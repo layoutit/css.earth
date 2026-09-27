@@ -1,0 +1,74 @@
+{
+  "id": "source-europa-jwst-carbon-dioxide",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Europa NIRSpec IFU",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17909/ve8q-sq65"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.adg4155"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1126/science.adg4270"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17909/ve8q-sq65",
+      "label": "MAST dataset DOI"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/science.adg4155",
+      "label": "Trumbo & Brown (2023)"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/science.adg4270",
+      "label": "Villanueva et al. (2023)"
+    },
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+      "label": "One of the eight level-3 cubes"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/inputs/401"
+    },
+    {
+      "url": "https://api.datacite.org/dois/10.17909/ve8q-sq65",
+      "checkedOn": "2026-09-19",
+      "locator": "types.resourceTypeGeneral Dataset; types.resourceType Astronomical Data; publisher STScI/MAST; publicationYear 2024; rightsList empty"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA/CSA JWST, NIRSpec GTO programme 1250 (PI G. Villanueva); MAST (STScI)",
+      "scope": "The jwst carbon dioxide input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    },
+    {
+      "kind": "limitation",
+      "text": "DOI 10.17909/ve8q-sq65: MAST dataset DOI for the JWST NIRSpec IFU observations of Europa; DataCite types it Dataset / Astronomical Data, publisher STScI/MAST, 2024 DOI 10.1126/science.adg4155: Trumbo & Brown (2023), Science 381(6664), 1308–1311: the first of the two papers reporting this carbon dioxide DOI 10.1126/science.adg4270: Villanueva et al. (2023), Science 381(6664), 1305–1308",
+      "scope": "The identifiers listed on this record.",
+      "evidence": "https://api.datacite.org/dois/10.17909/ve8q-sq65"
+    }
+  ]
+}

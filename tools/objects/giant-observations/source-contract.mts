@@ -7,9 +7,13 @@ const detail = object({structure: detailImage, palette: detailImage, contrast: n
 const details = object({north: optional(detail), south: optional(detail)});
 const files = object({surface: string, surface2x: string, poles: string, poles2x: string, thumbnail: string});
 const control = object({id: string, label: string, shortLabel: string, measurement: string, thumbnailUrl: string, surfaceUrl: string, surface2xUrl: string,
-  polesUrl: string, poles2xUrl: string, falseColor: boolean, qualification: string});
+  polesUrl: string, poles2xUrl: string, falseColor: boolean, qualification: string,
+  step: optional(object({group:string,label:string}))});
+const projection = object({boundaryLatitudeDegrees: number, projection: optional(literal('latitude-linear', 'orthographic')), overlap: optional(number), alphaOpaqueRadius: optional(number), alphaTransparentRadius: optional(number)});
 const absent = (value: unknown): value is undefined => value === undefined;
 const lens = union(
+  object({id:string, operation:literal('rgb-observed-gaps'), source:string, files, control,
+    polarDetails:absent, coverageSources:array(string), planetographicAxisRatio:number, projection}),
   object({id: string, operation: literal('rgb-polar-structure'), source: string, files, control, polarDetails: details,
     coverage: object({columnStride: number, minimumMean: number, firstMeasuredRow: number, lastMeasuredRow: number}),
     continuation: object({edgeLatitudeDegrees: number, overlap: optional(number), detailLookbackDegrees: optional(number), detailBlendStartRadius: optional(number),
@@ -18,8 +22,8 @@ const lens = union(
   object({id: string, operation: literal('scalar-observed-gaps'), source: string, files, control: absent, polarDetails: optional(details),
     label: string, shortLabel: string, filter: string, wavelength: string, measurement: string, qualification: string, structuralAuthority: optional(string),
     palette: array(tuple(number, number, number)), scalar: object({bitpix: number, width: number, height: number, percentiles: tuple(number, number), minimumCoverageFraction: number,
-      noData: literal(0), coverage: literal('polar-connected-zero')}),
-    projection: object({boundaryLatitudeDegrees: number, projection: optional(literal('latitude-linear', 'orthographic')), overlap: optional(number), alphaOpaqueRadius: optional(number), alphaTransparentRadius: optional(number)})}));
+      noData: literal(0), coverage: literal('polar-connected-zero','finite'), range:optional(tuple(number,number)), gamma:optional(number), lossless:optional(boolean)}),
+    projection}));
 const encoding = object({quality: optional(number), alphaQuality: optional(number), effort: optional(number), smartSubsample: optional(boolean)});
 const recipe = object({schema: literal('cssearth-observed-polar-surfaces@1'), namespace: string, publicPrefix: string,
   lenses: array(lens),

@@ -45,6 +45,11 @@
       "title": "Akatsuki ultraviolet photograph",
       "detail": "One exposure",
       "summary": "Venus in ultraviolet light from orbit on 30 August 2023. Grey marks the half the camera could not see."
+    },
+    "emissivity": {
+      "title": "Magellan microwave emissivity",
+      "detail": "Magellan · 4.64 km pixels",
+      "summary": "Microwave emissivity corrected for antenna and atmosphere, with unobserved cells left empty."
     }
   }
 }

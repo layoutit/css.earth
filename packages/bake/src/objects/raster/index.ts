@@ -32,6 +32,7 @@ export * from './observed/pds-byte-mosaic.ts';
 export * from './pds/pds-float-map.ts';
 export * from './pds/pds-image.ts';
 export * from './pds/pds-scalar-grid.ts';
+export * from './pds/pds-binned-table.ts';
 export * from './pds/pds-scalar-map.ts';
 export * from './photometric-observations.ts';
 export { type TwoTermSinusoid, type FourierFromTransit, type EclipseNormalizedFourier, type FourierPhaseCurve, type SpidermanModel, type PublishedPhaseCurve,

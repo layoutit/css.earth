@@ -334,3 +334,16 @@ src/objects/*/source/**/*.bpc
 # Small expected-output receipt supports offline source recovery.
 
 /site/prepared-world-presentation.json
+
+# Solar System source products restored from their manifest origins or source-cache.
+/src/objects/mars/source/geology/SIM3292_Global_Geology.shp
+/src/objects/mars/source/grs/*.tab
+/src/objects/mars/source/magnetic/radial-field.dat
+/src/objects/venus/source/emissivity/*.tif
+/src/objects/europa/source/jwst/*.fits*
+/src/objects/europa/source/hst/*.fits*
+/src/objects/europa/source/hst/registration.json
+/src/objects/europa/source/observations/junocam/*.IMG
+
+# Published Mars crust model and its coordinate-only conversion
+src/objects/mars/source/crust/*.dat

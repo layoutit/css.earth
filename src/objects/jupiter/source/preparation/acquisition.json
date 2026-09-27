@@ -189,6 +189,366 @@
       ],
       "path": "telescopes/juno-mwr/MWR_J_NH3A_V01.FMT",
       "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/LABEL/MWR_J_NH3A_V01.FMT"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle22/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle23/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle24/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle25/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle26/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle27/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2020a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle28/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2021a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle29/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2022a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n-f502n-f658n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f658n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/hlsps/opal/cycle30/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024a_f658n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle31/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2024c_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n-f502n-f631n_v1_globalmap.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f395n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f502n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f502n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f631n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "magnetic/radial-field.fits",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/jupiter/magnetic/radial-field.fits"
     }
   ]
 }

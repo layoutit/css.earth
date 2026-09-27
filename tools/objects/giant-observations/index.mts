@@ -7,6 +7,7 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '@cssearth/bake/scene';
+import {planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
 import { readFitsPrimary } from '@cssearth/fits';
 import {verifyObservationSources} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {latitudeRasterBands} from '@cssearth/bake/objects/layers/giant';
@@ -26,12 +27,16 @@ export function parseObservedPolarRecipe(input: unknown) {
   const ids=new Set(),outputs=new Set(),sourcePaths=new Set<string>();
   const source=(path: string)=>{validateRelativePath(path);sourcePaths.add(path);};
   for(const lens of config.lenses) {
-    if(!/^[a-z][a-z0-9-]*$/.test(lens.id)||ids.has(lens.id)||!['rgb-polar-structure','scalar-observed-gaps'].includes(lens.operation))throw new TypeError('Invalid observed polar lens operation.');
+    if(!/^[a-z][a-z0-9-]*$/.test(lens.id)||ids.has(lens.id))throw new TypeError('Invalid observed polar lens operation.');
     ids.add(lens.id);source(lens.source);
     for(const filename of Object.values(lens.files)){validateRelativePath(filename);if(outputs.has(filename))throw new TypeError('Observed polar outputs must be unique.');outputs.add(filename);}
     for(const detail of Object.values(lens.polarDetails??{})){source(detail.structure.path);if(detail.palette)source(detail.palette.path);}
     if(lens.operation==='rgb-polar-structure'&&(!Number.isInteger(lens.coverage.columnStride)||lens.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
-    if(lens.operation==='scalar-observed-gaps'&&(!Array.isArray(lens.palette)||lens.palette.length<2||lens.scalar.noData!==0||lens.scalar.coverage!=='polar-connected-zero'||Object.keys(lens.polarDetails??{}).length>0))throw new TypeError('Invalid measured scalar parameters.');
+    if(lens.operation==='rgb-observed-gaps'){
+      if(lens.coverageSources.length!==3||!(lens.planetographicAxisRatio>=1))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
+      lens.coverageSources.forEach(source);
+    }
+    if(lens.operation==='scalar-observed-gaps'&&(!Array.isArray(lens.palette)||lens.palette.length<2||Object.keys(lens.polarDetails??{}).length>0||lens.scalar.range&&!(lens.scalar.range[1]>lens.scalar.range[0])))throw new TypeError('Invalid measured scalar parameters.');
   }
   return {...config,sourcePins:[...sourcePaths].map(path=>({path}))};
 }
@@ -78,12 +83,12 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     if(write)await writeFile(resolve(publicDirectory,filename),data);
     return asset;
   };
-  const pack=async (source: ObservedRgb,rings?: DomeRingWarp)=>{
+  const pack=async (source: ObservedRgb,rings?: DomeRingWarp,lossless=false)=>{
     const {width,height}=source.info, channels=requireChannels(source.info.channels);
     if (!Buffer.isBuffer(source.data)) throw new TypeError('Projective raster packing requires a byte buffer.');
     const packed=packProjectiveSurfaceRaster(source.data,{width,height,channels,bands:latitudeRasterBands(recipe.packing.latitudeBoundsDegrees,height),gutter:recipe.packing.gutter*height/recipe.dimensions.height});
     if(rings?.length)writeDomeRings(packed,source,rings,recipe.packing.latitudeBoundsDegrees);
-    return sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels}}).webp(recipe.encoding.surface).toBuffer();
+    return sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels}}).webp({...recipe.encoding.surface,...(lossless?{lossless:true}:{})}).toBuffer();
   };
   for(const lens of recipe.lenses) {
     let source1x: ObservedRgb,source2x: ObservedRgb;
@@ -101,13 +106,31 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
       polar=preparePolarContinuationAtlas({source:source2x,tileSize:polarTileSize*2,firstMeasuredRow:Math.round((90-edgeLatitudeDegrees)/180*(original.info.height-1)),lastMeasuredRow:Math.round((90+edgeLatitudeDegrees)/180*(original.info.height-1)),measuredHeight:original.info.height,polarDetails:details,...continuation});
       source2x=preparePolarSurfaceTransition({source:source2x,polarDetails:details,...lens.transition});
       source1x=preparePolarSurfaceTransition({source:source1x,polarDetails:details,...lens.transition});
+    } else if(lens.operation==='rgb-observed-gaps') {
+      const image=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
+      const masks=lens.coverageSources.map(path=>{
+        const scalar=readFitsPrimary(requireSource(sources,path));
+        if(scalar.width!==image.info.width||scalar.height!==image.info.height)throw new Error('RGB component coverage dimensions differ.');
+        return measureScalarCoverage(scalar,{noData:0,coverage:'polar-connected-zero'}).missing;
+      });
+      const rgba=Buffer.alloc(image.info.width*image.info.height*4);
+      for(let i=0;i<masks[0].length;i++)if(masks.every(mask=>!mask[i])){
+        rgba.set(image.data.subarray(i*image.info.channels,i*image.info.channels+3),i*4);rgba[i*4+3]=255;
+      }
+      const data=planetographicRowsToMeshLatitude(rgba,image.info.width,image.info.height,4,lens.planetographicAxisRatio);
+      const missing=Uint8Array.from({length:masks[0].length},(_,i)=>data[i*4+3]===255?0:1);
+      if(!missing.includes(0))throw new Error('RGB map has no common observed coverage.');
+      const original={data,info:{width:image.info.width,height:image.info.height,channels:4},missing};
+      source1x=resizeObservedRgb(original,width,height);source2x=resizeObservedRgb(original,width*2,height*2);
+      measured={firstMeasuredRow:Math.floor(missing.indexOf(0)/image.info.width),lastMeasuredRow:Math.floor(missing.lastIndexOf(0)/image.info.width),sourceMissingPixels:missing.reduce((sum,n)=>sum+n,0)};
+      polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...lens.projection});
     } else {
       const scalar=readFitsPrimary(bytes);
       if(scalar.bitpix!==lens.scalar.bitpix||scalar.width!==lens.scalar.width||scalar.height!==lens.scalar.height)throw new Error('Pinned scalar polar dimensions changed.');
       const measuredSource=measureScalarCoverage(scalar,lens.scalar);
-      sourceRange=finitePercentiles(measuredSource.values,...lens.scalar.percentiles,lens.scalar.minimumCoverageFraction,measuredSource.missing);
+      sourceRange=lens.scalar.range??finitePercentiles(measuredSource.values,...lens.scalar.percentiles,lens.scalar.minimumCoverageFraction,measuredSource.missing);
       if(!(sourceRange[1]>sourceRange[0]))throw new Error('Scalar observation has no measured dynamic range.');
-      const original={data:falseColorMap(measuredSource,lens.palette,...sourceRange),info:{width:scalar.width,height:scalar.height,channels:4},missing:measuredSource.missing};
+      const original={data:falseColorMap(measuredSource,lens.palette,...sourceRange,lens.scalar.gamma),info:{width:scalar.width,height:scalar.height,channels:4},missing:measuredSource.missing};
       source2x=resizeObservedRgb(original,width*2,height*2);
       source1x=resizeObservedRgb(original,width,height);
       measured={firstMeasuredRow:measuredSource.firstMeasuredRow,lastMeasuredRow:measuredSource.lastMeasuredRow,sourceMissingPixels:measuredSource.sourceMissingPixels};
@@ -119,12 +142,13 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     }
     maps.set(lens.id,{data:source2x.data,...source2x.info});
     coverage[lens.id]={...measured,...Object.fromEntries(Object.entries(polar).filter(([key])=>key!=='data'))};
-    const surface=await add(lens.files.surface,await pack(source1x,dome)),surface2x=await add(lens.files.surface2x,await pack(source2x,dome));
+    const lossless=lens.operation==='scalar-observed-gaps'&&lens.scalar.lossless===true;
+    const surface=await add(lens.files.surface,await pack(source1x,dome,lossless)),surface2x=await add(lens.files.surface2x,await pack(source2x,dome,lossless));
     const raw={width:polar.width,height:polar.height,channels:4 as const};
-    const poles=await add(lens.files.poles,await sharp(polar.data,{raw}).resize(polarTileSize*2,polarTileSize).webp(recipe.encoding.polar).toBuffer());
-    const poles2x=await add(lens.files.poles2x,await sharp(polar.data,{raw}).webp(recipe.encoding.polar).toBuffer());
-    const thumbnail=await add(lens.files.thumbnail,await sharp(surface.data).resize(recipe.thumbnail.width,recipe.thumbnail.height,{fit:recipe.thumbnail.fit,position:recipe.thumbnail.position}).webp(recipe.encoding.thumbnail).toBuffer());
-    if(lens.operation==='rgb-polar-structure'){controls.push(lens.control);continue;}
+    const poles=await add(lens.files.poles,await sharp(polar.data,{raw}).resize(polarTileSize*2,polarTileSize).webp({...recipe.encoding.polar,...(lossless?{lossless:true}:{})}).toBuffer());
+    const poles2x=await add(lens.files.poles2x,await sharp(polar.data,{raw}).webp({...recipe.encoding.polar,...(lossless?{lossless:true}:{})}).toBuffer());
+    const thumbnail=await add(lens.files.thumbnail,await sharp(surface.data).resize(recipe.thumbnail.width,recipe.thumbnail.height,{fit:recipe.thumbnail.fit,position:recipe.thumbnail.position}).webp({...recipe.encoding.thumbnail,...(lossless?{lossless:true}:{})}).toBuffer());
+    if(lens.operation!=='scalar-observed-gaps'){controls.push(lens.control);continue;}
     if(!sourceRange) throw new Error('Scalar observation requires its measured range.');
     controls.push({id:lens.id,label:lens.label,shortLabel:lens.shortLabel,filter:lens.filter,wavelength:lens.wavelength,measurement:lens.measurement,
       thumbnailUrl:recipe.publicPrefix+lens.files.thumbnail,surfaceUrl:recipe.publicPrefix+lens.files.surface,surface2xUrl:recipe.publicPrefix+lens.files.surface2x,polesUrl:recipe.publicPrefix+lens.files.poles,poles2xUrl:recipe.publicPrefix+lens.files.poles2x,falseColor:true,qualification:lens.qualification,

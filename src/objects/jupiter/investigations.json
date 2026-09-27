@@ -320,6 +320,68 @@
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
       ]
+    },
+    {
+      "id": "opal-dated-visible",
+      "subject": "OPAL dated visible maps",
+      "status": "included",
+      "finding": "Eleven released RGB maps from 2015 through 2025 use the shared date stepper and intersection of their three component footprints. The release sequence has no 2023 and two 2024 dates; no quantitative storm-size or colour trend is claimed.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/opal"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "jrm33-radial-field",
+      "subject": "JRM33 internal magnetic field",
+      "status": "included",
+      "finding": "The PSH community degree-13 evaluator samples radial field at the 1-bar ellipsoid in System III east longitude. Zero is valid, the palette is linear, and the inferred internal field excludes external currents.",
+      "evidence": [
+        "https://github.com/rjwilson-LASP/PSH"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "dilute-core-profile",
+      "subject": "Militzer 2022 dilute-core interior",
+      "status": "deferred",
+      "finding": "The gravity-inferred interior is not a surface map. A numerical radial profile and its model alternatives have not been qualified for the existing cross-section route in this change.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ac7ec8"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "A released numerical profile and its assumptions are selected and checked."
+    },
+    {
+      "id": "uvs-auroral-grids",
+      "subject": "Juno UVS or Hubble auroral grids",
+      "status": "deferred",
+      "finding": "No new registered numeric auroral product was selected in this release.",
+      "evidence": [
+        "https://pds-atmospheres.nmsu.edu/data_and_services/atmospheres_data/JUNO/juno.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "A dated polar grid with units, geometry and an appropriate rendering interpretation is qualified."
     }
   ]
 }

@@ -1,0 +1,35 @@
+{
+  "id": "source-europa-jwst-pck00011",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Europa · jwst pck00011",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/inputs/404"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL NAIF; IAU Working Group on Cartographic Coordinates and Rotational Elements",
+      "scope": "The jwst pck00011 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NAIF generic kernel.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

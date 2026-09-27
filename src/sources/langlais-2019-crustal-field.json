@@ -1,0 +1,22 @@
+{
+  "id": "langlais-2019-crustal-field",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Langlais et al. (2019) crustal magnetic field",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2018JE005854",
+      "label": "Langlais et al. (2019) crustal magnetic field"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/preparation/magnetic.json",
+      "locator": "/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,35 @@
+{
+  "id": "source-europa-jncr-2022272-45c00003-v01",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Europa · jncr 2022272 45c00003 v01",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00003_V01.IMG",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/inputs/406"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/SwRI/MSSS; M. Caplinger, Juno JunoCam RDR V1.0, NASA Planetary Data System, JUNO-J-JUNOCAM-3-RDR-L1A-V1.0",
+      "scope": "The jncr 2022272 45c00003 v01 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA Planetary Data System archive data; retain the credit and cite the data set.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

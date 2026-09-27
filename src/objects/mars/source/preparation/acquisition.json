@@ -107,6 +107,166 @@
       ],
       "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_observations.tab",
       "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/index/east_deuteronilus_mensae_3d_v2_observations.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/h2o_5x5.tab",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/h2o_5x5.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/h2o_5x5.lbl",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/h2o_5x5.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/cl_5x5.tab",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/cl_5x5.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/cl_5x5.lbl",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/cl_5x5.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/fe_5x5.tab",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/fe_5x5.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/fe_5x5.lbl",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/fe_5x5.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/si_5x5.tab",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/si_5x5.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/si_5x5.lbl",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/si_5x5.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/k_5x5.tab",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/k_5x5.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/k_5x5.lbl",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/k_5x5.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/th_5x5.tab",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/th_5x5.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "grs/th_5x5.lbl",
+      "url": "https://pds-geosciences.wustl.edu/ody/ody-m-grs-5-elements-v1/odgm_xxxx/data/unsmoothed/5x5/th_5x5.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/SIM3292_Global_Geology.shp",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/geology/SIM3292_Global_Geology.shp"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/SIM3292_Global_Geology.dbf",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/geology/SIM3292_Global_Geology.dbf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/SIM3292_Global_Geology.prj",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/geology/SIM3292_Global_Geology.prj"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geology/sim3292-colors.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/geology/sim3292-colors.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "magnetic/Langlais2019.sh.gz",
+      "url": "https://zenodo.org/records/3876714/files/Langlais2019.sh.gz?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "magnetic/radial-field.dat",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/magnetic/radial-field.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "crust/Mars-thick-Khan2022-39-2900-2900.dat",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/crust/Mars-thick-Khan2022-39-2900-2900.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "crust/thickness.dat",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/mars/crust/thickness.dat"
     }
   ]
 }

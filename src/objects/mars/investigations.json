@@ -232,19 +232,23 @@
     },
     {
       "id": "interior-view",
-      "subject": "Mars cross-section, methane lens or interior view",
-      "status": "excluded",
-      "finding": "The README records that there is no Mars cross-section, methane lens or fabricated interior view.",
-      "revisitWhen": "A published interior-structure or methane source suitable for a prepared lens is adopted.",
+      "subject": "InSight interior interpretations",
+      "status": "deferred",
+      "finding": "InSight seismic results supersede the earlier no-source rationale, but the 2021 and 2023 core interpretations differ. This surface-data addition does not choose a disputed full interior profile.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L105"
+        "https://www.nature.com/articles/s41586-023-06601-8"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
+        },
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
         }
-      ]
+      ],
+      "revisitWhen": "A numerical radial profile and a selected interpretation, including the molten-layer dispute, are qualified for the existing interior view."
     },
     {
       "id": "viking-capture-attribution",
@@ -358,6 +362,114 @@
           "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
         }
       ]
+    },
+    {
+      "id": "sim3292-geology",
+      "subject": "USGS SIM 3292 geology",
+      "status": "included",
+      "finding": "Selected the published 44-unit global polygon map and its original legend fills; all 1,311 polygons decode through the existing categorical reader.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3292/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "odyssey-grs-elements",
+      "subject": "Odyssey GRS ELEMTS version 1",
+      "status": "included",
+      "finding": "Six unsmoothed 5-degree concentration maps retain negative estimates and product-specific missing bins. Water equivalent is hydrogen expressed as H2O; thorium converts weight percent to ppm.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "langlais-2019-radial-field",
+      "subject": "Langlais 2019 crustal magnetic model",
+      "status": "included",
+      "finding": "Degree/order 134 radial field evaluated by pinned pyshtools on the 3393.5 km sphere of Figure 6b, with zero neutral and no invented small-scale field.",
+      "evidence": [
+        "https://zenodo.org/records/3876714"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "insight-crust-thickness",
+      "subject": "Wieczorek 2022 precomputed crust thickness",
+      "status": "included",
+      "finding": "Selected Figure 2 grid Mars-thick-Khan2022-39-2900-2900.dat: uniform density 2900 kg/m3 and 39 km under InSight. It is one published example, not a unique reference solution.",
+      "evidence": [
+        "https://zenodo.org/records/6477509"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ]
+    },
+    {
+      "id": "swim-ice-consistency",
+      "subject": "SWIM subsurface ice consistency",
+      "status": "deferred",
+      "finding": "The published regional composite is a separate interpretation combining several instruments, not the GRS hydrogen measurement now drawn. It remains outside this surface release.",
+      "evidence": [
+        "https://pubs.usgs.gov/publication/70233244"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "The native numerical composite, coverage and score semantics are acquired and qualified."
+    },
+    {
+      "id": "mineral-maps-and-thermal-inertia",
+      "subject": "OMEGA/CRISM minerals and TES/THEMIS thermal inertia",
+      "status": "deferred",
+      "finding": "These candidate products were named in the showcase investigation but their complete numeric global inputs and calibration were not qualified here.",
+      "evidence": [
+        "https://ode.rsl.wustl.edu/mars/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "A particular downloadable map, its registration and measurement units are selected."
+    },
+    {
+      "id": "dated-marci-weather",
+      "subject": "Dated MARCI dust and weather maps",
+      "status": "deferred",
+      "finding": "A dated weather comparison needs its own selected epochs and coverage checks. The current thermal mosaic is not a daily weather product.",
+      "evidence": [
+        "https://www.msss.com/msss_images/subject/weather_reports.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-26",
+          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+        }
+      ],
+      "revisitWhen": "A matched dated pair is chosen and prepared with its archive coverage."
     }
   ]
 }

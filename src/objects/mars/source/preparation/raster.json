@@ -38,6 +38,580 @@
       "falseColor": false,
       "output": "mars-surface-{id}{suffix}.webp",
       "thumbnail": "mars-lens-{id}.webp"
+    },
+    {
+      "id": "water-equivalent",
+      "source": "grs/h2o_5x5.tab",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "water-equivalent",
+        "label": "Water equivalent",
+        "format": "pds-binned-table",
+        "path": "grs/h2o_5x5.tab",
+        "labelPath": "grs/h2o_5x5.lbl",
+        "binDegrees": 5,
+        "column": "CONCENTRATION",
+        "sourceUnits": "WEIGHT PERCENT",
+        "scale": 1,
+        "consumer": "water-equivalent",
+        "minimum": -2.34,
+        "maximum": 11.59,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "-2.34",
+          "11.59"
+        ],
+        "units": "wt%",
+        "title": "Water equivalent (wt%)",
+        "description": "Odyssey GRS, June 2002–April 2005: water equivalent in native 5° bins. Hydrogen expressed as equivalent water, not a map of exposed ice. Negative estimates and source gaps are retained. Errors are supplied in the source tables; bins are not interpolated.",
+        "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "chlorine",
+      "source": "grs/cl_5x5.tab",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "chlorine",
+        "label": "Chlorine",
+        "format": "pds-binned-table",
+        "path": "grs/cl_5x5.tab",
+        "labelPath": "grs/cl_5x5.lbl",
+        "binDegrees": 5,
+        "column": "CONCENTRATION",
+        "sourceUnits": "WEIGHT PERCENT",
+        "scale": 1,
+        "consumer": "chlorine",
+        "minimum": -0.27,
+        "maximum": 1.04,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "-0.27",
+          "1.04"
+        ],
+        "units": "wt%",
+        "title": "Chlorine (wt%)",
+        "description": "Odyssey GRS, June 2002–April 2005: chlorine in native 5° bins. Negative estimates and source gaps are retained. Errors are supplied in the source tables; bins are not interpolated.",
+        "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "iron",
+      "source": "grs/fe_5x5.tab",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "iron",
+        "label": "Iron",
+        "format": "pds-binned-table",
+        "path": "grs/fe_5x5.tab",
+        "labelPath": "grs/fe_5x5.lbl",
+        "binDegrees": 5,
+        "column": "CONCENTRATION",
+        "sourceUnits": "WEIGHT PERCENT",
+        "scale": 1,
+        "consumer": "iron",
+        "minimum": 4.53,
+        "maximum": 25.86,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "4.53",
+          "25.86"
+        ],
+        "units": "wt%",
+        "title": "Iron (wt%)",
+        "description": "Odyssey GRS, June 2002–April 2005: iron in native 5° bins. Negative estimates and source gaps are retained. Errors are supplied in the source tables; bins are not interpolated.",
+        "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "silicon",
+      "source": "grs/si_5x5.tab",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "silicon",
+        "label": "Silicon",
+        "format": "pds-binned-table",
+        "path": "grs/si_5x5.tab",
+        "labelPath": "grs/si_5x5.lbl",
+        "binDegrees": 5,
+        "column": "CONCENTRATION",
+        "sourceUnits": "WEIGHT PERCENT",
+        "scale": 1,
+        "consumer": "silicon",
+        "minimum": 8.33,
+        "maximum": 29.21,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "8.33",
+          "29.21"
+        ],
+        "units": "wt%",
+        "title": "Silicon (wt%)",
+        "description": "Odyssey GRS, June 2002–April 2005: silicon in native 5° bins. Negative estimates and source gaps are retained. Errors are supplied in the source tables; bins are not interpolated.",
+        "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "potassium",
+      "source": "grs/k_5x5.tab",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "potassium",
+        "label": "Potassium",
+        "format": "pds-binned-table",
+        "path": "grs/k_5x5.tab",
+        "labelPath": "grs/k_5x5.lbl",
+        "binDegrees": 5,
+        "column": "CONCENTRATION",
+        "sourceUnits": "WEIGHT PERCENT",
+        "scale": 1,
+        "consumer": "potassium",
+        "minimum": -0.1,
+        "maximum": 0.67,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "-0.1",
+          "0.67"
+        ],
+        "units": "wt%",
+        "title": "Potassium (wt%)",
+        "description": "Odyssey GRS, June 2002–April 2005: potassium in native 5° bins. Negative estimates and source gaps are retained. Errors are supplied in the source tables; bins are not interpolated.",
+        "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "thorium",
+      "source": "grs/th_5x5.tab",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "thorium",
+        "label": "Thorium",
+        "format": "pds-binned-table",
+        "path": "grs/th_5x5.tab",
+        "labelPath": "grs/th_5x5.lbl",
+        "binDegrees": 5,
+        "column": "CONCENTRATION",
+        "sourceUnits": "WEIGHT PERCENT",
+        "scale": 10000,
+        "consumer": "thorium",
+        "minimum": -0.89,
+        "maximum": 2.17,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "-0.89",
+          "2.17"
+        ],
+        "units": "ppm",
+        "title": "Thorium (ppm)",
+        "description": "Odyssey GRS, June 2002–April 2005: thorium in native 5° bins. Negative estimates and source gaps are retained. Errors are supplied in the source tables; bins are not interpolated.",
+        "sourceUrl": "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "geology",
+      "source": "geology/SIM3292_Global_Geology.shp",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "geology",
+        "label": "Geology",
+        "format": "geologic-shapefile",
+        "path": "geology/SIM3292_Global_Geology.shp",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "overlapPolicy": "withhold-conflicts",
+        "sourceUrl": "https://pubs.usgs.gov/sim/3292/",
+        "description": "Tanaka et al. (2014) · USGS SIM 3292",
+        "title": "Interpreted geologic units",
+        "grid": {
+          "attributePath": "geology/SIM3292_Global_Geology.dbf",
+          "projectionPath": "geology/SIM3292_Global_Geology.prj",
+          "coordinateSystem": "GCS_Mars_2000_Sphere",
+          "referenceRadiusMeters": 3396190,
+          "longitudeDirection": "east-positive",
+          "latitudeType": "planetocentric",
+          "longitudeDomain": [
+            -180,
+            180
+          ],
+          "field": "Unit",
+          "expectedRecords": 1311,
+          "expectedBounds": [
+            -179.99999001642678,
+            -89.99996889507656,
+            179.99999001642678,
+            89.99996889507656
+          ],
+          "unknownValues": [],
+          "withheldDegenerateRings": []
+        },
+        "categories": [
+          {
+            "value": "mAl",
+            "label": "Middle Amazonian lowland unit",
+            "color": "#bec131"
+          },
+          {
+            "value": "lHl",
+            "label": "Late Hesperian lowland unit",
+            "color": "#8dc63f"
+          },
+          {
+            "value": "AHi",
+            "label": "Amazonian and Hesperian impact unit",
+            "color": "#fff200"
+          },
+          {
+            "value": "lApc",
+            "label": "Late Amazonian polar cap unit",
+            "color": "#d9f1fd"
+          },
+          {
+            "value": "lApd",
+            "label": "Late Amazonian polar dunes unit",
+            "color": "#ffe8ba"
+          },
+          {
+            "value": "Apu",
+            "label": "Amazonian polar undivided unit",
+            "color": "#9cb4be"
+          },
+          {
+            "value": "Ap",
+            "label": "Amazonian polar unit",
+            "color": "#009ccb"
+          },
+          {
+            "value": "Hp",
+            "label": "Hesperian polar unit",
+            "color": "#009bb2"
+          },
+          {
+            "value": "Hpu",
+            "label": "Hesperian polar undivided unit",
+            "color": "#83aebe"
+          },
+          {
+            "value": "Hpe",
+            "label": "Hesperian polar edifice unit",
+            "color": "#0089cf"
+          },
+          {
+            "value": "eAb",
+            "label": "Early Amazonian basin unit",
+            "color": "#99d4c0"
+          },
+          {
+            "value": "lHb",
+            "label": "Late Hesperian basin unit",
+            "color": "#9fb39f"
+          },
+          {
+            "value": "eHb",
+            "label": "Early Hesperian basin unit",
+            "color": "#49a1ae"
+          },
+          {
+            "value": "HNb",
+            "label": "Hesperian and Noachian basin unit",
+            "color": "#6da69f"
+          },
+          {
+            "value": "lAvf",
+            "label": "Late Amazonian volcanic field unit",
+            "color": "#ccb0a7"
+          },
+          {
+            "value": "Av",
+            "label": "Amazonian volcanic unit",
+            "color": "#f8aa9f"
+          },
+          {
+            "value": "AHv",
+            "label": "Amazonian and Hesperian volcanic",
+            "color": "#f7966b"
+          },
+          {
+            "value": "lHv",
+            "label": "Late Hesperian volcanic unit",
+            "color": "#ca7d9a"
+          },
+          {
+            "value": "lHvf",
+            "label": "Late Hesperian volcanic field unit",
+            "color": "#cc9e90"
+          },
+          {
+            "value": "eHv",
+            "label": "Early Hesperian volcanic unit",
+            "color": "#b37ab4"
+          },
+          {
+            "value": "lNv",
+            "label": "Late Noachian volcanic unit",
+            "color": "#8781bd"
+          },
+          {
+            "value": "Ave",
+            "label": "Amazonian volcanic edifice",
+            "color": "#cc7c5a"
+          },
+          {
+            "value": "lAv",
+            "label": "Late Amazonian volcanic unit",
+            "color": "#fabfb7"
+          },
+          {
+            "value": "Hve",
+            "label": "Hesperian volcanic edifice unit",
+            "color": "#f36f21"
+          },
+          {
+            "value": "Nve",
+            "label": "Noachian volcanic edifice unit",
+            "color": "#c9252b"
+          },
+          {
+            "value": "lAa",
+            "label": "Late Amazonian apron unit",
+            "color": "#ffd800"
+          },
+          {
+            "value": "Aa",
+            "label": "Amazonian apron unit",
+            "color": "#efd114"
+          },
+          {
+            "value": "ANa",
+            "label": "Amazonian and Noachian apron unit",
+            "color": "#bda632"
+          },
+          {
+            "value": "AHtu",
+            "label": "Amazonian and Hesperian transition undivided unit",
+            "color": "#e8e2d8"
+          },
+          {
+            "value": "Htu",
+            "label": "Hesperian transition undivided unit",
+            "color": "#dbd5d3"
+          },
+          {
+            "value": "lHt",
+            "label": "Late Hesperian transition unit",
+            "color": "#ffcb04"
+          },
+          {
+            "value": "eHt",
+            "label": "Early Hesperian transition unit",
+            "color": "#e0b025"
+          },
+          {
+            "value": "Ht",
+            "label": "Hesperian transition unit",
+            "color": "#ffdea3"
+          },
+          {
+            "value": "Hto",
+            "label": "Hesperian transition outflow unit",
+            "color": "#abe1fa"
+          },
+          {
+            "value": "HNt",
+            "label": "Hesperian and Noachian transition unit",
+            "color": "#faa619"
+          },
+          {
+            "value": "HNhu",
+            "label": "Hesperian and Noachian highland undivided unit",
+            "color": "#cbc3c0"
+          },
+          {
+            "value": "Nhu",
+            "label": "Noachian highland undivided unit",
+            "color": "#b6aaa7"
+          },
+          {
+            "value": "eHh",
+            "label": "Early Hesperian highland unit",
+            "color": "#e8cab0"
+          },
+          {
+            "value": "lNh",
+            "label": "Late Noachian highland unit",
+            "color": "#ceaf87"
+          },
+          {
+            "value": "mNh",
+            "label": "Middle Noachian highland unit",
+            "color": "#cd9d81"
+          },
+          {
+            "value": "eNh",
+            "label": "Early Noachian highland unit",
+            "color": "#b98860"
+          },
+          {
+            "value": "Nhe",
+            "label": "Noachian highland edifice unit",
+            "color": "#a62b4d"
+          },
+          {
+            "value": "mNhm",
+            "label": "Middle Noachian highland massif unit",
+            "color": "#a1a397"
+          },
+          {
+            "value": "eNhm",
+            "label": "Early Noachian highland massif unit",
+            "color": "#8d8e83"
+          }
+        ]
+      }
+    },
+    {
+      "id": "magnetic",
+      "source": "magnetic/radial-field.dat",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "magnetic",
+        "label": "Magnetic field",
+        "format": "tecplot-lonlat-map",
+        "path": "magnetic/radial-field.dat",
+        "variable": "Br (nT)",
+        "consumer": "magnetic",
+        "minimum": -12000,
+        "maximum": 12000,
+        "colors": [
+          "#2166ac",
+          "#f7f7f7",
+          "#b2182b"
+        ],
+        "labels": [
+          "−12,000",
+          "0",
+          "12,000"
+        ],
+        "units": "nT",
+        "title": "Radial field (nT)",
+        "description": "Langlais et al. (2019) · degree 134 · surface model",
+        "sourceUrl": "https://doi.org/10.1029/2018JE005854"
+      },
+      "resolutionScale": 0.5
+    },
+    {
+      "id": "crust",
+      "source": "crust/thickness.dat",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "crust",
+        "label": "Crust thickness",
+        "format": "tecplot-lonlat-map",
+        "path": "crust/thickness.dat",
+        "variable": "Thickness (km)",
+        "consumer": "crust",
+        "minimum": 0,
+        "maximum": 120,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0",
+          "30",
+          "60",
+          "90",
+          "120"
+        ],
+        "units": "km",
+        "title": "Crust thickness (km)",
+        "description": "Wieczorek et al. (2022) · Figure 2 example",
+        "sourceUrl": "https://doi.org/10.1029/2022JE007298"
+      },
+      "resolutionScale": 0.5
     }
   ],
   "atmosphere": {

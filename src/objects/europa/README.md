@@ -22,6 +22,24 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
+The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [carbon dioxide](evidence/showcase/carbon-dioxide.png).
+
+### Recovered observation views (26 September 2026)
+
+Four views from the parked showcase have been prepared with the current tools while retaining the current Galileo colour work:
+
+| View | Source and meaning |
+| --- | --- |
+| Carbon dioxide | Eight public JWST/NIRSpec cubes from programs 1250, 4023 and 9230, November 2022–February 2025; [Trumbo and Brown (2023)](https://doi.org/10.1126/science.adg4155) motivates the 4.26 µm feature. This is continuum-relative band depth from the stated windows, not abundance. |
+| Peroxide signature | The same cubes and geometry, a 3.50 µm continuum-relative feature motivated by [Wu et al. (2024)](https://doi.org/10.3847/PSJ/ad7468). [Yoffe and Shahaf (2026), Appendix A.4](https://arxiv.org/html/2603.10520v1) dispute a peroxide interpretation because of possible instrumental structure. The visible caption states this dispute. Our straight-line continuum calculation is not their published band-area method. |
+| Salt signature | Sixty public HST/STIS frames from the [Trumbo et al. (2019) observations](https://doi.org/10.1126/sciadv.aaw7123), reduced with the existing slit-scan tool: 450 nm absorption equivalent width in Å. Irradiated NaCl is an interpretation of the spectral signature; this does not establish an ocean origin. |
+| JunoCam | Four RGB-strip observations from Juno's 29 September 2022 flyby, registered with the released Juno SPICE kernels and the existing camera/limb-fitting preparation. The images keep their observed illumination and uncovered regions. Their shared display range preserves band ratios, not natural colour. |
+
+The current [JWST reduction report](evidence/jwst-band-maps.json) records all eight cube fits and the two final maps: each covers 88.83% of the sphere. Missing coverage remains missing; the 1° output grid does not imply 1° resolving power. Negative peroxide estimates remain in the source and display range. The STIS rerun uses all 60 frames, covers 82.3%, and places the strongest absorption at 94.5° W, 16.5° N beside Tara Regio, reproducing the earlier 193.6 Å peak and 84.5 Å median.
+
+The [JWST recipe](source/preparation/jwst-band-maps.json) is run by `tools/objects/jwst/cubes/author-body-maps.mts`; the STIS source is produced by `tools/objects/hst/slit-scan-map.mts europa-salt-map`. The existing JunoCam camera implementation consumes the [raster recipe](source/preparation/raster.json). Generated map/geometry receipts accompany the cached inputs. SPHERE products remain withheld under their existing reuse restriction. The ALMA thermal view is deferred: the parked numeric product was not recoverable from the branch or source cache, and the other sessions were unfinished. No thermal map is inferred from an old display image.
+
+
 The 14 September 2026 **Monochrome** update inserts 301 equirectangular products and 31 products whose inspected STAC records list only polar GeoTIFFs. The shipped 8,192 × 4,096 geographic preparation, the one image density, receives controlled photographs over **15.224% of the sphere**, with 330 contributing images (asset record (`prepared/assets.json`)). Outside those footprints, the published global mosaic stays visible. The update did not change the other datasets.
 
 [Before and after in the running app](evidence/galileo/browser.json) · [Surface and delivery checks](evidence/galileo/delivery.json) · [Two-product fresh restoration](evidence/galileo/restoration.json). All 332 original GeoTIFFs contribute to the source lineage; the asset record retains the selected area and fitted display gain for each image at each level.

@@ -1,0 +1,150 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+ Revised: Mar 12, 2021           Europa / (Jupiter)                         502
+
+ SATELLITE PHYSICAL PROPERTIES:
+  Mean radius (km)       = 1560.8   +- 0.3    Density (g cm^-3)= 3.013 +- 0.005
+  GM   (km^3/s^2)        = 3202.7121+- 0.0054 Geometric Albedo = 0.67 +/- 0.03  
+
+ SATELLITE ORBIT (at J2000.0 epoch, 2000-Jan-1.5):
+  Semi-major axis, a (km) ~ 671,000           Orbital period   ~ 3.55 d
+  Eccentricity, e         ~ 0.00981        Rotational period   = Synchronous
+  Inclination, i  (deg)   ~ 0.462
+*******************************************************************************
+
+
+*******************************************************************************
+Ephemeris / API_USER Fri Sep 18 20:13:25 2026 Pasadena, USA      / Horizons    
+*******************************************************************************
+Target body name: Europa (502)                    {source: jup365_merged}
+Center body name: James Webb Space Telescope (spacecraft) (-170) {source: JWST_MERGED}
+Center-site name: BODYCENTRIC
+*******************************************************************************
+Start time      : A.D. 2025-Jan-29 05:35:28.3990 UT      
+Stop  time      : A.D. 2025-Jan-29 05:35:28.8990 UT      
+Step-size       : 0 steps
+*******************************************************************************
+Target pole/equ : IAU_EUROPA                      {West-longitude positive}
+Target radii    : 1562.6, 1560.3, 1559.5 km       {Equator_a, b, pole_c}       
+Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ICRF
+Center radii    : undefined                                                    
+Target primary  : Jupiter
+Vis. interferer : None
+Rel. light bend : Sun                             {source: jup365_merged}
+Rel. lght bnd GM: 1.3271E+11 km^3/s^2                                          
+Atmos refraction: NO (AIRLESS)
+RA format       : DEG
+Time format     : CAL 
+Calendar mode   : Mixed Julian/Gregorian
+EOP file        : eop.260918.p261215                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-18. PREDICTS-> 2026-DEC-14
+Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass     n.a.    , Daylight (NO )
+Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
+Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
+*******************************************************************************************************************************
+ Date__(UT)__HR:MN:SC.fff     R.A.___(ICRF)___DEC  Ang-diam             delta      deldot     S-T-O       phi  PAB-LON  PAB-LAT
+*******************************************************************************************************************************
+$$SOE
+ 2025-Jan-29 05:35:28.399      69.35960  21.58946  0.958764  4.49433901455409  37.8998010    9.5361    9.5392  75.6354  -0.4698
+$$EOE
+*******************************************************************************************************************************
+Column meaning:
+ 
+TIME
+
+  Times PRIOR to 1962 are UT1, a mean-solar time closely related to the
+prior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current
+civil or "wall-clock" time-scale. UTC is kept within 0.9 seconds of UT1
+using integer leap-seconds for 1972 and later years.
+
+  Conversion from the internal Barycentric Dynamical Time (TDB) of solar
+system dynamics to the non-uniform civil UT time-scale requested for output
+has not been determined for UTC times after the next July or January 1st.
+Therefore, the last known leap-second is used as a constant over future
+intervals.
+
+  Time tags refer to the UT time-scale conversion from TDB on Earth
+regardless of observer location within the solar system, although clock
+rates may differ due to the local gravity field and no analog to "UT"
+may be defined for that location.
+
+  Any 'b' symbol in the 1st-column denotes a B.C. date. First-column blank
+(" ") denotes an A.D. date.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+  NOTE: "n.a." in output means quantity "not available" at the print-time.
+ 
+ 'R.A.___(ICRF)___DEC' =
+  Astrometric right ascension and declination of the target center with
+respect to the observing site (coordinate origin) in the reference frame of
+the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
+aberration.
+
+  Units: RA  in decimal degrees,  ddd.fffff{ffff}
+         DEC in decimal degrees,  sdd.fffff{ffff}
+ 
+ 'Ang-diam' =
+   The equatorial angular width of the target body full disk, if it were fully
+illuminated and visible to the observer. If the target body diameter is unknown
+"n.a." is output.
+
+   Units: ARCSECONDS
+ 
+ 'delta      deldot' =
+   Apparent range ("delta", light-time aberrated) and range-rate ("delta-dot")
+of the target center relative to the observer. A positive "deldot" means the
+target center is moving away from the observer, negative indicates movement
+toward the observer.  Units: AU and KM/S
+ 
+ 'S-T-O' =
+   The Sun-Target-Observer angle; the interior vertex angle at target center
+formed by a vector from the target to the apparent center of the Sun (at
+reflection time on the target) and the apparent vector from target to the
+observer at print-time. Slightly different from true PHASE ANGLE (requestable
+separately) at the few arcsecond level in that it includes stellar aberration
+on the down-leg from target to observer.  Units: DEGREES
+ 
+ 'phi  PAB-LON  PAB-LAT' =
+   "phi" is the true PHASE ANGLE at the observers' location at print time.
+"PAB-LON" and "PAB-LAT" are the J2000 ecliptic longitude and latitude of the
+phase angle bisector direction; the outward directed angle bisecting the arc
+created by the apparent vector from Sun to target center and the astrometric
+vector from observer to target center. For an otherwise uniform ellipsoid, the
+time when its long-axis is perpendicular to the PAB direction approximately
+corresponds to lightcurve maximum (or maximum brightness) of the body. PAB is
+discussed in Harris et al., Icarus 57, 251-258 (1984).
+
+   Units: DEGREES, DEGREES, DEGREES
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+
+*******************************************************************************************************************************

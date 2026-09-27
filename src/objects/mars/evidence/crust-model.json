@@ -1,0 +1,27 @@
+{
+  "source": "https://zenodo.org/records/6477509",
+  "file": "grids/Mars-thick-Khan2022-39-2900-2900.dat",
+  "paperFigure": 2,
+  "meaning": "A published example assuming 39 km beneath InSight and uniform crust density 2900 kg/m^3",
+  "report": {
+    "format": "tecplot-lonlat-map",
+    "variable": "Thickness (km)",
+    "grid": {
+      "columns": 1441,
+      "rows": 721,
+      "stepDegrees": [
+        0.25,
+        0.25
+      ]
+    },
+    "minimum": 5.579432063661443,
+    "maximum": 116.81070334675314,
+    "outlineLatitudes": []
+  },
+  "anchorsKm": {
+    "insight": 38.99026935319348,
+    "isidis": 6.977581975270368,
+    "southernTharsis": 86.04105483489866
+  },
+  "areaWeightedMeanKm": 56.71081920400026
+}

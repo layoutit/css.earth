@@ -1,0 +1,9 @@
+{
+  "purpose": "Upstream harmonic evaluation for prepared magnetic maps; no runtime evaluator.",
+  "packages": {"pyshtools": "4.14.1", "numpy": "2.5.3", "astropy": "8.0.1"},
+  "psh": {
+    "url": "https://raw.githubusercontent.com/rjwilson-LASP/PSH/cf7e712e39a45a14905d13d21978043026089a4e/Jupiter/Python/jovian_jrm33_order13_internal_rtp.py",
+    "sha256": "284770e1ce08465beb2dd3bf4b16fc6564f07fbbb8b5e9d9dd6abe748f8a5786",
+    "license": "GPL-3.0; fetched unmodified as an external preparation tool. https://github.com/rjwilson-LASP/PSH/blob/cf7e712e39a45a14905d13d21978043026089a4e/LICENSE"
+  }
+}

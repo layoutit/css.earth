@@ -1,0 +1,22 @@
+{
+  "id": "jrm33-radial-field",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Connerney et al. (2022) JRM33 magnetic field",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2021JE007055",
+      "label": "Connerney et al. (2022) JRM33 magnetic field"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/jupiter/source/preparation/magnetic.json",
+      "locator": "/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

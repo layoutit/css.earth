@@ -3213,6 +3213,310 @@
       ],
       "path": "galileo/s0527272726.tif",
       "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272726/s0527272726.npola.photr.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/carbon-dioxide.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/pck00011.tpc",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/pck00011.tpc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw01250-o002-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw01250-o002-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw01250-o002-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw01250-o002-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw04023-o001-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw04023-o001-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw04023-o001-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw04023-o001-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw04023-o002-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw04023-o002-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw04023-o002-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw04023-o002-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw04023-o003-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw04023-o003-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw04023-o003-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw04023-o003-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o001-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o001-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o001-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o001-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o002-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o002-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o002-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o002-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o003-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o003-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o003-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o003-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o004-heliocentric.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o004-heliocentric.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/horizons-jw09230-o004-observer.txt",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/horizons-jw09230-o004-observer.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "shape/iau-ellipsoid.tab",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/shape/iau-ellipsoid.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00001_V01.IMG",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00001_V01.LBL",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00001_V01.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00002_V01.IMG",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00002_V01.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00002_V01.LBL",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00002_V01.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00003_V01.IMG",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00003_V01.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00003_V01.LBL",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00003_V01.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00004_V01.IMG",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00004_V01.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/junocam/JNCR_2022272_45C00004_V01.LBL",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DATA/RDR/JUPITER/ORBIT_45/JNCR_2022272_45C00004_V01.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/hydrogen-peroxide.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "hst/nacl-450nm.fits",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/hst/nacl-450nm.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "hst/nacl-450nm.fits.body-map.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/hst/nacl-450nm.fits.body-map.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "hst/nacl-450nm.fits.product.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/hst/nacl-450nm.fits.product.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "hst/registration.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/hst/registration.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/carbon-dioxide.fits.body-map.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/carbon-dioxide.fits.body-map.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/carbon-dioxide.fits.product.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/carbon-dioxide.fits.product.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/carbon-dioxide.fits.resolution.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/carbon-dioxide.fits.resolution.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/hydrogen-peroxide.fits.body-map.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/hydrogen-peroxide.fits.body-map.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/hydrogen-peroxide.fits.product.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/hydrogen-peroxide.fits.product.json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "jwst/hydrogen-peroxide.fits.resolution.json",
+      "url": "https://earth-assets.lowpoly.cc/source-cache/europa/jwst/hydrogen-peroxide.fits.resolution.json"
     }
   ]
 }

@@ -68,12 +68,68 @@
         "filter": "365 nm",
         "observationMiddle": "2023-08-30T10:04:46.033",
         "converterId": "7b81c2b8b5a5",
-        "gain": 5e-09,
+        "gain": 5e-9,
         "gamma": 2.2,
         "referenceRadiusMeters": 6051800,
         "outputLongitudeOrigin": 180
       },
       "thumbnailCenterLongitudeDegrees": 29.123
+    },
+    {
+      "id": "emissivity",
+      "source": "emissivity/magellan.tif",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "emissivity",
+        "label": "Microwave emissivity",
+        "format": "geotiff",
+        "path": "emissivity/magellan.tif",
+        "consumer": "emissivity",
+        "sampling": "nearest",
+        "minimum": 0.29,
+        "maximum": 1,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0.29",
+          "1.00"
+        ],
+        "units": "Dimensionless",
+        "title": "Microwave emissivity",
+        "description": "Magellan · USGS global GEDR · 4.64 km pixels",
+        "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m",
+        "valueTransform": {
+          "scale": 0.0001,
+          "offset": -0.0001
+        },
+        "grid": {
+          "width": 8193,
+          "height": 4097,
+          "referenceRadiusMeters": 6051000,
+          "centerLongitude": 0,
+          "longitudeRange": [
+            -180,
+            180
+          ],
+          "noData": -32768,
+          "origin": [
+            -19014417.9036,
+            9509529.4812
+          ],
+          "resolution": [
+            4641.0588,
+            -4641.0588
+          ]
+        }
+      }
     }
   ],
   "atmosphere": {

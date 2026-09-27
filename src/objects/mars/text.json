@@ -40,6 +40,51 @@
       "title": "THEMIS daytime infrared mosaic",
       "detail": "Infrared",
       "summary": "Daytime infrared brightness from combined observations. Black bands at the edges are missing coverage."
+    },
+    "water-equivalent": {
+      "title": "Odyssey GRS water equivalent",
+      "detail": "5° bins · 2002–2005",
+      "summary": "Hydrogen expressed as equivalent water. Source gaps and negative estimates remain visible."
+    },
+    "chlorine": {
+      "title": "Odyssey GRS chlorine",
+      "detail": "5° bins · 2002–2005",
+      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+    },
+    "iron": {
+      "title": "Odyssey GRS iron",
+      "detail": "5° bins · 2002–2005",
+      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+    },
+    "silicon": {
+      "title": "Odyssey GRS silicon",
+      "detail": "5° bins · 2002–2005",
+      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+    },
+    "potassium": {
+      "title": "Odyssey GRS potassium",
+      "detail": "5° bins · 2002–2005",
+      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+    },
+    "thorium": {
+      "title": "Odyssey GRS thorium",
+      "detail": "5° bins · 2002–2005",
+      "summary": "Concentration estimates in original 5° bins; source gaps and negative estimates are retained."
+    },
+    "geology": {
+      "title": "USGS SIM 3292 geologic units",
+      "detail": "USGS SIM 3292 · 2014",
+      "summary": "Forty-four interpreted geologic units in the published map colours."
+    },
+    "magnetic": {
+      "title": "Langlais 2019 radial field",
+      "detail": "Langlais 2019 · surface",
+      "summary": "Radial crustal field inferred from MGS and MAVEN. Features smaller than about 160 km are unresolved."
+    },
+    "crust": {
+      "title": "Wieczorek 2022 crust model",
+      "detail": "InSight-tied model · Fig. 2",
+      "summary": "Model with 39 km beneath InSight and uniform crust density; one published example."
     }
   }
 }
