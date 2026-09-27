@@ -11,9 +11,9 @@ import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
 import { definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
 import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
-import { readPreparedJsonExports } from "../prepared/check-prepared-presentation.mts";
+import { readPreparedJsonExports } from '@cssearth/bake/contract';
 import { parseRuntimeSource, resolveRuntimeSource } from '@cssearth/bake/runtime-source';
-import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '../prepared/prepared-object-source.mts';
+import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '@cssearth/bake/contract';
 import { requireAuthoredWorldFrameReceipt } from '@cssearth/bake/sources';
 import { readContextObjects } from '../prepare/prepare-catalog.mts';
 

@@ -33,7 +33,7 @@ group and can supersede an older deployment.
   a check requires naming where its proof remains.
 - PR jobs restore the prepared inputs their selected checks need, but do not run
   an exhaustive R2 publication sweep. Contributors publishing an object run
-  `node tools/assets/check-assets-published.mts --object=<id>` themselves. The
+  `node packages/bake/cli/check-assets-published.mts --object=<id>` themselves. The
   default R2 deploy downloads and sha-verifies every inventoried key from R2 in
   its setup, with no restored cache, and runs `pnpm check:deploy-assets`; a key
   R2 does not serve blocks publication. The nightly sweep checks every key again. See the

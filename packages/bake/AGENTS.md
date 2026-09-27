@@ -88,7 +88,18 @@ its validators accept); the renderer never imports the bake.
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
-  and the renderer's object controls. It imports `presentation`.
+  and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
+  against the descriptor (`check-prepared-presentation.ts`, `prepared-object-source.ts`; the prepared format constant comes
+  from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
+  `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
+  `tools/ci/check-object-runtime-ownership.mts` imports the readers. Its tests are in `tests/contract/`.
+- `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
+  asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
+  published-asset gate, the deploy check (which reads the renderer's prepared world-context parsers) and the dry-run prune
+  report. It is its own topic so that `delivery`'s many importers do not load `undici` or those parsers. It imports `delivery`
+  and `objects/sources`. Its commands are `packages/bake/cli/{stage-published-assets,publish-runtime-assets,
+  check-assets-published,check-deploy-assets,prune-runtime-assets}.mts` (publish-assets.yml runs the first three from the
+  trusted checkout); its tests are in `tests/asset-publication/`.
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;

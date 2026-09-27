@@ -2,21 +2,26 @@ import { sha256 } from '@cssearth/core/node';
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
 import { isDeepStrictEqual } from "node:util";
-import { relative, resolve } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import type { Node } from 'estree';
 import type { ObjectEntry } from '@cssearth/objects';
-import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
-import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
-import { requireAuthoredWorldFrame } from '@cssearth/bake/sources';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
+import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../presentation/index.ts";
+import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
+import { requireAuthoredWorldFrame } from '../sources/index.ts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '@cssearth/bake/runtime-source';
-import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
+import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../runtime-source/index.ts';
+import type { RuntimeSourceReader } from '../runtime-source/index.ts';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
+/** The scene objects, read from the registry of this checkout (found through this package's own name) on first use rather than
+ * when the entry is imported. */
+let sceneObjects: readonly ObjectEntry[] | undefined;
+export const preparedPresentationSceneObjects = () => sceneObjects ??=
+  readPreparedObjects(resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..")).sceneObjects;
 
 export interface PreparedJsonExport { name: string; value: unknown; }
 export function readPreparedJsonModule(source: string, expectedExport?: string): PreparedJsonExport {
@@ -173,7 +178,7 @@ export interface PreparedPresentationAuditOptions {
   readText?: RuntimeSourceReader;
   readControls?: (path: string) => Promise<unknown>;
 }
-export async function auditPreparedPresentations({ root = process.cwd(), objects = SCENE_OBJECTS, strict = true,
+export async function auditPreparedPresentations({ root = process.cwd(), objects = preparedPresentationSceneObjects(), strict = true,
   readText = path => readFile(path, "utf8"), readControls = async path => (await import(pathToFileURL(path).href)).objectControls } : PreparedPresentationAuditOptions = {}) {
   const entries = [];
   for (const object of objects) {
@@ -234,11 +239,4 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
   const report = { schema: "cssearth-prepared-presentation-audit@1", complete: entries.every(entry => entry.complete), entries };
   if (strict && !report.complete) throw new TypeError(entries.filter(entry => !entry.complete).map(entry => `${entry.id}: ${entry.error}`).join("\n"));
   return report;
-}
-if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  const args = process.argv.slice(2), index = args.indexOf("--object"), id = index < 0 ? null : args[index + 1];
-  if (id && !SCENE_OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
-  if (!id && !args.includes("--all") && !args.includes("--inventory")) throw new Error("Use --object ID, --all, or --inventory.");
-  const report = await auditPreparedPresentations({ objects: id ? SCENE_OBJECTS.filter(object => object.id === id) : SCENE_OBJECTS, strict: !args.includes("--inventory") });
-  console.log(JSON.stringify(report, null, 2));
 }

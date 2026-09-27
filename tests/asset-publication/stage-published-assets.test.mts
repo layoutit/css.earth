@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { parseDocument } from 'yaml';
 import { sha256 } from '@cssearth/core/node';
-import { stagePublishedAssets } from './stage-published-assets.mts';
+import { stagePublishedAssets } from '@cssearth/bake/asset-publication';
 
 const objectId = 'fixture';
 const base = `src/objects/${objectId}`;
@@ -29,19 +29,19 @@ async function fixture(t: TestContext) {
   for (const root of [options.root, options.artifactRoot, options.sourceRoot]) await mkdir(root, { recursive: true });
   for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, inventoryPath, JSON.stringify(manifest));
   await put(options.artifactRoot, assetPath, bytes);
-  await put(options.root, 'tools/assets/publish-runtime-assets.mts', 'trusted publisher');
+  await put(options.root, 'packages/bake/cli/publish-runtime-assets.mts', 'trusted publisher');
   return options;
 }
 
 test('stages pinned nested bytes and inventories without importing arbitrary artifact code', async t => {
   const options = await fixture(t);
-  await put(options.artifactRoot, 'tools/assets/publish-runtime-assets.mts', 'untrusted replacement');
+  await put(options.artifactRoot, 'packages/bake/cli/publish-runtime-assets.mts', 'untrusted replacement');
   await put(options.artifactRoot, 'package.json', '{"scripts":{"postinstall":"malicious"}}');
   await put(options.root, `${base}/inventory.json`, 'stale inventory from main');
   assert.equal(await stagePublishedAssets(options), 1);
   assert.deepEqual(await readFile(resolve(options.root, assetPath)), bytes);
   assert.equal(await readFile(resolve(options.root, inventoryPath), 'utf8'), JSON.stringify(manifest));
-  assert.equal(await readFile(resolve(options.root, 'tools/assets/publish-runtime-assets.mts'), 'utf8'), 'trusted publisher');
+  assert.equal(await readFile(resolve(options.root, 'packages/bake/cli/publish-runtime-assets.mts'), 'utf8'), 'trusted publisher');
   await assert.rejects(readFile(resolve(options.root, 'package.json')), { code: 'ENOENT' });
 });
 
@@ -80,7 +80,7 @@ test('rejects missing or extra inventories and changed file bytes before mutatin
 test('rejects traversal in committed inventories and object ids', async t => {
   const options = await fixture(t);
   for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, inventoryPath,
-    JSON.stringify({ ...manifest, assets: [{ ...manifest.assets[0], filename: '../../../../tools/assets/publish-runtime-assets.mts' }] }));
+    JSON.stringify({ ...manifest, assets: [{ ...manifest.assets[0], filename: '../../../../packages/bake/cli/publish-runtime-assets.mts' }] }));
   await assert.rejects(stagePublishedAssets(options), /invalid inventory entry/);
   await assert.rejects(stagePublishedAssets({ ...options, objectId: '../other' }), /Unsafe object id/);
 });
@@ -92,9 +92,9 @@ test('rejects source, artifact, and destination links without following them', a
       const path = location === 'root' ? assetPath : inventoryPath;
       await mkdir(dirname(resolve(options[location], path)), { recursive: true });
       await rm(resolve(options[location], path), { force: true });
-      await symlink(resolve(options.root, 'tools/assets/publish-runtime-assets.mts'), resolve(options[location], path));
+      await symlink(resolve(options.root, 'packages/bake/cli/publish-runtime-assets.mts'), resolve(options[location], path));
       await assert.rejects(stagePublishedAssets(options), /regular files and directories/);
-      assert.equal(await readFile(resolve(options.root, 'tools/assets/publish-runtime-assets.mts'), 'utf8'), 'trusted publisher');
+      assert.equal(await readFile(resolve(options.root, 'packages/bake/cli/publish-runtime-assets.mts'), 'utf8'), 'trusted publisher');
     });
   }
   await t.test('artifact parent directory', async child => {

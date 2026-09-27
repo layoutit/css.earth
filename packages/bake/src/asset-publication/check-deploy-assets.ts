@@ -1,13 +1,15 @@
 import { execFile } from 'node:child_process';
 import { readdir, readFile } from 'node:fs/promises';
-import { extname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
+import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
-import { inventoryAssets, inventoriedObjectIds } from '@cssearth/bake/delivery';
-import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
-import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '@cssearth/renderer';
+import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
+import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
+import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 const execFileAsync = promisify(execFile);
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);
 const escapedOrigin = RUNTIME_ASSET_ORIGIN.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 const runtimeAssetPattern = new RegExp(`${escapedOrigin}/runtime-assets/[a-f0-9]{64}/[a-zA-Z0-9._@/-]+`, 'gu');
@@ -55,7 +57,7 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
   return hosts.length;
 }
 
-export async function checkDeployAssets(root = resolve(import.meta.dirname, '../..')): Promise<{ files: number; urls: number }> {
+export async function checkDeployAssets(root = ROOT): Promise<{ files: number; urls: number }> {
   const { stdout } = await execFileAsync('git', ['diff', '--name-only', '--', 'src/objects'], { cwd: root });
   const drift = stdout.split('\n').map(path => path.trim()).filter(Boolean);
   if (drift.length) throw new Error(`The deploy preparation changed committed object metadata:\n${drift.join('\n')}\nPrepare and publish those assets explicitly before deploying.`);
@@ -67,9 +69,4 @@ export async function checkDeployAssets(root = resolve(import.meta.dirname, '../
   if (unknown.length) throw new Error(`The built site references runtime assets outside the committed inventories:\n${unknown.join('\n')}`);
   await checkPublishedWorldPair(root);
   return { files: files.length, urls: new Set(referenced).size };
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const result = await checkDeployAssets();
-  console.log(`Verified ${result.urls} emitted runtime asset URL(s) across ${result.files} deploy file(s).`);
 }

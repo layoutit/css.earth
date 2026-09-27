@@ -3,8 +3,9 @@ import { parsePreparedObjectRuntime } from './validation/index.js';
 import type { ObjectRuntimeDefinition } from './runtime/object-runtime-types.js';
 import { record } from './validation/guards.js';
 import { parsePreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
+import { PREPARED_CSS_OBJECT_FORMAT } from './prepared-data/object-format.js';
 
-export const PREPARED_CSS_OBJECT_FORMAT = 'cssearth-css-object@5';
+export { PREPARED_CSS_OBJECT_FORMAT };
 
 export function requirePreparedCssDescriptor(input: unknown) {
   const descriptor = parseObjectDescriptor(input);

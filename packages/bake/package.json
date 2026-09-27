@@ -251,6 +251,11 @@
       "import": "./dist/astronomy.js",
       "default": "./dist/astronomy.js"
     },
+    "./asset-publication": {
+      "types": "./dist/asset-publication.d.ts",
+      "import": "./dist/asset-publication.js",
+      "default": "./dist/asset-publication.js"
+    },
     "./site-assets": {
       "types": "./dist/site-assets.d.ts",
       "import": "./dist/site-assets.js",
@@ -304,6 +309,7 @@
     "playwright": "1.60.0",
     "robust-predicates": "3.0.3",
     "sharp": "0.35.3",
+    "undici": "7.29.1",
     "vite": "7.3.1",
     "yaml": "^2.9.0"
   },

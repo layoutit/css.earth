@@ -2,14 +2,14 @@ import { isArray, isRecord, requireRecord, requireArray, requireString } from '@
 import { isDeepStrictEqual } from 'node:util';
 import { dirname, relative, resolve } from 'node:path';
 import type { Node, FunctionDeclaration } from 'estree';
-import { parseRuntimeSource } from '@cssearth/bake/runtime-source';
-import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
-import { nodeName, propertyKey, staticObjectProperties } from '@cssearth/bake/runtime-source';
-import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mts';
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '@cssearth/bake/presentation';
-import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
-import { requireAuthoredWorldFrame } from '@cssearth/bake/sources';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
+import { parseRuntimeSource } from '../runtime-source/index.ts';
+import type { RuntimeSourceReader } from '../runtime-source/index.ts';
+import { nodeName, propertyKey, staticObjectProperties } from '../runtime-source/index.ts';
+import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.ts';
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../presentation/index.ts';
+import { requireObjectRuntimeDefinition } from './object-runtime-contract.ts';
+import { requireAuthoredWorldFrame } from '../sources/index.ts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
 
 export function requireDescriptorAdapterSource(text: string, exported: string): string {
   const ast = parseRuntimeSource(text, 'site/packaged-object-runtime.mts');

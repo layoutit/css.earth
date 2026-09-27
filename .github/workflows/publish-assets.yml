@@ -220,14 +220,14 @@ jobs:
           name: prepared-${{ inputs.object }}
           path: ${{ runner.temp }}/prepared-artifact
       - name: Verify the frozen inventories and stage only their bytes
-        run: node tools/assets/stage-published-assets.mts "$RUNNER_TEMP/prepared-artifact" "$GITHUB_WORKSPACE/pull-request" "$OBJECT"
+        run: node packages/bake/cli/stage-published-assets.mts "$RUNNER_TEMP/prepared-artifact" "$GITHUB_WORKSPACE/pull-request" "$OBJECT"
       - name: Publish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: node tools/assets/publish-runtime-assets.mts "--object=$OBJECT"
+        run: node packages/bake/cli/publish-runtime-assets.mts "--object=$OBJECT"
       - name: Confirm every inventoried key is live
-        run: node tools/assets/check-assets-published.mts "--object=$OBJECT"
+        run: node packages/bake/cli/check-assets-published.mts "--object=$OBJECT"
       - name: Report
         env:
           NUMBER: ${{ inputs.pull_request }}

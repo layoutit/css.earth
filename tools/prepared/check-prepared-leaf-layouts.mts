@@ -12,7 +12,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { auditObjectRuntimeOwnership } from "../ci/check-object-runtime-ownership.mts";
-import { readPreparedPresentationModule } from "./check-prepared-presentation.mts";
+import { readPreparedPresentationModule } from "@cssearth/bake/contract";
 import { readPreparedObjects } from "@cssearth/objects/node";
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;

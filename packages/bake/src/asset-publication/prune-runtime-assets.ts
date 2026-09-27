@@ -13,16 +13,14 @@
 //   1. Cloudflare dashboard -> R2 -> Manage R2 API Tokens -> create a token with "Object Read only" permission,
 //      scoped to the `cssearth-assets` bucket if possible.
 //   2. Export three variables: R2_ACCOUNT_ID (see `wrangler whoami`), R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY.
-//   3. Run `node tools/assets/prune-runtime-assets.mts --dry-run`.
+//   3. Run `node packages/bake/cli/prune-runtime-assets.mts --dry-run`.
 //
 // Without those, the CLI below reports plainly that it cannot list and exits non-zero — it never fabricates an
 // empty or partial report. `listRuntimeAssetKeys` (the real S3 lister) and the pure `computePruneCandidates` are
 // both exported and independently unit-tested against an injected transport/lister, so the decision logic has
 // real coverage even where this environment cannot reach the real bucket.
 import { createHash, createHmac } from 'node:crypto';
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { inventoryAssets, inventoriedObjectIds } from '@cssearth/bake/delivery';
+import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
 
 export const BUCKET = 'cssearth-assets';
 export const PRUNE_PREFIX = 'runtime-assets/';
@@ -115,26 +113,7 @@ export async function listRuntimeAssetKeys({ accountId, accessKeyId, secretAcces
   return keys;
 }
 
-function credentialsFromEnv(env: NodeJS.ProcessEnv): R2Credentials | null {
+export function credentialsFromEnv(env: NodeJS.ProcessEnv): R2Credentials | null {
   const accountId = env.R2_ACCOUNT_ID, accessKeyId = env.R2_ACCESS_KEY_ID, secretAccessKey = env.R2_SECRET_ACCESS_KEY;
   return accountId && accessKeyId && secretAccessKey ? { accountId, accessKeyId, secretAccessKey } : null;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  if (!process.argv.includes('--dry-run')) throw new Error('Usage: prune-runtime-assets.mts --dry-run (there is no delete path).');
-  const root = resolve(import.meta.dirname, '../..');
-  const inventoried = await currentlyInventoriedKeys(root);
-  const credentials = credentialsFromEnv(process.env);
-  if (!credentials) {
-    console.error('Cannot list R2 objects: wrangler has no read-only list command, and R2_ACCOUNT_ID/R2_ACCESS_KEY_ID/' +
-      'R2_SECRET_ACCESS_KEY are not set. See the comment at the top of this file for how to create a read-only R2 API ' +
-      `token. (${inventoried.size} key(s) are currently inventoried locally, for reference.)`);
-    process.exitCode = 1;
-  } else {
-    const live = await listRuntimeAssetKeys(credentials);
-    const { candidates, bytes } = computePruneCandidates(live, inventoried);
-    console.log(`${live.length} live runtime-assets/ key(s); ${inventoried.size} currently inventoried.`);
-    console.log(`Would prune ${candidates.length} key(s), ${(bytes / 1e6).toFixed(1)} MB — dry run only, nothing deleted.`);
-    for (const { key, bytes: size } of candidates) console.log(`  ${key} (${size} bytes)`);
-  }
 }

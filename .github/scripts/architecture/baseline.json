@@ -1,19 +1,18 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 13,
+    "largestCycle": 12,
     "layerOrder": [
       "tools/objects(root)",
       "tools/objects/giant-layers",
       "tools/objects/material-composition",
       "tools/prepare",
-      "tools/ci",
       "tools/objects/new-object",
       "tools/objects/source-authoring",
-      "tools/prepared",
       "tools/sources",
       "tools/objects/paged-ellipsoid",
       "tools/objects/content",
+      "tools/ci",
       "tools/assets",
       "tools/objects/giant-observations",
       "site/scene",
@@ -44,8 +43,7 @@
       {"from":"tools/ci","to":"tools/prepare","imports":1},
       {"from":"tools/objects/giant-observations","to":"tools/objects(root)","imports":1},
       {"from":"tools/objects/new-object","to":"tools/prepare","imports":1},
-      {"from":"tools/objects/source-authoring","to":"tools/objects/new-object","imports":1},
-      {"from":"tools/prepared","to":"tools/ci","imports":1}
+      {"from":"tools/objects/source-authoring","to":"tools/objects/new-object","imports":1}
     ]
   },
   "rules": {

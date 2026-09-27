@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import { contentType, publishAssets } from './publish-runtime-assets.mts';
+import { contentType, publishAssets } from '@cssearth/bake/asset-publication';
 import type { PublishAsset } from '@cssearth/bake/delivery';
 
 async function fixture(t: TestContext) {

@@ -1,6 +1,5 @@
 import { copyFile, lstat, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { requireInventory } from '@cssearth/objects/node';
 import { sha256 } from '@cssearth/core/node';
 
@@ -73,11 +72,4 @@ export async function stagePublishedAssets({ artifactRoot, sourceRoot, root, obj
     }
   }
   return files.size;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [artifactRoot, sourceRoot, objectId, ...extra] = process.argv.slice(2);
-  if (!artifactRoot || !sourceRoot || !objectId || extra.length) throw new Error('Usage: stage-published-assets.mts <artifact-root> <PR-checkout> <object-id>');
-  const count = await stagePublishedAssets({ artifactRoot, sourceRoot, objectId, root: resolve(import.meta.dirname, '../..') });
-  console.log(`Verified and staged ${count} committed asset(s) for ${objectId}.`);
 }

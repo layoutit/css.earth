@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { requireDescriptorAdapterSource } from '@cssearth/bake/contract';
 
 test('the descriptor transport reads the complete object or, adopting its page, the first-view transport, and nothing else', async () => {
   const source = await readFile(new URL('../../site/packaged-object-runtime.mts', import.meta.url), 'utf8');
