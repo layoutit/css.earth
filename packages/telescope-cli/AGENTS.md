@@ -10,8 +10,10 @@ runs its implementation, `tools/objects/telescopes/cli.mts`, there. Keep its arg
 that is the change.
 
 This package is the layer above the libraries: the implementation it runs imports `@cssearth/telescope`, `@cssearth/bake`
-and the other packages, and nothing imports this package. `@cssearth/telescope` never imports it or `@cssearth/bake`.
-The implementation's direct imports are all packages; it reaches workspace code only as processes or modules it runs from
+and the other packages. `@cssearth/telescope` never imports it or `@cssearth/bake`. Until the implementation moves here, two
+kinds of relative import remain: `tools/objects/telescopes/cli.mts` reads this package's `src/help.mts` by path, and the
+implementation imports the archive folders (`tools/objects/<archive>/`, for example `families/f04-slit-profile.mts` →
+`tools/objects/hst/`), which move with it. Beyond those, it reaches workspace code only as processes or modules it runs from
 the checkout by path (`tools/objects/telescopes/workspace-commands.mts`, the sphere lane in `tools/objects/telescope-sphere/`).
 Moving the implementation here also moves the archive programs, ledgers and toolchain locks whose paths body manifests,
 ledgers and test fixtures record, so it is a change of its own under the provenance contract.
