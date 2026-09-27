@@ -4,11 +4,12 @@ const test = sourceTest();
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { compareLightCurves, parseLightCurve, type LightCurve } from './compare-light-curves.mts';
-import { readProgram, renderSettings } from './reduce-tso.mts';
+import { JWST_PROGRAMS, readProgram, renderSettings } from './reduce-tso.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
+import { eurekaToolchain } from './toolchain.mts';
 
 const repository = WORKSPACE;
-const program = resolve(WORKSPACE, 'tools/objects/jwst/programs/wasp-43b-miri-1366');
+const program = resolve(WORKSPACE, JWST_PROGRAMS.path, 'wasp-43b-miri-1366');
 
 test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its control files and the Bell et al. deposit', async () => {
   const pinned = await readProgram(program);
@@ -29,7 +30,7 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
 
 test('the HD 189733b MIRI eclipses pin their segments, Lally et al.\'s extraction choices and their deposit files by md5', async () => {
   for (const [observation, eclipse, files] of [['002', 1, 5], ['011', 2, 4]] as const) {
-    const directory = resolve(WORKSPACE, `tools/objects/jwst/programs/hd-189733b-miri-2021-${observation}`), pinned = await readProgram(directory);
+    const directory = resolve(WORKSPACE, JWST_PROGRAMS.path, `hd-189733b-miri-2021-${observation}`), pinned = await readProgram(directory);
     assert.equal(pinned.segments.length, 7);
     assert.ok(pinned.segments.every(segment => segment.name.startsWith(`jw02021${observation}001_04103_00001-seg`)));
     assert.equal(pinned.segments.reduce((sum, segment) => sum + segment.bytes, 0), 6_379_456_320);
@@ -43,7 +44,7 @@ test('the HD 189733b MIRI eclipses pin their segments, Lally et al.\'s extractio
     assert.match(s3, /^bg_hw\s+12\b/mu); assert.match(s3, /^bg_deg\s+1\b/mu);
     assert.match(s4, /^wave_min\s+6\.37\b/mu); assert.match(s4, /^wave_max\s+9\.43\b/mu);
   }
-  await assert.rejects(readProgram(resolve(WORKSPACE, 'tools/objects/jwst/programs/does-not-exist')));
+  await assert.rejects(readProgram(resolve(WORKSPACE, JWST_PROGRAMS.path, 'does-not-exist')));
 });
 
 test('rendering a control file sets its directories and keeps every other line', () => {
@@ -75,7 +76,7 @@ test('a light-curve comparison pairs integrations by time, skips masks, and sepa
 test('the WASP-43b MIRI reduction from raw reproduces Bell et al. (2024)\'s Eureka! v1 light curves', async context => {
   const curves = resolve(repository, 'output/jwst/wasp-43b-miri-1366/light-curves');
   if (!await access(resolve(curves, 'ours-white.csv')).then(() => true, () => false)) {
-    context.skip('run node packages/telescope-cli/src/archives/jwst/reduce-tso.mts tools/objects/jwst/programs/wasp-43b-miri-1366 output/jwst/wasp-43b-miri-1366 to cover this');
+    context.skip('run node packages/telescope-cli/src/archives/jwst/reduce-tso.mts packages/telescope-cli/src/archives/jwst/programs/wasp-43b-miri-1366 output/jwst/wasp-43b-miri-1366 to cover this');
     return;
   }
   const read = async (name: string) => parseLightCurve(await readFile(resolve(curves, name), 'utf8'));
@@ -101,7 +102,7 @@ test('the HD 189733b MIRI eclipses reduced from raw reproduce Lally et al. (2025
   for (const observation of ['002', '011']) {
     const curves = resolve(repository, `output/jwst/hd-189733b-miri-2021-${observation}/light-curves`);
     if (!await access(resolve(curves, 'author-white.csv')).then(() => true, () => false)) {
-      context.diagnostic(`run node packages/telescope-cli/src/archives/jwst/reduce-tso.mts tools/objects/jwst/programs/hd-189733b-miri-2021-${observation} output/jwst/hd-189733b-miri-2021-${observation} to cover observation ${observation}`);
+      context.diagnostic(`run node packages/telescope-cli/src/archives/jwst/reduce-tso.mts packages/telescope-cli/src/archives/jwst/programs/hd-189733b-miri-2021-${observation} output/jwst/hd-189733b-miri-2021-${observation} to cover observation ${observation}`);
       continue;
     }
     const read = async (name: string) => parseLightCurve(await readFile(resolve(curves, name), 'utf8'));
@@ -117,7 +118,7 @@ test('the HD 189733b MIRI eclipses reduced from raw reproduce Lally et al. (2025
 
 
 test('the TRAPPIST-1b phase-curve program pins the whole visit as MIRI photometry, with the authors\' control files', async () => {
-  const pinned = await readProgram(resolve(WORKSPACE, 'tools/objects/jwst/programs/trappist-1b-miri-3077'));
+  const pinned = await readProgram(resolve(WORKSPACE, JWST_PROGRAMS.path, 'trappist-1b-miri-3077'));
   assert.equal(pinned.mode, 'photometry');
   // Both exposures of the visit: 70 segments of observation 1 and 38 of observation 2, 59 hours.
   assert.equal(pinned.segments.length, 108);
@@ -127,13 +128,18 @@ test('the TRAPPIST-1b phase-curve program pins the whole visit as MIRI photometr
   assert.equal(pinned.crdsContext, 'jwst_1535.pmap');
   assert.equal(pinned.oracle?.kind, 'eureka-light-curve-zip');
   for (const template of Object.values(pinned.stages)) {
-    await access(resolve(WORKSPACE, 'tools/objects/jwst/programs/trappist-1b-miri-3077', template));
+    await access(resolve(WORKSPACE, JWST_PROGRAMS.path, 'trappist-1b-miri-3077', template));
   }
   // Bell's Stage 3 settings, carried over: aperture photometry of the star with his aperture and sky annulus.
-  const stage3 = await readFile(resolve(WORKSPACE, 'tools/objects/jwst/programs/trappist-1b-miri-3077', pinned.stages.S3), 'utf8');
+  const stage3 = await readFile(resolve(WORKSPACE, JWST_PROGRAMS.path, 'trappist-1b-miri-3077', pinned.stages.S3), 'utf8');
   for (const setting of [/^photometry\s+True$/mu, /^photap\s+5\b/mu, /^skyin\s+16\b/mu, /^skywidth\s+30\b/mu, /^gain\s+3\.57$/mu]) {
     assert.match(stage3, setting);
   }
   // One worker, because this machine runs one heavy job at a time.
   assert.match(stage3, /^ncpu\s+1$/mu);
+});
+
+test('the Eureka! toolchain reads its descriptor and lock beside this code before it looks for an installed environment', async () => {
+  // Installed or not, the pins are read first: a missing descriptor or lock fails with ENOENT, anything else is about the install.
+  await eurekaToolchain('jwst_1535.pmap').catch((error: unknown) => assert.doesNotMatch(String(error), /ENOENT/u));
 });

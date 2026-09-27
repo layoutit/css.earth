@@ -123,7 +123,7 @@ export async function measureCubeResolution(file: string): Promise<{ receipt: st
   if (arcsec !== undefined && !(arcsec > 0)) throw new Error('Invalid resolution bound.');
   const text = `${JSON.stringify({ schema: 'cssearth-cube-resolution@1', product: before,
     implementation: sha256(await readFile(new URL('./resolution.mts', import.meta.url))),
-    softwarePins: await sha256File(resolve(WORKSPACE, 'tools/objects/jwst/requirements.lock')),
+    softwarePins: await sha256File(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst/requirements.lock')),
     arcsecPerPixel: cube.arcsecPerPixel, upperBoundArcsec: arcsec, ...measured }, null, 2)}\n`;
   const receipt = `${file}.${sha256(text)}.resolution.json`;
   await writeFile(receipt, text);

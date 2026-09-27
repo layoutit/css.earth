@@ -207,7 +207,7 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
   const comparison = cubeComparisonScope(ours, theirs, requestedWavelengthMicrometres);
   const samples = await compareSamples(ours, theirs, archiveOffset);
   const acceptance = sampleAgreement(samples);
-  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: id, band, observation: entry.observation, toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
+  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: id, band, observation: entry.observation, toolchain: 'packages/telescope-cli/src/archives/jwst/toolchain.json', crdsContext: program.crdsContext,
     mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { name: basename(local), ...(await sha256File(local)), calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance,
     comparison,
     grid: { width: ours.width, height: ours.height, planes: ours.planes, arcsecPerPixel: ours.arcsecPerPixel, micrometres: [ours.wavelength(0), ours.wavelength(ours.planes - 1)] }, samples };

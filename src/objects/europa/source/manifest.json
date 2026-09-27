@@ -19679,7 +19679,7 @@
       "credit": "NASA/ESA/CSA JWST, NIRSpec GTO programme 1250 (PI G. Villanueva); MAST (STScI)",
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "acquisition": "Written by tools/objects/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned with the exposures it was built from in tools/objects/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
+      "acquisition": "Written by tools/objects/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned with the exposures it was built from in packages/telescope-cli/src/archives/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
       "redistribution": "Derived from public JWST data; retain the credit.",
       "consumers": [
         "jwst-carbon-dioxide"
@@ -20419,7 +20419,7 @@
       "credit": "NASA/ESA/CSA JWST, NIRSpec programmes 1250 (PI G. Villanueva), 4023 and 9230; MAST (STScI)",
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "acquisition": "Written by tools/objects/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned in tools/objects/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
+      "acquisition": "Written by tools/objects/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned in packages/telescope-cli/src/archives/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
       "redistribution": "Derived from public JWST data; retain the credit.",
       "consumers": [
         "jwst-hydrogen-peroxide"
