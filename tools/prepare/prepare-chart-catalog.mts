@@ -1,6 +1,6 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import sharp from 'sharp';
+import sharp, { type OverlayOptions } from 'sharp';
 import { inventoriedObjectIds } from '../assets/runtime-assets.mts';
 import { parseChartAssetRecipe } from '../objects/charts/charts.ts';
 import { escapeXml } from '../objects/charts/chart-style.mts';
@@ -25,7 +25,7 @@ export async function prepareChartCatalog(args: readonly string[] = [], root = r
       png: await sharp(resolve(root, 'output/chart-recipes', id, chart.output), { density: 144 }).png().toBuffer() });
   }
   async function board(items: typeof entries, path: string) {
-    const cellWidth = 692, cellHeight = 860, composite: sharp.OverlayOptions[] = [];
+    const cellWidth = 692, cellHeight = 860, composite: OverlayOptions[] = [];
     for (const [index, entry] of items.entries()) {
       const left = index % 3 * cellWidth + 40, top = Math.floor(index / 3) * cellHeight + 32;
       const label = `<svg width="612" height="52"><text x="0" y="19" font-family="sans-serif" font-size="20" fill="#ddd">${escapeXml(entry.id)} · ${entry.kind}${entry.variant ? ` · ${entry.variant}` : ''}</text></svg>`;
