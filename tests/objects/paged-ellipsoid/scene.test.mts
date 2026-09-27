@@ -1,11 +1,11 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '@cssearth/bake/presentation';
-import { assertPolarCaps, poleOfClass } from '../../../tests/objects/polar-caps.mts';
+import { assertPolarCaps, poleOfClass } from '../polar-caps.mts';
 import { parsePagedProfile, parseInteriorSource, createPagedSurfaceRaster, createAtmospherePreparation, prepareEllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { preparePagedEllipsoidScene } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';

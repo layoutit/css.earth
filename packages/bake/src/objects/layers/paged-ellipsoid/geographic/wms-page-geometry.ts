@@ -1,7 +1,7 @@
-import { prepareProjectiveTextureLayer } from "@cssearth/bake/scene";
-import { prepareCityPageGeometry, CITY_PAGE_RASTER_SCALE, cityPageRasterDensity } from "./page-geometry.mts";
+import { prepareProjectiveTextureLayer } from "../../../../scene/index.ts";
+import { prepareCityPageGeometry, CITY_PAGE_RASTER_SCALE, cityPageRasterDensity } from "./page-geometry.ts";
 
-import type { GeographicScene, PageAddress, PageGeometry, GeographicBounds } from './contracts.mts';
+import type { GeographicScene, PageAddress, PageGeometry, GeographicBounds } from './contracts.ts';
 export const WORLDCOVER_WMS = Object.freeze({
   endpoint: "https://mapproxy.terrascope.be/mapproxy/service",
   layer: "esa-worldcover-s2rgbnir-10m-2021-v2_tcc",

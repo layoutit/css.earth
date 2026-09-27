@@ -3,10 +3,10 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { normalizeDestinationQuery } from '@cssearth/objects';
-import { prepareLocationPoint, prepareLocationCamera } from "./prepare-location.mts";
+import { prepareLocationPoint, prepareLocationCamera } from "./prepare-location.ts";
 
-import type { GeographicScene } from './contracts.mts';
-import { parsePlacesConfig, parsePlacesManifest, parseBodyAttitude } from './source-records.mts';
+import type { GeographicScene } from './contracts.ts';
+import { parsePlacesConfig, parsePlacesManifest, parseBodyAttitude } from './source-records.ts';
 export async function preparePlaces({sourceDirectory,publicDirectory,config: value,scene}: { sourceDirectory: string; publicDirectory: string; config: unknown; scene: GeographicScene }) {
 const config=parsePlacesConfig(value);
 const recipe=config.geographic.places;

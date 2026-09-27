@@ -1,7 +1,7 @@
 import { cross3 as cross } from '@cssearth/core';
-import { prepareProjectiveTextureLayer } from "@cssearth/bake/scene";
+import { prepareProjectiveTextureLayer } from "../../../../scene/index.ts";
 
-import type { PageAddress, GeographicScene, GeographicLeaf, GeographicBounds, PolarBounds, PageGeometry, PolarProjection, PolarPlane } from './contracts.mts';
+import type { PageAddress, GeographicScene, GeographicLeaf, GeographicBounds, PolarBounds, PageGeometry, PolarProjection, PolarPlane } from './contracts.ts';
 export const CITY_PAGE_PIXELS = 1024;
 export const CITY_PAGE_GUTTER = 8;
 export const CITY_PAGE_LAST_LEVEL = 7;

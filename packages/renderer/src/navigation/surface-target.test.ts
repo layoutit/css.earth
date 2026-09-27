@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import { preparedScenePitch } from '@cssearth/engine';
-import { prepareLocationPoint, prepareLocationCamera } from '../../../../tools/objects/paged-ellipsoid/geographic/prepare-location.mts';
+import { prepareLocationPoint, prepareLocationCamera } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 import { dotN as dot } from '@cssearth/core';
 
