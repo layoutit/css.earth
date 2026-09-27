@@ -77,10 +77,12 @@ export const HOOKS_DIRECTORY = 'cssearth-hooks';
 
 /** Runs the calling worktree's own tracked hook. It names no checker path, so it stays correct on every branch
  * layout, and it lives outside `.git/hooks`, which an older branch's installer overwrites. */
+/** Marks a file this installer wrote into its hooks directory; nothing else there is ever overwritten. */
+export const DISPATCHER_MARKER = 'cssearth-commit-msg-dispatcher';
 export const DISPATCHER = `#!/bin/sh
-# ${HOOK_MARKER}: run this worktree's tracked ${HOOK_SOURCE}. Written by \`pnpm install\`.
-root=$(git rev-parse --show-toplevel) || exit 0
-[ -f "$root/${HOOK_SOURCE}" ] || exit 0
+# ${HOOK_MARKER} ${DISPATCHER_MARKER}: run this worktree's tracked ${HOOK_SOURCE}. Written by \`pnpm install\`.
+root=$(git rev-parse --show-toplevel) || { echo "commit-msg: cannot find this worktree's top level; run git commit from inside the worktree." >&2; exit 1; }
+[ -f "$root/${HOOK_SOURCE}" ] || { echo "commit-msg: $root/${HOOK_SOURCE} is missing; restore it (git checkout -- ${HOOK_SOURCE}), or skip once with git commit --no-verify." >&2; exit 1; }
 exec sh "$root/${HOOK_SOURCE}" "$@"
 `;
 
@@ -91,17 +93,18 @@ const git = async (root: string, ...args: string[]) => (await execFileAsync('git
  * returns early once core.hooksPath is set. Leaves any core.hooksPath already configured (including the pre-push
  * opt-in `.githooks`) and never disables a hook of the contributor's own in `.git/hooks`. */
 export async function installHook(root: string): Promise<string> {
-  let common: string, configured: string;
+  let common: string, configured: string | undefined;
   try {
     common = resolve(root, await git(root, 'rev-parse', '--git-common-dir'));
-    configured = await git(root, 'config', '--get', 'core.hooksPath').catch(() => '');
+    // `git config --get` fails when the key is unset; an explicitly empty value is a setting too, and is kept.
+    configured = await git(root, 'config', '--get', 'core.hooksPath').catch(() => undefined);
   } catch {
     return 'Not a Git checkout; no hook installed.';
   }
   // Not `git rev-parse --git-path hooks`: that answers core.hooksPath once it is set.
   const legacy = resolve(common, 'hooks'), directory = resolve(common, HOOKS_DIRECTORY), target = resolve(directory, 'commit-msg');
-  if (configured && resolve(root, configured) !== directory) return `core.hooksPath is ${configured}; left unchanged (${HOOK_SOURCE} applies when that path is .githooks).`;
-  if (!configured) {
+  if (configured !== undefined && (!configured || resolve(root, configured) !== directory)) return `core.hooksPath is ${JSON.stringify(configured)}; left unchanged (${HOOK_SOURCE} applies when that path is .githooks).`;
+  if (configured === undefined) {
     const own: string[] = [];
     for (const name of await readdir(legacy).catch(() => [] as string[])) {
       if (name.endsWith('.sample')) continue;
@@ -110,6 +113,8 @@ export async function installHook(root: string): Promise<string> {
     }
     if (own.length) return `${legacy} has hooks of your own (${own.join(', ')}); left unchanged. Set core.hooksPath to run ${HOOK_SOURCE}.`;
   }
+  const current = await readFile(target, 'utf8').catch(() => undefined);
+  if (current !== undefined && !current.includes(DISPATCHER_MARKER)) return `${target} is not this installer's dispatcher; left unchanged.`;
   await mkdir(directory, { recursive: true });
   await writeFile(target, DISPATCHER);
   await chmod(target, 0o755);

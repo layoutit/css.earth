@@ -269,7 +269,8 @@ accepted as Git writes them.
 
 `pnpm install` installs a `commit-msg` hook that checks each message as you commit: it points `core.hooksPath` at a
 small dispatcher in `.git/cssearth-hooks/` that runs each worktree's own `.githooks/commit-msg`. It leaves hooks of
-your own in `.git/hooks` and any `core.hooksPath` you already set in place. CI runs the same check over every commit in a pull request as part of the required `Classify changes`
+your own in `.git/hooks` and any `core.hooksPath` you already set in place. The `publish-assets.yml` asset job runs lifecycle scripts, so
+its throwaway checkout gets this `core.hooksPath` too; it never commits there, so the setting is harmless. CI runs the same check over every commit in a pull request as part of the required `Classify changes`
 job, so reword a rejected commit with `git rebase -i` rather than skipping the hook.
 
 ## Pull requests

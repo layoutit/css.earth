@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
-import { HOOKS_DIRECTORY, MAX_LENGTH, cleanMessage, installHook, messageProblem, rangeProblems, type RangeCommit } from './commit-message.mts';
+import { DISPATCHER_MARKER, HOOKS_DIRECTORY, MAX_LENGTH, cleanMessage, installHook, messageProblem, rangeProblems, type RangeCommit } from './commit-message.mts';
 const test = sourceTest();
 
 const execFileAsync = promisify(execFile);
@@ -107,8 +107,41 @@ test('the installer keeps a hook of your own and any core.hooksPath already set'
     assert.equal(await git('config', '--get', 'core.hooksPath').then(() => 'set', () => 'unset'), 'unset');
     await rm(resolve(legacyHooks, 'pre-commit'));
     await git('config', 'core.hooksPath', '.githooks');
-    assert.match(await installHook(root), /core\.hooksPath is \.githooks; left unchanged/u);
+    assert.match(await installHook(root), /core\.hooksPath is "\.githooks"; left unchanged/u);
     assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.githooks');
+    await git('config', 'core.hooksPath', '');
+    assert.match(await installHook(root), /core\.hooksPath is ""; left unchanged/u, 'an explicitly empty value is a setting, not an absence');
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout, '\n');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('the installer overwrites only its own dispatcher, and the dispatcher fails loudly', async () => {
+  const { root, git, accepted } = await hookClone();
+  try {
+    const target = resolve(root, '.git', HOOKS_DIRECTORY, 'commit-msg');
+    await mkdir(dirname(target), { recursive: true });
+    await writeFile(target, '#!/bin/sh\n# cssearth-commit-message-hook but not the dispatcher\n', { mode: 0o755 });
+    assert.match(await installHook(root), /not this installer's dispatcher; left unchanged/u);
+    assert.equal(await readFile(target, 'utf8'), '#!/bin/sh\n# cssearth-commit-message-hook but not the dispatcher\n');
+    await rm(target);
+    assert.match(await installHook(root), /Installed/u);
+    assert.match(await readFile(target, 'utf8'), new RegExp(DISPATCHER_MARKER, 'u'));
+    await git('rm', '-q', '--cached', '.githooks/commit-msg');
+    await rm(resolve(root, '.githooks/commit-msg'));
+    const missing = await git('commit', '-q', '--allow-empty', '-m', 'chore: fine').then(() => '', (error: { stderr: string }) => error.stderr);
+    assert.match(missing, /\.githooks\/commit-msg is missing; restore it/u);
+    assert.equal(await accepted('chore: fine'), false);
+    const outside = await mkdtemp(resolve(tmpdir(), 'commit-message-outside-'));
+    try {
+      const run = await execFileAsync('sh', [target, 'message'], { cwd: outside, env: { ...process.env, GIT_CEILING_DIRECTORIES: outside } })
+        .then(() => ({ code: 0, stderr: '' }), (error: { code: number; stderr: string }) => error);
+      assert.equal(run.code, 1);
+      assert.match(run.stderr, /cannot find this worktree's top level/u);
+    } finally {
+      await rm(outside, { recursive: true, force: true });
+    }
   } finally {
     await rm(root, { recursive: true, force: true });
   }
