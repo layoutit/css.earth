@@ -1,0 +1,307 @@
+[
+  {
+    "id": "96-saturn-ring-opacity",
+    "title": "Saturn rings: compare measured opacity profiles",
+    "bodies": [
+      "saturn"
+    ],
+    "probes": [
+      "saturn-opacity"
+    ],
+    "current": "Saturn currently uses one Cassini UVIS occultation profile to prepare ring opacity. Proposal 44 concerns spectral interpretation; it does not cover a comparison of dated occultation profiles.",
+    "result": "Prepare a small set of measured radial profiles with instrument, wavelength, event time and uncertainty, using the existing chart and ring preparation contracts.",
+    "evidence": "OPUS lists Cassini RSS optical-depth profiles and companion geometry/calibration products. The inspected K-band label identifies calibrated optical depth and phase shift over 72,001.25–144,998.75 km. UVIS, VIMS and Voyager occultations are separate instrument families.",
+    "work": "Choose events with useful radial coverage; decode their native tables and quality limits; reconcile ring radius and event-time conventions. Keep optical depth distinct from display alpha and from the brightness spectra in proposal 44.",
+    "limit": "Different wavelengths, opening angles and epochs cannot be pooled into one measured profile. A single occultation samples a path, not every longitude. Do not infer complete azimuthal structure or change retained ring geometry.",
+    "checks": "Verify native table values, radius ordering, missingness, uncertainty and the optical-depth-to-transmission conversion. Demonstrate a useful change against the currently selected UVIS profile; keep preparation and rendering separate.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "97-uranus-ring-opacity",
+    "title": "Uranus rings: replace broad opacity assumptions with measured profiles",
+    "bodies": [
+      "uranus"
+    ],
+    "probes": [
+      "uranus-opacity",
+      "uranus-ground"
+    ],
+    "current": "Uranus uses published ring dimensions and broad optical-depth values; the epsilon-ring display uses a midpoint of the published range.",
+    "result": "Qualify Voyager and Earth-based occultation profiles for prepared ring-opacity inputs and source-backed explanatory charts.",
+    "evidence": "The inspected Voyager PPS label supplies ring-intercept radius, normal opacity and uncertainty. The Earth-based PDS4 release supplies radial products at multiple sampling intervals, ring fits and quality ratings. These are native measurements beyond the summary ring table.",
+    "work": "Select dated ingress/egress events with documented ring-plane models and adequate signal. Preserve the native quantity: normalized flux, opacity and optical depth are different. Compare overlapping independent events before changing an existing display parameter.",
+    "limit": "Sampling interval is not spatial resolving power. Narrow-ring eccentricity and longitude variations prohibit averaging all profiles into a supposedly simultaneous circular ring. Keep fixed geometry and disclose any display-width floor.",
+    "checks": "Check radius, units, flags, uncertainties, bandpass and conversion against the label and independent numeric rows. Demonstrate that the existing prepared annular texture can represent the result without geometry or renderer changes.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "98-neptune-ring-measurements",
+    "title": "Neptune rings: measured radial profiles and dated arc observations",
+    "bodies": [
+      "neptune"
+    ],
+    "probes": [
+      "neptune-opacity",
+      "neptune-arcs"
+    ],
+    "current": "Current Neptune ring radii are sourced, but arc centres and widths remain schematic because the selected summary table does not establish absolute positions.",
+    "result": "Qualify native occultation profiles and calibrated Voyager/Hubble observations as separate constraints on the existing ring presentation.",
+    "evidence": "OPUS provides Voyager PPS/UVS ring occultations and ISS calibrated/geometrically corrected images. The first inspected PPS segment covers only 42,500–49,999 km: it does not measure the Adams arcs near 62,933 km.",
+    "work": "Read every segment associated with the selected occultation and choose actual arc imaging by event time, phase and ring longitude. Retain a separate table of what each source measures. Use only source-supported fixed-epoch arc locations or an existing prepared chart.",
+    "limit": "A radial occultation cannot locate every arc. Do not expand the inspected inner-ring segment to the Adams ring, fill unseen longitudes, animate arcs or alter scene geometry.",
+    "checks": "Independently verify radius/longitude frames and timing, resolve actual arc coverage from native images, and compare with the current schematic assumptions. A profile-only result must be labeled as such.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "99-saturn-moon-vims",
+    "title": "Saturn moons: qualify additional infrared bands and coverage",
+    "bodies": [
+      "mimas",
+      "hyperion",
+      "dione",
+      "rhea",
+      "tethys",
+      "iapetus",
+      "phoebe"
+    ],
+    "probes": [
+      "mimas-infrared",
+      "hyperion-infrared",
+      "dione-infrared"
+    ],
+    "current": "Dione, Rhea, Tethys, Iapetus and Phoebe already have infrared/ice views. Mimas and Hyperion are the clearest missing VIMS cases in this set. Enceladus now has the merged infrared mosaic and is not another new infrared addition.",
+    "result": "Start with measured VIMS bands for Mimas and Hyperion; extend another moon only when a native-source comparison establishes new coverage or a distinct useful spectral measurement.",
+    "evidence": "Read labels identify 48×352×12 and 36×352×24 QUBEs for the inspected Mimas and Hyperion products. OPUS also finds a sharp Dione observation, but its label is only 64×352×1: one spatial line, not a high-resolution global map. OPUS exposes raw QUBEs and geometry summaries, not a ready calibrated global mosaic.",
+    "work": "Recover the documented radiometric calibration and wavelength tables, separate VIS/IR channels sharing a QUBE, validate per-pixel geometry and compare against the selected corrected mosaics. Prefer independent registration and measured area gain over more catalogue rows.",
+    "limit": "A band-depth indicator is not mineral abundance. Resolution sorting does not rank total useful coverage. Preserve scan gaps, saturation and fixed moon geometry; do not reopen rejected registrations without new evidence.",
+    "checks": "Independent calibrated samples, wavelength selection, held-out registration, area-weighted support and overlap checks. Report each moon separately, including any case that produces no useful addition.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "100-saturn-moon-ultraviolet",
+    "title": "Saturn moons: measured ultraviolet spectra",
+    "bodies": [
+      "mimas",
+      "enceladus",
+      "tethys",
+      "dione",
+      "rhea",
+      "iapetus",
+      "phoebe",
+      "hyperion"
+    ],
+    "probes": [
+      "dione-ultraviolet"
+    ],
+    "current": "Visible/infrared composites do not expose the archived ultraviolet measurements as spectra with their original calibration and observing conditions.",
+    "result": "Qualify selected UVIS and Hubble STIS spectra as existing prepared charts; a surface band is optional only where resolved footprints and registration support it.",
+    "evidence": "The Dione UVIS example has a native FUV cube plus a versioned calibration-correction product. Catalogue records also mix HDAC time series, EUV/FUV scans and different observing purposes.",
+    "work": "Separate sunlight reflected by ice from atmospheric emission, background and detector calibration. Apply the documented correction for the selected release, inspect slit footprints, and compare with existing VIMS/visible source coverage.",
+    "limit": "A target name or generic Emission field does not establish a surface reflectance measurement. Raw counts and correction factors are not final radiance or I/F. Unresolved spectra must stay charts, not painted surface patches.",
+    "checks": "Validate units and correction direction against native documentation; retain spectral errors and resolution, event time and pointing. Demonstrate that existing chart or surface preparation supports the chosen result.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "101-galilean-ultraviolet",
+    "title": "Jupiter moons: distinguish ultraviolet surface and atmospheric signals",
+    "bodies": [
+      "io",
+      "europa",
+      "ganymede",
+      "callisto"
+    ],
+    "probes": [
+      "europa-ultraviolet"
+    ],
+    "current": "The earlier proposals cover NIMS, photography and volcanic changes. Hubble ultraviolet spectra provide a separate set of measurements requiring their own interpretation.",
+    "result": "Prepare selected measured spectra or spatially supported ultraviolet bands with clear labels for reflected light versus atmospheric emission.",
+    "evidence": "A targeted Europa STIS query returns native spectrum products, including calibrated 1D and 2D extractions. The archive also contains ACS/STIS/WFPC2 observations of Io, Europa and Ganymede; these are not automatically surface maps.",
+    "work": "Select coherent observing programs, remove acquisition images and calibrations, read aperture/pointing/error products, and match published analyses to exact observation IDs. Use the existing chart contract for spatially unresolved signals.",
+    "limit": "Do not place an auroral or exospheric emission pattern on solid terrain, interpret it as mineral abundance, or combine time-variable emissions into a timeless global surface.",
+    "checks": "Check extraction, flux units, wavelength solution, error arrays and observing geometry. Any mapped result needs independent surface registration; otherwise deliver a qualified chart or retain a source decision.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "102-uranus-voyager-history",
+    "title": "Uranus: a dated Voyager cloud observation",
+    "bodies": [
+      "uranus"
+    ],
+    "probes": [
+      "uranus-voyager"
+    ],
+    "current": "Uranus already has dated OPAL maps. A Voyager-era view would extend the time baseline only if it is reconstructed from a coherent observation set.",
+    "result": "Qualify one dated 1986 cloud/filter dataset through the existing surface/date selector.",
+    "evidence": "OPUS exposes thousands of Uranus ISS records with calibrated and geometrically corrected products. The resolution-ranked example crosses incidence angles above 90 degrees and approaches the limb; nominally fine sampling is not sufficient selection evidence.",
+    "work": "Choose a near-contemporaneous filter set using illumination, disk placement and resolution together. Use the native calibration and camera geometry, retaining missing polar/limb coverage and acquisition times.",
+    "limit": "No mixing decades or unseen hemispheres; no inferred high-detail clouds. A Voyager false-color view must not imply absolute brightness comparability with contrast-enhanced OPAL displays.",
+    "checks": "Check independent limb/feature registration, inter-band timing, source sampling and visible coverage. Use an honest dated regional result if a coherent global view is unsupported.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "103-uranian-moon-filter-measurements",
+    "title": "Uranian moons: qualify numeric Voyager filter measurements",
+    "bodies": [
+      "ariel",
+      "miranda",
+      "umbriel",
+      "titania",
+      "oberon"
+    ],
+    "probes": [
+      "miranda-bands"
+    ],
+    "current": "All five moons already have Voyager color datasets. A second color composite is duplicate work. The current recipes include whole-disc color matching and no phase normalization.",
+    "result": "Assess whether calibrated individual filter values or measured ratios can support a distinct numeric dataset or chart beyond the current display colors.",
+    "evidence": "Native Voyager CALIB/GEOMED products and geometry are accessible. Existing ledgers preserve camera/control limits and the earlier unsuccessful Oberon color trial as well as the subsequently included Voyager color dataset.",
+    "work": "Start from selected observations and their existing registrations. Trace calibration, scaling, phase and uncertainty to the original measurements; inspect additional frames only if they meet an explicit unmet coverage or information requirement.",
+    "limit": "Archive availability does not reopen rejected reconstructions. Do not repeat the old Oberon trial, borrow clear-filter detail, fill the unlit north or change moon geometry.",
+    "checks": "Establish physically meaningful units and independent photometric checks. If the available calibration cannot support numeric interpretation beyond the current color display, retain that negative result rather than add another lens.",
+    "phase": "Blocked by existing evidence",
+    "priority": 3
+  },
+  {
+    "id": "104-neptune-moon-filter-measurements",
+    "title": "Neptune moons: qualify useful native filter measurements",
+    "bodies": [
+      "triton",
+      "proteus",
+      "nereid",
+      "larissa"
+    ],
+    "probes": [
+      "proteus-bands"
+    ],
+    "current": "Triton and Proteus already use calibrated Voyager photography and filter color. Proteus still lacks independent interior feature control; Triton retains a documented calibration-scale discrepancy.",
+    "result": "Resolve a demonstrated calibration or registration gap before adding a numeric band or genuinely additional observed region. Unresolved small moons can contribute measured photometry, not fabricated textures.",
+    "evidence": "The resolution-ranked Proteus example C1138920 is already a selected source. Its presence in OPUS is duplication, not a newly discovered high-resolution image.",
+    "work": "Compare exact observation IDs and source processing versions first. Follow the existing Triton/Proteus reopen conditions and investigate alternative native products only when they offer new calibration or independent geometric evidence.",
+    "limit": "No new surface from a point source, no repeat of the same unconstrained limb fit, and no geometry changes. Preserve existing native-resolution and missing-coverage limits.",
+    "checks": "An independent calibration/control improvement must be demonstrated against the current selected inputs. Otherwise close the candidate as existing-family or unresolved; do not count retrieved copies as new data.",
+    "phase": "Blocked by existing evidence",
+    "priority": 3
+  },
+  {
+    "id": "105-pluto-charon-mvic-bands",
+    "title": "Pluto and Charon: native MVIC spectral bands",
+    "bodies": [
+      "pluto",
+      "charon"
+    ],
+    "probes": [
+      "pluto-bands",
+      "charon-bands"
+    ],
+    "current": "Current enhanced-color displays combine MVIC filters. Native individual measurements could provide useful band comparisons beyond those display composites.",
+    "result": "Qualify selected blue, red, near-infrared and methane-filter observations on the existing surfaces, grouped with the existing selector.",
+    "evidence": "OPUS returns calibrated MVIC SCI products. Their labels explicitly say the absolute-calibration step does not convert stored calibrated DN to physical units. The Charon intended-target sample is from 2012, so it cannot stand in for resolved 2015 flyby coverage.",
+    "work": "Locate the actual encounter scans, including Charon observations indexed under another intended target. Bind filter identities, scan timing and physical-unit conversion; use published geometry/control against current mosaics.",
+    "limit": "OPUS does not supply enhanced MVIC surface geometry in this audit. Four differently colored arrays alone do not establish composition or independent spatial information. Do not substitute 2012 point-source frames for resolved encounter scans.",
+    "checks": "Verify calibration constants, band registration, scan geometry, masks and native sampling against independent values and landmarks. Name reflectance/band ratios honestly and avoid duplicating enhanced color.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "106-pluto-small-moon-source-controls",
+    "title": "Pluto small moons: preserve and resolve native-image blockers",
+    "bodies": [
+      "nix",
+      "hydra",
+      "kerberos",
+      "styx"
+    ],
+    "probes": [
+      "nix-bands"
+    ],
+    "current": "Nix/Hydra photographic registration is deferred, Nix MVIC color is excluded for inadequate spatial information, and Kerberos/Styx have unresolved source limits.",
+    "result": "Use OPUS to document exact candidate/control products and their overlap with existing failed trials; reopen a surface only when its recorded condition is met.",
+    "evidence": "OPUS provides LORRI/MVIC records and calibrated-file links. Existing Nix evidence estimates roughly 24×17 color pixels, inadequate for the required cross-band registration; the indexed image dimensions describe the detector, not the moon.",
+    "work": "Compare identifiers, pointing and source-model bindings with the existing ledgers. Seek independent control or a newly released registered product; distinguish matching metadata from a successful shape-frame solution.",
+    "limit": "No geometry changes, no coarse color transferred onto finer LORRI detail, and no repeated failed fit presented as new evidence. Styx has no intended-target MVIC row in this snapshot; that is not proof that it never appears in a frame.",
+    "checks": "Meet the existing disjoint interior-holdout and source-frame conditions on genuinely new evidence. An unchanged blocker remains blocked and does not justify a rendered dataset.",
+    "phase": "Blocked by existing evidence",
+    "priority": 3
+  },
+  {
+    "id": "107-venus-historical-clouds",
+    "title": "Venus: native Galileo and Cassini cloud observations",
+    "bodies": [
+      "venus"
+    ],
+    "probes": [
+      "venus-clouds"
+    ],
+    "current": "Venus has Magellan surface measurements and Akatsuki ultraviolet clouds. Historical optical/infrared flybys are a different observing opportunity from the rejected sparse radar-look mosaics.",
+    "result": "Qualify one coherent dated cloud/filter observation through existing prepared datasets.",
+    "evidence": "Galileo SSI and Cassini ISS/VIMS/UVIS have Venus intended-target records. The inspected Galileo endpoint supplies raw EDR imagery and geometry; calibrated reflectance is not established by that file listing.",
+    "work": "Recover the relevant calibration, verify filter and exposure, and choose a time-consistent observed hemisphere. Register cloud images using atmosphere-appropriate geometry; preserve native resolution and missing coverage.",
+    "limit": "Cloud measurements are not surface geology or global ground coverage. Different wavelengths can probe different altitudes; do not merge moving clouds from separate flybys.",
+    "checks": "Independent radiometric and pointing checks, explicit time and bandpass, and a demonstrated useful difference from the current Akatsuki dataset. No inferred unseen cloud texture.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "108-giant-planet-measured-spectra",
+    "title": "Giant planets: measured ultraviolet and infrared spectra",
+    "bodies": [
+      "jupiter",
+      "saturn",
+      "uranus",
+      "neptune"
+    ],
+    "probes": [
+      "giant-spectra"
+    ],
+    "current": "Several current spectrum/atmosphere charts are model outputs. OPUS supplies observed spectra whose purpose and calibration can be compared with those model claims.",
+    "result": "Add selected measured spectra to existing prepared charts, labeled by aperture, wavelength and observation time.",
+    "evidence": "The Uranus STIS search has spectrum records and calibrated FITS links. The earliest sample is not automatically a complete disk-integrated reflected-light spectrum; slit placement and emission interpretation require native checks.",
+    "work": "Choose published, coherent programs; recover extraction/error arrays and instrument response. Separate reflected sunlight, thermal radiation and auroral emission. Compare models only at matched geometry and spectral resolution.",
+    "limit": "A spectrum from a slit or limb is not a global atmosphere profile. Raw Hubble inputs overlapping OPAL maps are not additional dates merely because OPUS lists them.",
+    "checks": "Validate physical units, aperture, uncertainties, resolution and observed-versus-modeled labels. Render all charts at preparation time through existing content support.",
+    "phase": "Qualification first",
+    "priority": 2
+  },
+  {
+    "id": "109-enceladus-uvis-occultations",
+    "title": "Enceladus: measured ultraviolet occultation light curves",
+    "bodies": [
+      "enceladus"
+    ],
+    "probes": [
+      "enceladus-occultation"
+    ],
+    "current": "The merged Enceladus VIMS mosaic concerns surface infrared data. UVIS occultation light curves could explain a different measurement without adding plume rendering.",
+    "result": "Qualify selected normalized stellar light curves and, only with an independently supported retrieval, plume column-density values in existing prepared chart content.",
+    "evidence": "The OPUS UVIS HSP query with Enceladus geometry returns raw time series. A body in the geometric field of view does not identify a plume occultation; event classification and reference-star/background measurements remain required.",
+    "work": "Match candidate events to published occultation analyses and original time series. Establish line-of-sight paths, stellar baseline, instrumental flags and uncertainty before any absorption retrieval.",
+    "limit": "Do not convert surface VIMS color into plume activity or infer a global/animated plume from a light curve. This proposal does not reopen the completed VIMS mosaic or change geometry.",
+    "checks": "Independently verify timing, normalization, background and retrieval assumptions. Preserve non-detections and uncertainty; use the existing chart contract or keep an evidence-backed source decision.",
+    "phase": "Qualification first",
+    "priority": 3
+  },
+  {
+    "id": "110-uranus-atmospheric-occultations",
+    "title": "Uranus: observed atmospheric occultation light curves",
+    "bodies": [
+      "uranus"
+    ],
+    "probes": [
+      "uranus-atmosphere"
+    ],
+    "current": "Uranus currently explains its atmosphere using model-based charts. The ring archive also contains separately labeled atmospheric occultation measurements.",
+    "result": "Prepare an observed stellar-flux curve alongside an accurately described atmospheric explanation using existing chart support.",
+    "evidence": "The read HST FOS PDS4 label identifies normalized stellar flux versus time during the 16 March 1996 atmospheric egress. It supplies time coordinates, sky-plane radius and flags, not a measured temperature-pressure grid.",
+    "work": "Decode the original calibrated table and quality record; compare ground-based events where compatible. Keep any later atmospheric inversion a separately justified model with explicit assumptions.",
+    "limit": "Do not relabel the API Optical Depth facet as a ready atmospheric temperature measurement. A single occultation samples one path and epoch, not the whole atmosphere.",
+    "checks": "Check time systems, normalization and quality flags against native rows. Distinguish observed light loss from any derived density/temperature and preserve uncertainties.",
+    "phase": "Qualification first",
+    "priority": 3
+  }
+]

@@ -1,0 +1,285 @@
+PDS_VERSION_ID                  = PDS3
+RECORD_TYPE                     = FIXED_LENGTH
+FILE_RECORDS                    = 144
+RECORD_BYTES                    = 580
+^TABLE                          = "SPEC0406220828_FP1.DAT"
+
+DATA_SET_ID                     = "CO-S-CIRS-2/3/4-REFORMATTED-V1.0"
+PRODUCT_CREATION_TIME           = 2011-01-01T01:36:30
+PRODUCT_ID                      = "SPEC0406220828_FP1.DAT"
+SOURCE_PRODUCT_ID               = "ISPM04062200.VAR"
+PRODUCT_TYPE                    = CALIBRATED_SPECTRUM
+
+INSTRUMENT_HOST_NAME            = "CASSINI ORBITER"
+INSTRUMENT_HOST_ID              = CO
+INSTRUMENT_NAME                 = "COMPOSITE INFRARED SPECTROMETER"
+INSTRUMENT_ID                   = CIRS
+DETECTOR_ID                     = FP1
+MISSION_PHASE_NAME              = "TOUR PRE-HUYGENS"
+TARGET_NAME                     = "MIMAS"
+OBSERVATION_ID                  = "CIRS_000MI_PRESOI001_ISS"
+SPACECRAFT_CLOCK_START_COUNT    = "1/1466585589"
+SPACECRAFT_CLOCK_STOP_COUNT     = "1/1466586307"
+START_TIME                      = 2004-06-22T08:28:58
+STOP_TIME                       = 2004-06-22T08:40:56
+
+/* Calibrated Spectrum Summary                                              */
+/*                                                                          */
+/* Values listed below summarize the parameters tabulated in this file.     */
+/* They are used for indexing purposes.                                     */
+
+INSTRUMENT_MODE_ID              = ALL
+EXPOSURE_DURATION               = 4.750 <second>
+MINIMUM_WAVELENGTH              = 14.388 <micrometer>
+MAXIMUM_WAVELENGTH              = 2000.000 <micrometer>
+
+/* Additional Indexing Parameters                                           */
+/*                                                                          */
+/* Values listed below are based on the associated tables:                  */
+/*     DATA/POIDATA/POI0406220828_FP1.TAB                                   */
+/*     DATA/RINDATA/RIN0406220828_FP1.TAB                                   */
+/*     DATA/TARDATA/TAR0406220828_FP1.TAB                                   */
+/*     DATA/GEODATA/GEO0406220828_601.TAB                                   */
+/* See the labels of each of these files for more information.              */
+
+/* This is a list of every body observed anywhere in the data file based on */
+/* the contents of file DATA/TARDATA/TAR08062228_FP1.TAB.                   */
+
+TARGET_LIST                     = {"IAPETUS"}
+
+/* These parameters describe the location and lighting geometry of CIRS     */
+/* footprints on the surface of Mimas. See                                  */
+/* DATA/POIDATA/POI0406220828_FP1.TAB and .LBL for more information.        */
+
+/* BODY_NAME                    = "MIMAS"                                   */
+/* BODY_SPICE_ID                = 601                                       */
+
+MINIMUM_LATITUDE                = "N/A"
+MAXIMUM_LATITUDE                = "N/A"
+MINIMUM_LONGITUDE               = "N/A"
+MAXIMUM_LONGITUDE               = "N/A"
+MINIMUM_LOCAL_TIME              = "N/A"
+MAXIMUM_LOCAL_TIME              = "N/A"
+MINIMUM_INCIDENCE_ANGLE         = "N/A"
+MAXIMUM_INCIDENCE_ANGLE         = "N/A"
+MINIMUM_EMISSION_ANGLE          = "N/A"
+MAXIMUM_EMISSION_ANGLE          = "N/A"
+MINIMUM_PHASE_ANGLE             = "N/A"
+MAXIMUM_PHASE_ANGLE             = "N/A"
+
+/* These parameters describe the geometric configuration of the system for  */
+/* Mimas during the observation. See DATA/GEODATA/GEO0406220828_601.TAB     */
+/* and .LBL for more information.                                           */
+
+SUB_SPACECRAFT_LATITUDE         = -18.038
+SUB_SPACECRAFT_LONGITUDE        = 151.300
+SUB_SOLAR_LATITUDE              = -24.586
+SUB_SOLAR_LONGITUDE             =  76.610
+TARGET_DISTANCE                 = 5717628.32
+
+/* These parameters describe the location and lighting geometry of CIRS     */
+/* footprints on the rings. See DATA/RINDATA/RIN0406220828_FP1.TAB and      */
+/* .LBL for more information.                                               */
+
+MINIMUM_RING_RADIUS             = 246576.35
+MAXIMUM_RING_RADIUS             = 299575.10
+MINIMUM_RADIAL_RESOLUTION       = 37972.
+MAXIMUM_RADIAL_RESOLUTION       = 49466.
+MINIMUM_RING_LONGITUDE          = 207.050
+MAXIMUM_RING_LONGITUDE          = 220.320
+
+/* Parameters to follow are embedded inside a NOTE string because they have */
+/* not yet been defined in the PDS Data Dictionary.                         */
+
+NOTE                            = "Further indexing information...
+
+/* Additional system geometry for Mimas */
+
+TARGET_PHASE_ANGLE              =  64.845
+MINIMUM_TARGET_PHASE_ANGLE      =  64.809
+MAXIMUM_TARGET_PHASE_ANGLE      =  64.884
+MIN_SUB_SPACECRAFT_LATITUDE     = -18.047
+MAX_SUB_SPACECRAFT_LATITUDE     = -18.030
+MIN_SUB_SPACECRAFT_LONGITUDE    = 149.840
+MAX_SUB_SPACECRAFT_LONGITUDE    = 152.883
+MIN_SUB_SOLAR_LATITUDE          = -24.586
+MAX_SUB_SOLAR_LATITUDE          = -24.586
+MIN_SUB_SOLAR_LONGITUDE         =  74.919
+MAX_SUB_SOLAR_LONGITUDE         =  78.456
+MIN_TARGET_DISTANCE             = 5712707.63
+MAX_TARGET_DISTANCE             = 5722226.67
+TARGET_ANGULAR_SEMIDIAMETER     = 0.036571 <millirad>
+MIN_ANGULAR_SEMIDIAMETER        = 0.036542 <millirad>
+MAX_ANGULAR_SEMIDIAMETER        = 0.036603 <millirad>
+TARGET_ORBITAL_LONGITUDE        =  80.755
+MIN_ORBITAL_LONGITUDE           =  79.233
+MAX_ORBITAL_LONGITUDE           =  82.411
+TARGET_SYSTEM3_LONGITUDE        = 260.687
+MIN_SYSTEM3_LONGITUDE           = 259.006
+MAX_SYSTEM3_LONGITUDE           = 262.519
+
+/* Additional ring geometry */
+
+MINIMUM_RING_LOCAL_TIME         =  2.6842 /* hours, not degrees */
+MAXIMUM_RING_LOCAL_TIME         =  4.4775 /* hours, not degrees */
+MINIMUM_RING_INCIDENCE_ANGLE    =  65.461
+MAXIMUM_RING_INCIDENCE_ANGLE    =  65.463
+MINIMUM_RING_EMISSION_ANGLE     =  73.378
+MAXIMUM_RING_EMISSION_ANGLE     =  73.673
+MINIMUM_RING_PHASE_ANGLE        =  63.141
+MAXIMUM_RING_PHASE_ANGLE        =  64.062
+"
+
+DESCRIPTION                     = "This file contains instrument parameters
+and timing information from CIRS activity CIRS_000MI_PRESOI001_ISS as observed
+through Focal Plane 1. Values were extracted from file
+DATA/APODSPEC/ISPM04062200.VAR on volume COCIRS_0406.
+
+The calibrated spectra associated this table can be found in this binary table
+file:
+  DATA/APODSPEC/SPEC0406220828_FP1.DAT.
+Information about the viewing geometry can be found in these files:
+  DATA/POIDATA/POI0406220828_FP1.TAB: pixel footprints on the target body;
+  DATA/RINDATA/RIN0406220828_FP1.TAB: pixel footprints on the rings;
+  DATA/TARDATA/TAR0406220828_FP1.TAB: list of the bodies within each pixel;
+  DATA/GEODATA/GEO0406220828_*.TAB:   system geometry at observation time.
+"
+
+OBJECT                          = TABLE
+  INTERCHANGE_FORMAT            = BINARY
+  ROWS                          = 144
+  ROW_BYTES                     = 580
+  COLUMNS                       = 7
+  PRIMARY_KEY                   = ("SCET", "DET")
+  START_PRIMARY_KEY             = (1087892938, 0)
+  STOP_PRIMARY_KEY              = (1087893651, 0)
+
+  OBJECT                        = COLUMN
+    NAME                        = SCET
+    DATA_TYPE                   = LSB_INTEGER
+    START_BYTE                  = 1
+    BYTES                       = 4
+    DESCRIPTION                 = "Spacecraft event time at the beginning of
+the scan, encoded as an integer in Unix time (seconds elapsed since January 1,
+1970, neglecting leap seconds)."
+    UNIT                        = "SECONDS"
+  END_OBJECT                    = COLUMN
+
+  OBJECT                        = COLUMN
+    NAME                        = DET
+    DATA_TYPE                   = LSB_INTEGER
+    START_BYTE                  = 5
+    BYTES                       = 4
+    DESCRIPTION                 = "Detector ID. Values are found in Table 1 of
+DOCUMENT/DATASIS.PDF:
+
+                 0: FP1, pixel 0
+
+                 1: FP3, PAIR mode, pixels 1+2
+                 2: FP3, PAIR mode, pixels 3+4
+                 3: FP3, PAIR mode, pixels 5+6
+                 4: FP3, PAIR mode, pixels 7+8
+                 5: FP3, PAIR mode, pixels 9+10
+
+                 6: FP3, CENTER mode, pixel 4
+                 7: FP3, CENTER mode, pixel 5
+                 8: FP3, CENTER mode, pixel 6
+                 9: FP3, CENTER mode, pixel 7
+                10: FP3, CENTER mode, pixel 8
+
+                11: FP3, ODD mode,  pixel 1
+                12: FP3, EVEN mode, pixel 2
+                13: FP3, ODD mode,  pixel 3
+                14: FP3, EVEN mode, pixel 4
+                15: FP3, ODD mode,  pixel 5
+                16: FP3, EVEN mode, pixel 6
+                17: FP3, ODD mode,  pixel 7
+                18: FP3, EVEN mode, pixel 8
+                19: FP3, ODD mode,  pixel 9
+                20: FP3, EVEN mode, pixel 10
+
+                21: FP4, ODD mode,  pixel 1
+                22: FP4, EVEN mode, pixel 2
+                23: FP4, ODD mode,  pixel 3
+                24: FP4, EVEN mode, pixel 4
+                25: FP4, ODD mode,  pixel 5
+                26: FP4, EVEN mode, pixel 6
+                27: FP4, ODD mode,  pixel 7
+                28: FP4, EVEN mode, pixel 8
+                29: FP4, ODD mode,  pixel 9
+                30: FP4, EVEN mode, pixel 10
+
+                31: FP4, CENTER mode, pixel 3
+                32: FP4, CENTER mode, pixel 4
+                33: FP4, CENTER mode, pixel 5
+                34: FP4, CENTER mode, pixel 6
+                35: FP4, CENTER mode, pixel 7
+
+                36: FP4, PAIR mode, pixels 1+2
+                37: FP4, PAIR mode, pixels 3+4
+                38: FP4, PAIR mode, pixels 5+6
+                39: FP4, PAIR mode, pixels 7+8
+                40: FP4, PAIR mode, pixels 9+10
+"
+  END_OBJECT                    = COLUMN
+
+  OBJECT                        = COLUMN
+    NAME                        = SHUTTER_CLOSED_FLAG
+    DATA_TYPE                   = LSB_INTEGER
+    START_BYTE                  = 9
+    BYTES                       = 4
+    DESCRIPTION                 = "0 if this interferogram was obtained with
+the shutter open; 1 if the shutter was closed. This value is always zero for
+Focal Plane 1, which does not have a shutter."
+  END_OBJECT                    = COLUMN
+
+  OBJECT                        = COLUMN
+    NAME                        = SPECTRAL_SAMPLES
+    DATA_TYPE                   = LSB_INTEGER
+    START_BYTE                  = 13
+    BYTES                       = 4
+    DESCRIPTION                 = "Number of points in re-gridded spectrum."
+  END_OBJECT                    = COLUMN
+
+  OBJECT                        = COLUMN
+    NAME                        = MINIMUM_SPECTRAL_SAMPLE
+    DATA_TYPE                   = PC_REAL
+    START_BYTE                  = 17
+    BYTES                       = 4
+    DESCRIPTION                 = "Wavenumber of first re-gridded spectral
+point (cm^-1)."
+    UNIT                        = "CM**-1"
+  END_OBJECT                    = COLUMN
+
+  OBJECT                        = COLUMN
+    NAME                        = SPECTRAL_SAMPLING_INTERVAL
+    DATA_TYPE                   = PC_REAL
+    START_BYTE                  = 21
+    BYTES                       = 4
+    DESCRIPTION                 = "Wavenumber step size of regridded data
+(cm^-1)."
+    UNIT                        = "CM**-1"
+  END_OBJECT                    = COLUMN
+
+  OBJECT                        = COLUMN
+    NAME                        = SPECTRUM
+    DATA_TYPE                   = PC_REAL
+    START_BYTE                  = 25
+    BYTES                       = 556
+    ITEMS                       = 139
+    ITEM_BYTES                  = 4
+    UNIT                        = "W/CM**2/SR/CM**-1"
+    DESCRIPTION                 = "Interpolated, calibrated spectrum."
+
+    SAMPLING_PARAMETER_NAME       = "WAVENUMBER"
+    SAMPLING_PARAMETER_UNIT       = "CM**-1"
+    MINIMUM_SAMPLING_PARAMETER    = 5.
+    MAXIMUM_SAMPLING_PARAMETER    = 695.
+    SAMPLING_PARAMETER_INTERVAL   = 5.
+    SAMPLING_PARAMETER_RESOLUTION = 5.47
+
+  END_OBJECT                    = COLUMN
+
+END_OBJECT                      = TABLE
+
+END

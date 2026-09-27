@@ -1,0 +1,7 @@
+# Proposal scope and acceptance
+
+These are proposals, not completed integrations. Use the [shared body guide](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/README.md), [celestial skill](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/.agents/skills/celestial-skill/SKILL.md) and [provenance contract](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/docs/provenance/CONTRACT.md). Keep the shared renderer, fixed existing body geometry and current shell. All scientific decoding, registration and raster preparation happen offline. Reuse existing band/date controls and source labels; do not add Dataset details or Surface photographs panels.
+
+An implementation must retain original quantity, units, source version, time support, coordinates, uncertainty and missingness. Update the owning body README and investigation ledger. Qualify a claimed measurement against independent native samples. For released assets, publish the prepared files and refresh the delivery inventory under the existing contract. Run only affected checks and inspect the real rendered result when appearance changes.
+
+For a qualification proposal, a negative result is a documented source decision with exact evidence and a reopen condition. It is not permission to ship an inferred or filled map. Generic-contract compatibility must be demonstrated before any integration that depends on it.
