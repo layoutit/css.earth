@@ -280,6 +280,9 @@ importers:
       '@layoutit/polycss':
         specifier: 0.2.11
         version: 0.2.11
+      '@typescript-eslint/parser':
+        specifier: ^8.69.0
+        version: 8.69.0(eslint@10.10.0(jiti@2.6.1))(typescript@5.9.3)
       geotiff:
         specifier: 3.0.5
         version: 3.0.5
@@ -295,10 +298,16 @@ importers:
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
+      vite:
+        specifier: 7.3.1
+        version: 7.3.1(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
       yaml:
         specifier: ^2.9.0
         version: 2.9.0
     devDependencies:
+      '@types/estree':
+        specifier: ^1.0.9
+        version: 1.0.9
       '@types/node':
         specifier: ^26.4.0
         version: 26.4.0

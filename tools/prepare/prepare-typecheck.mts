@@ -1,8 +1,8 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawn } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import ts from 'typescript';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
@@ -149,14 +149,16 @@ async function run(root: string, args: string[]) {
   });
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  if (process.argv.length !== 2) throw new TypeError('Usage: node tools/prepare/prepare-typecheck.mts (after pnpm build:tools)');
+/** Restore the typecheck's pinned inputs, then generate the page metadata, feature index and facility catalogue it reads. */
+export async function prepareTypecheck() {
   const result = await restoreTypecheckInputs();
   console.log(`Typecheck inputs: ${result.files} pinned files, ${result.bytes} bytes; ${result.installed} downloaded, ${result.reused} reused. No body texture banks.`);
   // `prepared/page.json` is a build output, not a tracked file: restore-object-json writes it from
   // the restored runtime. The two steps below read it, so it has to exist before they run.
   await run(projectRoot, ['tools/assets/restore-object-json.mts', '--restored-only']);
-  await run(projectRoot, ['tools/prepare/prepare-feature-index.mts']);
+  await run(projectRoot, ['tools/prepare/cli/prepare-feature-index.mts']);
   await run(projectRoot, ['tools/prepare/cli/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: source catalogues generated.');
 }
+
+refuseDirectRun(import.meta);

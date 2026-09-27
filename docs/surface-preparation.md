@@ -576,7 +576,7 @@ at its viewing angle. The planets' lighting overlays put that back with the
 same published law, so the limb in the app is the limb the instrument saw.
 
 - **The law.** Each planet keeps its model in `source/photometry/`, one
-  [model record](../tools/photometry/README.md#model-records) per colour channel.
+  [model record](../packages/bake/src/photometry/README.md#model-records) per colour channel.
   [limb.mts](../packages/bake/src/photometry/limb.ts) evaluates it relative to the flood-lit
   disc centre, where incidence, emission and phase are all zero. The centre of
   the default view shows the map as published; every other pixel follows the
@@ -594,7 +594,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Mars | Hapke, surface only | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), OMEGA and CRISM |
   | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
   | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
-  | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../tools/photometry/fit-epic-limb.mts)) |
+  | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../packages/bake/cli/fit-epic-limb.mts)) |
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
@@ -625,7 +625,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   channel factors), which is largest near the limb.
 - **Colour tie.** A colour map whose archive scaling is arbitrary (Saturn's
   OPAL TIF) names a whole-disc colour computed once from a published spectrum
-  ([whole-disc-colour.mts](../tools/photometry/whole-disc-colour.mts)). The map's
+  ([whole-disc-colour.ts](../packages/bake/src/objects/raster/whole-disc-colour.ts)). The map's
   green and blue are scaled by one gain each so that, once the limb law is put
   back, the flood-lit disc integrates to that colour: the target ratios are the
   colour's divided by each channel's disc mean of the law, 2/(2k+1) for Minnaert.
@@ -638,7 +638,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   ![Saturn in the app: the live site, main with the F395N blue limb, and the colour tie; swatches compare centre, limb and whole disc with Karkoschka's colour](images/planet-limbs/saturn-true-colour.webp)
 - **Halo.** Venus and Mars draw a halo from a NASA [PSG](https://psg.gsfc.nasa.gov/)
   limb profile with the Sun behind the viewer, lit where the tangent point faces
-  the Sun. [acquire-psg-limb-table.mts](../tools/photometry/acquire-psg-limb-table.mts)
+  the Sun. [acquire-psg-limb-table.mts](../packages/bake/cli/acquire-psg-limb-table.mts)
   computes it once, against PSG's own disc centre, and
   [halo.mts](../packages/bake/src/photometry/halo.ts) reads it. PSG computes limb lines of
   sight with single scattering only

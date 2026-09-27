@@ -55,6 +55,12 @@ export const LAYER_RULES: readonly LayerRule[] = [
     forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
   },
   {
+    id: 'nothing-imports-cli-entries',
+    description: 'packages/*/cli/ holds command entries: nothing imports them, including other entries and the package itself (tests and type-only imports count)',
+    forbids: (_from, to) => /^packages\/[^/]+\/cli\//u.test(to),
+    includeTests: true,
+  },
+  {
     id: 'telescope-imports-no-bake',
     description: 'packages/telescope must never import @cssearth/bake: acquisition stays below preparation (tests and type-only imports count)',
     forbids: (from, to) => from.startsWith('packages/telescope/') && to.startsWith('packages/bake/'),

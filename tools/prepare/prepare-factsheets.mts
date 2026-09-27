@@ -1,3 +1,4 @@
+import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireArray,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 const parseSourceRef=shape({id:text,path:text});
@@ -7,7 +8,6 @@ const parseManifest=shape({inputs:array(entry_),documents:array(entry_),generate
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { orderFacts } from '@cssearth/objects';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
@@ -58,13 +58,14 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const check = process.argv.includes('--check'), quiet = process.argv.includes('--quiet');
-  const ids = process.argv.slice(2).filter(id => !['--', '--check', '--quiet'].includes(id));
+/** Re-publish the facts of the named registered objects, or of every one when `ids` is empty. */
+export async function prepareFactsheets({ ids = [] as readonly string[], check = false } = {}) {
   assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
   const results = [];
   for (const object of SCENE_OBJECTS) if (!ids.length || ids.includes(object.id)) {
     results.push(await prepareFactsheet(resolve(import.meta.dirname, '../../src/objects', object.id), { check }));
   }
-  console.log(JSON.stringify({ check, objects: results.length, facts: results.reduce((sum, body) => sum + body.count, 0), ...(quiet ? {} : { results }) }));
+  return results;
 }
+
+refuseDirectRun(import.meta);

@@ -165,7 +165,7 @@ source uncertainty may justify a different criterion; retain its rationale.
 
 Level gains that follow phase angle rather than exposure mean a phase function
 is missing. Normalize with the body's published photometric model first (see
-`tools/photometry/README.md`), then fit only what remains.
+`packages/bake/src/photometry/README.md`), then fit only what remains.
 
 When residual exposure steps warrant level matching, sample the same surface
 locations in each observation after photometric correction. Robust median

@@ -13,8 +13,8 @@ import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contr
 import { requireAuthoredWorldFrame } from '../sources/authored-world-frame.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../ci/runtime-ast.mts';
-import type { RuntimeSourceReader } from '../ci/runtime-source-graph.mts';
+import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '@cssearth/bake/runtime-source';
+import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
 
 export interface PreparedJsonExport { name: string; value: unknown; }
 export function readPreparedJsonModule(source: string, expectedExport?: string): PreparedJsonExport {

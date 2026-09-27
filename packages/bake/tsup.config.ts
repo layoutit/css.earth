@@ -36,7 +36,8 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/layers/material-composition': 'src/objects/layers/material-composition/index.ts',
     'objects/layers/observed-surfaces': 'src/objects/layers/observed-surfaces/index.ts',
     'objects/layers/paged-ellipsoid': 'src/objects/layers/paged-ellipsoid/index.ts',
-    'objects/layers/terrestrial': 'src/objects/layers/terrestrial/index.ts' }
+    'objects/layers/terrestrial': 'src/objects/layers/terrestrial/index.ts',
+    'runtime-source': 'src/runtime-source/index.ts' }
 
 /** Declarations come from one `tsc` pass over the sources (`tsconfig.build.json`, emitted per file under `dist/types/`),
  * not tsup's `dts`: its rollup bundling of every entry in one worker grew past Node's default heap as topics were added,

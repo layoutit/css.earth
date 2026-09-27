@@ -6,11 +6,12 @@ reference geometry with a published photometric model, so photographs taken
 under different illumination can be joined and relit. Preparation runs it; the
 runtime never evaluates a model.
 
-The models and the limb laws are the `@cssearth/bake/photometry` entry
-([`packages/bake/src/photometry/`](../../packages/bake/src/photometry/)). This
-folder keeps the whole-disc colour policy, the commands that make records
-(`fit-epic-limb.mts`, `acquire-psg-limb-table.mts`) and the tests, which import
-the entry.
+The models and the limb laws are the `@cssearth/bake/photometry` entry (this
+folder). The whole-disc colour policy is in `@cssearth/bake/objects/raster`
+([`whole-disc-colour.ts`](../objects/raster/whole-disc-colour.ts)), the commands that
+make records are in [`packages/bake/cli/`](../../cli/) (`fit-epic-limb.mts`,
+`acquire-psg-limb-table.mts`), and the tests, which import the entry, are in
+[`tests/photometry/`](../../../../tests/photometry/).
 
 ## Modules
 
@@ -22,14 +23,14 @@ the entry.
 | `roughness.ts` | Hapke (1984) macroscopic roughness, step for step as ISIS computes it. |
 | `normalization.ts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |
 | `model-record.ts` | Reading and validating model records and the recipe block that names them. |
-| `whole-disc-colour.mts` (this folder) | A planet's whole-disc colour record, computed once from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.ts`); `keepLuminance` then restores the map's untied mean luminance with a soft shoulder. |
+| `whole-disc-colour.ts` (`objects/raster`) | A planet's whole-disc colour record, computed once from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.ts`); `keepLuminance` then restores the map's untied mean luminance with a soft shoulder. |
 
 Angles are radians in code and degrees in records and recipes.
 
 ## Model records
 
 A body keeps each published model in `src/objects/<body>/source/photometry/<id>.json`.
-[Lutetia's record](../../src/objects/lutetia/source/photometry/hasselmann-2016-hapke-1993.json)
+[Lutetia's record](../../../../src/objects/lutetia/source/photometry/hasselmann-2016-hapke-1993.json)
 is a complete example: instrument, filter, the quantity the paper fitted, the
 model, and the phase, incidence and emission ranges of the fitted data.
 
@@ -103,7 +104,7 @@ Check each point against the source before merging a record:
 
 ## Tests and oracle
 
-- `disk.test.mts` holds the disk functions to exact equality with frozen copies
+- In `tests/photometry/`, `disk.test.mts` holds the disk functions to exact equality with frozen copies
   of the historical arithmetic.
 - `hapke.test.mts` and `normalization.test.mts` check defining limits:
   Chandrasekhar's H(1), phase-function normalization, opposition peaks,
@@ -113,7 +114,7 @@ Check each point against the source before merging a record:
   unit tests of USGS ISIS 10.0.0_LTS, to six significant digits. The cases cover
   Hapke with shadow hiding, roughness and both ISIS phase functions, plus
   Lunar-Lambert, Minnaert and Lommel-Seeliger.
-  [`photometric-truth.py`](../oracles/isis/photometric-truth.py) reads the truth
+  [`photometric-truth.py`](../../../../tools/oracles/isis/photometric-truth.py) reads the truth
   files at the pinned commit, and the fixture records each file's URL and sha256.
 - `whole-disc-colour.test.mts` checks the record parser, the Minnaert disc
   means 2/(2k+1), the tie and the luminance factor and shoulder on synthetic maps.

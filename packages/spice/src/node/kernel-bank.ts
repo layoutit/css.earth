@@ -8,7 +8,7 @@
  *
  * The source-manifest format and its validation belong to the application, so a
  * caller binds the banks to its manifest reader with `kernelBanks`. The command
- * line (acquire, verify, add) is `tools/kernel-banks/kernel-bank.mts`.
+ * line (acquire, verify, add) is `packages/bake/cli/kernel-bank.mts`.
  *
  * An added kernel inherits the credit, license and catalogue binding of the
  * bank's first kernel unless the options give others. A recipe names the bank with
@@ -41,7 +41,7 @@ export interface KernelBankManifest {
 export interface KernelBankOptions {
   /** Reads and validates `manifest.json` at a location: the application's source-manifest reader. */
   readonly openManifest: (location: KernelBankManifestLocation) => Promise<KernelBankManifest>;
-  /** The command an added kernel's acquisition note names, such as `node tools/kernel-banks/kernel-bank.mts`. */
+  /** The command an added kernel's acquisition note names, such as `node packages/bake/cli/kernel-bank.mts`. */
   readonly acquireCommand: string;
 }
 

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readOracleFixture, assertPinnedReferences } from '../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedReferences } from '../../tools/oracles/fixture.mts';
 import { radianceFactor, type ScatteringAngles } from '@cssearth/bake/photometry';
 import type { HapkeModel, ParticlePhaseFunction } from '@cssearth/bake/photometry';
 

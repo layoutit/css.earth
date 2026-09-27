@@ -1,8 +1,8 @@
 #!/usr/bin/env node
+import { refuseDirectRun } from '../cli/library-entry.mts';
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
 
 import { SHELL_TITLE_SOURCES } from "../../site/source/titles/manifest.mts";
 
@@ -90,6 +90,4 @@ function validateManifest() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await prepareShellTitles();
-}
+refuseDirectRun(import.meta);

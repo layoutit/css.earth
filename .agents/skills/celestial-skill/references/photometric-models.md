@@ -7,7 +7,7 @@ photometry records and recipe before proposing a search, model addition or bake;
 later evidence may have resolved an entry here. Add
 a model record only from values read in the paper, its archive document, or a
 compilation that cites it, and name the table in the binding's locator. The
-[photometry guide](../../../../tools/photometry/README.md) has the record format and the
+[photometry guide](../../../../packages/bake/src/photometry/README.md) has the record format and the
 review checklist.
 
 "Read" names what was checked: full text, abstract, archive document or

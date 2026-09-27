@@ -3,9 +3,9 @@
  * `manifest.json` is validated and verified like a body's source manifest, under the identity `spice-<set>`. The banks
  * themselves (restoring kernels from their NAIF origins, adding kernels) are `@cssearth/spice/node`.
  *
- *   node tools/kernel-banks/kernel-bank.mts acquire <set>        restore missing kernels, then verify every pin
- *   node tools/kernel-banks/kernel-bank.mts verify <set>         verify every pin
- *   node tools/kernel-banks/kernel-bank.mts add <set> <url>...   download, pin and append kernels
+ *   node packages/bake/cli/kernel-bank.mts acquire <set>        restore missing kernels, then verify every pin
+ *   node packages/bake/cli/kernel-bank.mts verify <set>         verify every pin
+ *   node packages/bake/cli/kernel-bank.mts add <set> <url>...   download, pin and append kernels
  *       [--credit <text>] [--license <text>] [--catalogue <id>]
  *
  * An added kernel inherits the credit, license and catalogue binding of the bank's first kernel unless the flags give

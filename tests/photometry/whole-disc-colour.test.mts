@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { tieBandRatios } from '@cssearth/bake/objects/raster';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
-import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from './whole-disc-colour.mts';
+import { displayBandRatios, keepLuminance, tieBandRatios, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from '@cssearth/bake/objects/raster';
 
 const record = { schema: WHOLE_DISC_COLOUR_SCHEMA, id: 'fixture', quantity: 'fixture', spectrum: {}, illuminant: {}, observer: 'fixture', linearSrgb: [0.5, 0.4, 0.25] };
 

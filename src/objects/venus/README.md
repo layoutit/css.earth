@@ -233,7 +233,7 @@ Outside the disc, the halo comes from a NASA PSG limb profile of PSG's own Venus
 template (VIRA-45 with Vandaele et al. 2020, Bierson et al. 2019 and Ehrenreich et
 al. 2012, and its sulfuric acid haze), computed with a local nasapsg/psg container
 by
-[acquire-psg-limb-table.mts](../../../tools/photometry/acquire-psg-limb-table.mts)
+[acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts)
 into `source/atmosphere/psg-limb.json`. It is the radiance of a 1 km beam along a
 line of sight grazing the planet at each tangent altitude, with the Sun behind the
 viewer, divided by PSG's own disc-centre radiance under an overhead Sun, in the

@@ -153,7 +153,7 @@ texel whose brightest channel passes 0.8 of full scale is compressed by a soft
 shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), all three channels by the
 same amount: 4.35 % of texels, none clipped, each keeping its own ratios. The
 largest factor that clips nothing, 1.085, left the disc dark. `node --test
-tools/photometry/whole-disc-colour.test.mts
+tests/photometry/whole-disc-colour.test.mts
 tools/objects/material-composition/layered-oblate.test.mts` checks the record,
 the disc means, these gains, the luminance factor and the shouldered share on
 the restored map. Spatial colour

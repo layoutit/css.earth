@@ -3,7 +3,7 @@
  * atmosphere template, a 1 km beam on a limb line of sight at each tangent altitude with the Sun behind the observer
  * (azimuth 0), and the nadir radiance under an overhead Sun in the same units. One profile serves every lighting frame.
  *
- *   node tools/photometry/acquire-psg-limb-table.mts --body=mars --psg-name=Mars --altitudes=0,2,5,... --lmax=43 \
+ *   node packages/bake/cli/acquire-psg-limb-table.mts --body=mars --psg-name=Mars --altitudes=0,2,5,... --lmax=43 \
  *     [--nmax=8 --window-nm=10 --api=http://localhost:3000/api.php --container=psg]
  *
  * PSG bounds the run in four ways, and every answer is checked against them:

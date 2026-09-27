@@ -42,7 +42,7 @@ import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepa
 import { verifyObservationSources } from '@cssearth/bake/objects/layers/observed-surfaces';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '@cssearth/bake/objects/geometry';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColour, outsideSilhouette, scatteringAngles, type Channels } from '@cssearth/bake/photometry';
-import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '../../photometry/whole-disc-colour.mts';
+import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColour } from '@cssearth/bake/objects/raster';
 import { tieBandRatios } from '@cssearth/bake/objects/raster';
 import type { BandRatioPolicy } from '@cssearth/bake/objects/raster';
 
@@ -127,7 +127,7 @@ export async function createLayeredOblatePreparation({ sourceDirectory, publicDi
   // colour is measured from the prepared surface once it is written.
   const LIMB_LAW = await loadLimbLaw(sourceDirectory, config.limb.models);
   let limbReference: Channels<number> | undefined;
-  // A map with arbitrary archive scaling names the planet's published whole-disc colour (tools/photometry/whole-disc-colour.mts).
+  // A map with arbitrary archive scaling names the planet's published whole-disc colour (packages/bake/src/objects/raster/whole-disc-colour.ts).
   // The tinted map's band ratios are tied to it through the limb law's disc means, so the flood-lit disc integrates to it.
   const COLOUR_TIE = config.colourTie === undefined ? undefined : displayBandRatios(await loadWholeDiscColour(sourceDirectory, config.colourTie), floodDiscMean(LIMB_LAW));
   await Promise.all([mkdir(publicDirectory,{recursive:true}),mkdir(stagingDirectory,{recursive:true})]);
