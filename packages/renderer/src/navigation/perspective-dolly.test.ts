@@ -1,6 +1,7 @@
 import { fixedCameraOrientation } from '../../../../src/platform/test/camera-orientation-fixture.mts';
 import { expect, it } from 'vitest';
 import type { PerspectiveDolly } from './perspective-dolly.js';
+import type { PreparedWorldCameraFrame } from './world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js';
 import scene from '../../../../src/objects/mercury/prepared/scene.json';
@@ -39,7 +40,7 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
     getBoundingClientRect: () => { layoutReads++; return { width, height, x, y: 0, left: x, top: 0 }; } });
   const options = { cameraPlan: { ...scene.camera, sceneScale: .3 }, heliocentric: null,
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
-      presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
+      presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 } satisfies PreparedWorldCameraFrame,
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     cameraElement: make(170), viewport: { read: () => ({ bounds: make(0).getBoundingClientRect(), focalPixels: focal, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(0), sceneElement: { style: {} } };
   const dolly = createPerspectiveDolly(options as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation([0, -1, 0, 1, 0, 0, 0, 0, 1]));
