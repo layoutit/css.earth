@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Published registered JIRAM frames -> the existing night-side radiance map.
- * node tools/objects/juno/jiram-registered-mosaic.mts <recipe.json> --inputs <directory> [--fetch]
+ * node packages/bake/authoring/juno/jiram-registered-mosaic.mts <recipe.json> --inputs <directory> [--fetch]
  * --fetch restores only the FITS subsets (curl + 7z), plus PDS observation-time indexes.
  */
 import { execFileSync } from 'node:child_process';
@@ -139,7 +139,7 @@ export async function registeredMosaic(recipeFile: string, directory: string, fe
     for (let x = 0; x < width; x++) { totalArea += weight; if (Number.isFinite(map[y * width + x])) { count++; area += weight; } }
   }
   await writeMap(root, { ...recipe, band: { name: 'M', unit: 'W/(m^2*sr)' }, side: 'night', visits,
-    background: { method: 'night-column-median', minimumSamples: policy.minimumBackgroundSamples } }, map, 'tools/objects/juno/jiram-registered-mosaic.mts');
+    background: { method: 'night-column-median', minimumSamples: policy.minimumBackgroundSamples } }, map, 'packages/bake/authoring/juno/jiram-registered-mosaic.mts');
   const rejected = new Map<string, { orbit: number; reason: string; productIds: string[] }>();
   for (const frame of frames) if (frame.rejected) {
     const key = `${frame.orbit}:${frame.rejected}`, group = rejected.get(key) ?? { orbit: frame.orbit, reason: frame.rejected, productIds: [] };

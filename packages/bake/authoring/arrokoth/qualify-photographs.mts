@@ -49,7 +49,7 @@ const held=audit(independent,{...reference,bodyToJ2000:multiplyCameraMatrices(re
 reports.push({id:'ca06-independent-exposure',path:holdoutPath,...held});
 const report={schema:'cssearth-arrokoth-registration-audit@1',meshSha256:createHash('sha256').update(await readFile(resolve(root,profile.mesh))).digest('hex'),
  controlSha256:createHash('sha256').update(await readFile(resolve(root,'preparation/photography.json'))).digest('hex'),
- generator:{path:'tools/objects/arrokoth/qualify-photographs.mts',sha256:createHash('sha256').update(await readFile(new URL(import.meta.url))).digest('hex')},
+ generator:{path:'packages/bake/authoring/arrokoth/qualify-photographs.mts',sha256:createHash('sha256').update(await readFile(new URL(import.meta.url))).digest('hex')},
  elapsedSeconds,method:'Frozen mesh attitude and pointing offsets; original TAN-SIP ray distortion. Along-normal ray-hit/miss limb residuals. No correction is fitted by this audit.',
  limits:{maximumHoldoutRmsPixels:3,minimumMatchedHoldoutEdges:100},reports};
 await writeFile(resolve(root,'../evidence/photography/registration.json'),JSON.stringify(report,null,2)+'\n');

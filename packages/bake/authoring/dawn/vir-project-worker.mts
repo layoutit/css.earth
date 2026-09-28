@@ -1,4 +1,4 @@
-/** Worker for tools/objects/dawn/vir-mosaic.mts: projects one reduced cube per message and returns the covered cells
+/** Worker for packages/bake/authoring/dawn/vir-mosaic.mts: projects one reduced cube per message and returns the covered cells
  * and each parameter's values there as transferable typed arrays. */
 import { parentPort, workerData } from 'node:worker_threads';
 import { projectReducedFile } from './vir-projection.mts';
