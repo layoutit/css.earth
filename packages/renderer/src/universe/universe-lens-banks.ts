@@ -217,12 +217,13 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
     /** While the camera coasts no bank mounts, shows or hides: a shown bank fades, the rest wait for the coast to stop
      * (motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); },
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string) {
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string, bodyContextOpacity = 1) {
       if (lifetime.disposed) return;
       let residencyChanged = false;
       for (const bank of banks) {
         const { frame, radiusUnits, visibility } = bank.framing;
-        const presentationOpacity = bank.id === detailedObjectId ? 1 : detailContextOpacity;
+        const presentationOpacity = bank.id === detailedObjectId ? 1
+          : detailContextOpacity * (bank.facts.attached ? 1 : bodyContextOpacity);
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
         const shown = bank.enabled ? presentationOpacity * contextOpacity : 0;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
