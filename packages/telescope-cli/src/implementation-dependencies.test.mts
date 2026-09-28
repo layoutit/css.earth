@@ -337,7 +337,7 @@ test('the telescope command package is followed into its sources, as when its mo
 
 test('a telescope command subpath is followed to the source its package exports declare, digits included (imaging/image3)', async () => {
   const specifier = '@cssearth/telescope-cli/archives/jwst/imaging/image3', source = 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts';
-  const composite = await implementationFingerprint(WORKSPACE, ['tools/objects/observation/sky-band-composite.mts']);
+  const composite = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sky/sky-band-composite.mts']);
   assert.ok(composite.files.some(file => file.path === source), 'the observation composite identity holds the JWST image3 source it imports');
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-cli-exports-'));
   try {

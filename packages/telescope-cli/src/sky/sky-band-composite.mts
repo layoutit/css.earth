@@ -15,8 +15,8 @@ import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '@cssearth/bake/objects/color';
 import { maskSaturatedStars, findPointSources } from '@cssearth/bake/objects/layers/observation';
-import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '@cssearth/telescope-cli/archives/jwst/imaging/bands';
-import { runImage3 } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
+import { JWST_BANDS, JWST_UNITS_REFERENCE, bandOfHeader, type JwstBand } from '../archives/jwst/imaging/bands.mts';
+import { runImage3 } from '../archives/jwst/imaging/image3.mts';
 import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,
   WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
 

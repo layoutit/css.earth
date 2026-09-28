@@ -85,6 +85,14 @@
       "types": "./src/selected-product.mts",
       "default": "./src/selected-product.mts"
     },
+    "./sky/author-sky-bands": {
+      "types": "./src/sky/author-sky-bands.mts",
+      "default": "./src/sky/author-sky-bands.mts"
+    },
+    "./sky/sky-band-composite": {
+      "types": "./src/sky/sky-band-composite.mts",
+      "default": "./src/sky/sky-band-composite.mts"
+    },
     "./sphere/native-scroll/carry-values": {
       "types": "./src/sphere/native-scroll/carry-values.mts",
       "default": "./src/sphere/native-scroll/carry-values.mts"

@@ -36,6 +36,12 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
   `@cssearth/telescope/node` errors name when a toolchain is missing.
 
+The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
+atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
+`tools/objects/observation/` because it imports this package's JWST imaging modules. `tools/prepare/prepare-volume-provenance.mts`
+and the nebula lab's sky-band adapter use it; its tests are in `tests/objects/observation/`, beside the shared source-test
+helper and FITS fixtures they read.
+
 The workspace's tools import it only through the subpaths `package.json` exports. Its node tests run with
 `pnpm test:telescope-cli`; a test whose toolchain or restored input is absent skips and names it.
 

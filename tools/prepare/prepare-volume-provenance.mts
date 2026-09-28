@@ -17,12 +17,12 @@ import { hasErrorCode } from '@cssearth/core';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
 import { manifestSources } from '@cssearth/bake/sources';
-import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
+import { composeSkyBandPng, verifySkyBandRecipe } from '@cssearth/telescope-cli/sky/sky-band-composite';
 import { fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
-  'tools/objects/observation/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
+  'packages/telescope-cli/src/sky/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 
 const integer = (value: unknown): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError('Expected a positive integer.');
