@@ -1562,10 +1562,11 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
     {focalPixels: 400, principalOffsetPixels: [0, 0]});
   const ring = find(root, 'contextBody', 'sun');
   expect(annotationVisibility(ring, 'indicator')).toBe('hidden');
+  const proxyOpacity = ring.parentNode!.style.opacity;
   layer.setOverview(true);
   expect(annotationVisibility(ring, 'indicator')).toBe('');
   expect(ring.dataset.objectNavigate).toBe('sun');
-  expect(ring.parentNode!.style.opacity).toBe('1');
+  expect(ring.parentNode!.style.opacity).toBe(proxyOpacity);
   layer.setOverview(false);
   expect(annotationVisibility(ring, 'indicator')).toBe('hidden');
   layer.destroy();

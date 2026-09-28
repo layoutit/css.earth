@@ -222,7 +222,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const projectedBodies: ProjectedBody<Entry>[] = [];
       for (const entry of publishingBodies) {
         const { body } = entry;
-        const isSelected = !overview && body.id === selectedId;
+        // The selected detail still owns its surface in a system overview.
+        // Shell context must not resurrect its proxy after the flight completes.
+        const ownsDetail = body.id === selectedId;
+        const isSelected = !overview && ownsDetail;
         const nearSelected = entry.orbit?.centerBodyId === closeFamilyCenter;
         const isOrbitFocus = !orbitOverview && body.id === orbitFocus.body.id;
         const bodyOrbitOpacity = isOrbitFocus ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
@@ -331,8 +334,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
         // so without this every star of the Milky Way stayed a dot from intergalactic distances.
         const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
-        const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
-          (isLocator ? 1 : systemOpacity * (isSelected || flightDestination ? 1 : proxyOpacity)) *
+        const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
+          (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : 1 - beyondLocalGroup);
         const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
