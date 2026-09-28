@@ -3,7 +3,7 @@
  * nesting more; each spawn cost about 0.75 s, half of a warm start. This expands `pnpm <script>` tokens from
  * package.json itself, so the chains stay defined in one place, and runs each `node …` step directly, timing it.
  *
- *   node tools/run-script-chain.mts <script-name>
+ *   node site/build/run-script-chain.mts <script-name>
  */
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';

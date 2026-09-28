@@ -1,4 +1,4 @@
-// Entry script: node tools/cli/bundle-netlify-functions.mts
+// Entry script: node site/build/bundle-netlify-functions.mts
 /**
  * Netlify packages a v2 function by tracing its files, so workspace packages stay external imports. The renderer's source
  * subpaths are TypeScript, which Node cannot load from node_modules: the deployed search function failed to load and

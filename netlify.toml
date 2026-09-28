@@ -9,7 +9,7 @@
 # (site/world-context-plan.mts finds it under the project root, marked by pnpm-workspace.yaml). The bundled
 # function carries both files; without them every search request fails with "Could not find the project root".
 [functions]
-  # tools/cli/bundle-netlify-functions.mts writes one self-contained module per function here at the end of build:deploy;
+  # site/build/bundle-netlify-functions.mts writes one self-contained module per function here at the end of build:deploy;
   # Netlify's own tracing would leave the renderer's TypeScript subpaths external, which Node cannot load.
   directory = "netlify/functions-bundled"
   included_files = ["pnpm-workspace.yaml", "src/objects/sun/prepared/world-context-summary.json"]

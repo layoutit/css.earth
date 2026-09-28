@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { expandScriptChain } from './run-script-chain.mts';
+import { expandScriptChain } from '../build/run-script-chain.mts';
 
 test('aliases expand in place, depth first, and only plain node steps remain', () => {
   const scripts = { a: 'node one.mts && pnpm b && node four.mts', b: 'pnpm -s c && node three.mts', c: 'node two.mts --flag x' };
@@ -22,8 +22,8 @@ test('the dev and build chains expand to direct steps: no alias is left for pnpm
     for (const step of steps) assert.match(step.command, /^(node |pnpm (-r|--filter) )/u, `${name}: ${step.command}`);
   }
   for (const step of expandScriptChain(scripts, 'dev:prepare')) assert.match(step.command, /^node /u, `a warm dev start spawns no pnpm: ${step.command}`);
-  assert.equal(scripts.predev, 'node tools/cli/run-script-chain.mts dev:prepare');
-  assert.equal(scripts.prebuild, 'node tools/cli/run-script-chain.mts build:prepare');
+  assert.equal(scripts.predev, 'node site/build/run-script-chain.mts dev:prepare');
+  assert.equal(scripts.prebuild, 'node site/build/run-script-chain.mts build:prepare');
 });
 
 test('site chains restore prepared assets before discovery reads them, and a deploy keeps the published world', async () => {
