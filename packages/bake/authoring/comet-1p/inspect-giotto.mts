@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const root = resolve(import.meta.dirname, '../../..');
+const root = resolve(import.meta.dirname, '../../../..');
 const sourceRoot = resolve(root, 'src/objects/comet-1p/source');
 const manifestPath = resolve(sourceRoot, 'reference/giotto-hmc-intake.json');
 

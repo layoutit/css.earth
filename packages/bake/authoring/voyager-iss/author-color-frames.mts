@@ -38,7 +38,7 @@ interface Recipe {
   observations: { id: string; frames: { id: string; kind: 'geomed' | 'controlled-ortho'; path?: string; labelPath?: string }[] }[];
 }
 
-const root = resolve(import.meta.dirname, '../../..');
+const root = resolve(import.meta.dirname, '../../../..');
 /** Grid cells that divide the globe evenly; a frame takes the coarsest one no larger than half its own pixel, and never finer than the recipe's cell. */
 const CELL_LADDER = [0.1, 0.12, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6];
 const frameCell = (pixelScaleKm: number, radiusKm: number, finest: number) => {

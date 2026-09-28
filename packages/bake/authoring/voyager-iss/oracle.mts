@@ -35,7 +35,7 @@ interface Recipe {
   observations: { id: string; frames: { id: string; kind: 'geomed' | 'controlled-ortho'; path?: string; labelPath?: string }[] }[];
 }
 type Grid = (number | null)[][];
-const root = resolve(import.meta.dirname, '../../..');
+const root = resolve(import.meta.dirname, '../../../..');
 /** Grid step of the comparison in degrees (about 1.2 km on Triton) and the offset search half-width in cells. */
 const STEP_DEGREES = 0.05, SEARCH_CELLS = 60, MINIMUM_SAMPLES = 500, DARK_IF = 0.02;
 
