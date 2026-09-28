@@ -1,4 +1,3 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { randomUUID } from "node:crypto";
 import {
@@ -11,23 +10,21 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 
 import {
   OBJECT_INFORMATION_SOURCES,
   objectInformationSource,
   validateObjectInformationSnapshot,
   requireObjectInformationSnapshot,
-} from "@cssearth/bake/sources";
+} from "./object-information-sources.ts";
 
-import type { ObjectInformationSource, ObjectInformationSnapshot } from '@cssearth/bake/sources';
+import type { ObjectInformationSource, ObjectInformationSnapshot } from './object-information-sources.ts';
 type FileOperations = ReturnType<typeof defaultFileOperations>;
 interface SerializedSnapshot {id: string; bytes: string;}
 interface NasaRecord {id: number; title: {rendered: string}; link: string; modified: string;}
 
-const OUTPUT_DIRECTORY = fileURLToPath(
-  new URL("../../data/object-information/", import.meta.url),
-);
+/** The snapshots of the checkout the command runs in. */
+const OUTPUT_DIRECTORY = resolve(process.cwd(), "data/object-information");
 
 const SELECTED_SECTIONS = new Set([
   "Introduction",
@@ -362,5 +359,3 @@ function parseCommandArguments(args: readonly string[]) {
 function defaultFileOperations() {
   return Object.freeze({ mkdir, mkdtemp, rename, rm, writeFile });
 }
-
-refuseDirectRun(import.meta);
