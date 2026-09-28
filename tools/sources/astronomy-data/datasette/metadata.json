@@ -1,0 +1,287 @@
+{
+ "title": "Astronomy data ledger",
+ "extra_css_urls": [
+  "/assets/dark.css"
+ ],
+ "plugins": {
+  "datasette-dashboards": {
+   "overview": {
+    "title": "Astronomy data ledger",
+    "layout": [
+     [
+      "datasets",
+      "bodies",
+      "incss"
+     ],
+     [
+      "archive",
+      "archive",
+      "kind"
+     ],
+     [
+      "missions",
+      "missions",
+      "missions"
+     ],
+     [
+      "top",
+      "top",
+      "top"
+     ]
+    ],
+    "charts": {
+     "datasets": {
+      "title": "Dataset families",
+      "db": "ledger",
+      "query": "SELECT count(DISTINCT source||char(0)||family) n FROM datasets",
+      "library": "metric",
+      "display": {
+       "field": "n"
+      }
+     },
+     "bodies": {
+      "title": "Bodies with data",
+      "db": "ledger",
+      "query": "SELECT count(DISTINCT body_id) n FROM dataset_bodies WHERE role='target'",
+      "library": "metric",
+      "display": {
+       "field": "n"
+      }
+     },
+     "incss": {
+      "title": "Of them in cssEarth",
+      "db": "ledger",
+      "query": "SELECT count(DISTINCT l.body_id) n FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id WHERE l.role='target' AND b.cssearth_object<>''",
+      "library": "metric",
+      "display": {
+       "field": "n"
+      }
+     },
+     "archive": {
+      "title": "Dataset families per archive",
+      "db": "ledger",
+      "library": "vega-lite",
+      "query": "SELECT CASE source WHEN 'photojournal' THEN 'Photojournal' WHEN 'usgs' THEN 'USGS maps' WHEN 'pds' THEN 'PDS4 bundles' WHEN 'umd' THEN 'Maryland' WHEN 'darts' THEN 'DARTS' WHEN 'opus' THEN 'OPUS' WHEN 'trek' THEN 'NASA Trek' ELSE source END AS archive, count(DISTINCT family) AS datasets FROM datasets GROUP BY archive",
+      "display": {
+       "mark": {
+        "type": "bar"
+       },
+       "encoding": {
+        "x": {
+         "field": "datasets",
+         "type": "quantitative",
+         "title": null
+        },
+        "y": {
+         "field": "archive",
+         "type": "nominal",
+         "title": null,
+         "sort": "-x"
+        }
+       },
+       "config": {
+        "background": "#000",
+        "view": {
+         "stroke": null
+        },
+        "axis": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "gridColor": "#1c1c1c",
+         "domainColor": "#444",
+         "tickColor": "#444",
+         "labelFontSize": 12,
+         "titleFontSize": 12
+        },
+        "legend": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "labelFontSize": 12
+        },
+        "range": {
+         "category": [
+          "#dfdfdf",
+          "#8db4dc",
+          "#8cc79a",
+          "#e0b46a",
+          "#c79ad6",
+          "#e08a8a"
+         ]
+        }
+       }
+      }
+     },
+     "kind": {
+      "title": "Dataset families per body kind",
+      "db": "ledger",
+      "library": "vega-lite",
+      "query": "SELECT CASE b.kind WHEN 'planet' THEN 'Planets' WHEN 'dwarf-planet' THEN 'Dwarf planets' WHEN 'satellite' THEN 'Moons' WHEN 'asteroid' THEN 'Asteroids' WHEN 'trans-neptunian' THEN 'Trans-Neptunian' WHEN 'comet' THEN 'Comets' WHEN 'interstellar' THEN 'Interstellar' WHEN 'star' THEN 'Stars' WHEN 'exoplanet' THEN 'Exoplanets' WHEN 'deep-sky' THEN 'Deep sky' WHEN 'sample' THEN 'Lab samples' WHEN 'calibration' THEN 'Calibration' WHEN 'environment' THEN 'Space environment' WHEN 'group' THEN 'Groups' ELSE 'Unidentified' END AS kind, count(DISTINCT d.source||char(0)||d.family) AS datasets FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id JOIN datasets d ON d.source=l.source AND d.id=l.dataset_id WHERE l.role='target' GROUP BY kind",
+      "display": {
+       "mark": {
+        "type": "bar"
+       },
+       "encoding": {
+        "x": {
+         "field": "datasets",
+         "type": "quantitative",
+         "title": null
+        },
+        "y": {
+         "field": "kind",
+         "type": "nominal",
+         "title": null,
+         "sort": "-x"
+        }
+       },
+       "config": {
+        "background": "#000",
+        "view": {
+         "stroke": null
+        },
+        "axis": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "gridColor": "#1c1c1c",
+         "domainColor": "#444",
+         "tickColor": "#444",
+         "labelFontSize": 12,
+         "titleFontSize": 12
+        },
+        "legend": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "labelFontSize": 12
+        },
+        "range": {
+         "category": [
+          "#dfdfdf",
+          "#8db4dc",
+          "#8cc79a",
+          "#e0b46a",
+          "#c79ad6",
+          "#e08a8a"
+         ]
+        }
+       }
+      }
+     },
+     "top": {
+      "title": "Bodies in cssEarth with the most dataset families, by archive",
+      "db": "ledger",
+      "library": "vega-lite",
+      "query": "WITH top AS (SELECT l.body_id FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id JOIN datasets d ON d.source=l.source AND d.id=l.dataset_id WHERE l.role='target' AND b.cssearth_object<>'' GROUP BY l.body_id ORDER BY count(DISTINCT d.source||char(0)||d.family) DESC LIMIT 30) SELECT b.name AS body, CASE l.source WHEN 'photojournal' THEN 'Photojournal' WHEN 'usgs' THEN 'USGS maps' WHEN 'pds' THEN 'PDS4 bundles' WHEN 'umd' THEN 'Maryland' WHEN 'darts' THEN 'DARTS' WHEN 'opus' THEN 'OPUS' ELSE l.source END AS archive, count(DISTINCT d.source||char(0)||d.family) AS datasets FROM dataset_bodies l JOIN bodies b ON b.id=l.body_id JOIN datasets d ON d.source=l.source AND d.id=l.dataset_id WHERE l.role='target' AND l.body_id IN (SELECT body_id FROM top) GROUP BY body, archive",
+      "display": {
+       "mark": {
+        "type": "bar"
+       },
+       "encoding": {
+        "x": {
+         "field": "datasets",
+         "type": "quantitative",
+         "title": null
+        },
+        "y": {
+         "field": "body",
+         "type": "nominal",
+         "title": null,
+         "sort": "-x"
+        },
+        "color": {
+         "field": "archive",
+         "type": "nominal",
+         "title": null
+        }
+       },
+       "config": {
+        "background": "#000",
+        "view": {
+         "stroke": null
+        },
+        "axis": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "gridColor": "#1c1c1c",
+         "domainColor": "#444",
+         "tickColor": "#444",
+         "labelFontSize": 12,
+         "titleFontSize": 12
+        },
+        "legend": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "labelFontSize": 12
+        },
+        "range": {
+         "category": [
+          "#dfdfdf",
+          "#8db4dc",
+          "#8cc79a",
+          "#e0b46a",
+          "#c79ad6",
+          "#e08a8a"
+         ]
+        }
+       },
+       "height": 620
+      }
+     },
+     "missions": {
+      "title": "Missions with the most dataset families",
+      "db": "ledger",
+      "library": "vega-lite",
+      "query": "SELECT m.name AS mission, count(DISTINCT d.source||char(0)||d.family) AS datasets FROM dataset_instruments l JOIN instruments i ON i.id=l.instrument_id JOIN missions m ON m.id=i.mission_id JOIN datasets d ON d.source=l.source AND d.id=l.dataset_id GROUP BY m.id ORDER BY datasets DESC LIMIT 25",
+      "display": {
+       "mark": {
+        "type": "bar"
+       },
+       "encoding": {
+        "x": {
+         "field": "datasets",
+         "type": "quantitative",
+         "title": null
+        },
+        "y": {
+         "field": "mission",
+         "type": "nominal",
+         "title": null,
+         "sort": "-x"
+        }
+       },
+       "config": {
+        "background": "#000",
+        "view": {
+         "stroke": null
+        },
+        "axis": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "gridColor": "#1c1c1c",
+         "domainColor": "#444",
+         "tickColor": "#444",
+         "labelFontSize": 12,
+         "titleFontSize": 12
+        },
+        "legend": {
+         "labelColor": "#b0b0b0",
+         "titleColor": "#858585",
+         "labelFontSize": 12
+        },
+        "range": {
+         "category": [
+          "#dfdfdf",
+          "#8db4dc",
+          "#8cc79a",
+          "#e0b46a",
+          "#c79ad6",
+          "#e08a8a"
+         ]
+        }
+       },
+       "height": 480
+      }
+     }
+    }
+   }
+  }
+ }
+}
