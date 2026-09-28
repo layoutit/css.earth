@@ -7,7 +7,6 @@ import { pathToFileURL } from "node:url";
 
 import { readPreparedObjects } from "@cssearth/objects/node";
 import { authoredObject } from '@cssearth/bake/sources';
-import type * as OperationsModule from '../objects/operations.ts';
 
 /** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
@@ -346,7 +345,7 @@ async function loadOperations() {
   const path = resolve("tools/objects/dist/operations.js"), module: unknown = await import(pathToFileURL(path).href);
   const runOperations = typeof module === "object" && module !== null && "runOperations" in module ? module.runOperations : null;
   if (typeof runOperations !== "function") throw new TypeError(`${path} exports no runOperations function; run pnpm build:tools.`);
-  return runOperations as typeof OperationsModule.runOperations;
+  return runOperations as (mode: string, id: string, argumentsList: string[]) => Promise<unknown>;
 }
 
 function objectOwnedScript(id: string, path: string, projectRoot: string) {
