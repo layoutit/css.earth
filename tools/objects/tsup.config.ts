@@ -8,7 +8,7 @@ export default {
   tsconfig: resolve(root, 'tools/objects/tsconfig.json'),
   format: ['esm'], target: 'node22', outDir: resolve(root, 'tools/objects/dist'), clean: true,
   splitting: false, sourcemap: false, dts: false,
-  // tools/ci/check-stale-builds.mts reads the inputs to know when this bundle is stale.
+  // packages/bake/cli/check-stale-builds.mts reads the inputs to know when this bundle is stale.
   metafile: true,
   // `@cssearth/renderer` is bundled, as it was when it was relative modules: its source subpaths are TypeScript whose sibling
   // imports name `.js`, which Node cannot load unbundled.

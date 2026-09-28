@@ -134,8 +134,11 @@ its validators accept); the renderer never imports the bake.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace. `packages/bake/cli/preparation-trace.mts` is the trace itself, which
   `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
-  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. Its tests
-  are `node --test` suites in `tests/preparation/`.
+  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
+  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `tools/prepare/prepare-object.mts` run through
+  `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
+  Its tests are `node --test` suites in `tests/preparation/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.

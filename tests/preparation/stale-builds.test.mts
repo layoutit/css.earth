@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { BUILD_RULES, rebuildStale, staleBuilds, staleInstall } from './check-stale-builds.mts';
+import { BUILD_RULES, rebuildStale, staleBuilds, staleInstall } from '@cssearth/bake/preparation';
 
 test('a build is stale when a compiled source is newer than its output or the output is missing', async () => {
   const root = await mkdtemp(join(tmpdir(), 'stale-builds-'));
@@ -145,4 +145,14 @@ test('an install older than pnpm-lock.yaml is named with the command that fixes 
     await writeFile(join(root, 'pnpm-lock.yaml'), "lockfileVersion: '9.0'\nimporters:\n  .:\n    dependencies:\n      '@cssearth/telescope':\n        specifier: workspace:*\n");
     assert.equal(await staleInstall(root), 'pnpm-lock.yaml changed after the last install; run pnpm install --frozen-lockfile');
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('the stale-build check loads from source with Node built-ins alone, so it runs while the bake itself is unbuilt', async () => {
+  const importsOf = async (path: string) => [...(await readFile(new URL(`../../${path}`, import.meta.url), 'utf8'))
+    .matchAll(/^\s*(?:import|export)\b[^'"]*?\bfrom\s+['"]([^'"]+)['"]|^\s*import\s+['"]([^'"]+)['"]/gmu)].map(match => match[1] ?? match[2]);
+  const library = await importsOf('packages/bake/src/preparation/stale-builds.ts');
+  assert.ok(library.length > 0, 'the library imports Node built-ins');
+  assert.deepEqual(library.filter(specifier => !specifier!.startsWith('node:')), [], 'stale-builds.ts imports only node: built-ins');
+  assert.deepEqual(await importsOf('packages/bake/cli/check-stale-builds.mts'), ['../src/preparation/stale-builds.ts'],
+    'the command loads the library from source, not through the built entry');
 });

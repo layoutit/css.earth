@@ -122,7 +122,7 @@ shell, sky, density-volume, image-layer, catalogue and world-context bakes, whic
 The object libraries' tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
 banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
-`tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
+`packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 
 ## Evidence
 

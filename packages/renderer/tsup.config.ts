@@ -31,7 +31,7 @@ export default {
   dts: true,
   sourcemap: process.env.CSSEARTH_PERFORMANCE_SOURCEMAPS === '1',
   clean: true,
-  // tools/ci/check-stale-builds.mts reads the inputs to know when this bundle is stale.
+  // packages/bake/cli/check-stale-builds.mts reads the inputs to know when this bundle is stale.
   metafile: true,
   target: 'es2022',
 };
