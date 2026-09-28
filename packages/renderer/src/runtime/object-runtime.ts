@@ -230,6 +230,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
+      setLightCurves(allowed: boolean) { if (!lifetime.disposed) guarded(() => playback.setLightCurves(allowed)); },
       destroy(options: { preserveControls?: boolean } = {}) {
         preserveControls = options.preserveControls === true;
         resolveReady();

@@ -158,13 +158,14 @@ export const wheelZoomInputKind: RuntimePolicy["wheelZoomInputKind"] = (
 };
 
 export function automaticPlaybackPolicy({
-  sceneState, motionRequested, documentHidden, reducedMotion,
+  sceneState, motionRequested, lightCurvesRequested, documentHidden, reducedMotion,
 }: AutomaticPlaybackInput): AutomaticPlaybackPolicy {
   const reason = sceneState !== "ready" ? "unavailable"
     : !motionRequested ? "motion-off"
       : documentHidden ? "hidden"
         : reducedMotion ? "reduced-motion" : "allowed";
-  return Object.freeze({ allowed: reason === "allowed", reason });
+  const lightCurves = sceneState === "ready" && lightCurvesRequested && !documentHidden && !reducedMotion;
+  return Object.freeze({ allowed: reason === "allowed", reason, lightCurves });
 }
 
 export const bindResponsiveOrbitPolicy: RuntimePolicy["bindResponsiveOrbitPolicy"] = ({

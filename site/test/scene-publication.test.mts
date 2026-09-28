@@ -13,7 +13,7 @@ test('readiness stays observable without publishing body lifecycle classes', () 
   const publication = createScenePublication({ stage, documentTarget: document, windowTarget: window as unknown as BrowserWindow,
     getShell: () => null, getWorld: () => null,
     read: () => ({ state, pending: null, objectId: 'earth', subject: { kind: 'object', objectId: 'earth' },
-      motionEnabled: false, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true }),
+      motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true }),
   });
   publication.publish();
   assert.equal(document.documentElement.dataset.ready, 'loading');

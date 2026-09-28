@@ -69,14 +69,17 @@ test("cleanup and publication failures process every native handle before report
   assert.equal(owner.stats().registeredCount, 0);
   owner.destroy(); const late = animation(); owner.register(late); assert.equal(late.playState, "idle");
 });
-test("a light curve plays with the motion permission but never holds texture placements off rest", () => {
+test("a light curve plays on its own permission, at its own rate, and never holds texture placements off rest", () => {
   const owner = createPreparedPlayback(), spin = animation(0), light = animation(0);
-  owner.register(light, { initialTime: 0, placesTexels: false }); owner.setReady();
-  owner.setAllowed(true); light.currentTime = 500;
-  assert.equal(light.playState, "running"); assert.equal(owner.motionAtRest(), true);
-  owner.register(spin, { initialTime: 0 });
-  assert.equal(spin.playState, "running"); assert.equal(owner.motionAtRest(), false);
-  owner.setAllowed(false); assert.equal(light.playState, "paused"); assert.equal(spin.playState, "paused");
-  assert.throws(() => owner.register(animation(), { placesTexels: "no" as unknown as boolean }), /prepared role/);
+  owner.register(light, { initialTime: 0, lightCurve: true }); owner.register(spin, { initialTime: 0 }); owner.setReady();
+  owner.setLightCurves(true);
+  assert.equal(light.playState, "running"); assert.equal(spin.playState, "paused"); light.currentTime = 500;
+  assert.equal(owner.motionAtRest(), true, "a playing light curve moves no texel");
+  owner.setAllowed(true); owner.setSelection({ speed: 3 });
+  assert.equal(spin.playState, "running"); assert.equal(spin.playbackRate, 3); assert.equal(light.playbackRate, 1);
+  assert.equal(owner.motionAtRest(), false);
+  owner.setAllowed(false); assert.equal(light.playState, "running", "pausing rotation leaves the light curve");
+  owner.setLightCurves(false); assert.equal(light.playState, "paused");
+  assert.throws(() => owner.register(animation(), { lightCurve: "yes" as unknown as boolean }), /prepared role/);
   owner.destroy();
 });

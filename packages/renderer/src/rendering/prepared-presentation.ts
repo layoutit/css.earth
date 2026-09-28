@@ -206,8 +206,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const motion = (definition.motion ?? []).map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
     animation.id = plan.id;
-    // A light curve moves no texel, so texture placements may hold while it plays.
-    context.registerAnimation(animation, { mode: 'motion', initialTime: 0, ...(plan.keyframes.every(frame => 'opacity' in frame) ? { placesTexels: false } : {}) });
+    // A light curve (opacity keyframes) plays on its own permission and moves no texel.
+    context.registerAnimation(animation, { mode: 'motion', initialTime: 0, ...(plan.keyframes.every(frame => 'opacity' in frame) ? { lightCurve: true } : {}) });
     return { animation, plan, duration: plan.duration };
   });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.

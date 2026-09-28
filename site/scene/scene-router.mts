@@ -133,7 +133,7 @@ export function createSceneRouter({
     setMotion(next) { preferences.set('motionEnabled', next); }, onError: report,
   });
   const publication = createScenePublication({ stage, documentTarget, windowTarget,
-    read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: subject(), motionEnabled: preferences.state.motionEnabled, reducedMotionActive,
+    read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: subject(), motionEnabled: preferences.state.motionEnabled, lightCurvesEnabled: preferences.state.lightCurvesEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
       hasPresented: hasPresented || initialScene?.available === true }),
     getShell: () => shellOwner?.shell ?? null, getWorld: () => world.current,
@@ -470,8 +470,8 @@ export function createSceneRouter({
     if (!session) return;
     try {
       if (scenes.state.kind === 'ready' && session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
-      const { allowed } = publication.playback();
-      if (!session.play(allowed)) return;
+      const { allowed, lightCurves } = publication.playback();
+      if (!session.play(allowed, lightCurves)) return;
       publication.publish();
     } catch (error) { fail(session, error); }
   }
