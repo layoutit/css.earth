@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Install or verify one of the pinned Python astronomy toolchains the telescope library runs.
  *
- *   node tools/objects/astronomy-toolchains.mts astroquery|pds|starry|spiderman install|verify
+ *   node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery|pds|starry|spiderman install|verify
  *
  * The pins, their hash-locked requirements and the licences of what they install are in packages/telescope/toolchains/;
  * the installers and the checks are `@cssearth/telescope/node`. */

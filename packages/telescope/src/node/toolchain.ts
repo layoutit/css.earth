@@ -110,7 +110,7 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
   const root = findInstalledRoot(ASTROQUERY_ROOT, shared, digest);
   if (!root) {
     const rootIssue = toolchainRootIssue(ASTROQUERY_ROOT);
-    throw new Error(rootIssue ?? 'The astronomy packages are not installed: node tools/objects/astronomy-toolchains.mts astroquery install');
+    throw new Error(rootIssue ?? 'The astronomy packages are not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install');
   }
   const bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
   return { python, digest, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),

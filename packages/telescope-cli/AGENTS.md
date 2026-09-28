@@ -31,7 +31,10 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
   The native CSS camera, resize input and carried viewport values that lane writes into its HTML are this package's
   `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in `labs/experiments/`
-  also imports); they followed the lane out of `tools/experiments/`.
+  also imports); they followed the lane out of `tools/experiments/`;
+- the installer of the pinned Python astronomy toolchains (`src/toolchains/astronomy-toolchains.mts`, run as
+  `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
+  `@cssearth/telescope/node` errors name when a toolchain is missing.
 
 The workspace's tools import it only through the subpaths `package.json` exports. Its node tests run with
 `pnpm test:telescope-cli`; a test whose toolchain or restored input is absent skips and names it.

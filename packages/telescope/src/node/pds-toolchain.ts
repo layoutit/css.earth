@@ -32,7 +32,7 @@ export interface PdsToolchain { readonly python: string; readonly digest: string
 export async function pdsToolchain(): Promise<PdsToolchain> {
   const { entry, digest } = await descriptor(), bin = resolve(PDS_TOOLCHAIN_ROOT, 'env/bin'), python = resolve(bin, 'python');
   const marker = await readFile(resolve(PDS_TOOLCHAIN_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The PDS package toolchain is not installed: node tools/objects/astronomy-toolchains.mts pds install');
+  if (!marker) throw new Error('The PDS package toolchain is not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts pds install');
   if (marker.pinsSha256 !== digest) throw new Error('The PDS package toolchain was installed from other pins; reinstall it.');
   if (!await access(python).then(() => true, () => false)) throw new Error(`The PDS package toolchain has no python at ${python}.`);
   return { python, digest, peppiVersion: requireString(entry.peppi), pdrVersion: requireString(entry.pdr),

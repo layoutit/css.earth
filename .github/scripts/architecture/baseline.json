@@ -4,10 +4,10 @@
     "largestCycle": 8,
     "layerOrder": [
       "tools/objects(root)",
-      "tools/prepare",
       "tools/objects/new-object",
       "tools/objects/source-authoring",
       "tools/sources",
+      "tools/prepare",
       "tools/objects/content",
       "tools/ci",
       "tools/assets",
@@ -26,7 +26,6 @@
       {"from":"site(root)","to":"site/scene","imports":5},
       {"from":"tools/prepare","to":"tools/objects(root)","imports":4},
       {"from":"site(root)","to":"site/navigation","imports":3},
-      {"from":"tools/sources","to":"tools/prepare","imports":3},
       {"from":"site(root)","to":"site/catalogue","imports":2},
       {"from":"site/search","to":"site(root)","imports":2},
       {"from":"site/shell","to":"site/scene","imports":2},
@@ -36,9 +35,7 @@
       {"from":"site/navigation","to":"site/scene","imports":1},
       {"from":"tools/assets","to":"tools/objects(root)","imports":1},
       {"from":"tools/assets","to":"tools/prepare","imports":1},
-      {"from":"tools/ci","to":"tools/prepare","imports":1},
-      {"from":"tools/objects/new-object","to":"tools/prepare","imports":1},
-      {"from":"tools/objects/source-authoring","to":"tools/objects/new-object","imports":1}
+      {"from":"tools/ci","to":"tools/prepare","imports":1}
     ]
   },
   "rules": {

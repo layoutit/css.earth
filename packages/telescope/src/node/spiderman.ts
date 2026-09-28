@@ -1,7 +1,7 @@
 /** SPIDERMAN owns spherical-harmonic brightness maps and the phase curves they make (Louden & Kreidberg 2018). cssEarth passes a
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
- * (spiderman-toolchain.json says why). Install: node tools/objects/astronomy-toolchains.mts spiderman install */
+ * (spiderman-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install */
 import { createHash } from 'node:crypto';
 import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
@@ -41,8 +41,8 @@ export function spidermanToolchainSync(): SpidermanToolchain {
   const { entry, digest } = descriptor(), bin = resolve(SPIDERMAN_ROOT, 'env/bin'), python = resolve(bin, 'python');
   let marker: Record<string, unknown>;
   try { marker = requireRecord(JSON.parse(readFileSync(resolve(SPIDERMAN_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The SPIDERMAN toolchain is not installed: node tools/objects/astronomy-toolchains.mts spiderman install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The SPIDERMAN toolchain was installed from other pins; reinstall it: node tools/objects/astronomy-toolchains.mts spiderman install');
+  catch { throw new Error('The SPIDERMAN toolchain is not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install'); }
+  if (marker.pinsSha256 !== digest) throw new Error('The SPIDERMAN toolchain was installed from other pins; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install');
   try { accessSync(python); } catch { throw new Error(`The SPIDERMAN toolchain has no python at ${python}.`); }
   // SPIDERMAN reads ~/.spidermanrc when present; an empty home keeps a user's file out of the result.
   const home = resolve(SPIDERMAN_ROOT, 'home'); mkdirSync(home, { recursive: true });

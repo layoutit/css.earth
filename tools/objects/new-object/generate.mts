@@ -11,7 +11,8 @@ import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorLens, json } from './lens.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
-import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
+import { neutralDiscMarker } from '@cssearth/bake/navigation';
+import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
 import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
@@ -472,7 +473,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
 
 /** Phase two, in a process that loads the rebuilt astronomy package: every hosted body's package. */
 export async function runHostedPhase(handoff: string, root = process.cwd()): Promise<NewObjectResult[]> {
-  const { hostedPackage } = await import('./hosted.mts'), { neutralDiscMarker } = await import('./scaffold.mts');
+  const { hostedPackage } = await import('./hosted.mts');
   const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
   const { refresh, records } = JSON.parse(await readFile(resolve(root, handoff), 'utf8')) as { refresh: boolean; records: any[] }, results: NewObjectResult[] = [];
   for (const saved of records) {
