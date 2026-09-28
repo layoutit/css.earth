@@ -10,7 +10,7 @@ Its mean radius, 37.2 solar radii, comes from comparing how fast its surface mov
 
 **Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited.
 
-**Brightness.** Gaia DR3 fits the star's G-band light with 5 harmonics of a 4.785-day period (vari_cepheid, source 4659023090689530112; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 0.723 mag, so at minimum the star gives 51% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 4 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.94 of a cycle after maximum. It plays when Motion is on.
+**Brightness.** Gaia DR3 fits the star's G-band light with 5 harmonics of a 4.785-day period (vari_cepheid, source 4659023090689530112; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 0.723 mag, so at minimum the star gives 51% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 3 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.94 of a cycle after maximum. It plays when Motion is on.
 
 ## Evidence
 
