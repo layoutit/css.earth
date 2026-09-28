@@ -772,14 +772,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 2058821,
-      "sha256": "e3e36e60eb18c7e93d3d1176e7672c657297dbc90d56638c5326ed07882de538"
+      "bytes": 2055955,
+      "sha256": "3061f65c2039b4eec980bb6c1cdbe9a0922183e0aa5d2dec95a3e352e3419e93"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 19169546,
-      "sha256": "5936c17dfe144d1115b3cc0bd5bfbd7e3f03f2df6e72e7a144279fe08aee9a85"
+      "bytes": 19125152,
+      "sha256": "8d86963d00b737fa9b00a5b86168481c4127ab417fe1b2c01d2f9b889a90536f"
     },
     {
       "location": "prepared",
@@ -894,12 +894,6 @@
       "filename": "world-orbits/alexandra.bin",
       "bytes": 4016,
       "sha256": "12ec7f9f213ae03b5a02f82f65f3e1bea912f009d7a3854225dfa58617f9a6d9"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/alicanto.bin",
-      "bytes": 4016,
-      "sha256": "83e6b22b49a8e2b7a13b76772a2b57b76742bc800bcb942dbdb8f47ed678afe9"
     },
     {
       "location": "prepared",
@@ -1167,21 +1161,9 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/asteroid-2007-tg422.bin",
-      "bytes": 4024,
-      "sha256": "882a042a1cbbba516bcc73f205a7b6fdbabb37c05706e072621e39c9f6f7abb2"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/asteroid-2008-ev5.bin",
       "bytes": 4024,
       "sha256": "179f5ce6ee9c528d2311f897192a3e470773a6abbb68ff6bd7514c7975fa639b"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/asteroid-2010-gb174.bin",
-      "bytes": 4032,
-      "sha256": "4e2770e767918469b34ff82f60ecd89adec79a512c2c62cab9a383f87caadff5"
     },
     {
       "location": "prepared",
@@ -1191,27 +1173,9 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/asteroid-2013-rf98.bin",
-      "bytes": 4024,
-      "sha256": "d34199291c27387f091c323089b25a27654bf18225727b836a4bc630873f96d8"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/asteroid-2015-bp519.bin",
-      "bytes": 4024,
-      "sha256": "424faaf876bfa8a544bd91b7b4e99cc8984dc1711b4c0f494be14c9a9b350327"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/asteroid-2017-of201.bin",
       "bytes": 4024,
       "sha256": "97b4fc7dc0dfcdc4cc308546e34a56638770ef5e1ce9a6b40d26ed86ab8b4aaa"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/asteroid-2023-kq14.bin",
-      "bytes": 4024,
-      "sha256": "2dc85355d14306ae36c7a9ece72314317a59c7fffb2e7d433fe9d41cd3fee972"
     },
     {
       "location": "prepared",

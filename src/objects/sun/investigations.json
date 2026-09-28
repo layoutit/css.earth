@@ -150,18 +150,16 @@
       ]
     },
     {
-      "id": "extreme-tno-orbit-only",
-      "subject": "Extreme trans-Neptunian objects drawn from their record alone",
-      "status": "included",
-      "finding": "Alicanto (2004 VN112), 2013 RF98, 2007 TG422, 2010 GB174, 2015 BP519 and 2023 KQ14 have Horizons orbits but no paper states one size for them (JPL lists only H; Becker et al. 2018 and Chen et al. 2025 give ranges). They are drawn from their astronomy records as a named dot with no page, their orbits hidden like other trans-Neptunian orbits; each record notes why its radius is 0.",
+      "id": "extreme-tnos-without-size",
+      "subject": "Extreme trans-Neptunian objects with no published size",
+      "status": "excluded",
+      "finding": "Alicanto (2004 VN112), 2013 RF98, 2007 TG422, 2010 GB174, 2015 BP519 and 2023 KQ14 have Horizons orbits, but no paper states one size for them: JPL SBDB (checked 2026-09-28) lists only H, Becker et al. (2018, AJ 156, 81) give 2015 BP519 400-700 km and Chen et al. (2025, Nature Astronomy) give 2023 KQ14 220-380 km. A body needs a size for its page, and a marker on the map must open a page, so they are not added.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/alicanto.json",
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2013-rf98.json",
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2007-tg422.json",
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2010-gb174.json",
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2015-bp519.json",
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2023-kq14.json"
-      ]
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "https://doi.org/10.3847/1538-3881/aad042",
+        "https://doi.org/10.1038/s41550-025-02595-7"
+      ],
+      "revisitWhen": "A paper states one size for any of them (thermal, occultation or a discoverer estimate at a stated albedo)."
     },
     {
       "id": "farfarout-2018-ag37",

@@ -38,10 +38,8 @@ const systemMembers: ReadonlySet<string> = new Set([...orbitCenters].flat());
 const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
   [object.id, object.discovery.illustration && !orbitFeatures.has(object.id) ? 0 : labelImportance(object.classification, defaultFeatures.has(object.id) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]),
   // A body drawn from its astronomy record is a star or planet hosted by a placed star; its tier is that role in its host's
-  // system, the one a catalogued planet of that system has. One orbiting the Sun is a trans-Neptunian object known from its orbit
-  // alone (tools/objects/prepare-spatial-context.ts) and takes the tier a packaged one the map features has.
-  ...applicationContext.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body =>
-    [body.id, 'orbit' in body && body.orbit?.centerBodyId === 'sun' ? labelImportance('trans-neptunian', true) : labelImportance('planet')])]);
+  // system, the one a catalogued planet of that system has.
+  ...applicationContext.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => [body.id, labelImportance('planet')])]);
 
 export const worldVisibilityPolicy = {
   compact: phone, annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, minorMoonIds, hiddenOrbitIds,

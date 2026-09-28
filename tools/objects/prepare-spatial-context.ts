@@ -72,14 +72,6 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       input.bodies.push({ id, name: record!.name, color: record!.effectiveTemperatureK === undefined ? '#9a9a9a'
         : await planckHex(record!.effectiveTemperatureK), unpackaged: true });
     }
-    // A trans-Neptunian object that no paper gives one size for is drawn from its Horizons orbit the same way: a dot and its
-    // path, no page (packages/astronomy's body records allow its unmeasured radius). The Sun is always the focus here.
-    if (input.focus.id === 'sun') {
-      for (const [id, record] of Object.entries(BODIES as Readonly<Record<string, { readonly name: string; readonly parent: string | null; readonly meanRadiusKm: number }>>)) {
-        if (packaged.has(id) || record.parent !== 'sun' || record.meanRadiusKm !== 0) continue;
-        input.bodies.push({ id, name: record.name, color: '#9a9a9a', unpackaged: true });
-      }
-    }
   }
   // Each packaged body's world presentation, prepared here so no page carries a stylesheet rule or a registry entry per body:
   // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,

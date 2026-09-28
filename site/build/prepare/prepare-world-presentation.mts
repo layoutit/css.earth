@@ -62,9 +62,7 @@ export function prepareWorldPresentation() {
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
     orbitFeatureIds: SCENE_OBJECTS.filter(orbitFeature).map(object => object.id),
-    // A trans-Neptunian object drawn from its record alone (tools/objects/prepare-spatial-context.ts) hides its orbit like a packaged one.
-    hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor,
-      ...APPLICATION_WORLD_CONTEXT.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true && 'orbit' in body && body.orbit?.centerBodyId === 'sun').map(body => body.id)],
+    hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },

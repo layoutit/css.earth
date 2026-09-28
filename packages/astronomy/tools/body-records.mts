@@ -41,13 +41,10 @@ function bodyRecord(value: unknown): BodyRecord {
   if (physical.effectiveTemperatureK !== undefined && (record.classification !== 'star' || !(physical.effectiveTemperatureK > 0))) {
     throw new TypeError(`A measured effective temperature belongs to a star and is positive: ${record.id} has ${physical.effectiveTemperatureK}.`);
   }
-  // Zero radius means no source measures one; only a body known from its orbit alone may lack it: a star or black hole on a hosted
-  // orbit (most S-stars, the black hole of Cygnus X-1), or a trans-Neptunian object on its Horizons orbit around the Sun that no
-  // paper gives one size for (2013 RF98).
-  const hostedOnly = ['star', 'black-hole'].includes(record.classification) && record.hostedOrbit !== undefined;
-  const heliocentricOnly = record.classification === 'trans-neptunian' && physical.parent === 'sun' && record.acquisition?.heliocentric?.model === 'asteroid';
-  if (physical.meanRadiusKm === 0 && !hostedOnly && !heliocentricOnly) {
-    throw new TypeError(`Only a body known from its orbit alone may have an unmeasured radius: ${record.id} (${record.classification}) has meanRadiusKm 0.`);
+  // Zero radius means no source measures one; only a star or black hole known from its hosted orbit alone may lack it (most S-stars,
+  // the black hole of Cygnus X-1).
+  if (physical.meanRadiusKm === 0 && (!['star', 'black-hole'].includes(record.classification) || record.hostedOrbit === undefined)) {
+    throw new TypeError(`Only a hosted star or black hole may have an unmeasured radius: ${record.id} has meanRadiusKm 0.`);
   }
   // A star or black hole beyond the Solar System is placed by its astrometry and orbits nothing this package models.
   if (record.star !== undefined && (!['star', 'black-hole'].includes(record.classification) || physical.parent !== null)) {

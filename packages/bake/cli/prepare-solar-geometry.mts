@@ -69,11 +69,7 @@ export async function prepareSolarGeometry() {
   // A star on a hosted orbit around a packaged placed host is drawn from its astronomy record without a package of its own.
   const RECORD_ONLY_HOSTED = (HOSTED_PLANET_IDS as readonly string[]).filter(id => !PACKAGED.includes(id as BodyId) &&
     PACKAGED.includes((ASTRONOMY_BODY_DATA as Record<string, { parent: string | null }>)[id]!.parent as BodyId)) as BodyId[];
-  // So is a trans-Neptunian object that no paper gives one size for: its Horizons orbit around the Sun, radius recorded as 0.
-  const RECORD_ONLY_HELIOCENTRIC = (Object.keys(ASTRONOMY_BODY_DATA) as BodyId[]).filter(id => !PACKAGED.includes(id) &&
-    (ASTRONOMY_BODY_DATA as Record<string, { parent: string | null; meanRadiusKm: number }>)[id]!.parent === "sun" &&
-    (ASTRONOMY_BODY_DATA as Record<string, { parent: string | null; meanRadiusKm: number }>)[id]!.meanRadiusKm === 0);
-  const BODIES = [...PACKAGED, ...RECORD_ONLY_HOSTED, ...RECORD_ONLY_HELIOCENTRIC];
+  const BODIES = [...PACKAGED, ...RECORD_ONLY_HOSTED];
 
   // The J2000 ecliptic north pole in ICRF: the ICRF +z axis tilted by the
   // obliquity about +x.
@@ -125,9 +121,6 @@ export async function prepareSolarGeometry() {
   };
   const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
     if (RECORD_ONLY_HOSTED.includes(id)) return [id, recordOnlyRotation(id)];
-    // A record-only trans-Neptunian object is a dot with no measured spin: the display axis its packaged neighbours use when no
-    // pole is published, ICRF north with the meridian at 0 and no spin.
-    if (RECORD_ONLY_HELIOCENTRIC.includes(id)) return [id, { poleRightAscensionRad: 0, poleDeclinationRad: Math.PI / 2, primeMeridianRad: 0, spinRateRadPerDay: 0 }];
     const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
     const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
     const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
