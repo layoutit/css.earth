@@ -197,8 +197,10 @@ its validators accept); the renderer never imports the bake.
     and outputs each preparation family records); `tools/objects/provenance.mts` compiles the record from them. It imports
     `objects/layers/terrestrial`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
-    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; and the default
-    lens's data coverage, read from its prepared minimap, that the default camera turns toward. It imports `objects/scene` and
+    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; the default
+    lens's data coverage, read from its prepared minimap, that the default camera turns toward; and the turn toward a partial
+    lens's data when a reader picks it (`lens-facing.ts`), from the coverage direction the minimap step records for each lens,
+    which the world-navigation stage applies to every lens whose recipe authors no focus. It imports `objects/scene` and
     `raster`.
   - `objects/celestial`: an object's sky orientation and directional Sun, prepared into renderer-neutral JSON from its
     celestial profile and the solar geometry the host passes in. It imports `objects/scene` and `presentation`.
