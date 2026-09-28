@@ -79,7 +79,7 @@ No dated test report is cited in the existing source notes.
 
 ### Voyager color lens (run of 2026-09-22, this version)
 
-Placement. `node tools/objects/voyager-iss/author-color-frames.mts triton --write` ([then](https://github.com/layoutit/cssEarth/blob/40d2789252/tools/objects/voyager-iss/author-color-frames.mts), now `packages/bake/authoring/voyager-iss/author-color-frames.mts`)
+Placement. `node tools/objects/voyager-iss/author-color-frames.mts triton --write` ([then](https://github.com/layoutit/css.earth/blob/40d2789252/tools/objects/voyager-iss/author-color-frames.mts), now `packages/bake/authoring/voyager-iss/author-color-frames.mts`)
 placed every frame and wrote [the placement report](source/reference/voyager-color-placement.json).
 For a GEOMED frame the recorded SEDR pointing predicts the disc; the limb is then
 found on the sunlit side (steepest drop from disc to sky along rays from the
@@ -90,7 +90,7 @@ points and an RMS below 1.3 pixels. Frames whose limb leaves the frame or whose
 crescent gives no clean limb are rejected by the fit and never placed; the
 recipe lists only the fifteen that passed.
 
-Oracle. `node tools/objects/voyager-iss/oracle.mts triton --frames <GEOMED directory> --write` ([then](https://github.com/layoutit/cssEarth/blob/40d2789252/tools/objects/voyager-iss/oracle.mts), now `packages/bake/authoring/voyager-iss/oracle.mts`)
+Oracle. `node tools/objects/voyager-iss/oracle.mts triton --frames <GEOMED directory> --write` ([then](https://github.com/layoutit/css.earth/blob/40d2789252/tools/objects/voyager-iss/oracle.mts), now `packages/bake/authoring/voyager-iss/oracle.mts`)
 places the controlled release's own colour frames the same way, with no datum
 shift, and cross-correlates their high-passed detail against Bland's orthophotos
 of the same frames ([report](source/reference/voyager-color-oracle.json)). The
@@ -124,7 +124,7 @@ squarely, own those texels instead of leaving them grey. Both policies are
 documented in [the colour preparation guide](../../../docs/color-preparation.md#current-routes-and-scope-of-the-repair).
 The whole lens then takes one brightness gain against the monochrome base, the median over every footprint boundary (a per-observation match would re-open the seams, and the two coarsest sets never border the base); the brightest 0.1 % of texels may clip.
 
-Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts` (the voyager-iss tests, [then](https://github.com/layoutit/cssEarth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
+Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts` (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer and both composer policies on synthetic
 data; `node --test tests/objects/unit/triton/*.test.mts` pins the placement
 report, the manifest pins, the solved gains and the withheld counts of this run.
