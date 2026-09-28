@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "epic-212161295",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "EPIC 212161295",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8110888
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/epic-212161295-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "EPIC 212161295",
+      "classification": "star",
+      "color": "#ffdbb5",
+      "distanceAu": 373648907.4,
+      "description": "A red giant 1,812 parsecs away, 12 times the Sun's width, weighed by its starquakes.",
+      "systemName": "EPIC 212161295 system",
+      "order": 2224,
+      "context": {
+        "order": 2221
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -30110588167892940000,
+        41589532627434160000,
+        22094047012920230000
+      ],
+      "presentationToReference": [
+        -0.5386790248362632,
+        -0.23179566237502044,
+        0.8099973327768298,
+        0.744037570911086,
+        0.32016210297022013,
+        0.5864335605116889,
+        0.3952632050598475,
+        -0.9185679064314253,
+        -7.216371099915092e-8
+      ],
+      "orbitUpReference": [
+        0.23179566237502044,
+        -0.32016210297022013,
+        0.9185679064314253
+      ],
+      "metersPerUnit": 26164154.83870968,
+      "bodyRadiusM": 8110888000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

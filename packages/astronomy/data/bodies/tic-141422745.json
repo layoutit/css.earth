@@ -1,0 +1,30 @@
+{
+ "id": "tic-141422745",
+ "classification": "star",
+ "order": 2616,
+ "physical": {
+  "name": "TIC 141422745",
+  "horizonsCode": null,
+  "meanRadiusKm": 10019401.8,
+  "gravitationalParameterKm3PerS2": 136269133435.06334,
+  "parent": null,
+  "effectiveTemperatureK": 4943
+ },
+ "physicalNotes": "Radius 14.4019 +/- 0.5159 solar radii from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 141422745 (observed by TESS): PARAM radius (solar radii) 14.401949 (16th-84th percentiles 13.887963-14.91985), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 10,019,402 km at 695,700 km per solar radius. Mass 1.0268 +/- 0.1036 solar masses from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 141422745 (observed by TESS): PARAM mass (solar masses) 1.026844 (16th-84th percentiles 0.926892-1.133994), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196); GM is that mass times the JPL solar GM. Temperature 4943 +/- 50 K from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 141422745: APOGEE DR17 effective temperature 4943.3916 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 84.5710119911859,
+  "declinationDegrees": -75.2723402831286,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1612.9,
+  "properMotionRaMasPerYear": 13.858194590967214,
+  "properMotionDecMasPerYear": 17.591458239530102,
+  "radialVelocityKmPerS": 47.31986,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4648610990444129024 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tic-141422745/source/photometry/gaia-dr3-source.csv",
+   "distance": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 141422745 (observed by TESS): PARAM asteroseismic distance (pc) 1612.851562 (16th-84th percentiles 1579.667969-1646.835938), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 1612.9 +/- 33.6 pc; Gaia DR3 parallax 0.6549 +/- 0.0112 mas (same row, RUWE 0.84), 58.2 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 13.858, 17.591 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 47.32 +/- 0.81 km/s"
+  }
+ }
+}

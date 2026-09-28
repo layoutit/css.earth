@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tic-140527175",
+  "card": {
+    "text": "A red giant 1,380 parsecs away, 19 times the Sun's width, weighed by its starquakes.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346196",
+        "url": "https://doi.org/10.1051/0004-6361/202346196",
+        "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+        "checked": "2026-09-28",
+        "locator": "tess_apo, TIC 140527175: Mass-M, Rad-M, Dist-M, Teff-A"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its oscillations, recorded by TESS, give 1.13 solar masses and 19.2 solar radii; APOGEE spectra give 4,412 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346196",
+        "url": "https://doi.org/10.1051/0004-6361/202346196",
+        "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+        "checked": "2026-09-28",
+        "locator": "tess_apo, TIC 140527175: Mass-M, Rad-M, Dist-M, Teff-A"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

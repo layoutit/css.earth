@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "tic-149218691",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4603,
+      "lowerKelvin": 4553,
+      "upperKelvin": 4653,
+      "citation": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 149218691: APOGEE DR17 effective temperature 4602.6074 +/- 50 K (the catalogue's final uncertainty): 4603 +/- 50 K, https://doi.org/10.1051/0004-6361/202346196"
+    },
+    "note": "PARAM fits an extinction A_V = 0.09 mag toward this star (Khan et al. (2023), A&A 677, A21, tess_apo, AV-M), and the colour routes do not remove extinction; APOGEE measured its temperature, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

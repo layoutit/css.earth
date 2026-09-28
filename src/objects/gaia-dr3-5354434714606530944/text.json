@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gaia-dr3-5354434714606530944",
+  "card": {
+    "text": "A star about 13,600 parsecs away, 101 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-09-28",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 5354434714606530944: radius_flame, mass_flame, teff_gspphot"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 101.1 solar radii and 1.94 solar masses (FLAME) and 3,588 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-09-28",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 5354434714606530944: radius_flame, mass_flame, teff_gspphot"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

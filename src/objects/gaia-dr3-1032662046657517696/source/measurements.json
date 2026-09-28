@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gaia-dr3-1032662046657517696",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 20,590,812 km at 9433.81 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 9433.810367653688,
+  "distanceSource": "Gaia DR3 parallax 0.1060 +/- 0.0138 mas (same row, RUWE 0.98): 9433.81 pc, no zero-point correction",
+  "radiusKm": 20590812.4,
+  "radiusSource": "Radius 29.597 (27.078 to 32.517) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 20,590,812 km at 695,700 km per solar radius. Mass 4.401 (4.293 to 4.441) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 4537 +/- 8.4 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1032662046657517696: teff_gspphot 4536.619 K (16th-84th percentiles 4528.952-4545.841), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4537,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1032662046657517696: teff_gspphot 4536.619 K (16th-84th percentiles 4528.952-4545.841), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 2.14,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-1032662046657517696.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.139, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

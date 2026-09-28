@@ -65,12 +65,13 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
 
 /** One caption and one circle follow the destination through the entire flight. Its preview sprite has a
  * separate lifetime and fades at 14–20px, long before the close-up has arrived. */
-function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixels: start, billboardFullDiscPixels: full }: PreparedWorldContext['camera']['presentation']['levelOfDetail']) {
+function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixels: start, billboardFullDiscPixels: full }: PreparedWorldContext['camera']['presentation']['levelOfDetail'], depthBase: number) {
   const leaf = (className: string, key: 'contextFlightLabel' | 'contextFlightCircle') => {
     const element = root.ownerDocument.createElement('span');
     element.className = className;
     element.dataset[key] = '';
     element.style.visibility = 'hidden';
+    element.style.zIndex = String(depthBase + 4);
     element.setAttribute('aria-hidden', 'true');
     root.appendChild(element);
     return element;
@@ -210,7 +211,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (body.contextColor) orbitRoot.style.color = body.contextColor;
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
       ...(colour ? { color: colour } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
@@ -233,7 +234,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
-  const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail);
+  const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const clock = opacityClock ?? opacityClockFor(windowTarget);

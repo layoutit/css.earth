@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "tic-260268102",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TIC 260268102",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12758859.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tic-260268102-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TIC 260268102",
+      "classification": "star",
+      "color": "#ffdcb7",
+      "distanceAu": 322041415.7,
+      "description": "A red giant 1,561 parsecs away, 18 times the Sun's width, weighed by its starquakes.",
+      "systemName": "TIC 260268102 system",
+      "order": 2533,
+      "context": {
+        "order": 2530
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1872816007953868300,
+        27012844970101203000,
+        -39847134905051050000
+      ],
+      "presentationToReference": [
+        -0.03887384986602141,
+        0.05720614254488162,
+        0.9976052731675635,
+        0.5607028535423082,
+        -0.8251233793083598,
+        0.06916443412813889,
+        -0.8271040646896297,
+        -0.5620488112022721,
+        -7.500311425466921e-8
+      ],
+      "orbitUpReference": [
+        -0.05720614254488162,
+        0.8251233793083598,
+        0.5620488112022721
+      ],
+      "metersPerUnit": 41157611.93548387,
+      "bodyRadiusM": 12758859700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

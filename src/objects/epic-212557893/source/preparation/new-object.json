@@ -1,0 +1,56 @@
+{
+  "id": "epic-212557893",
+  "name": "EPIC 212557893",
+  "system": "EPIC 212557893 system",
+  "description": "A red giant in K2 campaign 6, 9.4 solar radii and 0.81 solar masses, weighed by its oscillations.",
+  "target": "EPIC 212557893",
+  "gaia": "3610673663085352448",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "credit": "Khan et al. (2023), A&A 677, A21"
+  },
+  "radius": {
+    "value": 9.3635,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212557893 (K2 campaign 6): PARAM radius (solar radii) 9.363518 (16th-84th percentiles 9.304231-9.436819), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.0663
+  },
+  "mass": {
+    "value": 0.8119,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212557893 (K2 campaign 6): PARAM mass (solar masses) 0.811923 (16th-84th percentiles 0.801292-0.826159), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.0124
+  },
+  "temperature": {
+    "value": 4874,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212557893: APOGEE DR17 effective temperature 4874.28 +/- 50 K (the catalogue's final uncertainty)",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 50
+  },
+  "distance": {
+    "value": 1882.5,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212557893 (K2 campaign 6): PARAM asteroseismic distance (pc) 1882.5 (16th-84th percentiles 1864.84375-1900.410156), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 17.8
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "PARAM fits an extinction A_V = 0.15 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_apo, AV-M), and the colour routes do not remove extinction; APOGEE measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A red giant 1,883 parsecs away, 9 times the Sun's width, weighed by its starquakes.",
+    "introduction": "Its oscillations, recorded in K2 campaign 6, give 0.81 solar masses and 9.4 solar radii; APOGEE spectra give 4,874 K at its surface.",
+    "locator": "k2_apo, EPIC 212557893: Mass-M, Rad-M, Dist-M, Teff-A"
+  },
+  "notes": [],
+  "order": 2402
+}

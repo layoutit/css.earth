@@ -327,8 +327,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           (annotationPriorities[body.id] ?? 0) >= 3;
         const proxyOpacity = highlighted || hostedPlanet ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
+        // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera over
+        // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
+        // so without this every star of the Milky Way stayed a dot from intergalactic distances.
+        const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
-          (isLocator ? 1 : systemOpacity * (isSelected || flightDestination ? 1 : proxyOpacity));
+          (isLocator ? 1 : systemOpacity * (isSelected || flightDestination ? 1 : proxyOpacity)) *
+          (isSelected || flightDestination ? 1 : 1 - beyondLocalGroup);
         const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
