@@ -799,6 +799,7 @@
 .object-card-tabpanel .object-lens-legend-labels > span { overflow-wrap: anywhere; text-align: center; }
 .object-card-tabpanel .object-lens-legend-labels > span:first-child { text-align: left; }
 .object-card-tabpanel .object-lens-legend-labels > span:last-child:not(:first-child) { text-align: right; }
+.object-card-tabpanel .object-lens-legend-meta { margin: 2px 0 0; color: var(--shell-text-muted); font: var(--shell-font-caption); }
 .object-card-tabpanel .object-lens-legend-panel:first-child { margin-top: 0; }
 .object-card-tabpanel .object-lens-details-title {
   margin: 0 0 8px;
