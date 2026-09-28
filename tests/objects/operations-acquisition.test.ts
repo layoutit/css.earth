@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from './source-test.mts';
 import { mkdtemp, readFile, writeFile, rm, readdir, mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash, randomUUID } from 'node:crypto';
-import { executeAcquisition, parseAcquisitionPlan } from './operations-acquisition.js';
+import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
 import { convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';

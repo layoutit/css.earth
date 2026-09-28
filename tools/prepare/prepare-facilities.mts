@@ -19,7 +19,7 @@ import { compileContributions } from '@cssearth/objects/provenance';
 import { parsePreparedExploration, parseExplorationImage } from '@cssearth/objects/provenance';
 import type { ExplorationImage } from '@cssearth/objects/provenance';
 import { validateObjectProvenance } from '@cssearth/objects/provenance';
-import { prepareObjectProvenance } from '../objects/provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '../assets/restore-factsheet-evidence.mts';
@@ -42,10 +42,10 @@ export const explorationCompilerClosure = [
   'packages/objects/src/provenance/prepared-sources.ts', 'packages/bake/src/sources/source-catalogue-inputs.ts',
   'src/platform/dataset-destination.mts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
   'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'tools/assets/restore-factsheet-evidence.mts',
-  'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
+  'packages/core/src/validate.ts', 'tools/objects/operations.ts', 'packages/bake/src/objects/acquisition/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
-  'tools/objects/provenance.mts', 'packages/bake/src/objects/provenance/provenance-records.ts', 'packages/bake/src/objects/provenance/provenance-recipes.ts', 'tools/prepare/prepare-provenance.mts',
+  'packages/bake/src/objects/provenance/object-provenance.ts', 'packages/bake/src/objects/provenance/provenance-records.ts', 'packages/bake/src/objects/provenance/provenance-recipes.ts', 'tools/prepare/prepare-provenance.mts',
 ] as const;
 
 interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;

@@ -59,7 +59,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'objects/layers/shape-model': ['astronomy', 'contract', 'presentation', 'scene', 'objects/color', 'objects/content', 'objects/geometry', 'objects/scene', 'objects/sources', 'objects/layers/material-composition'],
   'objects/layers/observation': ['raster', 'objects/cameras', 'objects/color', 'objects/geometry', 'objects/raster'],
   'objects/stellar': ['objects/color', 'objects/raster', 'objects/sources'],
-  'objects/acquisition': ['raster', 'objects/sources'],
+  'objects/acquisition': ['raster', 'objects/sources', 'objects/layers/observation', 'objects/layers/terrestrial'],
   'objects/sphere-survey': ['objects/cameras', 'objects/geometry', 'objects/layers/terrestrial'],
   'objects/layers/paged-ellipsoid': ['raster', 'scene', 'photometry', 'presentation', 'objects/color', 'objects/content', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/observation'],
   'prepared-presentation': ['presentation', 'raster'],
@@ -70,7 +70,7 @@ const LOWER_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'site-assets': ['raster', 'runtime-source', 'objects/raster', 'objects/charts'],
   'navigation': ['astronomy', 'delivery', 'raster', 'sources', 'objects/raster'],
   'objects/surface-features': ['objects/geometry', 'objects/raster', 'objects/scene', 'objects/layers/paged-ellipsoid', 'objects/layers/terrestrial'],
-  'objects/provenance': ['objects/layers/terrestrial'],
+  'objects/provenance': ['objects/layers/terrestrial', 'objects/acquisition', 'sources'],
   'objects/layers/terrestrial': ['astronomy', 'contract', 'prepared-presentation', 'photometry', 'raster', 'scene', 'presentation', 'objects/cameras', 'objects/content', 'objects/color', 'objects/geometry', 'objects/raster', 'objects/scene', 'objects/sources', 'objects/layers/material-composition', 'objects/layers/shape-model'],
 };
 

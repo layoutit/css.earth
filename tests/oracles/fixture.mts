@@ -11,7 +11,7 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 
 export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
 /** The compiled acquisition operations. Loaded here because `sbmt/` is its own package scope, which cannot see the root `#preparation` imports. */
-export const acquisitionOperations = async () => ({...await import('@cssearth/bake/objects/sources'), ...await import('#preparation/operations-acquisition')});
+export const acquisitionOperations = async () => ({...await import('@cssearth/bake/objects/sources'), ...await import('@cssearth/bake/objects/acquisition')});
 export interface OracleSample { index: number; value: number }
 
 export async function readOracleFixture(name: string) {

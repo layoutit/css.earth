@@ -6,7 +6,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 export default {
   // Each entry keeps its bundle name under dist/; the object content preparer is site-owned preparation (site/build/content).
   entry: {
-    ...Object.fromEntries(['prepare-authored', 'prepare-world-navigation', 'prepare-spatial-context', 'operations', 'operations-acquisition', 'refresh-features', 'refresh-photographs']
+    ...Object.fromEntries(['prepare-authored', 'prepare-world-navigation', 'prepare-spatial-context', 'operations', 'refresh-features', 'refresh-photographs']
       .map(name => [name, resolve(root, 'tools/objects', `${name}.ts`)])),
     'content/prepare': resolve(root, 'site/build/content/prepare.ts'),
   },

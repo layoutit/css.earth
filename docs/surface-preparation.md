@@ -16,7 +16,7 @@ Original images, meshes and labels
 
 | Step | Implementation |
 | --- | --- |
-| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
+| Restore missing inputs; reject changed bytes | [Acquisition](../packages/bake/src/objects/acquisition/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
 | Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
@@ -25,7 +25,7 @@ Original images, meshes and labels
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
 | Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
-| Record input, recipe and output identities | [Provenance bindings](../packages/bake/src/objects/provenance/provenance-recipes.ts) and [record generation](../tools/objects/provenance.mts) |
+| Record input, recipe and output identities | [Provenance bindings](../packages/bake/src/objects/provenance/provenance-recipes.ts) and [record generation](../packages/bake/src/objects/provenance/object-provenance.ts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
 [The loader](../packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts) assembles the

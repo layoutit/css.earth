@@ -1,7 +1,7 @@
 import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '@cssearth/bake/delivery';
 import { containedPath, parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
 import { fileURLToPath } from 'node:url';
-import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
+import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from '@cssearth/bake/objects/acquisition';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { publishSourceBytes } from '@cssearth/bake/delivery';
 import { readFile, lstat } from 'node:fs/promises';

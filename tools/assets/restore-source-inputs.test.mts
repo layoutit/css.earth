@@ -7,7 +7,7 @@ import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { validateObjectPackageFiles } from '../../site/build/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
+import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { requireInventory } from '@cssearth/objects/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 

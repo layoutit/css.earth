@@ -80,7 +80,7 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
   // Provenance verifies raw source bytes; a reuse-images stage carries the published record for its unchanged images.
   if (!reuseImages) {
-    const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href);
+    const { prepareObjectProvenance } = await import('@cssearth/bake/objects/provenance');
     await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
   }
   return Object.freeze({ ...result, definition: prepared.definition, scene });
@@ -218,7 +218,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }
       } else {
-        const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
+        const { prepareObjectProvenance } = await import('@cssearth/bake/objects/provenance');
         await prepareObjectProvenance({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, basis: 'prepared' });
       }
       const { publishPreparedObject } = await import('@cssearth/bake/delivery');

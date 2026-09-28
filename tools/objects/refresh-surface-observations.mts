@@ -13,7 +13,7 @@ import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestria
 import { prepareSolidRasters, prepareSolidSurfacePoles } from '@cssearth/bake/objects/layers/terrestrial';
 import { lensBillboardColors } from '@cssearth/bake/objects/content';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
-import { prepareObjectProvenance } from './provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { repinObjectJson } from '@cssearth/bake/contract';
 
 

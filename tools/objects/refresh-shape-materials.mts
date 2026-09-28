@@ -13,7 +13,7 @@ import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
 import { refreshObservationControls } from './refresh-surface-observations.mts';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
-import { prepareObjectProvenance } from './provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '@cssearth/bake/navigation';
 import { validateMarkerDescriptor, renderMarker } from '@cssearth/bake/navigation';
