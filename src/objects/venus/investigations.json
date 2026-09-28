@@ -16,12 +16,10 @@
       ],
       "checked": [
         {
-          "date": "2026-09-16",
-          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+          "date": "2026-09-16"
         },
         {
-          "date": "2026-09-19",
-          "commit": "694a1265852870fed108c79258b324f5e1072ef9"
+          "date": "2026-09-19"
         }
       ]
     },
@@ -39,8 +37,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-19",
-          "commit": "694a1265852870fed108c79258b324f5e1072ef9"
+          "date": "2026-09-19"
         }
       ]
     },
@@ -55,8 +52,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -69,8 +65,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -85,8 +80,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -102,8 +96,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -118,8 +111,7 @@
       "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -133,8 +125,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+          "date": "2026-09-26"
         }
       ]
     },
@@ -148,8 +139,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+          "date": "2026-09-26"
         }
       ],
       "revisitWhen": "A particular Level 3 release and its usable geographic coverage are selected."
@@ -164,8 +154,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+          "date": "2026-09-26"
         }
       ],
       "revisitWhen": "The published GIS units and symbology are acquired with clear reuse terms."
@@ -180,8 +169,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
+          "date": "2026-09-26"
         }
       ],
       "revisitWhen": "The numeric surface-emissivity grid and its atmosphere correction and gaps are established."
@@ -192,14 +180,12 @@
       "status": "included",
       "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts.",
       "evidence": [
-        "evidence/usgs-numeric/numeric-checks.json",
-        "README.md"
+        "https://github.com/layoutit/css.earth/blob/7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05/src/objects/venus/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05/src/objects/venus/README.md"
       ],
       "checked": [
         {
-          "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
+          "date": "2026-09-27"
         }
       ]
     }

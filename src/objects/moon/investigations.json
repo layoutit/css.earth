@@ -14,8 +14,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -31,8 +30,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -48,8 +46,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -65,8 +62,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -82,8 +78,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -100,8 +95,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -117,8 +111,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -133,8 +126,7 @@
       "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
       "checked": [
         {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
+          "date": "2026-09-25"
         }
       ]
     },
@@ -144,14 +136,12 @@
       "status": "included",
       "finding": "Eight 2016 Kaguya MI views plus a shared companion-fit coverage gate; FeO outside 0\u2013100 weight percent is masked. Native samples and all compact-cell calibration and masks are checked.",
       "evidence": [
-        "evidence/usgs-numeric/numeric-checks.json",
-        "README.md"
+        "https://github.com/layoutit/css.earth/blob/7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05/src/objects/moon/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05/src/objects/moon/README.md"
       ],
       "checked": [
         {
-          "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
+          "date": "2026-09-27"
         }
       ]
     }
