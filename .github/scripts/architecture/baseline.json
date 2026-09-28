@@ -62,6 +62,7 @@
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/spectrum-data.mts"},
       {"from":"tools/ci/check-object-runtime-ownership.mts","to":"site/objects.mts"},
       {"from":"tools/objects/content/prepare.ts","to":"site/prepared-shell-titles.d.mts"},
+      {"from":"tools/objects/prepare-spatial-context.ts","to":"site/build/prepare/jpl-mission-targets.mts"},
       {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"tools/prepare/check-preparation-inputs.mts","to":"site/object-text.mts"},
       {"from":"tools/prepare/prepare-catalog.mts","to":"site/asset-origin.mts"},
