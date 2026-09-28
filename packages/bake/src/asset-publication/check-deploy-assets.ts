@@ -32,15 +32,15 @@ export function unknownRuntimeAssetUrls(referenced: readonly string[], inventori
   return [...new Set(referenced.filter(url => !inventoried.has(url)))].sort();
 }
 
-/** The site reads the Sun's world summary and each system's views as published, from their inventory hashes, while builds
- * regenerate them locally. A set re-pinned apart (2026-09-24: 48 systems, 44 views) passes every local build and breaks
- * in-app navigation, so every system the published summary names must have its published views, and they must parse. */
 /** A dropped connection is retried, as the asset restore retries it; a read that still fails names its URL. */
 async function readPublishedText(url: string): Promise<string> {
   try { return (await fetchWithRetry(fetch, url)).toString('utf8'); }
   catch (cause) { throw new Error(`Could not read ${url}.`, { cause }); }
 }
 
+/** The site reads the Sun's world summary and each system's views as published, from their inventory hashes, while builds
+ * regenerate them locally. A set re-pinned apart (2026-09-24: 48 systems, 44 views) passes every local build and breaks
+ * in-app navigation, so every system the published summary names must have its published views, and they must parse. */
 export async function checkPublishedWorldPair(root: string, fetchText: (url: string) => Promise<string> = readPublishedText) {
   const [summaryAsset] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-context-summary.json'] });
   if (!summaryAsset) throw new Error('The Sun inventory lacks world-context-summary.json.');
