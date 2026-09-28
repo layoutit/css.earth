@@ -761,8 +761,8 @@ test('the moons of a framed planet keep their names before stars beyond the Sola
   const ra = 290.7 * Math.PI / 180, dec = 44.5 * Math.PI / 180, toward = [Math.cos(dec) * Math.cos(ra), Math.cos(dec) * Math.sin(ra), Math.sin(dec)];
   // The rotation that turns the camera's forward axis (-z) onto that direction.
   const axis = [toward[1]!, -toward[0]!, 0], w = 1 - toward[2]!, norm = Math.hypot(...axis, w);
-  input.world.pose.orientationXyzw = [axis[0]! / norm, axis[1]! / norm, axis[2]! / norm, w / norm];
-  input.world.pose.positionM = [0, 1, 2].map(index => jupiter.positionM[index]! - toward[index]! * .08 * 149597870700) as [number, number, number];
+  input.world = { ...input.world, pose: { orientationXyzw: [axis[0]! / norm, axis[1]! / norm, axis[2]! / norm, w / norm],
+    positionM: [0, 1, 2].map(index => jupiter.positionM[index]! - toward[index]! * .08 * 149597870700) as [number, number, number] } };
   const named = new Set(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!.id));
   for (const moon of ['io', 'europa', 'ganymede', 'callisto']) expect(named.has(moon), `${moon} is named`).toBe(true);
 });
