@@ -3,6 +3,7 @@
   "name": "HD 226868",
   "system": "Cygnus X-1 system",
   "description": "The blue supergiant of Cygnus X-1, orbiting a black hole of 21 solar masses every 5.6 days.",
+  "order": 1845,
   "target": "HD 226868",
   "gaia": "2059383668236814720",
   "paper": {
@@ -28,6 +29,12 @@
     "value": 3.348,
     "source": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived",
     "url": "https://arxiv.org/abs/2102.09091"
+  },
+  "radialVelocity": {
+    "value": -2.7,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2059383668236814720 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract",
+    "uncertainty": 3.2
   },
   "color": {
     "skip": [
@@ -58,12 +65,5 @@
     "The star nearly fills its Roche lobe (filling factor 0.96, Miller-Jones et al. 2021, Table 1), so it is slightly egg-shaped; it is drawn as a sphere at its mean radius.",
     "The accretion disc and the radio jet of the black hole are not drawn.",
     "The black hole has no measured size and is drawn as a point on its orbit."
-  ],
-  "radialVelocity": {
-    "value": -2.7,
-    "uncertainty": 3.2,
-    "source": "SIMBAD's radial velocity for Gaia DR3 2059383668236814720 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
-  },
-  "order": 1845
+  ]
 }
