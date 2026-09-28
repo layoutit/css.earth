@@ -4,7 +4,7 @@
 // labels read by glyph; the setup of a body's lens (`survey-setup.ts`, with the survey figure table
 // `vernazza-2021-figures.json`), its install into the body's package (`survey-install.ts`) and the measurement of a lens against
 // its paper's comparison figure (`published-comparison.ts`). Their commands are `packages/bake/cli/sphere-survey-{setup,install,
-// apparitions}.mts` and `published-comparison.mts`; they work in the checkout they run in.
+// apparitions}.mts` and `published-comparison.mts`, which pass in the checkout they belong to.
 export * from './lam.ts';
 export * from './frames.ts';
 export * from './figure-labels.ts';

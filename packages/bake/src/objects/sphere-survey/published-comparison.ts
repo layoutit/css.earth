@@ -20,8 +20,6 @@ import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type 
 import { decodeCalibratedCamera, loadCameraShape } from '../geometry/index.ts';
 import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from '../layers/terrestrial/index.ts';
 
-/** The checkout the command runs in. */
-const ROOT = process.cwd();
 const SWEEP = { from: -30, to: 30, step: 2 };
 const round = (value: number, digits = 3) => Number(value.toFixed(digits));
 const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
@@ -30,7 +28,8 @@ const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
 const UNPINNED = '0'.repeat(64);
 
 /** The measurement for a body's package, or for any source directory laid out like one, such as a setup run's scratch copy. */
-export async function measurePublishedComparison(objectId: string, { adopt = false, sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source') } = {}) {
+/** `root` is the checkout the body's package, orientation and camera inputs are read from; the command passes it in. */
+export async function measurePublishedComparison(objectId: string, { root, adopt = false, sourceDirectory = resolve(root, 'src/objects', objectId, 'source') }: { root: string; adopt?: boolean; sourceDirectory?: string }) {
   const specPath = resolve(sourceDirectory, COMPARISON_SPEC_FILE);
   const stated = JSON.parse(await readFile(specPath, 'utf8')), spec = parseComparisonSpec(stated);
   const { record, recipe, frames } = await loadObserverCameraInputs(sourceDirectory);
@@ -45,10 +44,10 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   const figure: Raster = image, cell = columnCells(figure, spec);
 
   // The native outline over a sweep of rotational phase, through the same derivation the recipe's cameras come from.
-  const base = await loadOrientation(sourceDirectory, record.rotation, ROOT);
+  const base = await loadOrientation(sourceDirectory, record.rotation, root);
   const sweep: Record<string, number> = {}; let atZero: DerivedCamera[] = [];
   for (let offset = SWEEP.from; offset <= SWEEP.to; offset += SWEEP.step) {
-    const derived = await deriveObserverCameras(sourceDirectory, record, frames, mesh, ROOT, { orientation: offset === 0 ? base : turnedOrientation(base, offset) });
+    const derived = await deriveObserverCameras(sourceDirectory, record, frames, mesh, root, { orientation: offset === 0 ? base : turnedOrientation(base, offset) });
     sweep[offset] = round(derived.reduce((sum, camera) => sum + camera.limb.residualPixels, 0) / derived.length);
     if (offset === 0) atZero = derived;
   }

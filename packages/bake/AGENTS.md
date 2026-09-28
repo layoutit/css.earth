@@ -221,7 +221,7 @@ its validators accept); the renderer never imports the bake.
     package's name), installs it into the body's package (`survey-install.ts`) and measures a lens against its paper's comparison
     figure (`published-comparison.ts`). It imports `objects/cameras`, `objects/geometry`, `objects/layers/terrestrial` and
     `sources`. Its commands are `packages/bake/cli/sphere-survey-{setup,install,apparitions}.mts` and `published-comparison.mts`,
-    working in the checkout they run in; its tests are in `tests/objects/sphere-survey/`.
+    which resolve their checkout from their own location and pass it in; its tests are in `tests/objects/sphere-survey/`.
   - `objects/interpretation`: the observation interpreter the raster lane packs surfaces through (`createSurfaceInterpreter`
     picks each surface's decoder: solar synoptic maps, terrestrial, shape-model, stellar and static observations, the
     Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,
