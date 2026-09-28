@@ -63,7 +63,7 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 From the repository root, run:
 
 ```sh
-node tools/prepare/cli/prepare-provenance.mts <object-id>
+node site/build/prepare/prepare-provenance.mts <object-id>
 ```
 
 Omit the ID to regenerate all registered scene-body records. By default the
@@ -160,7 +160,7 @@ For source bindings or product-lineage changes, run:
 pnpm test:node
 ```
 This is the broad native suite. For a focused change, select the relevant tests
-under `tests/provenance/`, `tests/contract/`, `tests/sources/`, `tools/contract/`, `tools/sources/` and the affected preparer.
+under `tests/provenance/`, `tests/contract/`, `tests/sources/` and the affected preparer.
 Report source-dependent skips separately. The suite does not reinstate the
 removed manifest-pin or provenance-retention checks, and a pass does not replace
 independent scientific qualification.

@@ -75,7 +75,7 @@ widths; changing the selected map must retain the mounted scene.
 card into `object.json`. If any body fails validation, it writes nothing. Supply
 object IDs to limit publication after the shared validation. A changed card
 changes catalogue text; regenerate catalogue/provenance with
-`node tools/prepare/cli/prepare-provenance.mts`. Changed prepared text refreshes the
+`node site/build/prepare/prepare-provenance.mts`. Changed prepared text refreshes the
 body inventory and must be published through the usual asset workflow.
 `node site/build/prepare/prepare-text.mts --check` verifies without writing.
 
@@ -96,7 +96,7 @@ Warnings are for the reviewer and never block:
 - repetition between blocks shown together: the introduction, one dataset
   summary and the mission, facility and note cards beside it. This check reads
   `site/prepared-facilities.json`, so run
-  `node tools/prepare/cli/prepare-facilities.mts --catalog-only` first.
+  `node site/build/prepare/prepare-facilities.mts --catalog-only` first.
 
 `site/test/prepare-text.test.mts` runs the check on every registered body.
 `site/test/rendered-page.test.mts` checks scene invariants in built HTML; it does

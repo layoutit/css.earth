@@ -14,5 +14,7 @@
     "path": "shape/uniform-disc.tab",
     "stepDegrees": 5,
     "qualification": "A sphere at the fitted radius. The photosphere of an asymptotic giant branch star is not a solid surface and its limb is not sharp; the sphere is the reference surface the interferometric image is cast onto, not a measured shape."
-  }
+  },
+  "surfaceGravityLogg": -0.38,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/pi1-gruis.json: -0.385"
 }

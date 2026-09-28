@@ -28,10 +28,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Sphere of the measured diameter",
-      "detail": "No image",
-      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
     }
   }
 }

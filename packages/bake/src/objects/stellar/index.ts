@@ -3,6 +3,7 @@
 // its own, not part of `objects/layers/observation`, so code that reaches the observation layer does not reach the source
 // manifests the colour records are read through.
 export * from './gravity-darkening.ts';
+export * from './limb-laws.ts';
 export * from './stellar-photometric-color.ts';
 export * from './stellar-spot-figure.ts';
 export * from './stellar-spot-occultation.ts';

@@ -675,8 +675,11 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
 // Every malformed case parses the whole generated universe again, so the test's time grows with the number of bodies.
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  const { readCatalog } = await import('../../../../tools/prepare/prepare-catalog.mts');
-  const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
+  const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
+  // Each entry's distance as `prepare:catalog` placed it in the generated catalogue.
+  const distances = JSON.parse(await readFile(fileURLToPath(new URL('../../../../site/prepared-object-distances.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
+  const distance = (descriptor: unknown) => parseNavigationDistance(distances[(descriptor as { id: string }).id]);
+  const contextEntries = (await readCatalog(fileURLToPath(new URL('../../../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
   // Bodies drawn from their astronomy records around a packaged host follow the catalogue's own entries.
   expect(parsePreparedWorldContext(source).bodies.filter(body => !body.unpackaged).map(body => body.id)).toEqual(contextEntries.map(body => body.id));

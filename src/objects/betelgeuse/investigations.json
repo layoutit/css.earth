@@ -90,6 +90,15 @@
         "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
       ],
       "revisitWhen": "A reconstruction of these or more data (the public 25 February 2020 night, another recipe or another code) whose spotless twins stay clean across ±2 percent in size, or a published spotless-disc test of the MATISSE images."
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,600 K and log g -0.08 for 17.75 solar masses (u1 1.114, u2 -0.025); the model atmosphere is extended, and the law reaches zero at 99.6% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/betelgeuse.json: -0.079.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
+      ]
     }
   ]
 }

@@ -27,7 +27,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,7 +100,7 @@
     "catalog": {
       "name": "Kepler-16 A",
       "classification": "star",
-      "color": "#ffd8b9",
+      "color": "#ffc195",
       "distanceAu": 15531101.8,
       "description": "Orange dwarf 75 parsecs away, the larger of the two stars Kepler-16 (AB) b circles.",
       "systemName": "Kepler-16 system",

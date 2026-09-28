@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."
-  }
+  },
+  "surfaceGravityLogg": 4.25,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hr-8799.json: 4.251"
 }

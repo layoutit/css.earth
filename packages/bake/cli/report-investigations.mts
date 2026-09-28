@@ -12,9 +12,8 @@ import {
   INVESTIGATION_INDEX_FILE, INVESTIGATION_STATUSES, formatInvestigationIndex, formatInvestigationReport, groundFacilities,
   investigationOptions, investigationReport, readFacilityLedgers, readInvestigationLedgers,
 } from '@cssearth/bake/sources';
-// The catalogue reader stays in tools/prepare until the catalogue preparation moves into the bake; the architecture baseline
-// records this edge until then.
-import { readCatalog } from '../../../tools/prepare/prepare-catalog.mts';
+import { readCatalog } from '@cssearth/objects/node';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const root = fileURLToPath(new URL('../../../', import.meta.url)), options = investigationOptions(process.argv.slice(2));
@@ -25,7 +24,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       : formatInvestigationReport(report, options.summary).replace(/catalogued objects have ledgers/u, 'ground facilities have ledgers').trimEnd());
     process.exit(0);
   }
-  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
+  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects'), prepareSceneDistance), readInvestigationLedgers(root)]);
   // The index covers every recorded decision, so its status filter is not the report's.
   const report = investigationReport(objects, ledgers, options.index ? { ...options, statuses: [...INVESTIGATION_STATUSES] } : options);
   if (options.index) {

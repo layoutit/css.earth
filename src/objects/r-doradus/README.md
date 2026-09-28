@@ -36,6 +36,8 @@ legend reads relative brightness at 338 GHz, not colour or temperature.
 
 **Colour lens.** The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ff6725**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). No model limb darkening is added: the giant's gravity is below the Claret & Bloemen (2011) grid, and the ALMA lens shows its measured disc. The catalogue swatch and the minimap use the same colour; the navigation marker stays the image. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. No second, independent spectrum was found: the ESO UVES files are this same night, and the star is too bright for Gaia XP and absent from the spectral libraries.
 
+**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^0.61 that Ohnaka et al. (2019), ApJ 883, 89 fit to the star's resolved disc (VLT/AMBER K-band continuum near 2.3 um; not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/r-doradus.json: -0.723.
+
 ## Evidence
 
 **The disc agrees with the published fit.** Measured here on the archive image: half-power diameter 60 mas, against the
@@ -72,5 +74,6 @@ they are not the same quantity, but the superlative is not ours to assert.
 
 **One hemisphere, one epoch, one band.** The far hemisphere and the poles were not observed and carry the no-data grid. The
 pattern changes over weeks, so the lens is one night of a changing surface.
+- **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

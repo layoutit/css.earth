@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."
-  }
+  },
+  "surfaceGravityLogg": 4.65,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-16-a.json: 4.652"
 }

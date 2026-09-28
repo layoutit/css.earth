@@ -20,6 +20,8 @@ Betelgeuse is the first body here that is not in the Solar System and the first 
 
 **Colour lens.** The colour of Betelgeuse's VLT/X-shooter spectrum. It was taken on 12 October 2009, before the Great Dimming, and is not corrected for light lost at the slit, which can tilt the colour. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffc876**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). No model limb darkening is added: the supergiant's gravity is below the Claret & Bloemen (2011) grid, and the image lenses show its measured limb. The catalogue swatch and the minimap use the same colour; the navigation marker stays the image. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. Cross-check: Kiehling (1987), HR 2061: an independent ground-based scan gives #ffc36f, 7 levels from the lens colour in its most different channel (the threshold for agreement is 12).
 
+**Limb.** The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,600 K and log g -0.08 for 17.75 solar masses (u1 1.114, u2 -0.025); the model atmosphere is extended, and the law reaches zero at 99.6% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/betelgeuse.json: -0.079.
+
 ## Evidence
 
 The former body-specific checks below last existed in git history. Their recorded results describe that revision; they have not been rerun in this worktree.
@@ -55,5 +57,6 @@ The former body-specific checks below last existed in git history. Their recorde
 **The sky is the Sun's.** The star field behind Betelgeuse is the shared cube baked from the Sun's position. From 168 parsecs the nearby stars would sit elsewhere; the cube is not the sky from Betelgeuse.
 
 **Self-luminous, so no lighting.** The star is drawn by the emissive material, the same as the Sun: the leaves carry the reconstruction's own brightness and no light direction or shadow is applied. The pipeline's Sun direction, which from Betelgeuse coincides with the direction to Earth within a thousandth of a degree, only sets the display meridian and the camera's reference view.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

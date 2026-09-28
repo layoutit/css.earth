@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."
-  }
+  },
+  "surfaceGravityLogg": 1.91,
+  "surfaceGravitySource": "log g 1.91 from 2023ApJS..266...11B; the 2 published values span log g 1.75 to 1.907 (https://ui.adsabs.harvard.edu/abs/2023ApJS..266...11B)"
 }

@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "luhman-16",
+  "source": "de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225, Table 2 (tab:params), Luhman 16A one-column retrieval (https://arxiv.org/abs/2503.21266)",
+  "band": "VLT/CRIRES+ J1226 setting (1.1-1.4 um); not a visible band",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "u1": {
+    "value": 0.46,
+    "uncertainty": 0.06,
+    "cell": "epsilon_limb, Limb-darkening coefficient, prior U(0.0,1.0): 0.46 +0.06 -0.06 (Luhman 16A, 1-column)"
+  },
+  "u2": {
+    "value": 0,
+    "fixed": "The survey broadens its model spectra with PyAstronomy's fastRotBroad and \"linear limb-darkening coefficient epsilon_limb\" (SupJup Survey I, de Regt et al. 2025, https://arxiv.org/abs/2405.10841): a linear law, so the quadratic term is zero"
+  },
+  "note": "Fitted with the rotational broadening to the CRIRES+ J-band spectrum of Luhman 16A itself; the only limb law measured for it. The two-column retrieval gives 0.44 +0.05 -0.04, inside this range. It is an infrared law: the visible limb is not measured, and no model table reaches a 1,300 K dwarf."
+}

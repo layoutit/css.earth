@@ -39,7 +39,7 @@
     "color": {
       "title": "Photosphere colour",
       "detail": "From its spectrum",
-      "summary": "Gaia colour on a uniform disc; no resolved image or limb darkening.",
+      "summary": "Gaia colour, dimmed toward the edge by its published law; no resolved image.",
       "sources": [
         {
           "catalogueId": "gaia-dr3-wd-1856-534",

@@ -683,11 +683,11 @@ test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY g
   assert.equal(limb.grid, 'tlusty');
   assert.ok(limb.coefficients!.u1 >= 0.0945336 && limb.coefficients!.u1 <= 0.137878 && limb.coefficients!.u2 >= 0.302762 && limb.coefficients!.u2 <= 0.347654, 'inside the four nodes');
   // Every node is read: the first data row too, which the reader would take for a units line without the one the rewrite adds.
-  assert.match(limb.file!.text, /^logg\tTeff\ta\tb\n\[cgs\]\tK\t\t\n/mu);
+  assert.match(limb.files![0]!.text, /^logg\tTeff\ta\tb\n\[cgs\]\tK\t\t\n/mu);
   assert.match(limb.sentence, /Reeve & Howarth \(2016\), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3\.348/u);
-  const replayed = (limb.acquisition!.replacements as { pattern: string; flags: string; replacement: string }[]).reduce((text, { pattern, flags, replacement }) => text.replace(new RegExp(pattern, flags), replacement), tlusty);
-  assert.equal(replayed, limb.file!.text, 'the restore recipe reproduces the stored table');
-  assert.match(limb.file!.text, /^logg\tTeff\ta\tb$/mu); assert.match(limb.file!.text, /^3\.25\t30000\t 1\.31065e-01\t 3\.33968e-01$/mu);
+  const replayed = (limb.acquisitions![0]!.replacements as { pattern: string; flags: string; replacement: string }[]).reduce((text, { pattern, flags, replacement }) => text.replace(new RegExp(pattern, flags), replacement), tlusty);
+  assert.equal(replayed, limb.files![0]!.text, 'the restore recipe reproduces the stored table');
+  assert.match(limb.files![0]!.text, /^logg\tTeff\ta\tb$/mu); assert.match(limb.files![0]!.text, /^3\.25\t30000\t 1\.31065e-01\t 3\.33968e-01$/mu);
   // A star ATLAS reaches keeps its ATLAS law: the new grid only fills the gap.
   assert.equal((await chooseLimb('cool', 5800, 4.4, { ...archive, async text(_url, form) { return form?.['-source'] === 'J/A+A/529/A75/table-af' ? ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cgs]\tK\t[Sun]\tkm/s\t\t\t\t\t', ...[4, 4.5].flatMap(g => [5750, 5875].map(t => `${g}\t${t}\t0\t2\t0.45\t0.26\tV\tL\tA`))].join('\n') : tlusty; } })).grid, 'atlas');
 });

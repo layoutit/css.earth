@@ -141,11 +141,28 @@
         "kind": "local",
         "reason": "Project-authored colour recipe naming the MagE spectrum bound above; repinned when edited."
       }
+    },
+    {
+      "id": "luhman-16-deregt-2025-limb-darkening",
+      "path": "photometry/deregt-2025-limb-darkening.json",
+      "origin": "https://arxiv.org/abs/2503.21266",
+      "credit": "de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, each value with its quoted cell",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "uniform-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1406.1518",
       "credit": "The colour of Faherty et al. (2014)'s MagE spectrum of Luhman 16 A as a uniform disc (no limb law is measured); rendered by tools/objects/source-authoring/context-markers.mts",
@@ -159,7 +176,8 @@
           "luhman-16-stellar-color",
           "luhman-16-faherty-2014-mage",
           "luhman-16-cie-1931-2deg-cmf",
-          "luhman-16-preparation-raster"
+          "luhman-16-preparation-raster",
+          "luhman-16-deregt-2025-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/context-markers.mts",

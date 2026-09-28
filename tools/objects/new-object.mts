@@ -5,6 +5,7 @@
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
  *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
+ *   node tools/objects/new-object.mts --star-limb <id>... [--bake]
  *   node tools/objects/new-object.mts --draft-photometry <id>... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
@@ -63,6 +64,20 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const lines = await relensExisting(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/cli/prepare-object.mts <id>...\n`);
+  } else if (args.includes('--star-limb') && !specPath) {
+    // Limb darkening for stars already in the tree, hand-made packages included: `--star-limb ID... [--bake]` (new-object/star-limb.mts).
+    const { starLimb } = await import('./new-object/star-limb.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
+    const ids = args.filter(argument => !argument.startsWith('--'));
+    const results = await starLimb(process.cwd(), ids, { progress: line => process.stderr.write(`${line}\n`) });
+    process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.colour ? `, colour ${result.colour}` : ''}`).join('\n')}\n`);
+    const changed = results.filter(result => !result.limb.startsWith('NONE')).map(result => result.id);
+    if (changed.length !== results.length) process.exitCode = 1;
+    if (args.includes('--bake') && changed.length) {
+      // A hand-made package's downloads may be missing from this checkout; restore them before the bake needs them.
+      const { spawnSync } = await import('node:child_process');
+      const restore = spawnSync(process.execPath, ['tools/assets/restore-source-inputs.mts', ...changed.map(id => `--object=${id}`)], { stdio: 'inherit' });
+      if (restore.status !== 0 || !await prepareObjects(changed)) process.exitCode = 1;
+    }
   } else if (args.includes('--refresh') && !specPath) {
     // Regenerate bodies the tool made from their stored specs: `--refresh ID... [--check | --bake]` (new-object/refresh.mts).
     const { mkdir, writeFile } = await import('node:fs/promises'), { refreshSpec } = await import('./new-object/refresh.mts');

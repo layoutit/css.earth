@@ -54,7 +54,7 @@
               "id": "pionier-2014-09-h-band",
               "path": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-05,
+              "backgroundMaximum": 0.00001,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -115,7 +115,12 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band).",
+        "limbDarkening": {
+          "law": "power",
+          "published": true,
+          "path": "photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json"
+        }
       }
     }
   ],
@@ -137,7 +142,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

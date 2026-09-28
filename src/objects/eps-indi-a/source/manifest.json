@@ -136,14 +136,40 @@
         "kind": "local",
         "reason": "Project-authored colour recipe naming the Gaia DR3 spectrum bound above."
       }
+    },
+    {
+      "id": "eps-indi-a-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 4500..4750 K, log g 4.5..5, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eps-indi-a-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "uniform-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "The colour lens as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its law; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -153,7 +179,8 @@
         "inputs": [
           "eps-indi-a-stellar-color",
           "eps-indi-a-gaia-dr3-xp-sampled",
-          "eps-indi-a-preparation-raster"
+          "eps-indi-a-preparation-raster",
+          "eps-indi-a-claret-2011-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/context-markers.mts",

@@ -14,5 +14,7 @@
     "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured."
   },
   "planetCount": 1,
-  "planetCountSource": "One known planet, WD 1856+534 b, transiting every 1.408 days (Vanderburg et al. 2020, Nature 585, 363)."
+  "planetCountSource": "One known planet, WD 1856+534 b, transiting every 1.408 days (Vanderburg et al. 2020, Nature 585, 363).",
+  "surfaceGravityLogg": 8.05,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wd-1856-534.json: 8.054"
 }

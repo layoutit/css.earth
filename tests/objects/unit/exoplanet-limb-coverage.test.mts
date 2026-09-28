@@ -71,8 +71,8 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     // A shape-only star (no colour source fit to draw) carries no limb profile; every other host does.
     if (science.kind === 'neutral-shape') { shapeOnly.push(id); continue; }
     assert.equal(science.kind, 'stellar-photometric-color');
-    // WD 1856+534's only fitted law puts the limb below zero, which the preparer refuses (its README): a uniform colour disc. Every
-    // other host has a measured law or a Claret model law at its own temperature and gravity.
+    // Every host has a law: one a paper fit or fixed for the star (WD 1856+534 takes the model coefficients its discovery paper
+    // fixed), or a model grid's law at its own temperature and gravity (tools/objects/new-object/limb.mts).
     if (science.limbDarkening === undefined) { uniform.push(id); continue; }
     const law = requireRecord(science.limbDarkening, `${id} limb darkening`);
     assert.equal(law.law, 'quadratic');
@@ -89,7 +89,8 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     assert.ok(requireArray(inventory.assets, `${id} assets`).some(asset => typeof requireRecord(asset, 'asset').filename === 'string' &&
       String(requireRecord(asset, 'asset').filename).includes('-limb-color@2x.webp')), `${id} must publish its limb plate`);
   }
-  assert.deepEqual(shapeOnly.sort(), ['hr-8799', 'kepler-16-a']);
-  // Epsilon Indi A's package draws no limb darkening either (its README, #655): a uniform colour disc from its Gaia spectrum.
-  assert.deepEqual(uniform, ['wd-1856-534', 'eps-indi-a']);
+  // HR 8799 and Kepler-16 A were gray shapes, and WD 1856+534 and Epsilon Indi A uniform discs, until `--star-limb` gave them
+  // their laws: no host star is left without one.
+  assert.deepEqual(shapeOnly, []);
+  assert.deepEqual(uniform, []);
 });

@@ -40,7 +40,7 @@ const parseRotation = shape({ kind: text, path: text, columnOrder: optional(text
  * per-image offset together and show the fit as a figure per epoch; they state no independent check. A lens whose cameras
  * reproduce that figure names the included ledger entry that decides it; the figure itself, the measurements and their
  * image are owned by `preparation/published-comparison.json` and `evidence/published-comparison.json`, which
- * `tools/objects/published-comparison.mts` writes. Its registration verdict is then reported beside the lens, not a gate.
+ * `packages/bake/cli/published-comparison.mts` writes. Its registration verdict is then reported beside the lens, not a gate.
  */
 const parseComparison = shape({ ledgerEntry: text });
 const parseRecord = shape({ schema: text, lensId: text, rotation: parseRotation, ephemeris: shape({ observer: text, heliocentric: text }), epoch: text,

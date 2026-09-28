@@ -190,7 +190,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (Crimean photoelectric). The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Colour from a measured spectrum of the star (Crimean photoelectric). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere.",
         "thumbnail": "ce-tauri-lens-color.webp",
         "surface": "ce-tauri-surface-color@2x.webp",
         "poles": "ce-tauri-poles-color@2x.webp",
@@ -200,7 +200,7 @@
           "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126"
         },
         "falseColor": false,
-        "notes": "The colour of CE Tauri's Crimean photoelectric spectrum. The scan is from 24 October 1982; a second scan in February 1983 is paler, and CE Tau varies. No resolved image of the surface is cast here."
+        "notes": "The colour of CE Tauri's Crimean photoelectric spectrum. The scan is from 24 October 1982; a second scan in February 1983 is paler, and CE Tau varies. No resolved image of the surface is cast here. The darkening toward the edge is the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,801 K and log g -0.12 for 14.37 solar masses (u1 1.111, u2 -0.000); the model atmosphere is extended, and the law reaches zero at 99.5% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used."
       }
     ]
   },

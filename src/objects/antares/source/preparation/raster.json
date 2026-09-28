@@ -19,14 +19,31 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "color",
       "output": "antares-surface-{id}{suffix}.webp",
       "thumbnail": "antares-lens-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published angular diameter, self-luminous, so no lighting."
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/neilson-2013-v-quadratic.tsv",
+          "grid": {
+            "teffK": 3660,
+            "logg": -0.05,
+            "massSolar": 15,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a(V)",
+            "u2": "b(V)",
+            "mass": "M"
+          }
+        },
+        "qualification": "Photosphere colour from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,660 K and log g -0.05 for 15 solar masses (u1 1.110, u2 -0.013); the model atmosphere is extended, and the law reaches zero at 99.6% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }
   ],
@@ -48,7 +65,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

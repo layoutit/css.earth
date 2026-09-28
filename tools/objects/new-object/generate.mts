@@ -178,7 +178,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
     : await chooseGravity({ archive, ra: row.ra, dec: row.dec, teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
   const limbLogg = gravity?.logg ?? physical.logg;
-  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'))]);
+  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);

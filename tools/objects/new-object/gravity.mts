@@ -66,7 +66,8 @@ export function choosePublished(rows: readonly { logg: number; bibcode: string; 
  * law, or null where that grid does not reach it. With `all`, the grid must reach every gravity. */
 async function lawsAcross(archive: Archive, teffK: number, loggs: readonly number[], where: string, all: boolean) {
   const lo = Math.min(...loggs), hi = Math.max(...loggs), reasons: string[] = [];
-  for (const grid of GRIDS) {
+  // The spread is measured on the plane-parallel grids, read by temperature and gravity alone.
+  for (const grid of GRIDS.filter(entry => !entry.columns.mass)) {
     const text = await archive.text(VIZIER_ASU, grid.form(`${Math.floor(teffK - 1000)}..${Math.ceil(teffK + 1000)}`, `${(lo - 0.5).toFixed(2)}..${(hi + 0.5).toFixed(2)}`));
     const rewritten = (grid.rewrite ?? []).reduce((out, { pattern, flags, replacement }) => out.replace(new RegExp(pattern, `${flags}u`), replacement), text.replace(/^#.*\n/gmu, '').replace(/^\s*\n/gmu, ''));
     const laws = loggs.map(logg => { try { return interpolateQuadraticLimbDarkening(rewritten, { law: 'quadratic', source: 'grid', path: grid.file, teffK, logg, models: grid.modelColumns, columns: grid.columns }); } catch (error) { reasons.push(`${grid.cite} at log g ${logg}: ${(error as Error).message}`); return null; } });
@@ -85,13 +86,15 @@ export async function chooseGravity({ archive, ra, dec, teffK, range, where }: {
   if (published) {
     const values = rows.filter(row => !range || (row.logg >= range.min && row.logg <= range.max)).map(row => row.logg);
     const gravities = [...new Set([...values, published.logg])], span = [Math.min(...values), Math.max(...values)] as const;
-    const laws = (await lawsAcross(archive, teffK, gravities, where, true)).map(law => profile(law!));
-    const chosen = laws[gravities.indexOf(published.logg)]!, spread = Math.max(0, ...laws.map(law => difference(law, chosen)));
+    // The spread is measured where a plane-parallel grid reaches every published value; elsewhere (a hot giant only Howarth's files
+    // reach) it is not measured, and the sentence says nothing of it.
+    const laws = await lawsAcross(archive, teffK, gravities, where, true).then(found => found.map(law => profile(law!)), () => null);
+    const spread = laws ? Math.max(0, ...laws.map(law => difference(law, laws[gravities.indexOf(published.logg)]!))) : Number.NaN;
     const pipeline = SURVEY_PIPELINES[published.bibcode];
     return { logg: published.logg, kind: 'published', source: `${published.bibcode}${published.title ? ` ("${published.title}")` : ''}${pipeline ? `, the ${pipeline} pipeline` : ''}`,
       url: `https://ui.adsabs.harvard.edu/abs/${encodeURIComponent(published.bibcode)}`, span, spread,
       sentence: `log g ${published.logg} from ${published.bibcode}${published.measurements > 1 ? `, the median of its ${published.measurements} spectra` : ''}${pipeline ? ` (${pipeline}, a survey pipeline: no analysis of this star's own spectra is published)` : ''}; ` +
-        `the ${values.length} published value${values.length === 1 ? '' : 's'} span log g ${span[0]} to ${span[1]}, across which the limb law changes by at most ${(spread * 100).toFixed(1)}% of the centre brightness` };
+        `the ${values.length} published value${values.length === 1 ? '' : 's'} span log g ${span[0]} to ${span[1]}${Number.isFinite(spread) ? `, across which the limb law changes by at most ${(spread * 100).toFixed(1)}% of the centre brightness` : ''}` };
   }
   if (!range) return null;
   // Every 0.05 dex inside the cited range, on round values.

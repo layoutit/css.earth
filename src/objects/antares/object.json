@@ -27,7 +27,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,7 +100,7 @@
     "catalog": {
       "name": "Antares",
       "classification": "star",
-      "color": "#ffc595",
+      "color": "#ffcb94",
       "distanceAu": 35019472,
       "description": "Red supergiant in Scorpius; its photosphere is not imaged here.",
       "systemName": "Scorpius",

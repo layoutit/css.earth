@@ -197,7 +197,7 @@ its validators accept); the renderer never imports the bake.
   - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
     and outputs each preparation family records); `object-provenance.ts` compiles the record from them, and
     `recover-provenance.ts` writes every scene body's record, with the facilities catalogue compilation the application passes
-    in (`tools/prepare/cli/prepare-provenance.mts`). It imports `objects/layers/terrestrial`, `objects/acquisition`,
+    in (`site/build/prepare/prepare-provenance.mts`). It imports `objects/layers/terrestrial`, `objects/acquisition`,
     `objects/sources`, `delivery` and `sources`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
     solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; the default
@@ -219,9 +219,11 @@ its validators accept); the renderer never imports the bake.
     coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
   - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
     downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
-    imports `objects/cameras`, `objects/geometry` and `objects/layers/terrestrial`. `packages/bake/cli/sphere-survey-apparitions.mts`
-    audits the shipped survey lenses; the setup and install commands stay in `tools/objects/sphere-survey/`, since setup imports
-    `tools/objects/published-comparison.mts` and install imports `tools/sources/author-source-records.mts`.
+    sets up a body's lens (`survey-setup.ts`, with the survey figure table `vernazza-2021-figures.json` read through the
+    package's name), installs it into the body's package (`survey-install.ts`) and measures a lens against its paper's comparison
+    figure (`published-comparison.ts`). It imports `objects/cameras`, `objects/geometry`, `objects/layers/terrestrial` and
+    `sources`. Its commands are `packages/bake/cli/sphere-survey-{setup,install,apparitions}.mts` and `published-comparison.mts`,
+    which resolve their checkout from their own location and pass it in; its tests are in `tests/objects/sphere-survey/`.
   - `objects/interpretation`: the observation interpreter the raster lane packs surfaces through (`createSurfaceInterpreter`
     picks each surface's decoder: solar synoptic maps, terrestrial, shape-model, stellar and static observations, the
     Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,

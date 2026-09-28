@@ -1,0 +1,43 @@
+// The object folders of a checkout read as the catalogue: the registered descriptors that opt into the navigable catalogue,
+// and the context objects the world loads without a catalogue entry. Preparation writes the application's prepared catalogue
+// (`prepare:catalog`) from these reads; the checks and reports that need the descriptors themselves read them here.
+import { readFile, readdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { hasErrorCode, isRecord } from '@cssearth/core';
+import { catalogEntry, defineObjects } from '../registry/index.js';
+import type { CatalogEntry, NavigationDistance } from '../registry/index.js';
+
+const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
+
+/** A folder alone is not a published destination. Its descriptor must opt in. `distance` places each descriptor for navigation
+ * (preparation passes `prepareSceneDistance` from `@cssearth/bake/navigation`). */
+export async function readCatalog(objectsDirectory: string, distance: (descriptor: unknown) => NavigationDistance) {
+  const entries: CatalogEntry[] = [];
+  for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
+    if (!directory.isDirectory()) continue;
+    let descriptor: unknown;
+    try { descriptor = JSON.parse(await readFile(resolve(objectsDirectory, directory.name, 'object.json'), 'utf8')); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog === undefined) continue;
+    if (descriptor.id !== directory.name) throw new TypeError(`Catalogue identity differs: ${directory.name}.`);
+    entries.push(catalogEntry(descriptor, async () => { throw new Error('Catalogue preparation cannot mount a scene.'); }, distance(descriptor)));
+  }
+  entries.sort(byOrder);
+  defineObjects(entries.map(({ order, context, ...object }) => object));
+  return entries;
+}
+
+/** Registered descriptors without a catalog entry are application context: the world loads their prepared resources directly. */
+export async function readContextObjects(objectsDirectory: string) {
+  const contexts: { id: string; type: string }[] = [];
+  for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
+    if (!directory.isDirectory()) continue;
+    let descriptor: unknown;
+    try { descriptor = JSON.parse(await readFile(resolve(objectsDirectory, directory.name, 'object.json'), 'utf8')); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog !== undefined) continue;
+    if (descriptor.id !== directory.name || typeof descriptor.type !== 'string') throw new TypeError(`Context object identity differs: ${directory.name}.`);
+    contexts.push({ id: directory.name, type: descriptor.type });
+  }
+  return contexts.sort((a, b) => a.id.localeCompare(b.id, 'en'));
+}
