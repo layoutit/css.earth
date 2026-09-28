@@ -129,6 +129,12 @@ router yields through a rendering opportunity and a task before retirement, keep
 cancellation ownership intact. This separates required teardown from camera publication; it is not a paint-readiness
 guarantee or a fixed settling delay. The incoming scene still must acknowledge its prepared activation.
 
+Pending textured faces stay in their original DOM parents with a direct inline `display: none` until their
+prepared activation batch. Each mesh parent keeps its first prepared face renderable so it connects populated;
+activation restores each remaining face's prepared display and image together. Selection changes to a withheld
+face's display update its pending value, and cancellation prevents further reveals. This paces render-layer
+creation as well as texture publication, without rebuilding the mesh or changing its sibling order.
+
 Texture activation gives the first retained face using each new image a separate rendering opportunity before
 resuming its prepared batch. This separates first-use graphics resource setup from the regular face paint burst;
 it does not assert that a frame callback proves GPU completion. The existing arrival paint gate still owns readiness.
@@ -142,4 +148,4 @@ World body owners are retained off-document until the prepared planner requests 
 
 ### Departing surfaces
 
-A scene replacement holds the source presentation as soon as its navigation request starts. Camera transforms continue, but pending texture commits and new view-driven material demand wait. The request releases its hold on cancellation, re-resolving the latest camera view; successful replacement disposes the source with its last displayed textures intact. Overlapping holds release independently.
+A scene replacement holds the source presentation as soon as its navigation request starts. Camera transforms and visibility continue on every prepared depth partition; holding their publication leaves the source mesh frozen behind the destination. Pending texture commits and new view-driven material demand wait. The request releases its hold on cancellation, re-resolving the latest camera view; successful replacement disposes the source with its last displayed textures intact. Overlapping holds release independently.
