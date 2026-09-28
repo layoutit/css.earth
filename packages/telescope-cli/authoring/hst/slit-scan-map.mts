@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Map one absorption band over a body's surface from STIS long-slit spectra scanned across its disc.
  *
- *   node tools/objects/hst/slit-scan-map.mts <scan id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
+ *   node packages/telescope-cli/authoring/hst/slit-scan-map.mts <scan id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
  *
  * A slit narrower than the body, stepped across it, samples the surface on two axes at once: the detector rows along the slit
  * are already a picture, and the steps are the other direction. Every row is a whole spectrum, so a band can be measured in each
@@ -11,7 +11,7 @@
  * Nothing about one body or one band is written here. Which frames, which reference spectrum, which continuum windows, which
  * band, which grid and which rotation model all come from a pinned scan definition in `programs/`, beside the raw JPL Horizons
  * responses that place the body; a re-run asks the network for nothing. The first one proven is Europa's irradiated sodium
- * chloride, `programs/europa-salt-map.scan.json`; [docs/hubble.md](../../../docs/hubble.md) says what it measured.
+ * chloride, `programs/europa-salt-map.scan.json`; [docs/hubble.md](../../../../docs/hubble.md) says what it measured.
  *
  * The parts that can be checked without a file are in [slit-scan-reduction.mts](slit-scan-reduction.mts). The body geometry is
  * the one every ground-based photograph uses (an IAU pole model from a text PCK through `observerCamera`), and the projection
@@ -233,7 +233,7 @@ export function scanProduct(definition: SlitScanDefinition, run: SlitScanRun): B
     CONTORD: String(definition.band.continuumOrder), ACROSSLT: definition.acrossSlitDirection,
     NVISITS: String(run.visits.length), NFRAMES: String(run.used.length), SCANID: definition.id,
     COMMONER: String(quantiles(run.referenceSigmas, [0.5])[0] ?? 0),
-    ORIGIN: 'cssEarth tools/objects/hst/slit-scan-map.mts',
+    ORIGIN: 'cssEarth packages/telescope-cli/authoring/hst/slit-scan-map.mts',
   }, [
     { name: definition.band.quantity, units: definition.band.units, values: map.depth },
     { name: `${definition.band.quantity} ERROR`, units: definition.band.units, values: map.error },

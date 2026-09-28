@@ -2,7 +2,7 @@
 /** Fit the one display number a published colour image does not print: the brightness stretch that maps a reflectance-colour
  * lens onto the publisher's own figure panel.
  *
- *   node tools/objects/circumstellar/fit-figure-stretch.mts <object id> <lens id> <figure.png> [--raw <dir>]...
+ *   node packages/telescope-cli/authoring/circumstellar/fit-figure-stretch.mts <object id> <lens id> <figure.png> [--raw <dir>]...
  *
  * The lens's recipe (circumstellar.json) names its bands, the stellar flux each is divided by and, under `stretch.fit`, the
  * figure panel: its pixel box and its scale in figure pixels per arcsecond, north up and east left. Each band's MAST mosaic
@@ -99,7 +99,7 @@ export async function fitFigureStretch(figure: string, panel: { x0: number; y0: 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), [id, lensId, figure] = args.filter((arg, i) => !arg.startsWith('--') && args[i - 1] !== '--raw');
   if (!id || !lensId || !figure) throw new TypeError('Usage: fit-figure-stretch <object id> <lens id> <figure.png> [--raw <dir>]...');
-  const repository = resolve(import.meta.dirname, '../../..'), recipe = requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', id, 'source/circumstellar.json'), 'utf8')) as unknown);
+  const repository = resolve(import.meta.dirname, '../../../..'), recipe = requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', id, 'source/circumstellar.json'), 'utf8')) as unknown);
   const lens = requireArray(recipe.lenses).map(value => requireRecord(value)).find(value => value.id === lensId);
   if (!lens) throw new Error(`${id} has no lens ${lensId}.`);
   const fitRecord = requireRecord(requireRecord(lens.stretch).fit), box = requireRecord(fitRecord.panel);

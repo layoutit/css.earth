@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Write a body's ALMA thermal maps from its record, src/objects/<id>/source/preparation/alma-thermal-maps.json.
  *
- *   node tools/objects/interferometry/author-thermal-maps.mts <object id> [--check] [--raw <dir>]...
+ *   node packages/telescope-cli/authoring/interferometry/author-thermal-maps.mts <object id> [--check] [--raw <dir>]...
  *
  * An ALMA continuum image of a resolved Solar System body is a picture of its heat: brightness temperature in every beam,
  * north up and east left. alma-disc-selfcal.mts makes that image from the raw visibilities and writes a receipt beside it.
@@ -36,7 +36,7 @@ import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observa
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 /** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */
 export const CUTOUT_ORIGIN = 'cssEarth tools/objects/interferometry/alma-disc-selfcal.mts';
 const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;

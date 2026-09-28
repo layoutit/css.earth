@@ -7,7 +7,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
 import { overlapAgreement, readReferenceSpectrum, scanPath, strongest } from './slit-scan-map.mts';
