@@ -9,7 +9,7 @@ import { readPreparedObjects } from '@cssearth/objects/node';
 import { publishShapeLighting, stageShapeLighting, validateStage } from '@cssearth/bake/refresh-shape-lighting';
 
 const projectRoot = process.cwd();
-const SCENE_OBJECTS = readPreparedObjects(projectRoot).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 
 const args = process.argv.slice(2), mode = args[0];

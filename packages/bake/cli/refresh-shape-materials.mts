@@ -12,7 +12,7 @@ import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { refreshShapeMaterialDescriptions, refreshShapeMaterials } from '@cssearth/bake/refresh-shape-materials';
 
 const projectRoot = process.cwd();
-const SCENE_OBJECTS = readPreparedObjects(projectRoot).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 
