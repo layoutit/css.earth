@@ -1,6 +1,6 @@
-/** Prepare authored objects end to end, in the only order that works, and name the step that failed.
- *
- *   node tools/prepare/cli/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images]
+/** `@cssearth/bake/prepare-object` (Node only): prepare authored objects end to end, in the only order that works, and
+ * name the step that failed. `packages/bake/cli/prepare-object.mts <object-id>... [--from <step>] [--to <step>]
+ * [--reuse-images]` is its command.
  *
  * The prepare step already redraws only the lighting and atmosphere banks when nothing else changed (prepare-authored.ts,
  * redrawOnlyDecision). --reuse-images forces that: it keeps the object's published images (and, for Earth, its pages, places
@@ -16,7 +16,6 @@
  * that takes the id list (page data, reader text, markers, provenance) once with every id, and the authored preparation, the
  * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
  * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -84,7 +83,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
   // its prepare step already pins the page data and publishes the set.
   const start = index(from, 0), end = reuseImages ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
   const steps = PREPARATION_STEPS.slice(start, end + 1), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
-  const resume = (step: PreparationStep) => `node tools/prepare/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
+  const resume = (step: PreparationStep) => `node packages/bake/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
   for (const step of steps) {
     if (step.scope === 'each') {
       const queue = ids.map((id, at) => [id, at] as const), failures: string[] = [];
@@ -118,5 +117,3 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
 
 /** One object, as before. */
 export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean } = {}) => prepareObjects([id], options);
-
-refuseDirectRun(import.meta);

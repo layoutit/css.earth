@@ -1,5 +1,6 @@
-// Entry script: node tools/prepare/cli/prepare-objects.mts [--force] [--concurrency=<n>] [--object=<id>...]. The work is in ../prepare-objects.mts.
-import { prepareObjects } from '../prepare-objects.mts';
+// Entry script: node packages/bake/cli/prepare-objects.mts [--force] [--concurrency=<n>] [--object=<id>...]. The work is
+// in @cssearth/bake/prepare-objects.
+import { prepareObjects } from '@cssearth/bake/prepare-objects';
 
 const options: { force?: boolean; concurrency?: number; objectIds?: string[] } = {};
 for (const argument of process.argv.slice(2)) {

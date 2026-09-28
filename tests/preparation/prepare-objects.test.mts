@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { runCachedPreparationObjects, tracedPreparationEnvironment } from "./prepare-objects.mts";
-import type { CachedPreparationOptions } from './prepare-objects.mts';
+import { runCachedPreparationObjects, tracedPreparationEnvironment } from "@cssearth/bake/prepare-objects";
+import type { CachedPreparationOptions } from '@cssearth/bake/prepare-objects';
 import { PREPARATION_TRACE_VARIABLE } from '@cssearth/bake/preparation';
-import { runObjectCommand } from '../cli/run-implemented-objects.mts';
-import type { PreparationCommand, PreparationOptions, PreparationReport } from '../cli/run-implemented-objects.mts';
+import { runObjectCommand } from '@cssearth/bake/run-implemented-objects';
+import type { PreparationCommand, PreparationOptions, PreparationReport } from '@cssearth/bake/run-implemented-objects';
 
 type FixtureOptions = CachedPreparationOptions & Required<Pick<PreparationOptions, 'projectRoot' | 'objectIds' | 'runCommand'>>;
 interface Fixture { root: string; options: FixtureOptions; started: string[]; events: { phase: string; id?: string; reason?: string }[]; }

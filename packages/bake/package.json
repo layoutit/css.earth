@@ -296,6 +296,21 @@
       "import": "./dist/preparation.js",
       "default": "./dist/preparation.js"
     },
+    "./run-implemented-objects": {
+      "types": "./dist/run-implemented-objects.d.ts",
+      "import": "./dist/run-implemented-objects.js",
+      "default": "./dist/run-implemented-objects.js"
+    },
+    "./prepare-objects": {
+      "types": "./dist/prepare-objects.d.ts",
+      "import": "./dist/prepare-objects.js",
+      "default": "./dist/prepare-objects.js"
+    },
+    "./prepare-object": {
+      "types": "./dist/prepare-object.d.ts",
+      "import": "./dist/prepare-object.js",
+      "default": "./dist/prepare-object.js"
+    },
     "./thread-pool": {
       "types": "./dist/thread-pool.d.ts",
       "import": "./dist/thread-pool.js",

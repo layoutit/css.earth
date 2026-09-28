@@ -336,7 +336,7 @@ from the repository root:
 ```sh
 CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm prebuild
 CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm exec astro build --mode performance
-node tools/cli/run-implemented-objects.mts assemble
+node packages/bake/cli/run-implemented-objects.mts assemble
 ```
 
 This requests renderer and hidden final source maps. Verify the actual output:

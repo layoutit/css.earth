@@ -63,6 +63,9 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'asset-publication': 'src/asset-publication/index.ts',
     'surface-previews': 'src/surface-previews/index.ts',
     'preparation': 'src/preparation/index.ts',
+    'run-implemented-objects': 'src/run-implemented-objects/index.ts',
+    'prepare-objects': 'src/prepare-objects/index.ts',
+    'prepare-object': 'src/prepare-object/index.ts',
     'thread-pool': 'src/thread-pool/index.ts' }
 
 /** Declarations come from one `tsc` pass over the sources (`tsconfig.build.json`, emitted per file under `dist/types/`),

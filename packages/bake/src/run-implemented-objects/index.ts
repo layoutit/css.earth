@@ -1,15 +1,20 @@
+// `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test, browser
+// or assemble command, and the concurrency-limited scheduler that prepares several objects with a memory budget. It
+// imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
 import { isArray } from '@cssearth/core';
 import { execFileSync, spawn } from "node:child_process";
 import { access, readdir, readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { availableParallelism, freemem, totalmem } from "node:os";
-import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
+import { dirname, resolve } from "node:path";
 
 import { readPreparedObjects } from "@cssearth/objects/node";
-import { authoredObject } from '@cssearth/bake/sources';
+import { authoredObject } from '../sources/index.ts';
 
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
 /** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
+const SCENE_OBJECTS = () => readPreparedObjects(ROOT).sceneObjects;
 
 export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>; onSpawn?: (pid: number) => void;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}
@@ -172,7 +177,7 @@ export async function runObjectCommand({ command, argumentsList, cwd, env, onSpa
 
 export async function runPreparationObjects({
   projectRoot = process.cwd(),
-  objectIds = SCENE_OBJECTS.map(({ id }) => id),
+  objectIds = SCENE_OBJECTS().map(({ id }) => id),
   concurrency = defaultPreparationConcurrency(),
   argumentsList = [],
   runCommand = runObjectCommand,
@@ -182,7 +187,7 @@ export async function runPreparationObjects({
   peakMemoryBytes = async () => 0,
   residentBytes = processResidentBytes,
 }: PreparationOptions = {}) {
-  const knownIds = new Set(SCENE_OBJECTS.map(({ id }) => id));
+  const knownIds = new Set(SCENE_OBJECTS().map(({ id }) => id));
   if (!isArray(objectIds) || objectIds.some(id => !knownIds.has(id)) ||
       new Set(objectIds).size !== objectIds.length) {
     throw new TypeError("Preparation requires unique IDs from SCENE_OBJECTS.");
@@ -300,10 +305,10 @@ function printPreparationProgress(event: PreparationEvent) {
   }
 }
 
-async function main(mode = process.argv[2]) {
+export async function main(mode = process.argv[2]) {
   if (!new Set(["acquire", "prepare", "test", "browser", "assemble"]).has(mode)) {
     throw new TypeError(
-      "Usage: node tools/cli/run-implemented-objects.mts " +
+      "Usage: node packages/bake/cli/run-implemented-objects.mts " +
       "acquire|prepare|test|browser|assemble",
     );
   }
@@ -326,7 +331,7 @@ async function main(mode = process.argv[2]) {
   // An authored body assembles through the shared operations module. Load it once and assemble in this process: a Node
   // start per body cost the deploy build about 110 ms each, four minutes over the catalogue.
   const runOperations = mode === "assemble" ? await loadOperations() : null;
-  for (const { id } of SCENE_OBJECTS) {
+  for (const { id } of SCENE_OBJECTS()) {
     if (runOperations && await authoredObject(id)) {
       await runOperations(mode, id, process.argv.slice(3)).catch((cause: unknown) => {
         throw new Error(`Implemented object ${id} failed to ${mode}.`, { cause });
@@ -358,8 +363,4 @@ function run(command: string, argumentsList: readonly string[], env?: NodeJS.Pro
       `Implemented object command failed with ${signal ?? `exit ${exitCode}`}.`,
     );
   });
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await main();
 }

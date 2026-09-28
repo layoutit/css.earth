@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bundleRendererPackage } from '@cssearth/bake/preparation';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const engineRequire = createRequire(resolve(root, 'packages/engine/package.json'));
 const output = resolve(root, '.local/preparation-tests');
 const universeOnly = process.argv.length === 3 && process.argv[2] === '--universe';
