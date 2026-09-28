@@ -1,16 +1,16 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { inventoryAssets, inventoriedObjectIds, volumeMetadataAssets } from '@cssearth/bake/delivery';
 import type { RuntimeAssetLocation } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 
-const projectRoot = resolve(import.meta.dirname, '../..');
+const projectRoot = resolve(import.meta.dirname, '../../..');
 
 export type CiInputMode = 'universe' | 'universe-preparation';
 
 export function requireCiInputMode(args: readonly string[]): CiInputMode {
   if (args.length !== 1 || (args[0] !== 'universe' && args[0] !== 'universe-preparation')) {
-    throw new TypeError('Usage: node tools/prepare/cli/prepare-ci-inputs.mts <universe|universe-preparation> (run pnpm build:tools first).');
+    throw new TypeError('Usage: node .github/scripts/ci/prepare-ci-inputs.mts <universe|universe-preparation> (run pnpm build:tools first).');
   }
   return args[0];
 }
@@ -91,4 +91,12 @@ export async function restoreCiPreparationInputs({ root = projectRoot, ...option
   return restoreSelectedCiInputs(await ciPreparationInputs(root), options);
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  // Entry script: node .github/scripts/ci/prepare-ci-inputs.mts universe|universe-preparation.
+  const mode = requireCiInputMode(process.argv.slice(2));
+  const restore = mode === 'universe' ? restoreCiUniverseInputs : restoreCiPreparationInputs;
+  const result = await restore({ onProgress: ({ completed, total }) => {
+    if (completed % 100 === 0 || completed === total) console.log(`${mode} inputs: ${completed}/${total}`);
+  } });
+  console.log(`${mode} inputs ready: ${JSON.stringify(result)}`);
+}

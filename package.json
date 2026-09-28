@@ -68,7 +68,7 @@
     "prepare:objects": "pnpm prepare:catalog && pnpm build:astronomy && node packages/bake/cli/prepare-solar-geometry.mts && pnpm build:catalog && node tools/prepare/cli/prepare-objects.mts && node site/build/prepare/prepare-feature-index.mts",
     "prepare:shell": "pnpm prepare:catalog && pnpm prepare:titles && pnpm prepare:shell-assets",
     "prepare:shell-assets": "node site/build/prepare/prepare-shell-icons.mts",
-    "prepare:typecheck": "node tools/prepare/cli/prepare-typecheck.mts",
+    "prepare:typecheck": "node .github/scripts/ci/prepare-typecheck.mts",
     "prepare:titles": "node site/build/prepare/prepare-shell-titles.mts",
     "prepare:volume": "node packages/bake/cli/prepare-volume.mts",
     "prepare:world-presentation": "node site/build/prepare/prepare-moon-labels.mts && node site/build/prepare/prepare-world-presentation.mts",
