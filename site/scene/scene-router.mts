@@ -378,6 +378,10 @@ export function createSceneRouter({
     const { navigation, selection } = ready;
     const source = scenes.current;
     try {
+      if (request.scene === 'replace') {
+        const release = source?.mount?.navigation?.holdPresentation?.();
+        if (release) request.own(release);
+      }
       if (request.subject.kind !== 'focus') {
         world.current?.previewSelection?.(request.subject.kind === 'overview' ? null : object.id);
         request.own(() => {

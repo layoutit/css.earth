@@ -134,3 +134,7 @@ Prepared space-separated RGB colors compare equal to their comma-separated CSSOM
 ### World owner attachment
 
 World body owners are retained off-document until the prepared planner requests their billboard or a caption measurement. A requested caption is attached hidden, measured on the next publication, and then admitted by the normal label policy. Orbit groups connect with their first populated strokes; catalogue moon captions attach only after passing projection, scale and occlusion checks. Once attached, these owners remain resident for reuse. Coasting never attaches or measures new owners.
+
+### Departing surfaces
+
+A scene replacement holds the source presentation as soon as its navigation request starts. Camera transforms continue, but pending texture commits and new view-driven material demand wait. The request releases its hold on cancellation, re-resolving the latest camera view; successful replacement disposes the source with its last displayed textures intact. Overlapping holds release independently.

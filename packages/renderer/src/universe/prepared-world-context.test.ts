@@ -2699,7 +2699,7 @@ test('a driven drag around Earth keeps revealing and retiring bodies', async () 
   const { layer, writes } = await orbitEarth({ coast: false });
   expect(writes.filter(write => / style\.visibility$/u.test(write)).length).toBeGreaterThan(0);
   layer.destroy();
-});
+}, 15000); // Full prepared catalogue, 90 driven views; CI runs this beside the other renderer suites.
 
  test('activation measures only captions the planner can name and caches those bounds', () => {
   const root = mount(1), layer = mounted.get(root)!;
