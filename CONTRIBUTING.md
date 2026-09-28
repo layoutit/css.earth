@@ -222,7 +222,9 @@ boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 dependencies: a `packages/*` file imports another workspace package only when
 its own `package.json` declares it, and outside tests of a package tsup builds
 only when `dependencies` ships it, since tsup inlines a `devDependencies` package
-(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. Not yet enforced:
+(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. And pre-install imports: a
+script a workflow job runs before it installs dependencies imports, with everything it reaches, only `node:`
+built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). Not yet enforced:
 unused files in library folders (untangle item K).
 
 Reference implementations live under `tests/oracles/` with their own pinned
