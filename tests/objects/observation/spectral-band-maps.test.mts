@@ -3,7 +3,6 @@ import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from '@cssearth/bake/objects/layers/observation';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
@@ -39,7 +38,7 @@ test('surface footprints paint only covered cell centres, including a footprint 
   assert.deepEqual([...seam].sort((a,b)=>a-b), [89*360,89*360+359,90*360,90*360+359]);
 });
 
-test('native planes and Organa cell spectra agree with the independent astropy fixture; maps reproduce their pins', async () => {
+test('native planes and Organa cell spectra agree with the independent astropy fixture; maps reproduce their declared products and evidence', async () => {
   const fixture = await readOracleFixture('fits/charon-leisa.json');
   await assertPinnedInputs(fixture.inputs);
   for (const input of fixture.inputs) await readOracleInput(input);
@@ -47,10 +46,9 @@ test('native planes and Organa cell spectra agree with the independent astropy f
   assert.equal(products.length, recipe.scans.length);
   const result = await prepareSpectralBandMaps(source, recipePath);
   const manifest = requireRecord(JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')));
-  const pins = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(value => requireRecord(value));
+  const entries = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(value => requireRecord(value));
   for (const [id, bytes] of Object.entries(result.products)) {
-    const pin = pins.find(p => p.path === `science/leisa/${id}.tif`);
-    assert.ok(pin); assert.ok(bytes.length > 0);
+    assert.ok(entries.some(entry => entry.path === `science/leisa/${id}.tif`)); assert.ok(bytes.length > 0);
   }
   assert.deepEqual(result.report, JSON.parse(await readFile(resolve(source, 'science/leisa/preparation.json'), 'utf8')));
   for (const product of products) {

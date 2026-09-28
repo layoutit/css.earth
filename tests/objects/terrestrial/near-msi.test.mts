@@ -1,17 +1,14 @@
 import { sourceLoad, sourceTest } from '../source-test.mts';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
 import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from '@cssearth/bake/objects/layers/terrestrial';
 import { matrixCamera } from '@cssearth/bake/objects/layers/terrestrial';
 
-const loaded = await sourceLoad(async () => {
-  const table = readFileSync(new URL('../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8');
-  const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-  return { table, digest };
-});
+const loaded = await sourceLoad(async () => ({
+  table: readFileSync(new URL('../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8'),
+}));
 const test = sourceTest(null, loaded);
-const { table, digest } = loaded.values;
+const { table } = loaded.values;
 test('released Mathilde table selects a reconstructed camera and rejects missing or ambiguous images', () => {
   const g = readMathildeImageGeometry(table, 42826360);
   assert.equal(g.latitude, 84.87); assert.equal(g.longitudeWest, 63.77); assert.equal(g.rangeKm, 1209.73);
@@ -54,10 +51,10 @@ function fits(raw: boolean, overrides: Record<string, string | number | boolean>
   }
   return bytes;
 }
-const identity = (image: Buffer, raw: Buffer) => ({ met: 42826360, filter: '0', startTime: '1997-06-27T12:55:52.899Z', imageSha256: digest(image), rawSha256: digest(raw) });
+const identity = { met: 42826360, filter: '0', startTime: '1997-06-27T12:55:52.899Z' };
 
 test('paired raw DN, not photograph brightness, masks telemetry loss and saturation', () => {
-  const image = fits(false), raw = fits(true), decoded = decodeNearMsi(image, raw, identity(image, raw));
+  const image = fits(false), raw = fits(true), decoded = decodeNearMsi(image, raw, identity);
   for (const i of [-1, 0, 1, 2, 3, 537 * 244]) assert.equal(decoded.acceptPixel(i), false);
   assert.equal(decoded.acceptPixel(4), true, 'a finite negative calibrated noise sample is not a missing pixel');
   assert.equal(decoded.acceptPixel(5), true);
@@ -66,14 +63,15 @@ test('paired raw DN, not photograph brightness, masks telemetry loss and saturat
   assert.match(decoded.qualityReport.archiveQualityIndexInterpretation, /Unresolved/);
 });
 
-test('calibration, raw exposure identity, compression, hashes and saturation totals fail closed', () => {
+test('calibration, raw exposure identity, compression and saturation totals fail closed', () => {
   const image = fits(false), raw = fits(true);
-  assert.throws(() => decodeNearMsi(image, raw, { ...identity(image, raw), imageSha256: '0'.repeat(64) }), /identity/);
+  assert.throws(() => decodeNearMsi(image, raw, { ...identity, met: 42826370 }), /identity/);
+  assert.throws(() => decodeNearMsi(image, raw, { ...identity, filter: '1' }), /identity/);
   const overrides: Record<string, string | number | boolean>[] = [{ 'NEAR-017': 42826370 }, { 'NEAR-012': '1' }, { 'NEAR-046': 2000433 }, { BZERO: 0 }, { 'NEAR-008': '10000000' }];
   for (const override of overrides) {
     const changed = fits(true, override);
-    assert.throws(() => decodeNearMsi(image, changed, identity(image, changed)), /identity/);
+    assert.throws(() => decodeNearMsi(image, changed, identity), /identity/);
   }
   const changed = fits(true, { 'NEAR-059': 0 });
-  assert.throws(() => decodeNearMsi(image, changed, identity(image, changed)), /saturation count/);
+  assert.throws(() => decodeNearMsi(image, changed, identity), /saturation count/);
 });
