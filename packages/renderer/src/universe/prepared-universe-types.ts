@@ -32,6 +32,9 @@ export interface PreparedUniverseOptions {
   lensVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
+  /** Published stellar extents, radius in metres by object id: each such galaxy is ringed at it, with its
+   * caption under the ring. Objects without one keep their ordinary marker. */
+  stellarExtents?: Readonly<Record<string, number>>;
   imageLayers?: readonly PreparedImageLayerBank[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
   imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];

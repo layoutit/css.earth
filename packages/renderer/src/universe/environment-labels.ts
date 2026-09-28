@@ -11,9 +11,12 @@ import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { PreparedSurfaceShellStats } from '../shell/prepared-shell-runtime.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import type { PreparedCssVolume } from '../volume/types.js';
+import { createVolumeRing, placeVolumeRing, projectVolumeRing } from './volume-ring.js';
 
 const LABEL_GAP_PX = 8;
 const LABEL_FADE_MS = 200;
+/** The catalogue's marker strength, so the galaxy's ring matches the rings of the galaxies around it. */
+const RING_OPACITY = .45;
 
 export interface EnvironmentLabelPublication {
   readonly labelBudget?: import('../labels/universe-label-policy.js').LabelBudget;
@@ -35,7 +38,7 @@ export interface EnvironmentLabelsRuntime {
 }
 
 /** Retained captions for prepared environment geometry; this does not own a scene or navigation. */
-export function mountEnvironmentLabels({ host, before, volume, shells, names = {}, links = {}, pickingHost = host, opacityClock }: {
+export function mountEnvironmentLabels({ host, before, volume, shells, names = {}, links = {}, pickingHost = host, opacityClock, ringRadiusM }: {
   readonly host: HTMLElement;
   readonly before: Element;
   readonly volume: PreparedCssVolume;
@@ -44,6 +47,8 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
   readonly pickingHost?: HTMLElement;
   readonly links?: Readonly<Record<string, string>>;
   readonly names?: Readonly<Record<string, string>>;
+  /** The volume's published stellar extent: a ring there, with the caption under it. */
+  readonly ringRadiusM?: number;
 }): EnvironmentLabelsRuntime {
   if (!host?.ownerDocument || before?.parentNode !== host) throw new TypeError('Environment labels need a host and child insertion point.');
   const document = host.ownerDocument, root = document.createElement('div');
@@ -56,10 +61,15 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
   const shellEntries = shellList.map(shell => createEntry(document, 'shell', shell.id, authoredName(names[shell.id]) ?? humanizeId(shell.id), shell.frame));
   const volumeEntry = createEntry(document, 'volume', volume.id, authoredName(names[volume.id]) ?? humanizeId(volume.id), volume.frame, links[volume.id]);
   const entries = [...shellEntries, volumeEntry];
+  if (ringRadiusM !== undefined && !(ringRadiusM > 0 && Number.isFinite(ringRadiusM))) throw new TypeError(`${volume.id}: stellar extent must be a positive radius in metres, got ${ringRadiusM}.`);
+  const ring = ringRadiusM === undefined ? null : createVolumeRing(document, volume.id);
+  const ringRadiusUnits = ringRadiusM === undefined ? 0 : ringRadiusM / volume.frame.metersPerUnit;
+  if (ring) root.appendChild(ring);
   for (const entry of entries) root.appendChild(entry.element);
   host.insertBefore(root, before);
   let destroyed = false, accepted: readonly LabelScreenRect[] = Object.freeze([]);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
+  const ringFader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock, { hideAtZero: true });
   // Captions are measured when first shown, not at mount: reading their size
   // then forced a layout of the whole starting page for labels drawn far out.
   const measure = () => { for (const entry of entries) entry.measured = false; };
@@ -76,7 +86,7 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
           !publication.viewport.principalOffsetPixels.every(Number.isFinite)) throw new TypeError('Environment label viewport is invalid.');
       const width = publication.viewport.widthPixels ?? host.clientWidth;
       const height = publication.viewport.heightPixels ?? host.clientHeight;
-      if (!(width > 0) || !(height > 0)) { accepted = hideAll(entries, fader); return accepted; }
+      if (!(width > 0) || !(height > 0)) { if (ring) ringFader.set(ring, 0); accepted = hideAll(entries, fader); return accepted; }
       if (publication.shellStats.length !== shellList.length) throw new TypeError('Environment label shell statistics must align with prepared shells.');
       const blockers = publication.blockerRects ?? [], next: LabelScreenRect[] = [];
       for (let index = 0; index < shellList.length; index++) {
@@ -87,8 +97,14 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
       const radius = frameRadius(volume.frame);
       const local = presentPhysicalPoseInVolume(publication.world.pose, volume.frame);
       const distance = Math.hypot(...local.positionUnits);
-      const volumeOpacity = smoothstep(radius, 2 * radius, distance);
-      admit(volumeEntry, volumeOpacity * (publication.volumeLabelOpacity ?? 1), publication, width, height, [...blockers, ...next], next, fader);
+      const volumeOpacity = smoothstep(radius, 2 * radius, distance) * (publication.volumeLabelOpacity ?? 1);
+      // With a published extent the caption hangs under its ring; inside that ring, where no ring encloses the galaxy,
+      // the caption hides with it.
+      const projection = ring && volumeOpacity > 0 ? projectVolumeRing(publication.world, publication.viewport, volume.frame, ringRadiusUnits) : null;
+      if (ring && projection) placeVolumeRing(ring, projection);
+      const shown = admit(volumeEntry, ring && !projection ? 0 : volumeOpacity, publication, width, height, [...blockers, ...next], next, fader,
+        projection ? [projection.x, projection.y + projection.radiusPixels] : undefined);
+      if (ring) ringFader.set(ring, shown ? Math.min(1, volumeOpacity) * RING_OPACITY : 0, LABEL_FADE_MS);
       picking.publish(root, entries.flatMap(entry => entry.element.dataset.environmentNavigate && entry.pickRect && entry.targetOpacity > .1
         ? [{element:entry.element, rank:-2, shape:{kind:'rect' as const,...entry.pickRect}}] : []));
       accepted = Object.freeze(next);
@@ -106,7 +122,7 @@ export function mountEnvironmentLabels({ host, before, volume, shells, names = {
       if (destroyed) return;
       destroyed = true; accepted = Object.freeze([]); fonts?.removeEventListener('loadingdone', measure);
       for (const entry of entries) if (entry.hideTimer !== null) clearTimeout(entry.hideTimer);
-      picking.remove(root); fader.destroy(); root.remove();
+      picking.remove(root); fader.destroy(); ringFader.destroy(); root.remove();
     },
   });
 }
@@ -127,22 +143,26 @@ function createEntry(document: Document, kind: Entry['kind'], id: string, name: 
   return { kind, id, element, frame, pickRect: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null };
 }
 
+/** Place and fade one caption; true when it shows. A volume caption given an anchor hangs from it (the bottom of its
+ * ring) instead of from its projected frame. */
 function admit(entry: Entry, opacity: number, publication: EnvironmentLabelPublication, width: number, height: number,
-  blockers: readonly LabelScreenRect[], accepted: LabelScreenRect[], fader: ReturnType<typeof createOpacityFader>): void {
-  const point = projectAnchor(entry, publication.world, publication.viewport, height);
-  if (!point) { hideNow(entry, fader); return; }
-  if (!(opacity > 0)) { fadeTo(entry, 0, fader); return; }
+  blockers: readonly LabelScreenRect[], accepted: LabelScreenRect[], fader: ReturnType<typeof createOpacityFader>,
+  anchor?: readonly [number, number]): boolean {
+  const point = anchor ?? projectAnchor(entry, publication.world, publication.viewport, height);
+  if (!point) { hideNow(entry, fader); return false; }
+  if (!(opacity > 0)) { fadeTo(entry, 0, fader); return false; }
   if (!entry.measured) { entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; entry.measured = true; }
   const [x, y] = point, bottom = entry.kind === 'volume' ? y + LABEL_GAP_PX + entry.height : y - LABEL_GAP_PX;
   const rect: LabelScreenRect = { left: x - entry.width / 2, right: x + entry.width / 2, top: bottom - entry.height, bottom };
   entry.element.style.transform = `translate(${format(x)}px,${format(bottom)}px) translate(-50%,-100%)`;
   if (rect.left < -width / 2 || rect.right > width / 2 || rect.top < -height / 2 || rect.bottom > height / 2 ||
-      !(opacity > 0)) { fadeTo(entry, 0, fader); return; }
-  if (blockers.some(blocker => labelRectsOverlap(rect, blocker))) { fadeTo(entry, 0, fader); return; }
-  if (publication.labelBudget && !publication.labelBudget.admit(rect)) { fadeTo(entry, 0, fader); return; }
+      !(opacity > 0)) { fadeTo(entry, 0, fader); return false; }
+  if (blockers.some(blocker => labelRectsOverlap(rect, blocker))) { fadeTo(entry, 0, fader); return false; }
+  if (publication.labelBudget && !publication.labelBudget.admit(rect)) { fadeTo(entry, 0, fader); return false; }
   fadeTo(entry, Math.min(1, opacity) * DEFAULT_CONTEXT_LABEL_OPACITY, fader);
   entry.pickRect = rect;
   accepted.push(Object.freeze(rect));
+  return true;
 }
 
 function projectAnchor(entry: Entry, world: WorldCameraPose, viewport: WorldCameraViewport, viewportHeight: number): readonly [number, number] | null {

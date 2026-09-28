@@ -3525,6 +3525,20 @@
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
       }
+    },
+    {
+      "id": "document-407",
+      "path": "src/objects/smc/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nidever-2011-smc-periphery",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/1104.2594"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []

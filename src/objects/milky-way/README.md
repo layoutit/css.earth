@@ -75,6 +75,13 @@ are converted to the shared Sun-centred ICRF frame, with two corrections:
 [`volume.test.ts`](../../../packages/bake/src/density/volume.test.ts) checks
 both against the asset and the Sgr A* package.
 
+The universe rings the galaxy at its [stellar extent](source/stellar-extent.json),
+26 kpc from the centre: López-Corredoira et al. (2018, A&A 612, L8;
+[arXiv:1804.03064](https://arxiv.org/abs/1804.03064)) detect disc stars beyond
+that radius at 99.7% confidence. The ring encloses every Milky Way star the app
+places (the farthest is 20.9 kpc from Sgr A*) and marks where stars are still
+measured, not a boundary; the caption hangs under it.
+
 Only the bulge and inner disc are drawn. The display keeps full volumetric
 support inside 1.5 model units (2.9 kpc) and smoothly reduces it to zero at
 3.5 units (6.8 kpc). These radii are presentation choices, not measured bulge
@@ -220,7 +227,9 @@ camera metadata uses the volume's Sun-centered ICRF frame and epoch.
 Two [browser captures](evidence/2026-09-28/capture.json) of this version show the
 galaxy as its bulge slices only: 603 slice elements, no disc image and no impostor
 view. From the [Milky Way overview](evidence/2026-09-28/bulge-overview.jpg) the
-bulge surrounds the Sagittarius A* circle. From 39,183 light-years above the
+bulge surrounds the Sagittarius A* circle, and the galaxy's 26 kpc ring (573 px)
+encloses it and its stars, with the LMC and SMC rings at their own published
+extents. From 39,183 light-years above the
 [Sun's neighbourhood](evidence/2026-09-28/near-sun.jpg) the inner disc fades out
 before the Sun. On css.earth before this change the same camera showed a 344 px
 face-on impostor picture of the whole galaxy beside the Sun, although the camera
