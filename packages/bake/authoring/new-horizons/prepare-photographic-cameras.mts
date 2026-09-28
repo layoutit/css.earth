@@ -3,7 +3,7 @@ import { cross3 as cross, array, boolean, number, optional, shape, text, dotN as
  * Bounded New Horizons LORRI pointing registration for a fixed PCK body frame
  * and fixed released STL.  This is deliberately not a pose or shape solver.
  *
- * Usage: node --experimental-strip-types tools/objects/new-horizons/prepare-photographic-cameras.mts \
+ * Usage: node --experimental-strip-types packages/bake/authoring/new-horizons/prepare-photographic-cameras.mts \
  *   src/objects/nix/source/preparation/photography.json
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -259,9 +259,9 @@ async function prepare(recipeFile: string) {
   const output = evidencePath(source, recipe.outputEvidencePath);
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, JSON.stringify({ schema: 'cssearth-nh-lorri-registration-evidence@1', bodyId: recipe.bodyId,
-    generator: { path: 'tools/objects/new-horizons/prepare-photographic-cameras.mts' },
+    generator: { path: 'packages/bake/authoring/new-horizons/prepare-photographic-cameras.mts' },
     helpers: await Promise.all(['compare-photographic-interiors.mts', 'render-interior-comparison.mts'].map(async name => ({
-      path: `tools/objects/new-horizons/${name}`,
+      path: `packages/bake/authoring/new-horizons/${name}`,
     }))),
     recipe: { path: relative(source, recipeFile) }, mesh: recipe.mesh, frames: evidence }, null, 2) + '\n');
 }

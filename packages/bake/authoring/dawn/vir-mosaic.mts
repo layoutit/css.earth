@@ -2,10 +2,10 @@
 import { projectReducedFile, pixelStepKm, boxMean } from './vir-projection.mts';
 /** Band-parameter maps from Dawn VIR IR calibrated cubes, reduced here from the archive.
  *
- *   node tools/objects/dawn/vir-mosaic.mts reduce <recipe.json> --work <directory> [--parallel <n>] [--limit <n>] [--only <product,...>]
- *   node tools/objects/dawn/vir-mosaic.mts stripes <recipe.json> --work <directory>
- *   node tools/objects/dawn/vir-mosaic.mts phase <recipe.json> --work <directory>
- *   node tools/objects/dawn/vir-mosaic.mts mosaic <recipe.json> --work <directory>
+ *   node packages/bake/authoring/dawn/vir-mosaic.mts reduce <recipe.json> --work <directory> [--parallel <n>] [--limit <n>] [--only <product,...>]
+ *   node packages/bake/authoring/dawn/vir-mosaic.mts stripes <recipe.json> --work <directory>
+ *   node packages/bake/authoring/dawn/vir-mosaic.mts phase <recipe.json> --work <directory>
+ *   node packages/bake/authoring/dawn/vir-mosaic.mts mosaic <recipe.json> --work <directory>
  *
  * `reduce` streams each cube the recipe selects from the PDS volume indexes (spectral cube, wavelength cube, per-line
  * housekeeping table), derives each line's camera from the Dawn kernels (the spacecraft CK and the VIR scan-mirror CK),
@@ -413,7 +413,7 @@ async function writeMap(root: string, recipe: VirRecipe, parameter: BandParamete
   const r = recipe.target.referenceRadiusKm;
   const label = ['PDS_VERSION_ID = PDS3', 'RECORD_TYPE = FIXED_LENGTH', `RECORD_BYTES = ${width * 4}`, `FILE_RECORDS = ${height}`, `^IMAGE = "${parameter.image.split('/').pop()}"`,
     `DATA_SET_ID = "${recipe.output.dataSetId}"`, `PRODUCT_ID = "${parameter.productId}"`, `TARGET_NAME = "${recipe.target.name}"`,
-    `NOTE = "Band depth ${parameter.id} from Dawn VIR IR calibrated cubes, mean of overlapping pixels. Written by tools/objects/dawn/vir-mosaic.mts."`,
+    `NOTE = "Band depth ${parameter.id} from Dawn VIR IR calibrated cubes, mean of overlapping pixels. Written by packages/bake/authoring/dawn/vir-mosaic.mts."`,
     'OBJECT = IMAGE', `  LINES = ${height}`, `  LINE_SAMPLES = ${width}`, '  SAMPLE_TYPE = PC_REAL', '  SAMPLE_BITS = 32', '  SCALING_FACTOR = 1', '  OFFSET = 0', `  MISSING_CONSTANT = ${missing.toExponential()}`, 'END_OBJECT = IMAGE',
     'OBJECT = IMAGE_MAP_PROJECTION', '  MAP_PROJECTION_TYPE = "EQUIRECTANGULAR"', '  COORDINATE_SYSTEM_NAME = "PLANETOCENTRIC"', '  COORDINATE_SYSTEM_TYPE = "BODY-FIXED ROTATING"',
     '  POSITIVE_LONGITUDE_DIRECTION = "EAST"', `  A_AXIS_RADIUS = ${r} <KM>`, `  B_AXIS_RADIUS = ${r} <KM>`, `  C_AXIS_RADIUS = ${r} <KM>`,
@@ -427,7 +427,7 @@ async function writeMap(root: string, recipe: VirRecipe, parameter: BandParamete
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
   const args = process.argv.slice(2), [command, recipePath] = positionalArguments(args, ['--work', '--limit', '--only', '--parallel']), work = flagValue(args, '--work');
-  if (!command || !recipePath || !work) throw new Error('Usage: node tools/objects/dawn/vir-mosaic.mts <reduce|stripes|mosaic> <recipe.json> --work <directory>');
+  if (!command || !recipePath || !work) throw new Error('Usage: node packages/bake/authoring/dawn/vir-mosaic.mts <reduce|stripes|mosaic> <recipe.json> --work <directory>');
   const recipe = parseRecipe(JSON.parse(await readFile(recipePath, 'utf8'))), root = dirname(resolve(recipePath));
   if (command === 'reduce') await reduce(recipe, resolve(work), { limit: flagValue(args, '--limit') === undefined ? undefined : Number(flagValue(args, '--limit')), only: flagValue(args, '--only')?.split(','), parallel: Number(flagValue(args, '--parallel') ?? 1) });
   else if (command === 'stripes') await stripes(recipe, resolve(work));

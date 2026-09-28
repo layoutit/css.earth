@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { kernelBankRoot } from '@cssearth/spice/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
@@ -140,7 +140,7 @@ test('the ledger page is the ledger, and its states are what the programs, recei
 });
 
 test('the guide prints the receipt\'s numbers', async () => {
-  const guide = await readFile(resolve(import.meta.dirname, '../../../docs/junocam.md'), 'utf8'), receipt = JSON.parse(await readFile(resolve(PROGRAMS, 'europa-pj45.registration.json'), 'utf8'));
+  const guide = await readFile(resolve(import.meta.dirname, '../../../../docs/junocam.md'), 'utf8'), receipt = JSON.parse(await readFile(resolve(PROGRAMS, 'europa-pj45.registration.json'), 'utf8'));
   for (const image of receipt.images) {
     const row = guide.split('\n').find(line => line.startsWith(`| \`${image.productId}\``));
     assert.ok(row, `${image.productId} is in the guide's table`);

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { bandDepth } from './vir-projection.mts';
 import { parseRecipe } from './vir-mosaic.mts';
 const test = sourceTest();
@@ -19,7 +19,7 @@ test('band depth is 1 - Rb/Rc at the band minimum under the line joining the two
 });
 
 test('the Ceres ammonium recipe parses: Survey and HAMO primary, LAMO then Approach as gap fill', async () => {
-  const recipe = parseRecipe(JSON.parse(await readFile(resolve(import.meta.dirname, '../../../src/objects/ceres/source/science/vir-reduction/recipe.json'), 'utf8')));
+  const recipe = parseRecipe(JSON.parse(await readFile(resolve(import.meta.dirname, '../../../../src/objects/ceres/source/science/vir-reduction/recipe.json'), 'utf8')));
   assert.deepEqual(recipe.phases.map(phase => [phase.volume, phase.role, phase.cubes.length]), [['DWNCHVIR_I1B', 'primary', 477], ['DWNCSVIR_I1B', 'primary', 195], ['DWNCLVIR_I1B', 'fill', 875], ['DWNCAVIR_I1B', 'fill', 110]]);
   assert.deepEqual(recipe.parameters.map(parameter => parameter.continuum), [{ left: [2.91, 3.01], right: [3.19, 3.24] }]);
   assert.equal(recipe.policy.maximumIncidenceDegrees, 70);

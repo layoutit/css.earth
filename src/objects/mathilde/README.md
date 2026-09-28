@@ -126,12 +126,12 @@ an inference, checked by native image projection and the withheld limb residuals
 above. FITS pixels stay in file order; display flips affect only a complete
 diagnostic image and its overlay together.
 
-`node tools/objects/near-msi/prepare-cameras.mts` reproduces the camera inputs.
+`node packages/bake/authoring/near-msi/prepare-cameras.mts` reproduces the camera inputs.
 It uses the shared PDS4 label reader for the native filename and acquisition time.
 The lens follows the common surface-observation recipe with `display.percentiles`;
 the format requires raw companions and camera refinement, retains the photograph's
 illumination and rejects compressed frames in its decoder.
-`node tools/objects/near-msi/capture-registration.mts` reproduces the source
+`node packages/bake/authoring/near-msi/capture-registration.mts` reproduces the source
 projection after preparation; the browser capture is
 `node tests/objects/browser/asteroid-photographic-coverage.mts mathilde after`.
 The shared `near-msi-camera` adapter binds them to the native Stooke mesh, refines

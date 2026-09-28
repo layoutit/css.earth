@@ -43,6 +43,7 @@ async function discover(directory: string, suffix: string): Promise<string[]> {
 const entries = universeOnly ? universeEntries : [...new Set([
   'packages/bake/src/scene/scene.test.ts', ...universeEntries,
   ...await discover('tools/objects', '.test.ts'), ...await discover('tests/objects', '.test.ts'),
+  ...await discover('packages/bake/authoring', '.test.ts'),
 ])];
 await mkdir(output, { recursive: true });
 const compiled: string[] = [];
@@ -64,7 +65,7 @@ function run(args: string[]) {
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
-const native = universeOnly ? [] : [...await discover('tools/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mjs'), ...await discover('tools/objects', '.test.mts'), ...await discover('tests/objects', '.test.mts')];
+const native = universeOnly ? [] : [...await discover('tools/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mjs'), ...await discover('tools/objects', '.test.mts'), ...await discover('tests/objects', '.test.mts'), ...await discover('packages/bake/authoring', '.test.mjs'), ...await discover('packages/bake/authoring', '.test.mts')];
 // Individual suites decode large pinned imagery/terrain. Keep file-level work
 // bounded as the registry grows; this does not omit any preparation cases.
 run(['--test', '--test-concurrency=1', ...compiled, ...native]);

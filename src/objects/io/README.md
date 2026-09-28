@@ -144,7 +144,7 @@ for distant images need separate qualification before admitting those pixels.
 The previous four-visit integrated-output comparison below does not validate
 these added observations.
 
-Reproduce with `node tools/objects/juno/jiram-registered-mosaic.mts src/objects/io/source/science/jiram/perry-recipe.json --inputs output/io-perry/inputs --fetch`.
+Reproduce with `node packages/bake/authoring/juno/jiram-registered-mosaic.mts src/objects/io/source/science/jiram/perry-recipe.json --inputs output/io-perry/inputs --fetch`.
 The fetch route requires curl and 7z, requests only the nested FITS members of
 the release ZIP and checks their CRCs. A PJ43 archive restoration reproduced
 the independently acquired FITS bytes. The float map is restored through the
@@ -232,7 +232,7 @@ their sparse partial-disc fits are not promoted by relaxing the registration
 policy. The investigated archive has no volumes 59 or 60. The ledger records
 these limits and the other indexed visits not reduced in this change.
 
-Reproduce with `node tools/objects/juno/jiram-mosaic.mts src/objects/io/source/science/jiram/recipe.json --frames output/jiram/frames --fetch`.
+Reproduce with `node packages/bake/authoring/juno/jiram-mosaic.mts src/objects/io/source/science/jiram/recipe.json --frames output/jiram/frames --fetch`.
 The larger generated float map is restored from the source cache; Git retains
 its recipe, label and measured receipt.
 

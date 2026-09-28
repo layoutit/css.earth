@@ -60,7 +60,7 @@ test('PDS times use exact exposures, including day-of-year rollover', () => {
 });
 
 test('registered recipes reject relaxed frame counts and unsupported grid sizes', async () => {
-  const raw = JSON.parse(await readFile(new URL('../../../src/objects/io/source/science/jiram/perry-recipe.json', import.meta.url), 'utf8'));
+  const raw = JSON.parse(await readFile(new URL('../../../../src/objects/io/source/science/jiram/perry-recipe.json', import.meta.url), 'utf8'));
   assert.equal(parseRegisteredRecipe(raw).output.pixelsPerDegree, 4);
   assert.throws(() => parseRegisteredRecipe({ ...raw, policy: { ...raw.policy, minimumFramesPerVisit: 1 } }), /policy/u);
   assert.throws(() => parseRegisteredRecipe({ ...raw, output: { ...raw.output, pixelsPerDegree: 90 } }), /policy/u);

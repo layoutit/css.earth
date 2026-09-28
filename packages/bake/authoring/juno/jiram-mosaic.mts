@@ -2,7 +2,7 @@
 /** A one-side map of one body in one JIRAM imager band from Juno JIRAM frames: Io's night-side 4.8 µm (M-band) thermal
  * emission is the first recipe.
  *
- *   node tools/objects/juno/jiram-mosaic.mts <recipe.json> --frames <directory> [--fetch] [--previews <directory>]
+ *   node packages/bake/authoring/juno/jiram-mosaic.mts <recipe.json> --frames <directory> [--fetch] [--previews <directory>]
  *
  * Frames are read from `--frames` (an ignored scratch directory such as output/jiram/frames); `--fetch` downloads any
  * missing frame and label from the archive the recipe names and validates their product identity and layout.
@@ -451,7 +451,7 @@ export async function runMosaic(recipePath: string, framesDirectory: string, fet
 export async function writeMap(root: string, recipe: Pick<JiramRecipe, 'output' | 'side' | 'background'> & {
   target: Pick<JiramRecipe['target'], 'name' | 'referenceRadiusKm'>; band: Pick<JiramRecipe['band'], 'name' | 'unit'>;
   visits: readonly { frames: readonly unknown[] }[];
-}, map: Float32Array, producer = 'tools/objects/juno/jiram-mosaic.mts') {
+}, map: Float32Array, producer = 'packages/bake/authoring/juno/jiram-mosaic.mts') {
   const ppd = recipe.output.pixelsPerDegree, width = 360 * ppd, height = 180 * ppd, missing = -1e32, bytes = Buffer.alloc(width * height * 4);
   for (let i = 0; i < map.length; i++) bytes.writeFloatLE(Number.isFinite(map[i]) ? map[i] : missing, i * 4);
   const name = recipe.output.image.split('/').pop()!;
@@ -498,7 +498,7 @@ async function writePreviews(directory: string, frames: FrameResult[], radii: re
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
   const args = process.argv.slice(2), [recipe] = positionalArguments(args, ['--previews', '--frames']), frames = flagValue(args, '--frames');
-  if (!recipe || !frames) throw new Error('Usage: node tools/objects/juno/jiram-mosaic.mts <recipe.json> --frames <directory> [--fetch] [--previews <directory>]');
+  if (!recipe || !frames) throw new Error('Usage: node packages/bake/authoring/juno/jiram-mosaic.mts <recipe.json> --frames <directory> [--fetch] [--previews <directory>]');
   const preview = flagValue(args, '--previews');
   const receipt = await runMosaic(resolve(recipe), resolve(frames), args.includes('--fetch'), preview === undefined ? undefined : resolve(preview));
   console.log(JSON.stringify({ coverage: receipt.coverage, visits: receipt.visits }, null, 2));
