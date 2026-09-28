@@ -8,7 +8,7 @@ const root = new URL('../../', import.meta.url);
 const json = async (path: string) => JSON.parse(await readFile(new URL(path, root), 'utf8')) as Record<string, unknown>;
 
 test('each ringed galaxy carries a published stellar extent bound to a catalogued paper', async () => {
-  assert.deepEqual(Object.keys(STELLAR_EXTENTS).sort(), ['lmc', 'milky-way', 'smc']);
+  assert.deepEqual(Object.keys(STELLAR_EXTENTS).sort(), ['lmc', 'm31', 'm33', 'milky-way', 'smc']);
   for (const [id, radiusM] of Object.entries(STELLAR_EXTENTS)) {
     const record = await json(`src/objects/${id}/source/stellar-extent.json`);
     assert.equal(record.schema, 'cssearth-stellar-extent@1'); assert.equal(record.objectId, id);

@@ -74,6 +74,20 @@
       "credit": "cssEarth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/m33/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mcconnachie-2010-m33-substructure",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/1009.2804"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []

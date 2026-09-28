@@ -8,6 +8,7 @@ A publisher optical image supplies the color of an authored 1 kpc depth envelope
 | --- | --- |
 | [Wide-field view of the Andromeda Galaxy](https://esahubble.org/images/heic1112f/) | `heic1112f`; 4783 × 5000 pixels; High-resolution crop/resample derived offline from the publisher Large JPEG. |
 | Geometry reference | Chemin, Carignan & Foster 2009, arXiv:0909.3846. Adopted parameters remain in the [recipe](source/recipe.json); exact source-field qualification is unresolved. |
+| [Ibata et al. (2005)](https://arxiv.org/abs/astro-ph/0504164) | [Stellar extent](source/stellar-extent.json): an extended disc-like structure of M31 stars spanning out to about 40 kpc (scattered detections to 70 kpc). The universe rings M31 at 40 kpc; it marks where stars are still measured, not a boundary. |
 
 The image is publisher-prepared display RGB, not common calibrated flux or a qualified natural-color measurement. Observation dates are not retained in the selected records. The 361.93 × 234.08 arcmin field describes the parent image, not the 4783 × 5000 crop; crop coordinates and conversion are retained in the acquisition record.
 
