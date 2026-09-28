@@ -1,10 +1,11 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { gzipSync, gunzipSync } from 'node:zlib';
-import catalogue from '../../site/source/moon-catalogues.json' with { type: 'json' };
-import world from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { hasProperMoonName, prepareBodyMoons } from '../../site/prepare-body-moons.mts';
+import catalogue from '../../source/moon-catalogues.json' with { type: 'json' };
+import world from '../../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
+import { hasProperMoonName, prepareBodyMoons } from '../../prepare-body-moons.mts';
 import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 
 
@@ -94,4 +95,6 @@ export async function prepareMoonLabels({ refresh = false }: { refresh?: boolean
   console.log(`${moons.filter(moon => moon.positionM).length} positioned labels; ${moons.filter(moon => !moon.positionM).length} without positions.`);
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  await prepareMoonLabels({ refresh: process.argv.includes('--refresh') });
+}

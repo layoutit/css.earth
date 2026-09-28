@@ -5,11 +5,11 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
-import { objectPageStyles } from '../../site/object-page-contract.mts';
+import { objectPageStyles } from '../../object-page-contract.mts';
 import { repinObjectJson } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 /** Refresh only fill metadata, reading existing local images. No surface,
  * texture, lighting, geometry, motion, facing or depth bank is rebuilt. */

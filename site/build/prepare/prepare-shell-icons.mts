@@ -1,9 +1,9 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
-import { SHELL_ICON_SOURCES } from "../../site/source/icons/manifest.mts";
+import { SHELL_ICON_SOURCES } from "../../source/icons/manifest.mts";
 
 const SAFE_SOURCE_FILE = /^symbol-[a-z0-9-]+\.svg$/u;
 const SAFE_OUTPUT_FILE = /^icon-[a-z0-9-]+\.svg$/u;
@@ -11,9 +11,9 @@ const SAFE_KEY = /^[a-z][A-Za-z0-9]*$/u;
 const SVG_ROOT = /<svg\b[^>]*\bwidth="([0-9.]+)"[^>]*\bheight="([0-9.]+)"[^>]*\bviewBox="0 0 ([0-9.]+) ([0-9.]+)"[^>]*>/u;
 
 export async function prepareShellIcons({
-  sourceRoot = resolve(import.meta.dirname, "../../site/source/icons"),
-  publicRoot = resolve(import.meta.dirname, "../../public/shell"),
-  moduleOutput = resolve(import.meta.dirname, "../../site/prepared-shell-icons.mjs"),
+  sourceRoot = resolve(import.meta.dirname, "../../source/icons"),
+  publicRoot = resolve(import.meta.dirname, "../../../public/shell"),
+  moduleOutput = resolve(import.meta.dirname, "../../prepared-shell-icons.mjs"),
 } = {}) {
   validateManifest();
   await mkdir(publicRoot, { recursive: true });
@@ -43,7 +43,7 @@ export async function prepareShellIcons({
       licenseUrl: descriptor.licenseUrl,
       attribution: descriptor.author,
       adaptation: `Wikimedia Commons ${descriptor.glyph} symbol normalized to a 20px outer SVG box.`,
-      generator: "tools/prepare/prepare-shell-icons.mts",
+      generator: "site/build/prepare/prepare-shell-icons.mts",
     });
   }
   const moduleSource = [
@@ -88,4 +88,6 @@ function validateManifest() {
   }
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  await prepareShellIcons();
+}

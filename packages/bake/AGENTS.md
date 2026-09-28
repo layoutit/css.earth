@@ -2,7 +2,7 @@
 
 Own the build-time preparation code: what the preparation tools and the nebula lab run to turn source records into
 prepared delivery. Nothing here runs in the application. The runtime (`@cssearth/renderer` and
-`site/**`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
+`site/**`, apart from its build-time `site/build/`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
 
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no

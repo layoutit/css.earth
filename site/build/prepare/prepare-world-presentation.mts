@@ -1,21 +1,21 @@
-/** `node tools/prepare/cli/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
+import { pathToFileURL } from 'node:url';
+/** `node site/build/prepare/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
  * sources so the browser reads one small file instead of source tables and recipes: which moons are major, which orbits
  * the default view hides, which objects are default features, and the galaxy and cluster fade distances. */
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import majorMoons from '../../site/source/major-moons.json' with { type: 'json' };
-import galaxies from '../../src/objects/local-group/source/presentation.json' with { type: 'json' };
-import clusters from '../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
+import majorMoons from '../../source/major-moons.json' with { type: 'json' };
+import galaxies from '../../../src/objects/local-group/source/presentation.json' with { type: 'json' };
+import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import type { ObjectDiscovery } from '@cssearth/objects';
-import { APPLICATION_WORLD_CONTEXT } from '../../site/world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
-const output = resolve(import.meta.dirname, '../../site/prepared-world-presentation.json');
+const output = resolve(import.meta.dirname, '../../prepared-world-presentation.json');
 
 const majorByParent = new Map(sourceArray(majorMoons.systems, input => {
   const system = sourceObject(input), ids = sourceArray(system.moons, sourceId);
@@ -68,4 +68,6 @@ export async function writeWorldPresentation() {
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  await writeWorldPresentation();
+}

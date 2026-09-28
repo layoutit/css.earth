@@ -1,4 +1,4 @@
-import targets from '../../site/source/jpl-small-body-mission-targets.json' with { type: 'json' };
+import targets from '../../source/jpl-small-body-mission-targets.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';
 
 // This is identity binding, not an editorial selection: membership comes only

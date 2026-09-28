@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { prepareText, reviewWarnings } from './prepare-text.mts';
+import { prepareText, reviewWarnings } from '../build/prepare/prepare-text.mts';
 
 test('every registered object has publishable reader text, and its published copies are current', async () => {
   const { objects, composition } = await prepareText({ check: true });

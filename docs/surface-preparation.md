@@ -881,7 +881,7 @@ surface geometry.
 
 The common compiler prepares this during normal object finalization. To refresh
 only this metadata from existing local assets, run
-`node tools/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
+`node site/build/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
 preserves surface assets, motion, lighting and depth partitions, and regenerates
 scene and page metadata. Source graphs are retained only after checking that
 their inputs changed solely in those scene references.

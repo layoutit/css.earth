@@ -56,7 +56,7 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
   { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('tools/sources/author-source-records.mts', id!)] },
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-object-json.mts', ...ids)] },
-  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-text.mts', ...ids)] },
+  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-text.mts', ...ids)] },
   { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('packages/bake/cli/prepare-navigation.mts', ...ids)] },
   // Every body arrives through its billboard: without one the camera flies in onto a mesh still loading. The renderer photographs the
   // delivered body in the running site and skips a body whose prepared runtime has not changed; the catalogue then carries the arrival

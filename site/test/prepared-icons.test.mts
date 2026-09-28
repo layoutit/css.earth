@@ -7,7 +7,7 @@ const test = sourceTest();
 import { SourceEvidence } from "./source-evidence-values.mts";
 
 import { sha256 } from "@cssearth/core/node";
-import { prepareShellIcons } from "../../tools/prepare/prepare-shell-icons.mts";
+import { prepareShellIcons } from "../build/prepare/prepare-shell-icons.mts";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { SHELL_ICON_SOURCES } from "../source/icons/manifest.mts";
 
