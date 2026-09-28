@@ -130,7 +130,10 @@ its validators accept); the renderer never imports the bake.
   the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`), which the ownership inventory
   anchors on.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
-  minimap or preview raster is drawn from, read and checked. It imports no topic.
+  minimap or preview raster is drawn from, read and checked; the sidebar minimaps and preview rasters themselves, with the
+  coverage direction of each lens's map, which the world-navigation stage turns a partial lens toward. It imports the topics
+  `LOWER_TOPICS` declares for it (`raster`, `scene`, `objects/scene`, `objects/default-view`, `objects/interpretation` and
+  three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
   subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which
@@ -200,8 +203,10 @@ its validators accept); the renderer never imports the bake.
     in (`site/build/prepare/prepare-provenance.mts`). It imports `objects/layers/terrestrial`, `objects/acquisition`,
     `objects/sources`, `delivery` and `sources`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
-    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; and the default
-    lens's data coverage, read from its prepared minimap, that the default camera turns toward. It imports `objects/scene` and
+    solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; the default
+    lens's data coverage, read from its prepared minimap, that the default camera turns toward; and the turn toward a partial
+    lens's data when a reader picks it (`lens-facing.ts`), from the coverage direction the minimap step records for each lens,
+    which the world-navigation stage applies to every lens whose recipe authors no focus. It imports `objects/scene` and
     `raster`.
   - `objects/celestial`: an object's sky orientation and directional Sun, prepared into renderer-neutral JSON from its
     celestial profile and the solar geometry the host passes in. It imports `objects/scene` and `presentation`.
