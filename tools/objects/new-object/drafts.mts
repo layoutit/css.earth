@@ -18,6 +18,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   cepheids: { names: 'NAME', draft: async (names, { archive }) => (await import('./cepheids.mts')).draftsFromCepheids(names, archive) },
   // A K2-field giant, far above or below the Galactic plane, weighed by its oscillations, from Khan et al. (2023) (k2.mts).
   k2: { names: 'EPIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromK2(names, archive) },
+  // A giant near the ecliptic poles, from the same paper's TESS + APOGEE table (k2.mts).
+  tess: { names: 'TIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromTess(names, archive) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */
