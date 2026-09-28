@@ -185,7 +185,7 @@
       "licenseEvidence": [
         "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
       ],
-      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-giotto.mts --write using the pinned registration and original inputs.",
+      "acquisition": "Reproduce with node packages/bake/authoring/comet-1p/prepare-giotto.mts --write using the pinned registration and original inputs.",
       "redistribution": "The projected photograph retains the MPS source-image terms, separate from the MIT application code.",
       "consumers": [
         "giotto-reference"
@@ -428,7 +428,7 @@
         "https://www2.mps.mpg.de/de/projekte/giotto/hmc/",
         "https://pds-ppi.igpp.ucla.edu/faq.jsp"
       ],
-      "acquisition": "Reproduce with node tools/objects/comet-1p/prepare-encounters.mts --write from pinned original pixels, encounter geometry and authored registration controls.",
+      "acquisition": "Reproduce with node packages/bake/authoring/comet-1p/prepare-encounters.mts --write from pinned original pixels, encounter geometry and authored registration controls.",
       "redistribution": "Keep the MPS image terms and Vega source credits with derived maps, atlases and thumbnails. The photographic material is not relicensed MIT.",
       "consumers": [
         "surfaces"

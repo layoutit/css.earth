@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parseGiottoIndex, surveyGiottoIndex } from '../../tools/objects/comet-1p/giotto-index.mts';
-import { decodeGiottoFrame, loadIntakeSource, parseIntakeManifest } from '../../tools/objects/comet-1p/inspect-giotto.mts';
+import { parseGiottoIndex, surveyGiottoIndex } from './giotto-index.mts';
+import { decodeGiottoFrame, loadIntakeSource, parseIntakeManifest } from './inspect-giotto.mts';
 
 function fixture(extra: string[][] = []): [Buffer, Buffer, Buffer] {
   const cards = [
@@ -68,7 +68,7 @@ test('intake accepts current path-based records and refuses truncated cached sou
 // tracked manifest so intake cannot quietly retain the obsolete requirement.
 test('intake parses the current source manifest without digest pins', async () => {
   const manifest = parseIntakeManifest(JSON.parse(await readFile(
-    new URL('../../src/objects/comet-1p/source/reference/giotto-hmc-intake.json', import.meta.url), 'utf8')));
+    new URL('../../../../src/objects/comet-1p/source/reference/giotto-hmc-intake.json', import.meta.url), 'utf8')));
   assert.ok(manifest.frames.length > 0);
   assert.ok(manifest.frames.every(frame => frame.header.bytes > 0 && frame.image.bytes > 0));
 });

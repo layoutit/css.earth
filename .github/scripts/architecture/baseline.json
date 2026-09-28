@@ -48,8 +48,13 @@
     "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
+      {"from":"packages/bake/authoring/comet-1p/inspect-halley-giotto.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/comet-1p/prepare-encounters.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/comet-1p/prepare-giotto.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/bake/authoring/dawn/vir-mosaic.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/bake/authoring/juno/juno.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/voyager-iss/limb.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/voyager-iss/place.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/renderer/src/navigation/camera-viewport.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/perspective-dolly.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},
