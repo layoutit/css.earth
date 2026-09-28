@@ -49,7 +49,10 @@ export function samePreparedVolumeTopology(leftInput: PreparedVolumeMountOptions
 
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
 export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, completedOpacity: (runtime: PreparedVolumeRuntime) => number): PreparedVolumeLodRuntime {
-  const initial = validatePreparedCssVolume(options.payload), bank = initial.impostors;
+  const initial = validatePreparedCssVolume(options.payload), prepared = initial.impostors;
+  const only = options.impostorView === undefined ? undefined : prepared?.views.find(view => view.id === options.impostorView);
+  if (options.impostorView !== undefined && !only) throw new TypeError(`${initial.id} has no impostor view ${options.impostorView}.`);
+  const bank = prepared && only ? { ...prepared, views: [only] } : prepared;
   const materials = (payload: PreparedVolumeMountOptions['payload']) => AXES.flatMap(axis =>
     payload.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
       textureUrl: options.resolveResource(leaf.texturePath),
