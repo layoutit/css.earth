@@ -12,11 +12,14 @@
  * 4. Howarth (2011), ATLAS9 models to the Eddington limit, Bessell V (J/MNRAS/413/1515, grid A10/P00v02r): one coefficient file per
  *    model, for hot giants below the gravities of the Claret table (Rigel's log g 1.8 at 12,100 K). Energy-integrating (ucE) laws.
  * 5. Claret (2017), PHOENIX models, TESS band (J/A+A/600/A30, tableab, Mod PC): cool stars and brown dwarfs down to 1,500 K.
+ * 6. PICASO on the cloud-free Sonora Bobcat atmospheres, Bessell V (picaso-limb.mts): brown dwarfs colder than every table, computed
+ *    with the pinned toolchain at the model nodes around the dwarf.
  *
  * Where a node beside the star is missing, the law is read between the nearest nodes that all exist. Outside every grid no law is
  * drawn and the reason is recorded; nothing is extrapolated. A spec may decline a law with its own reason. */
 import { interpolateGrid, readHowarthNode, readLimbGrid, type GridNode, type QuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { VIZIER_ASU, type Archive } from './archives.mts';
+import { fromPicaso, PICASO } from './picaso-limb.mts';
 
 interface Grid {
   readonly key: 'atlas' | 'tlusty' | 'neilson' | 'phoenix'; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
@@ -58,7 +61,7 @@ export interface LimbChoice {
   readonly files?: readonly { readonly path: string; readonly text: string }[];
   readonly acquisitions?: readonly Record<string, unknown>[]; readonly inputs?: readonly Record<string, unknown>[]; readonly coefficients?: QuadraticLimbDarkening;
   /** The sentence the lens qualification, README and NOTICE use. */
-  readonly sentence: string; readonly credit?: string; readonly grid?: Grid['key'] | 'howarth';
+  readonly sentence: string; readonly credit?: string; readonly grid?: Grid['key'] | 'howarth' | 'picaso';
 }
 
 // The node range a request names, written as the grid writes its values (the form every existing package restores with).
@@ -122,9 +125,9 @@ async function fromHowarth(id: string, teffK: number, logg: number, archive: Arc
 export async function chooseLimb(id: string, teffK: number, logg: number, archive: Archive, decline?: string, massSolar?: number): Promise<LimbChoice> {
   if (decline) return { sentence: `No limb darkening is drawn: ${decline}` };
   const reasons: string[] = [];
-  for (const grid of [...GRIDS.slice(0, 3), 'howarth' as const, GRIDS[3]!]) {
-    try { return grid === 'howarth' ? await fromHowarth(id, teffK, logg, archive) : await fromGrid(id, grid, teffK, logg, massSolar, archive); }
-    catch (error) { reasons.push(`${grid === 'howarth' ? HOWARTH.cite : `${grid.cite} (${grid.models})`}: ${(error as Error).message}`); }
+  for (const grid of [...GRIDS.slice(0, 3), 'howarth' as const, GRIDS[3]!, 'picaso' as const]) {
+    try { return grid === 'howarth' ? await fromHowarth(id, teffK, logg, archive) : grid === 'picaso' ? fromPicaso(id, teffK, logg) : await fromGrid(id, grid, teffK, logg, massSolar, archive); }
+    catch (error) { reasons.push(`${grid === 'howarth' ? HOWARTH.cite : grid === 'picaso' ? `${PICASO.cite} (${PICASO.models})` : `${grid.cite} (${grid.models})`}: ${(error as Error).message}`); }
   }
   return { sentence: `No limb darkening is drawn: at ${teffK.toLocaleString('en-US')} K and log g ${logg}${massSolar === undefined ? '' : ` for ${massSolar} solar masses`} no model grid used here reaches it (${reasons.join('; ')})` };
 }

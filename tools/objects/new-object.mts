@@ -66,7 +66,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.colour ? `, colour ${result.colour}` : ''}`).join('\n')}\n`);
     const changed = results.filter(result => !result.limb.startsWith('NONE')).map(result => result.id);
     if (changed.length !== results.length) process.exitCode = 1;
-    if (args.includes('--bake') && changed.length && !await prepareObjects(changed)) process.exitCode = 1;
+    if (args.includes('--bake') && changed.length) {
+      // A hand-made package's downloads may be missing from this checkout; restore them before the bake needs them.
+      const { spawnSync } = await import('node:child_process');
+      const restore = spawnSync(process.execPath, ['tools/assets/restore-source-inputs.mts', ...changed.map(id => `--object=${id}`)], { stdio: 'inherit' });
+      if (restore.status !== 0 || !await prepareObjects(changed)) process.exitCode = 1;
+    }
   } else if (args.includes('--refresh') && !specPath) {
     // Regenerate bodies the tool made from their stored specs: `--refresh ID... [--check | --bake]` (new-object/refresh.mts).
     const { mkdir, writeFile } = await import('node:fs/promises'), { refreshSpec } = await import('./new-object/refresh.mts');

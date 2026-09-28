@@ -22,3 +22,4 @@ export * from './projection.js';
 export * from './transit.js';
 export * from './starry.js';
 export * from './spiderman.js';
+export * from './picaso.js';

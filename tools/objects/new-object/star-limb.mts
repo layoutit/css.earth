@@ -23,7 +23,7 @@ const GM_SUN = 132712440041.93938;
 const PACKAGE_FILES = ['object.json', 'text.json', 'NOTICE.md', 'README.md', 'investigations.json', 'source/manifest.json', 'source/measurements.json',
   'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json'];
 // Sentences that said no law is drawn, and nothing else: "No limb darkening is drawn: ...", "... the law is not extrapolated."
-const STALE = /(?:^|(?<=\.\s))(?:- )?[^.\n]*(?:\bno limb[- ]darkening\b|\blimb[^.\n]*\bnot extrapolated\b)[^.\n]*(?:\.[^.\n]*extrapolated)?\.\s*/gimu;
+const STALE = /(?:^|(?<=\.\s))(?:- )?[^.\n]*(?:\bno limb[- ]darkening\b|\blimb[^.\n]*\bnot extrapolated\b)[^.\n]*(?:\.[^.\n]*extrapolated)?\.[^\S\n]*/gimu;
 
 interface StarGravity { readonly logg: number; readonly kind: 'measured' | GravityChoice['kind']; readonly sentence: string; readonly url?: string }
 
@@ -48,7 +48,7 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
 
 /** Insert or replace the README's limb paragraph, and drop the sentences that said no law was drawn. */
 function readmeWithLimb(readme: string, paragraph: string, problem: string) {
-  const lines = readme.replace(STALE, '').split('\n').filter(line => !line.startsWith('**Limb.**') && !line.startsWith('- **Model limb.**'));
+  const lines = readme.replace(STALE, '').replace(/[^\S\n]+$/gmu, '').split('\n').filter(line => !line.startsWith('**Limb.**') && !line.startsWith('- **Model limb.**'));
   const evidence = lines.indexOf('## Evidence'), problems = lines.indexOf('## Known problems');
   if (evidence >= 0) lines.splice(evidence, 0, paragraph, ''); else lines.push('', paragraph);
   const at = lines.indexOf('## Known problems');
@@ -105,7 +105,8 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     const read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
     const body = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8')) as Record<string, any>;
     const measurements = read(`${s}/measurements.json`), teffK = Number(measurements.effectiveTemperatureK);
-    let host = body; while (!host.star && host.hostedOrbit?.host) host = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${host.hostedOrbit.host}.json`), 'utf8'));
+    // A companion placed by its orbit takes its sky position from the body it circles (its orbit's host, else its parent).
+    let host = body; for (let next = body.hostedOrbit?.host ?? body.physical?.parent; !host.star && next; next = host.hostedOrbit?.host ?? host.physical?.parent) host = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${next}.json`), 'utf8'));
     const gm = Number(body.physical.gravitationalParameterKm3PerS2), radiusKm = Number(body.physical.meanRadiusKm);
     const massSolar = gm > 0 ? Number((gm / GM_SUN).toFixed(3)) : undefined;
     const published = await publishedLaw(root, id);

@@ -102,3 +102,14 @@ its own ignored environment ([starry-toolchain.json](starry-toolchain.json) says
 0.5.3, which it imports. cssEarth does not copy or modify starry source code; the runner removes the `-fno-exceptions` compiler flag
 that PyMC3 adds, because starry's compiled operators throw C++ exceptions. starry is copyright 2019–2021 Rodrigo Luger and distributed
 under the MIT license, reproduced in [STARRY-LICENSE.txt](STARRY-LICENSE.txt).
+
+# PICASO
+
+cssEarth uses [PICASO 4.1](https://pypi.org/project/picaso/4.1/) (Batalha et al. 2019, ApJ 878, 70,
+[doi:10.3847/1538-4357/ab1b51](https://doi.org/10.3847/1538-4357/ab1b51)) to compute the intensity a brown dwarf's model atmosphere
+emits at each viewing angle, for stars colder than every published limb-darkening table. It is installed from hash-pinned PyPI
+releases into its own ignored environment ([picaso-toolchain.json](picaso-toolchain.json)), with the reference data of the release,
+the Sonora Bobcat structures of Marley et al. (2021, ApJ 920, 85; [doi:10.5281/zenodo.5063476](https://doi.org/10.5281/zenodo.5063476),
+CC BY 4.0) and the PICASO 4.0 correlated-k tables of Batalha and Mang ([doi:10.5281/zenodo.18636725](https://doi.org/10.5281/zenodo.18636725),
+CC BY 4.0). cssEarth does not copy or modify PICASO source code. PICASO is distributed under the GNU General Public License
+version 3, reproduced in [PICASO-LICENSE.txt](PICASO-LICENSE.txt).
