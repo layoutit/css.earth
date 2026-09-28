@@ -33,6 +33,33 @@
         "https://gea.esac.esa.int/archive/",
         "https://doi.org/10.1051/0004-6361/202243990"
       ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,750 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.428 +/- 0.022 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2-degree observer: #ffe2c6. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,750 K and log g 1.5 (u1 0.689, u2 0.101): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 1.5 from 2022MNRAS.510.1894K; the 7 published values span log g 0.69 to 1.82, across which the limb law changes by at most 1.0% of the centre brightness.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.1894K"
+      ]
     }
   ]
 }

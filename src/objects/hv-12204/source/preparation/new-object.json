@@ -38,8 +38,6 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.06 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
-  "planets": [],
-  "companions": [],
   "text": {
     "card": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 3.4 days.",
     "introduction": "Its mean radius, 28.5 solar radii, comes from comparing how fast its surface moves with how its size changes, 45,434 parsecs away.",
@@ -57,5 +55,13 @@
     "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663635885576846336"
   },
   "order": 1951,
-  "lightCurve": "gaia-dr3-vari-cepheid"
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "lightCurve": "gaia-dr3-vari-cepheid",
+  "planets": [],
+  "companions": []
 }

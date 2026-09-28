@@ -7,6 +7,8 @@
  * and its light changes through the pulsation. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 
+/** Luck (2018), AJ 156, 171, table 3: its 1,128 spectra of 435 Cepheids give log g -1.33 to 2.86 (counted from the VizieR table, 2026-09-28). */
+export const CEPHEID_GRAVITIES = { min: -1.33, max: 2.86, source: 'Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)', url: 'https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3' };
 export const CEPHEIDS = { source: 'J/A+A/550/A70/table10', paper: 'https://arxiv.org/abs/1212.5478', credit: 'Groenewegen (2013), A&A 550, A70' };
 const WHERE: Readonly<Record<string, string>> = { G: 'the Milky Way', L: 'the Large Magellanic Cloud', S: 'the Small Magellanic Cloud' };
 const COLUMNS = ['Loc', 'Name', 'E(B-V)', 'e_E(B-V)', 'Per', 'Dist', 'e.D', 'Rad', 'e.R'] as const;
@@ -35,7 +37,8 @@ export function draftFromCepheid(row: ReturnType<typeof parseCepheidRow>) {
         locator: `table10, ${row.name}: Per, Rad, Dist` },
       color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'],
         reason: `Interstellar dust reddens every spectrum of this star, E(B-V) = ${row.reddening[0]} +/- ${row.reddening[1]} (${CEPHEIDS.credit}, table10), and its light changes through each pulsation` },
-      lightCurve: 'gaia-dr3-vari-cepheid', planets: [], companions: [],
+      // Cepheids have no measured masses; a limb is read inside the gravities Luck (2018) measured in Cepheid spectra.
+      gravityRange: CEPHEID_GRAVITIES, lightCurve: 'gaia-dr3-vari-cepheid', planets: [], companions: [],
       notes: ['The star pulsates; it is drawn at its mean radius.'],
     },
     missing: ['temperature (a mean effective temperature, cited)', 'mass (cited, or "gaia-flame")'],

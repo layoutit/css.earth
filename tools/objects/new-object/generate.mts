@@ -15,6 +15,7 @@ import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffo
 import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
+import { chooseGravity } from './gravity.mts';
 import type { Cited, StarSpec } from './spec.mts';
 import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
@@ -166,7 +167,11 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     if (radialVelocity.value !== 0) found.push([radialVelocity.url, await fetchPublication(archive, radialVelocity.url)]);
   }
   const body = astronomyRecord(spec, row, ids, order);
-  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none ?? (Number.isFinite(physical.logg) ? undefined : 'no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited'))]);
+  // No mass: a published spectroscopic gravity, else a display gravity inside the class's cited range (gravity.mts).
+  const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
+    : await chooseGravity({ archive, ra: row.ra, dec: row.dec, teffK: spec.temperature.value, ...(spec.gravityRange ? { range: spec.gravityRange } : {}), where: id });
+  const limbLogg = gravity?.logg ?? physical.logg;
+  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'))]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
@@ -183,6 +188,10 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   for (const [key, value] of Object.entries(measurements)) {
     out[key] = value;
     if (key === 'effectiveTemperatureSource' && Number.isFinite(physical.logg)) { out.surfaceGravityLogg = physical.logg; out.surfaceGravitySource = physical.gravitySource; }
+    // A published gravity is a fact of the star; a bounded one only chose the limb law and is never recorded as one.
+    else if (key === 'effectiveTemperatureSource' && gravity?.kind === 'published') { out.surfaceGravityLogg = gravity.logg; out.surfaceGravitySource = `${gravity.sentence} (${gravity.url})`; }
+    // A bounded gravity is recorded only as the one the limb law was read at, never as the star's.
+    else if (key === 'effectiveTemperatureSource' && gravity?.kind === 'bounded' && limb.limbDarkening) { out.limbDisplayGravityLogg = gravity.logg; out.limbDisplayGravitySource = `${gravity.sentence} (${gravity.url})`; }
   }
   out.angularDiameterSource = `Computed here from the record's radius and distance: 2 x ${Math.round(physical.radiusKm).toLocaleString('en-US')} km at ${distance.toFixed(2)} pc = ${measurements.angularDiameterMas} mas. No interferometric diameter of this star is used.`;
   out.shape = { kind: 'uniform-disc-sphere', qualification: `A sphere at the published radius, coloured from ${colorWords} (photometry/stellar-color.json); no image of the photosphere exists.` };
@@ -256,15 +265,15 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter((name): name is string => Boolean(name) && name !== spec.name).join(', ');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
     spec.text ? `${spec.text.introduction}${names ? ` It is also ${names}.` : ''} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name}${names ? ` (${names})` : ''} is ${distance.toFixed(1)} parsecs away. ${TODO}: what the star is and why it is here, from ${spec.paper.credit}.`, '',
-    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : ' No surface gravity is known.'}`, '',
+    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : gravity?.kind === 'published' ? ` log g ${gravity.logg} from ${gravity.source}.` : ' No surface gravity of this star is published.'}`, '',
     `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
-    `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}`, '',
+    `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.`, '',
     ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../tools/contract/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
-    ...limb.limbDarkening ? ['- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.'] : [],
+    ...limb.limbDarkening ? [`- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and ${gravity?.kind === 'bounded' ? 'a display gravity inside its class\'s published range (see Limb)' : 'gravity'}, not a measurement of this star.`] : [],
     ...spec.notes.map(note => `- **Not shown.** ${note.replace(/\.$/u, '')}.`),
     ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
@@ -292,6 +301,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
       finding: `${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2-degree observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.` },
     ...limb.limbDarkening && vizier(limb.credit) ? [{ id: 'limb-darkening', subject: 'Limb darkening', evidence: [`https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${vizier(limb.credit)}`], finding: `The disc is ${limb.sentence}.` }] : [],
     ...spec.spin ? [{ id: 'spin', subject: 'Spin', evidence: [spec.spin.url], finding: `Inclination ${spec.spin.inclinationDegrees} degrees from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''}, from ${spec.spin.source}; the axis's direction on the sky is a convention.` }] : [],
+    ...gravity && limb.limbDarkening ? [{ id: 'surface-gravity', subject: 'Surface gravity', evidence: [gravity.url], finding: `${gravity.kind === 'published' ? 'Published' : 'Unmeasured, bounded'}: ${gravity.sentence}.` }] : [],
     ...lightCurve ? [lightCurve.decision] : [],
   ]);
 

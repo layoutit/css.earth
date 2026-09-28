@@ -39,8 +39,6 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.37 +/- 0.011 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
-  "planets": [],
-  "companions": [],
   "text": {
     "card": "A Cepheid in the Milky Way that swells and shrinks every 23.0 days.",
     "introduction": "Its mean radius, 91.6 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,217 parsecs away.",
@@ -56,5 +54,13 @@
     "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
   },
   "order": 1938,
-  "lightCurve": "gaia-dr3-vari-cepheid"
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "lightCurve": "gaia-dr3-vari-cepheid",
+  "planets": [],
+  "companions": []
 }

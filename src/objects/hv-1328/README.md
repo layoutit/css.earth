@@ -4,11 +4,11 @@
 
 Its mean radius, 77.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 55,005 parsecs away. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
 
-**Star.** Placement: Gaia DR3 source 4688810475608636800, distance 55,005 pc from Groenewegen (2013), A&A 550, A70, table10, HV 1328: Baade-Wesselink distance (pc) 55005.4 +/- 4054.3 (Monte-Carlo); Gaia DR3's parallax, 0.004 ± 0.015 mas (0.2 standard errors), is not used. Radius 77.2 +/- 5.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 1328: Baade-Wesselink mean radius (solar radii) 77.2 +/- 5.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,750 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=SMC0152, columns Teffp, e_Teffp: Teff 5750 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic). No surface gravity is known.
+**Star.** Placement: Gaia DR3 source 4688810475608636800, distance 55,005 pc from Groenewegen (2013), A&A 550, A70, table10, HV 1328: Baade-Wesselink distance (pc) 55005.4 +/- 4054.3 (Monte-Carlo); Gaia DR3's parallax, 0.004 ± 0.015 mas (0.2 standard errors), is not used. Radius 77.2 +/- 5.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 1328: Baade-Wesselink mean radius (solar radii) 77.2 +/- 5.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,750 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=SMC0152, columns Teffp, e_Teffp: Teff 5750 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 2.38 from 2021MNRAS.506..150B ("The GALAH+ survey: Third data release."), the GALAH DR3 pipeline.
 
 **Colour.** A Planck spectrum at 5,750 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.004 +/- 0.003 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2° observer: #fff0e9. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
-**Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited.
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,750 K and log g 2.38 (u1 0.448, u2 0.260): a model, because no fit of this star's limb is used. Gravity: log g 2.38 from 2021MNRAS.506..150B (GALAH DR3, a survey pipeline: no analysis of this star's own spectra is published); the 2 published values span log g 1.9191 to 2.3848, across which the limb law changes by at most 0.4% of the centre brightness.
 
 **Brightness.** Gaia DR3 fits the star's G-band light with 4 harmonics of a 15.84-day period (vari_cepheid, source 4688810475608636800; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 0.681 mag, so at minimum the star gives 53% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 3 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.36 of a cycle after maximum. It plays when Motion is on.
 
@@ -21,6 +21,7 @@ Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Not shown.** No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.

@@ -8,7 +8,8 @@
  * - **Refused:** a package with no stored spec (made by hand), or one a person extended with lenses the tool does not make (a
  *   Doppler map, a resolved image): regenerating would drop them.
  * - **Kept:** the reader card or introduction when a person rewrote it (it differs from what the stored spec drafted and carries no
- *   TODO); the README once a person has written it (it no longer carries the draft's line or a TODO), whole; the investigation ledger.
+ *   TODO); the README once a person has written it (it no longer carries the draft's line or a TODO), whole; every entry of the
+ *   investigation ledger, with the regeneration's decisions it lacks added after them.
  * - **Removed:** source files the old manifest declared that the new generation no longer uses (a cross-check spectrum a better
  *   route replaced).
  * - **Written:** everything else the tool owns.
@@ -75,8 +76,16 @@ export async function mergeRefresh(files: PackageFiles, id: string, root: string
   // to check against the regenerated package.
   const readme = await readFile(resolve(o, 'README.md'), 'utf8').catch(() => null);
   if (readme !== null && !readme.includes('This account was drafted from') && !readme.includes(TODO)) { files.delete(`${rel}/README.md`); kept.push('README.md (a person wrote it; check its numbers)'); }
-  // The ledger is a person's record.
-  if (await exists(resolve(o, 'investigations.json'))) { files.delete(`${rel}/investigations.json`); kept.push('investigations.json'); }
+  // The ledger is a person's record: every entry already there stays as written; a decision the regeneration made that it lacks
+  // (a new route, such as the surface gravity) is added after them.
+  if (await exists(resolve(o, 'investigations.json'))) {
+    const old = await read(`${rel}/investigations.json`), fresh = files.get(`${rel}/investigations.json`);
+    const known = new Set((old.entries ?? []).map((entry: { id: string }) => entry.id));
+    const added = fresh === undefined ? [] : (JSON.parse(String(fresh)).entries ?? []).filter((entry: { id: string }) => !known.has(entry.id));
+    if (added.length) files.set(`${rel}/investigations.json`, `${JSON.stringify({ ...old, entries: [...old.entries, ...added] }, null, 2)}\n`);
+    else files.delete(`${rel}/investigations.json`);
+    kept.push(`investigations.json${added.length ? ` (added ${added.map((entry: { id: string }) => entry.id).join(', ')})` : ''}`);
+  }
   // Source files the old manifest declared and the new one does not.
   const declared = (manifest: Record<string, any>) => [...(manifest.inputs ?? []), ...(manifest.documents ?? []), ...(manifest.generatedIntermediates ?? [])].map((entry: { path: string }) => entry.path);
   const now = new Set(declared(JSON.parse(String(files.get(`${rel}/source/manifest.json`)))));
