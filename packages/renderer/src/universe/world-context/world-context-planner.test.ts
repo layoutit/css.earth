@@ -111,11 +111,11 @@ test('retired and incompatible frame requests respect prepared identity and meas
   expect(() => calculate({ ...input, world: { ...input.world, epochJdTt: input.world.epochJdTt + 1 } })).toThrow('matching frame');
 });
 
-test('overview uses its prepared billboard even when the retained surface is large', () => {
+test('overview does not resurrect the selected billboard over a resolved surface', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.world.pose.positionM = [0, 0, plan.focus.radiusM * 20];
   const marker = (overview: boolean) => calculate({ ...input, overview }).projectedBodies.find(body => body.index === 0)!;
-  expect(marker(true).markerOpacity).toBe(1);
+  expect(marker(true).markerOpacity).toBe(0);
   expect(marker(false).markerOpacity).toBe(0);
 });
 

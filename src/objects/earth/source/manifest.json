@@ -1467,6 +1467,14 @@
       "origin": "https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/",
       "credit": "NASA DSCOVR EPIC team (NASA GSFC); fit: cssEarth.",
       "acquisition": "Derived by tools/photometry/fit-epic-limb.mts from the named EPIC frames; the frames are not redistributed."
+    },
+    {
+      "path": "presentation/overview.json",
+      "purpose": "Wikipedia article route for the existing body overview panel.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored presentation link, read by site/prepare-body-overview.mts."
+      }
     }
   ]
 }

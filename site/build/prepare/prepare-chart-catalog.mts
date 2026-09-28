@@ -1,14 +1,14 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import sharp, { type OverlayOptions } from 'sharp';
 import { inventoriedObjectIds } from '@cssearth/bake/delivery';
-import { parseChartAssetRecipe } from '../../site/build/charts/charts.ts';
+import { parseChartAssetRecipe } from '../charts/charts.ts';
 import { escapeXml } from '@cssearth/bake/objects/charts';
 import { refreshObjectCharts } from './refresh-charts.mts';
-import { refuseDirectRun } from '../cli/library-entry.mts';
 
 // Illustrations use the same source recipes and SVG renderer as the live panels.
-export async function prepareChartCatalog(args: readonly string[] = [], root = resolve(import.meta.dirname, '../..')) {
+export async function prepareChartCatalog(args: readonly string[] = [], root = resolve(import.meta.dirname, '../../..')) {
   if (args.some(arg => arg !== '--write')) throw new Error('Usage: prepare-chart-catalog.mts [--write]');
   const entries: { id: string; kind: string; output: string; variant: string; png: Buffer }[] = [];
   for (const id of inventoriedObjectIds([], root)) {
@@ -43,4 +43,5 @@ export async function prepareChartCatalog(args: readonly string[] = [], root = r
   console.log(`${entries.length} charts inspected through source recipes; ${examples.length} illustrated catalogue examples. ${output}/chart-recipes.png`);
 }
 
-refuseDirectRun(import.meta);
+// Entry script: node site/build/prepare/prepare-chart-catalog.mts [--object=<id>] [--write].
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) await prepareChartCatalog(process.argv.slice(2));

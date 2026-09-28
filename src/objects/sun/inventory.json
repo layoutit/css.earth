@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "sun-arrival.webp",
-      "bytes": 34910,
-      "sha256": "99ccde1464a1f0614126e1dbec01349e249b56754b5e0f1b30315111eab65e08"
+      "bytes": 32138,
+      "sha256": "53027243bb5940ecc007e19e83cdf17864861743aa0fb32e27279787bf0d445d"
     },
     {
       "location": "public",
@@ -143,7 +143,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1406,
-      "sha256": "95bdf08a410434ab51d0b79eeae4e41278bf8e714ec6de490b2fd0b7e9b64b47"
+      "sha256": "c6c8f8aa4527941553cb8facc0b04eb75a6988917aee30acc8c30db162a5a1f8"
     },
     {
       "location": "prepared",
@@ -327,12 +327,6 @@
     },
     {
       "location": "prepared",
-      "filename": "system-views/hat-p-70.json",
-      "bytes": 30176,
-      "sha256": "b1622ba1cbbf0c75fe4b9773928fd92afc8f5263cfa293718341dca8fa467274"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/haumea.json",
       "bytes": 34539,
       "sha256": "e3c52736f711644aa592f7d832736a16302c1390014ff87e24e856f661297274"
@@ -402,12 +396,6 @@
       "filename": "system-views/hd-29391.json",
       "bytes": 30283,
       "sha256": "2a744225df273fe0d2bd1c60b46a2e70d29cf978553105522f378aa78b9dad4c"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/hd-3167.json",
-      "bytes": 34762,
-      "sha256": "4a1e109ccd88af3a7a181353469666a2ab1370e51491c5aca40b92b4b0f6318a"
     },
     {
       "location": "prepared",
@@ -495,12 +483,6 @@
     },
     {
       "location": "prepared",
-      "filename": "system-views/k2-122.json",
-      "bytes": 30149,
-      "sha256": "9b2e907d6b575482f50f381624ae4ed5047a8d81317e44a12c546b9ba79396f6"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/k2-18.json",
       "bytes": 30536,
       "sha256": "df44f712d773ff32f8a65ff1563138a9273f13f71bc8baf573c3a69d3646241c"
@@ -513,27 +495,9 @@
     },
     {
       "location": "prepared",
-      "filename": "system-views/kepler-1024.json",
-      "bytes": 30304,
-      "sha256": "c8700b27b0e8dfec9604af45304573882a5e98342451215168368b47eda019d3"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/kepler-1542.json",
-      "bytes": 42765,
-      "sha256": "355637bbbf1cd558b99e68830e82176383a1e4deeb93dfd9a68fa57dca8ad878"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/kepler-16-a.json",
       "bytes": 34483,
       "sha256": "cd855ad90ff254186b2dc2bbf7fde28a8945457a8f31a1d72532ceda7bdea0dd"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/kepler-1795.json",
-      "bytes": 30528,
-      "sha256": "38f304de62be9eea354f538034db071433716632e987a6e21ad0dd9cddea5dbc"
     },
     {
       "location": "prepared",
@@ -564,12 +528,6 @@
       "filename": "system-views/kepler-7.json",
       "bytes": 30065,
       "sha256": "de16e80626a7263da3ff0214674ec951bbeedf7145b374418182e03fa2583cd2"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/kepler-736.json",
-      "bytes": 30217,
-      "sha256": "616b49f27b5d26464351456d1fe35b67dc5de266c1cecf2d95664afbc2170530"
     },
     {
       "location": "prepared",
@@ -699,24 +657,6 @@
     },
     {
       "location": "prepared",
-      "filename": "system-views/toi-1899.json",
-      "bytes": 30539,
-      "sha256": "cfea64f97df79de0367db695cb63dc8d394b002631281a44c46c885fa4dae46f"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/toi-2049.json",
-      "bytes": 30194,
-      "sha256": "fb3ff0f00242e59f81d27524e00e5423686c34b228599260312cd939e719a22f"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/toi-2092.json",
-      "bytes": 30205,
-      "sha256": "2c2412944e86f0c82aeefd426a9e666f70b35973ee672d408d118be9436ed043"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/toi-2134.json",
       "bytes": 34660,
       "sha256": "450f93803789299f76bed5c1a294bf0eb970c60659f677c60e7ba260ad14cecc"
@@ -729,33 +669,15 @@
     },
     {
       "location": "prepared",
-      "filename": "system-views/toi-2267.json",
-      "bytes": 34713,
-      "sha256": "05f6e5dca4fcc2c35af7e3e1cdeba876931d93fcfad50997df12b432dafdea98"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/toi-431.json",
       "bytes": 34698,
       "sha256": "f17029088b56e53fbd6e05c0fc32b1dd3a1ec41cb9decd4fd826f6933a080253"
     },
     {
       "location": "prepared",
-      "filename": "system-views/toi-4511.json",
-      "bytes": 30470,
-      "sha256": "0ed3c3e0da7f4def08e80bc6fe83988961a511f2c82e0fe8eed985f7f5336e10"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/toi-5789.json",
       "bytes": 30471,
       "sha256": "783fb1a1a63ac24685f03f4e06b1adcd5015964edeb62e81b06416f524b8e509"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/toi-6008.json",
-      "bytes": 30464,
-      "sha256": "8a061ab88b5ab931b90dd2baf159d035911e6f16d75026519be1ec64dca59a61"
     },
     {
       "location": "prepared",
@@ -798,12 +720,6 @@
       "filename": "system-views/wasp-121.json",
       "bytes": 30517,
       "sha256": "43b6724639296d34c5882bf1a3f4e04a6dbaf04023775a99e1ffea62228fed4e"
-    },
-    {
-      "location": "prepared",
-      "filename": "system-views/wasp-157.json",
-      "bytes": 30210,
-      "sha256": "2c563bca8312e318b89cd9dae6cc2e60b937e16fd90f20ce5d04d271c3df0b03"
     },
     {
       "location": "prepared",
@@ -856,14 +772,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 2088803,
-      "sha256": "7d5c83af13b24200da039c53ce690342572290e90dc046698419393f0330cc60"
+      "bytes": 2052923,
+      "sha256": "ed4c476b130e6e52b1ff2ce016a0a7f5725b09bfba7169e1973f86565ef2e395"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 19849679,
-      "sha256": "58990d39a206ad71949f76fbd68adac44ec91149f9f463b8d38a4a6cc7250545"
+      "bytes": 19092808,
+      "sha256": "4c5a23000f869a7e55c7495eec75fcdf7ef6d0b759515885964473084fe8195a"
     },
     {
       "location": "prepared",
@@ -2415,12 +2331,6 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/hat-p-70b.bin",
-      "bytes": 4408,
-      "sha256": "c2642b8e1a903dd377956b5414006e46bed904bc3c6ce3fc1dbe9039e749bed5"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/hati.bin",
       "bytes": 4008,
       "sha256": "7e4d142f6b274d6d3b0018ec86f880d00bf520df18ada946b6f873c07faaa1bd"
@@ -2556,18 +2466,6 @@
       "filename": "world-orbits/hd-29391-b.bin",
       "bytes": 4408,
       "sha256": "99dfeaa1b7b57cf9fbd8ed4a8cf1eb91c2d84ec798c634c8272fda95a0786e30"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/hd-3167b.bin",
-      "bytes": 4408,
-      "sha256": "73aa329e5e171b5df9dc1d697494e06aa8dd6acea9f06734386d38c750029838"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/hd-3167c.bin",
-      "bytes": 4408,
-      "sha256": "b22b9357123be7f65334a1db294bf15a8d0a75205c3ec5130e09dbbb59755a46"
     },
     {
       "location": "prepared",
@@ -3003,12 +2901,6 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/k2-122b.bin",
-      "bytes": 4416,
-      "sha256": "3da343e0a458f4034abe21e922822afcae00e10f39651314cf2d11bb975f8c2e"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/k2-18b.bin",
       "bytes": 4408,
       "sha256": "00958967e86b094366bcb802cb353002efe9097e35050171aea8cdd813c46c2a"
@@ -3057,36 +2949,6 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/kepler-1024b.bin",
-      "bytes": 4416,
-      "sha256": "dc30b13261de594dfc3267895cf8442d44c4e1101c070236633a31c365b5b52b"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/kepler-1542b.bin",
-      "bytes": 4416,
-      "sha256": "36491bdf53c8d52bdf98ae8174c3dbe36ecc107827ce017c486267a44511f592"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/kepler-1542c.bin",
-      "bytes": 4416,
-      "sha256": "6875db94e50cf1c4b5192551a6c1057a5a347ba90a4db492b21540829f3bd0a4"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/kepler-1542d.bin",
-      "bytes": 4416,
-      "sha256": "e07fc4fe8a0f1f0348ca3a42ce1e87a8e5f9c95aff60f66a6f8762e18fcc0990"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/kepler-1542e.bin",
-      "bytes": 4416,
-      "sha256": "8adf3b3c66f9d9d74fb230b60df50972a60fb8b9756417324097676ee2258abe"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/kepler-16-b.bin",
       "bytes": 4024,
       "sha256": "5123b66fbaf5050b13013d712feb0643df06d0e75dd100a7893e327f47714042"
@@ -3096,12 +2958,6 @@
       "filename": "world-orbits/kepler-16ab-b.bin",
       "bytes": 4416,
       "sha256": "4efafc0f415b5e0786299aba51d3f43fb7fb7fa83e362dd59f244835acbd4b48"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/kepler-1795b.bin",
-      "bytes": 4416,
-      "sha256": "505533a6afceb8e9efaea7328b355d870244a859f185cc3538bdb63a4b91f0c2"
     },
     {
       "location": "prepared",
@@ -3150,12 +3006,6 @@
       "filename": "world-orbits/kepler-452b.bin",
       "bytes": 4416,
       "sha256": "7fa5c2a4ce2160e38977e9171a3b610730d7b096c8c206434b4eaf256495c261"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/kepler-736b.bin",
-      "bytes": 4416,
-      "sha256": "f41f07842a0ce8629a25302171d26f33abc27df81d316ba904ccc657770179d9"
     },
     {
       "location": "prepared",
@@ -4677,24 +4527,6 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/toi-1899b.bin",
-      "bytes": 4416,
-      "sha256": "a13e3408ea15badf3c63aa25c6f3fd02e7c875f1db85c735818551583d468ff4"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/toi-2049b.bin",
-      "bytes": 4416,
-      "sha256": "2ca8d7c9fb8b288ea7203fcb4a6e5f1bc73106dda36a87447060d467ecd78c72"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/toi-2092b.bin",
-      "bytes": 4416,
-      "sha256": "cba037105caf9695ec0ec438a60daeb45608d0c9036c05f8f6f32dc8837aa404"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/toi-2134b.bin",
       "bytes": 4408,
       "sha256": "2c977aa828da18dea3dce434d6c573bd2b47fd764c8fa9a5f53f4131fed61327"
@@ -4713,18 +4545,6 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/toi-2267b.bin",
-      "bytes": 4408,
-      "sha256": "e121489bf9c083c7f63d1cef2950f953d60ec0a35e055320683a85e24cea996d"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/toi-2267c.bin",
-      "bytes": 4408,
-      "sha256": "d353e0d759106de04c8dfe2ea031767c72738f91952988a21b9ec0a820ba475c"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/toi-431b.bin",
       "bytes": 4408,
       "sha256": "2bba411ae1f77bef043381aa16703f6e7221d1363ff390ac2bfacbfa0c6cb599"
@@ -4737,21 +4557,9 @@
     },
     {
       "location": "prepared",
-      "filename": "world-orbits/toi-4511b.bin",
-      "bytes": 4416,
-      "sha256": "1c3c1e166ef63953af6158633b50c52e726037fa4b35d5fe46fd4bd1f2188387"
-    },
-    {
-      "location": "prepared",
       "filename": "world-orbits/toi-5789c.bin",
       "bytes": 4408,
       "sha256": "92952861115eee8a407cf25291c2e1edd3ca8c6172dc9887b65abb7ed536e6a0"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/toi-6008b.bin",
-      "bytes": 4408,
-      "sha256": "ed09566cb71023fe2baafef69c7ca10536f44da797e879ea1603f32490d27e05"
     },
     {
       "location": "prepared",
@@ -5004,12 +4812,6 @@
       "filename": "world-orbits/wasp-12b.bin",
       "bytes": 4416,
       "sha256": "e4d959616d271df6b9e30543728048d8f6b4c5cb13efda1f7182e703eb1c9607"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/wasp-157b.bin",
-      "bytes": 4416,
-      "sha256": "e26ef63b92fe6c50d1487d5bba75168b804e51621379113829358727965f9aef"
     },
     {
       "location": "prepared",

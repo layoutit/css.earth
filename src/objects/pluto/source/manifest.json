@@ -549,6 +549,14 @@
       "origin": "https://doi.org/10.1016/j.icarus.2016.11.012",
       "credit": "Bonnie J. Buratti and co-authors, New Horizons team; transcription and emission limit: cssEarth.",
       "acquisition": "Parameter value transcribed from the cited source into a project document; the emission limit is computed from the paper's Table 1; no data file was downloaded."
+    },
+    {
+      "path": "presentation/overview.json",
+      "purpose": "Wikipedia article route for the existing body overview panel.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored presentation link, read by site/prepare-body-overview.mts."
+      }
     }
   ]
 }

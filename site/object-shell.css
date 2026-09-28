@@ -1,3 +1,8 @@
+/* Every retained mesh parent owns a 3D frame before paced leaves connect.
+ * An identity translation preserves authored transforms while preventing WebKit
+ * from omitting an initially empty preserve-3d parent from its layer tree. */
+:where(.object-stage) .polycss-mesh { translate: 0px 0px 0px; }
+
 .object-cubic-sky {
   --object-cubic-sky-zoom: 1;
   --object-cubic-sky-camera-distance: max(

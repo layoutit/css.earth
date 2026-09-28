@@ -1,14 +1,14 @@
-import type {RasterImage} from '@cssearth/bake/objects/layers/observation';
-import type {SurfacePreviewDirectories} from '@cssearth/bake/surface-previews';
-import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from '@cssearth/bake/surface-previews';
-import {parsePagedProfile} from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import type {RasterImage} from '../objects/layers/observation/index.ts';
+import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
+import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.ts';
+import {parsePagedProfile} from '../objects/layers/paged-ellipsoid/index.ts';
 import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createProjectiveSurfaceRasterLayout } from '@cssearth/bake/scene';
-import { latitudeRasterBands } from '@cssearth/bake/objects/layers/giant';
-import { preparePagedSurfaceMap } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { createProjectiveSurfaceRasterLayout } from '../scene/index.ts';
+import { latitudeRasterBands } from '../objects/layers/giant/index.ts';
+import { preparePagedSurfaceMap } from '../objects/layers/paged-ellipsoid/index.ts';
 
 // Reverse only the declared lossless packing, before downsizing. Unrepresented
 // polar rows stay transparent; a polar sprite is not an equirectangular map.

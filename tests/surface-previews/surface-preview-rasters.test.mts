@@ -1,11 +1,11 @@
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mts';
+import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from '@cssearth/bake/surface-previews';
 import { preparePagedSurfaceMap } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { prepareProjectiveTextureLayer } from '@cssearth/bake/scene';

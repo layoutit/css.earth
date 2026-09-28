@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import { decodeNewHorizonsLorri, decodeArrokothMvic, newHorizonsCamera, bindSipCamera } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFitsPrimary } from '@cssearth/fits';
 import {array,number,nullable,optional,shape,text} from '@cssearth/core';
@@ -63,9 +62,8 @@ test('native New Horizons TAN-SIP rays agree with Astropy over the full detector
 });
 
 test('LORRI rejects a different image, incomplete quality layout and non-rigid body attitude',async()=>{
-  const bytes=await readFile(new URL('observations/lor_0408626332_0x636_sci.fit',source)),camera=await read('observations/ca06-camera.json');
-  const changed=Buffer.from(bytes);changed[changed.length-1]^=1;
-  assert.throws(()=>decodeNewHorizonsLorri(changed,camera),/hash/);
+  const bytes=await readFile(new URL('observations/lor_0408626332_0x636_sci.fit',source)),camera=await read('observations/ca06-camera.json'),other=await read('observations/ca05-camera.json');
+  assert.throws(()=>decodeNewHorizonsLorri(bytes,other),/product/);
   const short=bytes.subarray(0,readFitsPrimary(bytes).nextOffset);
   assert.throws(()=>decodeNewHorizonsLorri(short,{...camera}));
   assert.throws(()=>newHorizonsCamera(bytes,{bodyToJ2000:[[2,0,0],[0,1,0],[0,0,1]],offsetPixels:[0,0]}),/attitude/);

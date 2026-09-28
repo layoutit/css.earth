@@ -75,16 +75,16 @@ Keep its alt text, source reference and chart title meaningful.
 
 ```sh
 # Render all registered charts under output/chart-recipes/.
-node tools/prepare/cli/prepare-charts.mts
+node site/build/prepare/prepare-charts.mts
 
 # Refresh an existing object's chart images, content sizes and inventory.
-node tools/prepare/cli/prepare-charts.mts --object=mars --write
+node site/build/prepare/prepare-charts.mts --object=mars --write
 
 # Omit --object to refresh every existing chart package.
-node tools/prepare/cli/prepare-charts.mts --write
+node site/build/prepare/prepare-charts.mts --write
 
 # Regenerate this illustration from the same sources and renderers.
-node tools/prepare/cli/prepare-chart-catalog.mts --write
+node site/build/prepare/prepare-chart-catalog.mts --write
 ```
 
 The partial refresh preserves all other inventory entries, textures, galleries

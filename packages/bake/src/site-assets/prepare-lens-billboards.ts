@@ -1,4 +1,4 @@
-// `pnpm prepare:lens-billboards`: what the universe knows about every volume lens bank before fetching it.
+// `pnpm prepare:lens-billboards` (`packages/bake/cli/prepare-lens-billboards.mts`): what the universe knows about every volume lens bank before fetching it.
 // Each bank gets its context visibility (whether it fades with the galaxy) and, when its default lens has
 // prepared impostors, the one impostor view that faces the Sun, packed with the others into one atlas image.
 // From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: the atlas draws it there,
@@ -6,17 +6,15 @@
 // lens payloads; the output records each payload's pinned sha256 so a stale atlas cannot pass for a fresh one.
 // An image-layer galaxy (Andromeda, Triangulum) gets the same one view: its source-facing slices, seen from the Sun and
 // composited back to front as the page composites them, so the galaxy shows from afar before its slices load.
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { encodeLossyWebp } from '@cssearth/bake/raster';
+import { encodeLossyWebp } from '../raster/index.ts';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory } from '@cssearth/objects/node';
 
-const root = resolve(import.meta.dirname, '../..');
 const OUTPUT = { metadata: 'site/prepared-lens-billboards.json', atlas: 'site/prepared-lens-billboards.webp' };
 /** Prepared impostor views are 256 px squares; cells keep them at their prepared size. */
 const CELL_PX = 256;
@@ -109,7 +107,8 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
   return { id, payloadSha256, contextVisibility: 'galactic' as const, attached: false, view: { back: toViewer, right: rightAxis, down: downAxis }, radiusUnits, image };
 }
 
-export async function prepareLensBillboards(projectRoot = root) {
+/** Writes the lens billboards of the checkout at `projectRoot`. */
+export async function prepareLensBillboards(projectRoot = process.cwd()) {
   const objects = resolve(projectRoot, 'src/objects');
   const banks: { id: string; payloadSha256: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
     view?: { back: Vector; right: Vector; down: Vector }; radiusUnits?: number; image?: Buffer }[] = [];
@@ -167,5 +166,3 @@ export async function prepareLensBillboards(projectRoot = root) {
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);
   return { banks: banks.length, billboards: drawn.length, atlasBytes: atlas.length };
 }
-
-refuseDirectRun(import.meta);

@@ -1,18 +1,18 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
 import type {ResizeOptions,Sharp} from 'sharp';
-import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, readRgba, withAlpha } from '@cssearth/bake/raster';
-import type {SurfacePreviewDirectories} from '@cssearth/bake/surface-previews';
-import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from '@cssearth/bake/surface-previews';
+import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, detectMissingCoverage, readRgba, withAlpha } from '../raster/index.ts';
+import { coverageDirection } from '../objects/default-view/index.ts';
+import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
+import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.ts';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '@cssearth/bake/objects/interpretation';
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/interpretation/index.ts';
+import type { SolarGeometry } from '../objects/scene/index.ts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
-function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
+function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, solarGeometry: SolarGeometry, photographs = false) {
   const key = `${objectDirectory}:${photographs ? recipe.surfaces.map(s => s.id).join(',') : 'complete'}`;
   let pending = interpreters.get(key);
   if (!pending) {
@@ -22,7 +22,7 @@ function interpretFor(objectDirectory: string, objectId: string, recipe: Interpr
   }
   return pending;
 }
-import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mts';
+import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.ts';
 
 // Preserve categorical/numeric cells only where the source contract requests it.
 // Ordinary images retain the established resize and WebP presentation.
@@ -40,11 +40,24 @@ async function writeMinimap(pipeline:Sharp, nearest:boolean, file:string) {
   await writeFile(file, chosen.data);
   return chosen.info;
 }
+/** Where a lens's map has data, as the area-weighted mean body-fixed direction of its covered cells in the surface map's frame
+ * (longitude 0 at the map's left edge), for the camera stage to turn a partial map toward. The lane's own missing-cell mask
+ * when it has one; otherwise the gray gap fill found by its graticule in the minimap before its lossy encoding, where the fill
+ * is still exact. None for a preview that is not a whole-body map (a limb plate). */
+async function minimapCoverage(pipeline:Sharp, leftEdgeLongitudeDeg:number, exact?:{ missing:Uint8Array; width:number; height:number }) {
+  if (exact) return roundedDirection(coverageDirection({ lens: '', ...exact, leftEdgeLongitudeDeg: 0 }));
+  const { data, info } = await pipeline.clone().removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  if (info.width !== 2 * info.height) return undefined;
+  const missing = detectMissingCoverage(data, info, { longitudeOffsetDegrees: leftEdgeLongitudeDeg });
+  return roundedDirection(coverageDirection({ lens: '', missing, width: info.width, height: info.height, leftEdgeLongitudeDeg }));
+}
+const roundedDirection = (direction: readonly number[]) => direction.map(value => Math.round(value * 1e4) / 1e4);
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
   ...(nearest ? { kernel: 'nearest' } : {}) });
 
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
-export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs }:SurfacePreviewDirectories & { photographs?: readonly string[] }) {
+/** `solarGeometry` is the generated scene geometry (`src/platform/solar-geometry.mts`) the host loads and passes in. */
+export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs, solarGeometry }:SurfacePreviewDirectories & { photographs?: readonly string[]; solarGeometry: SolarGeometry }) {
   const prepared = await optionalJson(resolve(outputDirectory, 'surfaces.json'));
   const rasterInput = await optionalJson(resolve(objectDirectory, 'source/preparation/raster.json'));
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);
@@ -75,13 +88,13 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
     const interpretation = science.get(surface.id);
     const nearest = nearestDisplay(surface, interpretation?.scientific, interpretation);
-    let pipeline;
+    let pipeline, exactMissing: { missing: Uint8Array; width: number; height: number } | undefined;
     if (interpretation && typeof surface.source === 'string') {
       const recipe = requireRecord(rasterInput);
       const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
       const parsed = parseInterpreterRecipe(recipe);
       const subset = selected ? selectSurfaceDependencies(parsed, [...selected]) : parsed;
-      const interpreted = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
+      const interpreted = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, solarGeometry, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
       const emission = requireRecord(recipe).emission;
       // A shadow's sphere is not drawn: its preview is what is, the off-limb image with the shadow disc over its centre.
       if (limbPreviews.has(surface.id) && interpreted.plates?.limb) {
@@ -111,6 +124,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
             { brightness: requireFiniteNumber(underlay.brightness), ...(typeof underlay.grayscale === 'boolean' ? { grayscale: underlay.grayscale } : {}), ...(typeof underlay.bits === 'number' ? { bits: underlay.bits } : {}) });
           pipeline = sharp(drawn, { raw: { width, height, channels: 4 } }).resize(minimapResize(nearest));
         } else pipeline = sharp(interpreted.data, { raw: { width, height, channels: interpreted.channels } }).resize(minimapResize(nearest));
+        if (interpreted.missing) exactMissing = { missing: interpreted.missing, width, height };
       }
     } else pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
@@ -125,17 +139,20 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       }
       pipeline = sharp(shifted, { raw: info });
     }
+    const framedOffset = framing?.centerLongitudeDegrees === undefined ? 0 : ((framing.centerLongitudeDegrees - 180) % 360 + 360) % 360;
+    const coverage = await minimapCoverage(pipeline, framedOffset, exactMissing);
     const result = await writeMinimap(pipeline, nearest, resolve(outputDirectory, path));
-    images.push({ id: surface.id, path, width: result.width, height: result.height,
+    images.push({ id: surface.id, path, width: result.width, height: result.height, ...(coverage ? { coverage } : {}),
       ...(surface.attribution ? { attribution: surface.attribution } : {}) });
   }
   if (!selected) for await (const preview of recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory })) {
     if (images.some(image => image.id === preview.id)) continue;
     const path = `minimaps/${preview.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-    const result = await writeMinimap(sharp(preview.raster.data, { raw: preview.raster.info })
-      .resize({ width: 640, withoutEnlargement: true }), false, resolve(outputDirectory, path));
-    images.push({ id: preview.id, path, width: result.width, height: result.height });
+    const previewPipeline = sharp(preview.raster.data, { raw: preview.raster.info }).resize({ width: 640, withoutEnlargement: true });
+    const coverage = await minimapCoverage(previewPipeline, 0);
+    const result = await writeMinimap(previewPipeline, false, resolve(outputDirectory, path));
+    images.push({ id: preview.id, path, width: result.width, height: result.height, ...(coverage ? { coverage } : {}) });
   }
   const [controls, lenses, bindings] = await Promise.all([
     optionalJson(resolve(outputDirectory, 'controls.json')),
@@ -155,4 +172,3 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   return images;
 }
 
-refuseDirectRun(import.meta);

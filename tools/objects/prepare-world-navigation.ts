@@ -8,7 +8,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
 import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
-import { readDefaultLensCoverage, coverageDirection, visibleCoverageShare } from '@cssearth/bake/objects/default-view';
+import { readDefaultLensCoverage, coverageDirection, visibleCoverageShare, faceLensData, readLensCoverages, authoredFocusLenses, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }
@@ -72,8 +72,11 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
   const coverage = !observation?.length && light === 'sun' ? await readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
-  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light, coverage: coverage && coverageDirection(coverage) });
-  if (coverage) {
+  // The minimap step records the default lens's coverage from its exact mask; a minimap from before that record is read back.
+  const lensCoverages = await readLensCoverages(objectDirectory), recorded = coverage && lensCoverages.get(coverage.lens);
+  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light,
+    coverage: recorded ? bodyFixedCoverage(recorded, placement.mapLeftEdgeLongitudeDeg) : coverage && coverageDirection(coverage) });
+  if (coverage && !recorded) {
     const shown = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, angles));
     const design = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, LIT_DEFAULT_VIEW));
     if (shown < design) throw new Error(`${descriptor.id}: the default camera (yaw ${angles.defaultControlYawDegrees.toFixed(1)}) shows ${(shown * 100).toFixed(1)}% of the ${coverage.lens} map's data, less than the design pose's ${(design * 100).toFixed(1)}%.`);
@@ -92,8 +95,13 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const sun = oriented.sun ? { ...oriented.sun, localDirection,
     referenceViewDirection: prepareSunReferenceViewDirection(geometry, { bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
-  const prepared = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
+  const tracked = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
+  // A partial map turns the camera toward its data when a reader picks it, by the rule the default camera follows; like the
+  // default pose, only a solved lane takes it. A paged globe's lens cameras are its recipe's own (Earth's cross-sections).
+  const prepared = solved && !sources.has('paged-ellipsoid') ? faceLensData(tracked, { geometry, bodyId: descriptor.id,
+    mapLeftEdgeLongitudeDeg: placement.mapLeftEdgeLongitudeDeg, camera, coverages: lensCoverages,
+    authored: authoredFocusLenses(sources.get('terrestrial'), sources.get('presentation')) }) : tracked;
   return { definition: prepared, frame, systemTransform: solved, defaultCamera: posed ? { angles, transform: posed.transform } : null,
     receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
       frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,

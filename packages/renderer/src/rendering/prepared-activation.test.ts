@@ -70,7 +70,7 @@ test('retiring before activation never connects a leaf', async () => {
 
 test('real prepared surface anchors and flat overlays remain resident while surface leaves connect', async () => {
   let overlayCount = 0;
-  for (const id of ['lutetia', 'bennu', 'ceres', 'earth']) {
+  for (const id of ['lutetia', 'bennu', 'ceres', 'earth', 'ida']) {
     const definition = JSON.parse(readFileSync(new URL(`../../../../src/objects/${id}/prepared/runtime.json`, import.meta.url), 'utf8'));
     const { document, window } = parseHTML('<html><body></body></html>');
     const callbacks: FrameRequestCallback[] = [];
