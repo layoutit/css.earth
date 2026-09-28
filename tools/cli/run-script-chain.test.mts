@@ -35,9 +35,9 @@ test('site chains restore prepared assets before discovery reads them, and a dep
     const catalogue = commands.indexOf('node tools/prepare/cli/prepare-catalog.mts');
     assert.ok(restore >= 0 && restore < catalogue, `${name}: first restore at step ${restore}, catalogue at step ${catalogue}`);
   }
-  // The deploy bundles the published world context; a later restore replaces the copy build:tools regenerates.
+  // The deploy bundles the published world context, so it restores once and never regenerates the world. A copy made on
+  // the runner differs from the published bytes, and restoring over it re-hashed every restored file.
   const deploy = expandScriptChain(scripts, 'build:deploy').map(step => step.command);
-  const lastWorld = deploy.findLastIndex(command => command.includes('prepare-spatial-context'));
-  const lastRestore = deploy.lastIndexOf('node tools/assets/setup.mts');
-  assert.ok(lastWorld >= 0 && lastWorld < lastRestore, `build:deploy: world context at step ${lastWorld}, last restore at step ${lastRestore}`);
+  assert.equal(deploy.findIndex(command => command.includes('prepare-spatial-context')), -1, 'build:deploy regenerates the world context');
+  assert.equal(deploy.filter(command => command === 'node tools/assets/setup.mts').length, 1, 'build:deploy restores once');
 });

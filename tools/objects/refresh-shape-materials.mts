@@ -17,6 +17,7 @@ import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '@cssearth/bake/navigation';
 import { validateMarkerDescriptor, renderMarker } from '@cssearth/bake/navigation';
+import { prepareSearchThumbnails } from '@cssearth/bake/site-assets';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
@@ -172,6 +173,8 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     }
 
     for (const filename of await readdir(markerStage)) await replaceAsset(resolve(markerStage, filename), resolve('public/navigation', filename));
+    // The committed search preview follows its context image.
+    await prepareSearchThumbnails();
   }
   await pretty(manifestPath, manifest);
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });

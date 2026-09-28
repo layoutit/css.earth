@@ -122,7 +122,7 @@ its validators accept); the renderer never imports the bake.
   bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
   them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `tests/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
-  not an object's own: dataset sprites and search thumbnails cut from prepared page and navigation images, the planets'
+  not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
   photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`
   for them and checks the pinned version when the excerpts are made). It imports `raster`, `runtime-source`,
   `objects/raster` and `objects/charts`. Its commands are `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,
