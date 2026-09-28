@@ -92,7 +92,7 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
     if (!lensIds.includes(key)) return lens;
     const label = labels.get(key); if (!label) throw new Error(`Missing photographic caption: ${key}`); return label;
   });
-  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.js');
+  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
   const navigation = await prepareWorldNavigationDefinition({ objectDirectory, projectRoot: process.cwd(),
     definition: { ...runtime, controls: { ...controls, lenses: { ...lenses, controls: selection } } } });
   const scene = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));

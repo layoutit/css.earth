@@ -16,7 +16,7 @@ import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view'
 import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
-import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
+import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.ts';
 import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
