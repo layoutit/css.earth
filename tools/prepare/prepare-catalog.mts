@@ -105,21 +105,25 @@ async function readLensVolumes(entries: readonly CatalogEntry[], projectRoot: st
   return volumes;
 }
 
-/** The frames of the galaxies the universe draws that the Local Group catalogue lists as members (their published
- * membership), which the Local Group overview fits in view. */
-async function readLocalGroupVolumes(projectRoot: string) {
-  const catalogue: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/prepared/catalogue.json'), 'utf8'));
-  const objects = isRecord(catalogue) && Array.isArray(catalogue.objects) ? catalogue.objects : [];
-  const volumes: Record<string, unknown> = {};
-  for (const object of objects) {
-    if (!isRecord(object) || typeof object.detailedObjectId !== 'string' || !isRecord(object.membership) || object.membership.group !== 'local-group') continue;
-    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', object.detailedObjectId, 'object.json'), 'utf8'));
+/** The galaxies the Local Group catalogue draws (its recipe's detail objects), each at its frame origin with the focus
+ * radius the recipe gives it: what the Local Group overview fits in view. The Milky Way has no focus radius there; the
+ * overview reads its volume directly. */
+async function readLocalGroupGalaxies(projectRoot: string) {
+  const recipePath = 'src/objects/local-group/source/catalogue.json';
+  const recipe: unknown = JSON.parse(await readFile(resolve(projectRoot, recipePath), 'utf8'));
+  if (!isRecord(recipe) || !isRecord(recipe.detailObjects)) throw new TypeError(`${recipePath}: detailObjects is missing.`);
+  const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
+  for (const [row, detail] of Object.entries(recipe.detailObjects)) {
+    if (!isRecord(detail) || typeof detail.id !== 'string') throw new TypeError(`${recipePath}: detailObjects.${row} has no id.`);
+    if (detail.focusRadiusM === undefined) continue;
+    if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
+    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
     if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
-      throw new TypeError(`src/objects/${object.detailedObjectId}/object.json: the Local Group member ${String(object.id)} has no properties.frame.`);
+      throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.frame.`);
     }
-    volumes[object.detailedObjectId] = descriptor.properties.frame;
+    galaxies[detail.id] = { originM: descriptor.properties.frame.originM, radiusM: detail.focusRadiusM };
   }
-  return volumes;
+  return galaxies;
 }
 
 async function writeGenerated(output: string, text: string) {
@@ -155,7 +159,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.distances), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.focuses), JSON.stringify(focuses) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
-  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-volumes.json'), JSON.stringify(await readLocalGroupVolumes(projectRoot)) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));

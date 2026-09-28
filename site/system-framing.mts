@@ -14,7 +14,7 @@ interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import lensVolumes from './prepared-lens-volumes.json' with { type: 'json' };
-import localGroupVolumes from './prepared-local-group-volumes.json' with { type: 'json' };
+import localGroupGalaxies from './prepared-local-group-galaxies.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
@@ -82,17 +82,21 @@ export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume)
 /** Volumes a body shows through one of its lenses, by volume id (tools/prepare/prepare-catalog.mts). */
 export const LENS_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(lensVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
 
-/** The Local Group as the universe draws it: the Milky Way and every drawn galaxy the catalogue lists as a member
- * (tools/prepare/prepare-catalog.mts), one box in reference axes around all their prepared bounds. */
+/** The Local Group as the universe draws it: the Milky Way's volume and the other galaxies the Local Group catalogue draws,
+ * each a sphere of its recipe focus radius (tools/prepare/prepare-catalog.mts), in one box in reference axes. */
 const LOCAL_GROUP_BOX = (() => {
-  const corners = [GALACTIC_VOLUME, ...Object.values(localGroupVolumes).map(frame => parseDensityVolumeFrame(frame))].flatMap(volume => {
-    const rotation = worldRotationFromQuaternion(volume.localToReferenceXyzw), { min, max } = volume.boundsUnits;
-    return [0, 1, 2, 3, 4, 5, 6, 7].map(corner => {
-      const local = tuple(axis => ((corner >> axis) & 1 ? max : min)[axis]! * volume.metersPerUnit);
-      const offset = rotateWorldPosition(rotation, local);
-      return tuple(axis => volume.originM[axis]! + offset[axis]);
-    });
+  const rotation = worldRotationFromQuaternion(GALACTIC_VOLUME.localToReferenceXyzw), { min, max } = GALACTIC_VOLUME.boundsUnits;
+  const galaxy = [0, 1, 2, 3, 4, 5, 6, 7].map(corner => {
+    const offset = rotateWorldPosition(rotation, tuple(axis => ((corner >> axis) & 1 ? max : min)[axis]! * GALACTIC_VOLUME.metersPerUnit));
+    return tuple(axis => GALACTIC_VOLUME.originM[axis]! + offset[axis]);
   });
+  const members = Object.entries(localGroupGalaxies as Record<string, { originM: unknown; radiusM: unknown }>).flatMap(([id, { originM, radiusM }]) => {
+    if (!Array.isArray(originM) || originM.length !== 3 || !originM.every(Number.isFinite) || typeof radiusM !== 'number' || !(radiusM > 0)) {
+      throw new TypeError(`prepared-local-group-galaxies.json: ${id} needs an origin of three numbers and a positive radius.`);
+    }
+    return [-1, 1].flatMap(sign => [0, 1, 2].map(axis => tuple(index => (originM[index] as number) + (index === axis ? sign * radiusM : 0))));
+  });
+  const corners = [...galaxy, ...members];
   const minimum = tuple(axis => Math.min(...corners.map(corner => corner[axis]!))), maximum = tuple(axis => Math.max(...corners.map(corner => corner[axis]!)));
   const centre = tuple(axis => (minimum[axis] + maximum[axis]) / 2);
   return { centre, candidate: { minimumM: tuple(axis => minimum[axis] - centre[axis]), maximumM: tuple(axis => maximum[axis] - centre[axis]),
