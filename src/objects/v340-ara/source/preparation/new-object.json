@@ -1,0 +1,54 @@
+{
+  "id": "v340-ara",
+  "name": "V340 Ara",
+  "system": "V340 Ara system",
+  "description": "A Cepheid in the Milky Way that pulsates every 20.81 days; its mean radius is 99.1 solar radii.",
+  "target": "V340 Ara",
+  "gaia": "5937099633141128448",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 99.1,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, V340 Ara: Baade-Wesselink mean radius (solar radii) 99.1 +/- 8.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 8.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5250,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 209, Name='V340 Ara', columns Teff, e_Teff (K): Teff 5250 +/- 323 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 323
+  },
+  "distance": {
+    "value": 3711.8,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, V340 Ara: Baade-Wesselink distance (pc) 3711.8 +/- 242.3 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 242.3
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.546 +/- 0.048 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way that swells and shrinks every 20.8 days.",
+    "introduction": "Its mean radius, 99.1 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,712 parsecs away.",
+    "locator": "table10, V340 Ara: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "order": 1933
+}

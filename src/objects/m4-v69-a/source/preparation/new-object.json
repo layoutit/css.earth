@@ -1,0 +1,60 @@
+{
+  "id": "m4-v69-a",
+  "name": "M4 V69 A",
+  "system": "M4 V69 system",
+  "description": "The primary star of the eclipsing binary M4 V69, 0.7665 solar masses and 0.8655 solar radii; the two stars eclipse each other every 48.188 days.",
+  "target": "[KTR2013] V69",
+  "gaia": "6045461417425321984",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "credit": "Kaluzny et al. (2013AJ....145...43K)"
+  },
+  "radius": {
+    "value": 0.8655,
+    "source": "Primary radius (solar radii) 0.8655 +/- 0.0097, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 0.0097
+  },
+  "mass": {
+    "value": 0.7665,
+    "source": "Primary mass (solar masses) 0.7665 +/- 0.0053, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 0.0053
+  },
+  "temperature": {
+    "value": 6081,
+    "source": "Primary log Teff 3.784 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 6081 K",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 126
+  },
+  "gravity": {
+    "value": 4.444,
+    "source": "Primary log g 4.444 +/- 0.132, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 0.132
+  },
+  "distance": {
+    "value": 1820,
+    "source": "Kaluzny et al. (2013), AJ 145, 43, the distance to M4 from V66 and V69: 1.82 +/- 0.04 kpc",
+    "url": "https://arxiv.org/abs/1301.2946",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The primary star of M4 V69, a pair that eclipse each other every 48.188 days.",
+    "introduction": "It has 0.7665 solar masses and 0.8655 solar radii; its partner has 0.7278 and 0.8074, measured from the eclipses and the stars' motions.",
+    "locator": "DEBCat (Southworth 2015, ASPC 496, 164), M4 V69: Mass, Radius and Period, from Kaluzny et al. (2013AJ....145...43K)"
+  },
+  "notes": [
+    "Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Kaluzny et al. (2013AJ....145...43K).",
+    "SIMBAD knows it as [KTR2013] V69 (not Cl* NGC 6121 SAW V69, a different variable); it is Gaia DR3 6045461417425321984, G = 16.67 against DEBCat's V = 17.01."
+  ],
+  "radialVelocity": {
+    "value": 66.9,
+    "uncertainty": 0.04,
+    "source": "SIMBAD's radial velocity for Gaia DR3 6045461417425321984 (quality A), from 2013AJ....145...43K; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K/abstract"
+  },
+  "order": 1990
+}

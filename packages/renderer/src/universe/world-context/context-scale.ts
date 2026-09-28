@@ -68,6 +68,8 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     of(pointIndex: number) { const root = rootIndex[pointIndex]!; return root < 0 ? 1 : values[root]!; },
     /** A system's star: the focus or a placed star that bodies orbit. */
     isSystemStar(id: string) { return roots.includes(id); },
+    /** The indexed point belongs to a system this camera still draws; a star outside every system never does. */
+    inShownSystem(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && values[root]! > 0; },
     /** The indexed point belongs to the focus star's own system. */
     inFocusSystem(pointIndex: number) { return rootIndex[pointIndex] === 0; },
     /** Inside its host's authored range a system draws every member's orbit, named or not. */

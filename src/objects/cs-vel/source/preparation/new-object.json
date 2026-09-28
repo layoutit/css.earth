@@ -1,0 +1,54 @@
+{
+  "id": "cs-vel",
+  "name": "CS Vel",
+  "system": "CS Vel system",
+  "description": "A Cepheid in the Milky Way that pulsates every 5.90 days; its mean radius is 43 solar radii.",
+  "target": "CS Vel",
+  "gaia": "5308893149150949248",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 43,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, CS Vel: Baade-Wesselink mean radius (solar radii) 43 +/- 2.4 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 2.4
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5375,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 58, Name='CS Vel', columns Teff, e_Teff (K): Teff 5375 +/- 177 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 177
+  },
+  "distance": {
+    "value": 3297.7,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, CS Vel: Baade-Wesselink distance (pc) 3297.7 +/- 182.7 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 182.7
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.737 +/- 0.029 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way that swells and shrinks every 5.9 days.",
+    "introduction": "Its mean radius, 43 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,298 parsecs away.",
+    "locator": "table10, CS Vel: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "order": 1937
+}

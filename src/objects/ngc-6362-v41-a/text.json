@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-6362-v41-a",
+  "card": {
+    "text": "The primary star of NGC 6362 V41, a pair that eclipse each other every 17.889 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "label": "Kaluzny et al. (2015), The Astronomical Journal 150 155",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V41: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has 0.8215 solar masses and 1.0739 solar radii; its partner has 0.728 and 0.7307, measured from the eclipses and the stars' motions.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "label": "Kaluzny et al. (2015), The Astronomical Journal 150 155",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V41: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

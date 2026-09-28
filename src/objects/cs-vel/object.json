@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "cs-vel",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CS Vel",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 29915100
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cs-vel-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CS Vel",
+      "classification": "star",
+      "color": "#ffecdd",
+      "distanceAu": 680199521.4,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 5.9 days.",
+      "systemName": "CS Vel system",
+      "order": 1937,
+      "context": {
+        "order": 1934
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -49385888760471430000,
+        34205724881547850000,
+        -82130185235567440000
+      ],
+      "presentationToReference": [
+        -0.4853343652401094,
+        0.6635151078626399,
+        0.5693841019514064,
+        0.3361529819476416,
+        -0.45956438970263397,
+        0.8220716175887319,
+        -0.8071255953348827,
+        -0.5903797704488822,
+        1.9071205130603567e-7
+      ],
+      "orbitUpReference": [
+        -0.6635151078626399,
+        0.45956438970263397,
+        0.5903797704488822
+      ],
+      "metersPerUnit": 96500322.58064516,
+      "bodyRadiusM": 29915100000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

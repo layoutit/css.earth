@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "v495-cyg",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "V495 Cyg",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 66161070
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/v495-cyg-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "V495 Cyg",
+      "classification": "star",
+      "color": "#ffecdd",
+      "distanceAu": 656169590.1,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 6.7 days.",
+      "systemName": "V495 Cyg system",
+      "order": 1940,
+      "context": {
+        "order": 1937
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        44948075902778940000,
+        -66655821060991510000,
+        56323764984494560000
+      ],
+      "presentationToReference": [
+        0.4578987940944593,
+        0.3207993534390257,
+        -0.8291058250910694,
+        -0.6790417491779595,
+        -0.47572972586678647,
+        -0.5590917016018477,
+        0.5737865432721276,
+        -0.8190048856751804,
+        -8.630510517096501e-8
+      ],
+      "orbitUpReference": [
+        -0.3207993534390257,
+        0.47572972586678647,
+        0.8190048856751804
+      ],
+      "metersPerUnit": 213422806.4516129,
+      "bodyRadiusM": 66161070000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

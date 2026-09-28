@@ -516,7 +516,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // Use the same admission during motion and at rest. Clear committed
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
-      const accepted = [...acceptedLandmarks, ...admitStableLabels(otherCandidates, labelBudget)];
+      // The system the camera is in is named before the field behind it: a star thousands of parsecs beyond the Sun must not
+      // take the caption of a body orbiting it. A hovered or selected body keeps its place in the first pass.
+      const ownSystem = (candidate: typeof candidates[number]) => candidate.pinned > 0 || systemFade.inShownSystem(candidate.projected.entry.index);
+      const accepted = [...acceptedLandmarks, ...admitStableLabels(otherCandidates.filter(ownSystem), labelBudget),
+        ...admitStableLabels(otherCandidates.filter(candidate => !ownSystem(candidate)), labelBudget)];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {

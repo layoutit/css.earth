@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hv-899",
+  "angularDiameterMas": 0.02,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 89,049,600 km at 47670.40 pc = 0.02 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 47670.4,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, HV 899: Baade-Wesselink distance (pc) 47670.4 +/- 1397.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 47670.4 +/- 1397.6 pc; Gaia DR3 parallax -0.0028 +/- 0.0154 mas (same row, RUWE 1.07), -0.2 standard errors, is not used",
+  "radiusKm": 89049600,
+  "radiusSource": "Radius 128 +/- 3.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 899: Baade-Wesselink mean radius (solar radii) 128 +/- 3.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 89,049,600 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5250 +/- 125 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0986, columns Teffp, e_Teffp: Teff 5250 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5250,
+  "effectiveTemperatureSource": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0986, columns Teffp, e_Teffp: Teff 5250 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

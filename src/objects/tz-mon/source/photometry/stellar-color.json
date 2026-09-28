@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "tz-mon",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5375,
+      "lowerKelvin": 5171,
+      "upperKelvin": 5579,
+      "citation": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 187, Name='TZ Mon', columns Teff, e_Teff (K): Teff 5375 +/- 204 K from a fit to the spectral energy distribution at mean light (not spectroscopic): 5375 +/- 204 K, https://arxiv.org/abs/2002.02186"
+    },
+    "note": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.431 +/- 0.029 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

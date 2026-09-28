@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-6256-150-5-155",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kaluzny et al. (2015): THE CLUSTER AGES EXPERIMENT (CASE). VII. ANALYSIS OF TWO ECLIPSING BINARIES IN THE GLOBULAR CLUSTER NGC 6362",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1508.04894"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/150/5/155"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015AJ....150..155K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-6256/150/5/155",
+      "label": "The Astronomical Journal 150 155"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kaluzny et al. (2015), The Astronomical Journal 150 155",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K"
+    }
+  ],
+  "publisher": "The Astronomical Journal 150 155",
+  "creators": [
+    "J. Kaluzny",
+    "I. B. Thompson",
+    "A. Dotter",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

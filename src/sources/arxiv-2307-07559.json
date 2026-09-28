@@ -1,0 +1,50 @@
+{
+  "id": "arxiv-2307-07559",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Groenewegen & Lub (2023): Spectral energy distributions of classical cepheids in the Magellanic Clouds",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2307.07559"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346062"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2307.07559",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202346062",
+      "label": "A&A 676, A136 (2023)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2307.07559",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Groenewegen & Lub (2023), A&A 676, A136 (2023)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2307.07559"
+    }
+  ],
+  "publisher": "A&A 676, A136 (2023)",
+  "creators": [
+    "Martin Groenewegen",
+    "Jan Lub"
+  ],
+  "publicationDate": "2023"
+}

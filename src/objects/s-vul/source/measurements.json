@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "s-vul",
+  "angularDiameterMas": 0.65,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 189,508,680 km at 3879.90 pc = 0.65 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 3879.9,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, S Vul: Baade-Wesselink distance (pc) 3879.9 +/- 195.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 3879.9 +/- 195.8 pc; Gaia DR3 parallax 0.2051 +/- 0.0202 mas (same row, RUWE 1.03), 10.2 standard errors, is not used",
+  "radiusKm": 189508680,
+  "radiusSource": "Radius 272.4 +/- 13.2 solar radii from Groenewegen (2013), A&A 550, A70, table10, S Vul: Baade-Wesselink mean radius (solar radii) 272.4 +/- 13.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 189,508,680 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4625 +/- 189 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 159, Name='S Vul', columns Teff, e_Teff (K): Teff 4625 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4625,
+  "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 159, Name='S Vul', columns Teff, e_Teff (K): Teff 4625 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
+  "surfaceGravityLogg": 0.93,
+  "surfaceGravitySource": "Luck (2018), AJ 156, 171, VizieR J/AJ/156/171/table11, recno 52, Name='S Vul', column Gavg ('Average gravity over cycle'; log g in dex, ReadMe unit label cm/s2): log g 0.93 averaged over the pulsation cycle (https://ui.adsabs.harvard.edu/abs/2018AJ....156..171L)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

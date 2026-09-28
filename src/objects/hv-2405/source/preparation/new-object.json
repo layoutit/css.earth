@@ -1,0 +1,60 @@
+{
+  "id": "hv-2405",
+  "name": "HV 2405",
+  "system": "HV 2405 system",
+  "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 6.92 days; its mean radius is 60.8 solar radii.",
+  "gaia": "4652001643815346176",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 60.8,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, HV 2405: Baade-Wesselink mean radius (solar radii) 60.8 +/- 6 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 6
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5625,
+    "source": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC1327, columns Teffp, e_Teffp: Teff 5625 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2307.07559",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 63519.3,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, HV 2405: Baade-Wesselink distance (pc) 63519.3 +/- 6336.9 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 6336.9
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.07 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 6.9 days.",
+    "introduction": "Its mean radius, 60.8 solar radii, comes from comparing how fast its surface moves with how its size changes, 63,519 parsecs away.",
+    "locator": "table10, HV 2405: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
+    "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
+    "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 4652001643815346176 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204652001643815346176"
+  },
+  "order": 1961
+}

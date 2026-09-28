@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ogle-smc-ecl-1421-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "OGLE-SMC-ECL-1421 A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12313890
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ogle-smc-ecl-1421-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "OGLE-SMC-ECL-1421 A",
+      "classification": "star",
+      "color": "#ffecde",
+      "distanceAu": 12794605931.5,
+      "description": "The primary star of OGLE-SMC-ECL-1421, a pair that eclipse each other every 102.834 days.",
+      "systemName": "OGLE-SMC-ECL-1421 system",
+      "order": 2000,
+      "context": {
+        "order": 1997
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        553010528365535760000,
+        118500374723992440000,
+        -1.8285809677856995e+21
+      ],
+      "presentationToReference": [
+        0.28892236359656065,
+        -0.9341428140635005,
+        0.20952582358101168,
+        0.061910952135978546,
+        -0.20017018947115606,
+        -0.9778031137466775,
+        -0.9553485760806855,
+        -0.2954811299907422,
+        -2.6786075896809076e-8
+      ],
+      "orbitUpReference": [
+        0.9341428140635005,
+        0.20017018947115606,
+        0.2954811299907422
+      ],
+      "metersPerUnit": 39722225.80645161,
+      "bodyRadiusM": 12313890000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

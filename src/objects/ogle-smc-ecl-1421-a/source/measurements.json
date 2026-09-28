@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ogle-smc-ecl-1421-a",
+  "angularDiameterMas": 0,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 12,313,890 km at 62030.00 pc = 0 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 62030,
+  "distanceSource": "Graczyk et al. (2020), ApJ 904, 13, the distance to OGLE-SMC-ECL-1421: 62.03 +/- 0.64 kpc (https://arxiv.org/abs/2010.08754): 62030 +/- 640 pc; Gaia DR3 parallax 0.0577 +/- 0.0521 mas (same row, RUWE 1.06), 1.1 standard errors, is not used",
+  "radiusKm": 12313890,
+  "radiusSource": "Radius 17.7 +/- 0.3 solar radii from Primary radius (solar radii) 17.7 +/- 0.3, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G): 12,313,890 km at 695,700 km per solar radius. Mass 2.72 +/- 0.02 solar masses from Primary mass (solar masses) 2.72 +/- 0.02, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G); GM is that mass times the JPL solar GM. Temperature 5395 +/- 99 K from Primary log Teff 3.732 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G): 5395 K (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5395,
+  "effectiveTemperatureSource": "Primary log Teff 3.732 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G): 5395 K (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G)",
+  "surfaceGravityLogg": 2.37,
+  "surfaceGravitySource": "Primary log g 2.37 +/- 0.01, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

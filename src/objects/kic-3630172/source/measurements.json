@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kic-3630172",
+  "angularDiameterMas": 0.21,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 12,444,195 km at 805.58 pc = 0.21 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 805.5791714189629,
+  "distanceSource": "Gaia DR3 parallax 1.2413 +/- 0.0100 mas (same row, RUWE 0.86): 805.58 pc, no zero-point correction",
+  "radiusKm": 12444194.6,
+  "radiusSource": "Radius 17.8873 +/- 0.3357 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3630172 (Gold): Radius (Mosser scale, solar radii) 17.8873 +/- 0.3357 (https://arxiv.org/abs/2410.00102): 12,444,195 km at 695,700 km per solar radius. Mass 1.4684 +/- 0.0619 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3630172 (Gold): Mass (Mosser scale, solar masses) 1.4684 +/- 0.0619 (https://arxiv.org/abs/2410.00102); GM is that mass times the JPL solar GM. Temperature 4366 +/- 39 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3630172 (Gold): APOGEE effective temperature (K) 4366.086 +/- 38.7928 (https://arxiv.org/abs/2410.00102). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4366,
+  "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3630172 (Gold): APOGEE effective temperature (K) 4366.086 +/- 38.7928 (https://arxiv.org/abs/2410.00102)",
+  "surfaceGravityLogg": 2.0902,
+  "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3630172 (Gold): Asteroseismic log g 2.0902 +/- 0.0041 (https://arxiv.org/abs/2410.00102)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

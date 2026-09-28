@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m4-v66-a",
+  "card": {
+    "text": "The primary star of M4 V66, a pair that eclipse each other every 8.111 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-145-2-43",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+        "label": "Kaluzny et al. (2013), The Astronomical Journal 145 43",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), M4 V66: Mass, Radius and Period, from Kaluzny et al. (2013AJ....145...43K)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has 0.7842 solar masses and 0.9347 solar radii; its partner has 0.7443 and 0.8298, measured from the eclipses and the stars' motions.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-145-2-43",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+        "label": "Kaluzny et al. (2013), The Astronomical Journal 145 43",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), M4 V66: Mass, Radius and Period, from Kaluzny et al. (2013AJ....145...43K)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

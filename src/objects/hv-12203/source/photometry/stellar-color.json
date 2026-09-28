@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hv-12203",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5750,
+      "lowerKelvin": 5625,
+      "upperKelvin": 5875,
+      "citation": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC3750, columns Teffp, e_Teffp: Teff 5750 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic): 5750 +/- 125 K, https://arxiv.org/abs/2307.07559"
+    },
+    "note": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.06 +/- 0.004 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

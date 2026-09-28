@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ngc-6362-v40-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 6362 V40 A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 922011.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngc-6362-v40-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 6362 V40 A",
+      "classification": "star",
+      "color": "#fff5f5",
+      "distanceAu": 1577719503,
+      "description": "The primary star of NGC 6362 V40, a pair that eclipse each other every 5.296 days.",
+      "systemName": "NGC 6362 V40 system",
+      "order": 1992,
+      "context": {
+        "order": 1989
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -11183099909848881000,
+        -91301669179605800000,
+        -217361509350123400000
+      ],
+      "presentationToReference": [
+        -0.04738132926367859,
+        0.11196303827908133,
+        -0.9925821314614343,
+        -0.3868332112393316,
+        0.9141002977676251,
+        0.1215759528171819,
+        -0.9209316349868071,
+        -0.38972416358298334,
+        2.6555094525658055e-7
+      ],
+      "orbitUpReference": [
+        -0.11196303827908133,
+        -0.9141002977676251,
+        0.38972416358298334
+      ],
+      "metersPerUnit": 2974229.6774193547,
+      "bodyRadiusM": 922011200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kic-5180026",
+  "displayName": "KIC 5180026",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "19 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2410-00102",
+          "url": "https://arxiv.org/abs/2410.00102",
+          "label": "Pinsonneault et al. (2024), The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1,638 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-kic-5180026",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "kic-5180026-lens-color.webp",
+        "surface": "kic-5180026-surface-color@2x.webp",
+        "poles": "kic-5180026-poles-color@2x.webp",
+        "source": {
+          "id": "kic-5180026-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2410.00102"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,430 K and log g 2.0361 (u1 0.795, u2 0.022): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)",
+      "href": "https://arxiv.org/abs/2410.00102"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2410.00102",
+      "credit": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kic-5180026.json",
+      "credit": "Pinsonneault et al. radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+/* AQ Pup: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.object-stage[data-object-id="aq-pup"] > :is(.polycss-camera, .aq-pup-corona-layer, .aq-pup-limb-layer) {
+  --aq-pup-scene-side-padding: 16px;
+  --aq-pup-reference-width: 1920px;
+  --aq-pup-reference-height: 1080px;
+  --aq-pup-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--aq-pup-scene-side-padding) - var(--aq-pup-scene-side-padding)) /
+        var(--aq-pup-reference-width)
+    ),
+    calc(100cqh / var(--aq-pup-reference-height))
+  );
+}
+
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="aq-pup"] > :is(.aq-pup-corona-layer, .aq-pup-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="aq-pup"] .aq-pup-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="aq-pup"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="aq-pup"] .aq-pup-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="aq-pup"] .aq-pup-body {
+  transform-style: preserve-3d;
+}
+
+.object-stage[data-object-id="aq-pup"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
+.object-stage[data-object-id="aq-pup"] .aq-pup-corona-layer {
+  background-image: var(--aq-pup-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(600px * var(--aq-pup-camera-zoom, 1))
+    calc(600px * var(--aq-pup-camera-zoom, 1));
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+.object-stage[data-object-id="aq-pup"] .aq-pup-limb-layer {
+  background-image: var(--aq-pup-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(496px * var(--aq-pup-camera-zoom, 1))
+    calc(496px * var(--aq-pup-camera-zoom, 1));
+}
+
+.object-stage[data-object-id="aq-pup"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="aq-pup"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="aq-pup"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
