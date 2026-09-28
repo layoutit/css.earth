@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "gaia-dr3-3341148006949062016",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4601,
+      "lowerKelvin": 4588.5,
+      "upperKelvin": 4613.5,
+      "citation": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3341148006949062016: teff_gspphot 4601.1064 K (16th-84th percentiles 4590.782-4615.8105), the temperature FLAME used: 4601 +/- 12.5 K, https://doi.org/10.1051/0004-6361/202243462"
+    },
+    "note": "GSP-Phot fits an extinction A_G = 1.40 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the colour routes do not remove extinction; GSP-Phot measured its temperature, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

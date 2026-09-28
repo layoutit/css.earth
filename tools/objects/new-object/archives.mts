@@ -139,7 +139,10 @@ export async function identify(resolver: Resolver, target: string | undefined, g
   // A catalogue name SIMBAD does not hold (some KIC numbers) is not fatal when the spec also gives the star's Gaia DR3 source.
   const byTarget = target ? await resolver(target) : undefined, name = byTarget || !gaia ? target ?? `Gaia DR3 ${gaia}` : `Gaia DR3 ${gaia}`;
   const found = byTarget ?? await resolver(name);
-  if (!found) throw new Error(`${id}: SIMBAD does not know ${target ? `${target}${gaia ? ` or Gaia DR3 ${gaia}` : ''}` : name}.`);
+  // A Gaia source SIMBAD has never catalogued (most distant giants) is still that source: the Gaia row the generator reads
+  // next is its identity and its evidence. A target without a Gaia source is refused.
+  if (!found && gaia) return { main: `Gaia DR3 ${gaia}`, gaia };
+  if (!found) throw new Error(`${id}: SIMBAD does not know ${target ?? name}.`);
   const ids = readIdentifiers(found.mainId, found.identifiers);
   if (gaia && ids.gaia && ids.gaia !== gaia) throw new Error(`${id}: SIMBAD names ${name} Gaia DR3 ${ids.gaia}, not the spec's ${gaia}.`);
   const source = gaia ?? ids.gaia;

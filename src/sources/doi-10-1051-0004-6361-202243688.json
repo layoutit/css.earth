@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-202243688",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Creevey et al. (2023): <i>Gaia</i> Data Release 3",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202243688"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/202243688",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202243688",
+      "checkedOn": "2026-09-28",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/202243688"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 674 A26",
+  "creators": [
+    "O. L. Creevey",
+    "R. Sordo",
+    "F. Pailler",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab1242",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Buder et al. (2021): The GALAH+ survey: Third data release",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2011.02505"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab1242"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021MNRAS.506..150B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.506..150B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab1242",
+      "label": "Monthly Notices of the Royal Astronomical Society 506 150-201"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.506..150B",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Buder et al. (2021), Monthly Notices of the Royal Astronomical Society 506 150-201",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.506..150B"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 506 150-201",
+  "creators": [
+    "Sven Buder",
+    "Sanjib Sharma",
+    "Janez Kos",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

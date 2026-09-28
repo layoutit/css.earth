@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "epic-230535187",
+  "angularDiameterMas": 0.01,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 7,512,864 km at 9574.00 pc = 0.01 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 9574,
+  "distanceSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 230535187 (K2 campaign 11): PARAM asteroseismic distance (pc) 9573.984375 (16th-84th percentiles 9226.40625-9932.890625), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 9574 +/- 353.2 pc; Gaia DR3 parallax 0.0314 +/- 0.0555 mas (same row, RUWE 1.03), 0.6 standard errors, is not used",
+  "radiusKm": 7512864.3,
+  "radiusSource": "Radius 10.799 +/- 0.4853 solar radii from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 230535187 (K2 campaign 11): PARAM radius (solar radii) 10.799037 (16th-84th percentiles 10.316917-11.287602), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 7,512,864 km at 695,700 km per solar radius. Mass 1.0349 +/- 0.1 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 230535187 (K2 campaign 11): PARAM mass (solar masses) 1.034935 (16th-84th percentiles 0.937088-1.13701), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196); GM is that mass times the JPL solar GM. Temperature 4831 +/- 50 K from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 230535187: APOGEE DR17 effective temperature 4830.5303 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4831,
+  "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 230535187: APOGEE DR17 effective temperature 4830.5303 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
+  "surfaceGravityLogg": 2.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-230535187.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.386, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}
