@@ -23,7 +23,7 @@ await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
-type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; framingScale(): Promise<number>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
+type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; framingScale(): Promise<number>; prepare(options: { getView(): ObjectPreparationView; initialTextures?: boolean }): Promise<MockLease> };
 type MockFactory = { navigation: MockPreparation };
 type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
 type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
@@ -101,15 +101,23 @@ test('billboard covers attachment at the final viewport framing with no second c
   const arrival: PreparedArrivalView = { ...photographicArrival, billboard: {
     url: '/scenes/body/arrival.webp', lens: 'photo', size: 1024, distanceM: 8000,
     focalPixels: 1000, rotation: photographicArrival.rotation } };
-  const f = fixtureFactory(arrival), { document, window } = parseHTML('<html><body><div><main></main></div></body></html>');
+  const f = fixtureFactory(arrival), { document, window } = parseHTML('<html><body><div class="object-input-surface"><main></main></div></body></html>');
   Object.defineProperty(window.HTMLImageElement.prototype, 'decode', { configurable: true, value: async () => {} });
   Object.defineProperty(document, 'defaultView', { value: f.windowTarget });
   const stage = document.querySelector('main');
   assert.ok(stage);
+  const surface = document.querySelector<HTMLElement>('.object-input-surface');
+  assert.ok(surface);
+  let initialTextures: boolean | undefined;
+  const prepare = f.factory.navigation.prepare;
+  f.factory.navigation.prepare = options => { initialTextures = options.initialTextures; return prepare(options); };
   const target = createWorldSelectionTarget(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
   assert.ok(target);
   const handoff = await drainFrames(f, { task: f.start({ stage }) });
   assert.equal(handoff.mountOptions.progressiveActivation, true);
+  assert.equal(handoff.mountOptions.deferTextureRefinement, false);
+  assert.equal(initialTextures, false, 'the covered arrival prepares viewport texels, like startup');
+  assert.equal(surface.inert, true);
   const initial = required(handoff.mountOptions.initialWorldCamera);
   const expected = presentWorldCamera(target, f.factory.navigation.frame, f.navigation.optics());
   const mountedProjection = presentWorldCamera(initial, f.factory.navigation.frame, f.navigation.optics());
@@ -119,6 +127,10 @@ test('billboard covers attachment at the final viewport framing with no second c
   const arrived = f.paints.length;
   const mount = f.mounted(), publication = deferred<boolean>(), apply = mount.navigation.apply;
   mount.navigation.apply = (world, options) => { apply(world, options); return publication.promise; };
+  const heldTransform = document.querySelector('img')?.style.transform;
+  mount.navigation.subscribe = () => { throw new Error('The billboard must not consume stage-coordinate publications.'); };
+  handoff.mountOptions.onNavigationReady?.(mount.navigation);
+  assert.equal(document.querySelector('img')?.style.transform, heldTransform, 'attachment cannot reposition the held cover');
   const completion = handoff.afterMount(mount);
   await nextTurn();
   f.step(5000); await nextTurn();
@@ -127,8 +139,12 @@ test('billboard covers attachment at the final viewport framing with no second c
   assert.equal(f.wheel().defaultPrevented, true, 'the covered destination cannot zoom');
   assert.equal(document.querySelector('img')?.dataset.arrivalBillboard, 'mounting');
   publication.resolve(true); await nextTurn();
-  assert.equal(document.querySelector('img'), null, 'readiness removes the opaque cover in one swap');
+  assert.equal(document.querySelector('img'), null, 'the acknowledged destination reveals at the original fly-to boundary');
   await drainFrames(f, { task: completion });
+  assert.equal(surface.inert, false);
+  surface.inert = true; // A newer arrival owns the input lock now.
+  f.controller.abort();
+  assert.equal(surface.inert, true, 'late cleanup cannot unlock the next arrival');
   assert.equal(document.querySelector('img'), null);
   for (const camera of f.paints.slice(arrived)) {
     closePose(camera.pose, initial.pose);

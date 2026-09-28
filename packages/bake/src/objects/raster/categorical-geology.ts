@@ -166,7 +166,7 @@ export async function loadGeologySurface(root: string, value: unknown) {
   });
   return {...createGeologySampler(polygons), report: {kind: 'geologic-categories', records: rows.length, field: grid.field,
     counts, withheldDegenerateRings: grid.withheldDegenerateRings, longitudeDirection: grid.longitudeDirection, missingPolicy: 'No polygon, declared unknown unit, or conflicting overlapping categories are withheld. Declared zero-area rings are excluded.',
-    interpretation: 'Archived interpreted geologic units; categorical colors are presentation choices, not measured color or elevation.'}};
+    interpretation: 'Archived interpreted geologic units; category colors mark units, not measured color or elevation.'}};
 }
 
 export function categoryColorForValue(value: number, lens: {categories: readonly {color:string}[]}) {

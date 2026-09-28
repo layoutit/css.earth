@@ -214,8 +214,8 @@
     {
       "location": "public",
       "filename": "titan-arrival.webp",
-      "bytes": 54278,
-      "sha256": "0b9be3844f517813c88d185f185b935ddc37d042b5fbf39693c23619276e99d1"
+      "bytes": 54840,
+      "sha256": "c3a601c8f8bfdcf7e0b7d46c5d4c6a1b190067b55fcf68fd940806c1842c59e5"
     },
     {
       "location": "public",
@@ -279,6 +279,24 @@
     },
     {
       "location": "public",
+      "filename": "titan-lens-vims-2um.webp",
+      "bytes": 738,
+      "sha256": "c1a91dbec8db96d9ada10c70a1d2eff26bcf6312828b54e5feeaa36c459d96e7"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-vims-5um.webp",
+      "bytes": 440,
+      "sha256": "39b8e03ea9c6cb1540cfd86f824a2f2765e60cc114545f316150aa0ff69eb84e"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-vims-color-ratio.webp",
+      "bytes": 972,
+      "sha256": "a0f123a2004ddf73f2902138d51a7d33e7f7b1f2afda249fce128f73f3658846"
+    },
+    {
+      "location": "public",
       "filename": "titan-normal@2x.webp",
       "bytes": 1846530,
       "sha256": "11f38fee73aa161cc4a55642bfa303c41c1d2b9a5c5db7568898df7332db25c6"
@@ -321,6 +339,24 @@
     },
     {
       "location": "public",
+      "filename": "titan-poles-vims-2um@2x.webp",
+      "bytes": 136252,
+      "sha256": "d55fb7e04b8500202f8e4843a691de63fdd36b2b600c90a9b53b36077943b196"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-vims-5um@2x.webp",
+      "bytes": 168328,
+      "sha256": "bc2a606bae516048d1d9588978052d051a95189042b9d556763e646d6c70ae91"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-vims-color-ratio@2x.webp",
+      "bytes": 290802,
+      "sha256": "68997951498d6fc95f2c00b02c8b3a01f9938244f1ccc77103e6a8655b692c88"
+    },
+    {
+      "location": "public",
       "filename": "titan-radar@2x.webp",
       "bytes": 9927924,
       "sha256": "7ba66907389064027f3e378787e0b02e0275255c23a9dfc5d32f5dff9754188d"
@@ -332,6 +368,24 @@
       "sha256": "c2e3ce90ccd3a761e64845d175436c6d712705b760511c1045e0781c065b46c8"
     },
     {
+      "location": "public",
+      "filename": "titan-vims-2um@2x.webp",
+      "bytes": 974794,
+      "sha256": "fb52559f511708ba02407bdad03e25f9c2666dd31c1fe21c207cbb2a47f3ef8d"
+    },
+    {
+      "location": "public",
+      "filename": "titan-vims-5um@2x.webp",
+      "bytes": 1543042,
+      "sha256": "70b001cfef562a82fca19a11988598c763235bb41f9bb05bf8d2e7a8f54f48f8"
+    },
+    {
+      "location": "public",
+      "filename": "titan-vims-color-ratio@2x.webp",
+      "bytes": 1393188,
+      "sha256": "5aab399019a8b7b0ea38107c2eccad7c4c9bb21e39dc9613c57e80abecb4d9de"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 296,
@@ -340,14 +394,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 90348,
-      "sha256": "51e0bf3c393b5cc04b504a01f5e2ad3eecb0fba2284bbac1eb2b3d07bd07f0ac"
+      "bytes": 91902,
+      "sha256": "8071aecaabb7a1b9de4bd7ff7b1e5b0b3b4b6d49087352e69fbcc97afee49913"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1420,
-      "sha256": "7f938d55719326adca06f19eb680fc2fd74b0bb138e9f1e7e3d546caea5456c3"
+      "sha256": "d1e85699579d3248ecbc276c7ff76aaaf905ea751ac44629423ca4d3487ec9f7"
     },
     {
       "location": "prepared",
@@ -358,8 +412,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 5736,
-      "sha256": "ff1a258311ef5c6713e59a823344ac8a10d85cb4972ce4964ef41a5121a96ef0"
+      "bytes": 6193,
+      "sha256": "8d04bf767c98c07be09cce1aab921880054a8e71773210551558bbe722a14a36"
     },
     {
       "location": "prepared",
@@ -370,8 +424,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 7640,
-      "sha256": "b420996ff018840e79fc0c2154336006c702b8aa19ef11ce81ce768c220aae33"
+      "bytes": 9265,
+      "sha256": "fa055a6a0c6f45dd901f15c8d258caa51bdb432754df3f9bba6cdffbae001c88"
     },
     {
       "location": "prepared",
@@ -382,8 +436,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 481,
-      "sha256": "21fac1e5fbbcc0cf36038109b5d0e72b37bb79c8adc5c624f1e791ab2bf2fa32"
+      "bytes": 722,
+      "sha256": "153a4b99c6a1fe67208630492676b79a5987625505da9bdfe14ef0d12ed47723"
     },
     {
       "location": "prepared",
@@ -406,14 +460,14 @@
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 10164,
-      "sha256": "e73f5dc8443ac07b5f5ad7200c4939d5e24cc5f627425232f738eedccdb0bb98"
+      "bytes": 10256,
+      "sha256": "2319564fb33fb92d04d6c3d002328066791d5b4c8f339bfddf3df821f611ff26"
     },
     {
       "location": "prepared",
       "filename": "minimaps/radar.webp",
-      "bytes": 21638,
-      "sha256": "9a2b7c6fe5f7c61ea20034baa5c76be0c002d183f63c468e9a13efec033212db"
+      "bytes": 22252,
+      "sha256": "f26d1882e0aa13b18808058516d2a263302fc8ce5239fee213035b3cbeff7515"
     },
     {
       "location": "prepared",
@@ -423,9 +477,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/vims-2um.webp",
+      "bytes": 10242,
+      "sha256": "20123a0ca92fcb511c3c95b570ee980c77c7335e09655cf7cb4965b189d0e972"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/vims-5um.webp",
+      "bytes": 9390,
+      "sha256": "10bf90fc70c59260de70ef64f3e7955cbf8505d54c50f7ef29d45e0b7cfdf04b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/vims-color-ratio.webp",
+      "bytes": 11752,
+      "sha256": "775c4e6d83e5534abaf0a1cb7585c017e1cb10fff40a963971c6a6f0cf76e8b1"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 584142,
-      "sha256": "d05988313bd6e270a6f6a13b5f47c8dc133e31cc06d1e3375127701cd213a7ea"
+      "bytes": 593538,
+      "sha256": "a2e753f3efb5bbdd9c5ea7408a4965ec2d6dfe614c2836c0a345d7960bb11926"
     },
     {
       "location": "prepared",
@@ -454,8 +526,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1648,
-      "sha256": "a56b43ae5befe7ce786536bbf29a34bd6775c62f72e993590b01a159ceada84a"
+      "bytes": 2278,
+      "sha256": "76f5e6787170f53f2afcf4cb4e557e63a665fe2e1ec2f6fbea4af367be659c5b"
     },
     {
       "location": "prepared",

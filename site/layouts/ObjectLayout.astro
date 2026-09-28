@@ -3,6 +3,7 @@ import { prepareInformationTabStyles } from '../server/information-tab-styles.mt
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
+import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { requireSceneObject } from "../objects.mts";
 import { objectSeo } from "../seo.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
@@ -34,6 +35,8 @@ const { objectId, navigation = false, scene, descriptor } = Astro.props;
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = prepareInformationTabStyles(objectUi);
 const objectRecord = requireSceneObject(objectId);
+const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
+const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
 const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID });
 ---
 
@@ -89,11 +92,16 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="object-head" />
     {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
+    {startup && <noscript><style is:inline>
+      .startup-loading { display: none; }
+      img[data-startup-billboard] { opacity: 1 !important; width: 70vmin; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    </style></noscript>}
     <title>{seo.title}</title>
     {!navigation && <ObjectSwatchStyles />}
   </head>
   <body data-object-shell={objectRecord.id}>
     <!--search-shell:start-->
+    {startup && <div class="startup-loading" role="status" aria-label="Loading scene"><span></span></div>}
     <div class="object-ui-layer">
       <Fragment set:html={objectUi} />
     </div>
@@ -110,11 +118,15 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
           {...scene?.attributes}
           style={scene?.style}
           data-object-id={objectRecord.id}
-          data-prepared-object={scene ? objectRecord.id : undefined}
+          data-prepared-object={scene && !startup ? objectRecord.id : undefined}
           aria-label={`3D CSS view of ${objectRecord.name}`}
-          set:html={scene?.html ?? ''}
+          set:html={startup ? '' : scene?.html ?? ''}
         />
         <!--prepared-scene:end-->
+        {startup && <>
+          <script is:inline type="application/json" data-startup-discovery set:html={JSON.stringify(startup).replace(/</g, '\u003c')} />
+          <img data-startup-billboard fetchpriority="high" src={startupImage} alt="" aria-hidden="true" draggable="false" style="position:absolute;opacity:0;pointer-events:none" />
+        </>}
       </div>
       <div class="object-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
       <div class="object-scene-overlays"></div>

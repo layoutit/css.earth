@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "RSLs_Gullies_New-IcyCraters_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "Ref",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "Daubar et al. (2013, Icarus)",
+      "label": "New impact craters (Daubar et al. 2013)",
+      "color": "#3987e5"
+    },
+    {
+      "value": "Dundas et al. (2015, Icarus)",
+      "label": "Active gullies, including dune gullies (Dundas et al. 2015)",
+      "color": "#d95926"
+    },
+    {
+      "value": "McEwen et al. (2014, Nature Geoscience) and Ojha et al. (2014, Icarus)",
+      "label": "Recurring slope lineae, confirmed or partial (McEwen et al. 2014; Ojha et al. 2014)",
+      "color": "#199e70"
+    },
+    {
+      "value": "Dundas et al. (2014, JGR)",
+      "label": "New craters exposing ice (Dundas et al. 2014)",
+      "color": "#eda100"
+    },
+    {
+      "value": "more than one class",
+      "label": "More than one class in the cell",
+      "color": "#ffffff"
+    }
+  ],
+  "sharedCellCategory": "more than one class",
+  "layers": [
+    {
+      "esriJsonPath": "RSLs_Gullies_New-IcyCraters_clon0.query.json",
+      "expectedRecords": 508
+    }
+  ],
+  "output": "mars-recent-activity.tif",
+  "receipt": "mars-recent-activity.json"
+}

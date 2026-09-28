@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "Hynek_Valley_Networks.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "polyline",
+  "field": null,
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "valley network",
+      "label": "Mapped valley (centreline)",
+      "color": "#edffe8"
+    }
+  ],
+  "layers": [
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-01.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-02.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-03.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-04.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-05.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-06.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-07.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-08.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-09.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hynek_Valley_Networks.query-10.json",
+      "expectedRecords": 879
+    }
+  ],
+  "output": "mars-valley-networks.tif",
+  "receipt": "mars-valley-networks.json"
+}

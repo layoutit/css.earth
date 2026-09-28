@@ -1117,7 +1117,11 @@ export function options(args: readonly string[]) {
   if (!name || !/^[a-z0-9-]+$/u.test(name)) throw new TypeError('Pass --name <lowercase-words-and-dashes>.');
   const stepsFile = value('--steps'), seconds = value('--seconds'), replay = value('--replay');
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
-  return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
+  const coldLoad = args.includes('--cold-load');
+  if (coldLoad && !value('--open')) throw new TypeError('--cold-load requires --open.');
+  if (coldLoad && (args.includes('--debug') || args.includes('--style-writes') || replay))
+    throw new TypeError('--cold-load records startup without injected debug hooks or replay.');
+  return { coldLoad, name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
     open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes') || args.includes('--debug'), debug: args.includes('--debug'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
@@ -1413,7 +1417,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const device = target.kind === 'device' ? await deviceInfo(udid) : null;
   stage('device ready');
   const out = resolve(root, 'output/performance/ios-captures', `${option.name}-${new Date().toISOString().replace(/[:.]/gu, '-')}`);
-  const { page, proxy } = await connectProxy(option.port, target, option.expectUrl);
+  const { page, proxy } = await connectProxy(option.port, target, option.open ? null : option.expectUrl);
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
   stage('visible page attached');
@@ -1439,8 +1443,12 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const enableDomains = async () => {
     stopwatchEpochMs = Date.now();
     for (const domain of ['Page', 'Console', 'Network', 'Timeline', 'Worker']) await session.send(`${domain}.enable`);
-    // Real visits keep Safari's cache; --no-cache measures a cold load (it also refetches repeated images).
-    if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
+    // Request cache bypass explicitly; response sources still determine whether a load was cold.
+    {
+      const cacheReply = await session.send('Network.setResourceCachingDisabled', { disabled: option.noCache });
+      if ('error' in cacheReply || 'timeout' in cacheReply)
+        throw new Error(`Web Inspector rejected cache bypass: ${JSON.stringify(cacheReply)}`);
+    }
   };
   await enableDomains();
   stage('Web Inspector ready');
@@ -1452,7 +1460,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     throw new Error(`Requested --open ${open} differs from --expect-url ${option.expectUrl}. Safari was not navigated.`);
   }
   // iPadOS 26's page target has no Page.navigate ("'Page.navigate' was not found"), so the page navigates itself.
-  if (open) {
+  if (open && !option.coldLoad) {
     workers.clear();
     const swapsBefore = session.swaps();
     await session.send('Runtime.evaluate', { expression: `location.assign(${JSON.stringify(open)})` });
@@ -1462,9 +1470,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await wait(option.settle * 1000);
   }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
-  const url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
+  let url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
   const expected = option.expectUrl ?? open;
-  if (expected && !sameCapturePage(expected, url)) {
+  if (!option.coldLoad && expected && !sameCapturePage(expected, url)) {
     session.close(); proxy?.kill();
     throw new Error(`Safari is on ${url}; expected ${expected}. No recording or screen grab started.`);
   }
@@ -1600,6 +1608,50 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   // Full screen and viewport captures have separate actions and provenance.
   const captureScreen = target.kind === 'device' ? (file: string) => deviceScreensSession?.screenshot(file) ?? deviceScreen(option.pymobiledevice3, udid, file)
     : async (file: string) => { await run('axe', ['screenshot', '--output', file, '--udid', udid]); };
+  let coldLoad: { url: string; requestedUrl: string; navigationUrl: string; cacheBypassRequested: boolean; at: number; readyAt: number } | null = null;
+  if (option.coldLoad && open) {
+    if (new URL(open).origin !== new URL(url).origin)
+      throw new Error('Cold-load capture needs the visible tab on the same origin so its Inspector clock survives navigation.');
+    const previousOrigin = await evaluate('performance.timeOrigin');
+    const swaps = session.swaps(), at = Date.now() - started;
+    workers.clear();
+    // Reload has WebKit's explicit cache-bypass contract; location.assign can
+    // reuse decoded images even with Network resource caching disabled.
+    const prepareReload = await session.send('Runtime.evaluate', {
+      expression: `history.replaceState(null, '', ${JSON.stringify(open)})`,
+    });
+    if ('error' in prepareReload || 'timeout' in prepareReload || isRecord(prepareReload.result) && prepareReload.result.wasThrown === true)
+      throw new Error(`Could not select the startup route: ${JSON.stringify(prepareReload)}`);
+    const reload = await session.send('Page.reload', { ignoreCache: true });
+    if ('error' in reload || 'timeout' in reload)
+      throw new Error(`Web Inspector rejected startup reload: ${JSON.stringify(reload)}`);
+    const deadline = Date.now() + 120_000;
+    let navigated = false;
+    while (Date.now() < deadline) {
+      const response = await session.send('Runtime.evaluate', { expression: 'performance.timeOrigin', returnByValue: true });
+      const origin = isRecord(response.result) && isRecord(response.result.result) ? response.result.result.value : null;
+      if (typeof origin === 'number' && origin !== previousOrigin) { navigated = true; break; }
+      await wait(50);
+    }
+    if (!navigated || session.swaps() !== swaps)
+      throw new Error('Cold-load navigation did not preserve the recording target; capture is incomplete.');
+    const ready = await awaitRoute(new URL(open).pathname);
+    url = isRecord(ready) && typeof ready.url === 'string' ? ready.url : open;
+    const navigationUrl = await evaluate("performance.getEntriesByType('navigation')[0]?.name");
+    if (typeof navigationUrl !== 'string' || new URL(navigationUrl).href !== new URL(open).href)
+      throw new Error(`Cold load requested ${open} but actually navigated to ${String(navigationUrl)}.`);
+    coldLoad = { url, requestedUrl: open, navigationUrl, cacheBypassRequested: true, at, readyAt: Date.now() - started };
+    marks.push({ label: JSON.stringify({ coldLoad: open }), at, value: coldLoad });
+    // Reload discards page-owned probes. Timeline, network and native screens
+    // span navigation; reinstall endpoint probes only after the mount is ready.
+    residencySnapshots.push(await evaluate(INSTALL_RESIDENCY_PROBE));
+    // Do not install input listeners into the newly mounted scene. WebKit's
+    // wheel-region invalidation restyled the whole tree and caused a 149 ms
+    // composite in the startup trace. Cold-load timing uses native timeline
+    // frames; interactive journeys install this logger before recording.
+    await wait(option.settle * 1000);
+    stage('cold scene ready');
+  }
   if (replay) {
     marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay!)), contacts: replay.plan.events.length }), at: 0, value: { skippedFingers: replay.plan.skippedFingers } });
     await playTouches(option.pymobiledevice3, udid, replay.plan.events, resolve(out, 'replay-plan.json'));
@@ -1617,6 +1669,13 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
       // Preserve the app error before the outer cleanup tears down Inspector.
       await writeFile(resolve(out, 'failure.json'), JSON.stringify({ error: error instanceof Error ? error.message : String(error),
         steps: marks, console: events.filter(event => event.method === 'Console.messageAdded') }, null, 2) + '\n');
+      // A device crash can make every further Inspector request time out. Preserve
+      // events already received before cleanup; --rebuild can export this partial take.
+      const moment = events.slice(recordingStart).filter(event => !String(event.method).startsWith('DOM.'));
+      await writeFile(resolve(out, 'raw.json.gz'), gzipSync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1',
+        moment, stopwatchEpochMs, deviceSamples: null, workers: [...workers], pagePid,
+        evidence: { snapshots: residencySnapshots }, metadata: { url, target: target.kind, partial: true, debug: option.debug } })));
+      await writeFile(resolve(out, 'residency.json'), JSON.stringify({ snapshots: residencySnapshots, partial: true }) + '\n');
       throw error;
     }
   }
@@ -1657,7 +1716,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const nativeExport: Promise<Awaited<ReturnType<typeof exportTimeProfile>> | { error: string }> = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
     : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 120 s.' });
   await wait(1500);
-  const moment = events.slice(recordingStart);
+  const moment = events.slice(recordingStart).filter(event => !String(event.method).startsWith('DOM.'));
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
   await residencyCheckpoint(steps.length);
@@ -1730,7 +1789,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const revision = (await run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' }))).stdout.trim() || null;
   const trackedChanges = await run('git', ['-C', root, 'status', '--porcelain']).then(result => result.stdout.trim().length > 0, () => null);
   const report = {
-    schema: 'cssearth-ios-capture@1', name: option.name, url, endUrl, checkout: root, checkoutRole: 'capture-tool', revision, trackedChanges, udid, target: target.kind,
+    schema: 'cssearth-ios-capture@1', name: option.name, url, endUrl, coldLoad, checkout: root, checkoutRole: 'capture-tool', revision, trackedChanges, udid, target: target.kind,
     ...(device ? { device, deviceMetrics: deviceSummary } : {}), durationMs, steps: marks,
     screenshots: marks.flatMap(mark => isRecord(mark.value) && typeof mark.value.file === 'string' && typeof mark.value.source === 'string' ? [mark.value] : []),
     filmstrip: screens ? { source: 'device-screen', frames: filmstripCount } : null, workers: Object.fromEntries(workers),

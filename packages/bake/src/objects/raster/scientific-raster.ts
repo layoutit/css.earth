@@ -31,6 +31,7 @@ import { loadHealpixNpyMap } from './healpix-map.ts';
 import { loadTecplotLonLatMap } from './tecplot-lonlat-map.ts';
 import { loadLatitudeBeltMap } from './latitude-belt-map.ts';
 import { loadPdsBinnedTable } from './pds/pds-binned-table.ts';
+import { loadPdsEqualAreaTable } from './pds/pds-equal-area-table.ts';
 import { loadLonLatSliceTable } from './lonlat-slice-table.ts';
 
 /** A GeoTIFF that declares NaN as its no-data value matches a grid recorded without one: NaN cells are non-finite and
@@ -173,6 +174,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
   if (lens.format === 'lonlat-slice-table') return loadLonLatSliceTable(root, value);
   if (lens.format === 'pds-binned-table') return loadPdsBinnedTable(root, value);
+  if (lens.format === 'pds-equal-area-table') return loadPdsEqualAreaTable(root, value);
   if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (lens.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
   if (lens.format === 'isis3') {

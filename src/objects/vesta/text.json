@@ -76,6 +76,26 @@
       "title": "GRaND iron gamma rays",
       "detail": "Dawn GRaND",
       "summary": "Iron gamma-ray rate: basaltic eucrite reads higher than Rheasilvia's diogenite; each value blends about 300 km."
+    },
+    "fast-neutrons": {
+      "title": "GRaND fast neutrons",
+      "detail": "Dawn GRaND",
+      "summary": "Fast neutrons, hydrogen trend removed, follow average atomic mass: heavier eucrite reads higher; each blends about 300 km."
+    },
+    "hegr": {
+      "title": "GRaND high-energy gamma rays",
+      "detail": "Dawn GRaND",
+      "summary": "High-energy gamma rays rise with heavy major elements: eucrite over Rheasilvia's diogenite; each value blends about 300 km."
+    },
+    "neutron-absorption": {
+      "title": "GRaND neutron absorption",
+      "detail": "Dawn GRaND",
+      "summary": "How strongly the soil absorbs slow neutrons: high where basaltic eucrite is, low in Rheasilvia; each blends about 300 km."
+    },
+    "geology": {
+      "title": "Yingst et al. global geologic map",
+      "detail": "Yingst et al. 2023",
+      "summary": "Interpreted rock units: crater floors, ejecta, cratered terrain and Rheasilvia's flanks, in the authors' colours."
     }
   }
 }

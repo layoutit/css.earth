@@ -6,6 +6,15 @@ A layer is either a shapefile pair or an ArcGIS REST polygon query response
 Stream one source polygon at a time; use pixel-center inclusion, retain holes,
 and withhold conflicting units instead of selecting the last polygon drawn.
 The original shapefile and its attributes remain the scientific source.
+
+A plan may declare `outputFrame` when the source's longitudes are in another prime-meridian convention of the same
+body frame (same pole, meridian moved by a whole angle). The grid is rasterized in the source's own coordinates and
+the output GeoTIFF names the target central meridian, source centre plus `targetMinusSourceLongitudeDegrees`. Eastings
+from the central meridian are unchanged, so no pixel moves or is resampled; only the meridian the file declares does.
+
+A plan may instead declare `"cellPresence": "point"` or `"cellPresence": "polyline"` for an ArcGIS point or polyline
+catalogue that publishes no footprint or width. A point then marks the one grid cell holding it and a polyline every
+cell it crosses. The grid states presence at its own resolution; it never gives a feature a size of its own.
 """
 import hashlib
 import json
@@ -49,6 +58,27 @@ def paint_polygon(grid, geometry, bounds, transform, category):
     return (y0, x0, hit)
 
 
+def paint_presence(grid, geometry, transform, category, kind, shared=-2):
+    """Mark the cell holding a point, or every cell a polyline crosses, under the same overlap rule as polygons.
+
+    A cell two categories reach is withheld, or takes the plan's declared `sharedCellCategory` (a true statement:
+    the cell holds catalogued features of more than one class)."""
+    if kind == 'point':
+        x, y = float(geometry['x']), float(geometry['y'])
+        col, row = (~transform) * (x, y)
+        col, row = min(grid.shape[1] - 1, math.floor(col)), min(grid.shape[0] - 1, math.floor(row))
+        if not (0 <= col and 0 <= row):
+            raise ValueError(f'Point outside the grid: {x}, {y}')
+        hit = np.zeros(grid.shape, dtype=bool); hit[row, col] = True
+    else:
+        lines = {'type': 'MultiLineString', 'coordinates': geometry['paths']}
+        hit = rasterize([(lines, 1)], out_shape=grid.shape, transform=transform, fill=0,
+                        all_touched=True, dtype='uint8').astype(bool)
+    conflict = hit & (grid != -1) & (grid != category)
+    grid[hit & (grid == -1)] = category
+    grid[conflict] = shared
+
+
 def resolve_nested(grid, footprints):
     """Give each withheld pixel to the smallest unit covering it.
 
@@ -65,12 +95,19 @@ def resolve_nested(grid, footprints):
     grid[withheld] = resolved[withheld]
 
 
+CELL_PRESENCE = {'point': 'esriGeometryPoint', 'polyline': 'esriGeometryPolyline'}
+
+
 def esri_json_records(root, layer, plan):
     """Yield (attributes, shape) from an ArcGIS REST polygon query response."""
     data = json.loads((root / layer['esriJsonPath']).read_text())
-    if (data.get('geometryType') != 'esriGeometryPolygon' or data.get('exceededTransferLimit')
+    expected = CELL_PRESENCE.get(plan.get('cellPresence'), 'esriGeometryPolygon')
+    if (data.get('geometryType') != expected or data.get('exceededTransferLimit')
             or data.get('spatialReference', {}).get('wkt') != plan['projectionWkt']):
-        raise ValueError('ArcGIS polygon response or coordinate system changed')
+        raise ValueError(f'ArcGIS {expected} response or coordinate system changed')
+    if expected != 'esriGeometryPolygon':
+        yield from ((feature['attributes'], feature.get('geometry')) for feature in data['features'])
+        return
     for feature in data['features']:
         parts, points = [], []
         for ring in (feature.get('geometry') or {}).get('rings', []):
@@ -107,6 +144,13 @@ def prepare(plan_path):
     if 'projectionPath' in plan and (root / plan['projectionPath']).read_text().strip() != plan['projectionWkt']:
         raise ValueError('Source coordinate system changed')
     center = plan.get('centerLongitude', 0)
+    frame = plan.get('outputFrame')
+    if frame is not None and (set(frame) != {'source', 'target', 'targetMinusSourceLongitudeDegrees', 'evidence'}
+                              or not isinstance(frame['targetMinusSourceLongitudeDegrees'], (int, float))
+                              or not frame['evidence']):
+        raise ValueError('outputFrame needs source, target, targetMinusSourceLongitudeDegrees and evidence')
+    shift = frame['targetMinusSourceLongitudeDegrees'] if frame else 0
+    output_center = (center + shift + 180) % 360 - 180 if frame else center  # a plan without a frame keeps its meridian as written
     width, height, radius = plan['width'], plan['height'], plan['radiusMeters']
     if width != height * 2 or not 32 <= width <= 4096:
         raise ValueError('Expected a bounded 2:1 scientific input grid')
@@ -133,19 +177,33 @@ def prepare(plan_path):
     # A plan may declare that its source draws some units inside a larger polygon without cutting a hole for them
     # (`"nestedUnits": "inner"`). Only then are footprints kept so a withheld pixel can go to the inner unit.
     nested = plan.get('nestedUnits') == 'inner'
+    presence = plan.get('cellPresence')
+    shared = plan.get('sharedCellCategory')
+    if (plan['field'] is None or shared is not None) and not presence or plan['field'] is None and len(plan['categories']) != 1 \
+            or shared is not None and shared not in categories:
+        raise ValueError('A null field needs cellPresence and exactly one category; sharedCellCategory needs cellPresence and a declared category')
+    shared_index = -2 if shared is None else categories[shared]
+    if presence not in (None, *CELL_PRESENCE) or presence and (nested or any('esriJsonPath' not in layer for layer in plan.get('layers', [plan]))):
+        raise ValueError('cellPresence must be "point" or "polyline", on ArcGIS layers (one per page), without nestedUnits')
     if plan.get('nestedUnits') not in (None, 'inner'):
         raise ValueError('nestedUnits must be "inner" when present')
     footprints = []
     for layer in plan.get('layers', [plan]):
         with rasterio.Env(GDAL_CACHEMAX=32 * 1024 * 1024, GDAL_NUM_THREADS='1'):
             for record, shape in layer_records(root, layer, plan):
-                value = record[plan['field']]
+                # A presence layer with one class and no class field (valley networks) names no field: every record is that class.
+                value = plan['categories'][0]['value'] if plan['field'] is None else record[plan['field']]
+                value = value if isinstance(value, str) else str(value)  # integer class fields (Strahler order)
                 if value not in categories and value not in plan['unknownValues']:
                     raise ValueError(f'Unmapped source category: {value}')
                 counts[value] = counts.get(value, 0) + 1
-                if not shape.points:
+                if not presence and not shape.points:
                     continue
                 category = categories.get(value, -2)
+                if presence:
+                    if shape:
+                        paint_presence(grid, shape, transform, category, presence, shared_index)
+                    continue
                 footprint = paint_polygon(grid, shape.__geo_interface__, shape.bbox, transform, category)
                 if nested and footprint is not None:
                     footprints.append((category, footprint))
@@ -157,7 +215,7 @@ def prepare(plan_path):
     output = root / plan['output']
     with rasterio.open(output, 'w', driver='GTiff', width=width, height=height,
                        count=1, dtype='int16', nodata=-32768, compress='deflate',
-                       predictor=2, crs=f'+proj=eqc +R={radius} +lat_ts=0 +lon_0={center} +units=m +no_defs',
+                       predictor=2, crs=f'+proj=eqc +R={radius} +lat_ts=0 +lon_0={output_center} +units=m +no_defs',
                        transform=output_transform) as target:
         target.write(grid, 1)
     receipt = dict(sourceRecords=counts, width=width, height=height,
@@ -166,9 +224,11 @@ def prepare(plan_path):
                    categories=plan['categories'], output=plan['output'],
                    sha256=hashlib.sha256(output.read_bytes()).hexdigest(),
                    transform=list(output_transform)[:6], radiusMeters=radius,
-                   policy='Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld' + ('; the smallest unit covering a withheld pixel takes it (nestedUnits inner)' if nested else '') + '; source edges clipped by global raster extent.')
+                   policy=({'point': 'One cell per catalogued point', 'polyline': 'Every cell a catalogued polyline crosses'}[presence] + '; no feature size or width drawn; cells holding two categories withheld' if presence else 'Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld') + ('; the smallest unit covering a withheld pixel takes it (nestedUnits inner)' if nested else '') + '; source edges clipped by global raster extent.')
     if center:
         receipt['centerLongitude'] = center
+    if frame:
+        receipt['outputFrame'] = dict(frame, outputCenterLongitude=output_center)
     (root / plan['receipt']).write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps({key: value for key, value in receipt.items() if key != 'categories'}))
 

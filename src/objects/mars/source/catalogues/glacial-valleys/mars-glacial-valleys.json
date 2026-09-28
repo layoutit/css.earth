@@ -1,0 +1,28 @@
+{
+  "sourceRecords": {
+    "point": 102
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8388507,
+  "categories": [
+    {
+      "value": "point",
+      "label": "Supraglacial or proglacial valley",
+      "color": "#ffffff"
+    }
+  ],
+  "output": "mars-glacial-valleys.tif",
+  "sha256": "073418347ebe93f2e76207841e25eec064506367954102ee4f4f1a7109eaaa4d",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

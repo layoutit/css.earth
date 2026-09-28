@@ -1,0 +1,30 @@
+{
+ "id": "av-sgr",
+ "classification": "star",
+ "order": 2018,
+ "physical": {
+  "name": "AV Sgr",
+  "horizonsCode": null,
+  "meanRadiusKm": 73883340,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4875
+ },
+ "physicalNotes": "Radius 106.2 +/- 8.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, AV Sgr: Baade-Wesselink mean radius (solar radii) 106.2 +/- 8.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 73,883,340 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4875 +/- 153 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 24, Name='AV Sgr', columns Teff, e_Teff (K): Teff 4875 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 271.20327515337704,
+  "declinationDegrees": -22.73241493342173,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 2452.7,
+  "properMotionRaMasPerYear": -0.11351835764004048,
+  "properMotionDecMasPerYear": -3.403946724707061,
+  "radialVelocityKmPerS": 17.9,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4069645924308096512 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/av-sgr/source/photometry/gaia-dr3-source.csv",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, AV Sgr: Baade-Wesselink distance (pc) 2452.7 +/- 198.3 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 2452.7 +/- 198.3 pc; Gaia DR3 parallax 0.3524 +/- 0.0252 mas (same row, RUWE 0.84), 14.0 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -0.114, -3.404 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 4069645924308096512 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract)"
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "FanSurvey_2005_2008_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "Feature",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "point",
+      "label": "Large alluvial fan",
+      "color": "#006633"
+    }
+  ],
+  "layers": [
+    {
+      "esriJsonPath": "FanSurvey_2005_2008_clon0.query.json",
+      "expectedRecords": 44
+    }
+  ],
+  "output": "mars-alluvial-fans.tif",
+  "receipt": "mars-alluvial-fans.json"
+}

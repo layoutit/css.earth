@@ -34,12 +34,12 @@ export function canUseArrivalBillboard(arrival: PreparedArrivalView | undefined,
 /** A retained image survives the detailed scene replacement. Its projection follows
  * the same acknowledged world camera; only transform and opacity change in flight. */
 export async function prepareArrivalBillboard(stage: HTMLElement, arrival: PreparedArrivalView,
-  frame: PreparedWorldCameraFrame, signal: AbortSignal) {
+  frame: PreparedWorldCameraFrame, signal: AbortSignal, existing?: HTMLImageElement) {
   const asset = arrival.billboard;
   if (!asset) throw new Error('Arrival billboard is not prepared.');
   const document = stage.ownerDocument, window = document.defaultView;
   if (!window) throw new Error('Arrival billboard requires a window.');
-  const image = document.createElement('img');
+  const image = existing ?? document.createElement('img');
   image.alt = ''; image.setAttribute('aria-hidden', 'true'); image.draggable = false;
   image.dataset.arrivalBillboard = 'flight';
   Object.assign(image.style, { position: 'absolute', left: '50%', top: '50%', width: `${asset.size}px`,
@@ -56,7 +56,7 @@ export async function prepareArrivalBillboard(stage: HTMLElement, arrival: Prepa
   function cancel() { destroy(); }
   signal.addEventListener('abort', cancel, { once: true });
   if (signal.aborted) { destroy(); throw aborted(); }
-  image.src = asset.url;
+  if (!existing) image.src = asset.url;
   try {
     await new Promise<void>((resolve, reject) => {
       rejectPending = reject;

@@ -4,6 +4,8 @@
 export interface InterpretedPlate { readonly data: Uint8Array; readonly size: number; readonly lossless: boolean; }
 export interface InterpretedSurface {
     readonly data: Uint8Array; readonly channels: 1 | 2 | 3 | 4; readonly nearest: boolean;
+    /** One byte per pixel, set where the interpretation painted the missing-coverage grid (no value in the source). */
+    readonly missing?: Uint8Array;
     /** Decoder-owned interpretation evidence, retained with the prepared surface. */
     readonly report?: Readonly<Record<string, unknown>>;
     /** Optional direct source sampler for the polar sprite only. The packed latitude bands stay exactly as prepared. */
@@ -15,6 +17,22 @@ export interface InterpretedSurface {
 }
 export interface ObservationInterpretation {
     (surface: { readonly id: string; readonly source: string; readonly science: Record<string, unknown>; readonly nativeSourcePoles?: boolean }, width: number, height: number, density: number): Promise<InterpretedSurface>;
+}
+/** Fill the cells an interpretation left empty with another prepared surface's pixels scaled by `brightness`. */
+export function applyUnderlay(pixels: Uint8Array, missing: Uint8Array, underlay: Uint8Array, id: string,
+    { brightness, grayscale = false, bits = 8 }: { brightness: number; grayscale?: boolean; bits?: number }) {
+    if (pixels.length !== underlay.length || missing.length * 4 !== pixels.length)
+        throw new RangeError(`${id}: underlay has ${underlay.length / 4} pixels, the surface ${pixels.length / 4} and its mask ${missing.length}.`);
+    const keep = (0xff << (8 - bits)) & 0xff;
+    for (let pixel = 0; pixel < missing.length; pixel++) {
+        if (!missing[pixel]) continue;
+        const offset = pixel * 4;
+        const luma = grayscale ? 0.2126 * underlay[offset]! + 0.7152 * underlay[offset + 1]! + 0.0722 * underlay[offset + 2]! : 0;
+        for (let channel = 0; channel < 3; channel++)
+            pixels[offset + channel] = Math.round((grayscale ? luma : underlay[offset + channel]!) * brightness) & keep;
+        pixels[offset + 3] = 255;
+    }
+    return pixels;
 }
 /** Expand interpreted pixels to the RGBA layout the packer and polar sampler read. */
 export function withAlpha(interpreted: InterpretedSurface, width: number, height: number): Uint8Array {

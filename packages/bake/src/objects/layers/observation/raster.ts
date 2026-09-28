@@ -68,7 +68,7 @@ export async function loadNativeObservationPoleSampler(input: string, plan: Obse
 }
 
 /** The same source interpretation feeds globe atlases and small, unwarped maps. */
-export async function observationRaster({ input, plan, width, height, elevation, scientific, source, sourceMissing }: ObservationRasterInput): Promise<RasterImage> {
+export async function observationRaster({ input, plan, width, height, elevation, scientific, source, sourceMissing }: ObservationRasterInput): Promise<RasterImage & { missing?: Uint8Array }> {
   if (plan.scientific && (plan.elevation || plan.coverage || plan.presentation)) throw new Error('Scientific rasters require a single numeric interpretation.');
   scientific ??= plan.scientific ? await loadScienceSurface(dirname(input), {...plan.scientific, path: basename(input)}) : null;
   elevation ??= plan.elevation ? decodeElevationGrid(await readFile(input), plan.elevation) : null;
@@ -89,7 +89,8 @@ export async function observationRaster({ input, plan, width, height, elevation,
   }
   const { info } = raster;
   const missing = raster.missing ?? (sourceMissing && source && sampleCoverage(sourceMissing, source.info, width, height));
-  return { info, data: missing ? paintMissingCoverage(raster.data, info, missing) : raster.data };
+  // The mask travels with the painted grid so a lens drawn over another surface can replace exactly those cells.
+  return { info, data: missing ? paintMissingCoverage(raster.data, info, missing) : raster.data, ...(missing ? { missing } : {}) };
 }
 
 /** The declared photographic presentation: saturation, linear gain/offset and sharpening, in that order. */

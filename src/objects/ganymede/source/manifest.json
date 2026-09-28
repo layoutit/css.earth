@@ -236,7 +236,7 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 2632345
       },
-      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "coverage": "Archived nondegenerate unit polygons colored by UNITNAME; 99.6% of the sphere mapped, gaps mostly beyond 80° latitude. Cells where polygons of different units overlap (0.001%) are withheld; no extrapolation.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1036,14 +1036,14 @@
       "id": "sim3237-display-categories-json",
       "path": "science/geology-sim3237/display-categories.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "Collins et al. (2013), USGS; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
-      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "acquisition": "Unit colors read from the GeologyUnits renderer in member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_ArcMap10.mxd of the official USGS ZIP (fetched by HTTP byte range, not vendored) and converted from the stored CIE L*a*b* with the ArcGIS conversion recorded in the file; unit names and symbols from the Description of Map Units on the SIM 3237 map sheet.",
       "redistribution": "Metadata only; retained in Git.",
       "consumers": [
         "geology-validation"
       ],
-      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+      "purpose": "Unit values, names, symbols and published GIS colors of the Geology lens; the recipe categories must equal them."
     },
     {
       "id": "sim3237-registration-anchors",
@@ -1051,12 +1051,12 @@
       "origin": "https://pubs.usgs.gov/sim/3237/",
       "credit": "USGS point and polygon layers; cssEarth comparison",
       "license": "Repository-authored validation metadata of public domain GIS data",
-      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained.",
+      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes (point TERRAIN against polygon UNITNAME). Original discrepancies are retained.",
       "redistribution": "Small source-validation metadata.",
       "consumers": [
         "geology-validation"
       ],
-      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
+      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes (point TERRAIN against polygon UNITNAME). Original discrepancies are retained."
     },
     {
       "path": "muse/source-qualification.json",

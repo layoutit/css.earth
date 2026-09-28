@@ -1,0 +1,30 @@
+{
+ "id": "vy-sgr",
+ "classification": "star",
+ "order": 2029,
+ "physical": {
+  "name": "VY Sgr",
+  "horizonsCode": null,
+  "meanRadiusKm": 68178600,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4250
+ },
+ "physicalNotes": "Radius 98 +/- 5.2 solar radii from Groenewegen (2013), A&A 550, A70, table10, VY Sgr: Baade-Wesselink mean radius (solar radii) 98 +/- 5.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 68,178,600 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4250 +/- 189 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 255, Name='VY Sgr', columns Teff, e_Teff (K): Teff 4250 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 273.0190261427981,
+  "declinationDegrees": -20.704024217137206,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 2702,
+  "properMotionRaMasPerYear": 0.30695166520789485,
+  "properMotionDecMasPerYear": -1.5480834221082906,
+  "radialVelocityKmPerS": 14.746451,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4094007532908816896 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/vy-sgr/source/photometry/gaia-dr3-source.csv",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, VY Sgr: Baade-Wesselink distance (pc) 2702 +/- 143.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 2702 +/- 143.9 pc; Gaia DR3 parallax 0.3578 +/- 0.0247 mas (same row, RUWE 0.81), 14.5 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 0.307, -1.548 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 14.75 +/- 7.33 km/s"
+  }
+ }
+}

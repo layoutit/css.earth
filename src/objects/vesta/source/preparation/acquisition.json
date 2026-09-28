@@ -447,6 +447,33 @@
       ],
       "path": "grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
       "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "grand/GRD_HEGR_COUNTS_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "grand/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB"
     }
   ]
 }

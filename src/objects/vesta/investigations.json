@@ -127,7 +127,7 @@
       "id": "dawn-grand-iron-counts",
       "subject": "Dawn GRaND corrected iron gamma-ray counting rate map",
       "status": "included",
-      "finding": "Included as the archived quantity, a counting rate: 178,698 equal-area pixels, 0.5 degree tall, of 7.6 MeV Fe gamma rays in counts/s corrected for neutron number density (Yamashita et al. 2013), 0.0687 to 0.07746, no missing pixels. Every pixel boundary is a multiple of 0.5 degrees, so the expansion onto 720 x 360 cells is lossless. The catalogue's preliminary factor (Fe wt% = 189.2 x counts/s, scaled to 13.8 wt% mean howardite) is not applied because the catalogue itself advises caution. The uncorrected-counts table is a processing stage of the same measurement and is not added. The grid is written in four latitude bands because the shared .npy reader overflows the call stack on 259,200 values.",
+      "finding": "Included as the archived quantity, a counting rate: 178,698 equal-area pixels, 0.5 degree tall, of 7.6 MeV Fe gamma rays in counts/s corrected for neutron number density (Yamashita et al. 2013), 0.0687 to 0.07746, no missing pixels. Every pixel boundary is a multiple of 0.5 degrees, so the expansion onto 720 x 360 cells is lossless. The catalogue's preliminary factor (Fe wt% = 189.2 x counts/s, scaled to 13.8 wt% mean howardite) is not applied because the catalogue itself advises caution. The uncorrected-counts table is a processing stage of the same measurement and is not added. The grid is one 720 x 360 .npy file; the shared reader finds its range with a loop because a spread of 259,200 values overflows the call stack.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
         "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
@@ -137,13 +137,15 @@
     {
       "id": "yingst-2023-global-geologic-map",
       "subject": "Global geologic map of Vesta, Yingst et al. (2023) linework",
-      "status": "unresolved",
-      "finding": "A reusable source exists: the ArcGIS layer package on Zenodo (record 19475473, CC BY 4.0, 2026-04-08) holds the polygons of the global map published as Yingst et al. (2023), PSJ 4:157, doi:10.3847/PSJ/acebe9. The shapefile has 136 polygons in 18 hybrid units that combine morphology with Dawn colour classes (for example 'Crater floor material, light blue', symbol cf4), in a 255 km plate carree grid in metres. Its frame is Claudia Double Prime: 19 of 40 Gazetteer craters of 20 to 300 km fall in crater units at zero shift against 9 at the 210 degree Claudia shift. It supersedes the preliminary 2014 map that NASA Vesta Trek shows as a colour render. Not prepared: the existing geology readers take degree shapefiles or GeoTIFFs whose central meridian must equal the recipe's, and none moves a source frame by 210 degrees, so the map cannot be placed on the Claudia mesh without a shared change or a derived re-seamed shapefile. Unit colours live only in the binary .lyr symbology. A second check on 2026-09-27: the .lyr symbology stores each unit colour as three CIE Lab doubles after an RgbColor class id; converting them to sRGB with the D65 or D50 white points, either matrix and either transfer curve leaves up to 0.48 of an 8-bit step, so no conversion reproduces integer author colours and the decoded values cannot be confirmed as the published ones.",
-      "revisitWhen": "The unit colours are recovered verifiably (a conversion of the .lyr Lab values that lands on integer RGB, or the legend of the published PSJ figure sampled and cited), and the shared geology tool shifts the rasterized grid 210 degrees into Claudia.",
+      "status": "included",
+      "finding": "A reusable source exists: the ArcGIS layer package on Zenodo (record 19475473, CC BY 4.0, 2026-04-08) holds the polygons of the global map published as Yingst et al. (2023), PSJ 4:157, doi:10.3847/PSJ/acebe9. The shapefile has 136 polygons in 18 hybrid units that combine morphology with Dawn colour classes (for example 'Crater floor material, light blue', symbol cf4), in a 255 km plate carree grid in metres. Its frame is Claudia Double Prime: 19 of 40 Gazetteer craters of 20 to 300 km fall in crater units at zero shift against 9 at the 210 degree Claudia shift. It supersedes the preliminary 2014 map that NASA Vesta Trek shows as a colour render. Not prepared: the existing geology readers take degree shapefiles or GeoTIFFs whose central meridian must equal the recipe's, and none moves a source frame by 210 degrees, so the map cannot be placed on the Claudia mesh without a shared change or a derived re-seamed shapefile. Unit colours live only in the binary .lyr symbology. A second check on 2026-09-27: the .lyr symbology stores each unit colour as three CIE Lab doubles after an RgbColor class id; converting them to sRGB with the D65 or D50 white points, either matrix and either transfer curve leaves up to 0.48 of an 8-bit step, so no conversion reproduces integer author colours and the decoded values cannot be confirmed as the published ones. Third check on 2026-09-27 (ccbf483de8): (a) colours resolved. The layer that draws the shapefile, v106/0005GeoUnits.lyr, symbolizes the 18 SYMBOL codes; converting its stored Lab values with Apple RGB primaries, gamma 1.8 and D65 (tools/objects/source-authoring/esri-symbology.mts) puts all 39 stored colours within 1.0e-6 of integer RGB (plain sRGB: up to 0.498), and the v10 copy is identical. Colour families follow the unit prefixes (crater material yellow-orange, crater floors green, cratered terrain blue, Rheasilvia teal, highlands tan). (b) placement proven. geology-grid.py rasterizes the 136 polygons to 2048 x 1024 with no conflicting pixels; 2,753 cells (0.13%) have no polygon (two south-pole rows, and a column at 30 E Claudia south of 25 S where the source polygons stop at 179.896 E in their frame). Placed at Claudia = source + 210, crater-floor units average 1,120 m below a 10-degree high-pass of the DLR HAMO terrain and crater material 215 m above it; every other 10-degree offset lies between -146 and +217 m for floors, and 208 or 212 degrees give -663 and -546 m. Gazetteer craters 20 to 150 km across fall in crater units 19 of 38 times at that placement against 10 unshifted and a 25% area chance rate; a 2-degree sweep peaks between -10 and +6 degrees. The scientific GeoTIFF reader requires the file's central meridian to equal the recipe's, so geology-grid.py gained a plan field, outputFrame, that writes the Claudia central meridian (-150) while keeping every pixel. Included 2026-09-27: source/geology/prepare-grid.json rasterizes the tracked shapefile with outputFrame; the committed vesta-geologic-units.tif equals the checked grid pixel for pixel and in CRS and transform, and read through the shared reader it again gives 19 of 38 Gazetteer craters in crater units. The source-frame gaps are shown as missing coverage.",
       "evidence": [
         "https://zenodo.org/records/19475473",
         "https://doi.org/10.3847/PSJ/acebe9",
-        "https://trek.nasa.gov/vesta/"
+        "https://trek.nasa.gov/vesta/",
+        "https://zenodo.org/api/records/19475473",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
+        "https://dawngis.dlr.de/data/Vesta/dtm_vesta.php"
       ]
     },
     {
@@ -154,6 +156,40 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/vesta/evidence/gazetteer-frame/crater-depressions.json"
+      ]
+    },
+    {
+      "id": "dawn-grand-fast-neutrons",
+      "subject": "Dawn GRaND fast neutron residual map (PDS4 dawn-grand-vesta 1.0)",
+      "status": "included",
+      "finding": "Included as archived: 114 quasi-equal-area pixels, 20 degrees tall with 10-degree polar caps, of the residual fast neutron counting rate in counts/s, 1.170 to 1.237, no missing pixels and no per-pixel uncertainty (the catalogue says smoothing over the footprint makes it small). Lawrence et al. (2013) detrended the +Z sensor counts against the epithermal map; the residual follows average atomic mass (about 21.7 amu for diogenite to 23 for basaltic eucrite) and carries an arbitrary offset. Pixel bounds are multiples of 10 degrees in latitude and 1.5 degrees in longitude, so the grid is 240 x 18 cells and lossless. Checks: 4,000 random points through the shared .npy reader equal a raw-table lookup at Claudia minus 210 degrees; the 90-225 E equatorial band the paper calls richest averages 1.221 against a 1.206 global mean with the shift and 1.208 without it; south of 60 S averages 1.195, low as the paper describes for Rheasilvia.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_FAST_NEUTRON_RES_MAP_DS.CAT",
+        "https://doi.org/10.1111/maps.12187",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4461122/"
+      ]
+    },
+    {
+      "id": "dawn-grand-hegr-counts",
+      "subject": "Dawn GRaND high-energy gamma-ray counting rate map",
+      "status": "included",
+      "finding": "Included as archived: 210 quasi-equal-area pixels, 15 degrees tall with 7.5-degree polar caps, of the corrected high-energy gamma-ray counting rate in counts/s, 12.516 to 13.143, no missing pixels. The catalogue says the rate is corrected for background, solid angle, orientation and cosmic rays, is proportional to heavy major-element content and samples a few tens of decimetres (Peplowski et al. 2013). The archived 1-sigma uncertainty, 0.117 to 0.311 counts/s, and sample counts, 124 to 2,718, are not drawn; the uncertainty is a large share of the range. Grid 360 x 24 cells (7.5 x 1 degree), lossless. Checks: 4,000 random reader points equal the raw table at Claudia minus 210 degrees; the 90-225 E equatorial band averages 12.885 against 12.776 with the shift and 12.815 without; the lowest pixel, 67.5-82.5 S and 270-315 E in Claudia, lies in Rheasilvia.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_HEGR_COUNTS_MAP_DS.CAT",
+        "https://doi.org/10.1111/maps.12176"
+      ]
+    },
+    {
+      "id": "dawn-grand-neutron-absorption",
+      "subject": "Dawn GRaND neutron absorption map (DCP)",
+      "status": "included",
+      "finding": "Included as the archived unitless parameter DCP: 204 quasi-equal-area pixels, 15 degrees tall with 7.5-degree polar caps, -0.0364 to 0.031, no missing pixels, from early-LAMO thermal and epithermal neutrons, 2011-12-08 to 2012-01-14. DCP rises linearly with the macroscopic thermal neutron absorption cross section, which Prettyman et al. (2013) tie to Fe, Ca, Al, Mg and other rock-forming elements and to the eucrite fraction of howardite, at about 300 km resolution. The catalogue's conversion (Sigma = 216.4 x DCP + 66.3, 10^-4 cm2/g) assumes a howardite mean the catalogue calls unknown and is not applied; the 1-sigma uncertainty, 0.0014 to 0.0075, is not drawn. The PDS4 label's modification history names PDS3 DAWN-A-GRAND-5-VESTA-GAMMA-IRON-COR-V1.0 as its source; the PDS3 catalogue gives DAWN-A-GRAND-5-VESTA-ABSORPTION-V1.0, and the table's own columns and checksum match the PDS4 label. Grid 360 x 24 cells, lossless. Checks: 4,000 random reader points equal the raw table at Claudia minus 210 degrees; the 90-225 E equatorial band averages 0.0059 against a -0.0072 mean with the shift and -0.0137 without; south of 60 S averages -0.022, low as the paper reports for Rheasilvia.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_NEUTRON_ABSORP_MAP_DS.CAT",
+        "https://doi.org/10.1111/maps.12244"
       ]
     }
   ]

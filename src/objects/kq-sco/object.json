@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kq-sco",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KQ Sco",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 103798440
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kq-sco-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KQ Sco",
+      "classification": "star",
+      "color": "#ffe2c6",
+      "distanceAu": 494684825,
+      "description": "A Cepheid in the Milky Way, 149 times the Sun's width, that swells and shrinks every 28.7 days.",
+      "systemName": "KQ Sco system",
+      "order": 2021,
+      "context": {
+        "order": 2018
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15262511741142230000,
+        -49644246505499970000,
+        -52716851380471144000
+      ],
+      "presentationToReference": [
+        -0.20623960480460507,
+        0.2093345504413718,
+        -0.95584741010349,
+        -0.6708338675683105,
+        0.6809010159523144,
+        0.29386345230131694,
+        -0.7123532463135005,
+        -0.7018210971940176,
+        5.0352800389604395e-8
+      ],
+      "orbitUpReference": [
+        -0.2093345504413718,
+        -0.6809010159523144,
+        0.7018210971940176
+      ],
+      "metersPerUnit": 334833677.41935486,
+      "bodyRadiusM": 103798440000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

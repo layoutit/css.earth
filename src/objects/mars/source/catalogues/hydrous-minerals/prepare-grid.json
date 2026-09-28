@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "Instrument",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "CRISM",
+      "label": "CRISM detection",
+      "color": "#ff0000"
+    },
+    {
+      "value": "OMEGA",
+      "label": "OMEGA detection",
+      "color": "#0099ff"
+    },
+    {
+      "value": "more than one class",
+      "label": "CRISM and OMEGA detections in one cell",
+      "color": "#ffffff"
+    }
+  ],
+  "sharedCellCategory": "more than one class",
+  "layers": [
+    {
+      "esriJsonPath": "Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-01.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-02.json",
+      "expectedRecords": 648
+    }
+  ],
+  "output": "mars-hydrous-minerals.tif",
+  "receipt": "mars-hydrous-minerals.json"
+}

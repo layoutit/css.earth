@@ -124,9 +124,12 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
   const directory = await mkdtemp(resolve(tmpdir(), 'mercury-features-'));
   try {
     const config = JSON.parse(await readFile(resolve(mercurySource, 'preparation/features.json'), 'utf8'));
+    // The lenses the object declares, read from its descriptor so the test follows new lenses instead of pinning a stale list.
+    const descriptor = JSON.parse(await readFile(resolve(mercurySource, '../object.json'), 'utf8')) as { properties: { recipe: { surfaces: { lenses: { id: string }[] }[] } } };
+    const declaredLensIds = descriptor.properties.recipe.surfaces[0]!.lenses.map(lens => lens.id);
     const tree = { scene: 1, nodes: [{ className: 'polycss-camera', parent: -1 }, { className: 'polycss-scene', parent: 0 }, { className: 'polycss-mesh mercury-system', parent: 1 }, { className: 'polycss-mesh mercury-body', parent: 2 }, { className: 'mercury-polar', parent: 3 }] };
     const { plan, catalog } = await prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'public'), outputDirectory: resolve(directory, 'prepared'),
-      config, maxEntries: 1000, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography', 'interior'] });
+      config, maxEntries: 1000, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds });
     assert.deepEqual(plan.outline, { pieces: 256 });
     assert.equal(plan.policy.minimumZoomShare, config.labelPolicy.minimumZoomShare);
     assert.equal(plan.target, 3);
@@ -182,9 +185,9 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     assert.ok(catalog.traces && catalog.traces.traces === 18451 && catalog.traces.matched === 66 && catalog.traces.unmatched.length === 9, JSON.stringify(catalog.traces));
     assert.ok(catalog.traces.unmatched.includes('Astrolabe Rupes'));
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p2'), outputDirectory: resolve(directory, 'o2'),
-      config, maxEntries: 10, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /exceed the authored capability/u);
+      config, maxEntries: 10, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds }), /exceed the authored capability/u);
     await assert.rejects(prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'p3'), outputDirectory: resolve(directory, 'o3'),
-      config, maxEntries: 1000, radiusKm: 2600, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /datum radius/u);
+      config, maxEntries: 1000, radiusKm: 2600, meshRadiusUnits: 11500, tree, declaredLensIds }), /datum radius/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

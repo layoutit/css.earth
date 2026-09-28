@@ -84,6 +84,16 @@
               "material": "lighting"
             },
             {
+              "id": "maximum-temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "noon-temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "heat-anomalies",
               "source": "content",
               "material": "lighting"
@@ -95,6 +105,11 @@
             },
             {
               "id": "topography",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "roughness",
               "source": "content",
               "material": "lighting"
             },
@@ -160,6 +175,26 @@
             },
             {
               "id": "optical-maturity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "thorium",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "potassium",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "iron-gamma",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "titanium",
               "source": "content",
               "material": "lighting"
             }

@@ -259,6 +259,186 @@
       ],
       "path": "science/grail/gggrx_1200a_boug_l660.tif",
       "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_boug_l660.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "lp-grs"
+      ],
+      "path": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "lola-roughness"
+      ],
+      "path": "science/lola/ldrm_16.img",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_90s80s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_90s80s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_80s70s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80s70s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_70s60s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70s60s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_60s50s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60s50s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_50s40s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50s40s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_40s30s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40s30s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_30s20s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30s20s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_20s10s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20s10s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_10s00s_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10s00s_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_00n10n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_10n20n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10n20n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_20n30n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20n30n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_30n40n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30n40n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_40n50n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40n50n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_50n60n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50n60n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_60n70n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60n70n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_70n80n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70n80n_002.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "diviner-gcp"
+      ],
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_80n90n_002.tab",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.tab"
     }
   ]
 }

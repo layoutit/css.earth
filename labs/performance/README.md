@@ -392,3 +392,13 @@ The chart lists exclusion counts, and `averageSeries.excludedGaps` records each
 omitted interval and reason. Raw frame intervals, percentile metrics and dropped
 frame counts remain unchanged. Reprocess older reports to use the same filtering
 policy before overlaying them.
+
+### Record initial scene mounting
+
+`ios-capture.mts --device --cold-load --open <same-origin URL> --steps <steps.json> --screens --name <name>`
+starts Timeline, Network and native frames before a WebKit `Page.reload(ignoreCache: true)`, then waits for the new document and scene readiness. Keep normal resource sharing enabled: adding `--no-cache` can refetch the same CSS texture separately for hundreds of faces.
+`--no-cache` requests Safari resource-cache bypass; it does not clear existing decoded images or operating-system caches, or restart Safari. The report's
+`coldLoad` receipt gives navigation and ready times, the requested URL and the Navigation Timing URL. A mismatch fails the capture; the app may add a saved-view token after that initial navigation. This mode requires an already-visible tab on the same origin and
+rejects debug/replay hooks, which do not survive document replacement. Input/camera logging is not reinstalled after reload: adding wheel listeners to the mounted scene invalidates WebKit event regions and contaminates startup timing. Native Timeline frames, network events and device screenshots remain active. Normal `--open` still settles before recording.
+
+Cache bypass is a request, not proof of a cold load. Check `Network.responseReceived.response.source` in the raw recording; a `memory-cache` response means those asset bytes were reused.

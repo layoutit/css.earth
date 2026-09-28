@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-aqueous-minerals-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Aqueous Mineral Distribution (NASA Mars Trek GIS layer)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/89"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "ehlmann-edwards-2014-aqueous-minerals",
+      "evidence": "The Trek catalogue entry for this layer cites Bethany L. Ehlmann and Christopher S. Edwards (2014), Annual Review of Earth and Planetary Sciences 42, 291-315."
+    }
+  ],
+  "statements": []
+}

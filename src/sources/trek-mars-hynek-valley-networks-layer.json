@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-hynek-valley-networks-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Valley Networks (NASA Mars Trek GIS layer Hynek_Valley_Networks)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/58"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "hynek-2010-valley-networks",
+      "evidence": "The Trek catalogue entry for this layer cites Brian M. Hynek, Michael Beach and Monica R. T. Hoke (2010), JGR 115, E09008."
+    }
+  ],
+  "statements": []
+}

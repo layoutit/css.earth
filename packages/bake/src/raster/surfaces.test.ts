@@ -66,6 +66,46 @@ describe('native source pole sampling', () => {
             expect(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]})).toThrow(/integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
     });
+    it('draws a catalogue lens over an earlier surface: empty cells take its pixels scaled, feature cells keep their colour', async () => {
+        const directory = await mkdtemp(join(tmpdir(), 'cssearth-underlay-'));
+        try {
+            await sharp({ create: { width: 64, height: 32, channels: 3, background: { r: 200, g: 100, b: 50 } } }).png().toFile(join(directory, 'photo.png'));
+            const photo = { id: 'photo', source: 'photo.png', falseColor: false, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp' };
+            const catalogue = { id: 'dunes', source: 'dunes.tif', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp',
+                science: { scientific: { displaySampling: 'nearest' } }, underlay: { surface: 'photo', brightness: 0.5 } };
+            const recipe = { schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
+                width: 64, height: 32, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
+                polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                thumbnail: { size: 8 }, surfaces: [photo, catalogue] };
+            const captured: Uint8Array[] = [];
+            await prepareSurfaces(parseRasterRecipe(recipe), directory, directory, async (_surface, width, height) => {
+                // The left half holds a catalogued feature; the right half is empty and painted with a stand-in grid colour.
+                const data = new Uint8Array(width * height * 3), missing = new Uint8Array(width * height);
+                for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+                    const i = y * width + x;
+                    if (x < width / 2) data.set([223, 115, 255], i * 3); else { data.set([90, 90, 90], i * 3); missing[i] = 1; }
+                }
+                captured.push(missing);
+                return { data, channels: 3, nearest: true, missing };
+            });
+            const rgba = await sharp(join(directory, 'dunes@2x.webp')).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+            const colours = new Set<string>();
+            for (let i = 0; i < rgba.data.length; i += 4) if (rgba.data[i + 3]) colours.add([...rgba.data.subarray(i, i + 3)].join(','));
+            // Lossless: only the feature colour and the half-bright photograph remain; the stand-in grid colour is gone.
+            expect([...colours].sort()).toEqual(['100,50,25', '223,115,255']);
+            expect(captured).toHaveLength(1);
+            // A grey, 6-bit underlay: Rec. 709 luma of (200, 100, 50) is 117.3, times 0.5 is 59 (58.6 rounded), keeping 6 bits is 56.
+            await prepareSurfaces(parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, grayscale: true, bits: 6 } }] }), directory, directory,
+                async (_surface, width, height) => ({ data: new Uint8Array(width * height * 3).fill(90), channels: 3, nearest: true, missing: new Uint8Array(width * height).fill(1) }));
+            const grey = await sharp(await readFile(join(directory, 'dunes@2x.webp'))).ensureAlpha().raw().toBuffer(); // sharp caches decoded files by path
+            const greys = new Set<string>(); for (let i = 0; i < grey.length; i += 4) if (grey[i + 3]) greys.add([...grey.subarray(i, i + 3)].join(','));
+            expect([...greys]).toEqual(['56,56,56']);
+            expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, bits: 9 } }] })).toThrow(/bits must be an integer from 1 to 8, not 9/);
+            expect(() => parseRasterRecipe({ ...recipe, surfaces: [catalogue, photo] })).toThrow(/earlier surface photo/);
+            expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0 } }] })).toThrow(/brightness must be in \(0, 1\], not 0/);
+            expect(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, science: undefined }] })).toThrow(/science lens/);
+        } finally { await rm(directory, { recursive: true, force: true }); }
+    });
     it('centres the lens thumbnail on a declared longitude, wrapping across the map edge', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-thumbnail-centre-'));
         try {

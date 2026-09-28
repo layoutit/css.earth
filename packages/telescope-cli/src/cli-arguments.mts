@@ -95,7 +95,7 @@ export function parseCli(args: readonly string[]): CliOptions {
   }
   if(command==='new-object'){
     // `--from-<route> NAME...` drafts a spec from an archive or catalogue; the workspace's drafts.mts names the routes.
-    const rest=args.slice(1),fromAt=rest.findIndex(arg=>/^--from-[a-z]+$/u.test(arg)),outAt=rest.indexOf('--out'),out=outAt>=0?rest[outAt+1]:undefined;
+    const rest=args.slice(1),fromAt=rest.findIndex(arg=>/^--from-[a-z0-9]+$/u.test(arg)),outAt=rest.indexOf('--out'),out=outAt>=0?rest[outAt+1]:undefined;
     const flags=rest.filter((arg,i)=>arg.startsWith('-')&&i!==fromAt&&arg!=='--out'),unknown=flags.filter(flag=>!['--json','--verbose','--check','--skip-existing','--bake','--refresh'].includes(flag));
     if(unknown.length)throw new TypeError(`Unknown new-object option ${unknown[0]}.`);
     const common={check:flags.includes('--check'),bake:flags.includes('--bake'),refresh:flags.includes('--refresh'),skipExisting:flags.includes('--skip-existing'),json:flags.includes('--json'),verbose:flags.includes('--verbose')};

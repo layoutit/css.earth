@@ -1,0 +1,40 @@
+{
+  "sourceRecords": {
+    "1": 424,
+    "2": 115,
+    "3": 8
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8384476,
+  "categories": [
+    {
+      "value": "1",
+      "label": "Dune field (confident)",
+      "color": "#df73ff"
+    },
+    {
+      "value": "2",
+      "label": "Dune field (fairly confident; needs a better image)",
+      "color": "#df73ff"
+    },
+    {
+      "value": "3",
+      "label": "Dune field (less confident; needs a better image)",
+      "color": "#df73ff"
+    }
+  ],
+  "output": "mars-dune-fields.tif",
+  "sha256": "b109075f45179f2a27aa8eb3d2a6837c2fb7abd28e437335bb231ae6f948cece",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld; source edges clipped by global raster extent."
+}

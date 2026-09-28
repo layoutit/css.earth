@@ -64,7 +64,7 @@ export function createObjectSelectionRuntime({
   function resolve(selection: ObjectSelection) {
     try {
       if (!view) throw new Error("Prepared selection requires a published view.");
-      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan, initial: !committed || !textureRefinement });
+      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan, initial: !textureRefinement });
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection: ObjectSelection | null = committed) {

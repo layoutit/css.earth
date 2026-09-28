@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-geotiff-image@1",
+  "source": {
+    "url": "https://planetarymaps.usgs.gov/mosaic/Mercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m.tif",
+    "productId": "MESS-H-MDIS-5-RDR-MD3-V1.0",
+    "width": 23040,
+    "height": 11520,
+    "origin": [
+      -7663601.119167,
+      3831800.559583
+    ],
+    "resolution": [
+      665.24315271,
+      -665.24315271
+    ],
+    "coordinates": "meters",
+    "radius": 2439400,
+    "centerLongitude": 0,
+    "noData": 0,
+    "bits": 8,
+    "sampleFormat": 1,
+    "samples": 3
+  },
+  "output": {
+    "width": 4096,
+    "height": 2048,
+    "radius": 2439400
+  }
+}

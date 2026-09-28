@@ -1,0 +1,35 @@
+{
+  "id": "source-mercury-usgs-messenger-md3-native",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MESSENGER MDIS MD3 color global mosaic",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m",
+      "label": "USGS product and downloads"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/31"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins APL; Carnegie Science; USGS Astrogeology",
+      "scope": "Native USGS mosaic and its reduced display image.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "United States government work / NASA-PDS data; cite USGS authors",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-glacier-like-forms-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Glacier-Like Forms (NASA Mars Trek GIS layer Glacier-like_Forms_GLFs_2012)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/77"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "souness-2012-glacier-like-forms",
+      "evidence": "The Trek catalogue entry for this layer cites Colin Souness, Bryn Hubbard, Ralph E. Milliken and Duncan Quincey (2012), Icarus 217, 243-255."
+    }
+  ],
+  "statements": []
+}

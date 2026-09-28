@@ -1,0 +1,53 @@
+{
+  "id": "w-gem",
+  "name": "W Gem",
+  "system": "W Gem system",
+  "description": "A Cepheid in the Milky Way that pulsates every 7.91 days; its mean radius is 68 solar radii.",
+  "target": "W Gem",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 68,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, W Gem: Baade-Wesselink mean radius (solar radii) 68 +/- 8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 8
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5625,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 259, Name='W Gem', columns Teff, e_Teff (K): Teff 5625 +/- 381 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 381
+  },
+  "distance": {
+    "value": 1222.7,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, W Gem: Baade-Wesselink distance (pc) 1222.7 +/- 143.1 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 143.1
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.255 +/- 0.01 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 68 times the Sun's width, that swells and shrinks every 7.9 days.",
+    "introduction": "Its mean radius, 68 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,223 parsecs away.",
+    "locator": "table10, W Gem: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "order": 2016
+}

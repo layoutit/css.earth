@@ -1,0 +1,30 @@
+{
+ "id": "cv-mon",
+ "classification": "star",
+ "order": 2004,
+ "physical": {
+  "name": "CV Mon",
+  "horizonsCode": null,
+  "meanRadiusKm": 28314990,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5375
+ },
+ "physicalNotes": "Radius 40.7 +/- 1.9 solar radii from Groenewegen (2013), A&A 550, A70, table10, CV Mon: Baade-Wesselink mean radius (solar radii) 40.7 +/- 1.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 28,314,990 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5375 +/- 208 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 60, Name='CV Mon', columns Teff, e_Teff (K): Teff 5375 +/- 208 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 99.27018871085222,
+  "declinationDegrees": 3.06396219476623,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1595.3,
+  "properMotionRaMasPerYear": 0.34899805016486907,
+  "properMotionDecMasPerYear": -0.6660232927109877,
+  "radialVelocityKmPerS": 9.351947,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3127142323596470144 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/cv-mon/source/photometry/gaia-dr3-source.csv; cross-identification HIP 31624: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3127142323596470144",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, CV Mon: Baade-Wesselink distance (pc) 1595.3 +/- 71.5 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1595.3 +/- 71.5 pc; Gaia DR3 parallax 0.5675 +/- 0.0148 mas (same row, RUWE 1.10), 38.3 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 0.349, -0.666 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 9.35 +/- 7.58 km/s"
+  }
+ }
+}

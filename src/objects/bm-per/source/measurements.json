@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "bm-per",
+  "angularDiameterMas": 0.38,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 63,934,830 km at 2253.40 pc = 0.38 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 2253.4,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, BM Per: Baade-Wesselink distance (pc) 2253.4 +/- 740.1 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 2253.4 +/- 740.1 pc; Gaia DR3 parallax 0.2880 +/- 0.0215 mas (same row, RUWE 0.99), 13.4 standard errors, is not used",
+  "radiusKm": 63934830,
+  "radiusSource": "Radius 91.9 +/- 30.9 solar radii from Groenewegen (2013), A&A 550, A70, table10, BM Per: Baade-Wesselink mean radius (solar radii) 91.9 +/- 30.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 63,934,830 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4750 +/- 237 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 42, Name='BM Per', columns Teff, e_Teff (K): Teff 4750 +/- 237 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4750,
+  "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 42, Name='BM Per', columns Teff, e_Teff (K): Teff 4750 +/- 237 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}
