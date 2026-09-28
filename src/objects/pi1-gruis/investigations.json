@@ -46,9 +46,9 @@
       "id": "limb-darkening",
       "subject": "Limb darkening",
       "status": "included",
-      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to Paladini et al.'s (2018) calibrated VLTI/PIONIER visibilities, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/pi1-gruis.json: -0.385.",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/pi1-gruis.json: -0.385.",
       "evidence": [
-        "https://doi.org/10.1038/nature25001"
+        "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits"
       ]
     }
   ]

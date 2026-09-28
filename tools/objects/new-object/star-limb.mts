@@ -5,6 +5,8 @@
  *    quadratic or power), a measurement or the model a paper fixed for this star;
  * 2. the model grids of limb.mts, at the star's temperature and gravity (and mass, for spherical models). The gravity is the star's
  *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts).
+ * 3. the star's own calibrated interferometry, fitted inside the first lobe, when an observation season records it
+ *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
  * A star that already has a colour lens gains the law on it; a placeholder that has none gains the colour lens with it
  * (color.mts, lens.mts). A star no source covers is reported and left unchanged. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
@@ -14,6 +16,7 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { fetchGaiaRow, liveArchive, readIdentifiers, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Resolver } from './archives.mts';
 import { chooseColor } from './color.mts';
 import { chooseGravity, type GravityChoice } from './gravity.mts';
+import { fitInterferometricLimb } from './interferometric-limb.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { StarSpec } from './spec.mts';
@@ -33,7 +36,9 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
   for (const name of names) {
     const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { schema?: string; law?: string; source?: string; band?: string; basis?: string; alpha?: { value: number }; u1?: { value: number }; u2?: { value: number }; fit?: { tool: string; input: string; data: string } };
     if (record.schema !== 'cssearth-published-limb-darkening@1') continue;
-    const path = `photometry/${name}`, url = /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(record.source ?? '')?.[0] ?? '';
+    // A fitted law's origin is the origin of the file it was fitted to, as the star's manifest records it.
+    const fitted = record.fit && ((JSON.parse(await readFile(resolve(root, 'src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path: string; origin?: string }[] }).inputs ?? []).find(input => input.path === record.fit!.input)?.origin;
+    const path = `photometry/${name}`, url = fitted ?? /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(record.source ?? '')?.[0] ?? '';
     const credit = (record.source ?? '').split(/,\s*(?=https?:|Table|Section)/u)[0]!.trim();
     // A law fitted in this package to a pinned input says so, and names the tool that refits it; any other record is a paper's.
     const fit = record.fit;
@@ -117,7 +122,9 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
       const choice = await chooseGravity({ archive, ra: host.star.rightAscensionDegrees, dec: host.star.declinationDegrees, teffK, where: id });
       if (choice) gravity = { logg: choice.logg, kind: choice.kind, sentence: choice.sentence, url: choice.url };
     }
-    const limb = published ?? (gravity ? await chooseLimb(id, teffK, gravity.logg, archive, undefined, massSolar) : { sentence: 'No limb darkening is drawn: no gravity of this star is measured or published' });
+    let limb = published ?? (gravity ? await chooseLimb(id, teffK, gravity.logg, archive, undefined, massSolar) : { sentence: 'No limb darkening is drawn: no gravity of this star is measured or published' });
+    // No paper and no grid: the star's own calibrated interferometry, fitted inside the first lobe (interferometric-limb.mts).
+    if (!limb.limbDarkening && await fitInterferometricLimb(root, id, progress)) limb = (await publishedLaw(root, id)) ?? limb;
     if (!limb.limbDarkening) { results.push({ id, limb: `NONE: ${limb.sentence}` }); progress(`  ${id}: no law (${limb.sentence.slice(0, 160)})`); continue; }
     const raster = read(`${s}/preparation/raster.json`), hasColor = raster.surfaces.some((entry: { science?: { kind?: string } }) => entry.science?.kind === 'stellar-photometric-color');
     let colour: string | undefined;

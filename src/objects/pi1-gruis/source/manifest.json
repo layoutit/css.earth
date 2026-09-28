@@ -246,12 +246,12 @@
       }
     },
     {
-      "id": "pi1-gruis-pionier-first-lobe-limb-darkening",
-      "path": "photometry/pionier-first-lobe-limb-darkening.json",
-      "origin": "https://doi.org/10.1038/nature25001",
-      "credit": "Paladini et al. (2018), Nature 553, 310, the calibrated VLTI/PIONIER visibilities they imaged from (https://doi.org/10.1038/nature25001)",
+      "id": "pi1-gruis-pi1-gruis-pionier-2014-09-first-lobe-limb-darkening",
+      "path": "photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json",
+      "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+      "credit": "π¹ Gruis, VLTI/PIONIER, nights of 25/26 and 29/30 September 2014 (ESO programme 093.D-0598, Paladini et al. 2018), the calibrated visibilities in observations/PI_GRU_forImage.fits",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Fitted by fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), checked by image-star.test.mts to observations/PI_GRU_forImage.fits",
+      "acquisition": "Fitted by fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), run by node tools/objects/new-object.mts --star-limb to observations/PI_GRU_forImage.fits",
       "redistribution": "A fitted parameter with its method; no paper figures",
       "consumers": [
         "assets",
@@ -277,7 +277,7 @@
         "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",
         "inputs": [
           "pi1-gruis-pionier-2014-09",
-          "pi1-gruis-pionier-first-lobe-limb-darkening"
+          "pi1-gruis-pi1-gruis-pionier-2014-09-first-lobe-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",

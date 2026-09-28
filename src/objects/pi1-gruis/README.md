@@ -16,7 +16,7 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 
 **Colour lens.** The colour of Gaia DR3's measured spectrum of π¹ Gruis. At G = 3.6 the star is brighter than the G of about 5 below which Gaia XP photometry can saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE of 2.9 is high, so the blue end of this colour is uncertain. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ff9a41**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). No model limb darkening is added: the giant's gravity is below the Claret & Bloemen (2011) grid, and the PIONIER lens shows its measured disc. The catalogue swatch and the minimap use the same colour; the navigation marker stays the image. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. No usable second spectrum was found: the only other scan (Willstrop, VizieR III/126) covers 400-650 nm, too little for a colour.
 
-**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to Paladini et al.'s (2018) calibrated VLTI/PIONIER visibilities, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/pi1-gruis.json: -0.385.
+**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/pi1-gruis.json: -0.385.
 
 ## Evidence
 
@@ -42,6 +42,6 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 
 **Self-luminous, so no lighting.** The star is drawn by the emissive material, the same as the Sun and Betelgeuse: the leaves carry the reconstruction's own brightness and no light direction or shadow is applied.
 - **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.
-- **The limb law depends on the baselines.** Inside the first lobe, where the whole disc dominates, the power law is 1.29 ± 0.11; fitted to every baseline, where the convection cells dominate, it is 0.42. The first-lobe law is drawn ([record](source/photometry/pionier-first-lobe-limb-darkening.json), refit by `image-star.test.mts`).
+- **The limb law depends on the baselines.** Inside the first lobe, where the whole disc dominates, the power law is 1.29 ± 0.11; fitted to every baseline, where the convection cells dominate, it is 0.42. The first-lobe law is drawn ([record](source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json), refit by `image-star.test.mts`).
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

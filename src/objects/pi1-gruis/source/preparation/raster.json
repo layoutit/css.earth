@@ -115,11 +115,11 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to Paladini et al.'s (2018) calibrated VLTI/PIONIER visibilities, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band).",
+        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band).",
         "limbDarkening": {
           "law": "power",
           "published": true,
-          "path": "photometry/pionier-first-lobe-limb-darkening.json"
+          "path": "photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json"
         }
       }
     }

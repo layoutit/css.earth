@@ -57,7 +57,7 @@ test('the π¹ Gruis season parses, and malformed seasons fail', async () => {
 
 test("the first-lobe power law on the author file is the limb the package records", async () => {
   const rows = readChannelRows(await readFile(authorFile));
-  const record = JSON.parse(await readFile(resolve(repository, 'src/objects/pi1-gruis/source/photometry/pionier-first-lobe-limb-darkening.json'), 'utf8'));
+  const record = JSON.parse(await readFile(resolve(repository, 'src/objects/pi1-gruis/source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json'), 'utf8'));
   const fit = fitPowerLawDisc(rows, { uniformMas: 18.17 });
   assert.equal(fit.points, 341);
   assert.ok(Math.abs(fit.alpha - record.alpha.value) < 0.005, `alpha ${fit.alpha}`);

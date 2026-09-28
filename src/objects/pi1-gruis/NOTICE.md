@@ -4,4 +4,4 @@ Photograph: reconstructed in this repository with SQUEEZE 3.0 (Fabien Baron, Geo
 
 Placement: SIMBAD (CDS, Strasbourg) position, proper motion and parallax from Gaia DR3 (Gaia Collaboration 2020). Mass for the display GM: Mayer et al., A&A 570, A113 (2014). No measured rotation axis: the display axis is celestial north.
 
-Limb darkening: Paladini et al. (2018), Nature 553, 310, the calibrated VLTI/PIONIER visibilities they imaged from (https://doi.org/10.1038/nature25001).
+Limb darkening: π¹ Gruis, VLTI/PIONIER, nights of 25/26 and 29/30 September 2014 (ESO programme 093.D-0598, Paladini et al. 2018), the calibrated visibilities in observations/PI_GRU_forImage.fits.
