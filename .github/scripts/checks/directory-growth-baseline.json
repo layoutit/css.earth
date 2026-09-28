@@ -19,7 +19,7 @@
       "tests": 19
     },
     "packages/bake/cli": {
-      "implementations": 60,
+      "implementations": 79,
       "tests": 0
     },
     "packages/renderer/src/navigation": {
@@ -49,6 +49,10 @@
     "site": {
       "implementations": 101,
       "tests": 2
+    },
+    "site/build/prepare": {
+      "implementations": 29,
+      "tests": 0
     },
     "site/components": {
       "implementations": 36,
