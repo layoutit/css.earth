@@ -2,7 +2,7 @@
 
 ## Sources
 
-55 Cnc e transits 55 Cnc every 0.737 days and is 1.9 times as wide as Earth. Orbit and size follow Bourrier et al. 2018's fit, the archive's default. This account was drafted from Bourrier et al. 2018's values; the sections below are the data's own.
+It is one of 7 planets known around 55 Cnc. Its orbit and size follow Bourrier et al. 2018's fit, the archive's default. This account was drafted from Bourrier et al. 2018's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1672763 Jupiter radii from Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract): 11,958.9 km at 71,492 km per Jupiter radius. GM from the mass 0.02513923 Jupiter masses (Bourrier et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018A&A...619A...1B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

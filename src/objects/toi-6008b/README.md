@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-6008 b transits TOI-6008 every 0.857 days and is as wide as Earth. Orbit and size follow Barkaoui et al. 2024's fit, the archive's default. This account was drafted from Barkaoui et al. 2024's values; the sections below are the data's own.
+It is the only planet known around TOI-6008. Its orbit and size follow Barkaoui et al. 2024's fit, the archive's default. This account was drafted from Barkaoui et al. 2024's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.0918906 Jupiter radii from Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract): 6,569.4 km at 71,492 km per Jupiter radius. No mass is measured: Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract) gives only an upper limit of 0.01258541 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 

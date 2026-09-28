@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "hd-60779b",
   "card": {
-    "text": "HD 60779 b crosses its star every 30 days and is 3.2 times as wide as Earth, found in 2026.",
+    "text": "HD 60779 b was found in 2026 by TESS as it crossed its star.",
     "sources": [
       {
         "catalogueId": "publication-2026aj-172-97d",
         "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
         "label": "DiTomasso et al. 2026",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL_2026): pl_orbper 29.986175, pl_radj 0.28958922, pl_bmassj 0.04464673"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 29.986175, pl_radj 0.28958922, pl_bmassj 0.04464673"
       }
     ]
   },
   "introduction": {
-    "text": "HD 60779 b transits HD 60779 every 30 days and is 3.2 times as wide as Earth. Orbit and size follow DiTomasso et al. 2026's fit, the archive's default.",
+    "text": "It is one of 2 planets known around HD 60779. Its orbit and size follow DiTomasso et al. 2026's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "publication-2026aj-172-97d",
         "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
         "label": "DiTomasso et al. 2026",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL_2026): pl_orbper 29.986175, pl_radj 0.28958922, pl_bmassj 0.04464673"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 29.986175, pl_radj 0.28958922, pl_bmassj 0.04464673"
       }
     ]
   },

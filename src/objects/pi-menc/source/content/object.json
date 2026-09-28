@@ -8,7 +8,7 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "2 Earth radii",
+        "value": "2.0 Earth radii",
         "source": {
           "catalogueId": "publication-2021mnras-502-2893k",
           "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K",
@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.013 Jupiter masses",
+        "value": "4.2 Earth masses",
         "source": {
           "catalogueId": "publication-2025aj-170-343h",
           "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H",

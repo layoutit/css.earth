@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-1024",
   "card": {
-    "text": "Kepler-1024 is a star of 5,143 K, 1090 parsecs away, with 1 known transiting planet.",
+    "text": "Kepler-1024 b crosses Kepler-1024 as seen from Earth, which is how it was found.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",
@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "Kepler-1024 is a star of 5,143 K 1090 parsecs away. Its planet Kepler-1024 b crosses it, which is how it was found and sized.",
+    "text": "Its radius and temperature follow Morton et al. 2016.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",

@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 3167 b transits HD 3167 every 0.96 days and is 1.6 times as wide as Earth. Orbit and size follow Coy et al. 2026's fit, the archive's default. This account was drafted from Coy et al. 2026's values; the sections below are the data's own.
+It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al. 2026's fit, the archive's default. This account was drafted from Coy et al. 2026's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1428319 Jupiter radii from Coy et al. 2026 (2026ApJ..1005L..77C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract): 10,211.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01524093 Jupiter masses (Coy et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026ApJ..1005L..77C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

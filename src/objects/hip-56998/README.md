@@ -2,7 +2,7 @@
 
 ## Sources
 
-HIP 56998 is a star of 4,675 K 12.8 parsecs away. Its planets HD 101581 b, HD 101581 c cross it, which is how they were found and sized. It is also HD 101581, HIP 56998. This account was drafted from Kunimoto et al. 2025's values; the sections below are the data's own.
+Its radius and temperature follow Kunimoto et al. 2025. It is also HD 101581, HIP 56998. This account was drafted from Kunimoto et al. 2025's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 5378886891123024512, parallax 78.227 ± 0.018 mas (12.78 pc). Radius 0.63 +/- 0.027 solar radii from Kunimoto et al. 2025, the stellar radius of the default parameter set of HD 101581 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract). Mass 0.653 +/- 0.028 solar masses from Kunimoto et al. 2025, the stellar mass of the default parameter set of HD 101581 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract). Temperature 4,675 K from Kunimoto et al. 2025, the stellar temperature of the default parameter set of HD 101581 b in the NASA Exoplanet Archive. log g 4.65 from the mass and radius.
 

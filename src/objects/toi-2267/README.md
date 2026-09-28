@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2267 A is a star of 3,030 K. Its planets TOI-2267 b, TOI-2267 c cross it, which is how they were found and sized. This account was drafted from Zúñiga-Fernández et al. 2025's values; the sections below are the data's own.
+Its radius and temperature follow Zúñiga-Fernández et al. 2025. This account was drafted from Zúñiga-Fernández et al. 2025's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 571488283984760960, parallax 44.350 ± 0.356 mas (22.55 pc); its RUWE is 13.7, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.2075 +/- 0.0225 solar radii from Zúñiga-Fernández et al. 2025, the stellar radius of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract). Mass 0.171 +/- 0.0079 solar masses from Zúñiga-Fernández et al. 2025, the stellar mass of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract). Temperature 3,030 K from Zúñiga-Fernández et al. 2025, the stellar temperature of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive. log g 5.04 from the mass and radius.
 

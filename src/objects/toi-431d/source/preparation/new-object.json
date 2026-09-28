@@ -14,9 +14,9 @@
         "reference": "OSBORN_ET_AL__2021"
       },
       "text": {
-        "card": "TOI-431 d crosses its star every 12.5 days and is 3.3 times as wide as Earth, found in 2021.",
-        "introduction": "TOI-431 d transits TOI-431 every 12.5 days and is 3.3 times as wide as Earth. Orbit and size follow Osborn et al. 2021's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORN_ET_AL__2021): pl_orbper 12.46103, pl_radj 0.29351465, pl_bmassj 0.03114888"
+        "card": "TOI-431 d was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around TOI-431. Its orbit and size follow Osborn et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORN_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 12.46103, pl_radj 0.29351465, pl_bmassj 0.03114888"
       },
       "order": 1817
     }

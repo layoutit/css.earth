@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-1542",
   "card": {
-    "text": "Kepler-1542 is a star of 5,564 K, 399 parsecs away, with 4 known transiting planets.",
+    "text": "4 planets cross Kepler-1542 as seen from Earth: b, c, d, e.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",
@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "Kepler-1542 is a star of 5,564 K 399 parsecs away. Its planets c, b, e, d cross it, which is how they were found and sized.",
+    "text": "Its radius and temperature follow Morton et al. 2016.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",

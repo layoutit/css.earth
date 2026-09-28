@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "toi-5789c",
   "card": {
-    "text": "TOI-5789 c crosses its star every 12.9 days and is 2.9 times as wide as Earth, found in 2026.",
+    "text": "TOI-5789 c was found in 2026 by TESS as it crossed its star.",
     "sources": [
       {
         "catalogueId": "publication-2026a-a-707a-197b",
         "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
         "label": "Bonomo et al. 2026",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2026): pl_orbper 12.927748, pl_radj 0.25515255, pl_bmassj 0.01573176"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 12.927748, pl_radj 0.25515255, pl_bmassj 0.01573176"
       }
     ]
   },
   "introduction": {
-    "text": "TOI-5789 c transits TOI-5789 every 12.9 days and is 2.9 times as wide as Earth. Orbit and size follow Bonomo et al. 2026's fit, the archive's default.",
+    "text": "It is one of 4 planets known around TOI-5789. Its orbit and size follow Bonomo et al. 2026's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "publication-2026a-a-707a-197b",
         "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
         "label": "Bonomo et al. 2026",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2026): pl_orbper 12.927748, pl_radj 0.25515255, pl_bmassj 0.01573176"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 12.927748, pl_radj 0.25515255, pl_bmassj 0.01573176"
       }
     ]
   },

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-1024 is a star of 5,143 K 1090 parsecs away. Its planet Kepler-1024 b crosses it, which is how it was found and sized. This account was drafted from Morton et al. 2016's values; the sections below are the data's own.
+Its radius and temperature follow Morton et al. 2016. This account was drafted from Morton et al. 2016's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2052666992204482816, parallax 0.948 ± 0.031 mas (1054.92 pc). Radius 0.78 +/- 0.045 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1024 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). Mass 0.81 +/- 0.042 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1024 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). Temperature 5,143 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1024 b in the NASA Exoplanet Archive. log g 4.56 from the mass and radius.
 

@@ -2,7 +2,7 @@
 
 ## Sources
 
-HAT-P-11 b transits HAT-P-11 every 4.89 days and is 0.45 times as wide as Jupiter. Orbit and size follow An et al. 2025's fit, the archive's default. This account was drafted from An et al. 2025's values; the sections below are the data's own.
+It is one of 2 planets known around HAT-P-11. Its orbit and size follow An et al. 2025's fit, the archive's default. This account was drafted from An et al. 2025's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.4466 Jupiter radii from Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract): 31,928.3 km at 71,492 km per Jupiter radius. GM from the mass 0.0787 Jupiter masses (Basilicata et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.127B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

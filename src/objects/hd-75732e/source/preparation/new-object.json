@@ -14,9 +14,9 @@
         "reference": "BOURRIER_ET_AL__2018"
       },
       "text": {
-        "card": "55 Cnc e crosses its star every 0.737 days and is 1.9 times as wide as Earth, found in 2004.",
-        "introduction": "55 Cnc e transits 55 Cnc every 0.737 days and is 1.9 times as wide as Earth. Orbit and size follow Bourrier et al. 2018's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923",
+        "card": "55 Cnc e was found in 2004 by McDonald Observatory as it crossed its star.",
+        "introduction": "It is one of 7 planets known around 55 Cnc. Its orbit and size follow Bourrier et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): disc_year 2004, disc_facility McDonald Observatory, sy_pnum 7; pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/55_Cancri_Ae",
           "title": "55 Cancri Ae",

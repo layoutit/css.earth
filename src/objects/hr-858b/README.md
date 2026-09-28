@@ -2,7 +2,7 @@
 
 ## Sources
 
-HR 858 b transits HR 858 every 3.59 days and is 2.0 times as wide as Earth. Orbit and size follow Bonfanti et al. 2025's fit, the archive's default. This account was drafted from Bonfanti et al. 2025's values; the sections below are the data's own.
+It is one of 3 planets known around HR 858. Its orbit and size follow Bonfanti et al. 2025's fit, the archive's default. This account was drafted from Bonfanti et al. 2025's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.17878521 Jupiter radii from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract): 12,781.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01116955 Jupiter masses (Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

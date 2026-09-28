@@ -2,7 +2,7 @@
 
 ## Sources
 
-WASP-157 b transits WASP-157 every 3.95 days and is as wide as Jupiter. Orbit and size follow Livingston et al. 2018's fit, the archive's default. This account was drafted from Livingston et al. 2018's values; the sections below are the data's own.
+It is the only planet known around WASP-157. Its orbit and size follow Livingston et al. 2018's fit, the archive's default. This account was drafted from Livingston et al. 2018's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.99830493 Jupiter radii from Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract): 71,370.8 km at 71,492 km per Jupiter radius. GM from the mass 0.574 Jupiter masses (Mo&#x10D;nik et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016PASP..128l4403M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016PASP..128l4403M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

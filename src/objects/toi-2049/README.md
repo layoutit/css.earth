@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2049 is a star of 6,164 K 571 parsecs away. Its planet TOI-2049 b crosses it, which is how it was found and sized. This account was drafted from Guenther et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Guenther et al. 2026. This account was drafted from Guenther et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2009110972943346304, parallax 1.754 ± 0.012 mas (570.16 pc). Radius 3.2 +/- 0.01 solar radii from Guenther et al. 2026, the stellar radius of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract). Mass 1.57 +/- 0.03 solar masses from Guenther et al. 2026, the stellar mass of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract). Temperature 6,164 K from Guenther et al. 2026, the stellar temperature of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive. log g 3.62 from the mass and radius.
 

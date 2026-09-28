@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-4511 is a star of 5,419 K 122 parsecs away. Its planet TOI-4511 b crosses it, which is how it was found and sized. This account was drafted from Lafarga et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Lafarga et al. 2026. This account was drafted from Lafarga et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 30392773430255360, parallax 8.254 ± 0.020 mas (121.15 pc). Radius 1.00145 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-4511 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). Mass 0.903 (0.863 to 0.943) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 5,418.77 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-4511 b in the NASA Exoplanet Archive. log g 4.39 from the mass and radius.
 

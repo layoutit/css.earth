@@ -2,7 +2,7 @@
 
 ## Sources
 
-HAT-P-11 is a star of 4,780 K 37.8 parsecs away. Its planet HAT-P-11 b crosses it, which is how it was found and sized. It is also HIP 97657. This account was drafted from An et al. 2025's values; the sections below are the data's own.
+Its radius and temperature follow Basilicata et al. 2024. It is also HIP 97657. This account was drafted from An et al. 2025's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2086512227851023872, parallax 26.427 ± 0.011 mas (37.84 pc). Radius 0.76 +/- 0.01 solar radii from Basilicata et al. 2024, the stellar radius of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract). Mass 0.811 +/- 0.03 solar masses from An et al. 2025, the stellar mass of the default parameter set of HAT-P-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract). Temperature 4,780 K from Basilicata et al. 2024, the stellar temperature of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive. log g 4.59 from the mass and radius.
 

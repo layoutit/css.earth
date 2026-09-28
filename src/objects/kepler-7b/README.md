@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-7 b transits Kepler-7 every 4.89 days and is 1.6 times as wide as Jupiter. Orbit and size follow Esteves et al. 2015's fit, the archive's default. This account was drafted from Esteves et al. 2015's values; the sections below are the data's own.
+It is the only planet known around Kepler-7. Its orbit and size follow Esteves et al. 2015's fit, the archive's default. This account was drafted from Esteves et al. 2015's values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.622 Jupiter radii from Esteves et al. 2015 (2015ApJ...804..150E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract): 115,960 km at 71,492 km per Jupiter radius. GM from the mass 0.441 Jupiter masses (Esteves et al. 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015ApJ...804..150E), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

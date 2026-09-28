@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-444 b transits Kepler-444 every 3.6 days and is 0.40 times as wide as Earth. Orbit and size follow Campante et al. 2015's fit, the archive's default. This account was drafted from Campante et al. 2015's values; the sections below are the data's own.
+It is one of 5 planets known around Kepler-444. Its orbit and size follow Campante et al. 2015's fit, the archive's default. This account was drafted from Campante et al. 2015's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.036 Jupiter radii from Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract): 2,573.7 km at 71,492 km per Jupiter radius. GM from the mass 0.000118 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

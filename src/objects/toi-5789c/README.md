@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-5789 c transits TOI-5789 every 12.9 days and is 2.9 times as wide as Earth. Orbit and size follow Bonomo et al. 2026's fit, the archive's default. This account was drafted from Bonomo et al. 2026's values; the sections below are the data's own.
+It is one of 4 planets known around TOI-5789. Its orbit and size follow Bonomo et al. 2026's fit, the archive's default. This account was drafted from Bonomo et al. 2026's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.25515255 Jupiter radii from Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract): 18,241.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01573176 Jupiter masses (Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

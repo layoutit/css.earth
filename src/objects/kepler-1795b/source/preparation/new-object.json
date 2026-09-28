@@ -14,9 +14,9 @@
         "reference": "VALIZADEGAN_ET_AL__2022"
       },
       "text": {
-        "card": "Kepler-1795 b crosses its star every 13.4 days and is 1.7 times as wide as Earth, found in 2021.",
-        "introduction": "Kepler-1795 b transits Kepler-1795 every 13.4 days and is 1.7 times as wide as Earth. Orbit and size follow Q1-Q17 DR25 KOI Table's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname VALIZADEGAN_ET_AL__2022): pl_orbper 13.36019993, pl_radj 0.14836462, pl_bmassj 0.0107"
+        "card": "Kepler-1795 b was found in 2021 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around Kepler-1795. Its orbit and size follow Q1-Q17 DR25 KOI Table's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname VALIZADEGAN_ET_AL__2022): disc_year 2021, disc_facility Kepler, sy_pnum 1; pl_orbper 13.36019993, pl_radj 0.14836462, pl_bmassj 0.0107"
       },
       "order": 2999
     }

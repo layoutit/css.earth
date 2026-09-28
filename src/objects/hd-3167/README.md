@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 3167 is a star of 5,338 K 47.3 parsecs away. Its planets b, c cross it, which is how they were found and sized. It is also HIP 2736. This account was drafted from Coy et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Coy et al. 2026. It is also HIP 2736. This account was drafted from Coy et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2554032474712538880, parallax 21.136 ± 0.019 mas (47.31 pc). Radius 0.871 +/- 0.015 solar radii from Coy et al. 2026, the stellar radius of the default parameter set of HD 3167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract). Mass 0.864 +/- 0.039 solar masses from Coy et al. 2026, the stellar mass of the default parameter set of HD 3167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract). Temperature 5,338 K from Coy et al. 2026, the stellar temperature of the default parameter set of HD 3167 b in the NASA Exoplanet Archive. log g 4.49 from the mass and radius.
 

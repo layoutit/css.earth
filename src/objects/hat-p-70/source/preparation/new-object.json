@@ -30,8 +30,8 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HAT-P-70 is a star of 8,450 K, 331 parsecs away, with 1 known transiting planet.",
-    "introduction": "HAT-P-70 is a star of 8,450 K 331 parsecs away. Its planet HAT-P-70 b crosses it, which is how it was found and sized.",
+    "card": "HAT-P-70 b crosses HAT-P-70 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Zhou et al. 2019.",
     "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL__2019): st_teff 8450, st_rad 1.858, st_mass 1.89"
   },
   "notes": [],

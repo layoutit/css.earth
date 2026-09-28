@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-1795 b transits Kepler-1795 every 13.4 days and is 1.7 times as wide as Earth. Orbit and size follow Q1-Q17 DR25 KOI Table's fit, the archive's default. This account was drafted from Valizadegan et al. 2022's values; the sections below are the data's own.
+It is the only planet known around Kepler-1795. Its orbit and size follow Q1-Q17 DR25 KOI Table's fit, the archive's default. This account was drafted from Valizadegan et al. 2022's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.14836462 Jupiter radii from Valizadegan et al. 2022 (2022ApJ...926..120V), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022ApJ...926..120V/abstract): 10,606.9 km at 71,492 km per Jupiter radius. GM from the mass 0.0107 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

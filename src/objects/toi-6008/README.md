@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-6008 is a star of 3,075 K 23.1 parsecs away. Its planet TOI-6008 b crosses it, which is how it was found and sized. This account was drafted from Barkaoui et al. 2024's values; the sections below are the data's own.
+Its radius and temperature follow Barkaoui et al. 2024. This account was drafted from Barkaoui et al. 2024's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2168280502430898944, parallax 43.440 ± 0.016 mas (23.02 pc). Radius 0.242 +/- 0.013 solar radii from Barkaoui et al. 2024, the stellar radius of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract). Mass 0.23 +/- 0.011 solar masses from Barkaoui et al. 2024, the stellar mass of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract). Temperature 3,075 K from Barkaoui et al. 2024, the stellar temperature of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive. log g 5.03 from the mass and radius.
 

@@ -14,9 +14,9 @@
         "reference": "RESCIGNO_ET_AL_2026"
       },
       "text": {
-        "card": "TOI-2134 b crosses its star every 9.23 days and is 2.7 times as wide as Earth, found in 2023.",
-        "introduction": "TOI-2134 b transits TOI-2134 every 9.23 days and is 2.7 times as wide as Earth. Orbit and size follow Rescigno et al. 2026's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RESCIGNO_ET_AL_2026): pl_orbper 9.229198, pl_radj 0.24400078, pl_bmassj 0.02948132"
+        "card": "TOI-2134 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-2134. Its orbit and size follow Rescigno et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RESCIGNO_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.229198, pl_radj 0.24400078, pl_bmassj 0.02948132"
       },
       "order": 1800
     }

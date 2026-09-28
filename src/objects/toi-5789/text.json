@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "toi-5789",
   "card": {
-    "text": "TOI-5789 is a star of 5,185 K, 20.5 parsecs away, with 1 known transiting planet.",
+    "text": "TOI-5789 c crosses TOI-5789 as seen from Earth, which is how it was found.",
     "sources": [
       {
         "catalogueId": "publication-2026a-a-707a-197b",
         "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
         "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-5789 c (st_refname BONOMO_ET_AL_2026): st_teff 5185, st_rad 0.833, st_mass 0.821"
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2026): st_teff 5185, st_rad 0.833, st_mass 0.821"
       }
     ]
   },
   "introduction": {
-    "text": "TOI-5789 is a star of 5,185 K 20.5 parsecs away. Its planet TOI-5789 c crosses it, which is how it was found and sized.",
+    "text": "Its radius and temperature follow Bonomo et al. 2026.",
     "sources": [
       {
         "catalogueId": "publication-2026a-a-707a-197b",
         "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
         "label": "Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set of TOI-5789 c (st_refname BONOMO_ET_AL_2026): st_teff 5185, st_rad 0.833, st_mass 0.821"
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2026): st_teff 5185, st_rad 0.833, st_mass 0.821"
       }
     ]
   },

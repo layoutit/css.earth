@@ -2,14 +2,14 @@
   "schema": "cssearth-object-text@1",
   "objectId": "wasp-12b",
   "card": {
-    "text": "WASP-12 b crosses its star every 1.09 days and is 2.0 times as wide as Jupiter, found in 2008.",
+    "text": "WASP-12 b was found in 2008 by SuperWASP as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202348363",
         "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract",
         "label": "Leonardi et al. 2024",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LEONARDI_ET_AL__2024): pl_orbper 1.091418901, pl_radj 1.965, pl_bmassj 1.47"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LEONARDI_ET_AL__2024): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.091418901, pl_radj 1.965, pl_bmassj 1.47"
       },
       {
         "catalogueId": "wikipedia-wasp-12b",
@@ -22,14 +22,14 @@
     ]
   },
   "introduction": {
-    "text": "WASP-12 b transits WASP-12 every 1.09 days and is 2.0 times as wide as Jupiter. Orbit and size follow Leonardi et al. 2024's fit, the archive's default.",
+    "text": "It is the only planet known around WASP-12. Its orbit and size follow Leonardi et al. 2024's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202348363",
         "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract",
         "label": "Leonardi et al. 2024",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LEONARDI_ET_AL__2024): pl_orbper 1.091418901, pl_radj 1.965, pl_bmassj 1.47"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LEONARDI_ET_AL__2024): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.091418901, pl_radj 1.965, pl_bmassj 1.47"
       },
       {
         "catalogueId": "wikipedia-wasp-12b",

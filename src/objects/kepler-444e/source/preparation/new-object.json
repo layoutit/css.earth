@@ -14,9 +14,9 @@
         "reference": "CAMPANTE_ET_AL__2015"
       },
       "text": {
-        "card": "Kepler-444 e crosses its star every 7.74 days and is 0.55 times as wide as Earth, found in 2015.",
-        "introduction": "Kepler-444 e transits Kepler-444 every 7.74 days and is 0.55 times as wide as Earth. Orbit and size follow Campante et al. 2015's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): pl_orbper 7.743493, pl_radj 0.049, pl_bmassj 0.00031463"
+        "card": "Kepler-444 e was found in 2015 by Kepler as it crossed its star.",
+        "introduction": "It is one of 5 planets known around Kepler-444. Its orbit and size follow Campante et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): disc_year 2015, disc_facility Kepler, sy_pnum 5; pl_orbper 7.743493, pl_radj 0.049, pl_bmassj 0.00031463"
       },
       "order": 1826
     }

@@ -2,7 +2,7 @@
 
 ## Sources
 
-WASP-157 is a star of 5,772 K 334 parsecs away. Its planet WASP-157 b crosses it, which is how it was found and sized. This account was drafted from Livingston et al. 2018's values; the sections below are the data's own.
+Its radius and temperature follow Livingston et al. 2018. This account was drafted from Livingston et al. 2018's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3630269399833507200, parallax 2.942 ± 0.028 mas (339.85 pc). Radius 1.1 +/- 0.03 solar radii from Livingston et al. 2018, the stellar radius of the default parameter set of WASP-157 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract). Mass 1.06 +/- 0.04 solar masses from Livingston et al. 2018, the stellar mass of the default parameter set of WASP-157 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract). Temperature 5,772 K from Livingston et al. 2018, the stellar temperature of the default parameter set of WASP-157 b in the NASA Exoplanet Archive. log g 4.38 from the mass and radius.
 

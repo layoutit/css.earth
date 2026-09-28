@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2049 b transits TOI-2049 every 5.3 days and is 1.5 times as wide as Jupiter. Orbit and size follow Guenther et al. 2026's fit, the archive's default. This account was drafted from Guenther et al. 2026's values; the sections below are the data's own.
+It is the only planet known around TOI-2049. Its orbit and size follow Guenther et al. 2026's fit, the archive's default. This account was drafted from Guenther et al. 2026's values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.485 Jupiter radii from Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract): 106,165.6 km at 71,492 km per Jupiter radius. GM from the mass 1.53 Jupiter masses (Guenther et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....172...54G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

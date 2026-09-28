@@ -2,14 +2,14 @@
   "schema": "cssearth-object-text@1",
   "objectId": "hd-3167c",
   "card": {
-    "text": "HD 3167 c crosses its star every 29.8 days and is 3.0 times as wide as Earth, found in 2016.",
+    "text": "HD 3167 c was found in 2016 by K2 as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-2041-8213-ae7f23",
         "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
         "label": "Coy et al. 2026",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987"
       },
       {
         "catalogueId": "wikipedia-hd-3167",
@@ -22,14 +22,14 @@
     ]
   },
   "introduction": {
-    "text": "HD 3167 c transits HD 3167 every 29.8 days and is 3.0 times as wide as Earth. Orbit and size follow Coy et al. 2026's fit, the archive's default.",
+    "text": "It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al. 2026's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-2041-8213-ae7f23",
         "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
         "label": "Coy et al. 2026",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987"
       },
       {
         "catalogueId": "wikipedia-hd-3167",

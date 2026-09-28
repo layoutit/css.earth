@@ -14,9 +14,9 @@
         "reference": "KUNIMOTO_ET_AL__2025"
       },
       "text": {
-        "card": "HD 101581 b crosses its star every 4.47 days and is 0.96 times as wide as Earth, found in 2025.",
-        "introduction": "HD 101581 b transits HIP 56998 every 4.47 days and is 0.96 times as wide as Earth. Orbit and size follow Kunimoto et al. 2025's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNIMOTO_ET_AL__2025): pl_orbper 4.46569, pl_radj 0.08528875, pl_bmassj 0.0026"
+        "card": "HD 101581 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HIP 56998. Its orbit and size follow Kunimoto et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNIMOTO_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.46569, pl_radj 0.08528875, pl_bmassj 0.0026"
       },
       "order": 1778
     }

@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-836 b transits TOI-836 every 3.82 days and is 1.7 times as wide as Earth. Orbit and size follow Hawthorn et al. 2023's fit, the archive's default. This account was drafted from Hawthorn et al. 2023's values; the sections below are the data's own.
+It is one of 2 planets known around TOI-836. Its orbit and size follow Hawthorn et al. 2023's fit, the archive's default. This account was drafted from Hawthorn et al. 2023's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.15202096 Jupiter radii from Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract): 10,868.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01425297 Jupiter masses (Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

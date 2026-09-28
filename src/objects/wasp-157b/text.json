@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "wasp-157b",
   "card": {
-    "text": "WASP-157 b crosses its star every 3.95 days and is as wide as Jupiter, found in 2016.",
+    "text": "WASP-157 b was found in 2016 by SuperWASP as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-1538-3881-aae778",
         "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
         "label": "Livingston et al. 2018",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): pl_orbper 3.951623, pl_radj 0.99830493, pl_bmassj 0.574"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2016, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.951623, pl_radj 0.99830493, pl_bmassj 0.574"
       }
     ]
   },
   "introduction": {
-    "text": "WASP-157 b transits WASP-157 every 3.95 days and is as wide as Jupiter. Orbit and size follow Livingston et al. 2018's fit, the archive's default.",
+    "text": "It is the only planet known around WASP-157. Its orbit and size follow Livingston et al. 2018's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-1538-3881-aae778",
         "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
         "label": "Livingston et al. 2018",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): pl_orbper 3.951623, pl_radj 0.99830493, pl_bmassj 0.574"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2016, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.951623, pl_radj 0.99830493, pl_bmassj 0.574"
       }
     ]
   },

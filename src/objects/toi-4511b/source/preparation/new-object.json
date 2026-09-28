@@ -14,9 +14,9 @@
         "reference": "LAFARGA_ET_AL_2026"
       },
       "text": {
-        "card": "TOI-4511 b crosses its star every 11 days and is 2.8 times as wide as Earth, found in 2026.",
-        "introduction": "TOI-4511 b transits TOI-4511 every 11 days and is 2.8 times as wide as Earth. Orbit and size follow Lafarga et al. 2026's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): pl_orbper 10.98090968596, pl_radj 0.24561103, pl_bmassj 0.0252"
+        "card": "TOI-4511 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4511. Its orbit and size follow Lafarga et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 10.98090968596, pl_radj 0.24561103, pl_bmassj 0.0252"
       },
       "order": 2989
     }

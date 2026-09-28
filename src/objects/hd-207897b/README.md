@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 207897 b transits HD 207897 every 16.2 days and is 2.3 times as wide as Earth. Orbit and size follow MacDougall et al. 2023's fit, the archive's default. This account was drafted from MacDougall et al. 2023's values; the sections below are the data's own.
+It is the only planet known around HD 207897. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default. This account was drafted from MacDougall et al. 2023's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.20903072 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 14,944 km at 71,492 km per Jupiter radius. GM from the mass 0.04656601 Jupiter masses (Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

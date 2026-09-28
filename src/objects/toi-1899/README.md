@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-1899 is a star of 3,926 K 128 parsecs away. Its planet TOI-1899 b crosses it, which is how it was found and sized. This account was drafted from Lin et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Lin et al. 2023. This account was drafted from Lin et al. 2023's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2073530190996615424, parallax 7.782 ± 0.011 mas (128.50 pc). Radius 0.607 +/- 0.017 solar radii from Lin et al. 2023, the stellar radius of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract). Mass 0.632 +/- 0.026 solar masses from Lin et al. 2023, the stellar mass of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract). Temperature 3,926 K from Lin et al. 2023, the stellar temperature of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive. log g 4.67 from the mass and radius.
 

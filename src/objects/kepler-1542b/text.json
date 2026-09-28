@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-1542b",
   "card": {
-    "text": "Kepler-1542 b crosses its star every 3.95 days and is 0.76 times as wide as Earth, found in 2016.",
+    "text": "Kepler-1542 b was found in 2016 by Kepler as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",
         "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
         "label": "Morton et al. 2016",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 3.95116882, pl_radj 0.06780266, pl_bmassj 0.00114"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): disc_year 2016, disc_facility Kepler, sy_pnum 4; pl_orbper 3.95116882, pl_radj 0.06780266, pl_bmassj 0.00114"
       }
     ]
   },
   "introduction": {
-    "text": "Kepler-1542 b transits Kepler-1542 every 3.95 days and is 0.76 times as wide as Earth. Orbit and size follow Morton et al. 2016's fit, the archive's default.",
+    "text": "It is one of 4 planets known around Kepler-1542. Its orbit and size follow Morton et al. 2016's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",
         "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
         "label": "Morton et al. 2016",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 3.95116882, pl_radj 0.06780266, pl_bmassj 0.00114"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): disc_year 2016, disc_facility Kepler, sy_pnum 4; pl_orbper 3.95116882, pl_radj 0.06780266, pl_bmassj 0.00114"
       }
     ]
   },

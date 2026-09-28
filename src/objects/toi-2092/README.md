@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2092 is a star of 5,842 K 177 parsecs away. Its planet TOI-2092 b crosses it, which is how it was found and sized. This account was drafted from Lafarga et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Lafarga et al. 2026. This account was drafted from Lafarga et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1505964178502982144, parallax 5.646 ± 0.013 mas (177.11 pc). Radius 1.0519 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-2092 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). Mass 1.056 (1.015 to 1.096) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 5,842.06 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-2092 b in the NASA Exoplanet Archive. log g 4.42 from the mass and radius.
 

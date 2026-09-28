@@ -5,6 +5,7 @@
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
  *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
+ *   node tools/objects/new-object.mts --retext <host id>...
  *   node tools/objects/new-object.mts --star-limb <id>... [--bake]
  *   node tools/objects/new-object.mts --draft-photometry <id>... --out entries.json
  *
@@ -47,6 +48,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { entries, notes } = await draftUltracoolPhotometry(liveArchive, planets);
     await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
+  } else if (args.includes('--retext') && !specPath) {
+    // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/retext.mts).
+    const { retextHosts } = await import('./new-object/retext.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const lines = await retextHosts(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} package(s) considered. Bake the changed ones from the text step: node tools/prepare/cli/prepare-object.mts <id>... --from catalogue\n`);
   } else if (option('phase-curve') !== undefined && !specPath) {
     // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-lens.mts).
     const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./new-object/phase-curve-lens.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');

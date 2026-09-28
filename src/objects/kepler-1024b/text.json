@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-1024b",
   "card": {
-    "text": "Kepler-1024 b crosses its star every 66.4 days and is 0.35 times as wide as Jupiter, found in 2016.",
+    "text": "Kepler-1024 b was found in 2016 by Kepler as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",
         "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
         "label": "Morton et al. 2016",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 66.4162133, pl_radj 0.34882684, pl_bmassj 0.0457"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): disc_year 2016, disc_facility Kepler, sy_pnum 1; pl_orbper 66.4162133, pl_radj 0.34882684, pl_bmassj 0.0457"
       }
     ]
   },
   "introduction": {
-    "text": "Kepler-1024 b transits Kepler-1024 every 66.4 days and is 0.35 times as wide as Jupiter. Orbit and size follow Morton et al. 2016's fit, the archive's default.",
+    "text": "It is the only planet known around Kepler-1024. Its orbit and size follow Morton et al. 2016's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-3847-0004-637x-822-2-86",
         "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
         "label": "Morton et al. 2016",
         "checked": "2026-09-28",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 66.4162133, pl_radj 0.34882684, pl_bmassj 0.0457"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): disc_year 2016, disc_facility Kepler, sy_pnum 1; pl_orbper 66.4162133, pl_radj 0.34882684, pl_bmassj 0.0457"
       }
     ]
   },

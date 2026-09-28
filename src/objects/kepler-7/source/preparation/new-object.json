@@ -30,8 +30,8 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "Kepler-7 is a star of 5,933 K, 923 parsecs away, with 1 known transiting planet.",
-    "introduction": "Kepler-7 is a star of 5,933 K 923 parsecs away. Its planet Kepler-7 b crosses it, which is how it was found and sized.",
+    "card": "Kepler-7 b crosses Kepler-7 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Esteves et al. 2015.",
     "locator": "NASA Exoplanet Archive ps table (st_refname ESTEVES_ET_AL__2015): st_teff 5933, st_rad 1.966, st_mass 1.359",
     "quotes": {
       "url": "https://en.wikipedia.org/wiki/Kepler-7",

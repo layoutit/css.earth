@@ -2,7 +2,7 @@
 
 ## Sources
 
-K2-122 b transits K2-122 every 2.22 days and is 1.2 times as wide as Earth. Orbit and size follow Castro-González et al. 2022's fit, the archive's default. This account was drafted from Castro-González et al. 2022's values; the sections below are the data's own.
+It is the only planet known around K2-122. Its orbit and size follow Castro-González et al. 2022's fit, the archive's default. This account was drafted from Castro-González et al. 2022's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.10348845 Jupiter radii from Castro-González et al. 2022 (2022MNRAS.509.1075C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract): 7,398.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00521 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

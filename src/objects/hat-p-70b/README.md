@@ -2,7 +2,7 @@
 
 ## Sources
 
-HAT-P-70 b transits HAT-P-70 every 2.74 days and is 1.9 times as wide as Jupiter. Orbit and size follow Zhou et al. 2019's fit, the archive's default. This account was drafted from Zhou et al. 2019's values; the sections below are the data's own.
+It is the only planet known around HAT-P-70. Its orbit and size follow Zhou et al. 2019's fit, the archive's default. This account was drafted from Zhou et al. 2019's values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.87 Jupiter radii from Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract): 133,690 km at 71,492 km per Jupiter radius. GM from the mass 6.78 Jupiter masses (Zhou et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..141Z), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

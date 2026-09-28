@@ -8,7 +8,7 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "1 Earth radii",
+        "value": "1.0 Earth radii",
         "source": {
           "catalogueId": "doi-10-1051-0004-6361-202554419",
           "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z",
@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.0031 Jupiter masses (model)",
+        "value": "0.97 Earth masses (model)",
         "source": {
           "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
           "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",

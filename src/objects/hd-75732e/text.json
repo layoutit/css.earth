@@ -2,14 +2,14 @@
   "schema": "cssearth-object-text@1",
   "objectId": "hd-75732e",
   "card": {
-    "text": "55 Cnc e crosses its star every 0.737 days and is 1.9 times as wide as Earth, found in 2004.",
+    "text": "55 Cnc e was found in 2004 by McDonald Observatory as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-201833154",
         "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
         "label": "Bourrier et al. 2018",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): disc_year 2004, disc_facility McDonald Observatory, sy_pnum 7; pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923"
       },
       {
         "catalogueId": "wikipedia-55-cancri-ae",
@@ -22,14 +22,14 @@
     ]
   },
   "introduction": {
-    "text": "55 Cnc e transits 55 Cnc every 0.737 days and is 1.9 times as wide as Earth. Orbit and size follow Bourrier et al. 2018's fit, the archive's default.",
+    "text": "It is one of 7 planets known around 55 Cnc. Its orbit and size follow Bourrier et al. 2018's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-201833154",
         "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract",
         "label": "Bourrier et al. 2018",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOURRIER_ET_AL__2018): disc_year 2004, disc_facility McDonald Observatory, sy_pnum 7; pl_orbper 0.7365474, pl_radj 0.1672763, pl_bmassj 0.02513923"
       },
       {
         "catalogueId": "wikipedia-55-cancri-ae",

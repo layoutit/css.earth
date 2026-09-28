@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 60779 is a star of 6,081 K 35.4 parsecs away. Its planet HD 60779 b crosses it, which is how it was found and sized. It is also HD 60779, HIP 36976. This account was drafted from DiTomasso et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow DiTomasso et al. 2026. It is also HD 60779, HIP 36976. This account was drafted from DiTomasso et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3060787930730737920, parallax 28.221 ± 0.019 mas (35.43 pc). Radius 1.129 +/- 0.013 solar radii from DiTomasso et al. 2026, the stellar radius of the default parameter set of HD 60779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract). Mass 1.05 +/- 0.044 solar masses from DiTomasso et al. 2026, the stellar mass of the default parameter set of HD 60779 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract). Temperature 6,081 K from DiTomasso et al. 2026, the stellar temperature of the default parameter set of HD 60779 b in the NASA Exoplanet Archive. log g 4.35 from the mass and radius.
 

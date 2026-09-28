@@ -8,7 +8,7 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "3 Earth radii",
+        "value": "3.0 Earth radii",
         "source": {
           "catalogueId": "doi-10-1093-mnras-stag512",
           "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L",
@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.028 Jupiter masses (model)",
+        "value": "9.0 Earth masses (model)",
         "source": {
           "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
           "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",

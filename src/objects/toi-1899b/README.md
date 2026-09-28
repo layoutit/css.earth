@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-1899 b transits TOI-1899 every 29.1 days and is 0.99 times as wide as Jupiter. Orbit and size follow Lin et al. 2023's fit, the archive's default. This account was drafted from Lin et al. 2023's values; the sections below are the data's own.
+It is the only planet known around TOI-1899. Its orbit and size follow Lin et al. 2023's fit, the archive's default. This account was drafted from Lin et al. 2023's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.99 Jupiter radii from Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract): 70,777.1 km at 71,492 km per Jupiter radius. GM from the mass 0.67 Jupiter masses (Lin et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166...90L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

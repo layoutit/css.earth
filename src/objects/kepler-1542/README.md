@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-1542 is a star of 5,564 K 399 parsecs away. Its planets c, b, e, d cross it, which is how they were found and sized. This account was drafted from Morton et al. 2016's values; the sections below are the data's own.
+Its radius and temperature follow Morton et al. 2016. This account was drafted from Morton et al. 2016's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2105526799680172032, parallax 2.558 ± 0.015 mas (390.90 pc); its RUWE is 1.5, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.99 +/- 0.133 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1542 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). Mass 0.94 +/- 0.032 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1542 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). Temperature 5,564 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1542 c in the NASA Exoplanet Archive. log g 4.42 from the mass and radius.
 

@@ -23,7 +23,17 @@ import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass
 import { TODO } from './scaffold.mts';
 import type { Cited, HostedSpec, StarSpec } from './spec.mts';
 
-const JUPITER_RADIUS_KM = 71492, JUPITER_GM = 126686531.9, SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938, EARTH_RADIUS_KM = 6371.0;
+// EARTH_GM is DE440's, km^3/s^2, the unit of the Jupiter and Sun values beside it.
+export const JUPITER_RADIUS_KM = 71492, JUPITER_GM = 126686531.9, SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938, EARTH_RADIUS_KM = 6371.0, EARTH_GM = 398600.435436;
+
+/** A hosted body's radius and mass as its factsheet shows them: two figures kept as printed (3.0, not 3), whole numbers from 100;
+ * a planet under 0.3 Jupiter radii reads both in Earth units, a companion star in solar units. Values are in the spec's units
+ * (Jupiter for a planet, solar for a companion). */
+export function sizeFacts(star: boolean, radius: number, mass: number) {
+  const earthUnits = !star && radius < 0.3, figures = (value: number) => value >= 100 ? Math.round(value).toLocaleString('en-US') : value.toPrecision(2);
+  return { radiusValue: star ? `${figures(radius)} solar radii` : earthUnits ? `${figures(radius * JUPITER_RADIUS_KM / EARTH_RADIUS_KM)} Earth radii` : `${figures(radius)} Jupiter radii`,
+    massValue: star ? `${figures(mass)} solar masses` : earthUnits ? `${figures(mass * JUPITER_GM / EARTH_GM)} Earth masses` : `${figures(mass)} Jupiter masses` };
+}
 const fixed = (value: number, digits: number) => Number(value.toFixed(digits));
 
 export interface HostedRecord {
@@ -152,14 +162,14 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   files.set(`${s}/measurements.json`, json(measurements));
 
   const content = read(`${s}/content/object.json`), period = record.orbit.periodDays;
-  const radiusValue = star ? `${Number(radius.value.toPrecision(2))} solar radii` : radius.value >= 0.3 ? `${Number(radius.value.toPrecision(2))} Jupiter radii` : `${Number((radius.value * JUPITER_RADIUS_KM / EARTH_RADIUS_KM).toPrecision(2))} Earth radii`;
+  const { radiusValue, massValue } = sizeFacts(star, radius.value, record.mass.value);
   const periodValue = period < 2 ? `${Math.round(period * 24)} hours` : period < 1000 ? `${Number(period.toPrecision(3))} days` : `${Math.round(period / 365.25)} years`;
   // A value the archive calculates from a relation, not a paper's measurement, says so on the fact itself, not only in its source.
   const model = (value: Cited) => value.source.includes('a model, not a measurement') ? ' (model)' : '';
   content.panel.facts = [
     { id: 'radius', label: 'Radius', value: `${radiusValue}${model(radius)}`, source: fact(radius.url, radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
     { id: 'period', label: 'Year', value: periodValue, source: fact(record.orbitCitation.url, record.orbitCitation.label, 'source/measurements.json', 'orbitalPeriodDays; orbitalPeriodSource') },
-    { id: 'mass', label: 'Mass', value: record.mass.unmeasured ? 'Not measured' : `${record.mass.limit ? 'Under ' : ''}${Number(record.mass.value.toPrecision(2))} ${star ? 'solar' : 'Jupiter'} masses${model(record.mass)}`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
+    { id: 'mass', label: 'Mass', value: record.mass.unmeasured ? 'Not measured' : `${record.mass.limit ? 'Under ' : ''}${massValue}${model(record.mass)}`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
   // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
   if (!star && !spec.photometry && !spec.thermal) {
     const control = content.lenses.controls[0];

@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2267 c transits TOI-2267 A every 3.5 days and is 1.1 times as wide as Earth. Orbit and size follow Zúñiga-Fernández et al. 2025's fit, the archive's default. This account was drafted from Zúñiga-Fernández et al. 2025's values; the sections below are the data's own.
+It is one of 3 planets known around TOI-2267 A. Its orbit and size follow Zúñiga-Fernández et al. 2025's fit, the archive's default. This account was drafted from Zúñiga-Fernández et al. 2025's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.10170416 Jupiter radii from Zúñiga-Fernández et al. 2025 (2025A&A...702A..85Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract): 7,271 km at 71,492 km per Jupiter radius. GM from the mass 0.00489 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

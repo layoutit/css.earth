@@ -14,9 +14,9 @@
         "reference": "GUENTHER_ET_AL_2026"
       },
       "text": {
-        "card": "TOI-2049 b crosses its star every 5.3 days and is 1.5 times as wide as Jupiter, found in 2026.",
-        "introduction": "TOI-2049 b transits TOI-2049 every 5.3 days and is 1.5 times as wide as Jupiter. Orbit and size follow Guenther et al. 2026's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GUENTHER_ET_AL_2026): pl_orbper 5.303468, pl_radj 1.485, pl_bmassj 1.53"
+        "card": "TOI-2049 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2049. Its orbit and size follow Guenther et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GUENTHER_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.303468, pl_radj 1.485, pl_bmassj 1.53"
       },
       "order": 2995
     }
