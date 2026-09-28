@@ -8,16 +8,16 @@ Its radius and temperature follow Barkaoui et al. 2024. This account was drafted
 
 **Colour.** Gaia DR3 XP spectrum, source 2168280502430898944, through the CIE 1931 2° observer: #ffcc7b. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
 
-**Limb.** No limb darkening is drawn: at 3,075 K and log g 5.03 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3075 is outside the grid 3500, 3750, 4000.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 3075 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Claret (2017), A&A 600, A30 (PHOENIX): The grid must hold exactly one node at 3000 K, log g 5.).
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,075 K and log g 5.03 (u1 0.171, u2 0.505): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/toi-6008.json: 5.032.
 
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

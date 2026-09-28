@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star. The disc itself is unresolved.",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc itself is unresolved; darkening toward the edge from a model atmosphere; darkening toward the edge from a model atmosphere.",
         "thumbnail": "toi-2267-lens-color.webp",
         "surface": "toi-2267-surface-color@2x.webp",
         "poles": "toi-2267-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=571488283984760960&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
-        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. No limb darkening is drawn: at 3,030 K and log g 5.04 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3030 is outside the grid 3500, 3750, 4000.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 3030 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Claret (2017), A&A 600, A30 (PHOENIX): The grid must hold exactly one node at 3000 K, log g 5.). The spin axis's direction on the sky is a display convention."
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. 04 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3030 is outside the grid 3500, 3750, 4000.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 3030 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Claret (2017), A&A 600, A30 (PHOENIX): The grid must hold exactly one node at 3000 K, log g 5.). The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,030 K and log g 5.04 (u1 0.178, u2 0.514): a model, because no fit of this star's limb is used. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,030 K and log g 5.04 (u1 0.178, u2 0.514): a model, because no fit of this star's limb is used."
       }
     ]
   },

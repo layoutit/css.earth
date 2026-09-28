@@ -5,3 +5,5 @@ Radius, mass and temperature: Radius 0.2075 +/- 0.0225 solar radii from Zúñiga
 Colour: Gaia DR3 XP spectrum, source 571488283984760960, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Placement: Gaia DR3 source 571488283984760960: position, parallax, proper motion. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+
+Limb darkening: Claret (2017), A&A 600, A30, via VizieR J/A+A/600/A30.

@@ -26,7 +26,25 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere colour from the star's Gaia DR3 BP/RP spectrum. No limb darkening is drawn: at 3,030 K and log g 5.04 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3030 is outside the grid 3500, 3750, 4000.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 3030 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Claret (2017), A&A 600, A30 (PHOENIX): The grid must hold exactly one node at 3000 K, log g 5.). The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum. 04 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3030 is outside the grid 3500, 3750, 4000.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 3030 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Claret (2017), A&A 600, A30 (PHOENIX): The grid must hold exactly one node at 3000 K, log g 5.). The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,030 K and log g 5.04 (u1 0.178, u2 0.514): a model, because no fit of this star's limb is used. The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,030 K and log g 5.04 (u1 0.178, u2 0.514): a model, because no fit of this star's limb is used.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 3030,
+            "logg": 5.04,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        }
       }
     }
   ],
@@ -48,7 +66,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },
