@@ -121,6 +121,62 @@
           ],
           "ambient": 0.55
         }
+      },
+      {
+        "id": "hydrogen",
+        "label": "Hydrogen",
+        "consumer": "hydrogen",
+        "path": "grand/vesta-hydrogen.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 180,
+          "height": 90,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-hydrogen-longitude.npy",
+          "latitudePath": "grand/vesta-hydrogen-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "micrograms/gram",
+        "displayUnits": "\u00b5g/g",
+        "minimum": 0,
+        "maximum": 391.1,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "iron",
+        "label": "Iron gamma rays",
+        "consumer": "iron",
+        "path": "grand/vesta-iron-counts.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-iron-counts-longitude.npy",
+          "latitudePath": "grand/vesta-iron-counts-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "counts/s",
+        "displayUnits": "counts/s",
+        "minimum": 0.0687,
+        "maximum": 0.07746,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
       }
     ],
     "observedColors": []

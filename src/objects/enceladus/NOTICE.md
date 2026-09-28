@@ -25,3 +25,9 @@ Infrared maps: Robidel et al. (2020), doi:10.1016/j.icarus.2020.113848.
 ISS detail: Bland et al. (2018), doi:10.1029/2018EA000399.
 Used under the [JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/);
 cssEarth resamples and encodes the published display composite.
+
+Geologic map units: Crow-Willard and Pappalardo (2015), Structural
+mapping of Enceladus and implications for formation of tectonized regions,
+JGR Planets 120, 928–950, doi:10.1002/2015JE004818. GIS layer
+"Cassini ISS Geologic Map Units, Global" served by NASA Solar System Treks (JPL).
+cssEarth rasterizes the published polygons and keeps their unit names and colors.

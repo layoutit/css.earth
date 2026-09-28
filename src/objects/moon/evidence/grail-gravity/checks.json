@@ -1,0 +1,541 @@
+{
+ "schema": "cssearth-moon-grail-gravity-checks@1",
+ "base": "56ebf377c709190f7c97be24c1905225266fbed9",
+ "date": "2026-09-27",
+ "scope": "Working changes above the named base: the gravity and bouguer-gravity blocks of source/preparation/raster.json, read by the shared loadScienceSurface and painted by paintScienceSurface outside a bake.",
+ "testedFiles": {
+  "gggrx_1200a_anom_l660.tif": {
+   "bytes": 66379853,
+   "sha256": "73516e7fe2a2840882805b484ce5bfa3a41f7ed44bc169bea840f18291dd8883"
+  },
+  "gggrx_1200a_anom_l660.img": {
+   "bytes": 66355200,
+   "sha256": "306a1b808b697628d8bed9c40a41aa261afcf55684d95c6207b1fa45937bb758"
+  },
+  "gggrx_1200a_boug_l660.tif": {
+   "bytes": 66379855,
+   "sha256": "55d9495745a24b975061b9df678496bb7c44e30b9fb3eea2a20b93e904b6f47d"
+  },
+  "gggrx_1200a_boug_l660.img": {
+   "bytes": 66355200,
+   "sha256": "365af338f67be701f6e7814223b62108f63cb4ad33d92313e27dcb6390e39097"
+  }
+ },
+ "methods": {
+  "byteOracle": "Every cell of each EXTRAS GeoTIFF (geotiff.js) compared with the RSDMAP IMG decoded independently with DataView from its PDS3 label layout (PC_REAL, 5760 x 2880, sample centre (s+0.5)/16 deg E, line centre 90-(l+0.5)/16 deg N), after moving the GeoTIFF's -180 deg left edge to the IMG's 0 deg.",
+  "loader": "The recipe's scientific block through the shared loader, sampled on an 831-point lattice including the seam and poles, compared with the IMG decode.",
+  "anomalyError": "1-sigma values from RSDMAP gggrx_1200a_anomerr_l660.img read by HTTP range at each basin centre.",
+  "basins": "10 km azimuthal bins around the Neumann et al. (2015) Table 1 centres; peak = highest bin inside half the central-anomaly diameter, trough = lowest bin from there to half the main-ring diameter. Neumann et al. (2015), Sci. Adv. 1:e1500852, Table 1 (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4646831/), used GRGM900C band-passed to degrees 6-540 with 2,500 kg/m3; this map keeps degrees 1-660 of GRGM1200A. The simple inside-minus-annulus mean contrast is also recorded; it is not their definition."
+ },
+ "results": {
+  "gravity": {
+   "cells": 16588800,
+   "tifGeo": {
+    "origin": [
+     -180,
+     90,
+     0
+    ],
+    "res": [
+     0.0625,
+     -0.0625,
+     0
+    ],
+    "nodata": -32767,
+    "sampleFormat": 3,
+    "bits": 32,
+    "keys": {
+     "GTModelTypeGeoKey": 2,
+     "GTRasterTypeGeoKey": 1,
+     "GeographicTypeGeoKey": 32767,
+     "GeogCitationGeoKey": "GCS Name = GCS_Moon_2000|Datum = Moon_2000|Ellipsoid = Moon_2000_IAU_IAG|Primem = Reference_Meridian|",
+     "GeogGeodeticDatumGeoKey": 32767,
+     "GeogAngularUnitsGeoKey": 9102,
+     "GeogEllipsoidGeoKey": 32767,
+     "GeogSemiMajorAxisGeoKey": 1737400,
+     "GeogSemiMinorAxisGeoKey": 1737400,
+     "GeogPrimeMeridianLongGeoKey": 0
+    }
+   },
+   "tifVsImgCellMismatches": 0,
+   "tifNoDataCells": 0,
+   "imgNonFinite": 0,
+   "units": "mGal",
+   "minimum": -1329.62,
+   "minimumAtLonELat": [
+    209.34375,
+    0.34375
+   ],
+   "maximum": 1781.94,
+   "maximumAtLonELat": [
+    201.21875,
+    5.71875
+   ],
+   "areaQuantiles": {
+    "0.001": -424.3,
+    "0.01": -318.95,
+    "0.025": -270.39,
+    "0.05": -225.54,
+    "0.5": -2.93,
+    "0.95": 229.84,
+    "0.975": 283.73,
+    "0.99": 377.56,
+    "0.999": 665.4
+   },
+   "display": {
+    "minimum": -400,
+    "maximum": 400,
+    "areaPercentBelow": 0.171,
+    "areaPercentAbove": 0.83
+   },
+   "loaderVsImg": {
+    "probes": 831,
+    "mismatches": 0,
+    "examples": []
+   },
+   "previewMissingPixels": 0
+  },
+  "bouguer-gravity": {
+   "cells": 16588800,
+   "tifGeo": {
+    "origin": [
+     -180,
+     90,
+     0
+    ],
+    "res": [
+     0.0625,
+     -0.0625,
+     0
+    ],
+    "nodata": -32767,
+    "sampleFormat": 3,
+    "bits": 32,
+    "keys": {
+     "GTModelTypeGeoKey": 2,
+     "GTRasterTypeGeoKey": 1,
+     "GeographicTypeGeoKey": 32767,
+     "GeogCitationGeoKey": "GCS Name = GCS_Moon_2000|Datum = Moon_2000|Ellipsoid = Moon_2000_IAU_IAG|Primem = Reference_Meridian|",
+     "GeogGeodeticDatumGeoKey": 32767,
+     "GeogAngularUnitsGeoKey": 9102,
+     "GeogEllipsoidGeoKey": 32767,
+     "GeogSemiMajorAxisGeoKey": 1737400,
+     "GeogSemiMinorAxisGeoKey": 1737400,
+     "GeogPrimeMeridianLongGeoKey": 0
+    }
+   },
+   "tifVsImgCellMismatches": 0,
+   "tifNoDataCells": 0,
+   "imgNonFinite": 0,
+   "units": "mGal",
+   "minimum": -799.88,
+   "minimumAtLonELat": [
+    201.65625,
+    5.03125
+   ],
+   "maximum": 741.42,
+   "maximumAtLonELat": [
+    55.46875,
+    19.46875
+   ],
+   "areaQuantiles": {
+    "0.001": -638.44,
+    "0.01": -572.09,
+    "0.025": -525.81,
+    "0.05": -452.6,
+    "0.5": 36.52,
+    "0.95": 367.94,
+    "0.975": 453.48,
+    "0.99": 590.76,
+    "0.999": 716.98
+   },
+   "display": {
+    "minimum": -600,
+    "maximum": 600,
+    "areaPercentBelow": 0.459,
+    "areaPercentAbove": 0.863
+   },
+   "loaderVsImg": {
+    "probes": 831,
+    "mismatches": 0,
+    "examples": []
+   },
+   "previewMissingPixels": 0
+  }
+ },
+ "basins": [
+  {
+   "name": "Orientale",
+   "lat": -20.1,
+   "lonE": 265.2,
+   "neumann2015": {
+    "mainRingKm": 937,
+    "centralDiameterKm": 436,
+    "contrastMGal": 720,
+    "sigma": 28
+   },
+   "thisMap": {
+    "centreFreeAir": 195.7,
+    "centreBouguer": 438.4,
+    "meanInsideCentral": 114.1,
+    "meanCentralToMainRing": -278.6,
+    "contrast": 392.8,
+    "anomalyError1Sigma": 1.87
+   }
+  },
+  {
+   "name": "Imbrium",
+   "lat": 37,
+   "lonE": 341.5,
+   "neumann2015": {
+    "mainRingKm": 1321,
+    "centralDiameterKm": 684,
+    "contrastMGal": 375,
+    "sigma": 37
+   },
+   "thisMap": {
+    "centreFreeAir": 265.5,
+    "centreBouguer": 630,
+    "meanInsideCentral": 494.3,
+    "meanCentralToMainRing": 202.3,
+    "contrast": 292.1,
+    "anomalyError1Sigma": 2.49
+   }
+  },
+  {
+   "name": "Serenitatis",
+   "lat": 25.4,
+   "lonE": 18.8,
+   "neumann2015": {
+    "mainRingKm": 923,
+    "centralDiameterKm": 556,
+    "contrastMGal": 450,
+    "sigma": 8
+   },
+   "thisMap": {
+    "centreFreeAir": 306.6,
+    "centreBouguer": 704.9,
+    "meanInsideCentral": 586,
+    "meanCentralToMainRing": 179,
+    "contrast": 407,
+    "anomalyError1Sigma": 2.97
+   }
+  },
+  {
+   "name": "Crisium",
+   "lat": 16.8,
+   "lonE": 58.4,
+   "neumann2015": {
+    "mainRingKm": 1076,
+    "centralDiameterKm": 498,
+    "contrastMGal": 598,
+    "sigma": 10
+   },
+   "thisMap": {
+    "centreFreeAir": 261.1,
+    "centreBouguer": 716.5,
+    "meanInsideCentral": 510.6,
+    "meanCentralToMainRing": 112.2,
+    "contrast": 398.4,
+    "anomalyError1Sigma": 3.64
+   }
+  },
+  {
+   "name": "Nectaris",
+   "lat": -15.6,
+   "lonE": 35.1,
+   "neumann2015": {
+    "mainRingKm": 885,
+    "centralDiameterKm": 440,
+    "contrastMGal": 514,
+    "sigma": 12
+   },
+   "thisMap": {
+    "centreFreeAir": 243.1,
+    "centreBouguer": 605.7,
+    "meanInsideCentral": 399.6,
+    "meanCentralToMainRing": 100.5,
+    "contrast": 299,
+    "anomalyError1Sigma": 2.61
+   }
+  },
+  {
+   "name": "Humorum",
+   "lat": -23.8,
+   "lonE": 320.8,
+   "neumann2015": {
+    "mainRingKm": 816,
+    "centralDiameterKm": 360,
+    "contrastMGal": 450,
+    "sigma": 11
+   },
+   "thisMap": {
+    "centreFreeAir": 288.7,
+    "centreBouguer": 583.8,
+    "meanInsideCentral": 452.1,
+    "meanCentralToMainRing": 115.3,
+    "contrast": 336.8,
+    "anomalyError1Sigma": 1.33
+   }
+  },
+  {
+   "name": "Smythii",
+   "lat": -2.5,
+   "lonE": 86.9,
+   "neumann2015": {
+    "mainRingKm": 878,
+    "centralDiameterKm": 438,
+    "contrastMGal": 494,
+    "sigma": 24
+   },
+   "thisMap": {
+    "centreFreeAir": 186.1,
+    "centreBouguer": 610.8,
+    "meanInsideCentral": 403.7,
+    "meanCentralToMainRing": 77.5,
+    "contrast": 326.2,
+    "anomalyError1Sigma": 3.47
+   }
+  },
+  {
+   "name": "Freundlich-Sharonov",
+   "lat": 18.35,
+   "lonE": 175.2,
+   "neumann2015": {
+    "mainRingKm": 582,
+    "centralDiameterKm": 318,
+    "contrastMGal": 528,
+    "sigma": 18
+   },
+   "thisMap": {
+    "centreFreeAir": 26.1,
+    "centreBouguer": 219,
+    "meanInsideCentral": -54.7,
+    "meanCentralToMainRing": -328.2,
+    "contrast": 273.5,
+    "anomalyError1Sigma": 5.34
+   }
+  },
+  {
+   "name": "Hertzsprung",
+   "lat": 2,
+   "lonE": 231,
+   "neumann2015": {
+    "mainRingKm": 571,
+    "centralDiameterKm": 254,
+    "contrastMGal": 404,
+    "sigma": 37
+   },
+   "thisMap": {
+    "centreFreeAir": 75.8,
+    "centreBouguer": -93.2,
+    "meanInsideCentral": -357.6,
+    "meanCentralToMainRing": -540.5,
+    "contrast": 182.9,
+    "anomalyError1Sigma": 2.63
+   }
+  },
+  {
+   "name": "Mendel-Rydberg",
+   "lat": -49.8,
+   "lonE": 265.4,
+   "neumann2015": {
+    "mainRingKm": 650,
+    "centralDiameterKm": 328,
+    "contrastMGal": 572,
+    "sigma": 18
+   },
+   "thisMap": {
+    "centreFreeAir": 152.3,
+    "centreBouguer": 313.9,
+    "meanInsideCentral": 30,
+    "meanCentralToMainRing": -250.4,
+    "contrast": 280.4,
+    "anomalyError1Sigma": 1.41
+   }
+  },
+  {
+   "name": "Apollo",
+   "lat": -36.1,
+   "lonE": 208.3,
+   "neumann2015": {
+    "mainRingKm": 492,
+    "centralDiameterKm": 264,
+    "contrastMGal": 329,
+    "sigma": 10
+   },
+   "thisMap": {
+    "centreFreeAir": 22.2,
+    "centreBouguer": 535.4,
+    "meanInsideCentral": 394.3,
+    "meanCentralToMainRing": 186.8,
+    "contrast": 207.5,
+    "anomalyError1Sigma": 2.05
+   }
+  },
+  {
+   "name": "Korolev",
+   "lat": -4.4,
+   "lonE": 202.2,
+   "neumann2015": {
+    "mainRingKm": 417,
+    "centralDiameterKm": 202,
+    "contrastMGal": 173,
+    "sigma": 15
+   },
+   "thisMap": {
+    "centreFreeAir": -140.6,
+    "centreBouguer": -410.9,
+    "meanInsideCentral": -488.2,
+    "meanCentralToMainRing": -578.3,
+    "contrast": 90,
+    "anomalyError1Sigma": 3.42
+   }
+  },
+  {
+   "name": "Schrodinger",
+   "lat": -74.9,
+   "lonE": 133.5,
+   "neumann2015": {
+    "mainRingKm": 326,
+    "centralDiameterKm": 154,
+    "contrastMGal": 240,
+    "sigma": 19
+   },
+   "thisMap": {
+    "centreFreeAir": -38.9,
+    "centreBouguer": 380.7,
+    "meanInsideCentral": 236.6,
+    "meanCentralToMainRing": 108.9,
+    "contrast": 127.6,
+    "anomalyError1Sigma": 0.6
+   }
+  },
+  {
+   "name": "Mendeleev",
+   "lat": 5.5,
+   "lonE": 141.1,
+   "neumann2015": {
+    "mainRingKm": 331,
+    "centralDiameterKm": 156,
+    "contrastMGal": 159,
+    "sigma": 33
+   },
+   "thisMap": {
+    "centreFreeAir": -113.9,
+    "centreBouguer": -54.8,
+    "meanInsideCentral": -197.1,
+    "meanCentralToMainRing": -267.7,
+    "contrast": 70.5,
+    "anomalyError1Sigma": 1.65
+   }
+  }
+ ],
+ "basinProfiles": {
+  "rows": [
+   {
+    "name": "Orientale",
+    "neumann": 720,
+    "sigma": 28,
+    "meanContrast": 392.8,
+    "profilePeakMinusTrough": 797.8
+   },
+   {
+    "name": "Imbrium",
+    "neumann": 375,
+    "sigma": 37,
+    "meanContrast": 292.1,
+    "profilePeakMinusTrough": 445.1
+   },
+   {
+    "name": "Serenitatis",
+    "neumann": 450,
+    "sigma": 8,
+    "meanContrast": 407,
+    "profilePeakMinusTrough": 565.6
+   },
+   {
+    "name": "Crisium",
+    "neumann": 598,
+    "sigma": 10,
+    "meanContrast": 398.4,
+    "profilePeakMinusTrough": 649.6
+   },
+   {
+    "name": "Nectaris",
+    "neumann": 514,
+    "sigma": 12,
+    "meanContrast": 299,
+    "profilePeakMinusTrough": 534.3
+   },
+   {
+    "name": "Humorum",
+    "neumann": 450,
+    "sigma": 11,
+    "meanContrast": 336.8,
+    "profilePeakMinusTrough": 535.2
+   },
+   {
+    "name": "Smythii",
+    "neumann": 494,
+    "sigma": 24,
+    "meanContrast": 326.2,
+    "profilePeakMinusTrough": 542.1
+   },
+   {
+    "name": "Freundlich-Sharonov",
+    "neumann": 528,
+    "sigma": 18,
+    "meanContrast": 273.5,
+    "profilePeakMinusTrough": 579.7
+   },
+   {
+    "name": "Hertzsprung",
+    "neumann": 404,
+    "sigma": 37,
+    "meanContrast": 182.9,
+    "profilePeakMinusTrough": 482.2
+   },
+   {
+    "name": "Mendel-Rydberg",
+    "neumann": 572,
+    "sigma": 18,
+    "meanContrast": 280.4,
+    "profilePeakMinusTrough": 607.4
+   },
+   {
+    "name": "Apollo",
+    "neumann": 329,
+    "sigma": 10,
+    "meanContrast": 207.5,
+    "profilePeakMinusTrough": 359.2
+   },
+   {
+    "name": "Korolev",
+    "neumann": 173,
+    "sigma": 15,
+    "meanContrast": 90,
+    "profilePeakMinusTrough": 196
+   },
+   {
+    "name": "Schrodinger",
+    "neumann": 240,
+    "sigma": 19,
+    "meanContrast": 127.6,
+    "profilePeakMinusTrough": 284.1
+   },
+   {
+    "name": "Mendeleev",
+    "neumann": 159,
+    "sigma": 33,
+    "meanContrast": 70.5,
+    "profilePeakMinusTrough": 228.8
+   }
+  ],
+  "medianRatioMean": 0.58,
+  "medianRatioProfile": 1.13,
+  "pearsonMean": 0.862,
+  "pearsonProfile": 0.987
+ },
+ "limits": "These checks qualify decoding, placement, units and one published comparison. They do not test GRAIL accuracy, the prepared WebP atlas, pole sprites or browser appearance, which the bake and browser inspection cover."
+}

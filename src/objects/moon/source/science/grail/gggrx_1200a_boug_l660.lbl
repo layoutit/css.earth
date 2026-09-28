@@ -1,0 +1,112 @@
+PDS_VERSION_ID               = PDS3
+RECORD_TYPE                  = FIXED_LENGTH
+FILE_RECORDS                 = 2880
+RECORD_BYTES                 = 23040
+^IMAGE                       = ("GGGRX_1200A_BOUG_L660.IMG",1)
+INSTRUMENT_HOST_NAME         = {"GRAVITY RECOVERY AND INTERIOR LABORATORY A",
+                                "GRAVITY RECOVERY AND INTERIOR LABORATORY B"}
+TARGET_NAME                  = "MOON"
+INSTRUMENT_NAME              = {"LUNAR GRAVITY RANGING SYSTEM A",
+                                "LUNAR GRAVITY RANGING SYSTEM B"}
+DATA_SET_ID                  = "GRAIL-L-LGRS-5-RDR-V1.0"
+ORIGINAL_PRODUCT_ID          = "GRGM1200A_BOUGUER_DISTURBANCE_TRUNCATE_N=660"
+PRODUCT_ID                   = "GGGRX_1200A_BOUG_L660.IMG"
+PRODUCT_RELEASE_DATE         = 2016-04-01
+DESCRIPTION               = "This data product is a map of the 
+ Bouguer disturbances (in mGal) of the lunar gravity field at a resolution
+ of 16 pix/deg by 16 pix/deg. It is based on a GRAIL gravity field of the Moon
+ produced by NASA GSFC called GRGM1200A. GRGM1200A is a degree and order 1200
+ spherical harmonic model, which includes the entire mission of GRAIL tracking
+ data. The LOLA topography, expressed in the Principal Axes frame, was used to
+ remove the contribution of the lunar relief (assuming a constant density of
+ 2500 kg/m3). The Bouguer disturbances are expanded in the spatial domain up 
+ to degree and order 660.
+
+ Some details describing this model are:
+   The spherical harmonic coefficients are fully normalized (geodesy 4pi
+   normalized).
+   The uncertainties are calibrated (the formal uncertainties multiplied by
+   a factor of 1.635).
+   The reference radius = 1738.0 km
+   The gravitational parameter is GM = 4902.80011526323 km**3/s**2
+   The planetary ephemeris used is de430 and defines the lunar body-fixed
+       coordinate system.
+   A Kaula type power law constraint is applied to the spherical harmonics
+       coefficients for degrees >600 (3.6e-4/n^2).
+   The weighting of the KBRR data is:
+       0.03 microns/sec in the primary mission
+       0.05 microns/sec in the extended mission
+   The weighting of the DSN data is:
+       0.12mm/s in both the primary and extended mission
+
+ The nominal tidal Love number is k2 = 0.024133 +/- 0.000016
+
+ The current best reference for the GRGM1200A gravity field is
+ LEMOINEETAL2014, published in the Geophysical Research Letters with the
+ DOI number 10.1002/2014GL060027 . For additional details on the GRAIL
+ mission, data and methods, see LEMOINEETAL2013.
+
+   Each point gives the Lunar Bouguer gravity disturbance in milligals,
+   on a reference sphere with semi-major-axis = 1738.0 km,
+   GM = 4902.80011526323 km**3/s**2, and zero rotation rate.
+
+ As other lunar gravity fields, the map is expressed in the Moon Principal
+ Axes frame, which slightly differs from the Moon Mean Earth frame.
+ For comparison with lunar topography, users are advised to make use of 
+ the LOLA PDS products also archived in the Moon Principal Axes frame, such
+ as the LDEM_64_PA product in the LRO-L-LOLA-4-GDR-V1.0 dataset, which 
+ can be accessed at the PDS Geosciences Node or at the LOLA PDS Data node.
+ Note also that the reference radius for gravity (1738 km) and topography
+ (1737.4 km) are different.
+"
+
+START_TIME                   = 2012-03-01
+STOP_TIME                    = 2012-12-14
+PRODUCT_CREATION_TIME        = 2016-04-01
+PRODUCER_ID                  = "GSFC LEVEL-2 TEAM"
+
+OBJECT               = IMAGE
+  LINES                      = 2880
+  LINE_SAMPLES               = 5760
+  SAMPLE_TYPE                = "PC_REAL"
+  SAMPLE_BITS                = 32
+  UNIT                       = "MILLIGALS"
+  OFFSET                     = 0
+  SCALING_FACTOR             = 1
+  DESCRIPTION                = "The Digital Map contains
+   values of the Bouguer gravity disturbance.  The values can be obtained
+   by multiplying the sample in the map by SCALING_FACTOR
+   and then adding OFFSET.  One milligal equals 0.01 mm/s/s."
+END_OBJECT           = IMAGE
+
+OBJECT               = IMAGE_MAP_PROJECTION
+  ^DATA_SET_MAP_PROJECTION     = "DSMAP_1200A.CAT"
+  COORDINATE_SYSTEM_TYPE       = "BODY-FIXED ROTATING"
+  COORDINATE_SYSTEM_NAME       = "LUNAR PRINCIPAL AXIS OF DE430"
+  MAP_PROJECTION_TYPE          = "SIMPLE CYLINDRICAL"
+  A_AXIS_RADIUS                = 1738.0 <km>
+  B_AXIS_RADIUS                = 1738.0 <km>
+  C_AXIS_RADIUS                = 1738.0 <km>
+  FIRST_STANDARD_PARALLEL      = "N/A"
+  SECOND_STANDARD_PARALLEL     = "N/A"
+  POSITIVE_LONGITUDE_DIRECTION = "EAST"
+  CENTER_LATITUDE              = 0.0 <degree>
+  CENTER_LONGITUDE             = 180.0 <degree>
+  REFERENCE_LATITUDE           = 0.0 <degree>
+  REFERENCE_LONGITUDE          = 0.0 <degree>
+  LINE_FIRST_PIXEL             = 1
+  LINE_LAST_PIXEL              = 2880
+  SAMPLE_FIRST_PIXEL           = 1
+  SAMPLE_LAST_PIXEL            = 5760
+  MAP_PROJECTION_ROTATION      = 0.0 <degree>
+  MAP_RESOLUTION               = 16 <pixel/degree>
+  MAP_SCALE                    = 1895.8639 <m/pixel>
+  MAXIMUM_LATITUDE             = 90 <degree>
+  MINIMUM_LATITUDE             = -90 <degree>
+  EASTERNMOST_LONGITUDE        = 360 <degree>
+  WESTERNMOST_LONGITUDE        = 0 <degree>
+  LINE_PROJECTION_OFFSET       = 1439.5 <pixel>
+  SAMPLE_PROJECTION_OFFSET     = 2879.5 <pixel>
+END_OBJECT           = IMAGE_MAP_PROJECTION
+
+END

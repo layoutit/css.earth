@@ -7,10 +7,12 @@ mosaic has been qualified yet (the investigation ledger records the Akatsuki
 route). The cloud-top limb law is transcribed from Pérez-Hoyos et al. (2018),
 doi:10.1002/2017JE005406, cited in `source/manifest.json`.
 
-The Magellan synthetic-color C3-MDIR mosaic and colorized topographic C3-MDIR
-mosaic are credited to the USGS Astrogeology Science Center and NASA. They are
-public-domain United States government scientific products delivered through
-the official USGS planetary WMS. NASA and USGS do not endorse this presentation.
+The Magellan SAR FMAP left-look global mosaic (radar) is credited to the USGS
+Astrogeology Science Center, NASA's Magellan mission and NSSDCA, and is read
+through NASA Solar System Treks tiles. The colorized topographic C3-MDIR mosaic is
+credited to the USGS Astrogeology Science Center and NASA, delivered through the
+official USGS planetary WMS. Both are United States government scientific
+products. NASA and USGS do not endorse this presentation.
 
 The navigation image is credited to NASA/JPL-Caltech and retained under NASA's
 media usage guidelines. The atmosphere model outputs are credited to the NASA
@@ -38,3 +40,4 @@ Landing, touchdown and impact sites (13): compiled from NASA NSSDCA, PDS and LRO
 
 - Microwave emissivity: NASA/JPL Magellan GEDR and USGS Astrogeology, global 4,641 m product; decoded from the published DN convention and GeoTIFF projection.
 Numeric Magellan GTDR v2, GEDR, GRDR and GSDR: NASA Magellan mission; Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley (MIT); NASA PDS Geosciences Node; USGS Astrogeology. cssEarth samples native grid cells and applies the documented calibration and its own palettes. The original data and labels are credited in the source manifest; the roughness-label conflict is documented beside its calibration.
+- Gravity, gravity uncertainty, Bouguer anomaly and geoid: NASA/JPL Magellan Gravity Science Team under W. L. Sjogren, model SHGJ120P; NASA PDS Geosciences Node, MGN-V-RSS-5-GRAVITY-L2-V1.0 products RS-DMGJ120P.A01, RS-DMBJ120P.A01 and RS-DMOJ120P.A01. cssEarth samples native cells and applies its own palettes and legends.

@@ -241,6 +241,24 @@
       "groups": [
         "refresh-usgs"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "grail-gravity"
+      ],
+      "path": "science/grail/gggrx_1200a_anom_l660.tif",
+      "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "grail-gravity"
+      ],
+      "path": "science/grail/gggrx_1200a_boug_l660.tif",
+      "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_boug_l660.tif"
     }
   ]
 }

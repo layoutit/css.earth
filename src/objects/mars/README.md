@@ -14,6 +14,9 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | --- | --- |
 | Visible surface | [Viking MDIM 2.1](https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg), colorized by NASA Ames |
 | Elevation | [USGS MOLA numeric DEM](https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m), meters above the GMM-2B areoid |
+| Albedo | [MGS TES bolometric albedo](https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m), Christensen et al. (2001), 8 pixels per degree |
+| Thermal inertia | [MGS TES nightside thermal inertia](https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html), Putzig and Mellon (2007), 20 pixels per degree |
+| Dust cover | [MGS TES dust cover index](https://www.mars.asu.edu/~ruff/DCI/dci.html), Ruff and Christensen (2002), 16 pixels per degree |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
@@ -31,6 +34,50 @@ The [26 September 2026 browser and delivery record](evidence/showcase/browser.js
 | Geology | [Tanaka et al. (2014), USGS SIM 3292](https://pubs.usgs.gov/sim/3292/): 1,311 polygons and 44 units at 1:20,000,000. The existing categorical reader uses the published legend fills, recorded in [the colour table](source/geology/sim3292-colors.json), without blending unit values. |
 | Water equivalent, chlorine, iron, silicon, potassium, thorium | [Odyssey GRS ELEMTS v1](https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html), observations 4 June 2002–3 April 2005. Unsmoothed 5° bins retain their native boundaries, negative estimates and each product's missing cells. Water equivalent is hydrogen expressed as H₂O, not a map of exposed ice. Five maps use weight percent; thorium converts weight percent to ppm by multiplying by 10,000. |
 | Magnetic field | [Langlais et al. (2019)](https://doi.org/10.1029/2018JE005854), degree/order 134, evaluated by pyshtools on the 3,393.5 km sphere of Figure 6b. This is a model inferred from MGS and MAVEN, with about 160 km resolution. The 0.5° grid displays radial field, blue inward and red outward, with zero neutral. |
+
+### TES albedo, thermal inertia, dust cover and the remaining candidates (27 September 2026)
+
+| View | Source, processing and limits |
+| --- | --- |
+| Albedo | [MGS TES global bolometric albedo](https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m), ASU product `GLOBAL_ALBEDO_8PPD` from [Christensen et al. (2001)](https://doi.org/10.1029/2000JE001370), distributed by USGS as a float32 GeoTIFF. Lambert albedo measured by the TES visible and near-infrared bolometer (0.3–2.9 µm), 2,880 × 1,440 cells at 8 pixels per degree (about 7.4 km) on a 3,396 km sphere. The existing scientific GeoTIFF reader checks size, projection, radius, origin, spacing and missing value against [the raster recipe](source/preparation/raster.json) and samples native cells by nearest neighbour. The publisher's [PDS3](source/science/usgs/tes-albedo-pds.lbl) and [ISIS](source/science/usgs/tes-albedo-isis.lbl) labels are kept beside it. |
+
+The label declares no missing value, but every cell poleward of about 87° (131,653
+cells, 3.2%) holds exactly 0.06, a constant fill beyond TES coverage; the next-lowest
+value anywhere is 0.061. A quality mask on the same file withholds values below
+0.0605, so the polar caps show as missing data. The measured values span 0.061–0.32,
+and the legend shows 0.06–0.32. Each cell averages observations from several seasons, so dust that moves
+between seasons is blended. The USGS grid rounds its spacing to 7,410 m; across
+the full width this displaces cells by at most 0.2 of a cell. The values agree with the
+examples in [Ruff and Christensen (2002)](https://doi.org/10.1029/2001JE001580),
+where dark ground measures about 0.12 and bright ground about 0.26: Syrtis Major is
+dark and Arabia and Tharsis are bright in this grid. These spot values do not
+validate the instrument calibration.
+
+Two more TES layers now read their numeric originals through new shared readers:
+
+| View | Source and reading |
+| --- | --- |
+| Thermal inertia | [Putzig and Mellon (2007)](https://doi.org/10.1016/j.icarus.2007.05.013) nightside map, PDS product `GLOBAL_TI_NIGHT_2007` in [MGS-M-TES-5-TIMAP-V1.0](https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html): big-endian 16-bit integers in J m⁻² K⁻¹ s⁻½, 7,200 × 3,600 cells at 20 pixels per degree. The `pds3-grid` reader checks the detached label's size, sample type and extent (cell edges at 180° W and 90° N). The data set catalogue gives the derived range as 5 to 5,000 and says other values are not computed, so 0 reads as no value. The product's interpolation mask marks infilled cells with 0; they are withheld (8.46% of the planet), leaving 5 to 4,999. The existing Thermal infrared view shows THEMIS daytime brightness, not thermal inertia. |
+| Dust cover | [Ruff and Christensen (2002)](https://doi.org/10.1029/2001JE001580) dust cover index from [the author's page](https://www.mars.asu.edu/~ruff/DCI/dci.html): a VICAR REAL file (little-endian floats, 5,760 × 2,880 cells, 16 pixels per degree). VICAR carries no projection; the recipe places the left edge at 180° W, as [ASU's catalogue](https://mars.asu.edu/data/tes_ruffdust/) describes the grid, and that placement reproduces the paper: Arabia 0.922, Syrtis Major 0.973, Mare Erythraeum 0.968 against its 0.970 regional average. Exactly 0.85 fills 21% of cells, all poleward of about 60° N and 80° S and below every value the paper discusses; the `vicar-grid` reader withholds it. |
+
+Checks: thermal-inertia spot values read Syrtis Major 193, Arabia 47 and Arsia 11; the 1st to 99th area-weighted percentiles are 24 to 476, and values above the 600 display maximum cover 0.4%.
+
+Two candidates stay deferred in the [investigation ledger](investigations.json):
+
+- Mineral abundances: plagioclase, high-Ca pyroxene and sheet silicates/high-Si glass,
+  [Bandfield (2002)](https://doi.org/10.1029/2001JE001510), as VICAR float exports from
+  [ASU](https://mars.asu.edu/data/tes_plagioclase/). The shared VICAR reader now reads
+  them, but 17 to 33% of cells hold exact zeros, 94% of them on bright dusty ground.
+  Whether a zero is a measured absence or a cell the authors masked needs the paper's
+  masking rule, which has not been read.
+- Roughness: [Kreslavsky and Head (2000)](https://doi.org/10.1029/2000JE001259),
+  byte grids with a published logarithmic scale, [Zenodo 15734221](https://zenodo.org/records/15734221).
+  Its missing-value code is not documented.
+
+The Mars Trek layers for these quantities are display images, not measured values, and
+are not used. Trek's landform and detection layers (gullies, glacier-like forms,
+valley networks, hydrated-mineral detections) would need survey point and line
+layers, which Mars does not have.
 
 The crust-thickness view uses `Mars-thick-Khan2022-39-2900-2900.dat`, the precomputed [Wieczorek et al. (2022) Figure 2 example](https://doi.org/10.1029/2022JE007298) from [Zenodo 6477509](https://zenodo.org/records/6477509). It assumes 39 km beneath InSight and uniform crust density of 2,900 kg/m³. Its mean is about 57 km; the full model family spans 30–72 km. This example is not a unique consensus model. The deposited 0.25° node grid spans 5.579–116.811 km, consistent with the paper’s rounded 6–117 km. [The converter](../../../packages/bake/cli/prepare-mars-crust.mts) only reverses rows and adds explicit coordinates for the existing Tecplot reader; it does not recalculate thickness.
 

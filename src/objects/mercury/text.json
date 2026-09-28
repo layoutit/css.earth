@@ -50,6 +50,16 @@
       "title": "Higher-Sun monochrome map",
       "detail": "MESSENGER MDIS",
       "summary": "Images taken with the Sun higher in the sky show surface brightness patterns. The two maps use different brightness scales."
+    },
+    "gravity": {
+      "title": "Gravity anomaly",
+      "detail": "MESSENGER",
+      "summary": "Radio tracking of MESSENGER measured where Mercury pulls a little harder or weaker. Detail is finer in the north."
+    },
+    "crust": {
+      "title": "Crustal-thickness model",
+      "detail": "MESSENGER",
+      "summary": "Thickness inferred from gravity and topography. It depends on assumed rock densities."
     }
   }
 }

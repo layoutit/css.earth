@@ -70,7 +70,8 @@
       "shape": "Shape",
       "ice-absorption": "Ice absorption",
       "infrared-ratio": "Infrared ratio",
-      "infrared": "Infrared color"
+      "infrared": "Infrared color",
+      "geology": "Geology"
     },
     "controls": [
       {
@@ -196,6 +197,81 @@
           "image": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp"
         },
         "notes": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
+        "noData": true
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "thumbnail": "/scenes/enceladus/enceladus-geology-thumbnail.webp",
+        "surface": "enceladus-geology-surface@2x.webp",
+        "poles": "enceladus-geology-poles@2x.webp",
+        "source": {
+          "id": "trek-enceladus-geologic-units-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1002/2015JE004818"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "meta": "Unit names and colors from the published GIS layer. Equatorial and heavily cratered plains share one color there.",
+          "sourceUrl": "https://doi.org/10.1002/2015JE004818",
+          "items": [
+            {
+              "label": "LH curvilinear material",
+              "color": "#df73ff"
+            },
+            {
+              "label": "LH smooth material",
+              "color": "#2f5b00"
+            },
+            {
+              "label": "TH curvilinear material",
+              "color": "#9700b4"
+            },
+            {
+              "label": "Central LH",
+              "color": "#005ce6"
+            },
+            {
+              "label": "Central south polar material",
+              "color": "#bee8ff"
+            },
+            {
+              "label": "Equatorial cratered plains",
+              "color": "#d7c29e"
+            },
+            {
+              "label": "Heavily cratered plains",
+              "color": "#d7c29e"
+            },
+            {
+              "label": "Northern lineated material",
+              "color": "#ffff73"
+            },
+            {
+              "label": "Ridged material",
+              "color": "#e60000"
+            },
+            {
+              "label": "Southern curvilinear material",
+              "color": "#4c0073"
+            },
+            {
+              "label": "Striated plains",
+              "color": "#e8beff"
+            },
+            {
+              "label": "Subdued cratered plains",
+              "color": "#ffebaf"
+            },
+            {
+              "label": "Transitional material",
+              "color": "#e9ffbe"
+            }
+          ]
+        },
+        "notes": "Interpreted units from Crow-Willard and Pappalardo (2015), mapped on the 2010 Cassini camera mosaic and released as GIS by NASA Trek. LH and TH are the leading- and trailing-hemisphere terrains. Colors identify map units; they are not surface color or composition. The published polygons nest without holes: subdued cratered plains and northern lineated material sit inside heavily cratered plains, so the smallest unit covering a cell is shown. Gray grid marks the few unmapped slivers. Line features are not shown.",
         "noData": true
       }
     ]

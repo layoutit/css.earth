@@ -1,0 +1,22 @@
+{
+  "id": "source-enceladus-trek-enceladus-geologic-units-vector",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassini ISS Geologic Map Units, Global (NASA Trek GIS layer)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/enceladus/source/manifest.json",
+      "locator": "/inputs/24"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

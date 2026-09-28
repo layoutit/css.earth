@@ -36,6 +36,14 @@ Feature notes: 3 of the labelled names carry a caption note, the lead summary of
 
 - **Relative albedo and slope:** Complete atlas transfer qualification remains a separate preparation check. The authored support policy withholds any facet whose released Albedo field is non-finite in both new views; this is not a complete photographic coverage mask.
 
+## NASA Trek layers reviewed and not added
+
+We checked three Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobos/) offers and the app lacks, on 2026-09-27. None became a lens. The [investigation ledger](investigations.json) keeps each decision and what would reopen it.
+
+- **Roughness, 1 km baseline.** Trek's numeric file is a JPL product made from the MExLab 200 m DEM of [Karachevtseva et al. (2014)](https://doi.org/10.1016/j.pss.2013.12.015). Its metadata states no formula and no unit. The values are signed, from −153 to +120, so they are not a roughness in the usual non-negative sense. They follow the DEM minus its local 5 × 5 cell mean (correlation 0.93). That is local relief from an older 1° DEM, which the Elevation lens already shows from the newer shape model.
+- **HRSC V/NIR spectral index.** The only public copy is a colour picture: seven legend classes of V/NIR between 0.6 and 1.6, plus one unexplained white class. No numeric index grid is published, so there is nothing to map values from.
+- **PH9224GT crater catalogue.** The [catalogue of 9,224 craters](https://doi.org/10.1016/j.asr.2013.11.006) lists centres and radii. The feature labels here read only the IAU/USGS Gazetteer of named features, and no body shows a crater catalogue yet. Trek's crater count and abundance maps are made from this same catalogue.
+
 [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes

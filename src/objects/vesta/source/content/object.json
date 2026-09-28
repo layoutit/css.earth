@@ -143,6 +143,116 @@
           "path": "../manifest.json"
         },
         "notes": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting."
+      },
+      {
+        "id": "hydrogen",
+        "label": "Surface elements",
+        "shortLabel": "H",
+        "thumbnail": "/scenes/vesta/vesta-hydrogen-thumbnail.webp",
+        "surface": "vesta-hydrogen-surface@2x.webp",
+        "poles": "vesta-hydrogen-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Hydrogen",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "196",
+            "391"
+          ],
+          "meta": "µg/g · Dawn GRaND, Dec 2011–Jan 2012",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+          "image": "/scenes/vesta/vesta-hydrogen-legend.webp"
+        },
+        "source": {
+          "id": "dawn-grand-vesta-hydrogen",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
+        },
+        "notes": "Hydrogen in the top few decimetres of regolith, from epithermal neutrons counted by Dawn’s GRaND in its low orbit (Prettyman et al. 2012). One colour per archived 2-degree pixel, but each value blends about 300 km of surface, so the map is much blurrier than its pixels. Hydrogen is richest where dark, carbonaceous material fell on Vesta and poorest in the Rheasilvia basin. Moved from the archive’s Claudia Double Prime longitudes into the Claudia frame of the other maps.",
+        "step": {
+          "group": "surface-elements",
+          "label": "Hydrogen"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Micrograms of hydrogen per gram of regolith: 400 µg/g is 0.04% by weight."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn’s gamma-ray and neutron detector counted epithermal neutrons from about 210 km above the surface, December 2011 to January 2012."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each archived pixel covers 2° of latitude and longitude; the instrument’s footprint is about 300 km across, so features smaller than that are not resolved."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "The archive gives no uncertainty per pixel. Hydrogen may be bound in hydrated minerals; this is not a map of ice."
+          }
+        ]
+      },
+      {
+        "id": "iron",
+        "label": "Surface elements",
+        "shortLabel": "Fe",
+        "thumbnail": "/scenes/vesta/vesta-iron-thumbnail.webp",
+        "surface": "vesta-iron-surface@2x.webp",
+        "poles": "vesta-iron-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Iron gamma rays",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.0687",
+            "0.0731",
+            "0.0775"
+          ],
+          "meta": "counts/s · Dawn GRaND, Dec 2011–Apr 2012",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+          "image": "/scenes/vesta/vesta-iron-legend.webp"
+        },
+        "source": {
+          "id": "dawn-grand-vesta-iron-counts",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
+        },
+        "notes": "How often Dawn’s GRaND detected the 7.6 MeV gamma rays that iron emits, corrected for the neutron density (Yamashita et al. 2013). A higher rate means more iron: basaltic eucrite terrain is richer than the diogenite excavated in the Rheasilvia basin. Values are archived on 0.5-degree equal-area pixels, but each blends about 300 km of surface. This is a counting rate, not an iron percentage; the authors’ preliminary factor of 189.2 wt% per count/s is not applied. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "surface-elements",
+          "label": "Iron gamma rays"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Counts per second of iron gamma rays in the detector. Higher means more iron; the scale is not a weight percent."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn’s gamma-ray detector counted the 7.6 MeV iron line from about 210 km above the surface, December 2011 to April 2012, when pointed at Vesta."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Pixels are 0.5° tall equal-area cells; the footprint is about 300 km across, so the map shows regional differences only."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "The archive gives no uncertainty per pixel. Its catalogue gives a preliminary conversion to iron weight percent and advises caution; it is not used here."
+          }
+        ]
       }
     ]
   },

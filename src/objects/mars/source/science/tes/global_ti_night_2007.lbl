@@ -1,0 +1,56 @@
+PDS_VERSION_ID                 = PDS3
+RECORD_TYPE                    = FIXED_LENGTH
+FILE_RECORDS                   = 3600
+RECORD_BYTES                   = 14400
+^IMAGE                         = "GLOBAL_TI_NIGHT_2007.IMG"
+
+DATA_SET_ID                    = "MGS-M-TES-5-TIMAP-V1.0"
+PRODUCT_ID                     = "GLOBAL_TI_NIGHT_2007"
+MISSION_NAME                   = "MARS GLOBAL SURVEYOR"
+INSTRUMENT_HOST_NAME           = "MARS GLOBAL SURVEYOR"
+INSTRUMENT_NAME                = "THERMAL EMISSION SPECTROMETER"
+TARGET_NAME                    = "MARS"
+START_TIME                     = "N/A"
+STOP_TIME                      = "N/A"
+SPACECRAFT_CLOCK_START_COUNT   = "N/A"
+SPACECRAFT_CLOCK_STOP_COUNT    = "N/A"
+PRODUCT_CREATION_TIME          = 2007-01-30
+PRODUCER_FULL_NAME             = "NATHANIEL PUTZIG"
+PRODUCER_INSTITUTION_NAME      = "SOUTHWEST RESEARCH INSTITUTE"
+
+OBJECT                         = IMAGE
+  LINES                        = 3600
+  LINE_SAMPLES                 = 7200
+  SAMPLE_TYPE                  = MSB_INTEGER
+  SAMPLE_BITS                  = 16
+  DESCRIPTION                  = "This image contains the nightside 
+       TES-derived thermal inertia. Units are J/(m^2*K*sqrt(s))."
+END_OBJECT                     = IMAGE
+
+OBJECT                         = IMAGE_MAP_PROJECTION
+  ^DATA_SET_MAP_PROJECTION     = "DSMAP.CAT"
+  MAP_PROJECTION_TYPE          = "SIMPLE CYLINDRICAL"
+  A_AXIS_RADIUS                = 3396.0 <km>
+  B_AXIS_RADIUS                = 3396.0 <km>
+  C_AXIS_RADIUS                = 3396.0 <km>
+  POSITIVE_LONGITUDE_DIRECTION = "EAST"
+  CENTER_LATITUDE              = 0.0 <deg>
+  CENTER_LONGITUDE             = 0.0 <deg>
+  LINE_FIRST_PIXEL             = 1
+  LINE_LAST_PIXEL              = 3600
+  SAMPLE_FIRST_PIXEL           = 1
+  SAMPLE_LAST_PIXEL            = 7200
+  MAP_PROJECTION_ROTATION      = 0.0
+  MAP_RESOLUTION               = 20.0 <pix/deg>
+  MAP_SCALE                    = 2.96 <km/pix>
+  MAXIMUM_LATITUDE             = 90.00 <deg>
+  MINIMUM_LATITUDE             = -90.00 <deg>
+  WESTERNMOST_LONGITUDE        = -180.0 <deg>
+  EASTERNMOST_LONGITUDE        = 180.0 <deg>
+  LINE_PROJECTION_OFFSET       = 1800.5
+  SAMPLE_PROJECTION_OFFSET     = 3600.5
+  COORDINATE_SYSTEM_TYPE       = "BODY-FIXED ROTATING"
+  COORDINATE_SYSTEM_NAME       = "PLANETOCENTRIC"
+END_OBJECT                     = IMAGE_MAP_PROJECTION
+
+END

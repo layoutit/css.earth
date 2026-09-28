@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "esriJsonPath": "Cassini_ISS_GeologicMapUnits_Global.query.json",
+  "symbolPath": "Cassini_ISS_GeologicMapUnits_Global.layer.json",
+  "projectionWkt": "PROJCS[\"EQUIRECTANGULAR_Enceladus\",GEOGCS[\"GCS_Enceladus\",DATUM[\"D_Enceladus\",SPHEROID[\"Enceladus_localRadius\",252100.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Plate_Carree\"],PARAMETER[\"false_easting\",0.0],PARAMETER[\"false_northing\",0.0],PARAMETER[\"central_meridian\",180.0],UNIT[\"Meter\",1.0]]",
+  "coordinateUnits": "equirectangular-meters",
+  "centerLongitude": 180,
+  "radiusMeters": 252100,
+  "width": 2048,
+  "height": 1024,
+  "expectedRecords": 13,
+  "field": "Name",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "LH curvilinear material",
+      "label": "LH curvilinear material",
+      "color": "#df73ff"
+    },
+    {
+      "value": "LH smooth material",
+      "label": "LH smooth material",
+      "color": "#2f5b00"
+    },
+    {
+      "value": "TH curvilinear material",
+      "label": "TH curvilinear material",
+      "color": "#9700b4"
+    },
+    {
+      "value": "central LH",
+      "label": "Central LH",
+      "color": "#005ce6"
+    },
+    {
+      "value": "central south polar material",
+      "label": "Central south polar material",
+      "color": "#bee8ff"
+    },
+    {
+      "value": "equatorial cratered plains",
+      "label": "Equatorial cratered plains",
+      "color": "#d7c29e"
+    },
+    {
+      "value": "heavily cratered plains",
+      "label": "Heavily cratered plains",
+      "color": "#d7c29e"
+    },
+    {
+      "value": "northern lineated material",
+      "label": "Northern lineated material",
+      "color": "#ffff73"
+    },
+    {
+      "value": "ridged material",
+      "label": "Ridged material",
+      "color": "#e60000"
+    },
+    {
+      "value": "southern curvilinear material",
+      "label": "Southern curvilinear material",
+      "color": "#4c0073"
+    },
+    {
+      "value": "striated plains",
+      "label": "Striated plains",
+      "color": "#e8beff"
+    },
+    {
+      "value": "subdued cratered plains",
+      "label": "Subdued cratered plains",
+      "color": "#ffebaf"
+    },
+    {
+      "value": "transitional material",
+      "label": "Transitional material",
+      "color": "#e9ffbe"
+    }
+  ],
+  "output": "enceladus-geologic-units.tif",
+  "receipt": "enceladus-geologic-units.json",
+  "nestedUnits": "inner",
+  "nestedUnitsReason": "The source draws subdued cratered plains and northern lineated material inside the heavily cratered plains polygon, and northern lineated material inside subdued cratered plains, without cutting holes. Where polygons share pixels the smallest unit takes them, so every published unit shows. The Trek map service also draws subdued cratered plains over heavily cratered plains, but it hides northern lineated material under subdued cratered plains; this grid shows it."
+}
