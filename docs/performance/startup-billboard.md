@@ -19,3 +19,7 @@ The normal camera frame presenter preserves the stage offset used by world label
 World caption measurements are demand-driven: the existing worker planner requests bounds only for labels that pass its naming policy. The publisher reads those CSS bounds before writes, caches them, and requests a follow-up plan. Hidden and occluded captions do not force startup layout reads. Font or viewport invalidation retains the same eligibility policy.
 
 On a query-specific reload, the search toolbar and category pills use the same pending-shell visibility rule as the sheet, dataset rail and footer. They reveal together after the requested view is restored.
+
+## Startup reveal
+
+A saved camera may have no matching baked billboard. While it prepares, the viewport uses a separate opaque cover with its own compositing layer. The world itself stays at its final opacity while the existing activation groups publish textures. The shared scene-ready publication removes the cover and reveals the sheet, search and pills together. Default startup and fly-to continue using their prepared billboard.
