@@ -1,5 +1,27 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hv-2257",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4655144146795764224 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hv-2257/source/photometry/gaia-dr3-source.csv; cross-identification HD 268878: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4655144146795764224. Distance: Groenewegen (2013), A&A 550, A70, table10, HV 2257: Baade-Wesselink distance (pc) 46153.9 +/- 2119.3 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 46153.9 +/- 2119.3 pc; Gaia DR3 parallax 0.0440 +/- 0.0141 mas (same row, RUWE 1.26), 3.1 standard errors, is not used. Proper motion: Gaia DR3 (same row): 2.053, -0.089 mas/yr. Radial velocity: Gaia DR3 (same row): 268.48 +/- 7.22 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4655144146795764224",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 156.6 +/- 6.5 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 2257: Baade-Wesselink mean radius (solar radii) 156.6 +/- 6.5 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 108,946,620 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5125 +/- 88 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0512, columns Teffp, e_Teffp: Teff 5125 +/- 88 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2307.07559"
+      ]
+    }
+  ]
 }

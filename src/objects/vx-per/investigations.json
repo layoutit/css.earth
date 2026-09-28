@@ -1,5 +1,37 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "vx-per",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 506779550797525760 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/vx-per/source/photometry/gaia-dr3-source.csv; cross-identification HD 236948, HIP 9928: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+506779550797525760. Distance: Groenewegen (2013), A&A 550, A70, table10, VX Per: Baade-Wesselink distance (pc) 4139.4 +/- 483.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 4139.4 +/- 483.6 pc; Gaia DR3 parallax 0.3636 +/- 0.0168 mas (same row, RUWE 1.12), 21.6 standard errors, is not used. Proper motion: Gaia DR3 (same row): -0.215, -1.312 mas/yr. Radial velocity: SIMBAD's radial velocity for Gaia DR3 506779550797525760 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+506779550797525760",
+        "https://arxiv.org/abs/1212.5478",
+        "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 117 +/- 13.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, VX Per: Baade-Wesselink mean radius (solar radii) 117 +/- 13.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 81,396,900 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5375 +/- 208 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 251, Name='VX Per', columns Teff, e_Teff (K): Teff 5375 +/- 208 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,375 K and log g 1.64 (u1 0.528, u2 0.207): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/635/A33/table1"
+      ]
+    }
+  ]
 }

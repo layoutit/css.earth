@@ -1,5 +1,33 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "kic-7132791",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2077236919560661248 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kic-7132791/source/photometry/gaia-dr3-source.csv. Distance: Gaia DR3 parallax 0.3243 +/- 0.0108 mas (same row, RUWE 0.98): 3083.92 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -3.400, -4.670 mas/yr. Radial velocity: Gaia DR3 (same row): 1.49 +/- 0.91 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 10.4224 +/- 0.1935 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 7132791 (Gold): Radius (Mosser scale, solar radii) 10.4224 +/- 0.1935 (https://arxiv.org/abs/2410.00102): 7,250,864 km at 695,700 km per solar radius. Mass 1.0871 +/- 0.0447 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 7132791 (Gold): Mass (Mosser scale, solar masses) 1.0871 +/- 0.0447 (https://arxiv.org/abs/2410.00102); GM is that mass times the JPL solar GM. Temperature 4801 +/- 55 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 7132791 (Gold): APOGEE effective temperature (K) 4801.189 +/- 54.9975 (https://arxiv.org/abs/2410.00102). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2410.00102"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,801 K and log g 2.4411 (u1 0.683, u2 0.108): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
 }

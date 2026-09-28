@@ -1,5 +1,36 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "ogle-smc-ecl-1421-a",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4688970798174366464 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ogle-smc-ecl-1421-a/source/photometry/gaia-dr3-source.csv. Distance: Graczyk et al. (2020), ApJ 904, 13, the distance to OGLE-SMC-ECL-1421: 62.03 +/- 0.64 kpc (https://arxiv.org/abs/2010.08754): 62030 +/- 640 pc; Gaia DR3 parallax 0.0577 +/- 0.0521 mas (same row, RUWE 1.06), 1.1 standard errors, is not used. Proper motion: Gaia DR3 (same row): 0.542, -1.182 mas/yr. Radial velocity: No catalogued radial velocity: Gaia DR3 measures none for source 4688970798174366464 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204688970798174366464).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/2010.08754",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204688970798174366464"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 17.7 +/- 0.3 solar radii from Primary radius (solar radii) 17.7 +/- 0.3, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G): 12,313,890 km at 695,700 km per solar radius. Mass 2.72 +/- 0.02 solar masses from Primary mass (solar masses) 2.72 +/- 0.02, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G); GM is that mass times the JPL solar GM. Temperature 5395 +/- 99 K from Primary log Teff 3.732 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G): 5395 K (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+        "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,395 K and log g 2.37 (u1 0.522, u2 0.218): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
 }

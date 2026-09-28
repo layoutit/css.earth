@@ -1,5 +1,27 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "kn-cen",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5864135319959353600 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kn-cen/source/photometry/gaia-dr3-source.csv; cross-identification HIP 66383: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5864135319959353600. Distance: Groenewegen (2013), A&A 550, A70, table10, KN Cen: Baade-Wesselink distance (pc) 3747.6 +/- 159.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 3747.6 +/- 159.8 pc; Gaia DR3 parallax 0.2272 +/- 0.0183 mas (same row, RUWE 1.03), 12.4 standard errors, is not used. Proper motion: Gaia DR3 (same row): -6.923, -1.383 mas/yr. Radial velocity: Gaia DR3 (same row): -39.72 +/- 5.84 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5864135319959353600",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 171.6 +/- 5.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, KN Cen: Baade-Wesselink mean radius (solar radii) 171.6 +/- 5.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 119,382,120 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4875 +/- 226 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 112, Name='KN Cen', columns Teff, e_Teff (K): Teff 4875 +/- 226 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    }
+  ]
 }

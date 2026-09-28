@@ -1,5 +1,36 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "ngc-6362-v40-a",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5813087468905224320 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ngc-6362-v40-a/source/photometry/gaia-dr3-source.csv. Distance: Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 2, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc (https://arxiv.org/abs/2105.09526): 7649 +/- 67 pc; Gaia DR3 parallax 0.0672 +/- 0.1093 mas (same row, RUWE 1.00), 0.6 standard errors, is not used. Proper motion: Gaia DR3 (same row): -5.574, -4.554 mas/yr. Radial velocity: No catalogued radial velocity: Gaia DR3 measures none for source 5813087468905224320 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 2,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205813087468905224320).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/2105.09526",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205813087468905224320"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.3253 +/- 0.0077 solar radii from Primary radius (solar radii) 1.3253 +/- 0.0077, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K): 922,011 km at 695,700 km per solar radius. Mass 0.8337 +/- 0.0063 solar masses from Primary mass (solar masses) 0.8337 +/- 0.0063, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K); GM is that mass times the JPL solar GM. Temperature 6152 +/- 127 K from Primary log Teff 3.789 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 6152 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,152 K and log g 4.114 (u1 0.390, u2 0.298): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
 }
