@@ -62,6 +62,7 @@ export interface PresentationDraft {
   assets: PreparedAssets; tree: PreparedTree; variants: PreparedVariant[]; materials: SourceMaterialTrack[];
   resourceOrder?: 'materials-first';
   viewBindings: PreparedViewBinding[]; animations: ObjectRuntimeDefinition['animations'];
+  motion?: NonNullable<ObjectRuntimeDefinition['motion']>;
   textureLevels?: PreparedTextureLevels;
 }
 export interface PresentationInputs {
@@ -70,4 +71,6 @@ export interface PresentationInputs {
   solarSource: SolarSource; controls: ObjectControls;
   /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
   lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
+  /** A pulsating star's published light curve as veil opacity over one period (the photometry topic prepares it); emissive only. */
+  lightCurve?: { readonly durationMs: number; readonly keyframes: readonly { readonly offset: number; readonly opacity: string }[] };
 }

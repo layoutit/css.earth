@@ -1,0 +1,40 @@
+{
+  "id": "gaia-dr3-vari-cepheid-hv-12199",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 vari_cepheid row for HV 12199 (source_id 4663542117864349440)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 vari_cepheid source_id",
+      "value": "4663542117864349440"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243990",
+      "label": "Ripepi et al. (2023), A&A 674, A17, the Cepheid sample"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+source_id%2C+pf%2C+pf_error%2C+fund_freq1%2C+reference_time_g%2C+zp_mag_g%2C+num_harmonics_for_p1_g%2C+fund_freq1_harmonic_ampl_g%2C+fund_freq1_harmonic_phase_g%2C+epoch_g%2C+epoch_g_error%2C+peak_to_peak_g%2C+r21_g%2C+phi21_g%2C+mode_best_classification+FROM+gaiadr3.vari_cepheid+WHERE+source_id+%3D+4663542117864349440",
+      "checkedOn": "2026-09-28",
+      "locator": "gaiadr3.vari_cepheid: pf 2.6391279638555583 +/- 0.00001913587 d, 5 G-band harmonics, peak_to_peak_g 0.59463775 mag, epoch_g 1675.6855055692247 +/- 0.000027062208 (BJD TCB - 2455197.5)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Ripepi et al. (2023), A&A 674, A17",
+      "scope": "citation",
+      "evidence": "https://www.cosmos.esa.int/web/gaia-users/credits"
+    }
+  ]
+}

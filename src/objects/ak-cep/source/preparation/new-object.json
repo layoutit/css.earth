@@ -3,6 +3,7 @@
   "name": "AK Cep",
   "system": "AK Cep system",
   "description": "A Cepheid in the Milky Way that pulsates every 7.23 days; its mean radius is 59.5 solar radii.",
+  "order": 1930,
   "target": "AK Cep",
   "gaia": "2007997408188526336",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1930
+  ]
 }

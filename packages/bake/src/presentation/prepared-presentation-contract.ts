@@ -522,9 +522,13 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     }
     if ([tree.camera, tree.scene].includes(animation.target) || !(animation.duration > 0)) fail("unsupported prepared motion");
     if (!array(animation.keyframes, "motion keyframes").length) fail("prepared motion has no keyframes");
-    for (const frame of animation.keyframes) {
-      record(frame, "keyframe", ["offset", "transform"]); finite(frame.offset, "keyframe offset"); string(frame.transform, "keyframe transform");
-      if (frame.offset < 0 || frame.offset > 1) fail("motion offset must be within animation");
+    // One compositor property per track: a transform (spin) or an opacity (a star's light curve).
+    const frames: readonly Record<string, unknown>[] = animation.keyframes;
+    const property = frames[0]!.opacity !== undefined ? "opacity" : "transform";
+    for (const frame of frames) {
+      record(frame, "keyframe", ["offset", property]); const offset = frame.offset; finite(offset, "keyframe offset"); string(frame[property], `keyframe ${property}`);
+      if (property === "opacity" && !(Number(frame.opacity) >= 0 && Number(frame.opacity) <= 1)) fail(`motion ${animation.id} keyframe opacity ${String(frame.opacity)} is outside 0..1`);
+      if (offset < 0 || offset > 1) fail("motion offset must be within animation");
     }
   }
 

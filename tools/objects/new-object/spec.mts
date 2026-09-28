@@ -61,6 +61,8 @@ export interface StarSpec {
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius: Cited | 'gaia-flame'; readonly mass: Cited | 'gaia-flame' | 'unmeasured'; readonly temperature: Cited;
   readonly gravity?: Cited; readonly radialVelocity?: Cited;
+  /** The published range of gravities for the star's class, cited: a limb read inside it when the star's own is unpublished (gravity.mts). */
+  readonly gravityRange?: { readonly min: number; readonly max: number; readonly source: string; readonly url: string };
   /** Parsecs, cited: replaces Gaia DR3's parallax distance (spec header). */
   readonly distance?: Cited;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
@@ -199,7 +201,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'gravityRange', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -227,6 +229,13 @@ export function parseStarSpec(value: unknown): StarSpec {
     radius: citedOrFlame(input.radius, at('radius'), [0.005, 3000]), mass: input.mass === 'unmeasured' ? 'unmeasured' : citedOrFlame(input.mass, at('mass'), [0.01, 300]),
     temperature: cited(input.temperature, at('temperature'), [1000, 60000]),
     ...(input.gravity === undefined ? {} : { gravity: cited(input.gravity, at('gravity'), [-1, 9]) }),
+    ...(input.gravityRange === undefined ? {} : { gravityRange: (() => {
+      const r = requireRecord(input.gravityRange, at('gravityRange')), min = requireFiniteNumber(r.min, at('gravityRange.min')), max = requireFiniteNumber(r.max, at('gravityRange.max'));
+      if (!(min < max) || min < -2 || max > 9) throw new RangeError(`${at('gravityRange')} must be an increasing range inside log g -2 to 9, not ${min} to ${max}.`);
+      const url = requireString(r.url, at('gravityRange.url'));
+      if (!URL_PATTERN.test(url)) throw new TypeError(`${at('gravityRange.url')} must be an https URL, not ${url}.`);
+      return { min, max, source: requireString(r.source, at('gravityRange.source')), url };
+    })() }),
     ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), [-1000, 1000]) }),
     ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e7]) }),
     ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),

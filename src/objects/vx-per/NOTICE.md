@@ -7,3 +7,5 @@ Colour: a Planck spectrum at the temperature of Groenewegen (2020), A&A 635, A33
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
 Placement: Gaia DR3 source 506779550797525760: position, proper motion; distance: Groenewegen (2013), A&A 550, A70, table10, VX Per: Baade-Wesselink distance (pc) 4139.4 +/- 483.6 (Monte-Carlo). This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+
+Light curve: Gaia DR3 vari_cepheid, source 506779550797525760; Ripepi et al. (2023), A&A 674, A17.

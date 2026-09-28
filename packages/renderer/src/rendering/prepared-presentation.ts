@@ -63,8 +63,8 @@ export interface PreparedPresentationDefinition {
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
-  /** Authored infinite motion, resolved from source CSS during preparation. */
-  motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
+  /** Infinite motion: a spin resolved from source CSS, or a star's light curve as opacity. */
+  motion?: readonly { target: number; id: string; keyframes: ({ offset: number; transform: string } | { offset: number; opacity: string })[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
   features?: PreparedSurfaceFeaturePlan;
   depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
@@ -206,7 +206,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const motion = (definition.motion ?? []).map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
     animation.id = plan.id;
-    context.registerAnimation(animation, { mode: 'motion', initialTime: 0 });
+    // A light curve (opacity keyframes) plays on its own permission and moves no texel.
+    context.registerAnimation(animation, { mode: 'motion', initialTime: 0, ...(plan.keyframes.every(frame => 'opacity' in frame) ? { lightCurve: true } : {}) });
     return { animation, plan, duration: plan.duration };
   });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.

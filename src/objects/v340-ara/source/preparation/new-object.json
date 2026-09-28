@@ -3,6 +3,7 @@
   "name": "V340 Ara",
   "system": "V340 Ara system",
   "description": "A Cepheid in the Milky Way that pulsates every 20.81 days; its mean radius is 99.1 solar radii.",
+  "order": 1933,
   "target": "V340 Ara",
   "gaia": "5937099633141128448",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1933
+  ]
 }

@@ -160,10 +160,13 @@ export function requireAnimations(value: unknown, tree: PreparedTree, motion = f
       finite(animation.sourceMinimum, 'animation minimum'); finite(animation.millisecondsPerDegree, 'animation time mapping');
     }
     const frames = array(animation.keyframes, 'keyframes'); if (!frames.length) fail('prepared animation has no keyframes');
+    // A motion track animates one compositor property: a transform (spin) or an opacity (a star's light curve).
+    const property = motion && record(frames[0], 'keyframe', ['offset', 'transform', 'opacity']).opacity !== undefined ? 'opacity' : 'transform';
     for (const input of frames) {
-      const frame = record(input, 'keyframe', ['offset', 'transform']);
+      const frame = record(input, 'keyframe', ['offset', property]);
       const offset = finite(frame.offset, 'keyframe offset'); if (offset < 0 || offset > 1) fail('keyframe offset must be within animation');
-      text(frame.transform, 'keyframe transform');
+      if (property === 'transform') text(frame.transform, 'keyframe transform');
+      else if (!/^(0(\.\d+)?|1(\.0+)?)$/u.test(text(frame.opacity, 'keyframe opacity'))) fail(`keyframe opacity must be within 0 and 1, got ${JSON.stringify(frame.opacity)}`);
     }
   }
 }

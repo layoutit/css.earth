@@ -7,6 +7,8 @@ interface WorldPreferencesTarget {
 
 export interface WorldPreferencesState {
   motionEnabled: boolean;
+  /** Pulsating stars play their light curves; separate from illustrative rotation and on by default. */
+  lightCurvesEnabled: boolean;
   heliosphereEnabled: boolean;
   illustrationModelsEnabled: boolean;
   surfaceLabelsEnabled: boolean;
@@ -25,13 +27,14 @@ export function createWorldPreferences({ getWorld, onMotionChange }: {
   onMotionChange(): void;
 }) {
   let state: Readonly<WorldPreferencesState> = Object.freeze({
-    motionEnabled: false, heliosphereEnabled: false, illustrationModelsEnabled: false,
+    motionEnabled: false, lightCurvesEnabled: true, heliosphereEnabled: false, illustrationModelsEnabled: false,
     surfaceLabelsEnabled: false, threeDStarsEnabled: false,
     highlightedClassification: null,
   });
   const listeners = new Set<(key: keyof WorldPreferencesState) => void>();
   const setters: { [K in keyof WorldPreferencesState]: (world: WorldPreferencesTarget, value: WorldPreferencesState[K]) => void } = {
     motionEnabled: () => {},
+    lightCurvesEnabled: () => {},
     heliosphereEnabled: (world, value) => world.setHeliosphereEnabled?.(value),
     illustrationModelsEnabled: (world, value) => world.setIllustrationModelsEnabled?.(value),
     surfaceLabelsEnabled: () => {},
@@ -44,7 +47,7 @@ export function createWorldPreferences({ getWorld, onMotionChange }: {
     const world = getWorld();
     if (world) setters[key](world, value);
     for (const listener of listeners) listener(key);
-    if (key === 'motionEnabled') onMotionChange();
+    if (key === 'motionEnabled' || key === 'lightCurvesEnabled') onMotionChange();
   }
   const subscribe: WorldPreferences['subscribe'] = listener => {
     listeners.add(listener);

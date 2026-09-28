@@ -42,7 +42,7 @@ export function createSceneSessions() {
 function createSceneSession({ objectId, url, request, onFailure, onCleanupError }: SessionOptions) {
   const lifetime = createSceneLifetime(), controller = new AbortController();
   let state: SceneSessionState = { kind: 'loading', activation: 'idle', mount: null };
-  let lastCommand: boolean | null = null;
+  let lastCommand: boolean | null = null, lastLightCurves: boolean | null = null;
   let preserveControls = false;
   let viewUrl: ReturnType<typeof bindViewUrl> | null = null;
   lifetime.onDispose(() => controller.abort());
@@ -85,7 +85,7 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
       if (!session.live) return false;
       requireSceneLifecycle(mount, objectId);
       state = { kind: 'loading', activation: 'mounting', mount };
-      session.play(false);
+      session.play(false, false);
       const result = await lifetime.wait(ready);
       if (result.cancelled || !session.live) return false;
       state = { kind: 'loading', activation: 'restoring', mount };
@@ -96,7 +96,7 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
       state = { kind: 'ready', mount: state.mount };
       return true;
     },
-    play(allowed: boolean) {
+    play(allowed: boolean, lightCurves: boolean) {
       const mount = session.mount;
       if (!mount) return session.live;
       const next = state.kind === 'ready' && allowed;
@@ -104,6 +104,13 @@ function createSceneSession({ objectId, url, request, onFailure, onCleanupError 
         if (next) mount.resume(); else mount.pause();
         if (!session.live) return false;
         lastCommand = next;
+      }
+      // Light curves have their own permission (Light curves setting); a mount without them ignores it.
+      const light = state.kind === 'ready' && lightCurves;
+      if (lastLightCurves !== light) {
+        mount.setLightCurves?.(light);
+        if (!session.live) return false;
+        lastLightCurves = light;
       }
       return true;
     },
