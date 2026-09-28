@@ -1,8 +1,7 @@
 import { handleFindRequest } from '../../site/server/find.mts';
-import { parseFeaturePin } from '../../site/search/feature-search.mts';
-import pin from '../../site/prepared-feature-index.json' with { type: 'json' };
+import { builtSearchData } from '../../site/server/search-data.mts';
+import { FEATURE_PIN } from '../../site/server/feature-pin.mts';
 
-const featurePin = parseFeaturePin(JSON.stringify(pin));
+const data = builtSearchData(FEATURE_PIN);
 
-export default (request: Request) => featurePin ? handleFindRequest(request, featurePin)
-  : new Response(JSON.stringify({ results: [] }), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+export default (request: Request) => handleFindRequest(request, data);

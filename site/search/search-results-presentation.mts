@@ -40,31 +40,7 @@ export function createSearchPresentation(documentTarget: Document) {
       }
       return selected;
     },
-    setEmptyHidden(hidden: boolean, loaded: boolean) { empty.hidden = hidden || !loaded; },
-  };
-}
-
-/** Catalogue fragments use the same retained chunks in native and live search. */
-export function createCatalogueRows(browser: HTMLElement) {
-  const items = [...browser.querySelectorAll<HTMLElement>('.object-item')];
-  const chunks = [...browser.querySelectorAll<HTMLElement>('.object-chunk')]
-    .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.object-item')] }));
-  return {
-    items, chunks,
-    order(ordered: readonly HTMLElement[]) {
-      for (const [index, chunk] of chunks.entries()) {
-        chunk.items = ordered.slice(index * 16, (index + 1) * 16);
-        requiredElement(chunk.node, '.object-chunk-list').append(...chunk.items);
-      }
-    },
-    refresh() {
-      for (const { node, items: rows } of chunks) {
-        const count = rows.filter(item => !item.hidden).length;
-        if (node.hidden !== (count === 0)) node.hidden = count === 0;
-        const height = `${Math.max(0, count * 28 - 8)}px`;
-        if (node.style.containIntrinsicBlockSize !== height) node.style.containIntrinsicBlockSize = height;
-      }
-    },
+    setEmptyHidden(hidden: boolean) { if (empty.hidden !== hidden) empty.hidden = hidden; },
   };
 }
 

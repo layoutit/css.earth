@@ -5,7 +5,8 @@ import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 import { sourceDocumentation } from '../source-documentation.mts';
 import type { CatalogueIndex } from './catalogue-index.mts';
 
-/** Prepared search transport. Runtime filters records and materializes only the visible rows. */
+/** Every object search can list. The build writes it once (`pages/catalogue/index.json.ts`); the find function reads
+ * that file, matches and orders it, and a browser receives only the rows it shows. */
 export function preparedCatalogueIndex(): CatalogueIndex {
   return Object.freeze({
     schema: 'cssearth-catalogue-index@1',

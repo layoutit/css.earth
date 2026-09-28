@@ -29,4 +29,16 @@ for (const [file, { bytes }] of Object.entries(result.metafile.outputs)) {
   if (typeof loaded !== 'object' || loaded === null || !('default' in loaded) || typeof loaded.default !== 'function')
     throw new Error(`${file}: the bundled Netlify function has no default export handler.`);
   console.log(`${file}: ${(bytes / 1e6).toFixed(2)} MB, loads`);
+  // The find function reads its catalogues from disk (netlify.toml `included_files`): answer one query here, so a missing
+  // or unreadable file fails the deploy instead of every search.
+  if (file.endsWith('/find.mjs')) {
+    const handler = loaded.default as (request: Request) => Promise<Response>;
+    const answer = await handler(new Request('https://deploy.invalid/.netlify/functions/find?object=earth&q=europa'));
+    const body: unknown = await answer.json();
+    const objects = typeof body === 'object' && body !== null && 'objects' in body ? body.objects : null;
+    const features = typeof body === 'object' && body !== null && 'features' in body ? body.features : null;
+    if (!answer.ok || typeof objects !== 'object' || objects === null || !('total' in objects) || !objects.total || !Array.isArray(features) || !features.length)
+      throw new Error(`${file}: a search for "europa" found no objects or features (HTTP ${answer.status}): ${JSON.stringify(body).slice(0, 300)}`);
+    console.log(`${file}: a search for "europa" answers ${String(objects.total)} objects and ${features.length} features`);
+  }
 }

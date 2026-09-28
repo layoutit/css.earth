@@ -6,13 +6,15 @@
   NODE_VERSION = "24"
 
 # The search function renders the selection card, whose modules read the world summary from disk at load
-# (site/world-context-plan.mts finds it under the project root, marked by pnpm-workspace.yaml). The bundled
-# function carries both files; without them every search request fails with "Could not find the project root".
+# (site/world-context-plan.mts finds it under the project root, marked by pnpm-workspace.yaml). Both functions search
+# the built object catalogue, the feature index and the places catalogues from disk (site/server/search-data.mts):
+# fetching them over HTTP made a new instance's first search take 3 to 4.5 s.
 [functions]
   # tools/cli/bundle-netlify-functions.mts writes one self-contained module per function here at the end of build:deploy;
   # Netlify's own tracing would leave the renderer's TypeScript subpaths external, which Node cannot load.
   directory = "netlify/functions-bundled"
-  included_files = ["pnpm-workspace.yaml", "src/objects/sun/prepared/world-context-summary.json"]
+  included_files = ["pnpm-workspace.yaml", "src/objects/sun/prepared/world-context-summary.json",
+    "dist/catalogue/index.json", "public/features/index.json", "public/scenes/*/*-places.json"]
 
 # This tiny router preserves optional view and category parameters. Search work
 # runs in a Node function; ordinary pages and scene assets stay on the CDN.

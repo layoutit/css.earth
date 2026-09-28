@@ -26,7 +26,6 @@ import { SOLAR_SYSTEM_ID, allPlanetarySystems, systemOfObject } from '../object-
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { temperatureColor } from '@cssearth/engine';
-import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 
 declare const __CSSEARTH_VERSION__: string;
@@ -245,7 +244,7 @@ const searchCategories = [
     >
       <ObjectResults activeObjectId={objectId}>
         <Accordion title="Named features" count={0} class="object-feature-results"
-          aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+          aria-label={features?.searchLabel ?? 'Named features'} hidden>
           <p class="object-feature-hint object-destination-hint" role="status"></p>
           <ul class="object-destination-list">
             {Array.from({ length: 8 }, () => <li hidden>
