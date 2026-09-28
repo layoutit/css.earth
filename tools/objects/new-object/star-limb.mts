@@ -31,16 +31,19 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
   const directory = resolve(root, 'src/objects', id, 'source/photometry');
   const names = (await readdir(directory).catch(() => [] as string[])).filter(name => name.endsWith('-limb-darkening.json'));
   for (const name of names) {
-    const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { schema?: string; law?: string; source?: string; band?: string; basis?: string; alpha?: { value: number }; u1?: { value: number }; u2?: { value: number } };
+    const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { schema?: string; law?: string; source?: string; band?: string; basis?: string; alpha?: { value: number }; u1?: { value: number }; u2?: { value: number }; fit?: { tool: string; input: string; data: string } };
     if (record.schema !== 'cssearth-published-limb-darkening@1') continue;
     const path = `photometry/${name}`, url = /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(record.source ?? '')?.[0] ?? '';
     const credit = (record.source ?? '').split(/,\s*(?=https?:|Table|Section)/u)[0]!.trim();
-    const law = record.law === 'power' ? `the power law I(mu) = mu^${record.alpha?.value} that ${credit} fit to the star's resolved disc (${record.band})`
+    // A law fitted in this package to a pinned input says so, and names the tool that refits it; any other record is a paper's.
+    const fit = record.fit;
+    const law = fit ? `the ${record.law === 'power' ? `power law I(mu) = mu^${record.alpha?.value}` : `quadratic law (u1 ${record.u1?.value}, u2 ${record.u2?.value})`} fitted in this package to ${fit.data} (${record.band})`
+      : record.law === 'power' ? `the power law I(mu) = mu^${record.alpha?.value} that ${credit} fit to the star's resolved disc (${record.band})`
       : `the quadratic law (u1 ${record.u1?.value}, u2 ${record.u2?.value}) ${credit} ${record.basis === 'model-prior' ? 'fixed from model atmospheres for this star' : 'fit to this star'} (${record.band})`;
     return { limbDarkening: { law: record.law === 'power' ? 'power' : 'quadratic', published: true, path }, sentence: `dimmed toward the limb by ${law}`, credit: `Limb darkening: ${credit}.`,
       inputs: [{ id: `${id}-${name.replace(/\.json$/u, '')}`, path, origin: url, credit, license: 'Factual numerical measurements; source attribution retained',
-        acquisition: 'Transcribed from the paper, each value with its quoted cell', redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['assets', 'lenses'],
-        sourceBinding: { kind: 'local', reason: 'Published limb-darkening law transcribed with its cells; repinned when edited.' } }] };
+        acquisition: fit ? `Fitted by ${fit.tool} to ${fit.input}` : 'Transcribed from the paper, each value with its quoted cell', redistribution: fit ? 'A fitted parameter with its method; no paper figures' : 'Factual parameter transcription only; no paper figures', consumers: ['assets', 'lenses'],
+        sourceBinding: { kind: 'local', reason: fit ? 'Limb-darkening law fitted in this package, with the refit that checks it; repinned when edited.' : 'Published limb-darkening law transcribed with its cells; repinned when edited.' } }] };
   }
   return null;
 }
@@ -74,7 +77,7 @@ function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, prog
   // The reader's summary is authored prose: it is not rewritten here, but a summary that still speaks of a uniform disc or of limb
   // darkening is named so it can be corrected by hand.
   const summary = String(read(`${o}/text.json`).datasets?.[surface.id]?.summary ?? '');
-  if (/\buniform\b|\blimb\b/iu.test(summary)) progress(`  ${id}: review ${o}/text.json datasets.${surface.id}.summary: "${summary}"`);
+  if (/\buniform\b|\blimb\b|\bdarkening\b/iu.test(summary)) progress(`  ${id}: review ${o}/text.json datasets.${surface.id}.summary: "${summary}"`);
   const manifest = read(`${s}/manifest.json`), inputs = limb.inputs ?? [];
   manifest.inputs = [...manifest.inputs.filter((entry: { path: string }) => !inputs.some(input => input.path === entry.path)), ...inputs];
   manifest.generatedIntermediates = (manifest.generatedIntermediates ?? []).map((entry: Record<string, any>) => entry.path !== 'presentation/context.png' ? entry

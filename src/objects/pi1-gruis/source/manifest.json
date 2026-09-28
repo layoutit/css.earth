@@ -244,11 +244,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "pi1-gruis-pionier-first-lobe-limb-darkening",
+      "path": "photometry/pionier-first-lobe-limb-darkening.json",
+      "origin": "https://doi.org/10.1038/nature25001",
+      "credit": "Paladini et al. (2018), Nature 553, 310, the calibrated VLTI/PIONIER visibilities they imaged from (https://doi.org/10.1038/nature25001)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Fitted by fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), checked by image-star.test.mts to observations/PI_GRU_forImage.fits",
+      "redistribution": "A fitted parameter with its method; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Limb-darkening law fitted in this package, with the refit that checks it; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "reconstruction-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://oidb.jmmc.fr/",
       "credit": "ESO/VLTI/PIONIER calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
@@ -259,7 +276,8 @@
       "recipe": {
         "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",
         "inputs": [
-          "pi1-gruis-pionier-2014-09"
+          "pi1-gruis-pionier-2014-09",
+          "pi1-gruis-pionier-first-lobe-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/pi1-gruis/author.mts",

@@ -118,7 +118,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a published law.",
         "thumbnail": "pi1-gruis-lens-color.webp",
         "surface": "pi1-gruis-surface-color@2x.webp",
         "poles": "pi1-gruis-poles-color@2x.webp",
@@ -128,7 +128,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The colour of Gaia DR3's measured spectrum of π¹ Gruis. At G = 3.6 the star is brighter than the G of about 5 below which Gaia XP photometry can saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE of 2.9 is high, so the blue end of this colour is uncertain. No resolved image of the surface is cast; the display axis is celestial north, a convention."
+        "notes": "The colour of Gaia DR3's measured spectrum of π¹ Gruis. At G = 3.6 the star is brighter than the G of about 5 below which Gaia XP photometry can saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE of 2.9 is high, so the blue end of this colour is uncertain. No resolved image of the surface is cast; the display axis is celestial north, a convention. The darkening toward the edge is the power law I(mu) = mu^1.29 fitted in this package to Paladini et al.'s (2018) calibrated VLTI/PIONIER visibilities, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band)."
       }
     ]
   },
