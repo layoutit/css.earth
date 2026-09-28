@@ -8,7 +8,7 @@ HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely ac
 
 **Colour.** A Planck spectrum at 31,138 K, because interstellar dust reddens every spectrum of this star: E(B-V) = 1.11 +/- 0.03 and A_V = 3.35 (Caballero-Nieves et al. 2009, as adopted by Orosz et al. 2011, ApJ 742, 84, section 3.2, https://arxiv.org/abs/1106.3689), which the colour routes do not remove, so a measured spectrum would show the dust's colour and not the star's, through the CIE 1931 2° observer: #a1bbff. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
-**Limb.** No limb darkening is drawn: at 31,138 K and log g 3.348 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3.348 is outside the grid 3.5, 4.; Claret (2017), A&A 600, A30 (PHOENIX): The limb-darkening grid is empty.).
+**Limb.** The disc is dimmed toward the limb by the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3.348 (u1 0.124, u2 0.330): a model, because no fit of this star's limb is used.
 
 **Black hole and orbit.** The black hole is the astronomy record [`cygnus-x-1`](../../../packages/astronomy/data/bodies/cygnus-x-1.json), drawn in this star's system with no page of its own. Its mass, 21.2 solar masses, is Miller-Jones et al. (2021), Table 1. Nothing measures its size, so the record keeps the unmeasured radius 0 and it is drawn as a point. The orbit is the relative orbit of the pair:
 
@@ -26,7 +26,7 @@ HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely ac
 
 ## Evidence
 
-[The rendered page](evidence/rendered-page.png) (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck colour, with no limb darkening (no model grid reaches its surface gravity).
+[The rendered page](evidence/rendered-page.png) (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck colour, dimmed toward the edge by the TLUSTY limb law.
 
 Generated 2026-09-27 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
@@ -34,6 +34,7 @@ Generated 2026-09-27 by [new-object.mts](../../../tools/objects/new-object.mts) 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** The star nearly fills its Roche lobe (filling factor 0.96, Miller-Jones et al. 2021, Table 1), so it is slightly egg-shaped; it is drawn as a sphere at its mean radius.
 - **Not shown.** The accretion disc and the radio jet of the black hole are not drawn.
 - **Not shown.** The black hole has no measured size and is drawn as a point on its orbit.

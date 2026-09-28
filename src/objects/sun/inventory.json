@@ -537,12 +537,6 @@
     },
     {
       "location": "prepared",
-      "filename": "system-views/m4-v69-a.json",
-      "bytes": 30415,
-      "sha256": "3776f2a9f2934b715de9717f390fa9dac3a98b5df135d94799701dc1133ff8f3"
-    },
-    {
-      "location": "prepared",
       "filename": "system-views/mars.json",
       "bytes": 34703,
       "sha256": "e6f94307495cc8a27dc886af061e403a804daebeb04afbaab98cf3f93fff7d0f"
@@ -736,14 +730,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 747496,
-      "sha256": "9fc0c30bf040dcb4dc0920f2310cc54879ecf620a5b46d4559677fa7ca43bef4"
+      "bytes": 742828,
+      "sha256": "020513b703d4eaf2e504988471190346ce966e21034add3fb4d2fffc2168afd2"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 9957293,
-      "sha256": "8a83a28dfd5be21d4f07792d8c164f924bb2ffc79959df6e2efe2696e8ccc678"
+      "bytes": 9893727,
+      "sha256": "366f1d7e623aede27b168f0f1c86080fb25ed7d181fb613b0481a5584c3e6359"
     },
     {
       "location": "prepared",
@@ -3192,12 +3186,6 @@
       "filename": "world-orbits/lyyli.bin",
       "bytes": 2872,
       "sha256": "b6f9fb81acc4e95b5e825893a39518c8c421698c6d2749ae72158ff7838c3083"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-orbits/m4-v69-b.bin",
-      "bytes": 2888,
-      "sha256": "fff2a90b6288b0241ba1748e26be51f380f580168812e0608d07a76d36d4260c"
     },
     {
       "location": "prepared",

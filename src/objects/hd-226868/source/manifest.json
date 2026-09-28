@@ -117,6 +117,32 @@
       }
     },
     {
+      "id": "hd-226868-reeve-2016-limb-darkening",
+      "path": "photometry/reeve-2016-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Reeve & Howarth (2016), MNRAS 456, 1294 (VizieR J/MNRAS/456/1294)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Bessell V coefficients of the whole grid (the nodes used are 30000..32500 K, log g 3.25..3.5), its model names rewritten into Teff and logg columns, solar metallicity.",
+      "redistribution": "Catalogue rows retained with their citation, each model name rewritten into its Teff and logg.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-226868-reeve-2016-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
       "id": "hd-226868-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
@@ -144,10 +170,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "uniform-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2102.09091",
-      "credit": "The colour lens as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -156,13 +182,14 @@
         "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
           "hd-226868-stellar-color",
+          "hd-226868-reeve-2016-limb-darkening",
           "hd-226868-preparation-raster"
         ]
       },
       "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],
