@@ -9,6 +9,8 @@
   "radiusSource": "Radius 88.6 +/- 4 solar radii from Groenewegen (2013), A&A 550, A70, table10, RY Sco: Baade-Wesselink mean radius (solar radii) 88.6 +/- 4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 61,639,020 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5000 +/- 221 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 142, Name='RY Sco', columns Teff, e_Teff (K): Teff 5000 +/- 221 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 5000,
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 142, Name='RY Sco', columns Teff, e_Teff (K): Teff 5000 +/- 221 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
+  "surfaceGravityLogg": 0.36,
+  "surfaceGravitySource": "log g 0.36 from 2024A&A...690A.246T, the median of its 2 spectra; the 11 published values span log g 0.1 to 1.5, across which the limb law changes by at most 1.9% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

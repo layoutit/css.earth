@@ -3,6 +3,7 @@
   "name": "ST Tau",
   "system": "ST Tau system",
   "description": "A Cepheid in the Milky Way that pulsates every 4.03 days; its mean radius is 39 solar radii.",
+  "order": 2012,
   "target": "ST Tau",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -48,6 +49,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 2012
+  ]
 }

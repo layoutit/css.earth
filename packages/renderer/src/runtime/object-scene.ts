@@ -31,6 +31,8 @@ export interface ObjectSceneLifecycle {
   readonly datasets?: ObjectDatasets;
   pause(): void;
   resume(): void;
+  /** Whether pulsating stars play their light curves; separate from pause and resume, which govern illustrative rotation. */
+  setLightCurves?(allowed: boolean): void;
   /** Replacement transfers the retained controls to the incoming scene; failure restores native fallback state. */
   destroy(options?: { preserveControls?: boolean }): void;
 }

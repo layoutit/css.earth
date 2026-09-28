@@ -7,6 +7,10 @@
  * and its light changes through the pulsation. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 
+/** The published gravities of classical Cepheids, which have no measured masses: the generator reads a Gaia DCEP's limb inside them when
+ * its own gravity is unpublished (generate.mts). Luck (2018), AJ 156, 171, table 3: its 1,128 spectra of 435 Cepheids give log g -1.33
+ * to 2.86 (counted from the VizieR table, 2026-09-28). */
+export const CEPHEID_GRAVITIES = { min: -1.33, max: 2.86, source: 'Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)', url: 'https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3' };
 export const CEPHEIDS = { source: 'J/A+A/550/A70/table10', paper: 'https://arxiv.org/abs/1212.5478', credit: 'Groenewegen (2013), A&A 550, A70' };
 const WHERE: Readonly<Record<string, string>> = { G: 'the Milky Way', L: 'the Large Magellanic Cloud', S: 'the Small Magellanic Cloud' };
 const COLUMNS = ['Loc', 'Name', 'E(B-V)', 'e_E(B-V)', 'Per', 'Dist', 'e.D', 'Rad', 'e.R'] as const;

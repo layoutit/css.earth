@@ -3,6 +3,7 @@
   "name": "XX Sgr",
   "system": "XX Sgr system",
   "description": "A Cepheid in the Milky Way that pulsates every 6.42 days; its mean radius is 45.8 solar radii.",
+  "order": 2031,
   "target": "XX Sgr",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -48,6 +49,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 2031
+  ]
 }

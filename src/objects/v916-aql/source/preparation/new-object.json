@@ -3,6 +3,7 @@
   "name": "V916 Aql",
   "system": "V916 Aql system",
   "description": "A Cepheid in the Milky Way that pulsates every 13.44 days; its mean radius is 90.7 solar radii.",
+  "order": 1935,
   "target": "V916 Aql",
   "gaia": "4313179507891570304",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1935
+  ]
 }

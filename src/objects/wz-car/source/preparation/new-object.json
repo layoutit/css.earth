@@ -3,6 +3,7 @@
   "name": "WZ Car",
   "system": "WZ Car system",
   "description": "A Cepheid in the Milky Way that pulsates every 23.02 days; its mean radius is 91.6 solar radii.",
+  "order": 1938,
   "target": "WZ Car",
   "gaia": "5338182833266967680",
   "paper": {
@@ -21,6 +22,11 @@
     "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 265, Name='WZ Car', columns Teff, e_Teff (K): Teff 5000 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
     "url": "https://arxiv.org/abs/2002.02186",
     "uncertainty": 153
+  },
+  "radialVelocity": {
+    "value": -15.1,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5338182833266967680 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
   },
   "distance": {
     "value": 3217.4,
@@ -49,11 +55,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "radialVelocity": {
-    "value": -15.1,
-    "source": "SIMBAD's radial velocity for Gaia DR3 5338182833266967680 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
-  },
-  "order": 1938
+  ]
 }

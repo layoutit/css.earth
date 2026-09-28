@@ -48,6 +48,12 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const limb = b.element('div', `${ns}-limb-layer object-render-root`, '', { 'aria-hidden': 'true' });
   limb.style.setProperty(`--${ns}-camera-zoom`, '1'); limb.style.scale = '1';
   b.append(null, corona, limb);
+  // A pulsating star dims under a black veil on the limb plate, the body's own silhouette at the plate's logical size:
+  // it covers the sphere and the rim without letting the sky behind show through, and animates opacity only.
+  const lightCurve = input.lightCurve, diameter = plan.camera.logicalBodyDiameter;
+  const veil = lightCurve ? b.element('div', `${ns}-light-veil`, `position:absolute;left:50%;top:50%;width:${diameter}px;height:${diameter}px;` +
+    `margin:${-diameter / 2}px 0 0 ${-diameter / 2}px;border-radius:50%;background:#000;opacity:${lightCurve.keyframes[0]!.opacity}`, { 'aria-hidden': 'true' }) : null;
+  if (veil) b.append(limb, veil);
   const { tree, index } = b.finish({ camera, scene });
   const targets = [body, body, corona, limb];
   // Every dataset gets a variant. One that names a companion cloud draws the plates of the surface it borrows, so the
@@ -74,5 +80,11 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
       ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
     animations: [],
+    ...(lightCurve && veil ? { motion: [
+      { target: index(veil), id: `${ns}-light-curve`, keyframes: lightCurve.keyframes.map(frame => ({ ...frame })), duration: lightCurve.durationMs, timings: [] },
+      // The off-limb light is the star's own and dims with it; a star with no plate publishes none and animates nothing there.
+      ...(entries.some(entry => entry.key.startsWith('corona:')) ? [{ target: index(corona), id: `${ns}-light-curve-corona`,
+        keyframes: lightCurve.keyframes.map(frame => ({ offset: frame.offset, opacity: (1 - Number(frame.opacity)).toFixed(4) })), duration: lightCurve.durationMs, timings: [] }] : []),
+    ] } : {}),
   };
 }

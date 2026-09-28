@@ -3,6 +3,7 @@
   "name": "KN Cen",
   "system": "KN Cen system",
   "description": "A Cepheid in the Milky Way that pulsates every 34.05 days; its mean radius is 171.6 solar radii.",
+  "order": 1932,
   "target": "KN Cen",
   "gaia": "5864135319959353600",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1932
+  ]
 }

@@ -7,3 +7,4 @@ export * from './normalization.ts';
 export * from './model-record.ts';
 export * from './limb.ts';
 export * from './halo.ts';
+export * from './light-curve.ts';

@@ -3,6 +3,7 @@
   "name": "TW Nor",
   "system": "TW Nor system",
   "description": "A Cepheid in the Milky Way that pulsates every 10.79 days; its mean radius is 73 solar radii.",
+  "order": 2025,
   "target": "TW Nor",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -20,6 +21,12 @@
     "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 183, Name='TW Nor', columns Teff, e_Teff (K): Teff 5000 +/- 204 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
     "url": "https://arxiv.org/abs/2002.02186",
     "uncertainty": 204
+  },
+  "radialVelocity": {
+    "value": -56.1,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5981406000300438016 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract",
+    "uncertainty": 0.2
   },
   "distance": {
     "value": 2293.8,
@@ -48,12 +55,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "radialVelocity": {
-    "value": -56.1,
-    "uncertainty": 0.2,
-    "source": "SIMBAD's radial velocity for Gaia DR3 5981406000300438016 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
-  },
-  "order": 2025
+  ]
 }

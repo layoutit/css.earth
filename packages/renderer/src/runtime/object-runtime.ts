@@ -223,6 +223,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       get datasets() { return live() ? datasets : undefined; },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
+      setLightCurves(allowed: boolean) { if (!lifetime.disposed) guarded(() => playback.setLightCurves(allowed)); },
       destroy(options: { preserveControls?: boolean } = {}) {
         preserveControls = options.preserveControls === true;
         resolveReady();

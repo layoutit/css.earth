@@ -3,6 +3,7 @@
   "name": "V495 Cyg",
   "system": "V495 Cyg system",
   "description": "A Cepheid in the Milky Way that pulsates every 6.72 days; its mean radius is 95.1 solar radii.",
+  "order": 1940,
   "target": "V495 Cyg",
   "gaia": "2055809495218465152",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1940
+  ]
 }

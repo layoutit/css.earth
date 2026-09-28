@@ -3,6 +3,7 @@
   "name": "U 1",
   "system": "U 1 system",
   "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 22.54 days; its mean radius is 113.2 solar radii.",
+  "order": 1977,
   "gaia": "4655402261473987968",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -51,6 +52,5 @@
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.",
     "SIMBAD does not resolve \"U 1\", the name Groenewegen (2013) gives it; it is placed by its Gaia DR3 source, OGLE-LMC-CEP-0079 in the OGLE catalogue."
-  ],
-  "order": 1977
+  ]
 }

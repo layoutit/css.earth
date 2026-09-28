@@ -169,6 +169,12 @@ const searchCategories = [
       </span>
     </label>
     <p id="object-motion-description" class="object-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
+    <label class="object-setting-control object-light-curves-setting-control">
+      <input class="object-light-curves-setting" type="checkbox" name="lightCurves" aria-describedby="object-light-curves-description" checked disabled />
+      <span class="object-setting-text">Light curves</span>
+      <span class="object-setting-switch" aria-hidden="true"></span>
+    </label>
+    <p id="object-light-curves-description" class="object-motion-description">Pulsating stars brighten and fade as measured, three days per second.</p>
     {speedSetting && <label class="object-setting-control object-speed-setting-control">
       <span class="object-setting-text">{speedSetting.label}</span>
       <input

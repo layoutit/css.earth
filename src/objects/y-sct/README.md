@@ -4,22 +4,27 @@
 
 Its mean radius, 71.1 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,770 parsecs away. It is also HIP 91366. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
 
-**Star.** Placement: Gaia DR3 source 4156450099578283776, distance 1,770 pc from Groenewegen (2013), A&A 550, A70, table10, Y Sct: Baade-Wesselink distance (pc) 1770 +/- 119.2 (Monte-Carlo); Gaia DR3's parallax, 0.518 ± 0.020 mas (25.5 standard errors), is not used. Radius 71.1 +/- 4.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, Y Sct: Baade-Wesselink mean radius (solar radii) 71.1 +/- 4.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,250 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 417, Name='Y Sct', columns Teff, e_Teff (K): Teff 5250 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic). No surface gravity is known.
+**Star.** Placement: Gaia DR3 source 4156450099578283776, distance 1,770 pc from Groenewegen (2013), A&A 550, A70, table10, Y Sct: Baade-Wesselink distance (pc) 1770 +/- 119.2 (Monte-Carlo); Gaia DR3's parallax, 0.518 ± 0.020 mas (25.5 standard errors), is not used. Radius 71.1 +/- 4.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, Y Sct: Baade-Wesselink mean radius (solar radii) 71.1 +/- 4.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,250 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 417, Name='Y Sct', columns Teff, e_Teff (K): Teff 5250 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 2.17 from 2011AJ....142..136L ("The distribution of the elements in the galactic disk. III. A  reconsideration of Cepheids from l = 30{deg} to 250{deg}.").
 
 **Colour.** A Planck spectrum at 5,250 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.757 +/- 0.012 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2° observer: #ffead9. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
-**Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited.
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,250 K and log g 2.17 (u1 0.556, u2 0.196): a model, because no fit of this star's limb is used. Gravity: log g 2.17 from 2011AJ....142..136L, the median of its 2 spectra; the 2 published values span log g 2.14 to 2.19, across which the limb law changes by at most 0.0% of the centre brightness.
+
+**Brightness.** Gaia DR3 fits the star's G-band light with 4 harmonics of a 10.34-day period (vari_cepheid, source 4156450099578283776; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 0.650 mag, so at minimum the star gives 55% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 3 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.98 of a cycle after maximum. It plays when Motion is on.
 
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
+- The bake reads Gaia's harmonics as published and holds them to the same row's peak-to-peak amplitude, epoch of maximum, R21 and phi21 ([light-curve.ts](../../../packages/bake/src/photometry/light-curve.ts)); on 2026-09-28 the model's maximum fell 0.0034 d from epoch_g (stated error 0.0010 d; 0.00033 of a period).
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
+- **Brightness.** The model is Gaia's 2014-2017 fit carried 425 cycles to the scene date; with the period's error the phase shown is known to 0.03 of a cycle, and period changes after 2017 are not included. The G band stands for all colours: the star's temperature and colour change through the cycle, and the page does not show that.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

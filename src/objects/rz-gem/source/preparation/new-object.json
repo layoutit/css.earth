@@ -3,6 +3,7 @@
   "name": "RZ Gem",
   "system": "RZ Gem system",
   "description": "A Cepheid in the Milky Way that pulsates every 5.53 days; its mean radius is 39.2 solar radii.",
+  "order": 2011,
   "target": "RZ Gem",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -20,6 +21,12 @@
     "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 145, Name='RZ Gem', columns Teff, e_Teff (K): Teff 5750 +/- 412 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
     "url": "https://arxiv.org/abs/2002.02186",
     "uncertainty": 412
+  },
+  "radialVelocity": {
+    "value": 6.5,
+    "source": "SIMBAD's radial velocity for Gaia DR3 3423693395726613504 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract",
+    "uncertainty": 2
   },
   "distance": {
     "value": 1990.3,
@@ -48,12 +55,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "radialVelocity": {
-    "value": 6.5,
-    "uncertainty": 2,
-    "source": "SIMBAD's radial velocity for Gaia DR3 3423693395726613504 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
-  },
-  "order": 2011
+  ]
 }
