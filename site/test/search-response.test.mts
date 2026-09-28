@@ -9,7 +9,7 @@ import { createFeatureBrowser } from '../feature-browser.mts';
 import { findObjects, handleFindRequest } from '../server/find.mts';
 import { readPublicFile, type SearchData } from '../server/search-data.mts';
 import { parseFindResponse } from '../search/find-protocol.mts';
-import type { CatalogueIndexEntry } from '../catalogue/catalogue-index.mts';
+import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 
 const origin = 'https://preview.example.test';
 const index = { schema: 'cssearth-prepared-feature-index@2',

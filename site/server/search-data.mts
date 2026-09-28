@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
 import type { FeatureIndexPin } from '../search/feature-search.mts';
-import { parseCatalogueIndex, type CatalogueIndexEntry } from '../catalogue/catalogue-index.mts';
+import { parseCatalogueIndex, type CatalogueIndexEntry } from '../search/catalogue-index.mts';
 
 /** Reads a prepared file by its site path. */
 export type ReadPrepared = (path: string) => Promise<unknown>;

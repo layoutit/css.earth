@@ -4,7 +4,7 @@ import type { FeatureIndex, FeatureIndexPin, IndexedFeature } from '../search/fe
 import { FIND_PAGE_ROWS, FIND_QUERY_LIMIT } from '../search/find-protocol.mts';
 import type { FindResponse, FindResult } from '../search/find-protocol.mts';
 import { searchObjects } from '../search/object-search.mts';
-import { catalogueRow, type CatalogueIndexEntry } from '../catalogue/catalogue-index.mts';
+import { catalogueRow, type CatalogueIndexEntry } from '../search/catalogue-index.mts';
 import { readPublicFile, type ReadPrepared, type SearchData } from './search-data.mts';
 
 /** The search function's side of search/find-protocol.mts. */

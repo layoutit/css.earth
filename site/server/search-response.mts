@@ -3,7 +3,7 @@ import { requiredElement } from '../browser/browser-types.mts';
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 import { findObjects, findResults } from './find.mts';
 import type { SearchData } from './search-data.mts';
-import { renderCatalogueRows } from '../catalogue/catalogue-window.mts';
+import { renderCatalogueRows } from '../search/catalogue-window.mts';
 import { renderDatasetResponse, UnreadableSavedView } from '../dataset-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';

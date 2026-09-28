@@ -3,8 +3,8 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import type { CatalogueRow } from '../catalogue/catalogue-index.mts';
-import { createCatalogueWindow } from '../catalogue/catalogue-window.mts';
+import type { CatalogueRow } from '../search/catalogue-index.mts';
+import { createCatalogueWindow } from '../search/catalogue-window.mts';
 
 const entry = (index: number): CatalogueRow => ({
   kind: 'scene', id: `earth-${index}`, name: `Earth ${index}`,

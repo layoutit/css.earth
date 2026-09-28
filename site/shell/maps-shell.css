@@ -460,7 +460,7 @@
 [data-search-results] #object-category-results .object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
 [data-search-results] #object-category-results .object-distance { color: var(--shell-text-secondary); }
 /* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
-   positions rows on a 56 px pitch (48 px row, 8 px gap; `site/catalogue/catalogue-window.mts`). */
+   positions rows on a 56 px pitch (48 px row, 8 px gap; `site/search/catalogue-window.mts`). */
 #object-category-results .object-observation-control.object-thumbnail-leading,
 #object-category-results .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
   grid-template-columns: 40px minmax(0, 1fr);

@@ -3,7 +3,7 @@ import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import type { CatalogueIndexEntry } from '../catalogue/catalogue-index.mts';
+import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 import { createDestinationBrowser } from '../destination-browser.mts';
 import { createFeatureBrowser } from '../feature-browser.mts';
 import { selectSceneFeature } from '../scene/scene-feature.mts';

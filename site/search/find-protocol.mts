@@ -1,6 +1,6 @@
 import type { PreparedDestination } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import { isRecord } from '@cssearth/core';
-import { parseCatalogueRow, type CatalogueRow } from '../catalogue/catalogue-index.mts';
+import { parseCatalogueRow, type CatalogueRow } from './catalogue-index.mts';
 
 /** Search objects and named features, cities included, on the server. The browser sends its query and receives the rows
  * to show: it never downloads the object catalogue (2.3 MB), the cross-body feature index (3.3 MB) or a body's places

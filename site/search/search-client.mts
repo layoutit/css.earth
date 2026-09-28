@@ -3,7 +3,7 @@ import type { BrowserWindow } from '../browser/browser-types.mts';
 import { requiredElement } from '../browser/browser-types.mts';
 import { nextFrame } from '../next-frame.mts';
 import { sourceDocuments, type SourceDocumentReference } from '../source-link.mts';
-import { createCatalogueWindow, type CatalogueSelection } from '../catalogue/catalogue-window.mts';
+import { createCatalogueWindow, type CatalogueSelection } from './catalogue-window.mts';
 import { FIND_PAGE_ROWS, FIND_PATH, parseFindResponse, type FindResponse } from './find-protocol.mts';
 
 /** What a settled search found; `features` is null when feature names could not load. */

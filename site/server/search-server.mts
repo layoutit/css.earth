@@ -7,7 +7,7 @@ import { handleFindRequest } from './find.mts';
 import { FIND_PATH } from '../search/find-protocol.mts';
 import { parseFeaturePin } from '../search/feature-search.mts';
 import { builtSearchData, readPublicFile, type SearchData } from './search-data.mts';
-import type { CatalogueIndexEntry } from '../catalogue/catalogue-index.mts';
+import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 
 /** Exercise Netlify's exact routing and handlers in Astro dev and static preview. Dev has no built catalogue, so it
  * computes the one the build would write, under Vite; a static preview reads the built file like the deploy. */
@@ -30,7 +30,7 @@ export function searchServer(): Plugin {
     pin: await readPin(),
     read: readPublicFile,
     async catalogue() {
-      const module = await server.ssrLoadModule('/site/catalogue/prepared-catalogue-index.mts') as { PREPARED_CATALOGUE_INDEX: { entries: readonly CatalogueIndexEntry[] } };
+      const module = await server.ssrLoadModule('/site/search/prepared-catalogue-index.mts') as { PREPARED_CATALOGUE_INDEX: { entries: readonly CatalogueIndexEntry[] } };
       return module.PREPARED_CATALOGUE_INDEX.entries;
     },
   });
