@@ -1,3 +1,4 @@
+import { prepareStartupBillboard } from '../startup-billboard.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
@@ -84,6 +85,7 @@ export function createSceneRouter({
   });
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
+  const initialBillboard = documentTarget.querySelector<HTMLImageElement>('img[data-startup-billboard]');
   let destroyed = false;
   // Whether a link flies in place; set once the router's modules have loaded (`ensureContext`).
   let navigable = (_id: string) => false;
@@ -135,7 +137,7 @@ export function createSceneRouter({
   const publication = createScenePublication({ stage, documentTarget, windowTarget,
     read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: subject(), motionEnabled: preferences.state.motionEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
-      hasPresented: hasPresented || initialScene?.available === true }),
+      hasPresented: hasPresented || initialScene?.available === true || initialBillboard?.isConnected === true }),
     getShell: () => shellOwner?.shell ?? null, getWorld: () => world.current,
   });
 
@@ -181,7 +183,8 @@ export function createSceneRouter({
 
   async function mountApplication(replacement?: SceneReplacement): Promise<boolean | undefined> {
     if (destroyed || scenes.current) return;
-    const request = replacement?.request, handoff = replacement?.handoff;
+    const request = replacement?.request;
+    let handoff = replacement?.handoff;
     const session = scenes.start({ objectId, request, url: request?.url ?? windowTarget.location?.href,
       onFailure: fail, onCleanupError: report });
     try {
@@ -190,8 +193,8 @@ export function createSceneRouter({
         if (!scenes.isCurrent(session)) return;
         preferences.set('motionEnabled', next);
       };
-      // A plain cold page mounts its body before it downloads the registry, then attaches the shell. Any other arrival
-      // (a navigation, a focus or overview link, a restored page) needs the registry and the shell first.
+      // A plain cold page can present its prepared cover before downloading the
+      // registry. Every path still prepares the world before mounting detail.
       const bodyFirst = !context && !replacement && !worldOwnsArrival();
       let ready = replacement?.context;
       if (!bodyFirst) {
@@ -215,12 +218,28 @@ export function createSceneRouter({
           if (contextual.cancelled || !scenes.isCurrent(session)) return;
         }
       }
+      const viewport = world.viewport;
+      const factory = await (replacement?.factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal));
+      if (!scenes.isCurrent(session)) return;
+      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? windowTarget.location.href, session.signal) : null;
+      handoff ??= startup ?? undefined;
+      publication.publish();
+      if (!scenes.isCurrent(session)) return;
+      // Every initial URL prepares its world before detail, including restored
+      // cameras that cannot use the default arrival photograph. Attaching world
+      // styles and layers afterward invalidates the already-presented surface.
+      if (!replacement) {
+        const loaded = await session.wait(ensureContext());
+        if (loaded.cancelled || !scenes.isCurrent(session)) return;
+        ready = loaded.value;
+        if (!session.shell) attachShell(session, ready);
+        const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemView(objectId)]));
+        if (contextual.cancelled || !scenes.isCurrent(session)) return;
+      }
       const framePresenter = world.createFramePresenter();
       session.framePresenter = framePresenter;
       session.own(() => framePresenter.destroy());
-      const viewport = world.viewport;
-      if (!await session.activate(replacement?.factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal), stage, {
-        deferTextureRefinement: true,
+      if (!await session.activate(factory, stage, {
         viewport,
         framePresenter,
         cameraMotion,
@@ -268,6 +287,7 @@ export function createSceneRouter({
         }));
       }
       hasPresented = true;
+      documentTarget.querySelector('.startup-loading')?.remove();
       initialScene?.commit();
       finishArrival(ready, session, request, interrupted);
       if (!request && arrival.feature) return navigate(objectId, { kind: 'feature', id: arrival.feature });
@@ -596,6 +616,7 @@ export function createSceneRouter({
   function fail(session: Session, error: unknown) {
     if (!scenes.isCurrent(session)) return;
     delete documentTarget.documentElement.dataset.bodyPending;
+    documentTarget.querySelector('.startup-loading')?.remove();
     if (session.request) requests.finish(session.request, 'failed');
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
     catch (failure) { report(failure); }

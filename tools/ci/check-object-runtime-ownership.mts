@@ -497,7 +497,8 @@ function requireApplicationWorldContextSource(mountSource: string, resourceSourc
     mount.calls('prepareObjectResources').length !== 1 || calls('prepareObjectResources').length !== 0) fail();
   const required = ['createPreparedUniverse', 'loadPreparedCssVolume', 'loadPreparedPointAppearance', 'loadPreparedCssSurfaceShell'];
   if (!context || !required.every(name => importsFactory(name, renderer) && calls(name).length === 1 && mount.calls(name).length === 0) ||
-    !importsFactory('PREPARED_NAVIGATION_MARKERS', './prepared-navigation-markers.mjs')) fail();
+    !importsFactory('preparedBodyBillboards', '@cssearth/renderer/navigation/prepared-body-billboards.ts') || calls('preparedBodyBillboards').length !== 1) fail();
+  if ([...imports.values()].some(binding => binding.source === './prepared-navigation-markers.mjs')) fail();
   // Bodies share src/objects, so descriptors and asset URLs come from the generated module that globs each context object by name.
   const initializers = nodes.flatMap(node => node.type === 'VariableDeclarator' && node.init?.type === 'Identifier' ? [node.init.name] : []);
   const generated = (name: string) => initializers.some(local => imports.get(local)?.name === name && imports.get(local)?.source === './prepared-context-objects.mts');
@@ -534,7 +535,7 @@ function requireApplicationWorldContextSource(mountSource: string, resourceSourc
 
 /** The generated module names each context object; each must reach its descriptor and prepared assets, binary banks included. */
 function requireContextObjectModuleSource(source: string, contexts: readonly { id: string; type: string }[]) {
-  function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
+  function fail(): never { throw new TypeError('Generated context object module does not match the current prepared context inventory.'); }
   const globs = new Map<string, unknown[]>();
   const records = new Map<string, ObjectExpression>();
   for (const statement of parseRuntimeSource(source, "source.mts").body) {

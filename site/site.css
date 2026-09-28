@@ -156,3 +156,9 @@ html[data-embed] .object-ui-layer { display: none !important; }
   color: var(--shell-text);
   background: var(--shell-selection);
 }
+
+/* One retained, compositor-driven indicator; no percentage or inherited variable writes. */
+.startup-loading { position: fixed; z-index: 20; top: 0; left: 0; width: 100%; height: 2px; overflow: hidden; pointer-events: none; }
+.startup-loading > span { display: block; width: 20%; height: 100%; background: #aab6c2; opacity: .55; animation: startup-loading 1.4s linear infinite; }
+@keyframes startup-loading { from { transform: translateX(-100%); } to { transform: translateX(500%); } }
+@media (prefers-reduced-motion: reduce) { .startup-loading > span { animation: none; width: 100%; opacity: .25; } }

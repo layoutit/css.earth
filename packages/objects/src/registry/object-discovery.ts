@@ -39,11 +39,17 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     /** Objects the default view features (prepared: dwarf planets, featured discoveries, JPL mission-target asteroids). */
     defaultFeatures: ReadonlySet<string>;
     /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
-    compact?: boolean }) {
+    compact?: boolean;
+    /** Bodies of a system: each body that orbits another, and each body something orbits. */
+    systemMembers?: ReadonlySet<string> }) {
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
     const illustration = object.discovery.illustration;
-    const featured = (!illustration || options.illustrations) && (options.defaultFeatures.has(object.id) || isDiscoveryAnchor(object));
+    // A star is named where there is more to find: a notable star (featured: an IAU proper name, or real imagery), or a star
+    // of a system, with something orbiting it or orbiting something itself. Every other star is a dot that names itself on
+    // hover, so the names on the map point to where there is more to click.
+    const namedStar = object.classification !== 'star' || object.discovery.featured || options.systemMembers?.has(object.id) === true;
+    const featured = (!illustration || options.illustrations) && (options.defaultFeatures.has(object.id) || isDiscoveryAnchor(object) && namedStar);
     // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
     // that a body with imagery orbits stays on it: without the star the planet has no system. So does a star whose colour comes from
     // its own measurements.

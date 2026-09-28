@@ -6,6 +6,7 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
+import { mountLensBillboards } from './lens-billboards.js';
 import type { PreparedCatalogBank, PreparedImageLayerBank, PreparedUniverseOptions } from './prepared-universe-types.js';
 
 interface ImageBank {
@@ -15,11 +16,15 @@ interface ImageBank {
   mounted: ReturnType<typeof mountPreparedCssImageLayers> | null;
   loading: Promise<void> | null;
   publishedOpacity: number;
+  /** Its leaf in the billboard layer, and whether that billboard fades with the Milky Way; -1 without a billboard. */
+  billboardIndex: number;
+  billboardRadiusUnits: number;
+  independent: boolean;
 }
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication }: {
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerBank>;
@@ -30,12 +35,27 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
   onSelect?: (object: PreparedCatalogObject) => void;
   requestPublication?: () => boolean;
+  /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
+  billboards?: PreparedUniverseOptions['lensBillboards'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
-  const images: ImageBank[] = declarations.map(bank => ({ ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame),
-    mounted: null, loading: null, publishedOpacity: NaN }));
+  let billboardCount = 0;
+  const images: ImageBank[] = declarations.map(bank => {
+    const facts = prepared?.plan.banks.get(bank.id);
+    return { ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, loading: null, publishedOpacity: NaN,
+      billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
+      independent: facts?.contextVisibility === 'independent' };
+  });
   const byId = new Map(images.map(bank => [bank.id, bank]));
+  const billboardEntries = images.flatMap(bank => {
+    const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
+    return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
+  });
+  // Mounted with the bank declarations, after the opaque galaxy backdrop: the atlas itself loads when one first shows.
+  const billboards = billboardEntries.length ? mountLensBillboards({ host: root, before: end, atlasUrl: prepared!.atlasUrl,
+    atlas: prepared!.plan.atlas, entries: billboardEntries }) : null;
+  if (billboards) lifetime.onDispose(() => billboards.destroy());
   lifetime.onDispose(() => {
     const mounted = catalog;
     catalog = null;
@@ -63,6 +83,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     catalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: bank.payload, galaxySample: bank.galaxySample,
       clusters: bank.clusters?.payload, nebulae: bank.nebulae,
       renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(lens => lens.id)]),
+      billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
       nebulaFrames: new Map(volumeDeclarations.map(lens => [lens.id, lens.frame])), onSelect, pickingHost: stage });
     publishResidency();
   }
@@ -112,12 +133,20 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       const bank = byId.get(id);
       return bank ? createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank)) : null;
     },
+    /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
+    setCoasting(active: boolean) { billboards?.setCoasting(active); },
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string) {
       if (lifetime.disposed) return;
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it.
         const presentationOpacity = bank.id === detailedObjectId ? 1 : 0;
         const opacity = presentationOpacity * volumeOpacity * projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits);
+        // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
+        if (billboards && bank.billboardIndex >= 0) {
+          const context = bank.independent ? 1 : volumeOpacity;
+          const handoff = bank.mounted ? Math.min(1, opacity / Math.max(context, Number.MIN_VALUE)) : 0;
+          billboards.publish(bank.billboardIndex, context * projectedVolumeOpacity(world, viewport, bank.frame, bank.billboardRadiusUnits) * (1 - handoff), world, viewport);
+        }
         if (!bank.mounted) {
           if (opacity > 0) void ensureImage(bank).catch(() => {});
           continue;

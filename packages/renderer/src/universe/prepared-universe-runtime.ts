@@ -14,7 +14,8 @@ import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
-import { detailedFocusContextOpacity } from './detailed-focus-context.js';
+import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
@@ -135,17 +136,18 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         frontRoot.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${depthBase + 1}`;
         presentationHost.appendChild(frontRoot);
         const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
-        const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock));
+        const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock, requestPublication));
         const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
+        // The galaxy backdrop is opaque black: it mounts first, so the lens banks' billboards, which mount at once, paint over it.
+        const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
+          prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM });
         const lenses = createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: volumeLensBanks, facts: lensFacts, frame: plan.frame, visibility: lensVisibility,
           billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication });
-        const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
-          prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM });
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeLensBanks,
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;
@@ -156,8 +158,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The caption sits below the selected body's longest reach, which an elongated shape model extends past its radius.
         let captionBody: typeof selected = selected;
         let previewCaption: typeof selected | null = null;
+        let selectedEdge: PreparedLabelEdge | undefined, previewEdge: PreparedLabelEdge | undefined;
         const caption = () => previewCaption ?? captionBody;
-        const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: detailedFocus !== null, preview: selectionPreview });
+        const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: detailedFocus !== null, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
         let publishedScale = '';
         background.mount();
@@ -219,12 +222,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             const rect = selectedLabel.rect(world, viewport, caption(), captionFlags());
             return spatial.captureFrame(world, viewport, rect ? [rect] : []);
           },
-          previewSelection(id?: string | null, framingScale?: number) {
+          previewSelection(id?: string | null, framingScale?: number, edge?: PreparedLabelEdge) {
             if (framingScale !== undefined && !(framingScale > 0 && framingScale <= 1)) throw new TypeError('Invalid preview framing scale.');
             const body = id ? [plan.focus, ...plan.bodies].find(body => body.id === id) : undefined;
             previewCaption = body ? framingScale === undefined && id === selected.id ? captionBody
               : { ...body, radiusM: body.radiusM / (framingScale ?? 1) } : null;
             selectionPreview = id;
+            previewEdge = edge ?? (id === selected.id ? selectedEdge : undefined);
             selectedLabel.prepare(caption());
             publishSuppressedLabels();
             spatial.previewSelection(id);
@@ -240,7 +244,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           /** Label suppression follows the selection here; callers set the other flags. */
           setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },
-          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); lenses.setCoasting(active); },
+          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); lenses.setCoasting(active); catalogBanks.setCoasting(active); },
           setLabelBlockers(rects: readonly LabelScreenRect[]) { labelBlockers = rects; spatial.setLabelBlockers(rects); },
           labelBudget() { return labelBudget; },
           inspect() {
@@ -248,7 +252,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               foregroundLabelExclusions: [...spatial.backgroundExclusionRects(), ...environmentLabels.labelExclusionRects()] });
           },
           /** `framingScale` (below 1 for an elongated shape model) sets the caption below the body's longest reach. */
-          selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale = 1) {
+          selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale = 1, edge?: PreparedLabelEdge) {
             const body = [plan.focus, ...plan.bodies].find(body => body.id === id);
             if (!body || frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt ||
                 frame.bodyRadiusM !== body.radiusM || !body.positionM.every((value, axis) => Math.abs(value - frame.originM[axis]) < .001)) {
@@ -256,6 +260,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             if (!(framingScale > 0 && framingScale <= 1)) throw new TypeError(`Selected ${id} has an invalid framing scale ${framingScale}.`);
             selected = body;
+            selectedEdge = edge;
             captionBody = framingScale === 1 ? body : Object.freeze({ ...body, radiusM: body.radiusM / framingScale });
             selectedLabel.prepare(caption());
             spatial.selectObject(id);
@@ -272,7 +277,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
-              lenses.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId);
+              lenses.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
+                selectedBodyContextOpacity(world, viewport, captionBody));
               for (const [index, shell] of shellLayers.entries()) {
                 shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
               }

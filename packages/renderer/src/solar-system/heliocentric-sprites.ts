@@ -1,8 +1,8 @@
 export interface Sprite {url?:string;index:number;count:number;size:number;}
 export interface SpriteImage {url:string;index:number;count:number;}
-/** `detail` is a larger prepared image of the same marker, drawn from `fromDiameterPixels`. */
+/** Image extent relative to the projected physical body, including prepared rings and margins. */
 export interface SpriteWithUrl extends Sprite {url:string; minimumDiameterPixels?: number;
-  detail?: SpriteImage & {fromDiameterPixels:number};}
+  imageScale?: number;}
 
 /** Readable core for an unresolved body that remains a navigation target. */
 export const MINIMUM_BODY_MARKER_DIAMETER_PIXELS = 2.4;

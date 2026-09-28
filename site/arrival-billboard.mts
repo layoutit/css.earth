@@ -1,6 +1,7 @@
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PreparedArrivalView } from '@cssearth/objects';
+import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { VisibleRect } from '@cssearth/renderer/solar-system/types.ts';
 
 type BillboardViewport = WorldCameraViewport & { readonly visibleRect: VisibleRect | null };
@@ -34,12 +35,12 @@ export function canUseArrivalBillboard(arrival: PreparedArrivalView | undefined,
 /** A retained image survives the detailed scene replacement. Its projection follows
  * the same acknowledged world camera; only transform and opacity change in flight. */
 export async function prepareArrivalBillboard(stage: HTMLElement, arrival: PreparedArrivalView,
-  frame: PreparedWorldCameraFrame, signal: AbortSignal) {
+  frame: PreparedWorldCameraFrame, signal: AbortSignal, existing?: HTMLImageElement) {
   const asset = arrival.billboard;
   if (!asset) throw new Error('Arrival billboard is not prepared.');
   const document = stage.ownerDocument, window = document.defaultView;
   if (!window) throw new Error('Arrival billboard requires a window.');
-  const image = document.createElement('img');
+  const image = existing ?? document.createElement('img');
   image.alt = ''; image.setAttribute('aria-hidden', 'true'); image.draggable = false;
   image.dataset.arrivalBillboard = 'flight';
   Object.assign(image.style, { position: 'absolute', left: '50%', top: '50%', width: `${asset.size}px`,
@@ -56,7 +57,7 @@ export async function prepareArrivalBillboard(stage: HTMLElement, arrival: Prepa
   function cancel() { destroy(); }
   signal.addEventListener('abort', cancel, { once: true });
   if (signal.aborted) { destroy(); throw aborted(); }
-  image.src = asset.url;
+  if (!existing) image.src = asset.url;
   try {
     await new Promise<void>((resolve, reject) => {
       rejectPending = reject;
@@ -73,8 +74,7 @@ export async function prepareArrivalBillboard(stage: HTMLElement, arrival: Prepa
       if (!center || !projection.silhouette || depthM <= 0) { image.style.opacity = '0'; return; }
       // Use the same projected silhouette as the mesh. Scaling only by centre depth
       // underestimates its size as the camera approaches the near surface.
-      const preparedRadius = asset.focalPixels * frame.bodyRadiusM /
-        Math.sqrt(asset.distanceM ** 2 - frame.bodyRadiusM ** 2);
+      const preparedRadius = billboardBodyRadiusPixels(asset, frame.bodyRadiusM);
       const scale = projection.silhouette.tangentialSemiAxis / preparedRadius;
       // Navigation optics are relative to the detail camera root. The root can
       // sit above the stage centre to clear shell chrome; this sibling image

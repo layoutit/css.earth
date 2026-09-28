@@ -11,7 +11,7 @@ import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
@@ -447,7 +447,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // The destination stays named through the whole flight, across its preview fade.
         // A planet of the framed system keeps its name whatever its orbit measures on screen. The extent fade is for bodies
         // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
-        const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
+        // Past the Local Group scale the galaxies are named, not the stars inside them: a name fades with the body's distance
+        // from the camera over the band where the overview becomes the Local Group.
+        const galactic = 1 - logarithmicFade(Math.hypot(...frame.eye(body)), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
+        const alpha = flightDestination ? 1 : referenceAnnotationOnly ? galactic : targeted ? markerOpacity : Math.min(markerOpacity, galactic, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
@@ -517,10 +520,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
       // The system the camera is in is named before the field behind it: a star thousands of parsecs beyond the Sun must not
-      // take the caption of a body orbiting it. A hovered or selected body keeps its place in the first pass.
+      // take the caption of a body orbiting it. Its planets, dwarf planets and moons come first, then the notable bodies
+      // beyond it (a star named there is one with more to find), then the comets and asteroids orbiting its star, then the
+      // rest of the field. A hovered or selected body keeps its place in the first pass.
       const ownSystem = (candidate: typeof candidates[number]) => candidate.pinned > 0 || systemFade.inShownSystem(candidate.projected.entry.index);
-      const accepted = [...acceptedLandmarks, ...admitStableLabels(otherCandidates.filter(ownSystem), labelBudget),
-        ...admitStableLabels(otherCandidates.filter(candidate => !ownSystem(candidate)), labelBudget)];
+      const moon = (candidate: typeof candidates[number]) => { const parent = candidate.projected.entry.parent; return parent !== null && !systemFade.isSystemStar(parent.id); };
+      const major = (candidate: typeof candidates[number]) => candidate.pinned > 0 || (ownSystem(candidate) ? moon(candidate) || (candidate.tier ?? 0) >= 2 : (candidate.tier ?? 0) >= 3);
+      const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
+        (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
+      const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget))];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {

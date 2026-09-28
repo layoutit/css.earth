@@ -105,7 +105,7 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     connectedSession = session;
     session.own(() => { if (connectedSession === session) connectedSession = null; });
     session.framePresenter?.attach?.(world);
-    world.selectObject?.(session.objectId, navigation.frame, navigation.framingScale);
+    world.selectObject?.(session.objectId, navigation.frame, navigation.framingScale, navigation.labelEdge);
     const disconnectFocus = world.connectNavigation?.(navigation, {
       readFocus,
       onFocusChange(publication) { if (isCurrent(session)) onFocusChange(session, publication); },

@@ -1,4 +1,5 @@
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
+import { createPreparedArrival } from './prepared-arrival.mts';
 import { canUseArrivalBillboard, frameArrivalBillboard, prepareArrivalBillboard } from './arrival-billboard.mts';
 import type { ObjectEntry } from './objects.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser/browser-types.mts';
@@ -28,7 +29,7 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, localGroupZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
@@ -93,11 +94,12 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!from || !optics) return null;
-      if (scope === 'local-group' || scope === 'nearby-universe') {
+      if (scope === 'local-group') return localGroupZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
+      if (scope === 'nearby-universe') {
         const frame = frames.get(objectId);
         if (!frame) return null;
         const projection = presentWorldCamera(from, frame, optics);
-        const distanceM = (scope === 'local-group' ? 1e6 : 1e8) * 3.085677581491367e16;
+        const distanceM = 1e8 * 3.085677581491367e16;
         return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
           distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
       }
@@ -245,7 +247,8 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       } } : null);
       const approachLimitS = billboard ? flight.durationS : departureOwner && !reducedMotion
         ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
-      const ownership = createPreparedSceneOwnership(signal);
+      const ownership = createPreparedArrival(signal, billboard, () => { if (billboard) timing.mark('billboard-removed'); },
+        stage?.ownerDocument.querySelector<HTMLElement>('.object-input-surface'));
       type Publisher =
         | { kind: 'departure'; held: boolean }
         | { kind: 'mounting'; owner: ObjectWorldNavigation | null }
@@ -292,7 +295,6 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         },
       });
       const activationSignal = AbortSignal.any([running.signal, activation.signal]);
-      running.signal.addEventListener('abort', () => billboard?.destroy(), { once: true });
       const interrupted = running.finished.then(() => {
         if (publisher.kind === 'departure') ownership.dispose();
         throw cancellationReason(running.signal);
@@ -302,12 +304,8 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       });
       void interrupted.catch(() => {});
       const wait = <T,>(task: Promise<T>): Promise<T> => Promise.race([task, interrupted]);
-      const preparation = Promise.resolve(toFactory).then(factory => {
-        if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
-        return factory.navigation.prepare({ signal: ownership.signal, cameraViewport,
-          getView: () => ({ world: billboard ? target : drawn, viewport: optics }) });
-      }).then(value => {
-        ownership.own(value);
+      const preparation = ownership.prepare(toFactory, { cameraViewport,
+        getView: () => ({ world: billboard ? target : drawn, viewport: optics }) }).then(value => {
         if (running.signal.aborted) { ownership.dispose(); throw cancellationReason(running.signal); }
         bankReady = true;
         return value;
@@ -318,63 +316,36 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         // This holds the existing flight; no segment or replacement clock starts.
         await wait(preparedLease.prepareView(() => ({ world: drawn, viewport: optics })));
         timing.mark('assets-ready');
-        billboard?.mounting();
         publisher = { kind: 'mounting', owner: null };
         // The destination retains its handoff callbacks. Keeping the departed
         // owner here chains every retired camera/scene into the current mount.
         // Once mounting starts, only the shared world and destination may publish.
         source = undefined;
         departureOwner = null;
-        const initialWorldCamera = drawn;
         const progressive = Boolean(presentWorld && !reducedMotion && !billboard);
         if (progressive) running.resume();
-        return {
-          transferTo: ownership.transferTo,
-          mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree,
-            initialWorldCamera, initialProjection: preparedLease.projection({ world: initialWorldCamera, viewport: optics }),
-            arrivingByFlight: true,
-            // Connect prepared leaf batches under the stationary opaque image.
-            // Readiness includes every batch and the final first-paint gate.
-            ...(billboard ? { progressiveActivation: true } : {}),
-            ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
-              if (running.signal.aborted || publisher.kind !== 'mounting') return;
-              publisher.owner = owner; void owner.apply(drawn, { signal: running.signal });
-            } } : {}) },
-          async afterMount(mount: ObjectSceneLifecycle) {
-            try {
-              if (running.signal.aborted) throw cancellationReason(running.signal);
-              if (!mount.navigation) throw new Error('The destination camera is unavailable.');
-              timing.mark('mounted');
-              const incomingOwner = mount.navigation;
-              publisher = { kind: 'destination', owner: incomingOwner };
-              activation.abort();
-              const publication = incomingOwner.apply(drawn, { signal: running.signal });
-              if (billboard) {
-                if (publication && !(await publication)) throw cancellationReason(running.signal);
-                billboard.publish(drawn, incomingOwner.optics());
-                // Scene activation already awaited decoded selection, complete
-                // attachment and a rendering opportunity. This publication
-                // acknowledges the same final camera before its cover is removed.
-                billboard.destroy();
-                timing.mark('billboard-removed');
-              }
-              if (reducedMotion) {
-                if (publication && !(await publication)) throw cancellationReason(running.signal);
-                running.complete();
-              } else running.resume();
-              if (!(await running.finished).completed) throw cancellationReason(running.signal);
-              lastCamera = incomingOwner.capture(); lastOptics = incomingOwner.optics();
-            } catch (error) { running.cancel(error); throw error; }
-            finally {
-              billboard?.destroy();
-              const reason: unknown = running.signal.reason;
-              mount.features?.setNavigationInFlight?.(false, !running.signal.aborted ||
-                (reason instanceof Error && 'preserveView' in reason && reason.preserveView === true));
-            }
+        return ownership.handoff(() => ({ world: drawn, viewport: optics }), {
+          ...(progressive ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
+            if (running.signal.aborted || publisher.kind !== 'mounting') return;
+            publisher.owner = owner; void owner.apply(drawn, { signal: running.signal });
+          } } : {}),
+        }, {
+          beforePublish(mount) {
+            if (running.signal.aborted) throw cancellationReason(running.signal);
+            timing.mark('mounted');
+            publisher = { kind: 'destination', owner: mount.navigation! };
+            activation.abort();
           },
-        };
+          async afterPublish(mount) {
+            try {
+              if (reducedMotion) running.complete();
+              else running.resume();
+              if (!(await running.finished).completed) throw cancellationReason(running.signal);
+              lastCamera = mount.navigation!.capture(); lastOptics = mount.navigation!.optics();
+            } catch (error) { running.cancel(error); throw error; }
+          },
+        });
       } catch (error) {
-        billboard?.destroy();
         running.cancel(error); ownership.dispose();
         throw error;
       }
