@@ -61,7 +61,7 @@
     "prepare:galaxy-field": "pnpm prepare:galaxy-field:data && node site/build/prepare/prepare-provenance.mts",
     "prepare:galaxy-field:data": "node packages/bake/cli/acquire-galaxy-field.mts && node packages/bake/cli/prepare-galaxy-field-points.mts",
     "prepare:arrival-billboards": "node packages/bake/cli/prepare-arrival-billboard.mts",
-    "prepare:lens-billboards": "node tools/prepare/cli/prepare-lens-billboards.mts",
+    "prepare:lens-billboards": "node packages/bake/cli/prepare-lens-billboards.mts",
     "prepare:search-thumbnails": "node packages/bake/cli/prepare-search-thumbnails.mts",
     "prepare:nebulae": "node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts",
     "prepare:object-json": "node packages/bake/cli/restore-object-json.mts && pnpm prepare:dataset-sprites && node packages/bake/cli/prepare-factsheets.mts --quiet && node site/build/prepare/prepare-provenance.mts --objects-only && pnpm prepare:world-context && node site/build/prepare/prepare-feature-index.mts",
