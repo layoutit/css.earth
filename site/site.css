@@ -109,9 +109,19 @@ body {
   transform-origin: 50% 50%;
 }
 
-/* Initial loading hides unprepared content. A prepared scene handoff keeps the
-   celestial view visible while incoming controls and materials settle. */
-html:not([data-scene-presented="true"]) .object-world-stage { opacity: 0.001; }
+/* Keep the world's paint state unchanged while startup prepares its scene.
+   Fading the whole world from .001 to 1 deferred a 119 ms iPad commit until
+   reveal. The cover has its own layer so removing it does not repaint the
+   viewport underneath. Fly-to keeps its existing prepared billboard cover. */
+html:not([data-scene-presented="true"]) .object-viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+  pointer-events: none;
+  transform: translateZ(0);
+}
 
 .object-input-surface {
   position: absolute;
