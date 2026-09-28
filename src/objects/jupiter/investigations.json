@@ -8,15 +8,8 @@
       "status": "included",
       "finding": "The visible body uses the 3,600 by 1,800 map combining the 395, 502 and 631 nm filters; its published page excludes latitudes beyond 80 degrees, so preparation verifies measured rows 101 through 1,698 and carries the retained body to 80 degrees south and north, with four prepared high-latitude rings a side and eight-degree interior bands.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L9",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L50",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/source/manifest.json",
         "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -25,15 +18,7 @@
       "status": "included",
       "finding": "The ultraviolet and methane-band lenses use the single-band FITS products observed 11 December 2025, preserving measured values including dark and finite negative samples, with a measured-pixel percentile stretch and false-colour palette for relative display contrast.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L10",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L107",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L123",
         "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -43,14 +28,9 @@
       "finding": "The pinned maps contain exact-zero exterior fill but no separate validity extension, so only exact-zero regions connected to a polar source edge and non-finite samples are marked unavailable while isolated interior zeros remain observations; the README calls this a conservative, explicitly qualified interpretation of the source fill and an edge-fill heuristic without an independent validity mask.",
       "revisitWhen": "A validity extension or mask accompanies the OPAL single-band maps.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L21",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L115",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L118"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L21",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L115",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L118"
       ]
     },
     {
@@ -59,15 +39,8 @@
       "status": "included",
       "finding": "North-pole cyclone structure comes from PIA23808 and south-pole structure from PIA23556: both publications' false-colour or infrared palettes are discarded and only bounded luminance structure is transported, with chroma from the visible-light PIA24239 and PIA21382 products, credited to Emma Walimaki and John Landino under CC BY, and from the measured Hubble 64-degree edge.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L65",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L71",
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/",
         "https://science.nasa.gov/photojournal/jupiters-south-pole-cyclones-in-2016/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -77,14 +50,9 @@
       "finding": "The cyclone arrangements are source-backed but the Juno sources are not registered to the Hubble map's longitudes, so the polar views are structural illustrations rather than a new geodetic map; no absent Hubble pixel is presented as an observation.",
       "revisitWhen": "A polar product registered to the Hubble longitude system is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L20",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L76",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L126"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L20",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L76",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L126"
       ]
     },
     {
@@ -93,13 +61,8 @@
       "status": "included",
       "finding": "The prepared scene binds the IAU equatorial and polar radii of 71,492 and 66,854 km and the JUP365 ephemeris closure, with 3.13 degrees of axial tilt and NASA's 9.9-hour rotation; the 36-second CSS rotation is an explicitly accelerated presentation timescale.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L83",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L85"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L83",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L85"
       ]
     },
     {
@@ -108,14 +71,7 @@
       "status": "included",
       "finding": "The checked table fixes ring boundaries, normal optical depths, vertical thicknesses and associated source moons, from the 100,000-122,400 km halo through the 270,000 km Thebe extension, and the prepared model preserves the physical optical-depth ordering.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L11",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L148",
         "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -124,14 +80,8 @@
       "status": "included",
       "finding": "PIA00701 establishes the three-part halo, main and gossamer structure, the halo's vertical extent and the truncation in Jupiter's shadow, and PIA01623 establishes the Amalthea and Thebe gossamer components and their approximately two-to-one edge-to-centre brightness; the prepared model composites those measured components once and retains their source thicknesses as metadata.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L156",
         "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
         "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -140,14 +90,9 @@
       "status": "included",
       "finding": "Because the measured optical depths are orders of magnitude below an opaque surface, the presentation declares a log-optical-depth contrast emphasis capped at 0.4 alpha with a 0.65 exponent and a three-unit minimum width for the narrow main ring; the README states this is a visibility presentation, not a claim about how the rings would look to a nearby unaided observer, and every measured radial boundary and ordering is preserved.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L22",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L175",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L183"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L22",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L175",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L183"
       ]
     },
     {
@@ -156,14 +101,7 @@
       "status": "included",
       "finding": "The OPAL paper by Simon, Wong and Orton publishes the visible-map channel construction and empirical Minnaert coefficients, F631N k=0.999, F502N k=0.950 and F395N k=0.850, transcribed into a checked record while the copyrighted paper is linked rather than redistributed; preparation reapplies the channel-specific law for the current observer, preserving Jupiter's measured wavelength-dependent centre-to-limb behaviour.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L205",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L212",
         "https://doi.org/10.1088/0004-637X/812/1/55"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -173,13 +111,8 @@
       "finding": "The pinned PSG configuration keeps its exact 4.360399-degree observation phase and light direction as source metadata, but that near-opposition geometry is not used as the free-orbit presentation light because it collapses the visible terminator into an unreadable limb; the presentation instead copies the accepted Saturn Sun direction as an authored choice.",
       "revisitWhen": "A light direction derived from the observation geometry becomes usable for the free-orbit presentation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L215",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L221"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L215",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L221"
       ]
     },
     {
@@ -188,13 +121,8 @@
       "status": "included",
       "finding": "The prepared overlay keeps a 0.05 neutral-light ambient floor and a smoothstep terminator computed in linear light and re-encoded through sRGB as one source-over colour plus alpha; it is exact for the declared neutral reference channel value of 160 and otherwise a bounded photometric overlay, not per-texel spectral radiative transfer, which avoids inventing an unvalidated volumetric haze model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L224",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L233"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L224",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L233"
       ]
     },
     {
@@ -204,13 +132,8 @@
       "finding": "The Hubble global map is already a visible-light map of the cloud atmosphere rather than a solid surface needing an Earth-like halo, and the checked 5 January 2024 full-disc Hubble view is the silhouette authority: 44,312 pixels in the normalized 1.005-to-1.03 exterior annulus are zero in every sampled channel, so the exterior halo is explicitly absent rather than artistically coloured.",
       "revisitWhen": "A measured exterior halo is published for Jupiter at this geometry.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L197",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L202"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L197",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L202"
       ]
     },
     {
@@ -219,14 +142,7 @@
       "status": "included",
       "finding": "The checked configuration expands a pinned 2026/08/30 12:00 ephemeris seed and contains the 50-layer Moses et al. 2005 atmosphere from 10 bar to 10 nanobar; the R=240 I/F response has 253 samples from 0.35 to 0.998 micrometres, and the reflectance, temperature-pressure and phase charts are generated as static SVG before runtime.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L239",
         "https://psg.gsfc.nasa.gov/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -236,14 +152,7 @@
       "finding": "The checked JPL discovery and mean-elements snapshot retains its 115-satellite catalogue and the PIA01299 montage stays pinned source material, but because the shared runtime mounts exactly one detailed object scene, the dormant Jupiter-owned billboard and orbit-guide derivations are excluded from the active asset inventory; Io, Europa, Ganymede and Callisto have their own packages.",
       "revisitWhen": "The shared runtime gains a contract for rendering a moon system inside a planet scene.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L136",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L143",
         "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -252,12 +161,7 @@
       "status": "included",
       "finding": "The navigation marker is the credited full-disc Hubble view, with its preparation recipe adapter-owned.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L254"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L254"
       ]
     },
     {
@@ -267,12 +171,7 @@
       "finding": "The evidence section states that the record describes image-background and source-value checks but cites no dated test or browser run; source byte pins are in the input manifest.",
       "revisitWhen": "A dated test or browser run for this Jupiter version is recorded in the package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/jupiter/README.md#L16"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/README.md#L16"
       ]
     },
     {
@@ -282,11 +181,6 @@
       "finding": "Hubble OPAL Minnaert coefficients of the visible map per channel (Simon et al. 2015, Table 1: F631N 0.999, F502N 0.95, F395N 0.85), relative to the flood-lit disc centre, without the former 0.05 ambient floor, smoothstep terminator or cap at the centre's brightness.",
       "evidence": [
         "https://doi.org/10.1088/0004-637X/812/1/55"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -295,11 +189,6 @@
       "status": "excluded",
       "evidence": [
         "https://psg.gsfc.nasa.gov/helpatm.php"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -309,11 +198,6 @@
       "finding": "Eleven released RGB maps from 2015 through 2025 use the shared date stepper and intersection of their three component footprints. The release sequence has no 2023 and two 2024 dates; no quantitative storm-size or colour trend is claimed.",
       "evidence": [
         "https://archive.stsci.edu/hlsp/opal"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
       ]
     },
     {
@@ -323,11 +207,6 @@
       "finding": "The PSH community degree-13 evaluator samples radial field at the 1-bar ellipsoid in System III east longitude. Zero is valid, the palette is linear, and the inferred internal field excludes external currents.",
       "evidence": [
         "https://github.com/rjwilson-LASP/PSH"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
       ]
     },
     {
@@ -338,11 +217,6 @@
       "evidence": [
         "https://doi.org/10.3847/PSJ/ac7ec8"
       ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
-      ],
       "revisitWhen": "A released numerical profile and its assumptions are selected and checked."
     },
     {
@@ -352,11 +226,6 @@
       "finding": "No new registered numeric auroral product was selected in this release.",
       "evidence": [
         "https://pds-atmospheres.nmsu.edu/data_and_services/atmospheres_data/JUNO/juno.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
       ],
       "revisitWhen": "A dated polar grid with units, geometry and an appropriate rendering interpretation is qualified."
     }

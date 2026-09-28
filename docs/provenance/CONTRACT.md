@@ -32,8 +32,8 @@ Apply [ISO 24495-1:2023, first edition](https://www.iso.org/standard/78907.html)
 [public preview](https://cdn.standards.iteh.ai/samples/78907/d194fac21d6a45f38bfcfec9657f7498/ISO-24495-1-2023.pdf)
 includes the principles and the start of the guidelines.
 
-This is a cssEarth adaptation using Markdown, existing manifests, SHA-256 pins,
-Git revisions, reproduction comparisons and browser evidence. It claims neither
+This is a cssEarth adaptation using Markdown, existing manifests, delivery SHA-256,
+reproduction comparisons and browser evidence. It claims neither
 PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XML labels or archive submission.
 
 ## File ownership
@@ -77,63 +77,19 @@ SOURCE summary, EVIDENCE index or body USAGE guide.
 
 ### Investigation ledger
 
-Record every source, route, lens or frame examined for an object in its
-`investigations.json`, beside the README, including trials that failed. Each
-entry says what was examined, its status (`included`, `excluded`, `unresolved`
-or `deferred`), the finding, evidence links and the date it was checked, with its pull request when there is one.
-An entry that is not included names what would reopen it in `revisitWhen`.
-Link repository evidence at a commit or pull request; a branch link moves.
+`investigations.json`, beside the README, is the object's notebook: every source,
+route, lens or frame examined, including trials that failed. Each entry has an
+`id`, a `status` (`included`, `excluded`, `unresolved` or `deferred`) and a
+`finding`; `subject`, `evidence` and `revisitWhen` (what would reopen it) are
+optional notes. Git holds its history; entries carry no commits or check dates.
+A facility keeps the same notebook in `src/facilities/<facility id>/investigations.json`,
+with `facilityId` in place of `objectId`. Reasoning many bodies share can live once
+under `data/investigations` and be named in an entry's `survey`.
 
-A facility keeps the same ledger in `src/facilities/<facility id>/investigations.json`,
-with `facilityId` in place of `objectId`: a telescope's archive, data policy and
-reduction software, and what was run from it. Every facility ledger answers the
-sweep first, one entry each for `archive-access`, `data-policy` and
-`reduction-software`, so facilities compare side by side. Use the facility
-catalogue's id when the facility has a page record; a facility without one keeps
-its ledger all the same. `node packages/bake/cli/report-investigations.mts --facilities` counts
-the catalogue's ground facilities that have ledgers and lists the open decisions.
-
-Give distinct source decisions their own entries. `included` means selected for
-the stated use, not that every scientific claim is qualified. Ledger coverage
-counts objects with records, not objects with complete imagery or an exhaustive
-source search.
-
-Reasoning that three or more bodies reach the same way belongs in one shared
-record under `data/investigations`, and an entry names it in `survey` instead of
-repeating the paragraph. The record holds the subject, finding, the evidence
-every body leans on and the reopen condition; the entry still states this body's
-status, its own evidence and when it was checked, and may override the subject
-or reopen condition. A shared record names no single body's files. A test
-refuses a finding repeated across three bodies and a record no longer quoted.
-
-The README links the ledger instead of repeating a source survey.
-An entry that is not included names, among its evidence, the source outside this
-repository that it examined: the archive, deposit or paper where the evidence
-that would reopen it appears. That is what makes a decision reopenable rather
-than a sentence nobody can act on. A test records how many decisions still name
-no such source, and that count may only fall.
-
-Read the ledger before investigating an object, starting from the open-work index
-([`docs/provenance/investigation-index.md`](investigation-index.md)), which
-groups every unresolved and deferred decision by what it waits on. Refresh it
-with `node packages/bake/cli/report-investigations.mts --index --write`. CI runs `pnpm check:investigations`, which parses every
-object and facility ledger with the shared records they quote, so a ledger with no entries, a check without its date or an
-evidence path that is not a link fails there. Reopen an excluded, unresolved or
-deferred entry only when its `revisitWhen` condition is met, and say which.
-`node packages/bake/cli/report-investigations.mts` lists every open entry across objects.
-Use `--summary` for catalogue coverage and `--classification` to select an
-existing object classification. Filter decisions with `--status=deferred,unresolved`
-and `--search=registration`, or export with `--json`. Filters select detail rows;
-summary counts cover the selected population. Counts measure recorded decisions,
-not qualified views or an exhaustive source search.
-
-When consolidating historical records, `checked` gives the date the records were
-reviewed. Preserve source decisions and original trial dates, results
-and evidence. Explain the migration method and extent of manual review in the PR.
-A schema or link check does not verify the finding; consolidation does not claim
-a fresh archive search or repeat qualification. After a finding changes, retain
-its entry id and previous checks, append the new checked revision, and preserve
-the earlier result in the finding or its pinned evidence.
+`node packages/bake/cli/report-investigations.mts` lists open entries across objects
+(`--summary`, `--facilities`, `--classification`, `--status`, `--search`, `--json`);
+`--index --write` refreshes [`docs/provenance/investigation-index.md`](investigation-index.md).
+CI runs `pnpm check:investigations`, which only checks that every notebook reads.
 
 ### Examples
 
@@ -149,7 +105,7 @@ URL, credits and terms in the existing manifest and acquisition recipe. Follow
 establish its published identity and bind the input. Preserve
 native identifiers: PDS4 LIDVID, PDS3 dataset/product ID, DOI or other published
 release ID. Do not invent PDS identifiers. A hash identifies bytes, not the
-provider's version or our code revision. Git identifies tracked source bytes;
+provider's version. Git identifies tracked source bytes;
 manifests and descriptors do not carry file-stability hashes. Missing downloads
 are restored by path from the source cache or origin, without a manifest digest
 comparison. Runtime inventories retain byte counts and SHA-256 for published
@@ -190,8 +146,8 @@ identity; the downloaded webpage does not become a permanent evidence file.
 
 Before removing a page, check code, acquisition recipes, manifests, tests and
 provenance references. Preserve used numerical extracts, source identity and
-extraction method. Update active references and affected delivery inventories together. Original
-reports remain unchanged at their recorded Git revision. Do not replace duplicated
+extraction method. Update active references and affected delivery inventories together. Git history
+keeps the original reports. Do not replace duplicated
 pages with a shared webpage archive or a blanket ignore rule.
 GitHub language classification does not determine what belongs in Git.
 
@@ -228,13 +184,13 @@ license alone does not establish an input's terms.
 
 Keep evidence beside the body or shared test/tool that owns the claim, and link
 it from the maintained README or guide. Keep an artifact in the current tree
-while an explanation or executable check needs it. Link historical reports at
-their exact Git revision, preserving their contents. Scratch captures and
+while an explanation or executable check needs it. Git history keeps removed
+reports; never link them by commit. Scratch captures and
 repetitive logs belong in ignored `output/`.
 
 Record:
 
-- **Tested inputs:** bodies/views, code revision and relevant manifests. Identify
+- **Tested inputs:** bodies/views and relevant manifests. Identify
   uncommitted changes, ignored inputs and files actually served to the browser;
   record byte counts and hashes for evidence inputs not fixed by Git or a delivery
   inventory. A path-only source manifest does not establish byte identity.
@@ -294,9 +250,8 @@ both inputs. A changed-pixel count locates change; it does not measure sharpness
 scientific accuracy or improvement. Explain the visible result separately and
 keep independent source/registration checks for scientific claims.
 
-**An old pass describes an old version.** Preserve its original revision, paths,
-hashes and outcome. To reuse it, identify the new revision and show that relevant
-dependencies still match. Unchanged textures do not qualify a changed camera.
+**An old pass describes an old version.** Preserve its paths, hashes and
+outcome. To reuse it, show that relevant dependencies still match. Unchanged textures do not qualify a changed camera.
 
 Separate metadata/file, decoding, scientific and application results. A body test
 is not a full-suite pass; installed images do not prove source restoration or
@@ -317,8 +272,8 @@ instructions in the same change.
 
 Use the [template](../../.github/pull_request_template.md) as a starting point;
 a small PR can be one paragraph and its relevant check. Remove unused prompts.
-Summarize checks and limitations. GitHub records CI revisions; local and reused
-evidence must identify the tested revision and relevant differences.
+Summarize checks and limitations. GitHub records CI runs; local and reused
+evidence names relevant differences.
 
 **Choose checks by what changed.** Run the affected tests locally; required CI
 checks still apply. A new body needs its source, package and browser checks,
@@ -338,17 +293,17 @@ limit, such as a runner that cannot start, in [CONTRIBUTING](../../CONTRIBUTING.
 and cite it, rather than explaining it again in each PR.
 
 Each added artifact must support a named claim, explanation or test. Explain
-unusually large additions. Preserve relevant failures and replace needed links
-with exact Git revision links before removing historical reports. A PR does not
+unusually large additions. Preserve relevant failures before removing
+historical reports; git history keeps them. A PR does not
 need a separate completion report in `docs/`.
 
 **Inspect PR images on GitHub.** Use a [GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
-or an image committed at a fixed revision, for example
-`https://github.com/layoutit/css.earth/blob/<commit>/<path>?raw=true`.
-A relative link resolves against the PR URL, not the repository root, so pin a
-repository link in the body to a commit as well. After publishing or editing the
+or an image committed to the branch, for example
+`https://github.com/layoutit/css.earth/blob/<branch>/<path>?raw=true`.
+A relative link resolves against the PR URL, not the repository root, so use a
+full branch or `main` link. Never link a commit. After publishing or editing the
 PR, reload it with normal repository access and inspect every image for loading,
-legibility, view and revision, and follow every link. File existence or HTTP
+legibility and view, and follow every link. File existence or HTTP
 success alone is insufficient. Fix broken embeds and links; if required images
 are unavailable, keep the PR in draft and identify what is missing.
 

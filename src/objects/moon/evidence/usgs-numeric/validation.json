@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-usgs-validation@1",
   "date": "2026-09-27T01:55:17.480Z",
-  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
   "testedCode": {
     "tools/objects/acquisition/geotiff-grid.mts": "d377dd0968f9940cb9f0c1d99549dcb7844e8ccfc8c6b567814d6ebd13661e3c",
     "tools/objects/operations-acquisition.ts": "e8285a05315bf6aab072a3b6f8a9ba3dbbed1d441538d6b124b00056b887158b",

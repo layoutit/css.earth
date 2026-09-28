@@ -8,15 +8,8 @@
       "status": "included",
       "finding": "The display sphere uses the approximate 715 km radius from NASA Science, which also supplies the 305-year orbital period and 45.8 AU average distance recorded as content. The rotation content is the 22.8266 h period of Hromakina et al. (2019), replacing NASA's rounded 22.5 hours.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L5",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L31",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/source/manifest.json",
         "https://science.nasa.gov/dwarf-planets/makemake/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -26,14 +19,8 @@
       "finding": "The measured projected axes of 1,430 +/-9 and 1,502 +/-45 km are recorded as a size comparison but not used for the displayed body, because the README states the sky-plane measurements do not uniquely define a three-dimensional shape or spin pole.",
       "revisitWhen": "A published three-dimensional shape or spin-pole solution for Makemake becomes available.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L5",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/source/manifest.json",
         "https://doi.org/10.1038/nature11597"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -43,13 +30,8 @@
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Makemake a measured uniform colour, which the shape-only convention does not supersede.",
       "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/537a58faf97607788e94a5cd89d0cfff1b934810/src/objects/makemake/source/photometry/disc-color.json",
-        "https://github.com/layoutit/css.earth/blob/537a58faf97607788e94a5cd89d0cfff1b934810/docs/shape-only-material.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/main/docs/shape-only-material.md"
       ]
     },
     {
@@ -60,11 +42,6 @@
       "revisitWhen": "A disc-resolved image or a flyby is published.",
       "evidence": [
         "https://doi.org/10.1038/nature11597"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -75,12 +52,7 @@
       "evidence": [
         "https://arxiv.org/abs/1904.03679",
         "https://doi.org/10.26093/cds/vizier.36250046",
-        "https://github.com/layoutit/css.earth/blob/537a58faf97607788e94a5cd89d0cfff1b934810/src/objects/makemake/source/photometry/disc-color.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/source/photometry/disc-color.json"
       ]
     },
     {
@@ -91,11 +63,6 @@
       "revisitWhen": "A newer multi-epoch colour set disagrees with Hromakina et al. (2019) beyond their uncertainties.",
       "evidence": [
         "https://doi.org/10.26093/cds/vizier.35460115"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -106,11 +73,6 @@
       "revisitWhen": "A published albedo that separates Makemake from its moon MK2.",
       "evidence": [
         "https://arxiv.org/abs/1904.03679"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -119,12 +81,7 @@
       "status": "included",
       "finding": "Orbital placement uses the existing pinned JPL elements at the shared 2026-09-03 TT epoch, as recorded under known problems.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L17"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/README.md#L17"
       ]
     },
     {
@@ -134,13 +91,8 @@
       "finding": "The display pole and meridian are explicitly arbitrary and the reported rotation period is content only, driving no invented ephemeris.",
       "revisitWhen": "A measured spin pole or longitude system for Makemake is published.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L17",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L31"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/README.md#L17",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/README.md#L31"
       ]
     },
     {
@@ -151,11 +103,6 @@
       "evidence": [
         "https://science.nasa.gov/resource/makemake-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18"
-        }
       ]
     },
     {
@@ -164,14 +111,9 @@
       "status": "unresolved",
       "finding": "No image resolves Makemake's surface, so no disc-resolved photometric law exists. Makemake keeps the shared sphere bank.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/objects/makemake/README.md"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/makemake/README.md"
       ],
-      "revisitWhen": "A resolved image of Makemake with a fitted disk law.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "A resolved image of Makemake with a fitted disk law."
     }
   ]
 }

@@ -9,11 +9,6 @@
       "finding": "Shown as the temperature lens, evaluated by SPIDERMAN 1.0.3. With the paper's dilution correction it gives a 3,704 ppm day side (paper 3,729 +/- 52) and 2,688 K (paper 2,699 +/- 32); its night side is 1,185 K against the paper's 1,259 +/- 44 K. About 3.4 percent of the surface, around midnight, has a negative fitted brightness and shows no data.",
       "evidence": [
         "https://arxiv.org/abs/2107.03349"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23"
-        }
       ]
     },
     {
@@ -25,11 +20,6 @@
       "evidence": [
         "https://pypi.org/project/spiderman-package/1.0.3/",
         "https://arxiv.org/abs/2107.03349"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23"
-        }
       ]
     },
     {
@@ -40,11 +30,6 @@
       "revisitWhen": "A second lens per planet is wanted.",
       "evidence": [
         "https://arxiv.org/abs/2107.03349"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23"
-        }
       ]
     },
     {
@@ -55,11 +40,6 @@
       "revisitWhen": "Its paper publishes a map, or the user asks for our own reduction.",
       "evidence": [
         "https://ui.adsabs.harvard.edu/abs/2024jwst.prop.5268W/abstract"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23"
-        }
       ]
     },
     {
@@ -70,11 +50,6 @@
       "revisitWhen": "A paper maps where the iron condenses.",
       "evidence": [
         "https://arxiv.org/abs/2003.05528"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23"
-        }
       ]
     }
   ]

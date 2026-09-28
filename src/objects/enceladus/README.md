@@ -72,7 +72,7 @@ recorded in the investigation ledger.
 
 ### Delivery checks for this view
 
-The 2026-09-27 checks used `b33089487811511e7015aa5a629e692f4a328e2d`
+The 2026-09-27 checks used
 plus this PR's Enceladus source, recipe, reader text and inventory changes.
 [Desktop](evidence/infrared-mosaic/globe.png) and
 [south-polar](evidence/infrared-mosaic/south-pole.png) captures show the delivered
@@ -109,10 +109,10 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 16098 × 8049 | 8.31 → 12.18 MB |
 
-Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/enceladus/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 The [browser comparison](evidence/native-source-sampling.png) uses identical camera
-coordinates at 4× zoom, Shadows off, Chromium at DPR 1, on revision `3dc424757`.
+coordinates at 4× zoom, Shadows off, Chromium at DPR 1.
 It separates the previous quality-90 image, the same intermediate-map sampling
 encoded at quality 95, and native-grid sampling at quality 95. The native result
 retains finer fracture detail; some improvement also comes from encoding quality.
@@ -121,7 +121,7 @@ not scientific registration accuracy or full browser conformance.
 
 A fresh [Pixelmatch comparison](evidence/native-pixelmatch/comparison.png) uses
 Chrome 153.0.8010.12, 1280 × 720, DPR 1 and an unchanged 520 × 480 crop. It runs
-on the merge of `e0487eff5` with main `c13f3643b`, whose renderer and scene are
+on the merge, whose renderer and scene are
 retained. [Capture settings and byte pins](evidence/native-pixelmatch/capture.json)
 identify the exact previous-main atlas and the encoding-only control.
 
@@ -141,7 +141,7 @@ The four input crops and three diffs are retained beside their reports. Reproduc
 a comparison with `node labs/investigations/compare-visual-evidence.mts <reference.png>
 <result.png> <diff.png> <report.json>` from the repository root.
 
-- The formal pinned Python environment reproduced the exact ZIP hash (see [docs/moons/b2-preparation/enceladus-dsk-reproduction.json](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/enceladus-dsk-reproduction.json)).
+- The formal pinned Python environment reproduced the exact ZIP hash (see docs/moons/b2-preparation/enceladus-dsk-reproduction.json).
 
 - The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound.
 

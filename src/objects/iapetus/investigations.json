@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "Iapetus_Cassini_Voyager_mosaic_global_783m.tif supplies Monochrome; its native coverage, zero gaps, seams and photographed shadows remain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/manifest.json",
         "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -24,14 +18,8 @@
       "status": "included",
       "finding": "The 11,741 by 5,871 calibrated, registered Cassini map supplies Enhanced color. Ultraviolet/infrared bands extend beyond human vision, so it is not natural color.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/manifest.json",
         "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -40,14 +28,8 @@
       "status": "included",
       "finding": "The accepted calibrated cube, navigation cube and detector data are the primary source for false-color Infrared and continuum-relative Ice absorption; native support and archive filtering define coverage.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/manifest.json",
         "https://vims.univ-nantes.fr/cube/C1568129671_1_ir.cub"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -56,14 +38,8 @@
       "status": "included",
       "finding": "This selected calibrated cube contributes source-supported regional infrared and ice observations with its matched navigation and detector data.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/manifest.json",
         "https://vims.univ-nantes.fr/cube/C1568133146_2_ir.cub"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -72,14 +48,8 @@
       "status": "included",
       "finding": "This selected calibrated cube contributes source-supported regional infrared and ice observations with its matched navigation and detector data.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/manifest.json",
         "https://vims.univ-nantes.fr/cube/C1568157352_4_ir.cub"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -89,14 +59,8 @@
       "finding": "Native support and aperture checks do not establish exact absolute pointing; a missing background row and its filtering dependencies are withheld.",
       "revisitWhen": "Independent controls qualify absolute source-camera registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/iapetus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/manifest.json",
         "https://vims.univ-nantes.fr/cube/1568129671_1"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -108,12 +72,7 @@
         "https://doi.org/10.1016/0019-1035(84)90111-8",
         "https://ntrs.nasa.gov/citations/19840066646"
       ],
-      "revisitWhen": "The fitted emission range of Squyres et al. (1984), or a Cassini disc-resolved Iapetus law with its ranges, is read in the paper.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "The fitted emission range of Squyres et al. (1984), or a Cassini disc-resolved Iapetus law with its ranges, is read in the paper."
     }
   ]
 }

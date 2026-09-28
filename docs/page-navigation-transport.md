@@ -205,7 +205,7 @@ failed startup cases verify that settings, choices and scene elements survive.
 ![A native Titan search in the existing Saturn scene with JavaScript disabled](images/native-search.png)
 
 The earlier [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4)
-was recorded at commit `05ed6415b`, before native dataset submits were added.
+was recorded, before native dataset submits were added.
 At 1280×900, application scripts are held for the first ten seconds,
 while the existing information tabs work by click and keyboard. Script startup
 then adds camera input and dataset switching to those same 972 scene elements.
@@ -214,5 +214,5 @@ It illustrates this implementation; it is not a matched camera-pose comparison.
 
 ![Factsheet selected while application scripts are held](images/progressive-enhancement.png)
 
-The [404-object migration and matched captures](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/page-navigation-transport.md#synchronized-natural-navigation-comparison)
+The [404-object migration and matched captures](page-navigation-transport.md#synchronized-natural-navigation-comparison)
 retain their measurements, source pins, failures and later integration scope.

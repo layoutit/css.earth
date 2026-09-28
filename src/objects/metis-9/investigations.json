@@ -8,20 +8,10 @@
       "status": "included",
       "finding": "The current LAM 3Dshape directory lists 9_Metis_mpcd.obj, matching the actual preparation input. The retained measurements describe 2962 vertices and 5920 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/metis-9/README.md",
         "https://observations.lam.fr/astero/3Dshape/9_Metis_mpcd.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/metis-9/source/reference/model-properties.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/metis-9/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/metis-9/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/metis-9/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -30,18 +20,8 @@
       "status": "included",
       "finding": "The retained Table 1 and Table A.1 extract records diameter 173 km, ecliptic J2000 pole (181°, 22°), period 5.079176 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 85.9106652849721 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/metis-9/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/metis-9/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/metis-9/source/reference/model-properties.json"
       ]
     },
     {
@@ -50,24 +30,8 @@
       "status": "included",
       "finding": "Included 2026-09-18 as the SPHERE photograph lens: 30 camera-1 deconvolved frames, 4 nights from 2018-06-08 to 2018-07-10, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The deconvolved camera-1 frames under https://observations.lam.fr/astero/Data/9Metis/ are qualified and cast as a photograph lens: 30 frames over four nights, geometry computed from the release's parameter record and pinned Horizons tables at each exposure midpoint, measured coverage 84.9 percent of the retained surface area, level matching inside gains of 0.80 to 1.87 as a single joined group. The reduced Red/ products are not used. This is photographed illumination, not a calibrated global reflectance map, so the missing-imagery grid still marks unphotographed, grazing and rejected surface.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/24e2730084f5b0528499be985940392e1d16da17/src/objects/metis-9/README.md",
         "https://observations.lam.fr/astero/Data/9Metis/Deconv/",
         "https://observations.lam.fr/astero/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-17"
-        },
-        {
-          "date": "2026-09-18"
-        }
       ]
     },
     {
@@ -78,17 +42,7 @@
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/metis-9/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/metis-9/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/metis-9/source/reference/model-properties.json"
       ]
     },
     {
@@ -98,16 +52,7 @@
       "finding": "Rebuilt 2026-09-18 by the survey setup on the ADAM mesh, the model the release’s rotation record describes, with the same 30 frames; it ships on zimpol-published-comparison. The rest of this finding describes the earlier lens on the MPCD mesh: The lens is derived and registers on its outline. All 30 frames project an outline elongated enough to define a position angle, 1.354 to 1.685, and the predicted limb position angles match the photographed contour with 2.30 degrees left after removing the 4.35-degree floor that exposures minutes apart set. The released MPCD shape is used rather than the ADAM reconstruction because it agrees more closely with the record, 2.30 against 2.72 degrees under the same rule. Neither marking-dependent sweep places the body: the cross-frame test is decisive on 2 of 30 frames, and the relief sweep's 16 decisive frames disagree among themselves by up to 9 degrees, so their 0.00-degree median reaches no verdict. The rotation record is read latitude-first because 181.3819 degrees cannot be a latitude.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/9Metis/Deconv/",
-        "https://observations.lam.fr/astero/3Dshape/9_Metis_param",
-        "https://github.com/layoutit/css.earth/blob/24e2730084f5b0528499be985940392e1d16da17/src/objects/metis-9/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        },
-        {
-          "date": "2026-09-18"
-        }
+        "https://observations.lam.fr/astero/3Dshape/9_Metis_param"
       ]
     },
     {
@@ -119,11 +64,6 @@
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/9Metis/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18"
-        }
       ]
     }
   ]

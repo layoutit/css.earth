@@ -64,7 +64,7 @@ without committed material still cannot reveal.
 Opacity 0 does not free a layer. A hidden element is `display:none`, or `visibility:hidden` without `will-change`:
 
 - #750: 735 of 753 hidden world markers cost nothing only because they drop `will-change`.
-- 6579cd4e2c: cutaways needed `display:none` to take the iPhone Earth page from 1,049 to 477 layers.
+-: cutaways needed `display:none` to take the iPhone Earth page from 1,049 to 477 layers.
 
 A coast may fade an element to 0. The pacer retires it once the coast stops.
 

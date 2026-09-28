@@ -4,7 +4,7 @@ for(const phase of ['before','after']){
  const root=`output/playwright/halley-mosaic/${phase}`;reports[phase]=JSON.parse(await readFile(`${root}/browser.json`,'utf8'));
  await copyFile(`${root}/browser.json`,`${out}/${phase}-browser.json`);await copyFile(`${root}/runtime-assets.json`,`${out}/${phase}-runtime-assets.json`);
 }
-const manifest={schema:'cssearth-halley-encounter-browser-evidence@1',testedRuntimeRevision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),baselineRevision:'1991273ff91753ad901f199b6187be5a240c5500',scope:'Production before/after at the same 30 km camera distance and exact saved pose matrices. Same viewport and DPR. Baseline shared shell predates the independently merged moon-system PR106; no renderer or Halley geometry is changed by this PR. Different photography is expected; this is a coverage comparison, not an image-parity claim.',images:[]};
+const manifest={schema:'cssearth-halley-encounter-browser-evidence@1',testedRuntimeRevision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),baselineRevision:'',scope:'Production before/after at the same 30 km camera distance and exact saved pose matrices. Same viewport and DPR. Baseline shared shell predates the independently merged moon-system PR106; no renderer or Halley geometry is changed by this PR. Different photography is expected; this is a coverage comparison, not an image-parity claim.',images:[]};
 for(const phase of ['before','after'])for(const report of reports[phase].reports){
  assert.deepEqual(report.errors,[]);assert.equal(report.views.length,3);
  const other=reports[phase==='before'?'after':'before'].reports.find(r=>r.dpr===report.dpr);assert.deepEqual(report.viewport,other.viewport);

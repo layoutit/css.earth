@@ -10,11 +10,6 @@
       "evidence": [
         "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/Kepler-7_b.jpg",
         "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-24"
-        }
       ]
     },
     {
@@ -25,12 +20,7 @@
       "evidence": [
         "https://arxiv.org/abs/1309.7894"
       ],
-      "revisitWhen": "A published smooth map, or fit coefficients whose map stays positive.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "A published smooth map, or fit coefficients whose map stays positive."
     }
   ]
 }

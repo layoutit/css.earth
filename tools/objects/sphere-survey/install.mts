@@ -148,12 +148,12 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
 
   // The ledger: the decision, and the entries it answers.
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
-  const check = { date: today }, listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
+  const listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
   const unused = setup.cast.released - lensFrames - leaveOut.length - setup.leftOutApparitions.reduce((sum, entry) => sum + entry.frames, 0);
   const decision = {
     id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
     finding: [decisionFinding(figure, evidence, setup.columnOrder), leftOutText].filter(Boolean).join(' '),
-    evidence: [setup.evidence.source, listing, ...(onAdam ? [adam] : [])], checked: [check] };
+    evidence: [setup.evidence.source, listing, ...(onAdam ? [adam] : [])] };
   const at = entries.findIndex(entry => entry.id === COMPARISON_ENTRY);
   if (at >= 0) entries[at] = decision; else entries.push(decision);
   // An entry the decision answers that quotes a shared record takes the record's subject and finding as its own first,
@@ -163,7 +163,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     const shared = requireRecord(await readJson(resolve(ROOT, INVESTIGATION_SURVEY_DIRECTORY, `${requireString(entry.survey)}.json`)));
     const { survey: _survey, ...own } = entry;
     entries[index] = { id: own.id, subject: requireString(shared.subject), status: own.status, finding: requireString(shared.finding),
-      evidence: [...(Array.isArray(shared.evidence) ? shared.evidence : []), ...requireArray(own.evidence)], checked: own.checked };
+      evidence: [...(Array.isArray(shared.evidence) ? shared.evidence : []), ...requireArray(own.evidence)] };
   }
   // An install run again the same day finds its own words at the front or back of an entry; it replaces them.
   const earlierWords = (text: string) => {
@@ -179,8 +179,6 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     const links = requireArray(entry.evidence).map(value => requireString(value));
     if (link && !links.includes(link)) links.push(link);
     entry.evidence = links;
-    const checked = requireArray(entry.checked).map(value => requireRecord(value));
-    entry.checked = checked.some(earlier => earlier.date === check.date) ? checked : [...checked, check];
   };
   close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: ${unusedWords(setup.apparitions, SURVEY_LENS_SETTINGS.levelMatching.minimumPairs)}.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
   // A lens that casts more than one apparition answers the entry that kept the other apparition's frames out on levels.

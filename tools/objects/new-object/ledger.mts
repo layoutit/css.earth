@@ -2,7 +2,6 @@
  * An entry is written only when it has a link; a package whose choices name none keeps the scaffold's empty ledger, which the
  * ledger check refuses until a person records what was examined. */
 import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/bake/sources';
-import { CHECKED } from './color.mts';
 import { json, type PackageFiles } from './lens.mts';
 
 export interface Decision { readonly id: string; readonly subject: string; readonly finding: string; readonly evidence?: readonly string[] }
@@ -19,7 +18,7 @@ export function citedLinks(text: string) {
 export function writeLedger(files: PackageFiles, id: string, decisions: readonly Decision[]) {
   const entries = decisions.flatMap(decision => {
     const evidence = [...new Set([...decision.evidence ?? [], ...citedLinks(decision.finding)])];
-    return evidence.length ? [{ id: decision.id, subject: decision.subject, status: 'included', finding: decision.finding.replace(/\s+/gu, ' ').trim(), evidence, checked: [{ date: CHECKED }] }] : [];
+    return evidence.length ? [{ id: decision.id, subject: decision.subject, status: 'included', finding: decision.finding.replace(/\s+/gu, ' ').trim(), evidence }] : [];
   });
   if (entries.length) files.set(`src/objects/${id}/investigations.json`, json({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries }));
 }

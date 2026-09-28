@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "The body uses the nominal solution's semiaxes of 1,161 × 852 × 513 km with the preferred pole at J2000 right ascension 285.1° and declination -10.6°; the README states this is an inferred shape, not a resolved mesh or a unique interior model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L7",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/haumea/source/manifest.json",
         "https://doi.org/10.1038/nature24051"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -24,14 +18,7 @@
       "status": "included",
       "finding": "The equatorial ring uses the same publication's 2,287 km radius and 70 km width; its gray and fixed opacity are schematic, it has no invented bands, it stays evenly lit and it uses no separate Shadows control.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L7",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L17",
         "https://doi.org/10.1038/nature24051"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -40,13 +27,8 @@
       "status": "excluded",
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published rotation-corrected colour indices and an occultation-based V geometric albedo now give Haumea a measured uniform colour (sRGB 188, 189, 191).",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/src/objects/haumea/source/photometry/disc-color.json",
-        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/docs/shape-only-material.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/haumea/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/main/docs/shape-only-material.md"
       ],
       "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc."
     },
@@ -58,14 +40,6 @@
       "revisitWhen": "A disc-resolved image or a flyby is published.",
       "evidence": [
         "https://doi.org/10.1038/nature24051"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        },
-        {
-          "date": "2026-09-19"
-        }
       ]
     },
     {
@@ -77,11 +51,6 @@
       "evidence": [
         "https://archive.eso.org/tap_obs",
         "https://oidb.jmmc.fr/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -94,14 +63,6 @@
         "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S",
         "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xb21.qa2_report.pdf",
         "https://ui.adsabs.harvard.edu/abs/2024PASP..136l4401K"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        },
-        {
-          "date": "2026-09-19"
-        }
       ]
     },
     {
@@ -113,11 +74,6 @@
       "evidence": [
         "https://almascience.eso.org/aq/?projectCode=2022.1.01753.S",
         "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xb21.qa2_report.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-19"
-        }
       ]
     },
     {
@@ -129,11 +85,6 @@
       "evidence": [
         "https://mast.stsci.edu/",
         "https://www.stsci.edu/hst-program-info/program/?program=18002"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -146,11 +97,6 @@
         "https://www.stsci.edu/hst-program-info/program/?program=12243",
         "https://arxiv.org/abs/2603.05394",
         "https://arxiv.org/abs/0903.4213"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -164,11 +110,6 @@
         "https://arxiv.org/abs/1705.09117",
         "https://arxiv.org/abs/1605.04145",
         "https://www.stsci.edu/jwst-program-info/program/?program=1273"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -179,12 +120,7 @@
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0509401",
         "https://doi.org/10.1086/499575",
-        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/src/objects/haumea/source/photometry/disc-color.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/haumea/source/photometry/disc-color.json"
       ]
     },
     {
@@ -195,12 +131,7 @@
       "evidence": [
         "https://arxiv.org/abs/2006.03113",
         "https://doi.org/10.1038/nature24051",
-        "https://github.com/layoutit/css.earth/blob/92c07424a07153b5dd02aad3e804ce11c580ca05/src/objects/haumea/source/photometry/disc-color.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/haumea/source/photometry/disc-color.json"
       ]
     },
     {
@@ -211,11 +142,6 @@
       "revisitWhen": "A newer rotation-corrected colour set disagrees with Rabinowitz et al. (2006) beyond their uncertainties.",
       "evidence": [
         "https://doi.org/10.26093/cds/vizier.35460115"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -226,11 +152,6 @@
       "revisitWhen": "A thermal model that includes Haumea's elongated shape and ring disagrees with the occultation albedo.",
       "evidence": [
         "https://arxiv.org/abs/2006.03113"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -241,11 +162,6 @@
       "revisitWhen": "A published surface map or rotationally resolved colour model fixes the region's extent and contrast in a body-fixed frame.",
       "evidence": [
         "https://arxiv.org/abs/0911.0009"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -256,11 +172,6 @@
       "revisitWhen": "A published albedo with separately measured ring and satellite contributions.",
       "evidence": [
         "https://arxiv.org/abs/2006.03113"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -269,13 +180,7 @@
       "status": "included",
       "finding": "The prepared orbital position and conic use the pinned primary vector and validated epoch record shared with Hi'iaka, which replaced the older heliocentric conic in the prepared scene; the README says this is not a new long-term ephemeris.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L15",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/hiiaka/source/validation/epoch-state.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hiiaka/source/validation/epoch-state.json"
       ]
     },
     {
@@ -285,13 +190,7 @@
       "finding": "The README records that the paper's main text and Methods give different uncertainties for the middle axis, 4 km and 2 km, while the nominal value agrees, so the adopted semiaxis is used with an unsettled error.",
       "revisitWhen": "An erratum or a later publication settles the middle-axis uncertainty.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L7",
         "https://doi.org/10.1038/nature24051"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -301,12 +200,7 @@
       "finding": "Known problems state that the pole is observationally constrained but the display meridian is arbitrary, because the measured 3.915341-hour period does not establish an absolute orientation at the application epoch; no fictitious rotational ephemeris is animated.",
       "revisitWhen": "A published longitude system or absolute rotational ephemeris fixes Haumea's meridian at a known epoch.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/haumea/README.md#L15"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/haumea/README.md#L15"
       ]
     },
     {
@@ -317,11 +211,6 @@
       "evidence": [
         "https://science.nasa.gov/resource/haumea-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18"
-        }
       ]
     }
   ]

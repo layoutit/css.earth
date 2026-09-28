@@ -1257,8 +1257,7 @@ Chromium's scrollbar/resizer styling and CSS view timelines. Firefox and real
 mobile hardware are not qualified. Unsupported prepared camera bindings are
 refused instead of producing an incomplete view.
 
-The following browser check is historical. Its helper last existed at
-[revision `6e32bc459b^`](https://github.com/layoutit/css.earth/blob/6e32bc459b%5E/tests/experiments/native-scroll/sphere-browser.mts)
+The following browser check is historical. Its helper remains in git history
 and is absent from this checkout:
 
 ```sh
@@ -1331,7 +1330,7 @@ The example uses the archive cube
 already pinned by the Europa 1250 reproduction record. This run checks those
 archive bytes; it does not claim a new Spec3 reproduction. Its 4.2–4.3 µm
 brightness image uses the explicit independent-sample uncertainty assumption.
-The disc registration reuses the [previous Europa fit](https://github.com/layoutit/css.earth/blob/4ac4a4a9eb076d63760768e9f4ca3408882f2bcc/src/objects/europa/evidence/jwst-band-maps.json), converted from top-row-first
+The disc registration reuses the [previous Europa fit](../src/objects/europa/evidence/jwst-band-maps.json), converted from top-row-first
 coordinates to native FITS coordinates; the map excludes emission angles above 65°.
 
 ![Europa projected brightness](images/telescopes/europa-projected-brightness.png)

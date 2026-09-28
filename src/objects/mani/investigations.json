@@ -8,13 +8,7 @@
       "status": "included",
       "finding": "The measured silhouette anchors the smooth assumed-depth model, without crater or limb-feature extrusion.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/mani/README.md#L36"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-10",
-          "pr": 99
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mani/README.md#L36"
       ]
     },
     {
@@ -23,14 +17,7 @@
       "status": "included",
       "finding": "The [same study’s thermal-size comparison and preference for an oblate interpretation](https://doi.org/10.1051/0004-6361/202346892) is context only. Thermal size is not substituted for the directly observed outline; the pole and true flattening remain undetermined.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/mani/README.md#L37",
         "https://doi.org/10.1051/0004-6361/202346892"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-10",
-          "pr": 99
-        }
       ]
     }
   ]

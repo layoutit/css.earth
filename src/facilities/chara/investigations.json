@@ -11,11 +11,6 @@
       "evidence": [
         "https://www.chara.gsu.edu/observers/database",
         "https://www.chara.gsu.edu/observers/data-reduction-software"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
       ]
     },
     {
@@ -26,11 +21,6 @@
       "revisitWhen": "CHARA states terms for copying or republishing reduced data.",
       "evidence": [
         "https://www.chara.gsu.edu/observers/database"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
       ]
     },
     {
@@ -42,11 +32,6 @@
       "evidence": [
         "https://github.com/jdmonnier/mircx_mystic",
         "https://www.chara.gsu.edu/observers/data-reduction-software"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
       ]
     },
     {
@@ -58,12 +43,6 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/257",
         "https://oidb.jmmc.fr/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 257
-        }
       ]
     }
   ]

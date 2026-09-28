@@ -952,7 +952,7 @@ export async function author(defaultLens = 'zimpol-v') {
     (input.sourceBinding?.references ?? []).map(reference => [`${input.id}/${reference.catalogueId}`, reference.evidence])));
   const binding = (id: string) => {
     const catalogueId = `source-betelgeuse-shell-${id}`;
-    const evidence = pinnedEvidence.get(`${id}/${catalogueId}`) ?? `${packageBase}/manifest.json@${'0'.repeat(40)}#/inputs/${inputs.length}`;
+    const evidence = pinnedEvidence.get(`${id}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${inputs.length}`;
     return { dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] } };
   };
   for (const entry of walked.sort((a, b) => pathOf(a).localeCompare(pathOf(b), 'en'))) {

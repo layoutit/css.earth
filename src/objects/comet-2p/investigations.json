@@ -8,14 +8,9 @@
       "status": "included",
       "finding": "Retained intake decision: Table 3: SAM1, P=11.1 h, a=4.58 km, axial ratio 2.60; section 4. Absolute published semiaxes supply a smooth ellipsoid; this is not a retrieved radar terrain mesh, and its attitude is illustrative.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/source/reference/source-record.json",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/source/shape/model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-2p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-2p/source/shape/model.json",
         "https://doi.org/10.1016/j.icarus.2005.01.012"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -25,13 +20,8 @@
       "finding": "Retained intake decision: No downloadable original mesh for this nucleus identified. Use the cited numeric shape constraints; unresolved mesh access is not evidence of absence.",
       "revisitWhen": "A downloadable original model with its units, frame and reuse record is located.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-2p/source/reference/source-record.json",
         "https://echo.jpl.nasa.gov/publications/pubs.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -41,13 +31,8 @@
       "finding": "Retained intake decision: Shape constraints only. Delay-Doppler images are not optical surface maps and are not draped as texture.",
       "revisitWhen": "A separately qualified radar observable is proposed with its own physical meaning, or resolved optical photographs become available.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-2p/source/reference/source-record.json",
         "https://doi.org/10.1016/j.icarus.2005.01.012"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -57,13 +42,8 @@
       "finding": "Retained intake decision: Constrain size and rotation; no resolved optical surface texture selected.",
       "revisitWhen": "Resolved surface observations and camera or terrain controls support a reproducible mapping.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-2p/source/reference/source-record.json",
         "https://doi.org/10.1016/j.icarus.2005.01.012"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -73,14 +53,8 @@
       "finding": "Table 3 also considers axis ratio 2.04 and a slower SAM2 case. The selected 2.60 SAM1 case better matches the reported infrared size; it is not a unique shape solution. Similar alternative illustrations are documented without extra datasets.",
       "revisitWhen": "Independent observations distinguish the alternative shapes or justify a useful comparison.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/source/reference/source-record.json",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-2p/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-2p/source/reference/source-record.json",
         "https://doi.org/10.1016/j.icarus.2005.01.012"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     }
   ]

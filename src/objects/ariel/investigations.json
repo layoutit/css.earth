@@ -8,13 +8,7 @@
       "status": "included",
       "finding": "Selected as Monochrome for revised registration, documented photometry, and original floating-point data.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json"
       ]
     },
     {
@@ -23,13 +17,7 @@
       "status": "included",
       "finding": "Selected as the conceptually distinct Elevation lens, with its own validity and ellipsoid datum.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json"
       ]
     },
     {
@@ -39,14 +27,8 @@
       "finding": "Excluded as a duplicate lower-density display mosaic; original LPI data has stronger mapping and processing provenance.",
       "revisitWhen": "A Ariel source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json",
         "https://space.jpl.nasa.gov/tmaps/uranus.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -56,14 +38,8 @@
       "finding": "Excluded: 47 km image detail and disc projection add no mapped surface capability to the selected mosaic.",
       "revisitWhen": "A primary Ariel release provides the PIA01351 source image with body-fixed camera geometry and useful mapped coverage beyond the Schenk mosaic.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json",
         "https://science.nasa.gov/photojournal/bright-patches-on-ariel/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -73,14 +49,8 @@
       "finding": "Unresolved complementary interpretive candidate. The examined releases describe geological figures and continued structural mapping, but did not establish a downloadable georeferenced unit raster/vector closure suitable for this renderer. No geological lens is claimed.",
       "revisitWhen": "A Ariel source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/manifest.json",
         "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1126.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -89,12 +59,7 @@
       "status": "included",
       "finding": "The inspected release republishes RAND and Jigsaw control solutions and is retained as registration support. It is not an additional image or measured-scalar lens.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/README.md"
       ]
     },
     {
@@ -103,12 +68,7 @@
       "status": "included",
       "finding": "The existing visual trial compared upper bounds of 2400, 3000 and 3600 DN and selected 3000 DN. This is a display-contrast choice applied to the retained numeric mosaic, not an albedo calibration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ariel/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/README.md"
       ]
     },
     {
@@ -117,14 +77,8 @@
       "status": "included",
       "finding": "9 GEOMED frames in 3 complete sets (1.3 to 19.8 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.0, 1.05); the archive calibration gives 0.873 and 0.972. No phase normalisation; the north stays unavailable.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/fd2ff67616df50df39ad194fe3d22073fdf40617/src/objects/ariel/README.md",
-        "https://github.com/layoutit/css.earth/blob/fd2ff67616df50df39ad194fe3d22073fdf40617/src/objects/ariel/source/reference/voyager-color-placement.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ariel/source/reference/voyager-color-placement.json",
         "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-22"
-        }
       ]
     },
     {
@@ -136,12 +90,7 @@
         "https://doi.org/10.1016/0019-1035(88)90039-5",
         "https://ntrs.nasa.gov/citations/19880051927"
       ],
-      "revisitWhen": "A disc-resolved law for Ariel with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "A disc-resolved law for Ariel with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released."
     }
   ]
 }

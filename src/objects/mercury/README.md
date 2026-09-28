@@ -64,7 +64,7 @@ footprints. These are checks of data handling, not instrument accuracy.
 The [qualification record](evidence/native-maps/qualification.json) records the
 tested inputs, unchanged geometry, inspected browser views, delivery and focused
 checks: 75 independent native footprints agree, and all 76 runtime files installed from the published asset host into an empty directory. The normal and enhanced surface maps are 2.48 MB and 3.55 MB; the new LOI map adds 2.93 MB. No cold-load timing was measured. Earlier JPEG timings and resampling comparisons apply only to the
-[previous Trek-based preparation](https://github.com/layoutit/css.earth/blob/7d1a553b68af8c749cc734f7bd9710085762d839/src/objects/mercury/README.md#evidence),
+[previous Trek-based preparation](README.md#evidence),
 not to these native-derived WebP files.
 
 ## Known problems

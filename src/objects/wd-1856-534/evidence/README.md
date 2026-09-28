@@ -1,6 +1,6 @@
 # WD 1856+534 evidence — 2026-09-23
 
-These results apply to the WD 1856+534 and WD 1856+534 b packages, records and tool changes committed with this evidence, on top of main at `874b508c84`.
+These results apply to the WD 1856+534 and WD 1856+534 b packages, records and tool changes committed with this evidence, on top of main.
 
 ## Numerical and source checks
 

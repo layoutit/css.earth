@@ -1,8 +1,7 @@
 {
   "schema": "cssearth-pipeline-evidence@1",
   "reference": {
-    "revision": "origin/main",
-    "commit": "3785f09de351c63fae771d0412ebedb03d2a92ec"
+    "revision": "origin/main"
   },
   "comparison": "node tools/compare-visual-evidence.mts on the exact committed bytes of both revisions: Pixelmatch threshold 0.1, anti-aliasing included, no resizing or masks. A mismatch count locates change; it does not measure quality.",
   "minimaps": {

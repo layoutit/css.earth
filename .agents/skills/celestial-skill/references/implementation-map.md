@@ -1,7 +1,7 @@
 # cssEarth implementation map
 
 Paths are relative to the selected repository. The documentation links were
-checked against main `2f6f8614add9a5a22ef03b86a47edef631950ade` on 2026-09-09.
+checked on 2026-09-09.
 Code examples below name the revisions where they were checked. Inspect the
 current checkout before using them.
 
@@ -135,7 +135,7 @@ instead of editing a shared list or atlas position.
   `source/preparation/terrestrial.json` selects `geometry.radialTerrain`, native
   `primitive: "u"`, and optional meshoptimizer simplification. Read
   [irregular meshes](irregular-meshes.md) before using this branch. The owners
-  below were verified in Vesta PR #24 at `1979293e` on 2026-09-07; inspect the
+  below were verified in Vesta PR #24 on 2026-09-07; inspect the
   selected checkout for availability rather than assuming that revision is merged.
 
 | Irregular-mesh capability | Owner relative to the repository |
@@ -166,7 +166,7 @@ reads the pinned raster with its declared grid and validity policy;
 it does not accept arbitrary projections, recover a paper figure's registration
 or establish compatibility with another shape. Source and atlas checks live in
 `native-photograph-source.test.mts` and `native-photograph.test.mts` beside those
-owners. These paths were inspected at main `943179c7c748c4e9727b9d94e15b214c2d20a68c`.
+owners. These paths were inspected.
 
 For individual observations, each row below gives the recipe format, an example,
 what the body owner writes, and the reader oracle. For a demonstrated missing
@@ -269,8 +269,7 @@ band the runtime hands the sky to the 3D star field, so the cube fades out there
 
 For photographs with per-pixel surface geometry, read
 [registered photographic mosaics](registered-photographic-mosaics.md). The 67P
-OSIRIS example below was inspected at commit
-`fde7dc8f3f35f6c56fee440b24bc7041a47255a2` in PR #49. Check the selected checkout
+OSIRIS example below was inspected in PR #49. Check the selected checkout
 for availability; this reference does not establish merge or deployment status.
 
 | Capability | Owner relative to the repository |

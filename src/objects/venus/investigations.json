@@ -13,14 +13,6 @@
         "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/00readme.txt",
         "https://www.isas.jaxa.jp/en/researchers/data-policy/",
         "https://darts.isas.jaxa.jp/planet/project/akatsuki/uvi.html.en"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        },
-        {
-          "date": "2026-09-19"
-        }
       ]
     },
     {
@@ -32,13 +24,8 @@
         "https://doi.org/10.17597/isas.darts/vco-00016",
         "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
         "https://ssd.jpl.nasa.gov/api/horizons.api",
-        "https://github.com/layoutit/css.earth/blob/694a1265852870fed108c79258b324f5e1072ef9/src/objects/venus/README.md",
-        "https://github.com/layoutit/css.earth/blob/694a1265852870fed108c79258b324f5e1072ef9/tools/objects/akatsuki/uvi-l3b.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-19"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/venus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/tools/objects/akatsuki/uvi-l3b.mts"
       ]
     },
     {
@@ -49,11 +36,6 @@
       "evidence": [
         "https://doi.org/10.1002/2017JE005406",
         "https://arxiv.org/abs/1801.03820"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -62,11 +44,6 @@
       "status": "excluded",
       "evidence": [
         "https://psg.gsfc.nasa.gov/helpatm.php"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -77,11 +54,6 @@
       "evidence": [
         "https://psg.gsfc.nasa.gov/images/help/handbook.pdf",
         "https://hub.docker.com/r/nasapsg/psg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -93,11 +65,6 @@
       "evidence": [
         "https://doi.org/10.1016/0019-1035(83)90071-4",
         "https://archives.esac.esa.int/psa/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -106,14 +73,9 @@
       "status": "excluded",
       "finding": "Removed with atmosphere/model.json; the disc takes the MASCS law.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "magellan-emissivity",
@@ -122,11 +84,6 @@
       "finding": "The USGS 4641 m signed GeoTIFF is decoded as (DN-1)/10000 with its declared nodata and projection. Antenna and atmosphere corrections are included; emission angle, roughness and tilt are not corrected.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
       ]
     },
     {
@@ -136,11 +93,6 @@
       "finding": "No full-coverage date sequence was qualified here; this surface emissivity addition retains the existing ultraviolet cloud data.",
       "evidence": [
         "https://darts.isas.jaxa.jp/missions/akatsuki/ir2_en.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
       ],
       "revisitWhen": "A particular Level 3 release and its usable geographic coverage are selected."
     },
@@ -152,11 +104,6 @@
       "evidence": [
         "https://ui.adsabs.harvard.edu/abs/2011P&SS...59.1559I/abstract"
       ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
-      ],
       "revisitWhen": "The published GIS units and symbology are acquired with clear reuse terms."
     },
     {
@@ -167,11 +114,6 @@
       "evidence": [
         "https://www.cosmos.esa.int/web/psa/venus-express"
       ],
-      "checked": [
-        {
-          "date": "2026-09-26"
-        }
-      ],
       "revisitWhen": "The numeric surface-emissivity grid and its atmosphere correction and gaps are established."
     },
     {
@@ -180,13 +122,8 @@
       "status": "included",
       "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05/src/objects/venus/evidence/usgs-numeric/numeric-checks.json",
-        "https://github.com/layoutit/css.earth/blob/7fcfc08cd8dae2a8f80e08272dc76cc84c0e8c05/src/objects/venus/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/venus/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/venus/README.md"
       ]
     }
   ]

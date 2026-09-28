@@ -1,8 +1,5 @@
 {
-  "baseRevision": "55fe2579fa741da71a0bd5498712d0f3d7e5fe25",
-  "mergedMain": "0636327babf3f6a52c3cfd265453555532739985",
   "workingChanges": "Expanded imagery and observation-only refresh before commit; exact source, recipe and delivered byte hashes bind this evidence.",
-  "beforeRevision": "55fe2579fa741da71a0bd5498712d0f3d7e5fe25",
   "captureImplementation": "tests/objects/browser/asteroid-photographic-coverage.mts",
   "captureImplementationSha256": "d6ce1404597bf76f55bd4fb8cff21fe6d8a3c707647e355959a16ac18a02187d",
   "beforeCapture": {

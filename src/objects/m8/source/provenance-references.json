@@ -3,31 +3,26 @@
   "references": [
     {
       "originalPath": "labs/nebula/models/m8/physical-evidence.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m8/source/bake-inputs/references/03-physical-evidence.json",
       "bytes": 14198
     },
     {
       "originalPath": "labs/nebula/models/m8/compiler.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m8/source/bake-inputs/references/01-compiler.json",
       "bytes": 1511
     },
     {
       "originalPath": "labs/nebula/models/m8/depth-model.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m8/source/bake-inputs/references/02-depth-model.json",
       "bytes": 3297
     },
     {
       "originalPath": "labs/nebula/models/m8/processing-observations.json",
-      "revision": "ef70e15cb6c115fb4f5aa2960f89972e7e3c717c",
       "path": "src/objects/m8/source/bake-inputs/references/04-processing-observations.json",
       "bytes": 5778
     },
     {
       "originalPath": "labs/nebula/models/m8/processing-structures.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m8/source/bake-inputs/references/05-processing-structures.json",
       "bytes": 420
     }

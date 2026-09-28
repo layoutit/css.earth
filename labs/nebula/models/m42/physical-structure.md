@@ -1,6 +1,6 @@
 # Orion: structure and velocity evidence
 
-Research intake: 12 September 2026. The image-only baseline at `6b589ae09` has no Orion spectroscopy or physical scaffold. This note records evidence and the next experiment; it does not claim that these constraints already drive the compiler.
+Research intake: 12 September 2026. The image-only baseline has no Orion spectroscopy or physical scaffold. This note records evidence and the next experiment; it does not claim that these constraints already drive the compiler.
 
 ## Why the current depth fails
 

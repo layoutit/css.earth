@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "The CLEAR frames in fully_processed.zip supply Monochrome from calibrated float I/F at about 335–1633 m/pixel. Native grids and ISIS metadata control registration. Per-frame Lunar-Lambert correction and overlap exposure normalization reduce acquisition shading but do not recover calibrated albedo or invert terrain shadows.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md",
         "https://doi.org/10.5066/P9MGH7FB",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/source/manifest.json"
       ]
     },
     {
@@ -24,14 +18,8 @@
       "status": "included",
       "finding": "The 14,138 × 7,069 tnmap-cyl-KH.jpg supplies Enhanced color at roughly 600 m/pixel, with variable native color resolution. Orange/green/blue filters approximate natural color with enhanced contrast. The original ±180° map is rolled to east-positive coordinates; black unilluminated northern coverage stays missing.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md",
         "https://www.lpi.usra.edu/icy_moons/neptune/triton/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/source/manifest.json"
       ]
     },
     {
@@ -41,12 +29,7 @@
       "finding": "GlobalFill interpolates over map grid lines. The selected original observations retain missing coverage instead of adopting those interpolated pixels.",
       "revisitWhen": "A controlled derivative distinguishes measured pixels from filled regions and supplies useful observed coverage beyond the selected originals.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/README.md"
       ]
     },
     {
@@ -55,13 +38,7 @@
       "status": "included",
       "finding": "The embedded TIFF grid and original ISIS label specify a 15° east, 18° north orthographic center, while release prose says 15° west. Preparation follows the pixel-owned grid and label, rejects the opposite hemisphere, and preserves ISIS special values as missing.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/triton/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/source/manifest.json"
       ]
     },
     {
@@ -70,15 +47,9 @@
       "status": "included",
       "finding": "Fifteen green/violet/ultraviolet frames at 4.0–25 km/pixel are placed by recorded SEDR pointing plus a limb fit (6–162 pixel corrections, RMS below 1.3 pixels) and a measured 24 km datum shift onto Bland's controlled grid. Together with Bland's twelve controlled colour frames they form the Voyager color lens, extending colour from 8.9 % to about 47 % of the map. Frames whose limb leaves the frame or whose crescent gives no clean limb are rejected by the fit.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/66948cc1fa9919990594906473bb671c5a4c5923/src/objects/triton/README.md",
-        "https://github.com/layoutit/css.earth/blob/66948cc1fa9919990594906473bb671c5a4c5923/src/objects/triton/source/reference/voyager-color-placement.json",
-        "https://github.com/layoutit/css.earth/blob/66948cc1fa9919990594906473bb671c5a4c5923/src/objects/triton/source/reference/voyager-color-oracle.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/source/reference/voyager-color-placement.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/source/reference/voyager-color-oracle.json",
         "https://pds-rings.seti.org/voyager/iss/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-22"
-        }
       ]
     },
     {
@@ -87,14 +58,8 @@
       "status": "included",
       "finding": "Where the two sets see the same ground, Bland's voycal I/F is darker than the GEOMED calibration by 1.35 (green), 1.19 (violet) and 1.28 (ultraviolet). The GEOMED green/violet ratio, 1.21, matches Nelson et al. (1990) geometric albedos (0.81/0.68 = 1.19); Bland's frames give 1.06. The recipe therefore scales every observation onto the 4.7 km/pixel GEOMED triplet band by band (bandLevels). Bland's frames keep their placement and detail; only their levels change.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/66948cc1fa9919990594906473bb671c5a4c5923/src/objects/triton/README.md",
         "https://doi.org/10.1029/GL017i010p01761",
         "https://doi.org/10.3847/PSJ/ad33ca"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-22"
-        }
       ]
     },
     {
@@ -106,11 +71,6 @@
       "evidence": [
         "https://doi.org/10.1029/GL017i010p01761",
         "https://doi.org/10.3847/PSJ/ad33ca"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-22"
-        }
       ]
     },
     {
@@ -123,12 +83,7 @@
         "https://ntrs.nasa.gov/citations/19950043343",
         "https://doi.org/10.1029/91JA01736"
       ],
-      "revisitWhen": "A global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "A global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs."
     }
   ]
 }

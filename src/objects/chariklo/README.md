@@ -9,8 +9,8 @@
 
 ## Evidence
 
-- [Recorded checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/VALIDATION.md): shape and rings, [17 source records](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/source-validation.json), and [fresh image installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/fresh-install.json) for both Centaurs.
-- [Headless Chrome checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/browser-validation.json) cover both bodies at 1440 × 900 CSS pixels, DPR 1/2, after integration of `3badfb535`. Later PR #89 checks cover data integration. [The drag report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/evidence/chariklo-drag.json) retains its earlier build identity and local raw-trace path/hash.
+- Recorded checks: shape and rings, 17 source records, and fresh image installation for both Centaurs.
+- Headless Chrome checks cover both bodies at 1440 × 900 CSS pixels, DPR 1/2, after integration. Later PR #89 checks cover data integration. The drag report retains its earlier build identity and local raw-trace path/hash.
 
 ## Known problems
 
@@ -36,11 +36,11 @@ The ICRS ring-plane normal is RA 151.03° ± 0.14°, Dec +41.81° ± 0.07°. The
 
 The selected contact gives C1R radius 385.9 km and radial width 7.04 km, and C2R radius 400.3 km and radial width 1.009 km. [The ring record](source/rings/occultation-2022.json) retains the uncertainties, normal occultation opacity and its explicitly schematic use as constant display alpha. C2R has broad uncertainties, and ring properties vary with longitude, wavelength and epoch. Its 2021 equivalent width of 0.117 km is opacity times radial width, not a geometric width. No unsampled longitude structure is added.
 
-Preparation uses the existing annular geometry helper and coplanar raster compiler: 256 source quads become 16 retained image tiles, preserving the central aperture and gap. Ring triangles are absent from the body surface-picking structure; no separate ring picking is provided. [The batch ring account](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#chariklos-rings) explains this processing and its source choices.
+Preparation uses the existing annular geometry helper and coplanar raster compiler: 256 source quads become 16 retained image tiles, preserving the central aperture and gap. Ring triangles are absent from the body surface-picking structure; no separate ring picking is provided. The batch ring account explains this processing and its source choices.
 
 ### Orbit
 
-This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `10199;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. [Independent vector comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/orbit-errors.json) sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
+This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `10199;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. Independent vector comparisons sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
 
 ### Reproduction
 

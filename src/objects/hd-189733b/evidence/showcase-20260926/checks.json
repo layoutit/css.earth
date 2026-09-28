@@ -1,8 +1,6 @@
 {
   "schema": "cssearth-hd189733-showcase-evidence@1",
   "checkedOn": "2026-09-26",
-  "implementationCommit": "54e578c8229d86d287d40d9985b88c836cfb0896",
-  "baseCommit": "f91790792505baec34886e60729cda3da7651d53",
   "sourceChecks": {
     "hst": "All six Table 1 records, including signed albedo and asymmetric errors.",
     "cheops": "Integrated 350-1100 nm band; 0.076 +/- 0.016.",
@@ -388,7 +386,6 @@
     "Some first screenshots caught pending browser paint; retained images were inspected after the chart and surface appeared."
   ],
   "integration": {
-    "mainCommit": "9830ac1173f25e00fb3111b6f1afe35a12865742",
     "resolution": "Chart titles follow main into tools/objects/content/prepare.ts; the deleted site title module stays deleted.",
     "inventoryByteIdenticalToImplementation": true,
     "inventorySha256": "19650c1844daf991b996bc648e0e91247668bfc15cd4108e7a5ddf0f99ac7338",

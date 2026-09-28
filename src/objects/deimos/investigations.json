@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "Selected best mapped mosaic supplies Monochrome with mixed detail and source illumination.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
         "https://doi.org/10.1186/s40623-023-01814-7"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -25,14 +19,8 @@
       "finding": "Superseded by the selected higher-density version and does not form a duplicate lens.",
       "revisitWhen": "A distinct release improves valid coverage or registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
         "https://doi.org/10.1186/s40623-023-01814-7"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -41,14 +29,8 @@
       "status": "included",
       "finding": "Selected source supplies shape, radial height, relative albedo and gravity-relative slope with missing albedo withheld.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
         "https://doi.org/10.1186/s40623-023-01814-7"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -58,14 +40,8 @@
       "finding": "Regional and perspective observations do not provide a qualified global color raster for the selected shape.",
       "revisitWhen": "A registered global color product with coverage evidence is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
         "https://doi.org/10.1186/s40623-023-01814-7"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -75,14 +51,8 @@
       "finding": "The survey found no qualified mapped product; disk spectra are not texture lenses.",
       "revisitWhen": "A mapped product states its quantity, frame and coverage.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json",
         "https://doi.org/10.1186/s40623-023-01814-7"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -91,13 +61,7 @@
       "status": "included",
       "finding": "The selected Stooke mosaic already integrates the identified useful HiRISE images. Those original mission observations are the underlying route, not an independent additional lens.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/deimos/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json"
       ]
     }
   ]

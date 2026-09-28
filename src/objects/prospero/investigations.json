@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "K2 reports a 7.145-hour single-peaked photometric period; the selected shape interpretation doubles it, consistent with the 2023 summary. A competing 4.415-cycle/day frequency remains documented. The 50 km size assumes albedo and is not a measured thermal diameter. Minimum elongation assumes uniform reflectivity and an equator-on view. Equal short axes, volume normalization, pole, spin sense and meridian remain display assumptions; no resolved surface or unique three-dimensional shape is established.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prospero/README.md",
         "https://arxiv.org/pdf/1706.06837",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prospero/source/measurements.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prospero/source/measurements.json"
       ]
     },
     {
@@ -23,12 +17,7 @@
       "survey": "uranus-flagship-2023-summary",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prospero/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prospero/README.md"
       ]
     },
     {
@@ -36,14 +25,9 @@
       "survey": "vlt-irregular-photometry",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prospero/README.md"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prospero/README.md"
       ],
-      "revisitWhen": "A prospero-resolved VLT or successor observation supplies a mapped surface grid or controlled camera solution.",
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
-      ]
+      "revisitWhen": "A prospero-resolved VLT or successor observation supplies a mapped surface grid or controlled camera solution."
     }
   ]
 }

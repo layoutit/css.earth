@@ -8,15 +8,8 @@
       "status": "included",
       "finding": "The [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) supplies the observation lens and the [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) supplies geometry and radial-height visualization.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/prometheus/README.md#L50",
         "https://pds-rings.seti.org/cassini/iss/",
         "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-09",
-          "pr": 83
-        }
       ]
     },
     {
@@ -26,13 +19,7 @@
       "finding": "`N1828136577_1` has a PDS table center sample of 790.20, inconsistent with the body in the image near sample 490. The earlier `N1828134597_1` covers this region at finer resolution; no camera-center correction is invented.",
       "revisitWhen": "A corrected camera centre for this frame is published.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/prometheus/README.md#L52"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-09",
-          "pr": 83
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/README.md#L52"
       ]
     },
     {
@@ -42,13 +29,7 @@
       "finding": "The Voyager-era Stooke shaded-relief and Celestia maps represent a different, older cartographic interpretation and cannot be described as Cassini observed pixels; the original Western University distribution URL currently returns 404. They add no qualified improvement over the chosen Cassini frames.",
       "revisitWhen": "A registered observational map improves on the Cassini frames.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/prometheus/README.md#L54"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-09",
-          "pr": 83
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/README.md#L54"
       ]
     },
     {
@@ -58,14 +39,7 @@
       "finding": "[SBIB’s Cassini catalog](https://sbn.psi.edu/pds/sbib/saturn.html) currently omits Prometheus from its listed targets. This is a limitation of that catalog, not a claim that other Prometheus datasets do not exist.",
       "revisitWhen": "The catalog lists Prometheus.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/prometheus/README.md#L58",
         "https://sbn.psi.edu/pds/sbib/saturn.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-09",
-          "pr": 83
-        }
       ]
     },
     {
@@ -76,12 +50,7 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/prometheus_document.pdf",
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/78e0164f7e892bda98f34aec8db0dcda72c60b37/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
       ]
     },
     {
@@ -90,14 +59,8 @@
       "status": "included",
       "finding": "The original IR3/GRN/UV3 triplet and the independently checked January 2010 sequence supply False color. The two encounters have no accepted overlap for level matching, so relative brightness remains unmatched rather than corrected by guessed gains.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/source/preparation/terrestrial.json",
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/prometheus_document.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -107,13 +70,7 @@
       "finding": "No accepted same-surface overlap connects the two color sequences, so their gains remain1. The observed brightness discontinuity is not corrected by per-band equalization or a natural-color assumption.",
       "revisitWhen": "An independently registered bridge observation or applicable sourced photometry establishes the inter-encounter level.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
       ]
     }
   ]

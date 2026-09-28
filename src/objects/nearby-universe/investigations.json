@@ -9,12 +9,7 @@
       "finding": "Pinned CDS TSV catalogue input for the nearby galaxy distribution; catalogue distance and identity measurements are distinct from authored display brightness and count clouds.",
       "evidence": [
         "https://doi.org/10.3847/1538-4357/ac94d8",
-        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/nearby-universe/source/catalogue.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-14"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/nearby-universe/source/catalogue.json"
       ]
     },
     {
@@ -24,12 +19,7 @@
       "finding": "Pinned CDS TSV catalogue input for the nearby galaxy distribution; catalogue distance and identity measurements are distinct from authored display brightness and count clouds.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361:20031411",
-        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/nearby-universe/source/catalogue.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-14"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/nearby-universe/source/catalogue.json"
       ]
     },
     {
@@ -39,12 +29,7 @@
       "finding": "Pinned CDS TSV catalogue input for the nearby galaxy distribution; catalogue distance and identity measurements are distinct from authored display brightness and count clouds.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361:20031412",
-        "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/nearby-universe/source/catalogue.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-14"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/nearby-universe/source/catalogue.json"
       ]
     },
     {
@@ -54,11 +39,6 @@
       "finding": "Rejected during development because point depth quantization and cross-axis transitions reduced point sharpness. Current renderer batches projected catalogue points and uses separate covariance count clouds. This consolidates the recorded implementation decision, not a new benchmark.",
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/215"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-14"
-        }
       ],
       "revisitWhen": "A matched rotation benchmark demonstrates sharper stable points at the same bounded rendering cost."
     }

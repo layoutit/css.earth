@@ -1,7 +1,6 @@
 # Retained nebula app evidence
 
-These original reports preserve the checks underlying the nebula delivery at
-`5569fa211db447927cb9c30284f13d2a37049695`. Their bytes and historical results
+These original reports preserve the checks underlying the nebula delivery. Their bytes and historical results
 are unchanged. The [capture map](capture-map.json) supplies hashes and portable
 locations for the images used to inspect the reported visual changes.
 

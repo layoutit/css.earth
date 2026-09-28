@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "Selected 154 m map supplies Monochrome; exact zero is gap while other dark values remain observed, and its 563 km map sphere remains distinct from other source frames.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/dione_cassini_voyager_global_mosaic_154m"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -24,14 +18,8 @@
       "status": "included",
       "finding": "Selected ultraviolet/infrared product supplies Enhanced color after producer calibration, registration and photometric correction; it is not natural color and has no separate validity mask.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -40,14 +28,8 @@
       "status": "included",
       "finding": "Selected Q128 OBJ supplies geometry and Shape; 2,000-face rendering approximation remains distinct from source uncertainty and cartographic registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.26033/bxx6-g543"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -56,14 +38,8 @@
       "status": "included",
       "finding": "Selected equatorial and polar grids supply Elevation as radius minus the 561.4 km source sphere. Join gaps remain marked and the numeric datum is separate from display scale.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.26033/bxx6-g543"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -72,14 +48,8 @@
       "status": "included",
       "finding": "Selected dimensionless equatorial and polar fields supply Relative albedo. They are normalized around one, less validated than topography, not geometric albedo or calibrated reflectance, and visually clip above 1.5.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.26033/bxx6-g543"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -88,14 +58,8 @@
       "status": "included",
       "finding": "Selected registered PDS product supplies Infrared with its own source wavelengths, phase-function parameters and coverage limits.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.17189/ctqe-ta30"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -104,14 +68,8 @@
       "status": "included",
       "finding": "Selected PDS product supplies Ice absorption as a spectral signal, not abundance, under the same documented source limits.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.17189/ctqe-ta30"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -121,14 +79,8 @@
       "finding": "The README says geographic registration, silhouette and feature review remain pending; current display checks do not qualify map-to-shape registration.",
       "revisitWhen": "A source-to-shape registration review with independent feature and silhouette evidence is completed.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/dione/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.26033/bxx6-g543"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     }
   ]

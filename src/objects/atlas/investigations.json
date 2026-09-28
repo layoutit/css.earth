@@ -8,13 +8,7 @@
       "status": "included",
       "finding": "Original PDS ISS calibrated frames plus the model release's registered viewing geometry. The 2017 closest-flyby images provide the strongest available detail in the qualified footprint.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/e013f9641ace2e6b49e9a66bd4414ec7bdea9763/src/planets/atlas/SOURCE.md#L25"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "pr": 28
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/atlas/README.md#L25"
       ]
     },
     {
@@ -23,13 +17,7 @@
       "status": "included",
       "finding": "PDS plate model, supplying both real geometry and the complementary radial-height view.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/e013f9641ace2e6b49e9a66bd4414ec7bdea9763/src/planets/atlas/SOURCE.md#L26"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "pr": 28
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/atlas/README.md#L26"
       ]
     },
     {
@@ -39,14 +27,7 @@
       "finding": "NASA press portraits ([Atlas overview](https://science.nasa.gov/saturn/moons/atlas/)) reuse the Cassini observations; directly calibrated frames preserve their original coordinates and numerical pixels.",
       "revisitWhen": "A press product adds pixels or registration that the calibrated frames lack.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/e013f9641ace2e6b49e9a66bd4414ec7bdea9763/src/planets/atlas/SOURCE.md#L27",
         "https://science.nasa.gov/saturn/moons/atlas/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "pr": 28
-        }
       ]
     },
     {
@@ -56,13 +37,7 @@
       "finding": "The USGS/DLR standard Cassini global-mosaic series does not supply a downloadable registered Atlas map in the inspected release. Papers on these small moons provide regional geological and compositional interpretation; no corresponding global scalar raster was identified for this package. This is a bounded survey, not a claim that no further data exists.",
       "revisitWhen": "A downloadable registered Atlas map or global scalar raster is found.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/e013f9641ace2e6b49e9a66bd4414ec7bdea9763/src/planets/atlas/SOURCE.md#L29"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "pr": 28
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/atlas/README.md#L29"
       ]
     },
     {
@@ -74,11 +49,6 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/atlas_document.pdf",
         "https://pds-rings.seti.org/cassini/iss/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -87,14 +57,8 @@
       "status": "included",
       "finding": "The selected IR3/GRN/UV3 sequence supplies False color through its published shape-camera rows. Each calibrated band keeps its own viewing geometry; shared sRGB display encoding does not establish natural color or eliminate relief-edge fringes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/atlas/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/atlas/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/atlas/source/preparation/terrestrial.json",
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/atlas_document.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     }
   ]

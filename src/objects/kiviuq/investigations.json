@@ -10,13 +10,7 @@
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
         "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kiviuq/source/measurements.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kiviuq/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/kiviuq/source/measurements.json"
       ]
     },
     {
@@ -26,13 +20,7 @@
       "finding": "Cassini ISS and the Kiviuq observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour lens.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kiviuq/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/kiviuq/"
       ]
     },
     {
@@ -43,13 +31,7 @@
       "revisitWhen": "A released Kiviuq mesh with a documented body frame, method and reuse route can be compared with this approximation.",
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf",
-        "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kiviuq/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/kiviuq/"
       ]
     },
     {
@@ -60,13 +42,7 @@
       "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified lens.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/kiviuq/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/kiviuq/"
       ]
     }
   ]

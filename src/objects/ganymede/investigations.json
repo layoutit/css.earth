@@ -13,17 +13,8 @@
         "https://doi.org/10.5281/zenodo.6390469",
         "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/README.md",
         "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/fit_SPHERE.json.gz",
-        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/browser.json",
-        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/registration.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-14"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/evidence/composition/browser.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/evidence/composition/registration.json"
       ]
     },
     {
@@ -34,11 +25,6 @@
       "revisitWhen": "Inspect the paper's data-availability route and retrieve the numerical map or reproducible source closure before selecting a surface quantity.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202347326"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -49,11 +35,6 @@
       "revisitWhen": "Reconsider only for a scientifically supported observation view that preserves the atmospheric and reflected-light distinction; this is not a candidate for literal surface chemistry under the current fixed-scene scope.",
       "evidence": [
         "https://zenodo.org/records/17964985"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -62,14 +43,8 @@
       "status": "included",
       "finding": "Selected 16,539 by 8,270 source provides Monochrome; variable 400 m to 20 km detail, original shadows, and zero-marked gaps remain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_global_mosaic_1km"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -78,14 +53,8 @@
       "status": "included",
       "finding": "Selected SSI 991/559/413 nm product provides False color, not natural color; missing color falls back to observed monochrome.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -95,14 +64,8 @@
       "finding": "The source synthesized red while green and blue were observed. The package uses monochrome from 110–150 degrees east rather than present synthesized red as measurement.",
       "revisitWhen": "A release supplies an observed red channel and coverage evidence for that sector.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -111,14 +74,8 @@
       "status": "included",
       "finding": "Selected 3,046-record, 23-unit source supplies categorical Geology. The known degenerate one-point ring is excluded while valid multipart geometry, no-data and uncovered poles remain explicit.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://pubs.usgs.gov/sim/3237/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -127,14 +84,8 @@
       "status": "included",
       "finding": "Pinned native maps supply Oxygen signature under the documented first-valid-night, coordinate, coverage, registration and residual-night limits.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://doi.org/10.5281/zenodo.11402374"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -147,12 +98,7 @@
         "https://doi.org/10.1016/0019-1035(81)90203-7",
         "https://doi.org/10.1016/j.icarus.2021.114631"
       ],
-      "revisitWhen": "A global disc-resolved Ganymede law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values.",
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
-      ]
+      "revisitWhen": "A global disc-resolved Ganymede law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values."
     }
   ]
 }

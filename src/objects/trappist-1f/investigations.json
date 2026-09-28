@@ -5,12 +5,7 @@
     {
       "id": "unresolved-disc",
       "survey": "exoplanet-unresolved-disc",
-      "status": "excluded",
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "id": "nasa-eyes-illustration",
@@ -20,11 +15,6 @@
       "evidence": [
         "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_f.jpg",
         "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-24"
-        }
       ]
     }
   ]

@@ -10,12 +10,6 @@
       "evidence": [
         "https://arxiv.org/abs/2108.07123",
         "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 623
-        }
       ]
     },
     {
@@ -25,12 +19,6 @@
       "finding": "Measured on this image the ring is 73.5 au in radius, tilted 50.0 degrees, with its nodes at position angle 161; Keppler et al. (2019) give 74 au, 51.7 and 156.7 degrees (160.4 from the gas). The drawn envelope, a disc of that geometry following the image's deprojected radial profile, leaves a residual of 2.62e-5 Jy per beam, against 5.95e-5 for a spherical shell and 7.46e-5 for constant depth.",
       "evidence": [
         "https://arxiv.org/abs/1902.07639"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 623
-        }
       ]
     },
     {
@@ -40,12 +28,6 @@
       "finding": "The west side is drawn nearer, the side Keppler et al. (2018, section 3.3) identify as the near side in scattered light; the planets' published orbits agree. The thickness, 0.1 of the radius, is a stated convention: millimetre grains settle much thinner than this. It is the convention the HD 181327 ring uses, where a disc of half that thickness showed as strips between the renderer's slices.",
       "evidence": [
         "https://arxiv.org/abs/1806.11568"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 623
-        }
       ]
     },
     {
@@ -56,13 +38,7 @@
       "evidence": [
         "https://arxiv.org/abs/2108.07123"
       ],
-      "revisitWhen": "A reduction of the ALMA data this package uses shows the source at planet c at five or more times its noise.",
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 623
-        }
-      ]
+      "revisitWhen": "A reduction of the ALMA data this package uses shows the source at planet c at five or more times its noise."
     }
   ]
 }

@@ -9,12 +9,6 @@
       "finding": "Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Cross-identification HIP 114189, HD 218396: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HR%208799 Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): parallax 24.461952 +/- 0.045453 mas, inverted to 40.8798 pc. Zurlo et al. (2022) fit at 24.525662 mas, so the orbits below keep their angular size and are placed at this distance. Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): pmRA* 108.2836 mas/yr, pmDec -50.0402 mas/yr. Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): -10.412 km/s.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 605
-        }
       ]
     },
     {
@@ -25,12 +19,6 @@
       "evidence": [
         "https://arxiv.org/abs/1210.0556",
         "https://doi.org/10.1088/0004-637X/761/1/57"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 605
-        }
       ]
     },
     {
@@ -41,12 +29,6 @@
       "evidence": [
         "https://arxiv.org/abs/2207.10684",
         "https://doi.org/10.1051/0004-6361/202243862"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 605
-        }
       ]
     }
   ]

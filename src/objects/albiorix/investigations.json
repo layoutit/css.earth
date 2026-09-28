@@ -10,13 +10,7 @@
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
         "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/albiorix/source/measurements.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/albiorix/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/albiorix/source/measurements.json"
       ]
     },
     {
@@ -26,13 +20,7 @@
       "finding": "Cassini ISS and the Albiorix observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour lens.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/albiorix/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/albiorix/"
       ]
     },
     {
@@ -43,13 +31,7 @@
       "revisitWhen": "A released Albiorix mesh with a documented body frame, method and reuse route can be compared with this approximation.",
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf",
-        "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/albiorix/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/albiorix/"
       ]
     },
     {
@@ -60,13 +42,7 @@
       "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified lens.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/albiorix/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/albiorix/"
       ]
     },
     {
@@ -76,13 +52,7 @@
       "finding": "Belyakov and Brown (2025) provides unresolved 0.7–5.3 micrometre spectra. It is not a spatial composition map or texture for Albiorix.",
       "revisitWhen": "A spatially resolved and registered Albiorix composition product can support a surface lens.",
       "evidence": [
-        "https://arxiv.org/abs/2503.20046",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/albiorix/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://arxiv.org/abs/2503.20046"
       ]
     }
   ]

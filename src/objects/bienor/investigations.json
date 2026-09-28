@@ -10,16 +10,7 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202450833",
         "https://arxiv.org/abs/2405.17235",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/source/measurements.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bienor/source/measurements.json"
       ]
     },
     {
@@ -30,16 +21,7 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202450833",
         "https://arxiv.org/abs/2405.17235",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/source/preparation/rotation.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bienor/source/preparation/rotation.json"
       ]
     },
     {
@@ -49,17 +31,7 @@
       "finding": "This review found occultation and disk-integrated light-curve constraints, not a reusable surface raster registered to the selected ellipsoid. The grid represents unmapped terrain; light curves and spectra cannot supply mapped color or local relief.",
       "revisitWhen": "A released reusable observation or mapped product supplies pixel geometry and registration to a source model that can be compared with the selected ellipsoid.",
       "evidence": [
-        "https://arxiv.org/abs/2405.17235",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://arxiv.org/abs/2405.17235"
       ]
     },
     {
@@ -70,16 +42,7 @@
       "revisitWhen": "A released numerical replacement shape or independent pole, scale, ring, or companion constraints distinguish an alternative and permit comparison with the selected model.",
       "evidence": [
         "https://arxiv.org/abs/2405.17235",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bienor/source/measurements.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bienor/source/measurements.json"
       ]
     },
     {
@@ -91,15 +54,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202450833",
         "https://github.com/layoutit/css.earth/pull/192"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
       ]
     },
     {
@@ -109,17 +63,7 @@
       "finding": "The historical source-survey document records prior route dispositions and attribution practice. It is provenance context, not a primary scientific input and does not qualify the selected model, a surface view, or a use licence for a new data product.",
       "revisitWhen": "A cited primary release from that survey is separately inspected with its native metadata and terms.",
       "evidence": [
-        "https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions",
         "https://github.com/layoutit/css.earth/pull/192"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
       ]
     }
   ]

@@ -8,20 +8,10 @@
       "status": "included",
       "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original 1950DA_RetrogradeModel.wf](https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf): Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.65 km sphere, from -0.13 to 0.18 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments. The live JPL index was checked against the actual preparation input shape/1950DA_RetrogradeModel.wf; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1950-da/README.md",
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf",
         "https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1950-da/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-1950-da/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -29,17 +19,7 @@
       "survey": "surface-imagery-8",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1950-da/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1950-da/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-1950-da/source/manifest.json"
       ]
     },
     {
@@ -51,12 +31,6 @@
       "evidence": [
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://arxiv.org/html/1310.0861"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
       ]
     }
   ]

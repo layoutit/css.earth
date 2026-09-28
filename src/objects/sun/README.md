@@ -38,7 +38,7 @@ satellite is targeted.
 
 ## Evidence
 
-Checked on 27 September 2026 at [`7e6e703528`](https://github.com/layoutit/css.earth/commit/7e6e703528dd56b27efc81ce33d346a88202fb4e).
+Checked on 27 September 2026.
 The [check record](evidence/aia-cr2311-20260927/checks.json) records the native-source restoration,
 FITS and preparation tests, and desktop/mobile arrow checks. Both arrows retain the mounted
 scene and camera. The [mobile capture](evidence/aia-cr2311-20260927/corona-193-mobile.png)
@@ -66,7 +66,7 @@ a numeric wavelength followed by a plain ion label for that keyword, reports a w
 and preserves the original card. Other unterminated strings still fail. The downloaded
 file and its image samples are unchanged.
 
-Photosphere and longitude review (measured on `main` at 11ac994699; unchanged continuum and magnetic recipes retain these results):
+Photosphere and longitude review (measured on `main`; unchanged continuum and magnetic recipes retain these results):
 
 - The old photosphere was built from daily browse JPEGs and sampled each day's
   disc on the wrong side of its central meridian between frames. With the
@@ -74,7 +74,7 @@ Photosphere and longitude review (measured on `main` at 11ac994699; unchanged co
   own `hmi.mrsynop_small_720s[2311]` magnetic map, against 76% before; the old
   map also showed doubled, half-strength spots where two frames blended
   ([before, after and the magnetic field](source/reference/photosphere-before-after.png)).
-- Longitude direction (Solar System audit, measured on `main` at 44bf8eac22):
+- Longitude direction (Solar System audit, measured on `main`):
   every Sun map was mirrored east–west. JSOC's magnetic-map header (CTYPE1
   `CRLN-CEA`, CDELT1 −0.5, pixel 1 at Carrington longitude 0.3°) and the AIA
   synoptic maps run Carrington longitude up to the right. Carrington longitude
@@ -104,7 +104,7 @@ Photosphere and longitude review (measured on `main` at 11ac994699; unchanged co
   equals astropy's raw integer through BSCALE/BZERO, with BLANK samples in the
   same places. The [oracle table](../../../tests/oracles/README.md) lists the
   committed fixture.
-- [Unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/sun) and the
+- Unit tests and the
   shared browser conformance harness
   define the package checks. The [four-lens render](source/reference/rendered-lenses.png)
   of this version was inspected after the scene reported ready: active regions

@@ -12,12 +12,6 @@
         "https://archive.eso.org/tap_obs/capabilities",
         "https://archive.eso.org/cms/eso-data-access-policy.html",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     },
     {
@@ -29,12 +23,6 @@
       "evidence": [
         "https://archive.eso.org/cms/eso-data-access-policy.html",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     },
     {
@@ -47,12 +35,6 @@
         "https://www.eso.org/sci/software/pipe_aem_table.html",
         "https://ftp.eso.org/pub/dfs/pipelines/instruments/harps/",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     },
     {
@@ -63,14 +45,8 @@
       "revisitWhen": "A candidate from the screen is taken up, or the screen is rerun per telescope.",
       "evidence": [
         "https://archive.eso.org/tap_obs/capabilities",
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     }
   ]

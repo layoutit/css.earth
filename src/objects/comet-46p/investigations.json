@@ -8,17 +8,9 @@
       "status": "excluded",
       "finding": "Superseded 2026-09-16: the Celestia generic mesh was a shared illustration with no relation to this nucleus, and its catalogue radius was an estimate. The package now shows a smooth ellipsoid at the published effective radius (Boehnhardt et al. (2002), A&A 387, 1107); no mesh from Celestia is retained.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-46p/source/reference/source-record.json",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-46p/source/shape/model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-46p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-46p/source/shape/model.json",
         "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-16"
-        }
       ],
       "revisitWhen": "A measured shape model of this nucleus (radar, spacecraft or a convex lightcurve inversion with a stated pole) would replace the ellipsoid."
     },
@@ -27,12 +19,7 @@
       "survey": "measured-shape-archive-route",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-46p/source/reference/source-record.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-46p/source/reference/source-record.json"
       ]
     },
     {
@@ -41,13 +28,8 @@
       "status": "included",
       "finding": "Retained intake decision: Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years. The cited material supplies explanatory context; it does not qualify photographic terrain on this nucleus.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-46p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-46p/source/reference/source-record.json",
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -55,13 +37,8 @@
       "survey": "context-as-surface-texture",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-46p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-46p/source/reference/source-record.json",
         "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/ESA_s_new_camera_follows_disintegration_of_a_comet"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -71,11 +48,6 @@
       "finding": "Boehnhardt et al. (2002), A&A 387, 1107: effective radius 0.6 km. Lightcurves give an axis ratio of at least 1.4 and a period of 6 to 7.5 hours; the minimum elongation is displayed. Used as the volume-equivalent radius of the displayed ellipsoid.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361:20020494"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     }
   ]

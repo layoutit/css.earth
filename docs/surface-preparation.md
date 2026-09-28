@@ -48,7 +48,7 @@ faces sit at rest; while the globe spins, every page takes the selected level. A
 holds less detail than the finest level stops earlier (`maximumTextureWidth` in the paged recipe): its
 finer levels read that level's files, and its lens keeps the matching camera limit. The camera's
 closest approach follows the atlas density, so a denser atlas also lets the camera come closer. These texture levels are separate from its retired geographic paging.
-The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
+The texture-level implementation and measurements
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
 current datasets and retained source history. The shared raster lane prepares
 each image once, at the canonical @2x density, so its bodies have no texture
@@ -105,7 +105,7 @@ LROC mosaic delivered in #151; Europa and Io retain that change's 8K photographi
 bands and Io's corrected feature positions. Low-resolution or unobserved source
 areas cannot gain measured detail from this change.
 
-The 12 September 2026 review used revision `3dc424757`: all 51 selected views
+The 12 September 2026 review used: all 51 selected views
 across 35 bodies were captured in Chromium at DPR 1 with Shadows on and off
 (102 captures), then inspected for visible texture, coverage and lighting.
 There were no script errors in those captures. Some unchanged scientific-view
@@ -119,7 +119,7 @@ separates source sampling from WebP quality at an identical camera position.
 shows a complete product view. These examples demonstrate the prepared result;
 they do not establish new observational resolution or remove the sources' seams.
 The [Enceladus Pixelmatch evidence](../src/objects/enceladus/README.md#evidence)
-adds fresh matched crops on the `e0487eff5` / `c13f3643b` merge: Pixelmatch diffs
+adds fresh matched crops: Pixelmatch diffs
 at threshold 0.1, an independent repeat, byte pins and reproduction commands.
 Anti-aliasing is included. The repeat has zero mismatches; most photographic
 changes are subtle.
@@ -194,7 +194,7 @@ explains why darkness alone cannot define missing data.
 ![Cassini VIMS maps with observed patches surrounded by gray missing coverage](images/cassini-coverage.png)
 
 Cassini VIMS example: infrared false color at left, ice absorption at right;
-gray marks unsupported data. The [original input record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/source-review/source-maps.json)
+gray marks unsupported data. The original input record
 identifies the cubes and processing behind this illustration.
 
 ## FITS support
@@ -336,7 +336,7 @@ distance are separate quantities.
 
 Mesh reduction example: each pair shows the source mesh at left and prepared mesh
 at right. Each is normalized to its own maximum radius, so compare shape rather
-than physical scale. The [original comparison method](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/main-belt-asteroids.md)
+than physical scale. The original comparison method
 records the camera settings and remaining views. These three illustrations are
 historical processing examples, not new browser checks.
 
@@ -462,7 +462,7 @@ declares a seam outset, preparation writes two corrections instead:
   `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
   0.38–0.6 CSS pixels on each edge. The runtime only selects a prepared step.
 
-The [historical seam browser test](https://github.com/layoutit/css.earth/blob/6e32bc459b%5E/site/test/surface-seams-browser.mts)
+The historical seam browser test
 measured saved Venus radar views over black and white backdrops and compared
 brightness across seams. The current
 [`rendered-page.test.mts`](../site/test/rendered-page.test.mts) checks built HTML
@@ -726,7 +726,7 @@ records released scene resources, DOM counts and WebKit memory categories.
 
 ### Arrival evidence
 
-The 2026-09-26 preparation at `95d442c8c0` covers all 722 body scenes:
+The 2026-09-26 preparation covers all 722 body scenes:
 1,444 inventoried files and 28,064,758 image bytes. Each image is 1024 square;
 its receipt matched the runtime, default dataset, camera rotation and both
 inventory hashes. Quaoar's rings required a distance of 16 radii; the other

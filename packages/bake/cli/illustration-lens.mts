@@ -111,7 +111,7 @@ await write(`${o}/object.json`, descriptor);
 
 const ledger = await read(`${o}/investigations.json`);
 ledger.entries.push({ id: model ? 'nasa-vtad-illustration' : 'nasa-eyes-illustration', subject: model ? `NASA VTAD ${name} 3D model texture as an illustration lens` : 'NASA Eyes on Exoplanets artist\'s concept map as an illustration lens',
-  status: 'included', finding: `Shown as the non-default Illustration lens, never as imagery: ${kind.finding}`, evidence: kind.evidence, checked: [{ date: checked }] });
+  status: 'included', finding: `Shown as the non-default Illustration lens, never as imagery: ${kind.finding}`, evidence: kind.evidence });
 await write(`${o}/investigations.json`, ledger);
 
 await writeFile(resolve(root, o, 'NOTICE.md'), `${(await readFile(resolve(root, o, 'NOTICE.md'), 'utf8')).trimEnd()}\n\nIllustration lens: ${kind.notice}, used unchanged under NASA's media guidelines (${NASA_MEDIA}). An artist's ${model ? 'illustration' : 'concept'}, not an observation.\n`);

@@ -12,12 +12,6 @@
         "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     },
     {
@@ -30,12 +24,6 @@
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/credits.html",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     },
     {
@@ -48,12 +36,6 @@
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/megapipe/docs/intro.html",
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/megapipe/",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     },
     {
@@ -64,14 +46,8 @@
       "revisitWhen": "A Gemini or CFHT candidate from the screen is taken up.",
       "evidence": [
         "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "pr": 293
-        }
       ]
     }
   ]

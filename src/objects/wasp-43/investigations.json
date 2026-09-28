@@ -10,11 +10,6 @@
       "revisitWhen": "An interferometric diameter or surface image of WASP-43 is published.",
       "evidence": [
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -24,11 +19,6 @@
       "finding": "Table 1 lists the assumed stellar radius 0.665 solar radii and mass 0.6916 solar masses, matching Hammond et al. (2024); they set the sphere and the display GM, and the WASP-43b package's orbit is expressed in this radius.",
       "evidence": [
         "https://arxiv.org/abs/2406.10207"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -38,11 +28,6 @@
       "finding": "Position, parallax 11.474 +/- 0.016 mas (87.15 pc, no zero-point correction) and proper motion -41.992, -38.004 mas/yr from Gaia EDR3; radial velocity -3.7 +/- 0.7 km/s from Gaia DR2.",
       "evidence": [
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -53,14 +38,6 @@
       "evidence": [
         "https://arxiv.org/abs/1702.03136",
         "https://arxiv.org/abs/2406.10207"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        },
-        {
-          "date": "2026-09-17"
-        }
       ]
     },
     {
@@ -71,11 +48,6 @@
       "revisitWhen": "Gaia DR4 publishes XP spectra, or a flux-calibrated optical spectrum of WASP-43 is released.",
       "evidence": [
         "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -86,11 +58,6 @@
       "evidence": [
         "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736",
         "https://doi.org/10.1051/0004-6361/202243462"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     },
     {
@@ -101,14 +68,6 @@
       "evidence": [
         "https://arxiv.org/abs/1104.2823",
         "https://arxiv.org/abs/1702.03136"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        },
-        {
-          "date": "2026-09-21"
-        }
       ]
     },
     {
@@ -119,11 +78,6 @@
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ac5f55",
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/163/228"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
       ]
     },
     {
@@ -134,11 +88,6 @@
       "revisitWhen": "A published spot map or spot-crossing mapping of WASP-43.",
       "evidence": [
         "https://arxiv.org/abs/1702.03136"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
       ]
     },
     {
@@ -148,11 +97,6 @@
       "finding": "The marker is the colour lens as a disc with the measured TESS limb darkening, rendered from the pinned colour and limb-darkening records; it replaced the scaffold's flat disc.",
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ac5f55"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17"
-        }
       ]
     }
   ]

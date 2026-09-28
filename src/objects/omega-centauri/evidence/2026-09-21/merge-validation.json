@@ -1,9 +1,6 @@
 {
   "schema": "cssearth-omega-merge-evidence@1",
-  "parents": [
-    "bb7cab3c2e5be0b58a63e2cbeca33ca94a7b3b5a",
-    "3aebc31094dff8332755b394b88c708b7c3f1062"
-  ],
+  "parents": [],
   "testedState": "Uncommitted merge plus regenerated dependent asset inventories. Incoming main contains catalogue transport changes; shared native-focus and detailed-context owners are unchanged. Typing issues in seven inherited telescope source/test files are repaired without changing the application renderer. The exact repair evidence is linked separately.",
   "recordedAt": "2026-09-20T22:10:59.269Z",
   "checks": [
@@ -70,7 +67,6 @@
     }
   ],
   "reusedEvidence": {
-    "baseRevision": "bb7cab3c2e5be0b58a63e2cbeca33ca94a7b3b5a",
     "pins": [
       {
         "path": "site/prepared-context-navigation.mts",
@@ -200,7 +196,7 @@
     ],
     "mismatches": []
   },
-  "captureReuse": "Six app views and three-repeat performance measurements remain the 2026-09-20 bb7cab3 evidence. The 25 recorded model, context owner, world-context and runtime entrypoint pins still match. A fresh native browser check verifies the merged catalogue navigation; this is not a new desktop FPS measurement.",
+  "captureReuse": "Six app views and three-repeat performance measurements remain the 2026-09-20 evidence. The 25 recorded model, context owner, world-context and runtime entrypoint pins still match. A fresh native browser check verifies the merged catalogue navigation; this is not a new desktop FPS measurement.",
   "limitations": [
     "Visual axis-handoff/side-view acceptance is still failed; no new bake or scientific acceptance.",
     "Minimum zoom is unchanged at 0.05 framing radii.",

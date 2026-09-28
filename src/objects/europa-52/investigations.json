@@ -8,20 +8,10 @@
       "status": "included",
       "finding": "The current LAM 3Dshape directory lists 52_Europa_mpcd.obj, matching the actual preparation input. The retained measurements describe 3666 vertices and 7328 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/europa-52/README.md",
         "https://observations.lam.fr/astero/3Dshape/52_Europa_mpcd.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/europa-52/source/reference/model-properties.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/europa-52/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/europa-52/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/europa-52/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -30,18 +20,8 @@
       "status": "included",
       "finding": "The retained Table 1 and Table A.1 extract records diameter 319 km, ecliptic J2000 pole (255°, 40°), period 5.629954 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 159.12972831753473 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/europa-52/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/europa-52/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/europa-52/source/reference/model-properties.json"
       ]
     },
     {
@@ -50,22 +30,9 @@
       "status": "included",
       "finding": "Included 2026-09-18 as the SPHERE photograph lens: 65 camera-1 deconvolved frames, 7 nights from 2018-07-08 to 2019-08-06, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/52Europa/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/europa-52/README.md",
         "https://observations.lam.fr/astero/Data/52Europa/",
         "https://observations.lam.fr/astero/",
         "https://observations.lam.fr/astero/Data/52Europa/Deconv/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18"
-        }
       ]
     },
     {
@@ -76,17 +43,7 @@
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/52_Europa_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/europa-52/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/europa-52/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/europa-52/source/reference/model-properties.json"
       ]
     },
     {
@@ -98,17 +55,6 @@
         "https://observations.lam.fr/astero/Data/52Europa/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        },
-        {
-          "date": "2026-09-17"
-        },
-        {
-          "date": "2026-09-18"
-        }
       ]
     },
     {
@@ -120,11 +66,6 @@
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/52Europa/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/52_Europa_adam.obj"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18"
-        }
       ]
     }
   ]

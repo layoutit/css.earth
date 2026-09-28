@@ -10,13 +10,7 @@
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2013.07.022",
         "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/measurements.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallene/source/measurements.json"
       ]
     },
     {
@@ -26,13 +20,7 @@
       "finding": "The 2005 clear-filter image provides a coarse 8 by 12 pixel brightness patch. Its limb fit supports pointing only, not feature-registered photography.",
       "evidence": [
         "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1496910582",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/n1496910582-metadata.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallene/source/survey/n1496910582-metadata.json"
       ]
     },
     {
@@ -43,13 +31,7 @@
       "revisitWhen": "An unsaturated source product or independently justified saturated-pixel treatment can be evaluated.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/qualification.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallene/source/survey/qualification.json"
       ]
     },
     {
@@ -59,13 +41,7 @@
       "finding": "The 158-degree phase leaves only a thin uncertain illuminated rim, despite finer nominal resolution.",
       "revisitWhen": "A lower-phase resolved view with usable interior can add coverage.",
       "evidence": [
-        "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://pds-rings.seti.org/cassini/iss/"
       ]
     },
     {
@@ -75,13 +51,7 @@
       "finding": "The trial leaves only four interpolation footprints; the required margin leaves zero samples and limits were not relaxed.",
       "revisitWhen": "A view with broad qualified interior or independently reduced pointing uncertainty can be assessed.",
       "evidence": [
-        "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://pds-rings.seti.org/cassini/iss/"
       ]
     },
     {
@@ -91,13 +61,7 @@
       "finding": "The direct 2026-09-10 review found no independently identifiable feature in the 8 by 13 pixel disc. Existing limb fit remains pointing evidence.",
       "revisitWhen": "Independent surface controls or an image with stable identifiable features can qualify feature registration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/registration-attempt-2026-09-10.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallene/source/survey/registration-attempt-2026-09-10.json"
       ]
     },
     {
@@ -108,14 +72,8 @@
       "revisitWhen": "A distinct frame with broad unsaturated, low- or moderate-phase interior and independently supportable registration can be assessed.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/opus-resolved.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/source/survey/qualification.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallene/source/survey/opus-resolved.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallene/source/survey/qualification.json"
       ]
     },
     {
@@ -125,13 +83,7 @@
       "finding": "The reviewed PDS satellite-shape inventory does not include Pallene, so it cannot supply a detailed Pallene mesh or local elevation field for this package.",
       "revisitWhen": "A PDS or other released Pallene-specific shape product with a documented frame and provenance can be reviewed.",
       "evidence": [
-        "https://doi.org/10.26033/ewy3-jy61",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://doi.org/10.26033/ewy3-jy61"
       ]
     },
     {
@@ -141,13 +93,7 @@
       "finding": "The updated shape survey was inspected as a route, but the full text was unavailable at review time. It therefore does not establish a new Pallene mesh or elevation source; the current PCK and 2013 published semiaxes remain selected.",
       "revisitWhen": "Accessible full text or a linked Pallene-specific released model can be assessed against the selected semiaxes.",
       "evidence": [
-        "https://doi.org/10.1016/j.icarus.2019.06.016",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://doi.org/10.1016/j.icarus.2019.06.016"
       ]
     },
     {
@@ -157,13 +103,7 @@
       "finding": "The reviewed photometry supplies integrated brightness context only. It does not provide a registered colour, composition or terrain map.",
       "revisitWhen": "A spatially resolved and registered Pallene colour, spectral or composition product can support a lens.",
       "evidence": [
-        "https://arxiv.org/abs/1912.09192",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/pallene/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://arxiv.org/abs/1912.09192"
       ]
     }
   ]

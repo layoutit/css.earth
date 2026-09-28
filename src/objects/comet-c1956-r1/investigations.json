@@ -7,16 +7,8 @@
       "survey": "celestia-native-illustration",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1956-r1/source/reference/source-record.json",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1956-r1/source/shape/model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-16"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-c1956-r1/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-c1956-r1/source/shape/model.json"
       ]
     },
     {
@@ -24,12 +16,7 @@
       "survey": "measured-shape-archive-route",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1956-r1/source/reference/source-record.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-c1956-r1/source/reference/source-record.json"
       ]
     },
     {
@@ -38,13 +25,8 @@
       "status": "included",
       "finding": "Retained intake decision: Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun. The cited material supplies explanatory context; it does not qualify photographic terrain on this nucleus.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1956-r1/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-c1956-r1/source/reference/source-record.json",
         "https://ssd.jpl.nasa.gov/sb/great_comets.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -52,13 +34,8 @@
       "survey": "context-as-surface-texture",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c1956-r1/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-c1956-r1/source/reference/source-record.json",
         "https://ssd.jpl.nasa.gov/sb/great_comets.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -69,11 +46,6 @@
       "revisitWhen": "A published nucleus radius (photometric, thermal or radar) would replace the assumed display radius.",
       "evidence": [
         "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=C%2F1956%20R1&phys-par=true"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16"
-        }
       ]
     }
   ]

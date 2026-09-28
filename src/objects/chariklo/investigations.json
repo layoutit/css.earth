@@ -10,16 +10,7 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141543",
         "https://arxiv.org/abs/2107.07904",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/measurements.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/chariklo/source/measurements.json"
       ]
     },
     {
@@ -29,17 +20,8 @@
       "finding": "The package uses the 18 October 2022 JWST NIRCam F150W2 first-contact values as two circular-annulus approximations: C1R radius 385.9 km and width 7.04 km; C2R radius 400.3 km and width 1.009 km. They are occultation geometry, not observed reflected colour or a scattering model; neutral gray and fixed alpha remain authored schematic display choices.",
       "evidence": [
         "https://arxiv.org/html/2510.06366v1#S0.T1",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/rings/occultation-2022.json",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/chariklo/source/rings/occultation-2022.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/chariklo/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -49,17 +31,7 @@
       "finding": "The reviewed occultation and integrated JWST information supplies no reusable surface raster registered to the selected ellipsoid. The grid marks unmapped terrain, and integrated spectra do not supply mapped color or local relief.",
       "revisitWhen": "A released reusable observation or mapped product supplies pixel geometry and registration to a source model that can be compared with the selected ellipsoid.",
       "evidence": [
-        "https://doi.org/10.1051/0004-6361/202141543",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://doi.org/10.1051/0004-6361/202141543"
       ]
     },
     {
@@ -69,18 +41,8 @@
       "finding": "The historical source-survey and NASA JWST page provide route and observation context. Neither is a primary numerical shape, ring, image, or registration product, so neither supplies a scientific input to this package.",
       "revisitWhen": "Either page links a versioned source product whose native metadata and terms can be inspected for a concrete use.",
       "evidence": [
-        "https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions",
-        "https://science.nasa.gov/blogs/webb/2023/01/25/webb-spies-chariklo-ring-system-with-high-precision-technique/",
-        "https://github.com/layoutit/css.earth/pull/192"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/pull/192",
+        "https://science.nasa.gov/blogs/webb/2023/01/25/webb-spies-chariklo-ring-system-with-high-precision-technique/"
       ]
     },
     {
@@ -91,14 +53,8 @@
       "revisitWhen": "A released multi-epoch, calibrated ring photometry/scattering product and a body rotational solution provide geometry and phase that can be bound to the selected model.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141543",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/chariklo/source/preparation/rotation.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/chariklo/source/preparation/rotation.json",
         "https://github.com/layoutit/css.earth/pull/192"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
       ]
     }
   ]

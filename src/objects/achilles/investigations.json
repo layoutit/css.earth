@@ -8,20 +8,10 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-3934.txt. Model 3934, version 2019-05-07, pole (172°, -5°), period 7.3063 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/achilles/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/achilles/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/reference/damit-model.json"
       ]
     },
     {
@@ -30,18 +20,8 @@
       "status": "included",
       "finding": "The retained calibration uses 131 ±8 km. occultation-constrained volume-equivalent diameter",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/achilles/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/reference/calibration.json",
         "https://doi.org/10.1051/0004-6361/202346022"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        },
-        {
-          "date": "2026-09-13",
-          "pr": 192
-        }
       ]
     },
     {
@@ -49,12 +29,7 @@
       "survey": "surface-imagery-5",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/README.md"
       ]
     },
     {
@@ -64,13 +39,7 @@
       "finding": "[NEOWISE thermal diameter 130.099 ± 0.554 km](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1) — alternative — Consistent thermal effective diameter, but its formal precision omits systematic errors; occultation volume scale is more directly compatible.",
       "revisitWhen": "New calibration or independent size evidence makes this alternative preferable to the currently adopted, physically compatible scale; do not average incompatible thermal fits.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/achilles/README.md",
         "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     }
   ]

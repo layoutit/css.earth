@@ -1,6 +1,4 @@
 {
-  "codeRevision": "126235fd6f41611f2c9aa082e1062480df6d5820",
-  "baseRevision": "16774548b",
   "capturedAt": "2026-09-10T13:35:16.641Z",
   "server": "http://127.0.0.1:4278",
   "build": "development",
@@ -241,7 +239,6 @@
     "resolvedFailure": {
       "cause": "The DOM-only empty-sky probe missed Haumea in the retained screen-picking registry. Hover at (1168,96) identified Haumea before the failing double-click.",
       "correction": "Probe the actual retained hover target before choosing an empty-sky point. No production camera change.",
-      "testedHeadBeforeTestPatch": "927b8bd8e",
       "testPath": "site/test/skybox-pointer-boundary.mjs",
       "testSha256": "8858cad1e20fcfef052eb68700c75ec89987063566530c2dbd79159800a7fb0a",
       "passedReport": "conformance-dpr.json",
@@ -283,7 +280,6 @@
     }
   ],
   "previousDefault": {
-    "codeRevision": "16774548b140b45e1f8cf50e21b9671055e0823f",
     "preparedObjectSha256": "7f3259c793a1b375e4f609bc0530d90983018cc3eba93e5dddfa01e199c23dd7",
     "lens": "model",
     "initialScenePitchDegrees": 20,

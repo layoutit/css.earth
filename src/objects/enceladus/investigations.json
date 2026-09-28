@@ -8,14 +8,8 @@
       "status": "included",
       "finding": "Selected products supply documented numeric scientific views; no-data and special values remain missing.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -25,14 +19,8 @@
       "finding": "The v2 DSK is retained as a source-intake and recipe proposal. Image-to-v2 alignment, prepared error, browser limb and feature qualification remain pending.",
       "revisitWhen": "Image alignment and the prepared-shape qualification record are completed for the v2 source.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -42,14 +30,8 @@
       "finding": "README records that NAIF reprocessed imagery after errors in the original model.",
       "revisitWhen": "A documented reconciled replacement changes the source decision.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -59,14 +41,8 @@
       "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior lens.",
       "revisitWhen": "A source-backed mapped product supports the claimed visible quantity.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -75,14 +51,8 @@
       "status": "included",
       "finding": "The selected six-observation set supplies Infrared ratio and Ice absorption under the pinned channel, mask, overlap and coverage rules. It remains partially supported and is not photometrically corrected.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
         "https://vims.univ-nantes.fr/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13"
-        }
       ]
     },
     {
@@ -94,12 +64,7 @@
         "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
         "https://doi.org/10.1016/j.icarus.2020.113848",
         "https://doi.org/10.1029/2018EA000399",
-        "https://github.com/layoutit/css.earth/blob/aa8f1ad8116737e6d2bebc1020ec30eab72481a3/src/objects/enceladus/evidence/infrared-mosaic/published-grid.jpg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/evidence/infrared-mosaic/published-grid.jpg"
       ]
     },
     {
@@ -111,11 +76,6 @@
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2021.114803",
         "https://openaccess.inaf.it/entities/publication/30596495-3f2f-49f7-a7fb-a1aca47c3390"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27"
-        }
       ]
     },
     {
@@ -127,11 +87,6 @@
       "evidence": [
         "https://doi.org/10.5194/epsc-dps2025-400",
         "https://www.ipgp.fr/en/research/phds/__trashed-2/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27"
-        }
       ]
     }
   ]

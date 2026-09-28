@@ -9,12 +9,6 @@
       "finding": "Gaia DR3 source 6199395656645840384 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 source 6199395656645840384: parallax 7.4105 +/- 0.0403 mas (RUWE 0.95), inverted to 134.9428 pc with no zero-point correction. Gaia DR3 source 6199395656645840384: pmRA* -18.7377 mas/yr, pmDec -24.0078 mas/yr. Gaia DR3 source 6199395656645840384: 29.31 +/- 3.29 km/s.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 652
-        }
       ]
     },
     {
@@ -24,12 +18,6 @@
       "finding": "Stolker et al. (2025), arXiv:2507.06206, Appendix A.",
       "evidence": [
         "https://arxiv.org/abs/2507.06206"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 652
-        }
       ]
     },
     {
@@ -40,12 +28,6 @@
       "evidence": [
         "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6199395656645840384&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
         "https://gea.esac.esa.int/archive/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 652
-        }
       ]
     },
     {
@@ -56,12 +38,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/201116451",
         "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "pr": 649
-        }
       ]
     }
   ]
