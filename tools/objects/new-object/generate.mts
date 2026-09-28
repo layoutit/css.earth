@@ -34,9 +34,10 @@ export function physicalValues(spec: StarSpec, row: GaiaRow) {
   };
   const cite = (value: Cited, label: string, unit: string) => ({ value: value.value, text: `${label} ${value.value}${value.uncertainty ? ` +/- ${value.uncertainty}` : ''} ${unit} from ${value.source} (${value.url})` });
   const radius = spec.radius === 'gaia-flame' ? flame('radiusFlame', 'Radius') : cite(spec.radius, 'Radius', 'solar radii');
-  const mass = spec.mass === 'gaia-flame' ? flame('massFlame', 'Mass') : cite(spec.mass, 'Mass', 'solar masses');
+  const mass = spec.mass === 'unmeasured' ? { value: 0, text: 'No mass is measured, so GM is 0, the records\' unpublished value' }
+    : spec.mass === 'gaia-flame' ? flame('massFlame', 'Mass') : cite(spec.mass, 'Mass', 'solar masses');
   const radiusKm = radius.value * SOLAR_RADIUS_KM, gm = GM_SUN * mass.value;
-  const exact = Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2);
+  const exact = gm > 0 ? Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2) : Number.NaN;
   const logg = spec.gravity ? spec.gravity.value : fixed(exact, 2);
   const gravitySource = spec.gravity ? `${spec.gravity.source} (${spec.gravity.url})`
     : `log g from the mass and radius in packages/astronomy/data/bodies/${spec.id}.json (sources in its physicalNotes), log10(GM/R^2) in cgs: ${exact.toFixed(3)}, rounded to two decimals`;
@@ -90,7 +91,7 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow, ids: Identifiers, 
   const cross = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter(Boolean).join(', ');
   return { id: spec.id, classification: 'star', order,
     physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(p.radiusKm, 1), gravitationalParameterKm3PerS2: fixed(p.gm, 5), parent: null, effectiveTemperatureK: t.value },
-    physicalNotes: `${p.radiusText}: ${Math.round(p.radiusKm).toLocaleString('en-US')} km at ${SOLAR_RADIUS_KM.toLocaleString('en-US')} km per solar radius. ${p.massText}; GM is that mass times the JPL solar GM. `
+    physicalNotes: `${p.radiusText}: ${Math.round(p.radiusKm).toLocaleString('en-US')} km at ${SOLAR_RADIUS_KM.toLocaleString('en-US')} km per solar radius. ${p.massText}${p.gm > 0 ? '; GM is that mass times the JPL solar GM' : ''}. `
       + `Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).`
       + (spec.spin ? ` Spin inclination ${spec.spin.inclinationDegrees} degrees${spec.spin.periodDays ? ` and rotation period ${spec.spin.periodDays} d` : ''} from ${spec.spin.source} (${spec.spin.url}).` : '')
       + ' presentationUp: the display axis is a sky-plane convention; the spin axis\'s position angle on the sky is not measured.',
@@ -134,7 +135,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
   const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' ? [value.url] : [])])];
+  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
   const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row), place = placement(spec, row);
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.

@@ -2,6 +2,9 @@
  * and radius from its oscillations (the Mosser scale, the catalogue's recommended values), temperature from APOGEE spectra, and the
  * star's Gaia DR3 source, which places it. One VizieR request per star (J/ApJS/276/69, table4).
  *
+ * The colour is the Planck spectrum at the APOGEE temperature: these giants lie hundreds to thousands of parsecs away in the Galactic
+ * plane, where interstellar dust reddens their spectra, and the colour routes do not remove it.
+ *
  * Only the Gold and Silver categories are drafted: at least two measured large-frequency separations, not flagged as outliers. Any
  * other category, or a value the catalogue leaves empty (-9999), is refused with the star's KIC number and the reason. */
 import { requireString } from '@cssearth/core';
@@ -34,7 +37,9 @@ export function draftFromApokasc(row: ReturnType<typeof parseApokascRow>) {
     description: `${STATE[row.state] ?? 'A giant'} in the Kepler field, ${radius.value.toFixed(1)} solar radii and ${mass.value.toFixed(2)} solar masses, weighed by its oscillations.`.replace(/^./u, letter => letter.toUpperCase()),
     paper: { url: APOKASC.paper, credit: APOKASC.credit },
     radius, mass, temperature: { ...cite(row.teff, 'APOGEE effective temperature (K)'), value: Math.round(row.teff[0]), uncertainty: Math.round(row.teff[1]) },
-    gravity: cite(row.logg, 'Asteroseismic log g'), planets: [], companions: [],
+    gravity: cite(row.logg, 'Asteroseismic log g'),
+    color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason: 'The star lies in the Galactic plane hundreds to thousands of parsecs away, where interstellar dust reddens its spectra, and the colour routes do not remove it; APOGEE measured its temperature' },
+    planets: [], companions: [],
   };
 }
 
