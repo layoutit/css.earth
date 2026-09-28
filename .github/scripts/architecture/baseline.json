@@ -48,6 +48,7 @@
     "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
+      {"from":"packages/bake/authoring/comet-1p/inspect-halley-giotto.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/bake/authoring/comet-1p/prepare-encounters.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/bake/authoring/comet-1p/prepare-giotto.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/bake/authoring/dawn/vir-mosaic.test.mts","to":"tests/objects/source-test.mts"},
