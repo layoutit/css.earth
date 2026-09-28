@@ -75,6 +75,7 @@ src/objects/venus/source/akatsuki/*.nc
 # Previews a package's own author draws from its pinned downloads; no checkout without those downloads can redraw them.
 !src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
 !src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
+!src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
 !src/objects/beta-pictoris-disc/source/previews/colour.png
@@ -294,6 +295,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/titan/source/science/b2-intake/topo_4PPD_interp.cub
 
 /src/objects/betelgeuse-shell/.prepared-*/
+/src/objects/eps-eridani-disc/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
 /src/objects/pds-70-disc/.prepared-*/
 /src/objects/m42/.prepared-*/

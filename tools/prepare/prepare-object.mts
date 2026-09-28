@@ -35,6 +35,8 @@ export interface PreparationStep {
 export const PREPARATIONS_AT_ONCE = 3;
 
 const node = (...args: string[]) => ['node', ...args];
+/** The running site the arrival billboards are photographed from: `pnpm dev` by default, another with CSSEARTH_BILLBOARD_ORIGIN. */
+export const billboardOrigin = () => process.env.CSSEARTH_BILLBOARD_ORIGIN ?? 'http://127.0.0.1:4210';
 const exists = (path: string) => access(path).then(() => true, () => false);
 
 /** The chain, in order. A step's purpose says what the next one needs from it. */
@@ -56,6 +58,15 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-object-json.mts', ...ids)] },
   { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-text.mts', ...ids)] },
   { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('packages/bake/cli/prepare-navigation.mts', ...ids)] },
+  // Every body arrives through its billboard: without one the camera flies in onto a mesh still loading. The renderer photographs the
+  // delivered body in the running site and skips a body whose prepared runtime has not changed; the catalogue then carries the arrival
+  // view the world files read.
+  { name: 'billboard', purpose: 'photograph the arrival billboard from the running site, then refresh the catalogue with it', scope: 'ids', commands: async ids => {
+    const origin = billboardOrigin();
+    // A dev server's first request compiles the page: it took over 5 s right after a restart (2026-09-27), so wait up to a minute.
+    if (!await fetch(origin, { signal: AbortSignal.timeout(60_000) }).then(response => response.ok, () => false)) throw new Error(`No site answers at ${origin}: start it with pnpm dev (or set CSSEARTH_BILLBOARD_ORIGIN), then resume from the billboard step.`);
+    return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('tools/prepare/cli/prepare-catalog.mts')];
+  } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
   { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-provenance.mts', ...ids)] },
   // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.

@@ -387,6 +387,12 @@
     },
     {
       "location": "prepared",
+      "filename": "system-views/hd-226868.json",
+      "bytes": 30467,
+      "sha256": "a3c0fcb5891c2d67c18a80872e087dc67c45b6f855f5f9056faddf5905b0fee9"
+    },
+    {
+      "location": "prepared",
       "filename": "system-views/hd-29391.json",
       "bytes": 30289,
       "sha256": "ede2dcff96cb2093652c1b215617f1a07ff93d14acbb80ab784d3c04216cae60"
@@ -592,8 +598,8 @@
     {
       "location": "prepared",
       "filename": "system-views/sgr-a-star.json",
-      "bytes": 193641,
-      "sha256": "298b67c07bc5251abdd7893dee912ad47e6b22e63a31fdcf3a0cb25e703ab9c1"
+      "bytes": 193520,
+      "sha256": "60d6e83d4dca5e3d84b5dc6759c4888d566d32e25eba2a4743c61230a56e2f9f"
     },
     {
       "location": "prepared",
@@ -724,14 +730,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 740371,
-      "sha256": "f3a0a21d6487ffc8ec2d38a551b97e4d9f46b8190d20aa12f36837afb38da702"
+      "bytes": 742828,
+      "sha256": "020513b703d4eaf2e504988471190346ce966e21034add3fb4d2fffc2168afd2"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 9846726,
-      "sha256": "f74c5443326b03da4df83714d3b46f452f0f5a62643d26087b0a2940a82443d2"
+      "bytes": 9893727,
+      "sha256": "366f1d7e623aede27b168f0f1c86080fb25ed7d181fb613b0481a5584c3e6359"
     },
     {
       "location": "prepared",
@@ -1686,6 +1692,12 @@
       "filename": "world-orbits/cybele.bin",
       "bytes": 2880,
       "sha256": "1d91a46c1f3e6ab6a54f2fd33f21de277accfbf4ad98832deefc4642149e0177"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/cygnus-x-1.bin",
+      "bytes": 2888,
+      "sha256": "8f71596283ebba0f074a30b456f20e6bb0ea0b902a7c5183d5c5edae80944bde"
     },
     {
       "location": "prepared",
@@ -3929,7 +3941,7 @@
       "location": "prepared",
       "filename": "world-orbits/s2.bin",
       "bytes": 2880,
-      "sha256": "861336a8d098e7f8d7d5ab4902dbd7c7a528ecf83b19ad3ed1ab4a6883e8c3ff"
+      "sha256": "73867e5b7673a7de952a27bf4aedbdcde7f315dd3b98290bcf288aa6727867af"
     },
     {
       "location": "prepared",

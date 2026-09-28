@@ -36,7 +36,8 @@ it from [the recipe](source/preparation/eht-topset.json): both releases by commi
 ## The S-stars
 
 The 40 stars around it are astronomy records in `packages/astronomy/data/bodies/`, each citing its orbit and size. They are
-drawn from those records, without pages of their own, until each gets a package. S301 comes from its discovery paper
+drawn from those records, without pages of their own, until each gets a package. [S2](../s2/README.md) has one: the
+generator packages its record as it is (`{ "record": true }` in the spec). S301 comes from its discovery paper
 (GRAVITY Collaboration 2026, [arXiv:2607.12664](https://arxiv.org/abs/2607.12664)). The other 39 are written by
 `packages/astronomy/tools/generate-s-stars.mts`, which reads every value from its publication:
 

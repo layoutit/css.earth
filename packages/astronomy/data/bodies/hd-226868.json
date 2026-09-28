@@ -1,0 +1,30 @@
+{
+ "id": "hd-226868",
+ "classification": "star",
+ "order": 1845,
+ "physical": {
+  "name": "HD 226868",
+  "horizonsCode": null,
+  "meanRadiusKm": 15514110,
+  "gravitationalParameterKm3PerS2": 5388125065702.739,
+  "parent": null,
+  "effectiveTemperatureK": 31138
+ },
+ "physicalNotes": "Radius 22.3 solar radii from Miller-Jones et al. (2021), Science 371, 1046, Table 1: R1 = 22.3 solar radii (median; 5th-95th percentile 20.6-24.1), derived from their dynamical model at 2.22 kpc (https://arxiv.org/abs/2102.09091): 15,514,110 km at 695,700 km per solar radius. Mass 40.6 solar masses from Miller-Jones et al. (2021), Science 371, 1046, Table 1: M1 = 40.6 solar masses (median; 5th-95th percentile 33.5-48.3), fitted (https://arxiv.org/abs/2102.09091); GM is that mass times the JPL solar GM. Temperature 31138 K from Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted (https://arxiv.org/abs/2102.09091). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 299.59029482904185,
+  "declinationDegrees": 35.201578765113695,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 2252.749640729428,
+  "properMotionRaMasPerYear": -3.812385175624448,
+  "properMotionDecMasPerYear": -6.309893239635542,
+  "radialVelocityKmPerS": -2.7,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2059383668236814720 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-226868/source/photometry/gaia-dr3-source.csv; cross-identification HD 226868, HIP 98298: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2059383668236814720",
+   "distance": "Gaia DR3 parallax 0.4439 +/- 0.0149 mas (same row, RUWE 0.97): 2252.75 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -3.812, -6.310 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 2059383668236814720 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+  }
+ }
+}

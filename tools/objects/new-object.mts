@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
- *   node tools/objects/new-object.mts --from-archive HOST... --out spec.json
  *   node tools/objects/new-object.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
@@ -31,13 +30,9 @@ export { neutralDiscMarker, scaffoldStar, scaffoldStarFiles, solarRadii, starSty
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
-  const specPath = option('spec'), handoff = option('hosted'), fromArchive = args.indexOf('--from-archive');
-  if (fromArchive >= 0) {
-    // A spec for planet hosts from the NASA Exoplanet Archive: `--from-archive HOST... --out spec.json`.
-    const hosts = args.slice(fromArchive + 1).filter((argument, i, list) => !argument.startsWith('--') && !list[i - 1]?.startsWith('--')), out = option('out');
-    if (!hosts.length || !out) throw new TypeError('Usage: new-object --from-archive HOST... --out spec.json');
-    const { specFromArchive } = await import('./new-object/generate.mts'), result = await specFromArchive(hosts, out, { progress: line => process.stderr.write(`${line}\n`) });
-    process.stdout.write(`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`);
+  const specPath = option('spec'), handoff = option('hosted');
+  if (args.some(argument => /^--from-[a-z]+$/u.test(argument))) {
+    throw new TypeError('Drafts have one path: pnpm telescope new-object --from-<route> NAME... --out SPEC.json (new-object/drafts.mts).');
   } else if (handoff) {
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.
     const { runHostedPhase } = await import('./new-object/generate.mts');

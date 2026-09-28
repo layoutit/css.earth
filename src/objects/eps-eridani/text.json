@@ -46,6 +46,19 @@
       "title": "Colour",
       "detail": "From its spectrum",
       "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "dust-ring": {
+      "title": "Dust ring, 1.3 mm",
+      "detail": "ALMA, December 2019",
+      "summary": "The dust belt 70 au out in its own glow at 1.3 mm. Its depth is the tilted ring that fits.",
+      "sources": [
+        {
+          "catalogueId": "source-eps-eridani-disc-dust-b6-cont",
+          "url": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S",
+          "label": "ALMA project 2019.1.00696.S, pipeline continuum image",
+          "checked": "2026-09-27"
+        }
+      ]
     }
   }
 }

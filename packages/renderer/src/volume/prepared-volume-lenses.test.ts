@@ -514,11 +514,12 @@ test('fixed detail planes retain physical geometry through camera motion, materi
 });
 
 
-test('incoming lens demands only the camera-facing axis and no hidden dataset', () => {
+test('detail demands a stable selected-lens rotation bank and no hidden dataset', () => {
   const { options } = dom();
   const mounted = createPreparedVolumeLenses({ payload: payload(), resolveResource: path => `/prepared/${path}` }).mount(options);
-  expect(mounted.textureUrls(publication(), true)).toEqual(['/prepared/first/z.webp']);
+  expect(mounted.textureUrls(publication(), true)).toEqual(['/prepared/first/x.webp', '/prepared/first/y.webp', '/prepared/first/z.webp']);
+  expect(mounted.textureUrls(publication(4, [1, 0, 0]), true)).toEqual(mounted.textureUrls(publication(), true));
   mounted.selectLens('second');
-  expect(mounted.textureUrls(publication(), true)).toEqual(['/prepared/second/z.webp']);
+  expect(mounted.textureUrls(publication(), true)).toEqual(['/prepared/second/x.webp', '/prepared/second/y.webp', '/prepared/second/z.webp']);
   mounted.destroy();
 });

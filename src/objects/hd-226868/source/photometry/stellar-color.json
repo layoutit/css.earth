@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-226868",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 31138,
+      "lowerKelvin": 31138,
+      "upperKelvin": 31138,
+      "citation": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted: 31138 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/2102.09091"
+    },
+    "note": "Interstellar dust reddens every spectrum of this star: E(B-V) = 1.11 +/- 0.03 and A_V = 3.35 (Caballero-Nieves et al. 2009, as adopted by Orosz et al. 2011, ApJ 742, 84, section 3.2, https://arxiv.org/abs/1106.3689), which the colour routes do not remove, so a measured spectrum would show the dust's colour and not the star's, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

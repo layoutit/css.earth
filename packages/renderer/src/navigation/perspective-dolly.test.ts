@@ -153,12 +153,12 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   const view = { getComputedStyle: () => ({ perspective: '1247px', perspectiveOrigin: '720px 450px' }) };
   const make = () => ({ style: {}, ownerDocument: { defaultView: view },
     getBoundingClientRect: () => ({ width: 1440, height: 900, x: 0, y: 0, left: 0, top: 0 }) });
-  let hidden = false, visibilityWrites = 0;
+  let hidden = false, visibilityWrites = 0, moving = false;
   const element = { style: {} as Record<string, string>, get hidden() { return hidden; },
     set hidden(value: boolean) { hidden = value; visibilityWrites++; } };
   const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [1e8, 0, 0],
     presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 };
-  const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
+  const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null, isCameraMoving: () => moving,
     worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
       maximumExtentUnits: 1e9 },
     cameraElement: make(), viewport: { read: () => ({ bounds: make().getBoundingClientRect(), focalPixels: 1247, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(), sceneElement: element,
@@ -186,6 +186,26 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   expect(outside.prepare().commit().levelOfDetail!.stage).toBe('geometry');
   expect(hidden).toBe(false);
   expect(element.style.transform, 'The shown scene carries the current pose').toMatch(/^translate3d\(/);
+  const writes = visibilityWrites;
+  moving = true;
+  for (const distance of [1e7, 1200, 1e7, 1200, 1e7]) {
+    place(outside, [0, 0, -distance]);
+    expect(outside.prepare().commit().levelOfDetail!.stage).toBe('geometry');
+    expect(hidden).toBe(false);
+  }
+  expect(visibilityWrites, 'Reversals retain the presented mesh instead of restarting reveal').toBe(writes);
+  expect(outside.retainedDetail()).toBe(true);
+  expect(outside.levelOfDetail().markerOpacity, 'The distant marker still follows projected size').toBe(1);
+  moving = false;
+  expect(outside.prepare().commit().levelOfDetail!.stage).toBe('marker');
+  expect(hidden).toBe(true);
+  expect(outside.retainedDetail()).toBe(false);
+  moving = true;
+  const cold = create(frame.originM);
+  place(cold, [0, 0, -1e7]);
+  expect(cold.prepare().commit().levelOfDetail!.stage).toBe('marker');
+  expect(hidden, 'Motion alone must not activate a cold distant mesh').toBe(true);
+
 });
 
 it('stops the zoom where one CSS pixel shows the least surface arc the imagery supports', () => {

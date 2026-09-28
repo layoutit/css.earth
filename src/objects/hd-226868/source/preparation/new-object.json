@@ -1,0 +1,69 @@
+{
+  "id": "hd-226868",
+  "name": "HD 226868",
+  "system": "Cygnus X-1 system",
+  "description": "The blue supergiant of Cygnus X-1, orbiting a black hole of 21 solar masses every 5.6 days.",
+  "order": 1845,
+  "target": "HD 226868",
+  "gaia": "2059383668236814720",
+  "paper": {
+    "url": "https://arxiv.org/abs/2102.09091",
+    "credit": "Miller-Jones et al. (2021), Science 371, 1046"
+  },
+  "radius": {
+    "value": 22.3,
+    "source": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: R1 = 22.3 solar radii (median; 5th-95th percentile 20.6-24.1), derived from their dynamical model at 2.22 kpc",
+    "url": "https://arxiv.org/abs/2102.09091"
+  },
+  "mass": {
+    "value": 40.6,
+    "source": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: M1 = 40.6 solar masses (median; 5th-95th percentile 33.5-48.3), fitted",
+    "url": "https://arxiv.org/abs/2102.09091"
+  },
+  "temperature": {
+    "value": 31138,
+    "source": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted",
+    "url": "https://arxiv.org/abs/2102.09091"
+  },
+  "gravity": {
+    "value": 3.348,
+    "source": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived",
+    "url": "https://arxiv.org/abs/2102.09091"
+  },
+  "radialVelocity": {
+    "value": -2.7,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2059383668236814720 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract",
+    "uncertainty": 3.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star: E(B-V) = 1.11 +/- 0.03 and A_V = 3.35 (Caballero-Nieves et al. 2009, as adopted by Orosz et al. 2011, ApJ 742, 84, section 3.2, https://arxiv.org/abs/1106.3689), which the colour routes do not remove, so a measured spectrum would show the dust's colour and not the star's"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A blue supergiant 40 times the Sun's mass, circling a black hole of 21 solar masses every 5.6 days.",
+    "introduction": "The star is 22 times as wide as the Sun and 31,000 K at its surface. Its black hole, Cygnus X-1, orbits 0.24 au away, closer than Mercury is to the Sun.",
+    "locator": "Table 1: M1, M_BH, R1, Teff and a",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Cygnus_X-1",
+      "title": "Cygnus X-1",
+      "revision": "1374065663",
+      "card": "Cygnus X-1 (abbreviated Cyg X-1) is a galactic X-ray source in the constellation Cygnus and was the first such source widely accepted to be a black hole.",
+      "introduction": "It was discovered in 1964 during a rocket flight and is one of the strongest X-ray sources detectable from Earth, producing a peak X-ray flux density of 2.3×10−23 W/(m2⋅Hz) (2.3×103 jansky)."
+    }
+  },
+  "notes": [
+    "The star nearly fills its Roche lobe (filling factor 0.96, Miller-Jones et al. 2021, Table 1), so it is slightly egg-shaped; it is drawn as a sphere at its mean radius.",
+    "The accretion disc and the radio jet of the black hole are not drawn.",
+    "The black hole has no measured size and is drawn as a point on its orbit."
+  ]
+}

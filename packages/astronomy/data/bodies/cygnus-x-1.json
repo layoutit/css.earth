@@ -1,0 +1,31 @@
+{
+ "id": "cygnus-x-1",
+ "classification": "black-hole",
+ "order": 1846,
+ "physical": {
+  "name": "Cygnus X-1",
+  "horizonsCode": null,
+  "meanRadiusKm": 0,
+  "gravitationalParameterKm3PerS2": 2813503728889.11,
+  "parent": "hd-226868"
+ },
+ "physicalNotes": "No source measures a size for this black hole (no shadow or horizon is resolved), so the radius is the records' unmeasured 0 and it is drawn as a point. GM from the mass 21.2 solar masses (Miller-Jones et al. (2021), Science 371, 1046, Table 1: M_BH = 21.2 solar masses (median; 5th-95th percentile 18.9-23.4), derived, https://arxiv.org/abs/2102.09091) times the JPL solar GM.",
+ "hostedOrbit": {
+  "periodDays": 5.599836,
+  "semiMajorAxisStellarRadii": 2.3528,
+  "inclinationDegrees": 152.49,
+  "eccentricity": 0.0189,
+  "argumentOfPeriapsisDegrees": 126.6,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 41160.8322,
+  "ascendingNodePositionAngleDegrees": 64.1,
+  "sources": {
+   "period": "Brocksopp et al. (1999, A&A 343, 861; arXiv:astro-ph/9812077), Table 3, photometric column: P = 5.599836 +/- 0.000037 d, the photometric ephemeris Miller-Jones et al. (2021, Science 371, 1046; arXiv:2102.09091) adopt (supplement, section 1.8).",
+   "shape": "Miller-Jones et al. (2021), Table 1: a = 0.244 au (median; 5th-95th percentile 0.231-0.256), the separation of the star and the black hole, over the star's 22.3 solar radii (15,514,110 km): 0.244 x 149,597,870.7 km / 15,514,110 km = 2.3528 stellar radii. Inclination: Table 1 gives 27.51 degrees (median; 26.94-28.28); it is written 180 - 27.51 = 152.49 degrees because their astrometric fit finds the orbit runs clockwise on the sky (Table S3, 1-D fit, i = 152.9 +/- 0.7 degrees; 'inclinations of 90-180 degrees indicate clockwise orbits').",
+   "eccentricity": "Miller-Jones et al. (2021), Table 1: e = 0.0189 (median; 5th-95th percentile 0.0163-0.0217).",
+   "argumentOfPeriapsis": "Miller-Jones et al. (2021), Table 1: omega = 306.6 degrees (median; 300.3-313.1), the black hole's own argument of periastron (their supplement: the star's is omega_BH + 180 degrees). Stored host-side, as the star's: 126.6 degrees, as the kepler-16-b record stores its host's.",
+   "phase": "Brocksopp et al. (1999), Table 3, photometric column: superior conjunction of the black hole at HJD 2441163.529 +/- 0.009, moved by the phase offset Miller-Jones et al. (2021) fit, phi = 0.0024 of a period (Table 1): HJD 2441163.5424. Periastron from it: the black hole is farthest from the observer at true anomaly 90 - 306.6 = 143.4 degrees, mean anomaly 142.094 degrees at e = 0.0189, which is 2.2103 d after periastron, so periastron is at HJD 2441161.3322, BMJD 41160.8322. HJD is taken as BJD_TDB (under a minute apart). Checked against Brocksopp et al.'s independent spectroscopic ephemeris in packages/astronomy/src/hostedOrbits.test.ts.",
+   "orientation": "Miller-Jones et al. (2021), Table S3, 1-D fit: Omega = 64.1 +/- 1.0 degrees east of north. It rests on their assumption that the jet lies along the orbital angular momentum (the Table S2 prior, 64.0 +/- 1.0 degrees); with a uniform prior their fit gives 95 +/- 18 degrees."
+  }
+ }
+}

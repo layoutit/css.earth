@@ -20,10 +20,12 @@ export interface HostedOrbit {
   readonly argumentOfPeriapsisDegrees?: number
   /**
    * Meaning assigned to `transitTimeBmjdTdb`. Required for an eccentric orbit so its epoch is never silently
-   * reinterpreted. `inferior-conjunction` uses the transit convention f = pi/2 - argumentOfPeriapsis; `periastron` is the
-   * epoch of periastron passage (f = 0), the epoch an astrometric orbit of a directly imaged planet publishes.
+   * reinterpreted. `inferior-conjunction` uses the transit convention f = pi/2 - argumentOfPeriapsis; `superior-conjunction`
+   * is the body behind its host, f = 3pi/2 - argumentOfPeriapsis (an eclipse ephemeris that times the companion's occultation,
+   * as Cygnus X-1's times its black hole behind the star); `periastron` is the epoch of periastron passage (f = 0), the epoch an
+   * astrometric orbit of a directly imaged planet publishes.
    */
-  readonly epochDefinition?: 'inferior-conjunction' | 'periastron'
+  readonly epochDefinition?: 'inferior-conjunction' | 'superior-conjunction' | 'periastron'
   /** Barycentric modified Julian date in TDB at the stated epoch definition. */
   readonly transitTimeBmjdTdb: number
   /** Position angle of the ascending node, degrees east of celestial north. */
@@ -64,6 +66,7 @@ export const HOSTED_PLANET_IDS: readonly HostedPlanetId[] = Object.keys(HOSTED_O
 export const hostedOrbit = (id: HostedPlanetId): HostedOrbit => HOSTED_ORBITS[id]
 
 const MJD_OFFSET = 2400000.5
+const EPOCH_DEFINITIONS: readonly unknown[] = ['inferior-conjunction', 'superior-conjunction', 'periastron']
 
 /** The observer's frame at a star: +Z toward the Sun (the observer), +X on the sky at the ascending node's position angle
  * (east of north), +Y = Z x X. The frame is right-handed, so cross products taken in it agree with ICRF. */
@@ -97,10 +100,10 @@ const validatedEccentricParameters = (orbit: HostedOrbit): { eccentricity: numbe
   if (!(Number.isFinite(orbit.semiMajorAxisStellarRadii) && orbit.semiMajorAxisStellarRadii > 0)) throw new TypeError('semiMajorAxisStellarRadii must be finite and positive.')
   if (!(Number.isFinite(orbit.inclinationDegrees) && orbit.inclinationDegrees >= 0 && orbit.inclinationDegrees <= 180)) throw new TypeError('inclinationDegrees must be finite and in [0, 180].')
   if (!(Number.isFinite(orbit.ascendingNodePositionAngleDegrees) && orbit.ascendingNodePositionAngleDegrees >= 0 && orbit.ascendingNodePositionAngleDegrees < 360)) throw new TypeError('ascendingNodePositionAngleDegrees must be finite and in [0, 360).')
-  if (orbit.epochDefinition !== undefined && orbit.epochDefinition !== 'inferior-conjunction' && orbit.epochDefinition !== 'periastron') throw new TypeError(`Unsupported hosted-orbit epoch definition: ${String(orbit.epochDefinition)}.`)
+  if (orbit.epochDefinition !== undefined && !EPOCH_DEFINITIONS.includes(orbit.epochDefinition)) throw new TypeError(`Unsupported hosted-orbit epoch definition: ${String(orbit.epochDefinition)}.`)
   if (orbit.argumentOfPeriapsisDegrees !== undefined && !(Number.isFinite(orbit.argumentOfPeriapsisDegrees) && orbit.argumentOfPeriapsisDegrees >= 0 && orbit.argumentOfPeriapsisDegrees < 360)) throw new TypeError('argumentOfPeriapsisDegrees must be finite and in [0, 360) when present.')
   if (e > 0 && (orbit.argumentOfPeriapsisDegrees === undefined || orbit.epochDefinition === undefined)) {
-    throw new TypeError('An eccentric hosted orbit requires argumentOfPeriapsisDegrees and an epochDefinition ("inferior-conjunction" or "periastron").')
+    throw new TypeError('An eccentric hosted orbit requires argumentOfPeriapsisDegrees and an epochDefinition ("inferior-conjunction", "superior-conjunction" or "periastron").')
   }
   if (orbit.semiMajorAxisStellarRadii * (1 - e) <= 1) throw new TypeError('Hosted orbit must remain outside the stellar surface: a/R* (1 - e) must be greater than 1.')
   return { eccentricity: e, argumentOfPeriapsisRad: (orbit.argumentOfPeriapsisDegrees ?? 0) * RAD_PER_DEG }
@@ -139,8 +142,8 @@ export const hostedKeplerElements = (orbit: HostedOrbit, host: { rightAscensionD
   const nodeNormal: Vec3 = [normal[1] * equatorialNode[2] - normal[2] * equatorialNode[1], normal[2] * equatorialNode[0] - normal[0] * equatorialNode[2], normal[0] * equatorialNode[1] - normal[1] * equatorialNode[0]]
   const argument = Math.atan2(perifocal[0] * nodeNormal[0] + perifocal[1] * nodeNormal[1] + perifocal[2] * nodeNormal[2],
     perifocal[0] * equatorialNode[0] + perifocal[1] * equatorialNode[1] + perifocal[2] * equatorialNode[2])
-  // The epoch's true anomaly: the transit convention f = pi/2 - omega, or f = 0 at a periastron epoch.
-  const epochTrueAnomaly = orbit.epochDefinition === 'periastron' ? 0 : Math.PI / 2 - periapsis
+  // The epoch's true anomaly: the transit convention f = pi/2 - omega, half an orbit on from it behind the host, or f = 0 at periastron.
+  const epochTrueAnomaly = orbit.epochDefinition === 'periastron' ? 0 : orbit.epochDefinition === 'superior-conjunction' ? 3 * Math.PI / 2 - periapsis : Math.PI / 2 - periapsis
   const conjunctionEccentricAnomaly = Math.atan2(Math.sqrt(1 - e * e) * Math.sin(epochTrueAnomaly), e + Math.cos(epochTrueAnomaly))
   return {
     epochJdTt: orbit.transitTimeBmjdTdb + MJD_OFFSET,

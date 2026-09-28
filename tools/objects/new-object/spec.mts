@@ -23,12 +23,20 @@
  * A planet or companion is a body on a hosted orbit around this star (orbit.mts): `orbit` is { "whereistheplanet": key,
  * "measurements": CSV path, "measurementsSource", "source", "url" } for an imaged orbit from the paper's posterior;
  * { "archive": "nasa-ps", "reference"? } for one paper's transit fit in the NASA Exoplanet Archive ("measured": true for a planet
- * found without a transit whose paper measures its whole orbit, inclination included, orbit.mts assembleMeasuredOrbit); or { "elements": { … },
- * "source", "url" }. A planet's radius and mass are in Jupiter units and default to the archive row's; a planet with a cited
- * `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units, temperature required.
+ * found without a transit whose paper measures its whole orbit, inclination included, orbit.mts assembleMeasuredOrbit); { "elements": { … },
+ * "source", "url" }; or { "record": true, "source", "url" } for a body whose astronomy record another owner already writes (the
+ * S-stars of packages/astronomy/tools/generate-s-stars.mts): the record is kept as it is and only the package is written, and the spec's
+ * cited radius and mass must reproduce the record's. A planet's radius and mass are in Jupiter units and default to the archive row's;
+ * a planet with a cited `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units,
+ * temperature required; `colorReason` says why its colour is a Planck spectrum when that is not because the archives cannot separate it
+ * from its star. A companion with `"blackHole": true` is a black hole: no temperature, a radius only if a source measures one (else the
+ * records' unmeasured 0), and an astronomy record only, drawn in its star's system, with no package of its own.
  *
  * `target` is a name SIMBAD resolves, through the telescope's resolver (packages/telescope/src/node/sky-target.ts); `gaia` is a Gaia
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
+ * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
+ * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
+ * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
  * `radius` and `mass` may be "gaia-flame": the Gaia DR3 FLAME value of the same source, an archive product. `gravity` defaults to
  * log g from the mass and radius. `radialVelocity` is needed only when Gaia DR3 has none. Every cited value names its source and a
  * URL; the URL becomes the fact's catalogue record (arXiv and DOI links are resolved to publication records; ADS links are cited by
@@ -51,6 +59,8 @@ export interface StarSpec {
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius: Cited | 'gaia-flame'; readonly mass: Cited | 'gaia-flame'; readonly temperature: Cited;
   readonly gravity?: Cited; readonly radialVelocity?: Cited;
+  /** Parsecs, cited: replaces Gaia DR3's parallax distance (spec header). */
+  readonly distance?: Cited;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
@@ -89,10 +99,13 @@ function draftQuotes(value: unknown, label: string): DraftQuotes {
   const quote = (key: 'card' | 'introduction') => { if (input[key] === undefined) return {}; const text = requireString(input[key], `${label}.${key}`); if (text.length > 300) throw new RangeError(`${label}.${key} is ${text.length} characters; a quote is 300 at most.`); return { [key]: text }; };
   return { url, title: requireString(input.title, `${label}.title`), revision: requireString(input.revision, `${label}.revision`), ...quote('card'), ...quote('introduction') };
 }
+export const HOSTED_EPOCHS = ['periastron', 'inferior-conjunction', 'superior-conjunction'] as const;
+export type HostedEpoch = typeof HOSTED_EPOCHS[number];
 export type OrbitSpec =
   | { readonly whereistheplanet: string; readonly measurements: string; readonly measurementsSource: string; readonly body?: number; readonly source: string; readonly url: string }
   | { readonly archive: 'nasa-ps'; readonly reference?: string; readonly planetName?: string; readonly measured?: true }
-  | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: 'periastron' | 'inferior-conjunction'; readonly source: string; readonly url: string };
+  | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: HostedEpoch; readonly source: string; readonly url: string }
+  | { readonly record: true; readonly source: string; readonly url: string };
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" lens (planet-lenses.mts). */
 export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
 /** Published flux densities in three infrared bands for the band-colour lens of an imaged planet (planet-lenses.mts): red, green,
@@ -107,6 +120,10 @@ export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText; readonly thermal?: ThermalSpec; readonly photometry?: PhotometrySpec;
+  /** A companion that is a black hole: an astronomy record only (spec header). */
+  readonly blackHole?: true;
+  /** Why a companion's colour is a Planck spectrum at its temperature, when not because the archives cannot separate it. */
+  readonly colorReason?: string;
 }
 const ELEMENT_KEYS = ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'argumentOfPeriapsisDegrees', 'transitTimeBmjdTdb', 'ascendingNodePositionAngleDegrees'];
 function orbitSpec(value: unknown, label: string): OrbitSpec {
@@ -119,36 +136,48 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
     return { archive: 'nasa-ps', ...(o.reference === undefined ? {} : { reference: requireString(o.reference, `${label}.reference`) }), ...(o.planetName === undefined ? {} : { planetName: requireString(o.planetName, `${label}.planetName`) }),
       ...(o.measured === undefined ? {} : o.measured === true ? { measured: true as const } : (() => { throw new TypeError(`${label}.measured is true or absent, not ${JSON.stringify(o.measured)}.`); })()) };
   }
+  if (o.record !== undefined) {
+    if (o.record !== true) throw new TypeError(`${label}.record is true or absent, not ${JSON.stringify(o.record)}.`);
+    return { record: true, source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
+  }
   if (o.elements !== undefined) {
     const elements = requireRecord(o.elements, `${label}.elements`), unknown = Object.keys(elements).filter(key => !ELEMENT_KEYS.includes(key));
     if (unknown.length) throw new TypeError(`${label}.elements: unknown ${unknown.join(', ')} (${ELEMENT_KEYS.join(', ')}).`);
     for (const key of ['periodDays', 'semiMajorAxisStellarRadii', 'inclinationDegrees', 'eccentricity', 'transitTimeBmjdTdb']) requireFiniteNumber(elements[key], `${label}.elements.${key}`);
-    // An eccentric orbit says what its reference epoch is: a periastron passage or a transit (inferior conjunction).
+    // An eccentric orbit says what its reference epoch is: a periastron passage, the body in front of its host (a transit or primary
+    // eclipse, inferior conjunction), or behind it (an occultation or secondary eclipse, superior conjunction), as the paper times it.
     const epoch = o.epoch === undefined ? undefined : requireString(o.epoch, `${label}.epoch`);
-    if (epoch !== undefined && epoch !== 'periastron' && epoch !== 'inferior-conjunction') throw new TypeError(`${label}.epoch is periastron or inferior-conjunction, not ${epoch}.`);
-    if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (periastron or inferior-conjunction).`);
-    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as 'periastron' | 'inferior-conjunction' } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
+    if (epoch !== undefined && !(HOSTED_EPOCHS as readonly string[]).includes(epoch)) throw new TypeError(`${label}.epoch is ${HOSTED_EPOCHS.join(', ')}, not ${epoch}.`);
+    if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (${HOSTED_EPOCHS.join(', ')}).`);
+    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as HostedEpoch } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
   }
-  throw new TypeError(`${label} needs whereistheplanet, archive or elements.`);
+  throw new TypeError(`${label} needs whereistheplanet, archive, elements or record.`);
 }
 function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): HostedSpec {
   const input = requireRecord(value, label), id = requireString(input.id, `${label}.id`), at = (name: string) => `${id}.${name}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: an id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'blackHole', 'colorReason']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
   const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
   if (thermal && kind !== 'planet') throw new TypeError(`${id}: a thermal lens is a planet's; a companion star has its temperature.`);
   const photometry = input.photometry === undefined ? undefined : photometrySpec(input.photometry, at('photometry'));
   if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one colour lens; not with a companion star or a thermal lens.`);
+  if (input.blackHole !== undefined && input.blackHole !== true) throw new TypeError(`${id}.blackHole is true or absent, not ${JSON.stringify(input.blackHole)}.`);
+  const blackHole = input.blackHole === true;
+  if (blackHole && kind !== 'companion') throw new TypeError(`${id}: only a companion may be a black hole.`);
+  if (blackHole && input.temperature !== undefined) throw new TypeError(`${id}: a black hole has no effective temperature.`);
+  if (input.colorReason !== undefined && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: colorReason explains a companion star's Planck colour.`);
   const range = kind === 'planet' ? { radius: [0.01, 5] as const, mass: [0.0001, 100] as const } : { radius: [0.005, 3000] as const, mass: [0.01, 300] as const };
   const out: HostedSpec = { kind, id, name: requireString(input.name, at('name')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     ...(input.radius === undefined ? {} : { radius: cited(input.radius, at('radius'), range.radius) }), ...(input.mass === undefined ? {} : { mass: cited(input.mass, at('mass'), range.mass) }),
-    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}) };
+    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}),
+    ...(blackHole ? { blackHole: true as const } : {}), ...(input.colorReason === undefined ? {} : { colorReason: requireString(input.colorReason, at('colorReason')) }) };
   const fromArchive = 'archive' in orbit;
-  if (!fromArchive && (!out.radius || !out.mass)) throw new TypeError(`${id}: give radius and mass with their sources; only an archive orbit supplies them.`);
-  if (kind === 'companion' && (!out.temperature || !out.radius || !out.mass)) throw new TypeError(`${id}: a companion star needs its cited temperature, radius and mass.`);
+  if (blackHole) { if (!out.mass) throw new TypeError(`${id}: a black hole needs its cited mass.`); if ('record' in orbit) throw new TypeError(`${id}: a black hole's record is written here; the record route packages a star another owner records.`); }
+  else if (!fromArchive && (!out.radius || !out.mass)) throw new TypeError(`${id}: give radius and mass with their sources; only an archive orbit supplies them.`);
+  if (kind === 'companion' && !blackHole && (!out.temperature || !out.radius || !out.mass)) throw new TypeError(`${id}: a companion star needs its cited temperature, radius and mass.`);
   return out;
 }
 
@@ -168,7 +197,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -197,6 +226,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     temperature: cited(input.temperature, at('temperature'), [1000, 60000]),
     ...(input.gravity === undefined ? {} : { gravity: cited(input.gravity, at('gravity'), [-1, 9]) }),
     ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), [-1000, 1000]) }),
+    ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e7]) }),
     ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),
