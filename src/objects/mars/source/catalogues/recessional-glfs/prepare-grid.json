@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "Recessional_GLF_Options_2016_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "Feature",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "point",
+      "label": "Recessional glacier-like form",
+      "color": "#ff33cc"
+    }
+  ],
+  "layers": [
+    {
+      "esriJsonPath": "Recessional_GLF_Options_2016_clon0.query.json",
+      "expectedRecords": 436
+    }
+  ],
+  "output": "mars-recessional-glfs.tif",
+  "receipt": "mars-recessional-glfs.json"
+}

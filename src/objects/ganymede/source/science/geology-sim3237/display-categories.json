@@ -1,122 +1,516 @@
 {
   "schema": "cssearth-geology-categories@1",
-  "attributeField": "Unit",
-  "paletteMeaning": "Authored categorical display palette; not a copy of the publication colors and not a measured scalar.",
+  "attributeField": "UNITNAME",
+  "paletteMeaning": "Unit colors are the authors' own GIS symbology for SIM 3237, not measured color or composition.",
+  "symbology": {
+    "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_ArcMap10.mxd",
+    "archiveUrl": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+    "renderer": "Unique-value renderer on UNITNAME of the GeologyUnits layer; the project holds four copies of this layer and all four carry the same 25 values and colors.",
+    "conversion": "ArcMap stores each color as CIE L*a*b*. RGB here uses Apple RGB primaries, gamma 1.8 and a D65 white: every stored color lands within 6e-7 of an integer, and the 20 units NASA Trek also serves match its published RGB exactly.",
+    "unitNames": "Labels are the unit names in the Description of Map Units on the SIM 3237 map sheet (https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf); symbol is the sheet's unit label.",
+    "units": [
+      {
+        "value": "Bright 3",
+        "symbol": "lg3",
+        "rendererLabel": "Bright Grooved 3",
+        "lab": [
+          87.055814,
+          1.29026,
+          -19.082579
+        ],
+        "rgb": [
+          190,
+          210,
+          255
+        ]
+      },
+      {
+        "value": "Bright 2",
+        "symbol": "lg2",
+        "rendererLabel": "Bright Grooved 2",
+        "lab": [
+          75.67162,
+          -3.3214,
+          -36.507603
+        ],
+        "rgb": [
+          115,
+          178,
+          255
+        ]
+      },
+      {
+        "value": "Bright 1",
+        "symbol": "lg1",
+        "rendererLabel": "Bright Grooved 1",
+        "lab": [
+          49.065726,
+          18.780426,
+          -67.431636
+        ],
+        "rgb": [
+          0,
+          92,
+          230
+        ]
+      },
+      {
+        "value": "Bright Subdued 3",
+        "symbol": "ls3",
+        "rendererLabel": "Bright Subdued 3",
+        "lab": [
+          95.428936,
+          -21.006007,
+          2.077529
+        ],
+        "rgb": [
+          190,
+          255,
+          232
+        ]
+      },
+      {
+        "value": "Bright Subdued 2",
+        "symbol": "ls2",
+        "rendererLabel": "Bright Subdued 2",
+        "lab": [
+          91.498447,
+          -42.085538,
+          -0.37604
+        ],
+        "rgb": [
+          115,
+          255,
+          223
+        ]
+      },
+      {
+        "value": "Bright Subdued 1",
+        "symbol": "ls1",
+        "rendererLabel": "Bright Subdued 1",
+        "lab": [
+          81.722538,
+          -62.610307,
+          8.517328
+        ],
+        "rgb": [
+          0,
+          230,
+          169
+        ]
+      },
+      {
+        "value": "Bright Irregular 3",
+        "symbol": "li3",
+        "rendererLabel": "Bright Irregular 3",
+        "lab": [
+          75.747039,
+          19.737561,
+          -18.725547
+        ],
+        "rgb": [
+          194,
+          158,
+          215
+        ]
+      },
+      {
+        "value": "Bright Irregular 2",
+        "symbol": "li2",
+        "rendererLabel": "Bright Irregular 2",
+        "lab": [
+          70.638592,
+          43.528144,
+          -39.178249
+        ],
+        "rgb": [
+          202,
+          122,
+          245
+        ]
+      },
+      {
+        "value": "Bright Irregular 1",
+        "symbol": "li1",
+        "rendererLabel": "Bright Irregular 1",
+        "lab": [
+          61.939635,
+          39.402808,
+          -35.058974
+        ],
+        "rgb": [
+          170,
+          102,
+          205
+        ]
+      },
+      {
+        "value": "Bright Undivided",
+        "symbol": "l",
+        "rendererLabel": "Bright Undivided",
+        "lab": [
+          56.560235,
+          -23.650169,
+          -26.94265
+        ],
+        "rgb": [
+          0,
+          132,
+          168
+        ]
+      },
+      {
+        "value": "Reticulate",
+        "symbol": "r",
+        "rendererLabel": "Reticulate",
+        "lab": [
+          64.181184,
+          58.535951,
+          -2.329052
+        ],
+        "rgb": [
+          237,
+          81,
+          146
+        ]
+      },
+      {
+        "value": "Dark Lineated",
+        "symbol": "dl",
+        "rendererLabel": "Dark Lineated",
+        "lab": [
+          69.527067,
+          18.843857,
+          26.577553
+        ],
+        "rgb": [
+          205,
+          137,
+          102
+        ]
+      },
+      {
+        "value": "Dark Cratered",
+        "symbol": "dc",
+        "rendererLabel": "Dark Cratered",
+        "lab": [
+          45.623002,
+          28.447648,
+          14.024178
+        ],
+        "rgb": [
+          137,
+          68,
+          68
+        ]
+      },
+      {
+        "value": "Dark Undivided",
+        "symbol": "d",
+        "rendererLabel": "Dark Undivided",
+        "lab": [
+          79.60949,
+          9.777675,
+          12.557486
+        ],
+        "rgb": [
+          215,
+          176,
+          158
+        ]
+      },
+      {
+        "value": "Crater materials C3",
+        "symbol": "c3",
+        "rendererLabel": "Crater materials C3",
+        "lab": [
+          99.081386,
+          -5.364994,
+          15.868874
+        ],
+        "rgb": [
+          255,
+          255,
+          212
+        ]
+      },
+      {
+        "value": "Crater materials C2",
+        "symbol": "c2",
+        "rendererLabel": "Crater materials C2",
+        "lab": [
+          94.614927,
+          -1.499123,
+          25.348657
+        ],
+        "rgb": [
+          255,
+          235,
+          175
+        ]
+      },
+      {
+        "value": "Crater materials C1",
+        "symbol": "c1",
+        "rendererLabel": "Crater materials C1",
+        "lab": [
+          67.827712,
+          24.199485,
+          64.68162
+        ],
+        "rgb": [
+          220,
+          126,
+          21
+        ]
+      },
+      {
+        "value": "Crater materials UC",
+        "symbol": "cu",
+        "rendererLabel": "Crater materials UC",
+        "lab": [
+          62.250389,
+          -4.452194,
+          51.318124
+        ],
+        "rgb": [
+          152,
+          133,
+          35
+        ]
+      },
+      {
+        "value": "Basin Smooth",
+        "symbol": "bs",
+        "rendererLabel": "Basin Smooth",
+        "lab": [
+          73.546455,
+          41.140579,
+          20.254496
+        ],
+        "rgb": [
+          255,
+          127,
+          127
+        ]
+      },
+      {
+        "value": "Basin Rugged",
+        "symbol": "br",
+        "rendererLabel": "Basin Rugged",
+        "lab": [
+          62.382813,
+          60.244178,
+          69.442292
+        ],
+        "rgb": [
+          255,
+          69,
+          0
+        ]
+      },
+      {
+        "value": "Basin interior",
+        "symbol": "bi",
+        "rendererLabel": "Basin interior",
+        "lab": [
+          97.934098,
+          2.727425,
+          1.069284
+        ],
+        "rgb": [
+          255,
+          245,
+          245
+        ]
+      },
+      {
+        "value": "Palimpsests P2",
+        "symbol": "p2",
+        "rendererLabel": "Palimpsests P2",
+        "lab": [
+          79.022768,
+          -36.156373,
+          36.526456
+        ],
+        "rgb": [
+          137,
+          205,
+          102
+        ]
+      },
+      {
+        "value": "Palimpsests P1",
+        "symbol": "p1",
+        "rendererLabel": "Palimpsests P1",
+        "lab": [
+          62.280197,
+          -9.779398,
+          34.065775
+        ],
+        "rgb": [
+          137,
+          137,
+          68
+        ]
+      },
+      {
+        "value": "Palimpsests PU",
+        "symbol": "pu",
+        "rendererLabel": "Palimpsests PU",
+        "lab": [
+          58.64028,
+          -28.233942,
+          28.813177
+        ],
+        "rgb": [
+          92,
+          137,
+          68
+        ]
+      },
+      {
+        "value": "Palimpsets interior",
+        "symbol": "pi",
+        "rendererLabel": "Palimpsets interior",
+        "lab": [
+          100,
+          0,
+          0
+        ],
+        "rgb": [
+          255,
+          255,
+          255
+        ]
+      }
+    ]
+  },
   "categories": [
     {
-      "value": "dc",
-      "label": "Dark cratered terrain",
-      "color": "#79574a"
+      "value": "Bright 3",
+      "label": "Young light grooved material",
+      "color": "#bed2ff"
     },
     {
-      "value": "dl",
-      "label": "Dark lineated terrain",
-      "color": "#98705b"
+      "value": "Bright 2",
+      "label": "Intermediate light grooved material",
+      "color": "#73b2ff"
     },
     {
-      "value": "d",
-      "label": "Dark terrain, undivided",
-      "color": "#b38e78"
+      "value": "Bright 1",
+      "label": "Old light grooved material",
+      "color": "#005ce6"
     },
     {
-      "value": "r",
-      "label": "Reticulate terrain",
-      "color": "#998781"
+      "value": "Bright Subdued 3",
+      "label": "Young light subdued material",
+      "color": "#beffe8"
     },
     {
-      "value": "lg1",
-      "label": "Light grooved terrain 1",
-      "color": "#729e83"
+      "value": "Bright Subdued 2",
+      "label": "Intermediate light subdued material",
+      "color": "#73ffdf"
     },
     {
-      "value": "lg2",
-      "label": "Light grooved terrain 2",
-      "color": "#98bd94"
+      "value": "Bright Subdued 1",
+      "label": "Old light subdued material",
+      "color": "#00e6a9"
     },
     {
-      "value": "lg3",
-      "label": "Light grooved terrain 3",
-      "color": "#c4d9a1"
+      "value": "Bright Irregular 3",
+      "label": "Young light irregular material",
+      "color": "#c29ed7"
     },
     {
-      "value": "ls1",
-      "label": "Light subdued terrain 1",
-      "color": "#77aeb2"
+      "value": "Bright Irregular 2",
+      "label": "Intermediate light irregular material",
+      "color": "#ca7af5"
     },
     {
-      "value": "ls2",
-      "label": "Light subdued terrain 2",
-      "color": "#9bc9c6"
+      "value": "Bright Irregular 1",
+      "label": "Old light irregular material",
+      "color": "#aa66cd"
     },
     {
-      "value": "ls3",
-      "label": "Light subdued terrain 3",
-      "color": "#c3e4d9"
+      "value": "Bright Undivided",
+      "label": "Light undivided material",
+      "color": "#0084a8"
     },
     {
-      "value": "li1",
-      "label": "Light irregular terrain 1",
-      "color": "#8079a9"
+      "value": "Reticulate",
+      "label": "Reticulate material",
+      "color": "#ed5192"
     },
     {
-      "value": "li2",
-      "label": "Light irregular terrain 2",
-      "color": "#aaa0c6"
+      "value": "Dark Lineated",
+      "label": "Dark lineated material",
+      "color": "#cd8966"
     },
     {
-      "value": "li3",
-      "label": "Light irregular terrain 3",
-      "color": "#d3c4e0"
+      "value": "Dark Cratered",
+      "label": "Dark cratered material",
+      "color": "#894444"
     },
     {
-      "value": "l",
-      "label": "Light terrain, undivided",
-      "color": "#d0d0bd"
+      "value": "Dark Undivided",
+      "label": "Dark undivided material",
+      "color": "#d7b09e"
     },
     {
-      "value": "p",
-      "label": "Palimpsest material",
-      "color": "#daac75"
+      "value": "Crater materials C3",
+      "label": "Fresh crater material",
+      "color": "#ffffd4"
     },
     {
-      "value": "pi",
-      "label": "Palimpsest interior",
-      "color": "#b88957"
+      "value": "Crater materials C2",
+      "label": "Partially degraded crater material",
+      "color": "#ffebaf"
     },
     {
-      "value": "bi",
-      "label": "Basin interior",
-      "color": "#c87770"
+      "value": "Crater materials C1",
+      "label": "Degraded crater material",
+      "color": "#dc7e15"
     },
     {
-      "value": "br",
-      "label": "Rugged basin material",
-      "color": "#a34f51"
+      "value": "Crater materials UC",
+      "label": "Undivided crater material",
+      "color": "#988523"
     },
     {
-      "value": "bs",
+      "value": "Basin Smooth",
       "label": "Smooth basin material",
-      "color": "#dea398"
+      "color": "#ff7f7f"
     },
     {
-      "value": "c1",
-      "label": "Crater material 1",
-      "color": "#ad8c27"
+      "value": "Basin Rugged",
+      "label": "Rugged basin material",
+      "color": "#ff4500"
     },
     {
-      "value": "c2",
-      "label": "Crater material 2",
-      "color": "#dbbc42"
+      "value": "Basin interior",
+      "label": "Basin interior plains material",
+      "color": "#fff5f5"
     },
     {
-      "value": "c3",
-      "label": "Crater material 3",
-      "color": "#f4df86"
+      "value": "Palimpsests P2",
+      "label": "Young palimpsest material",
+      "color": "#89cd66"
     },
     {
-      "value": "cu",
-      "label": "Crater material, undivided",
-      "color": "#d1c59f"
+      "value": "Palimpsests P1",
+      "label": "Ancient palimpsest material",
+      "color": "#898944"
+    },
+    {
+      "value": "Palimpsests PU",
+      "label": "Undivided palimpsest material",
+      "color": "#5c8944"
+    },
+    {
+      "value": "Palimpsets interior",
+      "label": "Palimpsest interior plains material",
+      "color": "#ffffff"
     }
   ]
 }

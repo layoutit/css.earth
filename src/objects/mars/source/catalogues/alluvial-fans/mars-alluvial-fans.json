@@ -1,0 +1,28 @@
+{
+  "sourceRecords": {
+    "point": 44
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8388564,
+  "categories": [
+    {
+      "value": "point",
+      "label": "Large alluvial fan",
+      "color": "#006633"
+    }
+  ],
+  "output": "mars-alluvial-fans.tif",
+  "sha256": "921780a949c494f2fc9f3fbac05edee75967b73dd57dfb57aadfb9fd78ecf791",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

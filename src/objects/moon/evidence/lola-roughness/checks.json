@@ -1,0 +1,50 @@
+{
+ "schema": "cssearth-moon-lola-roughness-checks@1",
+ "base": "ccbf483de86e281069b2f17f12de1f50bb2c8d07",
+ "date": "2026-09-27",
+ "scope": "Working changes above the named base: the roughness block (LDRM_16) of source/preparation/raster.json read by the shared pds3-grid reader (loadScienceSurface) and painted by paintScienceSurface outside a bake.",
+ "testedFiles": {
+  "ldrm_16.img": {
+   "bytes": 33177600,
+   "sha256": "3941d2ef396ad41809c2f27c487348562714b3f0bf1150f1fe33b387998aa348"
+  },
+  "ldrm_16.lbl": {
+   "bytes": 3929,
+   "sha256": "4e6dc6acc31c32724340ec150796bfd6faec26d6564242384210152fdbec6c33"
+  }
+ },
+ "methods": {
+  "oracle": "Independent Buffer.readInt16LE decode of the image from the label layout, compared with the recipe sampler on a 0.37 x 0.53 degree lattice plus the seam and poles; a pixel is expected missing where it holds the label MISSING_CONSTANT -32768.",
+  "statistics": "Area-weighted (cos latitude) percentiles of valid pixels, from ldrm16-stats.mjs; place values are medians of observed pixels in a box of the stated half-width."
+ },
+ "results": {
+  "probes": 331175,
+  "mismatches": 0,
+  "withheld": 16339,
+  "readerReport": {
+   "format": "pds3-grid",
+   "width": 5760,
+   "height": 2880,
+   "band": 1,
+   "mappedCells": 15765506,
+   "missingCells": 823294,
+   "withheldByMask": 0,
+   "valueRange": [
+    0.002,
+    18.059
+   ],
+   "sampling": "nearest-cell"
+  },
+  "peakResidentMegabytes": 444
+ },
+ "statistics": [
+  "{\"missingAreaPercent\":4.43,\"negativeSamples\":0,\"p01\":0.497,\"p05\":0.599,\"p25\":0.771,\"p50\":0.923,\"p75\":1.118,\"p95\":1.518,\"p99\":1.932,\"max\":18.059,\"percentAbove\":{\"2\":0.74,\"1.5\":5.12,\"2.5\":0.15},\"percentBelow\":{\"0.5\":1}}",
+  "Mare Serenitatis centre {\"n\":4207,\"median\":0.809}",
+  "Mare Imbrium centre {\"n\":4124,\"median\":0.908}",
+  "Mare Tranquillitatis {\"n\":3980,\"median\":0.734}",
+  "Farside highlands {\"n\":4117,\"median\":1.204}",
+  "Tycho (43.3S 348.7E) {\"n\":94,\"median\":3.008}",
+  "Copernicus (9.6N 339.9E) {\"n\":90,\"median\":1.762}",
+  "missing fraction by 10 deg band {\"0\":0.043,\"10\":0.04,\"20\":0.033,\"30\":0.03,\"40\":0.037,\"50\":0.044,\"60\":0.056,\"70\":0.09,\"80\":0.033,\"-10\":0.044,\"-20\":0.038,\"-30\":0.037,\"-40\":0.037,\"-50\":0.039,\"-60\":0.06,\"-70\":0.074,\"-80\":0.106,\"-90\":0.052}"
+ ]
+}

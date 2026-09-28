@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-recent-activity-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "RSLs, Fresh Gullies, New and Icy Craters (NASA Mars Trek GIS layer)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/84"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "hirise-surface-change-sites",
+      "evidence": "The Trek catalogue entry for this layer cites Ingrid J. Daubar and colleagues (2013), Icarus."
+    }
+  ],
+  "statements": []
+}

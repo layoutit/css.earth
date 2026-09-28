@@ -1,0 +1,32 @@
+{
+  "id": "fassett-2010-glacial-valleys",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Supraglacial and proglacial valleys on Amazonian Mars, Fassett et al. (2010)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1016/j.icarus.2010.02.021"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2010.02.021",
+      "label": "doi:10.1016/j.icarus.2010.02.021"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/0",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/81"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

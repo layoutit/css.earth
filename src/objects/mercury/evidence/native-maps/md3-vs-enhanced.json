@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-evidence-md3-vs-enhanced@1",
+  "checked": "2026-09-27",
+  "base": "ccbf483de86e281069b2f17f12de1f50bb2c8d07",
+  "inputs": {
+    "md3": "src/objects/mercury/source/maps/native/md3.png",
+    "enhanced": "src/objects/mercury/source/maps/native/enhanced.png"
+  },
+  "method": "Both compact 4096 x 2048 maps from the same reducer. Pixelmatch threshold 0.1 over the whole map; Pearson correlation of channels over observed pixels (every 7th); coverage from rows where the two maps are the identical gray grid.",
+  "pixelmatchFlaggedPercent": 26.5,
+  "channelMeans": {
+    "md3": [
+      99.27,
+      99.36,
+      97.11
+    ],
+    "enhanced": [
+      100.62,
+      99.32,
+      134.39
+    ]
+  },
+  "correlation": {
+    "md3 R": {
+      "enh R": 0.917,
+      "enh G": 0.989,
+      "enh B": 0.19,
+      "bdr": 0.526
+    },
+    "md3 G": {
+      "enh R": 0.847,
+      "enh G": 0.997,
+      "enh B": 0.323,
+      "bdr": 0.519
+    },
+    "md3 B": {
+      "enh R": 0.715,
+      "enh G": 0.973,
+      "enh B": 0.517,
+      "bdr": 0.498
+    }
+  },
+  "md3ChannelCorrelation": {
+    "RG": 0.984,
+    "RB": 0.932,
+    "GB": 0.97
+  },
+  "coverage": {
+    "md3Missing": 256870,
+    "enhancedMissing": 256870,
+    "halfCoveredFromLatitude": [
+      87.14,
+      -87.06
+    ],
+    "nearlyFullFromLatitude": [
+      83.63,
+      -79.94
+    ]
+  },
+  "image": "md3-vs-enhanced.webp (top MD3 color, bottom enhanced color, each reduced to 1024 x 512)"
+}

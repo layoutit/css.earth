@@ -8,13 +8,91 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - [USGS Voyager/Galileo color mosaic, 1.4 km](https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km): 11520 × 5760, three unsigned-byte bands.
 
-- The Geology view uses [USGS SIM3237](https://pubs.usgs.gov/sim/3237/), Collins et al. (2013), at 1:15,000,000.
+- The Geology view uses the global geologic map of Collins et al. (2013), [USGS SIM 3237](https://doi.org/10.3133/sim3237), at 1:15,000,000, in the authors’ own GIS colors. See [Geologic map](#geologic-map).
 
 - The VLT/MUSE views use original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 
 - The mapped VLT/SPHERE MCMC composition release of [King and Fletcher (2022)](https://doi.org/10.1029/2022JE007323), is pinned as [Zenodo 6390469](https://doi.org/10.5281/zenodo.6390469). Its **Ice fraction** and **Dark material** views are withheld from publication until reuse terms for the numerical data are explicit (see Known problems). The native source and conversion record are [fit_SPHERE.json.gz](https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz) and [model-conversion.json](source/composition/model-conversion.json).
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+
+## Geologic map
+
+**Geology** shows the interpreted units of the global geologic map of Ganymede by
+Collins et al. (2013), [USGS SIM 3237](https://doi.org/10.3133/sim3237), mapped on
+the USGS Voyager/Galileo 1 km mosaic. The unit polygons are the `GeologyUnits`
+shapefile from the SIM 3237 GIS download
+([database ZIP](https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip)),
+kept in `source/science/geology-sim3237/`: 3,046 polygons in signed east-positive
+planetocentric degrees on the 2,632.345 km `GCS_Ganymede_2000` sphere.
+
+**Units and colors.** Each polygon is colored by its `UNITNAME` attribute, the field
+the authors' own ArcMap project (`Ganymede_Geology_SIM3237_ArcMap10.mxd` in the same
+ZIP) symbolizes. That project holds four copies of the unit layer, all with the same
+25 values and colors. ArcMap stores colors as CIE L\*a\*b\*; converted with the
+ArcGIS rule (Apple RGB primaries, gamma 1.8, D65 white) every one lands within
+6 × 10⁻⁷ of a whole RGB value, and the 20 units that NASA Trek also serves match
+Trek's published RGB exactly. Unit names and symbols are the Description of Map
+Units on the [map sheet](https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf);
+`UNITNAME` keeps the three palimpsest classes (p1, p2, pu) that the `Unit` symbol
+field merges into `p`. The values, symbols, stored L\*a\*b\* and RGB are in
+[display-categories.json](source/science/geology-sim3237/display-categories.json).
+Colors mark map units, not surface color, brightness or composition.
+
+The bake's shared shapefile sampler (`geologic-shapefile`, conflicts withheld) paints
+the polygons at each output pixel centre. Unlike the Enceladus map, these polygons
+tile the sphere without nesting, so no overlap rule is needed and no intermediate
+grid is kept.
+
+| Unit | Color | Polygons | Mapped km² | Shown km² |
+| --- | --- | ---: | ---: | ---: |
+| Young light grooved material (`lg3`) | `#bed2ff` | 272 | 5,048,863 | 5,049,000 |
+| Intermediate light grooved material (`lg2`) | `#73b2ff` | 244 | 4,950,450 | 4,950,035 |
+| Old light grooved material (`lg1`) | `#005ce6` | 111 | 2,096,119 | 2,096,315 |
+| Young light subdued material (`ls3`) | `#beffe8` | 116 | 3,549,928 | 3,549,935 |
+| Intermediate light subdued material (`ls2`) | `#73ffdf` | 174 | 4,365,787 | 4,365,129 |
+| Old light subdued material (`ls1`) | `#00e6a9` | 284 | 6,745,581 | 6,745,201 |
+| Young light irregular material (`li3`) | `#c29ed7` | 7 | 111,479 | 111,533 |
+| Intermediate light irregular material (`li2`) | `#ca7af5` | 60 | 1,001,769 | 1,001,472 |
+| Old light irregular material (`li1`) | `#aa66cd` | 100 | 1,986,828 | 1,986,407 |
+| Light undivided material (`l`) | `#0084a8` | 132 | 21,979,484 | 21,972,525 |
+| Reticulate material (`r`) | `#ed5192` | 30 | 394,166 | 394,155 |
+| Dark lineated material (`dl`) | `#cd8966` | 118 | 2,112,722 | 2,112,696 |
+| Dark cratered material (`dc`) | `#894444` | 145 | 19,738,208 | 19,738,105 |
+| Dark undivided material (`d`) | `#d7b09e` | 297 | 5,858,623 | 5,865,549 |
+| Fresh crater material (`c3`) | `#ffffd4` | 94 | 737,703 | 737,493 |
+| Partially degraded crater material (`c2`) | `#ffebaf` | 201 | 1,785,780 | 1,785,845 |
+| Degraded crater material (`c1`) | `#dc7e15` | 491 | 1,668,945 | 1,669,319 |
+| Undivided crater material (`cu`) | `#988523` | 83 | 290,808 | 290,761 |
+| Smooth basin material (`bs`) | `#ff7f7f` | 1 | 304,287 | 304,296 |
+| Rugged basin material (`br`) | `#ff4500` | 1 | 471,369 | 471,294 |
+| Basin interior plains material (`bi`) | `#fff5f5` | 1 | 14,513 | 14,521 |
+| Young palimpsest material (`p2`) | `#89cd66` | 6 | 220,470 | 220,540 |
+| Ancient palimpsest material (`p1`) | `#898944` | 34 | 672,225 | 672,133 |
+| Undivided palimpsest material (`pu`) | `#5c8944` | 27 | 587,772 | 587,878 |
+| Palimpsest interior plains material (`pi`) | `#ffffff` | 17 | 32,261 | 32,266 |
+
+Mapped km² is each unit's polygon area on the source sphere (87,075,400 km²);
+shown km² counts the sampled cells at the 8192 × 4096 prepared density. The
+polygons cover 99.60% of the sphere. Gray covers 0.40%: 0.21% beyond 80° N and
+0.18% beyond 80° S, where the map has no polygons. Cells where polygons of two
+units overlap cover 0.001% and are withheld. Details:
+[units.json](evidence/geology/units.json).
+
+**Registration.** Gazetteer centres of features the map text names fall in the
+expected unit in 13 of 15 cases when longitudes are read east-positive, and 3 of
+15 when read west-positive ([features.json](evidence/geology/features.json)):
+Galileo, Nicholson, Barnard, Marius and Perrine Regiones in dark cratered material,
+Uruk Sulcus in light material, Osiris and Tros in fresh crater material, Gilgamesh
+in basin interior plains, and Epigeus, Zakar, Teshub and Hathor in young palimpsest
+material or its interior plains, as the pamphlet lists them. The two misses are
+large features whose centre point lands on a neighbour: Harpagia Sulcus centres on
+lg2 while ls2, which the pamphlet names there, is the largest unit within 350 km;
+Xibalba Sulcus centres on a c2 crater inside light material. Over the monochrome
+mosaic, dark units average 54–63 DN, light units 74–85 DN and fresh craters and
+Gilgamesh 95–110 DN ([flat map](evidence/geology/units-flat.png) ·
+[over the mosaic](evidence/geology/units-over-mosaic.webp), both 0–360° E, north up).
+This checks the frame and gross registration; it is not a measured offset.
 
 ## Evidence
 
@@ -65,7 +143,10 @@ Feature notes: 68 of the labelled names carry a caption note, the lead summary o
 
 - **Reuse:** Zenodo exposes the release as open/`other-open`, while the tag has no explicit data licence and the paper's availability statement does not grant rights to the numerical files. The two composition views are therefore withheld: they have no lens, surface recipe or dataset text, and no composition asset is published. The pinned source, conversion record and evidence stay so the views can return once explicit reuse terms exist.
 
-- **Geology:** The separate point labels disagree with final polygon categories at 124 of 3,042 comparable locations; 870 ejecta labels are outside that comparison. The audit retains those disagreements.
+- **Geology attributes:** four polygons carry a `UNITNAME` that differs from their `TERRAIN` and `Unit` fields and from the separate label points: record 1946 (545,327 km², south-west of Barnard Regio) is young light grooved material by `UNITNAME` but dark cratered by the other three; records 1843 (306,748 km², light subdued 3 against light undivided), 1786 (22,953 km²) and 2101 (5,803 km²) are the others. A fifth, record 2924 (31,394 km²), has `Unit` `l` against light grooved material in both name fields. The lens follows `UNITNAME`, the field the authors' map project colors; the mosaic inside record 1946 averages 72.8 DN, between the dark (62.5) and young light grooved (78.8) means, so it does not settle the question. [units.json](evidence/geology/units.json) lists them.
+- **Geology label points:** the separate point labels disagree with the colored polygon unit at 129 of 3,042 comparable locations, the 124 found against `Unit` plus the five points inside the records above; 870 ejecta labels have no polygon unit. The audit keeps them.
+- **Geology symbology files:** `layerSymbology/GanymedeUnits.lyr` in the same ZIP is an older lookup (one palimpsest value, a crater-ejecta value) that does not match the shipped attributes; its shared colors equal the project's. NASA Trek's layer uses different colors for p1, p2, pu, pi and reticulate material. Neither is used.
+- **Geology structures:** contacts, grooves, furrows, crater rims and other line and point symbols are not shown. Geology has not been baked or checked in a browser since the color change.
 
 [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
@@ -114,11 +195,13 @@ Delivery keeps the prepared HD texture dimensions. The photographic normal and e
 
 ## Interpreted geology
 
-The original `GeologyUnits` SHP/DBF/PRJ files retain 3,046 records and 23 `Unit` symbols. The archive combines palimpsest age subdivisions under `p`; no finer age interpretation is invented. Colors are authored categorical display choices, not measured brightness, composition or relief. Structure lines and ejecta point symbols are outside this base-unit view.
+The original `GeologyUnits` SHP/DBF/PRJ files retain 3,046 records and 25 `UNITNAME` values. Structure lines and ejecta point symbols are outside this base-unit view.
 
-`source/science/geology-sim3237/` retains raw members, readme/metadata, archive member integrity receipts, and independent label-point anchors. Coordinates are signed east-positive planetocentric degrees in `GCS_Ganymede_2000`, on the 2,632,345 m source sphere and RAND November 1999 control. Mapping those angles onto the existing 2,631,200 m displayed sphere adds no 1,145 m elevation offset. Only unambiguous polygons are colored; uncovered polar areas remain missing.
+`source/science/geology-sim3237/` retains raw members, readme/metadata, archive member integrity receipts, the unit symbology record and independent label-point anchors. Coordinates are signed east-positive planetocentric degrees in `GCS_Ganymede_2000`, on the 2,632,345 m source sphere and RAND November 1999 control. Mapping those angles onto the existing 2,631,200 m displayed sphere adds no 1,145 m elevation offset. Only unambiguous polygons are colored; uncovered polar areas remain missing.
 
-Record 3,023 contains one degenerate one-point ring and 90 valid rings. The decoder explicitly excludes that pinned zero-area ring while preserving the valid multipart region, and rejects any undeclared degeneracy. Prepared visual qualification belongs to the B2 record.
+Record 3,023 contains one degenerate one-point ring and 90 valid rings. The decoder explicitly excludes that pinned zero-area ring while preserving the valid multipart region, and rejects any undeclared degeneracy.
+
+The colors were read from the `.mxd` member by HTTP byte range (the 743,424-byte file is not vendored). Each unique-value symbol is an ESRI `RgbColor` record holding three little-endian doubles (L\*, a\*, b\*); the fill that precedes each label is the unit color and the shared 110-gray outline is skipped. The extractor is proposed as a shared tool; until it lands, the record in `display-categories.json` is the checked-in result.
 
 ## Visible spectral surface views
 

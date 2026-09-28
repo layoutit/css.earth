@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-hydrous-minerals-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hydrous Mineral Detections, OMEGA and CRISM (NASA Mars Trek GIS layer)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/86"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "carter-2013-hydrous-minerals",
+      "evidence": "The Trek catalogue entry for this layer cites J. Carter, F. Poulet, J.-P. Bibring, N. Mangold and S. Murchie (2013), JGR Planets 118, 831-858."
+    }
+  ],
+  "statements": []
+}

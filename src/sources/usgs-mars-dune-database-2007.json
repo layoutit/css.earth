@@ -1,0 +1,57 @@
+{
+  "id": "usgs-mars-dune-database-2007",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Mars Global Digital Dune Database: MC2-MC29, USGS Open-File Report 2007-1158",
+  "creators": [
+    "Hayward, R. K.",
+    "Mullins, K. F.",
+    "Fenton, L. K.",
+    "Hare, T. M.",
+    "Titus, T. N.",
+    "Bourke, M. C.",
+    "Colaprete, A.",
+    "Christensen, P. R."
+  ],
+  "publisher": "U.S. Geological Survey",
+  "publicationDate": "2007",
+  "version": "MC2-MC29 (2007)",
+  "identifiers": [
+    {
+      "type": "usgs-ofr",
+      "value": "2007-1158"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pubs.usgs.gov/of/2007/1158/",
+      "label": "USGS Open-File Report 2007-1158"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer",
+      "label": "NASA Trek GIS layer Dune_Field"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+      "label": "USGS copyrights and credits"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/55"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Moderate to large dune fields between 65 N and 65 S from THEMIS daytime infrared at about 100 m per pixel; small fields and fields in coverage gaps are missing.",
+      "scope": "Whole database",
+      "evidence": "https://pubs.usgs.gov/of/2007/1158/"
+    }
+  ]
+}

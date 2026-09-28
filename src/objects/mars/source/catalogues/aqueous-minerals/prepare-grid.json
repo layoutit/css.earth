@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "Aqueous_Mineral_Distribution_Options_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "Class",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "phyllosilicate",
+      "label": "Phyllosilicates (clays)",
+      "color": "#0099ff"
+    },
+    {
+      "value": "sulfate",
+      "label": "Sulfates",
+      "color": "#ff6699"
+    },
+    {
+      "value": "silica",
+      "label": "Silica",
+      "color": "#9900cc"
+    },
+    {
+      "value": "chloride",
+      "label": "Chlorides",
+      "color": "#ffff00"
+    },
+    {
+      "value": "carbonate",
+      "label": "Carbonates",
+      "color": "#33cc00"
+    },
+    {
+      "value": "more than one class",
+      "label": "More than one class in the cell",
+      "color": "#ffffff"
+    }
+  ],
+  "sharedCellCategory": "more than one class",
+  "layers": [
+    {
+      "esriJsonPath": "Aqueous_Mineral_Distribution_Options_clon0.query-01.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Aqueous_Mineral_Distribution_Options_clon0.query-02.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Aqueous_Mineral_Distribution_Options_clon0.query-03.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Aqueous_Mineral_Distribution_Options_clon0.query-04.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Aqueous_Mineral_Distribution_Options_clon0.query-05.json",
+      "expectedRecords": 572
+    }
+  ],
+  "output": "mars-aqueous-classes.tif",
+  "receipt": "mars-aqueous-classes.json"
+}

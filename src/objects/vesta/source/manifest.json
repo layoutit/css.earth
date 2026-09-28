@@ -1637,6 +1637,460 @@
           }
         ]
       }
+    },
+    {
+      "id": "dawn-grand-vesta-fast-neutrons-table",
+      "path": "grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-FAST-RESIDUAL-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "fast-neutrons"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-fast-neutrons-label",
+      "path": "grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 114 fixed-width records on quasi-equal-area pixels 20 degrees tall (10-degree polar caps), the residual fast neutron counting rate in counts/s and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "fast-neutrons"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hegr-counts-table",
+      "path": "grand/GRD_HEGR_COUNTS_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-HEGR-COUNTS-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hegr"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hegr-counts-label",
+      "path": "grand/GRD_HEGR_COUNTS_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 210 fixed-width records on quasi-equal-area pixels 15 degrees tall (7.5-degree polar caps), the corrected high-energy gamma-ray counting rate and its 1-sigma uncertainty in counts/s, samples per pixel and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hegr"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-neutron-absorption-table",
+      "path": "grand/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-ABSORPTION-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "neutron-absorption"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-neutron-absorption-label",
+      "path": "grand/GRD_NEUTRON_ABSORPTION_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 204 fixed-width records on quasi-equal-area pixels 15 degrees tall (7.5-degree polar caps), the unitless neutron absorption parameter DCP and its 1-sigma uncertainty, and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "neutron-absorption"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-fast-neutrons",
+      "path": "grand/vesta-fast-neutrons.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "fast-neutrons"
+      ],
+      "lensId": "fast-neutrons",
+      "label": "Fast neutrons",
+      "falseColor": true,
+      "width": 240,
+      "height": 18,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "latitudeStepDegrees": 10,
+        "longitudeStepDegrees": 1.5
+      },
+      "coverage": "Residual fast neutron counting rate (counts/s) from the GRaND +Z sensor, detrended against the epithermal neutron map (Lawrence et al. 2013); 114 quasi-equal-area pixels 20 degrees tall expanded onto 10 x 1.5 degree cells; 2011-12-09 to 2012-05-01. Relates to average atomic mass; the level carries an arbitrary offset. No per-pixel uncertainty is archived.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hegr-counts",
+      "path": "grand/vesta-hegr-counts.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hegr"
+      ],
+      "lensId": "hegr",
+      "label": "High-energy gamma rays",
+      "falseColor": true,
+      "width": 360,
+      "height": 24,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "latitudeStepDegrees": 7.5,
+        "longitudeStepDegrees": 1
+      },
+      "coverage": "Corrected high-energy gamma-ray counting rate (counts/s), sensitive to heavy major-element content (Peplowski et al. 2013); 210 quasi-equal-area pixels 15 degrees tall expanded onto 7.5 x 1 degree cells; 2011-12-12 to 2012-05-01; effective resolution about 300 km. The archived 1-sigma uncertainty (0.117 to 0.311 counts/s) is not drawn.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-neutron-absorption",
+      "path": "grand/vesta-neutron-absorption.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "neutron-absorption"
+      ],
+      "lensId": "neutron-absorption",
+      "label": "Neutron absorption",
+      "falseColor": true,
+      "width": 360,
+      "height": 24,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "latitudeStepDegrees": 7.5,
+        "longitudeStepDegrees": 1
+      },
+      "coverage": "Unitless parameter DCP, linear in the macroscopic thermal neutron absorption cross section (Prettyman et al. 2013); 204 quasi-equal-area pixels 15 degrees tall expanded onto 7.5 x 1 degree cells; 2011-12-08 to 2012-01-14; effective resolution about 300 km. The label's howardite conversion to cross section is not applied; the archived 1-sigma uncertainty (0.0014 to 0.0075) is not drawn.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-shapefile",
+      "path": "geology/Vesta_Global_Yingst_HybridMap_polys24.shp",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-attributes",
+      "path": "geology/Vesta_Global_Yingst_HybridMap_polys24.dbf",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-projection",
+      "path": "geology/Vesta_Global_Yingst_HybridMap_polys24.prj",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-symbology",
+      "path": "geology/0005GeoUnits.lyr",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-grid",
+      "path": "geology/vesta-geologic-units.tif",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the shapefile using geology/prepare-grid.json; outputFrame names the Claudia central meridian (-150) for the source's Claudia Double Prime 0, so no pixel moves.",
+      "redistribution": "Retain authors and interpretation; unit colours come from the authors' ArcMap layer and are not observations.",
+      "consumers": [
+        "geology"
+      ],
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": -150,
+        "referenceRadiusMeters": 255000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "frame": "Dawn Claudia; source Claudia Double Prime central meridian 0 plus 210 degrees"
+      },
+      "coverage": "18 hybrid units in 136 polygons at pixel-centre inclusion; 2,753 cells (0.13%) have no polygon: the two southernmost rows over 1,621 columns, and one column at 30 E Claudia south of 25 S where the source polygons stop at 179.896 E (source frame).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Derived from the shapefile entries above."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1824,11 +2278,111 @@
       }
     },
     {
+      "path": "grand/vesta-fast-neutrons-longitude.npy",
+      "purpose": "Claudia east longitudes of the fast neutron grid columns (0.75 to 359.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-fast-neutrons-latitude.npy",
+      "purpose": "Latitudes of the fast neutron grid rows (-85 to 85 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-hegr-counts-longitude.npy",
+      "purpose": "Claudia east longitudes of the high-energy gamma-ray grid columns (0.5 to 359.5 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-hegr-counts-latitude.npy",
+      "purpose": "Latitudes of the high-energy gamma-ray grid rows (-86.25 to 86.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-neutron-absorption-longitude.npy",
+      "purpose": "Claudia east longitudes of the neutron absorption grid columns (0.5 to 359.5 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-neutron-absorption-latitude.npy",
+      "purpose": "Latitudes of the neutron absorption grid rows (-86.25 to 86.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
       "path": "grand/prepare-grids.json",
       "purpose": "Frame shift and table layout for the GRaND grids, citing the archive catalogue and coordinate document.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities."
+      }
+    },
+    {
+      "path": "geology/prepare-grid.json",
+      "purpose": "Rasterization plan: unit codes, labels and the colours read from 0005GeoUnits.lyr, and the 210-degree output frame.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities."
+      }
+    },
+    {
+      "path": "geology/vesta-geologic-units.json",
+      "purpose": "Receipt written by geology-grid.py.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated receipt of the project's rasterization."
       }
     }
   ]

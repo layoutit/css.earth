@@ -36,6 +36,16 @@
       "detail": "LRO Diviner",
       "summary": "Midnight temperatures fitted from Diviner data, 2009–2022, within 70° of the equator. They average many nights."
     },
+    "maximum-temperature": {
+      "title": "LRO Diviner: maximum temperature",
+      "detail": "LRO Diviner",
+      "summary": "The hottest the ground gets each lunar day, averaged over 2009–2015. Dark maria run hotter than bright highlands."
+    },
+    "noon-temperature": {
+      "title": "LRO Diviner: noon temperature",
+      "detail": "LRO Diviner",
+      "summary": "Ground temperature around local noon (11:30–12:30), averaged over 2009–2015. Covers 99%; gray marks gaps."
+    },
     "heat-anomalies": {
       "title": "LRO Diviner GHRM: heat anomalies",
       "detail": "LRO Diviner",
@@ -115,6 +125,31 @@
       "title": "Changes from exposure to space",
       "detail": "Kaguya MI",
       "summary": "Sunlight reflected by the soil reveals changes from exposure to space; lower values indicate more weathered material."
+    },
+    "roughness": {
+      "title": "LOLA surface roughness (LDRM_16)",
+      "detail": "LRO LOLA",
+      "summary": "How bumpy the ground is over 30–120 m, from LOLA laser shots in 2009–2011. Maria are smooth; young craters rough."
+    },
+    "thorium": {
+      "title": "Lunar Prospector GRS: thorium",
+      "detail": "Lunar Prospector",
+      "summary": "Thorium from gamma rays measured in 1998, in 2° cells. Richest around Mare Imbrium, where KREEP rock lies."
+    },
+    "potassium": {
+      "title": "Lunar Prospector GRS: potassium",
+      "detail": "Lunar Prospector",
+      "summary": "Potassium from gamma rays measured in 1998. It follows thorium; single cells are noisy, about ±230 ppm."
+    },
+    "iron-gamma": {
+      "title": "Lunar Prospector GRS: iron (FeO)",
+      "detail": "Lunar Prospector",
+      "summary": "Iron as FeO from gamma rays measured in 1998, in 2° cells. High in the dark maria, low in the highlands."
+    },
+    "titanium": {
+      "title": "Lunar Prospector GRS: titanium (TiO₂)",
+      "detail": "Lunar Prospector",
+      "summary": "Titanium as TiO₂ from gamma rays measured in 1998. High in Mare Tranquillitatis and western Procellarum."
     }
   }
 }

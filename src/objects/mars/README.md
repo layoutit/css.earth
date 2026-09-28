@@ -21,6 +21,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Dimensions, placement and charts | USGS, JPL and NASA PSG records below |
+| Landform and mineral catalogues | Eleven published surveys through their [NASA Trek](https://trek.nasa.gov/mars/) GIS layers, listed [below](#landform-and-mineral-catalogues-27-september-2026) |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
@@ -75,9 +76,43 @@ Two candidates stay deferred in the [investigation ledger](investigations.json):
   Its missing-value code is not documented.
 
 The Mars Trek layers for these quantities are display images, not measured values, and
-are not used. Trek's landform and detection layers (gullies, glacier-like forms,
-valley networks, hydrated-mineral detections) would need survey point and line
-layers, which Mars does not have.
+are not used.
+
+### Landform and mineral catalogues (27 September 2026)
+
+Eleven lenses draw published catalogues over the Viking colour mosaic, drawn in grey at 35% brightness. All come from [NASA Trek](https://trek.nasa.gov/mars/) ArcGIS layers, asked for in the Mars 2000 sphere (east-positive longitude, planetocentric latitude; the vertices equal the server's native response). The shared [`geology-grid.py`](../../../packages/bake/src/objects/acquisition/geology-grid.py) paints each into a 4,096 × 2,048 categorical grid, 5.2 km cells at the equator, the same size as the Visible colour texture.
+
+| Lens | Source | Drawn as | Cells |
+| --- | --- | --- | --- |
+| Dune fields | [Hayward et al. (2007)](https://pubs.usgs.gov/of/2007/1158/), USGS OFR 2007-1158, 547 fields, 65° N–65° S | Cells whose centre is inside a field outline | 4,132 |
+| Water-related landforms: valley networks | [Hynek et al. (2010)](https://doi.org/10.1029/2009JE003548), 9,879 networks | Every cell a valley centreline crosses | 163,901 |
+| … alluvial fans | [Moore and Howard (2005)](https://doi.org/10.1029/2004JE002352), [Kraal et al. (2008)](https://doi.org/10.1016/j.icarus.2007.09.028), 44 fans | One cell per fan | 44 |
+| … gullies | [Harrison et al. (2015)](https://doi.org/10.1016/j.icarus.2015.01.022), 4,978 sites, by slope orientation | One cell per site | 4,771 |
+| … glacier-like forms | [Souness et al. (2012)](https://doi.org/10.1016/j.icarus.2011.10.020), 1,309 | One cell per centre | 1,193 |
+| … recessional glacier-like forms | [Brough et al. (2016)](https://doi.org/10.1016/j.icarus.2016.03.006), 436 | One cell per centre | 407 |
+| … glacial valleys | [Fassett et al. (2010)](https://doi.org/10.1016/j.icarus.2010.02.021), 102 | One cell per valley point | 101 |
+| Present-day changes | Trek compilation of [Daubar et al. (2013)](https://doi.org/10.1016/j.icarus.2013.04.009), [Dundas et al. (2014)](https://doi.org/10.1002/2013JE004482), [(2015)](https://doi.org/10.1016/j.icarus.2014.05.013), [McEwen et al. (2014)](https://doi.org/10.1038/ngeo2014), [Ojha et al. (2014)](https://doi.org/10.1016/j.icarus.2013.12.021), 508 HiRISE sites | One cell per site, coloured by source catalogue | 489 |
+| Aqueous minerals: hydrous detections | [Carter et al. (2013)](https://doi.org/10.1029/2012JE004145), 1,648 (CRISM 1,208, OMEGA 440) | One cell per detection, by instrument | 1,461 |
+| … mineral classes | [Ehlmann and Edwards (2014)](https://doi.org/10.1146/annurev-earth-060313-055024), 4,572 in five classes | One cell per site, by class | 2,373 |
+| … chloride deposits | [Osterloo et al. (2010)](https://doi.org/10.1029/2010JE003613), 642 THEMIS deposits | Cells whose centre is inside a deposit outline | 676 |
+
+What a coloured cell means:
+
+- For a point or line catalogue, the cell holds at least one catalogued feature. None of these catalogues publishes a footprint or a line width (Trek draws screen-sized symbols), so no size is drawn. Dune fields and chloride deposits are published outlines.
+- A white cell holds features of more than one class (gullies facing different ways, both instruments, two mineral classes, two HiRISE catalogues). That colour is ours; so is the four-colour palette of Present-day changes, because Trek tells its types apart only by symbol shape. It colours the four source catalogues, because a six-type palette failed the colour-separation check. Every other colour is the layer's own: the renderer symbol, or the `jC_fillclr` fill attribute the records carry.
+- Unmarked ground is not proof of absence. Each survey covers only the images it searched, and small features fall below 5.2 km: 89 of 547 dune fields (1.2% of their area) and 347 of 642 chloride deposits (13.7%) hold no cell centre.
+
+The dimmed photograph is a presentation choice: the Viking mosaic as grey at 35% brightness, 6 bits per channel. At that level every legend colour differs by at least 15 OKLab units from 95% of the terrain; the alluvial-fan green is the limit (15.7 at 0.35, 13.8 at 0.4). Grey and 6 bits keep each lens lossless at about 2 MB instead of 7.6 MB for the colour mosaic. Each lens states this in its notes.
+
+Byte cost: the photograph now travels in the lossless categorical lane. Each composed lens measures about 7.6 MB as lossless WebP at 4,096 × 2,048 (valley networks 7.8 MB), against 1.9 MB for the lossy Visible colour texture.
+
+Checks, with the byte identity of every grid and response, are in [the catalogue checks](evidence/catalogues/checks.json):
+
+- The USGS dune shapefile matches the Trek layer vertex for vertex. Its projection file names the flattened ellipsoid although its metadata calls the latitudes aerocentric, which is why the Trek response is the input. Dune area is 70,230 km² on the grid against the database's 69,750 km².
+- Every catalogue point, read back through the shared scientific reader, lands in a cell of its own class or the shared class. All but 3 of 1,172,096 valley vertices lie in a marked cell; those 3 sit on a cell edge.
+- The grids are not yet seen in a browser, and the pole images have not been checked for the underlay.
+
+Author supplements for the valley, gully, chloride and hydrous catalogues were not retrieved; each decision is in the [investigation ledger](investigations.json).
 
 The crust-thickness view uses `Mars-thick-Khan2022-39-2900-2900.dat`, the precomputed [Wieczorek et al. (2022) Figure 2 example](https://doi.org/10.1029/2022JE007298) from [Zenodo 6477509](https://zenodo.org/records/6477509). It assumes 39 km beneath InSight and uniform crust density of 2,900 kg/m³. Its mean is about 57 km; the full model family spans 30–72 km. This example is not a unique consensus model. The deposited 0.25° node grid spans 5.579–116.811 km, consistent with the paper’s rounded 6–117 km. [The converter](../../../packages/bake/cli/prepare-mars-crust.mts) only reverses rows and adds explicit coordinates for the existing Tecplot reader; it does not recalculate thickness.
 

@@ -1,0 +1,32 @@
+{
+  "id": "moore-kraal-alluvial-fans",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Large alluvial fans on Mars, Moore and Howard (2005) and Kraal et al. (2008)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2004JE002352",
+      "label": "doi:10.1029/2004JE002352"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2007.09.028",
+      "label": "doi:10.1016/j.icarus.2007.09.028"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/2",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/68"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

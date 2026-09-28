@@ -340,6 +340,334 @@
       ],
       "path": "science/tes/dci.vicar",
       "url": "https://www.mars.asu.edu/~ruff/DCI/dci_lo_ice_dust_16ppd_shifted.vicar"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/dune-fields/Dune_Field.query.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/dune-fields/Dune_Field.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-01.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D0+AND+FID%3C%3D999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-02.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D1000+AND+FID%3C%3D1999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-03.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D2000+AND+FID%3C%3D2999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-04.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D3000+AND+FID%3C%3D3999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-05.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D4000+AND+FID%3C%3D4999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-06.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D5000+AND+FID%3C%3D5999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-07.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D6000+AND+FID%3C%3D6999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-08.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D7000+AND+FID%3C%3D7999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-09.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D8000+AND+FID%3C%3D8999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.query-10.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0/query?where=FID%3E%3D9000+AND+FID%3C%3D9878&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/valley-networks/Hynek_Valley_Networks.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/alluvial-fans/FanSurvey_2005_2008_clon0.query.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/2/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/alluvial-fans/FanSurvey_2005_2008_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/2?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/gullies/Gullied_Landform_Survey_2015_clon0.query-01.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3/query?where=FID%3E%3D0+AND+FID%3C%3D999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/gullies/Gullied_Landform_Survey_2015_clon0.query-02.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3/query?where=FID%3E%3D1000+AND+FID%3C%3D1999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/gullies/Gullied_Landform_Survey_2015_clon0.query-03.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3/query?where=FID%3E%3D2000+AND+FID%3C%3D2999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/gullies/Gullied_Landform_Survey_2015_clon0.query-04.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3/query?where=FID%3E%3D3000+AND+FID%3C%3D3999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/gullies/Gullied_Landform_Survey_2015_clon0.query-05.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3/query?where=FID%3E%3D4000+AND+FID%3C%3D4977&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/gullies/Gullied_Landform_Survey_2015_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-01.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1/query?where=FID%3E%3D0+AND+FID%3C%3D999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-02.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1/query?where=FID%3E%3D1000+AND+FID%3C%3D1308&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/recessional-glfs/Recessional_GLF_Options_2016_clon0.query.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/4/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/recessional-glfs/Recessional_GLF_Options_2016_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/4?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/glacial-valleys/Glacial_Valleys_2010_clon0.query.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/glacial-valleys/Glacial_Valleys_2010_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/recent-activity/RSLs_Gullies_New-IcyCraters_clon0.query.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/recent-activity/RSLs_Gullies_New-IcyCraters_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-01.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer/0/query?where=FID%3E%3D0+AND+FID%3C%3D999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-02.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer/0/query?where=FID%3E%3D1000+AND+FID%3C%3D1647&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-01.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0/query?where=FID%3E%3D0+AND+FID%3C%3D999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-02.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0/query?where=FID%3E%3D1000+AND+FID%3C%3D1999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-03.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0/query?where=FID%3E%3D2000+AND+FID%3C%3D2999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-04.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0/query?where=FID%3E%3D3000+AND+FID%3C%3D3999&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-05.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0/query?where=FID%3E%3D4000+AND+FID%3C%3D4571&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.query.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer/0/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22GCS_Mars_2000_Sphere%5C%22%2CDATUM%5B%5C%22D_Mars_2000_Sphere%5C%22%2CSPHEROID%5B%5C%22Mars_2000_Sphere_IAU_IAG%5C%22%2C3396190.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "catalogues/chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.layer.json",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer/0?f=json"
     }
   ]
 }

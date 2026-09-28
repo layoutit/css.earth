@@ -1,0 +1,32 @@
+{
+  "id": "brough-2016-recessional-glfs",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Former extent of glacier-like forms on Mars, Brough et al. (2016)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1016/j.icarus.2016.03.006"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2016.03.006",
+      "label": "doi:10.1016/j.icarus.2016.03.006"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/4",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/79"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

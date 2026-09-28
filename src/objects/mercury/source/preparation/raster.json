@@ -39,6 +39,13 @@
       "thumbnail": "mercury-lens-{id}.webp"
     },
     {
+      "id": "color",
+      "source": "maps/native/md3.png",
+      "falseColor": true,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp"
+    },
+    {
       "id": "enhanced",
       "source": "maps/native/enhanced.png",
       "falseColor": true,

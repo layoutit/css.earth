@@ -1,0 +1,47 @@
+{
+  "id": "hirise-surface-change-sites",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HiRISE surface-change sites: new craters, icy impacts, active gullies and recurring slope lineae (NASA Trek compilation)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2013.04.009",
+      "label": "doi:10.1016/j.icarus.2013.04.009"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/2013JE004482",
+      "label": "doi:10.1002/2013JE004482"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2014.05.013",
+      "label": "doi:10.1016/j.icarus.2014.05.013"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/ngeo2014",
+      "label": "doi:10.1038/ngeo2014"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2013.12.021",
+      "label": "doi:10.1016/j.icarus.2013.12.021"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/83"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

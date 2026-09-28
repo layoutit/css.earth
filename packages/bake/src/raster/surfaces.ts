@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
 import { RASTER_DENSITY, type RasterRecipe } from './config.ts';
 import { raster, readRgba, assetPath } from './io.ts';
-import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.ts';
+import { applyUnderlay, withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.ts';
 import { composeLimbPreview } from './emission-preview.ts';
 import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.ts';
 import { missingCoverageColor } from './missing-coverage.ts';
@@ -74,6 +74,9 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
     const metadata: Record<string, unknown> = {};
     const interpretations: Record<string, Record<string, Readonly<Record<string, unknown>>>> = {};
     const nativeSourcePoles = new Map<string, Promise<NativePoleSampler>>();
+    // Only surfaces another lens draws over are kept, finished (after exposure), for that lens to fill its empty cells from.
+    const underlaid = new Set(config.surfaces.flatMap(surface => surface.underlay ? [surface.underlay.surface] : []));
+    const underlays = new Map<string, Uint8Array>();
     const load = async (path: string) => { let data = decoded.get(path); if (!data) {
         data = await readRgba(resolve(sourceDirectory, path), config.sourceWidth, config.sourceHeight);
         decoded.set(path, data);
@@ -107,6 +110,11 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
             const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) }, width, height, density);
             nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height); nativePhotograph = interpreted.nativePhotograph;
+            if (surface.underlay) {
+                const base = underlays.get(surface.underlay.surface);
+                if (!base || !interpreted.missing) throw new TypeError(`${surface.id}: underlay ${surface.underlay.surface} needs that surface prepared first and this lens's missing-cell mask (${interpreted.missing ? 'mask present' : 'no mask'}).`);
+                pixels = applyUnderlay(pixels === interpreted.data ? Uint8Array.from(pixels) : pixels, interpreted.missing, base, surface.id, surface.underlay);
+            }
             if (config.resample === 'source-packed') {
                 if (!nearest) throw new TypeError('Source-packed science must retain nearest numeric sampling.');
                 source = pixels;
@@ -137,6 +145,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
         }
         if (surface.exposure)
             applySurfaceExposure(pixels, surface.exposure);
+        if (underlaid.has(surface.id)) underlays.set(surface.id, Uint8Array.from(pixels));
         // The legacy source-packed route resized an already-packed raster, so a filter footprint could cross
         // stored latitude-strip gutters. This opt-in resizes the completed source map first, then creates those
         // same target-size gutters. It deliberately keeps coverage completion at the native source resolution.

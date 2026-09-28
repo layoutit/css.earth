@@ -1,0 +1,32 @@
+{
+  "id": "osterloo-2010-chloride-deposits",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Chloride-bearing materials on Mars from THEMIS, Osterloo et al. (2010)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1029/2010JE003613"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2010JE003613",
+      "label": "doi:10.1029/2010JE003613"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/94"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

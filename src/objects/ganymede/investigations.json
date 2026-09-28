@@ -72,10 +72,13 @@
       "id": "sim3237-geology",
       "subject": "USGS SIM 3237 GeologyUnits polygons",
       "status": "included",
-      "finding": "Selected 3,046-record, 23-unit source supplies categorical Geology. The known degenerate one-point ring is excluded while valid multipart geometry, no-data and uncovered poles remain explicit.",
+      "finding": "Selected the 3,046-record GeologyUnits polygons for categorical Geology, now colored by UNITNAME (25 units, keeping the p1/p2/pu palimpsest split that the 23-symbol Unit field merged, as used until 2026-09-27). The known degenerate one-point ring is excluded while valid multipart geometry, no-data and uncovered poles remain explicit. Polygons cover 99.60% of the sphere; 0.40% is gray, mostly beyond 80 degrees latitude; overlapping units withheld on 0.001%. Gazetteer centres of 15 features named in the map text land in the expected unit 13 times read east-positive and 3 times read west-positive.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
-        "https://pubs.usgs.gov/sim/3237/"
+        "https://pubs.usgs.gov/sim/3237/",
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_pamphlet.pdf",
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf"
       ]
     },
     {
@@ -99,6 +102,69 @@
         "https://doi.org/10.1016/j.icarus.2021.114631"
       ],
       "revisitWhen": "A global disc-resolved Ganymede law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values."
+    },
+    {
+      "id": "sim3237-unit-symbology",
+      "subject": "SIM 3237 unit colors from the authors' ArcMap project",
+      "status": "included",
+      "finding": "Ganymede_Geology_SIM3237_ArcMap10.mxd in the SIM 3237 database ZIP holds four copies of the GeologyUnits layer, each a unique-value renderer on UNITNAME with the same 25 values and fill colors, stored as CIE L*a*b*. Converted with Apple RGB primaries, gamma 1.8 and a D65 white, every color lands within 6e-7 of an integer RGB and the 20 units NASA Trek also serves match Trek's RGB exactly; sRGB or other primaries miss by up to 13 L*a*b* units. These colors replace the authored display palette used before. Unit names come from the map sheet's Description of Map Units.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf",
+        "https://trek.nasa.gov/ganymede/trekarcgis/rest/services/ganymede/Ganymede_Voyager_GalileoSSI_GeologicMapUnits/MapServer/2?f=json"
+      ]
+    },
+    {
+      "id": "sim3237-unitname-attribute",
+      "subject": "Which GeologyUnits attribute names each polygon's unit",
+      "status": "included",
+      "finding": "UNITNAME, TERRAIN and Unit agree on 3,041 of 3,046 polygons. Four polygons (records 1786, 1843, 1946, 2101; largest 545,327 km2) have a UNITNAME that differs from TERRAIN, Unit and the separate label points, and record 2924 has Unit l against light grooved material in both name fields. UNITNAME is used because it is the field the authors' map project colors. The monochrome mosaic inside record 1946 averages 72.8 DN, between the dark cratered (62.5) and young light grooved (78.8) means, so brightness does not decide it. Label-point agreement is 2,913 of 3,042 against UNITNAME and 2,918 against Unit.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+        "https://pubs.usgs.gov/sim/3237/SIM3237_metadata/sim3237_Ganymede_metadata.txt"
+      ]
+    },
+    {
+      "id": "sim3237-layer-symbology-lyr",
+      "subject": "layerSymbology/GanymedeUnits.lyr in the SIM 3237 database",
+      "status": "excluded",
+      "finding": "The layer file renders UNITNAME with one Palimpsests value and a Crater ejecta value; the shipped polygons carry Palimpsests P1, P2 and PU and no crater ejecta, so three units would fall to its default symbol. Its other colors equal the ArcMap project's.",
+      "revisitWhen": "USGS republishes a layer file whose values match the shipped GeologyUnits attributes.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+        "https://pubs.usgs.gov/sim/3237/SIM3237_readme/sim3237_Ganymede_readme.txt"
+      ]
+    },
+    {
+      "id": "trek-ganymede-geologic-units",
+      "subject": "NASA Trek layer Voyager Multi Instruments and Galileo SSI Geologic Map Units, Global",
+      "status": "excluded",
+      "finding": "Trek serves the same 25 UNITNAME values on the Ganymede_2015 2,631.2 km sphere. Its renderer matches the SIM 3237 project for 20 units but colors p1, p2, pu, pi and reticulate material differently (pi and reticulate share one color). The USGS GIS download is reachable and is the authors' own release, so Trek is used only as an independent check of the color conversion.",
+      "revisitWhen": "Trek documents a source for its five differing colors, or the USGS download becomes unavailable.",
+      "evidence": [
+        "https://trek.nasa.gov/ganymede/trekarcgis/rest/services/ganymede/Ganymede_Voyager_GalileoSSI_GeologicMapUnits/MapServer/2?f=json",
+        "https://trek.nasa.gov/ganymede/"
+      ]
+    },
+    {
+      "id": "sim3237-map-sheet-colors",
+      "subject": "Printed SIM 3237 map sheet unit colors",
+      "status": "unresolved",
+      "finding": "The map sheet PDF fills units with CMYK process colors; its unit boxes were not matched one by one against the GIS colors. The lens uses the GIS project's RGB colors.",
+      "revisitWhen": "The sheet's Description of Map Units boxes are decoded and compared unit by unit with the GIS colors.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf"
+      ]
+    },
+    {
+      "id": "sim3237-intermediate-grid",
+      "subject": "Offline categorical GeoTIFF of the SIM 3237 units (the Enceladus route)",
+      "status": "excluded",
+      "finding": "The shared raster lane reads the SIM 3237 shapefile directly (geologic-shapefile), and the polygons tile the sphere without nested units, so a checked-in grid from geology-grid.py would add a step without changing any cell.",
+      "revisitWhen": "The shared lane stops reading shapefiles directly or a unit needs the nested-units rule.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip"
+      ]
     }
   ]
 }
