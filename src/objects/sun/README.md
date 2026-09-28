@@ -213,7 +213,7 @@ native disk-map inputs through `telescope:query`: 28 HMI continuum frames, the H
 and AIA 171/193/304 synoptic maps. The declarations also include a COR1-A density cube. No solar branch is required in the shared query or qualification code.
 
 ```sh
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 
