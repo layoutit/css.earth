@@ -129,8 +129,10 @@ router yields through a rendering opportunity and a task before retirement, keep
 cancellation ownership intact. This separates required teardown from camera publication; it is not a paint-readiness
 guarantee or a fixed settling delay. The incoming scene still must acknowledge its prepared activation.
 
-Texture activation still gives each prepared batch a rendering opportunity, but leaves already showing their pending
-image receive no style assignment. Marker atlas swaps and label offsets, search clearing, readouts and readiness
+Texture activation gives the first retained face using each new image a separate rendering opportunity before
+resuming its prepared batch. This separates first-use graphics resource setup from the regular face paint burst;
+it does not assert that a frame callback proves GPU completion. The existing arrival paint gate still owns readiness.
+Leaves already showing their pending image receive no style assignment. Marker atlas swaps and label offsets, search clearing, readouts and readiness
 attributes likewise publish only changed values; fixed-precision lengths are formatted as their CSSOM values.
 Prepared space-separated RGB colors compare equal to their comma-separated CSSOM serialization, without suppressing genuine color changes.
 
