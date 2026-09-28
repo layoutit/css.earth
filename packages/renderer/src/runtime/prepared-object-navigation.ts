@@ -95,7 +95,8 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       cameraViewport?.read(definition.camera.projection.cssPerspective);
       const resources = prepareObjectResources(definition.assets, { signal, startup: false, assetOrigin: definition.assetOrigin });
       let tree: PreparedTreeLease | undefined;
-      const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
+      // A server-rendered scene is already prepared DOM; attachment adopts it.
+      const construction = ownerDocument && !selectionStage?.dataset.preparedObject ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
       const destroy = () => { resources.destroy(); tree?.destroy(); };
       let demand: ReturnType<typeof createObjectViewDemand> | null = null;
       const prepareView = (read: () => ObjectPreparationView) => {

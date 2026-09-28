@@ -12,33 +12,14 @@ import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
-const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
 const ANNOTATION_ENTRY_MARGIN = .05;
-function orbitPresentation(segments: readonly OrbitSegment[] | number) {
-  if (typeof segments === 'number') return orbitPresentationForExtent(segments);
-  let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
-  for (const [x0, y0, x1, y1] of segments) {
-    left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
-    top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
-  }
-  return orbitPresentationForExtent(Math.max(1, right - left, bottom - top));
-}
-/** The extent fade in 1/64 steps: rotation changes every orbit's extent a little
- * each frame, and a step this small cannot change a composited pixel, so a body's
- * marker and orbit keep their alpha instead of restyling on every frame. */
-const EXTENT_FADE_STEPS = 64;
-const quantizeAlpha = (alpha: number) => Math.round(alpha * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
-function orbitPresentationForExtent(extent: number) {
-  const opacity = Math.round(logarithmicFade(extent, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS) * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
-  // Orbit paint has its own fade; label admission does not depend on this value.
-  return { width: CONTEXT_LINE_WIDTH, opacity };
-}
-export { orbitOutsideMarker } from './orbit-marker-gap.js';
-import { orbitOutsideMarker } from './orbit-marker-gap.js';
+export { orbitOutsideMarker } from './orbit-presentation.js';
+import { orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
+
 /** UI measurements and the last committed annotation state, without DOM handles. */
 export interface WorldBodyPresentation {
   hovered: boolean;
