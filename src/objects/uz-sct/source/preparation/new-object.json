@@ -3,6 +3,7 @@
   "name": "UZ Sct",
   "system": "UZ Sct system",
   "description": "A Cepheid in the Milky Way that pulsates every 14.75 days; its mean radius is 85.6 solar radii.",
+  "order": 1941,
   "target": "UZ Sct",
   "gaia": "4104869264724284544",
   "paper": {
@@ -39,6 +40,8 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 1.071 +/- 0.066 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
+  "planets": [],
+  "companions": [],
   "text": {
     "card": "A Cepheid in the Milky Way that swells and shrinks every 14.7 days.",
     "introduction": "Its mean radius, 85.6 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,088 parsecs away.",
@@ -47,15 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1941,
-  "gravityRange": {
-    "min": -1.33,
-    "max": 2.86,
-    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
-    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
-  },
-  "lightCurve": "gaia-dr3-vari-cepheid",
-  "planets": [],
-  "companions": []
+  ]
 }

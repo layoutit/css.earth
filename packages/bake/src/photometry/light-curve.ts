@@ -32,12 +32,14 @@ export interface GaiaCepheidModel {
   readonly peakToPeakMag: number;
   readonly r21: number | null;
   readonly phi21: number | null;
+  /** Gaia's type: DCEP (classical), T2CEP (type II) or ACEP (anomalous). */
+  readonly type: string;
 }
 
 /** The columns the acquisition query selects, in its order. */
 export const GAIA_CEPHEID_COLUMNS = ['source_id', 'pf', 'pf_error', 'fund_freq1', 'reference_time_g', 'zp_mag_g', 'num_harmonics_for_p1_g',
   'fund_freq1_harmonic_ampl_g', 'fund_freq1_harmonic_phase_g', 'epoch_g', 'epoch_g_error', 'peak_to_peak_g', 'r21_g', 'phi21_g',
-  'mode_best_classification'] as const;
+  'mode_best_classification', 'type_best_classification'] as const;
 
 /** The ADQL the acquisition plan sends to the Gaia archive for one source. */
 export function gaiaCepheidQuery(sourceId: string): string {
@@ -55,6 +57,14 @@ function csvCells(line: string): string[] {
   }
   cells.push(cell);
   return cells;
+}
+
+/** What the archive's answer says about a star before it is read as a model: no row (not a Gaia Cepheid), or its mode and type. */
+export function gaiaCepheidClass(text: string): { mode: string; type: string } | null {
+  const lines = text.trim().split(/\r?\n/u);
+  if (lines.length < 2) return null;
+  const header = csvCells(lines[0]!), cells = csvCells(lines[1]!), at = (name: string) => cells[header.indexOf(name)]?.trim() ?? '';
+  return { mode: at('mode_best_classification'), type: at('type_best_classification') };
 }
 
 /** Parse the archived vari_cepheid row. `where` names the file in every refusal. */
@@ -92,7 +102,7 @@ export function parseGaiaCepheidRow(text: string, where: string): GaiaCepheidMod
     referenceTime: number('reference_time_g'), zeroPointMag: number('zp_mag_g'),
     amplitudesMag: Object.freeze(amplitudesMag), phasesRadians: Object.freeze(phasesRadians),
     epochMaximum: number('epoch_g'), epochMaximumError: number('epoch_g_error'), peakToPeakMag: number('peak_to_peak_g'),
-    r21: optional('r21_g'), phi21: optional('phi21_g') });
+    r21: optional('r21_g'), phi21: optional('phi21_g'), type: cell('type_best_classification') });
 }
 
 /** G magnitude at a Gaia time: zp + sum A_k cos(2 pi k f (t - Tref) + phi_k). */

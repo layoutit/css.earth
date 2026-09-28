@@ -3,6 +3,7 @@
   "name": "S Vul",
   "system": "S Vul system",
   "description": "A Cepheid in the Milky Way that pulsates every 68.71 days; its mean radius is 272.4 solar radii.",
+  "order": 1931,
   "target": "S Vul",
   "gaia": "2027971514401523456",
   "paper": {
@@ -44,6 +45,8 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.727 +/- 0.043 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
+  "planets": [],
+  "companions": [],
   "text": {
     "card": "A Cepheid in the Milky Way that swells and shrinks every 68.7 days.",
     "introduction": "Its mean radius, 272.4 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,880 parsecs away.",
@@ -52,15 +55,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1931,
-  "gravityRange": {
-    "min": -1.33,
-    "max": 2.86,
-    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
-    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
-  },
-  "lightCurve": "gaia-dr3-vari-cepheid",
-  "planets": [],
-  "companions": []
+  ]
 }

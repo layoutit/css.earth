@@ -3,6 +3,7 @@
   "name": "AQ Pup",
   "system": "AQ Pup system",
   "description": "A Cepheid in the Milky Way that pulsates every 30.10 days; its mean radius is 137.2 solar radii.",
+  "order": 1943,
   "target": "AQ Pup",
   "gaia": "5597379741549105280",
   "paper": {
@@ -22,6 +23,11 @@
     "url": "https://arxiv.org/abs/2002.02186",
     "uncertainty": 208
   },
+  "radialVelocity": {
+    "value": 56.9,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5597379741549105280 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
+  },
   "distance": {
     "value": 2991.1,
     "source": "Groenewegen (2013), A&A 550, A70, table10, AQ Pup: Baade-Wesselink distance (pc) 2991.1 +/- 141.3 (Monte-Carlo)",
@@ -39,6 +45,8 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.518 +/- 0.01 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
+  "planets": [],
+  "companions": [],
   "text": {
     "card": "A Cepheid in the Milky Way that swells and shrinks every 30.1 days.",
     "introduction": "Its mean radius, 137.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,991 parsecs away.",
@@ -47,20 +55,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "radialVelocity": {
-    "value": 56.9,
-    "source": "SIMBAD's radial velocity for Gaia DR3 5597379741549105280 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
-  },
-  "order": 1943,
-  "gravityRange": {
-    "min": -1.33,
-    "max": 2.86,
-    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
-    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
-  },
-  "lightCurve": "gaia-dr3-vari-cepheid",
-  "planets": [],
-  "companions": []
+  ]
 }

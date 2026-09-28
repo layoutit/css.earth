@@ -1,0 +1,35 @@
+{
+  "id": "page-simbad-cds-unistra-fr-simbad-sim-id-ident-gaia-dr3-4663542079171750528",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Web page simbad.cds.unistra.fr/simbad/sim-id",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528",
+      "label": "simbad.cds.unistra.fr/simbad/sim-id"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528",
+      "checkedOn": "2026-09-28",
+      "locator": "The page as cited by a NASA Exoplanet Archive parameter set or by a spec"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "simbad.cds.unistra.fr/simbad/sim-id",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528"
+    }
+  ]
+}

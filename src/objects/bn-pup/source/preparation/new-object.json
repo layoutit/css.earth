@@ -3,6 +3,7 @@
   "name": "BN Pup",
   "system": "BN Pup system",
   "description": "A Cepheid in the Milky Way that pulsates every 13.67 days; its mean radius is 76.3 solar radii.",
+  "order": 1936,
   "target": "BN Pup",
   "gaia": "5596601154188852352",
   "paper": {
@@ -22,6 +23,12 @@
     "url": "https://arxiv.org/abs/2002.02186",
     "uncertainty": 153
   },
+  "radialVelocity": {
+    "value": 62.3,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5596601154188852352 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract",
+    "uncertainty": 0.1
+  },
   "distance": {
     "value": 3570.8,
     "source": "Groenewegen (2013), A&A 550, A70, table10, BN Pup: Baade-Wesselink distance (pc) 3570.8 +/- 95.2 (Monte-Carlo)",
@@ -39,6 +46,8 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.416 +/- 0.018 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
+  "planets": [],
+  "companions": [],
   "text": {
     "card": "A Cepheid in the Milky Way that swells and shrinks every 13.7 days.",
     "introduction": "Its mean radius, 76.3 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,571 parsecs away.",
@@ -47,21 +56,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "radialVelocity": {
-    "value": 62.3,
-    "uncertainty": 0.1,
-    "source": "SIMBAD's radial velocity for Gaia DR3 5596601154188852352 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
-  },
-  "order": 1936,
-  "gravityRange": {
-    "min": -1.33,
-    "max": 2.86,
-    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
-    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
-  },
-  "lightCurve": "gaia-dr3-vari-cepheid",
-  "planets": [],
-  "companions": []
+  ]
 }

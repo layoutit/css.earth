@@ -3,6 +3,7 @@
   "name": "T Mon",
   "system": "T Mon system",
   "description": "A Cepheid in the Milky Way that pulsates every 27.03 days; its mean radius is 114 solar radii.",
+  "order": 2015,
   "target": "T Mon",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -48,6 +49,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 2015
+  ]
 }

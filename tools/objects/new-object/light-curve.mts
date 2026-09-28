@@ -34,6 +34,8 @@ export function installLightCurve(files: PackageFiles, { id, name, sourceId, csv
   plan.operations = [...plan.operations.filter(step => step.path !== LIGHT_CURVE_MODEL),
     { kind: 'request-download', groups: ['restore', 'refresh'], path: LIGHT_CURVE_MODEL, url: GAIA_TAP, form: gaiaCepheidForm(sourceId), requiredPrefix: 'source_id,pf,' }];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
+  // The row itself, as the acquisition step restores it: the bake reads the model from it.
+  files.set(`${s}/${LIGHT_CURVE_MODEL}`, csv);
   const manifest = JSON.parse(read(`${s}/manifest.json`)) as { inputs: Record<string, unknown>[] };
   manifest.inputs = [...manifest.inputs.filter(input => input.path !== LIGHT_CURVE_MODEL), { id: `${id}-gaia-dr3-vari-cepheid`, path: LIGHT_CURVE_MODEL, origin: GAIA_TAP,
     credit: `ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; ${PAPER}`, ...GAIA_LICENSE,

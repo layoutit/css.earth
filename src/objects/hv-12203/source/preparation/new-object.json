@@ -3,6 +3,7 @@
   "name": "HV 12203",
   "system": "HV 12203 system",
   "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 2.95 days; its mean radius is 24.8 solar radii.",
+  "order": 1950,
   "gaia": "4663635816857326976",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -21,6 +22,11 @@
     "url": "https://arxiv.org/abs/2307.07559",
     "uncertainty": 125
   },
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 4663635816857326976 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 10,000,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663635816857326976"
+  },
   "distance": {
     "value": 44902.6,
     "source": "Groenewegen (2013), A&A 550, A70, table10, HV 12203: Baade-Wesselink distance (pc) 44902.6 +/- 2481.8 (Monte-Carlo)",
@@ -38,6 +44,8 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.06 +/- 0.004 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
+  "planets": [],
+  "companions": [],
   "text": {
     "card": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 3.0 days.",
     "introduction": "Its mean radius, 24.8 solar radii, comes from comparing how fast its surface moves with how its size changes, 44,903 parsecs away.",
@@ -48,20 +56,5 @@
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
-  ],
-  "radialVelocity": {
-    "value": 0,
-    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 4663635816857326976 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 10,000,000 of its distance per century",
-    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663635816857326976"
-  },
-  "order": 1950,
-  "gravityRange": {
-    "min": -1.33,
-    "max": 2.86,
-    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
-    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
-  },
-  "lightCurve": "gaia-dr3-vari-cepheid",
-  "planets": [],
-  "companions": []
+  ]
 }

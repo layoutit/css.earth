@@ -3,6 +3,7 @@
   "name": "AK Cep",
   "system": "AK Cep system",
   "description": "A Cepheid in the Milky Way that pulsates every 7.23 days; its mean radius is 59.5 solar radii.",
+  "order": 1930,
   "target": "AK Cep",
   "gaia": "2007997408188526336",
   "paper": {
@@ -39,6 +40,8 @@
     ],
     "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.635 +/- 0.049 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
   },
+  "planets": [],
+  "companions": [],
   "text": {
     "card": "A Cepheid in the Milky Way that swells and shrinks every 7.2 days.",
     "introduction": "Its mean radius, 59.5 solar radii, comes from comparing how fast its surface moves with how its size changes, 4,036 parsecs away.",
@@ -47,15 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1930,
-  "gravityRange": {
-    "min": -1.33,
-    "max": 2.86,
-    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
-    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
-  },
-  "lightCurve": "gaia-dr3-vari-cepheid",
-  "planets": [],
-  "companions": []
+  ]
 }

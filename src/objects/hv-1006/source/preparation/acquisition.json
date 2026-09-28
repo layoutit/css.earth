@@ -65,7 +65,7 @@
         "REQUEST": "doQuery",
         "LANG": "ADQL",
         "FORMAT": "csv",
-        "QUERY": "SELECT source_id, pf, pf_error, fund_freq1, reference_time_g, zp_mag_g, num_harmonics_for_p1_g, fund_freq1_harmonic_ampl_g, fund_freq1_harmonic_phase_g, epoch_g, epoch_g_error, peak_to_peak_g, r21_g, phi21_g, mode_best_classification FROM gaiadr3.vari_cepheid WHERE source_id = 4657656737101291392"
+        "QUERY": "SELECT source_id, pf, pf_error, fund_freq1, reference_time_g, zp_mag_g, num_harmonics_for_p1_g, fund_freq1_harmonic_ampl_g, fund_freq1_harmonic_phase_g, epoch_g, epoch_g_error, peak_to_peak_g, r21_g, phi21_g, mode_best_classification, type_best_classification FROM gaiadr3.vari_cepheid WHERE source_id = 4657656737101291392"
       },
       "requiredPrefix": "source_id,pf,"
     }

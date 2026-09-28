@@ -164,6 +164,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         await Promise.all([cp(outputDirectory, stagedData, { recursive: true, filter: published('prepared', outputDirectory) }),
           cp(publicDirectory, stagedPublic, { recursive: true, filter: published('public', publicDirectory) })]);
       }
+      else {
+        // The arrival billboard belongs to navigation, not to this bake: a full run carries the published record and the image it
+        // names, or the page that the billboard step photographs could not start without them (packages/bake/cli/prepare-arrival-billboard.mts).
+        const record: unknown = await readFile(resolve(outputDirectory, 'arrival-billboard.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
+        const url = record && typeof record === 'object' && 'url' in record && typeof record.url === 'string' ? record.url : null;
+        const image = url?.startsWith(`/scenes/${id}/`) ? url.slice(`/scenes/${id}/`.length) : null;
+        if (image && await access(resolve(publicDirectory, image)).then(() => true, () => false)) {
+          await mkdir(stagedPublic, { recursive: true }); await mkdir(stagedData, { recursive: true });
+          await Promise.all([cp(resolve(outputDirectory, 'arrival-billboard.json'), resolve(stagedData, 'arrival-billboard.json')), cp(resolve(publicDirectory, image), resolve(stagedPublic, image))]);
+        }
+      }
       const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages, reuseImages, acceptChanged });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
       // Palette legend labels are derived from the stretch this run just measured: refresh them, repin, and prepare again.

@@ -4,13 +4,13 @@ const test = sourceTest();
 import { checkGaiaCepheidModel, gaiaCepheidQuery, gaiaMagnitude, GAIA_TIME_OFFSET_JD, linearToSrgb, parseGaiaCepheidRow, pulsationTrack, PULSATION_SECONDS_PER_DAY } from '@cssearth/bake/photometry';
 
 // S Vul's row as the Gaia archive returns it to gaiaCepheidQuery('2027971514401523456') (gaiadr3.vari_cepheid).
-const header = 'source_id,pf,pf_error,fund_freq1,reference_time_g,zp_mag_g,num_harmonics_for_p1_g,fund_freq1_harmonic_ampl_g,fund_freq1_harmonic_phase_g,epoch_g,epoch_g_error,peak_to_peak_g,r21_g,phi21_g,mode_best_classification';
+const header = 'source_id,pf,pf_error,fund_freq1,reference_time_g,zp_mag_g,num_harmonics_for_p1_g,fund_freq1_harmonic_ampl_g,fund_freq1_harmonic_phase_g,epoch_g,epoch_g_error,peak_to_peak_g,r21_g,phi21_g,mode_best_classification,type_best_classification';
 const nan = (count: number) => Array(count).fill('NaN').join(', '), zero = (count: number) => Array(count).fill('0.0').join(', ');
 const row = (overrides: Partial<Record<string, string>> = {}) => {
   const values: Record<string, string> = { source_id: '2027971514401523456', pf: '69.467416955503', pf_error: '0.04627568', fund_freq1: '0.014395237995397827',
     reference_time_g: '1796.4225877192143', zp_mag_g: '8.083196', num_harmonics_for_p1_g: '2',
     fund_freq1_harmonic_ampl_g: `"(0.19668083, 0.04891441, ${nan(14)})"`, fund_freq1_harmonic_phase_g: `"(5.454763, 3.7024179, ${zero(14)})"`,
-    epoch_g: '1626.505285846054', epoch_g_error: '0.06544369', peak_to_peak_g: '0.42478037', r21_g: '0.24869943', phi21_g: '5.3592625', mode_best_classification: 'FUNDAMENTAL', ...overrides };
+    epoch_g: '1626.505285846054', epoch_g_error: '0.06544369', peak_to_peak_g: '0.42478037', r21_g: '0.24869943', phi21_g: '5.3592625', mode_best_classification: 'FUNDAMENTAL', type_best_classification: 'DCEP', ...overrides };
   return `${header}\n${header.split(',').map(name => values[name]).join(',')}\n`;
 };
 const SCENE_JD = 2461286.5;

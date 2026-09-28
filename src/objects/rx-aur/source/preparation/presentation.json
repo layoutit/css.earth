@@ -1,5 +1,8 @@
 {
   "schema": "cssearth-css-presentation-profile@1",
   "namespace": "rx-aur",
-  "mode": "emissive"
+  "mode": "emissive",
+  "lightCurve": {
+    "model": "photometry/gaia-dr3-vari-cepheid.csv"
+  }
 }

@@ -30,6 +30,34 @@
       "evidence": [
         "https://arxiv.org/abs/2002.02186"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,250 K and log g 2.17 (u1 0.556, u2 0.196): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 2.17 from 2011AJ....142..136L, the median of its 2 spectra; the 2 published values span log g 2.14 to 2.19, across which the limb law changes by at most 0.0% of the centre brightness.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2011AJ....142..136L"
+      ]
+    },
+    {
+      "id": "light-curve",
+      "subject": "Light curve",
+      "status": "included",
+      "finding": "Gaia DR3 vari_cepheid, source 4156450099578283776: 4 G-band harmonics of a 10.341812681083045 d period, peak-to-peak 0.650 mag; the harmonics reproduce the row's epoch of maximum and peak-to-peak amplitude. The page plays it as a veil over the disc from the scene date, phase known to 0.03 of a cycle there.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243990"
+      ]
     }
   ]
 }

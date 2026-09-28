@@ -21,6 +21,8 @@ import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Ex
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
 import { gaiaCepheidForm, installLightCurve } from './light-curve.mts';
+import { gaiaCepheidClass } from '@cssearth/bake/photometry';
+import { CEPHEID_GRAVITIES } from './cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
 
@@ -167,9 +169,13 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     if (radialVelocity.value !== 0) found.push([radialVelocity.url, await fetchPublication(archive, radialVelocity.url)]);
   }
   const body = astronomyRecord(spec, row, ids, order);
+  // Gaia DR3 knows every Cepheid it modelled: a fundamental-mode model is a light curve the page plays, and a classical Cepheid
+  // takes the class's published gravities when its own is unknown (light-curve.mts, gravity.mts). No spec field asks for either.
+  const cepheidCsv = await archive.text(GAIA_TAP, gaiaCepheidForm(row.sourceId)), cepheid = gaiaCepheidClass(cepheidCsv);
+  const gravityRange = spec.gravityRange ?? (cepheid?.type === 'DCEP' ? CEPHEID_GRAVITIES : undefined);
   // No mass: a published spectroscopic gravity, else a display gravity inside the class's cited range (gravity.mts).
   const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
-    : await chooseGravity({ archive, ra: row.ra, dec: row.dec, teffK: spec.temperature.value, ...(spec.gravityRange ? { range: spec.gravityRange } : {}), where: id });
+    : await chooseGravity({ archive, ra: row.ra, dec: row.dec, teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
   const limbLogg = gravity?.logg ?? physical.logg;
   const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'))]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
@@ -290,7 +296,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The ledger records each choice made above with the links it read.
   const gaiaArchive = 'https://gea.esac.esa.int/archive/', vizier = (credit: string | undefined) => credit?.match(/VizieR (J\/[^\s.,)]+)/u)?.[1];
   // A Cepheid plays Gaia's published light curve, checked against its own row (light-curve.mts).
-  const lightCurve = spec.lightCurve ? installLightCurve(files, { id, name: spec.name, sourceId: row.sourceId, csv: await archive.text(GAIA_TAP, gaiaCepheidForm(row.sourceId)) }) : null;
+  const lightCurve = cepheid?.mode === 'FUNDAMENTAL' ? installLightCurve(files, { id, name: spec.name, sourceId: row.sourceId, csv: cepheidCsv }) : null;
   const colorLinks = color.inputs.map(input => String(input.origin)).filter(origin => origin.startsWith('https://') && !origin.includes('asu-tsv') && !origin.includes('/tap/'));
   writeLedger(files, id, [
     { id: 'placement', subject: 'Placement', evidence: [gaiaArchive, ...place.cited ? [place.cited.url] : [], ...row.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
