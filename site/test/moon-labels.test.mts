@@ -59,6 +59,12 @@ test('disabled captions respect foreground labels, planet occlusion and overview
     pose: { positionM: [0, 0, 100] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 100, widthPixels: 500, heightPixels: 300, principalOffsetPixels: [0, 0] as const };
   const parents = new Map([[parent.id, parent]]);
+  const demand = new Set<number>();
+  assert.deepEqual(projectMoonLabels(moons, [0, 0], parents, parent, pose, viewport, [], undefined, undefined, undefined, demand), []);
+  assert.deepEqual([...demand], [0]); // The occluded caption never needs a DOM measurement.
+  demand.clear();
+  projectMoonLabels(moons, [0, 0], parents, parent, { ...pose, pose: { ...pose.pose, positionM: [0, 0, 10000] } }, viewport, [], undefined, undefined, undefined, demand);
+  assert.equal(demand.size, 0);
   assert.deepEqual(projectMoonLabels(moons, [30, 30], parents, parent, pose, viewport, []).map(point => point.index), [0]);
   assert.equal(projectMoonLabels(moons, [30, 30], parents, parent, pose, viewport, [{ left: 20, right: 60, top: -20, bottom: 20 }]).length, 0);
   assert.equal(projectMoonLabels(moons, [30, 30], parents, parent, { ...pose, pose: { ...pose.pose, positionM: [0, 0, 10000] } }, viewport, []).length, 0);
