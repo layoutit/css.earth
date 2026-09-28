@@ -3,6 +3,7 @@
  * `--update-baseline` never records one. */
 import { checkDeclaredDependencies } from './declared-dependencies.mts';
 import { checkNebulaBoundaries } from './nebula-packages.mts';
+import { checkPreInstallImports } from './pre-install-imports.mts';
 
 export interface RepositoryRule {
   readonly id: string;
@@ -16,7 +17,7 @@ export interface RepositoryRule {
  * means code went back to a retired location. Each move that empties a folder appends it here. */
 export const RETIRED_FOLDERS: readonly string[] = [
   'tools/audits',
-  'tools/ci/architecture',
+  'tools/ci',
   'tools/evidence',
   'tools/experiments',
   'tools/facility-renders',
@@ -61,6 +62,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/performance',
   'tools/photometry',
   'tools/prepare/astronomy',
+  'tools/prepared',
   'tools/references',
   'tools/spice',
 ];
@@ -89,6 +91,11 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
     id: 'declared-dependencies',
     description: 'a packages/* file imports another workspace package only when its package.json declares it, and outside tests of a tsup-built package only when it ships it in dependencies (declared-dependencies.mts)',
     check: checkDeclaredDependencies,
+  },
+  {
+    id: 'pre-install-imports',
+    description: 'a script a workflow job runs before its install imports only node: built-ins and files the job\'s checkout keeps, transitively (pre-install-imports.mts)',
+    check: checkPreInstallImports,
   },
 ];
 

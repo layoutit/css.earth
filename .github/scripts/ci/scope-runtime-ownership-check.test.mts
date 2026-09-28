@@ -14,7 +14,7 @@ test('an object-only diff scopes to the touched objects, sorted and deduplicated
 
 test('a diff that also touches shared code runs --all, even with object paths present', () => {
   // Mutation check: a single non-object path must flip the whole decision, not just get ignored alongside it.
-  const args = selectRuntimeOwnershipArgs(['src/objects/mars/object.json', 'tools/ci/check-object-runtime-ownership.mts']);
+  const args = selectRuntimeOwnershipArgs(['src/objects/mars/object.json', '.github/scripts/checks/check-object-runtime-ownership.mts']);
   assert.deepEqual(args, ['--all']);
 });
 

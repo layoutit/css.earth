@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { BUILD_RULES, rebuildStale, staleBuilds, staleInstall } from './check-stale-builds.mts';
+import { BUILD_RULES, rebuildStale, staleBuilds, staleInstall } from '@cssearth/bake/preparation';
 
 test('a build is stale when a compiled source is newer than its output or the output is missing', async () => {
   const root = await mkdtemp(join(tmpdir(), 'stale-builds-'));
@@ -145,4 +145,29 @@ test('an install older than pnpm-lock.yaml is named with the command that fixes 
     await writeFile(join(root, 'pnpm-lock.yaml'), "lockfileVersion: '9.0'\nimporters:\n  .:\n    dependencies:\n      '@cssearth/telescope':\n        specifier: workspace:*\n");
     assert.equal(await staleInstall(root), 'pnpm-lock.yaml changed after the last install; run pnpm install --frozen-lockfile');
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('the stale-build check loads from source with Node built-ins alone, so it runs while the bake itself is unbuilt', async () => {
+  const importsOf = async (path: string) => [...(await readFile(new URL(`../../${path}`, import.meta.url), 'utf8'))
+    .matchAll(/^\s*(?:import|export)\b[^'"]*?\bfrom\s+['"]([^'"]+)['"]|^\s*import\s+['"]([^'"]+)['"]/gmu)].map(match => match[1] ?? match[2]);
+  const library = await importsOf('packages/bake/src/preparation/stale-builds.ts');
+  assert.ok(library.length > 0, 'the library imports Node built-ins');
+  assert.deepEqual(library.filter(specifier => !specifier!.startsWith('node:')), [], 'stale-builds.ts imports only node: built-ins');
+  assert.deepEqual(await importsOf('packages/bake/cli/check-stale-builds.mts'), ['../src/preparation/stale-builds.ts'],
+    'the command loads the library from source, not through the built entry');
+});
+
+test('a build command streams to the terminal, so no output size fails it, and a failing build still fails', async () => {
+  // The runner inherits its caller's stdio; run it in a child whose output this test drains, as a terminal would.
+  const { spawnSync } = await import('node:child_process');
+  const runner = (command: string) => spawnSync(process.execPath, ['--input-type=module', '-e',
+    `import { runBuildCommand } from '@cssearth/bake/preparation'; await runBuildCommand(${JSON.stringify(command)});`],
+  { cwd: new URL('../..', import.meta.url), encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  const node = JSON.stringify(process.execPath);
+  const large = runner(`${node} -e "process.stdout.write('x'.repeat(3 * 1024 * 1024))"`);
+  assert.equal(large.status, 0, large.stderr);
+  assert.equal(large.stdout.length, 3 * 1024 * 1024, 'the 3 MiB of build output reached the terminal');
+  const failing = runner(`${node} -e "process.exit(3)"`);
+  assert.notEqual(failing.status, 0);
+  assert.match(failing.stderr, /exited with status 3/u);
 });

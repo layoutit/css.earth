@@ -25,7 +25,7 @@ its validators accept); the renderer never imports the bake.
   and directional-Sun contracts and preparers it validates, and the material-track source planning (frame lookups and banks)
   the layer presentations build on. It imports `scene` and `raster`. The host passes material
   tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
-  tests are `node --test` suites in `tests/presentation/` (the activation groups) and, until they move, `tools/prepared/`.
+  tests are `node --test` suites in `tests/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
   slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
   It imports `scene` and `volume`.
@@ -92,7 +92,7 @@ its validators accept); the renderer never imports the bake.
   against the descriptor (`check-prepared-presentation.ts`, `prepared-object-source.ts`; the prepared format constant comes
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
-  `tools/ci/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
+  `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
   and spatial-context finalization before it stays in `tools/prepare/prepare-object-json.mts`, which reads the `tools/objects` bundle.
   Its tests are in `tests/contract/`.
@@ -134,8 +134,11 @@ its validators accept); the renderer never imports the bake.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace. `packages/bake/cli/preparation-trace.mts` is the trace itself, which
   `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
-  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. Its tests
-  are `node --test` suites in `tests/preparation/`.
+  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
+  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `tools/prepare/prepare-object.mts` run through
+  `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
+  Its tests are `node --test` suites in `tests/preparation/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.

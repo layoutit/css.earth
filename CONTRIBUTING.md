@@ -222,7 +222,9 @@ boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 dependencies: a `packages/*` file imports another workspace package only when
 its own `package.json` declares it, and outside tests of a package tsup builds
 only when `dependencies` ships it, since tsup inlines a `devDependencies` package
-(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. Not yet enforced:
+(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. And pre-install imports: a
+script a workflow job runs before it installs dependencies imports, with everything it reaches, only `node:`
+built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). Not yet enforced:
 unused files in library folders (untangle item K).
 
 Reference implementations live under `tests/oracles/` with their own pinned
@@ -241,7 +243,7 @@ changes" job) — a job it skips still reports success, never failure, so it nev
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
 
-`node tools/ci/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
+`node .github/scripts/checks/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
 (it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
 `prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
 

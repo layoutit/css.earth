@@ -1,16 +1,13 @@
-#!/usr/bin/env node
 /** Say which build a preparation run would read stale, before the run fails with an unrelated-looking error (a digest
  * mismatch from an old objects package, a missing module after main moved). A build is stale when a source it compiles is
  * newer than its output, or its output is missing. Modification times are enough for a local preflight; CI builds fresh.
  * An install older than pnpm-lock.yaml is refused first: no rebuild fixes a missing dependency.
  *
- *   node tools/ci/check-stale-builds.mts        exits 1 and prints the commands to run when any build is stale
- *   node tools/ci/check-stale-builds.mts --run  rebuilds only the stale ones, in rule order, and exits 0 when they pass */
-import { execFile } from 'node:child_process';
+ * It imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
+ * runs, and `--run` still rebuilds, when this package's own build is missing or stale. */
+import { spawn } from 'node:child_process';
 import { readdir, readFile, stat } from 'node:fs/promises';
-import { promisify } from 'node:util';
 import { relative, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 
 /** `inputs` names the bundler's metafile: every file the last build read counts as a source, so an import from outside the
  * declared directories (src/platform, a site module) still marks the bundle stale. `base` is the directory tsup ran from,
@@ -97,26 +94,22 @@ export async function staleInstall(root = process.cwd()) {
 }
 
 /** Rebuild only what is stale, in rule order, so a dependent build never runs before its dependency. */
+/** Run one build command through the shell with the caller's terminal, so a long build streams its output and no output
+ * size can fail it; resolves when it exits 0 and rejects with its exit status otherwise. */
+export function runBuildCommand(command: string, cwd = process.cwd()): Promise<void> {
+  return new Promise((done, fail) => {
+    const child = spawn(command, { cwd, shell: true, stdio: 'inherit' });
+    child.once('error', fail);
+    child.once('exit', (code, signal) => code === 0 ? done() : fail(new Error(`${command} exited with ${signal ?? `status ${code}`}`)));
+  });
+}
+
 export async function rebuildStale(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES,
-  run: (command: string) => Promise<void> = async command => { await promisify(execFile)(command, { cwd: root, shell: true }); }) {
+  run: (command: string) => Promise<void> = command => runBuildCommand(command, root)) {
   const stale = await staleBuilds(root, rules);
   for (const build of stale) {
     console.log(`rebuilding ${build.name}: ${build.reason}`);
     await run(build.command);
   }
   return stale;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const install = await staleInstall();
-  if (install) { console.error(install); process.exit(1); }
-  if (process.argv.includes('--run')) {
-    const rebuilt = await rebuildStale();
-    console.log(rebuilt.length ? `Rebuilt ${rebuilt.length} stale build(s).` : 'Builds are current; nothing rebuilt.');
-  } else {
-    const stale = await staleBuilds();
-    if (!stale.length) console.log('Builds are current.');
-    for (const build of stale) console.log(`stale ${build.name}: ${build.reason}\n  run: ${build.command}`);
-    if (stale.length) process.exitCode = 1;
-  }
 }

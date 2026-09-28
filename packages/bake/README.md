@@ -112,7 +112,7 @@ another topic.
 (Vitest) from the repository checkout, since two of them replay tracked compact inputs under `src/objects/`. The raster
 lane's surface test also reads the observation lens sampler from `src/objects/layers/observation/`. The photometry tests live
 in `tests/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
-The node-tree, CSSOM, leaf-box, layout and activation tests likewise stay in `tools/prepared/`. The prepared-presentation, delivery,
+The node-tree, CSSOM, leaf-box, layout and activation tests are `node --test` suites in `tests/presentation/`. The prepared-presentation, delivery,
 sources, navigation and preparation tests (with the solar-geometry generator's) are `node --test` suites in `tests/prepared-presentation/`, `tests/delivery/`,
 `tests/sources/`, `tests/navigation/`, `tests/preparation/` and `tests/galaxy-field/`; the shared lighting-bank check is `tests/raster/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
@@ -122,7 +122,7 @@ shell, sky, density-volume, image-layer, catalogue and world-context bakes, whic
 The object libraries' tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
 banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
-`tools/ci/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
+`packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 
 ## Evidence
 
