@@ -33,7 +33,7 @@ const GALAXY_PREFETCH_RATIO = 1 / 32;
 /** Hidden, unsubscribed lens banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_LENS_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, environmentLinks, stellarExtents = {}, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: PreparedUniverseOptions) {
   const plan = parsePreparedWorldContextPlan(context), payload = validatePreparedCssVolume(volume);
   if (volumeLensBanks.length && !lensBillboards) throw new TypeError('Volume lens banks require their prepared billboards.');
   const lensFacts = volumeLensBanks.map(bank => {
@@ -149,7 +149,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeLensBanks,
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards, stellarExtents });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;
@@ -178,7 +178,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         publishSuppressedLabels();
         const bodyAnnotations = spatial.inspect();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
-        const environmentLabels = own(mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock }));
+        const environmentLabels = own(mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock,
+          ...(stellarExtents[payload.id] === undefined ? {} : { ringRadiusM: stellarExtents[payload.id] }) }));
         catalogBanks.mountInitialCatalog();
         catalogBanks.publishResidency();
         lenses.publishResidency();
@@ -238,8 +239,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setOverview(enabled: boolean, scope?: string) {
             overview = enabled;
             spatial.setOverview(enabled);
-            // The background galaxy is an overview destination, not a catalogue focus.
-            background.setDetail(enabled && scope === plan.volume.objectId);
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

@@ -3243,6 +3243,20 @@
           }
         ]
       }
+    },
+    {
+      "id": "document-378",
+      "path": "src/objects/lmc/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nidever-2019-lmc-smash",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/1805.02671"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []

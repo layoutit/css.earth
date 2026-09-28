@@ -24,7 +24,7 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared }: {
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {} }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerBank>;
@@ -35,6 +35,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
   onSelect?: (object: PreparedCatalogObject) => void;
   requestPublication?: () => boolean;
+  /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
+  stellarExtents?: Readonly<Record<string, number>>;
   /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
   billboards?: PreparedUniverseOptions['lensBillboards'];
 }) {
@@ -84,8 +86,16 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       clusters: bank.clusters?.payload, nebulae: bank.nebulae,
       renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(lens => lens.id)]),
       billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
+      volumeRings: volumeRings(),
       nebulaFrames: new Map(volumeDeclarations.map(lens => [lens.id, lens.frame])), onSelect, pickingHost: stage });
     publishResidency();
+  }
+  /** Every bank with a published stellar extent, centred on its frame: the catalogue rings it at that radius. */
+  function volumeRings() {
+    return new Map([...declarations, ...volumeDeclarations].flatMap(bank => {
+      const radiusM = stellarExtents[bank.id];
+      return radiusM === undefined ? [] : [[bank.id, { frame: bank.frame, radiusUnits: radiusM / bank.frame.metersPerUnit }] as const];
+    }));
   }
   function ensureCatalog(): Promise<void> {
     if (lifetime.disposed || catalog) return Promise.resolve();

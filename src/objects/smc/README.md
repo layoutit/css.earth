@@ -16,6 +16,7 @@ The shape is a hypothesis with two parts. A broad envelope carries 82.79% of the
 | [DSS2, heic0514c](https://esahubble.org/images/heic0514c/) | 13096 × 13616-pixel photographic plate composite; narrower footprint than VISTA or SMASH. |
 | [AllWISE colour HiPS through CDS](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json) | W4/W2/W1 false colour over a 10° TAN field, 4000² pixels; not native detector sampling. |
 | [Bonanos et al. (2010)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416) | Observed sky positions and Johnson V for 1,803 selected massive stars; their depths are model-contained realizations. |
+| [Nidever et al. (2011)](https://arxiv.org/abs/1104.2594) | [Stellar extent](source/stellar-extent.json): SMC red giants detected out to about 11 kpc. The universe rings the SMC at that radius; it marks where stars are still measured, not a boundary. |
 
 Native photographs supply colour after registered star removal; the two dust and PAH lab composites keep compact emission instead, and are not shipped. Every lens recolours the same neutral alpha, so switching lenses changes colour and never geometry. None of the images covers the full Bridge, Wing or tidal debris.
 

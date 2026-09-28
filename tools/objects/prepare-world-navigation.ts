@@ -7,8 +7,8 @@ import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
-import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
-import { readDefaultLensCoverage, coverageDirection, visibleCoverageShare, faceLensData, readLensCoverages, authoredFocusLenses, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
+import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, MINIMUM_COVERED_SHARE, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
+import { readDefaultLensCoverage, coverageDirection, coveredShare, visibleCoverageShare, faceLensData, readLensCoverages, authoredFocusLenses, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
 
 type Input = Record<string, any>;
 export interface WorldNavigationOptions { readonly objectDirectory: string; readonly definition: Input; readonly projectRoot?: string; }
@@ -71,7 +71,9 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     : approachSource ? [await approachDirection()] : undefined;
   const light = (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun';
   // A lit body without photograph frames opens on the side of its default map that has data.
-  const coverage = !observation?.length && light === 'sun' ? await readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
+  // A map with next to no data (a shape-only body's empty model map) has no side to face.
+  const read = !observation?.length && light === 'sun' ? await readDefaultLensCoverage(objectDirectory, placement.mapLeftEdgeLongitudeDeg) : undefined;
+  const coverage = read && coveredShare(read) >= MINIMUM_COVERED_SHARE ? read : undefined;
   // The minimap step records the default lens's coverage from its exact mask; a minimap from before that record is read back.
   const lensCoverages = await readLensCoverages(objectDirectory), recorded = coverage && lensCoverages.get(coverage.lens);
   const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light,

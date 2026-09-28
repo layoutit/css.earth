@@ -1,0 +1,54 @@
+{
+  "id": "lopez-corredoira-2018-outer-disc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Disk stars in the Milky Way detected beyond 25 kpc from its center",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/201832880"
+    },
+    {
+      "type": "arxiv",
+      "value": "1804.03064"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1804.03064",
+      "label": "arXiv:1804.03064"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/201832880",
+      "label": "A&A 612, L8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1804.03064",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract, Results: disk stars at R > 26 kpc (99.7% C.L.) and even at R > 31 kpc (95.4% C.L.)"
+    }
+  ],
+  "creators": [
+    "M. Lopez-Corredoira",
+    "C. Allende Prieto",
+    "F. Garzon",
+    "H. Wang",
+    "C. Liu",
+    "L. Deng"
+  ],
+  "publisher": "A&A 612, L8",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Lopez-Corredoira et al. (2018), A&A 612, L8.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1804.03064"
+    }
+  ]
+}

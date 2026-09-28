@@ -317,6 +317,9 @@ importers:
         specifier: ^2.9.0
         version: 2.9.0
     devDependencies:
+      '@cssearth/telescope-cli':
+        specifier: workspace:*
+        version: link:../telescope-cli
       '@types/estree':
         specifier: ^1.0.9
         version: 1.0.9

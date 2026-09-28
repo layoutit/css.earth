@@ -1,12 +1,11 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 6,
+    "largestCycle": 5,
     "layerOrder": [
       "site/scene",
       "site/shell",
       "site/navigation",
-      "site/catalogue",
       "site(root)",
       "site/search",
       "tools/objects(root)",
@@ -18,10 +17,9 @@
       "site/layouts"
     ],
     "cycleClosingEdges": [
+      {"from":"site/search","to":"site(root)","imports":8},
       {"from":"site(root)","to":"site/scene","imports":5},
       {"from":"site(root)","to":"site/navigation","imports":3},
-      {"from":"site(root)","to":"site/catalogue","imports":2},
-      {"from":"site/search","to":"site(root)","imports":2},
       {"from":"site/shell","to":"site/scene","imports":2},
       {"from":"tools/objects/new-object","to":"tools/objects(root)","imports":2},
       {"from":"tools/prepare","to":"tools/objects(root)","imports":2},
@@ -31,6 +29,7 @@
     ]
   },
   "rules": {
+    "authoring-is-leaf": [],
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
       {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"site/objects.mts"},
@@ -49,6 +48,13 @@
     "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
+      {"from":"packages/bake/authoring/comet-1p/inspect-halley-giotto.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/comet-1p/prepare-encounters.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/comet-1p/prepare-giotto.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/dawn/vir-mosaic.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/juno/juno.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/voyager-iss/limb.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/bake/authoring/voyager-iss/place.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/renderer/src/navigation/camera-viewport.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/perspective-dolly.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},

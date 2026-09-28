@@ -82,6 +82,12 @@ export const LAYER_RULES: readonly LayerRule[] = [
     forbids: (from, to) => (from.startsWith(BAKE_NEBULA) && to.startsWith(BAKE_OBJECTS)) || (from.startsWith(BAKE_OBJECTS) && to.startsWith(BAKE_NEBULA)),
     includeTests: true,
   },
+  {
+    id: 'authoring-is-leaf',
+    description: 'packages/bake/authoring/ holds per-body and per-mission authoring scripts: nothing imports them except their own tests (tests and type-only imports count)',
+    forbids: (from, to) => to.startsWith('packages/bake/authoring/') && !from.startsWith('packages/bake/authoring/'),
+    includeTests: true,
+  },
 ];
 
 /** Every forbidden file-to-file import per rule, sorted and without duplicates. */

@@ -27,7 +27,7 @@ its validators accept); the renderer never imports the bake.
   tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
   tests are `node --test` suites in `tests/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
-  slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
+  slice stacks into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
   It imports `scene` and `volume`.
 - `src/stars/` is published as `@cssearth/bake/stars` (Node only): the point-field star bake (recipes, catalogue
   sources, palette, hierarchy, point atlas and photometry, diffuse sky, encoded bank). It imports `raster` and `volume`.
@@ -137,12 +137,24 @@ its validators accept); the renderer never imports the bake.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
   subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which
-  `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
+  `packages/bake/cli/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
   before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
-  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `tools/prepare/prepare-object.mts` run through
+  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
   because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
   Its tests are `node --test` suites in `tests/preparation/`.
+- `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
+  scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command; its tests are in `tests/preparation/`.
+- `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the preparation cache (a verified
+  receipt, from `preparation`, skips an unchanged object) over `run-implemented-objects`'s scheduler. It imports
+  `preparation` and `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command; its tests are in
+  `tests/preparation/`.
+- `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
+  or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
+  billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps
+  shell out to the other bake and site-owned preparation commands by path. `packages/bake/cli/prepare-object.mts` is its
+  command; its tests are in `tests/preparation/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.

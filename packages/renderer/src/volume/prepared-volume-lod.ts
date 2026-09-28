@@ -1,4 +1,3 @@
-import { mountPreparedVolumePlanes } from './prepared-volume-planes.js';
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
@@ -29,14 +28,6 @@ export function samePreparedVolumeTopology(leftInput: PreparedVolumeMountOptions
           x.style.transform !== y.style.transform || !boundsEqual(x.boundsCssPixels, y.boundsCssPixels)) return false;
     }
   }
-  const leftPlanes = left.detailPlanes ?? [], rightPlanes = right.detailPlanes ?? [];
-  if (leftPlanes.length !== rightPlanes.length || leftPlanes.some((leaf, index) => {
-    const other = rightPlanes[index]!;
-    return leaf.id !== other.id || leaf.widthPx !== other.widthPx || leaf.heightPx !== other.heightPx ||
-      !vectorEquals(leaf.centerUnits, other.centerUnits) || leaf.style.width !== other.style.width ||
-      leaf.style.height !== other.style.height || leaf.style.transform !== other.style.transform ||
-      !boundsEqual(leaf.boundsCssPixels, other.boundsCssPixels);
-  })) return false;
   const a = left.impostors, b = right.impostors;
   if (!a || !b) return a === b;
   if (a.radiusUnits !== b.radiusUnits || a.fullBelowDiameterPixels !== b.fullBelowDiameterPixels ||
@@ -49,10 +40,7 @@ export function samePreparedVolumeTopology(leftInput: PreparedVolumeMountOptions
 
 /** Retain the full geometry, but publish it only when depth can occupy visible screen pixels. */
 export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, completedOpacity: (runtime: PreparedVolumeRuntime) => number): PreparedVolumeLodRuntime {
-  const initial = validatePreparedCssVolume(options.payload), prepared = initial.impostors;
-  const only = options.impostorView === undefined ? undefined : prepared?.views.find(view => view.id === options.impostorView);
-  if (options.impostorView !== undefined && !only) throw new TypeError(`${initial.id} has no impostor view ${options.impostorView}.`);
-  const bank = prepared && only ? { ...prepared, views: [only] } : prepared;
+  const initial = validatePreparedCssVolume(options.payload), bank = initial.impostors;
   const materials = (payload: PreparedVolumeMountOptions['payload']) => AXES.flatMap(axis =>
     payload.stacks.find(stack => stack.axis === axis)!.leaves.map(leaf => ({
       textureUrl: options.resolveResource(leaf.texturePath),
@@ -108,7 +96,6 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     position: 'absolute', inset: '0', pointerEvents: 'none', display: 'none', transformStyle: 'flat',
   });
   const marker = create('span'); marker.hidden = true; full.append(marker);
-  let planes: ReturnType<typeof mountPreparedVolumePlanes> | null = null;
   options.host.insertBefore(full, options.before); options.host.insertBefore(distant, options.before);
   let presentation = initial;
   // The full volume is built the first time it contributes: at impostor sizes, and while the cloud is off screen,
@@ -117,7 +104,6 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
   const roots: HTMLElement[] = [];
   const detail = () => {
     if (runtime) return runtime;
-    if (presentation.detailPlanes) planes = mountPreparedVolumePlanes({ ...options, payload: presentation, host: full, before: marker });
     runtime = mountPreparedCssVolume({ ...options, payload: presentation, host: full, before: marker });
     // The universe must remain visible outside the prepared cloud footprint.
     for (const root of runtime.roots) { root.style.background = 'transparent'; roots.push(root); }
@@ -160,7 +146,6 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (detailVisible) {
       const volume = detail();
       volume.publish(publication);
-      planes?.publish(publication);
       full.style.opacity = responsive ? `calc(var(--native-volume-mix) * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume));
     }
     distant.style.opacity = !detailAllowed ? '' : responsive ? 'calc(1 - var(--native-volume-mix))' : String(1 - volumeMix);
@@ -186,12 +171,11 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     const next = validatePreparedCssVolume(payload);
     if (!samePreparedVolumeTopology(initial, next)) throw new TypeError('Prepared volume presentation has a different topology.');
     presentation = next;
-    planes?.setPresentation(next);
     runtime?.setMaterials(materials(next));
     for (const node of views.values()) node.style.backgroundImage = '';
   }, destroy() {
     if (destroyed) return; destroyed = true;
-    runtime?.destroy(); planes?.destroy(); full.remove(); distant.remove();
+    runtime?.destroy(); full.remove(); distant.remove();
   } });
 }
 

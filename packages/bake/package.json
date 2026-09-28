@@ -251,6 +251,11 @@
       "import": "./dist/sources.js",
       "default": "./dist/sources.js"
     },
+    "./sources/astronomy-data": {
+      "types": "./dist/sources/astronomy-data.d.ts",
+      "import": "./dist/sources/astronomy-data.js",
+      "default": "./dist/sources/astronomy-data.js"
+    },
     "./contract": {
       "types": "./dist/contract.d.ts",
       "import": "./dist/contract.js",
@@ -291,6 +296,21 @@
       "import": "./dist/preparation.js",
       "default": "./dist/preparation.js"
     },
+    "./run-implemented-objects": {
+      "types": "./dist/run-implemented-objects.d.ts",
+      "import": "./dist/run-implemented-objects.js",
+      "default": "./dist/run-implemented-objects.js"
+    },
+    "./prepare-objects": {
+      "types": "./dist/prepare-objects.d.ts",
+      "import": "./dist/prepare-objects.js",
+      "default": "./dist/prepare-objects.js"
+    },
+    "./prepare-object": {
+      "types": "./dist/prepare-object.d.ts",
+      "import": "./dist/prepare-object.js",
+      "default": "./dist/prepare-object.js"
+    },
     "./thread-pool": {
       "types": "./dist/thread-pool.d.ts",
       "import": "./dist/thread-pool.js",
@@ -300,7 +320,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.cli.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.cli.json && tsc --noEmit -p tsconfig.authoring.json",
     "test": "vitest run"
   },
   "dependencies": {
@@ -331,6 +351,7 @@
     "yaml": "^2.9.0"
   },
   "devDependencies": {
+    "@cssearth/telescope-cli": "workspace:*",
     "@types/estree": "^1.0.9",
     "@types/node": "^26.4.0",
     "@types/three": "0.180.0",

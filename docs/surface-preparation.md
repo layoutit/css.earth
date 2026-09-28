@@ -149,7 +149,7 @@ document their recorded revision; they are not relabeled as a new full sweep.
 ### Registered JIRAM radiance
 
 For Perry et al. (2025)'s registered Io FITS release,
-[`jiram-registered-mosaic.mts`](../tools/objects/juno/jiram-registered-mosaic.mts)
+[`jiram-registered-mosaic.mts`](../packages/bake/authoring/juno/jiram-registered-mosaic.mts)
 transfers the published planetographic geometry into the existing camera,
 projection and per-visit combination code. It consumes the band-radiance plane
 and released detector masks, then retains qualified cold-night columns.

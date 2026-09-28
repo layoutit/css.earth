@@ -28,7 +28,7 @@ HD 189733 A is a K2 dwarf in Vulpecula, 19.8 parsecs away. It hosts the hot Jupi
 
 ## Evidence
 
-The initial package was prepared on 2026-09-17 with `node tools/prepare/prepare-object.mts hd-189733`.
+The initial package was prepared on 2026-09-17 with [`node tools/prepare/prepare-object.mts hd-189733`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)).
 
 - [`stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts) (now [`tests/objects/observation/stellar/stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts)) reads the pinned XP spectra of both HD 189733 stars and checks their colours, 255, 226, 207 and 255, 201, 123, and that the spectrum's errors move no channel by more than 3.
 - `source.test.mts` verifies the pins and acquisitions, that radius and GM are the map paper's stellar values, that placement is the archived Gaia row, and that the TESS fit returns the coefficients above from 30 transits with the map's radius ratio within 0.001.

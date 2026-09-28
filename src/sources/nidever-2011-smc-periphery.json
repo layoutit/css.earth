@@ -1,0 +1,54 @@
+{
+  "id": "nidever-2011-smc-periphery",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Discovery of a Large Stellar Periphery Around the Small Magellanic Cloud",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/2041-8205/733/1/L10"
+    },
+    {
+      "type": "arxiv",
+      "value": "1104.2594"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1104.2594",
+      "label": "arXiv:1104.2594"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/2041-8205/733/1/L10",
+      "label": "ApJL 733, L10"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1104.2594",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract: metal-poor red giant branch stars in the SMC that extend to large radii (~11 kpc)"
+    }
+  ],
+  "creators": [
+    "David L. Nidever",
+    "Steven R. Majewski",
+    "Ricardo R. Munoz",
+    "Rachael L. Beaton",
+    "Richard J. Patterson",
+    "William E. Kunkel"
+  ],
+  "publisher": "ApJL 733, L10",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Nidever et al. (2011), ApJL 733, L10.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1104.2594"
+    }
+  ]
+}
