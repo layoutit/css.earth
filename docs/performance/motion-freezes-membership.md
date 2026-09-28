@@ -95,9 +95,12 @@ native listeners. This preserves native dispatch order and avoids rebuilding Saf
 The shell stylesheet owns touch handling and text selection on that surface. Standalone renderer mounts still clean
 up their own listeners and inline input styles.
 
-The shell also owns the minimap controller, surface reader and footer readout. Replacing a preview card binds only its
-new map nodes; arriving at that same card does not bind them a second time. Destination controls stay inert until the
-navigation readiness gate releases them. Busy status uses ARIA, without a cosmetic loading class that restyles the dataset subtree.
+The shell also owns the minimap controller, surface reader and footer readout. During a replacement flight, its
+outgoing information card keeps its nodes and detail/overview layout. The destination fragment and styles prepare
+during the flight, but the card publishes only after the old scene retires and before the new detail tree mounts.
+This avoids repainting the departing scene when WebKit removes the card's offscreen context rail. Cancellation keeps
+the original card; arrival binds the new card's maps once. Destination controls stay inert until navigation readiness
+releases them. Same-scene overview navigation keeps its existing selection behavior.
 
 A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
@@ -126,8 +129,16 @@ router yields through a rendering opportunity and a task before retirement, keep
 cancellation ownership intact. This separates required teardown from camera publication; it is not a paint-readiness
 guarantee or a fixed settling delay. The incoming scene still must acknowledge its prepared activation.
 
-Texture activation still gives each prepared batch a rendering opportunity, but leaves already showing their pending
-image receive no style assignment. Marker atlas swaps and label offsets, search clearing, readouts and readiness
+Pending textured faces stay in their original DOM parents with a direct inline `display: none` until their
+prepared activation batch. Each mesh parent keeps its first prepared face renderable so it connects populated;
+activation restores each remaining face's prepared display and image together. Selection changes to a withheld
+face's display update its pending value, and cancellation prevents further reveals. This paces render-layer
+creation as well as texture publication, without rebuilding the mesh or changing its sibling order.
+
+Texture activation gives the first retained face using each new image a separate rendering opportunity before
+resuming its prepared batch. This separates first-use graphics resource setup from the regular face paint burst;
+it does not assert that a frame callback proves GPU completion. The existing arrival paint gate still owns readiness.
+Leaves already showing their pending image receive no style assignment. Marker atlas swaps and label offsets, search clearing, readouts and readiness
 attributes likewise publish only changed values; fixed-precision lengths are formatted as their CSSOM values.
 Prepared space-separated RGB colors compare equal to their comma-separated CSSOM serialization, without suppressing genuine color changes.
 
@@ -137,4 +148,4 @@ World body owners are retained off-document until the prepared planner requests 
 
 ### Departing surfaces
 
-A scene replacement holds the source presentation as soon as its navigation request starts. Camera transforms continue, but pending texture commits and new view-driven material demand wait. The request releases its hold on cancellation, re-resolving the latest camera view; successful replacement disposes the source with its last displayed textures intact. Overlapping holds release independently.
+A scene replacement holds the source presentation as soon as its navigation request starts. Camera transforms and visibility continue on every prepared depth partition; holding their publication leaves the source mesh frozen behind the destination. Pending texture commits and new view-driven material demand wait. The request releases its hold on cancellation, re-resolving the latest camera view; successful replacement disposes the source with its last displayed textures intact. Overlapping holds release independently.

@@ -6,7 +6,7 @@ import { dirname, relative, resolve, sep } from 'node:path';
 import { promisify } from 'node:util';
 import ts from 'typescript';
 import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/delivery';
-import { installRuntimeAssets } from '../assets/setup.mts';
+import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readPreparedObjects } from '@cssearth/objects/node';
@@ -157,7 +157,7 @@ export async function prepareTypecheck() {
   console.log(`Typecheck inputs: ${result.files} pinned files, ${result.bytes} bytes; ${result.installed} downloaded, ${result.reused} reused. No body texture banks.`);
   // `prepared/page.json` is a build output, not a tracked file: restore-object-json writes it from
   // the restored runtime. The two steps below read it, so it has to exist before they run.
-  await run(projectRoot, ['tools/assets/restore-object-json.mts', '--restored-only']);
+  await run(projectRoot, ['packages/bake/cli/restore-object-json.mts', '--restored-only']);
   await run(projectRoot, ['site/build/prepare/prepare-feature-index.mts']);
   await run(projectRoot, ['tools/prepare/cli/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: source catalogues generated.');

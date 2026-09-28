@@ -8,7 +8,7 @@ import { updateSettingsPanel, updateShellElement } from './navigation-shell-cont
 export interface NavigationContent {
   readonly id: string;
   readonly name: string;
-  apply(options?: { preserveSidebar?: boolean }): void;
+  apply(): void;
   dispose(): void;
 }
 export type NavigationContentLoader = (object: ObjectEntry, options: { signal: AbortSignal }) => Promise<NavigationContent>;
@@ -71,7 +71,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
         signal.throwIfAborted();
         return Object.freeze({
           id: object.id, name: object.name,
-          apply({ preserveSidebar = false } = {}) {
+          apply() {
             if (signal.aborted || committed) throw new Error('Object content no longer owns this transition.');
             const incomingSource = readSource();
             try {
@@ -81,10 +81,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               for (const selector of ['.object-information-panel', '.object-settings-panel']) {
                 const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
                 if (!target || !incoming) throw new Error(`Object shell content disappeared: ${selector}.`);
-                // The selection preview was imported from this same fragment and
-                // keeps its retained nodes. Only a registry-only preview, whose
-                // fragment had not arrived, is replaced by the destination card.
-                if (preserveSidebar && selector === '.object-information-panel' && !target.querySelector(':scope > [data-card-preview]')) continue;
+                // The router retires the source scene before publishing this card.
                 if (selector === '.object-settings-panel') updateSettingsPanel(target, incoming);
                 else target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
               }

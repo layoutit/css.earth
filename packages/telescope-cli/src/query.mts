@@ -481,7 +481,7 @@ const numberFlag = (args: readonly string[], flag: string): number | undefined =
 
 const shellWord = (value: string): string => /^[A-Za-z0-9_./,:@+-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
 
-export const QUERY_HELP = `Usage: node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target TARGET --wavelength MIN,MAX [options]
+export const QUERY_HELP = `Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target TARGET --wavelength MIN,MAX [options]
 
 Required for an explicit workflow verdict:
   --continuum LEFT_FROM,LEFT_TO,RIGHT_FROM,RIGHT_TO (optional band-depth inputs)

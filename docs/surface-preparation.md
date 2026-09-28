@@ -16,7 +16,7 @@ Original images, meshes and labels
 
 | Step | Implementation |
 | --- | --- |
-| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
+| Restore missing inputs; reject changed bytes | [Acquisition](../packages/bake/src/objects/acquisition/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../packages/bake/cli/restore-source-inputs.mts) |
 | Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
@@ -25,7 +25,7 @@ Original images, meshes and labels
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
 | Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
-| Record input, recipe and output identities | [Provenance bindings](../packages/bake/src/objects/provenance/provenance-recipes.ts) and [record generation](../tools/objects/provenance.mts) |
+| Record input, recipe and output identities | [Provenance bindings](../packages/bake/src/objects/provenance/provenance-recipes.ts) and [record generation](../packages/bake/src/objects/provenance/object-provenance.ts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
 [The loader](../packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts) assembles the
@@ -266,7 +266,7 @@ Regenerate the small reference fixtures with `node tests/oracles/setup.mts`, the
 The retained runner's full and `--restore` paths still name four removed per-body
 test files under `tests/objects/unit/`. They are not a working complete gate.
 Until that runner is repaired, restore the affected body's inputs with
-`node tools/assets/restore-source-inputs.mts --object=<id>` and select the existing
+`node packages/bake/cli/restore-source-inputs.mts --object=<id>` and select the existing
 FITS tests (`node tests/oracles/test-fits.mts --unit` runs the package's own tests and its
 Astropy comparisons) and the affected preparation owner's tests. Report missing
 archive inputs and source-dependent skips; do not claim a full FITS pass from
@@ -314,6 +314,33 @@ source spans 360° of longitude, to within one of its pixels, its recipe declare
 declaration, a target pixel whose footprint crosses the edge counts as missing
 and receives the gray coverage grid. That drew a one-pixel line at 180° on Io's
 8K maps. Preparation rejects the declaration for a source that does not span 360°.
+
+### Where the prepared map starts
+
+`mapLeftEdgeLongitudeDeg` in a body's `source/presentation/surface-map.json` says which east longitude the prepared map's
+left edge shows. The world frame, the status-bar longitude and the feature anchors all read it, so they agree with each
+other even when it is wrong; only the imagery disagrees. It must equal the edge the decoder wrote. The raster lane's
+photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
+
+The authored preparation measures it for every lens with native photographic sampling
+(`assertMapsStartAtSurfaceMapEdge` in `tools/objects/prepare-authored.ts`). It reads the lens's pinned source through
+its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
+edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
+declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
+the declared edge plus (centre − 180°); the check allows for that, and so must anyone who draws Gazetteer rims on a
+minimap by hand. A redraw-only run carries the published feature anchors forward, so it runs the full preparation when
+the surface map's edge differs from the one the published feature record states.
+
+On 2026-09-28 this found eight bodies drawn half a turn from their frames: Iapetus, Ganymede, Ariel, Miranda, Oberon,
+Titania, Umbriel and Triton. Each kept the 180° E edge of the retired terrestrial atlas after moving to the raster
+lane. Their surface maps now declare 0° E, and each README records the correction.
+
+![Flying to a named feature on each body before and after the correction](images/map-edge-fly-to-2026-09-28.webp)
+
+Headless Chromium on the dev server, each capture after `window.__cssEarth.ready`, "fly to" one named feature per body.
+Before, Umbriel's Wunda and Triton's Xuuch land on the no-data grid and Oberon's Hamlet and Titania's Gertrude on smeared
+edges; after, each lands on its feature. The before row's Iapetus tile already has its fix; its own before and after are in
+its [evidence note](../src/objects/iapetus/evidence/map-edge-2026-09-28.md).
 
 ![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
 
@@ -675,7 +702,7 @@ to build the tools, restore inputs and prepare the selected body. For example,
 after building the tools and restoring Arrokoth's inputs:
 
 ```sh
-node tools/objects/dist/operations.js acquire arrokoth --verify-only
+node packages/bake/cli/object-operations.mts acquire arrokoth --verify-only
 node tools/objects/dist/prepare-authored.js arrokoth --write
 node --test tests/objects/terrestrial/obj-uv-fits.test.mts
 ```

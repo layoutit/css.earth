@@ -19,7 +19,7 @@ import { parseObjectText, textBudgetErrors } from '../../site/object-text.mts';
 import type { TextFinding } from '../../site/object-text.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
 import type { InventoryAsset } from '@cssearth/objects/node';
-import { installRuntimeAssets } from '../assets/setup.mts';
+import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 
 const root = resolve(import.meta.dirname, '../..');
 const readOptional = (path: string) => readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });

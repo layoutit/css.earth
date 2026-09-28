@@ -1,4 +1,4 @@
-import { createObjectCatalogue } from './catalogue/object-catalogue.mts';
+import { createSearchClient, type SearchOutcome } from './search/search-client.mts';
 import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser/browser-types.mts';
@@ -24,9 +24,11 @@ export interface ObjectBrowserOptions {
 
 interface ShownSearch {
   query: string | null;
-  classification: string | null | undefined;
-  objects: number;
-  features: number | 'pending';
+  classification: string | null;
+  /** Overview rows matched on the page, and the objects the search found; 'pending' until its answer arrives. */
+  overviews: number;
+  objects: number | 'pending';
+  features: number;
 }
 
 interface SubjectOverride {
@@ -68,14 +70,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     windowTarget, selectNavigation: current => { void navigation?.select(current); },
   });
   const resultsPanel = requiredElement(browser, '#object-category-results');
-  const catalogue = createObjectCatalogue({ documentTarget, windowTarget, browser, resultsPanel, lifetime,
-    onLoad() {
-      presentSelection();
-      if (open) { shown.query = null; filter(false); }
-    },
-  });
+  browser.dataset.retained = '';
   information.dataset.retained = '';
-  const setEmptyHidden = (hidden: boolean) => searchPresentation.setEmptyHidden(hidden, catalogue.loaded);
   const collapseSolarSystemBranches = () => {
     if (!navigationRoot) return;
     for (const branch of navigationRoot.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) {
@@ -98,10 +94,12 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   // The search the results show: its query (null when the next filter must run again, even for the same text), its
-  // category pill, the objects it matched, and its feature rows, 'pending' while its feature search runs.
-  const shown: ShownSearch = { query: null, classification: null, objects: 0, features: 0 };
-  // "No matching results" waits until the objects and the feature search have both settled at zero.
-  const presentEmpty = () => { setEmptyHidden(!showingSearchResults || shown.objects > 0 || shown.features !== 0); };
+  // category pill, and what it found.
+  const shown: ShownSearch = { query: null, classification: null, overviews: 0, objects: 0, features: 0 };
+  // "No matching results" waits until the search has answered with nothing.
+  const presentEmpty = () => {
+    searchPresentation.setEmptyHidden(!showingSearchResults || shown.objects !== 0 || shown.overviews + shown.features > 0);
+  };
   const destinations = createDestinationBrowser({
     documentTarget,
     onSelected() { setOpen(false); search.blur(); },
@@ -109,11 +107,22 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   });
   lifetime.onDispose(() => destinations?.destroy());
   const features = createFeatureBrowser({
-    documentTarget, objectId: readObjectId(),
-    onResults(count) { shown.features = count; presentEmpty(); },
+    documentTarget,
     onSelected() { setOpen(false); search.blur(); },
   });
   lifetime.onDispose(() => features?.destroy());
+  const results = createSearchClient({ documentTarget, windowTarget, resultsPanel, lifetime,
+    readObjectId: () => documentTarget.body.dataset.objectShell || readObjectId(),
+    onResults(outcome: SearchOutcome | null) {
+      if (!showingSearchResults) return;
+      // A failed search shows its retry line, never "No matching results".
+      shown.objects = outcome?.objects ?? 'pending';
+      shown.features = features?.present(shown.query ?? '', outcome ? outcome.features : []) ?? 0;
+      if (outcome) { shown.classification = outcome.classification; markCategory(outcome.classification); }
+      presentSelection();
+      presentEmpty();
+    },
+  });
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Coalesce synchronous selection updates before notifying the scene.
@@ -129,7 +138,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       onCategoryChange(reportedCategory);
     });
   };
-  const presentSelection = () => catalogue.setSelection(presentation.present(currentSubject(), catalogue.sources));
+  const presentSelection = () => results.setSelection(presentation.present(currentSubject(), results.sources));
   const presentBrowser = () => {
     searchPresentation.present(open, showingSearchResults);
     void navigation?.setVisible(open && !showingSearchResults);
@@ -150,17 +159,19 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     presentBrowser();
     if (resetScroll) resetResultsScroll();
     if (!searching) {
-      Object.assign(shown, { query, classification: null, objects: 0, features: 0 } satisfies ShownSearch);
+      Object.assign(shown, { query, classification: null, overviews: 0, objects: 0, features: 0 } satisfies ShownSearch);
       markCategory();
       presentEmpty();
-      void features?.search('');
+      results.clear();
+      features?.present('', []);
       return;
     }
-    const result = catalogue.search(query, { illustrations: readIllustrationModels() });
-    markCategory(result.classification);
-    // The feature browser reports at once when this query starts no feature search.
-    Object.assign(shown, { query, classification: result.classification, objects: result.matches.length + visibleOverviews, features: features ? 'pending' : 0 } satisfies ShownSearch);
-    void features?.search(result.detailQuery);
+    // A pill presses at once; the answer confirms it, or presses the pill a typed category ("stars") names.
+    const pill = categoryButtons.find(button => button.dataset.searchQuery?.toLocaleLowerCase('en') === query);
+    const classification = pill?.dataset.searchClassification ?? null;
+    markCategory(classification);
+    Object.assign(shown, { query, classification, overviews: visibleOverviews, objects: 'pending', features: 0 } satisfies ShownSearch);
+    void results.search(query, readIllustrationModels());
     // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
     presentEmpty();
   };
@@ -174,11 +185,10 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         input.value = currentUrl.searchParams.get(input.name) ?? '';
         input.disabled = !input.value;
       }
-      void catalogue.ensureLoaded();
       filter();
     } else {
       presentBrowser();
-      catalogue.clearWindow();
+      results.clear();
       shown.query = null;
       markCategory();
     }
@@ -215,11 +225,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     search.value = "";
     closeKeepingFocus();
   }, { signal: events.signal });
-  // The catalogue loads on intent, before the click: a pointer over, a press on or focus in a category or the search
-  // field starts it, so the list is usually ready when it opens. Visitors who never search never load it.
-  for (const target of [...categoryButtons, search]) for (const type of ['pointerover', 'pointerdown', 'focusin'] as const) {
-    target.addEventListener(type, () => { void catalogue.ensureLoaded(); }, { signal: events.signal, once: true, passive: true });
-  }
   for (const button of categoryButtons) {
     button.addEventListener('click', event => {
       event.preventDefault();
@@ -266,12 +271,12 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         event.target instanceof windowTarget.HTMLInputElement && event.target.hasAttribute('data-information-tab')) return;
     const windowedRow = event.target instanceof windowTarget.Element
       ? event.target.closest<HTMLElement>('[data-catalogue-index]') : null;
-    if (catalogue.windowed && windowedRow && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+    if (windowedRow && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
       const current = Number(windowedRow.dataset.catalogueIndex);
       const next = current + (event.key === 'ArrowDown' ? 1 : -1);
       if (next < 0) search.focus();
-      else catalogue.focus(next);
+      else results.focus(next);
       return;
     }
     const controls = [...browser.querySelectorAll<HTMLElement>("summary, a, button")].filter(visibleControl);
@@ -349,15 +354,16 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
         searchCard.dataset.searchObject = object.id;
         documentTarget.querySelector('.object-sidebar-search-clear')?.setAttribute('href', object.route);
       }
-      destinations?.present(null); features?.refresh();
+      // Feature rows list the bound body's features first: an open search asks again for it.
+      destinations?.present(null);
+      if (open && showingSearchResults) { shown.query = null; filter(false); }
       // The shell publishes once after all incoming content owners are bound.
     },
     presentDestination(value: DestinationPresentation | null) { destinations?.present(value); },
     destroy() {
       events.abort();
       destinations?.destroy();
-      catalogue.showInlineRows();
-      setEmptyHidden(true);
+      searchPresentation.setEmptyHidden(true);
       setOpen(false);
     },
   });

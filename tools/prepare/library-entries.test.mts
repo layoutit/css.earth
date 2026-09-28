@@ -11,9 +11,15 @@ const run = (args: readonly string[]) => promisify(execFile)(process.execPath, a
     (error: { code?: number; stdout?: string; stderr?: string }) => ({ code: error.code ?? -1, output: `${error.stdout ?? ''}${error.stderr ?? ''}` }));
 const entries = (await readdir(resolve(root, 'tools/prepare/cli'))).filter(name => name.endsWith('.mts')).sort();
 
+/** Entries whose library moved out of `tools/prepare` into a `@cssearth/bake` package: they import the package
+ * directly, and the old `tools/prepare/<name>.mts` co-located library was retired with it, so neither the
+ * same-name-library nor the old-path-guard invariant below applies to them. */
+const MOVED_TO_BAKE = new Set(['prepare-provenance.mts']);
+
 test('every entry script in tools/prepare/cli calls a library of the same name', async () => {
   assert.ok(entries.length > 0);
   for (const name of entries) {
+    if (MOVED_TO_BAKE.has(name)) continue;
     const source = await readFile(resolve(root, 'tools/prepare/cli', name), 'utf8');
     assert.match(source, new RegExp(`from '\\.\\./${name.replace('.', '\\.')}'`), name);
   }
@@ -21,10 +27,20 @@ test('every entry script in tools/prepare/cli calls a library of the same name',
 
 test('a tools/prepare library run by its old path fails and names its entry script; importing it prints nothing', async () => {
   for (const name of entries) {
+    if (MOVED_TO_BAKE.has(name)) continue;
     const direct = await run([`tools/prepare/${name}`]);
     assert.notEqual(direct.code, 0, name);
     assert.match(direct.output, new RegExp(`node tools/prepare/cli/${name.replace('.', '\\.')}`), name);
     const imported = await run(['--input-type=module', '-e', `await import('./tools/prepare/${name}')`]);
     assert.deepEqual(imported, { code: 0, output: '' }, name);
+  }
+});
+
+test('an entry moved into a bake package imports that package and has no leftover tools/prepare library at its old path', async () => {
+  for (const name of MOVED_TO_BAKE) {
+    assert.ok(entries.includes(name), name);
+    const source = await readFile(resolve(root, 'tools/prepare/cli', name), 'utf8');
+    assert.match(source, /from '@cssearth\/bake\//u, name);
+    await assert.rejects(readFile(resolve(root, 'tools/prepare', name), 'utf8'), /ENOENT/u, name);
   }
 });

@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareObjectProvenance } from './provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;

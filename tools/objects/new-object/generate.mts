@@ -2,7 +2,7 @@
  * lens from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue colour and navigation
  * marker from that lens, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
- * tools/contract/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
+ * tests/contract/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -277,7 +277,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.`, '',
-    ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../tools/contract/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
+    ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../tests/contract/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
     ...limb.limbDarkening ? [`- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and ${gravity?.kind === 'bounded' ? 'a display gravity inside its class\'s published range (see Limb)' : 'gravity'}, not a measurement of this star.`] : [],

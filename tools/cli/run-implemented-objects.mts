@@ -76,7 +76,7 @@ export async function resolveObjectAssembly(
   { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {},
 ) {
   const script = await authoredObject(id, projectRoot)
-    ? resolve(projectRoot, 'tools/objects/dist/operations.js') : objectAssembleScript(id, projectRoot);
+    ? resolve(projectRoot, 'packages/bake/cli/object-operations.mts') : objectAssembleScript(id, projectRoot);
   try {
     await accessFile(script);
   } catch (cause) {
@@ -101,7 +101,7 @@ export async function resolveObjectCommand(
   const authored = await authoredObject(id, projectRoot);
   const script = authored
     ? mode === 'browser' ? resolveScript(id, projectRoot)
-      : resolve(projectRoot, 'tools/objects/dist', mode === 'prepare' ? 'prepare-authored.js' : 'operations.js')
+      : mode === 'prepare' ? resolve(projectRoot, 'tools/objects/dist/prepare-authored.js') : resolve(projectRoot, 'packages/bake/cli/object-operations.mts')
     : resolveScript(id, projectRoot);
   try {
     await accessFile(script);
@@ -323,12 +323,29 @@ async function main(mode = process.argv[2]) {
     return;
   }
 
+  // An authored body assembles through the shared operations module. Load it once and assemble in this process: a Node
+  // start per body cost the deploy build about 110 ms each, four minutes over the catalogue.
+  const runOperations = mode === "assemble" ? await loadOperations() : null;
   for (const { id } of SCENE_OBJECTS) {
+    if (runOperations && await authoredObject(id)) {
+      await runOperations(mode, id, process.argv.slice(3)).catch((cause: unknown) => {
+        throw new Error(`Implemented object ${id} failed to ${mode}.`, { cause });
+      });
+      continue;
+    }
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverObjectTests(id)]
       : [await resolveObjectCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
     await run(process.execPath, argumentsList, mode === "test" ? { ...process.env, CSSEARTH_TEST_OBJECTS: id } : undefined);
   }
+}
+
+/** `runOperations` runs an authored body's assembly, loaded as a module. */
+async function loadOperations() {
+  const specifier = "@cssearth/bake/objects/acquisition", module: unknown = await import(specifier);
+  const runOperations = typeof module === "object" && module !== null && "runOperations" in module ? module.runOperations : null;
+  if (typeof runOperations !== "function") throw new TypeError(`${specifier} exports no runOperations function; run pnpm build:packages.`);
+  return runOperations as (mode: string, id: string, argumentsList: string[]) => Promise<unknown>;
 }
 
 function objectOwnedScript(id: string, path: string, projectRoot: string) {

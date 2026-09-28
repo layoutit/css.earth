@@ -84,7 +84,7 @@ pnpm dev
 
 To work on one object, use `pnpm setup:assets --object=mars` and open `/mars/`. For a production build, run `pnpm build`, then `pnpm preview`.
 
-Re-preparing an object from its original sources needs more: `node tools/assets/restore-source-inputs.mts --object=<id>` restores missing source files, and `pnpm prepare:objects --object=<id>` bakes the selected body. Some conversions need Python or the documented native toolchains. You do not need that to work on the shell, the renderer or the docs.
+Re-preparing an object from its original sources needs more: `node packages/bake/cli/restore-source-inputs.mts --object=<id>` restores missing source files, and `pnpm prepare:objects --object=<id>` bakes the selected body. Some conversions need Python or the documented native toolchains. You do not need that to work on the shell, the renderer or the docs.
 
 ## Documentation
 

@@ -43,7 +43,7 @@ the session. Production builds require every configured volume package and
 reject missing files, invalid metadata and mismatched asset hashes.
 
 Re-preparing a body from its sources needs more: run
-`node tools/assets/restore-source-inputs.mts --object=<id>` to restore missing
+`node packages/bake/cli/restore-source-inputs.mts --object=<id>` to restore missing
 source files, then `pnpm prepare:objects --object=<id>` for the bake. Downloads
 are addressed by their source paths and origin URLs; manifests do not verify
 source digests. Some conversions need the documented Python/native toolchains.
@@ -59,7 +59,7 @@ inventory; R2 holds the bytes.
 1. Bake the object. `pnpm prepare:objects --object=<id>` for a body,
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, restore that object's sources with
-   `node tools/assets/restore-source-inputs.mts --object=<id>` first.
+   `node packages/bake/cli/restore-source-inputs.mts --object=<id>` first.
 2. Publish the bytes: `node packages/bake/cli/publish-runtime-assets.mts --object=<id>`.
    Safe to repeat — keys are content-addressed, so it uploads only what is
    missing.
@@ -114,7 +114,7 @@ A second cache, `source-cache/<object id>/<manifest path>`, mirrors downloaded
 inputs by the same path their source manifest names. Restorers try it before the
 origin URL when a file is missing. `node packages/bake/cli/publish-source-cache.mts
 --object=<id>` publishes that object's available downloads; restore them first
-with `node tools/assets/restore-source-inputs.mts --object=<id>`. To publish one
+with `node packages/bake/cli/restore-source-inputs.mts --object=<id>`. To publish one
 file, use `--file=<path> --key=<object id>/<manifest path>`. The publisher verifies
 the upload; this is not a manifest digest check during acquisition. Earlier
 hash-addressed source-cache keys may remain in R2, but current restorers use the
@@ -123,11 +123,11 @@ path keys and fall back to the source archive.
 Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
 The public asset bucket's read-only CORS policy is
-[`tools/assets/r2-cors.json`](tools/assets/r2-cors.json). It permits `GET` and
+[`packages/bake/src/asset-publication/r2-cors.json`](packages/bake/src/asset-publication/r2-cors.json). It permits `GET` and
 `HEAD` from any origin so LAN previews can read the same published JSON as
 production without adding each device address and port. It does not permit
 browser writes. A maintainer applies it with
-`npx --yes wrangler@4.129.0 r2 bucket cors set cssearth-assets --file tools/assets/r2-cors.json`
+`npx --yes wrangler@4.129.0 r2 bucket cors set cssearth-assets --file packages/bake/src/asset-publication/r2-cors.json`
 and verifies it with `npx --yes wrangler@4.129.0 r2 bucket cors list cssearth-assets`.
 
 `node packages/bake/cli/prune-runtime-assets.mts --dry-run` reports, and never deletes, the `runtime-assets/<sha256>/...` keys that are live in R2 but referenced by no current inventory. It never lists or reports on `scenes/` or `source-cache/`. It needs a separate read-only R2 API token, because `wrangler` cannot list a bucket's objects; the comment at the top of that file explains how to get and set one.

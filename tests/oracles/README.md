@@ -100,7 +100,7 @@ node tests/oracles/run.mts
 node tests/oracles/run.mts fits/llorri spice/dart-draco
 ```
 
-The inputs must be restored first (`node tools/objects/dist/operations.js acquire <id>`).
+The inputs must be restored first (`node packages/bake/cli/object-operations.mts acquire <id>`).
 `isis/photometric-truth` reads no body input; it downloads the ISIS truth files
 at the pinned commit, so it needs network access.
 

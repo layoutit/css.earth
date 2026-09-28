@@ -1,8 +1,5 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser/browser-types.mts';
-import type { ObjectEntry } from './objects.mts';
-import { requiredElement } from './browser/browser-types.mts';
-import { objectTypeLabel } from './object-classification-label.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
@@ -97,20 +94,6 @@ function createPanelController(drawer: HTMLElement, objectId: string, windowTarg
       events.abort();
     },
   });
-}
-
-/** Fill the shell's one preview card with registry facts; no object content is derived. */
-export function objectCardPreview(documentTarget: Document, object: ObjectEntry) {
-  const template = requiredElement<HTMLTemplateElement>(documentTarget, 'template[data-object-card-preview]');
-  const card = template.content.firstElementChild;
-  if (!card) throw new Error('Object card preview is empty.');
-  const preview = documentTarget.importNode(card, true);
-  const name = requiredElement(preview, '[data-card-preview-name]');
-  name.textContent = object.name;
-  name.setAttribute('aria-label', object.name);
-  requiredElement(preview, '[data-card-preview-classification]').textContent = objectTypeLabel(object);
-  requiredElement(preview, '[data-card-preview-description]').textContent = object.description;
-  return preview;
 }
 
 function restorePanelState(panels: readonly Panel[], objectId: string, windowTarget: Window) {

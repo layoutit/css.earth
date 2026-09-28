@@ -50,7 +50,7 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
     node('catalog', 'tools/prepare/cli/prepare-catalog.mts', ['packages']),
     node('solar', 'packages/bake/cli/prepare-solar-geometry.mts', ['catalog']),
     { id: 'preparation', after: ['packages', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],
-      outputs: [{ path: 'tools/objects/dist', required: ['operations.js', 'prepare-spatial-context.js'] }] },
+      outputs: [{ path: 'tools/objects/dist', required: ['prepare-authored.js', 'prepare-spatial-context.js'] }] },
   ];
   if (mode === 'full') tasks.push(
     // Hashes icon sources with @cssearth/core/node, so it waits for the packages build.

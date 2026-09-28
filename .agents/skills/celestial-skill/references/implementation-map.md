@@ -50,7 +50,7 @@ fallback requirements are not the current authored-package template.
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `packages/renderer/src/validation/` |
 | Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `packages/bake/src/delivery/publication.ts`, `tools/prepare/prepare-object-json.mts` |
-| Source acquisition, verification and runtime inventory | `tools/objects/operations-acquisition.ts`, `packages/bake/src/objects/sources/source-files.ts`, `tools/objects/operations.ts`, package source manifests and acquisition JSON |
+| Source acquisition, verification and runtime inventory | `packages/bake/src/objects/acquisition/operations-acquisition.ts`, `packages/bake/src/objects/sources/source-files.ts`, `packages/bake/src/objects/acquisition/object-operations.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `packages/renderer/src/runtime/shell-contract.ts`, `site/scene/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
@@ -424,8 +424,8 @@ purposes; run those needed for the task, not every preparation step by default.
 | --- | --- |
 | Build shared tool bundles when needed | `pnpm build:tools` |
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
-| Restore missing declared source files | `node tools/objects/dist/operations.js acquire <id>` |
-| Check declared source-file coverage without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only`; this does not verify source digests |
+| Restore missing declared source files | `node packages/bake/cli/object-operations.mts acquire <id>` |
+| Check declared source-file coverage without acquiring | `node packages/bake/cli/object-operations.mts acquire <id> --verify-only`; this does not verify source digests |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:objects -- --object=<id>` |
 | Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, then `node tests/oracles/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
@@ -451,11 +451,11 @@ purposes; run those needed for the task, not every preparation step by default.
 | Write a ground-based lens's two Horizons tables | `node packages/bake/cli/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and declared in the manifest; a table the manifest does not name yet is declared for `node tools/sources/author-source-records.mts` |
 | Measure a ground-based lens against its paper's comparison figure | `node tools/objects/published-comparison.mts <id> [--write]`: reads the figure from the pinned PDF (`packages/bake/src/sources/pdf-image.ts`), writes `evidence/published-comparison.json` and its image; a new record's zero pixel digest is adopted on the first `--write` |
 | Generate a placed star, its planets and companion stars | `pnpm telescope new-object <spec.json>` (also `node tools/objects/new-object.mts --spec <spec.json>`; format in `tools/objects/new-object/spec.mts`). SIMBAD, through the telescope's resolver, names the star and gives its Gaia DR3 source; placement from the Gaia row. Colour: the first spectrum that reads, in the order STIS NGSL, Gaia XP (the ARI Heidelberg mirror when ESA's DataLink is down), Pulkovo, Kiehling, Kharitonov, Burnashev part 2, with the next as the cross-check, else Planck at the cited temperature; coverage gaps declared. Limb: Claret & Bloemen (2011) ATLAS V, else Claret (2017) PHOENIX, else none with the reason. Orbits: a whereistheplanet posterior picked by `posterior-pick.py`, one paper's NASA Exoplanet Archive `ps` row, or cited elements. Source records are written or reused by identity. Only prose is left marked `TODO(new-object)`, then `prepare-object`. The shape-only scaffold (`node tools/objects/new-object.mts <id> --name ...`) remains for a black hole. `tools/objects/new-object/new-object.test.mts` reproduces GJ 504 b's shipped orbit from its posterior pick and checks the route choice, gaps and archive rows on fixtures |
-| Restore selected-body sources before baking | `node tools/assets/restore-source-inputs.mts --object=<id>`, then `pnpm prepare:objects --object=<id>` |
+| Restore selected-body sources before baking | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`, then `pnpm prepare:objects --object=<id>` |
 | Build the site and assemble declared runtime files | `pnpm build` |
 
 Default acquisition restores missing inputs through `source/preparation/acquisition.json`.
-`tools/assets/restore-source-inputs.mts` selects the shared acquisition route;
+`packages/bake/cli/restore-source-inputs.mts` selects the shared acquisition route;
 source-manifest coverage and path checks do not compare a stored digest.
 `pnpm setup:assets` separately installs published runtime bytes against their
 inventories. Preserve source identity and scientific interpretation without

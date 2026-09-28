@@ -10,6 +10,8 @@ import { handleSearchRequest } from '../server/search-response.mts';
 import searchRoute from '../server/search-route.mts';
 
 const origin = 'https://example.test';
+// A refused dataset request never reaches search.
+const noSearchData = { pin: null, read: async () => { throw new Error('unused'); }, catalogue: async () => [] };
 const scene = await loadPreparedSceneMarkup('saturn');
 const prepared = await readPreparedObjectBytes('saturn');
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body><!--search-shell:start-->
@@ -45,7 +47,7 @@ test('invalid requests and corrupt prepared bytes cannot publish another dataset
   for (const query of ['dataset=', 'dataset=unknown', 'dataset=normal&dataset=ultraviolet', 'dataset=..%2Fearth', 'feature=city-', 'feature=city-lima', 'feature=city-1&feature=2']) {
     await assert.rejects(renderDatasetResponse(html, new URL(`/saturn/?${query}`, origin), 'saturn', read), RangeError);
     const transport: typeof fetch = async () => new Response(html, { headers: { 'content-type': 'text/html' } });
-    assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?${query}`), transport)).status, 400);
+    assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?${query}`), noSearchData, transport)).status, 400);
   }
   const corrupt: typeof fetch = async () => new Response('{}');
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|sha256|digest|identity/i);

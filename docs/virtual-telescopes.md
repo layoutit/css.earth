@@ -288,7 +288,7 @@ source directory; it may name the science input itself for an attached-label pro
 For example:
 
 ```sh
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 
@@ -656,11 +656,11 @@ care about?* These commands require Node 22.18.x or Node 24+. When the shell's N
 newest compatible Node already installed under NVM, or `CSSEARTH_NODE`; it reports a concrete recovery only when neither exists.
 
 ```
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 3.4,3.6 --kind cube \
   --any-time --range-km 630000000 --radius-km 1560.8 --min-elements 8 --result body-map
 ```
 
-`node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
+`node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --help` prints the complete grammar. A minimum-resolution option is the largest acceptable scale, so a
 smaller `--min-arcsec` or `--min-km` asks for sharper data. For machine input, `pnpm --silent telescope:query ... --json`
 writes JSON alone; ordinary `pnpm` prints its script banner before the program's stdout.
 
@@ -681,7 +681,7 @@ the MAST collection, exact observation ids, and the source that establishes the 
 does not copy the programme, instrument, filter, time, or archive target. The query asks current MAST rows for those facts
 through the pinned Astroquery client and refuses missing, duplicate, extra, or wrong-collection results. It therefore can find
 Nix in Hubble programme 10427's two ACS/WFC F606W visits while still reporting that MAST calls those pointings `PLUTO`; it
-does not turn every Pluto exposure into a Nix observation. `node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/hst/target-associations.mts` exercises that live boundary.
+does not turn every Pluto exposure into a Nix observation. `node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/archives/hst/target-associations.mts` exercises that live boundary.
 
 MAST owns HST observation and product metadata. The checked-in HST ledger is a reproducible discovery snapshot and offline
 index, not an independent authority; it also records the cssEarth-specific layer MAST cannot know—available reducers, pinned
@@ -767,7 +767,7 @@ and Keck modes remain visible where those sourced capability facts have not been
 The query can make an explicit selection instead of silently treating the first candidate as the answer:
 
 ```
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250
 ```
@@ -801,7 +801,7 @@ source-label target names against PDS context products through Peppi; cssEarth k
 is a complete search within an explicit scope, rather than an exact-product lookup disguised as discovery:
 
 ```
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target charon --write
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target charon --write
 ```
 
 Peppi exhausts the target's `Product_Observational` records across processing levels. cssEarth verifies every returned label against the Registry,
@@ -828,7 +828,7 @@ read, along with the output plane and its body-map metadata.
 Publication performs the query and verifies the whole chain in one command:
 
 ```
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/body-map-publication.mts --target europa --wavelength 4.24,4.28 --kind cube \
   --any-time --min-arcsec 0.3 --result body-map \
   --select-telescope JWST --select-mode NIRSPEC/IFU --program europa-1250 \
   --map src/objects/europa/source/jwst/carbon-dioxide.fits.body-map.json \

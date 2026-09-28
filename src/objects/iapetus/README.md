@@ -31,13 +31,21 @@ A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted th
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
+Map edge correction (2026-09-28): that edge check was run on the retired terrestrial atlas, which kept the monochrome source's 180° E left edge. The shared raster lane samples every lens onto a 0–360° E grid, so the current atlas starts at 0° E, but `source/presentation/surface-map.json` still declared 180° E. The globe was drawn 180° from its frame: at the default camera the status bar read 305° E while the bright trailing side faced the viewer. Feature labels are anchored with the same edge, so they sat over terrain 180° from their craters. Three measurements on the prepared files agree:
+
+- Equator luminance of the prepared Enhanced color atlas in 30° columns counted from the left edge: bright from 30° to 120°, dark from 150° to 360°. With a 0° E edge this places Cassini Regio at 150–360° E, centred near 255° E.
+- The largest Gazetteer craters drawn on the prepared minimap at a 0° E edge land on their basins: Engelier (95.3° E, 40.5° S), Gerin (127° E, 45.6° S), Turgis (331.6° E, 16.9° N) and Malprimis (241.8° E, 15.2° S). At 180° E none of them does.
+- Read through its georeferenced source, the prepared Monochrome map correlates 0.82 from 0° E and 0.21 from 180° E; Enhanced color 0.96 and −0.58.
+
+The fix sets the left edge to 0° E. The texture, the rotation model and the status-bar formatting are unchanged. The body’s frame, feature anchors and arrival billboard now follow the atlas. The same source measurement found seven more bodies half a turn off (Ganymede and the Voyager moons of Uranus and Neptune); the preparation now refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)). [Before and after at the same saved camera](evidence/map-edge-2026-09-28.md).
+
 The B9 qualification report records exact source-map replay and selected package and interaction checks.
 
 The Iapetus visual review covers six serial captures of the normal, infrared and ice views at DPR 1 and 2, reviewed on 2026-09-10. Reports and images identify capture plus the then-modified source, prepared and served-file pins. The same qualification report records failed broader suites and an incomplete full build.
 
 ## Known problems
 
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Iapetus (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Turgis and Engelier rims on the Cassini/Voyager mosaic coincide with the imagery.
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Iapetus (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge is checked by drawing Gazetteer rims on the prepared minimap and keeping the edge where Turgis, Engelier, Gerin and Malprimis land on their basins (see the map edge correction above).
 
 Feature notes: 11 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 

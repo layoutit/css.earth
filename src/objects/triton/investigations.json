@@ -84,6 +84,16 @@
         "https://doi.org/10.1029/91JA01736"
       ],
       "revisitWhen": "A global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs."
+    },
+    {
+      "id": "map-left-edge-2026-09-28",
+      "subject": "Surface map left edge after the raster lane change",
+      "status": "included",
+      "finding": "The raster lane writes this map from 0° E, but surface-map.json still declared the retired atlas's 180° E left edge, so the globe, labels and status-bar longitude were half a turn from the imagery. Read through its georeferenced source, the prepared enhanced map correlates 0.96 from 0° E and 0.62 from 180° E. The declaration is now 0° E, and preparation refuses a declared edge the source contradicts.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/triton/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/surface-preparation.md#where-the-prepared-map-starts"
+      ]
     }
   ]
 }

@@ -13,7 +13,7 @@ export interface ObjectSelectionState {
 }
 export interface ObjectSelectionRuntimeOptions {
   definition: PreparedPresentationDefinition & { controls: ObjectControls };
-  presentation: Pick<ReturnType<typeof mountPreparedPresentation>, "publishFrame" | "commitSelection">;
+  presentation: Pick<ReturnType<typeof mountPreparedPresentation>, "publishCamera" | "publishFrame" | "commitSelection">;
   residency: ReturnType<typeof createPreparedResidency>; lifetime: SceneLifetime;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   prepareSelection?: (selection: ObjectSelection, signal: AbortSignal) => void | Promise<void>;
@@ -242,7 +242,12 @@ export function createObjectSelectionRuntime({
     setView(next: PreparedView) {
       if (!live()) return;
       view = next;
-      if (presentationHolds > 0) return;
+      if (presentationHolds > 0) {
+        // The material lease holds textures, not the camera. Every prepared
+        // depth partition must follow the main scene and retire when it hides.
+        presentation.publishCamera(next);
+        return;
+      }
       try {
         const plan = committed ? resolve(committed) : null;
         const prepared = plan && committedPlan && sameDemand(plan, committedPlan) && plan.required.every(key => residency.resources.has(key));

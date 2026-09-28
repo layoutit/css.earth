@@ -4,7 +4,7 @@
  *   node tools/objects/new-object.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
- *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json
+ *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
  *   node tools/objects/new-object.mts --draft-photometry <id>... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
@@ -21,7 +21,7 @@
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape lens and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
- * tools/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/cli/prepare-object.mts <id> */
+ * tests/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/cli/prepare-object.mts <id> */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { scaffoldStar, TODO } from './new-object/scaffold.mts';
@@ -46,6 +46,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { entries, notes } = await draftUltracoolPhotometry(liveArchive, planets);
     await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
+  } else if (option('phase-curve') !== undefined && !specPath) {
+    // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-lens.mts).
+    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./new-object/phase-curve-lens.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const entries = parsePhaseCurveEntries(JSON.parse(await readFile(option('phase-curve')!, 'utf8')));
+    const lines = await relensExisting(process.cwd(), [...entries.keys()], 'phase-curve', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), entries);
+    process.stdout.write(`${lines.length} lens(es) added. Bake the changed planets: node tools/prepare/cli/prepare-object.mts <id>...\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
     const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./new-object/spec.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');

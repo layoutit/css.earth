@@ -34,14 +34,3 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
   return { query, matches: ranked, classification, systemName, showAll,
     detailQuery: classification || systemName || showAll ? '' : query };
 }
-
-/** Read only the labels already published by the shared result components. */
-export function objectSearchLabels(item: HTMLElement): ObjectSearchLabels {
-  const names: unknown = JSON.parse(item.dataset.objectSearchNames ?? '[]');
-  if (!Array.isArray(names) || !names.every(name => typeof name === 'string')) throw new TypeError('Prepared object search names are invalid.');
-  return { name: item.dataset.objectName ?? '', names,
-    illustration: item.dataset.objectIllustration === 'true',
-    candidate: item.dataset.objectCandidate === 'true',
-    classification: item.dataset.objectClassification ?? '', classificationName: item.dataset.objectClassificationName ?? '',
-    systemName: item.dataset.objectSystemName ?? '' };
-}

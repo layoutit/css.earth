@@ -59,6 +59,8 @@ jobs:
         # nightly sweep keeps it.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
+          # The deploy imports the packages' JavaScript only; their type declarations were most of build:packages.
+          CSSEARTH_SKIP_DECLARATIONS: '1'
           # Default: textures and scene JSON resolve to R2, so the deploy ships no public/scenes copy.
           # This cannot be a dispatch input that defaults on, because the automatic workflow_run path has
           # no inputs at all and shares the `production-deploy` concurrency group with cancel-in-progress:

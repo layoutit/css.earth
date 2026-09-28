@@ -121,6 +121,13 @@ test('every body marker and resolved context image leaves space outside its silh
   }
 });
 
+test('every context image has its committed search preview, and no preview outlives its image', async () => {
+  const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
+  const expected = Object.entries(PREPARED_NAVIGATION_MARKERS).filter(([, marker]) => marker.context).map(([id]) => `${id}@2x.webp`).sort();
+  assert.deepEqual((await readdir(resolve(projectRoot, 'public/navigation/search'))).sort(), expected,
+    'run node packages/bake/cli/prepare-navigation.mts <id> after drawing a context image');
+});
+
 test("reproduces the checked-in body images and utility markers", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
   context.after(() => rm(root, { recursive: true, force: true }));

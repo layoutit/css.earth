@@ -14,7 +14,6 @@
       "tools/objects/source-authoring",
       "tools/sources",
       "tools/prepare",
-      "tools/assets",
       "labs/nebula(app)",
       "labs/nebula-pkg/lab",
       "site/components",
@@ -22,17 +21,15 @@
     ],
     "cycleClosingEdges": [
       {"from":"site(root)","to":"site/scene","imports":5},
-      {"from":"tools/prepare","to":"tools/objects(root)","imports":4},
       {"from":"site(root)","to":"site/navigation","imports":3},
       {"from":"site(root)","to":"site/catalogue","imports":2},
       {"from":"site/search","to":"site(root)","imports":2},
       {"from":"site/shell","to":"site/scene","imports":2},
       {"from":"tools/objects/new-object","to":"tools/objects(root)","imports":2},
+      {"from":"tools/prepare","to":"tools/objects(root)","imports":2},
       {"from":"labs/nebula-pkg/lab","to":"labs/nebula(app)","imports":1},
       {"from":"site/layouts","to":"site/components","imports":1},
-      {"from":"site/navigation","to":"site/scene","imports":1},
-      {"from":"tools/assets","to":"tools/objects(root)","imports":1},
-      {"from":"tools/assets","to":"tools/prepare","imports":1}
+      {"from":"site/navigation","to":"site/scene","imports":1}
     ]
   },
   "rules": {
@@ -67,7 +64,6 @@
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
       {"from":"packages/bake/cli/report-investigations.mts","to":"tools/prepare/prepare-catalog.mts"},
-      {"from":"packages/bake/src/density/retirement.test.ts","to":"tools/cli/bundle-renderer.mts"},
       {"from":"packages/renderer/src/navigation/camera-viewport.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/perspective-dolly.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},

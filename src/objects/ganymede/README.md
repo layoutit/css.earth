@@ -131,6 +131,8 @@ A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted th
 
 Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
+Map edge correction (2026-09-28): the raster lane's photograph decoder writes this map from 0° E, but `source/presentation/surface-map.json` declared 180° E, so the globe, its labels and the status-bar longitude were drawn half a turn from the imagery. The earlier edge check cropped the source raster, which does not show where the prepared map starts. Read through its georeferenced source, the prepared normal map correlates 0.90 from 0° E and −0.07 from 180° E. The surface map now declares 0° E and the body was rebaked; the preparation now refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)).
+
 - Six distributed point anchors, exact input hashes, and decoder failure cases are tested.
 
 - Focused checks run from the shared runners in [tests/objects/unit](../../../tests/objects/unit/runtime-package.test.mts) (runtime package and feature catalogue, scoped with `CSSEARTH_TEST_OBJECTS=ganymede`) and the shared browser conformance harness.
@@ -139,7 +141,7 @@ Composition conversion: the two withheld views consume posterior medians for `de
 
 ## Known problems
 
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ganymede (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, 180° from the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Ganymede (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, 180° from the Gazetteer origin. The map edge is measured against the georeferenced source at every preparation (see the map edge correction above).
 
 Feature notes: 68 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 

@@ -2,7 +2,7 @@
 /** Keep every body rebuildable from its sources, and keep papers and shared reference copies out of it.
  *
  * A body is prepared again from what its source manifest declares: a fresh checkout restores each missing file with
- * the acquisition step for that exact path (tools/objects/operations-acquisition.ts `restoreMissingSources`), or the
+ * the acquisition step for that exact path (packages/bake/src/objects/acquisition/operations-acquisition.ts `restoreMissingSources`), or the
  * source mirror's copy of a generated intermediate. This check fails a change that would leave a body unrestorable:
  *
  * - a declared file that is not committed, has no acquisition step for its path and is not a generated intermediate;
@@ -101,7 +101,7 @@ export async function checkBodyReferences(root = process.cwd()): Promise<Finding
   for (const [objectId, files] of committed) {
     if (!files.has('manifest.json')) continue;
     const manifest = await json(`src/objects/${objectId}/source/manifest.json`);
-    // A volume package restores through its own repository-relative manifest (tools/assets/restore-source-inputs.mts).
+    // A volume package restores through its own repository-relative manifest (packages/bake/cli/restore-source-inputs.mts).
     if (record(manifest).schema !== 'cssearth-authoritative-sources@2') continue;
     const acquisition = files.has('preparation/acquisition.json') ? await json(`src/objects/${objectId}/source/preparation/acquisition.json`) : null;
     findings.push(...bodySourceFindings(objectId, manifest, acquisition, files));

@@ -59,7 +59,7 @@ test('cache hits with missing JS, declarations, nested chunks or receipt rebuild
 test('a different exact identity or corrupted output cannot reuse compiled files', async t => {
   const f = fixture(t);
   await buildCi({ ...f, mode: 'lint', digest });
-  f.write('tools/objects/dist/operations.js', 'wrong output');
+  f.write('tools/objects/dist/prepare-authored.js', 'wrong output');
   const corrupted = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
   assert.equal(corrupted.find(result => result.id === 'preparation')?.cached, false);
   const different = await buildCi({ ...f, mode: 'lint', digest: 'b'.repeat(64), cacheHit: true });
@@ -103,7 +103,7 @@ test('a preparation hit still proves its JS entrypoints and nested files', async
   await buildCi(options);
   const warm = await buildCi({ ...options, cacheHit: true });
   assert.deepEqual(warm.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation']);
-  for (const file of ['operations.js', 'prepare-spatial-context.js', 'nested/chunk.js']) {
+  for (const file of ['prepare-authored.js', 'prepare-spatial-context.js', 'nested/chunk.js']) {
     unlinkSync(resolve(f.root, 'tools/objects/dist', file));
     const missing = await buildCi({ ...options, cacheHit: true });
     assert.equal(missing.find(result => result.id === 'preparation')?.cached, false, file);

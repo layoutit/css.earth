@@ -302,7 +302,10 @@ by hand, as Kepler-16 is: the pair's orbit comes from a paper). A companion with
 reasons, and a star's component letter is hyphenated in its id (K2-32B is `k2-32-b`; `k2-32b` is the planet). A planet's colour comes from what is measured
 (`tools/objects/new-object/planet-lenses.mts`): a dayside brightness temperature in the archive's emission table gives the "Thermal glow" lens,
 otherwise the neutral gray is lit by the host's measured colour; `telescope new-object --thermal <id>...` and `--host-light <id>...` do the
-same for planets already in the tree, then `prepare-object.mts` bakes them. Before imagery work on
+same for planets already in the tree, then `prepare-object.mts` bakes them. A paper's published phase-curve fit becomes a heat-map lens beside the
+colour lens (`tools/objects/new-object/phase-curve-lens.mts`): `phaseCurves` on a planet in a spec, or `--phase-curve entries.json` for planets in
+the tree, each entry the paper's table as `cssearth-published-phase-curve@1` plus who fitted what; the range, hottest longitude and reader text
+come from the drawn map. GJ and Gliese are one catalogue, so an article titled either way quotes. Before imagery work on
 a moon or small body, `node packages/bake/cli/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
 `--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.
