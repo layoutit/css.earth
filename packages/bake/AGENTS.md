@@ -171,12 +171,14 @@ its validators accept); the renderer never imports the bake.
     idle-timeout stream relay pinned downloads go through.
   - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,
     reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style. It imports
-    no topic. The recipe dispatcher, spectrum reader and compact spectrum stay in
-    `tools/objects/charts/`: `site/prepare-body-overview.mts` uses them, and the runtime may not import the bake.
+    no topic. The recipe dispatcher is site-owned preparation in
+    `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
+    `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
   - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
     payload), the shared lens vocabulary, lens steps and prepared legends, each lens control's billboard colour, and the legend
     labels a palette lens derives from the stretch its report states. It
-    imports no topic. The content preparer that reads factsheets and writes the payload stays in `tools/objects/content/`.
+    imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`
+    (it reads the prepared shell titles).
   - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
     vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three

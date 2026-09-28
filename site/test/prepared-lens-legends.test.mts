@@ -2,7 +2,7 @@ import {requireRecord, requireArray} from '@cssearth/core';
 import {parseObjectContentFixture} from '../../tests/objects/content/object-content-fixture.mts';
 import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mts";
-import { prepareObjectContent } from "#preparation/content/prepare";
+import { prepareObjectContent } from "../build/content/prepare.ts";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { OBJECTS } from "../objects.mts";

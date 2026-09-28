@@ -5,9 +5,9 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { inventoryText, readInventory, type InventoryAsset } from '@cssearth/objects/node';
 import { inventoryAssets } from '@cssearth/bake/delivery';
-import { installRuntimeAssets } from '../../assets/setup.mts';
+import { installRuntimeAssets } from '../assets/setup.mts';
 import { writePreparedSet, type PreparedOutput } from '@cssearth/bake/delivery';
-import { parseChartAssetRecipe, prepareChartAssets } from '../charts/charts.ts';
+import { parseChartAssetRecipe, prepareChartAssets } from '../../site/build/charts/charts.ts';
 
 /** Refresh existing charts and their intrinsic sizes without rebaking surfaces or galleries.
  * The full authored-preparation receipt is deliberately left alone: this is a partial preparation.
