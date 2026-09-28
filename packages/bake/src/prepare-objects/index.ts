@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { randomUUID } from 'node:crypto';
 import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import { basename, resolve } from "node:path";
+import { basename, dirname, resolve } from "node:path";
 import sharp from "sharp";
 import type { PreparationOptions, PreparationEvent } from '../run-implemented-objects/index.ts';
 type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
@@ -25,15 +25,17 @@ import { PREPARATION_TRACE_VARIABLE, readPreparationReceipt, readPreparationTrac
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
-const SCENE_OBJECTS = readPreparedObjects(process.cwd()).sceneObjects;
+const require = createRequire(import.meta.url);
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(require.resolve("@cssearth/bake/package.json")), "../..");
+/** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
+const SCENE_OBJECTS = () => readPreparedObjects(ROOT).sceneObjects;
 
 const sharedSteps = ["site/build/prepare/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 // This module always runs from the built, flat `dist/prepare-objects.js` (never from its nested `src/` location), so
 // the trace sits one level up, beside the other bake commands.
 const traceModule = new URL("../cli/preparation-trace.mts", import.meta.url).href;
-
-const require = createRequire(import.meta.url);
 
 // Installed packages are read from node_modules, which receipts do not fingerprint; the manifest and lockfile stand for them.
 export async function sharedPreparationFiles(_root?: string) {
@@ -64,12 +66,12 @@ export function tracedPreparationEnvironment(traceDirectory: string, environment
  * with packages/bake/cli/preparation-trace.mts, and its receipt lists exactly the files that run read and wrote.
  */
 export async function runCachedPreparationObjects({ projectRoot = process.cwd(), force = false,
-  objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
+  objectIds = SCENE_OBJECTS().map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
   runCommand = runObjectCommand, schedule = runPreparationObjects,
   environment = preparationEnvironment, sharedFiles = sharedPreparationFiles,
   onEvent = event => console.log(JSON.stringify(event)) }: CachedPreparationOptions = {}) {
   assert.ok(isArray(objectIds) && new Set(objectIds).size === objectIds.length &&
-    objectIds.every(id => SCENE_OBJECTS.some(object => object.id === id)), "Preparation requires unique IDs from SCENE_OBJECTS");
+    objectIds.every(id => SCENE_OBJECTS().some(object => object.id === id)), "Preparation requires unique IDs from SCENE_OBJECTS");
   assert.equal(typeof force, "boolean");
   const root = resolve(projectRoot), shared = await sharedFiles(root), toolchain = await environment();
   const pending: string[] = [], cached: string[] = [];
@@ -105,7 +107,7 @@ export async function runCachedPreparationObjects({ projectRoot = process.cwd(),
 }
 
 export async function prepareObjects({ projectRoot = process.cwd(), force = false,
-  objectIds = SCENE_OBJECTS.map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
+  objectIds = SCENE_OBJECTS().map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
   const root = resolve(projectRoot), lock = resolve(root, cacheRoot, "running.lock");
   await mkdir(resolve(root, cacheRoot), { recursive: true });
   try { await writeFile(lock, JSON.stringify({ pid: process.pid, started: new Date().toISOString() }) + "\n", { flag: "wx" }); }
