@@ -132,7 +132,10 @@ a later page of objects as the list scrolls (the Stars category lists about
 page never downloads the object catalogue (2.3 MB), the cross-body feature index
 (3.3 MB) or Earth's places catalogue (14.8 MB); an answer is about 1 to 30 KB.
 Rows already on screen stay until the next answer replaces them, so typing never
-blanks the list, and a failed search shows a retry line. The page waits one
+blanks the list, and a failed search shows a retry line. Before this, the page
+downloaded the whole catalogue first, and [a phone showed "Loading celestial
+objects…" for about 3 s](images/search-one-request.png) while features arrived
+separately. The page waits one
 animation frame after typing, so keystrokes that arrive faster than it draws send
 one request for the newest text; a newer request cancels the older one.
 
