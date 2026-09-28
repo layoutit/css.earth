@@ -80,7 +80,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const { number, name, figure } = setup.survey, evidence = parseComparisonEvidence(setup.evidence);
   const disagreeing = evidence.columns.filter(column => phaseAgreement(column) === 'elsewhere');
   if (disagreeing.length > 0) throw new Error(`${objectId}'s rotation and the paper's model disagree in ${disagreeing.map(column => `${column.label} (best at ${column.bestTurnDegrees}°)`).join(', ')}; nothing installed.`);
-  const today = new Date().toISOString().slice(0, 10), commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
+  const today = new Date().toISOString().slice(0, 10);
   const lensFrames = setup.cast.frames, nights = setup.cast.nights, onAdam = setup.lensMesh === 'adam', castApparitions = setup.apparitions.filter(entry => entry.cast > 0).length;
   // The mesh the lens rides, named as the Shape view's source when the release has no ADAM mesh for the body.
   const primaryPath = requireString(requireRecord(requireRecord(recipe.geometry).radialTerrain).path);
@@ -148,7 +148,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
 
   // The ledger: the decision, and the entries it answers.
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
-  const check = { date: today, commit }, listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
+  const check = { date: today }, listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
   const unused = setup.cast.released - lensFrames - leaveOut.length - setup.leftOutApparitions.reduce((sum, entry) => sum + entry.frames, 0);
   const decision = {
     id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
@@ -180,7 +180,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     if (link && !links.includes(link)) links.push(link);
     entry.evidence = links;
     const checked = requireArray(entry.checked).map(value => requireRecord(value));
-    entry.checked = checked.some(earlier => earlier.date === check.date && earlier.commit === check.commit) ? checked : [...checked, check];
+    entry.checked = checked.some(earlier => earlier.date === check.date) ? checked : [...checked, check];
   };
   close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: ${unusedWords(setup.apparitions, SURVEY_LENS_SETTINGS.levelMatching.minimumPairs)}.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
   // A lens that casts more than one apparition answers the entry that kept the other apparition's frames out on levels.

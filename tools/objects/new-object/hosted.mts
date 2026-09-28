@@ -14,7 +14,7 @@ import { citedName, isCollaboration, type Archive, type Publication } from './ar
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { quoteSource } from './prose.mts';
-import { checkedCommit, writeLedger } from './ledger.mts';
+import { writeLedger } from './ledger.mts';
 import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
@@ -208,7 +208,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...star && t ? [{ id: 'colour', subject: 'Colour', evidence: [t.url], finding: `A Planck spectrum at ${t.value} K from ${t.source}: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}.${limbSentence ? ` The disc is ${limbSentence}.` : ''}` }]
       : spec.photometry ? [{ id: 'colour', subject: 'Colour', evidence: [spec.photometry.source.url], finding: String(colorLine).replace('**Colour.** ', '') }]
       : spec.thermal ? [{ id: 'colour', subject: 'Colour', evidence: [spec.thermal.url], finding: String(colorLine).replace('**Colour.** ', '') }] : [],
-  ], checkedCommit(root));
+  ]);
   // A planet's marker is its lens drawn as a disc (the companion star's comes from its colour lens, lens.mts).
   if (!star) lensMarkerEntry(files, id);
   bindInputs(files, id);

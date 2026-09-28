@@ -41,8 +41,6 @@ interface Body {
   calibration: { method: string; diameterKm: number; uncertaintyKm: number; quantity: string; reference: string; referenceUrl: string; notes: string; visibleDescription: string; neowiseReference?: string; catalogueId: string; record?: RecordSource };
   occultation?: { file: number; name: string };
   checked?: string;
-  /** The commit that holds the ledger as checked on `checked`; required with a body's own `checked`. */
-  commit?: string;
   /** Simplification error allowance as a fraction of the radius; 0.02 unless a shape needs more to reach the face budget. */
   maximumErrorFraction: number;
   text: { card: string; cardSources: string[]; introduction: string; introductionSources: string[]; shapeSummary: string };
@@ -55,8 +53,6 @@ const only = args.find(arg => arg.startsWith('--object='))?.slice(9);
 const inputs = requireRecord(JSON.parse(await readFile(inputsPath, 'utf8')));
 /** The date the current body's sources were checked: its own `checked`, else the table's. */
 let checked = requireString(inputs.checked);
-/** The commit that holds the ledger entries checked on that date: the body's own `commit`, else the table's. */
-let commit = requireString(inputs.commit);
 const bodies = requireArray(inputs.bodies).map(value => parseBody(requireRecord(value))).filter(body => !only || body.id === only);
 if (only && !bodies.length) throw new Error(`No input for ${only}.`);
 
@@ -72,7 +68,7 @@ function parseBody(raw: Record<string, unknown>): Body {
   const record = calibration.record === undefined ? undefined : requireRecord(calibration.record);
   const optionalNumber = (value: unknown) => value === undefined ? undefined : requireFiniteNumber(value);
   const body: Body = {
-    id, name: requireString(raw.name), number: requireFiniteNumber(raw.number), checked: raw.checked === undefined ? undefined : requireString(raw.checked), commit: raw.commit === undefined ? undefined : requireString(raw.commit),
+    id, name: requireString(raw.name), number: requireFiniteNumber(raw.number), checked: raw.checked === undefined ? undefined : requireString(raw.checked),
     maximumErrorFraction: raw.maximumErrorFraction === undefined ? 0.02 : requireFiniteNumber(raw.maximumErrorFraction),
     model: { id: requireFiniteNumber(model.id), version: requireString(model.version), shapeFile: requireFiniteNumber(model.shapeFile), spinFile: optionalNumber(model.spinFile),
       lambda: requireFiniteNumber(model.lambda), beta: requireFiniteNumber(model.beta), periodHours: requireFiniteNumber(model.periodHours), yorpRadPerDay2: optionalNumber(model.yorpRadPerDay2),
@@ -532,19 +528,16 @@ function ledger(body: Body, modelUrl: string) {
   const entries: Record<string, unknown>[] = [
     { id: 'selected-shape-and-spin', subject: `DAMIT ${model.id}: selected shape and spin`, status: 'included',
       finding: `DAMIT model ${model.id}, version ${model.version}, pole (${model.lambda}°, ${model.beta}°), period ${model.periodHours} h, taken unchanged from the archive.${body.alternatives.length ? ` Mirror solution ${body.alternatives.map(a => a.id).join(', ')} recorded as an alternative.` : ''}`,
-      evidence: [modelUrl, `${DAMIT}/exports/table/asteroid_models`], checked: [{ date: checked, commit }] },
+      evidence: [modelUrl, `${DAMIT}/exports/table/asteroid_models`], checked: [{ date: checked }] },
     { id: 'selected-physical-scale', subject: 'Physical scale', status: 'included',
       finding: `${calibration.diameterKm} ± ${calibration.uncertaintyKm} km, ${calibration.quantity}. ${calibration.notes}`,
-      evidence: [calibration.referenceUrl], checked: [{ date: checked, commit }] },
+      evidence: [calibration.referenceUrl], checked: [{ date: checked }] },
     { id: 'surface-imagery', subject: 'Resolved surface imagery', status: 'unresolved',
       finding: 'No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.',
-      revisitWhen: 'A resolved image or a registered surface map of this asteroid is published.', evidence: [modelUrl], checked: [{ date: checked, commit }] },
+      revisitWhen: 'A resolved image or a registered surface map of this asteroid is published.', evidence: [modelUrl], checked: [{ date: checked }] },
   ];
   return { schema: 'cssearth-investigation-ledger@1', objectId: id, entries };
 }
 
-const tableChecked = checked, tableCommit = commit;
-for (const body of bodies) {
-  if ((body.checked === undefined) !== (body.commit === undefined)) throw new TypeError(`${body.id}: inputs give checked and commit together, so the ledger names the version it checked.`);
-  checked = body.checked ?? tableChecked; commit = body.commit ?? tableCommit; await authorBody(body);
-}
+const tableChecked = checked;
+for (const body of bodies) { checked = body.checked ?? tableChecked; await authorBody(body); }

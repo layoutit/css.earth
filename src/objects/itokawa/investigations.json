@@ -17,17 +17,14 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+          "date": "2026-09-13"
         },
         {
           "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
         },
         {
-          "date": "2026-09-14",
-          "commit": "b7e79702738ceda157502dfef311890ba8cef85c"
+          "date": "2026-09-14"
         }
       ]
     },
@@ -42,8 +39,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -58,8 +54,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+          "date": "2026-09-13"
         }
       ]
     },
@@ -74,8 +69,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-14",
-          "commit": "b7e79702738ceda157502dfef311890ba8cef85c"
+          "date": "2026-09-14"
         }
       ],
       "revisitWhen": "A source-backed photometric treatment or another connected frame set explains their overlap brightness within its qualified limits."
@@ -91,8 +85,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-14",
-          "commit": "b7e79702738ceda157502dfef311890ba8cef85c"
+          "date": "2026-09-14"
         }
       ],
       "revisitWhen": "The native single-exposure/subwindow calibration is implemented and checked against the archive, followed by model-registration and transfer checks."
@@ -109,8 +102,7 @@
       ],
       "checked": [
         {
-          "date": "2026-09-14",
-          "commit": "06011cc9dbc174e819eb05aee44f7293cd6f4d9d"
+          "date": "2026-09-14"
         }
       ],
       "revisitWhen": "Before using this SUM/UV route in a photographic lens, independently qualify the camera convention and account for the angular-versus-projective difference without fitting to oracle outputs."

@@ -58,7 +58,7 @@ export function formatInvestigationReport(report: ReturnType<typeof investigatio
     const last = entry.checked.at(-1);
     lines.push(`\n- ${entry.objectId}: ${entry.subject} [${entry.status}; ${entry.id}]`, `  finding: ${entry.finding}`);
     if (entry.revisitWhen) lines.push(`  revisit when: ${entry.revisitWhen}`);
-    if (last) lines.push(`  checked: ${last.date} at ${last.commit}${last.pr === undefined ? '' : ` (#${last.pr})`}`);
+    if (last) lines.push(`  checked: ${last.date}${last.pr === undefined ? '' : ` (#${last.pr})`}`);
     lines.push(`  evidence: ${entry.evidence.join(' ')}`);
   }
   return lines.join('\n') + '\n';

@@ -1,7 +1,6 @@
 /** A generated package's investigation ledger: every source the generator chose, as an included decision with the links it read.
  * An entry is written only when it has a link; a package whose choices name none keeps the scaffold's empty ledger, which the
  * ledger check refuses until a person records what was examined. */
-import { execFileSync } from 'node:child_process';
 import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/bake/sources';
 import { CHECKED } from './color.mts';
 import { json, type PackageFiles } from './lens.mts';
@@ -16,16 +15,11 @@ export function citedLinks(text: string) {
     .concat([...text.matchAll(ADS)].map(match => `https://ui.adsabs.harvard.edu/abs/${match[1]}/abstract`));
 }
 
-/** The commit the generator read the repository at: the version its choices were checked against. */
-export function checkedCommit(root: string) {
-  return execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
-}
-
 /** Write the ledger of the decisions that have links. */
-export function writeLedger(files: PackageFiles, id: string, decisions: readonly Decision[], commit: string) {
+export function writeLedger(files: PackageFiles, id: string, decisions: readonly Decision[]) {
   const entries = decisions.flatMap(decision => {
     const evidence = [...new Set([...decision.evidence ?? [], ...citedLinks(decision.finding)])];
-    return evidence.length ? [{ id: decision.id, subject: decision.subject, status: 'included', finding: decision.finding.replace(/\s+/gu, ' ').trim(), evidence, checked: [{ date: CHECKED, commit }] }] : [];
+    return evidence.length ? [{ id: decision.id, subject: decision.subject, status: 'included', finding: decision.finding.replace(/\s+/gu, ' ').trim(), evidence, checked: [{ date: CHECKED }] }] : [];
   });
   if (entries.length) files.set(`src/objects/${id}/investigations.json`, json({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries }));
 }

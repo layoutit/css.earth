@@ -15,7 +15,7 @@ export const INVESTIGATION_LEDGER_FILE = 'investigations.json';
 export const INVESTIGATION_STATUSES = ['included', 'excluded', 'unresolved', 'deferred'] as const;
 export type InvestigationStatus = typeof INVESTIGATION_STATUSES[number];
 
-export interface InvestigationCheck { date: string; commit: string; pr?: number }
+export interface InvestigationCheck { date: string; pr?: number }
 export interface InvestigationEntry {
   id: string; subject: string; status: InvestigationStatus; finding: string; revisitWhen?: string;
   /** The shared record this decision leans on (data/investigations), when the reasoning is not this body's own. */
@@ -29,7 +29,6 @@ export interface FacilityInvestigationLedger { schema: typeof INVESTIGATION_LEDG
 export const FACILITY_SWEEP = ['archive-access', 'data-policy', 'reduction-software'] as const;
 
 const IDENTIFIER = /^[a-z0-9][a-z0-9-]*$/;
-const COMMIT = /^[0-9a-f]{40}$/;
 const REPOSITORY = 'https://github.com/layoutit/css.earth/';
 // A repository link names the version it describes: a commit's file, tree or commit page, or a pull request.
 const PINNED_REPOSITORY_LINK = /^https:\/\/github\.com\/layoutit\/css\.earth\/(?:(?:blob|tree|commit)\/[0-9a-f]{40}|pull\/[1-9][0-9]*)(?:[/#?]|$)/;
@@ -63,11 +62,10 @@ export function evidenceLink(value: unknown, context: string) {
 }
 
 function check(value: unknown, context: string): InvestigationCheck {
-  const raw = record(value, ['date', 'commit'], ['pr'], context), commit = line(raw.commit, `${context} commit`);
-  if (!COMMIT.test(commit)) fail(context, 'expects the full 40-character commit that holds the checked version');
-  if (raw.pr === undefined) return { date: calendarDate(raw.date, `${context} date`), commit };
+  const raw = record(value, ['date'], ['pr'], context);
+  if (raw.pr === undefined) return { date: calendarDate(raw.date, `${context} date`) };
   if (typeof raw.pr !== 'number' || !Number.isSafeInteger(raw.pr) || raw.pr < 1) fail(context, 'expects a pull request number');
-  return { date: calendarDate(raw.date, `${context} date`), commit, pr: raw.pr };
+  return { date: calendarDate(raw.date, `${context} date`), pr: raw.pr };
 }
 
 /** Validate one ledger against the object package that owns it. */

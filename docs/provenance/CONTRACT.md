@@ -80,7 +80,7 @@ SOURCE summary, EVIDENCE index or body USAGE guide.
 Record every source, route, lens or frame examined for an object in its
 `investigations.json`, beside the README, including trials that failed. Each
 entry says what was examined, its status (`included`, `excluded`, `unresolved`
-or `deferred`), the finding, evidence links and the commit it was checked at.
+or `deferred`), the finding, evidence links and the date it was checked, with its pull request when there is one.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
 
@@ -117,7 +117,7 @@ Read the ledger before investigating an object, starting from the open-work inde
 ([`docs/provenance/investigation-index.md`](investigation-index.md)), which
 groups every unresolved and deferred decision by what it waits on. Refresh it
 with `node packages/bake/cli/report-investigations.mts --index --write`. CI runs `pnpm check:investigations`, which parses every
-object and facility ledger with the shared records they quote, so a ledger with no entries, a check without its commit or an
+object and facility ledger with the shared records they quote, so a ledger with no entries, a check without its date or an
 evidence path that is not a link fails there. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node packages/bake/cli/report-investigations.mts` lists every open entry across objects.
@@ -127,8 +127,8 @@ and `--search=registration`, or export with `--json`. Filters select detail rows
 summary counts cover the selected population. Counts measure recorded decisions,
 not qualified views or an exhaustive source search.
 
-When consolidating historical records, `checked` identifies the version of the
-records reviewed. Preserve source decisions and original trial dates, results
+When consolidating historical records, `checked` gives the date the records were
+reviewed. Preserve source decisions and original trial dates, results
 and evidence. Explain the migration method and extent of manual review in the PR.
 A schema or link check does not verify the finding; consolidation does not claim
 a fresh archive search or repeat qualification. After a finding changes, retain
