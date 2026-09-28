@@ -36,6 +36,12 @@ export function openingDirection(geometry: SolarGeometry, bodyId: string, { init
  * more; 0.1 separates them. */
 export const LOPSIDED_COVERAGE = 0.1;
 
+/** The least share of a body's area a default map must cover before its data has a side to face. Read back from a lossy
+ * minimap, a map with no data at all still shows 0.44% covered along the painted parallels (all 128 shape-only bodies'
+ * model maps, 2026-09-28), which averages to a strongly lopsided direction; the least-covered map with data opens Triton,
+ * at 27.6%. 1% separates them. */
+export const MINIMUM_COVERED_SHARE = 0.01;
+
 /** The body-fixed direction toward an observer stated as a sub-observer point (west-positive longitude, as archives state it). */
 export function observerPointDirection(bodyId: string, { observerWestLongitude, observerLatitude }: ObserverPoint): Vector3 {
   if (!Number.isFinite(observerWestLongitude) || !(Math.abs(observerLatitude) <= 90)) throw new TypeError(`${bodyId}: an observation frame has no sub-observer point.`);
