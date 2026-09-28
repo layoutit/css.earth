@@ -95,9 +95,12 @@ native listeners. This preserves native dispatch order and avoids rebuilding Saf
 The shell stylesheet owns touch handling and text selection on that surface. Standalone renderer mounts still clean
 up their own listeners and inline input styles.
 
-The shell also owns the minimap controller, surface reader and footer readout. Replacing a preview card binds only its
-new map nodes; arriving at that same card does not bind them a second time. Destination controls stay inert until the
-navigation readiness gate releases them. Busy status uses ARIA, without a cosmetic loading class that restyles the dataset subtree.
+The shell also owns the minimap controller, surface reader and footer readout. During a replacement flight, its
+outgoing information card keeps its nodes and detail/overview layout. The destination fragment and styles prepare
+during the flight, but the card publishes only after the old scene retires and before the new detail tree mounts.
+This avoids repainting the departing scene when WebKit removes the card's offscreen context rail. Cancellation keeps
+the original card; arrival binds the new card's maps once. Destination controls stay inert until navigation readiness
+releases them. Same-scene overview navigation keeps its existing selection behavior.
 
 A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the

@@ -614,12 +614,11 @@
   text-underline-offset: 3px;
 }
 
-/* Keep both body cards retained; zoom only changes which view is visible.
-   A registry-only selection preview has one view until its fragment arrives. */
+/* Keep both body cards retained; zoom only changes which view is visible. */
 .object-information-panel:not([data-card-subject="satellite-system"]) > [data-satellite-system],
-.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system], [data-card-preview]),
+.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]),
 .object-information-panel:not([data-card-subject="satellite-system"]):not([data-card-view="overview"]) > [data-body-overview],
-.object-information-panel:not([data-card-subject="satellite-system"])[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
+.object-information-panel:not([data-card-subject="satellite-system"])[data-card-view="overview"] > :not([data-body-overview]) {
   display: none !important;
 }
 .object-body-overview-image {

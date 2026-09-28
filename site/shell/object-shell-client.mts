@@ -9,7 +9,7 @@ import { errorMessage, requiredElement } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
-import { createSurfaceMinimap, loadSurfacePreview } from "../minimap/surface-minimap.mts";
+import { createSurfaceMinimap } from "../minimap/surface-minimap.mts";
 import { createViewReadout } from "../view-readout.mts";
 import { createSurfaceMapReader } from "../minimap/surface-map-context.mts";
 import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
@@ -18,7 +18,7 @@ import { bindNavigationIntent, navigationFragments } from '../navigation/navigat
 import { createSheetController } from './shell-sheet.mts';
 import { bindDatasetPicker } from '../dataset-picker.mts';
 import { createSettingsController } from './shell-settings.mts';
-import { mountInformationCard, createInformationTabsController, createTabsController, restoreInformationPanels, objectCardPreview } from '../information-card.mts';
+import { mountInformationCard, createTabsController } from '../information-card.mts';
 import type { ObjectShell, ShellOptions, ShellNavigationTarget, ShellNavigationTransition } from './object-shell-types.mts';
 
 export function mountObjectShell({
@@ -48,7 +48,7 @@ export function mountObjectShell({
   let surfaceReader: ReturnType<typeof createSurfaceMapReader>;
   let releaseArrivalControls = () => {};
   let navigationTransition: (ShellNavigationTransition & { cardView: 'detail' | 'overview' | null;
-    cardSubject: 'body' | 'satellite-system' | null }) | null = null;
+    cardSubject: 'body' | 'satellite-system' | null; retainsSourceCard: boolean }) | null = null;
   let camera: ShellCamera | null = null;
   let unsubscribeCamera: (() => void) | null = null;
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
@@ -83,7 +83,7 @@ export function mountObjectShell({
   drawer.ownerDocument.addEventListener('objectmotionchange', motionChanged, { capture: true });
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
   function updateBodyCard(world = camera?.navigation?.capture()) {
-    if (coasting) return;
+    if (coasting || navigationTransition?.retainsSourceCard) return;
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
     const subject = navigationTransition?.cardSubject ?? (readSelection().kind === 'satellite-system' ? 'satellite-system' : 'body');
     const previous = information?.dataset.cardView;
@@ -181,16 +181,16 @@ export function mountObjectShell({
   function beginNavigation(target: ShellNavigationTarget): ShellNavigationTransition | null {
     if (lifetime.disposed) return null;
     navigationTransition?.dispose();
-    const previewLifetime = createSceneLifetime();
     let arrived = false;
     let restoreBrowser = () => {};
-    let settleCard = (_keep: boolean) => {};
     const settlePreview = (keep: boolean) => {
-      previewLifetime.destroy();
-      settleCard(keep);
       if (!keep) restoreBrowser();
     };
+    const retainsSourceCard = target.kind !== 'overview' && target.object.id !== objectId;
     const transition: NonNullable<typeof navigationTransition> = {
+      // Removing the offscreen context rail repaints the resident 3D surface in
+      // WebKit. Publish the prepared card only after the router retires that scene.
+      retainsSourceCard,
       // Classify the endpoint once; intermediate flight poses must not toggle
       // the destination's retained overview/detail card.
       cardView: target.kind === 'satellite-system' ? 'overview' : target.kind === 'object' ? (target.targetWorldCamera
@@ -199,12 +199,18 @@ export function mountObjectShell({
       cardSubject: target.kind === 'overview' ? null : target.kind === 'satellite-system' ? 'satellite-system' : 'body',
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;
-        const preserveSidebar = content !== undefined && target.kind !== 'overview' && target.object.id === content.id;
-        const keep = content ? preserveSidebar : (subject.kind === 'overview') === (target.kind === 'overview');
-        // Invalidate pending fragment callbacks before committing or restoring DOM.
+        const keep = content ? target.kind !== 'overview' && target.object.id === content.id
+          : (subject.kind === 'overview') === (target.kind === 'overview');
         arrived = true;
+        transition.retainsSourceCard = false;
         settlePreview(keep);
-        if (content) setObject(content, { preserveSidebar });
+        if (content) {
+          setObject(content);
+          const controls = [...drawer.querySelectorAll<HTMLElement>('.object-information-panel .object-card-tabs, .object-information-panel [data-information-panel]')]
+            .filter(node => node.dataset.informationGroup !== 'overview').map(node => [node, node.inert] as const);
+          for (const [node] of controls) node.inert = true;
+          releaseArrivalControls = () => { for (const [node, inert] of controls) if (node.inert !== inert) node.inert = inert; };
+        }
       },
       dispose() {
         if (navigationTransition !== transition) return;
@@ -219,52 +225,9 @@ export function mountObjectShell({
         if (target.preview) restoreBrowser = objectBrowser.previewSelection({ kind: 'overview', overview: target.overview });
       } else {
         const object = target.object;
-        sheet.showSelection();
+        if (!retainsSourceCard) sheet.showSelection();
         restoreBrowser = objectBrowser.previewSelection(target.kind === 'satellite-system'
           ? { kind: 'satellite-system', hostId: object.id } : { kind: 'object', objectId: object.id });
-        if (object.id !== objectId) {
-          const panel = requiredElement(drawer, '.object-information-panel');
-          const previous = [...panel.childNodes], previousBusy = panel.ariaBusy;
-          let pendingControls: (readonly [HTMLElement, boolean])[] = [];
-          settleCard = keep => {
-            if (keep) releaseArrivalControls = () => {
-              for (const [node, inert] of pendingControls) if (node.inert !== inert) node.inert = inert;
-              pendingControls = [];
-            };
-            else { panel.replaceChildren(...previous); bindCardMaps(); }
-            panel.ariaBusy = previousBusy;
-          };
-          const showCard = (card: Element) => {
-            panel.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
-            restoreInformationPanels(panel, object.id, windowTarget);
-            for (const map of panel.querySelectorAll<HTMLElement>('.object-surface-minimap')) {
-              if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
-            }
-            // Detail controls wait for their renderer; navigation stays usable
-            // so another destination can supersede this request.
-            pendingControls = [...panel.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]')]
-              .filter(node => node.dataset.informationGroup !== 'overview')
-              .map(node => [node, node.inert] as const);
-            for (const [node] of pendingControls) node.inert = true;
-            createInformationTabsController(drawer, previewLifetime, 'overview');
-            bindCardMaps();
-          };
-          const cached = fragments.peek(object.id);
-          const card = cached?.document.querySelector('.object-information-panel');
-          if (cached && card) {
-            try { showCard(card); } finally { cached.release(); }
-          } else {
-            cached?.release();
-            panel.replaceChildren(objectCardPreview(documentTarget, object));
-            fragments.get(object.id).then(fragment => {
-              try {
-                const card = fragment.document.querySelector('.object-information-panel');
-                if (card && navigationTransition === transition && !arrived) { showCard(card); updateBodyCard(); }
-              } finally { fragment.release(); }
-            }, () => {});
-          }
-          panel.ariaBusy = 'true';
-        }
         updateBodyCard();
       }
       return transition;
@@ -274,10 +237,10 @@ export function mountObjectShell({
     }
   }
 
-  function setObject(content: NavigationContent, { preserveSidebar = false } = {}) {
+  function setObject(content: NavigationContent) {
     if (lifetime.disposed) return;
     disposeContent();
-    content.apply({ preserveSidebar });
+    content.apply();
     objectId = content.id;
     presentedSubject = null;
     objectBrowser.bindObject(content.id);
