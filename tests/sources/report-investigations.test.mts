@@ -4,8 +4,8 @@ const test = sourceTest();
 import { INVESTIGATION_LEDGER_SCHEMA, investigationOptions, investigationReport, formatInvestigationReport, type InvestigationLedger } from '@cssearth/bake/sources';
 
 const ledger = (objectId: string): InvestigationLedger => ({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries: [
-  { id: 'mesh', subject: 'Selected mesh', status: 'included', finding: 'Source geometry is in use; optical terrain remains unknown.', evidence: ['https://example.org/mesh'], checked: [{ date: '2026-09-13', commit: 'a'.repeat(40) }] },
-  { id: 'photography', subject: 'Camera registration', status: 'unresolved', finding: 'Withheld terrain features fail registration.', revisitWhen: 'Released registered camera controls.', evidence: ['https://example.org/camera'], checked: [{ date: '2026-09-13', commit: 'b'.repeat(40) }] },
+  { id: 'mesh', subject: 'Selected mesh', status: 'included', finding: 'Source geometry is in use; optical terrain remains unknown.', evidence: ['https://example.org/mesh'], checked: [{ date: '2026-09-13' }] },
+  { id: 'photography', subject: 'Camera registration', status: 'unresolved', finding: 'Withheld terrain features fail registration.', revisitWhen: 'Released registered camera controls.', evidence: ['https://example.org/camera'], checked: [{ date: '2026-09-13' }] },
 ] });
 const objects = [{ id: 'with-ledger', classification: 'asteroid' }, { id: 'missing-ledger', classification: 'asteroid' }, { id: 'moon', classification: 'moon' }];
 
