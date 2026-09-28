@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-22 b transits Kepler-22 every 290 days and is 2.1 Earth radii across. Orbit and size follow Bonomo et al. 2023's fit, the archive's default. This account was drafted from Bonomo et al. 2023's values; the sections below are the data's own.
+Kepler-22 b transits Kepler-22 every 290 days and is 2.1 times as wide as Earth. Orbit and size follow Bonomo et al. 2023's fit, the archive's default. This account was drafted from Bonomo et al. 2023's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.18734977 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 13,394 km at 71,492 km per Jupiter radius. No mass is measured: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) gives only an upper limit of 0.0286318 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.
 

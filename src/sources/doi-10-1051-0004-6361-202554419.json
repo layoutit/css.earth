@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202554419",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zúñiga-Fernández et al. (2025): Two warm Earth-sized exoplanets and an Earth-sized candidate in the M5V-M6V binary system TOI-2267",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2508.14176"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202554419"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...702A..85Z"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202554419",
+      "label": "Astronomy & Astrophysics 702 A85"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zúñiga-Fernández et al. (2025), Astronomy & Astrophysics 702 A85",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 702 A85",
+  "creators": [
+    "S. Zúñiga-Fernández",
+    "F. J. Pozuelos",
+    "M. Dévora-Pajares",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

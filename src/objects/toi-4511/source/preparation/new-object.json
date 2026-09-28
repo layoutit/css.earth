@@ -1,0 +1,32 @@
+{
+  "id": "toi-4511",
+  "name": "TOI-4511",
+  "system": "TOI-4511 system",
+  "description": "Star of 5,419 K, 122 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4511",
+  "gaia": "30392773430255360",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 1.00145,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-4511 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5418.77,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-4511 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4511 is a star of 5,419 K, 122 parsecs away, with 1 known transiting planet.",
+    "introduction": "TOI-4511 is a star of 5,419 K 122 parsecs away. Its planet TOI-4511 b crosses it, which is how it was found and sized.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5418.77, st_rad 1.00145"
+  },
+  "notes": [],
+  "order": 2988
+}

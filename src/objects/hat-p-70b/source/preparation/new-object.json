@@ -1,0 +1,24 @@
+{
+  "host": "hat-p-70",
+  "planets": [
+    {
+      "id": "hat-p-70b",
+      "name": "HAT-P-70 b",
+      "description": "Transiting planet of HAT-P-70 with a 2.74-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract",
+        "credit": "Zhou et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ZHOU_ET_AL__2019"
+      },
+      "text": {
+        "card": "HAT-P-70 b crosses its star every 2.74 days and is 1.9 times as wide as Jupiter, found in 2019.",
+        "introduction": "HAT-P-70 b transits HAT-P-70 every 2.74 days and is 1.9 times as wide as Jupiter. Orbit and size follow Zhou et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHOU_ET_AL__2019): pl_orbper 2.74432452, pl_radj 1.87, pl_bmassj 6.78"
+      },
+      "order": 2997
+    }
+  ]
+}

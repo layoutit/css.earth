@@ -1,0 +1,44 @@
+{
+  "id": "wikipedia-hd-3167",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Wikipedia article: HD 3167",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://en.wikipedia.org/wiki/HD_3167"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://en.wikipedia.org/wiki/HD_3167",
+      "label": "Wikipedia, HD 3167"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://en.wikipedia.org/wiki/HD_3167",
+      "checkedOn": "2026-09-28",
+      "locator": "Lead section, as the REST summary API serves it; the quotes name the revision"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wikipedia contributors, \"HD 3167\", Wikipedia, The Free Encyclopedia",
+      "scope": "citation",
+      "evidence": "https://en.wikipedia.org/wiki/HD_3167"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution",
+      "scope": "Quoted text",
+      "evidence": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ],
+  "creators": [
+    "Wikipedia contributors"
+  ]
+}

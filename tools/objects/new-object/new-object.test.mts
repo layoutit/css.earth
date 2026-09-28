@@ -346,6 +346,9 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.equal(held.spec.host, 'hd-1b-host');
   assert.deepEqual((held.spec.planets as { id: string }[]).map(planet => planet.id), ['hd-1b-host-b', 'hd-1b-host-c']);
   assert.match(planets[0]!.text.card, /^HD 1 b crosses its star every 3 days/u);
+  // A radius ratio is a width ratio, with two figures kept; the host needs no article chosen by its temperature.
+  assert.match(planets[0]!.text.card, /^HD 1 b crosses its star every 3 days and is (as wide as|\d(\.\d)? times as wide as|\d\d times as wide as) (Earth|Jupiter)/u);
+  assert.match((spec.text as { card: string }).card, /^HD 1 is a star of 5,000 K(, [\d.]+ parsecs away,)? with 2 known transiting planets\.$/u);
   const filled = await archiveSpec({ ...archive, async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? gapped : archive.text(url); } }, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
   const temperature = filled.spec.temperature as { value: number; uncertainty: number; source: string };
   assert.deepEqual([temperature.value, temperature.uncertainty], [5010, 40], 'from the other row, with its own uncertainty');

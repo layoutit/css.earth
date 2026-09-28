@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2267",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 571488283984760960: position at J2016.0. Distance: Gaia DR3 parallax 44.3496 +/- 0.3556 mas (same row, RUWE 13.71): 22.55 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published. Proper motion: Gaia DR3 (same row): 182.388, -213.503 mas/yr. Radial velocity from No catalogued radial velocity: Gaia DR3 measures none for source 571488283984760960 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 7,000 of its distance per century.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%20571488283984760960"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.2075 +/- 0.0225 solar radii from Zúñiga-Fernández et al. 2025, the stellar radius of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract). Mass 0.171 +/- 0.0079 solar masses from Zúñiga-Fernández et al. 2025, the stellar mass of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract). Temperature 3030 +/- 100 K from Zúñiga-Fernández et al. 2025, the stellar temperature of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 571488283984760960, through the CIE 1931 2-degree observer: #ffd486. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=571488283984760960&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    }
+  ]
+}

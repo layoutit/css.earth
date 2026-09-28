@@ -2,7 +2,7 @@
 
 ## Sources
 
-GJ 143 b transits GJ 143 every 35.6 days and is 2.6 Earth radii across. Orbit and size follow Dragomir et al. 2019's fit, the archive's default. This account was drafted from Dragomir et al. 2019's values; the sections below are the data's own.
+GJ 143 b transits GJ 143 every 35.6 days and is 2.6 times as wide as Earth. Orbit and size follow Dragomir et al. 2019's fit, the archive's default. This account was drafted from Dragomir et al. 2019's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.2328486 Jupiter radii from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract): 16,646.8 km at 71,492 km per Jupiter radius. GM from the mass 0.07142183 Jupiter masses (Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

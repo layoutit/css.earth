@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4511b",
+  "card": {
+    "text": "TOI-4511 b crosses its star every 11 days and is 2.8 times as wide as Earth, found in 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag512",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "label": "Lafarga et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): pl_orbper 10.98090968596, pl_radj 0.24561103, pl_bmassj 0.0252"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-4511 b transits TOI-4511 every 11 days and is 2.8 times as wide as Earth. Orbit and size follow Lafarga et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag512",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "label": "Lafarga et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): pl_orbper 10.98090968596, pl_radj 0.24561103, pl_bmassj 0.0252"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

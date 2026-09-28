@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-3167c",
+  "card": {
+    "text": "HD 3167 c crosses its star every 29.8 days and is 3.0 times as wide as Earth, found in 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+        "label": "Coy et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987"
+      },
+      {
+        "catalogueId": "wikipedia-hd-3167",
+        "url": "https://en.wikipedia.org/wiki/HD_3167",
+        "label": "Wikipedia, \"HD 3167\"",
+        "checked": "2026-09-28",
+        "locator": "Lead section, revision 1375293503",
+        "quote": "The distance to HD 3167 can be determined from its annual parallax shift of 21.1363 mas as measured by the Gaia space observatory, yielding a range of 154 light years."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 3167 c transits HD 3167 every 29.8 days and is 3.0 times as wide as Earth. Orbit and size follow Coy et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+        "label": "Coy et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987"
+      },
+      {
+        "catalogueId": "wikipedia-hd-3167",
+        "url": "https://en.wikipedia.org/wiki/HD_3167",
+        "label": "Wikipedia, \"HD 3167\"",
+        "checked": "2026-09-28",
+        "locator": "Lead section, revision 1375293503",
+        "quote": "It has a relatively high proper motion, traversing the celestial sphere at the rate of 0.204″ per year."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-7b",
   "card": {
-    "text": "Kepler-7 b crosses its star every 4.89 days and is 1.6 Jupiter radii across, found in 2009.",
+    "text": "Kepler-7 b crosses its star every 4.89 days and is 1.6 times as wide as Jupiter, found in 2009.",
     "sources": [
       {
         "catalogueId": "doi-10-1088-0004-637x-804-2-150",
@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "Kepler-7 b transits Kepler-7 every 4.89 days and is 1.6 Jupiter radii across. Orbit and size follow Esteves et al. 2015's fit, the archive's default.",
+    "text": "Kepler-7 b transits Kepler-7 every 4.89 days and is 1.6 times as wide as Jupiter. Orbit and size follow Esteves et al. 2015's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-1088-0004-637x-804-2-150",

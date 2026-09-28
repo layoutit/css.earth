@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-6008",
+  "displayName": "TOI-6008",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.24 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202349127",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B",
+          "label": "Barkaoui et al. (2024), Astronomy & Astrophysics 687 A264",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "23.0 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-6008",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc itself is unresolved.",
+        "thumbnail": "toi-6008-lens-color.webp",
+        "surface": "toi-6008-surface-color@2x.webp",
+        "poles": "toi-6008-poles-color@2x.webp",
+        "source": {
+          "id": "toi-6008-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2168280502430898944&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. No limb darkening is drawn: at 3,075 K and log g 5.03 no model grid used here reaches it (Claret & Bloemen (2011), A&A 529, A75 (ATLAS): 3075 is outside the grid 3500, 3750, 4000.; Reeve & Howarth (2016), MNRAS 456, 1294 (non-LTE TLUSTY): 3075 is outside the grid 27500, 30000, 32500, 35000, 37500, 40000, 42500, 45000, 47500, 50000, 52500, 55000.; Claret (2017), A&A 600, A30 (PHOENIX): The grid must hold exactly one node at 3000 K, log g 5.). The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Barkaoui et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+      "credit": "Barkaoui et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-6008.json",
+      "credit": "Barkaoui et al. 2024, the stellar radius of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

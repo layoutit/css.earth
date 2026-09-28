@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-1024",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-1024",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 542646
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-1024-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-1024",
+      "classification": "star",
+      "color": "#ffe8d5",
+      "distanceAu": 217591959.8,
+      "description": "Kepler-1024 is a star of 5,143 K, 1090 parsecs away, with 1 known transiting planet.",
+      "systemName": "Kepler-1024 system",
+      "order": 2992,
+      "context": {
+        "order": 2989
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9555626118328578000,
+        -23709320148653590000,
+        20153036505801650000
+      ],
+      "presentationToReference": [
+        0.29355590936466797,
+        0.23143437841990175,
+        -0.9275036692986592,
+        -0.7283678694068718,
+        -0.5742327954568384,
+        -0.3738140492778719,
+        0.6191164469570948,
+        -0.7852991946431745,
+        6.534014004160063e-8
+      ],
+      "orbitUpReference": [
+        -0.23143437841990175,
+        0.5742327954568384,
+        0.7852991946431745
+      ],
+      "metersPerUnit": 1750470.9677419355,
+      "bodyRadiusM": 542646000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

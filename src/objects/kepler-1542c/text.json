@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-1542c",
+  "card": {
+    "text": "Kepler-1542 c crosses its star every 2.89 days and is 0.65 times as wide as Earth, found in 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+        "label": "Morton et al. 2016",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 2.89223021, pl_radj 0.05798912, pl_bmassj 0.000653"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-1542 c transits Kepler-1542 every 2.89 days and is 0.65 times as wide as Earth. Orbit and size follow Morton et al. 2016's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+        "label": "Morton et al. 2016",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 2.89223021, pl_radj 0.05798912, pl_bmassj 0.000653"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

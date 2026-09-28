@@ -4,7 +4,7 @@
 
 ## Sources
 
-WASP-12 b transits WASP-12 every 1.09 days and is 2 Jupiter radii across. Orbit and size follow Leonardi et al. 2024's fit, the archive's default. This account was drafted from Leonardi et al. 2024's values; the sections below are the data's own.
+WASP-12 b transits WASP-12 every 1.09 days and is 2.0 times as wide as Jupiter. Orbit and size follow Leonardi et al. 2024's fit, the archive's default. This account was drafted from Leonardi et al. 2024's values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.965 Jupiter radii from Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract): 140,481.8 km at 71,492 km per Jupiter radius. GM from the mass 1.47 Jupiter masses (Collins et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...78C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

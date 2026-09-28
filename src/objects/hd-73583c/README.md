@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 73583 c transits HD 73583 every 18.9 days and is 2.4 Earth radii across. Orbit and size follow Barrag&aacute;n et al. 2022's fit, the archive's default. This account was drafted from Barrag&aacute;n et al. 2022's values; the sections below are the data's own.
+HD 73583 c transits HD 73583 every 18.9 days and is 2.4 times as wide as Earth. Orbit and size follow Barrag&aacute;n et al. 2022's fit, the archive's default. This account was drafted from Barrag&aacute;n et al. 2022's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.21322189 Jupiter radii from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract): 15,243.7 km at 71,492 km per Jupiter radius. GM from the mass 0.03051961 Jupiter masses (Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

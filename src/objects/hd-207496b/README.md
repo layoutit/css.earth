@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 207496 b transits HD 207496 every 6.44 days and is 2.3 Earth radii across. Orbit and size follow Barros et al. 2023's fit, the archive's default. This account was drafted from Barros et al. 2023's values; the sections below are the data's own.
+HD 207496 b transits HD 207496 every 6.44 days and is 2.3 times as wide as Earth. Orbit and size follow Barros et al. 2023's fit, the archive's default. This account was drafted from Barros et al. 2023's values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.2007319 Jupiter radii from Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract): 14,350.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01919275 Jupiter masses (Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 

@@ -1,0 +1,24 @@
+{
+  "host": "toi-2092",
+  "planets": [
+    {
+      "id": "toi-2092b",
+      "name": "TOI-2092 b",
+      "description": "Transiting planet of TOI-2092 with a 4.3-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "credit": "Lafarga et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LAFARGA_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-2092 b crosses its star every 4.3 days and is 3.0 times as wide as Earth, found in 2026.",
+        "introduction": "TOI-2092 b transits TOI-2092 every 4.3 days and is 3.0 times as wide as Earth. Orbit and size follow Lafarga et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): pl_orbper 4.30325528074, pl_radj 0.26308633, pl_bmassj 0.0283"
+      },
+      "order": 2987
+    }
+  ]
+}

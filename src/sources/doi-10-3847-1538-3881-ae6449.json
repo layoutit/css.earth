@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-3881-ae6449",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Guenther et al. (2026): The Discovery of Five Hot Jupiters by TESS*",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae6449"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026AJ....172...54G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G",
+      "checkedOn": "2026-09-28",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Guenther et al. (2026), The Astronomical Journal 172 54",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 172 54",
+  "creators": [
+    "Eike W. Guenther",
+    "William D. Cochran",
+    "Phillip J. MacQueen",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

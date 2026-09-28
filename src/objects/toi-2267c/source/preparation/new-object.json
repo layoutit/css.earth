@@ -1,0 +1,24 @@
+{
+  "host": "toi-2267",
+  "planets": [
+    {
+      "id": "toi-2267c",
+      "name": "TOI-2267 c",
+      "description": "Transiting planet of TOI-2267 A with a 3.5-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract",
+        "credit": "Zúñiga-Fernández et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ZUNIGA_FERNANDEZ_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-2267 c crosses its star every 3.5 days and is 1.1 times as wide as Earth, found in 2025.",
+        "introduction": "TOI-2267 c transits TOI-2267 A every 3.5 days and is 1.1 times as wide as Earth. Orbit and size follow Zúñiga-Fernández et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZUNIGA_FERNANDEZ_ET_AL_2025): pl_orbper 3.4950412, pl_radj 0.10170416, pl_bmassj 0.00489"
+      },
+      "order": 2970
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1899b",
+  "card": {
+    "text": "TOI-1899 b crosses its star every 29.1 days and is 0.99 times as wide as Jupiter, found in 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ace1ef",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract",
+        "label": "Lin et al. 2023",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIN_ET_AL__2023): pl_orbper 29.090312, pl_radj 0.99, pl_bmassj 0.67"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-1899 b transits TOI-1899 every 29.1 days and is 0.99 times as wide as Jupiter. Orbit and size follow Lin et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ace1ef",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract",
+        "label": "Lin et al. 2023",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIN_ET_AL__2023): pl_orbper 29.090312, pl_radj 0.99, pl_bmassj 0.67"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

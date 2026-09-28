@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4357-ac4399",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Valizadegan et al. (2022): ExoMiner: A Highly Accurate and Explainable Deep Learning Classifier That Validates 301 New Exoplanets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2111.10009"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ac4399"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJ...926..120V"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...926..120V",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ac4399",
+      "label": "The Astrophysical Journal 926 120"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...926..120V",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Valizadegan et al. (2022), The Astrophysical Journal 926 120",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJ...926..120V"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 926 120",
+  "creators": [
+    "Hamed Valizadegan",
+    "Miguel J. S. Martinho",
+    "Laurent S. Wilkens",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

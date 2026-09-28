@@ -78,7 +78,9 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     try { assembled = measured ? assembleMeasuredOrbit(planetRows, composite, archiveRadius, all.find(entry => entry.rad !== undefined)?.rad ?? 1) : assembleArchiveOrbit(planetRows, undefined, composite); }
     catch (error) { return { skip: `${(error as Error).message.replace(/\.$/u, '')}${measured ? ` (found by ${method})` : ''}`, note }; }
     const period = assembled.orbit.periodDays, year = row.year ? `, found in ${row.year}` : '', radius = assembled.radius.value, mass = assembled.mass.value;
-    const size = radius >= 0.3 ? `${short(radius)} Jupiter radii` : `${short(radius * 71492 / 6371)} Earth radii`, modelSize = assembled.radius.row.reference === 'CALCULATED_VALUE';
+    // A ratio of radii is a ratio of widths; two figures kept as printed (1.0, not 1).
+    const [ratio, body] = radius >= 0.3 ? [radius, 'Jupiter'] : [radius * 71492 / 6371, 'Earth'], figures = ratio.toPrecision(2);
+    const size = figures === '1.0' ? `as wide as ${body}` : `${figures} times as wide as ${body}`, modelSize = assembled.radius.row.reference === 'CALCULATED_VALUE';
     const defaultRow = assembled.row ?? planetRows.find(entry => entry.isDefault)!;
     // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-lenses.mts).
     if (!thermal) note.push(`${name}: no measured dayside brightness temperature in the archive's emission table; its gray takes the host's light`);
@@ -91,13 +93,13 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     const text = measured ? {
       card: fit(110, `${name} orbits its star every ${span}. It was found by ${method}${when} and does not cross the star.`,
         `${name} orbits its star every ${span}. It was found by ${method}${when}.`, `${name} orbits its star every ${span}.`),
-      introduction: fit(180, `${name} was found by ${method}. Its orbit, tilt included, follows ${defaultRow.label}'s fit; ${modelSize ? `its size is the archive's model from its mass, ${size}` : `it is ${size} across`}.`,
-        `${name}: a ${span} orbit from ${defaultRow.label}; ${modelSize ? 'its size is a model from its mass' : `${size} across`}.`),
+      introduction: fit(180, `${name} was found by ${method}. Its orbit, tilt included, follows ${defaultRow.label}'s fit; ${modelSize ? `its size is the archive's model from its mass, ${size}` : `it is ${size}`}.`,
+        `${name}: a ${span} orbit from ${defaultRow.label}; ${modelSize ? 'its size is a model from its mass' : size}.`),
       locator: `NASA Exoplanet Archive ps table (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_orbincl ${assembled.orbit.inclinationDegrees}, pl_orbtper ${defaultRow.periastronTime}; ${modelSize ? `pscomppars calculated pl_radj ${radius}` : `pl_radj ${radius}`}, ${massText}`,
     } : {
-      card: `${name} crosses its star every ${short(period, 3)} days and is ${size} across${year}.`,
-      introduction: fit(180, `${name} transits ${hostname} every ${short(period, 3)} days and is ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`,
-        `${name}: a ${short(period, 3)}-day orbit, ${size} across. Orbit and size follow ${row.label}'s fit, the archive's default.`),
+      card: `${name} crosses its star every ${short(period, 3)} days and is ${size}${year}.`,
+      introduction: fit(180, `${name} transits ${hostname} every ${short(period, 3)} days and is ${size}. Orbit and size follow ${row.label}'s fit, the archive's default.`,
+        `${name}: a ${short(period, 3)}-day orbit, ${size}. Orbit and size follow ${row.label}'s fit, the archive's default.`),
       locator: `NASA Exoplanet Archive ps table, default parameter set (pl_refname ${defaultRow.reference}): pl_orbper ${period}, pl_radj ${radius}, ${massText}`,
     };
     return { note, found: { period, planet: row.planet, transits: !measured, entry: { id, name, ...(thermal ? { thermal } : {}),
@@ -123,19 +125,20 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   const kelvin = teff?.value ?? Number(tic!.Teff), temperature = teff ? undefined : { value: kelvin, ...(Number(tic!.s_Teff) > 0 ? { uncertainty: Number(tic!.s_Teff) } : {}), source: `${TIC.credit}, the effective temperature of TIC ${tic!.TIC} (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one`, url: TIC.url };
   const from = (row: StarRow) => row === star ? `the default parameter set of ${row.planet}` : `${row.planet}'s parameter set from ${row.label} (the default leaves it empty)`;
   const cited = (picked: ReturnType<typeof pick>, key: string) => picked === undefined ? 'gaia-flame' as const : { value: picked.value, ...(picked.err ? { uncertainty: picked.err } : {}), source: `${picked.row.label}, the stellar ${key} of ${from(picked.row)} in the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
-  const n = planets.length, dist = star.dist === undefined ? '' : ` ${short(star.dist, 3)} parsecs away`, allTransit = sorted.every(item => item.transits);
+  // "a star of 8,450 K" needs no article chosen by the number; the distance is set off by commas mid-sentence.
+  const n = planets.length, dist = star.dist === undefined ? '' : `, ${short(star.dist, 3)} parsecs away`, mid = dist ? `${dist},` : '', allTransit = sorted.every(item => item.transits);
   const kind = allTransit ? `transiting planet${n === 1 ? '' : 's'}` : `planet${n === 1 ? '' : 's'}`, list = planets.map(p => String((p as { name: string }).name).replace(`${hostname} `, '')).join(', ');
   if (existing(hostId)) notes.push(`${hostname} is already in the universe as ${hostId}`);
   const entry = existing(hostId) ? { host: hostId, planets, notes: skipped } : {
     // The host is named as its planets name it (pi Men for pi Men c), the archive's host name when they match.
-    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+A$/u, '')} system`, description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist} with ${n} ${kind}.`,
+    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+A$/u, '')} system`, description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} ${kind}.`,
     target: hostname, ...(star.gaiaDr3 ? { gaia: star.gaiaDr3 } : {}), paper: { url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: star.label },
     radius: cited(rad, 'radius'), temperature: temperature ?? cited(teff, 'temperature'), mass: cited(mass, 'mass'),
-    text: { card: `${hostname} is a ${Math.round(kelvin).toLocaleString('en-US')} K star${dist} with ${n} known ${kind}.`,
+    text: { card: `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} known ${kind}.`,
       introduction: allTransit ? fit(180, `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist}. ${n === 1 ? `Its planet ${String((planets[0] as { name: string }).name)} crosses it` : `Its planets ${planets.map(p => String((p as { name: string }).name).replace(`${hostname} `, '')).join(', ')} cross it`}, which is how ${n === 1 ? 'it was' : 'they were'} found and sized.`,
         `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist}. Its ${n} transiting planet${n === 1 ? '' : 's'} were found and sized as ${n === 1 ? 'it crosses' : 'they cross'} it.`)
         : fit(180, `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist}. ${n === 1 ? `Its planet is ${list}` : `Its planets are ${list}`}, each placed on the orbit its paper measured.`,
-          `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${dist} with ${n} planet${n === 1 ? '' : 's'} on measured orbits.`),
+          `${hostname} is a star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} planet${n === 1 ? '' : 's'} on measured orbits.`),
       locator: `NASA Exoplanet Archive ps table (st_refname ${[...new Set([teff, rad, mass].flatMap(picked => picked ? [picked.row.reference] : []))].join(', ')}): ${teff ? `st_teff ${teff.value}` : `no st_teff; TIC ${tic!.TIC} Teff ${tic!.Teff}`}${rad ? `, st_rad ${rad.value}` : ''}${mass ? `, st_mass ${mass.value}` : ''}`,
       ...await quotesFor([hostname], [hostname]) },
     planets, notes: skipped };

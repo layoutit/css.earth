@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-157",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-157",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 765270
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-157-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-157",
+      "classification": "star",
+      "color": "#fff0ea",
+      "distanceAu": 70099059.7,
+      "description": "WASP-157 is a star of 5,772 K, 334 parsecs away, with 1 known transiting planet.",
+      "systemName": "WASP-157 system",
+      "order": 2984,
+      "context": {
+        "order": 2981
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -9644023880140313000,
+        -3829062453783011000,
+        -1517014632712576500
+      ],
+      "presentationToReference": [
+        -0.9196460315730894,
+        0.13445087730284638,
+        -0.3690178020155166,
+        -0.36513618527217434,
+        0.05338262272784455,
+        0.9294223269297875,
+        -0.1446607853454156,
+        -0.989481307141874,
+        2.367017671625898e-7
+      ],
+      "orbitUpReference": [
+        -0.13445087730284638,
+        -0.05338262272784455,
+        0.989481307141874
+      ],
+      "metersPerUnit": 2468612.9032258065,
+      "bodyRadiusM": 765270000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

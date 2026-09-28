@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-157b",
+  "displayName": "WASP-157 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae778",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L",
+          "label": "Livingston et al. 2018",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.95 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aae778",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L",
+          "label": "Livingston et al. 2018",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.57 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-1538-3873-128-970-124403",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128l4403M",
+          "label": "Močnik et al. 2016",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WASP-157; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wasp-157b-lens-shape.webp",
+        "surface": "wasp-157b-surface-shape@2x.webp",
+        "poles": "wasp-157b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-157b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of WASP-157 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wasp-157's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Livingston et al. 2018",
+      "href": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+      "credit": "Livingston et al. 2018"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-157b.json",
+      "credit": "Radius from Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive; mass from Mo&#x10D;nik et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016PASP..128l4403M), via the NASA Exoplanet Archive; orbit from Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive"
+    }
+  }
+}

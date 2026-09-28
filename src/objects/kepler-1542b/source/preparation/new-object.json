@@ -1,0 +1,24 @@
+{
+  "host": "kepler-1542",
+  "planets": [
+    {
+      "id": "kepler-1542b",
+      "name": "Kepler-1542 b",
+      "description": "Transiting planet of Kepler-1542 with a 3.95-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+        "credit": "Morton et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MORTON_ET_AL__2016"
+      },
+      "text": {
+        "card": "Kepler-1542 b crosses its star every 3.95 days and is 0.76 times as wide as Earth, found in 2016.",
+        "introduction": "Kepler-1542 b transits Kepler-1542 every 3.95 days and is 0.76 times as wide as Earth. Orbit and size follow Morton et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 3.95116882, pl_radj 0.06780266, pl_bmassj 0.00114"
+      },
+      "order": 2981
+    }
+  ]
+}

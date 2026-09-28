@@ -1,0 +1,24 @@
+{
+  "host": "kepler-736",
+  "planets": [
+    {
+      "id": "kepler-736b",
+      "name": "Kepler-736 b",
+      "description": "Transiting planet of Kepler-736 with a 3.6-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+        "credit": "Morton et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MORTON_ET_AL__2016"
+      },
+      "text": {
+        "card": "Kepler-736 b crosses its star every 3.6 days and is 2.9 times as wide as Earth, found in 2016.",
+        "introduction": "Kepler-736 b transits Kepler-736 every 3.6 days and is 2.9 times as wide as Earth. Orbit and size follow Morton et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): pl_orbper 3.60147201, pl_radj 0.26139709, pl_bmassj 0.028"
+      },
+      "order": 2991
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-70b",
+  "card": {
+    "text": "HAT-P-70 b crosses its star every 2.74 days and is 1.9 times as wide as Jupiter, found in 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract",
+        "label": "Zhou et al. 2019",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHOU_ET_AL__2019): pl_orbper 2.74432452, pl_radj 1.87, pl_bmassj 6.78"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HAT-P-70 b transits HAT-P-70 every 2.74 days and is 1.9 times as wide as Jupiter. Orbit and size follow Zhou et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract",
+        "label": "Zhou et al. 2019",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHOU_ET_AL__2019): pl_orbper 2.74432452, pl_radj 1.87, pl_bmassj 6.78"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

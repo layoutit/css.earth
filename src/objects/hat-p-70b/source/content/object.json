@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hat-p-70b",
+  "displayName": "HAT-P-70 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.9 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z",
+          "label": "Zhou et al. 2019",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.74 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z",
+          "label": "Zhou et al. 2019",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "6.8 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z",
+          "label": "Zhou et al. 2019",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HAT-P-70; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hat-p-70b-lens-shape.webp",
+        "surface": "hat-p-70b-surface-shape@2x.webp",
+        "poles": "hat-p-70b-poles-shape@2x.webp",
+        "source": {
+          "id": "hat-p-70b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HAT-P-70 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hat-p-70's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zhou et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract",
+      "credit": "Zhou et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-70b.json",
+      "credit": "Radius from Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive; mass from Zhou et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..141Z), via the NASA Exoplanet Archive; orbit from Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive"
+    }
+  }
+}

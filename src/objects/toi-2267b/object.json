@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "toi-2267b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-2267 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6378.1
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-2267b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-2267 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 4650886.8,
+      "description": "TOI-2267 b crosses its star every 2.29 days and is as wide as Earth, found in 2025.",
+      "systemName": "TOI-2267 system",
+      "order": 2969,
+      "context": {
+        "order": 2969
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        26071402335616428,
+        56083693196086290,
+        693008451666036700
+      ],
+      "presentationToReference": [
+        0.043018607244911966,
+        0.9065172844024741,
+        -0.419971204382243,
+        0.07802637489084302,
+        -0.42212485438545083,
+        -0.9031735670021879,
+        0.9960227327988562,
+        -0.006084438316365582,
+        0.08889148079693981
+      ],
+      "orbitUpReference": [
+        -0.9065172844024741,
+        0.42212485438545083,
+        0.006084438316365582
+      ],
+      "metersPerUnit": 20574.516129032258,
+      "bodyRadiusM": 6378100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

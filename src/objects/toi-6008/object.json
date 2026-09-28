@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "toi-6008",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-6008",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 168359.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-6008-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-6008",
+      "classification": "star",
+      "color": "#ffcc7b",
+      "distanceAu": 4748150.2,
+      "description": "TOI-6008 is a star of 3,075 K, 23.1 parsecs away, with 1 known transiting planet.",
+      "systemName": "TOI-6008 system",
+      "order": 2966,
+      "context": {
+        "order": 2963
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        298388253148527400,
+        -349992021116969150,
+        541308440740447360
+      ],
+      "presentationToReference": [
+        0.4200809916629729,
+        0.4944056418231144,
+        -0.7609829313308727,
+        -0.4927305071957118,
+        -0.5799238476684254,
+        -0.6487718999649301,
+        0.7620686371463596,
+        -0.6474962488222793,
+        0.000006242361634362911
+      ],
+      "orbitUpReference": [
+        -0.4944056418231144,
+        0.5799238476684254,
+        0.6474962488222793
+      ],
+      "metersPerUnit": 543094.8387096775,
+      "bodyRadiusM": 168359400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

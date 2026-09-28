@@ -1,0 +1,24 @@
+{
+  "host": "toi-2049",
+  "planets": [
+    {
+      "id": "toi-2049b",
+      "name": "TOI-2049 b",
+      "description": "Transiting planet of TOI-2049 with a 5.3-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+        "credit": "Guenther et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GUENTHER_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-2049 b crosses its star every 5.3 days and is 1.5 times as wide as Jupiter, found in 2026.",
+        "introduction": "TOI-2049 b transits TOI-2049 every 5.3 days and is 1.5 times as wide as Jupiter. Orbit and size follow Guenther et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GUENTHER_ET_AL_2026): pl_orbper 5.303468, pl_radj 1.485, pl_bmassj 1.53"
+      },
+      "order": 2995
+    }
+  ]
+}

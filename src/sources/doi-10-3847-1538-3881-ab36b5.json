@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ab36b5",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zhou et al. (2019): Two New HATNet Hot Jupiters around A Stars and the First Glimpse at the Occurrence Rate of Hot Jupiters from TESS <sup>∗</sup>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1906.00462"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab36b5"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019AJ....158..141Z"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab36b5",
+      "label": "The Astronomical Journal 158 141"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zhou et al. (2019), The Astronomical Journal 158 141",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z"
+    }
+  ],
+  "publisher": "The Astronomical Journal 158 141",
+  "creators": [
+    "G. Zhou",
+    "C. X. Huang",
+    "G. Á. Bakos",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

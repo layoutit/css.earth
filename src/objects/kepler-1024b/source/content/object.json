@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-1024b",
+  "displayName": "Kepler-1024 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.35 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M",
+          "label": "Morton et al. 2016",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "66.4 days",
+        "source": {
+          "catalogueId": "doi-10-3847-0004-637x-822-2-86",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M",
+          "label": "Morton et al. 2016",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.046 Jupiter masses (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-1024; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-1024b-lens-shape.webp",
+        "surface": "kepler-1024b-surface-shape@2x.webp",
+        "poles": "kepler-1024b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-1024b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-1024 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-1024's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Morton et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+      "credit": "Morton et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-1024b.json",
+      "credit": "Radius from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive"
+    }
+  }
+}

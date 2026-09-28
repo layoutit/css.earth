@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-3167b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 3167 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10211.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-3167b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 3167 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 9758845.6,
+      "description": "HD 3167 b crosses its star every 0.96 days and is 1.6 times as wide as Earth, found in 2016.",
+      "systemName": "HD 3167 system",
+      "order": 2972,
+      "context": {
+        "order": 2972
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1438733810272068600,
+        221197692621211620,
+        111498859128358180
+      ],
+      "presentationToReference": [
+        0.9789411904481566,
+        0.1896728926617541,
+        -0.07548734617979784,
+        0.18934024370770705,
+        -0.9818429589834418,
+        -0.011604999239368698,
+        0.07631787311404861,
+        0.0029321807519934254,
+        0.9970792268217132
+      ],
+      "orbitUpReference": [
+        -0.1896728926617541,
+        0.9818429589834418,
+        -0.0029321807519934254
+      ],
+      "metersPerUnit": 32939.67741935484,
+      "bodyRadiusM": 10211300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

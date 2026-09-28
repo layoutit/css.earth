@@ -56,4 +56,5 @@ test('published text keeps the authored blocks and names the input it was checke
   assert.equal(prepared.introduction.text, blocks.introduction.text);
   assert.throws(() => parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', ...blocks }, 'titan'), /belongs to saturn/u);
   assert.throws(() => parsePreparedText({ schema: OBJECT_TEXT_SCHEMA, objectId: 'saturn', ...blocks }), /prepared text schema/u);
+  assert.throws(() => parsePreparedText(undefined, 'toi-6008b'), /^TypeError: toi-6008b: prepared\/text\.json is missing; run the bake's text step/u, 'a body baked short of its text step is named');
 });

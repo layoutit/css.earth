@@ -54,7 +54,7 @@ export async function wideCompanions(archive: Archive, host: { readonly gaia: st
     companions.push({ id: idFor({ hostname: name, gaiaDr3: `Gaia DR3 ${gaia}` }), name, system: host.system, gaia,
       description: `Star bound to ${host.name}, ${au} AU away.`, paper: EL_BADRY,
       radius: cite('Rad', 's_Rad', 'the radius'), temperature: cite('Teff', 's_Teff', 'the effective temperature'), mass: cite('Mass', 's_Mass', 'the mass'),
-      text: { card: fit(110, `${name} is a ${teff.toLocaleString('en-US')} K star bound to ${host.name}, ${au} AU away.`, `A ${teff.toLocaleString('en-US')} K star bound to ${host.name}.`),
+      text: { card: fit(110, `${name} is a star of ${teff.toLocaleString('en-US')} K, bound to ${host.name} ${au} AU away.`, `A star of ${teff.toLocaleString('en-US')} K, bound to ${host.name}.`),
         introduction: fit(180, `${name} shares its motion through space with ${host.name}, ${au} AU away, so the two are a bound pair. Both are placed where Gaia measures them.`, `${name} moves through space with ${host.name}, ${au} AU away: a bound pair, both placed where Gaia measures them.`),
         locator: `J/MNRAS/506/2269 catalog: source_id ${host.gaia} and ${gaia}, sep_AU ${pair.sepAU}, R_chance_align ${pair.R}` },
       notes: [`${name}'s orbit around ${host.name} is not measured; both stars are placed at their Gaia DR3 positions, which is where they are`] });

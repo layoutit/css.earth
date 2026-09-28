@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-1542c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.05798912 Jupiter radii from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.000653 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): P 2.89223021 d; Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): a/R* derived by Kepler's third law from its period 2.89223021 d, stellar mass 0.94 and radius 0.99 solar units; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 89.38 degrees; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0; Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): transit mid-time 2454965.86465 BJD, taken as BJD_TDB; Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract"
+      ]
+    }
+  ]
+}

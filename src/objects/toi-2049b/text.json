@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2049b",
+  "card": {
+    "text": "TOI-2049 b crosses its star every 5.3 days and is 1.5 times as wide as Jupiter, found in 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae6449",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+        "label": "Guenther et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GUENTHER_ET_AL_2026): pl_orbper 5.303468, pl_radj 1.485, pl_bmassj 1.53"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-2049 b transits TOI-2049 every 5.3 days and is 1.5 times as wide as Jupiter. Orbit and size follow Guenther et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae6449",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+        "label": "Guenther et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GUENTHER_ET_AL_2026): pl_orbper 5.303468, pl_radj 1.485, pl_bmassj 1.53"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

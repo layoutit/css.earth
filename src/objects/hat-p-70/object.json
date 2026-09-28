@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hat-p-70",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-70",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1292610.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-70-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-70",
+      "classification": "star",
+      "color": "#c7d6ff",
+      "distanceAu": 65626762.2,
+      "description": "HAT-P-70 is a star of 8,450 K, 331 parsecs away, with 1 known transiting planet.",
+      "systemName": "HAT-P-70 system",
+      "order": 2996,
+      "context": {
+        "order": 2993
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2575293363788526000,
+        9319248285338690000,
+        1704468891124371200
+      ],
+      "presentationToReference": [
+        0.2623132924599493,
+        0.04624334586478952,
+        0.9638741046226164,
+        0.9492365939166861,
+        0.16734150211916754,
+        -0.2663582370379201,
+        0.17361343660059642,
+        -0.9848138781677125,
+        -2.4266068336259393e-8
+      ],
+      "orbitUpReference": [
+        -0.04624334586478952,
+        -0.16734150211916754,
+        0.9848138781677125
+      ],
+      "metersPerUnit": 4169711.6129032257,
+      "bodyRadiusM": 1292610600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

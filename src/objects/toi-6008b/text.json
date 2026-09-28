@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6008b",
+  "card": {
+    "text": "TOI-6008 b crosses its star every 0.857 days and is as wide as Earth, found in 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202349127",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+        "label": "Barkaoui et al. 2024",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL_2024): pl_orbper 0.8574347, pl_radj 0.0918906, pl_bmassj 0.01258541"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-6008 b transits TOI-6008 every 0.857 days and is as wide as Earth. Orbit and size follow Barkaoui et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202349127",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+        "label": "Barkaoui et al. 2024",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL_2024): pl_orbper 0.8574347, pl_radj 0.0918906, pl_bmassj 0.01258541"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

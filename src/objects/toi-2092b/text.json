@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2092b",
+  "card": {
+    "text": "TOI-2092 b crosses its star every 4.3 days and is 3.0 times as wide as Earth, found in 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag512",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "label": "Lafarga et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): pl_orbper 4.30325528074, pl_radj 0.26308633, pl_bmassj 0.0283"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-2092 b transits TOI-2092 every 4.3 days and is 3.0 times as wide as Earth. Orbit and size follow Lafarga et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag512",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "label": "Lafarga et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAFARGA_ET_AL_2026): pl_orbper 4.30325528074, pl_radj 0.26308633, pl_bmassj 0.0283"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}
