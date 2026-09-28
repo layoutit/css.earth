@@ -300,7 +300,6 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
             const paths = new Set<string>();
             if (!projection || (projection.visible && projection.volumeMix > 0)) {
               for (const stack of volume.stacks) for (const leaf of stack.leaves) paths.add(leaf.texturePath);
-              for (const leaf of volume.detailPlanes ?? []) paths.add(leaf.texturePath);
             } else if (projection.visible && approaching) {
               for (const path of preparedVolumeTexturePaths(volume, publication)) paths.add(path);
             }

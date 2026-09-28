@@ -79,6 +79,7 @@ These change paint every frame on purpose, and each has a budget:
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 | Surface minimap viewport boxes (`site/minimap/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
+| Rings around volumes (`universe/volume-ring.ts`) | `width`, `height` of a ring around the Milky Way and each galaxy or nebula drawn as a cloud, in whole pixels | the rings on screen | A ring encloses its cloud at every distance. A transform would scale its line with it |
 
 The footer readout (distance, coordinates, the scale ruler) holds its last reading while the camera moves, and reads
 once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to

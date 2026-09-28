@@ -1,0 +1,54 @@
+{
+  "id": "ibata-2005-m31-extended-disk",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "On the accretion origin of a vast extended stellar disk around the Andromeda galaxy",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/491727"
+    },
+    {
+      "type": "arxiv",
+      "value": "astro-ph/0504164"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0504164",
+      "label": "arXiv:astro-ph/0504164"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/491727",
+      "label": "ApJ 634, 287"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0504164",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract: the stellar structure spans radii from 15 kpc out to ~40 kpc, with detections out to R ~ 70 kpc"
+    }
+  ],
+  "creators": [
+    "R. Ibata",
+    "S. Chapman",
+    "A. M. N. Ferguson",
+    "G. Lewis",
+    "M. Irwin",
+    "N. Tanvir"
+  ],
+  "publisher": "ApJ 634, 287",
+  "publicationDate": "2005",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ibata et al. (2005), ApJ 634, 287.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/astro-ph/0504164"
+    }
+  ]
+}

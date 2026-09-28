@@ -1,0 +1,56 @@
+{
+  "id": "mcconnachie-2010-m33-substructure",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The photometric properties of a vast stellar substructure in the outskirts of M33",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/723/2/1038"
+    },
+    {
+      "type": "arxiv",
+      "value": "1009.2804"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1009.2804",
+      "label": "arXiv:1009.2804"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-637X/723/2/1038",
+      "label": "ApJ 723, 1038"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1009.2804",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract: the structure extends to projected radii of ~40 kpc from the center of M33 in both the north-west and south-east quadrants"
+    }
+  ],
+  "creators": [
+    "Alan W. McConnachie",
+    "Annette M. N. Ferguson",
+    "Michael J. Irwin",
+    "John Dubinski",
+    "Lawrence M. Widrow",
+    "Aaron Dotter",
+    "Rodrigo Ibata",
+    "Geraint F. Lewis"
+  ],
+  "publisher": "ApJ 723, 1038",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite McConnachie et al. (2010), ApJ 723, 1038.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1009.2804"
+    }
+  ]
+}

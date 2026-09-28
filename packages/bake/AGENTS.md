@@ -27,7 +27,7 @@ its validators accept); the renderer never imports the bake.
   tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
   tests are `node --test` suites in `tests/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
-  slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
+  slice stacks into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
   It imports `scene` and `volume`.
 - `src/stars/` is published as `@cssearth/bake/stars` (Node only): the point-field star bake (recipes, catalogue
   sources, palette, hierarchy, point atlas and photometry, diffuse sky, encoded bank). It imports `raster` and `volume`.

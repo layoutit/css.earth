@@ -75,6 +75,20 @@
       "credit": "cssEarth contributors",
       "title": "Dataset presentation and prepared-bank bindings",
       "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/m31/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ibata-2005-m31-extended-disk",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/astro-ph/0504164"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": []
