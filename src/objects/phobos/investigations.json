@@ -65,6 +65,45 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/phobos/source/manifest.json",
         "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
       ]
+    },
+    {
+      "id": "trek-roughness-1km-baseline",
+      "subject": "NASA Trek average roughness, 1 km baseline, from the MExLab 200 m DEM (and the HRSC 100 m DEM twin)",
+      "status": "excluded",
+      "finding": "The only numeric original is a JPL Trek derivative (Float32 GeoTIFF, 350 x 175 cells at 1.03 degrees, about 200 m) whose metadata gives no formula and no unit; its values are signed (-153 to +120, median 0.07) and track the source DEM minus its 5 x 5 cell mean (r = 0.93), so it is an undocumented local-relief residual of an older 1 degree DEM, not a published roughness distinct from the SPC Elevation and Slope lenses.",
+      "revisitWhen": "The producer or a paper publishes the roughness definition and unit, or a roughness map computed from the selected Ernst et al. (2023) shape is released.",
+      "evidence": [
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/data/stream?label=AvgRoughness1kmBaseline_DTM_MExLab_200_final",
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=AvgRoughness1kmBaseline_DTM_MExLab_200_final",
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/data/stream?label=DTM_MExLab_200_final",
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=Phobos_ME_HRSC_AvgRoughness1kmBaseline_Global_2ppd",
+        "https://doi.org/10.1016/j.pss.2013.12.015"
+      ]
+    },
+    {
+      "id": "hrsc-vnir-index-mosaic",
+      "subject": "MEX HRSC colour V/NIR spectral index mosaic, 14 m/pixel (NASA Trek Index_VNIR_mosaic)",
+      "status": "excluded",
+      "finding": "The only public copy is a four-band 8-bit RGBA render (5883 x 2920 cells, 0.0612 degrees) with nine flat colours: seven legend classes of V/NIR from 0.6 to 1.6, an undocumented white class and transparent no-coverage (35 percent of cells); no numeric index grid is published, the class bounds come from the Trek legend rather than a stated product label, and the shared GeoTIFF science loader reads only single-band values.",
+      "revisitWhen": "MIIGAiK/MExLab or the HRSC team releases the numeric index grid (or a single-band class raster with documented class bounds) for Phobos.",
+      "evidence": [
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/data/stream?label=Index_VNIR_mosaic",
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=Index_VNIR_mosaic",
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/legend/stream?label=Index_VNIR_mosaic",
+        "https://doi.org/10.1016/j.pss.2013.12.015"
+      ]
+    },
+    {
+      "id": "ph9224gt-crater-catalogue",
+      "subject": "PH9224GT global catalogue of 9,224 Phobos craters (Salamuniccar et al. 2014), with its Trek crater count and abundance rasters",
+      "status": "deferred",
+      "finding": "The catalogue is a point shapefile of crater centres and radii (Lon_E, Lat, Radius_m; 9,224 records in the Phobos_2015 11,080 m sphere frame), but the body's surface-feature lane reads only the IAU/USGS Gazetteer nomenclature schema and no body carries a crater-catalogue layer; the Trek count and abundance rasters are JPL binnings of this catalogue, not independent data.",
+      "revisitWhen": "The shared feature lane supports a point catalogue of craters with radii beyond Gazetteer nomenclature.",
+      "evidence": [
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/data/stream?label=PH9224GT_Phobos2000",
+        "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=PH9224GT_Phobos2000",
+        "https://doi.org/10.1016/j.asr.2013.11.006"
+      ]
     }
   ]
 }

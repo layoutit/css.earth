@@ -683,6 +683,72 @@
         "kind": "local",
         "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
       }
+    },
+    {
+      "id": "trek-mercury-hgm008-gravity-anomaly",
+      "path": "science/gravity/anomaly-hgm008.tif",
+      "origin": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe",
+      "credit": "A. Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center; NASA Solar System Treks",
+      "license": "United States Government scientific data; cite Genova et al. (2019)",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/Anomaly_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://doi.org/10.1029/2018GL081135"
+      ],
+      "acquisition": "Trek product 'MSGR MLA, Gravity Anomaly Global' (Anomaly_Map_HgM008_Lmax90_16ppd, dated 2020-06-11). Extract member Anomaly_Map_HgM008_Lmax90_16ppd.tif from the Trek download archive, unchanged: 3600 x 1800 float64 GeoTIFF, geographic degrees on a 2,439.7 km sphere, 0.1 degree cells from -180 E, 90 N; values in mGal; declared no-data 9.969209968386869e+36 (no such cells). The file name says 16ppd; the grid is 10 cells per degree.",
+      "redistribution": "Original numeric product restored from its origin or source cache; prepared display images with credit.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "lensId": "gravity",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-mercury-hgm008-gravity-anomaly",
+            "role": "material",
+            "evidence": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe"
+          },
+          {
+            "catalogueId": "genova-2019-mercury-hgm008",
+            "role": "method",
+            "evidence": "src/objects/mercury/source/science/gravity/ggmes_100v08_sha.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trek-mercury-hgm008-crustal-thickness",
+      "path": "science/gravity/crustal-thickness-hgm008.tif",
+      "origin": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6",
+      "credit": "A. Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center; NASA Solar System Treks",
+      "license": "United States Government scientific data; cite Genova et al. (2019)",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/CrustalThickness_Map_HgM008_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://doi.org/10.1029/2018GL081135"
+      ],
+      "acquisition": "Trek product 'MSGR MLA, Crustal Thickness Global' (CrustalThickness_Map_HgM008_16ppd, dated 2020-06-11). Extract member CrustalThickness_Map_HgM008_16ppd.tif from the Trek download archive, unchanged: 5760 x 2880 float32 GeoTIFF, geographic degrees on a 2,439.7 km sphere, 0.0625 degree cells from -180 E, 90 N; values in km; declared no-data NaN (no such cells).",
+      "redistribution": "Original numeric product restored from its origin or source cache; prepared display images with credit.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "lensId": "crust",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-mercury-hgm008-crustal-thickness",
+            "role": "material",
+            "evidence": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6"
+          },
+          {
+            "catalogueId": "genova-2019-mercury-hgm008",
+            "role": "method",
+            "evidence": "https://doi.org/10.1029/2018GL081135"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -931,6 +997,21 @@
           }
         ]
       }
+    },
+    {
+      "path": "science/gravity/ggmes_100v08_sha.lbl",
+      "purpose": "PDS3 label of the HgM008 spherical-harmonic model (GGMES_100V08): reference radius, GM, Kaula constraint, producer and citation. The Trek grids carry no label of their own.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "genova-2019-mercury-hgm008",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl"
+          }
+        ]
+      },
+      "origin": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl"
     }
   ]
 }

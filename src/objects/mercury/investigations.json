@@ -172,6 +172,58 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/loi-check.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
       ]
+    },
+    {
+      "id": "hgm008-gravity-anomaly",
+      "subject": "MESSENGER HgM008 free-air gravity anomaly grid, degree 90 (NASA Mercury Trek, Anomaly_Map_HgM008_Lmax90_16ppd)",
+      "status": "included",
+      "finding": "Adopted as the Gravity lens. The PDS archive holds only the HgM008 coefficients; this numeric GeoTIFF (mGal) was produced by the model's author at NASA Goddard and published by Trek. A sum of the PDS coefficients (degrees 2-90, factor l-1) matches it within 0.15 mGal at 12 cells. The file name says 16ppd; the grid is 0.1 degree. The Trek description calls it a northern orthographic map; the file is a global geographic grid.",
+      "evidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/Anomaly_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl",
+        "https://doi.org/10.1029/2018GL081135"
+      ]
+    },
+    {
+      "id": "hgm008-crustal-thickness",
+      "subject": "Genova et al. (2019) crustal-thickness model from HgM008 and MLA topography (NASA Mercury Trek, CrustalThickness_Map_HgM008_16ppd)",
+      "status": "included",
+      "finding": "Adopted as the Crust lens and labelled as a model: crust 2,800 kg/m3, crust-mantle contrast 400 kg/m3, mean 35 km, degrees 2-60 with finite-amplitude corrections (paper text and Figure 1 caption). The grid's area-weighted mean is 34.40 km, and 522 cells in Rachmaninoff fall below zero (minimum -3.03 km); both are shown as published. The GeoTIFF declares NaN as no-data, which the shared scientific GeoTIFF reader cannot yet declare; the lens needs that one-line reader change before it can bake.",
+      "evidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/CrustalThickness_Map_HgM008_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://doi.org/10.1029/2018GL081135",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662718/"
+      ]
+    },
+    {
+      "id": "hgm008-gravity-disturbance",
+      "subject": "MESSENGER HgM008 gravity disturbance grid, degree 90 (NASA Mercury Trek, Disturbance_Map_HgM008_Lmax90_16ppd)",
+      "status": "excluded",
+      "finding": "Not added. It is the same HgM008 field with degree weighting l+1 instead of l-1 (confirmed within 1.6 mGal by a coefficient sum), so it repeats the Gravity lens with slightly different amplitudes. The paper shows the free-air anomaly. Its georeference stretches 5,762 x 2,881 samples over the globe with identical first and last columns and constant polar rows, which looks like a node grid labelled as cells.",
+      "revisitWhen": "A reader needs the radial gravity itself rather than the conventional anomaly.",
+      "evidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/Disturbance_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl"
+      ]
+    },
+    {
+      "id": "hgm008-degree-strength",
+      "subject": "MESSENGER HgM008 degree-strength map (NASA Mercury Trek, DegreeStrength_Map_HgM008_4ppd)",
+      "status": "included",
+      "finding": "Used as the documented resolution limit of the Gravity and Crust lenses rather than as its own lens: degree 45.6-73.0 north of 60 N and 10.9-15.1 south of 30 S, about 105-125 km versus 500-700 km half-wavelength. A quality mask would need a threshold the product does not publish.",
+      "evidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/DegreeStrength_Map_HgM008_4ppd/1.0.0/WMTSCapabilities.xml"
+      ]
+    },
+    {
+      "id": "other-mercury-crust-models",
+      "subject": "Other Mercury crustal-thickness models (Padovan et al. 2015, Sori 2018, Beuthe et al. 2020)",
+      "status": "unresolved",
+      "finding": "Not examined for published numeric grids in this change. Each would be an alternative model under its own assumptions, shown beside, not instead of, the Genova et al. (2019) grid.",
+      "revisitWhen": "A published numeric grid of one of these models is found.",
+      "evidence": [
+        "https://doi.org/10.1029/2020GL087261"
+      ]
     }
   ]
 }

@@ -56,6 +56,16 @@
       "detail": "GRAIL",
       "summary": "Thickness inferred from gravity and topography. It depends on assumed rock densities."
     },
+    "gravity": {
+      "title": "GRAIL gravity anomaly (GRGM1200A)",
+      "detail": "GRAIL",
+      "summary": "Where the Moon pulls harder (red) or softer (blue) than a smooth, even sphere, measured by the twin GRAIL probes in 2012."
+    },
+    "bouguer-gravity": {
+      "title": "GRAIL Bouguer gravity (GRGM1200A)",
+      "detail": "GRAIL",
+      "summary": "Gravity with the pull of hills and craters removed, so what remains comes from denser or lighter rock underground."
+    },
     "silicate-signature": {
       "title": "Diviner Christiansen feature, 2009–2016",
       "detail": "LRO Diviner",

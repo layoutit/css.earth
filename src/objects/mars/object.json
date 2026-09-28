@@ -165,6 +165,21 @@
               "id": "crust",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "thermal-inertia",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "dust-cover",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

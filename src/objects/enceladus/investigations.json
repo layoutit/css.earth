@@ -8,6 +8,7 @@
       "status": "included",
       "finding": "Selected products supply documented numeric scientific views; no-data and special values remain missing.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
       ]
@@ -19,6 +20,7 @@
       "finding": "The v2 DSK is retained as a source-intake and recipe proposal. Image-to-v2 alignment, prepared error, browser limb and feature qualification remain pending.",
       "revisitWhen": "Image alignment and the prepared-shape qualification record are completed for the v2 source.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
       ]
@@ -30,6 +32,7 @@
       "finding": "README records that NAIF reprocessed imagery after errors in the original model.",
       "revisitWhen": "A documented reconciled replacement changes the source decision.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
       ]
@@ -41,6 +44,7 @@
       "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior lens.",
       "revisitWhen": "A source-backed mapped product supports the claimed visible quantity.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
       ]
@@ -51,6 +55,7 @@
       "status": "included",
       "finding": "The selected six-observation set supplies Infrared ratio and Ice absorption under the pinned channel, mask, overlap and coverage rules. It remains partially supported and is not photometrically corrected.",
       "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
         "https://vims.univ-nantes.fr/"
       ]
@@ -87,6 +92,37 @@
       "evidence": [
         "https://doi.org/10.5194/epsc-dps2025-400",
         "https://www.ipgp.fr/en/research/phds/__trashed-2/"
+      ]
+    },
+    {
+      "id": "crow-willard-2015-geologic-units",
+      "subject": "Global geologic map units (Crow-Willard and Pappalardo 2015)",
+      "status": "included",
+      "finding": "NASA Trek serves the published map as a 13-polygon GIS layer with unit names and colors. Its file download answered 'Access denied'; the public ArcGIS REST query returned the full geometry in the native frame (Plate Carree, central meridian 180, 252.1 km sphere, east-positive). Units are rasterized at pixel centers to a 2048 x 1024 grid with conflicts withheld. Gazetteer centres and an overlay on the Schenk 2024 mosaic show no longitude flip or visible offset. The paper itself returned HTTP 403, so its figure colors were not compared with the GIS renderer; equatorial and heavily cratered plains share one renderer color.",
+      "evidence": [
+        "https://doi.org/10.1002/2015JE004818",
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
+      ]
+    },
+    {
+      "id": "crow-willard-2015-nested-overlaps",
+      "subject": "Overlapping unit polygons in the geologic map",
+      "status": "included",
+      "finding": "The heavily cratered plains polygon has no holes where subdued cratered plains and northern lineated material sit (15-105 E, 30-76 N); northern lineated material also lies inside subdued cratered plains, and two small subdued cratered plains rings overlap equatorial cratered plains and central LH. Under the shared withhold-conflicts rule 3.41% of the sphere was gray, northern lineated material showed no cells and subdued cratered plains 6 km2. The grid now gives each shared cell to the smallest covering unit (geology-grid.py nestedUnits inner): no conflicts remain, 0.072% of the sphere is unmapped, northern lineated material shows 8,544 km2 and subdued cratered plains 17,223 km2. The Trek MapServer rendering also puts subdued cratered plains over heavily cratered plains but hides northern lineated material; the grid differs there on purpose so that every published unit shows.",
+      "evidence": [
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/export?bbox=-791995.5,-395997.75,791995.5,395997.75&size=2048,1024&format=png24&f=image",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
+      ]
+    },
+    {
+      "id": "crow-willard-2015-linework",
+      "subject": "Geologic map line features (ridges, troughs, scarps, contacts)",
+      "status": "excluded",
+      "finding": "The companion Trek layer Cassini_ISS_GeologicMapFeatures_Global holds 13 polyline records in 13 symbol classes. Geology lenses on other bodies show polygon units only; drawing line symbols would need a renderer feature.",
+      "revisitWhen": "A shared route for published line symbols exists.",
+      "evidence": [
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapFeatures_Global/MapServer/0?f=json"
       ]
     }
   ]

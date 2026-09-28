@@ -180,7 +180,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17\u00b0, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
+      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17°, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
       "evidence": [
         "https://doi.org/10.1016/j.pss.2012.12.005",
         "https://arxiv.org/abs/1208.4518"
@@ -297,10 +297,87 @@
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid.",
+      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid. The evidence records the tested file hashes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md"
+      ]
+    },
+    {
+      "id": "tes-bolometric-albedo",
+      "subject": "MGS TES global bolometric Lambert albedo, USGS 7410 m GeoTIFF",
+      "status": "included",
+      "finding": "The USGS float32 GeoTIFF (2,880 by 1,440 cells, 8 pixels per degree, simple cylindrical on a 3,396 km sphere, ASU product GLOBAL_ALBEDO_8PPD, Christensen et al. 2001) is read natively by the existing scientific GeoTIFF reader. Measured values span 0.061 to 0.32. The label declares no missing value, but 131,653 cells (3.2 percent) poleward of about 87 degrees hold exactly 0.06, a constant fill beyond TES coverage; the next-lowest value is 0.061. A quality mask on the same file withholds values below 0.0605. It is a numeric reflectance quantity, distinct from the colorized Viking visible mosaic.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m",
+        "https://doi.org/10.1029/2000JE001370"
+      ]
+    },
+    {
+      "id": "tes-thermal-inertia-putzig-2007",
+      "subject": "MGS TES nightside thermal inertia, Putzig and Mellon (2007), PDS MGS-M-TES-5-TIMAP-V1.0",
+      "status": "included",
+      "finding": "This is the selected numeric original: GLOBAL_TI_NIGHT_2007.IMG, 7,200 by 3,600 MSB 16-bit integers in tiu (J m-2 K-1 s-1/2), 20 pixels per degree from -180 to 180 degrees east, with an interpolation mask. It differs from the existing thermal lens, which is qualitative THEMIS daytime infrared brightness rather than thermal inertia. No shared reader accepts it: pds-image requires LSB integers centred on 180 degrees east with a MISSING_CONSTANT and UNIT, and this label has neither; its null value 0 is stated only on the producer page. The 2007 maps supersede the 2003 map and the 8 pixel-per-degree Christensen et al. (2001) inertia grid. The shared pds3-grid reader now reads the product and its interpolation mask; the thermal-inertia lens shows it with interpolated cells withheld.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2007.05.013",
+        "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat",
+        "https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html",
+        "https://se.psi.edu/inertia/2007/"
+      ]
+    },
+    {
+      "id": "tes-bandfield-2002-mineral-abundances",
+      "subject": "MGS TES plagioclase, high-Ca pyroxene and sheet silicate/high-Si glass abundances, Bandfield (2002)",
+      "status": "deferred",
+      "finding": "The numeric values come from ASU's JMARS map server as VICAR REAL exports (1,440 by 720 cells, 4 pixels per degree, 0 to 360 degrees east, little-endian float), with -1 for no data and exact zeros over high-albedo surfaces. Trek and the ASU PNGs are colorized renders and are not used. No shared reader decodes a VICAR REAL global map, and the server truncated one of three first downloads, so an acquisition needs a byte-count check. The zero-valued dusty regions need the paper's masking rule before they can be shown as measured abundance.",
+      "revisitWhen": "The paper’s masking rule for zero cells is read and recorded (the shared VICAR REAL reader now exists).",
+      "evidence": [
+        "https://mars.asu.edu/data/tes_plagioclase/",
+        "https://mars.asu.edu/data/tes_clinopyroxene/",
+        "https://mars.asu.edu/data/tes_silicates/",
+        "https://doi.org/10.1029/2001JE001510"
+      ]
+    },
+    {
+      "id": "tes-dust-cover-index",
+      "subject": "MGS TES dust cover index, Ruff and Christensen (2002)",
+      "status": "included",
+      "finding": "The author's page publishes floating-point ISIS and VICAR versions of the 16 pixel-per-degree map (5,760 by 2,880 cells, mean emissivity at 1350-1400 per cm). The ISIS qube label carries no map projection or missing value; the grid comes from the ASU catalogue page. The paper classes 0.940 or less as dust-covered and 0.962 or more as dust-free. The TIF, JPG and PNG versions are colorized. No shared reader decodes either numeric file. The shared vicar-grid reader now reads the VICAR REAL file (dci_lo_ice_dust_16ppd_shifted.vicar); its left edge at 180 degrees W reproduces the paper’s Arabia, Syrtis Major and Mare Erythraeum values, and the exact 0.85 polar fill is withheld.",
+      "evidence": [
+        "https://www.mars.asu.edu/~ruff/DCI/dci.html",
+        "https://mars.asu.edu/data/tes_ruffdust/",
+        "https://doi.org/10.1029/2001JE001580"
+      ]
+    },
+    {
+      "id": "mola-roughness-kreslavsky",
+      "subject": "MOLA kilometre-scale roughness, Kreslavsky and Head (2000), Zenodo 15734221",
+      "status": "deferred",
+      "finding": "Numeric originals exist: E8R0, E8R1 and E8R2.raw, 2,880 by 1,440 bytes at 8 pixels per degree for the 0.6, 2.4 and 9.2 km baselines, CC BY 4.0. The read-me gives C = (1/l) 10^((DN-511)/80), the interquartile range of profile curvature. It recommends the colour composite for qualitative use, gives no missing-value code, and the files have no label. Trek and ASU show only the RGB composite. No shared reader decodes a headerless byte grid.",
+      "revisitWhen": "A shared headerless-grid reader with an authored exponential DN transform exists, and the missing-value code is confirmed.",
+      "evidence": [
+        "https://zenodo.org/records/15734221",
+        "https://doi.org/10.1029/2000JE001259"
+      ]
+    },
+    {
+      "id": "trek-tes-display-renders",
+      "subject": "NASA Mars Trek TES and MOLA roughness layers",
+      "status": "excluded",
+      "finding": "Trek serves these as display tiles and renders; the numeric values are taken from their originals (USGS, PDS, ASU and Zenodo) in the entries above.",
+      "revisitWhen": "Trek publishes the numeric originals with labels.",
+      "evidence": [
+        "https://trek.nasa.gov/mars/"
+      ]
+    },
+    {
+      "id": "trek-landform-layers",
+      "subject": "Trek landform and detection layers: gullies, glacier-like forms, valley networks, alluvial fans, hydrous mineral and chloride detections",
+      "status": "deferred",
+      "finding": "Mars supports IAU named features and curated landing sites and traverses, not dataset point or line layers. Placing thousands of unnamed survey points in the named-feature lane would misrepresent them.",
+      "revisitWhen": "A shared feature-layer capability for survey points and polylines exists.",
+      "evidence": [
+        "https://trek.nasa.gov/mars/"
       ]
     }
   ]

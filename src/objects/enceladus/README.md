@@ -16,6 +16,8 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 - Infrared color: [NASA PIA24027](https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/), the published Robidel (2020) infrared / Bland (2018) visible-camera composite.
 
+- Geology: [Crow-Willard and Pappalardo (2015)](https://doi.org/10.1002/2015JE004818), the global geologic map units served as GIS by [NASA Solar System Treks](https://trek.nasa.gov/enceladus/).
+
 - Ice absorption and Infrared ratio use six calibrated VIMS observations with matched navigation backplanes. The [source interpretation](source/vims-chemistry/INTERPRETATION.md) defines every channel, coordinate, mask, overlap rule and scientific limit.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
@@ -100,6 +102,76 @@ Each cold browser case fetched the same 1,928,874-byte infrared surface texture;
 this is the texture body size, not the full page transfer. No full-site build
 was run. The all-object sprite preparation encountered an unrelated missing
 Moon texture; it had already generated the Enceladus sprite.
+
+## Geologic map
+
+**Geology** shows the interpreted units of
+[Crow-Willard and Pappalardo (2015)](https://doi.org/10.1002/2015JE004818),
+mapped on the April 2010 Cassini camera mosaic. NASA Solar System Treks serves the
+map as the GIS layer
+[Cassini ISS Geologic Map Units, Global](https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer)
+(created 2023-09-29). Trek's file download answered "Access denied" on 2026-09-27,
+so we keep the layer's public ArcGIS query response: 13 polygon records, one per
+unit, with the layer description that holds the unit colors. Both are in
+`source/geology/`. The paper page returned HTTP 403 to our requests, so its
+figure colors were not compared with the GIS colors.
+
+The layer uses a Plate Carrée grid in metres on a 252.1 km sphere, central
+meridian 180°, east-positive longitude. We rasterize each polygon at pixel
+centres into a 2048 × 1024 grid in that same frame (about 0.77 km per cell at
+the equator; the source vertices are 2–16 km apart). Holes are kept. The published
+polygons nest without holes (see Known problems), so where units overlap the
+smallest unit covering the cell takes it; cells no unit covers stay gray. Unit names and colors are the layer's own; only the first letter is
+capitalised. LH and TH are the leading- and trailing-hemisphere terrains. The
+colors mark map units, not surface color or composition.
+
+| Unit | Color | Mapped km² | Shown km² |
+| --- | --- | ---: | ---: |
+| LH curvilinear material | `#df73ff` | 131,902 | 131,808 |
+| LH smooth material | `#2f5b00` | 26,411 | 26,411 |
+| TH curvilinear material | `#9700b4` | 38,448 | 38,388 |
+| Central LH | `#005ce6` | 44,142 | 43,233 |
+| Central south polar material | `#bee8ff` | 49,086 | 49,060 |
+| Equatorial cratered plains | `#d7c29e` | 33,475 | 33,475 |
+| Heavily cratered plains | `#d7c29e` | 293,585 | 267,563 |
+| Northern lineated material | `#ffff73` | 8,544 | 8,544 |
+| Ridged material | `#e60000` | 25,411 | 25,411 |
+| Southern curvilinear material | `#4c0073` | 45,134 | 45,134 |
+| Striated plains | `#e8beff` | 33,839 | 33,808 |
+| Subdued cratered plains | `#ffebaf` | 26,629 | 17,223 |
+| Transitional material | `#e9ffbe` | 78,078 | 78,016 |
+
+Areas are on the 252.1 km sphere; the whole sphere is 798,648 km².
+Gray covers 0.072% of the sphere, all unmapped slivers; no overlap is left
+unresolved.
+
+**Registration.** The central LH unit is centred near 271° E (89° W), the
+leading-hemisphere apex, so longitudes are east-positive with no flip. Every
+named tiger stripe (Alexandria, Baghdad, Cairo, Camphor, Damascus Sulci) falls in
+central south polar material, Cufa Dorsa and Ebony Dorsum in ridged material,
+Sarandib Planitia in striated plains and Sind Sulci in central LH. Drawn over
+the Schenk 2024 mosaic, the unit edges follow the cratered and tectonized
+contacts with no visible shift. This is a visual check, not a measured offset;
+the map was drawn on an older mosaic with a different control solution.
+
+Reproduce the grid from the repository root with the mapped-science Python
+environment:
+
+    python packages/bake/src/objects/acquisition/geology-grid.py src/objects/enceladus/source/geology/prepare-grid.json
+
+**Known problems.**
+
+- The heavily cratered plains polygon has no holes where subdued cratered plains
+  and northern lineated material sit (15–105° E, 30–76° N), and northern lineated
+  material lies inside subdued cratered plains. The smallest covering unit is
+  shown, so both appear. Trek's own rendering also draws subdued cratered plains
+  over heavily cratered plains, but it hides northern lineated material; this map
+  shows it. The rule is opt-in (`nestedUnits: "inner"` in
+  `source/geology/prepare-grid.json`); other geology grids keep overlaps gray.
+- Equatorial and heavily cratered plains share one color (`#d7c29e`) in the
+  layer, so their shared boundary is invisible.
+- The companion line layer (ridges, troughs, scarps, contacts) is not shown.
+- No browser check has been made yet.
 
 ## Evidence
 

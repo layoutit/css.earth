@@ -139,15 +139,73 @@
         "thumbnail": "venus-lens-radar.webp",
         "surface": "venus-radar@2x.webp",
         "source": {
-          "id": "magellan-radar",
-          "url": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
+          "id": "usgs-magellan-fmap-left-look-global-mosaic-75m",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m"
         },
         "poles": "venus-poles-radar@2x.webp",
         "material": "venus-observation-material@2x.webp",
         "shortLabel": "SAR",
-        "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
+        "legend": {
+          "kind": "scale",
+          "title": "Radar brightness",
+          "meta": "dB relative to the Muhleman law",
+          "labels": [
+            "≤−20",
+            "+5",
+            "≥+30"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                251,
+                251,
+                251
+              ]
+            ],
+            "labels": [
+              "≤−20",
+              "+5",
+              "≥+30"
+            ]
+          },
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m"
+        },
         "falseColor": true,
-        "notes": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color."
+        "qualification": "USGS Magellan SAR FMAP left-look global mosaic (75 m per pixel from full-resolution F-BIDRs, mission cycles 1 and 3), read through NASA Trek zoom-4 tiles at about 4.64 km per pixel. Gray is the product’s DN: radar cross-section divided by the Muhleman law, 0.2 × DN − 20.2 dB, clipped at −20 and +30 dB.",
+        "notes": "Magellan’s radar looked through the clouds from orbit. Bright ground returned more of the radar signal than average; dark ground returned less. Brightness is the echo in decibels relative to an average Venus surface seen at the same angle (the Muhleman law): 0 dB is average, +10 dB is ten times stronger. USGS mosaicked Magellan’s full-resolution left-looking radar strips at 75 m per pixel. NASA Trek’s zoom-4 tiles average them to about 4.6 km per pixel. This is radar brightness, not visible colour. Slopes facing the radar, rough ground and some minerals all look bright. Gray grid marks missing source data: the poles beyond 84° N and 80° S, and strips the left-looking radar missed.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Magellan’s radar looked through the clouds from orbit. Bright ground returned more of the radar signal than average; dark ground returned less."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Brightness is the echo in decibels relative to an average Venus surface seen at the same angle (the Muhleman law): 0 dB is average, +10 dB is ten times stronger."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "USGS mosaicked Magellan’s full-resolution left-looking radar strips at 75 m per pixel. NASA Trek’s zoom-4 tiles average them to about 4.6 km per pixel."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "This is radar brightness, not visible colour. Slopes facing the radar, rough ground and some minerals all look bright."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray grid marks missing source data: the poles beyond 84° N and 80° S, and strips the left-looking radar missed."
+          }
+        ]
       },
       {
         "id": "elevation",
@@ -453,6 +511,366 @@
             "id": "coverage",
             "label": "Coverage",
             "value": "Gray grid marks missing source data."
+          }
+        ]
+      },
+      {
+        "id": "gravity",
+        "label": "Gravity",
+        "thumbnail": "venus-lens-gravity.webp",
+        "surface": "venus-gravity@2x.webp",
+        "poles": "venus-poles-gravity@2x.webp",
+        "source": {
+          "id": "magellan-gravity-shgj120p",
+          "path": "../science/mgn-gravity/freeair.dat",
+          "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "material": "venus-observation-material@2x.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Gravity anomaly",
+          "meta": "mGal at 6,051 km radius",
+          "labels": [
+            "≤−200",
+            "0",
+            "≥200"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "≤−200",
+              "0",
+              "≥200"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "falseColor": true,
+        "qualification": "Magellan free-air gravity from JPL model SHGJ120P to degree and order 120 (PDS MGN-V-RSS-5-GRAVITY-L2-V1.0, product RS-DMGJ120P.A01, released 1995–96 as preliminary), in mGal at the 6,051.0 km reference sphere, 1° cells.",
+        "notes": "How much Venus’s gravity differs from the pull of a perfectly round, evenly dense planet, at a radius of 6,051 km. Extra mass below the surface pulls harder. Milligals (mGal): 1 mGal is 0.00001 m/s², and Venus’s surface gravity is about 887,000 mGal. Red pulls harder and blue weaker; values beyond −200 or +200 mGal (0.11% of the planet, over Maxwell Montes and Atla Regio) use endpoint colors. JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients. Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How much Venus’s gravity differs from the pull of a perfectly round, evenly dense planet, at a radius of 6,051 km. Extra mass below the surface pulls harder."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal): 1 mGal is 0.00001 m/s², and Venus’s surface gravity is about 887,000 mGal. Red pulls harder and blue weaker; values beyond −200 or +200 mGal (0.11% of the planet, over Maxwell Montes and Atla Regio) use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre."
+          }
+        ]
+      },
+      {
+        "id": "gravity-uncertainty",
+        "label": "Gravity uncertainty",
+        "thumbnail": "venus-lens-gravity-uncertainty.webp",
+        "surface": "venus-gravity-uncertainty@2x.webp",
+        "poles": "venus-poles-gravity-uncertainty@2x.webp",
+        "source": {
+          "id": "magellan-gravity-shgj120p",
+          "path": "../science/mgn-gravity/freeair.dat",
+          "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "material": "venus-observation-material@2x.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Gravity uncertainty",
+          "meta": "mGal, one sigma",
+          "labels": [
+            "0",
+            "22"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "22"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "falseColor": true,
+        "qualification": "One-sigma uncertainty of the SHGJ120P free-air anomaly, the second band of PDS product RS-DMGJ120P.A01, in mGal, 1° cells.",
+        "notes": "The one-sigma uncertainty of the gravity anomaly map at each place: how far the true value may plausibly differ from the map. Milligals (mGal). Yellow is least certain. The archive stores this map as the second band of the free-air product. JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients. Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The one-sigma uncertainty of the gravity anomaly map at each place: how far the true value may plausibly differ from the map."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal). Yellow is least certain. The archive stores this map as the second band of the free-air product."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre."
+          }
+        ]
+      },
+      {
+        "id": "bouguer",
+        "label": "Bouguer gravity",
+        "thumbnail": "venus-lens-bouguer.webp",
+        "surface": "venus-bouguer@2x.webp",
+        "poles": "venus-poles-bouguer@2x.webp",
+        "source": {
+          "id": "magellan-gravity-shgj120p",
+          "path": "../science/mgn-gravity/bouguer.dat",
+          "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "material": "venus-observation-material@2x.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Bouguer anomaly",
+          "meta": "mGal at 6,051 km radius",
+          "labels": [
+            "≤−600",
+            "0",
+            "≥600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "≤−600",
+              "0",
+              "≥600"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "falseColor": true,
+        "qualification": "Magellan Bouguer anomaly from SHGJ120P (PDS product RS-DMBJ120P.A01): the free-air anomaly minus the gravity the topography would produce with no compensation, at the 6,051.0 km reference sphere, in mGal, 1° cells. The archive catalogue does not state the density used.",
+        "notes": "Gravity after subtracting what the visible mountains and lowlands would pull if nothing below compensated for them. What remains points to mass below the surface. Milligals (mGal). Blue means less mass below than the topography alone implies, as under thick, light crust; values beyond ±600 mGal (0.06% of the planet, under Maxwell Montes) use endpoint colors. JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients. Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Gravity after subtracting what the visible mountains and lowlands would pull if nothing below compensated for them. What remains points to mass below the surface."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal). Blue means less mass below than the topography alone implies, as under thick, light crust; values beyond ±600 mGal (0.06% of the planet, under Maxwell Montes) use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre."
+          }
+        ]
+      },
+      {
+        "id": "geoid",
+        "label": "Geoid",
+        "thumbnail": "venus-lens-geoid.webp",
+        "surface": "venus-geoid@2x.webp",
+        "poles": "venus-poles-geoid@2x.webp",
+        "source": {
+          "id": "magellan-gravity-shgj120p",
+          "path": "../science/mgn-gravity/geoid.dat",
+          "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "material": "venus-observation-material@2x.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Geoid height",
+          "meta": "Meters",
+          "labels": [
+            "≤−100",
+            "0",
+            "≥100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "≤−100",
+              "0",
+              "≥100"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/"
+        },
+        "falseColor": true,
+        "qualification": "Magellan geoid anomaly from SHGJ120P (PDS product RS-DMOJ120P.A01), in meters, 1° cells. The archive gives geoid errors of about 0.1 to 2.3 m.",
+        "notes": "The height of the geoid: the surface of equal gravity potential, where a global ocean would settle. Highs sit over mass excess. Meters of geoid anomaly: how far the equal-potential surface rises above or falls below its mean. Values beyond ±100 m (0.38% of the planet, over Atla Regio and Beta Regio) use endpoint colors. JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients. Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The height of the geoid: the surface of equal gravity potential, where a global ocean would settle. Highs sit over mass excess."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Meters of geoid anomaly: how far the equal-potential surface rises above or falls below its mean. Values beyond ±100 m (0.38% of the planet, over Atla Regio and Beta Regio) use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL’s Magellan Gravity Science Team fitted this model to more than 3.3 million Doppler measurements of the Magellan spacecraft, 204,000 of them from Pioneer Venus Orbiter. It is the degree-120 model the archive publishes as maps; the later degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 120 resolves features about 160 km across at best, and less where Magellan flew high, near the poles and in the south. Each 1° cell holds the model value at its centre."
           }
         ]
       }

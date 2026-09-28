@@ -1,0 +1,27 @@
+{
+  "id": "pds-mgs-tes-thermal-inertia",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MGS TES thermal inertia maps, Putzig & Mellon (2007)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html",
+      "label": "TES thermal inertia maps at the PDS Geosciences Node"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat",
+      "label": "MGS-M-TES-5-TIMAP-V1.0 data set catalogue"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

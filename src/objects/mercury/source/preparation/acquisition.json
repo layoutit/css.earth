@@ -141,6 +141,32 @@
       "groups": [
         "refresh-native-labels"
       ]
+    },
+    {
+      "kind": "zip-member",
+      "path": "science/gravity/anomaly-hgm008.tif",
+      "url": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe",
+      "member": "Anomaly_Map_HgM008_Lmax90_16ppd.tif",
+      "groups": [
+        "refresh-gravity"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "path": "science/gravity/crustal-thickness-hgm008.tif",
+      "url": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6",
+      "member": "CrustalThickness_Map_HgM008_16ppd.tif",
+      "groups": [
+        "refresh-gravity"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "science/gravity/ggmes_100v08_sha.lbl",
+      "url": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl",
+      "groups": [
+        "refresh-gravity"
+      ]
     }
   ]
 }

@@ -32,9 +32,9 @@
       "summary": "An OpenSpace cloud texture of unknown camera, wavelength and processing."
     },
     "radar": {
-      "title": "C3-MDIR synthetic-color radar mosaic",
+      "title": "Radar brightness of the ground",
       "detail": "Magellan",
-      "summary": "Radar images of the ground beneath the clouds, in added colors a person would not see."
+      "summary": "Magellan’s radar mapped the ground beneath the clouds; brighter means a stronger radar echo."
     },
     "elevation": {
       "title": "Height of the solid surface",
@@ -60,6 +60,26 @@
       "title": "Small-scale bumps seen by radar",
       "detail": "Magellan",
       "summary": "Radar echoes reveal how uneven the ground is at scales of meters; larger values mean a rougher surface."
+    },
+    "gravity": {
+      "title": "Gravity anomaly",
+      "detail": "Magellan",
+      "summary": "Radio tracking of Magellan measured where Venus pulls a little harder or weaker than a smooth planet."
+    },
+    "gravity-uncertainty": {
+      "title": "How well gravity is known",
+      "detail": "Magellan",
+      "summary": "The one-sigma uncertainty of the gravity map; larger where Magellan flew high."
+    },
+    "bouguer": {
+      "title": "Gravity without the topography",
+      "detail": "Magellan",
+      "summary": "Gravity after subtracting the pull of the visible mountains and lowlands, which points to mass below them."
+    },
+    "geoid": {
+      "title": "Shape of Venus’s gravity",
+      "detail": "Magellan",
+      "summary": "The height of the surface of equal gravity potential, the level a global ocean would settle to."
     }
   }
 }

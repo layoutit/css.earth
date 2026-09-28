@@ -1,0 +1,101 @@
+{
+  "sourceRecords": {
+    "TH curvilinear material": 1,
+    "equatorial cratered plains": 1,
+    "northern lineated material": 1,
+    "LH smooth material": 1,
+    "subdued cratered plains": 1,
+    "heavily cratered plains": 1,
+    "central LH": 1,
+    "transitional material": 1,
+    "striated plains": 1,
+    "ridged material": 1,
+    "LH curvilinear material": 1,
+    "southern curvilinear material": 1,
+    "central south polar material": 1
+  },
+  "width": 2048,
+  "height": 1024,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 1173,
+  "categories": [
+    {
+      "value": "LH curvilinear material",
+      "label": "LH curvilinear material",
+      "color": "#df73ff"
+    },
+    {
+      "value": "LH smooth material",
+      "label": "LH smooth material",
+      "color": "#2f5b00"
+    },
+    {
+      "value": "TH curvilinear material",
+      "label": "TH curvilinear material",
+      "color": "#9700b4"
+    },
+    {
+      "value": "central LH",
+      "label": "Central LH",
+      "color": "#005ce6"
+    },
+    {
+      "value": "central south polar material",
+      "label": "Central south polar material",
+      "color": "#bee8ff"
+    },
+    {
+      "value": "equatorial cratered plains",
+      "label": "Equatorial cratered plains",
+      "color": "#d7c29e"
+    },
+    {
+      "value": "heavily cratered plains",
+      "label": "Heavily cratered plains",
+      "color": "#d7c29e"
+    },
+    {
+      "value": "northern lineated material",
+      "label": "Northern lineated material",
+      "color": "#ffff73"
+    },
+    {
+      "value": "ridged material",
+      "label": "Ridged material",
+      "color": "#e60000"
+    },
+    {
+      "value": "southern curvilinear material",
+      "label": "Southern curvilinear material",
+      "color": "#4c0073"
+    },
+    {
+      "value": "striated plains",
+      "label": "Striated plains",
+      "color": "#e8beff"
+    },
+    {
+      "value": "subdued cratered plains",
+      "label": "Subdued cratered plains",
+      "color": "#ffebaf"
+    },
+    {
+      "value": "transitional material",
+      "label": "Transitional material",
+      "color": "#e9ffbe"
+    }
+  ],
+  "output": "enceladus-geologic-units.tif",
+  "sha256": "10cf401291065995d394fb635c43e95bd8b9cd416e18517185b6f432dd10bced",
+  "transform": [
+    773.4331132519403,
+    0.0,
+    -791995.5079699869,
+    0.0,
+    -773.4331132519403,
+    395997.75398499344
+  ],
+  "radiusMeters": 252100,
+  "policy": "Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld; the smallest unit covering a withheld pixel takes it (nestedUnits inner); source edges clipped by global raster extent.",
+  "centerLongitude": 180
+}

@@ -51,6 +51,36 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-geology-shadow-alpha@2x.webp",
+      "bytes": 566550,
+      "sha256": "052c1714b71072b2aab484667e75e9a64f829144199a9dd0851636eb0d9228e7"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-geology-shadow@2x.webp",
+      "bytes": 254964,
+      "sha256": "5bd9bd0bf8eb64dd78f54becb1707d65ccc5ba0a3f914d2cf54a560fd35a7a6b"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-geology-surface-alpha@2x.webp",
+      "bytes": 286508,
+      "sha256": "6d3b78f36fd8943a0c59f7b56d2ecf549a5a5b2162d721f1db6e989b38fe38f9"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-geology-surface@2x.webp",
+      "bytes": 17846,
+      "sha256": "4c0d9512dc33baee75798c236b5a30aa9699edb64c82f2e8028be67b6f3a55bd"
+    },
+    {
+      "location": "public",
+      "filename": "enceladus-geology-thumbnail.webp",
+      "bytes": 506,
+      "sha256": "df7a4cb75077cf22a727535e062e19d36580cd0cd3ef842a8e77f1b2d3507531"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-ice-absorption-legend.webp",
       "bytes": 146,
       "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e"
@@ -220,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1681,
-      "sha256": "fa7415ae07ee4573a288acceec0bafb1196dffc0d664e540b4c5345284c6451a"
+      "bytes": 1947,
+      "sha256": "44b9997db9ad1d0475703912969e613f506eb839cfd666564b2a10ec8ec19a76"
     },
     {
       "location": "prepared",
@@ -232,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1858,
-      "sha256": "28cb4e86aae33fb24810330840926fd659cac6ab30397720095764c758fdad0a"
+      "bytes": 2999,
+      "sha256": "9f15a1e1bb1085d4fe0e1ba759bb1e21ea67e263f61ea571cad9d8134a5160b3"
     },
     {
       "location": "prepared",
@@ -244,26 +274,32 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 4232,
-      "sha256": "8eb7f9ac532cc6cc4ea6975d1a0422fa2d12d1418878449ad1029cee2effc5f0"
+      "bytes": 5810,
+      "sha256": "2758a971c0d3e779b3bc288a0dec952c8b862afd11fbe1ca8067580efd9f4483"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 9744,
-      "sha256": "0d1681a404d4773197411998e67e88348001f249469a14ee6e78ac3992cee353"
+      "bytes": 11541,
+      "sha256": "49186aa2e1582ae53ddf7971d0cd1cf3d7926423761cb6ec4a5e7c12fd67116f"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 479,
-      "sha256": "18a0ab571f608c5f3793a380e30cc6af92fe2bac7f19f5d0f160f836bb9e4e85"
+      "bytes": 552,
+      "sha256": "26969b41b65fd1562790886a6a47719d74afb23d138f820c694ba3473140ca23"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
       "bytes": 36666,
       "sha256": "ebf3aba2cd6dc22204918035abd25b8fbb6a9051a4254f9f2f81f8f11c02faea"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/geology.webp",
+      "bytes": 7716,
+      "sha256": "6005e8702b5bd5e32844311132c45f4e25bcffa027ca3bedb3a91e8e64ae9267"
     },
     {
       "location": "prepared",
@@ -298,8 +334,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1526529,
-      "sha256": "eae90e4b12f09ab1d43100d53755c135b46c1482f2117b088b09c0d5994a0f52"
+      "bytes": 1538390,
+      "sha256": "6a9233e2a471bd0acab7120dbc3b27e37807ffbd36c34cde12e11bd1606baf25"
     },
     {
       "location": "prepared",
@@ -322,14 +358,14 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 9751,
-      "sha256": "ca5d271f8064852c091cf380bd2220c644d6c90ab6b99175e33f191591d8fa91"
+      "bytes": 11548,
+      "sha256": "98634a55b93ec2be0a54746c741d3277dc31f614e651f67a367c1181d9f2f157"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1786,
-      "sha256": "09a20cd7edf403a34c4ed6fb764b508c26368947169a3c23b69ff24c205c9fc5"
+      "bytes": 1985,
+      "sha256": "1e425aae34ee0601e7a8b6c4e2a1a84b2d750fc55d7b10347492ba6036a30e99"
     },
     {
       "location": "prepared",

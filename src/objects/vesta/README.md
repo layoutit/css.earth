@@ -11,6 +11,8 @@ Vesta uses Dawn framing-camera mosaics, spectral ratios and a terrain model in t
 | HAMO photography and the north | [DLR Dawn HAMO-1-2 clear mosaic](https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.png), May 2013, 60 m/pixel; HAMO-1 south (2011) joined with HAMO-2 north (June to July 2012) |
 | Spectral ratios | [DLR Clementine-style mosaic](https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clementine/Vesta_clementine_HAMO-1-2_global.jp2), from the original PDS archive |
 | Shape and elevation | [DLR HAMO 64-pixel-per-degree terrain model](https://dawngis.dlr.de/data/Vesta/dtm_vesta.php) |
+| Hydrogen | [Dawn GRaND hydrogen map](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_HYDROGEN_MAP`; Prettyman et al. 2012, [Science 338, 242](https://doi.org/10.1126/science.1225354) |
+| Iron gamma rays | [Dawn GRaND corrected iron counting rate](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_IRON_CORRECTED_COUNTS_MAP`; Yamashita et al. 2013, [MAPS 48, 2237](https://doi.org/10.1111/maps.12139) |
 | Physical placement | JPL Horizons solution #36 |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VESTA/target) Vesta centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -56,15 +58,60 @@ pins the label grid, the fallback order and the prepared coverage.
 
 ![Dawn mosaic predicted through the route beside the SPHERE frame](evidence/sphere-registration-2018-06-08.png)
 
+## Surface elements from GRaND
+
+Dawn's gamma-ray and neutron detector (GRaND) measured the top few decimetres
+of regolith from low orbit, about 210 km up. Two archived numeric maps are
+shown, read from the PDS4 bundle `urn:nasa:pds:dawn-grand-vesta` 1.0, not from
+the colour renders in NASA Vesta Trek.
+
+| Lens | Archived quantity | Pixels | Values | Dates |
+| --- | --- | --- | --- | --- |
+| Hydrogen | Hydrogen abundance, µg/g | 16,200, 2° × 2° | 0.0 to 391.1 | 2011-12-08 to 2012-01-14 |
+| Iron gamma rays | Fe 7.6 MeV counting rate corrected for neutron density, counts/s | 178,698 equal-area, 0.5° tall | 0.0687 to 0.07746 | 2011-12-08 to 2012-04-27 |
+
+**Resolution.** The archive and papers give about 300 km full width at half
+maximum on the surface. The pixels are a sampling grid, not detail: features
+smaller than a few hundred kilometres are blurred together.
+
+**Frame.** The archive uses Claudia Double Prime; the other Vesta maps use
+Claudia. The [GRaND catalogue](https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT)
+states the two share a pole and differ by 210° of longitude (Marcia at 190° E
+in Claudia). [`tools/objects/source-authoring/vesta-grand/prepare-grids.mts`](../../../tools/objects/source-authoring/vesta-grand/prepare-grids.mts)
+places every archived pixel by its own latitude and longitude bounds, adds 210°,
+and writes the `.npy` grids the shared reader takes. It checks each table
+against its label's checksum, record count and units, and refuses overlaps,
+gaps and pixels that straddle a cell, so no value is resampled. The hydrogen
+label says rows start at −180° E; the longitude columns start each row at −30° E,
+and the columns are used.
+
+**What the values mean.** Hydrogen is richest where dark, carbonaceous material
+fell on Vesta and poorest in the Rheasilvia basin (minimum at 303° E, 63° S in
+Claudia). A higher iron counting rate means more iron: basaltic eucrite terrain
+against the diogenite that Rheasilvia excavated. The iron map is a counting
+rate. The catalogue's preliminary conversion (wt% = 189.2 × counts/s, scaled to
+the 13.8 wt% mean of howardites) comes with a caution and is not applied.
+Neither table carries a per-pixel uncertainty.
+
+**Checks (2026-09-27).** 4,000 random points read through the
+shared `.npy` reader equal a direct lookup in the raw tables at Claudia minus
+210°. The hydrogen table's longitudes correlate best with the Trek hydrogen
+render at zero shift (r = 0.75 in its red channel, 10° steps), which confirms
+the archive columns are Claudia Double Prime.
+
+A global geologic map is not yet shown; see the
+[investigation ledger](investigations.json) entry `yingst-2023-global-geologic-map`.
+
 ## Known problems
 
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Vesta (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Vesta (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius. On Vesta the Gazetteer uses the IAU Claudia Double Prime meridian, 210° from the Claudia frame of the maps and mesh, so `presentation/surface-map.json` puts the map's left edge (Claudia 0°) at 150° in the Gazetteer frame. Before this, every Vesta label sat 210° from its feature. Tested against the HAMO terrain model: with the shift, all 33 Gazetteer craters 15–80 km across and within 40° of the equator have centres below the ring one diameter out (median 3.7 km deep); without it, 11 do ([`evidence/gazetteer-frame/crater-depressions.json`](evidence/gazetteer-frame/crater-depressions.json)). The app now draws the Marcia label on its 68 km crater ([`evidence/gazetteer-frame/marcia-label.jpg`](evidence/gazetteer-frame/marcia-label.jpg), headless Chromium at 1280 × 800, 2026-09-27).
 
 Feature notes: 9 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - The visible mosaic has clipped bright terrain and registration artifacts. The black-pixel mask is a heuristic that can hide valid dark pixels.
 - Clear-filter photography retains the illumination and seams of the original low-altitude mosaic. Its 20 m/pixel source is downsampled for this display; it does not change the 800-face mesh or supply 20 m terrain geometry. North of the LAMO coverage the 60 m/pixel HAMO mosaic shows instead, so resolution and sun angle change across that boundary, and the last few degrees around the north pole are very dark in the source.
 - Spectral ratios are not mineral-abundance measurements.
+- GRaND maps resolve about 300 km; their 2° and 0.5° pixels are sampling, not detail. The iron lens is a counting rate, not a weight percent.
 - Terrain values are radii, despite contradictory generic label wording. Polar interpolation is not independent stereo coverage.
 - The 8 km simplification allowance is an approximation, not an error bound or source uncertainty. Placement uses osculating elements with limited temporal validity.
 

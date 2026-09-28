@@ -1,0 +1,51 @@
+{
+  "id": "trek-mercury-hgm008-crustal-thickness",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MSGR MLA, Crustal Thickness Global (CrustalThickness_Map_HgM008_16ppd)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://trek.nasa.gov/mercury/",
+      "label": "NASA Mercury Trek"
+    },
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/tiles/Mercury/EQ/CrustalThickness_Map_HgM008_16ppd/1.0.0/WMTSCapabilities.xml",
+      "label": "Trek layer service"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/30"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "genova-2019-mercury-hgm008",
+      "evidence": "Genova et al. (2019), Figure 1C-D and text: crustal thickness from HgM008 and MLA topography, degrees 2-60"
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Antonio Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center",
+      "scope": "citation",
+      "evidence": "https://trek.nasa.gov/mercury/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=HgM008"
+    },
+    {
+      "kind": "limitation",
+      "text": "Model output: assumes crust density 2,800 kg/m3, crust-mantle density contrast 400 kg/m3 and 35 km mean thickness.",
+      "scope": "interpretation",
+      "evidence": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662718/"
+    }
+  ]
+}

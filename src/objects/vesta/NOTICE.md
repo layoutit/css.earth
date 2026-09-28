@@ -19,3 +19,5 @@ original global PNG; the companion PDS label supplies its map registration.
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
 
 Feature caption notes: 9 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
+
+Hydrogen and iron gamma-ray maps: NASA/JPL-Caltech/UCLA/PSI, Dawn GRaND team (T. H. Prettyman, Planetary Science Institute), archived by the NASA Planetary Data System Small Bodies Node as bundle `urn:nasa:pds:dawn-grand-vesta` 1.0. Cite Prettyman et al. (2012), Science 338, 242, and Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237. The prepared grids move the archived pixels from Claudia Double Prime into the Claudia frame; values are unchanged.

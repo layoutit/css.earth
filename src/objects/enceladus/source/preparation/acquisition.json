@@ -203,6 +203,22 @@
       ],
       "path": "features/ENCELADUS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ENCELADUS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "geology"
+      ],
+      "path": "geology/Cassini_ISS_GeologicMapUnits_Global.query.json",
+      "url": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "geology"
+      ],
+      "path": "geology/Cassini_ISS_GeologicMapUnits_Global.layer.json",
+      "url": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/0?f=json"
     }
   ]
 }

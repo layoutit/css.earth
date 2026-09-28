@@ -15,6 +15,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 | Geology | [USGS Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), 49 units |
 | Silicate signature | [Lucey et al. (2021)](https://zenodo.org/records/4558194), Christiansen-feature wavelength |
 | Crust thickness | [NASA GRAIL visualization](https://svs.gsfc.nasa.gov/4014/), based on gravity and topography models |
+| Gravity, Bouguer gravity | [GRAIL GRGM1200A maps](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/), NASA GSFC, PDS release 2016-04-01: free-air anomaly and Bouguer disturbance in mGal, summed to degree 660, 16 pixels/degree. See [GRAIL gravity views](#grail-gravity-views). |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MOON/target) the Moon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 | Lighting | The Hapke model of [Sato et al. (2014)](https://doi.org/10.1002/2013JE004580) at 643 nm, the model the monochrome mosaic was corrected with, recorded in [`source/photometry/sato-2014-hapke-643nm.json`](source/photometry/sato-2014-hapke-643nm.json). See [Lighting law](#lighting-law). |
 
@@ -290,9 +291,94 @@ See the [mapped-science conversion method](../../../packages/bake/src/objects/ac
 
 </details>
 
+## GRAIL gravity views
+
+Two views show the Moon's gravity field as GRAIL measured it. Both use the
+GRGM1200A field from NASA Goddard's GRAIL team, built from the whole mission's
+tracking data (1 March to 14 December 2012). The PDS label names
+[Lemoine et al. (2014)](https://doi.org/10.1002/2014GL060027) as the field's
+reference.
+
+| View | Product | What it shows |
+| --- | --- | --- |
+| Gravity | [GGGRX_1200A_ANOM_L660](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl) | Free-air gravity anomaly in mGal: the measured field minus that of a uniform sphere, with nothing removed for topography |
+| Bouguer gravity | [GGGRX_1200A_BOUG_L660](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl) | Bouguer disturbance in mGal: the same field after the GRAIL team removed the pull of LOLA topography, taken as rock of 2,500 kg/m³ |
+
+One mGal is 0.01 mm/s². Both maps give values on a 1,738.0 km reference sphere
+in the lunar principal-axis frame of DE430. They are 16 pixels per degree
+(about 1.9 km at the equator), global, with no missing cells.
+
+**How the views relate to Crust.** The Crust view is not a measurement. It is
+a model of crustal thickness that GRAIL scientists inverted from gravity and
+topography, and it depends on the densities they assumed for crust and mantle.
+The Bouguer view is the step before such a model: gravity with the
+topography's pull removed, under one stated density. A crustal-thickness model
+then turns what is left into a thickness, with its own density choices. The
+Gravity view is the measured field itself, before either step. Positive Bouguer values usually mean dense mantle lies closer to
+the surface, as under the mare basins' mascons
+([Neumann et al. 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4646831/)).
+
+**Degree 660.** The field is a sum of spherical harmonics up to degree 1200.
+The archive publishes each map summed to several degrees. The label says that
+terms above degree 600 are held toward a power-law prior (Kaula,
+3.6 × 10⁻⁴/n²). Degree 660 is the archived sum just above that limit. Its
+shortest half-wavelength, π × 1,738 km / 660 ≈ 8.3 km, spans about three
+texels of the 4,096-pixel numeric texture (2.7 km), so the texture keeps every
+term the map carries. The degree-900 and degree-1200 maps add terms that the
+prior increasingly shapes.
+
+**Colours.** Blue is below zero and red above, the same palette as Heat
+anomalies. Gravity spans ±400 mGal and Bouguer gravity ±600 mGal.
+These are display stretches chosen from each map's own spread, not scientific
+limits: 1.0% of the Moon's area lies beyond the Gravity stretch and
+1.3% beyond the Bouguer one. Those areas show the end colours.
+
+### Evidence
+
+- The lenses read the archive's EXTRAS GeoTIFF copies. The volume's
+  [extrinfo.txt](source/science/grail/extrinfo.txt) says they hold the same data
+  as the RSDMAP images. A byte-level comparison agreed on all 16,588,800 cells
+  of each map after shifting the GeoTIFF's −180° left edge to the image's 0°.
+- The GeoTIFF tags a 1,737.4 km Moon_2000 ellipsoid. That is a setting of the
+  GIS container: the RSDMAP label, which governs the values, gives the 1,738.0 km
+  sphere. The geographic grid reads the same either way.
+- The migrated PDS4 labels (`.xml`) swap the upper-left corner coordinates. The
+  original PDS3 labels are kept here and used instead.
+- The Moon's recipe block, read through the shared scientific loader, returns
+  the IMG value at all 831 probe points, including the seam and both poles.
+- Published comparison: [Neumann et al. (2015), Table 1](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4646831/)
+  gives the Bouguer contrast of the central high of each lunar basin. For the 14
+  basins from Orientale to Mendeleev, the peak-minus-trough of this map's
+  azimuthally averaged profile is 1.04 to 1.44 times theirs (median 1.13,
+  correlation 0.987). Orientale: 798 mGal here, 720 ± 28 there. They used the
+  earlier GRGM900C field filtered to degrees 6 to 540, so a somewhat larger
+  contrast is expected from a field kept to degree 660.
+- The largest Bouguer value, +741 mGal, lies at 19.5° N, 55.5° E in the
+  Crisium basin. The free-air extremes, −1,330 and +1,782 mGal, lie in the farside
+  highlands between 201° and 210° E near the equator; that map keeps the pull
+  of topography.
+- [All check results](evidence/grail-gravity/checks.json), with the tested
+  file sizes and hashes. Flat previews painted with the lens palette were
+  inspected; they are not in the repository.
+
+### Known problems
+
+- Gravity is in the principal-axis frame; the surface and other views are in
+  the mean-Earth frame. Positions differ by about 1 km at the surface
+  ([LRO coordinate white paper](https://science.nasa.gov/wp-content/uploads/2024/01/luncoordwhitepaper-10-08.pdf)),
+  under half a numeric texel. No frame conversion is applied.
+- Values above degree 600 are partly shaped by the prior. Formal uncertainty
+  varies across the Moon; the archived error map gives 0.6 to 5.3 mGal (1σ) at
+  the 14 basin centres checked.
+- The Bouguer view assumes one density everywhere. Dense mare basalt is not
+  removed, so part of the positive signal over the maria is basalt fill rather
+  than mantle uplift.
+- Numeric colour does not displace the globe. Lighting and shading are the
+  shared Moon lighting, not part of the data.
+
 ## Catalogue attribution
 
-The GRAIL crustal-thickness print is attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.
+The GRAIL crustal-thickness print and the two GRGM1200A gravity maps are attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.
 
 ## Kaguya numeric views
 

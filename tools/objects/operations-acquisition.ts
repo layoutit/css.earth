@@ -15,6 +15,7 @@ import { sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { withIdleTimeout } from '@cssearth/bake/objects/sources';
 import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from '@cssearth/bake/objects/acquisition';
 import { prepareDskMesh, validateDskMeshRecipe } from '@cssearth/bake/objects/acquisition';
+import { missingCoverageColor } from '@cssearth/bake/raster';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
 interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
 interface MappedComposition extends OperationBase {kind:'mapped-composition';path:string;recipePath:string;product:string;}
@@ -29,7 +30,7 @@ interface ZipMember extends OperationBase {kind:'zip-member';path:string;url:str
 interface TarGzMember extends OperationBase {kind:'tar-gz-member';path:string;url:string;member:string;}
 interface SatelliteCatalog extends OperationBase {kind:'satellite-catalog';path:string;recipePath:string;headers?:Record<string,string>;}
 interface VerifyDownload extends OperationBase {kind:'verify-download';url:string;}
-interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;}
+interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;missingCoverage?:'transparent';}
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
 /** A pinned JPL Horizons time-list table asked for again; Horizons dates each response, so its rows are compared, not its bytes. */
@@ -63,6 +64,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
   if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
   if(step.kind==='tile-mosaic')for(const key of ['tileSize','columns','rows','dataWidth','dataHeight','width','height','concurrency'])if(typeof step[key]!=='number'||!Number.isSafeInteger(step[key])||step[key]<=0)throw new TypeError(`Invalid mosaic ${key}.`);
+  if(step.kind==='tile-mosaic'&&step.missingCoverage!==undefined&&(step.missingCoverage!=='transparent'||step.dataWidth!==step.width||step.dataHeight!==step.height))throw new TypeError(`${String(step.path)}: missingCoverage must be "transparent" and needs the mosaic kept at its data size, not ${String(step.missingCoverage)} at ${String(step.dataWidth)}x${String(step.dataHeight)} to ${String(step.width)}x${String(step.height)}.`);
   if(step.kind==='verify-request'){record(step.form);if(typeof step.expectedPath!=='string'||!['trim','numeric-lines','before-marker'].includes(String(step.selector)))throw new TypeError('Invalid source response comparator.');if(step.selector==='before-marker'&&typeof step.marker!=='string')throw new TypeError('Source marker is missing.');}
   if(step.kind==='verify-json')record(step.fields);
  }
@@ -221,6 +223,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    const inputs:{input:Buffer;left:number;top:number}[]=[];
    for(let offset=0;offset<tiles.length;offset+=step.concurrency)await Promise.all(tiles.slice(offset,offset+step.concurrency).map(async({x,y})=>{inputs.push({input:Buffer.from(await bytes(step.url.replaceAll('${x}',String(x)).replaceAll('${y}',String(y)))),left:x*step.tileSize,top:y*step.tileSize});}));
    inputs.sort((a,b)=>a.top-b.top||a.left-b.left);
+   if(step.missingCoverage==='transparent'){await publish(step.path,await transparentGapsAsCoverage(step,inputs));continue;}
    const stitched=await sharp({create:{width:step.columns*step.tileSize,height:step.rows*step.tileSize,channels:3,background:{r:0,g:0,b:0}}}).composite(inputs).png().toBuffer();
    let image=sharp(stitched).extract({left:0,top:0,width:step.dataWidth,height:step.dataHeight});if(step.dataWidth!==step.width||step.dataHeight!==step.height)image=image.resize(step.width,step.height,{kernel:'lanczos3',fit:'fill'});if(step.forceRgb)image=image.removeAlpha();
    await publish(step.path,await image.png({compressionLevel:9,adaptiveFiltering:true}).toBuffer());
@@ -230,6 +233,33 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  if(failures.length===1)throw failures[0].error;
  if(failures.length)throw new AggregateError(failures.map(f=>f.error),`${failures.length} acquisition steps failed (every step was attempted):\n`+failures.map(f=>` - ${'path' in f.step?f.step.path:f.step.kind}: ${f.error instanceof Error?f.error.message:String(f.error)}`).join('\n'));
  return {operationCount:selected.length};
+}
+
+/**
+ * A gray tile service that marks no-data as transparency and averages observed values with those transparent zeros
+ * when it downsamples (Trek's partial-alpha pixels, gray ≈ observed mean × alpha / 255). Dividing by alpha recovers the
+ * observed mean, with an 8-bit rounding error of at most ±1 DN when alpha ≥ 128. Pixels less than half observed become
+ * the shared missing-coverage grid rather than being recovered from too few samples.
+ */
+async function transparentGapsAsCoverage(step:Mosaic,inputs:{input:Buffer;left:number;top:number}[]) {
+ const {width,height}=step,gray=new Uint8Array(width*height),alpha=new Uint8Array(width*height);
+ // Tiles are decoded one by one; compositing would premultiply partial alpha and shift gray values by up to 2 DN.
+ for(const tile of inputs){
+  const {data,info}=await sharp(tile.input).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+  if(info.width!==step.tileSize||info.height!==step.tileSize||info.channels!==4)throw new Error(`${step.path}: tile at ${tile.left},${tile.top} is ${info.width}x${info.height} with ${info.channels} channels.`);
+  for(let y=0;y<info.height&&tile.top+y<height;y++)for(let x=0;x<info.width&&tile.left+x<width;x++){
+   const source=(y*info.width+x)*4,target=(tile.top+y)*width+tile.left+x;
+   if(data[source]!==data[source+1]||data[source]!==data[source+2])throw new Error(`${step.path}: tile at ${tile.left},${tile.top} is not gray at ${x},${y}.`);
+   gray[target]=data[source]!;alpha[target]=data[source+3]!;
+  }
+ }
+ const rgb=new Uint8Array(width*height*3);
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+  const i=y*width+x,a=alpha[i]!;
+  if(a<128)rgb.set(missingCoverageColor(-180+(x+.5)*360/width,90-(y+.5)*180/height,180/height),i*3);
+  else rgb.fill(Math.min(255,Math.round(gray[i]!*255/a)),i*3,i*3+3);
+ }
+ return sharp(rgb,{raw:{width,height,channels:3}}).png({compressionLevel:9,adaptiveFiltering:true}).toBuffer();
 }
 
 /** Default acquisition restores missing pins only. Existing bytes are verified afterwards, so a stale pin never blocks a download. */

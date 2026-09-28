@@ -85,6 +85,21 @@
       "title": "Wieczorek 2022 crust model",
       "detail": "Wieczorek et al. (2022)",
       "summary": "Model with 39 km beneath InSight and uniform crust density; one published example."
+    },
+    "albedo": {
+      "title": "MGS TES surface albedo",
+      "detail": "MGS TES",
+      "summary": "How much sunlight the ground reflects. Bright areas are dusty; dark areas are sand and rock."
+    },
+    "thermal-inertia": {
+      "title": "How fast the ground heats and cools",
+      "detail": "MGS TES",
+      "summary": "Dust heats and cools quickly; sand and rock hold their temperature. Measured from nightside temperatures."
+    },
+    "dust-cover": {
+      "title": "Where dust covers the ground",
+      "detail": "MGS TES",
+      "summary": "An infrared index of fine dust cover: low values are dusty, high values dust-free."
     }
   }
 }
