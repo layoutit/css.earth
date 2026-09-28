@@ -67,7 +67,6 @@
     "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
       {"from":"packages/bake/cli/report-investigations.mts","to":"tools/prepare/prepare-catalog.mts"},
-      {"from":"packages/bake/src/density/retirement.test.ts","to":"tools/cli/bundle-renderer.mts"},
       {"from":"packages/renderer/src/navigation/camera-viewport.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/perspective-dolly.test.ts","to":"src/platform/test/camera-orientation-fixture.mts"},
       {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},
