@@ -52,7 +52,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./new-object/phase-curve-lens.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const entries = parsePhaseCurveEntries(JSON.parse(await readFile(option('phase-curve')!, 'utf8')));
     const lines = await relensExisting(process.cwd(), [...entries.keys()], 'phase-curve', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), entries);
-    process.stdout.write(`${lines.length} lens(es) added. Bake the changed planets: node tools/prepare/cli/prepare-object.mts <id>...\n`);
+    process.stdout.write(`${lines.length} lens(es) added. Bake the changed planets: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
     const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./new-object/spec.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
