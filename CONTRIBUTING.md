@@ -241,7 +241,7 @@ changes" job) — a job it skips still reports success, never failure, so it nev
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
 
-`node tools/ci/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
+`node .github/scripts/checks/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
 (it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
 `prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
 

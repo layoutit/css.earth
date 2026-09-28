@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 8,
+    "largestCycle": 7,
     "layerOrder": [
       "tools/objects(root)",
       "tools/objects/new-object",
@@ -9,7 +9,6 @@
       "tools/sources",
       "tools/prepare",
       "tools/objects/content",
-      "tools/ci",
       "tools/assets",
       "site/scene",
       "site/shell",
@@ -34,13 +33,14 @@
       {"from":"site/layouts","to":"site/components","imports":1},
       {"from":"site/navigation","to":"site/scene","imports":1},
       {"from":"tools/assets","to":"tools/objects(root)","imports":1},
-      {"from":"tools/assets","to":"tools/prepare","imports":1},
-      {"from":"tools/ci","to":"tools/prepare","imports":1}
+      {"from":"tools/assets","to":"tools/prepare","imports":1}
     ]
   },
   "rules": {
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
+      {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"site/objects.mts"},
+      {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"tools/prepare/prepare-catalog.mts"},
       {"from":"labs/experiments/native-scroll/preview.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts","to":"tools/objects/circumstellar/author.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/sources/sky-bands.ts","to":"tools/objects/observation/sky-band-composite.mts"},
@@ -51,7 +51,6 @@
       {"from":"packages/bake/cli/report-investigations.mts","to":"tools/prepare/prepare-catalog.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/compact-spectrum.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/spectrum-data.mts"},
-      {"from":"tools/ci/check-object-runtime-ownership.mts","to":"site/objects.mts"},
       {"from":"tools/objects/content/prepare.ts","to":"site/prepared-shell-titles.d.mts"},
       {"from":"tools/objects/prepare-spatial-context.ts","to":"site/build/prepare/jpl-mission-targets.mts"},
       {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"},

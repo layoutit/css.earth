@@ -181,7 +181,7 @@ jobs:
         run: pnpm test:telescope-cli
       - name: Check physical frame receipts
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
-        run: node tools/ci/check-object-runtime-ownership.mts --receipts
+        run: node .github/scripts/checks/check-object-runtime-ownership.mts --receipts
       - name: Check independent body additions
         run: node --test tools/contract/body-additions.test.mts
       - name: Test the object generator and every lit body's presentation

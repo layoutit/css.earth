@@ -11,11 +11,11 @@ interface LayoutReport {id:string;count:number;completedByDescriptor:number;fail
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { auditObjectRuntimeOwnership } from "../ci/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "./check-object-runtime-ownership.mts";
 import { readPreparedPresentationModule } from "@cssearth/bake/contract";
 import { readPreparedObjects } from "@cssearth/objects/node";
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../../..")).sceneObjects;
 
 const cssName = (name:string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 const projectiveLeaf = (node:TreeNode) => node?.attributes?.["data-prepared-projection"] === "single-leaf";
