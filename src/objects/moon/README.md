@@ -79,7 +79,7 @@ The Moon is a first-class cssEarth object. It is not mounted inside Earth.
 Authored geometry, observation-processing parameters, controls, legends and
 physical source bindings live in `source/preparation/`, `source/presentation/`
 and `source/content/object.json`, pinned by `object.json`. The generic authored
-preparation (`tools/objects/prepare-authored.ts`: raster, celestial, scene,
+preparation (`site/build/prepare/prepare-authored.ts`: raster, celestial, scene,
 content, composite presentation, features) compiles those records into
 `prepared/*.json`. Each numeric scientific lens declares its interpretation in
 the `science` block of `source/preparation/raster.json`; the shared observation
