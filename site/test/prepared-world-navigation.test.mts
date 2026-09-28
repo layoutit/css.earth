@@ -222,6 +222,7 @@ test('saved views and explicit non-photographic datasets keep their requested di
         pose: { schema: 'cssearth-camera-pose@2', scene: projection.sceneMatrix } } });
     const url = `https://example.test/1/?dataset=${dataset}${dataset === 'photo' ? `&${saved}` : ''}`;
     const handoff = await drainFrames(f, { task: f.start({ url }) });
+    assert.equal(handoff.mountOptions.progressiveActivation, true, 'saved views without a photographic cover still pace activation');
     const mount = f.mounted();
     handoff.mountOptions.onNavigationReady?.(mount.navigation);
     await drainFrames(f, { task: handoff.afterMount(mount) });
