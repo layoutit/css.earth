@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { resolve, sep } from 'node:path';
+import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { parseArrivalView, parseArrivalBillboard, type ObjectDiscovery } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
@@ -101,11 +101,15 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     if (!isRecord(runtime) || !isRecord(controls) || !isRecord(controls.lenses)) throw new TypeError('An arrival billboard requires its prepared runtime and lenses.');
     // Every body can have an arrival image. This does not turn a shape model,
     // measured colour or illustration into photographic evidence.
-    discovery.arrival = parseArrivalView({
-      defaultLens: controls.lenses.defaultLens,
+    const view = { defaultLens: controls.lenses.defaultLens,
       lensIds: [...new Set([controls.lenses.defaultLens, ...(discovery.arrival?.lensIds ?? [])])],
       rotation: preparedDefaultViewRotation(runtime.camera),
-      billboard: { ...asset, url: await resolveBuildSceneAddress(asset.url, resolve(objectDirectory, '../../..')) } });
+      billboard: { ...asset, url: await resolveBuildSceneAddress(asset.url, resolve(objectDirectory, '../../..')) } };
+    try { discovery.arrival = parseArrivalView(view); }
+    catch (error) {
+      throw new TypeError(`${basename(objectDirectory)}: prepared/arrival-billboard.json (lens ${asset.lens}, rotation ${JSON.stringify(asset.rotation)}) ` +
+        `does not match the default view (lens ${view.defaultLens}, rotation ${JSON.stringify(view.rotation)}). ${error instanceof Error ? error.message : String(error)}`, { cause: error });
+    }
   }
   return discovery;
 }

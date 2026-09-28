@@ -41,6 +41,14 @@ test('an authored focus is kept, whatever the coverage says', () => {
   assert.deepEqual(kept!.navigation.camera, authoredCamera);
 });
 
+test('the default lens keeps the opening camera', () => {
+  const variants = faceLensData({ controls: { lenses: { defaultLens: 'normal', controls: [] } }, variants: [variant('normal'), variant('temperature')] },
+    { geometry: solarGeometry, bodyId: 'iapetus', mapLeftEdgeLongitudeDeg: 0, camera, authored: new Set(),
+      coverages: new Map([['normal', point(274, 29)], ['temperature', point(274, 29)]]) }).variants as Record<string, any>[];
+  assert.equal(variants[0]!.navigation, undefined);
+  assert.ok(variants[1]!.navigation.camera);
+});
+
 test('authored focus lenses come from terrestrial focus and composite lensFocus', () => {
   const terrestrial = { raster: { scientific: [{ id: 'elevation', focus: { longitudeDegrees: 1, latitudeDegrees: 2, zoom: 3 } }, { id: 'geology' }], observations: [{ id: 'giotto', focus: {} }] } };
   assert.deepEqual([...authoredFocusLenses(terrestrial, { lensFocus: { infrared: {} } })].sort(), ['elevation', 'giotto', 'infrared']);
