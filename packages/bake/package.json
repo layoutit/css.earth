@@ -300,7 +300,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.cli.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.cli.json && tsc --noEmit -p tsconfig.authoring.json",
     "test": "vitest run"
   },
   "dependencies": {
@@ -331,6 +331,7 @@
     "yaml": "^2.9.0"
   },
   "devDependencies": {
+    "@cssearth/telescope-cli": "workspace:*",
     "@types/estree": "^1.0.9",
     "@types/node": "^26.4.0",
     "@types/three": "0.180.0",
