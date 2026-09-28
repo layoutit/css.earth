@@ -23,9 +23,11 @@ test('complete connected topology stays fixed while selection images activate in
   expect(f.leaves.every(node => node.isConnected && node.style.backgroundImage === 'none')).toBe(true);
   const ready = f.controller.activate(); expect(f.controller.activate()).toBe(ready);
   f.paint();
-  expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(['url(surface.webp)', 'url(surface.webp)', 'none']);
+  expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(['url(surface.webp)', 'none', 'none']);
   // A selection supersedes the withheld image and immediately updates resident leaves.
   for (const leaf of f.leaves) f.controller.write(leaf, 'url(next.webp)');
+  f.paint();
+  expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(['url(next.webp)', 'url(next.webp)', 'none']);
   f.paint();
   expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(Array(3).fill('url(next.webp)'));
   let settled = false; ready.then(() => { settled = true; });
@@ -52,4 +54,19 @@ test('activating untextured leaves does not invalidate their retained styles', a
   f.paint(); f.paint(); f.paint(); await ready; await Promise.resolve();
   expect(changes).toEqual([]);
   observer.disconnect(); f.dispose();
+});
+
+test('each new atlas starts with one retained face before the regular batch resumes', async () => {
+  const f = fixture();
+  f.controller.write(f.leaves[0], 'url(first.webp)');
+  f.controller.write(f.leaves[1], 'url(second.webp)');
+  f.controller.write(f.leaves[2], 'url(second.webp)');
+  const ready = f.controller.activate();
+  f.paint();
+  expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(['url(first.webp)', 'none', 'none']);
+  f.paint();
+  expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(['url(first.webp)', 'url(second.webp)', 'none']);
+  f.paint(); f.paint(); await ready;
+  expect(f.leaves.map(node => node.style.backgroundImage)).toEqual(['url(first.webp)', 'url(second.webp)', 'url(second.webp)']);
+  f.dispose();
 });

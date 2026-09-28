@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
 test('memory and residency evidence share the trace clock and preserve category units', () => {
   const trace = traceEvents([], 1000, null, {}, undefined, null, {
@@ -200,4 +200,21 @@ test('native threads with the same name in different processes retain independen
   assert.notEqual(events[0]!.pid, events[1]!.pid);
   assert.deepEqual(events.map(event => event.dur), [1000, 1000]);
   assert.deepEqual(events.map(event => (event.args as {nativePid: number}).nativePid), [10, 20]);
+});
+
+test('native coverage rejects a saved recording that ended when the device disconnected', () => {
+  const clock = '<start-date>2026-09-28T16:03:20Z</start-date>';
+  assert.equal(nativeRecordingClock(`${clock}<end-reason>User pressed Stop</end-reason>`), Date.parse('2026-09-28T16:03:20Z'));
+  assert.throws(() => nativeRecordingClock(`${clock}<end-reason>Device disconnected</end-reason>`), /ended early: Device disconnected/);
+  assert.throws(() => nativeRecordingClock('<end-reason>User pressed Stop</end-reason>'), /clock origin/);
+});
+
+
+test('opening a route waits for the new document, not the outgoing ready page', () => {
+  const url = 'http://preview.test/earth/';
+  assert.equal(navigatedAppReady({ url, timeOrigin: 100, ready: true }, url, 100), false);
+  assert.equal(navigatedAppReady({ url: 'http://preview.test/bennu/', timeOrigin: 101, ready: true }, url, 100), false);
+  assert.equal(navigatedAppReady({ url, timeOrigin: 101, ready: false }, url, 100), false);
+  assert.equal(navigatedAppReady({ url, timeOrigin: NaN, ready: true }, url, 100), false);
+  assert.equal(navigatedAppReady({ url, timeOrigin: 101, ready: true }, url, 100), true);
 });
