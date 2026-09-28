@@ -10,8 +10,7 @@ import { savedWorldCamera } from '@cssearth/renderer/navigation/saved-world-came
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
-import { contextMarkerSprite } from '@cssearth/renderer/navigation/marker-presentation.ts';
-import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
+import { preparedBodyBillboards } from '../../../site/prepared-body-billboards.mts';
 import type { OrbitSegment } from '@cssearth/renderer/solar-system/types.ts';
 import type { NativeCameraRotation } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';
@@ -24,7 +23,7 @@ const volume = await loadPreparedCssVolume(descriptor, { read: async path => {
   const bytes = await readFile(new URL(`src/objects/milky-way/${path}`, root));
   return Uint8Array.from(bytes).buffer;
 } });
-const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS).map(([id, marker]) => [id, contextMarkerSprite(marker)]));
+const sprites = preparedBodyBillboards([plan.focus, ...plan.bodies], new Set(), () => 2.4);
 const planetIds = new Set(plan.classificationViews?.planet?.memberIds);
 const points = [plan.focus, ...plan.bodies];
 const solarIds = new Set([plan.focus.id, ...planetIds]);
