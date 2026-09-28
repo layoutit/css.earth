@@ -16,11 +16,14 @@ import { pathToFileURL } from 'node:url';
 /** Tracked node-test files the selection may take, as `git ls-files` pathspecs. */
 export const BAKE_OBJECT_TEST_PATHS = ['tools/**/*.test.mts', 'tools/**/*.test.ts', 'tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts'] as const;
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
+/** Tests of an object entry that read the restored prepared packages of real bodies, so they run where those are restored:
+ * the source-catalogue step of audit.yml's prepared-universe job. */
+export const RESTORED_PACKAGE_TESTS: readonly string[] = ['tests/contract/object-provenance.test.mts'];
 
 /** The test files among `files` whose source (read by `read`) imports an `@cssearth/bake/objects/<topic>` or
- * `@cssearth/bake/objects/layers/<kind>` entry, sorted. */
+ * `@cssearth/bake/objects/layers/<kind>` entry, sorted, except the tests of restored packages. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {
-  return files.filter(path => /\.test\.m?ts$/u.test(path) && OBJECT_ENTRY.test(read(path))).sort();
+  return files.filter(path => /\.test\.m?ts$/u.test(path) && !RESTORED_PACKAGE_TESTS.includes(path) && OBJECT_ENTRY.test(read(path))).sort();
 }
 
 function trackedTests(root: string): string[] {
