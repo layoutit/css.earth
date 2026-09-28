@@ -757,20 +757,38 @@
 }
 .object-card-tabpanel :is(.object-surface-minimap, .object-lens-legend-panel, .object-facility-preview) + .object-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
 .object-card-tabpanel .object-lens-legend-panel { width: 100%; min-height: 28px; }
-.object-card-tabpanel .object-lens-steps { display: flex; align-items: center; gap: 4px; margin: 6px 0 8px; }
-.object-card-tabpanel .object-lens-step-label { flex: 1; text-align: center; color: var(--shell-text); font: var(--shell-font-value); font-variant-numeric: tabular-nums; }
-.object-card-tabpanel .object-lens-step {
-  display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent;
-  color: var(--shell-text-secondary); cursor: pointer;
+/* A sequence plays over the bottom of its map like a short video: segments above, play and step label below. */
+.object-card-tabpanel .object-sequence-player { display: grid; margin: 6px 0 8px; color: var(--shell-text); }
+.object-card-tabpanel .object-surface-minimap > .object-sequence-player {
+  position: absolute; right: 0; bottom: 0; left: 0; z-index: 1; margin: 0; padding-top: 2px;
+  background: rgb(0 0 0 / 0.62); cursor: default;
 }
-.object-card-tabpanel .object-lens-step:disabled { opacity: 0.25; cursor: default; }
-.object-card-tabpanel .object-lens-play { width: 44px; flex-shrink: 0; font: var(--shell-font-caption); }
-.object-card-tabpanel .object-lens-step:not(:disabled):hover { color: var(--shell-text); background: rgb(255 255 255 / 0.08); }
-.object-card-tabpanel .object-lens-step:focus-visible { outline: 0; box-shadow: 0 0 0 1px var(--shell-focus); }
-/* The same drawn chevron as the search caret: two borders of a square, turned to point left or right. */
-.object-card-tabpanel .object-lens-step-chevron { width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; }
-.object-card-tabpanel .object-lens-step-chevron.is-next { transform: translateX(-2px) rotate(-45deg); }
-.object-card-tabpanel .object-lens-step-chevron.is-previous { transform: translateX(2px) rotate(135deg); }
+.object-card-tabpanel .object-sequence-track { display: flex; gap: 2px; padding-inline: 8px; }
+.object-card-tabpanel .object-sequence-segment {
+  display: grid; align-items: center; flex: 1; min-width: 0; height: 12px; padding: 0; border: 0; background: transparent; cursor: pointer;
+}
+.object-card-tabpanel .object-sequence-segment-bar { display: block; height: 3px; overflow: hidden; background: rgb(255 255 255 / 0.28); }
+.object-card-tabpanel .object-sequence-segment:hover .object-sequence-segment-bar { background: rgb(255 255 255 / 0.45); }
+.object-card-tabpanel .object-sequence-segment-fill { display: block; height: 100%; background: currentColor; transform: scaleX(0); transform-origin: left; }
+.object-card-tabpanel .object-sequence-segment:is(.is-past, [aria-current]) .object-sequence-segment-fill { transform: none; }
+/* While playback holds a step, its segment fills over the same hold, then the next step takes over. */
+.object-card-tabpanel [data-sequence-running="true"] .object-sequence-segment[aria-current] .object-sequence-segment-fill {
+  animation: object-sequence-fill var(--sequence-hold) linear both;
+}
+@keyframes object-sequence-fill { from { transform: scaleX(0); } to { transform: none; } }
+.object-card-tabpanel .object-sequence-row { display: flex; align-items: center; gap: 4px; height: 26px; padding-inline: 2px 8px; }
+.object-card-tabpanel .object-lens-play {
+  display: grid; place-items: center; flex-shrink: 0; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 4px;
+  background: transparent; color: inherit; cursor: pointer;
+}
+.object-card-tabpanel .object-lens-play .material-symbol { display: block; width: 18px; height: 18px; fill: currentColor; }
+.object-card-tabpanel .object-lens-play[aria-pressed="true"] .is-play,
+.object-card-tabpanel .object-lens-play:not([aria-pressed="true"]) .is-pause { display: none; }
+.object-card-tabpanel .object-lens-play:disabled { opacity: 0.4; cursor: default; }
+.object-card-tabpanel .object-lens-play:not(:disabled):hover { background: rgb(255 255 255 / 0.12); }
+.object-card-tabpanel :is(.object-lens-play, .object-sequence-segment):focus-visible { outline: 0; box-shadow: 0 0 0 1px var(--shell-focus); }
+.object-card-tabpanel .object-sequence-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--shell-font-caption); }
+.object-card-tabpanel .object-sequence-count { flex-shrink: 0; color: var(--shell-text-secondary); font: var(--shell-font-caption); font-variant-numeric: tabular-nums; }
 .object-card-tabpanel .object-lens-legend-labels {
   display: grid;
   grid-template-columns: repeat(var(--legend-label-count), minmax(0, 1fr));
