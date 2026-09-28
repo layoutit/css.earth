@@ -1,4 +1,4 @@
-import { readObservation, type ObservationRaster, colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor, loadControlledObservationGeometry, matchObservedColorLevels, npyLonLatGridDependencies } from '../../../raster/index.ts';
+import { readObservation, type ObservationRaster, colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor, loadControlledObservationGeometry, matchObservedColorLevels, npyLonLatGridDependencies, pds3GridDependencies } from '../../../raster/index.ts';
 import { scientificPreviewGrid, lensTextureGrid, type SolidRasterGrid } from '../raster-grid.ts';
 import { createRasterEmitter } from '../raster-output.ts';
 import { parseSolidRasterConfig, parseSurfaceSource } from '../records/solid-source.ts';
@@ -132,7 +132,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
       : lens.format === 'geologic-shapefile' ? [requireString(requireRecord(lens.grid).attributePath), requireString(requireRecord(lens.grid).projectionPath)]
       : lens.format === 'pds-image' ? [lens.labelPath]
-      : lens.format === 'npy-lonlat-grid' ? npyLonLatGridDependencies(lens) : [];
+      : lens.format === 'npy-lonlat-grid' ? npyLonLatGridDependencies(lens)
+      : lens.format === 'pds3-grid' ? pds3GridDependencies(lens) : [];
     for (const pathValue of dependencies) {
       const path = requireString(pathValue);
       if (![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === path)) throw new Error(`Unpinned scientific dependency: ${path}`);

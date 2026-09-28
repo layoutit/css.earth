@@ -1,0 +1,27 @@
+{
+  "id": "source-enceladus-trek-enceladus-geologic-units-grid",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Enceladus global geologic units (Crow-Willard and Pappalardo 2015), categorical grid",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/2015JE004818",
+      "label": "Crow-Willard and Pappalardo (2015), JGR Planets"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/enceladus/source/manifest.json",
+      "locator": "/inputs/23"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

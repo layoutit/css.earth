@@ -91,6 +91,94 @@
           }
         }
       }
+    },
+    {
+      "id": "gravity",
+      "source": "science/gravity/anomaly-hgm008.tif",
+      "falseColor": true,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "anomaly-hgm008.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -150,
+          "maximum": 150,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal at 2,440 km radius",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 3600,
+            "height": 1800,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.1,
+              -0.10000000000000002
+            ],
+            "referenceRadiusMeters": 2439700,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 9.969209968386869e+36
+          }
+        }
+      }
+    },
+    {
+      "id": "crust",
+      "source": "science/gravity/crustal-thickness-hgm008.tif",
+      "falseColor": true,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "crustal-thickness-hgm008.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 70,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "km",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.0625,
+              -0.0625
+            ],
+            "referenceRadiusMeters": 2439700,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
     }
   ],
   "lighting": {

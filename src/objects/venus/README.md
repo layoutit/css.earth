@@ -10,7 +10,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | --- | --- |
 | Clouds | Pinned cloud texture described below |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
-| Radar | [USGS Magellan synthetic-color radar mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m) |
+| Radar | [USGS Magellan SAR FMAP left-look global mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m), read through NASA Trek zoom-4 tiles |
 | Elevation, emissivity, reflectivity, roughness | [USGS numeric Magellan products](source/science/usgs/), at about 4.64 km grid spacing |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
@@ -55,11 +55,10 @@ Landing sites: 13 spacecraft landing, touchdown or impact sites are labelled bes
 
 Feature notes: 112 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
-- Magellan colors are synthetic; they are not natural-color views.
+- Radar brightness is not visible colour. About 7.7% of the area between 80° S and 84° N is missing from the left-looking mosaic and shows the gray grid; the poles beyond it are missing too.
 - The halo is a PSG model, not a measurement. PSG computes it with single scattering only and with the Sun one degree above the tangent point's horizon, so the real halo, especially the low haze just above the cloud top, may be brighter (see the `limb-halo` and `measured-limb-halo` ledger entries). Rotation is accelerated.
 - The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
-- The Magellan color source map has a darker one-pixel column at both its left and right edges (mean brightness 108 against about 124 beside them). A thin dark line can show along 180° E at close zoom.
 - The camera and background sky do not represent an observer at a stated epoch.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -265,7 +264,7 @@ RenderableAtmosphere tuning is removed with its record.
 
 ## Magellan radar and elevation views
 
-The Radar view retains the USGS C3-MDIR synthetic-color WMS mosaic. Elevation
+The Radar view is described in the next section. Elevation
 now uses the numeric GTDR v2, with meters above a 6,051 km sphere. Its new scale
 runs from −3,000 to 12,000 m, generated from the same palette as the map.
 Radar brightness and the former wrapping color legend no longer enter Elevation.
@@ -295,6 +294,86 @@ The scientific views use the same prepared observation material as Radar,
 without an opaque cloud texture over the surface. Their geometry, lighting
 controls and exterior atmospheric limb remain shared with the existing body.
 See the [numeric acquisition method](../../../docs/usgs-numeric-surfaces.md).
+
+### Radar: the FMAP left-look mosaic (27 September 2026)
+
+The Radar lens shows the USGS
+[Magellan SAR FMAP left-look global mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m):
+Magellan's full-resolution radar strips (F-BIDRs, about 75 m per pixel) from
+mapping cycles 1 and 3, when the radar looked left, mosaicked by USGS. The native
+file is 506,928 × 230,948 bytes (117 GB) on a 6,051.0 km sphere from 83.9996° N to
+80.0106° S; its [detached label](source/radar/fmap-left-look-75m-pds3.lbl) is kept.
+
+**Route.** The native file has no reduced copies, so preparation reads the same
+product from NASA Trek's WMTS layer `Venus_Magellan_LeftLook_mosaic_global_75m`
+([capabilities](https://trek.nasa.gov/tiles/Venus/EQ/Venus_Magellan_LeftLook_mosaic_global_75m/1.0.0/WMTSCapabilities.xml)).
+Zoom 4 is 32 × 16 tiles of 256 pixels: one 8192 × 4096 map, 0.0439° or 4.64 km
+per pixel, the same spacing as the numeric Magellan maps. Trek does not document
+how it reduces the mosaic; each zoom-4 pixel differs from the mean of its four
+zoom-5 pixels by 1.2 DN on average, and from any single one by 1.5 to 2.6 DN, so
+it averages.
+
+**Values.** Gray is the product's DN. The USGS page gives
+`DN = 5 × (RV + 20) + 1`, with RV the radar cross-section divided by the Muhleman
+law in decibels, clipped at −20 and +30 dB; so 0.2 × DN − 20.2 dB. The legend runs
+from −20 to +30 dB. The observed median is DN 103, +0.4 dB: the average surface
+matches the Muhleman law, as it should. Observed values run from DN 15 to 203.
+Trek averages DN values, so a pixel is the mean of decibels, not of power. There is
+no exposure curve, sharpening or colour; the previous lens applied all three.
+
+**Gaps.** Trek marks no-data as transparent. A partly transparent pixel carries the
+DN averaged with zeros: its gray falls in proportion to its alpha. Preparation
+divides by alpha where at least half the footprint was observed (8-bit rounding
+then stays within 1 DN) and marks the rest missing. 7.75% of the area between
+80° S and 84° N is missing, 8.71% of the globe; nothing is filled.
+
+**Placement.** Maxwell Montes, Atla Regio and Beta Regio sit where the Magellan
+gravity maps put them, and on the same 2048-wide grid the mosaic's brightness
+correlates with the old C3-MDIR map at r = 0.81 at zero offset.
+
+**Bytes.** The lens uses `resolutionScale` 4, so the 8192-wide map reaches the
+atlas without another resize: 8320 × 6144 pixels, 2,629,358 bytes in the lossy
+lane (quality 80), plus 98,866 bytes of lossless poles. The previous 2048-wide
+synthetic-colour atlas was 1,012,746 bytes with 445,994 bytes of poles. At scale 2
+the atlas would be 705,862 bytes. Radar is not the default lens, so the cost is
+paid only when a reader picks it. The atlas stays under the raster lane's
+64-megapixel single-image limit, so it needs no pages or texture levels.
+
+**Synthetic colour removed.** USGS made the colourised C3-MDIR mosaic to simulate
+the surface. Colour predicted from brightness alone leaves a 5.2 DN RMS residual
+against a 31.2 DN brightness spread: it is one colour ramp over the same radar
+brightness. It is not kept as a separate lens (ledger entry
+`magellan-c3-mdir-synthetic-colour`). What is lost is coverage: C3-MDIR fills the
+poles and left-look gaps from other cycles.
+
+### Gravity, its uncertainty, Bouguer anomaly and geoid
+
+Four views come from the Magellan gravity maps in the PDS Geosciences volume
+[MGN-V-RSS-5-GRAVITY-L2-V1.0](https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/):
+the free-air anomaly (`freeair.dat`, band 1) and its one-sigma uncertainty (band 2),
+the Bouguer anomaly (`bouguer.dat`) and the geoid (`geoid.dat`). All come from JPL's
+degree-120 model SHGJ120P, which the archive labels preliminary. The later degree-180
+model MGNP180U ([Konopliv et al. 1999](https://doi.org/10.1006/icar.1999.6086)) is
+archived only as coefficients, so it is not shown.
+
+The shared `pds3-grid` reader reads each 360 by 180 grid of big-endian 64-bit values
+without resampling. Cell centres sit at whole degrees from 120° W and at 89.5° N to
+89.5° S, as the PDS3 labels state; the reader checks those extents against the recipe.
+The ledger entry `magellan-gravity-maps` records that a sum of the model's coefficients
+reproduces the free-air grid to 0.004 mGal with this placement, and that the 2023 PDS4
+labels, which put cell edges there, would leave 5.4 mGal of error.
+
+| View | Values | Display range | Beyond the range |
+| --- | --- | --- | --- |
+| Gravity | −100.4 to 386.5 mGal | −200 to 200 mGal | 0.11%, Maxwell Montes and Atla Regio |
+| Gravity uncertainty | 1.76 to 21.72 mGal | 0 to 22 mGal | none |
+| Bouguer gravity | −975.8 to 198.1 mGal | −600 to 600 mGal | 0.06%, under Maxwell Montes |
+| Geoid | −66.1 to 154.5 m | −100 to 100 m | 0.38%, Atla Regio and Beta Regio |
+
+The Bouguer map is the free-air anomaly minus the gravity the topography would produce
+with no compensation; the archive catalogue does not state the density it used.
+Degree 120 resolves features about 160 km across at best, and less where Magellan
+flew high, near the poles and in the south; the uncertainty view shows where.
 
 </details>
 

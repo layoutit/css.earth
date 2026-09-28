@@ -126,6 +126,16 @@
               "material": "lighting"
             },
             {
+              "id": "gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "crust",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "interior",
               "source": "content",
               "material": "lighting"

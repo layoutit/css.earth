@@ -5,6 +5,7 @@
 - Physical and orbital facts: NASA JPL Solar System Dynamics.
 - Elevation lens: LRO LOLA LDEM16 numeric grid, David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node.
 - Crustal thickness lens: NASA GSFC Scientific Visualization Studio; GRAIL. NASA media usage guidelines.
+- Gravity and Bouguer gravity lenses: GRAIL GRGM1200A gravity anomaly and Bouguer disturbance maps (GGGRX_1200A_ANOM_L660, GGGRX_1200A_BOUG_L660), NASA GSFC GRAIL Level-2 team; reference Lemoine et al. (2014), doi:10.1002/2014GL060027; NASA PDS Geosciences Node. Publicly archived NASA mission data; retain producer and PDS citation.
 - Lighting: the published Hapke law of Sato et al. (2014),
   doi:10.1002/2013JE004580, whose parameter values are transcribed as facts in
   `source/photometry/sato-2014-hapke-643nm.json`, with w, b and h_S taken as

@@ -1,0 +1,140 @@
+PDS_VERSION_ID      = PDS3
+RECORD_TYPE         = STREAM
+OBJECT              = TEXT
+ INTERCHANGE_FORMAT = ASCII
+  PUBLICATION_DATE  = 2021-03-23
+  NOTE              = "Description of contents of the EXTRAS directory"
+END_OBJECT          = TEXT
+END
+
+This directory contains 3 subdirectories, COVARIANCE, CLONES, and GEOTIFF.
+
+-----------------------------------------------------------------------------
+COVARIANCE Subdirectory:
+-----------------------------------------------------------------------------
+This directory contains the following files as a reference to allow the user 
+to confirm proper reading of the (binary) SHBDR files:
+
+GGGRX_0660PM_SHB_L05_COEFFICIENTS.ASC:
+Parameter description (name, value, sigma) for SHBDR file
+GGGRX_0660PM_SHB_L50.DAT. GGGRX_0660PM_SHB_L05_COEFFICIENTS.TXT is the 
+associated label file.
+
+GGGRX_0660PM_SHB_L05_COVARIANCE.ASC:
+This file gives the (symmetric) covariance matrix, truncated at L=5, in 
+ASCII format, from GGGRX_0660PM_SHB_L50.DAT. There are 37 
+lines/rows/parameters, and the format is "%20.13e " repeated 37 times. Line 
+feed and carriage return characters complete the line (DOS format).
+GGGRX_0660PM_SHB_L05_COVARIANCE.TXT is the associated label file.
+
+JGGRX_0660B_SHB_L05_COEFFICIENTS.ASC:
+Parameter description (name, value, sigma) for SHBDR file 
+JGGRX_0660B_SHB_L50.DAT. JGGRX_0660B_SHB_L05_COEFFICIENTS.TXT is the 
+associated label file.
+
+JGGRX_0660B_SHB_L05_COVARIANCE.ASC:
+This file gives the (symmetric) covariance matrix, truncated at L=5, in 
+ASCII format, from JGGRX_0660B_SHB_L50.DAT. There are 33 
+lines/rows/parameters, and the format is "%20.13e " repeated 33 times. Line 
+feed and carriage return characters complete the line (DOS format).
+JGGRX_0660B_SHB_L05_COVARIANCE.TXT is the associated label file.
+
+GGGRX_0900C_SHB_L05_COEFFICIENTS.ASC:
+Parameter description (name, value, sigma) for SHBDR file
+GGGRX_0900C_SHB_L50.DAT. GGGRX_0900C_SHB_L05_COEFFICIENTS.TXT is the 
+associated label file.
+
+GGGRX_0900C_SHB_L05_COVARIANCE.ASC:
+This file gives the (symmetric) covariance matrix, truncated at L=5, in 
+ASCII format, from GGGRX_0900C_SHB_L50.DAT. There are 34 
+lines/rows/parameters, and the format is " %25.16e" repeated 34 times. Line 
+feed and carriage return characters complete the line (DOS format).
+GGGRX_0900C_SHB_L05_COVARIANCE.TXT is the associated label file.
+
+GGGRX_0900C_SHB_L50_COEFFICIENTS.ASC:
+Parameter description (name, value, sigma) for SHBDR file
+GGGRX_0900C_SHB_L50.DAT. GGGRX_0900C_SHB_L50_COEFFICIENTS.TXT is the 
+associated label file.
+
+GGGRX_0900C_SHB_L50_COVARIANCE.ASC:
+This file gives the (symmetric) covariance matrix, truncated at L=50, in 
+ASCII format, from GGGRX_0900C_SHB_L50.DAT. There are 2599 
+lines/rows/parameters, and the format is " %25.16e" repeated 2599 times. 
+Line feed and carriage return characters complete the line (DOS format).
+GGGRX_0900C_SHB_L50_COVARIANCE.TXT is the associated label file.
+
+JGGRX_0900D_SHB_L05_COEFFICIENTS.ASC:
+Parameter description (name, value, sigma) for SHBDR file
+JGGRX_0900D_SHB_L50.DAT. JGGRX_0900D_SHB_L05_COEFFICIENTS.TXT is the 
+associated label file.
+
+JGGRX_0900D_SHB_L05_COVARIANCE.ASC:
+This file gives the (symmetric) covariance matrix, truncated at L=5, in 
+ASCII format, from JGGRX_0900D_SHB_L50.DAT. There are 33 
+lines/rows/parameters, and the format is " %20.13e" repeated 33 times. Line 
+feed and carriage return characters complete the line (DOS format).
+JGGRX_0900D_SHB_L05_COVARIANCE.TXT is the associated label file.
+
+-----------------------------------------------------------------------------
+CLONES Subdirectory:
+-----------------------------------------------------------------------------
+This directory contains 500 "clones" of the GRGM900C field, each uniquely 
+identified by an index number (0001-0500). The clones are organized into 
+folders of 100 files each.
+
+Each clone is a member of a statistical ensemble based on the GRGM900C 
+covariance. Instead of the computationally expensive method of diagonalizing 
+the full covariance matrix, a Monte Carlo method is used. For more detail on 
+this method, see CLONE_DESCRIPTION.PDF/LBL in this directory.
+
+-----------------------------------------------------------------------------
+GEOTIFF Subdirectory:
+-----------------------------------------------------------------------------
+This directory contains non-PDS-standard products provided to users to 
+facilitate the use and analysis of GRAIL gravity maps. The GeoTIFF files 
+contain the same data as the corresponding files in the RSDMAP folder of the 
+main GRAIL archive. Popular mapping software such as ESRI ArcMap and QGIS are
+able to import the GeoTIFF files directly.
+
+Most of the files in this EXTRAS/GEOTIFF folder correspond to the GSFC 
+GRGM1200A gravity field obtained from GRAIL primary and extended mission 
+data. The map products are expanded with various degree and order 
+truncations, which can be useful in various studies.
+
+There are six types of maps:
+
+- Gravity Anomaly maps (GGGRX_1200A_ANOM_L*.TIF)
+
+- Gravity Disturbance maps (GGGRX_1200A_DIST_L*.TIF)
+
+- Gravity Bouguer Disturbance maps (GGGRX_1200A_BOUG_L*.TIF)
+
+- Gravity Anomaly Error maps (GGGRX_1200A_ANOMERR_L*.TIF)
+
+- Geoid Height map (GGGRX_1200A_GEOID_L660.TIF)
+
+- Degree Strength map (GGGRX_1200A_DEGSTR.TIF)
+
+The GeoTIFF subdirectory also contains some files that correspond to the GSFC
+GRGM1200L gravity field. See GRGM1200L_DESCRIPTION.TXT for a description of 
+these files. 
+
+-----------------------------------------------------------------------------
+
+Users are encouraged to refer to the label files (.LBL) of the corresponding
+IMG products in the RSDMAP directory of the main GRAIL PDS archive.
+
+The main PDS GRAIL archive's RSDMAP products can be found at the following URL:
+http://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/
+
+All EXTRAS products are provided at the discretion of the GRAIL Science Team
+and are not supported.
+
+-----------------------------------------------------------------------------
+
+Also included in the EXTRAS directory is the following file:
+
+FORTNIGHT_CALCULATION.XLS: This is a supporting document for 
+ONCE_UPON_A_FORTNIGHT.PDF, JPL D-61501, containing the numerical content 
+described therein, as a Microsoft Excel file. This is the original version 
+of the file FORTNIGHT_CALCULATION.PDF, located in the DOCUMENT directory.

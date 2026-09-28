@@ -50,12 +50,22 @@
       "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg"
     },
     {
-      "kind": "download",
+      "kind": "tile-mosaic",
       "groups": [
         "refresh"
       ],
-      "path": "surface/venus-magellan-color-wms.png",
-      "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_color&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
+      "path": "surface/venus-magellan-fmap-left-look-z4.png",
+      "url": "https://trek.nasa.gov/tiles/Venus/EQ/Venus_Magellan_LeftLook_mosaic_global_75m/1.0.0/default/default028mm/4/${y}/${x}.png",
+      "tileSize": 256,
+      "columns": 32,
+      "rows": 16,
+      "dataWidth": 8192,
+      "dataHeight": 4096,
+      "width": 8192,
+      "height": 4096,
+      "forceRgb": true,
+      "missingCoverage": "transparent",
+      "concurrency": 6
     },
     {
       "kind": "download",
@@ -160,6 +170,38 @@
       "groups": [
         "refresh-usgs"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "radar/fmap-left-look-75m-pds3.lbl",
+      "url": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_LeftLook_mosaic_global_75m_pds3.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-gravity"
+      ],
+      "path": "science/mgn-gravity/freeair.dat",
+      "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/freeair.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-gravity"
+      ],
+      "path": "science/mgn-gravity/bouguer.dat",
+      "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/bouguer.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-gravity"
+      ],
+      "path": "science/mgn-gravity/geoid.dat",
+      "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat"
     }
   ]
 }

@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-vesta-grand-grids@1",
+  "frame": {
+    "source": "Claudia Double Prime",
+    "target": "Dawn Claudia",
+    "claudiaMinusSourceLongitudeDegrees": 210,
+    "evidence": [
+      "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
+      "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/DOCUMENT/VESTA_COORDINATES/VESTA_COORDINATES_131018.HTM"
+    ],
+    "note": "The GRaND catalogue states that the archive maps use Claudia Double Prime, whose prime meridian is shifted 210 degrees from Claudia with the same pole (Marcia at 190 E in Claudia). The coordinate document gives Claudia crater at 356.0 E (Claudia) and 146.0 E (Claudia Double Prime). The shift is exact and moves whole cells; no value is resampled."
+  },
+  "products": [
+    {
+      "id": "hydrogen",
+      "table": "GRD_HYDROGEN_MAP.TAB",
+      "label": "GRD_HYDROGEN_MAP.xml",
+      "field": "HYDROGEN_ABUNDANCE",
+      "unit": "micrograms/gram",
+      "records": 16200,
+      "stepDegrees": 2,
+      "values": "vesta-hydrogen.npy",
+      "longitudes": "vesta-hydrogen-longitude.npy",
+      "latitudes": "vesta-hydrogen-latitude.npy"
+    },
+    {
+      "id": "iron-counts",
+      "table": "GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "label": "GRD_IRON_CORRECTED_COUNTS_MAP.xml",
+      "field": "FE_COUNTING_RATE",
+      "unit": "counts/s",
+      "records": 178698,
+      "stepDegrees": 0.5,
+      "values": "vesta-iron-counts.npy",
+      "longitudes": "vesta-iron-counts-longitude.npy",
+      "latitudes": "vesta-iron-counts-latitude.npy"
+    }
+  ]
+}

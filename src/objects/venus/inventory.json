@@ -15,6 +15,12 @@
     },
     {
       "location": "public",
+      "filename": "venus-bouguer@2x.webp",
+      "bytes": 66076,
+      "sha256": "0f3628e9a6fd9dabf3cdc23a93a8d69ae5c2c80e1cbf35dfc66a41aaf09be22a"
+    },
+    {
+      "location": "public",
       "filename": "venus-clouds@2x.webp",
       "bytes": 23630,
       "sha256": "15c3c68cc6261638071f4961cdba8bb19d46cecb19306b53dc1398f3fbca8f08"
@@ -39,6 +45,30 @@
     },
     {
       "location": "public",
+      "filename": "venus-geoid@2x.webp",
+      "bytes": 56106,
+      "sha256": "e6091d1405b0324b830c8f2d0fae8c528a0e9844da1ddadc7704dbb54174393e"
+    },
+    {
+      "location": "public",
+      "filename": "venus-gravity-uncertainty@2x.webp",
+      "bytes": 59078,
+      "sha256": "ca1f3f01b9ec19e580e3665034192735433f50f02d7557f1d9645b6aa5fa8a63"
+    },
+    {
+      "location": "public",
+      "filename": "venus-gravity@2x.webp",
+      "bytes": 72002,
+      "sha256": "94ffb027de4e05967acf62da04fd265633e1423d9fb8c88bb9b41352126c4309"
+    },
+    {
+      "location": "public",
+      "filename": "venus-lens-bouguer.webp",
+      "bytes": 2746,
+      "sha256": "b59d095f6d016ceaab3c1470199a609229cda5366ee227256df2b83b9f2f5cf7"
+    },
+    {
+      "location": "public",
       "filename": "venus-lens-clouds.webp",
       "bytes": 158,
       "sha256": "2beab35ff195f7292a3a42d44f8cf43c1348b653eea3ea6c2af36cb5234e18ce"
@@ -57,9 +87,27 @@
     },
     {
       "location": "public",
+      "filename": "venus-lens-geoid.webp",
+      "bytes": 2894,
+      "sha256": "2b14ec4a5544f06f05d63fdba61f449b0769f567a3e87c9cf1814b20a004d99c"
+    },
+    {
+      "location": "public",
+      "filename": "venus-lens-gravity-uncertainty.webp",
+      "bytes": 2816,
+      "sha256": "ef93c1cf644e821d5e4563620c03e422a79d5938a321898bc7623c9a7e9e9193"
+    },
+    {
+      "location": "public",
+      "filename": "venus-lens-gravity.webp",
+      "bytes": 3114,
+      "sha256": "2416567208df41cd8802a4faf142b1c0e840e26e33c6956e4d1a3197c52c2ecb"
+    },
+    {
+      "location": "public",
       "filename": "venus-lens-radar.webp",
-      "bytes": 1410,
-      "sha256": "5a235993f72018cb7d41cac004417cd6bcf3af6ee9bf12272630e9a9136c8813"
+      "bytes": 566,
+      "sha256": "6bf0f28f5c36568835a220c9987c72ad9b8f06fc4946c8b4a7fef3ea73611e60"
     },
     {
       "location": "public",
@@ -105,6 +153,12 @@
     },
     {
       "location": "public",
+      "filename": "venus-poles-bouguer@2x.webp",
+      "bytes": 31810,
+      "sha256": "f1622fefd38a2b4d57fb34dad085c586b9f8ba5bc20cfb11ef294da1f288ea3e"
+    },
+    {
+      "location": "public",
       "filename": "venus-poles-clouds@2x.webp",
       "bytes": 84964,
       "sha256": "c83cc4bc055a05b004758414e1c80e33f931853abc74b69f1dd10c0d9501d5ba"
@@ -123,9 +177,27 @@
     },
     {
       "location": "public",
+      "filename": "venus-poles-geoid@2x.webp",
+      "bytes": 28082,
+      "sha256": "32a06e55f57c22743005b2b3c6617dbdea2823979060a2896bbc07e4dc32d779"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-gravity-uncertainty@2x.webp",
+      "bytes": 22808,
+      "sha256": "08a57745508a849535cb0bdf6f76e92a994bc6ba61a7b21bb4bf40491ec23a8a"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-gravity@2x.webp",
+      "bytes": 35286,
+      "sha256": "28462576293be31a360f7980273909ec699c47e3950ad74d74282e4b9de8704e"
+    },
+    {
+      "location": "public",
       "filename": "venus-poles-radar@2x.webp",
-      "bytes": 445994,
-      "sha256": "ca4c7703ed677382743e628b10a63bd75391a63981c3771aeb319542dd4c123e"
+      "bytes": 98866,
+      "sha256": "3d5bc09bab1d859b2654a9ca57e75c88476db9ed29ca5c23d1984f3d1fc8a3fc"
     },
     {
       "location": "public",
@@ -148,8 +220,8 @@
     {
       "location": "public",
       "filename": "venus-radar@2x.webp",
-      "bytes": 1012746,
-      "sha256": "9a22f478d116717a14fe23cf41fd7f485dd4616161706faab20a56de38c82046"
+      "bytes": 2629358,
+      "sha256": "06028d7699d1c2a09029faf28715e5fc358c70a7101467fdb156859232e42c75"
     },
     {
       "location": "public",
@@ -184,14 +256,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 5773,
-      "sha256": "47d78409527740b7f1446979482dfb4c715124011deb19e016bea58ae443bad5"
+      "bytes": 7843,
+      "sha256": "8a815d36b63859d10e1ca588b48da607db44c1c614211c38adc9ba6ed400bdfa"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1548,
-      "sha256": "6094d9789dc6addb98ba3b994249c1ef4cb5d000da3d8de6e97cee35feeb7222"
+      "sha256": "29405fe136cc1e1c5ac47432d299a7926a1b57c202ebe9d2237426dbb3ff080a"
     },
     {
       "location": "prepared",
@@ -202,8 +274,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 9922,
-      "sha256": "833e305d7069770c27e5b49ff670e57b64431297bd718e63b69a44e4f7d269b1"
+      "bytes": 22346,
+      "sha256": "58f3e3fd6417cae3f98f703063c56ff5755fc6810763ee0d8f6baf5b889cefeb"
     },
     {
       "location": "prepared",
@@ -214,14 +286,20 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 14628,
-      "sha256": "02b30d7011879ef200283c6ea514d19f36a5c6968ed51f38a1a5600c14cde723"
+      "bytes": 30513,
+      "sha256": "8425d2e93d51e374c640358d3f45580d8d71f8ca30e92be215114b13f229d9ad"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 550,
-      "sha256": "31b23f39fbc2b27c96f979ec0058202c797c90ae38f8ba2ab256843f59c45796"
+      "bytes": 862,
+      "sha256": "4f43cbbf56e04c60bc8bf98729479ffbd0cf12e17cfe77adc52c19e5045ccd38"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/bouguer.webp",
+      "bytes": 4898,
+      "sha256": "adee0a8d3e0c0549eef9262dde91d77ebbd02b3d47a3d724a872f13e5e696555"
     },
     {
       "location": "prepared",
@@ -243,9 +321,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/geoid.webp",
+      "bytes": 4206,
+      "sha256": "00831fcebdd890fb3138a633df8a8ed1f3b0a4e05121b1dcf1f2788e99332580"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/gravity-uncertainty.webp",
+      "bytes": 3188,
+      "sha256": "da8152a40ea0064316303b55848d22180fe2f484f468686e55fac41949bfdd0d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/gravity.webp",
+      "bytes": 6538,
+      "sha256": "226f5559f70379a9786042f48c23fbeac2c2b349d5c95803b2dca643da54817f"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/radar.webp",
-      "bytes": 29366,
-      "sha256": "2e3a354df16f179790b22b407dceebb64ed685401ef5d89f1b24a4a2a71bbb16"
+      "bytes": 7766,
+      "sha256": "9c134ac8b862081b0d022af6c6ca783b454fee866168a4f449f66acf3d5f62fa"
     },
     {
       "location": "prepared",
@@ -268,14 +364,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 542863,
-      "sha256": "95a4eca16cf5b4d13640fb9b31ff8555a1181be2e1000569f8e241aae17ad51f"
+      "bytes": 550655,
+      "sha256": "de6eb0d6c6b6bd851a4431c10962c3b0a516d84e8fe5bce1da786944378a83ee"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393834,
-      "sha256": "50db54b8018856b85a37173c01b7f0e255c1177aabc14a79865de09147746d7f"
+      "bytes": 376258,
+      "sha256": "60fbd0f2b1dfaeff6d509785f1e69885701995285a9f8b2e9a4dd5a0fdefe377"
     },
     {
       "location": "prepared",
@@ -292,8 +388,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1955,
-      "sha256": "e15aeda080a30d5f887b1788a9140d3fceb61565d53a051223b02a62bbe407e2"
+      "bytes": 2667,
+      "sha256": "62c90e3583f5ae8b4f5140fa523996cc9ad9da635c32ec5d74ee9e898d559886"
     },
     {
       "location": "prepared",

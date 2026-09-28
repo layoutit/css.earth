@@ -219,6 +219,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-bouguer-gravity@2x.webp",
+      "bytes": 2978110,
+      "sha256": "714044c845bc4a3e1ab1e1ad3e30c85bb096a66ad4a2eea701c06f882a40b3a1"
+    },
+    {
+      "location": "public",
       "filename": "moon-clinopyroxene@2x.webp",
       "bytes": 1974246,
       "sha256": "5ede23313fc2189102c34a78c3b5b94ec689fa688a23a78f1d81593366af4d88"
@@ -243,6 +249,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-gravity@2x.webp",
+      "bytes": 6551746,
+      "sha256": "dd35878b1703531b7a1899af39ea33c4bf084a822987c5e54ce4ee34ffdefd03"
+    },
+    {
+      "location": "public",
       "filename": "moon-heat-anomalies@2x.webp",
       "bytes": 7524188,
       "sha256": "b2a6b899d3740729bcf70107b34d6f76147749b1dbf634c02ae2cd7667e23210"
@@ -252,6 +264,12 @@
       "filename": "moon-iron-oxide@2x.webp",
       "bytes": 2589932,
       "sha256": "0306a345ffc526ae8cba6cb30f73009d508fc8dee22045466e49c65940f906fd"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-bouguer-gravity.webp",
+      "bytes": 3462,
+      "sha256": "ff38da55d2050447bed51c52895593bcf4e949c49af5fbfc386c465b43f146eb"
     },
     {
       "location": "public",
@@ -270,6 +288,12 @@
       "filename": "moon-lens-geology.webp",
       "bytes": 1706,
       "sha256": "203431b8cdb722cf166e2be0009d2869b671ee9c5ee2c00f8359a190af10caa4"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-gravity.webp",
+      "bytes": 3844,
+      "sha256": "4975ce4bc908795e346fb7968065f9fc6f22da38e1bac128feda4d2c38910332"
     },
     {
       "location": "public",
@@ -387,6 +411,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-poles-bouguer-gravity@2x.webp",
+      "bytes": 75388,
+      "sha256": "19eb1a2cc01d8d106e4855b2e9e58bc6240e8a6a7f35f2383f1dd0233e334ff9"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-clinopyroxene@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -402,6 +432,12 @@
       "filename": "moon-poles-geology@2x.webp",
       "bytes": 17540,
       "sha256": "0fa33c48c0916ba9474af08592b9f2dbc8faf285beef17fed9e743fa814c3456"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-gravity@2x.webp",
+      "bytes": 352546,
+      "sha256": "3736c0674afe0277deb9348c89525ed80c449e5577842f7234ba75f67a0ea7d6"
     },
     {
       "location": "public",
@@ -520,14 +556,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 95497,
-      "sha256": "b34632c9b5df527fd2011d6370331adb4410a4a2449c88ccfe1736a3626e94ee"
+      "bytes": 96524,
+      "sha256": "5fd1d749d4105761e35e3022c60129dd28b3f0777393513cdeb387970faeebe3"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1419,
-      "sha256": "f803ba28ec7c7b31fea6cbbebe083e37e173e02c9390b2c97c4bc5970dc3bfbe"
+      "sha256": "eb26f8eaa53f9ebd5be2d3c7f3e5a83193bdf5396bd3f41458f96bea1cf201f7"
     },
     {
       "location": "prepared",
@@ -538,8 +574,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 32622,
-      "sha256": "492c977cf19b4853a3cf3ad4b484c3f254196ea02732db0df66b3d5ddd2b9d14"
+      "bytes": 35655,
+      "sha256": "f0c055f554083c18020118b36d149a5ca4adf88df2860d450f4bcf967ccec38e"
     },
     {
       "location": "prepared",
@@ -556,14 +592,20 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 44803,
-      "sha256": "88a03b9937201bc0cc96eba12759fc9bb10894a6b01931f2e8b33792a4920cf2"
+      "bytes": 49520,
+      "sha256": "314b4718900381462fd7aabdc1ec48db835820ce3904ac10705cbd425be4e12b"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1369,
-      "sha256": "fb7c1d4935cb76eea35ad7d15b132e2b340da300d21a3dc7cce75b6014641efd"
+      "bytes": 1531,
+      "sha256": "e4e40e489548e61f3e7a3d1e6904524ce293a1baff16e8fd452b10ae54f10e82"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/bouguer-gravity.webp",
+      "bytes": 7520,
+      "sha256": "65fad638e5db00c95cfd5e8b5c9dff782bf3afbd4f389c45e59db22b80816dbe"
     },
     {
       "location": "prepared",
@@ -582,6 +624,12 @@
       "filename": "minimaps/geology.webp",
       "bytes": 41424,
       "sha256": "21b4b8557143ab8e038a83556fb97c091c35df438d830ab3d3a3a5e74f868693"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/gravity.webp",
+      "bytes": 40336,
+      "sha256": "2f9fa924a2b96d33f1fd9560370e4c7df3fca78e1401ab72c26f22ddd60d40e4"
     },
     {
       "location": "prepared",
@@ -670,8 +718,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 633801,
-      "sha256": "1b0df3a2b0a1fb7b3f6b45a679d41076ec6cb412eca5de717b9f1cda444dcc88"
+      "bytes": 643426,
+      "sha256": "c60d85217001b0ff98adc606bdb959350c9446b677d141adbf069318bd3d5208"
     },
     {
       "location": "prepared",
@@ -694,8 +742,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3843,
-      "sha256": "ddfd9f04daefaa3ace994205764616cbad8e3a5d395af3a954de1e8cd6c32c3c"
+      "bytes": 4258,
+      "sha256": "dd34f7006c8ea6de14242ee03a87b8d14ae0eb9c1b54c81aa7dee682dee160d0"
     },
     {
       "location": "prepared",

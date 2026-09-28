@@ -1,0 +1,68 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 12182
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 2880
+      Lines   = 1440
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    ^Core     = Mars_MGS_TES_Albedo_mosaic_global_7410m.tif
+  End_Object
+
+  Group = Archive
+    ProducerInstitutionName = "ARIZONA STATE UNIVERSITY"
+    ProducerFullName        = "PHILIP CHRISTENSEN"
+    ProductId               = GLOBAL_ALBEDO_8PPD
+    InstrumentHostId        = MGS
+    InstrumentId            = TES
+    TargetName              = MARS
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = SimpleCylindrical
+    CenterLongitude    = 0.0
+    TargetName         = Mars
+    EquatorialRadius   = 3396000.0 <meters>
+    PolarRadius        = 3396000.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 180
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -10670400.0 <meters>
+    UpperLeftCornerY   = 5335200.0 <meters>
+    PixelResolution    = 7410.0 <meters/pixel>
+    Scale              = 8.0 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1749             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 1147
+  ^History  = Mars_MGS_TES_Albedo_mosaic_global_7410m.History.IsisCube
+End_Object
+
+Object = OriginalLabel
+  Name           = IsisCube
+  StartByte      = 1
+  Bytes          = 1945
+  ^OriginalLabel = Mars_MGS_TES_Albedo_mosaic_global_7410m.OriginalLabel.IsisC-
+                   ube
+End_Object
+End

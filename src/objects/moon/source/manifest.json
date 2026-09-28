@@ -1135,6 +1135,76 @@
           }
         ]
       }
+    },
+    {
+      "id": "grail-grgm1200a-gravity-anomaly-l660",
+      "path": "science/grail/gggrx_1200a_anom_l660.tif",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif",
+      "credit": "NASA GSFC GRAIL Level-2 team (GRGM1200A; Lemoine et al. 2014, doi:10.1002/2014GL060027); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
+      ],
+      "acquisition": "Exact public PDS GRAIL_1001 EXTRAS GeoTIFF download of the gravity anomaly map; the volume's extrinfo.txt states it holds the same data as RSDMAP GGGRX_1200A_ANOM_L660.IMG. Original float32 mGal samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "grail",
+            "evidence": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-gravity-anomaly-l660",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "grail-grgm1200a-bouguer-disturbance-l660",
+      "path": "science/grail/gggrx_1200a_boug_l660.tif",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_boug_l660.tif",
+      "credit": "NASA GSFC GRAIL Level-2 team (GRGM1200A; Lemoine et al. 2014, doi:10.1002/2014GL060027); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl"
+      ],
+      "acquisition": "Exact public PDS GRAIL_1001 EXTRAS GeoTIFF download of the Bouguer disturbance map; the volume's extrinfo.txt states it holds the same data as RSDMAP GGGRX_1200A_BOUG_L660.IMG. Original float32 mGal samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "grail",
+            "evidence": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-bouguer-disturbance-l660",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1652,6 +1722,41 @@
         "kind": "local",
         "reason": "Project-authored presentation link, read by site/prepare-body-overview.mts."
       }
+    },
+    {
+      "path": "science/grail/gggrx_1200a_anom_l660.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
+      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the lens reads.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-gravity-anomaly-l660",
+            "role": "material",
+            "evidence": "Detached PDS3 label of the RSDMAP product whose values the EXTRAS GeoTIFF carries."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/grail/gggrx_1200a_boug_l660.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl",
+      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the lens reads.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-bouguer-disturbance-l660",
+            "role": "material",
+            "evidence": "Detached PDS3 label of the RSDMAP product whose values the EXTRAS GeoTIFF carries."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/grail/extrinfo.txt",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/extrinfo.txt",
+      "purpose": "GRAIL_1001 EXTRAS description: the GeoTIFF directory holds non-PDS-standard copies with the same data as the RSDMAP maps, and users should refer to the RSDMAP labels."
     }
   ]
 }
