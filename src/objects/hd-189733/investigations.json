@@ -11,12 +11,6 @@
       "evidence": [
         "https://ui.adsabs.harvard.edu/abs/2015MNRAS.447..846B",
         "https://oidb.jmmc.fr/search.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -27,12 +21,6 @@
       "evidence": [
         "https://arxiv.org/abs/2503.20895",
         "https://zenodo.org/records/15103479"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -44,12 +32,6 @@
       "evidence": [
         "https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=II/345/jmdc&HD189733",
         "https://ui.adsabs.harvard.edu/abs/2015MNRAS.447..846B"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -59,12 +41,6 @@
       "finding": "Position at J2016.0, parallax 50.567 +/- 0.016 mas (19.776 pc, no zero-point correction), proper motion -3.208, -250.323 mas/yr and radial velocity -2.53 +/- 0.12 km/s, from the archived gaia_source row.",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -75,12 +51,6 @@
       "evidence": [
         "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816201846144&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
         "https://doi.org/10.1051/0004-6361/202243880"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -91,12 +61,6 @@
       "revisitWhen": "A published TESS or visible-light limb-darkening law measured from HD 189733b transits appears.",
       "evidence": [
         "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/AJ/163/228/table4&-out=Name&-out.max=9999"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -106,12 +70,6 @@
       "finding": "SPOC 2-minute light curves of sectors 41, 54 and 81 (TIC 256364928) hold 30 complete transits. Their headers record 118.8-second integrations. Folded and fitted together with batman 2.5.3 and SciPy 1.18.1: u1 0.216, u2 0.440, radius ratio 0.1556 (the map's 0.1553), transit 6.4 +/- 0.9 s before the map ephemeris, reduced chi-squared 3.4. Sector by sector u1 runs 0.13-0.28 and u2 0.37-0.54 with u1 + u2 within 0.65-0.67. The timing error is the local covariance of this model and does not include starspots or other model error. The 20-second light curves of sectors 41, 54 and 81 and the multi-sector DV products were not used.",
       "evidence": [
         "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -122,12 +80,6 @@
       "evidence": [
         "https://arxiv.org/abs/2310.06681",
         "https://doi.org/10.1051/0004-6361/202346366"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -138,12 +90,6 @@
       "revisitWhen": "The orbit's sky orientation is measured, for example by astrometry or interferometry of the system.",
       "evidence": [
         "https://arxiv.org/abs/2310.06681"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -155,12 +101,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202452633",
         "https://arxiv.org/html/2502.18129v1"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -171,9 +111,6 @@
       "evidence": [
         "https://doi.org/10.3847/1538-3881/ad1f6c",
         "https://www.astroexplorer.org/details/ajad1f6cf7"
-      ],
-      "checked": [
-        { "date": "2026-09-23", "commit": "4145afff447b473c72ac7eb901d638d6534837c4" }
       ]
     },
     {
@@ -184,12 +121,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202452633",
         "https://arxiv.org/html/2502.18129v1"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "d3c1fb2acc2de28a56a6388553a6cf3fee6ada38"
-        }
       ]
     },
     {
@@ -201,12 +132,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202452633",
         "https://doi.org/10.1051/0004-6361/202346366"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "d3c1fb2acc2de28a56a6388553a6cf3fee6ada38"
-        }
       ]
     },
     {
@@ -215,13 +140,7 @@
       "status": "included",
       "finding": "The spectrum colour dimmed toward the limb by the fitted law, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/src/objects/hd-189733/source/presentation/context.png"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733/source/presentation/context.png"
       ]
     }
   ]

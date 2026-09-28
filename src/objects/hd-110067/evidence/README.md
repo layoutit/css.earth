@@ -1,6 +1,6 @@
 # HD 110067 evidence — 2026-09-23
 
-These results apply to the source records, recipes and presentation CSS committed with this evidence. The shared Telescope reader is the `eso-sdp-spectrum@1` implementation in commit `eca0259c7159eae652792f4babce3aba9792db3c`.
+These results apply to the source records, recipes and presentation CSS committed with this evidence. The shared Telescope reader is the `eso-sdp-spectrum@1` implementation.
 
 ## Numerical and source checks
 

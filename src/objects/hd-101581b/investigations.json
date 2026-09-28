@@ -1,5 +1,37 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-101581b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.08528875 Jupiter radii from Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract): 6,097.5 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+        "https://doi.org/10.3847/1538-3881/ad9266",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0026 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 4.46569 d (Kunimoto et al. 2025); a/R* derived from its semi-major axis 0.046 au and stellar radius 0.63 solar radii (Kunimoto et al. 2025); inclination 87.78 degrees (Kunimoto et al. 2025); no archive row states an eccentricity; the orbit is taken as circular; transit mid-time 2460014.8496 BJD, taken as BJD_TDB (Kunimoto et al. 2025). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

@@ -9,19 +9,8 @@
       "finding": "The live record and preparation recipe select model 189, version 2011-03-28, pole (9°, −4°), period 6.3192 h. The record reports D = 125 km with σD = 15 km but separately comments that the AO size is 104 ±11 km. The recipe uses the latter published calibration. These are different source determinations, not interchangeable fields.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/189",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/adelheid/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/source/preparation/terrestrial.json",
         "https://arxiv.org/html/1308.0446"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -29,13 +18,7 @@
       "survey": "survey-damit-documentation",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/README.md"
       ]
     },
     {
@@ -44,14 +27,7 @@
       "status": "included",
       "finding": "[A. Marciniak (2007), Photometry and models of selected main belt asteroids. IV. 184 Dejopeja, 276 Adelheid, 556 Phyllis](https://ui.adsabs.harvard.edu/abs/2007A%26A...473..633M) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
         "https://ui.adsabs.harvard.edu/abs/2007A%26A...473..633M"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -59,13 +35,7 @@
       "survey": "survey-urech-et-al-2011-combining-asteroid-models-derived-by-lightcurve-",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/README.md"
       ]
     },
     {
@@ -73,13 +43,7 @@
       "survey": "survey-hanu-et-al-2013-sizes-of-main-belt-asteroids-by-combining-shape-m",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/README.md"
       ]
     },
     {
@@ -89,21 +53,9 @@
       "finding": "AKARI 135.3 ±2.09 km is retained as a comparison, not the selected scale of the rendered shape. The imported ledger incorrectly marked that comparison as included. The preparation uses the documented 104 ±11 km AO calibration; a thermal effective-sphere diameter is not automatically a better physical-volume calibration. The original catalogue row for asteroid 276 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
       "revisitWhen": "A model-specific comparison resolves the difference between thermal, AO and occultation scales and justifies changing the selected calibration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
         "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
         "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/adelheid/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/source/reference/damit-model.json"
       ]
     },
     {
@@ -112,14 +64,7 @@
       "status": "included",
       "finding": "[Hanuš et al. (2013), Icarus 226, 1045–1057](https://arxiv.org/pdf/1308.0446) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
         "https://arxiv.org/pdf/1308.0446"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -127,13 +72,7 @@
       "survey": "survey-urech-et-al-2011-icarus-214-652-670",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/README.md"
       ]
     },
     {
@@ -141,14 +80,7 @@
       "survey": "surface-imagery",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/190"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -158,20 +90,8 @@
       "finding": "Alternative archive solutions: model 190, pole ['199', '-20'], [Model 190](https://damit.cuni.cz/projects/damit/asteroid_models/view/190) The live DAMIT export lists these other models for this target: 190: pole (199°, -20°), 6.3192 h, version 2011-03-28, archive diameter 117 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/190",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -179,13 +99,7 @@
       "survey": "versioned-view-evidence",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/adelheid/README.md#evidence"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/adelheid/README.md#evidence"
       ]
     },
     {
@@ -197,13 +111,6 @@
       "evidence": [
         "https://arxiv.org/html/2505.09437v1",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/189"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     }
   ]

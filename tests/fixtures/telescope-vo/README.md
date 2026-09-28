@@ -1,6 +1,6 @@
 # VO boundary fixtures
 
-Captured on 2026-09-20 using the repository's pinned PyVO 1.9.1 during the independent review of PR #423 at `cbcad927220c95853260363c2a6a4cd8ff6002c8`.
+Captured on 2026-09-20 using the repository's pinned PyVO 1.9.1 during the independent review of PR #423.
 
 | File | Provenance and supported claim |
 | --- | --- |

@@ -35,6 +35,7 @@
     "check:assets-published": "node packages/bake/cli/check-assets-published.mts",
     "check:deploy-assets": "node packages/bake/cli/check-deploy-assets.mts",
     "check:body-references": "node .github/scripts/checks/check-body-references.mts",
+    "check:investigations": "node packages/bake/cli/report-investigations.mts --summary && node packages/bake/cli/report-investigations.mts --facilities --summary",
     "check:directory-growth": "node .github/scripts/checks/check-directory-growth.mts",
     "check:ci": "node .github/scripts/ci/check-ci.mts",
     "check:pr": "node .github/scripts/ci/check-ci.mts",

@@ -279,7 +279,7 @@ the atlas transfer counts.
 
 [`evidence/photograph-pipeline`](../../../../../../../evidence/photograph-pipeline/) compares the
 prepared images that moving every photograph lens onto this contract changed
-with `main` at `3785f09de`:
+with `main`:
 
 - [Six minimap sheets](../../../../../../../evidence/photograph-pipeline/minimaps-01.webp) show each
   changed 640 × 320 minimap on `main`, on the branch and as a Pixelmatch diff.
@@ -294,7 +294,7 @@ with `main` at `3785f09de`:
   committed: the repository ignores `captures/` folders, and no copy remains.
   The sheets above are the kept visual evidence.
 
-[`tools/compare-visual-evidence.mts`](https://github.com/layoutit/css.earth/blob/c750338b7ca446dc703345c4c88cbe5eef010c53/tools/compare-visual-evidence.mts) (now
+[`tools/compare-visual-evidence.mts`](../../../../../../../labs/investigations/compare-visual-evidence.mts) (now
 [`labs/investigations/compare-visual-evidence.mts`](../../../../../../../labs/investigations/compare-visual-evidence.mts)) made each diff from the exact committed
 bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
 locates change. The sheets were inspected against `main` at native resolution,

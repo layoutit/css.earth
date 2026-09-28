@@ -32,7 +32,7 @@ WASP-12 b transits WASP-12 every 1.09 days and is 2 Jupiter radii across. Orbit 
 
 ## Evidence
 
-Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/published-phase-curve-map.test.mts) (now [`tests/objects/terrestrial/published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
+Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`tests/objects/terrestrial/published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-12b.json).
 

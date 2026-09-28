@@ -8,7 +8,7 @@ const SIZE=128;
 const root=path.resolve(import.meta.dirname,'../../../site/source/facilities/emblems');
 const output=path.resolve(import.meta.dirname,'../../../public/shell/facility-emblems');
 const catalogueRoot=path.resolve(import.meta.dirname,'../../../src/sources');
-const historicalEvidence='site/source/machines/emblem-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf';
+const historicalEvidence='site/source/facilities/emblem-library.json';
 
 const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-records.json'),'utf8'))).map(value=>{const entry=requireRecord(value);return {...entry,id:requireString(entry.id),localSource:requireString(entry.localSource)};});
 await fs.mkdir(output,{recursive:true});

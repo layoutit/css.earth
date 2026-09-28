@@ -35,7 +35,7 @@ The spectral source has 102,934 samples at −1 and 5,281 at +1. The TIFF does n
 
 ### Checks for this change
 
-Prepared on `ebd16155a` plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six lenses and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base SHA-256; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
+Prepared plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six lenses and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base SHA-256; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
 
 All 50 runtime assets were published through the existing content-addressed asset publisher and installed into an empty temporary destination: 29,095,665 bytes, 50 downloads, zero reused files. The three added lenses contribute 12.45 MB of prepared files. This is scene-asset installation evidence; it excludes shared shell assets and browser network traffic. The temporary install was removed after verification.
 
@@ -54,7 +54,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | normal | 1800 × 900 | 1.01 → 1.42 MB |
 | enhanced | 3600 × 1800 | 3.91 → 5.83 MB |
 
-Each atlas remains 2048 × 6400 pixels, with 790 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ryugu/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 6400 pixels, with 790 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 2.775 / 7.243 / 19.166 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 

@@ -10,12 +10,6 @@
       "evidence": [
         "https://arxiv.org/abs/2510.24708",
         "https://zenodo.org/records/14751570"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
-        }
       ]
     },
     {
@@ -26,12 +20,6 @@
       "revisitWhen": "A paper presents a 3D grid of this planet as its main result.",
       "evidence": [
         "https://arxiv.org/abs/2510.24708"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
-        }
       ]
     },
     {
@@ -43,17 +31,7 @@
         "https://zenodo.org/records/14751570",
         "https://zenodo.org/records/7907569",
         "https://www.nature.com/articles/s41550-025-02666-9/figures/4",
-        "https://github.com/layoutit/css.earth/blob/c07c5859f6022adec7296bd29c67c321f036eaeb/tools/objects/charts/retrieved-profile.test.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
-        },
-        {
-          "date": "2026-09-26",
-          "commit": "c07c5859f6022adec7296bd29c67c321f036eaeb"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/tests/objects/charts/retrieved-profile.test.mts"
       ]
     },
     {
@@ -65,12 +43,6 @@
       "evidence": [
         "https://zenodo.org/records/14751570",
         "https://www.nature.com/articles/s41550-025-02666-9/figures/4"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "c07c5859f6022adec7296bd29c67c321f036eaeb"
-        }
       ]
     },
     {
@@ -81,12 +53,6 @@
       "revisitWhen": "A map file of it is published.",
       "evidence": [
         "https://arxiv.org/abs/2301.08192"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "31ab4ce0b9b99ea1016fc3a83c6adec613c7282d"
-        }
       ]
     }
   ]

@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-4281.txt. Model 4281, version 2019-05-07, pole (237°, 57°), period 7.69659 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4281",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mentor/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mentor/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/source/reference/damit-model.json"
       ]
     },
     {
@@ -32,21 +20,9 @@
       "status": "included",
       "finding": "The original IRSA query was rerun for asteroid 3451; its Gr12b row matches the retained diameter 126.2880 km, error 1.6420 km, fit code DVBI and mean epoch 2455324.0991095. D in FIT_CODE means diameter was fitted. This effective-sphere diameter provides an approximate display scale, not a resolved surface or an independent physical-volume fit to the shape.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mentor/source/reference/calibration.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mentor/source/reference/neowise-query.txt",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/source/reference/neowise-query.txt",
         "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -54,14 +30,7 @@
       "survey": "surface-imagery-7",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md",
         "https://arxiv.org/abs/2308.05380v1"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -71,21 +40,9 @@
       "finding": "The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases. Convex inversion leaves concavities and fine relief unresolved. - Transferring thermal diameter to mesh volume is approximate. The quoted fit error excludes additional thermal/shape uncertainty and does not measure local shape accuracy. - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain. - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole. - Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.2 revises the shape/spin solution. The recorded public target query did not expose its numerical mesh; this view keeps the older mesh and matching pole. The live DAMIT export lists these other models for this target: 4282: pole (82°, 7°), 7.69659 h, version 2019-05-07. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md",
         "https://arxiv.org/abs/2308.05380v1",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4282"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -94,21 +51,9 @@
       "status": "included",
       "finding": "The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/13357/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from NOTICE.md.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md",
         "https://damit.cuni.cz/projects/damit/pages/documentation",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mentor/source/reference/damit-model.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/mentor/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/source/manifest.json"
       ]
     },
     {
@@ -116,18 +61,7 @@
       "survey": "recorded-survey-2",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/README.md"
       ]
     },
     {
@@ -137,13 +71,7 @@
       "finding": "Alternative archive solution: [model 4282](https://damit.cuni.cz/projects/damit/asteroid_models/view/4282), ecliptic pole (82°, 7°).",
       "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/mentor/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/README.md"
       ]
     }
   ]

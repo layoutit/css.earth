@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-dataset-browser-check@1",
   "date": "2026-09-27T01:59:21.535Z",
-  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
   "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
   "testedFiles": {
     "source/content/object.json": "85dfaa8c343b5f4132418ec3ba1c718f232658e6ae0d7fda2221b7a632011160",

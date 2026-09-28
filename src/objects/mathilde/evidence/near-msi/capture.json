@@ -1,5 +1,4 @@
 {
-  "baseRevision": "ebf7c8456aab3af05bf451e4dd2eede757e6dfac",
   "changes": "NEAR MSI preparation, Mathilde alternative mesh and three-lens package in this commit.",
   "browser": "152.0.7977.84",
   "viewport": {
@@ -158,7 +157,6 @@
     }
   },
   "recipeMigrationRevalidation": {
-    "mainRevision": "2f2752abb4a6fac0b40c8c549ef1d20d9ae395b3",
     "change": "NEAR MSI migrated to the shared lens recipe and PDS4 label reader; full Mathilde preparation replayed.",
     "runtimeAssets": {
       "count": 39,

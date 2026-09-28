@@ -10,12 +10,6 @@
       "evidence": [
         "https://arxiv.org/abs/2608.27437",
         "https://arxiv.org/html/2608.27437v1/Programims_105-eps-converted-to.png"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
-        }
       ]
     },
     {
@@ -25,12 +19,6 @@
       "finding": "On the mean of the three reflectance channels the ring's ridge, under nine binnings, traces an ellipse of 80.8 au and axis ratio 0.878: inclination 28.6 degrees, nodes at position angle 100.7 degrees (scatter 0.10 au, 0.16 and 0.55 degrees), against the published 80 au, 28.54 and 100.39 degrees; the author refuses more than five degrees or a tenth of the radius. The drawn envelope is a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included: it leaves 0.456 against a signal of 2.50, where a single gaussian ring (radial width 22.6 au) leaves 0.532, a spherical shell 0.654 and constant depth 1.131. The light is drawn to 237 au, where the ring's deprojected median reaches the per-pixel noise, in a grid reaching 300 au.",
       "evidence": [
         "https://arxiv.org/abs/2608.27437"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
-        }
       ]
     },
     {
@@ -42,12 +30,6 @@
       "evidence": [
         "https://arxiv.org/abs/2608.27437",
         "https://doi.org/10.1088/0004-637X/789/1/58"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
-        }
       ]
     },
     {
@@ -57,12 +39,6 @@
       "finding": "Six lenses in the paper's per-filter colour bars (one ring six times); a composite on the sky-band display with M8's asinh settings, which drew the ring at 70 to 100 percent of its peak from 48 to 120 au where the data fall to a fifth; and F182M alone in its Figure 26 scale, which matched that figure but showed one filter's brightness legend rather than the dust. The reflectance colour of the paper's Figure 1 shows the dust itself and is drawn.",
       "evidence": [
         "https://arxiv.org/abs/2608.27437"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
-        }
       ],
       "revisitWhen": "The paper or a later one prints a calibrated colour scale for its reflectance images, or a composite with a published stretch."
     },
@@ -74,12 +50,6 @@
       "revisitWhen": "A pipeline release changes the align_refs fit, or a published MIRI reduction of this disc is deposited.",
       "evidence": [
         "https://jwst-pipeline.readthedocs.io/en/latest/jwst/align_refs/index.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
-        }
       ]
     }
   ]

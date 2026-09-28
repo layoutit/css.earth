@@ -3,31 +3,26 @@
   "references": [
     {
       "originalPath": "labs/nebula/models/helix/compiler.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/01-compiler.json",
       "bytes": 1329
     },
     {
       "originalPath": "labs/nebula/models/helix/observations.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/02-observations.json",
       "bytes": 4470
     },
     {
       "originalPath": "labs/nebula/models/helix/observation-structures.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/03-observation-structures.json",
       "bytes": 405
     },
     {
       "originalPath": "labs/nebula/models/helix/joint-fit.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/04-joint-fit.json",
       "bytes": 1020
     },
     {
       "originalPath": "labs/nebula/models/helix/kinematics-hco.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/evidence/helix/kinematics-hco.json",
       "bytes": 7355
     }

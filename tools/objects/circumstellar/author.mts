@@ -772,7 +772,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const pinnedEvidence = new Map((pinned.inputs ?? []).flatMap(input => (input.sourceBinding?.references ?? []).map(reference => [`${input.id}/${reference.catalogueId}`, reference.evidence])));
   const inputs = built.flatMap(b => b.bands.map(band => ({ lens: b.lens, band }))).map(({ lens, band }, index) => {
     const inputId = inputOf(lens, band), catalogueId = `source-${id}-${inputId}`;
-    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json@${'0'.repeat(40)}#/inputs/${index}`;
+    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${index}`;
     return { id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] },
       path: lens.deposit ? lens.deposit.path : lens.archive ? lens.archive.path : lens.hst ? `${lens.hst.work}/psf-subtracted/${band.origin.file}` : `${downloadsBase}/observations/${band.origin.file}`, origin: band.origin.url, sourceUrl: band.origin.landing,
       title: band.origin.title, credit: band.origin.credit, displayCredit: band.origin.displayCredit, acquisition: band.origin.acquisition,
@@ -782,7 +782,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     const beam = b.lens.archive?.primaryBeam;
     if (!beam) continue;
     const inputId = `${b.lens.id}-primary-beam`, catalogueId = `source-${id}-${inputId}`, index = inputs.length;
-    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json@${'0'.repeat(40)}#/inputs/${index}`;
+    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${index}`;
     inputs.push({ id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] }, path: beam.path, origin: beam.url,
       sourceUrl: b.lens.archive!.landing, title: beam.title, credit: b.lens.archive!.credit, displayCredit: b.lens.archive!.displayCredit, acquisition: b.lens.archive!.acquisition,
       license: b.lens.archive!.license, lensId: b.lens.id });

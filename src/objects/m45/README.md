@@ -22,7 +22,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 - [Recorded app checks](../../../site/test/evidence/nebulae/2026-09-14/field-defaults.json) cover the delivered composite and catalogue field; [report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) limits their claims.
 - [Delivery](source/delivery.json) pins the compiler and composite recipes. The app composite uses a freshly supplied compiler result; the historical standalone composite remains a separate comparison. This is not a new cold-replay or material acceptance claim.
-- [Historical registration evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/registration-evidence.json) records relative stellar alignment. Niittee’s 99 held-out stars give 0.450″ RMS only within the central NOIRLab overlap; absolute and outer-field distortion remain unqualified.
+- [Historical registration evidence](../../../labs/nebula/models/m45/registration-evidence.json) records relative stellar alignment. Niittee’s 99 held-out stars give 0.450″ RMS only within the central NOIRLab overlap; absolute and outer-field distortion remain unqualified.
 
 ## Known problems
 
@@ -33,7 +33,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/README.md) retains historical replay hashes, native separation checks and failed material views. [Physical evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/physical-evidence.json) scopes the Gibson–Nordsieck and Ritchey interpretations. The [source dossier](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m45/source-dossier.json) preserves excluded 2MASS/IRIS and preliminary Usama/Andreo candidates, plus unacquired WISP UV data. General preparation is in the [nebula guide](../../../docs/nebulae/README.md).
+The [fixed lab account](../../../labs/nebula/models/m45/README.md) retains historical replay hashes, native separation checks and failed material views. [Physical evidence](../../../labs/nebula/models/m45/physical-evidence.json) scopes the Gibson–Nordsieck and Ritchey interpretations. The [source dossier](../../../labs/nebula/models/m45/source-dossier.json) preserves excluded 2MASS/IRIS and preliminary Usama/Andreo candidates, plus unacquired WISP UV data. General preparation is in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
 

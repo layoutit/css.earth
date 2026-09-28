@@ -1,5 +1,45 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "kepler-22",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.869 +/- 0.011 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract); Mass 0.857 +/- 0.051 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract); temperature from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "https://doi.org/10.1051/0004-6361/202346211",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 2127941757262806656, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,596 K and log g 4.49 (u1 0.500, u2 0.234): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451",
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2127941757262806656: position, parallax, proper motion and radial velocity. Identifiers: SIMBAD, CDS, Strasbourg.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    }
+  ]
 }

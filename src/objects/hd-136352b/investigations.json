@@ -1,5 +1,38 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-136352b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.14845239 Jupiter radii from Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract): 10,613.2 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "https://doi.org/10.1038/s41550-021-01381-5",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01485078 Jupiter masses: Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "https://doi.org/10.1038/s41550-021-01381-5",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 11.57797 d (Delrez et al. 2021); a/R* 19.6 (Delrez et al. 2021); inclination 88.49 degrees (Delrez et al. 2021); e 0 (Delrez et al. 2021); transit mid-time 2458944.3726 BJD, taken as BJD_TDB (Delrez et al. 2021). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

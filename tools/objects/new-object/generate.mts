@@ -19,6 +19,7 @@ import type { Cited, StarSpec } from './spec.mts';
 import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
+import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
@@ -275,6 +276,20 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     publisher: 'European Space Agency, Gaia Data Processing and Analysis Consortium' }));
   for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
   for (const record of color.catalogue) files.set(`src/sources/${record.id}.json`, json(record.record));
+
+  // The ledger records each choice made above with the links it read.
+  const gaiaArchive = 'https://gea.esac.esa.int/archive/', vizier = (credit: string | undefined) => credit?.match(/VizieR (J\/[^\s.,)]+)/u)?.[1];
+  const colorLinks = color.inputs.map(input => String(input.origin)).filter(origin => origin.startsWith('https://') && !origin.includes('asu-tsv') && !origin.includes('/tap/'));
+  writeLedger(files, id, [
+    { id: 'placement', subject: 'Placement', evidence: [gaiaArchive, ...place.cited ? [place.cited.url] : [], ...row.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
+      finding: `Gaia DR3 source ${row.sourceId}: position at J2016.0. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${row.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
+    { id: 'radius-mass-and-temperature', subject: 'Radius, mass and temperature', evidence: [...spec.radius === 'gaia-flame' || spec.mass === 'gaia-flame' ? [gaiaArchive] : [], spec.temperature.url],
+      finding: `${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value}${spec.temperature.uncertainty ? ` +/- ${spec.temperature.uncertainty}` : ''} K from ${spec.temperature.source}.` },
+    { id: 'colour', subject: 'Colour', evidence: color.route === 'planck' ? [spec.temperature.url] : colorLinks,
+      finding: `${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2-degree observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.` },
+    ...limb.limbDarkening && vizier(limb.credit) ? [{ id: 'limb-darkening', subject: 'Limb darkening', evidence: [`https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${vizier(limb.credit)}`], finding: `The disc is ${limb.sentence}.` }] : [],
+    ...spec.spin ? [{ id: 'spin', subject: 'Spin', evidence: [spec.spin.url], finding: `Inclination ${spec.spin.inclinationDegrees} degrees from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''}, from ${spec.spin.source}; the axis's direction on the sky is a convention.` }] : [],
+  ]);
 
   const todo = [...color.todo ? [color.todo] : [], ...spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the star and its evidence']];
   return { id, files, color, limb, hex: colorHex, todo };

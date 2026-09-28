@@ -8,23 +8,11 @@
       "status": "included",
       "finding": "The current LAM 3Dshape directory lists 87_Sylvia_mpcd.obj, matching the actual preparation input. The retained measurements describe 2898 vertices and 5792 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sylvia/README.md",
         "https://observations.lam.fr/astero/3Dshape/87_Sylvia_mpcd.obj",
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/sylvia/source/reference/model-properties.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/sylvia/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sylvia/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sylvia/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -33,13 +21,7 @@
       "status": "included",
       "finding": "Radius minus 137 km, false color over −50 to +70 km; broad shape, not gravitational height.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sylvia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sylvia/README.md"
       ]
     },
     {
@@ -48,13 +30,7 @@
       "status": "included",
       "finding": "Retained Sylvia vector at 3 September 2026 TT, shared with Romulus.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/sylvia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sylvia/README.md"
       ]
     },
     {
@@ -65,23 +41,7 @@
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/87_Sylvia_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/sylvia/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/sylvia/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sylvia/source/reference/model-properties.json"
       ]
     },
     {
@@ -93,20 +53,6 @@
         "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
-        }
       ]
     },
     {
@@ -118,12 +64,6 @@
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/87_Sylvia_adam.obj"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
-        }
       ]
     }
   ]

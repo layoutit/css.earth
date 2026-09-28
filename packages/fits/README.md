@@ -43,7 +43,7 @@ in [`tests/oracles/fits/`](../../tests/oracles/README.md), and
 [`tests/fits/repository-inputs.test.mts`](../../tests/fits/repository-inputs.test.mts) reads every FITS file the
 repository tracks through this package and checks one digest per reading against those recorded from the three readers
 it replaced (`tools/fits/fits.mts` with its rice and sky modules, `tools/objects/observation/fits.mts` and
-`tools/nebula/application/fits.ts` at 7e47cf4489). `node tests/oracles/test-fits.mts --unit` runs all of them offline.
+`tools/nebula/application/fits.ts`). `node tests/oracles/test-fits.mts --unit` runs all of them offline.
 
 ESM, CommonJS and declarations are built with tsup, like the other packages. From the repository root:
 

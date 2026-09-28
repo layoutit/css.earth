@@ -9,8 +9,8 @@
 
 ## Evidence
 
-- [Recorded checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/VALIDATION.md): shape, [16 source records](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/source-validation.json), and [fresh image installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/fresh-install.json) for both Centaurs.
-- [Headless Chrome checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/browser-validation.json) cover both bodies at 1440 × 900 CSS pixels, DPR 1/2, after integration of `3badfb535`. Later PR #89 checks cover data integration; [default](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/evidence/bienor-default.png) and [close](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/evidence/bienor-close.png) captures retain their earlier build identities.
+- Recorded checks: shape, 16 source records, and fresh image installation for both Centaurs.
+- Headless Chrome checks cover both bodies at 1440 × 900 CSS pixels, DPR 1/2, after integration. Later PR #89 checks cover data integration; default and close captures retain their earlier build identities.
 
 ## Known problems
 
@@ -33,7 +33,7 @@ The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3
 
 ### Orbit
 
-This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `54598;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. [Independent vector comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/orbit-errors.json) sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
+This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `54598;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. Independent vector comparisons sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
 
 ### Reproduction
 

@@ -528,13 +528,13 @@ function ledger(body: Body, modelUrl: string) {
   const entries: Record<string, unknown>[] = [
     { id: 'selected-shape-and-spin', subject: `DAMIT ${model.id}: selected shape and spin`, status: 'included',
       finding: `DAMIT model ${model.id}, version ${model.version}, pole (${model.lambda}°, ${model.beta}°), period ${model.periodHours} h, taken unchanged from the archive.${body.alternatives.length ? ` Mirror solution ${body.alternatives.map(a => a.id).join(', ')} recorded as an alternative.` : ''}`,
-      evidence: [modelUrl, `${DAMIT}/exports/table/asteroid_models`], checked: [{ date: checked }] },
+      evidence: [modelUrl, `${DAMIT}/exports/table/asteroid_models`] },
     { id: 'selected-physical-scale', subject: 'Physical scale', status: 'included',
       finding: `${calibration.diameterKm} ± ${calibration.uncertaintyKm} km, ${calibration.quantity}. ${calibration.notes}`,
-      evidence: [calibration.referenceUrl], checked: [{ date: checked }] },
+      evidence: [calibration.referenceUrl] },
     { id: 'surface-imagery', subject: 'Resolved surface imagery', status: 'unresolved',
       finding: 'No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.',
-      revisitWhen: 'A resolved image or a registered surface map of this asteroid is published.', evidence: [modelUrl], checked: [{ date: checked }] },
+      revisitWhen: 'A resolved image or a registered surface map of this asteroid is published.', evidence: [modelUrl] },
   ];
   return { schema: 'cssearth-investigation-ledger@1', objectId: id, entries };
 }

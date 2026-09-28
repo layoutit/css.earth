@@ -10,12 +10,6 @@
       "evidence": [
         "https://doi.org/10.1038/s41586-023-06692-3",
         "https://arxiv.org/html/2311.17775v1"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
-        }
       ]
     },
     {
@@ -25,12 +19,6 @@
       "finding": "The ESPRESSO spectrum is unresolved. No texture or spot map is inferred. The darker edge is a published ATLAS9 model, not a resolved measurement.",
       "evidence": [
         "https://doi.org/10.1038/s41586-023-06692-3"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
-        }
       ],
       "revisitWhen": "A source-backed resolved product, rotational constraint or appropriate photometric model becomes available."
     },
@@ -42,12 +30,6 @@
       "evidence": [
         "https://arxiv.org/abs/2312.04599"
       ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
-        }
-      ],
       "revisitWhen": "Companion astrometry and a justified wide-system placement are prepared."
     },
     {
@@ -57,12 +39,6 @@
       "finding": "Zak et al. (2024), section 4: fixed model coefficients u1=0.564 and u2=0.145 from ExoCTK ATLAS9 in 380–788 nm. Applied achromatically to the measured colour; not a fitted or resolved intensity profile.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202450570"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "eca0259c7159eae652792f4babce3aba9792db3c"
-        }
       ]
     }
   ]

@@ -24,7 +24,7 @@ text. They do not configure rendering, geometry, simulation or camera scale.
 
 Check angle units and spin-axis conventions before comparing axial tilts. Keep
 solar activity and complete magnetic cycles distinct, and specify latitude for
-differential rotation. The [September 2026 source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/factsheets.md#corrections-requiring-care)
+differential rotation. The [September 2026 source review](factsheets.md#corrections-requiring-care)
 retains the selected values, source-access limits and the original pass's
 uncertainty threshold; those dated selections are not a current catalogue.
 

@@ -211,6 +211,8 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     datasets: { shape: { title: 'Sphere of the measured radius', detail: 'No image', summary: 'A sphere at the published size in neutral gray. No picture of the surface is cast here.' } } });
   put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: placement, radius, rotation and the shape lens, each with its source.\n\n## Evidence\n\n${TODO}: the tests and captures that prove the package.\n\n## Known problems\n\n${TODO}: what is not shown and why.\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the measurements and placement credits.\n`);
+  // Empty, like the TODO prose: `pnpm check:investigations` refuses it until the sources examined are recorded (new-object
+  // writes its own choices over it, ledger.mts).
   put(`${o}/investigations.json`, { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] });
   put(`${o}/.gitignore`, '# No observation files: the sphere is the shared neutral gray.\n');
   const local = (reason: string) => ({ kind: 'local', reason });

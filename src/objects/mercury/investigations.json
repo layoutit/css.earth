@@ -8,20 +8,7 @@
       "status": "included",
       "finding": "The exterior Monochrome view now uses the native USGS BDR GeoTIFF, reduced by pixel-area averaging. The old Trek BDR snapshot is retained only for the interior illustration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L7",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L57",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/source/manifest.json"
       ]
     },
     {
@@ -30,20 +17,7 @@
       "status": "included",
       "finding": "The exterior Enhanced color view now uses the native USGS RGB GeoTIFF. Missing polar coverage is gray grid; the former Trek image and modeled completion are retired.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L8",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/source/manifest.json",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/source/manifest.json"
       ]
     },
     {
@@ -53,21 +27,7 @@
       "finding": "Retired the modeled polar completion. Native enhanced-color observations are reduced directly; missing source footprints are gray grid.",
       "revisitWhen": "Do not synthesize missing observations. A future observed product may replace the gaps.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L8",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L58",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/enhanced-check.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
       ]
     },
     {
@@ -76,20 +36,7 @@
       "status": "excluded",
       "finding": "The numeric DEM replaced the colored hillshade in PR #835. Its last remaining use, as a fallback for enhanced-color polar reconstruction, is now retired.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L9",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L59",
-        "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
-        }
+        "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png"
       ],
       "revisitWhen": "Use the numeric DEM and its matching scale; the old colored hillshade is not a numeric elevation input."
     },
@@ -99,15 +46,7 @@
       "status": "included",
       "finding": "The Interior view and the retained 3D cutaway use the NASA Science facts record retrieved 2026-08-30; the only radial boundary claimed is the 0.85-radius metallic core, mantle and crust stay one combined shell, and colours and fine texture are illustrative.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L10",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L61",
         "https://science.nasa.gov/mercury/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -117,15 +56,7 @@
       "finding": "The rendered 366 km shell is the arithmetic difference between NASA's published 2,440 km planet radius and 2,074 km core radius, while the same source separately describes the shell as about 400 km.",
       "revisitWhen": "NASA or another authority publishes radii and a shell thickness that agree.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L61",
         "https://science.nasa.gov/mercury/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -134,15 +65,7 @@
       "status": "included",
       "finding": "The Spectrum panel is a 326-point, 350-1000 nm global area-weighted mean prepared from M. D'Amore's MASCS cube; the committed snapshot records the 197,099,868-byte archive identity, the aggregation rule, parsed counts and an archive/record count discrepancy.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L11",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L63",
         "https://doi.org/10.5281/zenodo.7433033"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -151,15 +74,7 @@
       "status": "included",
       "finding": "Named features use the Mercury centre-point export, snapshot 2026-09-11, whose FGDC metadata declares public-domain use: 573 IAU-adopted names with centre, diameter, extent and name origin, labelled at the closest zoom only.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L70",
         "https://planetarynames.wr.usgs.gov/Page/MERCURY/target"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -168,15 +83,7 @@
       "status": "included",
       "finding": "Feature traces come from the CC BY 4.0 Combined_Tectonic_Map shapefile of 18,451 polylines; the up-to-six longest contractional or extensional structures inside each rupes, dorsum or fossae extent draw that feature's outline.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L13",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L69",
         "https://data.mendeley.com/datasets/p43b9wttpj/2"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -186,13 +93,7 @@
       "finding": "The README records that the drawn outlines are not published nomenclature boundaries: craters and faculae trace their published diameter as a circle and other classes trace the Gazetteer extent box or mapped tectonic traces.",
       "revisitWhen": "A released dataset supplies mapped nomenclature boundaries for Mercury's features.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L46"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/README.md#L46"
       ]
     },
     {
@@ -201,13 +102,7 @@
       "status": "included",
       "finding": "One site is labelled beside the IAU names, each coordinate quoting the NASA NSSDCA, PDS, LROC, agency or paper page it was read from with the stated latitude kind and longitude convention.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L72"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/README.md#L72"
       ]
     },
     {
@@ -216,13 +111,7 @@
       "status": "included",
       "finding": "486 labelled names carry a caption note taken from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L74"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/README.md#L74"
       ]
     },
     {
@@ -231,14 +120,7 @@
       "status": "included",
       "finding": "The navigation marker uses this published MESSENGER global view.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L60",
         "https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -248,15 +130,7 @@
       "finding": "The pinned PSG configuration reports ATMOSPHERE-STRUCTURE as None, so the package deliberately publishes no temperature-pressure chart and describes the thin exosphere separately.",
       "revisitWhen": "A source that supplies a usable exosphere structure for Mercury is pinned.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L48",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mercury/README.md#L64",
         "https://psg.gsfc.nasa.gov/api.php"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -267,12 +141,6 @@
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2015.11.040",
         "https://planetarydata.jpl.nasa.gov/img/data/messenger/msgrmds_7001/DOCUMENT/MDIS_CDR_RDRSIS.HTM"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
       ]
     },
     {
@@ -281,15 +149,9 @@
       "status": "excluded",
       "finding": "Replaced by the published KS3 law; Mercury now bakes its own bank.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
-      ]
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "usgs-numeric-surfaces",
@@ -297,14 +159,7 @@
       "status": "included",
       "finding": "MESSENGER DEM v2 replaces the colored topography input. Native DN uses 0.5 m per unit; central-meridian 180 placement checked against independent native bytes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7d1a553b68af8c749cc734f7bd9710085762d839/src/objects/mercury/evidence/usgs-numeric/numeric-checks.json",
-        "https://github.com/layoutit/css.earth/blob/7d1a553b68af8c749cc734f7bd9710085762d839/src/objects/mercury/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/usgs-numeric/numeric-checks.json"
       ]
     },
     {
@@ -313,16 +168,9 @@
       "status": "included",
       "finding": "BDR and LOI share the Monochrome arrow selector. All three maps use native area means at the existing 4K display size. Publisher display stretches are retained and qualified separately. Enhanced-color polar gaps remain missing; no terrain or neighboring hue is used to reconstruct them.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/README.md#native-photographic-maps",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/bdr-check.json",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/loi-check.json",
-        "https://github.com/layoutit/css.earth/blob/b2858e48c30c0b48906c7787859c63eb3fa985b9/src/objects/mercury/evidence/native-maps/enhanced-check.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b2858e48c30c0b48906c7787859c63eb3fa985b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/bdr-check.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/loi-check.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
       ]
     },
     {
@@ -334,12 +182,6 @@
         "https://trek.nasa.gov/tiles/Mercury/EQ/Anomaly_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
         "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl",
         "https://doi.org/10.1029/2018GL081135"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     },
     {
@@ -351,12 +193,6 @@
         "https://trek.nasa.gov/tiles/Mercury/EQ/CrustalThickness_Map_HgM008_16ppd/1.0.0/WMTSCapabilities.xml",
         "https://doi.org/10.1029/2018GL081135",
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662718/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     },
     {
@@ -368,12 +204,6 @@
       "evidence": [
         "https://trek.nasa.gov/tiles/Mercury/EQ/Disturbance_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
         "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     },
     {
@@ -383,12 +213,6 @@
       "finding": "Used as the documented resolution limit of the Gravity and Crust lenses rather than as its own lens: degree 45.6-73.0 north of 60 N and 10.9-15.1 south of 30 S, about 105-125 km versus 500-700 km half-wavelength. A quality mask would need a threshold the product does not publish.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Mercury/EQ/DegreeStrength_Map_HgM008_4ppd/1.0.0/WMTSCapabilities.xml"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     },
     {
@@ -399,12 +223,6 @@
       "revisitWhen": "A published numeric grid of one of these models is found.",
       "evidence": [
         "https://doi.org/10.1029/2020GL087261"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     }
   ]

@@ -10,7 +10,7 @@ const [phase,base]=process.argv.slice(2);if(!phase||!base)throw Error('phase and
 const root=resolve(`output/playwright/halley-mosaic/${phase}`);await mkdir(root,{recursive:true});
 const launch=await conformanceBrowserLaunch({evidenceDirectory:root});const browser=await chromium.launch(launch.options);const reports=[];
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const inventory=phase==='before'?execFileSync('git',['show','1991273ff:src/planets/comet-1p/runtime-assets.json']):await readFile('src/planets/comet-1p/runtime-assets.json');
+const inventory=phase==='before'?execFileSync('git',['show',':src/planets/comet-1p/runtime-assets.json']):await readFile('src/planets/comet-1p/runtime-assets.json');
 await writeFile(resolve(root,'runtime-assets.json'),inventory);
 try{for(const dpr of (process.env.CAPTURE_DPRS??'1,2').split(',').map(Number)){
  const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:dpr});const page=await context.newPage();const errors=[],network=[],pending=[];

@@ -1,12 +1,9 @@
 {
   "schema": "cssearth-fixture-placement-repair@1",
-  "testedBase": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
   "reason": "Contract lint rejects 44 raw fixture files in docs plus an unreachable guide; five downstream CI checks stopped before running.",
   "repair": {
     "round": 2,
     "maximumCleanupRounds": 2,
-    "base": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
-    "lintBase": "3aebc31094dff8332755b394b88c708b7c3f1062",
     "counts": {
       "movedFiles": 44,
       "byteIdenticalArtifacts": 18,
@@ -854,7 +851,6 @@
     }
   },
   "documentation": {
-    "base": "3aebc31094dff8332755b394b88c708b7c3f1062",
     "markdownFiles": 10,
     "localLinksChecked": 161,
     "errors": [],
@@ -869,7 +865,6 @@
   "review": {
     "receipt": {
       "packet": "fixture-relocation",
-      "sourceRef": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
       "durationMs": 45333,
       "turns": 1,
       "successful": true,
@@ -879,7 +874,6 @@
       "sourceDrift": [],
       "dataDrift": [],
       "preservation": {
-        "sourceRef": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
         "files": 44,
         "exactBytes": 26,
         "descriptorFiles": 17,
@@ -975,7 +969,6 @@
     },
     "preservation": {
       "summary": {
-        "sourceRef": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
         "files": 44,
         "exactBytes": 26,
         "descriptorFiles": 17,
@@ -1932,10 +1925,9 @@
         }
       ]
     },
-    "report": "**Verdict:** Accept. The 44 data files moved with path transport only; payloads were not scientifically regenerated. No P0, P1, or borderline P2 on this relocation.\n\n## Findings\n\nNone blocking.\n\n**P2 (ordinary, non-blocking):** F18 `dataset.acquisition.identity` stays a repo-root string (`tools/objects/pds/...`) while member paths gained one `../`. Loader opens members from the descriptor directory (`family-operation.mts` 130–133), not identity. The new existence check only runs when identity starts with `../` (`family-examples.test.mts` 33). Pre-existing split, not a broken target after the move.\n\n## Independent check inference\n\nThe script is a preservation check, not scientific acceptance.\n\n- Same 44 non-Markdown names, `docs/…` → `tests/fixtures/…`.\n- `artifacts/` and `params/`: exact bytes (26).\n- 17 descriptors (F02–F18): JSON keys/values equal except `../` strings whose resolved targets match old vs new parents.\n- `manifest.json`: 17 `command` strings, prefix replace only (F02–F18). F01 stays `telescope export`.\n- `allChecksPass` follows those asserts; it does not re-qualify science.\n\nPath hop is correct: old descriptors sit three levels under root, new ones four. Repo-root refs `../../../` → `../../../../`. Same-fixtures refs `../../../tests/fixtures/telescope-families/…` → `../../telescope-families/…`.\n\n## Transport, owners, checker\n\n- Loader still `resolve(dirname(descriptorPath), member.path)` (`family-operation.mts` 130–133).\n- Tests point at `tests/fixtures/telescope-family-examples` (`family-examples.test.mts` 9; `family-operation.test.mts` 61).\n- Guide stays Markdown and is indexed (`docs/README.md`; `docs/telescope-family-examples/README.md`).\n- Docs checker unchanged: non-guide files under `docs/` still fail (`check-documentation-links.py` 118–124). Failures were not ignored.\n- F13/F17 restorer still writes `output/telescope-family-examples` (`f13-f17-examples.mts` 15). No docs path.\n\n## Scope / limits\n\nCovered: path transport, byte/JSON preservation vs `7a4f389`, loader/command/test refs, restore/prepare locations, docs contract vs remaining guide.\n\nNot covered: native scientific exports, decoder/Python env, unrelated telescope architecture. Those were already unavailable; this move does not claim they pass.\n\n=== REPORT COMPLETE ===\n"
+    "report": "**Verdict:** Accept. The 44 data files moved with path transport only; payloads were not scientifically regenerated. No P0, P1, or borderline P2 on this relocation.\n\n## Findings\n\nNone blocking.\n\n**P2 (ordinary, non-blocking):** F18 `dataset.acquisition.identity` stays a repo-root string (`tools/objects/pds/...`) while member paths gained one `../`. Loader opens members from the descriptor directory (`family-operation.mts` 130–133), not identity. The new existence check only runs when identity starts with `../` (`family-examples.test.mts` 33). Pre-existing split, not a broken target after the move.\n\n## Independent check inference\n\nThe script is a preservation check, not scientific acceptance.\n\n- Same 44 non-Markdown names, `docs/…` → `tests/fixtures/…`.\n- `artifacts/` and `params/`: exact bytes (26).\n- 17 descriptors (F02–F18): JSON keys/values equal except `../` strings whose resolved targets match old vs new parents.\n- `manifest.json`: 17 `command` strings, prefix replace only (F02–F18). F01 stays `telescope export`.\n- `allChecksPass` follows those asserts; it does not re-qualify science.\n\nPath hop is correct: old descriptors sit three levels under root, new ones four. Repo-root refs `../../../` → `../../../../`. Same-fixtures refs `../../../tests/fixtures/telescope-families/…` → `../../telescope-families/…`.\n\n## Transport, owners, checker\n\n- Loader still `resolve(dirname(descriptorPath), member.path)` (`family-operation.mts` 130–133).\n- Tests point at `tests/fixtures/telescope-family-examples` (`family-examples.test.mts` 9; `family-operation.test.mts` 61).\n- Guide stays Markdown and is indexed (`docs/README.md`; `docs/telescope-family-examples/README.md`).\n- Docs checker unchanged: non-guide files under `docs/` still fail (`check-documentation-links.py` 118–124). Failures were not ignored.\n- F13/F17 restorer still writes `output/telescope-family-examples` (`f13-f17-examples.mts` 15). No docs path.\n\n## Scope / limits\n\nCovered: path transport, byte/JSON preservation vs, loader/command/test refs, restore/prepare locations, docs contract vs remaining guide.\n\nNot covered: native scientific exports, decoder/Python env, unrelated telescope architecture. Those were already unavailable; this move does not claim they pass.\n\n=== REPORT COMPLETE ===\n"
   },
   "productionBeforeRepair": {
-    "head": "7a4f38985d98c4c03e7c48710428d9017f45f9d5",
     "url": "https://github.com/layoutit/css.earth/actions/runs/35541285697/job/106159310455",
     "result": "passed",
     "coverage": "Production build/R2 metadata identity and Venus/Mercury navigation,81 content-addressed requests and zero same-origin scene requests. This does not inspect Omega morphology.",

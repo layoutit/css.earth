@@ -3,49 +3,41 @@
   "references": [
     {
       "originalPath": "labs/nebula/models/m45/physical-evidence.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/04-physical-evidence.json",
       "bytes": 15400
     },
     {
       "originalPath": "labs/nebula/models/m45/stellar-catalogue.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/06-stellar-catalogue.json",
       "bytes": 1654998
     },
     {
       "originalPath": "labs/nebula/models/m45/compiler.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/01-compiler.json",
       "bytes": 1147
     },
     {
       "originalPath": "labs/nebula/models/m45/depth-model.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/02-depth-model.json",
       "bytes": 3319
     },
     {
       "originalPath": "labs/nebula/models/m45/observation-structures.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/03-observation-structures.json",
       "bytes": 423
     },
     {
       "originalPath": "labs/nebula/models/m45/processing-observations.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/05-processing-observations.json",
       "bytes": 8832
     },
     {
       "originalPath": "labs/nebula/models/m45/optical-composite-observations.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/07-optical-composite-observations.json",
       "bytes": 5257
     },
     {
       "originalPath": "labs/nebula/models/m45/optical-composite.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/08-optical-composite.json",
       "bytes": 1320
     }

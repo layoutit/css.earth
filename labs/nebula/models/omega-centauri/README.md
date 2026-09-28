@@ -101,8 +101,7 @@ no unfinished application package or new runtime bank is shipped here.
 | Nearest, original bank | 0.096259 | 0.082798 | 0.04 |
 | Smooth, adaptive bank | 0.124987 | 0.114655 | 0.04 |
 
-These checks ran on the working tree based on
-`ef1e8b067f8f7d23d4bf13ea065f02f1dec7f4ad` plus the registration, photometric
+These checks ran on the working tree based on main plus the registration, photometric
 compiler, compact replay, coordinate transport and adaptive-layer changes now
 published in this branch. That base commit alone is not the tested version.
 The [validation record](evidence/2026-09-20/validation.json) pins the tested sources

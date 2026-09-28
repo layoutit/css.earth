@@ -21,7 +21,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | normal | 5760 × 2880 | 7.11 → 9.76 MB |
 | enhanced | 6356 × 3178 | 8.09 → 11.92 MB |
 
-Each atlas remains 4096 × 11520 pixels, with 720 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mimas/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 4096 × 11520 pixels, with 720 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 - Herschel is at roughly 1.38° S, 111.76° W (248.24° E), independently documented in the [IAU gazetteer](https://planetarynames.wr.usgs.gov/Feature/2478).
 

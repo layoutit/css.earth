@@ -8,16 +8,7 @@
       "status": "included",
       "finding": "The selected shape is the published primary-body oblate model with semiaxes a = b = 218.05 +/-0.11 km and c = 187.5 +/-2.4 km from the 2025 multi-event analysis; the satellite is excluded from the displayed primary dimensions.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L9",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L33",
         "https://arxiv.org/abs/2501.09739"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -26,14 +17,7 @@
       "status": "included",
       "finding": "The display uses the paper's J2000-equatorial satellite-orbit pole at right ascension 20.8 +/-1.9 degrees and declination 34.9 +/-1.9 degrees as a body-pole prior under the explicit equatorial-orbit assumption, with an arbitrary prime meridian and rotational phase.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L14",
         "https://arxiv.org/abs/2501.09739"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -43,13 +27,7 @@
       "finding": "The README keeps the earlier fits as supporting data only, because the 2025 paper reports timing and profile disagreements and poor Keplerian satellite-orbit fit quality.",
       "revisitWhen": "A reanalysis reconciles the timing and profile disagreements or improves the satellite-orbit fit enough to change the adopted model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L34"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huya/README.md#L34"
       ]
     },
     {
@@ -59,14 +37,8 @@
       "finding": "The depth and inferred flattening depend on the equatorial satellite-orbit assumption; the paper disfavours hydrostatic Maclaurin equilibrium and this view asserts none.",
       "revisitWhen": "An independent pole determination or a direct measurement of the polar axis removes the equatorial-orbit assumption.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L35"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huya/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huya/README.md#L35"
       ]
     },
     {
@@ -74,14 +46,8 @@
       "survey": "horizons-position",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L10",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L28"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huya/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huya/README.md#L28"
       ]
     },
     {
@@ -90,15 +56,7 @@
       "status": "included",
       "finding": "No surface imagery exists for this body, so the manifest supplies the project-authored missing-coverage grid, the normal grid marks unmapped terrain and Shadows defaults off; no satellite is fabricated in the body scene.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L16",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/README.md#L35",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/huya/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huya/source/manifest.json"
       ]
     }
   ]

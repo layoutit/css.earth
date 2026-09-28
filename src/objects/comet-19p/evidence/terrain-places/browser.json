@@ -1,6 +1,5 @@
 {
   "date": "2026-09-12",
-  "testedBase": "e986b92804c786669a30c2bcc104b820e8fa6e3c",
   "workingTree": "Seven terrain places, the preparation helpers and the opt-in surface normal change recorded by the pins below; runtime renderer and shell match testedBase.",
   "implementation": [
     {
@@ -306,7 +305,7 @@
     "preparationTypecheck": "passed",
     "coordinateReproduction": "Both generators compare exactly with the checked-in landmark coordinates and residual evidence.",
     "targetedProvenance": "Both bodies pass with no unresolved inputs.",
-    "aggregateSources": "On base 3efdf2c9, 66 passed and 1 skipped for the absent 1998 ML14 paper. On current main e986b9280, pnpm test:sources stops before tests because Earth, Moon and Mars acquisition recipes changed in be99ac479 without updating object.json recipe pins. These files are untouched by this change."
+    "aggregateSources": "66 passed and 1 skipped for the absent 1998 ML14 paper. pnpm test:sources stops before tests because Earth, Moon and Mars acquisition recipes changed without updating object.json recipe pins. These files are untouched by this change."
   },
   "limits": [
     "This checks the two changed comet packages, not all-body browser conformance.",

@@ -1,6 +1,5 @@
 {
  "schema": "cssearth-moon-grail-gravity-checks@1",
- "base": "56ebf377c709190f7c97be24c1905225266fbed9",
  "date": "2026-09-27",
  "scope": "Working changes above the named base: the gravity and bouguer-gravity blocks of source/preparation/raster.json, read by the shared loadScienceSurface and painted by paintScienceSurface outside a bake.",
  "testedFiles": {

@@ -104,5 +104,5 @@ roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
 parses built Saturn, Earth and Mercury HTML for one prepared scene, a camera,
 texture references and unique IDs. It does not switch stellar lenses or inspect
 their attribution. The merged-visibility regression was fixed in
-`prepared-sky-runtime` ([af4dc9282](https://github.com/layoutit/css.earth/commit/af4dc9282db2fbcf563dc463edfca04a9f92b9b0));
+`prepared-sky-runtime`;
 the HTML check does not test that interaction.

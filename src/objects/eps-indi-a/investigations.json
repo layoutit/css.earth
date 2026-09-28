@@ -1,5 +1,36 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "eps-indi-a",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6412595290592307840 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 source 6412595290592307840: parallax 274.8431 +/- 0.0956 mas (RUWE 1.15), inverted to 3.6384 pc with no zero-point correction. Gaia DR3 source 6412595290592307840: pmRA* 3966.6605 mas/yr, pmDec -2536.1920 mas/yr. Gaia DR3 source 6412595290592307840: -40.43 +/- 0.13 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-temperature-and-mass",
+      "subject": "Radius, temperature and mass",
+      "status": "included",
+      "finding": "As Sanghi et al. (2026), AJ, tabulate them (Table 1): radius from interferometry (Rains et al. 2020; Creevey et al. 2023), mass from asteroseismology (Lundkvist et al. 2024).",
+      "evidence": [
+        "https://arxiv.org/abs/2603.08787",
+        "https://doi.org/10.3847/1538-3881/ae74c8",
+        "https://arxiv.org/abs/2403.04509"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "The Gaia DR3 BP/RP sampled spectrum of source 6412595290592307840 (De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3), weighted by the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6412595290592307840&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://gea.esac.esa.int/archive/"
+      ]
+    }
+  ]
 }

@@ -19,7 +19,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 ## Evidence
 
 - [Delivery](source/delivery.json) retains the 144-slice symmetry result and adds the independently prepared catalogue field. This does not rerun or relabel the original separation as NOX.
-- The [fixed experiment report](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/README.md) records synthetic hollow-shell and zero-regularization controls, real front/oblique inspection and the original test/build results. Source-image fit errors are not physical depth errors.
+- The [fixed experiment report](../../../labs/nebula/models/m2-9/README.md) records synthetic hollow-shell and zero-regularization controls, real front/oblique inspection and the original test/build results. Source-image fit errors are not physical depth errors.
 - This provenance update makes no fresh cold-replay, independent scientific-review or material-acceptance claim. The historical external review timed out and was not completed.
 
 ## Known problems
@@ -31,7 +31,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m2-9/README.md) preserves crop, manual point masks, independent FISTA/proximal implementation, original timings and failed-view limitations. The [planetary-nebula method](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/planetary-nebulae.md) describes the paper and its constraints. Common preparation is in the [nebula guide](../../../docs/nebulae/README.md).
+The [fixed lab account](../../../labs/nebula/models/m2-9/README.md) preserves crop, manual point masks, independent FISTA/proximal implementation, original timings and failed-view limitations. The [planetary-nebula method](../../../labs/nebula/docs/planetary-nebulae.md) describes the paper and its constraints. Common preparation is in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
 
