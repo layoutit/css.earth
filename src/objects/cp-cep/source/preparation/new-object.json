@@ -3,6 +3,7 @@
   "name": "CP Cep",
   "system": "CP Cep system",
   "description": "A Cepheid in the Milky Way that pulsates every 17.86 days; its mean radius is 85.2 solar radii.",
+  "order": 1942,
   "target": "CP Cep",
   "gaia": "2198162651499971200",
   "paper": {
@@ -21,6 +22,12 @@
     "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 55, Name='CP Cep', columns Teff, e_Teff (K): Teff 4875 +/- 177 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
     "url": "https://arxiv.org/abs/2002.02186",
     "uncertainty": 177
+  },
+  "radialVelocity": {
+    "value": -40.7,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2198162651499971200 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract",
+    "uncertainty": 0.1
   },
   "distance": {
     "value": 3073.5,
@@ -49,12 +56,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "radialVelocity": {
-    "value": -40.7,
-    "uncertainty": 0.1,
-    "source": "SIMBAD's radial velocity for Gaia DR3 2198162651499971200 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
-  },
-  "order": 1942
+  ]
 }

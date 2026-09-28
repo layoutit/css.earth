@@ -4,11 +4,11 @@
 
 Its mean radius, 105.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 39,034 parsecs away. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
 
-**Star.** Placement: Gaia DR3 source 4660363361045224192, distance 39,034 pc from Groenewegen (2013), A&A 550, A70, table10, HV 12815: Baade-Wesselink distance (pc) 39034.2 +/- 3812 (Monte-Carlo); Gaia DR3's parallax, -0.017 ± 0.016 mas (-1.1 standard errors), is not used. Radius 105.2 +/- 11 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 12815: Baade-Wesselink mean radius (solar radii) 105.2 +/- 11 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,125 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC4066, columns Teffp, e_Teffp: Teff 5125 +/- 88 K from a fit to the spectral energy distribution at mean light (not spectroscopic). No surface gravity is known.
+**Star.** Placement: Gaia DR3 source 4660363361045224192, distance 39,034 pc from Groenewegen (2013), A&A 550, A70, table10, HV 12815: Baade-Wesselink distance (pc) 39034.2 +/- 3812 (Monte-Carlo); Gaia DR3's parallax, -0.017 ± 0.016 mas (-1.1 standard errors), is not used. Radius 105.2 +/- 11 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 12815: Baade-Wesselink mean radius (solar radii) 105.2 +/- 11 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,125 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC4066, columns Teffp, e_Teffp: Teff 5125 +/- 88 K from a fit to the spectral energy distribution at mean light (not spectroscopic). No surface gravity of this star is published.
 
 **Colour.** A Planck spectrum at 5,125 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.07 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2° observer: #ffe8d4. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
-**Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited.
+**Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class.
 
 ## Evidence
 

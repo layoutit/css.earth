@@ -327,11 +327,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // annotations. Later frames need only the anchor locator; its siblings
       // keep their prepared DOM without further visibility work.
       const publishingBodies = opacity === 0 && systemRetired ? anchorOnly : bodies;
-      // Cache the retained UI text bounds before any projection writes.
-      for (const entry of publishingBodies) if (entry.labelSize.width === 0) {
-        const text = windowTarget.getComputedStyle(entry.marker, '::after');
-        entry.labelSize = { width: Math.ceil(parseFloat(text.width)), height: Math.ceil(parseFloat(text.height)) };
-      }
       return { world, viewport: { ...viewport,
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
@@ -447,6 +442,16 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // A user-timing mark once a second names the orbit renderer inside any performance trace.
       if (publishCount++ % 60 === 0) windowTarget.performance?.mark?.(`cssearth-orbit-renderer:${orbitRenderer}`);
       if (destroyed) return;
+      // The planner alone owns eligibility. Read only newly eligible captions,
+      // before any writes, then replan once with their actual CSS bounds.
+      let measured = false;
+      for (const index of preparedFrame.labelMeasurements ?? []) {
+        const entry = bodies[index];
+        if (entry.labelSize.width !== 0) continue;
+        const text = windowTarget.getComputedStyle(entry.marker, '::after');
+        const width = Math.ceil(parseFloat(text.width)), height = Math.ceil(parseFloat(text.height));
+        if (width > 0 && height > 0) { entry.labelSize = { width, height }; measured = true; }
+      }
       fader.batch(() => {
       const cameraChanged = !sameCamera(world, viewport);
       const nextDistantNavigationActive = distantNavigation !== undefined && Math.hypot(
@@ -612,6 +617,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       interactions.commit(paintedOrder, depthOrder.rank, captionBody,
         captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight);
       });
+      if (measured) { invalidatePolicy(); refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);

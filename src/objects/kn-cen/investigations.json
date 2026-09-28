@@ -22,6 +22,43 @@
         "https://arxiv.org/abs/1212.5478",
         "https://arxiv.org/abs/2002.02186"
       ]
+    },
+    {
+      "id": "light-curve",
+      "subject": "Light curve",
+      "status": "included",
+      "finding": "Gaia DR3 vari_cepheid, source 5864135319959353600: 6 G-band harmonics of a 34.02846822286729 d period, peak-to-peak 0.876 mag; the harmonics reproduce the row's epoch of maximum and peak-to-peak amplitude. The page plays it as a veil over the disc from the scene date, phase known to 0.01 of a cycle there.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243990"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,875 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.797 +/- 0.087 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2-degree observer: #ffe4cb. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,875 K and log g 0.4 (u1 0.666, u2 0.097): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 0.4 from 2023A&A...678A.195D; the 7 published values span log g 0.4 to 1.7, across which the limb law changes by at most 1.8% of the centre brightness.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D"
+      ]
     }
   ]
 }

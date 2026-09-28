@@ -206,6 +206,7 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
   const doi = /doi\.org\/(10\.\S+)$/u.exec(url)?.[1];
   if (doi) return parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, url);
   // Any other page (an archive's documentation, ExoFOP): a reference page named by its address.
-  const { hostname, pathname } = new URL(url), id = `page-${`${hostname}${pathname}`.toLowerCase().replace(/\.(html?|php)$/u, '').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;
+  // The query names the record when there is one: SIMBAD's sim-id page is one path for every star.
+  const { hostname, pathname, search } = new URL(url), id = `page-${`${hostname}${pathname.replace(/\.(html?|php)$/u, '')}${decodeURIComponent(search)}`.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;
   return { id, title: `${hostname}${pathname}`, creators: [], year: '', url, page: true };
 }

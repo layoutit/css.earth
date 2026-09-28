@@ -3,6 +3,7 @@
   "name": "CS Vel",
   "system": "CS Vel system",
   "description": "A Cepheid in the Milky Way that pulsates every 5.90 days; its mean radius is 43 solar radii.",
+  "order": 1937,
   "target": "CS Vel",
   "gaia": "5308893149150949248",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1937
+  ]
 }

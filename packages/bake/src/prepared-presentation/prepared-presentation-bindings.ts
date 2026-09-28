@@ -374,7 +374,9 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     const placed = <D extends { textureLevels?: unknown }>(value: D): D => placements && isRecord(value.textureLevels)
       ? { ...value, textureLevels: { ...value.textureLevels, placements } } : value;
     if (interiorOnly) return withPreparedInteriorFill(placed(withoutPreparedInteriorFill(input)), interior, assetRoot, gapExclusion);
-    const bound = placed({ ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
+    // CSS compiles transform motion only; a light curve the presentation prepared (opacity keyframes) is kept beside it.
+    const lightCurves = (definition.motion ?? []).filter(track => track.keyframes.every(frame => 'opacity' in frame));
+    const bound = placed({ ...definition, ...bindings, motion: [...bindings.motion, ...lightCurves], tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
     // Leaf boxes: each leaf's factor, the body's steps and their binding (bake/presentation/leaf-box.ts).
     // The steps start at the body's logical diameter, which only an object runtime's camera carries.
     const logicalBodyDiameter: unknown = isRecord(definition.camera) ? definition.camera.logicalBodyDiameter : undefined;

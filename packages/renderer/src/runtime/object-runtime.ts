@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import { initialStageSelection } from './initial-stage-selection.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
@@ -25,7 +26,7 @@ import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
-import { initialObjectSelection, requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
+import { requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
@@ -46,22 +47,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     if (!worldContext || !viewport || !framePresenter || !cameraMotion) throw new TypeError('Object mount requires its shared world, viewport and frame presenter.');
     const worldFrame = worldContext.frame;
-    const initialLens = stage.dataset.preparedDataset;
     if (stage.dataset.preparedView) {
       const saved = parseSharedView(`v=${stage.dataset.preparedView}`);
       if (!saved) throw new TypeError('A prepared view requires its shared world frame.');
       initialWorldCamera ??= savedWorldCamera(saved, worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
       delete stage.dataset.preparedView;
     }
-    const initialSettings: Record<string, boolean | number> = {};
-    for (const control of definition.controls.settings?.controls ?? []) {
-      const input = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].find(input => input.name === control.name);
-      if (input) initialSettings[control.name] = control.kind === 'toggle' ? input.checked : Number(input.value);
-    }
-    // Validate the server's transported selection even when the user has since
-    // changed a native control. The current controls then own that newer intent.
-    if (stage.dataset.preparedSettings) initialObjectSelection(definition.controls, initialLens, JSON.parse(stage.dataset.preparedSettings));
-    const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
+    const { initialLens, initialSettings, selection: initialSelection } = initialStageSelection(definition.controls, stage);
     if (stage.dataset.preparedDataset !== undefined) delete stage.dataset.preparedDataset;
     if (stage.dataset.preparedSettings !== undefined) delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
@@ -231,6 +223,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       get datasets() { return live() ? datasets : undefined; },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
+      setLightCurves(allowed: boolean) { if (!lifetime.disposed) guarded(() => playback.setLightCurves(allowed)); },
       destroy(options: { preserveControls?: boolean } = {}) {
         preserveControls = options.preserveControls === true;
         resolveReady();

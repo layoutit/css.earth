@@ -17,12 +17,12 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
   let lease: Awaited<ReturnType<Navigation['prepare']>> | null = null;
   let preparing = false, coverRemoved = false;
   const previousInert = inputSurface?.inert ?? false;
-  if (cover && inputSurface) inputSurface.inert = true;
+  if (inputSurface) inputSurface.inert = true;
   function removeCover() {
     if (coverRemoved) return;
     coverRemoved = true;
     cover?.destroy();
-    if (cover && inputSurface) inputSurface.inert = previousInert;
+    if (inputSurface) inputSurface.inert = previousInert;
   }
   ownership.signal.addEventListener('abort', removeCover, { once: true });
   if (ownership.signal.aborted) removeCover();
@@ -56,7 +56,7 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
           preparedResources: lease.resources, preparedTree: lease.tree,
           initialWorldCamera: view.world, initialProjection: lease.projection(view),
           ...options,
-          ...(cover ? { progressiveActivation: true } : {}),
+          progressiveActivation: true,
         },
         async afterMount(mount) {
           let failure: unknown;

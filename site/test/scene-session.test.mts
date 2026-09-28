@@ -21,6 +21,7 @@ function fixture() {
   const native = (ready = Promise.resolve()): ObjectSceneLifecycle => ({
     ready, sharedView: unusedSharedView,
     pause() { calls.push('pause'); }, resume() { calls.push('resume'); }, destroy() { calls.push('destroy'); },
+    setLightCurves(allowed: boolean) { calls.push(`light:${allowed}`); },
   });
   return { scenes, session, options, errors, calls, native, stage: {} as HTMLElement };
 }
@@ -30,16 +31,18 @@ test('readiness waits for native activation and restoration; one session command
   const work = h.session.activate(() => { mounted.resolve(); return h.native(ready.promise); }, h.stage, unusedMountOptions);
   await mounted.promise;
   assert.equal(h.session.commit(), false, 'A native mount alone cannot publish readiness');
-  h.session.play(true); assert.deepEqual(h.calls, ['pause']);
+  h.session.play(true, true); assert.deepEqual(h.calls, ['pause', 'light:false']);
   assert.throws(() => h.scenes.start(h.options), /Retire the current scene/);
   ready.resolve(); assert.equal(await work, true);
   assert.equal(h.session.state.kind, 'loading', 'Dataset and saved-view restoration still precede commit');
   assert.equal(h.session.commit(), true);
-  h.session.play(true); h.session.play(true);
-  assert.equal(h.session.playing, true); assert.deepEqual(h.calls, ['pause', 'resume']);
+  h.session.play(false, true); h.session.play(false, true);
+  assert.equal(h.session.playing, false); assert.deepEqual(h.calls, ['pause', 'light:false', 'light:true'], 'light curves play while rotation stays paused');
+  h.session.play(true, true);
+  assert.equal(h.session.playing, true); assert.deepEqual(h.calls, ['pause', 'light:false', 'light:true', 'resume']);
   h.session.dispose(); h.session.dispose();
   assert.equal(h.session.signal.aborted, true); assert.equal(h.scenes.current, null);
-  assert.equal(h.scenes.state.kind, 'disposed'); assert.deepEqual(h.calls, ['pause', 'resume', 'destroy']);
+  assert.equal(h.scenes.state.kind, 'disposed'); assert.deepEqual(h.calls, ['pause', 'light:false', 'light:true', 'resume', 'destroy']);
   assert.equal(h.session.commit(), false);
 });
 
@@ -102,7 +105,7 @@ test('URL replacement stays bounded and flush failures cannot skip native or bin
   const errors = h.session.dispose();
   assert.deepEqual(errors.map(error => error instanceof Error ? error.message : error), ['flush failed', 'binding cleanup failed']);
   assert.equal(currentReleased, 1); assert.equal(h.session.signal.aborted, true);
-  assert.deepEqual(h.calls, ['pause', 'destroy']);
+  assert.deepEqual(h.calls, ['pause', 'light:false', 'destroy']);
   assert.deepEqual(h.session.dispose(), []);
 });
 

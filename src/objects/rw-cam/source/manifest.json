@@ -117,6 +117,32 @@
       }
     },
     {
+      "id": "rw-cam-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 5000..5250 K, log g 0..0.5, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rw-cam-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
       "id": "rw-cam-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
@@ -140,14 +166,39 @@
           }
         ]
       }
+    },
+    {
+      "id": "rw-cam-gaia-dr3-vari-cepheid",
+      "path": "photometry/gaia-dr3-vari-cepheid.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Ripepi et al. (2023), A&A 674, A17",
+      "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the vari_cepheid row of source_id 473043922712140928 (period, G-band harmonic amplitudes and phases, epoch of maximum, peak-to-peak amplitude, R21 and phi21).",
+      "redistribution": "One catalogue row, retained unchanged with its credit.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rw-cam-gaia-dr3-vari-cepheid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "uniform-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2002.02186",
-      "credit": "The colour lens as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -156,13 +207,14 @@
         "generator": "tools/objects/source-authoring/context-markers.mts",
         "inputs": [
           "rw-cam-stellar-color",
+          "rw-cam-claret-2011-limb-darkening",
           "rw-cam-preparation-raster"
         ]
       },
       "generator": "tools/objects/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

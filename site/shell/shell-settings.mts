@@ -10,6 +10,7 @@ export function createSettingsController(
   lifetime: SceneLifetime,
 ) {
   const motion = documentTarget.querySelector(".object-motion-setting");
+  const lightCurves = documentTarget.querySelector(".object-light-curves-setting");
   const heliosphere = documentTarget.querySelector(".object-heliosphere-setting");
   const illustrationModels = documentTarget.querySelector(".object-illustration-models-setting");
   const surfaceLabels = documentTarget.querySelector(".object-surface-labels-setting");
@@ -17,7 +18,7 @@ export function createSettingsController(
   let speed = documentTarget.querySelector<HTMLInputElement>(
     '.object-speed-setting[type="range"][name="speed"]',
   );
-  if (!(motion instanceof windowTarget.HTMLInputElement) ||
+  if (!(motion instanceof windowTarget.HTMLInputElement) || !(lightCurves instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
       !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
       !(surfaceLabels instanceof windowTarget.HTMLInputElement) ||
@@ -27,7 +28,7 @@ export function createSettingsController(
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  const inputs = { motionEnabled: motion, heliosphereEnabled: heliosphere,
+  const inputs = { motionEnabled: motion, lightCurvesEnabled: lightCurves, heliosphereEnabled: heliosphere,
     illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels,
     threeDStarsEnabled: threeDStars };
   type Toggle = keyof typeof inputs;
@@ -76,7 +77,7 @@ export function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, threeDStars]) input.disabled = true;
+      for (const input of [motion, lightCurves, heliosphere, illustrationModels, surfaceLabels, threeDStars]) input.disabled = true;
       delete documentTarget.body.dataset.surfaceLabels;
     },
   });

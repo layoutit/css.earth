@@ -11,6 +11,7 @@ import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, p
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
+import { checkGaiaCepheidModel, parseGaiaCepheidRow, pulsationTrack } from '@cssearth/bake/photometry';
 import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
@@ -162,6 +163,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         };
         await Promise.all([cp(outputDirectory, stagedData, { recursive: true, filter: published('prepared', outputDirectory) }),
           cp(publicDirectory, stagedPublic, { recursive: true, filter: published('public', publicDirectory) })]);
+      }
+      else {
+        // The arrival billboard belongs to navigation, not to this bake: a full run carries the published record and the image it
+        // names, or the page that the billboard step photographs could not start without them (packages/bake/cli/prepare-arrival-billboard.mts).
+        const record: unknown = await readFile(resolve(outputDirectory, 'arrival-billboard.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
+        const url = record && typeof record === 'object' && 'url' in record && typeof record.url === 'string' ? record.url : null;
+        const image = url?.startsWith(`/scenes/${id}/`) ? url.slice(`/scenes/${id}/`.length) : null;
+        if (image && await access(resolve(publicDirectory, image)).then(() => true, () => false)) {
+          await mkdir(stagedPublic, { recursive: true }); await mkdir(stagedData, { recursive: true });
+          await Promise.all([cp(resolve(outputDirectory, 'arrival-billboard.json'), resolve(stagedData, 'arrival-billboard.json')), cp(resolve(publicDirectory, image), resolve(stagedPublic, image))]);
+        }
       }
       const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages, reuseImages, acceptChanged });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
@@ -363,7 +375,12 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory, imagePixels });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
-  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters);
+  // A pulsating star plays its published light curve from the scene epoch: Gaia's model, checked against its own row.
+  const lightCurve = presentation.lightCurve ? await (async (path: string) => {
+    const where = `${descriptor.id}: ${path}`, model = parseGaiaCepheidRow(await readFile(resolve(sourceDirectory, path), 'utf8'), where);
+    return pulsationTrack(model, checkGaiaCepheidModel(model, where), Number((scene.worldFrame as { epochJdTt?: unknown } | null)?.epochJdTt), path, where);
+  })(presentation.lightCurve.model) : undefined;
+  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), ...(lightCurve ? { lightCurve } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters);
   const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, definition as unknown as Record<string, unknown>, publishedFeatures)
     : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
   const runtime = attached.definition, features = attached.features !== null;

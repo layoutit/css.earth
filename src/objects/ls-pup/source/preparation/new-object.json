@@ -3,6 +3,7 @@
   "name": "LS Pup",
   "system": "LS Pup system",
   "description": "A Cepheid in the Milky Way that pulsates every 14.15 days; its mean radius is 79.3 solar radii.",
+  "order": 1926,
   "target": "LS Pup",
   "gaia": "5597327141100381568",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1926
+  ]
 }

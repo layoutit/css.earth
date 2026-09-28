@@ -171,3 +171,17 @@ test('prepared lens transitions require bounded duration and an explicit zoom po
     assert.throws(() => parsePreparedObjectRuntime(input), /camera transition/);
   }
 });
+
+test("WZ Car's prepared light curve is an opacity motion track; a transform frame or an out-of-range opacity is refused", async () => {
+  const original = JSON.parse(await readFile(new URL('../../../../src/objects/wz-car/prepared/runtime.json', import.meta.url), 'utf8'));
+  const parsed = parsePreparedObjectRuntime(original);
+  const track = parsed.motion?.find(entry => entry.id === 'wz-car-light-curve');
+  assert.ok(track && track.keyframes.every(frame => 'opacity' in frame));
+  for (const mutate of [
+    (frames: Record<string, unknown>[]) => { frames[3] = { offset: frames[3]!.offset, transform: 'none' }; },
+    (frames: Record<string, unknown>[]) => { frames[3]!.opacity = '1.2'; },
+  ]) {
+    const input = structuredClone(original); mutate(input.motion.find((entry: { id: string }) => entry.id === 'wz-car-light-curve').keyframes);
+    assert.throws(() => parsePreparedObjectRuntime(input), /keyframe/);
+  }
+});

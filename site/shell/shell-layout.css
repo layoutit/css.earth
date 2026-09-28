@@ -1,5 +1,5 @@
 /* Application geometry. Tune the dock here, not in planet or component styles. */
-html[data-shell-context="pending"] :is(.object-sidebar, .object-dataset-context-rail, .object-footer) {
+html[data-shell-context="pending"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories, .object-dataset-context-rail, .object-footer) {
   visibility: hidden;
 }
 body[data-object-shell] {

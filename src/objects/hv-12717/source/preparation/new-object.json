@@ -3,6 +3,7 @@
   "name": "HV 12717",
   "system": "HV 12717 system",
   "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 8.84 days; its mean radius is 41.8 solar radii.",
+  "order": 1954,
   "gaia": "4656162058347627136",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -50,6 +51,5 @@
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
-  ],
-  "order": 1954
+  ]
 }

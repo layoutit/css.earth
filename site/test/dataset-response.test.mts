@@ -51,6 +51,20 @@ test('invalid requests and corrupt prepared bytes cannot publish another dataset
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|sha256|digest|identity/i);
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'earth', read), /identity/);
 });
+test('a billboard startup page takes the selected scene and its prepared mark', async () => {
+  // ObjectLayout ships an empty stage without data-prepared-object when the object has an arrival billboard.
+  const stage = `<main class="object-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main>`;
+  const startup = html.replace(stage, '<main class="object-stage" data-object-id="saturn" aria-label="Saturn"></main>')
+    .replace('<!--prepared-scene:end-->', '<!--prepared-scene:end--><script type="application/json" data-startup-discovery>{}</script>');
+  assert.notEqual(startup, html, 'the fixture must contain the prepared stage it replaces');
+  const document = parseHTML(await renderDatasetResponse(startup, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read)).document;
+  assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-object'), 'saturn');
+  assert.equal(document.querySelector('.object-stage')?.getAttribute('data-prepared-dataset'), 'ultraviolet');
+  assert.equal(document.querySelectorAll('.polycss-scene').length, 1);
+  // Without the startup marker a stage that lost its prepared mark is still refused.
+  const unmarked = startup.replace('<script type="application/json" data-startup-discovery>{}</script>', '');
+  await assert.rejects(renderDatasetResponse(unmarked, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read), /identity drifted: requested saturn/);
+});
 test('a city link is left to the page, which selects the city on arrival', async () => {
   // The native response used to reject every non-numeric feature, so a shared city link answered 400.
   assert.equal(await renderDatasetResponse(html, new URL('/saturn/?feature=city-3435910', origin), 'saturn', read), html);
