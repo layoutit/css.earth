@@ -6,7 +6,8 @@ import { mountSelectedBodyLabel } from './selected-body-label.js';
 
 const observations = new Map<Element, ResizeObserverCallback>();
 vi.stubGlobal('ResizeObserver', class {
-  constructor(private callback: ResizeObserverCallback) {}
+  private readonly callback: ResizeObserverCallback;
+  constructor(callback: ResizeObserverCallback) { this.callback = callback; }
   observe(element: Element) { observations.set(element, this.callback); }
   unobserve(element: Element) { observations.delete(element); }
   disconnect() { for (const [element, callback] of observations) if (callback === this.callback) observations.delete(element); }
