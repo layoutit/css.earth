@@ -45,7 +45,7 @@ set of Titania that the archive holds, 30 frames in 10 sets, listed in
 the `vgr2.ura111` trajectory and the Ring-Moon Systems Node SEDR pointing C-kernel. Observer and Sun
 positions for the photometric correction are JPL Horizons vectors at each frame's exposure time.
 
-Placement. `node tools/objects/voyager-iss/author-color-frames.mts titania --write` wrote
+Placement. `node tools/objects/voyager-iss/author-color-frames.mts titania --write` ([then](https://github.com/layoutit/cssEarth/blob/40d2789252/tools/objects/voyager-iss/author-color-frames.mts), now `packages/bake/authoring/voyager-iss/author-color-frames.mts`) wrote
 [the placement report](source/reference/voyager-color-placement.json). The SEDR pointing predicts the
 disc; the limb is fitted as one circle (robust levels from the frame's own histogram, a centroid seed
 when the whole disc sits in the frame far from the prediction) and the optical centre moves by the
@@ -59,7 +59,7 @@ Only pixels above the frame's ground floor (a tenth of the way from its sky leve
 `limb.groundFloor`) are projected: a disc cut by the frame edge sits on a band of negative values in
 the GEOMED border rows, which would otherwise become terrain.
 
-Oracle. `node tools/objects/voyager-iss/oracle.mts titania --write` re-places every frame and correlates
+Oracle. `node tools/objects/voyager-iss/oracle.mts titania --write` ([then](https://github.com/layoutit/cssEarth/blob/40d2789252/tools/objects/voyager-iss/oracle.mts), now `packages/bake/authoring/voyager-iss/oracle.mts`) re-places every frame and correlates
 its high-passed detail against the mosaic in the frame plane
 ([report](source/reference/voyager-color-oracle.json)): 17 frames compared, mean
 correlation 0.45, mean residual 11.7 km. The mosaic is the same control the
@@ -85,7 +85,7 @@ V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole lens then take
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
 may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
 
-Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts`
+Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts` (the voyager-iss tests, [then](https://github.com/layoutit/cssEarth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer's ground floor, and the composer's withheld, band-level,
 band-ratio and non-positive-sample rules on synthetic frames;
 `node --test tests/objects/unit/uranian-moons/voyager-color.test.mts` reads this moon's reports and
