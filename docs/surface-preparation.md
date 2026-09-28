@@ -323,7 +323,7 @@ other even when it is wrong; only the imagery disagrees. It must equal the edge 
 photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
 
 The authored preparation measures it for every lens with native photographic sampling
-(`assertMapsStartAtSurfaceMapEdge` in `tools/objects/prepare-authored.ts`). It reads the lens's pinned source through
+(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/prepare-authored.ts`). It reads the lens's pinned source through
 its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
 edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
 declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
