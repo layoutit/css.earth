@@ -47,6 +47,13 @@ function eachPixel(coverage: LensCoverage, visit: (direction: Vector3, area: num
   }
 }
 
+/** The share of the body's area, by the cells' true area, that the map covers. */
+export function coveredShare(coverage: LensCoverage): number {
+  let covered = 0, total = 0;
+  eachPixel(coverage, (_direction, area, isCovered) => { total += area; if (isCovered) covered += area; });
+  return total > 0 ? covered / total : 0;
+}
+
 /** The area-weighted mean body-fixed direction of the covered pixels; its length says how lopsided the data is. */
 export function coverageDirection(coverage: LensCoverage): Vector3 {
   const sum = [0, 0, 0]; let area = 0;

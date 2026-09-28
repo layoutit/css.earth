@@ -3,8 +3,8 @@ import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import type { Vector3 } from '@cssearth/renderer/solar-system/types.ts';
 import { preparedControlPitch } from '@cssearth/engine';
-import { LOPSIDED_COVERAGE, prepareDefaultCameraAngles } from '@cssearth/bake/objects/scene';
-import { authoredFocusLenses, faceLensData } from '@cssearth/bake/objects/default-view';
+import { LOPSIDED_COVERAGE, MINIMUM_COVERED_SHARE, prepareDefaultCameraAngles } from '@cssearth/bake/objects/scene';
+import { authoredFocusLenses, coverageDirection, coveredShare, faceLensData } from '@cssearth/bake/objects/default-view';
 import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
 
 const point = (longitude: number, latitude: number, length = 0.7) => { const l = longitude * Math.PI / 180, b = latitude * Math.PI / 180;
@@ -53,4 +53,15 @@ test('authored focus lenses come from terrestrial focus and composite lensFocus'
   const terrestrial = { raster: { scientific: [{ id: 'elevation', focus: { longitudeDegrees: 1, latitudeDegrees: 2, zoom: 3 } }, { id: 'geology' }], observations: [{ id: 'giotto', focus: {} }] } };
   assert.deepEqual([...authoredFocusLenses(terrestrial, { lensFocus: { infrared: {} } })].sort(), ['elevation', 'giotto', 'infrared']);
   assert.deepEqual([...authoredFocusLenses(undefined, undefined)], []);
+});
+
+test('a map with next to no data has no side to face, however lopsided its few cells look', () => {
+  const width = 360, height = 180, missing = new Uint8Array(width * height).fill(1);
+  // A few cells along one northern parallel, as a lossy minimap of an empty map reads its painted line.
+  for (let x = 0; x < 60; x++) missing[20 * width + x] = 0;
+  const sparse = { lens: 'model', missing, width, height, leftEdgeLongitudeDeg: 0 };
+  assert.ok(Math.hypot(...coverageDirection(sparse)) > LOPSIDED_COVERAGE, 'the stray cells alone would turn the camera');
+  assert.ok(coveredShare(sparse) < MINIMUM_COVERED_SHARE);
+  const half = { ...sparse, missing: Uint8Array.from({ length: width * height }, (_, i) => Number(i % width >= width / 2)) };
+  assert.ok(Math.abs(coveredShare(half) - 0.5) < 1e-9);
 });
