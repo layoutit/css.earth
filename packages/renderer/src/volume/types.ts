@@ -89,6 +89,9 @@ export interface PreparedVolumeMountOptions {
   /** Build the full slice renderer on the first publication that needs it instead of at mount. Only for a mount that
    * adopts no server-rendered DOM: adoption requires the same nodes, created in the same order, as the server's render. */
   readonly lazyDetail?: boolean;
+  /** Draw only this prepared impostor view, as one billboard turned to face the camera, instead of blending the views
+   * nearest the camera's direction. */
+  readonly impostorView?: string;
 }
 
 export interface PreparedVolumeRuntime {

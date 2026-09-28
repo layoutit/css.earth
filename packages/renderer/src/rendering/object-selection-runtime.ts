@@ -19,7 +19,6 @@ export interface ObjectSelectionRuntimeOptions {
   prepareSelection?: (selection: ObjectSelection, signal: AbortSignal) => void | Promise<void>;
   onCommit?: (selection: ObjectSelection, plan: PreparedPresentationPlan, intent: SelectionIntent) => void;
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
-  deferTextureRefinement?: boolean;
   /** The input surface's camera-motion signal: view-driven levels commit only while it is still. */
   motion?: CameraMotionSignal | null;
   initialLens?: string;
@@ -36,7 +35,7 @@ const sameDemand = (a: PreparedPresentationPlan, b: PreparedPresentationPlan) =>
 
 export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime, initialLens, initialSettings,
-  onChange = () => {}, prepareSelection, onCommit = () => {}, onFatalError, onMaterialError = () => {}, deferTextureRefinement = false,
+  onChange = () => {}, prepareSelection, onCommit = () => {}, onFatalError, onMaterialError = () => {},
   motion = null,
 }: ObjectSelectionRuntimeOptions) {
   // Blur while moving (motion-freezes-membership.md): a texture level the view asks for may decode during camera motion,
@@ -54,7 +53,6 @@ export function createObjectSelectionRuntime({
   /** The one request in flight; a newer request supersedes it. */
   let active: SelectionRequest | null = null, destroyed = false, started = false, error: string | null = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
-  let textureRefinement = !deferTextureRefinement;
   const live = () => !destroyed && !lifetime.disposed;
   const state = (): Readonly<ObjectSelectionState> => Object.freeze({ desired, committed, plan: committedPlan, committedBy,
     pending: active !== null && active.intent.kind !== "frame", loadingMaterial: active?.intent.kind === "frame",
@@ -64,7 +62,7 @@ export function createObjectSelectionRuntime({
   function resolve(selection: ObjectSelection) {
     try {
       if (!view) throw new Error("Prepared selection requires a published view.");
-      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan, initial: !textureRefinement });
+      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan });
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection: ObjectSelection | null = committed) {
@@ -240,11 +238,6 @@ export function createObjectSelectionRuntime({
         if (prepared) return;
         run(committed, "frame").catch(failure => { if (live()) onMaterialError(failure); });
       } catch (failure) { if (live()) onFatalError(failure); throw failure; }
-    },
-    refineTextures() {
-      if (!live()) return;
-      textureRefinement = true;
-      if (view) this.setView(view);
     },
     state,
     stats: () => Object.freeze({ ...state(), requests, passes, commits, framePublications, destroyed }),

@@ -32,10 +32,12 @@ interface Entry {
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, galaxySample, nebulae, nebulaFrames, renderedObjectIds, onSelect = () => {}, pickingHost = host }: {
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, galaxySample, nebulae, nebulaFrames, renderedObjectIds, billboardedObjectIds, onSelect = () => {}, pickingHost = host }: {
   host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
   nebulaFrames?: ReadonlyMap<string, DensityVolumeFrame>;
   renderedObjectIds?: ReadonlySet<string>;
+  /** Objects whose own image marks them from afar: their caption stands without a ring over that image. */
+  billboardedObjectIds?: ReadonlySet<string>;
   galaxySample?: unknown;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
@@ -216,7 +218,8 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
         if (visible.has(entry.object.id) && (projected || fader.current(entry.label) > 0)) {
           entry.label.style.transform = `translate(${entry.labelX}px,${entry.labelY}px) translate(-50%,-100%)`;
         }
-        fader.set(entry.marker, projected ? objectAlpha * .45 : 0, 200);
+        const billboarded = !isPreparedCluster(entry.object) && entry.object.detailedObjectId !== undefined && billboardedObjectIds?.has(entry.object.detailedObjectId) === true;
+        fader.set(entry.marker, projected && !billboarded ? objectAlpha * .45 : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
         if (entry.dot) fader.set(entry.dot, visible.has(entry.object.id) ? Math.max(0, Math.min(1, dotOpacity)) * (1 - (projected ? objectAlpha : 0)) * .4 : 0, 200);

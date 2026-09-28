@@ -193,8 +193,8 @@ export function createSceneRouter({
         if (!scenes.isCurrent(session)) return;
         preferences.set('motionEnabled', next);
       };
-      // A plain cold page mounts its body before it downloads the registry, then attaches the shell. Any other arrival
-      // (a navigation, a focus or overview link, a restored page) needs the registry and the shell first.
+      // A plain cold page can present its prepared cover before downloading the
+      // registry. Every path still prepares the world before mounting detail.
       const bodyFirst = !context && !replacement && !worldOwnsArrival();
       let ready = replacement?.context;
       if (!bodyFirst) {
@@ -225,14 +225,14 @@ export function createSceneRouter({
       handoff ??= startup ?? undefined;
       publication.publish();
       if (!scenes.isCurrent(session)) return;
-      // The cover is already visible. Prepare the shared world before mounting
-      // detail, exactly as a replacement arrival does: no late world attachment
-      // may invalidate an already-presented surface.
-      if (startup) {
+      // Every initial URL prepares its world before detail, including restored
+      // cameras that cannot use the default arrival photograph. Attaching world
+      // styles and layers afterward invalidates the already-presented surface.
+      if (!replacement) {
         const loaded = await session.wait(ensureContext());
         if (loaded.cancelled || !scenes.isCurrent(session)) return;
         ready = loaded.value;
-        attachShell(session, ready);
+        if (!session.shell) attachShell(session, ready);
         const contextual = await session.wait(Promise.all([world.ensure(), ready.registry.loadSystemView(objectId)]));
         if (contextual.cancelled || !scenes.isCurrent(session)) return;
       }
@@ -240,7 +240,6 @@ export function createSceneRouter({
       session.framePresenter = framePresenter;
       session.own(() => framePresenter.destroy());
       if (!await session.activate(factory, stage, {
-        deferTextureRefinement: handoff?.mountOptions.deferTextureRefinement ?? true,
         viewport,
         framePresenter,
         cameraMotion,

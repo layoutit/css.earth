@@ -154,7 +154,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const unpackaged = 'unpackaged' in body && body.unpackaged === true;
     const plainDot = plainDotIds.has(body.id);
     const sprite = plainDot ? undefined : sprites[body.id];
-    if (!sprite && !unpackaged && !plainDot) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
     const marker = host.ownerDocument.createElement('s');
     marker.dataset.contextGroup = body.id;
     marker.dataset.contextBody = body.id;
@@ -169,8 +168,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // custom property, which re-resolved the marker and both pseudos for every moving body on every frame.
     const spriteLeaf = host.ownerDocument.createElement('i');
     spriteLeaf.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;background-repeat:no-repeat;transform-origin:50% 50%;pointer-events:none`;
-    // The atlas image is set when the sprite first shows (below): a page opens with a handful of sprites on screen, and a
-    // hidden body must not fetch its atlas page. A plain dot is its colour, and fetches none.
+    // The body billboard is set only when resolved and visible. Unresolved bodies
+    // remain colour dots and never fetch an image.
     if (plainDot) { spriteLeaf.style.backgroundColor = body.color; spriteLeaf.style.borderRadius = '50%'; marker.dataset.contextPlainDot = ''; }
     marker.appendChild(spriteLeaf);
     // A body's world colour is prepared (its swatch, else its catalogue colour lifted for caption contrast) and set inline, as a
@@ -531,7 +530,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A body's circle holds a dot in the body's colour, sized by its radius, until its own disc outgrows the dot.
         // The focus star's circle holds the same dot over its point of light.
         // A plain dot is always its colour; the flat-dot swap is for bodies with a sprite.
-        const flatDot = coast ? entry.paint.flatDot : !entry.plainDot && entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter;
+        const flatDot = coast ? entry.paint.flatDot : !entry.plainDot && (!entry.sprite ||
+          diameter < (entry.sprite.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS) ||
+          entry.indicatorShown && entry.dotDiameter !== null && diameter < entry.dotDiameter);
         // A body without its own circle inside its parent's dot is part of that dot, not a second dot within it.
         const parentDot = entry.orbit ? entriesById.get(entry.orbit.centerBodyId) : undefined;
         const insideParentDot = !entry.indicatorShown && parentDot?.paint.flatDot === true &&
@@ -541,7 +542,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.dotDiameter! :
+        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.dotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
           Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
         const wasShown = entry.paint.billboardShown === true;
         const hoverChanged = entry.paint.indicatorHovered !== entry.hovered;

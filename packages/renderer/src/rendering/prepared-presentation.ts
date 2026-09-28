@@ -88,10 +88,10 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;
 }
-export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan, initial = false }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null; initial?: boolean }): PreparedPresentationPlan {
+export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
   const variant = selectedPreparedVariant(definition, selection);
   const textureLevel = definition.textureLevels ? selectPreparedTextureLevel(definition.textureLevels,
-    view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
+    view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel) : undefined;
   // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
   const fallback = activeResourceFallbacks(definition.assets?.fallbacks);
   const levelChoice = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);

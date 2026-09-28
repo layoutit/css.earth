@@ -18,7 +18,7 @@ export interface ObjectPreparationView { world: WorldCameraPose; viewport: World
 
 /** Prepared address selection uses the same camera orientation, LOD and
  * material resolver as the mounted presentation, without constructing a scene. */
-export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame, initialTextures = true) {
+export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame) {
   const selection = initialObjectSelection(definition.controls);
   const { camera, sun } = definition;
   const orientation = definition.materials.length ? createCameraOrientation({ cameraPlan: camera,
@@ -34,13 +34,11 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
     orientation?.setSceneRotation(presentation.rotation);
     const radius = frame.bodyRadiusM / frame.metersPerUnit;
     const diameter = worldCameraSilhouetteDiameter(presentation, radius);
-    return resolvePreparedPresentation(definition, { selection, initial: initialTextures, view: {
+    return resolvePreparedPresentation(definition, { selection, view: {
       sceneMatrix: orientation?.scene() ?? '', sunViewDirection: light(), reference,
       levelOfDetail: levelOfDetailFor(camera.levelOfDetail, diameter),
-      ...(!initialTextures ? {
-        projection: physicalProjectionFromCamera(presentation.rotation, presentation.bodyCenterUnits, camera.sceneScale, worldCameraViewport(world, viewport)),
-        viewportWidth: viewport.widthPixels, viewportHeight: viewport.heightPixels, motionAtRest: true,
-      } : {}),
+      projection: physicalProjectionFromCamera(presentation.rotation, presentation.bodyCenterUnits, camera.sceneScale, worldCameraViewport(world, viewport)),
+      viewportWidth: viewport.widthPixels, viewportHeight: viewport.heightPixels, motionAtRest: true,
     } });
   };
 }
@@ -76,8 +74,8 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
       return fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
     },
-    async prepare({ signal, getView, cameraViewport, initialTextures = true, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
-      signal: AbortSignal; getView: () => ObjectPreparationView; initialTextures?: boolean; cameraViewport?: CameraViewport; ownerDocument?: Document;
+    async prepare({ signal, getView, cameraViewport, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
+      signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; ownerDocument?: Document;
     }) {
       const definition = await abortable(load(signal), signal);
       // Resolve a new authored projection while the outgoing scene is intact.
@@ -89,7 +87,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       const destroy = () => { resources.destroy(); tree?.destroy(); };
       let demand: ReturnType<typeof createObjectViewDemand> | null = null;
       const prepareView = (read: () => ObjectPreparationView) => {
-        demand ??= createObjectViewDemand(definition, frame, initialTextures);
+        demand ??= createObjectViewDemand(definition, frame);
         return resources.prepareDemand(() => demand!(read()));
       };
       try {

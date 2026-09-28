@@ -31,8 +31,7 @@ test('startup uses the baked perspective and viewport texture demand before moun
     assert.ok(Math.abs(presentWorldCamera(view.world, object.worldFrame, view.viewport).distanceM - arrival.billboard.distanceM) < 1e-5);
     assert.ok(definition.textureLevels);
     const diameter = 2 * presentWorldCamera(view.world, object.worldFrame, view.viewport).silhouette!.tangentialSemiAxis;
-    assert.ok(selectPreparedTextureLevel(definition.textureLevels, diameter, undefined, false) > 0,
+    assert.ok(selectPreparedTextureLevel(definition.textureLevels, diameter, undefined) > 0,
       'the initial detailed scene demands viewport-sized textures');
-    assert.equal(selectPreparedTextureLevel(definition.textureLevels, diameter, undefined, true), 0);
   }
 });

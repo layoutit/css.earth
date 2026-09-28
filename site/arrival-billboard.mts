@@ -1,6 +1,7 @@
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { PreparedArrivalView } from '@cssearth/objects';
+import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { VisibleRect } from '@cssearth/renderer/solar-system/types.ts';
 
 type BillboardViewport = WorldCameraViewport & { readonly visibleRect: VisibleRect | null };
@@ -73,8 +74,7 @@ export async function prepareArrivalBillboard(stage: HTMLElement, arrival: Prepa
       if (!center || !projection.silhouette || depthM <= 0) { image.style.opacity = '0'; return; }
       // Use the same projected silhouette as the mesh. Scaling only by centre depth
       // underestimates its size as the camera approaches the near surface.
-      const preparedRadius = asset.focalPixels * frame.bodyRadiusM /
-        Math.sqrt(asset.distanceM ** 2 - frame.bodyRadiusM ** 2);
+      const preparedRadius = billboardBodyRadiusPixels(asset, frame.bodyRadiusM);
       const scale = projection.silhouette.tangentialSemiAxis / preparedRadius;
       // Navigation optics are relative to the detail camera root. The root can
       // sit above the stage centre to clear shell chrome; this sibling image

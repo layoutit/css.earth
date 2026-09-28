@@ -29,7 +29,6 @@ export interface ObjectSceneLifecycle {
   readonly features?: SurfaceFeatureNavigationRuntime;
   readonly navigation?: ObjectWorldNavigation;
   readonly datasets?: ObjectDatasets;
-  refineTextures?(): void;
   pause(): void;
   resume(): void;
   /** Whether pulsating stars play their light curves; separate from pause and resume, which govern illustrative rotation. */

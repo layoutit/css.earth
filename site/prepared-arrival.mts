@@ -29,13 +29,13 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
   return {
     signal: ownership.signal,
     dispose: ownership.dispose,
-    async prepare(factory: SceneFactory | Promise<SceneFactory>, options: Omit<Preparation, 'signal' | 'initialTextures'>) {
+    async prepare(factory: SceneFactory | Promise<SceneFactory>, options: Omit<Preparation, 'signal'>) {
       if (preparing) throw new Error('An arrival prepares its scene once.');
       preparing = true;
       try {
         const navigation = (await factory).navigation;
         if (!navigation) throw new TypeError('Destination has no prepared navigation.');
-        lease = await navigation.prepare({ ...options, signal: ownership.signal, initialTextures: !cover });
+        lease = await navigation.prepare({ ...options, signal: ownership.signal });
         ownership.own(lease);
         ownership.signal.throwIfAborted();
         return lease;
@@ -56,7 +56,7 @@ export function createPreparedArrival(signal: AbortSignal, cover: Cover | null =
           preparedResources: lease.resources, preparedTree: lease.tree,
           initialWorldCamera: view.world, initialProjection: lease.projection(view),
           ...options,
-          ...(cover ? { progressiveActivation: true, deferTextureRefinement: false } : {}),
+          ...(cover ? { progressiveActivation: true } : {}),
         },
         async afterMount(mount) {
           let failure: unknown;
