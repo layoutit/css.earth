@@ -4,6 +4,7 @@
 // encounter and orthophoto landmarks and check published controls in native pixels. `packages/bake/cli/` holds the
 // landmark and control-check commands. `attach.ts` attaches the banks to a prepared globe for the host.
 export * from './archive.ts';
+export * from './atlas-edge.ts';
 export * from './attach.ts';
 export * from './catalog.ts';
 export * from './check-projected-controls.ts';

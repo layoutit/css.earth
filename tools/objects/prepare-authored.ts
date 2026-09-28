@@ -17,7 +17,8 @@ import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts'
 import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
-import { attachSurfaceFeatures, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
+import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
+import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
   /** Write mode: regenerated reviewed images replace their source copies and pins instead of failing. */
@@ -75,6 +76,7 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-surface-minimaps.mts')).href);
   // Minimaps render from the raw imagery; a reuse-images stage already carries the published ones.
   if (!reuseImages) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
+  if (!reuseImages) await assertMapsStartAtSurfaceMapEdge(objectDirectory, outputDirectory);
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   await assertDefaultViewsFaceLenses(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
@@ -84,6 +86,40 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
     await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
   }
   return Object.freeze({ ...result, definition: prepared.definition, scene });
+}
+
+/** Each photograph lens's prepared map must start where the surface map says. The lens's own georeferenced source is read at
+ * true east longitudes and correlated with its prepared minimap (rolled by the minimap framing) at every candidate left edge;
+ * a map whose best edge is not the declared one is drawn away from its frame, as Iapetus and Ganymede were half a turn. */
+export async function assertMapsStartAtSurfaceMapEdge(objectDirectory: string, outputDirectory: string): Promise<void> {
+  const { descriptor, sources, manifest } = await readAuthoredSources(objectDirectory);
+  const surfaceMap = (source(sources, 'features')?.value as { surfaceMap?: unknown } | undefined)?.surfaceMap;
+  const surfaces = (source(sources, 'raster')?.value as { surfaces?: unknown } | undefined)?.surfaces;
+  if (typeof surfaceMap !== 'string' || !Array.isArray(surfaces)) return;
+  const surfaceMapPath = resolve(objectDirectory, 'source', surfaceMap);
+  const edge = record(JSON.parse(await readFile(surfaceMapPath, 'utf8')) as unknown, 'surface map').mapLeftEdgeLongitudeDeg;
+  if (typeof edge !== 'number' || !Number.isFinite(edge)) throw new TypeError(`${descriptor.id}: ${surfaceMapPath} mapLeftEdgeLongitudeDeg is ${String(edge)}, not a number.`);
+  const framing = await readFile(resolve(objectDirectory, 'source/presentation/minimap.json'), 'utf8').then(text => (JSON.parse(text) as { centerLongitudeDegrees?: unknown }).centerLongitudeDegrees, () => undefined);
+  // prepare-surface-minimaps rolls a framed minimap so its left edge is map longitude (center - 180).
+  const minimapEdge = ((edge + (typeof framing === 'number' ? framing - 180 : 0)) % 360 + 360) % 360;
+  const minimaps = record(JSON.parse(await readFile(resolve(outputDirectory, 'minimaps.json'), 'utf8')) as unknown, 'minimaps').images;
+  for (const value of surfaces) {
+    const surface = record(value, 'raster surface'), science = surface.science === undefined ? undefined : record(surface.science, `${String(surface.id)} science`);
+    if (science?.kind !== 'terrestrial-observation' || !science.nativePhotographicSampling) continue;
+    const input = manifest.manifest.inputs.find(entry => entry.id === science.input);
+    const image = Array.isArray(minimaps) ? minimaps.map(entry => record(entry, 'minimap')).find(entry => entry.id === surface.id) : undefined;
+    if (!input || typeof image?.path !== 'string') continue;
+    const photograph = await loadNativePhotograph(resolve(objectDirectory, 'source'), input, science.validity);
+    const { data, info } = await sharp(resolve(outputDirectory, image.path)).removeAlpha().greyscale().raw().toBuffer({ resolveWithObject: true });
+    const color = [0, 0, 0];
+    const measured = measureAtlasLeftEdge((longitude, latitude) => photograph.sample(longitude, latitude, color) ? (color[0]! + color[1]! + color[2]!) / 3 : null,
+      { data, width: info.width, height: info.height }, minimapEdge);
+    if (longitudeDistanceDeg(measured.edgeDeg, minimapEdge) > 4 && measured.correlation - measured.expectedCorrelation > 0.2) {
+      const actual = ((measured.edgeDeg - (minimapEdge - edge)) % 360 + 360) % 360;
+      throw new Error(`${descriptor.id}/${String(surface.id)}: the prepared map starts at ${actual}° E, but ${relative(process.cwd(), surfaceMapPath)} declares mapLeftEdgeLongitudeDeg ${edge}. `
+        + `Its source correlates ${measured.correlation.toFixed(2)} with the minimap read from ${measured.edgeDeg}° E and ${measured.expectedCorrelation.toFixed(2)} read from ${minimapEdge}° E, where the declared edge and the minimap framing put it (${measured.samples} source samples).`);
+    }
+  }
 }
 
 /** Legend labels of the object's content record against the stretch a staged or checked run reported (`@cssearth/bake/objects/content`). */
@@ -440,6 +476,14 @@ export async function redrawOnlyDecision(objectDirectory: string): Promise<{ red
     if (!bytes) return { redraw: false, reason: `the published version of ${path} is not in the last 200 commits` };
     if (without(JSON.parse(bytes.toString('utf8')), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
     acceptChanged.push(id);
+  }
+  // A redraw carries the published feature anchors, which were placed with the left edge the published feature record states.
+  const surfaceMap = (source(sources, 'features')?.value as { surfaceMap?: unknown } | undefined)?.surfaceMap;
+  if (typeof surfaceMap === 'string') {
+    const edge = (JSON.parse(await readFile(resolve(objectDirectory, 'source', surfaceMap), 'utf8')) as { mapLeftEdgeLongitudeDeg?: unknown }).mapLeftEdgeLongitudeDeg;
+    const publishedEdge = await readFile(resolve(objectDirectory, 'prepared/features.json'), 'utf8')
+      .then(text => (JSON.parse(text) as { mapLeftEdgeLongitudeDeg?: unknown }).mapLeftEdgeLongitudeDeg, () => undefined);
+    if (publishedEdge !== edge) return { redraw: false, reason: `the surface map's left edge is ${String(edge)}° E, but the published feature anchors used ${String(publishedEdge)}° E` };
   }
   return { redraw: true, acceptChanged, reason: acceptChanged.length ? `only ${acceptChanged.map(id => `${id} ${REDRAWN_KEYS[id]!.join('/')}`).join(', ')} changed` : 'no recipe changed' };
 }
