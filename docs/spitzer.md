@@ -41,7 +41,7 @@ node packages/telescope-cli/src/archives/spitzer/archive-ledger.mts --write
 For an observation returned by the shared capability query, the same stages are available through the checked dispatcher:
 
 ```
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/qualify.mts --target bennu --telescope Spitzer --mode 'IRAC Map' --observation 21415424 --channel 1
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/qualify.mts --target bennu --telescope Spitzer --mode 'IRAC Map' --observation 21415424 --channel 1
 ```
 
 It first requires that the canonical target, mode and AOR occur together in the committed archive index. It then runs the

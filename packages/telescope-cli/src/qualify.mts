@@ -220,7 +220,7 @@ export async function recordQualification(root: string, result: QualificationRes
   return qualified;
 }
 
-export const QUALIFY_HELP = `Usage: node tools/cli/run-typed-module.mjs packages/telescope-cli/src/qualify.mts --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
+export const QUALIFY_HELP = `Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/qualify.mts --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
 Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
 --archive-programme ID --archive-target NAME --night YYYY-MM-DD, --source-product ID, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;

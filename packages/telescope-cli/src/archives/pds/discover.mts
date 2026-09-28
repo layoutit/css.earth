@@ -160,7 +160,7 @@ export async function pdsTarget(root: string, id: string) {
   return { id, lid: targets[0]!.lid, name: targets[0]!.name };
 }
 
-export const DISCOVER_HELP = 'Usage: node tools/cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target TARGET [--write]';
+export const DISCOVER_HELP = 'Usage: node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/archives/pds/discover.mts --archive pds --target TARGET [--write]';
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), archive = flagValue(args, '--archive'), target = flagValue(args, '--target');
   if (args.includes('--help') || args.includes('-h')) process.stdout.write(`${DISCOVER_HELP}\n`);

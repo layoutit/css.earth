@@ -1,5 +1,5 @@
 ---
-import { prepareInformationTabStyles } from '../server/information-tab-styles.mts';
+import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
@@ -33,7 +33,7 @@ interface Props {
 
 const { objectId, navigation = false, scene, descriptor } = Astro.props;
 const objectUi = await Astro.slots.render('object-ui');
-const tabStyles = prepareInformationTabStyles(objectUi);
+const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;

@@ -42,14 +42,15 @@ class ControlledImage implements PreparedImage {
   removeAttribute(name: string): void { if (name === "src") this.src = ""; }
 }
 interface HarnessOptions {
+  definition?: ObjectRuntimeDefinition;
   initialLens?: string;
   onTicket?: (ticket: PreparedResidencyTicket) => void;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
   initialDiameter?: number;
   motion?: ReturnType<typeof cameraMotionSignalFor>;
 }
-function harness({ onTicket, onChange, initialDiameter = 100, initialLens, motion }: HarnessOptions = {}) {
-  const definition = earthDefinition, f = retainedPresentationFixture(definition);
+function harness({ definition = earthDefinition, onTicket, onChange, initialDiameter = 100, initialLens, motion }: HarnessOptions = {}) {
+  const f = retainedPresentationFixture(definition);
   const jobs: ImageJob[] = [], commits: { selection: ObjectSelection; plan: PreparedPresentationPlan }[] = [], changes: Readonly<ObjectSelectionState>[] = [], fatal: unknown[] = [], materialErrors: unknown[] = [], created: ReturnType<typeof f.document.createElement>[] = [];
   const createElement = f.document.createElement;
   f.document.createElement = tag => { const node = createElement(tag); created.push(node); return node; };
@@ -71,7 +72,7 @@ function harness({ onTicket, onChange, initialDiameter = 100, initialLens, motio
   f.lifetime.onDispose(() => coordinator.destroy());
   let revision = 0, currentView: PreparedView | undefined;
   function view(row: number, withinRow = 0, silhouetteDiameter = 100): PreparedView {
-    const track = definition.materials[0], frame = 20 + row * 32 + withinRow;
+    const track = definition.materials[0] ?? earthDefinition.materials[0], frame = 20 + row * 32 + withinRow;
     const z = frame / (track.frame.indices.length - 1) * 2 - 1;
     const direction: readonly [number, number, number] = [Math.sqrt(1 - z * z), 0, z];
     const next: PreparedView = { ...f.view, controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
@@ -334,4 +335,25 @@ test('same-turn navigation supersession does not briefly publish the old surface
   await h.resolveJobs();
   assert.equal(h.frameCount(), frames);
   h.lifetime.destroy(); successor();
+});
+
+
+test('held departure moves and hides every Ryugu depth partition without publishing materials', async t => {
+  const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition('ryugu'));
+  const h = harness({ definition }); t.after(h.restore); await h.ready();
+  assert.ok(definition.depthPartitions?.groups.length, 'exercise the partitioned mesh');
+  const scene = h.created[definition.tree.scene];
+  const groups = definition.depthPartitions.groups.map(group => h.created[group.scene]);
+  const release = h.coordinator.holdPresentation();
+  const frames = h.frameCount(), commits = h.commits.length, requests = h.coordinator.stats().requests;
+  scene.style.transform = 'translate3d(0px,0px,-10000px)';
+  h.view(0);
+  for (const group of groups) assert.equal(group.style.transform, scene.style.transform);
+  scene.hidden = true;
+  h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'marker', silhouetteDiameter: 1, billboardOpacity: 0, markerOpacity: 1 } });
+  for (const group of groups) assert.equal(group.hidden, true, 'no full-size source remains behind the destination');
+  assert.equal(h.frameCount(), frames);
+  assert.equal(h.commits.length, commits);
+  assert.equal(h.coordinator.stats().requests, requests);
+  h.lifetime.destroy(); release();
 });

@@ -122,7 +122,7 @@ its validators accept); the renderer never imports the bake.
   bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
   them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `tests/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
-  not an object's own: dataset sprites and search thumbnails cut from prepared page and navigation images, the planets'
+  not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
   photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`
   for them and checks the pinned version when the excerpts are made). It imports `raster`, `runtime-source`,
   `objects/raster` and `objects/charts`. Its commands are `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,
@@ -132,7 +132,8 @@ its validators accept); the renderer never imports the bake.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
   minimap or preview raster is drawn from, read and checked. It imports no topic.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
-  of the preparation trace. `packages/bake/cli/preparation-trace.mts` is the trace itself, which
+  of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
+  subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which
   `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
   before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
   holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `tools/prepare/prepare-object.mts` run through
@@ -287,7 +288,7 @@ density: keep component-bound 3D material distinct from historical image-ray sam
 the finite-emission compiler. Change an output only on purpose, together with every test and accepted bake that pins it.
 
 The `nebulaImplementation` inventory in `package.json` lists the sources that nebula delivery identities hash. Keep it
-covering every topic directory whose code a delivery runs (`tools/nebula/application/package-identity.test.ts` checks it
+covering every topic directory whose code a delivery runs (`tests/nebula/application/package-identity.test.ts` checks it
 against the delivery's import closure); `src/nebula/objects.ts` names only owners outside the package.
 
 ## Shared package contract
