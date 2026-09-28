@@ -66,6 +66,8 @@ function sequence(autoplay = true) {
 test('sequence playback wraps, waits for the pending map, and pauses without another selection', () => {
   vi.useFakeTimers();
   const h = sequence();
+  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
+  h.click('#details-last [data-dataset-play]');
   expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Pause');
   vi.advanceTimersByTime(1500);
   expect(h.actions).toEqual(['first']);
@@ -86,13 +88,14 @@ test('sequence playback wraps, waits for the pending map, and pauses without ano
   h.click('[value="other"]'); h.commit();
   h.click('[value="last"]'); h.commit();
   vi.advanceTimersByTime(1500);
-  expect(h.actions.at(-1)).toBe('first');
+  expect(h.actions).toEqual(['first', 'last', 'other', 'last']);
+  expect(vi.getTimerCount()).toBe(0);
   h.binding.destroy();
 });
 
-test('a manual group stays at its selected depth until playback is requested', () => {
+test.each([true, false])('a sequence stays paused even with legacy autoplay=%s until Play is pressed', autoplay => {
   vi.useFakeTimers();
-  const h = sequence(false);
+  const h = sequence(autoplay);
   vi.advanceTimersByTime(10000);
   expect(h.actions).toEqual([]);
   expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
@@ -110,6 +113,7 @@ test('a manual group stays at its selected depth until playback is requested', (
 test.each(['manual', 'hidden', 'unready', 'destroy'] as const)('playback stops on %s', reason => {
   vi.useFakeTimers();
   const h = sequence();
+  h.click('#details-last [data-dataset-play]');
   if (reason === 'manual') { h.click('[value="other"]'); h.commit(); }
   if (reason === 'hidden') h.hide();
   if (reason === 'unready') h.binding.setReady(false);
