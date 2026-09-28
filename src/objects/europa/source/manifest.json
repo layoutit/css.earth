@@ -19679,7 +19679,7 @@
       "credit": "NASA/ESA/CSA JWST, NIRSpec GTO programme 1250 (PI G. Villanueva); MAST (STScI)",
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "acquisition": "Written by tools/objects/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned with the exposures it was built from in packages/telescope-cli/src/archives/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
+      "acquisition": "Written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned with the exposures it was built from in packages/telescope-cli/src/archives/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
       "redistribution": "Derived from public JWST data; retain the credit.",
       "consumers": [
         "jwst-carbon-dioxide"
@@ -19726,7 +19726,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw01250-o002, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw01250-o002, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19748,7 +19748,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw01250-o002, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw01250-o002, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19770,7 +19770,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw04023-o001, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw04023-o001, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19792,7 +19792,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw04023-o001, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw04023-o001, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19814,7 +19814,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw04023-o002, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw04023-o002, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19836,7 +19836,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw04023-o002, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw04023-o002, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19858,7 +19858,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw04023-o003, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw04023-o003, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19880,7 +19880,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw04023-o003, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw04023-o003, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19902,7 +19902,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o001, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o001, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19924,7 +19924,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o001, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o001, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19946,7 +19946,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o002, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o002, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19968,7 +19968,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o002, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o002, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -19990,7 +19990,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o003, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o003, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -20012,7 +20012,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o003, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o003, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -20034,7 +20034,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o004, giving the direction to the Sun, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API: Europa's heliocentric state at the light-time corrected epoch of jw09230-o004, giving the direction to the Sun, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -20056,7 +20056,7 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
       "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
       "license": "Public ephemeris service output; cite JPL Horizons.",
-      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o004, written by tools/objects/jwst/cubes/author-body-maps.mts.",
+      "acquisition": "Pinned response from the JPL Horizons API for Europa (502) with JWST (500@-170) as the observer at the exposure start of jw09230-o004, written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts.",
       "redistribution": "Public NASA/JPL output; retain the citation.",
       "consumers": [
         "jwst-band-maps"
@@ -20419,7 +20419,7 @@
       "credit": "NASA/ESA/CSA JWST, NIRSpec programmes 1250 (PI G. Villanueva), 4023 and 9230; MAST (STScI)",
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "acquisition": "Written by tools/objects/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned in packages/telescope-cli/src/archives/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
+      "acquisition": "Written by packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts, as preparation/jwst-band-maps.json states, from MAST's level-3 cubes of eight NIRSpec observations (programmes 1250, 4023 and 9230; each pinned in packages/telescope-cli/src/archives/jwst/imaging/programs/europa-*.json), the pinned Horizons tables and the pinned rotation model. --check reproduces it byte for byte.",
       "redistribution": "Derived from public JWST data; retain the credit.",
       "consumers": [
         "jwst-hydrogen-peroxide"
@@ -20446,7 +20446,7 @@
       "credit": "NASA/ESA Hubble Space Telescope, programme 14650 (PI M. Brown); MAST (STScI)",
       "displayCredit": "NASA/ESA HST, MAST",
       "license": "HST data served by MAST are public after their exclusive access period and carry no copyright; credit the mission, the programme and MAST.",
-      "acquisition": "Written by tools/objects/hst/slit-scan-map.mts from the 60 MAST frames pinned by URI, size and sha256 in packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json, with the pinned Horizons responses beside it; measured in europa-salt-map.scan.reproduction.json. Re-run: node tools/objects/hst/slit-scan-map.mts europa-salt-map <frames> <out> --fetch.",
+      "acquisition": "Written by packages/telescope-cli/authoring/hst/slit-scan-map.mts from the 60 MAST frames pinned by URI, size and sha256 in packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json, with the pinned Horizons responses beside it; measured in europa-salt-map.scan.reproduction.json. Re-run: node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <frames> <out> --fetch.",
       "redistribution": "Derived from public Hubble data; retain the credit.",
       "consumers": [
         "hst-sodium-chloride"
@@ -20469,7 +20469,7 @@
   "generatedIntermediates": [
     {
       "path": "hst/nacl-450nm.fits.body-map.json",
-      "generator": "node tools/objects/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
+      "generator": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20477,7 +20477,7 @@
     },
     {
       "path": "hst/nacl-450nm.fits.product.json",
-      "generator": "node tools/objects/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
+      "generator": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20485,7 +20485,7 @@
     },
     {
       "path": "hst/registration.json",
-      "generator": "node tools/objects/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
+      "generator": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <STIS frames> src/objects/europa/source/hst",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20493,7 +20493,7 @@
     },
     {
       "path": "jwst/carbon-dioxide.fits.body-map.json",
-      "generator": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20501,7 +20501,7 @@
     },
     {
       "path": "jwst/carbon-dioxide.fits.product.json",
-      "generator": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20509,7 +20509,7 @@
     },
     {
       "path": "jwst/carbon-dioxide.fits.resolution.json",
-      "generator": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20517,7 +20517,7 @@
     },
     {
       "path": "jwst/hydrogen-peroxide.fits.body-map.json",
-      "generator": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20525,7 +20525,7 @@
     },
     {
       "path": "jwst/hydrogen-peroxide.fits.product.json",
-      "generator": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."
@@ -20533,7 +20533,7 @@
     },
     {
       "path": "jwst/hydrogen-peroxide.fits.resolution.json",
-      "generator": "node tools/objects/jwst/cubes/author-body-maps.mts europa",
+      "generator": "node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts europa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reduction receipt or geometry companion, generated with the matching map; not an independent observation."

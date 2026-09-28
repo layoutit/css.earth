@@ -81,7 +81,7 @@ is the north pole, column 1 starts at 0 degrees east longitude, east to the righ
 where the surface was seen more than 60 degrees from face on. The strong side is the right-hand half of the map, around
 270 degrees east longitude, the hemisphere that faces the direction Europa travels.
 
-`node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt`
+`node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt`
 
 ## ALMA: Europa's thermal disc
 

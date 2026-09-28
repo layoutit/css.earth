@@ -181,7 +181,7 @@
       "path": "src/objects/hd-181327-disc/source/density-reflectance.ktx2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -189,7 +189,7 @@
       "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -197,7 +197,7 @@
       "path": "src/objects/hd-181327-disc/source/previews/reflectance.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     }
   ]
