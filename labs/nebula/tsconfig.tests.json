@@ -20,9 +20,9 @@
     "packages/**/*.test.ts",
     "packages/**/*.test.mts",
     "../../node_modules/vite/client.d.ts",
-    "../../tools/nebula/**/*.test.mts",
-    "../../tools/nebula/**/*.test.ts",
-    "../../tools/nebula/application-isolation*.ts",
+    "../../tests/nebula/**/*.test.mts",
+    "../../tests/nebula/**/*.test.ts",
+    "../../tests/nebula/application-isolation*.ts",
     "../../tests/sources/nebula-provenance-source-closure.test.mts"
   ],
   "exclude": [

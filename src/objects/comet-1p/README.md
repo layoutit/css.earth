@@ -56,7 +56,7 @@ Reproduce the diagnostics with:
 ```sh
 node tools/objects/comet-1p/inspect-giotto.mts --download --all-clear-mdm --output=output/halley-intake
 node tools/objects/comet-1p/inspect-encounter-resampling.mts output/halley-resampling
-node --test tools/contract/inspect-halley-giotto.test.mts tools/objects/comet-1p/prepare-encounters.test.mts
+node --test tests/contract/inspect-halley-giotto.test.mts tools/objects/comet-1p/prepare-encounters.test.mts
 pnpm -s telescope papers comet-1p --instrument Giotto --json --out output/halley-papers
 ```
 

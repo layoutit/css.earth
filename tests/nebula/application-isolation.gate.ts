@@ -42,7 +42,7 @@ for (const path of ['packages/renderer/src/volume/types.ts', 'packages/renderer/
 }
 await assert.rejects(access(join(sandbox, 'labs')));
 await writeFile(join(output, 'closure.json'), JSON.stringify({ sandbox, inputs }, null, 2));
-await build({ entryPoints: [resolve(root, 'tools/nebula/application-isolation-guard.ts')], outfile: join(sandbox, 'guard.mjs'), bundle: true, platform: 'node', format: 'esm', target: 'node22' });
+await build({ entryPoints: [resolve(root, 'tests/nebula/application-isolation-guard.ts')], outfile: join(sandbox, 'guard.mjs'), bundle: true, platform: 'node', format: 'esm', target: 'node22' });
 const guardProbe = spawnSync(process.execPath, ['--import', './guard.mjs', '-e',
   "require('node:fs').readFileSync('/forbidden/labs/nebula/models/missing.json')"], { cwd: sandbox, encoding: 'utf8' });
 assert.notEqual(guardProbe.status, 0);

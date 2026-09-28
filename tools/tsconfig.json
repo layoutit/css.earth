@@ -32,8 +32,7 @@
     "../labs/experiments/**/*.mts",
     "../labs/investigations/**/*.mts",
     "../labs/performance/**/*.mts",
-    "../site/env.d.ts",
-    "nebula/application/**/*.ts"
+    "../site/env.d.ts"
   ],
   "exclude": [
     "**/*.test.mts",

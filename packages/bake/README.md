@@ -1,6 +1,6 @@
 # @cssearth/bake
 
-The repository's build-time preparation code. The preparation tools (`tools/nebula`, `tools/objects`,
+The repository's build-time preparation code. The preparation tools (`tools/objects`,
 `tools/prepare`, `tools/assets`) and the nebula lab import it to turn source
 records into prepared delivery. The application never imports it: the runtime reads only what the bake wrote.
 
