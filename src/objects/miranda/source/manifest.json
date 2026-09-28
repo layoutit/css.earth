@@ -1251,7 +1251,7 @@
       "consumers": [
         "geology-surfaces"
       ],
-      "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
+      "acquisition": "Checked-in derived categorical grid. Reproduce with packages/bake/src/objects/acquisition/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
       "coverage": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
       "sourceBinding": {
         "kind": "catalogued",

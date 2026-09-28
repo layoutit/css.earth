@@ -150,7 +150,7 @@ All interpolation contributors must have accepted quality, finite nonnegative si
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/lutetia/source --profile preparation/n20100710t154135529id4df22-camera.json`, then run `node tools/objects/dist/prepare-authored.js lutetia --write`.
+Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/lutetia/source --profile preparation/n20100710t154135529id4df22-camera.json`, then run `node site/build/prepare/prepare-authored.ts lutetia --write`.
 
 The added camera reproduces archived boresight RA/Dec to 0.0000043 degrees and the archived surface-intercept point to 0.00535 pixels before adjustment. The same bounded image/model correlation method and disjoint two-fit/two-holdout windows as the first image give a translation of [−31.5,+125] pixels. The maximum withheld residual is 5.408 pixels, below the unchanged 12-pixel limit. These are source-shape registration checks, not absolute cartographic precision. No roll, scale, mesh or local warp is fitted.
 

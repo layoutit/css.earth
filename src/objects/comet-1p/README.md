@@ -182,7 +182,7 @@ Reproduce in order, after restoring the declared source inputs:
 ```sh
 node packages/bake/authoring/comet-1p/prepare-giotto.mts --write
 node packages/bake/authoring/comet-1p/prepare-encounters.mts --write
-node tools/objects/dist/prepare-authored.js comet-1p --write
+node site/build/prepare/prepare-authored.ts comet-1p --write
 node --test packages/bake/authoring/comet-1p/prepare-encounters.test.mts
 ```
 
