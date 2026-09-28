@@ -6,8 +6,9 @@
  *
  * Each archived pixel keeps its value exactly. Pixels are placed by the table's own MIN/MAX latitude and longitude
  * columns (the row order starts at -30 E, not at the label's -180 E), moved 210 degrees from Claudia Double Prime into
- * the Dawn Claudia frame of the other Vesta maps, and expanded onto a regular grid whose step divides every published
- * pixel boundary. The script refuses a pixel that straddles a grid cell, a cell covered twice, or an uncovered cell, so
+ * the Dawn Claudia frame of the other Vesta maps, and expanded onto a regular grid whose steps divide every published
+ * pixel boundary. A product gives one `stepDegrees`, or `latitudeStepDegrees` and `longitudeStepDegrees` when its
+ * latitude bands are much coarser than its longitude boundaries. The script refuses a pixel that straddles a grid cell, a cell covered twice, or an uncovered cell, so
  * the grid is a lossless re-indexing of the table. Nothing is interpolated, smoothed or filled.
  */
 import { createHash } from 'node:crypto';
@@ -69,8 +70,10 @@ const report: Record<string, unknown>[] = [];
 for (const entry of plan.products) {
   const product = record(entry, 'product');
   const id = String(product.id), tablePath = text(product.table, `${id}.table`), labelPath = text(product.label, `${id}.label`);
-  const step = number(product.stepDegrees, `${id}.stepDegrees`), width = 360 / step, height = 180 / step;
-  if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height)) throw new Error(`${id}: step ${step} does not divide the sphere.`);
+  const latStep = number(product.latitudeStepDegrees ?? product.stepDegrees, `${id}.latitudeStepDegrees`);
+  const lonStep = number(product.longitudeStepDegrees ?? product.stepDegrees, `${id}.longitudeStepDegrees`);
+  const width = 360 / lonStep, height = 180 / latStep;
+  if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height)) throw new Error(`${id}: steps ${latStep} x ${lonStep} do not divide the sphere.`);
   const bytes = readFileSync(resolve(directory, tablePath));
   const label = readLabel(readFileSync(resolve(directory, labelPath), 'utf8'), labelPath);
   const digest = createHash('md5').update(bytes).digest('hex');
@@ -94,23 +97,23 @@ for (const entry of plan.products) {
   for (let i = 0; i < label.records; i++) {
     const row = bytes.subarray(i * label.recordLength, (i + 1) * label.recordLength);
     const south = minLat(row), north = maxLat(row), west = minLon(row), span = deltaLon(row), value = quantity(row);
-    const cells = [(south + 90) / step, (north + 90) / step, (west + 180) / step, span / step];
+    const cells = [(south + 90) / latStep, (north + 90) / latStep, (west + 180) / lonStep, span / lonStep];
     if (cells.some(cell => !Number.isInteger(cell)) || south < -90 || north > 90 || north <= south || span <= 0) {
-      throw new Error(`${id}: record ${i} (${south}..${north} N, ${west} E + ${span}) does not tile the ${step} degree grid.`);
+      throw new Error(`${id}: record ${i} (${south}..${north} N, ${west} E + ${span}) does not tile the ${latStep} x ${lonStep} degree grid.`);
     }
     minimum = Math.min(minimum, value); maximum = Math.max(maximum, value); if (value === 0) zeros++;
     for (let y = cells[0]!; y < cells[1]!; y++) for (let k = 0; k < cells[3]!; k++) {
       // Source column in Claudia Double Prime from -180 E, moved into Claudia columns from 0 E.
-      const claudiaWest = west + k * step + shift;
-      const x = Math.round((((claudiaWest % 360) + 360) % 360) / step);
+      const claudiaWest = west + k * lonStep + shift;
+      const x = Math.round((((claudiaWest % 360) + 360) % 360) / lonStep);
       if (Number.isFinite(grid[y * width + x]!)) throw new Error(`${id}: record ${i} overlaps an earlier pixel at row ${y}, column ${x}.`);
       grid[y * width + x] = value;
     }
   }
   const empty = grid.reduce((count, value) => count + (Number.isFinite(value) ? 0 : 1), 0);
   if (empty) throw new Error(`${id}: ${empty} grid cells have no archived pixel.`);
-  const longitudes = Float64Array.from({ length: width }, (_, x) => (x + 0.5) * step);
-  const latitudes = Float64Array.from({ length: height }, (_, y) => -90 + (y + 0.5) * step);
+  const longitudes = Float64Array.from({ length: width }, (_, x) => (x + 0.5) * lonStep);
+  const latitudes = Float64Array.from({ length: height }, (_, y) => -90 + (y + 0.5) * latStep);
   writeFileSync(resolve(directory, text(product.longitudes, `${id}.longitudes`)), npy(longitudes, [width]));
   writeFileSync(resolve(directory, text(product.values, `${id}.values`)), npy(grid, [height, width]));
   writeFileSync(resolve(directory, text(product.latitudes, `${id}.latitudes`)), npy(latitudes, [height]));

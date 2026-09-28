@@ -214,8 +214,8 @@
     {
       "location": "public",
       "filename": "moon-arrival.webp",
-      "bytes": 129878,
-      "sha256": "1d5469b45053060b55f57fe66870c9e207676fd826edbdc405d67f5e46133b2a"
+      "bytes": 129418,
+      "sha256": "22b17781f2d03d847403db9047ab976334cee1827156310895625fc077a2a833"
     },
     {
       "location": "public",
@@ -261,6 +261,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-iron-gamma@2x.webp",
+      "bytes": 41268,
+      "sha256": "795046f5466910aee9d2818cea608c4f7bcffefa624b26c23211c527582dc763"
+    },
+    {
+      "location": "public",
       "filename": "moon-iron-oxide@2x.webp",
       "bytes": 2589932,
       "sha256": "0306a345ffc526ae8cba6cb30f73009d508fc8dee22045466e49c65940f906fd"
@@ -300,6 +306,12 @@
       "filename": "moon-lens-heat-anomalies.webp",
       "bytes": 3266,
       "sha256": "75124782f456b6bffaeb7e8604cee928cdc26b250ae640f2c099f1e169cae7fa"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-iron-gamma.webp",
+      "bytes": 2456,
+      "sha256": "03537f136d5191b56dc8a2e77384bd31956984aabe8fe73f15755bda149423cd"
     },
     {
       "location": "public",
@@ -345,9 +357,21 @@
     },
     {
       "location": "public",
+      "filename": "moon-lens-potassium.webp",
+      "bytes": 2426,
+      "sha256": "e7acf7c0ae5d117e757df67cb609d82d42402a166376a5fd3f701c0e195895a8"
+    },
+    {
+      "location": "public",
       "filename": "moon-lens-rock-abundance.webp",
       "bytes": 3508,
       "sha256": "2e06999183fb80a791ccd6df4520678317f44f898db948ff0fb2d69c930f839e"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-roughness.webp",
+      "bytes": 3998,
+      "sha256": "67631f535eb50a782d0b96ee28f8699152c1dc4b76b9096e3cd64737c1dc6091"
     },
     {
       "location": "public",
@@ -366,6 +390,18 @@
       "filename": "moon-lens-surface.webp",
       "bytes": 402,
       "sha256": "d2826fdcc71c63d80b455eb0971037f6d889161a3009939a12b84853c933d02d"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-thorium.webp",
+      "bytes": 2336,
+      "sha256": "6fbbab448fa44270bdb0c3abf424b7633ef61a8754b2d0202ba3e82a0413d389"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-titanium.webp",
+      "bytes": 2472,
+      "sha256": "ecef90c37e2d5dae9528e085cf1c71b9242d0cde3d19ad344da4a22cdc9a1d29"
     },
     {
       "location": "public",
@@ -447,6 +483,12 @@
     },
     {
       "location": "public",
+      "filename": "moon-poles-iron-gamma@2x.webp",
+      "bytes": 12808,
+      "sha256": "6c3d514ccf77d3068788734764272bd860aac6ce6dd7edc6c58b72af91af470e"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-iron-oxide@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -489,9 +531,21 @@
     },
     {
       "location": "public",
+      "filename": "moon-poles-potassium@2x.webp",
+      "bytes": 12944,
+      "sha256": "9999e8b7f0862af06832f9437807eff53e0e9d174c22551624e6ac8354462505"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-rock-abundance@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-roughness@2x.webp",
+      "bytes": 411760,
+      "sha256": "201f29c5cce193dfe58f6cfe3b85d70b86c3766e08ae2e132e4dce0c7c2c0777"
     },
     {
       "location": "public",
@@ -513,15 +567,39 @@
     },
     {
       "location": "public",
+      "filename": "moon-poles-thorium@2x.webp",
+      "bytes": 12090,
+      "sha256": "ac3109ebf68a5f94420feaf87a6f2771991194a7862864f8d079208868c4ed9f"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-titanium@2x.webp",
+      "bytes": 12592,
+      "sha256": "6a8dcf47a344586bd76e4d15ab355edbeb6c88096b13e719fd90fc99d5c71596"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-topography@2x.webp",
       "bytes": 179314,
       "sha256": "5901b036d59beab99b8d802e4d36867038f278c70411163cbb4500fb03a1d372"
     },
     {
       "location": "public",
+      "filename": "moon-potassium@2x.webp",
+      "bytes": 41562,
+      "sha256": "42f029c4e56d8c9823e06977eed1eb9760688dad98da92dee601887802ee2620"
+    },
+    {
+      "location": "public",
       "filename": "moon-rock-abundance@2x.webp",
       "bytes": 7873838,
       "sha256": "c18bd348b7ca749ca584a7d3fa85b915a84ed4129dbfe5d52d73fc76874d3ecd"
+    },
+    {
+      "location": "public",
+      "filename": "moon-roughness@2x.webp",
+      "bytes": 12315644,
+      "sha256": "052b91c4aa0886412b879e36b587f0cd89f1c6a63c6bc69d39933f640de9d02d"
     },
     {
       "location": "public",
@@ -543,6 +621,18 @@
     },
     {
       "location": "public",
+      "filename": "moon-thorium@2x.webp",
+      "bytes": 39908,
+      "sha256": "3d18b58d075ba73263ea17c9480b61f808fa255caffcb1772dfa41f66865580a"
+    },
+    {
+      "location": "public",
+      "filename": "moon-titanium@2x.webp",
+      "bytes": 37564,
+      "sha256": "f7b94604b8736152a1235fb53ee5ce93755e6b01d30b0114226c54b0ba7f1413"
+    },
+    {
+      "location": "public",
       "filename": "moon-topography@2x.webp",
       "bytes": 5001160,
       "sha256": "421722f523990e3bc04737f9abfe50bd77df97b65368017e571fa52acad40788"
@@ -556,14 +646,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 96524,
-      "sha256": "5fd1d749d4105761e35e3022c60129dd28b3f0777393513cdeb387970faeebe3"
+      "bytes": 98999,
+      "sha256": "09545910ade13360ab87591fbff18c96fa94e5b6e24529b8fd4dc8ca08e68a75"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1419,
-      "sha256": "eb26f8eaa53f9ebd5be2d3c7f3e5a83193bdf5396bd3f41458f96bea1cf201f7"
+      "sha256": "fa1246ebaca2b9ca3ddeb2716c9f2ce0c849d5765897217ea9f54fad497db7e4"
     },
     {
       "location": "prepared",
@@ -574,8 +664,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 35655,
-      "sha256": "f0c055f554083c18020118b36d149a5ca4adf88df2860d450f4bcf967ccec38e"
+      "bytes": 48457,
+      "sha256": "b4aae251d34b4b8a49344ef291450040d456e661bc8fecae6309c4660698b1cd"
     },
     {
       "location": "prepared",
@@ -592,14 +682,14 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 49520,
-      "sha256": "314b4718900381462fd7aabdc1ec48db835820ce3904ac10705cbd425be4e12b"
+      "bytes": 65807,
+      "sha256": "9af7918702187736f001d2edeaba46718e38edc797968f0a20e089af80f24676"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1531,
-      "sha256": "e4e40e489548e61f3e7a3d1e6904524ce293a1baff16e8fd452b10ae54f10e82"
+      "bytes": 1912,
+      "sha256": "d682608c08edc89509c5b160054e0fbff7930e275270629251c33d5865b703e6"
     },
     {
       "location": "prepared",
@@ -636,6 +726,12 @@
       "filename": "minimaps/heat-anomalies.webp",
       "bytes": 24634,
       "sha256": "a183caeabf800262e0e3bebe3465e7e006999dfdb9612bf3c13f65db36dc3d2e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/iron-gamma.webp",
+      "bytes": 11732,
+      "sha256": "985c1addb0ee9afbda39df213fae338caed7465c21d53f8f9473330daf530a23"
     },
     {
       "location": "prepared",
@@ -681,9 +777,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/potassium.webp",
+      "bytes": 14972,
+      "sha256": "dc9ba4fe9172d57fb1cb4ff2ce0dfdeec4cb27bf315b31037fce20bbbbc82984"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/rock-abundance.webp",
       "bytes": 36790,
       "sha256": "a6d73ce011b0d315ba669546d439b8898c11f1804af9801e1d81e0df7720e07b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/roughness.webp",
+      "bytes": 79048,
+      "sha256": "7e27f18390a9bd2f3fcaffb9d439640bd5e9e7235e6aa56815dcad5df2f56000"
     },
     {
       "location": "prepared",
@@ -705,6 +813,18 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/thorium.webp",
+      "bytes": 5512,
+      "sha256": "bebd0bdb99b591ed5499bcbfbf8d302a790e4b0011e31f8d90b270343b181c80"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/titanium.webp",
+      "bytes": 16784,
+      "sha256": "5641d6a452101cc2c0ba376bd164d5efc3b6c4980149ce1a1e23e32764554d70"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/topography.webp",
       "bytes": 15392,
       "sha256": "45451a861fd19326effb413a328c9d81dd89de24e5371c62bb21a328a2ab5af2"
@@ -718,8 +838,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 643426,
-      "sha256": "c60d85217001b0ff98adc606bdb959350c9446b677d141adbf069318bd3d5208"
+      "bytes": 667869,
+      "sha256": "ec701ed317d3e09d0764246ce720461df745408c7f5cc1b55ad5832bc3934d8f"
     },
     {
       "location": "prepared",
@@ -742,8 +862,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 4258,
-      "sha256": "dd34f7006c8ea6de14242ee03a87b8d14ae0eb9c1b54c81aa7dee682dee160d0"
+      "bytes": 5280,
+      "sha256": "a97a88994281cd54612d80dd212ff3b56a7540afce736d72362f9ad05a9ba5f5"
     },
     {
       "location": "prepared",

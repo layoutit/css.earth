@@ -38,6 +38,66 @@
       }
     },
     {
+      "id": "vims-2um",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "vims/Titan_global_32ppd_2microns_v2.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "trek-titan-vims-2um-32ppd",
+        "id": "vims-2um",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      }
+    },
+    {
+      "id": "vims-5um",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "vims/Titan_global_32ppd_5microns_v2.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "trek-titan-vims-5um-32ppd",
+        "id": "vims-5um",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      }
+    },
+    {
+      "id": "vims-color-ratio",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "vims/Titan_global_32ppd_ColorRatio_v2.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "trek-titan-vims-color-ratio-32ppd",
+        "id": "vims-color-ratio",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      }
+    },
+    {
       "id": "radar",
       "output": "titan-{id}{suffix}.webp",
       "thumbnail": "titan-lens-{id}.webp",

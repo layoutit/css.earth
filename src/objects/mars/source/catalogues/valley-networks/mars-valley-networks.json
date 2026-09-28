@@ -1,0 +1,28 @@
+{
+  "sourceRecords": {
+    "valley network": 9879
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8224707,
+  "categories": [
+    {
+      "value": "valley network",
+      "label": "Mapped valley (centreline)",
+      "color": "#edffe8"
+    }
+  ],
+  "output": "mars-valley-networks.tif",
+  "sha256": "f2b90950eba8167c4585b5e710c8f6d4fa01a8ea05537fca87636a401f61ba5f",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "Every cell a catalogued polyline crosses; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

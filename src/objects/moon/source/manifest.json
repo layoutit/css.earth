@@ -1205,6 +1205,68 @@
           }
         ]
       }
+    },
+    {
+      "id": "lp-grs-elem-abundance-2deg",
+      "path": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab",
+      "credit": "T. H. Prettyman (Planetary Science Institute) and the Lunar Prospector spectrometer team (Prettyman et al. 2006, doi:10.1029/2005JE002656); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat"
+      ],
+      "acquisition": "Exact public PDS ASCII table LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG of LP-L-GRS-5-ELEM-ABUNDANCE-V1.0 (volume LP_9001): weight fractions of FeO and TiO2, K and Th in ppm, with the error matrix, on 2 degree equal-area pixels. Original numeric values, not a rendered map",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "lro-lola-ldrm-16",
+      "path": "science/lola/ldrm_16.img",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.img",
+      "credit": "David E. Smith and NASA GSFC LRO LOLA team (Zuber et al. 2012, doi:10.1038/nature11216); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl"
+      ],
+      "acquisition": "Exact public PDS binary download of LDRM_16 (LRO-L-LOLA-4-GDR-V1.0, product version V2.0): per-pixel mean of the residual standard deviation of altitudes after a plane fit, 16 pixels/degree, signed 16-bit millimetres. Original numeric samples, not a rendered image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-lola-ldrm-16",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1757,6 +1819,51 @@
       "path": "science/grail/extrinfo.txt",
       "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/extrinfo.txt",
       "purpose": "GRAIL_1001 EXTRAS description: the GeoTIFF directory holds non-PDS-standard copies with the same data as the RSDMAP maps, and users should refer to the RSDMAP labels."
+    },
+    {
+      "path": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl",
+      "purpose": "Original PDS3 label of the 2 degree table: identity, producer, row count and size, the column list and its units, and the high-altitude (100 km) mission phase.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
+            "role": "material",
+            "evidence": "Detached PDS3 label of the table the surface-element lenses read."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/lp-grs/lpgrs_elem_abundance.fmt",
+      "origin": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_elem_abundance.fmt",
+      "purpose": "Original PDS3 format file the label points to (^STRUCTURE): the START_BYTE, BYTES and description of each of the 61 columns, which the reader uses to cut each row.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
+            "role": "material",
+            "evidence": "Format file of the table the surface-element lenses read."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/lola/ldrm_16.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl",
+      "purpose": "Original PDS3 label of LDRM_16: identity, mission phases through LRO_SM_17, method (residual standard deviation of three successive shots after a plane fit to 5 to 15 returns, 30 to 120 m baseline, averaged per pixel), millimetre scaling, missing constant and grid registration.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-lola-ldrm-16",
+            "role": "material",
+            "evidence": "Detached PDS3 label the roughness reader checks."
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-dune-field-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Dune Field (NASA Mars Trek GIS layer)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/56"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "usgs-mars-dune-database-2007",
+      "evidence": "All 547 polygons match Shapefiles/Geocentric/Dune_Field.shp vertex for vertex (src/objects/mars/evidence/catalogues/checks.json)."
+    }
+  ],
+  "statements": []
+}

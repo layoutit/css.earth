@@ -1,6 +1,6 @@
 # Mercury
 
-Mercury offers two monochrome maps taken under different sunlight, an enhanced-color map, numeric elevation, a gravity map, a crustal-thickness model and an illustrated cross section.
+Mercury offers two monochrome maps taken under different sunlight, a three-filter color map, an enhanced-color map, numeric elevation, a gravity map, a crustal-thickness model and an illustrated cross section.
 
 The [navigation marker recipe](source/preparation/navigation.json) retains the existing credited image and crop, then prepares a circular alpha edge so the photographic background cannot cover surrounding objects. The same silhouette is used by its larger context image where configured.
 
@@ -11,6 +11,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | View or property | Source and interpretation |
 | --- | --- |
 | Monochrome: Low Sun / Higher Sun | Native USGS MESSENGER MDIS BDR and LOI GeoTIFFs, edition 1 (2016), from NAC or WAC 750 nm images. The existing arrows switch between them. |
+| Color | Native USGS MDIS MD3 665 m GeoTIFF, edition 1 (2016). Red, green and blue are the 1000, 750 and 430 nm filter images. Not natural color. Gray grid marks missing coverage. |
 | Enhanced color | Native USGS MDIS 665 m GeoTIFF, edition 1 (2016). Red: principal component 2; green: principal component 1; blue: 430/1000 nm ratio. Gray grid marks missing coverage. |
 | Topography | [USGS MESSENGER 665 m DEM v2](https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m), numeric heights above a 2,439.4 km sphere with a matching color scale. |
 | Gravity | Free-air gravity anomaly of the MESSENGER gravity model HgM008 ([Genova et al. 2019](https://doi.org/10.1029/2018GL081135)), degree 90, in mGal on a 2,440 km sphere; numeric grid from NASA Mercury Trek. See [Gravity and crust](#gravity-and-crust). |
@@ -38,6 +39,18 @@ surface differences; they are not natural color or a classification of minerals.
 The PDS3 label's product name says `256PPD`, but its dimensions, map scale and the
 GeoTIFF itself specify **64 pixels per degree**. Preparation uses that actual grid.
 
+[Color](https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m)
+is the USGS MD3 mosaic (PDS data set `MESS-H-MDIS-5-RDR-MD3-V1.0`), the same
+23,040 × 11,520 RGB grid. USGS puts the 1000, 750 and 430 nm filter images in red,
+green and blue. The 3-color map campaign images were corrected to 30° incidence,
+0° emission and 30° phase, and each pixel averages every image that met the scale,
+lighting and detector-temperature limits. USGS stretched about 0–0.2 reflectance
+into 8 bits. The enhanced mosaic is made from the same three bands, but shows two
+principal components and a band ratio instead of the bands themselves. 1000 nm is
+beyond human vision, so neither is natural color. The USGS page cites
+[Denevi et al. (2016)](https://www.hou.usra.edu/meetings/lpsc2016/pdf/1264.pdf) for the
+calibration and map products.
+
 The [acquisition recipes](source/maps/native) validate the GeoTIFF encoding and
 its planetocentric, positive-east, north-up frame on a 2,439.4 km sphere. The
 [offline reducer](../../../packages/bake/src/objects/acquisition/geotiff-image.ts) reads bounded
@@ -63,6 +76,18 @@ area sums without the production GeoTIFF decoder. Conversion receipts identify
 the complete original files, compact outputs, missing coverage and partial
 footprints. These are checks of data handling, not instrument accuracy.
 
+The Color map (27 September 2026, on `ccbf483de8`) went through the same reducer
+and an independent check: 25 of 25 footprints match the original bytes, 15 of them
+observed and 10 in the polar gray grid ([check](evidence/native-maps/md3-check.json),
+[conversion receipt](evidence/native-maps/md3-conversion.json)). The original file
+is 796,539,539 bytes; the reducer read it in row windows of at most 0.55 MB. Its
+256,870 missing and 17,555 partial display pixels are the same count as the
+enhanced map's. The [comparison](evidence/native-maps/md3-vs-enhanced.json) shows
+the two are different products: 26.5% of pixels differ at pixelmatch threshold 0.1,
+and the Color map's blue mean is 97 against the enhanced map's 134
+([both maps](evidence/native-maps/md3-vs-enhanced.webp)). The Color lens has not
+been baked or inspected in a browser yet.
+
 The [qualification record](evidence/native-maps/qualification.json) records the
 tested inputs, unchanged geometry, inspected browser views, delivery and focused
 checks: 75 independent native footprints agree, and all 76 runtime files installed from the published asset host into an empty directory. The normal and enhanced surface maps are 2.48 MB and 3.55 MB; the new LOI map adds 2.93 MB. No cold-load timing was measured. Earlier JPEG timings and resampling comparisons apply only to the
@@ -75,13 +100,13 @@ The interior’s shape shading is illustrative in both exterior-lighting states.
 
 Feature outlines are not published nomenclature boundaries. Craters and faculae trace their published diameter as a circle; planitiae, montes, valles and catenae trace the Gazetteer’s latitude–longitude extent box. Rupes, dorsa and fossae show mapped tectonic traces instead: the up-to-six longest contractional (rupes, dorsa) or extensional (fossae) structures whose vertices lie inside the padded published extent, each at least a quarter of the longest. Those are the mapped structures near the name, not a Gazetteer boundary; 66 of 75 such features match, and the 9 without a mapped structure inside their extent (Adventure, Astrolabe, Fram, Gjöa, Zarya, Resolution, Vostok, Acadia and Protea Rupes) keep the extent box. Selecting a feature flies the camera over its centre at a distance that frames its published diameter, never farther than the observer already is. The 32 telescopic albedo features carry no diameter and are not labelled. The export repeats 8 features (one row per map quadrangle); preparation keeps the first row and records a maximum centre separation of 0.16° and diameter difference of 0.85 km. The view readout counts longitude from the map’s left edge, 180° from the Gazetteer’s positive-east origin.
 
-Enhanced color has missing polar coverage, shown as gray grid. The 366 km rendered outer shell is the difference between the cited radii; NASA separately describes it as “about 400 km.” The sky and display rotation are contextual, not an epoch-correct observation. The PSG source specifies no atmosphere structure, so no temperature-pressure chart is supplied.
+Color and Enhanced color have the same missing polar coverage, beyond about 84° N and 80° S, shown as gray grid. The 366 km rendered outer shell is the difference between the cited radii; NASA separately describes it as “about 400 km.” The sky and display rotation are contextual, not an epoch-correct observation. The PSG source specifies no atmosphere structure, so no temperature-pressure chart is supplied.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="mercury-sources"></a>
 
-- The enhanced-colour and topography lenses share the 750 nm lighting bank ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
+- The color, enhanced-colour and topography lenses share the 750 nm lighting bank ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 
 <details>
 <summary>Methods and source notes</summary>
@@ -95,7 +120,7 @@ Enhanced color has missing polar coverage, shown as gray grid. The 366 km render
 - Surface spectrum: a 326-point, 350–1000 nm global area-weighted mean prepared from M. D'Amore's DLR/Zenodo MESSENGER MASCS one-degree spectral cube (DOI `10.5281/zenodo.7433033`, CC-BY-4.0). The committed snapshot records the exact 197,099,868-byte archive identity, aggregation rule, parsed counts, and the archive/record count discrepancy.
 - Atmospheric context: a pinned NASA GSFC Planetary Spectrum Generator configuration explicitly reports `ATMOSPHERE-STRUCTURE` as `None`. Mercury's thin exosphere is described separately, so the object package deliberately publishes no temperature-pressure chart.
 - Surface density: the [raster recipe](source/preparation/raster.json) prepares every image once, at the canonical density. The lens maps are 4160 by 3072 pixels (4096 texels around the equator); mount and startup decode them directly. The earlier 1x maps and the silhouette texture levels that switched between them were retired with every raster-lane 1x file.
-- Surface map format: the three photographic maps use the shared WebP encoder; elevation uses lossless WebP. Each packed map remains 4,160 × 3,072 pixels, with 4,096 equatorial texels. No runtime texture levels or new geometry are introduced.
+- Surface map format: the four photographic maps use the shared WebP encoder; elevation uses lossless WebP. Each packed map remains 4,160 × 3,072 pixels, with 4,096 equatorial texels. No runtime texture levels or new geometry are introduced.
 - Prepared lighting: the Kaasalainen–Shkuratov KS3 model that MESSENGER's map products were corrected with ([Domingue et al. 2016](https://doi.org/10.1016/j.icarus.2015.11.040), eq. 43 and Table 9 at 748.7 nm: c_l 0.6424, phase slope 0.5628 per radian), recorded in `source/photometry/domingue-2016-ks3-749nm.json`. Each frame is the model relative to the flood-lit disc centre, so the default shadowless view shows the 750 nm map as published at the centre and keeps 68% of that brightness near the limb, at 84° emission; the old Lambert frame with its 0.35 floor and 0.05 ambient term is gone. Mercury left the shared `sphere` bank for its own 256-frame bank. The camera transforms the same fixed direction used by the baked cube Sun, selects the nearest prepared phase from view-space light Z, and rotates that retained overlay to the same view-space azimuth; no lighting pixels are calculated at runtime. The model's fitted phases run from 23° to 87°; the shadowless frame at 0° is an extrapolation, and the exponential phase term has no opposition surge. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
 - Feature traces: version 2 of Klimczak, Byrne and Crane’s “A Global Tectonic Map of Mercury” (Mendeley Data, DOI `10.17632/p43b9wttpj.2`, CC BY 4.0), whose `Combined_Tectonic_Map` shapefile holds 18,451 polylines in Plate Carrée metres on a 2,440,000 m sphere with a `Fault_Type` of contractional landform, extensional landform or trough. Preparation verifies the pinned archive, decodes the polylines and attributes, converts metres to east longitude and latitude, and for each Gazetteer rupes, dorsum or fossae selects the traces of the matching class whose vertices lie 90% inside the published extent padded by 0.3°, keeps the up-to-six longest that are at least a quarter of the leader, and decimates them to 240 vertices on the mesh sphere. The 300 m datum difference is below the label precision.
 - Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mercury (`MERCURY_nomenclature_center_pts.zip`, retrieved 2026-09-11 from the USGS Astrogeology download bucket), whose FGDC metadata declares the use constraint “Public domain.” Preparation verifies the pinned archive bytes, reads the dBase attribute table and the `GCS_Mercury_2000` projection (2,439,700 m sphere, matching the authored radius), drops the albedo-feature type code, folds repeated rows, converts each positive-east centre to a unit direction through the same `presentation/surface-map.json` axes the minimap uses with the map’s left edge at 180° E, and scales it to the mesh’s raw 11,500-unit radius. Features are ranked by diameter; craters and faculae get a small-circle rim (centre, east and north vectors), other types a 64-vertex polygon along their published extent box. The runtime fetches and byte-verifies the catalogue, projects the prepared anchors through the current camera each frame, fades labels toward the limb, admits them by prepared priority without overlap, and shows them only at the closest zoom. The hovered feature’s caption (name, type, diameter, name origin) and its outline, drawn as retained screen chords like the orbit lines, come from the same prepared record.

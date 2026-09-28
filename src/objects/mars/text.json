@@ -100,6 +100,61 @@
       "title": "Where dust covers the ground",
       "detail": "MGS TES",
       "summary": "An infrared index of fine dust cover: low values are dusty, high values dust-free."
+    },
+    "dune-fields": {
+      "title": "USGS dune database fields",
+      "detail": "USGS / THEMIS",
+      "summary": "Moderate to large dune fields mapped in THEMIS images, 65° N to 65° S. Unmarked ground may still hold sand."
+    },
+    "valley-networks": {
+      "title": "Hynek global valley network map",
+      "detail": "THEMIS / MOLA",
+      "summary": "Ancient river valleys mapped across Mars, shown by the 5.2 km cells each valley line crosses."
+    },
+    "alluvial-fans": {
+      "title": "Large alluvial fans in craters",
+      "detail": "THEMIS",
+      "summary": "44 large fans of water-carried sediment inside craters, each marked by the 5.2 km cell holding it."
+    },
+    "gullies": {
+      "title": "CTX global gully survey",
+      "detail": "MRO CTX",
+      "summary": "Young gullies on slopes, coloured by the direction they face; each 5.2 km cell holds at least one."
+    },
+    "glacier-like-forms": {
+      "title": "Martian glacier-like form inventory",
+      "detail": "MRO CTX",
+      "summary": "1,309 small ice-rich glaciers in the mid-latitudes, each marked by the 5.2 km cell at its centre."
+    },
+    "recessional-glfs": {
+      "title": "Glacier-like forms that have shrunk",
+      "detail": "MRO CTX",
+      "summary": "436 glacier-like forms with strong evidence of retreat since a last glacial maximum, one 5.2 km cell each."
+    },
+    "glacial-valleys": {
+      "title": "Valleys cut by glacial meltwater",
+      "detail": "MRO CTX",
+      "summary": "Small valleys carved by meltwater on or beside Amazonian glaciers, one 5.2 km cell each."
+    },
+    "recent-activity": {
+      "title": "Changes seen by HiRISE",
+      "detail": "MRO HiRISE",
+      "summary": "New craters, active gullies and seasonal slope streaks seen forming in repeat HiRISE images."
+    },
+    "hydrous-minerals": {
+      "title": "CRISM and OMEGA hydrous detections",
+      "detail": "MRO CRISM / MEx OMEGA",
+      "summary": "Where infrared spectrometers detected water-altered minerals such as clays and hydrated salts."
+    },
+    "aqueous-classes": {
+      "title": "Water-formed mineral classes",
+      "detail": "CRISM / OMEGA / THEMIS",
+      "summary": "Clays, sulfates, silica, chlorides and carbonates found from orbit, one 5.2 km cell per site."
+    },
+    "chloride-deposits": {
+      "title": "THEMIS chloride-bearing deposits",
+      "detail": "Odyssey THEMIS",
+      "summary": "Salt deposits found in infrared images. Deposits under about 5 km across fall between map cells."
     }
   }
 }

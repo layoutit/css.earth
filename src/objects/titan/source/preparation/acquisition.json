@@ -577,6 +577,30 @@
       ],
       "path": "features/TITAN_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITAN_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-vims"
+      ],
+      "path": "vims/Titan_global_32ppd_2microns_v2.tif",
+      "url": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=90ee84fb-30fe-4a56-92e5-c4c3153a24b0"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-vims"
+      ],
+      "path": "vims/Titan_global_32ppd_5microns_v2.tif",
+      "url": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=9f8686c4-d348-4b15-9364-bc37ec43fb27"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-vims"
+      ],
+      "path": "vims/Titan_global_32ppd_ColorRatio_v2.tif",
+      "url": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=7186b3f4-27a9-4219-8312-5a05808158d0"
     }
   ]
 }

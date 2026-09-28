@@ -34,6 +34,45 @@
       "values": "vesta-iron-counts.npy",
       "longitudes": "vesta-iron-counts-longitude.npy",
       "latitudes": "vesta-iron-counts-latitude.npy"
+    },
+    {
+      "id": "fast-neutrons",
+      "table": "GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "label": "GRD_FAST_NEUTRON_RESIDUAL_MAP.xml",
+      "field": "FAST_NEUTRON_COUNTING_RATE",
+      "unit": "counts/s",
+      "records": 114,
+      "latitudeStepDegrees": 10,
+      "longitudeStepDegrees": 1.5,
+      "values": "vesta-fast-neutrons.npy",
+      "longitudes": "vesta-fast-neutrons-longitude.npy",
+      "latitudes": "vesta-fast-neutrons-latitude.npy"
+    },
+    {
+      "id": "hegr-counts",
+      "table": "GRD_HEGR_COUNTS_MAP.TAB",
+      "label": "GRD_HEGR_COUNTS_MAP.xml",
+      "field": "HEGR_COUNTING_RATE",
+      "unit": "counts/s",
+      "records": 210,
+      "latitudeStepDegrees": 7.5,
+      "longitudeStepDegrees": 1,
+      "values": "vesta-hegr-counts.npy",
+      "longitudes": "vesta-hegr-counts-longitude.npy",
+      "latitudes": "vesta-hegr-counts-latitude.npy"
+    },
+    {
+      "id": "neutron-absorption",
+      "table": "GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "label": "GRD_NEUTRON_ABSORPTION_MAP.xml",
+      "field": "DCP",
+      "unit": "unitless",
+      "records": 204,
+      "latitudeStepDegrees": 7.5,
+      "longitudeStepDegrees": 1,
+      "values": "vesta-neutron-absorption.npy",
+      "longitudes": "vesta-neutron-absorption-longitude.npy",
+      "latitudes": "vesta-neutron-absorption-latitude.npy"
     }
   ]
 }

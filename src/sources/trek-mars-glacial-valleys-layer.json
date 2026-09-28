@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-glacial-valleys-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Supraglacial and Proglacial Valleys (NASA Mars Trek GIS layer Glacial_Valleys_2010)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/0",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/82"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "fassett-2010-glacial-valleys",
+      "evidence": "The Trek catalogue entry for this layer cites Caleb I. Fassett, James L. Dickson, James W. Head, Joseph S. Levy and David R. Marchant (2010), Icarus 208, 86-100."
+    }
+  ],
+  "statements": []
+}

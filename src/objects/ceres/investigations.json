@@ -22,6 +22,24 @@
       ]
     },
     {
+      "id": "dlr-fc-140m-native-cube",
+      "subject": "Native DLR/USGS Dawn FC 140 m global mosaic cube (Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub, the product behind NASA Trek's 59 ppd layer) instead of the WMS render",
+      "status": "excluded",
+      "finding": "Not adopted. The Monochrome lens already shows this mosaic, rendered by the USGS WMS at the full 4096 x 2048 prepared size, so the cube adds no resolution. Reduced by pixel-area mean to the same frame, it keeps the same tone (median transfer is identity) and registration (best shift 0, 0). Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the WebP q80 lane on both and 1.4% at half resolution. Between 34 N and 11 S only 0.1-0.4% change; toward the poles 16-19% change, where the WMS render shows resampling jaggies the area mean does not. Switching needs a reader for tiled ISIS3 byte cubes that the shared reducer lacks, and the cube stores the south-polar gap as value 1, the same value as clipped shadow (11% of its pixels), so the gap cannot be told from terrain by value.",
+      "revisitWhen": "A shared reader for tiled ISIS3 byte cubes exists and DLR or USGS documents the cube's fill value, or the high-latitude crops are judged worth the change.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m",
+        "https://astrogeology.usgs.gov/search/map/Ceres/Dawn/DLR/FramingCamera/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016",
+        "https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
+        }
+      ]
+    },
+    {
       "id": "pia19977-enhanced-color",
       "subject": "NASA PIA19977 false-colour map",
       "status": "included",

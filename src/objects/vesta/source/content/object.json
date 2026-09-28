@@ -253,6 +253,267 @@
             "value": "The archive gives no uncertainty per pixel. Its catalogue gives a preliminary conversion to iron weight percent and advises caution; it is not used here."
           }
         ]
+      },
+      {
+        "id": "fast-neutrons",
+        "label": "Surface elements",
+        "shortLabel": "Fast n",
+        "thumbnail": "/scenes/vesta/vesta-fast-neutrons-thumbnail.webp",
+        "surface": "vesta-fast-neutrons-surface@2x.webp",
+        "poles": "vesta-fast-neutrons-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Fast neutrons",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "1.170",
+            "1.204",
+            "1.237"
+          ],
+          "meta": "counts/s · Dawn GRaND, Dec 2011–May 2012",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+          "image": "/scenes/vesta/vesta-fast-neutrons-legend.webp"
+        },
+        "source": {
+          "id": "dawn-grand-vesta-fast-neutrons",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
+        },
+        "notes": "Fast neutrons counted by Dawn’s GRaND after removing the part that follows hydrogen (Lawrence et al. 2013). What is left follows the average atomic mass of the regolith: heavier, iron-rich basaltic eucrite reads higher than the diogenite of the Rheasilvia basin. The whole map spans only about 5%. One colour per archived pixel, 20 degrees tall. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "surface-elements",
+          "label": "Fast neutrons"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Counts per second left after the hydrogen trend was removed. The level has an arbitrary offset, so only differences between places mean anything."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn’s gamma-ray and neutron detector counted fast neutrons from about 210 km above the surface, December 2011 to January 2012 and April 2012."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Pixels are 20° tall quasi-equal-area cells; the counts were smoothed over the detector footprint first, so the map shows only regional differences."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "The archive gives no uncertainty per pixel; the authors say the smoothing makes it small. This is a counting rate, not a mass in atomic units."
+          }
+        ]
+      },
+      {
+        "id": "hegr",
+        "label": "Surface elements",
+        "shortLabel": "HEGR",
+        "thumbnail": "/scenes/vesta/vesta-hegr-thumbnail.webp",
+        "surface": "vesta-hegr-surface@2x.webp",
+        "poles": "vesta-hegr-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "High-energy gamma rays",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "12.52",
+            "12.83",
+            "13.14"
+          ],
+          "meta": "counts/s · Dawn GRaND, Dec 2011–Apr 2012",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+          "image": "/scenes/vesta/vesta-hegr-legend.webp"
+        },
+        "source": {
+          "id": "dawn-grand-vesta-hegr-counts",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
+        },
+        "notes": "High-energy gamma rays counted by Dawn’s GRaND, corrected for background, viewing geometry and cosmic-ray changes (Peplowski et al. 2013). The rate rises with the heavy major elements in the top few tens of decimetres: eucrite-like terrain reads higher than the diogenite-like floor of Rheasilvia. One colour per archived pixel, 15 degrees tall, each blending about 300 km. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "surface-elements",
+          "label": "High-energy gamma rays"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Counts per second of high-energy gamma rays in the detector. Higher means more heavy major elements; the scale is not a composition."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn’s gamma-ray detector counted high-energy gamma rays from about 210 km above the surface, December 2011 to April 2012."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Pixels are 15° tall quasi-equal-area cells; the footprint is about 300 km across, so the map shows regional differences only."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "Each pixel’s 1-sigma uncertainty is 0.12 to 0.31 counts/s, a large part of the whole range, so neighbouring pixels can differ by noise alone."
+          }
+        ]
+      },
+      {
+        "id": "neutron-absorption",
+        "label": "Surface elements",
+        "shortLabel": "Abs",
+        "thumbnail": "/scenes/vesta/vesta-neutron-absorption-thumbnail.webp",
+        "surface": "vesta-neutron-absorption-surface@2x.webp",
+        "poles": "vesta-neutron-absorption-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Neutron absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−0.036",
+            "−0.003",
+            "0.031"
+          ],
+          "meta": "unitless · Dawn GRaND, Dec 2011–Jan 2012",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+          "image": "/scenes/vesta/vesta-neutron-absorption-legend.webp"
+        },
+        "source": {
+          "id": "dawn-grand-vesta-neutron-absorption",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/"
+        },
+        "notes": "How strongly the regolith absorbs slow neutrons, from thermal and epithermal neutrons counted by Dawn’s GRaND (Prettyman et al. 2013). Absorption depends on Fe, Ca, Al, Mg and other rock-forming elements and rises with the share of basaltic eucrite: the Rheasilvia basin reads low, the dark hemisphere high. One colour per archived pixel, 15 degrees tall, each blending about 300 km. Moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "surface-elements",
+          "label": "Neutron absorption"
+        },
+        "facts": [
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "The archived parameter DCP, which has no unit and rises in step with the neutron absorption cross section. Zero is not “no absorption”."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn’s gamma-ray and neutron detector compared thermal and epithermal neutron counts from about 210 km above the surface, December 2011 to January 2012."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Pixels are 15° tall quasi-equal-area cells; the footprint is about 300 km across, so the map shows regional differences only."
+          },
+          {
+            "id": "limits",
+            "label": "Limits",
+            "value": "The archive gives a conversion to cross section that assumes howardite regolith; it is not applied. Each pixel’s 1-sigma uncertainty is 0.0014 to 0.0075."
+          }
+        ]
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "shortLabel": "Geology",
+        "thumbnail": "/scenes/vesta/vesta-geology-thumbnail.webp",
+        "surface": "vesta-geology-surface@2x.webp",
+        "poles": "vesta-geology-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "meta": "Unit names from the shapefile; colours from the authors' ArcMap layer (0005GeoUnits.lyr).",
+          "sourceUrl": "https://doi.org/10.3847/PSJ/acebe9",
+          "items": [
+            {
+              "label": "Crater material, undifferentiated",
+              "color": "#ffff00"
+            },
+            {
+              "label": "Crater material, greenish-yellow",
+              "color": "#e9ffbe"
+            },
+            {
+              "label": "Crater material, purple",
+              "color": "#ffffbe"
+            },
+            {
+              "label": "Crater material, light blue",
+              "color": "#ffd37f"
+            },
+            {
+              "label": "Crater material, orange",
+              "color": "#e69800"
+            },
+            {
+              "label": "Crater floor material, undifferentiated",
+              "color": "#d3ffbe"
+            },
+            {
+              "label": "Crater floor material, dark purple",
+              "color": "#d1ff73"
+            },
+            {
+              "label": "Crater floor material, light blue",
+              "color": "#55ff00"
+            },
+            {
+              "label": "Crater floor material, orange",
+              "color": "#38a800"
+            },
+            {
+              "label": "Cratered highlands",
+              "color": "#d7c29e"
+            },
+            {
+              "label": "Cratered terrain, greenish-yellow",
+              "color": "#bed2ff"
+            },
+            {
+              "label": "Cratered terrain, purple, blue, and orange mix",
+              "color": "#73b2ff"
+            },
+            {
+              "label": "Cratered terrain, purple and orange, orange rims",
+              "color": "#005ce6"
+            },
+            {
+              "label": "Cratered terrain, light blue, orange and blue rims",
+              "color": "#002673"
+            },
+            {
+              "label": "Landslide material",
+              "color": "#a8a800"
+            },
+            {
+              "label": "Rheasilvia outer flank, greenish-yellow",
+              "color": "#73ffdf"
+            },
+            {
+              "label": "Rheasilvia outer flank, blue, greenish rims",
+              "color": "#00e6a9"
+            },
+            {
+              "label": "Rheasilvia ridge and trough terrain",
+              "color": "#00a884"
+            }
+          ]
+        },
+        "source": {
+          "id": "yingst-2023-geologic-units-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.19475473"
+        },
+        "notes": "Geologic units of the Yingst et al. (2023) global map, drawn in the authors' own ArcMap colours. Units combine landform with Dawn colour-ratio classes, so a name such as “light blue” describes the colour-ratio class, not the map colour. Moved from Claudia Double Prime into the Claudia frame of the other maps. Grey marks the few cells no polygon covers: a thin line at 30° E south of 25° S and the south-pole rows. Contacts and line features are not shown.",
+        "noData": true
       }
     ]
   },

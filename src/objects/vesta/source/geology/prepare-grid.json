@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "shapePath": "Vesta_Global_Yingst_HybridMap_polys24.shp",
+  "attributePath": "Vesta_Global_Yingst_HybridMap_polys24.dbf",
+  "projectionPath": "Vesta_Global_Yingst_HybridMap_polys24.prj",
+  "projectionWkt": "PROJCS[\"SimpleCylindrical_Vesta\",GEOGCS[\"GCS_Vesta\",DATUM[\"D_Vesta\",SPHEROID[\"Vesta\",255000.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Plate_Carree\"],PARAMETER[\"false_easting\",0.0],PARAMETER[\"false_northing\",0.0],PARAMETER[\"central_meridian\",0.0],UNIT[\"Meter\",1.0]]",
+  "coordinateUnits": "equirectangular-meters",
+  "centerLongitude": 0,
+  "radiusMeters": 255000,
+  "width": 2048,
+  "height": 1024,
+  "expectedRecords": 136,
+  "field": "SYMBOL",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "c1",
+      "label": "Crater material, undifferentiated",
+      "color": "#ffff00"
+    },
+    {
+      "value": "c2",
+      "label": "Crater material, greenish-yellow",
+      "color": "#e9ffbe"
+    },
+    {
+      "value": "c3",
+      "label": "Crater material, purple",
+      "color": "#ffffbe"
+    },
+    {
+      "value": "c4",
+      "label": "Crater material, light blue",
+      "color": "#ffd37f"
+    },
+    {
+      "value": "c5",
+      "label": "Crater material, orange",
+      "color": "#e69800"
+    },
+    {
+      "value": "cf1",
+      "label": "Crater floor material, undifferentiated",
+      "color": "#d3ffbe"
+    },
+    {
+      "value": "cf3",
+      "label": "Crater floor material, dark purple",
+      "color": "#d1ff73"
+    },
+    {
+      "value": "cf4",
+      "label": "Crater floor material, light blue",
+      "color": "#55ff00"
+    },
+    {
+      "value": "cf5",
+      "label": "Crater floor material, orange",
+      "color": "#38a800"
+    },
+    {
+      "value": "ch",
+      "label": "Cratered highlands",
+      "color": "#d7c29e"
+    },
+    {
+      "value": "ct1",
+      "label": "Cratered terrain, greenish-yellow",
+      "color": "#bed2ff"
+    },
+    {
+      "value": "ct2",
+      "label": "Cratered terrain, purple, blue, and orange mix",
+      "color": "#73b2ff"
+    },
+    {
+      "value": "ct3",
+      "label": "Cratered terrain, purple and orange, orange rims",
+      "color": "#005ce6"
+    },
+    {
+      "value": "ct4",
+      "label": "Cratered terrain, light blue, orange and blue rims",
+      "color": "#002673"
+    },
+    {
+      "value": "lm",
+      "label": "Landslide material",
+      "color": "#a8a800"
+    },
+    {
+      "value": "Rof1",
+      "label": "Rheasilvia outer flank, greenish-yellow",
+      "color": "#73ffdf"
+    },
+    {
+      "value": "Rof2",
+      "label": "Rheasilvia outer flank, blue, greenish rims",
+      "color": "#00e6a9"
+    },
+    {
+      "value": "rtR",
+      "label": "Rheasilvia ridge and trough terrain",
+      "color": "#00a884"
+    }
+  ],
+  "output": "vesta-geologic-units.tif",
+  "receipt": "vesta-geologic-units.json",
+  "outputFrame": {
+    "source": "Claudia Double Prime",
+    "target": "Dawn Claudia",
+    "targetMinusSourceLongitudeDegrees": 210,
+    "evidence": [
+      "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
+      "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/DOCUMENT/VESTA_COORDINATES/VESTA_COORDINATES_131018.HTM"
+    ]
+  },
+  "colorSource": {
+    "path": "0005GeoUnits.lyr",
+    "extractor": "tools/objects/source-authoring/esri-symbology.mts",
+    "headingByteOffset": 3340,
+    "note": "All 39 stored L*a*b* colours convert to integer RGB within 1.0e-6 under Apple RGB primaries, gamma 1.8 and D65; plain sRGB leaves up to 0.498."
+  }
+}

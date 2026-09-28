@@ -47,6 +47,23 @@
       ]
     },
     {
+      "id": "usgs-mdis-md3-color",
+      "subject": "USGS MESSENGER MDIS MD3 color global mosaic, 665 m, edition 1 (2016)",
+      "status": "included",
+      "finding": "Added as the Color lens. USGS places the 1000, 750 and 430 nm filter images in red, green and blue (PDS data set MESS-H-MDIS-5-RDR-MD3-V1.0), each photometrically normalized and stretched about 0-0.2 reflectance into 8 bits. The enhanced mosaic is built from the same bands but shows principal components and the 430/1000 nm ratio, so the two differ: 26.5% of pixels at pixelmatch threshold 0.1. It is reduced with the same native pixel-area mean as the other native maps; 25 independent footprints match. Gaps beyond about 84N and 80S are the gray grid, the same pixels as in the enhanced map. 1000 nm is outside human vision, so it is not natural color.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m",
+        "https://astrogeology.usgs.gov/ckan/dataset/fc37692f-e806-4632-b300-0250bb61c3de/resource/0313deb7-ad46-4ad9-96fd-cd7e8886443c/download/mercury_messenger_mdis_basemap_md3color_mosaic_global_665m_pds3.lbl",
+        "https://planetarymaps.usgs.gov/mosaic/Mercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m.tif"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
+        }
+      ]
+    },
+    {
       "id": "enhanced-color-polar-completion",
       "subject": "Modelled completion of the enhanced-colour polar no-data pixels",
       "status": "excluded",

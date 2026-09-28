@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "Gullied_Landform_Survey_2015_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "jC_fillclr",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "0 255 255 255",
+      "label": "Pole-facing gullies",
+      "color": "#00ffff"
+    },
+    {
+      "value": "255 0 0 255",
+      "label": "Equator-facing gullies",
+      "color": "#ff0000"
+    },
+    {
+      "value": "255 255 0 255",
+      "label": "East- or west-facing gullies",
+      "color": "#ffff00"
+    },
+    {
+      "value": "204 0 204 255",
+      "label": "No preferred orientation",
+      "color": "#cc00cc"
+    },
+    {
+      "value": "more than one class",
+      "label": "More than one class in the cell",
+      "color": "#ffffff"
+    }
+  ],
+  "sharedCellCategory": "more than one class",
+  "layers": [
+    {
+      "esriJsonPath": "Gullied_Landform_Survey_2015_clon0.query-01.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Gullied_Landform_Survey_2015_clon0.query-02.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Gullied_Landform_Survey_2015_clon0.query-03.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Gullied_Landform_Survey_2015_clon0.query-04.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Gullied_Landform_Survey_2015_clon0.query-05.json",
+      "expectedRecords": 978
+    }
+  ],
+  "output": "mars-gullies.tif",
+  "receipt": "mars-gullies.json"
+}

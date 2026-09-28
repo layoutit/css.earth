@@ -1,0 +1,621 @@
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 1
+    NAME                      = "PIXEL_INDEX"
+    DATA_TYPE                 = ASCII_INTEGER
+    START_BYTE                = 1
+    BYTES                     = 10
+    FORMAT                    = "I10"
+    DESCRIPTION               = "Index of the pixel in the map 
+       to which the remaining values in this row apply. The map
+       covers -90 to 90 degrees latitude and -180 to 180 degrees 
+       longitude. Pixels are indexed from west to east and from 
+       south to north in the map, beginning with 0."
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 2
+    NAME                      = "MIN_LAT"
+    DATA_TYPE                 = ASCII_REAL
+    UNIT                      = "deg"
+    START_BYTE                = 11
+    BYTES                     = 7
+    FORMAT                    = "F7.1"
+    DESCRIPTION               = "Pixel latitude southernmost boundary"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 3
+    NAME                      = "MAX_LAT"
+    DATA_TYPE                 = ASCII_REAL
+    UNIT                      = "deg"
+    START_BYTE                = 18
+    BYTES                     = 7
+    FORMAT                    = "F7.1"
+    DESCRIPTION               = "Pixel latitude northernmost boundary"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 4
+    NAME                      = "MIN_LON"
+    DATA_TYPE                 = ASCII_REAL
+    UNIT                      = "deg"
+    START_BYTE                = 25
+    BYTES                     = 7
+    FORMAT                    = "F7.1"
+    DESCRIPTION               = "Pixel longitude westernmost boundary.
+       Longitude increases to the east."
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 5
+    NAME                      = "MAX_LON"
+    DATA_TYPE                 = ASCII_REAL
+    UNIT                      = "deg"
+    START_BYTE                = 32
+    BYTES                     = 7
+    FORMAT                    = "F7.1"
+    DESCRIPTION               = "Pixel longitude easternmost boundary.
+       Longitude increases to the east."
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 6
+    NAME                      = "AM"
+    DATA_TYPE                 = ASCII_REAL
+    UNIT                      = "g/mol"
+    START_BYTE                = 39
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Average atomic mass"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 7
+    NAME                      = "NEUTRON_DEN"
+    DATA_TYPE                 = ASCII_REAL
+    UNIT                      = "g/cm**3"
+    START_BYTE                = 54
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Neutron number density"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 8
+    NAME                      = "W_MGO"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 69
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction MgO, g/g"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 9
+    NAME                      = "W_AL2O3"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 84
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction Al2O3, g/g"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 10
+    NAME                      = "W_SIO2"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 99
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction SiO2, g/g"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 11
+    NAME                      = "W_CAO"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 114
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction CaO, g/g"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 12
+    NAME                      = "TIO2"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 129
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction TiO2, g/g"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 13
+    NAME                      = "W_FEO"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 144
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction FeO, g/g"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 14
+    NAME                      = "W_K"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 159
+    BYTES                     = 15
+    FORMAT                    = "E14.4"
+    DESCRIPTION               = "Weight fraction K, ppm"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 15
+    NAME                      = "W_TH"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 174
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Weight fraction Th, ppm"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 16
+    NAME                      = "W_U"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 189
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Weight fraction U (tied U=0.27Th), ppm"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 17
+    NAME                      = "E[0,0]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 204
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 18
+    NAME                      = "E[0,1]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 219
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 19
+    NAME                      = "E[0,2]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 234
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 20
+    NAME                      = "E[0,3]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 249
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 21
+    NAME                      = "E[0,4]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 264
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 22
+    NAME                      = "E[0,5]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 279
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 23
+    NAME                      = "E[0,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 294
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 24
+    NAME                      = "E[0,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 309
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 25
+    NAME                      = "E[0,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 324
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 26
+    NAME                      = "E[1,1]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 339
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 27
+    NAME                      = "E[1,2]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 354
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 28
+    NAME                      = "E[1,3]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 369
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 29
+    NAME                      = "E[1,4]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 384
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 30
+    NAME                      = "E[1,5]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 399
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 31
+    NAME                      = "E[1,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 414
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 32
+    NAME                      = "E[1,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 429
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 33
+    NAME                      = "E[1,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 444
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 34
+    NAME                      = "E[2,2]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 459
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 35
+    NAME                      = "E[2,3]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 474
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 36
+    NAME                      = "E[2,4]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 489
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 37
+    NAME                      = "E[2,5]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 504
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 38
+    NAME                      = "E[2,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 519
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 39
+    NAME                      = "E[2,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 534
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 40
+    NAME                      = "E[2,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 549
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 41
+    NAME                      = "E[3,3]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 564
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 42
+    NAME                      = "E[3,4]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 579
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 43
+    NAME                      = "E[3,5]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 594
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 44
+    NAME                      = "E[3,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 609
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 45
+    NAME                      = "E[3,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 624
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 46
+    NAME                      = "E[3,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 639
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 47
+    NAME                      = "E[4,4]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 654
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 48
+    NAME                      = "E[4,5]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 669
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 49
+    NAME                      = "E[4,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 684
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 50
+    NAME                      = "E[4,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 699
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 51
+    NAME                      = "E[4,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 714
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 52
+    NAME                      = "E[5,5]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 729
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 53
+    NAME                      = "E[5,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 744
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 54
+    NAME                      = "E[5,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 759
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 55
+    NAME                      = "E[5,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 774
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 56
+    NAME                      = "E[6,6]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 789
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 57
+    NAME                      = "E[6,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 804
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 58
+    NAME                      = "E[6,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 819
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 59
+    NAME                      = "E[7,7]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 834
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 60
+    NAME                      = "E[7,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 849
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN
+
+  OBJECT                      = COLUMN
+    COLUMN_NUMBER             = 61
+    NAME                      = "E[8,8]"
+    DATA_TYPE                 = ASCII_REAL
+    START_BYTE                = 864
+    BYTES                     = 15
+    FORMAT                    = "F14.4"
+    DESCRIPTION               = "Error matrix component"
+  END_OBJECT                  = COLUMN

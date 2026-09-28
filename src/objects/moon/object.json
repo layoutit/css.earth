@@ -99,6 +99,11 @@
               "material": "lighting"
             },
             {
+              "id": "roughness",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "crust",
               "source": "content",
               "material": "lighting"
@@ -160,6 +165,26 @@
             },
             {
               "id": "optical-maturity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "thorium",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "potassium",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "iron-gamma",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "titanium",
               "source": "content",
               "material": "lighting"
             }

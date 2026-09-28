@@ -1,0 +1,62 @@
+{
+  "id": "yingst-2023-vesta-global-geologic-map-linework",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Linework for Vesta global map in ArcGIS format",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.19475473"
+    }
+  ],
+  "creators": [
+    "Scott Mest",
+    "R. Aileen Yingst",
+    "Daniel Berman",
+    "W. Brent Garry",
+    "David Williams",
+    "Tracy Gregg"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2026-04-08",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.5281/zenodo.19475473",
+      "label": "ArcGIS layer package"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/PSJ/acebe9",
+      "label": "Yingst et al. (2023), The Planetary Science Journal 4:157"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/19475473",
+      "checkedOn": "2026-09-27",
+      "locator": "metadata, creators, CC-BY-4.0 license and the md5 of Yingst_Vesta_Global_Map_2024.lpk"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mest, Yingst, Berman, Garry, Williams and Gregg, linework of the Vesta global geologic map published as Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9; funded by NASA DDAP grant NNX15AI89G.",
+      "scope": "Geologic unit polygons and their layer symbology",
+      "evidence": "https://zenodo.org/api/records/19475473"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; cite Yingst et al. (2023).",
+      "scope": "Geologic unit polygons and their layer symbology",
+      "evidence": "https://zenodo.org/api/records/19475473"
+    },
+    {
+      "kind": "limitation",
+      "text": "Longitudes are in Claudia Double Prime, 210 degrees from the Dawn Claudia frame of the other Vesta maps; unit names carry Dawn colour-ratio classes, not the map's own symbol colours.",
+      "scope": "Placement and legend",
+      "evidence": "src/objects/vesta/investigations.json"
+    }
+  ]
+}

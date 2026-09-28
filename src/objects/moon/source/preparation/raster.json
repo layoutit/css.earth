@@ -234,6 +234,44 @@
       }
     },
     {
+      "id": "roughness",
+      "source": "science/lola/ldrm_16.img",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "ldrm_16.img",
+          "labelPath": "ldrm_16.lbl",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.5,
+          "maximum": 2.0,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "m residual standard deviation, 30-120 m baseline",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "pixelsPerDegree": 16,
+            "firstCentreLongitude": 0.03125,
+            "firstCentreLatitude": 89.96875,
+            "labelExtent": "edges",
+            "datasetId": "LRO-L-LOLA-4-GDR-V1.0",
+            "productId": "LDRM_16",
+            "noData": -32768
+          }
+        }
+      }
+    },
+    {
       "id": "crust",
       "source": "lenses/grail-crustal-thickness-print.jpg",
       "falseColor": true,
@@ -1256,6 +1294,154 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "id": "thorium",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "W_TH",
+          "columnDescription": "Weight fraction Th, ppm",
+          "errorColumn": "E[7,7]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 10,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "ppm",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "potassium",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "W_K",
+          "columnDescription": "Weight fraction K, ppm",
+          "errorColumn": "E[6,6]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 3500,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "ppm",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "iron-gamma",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "W_FEO",
+          "columnDescription": "Weight fraction FeO, g/g",
+          "errorColumn": "E[5,5]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 25,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "weight % FeO",
+          "valueTransform": {
+            "scale": 100,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "titanium",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "TIO2",
+          "columnDescription": "Weight fraction TiO2, g/g",
+          "errorColumn": "E[4,4]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 8,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "weight % TiO2",
+          "valueTransform": {
+            "scale": 100,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
         }
       }
     }

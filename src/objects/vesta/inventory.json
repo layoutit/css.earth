@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "vesta-arrival.webp",
-      "bytes": 118210,
-      "sha256": "8b3dbaac2049de5b03818a7c2abd67d40c6063c47ea1099028f7c0fd981525f9"
+      "bytes": 135628,
+      "sha256": "98ba5b0c3a14be4f67c1f67eaee516126be47d7754cd8990332dd21dd9182bf6"
     },
     {
       "location": "public",
@@ -16,26 +16,26 @@
     {
       "location": "public",
       "filename": "vesta-elevation-shadow-alpha@2x.webp",
-      "bytes": 725822,
-      "sha256": "f63816d726bc1f08c7f6d0f55e3f2c22ad437390ca2a117e1b8147776ac918f0"
+      "bytes": 661776,
+      "sha256": "ed97b326918ae1f1f7db47d4ab860677cf931829c7ca58752744d47d9c04fb1d"
     },
     {
       "location": "public",
       "filename": "vesta-elevation-shadow@2x.webp",
-      "bytes": 296816,
-      "sha256": "eaca432d78014b075b7afe791b54720f5249db29df737d331d9cd4104c46aa55"
+      "bytes": 273382,
+      "sha256": "c5f664dcfe853bf1bf155e51efc336ba19f8eff0ffe3d7a3946fdfd4189ad621"
     },
     {
       "location": "public",
       "filename": "vesta-elevation-surface-alpha@2x.webp",
-      "bytes": 1061170,
-      "sha256": "bf1fabf1199c87c1f47fa10e6485444f7a7d49e4f07026c1df3f8737f07b9e5e"
+      "bytes": 986634,
+      "sha256": "95be2c438bdb3e49f3cc154267223e714010949890dfb9e39b1624e538659428"
     },
     {
       "location": "public",
       "filename": "vesta-elevation-surface@2x.webp",
-      "bytes": 765156,
-      "sha256": "7ef54677f94a6a651550411fbe372603a44c1ee54c1756ed1c1e4a3f29f3d9fd"
+      "bytes": 717522,
+      "sha256": "fd8129b9b1778a90667a8f9112a20fe4c6f391264925087d1efbe291140f3226"
     },
     {
       "location": "public",
@@ -45,39 +45,141 @@
     },
     {
       "location": "public",
+      "filename": "vesta-fast-neutrons-legend.webp",
+      "bytes": 188,
+      "sha256": "59eca8ceb5cc55f626f4750398989393d9313bd64f3e8d5a5dd54ccad501c9ea"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-fast-neutrons-shadow-alpha@2x.webp",
+      "bytes": 986508,
+      "sha256": "86d43bdfbcd8e6d18359c209b624d23bc514d426f1fd3d82842c8b7920c46ca9"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-fast-neutrons-shadow@2x.webp",
+      "bytes": 403436,
+      "sha256": "8ee7299d83a7f59c55c2ee73c4b5bfb2b356534024edbc131bfca59c22e1115c"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-fast-neutrons-surface-alpha@2x.webp",
+      "bytes": 619864,
+      "sha256": "47ea34f36873e86c814b073cbfa9185418ffb0353fb0b186a208819012dea48b"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-fast-neutrons-surface@2x.webp",
+      "bytes": 53872,
+      "sha256": "3f5ba6ae240dd34e068d1624e05b1c9009d7a5d8aad5260122adf7b1511f0045"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-fast-neutrons-thumbnail.webp",
+      "bytes": 354,
+      "sha256": "954e5b5f6bf8b844c21ee1cbb2086eaaa4e4ed22ae227b07711ba703382524b7"
+    },
+    {
+      "location": "public",
       "filename": "vesta-features.json",
       "bytes": 175474,
       "sha256": "578c840c7cc006a86c04c4a6e269a83e4a66467c992a3e90066f3655a0d2db0a"
     },
     {
       "location": "public",
+      "filename": "vesta-geology-shadow-alpha@2x.webp",
+      "bytes": 270270,
+      "sha256": "1de8e14973298650a043e96a4dc7a52fcbc59aed88c841b9fcad04c3269acb5b"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-geology-shadow@2x.webp",
+      "bytes": 131486,
+      "sha256": "5665e2a67dbf3ac234ae7635257fc1cb65653da69ff107e2adf29e85a6d9413e"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-geology-surface-alpha@2x.webp",
+      "bytes": 167494,
+      "sha256": "ac14d6da5d8fb5ebf02b23e581485b917d619bed182a5ff81dca32abd85c1757"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-geology-surface@2x.webp",
+      "bytes": 17624,
+      "sha256": "acbf54722c3508a1339e3816ecf9cc87044c37b7d85edf4cef48906e42d0dc70"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-geology-thumbnail.webp",
+      "bytes": 752,
+      "sha256": "4fa325f9461fad7d0d26b9d4b5ab71ff59cc1d054f6a2cd61a3ccd350ff54210"
+    },
+    {
+      "location": "public",
       "filename": "vesta-hamo-shadow-alpha@2x.webp",
-      "bytes": 643192,
-      "sha256": "9674353b44e8b75ed564879a25913383670a7af52c2b1bb2697f15cffe9a880c"
+      "bytes": 584738,
+      "sha256": "aaa59905c3ecdb25c3713458ee1bc7e32d8880580df644c72795fb5c6e0207cf"
     },
     {
       "location": "public",
       "filename": "vesta-hamo-shadow@2x.webp",
-      "bytes": 241824,
-      "sha256": "689cb94ba364ca18be0c580db5d0c841fe1e327bb2e9592f26630effbf0edc68"
+      "bytes": 224502,
+      "sha256": "5d6d87cff2ca2736bf7d8b5276d56c33c887c37eef9a486490e60f039400eb6c"
     },
     {
       "location": "public",
       "filename": "vesta-hamo-surface-alpha@2x.webp",
-      "bytes": 1010496,
-      "sha256": "21687895f4defb10d0e4a61218425db6ad4e29e255b0252b81f15f2380984abf"
+      "bytes": 942078,
+      "sha256": "6d72f756c1d9bb2fe8a22a398f2d7a54bd1db600f4864c7c2020283f0462017c"
     },
     {
       "location": "public",
       "filename": "vesta-hamo-surface@2x.webp",
-      "bytes": 746722,
-      "sha256": "8baaee325d2ac16a333bd9a2156967c3d64a7bc092e1a324da28f91e3f4ba284"
+      "bytes": 706576,
+      "sha256": "ee4f77ea3a661cc55489c0408ff761b6d3a4f0966a65456c2c20eb2ad87b067b"
     },
     {
       "location": "public",
       "filename": "vesta-hamo-thumbnail.webp",
       "bytes": 3876,
       "sha256": "8291e8d71afabb804730646689eb766543d1e84cce983bf13ec71cd6a9d8fbf9"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hegr-legend.webp",
+      "bytes": 188,
+      "sha256": "59eca8ceb5cc55f626f4750398989393d9313bd64f3e8d5a5dd54ccad501c9ea"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hegr-shadow-alpha@2x.webp",
+      "bytes": 989946,
+      "sha256": "063089e0083a8b779d1878d82174c111cc12a9f2efa42cfbab9cd1cc64ded720"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hegr-shadow@2x.webp",
+      "bytes": 405276,
+      "sha256": "53719b18cc94930a0e09e99d19906390d324b399931e4b31309794fc55417614"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hegr-surface-alpha@2x.webp",
+      "bytes": 644734,
+      "sha256": "5e747515bdf56da3382fbcfef05887923ffdc5c0145974ca1a833fe2376917e7"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hegr-surface@2x.webp",
+      "bytes": 74800,
+      "sha256": "84b49471adde77fe9cc07655f6581f27a4ee60c7a27c1e70e6993b13d81f8667"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-hegr-thumbnail.webp",
+      "bytes": 652,
+      "sha256": "c737a91c2de74f48031a2b23491d366ce387c848fe37af87b2f78fe324b0d636"
     },
     {
       "location": "public",
@@ -88,26 +190,26 @@
     {
       "location": "public",
       "filename": "vesta-hydrogen-shadow-alpha@2x.webp",
-      "bytes": 1336496,
-      "sha256": "1ca24bc1f19bbeba337efe8c811f7da10a752b54e595d35f82b2ac47a2718ae7"
+      "bytes": 1288134,
+      "sha256": "9bfeed6d5957579165476ab58a0dcf19483780f4cc3f150bbcf02dddf1b894af"
     },
     {
       "location": "public",
       "filename": "vesta-hydrogen-shadow@2x.webp",
-      "bytes": 700832,
-      "sha256": "c815104d9d392b7e0159f99fc03110a65c59a2628ae09ae29a222f5d2ec79530"
+      "bytes": 699592,
+      "sha256": "6b12fb1282220389d733c7c7d23d6f80a05db8e2a96f3526b01171be3adb95d8"
     },
     {
       "location": "public",
       "filename": "vesta-hydrogen-surface-alpha@2x.webp",
-      "bytes": 1083796,
-      "sha256": "ed4f6a56eebe4c1949e2e526cb44f4349118b974b12fed68a19cd3a39ae3b081"
+      "bytes": 1035182,
+      "sha256": "121397fafe04e65bbd0db3d3844a68517c5acaf8c76bc405886003a2e8d3d044"
     },
     {
       "location": "public",
       "filename": "vesta-hydrogen-surface@2x.webp",
-      "bytes": 396228,
-      "sha256": "0aca3c54a6565855e5ac3e7da84bb1097be962bdde31fcc92805c89691505045"
+      "bytes": 393600,
+      "sha256": "cf9d3e355ce2b30940887a28447adb933b0f07226a189b493f3eb86e3a964b41"
     },
     {
       "location": "public",
@@ -124,26 +226,26 @@
     {
       "location": "public",
       "filename": "vesta-iron-shadow-alpha@2x.webp",
-      "bytes": 1643754,
-      "sha256": "cf23a58b26b9c343f42873165a30d3601ae33207afadde30317f74e840014d39"
+      "bytes": 1598842,
+      "sha256": "fdd4ab4b0d57868ece9b20472375cd42e39d9f84a7169bb5cde4b42e8e17cb13"
     },
     {
       "location": "public",
       "filename": "vesta-iron-shadow@2x.webp",
-      "bytes": 1018868,
-      "sha256": "6f600fd7addfd4c2b6bb01d1820d8e5aeff1db04c442bc516e4f47e0bbe8e0d8"
+      "bytes": 1018608,
+      "sha256": "2c01d0298a53318ce6aa95406c9e743508446da28b243a2a6a6572142aae3c66"
     },
     {
       "location": "public",
       "filename": "vesta-iron-surface-alpha@2x.webp",
-      "bytes": 1607194,
-      "sha256": "87f97b368d72ded07a3269a194b9d62c3264d38c9103ea9d50c19aef6da60e17"
+      "bytes": 1564542,
+      "sha256": "ef45f2489c5bc9bd5d7a41530ffdc4b1008cea915703a47cdec6824741c631cc"
     },
     {
       "location": "public",
       "filename": "vesta-iron-surface@2x.webp",
-      "bytes": 849184,
-      "sha256": "80cea6ccf5a4293fe3205509bf5240de8ff2e96f2f47d431015c32706d784b95"
+      "bytes": 847988,
+      "sha256": "7db9aa1e47d348dacf42ebbe74e7d6d92b753f510e3260e6c0b07f450c8e6281"
     },
     {
       "location": "public",
@@ -153,27 +255,63 @@
     },
     {
       "location": "public",
+      "filename": "vesta-neutron-absorption-legend.webp",
+      "bytes": 188,
+      "sha256": "59eca8ceb5cc55f626f4750398989393d9313bd64f3e8d5a5dd54ccad501c9ea"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-neutron-absorption-shadow-alpha@2x.webp",
+      "bytes": 993554,
+      "sha256": "8abe25a7aecde43d8124be300bbddb6b936f9319ff5eefe80eb751fc31e78fed"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-neutron-absorption-shadow@2x.webp",
+      "bytes": 408954,
+      "sha256": "35792f91fb5c49836ad3426ee9e246c0eeb68113d732a0473d7bf0d1d83461cd"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-neutron-absorption-surface-alpha@2x.webp",
+      "bytes": 645168,
+      "sha256": "9a68782b02b1bc320e3830101c502a3a10b8285c4d28fc7382cd76b3e40efcc9"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-neutron-absorption-surface@2x.webp",
+      "bytes": 74260,
+      "sha256": "70617fa190b1d1dd7a9e504ca7aafb253f6033c1d2eb315d1af924862290f796"
+    },
+    {
+      "location": "public",
+      "filename": "vesta-neutron-absorption-thumbnail.webp",
+      "bytes": 638,
+      "sha256": "aec84639946cc8964e573ce8e3a3758600b2f0f772e046dbcdc3358bbacf5794"
+    },
+    {
+      "location": "public",
       "filename": "vesta-normal-shadow-alpha@2x.webp",
-      "bytes": 672448,
-      "sha256": "6dab2e2374bacedc4708b08a9529a19d5c52dd63fa3c6f8d97c5af7c97fcc601"
+      "bytes": 611328,
+      "sha256": "8b7d21897fe681c18e4531496f5a1dfdf3d3f39e963064690d3b637f937a5eef"
     },
     {
       "location": "public",
       "filename": "vesta-normal-shadow@2x.webp",
-      "bytes": 336622,
-      "sha256": "79e8228712b11537630b149836e781605a25ac34aa13c0f63e0e9149154a4973"
+      "bytes": 319746,
+      "sha256": "052428116f1682d6b6cd52eb0060d055173a36092471d39eb999a7393fa64d50"
     },
     {
       "location": "public",
       "filename": "vesta-normal-surface-alpha@2x.webp",
-      "bytes": 1131958,
-      "sha256": "26732de0c269fda8a8cfcacaa99e6923e5e6430fb0759b8a514db6daaf263a98"
+      "bytes": 1057572,
+      "sha256": "3331a2958746c0930802da0728f09b40c807d13360228a2318bf1f98f5258d21"
     },
     {
       "location": "public",
       "filename": "vesta-normal-surface@2x.webp",
-      "bytes": 1331058,
-      "sha256": "590c5fb7cffd5a76be8072dfed8046d9d17b31b25cd4206667cb9be362130ce0"
+      "bytes": 1303238,
+      "sha256": "7a59d1adde66bc9ba82a175f981b7822482c5757cbeb4e9e6ff73fbdc66a12da"
     },
     {
       "location": "public",
@@ -184,26 +322,26 @@
     {
       "location": "public",
       "filename": "vesta-ratios-shadow-alpha@2x.webp",
-      "bytes": 796262,
-      "sha256": "ef471e8aef3a8404e61cf86600b130f091cf6f9ec060ec8622d5ec73437926b1"
+      "bytes": 741320,
+      "sha256": "914d880cb951dbb59f40eaa1bb90336365a6bcbbff645b3fdf86d4cbd17fb146"
     },
     {
       "location": "public",
       "filename": "vesta-ratios-shadow@2x.webp",
-      "bytes": 440176,
-      "sha256": "9d54b65017c0788c9208c131e9d6ab090dd409e28d0ae715f58db0ca4726434c"
+      "bytes": 420324,
+      "sha256": "7e6637f895623c073105f3e9fdd3945f711f1e089c6ad46725655ab371d8c6ef"
     },
     {
       "location": "public",
       "filename": "vesta-ratios-surface-alpha@2x.webp",
-      "bytes": 1525392,
-      "sha256": "4b6cf70f87fe59112d4f3d139b68bea51d670f6c22409b79b40d411bd5b5e950"
+      "bytes": 1439190,
+      "sha256": "3581a24c0ca6e5c1de846f7445f4c72d0de04f5f5c043920dc09dee865109ae2"
     },
     {
       "location": "public",
       "filename": "vesta-ratios-surface@2x.webp",
-      "bytes": 1382946,
-      "sha256": "1845c0a9c91c78d4bb29763fbb6a06b6d7af468ff0635f3712214793644e6a8d"
+      "bytes": 1343158,
+      "sha256": "6643d1af433af8484701d94513e1801e9f83d929431a63ecb12547ab17b03872"
     },
     {
       "location": "public",
@@ -214,26 +352,26 @@
     {
       "location": "public",
       "filename": "vesta-surface-shadow-alpha@2x.webp",
-      "bytes": 756180,
-      "sha256": "5970a1391e0c6a162d6001c335374860f2289ae2f231ec98acf2d8c9b4457384"
+      "bytes": 699024,
+      "sha256": "38728f5b27f255c4503025905d012733a767fea304e6b6719b19bd7abc7d9ca7"
     },
     {
       "location": "public",
       "filename": "vesta-surface-shadow@2x.webp",
-      "bytes": 406032,
-      "sha256": "b76a358da032a19a350916b906c6f83e7a9ffd21b5da2828fe06a72f6ffbf263"
+      "bytes": 378944,
+      "sha256": "2e308df54522b14f1f51fb58625564fbe85ac927cf4e64564ed7146cb1913632"
     },
     {
       "location": "public",
       "filename": "vesta-surface-surface-alpha@2x.webp",
-      "bytes": 1453568,
-      "sha256": "b330768e8c0f08bffb997017b7ce85acf5c2f22ed867a6e8e151ed5873e8adda"
+      "bytes": 1337820,
+      "sha256": "0bc436921dfbc4421a5769d90abc9ac42b7c3b5e52d42e8c5b5304e34a0286d0"
     },
     {
       "location": "public",
       "filename": "vesta-surface-surface@2x.webp",
-      "bytes": 1212660,
-      "sha256": "d74615d206382a9c44d0c9fd42b5cfd4304c310dc8f73d7dfc45dbed9aafc610"
+      "bytes": 1150624,
+      "sha256": "b35c8e50742a40602ef90e22afab792ed11cc807faeeaff9b307a952ce4bf089"
     },
     {
       "location": "public",
@@ -244,14 +382,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 297,
-      "sha256": "3ba79f6082e0a5d7aea250c9db09d8cce0d2b133a25198a1c05690b8d47fbc01"
+      "bytes": 296,
+      "sha256": "9766a0ea249c654e7c046ccd0362a6ecd2c419346da79ea21289799a2df3e0d6"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1628,
-      "sha256": "2c2c57caf979553b1cca84b3d5626df6912a52c28ba9ffaba43d77da89d15d01"
+      "bytes": 2634,
+      "sha256": "8c8c46287908324c5c56ab642a4f2ab51dc746406c2f0c81101906dc87a533b1"
     },
     {
       "location": "prepared",
@@ -262,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3506,
-      "sha256": "0030490b5bcd16a35e2f15d24b6eec1fc7b9733abeaaa880b7dcc77746f7fa4a"
+      "bytes": 8927,
+      "sha256": "8a5c718d200b54a91058bbea3019e56b2fb2032962ba4bbd6103c6c91e0afecb"
     },
     {
       "location": "prepared",
@@ -274,20 +412,20 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 5913,
-      "sha256": "801ce9fd4f8bec1c88693e2cb505f4b483f286b7dd428c6878490bdd1b670864"
+      "bytes": 13208,
+      "sha256": "73ace91a73402b67c442721540ee57403c4b66a4211e12134bac10249120dde2"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 11825,
-      "sha256": "3538c1fe48f708e3379002185e632ce22f79046073d12f6f2a1c3629bdcc6283"
+      "bytes": 19934,
+      "sha256": "da4184ce2494e65c289e3efb93cc4086e21d9362dff04e8a8dee83ccd686b150"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 514,
-      "sha256": "294f17c795b19c84948f952e570644c71bbe6f20f4c12a1a8402729363b7ab82"
+      "bytes": 834,
+      "sha256": "abff00b189721b8003b5e638dae1381d649d57d4dd0276208ed80ae47f9af357"
     },
     {
       "location": "prepared",
@@ -297,9 +435,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/fast-neutrons.webp",
+      "bytes": 1794,
+      "sha256": "f0bcd046d7c7e92efafcbcfcb8b0d51676de33d949e51584b0f61ce4b74d5789"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/geology.webp",
+      "bytes": 12252,
+      "sha256": "a16a4d807a8d06c979a6a2b4d92b1a8c85a3f45dbff958e64cd4010b152f731f"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/hamo.webp",
       "bytes": 15104,
       "sha256": "896ddf2d56a762196814e772b4f61ea75428933f772fd830bc66093d03023418"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/hegr.webp",
+      "bytes": 2692,
+      "sha256": "331431ea5d01305f3817d7d9623784bd554c7b22f6bbc6601817fcef9eb44202"
     },
     {
       "location": "prepared",
@@ -312,6 +468,12 @@
       "filename": "minimaps/iron.webp",
       "bytes": 2616,
       "sha256": "12553866bd1fd3034271c17beed0e51bf7c51b97bc9a3c3e5ff4937f0735d00e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/neutron-absorption.webp",
+      "bytes": 2370,
+      "sha256": "dba4d2b9865acf2d52e9e850e567a7bb96a53d108063b5b3c64506f94aaa996e"
     },
     {
       "location": "prepared",
@@ -334,14 +496,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 647952,
-      "sha256": "98ba0a6ba6980cdd763469467aafedbca0560b3f22fdaa6cfe2c020e3056d5ef"
+      "bytes": 662013,
+      "sha256": "c84ed86bb55190648d8330503fb0388b79544a0898400d82610d6afd18a31c0a"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 595043,
-      "sha256": "0a7b37957a24e59d8904e72e6425d356d381590600afb53033ac28acaebddc1c"
+      "bytes": 588151,
+      "sha256": "4bd9f001d0c091ad6a68869f537978072104925ae790894753f4cf4a7d90aa35"
     },
     {
       "location": "prepared",
@@ -358,14 +520,14 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 11828,
-      "sha256": "f8de716e5de5af25fb6879d06c2f3b07ccead92c1b912f1a89b88486e30ced43"
+      "bytes": 19937,
+      "sha256": "86252c60610b4e9b54a389e11a2ce06e22ee67a0633e4c4d39a40d2c43ac100c"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2647,
-      "sha256": "dade21ada268683d4076049ac73c94cc38eaf3a3ba2368b01cc4c50087098e5a"
+      "bytes": 3484,
+      "sha256": "94557925dcf195f1ab2d983911d529685aeda6aa768a7fdb26ec8c60a169a5dc"
     },
     {
       "location": "prepared",

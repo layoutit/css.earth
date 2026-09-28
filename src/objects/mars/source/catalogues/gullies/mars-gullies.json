@@ -1,0 +1,51 @@
+{
+  "sourceRecords": {
+    "204 0 204 255": 276,
+    "255 255 0 255": 797,
+    "255 0 0 255": 1166,
+    "0 255 255 255": 2739
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8383837,
+  "categories": [
+    {
+      "value": "0 255 255 255",
+      "label": "Pole-facing gullies",
+      "color": "#00ffff"
+    },
+    {
+      "value": "255 0 0 255",
+      "label": "Equator-facing gullies",
+      "color": "#ff0000"
+    },
+    {
+      "value": "255 255 0 255",
+      "label": "East- or west-facing gullies",
+      "color": "#ffff00"
+    },
+    {
+      "value": "204 0 204 255",
+      "label": "No preferred orientation",
+      "color": "#cc00cc"
+    },
+    {
+      "value": "more than one class",
+      "label": "More than one class in the cell",
+      "color": "#ffffff"
+    }
+  ],
+  "output": "mars-gullies.tif",
+  "sha256": "019a3338c465cd20618910220e4eba351efcb5d5b52e234363b3b6d5aa8a9d66",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

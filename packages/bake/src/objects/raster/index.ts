@@ -57,4 +57,5 @@ export * from './eclipse-map/transit-timing.ts';
 export * from './eclipse-map/transit-limb-darkening.ts';
 export * from './fits/fits-table.ts';
 export { decodePds3Grid, loadPds3Grid, pds3GridDependencies } from './pds/pds3-grid.ts';
+export { equalAreaPixel, loadPdsEqualAreaTable, parsePdsEqualAreaTable, pdsEqualAreaTableDependencies, pdsTableColumns } from './pds/pds-equal-area-table.ts';
 export { vicarLabel, loadVicarGrid } from './vicar-grid.ts';

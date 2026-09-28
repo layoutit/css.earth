@@ -1,0 +1,32 @@
+{
+  "id": "carter-2013-hydrous-minerals",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hydrous minerals on Mars as seen by CRISM and OMEGA, Carter et al. (2013)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1029/2012JE004145"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2012JE004145",
+      "label": "doi:10.1029/2012JE004145"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/85"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
