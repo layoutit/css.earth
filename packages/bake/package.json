@@ -251,6 +251,11 @@
       "import": "./dist/sources.js",
       "default": "./dist/sources.js"
     },
+    "./sources/astronomy-data": {
+      "types": "./dist/sources/astronomy-data.d.ts",
+      "import": "./dist/sources/astronomy-data.js",
+      "default": "./dist/sources/astronomy-data.js"
+    },
     "./contract": {
       "types": "./dist/contract.d.ts",
       "import": "./dist/contract.js",

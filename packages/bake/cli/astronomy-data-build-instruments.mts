@@ -1,7 +1,7 @@
-// Entry script: node tools/sources/astronomy-data/build-instruments.mts [--dry-run]
-/** Build missions, instruments and dataset_instruments in the ledger from each archive's own instrument fields. */
+// Entry script: node packages/bake/cli/astronomy-data-build-instruments.mts [--dry-run]. Builds missions, instruments and
+// dataset_instruments in the ledger from each archive's own instrument fields; the work is in @cssearth/bake/sources/astronomy-data.
 import { DatabaseSync } from "node:sqlite";
-import { databasePath } from "./model.mts";
+import { databasePath } from "@cssearth/bake/sources/astronomy-data";
 
 const dry = process.argv.includes("--dry-run");
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");

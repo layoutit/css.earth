@@ -1,7 +1,12 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { resolve } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+// The checkout this module's own @cssearth/bake install sits in, independent of the caller's cwd (as
+// ../model.ts resolves it; duplicated here rather than imported to avoid a cycle, since model.ts imports this file).
+const CHECKOUT_ROOT = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
 export const workDir = resolve(
+  CHECKOUT_ROOT,
   process.env.OPUS_WORK_DIR ?? "output/opus-audit",
 );
 export type Obj = Record<string, unknown>;

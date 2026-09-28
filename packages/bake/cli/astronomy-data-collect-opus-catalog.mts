@@ -1,6 +1,7 @@
+// Entry script: node packages/bake/cli/astronomy-data-collect-opus-catalog.mts. OPUS pipeline stage: global and
+// per-instrument/target catalogue counts, into OPUS_WORK_DIR; the shared client is in @cssearth/bake/sources/astronomy-data.
 import { writeFile } from "node:fs/promises";
-import { get, mults, object, batch } from "./client.mts";
-import { workDir } from "./client.mts";
+import { get, mults, object, batch, workDir } from "@cssearth/bake/sources/astronomy-data";
 const global: Record<string, unknown> = {};
 await batch(["instrument", "target", "mission", "planet"], async (field) => {
   global[field] = await get("meta/mults/" + field + ".json");

@@ -1,18 +1,18 @@
 // Collect NASA Photojournal map candidates from science.nasa.gov's public WordPress API into ignored scratch output.
 //
-//   PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node tools/sources/astronomy-data/collect-photojournal.mts
+//   PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node packages/bake/cli/astronomy-data-collect-photojournal.mts
 //
 // The Photojournal has no "map" category, so an entry is chosen by what it says about itself: a title that names a map,
 // mosaic, globe, hemisphere, projection or atlas (plural forms included), or a caption that states a map projection or a
 // global map or mosaic. Every chosen entry keeps its downloadable files with their pixel sizes, read from the site's own
 // media records, and the caption phrases that chose it. Collection writes only scratch output; review the result and the
-// proposed decisions (collect/photojournal-review.mts) before one SQLite transaction (apply-photojournal.mts).
+// proposed decisions (photojournal-review.ts) before one SQLite transaction (astronomy-data-apply-ledger-fixes.mts).
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
-import { array, object, string, batch } from "./collect/client.mts";
+import { array, object, string, batch, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 
-const dir = resolve(process.env.PHOTOJOURNAL_WORK_DIR ?? "output/photojournal-refresh");
+const dir = resolve(checkoutRoot, process.env.PHOTOJOURNAL_WORK_DIR ?? "output/photojournal-refresh");
 const api = "https://science.nasa.gov/wp-json/wp/v2";
 /** The science-org term every Photojournal entry carries. */
 const PHOTOJOURNAL = 19791;

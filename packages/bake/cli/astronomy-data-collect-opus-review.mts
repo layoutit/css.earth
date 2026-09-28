@@ -1,6 +1,8 @@
+// Entry script: node packages/bake/cli/astronomy-data-collect-opus-review.mts. OPUS pipeline stage: a proposed
+// decision and reason for each instrument/target sample, into OPUS_WORK_DIR; the shared client is in
+// @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile } from "node:fs/promises";
-import { array, object, string, number } from "./client.mts";
-import { workDir } from "./client.mts";
+import { array, object, string, number, workDir } from "@cssearth/bake/sources/astronomy-data";
 const root = workDir;
 const rows = array(
   JSON.parse(await readFile(root + "/samples.json", "utf8")),

@@ -87,11 +87,17 @@ jobs:
       - name: Install dependencies and prove the lockfile
         if: ${{ !cancelled() }}
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Build the bake package
+        if: ${{ !cancelled() }}
+        # The astronomy data ledger check below resolves the ledger and its library through the built
+        # @cssearth/bake package, like every other packages/bake/cli entry; --ignore-scripts above skipped
+        # the postinstall build.
+        run: pnpm --filter @cssearth/bake build
       - name: Check the astronomy data ledger
         if: ${{ !cancelled() }}
         # SQLite integrity, evidence hashes, source counts, proposal writeups and the export slices.
         # Nothing ran it after #869, so an edited ledger could drift from its own checks unseen.
-        run: node tools/sources/astronomy-data/verify.mts
+        run: node packages/bake/cli/astronomy-data-verify.mts
       - name: Lint every authored tree
         if: ${{ !cancelled() }}
         # `tools`, `src` and `site` had no ESLint at all, so the size and boundary rules governed

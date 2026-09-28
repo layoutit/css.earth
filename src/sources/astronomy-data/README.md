@@ -6,20 +6,24 @@ permanent. There is one database, no database service and no ORM.
 
 The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland
 Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets.
+This directory holds the data and this document; the browser, slicer, verifier and collectors are
+`@cssearth/bake/sources` and its `packages/bake/cli/astronomy-data-*.mts` commands.
 
 ## Query the ledger
 
-From the repository root, with the project's supported Node version:
+With the project's supported Node version, from the repository root (the script paths below are relative to it; once
+running, a command resolves its own `@cssearth/bake` install, the ledger and its default output directories from the
+checkout that install belongs to, not the working directory):
 
 ```sh
-node tools/sources/astronomy-data/browse.mts
-node tools/sources/astronomy-data/slice.mts --source=opus --target=Mimas --format=json
-node tools/sources/astronomy-data/slice.mts --proposal=111 --format=tsv
-sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
+node packages/bake/cli/astronomy-data-browse.mts
+node packages/bake/cli/astronomy-data-slice.mts --source=opus --target=Mimas --format=json
+node packages/bake/cli/astronomy-data-slice.mts --proposal=111 --format=tsv
+sqlite3 -header -column src/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-`browse.mts` opens the ledger in [Datasette](https://datasette.io/), read-only, at
+`astronomy-data-browse.mts` opens the ledger in [Datasette](https://datasette.io/), read-only, at
 `http://127.0.0.1:8001/-/dashboards/overview`; `PORT` changes the port. The first run
 installs the pinned packages in `datasette/requirements.txt` into the ignored
 `output/ledger-venv`. The overview dashboard counts dataset families, bodies and
@@ -33,7 +37,7 @@ captures were taken from this ledger on 28 September 2026.
 Maryland rows are read from their full `targets` lists, not their shortened target
 text. A Photojournal record that names a moon and its planet counts for the moon,
 and the Sun counts only when no other body is tagged. Kind and parent come from
-`packages/astronomy/data/bodies`. `slice.mts` keeps the filtered JSON and TSV
+`packages/astronomy/data/bodies`. `astronomy-data-slice.mts` keeps the filtered JSON and TSV
 exports. `AUDIT_DB` selects another file for comparisons.
 Open `ledger.sqlite` in a SQLite browser for direct editing.
 
@@ -74,8 +78,8 @@ COMMIT;
 Git stores the database as a binary file. Review changes through a text export:
 
 ```sh
-sqlite3 tools/sources/astronomy-data/ledger.sqlite .dump > /tmp/astronomy-data.sql
-node tools/sources/astronomy-data/verify.mts
+sqlite3 src/sources/astronomy-data/ledger.sqlite .dump > /tmp/astronomy-data.sql
+node packages/bake/cli/astronomy-data-verify.mts
 ```
 
 For a revision comparison, extract the old database with `git show` to `/tmp`,
@@ -87,23 +91,24 @@ without accounting for the other edits.
 Public collectors write to ignored scratch output and never replace the ledger:
 
 ```sh
-OPUS_WORK_DIR=output/opus-refresh node tools/sources/astronomy-data/collect-opus.mts
-ARCHIVE_WORK_DIR=output/archive-refresh node tools/sources/astronomy-data/collect-archives.mts umd
-ARCHIVE_WORK_DIR=output/archive-refresh node tools/sources/astronomy-data/collect-archives.mts darts
-PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node tools/sources/astronomy-data/collect-photojournal.mts
-USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-files.mts
-TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
-node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
-node tools/sources/astronomy-data/apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
-node tools/sources/astronomy-data/collect-trek.mts --dry-run        # NASA Trek map layers; TREK_CACHE keeps pages
-node tools/sources/astronomy-data/build-instruments.mts --dry-run   # rebuilds missions and instruments
-node tools/sources/astronomy-data/mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
+OPUS_WORK_DIR=output/opus-refresh node packages/bake/cli/astronomy-data-collect-opus.mts
+ARCHIVE_WORK_DIR=output/archive-refresh node packages/bake/cli/astronomy-data-collect-archives.mts umd
+ARCHIVE_WORK_DIR=output/archive-refresh node packages/bake/cli/astronomy-data-collect-archives.mts darts
+PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node packages/bake/cli/astronomy-data-collect-photojournal.mts
+USGS_WORK_DIR=output/usgs-files node packages/bake/cli/astronomy-data-collect-usgs-files.mts
+TARGETS_WORK_DIR=output/ledger-targets node packages/bake/cli/astronomy-data-collect-targets.mts
+node packages/bake/cli/astronomy-data-apply-ledger-fixes.mts --dry-run   # then without --dry-run
+node packages/bake/cli/astronomy-data-apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
+node packages/bake/cli/astronomy-data-collect-trek.mts --dry-run        # NASA Trek map layers; TREK_CACHE keeps pages
+node packages/bake/cli/astronomy-data-build-instruments.mts --dry-run   # rebuilds missions and instruments
+node packages/bake/cli/astronomy-data-mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
 ```
 
 - **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a
   map, mosaic, globe, hemisphere, projection or atlas (plurals included), or a caption stating a map projection or a
   global map or mosaic. Each row keeps its downloadable files with their pixel sizes and the caption phrases that chose
-  it. New rows get a decision and a reason built from their own evidence (`collect/photojournal-review.mts`).
+  it. New rows get a decision and a reason built from their own evidence (`photojournal-review.ts` in
+  `@cssearth/bake/sources`).
 - **USGS.** Each product's files are read from its own Astropedia page. A row's reason says what that page offers.
 - **Targets.** Rows collected without a target get the one their archive label states: PDS4 `<Target_Identification>`,
   or PDS3 `TARGET_NAME` in `catalog/dataset.cat`, kept as stated (for example `CHECKOUT`). Rows whose source states
@@ -112,7 +117,7 @@ node tools/sources/astronomy-data/mark-map-usage.mts --dry-run      # marks maps
 Use a new output directory for fresh retrievals. Review additions, removals,
 versions and changed source metadata before a database transaction. Preserve
 our decisions, proposal joins and work status; do not replace tables with a new
-scrape. Family rules in `collect/archive-review.mts` suggest review scopes, not
+scrape. Family rules in `collect/archive-review.ts` (`@cssearth/bake/sources`) suggest review scopes, not
 scientific acceptance. Update the retained coverage receipt and verifier's
 snapshot counts when accepting a new collection. Scratch HTML is never committed.
 
@@ -186,7 +191,7 @@ The database's size comes from retained per-record metadata and scientific label
 it contains no science image payloads or downloaded webpages. Historical reviews
 and collection receipts remain queryable in `evidence` instead of separate files.
 
-`verify.mts` checks SQLite integrity and foreign keys, snapshot coverage, all
+`astronomy-data-verify.mts` (`packages/bake/cli`) checks SQLite integrity and foreign keys, snapshot coverage, all
 retained evidence hashes, OPUS partition reconciliation, label byte counts,
 proposal writeups/joins, filters and exports. These checks establish ledger
 consistency, not scientific acceptance of the proposed datasets.
