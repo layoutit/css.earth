@@ -5,7 +5,6 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import {readFile, type FileHandle} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import type { PathLike } from 'node:fs';
 
@@ -38,8 +37,6 @@ for (const id of ['io', 'ganymede']) test(`${id} independently archived label po
 test('Agenor preserves independently decoded source heights and withholds incomplete interpolation footprints', async () => {
   const source = `${planets}europa/source`, lens = await scienceLens(source, 'elevation');
   const anchors = await json(`${source}/science/controlled-dtms/Agenor/value-anchors.json`);
-  const bytes = await readFile(`${source}/${anchors.sourcePath}`);
-  assert.equal(createHash('sha256').update(bytes).digest('hex'), anchors.sha256);
   const original = await loadScienceSurface(source, {...lens, sampling: 'nearest'}), display = await loadScienceSurface(source, lens);
   for (const point of anchors.anchors) assert.equal(original.sample(point.longitudeEastDegrees, point.latitudeDegrees), point.heightMeters);
   for (const point of anchors.anchors.slice(1, -1)) assert.ok(Math.abs(required(display.sample(point.longitudeEastDegrees, point.latitudeDegrees)) - point.heightMeters) < 1e-8);

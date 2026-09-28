@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { writeArrayBuffer } from 'geotiff';
@@ -142,7 +141,7 @@ async function scanCells(root: string, recipe: Recipe, scan: Recipe['scans'][num
   }
   return { maps, inputs: [scan.cube, scan.wavelengths, scan.geometry, scan.label].map((path,i) => {
     const bytes = [cubeBytes, waveBytes, geometryBytes, Buffer.from(label)][i];
-    return { path, bytes: bytes.length, sha256: sha256(bytes) };
+    return { path, bytes: bytes.length };
   }) };
 }
 
