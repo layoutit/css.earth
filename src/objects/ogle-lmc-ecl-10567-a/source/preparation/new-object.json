@@ -48,12 +48,13 @@
   },
   "notes": [
     "Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Graczyk et al. (2018ApJ...860....1G); Pietrzynski et al. (2013Natur.495...76P).",
-    "SIMBAD knows the system as OGLE LMC-ECL-10567 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.50 arcsec from SIMBAD's position, G = 16.24 against DEBCat's V = 16.43."
+    "SIMBAD knows the system as OGLE LMC-ECL-10567 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.50 arcsec from SIMBAD's position, G = 16.24 against DEBCat's V = 16.43.",
+    "Its Gaia DR3 astrometry has RUWE 4.5, so its proper motion may be corrupted; at 49 kpc it moves the star by far less than a pixel."
   ],
   "radialVelocity": {
     "value": 0,
     "source": "No catalogued radial velocity: Gaia DR3 measures none for source 4658354927055221632 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000,000 of its distance per century",
     "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204658354927055221632"
   },
-  "order": 1921
+  "order": 1998
 }

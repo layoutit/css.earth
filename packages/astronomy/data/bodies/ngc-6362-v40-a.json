@@ -1,7 +1,7 @@
 {
  "id": "ngc-6362-v40-a",
  "classification": "star",
- "order": 1915,
+ "order": 1992,
  "physical": {
   "name": "NGC 6362 V40 A",
   "horizonsCode": null,
@@ -22,7 +22,7 @@
   "presentationUp": "display-axis",
   "sources": {
    "position": "Gaia DR3 source 5813087468905224320 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ngc-6362-v40-a/source/photometry/gaia-dr3-source.csv",
-   "distance": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 3, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc (https://arxiv.org/abs/2105.09526): 7649 +/- 67 pc; Gaia DR3 parallax 0.0672 +/- 0.1093 mas (same row, RUWE 1.00), 0.6 standard errors, is not used",
+   "distance": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 2, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc (https://arxiv.org/abs/2105.09526): 7649 +/- 67 pc; Gaia DR3 parallax 0.0672 +/- 0.1093 mas (same row, RUWE 1.00), 0.6 standard errors, is not used",
    "properMotion": "Gaia DR3 (same row): -5.574, -4.554 mas/yr",
    "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 5813087468905224320 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 2,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205813087468905224320)"
   }

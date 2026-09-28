@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-display-orientation@1",
-  "rightAscensionDegrees": 336.06921576019005,
-  "declinationDegrees": 0.09424723562310863,
+  "rightAscensionDegrees": 336.18066565360544,
+  "declinationDegrees": 0.09454959256267528,
   "displayMeridianDegrees": 90,
   "phase": "arbitrary-display-phase",
   "source": "No rotation period or spin axis of M4 V69 B is measured in the sources this package cites. The display axis is the normal of its hosted orbit in packages/astronomy/data/bodies/m4-v69-b.json, computed by hostedKeplerElements in @cssearth/astronomy; the meridian is set so that grid longitude 0 faces the Sun and Earth at the scene epoch.",

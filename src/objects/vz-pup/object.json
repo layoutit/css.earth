@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe8d4",
       "distanceAu": 852719477.3,
-      "description": "A Cepheid in the Milky Way that pulsates every 23.17 days; its mean radius is 97.3 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 23.2 days.",
       "systemName": "VZ Pup system",
       "order": 1929,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -46751155206698120000,
-        101893342623203030000,
+        -46751155206698115000,
+        101893342623203020000,
         -60867972379963900000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.36648881544345707,
+        0.19898392003654428,
+        0.9088956748283831,
+        0.7987561007733623,
+        -0.43368195627565265,
+        0.4170235632170646,
+        -0.47715263766659183,
+        -0.8788204369311248,
+        3.3650323556743e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.19898392003654428,
+        0.43368195627565265,
+        0.8788204369311248
       ],
-      "metersPerUnit": 272950040.32258064,
+      "metersPerUnit": 218360032.2580645,
       "bodyRadiusM": 67691610000
     }
   },

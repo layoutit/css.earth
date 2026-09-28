@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "m4-v69-a-arrival.webp",
-      "bytes": 27262,
-      "sha256": "732aa3daec7646ad2f437c494bc71ce8206e040a62e02bcaf1e2d9f24908fe84"
+      "bytes": 27284,
+      "sha256": "6e69b6f21e6d8c55d7d2fa39d86999958fa13994610819852fdddeddf3a3eaa9"
     },
     {
       "location": "public",
@@ -35,7 +35,7 @@
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 371,
-      "sha256": "241d67ec7049eacd77adb7250345eb02e125dae62078f9bf6fe396ac1e514b01"
+      "sha256": "8f74646f5545c79e2e6e483fc1a59383bd6a61c09507d214076820e9588c97f1"
     },
     {
       "location": "prepared",
@@ -47,7 +47,7 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1407,
-      "sha256": "77102443487a18b59e591e199469b2ac1d85b686fea1858cef4e74b9fcde26fb"
+      "sha256": "20fb3fe296b6aa3ca3e8c8955500676d33bf5a6884026f715f908e322c1a03ff"
     },
     {
       "location": "prepared",
@@ -82,20 +82,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 503803,
-      "sha256": "299e61a5ae1305b8c0a100900f0cf878d44d9b0573ee3a61e4bf1511f4f2abf5"
+      "bytes": 503805,
+      "sha256": "4a2061d6e54cdc0fb1aeb7036671fb3737a80b84a19cbe4f2ce739f6cd2599da"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393355,
-      "sha256": "00119a0101d50b7c87e65e90a0b5e4d5cdd2301c9fb0bbe4650e521760767530"
+      "bytes": 393382,
+      "sha256": "45ef6b1711cfdb882bda3e94540a49cf4c7e35e0fcf7be5f1cdcbcad4f40bab2"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1203,
-      "sha256": "4cb9783404c34f7e0fd98fd07d0df8328d97190cc55092bc2223aed024094034"
+      "bytes": 1206,
+      "sha256": "66d886899021a4739b6a120bda3886cdfb2eaea303f2a50a7ae3536c646be274"
     },
     {
       "location": "prepared",
@@ -112,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1171,
-      "sha256": "8f29e3ebfd216f0efec7a0becc8ddc698355f24a30d3cf9ab0ca004591153bff"
+      "bytes": 1174,
+      "sha256": "2a4ae1ba8bacf28b4d40d5e8ab2f9263fe87c5e86c0bb1312bb2b734a948c47f"
     }
   ]
 }

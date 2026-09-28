@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffecdd",
       "distanceAu": 892219194.5,
-      "description": "A Cepheid in the Milky Way that pulsates every 7.43 days; its mean radius is 59.2 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 7.4 days.",
       "systemName": "TZ Mon system",
       "order": 1927,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -33427304146612010000,
+        -33427304146612015000,
         129217573963191680000,
-        -875825982073558000
+        -875825982073558100
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.25044039427332815,
+        0.0016433631532312136,
+        0.9681306256253681,
+        0.9681097832014254,
+        -0.00635263279717856,
+        0.2504457860021475,
+        -0.006561751740898671,
+        -0.9999784714753067,
+        8.359680700042339e-11
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.0016433631532312136,
+        0.00635263279717856,
+        0.9999784714753067
       ],
-      "metersPerUnit": 166070322.58064517,
+      "metersPerUnit": 132856258.06451613,
       "bodyRadiusM": 41185440000
     }
   },

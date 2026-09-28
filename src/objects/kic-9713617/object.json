@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe0c1",
       "distanceAu": 134630513.2,
-      "description": "A red giant climbing its first giant branch in the Kepler field, 5.0 solar radii and 1.13 solar masses, weighed by its oscillations.",
+      "description": "A red giant in the Kepler field, 5 times the Sun's width, weighed by its starquakes.",
       "systemName": "KIC 9713617 system",
       "order": 1856,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        5472931693023874000,
-        -12748466682529358000,
+        5472931693023875000,
+        -12748466682529360000,
         14600029549877602000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.2717384674589811,
+        0.28596686572520474,
+        -0.9189021476796903,
+        -0.6329786288358414,
+        -0.6661225205977386,
+        -0.3944855421807163,
+        0.724911208866398,
+        -0.6888423181395131,
+        1.9832791978980552e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.28596686572520474,
+        0.6661225205977386,
+        0.6888423181395131
       ],
-      "metersPerUnit": 14085961.290322581,
+      "metersPerUnit": 11268769.032258065,
       "bodyRadiusM": 3493318400
     }
   },

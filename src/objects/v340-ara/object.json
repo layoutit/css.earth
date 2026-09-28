@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffead9",
       "distanceAu": 765613534.1,
-      "description": "A Cepheid in the Milky Way that pulsates every 20.81 days; its mean radius is 99.1 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 20.8 days.",
       "systemName": "V340 Ara system",
       "order": 1933,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -22903261611971797000,
-        -67780065914325980000,
+        -22903261611971793000,
+        -67780065914326000000,
         -89439229737018800000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.19996892305894723,
+        0.2499828724724811,
+        -0.9473758458399983,
+        -0.5917893711117505,
+        0.7398015500931474,
+        0.3201234241959425,
+        -0.7808954923994658,
+        -0.6246616923985202,
+        1.1236026802047557e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.2499828724724811,
+        -0.7398015500931474,
+        0.6246616923985202
       ],
-      "metersPerUnit": 277999475.8064516,
+      "metersPerUnit": 222399580.6451613,
       "bodyRadiusM": 68943870000
     }
   },

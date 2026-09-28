@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe4cb",
       "distanceAu": 633954790.4,
-      "description": "A Cepheid in the Milky Way that pulsates every 17.86 days; its mean radius is 85.2 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 17.9 days.",
       "systemName": "CP Cep system",
       "order": 1942,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        45486464687797486000,
+        45486464687797500000,
         -26826206336236960000,
-        78775864449069630000
+        78775864449069650000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.4796212018682278,
+        0.7154737817955437,
+        -0.5079968211334196,
+        -0.2828625485155677,
+        -0.4219591792211257,
+        -0.8613589435991896,
+        0.8306336625527254,
+        -0.5568192872325964,
+        -1.6863739140180143e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.7154737817955437,
+        0.4219591792211257,
+        0.5568192872325964
       ],
-      "metersPerUnit": 239006612.9032258,
+      "metersPerUnit": 191205290.32258064,
       "bodyRadiusM": 59273640000
     }
   },

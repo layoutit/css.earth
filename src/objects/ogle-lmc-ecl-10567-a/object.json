@@ -102,38 +102,38 @@
       "classification": "star",
       "color": "#ffe7d2",
       "distanceAu": 10125745603.5,
-      "description": "The primary star of the eclipsing binary OGLE-LMC-ECL-10567, 3.333 solar masses and 24.6 solar radii; the two stars eclipse each other every 117.975 days.",
+      "description": "The primary star of OGLE-LMC-ECL-10567, a pair that eclipse each other every 117.975 days.",
       "systemName": "OGLE-LMC-ECL-10567 system",
-      "order": 1921,
+      "order": 1998,
       "context": {
-        "order": 1918
+        "order": 1995
       }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        109684728496187210000,
-        539500155832507300000,
-        -1.411204283700606e+21
+        109684728496187240000,
+        539500155832507430000,
+        -1.4112042837006061e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.07240921631187239,
+        -0.18560854121196763,
+        0.9799522308879479,
+        0.3561551732819421,
+        -0.9129402320890453,
+        -0.19923259065150478,
+        -0.9316170876157277,
+        -0.3634413323527822,
+        -1.5541281016509492e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.18560854121196763,
+        0.9129402320890453,
+        0.3634413323527822
       ],
-      "metersPerUnit": 69008951.61290322,
+      "metersPerUnit": 55207161.29032258,
       "bodyRadiusM": 17114220000
     }
   },

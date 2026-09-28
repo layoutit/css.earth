@@ -102,38 +102,38 @@
       "classification": "star",
       "color": "#fff5f5",
       "distanceAu": 375401947.4,
-      "description": "The primary star of the eclipsing binary M4 V66, 0.7842 solar masses and 0.9347 solar radii; the two stars eclipse each other every 8.111 days.",
+      "description": "The primary star of M4 V66, a pair that eclipse each other every 8.111 days.",
       "systemName": "M4 V66 system",
-      "order": 1913,
+      "order": 1988,
       "context": {
-        "order": 1910
+        "order": 1985
       }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -20559574472640870000,
-        -45867687385138400000,
-        -25046551064771375000
+        -20529815246467340000,
+        -45861112187453280000,
+        -25082975175864996000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.365563919061262,
+        0.18248804288662382,
+        -0.9127218279870274,
+        -0.8166253666922139,
+        0.4076568971069556,
+        0.40858152762445865,
+        -0.4466385916547946,
+        -0.8947144619623284,
+        2.8799953870464925e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.18248804288662382,
+        -0.4076568971069556,
+        0.8947144619623284
       ],
-      "metersPerUnit": 2622059.6774193547,
+      "metersPerUnit": 2097647.7419354836,
       "bodyRadiusM": 650270800
     }
   },

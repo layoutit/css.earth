@@ -35,7 +35,7 @@
   },
   "distance": {
     "value": 7649,
-    "source": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 3, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc",
+    "source": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 2, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc",
     "url": "https://arxiv.org/abs/2105.09526",
     "uncertainty": 67
   },
@@ -55,5 +55,5 @@
     "source": "No catalogued radial velocity: Gaia DR3 measures none for source 5813082349302593920 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 2,000,000 of its distance per century",
     "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205813082349302593920"
   },
-  "order": 1917
+  "order": 1994
 }

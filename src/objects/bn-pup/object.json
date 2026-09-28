@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffead9",
       "distanceAu": 736530510.4,
-      "description": "A Cepheid in the Milky Way that pulsates every 13.67 days; its mean radius is 76.3 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 13.7 days.",
       "systemName": "BN Pup system",
       "order": 1936,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -49935780736407870000,
-        81202903087335820000,
-        -55252937474298780000
+        -49935780736407880000,
+        81202903087335850000,
+        -55252937474298790000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.4532060091185588,
+        0.26268130277416246,
+        0.851823248374742,
+        0.7369794382772367,
+        -0.42715823066899683,
+        0.5238293171714434,
+        -0.501463479084367,
+        -0.8651788133932782,
+        4.198079418164118e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.26268130277416246,
+        0.42715823066899683,
+        0.8651788133932782
       ],
-      "metersPerUnit": 214039959.67741936,
+      "metersPerUnit": 171231967.7419355,
       "bodyRadiusM": 53081910000
     }
   },

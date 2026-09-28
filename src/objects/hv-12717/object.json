@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#fff0e9",
       "distanceAu": 7317739604.2,
-      "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 8.84 days; its mean radius is 41.8 solar radii.",
+      "description": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 8.8 days.",
       "systemName": "HV 12717 system",
       "order": 1954,
       "context": {
@@ -115,25 +115,25 @@
       "originM": [
         127432203972471800000,
         366695756790943600000,
-        -1.0235738033728923e+21
+        -1.0235738033728925e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.11640639759079129,
+        -0.3069254374282527,
+        0.9445879135683508,
+        0.3349681691849424,
+        -0.8832002332949799,
+        -0.32825854678984484,
+        -0.9350111636942215,
+        -0.35461827895240916,
+        -9.434241435222682e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.3069254374282527,
+        0.8832002332949799,
+        0.35461827895240916
       ],
-      "metersPerUnit": 117259112.90322581,
+      "metersPerUnit": 93807290.32258065,
       "bodyRadiusM": 29080260000
     }
   },

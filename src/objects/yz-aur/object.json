@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe8d4",
       "distanceAu": 875635329.5,
-      "description": "A Cepheid in the Milky Way that pulsates every 18.19 days; its mean radius is 103.7 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 18.2 days.",
       "systemName": "YZ Aur system",
       "order": 1928,
       "context": {
@@ -115,25 +115,25 @@
       "originM": [
         19397081850682036000,
         98337057477252740000,
-        84337356839820300000
+        84337356839820280000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.1480770326092894,
+        0.12459539235171209,
+        0.9810959079612708,
+        0.7507036253625297,
+        0.6316591228549661,
+        -0.19352214183821345,
+        0.6438301478504888,
+        -0.7651684394424654,
+        4.2089471289040385e-9
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.12459539235171209,
+        -0.6316591228549661,
+        0.7651684394424654
       ],
-      "metersPerUnit": 290903588.7096774,
+      "metersPerUnit": 232722870.96774194,
       "bodyRadiusM": 72144090000
     }
   },

@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffede1",
       "distanceAu": 1093533501.1,
-      "description": "A Cepheid in the Milky Way that pulsates every 10.29 days; its mean radius is 93.6 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 10.3 days.",
       "systemName": "AN Aur system",
       "order": 1925,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        32194476064846940000,
-        119509330321828870000,
-        106971101084193550000
+        32194476064846950000,
+        119509330321828860000,
+        106971101084193540000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.19679942618860433,
+        0.17008875932955747,
+        0.9655774437100154,
+        0.7305404686240828,
+        0.6313876966682781,
+        -0.2601157438496021,
+        0.6538964822923744,
+        -0.7565840273529824,
+        -1.4458557918487135e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.17008875932955747,
+        -0.6313876966682781,
+        0.7565840273529824
       ],
-      "metersPerUnit": 262570645.16129032,
+      "metersPerUnit": 210056516.12903225,
       "bodyRadiusM": 65117520000
     }
   },

@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe4cb",
       "distanceAu": 772997898.5,
-      "description": "A Cepheid in the Milky Way that pulsates every 34.05 days; its mean radius is 171.6 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 34.0 days.",
       "systemName": "KN Cen system",
       "order": 1932,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -45328355000008190000,
+        -45328355000008180000,
         -20327273444894330000,
-        -104424534605336050000
+        -104424534605336040000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.3919821570738163,
+        0.8239645696222226,
+        -0.4091850150518996,
+        -0.17578243226254786,
+        0.36950360356969547,
+        0.9124514362183185,
+        -0.9030229925332027,
+        -0.4295922193851684,
+        3.2342743978155466e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.8239645696222226,
+        -0.36950360356969547,
+        0.4295922193851684
       ],
-      "metersPerUnit": 481379516.12903225,
+      "metersPerUnit": 385103612.9032258,
       "bodyRadiusM": 119382120000
     }
   },

@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe6d0",
       "distanceAu": 663636353.6,
-      "description": "A Cepheid in the Milky Way that pulsates every 23.02 days; its mean radius is 91.6 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 23.0 days.",
       "systemName": "WZ Car system",
       "order": 1938,
       "context": {
@@ -114,26 +114,26 @@
       "epochJdTt": 2461286.5,
       "originM": [
         -46313992496737740000,
-        13430971192681250000,
+        13430971192681249000,
         -86780531429817580000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.4665052650800421,
+        0.8395225713183179,
+        0.2785223328562355,
+        0.13528565426460665,
+        -0.2434594045214682,
+        0.9604297528191479,
+        -0.8741113369604567,
+        -0.48572561245741624,
+        2.6628818681530417e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.8395225713183179,
+        0.2434594045214682,
+        0.48572561245741624
       ],
-      "metersPerUnit": 256960161.29032257,
+      "metersPerUnit": 205568129.03225806,
       "bodyRadiusM": 63726120000
     }
   },

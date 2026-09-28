@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffede1",
       "distanceAu": 660109098.3,
-      "description": "A Cepheid in the Milky Way that pulsates every 14.79 days; its mean radius is 94.6 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 14.8 days.",
       "systemName": "RW Cas system",
       "order": 1939,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        48010904560006480000,
+        48010904560006490000,
         21686231281191137000,
-        83524868955793310000
+        83524868955793300000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.4861818295955085,
+        0.7708262442444805,
+        0.4116480654091702,
+        0.21960535211626606,
+        0.3481775683139347,
+        -0.9113428938905962,
+        0.8458136425318847,
+        -0.5334784738927557,
+        -3.839921587942738e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.7708262442444805,
+        -0.3481775683139347,
+        0.5334784738927557
       ],
-      "metersPerUnit": 265375887.0967742,
+      "metersPerUnit": 212300709.67741936,
       "bodyRadiusM": 65813220000
     }
   },

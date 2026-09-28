@@ -35,7 +35,7 @@
           "eccentricity": 0,
           "transitTimeBmjdTdb": 52818.413
         },
-        "source": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
+        "source": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 6, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
         "url": "https://arxiv.org/abs/2010.08754"
       },
       "text": {
@@ -43,7 +43,7 @@
         "introduction": "It has 2.85 solar masses and 23.8 solar radii; its partner has 2.72 and 17.7, measured from the eclipses and the stars' motions.",
         "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-SMC-ECL-1421: Mass, Radius and Period, from Graczyk et al. (2020ApJ...904...13G)"
       },
-      "order": 1924
+      "order": 2001
     }
   ]
 }

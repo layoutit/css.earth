@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffede1",
       "distanceAu": 8944054853.8,
-      "description": "A Cepheid in the Small Magellanic Cloud that pulsates every 14.38 days; its mean radius is 50.4 solar radii.",
+      "description": "A Cepheid in the Small Magellanic Cloud that swells and shrinks every 14.4 days.",
       "systemName": "HV 1335 system",
       "order": 1979,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        365332788612792700000,
-        59380830001129420000,
-        -1.285799677031334e+21
+        365332788612792800000,
+        59380830001129430000,
+        -1.2857996770313345e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.27304163764619616,
+        -0.9485301029785357,
+        0.16043349979044827,
+        0.04437991763581048,
+        -0.1541730546031019,
+        -0.9870466514532066,
+        -0.9609779846708884,
+        -0.27662485965270256,
+        -2.453552687812711e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.9485301029785357,
+        0.1541730546031019,
+        0.27662485965270256
       ],
-      "metersPerUnit": 141384193.5483871,
+      "metersPerUnit": 113107354.83870968,
       "bodyRadiusM": 35063280000
     }
   },

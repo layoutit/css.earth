@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe8d4",
       "distanceAu": 11625786116.2,
-      "description": "A Cepheid in the Small Magellanic Cloud that pulsates every 42.71 days; its mean radius is 162.1 solar radii.",
+      "description": "A Cepheid in the Small Magellanic Cloud that swells and shrinks every 42.7 days.",
       "systemName": "HV 837 system",
       "order": 1983,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        521958743707947000000,
-        129980164441235280000,
-        -1.6539213977481728e+21
+        521958743707946840000,
+        129980164441235310000,
+        -1.6539213977481726e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.30011557086211876,
+        -0.922788644436093,
+        0.24164387396725498,
+        0.07473592831286145,
+        -0.22979622025855695,
+        -0.9703650025501207,
+        -0.950970654197762,
+        -0.3092811259270097,
+        -4.215364443125058e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.922788644436093,
+        0.22979622025855695,
+        0.3092811259270097
       ],
-      "metersPerUnit": 454729717.7419355,
+      "metersPerUnit": 363783774.1935484,
       "bodyRadiusM": 112772970000
     }
   },

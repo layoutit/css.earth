@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffefe5",
       "distanceAu": 9425600868.7,
-      "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 16.22 days; its mean radius is 86.7 solar radii.",
+      "description": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 16.2 days.",
       "systemName": "HV 2549 system",
       "order": 1964,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        63702102208527426000,
-        439477719977745800000,
-        -1.33829812477076e+21
+        63702102208527440000,
+        439477719977745840000,
+        -1.3382981247707602e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.04517719702782125,
+        -0.1361511478308566,
+        0.9896574588275733,
+        0.3116752957348613,
+        -0.9392978206307347,
+        -0.14345073784034365,
+        -0.9491140768618367,
+        -0.31493248340349467,
+        -1.0655438525317652e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.1361511478308566,
+        0.9392978206307347,
+        0.31493248340349467
       ],
-      "metersPerUnit": 243214475.80645162,
+      "metersPerUnit": 194571580.6451613,
       "bodyRadiusM": 60317190000
     }
   },

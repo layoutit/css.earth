@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffecdd",
       "distanceAu": 9231712119.3,
-      "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 22.72 days; its mean radius is 97.4 solar radii.",
+      "description": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 22.7 days.",
       "systemName": "HV 876 system",
       "order": 1969,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        143706567169903130000,
+        143706567169903170000,
         511305377776331800000,
-        -1.2748329607420497e+21
+        -1.27483296074205e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.10405643712577138,
+        -0.24976568877444946,
+        0.9626989968851715,
+        0.3702309291944054,
+        -0.8886610251786501,
+        -0.27057465032090106,
+        -0.9230933414127404,
+        -0.38457597824026335,
+        -8.29432193513542e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.24976568877444946,
+        0.8886610251786501,
+        0.38457597824026335
       ],
-      "metersPerUnit": 273230564.516129,
+      "metersPerUnit": 218584451.61290324,
       "bodyRadiusM": 67761180000
     }
   },

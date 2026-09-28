@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe8d4",
       "distanceAu": 10828325377.3,
-      "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 22.54 days; its mean radius is 113.2 solar radii.",
+      "description": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 22.5 days.",
       "systemName": "U 1 system",
       "order": 1977,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        179089745131248520000,
+        179089745131248550000,
         544022899120513740000,
         -1.5152636336184466e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.11055643361960202,
+        -0.2924914140317174,
+        0.9498558036370789,
+        0.33583850091517337,
+        -0.8885035447346843,
+        -0.3126882669640004,
+        -0.9354088818737845,
+        -0.35356784880928777,
+        -9.48547300766487e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.2924914140317174,
+        0.8885035447346843,
+        0.35356784880928777
       ],
-      "metersPerUnit": 317553387.0967742,
+      "metersPerUnit": 254042709.67741936,
       "bodyRadiusM": 78753240000
     }
   },

@@ -103,11 +103,11 @@
       "classification": "star",
       "color": "#fff4f3",
       "distanceAu": 1577719503,
-      "description": "The secondary star of the eclipsing binary NGC 6362 V40, 0.7947 solar masses and 0.997 solar radii; the two stars eclipse each other every 5.296 days.",
+      "description": "The secondary star of NGC 6362 V40, a pair that eclipse each other every 5.296 days.",
       "systemName": "NGC 6362 V40 system",
-      "order": 1916,
+      "order": 1993,
       "context": {
-        "order": 1916
+        "order": 1993
       }
     },
     "worldFrame": {
@@ -116,25 +116,25 @@
       "originM": [
         -11183099908747766000,
         -91301669170846420000,
-        -217361509354838400000
+        -217361509354838460000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.016526702427987854,
+        -0.9935749318968427,
+        -0.1119630421748237,
+        -0.3904227420069962,
+        0.1095014150223386,
+        -0.9141003897996348,
+        -0.9204873440903985,
+        -0.02860585279781336,
+        0.38972394660209764
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.9935749318968427,
+        -0.1095014150223386,
+        0.02860585279781336
       ],
-      "metersPerUnit": 2796826.209677419,
+      "metersPerUnit": 2237460.9677419355,
       "bodyRadiusM": 693612900
     }
   },

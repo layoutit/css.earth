@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe2c6",
       "distanceAu": 760539526.3,
-      "description": "A Cepheid in the Milky Way that pulsates every 15.04 days; its mean radius is 88.1 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 15.0 days.",
       "systemName": "VW Cen system",
       "order": 1934,
       "context": {
@@ -114,26 +114,26 @@
       "epochJdTt": 2461286.5,
       "originM": [
         -45649498144101820000,
-        -19845041835815830000,
+        -19845041835815825000,
         -102308697498482200000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.4012258105416001,
+        0.8246632583859743,
+        -0.3986832818459583,
+        -0.17442345084878,
+        0.35850358299122354,
+        0.9170886766155486,
+        -0.8992187213071353,
+        -0.4374993614288856,
+        2.7935184068802874e-7
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.8246632583859743,
+        -0.35850358299122354,
+        0.4374993614288856
       ],
-      "metersPerUnit": 247141814.51612905,
+      "metersPerUnit": 197713451.61290324,
       "bodyRadiusM": 61291170000
     }
   },

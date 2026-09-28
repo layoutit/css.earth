@@ -102,38 +102,38 @@
       "classification": "star",
       "color": "#ffead8",
       "distanceAu": 10290138654.1,
-      "description": "The primary star of the eclipsing binary OGLE-LMC-ECL-09114, 3.304 solar masses and 26.33 solar radii; the two stars eclipse each other every 214.366 days.",
+      "description": "The primary star of OGLE-LMC-ECL-09114, a pair that eclipse each other every 214.366 days.",
       "systemName": "OGLE-LMC-ECL-09114 system",
-      "order": 1919,
+      "order": 1996,
       "context": {
-        "order": 1916
+        "order": 1993
       }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        118797578924634440000,
-        539492872820038430000,
-        -1.4368486623253548e+21
+        118797578924634370000,
+        539492872820038400000,
+        -1.4368486623253546e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.07717221510011717,
+        -0.20072655362502678,
+        0.976602938704549,
+        0.35046050940700596,
+        -0.9115540199201307,
+        -0.21505045945924386,
+        -0.9333926722246771,
+        -0.3588566837015429,
+        -8.73342867724783e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.20072655362502678,
+        0.9115540199201307,
+        0.3588566837015429
       ],
-      "metersPerUnit": 73862020.16129032,
+      "metersPerUnit": 59089616.12903226,
       "bodyRadiusM": 18317781000
     }
   },

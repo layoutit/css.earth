@@ -103,38 +103,38 @@
       "classification": "star",
       "color": "#fff0e9",
       "distanceAu": 1577719503.1,
-      "description": "The secondary star of the eclipsing binary NGC 6362 V41, 0.728 solar masses and 0.7307 solar radii; the two stars eclipse each other every 17.889 days.",
+      "description": "The secondary star of NGC 6362 V41, a pair that eclipse each other every 17.889 days.",
       "systemName": "NGC 6362 V41 system",
-      "order": 1918,
+      "order": 1995,
       "context": {
-        "order": 1918
+        "order": 1995
       }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -11371407264114090000,
-        -91259640760809520000,
-        -217369389149657700000
+        -11371407268230599000,
+        -91259640793717960000,
+        -217369389133449300000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.04033176833696637,
+        -0.9926760317414356,
+        -0.11387556572368682,
+        -0.38762047025962226,
+        0.12058721903104577,
+        -0.9138977479138833,
+        -0.920936327602795,
+        -0.007281388084357975,
+        0.38964504602143013
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.9926760317414356,
+        -0.12058721903104577,
+        0.007281388084357975
       ],
-      "metersPerUnit": 2049790.322580645,
+      "metersPerUnit": 1639832.2580645161,
       "bodyRadiusM": 508348000
     }
   },

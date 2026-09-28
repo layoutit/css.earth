@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe4cb",
       "distanceAu": 8875698936.7,
-      "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 36.83 days; its mean radius is 131.8 solar radii.",
+      "description": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 36.8 days.",
       "systemName": "HV 879 system",
       "order": 1972,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        124347904052187640000,
-        449094992555115100000,
-        -1.2433286172065095e+21
+        124347904052187700000,
+        449094992555115200000,
+        -1.24332861720651e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.09365058529489634,
+        -0.24987238788073654,
+        0.9637392581236393,
+        0.33822853088172805,
+        -0.9024382630109941,
+        -0.2668457276241988,
+        -0.9363925612538321,
+        -0.35095437200365354,
+        -9.913732163338127e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.24987238788073654,
+        0.9024382630109941,
+        0.35095437200365354
       ],
-      "metersPerUnit": 369730887.0967742,
+      "metersPerUnit": 295784709.67741936,
       "bodyRadiusM": 91693260000
     }
   },

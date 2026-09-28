@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#fff0e9",
       "distanceAu": 9261826089,
-      "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 2.95 days; its mean radius is 24.8 solar radii.",
+      "description": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 3.0 days.",
       "systemName": "HV 12203 system",
       "order": 1950,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        115015396803891460000,
+        115015396803891450000,
         563264653844549500000,
         -1.2606552657500305e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.0830106737074083,
+        -0.18203204917628565,
+        0.9797824049876201,
+        0.40652799269067275,
+        -0.891464274260176,
+        -0.20006608627318648,
+        -0.9098594502501663,
+        -0.4149165949807985,
+        -7.356458219761722e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.18203204917628565,
+        0.891464274260176,
+        0.4149165949807985
       ],
-      "metersPerUnit": 69570000,
+      "metersPerUnit": 55656000,
       "bodyRadiusM": 17253360000
     }
   },

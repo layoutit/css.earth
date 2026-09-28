@@ -3,8 +3,8 @@
   "name": "M4 V69 A",
   "system": "M4 V69 system",
   "description": "The primary star of the eclipsing binary M4 V69, 0.7665 solar masses and 0.8655 solar radii; the two stars eclipse each other every 48.188 days.",
-  "target": "Cl* NGC 6121 SAW V69",
-  "gaia": "6045465884181865472",
+  "target": "[KTR2013] V69",
+  "gaia": "6045461417425321984",
   "paper": {
     "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
     "credit": "Kaluzny et al. (2013AJ....145...43K)"
@@ -48,12 +48,13 @@
   },
   "notes": [
     "Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Kaluzny et al. (2013AJ....145...43K).",
-    "SIMBAD knows the system as Cl* NGC 6121 SAW V69 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.68 arcsec from SIMBAD's position, G = 17.08 against DEBCat's V = 17.01."
+    "SIMBAD knows it as [KTR2013] V69 (not Cl* NGC 6121 SAW V69, a different variable); it is Gaia DR3 6045461417425321984, G = 16.67 against DEBCat's V = 17.01."
   ],
   "radialVelocity": {
-    "value": 0,
-    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 6045465884181865472 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 600,000 of its distance per century",
-    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%206045465884181865472"
+    "value": 66.9,
+    "uncertainty": 0.04,
+    "source": "SIMBAD's radial velocity for Gaia DR3 6045461417425321984 (quality A), from 2013AJ....145...43K; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K/abstract"
   },
-  "order": 1853
+  "order": 1990
 }

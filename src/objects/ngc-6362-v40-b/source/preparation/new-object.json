@@ -37,7 +37,7 @@
           "argumentOfPeriapsisDegrees": 26.6
         },
         "epoch": "inferior-conjunction",
-        "source": "NGC 6362 V40: P 5.2961725 d and primary-eclipse time HJD 2453915.50966 (Section II.1, after Equation (1)); i 88.22 degrees (Table 4, column V40); e 0.05054, omega 206.6 degrees (Table 4, column V40); stored +180 degrees: as published the companion would pass behind 7.3 h from the published secondary-minimum ephemeris (Eq. 1); +180 puts it within 0.01 h. HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
+        "source": "NGC 6362 V40: P 5.2961725 d and primary-eclipse time HJD 2453915.50966 (Section II.1, after Equation (1)); i 88.22 degrees (Table 4, column V40); e 0.05054, omega 206.6 degrees (Table 4, column V40); stored +180 degrees: as published the companion would pass behind 7.3 h from the published secondary-minimum ephemeris (Eq. 1); +180 puts it within 0.01 h, and it fits the paper's Table 3 radial velocities. HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
         "url": "https://arxiv.org/abs/1508.04894"
       },
       "text": {
@@ -45,7 +45,7 @@
         "introduction": "It has 0.7947 solar masses and 0.997 solar radii; its partner has 0.8337 and 1.3253, measured from the eclipses and the stars' motions.",
         "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V40: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
       },
-      "order": 1916
+      "order": 1993
     }
   ]
 }

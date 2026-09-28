@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffede1",
       "distanceAu": 922024524,
-      "description": "A Cepheid in the Milky Way that pulsates every 14.15 days; its mean radius is 79.3 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 14.1 days.",
       "systemName": "LS Pup system",
       "order": 1926,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -59677862887386020000,
-        104428448867464450000,
+        -59677862887386030000,
+        104428448867464430000,
         -67518428404404730000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.4326585945485708,
+        0.24287481837166233,
+        0.868227138002601,
+        0.7570959101391678,
+        -0.42499899531026736,
+        0.4961669445215073,
+        -0.489502117884898,
+        -0.8720021081317381,
+        6.366948389046887e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.24287481837166233,
+        0.42499899531026736,
+        0.8720021081317381
       ],
-      "metersPerUnit": 222455685.48387095,
+      "metersPerUnit": 177964548.38709676,
       "bodyRadiusM": 55169010000
     }
   },

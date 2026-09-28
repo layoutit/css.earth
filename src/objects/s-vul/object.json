@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe0c1",
       "distanceAu": 800286833.4,
-      "description": "A Cepheid in the Milky Way that pulsates every 68.71 days; its mean radius is 272.4 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 68.7 days.",
       "systemName": "S Vul system",
       "order": 1931,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        48468277953685910000,
-        -94718723217092360000,
-        54884940788654340000
+        48468277953685930000,
+        -94718723217092430000,
+        54884940788654350000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.40484281447007553,
+        0.20883408177159077,
+        -0.8902194234359104,
+        -0.791160654126492,
+        -0.40811204493951475,
+        -0.4555319726840577,
+        0.4584398705763817,
+        -0.8887254272641827,
+        -7.984586594037288e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.20883408177159077,
+        0.40811204493951475,
+        0.8887254272641827
       ],
-      "metersPerUnit": 764147903.2258065,
+      "metersPerUnit": 611318322.5806452,
       "bodyRadiusM": 189508680000
     }
   },

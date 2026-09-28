@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffead9",
       "distanceAu": 13910725734.1,
-      "description": "A Cepheid in the Small Magellanic Cloud that pulsates every 16.74 days; its mean radius is 97.2 solar radii.",
+      "description": "A Cepheid in the Small Magellanic Cloud that swells and shrinks every 16.7 days.",
       "systemName": "HV 822 system",
       "order": 1982,
       "context": {
@@ -114,26 +114,26 @@
       "epochJdTt": 2461286.5,
       "originM": [
         579812031816150800000,
-        107264755632287660000,
-        -1.9957293155303353e+21
+        107264755632287680000,
+        -1.995729315530335e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.27861989107347696,
+        -0.9430158336140912,
+        0.18191232462734483,
+        0.051544453875291996,
+        -0.1744570523825946,
+        -0.9833147543633598,
+        -0.9590172707375514,
+        -0.28334762117776335,
+        -3.120755318686365e-8
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.9430158336140912,
+        0.1744570523825946,
+        0.28334762117776335
       ],
-      "metersPerUnit": 272669516.12903225,
+      "metersPerUnit": 218135612.9032258,
       "bodyRadiusM": 67622040000
     }
   },

@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffe4cb",
       "distanceAu": 636883976,
-      "description": "A Cepheid in the Milky Way that pulsates every 14.75 days; its mean radius is 85.6 solar radii.",
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 14.7 days.",
       "systemName": "UZ Sct system",
       "order": 1941,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        12672051043366021000,
-        -91992454665088660000,
-        -21317043012313285000
+        12672051043366020000,
+        -91992454665088650000,
+        -21317043012313290000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.13300292526787197,
+        -0.030531909754286702,
+        -0.9906452565661157,
+        -0.9655315884664217,
+        0.22164560909355593,
+        -0.13646235980318885,
+        -0.2237386277416067,
+        -0.9746491812217885,
+        8.941747696235846e-9
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        0.030531909754286702,
+        -0.22164560909355593,
+        0.9746491812217885
       ],
-      "metersPerUnit": 240128709.67741936,
+      "metersPerUnit": 192102967.7419355,
       "bodyRadiusM": 59551920000
     }
   },

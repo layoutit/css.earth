@@ -102,7 +102,7 @@
       "classification": "star",
       "color": "#ffdebd",
       "distanceAu": 439813427.6,
-      "description": "A red-clump giant burning helium in its core in the Kepler field, 11.3 solar radii and 1.17 solar masses, weighed by its oscillations.",
+      "description": "A red-clump giant in the Kepler field, 11 times the Sun's width, weighed by its starquakes.",
       "systemName": "KIC 8260055 system",
       "order": 1880,
       "context": {
@@ -113,27 +113,27 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        23432592327665900000,
-        -41001915603420480000,
-        45812210127208930000
+        23432592327665897000,
+        -41001915603420490000,
+        45812210127208920000
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.3561444987245044,
+        0.34548704676844405,
+        -0.8682164456767048,
+        -0.6231750407778881,
+        -0.6045268108983819,
+        -0.49618565422280153,
+        0.6962858354007706,
+        -0.7177646100360834,
+        -6.425229793856465e-9
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.34548704676844405,
+        0.6045268108983819,
+        0.7177646100360834
       ],
-      "metersPerUnit": 31721114.919354837,
+      "metersPerUnit": 25376891.93548387,
       "bodyRadiusM": 7866836500
     }
   },

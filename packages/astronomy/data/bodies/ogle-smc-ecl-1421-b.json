@@ -1,7 +1,7 @@
 {
  "id": "ogle-smc-ecl-1421-b",
  "classification": "star",
- "order": 1924,
+ "order": 2001,
  "physical": {
   "name": "OGLE-SMC-ECL-1421 B",
   "horizonsCode": null,
@@ -19,10 +19,10 @@
   "transitTimeBmjdTdb": 52818.413,
   "ascendingNodePositionAngleDegrees": 0,
   "sources": {
-   "period": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): P 102.8984 d",
-   "shape": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): a/R* 9.2508, inclination 88.05 degrees",
-   "eccentricity": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): e 0",
-   "phase": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): transit (inferior conjunction) at 52818.413 BMJD_TDB",
+   "period": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 6, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): P 102.8984 d",
+   "shape": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 6, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): a/R* 9.2508, inclination 88.05 degrees",
+   "eccentricity": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 6, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): e 0",
+   "phase": "OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 6, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/2010.08754): transit (inferior conjunction) at 52818.413 BMJD_TDB",
    "orientation": "Display convention: the orbit's position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north)."
   }
  }

@@ -103,38 +103,38 @@
       "classification": "star",
       "color": "#ffe6d0",
       "distanceAu": 12794605931.7,
-      "description": "The secondary star of the eclipsing binary OGLE-SMC-ECL-1421, 2.85 solar masses and 23.8 solar radii; the two stars eclipse each other every 102.834 days.",
+      "description": "The secondary star of OGLE-SMC-ECL-1421, a pair that eclipse each other every 102.834 days.",
       "systemName": "OGLE-SMC-ECL-1421 system",
-      "order": 1924,
+      "order": 2001,
       "context": {
-        "order": 1924
+        "order": 2001
       }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        553010528476602800000,
-        118500374748796160000,
-        -1.8285809677806852e+21
+        553010528476602900000,
+        118500374748796190000,
+        -1.828580967780686e+21
       ],
       "presentationToReference": [
-        1,
-        0,
-        0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        0.281625389667946,
+        0.21923574224006176,
+        0.9341428312730481,
+        0.095147109330248,
+        -0.9751302069495653,
+        0.20017019528540075,
+        -0.9547953537174733,
+        -0.0325079808500443,
+        0.2954810716451694
       ],
       "orbitUpReference": [
-        0,
-        0,
-        1
+        -0.21923574224006176,
+        0.9751302069495653,
+        0.0325079808500443
       ],
-      "metersPerUnit": 66764758.06451613,
+      "metersPerUnit": 53411806.451612905,
       "bodyRadiusM": 16557660000
     }
   },

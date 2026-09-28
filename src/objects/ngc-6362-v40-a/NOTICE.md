@@ -6,4 +6,4 @@ Colour: a Planck spectrum at the temperature of Primary log Teff 3.789 +/- 0.009
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
-Placement: Gaia DR3 source 5813087468905224320: position, proper motion; distance: Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 3, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+Placement: Gaia DR3 source 5813087468905224320: position, proper motion; distance: Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 2, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

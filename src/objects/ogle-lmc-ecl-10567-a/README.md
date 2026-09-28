@@ -21,6 +21,7 @@ Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) 
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Graczyk et al. (2018ApJ...860....1G); Pietrzynski et al. (2013Natur.495...76P).
 - **Not shown.** SIMBAD knows the system as OGLE LMC-ECL-10567 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.50 arcsec from SIMBAD's position, G = 16.24 against DEBCat's V = 16.43.
+- **Not shown.** Its Gaia DR3 astrometry has RUWE 4.5, so its proper motion may be corrupted; at 49 kpc it moves the star by far less than a pixel.
 - **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

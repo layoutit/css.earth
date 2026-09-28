@@ -6,4 +6,4 @@ Colour: a Planck spectrum at the temperature of Primary log Teff 3.784 +/- 0.009
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
-Placement: Gaia DR3 source 6045465884181865472: position, proper motion; distance: Kaluzny et al. (2013), AJ 145, 43, the distance to M4 from V66 and V69: 1.82 +/- 0.04 kpc. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+Placement: Gaia DR3 source 6045461417425321984: position, proper motion; distance: Kaluzny et al. (2013), AJ 145, 43, the distance to M4 from V66 and V69: 1.82 +/- 0.04 kpc. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
