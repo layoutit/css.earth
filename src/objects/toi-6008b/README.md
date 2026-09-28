@@ -10,7 +10,7 @@ It is the only planet known around TOI-6008. Its orbit and size follow Barkaoui 
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by toi-6008's measured colour (#ffcc7b, the colour lens of toi-6008 (src/objects/toi-6008/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of TOI-6008's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+**Charts.** The orbits of TOI-6008's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (76, 82, 83), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 

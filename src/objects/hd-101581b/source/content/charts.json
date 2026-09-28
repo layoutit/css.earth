@@ -13,6 +13,37 @@
       "metadata": {
         "orbitSource": "Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): P 4.46569 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-101581b-transit",
+      "title": "HD 101581 b: its transit",
+      "description": "HD 101581 b crossing its star, as TESS recorded it: 3 sectors (90, 99, 100) of the SPOC pipeline's 2-minute light curves of TIC 397362481, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 80 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 255 minutes at these dates, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-101581b-transit.svg",
+      "metadata": {
+        "tic": "TIC 397362481",
+        "sectors": [
+          90,
+          99,
+          100
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-101581b",
+      "sources": [
+        "photometry/tess/tess2025071122000-s0090-0000000397362481-0287-s_lc.fits",
+        "photometry/tess/tess2026005125623-s0099-0000000397362481-0300-s_lc.fits",
+        "photometry/tess/tess2026033082000-s0100-0000000397362481-0302-s_lc.fits"
+      ],
+      "durationHours": 1.77,
+      "binMinutes": 7,
+      "alignMinutes": 80,
+      "notes": [
+        "TESS 2-min SPOC · sectors 90, 99, 100",
+        "Aligned on TESS's dip, 80 min late; 7-min bins.",
+        "The ephemeris's own 1σ there is 85 min.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

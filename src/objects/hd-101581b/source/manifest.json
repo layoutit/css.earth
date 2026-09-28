@@ -99,6 +99,93 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "hd-101581b-tess-sector-90",
+      "path": "photometry/tess/tess2025071122000-s0090-0000000397362481-0287-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025071122000-s0090-0000000397362481-0287-s_lc.fits",
+      "productId": "tess2025071122000-s0090-0000000397362481-0287-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 101581 b's star (TIC 397362481), sector 90",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-397362481",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025071122000-s0090-0000000397362481-0287-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-101581b-tess-sector-99",
+      "path": "photometry/tess/tess2026005125623-s0099-0000000397362481-0300-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026005125623-s0099-0000000397362481-0300-s_lc.fits",
+      "productId": "tess2026005125623-s0099-0000000397362481-0300-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 101581 b's star (TIC 397362481), sector 99",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-397362481",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026005125623-s0099-0000000397362481-0300-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-101581b-tess-sector-100",
+      "path": "photometry/tess/tess2026033082000-s0100-0000000397362481-0302-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026033082000-s0100-0000000397362481-0302-s_lc.fits",
+      "productId": "tess2026033082000-s0100-0000000397362481-0302-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 101581 b's star (TIC 397362481), sector 100",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-397362481",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026033082000-s0100-0000000397362481-0302-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

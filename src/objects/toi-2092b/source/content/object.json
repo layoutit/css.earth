@@ -95,7 +95,7 @@
       "id": "toi-2092b-transit",
       "titleKey": "transitLightCurve",
       "src": "/scenes/toi-2092b/toi-2092b-transit.svg",
-      "alt": "TOI-2092 b crossing its star, as TESS recorded it: 3 sectors (50, 76, 77) of the SPOC pipeline's 2-minute light curves of TIC 393965778, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "alt": "TOI-2092 b crossing its star, as TESS recorded it: 3 sectors (50, 76, 77) of the SPOC pipeline's 2-minute light curves of TIC 393965778, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 19 minutes at these dates, then averaged in 10-minute bins. Error bars are each bin's standard error.",
       "source": {
         "id": "toi-2092b-tess-sector-50",
         "path": "../manifest.json",

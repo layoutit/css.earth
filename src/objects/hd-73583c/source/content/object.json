@@ -95,7 +95,7 @@
       "id": "hd-73583c-transit",
       "titleKey": "transitLightCurve",
       "src": "/scenes/hd-73583c/hd-73583c-transit.svg",
-      "alt": "HD 73583 c crossing its star, as TESS recorded it: 3 sectors (34, 61, 88) of the SPOC pipeline's 2-minute light curves of TIC 101011575, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "alt": "HD 73583 c crossing its star, as TESS recorded it: 3 sectors (34, 61, 88) of the SPOC pipeline's 2-minute light curves of TIC 101011575, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 6 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 6 minutes at these dates, then averaged in 15-minute bins. Error bars are each bin's standard error.",
       "source": {
         "id": "hd-73583c-tess-sector-34",
         "path": "../manifest.json",

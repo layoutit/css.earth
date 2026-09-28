@@ -14,8 +14,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
 import { bindInputs, json, type PackageFiles } from './lens.mts';
-import { decodeEntities, NASA_TAP } from './orbit.mts';
-import { installTransitChart, liveTessArchive, type TessArchive } from './transit-chart.mts';
+import { archiveRows, bestEphemeris, decodeEntities, ephemerisSigmaDays, NASA_TAP } from './orbit.mts';
+import { installTransitChart, liveTessArchive, type Fold, type TessArchive } from './transit-chart.mts';
 
 const SPECTRA = {
   transmission: { table: 'transitspec', depth: 'plntransdep', label: 'Transit depth (%)', titleKey: 'transmissionSpectrum', title: 'transmission spectrum',
@@ -68,20 +68,32 @@ const short = (text: string, length = 52) => text.length <= length ? text : `${t
 /** Add the orbits chart and any archive spectra to a planet's package. `hostName` titles the orbits chart. */
 /** The fold of planet `id` in these light-curve files, with the bake's own reader, fold and window: how many whole transits, the
  * dip's depth (the middle 60% of the transit below the baseline) and its standard error (the baseline's scatter over the in-transit
- * count). A planet the astronomy records do not hold, or files the reader refuses, fold no transit. */
-async function transitsIn(id: string) {
+ * count), with the ephemeris moved by `shiftMinutes`. A planet the astronomy records do not hold, or files the reader refuses, fold
+ * no transit. */
+async function transitFold(id: string): Promise<Fold> {
   const [{ foldTransits, readTessLightCurve, transitWindow }, { hostedOrbit }] = await Promise.all([import('@cssearth/bake/objects/raster'), import('@cssearth/astronomy')]);
-  return (curves: readonly Buffer[], durationHours: number) => {
-    try {
-      const orbit = hostedOrbit(id as Parameters<typeof hostedOrbit>[0]), window = transitWindow(durationHours);
-      const folded = foldTransits(curves.map(bytes => readTessLightCurve(bytes)), orbit, window), inside: number[] = [], outside: number[] = [];
-      folded.time.forEach((time, i) => { const offset = Math.abs(time - orbit.transitTimeBmjdTdb); if (offset < 0.3 * durationHours / 24) inside.push(folded.flux[i]!); else if (offset > window.outsideDays) outside.push(folded.flux[i]!); });
-      if (inside.length < 3 || outside.length < 3) return { transits: 0, depthPpm: 0, errorPpm: Infinity };
-      const mean = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / values.length, base = mean(outside);
-      const scatter = Math.sqrt(outside.reduce((sum, value) => sum + (value - base) ** 2, 0) / (outside.length - 1));
-      return { transits: folded.transits, depthPpm: (base - mean(inside)) * 1e6, errorPpm: scatter / Math.sqrt(inside.length) * 1e6 };
-    } catch { return { transits: 0, depthPpm: 0, errorPpm: Infinity }; }
+  const read = (curves: readonly Buffer[]) => curves.map(bytes => readTessLightCurve(bytes)), none = { transits: 0, depthPpm: 0, errorPpm: Infinity };
+  return {
+    midBmjd(curves) { const times = read(curves).flatMap(curve => [curve.time[0]!, curve.time.at(-1)!]); return (Math.min(...times) + Math.max(...times)) / 2; },
+    measure(curves, durationHours, shiftMinutes) {
+      try {
+        const base = hostedOrbit(id as Parameters<typeof hostedOrbit>[0]), orbit = { ...base, transitTimeBmjdTdb: base.transitTimeBmjdTdb + shiftMinutes / 1440 }, window = transitWindow(durationHours);
+        const folded = foldTransits(read(curves), orbit, window), inside: number[] = [], outside: number[] = [];
+        folded.time.forEach((time, i) => { const offset = Math.abs(time - orbit.transitTimeBmjdTdb); if (offset < 0.3 * durationHours / 24) inside.push(folded.flux[i]!); else if (offset > window.outsideDays) outside.push(folded.flux[i]!); });
+        if (inside.length < 3 || outside.length < 3) return none;
+        const mean = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / values.length, level = mean(outside);
+        const scatter = Math.sqrt(outside.reduce((sum, value) => sum + (value - level) ** 2, 0) / (outside.length - 1));
+        return { transits: folded.transits, depthPpm: (level - mean(inside)) * 1e6, errorPpm: scatter / Math.sqrt(inside.length) * 1e6 };
+      } catch { return none; }
+    },
   };
+}
+
+/** The uncertainty of the ephemeris the orbit took (orbit.mts bestEphemeris, the same rows) at a date, or undefined when no row gives
+ * its errors. */
+async function timingSigma(archive: Archive, name: string) {
+  const best = bestEphemeris(await archiveRows(archive, name).catch(() => []));
+  return best ? (epochBjd: number) => ephemerisSigmaDays(best.row, epochBjd) : undefined;
 }
 
 export async function installPlanetCharts(files: PackageFiles, id: string, name: string, host: { id: string; name: string }, archive: Archive, tess?: TessArchive) {
@@ -120,7 +132,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
     drawn.push(`its ${spec.title}, ${rows.length} bins from ${first.label} in the archive's ${spec.table} table${chosen.papers > 1 ? `, the most of its ${chosen.papers} papers` : ''}`);
   }
   // The transit as TESS recorded it (transit-chart.mts), after the spectra.
-  const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitsIn(id));
+  const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitFold(id), await timingSigma(archive, name));
   report.push(transit.report);
   if (transit.recipe) { charts.push(transit.recipe); controls.push(transit.control); inputs.push(...transit.inputs); operations.push(...transit.operations); drawn.push(transit.readme); }
   files.set(`${s}/content/charts.json`, json({ schema: 'cssearth-chart-assets@1', publicBase: `/scenes/${id}/`, charts }));

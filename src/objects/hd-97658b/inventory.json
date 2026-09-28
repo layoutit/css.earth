@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "hd-97658b-arrival.webp",
-      "bytes": 29434,
-      "sha256": "0c93b0e84ccfa57fb99c47807e618f1413f0b6dd52fe3adf2ea3534046b47a40"
+      "bytes": 29328,
+      "sha256": "3786c6be5446fd7091012c8ce3829ec959c704de7d4828a393ec8c2752f410c1"
     },
     {
       "location": "public",
@@ -256,8 +256,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 306,
-      "sha256": "d606bce5cbf1ea7b8da485e88981dbe6cb53ff1500887616144715581c1f4893"
+      "bytes": 308,
+      "sha256": "d557f3505e57aaf6dfae3813c1a96d28c890b28b9164d36525ccaf694ef30409"
     },
     {
       "location": "prepared",
@@ -304,26 +304,26 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 576111,
-      "sha256": "35a11c4ed65b470e7bb307a045711f473531a8c7850075a24cf2b72e3fa5c655"
+      "bytes": 576112,
+      "sha256": "0cdc0591f70f5694930e0602da9e890624c1176fe5f6b2cfad93a50573c6700e"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393146,
-      "sha256": "7967a5ce3a53ad04590f1df3f25683cd73711f83318f50d78d779b75e9b78db4"
+      "bytes": 393166,
+      "sha256": "9d8f404d1072c977434375e185715ec2ad1258cc5f01d9681502baa5d34db795"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1199,
-      "sha256": "7c7232dfad4f9f52c6a6b908c2e02e9a809d91d43016fe2a96c63c3673c95b98"
+      "bytes": 1196,
+      "sha256": "28509254faeaf49dda6f8eed69061f1b3f480343d42ef35e237cc6bd7a5acf77"
     },
     {
       "location": "prepared",
       "filename": "sun.json",
-      "bytes": 677,
-      "sha256": "05a7b7530adf73d1ab3624e3c537b44b05c5734c9d62539d16e91a1863e4a3f6"
+      "bytes": 675,
+      "sha256": "b4787ddc3a60564c5db5bf6e4a4614a440cde69c27c7f815945230bf830f5959"
     },
     {
       "location": "prepared",
@@ -335,7 +335,7 @@
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 1148,
-      "sha256": "69eac3b6ab81932691951e4c940bdab35ea3efb420ec0be683ee36cb41fefbef"
+      "sha256": "ecafe3089efdd1ed8b8e6d871911e63502d5412c6fcc16f73b1e9fb0852f92fc"
     }
   ]
 }

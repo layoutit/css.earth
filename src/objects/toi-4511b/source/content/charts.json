@@ -18,7 +18,7 @@
       "kind": "folded-transit",
       "id": "toi-4511b-transit",
       "title": "TOI-4511 b: its transit",
-      "description": "TOI-4511 b crossing its star, as TESS recorded it: 3 sectors (43, 70, 71) of the SPOC pipeline's 2-minute light curves of TIC 333674399, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "description": "TOI-4511 b crossing its star, as TESS recorded it: 3 sectors (43, 70, 71) of the SPOC pipeline's 2-minute light curves of TIC 333674399, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 20 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 24 minutes at these dates, then averaged in 12-minute bins. Error bars are each bin's standard error.",
       "output": "toi-4511b-transit.svg",
       "metadata": {
         "tic": "TIC 333674399",
@@ -37,9 +37,11 @@
       ],
       "durationHours": 2.9196155,
       "binMinutes": 12,
+      "alignMinutes": 20,
       "notes": [
         "TESS 2-min SPOC · sectors 43, 70, 71",
-        "Folded on the app's orbit; 12-min bins.",
+        "Aligned on TESS's dip, 20 min late; 12-min bins.",
+        "The ephemeris's own 1σ there is 8 min.",
         "Bars: standard error of each bin."
       ]
     }

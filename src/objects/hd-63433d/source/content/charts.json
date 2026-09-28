@@ -18,7 +18,7 @@
       "kind": "folded-transit",
       "id": "hd-63433d-transit",
       "title": "HD 63433 d: its transit",
-      "description": "HD 63433 d crossing its star, as TESS recorded it: 3 sectors (46, 47, 72) of the SPOC pipeline's 2-minute light curves of TIC 130181866, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "description": "HD 63433 d crossing its star, as TESS recorded it: 3 sectors (46, 47, 72) of the SPOC pipeline's 2-minute light curves of TIC 130181866, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 8 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 8 minutes at these dates, then averaged in 10-minute bins. Error bars are each bin's standard error.",
       "output": "hd-63433d-transit.svg",
       "metadata": {
         "tic": "TIC 130181866",
@@ -37,9 +37,11 @@
       ],
       "durationHours": 2.585,
       "binMinutes": 10,
+      "alignMinutes": -8,
       "notes": [
         "TESS 2-min SPOC · sectors 46, 47, 72",
-        "Folded on the app's orbit; 10-min bins.",
+        "Aligned on TESS's dip, 8 min early; 10-min bins.",
+        "The ephemeris's own 1σ there is 3 min.",
         "Bars: standard error of each bin."
       ]
     }

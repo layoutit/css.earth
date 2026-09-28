@@ -13,6 +13,37 @@
       "metadata": {
         "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.85737269789 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-6008b-transit",
+      "title": "TOI-6008 b: its transit",
+      "description": "TOI-6008 b crossing its star, as TESS recorded it: 3 sectors (76, 82, 83) of the SPOC pipeline's 2-minute light curves of TIC 286201103, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 10 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 125 minutes at these dates, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-6008b-transit.svg",
+      "metadata": {
+        "tic": "TIC 286201103",
+        "sectors": [
+          76,
+          82,
+          83
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-6008b",
+      "sources": [
+        "photometry/tess/tess2024058030222-s0076-0000000286201103-0271-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000286201103-0278-s_lc.fits",
+        "photometry/tess/tess2024249191853-s0083-0000000286201103-0280-s_lc.fits"
+      ],
+      "durationHours": 0.65,
+      "binMinutes": 4,
+      "alignMinutes": -10,
+      "notes": [
+        "TESS 2-min SPOC · sectors 76, 82, 83",
+        "Aligned on TESS's dip, 10 min early; 4-min bins.",
+        "The ephemeris's own 1σ there is 42 min.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

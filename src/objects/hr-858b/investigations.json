@@ -33,6 +33,20 @@
         "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
         "https://exoplanetarchive.ipac.caltech.edu/"
       ]
+    },
+    {
+      "id": "tess-transit-timing",
+      "subject": "Transit times in TESS sectors 97, 105 and 106 (2025-2026)",
+      "status": "unresolved",
+      "finding": "Folded on the orbit's straight-line ephemeris (P 3.5852900 d, transit 2459169.27128 BJD; the TOI table's 396.02, uncertain by 8 min at these dates), the SPOC 2-minute light curves show no dip; with HR 858 c and d masked, the dip (229, 239 and 230 ppm; 29, 19 and 27 sigma) comes 294, 390 and 412 min early in sectors 97, 105 and 106, earlier by about 1.5 min per orbit. Bonfanti et al. (2024) report significant transit-timing variations of b and c, close to but out of the 5:3 resonance, with semi-amplitudes of up to 5 hours in their simulation. No archive product gives a TTV ephemeris, so the orbit stays the straight line and there is no transit chart.",
+      "evidence": [
+        "https://arxiv.org/abs/2411.14911",
+        "https://arxiv.org/abs/1905.05193",
+        "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025258001959-s0097-0000000178155732-0294-s_lc.fits",
+        "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026164183000-s0105-0000000178155732-0307-s_lc.fits",
+        "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026192185000-s0106-0000000178155732-0308-s_lc.fits"
+      ],
+      "revisitWhen": "A published TTV ephemeris or dynamical model of HR 858 b and c that preparation can call for the transit times."
     }
   ]
 }

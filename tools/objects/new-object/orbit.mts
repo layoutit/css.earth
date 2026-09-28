@@ -113,6 +113,13 @@ export async function compositeRadius(archive: Archive, planet: string): Promise
 const SOLAR_RADIUS_AU = 695700 / AU_KM;
 /** The date archive ephemerides are compared at, BJD_TDB: 2026-01-01, near the app's scenes and fixed so a draft is reproducible. */
 export const EPHEMERIS_EPOCH_BJD = 2461041.5;
+/** A row's transit-time uncertainty at `epochBjd`: its transit-time error plus its period error times the orbits since. */
+export const ephemerisSigmaDays = (row: ArchiveRow, epochBjd: number) => Math.hypot(row.transitMidError!, Math.round((epochBjd - row.transitMid!) / row.period!) * row.periodError!);
+/** Of the rows that give a period and a transit time with both errors, the one that predicts `epochBjd` best, with its uncertainty there. */
+export function bestEphemeris(rows: readonly ArchiveRow[], epochBjd = EPHEMERIS_EPOCH_BJD) {
+  return rows.flatMap(row => row.period !== undefined && row.transitMid !== undefined && (row.periodError ?? 0) > 0 && (row.transitMidError ?? 0) > 0
+    ? [{ row, sigmaDays: ephemerisSigmaDays(row, epochBjd) }] : []).sort((a, b) => a.sigmaDays - b.sigmaDays)[0];
+}
 /** a/R* by Kepler's third law in solar units: a in au is the cube root of M P^2, P in years. */
 export const keplerRatio = (starMass: number, periodDays: number, starRadius: number) => Math.cbrt(starMass * (periodDays / DAYS_PER_YEAR) ** 2) / (starRadius * SOLAR_RADIUS_AU);
 /** A stated a/R* and Kepler's third law with the same rows' stellar mass and radius agree within this factor. Measured 2026-09-24 on
@@ -136,8 +143,7 @@ export function assembleArchiveOrbit(rows: readonly ArchiveRow[], reference?: st
   // The period and transit time come from one row together: of the rows that give both with their errors, the one whose ephemeris
   // predicts EPHEMERIS_EPOCH best (the transit-time error plus the period error times the orbits since). A default row with a short
   // period and an old transit drifts: HAT-P-11 b's (4.888 d from 2009) put its 2024 TESS transits 5.3 hours late.
-  const timing = [chosen, ...others].flatMap(row => row.period !== undefined && row.transitMid !== undefined && (row.periodError ?? 0) > 0 && (row.transitMidError ?? 0) > 0
-    ? [{ row, sigmaDays: Math.hypot(row.transitMidError!, Math.round((EPHEMERIS_EPOCH_BJD - row.transitMid) / row.period) * row.periodError!) }] : []).sort((a, b) => a.sigmaDays - b.sigmaDays)[0];
+  const timing = bestEphemeris([chosen, ...others]);
   const period = timing ? { value: timing.row.period!, row: timing.row } : pick('period'), transit = timing ? { value: timing.row.transitMid!, row: timing.row } : pick('transitMid');
   const impact = [chosen, ...others].find(row => row.impactParameter !== undefined);
   const timed = [chosen, ...others].find(row => row.durationHours !== undefined && row.radiusRatio !== undefined);

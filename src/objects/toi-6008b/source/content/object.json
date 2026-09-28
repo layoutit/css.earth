@@ -90,6 +90,17 @@
         "path": "../manifest.json",
         "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B"
       }
+    },
+    {
+      "id": "toi-6008b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-6008b/toi-6008b-transit.svg",
+      "alt": "TOI-6008 b crossing its star, as TESS recorded it: 3 sectors (76, 82, 83) of the SPOC pipeline's 2-minute light curves of TIC 286201103, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 10 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 125 minutes at these dates, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-6008b-tess-sector-76",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024058030222-s0076-0000000286201103-0271-s_lc.fits"
+      }
     }
   ],
   "resources": [

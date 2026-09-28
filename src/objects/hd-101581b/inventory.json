@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "hd-101581b-arrival.webp",
-      "bytes": 29958,
-      "sha256": "dd1feec92c26fcfe40c2bb1c40908c5b126f1d741e22b7583b49ebbc140a3b12"
+      "bytes": 29946,
+      "sha256": "3071fa55656a947ac4d54b98b490d8b2fbc79e906cded1d24c0c6c54ea018ef7"
     },
     {
       "location": "public",
@@ -30,6 +30,12 @@
       "filename": "hd-101581b-system-orbits.svg",
       "bytes": 7924,
       "sha256": "ac59477c558e47d7ce37cefa87a0bb7c9db1c3060d0fcf06d281be7d0a227715"
+    },
+    {
+      "location": "public",
+      "filename": "hd-101581b-transit.svg",
+      "bytes": 13188,
+      "sha256": "72a6c283f1e700bb73df9a08e5ab6b12e91afe3aa50a65bf52eccda2898147e7"
     },
     {
       "location": "public",
@@ -257,13 +263,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1409,
-      "sha256": "106babbf7bb09b48e9a9d71cb9509da6c11b3cd6c6accea1e63893fd1481baed"
+      "sha256": "d61b794e491df90e3e746510381f19eb7e5bd1b54f97eaa7c9df01b936f8a732"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2616,
-      "sha256": "0c66bf3067b0e514728895e7845d332d2d5fc64206f864f5057f910cb61aaa72"
+      "bytes": 3453,
+      "sha256": "a6986d547e3645da2fafdeffcdc0b69afeeb59bbf20a4a5de0873bb606cf1652"
     },
     {
       "location": "prepared",

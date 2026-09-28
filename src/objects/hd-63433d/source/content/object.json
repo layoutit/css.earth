@@ -95,7 +95,7 @@
       "id": "hd-63433d-transit",
       "titleKey": "transitLightCurve",
       "src": "/scenes/hd-63433d/hd-63433d-transit.svg",
-      "alt": "HD 63433 d crossing its star, as TESS recorded it: 3 sectors (46, 47, 72) of the SPOC pipeline's 2-minute light curves of TIC 130181866, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "alt": "HD 63433 d crossing its star, as TESS recorded it: 3 sectors (46, 47, 72) of the SPOC pipeline's 2-minute light curves of TIC 130181866, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 8 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 8 minutes at these dates, then averaged in 10-minute bins. Error bars are each bin's standard error.",
       "source": {
         "id": "hd-63433d-tess-sector-46",
         "path": "../manifest.json",

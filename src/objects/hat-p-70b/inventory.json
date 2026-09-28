@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "hat-p-70b-arrival.webp",
-      "bytes": 29742,
-      "sha256": "a661b7e5387675bc0991ea9f4c2b9cd50678cc90cab1491e9ee58d73f736acb3"
+      "bytes": 29872,
+      "sha256": "5149b3690e9ba5054fe8e11f2a92abafc2f570cdc7da53a0abd5038744029a1e"
     },
     {
       "location": "public",
@@ -250,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 309,
-      "sha256": "36ff16af38f5fb79528399809f225923cb23bc6401ffc064ab0764c4098d4c90"
+      "bytes": 307,
+      "sha256": "235c5b28374d0a676799bc5abb72b41335dc8b9bb31877d2d8f0fb6f4fa8529b"
     },
     {
       "location": "prepared",
@@ -298,26 +298,26 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 576103,
-      "sha256": "d45a7fbe3356bcd07d3ae59108bbe588e145c8493f619f185557f5d961835aa0"
+      "bytes": 576082,
+      "sha256": "b2c3098d7a3d3a3619073c54d092ff1d4eeddb226860d44e035dcb183892c4ed"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 393192,
-      "sha256": "f8c8f283ff77d3b840f9dab41c5af5ca43044882b44576f6ba4f61b8f743c771"
+      "sha256": "6f687af7a625d3bd2a15d6b5774d3cb9f29579d74faa3979189f6c2dbbf68c2e"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
       "bytes": 1203,
-      "sha256": "6ab98f267d789d35dfba692a943063dd519d801eeb10eb243204b210b1cf3488"
+      "sha256": "4d4d3ca31f4836c2b69081210093e0510cd3cab238dfe97062fe814bc16ef774"
     },
     {
       "location": "prepared",
       "filename": "sun.json",
-      "bytes": 663,
-      "sha256": "f875ac4b93ea952744751861729563ad1d9b1d3ffe819e0415a7cb4a2ba8fe16"
+      "bytes": 642,
+      "sha256": "ae2e4d8a45f5130e3fefb115f996ff81cd442fe1d259b6ff9a22991b6a789ff0"
     },
     {
       "location": "prepared",
@@ -329,7 +329,7 @@
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 1157,
-      "sha256": "229e6d6a48bfb1270cc234228d6601624d8f645b8ca85bf07787299190cda14b"
+      "sha256": "6baacc86d0ca23f9e860f9b350d4e921356115196d6a90347eb9ee4b6f1ebe22"
     }
   ]
 }
