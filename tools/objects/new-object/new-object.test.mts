@@ -715,3 +715,14 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids/u);
 });
+
+test('a binary whose primary Gaia sees eclipsing on another period is refused; long orbits Gaia cannot measure are not checked', async () => {
+  const { eclipsingPeriodAgrees, GAIA_EB_CHECKED_DAYS } = await import('./generate.mts');
+  // Gaia DR3 vari_eclipsing_binary, 2026-09-28: 6045477944460616704 (Cl* NGC 6121 SAW V66) 0.26988 d; the M4 V66 of Kaluzny et al.
+  // (2013) is an 8.11-day pair. 4658260373306002944 (OGLE-LMC-ECL-09114, the right star by position) 2.99898 d for a 214.37-day orbit.
+  assert.equal(eclipsingPeriodAgrees(8.11130346, 0.2698801868), false, 'the namesake variable is refused');
+  assert.equal(eclipsingPeriodAgrees(8.11130346, 8.1113 / 2), true, 'half the period is the same binary');
+  assert.equal(eclipsingPeriodAgrees(8.11130346, undefined), true, 'no Gaia solution is not a check');
+  assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
+  assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
+});

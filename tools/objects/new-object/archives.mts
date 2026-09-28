@@ -110,6 +110,13 @@ export async function fetchGaiaRow(archive: Archive, sourceId: string) {
   return { csv, row: parseGaiaRow(csv, sourceId) };
 }
 
+/** Gaia DR3's eclipsing-binary period of a source, in days, when its variability pipeline fitted one (gaiadr3.vari_eclipsing_binary). */
+export async function fetchGaiaEclipsingPeriod(archive: Archive, sourceId: string): Promise<number | undefined> {
+  const csv = await archive.text(GAIA_TAP, { REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: `SELECT frequency FROM gaiadr3.vari_eclipsing_binary WHERE source_id = ${sourceId}` });
+  const value = csv.trim().split(/\r?\n/u)[1]?.trim();
+  return value ? 1 / Number(value) : undefined;
+}
+
 export interface Identifiers { readonly main: string; readonly gaia?: string; readonly hd?: number; readonly hr?: number; readonly hip?: number }
 /** The numbers the archives are searched by, read from SIMBAD's identifier list: HD, HR, HIP and the Gaia DR3 source_id. */
 export function readIdentifiers(main: string, identifiers: readonly string[]): Identifiers {

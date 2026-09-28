@@ -12,7 +12,7 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorLens, json } from './lens.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { citedName, isCollaboration, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
+import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { Cited, StarSpec } from './spec.mts';
@@ -130,6 +130,16 @@ export interface Generated {
   readonly todo: readonly string[];
 }
 
+/** Gaia DR3 spans 1,038 days (2014 July 25 to 2017 May 28). An orbit it saw at least ten times has a period it can measure; beyond that
+ * its eclipsing-binary periods are aliases (a 214-day LMC giant pair fitted at 3.0 d, a 118-day one at 187 d, 2026-09-28). */
+export const GAIA_EB_CHECKED_DAYS = 1038 / 10;
+/** A binary's primary must be the star Gaia sees eclipsing on the paper's period, or half or twice it: a namesake variable in a crowded
+ * cluster (M4's other "V66", 0.27 d against 8.11 d) is refused. No Gaia solution, or a period Gaia cannot measure, is not a check. */
+export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | undefined) {
+  if (gaiaDays === undefined || paperDays > GAIA_EB_CHECKED_DAYS) return true;
+  return [paperDays, paperDays / 2, paperDays * 2].some(period => Math.abs(gaiaDays - period) / period < 0.01);
+}
+
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
 export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
@@ -138,6 +148,12 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
   const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row), place = placement(spec, row);
+  const binaryPeriods = spec.companions.flatMap(companion => 'elements' in companion.orbit ? [companion.orbit.elements.periodDays!] : []);
+  if (binaryPeriods.length) {
+    const gaiaDays = await fetchGaiaEclipsingPeriod(archive, row.sourceId);
+    for (const paperDays of binaryPeriods) if (!eclipsingPeriodAgrees(paperDays, gaiaDays))
+      throw new Error(`${id}: Gaia DR3 ${row.sourceId} eclipses every ${gaiaDays!.toFixed(4)} d, not on the orbit's ${paperDays} d (or half or twice it): it is probably another star of that name.`);
+  }
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
   const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: 2016 }, refresh ? id : undefined);
   if (held) throw new Error(`${id}: Gaia DR3 ${row.sourceId} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
