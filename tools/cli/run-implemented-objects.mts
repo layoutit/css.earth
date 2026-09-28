@@ -340,11 +340,11 @@ async function main(mode = process.argv[2]) {
   }
 }
 
-/** The bundle `resolveObjectAssembly` runs for an authored body, loaded as a module. */
+/** `runOperations` runs an authored body's assembly, loaded as a module. */
 async function loadOperations() {
-  const path = resolve("tools/objects/dist/operations.js"), module: unknown = await import(pathToFileURL(path).href);
+  const specifier = "@cssearth/bake/objects/acquisition", module: unknown = await import(specifier);
   const runOperations = typeof module === "object" && module !== null && "runOperations" in module ? module.runOperations : null;
-  if (typeof runOperations !== "function") throw new TypeError(`${path} exports no runOperations function; run pnpm build:tools.`);
+  if (typeof runOperations !== "function") throw new TypeError(`${specifier} exports no runOperations function; run pnpm build:packages.`);
   return runOperations as (mode: string, id: string, argumentsList: string[]) => Promise<unknown>;
 }
 
