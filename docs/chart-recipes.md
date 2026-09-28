@@ -52,9 +52,9 @@ preparation derives image dimensions from the generated SVG. The content
 recipe also records dimensions for consumers of the authored document.
 Keep its alt text, source reference and chart title meaningful.
 
-Generated exoplanets get their charts from `new-object` (`tools/objects/new-object/planet-charts.mts`): HD 3167 c's orbits, HAT-P-11 b's transmission spectrum from Fraine et al. (2014) and WASP-12 b's dayside emission from Crossfield et al. (2012), as the NASA Exoplanet Archive lists them.
+Generated exoplanets get their charts from `new-object` (`tools/objects/new-object/planet-charts.mts`): HD 3167 c's orbits, HAT-P-11 b's transit folded from three TESS sectors (landing on 0 hours once its orbit took the ephemeris that predicts today) and its transmission spectrum from Fraine et al. (2014), as the NASA Exoplanet Archive lists it.
 
-![Generated charts: HD 3167 system orbits, HAT-P-11 b transmission spectrum, WASP-12 b dayside emission](images/generated-exoplanet-charts.webp)
+![Generated charts: HD 3167 system orbits, HAT-P-11 b transit from TESS, HAT-P-11 b transmission spectrum](images/generated-exoplanet-charts.webp)
 
 ## Add or reuse one
 
