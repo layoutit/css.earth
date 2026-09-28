@@ -10,10 +10,13 @@ Its mean radius, 91.6 solar radii, comes from comparing how fast its surface mov
 
 **Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited.
 
+**Brightness.** Gaia DR3 fits the star's G-band light with 6 harmonics of a 23.02-day period (vari_cepheid, source 5338182833266967680; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 1.122 mag, so at minimum the star gives 36% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, one day of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.79 of a cycle after maximum. It plays when Motion is on.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
+- The bake reads Gaia's harmonics as published and holds them to the same row's peak-to-peak amplitude, epoch of maximum, R21 and phi21 ([light-curve.ts](../../../packages/bake/src/photometry/light-curve.ts)); on 2026-09-28 the model's maximum fell 0.0007 d from epoch_g (stated error 0.0060 d; 0.00003 of a period).
 
 ## Known problems
 
@@ -21,5 +24,6 @@ Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) 
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
+- **Brightness.** The model is Gaia's 2014-2017 fit carried 194 cycles to the scene date; with the period's error the phase shown is known to 0.04 of a cycle, and period changes after 2017 are not included. The G band stands for all colours: the star's temperature and colour change through the cycle, and the page does not show that.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

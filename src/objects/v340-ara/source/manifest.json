@@ -140,6 +140,31 @@
           }
         ]
       }
+    },
+    {
+      "id": "v340-ara-gaia-dr3-vari-cepheid",
+      "path": "photometry/gaia-dr3-vari-cepheid.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Ripepi et al. (2023), A&A 674, A17",
+      "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the vari_cepheid row of source_id 5937099633141128448 (period, G-band harmonic amplitudes and phases, epoch of maximum, peak-to-peak amplitude, R21 and phi21).",
+      "redistribution": "One catalogue row, retained unchanged with its credit.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-v340-ara-gaia-dr3-vari-cepheid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

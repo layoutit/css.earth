@@ -21,6 +21,16 @@
         "https://arxiv.org/abs/1212.5478",
         "https://arxiv.org/abs/2307.07559"
       ]
+    },
+    {
+      "id": "light-curve",
+      "subject": "Light curve",
+      "status": "included",
+      "finding": "Gaia DR3 vari_cepheid, source 4661266369343899904: 3 G-band harmonics of a 31.056210162235836 d period, peak-to-peak 1.032 mag; the harmonics reproduce the row's epoch of maximum and peak-to-peak amplitude. The page plays it as a veil over the disc from the scene date, phase known to 0.02 of a cycle there.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243990"
+      ]
     }
   ]
 }

@@ -1,8 +1,9 @@
 export interface PreparedPlaybackSelection { readonly speed?: number; readonly [key: string]: unknown; }
 export type PreparedAnimationMode = "motion" | "pose";
 export type PreparedAnimation = Pick<Animation, "play" | "pause" | "cancel" | "playbackRate" | "currentTime" | "playState">;
-export interface PreparedAnimationOptions { mode?: PreparedAnimationMode; rate?: number; enabledWhen?: Readonly<Record<string, unknown>>; initialTime?: number; }
-interface PlaybackEntry { animation: PreparedAnimation; mode: PreparedAnimationMode; rate: number; enabledWhen: Readonly<Record<string, unknown>>; running: boolean | null; appliedRate: number | null; }
+/** `placesTexels: false` marks motion that moves no texel (a light curve's opacity): texture placements may hold while it plays. */
+export interface PreparedAnimationOptions { mode?: PreparedAnimationMode; rate?: number; enabledWhen?: Readonly<Record<string, unknown>>; initialTime?: number; placesTexels?: boolean; }
+interface PlaybackEntry { animation: PreparedAnimation; mode: PreparedAnimationMode; rate: number; enabledWhen: Readonly<Record<string, unknown>>; placesTexels: boolean; running: boolean | null; appliedRate: number | null; }
 
 // The router grants permission. This owner applies it to retained native
 // animations; it creates no timer, frame loop, visibility or media observer.
@@ -34,16 +35,16 @@ export function createPreparedPlayback() {
     if (errors.length) throw new AggregateError(errors, "Prepared native playback publication failed.");
   }
   return Object.freeze({
-    register(animation: PreparedAnimation, { mode = "motion", rate = 1, enabledWhen = {}, initialTime }: PreparedAnimationOptions = {}) {
+    register(animation: PreparedAnimation, { mode = "motion", rate = 1, enabledWhen = {}, initialTime, placesTexels = true }: PreparedAnimationOptions = {}) {
       if (!animation || (["play", "pause", "cancel"] as const).some(name => typeof animation[name] !== "function") ||
           !["motion", "pose"].includes(mode) || !Number.isFinite(rate) ||
-          (initialTime !== undefined && !Number.isFinite(initialTime)) ||
+          (initialTime !== undefined && !Number.isFinite(initialTime)) || typeof placesTexels !== "boolean" ||
           !enabledWhen || typeof enabledWhen !== "object" || Array.isArray(enabledWhen)) {
         throw new TypeError("Prepared playback requires a native animation and valid prepared role.");
       }
       if (destroyed) { animation.cancel(); return animation; }
       if (handles.has(animation)) return animation;
-      const entry: PlaybackEntry = { animation, mode, rate, enabledWhen: Object.freeze({ ...enabledWhen }), running: null, appliedRate: null };
+      const entry: PlaybackEntry = { animation, mode, rate, enabledWhen: Object.freeze({ ...enabledWhen }), placesTexels, running: null, appliedRate: null };
       handles.set(animation, entry);
       // Pose-addressed WAAPI is never reset as if it were rotation playback.
       if (initialTime !== undefined) animation.currentTime = initialTime;
@@ -60,9 +61,9 @@ export function createPreparedPlayback() {
       if (destroyed) return;
       for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = 0;
     },
-    /** Whether every motion animation is paused at its prepared start, the pose preparation measured. */
+    /** Whether every motion animation that places texels is paused at its prepared start, the pose preparation measured. */
     motionAtRest() {
-      return [...handles.values()].every(({ animation, mode, running }) => mode !== "motion" || !running && Number(animation.currentTime ?? 0) === 0);
+      return [...handles.values()].every(({ animation, mode, placesTexels, running }) => mode !== "motion" || !placesTexels || !running && Number(animation.currentTime ?? 0) === 0);
     },
     captureMotion() {
       return [...handles.values()].filter(entry => entry.mode === "motion")

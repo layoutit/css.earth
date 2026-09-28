@@ -65,6 +65,8 @@ export interface StarSpec {
   readonly distance?: Cited;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   readonly limb?: { readonly none: string };
+  /** A published light curve the page plays: the star's Gaia DR3 vari_cepheid model (light-curve.mts). */
+  readonly lightCurve?: 'gaia-dr3-vari-cepheid';
   readonly color?: { readonly skip: readonly ColorRoute[]; readonly reason: string };
   readonly planets: readonly HostedSpec[]; readonly companions: readonly HostedSpec[];
   /** Drafted reader text, cited to the paper at `locator`; without it the card and introduction stay marked for a person. */
@@ -199,7 +201,7 @@ export function parseStarSpec(value: unknown): StarSpec {
   const input = requireRecord(value, 'star spec'), id = requireString(input.id, 'id');
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: a star id is lowercase letters, digits and hyphens.`);
   const at = (label: string) => `${id}.${label}`;
-  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'distance', 'spin', 'limb', 'color', 'planets', 'companions', 'text', 'notes']);
+  const known = new Set(['id', 'name', 'system', 'description', 'order', 'target', 'gaia', 'paper', 'radius', 'mass', 'temperature', 'gravity', 'radialVelocity', 'distance', 'spin', 'limb', 'lightCurve', 'color', 'planets', 'companions', 'text', 'notes']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown spec fields ${unknown.join(', ')}.`);
   const gaia = input.gaia === undefined ? undefined : requireString(input.gaia, at('gaia')), target = input.target === undefined ? undefined : requireString(input.target, at('target'));
@@ -220,6 +222,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     return { skip: skip as ColorRoute[], reason: requireString(c.reason, at('color.reason')) };
   })();
   const limb = input.limb === undefined ? undefined : { none: requireString(requireRecord(input.limb, at('limb')).none, at('limb.none')) };
+  if (input.lightCurve !== undefined && input.lightCurve !== 'gaia-dr3-vari-cepheid') throw new TypeError(`${at('lightCurve')} is "gaia-dr3-vari-cepheid", not ${JSON.stringify(input.lightCurve)}.`);
   return {
     id, name, system: input.system === undefined ? `${name} system` : requireString(input.system, at('system')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), ...(target ? { target } : {}), ...(gaia ? { gaia } : {}),
@@ -229,7 +232,7 @@ export function parseStarSpec(value: unknown): StarSpec {
     ...(input.gravity === undefined ? {} : { gravity: cited(input.gravity, at('gravity'), [-1, 9]) }),
     ...(input.radialVelocity === undefined ? {} : { radialVelocity: cited(input.radialVelocity, at('radialVelocity'), [-1000, 1000]) }),
     ...(input.distance === undefined ? {} : { distance: cited(input.distance, at('distance'), [1, 1e7]) }),
-    ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(color ? { color } : {}),
+    ...(spin ? { spin } : {}), ...(limb ? { limb } : {}), ...(input.lightCurve ? { lightCurve: 'gaia-dr3-vari-cepheid' as const } : {}), ...(color ? { color } : {}),
     planets: input.planets === undefined ? [] : requireArray(input.planets, at('planets')).map((entry, i) => hostedSpec(entry, 'planet', `${at('planets')}[${i}]`)),
     companions: input.companions === undefined ? [] : requireArray(input.companions, at('companions')).map((entry, i) => hostedSpec(entry, 'companion', `${at('companions')}[${i}]`)),
     ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }),

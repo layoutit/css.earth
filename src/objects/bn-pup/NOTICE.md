@@ -5,3 +5,5 @@ Radius, mass and temperature: Radius 76.3 +/- 1.9 solar radii from Groenewegen (
 Colour: a Planck spectrum at the temperature of Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 43, Name='BN Pup', columns Teff, e_Teff (K): Teff 5250 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic), through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
 
 Placement: Gaia DR3 source 5596601154188852352: position, proper motion; distance: Groenewegen (2013), A&A 550, A70, table10, BN Pup: Baade-Wesselink distance (pc) 3570.8 +/- 95.2 (Monte-Carlo). This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+
+Light curve: Gaia DR3 vari_cepheid, source 5596601154188852352; Ripepi et al. (2023), A&A 674, A17.

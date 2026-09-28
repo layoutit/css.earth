@@ -52,5 +52,6 @@
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.",
     "SIMBAD does not resolve \"U 1\", the name Groenewegen (2013) gives it; it is placed by its Gaia DR3 source, OGLE-LMC-CEP-0079 in the OGLE catalogue."
   ],
-  "order": 1977
+  "order": 1977,
+  "lightCurve": "gaia-dr3-vari-cepheid"
 }

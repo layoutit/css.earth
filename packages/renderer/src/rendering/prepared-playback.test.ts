@@ -69,3 +69,14 @@ test("cleanup and publication failures process every native handle before report
   assert.equal(owner.stats().registeredCount, 0);
   owner.destroy(); const late = animation(); owner.register(late); assert.equal(late.playState, "idle");
 });
+test("a light curve plays with the motion permission but never holds texture placements off rest", () => {
+  const owner = createPreparedPlayback(), spin = animation(0), light = animation(0);
+  owner.register(light, { initialTime: 0, placesTexels: false }); owner.setReady();
+  owner.setAllowed(true); light.currentTime = 500;
+  assert.equal(light.playState, "running"); assert.equal(owner.motionAtRest(), true);
+  owner.register(spin, { initialTime: 0 });
+  assert.equal(spin.playState, "running"); assert.equal(owner.motionAtRest(), false);
+  owner.setAllowed(false); assert.equal(light.playState, "paused"); assert.equal(spin.playState, "paused");
+  assert.throws(() => owner.register(animation(), { placesTexels: "no" as unknown as boolean }), /prepared role/);
+  owner.destroy();
+});

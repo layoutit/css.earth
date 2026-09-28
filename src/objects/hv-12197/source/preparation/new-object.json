@@ -56,5 +56,6 @@
     "source": "No catalogued radial velocity: Gaia DR3 measures none for source 4663542079171750528 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 10,000,000 of its distance per century",
     "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528"
   },
-  "order": 1946
+  "order": 1946,
+  "lightCurve": "gaia-dr3-vari-cepheid"
 }

@@ -35,7 +35,7 @@ export function draftFromCepheid(row: ReturnType<typeof parseCepheidRow>) {
         locator: `table10, ${row.name}: Per, Rad, Dist` },
       color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'],
         reason: `Interstellar dust reddens every spectrum of this star, E(B-V) = ${row.reddening[0]} +/- ${row.reddening[1]} (${CEPHEIDS.credit}, table10), and its light changes through each pulsation` },
-      planets: [], companions: [],
+      lightCurve: 'gaia-dr3-vari-cepheid', planets: [], companions: [],
       notes: ['The star pulsates; it is drawn at its mean radius.'],
     },
     missing: ['temperature (a mean effective temperature, cited)', 'mass (cited, or "gaia-flame")'],

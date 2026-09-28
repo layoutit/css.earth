@@ -51,5 +51,6 @@
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
   ],
-  "order": 1982
+  "order": 1982,
+  "lightCurve": "gaia-dr3-vari-cepheid"
 }
