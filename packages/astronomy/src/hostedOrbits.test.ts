@@ -615,3 +615,23 @@ describe('Cygnus X-1: a black hole on its measured orbit around its supergiant',
     expect(dot(h, sight) / Math.hypot(...h)).toBeCloseTo(Math.cos((180 - 152.49) * Math.PI / 180), 2)
   })
 })
+
+describe('eclipsing binaries: each paper\'s periastron angle, checked against its own secondary eclipse', () => {
+  // Independent oracles: a secondary-eclipse timing each paper publishes separately from the elements the records carry.
+  const cases = [
+    // Kaluzny et al. (2015, AJ 150, 155; arXiv:1508.04894), Eq. 1: secondary minimum at HJD 2453891.82853 + 5.29617486 E.
+    { id: 'ngc-6362-v40-b', host: 'ngc-6362-v40-a', secondaryHjd: 2453891.82853, periodDays: 5.29617486 },
+    // Kaluzny et al. (2013, AJ 145, 43; arXiv:1301.2946), Table 3 footnote: the secondary minimum occurs at phase 0.6086052.
+    { id: 'm4-v69-b', host: 'm4-v69-a', secondaryHjd: 2450048.34890 + 0.6086052 * 48.1882687, periodDays: 48.1882687 },
+  ] as const
+  for (const c of cases) it(`puts ${c.id} straight behind its star at the published secondary eclipse, within a tenth of an hour`, () => {
+    const star = starAstrometry(c.host), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const depth = (t: number) => { const p = hostedPlanetStateRelativeKm(c.id, t).positionKm; return dot(p, sight) / Math.hypot(...p) }
+    for (const n of [0, 100, 1000]) {
+      const t = c.secondaryHjd + n * c.periodDays
+      let best = 0
+      for (let dt = -0.5; dt <= 0.5; dt += 0.001) if (depth(t + dt) > depth(t + best)) best = dt
+      expect(Math.abs(best) * 24, `cycle ${n}`).toBeLessThan(0.1)
+    }
+  })
+})

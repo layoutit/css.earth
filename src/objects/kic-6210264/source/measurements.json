@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kic-6210264",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 7,499,855 km at 2213.21 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 2213.2133823096437,
+  "distanceSource": "Gaia DR3 parallax 0.4518 +/- 0.0087 mas (same row, RUWE 0.82): 2213.21 pc, no zero-point correction",
+  "radiusKm": 7499854.7,
+  "radiusSource": "Radius 10.7803 +/- 0.179 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 6210264 (Gold): Radius (Mosser scale, solar radii) 10.7803 +/- 0.179 (https://arxiv.org/abs/2410.00102): 7,499,855 km at 695,700 km per solar radius. Mass 1.546 +/- 0.0562 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 6210264 (Gold): Mass (Mosser scale, solar masses) 1.546 +/- 0.0562 (https://arxiv.org/abs/2410.00102); GM is that mass times the JPL solar GM. Temperature 4933 +/- 48 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 6210264 (Gold): APOGEE effective temperature (K) 4933.0576 +/- 48.4407 (https://arxiv.org/abs/2410.00102). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4933,
+  "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 6210264 (Gold): APOGEE effective temperature (K) 4933.0576 +/- 48.4407 (https://arxiv.org/abs/2410.00102)",
+  "surfaceGravityLogg": 2.5647,
+  "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 6210264 (Gold): Asteroseismic log g 2.5647 +/- 0.0037 (https://arxiv.org/abs/2410.00102)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

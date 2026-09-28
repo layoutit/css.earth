@@ -1,0 +1,51 @@
+{
+  "host": "m4-v69-a",
+  "companions": [
+    {
+      "id": "m4-v69-b",
+      "name": "M4 V69 B",
+      "description": "The secondary star of the eclipsing binary M4 V69, 0.7278 solar masses and 0.8074 solar radii; the two stars eclipse each other every 48.188 days.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+        "credit": "Kaluzny et al. (2013AJ....145...43K)"
+      },
+      "radius": {
+        "value": 0.8074,
+        "source": "Secondary radius (solar radii) 0.8074 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+        "uncertainty": 0.008
+      },
+      "mass": {
+        "value": 0.7278,
+        "source": "Secondary mass (solar masses) 0.7278 +/- 0.0048, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+        "uncertainty": 0.0048
+      },
+      "temperature": {
+        "value": 5916,
+        "source": "Secondary log Teff 3.772 +/- 0.01, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 5916 K",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+        "uncertainty": 136
+      },
+      "orbit": {
+        "elements": {
+          "semiMajorAxisStellarRadii": 73.6119,
+          "periodDays": 48.1882687,
+          "inclinationDegrees": 89.789,
+          "eccentricity": 0.384,
+          "transitTimeBmjdTdb": 50047.8489,
+          "argumentOfPeriapsisDegrees": 65.25
+        },
+        "epoch": "inferior-conjunction",
+        "source": "M4 V69: P 48.1882687 d and primary-eclipse time HJD 2450048.3489 (Section II, text before Equation (1)); i 89.789 degrees (Table 11, column V69 (third)); e 0.384, omega 65.25 degrees (Table 10, column V69); checked: with it as published the companion is straight behind within 0.07 h of the published secondary eclipse at phase 0.6086052 (Table 3 footnote); +180 degrees would miss by 72 h. HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
+        "url": "https://arxiv.org/abs/1301.2946"
+      },
+      "text": {
+        "card": "The secondary star of M4 V69, a pair that eclipse each other every 48.188 days.",
+        "introduction": "It has 0.7278 solar masses and 0.8074 solar radii; its partner has 0.7665 and 0.8655, measured from the eclipses and the stars' motions.",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), M4 V69: Mass, Radius and Period, from Kaluzny et al. (2013AJ....145...43K)"
+      },
+      "order": 1854
+    }
+  ]
+}

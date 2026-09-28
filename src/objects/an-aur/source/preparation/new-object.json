@@ -1,0 +1,60 @@
+{
+  "id": "an-aur",
+  "name": "AN Aur",
+  "system": "AN Aur system",
+  "description": "A Cepheid in the Milky Way that pulsates every 10.29 days; its mean radius is 93.6 solar radii.",
+  "target": "AN Aur",
+  "gaia": "201574982848108416",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 93.6,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, AN Aur: Baade-Wesselink mean radius (solar radii) 93.6 +/- 8.1 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 8.1
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5500,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 14, Name='AN Aur', columns Teff, e_Teff (K): Teff 5500 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 153
+  },
+  "distance": {
+    "value": 5301.6,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, AN Aur: Baade-Wesselink distance (pc) 5301.6 +/- 463.4 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 463.4
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.6 +/- 0.057 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way that swells and shrinks every 10.3 days.",
+    "introduction": "Its mean radius, 93.6 solar radii, comes from comparing how fast its surface moves with how its size changes, 5,302 parsecs away.",
+    "locator": "table10, AN Aur: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "radialVelocity": {
+    "value": 1.9,
+    "uncertainty": 0.2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 201574982848108416 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
+  },
+  "order": 1925
+}

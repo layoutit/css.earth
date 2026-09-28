@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ogle-smc-ecl-1421-b",
+  "displayName": "OGLE-SMC-ECL-1421 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "24 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+          "label": "Graczyk et al. 2020",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "103 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://arxiv.org/abs/2010.08754",
+          "label": "Graczyk et al. 2020",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.9 solar masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+          "label": "Graczyk et al. 2020",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ogle-smc-ecl-1421-b-lens-color.webp",
+        "surface": "ogle-smc-ecl-1421-b-surface-color@2x.webp",
+        "poles": "ogle-smc-ecl-1421-b-poles-color@2x.webp",
+        "source": {
+          "id": "ogle-smc-ecl-1421-b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,023 K and log g 2.14 (u1 0.615, u2 0.157): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Graczyk et al. (2020ApJ...904...13G)",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+      "credit": "Graczyk et al. (2020ApJ...904...13G)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ogle-smc-ecl-1421-b.json",
+      "credit": "Radius from Secondary radius (solar radii) 23.8 +/- 0.2, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G); mass from Secondary mass (solar masses) 2.85 +/- 0.02, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G); orbit from OGLE-SMC-ECL-1421: P 102.8984 d and primary-eclipse time HJD 2452818.913 (the 2014 ephemeris, arXiv:1311.2340, with its observed period); i 88.05 degrees (arXiv:2010.08754, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses"
+    }
+  }
+}

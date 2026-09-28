@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ngc-6362-v41-a",
+  "displayName": "NGC 6362 V41 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+          "label": "Kaluzny et al. (2015), The Astronomical Journal 150 155",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "7,649 parsecs",
+        "source": {
+          "catalogueId": "baumgardt-vasiliev-2021",
+          "url": "https://arxiv.org/abs/2105.09526",
+          "label": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 3, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ngc-6362-v41-a-lens-color.webp",
+        "surface": "ngc-6362-v41-a-surface-color@2x.webp",
+        "poles": "ngc-6362-v41-a-poles-color@2x.webp",
+        "source": {
+          "id": "ngc-6362-v41-a-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,124 K and log g 4.291 (u1 0.395, u2 0.296): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kaluzny et al. (2015AJ....150..155K)",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+      "credit": "Kaluzny et al. (2015AJ....150..155K)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ngc-6362-v41-a.json",
+      "credit": "Primary radius radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

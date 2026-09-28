@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "v340-ara",
+  "card": {
+    "text": "A Cepheid in the Milky Way that swells and shrinks every 20.8 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1212-5478",
+        "url": "https://arxiv.org/abs/1212.5478",
+        "label": "Groenewegen (2012)",
+        "checked": "2026-09-28",
+        "locator": "table10, V340 Ara: Per, Rad, Dist"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its mean radius, 99.1 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,712 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1212-5478",
+        "url": "https://arxiv.org/abs/1212.5478",
+        "label": "Groenewegen (2012)",
+        "checked": "2026-09-28",
+        "locator": "table10, V340 Ara: Per, Rad, Dist"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light."
+    }
+  }
+}

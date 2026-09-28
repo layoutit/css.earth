@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "ngc-6362-v40-b",
+  "radiusKm": 693612.9,
+  "radiusSource": "Radius 0.997 +/- 0.013 solar radii from Secondary radius (solar radii) 0.997 +/- 0.013, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K): 693,612.9 km at 695,700 km per solar radius. GM from the mass 0.7947 +/- 0.0048 solar masses (Secondary mass (solar masses) 0.7947 +/- 0.0048, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K), https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K) times the JPL solar GM. Temperature 6095 +/- 154 K from Secondary log Teff 3.785 +/- 0.011, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 6095 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K). A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.2961725,
+  "orbitalPeriodSource": "NGC 6362 V40: P 5.2961725 d and primary-eclipse time HJD 2453915.50966 (Section II.1, after Equation (1)); i 88.22 degrees (Table 4, column V40); e 0.05054, omega 206.6 degrees (Table 4, column V40); stored +180 degrees: as published the companion would pass behind 7.3 h from the published secondary-minimum ephemeris (Eq. 1); +180 puts it within 0.01 h. HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1508.04894): P 5.2961725 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of NGC 6362 V40 B is measured; only its size, mass and orbit are."
+  },
+  "effectiveTemperatureK": 6095,
+  "effectiveTemperatureSource": "Secondary log Teff 3.785 +/- 0.011, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 6095 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K)",
+  "surfaceGravityLogg": 4.34,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ngc-6362-v40-b.json, log10(GM/R^2) in cgs, rounded to two decimals",
+  "massSource": "0.7947 solar masses: Secondary mass (solar masses) 0.7947 +/- 0.0048, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K)."
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/kn-cen/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "kn-cen-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csskn-cen-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "kn-cen-surface-{id}{suffix}.webp",
+      "thumbnail": "kn-cen-lens-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "qualification": "Uniform photosphere colour from a blackbody at the star's published temperature. No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "kn-cen-context-{id}{suffix}.webp",
+    "limbOutput": "kn-cen-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csskn-cen-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "ngc-6362-v40-a",
+  "name": "NGC 6362 V40 A",
+  "system": "NGC 6362 V40 system",
+  "description": "The primary star of the eclipsing binary NGC 6362 V40, 0.8337 solar masses and 1.3253 solar radii; the two stars eclipse each other every 5.296 days.",
+  "target": "Cl* NGC 6362 SAW V40",
+  "gaia": "5813087468905224320",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+    "credit": "Kaluzny et al. (2015AJ....150..155K)"
+  },
+  "radius": {
+    "value": 1.3253,
+    "source": "Primary radius (solar radii) 1.3253 +/- 0.0077, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+    "uncertainty": 0.0077
+  },
+  "mass": {
+    "value": 0.8337,
+    "source": "Primary mass (solar masses) 0.8337 +/- 0.0063, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+    "uncertainty": 0.0063
+  },
+  "temperature": {
+    "value": 6152,
+    "source": "Primary log Teff 3.789 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 6152 K",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+    "uncertainty": 127
+  },
+  "gravity": {
+    "value": 4.114,
+    "source": "Primary log g 4.114 +/- 0.005, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+    "uncertainty": 0.005
+  },
+  "distance": {
+    "value": 7649,
+    "source": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 3, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc",
+    "url": "https://arxiv.org/abs/2105.09526",
+    "uncertainty": 67
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The primary star of NGC 6362 V40, a pair that eclipse each other every 5.296 days.",
+    "introduction": "It has 0.8337 solar masses and 1.3253 solar radii; its partner has 0.7947 and 0.997, measured from the eclipses and the stars' motions.",
+    "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V40: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
+  },
+  "notes": [
+    "Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Kaluzny et al. (2015AJ....150..155K).",
+    "SIMBAD knows the system as Cl* NGC 6362 SAW V40 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.12 arcsec from SIMBAD's position, G = 18.02 against DEBCat's V = 18.22."
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 5813087468905224320 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 2,000,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205813087468905224320"
+  },
+  "order": 1915
+}

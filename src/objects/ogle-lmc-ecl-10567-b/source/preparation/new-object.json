@@ -1,0 +1,49 @@
+{
+  "host": "ogle-lmc-ecl-10567-a",
+  "companions": [
+    {
+      "id": "ogle-lmc-ecl-10567-b",
+      "name": "OGLE-LMC-ECL-10567 B",
+      "description": "The secondary star of the eclipsing binary OGLE-LMC-ECL-10567, 3.184 solar masses and 36.64 solar radii; the two stars eclipse each other every 117.975 days.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+        "credit": "Graczyk et al. (2018ApJ...860....1G)"
+      },
+      "radius": {
+        "value": 36.64,
+        "source": "Secondary radius (solar radii) 36.64 +/- 0.25, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+        "uncertainty": 0.25
+      },
+      "mass": {
+        "value": 3.184,
+        "source": "Secondary mass (solar masses) 3.184 +/- 0.026, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+        "uncertainty": 0.026
+      },
+      "temperature": {
+        "value": 4710,
+        "source": "Secondary log Teff 3.673 +/- 0.007, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G): 4710 K",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+        "uncertainty": 76
+      },
+      "orbit": {
+        "elements": {
+          "semiMajorAxisStellarRadii": 7.6863,
+          "periodDays": 117.9747,
+          "inclinationDegrees": 83.7,
+          "eccentricity": 0,
+          "transitTimeBmjdTdb": 52167.9
+        },
+        "source": "OGLE-LMC-ECL-10567: P 117.9747 d and primary-eclipse time HJD 2452168.4 (arXiv:1805.04952, Table 1 (tbl:1), column $T_0$ (HJD-2450000) and table comment); i 83.7 degrees (arXiv:1805.04952, Table 3, column $i$ (deg)); e 0 (circular). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
+        "url": "https://arxiv.org/abs/1805.04952"
+      },
+      "text": {
+        "card": "The secondary star of OGLE-LMC-ECL-10567, a pair that eclipse each other every 117.975 days.",
+        "introduction": "It has 3.184 solar masses and 36.64 solar radii; its partner has 3.333 and 24.6, measured from the eclipses and the stars' motions.",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-LMC-ECL-10567: Mass, Radius and Period, from Graczyk et al. (2018ApJ...860....1G)"
+      },
+      "order": 1922
+    }
+  ]
+}

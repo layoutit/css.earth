@@ -1,0 +1,30 @@
+{
+ "id": "hv-12199",
+ "classification": "star",
+ "order": 1948,
+ "physical": {
+  "name": "HV 12199",
+  "horizonsCode": null,
+  "meanRadiusKm": 18644760,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5750
+ },
+ "physicalNotes": "Radius 26.8 +/- 1.6 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 12199: Baade-Wesselink mean radius (solar radii) 26.8 +/- 1.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 18,644,760 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5750 +/- 250 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC3724, columns Teffp, e_Teffp: Teff 5750 +/- 250 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 78.35474632764354,
+  "declinationDegrees": -65.49143864673479,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 51317.8,
+  "properMotionRaMasPerYear": 1.5381471410883818,
+  "properMotionDecMasPerYear": 0.2575924949997667,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4663542117864349440 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hv-12199/source/photometry/gaia-dr3-source.csv",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, HV 12199: Baade-Wesselink distance (pc) 51317.8 +/- 3040.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 51317.8 +/- 3040.6 pc; Gaia DR3 parallax -0.0171 +/- 0.0371 mas (same row, RUWE 1.04), -0.5 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 1.538, 0.258 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 4663542117864349440 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542117864349440)"
+  }
+ }
+}

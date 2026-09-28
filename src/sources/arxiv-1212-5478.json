@@ -1,0 +1,48 @@
+{
+  "id": "arxiv-1212-5478",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Groenewegen (2012): Baade-Wesselink distances to Galactic and Magellanic Cloud Cepheids and the effect of metallicity",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1212.5478"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201220446"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1212.5478",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201220446",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1212.5478",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Groenewegen (2012)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1212.5478"
+    }
+  ],
+  "creators": [
+    "M. A. T. Groenewegen"
+  ],
+  "publicationDate": "2012"
+}

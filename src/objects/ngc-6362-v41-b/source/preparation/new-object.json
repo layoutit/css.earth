@@ -1,0 +1,51 @@
+{
+  "host": "ngc-6362-v41-a",
+  "companions": [
+    {
+      "id": "ngc-6362-v41-b",
+      "name": "NGC 6362 V41 B",
+      "description": "The secondary star of the eclipsing binary NGC 6362 V41, 0.728 solar masses and 0.7307 solar radii; the two stars eclipse each other every 17.889 days.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "credit": "Kaluzny et al. (2015AJ....150..155K)"
+      },
+      "radius": {
+        "value": 0.7307,
+        "source": "Secondary radius (solar radii) 0.7307 +/- 0.0046, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "uncertainty": 0.0046
+      },
+      "mass": {
+        "value": 0.728,
+        "source": "Secondary mass (solar masses) 0.728 +/- 0.0047, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "uncertainty": 0.0047
+      },
+      "temperature": {
+        "value": 5741,
+        "source": "Secondary log Teff 3.759 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 5741 K",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "uncertainty": 119
+      },
+      "orbit": {
+        "elements": {
+          "semiMajorAxisStellarRadii": 31.017,
+          "periodDays": 17.8888441,
+          "inclinationDegrees": 89.547,
+          "eccentricity": 0.3125,
+          "transitTimeBmjdTdb": 54263.15242,
+          "argumentOfPeriapsisDegrees": 141.23
+        },
+        "epoch": "inferior-conjunction",
+        "source": "NGC 6362 V41: P 17.8888441 d and primary-eclipse time HJD 2454263.65242 (Section II.1, before Equation (2)); i 89.547 degrees (Table 4, column V41); e 0.3125, omega 321.23 degrees (Table 4, column V41); stored +180 degrees, the convention checked on NGC 6362 V40 in the same paper (Kaluzny et al. 2015); no secondary-eclipse time of V41 is published. HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses",
+        "url": "https://arxiv.org/abs/1508.04894"
+      },
+      "text": {
+        "card": "The secondary star of NGC 6362 V41, a pair that eclipse each other every 17.889 days.",
+        "introduction": "It has 0.728 solar masses and 0.7307 solar radii; its partner has 0.8215 and 1.0739, measured from the eclipses and the stars' motions.",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V41: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
+      },
+      "order": 1918
+    }
+  ]
+}

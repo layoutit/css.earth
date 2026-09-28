@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ngc-6362-v40-a",
+  "angularDiameterMas": 0,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 922,011 km at 7649.00 pc = 0 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 7649,
+  "distanceSource": "Baumgardt & Vasiliev (2021), MNRAS 505, 5957, Table 3, mean distance of NGC 6362 from 28 determinations: 7.649 (+0.067/-0.066) kpc (https://arxiv.org/abs/2105.09526): 7649 +/- 67 pc; Gaia DR3 parallax 0.0672 +/- 0.1093 mas (same row, RUWE 1.00), 0.6 standard errors, is not used",
+  "radiusKm": 922011.2,
+  "radiusSource": "Radius 1.3253 +/- 0.0077 solar radii from Primary radius (solar radii) 1.3253 +/- 0.0077, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K): 922,011 km at 695,700 km per solar radius. Mass 0.8337 +/- 0.0063 solar masses from Primary mass (solar masses) 0.8337 +/- 0.0063, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K); GM is that mass times the JPL solar GM. Temperature 6152 +/- 127 K from Primary log Teff 3.789 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 6152 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6152,
+  "effectiveTemperatureSource": "Primary log Teff 3.789 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 6152 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K)",
+  "surfaceGravityLogg": 4.114,
+  "surfaceGravitySource": "Primary log g 4.114 +/- 0.005, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

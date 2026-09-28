@@ -1,0 +1,59 @@
+{
+  "id": "m4-v66-a",
+  "name": "M4 V66 A",
+  "system": "M4 V66 system",
+  "description": "The primary star of the eclipsing binary M4 V66, 0.7842 solar masses and 0.9347 solar radii; the two stars eclipse each other every 8.111 days.",
+  "target": "Cl* NGC 6121 SAW V66",
+  "gaia": "6045477944460616704",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "credit": "Kaluzny et al. (2013AJ....145...43K)"
+  },
+  "radius": {
+    "value": 0.9347,
+    "source": "Primary radius (solar radii) 0.9347 +/- 0.0048, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 0.0048
+  },
+  "mass": {
+    "value": 0.7842,
+    "source": "Primary mass (solar masses) 0.7842 +/- 0.0045, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 0.0045
+  },
+  "temperature": {
+    "value": 6166,
+    "source": "Primary log Teff 3.79 +/- 0.007, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 6166 K",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 99
+  },
+  "gravity": {
+    "value": 4.388,
+    "source": "Primary log g 4.388 +/- 0.077, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+    "uncertainty": 0.077
+  },
+  "distance": {
+    "value": 1820,
+    "source": "Kaluzny et al. (2013), AJ 145, 43, the distance to M4 from V66 and V69: 1.82 +/- 0.04 kpc",
+    "url": "https://arxiv.org/abs/1301.2946",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The primary star of M4 V66, a pair that eclipse each other every 8.111 days.",
+    "introduction": "It has 0.7842 solar masses and 0.9347 solar radii; its partner has 0.7443 and 0.8298, measured from the eclipses and the stars' motions.",
+    "locator": "DEBCat (Southworth 2015, ASPC 496, 164), M4 V66: Mass, Radius and Period, from Kaluzny et al. (2013AJ....145...43K)"
+  },
+  "notes": [
+    "Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Kaluzny et al. (2013AJ....145...43K).",
+    "SIMBAD knows the system as Cl* NGC 6121 SAW V66 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.36 arcsec from SIMBAD's position, G = 16.58 against DEBCat's V = 16.84."
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 6045477944460616704 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 600,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%206045477944460616704"
+  },
+  "order": 1913
+}

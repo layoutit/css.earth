@@ -1,0 +1,59 @@
+{
+  "id": "ogle-lmc-ecl-09114-a",
+  "name": "OGLE-LMC-ECL-09114 A",
+  "system": "OGLE-LMC-ECL-09114 system",
+  "description": "The primary star of the eclipsing binary OGLE-LMC-ECL-09114, 3.304 solar masses and 26.33 solar radii; the two stars eclipse each other every 214.366 days.",
+  "target": "OGLE LMC-ECL-09114",
+  "gaia": "4658260373306002944",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+    "credit": "Graczyk et al. (2018ApJ...860....1G)"
+  },
+  "radius": {
+    "value": 26.33,
+    "source": "Primary radius (solar radii) 26.33 +/- 0.34, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+    "uncertainty": 0.34
+  },
+  "mass": {
+    "value": 3.304,
+    "source": "Primary mass (solar masses) 3.304 +/- 0.023, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+    "uncertainty": 0.023
+  },
+  "temperature": {
+    "value": 5236,
+    "source": "Primary log Teff 3.719 +/- 0.005, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G): 5236 K",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+    "uncertainty": 60
+  },
+  "gravity": {
+    "value": 2.116,
+    "source": "Primary log g 2.116 +/- 0.011, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G)",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+    "uncertainty": 0.011
+  },
+  "distance": {
+    "value": 49888,
+    "source": "Pietrzynski et al. (2019), Nature 567, 200, Table 1: distance modulus 18.490 +/- 0.028 for OGLE-LMC-ECL-09114, converted here as 10^(1 + m/5) pc",
+    "url": "https://arxiv.org/abs/1903.08096",
+    "uncertainty": 643
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "The primary star of OGLE-LMC-ECL-09114, a pair that eclipse each other every 214.366 days.",
+    "introduction": "It has 3.304 solar masses and 26.33 solar radii; its partner has 3.205 and 18.79, measured from the eclipses and the stars' motions.",
+    "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-LMC-ECL-09114: Mass, Radius and Period, from Graczyk et al. (2018ApJ...860....1G)"
+  },
+  "notes": [
+    "Masses, radii and temperatures as DEBCat (Southworth 2015, ASPC 496, 164) (https://www.astro.keele.ac.uk/jkt/debcat/) lists them from Graczyk et al. (2018ApJ...860....1G); Pietrzynski et al. (2013Natur.495...76P).",
+    "SIMBAD knows the system as OGLE LMC-ECL-09114 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.47 arcsec from SIMBAD's position, G = 16.46 against DEBCat's V = 16.71."
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 4658260373306002944 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204658260373306002944"
+  },
+  "order": 1919
+}

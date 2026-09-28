@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kic-12217154",
+  "angularDiameterMas": 0.08,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 8,288,709 km at 1469.59 pc = 0.08 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 1469.592670746022,
+  "distanceSource": "Gaia DR3 parallax 0.6805 +/- 0.0107 mas (same row, RUWE 0.95): 1469.59 pc, no zero-point correction",
+  "radiusKm": 8288708.9,
+  "radiusSource": "Radius 11.9142 +/- 0.2101 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 12217154 (Gold): Radius (Mosser scale, solar radii) 11.9142 +/- 0.2101 (https://arxiv.org/abs/2410.00102): 8,288,709 km at 695,700 km per solar radius. Mass 2.0148 +/- 0.0779 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 12217154 (Gold): Mass (Mosser scale, solar masses) 2.0148 +/- 0.0779 (https://arxiv.org/abs/2410.00102); GM is that mass times the JPL solar GM. Temperature 4902 +/- 47 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 12217154 (Gold): APOGEE effective temperature (K) 4902.3276 +/- 46.7896 (https://arxiv.org/abs/2410.00102). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4902,
+  "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 12217154 (Gold): APOGEE effective temperature (K) 4902.3276 +/- 46.7896 (https://arxiv.org/abs/2410.00102)",
+  "surfaceGravityLogg": 2.5929,
+  "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 12217154 (Gold): Asteroseismic log g 2.5929 +/- 0.0038 (https://arxiv.org/abs/2410.00102)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}
