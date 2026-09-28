@@ -38,6 +38,10 @@ export function draftFromApokasc(row: ReturnType<typeof parseApokascRow>) {
     paper: { url: APOKASC.paper, credit: APOKASC.credit },
     radius, mass, temperature: { ...cite(row.teff, 'APOGEE effective temperature (K)'), value: Math.round(row.teff[0]), uncertainty: Math.round(row.teff[1]) },
     gravity: cite(row.logg, 'Asteroseismic log g'),
+    // The reader text is the catalogue row in words, cited to it; nothing the row does not hold.
+    text: { card: `A ${row.state === 'RGB' ? 'red giant' : row.state === 'RC' ? 'red-clump giant' : 'giant'} in the Kepler field, ${radius.value.toFixed(0)} times the Sun's width, weighed by its starquakes.`,
+      introduction: `Its oscillations give ${mass.value.toFixed(2)} solar masses and ${radius.value.toFixed(1)} solar radii; APOGEE spectra give ${Math.round(row.teff[0]).toLocaleString('en-US')} K at its surface.`,
+      locator: `table4, KIC ${row.kic}: Mass, Radius, Teff` },
     color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason: 'The star lies in the Galactic plane hundreds to thousands of parsecs away, where interstellar dust reddens its spectra, and the colour routes do not remove it; APOGEE measured its temperature' },
     planets: [], companions: [],
   };
