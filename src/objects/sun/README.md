@@ -31,8 +31,13 @@ ephemerides. The footer's provider list combines the existing prepared source
 credits of the bodies in this overview.
 
 The [world navigation recipe](source/navigation/universe.json) samples every
-prepared orbit at 60 vertices, including open comet paths. This changes the
-display path, not the source positions or orbital model. A host detail view
+prepared orbit at 90 vertices, including open comet paths. This changes the
+display path, not the source positions or orbital model. Seen from its centre,
+a chord of an N-vertex circle strays (π/N)²/2 of the radius. On a 1,440 px
+view with the 60° field, that is 1.7 px at 60 vertices and 0.8 px at 90, so a
+moon's orbit seen from its planet no longer shows corners
+([60 against 90](evidence/orbit-points-20260928/moon-and-ganymede.png): the
+Moon's orbit from 1.1 million km and Ganymede's from 1.9 million km). A host detail view
 defers its satellites' paths until the satellite system is opened or a
 satellite is targeted.
 
