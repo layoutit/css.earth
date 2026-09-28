@@ -50,6 +50,15 @@ gesture.
   over 25 ms the pacer waits a frame and halves the slice. Leaf-box steps use it and hold during any motion, because a
   resized leaf repaints.
 
+## Mesh detail survives input reversals
+
+Once a mesh is presented, its geometry and material demand remain resident throughout driven motion and its coast.
+Crossing the distant billboard threshold must not hide the scene or reset its prepared reveal groups during that
+motion: a quick reversal would recreate the same composited leaves repeatedly. Proxy opacity still follows projected
+size. When the shared motion signal becomes inactive, the camera publishes the current level once and retires detail
+if it is still distant. A cold distant mount does not activate detail merely because the camera is moving, and a mesh
+without committed material still cannot reveal.
+
 ## Hidden stays out of compositing
 
 Opacity 0 does not free a layer. A hidden element is `display:none`, or `visibility:hidden` without `will-change`:
