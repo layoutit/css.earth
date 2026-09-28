@@ -5,7 +5,7 @@ clouds are not live weather. Dataset selection is manual at every zoom.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-The [navigation marker recipe](source/preparation/navigation.json) retains the existing credited image and crop, then prepares a circular alpha edge so the photographic background cannot cover surrounding objects. The same silhouette is used by its larger context image where configured.
+The [navigation marker recipe](source/preparation/navigation.json) supplies the small menu and search icons. World views use the same prepared, cloud-free Surface billboard as arrivals (`earth-arrival.webp`), including its baked physical scale. The old cloudy navigation photograph is no longer a world-body image.
 
 ## Sources
 

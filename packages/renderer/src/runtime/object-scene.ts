@@ -29,7 +29,6 @@ export interface ObjectSceneLifecycle {
   readonly features?: SurfaceFeatureNavigationRuntime;
   readonly navigation?: ObjectWorldNavigation;
   readonly datasets?: ObjectDatasets;
-  refineTextures?(): void;
   pause(): void;
   resume(): void;
   /** Replacement transfers the retained controls to the incoming scene; failure restores native fallback state. */

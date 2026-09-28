@@ -45,10 +45,10 @@ interface HarnessOptions {
   initialLens?: string;
   onTicket?: (ticket: PreparedResidencyTicket) => void;
   onChange?: (state: Readonly<ObjectSelectionState>) => void;
-  deferTextureRefinement?: boolean;
+  initialDiameter?: number;
   motion?: ReturnType<typeof cameraMotionSignalFor>;
 }
-function harness({ onTicket, onChange, deferTextureRefinement, initialLens, motion }: HarnessOptions = {}) {
+function harness({ onTicket, onChange, initialDiameter = 100, initialLens, motion }: HarnessOptions = {}) {
   const definition = earthDefinition, f = retainedPresentationFixture(definition);
   const jobs: ImageJob[] = [], commits: { selection: ObjectSelection; plan: PreparedPresentationPlan }[] = [], changes: Readonly<ObjectSelectionState>[] = [], fatal: unknown[] = [], materialErrors: unknown[] = [], created: ReturnType<typeof f.document.createElement>[] = [];
   const createElement = f.document.createElement;
@@ -65,7 +65,7 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens, moti
   const presentationContext: PreparedPresentationContext & { resources: typeof resources.resources } = { ...f.context, resources: resources.resources };
   const presentation = mountPreparedPresentation(f.stage, presentationContext, definition);
   const coordinator = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime,
-    deferTextureRefinement, initialLens, motion,
+    initialLens, motion,
     onChange: state => { changes.push(state); onChange?.(state); }, onCommit: (selection, plan) => commits.push({ selection, plan }),
     onFatalError(error) { fatal.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => coordinator.destroy());
@@ -80,7 +80,7 @@ function harness({ onTicket, onChange, deferTextureRefinement, initialLens, moti
       sunViewDirection: direction, reference: currentView?.reference, };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
   }
-  view(0); const initialReady = coordinator.start();
+  view(0, 0, initialDiameter); const initialReady = coordinator.start();
   async function resolveJobs({ exclude = [] }: { exclude?: readonly ImageJob[] } = {}) {
     // Every wave settles at least one decode, so a queue that drains at all drains within one wave per prepared entry.
     for (let wave = 0; wave < definition.assets.entries.length + 45; wave++) {
@@ -109,7 +109,7 @@ test('the native dataset is the first desired and committed selection', async t 
   assert.ok(h.changes.every(state => state.desired.lensId === 'topography'));
 });
 
-test('initial coarse commit remains successful when its publication immediately requests refinement', async t => {
+test('initial commit remains successful when its publication immediately requests a closer view', async t => {
   let h!: ReturnType<typeof harness>; let requested = false;
   h = harness({ onChange(state) {
     if (!state.committed || requested) return;
@@ -118,29 +118,18 @@ test('initial coarse commit remains successful when its publication immediately 
   } });
   t.after(h.restore); await h.ready();
   const initialCommit = h.commits[0], finalCommit = h.commits.at(-1); assert.ok(initialCommit); assert.ok(finalCommit);
-  // The first pass is the prepared 512 bank the page already shows; a 1000 px globe then takes the 4096 level.
+  // The initial 100 px view needs the small bank; the new 1000 px view needs the 4096 level.
   assert.equal(initialCommit.plan.textureLevel, 0);
   assert.equal(finalCommit.plan.textureLevel, 3);
   assert.deepEqual(h.fatal, []);
 });
-test('URL restoration admits no default-camera detail before the router releases refinement', async t => {
-  const h = harness({ deferTextureRefinement: true }); t.after(h.restore); await h.ready();
-  h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
-  await h.resolveJobs();
-  // Until the router releases refinement the body keeps the prepared 512 bank, whatever the camera shows.
-  const coarsePlan = h.coordinator.state().plan; assert.ok(coarsePlan); assert.equal(coarsePlan.textureLevel, 0);
-  assert(!h.jobs.some(job => /-level-(1024|2048|4096)\.webp/.test(job.url)));
-  h.coordinator.setView(h.currentView()); // saved distant view
-  h.coordinator.refineTextures(); await h.resolveJobs();
-  // Released, the body takes the level its projected size needs: a distant globe keeps the 512 bank, a near one climbs
-  // to Earth's 4096 level.
-  const restoredPlan = h.coordinator.state().plan; assert.ok(restoredPlan); assert.equal(restoredPlan.textureLevel, 0);
-  h.coordinator.setView({ ...h.currentView(), levelOfDetail: { stage: 'geometry', silhouetteDiameter: 1000, billboardOpacity: 0, markerOpacity: 0 } });
-  await h.resolveJobs();
-  const nearPlan = h.coordinator.state().plan; assert.ok(nearPlan); assert.equal(nearPlan.textureLevel, 3);
-  const levelFiles = new Set(Object.values(earthDefinition.textureLevels!.levels[3]!.resources)
-    .map(key => earthDefinition.assets.entries.find(entry => entry.key === key)?.url.split('/').pop()));
-  assert(h.jobs.some(job => levelFiles.has(job.url.split('/').pop())), 'a near globe loads the 4096 level');
+test('a close startup decodes its destination level without a coarse pass or input gate', async t => {
+  const h = harness({ initialDiameter: 1000 }); t.after(h.restore); await h.ready();
+  assert.equal(h.commits[0].plan.textureLevel, 3);
+  assert(h.commits.every(commit => commit.plan.textureLevel === 3));
+  assert(!h.jobs.some(job => /-level-512\.webp/.test(job.url)), 'startup never requests the forced coarse bank');
+  h.view(0, 0, 100); await h.resolveJobs();
+  assert.equal(h.coordinator.state().plan?.textureLevel, 0, 'a distant view still selects its sufficient small level');
 });
 
 test("camera movement during startup keeps the pinned atmosphere rows and still settles", async t => {
