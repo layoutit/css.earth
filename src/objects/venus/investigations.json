@@ -6,7 +6,7 @@
       "id": "cloud-imagery",
       "subject": "Source-backed global ultraviolet cloud map to replace the illustrative cloud texture",
       "status": "unresolved",
-      "finding": "Akatsuki UVI Level 3b now backs an Ultraviolet lens, so the route the earlier finding called missing exists: tools/objects/akatsuki/uvi-l3b.mts reads the NetCDF-4 grid and the raster lane draws the unobserved side as a declared data gap. What has not been resolved is the subject of this entry. One exposure covers 48.54 per cent of the globe at best, measured over 34 candidates, so the default lens is still the OpenSpace texture, an illustration whose camera, wavelength and colour processing are unresolved. No archive publishes a source-backed global cylindrical UV cloud mosaic: DARTS ships vco_uvi_l3 only as per-exposure 0.125-degree grids, and ESA's VMC mosaic is a northern-hemisphere press strip. Compositing several exposures across one four-day cloud rotation would mix scenes that have moved, which is why this repository has not built it.",
+      "finding": "Akatsuki UVI Level 3b now backs an Ultraviolet lens, so the route the earlier finding called missing exists: packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts reads the NetCDF-4 grid and the raster lane draws the unobserved side as a declared data gap. What has not been resolved is the subject of this entry. One exposure covers 48.54 per cent of the globe at best, measured over 34 candidates, so the default lens is still the OpenSpace texture, an illustration whose camera, wavelength and colour processing are unresolved. No archive publishes a source-backed global cylindrical UV cloud mosaic: DARTS ships vco_uvi_l3 only as per-exposure 0.125-degree grids, and ESA's VMC mosaic is a northern-hemisphere press strip. Compositing several exposures across one four-day cloud rotation would mix scenes that have moved, which is why this repository has not built it.",
       "revisitWhen": "A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud lens stop being an illustration.",
       "evidence": [
         "https://doi.org/10.17597/isas.darts/vco-00016",
@@ -25,7 +25,7 @@
         "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
         "https://ssd.jpl.nasa.gov/api/horizons.api",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/venus/README.md",
-        "https://github.com/layoutit/css.earth/blob/main/tools/objects/akatsuki/uvi-l3b.mts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts"
       ]
     },
     {
