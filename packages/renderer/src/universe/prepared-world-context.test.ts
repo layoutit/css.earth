@@ -106,7 +106,8 @@ class Clock extends EventTarget {
 }
 class FakeDocument {
   defaultView = new Clock();
-  createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); }
+  readonly allocated: FakeElement[] = [];
+  createElement(tagName: string): FakeElement { const element = new FakeElement(this, tagName); this.allocated.push(element); return element; }
   createElementNS(_namespace: string, tagName: string): FakeElement { return this.createElement(tagName); }
 }
 
@@ -165,11 +166,12 @@ function plan(scale: number) {
   });
 }
 function find(root: FakeElement, key: string, value: string): FakeElement {
-  const found = [root, ...all(root)].find(element => element.dataset[key] === value);
+  // State assertions can inspect retained detached owners; DOM admission is checked separately by parent/children.
+  const found = [root, ...all(root), ...root.ownerDocument.allocated].find(element => element.dataset[key] === value);
   if (!found) throw new Error(`Missing ${key}=${value}`); return found;
 }
-// Orbit leaf blocks are built on first use and then retained. Every earlier node
-// survives in order, and only orbit leaf blocks or their leaves may be added. The one
+// World owners and orbit leaf blocks attach on first demand and then remain retained. Every earlier node
+// survives in order; new additions must belong to these presentation owners. The one
 // corner locator is the exception by design: a single element that moves into whichever
 // marker is emphasised, so it and its two paths are left out of the order.
 const isLocator = (node: FakeElement) => node.getAttribute('class') === 'context-locator' || node.parentNode?.getAttribute('class') === 'context-locator';
@@ -177,8 +179,10 @@ function expectRetained(root: FakeElement, retained: readonly FakeElement[]) {
   const nodes = retained.filter(node => !isLocator(node));
   const known = new Set(nodes), now = all(root).filter(node => !isLocator(node)), kept = now.filter(node => known.has(node));
   expect(kept.length === nodes.length && kept.every((node, index) => node === nodes[index]), 'every retained node survives in order').toBe(true);
-  expect(now.every(node => known.has(node) || node.className === 'context-orbit-block' || node.parentNode?.className === 'context-orbit-block'),
-    'only orbit leaf blocks are added').toBe(true);
+  const demandedOwner = (node: FakeElement): boolean => node.className === 'context-orbit' ||
+    node.dataset.contextBody !== undefined || node.children.some(child => child.dataset.contextBody !== undefined) ||
+    node.className === 'context-orbit-block' || (node.parentNode !== null && node.parentNode !== root && demandedOwner(node.parentNode));
+  expect(now.every(node => known.has(node) || demandedOwner(node)), 'only demanded world owners or orbit leaves are attached').toBe(true);
 }
 function captionName(element: { dataset: { contextName?: string } }): string {
   const name = element.dataset.contextName;
@@ -1700,11 +1704,11 @@ test('one retained focus label and locator survive system retirement at their ph
   const label = focus.billboard as unknown as FakeElement, locator = focus.billboard as unknown as FakeElement;
   const retained = all(host);
   expect(label.dataset.contextName).toBe('Anchor');
-  expect(mover(label).parentNode).toBe(root);
+  expect(mover(label).parentNode).toBe(null);
   expect(mover(label).children).toEqual([label]);
   // The only child is the sprite, which alone scales; the ring and caption stay pseudos of the unscaled marker.
   expect(label.children.map(child => child.tagName)).toEqual(['i']); expect(label.children[0]!.children).toHaveLength(0); expect(label).toBe(locator);
-  expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([label]);
+  expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([]);
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const camera = (distance: number): {referenceFrame: string; epochJdTt: number; pose: {positionM: [number, number, number]; orientationXyzw: OrientationXyzw}} => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } });
@@ -2342,7 +2346,8 @@ test('the main thread draws worker frames from the orbit summary exactly as from
     world.pose.positionM[2] = distance;
     for (const { layer, root } of layers) {
       layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
-      // Consume the measurement response, just as the worker queue does.
+      // Attach the requested captions, measure them, then consume the measured worker frame.
+      layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
       layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
       root.ownerDocument.defaultView.advance(50);
     }
@@ -2694,7 +2699,7 @@ test('a driven drag around Earth keeps revealing and retiring bodies', async () 
   const { layer, writes } = await orbitEarth({ coast: false });
   expect(writes.filter(write => / style\.visibility$/u.test(write)).length).toBeGreaterThan(0);
   layer.destroy();
-});
+}, 15000); // Full prepared catalogue, 90 driven views; CI runs this beside the other renderer suites.
 
  test('activation measures only captions the planner can name and caches those bounds', () => {
   const root = mount(1), layer = mounted.get(root)!;
@@ -2708,4 +2713,27 @@ test('a driven drag around Earth keeps revealing and retiring bodies', async () 
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   expect(sun.measurements).toBe(1); expect(mercury.measurements).toBe(1); expect(venus.measurements).toBe(0);
   layer.destroy();
+});
+
+
+test('world owners stay detached until requested, attach before measurement, and retain identity across views', () => {
+  const document = new FakeDocument(), host = document.createElement('section');
+  host.clientWidth = 800; host.clientHeight = 600;
+  const before = document.createElement('div'); host.appendChild(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const owners = layer.inspect(), root = layer.root as unknown as FakeElement;
+  expect(owners.every(entry => entry.mover.parentNode === null)).toBe(true);
+  expect(all(root).filter(node => node.dataset.contextBody !== undefined)).toHaveLength(0);
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } } as const;
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
+  layer.publish(world, viewport);
+  const venus = owners.find(entry => entry.id === 'venus')!;
+  expect(venus.mover.parentNode).toBe(null);
+  expect((venus.billboard as unknown as FakeElement).measurements).toBe(0);
+  const attached = all(root);
+  layer.setCoasting(true); layer.previewSelection('venus'); layer.publish(world, viewport);
+  expect(all(root)).toEqual(attached);
+  layer.setCoasting(false); layer.publish(world, viewport);
+  expect(layer.inspect().map(entry => entry.mover)).toEqual(owners.map(entry => entry.mover));
+  layer.destroy(); expect(root.parentNode).toBe(null);
 });
