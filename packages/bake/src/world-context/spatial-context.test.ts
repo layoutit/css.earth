@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { M_PER_AU } from '@cssearth/astronomy';
-import { parseWorldContextSource, prepareWorldContext } from './spatial-context.ts';
-import type { OrbitalState } from './spatial-context.ts';
+import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks } from './spatial-context.ts';
+import type { OrbitalState, Vector3 } from './spatial-context.ts';
 
 const sourcePath = 'src/objects/sun/source/navigation/universe.json';
 // Unit cases supply their own body inventory; the application resolves catalogue membership.
@@ -96,7 +96,7 @@ test('Sun context source derives its physical scale from the prepared visible ra
 test('prepared ellipses start at their same-epoch ephemeris position', async () => {
   const source = parseWorldContextSource(await readSource() as unknown);
   const body = source.bodies[0]!;
-  const result = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments: 16 } },
+  const result = prepareWorldContext({ ...source, bodies: [body], orbit: { trail: source.orbit!.trail, segments: 16 } },
     { [body.id]: { radiusM: 1 } }, {
       [body.id]: { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
     });
@@ -104,6 +104,42 @@ test('prepared ellipses start at their same-epoch ephemeris position', async () 
   assert.equal(result.bodies[0]!.orbit!.verticesM.length, 16);
   assert.equal(result.bodies[0]!.orbit!.trail.length, 16);
   assert.deepEqual(result.focus.positionM, [0, 0, 0]);
+});
+
+test('a fine bank strays no more than (π/N)²/2 radians, seen from the body or from the centre, and records the coarse path\'s distance', async () => {
+  const source = parseWorldContextSource(await readSource() as unknown);
+  const body = source.bodies[0]!;
+  const state: OrbitalState = { positionM: [10, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1],
+    perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: 0, trueAnomalyRadians: 0 };
+  const config = { ...source, bodies: [body], orbit: { trail: source.orbit!.trail, segments: 16, fineSegments: 32 } };
+  const prepared = prepareWorldContext(config, { [body.id]: { radiusM: 1, orbitStyle: 'trail' } }, { [body.id]: state });
+  const orbit = prepared.bodies[0]!.orbit!, fine = orbit.fine!;
+  assert.equal(orbit.verticesM.length, 16, 'the coarse bank keeps its even steps');
+  assert.deepEqual(fine.verticesM[0], state.positionM);
+  const epsilon = (Math.PI / 32) ** 2 / 2, angle = (vertex: Vector3) => Math.abs(Math.atan2(vertex[1], vertex[0]));
+  for (let index = 0; index < fine.verticesM.length; index++) {
+    const a = fine.verticesM[index]!, b = fine.verticesM[(index + 1) % fine.verticesM.length]!;
+    const middle = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0], sagitta = 10 - Math.hypot(...middle);
+    assert(sagitta / 10 <= epsilon * (1 + 1e-9), `chord ${index} from the centre`);
+    const fromBody = Math.hypot(middle[0]! - 10, middle[1]!);
+    assert(sagitta / fromBody <= epsilon * 1.05, `chord ${index} from the body: ${sagitta / fromBody} over ${epsilon}`);
+  }
+  assert(Math.abs(angle(fine.verticesM[1]!) - (2 * Math.PI / 32) ** 2 / 256) < 1e-15, 'the first chord is 1/256 of the graded start');
+  // The coarse even chord's middle is one sagitta from the circle.
+  assert(Math.abs(fine.deviationM - 10 * (1 - Math.cos(Math.PI / 16))) < 1e-12);
+  assert.deepEqual(fine.activeChords, fine.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+  assert.equal(fine.trail.at(-1), 1, 'the chord closing onto the body is solid');
+  for (const path of [orbit, fine]) for (const index of path.activeChords) for (const vertex of [path.verticesM[index]!, path.verticesM[(index + 1) % path.verticesM.length]!]) {
+    assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM, 'bounds hold both paths');
+  }
+  const banks = worldOrbitBanks(prepared);
+  assert.deepEqual(banks.map(bank => bank.id), [body.id, `${body.id}.fine`]);
+  const summary = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])));
+  assert.deepEqual(summary.bodies[0]!.orbit!.fine, { vertexCount: fine.verticesM.length, deviationM: fine.deviationM });
+  const closed = prepareWorldContext(config, { [body.id]: { radiusM: 1, orbitStyle: 'closed' } }, { [body.id]: state }).bodies[0]!.orbit!;
+  assert(closed.fine!.trail.every(weight => weight === 1));
+  const raw = await readSource() as Record<string, unknown>;
+  assert.throws(() => parseWorldContextSource({ ...raw, orbit: { ...config.orbit, fineSegments: 16 } }), /must exceed segments 16/);
 });
 
 test('a hyperbolic world trajectory retains its epoch marker on a finite open conic', async () => {
@@ -114,7 +150,7 @@ test('a hyperbolic world trajectory retains its epoch marker on a finite open co
   const state: OrbitalState = { positionM: [distance * Math.cos(trueAnomalyRadians), distance * Math.sin(trueAnomalyRadians), 0],
     centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
     semiMajorAxisM: -M_PER_AU, eccentricity, trueAnomalyRadians };
-  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments: 16 } },
+  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { trail: source.orbit!.trail, segments: 16 } },
     { [body.id]: { radiusM: 100, orbitStyle: 'closed' } }, { [body.id]: state });
   const orbit = prepared.bodies[0]!.orbit!;
   assert.equal(orbit.closed, false, 'a bound-orbit styling preference cannot close a hyperbola');
@@ -162,7 +198,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     satellite: { positionM: [1007, 0, 0], centerBodyId: 'parent', centerPositionM: [1000, 0, 0],
       normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
   };
-  const config = { ...source, bodies, orbit: { ...source.orbit!, segments: 16 } };
+  const config = { ...source, bodies, orbit: { trail: source.orbit!.trail, segments: 16 } };
   const facts = { parent: { radiusM: 2 }, satellite: { radiusM: 1 } };
   const orbit = prepareWorldContext(config, facts, states).bodies[1]!.orbit!;
   const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
@@ -205,7 +241,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM,
       'prepared bound includes every active endpoint and therefore its convex chords');
   }
-  assert(Math.abs(orbit.verticesM[8]![0] - 987) < 1e-10, 'apocentre must remain around the parent, not the global origin');
+  assert(Math.abs(orbit.verticesM[orbit.verticesM.length / 2]![0] - 987) < 1e-10, 'apocentre must remain around the parent, not the global origin');
   for (const [x, y, z] of orbit.verticesM) {
     assert(Math.abs(((x - 997) / 10) ** 2 + (y / Math.sqrt(91)) ** 2 - 1) < 1e-12);
     assert.equal(z, 0);
@@ -246,7 +282,7 @@ test('classification views share the root candidate angles and enclose their mem
     satellite: { positionM: [1007, 0, 0], centerBodyId: 'parent', centerPositionM: [1000, 0, 0],
       normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
   };
-  const config = { ...source, bodies, orbit: { ...source.orbit!, segments: 16 } };
+  const config = { ...source, bodies, orbit: { trail: source.orbit!.trail, segments: 16 } };
   const facts = { parent: { radiusM: 2, classification: 'planet' }, satellite: { radiusM: 1, classification: 'satellite' } };
   const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
   const context = prepareWorldContext(config, facts, states, {}, policy);
@@ -272,7 +308,7 @@ test('extent traversal covers each active chord once for sparse trails and uneve
   const state: OrbitalState = { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
     normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 };
   for (const segments of [8, 9, 16, 127, 128]) for (const orbitStyle of ['closed', 'trail'] as const) {
-    const context = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit!, segments } },
+    const context = prepareWorldContext({ ...source, bodies: [body], orbit: { trail: source.orbit!.trail, segments } },
       { [body.id]: { radiusM: 1, orbitStyle } }, { [body.id]: state });
     const orbit = context.bodies[0]!.orbit!;
     assert.deepEqual([...orbit!.extentChords].sort((a, b) => a - b), orbit.activeChords);

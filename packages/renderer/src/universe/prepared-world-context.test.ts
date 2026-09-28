@@ -2567,16 +2567,26 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   for (const [index, body] of decoded.bodies.entries()) {
     const truth = full.bodies[index]!.orbit;
     if (!truth) { expect(body.orbit, body.id).toBeUndefined(); continue; }
-    const { verticesM, bounds, lod, ...rest } = body.orbit!;
-    const { verticesM: trueVertices, bounds: trueBounds, lod: trueLod, ...trueRest } = truth;
+    const { verticesM, bounds, lod, fine, ...rest } = body.orbit!;
+    const { verticesM: trueVertices, bounds: trueBounds, lod: trueLod, fine: trueFine, ...trueRest } = truth;
     expect(rest, body.id).toEqual(trueRest);
     // The body's own vertex is the Int32 origin and decodes exactly; every other vertex lies within half a step on each axis,
-    // plus the double rounding of adding the step count to a coordinate of order 1e11 m.
+    // plus the double rounding of adding the step count to a coordinate of order 1e11 m. A fine bank is quantized the same way.
     const pinned = truth.closed === false ? truth.bodyVertexIndex! : 0;
-    expect([...verticesM.subarray(pinned * 3, pinned * 3 + 3)], body.id).toEqual([...trueVertices.subarray(pinned * 3, pinned * 3 + 3)]);
-    let reach = 0;
-    for (let i = 0; i < trueVertices.length; i++) reach = Math.max(reach, Math.abs(trueVertices[i]! - trueVertices[pinned * 3 + i % 3]!));
-    for (let i = 0; i < trueVertices.length; i++) expect(Math.abs(verticesM[i]! - trueVertices[i]!), body.id).toBeLessThanOrEqual(reach / 0x7fffffff / 2 + 4 * Number.EPSILON * Math.abs(trueVertices[i]!));
+    const within = (decodedM: Float64Array, exactM: Float64Array, label: string) => {
+      expect(decodedM.length, label).toBe(exactM.length);
+      expect([...decodedM.subarray(pinned * 3, pinned * 3 + 3)], label).toEqual([...exactM.subarray(pinned * 3, pinned * 3 + 3)]);
+      let reach = 0;
+      for (let i = 0; i < exactM.length; i++) reach = Math.max(reach, Math.abs(exactM[i]! - exactM[pinned * 3 + i % 3]!));
+      for (let i = 0; i < exactM.length; i++) expect(Math.abs(decodedM[i]! - exactM[i]!), label).toBeLessThanOrEqual(reach / 0x7fffffff / 2 + 4 * Number.EPSILON * Math.abs(exactM[i]!));
+    };
+    within(verticesM, trueVertices, body.id);
+    expect(fine === undefined, body.id).toBe(trueFine === undefined);
+    if (fine && trueFine && 'verticesM' in fine && 'verticesM' in trueFine) {
+      within(fine.verticesM, trueFine.verticesM, `${body.id} fine`);
+      expect([fine.vertexCount, fine.deviationM, [...fine.trail], [...fine.activeChords ?? []]], body.id)
+        .toEqual([trueFine.vertexCount, trueFine.deviationM, [...trueFine.trail], [...trueFine.activeChords ?? []]]);
+    } else if (fine || trueFine) throw new Error(`${body.id}: a fine bank decoded without its path`);
     // Culling spheres are rounded outward: each still holds the sphere it rounds.
     for (const [rounded, exact] of [[bounds, trueBounds], [lod?.bounds, trueLod?.bounds]] as const) {
       if (!exact) continue;
@@ -2587,8 +2597,12 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   }
   // Each path is its own bank, named by its body. A bank of another size, one for a body the summary does not pin, or one
   // whose body carries another's path never decodes.
-  expect(banks.size).toBe(summary.bodies.filter(body => body.orbit).length);
-  const earth = banks.get('earth')!;
+  // Closed paths also carry a fine bank, `<id>.fine`; open trajectories do not.
+  expect(banks.size).toBe(summary.bodies.filter(body => body.orbit).length + summary.bodies.filter(body => body.orbit?.fine).length);
+  expect(summary.bodies.filter(body => body.orbit?.fine).every(body => body.orbit!.closed !== false)).toBe(true);
+  const earth = banks.get('earth')!, earthFine = banks.get('earth.fine')!;
+  expect(decodeWorldOrbitBank(summary, 'earth.fine', earthFine).get('earth')!.vertexCount).toBe(summary.bodies.find(body => body.id === 'earth')!.orbit!.fine!.vertexCount);
+  expect(() => decodeWorldOrbitBank(summary, 'earth.fine', earth)).toThrow(/its summary says/);
   expect([...decodeWorldOrbitBank(summary, 'earth', earth).keys()]).toEqual(['earth']);
   expect(() => decodeWorldOrbitBank(summary, 'earth', earth.slice(0, earth.byteLength - 8))).toThrow(/its summary says/);
   expect(() => decodeWorldOrbitBank(summary, 'nowhere', earth)).toThrow(/summary says undefined/);

@@ -1,6 +1,7 @@
 import { createSystemFade, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
+import { FINE_ORBIT_BANK_SUFFIX, fineOrbitPath, orbitVertexCapacity } from '../../prepared-data/world-context.js';
+import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedFineOrbitPath, PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
@@ -13,6 +14,9 @@ import { admitStableLabels, type StableLabelCandidate } from '../../labels/stabl
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
+/** A coarse chord's bulge from the true path, in projected pixels, above which its fine bank is read: the half pixel the
+ * stroke renderer already accepts between detail levels (`ORBIT_RENDERER_LOD_PIXELS.strokes`). */
+const FINE_ORBIT_PIXELS = 0.5;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
@@ -81,12 +85,18 @@ interface ProjectedBody<Entry> {
  * a frame that would draw or measure a path it lacks names that body (`takeWantedOrbits`) and draws no segments for it. */
 type PlannerOrbit = PreparedContextOrbit | PreparedContextOrbitGeometry;
 const hasPath = (orbit: PlannerOrbit): orbit is PreparedContextOrbitGeometry => 'verticesM' in orbit;
-// Prepared detail levels are decoded once; each frame only selects one.
-const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
-  // Each coarser level gathers its selected vertices once, into its own flat array.
-  ...(orbit.lod?.levels ?? []).map(level => ({ vertices: Float64Array.from({ length: level.vertexIndices.length * 3 },
-    (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
-    trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
+const hasFinePath = (fine: PreparedContextOrbitGeometry['fine']): fine is PreparedFineOrbitPath => fine !== undefined && 'verticesM' in fine;
+// Prepared detail levels are decoded once; each frame only selects one. A coarse path's deviations are from itself; with a
+// fine bank each also carries the coarse path's distance from the fine one, and the fine path, once read, leads the list.
+const pathLevels = (orbit: PreparedContextOrbitGeometry) => {
+  const fineM = orbit.fine?.deviationM ?? 0;
+  const coarse = [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: fineM },
+    // Each coarser level gathers its selected vertices once, into its own flat array.
+    ...(orbit.lod?.levels ?? []).map(level => ({ vertices: Float64Array.from({ length: level.vertexIndices.length * 3 },
+      (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
+      trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM + fineM }))];
+  return hasFinePath(orbit.fine) ? [{ vertices: orbit.fine.verticesM, trail: orbit.fine.trail, activeChords: orbit.fine.activeChords, deviationM: 0 }, ...coarse] : coarse;
+};
 
 export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
@@ -100,7 +110,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
       closedOrbit: orbit?.fullTrail === true,
-      orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
+      orbitProjection: createRetainedRingProjection(orbit ? orbitVertexCapacity(orbit) * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
       hiddenStub: null as null | { projected: ProjectedBody<unknown> },
       // Per-frame working objects are retained per body: the view's fields are
@@ -109,7 +119,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       output: null as PlannedBodyOutput | null, bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
   });
   // Only the selected path fades with depth; one shared scratch pool serves it.
-  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0))));
+  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit ? orbitVertexCapacity(entry.orbit) : 0))));
   const planFrame = (view: WorldContextView) => {
     const labelMeasurements: number[] = [];
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
@@ -205,6 +215,21 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           if (entry.levels[level]!.deviationM * pixelsPerMeterAtUnitDepth / nearest <= (view.orbitLodPixels ?? ORBIT_LOD_PIXELS)) return level;
         }
         return 0;
+      };
+      // Once a projected coarse chord bulges half a pixel from the path it stands for, the path's fine bank is read. A smooth
+      // curve bulges from a chord of length L about L(α + β)/16, with α and β its turns at the chord's two ends (exact to
+      // first order on a circle), so the drawn chords measure it: a camera near or inside the path turns them long.
+      const wantFinePath = (entry: (typeof bodies)[number], segments: readonly OrbitSegment[]) => {
+        const fine = entry.orbit?.fine;
+        if (!fine || hasFinePath(fine) || segments.length < 2) return;
+        const turn = (from: OrbitSegment, to: OrbitSegment) => from[2] !== to[0] || from[3] !== to[1] ? 0
+          : Math.abs(Math.atan2((from[2] - from[0]) * (to[3] - to[1]) - (from[3] - from[1]) * (to[2] - to[0]),
+            (from[2] - from[0]) * (to[2] - to[0]) + (from[3] - from[1]) * (to[3] - to[1])));
+        for (let index = 0; index < segments.length; index++) {
+          const segment = segments[index]!, before = segments[(index + segments.length - 1) % segments.length]!, after = segments[(index + 1) % segments.length]!;
+          const bulge = Math.hypot(segment[2] - segment[0], segment[3] - segment[1]) * (turn(before, segment) + turn(segment, after)) / 16;
+          if (bulge > FINE_ORBIT_PIXELS) { wantedOrbits.add(`${entry.body.id}${FINE_ORBIT_BANK_SUFFIX}`); return; }
+        }
       };
       // A moon's orbit belongs to its planet's system. It is planned only while that
       // system is selected or previewed (the planet, the moon or a sibling), or on
@@ -309,9 +334,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           if (!skipped && !entry.levels.length) wantedOrbits.add(body.id);
           else if (!skipped) {
             measuredExtent = null;
-            const level = entry.levels[detailLevel(entry)]!;
+            const index = detailLevel(entry), level = entry.levels[index]!;
             segments = projector(level.vertices, level.trail, level.activeChords, fullOrbit,
               isOrbitFocus ? selectedOrbitProjection : entry.orbitProjection, entry.orbit.closed !== false);
+            if (index === 0) wantFinePath(entry, segments);
           }
         }
         if (entry.orbit) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
@@ -563,7 +589,17 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         if (entry.state) Object.assign(entry.state as object, { orbit, levels: entry.levels });
       }
     },
-    /** The bodies whose paths the frames since the last call needed and lacked. */
+    /** Give coarse paths their fine banks: each fine path becomes the path's finest level. */
+    attachFineOrbits(paths: ReadonlyMap<string, PreparedContextOrbitGeometry>) {
+      for (const entry of prepared) {
+        const path = paths.get(entry.body.id);
+        if (!path || !entry.orbit || !hasPath(entry.orbit) || hasFinePath(entry.orbit.fine)) continue;
+        const orbit: PreparedContextOrbitGeometry = { ...entry.orbit, fine: fineOrbitPath(entry.orbit, path) };
+        entry.orbit = orbit; entry.levels = pathLevels(orbit);
+        if (entry.state) Object.assign(entry.state as object, { orbit, levels: entry.levels });
+      }
+    },
+    /** The banks the frames since the last call needed and lacked: a body's id, or `<id>.fine` for its fine path. */
     takeWantedOrbits(): string[] {
       const ids = [...wantedOrbits]; wantedOrbits.clear();
       return ids;

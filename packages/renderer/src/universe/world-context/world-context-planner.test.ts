@@ -649,6 +649,14 @@ test('the planner plans from the summary alone, names the paths it lacked, and d
   expect(planner.takeWantedOrbits()).toEqual([]);
   // Each wanted path is its own bank; the frame requested exactly the paths it would draw.
   for (const id of wanted) planner.attachOrbits(decodeWorldOrbitBank(summary, id, await bank(id)));
+  planner(current);
+  // From 20 au on this 1,995 px view Saturn's 60 chords bulge 1.1 px, so its fine bank is read; Earth's bulge 0.12 px.
+  const fineWanted = planner.takeWantedOrbits();
+  expect(fineWanted).toContain('saturn.fine');
+  expect(fineWanted).not.toContain('earth.fine');
+  expect(fineWanted.every(id => id.endsWith('.fine'))).toBe(true);
+  // With every drawn path's fine bank in hand too, the summary planner draws as the planner given the full file.
+  for (const id of wanted) if (summary.orbitBanks![`${id}.fine`]) planner.attachFineOrbits(decodeWorldOrbitBank(summary, `${id}.fine`, await bank(`${id}.fine`)));
   const after = planner(current), full = createWorldContextPlanner(plan)(view());
   // With the bank attached, the Sun's orbits draw as the planner given every full-precision path draws them: the Int32
   // vertices move no projected point by a thousandth of a pixel.

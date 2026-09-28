@@ -36,6 +36,16 @@ display path, not the source positions or orbital model. A host detail view
 defers its satellites' paths until the satellite system is opened or a
 satellite is targeted.
 
+Each closed orbit also has a fine path (`fineSegments: 120`), stored in its
+own file (`world-orbits/<id>.fine.bin`). The planner reads that file only once
+a drawn 60-vertex chord would bulge more than half a pixel from the true path.
+That happens when an orbit is large on screen or passes near the camera, for
+example a moon's orbit seen from its planet, or a planet's own orbit seen from
+the planet. The fine path keeps every chord within (π/120)²/2 radians of the
+path, whether seen from the orbit's centre or from the body. Near the body the
+spacing shrinks with the square root of the angle from it. Pages that never
+zoom in read exactly the 60-vertex files they read before.
+
 ## Evidence
 
 Checked on 27 September 2026.

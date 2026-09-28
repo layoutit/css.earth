@@ -72,13 +72,26 @@ export interface PreparedContextOrbit {
   readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number };
   readonly lod?: { readonly bounds: { readonly centerM: PositionM; readonly radiusM: number } };
   readonly closed?: false; readonly displayExtentAu?: number;
+  /** A closed path's fine bank (`<body id>.fine`), read only when the coarse path strays past the planner's pixel budget. */
+  readonly fine?: PreparedFineOrbit;
 }
+/** A fine bank's vertex count and the coarse path's largest distance from the true path, in metres. */
+export interface PreparedFineOrbit { readonly vertexCount: number; readonly deviationM: number }
+/** The fine path itself: every coarse vertex and the fine even steps between them. */
+export interface PreparedFineOrbitPath extends PreparedFineOrbit {
+  readonly verticesM: Float64Array; readonly trail: Float64Array; readonly activeChords?: Uint32Array;
+}
+export const FINE_ORBIT_BANK_SUFFIX = '.fine';
+/** The most vertices an orbit can draw, coarse or fine: its projection and stroke pools hold this many. */
+export const orbitVertexCapacity = (orbit: PreparedContextOrbit) => Math.max(orbit.vertexCount, orbit.fine?.vertexCount ?? 0);
 /** An orbit's path as typed arrays: the planner worker reads them straight from the binary orbit bank. */
 export interface PreparedContextOrbitGeometry extends PreparedContextOrbit {
   /** Vertices as consecutive x, y, z metres. */
   readonly verticesM: Float64Array; readonly trail: Float64Array;
   readonly activeChords?: Uint32Array; readonly extentChords?: Uint32Array; readonly lod?: PreparedOrbitLod;
   readonly bodyVertexIndex?: number; readonly trailModel?: 'finite-open-trajectory-constant-weight'; readonly strokes?: PreparedOrbitStrokes;
+  /** The full file carries the fine path; a coarse bank carries only its summary until the fine bank is read. */
+  readonly fine?: PreparedFineOrbit | PreparedFineOrbitPath;
 }
 export interface PreparedContextGeometryBody extends PreparedContextBody {
   readonly orbit?: PreparedContextOrbitGeometry;
@@ -304,7 +317,7 @@ const sphere = (input: unknown, label: string) => {
 /** A JSON orbit (the full prepared file, read by build tools and tests) packed into the typed arrays the planner uses. */
 function jsonOrbitGeometry(value: unknown): OrbitGeometryCandidate {
   const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
-    'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod',
+    'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel', 'strokes', 'lod', 'fine',
     // A parsed copy carries these; both are derived again from the path.
     'vertexCount', 'fullTrail']);
   let strokes: PreparedOrbitStrokes | undefined;
@@ -331,7 +344,15 @@ function jsonOrbitGeometry(value: unknown): OrbitGeometryCandidate {
     ...(orbit.bodyVertexIndex === undefined ? {} : { bodyVertexIndex: finite(orbit.bodyVertexIndex, 'orbit epoch vertex') }),
     ...(orbit.displayExtentAu === undefined ? {} : { displayExtentAu: finite(orbit.displayExtentAu, 'Open trajectory display extent') }),
     ...(orbit.trailModel === undefined ? {} : { trailModel: orbit.trailModel }),
-    ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) };
+    ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}), ...(orbit.fine === undefined ? {} : { fine: jsonFineOrbit(orbit.fine) }) };
+}
+function jsonFineOrbit(value: unknown): PreparedFineOrbitPath {
+  const fine = record(value, 'orbit fine path', ['verticesM', 'trail', 'activeChords', 'extentChords', 'deviationM', 'vertexCount']);
+  const verticesM = fine.verticesM instanceof Float64Array ? Float64Array.from(numberList(fine.verticesM, 'orbit fine vertices'))
+    : Float64Array.from(array(fine.verticesM, 'orbit fine vertices').flatMap(value => vector(value, 'orbit fine vertex')));
+  return { vertexCount: verticesM.length / 3, deviationM: finite(fine.deviationM, 'orbit fine deviation'), verticesM,
+    trail: Float64Array.from(numberList(fine.trail, 'orbit fine trail')),
+    ...(fine.activeChords === undefined ? {} : { activeChords: indices(fine.activeChords, 'orbit fine active chords') }) };
 }
 /** Every prepared orbit path, whether it came from JSON or the binary bank, passes the same checks. */
 function validateOrbitGeometry(orbit: OrbitGeometryCandidate, bodyPositionM: PositionM, focusId: string, renderedIds: ReadonlySet<string>, bodyId = 'orbit'): PreparedContextOrbitGeometry {
@@ -403,8 +424,29 @@ function validateOrbitGeometry(orbit: OrbitGeometryCandidate, bodyPositionM: Pos
     }
   }
   const lod = orbit.lod && Object.freeze({ bounds: orbit.lod.bounds, levels: Object.freeze(orbit.lod.levels.map(level => Object.freeze({ ...level }))) });
+  const fine = orbit.fine && validateFineOrbit(orbit, bodyPositionM, focusId, renderedIds, bodyId, count);
   // The open-trajectory checks above admit only the one trail model.
-  return Object.freeze({ ...orbit, ...(lod ? { lod } : {}), vertexCount: count, fullTrail: trail.every(weight => weight === 1) }) as PreparedContextOrbitGeometry;
+  return Object.freeze({ ...orbit, ...(lod ? { lod } : {}), ...(fine ? { fine } : {}), vertexCount: count, fullTrail: trail.every(weight => weight === 1) }) as PreparedContextOrbitGeometry;
+}
+/** A fine path passes the closed-path checks inside its coarse orbit's bounds; a summary's fine bank states more vertices. */
+function validateFineOrbit(orbit: OrbitGeometryCandidate, bodyPositionM: PositionM, focusId: string, renderedIds: ReadonlySet<string>, bodyId: string,
+  coarseCount: number): PreparedFineOrbit | PreparedFineOrbitPath {
+  const fine = orbit.fine!;
+  if (orbit.closed === false || !Number.isSafeInteger(fine.vertexCount) || fine.vertexCount <= coarseCount || !(fine.deviationM >= 0)) {
+    throw new TypeError(`${bodyId}: a fine orbit bank belongs to a closed path, with more than its ${coarseCount} coarse vertices (it states ${fine.vertexCount}) and a deviation of 0 m or more (${fine.deviationM}).`);
+  }
+  if (!('verticesM' in fine)) return Object.freeze({ vertexCount: fine.vertexCount, deviationM: fine.deviationM });
+  const path = validateOrbitGeometry({ centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM, verticesM: fine.verticesM, trail: fine.trail,
+    ...(fine.activeChords ? { activeChords: fine.activeChords } : {}), ...(orbit.bounds ? { bounds: orbit.bounds } : {}) },
+  bodyPositionM, focusId, renderedIds, `${bodyId} fine path`);
+  if (path.vertexCount !== fine.vertexCount) throw new TypeError(`${bodyId}: its fine path has ${path.vertexCount} vertices; it states ${fine.vertexCount}.`);
+  return Object.freeze({ vertexCount: fine.vertexCount, deviationM: fine.deviationM, verticesM: path.verticesM, trail: path.trail,
+    ...(path.activeChords ? { activeChords: path.activeChords } : {}) });
+}
+/** A decoded fine bank as its coarse orbit's fine path. */
+export function fineOrbitPath(orbit: PreparedContextOrbit, path: PreparedContextOrbitGeometry): PreparedFineOrbitPath {
+  if (!orbit.fine) throw new TypeError('A fine orbit path needs its summary.');
+  return Object.freeze({ ...orbit.fine, verticesM: path.verticesM, trail: path.trail, ...(path.activeChords ? { activeChords: path.activeChords } : {}) });
 }
 /** An orbit's vertices as points, for build tools and tests that walk the path. */
 export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'verticesM'>): PositionM[] {
@@ -414,8 +456,9 @@ export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'vertice
 const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 2;
 /** One bank's paths from its pinned binary file: index and weight sections become typed-array views over the transferred
  * bytes, Int32 vertex steps are decoded to metres, and each orbit passes the same checks as the JSON file. The bank must
- * hold exactly the path of the body it is named for. */
+ * hold exactly the path of the body it is named for. A `<body id>.fine` bank returns that body's fine path, keyed by the body. */
 export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: string, bytes: ArrayBuffer): ReadonlyMap<string, PreparedContextOrbitGeometry> {
+  const fineOf = centreId.endsWith(FINE_ORBIT_BANK_SUFFIX) ? centreId.slice(0, -FINE_ORBIT_BANK_SUFFIX.length) : undefined;
   const expected = plan.orbitBanks?.[centreId];
   if (expected === undefined || bytes.byteLength !== expected) throw new TypeError(`Orbit bank ${centreId} is ${bytes.byteLength} bytes; its summary says ${expected}.`);
   const view = new DataView(bytes);
@@ -435,11 +478,12 @@ export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: strin
   }));
   const renderedIds = new Set(plan.bodies.map(body => body.id)), orbits = new Map<string, PreparedContextOrbitGeometry>();
   for (const body of plan.bodies) {
-    if (!body.orbit || body.id !== centreId) continue;
+    if (!body.orbit || body.id !== (fineOf ?? centreId)) continue;
     const path = paths.get(body.id);
     if (!path) throw new TypeError(`${body.id}: orbit bank ${centreId} lacks its path.`);
     paths.delete(body.id);
     const { orbit } = body;
+    if (fineOf && !orbit.fine) throw new TypeError(`${body.id}: its summary names no fine bank, yet ${centreId} was read.`);
     const originM = vector(path.vertexOriginM, `${body.id} vertex origin`), stepM = positive(path.vertexStepM, `${body.id} vertex step`);
     const steps = section(path.vertices, Int32Array, `${body.id} vertices`);
     const geometry = validateOrbitGeometry({ centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM,
@@ -448,31 +492,39 @@ export function decodeWorldOrbitBank(plan: PreparedWorldContext, centreId: strin
       ...(orbit.bounds ? { bounds: orbit.bounds } : {}),
       ...(orbit.closed === false ? { closed: false as const, displayExtentAu: orbit.displayExtentAu,
         bodyVertexIndex: finite(path.bodyVertexIndex, `${body.id} epoch vertex`), trailModel: path.trailModel } : {}),
-      ...(orbit.lod ? { lod: { bounds: orbit.lod.bounds, levels: array(path.levels, `${body.id} detail levels`).map(value => {
+      ...(orbit.fine && !fineOf ? { fine: orbit.fine } : {}),
+      ...(orbit.lod && !fineOf ? { lod: { bounds: orbit.lod.bounds, levels: array(path.levels, `${body.id} detail levels`).map(value => {
         const level = record(value, 'orbit bank level', ['vertexIndices', 'trail', 'activeChords', 'deviationM']);
         return { vertexIndices: section(level.vertexIndices, Uint32Array, `${body.id} level vertices`), trail: section(level.trail, Float64Array, `${body.id} level trail`),
           activeChords: section(level.activeChords, Uint32Array, `${body.id} level chords`), deviationM: finite(level.deviationM, `${body.id} level deviation`) };
       }) } } : {}) }, body.positionM, plan.focus.id, renderedIds, body.id);
-    if (geometry.vertexCount !== orbit.vertexCount || geometry.fullTrail !== orbit.fullTrail) throw new TypeError(`${body.id}: orbit bank ${centreId} differs from its summary.`);
+    if (fineOf && array(path.levels, `${body.id} detail levels`).length) throw new TypeError(`${body.id}: fine bank ${centreId} carries coarser levels; its coarse bank holds them.`);
+    const expectedCount = fineOf ? orbit.fine!.vertexCount : orbit.vertexCount;
+    if (geometry.vertexCount !== expectedCount || geometry.fullTrail !== orbit.fullTrail) {
+      throw new TypeError(`${body.id}: orbit bank ${centreId} holds ${geometry.vertexCount} vertices (full trail ${geometry.fullTrail}); its summary says ${expectedCount} (${orbit.fullTrail}).`);
+    }
     orbits.set(body.id, geometry);
   }
   if (paths.size) throw new TypeError(`Orbit bank ${centreId} carries paths for bodies it does not hold: ${[...paths.keys()].join(', ')}.`);
   return orbits;
 }
-/** The planner's full context from the summary plan and every centre's bank, for build tools and tests. */
+/** The planner's full context from the summary plan and every centre's bank, for build tools and tests. A fine bank, when
+ * given, becomes its orbit's fine path. */
 export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap<string, ArrayBuffer>): PreparedWorldContextGeometry {
-  const orbits = new Map([...banks].flatMap(([id, bytes]) => [...decodeWorldOrbitBank(plan, id, bytes)]));
+  const decoded = (fine: boolean) => new Map([...banks].filter(([id]) => id.endsWith(FINE_ORBIT_BANK_SUFFIX) === fine)
+    .flatMap(([id, bytes]) => [...decodeWorldOrbitBank(plan, id, bytes)]));
+  const orbits = decoded(false), finePaths = decoded(true);
   const bodies = plan.bodies.map(body => {
     if (!body.orbit) return body as PreparedContextGeometryBody;
-    const orbit = orbits.get(body.id);
+    const orbit = orbits.get(body.id), finePath = finePaths.get(body.id);
     if (!orbit) throw new TypeError(`${body.id}: no bank holds its orbit.`);
-    return Object.freeze({ ...body, orbit });
+    return Object.freeze({ ...body, orbit: finePath ? Object.freeze({ ...orbit, fine: fineOrbitPath(orbit, finePath) }) : orbit });
   });
   const { orbitBanks: _pins, ...rest } = plan;
   return Object.freeze({ ...rest, schema: 'cssearth-world-context@1', bodies: Object.freeze(bodies) });
 }
 function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
-  const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
+  const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu', 'fine']);
   const vertexCount = finite(orbit.vertexCount, 'orbit vertex count');
   if (!Number.isSafeInteger(vertexCount) || vertexCount < 8) throw new TypeError('Context orbit must carry at least eight prepared vertices.');
   if (typeof orbit.fullTrail !== 'boolean') throw new TypeError('Context orbit must state whether its trail is full.');
@@ -483,7 +535,15 @@ function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
     vertexCount, fullTrail: orbit.fullTrail,
     ...(orbit.bounds === undefined ? {} : { bounds: sphere(orbit.bounds, 'orbit bounds') }),
     ...(orbit.lod === undefined ? {} : { lod: Object.freeze({ bounds: sphere(record(orbit.lod, 'orbit detail levels', ['bounds']).bounds, 'orbit detail bounds') }) }),
-    ...(orbit.closed === false ? { closed: false as const, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent') } : {}) });
+    ...(orbit.closed === false ? { closed: false as const, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent') } : {}),
+    ...(orbit.fine === undefined ? {} : { fine: (() => {
+      const fine = record(orbit.fine, 'orbit fine bank', ['vertexCount', 'deviationM']);
+      const fineCount = finite(fine.vertexCount, 'orbit fine vertex count'), deviationM = finite(fine.deviationM, 'orbit fine deviation');
+      if (orbit.closed === false || !Number.isSafeInteger(fineCount) || fineCount <= vertexCount || deviationM < 0) {
+        throw new TypeError(`A fine orbit bank belongs to a closed path, with more than its ${vertexCount} coarse vertices (it states ${fineCount}) and a deviation of 0 m or more (${deviationM}).`);
+      }
+      return Object.freeze({ vertexCount: fineCount, deviationM });
+    })() }) });
 }
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&
@@ -496,7 +556,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   const orbitBanks = input.orbitBanks === undefined ? undefined : Object.freeze(Object.fromEntries(Object.entries(record(input.orbitBanks, 'orbit banks'))
     .map(([id, value]) => {
       const byteLength = positive(value, `orbit bank ${id} byte length`);
-      if (!/^[a-z][a-z0-9-]*$/.test(id) || !Number.isSafeInteger(byteLength)) throw new TypeError(`Orbit bank ${id} is invalid.`);
+      if (!/^[a-z][a-z0-9-]*(?:\.fine)?$/.test(id) || !Number.isSafeInteger(byteLength)) throw new TypeError(`Orbit bank ${id} is invalid.`);
       return [id, byteLength] as const;
     })));
   const frame = parsePreparedWorldCameraFrame(input.frame);
@@ -564,7 +624,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   // Every orbit's bank is pinned, and every pin holds an orbit.
   if (orbitBanks) {
-    const banks = new Set(bodies.flatMap(body => body.orbit ? [body.id] : []));
+    const banks = new Set(bodies.flatMap(body => !body.orbit ? [] : body.orbit.fine ? [body.id, `${body.id}${FINE_ORBIT_BANK_SUFFIX}`] : [body.id]));
     for (const bank of banks) if (orbitBanks[bank] === undefined) throw new TypeError(`The world context summary pins no orbit bank ${bank}.`);
     for (const id of Object.keys(orbitBanks)) if (!banks.has(id)) throw new TypeError(`Orbit bank ${id} holds no orbit.`);
   }

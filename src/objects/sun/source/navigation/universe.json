@@ -47,6 +47,7 @@
   "bodies": "catalog",
   "orbit": {
     "segments": 60,
+    "fineSegments": 120,
     "trail": {
       "solidTurns": 0.375,
       "fadeTurns": 0.25

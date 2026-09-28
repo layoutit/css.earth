@@ -60,7 +60,9 @@ export interface WorldContextSource {
   readonly bodies: readonly ({ readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate'; readonly unpackaged?: true; readonly orbitsWithinM?: number; readonly labelPlacement?: 'centre' } & WorldContextPresentation)[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
-  readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
+  /** `segments`: the even vertices every page reads. `fineSegments`: a closed path's even vertices in its fine bank, read
+   * only when the coarse path strays more than the planner's pixel budget (a moon's orbit seen from its planet). */
+  readonly orbit: { readonly segments: number; readonly fineSegments?: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number; readonly presentation: WorldContextCameraPresentation };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -114,6 +116,8 @@ export interface PreparedWorldContext {
     readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
       readonly extentChords: readonly number[]; readonly lod: PreparedOrbitLod;
+      /** A closed path's fine bank, graded toward the body, and the coarse path's largest distance from the true path. */
+      readonly fine?: PreparedFineOrbit;
       /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
       readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
       readonly trailModel?: 'finite-open-trajectory-constant-weight' } }[];
@@ -151,18 +155,22 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
     return freeze({ ...presentation(body, `World context body ${index}`), ...(body.labelPlacement === 'centre' ? { labelPlacement: 'centre' as const } : {}), ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), ...(body.unpackaged === true ? { unpackaged: true as const } : {}), ...(body.orbitsWithinM === undefined ? {} : { orbitsWithinM: positive(body.orbitsWithinM, `world context body ${index} orbit range`) }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
-  const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');
+  const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'fineSegments', 'trail'], 'world context orbit');
   const trail = record(orbit.trail, 'world context orbit trail'); keys(trail, ['solidTurns', 'fadeTurns'], 'world context orbit trail');
   const segments = integer(orbit.segments, 'World context orbit segments');
   const solidTurns = nonnegative(trail.solidTurns, 'World context trail solid turns'), fadeTurns = positive(trail.fadeTurns, 'World context trail fade turns');
   if (segments < 8 || solidTurns + fadeTurns >= 1) throw new TypeError('World context orbit trail is invalid.');
+  const fineSegments = orbit.fineSegments === undefined ? undefined : integer(orbit.fineSegments, 'World context orbit fine segments');
+  if (fineSegments !== undefined && !(fineSegments > segments)) {
+    throw new TypeError(`World context orbit fineSegments ${fineSegments} must exceed segments ${segments}.`);
+  }
   const camera = parseCamera(input.camera), volume = record(input.volume, 'World context volume');
   const system = parseSystem(input.system);
   keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile'], 'World context volume');
   const fadeStartDistanceM = positive(volume.fadeStartDistanceM, 'Volume fade start'), fullDistanceM = positive(volume.fullDistanceM, 'Volume full distance');
   if (!(fadeStartDistanceM < fullDistanceM && fullDistanceM <= camera.maximumDistanceM)) throw new TypeError('Volume distance range is invalid.');
   const stars = parseStars(input.stars, fadeStartDistanceM);
-  return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), ...(fromCatalog ? { bodySelection: 'catalog' as const } : {}), orbit: freeze({ segments, trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
+  return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), ...(fromCatalog ? { bodySelection: 'catalog' as const } : {}), orbit: freeze({ segments, ...(fineSegments === undefined ? {} : { fineSegments }), trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
     volume: freeze({ objectId: identifier(volume.objectId, 'Volume object id'), fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
       ...(volume.brightnessProfile === undefined ? {} : { brightnessProfile: parseVolumeOpacityProfile(volume.brightnessProfile) }) }) });
@@ -234,7 +242,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       focus: add(state.centerPositionM, scale(state.positionM, -1)), perihelionDirection: state.perihelionDirection,
       perihelionMotion: motion, segments: source.orbit.segments,
     }) : undefined;
-    let verticesM: readonly Vector3[], trail: readonly number[];
+    let verticesM: readonly Vector3[], trail: readonly number[], fine: PreparedFineOrbit | undefined;
     if (path) {
       verticesM = freeze(path.vertices.map((vertex, index) => index === path.bodyVertexIndex
         ? copy(state.positionM) : copy(add(state.positionM, vertex))));
@@ -243,22 +251,29 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
       const eccentric = 2 * Math.atan2(Math.sqrt(1 - state.eccentricity) * Math.sin(state.trueAnomalyRadians / 2),
         Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
-      verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
-        eccentric + index * 2 * Math.PI / source.orbit.segments)));
-      trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
-        : trailWeights(source.orbit.segments, source.orbit.trail);
+      const point = (turn: number) => ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor, eccentric + turn * 2 * Math.PI);
+      const sample = (turns: readonly number[]) => ({ verticesM: freeze(turns.map((turn, index) => index === 0 ? copy(state.positionM) : point(turn))),
+        trail: fact.orbitStyle === 'closed' ? freeze(turns.map(() => 1)) : trailWeights(turns, source.orbit.trail) });
+      const coarseTurns = Array.from({ length: source.orbit.segments }, (_, index) => index / source.orbit.segments);
+      ({ verticesM, trail } = sample(coarseTurns));
+      if (source.orbit.fineSegments !== undefined) {
+        const finePath = sample(fineClosedPathTurns(source.orbit.fineSegments));
+        fine = prepareFineOrbit(finePath.verticesM, finePath.trail, closedPathDeviationM(verticesM, coarseTurns, point));
+      }
     }
     const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
     const extentChords = prepareExtentChords(activeChords);
-    // Enclose the actual authored trail, including the pinned ephemeris vertex.
+    // Enclose the actual authored trail, including the pinned ephemeris vertex, for the coarse path and a fine one.
     // A sphere containing its endpoints also contains every active chord.
-    const endpoints = activeChords.length ? activeChords.flatMap(index => [verticesM[index]!, verticesM[(index + 1) % verticesM.length]!]) : verticesM;
+    const endpoints = [{ verticesM, activeChords }, ...(fine ? [fine] : [])].flatMap(drawn => drawn.activeChords.length
+      ? drawn.activeChords.flatMap(index => [drawn.verticesM[index]!, drawn.verticesM[(index + 1) % drawn.verticesM.length]!]) : drawn.verticesM);
     const centerM = [0, 1, 2].map(axis => (Math.min(...endpoints.map(v => v[axis]!)) + Math.max(...endpoints.map(v => v[axis]!))) / 2) as unknown as Vector3;
     const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
       Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
-    const lod = prepareOrbitLod(verticesM, trail, path ? path.closed !== false : true, path?.bodyVertexIndex ?? 0);
+    const lod = prepareOrbitLod(verticesM, trail, path ? path.closed !== false : true, path?.bodyVertexIndex ?? 0, fine ? [...verticesM, ...fine.verticesM] : verticesM);
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
       orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords, lod,
+        ...(fine ? { fine } : {}),
         ...(path ? { closed: path.closed, bodyVertexIndex: path.bodyVertexIndex, displayExtentAu: path.displayExtentAu, trailModel: path.trailModel } : {}) }) });
   });
   const focus = { ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM };
@@ -302,9 +317,11 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   };
   return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
     if (!body.orbit) return body;
-    const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
+    const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, fine, closed, displayExtentAu } = body.orbit;
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
-      bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }), ...(closed === false ? { closed, displayExtentAu } : {}) }) });
+      bounds: outwardSphere(bounds), lod: freeze({ bounds: outwardSphere(lod.bounds) }),
+      ...(fine ? { fine: freeze({ vertexCount: fine.verticesM.length, deviationM: fine.deviationM }) } : {}),
+      ...(closed === false ? { closed, displayExtentAu } : {}) }) });
   })) });
 }
 
@@ -351,7 +368,8 @@ export function orbitVertexError(verticesM: readonly Vector3[], pinnedIndex = 0)
   const { originM, stepM } = orbitVertexQuantum(verticesM, pinnedIndex);
   return Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => originM[axis]! + Math.round((value - originM[axis]!) / stepM) * stepM - value))));
 }
-export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true): Uint8Array {
+export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body: PreparedWorldContext['bodies'][number]) => boolean = () => true,
+  tier: 'coarse' | 'fine' = 'coarse'): Uint8Array {
   const sections: (Float64Array | Uint32Array | Int32Array)[] = [];
   let offset = 0;
   const section = (values: Float64Array | Uint32Array | Int32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
@@ -363,12 +381,15 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
   const bodies = prepared.bodies.flatMap(body => {
     const orbit = body.orbit;
     if (!orbit || !include(body)) return [];
-    const { originM, stepM } = orbitVertexQuantum(orbit.verticesM, orbit.closed === false ? orbit.bodyVertexIndex : 0);
-    const vertices = section(Int32Array.from(orbit.verticesM.flat(), (value, index) => Math.round((value - originM[index % 3]!) / stepM)));
-    return [{ id: body.id, vertexOriginM: originM, vertexStepM: stepM, vertices, trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
-      extentChords: u32(orbit.extentChords),
+    // A fine bank is one closed path with no coarser levels: the coarse bank already carries those.
+    const path = tier === 'fine' ? orbit.fine : orbit;
+    if (!path) throw new TypeError(`${body.id} has no fine orbit path to bank.`);
+    const { originM, stepM } = orbitVertexQuantum(path.verticesM, orbit.closed === false ? orbit.bodyVertexIndex : 0);
+    const vertices = section(Int32Array.from(path.verticesM.flat(), (value, index) => Math.round((value - originM[index % 3]!) / stepM)));
+    return [{ id: body.id, vertexOriginM: originM, vertexStepM: stepM, vertices, trail: f64(path.trail), activeChords: u32(path.activeChords),
+      extentChords: u32(path.extentChords),
       ...(orbit.closed === false ? { bodyVertexIndex: orbit.bodyVertexIndex, trailModel: orbit.trailModel } : {}),
-      levels: orbit.lod.levels.map(level => ({ vertexIndices: u32(level.vertexIndices), trail: f64(level.trail),
+      levels: tier === 'fine' ? [] : orbit.lod.levels.map(level => ({ vertexIndices: u32(level.vertexIndices), trail: f64(level.trail),
         activeChords: u32(level.activeChords), deviationM: level.deviationM })) }];
   });
   const header = new TextEncoder().encode(JSON.stringify({ schema: 'cssearth-world-orbits@2', bodies }));
@@ -389,9 +410,13 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
  * downloads only the paths its views draw. A bank per orbit centre carried every path around that centre: the Sun view
  * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path). */
 export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
-  return prepared.bodies.filter(body => body.orbit).map(body => body.id).sort()
-    .map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.id === id) }));
+  return prepared.bodies.filter(body => body.orbit).map(body => body.id).sort().flatMap(id => [
+    { id, bytes: encodeWorldOrbits(prepared, body => body.id === id) },
+    // `<id>.fine`: the same path at its fine vertex count, read only when the coarse one strays past the pixel budget.
+    ...(prepared.bodies.find(body => body.id === id)!.orbit!.fine ? [{ id: `${id}${FINE_ORBIT_BANK_SUFFIX}`,
+      bytes: encodeWorldOrbits(prepared, body => body.id === id, 'fine') }] : [])]);
 }
+export const FINE_ORBIT_BANK_SUFFIX = '.fine';
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];
   readonly activeChords: readonly number[]; readonly deviationM: number;
@@ -406,10 +431,10 @@ export interface PreparedOrbitLod {
 // the trail weights it spans, and records its largest distance from the full
 // path. The runtime selects a level by projected error; it never derives one.
 const ORBIT_LOD_STEPS = [2, 4, 8] as const;
-function prepareOrbitLod(verticesM: readonly Vector3[], trail: readonly number[], closed: boolean, pinned: number): PreparedOrbitLod {
+function prepareOrbitLod(verticesM: readonly Vector3[], trail: readonly number[], closed: boolean, pinned: number, boundsVerticesM = verticesM): PreparedOrbitLod {
   const count = verticesM.length;
-  const centerM = [0, 1, 2].map(axis => (Math.min(...verticesM.map(v => v[axis]!)) + Math.max(...verticesM.map(v => v[axis]!))) / 2) as unknown as Vector3;
-  const radiusM = Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON);
+  const centerM = [0, 1, 2].map(axis => (Math.min(...boundsVerticesM.map(v => v[axis]!)) + Math.max(...boundsVerticesM.map(v => v[axis]!))) / 2) as unknown as Vector3;
+  const radiusM = Math.max(...boundsVerticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON);
   const levels = ORBIT_LOD_STEPS.map(step => {
     const keep = new Set([0, pinned]);
     for (let index = 0; index < count; index += step) keep.add(index);
@@ -536,7 +561,40 @@ function validateState(state: OrbitalState, id: string): void {
   }
 }
 function ellipse(centre: Vector3, perihelion: Vector3, motion: Vector3, major: number, minor: number, anomaly: number): Vector3 { return add(centre, add(scale(perihelion, major * Math.cos(anomaly)), scale(motion, minor * Math.sin(anomaly)))); }
-function trailWeights(segments: number, trail: WorldContextSource['orbit']['trail']): readonly number[] { return freeze(Array.from({ length: segments }, (_, index) => { const behind = (segments - index - .5) / segments; return Number((behind <= trail.solidTurns ? 1 : Math.max(0, 1 - (behind - trail.solidTurns) / trail.fadeTurns)).toFixed(6)); })); }
+// A closed fine path's vertices as turns of eccentric anomaly ahead of the body. `fineSegments` even steps leave a chord
+// whose middle, seen from the path's centre, is ε = (π/N)²/2 radians off the path (1.7 px at N = 60 across a 1,440 px,
+// 60° view; 0.4 px at N = 120): a moon's orbit seen from its planet. Seen from the body, a chord θ radians away of length
+// Δθ is Δθ²/(8θ) off, so near the body the step shrinks as (2π/N)·√θ, which holds the same ε. Below θ = (2π/N)² the
+// step halves CLOSED_PATH_BODY_HALVINGS times, each chord as long as its distance, down to a camera a few metres out.
+const CLOSED_PATH_BODY_HALVINGS = 8;
+function fineClosedPathTurns(fineSegments: number): readonly number[] {
+  const even = 2 * Math.PI / fineSegments, graded = even ** 2, side: number[] = [];
+  for (let halving = CLOSED_PATH_BODY_HALVINGS; halving >= 1; halving--) side.push(graded / 2 ** halving);
+  for (let angle = graded; angle < Math.PI; angle += even * Math.min(1, Math.sqrt(angle))) side.push(angle);
+  const turns = new Set([0, .5, ...side.flatMap(angle => [angle / (2 * Math.PI), 1 - angle / (2 * Math.PI)])]);
+  return freeze([...turns].sort((a, b) => a - b));
+}
+// The coarse path's largest distance from the true path, for ordering it among the detail levels: each coarse chord against
+// the ellipse points it cuts across, at sixty-four steps a chord.
+const DEVIATION_SAMPLES_PER_CHORD = 64;
+function closedPathDeviationM(verticesM: readonly Vector3[], turns: readonly number[], point: (turn: number) => Vector3): number {
+  let deviationM = 0;
+  for (let chord = 0; chord < turns.length; chord++) {
+    const from = turns[chord]!, to = turns[chord + 1] ?? 1, a = verticesM[chord]!, b = verticesM[(chord + 1) % verticesM.length]!;
+    for (let step = 1; step < DEVIATION_SAMPLES_PER_CHORD; step++) deviationM = Math.max(deviationM, distanceToSegment(point(from + (to - from) * step / DEVIATION_SAMPLES_PER_CHORD), a, b));
+  }
+  return deviationM;
+}
+export interface PreparedFineOrbit {
+  readonly verticesM: readonly Vector3[]; readonly trail: readonly number[]; readonly activeChords: readonly number[];
+  readonly extentChords: readonly number[]; readonly deviationM: number;
+}
+function prepareFineOrbit(verticesM: readonly Vector3[], trail: readonly number[], deviationM: number): PreparedFineOrbit {
+  const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+  return freeze({ verticesM, trail, activeChords, extentChords: prepareExtentChords(activeChords), deviationM });
+}
+// Each chord's weight from the share of a turn its middle lies behind the body.
+function trailWeights(turns: readonly number[], trail: WorldContextSource['orbit']['trail']): readonly number[] { return freeze(turns.map((turn, index) => { const behind = 1 - (turn + (turns[index + 1] ?? 1)) / 2; return Number((behind <= trail.solidTurns ? 1 : Math.max(0, 1 - (behind - trail.solidTurns) / trail.fadeTurns)).toFixed(6)); })); }
 function record(value: unknown, name: string): Record<string, unknown> { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${name} must be an object.`); return value as Record<string, unknown>; }
 function keys(value: Record<string, unknown>, allowed: readonly string[], name: string): void { for (const key of Object.keys(value)) if (!allowed.includes(key)) throw new TypeError(`${name}.${key} is not supported.`); }
 function text(value: unknown, name: string): string { if (typeof value !== 'string' || !value) throw new TypeError(`${name} must be text.`); return value; }

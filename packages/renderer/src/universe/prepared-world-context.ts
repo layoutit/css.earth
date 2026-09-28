@@ -1,5 +1,6 @@
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
+import { orbitVertexCapacity } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
@@ -213,7 +214,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (body.contextColor) orbitRoot.style.color = body.contextColor;
 
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, strokeHost: root, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, strokeHost: root, dashed: approximate, capacity: orbitProjectionCapacity(orbit ? orbitVertexCapacity(orbit) : 0), id: body.id,
       ...(colour ? { color: colour } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only

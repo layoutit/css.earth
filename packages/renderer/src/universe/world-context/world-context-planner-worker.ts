@@ -1,6 +1,6 @@
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context-planner.js';
-import { decodeWorldOrbitBank, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
+import { decodeWorldOrbitBank, FINE_ORBIT_BANK_SUFFIX, parsePreparedWorldContextSummary } from '../../prepared-data/world-context.js';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '../../prepared-data/world-context.js';
 import type { WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
@@ -23,7 +23,8 @@ async function read(url: string): Promise<ArrayBuffer> {
 }
 
 // Orbit paths arrive one per bank: a frame that needs a path it lacks names the body, and that body's bank is read once,
-// decoded and attached; the page is told so it plans again. A bank that fails is logged
+// decoded and attached; the page is told so it plans again. A path drawn past its coarse bank's pixel budget names its
+// `<id>.fine` bank the same way, and the fine path replaces the coarse one as its finest level. A bank that fails is logged
 // once and left out, so a missing file costs its orbits, not the world.
 let banks: { plan: PreparedWorldContext; source: WorldPlannerSource; bankOf: ReadonlyMap<string, string>;
   requested: Set<string> } | null = null;
@@ -35,7 +36,8 @@ function requestWantedBanks() {
     if (requested.has(centre)) continue;
     requested.add(centre);
     read(`${source.orbitBanksUrl}${centre}.bin`).then(bytes => {
-      calculate.attachOrbits(decodeWorldOrbitBank(plan, centre, bytes));
+      const paths = decodeWorldOrbitBank(plan, centre, bytes);
+      if (centre.endsWith(FINE_ORBIT_BANK_SUFFIX)) calculate.attachFineOrbits(paths); else calculate.attachOrbits(paths);
       scope.postMessage({ orbitsLoaded: centre });
     }).catch(error => console.error(`World orbit bank ${centre} could not be loaded; its orbits stay undrawn.`, error));
   }
@@ -52,7 +54,7 @@ scope.onmessage = ({ data }) => {
       const source = data.source;
       const plan = parsePreparedWorldContextSummary(data.plan);
       banks = { plan, source, requested: new Set(),
-        bankOf: new Map(plan.bodies.flatMap(body => body.orbit ? [[body.id, body.id] as const] : [])) };
+        bankOf: new Map(Object.keys(plan.orbitBanks ?? {}).map(bank => [bank, bank] as const)) };
       initialise(plan, data.annotationPriorities, data.annotationLandmarks);
     } else if ('plan' in data) {
       banks = null;
