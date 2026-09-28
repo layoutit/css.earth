@@ -11,7 +11,10 @@ import { rebuildStale, staleBuilds, staleInstall } from '../src/preparation/stal
 const install = await staleInstall();
 if (install) { console.error(install); process.exit(1); }
 if (process.argv.includes('--run')) {
-  const rebuilt = await rebuildStale();
+  const rebuilt = await rebuildStale().catch((error: unknown) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  });
   console.log(rebuilt.length ? `Rebuilt ${rebuilt.length} stale build(s).` : 'Builds are current; nothing rebuilt.');
 } else {
   const stale = await staleBuilds();

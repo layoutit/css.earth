@@ -5,9 +5,8 @@
  *
  * It imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
  * runs, and `--run` still rebuilds, when this package's own build is missing or stale. */
-import { execFile } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { readdir, readFile, stat } from 'node:fs/promises';
-import { promisify } from 'node:util';
 import { relative, resolve } from 'node:path';
 
 /** `inputs` names the bundler's metafile: every file the last build read counts as a source, so an import from outside the
@@ -95,8 +94,18 @@ export async function staleInstall(root = process.cwd()) {
 }
 
 /** Rebuild only what is stale, in rule order, so a dependent build never runs before its dependency. */
+/** Run one build command through the shell with the caller's terminal, so a long build streams its output and no output
+ * size can fail it; resolves when it exits 0 and rejects with its exit status otherwise. */
+export function runBuildCommand(command: string, cwd = process.cwd()): Promise<void> {
+  return new Promise((done, fail) => {
+    const child = spawn(command, { cwd, shell: true, stdio: 'inherit' });
+    child.once('error', fail);
+    child.once('exit', (code, signal) => code === 0 ? done() : fail(new Error(`${command} exited with ${signal ?? `status ${code}`}`)));
+  });
+}
+
 export async function rebuildStale(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES,
-  run: (command: string) => Promise<void> = async command => { await promisify(execFile)(command, { cwd: root, shell: true }); }) {
+  run: (command: string) => Promise<void> = command => runBuildCommand(command, root)) {
   const stale = await staleBuilds(root, rules);
   for (const build of stale) {
     console.log(`rebuilding ${build.name}: ${build.reason}`);

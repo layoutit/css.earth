@@ -156,3 +156,18 @@ test('the stale-build check loads from source with Node built-ins alone, so it r
   assert.deepEqual(await importsOf('packages/bake/cli/check-stale-builds.mts'), ['../src/preparation/stale-builds.ts'],
     'the command loads the library from source, not through the built entry');
 });
+
+test('a build command streams to the terminal, so no output size fails it, and a failing build still fails', async () => {
+  // The runner inherits its caller's stdio; run it in a child whose output this test drains, as a terminal would.
+  const { spawnSync } = await import('node:child_process');
+  const runner = (command: string) => spawnSync(process.execPath, ['--input-type=module', '-e',
+    `import { runBuildCommand } from '@cssearth/bake/preparation'; await runBuildCommand(${JSON.stringify(command)});`],
+  { cwd: new URL('../..', import.meta.url), encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  const node = JSON.stringify(process.execPath);
+  const large = runner(`${node} -e "process.stdout.write('x'.repeat(3 * 1024 * 1024))"`);
+  assert.equal(large.status, 0, large.stderr);
+  assert.equal(large.stdout.length, 3 * 1024 * 1024, 'the 3 MiB of build output reached the terminal');
+  const failing = runner(`${node} -e "process.exit(3)"`);
+  assert.notEqual(failing.status, 0);
+  assert.match(failing.stderr, /exited with status 3/u);
+});
