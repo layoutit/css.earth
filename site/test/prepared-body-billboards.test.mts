@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseObjectDiscovery } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT as context } from '../world-context-plan.mts';
-import { billboardBodyRadiusPixels, preparedBodyBillboards } from '../prepared-body-billboards.mts';
+import { billboardBodyRadiusPixels, preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 
 const bodies = [context.focus, ...context.bodies];
 test('world bodies use their arrival image, including its physical radius within the square', () => {

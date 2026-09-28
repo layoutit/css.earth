@@ -10,7 +10,7 @@ import { savedWorldCamera } from '@cssearth/renderer/navigation/saved-world-came
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/renderer/navigation/world-camera-math.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
-import { preparedBodyBillboards } from '../../../site/prepared-body-billboards.mts';
+import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { OrbitSegment } from '@cssearth/renderer/solar-system/types.ts';
 import type { NativeCameraRotation } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling.mts';

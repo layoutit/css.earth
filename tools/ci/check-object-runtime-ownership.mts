@@ -497,7 +497,7 @@ function requireApplicationWorldContextSource(mountSource: string, resourceSourc
     mount.calls('prepareObjectResources').length !== 1 || calls('prepareObjectResources').length !== 0) fail();
   const required = ['createPreparedUniverse', 'loadPreparedCssVolume', 'loadPreparedPointAppearance', 'loadPreparedCssSurfaceShell'];
   if (!context || !required.every(name => importsFactory(name, renderer) && calls(name).length === 1 && mount.calls(name).length === 0) ||
-    !importsFactory('preparedBodyBillboards', './prepared-body-billboards.mts') || calls('preparedBodyBillboards').length !== 1) fail();
+    !importsFactory('preparedBodyBillboards', '@cssearth/renderer/navigation/prepared-body-billboards.ts') || calls('preparedBodyBillboards').length !== 1) fail();
   if ([...imports.values()].some(binding => binding.source === './prepared-navigation-markers.mjs')) fail();
   // Bodies share src/objects, so descriptors and asset URLs come from the generated module that globs each context object by name.
   const initializers = nodes.flatMap(node => node.type === 'VariableDeclarator' && node.init?.type === 'Identifier' ? [node.init.name] : []);

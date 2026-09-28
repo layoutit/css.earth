@@ -6,7 +6,7 @@ import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sam
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, parseLensBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE } from './world-context-plan.mts';
-import { preparedBodyBillboards } from './prepared-body-billboards.mts';
+import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
