@@ -45,6 +45,10 @@ the planet. The fine path keeps every chord within (π/120)²/2 radians of the
 path, whether seen from the orbit's centre or from the body. Near the body the
 spacing shrinks with the square root of the angle from it. Pages that never
 zoom in read exactly the 60-vertex files they read before.
+[The comparison](evidence/orbit-fine-paths-20260928/moon-and-ganymede.png)
+(fix/orbit-body-refinement, 2026-09-28; headless Chrome, 1440 × 900 at 2×)
+shows the Moon's orbit from 1.1 million km and Ganymede's from 1.9 million km.
+Each pair shows the 60-vertex path on the left and the fine path on the right.
 
 ## Evidence
 
