@@ -19,7 +19,9 @@ Charon combines New Horizons photographs, elevation, modeled Bond albedo and two
 
 ## Evidence
 
-The [LEISA capture record](evidence/leisa-ice/capture.json) binds the tested inputs, prepared assets and browser views. It checks both datasets at DPR 1 and 2, the mobile selector, dragging, Shadows off/on/off, and the Organa search result. The browser verifies the downloaded texture hashes and keeps the same 450 surface leaves while switching datasets.
+The [LEISA capture record](evidence/leisa-ice/capture.json) binds the tested inputs, prepared assets and browser views.
+Its `completeBodyPreparation` check recorded [`node tools/objects/dist/prepare-authored.js charon --write`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/prepare-authored.ts)
+(now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). It checks both datasets at DPR 1 and 2, the mobile selector, dragging, Shadows off/on/off, and the Organa search result. The browser verifies the downloaded texture hashes and keeps the same 450 surface leaves while switching datasets.
 
 [Water ice](evidence/leisa-ice/water-ice.png) · [Ammonia](evidence/leisa-ice/ammonia.png) · [Organa](evidence/leisa-ice/organa.png) · [DPR 2](evidence/leisa-ice/ammonia-dpr2.png) · [Mobile](evidence/leisa-ice/mobile.png)
 
