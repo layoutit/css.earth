@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its colour is Gaia's spectrum of it."
-  }
+  },
+  "surfaceGravityLogg": 4.63,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/eps-indi-a.json: 4.625"
 }

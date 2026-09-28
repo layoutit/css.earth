@@ -126,7 +126,12 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere colour from the star's VLT/UVES spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere colour from the star's VLT/UVES spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^0.61 that Ohnaka et al. (2019), ApJ 883, 89 fit to the star's resolved disc (VLT/AMBER K-band continuum near 2.3 um; not a visible band).",
+        "limbDarkening": {
+          "law": "power",
+          "published": true,
+          "path": "photometry/ohnaka-2019-limb-darkening.json"
+        }
       }
     }
   ],
@@ -148,7 +153,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

@@ -16,6 +16,10 @@ Antares is the nearest red supergiant. Its package holds the placement, the publ
 
 **Catalogue colour.** #ffc595, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [star-color.ts](../../../packages/engine/src/solar-system/star-color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 3660 ± 120 K from Ohnaka et al. 2013 (A&A 555, A24; <https://arxiv.org/abs/1304.4800>), abstract: the bolometric flux with the VLTI/AMBER limb-darkened diameter 37.38 mas, the radius source. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
 
+**Colour lens.** A Planck spectrum at 3,660 K, because no archive holds a spectrum of this star (stis-ngsl: HD 148478 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 6134 is not in the catalogue; kiehling: HR 6134 is not among its 60 stars; kharitonov: HR 6134 is not in the catalogue; burnashev: BS 6134 is not in part2), through the CIE 1931 2° observer: #ffcb94. Routes tried in order: stis-ngsl: HD 148478 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 6134 is not in the catalogue; kiehling: HR 6134 is not among its 60 stars; kharitonov: HR 6134 is not in the catalogue; burnashev: BS 6134 is not in part2; planck: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,660 K and log g -0.05 for 15 solar masses (u1 1.110, u2 -0.013); the model atmosphere is extended, and the law reaches zero at 99.6% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/antares.json: -0.054.
+
 ## Evidence
 
 - [`investigations.json`](investigations.json) records the two image routes that were checked and excluded, with the measured numbers.
@@ -32,5 +36,6 @@ Antares is the nearest red supergiant. Its package holds the placement, the publ
 **The axis is a convention.** Where the pole really points is unknown.
 
 **The sky is the Sun's.** The star field behind Antares is the shared cube baked from the Sun's position.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

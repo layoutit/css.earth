@@ -168,7 +168,10 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         // The arrival billboard belongs to navigation, not to this bake: a full run carries the published record and the image it
         // names, or the page that the billboard step photographs could not start without them (packages/bake/cli/prepare-arrival-billboard.mts).
         const record: unknown = await readFile(resolve(outputDirectory, 'arrival-billboard.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
-        const url = record && typeof record === 'object' && 'url' in record && typeof record.url === 'string' ? record.url : null;
+        // Only while it still shows the default lens: a billboard of a replaced lens is stale, and the billboard step makes the new one.
+        const content = JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8')) as { lenses?: { defaultLens?: unknown } };
+        const current = record && typeof record === 'object' && 'lens' in record && record.lens === content.lenses?.defaultLens;
+        const url = current && 'url' in record && typeof record.url === 'string' ? record.url : null;
         const image = url?.startsWith(`/scenes/${id}/`) ? url.slice(`/scenes/${id}/`.length) : null;
         if (image && await access(resolve(publicDirectory, image)).then(() => true, () => false)) {
           await mkdir(stagedPublic, { recursive: true }); await mkdir(stagedData, { recursive: true });

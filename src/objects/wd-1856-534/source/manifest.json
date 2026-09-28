@@ -172,11 +172,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "wd-1856-534-vanderburg-2020-limb-darkening",
+      "path": "photometry/vanderburg-2020-limb-darkening.json",
+      "origin": "https://arxiv.org/abs/2009.07282",
+      "credit": "Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, each value with its quoted cell",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "stellar-color-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
@@ -190,7 +207,8 @@
           "wd-1856-534-stellar-color",
           "wd-1856-534-gaia-dr3-xp-sampled",
           "wd-1856-534-cie-1931-2deg-cmf",
-          "wd-1856-534-preparation-raster"
+          "wd-1856-534-preparation-raster",
+          "wd-1856-534-vanderburg-2020-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",

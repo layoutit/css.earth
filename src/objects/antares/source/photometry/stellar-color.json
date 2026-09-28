@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "antares",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3660,
+      "lowerKelvin": 3660,
+      "upperKelvin": 3660,
+      "citation": "Effective temperature 3660 ± 120 K from Ohnaka et al. 2013 (A&A 555, A24; https://arxiv.org/abs/1304.4800), abstract: the bolometric flux with the VLTI/AMBER limb-darkened diameter 37.38 mas, the radius source.: 3660 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/1304.4800"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 148478 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 6134 is not in the catalogue; kiehling: HR 6134 is not among its 60 stars; kharitonov: HR 6134 is not in the catalogue; burnashev: BS 6134 is not in part2), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

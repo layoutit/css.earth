@@ -27,7 +27,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,7 +100,7 @@
     "catalog": {
       "name": "HR 8799",
       "classification": "star",
-      "color": "#edefff",
+      "color": "#f0f0ff",
       "distanceAu": 8432043.3,
       "description": "Young F0 star 41 parsecs away in Pegasus, orbited by four giant planets that were photographed directly.",
       "systemName": "HR 8799 system",

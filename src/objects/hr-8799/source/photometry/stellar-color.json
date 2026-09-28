@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hr-8799",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 7193,
+      "lowerKelvin": 7193,
+      "upperKelvin": 7193,
+      "citation": "Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556): effective temperature 7193 +/- 87 K from the CHARA limb-darkened diameter and bolometric flux, https://arxiv.org/abs/1210.0556: 7193 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/1210.0556"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 218396 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 8799 is not in the catalogue; kiehling: HR 8799 is not among its 60 stars; kharitonov: HR 8799 is not in the catalogue; burnashev: BS 8799 is not in part2), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

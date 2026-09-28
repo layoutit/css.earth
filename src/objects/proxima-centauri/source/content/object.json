@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere.",
         "thumbnail": "proxima-centauri-lens-color.webp",
         "surface": "proxima-centauri-surface-color@2x.webp",
         "poles": "proxima-centauri-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://doi.org/10.17909/kmdt-pw63"
         },
         "falseColor": false,
-        "notes": "The colour of the Hubble Space Telescope's STIS spectrum of Proxima Centauri from 26 April 2015; Proxima flares, so this is one moment."
+        "notes": "The colour of the Hubble Space Telescope's STIS spectrum of Proxima Centauri from 26 April 2015; Proxima flares, so this is one moment. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,098 K and log g 4.59 (u1 0.162, u2 0.488): a model, because no fit of this star's limb is used."
       }
     ]
   },

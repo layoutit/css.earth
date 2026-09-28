@@ -62,22 +62,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "hr-8799-lens-shape.webp",
-        "surface": "hr-8799-surface-shape@2x.webp",
-        "poles": "hr-8799-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hr-8799-lens-color.webp",
+        "surface": "hr-8799-surface-color@2x.webp",
+        "poles": "hr-8799-poles-color@2x.webp",
         "source": {
-          "id": "hr-8799-observational-measurements",
+          "id": "hr-8799-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/0811.2606"
+          "url": "https://arxiv.org/abs/1210.0556"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere exists: the star is 0.34 milliarcseconds across, which the CHARA interferometer measures as a size and nothing more (Baines et al. 2012). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,193 K and log g 4.25 (u1 0.296, u2 0.339): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

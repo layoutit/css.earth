@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "wd-1856-534",
+  "source": "Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282)",
+  "band": "GTC g' band; the coefficients Gianninas et al. (2013) compute from white-dwarf model atmospheres, not a visible-band measurement",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "basis": "model-prior",
+  "u1": {
+    "value": 0.05,
+    "fixed": "\"The Gianninas coefficients (u_1 = 0.05, u_2 = 0.52)\", the paper's fixed g'-band values for WD 1856"
+  },
+  "u2": {
+    "value": 0.52,
+    "fixed": "\"The Gianninas coefficients (u_1 = 0.05, u_2 = 0.52)\", the paper's fixed g'-band values for WD 1856"
+  },
+  "note": "The only limb law published for this star: the model coefficients the discovery paper fixed when fitting its transit, which it reports agree with Claret et al. (2019)'s independent u1 = 0.07, u2 = 0.46."
+}

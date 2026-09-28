@@ -8,7 +8,7 @@ Its mean radius, 105.2 solar radii, comes from comparing how fast its surface mo
 
 **Colour.** A Planck spectrum at 5,125 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.07 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2° observer: #ffe8d4. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
-**Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class.
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,125 K and log g 0.85 (u1 0.591, u2 0.156): a model, because no fit of this star's limb is used. Gravity: no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 1.9% of the centre brightness from the one drawn, at log g 0.85, the gravity closest to all of them; log g 0.85 is a display choice, not a measurement.
 
 ## Evidence
 
@@ -18,6 +18,7 @@ Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and a display gravity inside its class's published range (see Limb), not a measurement of this star.
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Not shown.** No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.

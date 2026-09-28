@@ -21,7 +21,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { hostLitGray, linearToSrgb } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { loadStellarPhotometricColor, quadraticIntensity } from '@cssearth/bake/objects/stellar';
+import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
@@ -66,10 +66,10 @@ export async function starMarker(id: string, { requireLimbDarkening = true } = {
   const source = resolve(objects, id, 'source'), { science } = await defaultSurface(id);
   const { color, limbDarkening } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), science, 'photometry/stellar-color.json');
   if (!limbDarkening && requireLimbDarkening) throw new Error(`${id} has no limb-darkening record.`);
-  const { u1, u2 } = limbDarkening?.coefficients ?? { u1: 0, u2: 0 };
+  const law = limbDarkening?.coefficients ?? { u1: 0, u2: 0 };
   // Intensity scales every linear channel; the colour's chromaticity stays.
   return disc((x, y) => {
-    const ratio = Math.max(0, quadraticIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), u1, u2));
+    const ratio = Math.max(0, limbIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), law));
     return color.linear.map(value => Math.round(255 * linearToSrgb(value * ratio))) as unknown as [number, number, number];
   });
 }

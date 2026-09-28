@@ -19,14 +19,33 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "color",
       "output": "hr-8799-surface-{id}{suffix}.webp",
       "thumbnail": "hr-8799-lens-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
+          "grid": {
+            "teffK": 7193,
+            "logg": 4.25,
+            "models": {
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        },
+        "qualification": "Photosphere colour from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,193 K and log g 4.25 (u1 0.296, u2 0.339): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }
   ],
@@ -48,7 +67,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

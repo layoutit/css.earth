@@ -245,11 +245,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "r-doradus-ohnaka-2019-limb-darkening",
+      "path": "photometry/ohnaka-2019-limb-darkening.json",
+      "origin": "https://arxiv.org/abs/1908.06997",
+      "credit": "Ohnaka et al. (2019), ApJ 883, 89",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, each value with its quoted cell",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1038/s41586-024-07836-9",
       "credit": "The ALMA continuum image on the lens palette; marker written by tools/objects/source-authoring/r-doradus/author.mts",
@@ -260,7 +277,8 @@
       "recipe": {
         "generator": "tools/objects/source-authoring/r-doradus/author.mts",
         "inputs": [
-          "r-doradus-alma-338ghz"
+          "r-doradus-alma-338ghz",
+          "r-doradus-ohnaka-2019-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/r-doradus/author.mts",

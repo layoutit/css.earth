@@ -23,17 +23,6 @@
       ]
     },
     {
-      "id": "limb-darkening",
-      "subject": "Limb darkening",
-      "status": "excluded",
-      "finding": "The only law fitted to this star's transits, Gendreau-Distler et al. (2026), Table 1 (Bessel R, stacked light curve), gives u1 = 0.52 +/- 0.32 and u2 = 0.52 +/- 0.34. The limb intensity 1 - u1 - u2 = -0.04 is below zero, which the shared limb preparer refuses. The transit is grazing, so it samples only part of the limb. The disc is drawn uniform.",
-      "evidence": [
-        "https://doi.org/10.3847/1538-3881/ae8c30",
-        "https://arxiv.org/abs/2511.21611"
-      ],
-      "revisitWhen": "A published limb-darkening law for this white dwarf keeps the limb between dark and the centre brightness."
-    },
-    {
       "id": "radial-velocity",
       "subject": "Radial velocity",
       "status": "included",
@@ -53,6 +42,15 @@
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=G+229-20"
       ],
       "revisitWhen": "The M-dwarf pair is prepared as star packages bound to this system."
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law (u1 0.05, u2 0.52) Vanderburg et al. (2020), Nature 585, 363, Methods, transit light-curve fitting (https://arxiv.org/abs/2009.07282) fixed from model atmospheres for this star (GTC g' band; the coefficients Gianninas et al. (2013) compute from white-dwarf model atmospheres, not a visible-band measurement). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/wd-1856-534.json: 8.054.",
+      "evidence": [
+        "https://arxiv.org/abs/2009.07282"
+      ]
     }
   ]
 }

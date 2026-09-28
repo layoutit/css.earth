@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."
-  }
+  },
+  "surfaceGravityLogg": 4.59,
+  "surfaceGravitySource": "log g 4.59 from 2023ApJS..266...41P; the 5 published values span log g 4.552 to 5.05, across which the limb law changes by at most 1.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P)"
 }
