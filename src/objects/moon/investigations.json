@@ -142,7 +142,7 @@
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Eight 2016 Kaguya MI views plus a shared companion-fit coverage gate; FeO outside 0–100 weight percent is masked. Native samples and all compact-cell calibration and masks are checked.",
+      "finding": "Eight 2016 Kaguya MI views plus a shared companion-fit coverage gate; FeO outside 0–100 weight percent is masked. Native samples and all compact-cell calibration and masks are checked. Checked on working changes above 4ac6f0aefe; the evidence records the tested file hashes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/moon/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/moon/README.md"
@@ -150,8 +150,7 @@
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
         }
       ]
     },
@@ -159,10 +158,10 @@
       "id": "grail-grgm1200a-l660",
       "subject": "GRAIL GRGM1200A gravity anomaly and Bouguer disturbance maps, degree 660",
       "status": "included",
-      "finding": "Two numeric views, Gravity (free-air anomaly) and Bouguer gravity (2,500 kg/m3 Bouguer disturbance), in mGal from the PDS RSDMAP products read through their EXTRAS GeoTIFF copies, which match the IMG values cell for cell. Degree 660 is the archived sum just above the label's degree-600 prior limit; its 8.3 km half-wavelength spans about three texels of the 4,096-pixel texture.",
+      "finding": "Two numeric views, Gravity (free-air anomaly) and Bouguer gravity (2,500 kg/m3 Bouguer disturbance), in mGal from the PDS RSDMAP products read through their EXTRAS GeoTIFF copies, which match the IMG values cell for cell. Degree 660 is the archived sum just above the label's degree-600 prior limit; its 8.3 km half-wavelength spans about three texels of the 4,096-pixel texture. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/moon/README.md",
-        "evidence/grail-gravity/checks.json",
+        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/moon/evidence/grail-gravity/checks.json",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/extrinfo.txt"
@@ -170,8 +169,7 @@
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9",
-          "scope": "Working changes above the named base; evidence/grail-gravity/checks.json records the tested files."
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
         }
       ]
     },
@@ -179,7 +177,7 @@
       "id": "grail-higher-degree-maps",
       "subject": "GRGM1200A maps summed to degree 900 and 1200",
       "status": "excluded",
-      "finding": "Not used: the label says a Kaula power-law prior constrains every term above degree 600, so these maps add increasingly prior-shaped detail. Degree 660 already resolves on the largest numeric texture.",
+      "finding": "Not used: the label says a Kaula power-law prior constrains every term above degree 600, so these maps add increasingly prior-shaped detail. Degree 660 already resolves on the largest numeric texture. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
       "evidence": [
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l1200.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
@@ -187,16 +185,16 @@
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9",
-          "scope": "Working changes above the named base; evidence/grail-gravity/checks.json records the tested files."
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
         }
-      ]
+      ],
+      "revisitWhen": "A release constrains terms above degree 600 with data rather than the Kaula prior."
     },
     {
       "id": "grail-gl1500e",
       "subject": "JPL GL1500E gravity field (Konopliv et al. 2014 lineage)",
       "status": "excluded",
-      "finding": "Not used: the archive holds only its spherical-harmonic coefficients (jggrx_1500e_sha.tab), with no gridded maps or updated covariance; a map would have to be summed here, while GRGM1200A ships archived maps and error maps.",
+      "finding": "Not used: the archive holds only its spherical-harmonic coefficients (jggrx_1500e_sha.tab), with no gridded maps or updated covariance; a map would have to be summed here, while GRGM1200A ships archived maps and error maps. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
       "evidence": [
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/errata.txt",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/"
@@ -204,26 +202,26 @@
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9",
-          "scope": "Working changes above the named base; evidence/grail-gravity/checks.json records the tested files."
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
         }
-      ]
+      ],
+      "revisitWhen": "The PDS archives gridded GL1500E maps with their error maps."
     },
     {
       "id": "trek-grail-gravity-layers",
       "subject": "NASA Moon Trek GRAIL LGRS gravity layers",
       "status": "excluded",
-      "finding": "Not used: Trek serves display tiles of the same GSFC products (for example gggrx_1200a_anom_l660.eq); the views read the numeric PDS originals instead. Trek's crust-mantle interface, crustal-thickness and grain-density layers were not examined here; Crust keeps its existing source.",
+      "finding": "Not used: Trek serves display tiles of the same GSFC products (for example gggrx_1200a_anom_l660.eq); the views read the numeric PDS originals instead. Trek's crust-mantle interface, crustal-thickness and grain-density layers were not examined here; Crust keeps its existing source. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Moon/EQ/gggrx_1200a_anom_l660.eq/1.0.0/WMTSCapabilities.xml"
       ],
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9",
-          "scope": "Working changes above the named base; evidence/grail-gravity/checks.json records the tested files."
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
         }
-      ]
+      ],
+      "revisitWhen": "A lens needs a Trek layer whose numeric original the PDS does not archive."
     }
   ]
 }

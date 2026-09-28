@@ -475,7 +475,7 @@
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid.",
+      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid. Checked on working changes above 4ac6f0aefe; the evidence records the tested file hashes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/mars/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/mars/README.md"
@@ -483,8 +483,7 @@
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
         }
       ]
     },

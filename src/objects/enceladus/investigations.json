@@ -150,7 +150,7 @@
       "evidence": [
         "https://doi.org/10.1002/2015JE004818",
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
-        "source/geology/enceladus-geologic-units.json"
+        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
       ],
       "checked": [
         {
@@ -166,7 +166,7 @@
       "finding": "The heavily cratered plains polygon has no holes where subdued cratered plains and northern lineated material sit (15-105 E, 30-76 N); northern lineated material also lies inside subdued cratered plains, and two small subdued cratered plains rings overlap equatorial cratered plains and central LH. Under the shared withhold-conflicts rule 3.41% of the sphere was gray, northern lineated material showed no cells and subdued cratered plains 6 km2. The grid now gives each shared cell to the smallest covering unit (geology-grid.py nestedUnits inner): no conflicts remain, 0.072% of the sphere is unmapped, northern lineated material shows 8,544 km2 and subdued cratered plains 17,223 km2. The Trek MapServer rendering also puts subdued cratered plains over heavily cratered plains but hides northern lineated material; the grid differs there on purpose so that every published unit shows.",
       "evidence": [
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/export?bbox=-791995.5,-395997.75,791995.5,395997.75&size=2048,1024&format=png24&f=image",
-        "source/geology/enceladus-geologic-units.json"
+        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
       ],
       "checked": [
         {

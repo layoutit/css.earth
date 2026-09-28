@@ -190,7 +190,7 @@
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts.",
+      "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts. Checked on working changes above 4ac6f0aefe; the evidence records the tested file hashes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/venus/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/venus/README.md"
@@ -198,8 +198,7 @@
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
         }
       ]
     },
