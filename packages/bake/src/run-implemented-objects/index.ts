@@ -1,15 +1,17 @@
+// `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test, browser
+// or assemble command, and the concurrency-limited scheduler that prepares several objects with a memory budget. It
+// imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
 import { isArray } from '@cssearth/core';
 import { execFileSync, spawn } from "node:child_process";
 import { access, readdir, readFile } from "node:fs/promises";
 import { availableParallelism, freemem, totalmem } from "node:os";
 import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
 
 import { readPreparedObjects } from "@cssearth/objects/node";
-import { authoredObject } from '@cssearth/bake/sources';
+import { authoredObject } from '../sources/index.ts';
 
 /** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(process.cwd()).sceneObjects;
 
 export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>; onSpawn?: (pid: number) => void;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}
@@ -300,10 +302,10 @@ function printPreparationProgress(event: PreparationEvent) {
   }
 }
 
-async function main(mode = process.argv[2]) {
+export async function main(mode = process.argv[2]) {
   if (!new Set(["acquire", "prepare", "test", "browser", "assemble"]).has(mode)) {
     throw new TypeError(
-      "Usage: node tools/cli/run-implemented-objects.mts " +
+      "Usage: node packages/bake/cli/run-implemented-objects.mts " +
       "acquire|prepare|test|browser|assemble",
     );
   }
@@ -358,8 +360,4 @@ function run(command: string, argumentsList: readonly string[], env?: NodeJS.Pro
       `Implemented object command failed with ${signal ?? `exit ${exitCode}`}.`,
     );
   });
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await main();
 }

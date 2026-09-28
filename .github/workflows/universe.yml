@@ -516,7 +516,7 @@ jobs:
               pnpm exec playwright install --with-deps --only-shell chromium
               node --test --test-concurrency=1 tests/objects/publication.test.mts \
                 tests/delivery/write-prepared-set.test.mts tests/preparation/preparation-cache.test.mts \
-                tools/prepare/prepare-objects.test.mts
+                tests/preparation/prepare-objects.test.mts
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac

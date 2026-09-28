@@ -22,7 +22,7 @@
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape lens and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
- * tests/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/cli/prepare-object.mts <id> */
+ * tests/contract/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { scaffoldStar, TODO } from './new-object/scaffold.mts';
@@ -58,15 +58,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./new-object/spec.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
     const lines = await relensExisting(process.cwd(), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
-    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/cli/prepare-object.mts <id>...\n`);
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
     // Colour for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-lenses.mts).
     const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');
     const lines = await relensExisting(process.cwd(), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
-    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node tools/prepare/cli/prepare-object.mts <id>...\n`);
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-limb') && !specPath) {
     // Limb darkening for stars already in the tree, hand-made packages included: `--star-limb ID... [--bake]` (new-object/star-limb.mts).
-    const { starLimb } = await import('./new-object/star-limb.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
+    const { starLimb } = await import('./new-object/star-limb.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
     const ids = args.filter(argument => !argument.startsWith('--'));
     const results = await starLimb(process.cwd(), ids, { progress: line => process.stderr.write(`${line}\n`) });
     process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.colour ? `, colour ${result.colour}` : ''}`).join('\n')}\n`);
@@ -81,7 +81,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   } else if (args.includes('--refresh') && !specPath) {
     // Regenerate bodies the tool made from their stored specs: `--refresh ID... [--check | --bake]` (new-object/refresh.mts).
     const { mkdir, writeFile } = await import('node:fs/promises'), { refreshSpec } = await import('./new-object/refresh.mts');
-    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
+    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
     const ids = args.filter(argument => !argument.startsWith('--')), path = resolve('output/new-object/refresh.json');
     await mkdir(resolve('output/new-object'), { recursive: true }); await writeFile(path, `${JSON.stringify(await refreshSpec(process.cwd(), ids), null, 2)}\n`);
     const results = await runNewObject(path, { progress: line => process.stderr.write(`${line}\n`), refresh: true });
@@ -90,13 +90,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (results.some(result => result.failed)) process.exitCode = 1;
     if ((args.includes('--check') || args.includes('--bake')) && good.length && !await prepareObjects(good, args.includes('--bake') ? {} : { to: 'page' })) process.exitCode = 1;
   } else if (args.includes('--bake') && !specPath) {
-    // The bake of objects already in the tree: `--bake ID...` (tools/prepare/prepare-object.mts).
-    const { prepareObjects } = await import('../prepare/prepare-object.mts');
+    // The bake of objects already in the tree: `--bake ID...` (packages/bake/cli/prepare-object.mts).
+    const { prepareObjects } = await import('@cssearth/bake/prepare-object');
     if (!await prepareObjects(args.filter(argument => argument !== '--bake'))) process.exitCode = 1;
   } else if (specPath) {
     // The full generator: every star in the spec file, from the archives (new-object/generate.mts); also `telescope new-object`.
-    // `--check` runs the bake through the page data on what was generated, `--bake` the whole chain (tools/prepare/prepare-object.mts).
-    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('../prepare/prepare-object.mts');
+    // `--check` runs the bake through the page data on what was generated, `--bake` the whole chain (packages/bake/cli/prepare-object.mts).
+    const { formatNewObject, runNewObject } = await import('./new-object/generate.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
     const results = await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`), skipExisting: args.includes('--skip-existing') });
     process.stdout.write(formatNewObject(results));
     // A body that failed is reported and not written; the rest are checked or baked.
@@ -111,6 +111,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (!id || missing.length) throw new TypeError(`Usage: new-object --spec <stars.json>, or the shape-only scaffold: new-object <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
     const order = option('order');
     const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, ...blackHole ? { blackHole: { shadowSource: option('shadow-source')! } } : { temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')! }, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
-    console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare/cli/prepare-object.mts ${id}`);
+    console.log(`${written.length} files written. Replace every ${TODO}, then: node packages/bake/cli/prepare-object.mts ${id}`);
   }
 }

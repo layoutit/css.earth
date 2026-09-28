@@ -1,7 +1,6 @@
-#!/usr/bin/env node
-// Entry script: node tools/prepare/cli/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images].
-// The chain and its steps are in ../prepare-object.mts.
-import { PREPARATION_STEPS, prepareObjects } from '../prepare-object.mts';
+// Entry script: node packages/bake/cli/prepare-object.mts <object-id>... [--from <step>] [--to <step>] [--reuse-images].
+// The work is in @cssearth/bake/prepare-object.
+import { PREPARATION_STEPS, prepareObjects } from '@cssearth/bake/prepare-object';
 
 const args = process.argv.slice(2), option = (name: string) => { const at = args.indexOf(name); return at >= 0 ? args[at + 1] : undefined; };
 const from = option('--from'), to = option('--to'), reuseImages = args.includes('--reuse-images');

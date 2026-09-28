@@ -201,6 +201,8 @@ from. It groups the files into folders and fails when a change adds:
 - an import of `tools/` or `@cssearth/bake` from `site/` or
   `packages/renderer/src/` (renderer tests may use bake);
 - an import of a `tools/prepare/` script, including from another prepare script;
+- an import of a `packages/*/cli/` command entry, including from another
+  entry or the package itself (tests included);
 - an import of `@cssearth/bake` from `packages/telescope`, tests included;
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 

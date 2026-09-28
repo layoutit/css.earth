@@ -282,7 +282,7 @@ For a photographic resolution refresh on the existing raster lane, use the
 Keep geometry and lighting fixed, prepare one body at a time, and compare actual
 close-ups and image delivery size before accepting the larger texture.
 
-For authored objects, `node tools/prepare/cli/prepare-object.mts <id>...` runs the whole preparation chain in order for those objects only and
+For authored objects, `node packages/bake/cli/prepare-object.mts <id>...` runs the whole preparation chain in order for those objects only and
 names the step that failed; resume with `--from <step>`, stop early with `--to <step>`. It refuses to start while other objects' prepared files are missing (`pnpm setup:assets`, then `pnpm prepare:object-json`), and its billboard step photographs each baked body's arrival billboard from the running site (`pnpm dev`, or `CSSEARTH_BILLBOARD_ORIGIN`). Before the bake it refuses an install older
 than `pnpm-lock.yaml` and reader text over its budgets, and restores the Sun's files that differ from its inventory. With several ids each tool runs once (the authored
 preparation three objects at a time), which is minutes for a batch where one call per object and tool was an hour. On the paged-ellipsoid lane (Earth) and the raster

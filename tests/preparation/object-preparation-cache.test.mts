@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { runCachedPreparationObjects } from './prepare-objects.mts';
-import type { CachedPreparationOptions } from './prepare-objects.mts';
-import { runObjectCommand } from '../cli/run-implemented-objects.mts';
-import type { PreparationCommand, PreparationReport } from '../cli/run-implemented-objects.mts';
+import { runCachedPreparationObjects } from '@cssearth/bake/prepare-objects';
+import type { CachedPreparationOptions } from '@cssearth/bake/prepare-objects';
+import { runObjectCommand } from '@cssearth/bake/run-implemented-objects';
+import type { PreparationCommand, PreparationReport } from '@cssearth/bake/run-implemented-objects';
 import { requireRecord } from '@cssearth/core';
 
 const repository = resolve(import.meta.dirname, '../..'), descriptorPath = 'src/objects/mercury/object.json';

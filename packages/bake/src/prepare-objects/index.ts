@@ -1,4 +1,6 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+// `@cssearth/bake/prepare-objects` (Node only): the preparation cache (verified receipts skip an unchanged object) and the
+// concurrency-scheduled catalogue-wide preparation run. It imports `preparation` and `run-implemented-objects`.
+// `packages/bake/cli/prepare-objects.mts` is its command.
 import { sha256 } from '@cssearth/core/node';
 import { isArray, hasErrorCode, requireString } from '@cssearth/core';
 import assert from "node:assert/strict";
@@ -7,7 +9,7 @@ import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { basename, resolve } from "node:path";
 import sharp from "sharp";
-import type { PreparationOptions, PreparationEvent } from '../cli/run-implemented-objects.mts';
+import type { PreparationOptions, PreparationEvent } from '../run-implemented-objects/index.ts';
 type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
   | {phase: 'receipt-refused'; id: string; reason: string};
 export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEvent' | 'argumentsList'> {
@@ -18,16 +20,18 @@ export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEv
 }
 
 import cwebpPath from "cwebp-bin";
-import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../cli/run-implemented-objects.mts";
-import { PREPARATION_TRACE_VARIABLE, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from '@cssearth/bake/preparation';
+import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../run-implemented-objects/index.ts";
+import { PREPARATION_TRACE_VARIABLE, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from '../preparation/index.ts';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(process.cwd()).sceneObjects;
 
 const sharedSteps = ["site/build/prepare/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
-const traceModule = new URL("../../packages/bake/cli/preparation-trace.mts", import.meta.url).href;
+// This module always runs from the built, flat `dist/prepare-objects.js` (never from its nested `src/` location), so
+// the trace sits one level up, beside the other bake commands.
+const traceModule = new URL("../cli/preparation-trace.mts", import.meta.url).href;
 
 const require = createRequire(import.meta.url);
 
@@ -130,5 +134,3 @@ export async function prepareObjects({ projectRoot = process.cwd(), force = fals
     return totalReport;
   } finally { await rm(lock, { force: true }); }
 }
-
-refuseDirectRun(import.meta);

@@ -19,6 +19,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/assets',
   'tools/audits',
   'tools/ci',
+  'tools/contract',
   'tools/evidence',
   'tools/experiments',
   'tools/facility-renders',

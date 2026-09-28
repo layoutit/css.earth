@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import packageJson from '../../package.json' with { type: 'json' };
-import { PREPARATION_STEPS } from './prepare-object.mts';
+import { PREPARATION_STEPS } from '@cssearth/bake/prepare-object';
 
 test('deploy generation and object authoring place the object with the same world-context command', async () => {
   assert.ok(packageJson.scripts['prepare:world-context']);
