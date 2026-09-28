@@ -8,6 +8,9 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, 'src/scene/scene.test.ts', 'src/presentation/*.test.ts', 'src/volume-leaves/*.test.ts', 'src/stars/*.test.ts', 'src/shell/*.test.ts', 'src/sky/*.test.ts', 'src/density/*.test.ts', 'src/image-layers/*.test.ts', 'src/galaxy-catalog/*.test.ts',
       'src/cluster-catalog/*.test.ts', 'src/world-context/spatial-context.test.ts',
       // The object libraries' node tests run under `pnpm test:bake-objects` (.github/scripts/checks/test-bake-objects.mts).
-      'src/objects/**/*.test.ts'],
+      'src/objects/**/*.test.ts',
+      // The authoring pipelines' node tests run under `pnpm test:node` and `pnpm test:bake-objects`; they use
+      // `node:test`, not Vitest.
+      'authoring/**/*.test.mts'],
   },
 });
