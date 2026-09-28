@@ -36,9 +36,9 @@ export * from './pds/pds-scalar-grid.ts';
 export * from './pds/pds-binned-table.ts';
 export * from './pds/pds-scalar-map.ts';
 export * from './photometric-observations.ts';
-export { type TwoTermSinusoid, type FourierFromTransit, type EclipseNormalizedFourier, type FourierPhaseCurve, type SpidermanModel, type PublishedPhaseCurve,
+export { type TwoTermSinusoid, type FourierFromTransit, type EclipseNormalizedFourier, type EclipseFourier, type FourierPhaseCurve, type SpidermanModel, type PublishedPhaseCurve,
   type DepositedChannels, type StarryPhaseCurve, parseStarryPhaseCurve, parsePublishedPhaseCurve, brightnessTemperature as phaseCurveBrightnessTemperature, impliedStellarTemperature, sinusoidMap, loadPublishedPhaseCurveMap,
-  depositedChannelWeights } from './eclipse-map/published-phase-curve-map.ts';
+  depositedChannelWeights, bandRadiance, bandTemperatures, publishedPhaseCurveMap } from './eclipse-map/published-phase-curve-map.ts';
 export * from './record-keys.ts';
 export * from './sbmt-symbols.ts';
 export * from './scientific-raster.ts';

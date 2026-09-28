@@ -21,6 +21,7 @@ import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { hostedPlanetStylesheet } from '../new-hosted-planet.mts';
+import { installPhaseCurveLens, type PhaseCurveEntry } from './phase-curve-lens.mts';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
 export const emissionQuery = (planet: string) => `select ${EMISSION_COLUMNS} from emissionspec where plntname='${planet.replace(/'/gu, "''")}' order by centralwavelng`;
@@ -205,7 +206,7 @@ const RELENS_FILES = ['object.json', 'text.json', 'source/preparation/raster.jso
 /** Give planets already in the tree their colour from what is measured: `thermal` reads the archive's emission table and
  * installs the "Thermal glow" lens where a dayside temperature is measured; `host-light` lights a neutral gray with the
  * host's colour. Returns one line per planet; nothing is baked here (tools/prepare/prepare-object.mts does that). */
-export async function relensExisting(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map()) {
+export async function relensExisting(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry' | 'phase-curve', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map(), phaseCurves: ReadonlyMap<string, readonly PhaseCurveEntry[]> = new Map()) {
   const { mkdir, writeFile } = await import('node:fs/promises');
   const lines: string[] = [];
   for (const id of ids) {
@@ -219,6 +220,15 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
     if (mode === 'host-light' && raster.emission !== undefined) { lines.push(`${id}: self-luminous, no starlight on it`); progress(lines.at(-1)!); continue; }
     // Whatever the mode, a lit shape planet gets its own stylesheet if it never had one (the lighting frame is 0×0 without it).
     if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(`src/renderers/css/styles/${id}-surfaces.css`)) { ensureStylesheet(files, id); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
+    if (mode === 'phase-curve') {
+      // A heat map is added beside the default lens, so the marker, drawn from the default lens, stays as it is.
+      for (const entry of phaseCurves.get(id) ?? []) {
+        const { minimum, maximum, hottest } = await installPhaseCurveLens(files, id, descriptor.displayName, entry);
+        lines.push(`${id}: ${entry.lens} lens from ${entry.credit}, ${minimum}-${maximum} K, hottest ${hottest}° from noon`); progress(lines.at(-1)!);
+      }
+      for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
+      continue;
+    }
     if (mode === 'photometry') {
       const spec = photometry.get(id);
       if (!spec) { lines.push(`${id}: no photometry entry in the spec`); progress(lines.at(-1)!); continue; }

@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { sourceTest } from '../source-test.mts';
 import { planckRadiance, mapPhaseCurve, mirrorGrid, type EmissionGrid, phaseCurveBrightnessTemperature as brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve, sinusoidMap } from '@cssearth/bake/objects/raster';
 import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
@@ -182,4 +184,84 @@ test('WASP-121b: the deposited spectra give each channel one conversion at every
     assert.equal(map.sample(180, 0), null);
     assert.ok(Math.abs(derived.nonPositiveAreaFraction - grey) < 0.001, `${detector} grey ${derived.nonPositiveAreaFraction}`);
   }
+});
+
+/** A `cssearth-published-phase-curve@1` record held in the test: each number is a table cell. */
+const tableCell = (value: number, where: string) => ({ value, cell: String(value), where });
+
+test('HD 189733b: Knutson et al. (2012)\'s second-order terms, counted from transit, give back their eq. 4 curve and Table 1 offsets', () => {
+  // Table 1 and section 4.2 at 3.6 and 4.5 µm; the maximum is timed from mid-eclipse and the minimum from mid-transit, in hours.
+  // At 3.6 µm the printed c2 puts both extremes after eclipse and transit, against the offsets the paper states three times, so only
+  // its eq. 4 identity is held here; which sign to draw is the planet package's decision.
+  const periodHours = 2.21857 * 24;
+  for (const band of [
+    { microns: 3.6, c: [-0.000479, -0.000389, 0.000025, -0.000020], k: 0.15511, depth: 0.001466, dayK: 1328, maxHours: -5.29, maxError: 0.59, minHours: -6.43, minError: 0.82, offsets: false },
+    { microns: 4.5, c: [-0.000468, 0.000122, -0.000011, -0.000020], k: 0.15580, depth: 0.001787, dayK: 1192, maxHours: -2.98, maxError: 0.82, minHours: -1.37, minError: 1.00, offsets: true },
+  ]) {
+    const record = parsePublishedPhaseCurve({ schema: 'cssearth-published-phase-curve@1', source: 'Knutson et al. (2012), Table 1', wavelengthMicrons: band.microns,
+      radiusRatio: tableCell(band.k, 'Rp/R*'), eclipseDepth: tableCell(band.depth, 'section 4.2'),
+      model: { kind: 'fourier-from-transit', cos1: tableCell(band.c[0]!, 'c1'), sin1: tableCell(band.c[1]!, 'c2'), cos2: tableCell(band.c[2]!, 'c3'), sin2: tableCell(band.c[3]!, 'c4') },
+      reported: { daysideK: tableCell(band.dayK, 'section 4.2'), offsetDegrees: tableCell(band.maxHours / periodHours * 360, 'Maximum flux offset') } });
+    if (record.model.kind !== 'fourier-from-transit') throw new TypeError('Knutson et al. count from transit.');
+    const { flux } = sinusoidMap(record.model, record.eclipseDepth);
+    // Their eq. 4, in the angle from transit theta = xi + pi, differs from the model only by the constant the paper does not print.
+    const [c1, c2, c3, c4] = band.c as [number, number, number, number];
+    const knutson = (theta: number) => c1 * Math.cos(theta) + c2 * Math.sin(theta) + c3 * Math.cos(2 * theta) + c4 * Math.sin(2 * theta);
+    for (const degrees of [-150, -90, -35, 0, 40, 120]) {
+      const xi = degrees * Math.PI / 180;
+      assert.ok(Math.abs(flux(xi) - flux(0) - (knutson(xi + Math.PI) - knutson(Math.PI))) < 1e-15, `${band.microns} µm at ${degrees} degrees`);
+    }
+    if (!band.offsets) continue;
+    let peak = 0, trough = 0;
+    for (let i = 0, top = -Infinity, bottom = Infinity; i < 72000; i++) {
+      const xi = -Math.PI + 2 * Math.PI * i / 72000, f = flux(xi);
+      if (f > top) { top = f; peak = xi; }
+      if (f < bottom) { bottom = f; trough = xi; }
+    }
+    const maxHours = peak / (2 * Math.PI) * periodHours, minHours = (trough < 0 ? trough + Math.PI : trough - Math.PI) / (2 * Math.PI) * periodHours;
+    assert.ok(Math.abs(maxHours - band.maxHours) <= band.maxError, `${band.microns} µm maximum at ${maxHours} h`);
+    assert.ok(Math.abs(minHours - band.minHours) <= band.minError, `${band.microns} µm minimum at ${minHours} h`);
+  }
+});
+
+test('GJ 1214b: Kempton et al. (2023)\'s terms, in the star\'s flux from eclipse, give their eq. 7 map, deposited night side and 5-12 µm day side', async () => {
+  // Extended Data Table 1, 5.0-12.0 µm, in ppm; Methods eq. 5. Rp/R* 0.1161 and the white-light result are the authors' Zenodo 7703086.
+  const [E, C1, D1, C2, D2] = [379e-6, 127e-6, -139e-6, 46e-6, -15e-6];
+  const raw = { schema: 'cssearth-published-phase-curve@1', source: 'Kempton et al. (2023), Extended Data Table 1', bandMicrons: [5, 12],
+    radiusRatio: tableCell(0.1161, 'Generate plots.ipynb, RpRs'), eclipseDepth: tableCell(E, 'E'),
+    model: { kind: 'eclipse-fourier', c1: tableCell(C1, 'C1'), d1: tableCell(D1, 'D1'), c2: tableCell(C2, 'C2'), d2: tableCell(D2, 'D2') },
+    reported: { daysideK: tableCell(553, 'MIRI 5-12 µm secondary eclipse'), offsetDegrees: tableCell(-47.68, 'white_light_result.txt, phi_med: the phase of the first-order term') } };
+  const record = parsePublishedPhaseCurve(raw);
+  if (record.model.kind !== 'eclipse-fourier') throw new TypeError('Kempton et al. write the terms in the star\'s flux.');
+  const { map, flux } = sinusoidMap(record.model, record.eclipseDepth);
+  // Their eq. 7: A0 = (Fp - C1 - C2)/2, A1 = 2 C1/pi, B1 = -2 D1/pi, A2 = 3 C2/2, B2 = -3 D2/2.
+  const printed = { a0: (E - C1 - C2) / 2, a1: 2 * C1 / Math.PI, b1: -2 * D1 / Math.PI, a2: 3 * C2 / 2, b2: -3 * D2 / 2 };
+  for (const key of Object.keys(printed) as (keyof typeof printed)[]) assert.ok(Math.abs(map[key] - printed[key]) < 1e-18, key);
+  // The deposited white-light night side is 125.4 +16.1/-15.4 ppm.
+  assert.ok(Math.abs(flux(Math.PI) - 125.4e-6) <= 15.4e-6, `night side ${flux(Math.PI)}`);
+  const directory = await mkdtemp(join(tmpdir(), 'gj-1214b-'));
+  try {
+    await writeFile(join(directory, 'phase-curve.json'), JSON.stringify(raw));
+    const loaded = await loadPublishedPhaseCurveMap(directory, { path: 'phase-curve.json' });
+    const { derived, bandMicrons } = loaded.report as unknown as { derived: Record<string, number>; bandMicrons: number[] };
+    assert.deepEqual(bandMicrons, [5, 12]);
+    assert.ok(Math.abs(derived.daysideK! - 553) < 1e-3, `day side ${derived.daysideK}`);
+    // The night side's own spectrum averages 437 +/- 19 K; the white light, converted across the band, agrees.
+    assert.ok(Math.abs(derived.nightsideK! - 437) <= 19, `night side ${derived.nightsideK}`);
+    // Across 5-12 µm one wavelength will not do: at the band centre the same night side reads 12 K colder, beyond the day side's 9 K error.
+    const centre = impliedStellarTemperature(E, 0.1161, 553, 8.5), single = brightnessTemperature(flux(Math.PI) / 0.1161 ** 2, centre, 8.5)!;
+    assert.ok(derived.nightsideK! - single > 9, `one wavelength ${single} vs band ${derived.nightsideK}`);
+    // Their Figure 2 shows longitudes where the map's emission is negative, in black; the map leaves them without a temperature.
+    assert.ok(Array.from({ length: 360 }, (_, i) => loaded.sample(i - 180, 0)).some(value => value === null), 'some longitudes have no emission');
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('a published phase curve gives one wavelength or one band', () => {
+  const base = { schema: 'cssearth-published-phase-curve@1', source: 's', radiusRatio: tableCell(0.1, 'k'), eclipseDepth: tableCell(1e-3, 'E'),
+    model: { kind: 'eclipse-fourier', c1: tableCell(1e-4, 'C1'), d1: tableCell(0, 'D1') }, reported: { daysideK: tableCell(1000, 'T'), offsetDegrees: tableCell(0, 'o') } };
+  assert.throws(() => parsePublishedPhaseCurve(base), /wavelengthMicrons or bandMicrons/u);
+  assert.throws(() => parsePublishedPhaseCurve({ ...base, wavelengthMicrons: 4.5, bandMicrons: [3, 5] }), /wavelengthMicrons or bandMicrons/u);
+  assert.throws(() => parsePublishedPhaseCurve({ ...base, bandMicrons: [5, 3] }), /lower and a higher/u);
+  const first = parsePublishedPhaseCurve({ ...base, bandMicrons: [3, 5] });
+  assert.deepEqual(first.model, { kind: 'eclipse-fourier', c1: 1e-4, d1: 0, c2: 0, d2: 0 }, 'a first-order fit has zero second-order terms');
 });
