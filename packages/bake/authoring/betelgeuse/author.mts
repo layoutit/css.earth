@@ -3,7 +3,7 @@
  * OIFITS merged from the pinned VLT/MATISSE files, the beam-convolved reconstruction and the navigation marker rendered from it.
  * All are deterministic functions of checked-in or pinned inputs.
  *
- *   node tools/objects/source-authoring/betelgeuse/author.mts [--check]
+ *   node packages/bake/authoring/betelgeuse/author.mts [--check]
  *
  * --check recomputes both outputs and fails if either differs from the file on disk. */
 import { readFile, readdir, writeFile } from 'node:fs/promises';

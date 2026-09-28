@@ -2,7 +2,7 @@
  * Offline intake of the Dawn GRaND Vesta derived maps (PDS4 bundle urn:nasa:pds:dawn-grand-vesta) into the existing
  * `npy-lonlat-grid` scientific input. Run from the repository root after restoring the tables:
  *
- *   node tools/objects/source-authoring/vesta-grand/prepare-grids.mts
+ *   node packages/bake/authoring/vesta-grand/prepare-grids.mts
  *
  * Each archived pixel keeps its value exactly. Pixels are placed by the table's own MIN/MAX latitude and longitude
  * columns (the row order starts at -30 E, not at the label's -180 E), moved 210 degrees from Claudia Double Prime into

@@ -305,5 +305,5 @@
       "distanceAu": 87.06785037265145
     }
   ],
-  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json."
+  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py packages/bake/authoring/outer-worlds/inputs.json."
 }

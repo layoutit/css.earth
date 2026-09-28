@@ -88,7 +88,7 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
         "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
-        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

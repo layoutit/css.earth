@@ -679,7 +679,7 @@
       "origin": "https://doi.org/10.1051/0004-6361/201731471",
       "credit": "Radius from the Montargès et al. (2018) limb-darkened diameter at the Gaia DR3 distance; sphere written by this repository",
       "license": "Project-authored reference surface from a published diameter.",
-      "acquisition": "Written by tools/objects/source-authoring/ce-tauri/author.mts from measurements.json (radius 500725430 km, 5 degree steps); `--check` recomputes it.",
+      "acquisition": "Written by packages/bake/authoring/ce-tauri/author.mts from measurements.json (radius 500725430 km, 5 degree steps); `--check` recomputes it.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "terrain"
@@ -693,7 +693,7 @@
       },
       "coverage": "A sphere of the published radius: the reference surface the published images are cast onto, not a measured shape.",
       "recipe": {
-        "generator": "tools/objects/source-authoring/ce-tauri/author.mts",
+        "generator": "packages/bake/authoring/ce-tauri/author.mts",
         "inputs": [
           "measurements"
         ],
@@ -910,13 +910,13 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/ce-tauri/author.mts",
+        "generator": "packages/bake/authoring/ce-tauri/author.mts",
         "inputs": [
           "cds-dec-avg",
           "ce-tauri-neilson-2013-limb-darkening"
         ]
       },
-      "generator": "tools/objects/source-authoring/ce-tauri/author.mts",
+      "generator": "packages/bake/authoring/ce-tauri/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Rendered by author.mts from the published December image as observed (north up, east left) through the lens's palette and percentile stretch."

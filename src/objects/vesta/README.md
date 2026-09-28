@@ -86,7 +86,7 @@ smaller than a few hundred kilometres are blurred together.
 **Frame.** The archive uses Claudia Double Prime; the other Vesta maps use
 Claudia. The [GRaND catalogue](https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT)
 states the two share a pole and differ by 210° of longitude (Marcia at 190° E
-in Claudia). [`tools/objects/source-authoring/vesta-grand/prepare-grids.mts`](../../../tools/objects/source-authoring/vesta-grand/prepare-grids.mts)
+in Claudia). [`packages/bake/authoring/vesta-grand/prepare-grids.mts`](../../../packages/bake/authoring/vesta-grand/prepare-grids.mts)
 places every archived pixel by its own latitude and longitude bounds, adds 210°,
 and writes the `.npy` grids the shared reader takes. It checks each table
 against its label's checksum, record count and units, and refuses overlaps,

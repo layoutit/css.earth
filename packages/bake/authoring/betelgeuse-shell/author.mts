@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one lens bank.
  *
- *   node tools/objects/source-authoring/betelgeuse-shell/author.mts [--check]
+ *   node packages/bake/authoring/betelgeuse-shell/author.mts [--check]
  *
  * --check recomputes every output and fails if any differs from the file on disk.
  *
@@ -980,7 +980,7 @@ export async function author(defaultLens = 'zimpol-v') {
         title: `ALMA ${ALMA_SIO.proposal} \u00b7 SiO v=0 J=5-4 cube of Betelgeuse, August 2023`,
         credit: 'ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member ' + ALMA_SIO.member,
         displayCredit: 'ALMA (ESO/NAOJ/NRAO)',
-        acquisition: `Cut out of the archive's own pipeline cube ${ALMA_SIO.product} through its SODA service, on the circle about the observation's phase centre that the origin URL requests. tools/objects/source-authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within ${ALMA_SIO.windowKmS} km/s of ${ALMA_SIO.windowCentreKmS} km/s LSRK in a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, and subtracts from each pixel the median of the ${sio.number('CONTCHAN')} channels more than ${ALMA_SIO.lineFreeBeyondKmS} km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.`,
+        acquisition: `Cut out of the archive's own pipeline cube ${ALMA_SIO.product} through its SODA service, on the circle about the observation's phase centre that the origin URL requests. packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within ${ALMA_SIO.windowKmS} km/s of ${ALMA_SIO.windowCentreKmS} km/s LSRK in a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, and subtracts from each pixel the median of the ${sio.number('CONTCHAN')} channels more than ${ALMA_SIO.lineFreeBeyondKmS} km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.`,
         license: 'ALMA data are public under the ALMA data access policy; retain the ALMA credit line.',
         lensId: 'sio-2023' });
     } else if (name === ALMA_SIO.continuum.path) {
@@ -990,7 +990,7 @@ export async function author(defaultLens = 'zimpol-v') {
         title: `ALMA ${ALMA_SIO.proposal} \u00b7 band 6 continuum image of Betelgeuse, August 2023`,
         credit: 'ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member ' + ALMA_SIO.member,
         displayCredit: 'ALMA (ESO/NAOJ/NRAO)',
-        acquisition: `The member's continuum image ${ALMA_SIO.continuum.product}, made with the same calibration as the line cube, downloaded whole from the archive and cut by tools/objects/source-authoring/betelgeuse-shell/reduce-alma-sio.mts to a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, values unchanged. It is the only product of the observation that shows where the star is.`,
+        acquisition: `The member's continuum image ${ALMA_SIO.continuum.product}, made with the same calibration as the line cube, downloaded whole from the archive and cut by packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts to a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, values unchanged. It is the only product of the observation that shows where the star is.`,
         license: 'ALMA data are public under the ALMA data access policy; retain the ALMA credit line.' });
     } else if (name === EMISSION_2020.path) {
       inputs.push({ id: 'matisse-2020-02-continuum-4mas', ...binding('matisse-2020-02-continuum-4mas'), path,
@@ -1016,7 +1016,7 @@ export async function author(defaultLens = 'zimpol-v') {
         sourceBinding: { kind: 'local', reason: 'The ESO Phase 3 release description of the collection, retained beside the products it describes.' } });
     } else if (name.endsWith('.ktx2') || name.startsWith('volume-')) {
       intermediates.push({ id: name.replace(/[^a-z0-9-]+/g, '-').toLowerCase(), path,
-        sourceBinding: { kind: 'local', reason: 'Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above.' } });
+        sourceBinding: { kind: 'local', reason: 'Density grid and slab recipe written by packages/bake/authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above.' } });
     } else {
       documents.push({ id: name.replace(/[^a-z0-9-]+/g, '-').toLowerCase(), path,
         sourceBinding: { kind: 'local', reason: 'Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above.' } });

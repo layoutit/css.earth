@@ -3,7 +3,7 @@
  * rendered from the published December 2016 image. The images themselves are the authors' (Montargès et al. 2018, CDS
  * J/A+A/614/A12) and are restored by the acquisition plan, not written here.
  *
- *   node tools/objects/source-authoring/ce-tauri/author.mts [--check] */
+ *   node packages/bake/authoring/ce-tauri/author.mts [--check] */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

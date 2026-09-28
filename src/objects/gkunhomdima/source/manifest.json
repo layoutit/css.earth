@@ -19,7 +19,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 316893.28905639314
       },
-      "acquisition": "Numerical ellipsoid table reproduced from measurements.json by tools/objects/source-authoring/trans-neptunian/author.py.",
+      "acquisition": "Numerical ellipsoid table reproduced from measurements.json by packages/bake/authoring/trans-neptunian/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -101,17 +101,17 @@
           {
             "catalogueId": "asteroid-lightcurve-database-v4",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           },
           {
             "catalogueId": "binary-minor-planets-v3",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           },
           {
             "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           }
         ]
       }

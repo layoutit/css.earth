@@ -3,7 +3,7 @@
  * reconstruction from the pinned SQUEEZE image, and the navigation marker rendered from it. The visibilities need no merge:
  * the pinned VLTI/PIONIER file is the image-ready file its authors published in the JMMC OiDB, and SQUEEZE read it as is.
  *
- *   node tools/objects/source-authoring/pi1-gruis/author.mts [--check]
+ *   node packages/bake/authoring/pi1-gruis/author.mts [--check]
  *
  * --check recomputes every output and fails if any differs from the file on disk. */
 import { readFile, writeFile } from 'node:fs/promises';

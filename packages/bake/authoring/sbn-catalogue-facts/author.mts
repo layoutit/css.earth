@@ -3,7 +3,7 @@
  * Database V4.0, Small Bodies Occultations V4.0, TNO and Centaur Diameters, Albedos and Densities V1.0, NEOWISE
  * Diameters and Albedos V2.0, Asteroid Masses (Baer, Chesley and Britt 2012) and Binary Minor Planets V3.0.
  *
- *   node tools/objects/source-authoring/sbn-catalogue-facts/author.mts [--fetch] [--check] [--only=<id>,<id>] [--report=<path>]
+ *   node packages/bake/authoring/sbn-catalogue-facts/author.mts [--fetch] [--check] [--only=<id>,<id>] [--report=<path>]
  *
  * Every table is read through its own PDS4 label: field names, positions and missing-value constants come from the
  * label, and the record count must match it. For each asteroid, comet, trans-Neptunian object and dwarf planet in the
@@ -46,7 +46,7 @@ import { halfUnit, interval, scientific, shortReference } from './format.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');
-const TOOL = 'tools/objects/source-authoring/sbn-catalogue-facts/author.mts';
+const TOOL = 'packages/bake/authoring/sbn-catalogue-facts/author.mts';
 const EVIDENCE = 'reference/sbn-catalogues.json', EVIDENCE_PATH = `source/${EVIDENCE}`, LEDGER_ID = 'sbn-catalogue-facts';
 const SMALL_BODIES = new Set(['asteroid', 'comet', 'trans-neptunian', 'dwarf-planet', 'interstellar']);
 /** Catalogue-level display scales. A display radius from one of these is a scale choice, not a shown measurement. */

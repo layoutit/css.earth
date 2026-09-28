@@ -10,7 +10,7 @@ CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here
 
 **Placement.** The ICRS position, proper motion and parallax are SIMBAD's, from Gaia DR3: parallax 1.52 ± 0.27 mas, 658 pc. Montargès et al. (2018) use the Hipparcos 1.82 ± 0.26 mas (549 pc). The radial velocity, 23.75 ± 0.44 km/s, is Famaey et al. (2005, A&A 430, 165). The mass behind the display GM is the current mass of 14.37 solar masses in the paper's stellar parameters.
 
-**Radius.** Montargès et al. (2018, [A&A 614, A12](https://doi.org/10.1051/0004-6361/201731471)) fit a power-law limb-darkened disc of 10.18 ± 0.07 mas at 1.62 µm to the December 2016 data (10.09 ± 0.09 mas in November). At the Gaia distance that is 500,725,430 km, 720 solar radii; the paper's 593 solar radii come from the Hipparcos distance. The reference surface is a 5-degree sphere table written by `tools/objects/source-authoring/ce-tauri/author.mts`.
+**Radius.** Montargès et al. (2018, [A&A 614, A12](https://doi.org/10.1051/0004-6361/201731471)) fit a power-law limb-darkened disc of 10.18 ± 0.07 mas at 1.62 µm to the December 2016 data (10.09 ± 0.09 mas in November). At the Gaia distance that is 500,725,430 km, 720 solar radii; the paper's 593 solar radii come from the Hipparcos distance. The reference surface is a 5-degree sphere table written by `packages/bake/authoring/ce-tauri/author.mts`.
 
 **Rotation: none measured.** The rotation record is the `cssearth-display-orientation@1` convention used for π¹ Gruis and Antares, with the display axis on celestial north. For a northern star that axis points to the star's right ascension plus 180 degrees. The star record sets `presentationUp: display-axis`, and the default view is one degree from the sub-Earth point.
 

@@ -1,6 +1,6 @@
 {
   "checkedOn": "2026-09-21",
-  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/companions/inputs.json.",
+  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using packages/bake/authoring/companions/inputs.json.",
   "referenceDirectory": "output/companions/references",
   "bodies": [
     {

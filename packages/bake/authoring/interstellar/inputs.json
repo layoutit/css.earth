@@ -1,7 +1,7 @@
 {
   "checkedOn": "2026-09-16",
   "referenceDirectory": "output/interstellar/references",
-  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/interstellar/inputs.json.",
+  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py packages/bake/authoring/interstellar/inputs.json.",
   "bodies": [
     {
       "id": "comet-3i",

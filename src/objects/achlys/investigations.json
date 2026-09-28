@@ -29,7 +29,7 @@
       "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
-        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

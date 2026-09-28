@@ -2,7 +2,7 @@
 /** R Doradus authored inputs: the uniform-disc reference sphere from the retained measurements, the lens frame cut from the
  * pinned ALMA continuum image, and the navigation marker rendered from it.
  *
- *   node tools/objects/source-authoring/r-doradus/author.mts [--check]
+ *   node packages/bake/authoring/r-doradus/author.mts [--check]
  *
  * The archive image is an ALMA pipeline product: 2880 x 2880 pixels of 5 mas over a 14 arcsecond field, with the star a 12-pixel
  * disc near the middle. This cuts the window around the star and resamples it to 0.625 mas so the sphere carries a smooth

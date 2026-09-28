@@ -12,7 +12,7 @@
  *
  * Then, from the repository root:
  *
- *   node tools/objects/source-authoring/betelgeuse-shell/reduce-alma-sio.mts
+ *   node packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts
  *
  * writes both files under .local/betelgeuse-shell/observations/, beside the package's other downloads, and fails unless
  * each matches the pin the author reads. Pass --check to compare without writing.

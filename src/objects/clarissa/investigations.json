@@ -103,7 +103,7 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
         "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
-        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]
