@@ -188,7 +188,7 @@
       "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
       "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
       "license": "MIT for authored registration; original source notices retained.",
-      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "acquisition": "node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
@@ -204,7 +204,7 @@
       "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
       "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
       "license": "MIT for authored registration; original source notices retained.",
-      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "acquisition": "node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
@@ -282,7 +282,7 @@
       "credit": "cssEarth; New Horizons science team",
       "license": "MIT; retain upstream source attribution.",
       "redistribution": "Retain source attribution and enhanced-color qualifications.",
-      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "acquisition": "node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."

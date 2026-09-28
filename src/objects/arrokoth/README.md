@@ -164,8 +164,8 @@ through local 3D surface points, including the overlapping lobes.
 
 ```sh
 node packages/bake/cli/object-operations.mts acquire arrokoth
-node tools/objects/arrokoth/prepare-photographic-cameras.mts
-node tools/objects/arrokoth/qualify-photographs.mts
+node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts
+node packages/bake/authoring/arrokoth/qualify-photographs.mts
 node tools/objects/dist/prepare-authored.js arrokoth --write
 node --test tests/objects/terrestrial/new-horizons-geo.test.mts
 ```
