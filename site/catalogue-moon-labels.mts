@@ -68,10 +68,11 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   return placements.filter(point => admitted.has(moons[point.index].id));
 }
 
-export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock, requestPublication?: () => boolean) {
+export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock, requestPublication?: () => boolean, depthBase = 0) {
   const moons = parseMoonLabels(prepared), parents = new Map(bodies.filter(body => moons.some(moon => moon.parentId === body.id)).map(body => [body.id, body]));
   const root = host.ownerDocument.createElement('div');
   root.className = 'catalogue-moon-labels';
+  root.style.zIndex = String(depthBase);
   const labels = moons.map(moon => {
     const label = host.ownerDocument.createElement('span');
     label.className = 'prepared-context-label catalogue-moon-label';

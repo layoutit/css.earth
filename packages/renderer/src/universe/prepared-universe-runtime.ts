@@ -120,11 +120,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         lifetime.onDispose(() => root.remove());
         root.className = 'prepared-universe';
         // The stage's depth band starts above zero: the background at 1, every depth-sorted body, the selected detail
-        // (--world-depth-base) and the annotations above it. A composited child with a negative z-index made WebKit split
+        // and the annotations above it. A composited child with a negative z-index made WebKit split
         // the stage into a background and a foreground layer, each backed at the whole stage (15.8 MB at 3x together).
         const depthBase = plan.bodies.length + 3;
-        presentationHost.style.setProperty('--world-depth-base', String(depthBase));
-        lifetime.onDispose(() => presentationHost.style.removeProperty('--world-depth-base'));
+        // Set only the depth owner: an inherited custom property here propagates into the mounted detail tree.
+        const previousDepth = stage.style.zIndex;
+        stage.style.zIndex = String(depthBase);
+        lifetime.onDispose(() => { stage.style.zIndex = previousDepth; });
         root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
         presentationHost.insertBefore(root, presentationHost.firstChild);
         // A bank whose every voxel lies between the observer and the body it surrounds composites over the
@@ -180,7 +182,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         catalogBanks.mountInitialCatalog();
         catalogBanks.publishResidency();
         lenses.publishResidency();
-        return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy, opacityClock,
+        return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy, opacityClock, depthBase,
           /** Mount an optional prepared shell after startup, the first time it is enabled. */
           addShell(shell: { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }) {
             if (lifetime.disposed) return;

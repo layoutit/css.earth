@@ -9,6 +9,12 @@ It was `src/renderers/css` until 2026-09-26. The compilers that write its prepar
 (`src/renderers/css/preparation`) until they moved into `@cssearth/bake`; the object page stylesheets
 (`src/renderers/css/styles/*-surfaces.css`), which belong to the objects, stay there.
 
+## World depth ownership
+
+The universe mount assigns numeric `z-index` values directly to the detail stage, shared orbit SVG and flight annotations.
+Its returned `depthBase` lets application-owned moon labels use the same band before attachment. Keep these values on
+the elements that own stacking; an inherited depth variable on the shared stage propagates through the mounted scene.
+
 ## Entries
 
 | entry | what it holds |

@@ -31,10 +31,11 @@ const chord = (x0: number, y0: number, x1: number, y1: number, weight: number): 
 test('strokes share one svg per world context, name each group by its body and join chords into polylines per opacity level', () => {
   const { root, orbit } = world();
   const mars = orbit('mars'), earth = orbit('earth');
-  const a = mountPreparedOrbitLines(mars.root, { renderer: 'strokes', id: 'mars' });
-  const b = mountPreparedOrbitLines(earth.root, { renderer: 'strokes', id: 'earth', dashed: true });
+  const a = mountPreparedOrbitLines(mars.root, { renderer: 'strokes', id: 'mars', depthBase: 700 });
+  const b = mountPreparedOrbitLines(earth.root, { renderer: 'strokes', id: 'earth', dashed: true, depthBase: 700 });
   const svgs = root.children.filter(child => child.tagName === 'svg');
   expect(svgs).toHaveLength(1);
+  expect(svgs[0]!.style.cssText).toContain('z-index:700');
   const [groupA, groupB] = svgs[0]!.children;
   // No inline colour: the published swatch rule for [data-context-orbit] colours the group like its marker.
   expect(groupA!.style.color).toBeUndefined(); expect(groupA!.dataset.contextOrbit).toBe('mars');

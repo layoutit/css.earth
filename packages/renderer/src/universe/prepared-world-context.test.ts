@@ -2120,10 +2120,12 @@ test('one retained flight caption survives the sprite fade through arrival', () 
     expect(current).toBe(caption);
     expect(current.style.visibility).toBe('');
     expect(current.textContent).toBe('Mercury');
+    expect(current.style.zIndex).toBe('4');
     expect(Number(current.style.opacity)).toBeGreaterThan(0);
     const marker = find(root, 'contextLabel', 'mercury');
     expect(annotationVisibility(marker, 'label')).toBe('hidden');
     const circle = find(root, 'contextFlightCircle', 'mercury');
+    expect(circle.style.zIndex).toBe('4');
     expect(circle.style.visibility).toBe(diameter < 20 ? '' : 'hidden');
     if (diameter < 20) expect(Number(circle.style.opacity)).toBeGreaterThan(0);
     expect(annotationVisibility(marker, 'indicator')).toBe('hidden');
