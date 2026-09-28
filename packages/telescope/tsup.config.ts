@@ -6,7 +6,7 @@ export default defineConfig({
   tsconfig: 'tsconfig.lib.json',
   format: ['esm'],
   splitting: false,
-  dts: { compilerOptions: { types: ['node'] } },
+  dts: process.env.CSSEARTH_SKIP_DECLARATIONS !== '1' && { compilerOptions: { types: ['node'] } },
   clean: true,
   target: 'es2022',
   removeNodeProtocol: false,

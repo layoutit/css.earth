@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 
 const root = resolve(import.meta.dirname, '../..');
-const RESTORE = (objectId: string) => `node tools/assets/restore-source-inputs.mts --object=${objectId}`;
+const RESTORE = (objectId: string) => `node packages/bake/cli/restore-source-inputs.mts --object=${objectId}`;
 
 type TestBody = (t: TestContext) => void | Promise<void>;
 type Hook = (fn: () => void | Promise<void>, options?: { readonly timeout?: number }) => void;
@@ -60,7 +60,7 @@ export function missingSourceReason(error: unknown, objectId: string | null = nu
     if (path.startsWith(objects)) {
       const [id, directory] = relative.slice('src/objects/'.length).split(sep);
       if (directory === 'source' && (objectId === null || id === objectId)) return `${id}: ${relative} is not restored; run ${RESTORE(id)}`;
-      return `${id}: ${relative} is not restored; run node tools/assets/setup.mts --object=${id}`;
+      return `${id}: ${relative} is not restored; run node packages/bake/cli/setup-assets.mts --object=${id}`;
     }
     return `${relative} is not restored; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   }

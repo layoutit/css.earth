@@ -98,11 +98,6 @@
   visibility: hidden;
 }
 
-.object-chunk-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-[data-grouped-visibility] .object-chunk { content-visibility: auto; }
-[data-grouped-visibility] .object-chunk[data-in-view],
-[data-grouped-visibility] .object-chunk:focus-within { content-visibility: visible; }
-
 .object-sidebar .maps-object-results .object-list {
   position: relative;
   display: grid;
@@ -445,10 +440,7 @@
   /* Inset the scrollport while leaving the row content at the same coordinates. */
   padding: 8px calc(var(--explorer-card-padding-inline-end) - var(--object-results-scrollbar-inset)) 0 var(--explorer-card-padding-inline-start);
 }
-#object-category-results:has(> .object-loading:not([hidden]), > .object-error:not([hidden])) {
-  min-height: min(420px, 55dvh);
-}
-.object-loading, .object-error {
+.object-error {
   margin: 0;
   color: var(--shell-text-muted);
   font: var(--shell-font-content);
@@ -468,7 +460,7 @@
 [data-search-results] #object-category-results .object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
 [data-search-results] #object-category-results .object-distance { color: var(--shell-text-secondary); }
 /* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
-   positions rows on a 56 px pitch (48 px row, 8 px gap; `site/catalogue/catalogue-window.mts`). */
+   positions rows on a 56 px pitch (48 px row, 8 px gap; `site/search/catalogue-window.mts`). */
 #object-category-results .object-observation-control.object-thumbnail-leading,
 #object-category-results .object-observation-control.object-thumbnail-leading:has(.object-lens-detail) {
   grid-template-columns: 40px minmax(0, 1fr);
@@ -614,12 +606,11 @@
   text-underline-offset: 3px;
 }
 
-/* Keep both body cards retained; zoom only changes which view is visible.
-   A registry-only selection preview has one view until its fragment arrives. */
+/* Keep both body cards retained; zoom only changes which view is visible. */
 .object-information-panel:not([data-card-subject="satellite-system"]) > [data-satellite-system],
-.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system], [data-card-preview]),
+.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]),
 .object-information-panel:not([data-card-subject="satellite-system"]):not([data-card-view="overview"]) > [data-body-overview],
-.object-information-panel:not([data-card-subject="satellite-system"])[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
+.object-information-panel:not([data-card-subject="satellite-system"])[data-card-view="overview"] > :not([data-body-overview]) {
   display: none !important;
 }
 .object-body-overview-image {

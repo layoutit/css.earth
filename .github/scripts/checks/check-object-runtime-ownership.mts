@@ -910,7 +910,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.arg
   for (const failure of failures) console.error(failure);
   if (failures.length) process.exitCode = 1;
   else console.log(`${OBJECTS.length} registered objects: recipe sources are current; ${receipts} physical frame receipt(s) checked, ` +
-    `${unrestored} not restored here (node tools/assets/setup.mts --location=prepared).`);
+    `${unrestored} not restored here (node packages/bake/cli/setup-assets.mts --location=prepared).`);
 } else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2);
   // One or more `--object <id>` pairs scope the audit to those objects; each occurrence is collected, not just

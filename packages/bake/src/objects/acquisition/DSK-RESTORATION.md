@@ -5,7 +5,7 @@ The converter requires Python 3.12, SpiceyPy 6.0.3 (CSPICE N0067) and NumPy 2.3.
 ```sh
 python3.12 -m venv .local/dsk-python
 .local/dsk-python/bin/python -m pip install --require-hashes --only-binary=:all: -r packages/bake/src/objects/acquisition/dsk-requirements.txt
-CSSEARTH_SPICE_PYTHON="$PWD/.local/dsk-python/bin/python" node tools/objects/dist/operations.js acquire enceladus
+CSSEARTH_SPICE_PYTHON="$PWD/.local/dsk-python/bin/python" node packages/bake/cli/object-operations.mts acquire enceladus
 ```
 
 This is an explicit preparation dependency, never a runtime browser dependency. Source restoration must fail clearly if it is absent; it must not silently use another converter or a stale hidden environment. The temporary research install under `/tmp/moons-b2-spiceypy` is not part of this recipe. Preserve the original DSK; the deterministic derivative ZIP retains exact coordinates, original face winding, a full source-to-welded vertex map and source/tool/geometry hashes. Mesh simplification happens later under a separately measured error budget.

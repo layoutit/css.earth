@@ -94,6 +94,18 @@
         "https://science.nasa.gov/photojournal/iapetus-temperature-variation-map/",
         "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07006/PIA07006.tif"
       ]
+    },
+    {
+      "id": "map-left-edge-2026-09-28",
+      "subject": "Surface map left edge after the raster lane change",
+      "status": "included",
+      "finding": "The shared raster lane writes a 0–360° E atlas, but surface-map.json still declared the retired atlas's 180° E left edge, so the globe was drawn 180° from its frame. Atlas luminance, Gazetteer craters, the source catalogue and a correlation against the georeferenced source (0.82 from 0° E, 0.21 from 180° E) all give 0° E; the declaration is now 0° E. The same source measurement found Ganymede, Ariel, Miranda, Oberon, Titania, Umbriel and Triton off by the same half turn.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/README.md#evidence",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/evidence/map-edge-2026-09-28.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/observations/catalog.json",
+        "https://github.com/layoutit/css.earth/blob/main/docs/surface-preparation.md#where-the-prepared-map-starts"
+      ]
     }
   ]
 }

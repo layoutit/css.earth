@@ -68,7 +68,7 @@ if (missing.length && !args.includes('--restore')) throw new Error(
   `${missing.length} missing FITS test inputs. ` +
   'Run pnpm build:preparation, then pnpm test:fits --restore. For the offline checks only, use pnpm test:fits --unit.\n' + missing.map(i => i.path).join('\n'));
 if (missing.length) {
-  const { executeAcquisition, parseAcquisitionPlan } = await import('#preparation/operations-acquisition');
+  const { executeAcquisition, parseAcquisitionPlan } = await import('@cssearth/bake/objects/acquisition');
   const { parseSourceManifest } = await import('@cssearth/bake/objects/sources');
   for (const input of missing) {
     if (input.path.startsWith('.local/fits-reference/')) {

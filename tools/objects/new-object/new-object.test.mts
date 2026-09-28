@@ -194,6 +194,8 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
     'HD_219134_c': { type: 'standard', title: 'HD 219134', extract, description: 'Star in the constellation Cassiopeia', revision: 1234, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134' } } },
     'HD_219134_e': { type: 'standard', title: 'HD 219134e', extract: 'HD 219134e is a planet orbiting HD 219134. It takes 94 days.', description: 'Exoplanet', revision: 7, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/HD_219134e' } } },
     'HD_219134_f': { type: 'standard', title: 'Kepler space telescope', extract: 'Kepler was a space telescope that found many a planet. It retired in 2018.', description: 'Space telescope', revision: 8, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Kepler_space_telescope' } } },
+    'GJ_436_b': { type: 'standard', title: 'Gliese 436 b', extract: 'Gliese 436 b is a Neptune-sized exoplanet orbiting the red dwarf Gliese 436. It was the first hot Neptune discovered with certainty.', description: 'Exoplanet', revision: 9, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Gliese_436_b' } } },
+    'GJ_436': { type: 'standard', title: 'Gliese 436', extract: 'Gliese 436 is a red dwarf in Leo. In 2004, the existence of an extrasolar planet, Gliese 436 b, was verified as orbiting the star.', description: 'Star in the constellation Leo', revision: 10, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Gliese_436' } } },
     'Ariel': { type: 'standard', title: 'Ariel', extract: 'Ariel is a spirit in The Tempest.', description: 'Character in a play', revision: 2, content_urls: { desktop: { page: 'https://en.wikipedia.org/wiki/Ariel' } } },
   };
   const archive = { exists: async (url: string) => decodeURIComponent(url.split('/').at(-1)!) in pages, text: async (url: string) => JSON.stringify(pages[decodeURIComponent(url.split('/').at(-1)!)]), bytes: async () => Buffer.alloc(0) };
@@ -205,6 +207,8 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
   assert.equal(await wikipediaQuotes(archive, ['HD 219134 c', 'HD 219134'], ['HD 219134 c']), undefined, "a planet name redirecting to a host lead that never names the planet gives it no quote");
   assert.equal((await wikipediaQuotes(archive, ['HD 219134 e', 'HD 219134'], ['HD 219134 e']))?.card, 'HD 219134e is a planet orbiting HD 219134.', 'a redirect to the planet\'s own article, titled with its letter joined');
   assert.equal(await wikipediaQuotes(archive, ['HD 219134 f', 'HD 219134'], ['HD 219134 f']), undefined, 'a redirect to an article about something else, which never names the planet');
+  assert.equal((await wikipediaQuotes(archive, ['GJ 436 b', 'GJ 436'], ['GJ 436 b']))?.card, 'Gliese 436 b is a Neptune-sized exoplanet orbiting the red dwarf Gliese 436.', 'GJ and Gliese are one catalogue: the planet\'s own article, served under Gliese');
+  assert.equal((await wikipediaQuotes(archive, ['GJ 436', 'GJ 436'], ['GJ 436']))?.card, 'Gliese 436 is a red dwarf in Leo.', 'the host\'s own article, served under Gliese');
   const { spelledOut } = await import('./prose.mts');
   assert.deepEqual(['55 Cnc e', 'eps Ind A', 'HU Aqr', 'ups And b', 'mu2 Sco', 'HD 219134 b', 'Kepler-62 f', 'TOI-700'].map(spelledOut),
     ['55 Cancri e', 'Epsilon Indi A', 'HU Aquarii', 'Upsilon Andromedae b', 'Mu2 Scorpii', 'HD 219134 b', 'Kepler-62 f', 'TOI-700'], 'as Wikipedia titles the articles');

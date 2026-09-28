@@ -1,4 +1,4 @@
-import manifest from '../public/navigation/sidebar-thumbnails.json';
+import manifest from '../public/navigation/sidebar-thumbnails.json' with { type: 'json' };
 import { sourceObject, sourceText } from '@cssearth/objects/sources';
 
 const data = sourceObject(manifest);

@@ -110,7 +110,10 @@ export default defineConfig(options => ({
   entry,
   // ESM only, like the preparation tools and the lab that import it.
   format: ['esm'],
-  onSuccess: async () => { await emitDeclarations(); return options.watch ? await watchDeclarationSources() : undefined },
+  onSuccess: async () => {
+    if (process.env.CSSEARTH_SKIP_DECLARATIONS === '1') return undefined
+    await emitDeclarations(); return options.watch ? await watchDeclarationSources() : undefined
+  },
   clean: true,
   // Topics read renderer constants, types and validators from its source subpaths (`@cssearth/renderer/rendering/*.ts`).
   // Those subpaths are TypeScript whose sibling imports name `.js`, which Node cannot load, so they are bundled; the

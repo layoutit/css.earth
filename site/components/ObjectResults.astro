@@ -1,33 +1,22 @@
 ---
-import CatalogueRows from "./CatalogueRows.astro";
 import CatalogueOverviewRows from './CatalogueOverviewRows.astro';
 import NavigationTree from './NavigationTree.astro';
-import { CATALOGUE_FRAGMENT_URL, CATALOGUE_INDEX_URL } from '../catalogue/catalogue-fragment-loader.mts';
 
 interface Props { activeObjectId?: string; }
 const { activeObjectId } = Astro.props;
-// Overview rows are small and stay inline. The full object catalogue has two
-// shared transports, named by path: compact JSON for the windowed browser runtime,
-// and the rendered rows for server/no-JS search. `astro dev` renders the rows
-// inline unless a test asks for the production transport.
-// The browser harness can exercise the production transport against Astro dev
-// without preparing every object package required by a full static build.
-const testCatalogueWindow = import.meta.env.DEV && process.env.CSSEARTH_TEST_CATALOGUE_WINDOW === '1';
+// Overview rows are small and stay inline. Object rows come from the find function, a page at a time, in astro dev
+// and production alike (`search/search-client.mts`).
 ---
 
 <div data-object-navigation-slot>
   <!-- The homepage exposes the existing tree's destinations in its initial HTML. -->
   <NavigationTree current={activeObjectId ?? ''} eager={Astro.url.pathname === '/'} />
 </div>
-<div id="object-category-results" class="object-results-scroll" role="region" aria-label="Search results" tabindex="0" hidden
-  data-catalogue-src={CATALOGUE_FRAGMENT_URL} data-catalogue-index-src={CATALOGUE_INDEX_URL}>
+<div id="object-category-results" class="object-results-scroll" role="region" aria-label="Search results" tabindex="0" hidden>
   <ul class="object-list object-overview-list"><CatalogueOverviewRows /></ul>
-  {import.meta.env.DEV && !testCatalogueWindow
-    ? <CatalogueRows />
-    : <ul class="object-list" data-catalogue-list></ul>}
-  <p class="object-loading" role="status" data-catalogue-loading hidden={import.meta.env.DEV && !testCatalogueWindow}>Loading celestial objects…</p>
-  <p class="object-error" role="alert" data-catalogue-error hidden>
-    Couldn't load the object list. <button type="button" class="object-retry" data-catalogue-retry>Retry</button>
+  <ul class="object-list" data-catalogue-list></ul>
+  <p class="object-error" role="alert" data-search-error hidden>
+    Couldn't load search results. <button type="button" class="object-retry" data-search-retry>Retry</button>
   </p>
   <p class="object-empty" aria-live="polite" hidden>No matching results</p>
   <slot />

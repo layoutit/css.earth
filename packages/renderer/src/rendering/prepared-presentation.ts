@@ -232,6 +232,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
   function publishStyle(index: number, name: string, value: string) {
+    if (name === 'display' && textureActivation.deferDisplay(target(index), value)) return;
     const leaves = textureBindings.get(`${index}:${name}`);
     if (leaves) {
       for (const leaf of leaves) textureActivation.write(leaf, value);
@@ -292,6 +293,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       }
       selectionPublications++;
     },
+    publishCamera: framePublisher.publishCamera,
     publishFrame: framePublisher.publish,
     observe() {
       const frame = framePublisher.observe();
@@ -344,6 +346,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
     ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
   return {
+    publishCamera(view: PreparedView) { publishDepth(view.projection); },
     publish({ selection, view, resources }: PreparedFramePublication) {
       publishDepth(view.projection);
       const levelOfDetail = view.levelOfDetail;

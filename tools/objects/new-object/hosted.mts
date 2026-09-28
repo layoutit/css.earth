@@ -16,6 +16,7 @@ import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mt
 import { quoteSource } from './prose.mts';
 import { writeLedger } from './ledger.mts';
 import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
+import { installPhaseCurveLens } from './phase-curve-lens.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
 import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
@@ -179,6 +180,12 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }, ...quoteSource(spec.text?.quotes, key, publications)];
   }
   files.set(`${o}/text.json`, json(text));
+  // Heat maps from published phase-curve fits join the colour lens, which stays the default (phase-curve-lens.mts).
+  const heat: { readonly line: string; readonly entry: NonNullable<HostedSpec['phaseCurves']>[number] }[] = [];
+  for (const entry of star ? [] : spec.phaseCurves ?? []) {
+    const { minimum, maximum, hottest } = await installPhaseCurveLens(files, id, spec.name, entry);
+    heat.push({ entry, line: `**${entry.label} heat map.** ${entry.credit}'s published fit to ${entry.observed} ([record](source/${entry.path})), drawn as a map of longitude without refitting: ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} K, hottest ${hottest === 0 ? 'at noon' : `${Math.abs(hottest)}° ${hottest > 0 ? 'east' : 'west'} of noon`}. It has no north-south information.` });
+  }
   const manifest = read(`${s}/manifest.json`);
   manifest.documents = [...manifest.documents, ...[...record.documents.keys()].map(path => ({ path, sourceBinding: { kind: 'local', reason: path.endsWith('pick.json')
     ? 'The whereistheplanet posterior and the measured positions that choose one sample from it (tools/objects/hosted-orbits/posterior-pick.py).' : path.endsWith('orbit.json')
@@ -195,6 +202,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', spec.text ? `${spec.text.introduction} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
     ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
+    ...heat.flatMap(({ line }) => [line, '']),
     '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
@@ -208,6 +216,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...star && t ? [{ id: 'colour', subject: 'Colour', evidence: [t.url], finding: `A Planck spectrum at ${t.value} K from ${t.source}: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}.${limbSentence ? ` The disc is ${limbSentence}.` : ''}` }]
       : spec.photometry ? [{ id: 'colour', subject: 'Colour', evidence: [spec.photometry.source.url], finding: String(colorLine).replace('**Colour.** ', '') }]
       : spec.thermal ? [{ id: 'colour', subject: 'Colour', evidence: [spec.thermal.url], finding: String(colorLine).replace('**Colour.** ', '') }] : [],
+    ...heat.map(({ entry, line }) => ({ id: entry.lens, subject: `${entry.label} heat map`, evidence: [entry.url], finding: line.replace(/^\*\*[^*]+\*\* /u, '') })),
   ]);
   // A planet's marker is its lens drawn as a disc (the companion star's comes from its colour lens, lens.mts).
   if (!star) lensMarkerEntry(files, id);

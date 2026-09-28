@@ -1,7 +1,7 @@
 # @cssearth/bake
 
-The repository's build-time preparation code. The preparation tools (`tools/nebula`, `tools/objects`,
-`tools/prepare`, `tools/assets`) and the nebula lab import it to turn source
+The repository's build-time preparation code. The preparation tools (`tools/objects`,
+`tools/prepare`) and the nebula lab import it to turn source
 records into prepared delivery. The application never imports it: the runtime reads only what the bake wrote.
 
 Each topic is one subpath entry. A topic imports another only when it sits on a lower layer (the raster lane uses the

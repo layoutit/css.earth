@@ -35,6 +35,8 @@
 // it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
+import { holdNativeDeviceTunnel } from './ipad-native-tunnel.mts';
+import { appendFileSync } from 'node:fs';
 import { symbolicateNativeXml } from './native-symbols.mts';
 import { execFile, spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, readFile, writeFile, readdir, realpath, rm } from 'node:fs/promises';
@@ -365,16 +367,22 @@ function inspector(socketUrl: string) {
 /** Waits until the page has loaded and the app reports itself ready or failed. Root readiness is available in
  * production too; the diagnostics hook is only present in builds that publish it. Evaluations
  * during the navigation itself can fail; they count as not ready. */
-async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120_000): Promise<void> {
-  const expression = "document.readyState === 'complete' && ((document.documentElement.dataset.ready === 'true') || " +
-    "(document.documentElement.dataset.ready === 'error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
+export function navigatedAppReady(value: unknown, url: string, previousOrigin: number): boolean {
+  return isRecord(value) && value.ready === true && typeof value.url === 'string' && sameCapturePage(value.url, url) &&
+    typeof value.timeOrigin === 'number' && Number.isFinite(value.timeOrigin) && value.timeOrigin !== previousOrigin;
+}
+
+async function waitForApp(session: ReturnType<typeof inspector>, url: string, previousOrigin: number, timeoutMs = 120_000): Promise<void> {
+  const expression = "({ url: location.href, timeOrigin: performance.timeOrigin, ready: document.readyState === 'complete' && " +
+    "(document.documentElement.dataset.ready === 'true' || document.documentElement.dataset.ready === 'error' || " +
+    "Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error))) })";
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
-    if (reply && isRecord(reply.result) && isRecord(reply.result.result) && reply.result.result.value === true) return;
+    if (reply && isRecord(reply.result) && isRecord(reply.result.result) && navigatedAppReady(reply.result.result.value, url, previousOrigin)) return;
     await wait(500);
   }
-  throw new Error(`The page did not report ready within ${timeoutMs / 1000} s.`);
+  throw new Error(`The new document at ${url} did not report ready within ${timeoutMs / 1000} s.`);
 }
 
 /** The page's viewport as a PNG through Web Inspector; this excludes Safari and must never stand in for a device screen. */
@@ -751,6 +759,16 @@ async function stopRecording(xctrace: ChildProcess): Promise<boolean> {
   return stopped;
 }
 
+/** A saved trace may still be a truncated device recording. Never silently use it as coverage. */
+export function nativeRecordingClock(toc: string): number {
+  const reason = toc.match(/<end-reason>([^<]+)<\/end-reason>/u)?.[1];
+  if (reason && /disconnect|error|fail|lost/iu.test(reason)) throw new Error(`Native recording ended early: ${reason}. See native-recorder.log and native-tunnel.log.`);
+  const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
+  const time = start ? Date.parse(start) : NaN;
+  if (!Number.isFinite(time)) throw new Error('Native trace clock origin is unavailable.');
+  return time;
+}
+
 async function exportTimeProfile(native: string, pid: number | null): Promise<{ summary: ReturnType<typeof summariseTimeProfile> | { error: string }; samples: NativeSample[]; startMs: number | null }> {
   try {
     // Instruments may still be finishing the file when its recorder exits; the first export can then fail with no message.
@@ -765,11 +783,8 @@ async function exportTimeProfile(native: string, pid: number | null): Promise<{ 
           const result = await run('xcrun', ['xctrace', 'export', '--input', native, '--toc'], { maxBuffer: 2 ** 26 });
           return result.stdout;
         });
-        const start = toc.match(/<start-date>([^<]+)<\/start-date>/u)?.[1];
-        const time = start ? Date.parse(start) : NaN;
-        if (!Number.isFinite(time)) throw new Error('Native trace clock origin is unavailable.');
         await writeFile(clockFile, toc);
-        return time;
+        return nativeRecordingClock(toc);
       } catch (error) { if (attempt >= 3) throw error; await wait(2000); return exportClock(attempt + 1); }
     };
     const startMs = await exportClock();
@@ -1463,8 +1478,10 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   if (open && !option.coldLoad) {
     workers.clear();
     const swapsBefore = session.swaps();
+    const before = await session.send('Runtime.evaluate', { expression: 'performance.timeOrigin', returnByValue: true });
+    const previousOrigin = requireFiniteNumber(isRecord(before.result) && isRecord(before.result.result) ? before.result.result.value : null, 'document clock before navigation');
     await session.send('Runtime.evaluate', { expression: `location.assign(${JSON.stringify(open)})` });
-    await waitForApp(session);
+    await waitForApp(session, open, previousOrigin);
     // A new process starts with every domain off (and its own stopwatch): enable them again before recording.
     if (session.swaps() !== swapsBefore) await enableDomains();
     await wait(option.settle * 1000);
@@ -1569,10 +1586,12 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   // page mode samples every process and keeps the page's pid when the samples are exported.
   const processes = option.native === 'all' || (target.kind === 'device' && option.native === 'page') ? ['--all-processes']
     : pagePid !== null ? ['--attach', String(pagePid)] : null;
+  const releaseNativeTunnel = target.kind === 'device' && processes
+    ? await holdNativeDeviceTunnel(option.pymobiledevice3, udid, resolve(out, 'native-tunnel.log')) : null;
   const xctrace = processes ? spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, ...processes, '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] }) : null;
   const xctraceLog: string[] = [];
-  xctrace?.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
-  xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
+  xctrace?.stdout?.on('data', chunk => { xctraceLog.push(String(chunk)); appendFileSync(resolve(out, 'native-recorder.log'), chunk); });
+  xctrace?.stderr?.on('data', chunk => { xctraceLog.push(String(chunk)); appendFileSync(resolve(out, 'native-recorder.log'), chunk); });
   for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
   let activeLayers: Awaited<ReturnType<typeof startLayerSampler>> | null = null;
@@ -1807,7 +1826,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   } catch (error) {
     await activeLayers?.stop().catch(() => null);
     if (debugInstalled) await evaluate(STOP_TRACE_CAUSES).then(value => writeFile(resolve(out,'causes.json'),JSON.stringify(value)+'\n')).catch(() => null);
-    xctrace?.kill('SIGINT');
+    if (xctrace) await stopRecording(xctrace);
     // Stop Inspector observers before the automation page closes. The iPad's
     // 2026-09-27 08:21:29 crash was inside InspectorMemoryAgent's live callback.
     await Promise.allSettled([session.send('Memory.stopTracking'), session.send('CPUProfiler.stopTracking'),
@@ -1816,7 +1835,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await Promise.allSettled([activeScreens?.stop(), activeMonitors?.stop()]);
     session.close(); proxy?.kill();
     throw error;
-  }
+  } finally { await releaseNativeTunnel?.(); }
 }
 
 type ReadmeInput = { name: string; url: string; endUrl: unknown; checkout: string; revision: string | null; trackedChanges: boolean | null; durationMs: number;

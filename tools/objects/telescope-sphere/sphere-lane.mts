@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
-import { installRuntimeAssets } from '../../assets/setup.mts';
+import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';

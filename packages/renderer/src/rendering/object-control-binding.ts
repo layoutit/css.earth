@@ -144,8 +144,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const step = lensInputs.find(input => input.value === next.desired.lensId)
       ?.closest<HTMLElement>('[data-step-group]');
     const group = step?.dataset.stepGroup ?? null;
-    // Depth and other manual groups can start paused. A pause lasts until the reader leaves the group.
-    if (ready && group !== currentGroup) { stopPlayback(); playing = step?.dataset.stepAutoplay === 'false' ? null : group; currentGroup = group; }
+    // Entering a sequence never starts playback; only its Play button does.
+    if (ready && group !== currentGroup) { stopPlayback(); currentGroup = group; }
     const members = playing ? sequences.get(playing) : undefined;
     if (!ready || document.hidden || next.error || !members?.includes(next.desired.lensId ?? '')) stopPlayback();
     if (next.pending) clearPlayTimer();

@@ -47,9 +47,11 @@
  * `text` ({ card, introduction, locator }) is drafted reader text cited to the paper, as `--from-archive` writes it; without it the
  * card and introduction stay marked for a person. `notes` are sentences for the README's "Not shown" list. A planet may carry
  * `thermal` (a measured dayside brightness temperature from the archive's emission table, for the "Thermal glow" lens) or
- * `photometry` (three-band flux densities for the band-colour lens); planet-lenses.mts. */
+ * `photometry` (three-band flux densities for the band-colour lens); planet-lenses.mts. `phaseCurves` adds a heat-map lens per
+ * published phase-curve fit beside the colour lens (phase-curve-lens.mts). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
+import { phaseCurveEntry, type PhaseCurveEntry } from './phase-curve-lens.mts';
 
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }
 export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kharitonov' | 'burnashev';
@@ -124,6 +126,8 @@ export interface HostedSpec {
   readonly kind: 'planet' | 'companion'; readonly id: string; readonly name: string; readonly description: string; readonly order?: number;
   readonly paper: { readonly url: string; readonly credit: string };
   readonly radius?: Cited; readonly mass?: Cited; readonly temperature?: Cited; readonly orbit: OrbitSpec; readonly text?: DraftText; readonly thermal?: ThermalSpec; readonly photometry?: PhotometrySpec;
+  /** Heat maps from published phase-curve fits, added beside the colour lens (phase-curve-lens.mts). */
+  readonly phaseCurves?: readonly PhaseCurveEntry[];
   /** A companion that is a black hole: an astronomy record only (spec header). */
   readonly blackHole?: true;
   /** Why a companion's colour is a Planck spectrum at its temperature, when not because the archives cannot separate it. */
@@ -160,13 +164,15 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
 function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): HostedSpec {
   const input = requireRecord(value, label), id = requireString(input.id, `${label}.id`), at = (name: string) => `${id}.${name}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: an id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'blackHole', 'colorReason']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'phaseCurves', 'blackHole', 'colorReason']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
   const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
   if (thermal && kind !== 'planet') throw new TypeError(`${id}: a thermal lens is a planet's; a companion star has its temperature.`);
   const photometry = input.photometry === undefined ? undefined : photometrySpec(input.photometry, at('photometry'));
   if (photometry && (kind !== 'planet' || thermal)) throw new TypeError(`${id}: band photometry is a planet's one colour lens; not with a companion star or a thermal lens.`);
+  const phaseCurves = input.phaseCurves === undefined ? undefined : requireArray(input.phaseCurves, at('phaseCurves')).map((entry, i) => phaseCurveEntry(entry, at(`phaseCurves[${i}]`)));
+  if (phaseCurves && kind !== 'planet') throw new TypeError(`${id}: a phase-curve map is a planet's.`);
   if (input.blackHole !== undefined && input.blackHole !== true) throw new TypeError(`${id}.blackHole is true or absent, not ${JSON.stringify(input.blackHole)}.`);
   const blackHole = input.blackHole === true;
   if (blackHole && kind !== 'companion') throw new TypeError(`${id}: only a companion may be a black hole.`);
@@ -176,7 +182,7 @@ function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): Ho
   const out: HostedSpec = { kind, id, name: requireString(input.name, at('name')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     ...(input.radius === undefined ? {} : { radius: cited(input.radius, at('radius'), range.radius) }), ...(input.mass === undefined ? {} : { mass: cited(input.mass, at('mass'), range.mass) }),
-    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}),
+    ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}), ...(phaseCurves ? { phaseCurves } : {}),
     ...(blackHole ? { blackHole: true as const } : {}), ...(input.colorReason === undefined ? {} : { colorReason: requireString(input.colorReason, at('colorReason')) }) };
   const fromArchive = 'archive' in orbit;
   if (blackHole) { if (!out.mass) throw new TypeError(`${id}: a black hole needs its cited mass.`); if ('record' in orbit) throw new TypeError(`${id}: a black hole's record is written here; the record route packages a star another owner records.`); }

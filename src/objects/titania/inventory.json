@@ -214,8 +214,8 @@
     {
       "location": "public",
       "filename": "titania-arrival.webp",
-      "bytes": 86010,
-      "sha256": "d84b6e11d0eacbd9ba32b0489968eb0019353d968c2ba725ac45faed355f8d16"
+      "bytes": 51034,
+      "sha256": "e29b424431be465c972c458ae197ea664b76f8258e4e556600ee6a8de42e938b"
     },
     {
       "location": "public",
@@ -226,8 +226,8 @@
     {
       "location": "public",
       "filename": "titania-features.json",
-      "bytes": 38216,
-      "sha256": "695e13c55a5dbfff68a9929b469426e31b36748bd10cb5028012c2e4de3ee8b3"
+      "bytes": 37184,
+      "sha256": "8fcbb234f582289da4e22575db999b4b298deb009333b52abc6dbe3c749b77e5"
     },
     {
       "location": "public",
@@ -298,8 +298,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 374,
-      "sha256": "8b843d36084b4ff5a49a62f07ee3e0fbc5ef3aba8a99962df973ba67447f8edf"
+      "bytes": 373,
+      "sha256": "a6717636d382158d227afd91bfb936c3fc31a58120e4af67bb8bf6a531e14932"
     },
     {
       "location": "prepared",
@@ -328,8 +328,8 @@
     {
       "location": "prepared",
       "filename": "features.json",
-      "bytes": 665,
-      "sha256": "7df4555e7bf2f4c0f7ea5281bb350392d55e46d74593bbcca4daedbb4629d42d"
+      "bytes": 663,
+      "sha256": "d40ef100e33f46fd6bdfb0f6a9a7f2a3ec363bd98a36f9e9b43ac501bbc3aa21"
     },
     {
       "location": "prepared",
@@ -352,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 6550,
-      "sha256": "86afe00ac5ecae6ced118452bd5f3a755bda436a91001e142bf1cae993b4f8ac"
+      "bytes": 6710,
+      "sha256": "11fd2fbff96180a06bdede229b4beeb485920898d7cd41fc5cc73056fd83071c"
     },
     {
       "location": "prepared",
@@ -364,26 +364,26 @@
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 6898,
-      "sha256": "bf49e8dada03d7b9b4f12ede85307f7a617aeafb0ae6a1d2f52a1eae808f2816"
+      "bytes": 7124,
+      "sha256": "7322db71fe9d0f4cc12545792afe5f51124a6f545e5de8e6896529e44d9b79b9"
     },
     {
       "location": "prepared",
       "filename": "minimaps/voyager-color.webp",
-      "bytes": 4008,
-      "sha256": "e16c6faeb6929fe357e5c6ce6e792cf2b815f822ff6889f2236436b3eebad5d1"
+      "bytes": 4118,
+      "sha256": "d265a86676655df4c7c09d7c8b433c6d7c7521b99bafc233d9857327b70a44b9"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 596441,
-      "sha256": "6777fe9eaba9d62f40cb21893e6b421c1a053f5cfe1b7cb35e2ca428587653db"
+      "bytes": 598277,
+      "sha256": "1540a5a8ee0b3dabd7a1eeb4d6f00f142b9c5edf4318f43dbb05f00baa33df4b"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 389454,
-      "sha256": "97f143f36a7aa730594f72b038055b0cc3ee90247761771bbd245746ea518c6b"
+      "bytes": 389459,
+      "sha256": "b049f6c63519e8b7951f97e0e9a7b296b53ce97dddc9c1742832e3bfda50d6c6"
     },
     {
       "location": "prepared",
@@ -395,7 +395,7 @@
       "location": "prepared",
       "filename": "sun.json",
       "bytes": 593,
-      "sha256": "10ddfad3c961a4cad97600e3bcc0c833bfbefbf9196fcbd3a5cc784d22d804fe"
+      "sha256": "8522762be771899c7a917519b8d0fe757a0ede85a769fd481ab6d3a11a6d7981"
     },
     {
       "location": "prepared",
@@ -412,8 +412,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1222,
-      "sha256": "72f579c3a846f185ac9bfa3162d40bc9b8b57fdd221417fa9cf6c257d013e64f"
+      "bytes": 1223,
+      "sha256": "ff852412fed04fb5c6d6837b72f722fe0e280c0b1e949ac08b889100a7fcf85b"
     }
   ]
 }
