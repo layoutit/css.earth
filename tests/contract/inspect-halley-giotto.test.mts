@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { parseGiottoIndex, surveyGiottoIndex } from '../objects/comet-1p/giotto-index.mts';
-import { decodeGiottoFrame, loadIntakeSource, parseIntakeManifest } from '../objects/comet-1p/inspect-giotto.mts';
+import { parseGiottoIndex, surveyGiottoIndex } from '../../tools/objects/comet-1p/giotto-index.mts';
+import { decodeGiottoFrame, loadIntakeSource, parseIntakeManifest } from '../../tools/objects/comet-1p/inspect-giotto.mts';
 
 function fixture(extra: string[][] = []): [Buffer, Buffer, Buffer] {
   const cards = [

@@ -3,12 +3,12 @@
  * package, and every placed star's catalogue distance, colour and stylesheet follow from its own records: its colour is its
  * measured colour lens, or the star field's colour fit at the effective temperature its measurement record cites. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { TODO, starStylesheet } from '../objects/new-object/scaffold.mts';
+import { TODO, starStylesheet } from '../../tools/objects/new-object/scaffold.mts';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 

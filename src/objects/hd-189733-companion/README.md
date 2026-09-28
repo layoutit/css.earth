@@ -47,7 +47,7 @@ Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-1897
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the HD 189733 system's members are the planet and B, and that its exit distance scales the Sun's 100 au.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733-companion/` in headless Chrome, no console errors.
 - Driven in a real browser from the planet outwards (1440 by 900, headless Chrome): where both stars are on screen, the pair's centre of mass sits 2 px from the centre of the view with A 35 px to one side and B to the other, and it stays within 1 px of the centre as the view widens further. Before this change A sat exactly at the centre and B swept in from the corner.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffc97b is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffc97b is the colour lens's prepared colour.
 
 ## Known problems
 
