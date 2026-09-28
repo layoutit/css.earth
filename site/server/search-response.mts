@@ -1,59 +1,20 @@
 import { parseHTML } from 'linkedom';
 import { requiredElement } from '../browser/browser-types.mts';
-import { isRecord } from '@cssearth/core';
-import { matchesObjectCategory } from '@cssearth/objects';
-import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
-import { parseFeaturePin } from '../search/feature-search.mts';
-import { findResults } from './find.mts';
+import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
+import { findObjects, findResults } from './find.mts';
+import type { SearchData } from './search-data.mts';
+import { renderCatalogueRows } from '../search/catalogue-window.mts';
 import { renderDatasetResponse, UnreadableSavedView } from '../dataset-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
-import { presentFeatureResults, presentOverviewResults, createSearchPresentation, createCatalogueRows } from '../search/search-results-presentation.mts';
-import { readCatalogueFragmentUrl } from '../catalogue/catalogue-fragment-loader.mts';
+import { presentFeatureResults, presentOverviewResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { objectIdAtPath } from '../root-object.mts';
 import { overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 
-export interface SearchPin { url: string; count: number; }
-export function parseSearchPin(value: unknown): SearchPin {
-  if (!isRecord(value) || typeof value.url !== 'string' || !/^\/(?:features|scenes)\/[a-zA-Z0-9/_-]+\.json$/u.test(value.url)
-    || typeof value.count !== 'number' || !Number.isSafeInteger(value.count) || value.count < 0) throw new TypeError('Invalid prepared search index pin.');
-  return { url: value.url, count: value.count };
-}
-
-/** A no-JS search reads the object rows straight from this document, but a page
- * ships them empty and names the shared catalogue fragment instead
- * (`catalogue-fragment-loader.mts`). Fetch and splice it in before matching,
- * the one no-JS reader of that markup. Returns false, instead of throwing, when
- * the fragment could not be loaded: the page still renders, with an empty object
- * list and a clear message, the way a failed feature index degrades below. */
-async function ensureCatalogueRows(document: Document, browser: HTMLElement, origin: string, fetcher: typeof fetch): Promise<boolean> {
-  const resultsPanel = requiredElement<HTMLElement>(browser, '#object-category-results');
-  if (resultsPanel.querySelector('.object-item')) return true;
-  const url = readCatalogueFragmentUrl(resultsPanel);
-  if (!url) return true;
-  try {
-    const response = await fetcher(new URL(url, origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
-    if (!response.ok) throw new Error(`Object catalogue fragment ${url} failed: ${response.status}.`);
-    const fragment = parseHTML(await response.text()).document;
-    const rows = fragment.querySelector('ul.object-list');
-    if (!rows) throw new Error('Object catalogue fragment content is missing its list.');
-    requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(document.importNode(rows, true));
-    const loading = resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]');
-    if (loading) loading.hidden = true;
-    return true;
-  } catch {
-    const loading = resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]');
-    if (loading) loading.hidden = true;
-    const error = resultsPanel.querySelector<HTMLElement>('[data-catalogue-error]');
-    if (error) error.hidden = false;
-    return false;
-  }
-}
-
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */
-export async function renderSearchResponse(html: string, url: URL, fetcher: typeof fetch = fetch): Promise<string> {
+export async function renderSearchResponse(html: string, url: URL, data: SearchData): Promise<string> {
   const startMarker = '<!--search-shell:start-->', endMarker = '<!--search-shell:end-->';
   const start = html.indexOf(startMarker) + startMarker.length, end = html.indexOf(endMarker);
   if (start < startMarker.length || end < start) throw new Error('Prepared search shell is missing.');
@@ -99,47 +60,32 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   if (searching) requiredElement(document, '.object-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
   if (searching) {
-    const catalogueLoaded = await ensureCatalogueRows(document, browser, url.origin, fetcher);
-    const rows = createCatalogueRows(browser);
-    const items = rows.items;
-    const labels = items.map(item => ({ ...objectSearchLabels(item), item }));
     const requestedCategory = url.searchParams.get('category');
     // Retain old category-only URLs; live search is driven solely by its query.
-    const category = ['all', 'planet', 'satellite', 'nebula', 'galaxy', 'galaxy-cluster', 'asteroid'].includes(requestedCategory ?? '') ? requestedCategory : null;
-    const result = searchObjects(labels, value || 'all objects');
-    const selected = !value && category ? category : result.classification === 'planet' || result.classification === 'dwarf-planet' || result.classification === 'exoplanet' ? 'planet' : 'all';
-    const matches = new Set(result.matches.map(match => match.item));
-    for (const item of items) {
-      item.hidden = !matches.has(item) || !matchesObjectCategory(item.dataset.objectClassification, selected);
-    }
-    const order = items.toSorted((a, b) => selected === 'planet' && (a.dataset.objectClassification === 'planet') !== (b.dataset.objectClassification === 'planet')
-      ? a.dataset.objectClassification === 'planet' ? -1 : 1 : Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
-    rows.order(order);
-    rows.refresh();
+    const category = ['planet', 'satellite', 'nebula', 'galaxy', 'galaxy-cluster', 'asteroid'].includes(requestedCategory ?? '') ? requestedCategory : null;
+    // The same matcher and order as the find function; with no JavaScript the page lists every match at once.
+    const found = findObjects(await data.catalogue(), value || category || 'all objects', { pageRows: Infinity });
+    renderCatalogueRows(document, requiredElement<HTMLUListElement>(browser, '[data-catalogue-list]'), found.objects.rows);
     const overviewCount = presentOverviewResults(browser, value);
-    presentation.markCategory(result.classification);
+    presentation.markCategory(found.classification);
     const featureRoot = document.querySelector<HTMLElement>('.object-feature-results');
     let detailCount = 0;
-    if (result.detailQuery && featureRoot) {
+    if (found.detailQuery && featureRoot && data.pin) {
       try {
-        const pin = parseFeaturePin(featureRoot.dataset.featureIndex);
-        if (pin) {
-          const results = await findResults(pin, url.origin, result.detailQuery, objectId, fetcher);
-          detailCount = presentFeatureResults(featureRoot, results);
-        }
+        detailCount = presentFeatureResults(featureRoot, await findResults(data.pin, found.detailQuery, objectId, data.read));
       } catch {
         presentFeatureResults(featureRoot, [], 'Feature names could not load. Submit your search to retry.');
         detailCount = 1;
       }
     }
-    presentation.setEmptyHidden(items.some(item => !item.hidden) || detailCount + overviewCount > 0, catalogueLoaded);
+    presentation.setEmptyHidden(found.objects.total + detailCount + overviewCount > 0);
   }
   createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
 /** Netlify's query rewrite and local middleware call this same request handler. */
-export async function handleSearchRequest(request: Request, fetcher: typeof fetch = fetch): Promise<Response> {
+export async function handleSearchRequest(request: Request, data: SearchData, fetcher: typeof fetch = fetch): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
   const url = new URL(request.url);
   const objectId = url.pathname === '/.netlify/functions/search' ? url.searchParams.get('object')
@@ -149,7 +95,7 @@ export async function handleSearchRequest(request: Request, fetcher: typeof fetc
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
   const page = await response.text();
-  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, fetcher);
+  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, data);
   let html: string;
   try {
     try { html = await render(url); }

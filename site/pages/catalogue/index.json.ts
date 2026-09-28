@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { PREPARED_CATALOGUE_INDEX_TEXT } from '../../catalogue/prepared-catalogue-index.mts';
+import { PREPARED_CATALOGUE_INDEX_TEXT } from '../../search/prepared-catalogue-index.mts';
 
 export const prerender = true;
 

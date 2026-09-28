@@ -2,31 +2,43 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../server/search-response.mts';
+import { handleSearchRequest, renderSearchResponse } from '../server/search-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
-import { objectSearchLabels, searchObjects } from '../search/object-search.mts';
 import searchRoute from '../server/search-route.mts';
 import { createFeatureBrowser } from '../feature-browser.mts';
-import { handleFindRequest } from '../server/find.mts';
+import { findObjects, handleFindRequest } from '../server/find.mts';
+import { readPublicFile, type SearchData } from '../server/search-data.mts';
+import { parseFindResponse } from '../search/find-protocol.mts';
+import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 
 const origin = 'https://preview.example.test';
-const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
+const index = { schema: 'cssearth-prepared-feature-index@2',
   objects: [{ id: 'moon', name: 'Moon', route: '/moon/', count: 1 }],
   features: [{ objectId: 'moon', id: 'tycho', name: 'Tycho', type: 'Crater', diameterKm: 85,
-    searchNames: ['tycho'], searchContext: 'crater' }], places: [] });
+    searchNames: ['tycho'], searchContext: 'crater' }], places: [] };
 const pin = { url: '/features/index.json', count: 1 };
-const row = (name: string, classification: string, aliases: string[] = [], distanceM = 1) => `<li class="object-item" data-object-name="${name.toLowerCase()}"
-  data-object-classification="${classification}" data-object-classification-name="${classification}" data-object-system-name="solar system"
-  data-object-distance-m="${distanceM}" data-object-search-names='${JSON.stringify(aliases)}'><a href="/${name.toLowerCase()}/">${name}</a></li>`;
+const entry = (kind: 'scene' | 'prepared-focus', name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => {
+  const id = name.toLowerCase();
+  return { kind, id, name, searchNames, classification, classificationName: classification, systemName: 'solar system',
+    route: kind === 'scene' ? `/${id}/` : `/sun/?focus=${id}`, illustration: false, candidate: false, distanceMeters,
+    detail: { text: `${distanceMeters} m`, title: 'Observer distance', ariaLabel: `${distanceMeters} m. Observer distance` },
+    source: { subject: `${kind === 'scene' ? 'object' : 'focus'}:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` },
+    marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff' } : { kind: 'focus', thumbnail: null } };
+};
+const entries = [entry('scene', 'Saturn', 'planet', 1), entry('scene', 'Titan', 'satellite', 2), entry('prepared-focus', 'M42', 'nebula', 3, ['orion nebula', 'm42'])];
+const reads: string[] = [];
+const data = (catalogue = entries, read: SearchData['read'] = async path => { reads.push(path); if (path === pin.url) return index; throw new Error(`${path} is not prepared.`); }): SearchData =>
+  ({ pin, read, catalogue: async () => catalogue });
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body data-object-shell="saturn"><!--search-shell:start-->
   <form class="object-sidebar-search-card" data-search-object="saturn"><input class="object-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="object-sheet-handle" type="checkbox">
   <div class="object-drawer-content"><nav class="object-browser" hidden>
     <div data-object-navigation-tree></div>
-    <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="object-chunk"><ul class="object-chunk-list">
-    ${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}
-    </ul></li></ul><p class="object-empty" hidden>No matching results</p>
-    <details class="object-feature-results" data-feature-index='${JSON.stringify(pin)}' hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
+    <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li></ul>
+    <ul class="object-list" data-catalogue-list></ul>
+    <p class="object-error" data-search-error hidden>Couldn't load search results. <button type="button" data-search-retry>Retry</button></p>
+    <p class="object-empty" hidden>No matching results</p>
+    <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content"><div class="object-context" hidden>
     <div data-prepared-focus-card hidden><span data-focus-name></span></div>
@@ -37,117 +49,77 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
       <section class="object-selected-panel" data-system-header="trappist-1">TRAPPIST-1 system</section><div data-solar-system-facts></div></div>
     </div><section class="object-information-panel">Saturn</section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
-// The one shared catalogue fragment (`/catalogue-fragment/`):
-// the same rows a page used to inline, minus the div they lived in.
-const catalogueRowsHtml = `<ul class="object-list"><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li>` +
-  `<li class="object-chunk"><ul class="object-chunk-list">${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}</ul></li></ul>`;
-const catalogueUrl = '/catalogue-fragment/';
-// A production page: the rows ship empty, referencing the fragment above instead of inlining it.
-const htmlNoCatalogue = html
-  .replace('<div id="object-category-results" role="region" aria-label="Search results">',
-    `<div id="object-category-results" role="region" aria-label="Search results" data-catalogue-src="${catalogueUrl}">`)
-  .replace(/<ul>.*?<\/ul>(?=<p class="object-empty")/su,
-    '<ul class="object-list" data-catalogue-list></ul><p class="object-loading" data-catalogue-loading>Loading celestial objects…</p>' +
-    '<p class="object-error" data-catalogue-error hidden>Couldn\'t load the object list. <button type="button" data-catalogue-retry>Retry</button></p>');
-assert.ok(htmlNoCatalogue.includes('data-catalogue-list'), 'fixture setup must strip the inline rows');
-assert.ok(!htmlNoCatalogue.includes('object-item'), 'fixture setup must strip every inline row');
-const fetchIndex: typeof fetch = async input => {
-  assert.equal(String(input), `${origin}/features/index.json`);
-  return new Response(index);
-};
-const visibleNames = (document: Document) => [...document.querySelectorAll('.object-item:not([hidden]) a')].map(element => element.textContent);
-const fetchIndexAndCatalogue: typeof fetch = async input => {
-  const url = String(input);
-  if (url === `${origin}${catalogueUrl}`) return new Response(catalogueRowsHtml);
-  return fetchIndex(input);
-};
+const visibleNames = (document: Document) => [...document.querySelectorAll('[data-catalogue-list] .object-item .object-name')].map(element => element.textContent);
+const render = async (path: string, search = data(), source = html) => parseHTML(await renderSearchResponse(source, new URL(path, origin), search)).document;
 
-test('a page that ships its catalogue empty has it fetched and merged before matching', async () => {
-  const seen: string[] = [];
-  const fetcher: typeof fetch = async input => { seen.push(String(input)); return fetchIndexAndCatalogue(input); };
-  const document = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), fetcher)).document;
-  assert.deepEqual(visibleNames(document), ['Saturn']);
-  assert.equal(document.querySelectorAll('.object-item').length, 3);
-  assert.equal(document.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
-  assert.ok(seen.includes(`${origin}${catalogueUrl}`), 'the catalogue fragment was fetched');
-  // Re-rendering the merged document needs no second fetch: the rows are already there.
-  const again = await renderSearchResponse(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=titan', origin), fetcher), new URL('/saturn/?q=titan', origin), fetchIndex);
-  assert.deepEqual(visibleNames(parseHTML(again).document), ['Titan']);
+test('native search lists the rows the find function would answer, with the same row markup', async () => {
+  const document = await render('/saturn/?q=orion');
+  assert.deepEqual(visibleNames(document), ['M42']);
+  const row = document.querySelector('[data-catalogue-list] .object-item a');
+  assert.equal(row?.getAttribute('href'), '/sun/?focus=m42');
+  assert.equal(row?.getAttribute('data-source-subject'), 'focus:m42');
+  const live = parseFindResponse(await (await handleFindRequest(new Request(`${origin}/.netlify/functions/find?object=saturn&q=orion`), data())).json());
+  assert.deepEqual(live.objects.rows.map(result => result.name), visibleNames(document));
 });
 
-test('a catalogue fragment that fails to load degrades to an empty list plus a message, instead of failing the request', async () => {
-  for (const failure of [async () => new Response('', { status: 503 }), async () => new Response('<p>no list</p>')]) {
-    const fetcher: typeof fetch = async input => String(input) === `${origin}${catalogueUrl}` ? failure() : fetchIndex(input);
-    const document = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), fetcher)).document;
-    assert.equal(document.querySelectorAll('.object-item').length, 0);
-    assert.equal(document.querySelector<HTMLElement>('[data-catalogue-error]')?.hidden, false);
-    assert.equal(document.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
-    assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
-  }
+test('an object catalogue that cannot load fails the request instead of listing nothing', async () => {
+  const broken: SearchData = { ...data(), catalogue: async () => { throw new Error('dist/catalogue/index.json is missing'); } };
+  await assert.rejects(renderSearchResponse(html, new URL('/saturn/?q=saturn', origin), broken), /index\.json is missing/u);
 });
 
-test('a page that already inlines its catalogue never fetches the fragment', async () => {
-  const seen: string[] = [];
-  const fetcher: typeof fetch = async input => { seen.push(String(input)); return fetchIndex(input); };
-  await renderSearchResponse(html, new URL('/saturn/?q=saturn', origin), fetcher);
-  assert.deepEqual(seen, [`${origin}/features/index.json`]);
-});
-
-test('native search replaces the selected card, retains every row, and preserves the scene/head bytes', async () => {
+test('native search replaces the selected card, lists the find function\'s matches, and preserves the scene/head bytes', async () => {
   for (const [query, names] of [['saturn', ['Saturn']], ['orion', ['M42']], ['planets', ['Saturn']], ['unknown', []]] as const) {
-    const response = await renderSearchResponse(html, new URL(`/?q=${query}`, origin), fetchIndex);
+    const response = await renderSearchResponse(html, new URL(`/?q=${query}`, origin), data());
     const { document } = parseHTML(response);
     assert.deepEqual(visibleNames(document), names);
-    assert.equal(document.querySelectorAll('.object-item').length, 3);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.object-browser')?.hidden, false);
     assert.equal(response.slice(0, response.indexOf('<!--search-shell:start-->')), html.slice(0, html.indexOf('<!--search-shell:start-->')));
     assert.equal(response.slice(response.indexOf('<!--search-shell:end-->')), html.slice(html.indexOf('<!--search-shell:end-->')));
-    const items = [...document.querySelectorAll<HTMLElement>('.object-item')].map(objectSearchLabels);
-    const result = searchObjects(items, query);
-    assert.deepEqual(result.matches.map(item => item.name), names.map(name => name.toLowerCase()));
+    assert.deepEqual(findObjects(entries, query).objects.rows.map(row => row.name), names);
   }
 });
 
 test('empty submission browses all objects, categories retain the query, pills replace it', async () => {
-  const empty = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=', origin), fetchIndex)).document;
+  const empty = await render('/saturn/?q=');
   assert.deepEqual(visibleNames(empty), ['Saturn', 'Titan', 'M42']);
-  const category = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=&category=satellite&v=saved-view', origin), fetchIndex)).document;
+  const category = await render('/saturn/?q=&category=satellite&v=saved-view');
   assert.deepEqual(visibleNames(category), ['Titan']);
   assert.equal(category.querySelector('input[name=v]')?.getAttribute('value'), 'saved-view');
   assert.equal(category.querySelector('input[name=v]')?.hasAttribute('disabled'), false);
-  const pill = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=old&browse=Planets', origin), fetchIndex)).document;
+  const pill = await render('/saturn/?q=old&browse=Planets');
   assert.deepEqual(visibleNames(pill), ['Saturn']);
   assert.equal(pill.querySelector('input[name=q]')?.getAttribute('value'), 'Planets');
 });
 
-test('native search sorts catalogue rows by their emitted meter distances', async () => {
-  const unsorted = html.replace(row('Titan', 'satellite'), row('Titan', 'satellite', [], 100));
-  const document = parseHTML(await renderSearchResponse(unsorted, new URL('/saturn/?q=', origin), fetchIndex)).document;
-  assert.deepEqual(visibleNames(document), ['Saturn', 'M42', 'Titan']);
+test('native search lists planets first, then catalogue rows by their meter distances', async () => {
+  const farTitan = [entry('scene', 'Titan', 'satellite', 100), ...entries.filter(({ id }) => id !== 'titan')];
+  assert.deepEqual(visibleNames(await render('/saturn/?q=', data(farTitan))), ['Saturn', 'M42', 'Titan']);
 });
 
 test('features are pinned, rendered into existing rows and have ordinary destination links', async () => {
-  const document = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), fetchIndex)).document;
+  reads.length = 0;
+  const document = await render('/saturn/?q=tycho');
+  assert.deepEqual(reads, ['/features/index.json'], 'the feature index is read from the files beside the function');
   assert.equal(document.querySelector('.object-destination-result')?.getAttribute('href'), '/moon/?feature=tycho');
   assert.equal(document.querySelector('.object-destination-result-name')?.textContent, 'Tycho');
   assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
-  const unavailable: typeof fetch = async () => new Response('', { status: 503 });
-  const failure = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), unavailable)).document;
+  const failure = await render('/saturn/?q=tycho', data(entries, async () => { throw new Error('unavailable'); }));
   assert.match(failure.querySelector('.object-destination-hint')?.textContent ?? '', /could not load/);
   assert.equal(failure.querySelector('.object-destination-result')?.hasAttribute('href'), false);
 });
 
 test('typed search shows a flat result list without the navigation tree, including queries that name an overview', async () => {
   for (const query of ['t', 'Milky Way']) {
-    const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
+    const document = await render(`/saturn/?q=${encodeURIComponent(query)}`);
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
     assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
     assert.equal(document.querySelector('.object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
-    if (query === 't') assert.deepEqual(visibleNames(document), ['Saturn', 'Titan']);
+    // A name that begins with the query ranks first, as in the live search.
+    if (query === 't') assert.deepEqual(visibleNames(document), ['Titan', 'Saturn']);
     assert.equal(document.querySelector<HTMLElement>('[data-search-overview]')?.hidden, query !== 'Milky Way');
     if (query === 'Milky Way') assert.equal(document.querySelector<HTMLElement>('.object-empty')?.hidden, true);
   }
@@ -159,8 +131,7 @@ const contextHtml = html
     '<div data-prepared-focus-card data-prepared-focus-id="m42" hidden><span data-focus-name>Orion Nebula</span></div>');
 
 test('a URL that names both a focus and an overview resolves to the focus alone', async () => {
-  const card = (query: string) => renderSearchResponse(contextHtml, new URL(`/saturn/${query}`, origin), fetchIndex)
-    .then(response => parseHTML(response).document);
+  const card = (query: string) => render(`/saturn/${query}`, data(), contextHtml);
   const overview = await card('?overview=system');
   assert.equal(overview.querySelector<HTMLElement>('.object-context [data-system-results]')?.hidden, false);
   assert.equal(overview.querySelector<HTMLElement>('.object-context')?.hidden, false);
@@ -190,7 +161,7 @@ test('native and live selections share card visibility, inertness, labels and sy
   ] as const;
   for (const [query, objectId, subject] of cases) {
     const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);
-    const native = parseHTML(await renderSearchResponse(source, new URL(`/${objectId}/${query}`, origin), fetchIndex)).document;
+    const native = await render(`/${objectId}/${query}`, data(), source);
     const live = parseHTML(source).document;
     const present = createSelectionPresentation(live);
     present.present({ kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
@@ -207,32 +178,31 @@ test('native and live selections share card visibility, inertness, labels and sy
 });
 
 test('named features share the results panel, start collapsed, and disappear when there are no matches', async () => {
-  const document = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=tycho', origin), fetchIndex)).document;
+  const document = await render('/saturn/?q=tycho');
   const features = document.querySelector<HTMLElement>('#object-category-results > .object-feature-results');
   assert.ok(features);
   assert.equal(features.hidden, false);
   assert.equal(features.hasAttribute('open'), false);
   assert.equal(features.querySelector('.object-panel-heading-count')?.textContent, '(1)');
-  const empty = parseHTML(await renderSearchResponse(html, new URL('/saturn/?q=unknown', origin), fetchIndex)).document;
+  const empty = await render('/saturn/?q=unknown');
   assert.equal(empty.querySelector<HTMLElement>('.object-feature-results')?.hidden, true);
   assert.equal(empty.querySelector<HTMLElement>('.object-empty')?.hidden, false);
 });
 
-test('live feature results retain their rows and disclosure until the query changes', async context => {
-  // The browser asks the find API; the real handler answers it from this index.
-  context.mock.method(globalThis, 'fetch', async (input: string | URL) => handleFindRequest(new Request(String(input)), pin, async () => new Response(index)));
+test('live feature results retain their rows and disclosure until the query changes', async () => {
+  // The find function answers the browser's query; the real handler answers it from this index.
+  const features = async (query: string) => parseFindResponse(await (await handleFindRequest(new Request(`${origin}/.netlify/functions/find?object=saturn&q=${query}`), data())).json()).features;
   const { document } = parseHTML(html);
   const root = document.querySelector<HTMLElement>('.object-feature-results')!;
   const row = root.querySelector('.object-destination-result');
-  const counts: number[] = [];
-  const browser = createFeatureBrowser({ documentTarget: document, objectId: 'saturn', onSelected() {}, onResults: count => counts.push(count) })!;
-  await browser.search('tycho');
+  const browser = createFeatureBrowser({ documentTarget: document, onSelected() {} })!;
+  const counts = [browser.present('tycho', await features('tycho'))];
   assert.equal(root.hidden, false);
   assert.equal(root.hasAttribute('open'), false);
   root.setAttribute('open', '');
-  await browser.search('tycho');
+  counts.push(browser.present('tycho', await features('tycho')));
   assert.equal(root.hasAttribute('open'), true);
-  await browser.search('unknown');
+  counts.push(browser.present('unknown', await features('unknown')));
   assert.equal(root.hidden, true);
   assert.equal(root.hasAttribute('open'), false);
   assert.equal(root.querySelector('.object-destination-result'), row);
@@ -242,12 +212,13 @@ test('live feature results retain their rows and disclosure until the query chan
 
 test('queries stay text, are bounded, and cannot become executable attributes or scene markup', async () => {
   const query = '\"><img src=x onerror=alert(1)>';
-  const document = parseHTML(await renderSearchResponse(html, new URL(`/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
+  const document = await render(`/?q=${encodeURIComponent(query)}`);
   assert.equal(document.querySelector('input[name=q]')?.getAttribute('value'), query);
   assert.equal(document.querySelectorAll('img,[onerror]').length, 0);
-  const long = parseHTML(await renderSearchResponse(html, new URL(`/?q=${'a'.repeat(500)}`, origin), fetchIndex)).document;
+  const long = await render(`/?q=${'a'.repeat(500)}`);
   assert.equal(long.querySelector('input[name=q]')?.getAttribute('value')?.length, 200);
-  assert.throws(() => parseSearchPin({ ...pin, url: '//attacker.example/index.json' }));
+  await assert.rejects(readPublicFile('//attacker.example/index.json'), /path is invalid/u);
+  await assert.rejects(readPublicFile('/features/../../secrets.json'), /path is invalid/u);
 });
 
 test('Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function', () => {
@@ -264,28 +235,27 @@ test('Netlify routing keeps all query parameters, bypasses assets, and never rec
   assert.equal(searchRoute(new Request(origin + '/?q=text'))?.searchParams.get('object'), 'earth');
 });
 
-test('function fetches only the static page and pinned indexes; search responses are not shared-cacheable', async () => {
+test('function fetches only the static page; search responses are not shared-cacheable', async () => {
   const seen: string[] = [];
   const fetcher: typeof fetch = async input => {
     seen.push(String(input));
-    return String(input).endsWith('/saturn/') ? new Response(html, { headers: { 'content-type': 'text/html', etag: 'static', 'content-length': '123' } }) : fetchIndex(input);
+    return new Response(html, { headers: { 'content-type': 'text/html', etag: 'static', 'content-length': '123' } });
   };
-  const response = await handleSearchRequest(new Request(origin + '/.netlify/functions/search?object=saturn&q=saturn'), fetcher);
+  const response = await handleSearchRequest(new Request(origin + '/.netlify/functions/search?object=saturn&q=saturn'), data(), fetcher);
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('cache-control'), 'private, no-store');
   assert.equal(response.headers.get('etag'), null);
   assert.equal(response.headers.get('content-length'), null);
   assert.equal(response.headers.get('x-robots-tag'), 'noindex, follow');
-  assert.deepEqual(seen, [origin + '/saturn/', origin + '/features/index.json']);
-  assert.equal((await handleSearchRequest(new Request(origin + '/.netlify/functions/search?object=../secrets&q=x'), fetcher)).status, 404);
-  assert.equal((await handleSearchRequest(new Request(origin + '/saturn/?q=x', { method: 'POST' }), fetcher)).status, 405);
+  assert.deepEqual(seen, [origin + '/saturn/']);
+  assert.equal((await handleSearchRequest(new Request(origin + '/.netlify/functions/search?object=../secrets&q=x'), data(), fetcher)).status, 404);
+  assert.equal((await handleSearchRequest(new Request(origin + '/saturn/?q=x', { method: 'POST' }), data(), fetcher)).status, 405);
 });
 
 test('an unreadable saved view renders the page as if it were absent', async () => {
-  const fetcher: typeof fetch = async input =>
-    String(input).endsWith('/saturn/') ? new Response(html, { headers: { 'content-type': 'text/html' } }) : fetchIndex(input);
+  const fetcher: typeof fetch = async () => new Response(html, { headers: { 'content-type': 'text/html' } });
   const body = async (query: string) => {
-    const response = await handleSearchRequest(new Request(`${origin}/.netlify/functions/search?object=saturn&${query}`), fetcher);
+    const response = await handleSearchRequest(new Request(`${origin}/.netlify/functions/search?object=saturn&${query}`), data(), fetcher);
     assert.equal(response.status, 200, query);
     assert.equal(response.headers.get('location'), null, query);
     return response.text();
@@ -294,5 +264,5 @@ test('an unreadable saved view renders the page as if it were absent', async () 
   assert.equal(await body('v=681&q=saturn'), await body('q=saturn'));
   assert.equal(await body('v=not-a-view'), await body(''));
   // Two views are a malformed request, not an old link.
-  assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?v=a&v=b`), fetcher)).status, 400);
+  assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?v=a&v=b`), data(), fetcher)).status, 400);
 });

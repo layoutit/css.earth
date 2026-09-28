@@ -1,23 +1,20 @@
 import { isRecord } from '@cssearth/core';
 import { featureResult, matchFeatures, parseFeatureIndex, placeFeatures, PLACE_FEATURE_PREFIX } from '../search/feature-search.mts';
 import type { FeatureIndex, FeatureIndexPin, IndexedFeature } from '../search/feature-search.mts';
-import { FIND_QUERY_LIMIT } from '../search/find-protocol.mts';
-import type { FindResult } from '../search/find-protocol.mts';
+import { FIND_PAGE_ROWS, FIND_QUERY_LIMIT } from '../search/find-protocol.mts';
+import type { FindResponse, FindResult } from '../search/find-protocol.mts';
+import { searchObjects } from '../search/object-search.mts';
+import { catalogueRow, type CatalogueIndexEntry } from '../search/catalogue-index.mts';
+import { readPublicFile, type ReadPrepared, type SearchData } from './search-data.mts';
 
 /** The search function's side of search/find-protocol.mts. */
 interface FindData { readonly index: FeatureIndex; readonly places: ReadonlyMap<string, ReadonlyMap<string, unknown>>; }
 
-async function readJson(url: URL, fetcher: typeof fetch): Promise<unknown> {
-  const response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15_000) });
-  if (!response.ok) throw new Error(`${url.pathname} could not load: HTTP ${response.status}.`);
-  return response.json();
-}
-
-async function readFindData(pin: FeatureIndexPin, origin: string, fetcher: typeof fetch): Promise<FindData> {
-  const base = parseFeatureIndex(await readJson(new URL(pin.url, origin), fetcher), pin);
+async function readFindData(pin: FeatureIndexPin, read: ReadPrepared): Promise<FindData> {
+  const base = parseFeatureIndex(await read(pin.url), pin);
   const places = new Map<string, Map<string, unknown>>(), features: IndexedFeature[] = [...base.features];
   for (const placePin of base.places) {
-    const catalog = await readJson(new URL(placePin.assetUrl, origin), fetcher);
+    const catalog = await read(placePin.url);
     const expanded = placeFeatures(placePin, catalog);
     for (const [index, feature] of features.entries()) {
       const names = feature.objectId === placePin.objectId ? expanded.aliases.get(feature.id) : undefined;
@@ -33,33 +30,55 @@ async function readFindData(pin: FeatureIndexPin, origin: string, fetcher: typeo
 
 // A warm function instance keeps the loaded data for its deploy, never results.
 const loaded = new Map<string, Promise<FindData>>();
-function findData(pin: FeatureIndexPin, origin: string, fetcher: typeof fetch): Promise<FindData> {
-  if (fetcher !== fetch) return readFindData(pin, origin, fetcher);
-  const key = `${origin}:${pin.url}`;
-  let pending = loaded.get(key);
+function findData(pin: FeatureIndexPin, read: ReadPrepared): Promise<FindData> {
+  if (read !== readPublicFile) return readFindData(pin, read);
+  let pending = loaded.get(pin.url);
   if (!pending) {
     loaded.clear();
-    pending = readFindData(pin, origin, fetcher).catch(error => { loaded.delete(key); throw error; });
-    loaded.set(key, pending);
+    pending = readFindData(pin, read).catch(error => { loaded.delete(pin.url); throw error; });
+    loaded.set(pin.url, pending);
   }
   return pending;
 }
 
-const json = (value: unknown, status = 200) => new Response(JSON.stringify(value), { status, headers: {
-  'Content-Type': 'application/json; charset=utf-8',
-  // Results depend only on the query and the deploy's pinned data.
-  'Cache-Control': 'public, max-age=300' } });
+/** Every result lists planets first, then by distance. A category query already excludes other classes, so it needs no
+ * second order; a typed name ranks exact and leading matches first within this order (`searchObjects`). */
+function catalogueLabels(entries: readonly CatalogueIndexEntry[]) {
+  return entries.map(entry => ({ entry, name: entry.name.toLocaleLowerCase('en'), names: entry.searchNames, classification: entry.classification,
+    classificationName: entry.classificationName, systemName: entry.systemName, illustration: entry.illustration, candidate: entry.candidate }))
+    .sort((a, b) => Number(b.classification === 'planet') - Number(a.classification === 'planet') || a.entry.distanceMeters - b.entry.distanceMeters);
+}
+const catalogueLabelsByIndex = new WeakMap<readonly CatalogueIndexEntry[], ReturnType<typeof catalogueLabels>>();
 
-/** The rows for a query, for the find API and the no-JavaScript search page alike. */
-export async function findResults(pin: FeatureIndexPin, origin: string, query: string, objectId: string, fetcher: typeof fetch = fetch): Promise<FindResult[]> {
-  const data = await findData(pin, origin, fetcher);
+/** One page of the objects a query matches, and the text its feature search runs on ('' for a category or system). */
+export function findObjects(entries: readonly CatalogueIndexEntry[], query: string, { offset = 0, pageRows = FIND_PAGE_ROWS, illustrations = false }: {
+  offset?: number; pageRows?: number; illustrations?: boolean;
+} = {}) {
+  let labels = catalogueLabelsByIndex.get(entries);
+  if (!labels) catalogueLabelsByIndex.set(entries, labels = catalogueLabels(entries));
+  const result = searchObjects(labels, query, { illustrations });
+  return {
+    objects: { total: result.matches.length, offset, rows: result.matches.slice(offset, offset + pageRows).map(match => catalogueRow(match.entry)) },
+    classification: result.classification ?? null,
+    detailQuery: result.detailQuery,
+  };
+}
+
+/** The feature rows for a query, for the find API and the no-JavaScript search page alike. */
+export async function findResults(pin: FeatureIndexPin, query: string, objectId: string, read: ReadPrepared = readPublicFile): Promise<FindResult[]> {
+  const data = await findData(pin, read);
   return matchFeatures(data.index, query.slice(0, FIND_QUERY_LIMIT), objectId).map(feature => {
     const lensIds = feature.id.startsWith(PLACE_FEATURE_PREFIX) ? undefined : data.index.objects.find(object => object.id === feature.objectId)?.lensIds;
     return { objectId: feature.objectId, id: feature.id, ...featureResult(feature, data.index, objectId), ...(lensIds ? { lensIds } : {}) };
   });
 }
 
-export async function handleFindRequest(request: Request, pin: FeatureIndexPin, fetcher: typeof fetch = fetch): Promise<Response> {
+const json = (value: unknown, status = 200) => new Response(JSON.stringify(value), { status, headers: {
+  'Content-Type': 'application/json; charset=utf-8',
+  // Results depend only on the query and the deploy's prepared data.
+  'Cache-Control': 'public, max-age=300' } });
+
+export async function handleFindRequest(request: Request, { pin, read, catalogue }: SearchData): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
   const url = new URL(request.url);
   const objectId = url.searchParams.get('object') ?? '';
@@ -68,8 +87,22 @@ export async function handleFindRequest(request: Request, pin: FeatureIndexPin, 
   if ((query === null) === (placeId === null)) return json({ error: 'Pass either q or place.' }, 400);
   if (placeId !== null) {
     if (!/^[0-9]+$/u.test(placeId)) return json({ error: 'A place id is a number.' }, 400);
-    const place = (await findData(pin, url.origin, fetcher)).places.get(objectId)?.get(placeId);
+    const place = pin ? (await findData(pin, read)).places.get(objectId)?.get(placeId) : undefined;
     return place === undefined ? json({ error: 'No such place.' }, 404) : json({ place });
   }
-  return json({ results: await findResults(pin, url.origin, query!, objectId, fetcher) });
+  const offsetText = url.searchParams.get('offset') ?? '0';
+  if (!/^(?:0|[1-9][0-9]{0,5})$/u.test(offsetText)) return json({ error: 'An offset is a row number.' }, 400);
+  const offset = Number(offsetText);
+  const { objects, classification, detailQuery } = findObjects(await catalogue(), query!.slice(0, FIND_QUERY_LIMIT),
+    { offset, illustrations: url.searchParams.get('illustrations') === '1' });
+  let features: FindResult[] | null = [];
+  if (offset === 0 && detailQuery && pin) {
+    try { features = await findResults(pin, detailQuery, objectId, read); }
+    catch (error) {
+      // Objects still answer when the feature data cannot load; the page says feature names are unavailable.
+      console.error('Feature search failed.', error);
+      features = null;
+    }
+  }
+  return json({ objects, classification, features } satisfies FindResponse);
 }

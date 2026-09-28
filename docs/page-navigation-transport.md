@@ -112,8 +112,9 @@ can exceed Netlify's edge CPU budget. The application continues to build static
 pages; it does not need an Astro server adapter.
 
 The function fetches the current object's prebuilt page without a query and
-updates the retained search controls and rows between the `search-shell`
-boundaries. Search alone passes the scene through unchanged; dataset, setting,
+updates the retained search controls between the `search-shell` boundaries, and
+lists every matching object with the same matcher, order and row markup as live
+search. Search alone passes the scene through unchanged; dataset, setting,
 saved-view and focus requests also update the existing stage between the
 `prepared-scene` boundaries. The
 head, stylesheet bytes and application scripts pass through unchanged. The
@@ -123,17 +124,32 @@ warm function instances cache only authenticated index data. Query responses
 are not cached and carry `noindex, follow`. An index failure leaves object
 search usable and displays a retry message in the existing feature section.
 
-Live search asks `netlify/functions/find.ts` instead of downloading anything:
-`?q=<query>&object=<body>` returns the rows to show and `?place=<id>&object=<body>`
-returns one city's record for its flight. The page therefore never downloads the
-cross-body index (3.3 MB) or Earth's places catalogue (14.8 MB); a query answer is
-a few hundred bytes to about 2 KB. The function reads both files once per warm
-instance, each checked against the byte count and SHA-256 pinned at build time
-(the places catalogue from the deploy's asset bucket). A city that a named
+Live search asks `netlify/functions/find.ts` instead of downloading anything.
+One request per query, `?q=<query>&object=<body>`, answers the first 40 matching
+objects, their total and the named-feature rows together; `&offset=<row>` answers
+a later page of objects as the list scrolls (the Stars category lists about
+1,500). `?place=<id>&object=<body>` returns one city's record for its flight. The
+page never downloads the object catalogue (2.3 MB), the cross-body feature index
+(3.3 MB) or Earth's places catalogue (14.8 MB); an answer is about 1 to 30 KB.
+Rows already on screen stay until the next answer replaces them, so typing never
+blanks the list, and a failed search shows a retry line. Before this, the page
+downloaded the whole catalogue first, and [a phone showed "Loading celestial
+objects…" for about 3 s](images/search-one-request.png) while features arrived
+separately. The page waits one
+animation frame after typing, so keystrokes that arrive faster than it draws send
+one request for the newest text; a newer request cancels the older one.
+
+Both functions read their data from files deployed beside them (`included_files`
+in `netlify.toml`, read by `site/server/search-data.mts`): the object catalogue
+the build writes to `dist/catalogue/index.json`, the feature index and each
+body's places catalogue from `public/`. Fetching them over HTTP made a new
+function instance's first search take 3 to 4.5 s; from disk it takes about
+0.2 s. The object catalogue is built under Vite, which the bundled functions
+cannot run, so they read the built file; Astro dev computes the same catalogue
+through Vite. The deploy's function bundler answers one query before publishing,
+so a missing file fails the deploy instead of every search. A city that a named
 feature already carries within 50 km is listed once, as that feature, and its
-alternate names find it. The page waits one animation frame after typing, so
-keystrokes that arrive faster than it draws send one request for the newest
-text.
+alternate names find it.
 
 JavaScript adopts the submitted query and selected category, keeps the form and
 result elements, and adds live filtering and in-place navigation. Both native
@@ -183,7 +199,7 @@ The search browser check submits the form, clears it, uses category buttons,
 matches aliases, and follows named-feature and city links with JavaScript
 disabled at desktop and phone widths. It then delays startup and verifies the
 same scene, form, result rows, query and computed result styles before exercising
-live search. Native feature links stay usable while the client index loads.
+live search. Native feature links stay usable while scripts load.
 The request tests cover parameter routing, escaping, pinned-index
 failure and unchanged scene bytes. Netlify's local function build checks the
 server bundle; it does not prove a deployed site's configuration.
