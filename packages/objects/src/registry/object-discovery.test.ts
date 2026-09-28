@@ -14,7 +14,7 @@ test('a star is named where there is more to find; every other star is an unname
   assert.deepEqual(hiddenBodies, [], 'an unnamed star is still drawn, and names itself on hover');
 });
 
-test('an extreme trans-Neptunian object stays on the map by its orbit while its page is only an illustration', () => {
+test('an extreme trans-Neptunian object stays on the map as a named dot while its page is only an illustration', () => {
   const illustration = (id: string) => ({ id, classification: 'trans-neptunian', discovery: { featured: false, imagery: false, illustration: true } });
   const objects = [illustration('sedna'), illustration('quaoar')];
   const options = { illustrations: false, defaultFeatures: new Set(['sedna']), orbitFeatures: new Set(['sedna']) };

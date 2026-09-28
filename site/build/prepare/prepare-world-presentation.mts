@@ -37,10 +37,8 @@ export function minorMoonOrbitIds(bodies: readonly { id: string; orbit?: { cente
   }).map(body => body.id);
 }
 
-/** The default context suppresses distant orbit classes, except the extreme trans-Neptunian objects, and limits asteroid orbits
- * to JPL spacecraft targets. */
+/** The default context suppresses distant orbit classes and limits asteroid orbits to JPL spacecraft targets. */
 export function showsDefaultContextOrbit(object: { id: string; classification: string }): boolean {
-  if (object.classification === 'trans-neptunian' && isExtremeTransNeptunian(object.id)) return true;
   if (['trans-neptunian', 'interstellar'].includes(object.classification)) return false;
   return object.classification !== 'asteroid' || isJplMissionTarget(object);
 }
@@ -51,7 +49,8 @@ export function isDefaultContextFeature(object: { id: string; classification: st
   return object.classification === 'dwarf-planet' || object.discovery.featured || orbitFeature(object);
 }
 
-/** A body the map shows by its measured orbit even when its page is only an illustration: an extreme trans-Neptunian object. */
+/** A body the map shows as a named dot, placed by its measured orbit, even when its page is only an illustration: an extreme
+ * trans-Neptunian object. Its orbit stays hidden with the other trans-Neptunian orbits. */
 export function orbitFeature(object: { id: string; classification: string }): boolean {
   return object.classification === 'trans-neptunian' && isExtremeTransNeptunian(object.id);
 }
@@ -63,7 +62,9 @@ export function prepareWorldPresentation() {
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
     orbitFeatureIds: SCENE_OBJECTS.filter(orbitFeature).map(object => object.id),
-    hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
+    // A trans-Neptunian object drawn from its record alone (tools/objects/prepare-spatial-context.ts) hides its orbit like a packaged one.
+    hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor,
+      ...APPLICATION_WORLD_CONTEXT.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true && 'orbit' in body && body.orbit?.centerBodyId === 'sun').map(body => body.id)],
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },

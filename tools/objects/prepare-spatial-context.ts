@@ -1,7 +1,7 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, isExtremeTransNeptunian, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
+import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { readCatalog, readPreparedObjects } from '@cssearth/objects/node';
@@ -156,10 +156,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     if (radiusM === undefined) throw new TypeError(`World context lacks a physical radius for ${body.id}.`);
     // A star other than the focus is placed, not orbiting: the context carries its position and radius and draws no trajectory.
     // A planet of another star closes its orbit around that star, which makes the star the root of its own planetary system.
-    // An extreme trans-Neptunian object closes its orbit too: the whole ellipse, where it points and how far it reaches, is what
-    // the map shows it for (site/build/prepare/prepare-world-presentation.mts keeps these orbits in the default view).
     const classification = classifications.get(body.id);
-    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : classification === 'star' || classification === 'black-hole' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' || isExtremeTransNeptunian(body.id) ? 'closed' : 'trail', classification };
+    facts[body.id] = { radiusM, orbitStyle: hostedStarIds.has(body.id) ? 'trail' : hostedIds.has(body.id) ? 'closed' : classification === 'star' || classification === 'black-hole' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
   }
   // A star measured to be bound to another with no measured orbit carries the pair's centre of mass, weighted by the
   // published masses (as gravitational parameters) at the two prepared positions.

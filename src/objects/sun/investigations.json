@@ -151,9 +151,9 @@
     },
     {
       "id": "extreme-tno-orbit-only",
-      "subject": "Extreme trans-Neptunian objects drawn from their orbit alone",
+      "subject": "Extreme trans-Neptunian objects drawn from their record alone",
       "status": "included",
-      "finding": "Alicanto (2004 VN112), 2013 RF98, 2007 TG422, 2010 GB174, 2015 BP519 and 2023 KQ14 have Horizons orbits but no paper states one size for them (JPL lists only H; Becker et al. 2018 and Chen et al. 2025 give ranges). They are drawn from their astronomy records as a dot and orbit with no page; each record notes why its radius is 0.",
+      "finding": "Alicanto (2004 VN112), 2013 RF98, 2007 TG422, 2010 GB174, 2015 BP519 and 2023 KQ14 have Horizons orbits but no paper states one size for them (JPL lists only H; Becker et al. 2018 and Chen et al. 2025 give ranges). They are drawn from their astronomy records as a named dot with no page, their orbits hidden like other trans-Neptunian orbits; each record notes why its radius is 0.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/alicanto.json",
         "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2013-rf98.json",

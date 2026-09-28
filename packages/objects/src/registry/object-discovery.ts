@@ -42,7 +42,8 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     compact?: boolean;
     /** Bodies of a system: each body that orbits another, and each body something orbits. */
     systemMembers?: ReadonlySet<string>;
-    /** Bodies the map shows by their measured orbit even when their page is only an illustration (extreme trans-Neptunian objects). */
+    /** Bodies the map shows as named dots, placed by their measured orbit, even when their page is only an illustration (extreme
+     * trans-Neptunian objects). */
     orbitFeatures?: ReadonlySet<string> }) {
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
