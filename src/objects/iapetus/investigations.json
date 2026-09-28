@@ -73,6 +73,17 @@
         "https://ntrs.nasa.gov/citations/19840066646"
       ],
       "revisitWhen": "The fitted emission range of Squyres et al. (1984), or a Cassini disc-resolved Iapetus law with its ranges, is read in the paper."
+    },
+    {
+      "id": "map-left-edge-2026-09-28",
+      "subject": "Surface map left edge after the raster lane change",
+      "status": "included",
+      "finding": "The shared raster lane writes a 0–360° E atlas, but surface-map.json still declared the retired atlas's 180° E left edge, so the globe was drawn 180° from its frame. Atlas luminance, Gazetteer craters on the minimap and the source catalogue all give 0° E; the declaration is now 0° E. Rhea, Dione, Tethys, Enceladus and Mimas pass the same crater check at their declared edges.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/README.md#evidence",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/evidence/map-edge-2026-09-28.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iapetus/source/observations/catalog.json"
+      ]
     }
   ]
 }

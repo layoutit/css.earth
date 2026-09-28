@@ -441,6 +441,14 @@ export async function redrawOnlyDecision(objectDirectory: string): Promise<{ red
     if (without(JSON.parse(bytes.toString('utf8')), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
     acceptChanged.push(id);
   }
+  // A redraw carries the published feature anchors, which were placed with the left edge the published feature record states.
+  const surfaceMap = (source(sources, 'features')?.value as { surfaceMap?: unknown } | undefined)?.surfaceMap;
+  if (typeof surfaceMap === 'string') {
+    const edge = (JSON.parse(await readFile(resolve(objectDirectory, 'source', surfaceMap), 'utf8')) as { mapLeftEdgeLongitudeDeg?: unknown }).mapLeftEdgeLongitudeDeg;
+    const publishedEdge = await readFile(resolve(objectDirectory, 'prepared/features.json'), 'utf8')
+      .then(text => (JSON.parse(text) as { mapLeftEdgeLongitudeDeg?: unknown }).mapLeftEdgeLongitudeDeg, () => undefined);
+    if (publishedEdge !== edge) return { redraw: false, reason: `the surface map's left edge is ${String(edge)}° E, but the published feature anchors used ${String(publishedEdge)}° E` };
+  }
   return { redraw: true, acceptChanged, reason: acceptChanged.length ? `only ${acceptChanged.map(id => `${id} ${REDRAWN_KEYS[id]!.join('/')}`).join(', ')} changed` : 'no recipe changed' };
 }
 
