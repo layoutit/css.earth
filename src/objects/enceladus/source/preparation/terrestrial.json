@@ -194,6 +194,119 @@
           "latitudeDegrees": -20,
           "zoom": 1.1
         }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "geology/enceladus-geologic-units.tif",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "categories": [
+          {
+            "value": "LH curvilinear material",
+            "label": "LH curvilinear material",
+            "color": "#df73ff"
+          },
+          {
+            "value": "LH smooth material",
+            "label": "LH smooth material",
+            "color": "#2f5b00"
+          },
+          {
+            "value": "TH curvilinear material",
+            "label": "TH curvilinear material",
+            "color": "#9700b4"
+          },
+          {
+            "value": "central LH",
+            "label": "Central LH",
+            "color": "#005ce6"
+          },
+          {
+            "value": "central south polar material",
+            "label": "Central south polar material",
+            "color": "#bee8ff"
+          },
+          {
+            "value": "equatorial cratered plains",
+            "label": "Equatorial cratered plains",
+            "color": "#d7c29e"
+          },
+          {
+            "value": "heavily cratered plains",
+            "label": "Heavily cratered plains",
+            "color": "#d7c29e"
+          },
+          {
+            "value": "northern lineated material",
+            "label": "Northern lineated material",
+            "color": "#ffff73"
+          },
+          {
+            "value": "ridged material",
+            "label": "Ridged material",
+            "color": "#e60000"
+          },
+          {
+            "value": "southern curvilinear material",
+            "label": "Southern curvilinear material",
+            "color": "#4c0073"
+          },
+          {
+            "value": "striated plains",
+            "label": "Striated plains",
+            "color": "#e8beff"
+          },
+          {
+            "value": "subdued cratered plains",
+            "label": "Subdued cratered plains",
+            "color": "#ffebaf"
+          },
+          {
+            "value": "transitional material",
+            "label": "Transitional material",
+            "color": "#e9ffbe"
+          }
+        ],
+        "description": "Interpreted geologic units",
+        "title": "Crow-Willard and Pappalardo (2015) global geologic units, NASA Trek GIS release",
+        "sourceUrl": "https://doi.org/10.1002/2015JE004818",
+        "grid": {
+          "width": 2048,
+          "height": 1024,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 252100,
+          "noData": -32768,
+          "origin": [
+            -791995.5079699869,
+            395997.75398499344
+          ],
+          "resolution": [
+            773.4331132519403,
+            -773.4331132519403
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.25,
+        "minimum": 0,
+        "maximum": 12,
+        "colors": [
+          "#df73ff",
+          "#2f5b00",
+          "#9700b4",
+          "#005ce6",
+          "#bee8ff",
+          "#d7c29e",
+          "#d7c29e",
+          "#ffff73",
+          "#e60000",
+          "#4c0073",
+          "#e8beff",
+          "#ffebaf",
+          "#e9ffbe"
+        ]
       }
     ],
     "observedColors": [],

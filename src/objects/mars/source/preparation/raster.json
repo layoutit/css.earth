@@ -652,6 +652,156 @@
         "sourceUrl": "https://doi.org/10.1029/2022JE007298"
       },
       "resolutionScale": 0.5
+    },
+    {
+      "id": "albedo",
+      "source": "science/usgs/tes-albedo.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tes-albedo.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.06,
+          "maximum": 0.32,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "Lambert albedo (0.3–2.9 µm)",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2880,
+            "height": 1440,
+            "origin": [
+              -10670400,
+              5335200
+            ],
+            "resolutionMeters": 7410,
+            "referenceRadiusMeters": 3396000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -3.4028226550889045e+38
+          },
+          "qualityMasks": [
+            {
+              "format": "geotiff",
+              "path": "tes-albedo.tif",
+              "sampling": "nearest",
+              "minimum": 0.0605,
+              "grid": {
+                "width": 2880,
+                "height": 1440,
+                "origin": [
+                  -10670400,
+                  5335200
+                ],
+                "resolutionMeters": 7410,
+                "referenceRadiusMeters": 3396000,
+                "centerLongitude": 0,
+                "wrapLongitude": true,
+                "noData": -3.4028226550889045e+38
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thermal-inertia",
+      "source": "science/tes/global_ti_night_2007.img",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "global_ti_night_2007.img",
+          "labelPath": "global_ti_night_2007.lbl",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 600,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "J m⁻² K⁻¹ s⁻½",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 7200,
+            "height": 3600,
+            "pixelsPerDegree": 20,
+            "firstCentreLongitude": -179.975,
+            "firstCentreLatitude": 89.975,
+            "labelExtent": "edges",
+            "datasetId": "MGS-M-TES-5-TIMAP-V1.0",
+            "productId": "GLOBAL_TI_NIGHT_2007",
+            "noData": 0,
+            "noDataEvidence": "The data set catalogue gives the derived range as 5 to 5000 and says higher and lower values are not computed; 0 marks a cell without a value (https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat)."
+          },
+          "mask": {
+            "path": "global_ti_msk_night_2007.img",
+            "labelPath": "global_ti_msk_night_2007.lbl",
+            "productId": "GLOBAL_TI_msk_NIGHT_2007",
+            "withholdWhere": [
+              0
+            ],
+            "evidence": "datainfo.txt: a mask value of 0 marks pixels infilled by interpolation; the catalogue removes them by multiplying the map by the mask (https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/datainfo.txt, https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat)."
+          }
+        }
+      }
+    },
+    {
+      "id": "dust-cover",
+      "source": "science/tes/dci.vicar",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "vicar-grid",
+          "path": "dci.vicar",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.92,
+          "maximum": 0.99,
+          "colors": [
+            "#fde725",
+            "#5ec962",
+            "#21918c",
+            "#3b528b",
+            "#440154"
+          ],
+          "units": "mean emissivity, 1350–1400 cm⁻¹",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "pixelsPerDegree": 16,
+            "westEdgeLongitude": -180,
+            "northEdgeLatitude": 90,
+            "georeferenceEvidence": "ASU's catalogue record gives a 16 pixel-per-degree global grid (https://mars.asu.edu/data/tes_ruffdust/); at a −180° east left edge the map reproduces Ruff & Christensen (2002): Arabia 0.922 (dust-covered, ≤ 0.940), Syrtis Major 0.973 and Mare Erythraeum 0.968 (their regional average 0.970).",
+            "noData": [
+              0.85
+            ],
+            "noDataEvidence": "Exactly 0.85, 21% of cells, all poleward of about 60° N and 80° S, below every value the paper discusses (0.90 and up): a constant fill where TES data are excluded, not a measurement."
+          }
+        }
+      }
     }
   ],
   "atmosphere": {

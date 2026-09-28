@@ -1419,6 +1419,224 @@
           }
         ]
       }
+    },
+    {
+      "id": "dawn-grand-vesta-hydrogen-table",
+      "path": "grand/GRD_HYDROGEN_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-HYDROGEN-MAP-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hydrogen"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hydrogen-label",
+      "path": "grand/GRD_HYDROGEN_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 16,200 fixed-width records, the Claudia Double Prime frame, micrograms/gram and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hydrogen"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-iron-counts-table",
+      "path": "grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (migrated from PDS3 DAWN-A-GRAND-5-VESTA-GAMMA-IRON-COR-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-iron-counts-label",
+      "path": "grand/GRD_IRON_CORRECTED_COUNTS_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 178,698 fixed-width records on 0.5-degree equal-area pixels, counts/s and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hydrogen",
+      "path": "grand/vesta-hydrogen.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hydrogen"
+      ],
+      "lensId": "hydrogen",
+      "label": "Hydrogen",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "stepDegrees": 2
+      },
+      "coverage": "Hydrogen abundance (micrograms per gram of regolith) on 2-degree pixels from epithermal neutrons measured in low orbit, 2011-12-08 to 2012-01-14; effective resolution about 300 km FWHM. Every pixel has a value; no per-pixel uncertainty is archived.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-iron-counts",
+      "path": "grand/vesta-iron-counts.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "lensId": "iron",
+      "label": "Iron gamma rays",
+      "falseColor": true,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "stepDegrees": 0.5
+      },
+      "coverage": "Fe 7.6 MeV gamma-ray counting rate (counts/s) corrected for neutron number density, 0.5-degree equal-area pixels expanded onto 0.5-degree cells, 2011-12-08 to 2012-04-27; effective resolution about 300 km. Not an iron weight percent.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1548,6 +1766,70 @@
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
       "acquisition": "Extracted unmodified from the released PDS zip archive beside the pinned mosaic."
+    },
+    {
+      "path": "grand/vesta-hydrogen-longitude.npy",
+      "purpose": "Claudia east longitudes of the hydrogen grid columns (1 to 359 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-hydrogen-latitude.npy",
+      "purpose": "Latitudes of the hydrogen grid rows (-89 to 89 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-iron-counts-longitude.npy",
+      "purpose": "Claudia east longitudes of the iron grid columns (0.25 to 359.75 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-iron-counts-latitude.npy",
+      "purpose": "Latitudes of the iron grid rows (-89.75 to 89.75 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/prepare-grids.json",
+      "purpose": "Frame shift and table layout for the GRaND grids, citing the archive catalogue and coordinate document.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities."
+      }
     }
   ]
 }

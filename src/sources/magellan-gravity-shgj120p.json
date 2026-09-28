@@ -1,0 +1,27 @@
+{
+  "id": "magellan-gravity-shgj120p",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Magellan gravity maps from model SHGJ120P (MGN-V-RSS-5-GRAVITY-L2-V1.0)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/missions/magellan/gravity.htm",
+      "label": "Magellan gravity data at the PDS Geosciences Node"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/",
+      "label": "MG_5201 gravity maps"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

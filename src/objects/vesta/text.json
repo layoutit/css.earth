@@ -66,6 +66,16 @@
       "title": "HAMO clear-filter mosaic",
       "detail": "Dawn FC · 60 m/pixel source",
       "summary": "High-altitude photographs of the whole surface, north pole included under low sun; illumination and seams remain."
+    },
+    "hydrogen": {
+      "title": "GRaND hydrogen",
+      "detail": "Dawn GRaND",
+      "summary": "Hydrogen in the top decimetres, richest where dark carbon-rich material fell; each value blends about 300 km."
+    },
+    "iron": {
+      "title": "GRaND iron gamma rays",
+      "detail": "Dawn GRaND",
+      "summary": "Iron gamma-ray rate: basaltic eucrite reads higher than Rheasilvia's diogenite; each value blends about 300 km."
     }
   }
 }

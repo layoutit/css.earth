@@ -48,7 +48,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Minnaert coefficients of the cloud tops from MESSENGER MASCS (P\u00e9rez-Hoyos et al. 2018, Fig. 2: 1.35 at 657 nm, 1.36 at 547 nm, 1.32 at 467 nm), read from the vector figure because the authors' data file is offline.",
+      "finding": "Minnaert coefficients of the cloud tops from MESSENGER MASCS (Pérez-Hoyos et al. 2018, Fig. 2: 1.35 at 657 nm, 1.36 at 547 nm, 1.32 at 467 nm), read from the vector figure because the authors' data file is offline.",
       "evidence": [
         "https://doi.org/10.1002/2017JE005406",
         "https://arxiv.org/abs/1801.03820"
@@ -190,16 +190,67 @@
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts.",
+      "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts. Checked on working changes above 4ac6f0aefe; the evidence records the tested file hashes.",
       "evidence": [
-        "evidence/usgs-numeric/numeric-checks.json",
-        "README.md"
+        "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/venus/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/venus/README.md"
       ],
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
+          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
+        }
+      ]
+    },
+    {
+      "id": "magellan-fmap-left-look-radar",
+      "subject": "Magellan SAR FMAP left-look global mosaic as the Radar lens",
+      "status": "included",
+      "finding": "The Radar lens now reads the USGS FMAP left-look mosaic (75 m per pixel from F-BIDRs, cycles 1 and 3; native 506,928 x 230,948 bytes, 83.9996 N to 80.0106 S) through NASA Trek's WMTS zoom 4: 32 x 16 PNG tiles, 8192 x 4096 pixels, 0.0439 degrees (4.64 km) per pixel. The native file is 117 GB and has no overviews, so the Trek pyramid is the bounded route; its reduction kernel is undocumented, but each zoom-4 pixel differs from the mean of its four zoom-5 pixels by 1.2 DN on average against 1.5 to 2.6 DN for any single one, so it averages rather than decimates. Gray is the product DN, 0.2 x DN - 20.2 dB relative to the Muhleman law (USGS product page); the observed median is DN 103 (+0.4 dB), range 15 to 203. Transparent Trek pixels are no-data; partly transparent ones carry the DN averaged with zeros (gray is proportional to alpha), so values are divided by alpha where at least half the footprint is observed (8-bit error at most 1 DN) and marked missing below that. 7.75 per cent of the area between 80 S and 84 N is missing, 8.71 per cent of the globe. Maxwell Montes, Atla Regio and Beta Regio fall where the free-air gravity grid places them, and brightness correlates at r = 0.81 with the C3-MDIR map on the same grid at zero offset. At resolutionScale 4 the lossy-lane atlas (8320 x 6144, q80) is 2,629,358 bytes, 705,862 at scale 2 and 195,760 at scale 1, against 1,012,746 for the previous 2048-wide synthetic-colour atlas; lossless poles 98,866 against 445,994.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m",
+        "https://trek.nasa.gov/tiles/Venus/EQ/Venus_Magellan_LeftLook_mosaic_global_75m/1.0.0/WMTSCapabilities.xml",
+        "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_LeftLook_mosaic_global_75m_pds3.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
+        }
+      ]
+    },
+    {
+      "id": "magellan-c3-mdir-synthetic-colour",
+      "subject": "USGS C3-MDIR synthetic-colour radar mosaic as its own lens",
+      "status": "excluded",
+      "finding": "USGS describes the colourised C3-MDIR mosaic as developed to simulate the surface; its hue is not a measurement. On the 2048 x 1024 WMS image the lens used, colour predicted from brightness alone (the mean RGB of each luma level) leaves an RMS residual of 5.2 DN against a luma spread of 31.2 DN: one black-red-orange-yellow ramp over radar brightness. The lens also added a per-channel exposure curve and sharpening. The FMAP left-look lens shows the same radar brightness at four times the linear detail with a stated decibel scale, so a second, coloured copy adds no information. Its advantage is coverage: C3-MDIR fills the poles and the left-look gaps from other cycles.",
+      "revisitWhen": "A published calibration that gives the colour ramp a physical meaning, or a need for gap-free global radar coverage that the FMAP right-look or stereo mosaics cannot supply.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m",
+        "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_C3-MDIR_Colorized_Global_Mosaic_4641m_pds3.lbl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
+        }
+      ]
+    },
+    {
+      "id": "magellan-gravity-maps",
+      "subject": "Magellan radio-science free-air gravity, its error, Bouguer anomaly and geoid",
+      "status": "included",
+      "finding": "PDS Geosciences volume MGN-V-RSS-5-GRAVITY-L2-V1.0 (mg_5201) archives gridded maps only for the degree-120 model SHGJ120P (MGNP120PSAAP, Konopliv and Sjogren 1996): freeair.dat (DMGJ120P, vertical gravity in mGal with its one-sigma error as band 2), geoid.dat (DMOJ120P, metres, with error) and bouguer.dat (DMBJ120P, mGal), 1 x 1 degree, 180 x 360 big-endian float64 on a 6,051.0 km sphere. The degree-180 model MGNP180U (Konopliv et al. 1999) is archived only as coefficients (shgj180u.a01). NASA Trek's Float32 fairgrd, fairerr, bouggrd and geoidgrd layers are conversions of the archive's 8-bit byte-scaled images (1.91 mGal steps), so the float64 grids are preferred. A synthesis of SHGJ120P degrees 2 to 120 reproduces freeair.dat to 0.0037 mGal RMS and geoid.dat to 0.0031 m with longitude centres at integer degrees from 120 W, as the PDS3 labels state; the 2023 PDS4 labels place cell edges there instead, which leaves 5.4 mGal RMS. Values: free-air -100.4 to 386.5 mGal (maximum at Atla Regio, 0.5 N 195 E), error 1.76 to 21.72 mGal, geoid -66.1 to 154.5 m, error 0.14 to 2.29 m, Bouguer -975.8 to 198.1 mGal; the archive catalogue gives free-air errors of about 2 to 12 mGal within 30 degrees of the equator and 15 to 21 at high latitude, and geoid errors of 0.1 to 2.3 m. The shared pds3-grid reader now decodes these images; the gravity, gravity-uncertainty, bouguer and geoid lenses read them unchanged. MGNP180U stays unshown until a coefficient synthesis is added.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/",
+        "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/catalog/gravds.cat",
+        "https://doi.org/10.1006/icar.1999.6086",
+        "https://ntrs.nasa.gov/citations/19970037571"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
         }
       ]
     }

@@ -1,0 +1,39 @@
+{
+  "id": "genova-2019-mercury-hgm008",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "HgM008 MESSENGER gravity field of Mercury (Genova et al. 2019, Geodetic evidence that Mercury has a solid inner core)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1029/2018GL081135"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2018GL081135",
+      "label": "Genova et al. (2019), Geophysical Research Letters 46, 3625-3633"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl",
+      "label": "PDS Geosciences Node, MESSENGER RS SHADR GGMES_100V08 label"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/documents/15"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. Genova, S. Goossens, E. Mazarico, F. G. Lemoine, G. A. Neumann, W. Kuang, T. J. Sabaka, S. A. Hauck II, D. E. Smith, S. C. Solomon, M. T. Zuber",
+      "scope": "citation",
+      "evidence": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6662718/"
+    }
+  ]
+}

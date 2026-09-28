@@ -703,6 +703,91 @@
           }
         ]
       }
+    },
+    {
+      "id": "trek-enceladus-geologic-units-grid",
+      "path": "geology/enceladus-geologic-units.tif",
+      "origin": "https://doi.org/10.1002/2015JE004818",
+      "catalog": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
+      "credit": "Crow-Willard and Pappalardo (2015), JGR Planets 120, 928-950; GIS layer served by NASA Solar System Treks (JPL)",
+      "license": "United States Government scientific data served by NASA Solar System Treks; cite Crow-Willard and Pappalardo (2015)",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/enceladus/",
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the ArcGIS REST polygon response using geology/prepare-grid.json.",
+      "redistribution": "Retain authors and interpretation; unit colors come from the published GIS layer and are not observations.",
+      "consumers": [
+        "geology"
+      ],
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 252100
+      },
+      "coverage": "Pixel-center categorical grid of 13 published polygons. Overlapping or unmapped cells withheld: 3.48% of the sphere, mostly where subdued cratered plains and northern lineated material lie inside the heavily cratered plains polygon.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://doi.org/10.1002/2015JE004818"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-trek-enceladus-geologic-units-grid",
+            "role": "material",
+            "evidence": "Crow-Willard and Pappalardo (2015) global geologic units, NASA Trek layer Cassini_ISS_GeologicMapUnits_Global (item f308003d-67be-4e7b-b972-50fbb2d24d74, created 2023-09-29)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trek-enceladus-geologic-units-vector",
+      "path": "geology/Cassini_ISS_GeologicMapUnits_Global.query.json",
+      "origin": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&f=json",
+      "catalog": "https://trek.nasa.gov/enceladus/",
+      "credit": "Crow-Willard and Pappalardo (2015); NASA Solar System Treks (JPL)",
+      "license": "United States Government scientific data served by NASA Solar System Treks; cite Crow-Willard and Pappalardo (2015)",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/enceladus/",
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "ArcGIS REST query of layer 0, all fields, full geometry, native spatial reference (Plate Carree, central meridian 180, 252100 m sphere). Trek's file download route answered 'Access denied' on 2026-09-27; this service is the public vector route. Restore with the geology acquisition group.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-trek-enceladus-geologic-units-vector",
+            "role": "material",
+            "evidence": "NASA Trek MapServer layer Cassini_ISS_GeologicMapUnits_Global, 13 polygon records, retrieved 2026-09-27."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -865,6 +950,16 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "geology/prepare-grid.json"
+    },
+    {
+      "path": "geology/enceladus-geologic-units.json"
+    },
+    {
+      "path": "geology/Cassini_ISS_GeologicMapUnits_Global.layer.json",
+      "purpose": "Published GIS layer description: fields, extent, spatial reference and unit colors (renderer)."
     }
   ]
 }

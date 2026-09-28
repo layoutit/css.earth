@@ -729,6 +729,144 @@
         "notes": "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust."
       },
       {
+        "id": "gravity",
+        "label": "Gravity",
+        "thumbnail": "moon-lens-gravity.webp",
+        "surface": "moon-gravity@2x.webp",
+        "poles": "moon-poles-gravity@2x.webp",
+        "source": {
+          "id": "grail-grgm1200a-gravity-anomaly-l660",
+          "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Free-air gravity anomaly",
+          "labels": [
+            "\u2264\u2212400",
+            "0",
+            "\u2265400"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "\u2264\u2212400",
+              "0",
+              "\u2265400"
+            ]
+          },
+          "meta": "mGal",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color GRAIL free-air gravity anomaly from the GRGM1200A field summed to degree 660, in mGal on a 1,738 km sphere. Blue is weaker and red stronger gravity than a uniform Moon; colors span \u2212400 to +400 mGal and stronger values share the end colors. Topography is not removed, so high ground reads positive. Mission data 2012; the whole globe is covered.",
+        "notes": "False-color GRAIL free-air gravity anomaly from the GRGM1200A field summed to degree 660, in mGal on a 1,738 km sphere. Blue is weaker and red stronger gravity than a uniform Moon; colors span \u2212400 to +400 mGal and stronger values share the end colors. Topography is not removed, so high ground reads positive. Mission data 2012; the whole globe is covered."
+      },
+      {
+        "id": "bouguer-gravity",
+        "label": "Bouguer gravity",
+        "thumbnail": "moon-lens-bouguer-gravity.webp",
+        "surface": "moon-bouguer-gravity@2x.webp",
+        "poles": "moon-poles-bouguer-gravity@2x.webp",
+        "source": {
+          "id": "grail-grgm1200a-bouguer-disturbance-l660",
+          "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_boug_l660.tif"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Bouguer gravity disturbance",
+          "labels": [
+            "\u2264\u2212600",
+            "0",
+            "\u2265600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "\u2264\u2212600",
+              "0",
+              "\u2265600"
+            ]
+          },
+          "meta": "mGal",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color GRAIL Bouguer disturbance from the GRGM1200A field summed to degree 660, in mGal: gravity after the pull of LOLA topography, taken as rock of 2,500 kg/m\u00b3, is removed. Colors span \u2212600 to +600 mGal and stronger values share the end colors. Red usually marks dense mantle nearer the surface; mare basalt is not removed. The Crust view is a model derived from maps like this one.",
+        "notes": "False-color GRAIL Bouguer disturbance from the GRGM1200A field summed to degree 660, in mGal: gravity after the pull of LOLA topography, taken as rock of 2,500 kg/m\u00b3, is removed. Colors span \u2212600 to +600 mGal and stronger values share the end colors. Red usually marks dense mantle nearer the surface; mare basalt is not removed. The Crust view is a model derived from maps like this one."
+      },
+      {
         "id": "silicate-signature",
         "label": "Silicate signature",
         "thumbnail": "moon-lens-silicate-signature.webp",

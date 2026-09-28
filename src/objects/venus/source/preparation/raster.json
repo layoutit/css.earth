@@ -32,16 +32,11 @@
     },
     {
       "id": "radar",
-      "source": "surface/venus-magellan-color-wms.png",
+      "source": "surface/venus-magellan-fmap-left-look-z4.png",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
       "thumbnail": "venus-lens-{id}.webp",
-      "exposure": [
-        1.4,
-        2.2,
-        0.9
-      ],
-      "sharpen": 0.65
+      "resolutionScale": 4
     },
     {
       "id": "elevation",
@@ -224,7 +219,7 @@
             "#bad367",
             "#fff2aa"
           ],
-          "units": "RMS slope \u00b7 degrees",
+          "units": "RMS slope · degrees",
           "valueTransform": {
             "scale": 0.1,
             "offset": -0.1
@@ -246,6 +241,164 @@
             "centerLongitude": 0,
             "wrapLongitude": true,
             "noData": -99999
+          }
+        }
+      }
+    },
+    {
+      "id": "gravity",
+      "source": "science/mgn-gravity/freeair.dat",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "freeair.dat",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -200,
+          "maximum": 200,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal at 6,051 km radius",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 360,
+            "height": 180,
+            "pixelsPerDegree": 1,
+            "firstCentreLongitude": -120,
+            "firstCentreLatitude": 89.5,
+            "labelExtent": "centres",
+            "datasetId": "MGN-V-RSS-5-GRAVITY-L2-V1.0",
+            "noData": null,
+            "band": 1,
+            "productId": "RS-DMGJ120P.A01"
+          }
+        }
+      }
+    },
+    {
+      "id": "gravity-uncertainty",
+      "source": "science/mgn-gravity/freeair.dat",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "freeair.dat",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 22,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "mGal, one sigma",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 360,
+            "height": 180,
+            "pixelsPerDegree": 1,
+            "firstCentreLongitude": -120,
+            "firstCentreLatitude": 89.5,
+            "labelExtent": "centres",
+            "datasetId": "MGN-V-RSS-5-GRAVITY-L2-V1.0",
+            "noData": null,
+            "band": 2,
+            "productId": "RS-DMGJ120P.A01"
+          }
+        }
+      }
+    },
+    {
+      "id": "bouguer",
+      "source": "science/mgn-gravity/bouguer.dat",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "bouguer.dat",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -600,
+          "maximum": 600,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal at 6,051 km radius",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 360,
+            "height": 180,
+            "pixelsPerDegree": 1,
+            "firstCentreLongitude": -120,
+            "firstCentreLatitude": 89.5,
+            "labelExtent": "centres",
+            "datasetId": "MGN-V-RSS-5-GRAVITY-L2-V1.0",
+            "noData": null,
+            "band": 1,
+            "productId": "RS-DMBJ120P.A01"
+          }
+        }
+      }
+    },
+    {
+      "id": "geoid",
+      "source": "science/mgn-gravity/geoid.dat",
+      "falseColor": true,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "geoid.dat",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -100,
+          "maximum": 100,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "m above the reference ellipsoid",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 360,
+            "height": 180,
+            "pixelsPerDegree": 1,
+            "firstCentreLongitude": -120,
+            "firstCentreLatitude": 89.5,
+            "labelExtent": "centres",
+            "datasetId": "MGN-V-RSS-5-GRAVITY-L2-V1.0",
+            "noData": null,
+            "band": 1,
+            "productId": "RS-DMOJ120P.A01"
           }
         }
       }

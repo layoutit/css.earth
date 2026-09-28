@@ -15,6 +15,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-lens-albedo.webp",
+      "bytes": 3548,
+      "sha256": "ecea8754b59d5e286994b4f20f789a8dab409503dbf96aed04604074f64ce1c5"
+    },
+    {
+      "location": "public",
       "filename": "mars-lens-chlorine.webp",
       "bytes": 772,
       "sha256": "94620da6357a905ff2fba9cdd7efdcac471d87fbf394c041a243457cc49510bc"
@@ -24,6 +30,12 @@
       "filename": "mars-lens-crust.webp",
       "bytes": 466,
       "sha256": "3e0d1461cfbd7abb235bc988b84f8b7314c2cef49ac875dc110a6ffa6db57e33"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-dust-cover.webp",
+      "bytes": 3228,
+      "sha256": "08d6e8febe6f062eac0ff53c721027f7dc19e102125856b3a728c9812e8863d2"
     },
     {
       "location": "public",
@@ -69,6 +81,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-lens-thermal-inertia.webp",
+      "bytes": 3642,
+      "sha256": "8da2507962587d1f4cb429bfb4f3ea990f8f163869062a598771d6e9daf4e6ea"
+    },
+    {
+      "location": "public",
       "filename": "mars-lens-thermal.webp",
       "bytes": 80,
       "sha256": "8456d240ce4955ca29f1e118c9c8c8f94019a49bf17ee0453ef6d781b0dcef0d"
@@ -111,6 +129,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-poles-albedo@2x.webp",
+      "bytes": 233386,
+      "sha256": "7c9d62573b1f8df75e627891210bb6a9ef245e79317b147292f9577700c27a6f"
+    },
+    {
+      "location": "public",
       "filename": "mars-poles-chlorine@2x.webp",
       "bytes": 9526,
       "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b"
@@ -120,6 +144,12 @@
       "filename": "mars-poles-crust@2x.webp",
       "bytes": 57270,
       "sha256": "445766435963c05f5622bc55ba116fc24ea76902bd8f9e28665c16e41ccf0eba"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-dust-cover@2x.webp",
+      "bytes": 63290,
+      "sha256": "528ebb7b860b7e6362a8e5bfe279e0bb6f1a9f136b2b7178059e0218b6a38c2a"
     },
     {
       "location": "public",
@@ -165,6 +195,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-poles-thermal-inertia@2x.webp",
+      "bytes": 282470,
+      "sha256": "6f557103cc8714ef75f06379fbb97b4bdb40d01930e5f7c442211b179355bdac"
+    },
+    {
+      "location": "public",
       "filename": "mars-poles-thermal@2x.webp",
       "bytes": 240764,
       "sha256": "2de1715ab6991bb1926906b430b5ffbe25739e3007e41f905d05e29f4624a339"
@@ -189,6 +225,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-albedo@2x.webp",
+      "bytes": 6075284,
+      "sha256": "9dbb42ee8016b5813d0118057eb350ee7af1cef4a5f283b898c3ca128676d49b"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-chlorine@2x.webp",
       "bytes": 7926,
       "sha256": "da12e20c418420a93b500ccbe1e52fa69400d8620ffd3ee47b40deb7544a3851"
@@ -198,6 +240,12 @@
       "filename": "mars-surface-crust@2x.webp",
       "bytes": 46302,
       "sha256": "a42baafe346a90cf542f3d5692412777d5880a29dc9b8fef3125ac74f7efc8b8"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-dust-cover@2x.webp",
+      "bytes": 7485358,
+      "sha256": "3f902877f08b87bb017b88fdb3bd6dd7c2d8081503463435e64ea8b0a4a727c5"
     },
     {
       "location": "public",
@@ -243,6 +291,12 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-thermal-inertia@2x.webp",
+      "bytes": 15459460,
+      "sha256": "4a0768441b88efda9bbb1c0d49d23fee5982300074b2c79844f7d8a59d1483ee"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-thermal@2x.webp",
       "bytes": 3750322,
       "sha256": "d2c5da7d5f190f551e440aaa176ba4b8e301a215cdece65ba12cb00226128cc5"
@@ -274,14 +328,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 7523,
-      "sha256": "1333e0d9f3c4a86224b7df53a9c5f692eea57f9415a722630da3b2bb9827eb44"
+      "bytes": 9123,
+      "sha256": "39db26f8d934d22a40549d9dd0948e7e04633a8eae3e7e0a257d04432ca694c0"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1547,
-      "sha256": "694a895abc4ff3284c61922b1366ff34af06d38157a27005ebf4ee2b7aa0442e"
+      "sha256": "25802baeaa6fa3a10e9cd617e68f3ba68bd956eb2875c9e79fcd9c7b4a79d144"
     },
     {
       "location": "prepared",
@@ -292,8 +346,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 22177,
-      "sha256": "31048b2a724656d1ceb7c4b4547ff6ef53c92c3e40bb5c9c96808e0dfd155aef"
+      "bytes": 29506,
+      "sha256": "897d22caa92713384afa3e9e87a35101073145ab18197315bbd86fc6b21e681a"
     },
     {
       "location": "prepared",
@@ -304,14 +358,20 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 29688,
-      "sha256": "43e8ccc4651aef592a93fc71f11e97bd526efdd2ddc3d565ab24a26f00c0671a"
+      "bytes": 39091,
+      "sha256": "17a0468b81f48081e2308abf6c9e7b4d03dccf4272cb580b9f66e7817add6468"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 907,
-      "sha256": "83eb3fa756ce02b22e34024781b5aa26743fddcf45ff895b2bd94140a7913d00"
+      "bytes": 1146,
+      "sha256": "3ab67a750a190251f0e7a1d024b6ae6cfd08f80aeeb5396ed4c94209bd825682"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/albedo.webp",
+      "bytes": 16924,
+      "sha256": "01937d921cff4d3bd9b45456e2fccdac570216b13c07a681cac130fb8d9da978"
     },
     {
       "location": "prepared",
@@ -324,6 +384,12 @@
       "filename": "minimaps/crust.webp",
       "bytes": 3842,
       "sha256": "4bc7057a6084760bc265ee4467318cd19beb1c3035800e1874faaa5d823d8b9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/dust-cover.webp",
+      "bytes": 41960,
+      "sha256": "3c79124afa6fcff27d914a71a993a7c8ef83e77e6c6bb5d0f056727d310600cf"
     },
     {
       "location": "prepared",
@@ -369,6 +435,12 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/thermal-inertia.webp",
+      "bytes": 41832,
+      "sha256": "f9c9cc9f8dd54a9c533c3cd8bf7d02956db398bc21c3466340f8af5ac0cd8b64"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/thermal.webp",
       "bytes": 13288,
       "sha256": "f8760e02a76ce7796a163bd1df857f98006835d6ec7e6191c32f28dd39520e23"
@@ -388,8 +460,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 569214,
-      "sha256": "c3fff95160b4ad7e0746a6922e8d2caac29183dfa2d21d15e88aa89e7b8f5022"
+      "bytes": 590011,
+      "sha256": "5ccd3c978673bf2baf3b294e31cc3d4f78584a5ef5ecd5ddf4bd5a117fbd3770"
     },
     {
       "location": "prepared",
@@ -412,8 +484,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2816,
-      "sha256": "62c7facba1c38c447d480cddafdb61c3a5f4a602badb2a919030b6e57b532994"
+      "bytes": 3355,
+      "sha256": "0c2383981c652ae0aaab2eea35687904b3e55ac7d4868ec881ab70bdd0c11328"
     },
     {
       "location": "prepared",

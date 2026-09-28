@@ -104,6 +104,16 @@
               "material": "lighting"
             },
             {
+              "id": "gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "bouguer-gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "silicate-signature",
               "source": "content",
               "material": "lighting"

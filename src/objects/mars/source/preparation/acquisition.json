@@ -275,6 +275,71 @@
       "groups": [
         "refresh-usgs"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/usgs/tes-albedo.tif",
+      "url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_TES_Albedo_mosaic_global_7410m.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/usgs/tes-albedo-pds.lbl",
+      "url": "https://astrogeology.usgs.gov/ckan/dataset/a5083068-715f-448d-9ff7-463a72d7c903/resource/87c847fc-53fe-42bb-b823-ac8b8089571f/download/mars_mgs_tes_albedo_mosaic_global_7410m_pds3.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/usgs/tes-albedo-isis.lbl",
+      "url": "https://astrogeology.usgs.gov/ckan/dataset/a5083068-715f-448d-9ff7-463a72d7c903/resource/77cb978e-f586-4b04-a28f-1d6d5dfc8488/download/mars_mgs_tes_albedo_mosaic_global_7410m.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-tes"
+      ],
+      "path": "science/tes/global_ti_night_2007.img",
+      "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_night_2007.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-tes"
+      ],
+      "path": "science/tes/global_ti_night_2007.lbl",
+      "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_night_2007.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-tes"
+      ],
+      "path": "science/tes/global_ti_msk_night_2007.img",
+      "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_msk_night_2007.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-tes"
+      ],
+      "path": "science/tes/global_ti_msk_night_2007.lbl",
+      "url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/global_ti_msk_night_2007.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-tes"
+      ],
+      "path": "science/tes/dci.vicar",
+      "url": "https://www.mars.asu.edu/~ruff/DCI/dci_lo_ice_dust_16ppd_shifted.vicar"
     }
   ]
 }

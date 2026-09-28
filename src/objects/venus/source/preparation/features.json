@@ -19,7 +19,11 @@
     "elevation",
     "emissivity",
     "reflectivity",
-    "roughness"
+    "roughness",
+    "gravity",
+    "gravity-uncertainty",
+    "bouguer",
+    "geoid"
   ],
   "kinds": {
     "point": [

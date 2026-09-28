@@ -429,6 +429,24 @@
       ],
       "path": "maps/vesta-hamo-clear.png",
       "url": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "grand/GRD_HYDROGEN_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
     }
   ]
 }

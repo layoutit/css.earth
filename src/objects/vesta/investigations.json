@@ -190,6 +190,74 @@
           "commit": "b947d53638c5b4dc36e2b390f1941962e843d536"
         }
       ]
+    },
+    {
+      "id": "dawn-grand-hydrogen",
+      "subject": "Dawn GRaND hydrogen abundance map (PDS4 dawn-grand-vesta 1.0)",
+      "status": "included",
+      "finding": "The archived numeric table, not the NASA Vesta Trek colour render, is used: 16,200 two-degree pixels of hydrogen in micrograms per gram (Prettyman et al. 2012), 0.0 to 391.1, no missing pixels and no per-pixel uncertainty. The label says the rows run from -180 E, but the MIN_LON column starts each row at -30 E, so pixels are placed by their own bounds. The catalogue states Claudia Double Prime, 210 degrees from the Claudia frame of the other Vesta maps; tools/objects/source-authoring/vesta-grand/prepare-grids.mts moves whole pixels by that amount. Checks: the table's column longitudes correlate best with the Trek ColorHydrogen render at zero shift (red channel r = 0.75, swept in 10 degree steps); 4,000 random points read through the shared .npy reader equal a raw-table lookup at Claudia minus 210 degrees; the minimum lies at 303 E, 63 S (Claudia), inside Rheasilvia, as the paper describes. Effective resolution is about 300 km FWHM, far coarser than the 2 degree pixels.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_HYDROGEN_MAP_DS.CAT",
+        "https://doi.org/10.1126/science.1225354"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "93517193d21885d253c0590cf37b21c94330b4af"
+        }
+      ]
+    },
+    {
+      "id": "dawn-grand-iron-counts",
+      "subject": "Dawn GRaND corrected iron gamma-ray counting rate map",
+      "status": "included",
+      "finding": "Included as the archived quantity, a counting rate: 178,698 equal-area pixels, 0.5 degree tall, of 7.6 MeV Fe gamma rays in counts/s corrected for neutron number density (Yamashita et al. 2013), 0.0687 to 0.07746, no missing pixels. Every pixel boundary is a multiple of 0.5 degrees, so the expansion onto 720 x 360 cells is lossless. The catalogue's preliminary factor (Fe wt% = 189.2 x counts/s, scaled to 13.8 wt% mean howardite) is not applied because the catalogue itself advises caution. The uncorrected-counts table is a processing stage of the same measurement and is not added. The grid is written in four latitude bands because the shared .npy reader overflows the call stack on 259,200 values.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
+        "https://doi.org/10.1111/maps.12139"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "93517193d21885d253c0590cf37b21c94330b4af"
+        }
+      ]
+    },
+    {
+      "id": "yingst-2023-global-geologic-map",
+      "subject": "Global geologic map of Vesta, Yingst et al. (2023) linework",
+      "status": "unresolved",
+      "finding": "A reusable source exists: the ArcGIS layer package on Zenodo (record 19475473, CC BY 4.0, 2026-04-08) holds the polygons of the global map published as Yingst et al. (2023), PSJ 4:157, doi:10.3847/PSJ/acebe9. The shapefile has 136 polygons in 18 hybrid units that combine morphology with Dawn colour classes (for example 'Crater floor material, light blue', symbol cf4), in a 255 km plate carree grid in metres. Its frame is Claudia Double Prime: 19 of 40 Gazetteer craters of 20 to 300 km fall in crater units at zero shift against 9 at the 210 degree Claudia shift. It supersedes the preliminary 2014 map that NASA Vesta Trek shows as a colour render. Not prepared: the existing geology readers take degree shapefiles or GeoTIFFs whose central meridian must equal the recipe's, and none moves a source frame by 210 degrees, so the map cannot be placed on the Claudia mesh without a shared change or a derived re-seamed shapefile. Unit colours live only in the binary .lyr symbology. A second check on 2026-09-27: the .lyr symbology stores each unit colour as three CIE Lab doubles after an RgbColor class id; converting them to sRGB with the D65 or D50 white points, either matrix and either transfer curve leaves up to 0.48 of an 8-bit step, so no conversion reproduces integer author colours and the decoded values cannot be confirmed as the published ones.",
+      "revisitWhen": "The unit colours are recovered verifiably (a conversion of the .lyr Lab values that lands on integer RGB, or the legend of the published PSJ figure sampled and cited), and the shared geology tool shifts the rasterized grid 210 degrees into Claudia.",
+      "evidence": [
+        "https://zenodo.org/records/19475473",
+        "https://doi.org/10.3847/PSJ/acebe9",
+        "https://trek.nasa.gov/vesta/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "93517193d21885d253c0590cf37b21c94330b4af"
+        }
+      ]
+    },
+    {
+      "id": "gazetteer-prime-meridian",
+      "subject": "Prime meridian of the Gazetteer Vesta feature centres",
+      "status": "included",
+      "finding": "The Gazetteer centre points use Claudia Double Prime, 210 degrees from the Claudia frame of the maps and mesh; the labels were drawn 210 degrees from their features. With the 210-degree shift all 33 craters 15-80 km across within 40 degrees of the equator sit below the ring one diameter out in the HAMO terrain (median 3.7 km); without it 11 do. The surface map left edge is now 150 E in the Gazetteer frame.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT",
+        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/vesta/evidence/gazetteer-frame/crater-depressions.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
+        }
+      ]
     }
   ]
 }

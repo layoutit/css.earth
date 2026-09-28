@@ -152,11 +152,18 @@ export async function loadNpyLonLatGrid(root: string, value: unknown) {
   const transfer = frame && await loadSpinFrameTransfer(root, insideRoot(requireString(frame.path, 'frameTransfer.path'), 'frameTransfer.path'),
     insideRoot(requireString(frame.meshSpinPath, 'frameTransfer.meshSpinPath'), 'frameTransfer.meshSpinPath'));
   const decoded = decodeNpyLonLatGrid({ values, longitudes, latitudes }, transfer?.meshToGrid ?? null);
-  const finite = [...values.values].filter(Number.isFinite);
+  // A loop, not Math.min(...values): a spread of a few hundred thousand grid nodes overflows the call stack.
+  let mapped = 0, lowest = Infinity, highest = -Infinity;
+  for (const value of values.values) {
+    if (!Number.isFinite(value)) continue;
+    mapped += 1;
+    if (value < lowest) lowest = value;
+    if (value > highest) highest = value;
+  }
   return { ...decoded, report: { format: 'npy-lonlat-grid', grid: { width: decoded.width, height: decoded.height,
     longitudeNodes: [longitudes.values[0], longitudes.values[longitudes.values.length - 1]],
     latitudeNodes: [latitudes.values[0], latitudes.values[latitudes.values.length - 1]] },
-    mappedNodes: finite.length, valueRange: [Math.min(...finite), Math.max(...finite)], sampling: 'nearest-node',
+    mappedNodes: mapped, valueRange: [lowest, highest], sampling: 'nearest-node',
     ...(transfer ? { frameTransfer: transfer.report } : {}) } };
 }
 

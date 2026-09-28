@@ -1,0 +1,171 @@
+{
+  "tested": {
+    "base": "56ebf377c709190f7c97be24c1905225266fbed9",
+    "changes": "Uncommitted Mercury gravity and crust lens sources above this base; no bake was run."
+  },
+  "subject": "MESSENGER HgM008 gravity anomaly and crustal-thickness grids (NASA Mercury Trek) used by the Gravity and Crust lenses",
+  "checked": "2026-09-27",
+  "testedFiles": {
+    "source/science/gravity/anomaly-hgm008.tif": {
+      "bytes": 62962754,
+      "origin": "member Anomaly_Map_HgM008_Lmax90_16ppd.tif of https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe (archive 60,367,769 bytes)"
+    },
+    "source/science/gravity/crustal-thickness-hgm008.tif": {
+      "bytes": 65961152,
+      "origin": "member CrustalThickness_Map_HgM008_16ppd.tif of https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6 (archive 65,422,955 bytes)"
+    },
+    "DegreeStrength_Map_HgM008_4ppd.tif": {
+      "bytes": 9440593,
+      "origin": "member of https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=ce1982c6-f270-4a5b-9234-97c24d956ea5 (archive 7,297,728 bytes); read for the documented resolution limits only"
+    },
+    "ggmes_100v08_sha.tab": {
+      "bytes": 628544,
+      "origin": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.tab; coefficients for the independent synthesis check"
+    }
+  },
+  "grids": {
+    "gravityAnomaly": {
+      "dimensions": [
+        3600,
+        1800
+      ],
+      "cellDegrees": 0.1,
+      "sampleType": "float64",
+      "units": "mGal",
+      "declaredNoData": 9.969209968386869e+36,
+      "missingCells": 0,
+      "minimum": {
+        "value": -244.99,
+        "latitude": 53.55,
+        "eastLongitude": -136.35
+      },
+      "maximum": {
+        "value": 181.47,
+        "latitude": 67.35,
+        "eastLongitude": 27.85
+      },
+      "areaWeightedMean": 0.0,
+      "areaQuantiles": {
+        "0.1%": -160.5,
+        "1%": -90.8,
+        "5%": -56.3,
+        "50%": 0.2,
+        "95%": 57.4,
+        "99%": 91.5,
+        "99.9%": 129.8
+      },
+      "areaBeyondDisplayRange": "0.138% of the surface is beyond +/-150 mGal (endpoint colours)"
+    },
+    "crustalThickness": {
+      "dimensions": [
+        5760,
+        2880
+      ],
+      "cellDegrees": 0.0625,
+      "sampleType": "float32",
+      "units": "km",
+      "declaredNoData": "NaN",
+      "missingCells": 0,
+      "minimum": {
+        "value": -3.03,
+        "latitude": 27.34,
+        "eastLongitude": 57.34,
+        "note": "inside Rachmaninoff (Gazetteer centre 27.66 N, 57.37 E, 305 km)"
+      },
+      "maximum": {
+        "value": 70.07,
+        "latitude": 31.22,
+        "eastLongitude": 119.91
+      },
+      "negativeCells": 522,
+      "negativeAreaShare": "0.0044%",
+      "areaAbove70km": "0.00014%",
+      "areaWeightedMean": 34.4,
+      "paperMean": "35 km (Genova et al. 2019, Figure 1 caption)",
+      "meanDifference": "0.60 km lower than the stated average; cause not established",
+      "areaQuantiles": {
+        "0.1%": 15.36,
+        "1%": 19.65,
+        "5%": 23.13,
+        "50%": 33.94,
+        "95%": 47.42,
+        "99%": 53.9,
+        "99.9%": 62.07
+      }
+    },
+    "degreeStrength": {
+      "dimensions": [
+        1440,
+        720
+      ],
+      "cellDegrees": 0.25,
+      "units": "spherical-harmonic degree",
+      "range": [
+        10.9,
+        73.02
+      ],
+      "latitudeBands": [
+        {
+          "band": "60-90 N",
+          "min": 45.6,
+          "mean": 61.7,
+          "max": 73.0
+        },
+        {
+          "band": "30-60 N",
+          "min": 27.9,
+          "mean": 41.9,
+          "max": 66.1
+        },
+        {
+          "band": "0-30 N",
+          "min": 18.9,
+          "mean": 25.1,
+          "max": 35.9
+        },
+        {
+          "band": "0-30 S",
+          "min": 13.9,
+          "mean": 17.0,
+          "max": 24.0
+        },
+        {
+          "band": "30-60 S",
+          "min": 11.7,
+          "mean": 12.8,
+          "max": 15.1
+        },
+        {
+          "band": "60-90 S",
+          "min": 10.9,
+          "mean": 11.2,
+          "max": 11.9
+        }
+      ],
+      "halfWavelength": "pi x 2,440 km / degree: 105 km at degree 73, 124 km at 61.7, 508 km at 15.1, 703 km at 10.9"
+    }
+  },
+  "independentSynthesis": {
+    "method": "Fully normalized spherical-harmonic sum of the PDS HgM008 coefficients (GM 22031.863566 km3/s2, R 2440.0 km from the SHADR header) at 12 map cell centres, written without the Trek files or the production loader.",
+    "gravityAnomaly": {
+      "formula": "GM/R^2 * sum over degrees 2-90 of (l-1) * normalized harmonic, in mGal",
+      "maximumAbsoluteDifference_mGal": 0.15,
+      "rejectedVariants": {
+        "degrees 3-90, (l-1)": 18.6,
+        "degrees 2-90, (l+1)": 63.0
+      },
+      "finding": "The Trek grid is the free-air anomaly with degree 2 (flattening and tidal terms) included, evaluated on the 2,440 km reference sphere; cells are placed correctly in positive-east longitude."
+    },
+    "gravityDisturbance": {
+      "formula": "degrees 2-90, (l+1)",
+      "maximumAbsoluteDifference_mGal": 1.62,
+      "finding": "Matches the disturbance product; the product is not used."
+    },
+    "degree2Contribution": "Removing degree 2 changes the anomaly by 18.2 mGal at 0 N 0 E and 18.6 mGal at the north pole."
+  },
+  "sharedLoaderCheck": {
+    "gravity": "packages/bake/src/objects/raster/scientific-raster.ts loadScienceSurface accepted the native grid with the raster.json declaration; Caloris Planitia centre 117.72, Rachmaninoff -237.41, north pole -63.94, south pole -14.81 mGal.",
+    "crust": "Refused: 'Scientific source grid changed' because the file declares GDAL_NODATA 'nan' and the grid declaration cannot express NaN."
+  },
+  "limits": "These checks establish decoding, placement, units and the anomaly definition. They do not test the gravity solution or the crustal model, and no browser view was inspected."
+}

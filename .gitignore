@@ -112,6 +112,11 @@ src/objects/*/source/**/*.tab
 src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds
 
+# Numeric grids the missing-data lenses download through their acquisition plans.
+src/objects/venus/source/science/mgn-gravity/*.dat
+src/objects/mars/source/science/tes/*.img
+src/objects/mars/source/science/tes/*.vicar
+
 # Radar volume slices restored by range request. The small delay frame stays tracked as reader evidence.
 src/objects/*/source/telescopes/**/slices/*.dat
 !src/objects/mars/source/telescopes/mro-sharad-3d/slices/frame-x0640-y0710.dat

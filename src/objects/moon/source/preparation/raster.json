@@ -241,6 +241,104 @@
       "thumbnail": "moon-lens-{id}.webp"
     },
     {
+      "id": "gravity",
+      "source": "science/grail/gggrx_1200a_anom_l660.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "gggrx_1200a_anom_l660.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -400.0,
+          "maximum": 400.0,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.0625,
+              -0.0625
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -32767
+          }
+        }
+      }
+    },
+    {
+      "id": "bouguer-gravity",
+      "source": "science/grail/gggrx_1200a_boug_l660.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "gggrx_1200a_boug_l660.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -600.0,
+          "maximum": 600.0,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.0625,
+              -0.0625
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -32767
+          }
+        }
+      }
+    },
+    {
       "id": "silicate-signature",
       "source": "science/diviner-cf-2021-georeferenced.tif",
       "falseColor": true,
