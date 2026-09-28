@@ -39,7 +39,7 @@ Checks against the papers:
 - 2.7 µm band: the 5th–95th percentiles are 12.2–15.4% and the depth grows toward both poles. [Simon et al. 2020](https://doi.org/10.1126/science.abc3522) report 12 to 17% that correlates with latitude. The 3.4 µm band area has no published range to compare.
 - Every table row matches the centroid of the same-numbered triangle of its OBJ within 0.08 mm. This is the identity check between each table and its mesh.
 
-The display ranges come from the data or the producer. OLA and thermal-inertia ranges cover the archived values. The OVIRS ranges are the producer readme's suggested stretch, mean ± 2 standard deviations, rounded to the shown digits.
+The display ranges come from the data or the producer. OLA and thermal-inertia ranges cover the archived values. The OVIRS ranges are the [producer readme](https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt)'s suggested stretch, mean ± 2 standard deviations, rounded to the shown digits.
 
 ## Evidence
 

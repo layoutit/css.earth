@@ -391,15 +391,6 @@
         "restore",
         "refresh"
       ],
-      "path": "science/spectral/ovirs_eq3_maps_readme.txt",
-      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "science/gravity/overview.xml",
       "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.xml"
     }

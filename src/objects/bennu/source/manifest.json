@@ -1199,40 +1199,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "bennu-hydration-notes",
-      "path": "science/spectral/ovirs_eq3_maps_readme.txt",
-      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt",
-      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
-      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
-      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
-      "consumers": [
-        "hydration",
-        "carbon"
-      ],
-      "coverage": "Producer readme: band definitions, shape model, combination and suggested stretch.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "osiris-rex",
-            "missionId": "osiris-rex",
-            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-bennu-hydration",
-            "role": "material",
-            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [
