@@ -37,7 +37,7 @@ Omitting that flag also prepares title and context source images.
 `finalize-sources.mts` accepts `--inputs=<path>`. This selects the exact bodies
 to rewrite. Author the current source manifest and its canonical bindings before
 extracting a new body; the extractor does not infer source identities.
-The six later models use [outer-worlds/inputs.json](../outer-worlds/inputs.json).
+The six later models use [outer-worlds/inputs.json](../../../../packages/bake/authoring/outer-worlds/inputs.json).
 An input file may set `referenceDirectory` for its downloaded originals.
 After new astronomy records are built, run `node packages/bake/cli/prepare-solar-geometry.mts`
 before preparing their surfaces. The shared transport refresh helper is only
