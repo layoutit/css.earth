@@ -118,7 +118,7 @@ without page errors or failed requests; a 390 × 844, DPR 2 phone view also pass
 The recipes and numeric checks are;
 later changes retain main's Mineral signatures group and shorten these two
 selector subtitles to “Dawn VIR”. The shared focused checks and fresh delivery
-verification are recorded in [Io's qualification](../io/README.md#close-pass-volcanic-heat-27-september-2026).
+verification are recorded in [Io's qualification](../io/README.md#registered-volcanic-heat-27-september-2026).
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
