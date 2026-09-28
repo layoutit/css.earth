@@ -1,8 +1,8 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawn } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import ts from 'typescript';
 import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/delivery';
@@ -11,10 +11,10 @@ import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 const exec = promisify(execFile);
-const projectRoot = resolve(import.meta.dirname, '../..');
+const projectRoot = resolve(import.meta.dirname, '../../..');
 
 /** TypeScript resolves literal JSON imports, not the texture URLs inside their data. Keep the real JSON
  * inputs instead of substituting declarations or importing every object's image bank into a typecheck. */
@@ -163,4 +163,8 @@ export async function prepareTypecheck() {
   console.log('Typecheck preparation complete: source catalogues generated.');
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  // Entry script: `pnpm prepare:typecheck` (after pnpm build:tools).
+  if (process.argv.length !== 2) throw new TypeError('Usage: node .github/scripts/ci/prepare-typecheck.mts (after pnpm build:tools)');
+  await prepareTypecheck();
+}

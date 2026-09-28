@@ -130,7 +130,10 @@ its validators accept); the renderer never imports the bake.
   the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`), which the ownership inventory
   anchors on.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
-  minimap or preview raster is drawn from, read and checked. It imports no topic.
+  minimap or preview raster is drawn from, read and checked; the sidebar minimaps and preview rasters themselves, with the
+  coverage direction of each lens's map, which the world-navigation stage turns a partial lens toward. It imports the topics
+  `LOWER_TOPICS` declares for it (`raster`, `scene`, `objects/scene`, `objects/default-view`, `objects/interpretation` and
+  three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
   subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which

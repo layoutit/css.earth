@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
 import type { TestContext } from 'node:test';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import {mkdtemp, mkdir, readFile, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import sharp, { type OutputInfo } from 'sharp';
-import {prepareSurfaceMinimaps} from './prepare-surface-minimaps.mts';
+import {prepareSurfaceMinimaps} from '@cssearth/bake/surface-previews';
 import {DECORATIVE_WEBP} from '@cssearth/bake/raster';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 
 const colors=[[231,21,41],[13,211,31],[82,84,82]];
 async function directories(t: TestContext) {
@@ -44,7 +45,7 @@ test('nearest, categorical and facet minimaps keep the smaller of lossless and l
   const sourceBytes=Buffer.from(JSON.stringify({surfaces}));
   await writeFile(resolve(f.outputDirectory,'surfaces.json'),sourceBytes);
   await writeFile(resolve(f.source,'presentation/minimap.json'),JSON.stringify({centerLongitudeDegrees:0}));
-  const result=await prepareSurfaceMinimaps(f);
+  const result=await prepareSurfaceMinimaps({ ...f, solarGeometry });
   for(const entry of result){
     assert.deepEqual(entry.attribution,attribution);assert.equal(entry.width,640);assert.equal(entry.height,4);
     const actual=await readFile(resolve(f.outputDirectory,entry.path));

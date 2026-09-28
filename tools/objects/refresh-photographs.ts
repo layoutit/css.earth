@@ -49,8 +49,9 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   for (const filename of replacements.keys()) await copyFile(resolve(stage, filename), resolve(publicDirectory, filename));
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
   await updateInventory({ objectId: id, objectDirectory, location: 'public', assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) });
-  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare/prepare-surface-minimaps.mts')).href) as typeof import('../prepare/prepare-surface-minimaps.mts');
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
+  const { prepareSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds,
+    solarGeometry: await import(pathToFileURL(resolve('src/platform/solar-geometry.mts')).href) as SolarGeometry });
   await refreshSurfaceContent(id, lensIds);
   return { id, lenses: lensIds, assets: replacements.size, bytes: [...replacements.values()].reduce((sum, entry) => sum + entry.bytes, 0),
     seconds: (Date.now() - start) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024, stage };

@@ -44,10 +44,7 @@
       {"from":"tools/objects/prepare-spatial-context.ts","to":"site/build/prepare/jpl-mission-targets.mts"},
       {"from":"tools/objects/refresh-photographs.ts","to":"site/build/content/prepare.ts"},
       {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"},
-      {"from":"tools/prepare/prepare-chart-catalog.mts","to":"site/build/charts/charts.ts"},
-      {"from":"tools/prepare/prepare-charts.mts","to":"site/build/charts/charts.ts"},
-      {"from":"tools/prepare/prepare-object-json.mts","to":"site/object-page-contract.mts"},
-      {"from":"tools/prepare/refresh-charts.mts","to":"site/build/charts/charts.ts"}
+      {"from":"tools/prepare/prepare-object-json.mts","to":"site/object-page-contract.mts"}
     ],
     "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
