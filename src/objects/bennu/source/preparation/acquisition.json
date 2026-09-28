@@ -186,6 +186,222 @@
       "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm_v2.zip",
       "member": "Bennu_OSIRIS-REx_OCAMS_Photometric_Mosaics_25cm/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.History.IsisCube",
       "path": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.History.IsisCube"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv42/g_03170mm_spc_obj_0000n00000_v042.obj"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv42/g_03170mm_spc_obj_0000n00000_v042.obj.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/gravity/RSWG_bouguer_map_shape_Oct2021.fits",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/gravity/RSWG_bouguer_map_shape_Oct2021.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/gravity/overview.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_obj_0000n00000_v020.obj"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_obj_0000n00000_v020.obj.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/altimetry/g_01680mm_alt_elv_0000n00000_v020.fits",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_elv_0000n00000_v020.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/altimetry/g_01680mm_alt_elv_0000n00000_v020.fits.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_elv_0000n00000_v020.fits.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPOv34/g_06330mm_spo_obj_0000n00000_v034.obj"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPOv34/g_06330mm_spo_obj_0000n00000_v034.obj.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.fits",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7logfile.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7logfile.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.fits",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/spectral/ovirs_eq3_maps_readme.txt",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/gravity/overview.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.xml"
     }
   ]
 }

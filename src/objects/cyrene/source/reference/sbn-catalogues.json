@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "cyrene",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 133,
+    "by": "Horizons command 133;"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 98,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "133",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00133",
+          "Absolute_mag": "7.98",
+          "Slope_param": "+0.13",
+          "Mean_JD": "2455289.8675835",
+          "N_W1": "10",
+          "N_W2": "11",
+          "N_W3": "13",
+          "N_W4": "13",
+          "Fit_code": "DVBI",
+          "Diameter": "72.175",
+          "Diameter_err": "0.932",
+          "V_albedo": "0.218",
+          "V_albedo_err": "0.037",
+          "IR_albedo": "0.394",
+          "IR_albedo_err": "0.072",
+          "Beaming_param": "0.988",
+          "Beaming_param_err": "0.039",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139516,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "133",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00133",
+          "Absolute_mag": "7.98",
+          "Slope_param": "+0.13",
+          "Mean_JD": "2455568.8908050",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "63.838",
+          "Diameter_err": "2.821",
+          "V_albedo": "0.279",
+          "V_albedo_err": "0.029",
+          "IR_albedo": "0.530",
+          "IR_albedo_err": "0.079",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

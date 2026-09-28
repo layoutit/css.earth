@@ -159,6 +159,52 @@
           "#f1c45c",
           "#cc543d"
         ]
+      },
+      {
+        "id": "craters",
+        "label": "Crater catalogue",
+        "format": "geotiff",
+        "path": "craters/phobos-crater-rims.tif",
+        "consumer": "crater-catalogue",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "description": "Catalogued crater rims · PH9224GT",
+        "title": "Salamunićcar et al. (2014) PH9224GT catalogue of 9,224 Phobos craters, NASA Trek GIS layer",
+        "sourceUrl": "https://doi.org/10.1016/j.asr.2013.11.006",
+        "categories": [
+          {
+            "value": "crater rim",
+            "label": "Catalogued crater rim",
+            "color": "#73dfff"
+          }
+        ],
+        "grid": {
+          "width": 2880,
+          "height": 1440,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 11080,
+          "noData": -32768,
+          "origin": [
+            -34808.84660177491,
+            17404.423300887454
+          ],
+          "resolution": [
+            24.172810140121463,
+            -24.172810140121463
+          ],
+          "wrapLongitude": true
+        },
+        "underlay": {
+          "surface": "normal",
+          "brightness": 0.35,
+          "grayscale": true,
+          "bits": 6
+        },
+        "minimum": 0,
+        "maximum": 0,
+        "colors": [
+          "#73dfff"
+        ]
       }
     ],
     "observedColors": []

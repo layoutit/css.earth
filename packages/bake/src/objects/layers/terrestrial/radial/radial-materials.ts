@@ -122,7 +122,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     if (sourceSurface && (!scientific || !sourceSurface.samplePoint || !scientific.surfaceSampling)) throw new Error('Terrain science requires its source-point sampler and bound profile.');
     const sampleScience = scientific && sourceSurface?.samplePoint
       ? createRadialScienceColorSampler({samplePoint: sourceSurface.samplePoint}, scientific, config) : null;
-    const scalarSources = ['pds3-scalar-map', 'facet-scalars', 'vtk-cell-categories', 'obj-uv-fits'].includes(scientific?.format ?? '') && Buffer.alloc(width * height * 4);
+    const scalarSources = ['pds3-scalar-map', 'facet-scalars', 'vtk-cell-categories', 'obj-uv-fits', 'circle-catalogue'].includes(scientific?.format ?? '') && Buffer.alloc(width * height * 4);
     const observation = radial.observationSurfaces?.get(surface.id);
     // Direct source samplers never consume the flat preview, including its
     // withheld radial directions. Keep that map only for previews/minimaps.

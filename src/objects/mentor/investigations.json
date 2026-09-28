@@ -73,6 +73,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mentor/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Small Bodies Occultations V4.0 record 492, DAMIT model 4281 diameter 100 ± 3 km (volume-equivalent; DAMIT model 4281 fitted to 1 occultation) is not shown: the astronomy record takes its size from a publication (\"PDS Becker radar meshes: source-volume radii; GM unknown in Horizons.\"), and it differs from the astronomy record's mean radius 63.144 km (diameter 126.288 km).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

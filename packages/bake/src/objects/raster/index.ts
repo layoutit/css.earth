@@ -46,6 +46,7 @@ export * from './source-records.ts';
 export * from './numpy/tar-member.ts';
 export * from './tecplot-lonlat-map.ts';
 export * from './vtk-categories.ts';
+export * from './circle-catalogue.ts';
 export * from './whole-disc-colour.ts';
 export * from './wise-atlas-mosaic.ts';
 export * from './eclipse-map/bare-rock.ts';

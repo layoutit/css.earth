@@ -71,6 +71,19 @@
           "catalogueId": "nasa-haumea",
           "locator": "/references/0; orbital-period"
         }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.510 ± 0.020",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Ortiz et al. 2017",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/10/fields/ALBEDO; /tno/rows/10/fields/ALBEDO_ERROR_UPPER; /tno/rows/10/fields/ALBEDO_ERROR_LOWER; /tno/rows/10/fields/ALBEDO_COLOR; /tno/rows/10/fields/REFERENCE_CODE"
+        }
       }
     ]
   },

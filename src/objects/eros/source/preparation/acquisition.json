@@ -247,6 +247,24 @@
       "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
       "member": "data/eros_nearmsi_filter7.xml",
       "path": "reference/eros_nearmsi_filter7.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "ponds/erosshiftedponds_20190226_circles.csv",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/data/erosshiftedponds_20190226_circles.csv"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "ponds/erosshiftedponds_20190226_circles.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/data/erosshiftedponds_20190226_circles.xml"
     }
   ]
 }

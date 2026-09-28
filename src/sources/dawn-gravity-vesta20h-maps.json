@@ -1,0 +1,111 @@
+{
+  "id": "dawn-gravity-vesta20h-maps",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Dawn Vesta gravity maps from model VESTA20H (Dawn Vesta Gravity Science Derived Data Bundle, maps collection)",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17189/av2q-ka20"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0"
+    },
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-RSS-5-VEGR-V2.0"
+    }
+  ],
+  "creators": [
+    "R. S. Park",
+    "A. S. Konopliv",
+    "S. W. Asmar",
+    "D. R. Buccino"
+  ],
+  "publisher": "NASA Planetary Data System",
+  "publicationDate": "2025",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17189/av2q-ka20",
+      "label": "Dawn Vesta Gravity Science Derived Data Bundle 1.0"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/",
+      "label": "PDS4 maps collection"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/",
+      "label": "PDS3 volume DWNVGRS_2: the same image bytes with their detached PDS3 labels"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1016/j.icarus.2013.09.005",
+      "label": "Konopliv et al. (2014), The Vesta gravity field, spin pole and rotation period, landmark positions, and ephemeris"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/document/dawn-rss-der-vesta-bundle-desc.txt",
+      "checkedOn": "2026-09-28",
+      "locator": "JGDWN_VES20H_SHA File Description; Description of the Digital Map of the Radial Gravity, Radial Gravity Error, Bouguer and Vesta GEOID"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/document/errata.txt",
+      "checkedOn": "2026-09-28",
+      "locator": "Maps collection: the geoid is not valid for all points; the valid region is roughly between +-60 degrees latitude"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/bundle-dawn-rss-der-vesta.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, Citation_Information (authors, publication_year 2025, doi)"
+    },
+    {
+      "path": "src/objects/vesta/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar); cite Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; NASA Planetary Data System Small Bodies Node.",
+      "scope": "The VESTA20H radial gravity, radial gravity error, Bouguer and geoid maps.",
+      "evidence": "Bundle description: 'The reference for this gravity field is Konopliv et al.'"
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve the producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://pds.nasa.gov/datastandards/documents/policy/"
+    },
+    {
+      "kind": "limitation",
+      "text": "Longitudes are in a frame close to Claudia Double Prime (the field was rotated 210 degrees from the published Claudia frame), not the Claudia frame of the other Vesta maps.",
+      "scope": "Longitude frame.",
+      "evidence": "Bundle description, JGDWN_VES20H_SHA File Description and every map description."
+    },
+    {
+      "kind": "limitation",
+      "text": "The geoid is valid only within about 60 degrees of the equator, where the spherical-harmonic series converges.",
+      "scope": "JGDWN_VES20H_GEOID_0020.",
+      "evidence": "errata.txt and the map description."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "source-bennu-gravity-overview",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Origins, Spectral Interpretation, Resource Identification, Security, Regolith Explorer (OSIRIS-REx): Radio Science Working Group Derived Gravity Data Products",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:orex.derived_gravity:data:collection_overview::1.1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.txt",
+      "label": "PDS Small Bodies Node"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/13"
+    },
+    {
+      "path": "src/objects/bennu/source/science/gravity/overview.xml",
+      "locator": "/Product_Observational/Identification_Area"
+    }
+  ],
+  "publisher": "NASA Planetary Data System Small Bodies Node",
+  "relations": [],
+  "statements": [],
+  "version": "1.1"
+}

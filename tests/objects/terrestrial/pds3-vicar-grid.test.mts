@@ -112,6 +112,56 @@ END
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
+test('pds3-grid follows a detached pointer with a record and withholds cells beyond a stated valid latitude', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'pds3-grid-'));
+  try {
+    // Dawn gravity labels: ^IMAGE = ("NAME.IMG",1), cell centres on the grid lines, first row at the north pole (20 degree cells here).
+    const width = 18, height = 10, recordBytes = width * 8;
+    const label = (record: number) => `PDS_VERSION_ID = PDS3
+RECORD_TYPE = FIXED_LENGTH
+RECORD_BYTES = ${recordBytes}
+^IMAGE = ("GEOID.IMG",${record})
+DATA_SET_ID = "TEST-GEOID"
+PRODUCT_ID = "GEOID.IMG"
+OBJECT = IMAGE
+  LINES = ${height}
+  LINE_SAMPLES = ${width}
+  SAMPLE_TYPE = PC_REAL
+  SAMPLE_BITS = 64
+END_OBJECT = IMAGE
+OBJECT = IMAGE_MAP_PROJECTION
+  MAP_PROJECTION_TYPE = "SIMPLE CYLINDRICAL"
+  POSITIVE_LONGITUDE_DIRECTION = "EAST"
+  MAP_RESOLUTION = 0.05
+  MAXIMUM_LATITUDE = 90.0 <DEGREES>
+  MINIMUM_LATITUDE = -90.0 <DEGREES>
+  WESTERNMOST_LONGITUDE = 0.0 <DEGREES>
+  EASTERNMOST_LONGITUDE = 340.0 <DEGREES>
+END_OBJECT = IMAGE_MAP_PROJECTION
+END
+`;
+    const body = Buffer.alloc(recordBytes + width * height * 8);
+    for (let i = 0; i < width * height; i++) body.writeDoubleLE(100 + i, recordBytes + i * 8);
+    await writeFile(join(directory, 'GEOID.IMG'), body);
+    await writeFile(join(directory, 'first.lbl'), label(1));
+    await writeFile(join(directory, 'second.lbl'), label(2));
+    const lens = (labelPath: string, extra = {}) => ({ id: 'geoid', format: 'pds3-grid', path: 'GEOID.IMG', labelPath, sampling: 'nearest', ...extra,
+      grid: { width, height, pixelsPerDegree: 0.05, firstCentreLongitude: 0, firstCentreLatitude: 90, labelExtent: 'centres',
+        datasetId: 'TEST-GEOID', productId: 'GEOID.IMG', noData: null } });
+    const second = await loadPds3Grid(directory, lens('second.lbl'));
+    assert.equal(second.sample(0, 90), 100, 'the image starts at the named record');
+    assert.equal(second.sample(20, 10), 100 + 4 * width + 1);
+    assert.equal((await loadPds3Grid(directory, lens('first.lbl'))).sample(0, 90), 0, 'record 1 starts at the first byte');
+    const limited = await loadPds3Grid(directory, lens('second.lbl', { latitudeLimit: { maximumAbsolute: 60, evidence: 'valid within about 60 degrees' } }));
+    assert.equal(limited.sample(0, 90), null, 'a polar row beyond the valid latitude is withheld');
+    assert.equal(limited.sample(20, -50), 100 + 7 * width + 1, 'a row within the valid latitude keeps its value');
+    assert.equal(limited.sample(20, -70), null);
+    assert.equal(limited.report.withheldByLatitude, 4 * width);
+    assert.equal('withheldByLatitude' in second.report, false, 'a lens without a limit reports as before');
+    await assert.rejects(loadPds3Grid(directory, lens('second.lbl', { latitudeLimit: { maximumAbsolute: 60 } })), /latitudeLimit.evidence/u);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('vicar-grid reads either byte order, places the stated edges and withholds declared fills', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'vicar-grid-'));
   try {

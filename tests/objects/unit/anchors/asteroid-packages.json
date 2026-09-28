@@ -172,7 +172,13 @@
    "red",
    "near-infrared",
    "spectral",
-   "elevation"
+   "elevation",
+   "geopotential",
+   "slope",
+   "gravity-anomaly",
+   "thermal-inertia",
+   "hydration",
+   "carbon"
   ],
   "radiusM": 241.0
  },
@@ -382,7 +388,8 @@
    "infrared",
    "near-infrared-1000",
    "near-infrared-1050",
-   "elevation"
+   "elevation",
+   "ponds"
   ],
   "radiusM": 8420.0
  },

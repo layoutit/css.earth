@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "asteroid-1999-fr33",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 80000,
+    "by": "SBDB record des 80000"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 48616,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "80000",
+          "Prov_desig": "1999 FR33",
+          "MPC_packed_name": "80000",
+          "Absolute_mag": "13.90",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455259.9938045",
+          "N_W1": "0",
+          "N_W2": "0",
+          "N_W3": "9",
+          "N_W4": "9",
+          "Fit_code": "DVB-",
+          "Diameter": "5.754",
+          "Diameter_err": "0.174",
+          "V_albedo": "0.147",
+          "V_albedo_err": "0.032",
+          "IR_albedo": "0.220",
+          "IR_albedo_err": "0.048",
+          "Beaming_param": "1.196",
+          "Beaming_param_err": "0.064",
+          "Stacked_flag": "-",
+          "Reference": "Mas11",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas11": "Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 13 others, Main Belt Asteroids with WISE/NEOWISE. I. Preliminary Albedos and Diameters, Astroph. J. 741, 68, doi:10.1088/0004-637X/741/2/68, 2011."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

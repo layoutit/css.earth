@@ -1,0 +1,33 @@
+{
+  "id": "source-bennu-spc-v20-shape",
+  "kind": "model",
+  "identityLevel": "release",
+  "title": "Bennu Shape Model, g_03170mm_spc_obj_0000n00000_v020.obj",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:orex.altimetry:data_derived_altimetry_global_models:g_03170mm_spc_obj_0000n00000_v020.obj::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj",
+      "label": "PDS Small Bodies Node"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/26"
+    },
+    {
+      "path": "src/objects/bennu/source/shape/g_03170mm_spc_obj_0000n00000_v020.obj.xml",
+      "locator": "/Product_Observational/Identification_Area"
+    }
+  ],
+  "publisher": "NASA Planetary Data System Small Bodies Node",
+  "version": "1.0",
+  "relations": [],
+  "statements": []
+}

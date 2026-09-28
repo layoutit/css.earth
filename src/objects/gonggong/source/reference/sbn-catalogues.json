@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "gonggong",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 225088,
+    "by": "SBDB record des 225088"
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 280,
+        "fields": {
+          "AST_NUMBER": "225088",
+          "AST_NAME": "-",
+          "PROV_DESIG": "2007 OR10",
+          "COMPANION_DESIGNATION": "-",
+          "DYNAMICAL_TYPE": "3:1",
+          "SYSTEM_SEMIMAJOR_AXIS": "67.38",
+          "SYSTEM_ECCENTRICITY": "0.50",
+          "SYSTEM_INCLINATION": "31.",
+          "EFFECTIVE_DIAMETER": "1535.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "150.00",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.145",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.018",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "1519.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "150.00",
+          "PRIMARY_DIAMETER_CODE": "D",
+          "COMPANION_DIAMETER": "220.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "35.00",
+          "COMPANION_DIAMETER_CODE": "D",
+          "PRIMARY_SPIN": "44.810",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.370",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "2.930E+04",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "-9.99E+00",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "G",
+          "BINARY_ORBITAL_PERIOD": "6.800E+01",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "3.30E+01",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "-9.999",
+          "BINARY_ECCENTRICITY_ERROR": "-9.999",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.089",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.020",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "3.65E+21",
+          "SYSTEM_MASS_UNCERTAINTY": "2.15E+21",
+          "SYSTEM_MASS_CODE": "E",
+          "SYSTEM_DENSITY": "1.85",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.65",
+          "SYSTEM_DENSITY_CODE": "A"
+        }
+      }
+    ],
+    "references": {
+      "K17a": "Kiss, Cs., G. Marton, A. Farkas-Takacs, J. Stansberry, T. Muller, J. Vinko, Z. Balog, J.-L. Ortiz, and A. Pal, 2017, Discovery of a satellite of the large trans-Neptunian object (225088) 2007 OR10, Astrophys. J. Lett., 838:L1."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 280,
+        "fields": {
+          "AST_NUMBER": "225088",
+          "AST_NAME": "-",
+          "PROV_DESIG": "2007 OR10",
+          "COMPANION_DESIGNATION": "-",
+          "DISCOVERY_METHOD_CODE": "H",
+          "YEAR_ANNOUNCEMENT": "2016",
+          "YEAR_UPDATE": "2018",
+          "REF_CODE_EFFECTIVE_DIAMETER": "P16a",
+          "REF_CODE_DIAMETER_RATIO": "K17a",
+          "REF_CODE_PRIMARY_DIAMETER": "-",
+          "REF_CODE_COMPANION_DIAMETER": "-",
+          "REF_CODE_PRIMARY_SPIN": "P16a",
+          "REF_CODE_BINARY_SEMIMAJOR": "K17a",
+          "REF_CODE_BINARY_PERIOD": "K17a",
+          "REF_CODE_BINARY_ECCENTRICITY": "-",
+          "REF_CODE_PRIMARY_ALBEDO": "P16a",
+          "REF_CODE_SYSTEM_MASS": "K17a",
+          "REF_CODE_SYSTEM_DENSITY": "K17a"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

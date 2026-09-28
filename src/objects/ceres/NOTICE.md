@@ -36,3 +36,5 @@ Clay band centre and Ammonium band centre: native `CMT_MOSAIC-BI_CENTER` and
 credited above. Numeric display ranges follow Ammannito et al. (2016),
 [LPSC 3020, Figure 2](https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf).
 The heat palette is authored; no paper figure is redistributed.
+
+Gravity, gravity uncertainty, Bouguer anomaly and geoid: JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model CERES18D, from Park, Konopliv, Asmar and Buccino (2025), Dawn Ceres Gravity Science Derived Data Bundle 1.0, NASA Planetary Data System Small Bodies Node, [doi:10.17189/c2eg-7x61](https://doi.org/10.17189/c2eg-7x61) (PDS3 `DAWN-A-RSS-5-CEGR-V4.0`). Public NASA PDS scientific data; retain this credit with the derived maps. The archived values are shown unchanged, one colour per 1° cell.

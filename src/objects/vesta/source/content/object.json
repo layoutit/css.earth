@@ -514,6 +514,226 @@
         },
         "notes": "Geologic units of the Yingst et al. (2023) global map, drawn in the authors' own ArcMap colours. Units combine landform with Dawn colour-ratio classes, so a name such as “light blue” describes the colour-ratio class, not the map colour. Moved from Claudia Double Prime into the Claudia frame of the other maps. Grey marks the few cells no polygon covers: a thin line at 30° E south of 25° S and the south-pole rows. Contacts and line features are not shown.",
         "noData": true
+      },
+      {
+        "id": "gravity",
+        "label": "Gravity",
+        "shortLabel": "Gravity",
+        "thumbnail": "/scenes/vesta/vesta-gravity-thumbnail.webp",
+        "surface": "vesta-gravity-surface@2x.webp",
+        "poles": "vesta-gravity-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial gravity without J2",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "≤−2000",
+            "0",
+            "≥2000"
+          ],
+          "meta": "mGal on a 290 × 265 km ellipsoid · Dawn VESTA20H",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/",
+          "image": "/scenes/vesta/vesta-gravity-legend.webp"
+        },
+        "source": {
+          "id": "dawn-gravity-vesta20h-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/"
+        },
+        "notes": "How strongly Vesta pulls at each place: radial gravity on a 290 × 265 km ellipsoid close to the surface, from degrees 2 to 20 of the field without J2, its overall flattening. JPL maps radial gravity because the series does not converge on the geoid, so a true gravity anomaly cannot be computed. Milligals (mGal): 1 mGal is 0.00001 m/s², and Vesta's mean surface gravity is about 25,300 mGal. Red pulls harder and blue weaker; values beyond ±2,000 mGal (0.16% of the surface, in Vestalia Terra) use endpoint colors. JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients. Degree 20 corresponds to features about 42 km across at the 265 km reference radius; Raymond et al. (2013) call the field accurate to about degree 20. Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "gravity-field",
+          "label": "Radial gravity"
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How strongly Vesta pulls at each place: radial gravity on a 290 × 265 km ellipsoid close to the surface, from degrees 2 to 20 of the field without J2, its overall flattening. JPL maps radial gravity because the series does not converge on the geoid, so a true gravity anomaly cannot be computed."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal): 1 mGal is 0.00001 m/s², and Vesta's mean surface gravity is about 25,300 mGal. Red pulls harder and blue weaker; values beyond ±2,000 mGal (0.16% of the surface, in Vestalia Terra) use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 20 corresponds to features about 42 km across at the 265 km reference radius; Raymond et al. (2013) call the field accurate to about degree 20. Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps."
+          }
+        ]
+      },
+      {
+        "id": "gravity-uncertainty",
+        "label": "Gravity",
+        "shortLabel": "Error",
+        "thumbnail": "/scenes/vesta/vesta-gravity-uncertainty-thumbnail.webp",
+        "surface": "vesta-gravity-uncertainty-surface@2x.webp",
+        "poles": "vesta-gravity-uncertainty-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Gravity uncertainty",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "85",
+            "170"
+          ],
+          "meta": "mGal, one sigma · Dawn VESTA20H",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/",
+          "image": "/scenes/vesta/vesta-gravity-uncertainty-legend.webp"
+        },
+        "source": {
+          "id": "dawn-gravity-vesta20h-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/"
+        },
+        "notes": "The one-sigma uncertainty of the radial gravity map at each place, mapped by JPL from the model's error covariance to degree 20. Milligals (mGal). Yellow is least certain: the error runs from 19 mGal near the equator to 169 mGal near the south pole. JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients. Degree 20 corresponds to features about 42 km across at the 265 km reference radius; Raymond et al. (2013) call the field accurate to about degree 20. Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "gravity-field",
+          "label": "Uncertainty"
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The one-sigma uncertainty of the radial gravity map at each place, mapped by JPL from the model's error covariance to degree 20."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal). Yellow is least certain: the error runs from 19 mGal near the equator to 169 mGal near the south pole."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 20 corresponds to features about 42 km across at the 265 km reference radius; Raymond et al. (2013) call the field accurate to about degree 20. Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps."
+          }
+        ]
+      },
+      {
+        "id": "bouguer",
+        "label": "Gravity",
+        "shortLabel": "Bouguer",
+        "thumbnail": "/scenes/vesta/vesta-bouguer-thumbnail.webp",
+        "surface": "vesta-bouguer-surface@2x.webp",
+        "poles": "vesta-bouguer-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Bouguer anomaly",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−250",
+            "0",
+            "250"
+          ],
+          "meta": "mGal on a 290 × 265 km ellipsoid · degree 15",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/",
+          "image": "/scenes/vesta/vesta-bouguer-legend.webp"
+        },
+        "source": {
+          "id": "dawn-gravity-vesta20h-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/"
+        },
+        "notes": "Radial gravity minus the pull the shape of Vesta would have at one uniform density: positive means denser material below. Raymond et al. (2013) describe a large positive anomaly at Vestalia Terra, a weaker one over the central mound of Rheasilvia and another over the equatorial troughs; all three read positive here. Milligals (mGal). Red marks extra mass below and blue a deficit. Values run from −156 to +238 mGal, inside the scale. JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients. The Bouguer map stops at degree 15, about 55 km, where JPL finds the Bouguer signal meets the model's error (the archive cites Konopliv et al. 2014, Section 4, Figure 5). Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "gravity-field",
+          "label": "Bouguer anomaly"
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Radial gravity minus the pull the shape of Vesta would have at one uniform density: positive means denser material below. Raymond et al. (2013) describe a large positive anomaly at Vestalia Terra, a weaker one over the central mound of Rheasilvia and another over the equatorial troughs; all three read positive here."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal). Red marks extra mass below and blue a deficit. Values run from −156 to +238 mGal, inside the scale."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The Bouguer map stops at degree 15, about 55 km, where JPL finds the Bouguer signal meets the model's error (the archive cites Konopliv et al. 2014, Section 4, Figure 5). Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps."
+          }
+        ]
+      },
+      {
+        "id": "geoid",
+        "label": "Gravity",
+        "shortLabel": "Geoid",
+        "thumbnail": "/scenes/vesta/vesta-geoid-thumbnail.webp",
+        "surface": "vesta-geoid-surface@2x.webp",
+        "poles": "vesta-geoid-surface@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Geoid height",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "≤−9000",
+            "0",
+            "≥9000"
+          ],
+          "meta": "m above the reference ellipsoid · Dawn VESTA20H",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/",
+          "image": "/scenes/vesta/vesta-geoid-legend.webp"
+        },
+        "source": {
+          "id": "dawn-gravity-vesta20h-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/"
+        },
+        "notes": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (281.0 km equatorial radius, flattening 0.1957). Meters. Values beyond ±9,000 m (0.26% of the shown area) use endpoint colors. The gray grid covers latitudes beyond 60°, where the archive says the geoid is not valid. JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients. Degree 20 corresponds to features about 42 km across at the 265 km reference radius; Raymond et al. (2013) call the field accurate to about degree 20. Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps.",
+        "step": {
+          "group": "gravity-field",
+          "label": "Geoid"
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (281.0 km equatorial radius, flattening 0.1957)."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Meters. Values beyond ±9,000 m (0.26% of the shown area) use endpoint colors. The gray grid covers latitudes beyond 60°, where the archive says the geoid is not valid."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted VESTA20H to Deep Space Network Doppler and range tracking and optical landmarks, July 2011 to July 2012 (Konopliv et al. 2014). The later degree-26 model VESTA26J (Park et al. 2025) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 20 corresponds to features about 42 km across at the 265 km reference radius; Raymond et al. (2013) call the field accurate to about degree 20. Each 1° cell holds the model value at its centre, moved from Claudia Double Prime into the Claudia frame of the other maps."
+          }
+        ]
       }
     ]
   },

@@ -1,0 +1,134 @@
+import { readFile } from 'node:fs/promises';
+import { basename, resolve } from 'node:path';
+import { array, number, shape, text } from '@cssearth/core';
+import type { ClosestSurfacePoint, SourceMesh } from '../geometry/index.ts';
+import { parseCategory } from './source-records.ts';
+
+/** A published catalogue of surface circles: one row per feature with a body-fixed centre and a published diameter
+ * (the Roberts Eros ponds catalogue: 334 ponds, centres on the Gaskell SPC shape, Thomas's characteristic diameters).
+ * The circle is the set of source-surface points within half the published diameter of the centre, straight-line
+ * distance, after the centre is projected onto the rendered source mesh. It is the catalogue's characteristic size,
+ * never an outline. Category 1 is inside a circle, category 0 is surface outside every circle; nothing is interpolated. */
+const local = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.includes('\\') && !p.split('/').includes('..');
+const parseField = shape({ name: text, unit: text });
+export const parseCircleCatalogueLens = shape({
+  format: text, path: text, labelPath: text, meshPath: text, sampling: text, displaySampling: text,
+  categories: array(parseCategory),
+  table: shape({ expectedRecords: number, metersPerUnit: number, fields: array(parseField),
+    idField: text, centerFields: array(text), diameterField: text, latitudeField: text, longitudeField: text, distanceField: text,
+    consistency: shape({ angleDegrees: number, distanceMeters: number }) }),
+  registration: shape({ maximumDistanceMeters: number }),
+  surfaceSampling: shape({ method: text, maximumDistanceMeters: number }),
+});
+type CircleLens = ReturnType<typeof parseCircleCatalogueLens>;
+
+export function validateCircleCatalogue(value: unknown, terrainValue: unknown) {
+  const lens = parseCircleCatalogueLens(value);
+  const terrain = shape({ path: text, simplification: shape({ maximumErrorMeters: number }) })(terrainValue);
+  const t = lens.table, names = t.fields.map(field => field.name), s = lens.surfaceSampling;
+  const named = [t.idField, ...t.centerFields, t.diameterField, t.latitudeField, t.longitudeField, t.distanceField];
+  if (lens.format !== 'circle-catalogue' || ![lens.path, lens.labelPath, lens.meshPath].every(local) || lens.meshPath !== terrain.path ||
+      !Number.isSafeInteger(t.expectedRecords) || t.expectedRecords < 1 || !(t.metersPerUnit > 0) ||
+      t.centerFields.length !== 3 || new Set(names).size !== names.length || named.some(name => !names.includes(name)) ||
+      !(t.consistency.angleDegrees > 0) || !(t.consistency.distanceMeters > 0) ||
+      !(lens.registration.maximumDistanceMeters > 0) ||
+      s.method !== 'closest-source-point' || !(s.maximumDistanceMeters > 0) || s.maximumDistanceMeters > terrain.simplification.maximumErrorMeters ||
+      lens.sampling !== 'nearest' || lens.displaySampling !== 'nearest' || lens.categories.length !== 2 ||
+      lens.categories.some(c => !c.value || !c.label || !/^#[0-9a-f]{6}$/i.test(c.color)) ||
+      new Set(lens.categories.map(c => c.value)).size !== 2) throw new TypeError('Invalid surface circle catalogue profile.');
+  return lens;
+}
+
+const tag = (xml: string, name: string) => new RegExp('<' + name + '(?:\\s[^>]*)?>([^<]+)</' + name + '>').exec(xml)?.[1]?.trim();
+
+/** A PDS4 Table_Delimited label must describe exactly the recipe's file, record count and named fields with their units. */
+export function checkDelimitedLabel(xml: string, lens: CircleLens) {
+  const fields = [...xml.matchAll(/<Field_Delimited>([\s\S]*?)<\/Field_Delimited>/g)].map(m => ({ name: tag(m[1]!, 'name'), unit: tag(m[1]!, 'unit') }));
+  if (tag(xml, 'file_name') !== basename(lens.path) || tag(xml, 'records') !== String(lens.table.expectedRecords) ||
+      tag(xml, 'field_delimiter') !== 'Comma' || tag(xml, 'record_delimiter') !== 'Carriage-Return Line-Feed' ||
+      tag(xml, 'fields') !== String(lens.table.fields.length) || fields.length !== lens.table.fields.length ||
+      fields.some((field, i) => field.name !== lens.table.fields[i]!.name || field.unit !== lens.table.fields[i]!.unit)) {
+    throw new Error(`${lens.labelPath}: the PDS label differs from the circle catalogue recipe.`);
+  }
+}
+
+/** Rows keep the catalogue's own numbers; the Cartesian centre must reproduce its printed latitude, longitude and distance. */
+export function parseCircleRows(csv: string, lens: CircleLens) {
+  const t = lens.table, column = (name: string) => t.fields.findIndex(field => field.name === name);
+  if (!csv.endsWith('\r\n') || csv.replace(/\r\n/g, '').includes('\n')) throw new Error(`${lens.path}: records must end in CRLF.`);
+  const lines = csv.slice(0, -2).split('\r\n');
+  if (lines.length !== t.expectedRecords) throw new Error(`${lens.path}: ${lines.length} records, the label states ${t.expectedRecords}.`);
+  const ids = new Set<number>();
+  return lines.map((line, row) => {
+    const cells = line.split(',');
+    if (cells.length !== t.fields.length || cells.some(cell => !/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(cell))) throw new Error(`${lens.path}: malformed record ${row + 1}.`);
+    const value = (name: string) => Number(cells[column(name)]);
+    const id = value(t.idField), center = t.centerFields.map(name => value(name) * t.metersPerUnit);
+    const diameterMeters = value(t.diameterField) * t.metersPerUnit;
+    if (!Number.isSafeInteger(id) || ids.has(id) || !(diameterMeters > 0)) throw new Error(`${lens.path}: record ${row + 1} needs a distinct id and a positive diameter.`);
+    ids.add(id);
+    const radius = Math.hypot(...center), latitude = Math.asin(center[2]! / radius) * 180 / Math.PI;
+    const longitude = (Math.atan2(center[1]!, center[0]!) * 180 / Math.PI + 360) % 360;
+    const dLon = Math.abs(longitude - ((value(t.longitudeField) % 360) + 360) % 360), angle = Math.max(Math.abs(latitude - value(t.latitudeField)), Math.min(dLon, 360 - dLon));
+    const distance = Math.abs(radius - value(t.distanceField) * t.metersPerUnit);
+    if (angle > t.consistency.angleDegrees || distance > t.consistency.distanceMeters) {
+      throw new Error(`${lens.path}: record ${id} centre disagrees with its printed latitude, longitude or distance (${angle.toFixed(5)}°, ${distance.toFixed(3)} m).`);
+    }
+    return { id, row, center, diameterMeters };
+  });
+}
+
+export function createCircleCatalogue(rows: ReturnType<typeof parseCircleRows>, lens: CircleLens, mesh: SourceMesh) {
+  const accepted: { id: number; point: readonly number[]; radius: number }[] = [], withheld: number[] = [], distances: number[] = [];
+  for (const row of rows) {
+    const hit = mesh.closestPoint(row.center, lens.registration.maximumDistanceMeters);
+    if (!hit) { withheld.push(row.id); continue; }
+    distances.push(hit.distanceMeters);
+    accepted.push({ id: row.id, point: hit.point, radius: row.diameterMeters / 2 });
+  }
+  const cellSize = Math.max(...accepted.map(circle => circle.radius)) * 2, cells = new Map<string, typeof accepted>();
+  const key = (p: readonly number[]) => p.map(n => Math.floor(n / cellSize)).join(',');
+  for (const circle of accepted) {
+    const low = circle.point.map(n => Math.floor((n - circle.radius) / cellSize)), high = circle.point.map(n => Math.floor((n + circle.radius) / cellSize));
+    for (let x = low[0]!; x <= high[0]!; x++) for (let y = low[1]!; y <= high[1]!; y++) for (let z = low[2]!; z <= high[2]!; z++) {
+      const k = `${x},${y},${z}`; if (!cells.has(k)) cells.set(k, []); cells.get(k)!.push(circle);
+    }
+  }
+  /** Inside the circle whose edge is proportionally farthest away; the lower catalogue id breaks a tie. */
+  function classify(hit: ClosestSurfacePoint) {
+    let selected: (typeof accepted)[number] | undefined, best = Infinity;
+    for (const circle of cells.get(key(hit.point)) ?? []) {
+      const score = Math.hypot(...hit.point.map((n, i) => n - circle.point[i]!)) / circle.radius;
+      if (score <= 1 && (score < best || (score === best && selected && circle.id < selected.id))) { selected = circle; best = score; }
+    }
+    return { ...hit, value: selected ? 1 : 0, sourceCell: selected?.id ?? 0 };
+  }
+  function samplePoint(point: readonly number[]) {
+    const hit = mesh.closestPoint(point, lens.surfaceSampling.maximumDistanceMeters);
+    return hit && classify(hit);
+  }
+  const sorted = [...distances].sort((a, b) => a - b);
+  return {
+    samplePoint,
+    sample(longitude: number, latitude: number) {
+      const hit = mesh.hit(longitude, latitude, true);
+      if (!hit) return null;
+      const lon = longitude * Math.PI / 180, lat = latitude * Math.PI / 180;
+      return samplePoint([Math.cos(lat) * Math.cos(lon), Math.cos(lat) * Math.sin(lon), Math.sin(lat)].map(n => n * hit.radius))?.value ?? null;
+    },
+    report: { sourceFormat: lens.format, sourceTable: basename(lens.path), sourceMesh: lens.meshPath, records: rows.length,
+      acceptedCircles: accepted.length, withheldCircles: withheld,
+      centreRegistrationMeters: { median: sorted[Math.floor(sorted.length / 2)] ?? null, maximum: sorted.at(-1) ?? null, limit: lens.registration.maximumDistanceMeters },
+      diameterMeters: { minimum: Math.min(...rows.map(r => r.diameterMeters)), maximum: Math.max(...rows.map(r => r.diameterMeters)) },
+      registration: 'Each catalogued centre is projected to the closest point of the rendered source mesh within the stated limit; a texel takes the closest full-source surface point and is inside a circle when its straight-line distance to that projected centre is at most half the published diameter.',
+      policy: 'Published characteristic diameter drawn as a circle on the source surface; not an outline. Category 0 is surface outside every catalogued circle, not proof that no pond exists.' },
+  };
+}
+
+export async function loadCircleCatalogue(root: string, value: unknown, mesh?: SourceMesh | null) {
+  const lens = parseCircleCatalogueLens(value);
+  if (!mesh?.closestPoint || !mesh.hit) throw new Error('A surface circle catalogue needs the complete rendered source mesh.');
+  const [csv, xml] = await Promise.all([readFile(resolve(root, lens.path), 'latin1'), readFile(resolve(root, lens.labelPath), 'utf8')]);
+  checkDelimitedLabel(xml, lens);
+  return createCircleCatalogue(parseCircleRows(csv, lens), lens, mesh);
+}

@@ -81,6 +81,11 @@
       "title": "NEAR MSI · 1050 nm",
       "detail": "NEAR MSI",
       "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "ponds": {
+      "title": "Roberts Eros Ponds Catalog V1.1",
+      "detail": "Roberts · PDS SBN",
+      "summary": "Flat deposits of fine material in small hollows, drawn at each pond's measured size. Unmarked ground may still hold ponds."
     }
   }
 }

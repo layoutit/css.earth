@@ -2091,6 +2091,366 @@
           }
         ]
       }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accel-img",
+      "path": "gravity/JGDWN_VES20H_ACCEL_0020.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCEL_0020.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity"
+      ],
+      "lensId": "gravity",
+      "label": "Radial gravity without J2",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "How strongly Vesta pulls at each place: radial gravity on a 290 × 265 km ellipsoid close to the surface, from degrees 2 to 20 of the field without J2, its overall flattening. JPL maps radial gravity because the series does not converge on the geoid, so a true gravity anomaly cannot be computed. Milligals (mGal): 1 mGal is 0.00001 m/s², and Vesta's mean surface gravity is about 25,300 mGal. Red pulls harder and blue weaker; values beyond ±2,000 mGal (0.16% of the surface, in Vestalia Terra) use endpoint colors.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCEL_0020.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0; PDS3 product JGDWN_VES20H_ACCEL_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accel-lbl",
+      "path": "gravity/JGDWN_VES20H_ACCEL_0020.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCEL_0020.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCEL_0020.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0; PDS3 product JGDWN_VES20H_ACCEL_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accerr-img",
+      "path": "gravity/JGDWN_VES20H_ACCERR_0020.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCERR_0020.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity-uncertainty"
+      ],
+      "lensId": "gravity-uncertainty",
+      "label": "Gravity uncertainty",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "The one-sigma uncertainty of the radial gravity map at each place, mapped by JPL from the model's error covariance to degree 20. Milligals (mGal). Yellow is least certain: the error runs from 19 mGal near the equator to 169 mGal near the south pole.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCERR_0020.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0; PDS3 product JGDWN_VES20H_ACCERR_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accerr-lbl",
+      "path": "gravity/JGDWN_VES20H_ACCERR_0020.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCERR_0020.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity-uncertainty"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCERR_0020.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0; PDS3 product JGDWN_VES20H_ACCERR_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-bou-img",
+      "path": "gravity/JGDWN_VES20H_BOU_0015.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_BOU_0015.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "bouguer"
+      ],
+      "lensId": "bouguer",
+      "label": "Bouguer anomaly",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "Radial gravity minus the pull the shape of Vesta would have at one uniform density: positive means denser material below. Raymond et al. (2013) describe a large positive anomaly at Vestalia Terra, a weaker one over the central mound of Rheasilvia and another over the equatorial troughs; all three read positive here. Milligals (mGal). Red marks extra mass below and blue a deficit. Values run from −156 to +238 mGal, inside the scale.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_BOU_0015.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0; PDS3 product JGDWN_VES20H_BOU_0015.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-bou-lbl",
+      "path": "gravity/JGDWN_VES20H_BOU_0015.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_BOU_0015.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "bouguer"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_BOU_0015.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0; PDS3 product JGDWN_VES20H_BOU_0015.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-geoid-img",
+      "path": "gravity/JGDWN_VES20H_GEOID_0020.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_GEOID_0020.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "geoid"
+      ],
+      "lensId": "geoid",
+      "label": "Geoid height",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (281.0 km equatorial radius, flattening 0.1957). Meters. Values beyond ±9,000 m (0.26% of the shown area) use endpoint colors. The gray grid covers latitudes beyond 60°, where the archive says the geoid is not valid.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_GEOID_0020.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0; PDS3 product JGDWN_VES20H_GEOID_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-geoid-lbl",
+      "path": "gravity/JGDWN_VES20H_GEOID_0020.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_GEOID_0020.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "geoid"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_GEOID_0020.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0; PDS3 product JGDWN_VES20H_GEOID_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

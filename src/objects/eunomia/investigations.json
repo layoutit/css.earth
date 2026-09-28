@@ -78,6 +78,18 @@
         "https://observations.lam.fr/astero/Data/15Eunomia/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/15_Eunomia_adam.obj"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Small Bodies Occultations V4.0 record 14, DAMIT model 5910 diameter 262 ± 7 km (volume-equivalent; DAMIT model 5910 fitted to 7 occultations) is not shown: the astronomy record takes its size from a publication (\"Vernazza et al. (2021), Table 1: mean ADAM/MPCD radii and masses; GM = G * mass.\"), and it differs from the astronomy record's mean radius 135 km (diameter 270 km). Baer et al. mass 3.18 × 10¹⁹ ± 2.98 × 10¹⁷ kg (record 105, Baer et al. 2011) is not shown: the astronomy record already carries GM 2.0356615 km³/s² (about 3.05e+19 kg with CODATA 2018 G), outside the catalogue uncertainty.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

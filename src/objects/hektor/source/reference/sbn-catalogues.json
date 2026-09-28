@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "hektor",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 624,
+    "by": "SBDB record des 624"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 326,
+        "fields": {
+          "Designation": "624",
+          "Name": "Hektor",
+          "Diameter_Nominal": "181.3",
+          "Uncert": "10.3",
+          "Dia_1": "173",
+          "Uncert_1": "15",
+          "Events_1": "18",
+          "Invalid_1": "0",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "232",
+          "Dia_2": "",
+          "Uncert_2": "",
+          "Events_2": "",
+          "Invalid_2": "",
+          "Model_Source_2": "",
+          "Model_Number_2": "",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_1": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 3,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_jupiter_trojans_csv::2.0",
+          "Asteroid_Number": "624",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00624",
+          "Absolute_mag": "7.20",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455227.7430055",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "11",
+          "N_W4": "11",
+          "Fit_code": "DVBI",
+          "Diameter": "147.369",
+          "Diameter_err": "2.325",
+          "V_albedo": "0.107",
+          "V_albedo_err": "0.011",
+          "IR_albedo": "0.155",
+          "IR_albedo_err": "0.011",
+          "Beaming_param": "0.740",
+          "Beaming_param_err": "0.017",
+          "Stacked_flag": "-",
+          "Reference": "Gr12b",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Gr12b": "Grav, T., A.K. Mainzer, J.M. Bauer, J.R. Masiero, C.R. Nugent, WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy, Astroph. J. 759, 49, doi:10.1088/0004-637X/759/1/49, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 23,
+        "fields": {
+          "AST_NUMBER": "624",
+          "AST_NAME": "Hektor",
+          "PROV_DESIG": "1907 XM",
+          "COMPANION_DESIGNATION": "I Skamandrios",
+          "DYNAMICAL_TYPE": "JL4",
+          "SYSTEM_SEMIMAJOR_AXIS": "5.26",
+          "SYSTEM_ECCENTRICITY": "0.02",
+          "SYSTEM_INCLINATION": "18.",
+          "EFFECTIVE_DIAMETER": "250.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "26.00",
+          "EFFECTIVE_DIAMETER_CODE": "D",
+          "D2_TO_D1_RATIO": "0.048",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.013",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "250.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "26.00",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "12.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "3.00",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "6.921",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "9.575E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "5.53E+01",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "2.965E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "2.88E-04",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.310",
+          "BINARY_ECCENTRICITY_ERROR": "0.030",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.023",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.001",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "7.90E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "1.40E+18",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.00",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.30",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "D15a": "Descamps, P., 2015, Dumb-bell-shaped equilibrium figures for fiducial contact-binary asteroids and EKBOs, Icarus, 245:64-79."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 23,
+        "fields": {
+          "AST_NUMBER": "624",
+          "AST_NAME": "Hektor",
+          "PROV_DESIG": "1907 XM",
+          "COMPANION_DESIGNATION": "I Skamandrios",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2006",
+          "YEAR_UPDATE": "2017",
+          "REF_CODE_EFFECTIVE_DIAMETER": "-",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "M14a",
+          "REF_CODE_COMPANION_DIAMETER": "M14a",
+          "REF_CODE_PRIMARY_SPIN": "M14a",
+          "REF_CODE_BINARY_SEMIMAJOR": "D15a",
+          "REF_CODE_BINARY_PERIOD": "D15a",
+          "REF_CODE_BINARY_ECCENTRICITY": "M14a",
+          "REF_CODE_PRIMARY_ALBEDO": "S05a",
+          "REF_CODE_SYSTEM_MASS": "M14a",
+          "REF_CODE_SYSTEM_DENSITY": "M14a"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

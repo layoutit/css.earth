@@ -1,0 +1,41 @@
+{
+  "id": "source-bennu-gravity-anomaly",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "OSIRIS-REx Bouguer Anomaly Map for Bennu's Estimated Gravity Field.",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:orex.derived_gravity:data:rswg_bouguer_map_shape_oct2021.fits::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.fits",
+      "label": "PDS Small Bodies Node"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/sciadv.abc3350",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/11"
+    },
+    {
+      "path": "src/objects/bennu/source/science/gravity/RSWG_bouguer_map_shape_Oct2021.xml",
+      "locator": "/Product_Observational/Identification_Area"
+    }
+  ],
+  "creators": [
+    "B. Rozitis"
+  ],
+  "publisher": "NASA Planetary Data System Small Bodies Node",
+  "version": "1.0",
+  "relations": [],
+  "statements": []
+}

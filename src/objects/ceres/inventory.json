@@ -21,6 +21,12 @@
     },
     {
       "location": "public",
+      "filename": "ceres-bouguer@2x.webp",
+      "bytes": 119770,
+      "sha256": "797e7de0ab92b6b608e6f1c504304532676b64de919a21f1ce23d2de47df9946"
+    },
+    {
+      "location": "public",
       "filename": "ceres-clay-band@2x.webp",
       "bytes": 3658868,
       "sha256": "909d3847f523e84a5c7b15f624e8adf65063dd92874c3b04d794f3749257e185"
@@ -51,6 +57,24 @@
     },
     {
       "location": "public",
+      "filename": "ceres-geoid@2x.webp",
+      "bytes": 72222,
+      "sha256": "41ade11338dc11f5e4179e7f39f3e3a44d798f78438189b0b2ff6429a6455d25"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-gravity-uncertainty@2x.webp",
+      "bytes": 21498,
+      "sha256": "f86bdade63fbcaec6af0d471997205030e8c3d29a898a554b24931d600010f8a"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-gravity@2x.webp",
+      "bytes": 119714,
+      "sha256": "5135882bc619eed35c04bad2437e24f5beb178078f46d53a114422f3be51774b"
+    },
+    {
+      "location": "public",
       "filename": "ceres-lens-ammonium-band.webp",
       "bytes": 3962,
       "sha256": "4ea7bbf76e6a16b212abadc0b0da56e6785bd02c4b78d5adb78daf13bd666661"
@@ -60,6 +84,12 @@
       "filename": "ceres-lens-ammonium-centre.webp",
       "bytes": 3244,
       "sha256": "adacd4936f8bfafa3f85d4042ec49b09f6b059b540911f46d26cd915a34e8c4f"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-lens-bouguer.webp",
+      "bytes": 3482,
+      "sha256": "584450f71b7d0c824c59c8cc8c3d110072a6e3ea5dc2c37e59455d69ed7c29db"
     },
     {
       "location": "public",
@@ -87,6 +117,24 @@
     },
     {
       "location": "public",
+      "filename": "ceres-lens-geoid.webp",
+      "bytes": 2310,
+      "sha256": "0353ae6bf91d192bd142d0b0efc1e6d80a9e033281c0271867fcb1e87c832d52"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-lens-gravity-uncertainty.webp",
+      "bytes": 906,
+      "sha256": "ad6d5f8d25201b75c81621cdf11eef66e0741d420eb632db5d9d63d04c845718"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-lens-gravity.webp",
+      "bytes": 3194,
+      "sha256": "ef0cb212f6e3c84f01da337c3348d5b4f7f21aad29a646f8b187b7816f944821"
+    },
+    {
+      "location": "public",
       "filename": "ceres-lens-normal.webp",
       "bytes": 854,
       "sha256": "39bebb57b23fdea57684a335339167e7392465f30addbe93190e4d176318ac05"
@@ -111,6 +159,12 @@
     },
     {
       "location": "public",
+      "filename": "ceres-poles-bouguer@2x.webp",
+      "bytes": 38462,
+      "sha256": "345efcfde5ea36b6514463c40fc30492cfd0af51bef9272586c2564d05dd69af"
+    },
+    {
+      "location": "public",
       "filename": "ceres-poles-clay-band@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
@@ -132,6 +186,24 @@
       "filename": "ceres-poles-enhanced@2x.webp",
       "bytes": 500466,
       "sha256": "7ff53068d31fdcef38ed724ca545cbfa03dc166fd6bd6784bbb054926270ff40"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-poles-geoid@2x.webp",
+      "bytes": 23504,
+      "sha256": "f5f6afa9ce96a5052ac939deaf21cfaf66e40f13e2d66788c14bcc5971c48a16"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-poles-gravity-uncertainty@2x.webp",
+      "bytes": 10354,
+      "sha256": "9f6f105637db72db8d84ce624824c9ffc6e4ada36e1bcd3ea5fc6ff10d7d439b"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-poles-gravity@2x.webp",
+      "bytes": 44170,
+      "sha256": "c6d26e38beb7b1b8c4746a22267065722c67c9b1f69fa9ad4d3efe7a5e5cb28c"
     },
     {
       "location": "public",
@@ -358,14 +430,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91190,
-      "sha256": "99ca92a08d53511638abbc7db0279a39f30b051def2e9a84df1b043a66f6f6f1"
+      "bytes": 93221,
+      "sha256": "a95b0382466f40da9841336bf2ec73ae8453d178e1979a97bffe3422e35777b7"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1420,
-      "sha256": "1e5e0699bd99429f5d8c2383cc206398b6a24eb0933cb77e3141ae13f0dc26b6"
+      "sha256": "a683ea2e3b9f30e16ad302252cb20a83e28322dd7db273a84aeccad2d619e9a5"
     },
     {
       "location": "prepared",
@@ -376,8 +448,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 8853,
-      "sha256": "1e6cf8cb46c4c1046519718892aa2359421105dc38f0cd9ebb7268143ff44ec1"
+      "bytes": 19561,
+      "sha256": "d543814f91e812198f88fd21047e38de0a0305e3a3ad274f27cc6eb059d06300"
     },
     {
       "location": "prepared",
@@ -388,8 +460,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 11230,
-      "sha256": "f0b9bdf07e199a271988590b74a4e6b2e60a2ab5749d36d826143645f2538989"
+      "bytes": 24508,
+      "sha256": "b280b5435366578d95177699072cd2ba5fdd34eea0a20889d4b9c95e95a898c7"
     },
     {
       "location": "prepared",
@@ -400,8 +472,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 568,
-      "sha256": "c6b52f878d998c8d2d6dc54ed7690003d639b7447f761def74f57f179d1d25c0"
+      "bytes": 880,
+      "sha256": "67d91d22fddd7e03dec8e3144ff11acf0e9515754af640327ed323d66f3f1b67"
     },
     {
       "location": "prepared",
@@ -414,6 +486,12 @@
       "filename": "minimaps/ammonium-centre.webp",
       "bytes": 44216,
       "sha256": "3dd71e22d4d7885ddc0feb7fda66d6400c5df2391147e74b3b2f3d68f5af35e5"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/bouguer.webp",
+      "bytes": 6414,
+      "sha256": "67b2e21af62c95accb2e82a78b1b6890f7e0c03aa6bb77f20e4b648c633477d2"
     },
     {
       "location": "prepared",
@@ -441,6 +519,24 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/geoid.webp",
+      "bytes": 3088,
+      "sha256": "2bbe84f8725637f137376c66781c06ee3bf948425b65476c0549dedb4e970eb0"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/gravity-uncertainty.webp",
+      "bytes": 1676,
+      "sha256": "399e878d8fcb37ef2e48550e12e6821f8a04c1677ea066659d3f0a0df6dbd906"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/gravity.webp",
+      "bytes": 6620,
+      "sha256": "7b51e1e89d249acb9dbd5c3ebad9239fe74c5e944bab8b7cc2112617da28d054"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/normal.webp",
       "bytes": 39370,
       "sha256": "5980b68da05e7ccef3b2512028c16dc63365e5d61dc30a142f7de729ac6df2c6"
@@ -448,8 +544,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 609839,
-      "sha256": "9daca58b86a8123f08aa330b4e099e435f29b70fa9b06852a94089044a99f438"
+      "bytes": 629973,
+      "sha256": "7a5cb22afa32d168c61aec516b11b5e07c2b35640193e694ae7a16888098e234"
     },
     {
       "location": "prepared",
@@ -478,8 +574,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1936,
-      "sha256": "13046e08c7863a511d9a87a40c58c30ab22b708c337918a9072fbbff7a3c62db"
+      "bytes": 2719,
+      "sha256": "4ffd9d77254310e0a7d21ae52b5eeb9514184003b375027628c91eb8f154161e"
     },
     {
       "location": "prepared",

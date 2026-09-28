@@ -15,7 +15,19 @@ export function parseSolidScience(value: unknown) {
     facetField:optional(shape({path:text,labelPath:text})),table:optional(shape({labelPath:optional(text)})),
     surfaceSampling:optional(shape({maximumDistanceMeters:number,renderedMeshPath:optional(text),ambiguityReference:optional(sourcePath)})),
     symbols:optional(shape({paths:text,locations:text})),comparison:optional(sourcePath),
-    qualityMasks:optional(array(sourcePath)),additionalGrids:optional(array(sourcePath))})(value));
+    qualityMasks:optional(array(sourcePath)),additionalGrids:optional(array(sourcePath)),
+    underlay:optional(parseScienceUnderlay)})(value));
+}
+/** A catalogue lens drawn over an earlier observation: its empty cells show that photograph as grey context
+ * (applyUnderlay in the raster lane owns the arithmetic). */
+export function parseScienceUnderlay(value: unknown) {
+  const underlay = shape({surface:text,brightness:number,grayscale:optional(boolean),bits:optional(number)})(value);
+  if (Object.keys(requireRecord(value)).some(key => !['surface','brightness','grayscale','bits'].includes(key)))
+    throw new TypeError('A scientific underlay takes only surface, brightness, grayscale and bits.');
+  if (!(underlay.brightness > 0 && underlay.brightness <= 1)) throw new TypeError(`Underlay brightness must be in (0, 1], not ${underlay.brightness}.`);
+  if (underlay.bits !== undefined && !(Number.isInteger(underlay.bits) && underlay.bits >= 1 && underlay.bits <= 8))
+    throw new TypeError(`Underlay bits must be an integer from 1 to 8, not ${underlay.bits}.`);
+  return underlay;
 }
 export const parseColorPhotometry = shape({consumer:text,profile:shape({radiusKm:number,maximumIncidenceDegrees:number,
   maximumEmissionDegrees:number,referenceIncidenceDegrees:number,referenceEmissionDegrees:number,observationWeights:dictionary(number),

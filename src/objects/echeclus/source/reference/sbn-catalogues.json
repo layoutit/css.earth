@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "echeclus",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 60558,
+    "by": "Horizons command 60558;"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 9,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_centaurs_csv::2.0",
+          "Asteroid_Number": "60558",
+          "Prov_desig": "-",
+          "Comet_desig": "174P/Echeclus",
+          "MPC_packed_name": "60558",
+          "Absolute_mag": "9.55",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455321.7142541",
+          "N_W1": "0",
+          "N_W2": "0",
+          "N_W3": "26",
+          "N_W4": "26",
+          "Fit_code": "DVB-",
+          "Diameter": "59.000",
+          "Diameter_err": "4.000",
+          "V_albedo": "0.077",
+          "V_albedo_err": "0.015",
+          "IR_albedo": "-.999",
+          "IR_albedo_err": "-.999",
+          "Beaming_param": "0.670",
+          "Beaming_param_err": "0.070",
+          "Stacked_flag": "S",
+          "Reference": "Bau13"
+        }
+      }
+    ],
+    "references": {
+      "Bau13": "Bauer, J.M., T. Grav, E. Blauvelt, A.K. Mainzer, J.R. Masiero, and 20 others, Centaurs and Scattered Disk Objects in the Thermal Infrared: Analysis of WISE/NEOWISE Observations, Astroph. J. 773, 22, doi:10.1088/0004-637X/773/1/22, 2013."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

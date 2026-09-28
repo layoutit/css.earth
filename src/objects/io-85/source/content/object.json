@@ -58,7 +58,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Occultation diameter",
+        "value": "164 ± 7 km (volume-equivalent; DAMIT model 1822 fitted to 14 occultations)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+          "label": "Herald et al. (2024), Small Bodies Occultations V4.0, asteroid diameters table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "small-bodies-occultations-v4",
+          "locator": "/occultations/rows/0/fields/Dia_1; /occultations/rows/0/fields/Uncert_1; /occultations/rows/0/fields/Events_1; /occultations/rows/0/fields/Model_Source_1; /occultations/rows/0/fields/Model_Number_1"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.058 ± 0.006 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

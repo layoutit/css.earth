@@ -7,6 +7,21 @@ maps and replaces the documented synthesized-red sector with observed monochrome
 USGS public scientific imagery policy:
 https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits
 
+DLR mosaic: DLR_Ganymede_Voyager-Galileo-Juno_V1.0 by the DLR JANUS team
+(Elke Kersten and colleagues), from NASA Voyager, Galileo SSI and JunoCam images,
+archived at the ESA Planetary Science Archive. Credit: ESA/DLR. Cite European
+Space Agency, 2022, DLR_Ganymede_Voyager-Galileo_Juno_V1.0,
+[10.57780/esa-fcj5pf3](https://doi.org/10.57780/esa-fcj5pf3), and Kersten, E.,
+Zubarev, A. E., Roatsch, T., and Matz, K.-D. (2021), Controlled Global Ganymede
+Mosaic from Voyager and Galileo Images, Planetary and Space Science 206, 105310,
+[doi:10.1016/j.pss.2021.105310](https://doi.org/10.1016/j.pss.2021.105310).
+Licence: [CC BY-NC 3.0 IGO](https://creativecommons.org/licenses/by-nc/3.0/igo/), the
+[ESA Space Science Archive terms](https://www.cosmos.esa.int/web/esdc/terms-and-conditions)
+that cover PSA data; commercial use needs a licence from ESA, and the credit
+implies no ESA endorsement. The [data set page](https://www.cosmos.esa.int/web/psa/dlr_ganymede_voyager-galileo-juno_v1.0)
+states no licence of its own. cssEarth, a non-commercial project, only resamples
+the 8-bit map to the prepared grid.
+
 Physical/orbital
 data and rotation models retain the pinned astronomy package's JPL and
 IAU/WGCCRE attribution. Exact inputs and license evidence are in the source

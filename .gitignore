@@ -117,6 +117,9 @@ src/objects/*/source/**/*.bds
 # grids they make are small and tracked, like the geologic-unit grids.
 src/objects/mars/source/catalogues/*/*.query*.json
 !src/objects/mars/source/catalogues/*/mars-*.tif
+# The Phobos crater catalogue pages restore the same way; its rim grid is tracked.
+src/objects/phobos/source/craters/*.query*.json
+!src/objects/phobos/source/craters/phobos-*.tif
 src/objects/venus/source/science/mgn-gravity/*.dat
 src/objects/mars/source/science/tes/*.img
 src/objects/mars/source/science/tes/*.vicar

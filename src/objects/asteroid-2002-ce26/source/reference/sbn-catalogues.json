@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "asteroid-2002-ce26",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 276049,
+    "by": "SBDB record des 276049"
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 285,
+        "fields": {
+          "AST_NUMBER": "276049",
+          "AST_NAME": "-",
+          "PROV_DESIG": "2002 CE26",
+          "COMPANION_DESIGNATION": "-",
+          "DYNAMICAL_TYPE": "APO",
+          "SYSTEM_SEMIMAJOR_AXIS": "2.23",
+          "SYSTEM_ECCENTRICITY": "0.56",
+          "SYSTEM_INCLINATION": "47.",
+          "EFFECTIVE_DIAMETER": "3.46",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "0.35",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.087",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.030",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "3.46",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "0.35",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "0.30",
+          "COMPANION_DIAMETER_UNCERTAINTY": "0.10",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "3.293",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "4.700E+00",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "2.00E-01",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "6.500E-01",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "4.00E-03",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.000",
+          "BINARY_ECCENTRICITY_ERROR": "0.020",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.071",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.022",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "1.95E+13",
+          "SYSTEM_MASS_UNCERTAINTY": "2.50E+12",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "0.90",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.45",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "S06a": "Shepard, M. K., et al., 2006, Radar and infrared observations of binary near-Earth Asteroid 2002 CE26, Icarus, 184:198-210."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 285,
+        "fields": {
+          "AST_NUMBER": "276049",
+          "AST_NAME": "-",
+          "PROV_DESIG": "2002 CE26",
+          "COMPANION_DESIGNATION": "-",
+          "DISCOVERY_METHOD_CODE": "R",
+          "YEAR_ANNOUNCEMENT": "2004",
+          "YEAR_UPDATE": "2013",
+          "REF_CODE_EFFECTIVE_DIAMETER": "S06a",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "S06a",
+          "REF_CODE_COMPANION_DIAMETER": "S06a",
+          "REF_CODE_PRIMARY_SPIN": "S06a",
+          "REF_CODE_BINARY_SEMIMAJOR": "S06a",
+          "REF_CODE_BINARY_PERIOD": "S06a",
+          "REF_CODE_BINARY_ECCENTRICITY": "S06a",
+          "REF_CODE_PRIMARY_ALBEDO": "M11c",
+          "REF_CODE_SYSTEM_MASS": "S06a",
+          "REF_CODE_SYSTEM_DENSITY": "S06a"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "laetitia",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 39,
+    "by": "Horizons command 39;"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 35,
+        "fields": {
+          "Designation": "39",
+          "Name": "Laetitia",
+          "Diameter_Nominal": "158.0",
+          "Uncert": "8.2",
+          "Dia_1": "160",
+          "Uncert_1": "3",
+          "Events_1": "4",
+          "Invalid_1": "0",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "130",
+          "Dia_2": "160",
+          "Uncert_2": "10",
+          "Events_2": "5",
+          "Invalid_2": "0",
+          "Model_Source_2": "DAMIT",
+          "Model_Number_2": "1835",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_1": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 25,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "39",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00039",
+          "Absolute_mag": "6.10",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455360.0884995",
+          "N_W1": "14",
+          "N_W2": "16",
+          "N_W3": "16",
+          "N_W4": "16",
+          "Fit_code": "DVBI",
+          "Diameter": "179.484",
+          "Diameter_err": "1.685",
+          "V_albedo": "0.226",
+          "V_albedo_err": "0.045",
+          "IR_albedo": "0.396",
+          "IR_albedo_err": "0.045",
+          "Beaming_param": "0.804",
+          "Beaming_param_err": "0.025",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139463,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "39",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00039",
+          "Absolute_mag": "6.00",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455537.1783035",
+          "N_W1": "12",
+          "N_W2": "12",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "161.782",
+          "Diameter_err": "5.942",
+          "V_albedo": "0.269",
+          "V_albedo_err": "0.043",
+          "IR_albedo": "0.461",
+          "IR_albedo_err": "0.077",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "masses": {
+    "catalogueId": "asteroid-masses-baer-2012",
+    "product": "urn:nasa:pds:compil.ast.masses:data:astmass12_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+    "rows": [
+      {
+        "recordNumber": 139,
+        "fields": {
+          "AST_NUMBER": "39",
+          "AST_NAME": "Laetitia",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "2.830E-12",
+          "MASS_SOL_UNC": "7.30E-13",
+          "MASS_KG": "5.63E+18",
+          "MASS_KG_UNC": "1.45E+18",
+          "BULK_DENSITY": "3.19",
+          "BULK_DENSITY_UNC": "0.99",
+          "AXIS_A": "210.000",
+          "AXIS_B": "150.000",
+          "AXIS_C": "107.000",
+          "EQUIV_RADIUS_UNC": "4.300",
+          "SIZE_REF_CODE": "Kaasalainen et al. 2002, Tedesco et al. 2002",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Baer et al. 2011"
+        }
+      }
+    ],
+    "references": {
+      "Baer et al. 2011": "Baer, J., S. Chesley, and R.D. Matson, Astrometric Masses of 26 asteroids, and observations on asteroid porosity, Astronomical Journal 141, 143, 2011."
+    },
+    "selected": {
+      "mass": 0
+    },
+    "rule": "The determination with the smallest stated mass uncertainty, excluding rows the compilation flags (DENSITY_NOTE N), rows for a secondary, and rows under three times their uncertainty. Density from the same row, when it is at least three times its uncertainty."
+  }
+}

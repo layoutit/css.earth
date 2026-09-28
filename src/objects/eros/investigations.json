@@ -50,6 +50,73 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eros/evidence/spectral-bands/native-values.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eros/evidence/spectral-bands/delivery-and-browser.json"
       ]
+    },
+    {
+      "id": "selected-roberts-ponds-catalogue",
+      "subject": "Roberts Eros Ponds Catalog V1.1 as the Ponds lens",
+      "status": "included",
+      "finding": "The PDS SBN bundle urn:nasa:pds:ast-eros.roberts.ponds-catalog::1.1 (doi:10.26033/4dqc-8067) lists 334 ponds with IAU_EROS centres in km, planetocentric latitude and east longitude, radial distance and one characteristic diameter each (7.4 to 213.6 m, median 49.9 m), identified by P. C. Thomas and relocated on the Gaskell SPC shape with SBMT. Because it publishes diameters, each pond is drawn as the set of source-surface points within half its diameter of the centre, not as a one-cell presence mark. Every row's Cartesian centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Projected onto ver128q, 326 centres lie within 27.4 m of the surface (median 2.3 m, 95th percentile 12.6 m); 8 lie 66 to 384 m away (ponds 1, 2, 10, 129, 216, 218, 219, 255) and are withheld by the 60 m limit chosen beforehand, a little under half the 131.9 m median ver128q edge; three of them (1, 2, 255) miss it by only 6 to 9 m. The SBMT copy of the table matches the CSV to 0.5 m and carries the cyan colour 0,255,255 the lens uses.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt",
+        "https://doi.org/10.26033/4dqc-8067",
+        "https://doi.org/10.1111/maps.12348"
+      ]
+    },
+    {
+      "id": "ponds-as-named-features",
+      "subject": "Ponds as labelled surface features",
+      "status": "excluded",
+      "finding": "The catalogue names ponds only by number (Pond001 to Pond334) and the surface-features bank is built for IAU names with search and captions. 334 numbered labels would add no names; the categorical lens carries position and size instead.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/data/erosshiftedponds_20190226_sbmt.tab"
+      ],
+      "revisitWhen": "The IAU names individual ponds, or the catalogue adds the polygon or ellipse outlines its caveats promise."
+    },
+    {
+      "id": "near-xgrs-derived-abundances",
+      "subject": "NEAR X-ray and gamma-ray element maps",
+      "status": "excluded",
+      "finding": "SBN archives only XGRS spectra (NEAR_A_XRS_2/3_EDR and NEAR_A_GRS_2/3_EDR data sets, cruise, orbit and surface phases); no derived abundance product exists in the archive. The published results are an eight-flare XRS average that Lim and Nittler (2009) say probably represents the whole of Eros and cannot establish or rule out spatial variation, and gamma-ray values measured only at the landing site (Evans et al. 2001; Peplowski et al. 2015). Neither supports a map, so the values are factsheet facts cited to the papers' tables.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/near/",
+        "https://doi.org/10.1016/j.icarus.2008.09.018",
+        "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x",
+        "https://doi.org/10.1111/maps.12434",
+        "https://doi.org/10.1111/j.1945-5100.2001.tb01856.x"
+      ],
+      "revisitWhen": "A derived, spatially resolved abundance product for Eros is archived."
+    },
+    {
+      "id": "near-xgrs-composition-facts",
+      "subject": "NEAR X-ray and gamma-ray composition facts",
+      "status": "included",
+      "finding": "Six facts: X-ray Mg/Si, Fe/Si and S/Si from Lim and Nittler (2009) Table 9, uncorrected eight-flare averages, which supersede the Nittler et al. (2001) calibration; landing-site Fe/Si by mass (1.19 ± 0.30, 2 SD) and hydrogen (1,100 ppm, 400 to 2,700 ppm) from Peplowski et al. (2015) Table 2 and abstract; landing-site potassium 0.07% with the 40% uncertainty Evans et al. (2001) assign to all their gamma-ray results. The extracts, locators and uncertainty meanings are in source/editorial/factsheet-review.json.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2008.09.018",
+        "https://doi.org/10.1111/maps.12434",
+        "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x"
+      ]
+    },
+    {
+      "id": "peplowski-2016-orbital-grs",
+      "subject": "Global gamma-ray composition from the orbital data (Peplowski 2016)",
+      "status": "unresolved",
+      "finding": "Peplowski (2016), Planetary and Space Science 134, 36-51, reports the first gamma-ray signal from orbit, from about 10 hours of low-altitude flyovers, with global Fe and Th concentrations and a global K concentration (abstract). The article is open access (CC BY-NC-ND 4.0) but the publisher and mirror downloads returned HTTP 403 or 404 on 2026-09-28, so its values were not read and no fact uses them.",
+      "evidence": [
+        "https://doi.org/10.1016/j.pss.2016.10.006"
+      ],
+      "revisitWhen": "The full text is read; its global Fe, Th and K values would join the factsheet as whole-body facts."
+    },
+    {
+      "id": "landing-site-pond-in-catalogue",
+      "subject": "The NEAR landing site in the ponds catalogue",
+      "status": "unresolved",
+      "finding": "Peplowski et al. (2015) describe the landing site as a ponded deposit (after Veverka et al. 2001), but the nearest catalogued pond (334, 16.7 m) lies about 5.5° of arc, roughly 0.6 km, from the landing coordinates in source/features/sites.json. The site coordinates are the 2001 solution, which Barnouin et al. (2012) later revised; the frames were not compared.",
+      "evidence": [
+        "https://doi.org/10.1111/maps.12434",
+        "https://doi.org/10.1038/35096507"
+      ],
+      "revisitWhen": "The revised landing coordinates are placed in the IAU_EROS frame of the catalogue."
     }
   ]
 }

@@ -45,6 +45,11 @@
       "title": "Modeled surface slopes",
       "detail": "Released facet values",
       "summary": "Slope against modeled gravity, including rotation and the pull of Mars at its mean distance."
+    },
+    "craters": {
+      "title": "PH9224GT crater catalogue",
+      "detail": "Catalogued crater rims",
+      "summary": "Rims of 9,224 craters found in topography and images, drawn over the mosaic. Unmarked ground may still hold craters."
     }
   }
 }

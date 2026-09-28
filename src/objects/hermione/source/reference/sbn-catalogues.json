@@ -1,0 +1,225 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "hermione",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 121,
+    "by": "SBDB record des 121"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 99,
+        "fields": {
+          "Designation": "121",
+          "Name": "Hermione",
+          "Diameter_Nominal": "185.2",
+          "Uncert": "9.7",
+          "Dia_1": "191",
+          "Uncert_1": "17",
+          "Events_1": "7",
+          "Invalid_1": "1",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "155",
+          "Dia_2": "193",
+          "Uncert_2": "15",
+          "Events_2": "10",
+          "Invalid_2": "0",
+          "Model_Source_2": "DAMIT",
+          "Model_Number_2": "156",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_2": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "masses": {
+    "catalogueId": "asteroid-masses-baer-2012",
+    "product": "urn:nasa:pds:compil.ast.masses:data:astmass12_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+    "rows": [
+      {
+        "recordNumber": 167,
+        "fields": {
+          "AST_NUMBER": "121",
+          "AST_NAME": "Hermione",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "4.700E-12",
+          "MASS_SOL_UNC": "8.00E-13",
+          "MASS_KG": "9.35E+18",
+          "MASS_KG_UNC": "1.59E+18",
+          "BULK_DENSITY": "1.96",
+          "BULK_DENSITY_UNC": "0.61",
+          "AXIS_A": "268.000",
+          "AXIS_B": "186.000",
+          "AXIS_C": "183.000",
+          "EQUIV_RADIUS_UNC": "9.000",
+          "SIZE_REF_CODE": "Marchis et al. 2005b",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Viateau 2000"
+        }
+      },
+      {
+        "recordNumber": 168,
+        "fields": {
+          "AST_NUMBER": "121",
+          "AST_NAME": "Hermione",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "2.705E-12",
+          "MASS_SOL_UNC": "1.50E-13",
+          "MASS_KG": "5.38E+18",
+          "MASS_KG_UNC": "2.98E+17",
+          "BULK_DENSITY": "1.13",
+          "BULK_DENSITY_UNC": "0.30",
+          "AXIS_A": "268.000",
+          "AXIS_B": "186.000",
+          "AXIS_C": "183.000",
+          "EQUIV_RADIUS_UNC": "9.000",
+          "SIZE_REF_CODE": "Marchis et al. 2005b",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Marchis et al. 2005b"
+        }
+      },
+      {
+        "recordNumber": 169,
+        "fields": {
+          "AST_NUMBER": "121",
+          "AST_NAME": "Hermione",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "2.363E-12",
+          "MASS_SOL_UNC": "1.01E-13",
+          "MASS_KG": "4.70E+18",
+          "MASS_KG_UNC": "2.00E+17",
+          "BULK_DENSITY": "1.37",
+          "BULK_DENSITY_UNC": "0.14",
+          "AXIS_A": "187.000",
+          "AXIS_B": "187.000",
+          "AXIS_C": "187.000",
+          "EQUIV_RADIUS_UNC": "3.000",
+          "SIZE_REF_CODE": "Descamps et al. 2009",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Descamps et al. 2009"
+        }
+      }
+    ],
+    "references": {
+      "Descamps et al. 2009": "Descamps, P., F. Marchis, J. Durech, J. Emery, A.W. Harris, M. Kaasalainen, J. Berthier, J.-P. Teng-Chuen-Yu, A. Peyrot, L. Hutton, J. Greene, J. Pollock, M. Assafin, R. Vieira-Martins, J.I.B. Camargo, F. Braga-Ribas, F. Vachier, D.E. Reichart, K.M. Ivarsen, J.A. Crain, M.C. Nysewander, A.P. Lacluyze, J.B. Haislip, R. Behrend, F. Colas, J. Lecacheux, L. Bernasconi, R. Roy, P. Baudouin, L. Brunetto, S, Sposetti, and F. Manzini, New insights on the binary Asteroid 121 Hermione, Icarus 203, 88-101, 2009."
+    },
+    "selected": {
+      "mass": 2
+    },
+    "rule": "The determination with the smallest stated mass uncertainty, excluding rows the compilation flags (DENSITY_NOTE N), rows for a secondary, and rows under three times their uncertainty. Density from the same row, when it is at least three times its uncertainty."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 13,
+        "fields": {
+          "AST_NUMBER": "121",
+          "AST_NAME": "Hermione",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2002 (121) 1",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "3.45",
+          "SYSTEM_ECCENTRICITY": "0.13",
+          "SYSTEM_INCLINATION": "8.",
+          "EFFECTIVE_DIAMETER": "190.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "-9.99",
+          "EFFECTIVE_DIAMETER_CODE": "D",
+          "D2_TO_D1_RATIO": "0.171",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "-9.999",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "187.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "6.00",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "32.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "-9.99",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.551",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "7.470E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "1.10E+01",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "2.563E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "2.10E-03",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.000",
+          "BINARY_ECCENTRICITY_ERROR": "-9.999",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.050",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.010",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "4.70E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "2.00E+17",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.40",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.35",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "D09a": "Descamps, P., et al., 2009, New insights on the binary asteroid 121 Hermione, Icarus, 203:88-101."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 13,
+        "fields": {
+          "AST_NUMBER": "121",
+          "AST_NAME": "Hermione",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2002 (121) 1",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2002",
+          "YEAR_UPDATE": "2013",
+          "REF_CODE_EFFECTIVE_DIAMETER": "-",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "D09a",
+          "REF_CODE_COMPANION_DIAMETER": "D09a",
+          "REF_CODE_PRIMARY_SPIN": "D09a",
+          "REF_CODE_BINARY_SEMIMAJOR": "D09a",
+          "REF_CODE_BINARY_PERIOD": "D09a",
+          "REF_CODE_BINARY_ECCENTRICITY": "D09a",
+          "REF_CODE_PRIMARY_ALBEDO": "D09a",
+          "REF_CODE_SYSTEM_MASS": "D09a",
+          "REF_CODE_SYSTEM_DENSITY": "D09a"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

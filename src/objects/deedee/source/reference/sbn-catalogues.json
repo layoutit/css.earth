@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "deedee",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "designation": "2014 UZ224",
+    "by": "Horizons designation 2014 UZ224"
+  },
+  "tno": {
+    "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+    "product": "urn:nasa:pds:tno-centaur_diam-albedo-density:data:tno_centaur_diam_alb_dens_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+    "rows": [
+      {
+        "recordNumber": 652,
+        "fields": {
+          "ASTEROID_NUMBER": "0",
+          "ASTEROID_NAME": "-",
+          "PROVISIONAL_DESIGNATION": "2014 UZ224",
+          "SEMIMAJOR_AXIS": "108.4",
+          "ECCENTRICITY": "0.65",
+          "INCLINATION": "27.",
+          "DYNAMICAL_TYPE": "SDO",
+          "NUMBER_OF_COMPANIONS": "0",
+          "ABSOLUTE_MAGNITUDE_MPC": "3.5",
+          "ABSOLUTE_MAGNITUDE": "3.500",
+          "ABSOLUTE_MAGNITUDE_UNCERTAINTY": "-99.999",
+          "EFFECTIVE_DIAMETER": "635.0",
+          "EFFECTIVE_DIAMETER_ERROR_UPPER": "65.0",
+          "EFFECTIVE_DIAMETER_ERROR_LOWER": "72.0",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "PRIMARY_DIAMETER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "SECONDARY_DIAMETER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "SECONDARY_DIAMETER_CODE": "-",
+          "ALBEDO": "0.131",
+          "ALBEDO_ERROR_UPPER": "0.039",
+          "ALBEDO_ERROR_LOWER": "0.028",
+          "ALBEDO_COLOR": "-",
+          "ALBEDO_CODE": "-",
+          "DENSITY": "-9.999",
+          "DENSITY_ERROR_UPPER": "-9.999",
+          "DENSITY_ERROR_LOWER": "-9.999",
+          "DENSITY_CODE": "-",
+          "METHOD_DIAMETER_ALBEDO": "T",
+          "METHOD_DENSITY": "-",
+          "REFERENCE_CODE": "G17a"
+        }
+      }
+    ],
+    "selected": {
+      "diameter": 0
+    },
+    "references": {
+      "G17a": "Gerdes, D. W., et al., 2017, Discovery and physical characterization of a large scattered disk object at 92 AU, Astrophys. J. Lett., 839(1):L15."
+    },
+    "rule": "Rows with an unqualified diameter (code blank: not assumed, derived or a limit); method rank occultation, imaging, mutual events, thermal, combined; the latest entry of the best method. A binary system shows its primary diameter when one is given. Density: the latest unqualified entry."
+  }
+}

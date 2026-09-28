@@ -90,6 +90,17 @@
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/320",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"54.5 km (size-calibrated model)\" (damit-models) implies a diameter of 109 km, outside the added Small Bodies Occultations V4.0 record 57, DAMIT model 320 diameter 130 ± 8 km (volume-equivalent; DAMIT model 320 fitted to 6 occultations). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

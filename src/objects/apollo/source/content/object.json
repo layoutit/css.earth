@@ -58,7 +58,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.350 ± 0.048 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Nugent et al. 2015 (Nug15)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/1/fields/V_albedo; /neowise/rows/1/fields/V_albedo_err; /neowise/rows/1/fields/Fit_code; /neowise/rows/1/fields/Reference"
+        }
+      },
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "Unnamed in the catalogue: semimajor axis 3.750 ± 0.250 km, period 1.140 ± 0.0100 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Ford et al. 2014",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

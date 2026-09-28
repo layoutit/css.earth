@@ -1,0 +1,239 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "fortuna",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 19,
+    "by": "SBDB record des 19"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 19,
+        "fields": {
+          "Number": "19",
+          "Name": "Fortuna",
+          "Desig": "-",
+          "Family": "9104",
+          "CSource": "S",
+          "Class": "C",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "223.07",
+          "HSource": "L",
+          "H": "7.152",
+          "HBand": "V",
+          "GSource": "L",
+          "G": "0.162",
+          "G2": "-9.99",
+          "AlbSource": "L",
+          "AlbFlag": "-",
+          "Albedo": "0.0489",
+          "PFlag": "-",
+          "Period": "7.4432",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.23",
+          "AmpMax": "0.30",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "-",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 13,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "19",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00019",
+          "Absolute_mag": "7.13",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2455259.9621605",
+          "N_W1": "9",
+          "N_W2": "10",
+          "N_W3": "7",
+          "N_W4": "10",
+          "Fit_code": "DVBI",
+          "Diameter": "196.371",
+          "Diameter_err": "0.305",
+          "V_albedo": "0.064",
+          "V_albedo_err": "0.013",
+          "IR_albedo": "0.065",
+          "IR_albedo_err": "0.014",
+          "Beaming_param": "0.918",
+          "Beaming_param_err": "0.008",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139449,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "19",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00019",
+          "Absolute_mag": "7.13",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2455573.1885965",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "209.814",
+          "Diameter_err": "2.198",
+          "V_albedo": "0.056",
+          "V_albedo_err": "0.012",
+          "IR_albedo": "0.067",
+          "IR_albedo_err": "0.011",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153121,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "19",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00019",
+          "Absolute_mag": "7.13",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2456750.3594933",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "189.738",
+          "Diameter_err": "60.007",
+          "V_albedo": "0.057",
+          "V_albedo_err": "0.024",
+          "IR_albedo": "0.085",
+          "IR_albedo_err": "0.062",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 161883,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "19",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00019",
+          "Absolute_mag": "7.13",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2457214.4447715",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "176.860",
+          "Diameter_err": "55.950",
+          "V_albedo": "0.065",
+          "V_albedo_err": "0.031",
+          "IR_albedo": "0.098",
+          "IR_albedo_err": "0.076",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 161884,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "19",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00019",
+          "Absolute_mag": "7.13",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2457050.2983692",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "182.590",
+          "Diameter_err": "50.769",
+          "V_albedo": "0.060",
+          "V_albedo_err": "0.029",
+          "IR_albedo": "0.090",
+          "IR_albedo_err": "0.070",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 172008,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "19",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00019",
+          "Absolute_mag": "7.13",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2457515.9671230",
+          "N_W1": "6",
+          "N_W2": "8",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "205.421",
+          "Diameter_err": "68.106",
+          "V_albedo": "0.046",
+          "V_albedo_err": "0.019",
+          "IR_albedo": "0.069",
+          "IR_albedo_err": "0.029",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas17",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

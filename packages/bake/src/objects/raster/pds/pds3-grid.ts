@@ -7,6 +7,8 @@
  * label's extent keywords give cell centres or cell edges; the label must then agree. A missing value comes from the
  * label's MISSING_CONSTANT, or, when the label declares none, from the recipe with the producer's evidence. An optional
  * mask image of the same grid withholds cells the producer flags (TES thermal inertia marks its interpolated cells).
+ * A detached label names its image alone or with the record the image starts at, as Dawn's gravity maps do. A lens may
+ * withhold cells poleward of a latitude the producer states its map is valid within (`latitudeLimit`, with that evidence).
  */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
@@ -68,9 +70,12 @@ export function decodePds3Grid(bytes: Buffer, labelText: string, detachedImage: 
   const lastCentreLongitude = policy.firstCentreLongitude + (width - 1) / ppd;
   const lastCentreLatitude = policy.firstCentreLatitude - (height - 1) / ppd;
   const close = (a: number, b: number) => Math.abs(a - b) < 1e-6;
-  // Attached labels point at a record; a detached label names the image file.
-  const pointer = field('^IMAGE');
-  const offset = detachedImage === null ? (numberOf(pointer) - 1) * numberOf(field('RECORD_BYTES')) : 0;
+  // Attached labels point at a record; a detached label names the image file, alone or with its starting record
+  // (Dawn gravity maps: ^IMAGE = ("JGDWN_CER18D_ACCEL_0018.IMG",1)).
+  const pointerText = field('^IMAGE'), detachedRecord = detachedImage === null ? null : /^(.*?)\s*,\s*(\d+)$/u.exec(pointerText);
+  const pointer = detachedRecord?.[1] ?? pointerText;
+  const offset = detachedImage === null ? (numberOf(pointer) - 1) * numberOf(field('RECORD_BYTES'))
+    : detachedRecord ? (Number(detachedRecord[2]) - 1) * numberOf(field('RECORD_BYTES')) : 0;
   const planeBytes = width * height * size;
   const problems = [
     field('PDS_VERSION_ID') !== 'PDS3' && 'PDS_VERSION_ID',
@@ -152,12 +157,25 @@ export async function loadPds3Grid(root: string, value: unknown) {
     }
   }
   const { width, height, values } = grid, ppd = policy.pixelsPerDegree;
+  let withheldByLatitude = 0;
+  if (lens.latitudeLimit !== undefined) {
+    // A producer that states where its map is valid (a spherical-harmonic geoid diverges near the poles) has the cells
+    // beyond that latitude withheld, never filled.
+    const limit = requireRecord(lens.latitudeLimit, `${id}.latitudeLimit`);
+    const maximum = requireFiniteNumber(limit.maximumAbsolute, `${id}.latitudeLimit.maximumAbsolute`);
+    if (!(maximum > 0 && maximum < 90)) throw new TypeError(`${id}.latitudeLimit.maximumAbsolute must lie between 0 and 90.`);
+    requireString(limit.evidence, `${id}.latitudeLimit.evidence`);
+    for (let y = 0; y < height; y++) {
+      if (Math.abs(policy.firstCentreLatitude - y / ppd) <= maximum) continue;
+      for (let x = 0; x < width; x++) if (Number.isFinite(values[y * width + x])) { values[y * width + x] = NaN; withheldByLatitude += 1; }
+    }
+  }
   const global = Math.abs(width / ppd - 360) < 1e-9;
   let mapped = 0, lowest = Infinity, highest = -Infinity;
   for (const v of values) if (Number.isFinite(v)) { mapped += 1; if (v < lowest) lowest = v; if (v > highest) highest = v; }
   return {
     report: { format: 'pds3-grid', width, height, band: policy.band, mappedCells: mapped, missingCells: values.length - mapped,
-      withheldByMask: withheld, valueRange: mapped ? [lowest, highest] : null, sampling: 'nearest-cell' },
+      withheldByMask: withheld, ...(lens.latitudeLimit === undefined ? {} : { withheldByLatitude }), valueRange: mapped ? [lowest, highest] : null, sampling: 'nearest-cell' },
     sample(longitude: number, latitude: number) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
       let x = Math.round((longitude - policy.firstCentreLongitude) * ppd);

@@ -404,6 +404,148 @@
           "#00e6a9",
           "#00a884"
         ]
+      },
+      {
+        "id": "gravity",
+        "label": "Gravity",
+        "consumer": "gravity",
+        "path": "gravity/JGDWN_VES20H_ACCEL_0020.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_ACCEL_0020.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_ACCEL_0020.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "mGal",
+        "displayUnits": "mGal",
+        "outputLongitudeOrigin": 150,
+        "minimum": -2000,
+        "maximum": 2000,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ]
+      },
+      {
+        "id": "gravity-uncertainty",
+        "label": "Gravity",
+        "consumer": "gravity-uncertainty",
+        "path": "gravity/JGDWN_VES20H_ACCERR_0020.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_ACCERR_0020.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_ACCERR_0020.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "mGal",
+        "displayUnits": "mGal, one sigma",
+        "outputLongitudeOrigin": 150,
+        "minimum": 0,
+        "maximum": 170,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "bouguer",
+        "label": "Gravity",
+        "consumer": "bouguer",
+        "path": "gravity/JGDWN_VES20H_BOU_0015.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_BOU_0015.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_BOU_0015.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "mGal",
+        "displayUnits": "mGal",
+        "outputLongitudeOrigin": 150,
+        "minimum": -250,
+        "maximum": 250,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ]
+      },
+      {
+        "id": "geoid",
+        "label": "Gravity",
+        "consumer": "geoid",
+        "path": "gravity/JGDWN_VES20H_GEOID_0020.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_GEOID_0020.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_GEOID_0020.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "meters",
+        "displayUnits": "m",
+        "outputLongitudeOrigin": 150,
+        "minimum": -9000,
+        "maximum": 9000,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ],
+        "latitudeLimit": {
+          "maximumAbsolute": 60,
+          "evidence": "Bundle errata and map description: the geoid is not valid for all points on the surface due to divergence of the spherical harmonics; the valid region is roughly between +-60 degrees latitude (https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/document/errata.txt)."
+        }
       }
     ],
     "observedColors": []

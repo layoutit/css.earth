@@ -1,0 +1,69 @@
+OSIRIS-REx Derived Radio Science Data Collection Overview
+
+
+The following files are included in this collection:
+
+overview.txt - This file, describing the files in the collection. All files with the exception of the pseudo range product are derived from:
+Chesley, S. R., French, A. S., Davis, A. B., Jacobson, R. A., Brozović, M., Farnocchia, D., et al. (2020). Trajectory estimation for particles observed in the vicinity of (101955) Bennu. Journal of Geophysical Research: Planets, 125, e2019JE006363.
+https://doi.org/10.1029/2019JE006363
+
+and 
+
+Hergenrother, C. W., Maleszewski, C., Li, J.‐Y., Pajola, M., Chesley, S. R., French, A. S., et al. (2020). Photometry of particles ejected from active asteroid
+(101955) Bennu. Journal of Geophysical Research: Planets, 125, e2020JE006381.
+https://doi.org/10.1029/2020JE006381
+
+
+
+obj.csv - Parameters of orbital fits. Note that some columns contain no data. If no data is present, these parameters were not calculated.
+
+det.csv - Parameters of detections for all observations used in orbital fits. Note that some columns contain no data. If no data is present, these parameters were not calculated.
+
+oblate.csv - Parameters of the particle shape fits. AMR is the area-to-mass ratio in m^2/kg and H is the absolute magnitude in mag, both from obj.csv. Here a and b are the semi-axes of an oblate ellipsoid of revolution in cm, as described in Hergenrother et al 2020. D_equiv is a volume equivalent spherical diameter in cm.
+
+particles_pub_03Mar2020.bsp - An SPK file containing the trajectories of the objects detailed in obj.csv
+
+grav_20_particles.m - A MATLAB script that provides the coefficients and covariance of the estimated gravity field. For more information about this gravity file, see note below
+
+grav_shape_16x16.m - A MATLAB script that provides the coefficients of the shape-based uniform density gravity field. For more information about this gravity file, see note below
+
+bounce.mp4 - Animation of particle bouncing off the Bennu surface.
+
+orba.mp4 - Cosmographia animation of particles from Jan. 6 - Feb. 20 (during Orbit A)
+
+orbc.mp4 - Cosmographia animation of particles from Aug. 9 - Sep. 23 (during Orbit C)
+
+RSWG_bouguer_map_shape_Oct2021.fits - Bouguer anomaly map for Bennu's estimated gravity field (grav_20_particles.m). Red‐orange (green‐blue) regions indicate regionsof higher (lower) surface accelerations than those derived from the shape assuming uniform density
+
+pseudo_range.txt - The "Bennu pseudo-ranging" data product consists of a table giving DSN range measurements of the OSIRIS-REx spacecraft as if the measurements were received and transmitted by Bennu. This product was produced by the OSIRIS-REx science team and 
+was used to estimate the ephemeris of Bennu, Yarkovsky effect, and YORP effect.
+
+
+GRAVITY FIELD FORMAT AND CONVENTIONS
+
+The gravity field is represented as a spherical harmonic expansion to
+degree and order 10 using fully normalized coefficients.  This
+normalization is also commonly referred to as 4-pi normalized or Stokes
+normalized, and corresponds to orthonormal basis functions over the
+sphere.
+
+Tesseral and sectoral terms are stored as fully normalized C(l,m) and
+S(l,m) coefficients using this convention.
+
+Zonal terms are stored separately as J2, J3, ..., J10 parameters, where
+J(l) equals minus the unnormalized C(l,0) coefficient.  The corresponding
+fully normalized zonal coefficient can be obtained by applying the same
+normalization used for the C and S terms.
+
+The parameter vector ordering is given explicitly by the NAMES array in
+the Matlab file, and the covariance matrix corresponds to this same
+ordering.
+
+GM is given in km^3/s^2.  The reference radius of the body is 0.290 km.
+Body-fixed frame orientation and spin parameters are provided in the file
+header. Note that there is approximately a month between the creation dates 
+of the two gravity files. Small differences in header frame values is due to 
+updates in these values. The best available values were used in each calculation.
+
+
+

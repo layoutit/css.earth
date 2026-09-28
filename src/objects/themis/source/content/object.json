@@ -32,7 +32,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "8.374 hours (synodic; LCDB quality 3)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+          "label": "Warner, Harris & Pravec (2021), Asteroid Lightcurve Database (LCDB) V4.0, summary table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-lightcurve-database-v4",
+          "locator": "/lcdb/rows/0/fields/Period; /lcdb/rows/0/fields/PFlag; /lcdb/rows/0/fields/Notes; /lcdb/rows/0/fields/U"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.069 ± 0.010 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

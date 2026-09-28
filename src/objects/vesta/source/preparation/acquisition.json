@@ -474,6 +474,74 @@
       ],
       "path": "grand/GRD_NEUTRON_ABSORPTION_MAP.TAB",
       "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_ACCEL_0020.IMG",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCEL_0020.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_ACCEL_0020.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCEL_0020.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_ACCERR_0020.IMG",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCERR_0020.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_ACCERR_0020.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCERR_0020.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_BOU_0015.IMG",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_BOU_0015.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_BOU_0015.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_BOU_0015.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_GEOID_0020.IMG",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_GEOID_0020.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "gravity/JGDWN_VES20H_GEOID_0020.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_GEOID_0020.LBL"
     }
   ]
 }

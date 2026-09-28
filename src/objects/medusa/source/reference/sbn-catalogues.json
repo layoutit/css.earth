@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "medusa",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 149,
+    "by": "Horizons command 149;"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 114,
+        "fields": {
+          "Designation": "149",
+          "Name": "Medusa",
+          "Diameter_Nominal": "21.6",
+          "Uncert": "1.4",
+          "Dia_1": "20.2",
+          "Uncert_1": "1.0",
+          "Events_1": "4",
+          "Invalid_1": "0",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "571",
+          "Dia_2": "",
+          "Uncert_2": "",
+          "Events_2": "",
+          "Invalid_2": "",
+          "Model_Source_2": "",
+          "Model_Number_2": "",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_1": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 139525,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "149",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00149",
+          "Absolute_mag": "10.79",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455417.4058300",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "9",
+          "N_W4": "0",
+          "Fit_code": "DVBI",
+          "Diameter": "23.719",
+          "Diameter_err": "0.267",
+          "V_albedo": "0.152",
+          "V_albedo_err": "0.030",
+          "IR_albedo": "0.351",
+          "IR_albedo_err": "0.055",
+          "Beaming_param": "1.161",
+          "Beaming_param_err": "0.027",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153202,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "149",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00149",
+          "Absolute_mag": "10.79",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2456655.9740634",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "18.968",
+          "Diameter_err": "3.636",
+          "V_albedo": "0.314",
+          "V_albedo_err": "0.070",
+          "IR_albedo": "0.471",
+          "IR_albedo_err": "0.171",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas12": "Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 2 others, Preliminary Analysis of WISE/NEOWISE 3-Band Cryogenic and Post-cryogenic Observations of Main Belt Asteroids, Astroph. J. 759, L8, doi:10.1088/2041-8205/759/1/L8, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

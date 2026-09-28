@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "asteroid-2001-sn263",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 153591,
+    "by": "SBDB record des 153591"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 25543,
+        "fields": {
+          "Number": "153591",
+          "Name": "2001 SN263",
+          "Desig": "2001 SN263",
+          "Family": "9101",
+          "CSource": "A",
+          "Class": "S*",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "1.29",
+          "HSource": "D",
+          "H": "16.81",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.24",
+          "G2": "-9.99",
+          "AlbSource": "A",
+          "AlbFlag": "-",
+          "Albedo": "0.20",
+          "PFlag": "-",
+          "Period": "3.423",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.13",
+          "AmpMax": "0.27",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "M",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  }
+}

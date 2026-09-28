@@ -190,6 +190,177 @@
           "image": "/scenes/bennu/bennu-elevation-legend.webp"
         },
         "notes": "Color shows radius minus a 241 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
+      },
+      {
+        "id": "geopotential",
+        "label": "Geopotential height",
+        "thumbnail": "/scenes/bennu/bennu-geopotential-thumbnail.webp",
+        "surface": "bennu-geopotential-surface@2x.webp",
+        "poles": "bennu-geopotential-surface@2x.webp",
+        "source": {
+          "id": "bennu-geopotential",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/sciadv.abd3649"
+        },
+        "falseColor": false,
+        "legend": {
+          "kind": "scale",
+          "title": "Geopotential height",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "45",
+            "90"
+          ],
+          "meta": "m above the lowest surface potential",
+          "sourceUrl": "https://doi.org/10.1126/sciadv.abd3649",
+          "image": "/scenes/bennu/bennu-geopotential-legend.webp"
+        },
+        "notes": "Height above the lowest point of Bennu’s surface potential, as archived by the OSIRIS-REx altimetry team for OLA shape v20 at 1.68 m facets: (U − Umin)/|g|, with uniform density 1194 kg/m³ and Bennu’s spin. Material would move from high to low values. Shown on its own archived mesh; each facet keeps its released value."
+      },
+      {
+        "id": "slope",
+        "label": "Slope",
+        "thumbnail": "/scenes/bennu/bennu-slope-thumbnail.webp",
+        "surface": "bennu-slope-surface@2x.webp",
+        "poles": "bennu-slope-surface@2x.webp",
+        "source": {
+          "id": "bennu-slope",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/sciadv.abd3649"
+        },
+        "falseColor": false,
+        "legend": {
+          "kind": "scale",
+          "title": "Slope",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "40",
+            "80"
+          ],
+          "meta": "deg · relative to gravity",
+          "sourceUrl": "https://doi.org/10.1126/sciadv.abd3649",
+          "image": "/scenes/bennu/bennu-slope-legend.webp"
+        },
+        "notes": "Angle between each facet and the local gravity plus spin acceleration, as archived for OLA shape v20 at 1.68 m facets with uniform density 1194 kg/m³. Values above 80° display at the top color. Shown on its own archived mesh; each facet keeps its released value."
+      },
+      {
+        "id": "gravity-anomaly",
+        "label": "Gravity anomaly",
+        "thumbnail": "/scenes/bennu/bennu-gravity-anomaly-thumbnail.webp",
+        "surface": "bennu-gravity-anomaly-surface@2x.webp",
+        "poles": "bennu-gravity-anomaly-surface@2x.webp",
+        "source": {
+          "id": "bennu-gravity-anomaly",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/sciadv.abc3350"
+        },
+        "falseColor": false,
+        "legend": {
+          "kind": "scale",
+          "title": "Gravity anomaly",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-3.5",
+            "0",
+            "3.5"
+          ],
+          "meta": "% of uniform-density surface gravity",
+          "sourceUrl": "https://doi.org/10.1126/sciadv.abc3350",
+          "image": "/scenes/bennu/bennu-gravity-anomaly-legend.webp"
+        },
+        "notes": "Radio Science Working Group map: measured surface acceleration minus the acceleration of a uniform-density Bennu, as a percentage. Positive is stronger than uniform density. The field comes from tracked ejected particles and spacecraft. Shown on the SPC v42 mesh the product was computed on."
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "thumbnail": "/scenes/bennu/bennu-thermal-inertia-thumbnail.webp",
+        "surface": "bennu-thermal-inertia-surface@2x.webp",
+        "poles": "bennu-thermal-inertia-surface@2x.webp",
+        "source": {
+          "id": "bennu-thermal-inertia",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/sciadv.abc3699"
+        },
+        "falseColor": false,
+        "legend": {
+          "kind": "scale",
+          "title": "Thermal inertia",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "180",
+            "290",
+            "400"
+          ],
+          "meta": "J m⁻² K⁻¹ s⁻½ · OTES",
+          "sourceUrl": "https://doi.org/10.1126/sciadv.abc3699",
+          "image": "/scenes/bennu/bennu-thermal-inertia-legend.webp"
+        },
+        "notes": "OTES thermal inertia from all seven Detailed Survey stations, fitted with a thermophysical model (Rozitis et al. 2020). Low values mark porous, weak boulders. Facets the archive leaves empty show the gray grid. Shown on the SPO v34 mesh the product was computed on.",
+        "noData": true
+      },
+      {
+        "id": "hydration",
+        "label": "2.7 µm band",
+        "thumbnail": "/scenes/bennu/bennu-hydration-thumbnail.webp",
+        "surface": "bennu-hydration-surface@2x.webp",
+        "poles": "bennu-hydration-surface@2x.webp",
+        "source": {
+          "id": "bennu-hydration",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/science.abc3522"
+        },
+        "falseColor": false,
+        "legend": {
+          "kind": "scale",
+          "title": "2.7 µm band depth",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "11.8",
+            "13.9",
+            "15.9"
+          ],
+          "meta": "% · producer stretch (mean ± 2σ)",
+          "sourceUrl": "https://doi.org/10.1126/science.abc3522",
+          "image": "/scenes/bennu/bennu-hydration-legend.webp"
+        },
+        "notes": "Depth of the 2.74 µm absorption of hydrated clay minerals in OVIRS spectra at 12:30 local time (Simon et al. 2020). The archive stores it as a fraction; the legend shows percent. Facets marked −9999 in the archive show the gray grid. Shown on the SPC v20 mesh the map was made on.",
+        "noData": true
+      },
+      {
+        "id": "carbon",
+        "label": "3.4 µm band",
+        "thumbnail": "/scenes/bennu/bennu-carbon-thumbnail.webp",
+        "surface": "bennu-carbon-surface@2x.webp",
+        "poles": "bennu-carbon-surface@2x.webp",
+        "source": {
+          "id": "bennu-carbon",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/science.abc3522"
+        },
+        "falseColor": false,
+        "legend": {
+          "kind": "scale",
+          "title": "3.4 µm band area",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.28",
+            "0.49",
+            "0.70"
+          ],
+          "meta": "%·µm · producer stretch (mean ± 2σ)",
+          "sourceUrl": "https://doi.org/10.1126/science.abc3522",
+          "image": "/scenes/bennu/bennu-carbon-legend.webp"
+        },
+        "notes": "Area of the 3.2–3.6 µm absorption linked to organics and carbonates in OVIRS spectra at 12:30 local time (Simon et al. 2020). Larger values mean a stronger band, not a measured abundance. Facets marked −9999 in the archive show the gray grid. Shown on the SPC v20 mesh the map was made on.",
+        "noData": true
       }
     ]
   },
@@ -229,6 +400,12 @@
       "role": "terrain",
       "description": "Released shape model",
       "href": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj"
+    },
+    {
+      "label": "Derived maps",
+      "role": "surface",
+      "description": "OSIRIS-REx derived map archive",
+      "href": "https://sbnarchive.psi.edu/pds4/orex/"
     }
   ],
   "provenance": {

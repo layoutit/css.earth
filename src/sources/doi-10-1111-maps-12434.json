@@ -1,0 +1,50 @@
+{
+  "id": "doi-10-1111-maps-12434",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Peplowski et al. (2015): Hydrogen and major element concentrations on 433 Eros: Evidence for an L- or LL-chondrite-like surface composition",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1111/maps.12434"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/maps.12434",
+      "label": "Publisher"
+    },
+    {
+      "role": "mirror",
+      "url": "https://europepmc.org/article/PMC/PMC5114864",
+      "label": "Europe PMC full text"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1111/maps.12434",
+      "checkedOn": "2026-09-28",
+      "locator": "Crossref record: title, authors, Meteoritics & Planetary Science 50(3), 353-367; CC BY-NC-ND 4.0"
+    }
+  ],
+  "creators": [
+    "P. N. Peplowski",
+    "D. Bazell",
+    "L. G. Evans",
+    "J. O. Goldsten",
+    "D. J. Lawrence",
+    "L. R. Nittler"
+  ],
+  "publisher": "Meteoritics & Planetary Science 50, 353-367",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Peplowski et al. (2015), Meteoritics & Planetary Science 50, 353-367",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1111/maps.12434"
+    }
+  ]
+}

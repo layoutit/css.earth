@@ -1,0 +1,71 @@
+{
+  "checked": "2026-09-28",
+  "cache": "output/catalogue-facts/cache",
+  "rules": {
+    "omitKinds": [
+      "lightcurve-amplitude"
+    ],
+    "omitKindsReason": "Reviewed 2026-09-28: lightcurve amplitude depends on viewing geometry and read as noise on the factsheet.",
+    "omitCompanionsShownAsBodies": true,
+    "omitCompanionsReason": "A companion the app already shows as its own body (an astronomy record whose parent is the primary, or a moon in site/source/moon-catalogues.json) is not repeated as a fact on the primary."
+  },
+  "catalogues": {
+    "lcdb": {
+      "catalogueId": "asteroid-lightcurve-database-v4",
+      "citation": "Warner, Harris & Pravec (2021), Asteroid Lightcurve Database (LCDB) V4.0",
+      "bundle": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/bundle_ast-lightcurve-database.xml",
+      "tables": {
+        "summary": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv"
+      }
+    },
+    "occultations": {
+      "catalogueId": "small-bodies-occultations-v4",
+      "citation": "Herald et al. (2024), Small Bodies Occultations V4.0",
+      "bundle": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/bundle_smallbodiesoccultations.xml",
+      "tables": {
+        "diameters": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv"
+      }
+    },
+    "tno": {
+      "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+      "citation": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0",
+      "bundle": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/bundle_tno-centaur_diam-albedo-density.xml",
+      "tables": {
+        "values": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+        "references": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/references.tab"
+      }
+    },
+    "neowise": {
+      "catalogueId": "neowise-diameters-albedos-v2",
+      "citation": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0",
+      "bundle": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+      "tables": {
+        "mainbelt": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "neos": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+        "jupiter_trojans": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_jupiter_trojans.csv",
+        "hildas": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_hildas.csv",
+        "centaurs": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_centaurs.csv",
+        "references": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/references.csv"
+      }
+    },
+    "masses": {
+      "catalogueId": "asteroid-masses-baer-2012",
+      "citation": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0",
+      "bundle": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/bundle_compil.ast.masses.xml",
+      "tables": {
+        "masses": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "references": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmassrefs12.tab"
+      }
+    },
+    "binary": {
+      "catalogueId": "binary-minor-planets-v3",
+      "citation": "Johnston (2019), Binary Minor Planets V3.0",
+      "bundle": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/bundle_ast_binary_parameters_compilation.xml",
+      "tables": {
+        "systems": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+        "sources": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+        "references": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/references.tab"
+      }
+    }
+  }
+}

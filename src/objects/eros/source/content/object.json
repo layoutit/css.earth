@@ -58,6 +58,84 @@
           "catalogueId": "jpl-small-body-database",
           "locator": "Target physical data: geometric albedo"
         }
+      },
+      {
+        "id": "surface-mg-si-xray",
+        "label": "Surface Mg/Si, X-ray",
+        "value": "0.753 (+0.078/−0.055), eight-flare average",
+        "source": {
+          "url": "https://doi.org/10.1016/j.icarus.2008.09.018",
+          "label": "Lim and Nittler (2009), Icarus 200, NEAR X-ray spectrometer",
+          "checked": "2026-09-28",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "doi-10-1016-j-icarus-2008-09-018",
+          "locator": "/references/0/ratios/Mg~1Si; Table 9, uncorrected, eight-flare average"
+        }
+      },
+      {
+        "id": "surface-fe-si-xray",
+        "label": "Surface Fe/Si, X-ray",
+        "value": "1.678 (+0.338/−0.320), eight-flare average",
+        "source": {
+          "url": "https://doi.org/10.1016/j.icarus.2008.09.018",
+          "label": "Lim and Nittler (2009), Icarus 200, NEAR X-ray spectrometer",
+          "checked": "2026-09-28",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "doi-10-1016-j-icarus-2008-09-018",
+          "locator": "/references/0/ratios/Fe~1Si; Table 9, uncorrected, eight-flare average"
+        }
+      },
+      {
+        "id": "surface-s-si-xray",
+        "label": "Surface S/Si, X-ray",
+        "value": "0.005 ± 0.008; ordinary chondrites 0.111–0.114",
+        "source": {
+          "url": "https://doi.org/10.1016/j.icarus.2008.09.018",
+          "label": "Lim and Nittler (2009), Icarus 200, NEAR X-ray spectrometer",
+          "checked": "2026-09-28",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "doi-10-1016-j-icarus-2008-09-018",
+          "locator": "/references/0/ratios/S~1Si and /references/0/chondritesTable9; Table 9"
+        }
+      },
+      {
+        "id": "landing-site-fe-si-gamma",
+        "label": "Landing-site Fe/Si, gamma-ray",
+        "value": "1.19 ± 0.30 by mass (2 SD)",
+        "source": {
+          "url": "https://doi.org/10.1111/maps.12434",
+          "label": "Peplowski et al. (2015), Meteoritics & Planetary Science 50, NEAR gamma-ray spectrometer",
+          "checked": "2026-09-28",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "doi-10-1111-maps-12434",
+          "locator": "/references/1/ratios/Fe~1Si; Table 2, BGO"
+        }
+      },
+      {
+        "id": "landing-site-hydrogen-gamma",
+        "label": "Landing-site hydrogen, gamma-ray",
+        "value": "1,100 ppm (400–2,700 ppm, 2 SD)",
+        "source": {
+          "url": "https://doi.org/10.1111/maps.12434",
+          "label": "Peplowski et al. (2015), Meteoritics & Planetary Science 50, NEAR gamma-ray spectrometer",
+          "checked": "2026-09-28",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "doi-10-1111-maps-12434",
+          "locator": "/references/1/hydrogenPpm; abstract and Hydrogen Abundance section"
+        }
+      },
+      {
+        "id": "landing-site-potassium-gamma",
+        "label": "Landing-site potassium, gamma-ray",
+        "value": "0.07% (±40%)",
+        "source": {
+          "url": "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x",
+          "label": "Evans et al. (2001), Meteoritics & Planetary Science 36, NEAR gamma-ray spectrometer",
+          "checked": "2026-09-28",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "doi-10-1111-j-1945-5100-2001-tb01854-x",
+          "locator": "/references/2/potassiumPercent; Table 1, K(1461)"
+        }
       }
     ]
   },
@@ -216,6 +294,37 @@
           "image": "/scenes/eros/eros-elevation-legend.webp"
         },
         "notes": "Color shows radius minus a 8420 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
+      },
+      {
+        "id": "ponds",
+        "label": "Ponds",
+        "thumbnail": "/scenes/eros/eros-ponds-thumbnail.webp",
+        "surface": "eros-ponds-surface@2x.webp",
+        "poles": "eros-ponds-surface@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "eros-ponds",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.26033/4dqc-8067"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Ponds",
+          "meta": "Roberts Eros Ponds Catalog V1.1 · diameters by P. C. Thomas · cyan is the catalogue's own SBMT colour",
+          "sourceUrl": "https://doi.org/10.26033/4dqc-8067",
+          "items": [
+            {
+              "label": "Catalogued pond, published diameter",
+              "color": "#00ffff"
+            },
+            {
+              "label": "No catalogued pond",
+              "color": "#808080"
+            }
+          ]
+        },
+        "notes": "Ponds are smooth, flat deposits of fine material in the floors of small hollows. Each cyan circle is one pond from the Roberts Eros Ponds Catalog V1.1, drawn on the shape at the characteristic diameter P. C. Thomas measured; ponds are rarely round, so this shows size, not outline. 326 of the 334 ponds are drawn; 8 catalogued centres lie 66 to 384 m off the shape and are left out. Ponds were found in images of uneven resolution and small ones are missed where images are coarse, so grey ground is not proof that no pond is there. The smallest ponds, a few metres across, can be smaller than one map pixel.",
+        "noData": true
       }
     ]
   },

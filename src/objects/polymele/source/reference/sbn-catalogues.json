@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "polymele",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 15094,
+    "by": "SBDB record des 15094"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 8163,
+        "fields": {
+          "Number": "15094",
+          "Name": "Polymele",
+          "Desig": "1999 WB2",
+          "Family": "9202",
+          "CSource": "A",
+          "Class": "C*",
+          "DiamSource": "C",
+          "DiamFlag": "-",
+          "Diam": "24.64",
+          "HSource": "M",
+          "H": "11.77",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.12",
+          "G2": "-9.99",
+          "AlbSource": "A",
+          "AlbFlag": "-",
+          "Albedo": "0.057",
+          "PFlag": "-",
+          "Period": "5.8607",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "-9.99",
+          "AmpMax": "0.09",
+          "U": "2-",
+          "Notes": "-",
+          "IsBinary": "-",
+          "Pole": "N",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 218,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_jupiter_trojans_csv::2.0",
+          "Asteroid_Number": "15094",
+          "Prov_desig": "-",
+          "MPC_packed_name": "15094",
+          "Absolute_mag": "11.60",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455228.5340305",
+          "N_W1": "0",
+          "N_W2": "0",
+          "N_W3": "11",
+          "N_W4": "11",
+          "Fit_code": "DVB-",
+          "Diameter": "21.075",
+          "Diameter_err": "0.136",
+          "V_albedo": "0.091",
+          "V_albedo_err": "0.017",
+          "IR_albedo": "0.182",
+          "IR_albedo_err": "0.008",
+          "Beaming_param": "1.060",
+          "Beaming_param_err": "0.009",
+          "Stacked_flag": "-",
+          "Reference": "Gr12b",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Gr12b": "Grav, T., A.K. Mainzer, J.M. Bauer, J.R. Masiero, C.R. Nugent, WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy, Astroph. J. 759, 49, doi:10.1088/0004-637X/759/1/49, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}
