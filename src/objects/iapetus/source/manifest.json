@@ -406,6 +406,83 @@
       }
     },
     {
+      "id": "photojournal-pia07005-figure",
+      "path": "figures/PIA07005.tif",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07005/PIA07005.tif",
+      "catalog": "https://science.nasa.gov/photojournal/iapetus-temperature-map/",
+      "credit": "NASA/JPL/GSFC",
+      "license": "NASA/JPL image use policy; retain the published credit",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://science.nasa.gov/photojournal/iapetus-temperature-map/"
+      ],
+      "acquisition": "Download the original Photojournal TIFF with the cirs-temperature-figure acquisition group.",
+      "redistribution": "Educational visualization with the published credit; the cleaned crop and display resampling are cssEarth derivatives.",
+      "consumers": [
+        "temperature-figure"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-photojournal-pia07005-figure",
+            "role": "material",
+            "evidence": "NASA PIA07005, released 2005-01-10; Cassini CIRS temperature map from the 31 December 2004 flyby."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-cirs-pia07005-temperature",
+      "path": "figures/pia07005-map.png",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07005/PIA07005.tif",
+      "catalog": "https://science.nasa.gov/photojournal/iapetus-temperature-map/",
+      "credit": "NASA/JPL/GSFC; cssEarth crop and annotation mask",
+      "license": "NASA/JPL image use policy; retain the published credit",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://science.nasa.gov/photojournal/iapetus-temperature-map/"
+      ],
+      "acquisition": "Checked-in compact crop, reproduced from figures/PIA07005.tif by node tools/objects/figure-map/clean-figure-map.mts src/objects/iapetus/source/figures/pia07005-map.json.",
+      "redistribution": "Educational visualization with the published credit; the published figure colours are kept unchanged inside the plotted frame.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "temperature",
+      "label": "Temperature",
+      "falseColor": true,
+      "width": 358,
+      "height": 358,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 270,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 736000
+      },
+      "coverage": "Crop of the figure's plotted frame, 0-180 W (180-360 E) by 90 S-90 N at 2 figure pixels per degree. Kept pixels cover 18.0% of the sphere by area. The figure's black (unobserved), its compression halo (brightest channel 19 or less), grid lines, axis ticks and the subsolar asterisk, each with a measured halo, are withheld as missing; nothing is filled. The rest of the globe has no data in this figure.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://science.nasa.gov/photojournal/iapetus-temperature-map/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-cassini-cirs-pia07005-temperature",
+            "role": "material",
+            "evidence": "NASA PIA07005, released 2005-01-10; Cassini CIRS temperature map from the 31 December 2004 flyby."
+          }
+        ]
+      }
+    },
+    {
       "id": "iapetus-cassini-infrared",
       "path": "cassini-ice/iapetus-infrared-display.tif",
       "origin": "https://vims.univ-nantes.fr/cube/1568129671_1",
@@ -728,6 +805,10 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "figures/pia07005-map.json",
+      "purpose": "Measured crop, annotation rectangles, background level and grid for the PIA07005 figure; reproduces figures/pia07005-map.png."
     }
   ],
   "generatedIntermediates": []

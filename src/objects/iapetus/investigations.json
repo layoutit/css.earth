@@ -73,6 +73,27 @@
         "https://ntrs.nasa.gov/citations/19840066646"
       ],
       "revisitWhen": "The fitted emission range of Squyres et al. (1984), or a Cassini disc-resolved Iapetus law with its ranges, is read in the paper."
+    },
+    {
+      "id": "photojournal-pia07005-cirs-temperature",
+      "subject": "NASA PIA07005 Iapetus Temperature Map (Cassini CIRS, 31 December 2004 flyby)",
+      "status": "included",
+      "finding": "Simple-cylindrical figure with a labelled frame: West Longitude 180-0 and latitude -90 to +90. Fit from the labelled frame and centre lines: 2.000 figure pixels per degree on both axes. The 10 unlabelled axis ticks (every 30 degrees) fall on the fit with 0 px residual (the half-pixel line width is 0.25 degrees). West longitude converts to east as 360 - W; the frame is 180-360 E. Landmark check against the USGS Cassini-Voyager base mosaic: along 60, 75, 105 and 120 W, the change from red to magenta (bar steps near 110 K) falls at the latitude where the mosaic brightens past grey level 140 (the Cassini Regio edge). Offsets are -5, 0, 0 and 0 degrees at the 5-degree sampling step. The colour bar has 12 equal 40 px steps; its 70-130 K labels sit on every second step boundary within 2.5-5.5 px (under 0.7 K). The legend repeats those steps and labels only. Map colours are continuous rather than stepped, so pixels are shown in the published colours, not decoded to numbers. Grid lines, ticks and the subsolar asterisk are withheld as measured rectangles; each keeps a 2 px halo, since ringing beyond 2 px is under 19 RGB against at least 46 between bar steps. Background at brightest channel 19 or less (the measured halo on black) is withheld. Kept pixels cover 18.0% of the sphere. About 3% of kept pixels are paler than the bar's top step; the figure gives them no separate value. It is one moment: the Sun was overhead at the asterisk, near 106 W, 9 S.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/iapetus-temperature-map/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07005/PIA07005.tif"
+      ]
+    },
+    {
+      "id": "photojournal-pia07006-temperature-variation",
+      "subject": "NASA PIA07006 Iapetus Temperature Variation Map",
+      "status": "excluded",
+      "finding": "Despite its title this is a plot, not a map: surface temperature (40-140 K) against time of day, with CIRS points and a thermal-inertia model curve. It has no latitude or longitude axis, so there is nothing to register to the surface.",
+      "revisitWhen": "A chart lens is wanted and the plotted CIRS points are available as numbers from the team or an archive product.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/iapetus-temperature-variation-map/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07006/PIA07006.tif"
+      ]
     }
   ]
 }

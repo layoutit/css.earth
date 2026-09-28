@@ -145,6 +145,29 @@
           "wrapLongitude": true
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "iapetus-{id}{suffix}.webp",
+      "thumbnail": "iapetus-lens-{id}.webp",
+      "source": "figures/pia07005-map.png",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "cassini-cirs-pia07005-temperature",
+        "id": "temperature",
+        "textureScale": 0.25,
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 270,
+          "grid": {
+            "pixelsPerDegree": 2,
+            "sampleOffset": 178.5,
+            "lineOffset": 178.5
+          }
+        }
+      }
     }
   ],
   "lighting": {

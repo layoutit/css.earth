@@ -152,6 +152,54 @@
       ],
       "path": "science/gravity/JGDWN_CER18D_GEOID_0018.LBL",
       "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNCGRS_2_v4/DATA/RSDMAP/JGDWN_CER18D_GEOID_0018.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/grand/GRD_HYDROGEN_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_HYDROGEN_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/grand/GRD_HYDROGEN_MAP.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/HYDROGEN/GRD_HYDROGEN_MAP.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/grand/GRD_IRON_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_IRON_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/grand/GRD_IRON_MAP.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/IRON/GRD_IRON_MAP.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.TAB",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_TPE_NEUTRON_COUNTS_MAP.TAB"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.LBL",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/HYDROGEN/GRD_TPE_NEUTRON_COUNTS_MAP.LBL"
     }
   ]
 }

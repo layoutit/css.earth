@@ -234,6 +234,118 @@
         "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
       ],
       "revisitWhen": "Readers ask how far the geoid itself may be off."
+    },
+    {
+      "id": "dawn-grand-ceres-maps",
+      "subject": "Dawn GRaND Ceres derived maps: hydrogen, iron and thermal plus epithermal neutron counts (DAWN GRaND Ceres Bundle 1.0, doi:10.26033/hf9h-pt31)",
+      "status": "included",
+      "finding": "GRD_HYDROGEN_MAP (wt.% water-equivalent hydrogen, 16.46 to 28.58, sigma about 0.82, a lower bound per the archive), GRD_IRON_MAP (wt.% iron, 13.17 to 17.42, statistical sigma about 0.40) and GRD_TPE_NEUTRON_COUNTS_MAP (counts/s, 2.670 to 3.696, sigma of the mean about 0.02, 276 to 2,885 samples per pixel) are shown as the hydrogen, iron and neutron-counts lenses, grouped with Vesta's as Surface elements. Each table has 110 twenty-degree quasi-equal-area pixels in 10 latitude bands (1, 8, 12, 16, 18, 18, 16, 12, 8, 1 pixels) that tile the sphere exactly; the archive gives a spatial resolution of about 600 km FWHM from LAMO at about 385 km, 2015-12-16 to 2016-05-11. The shared pds-equal-area-table reader samples the containing pixel with no interpolation; the PDS3 labels (DWNCGRD_2) describe their columns inline, which the reader needed to accept. Table bytes match the MD5 in the PDS4 labels. Hydrogen rises from 16.5 at the equator to 28.6 at the north pole while neutron counts fall toward both poles; iron peaks within 20 degrees of the equator. Scales span every value; viridis as on Vesta.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/CATALOG/",
+        "https://doi.org/10.1126/science.aah6765",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ]
+    },
+    {
+      "id": "dawn-grand-ceres-smoothed-hydrogen",
+      "subject": "GRD_SMOOTHED_HYDROGEN_MAP, the same hydrogen on 2-degree pixels",
+      "status": "excluded",
+      "finding": "The data set catalog says it is the 20-degree counting map smoothed with tesseral spherical harmonics, rebinned to 2 degrees and converted to hydrogen; it carries no new measurement and keeps the 600 km FWHM resolution (16,200 rows, 16.36 to 28.65 wt.% WEH). Showing it beside the 20-degree map would suggest detail the data do not have, so only the measured pixels are shown.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/CATALOG/GRD_SMOOTHED_HYDROGEN_MAP_DATASET.CAT"
+      ],
+      "revisitWhen": "Readers ask for a smooth hydrogen map, or the archive documents the harmonic degree used."
+    },
+    {
+      "id": "dawn-grand-ceres-iron-gamma-counts",
+      "subject": "GRD_IRON_GAMMA_COUNTS_MAP, the 7.6 MeV gamma-ray counting rate",
+      "status": "excluded",
+      "finding": "This is the counting rate the iron map was computed from (5.45 to 7.89 counts/min); the iron lens shows the same information in weight percent. Its PDS3 label names the value columns TPE_COUNTING_RATE and SIG_TPE_COUNTING_RATE, although their descriptions and the PDS4 label call them the Fe 7.6 MeV rate.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/IRON/GRD_IRON_GAMMA_COUNTS_MAP.LBL",
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_IRON_GAMMA_COUNTS_MAP.xml"
+      ],
+      "revisitWhen": "The iron concentration map is superseded or withdrawn."
+    },
+    {
+      "id": "dawn-grand-ceres-c2e-elliptical",
+      "subject": "GRaND data from Dawn's final elliptical orbit (C2E), periapsis under 50 km",
+      "status": "deferred",
+      "finding": "The bundle description says these are high spatial-resolution mapping data, but only raw and calibrated counts are archived; the derived collection holds no C2E map. Making one would be our own reduction of GRaND spectra.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/document/Dawn_GRaND_Ceres_bundle_description.pdf"
+      ],
+      "revisitWhen": "A derived C2E map is archived or published with data."
+    },
+    {
+      "id": "dawn-fc-lamo-clear-global-35m",
+      "subject": "Dawn FC LAMO clear-filter global mosaic CE_LAMO_G_00N_180E_EQU_CLR.IMG (DAWN-A-FC2-5-CERESMOSAIC-V1.0, volume DWNCLCFC2_2), 35 m/pixel",
+      "status": "excluded",
+      "finding": "Its 35 m texels are never drawn. The camera stops at 1.2 Ceres radii from the centre (94 km above the surface) or at maximum zoom 4, whichever is farther; with a focal length of 0.866 times the viewport width, one CSS pixel below the camera covers at least 155 to 169 m (framing reference zoom 1.0 or 1.1, at viewports 710 or 640 CSS px wide), so at two texels per CSS pixel the finest texel shown is 77 to 85 m. At 390 CSS px it is 139 m and at 1440 CSS px 129 to 150 m, the 140 m mosaic's own scale. The product is one 3.56 GB 8-bit image (84,376 x 42,187) whose projection offsets are not whole pixels at 234.37 pixels/degree, which the shared PDS byte reader refuses. See evidence/max-zoom/texels.json.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/dawn/fc/DWNCLCFC2_2/DATA/",
+        "evidence/max-zoom/texels.json"
+      ],
+      "revisitWhen": "The shared camera lets Ceres come closer than 1.2 radii, or the Monochrome atlas is raised past the 140 m mosaic's 21,093 texels around the equator."
+    },
+    {
+      "id": "monochrome-atlas-density",
+      "subject": "Texel size of the shipped Monochrome atlas",
+      "status": "unresolved",
+      "finding": "The Monochrome lens is prepared at 4096 texels around the equator (ceres-normal@2x.webp, 4160 x 3072 with gutters, 3,887,406 bytes), 720 m per texel, from a 4096 x 2048 WMS render of the 140 m mosaic. At maximum zoom the camera shows 77 to 173 m per texel depending on the viewport, so the lens is magnified about 5 to 9 times there. A 16,384-texel atlas (180 m) would be about 62 MB of full-resolution pages and 32,768 (90 m) about 250 MB, if bytes grow with texel count as now, plus about a third more for the reduced levels; first views load only the level the silhouette needs.",
+      "evidence": [
+        "evidence/max-zoom/texels.json",
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m"
+      ],
+      "revisitWhen": "The lead decides on a Monochrome resolutionScale and its source (WMS at a larger size or the native cube)."
+    },
+    {
+      "id": "urvara-c2e-mosaics",
+      "subject": "Ceres Urvara Dawn FC C2E mosaics V1.0 (urn:nasa:pds:dwarf_planet-ceres.dawn-fc.urvara-mosaics)",
+      "status": "excluded",
+      "finding": "Controlled clear-filter mosaics of Urvara (128 to 93 W, 59 to 35 S) from 1,583 C2E images at 5 m/pixel, polar stereographic 8-bit GeoTIFF, 2.32 GB for the main mosaic, photometrically corrected with Schroeder et al. (2017, 2018). The repository has a regional route (the Europa normal lens's detailMosaic inserts controlled GeoTIFFs into the global lens), but inserted pixels take the global atlas's density, and on Ceres the finest texel the camera ever shows is 77 to 85 m, so 5 m detail cannot appear; resampled that far it holds nothing the LAMO or 140 m mosaics lack. No route lets the camera come closer over one region.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/dwarf_planet-ceres.dawn-fc.urvara-mosaics/document/productdescription.txt",
+        "evidence/max-zoom/texels.json"
+      ],
+      "revisitWhen": "A shared regional close-zoom route exists (camera below 1.2 radii with regional texture pages)."
+    },
+    {
+      "id": "occator-xm2-mosaic",
+      "subject": "Occator crater (Cerealia and Vinalia Faculae) XM2 clear-filter mosaic, about 3 m/pixel",
+      "status": "excluded",
+      "finding": "The DLR XM2 mosaic used for the Occator geologic maps is not in the Small Bodies Node Dawn FC volumes (checked DWNC*FC2 listings: only global HAMO and LAMO mosaic volumes) or PDS4 Dawn bundles; PIA21924 is a press image without a map frame. Even if released, its detail is below the 77 to 85 m the camera can show.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds3/dawn/fc/",
+        "https://sbnarchive.psi.edu/pds4/dawn/",
+        "https://science.nasa.gov/resource/mosaic-of-cerealia-facula-in-occator-crater/"
+      ],
+      "revisitWhen": "A controlled Occator mosaic is archived and a regional close-zoom route exists."
+    },
+    {
+      "id": "photojournal-pia21914-faculae-map",
+      "subject": "NASA PIA21914 Map of Ceres' Bright Spots (Dawn framing camera)",
+      "status": "excluded",
+      "finding": "Global simple-cylindrical picture (2000 x 989 px) with no printed grid. Three gazetteer landmarks (Occator floor, Haulani, Ahuna Mons markers) fit 5.47 px per degree with the left edge near 177.5 E, residuals up to 3.7 px. The markers are not crater centres, so this is only a rough frame check. The content is coloured dots in four classes (floor faculae, rim/wall faculae, bright ejecta, Ahuna Mons) over a camera mosaic. That is a categorical point overlay, not a mapped quantity with a scale and units. As a lens it would burn dots into a photograph; as features it would need each spot's coordinates, which the figure gives only as digitised dot positions.",
+      "revisitWhen": "The faculae catalogue behind the figure (coordinates and class for each of the 300+ spots) is found in a published table or archive product, for use as feature content rather than a lens.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/map-of-ceres-bright-spots/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21914/PIA21914.tif"
+      ]
+    },
+    {
+      "id": "alma-265ghz-thermal-images",
+      "subject": "ALMA Ceres Imaging and Spectrum V1.0 (urn:nasa:pds:gbo.ast-ceres.alma.images-spectra::1.0): 265 GHz thermal images as a surface lens",
+      "status": "excluded",
+      "finding": "All 86 calibrated 12-m images (3 epochs: 40 in Oct-Nov 2015, 31 in Sep 2017, 15 in Oct 2017) and the three imaging_parameters tables were read. From the tabulated beam axes and geocentric range, the beam at Ceres is 77-111 km x 63-86 km in 2015, 51-98 x 40-60 km in Sep 2017 and 47-78 x 31-41 km in Oct 2017 (geometric mean 38-96 km). Against the 939.4 km diameter this is 10-25 beams across the disc, about 67-430 beams per disc by area, matching the 10-20 beams the data description states. The app's Dawn 140 m map is 270-690 times finer. Each epoch covers a full rotation (largest sub-Earth longitude gap 55, 62 and 123 degrees; 31 degrees for all epochs combined), but sub-Earth latitude stays between +6.4 and -1.0 degrees, so the poles are only seen at the limb. The disc is dominated by a smooth limb-darkening and diurnal pattern that changes with local time, not location: it spans a median 51%, 31% and 23% of mean disc brightness per epoch. After removing a degree-4 smooth fit inside 0.85 R, the leftover structure is 2.9%, 1.2% and 1.6% RMS (median). The off-disc RMS is 5.4%, 1.1% and 1.5%, and the data description gives 3%, 1% and 2% as imaging artifacts. Surface-fixed test: residual maps rotated to Ceres north and compared between independent epochs looking at the same longitude (within 8 degrees) correlate at median r = 0.04 (n = 101; 0.05 for Sep vs Oct 2017 alone, n = 17). Pairs looking at opposite sides give r = 0.06 (n = 1178). Within one epoch r = 0.61, so the leftover pattern belongs to each epoch's imaging, not to the ground. A surface-fixed thermal map would show about 40-100 km blobs at the artifact level, with no feature that repeats between epochs. Li et al. (2020), the bundle's own paper, reports disc-integrated properties only. The lightcurves and spectrum are disc-integrated and have no surface to map onto. Nothing readable is added to Ceres' surface.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-ceres.alma.images-spectra_V1_0/",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-ceres.alma.images-spectra_V1_0/document/data_description.pdfa.pdf",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-ceres.alma.images-spectra_V1_0/data/imaging_parameters/",
+        "https://doi.org/10.3847/1538-3881/ab8305"
+      ],
+      "revisitWhen": "A published resolved thermal-inertia or emissivity map of Ceres from these ALMA data, or a new ALMA epoch whose surface-fixed residuals repeat between independent epochs."
     }
   ]
 }

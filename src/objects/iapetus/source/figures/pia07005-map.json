@@ -1,0 +1,183 @@
+{
+  "schema": "cssearth-figure-map-clean@1",
+  "source": "PIA07005.tif",
+  "output": "pia07005-map.png",
+  "crop": {
+    "left": 95,
+    "top": 123,
+    "width": 358,
+    "height": 358
+  },
+  "rectangles": [
+    {
+      "left": 95,
+      "top": 299,
+      "width": 358,
+      "height": 6,
+      "reason": "Latitude 0 grid line (rows 301-302) with its measured 2 px compression halo."
+    },
+    {
+      "left": 271,
+      "top": 123,
+      "width": 6,
+      "height": 358,
+      "reason": "Longitude 90 W grid line (columns 273-274) with its measured 2 px compression halo."
+    },
+    {
+      "left": 95,
+      "top": 123,
+      "width": 2,
+      "height": 358,
+      "reason": "Halo of the left frame line (columns 93-94, 180 W)."
+    },
+    {
+      "left": 451,
+      "top": 123,
+      "width": 2,
+      "height": 358,
+      "reason": "Halo of the right frame line (columns 453-454, 0 W)."
+    },
+    {
+      "left": 95,
+      "top": 123,
+      "width": 358,
+      "height": 2,
+      "reason": "Halo of the top frame line (rows 121-122, 90 N)."
+    },
+    {
+      "left": 95,
+      "top": 479,
+      "width": 358,
+      "height": 2,
+      "reason": "Halo of the bottom frame line (rows 481-482, 90 S)."
+    },
+    {
+      "left": 95,
+      "top": 179,
+      "width": 12,
+      "height": 6,
+      "reason": "Left axis tick at +60 latitude (columns 94-104) with halo."
+    },
+    {
+      "left": 441,
+      "top": 179,
+      "width": 12,
+      "height": 6,
+      "reason": "Right axis tick at +60 latitude (columns 443-454) with halo."
+    },
+    {
+      "left": 95,
+      "top": 239,
+      "width": 12,
+      "height": 6,
+      "reason": "Left axis tick at +30 latitude (columns 94-104) with halo."
+    },
+    {
+      "left": 441,
+      "top": 239,
+      "width": 12,
+      "height": 6,
+      "reason": "Right axis tick at +30 latitude (columns 443-454) with halo."
+    },
+    {
+      "left": 95,
+      "top": 359,
+      "width": 12,
+      "height": 6,
+      "reason": "Left axis tick at -30 latitude (columns 94-104) with halo."
+    },
+    {
+      "left": 441,
+      "top": 359,
+      "width": 12,
+      "height": 6,
+      "reason": "Right axis tick at -30 latitude (columns 443-454) with halo."
+    },
+    {
+      "left": 95,
+      "top": 419,
+      "width": 12,
+      "height": 6,
+      "reason": "Left axis tick at -60 latitude (columns 94-104) with halo."
+    },
+    {
+      "left": 441,
+      "top": 419,
+      "width": 12,
+      "height": 6,
+      "reason": "Right axis tick at -60 latitude (columns 443-454) with halo."
+    },
+    {
+      "left": 151,
+      "top": 123,
+      "width": 6,
+      "height": 8,
+      "reason": "Top axis tick at 150 W (rows 121-128) with halo."
+    },
+    {
+      "left": 151,
+      "top": 473,
+      "width": 6,
+      "height": 8,
+      "reason": "Bottom axis tick at 150 W (rows 475-482) with halo."
+    },
+    {
+      "left": 211,
+      "top": 123,
+      "width": 6,
+      "height": 8,
+      "reason": "Top axis tick at 120 W (rows 121-128) with halo."
+    },
+    {
+      "left": 211,
+      "top": 473,
+      "width": 6,
+      "height": 8,
+      "reason": "Bottom axis tick at 120 W (rows 475-482) with halo."
+    },
+    {
+      "left": 331,
+      "top": 123,
+      "width": 6,
+      "height": 8,
+      "reason": "Top axis tick at 60 W (rows 121-128) with halo."
+    },
+    {
+      "left": 331,
+      "top": 473,
+      "width": 6,
+      "height": 8,
+      "reason": "Bottom axis tick at 60 W (rows 475-482) with halo."
+    },
+    {
+      "left": 391,
+      "top": 123,
+      "width": 6,
+      "height": 8,
+      "reason": "Top axis tick at 30 W (rows 121-128) with halo."
+    },
+    {
+      "left": 391,
+      "top": 473,
+      "width": 6,
+      "height": 8,
+      "reason": "Bottom axis tick at 30 W (rows 475-482) with halo."
+    },
+    {
+      "left": 230,
+      "top": 308,
+      "width": 24,
+      "height": 23,
+      "reason": "Orange asterisk marking the subsolar point, drawn over the data (glyph x 232-251, y 310-328) with a 2 px halo."
+    }
+  ],
+  "background": {
+    "maximumChannel": 19
+  },
+  "grid": {
+    "centerLongitude": 270,
+    "pixelsPerDegree": 2,
+    "sampleOffset": 178.5,
+    "lineOffset": 178.5
+  }
+}

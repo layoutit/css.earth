@@ -7,6 +7,7 @@
 | Monochrome | [USGS Cassini/Voyager mosaic](https://astrogeology.usgs.gov/search/map/iapetus_cassini_voyager_global_mosaic_803m), May 2008; about 803 m per source pixel. |
 | Enhanced color | [JPL PIA18436](https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/), 2014; calibrated and photometrically corrected Cassini ultraviolet/infrared imagery. |
 | Infrared and Ice absorption | [Nantes Cassini VIMS archive](https://vims.univ-nantes.fr/), three observations from 10 September 2007. Infrared maps near-2.02/1.59/1.28 µm channels to false color; Ice absorption measures the near-2.02 µm feature relative to its continuum. |
+| Temperature | [NASA PIA07005](https://science.nasa.gov/photojournal/iapetus-temperature-map/), January 2005: Cassini CIRS surface temperatures from the 31 December 2004 flyby, as NASA published them in a map figure. Covers part of the dark leading side (18% of the globe). The legend repeats the figure's 70-130 K colour bar. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/IAPETUS/target) Iapetus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
@@ -44,6 +45,9 @@ Feature notes: 11 of the labelled names carry a caption note, the lead summary o
 - The independent USGS comparison supports gross VIMS framing; precise local absolute registration remains unqualified.
 - VIMS has no photometric correction or cross-observation level matching. Illumination, viewing angle, grain size, noise and archive filtering remain in the signal; neither view measures ice abundance.
 - The enhanced-color mosaic has no independent validity mask. Real dark terrain is retained, along with coarse polar imagery, seams and residual photographed shading.
+- Temperature is one moment of one flyby. Local time matters as much as the surface: the Sun was overhead near 106° W, 9° S (the figure's asterisk). Places away from that point were in morning, evening or night.
+- Temperature shows NASA's published colours, not numbers. The map's colours change smoothly, but the bar has 12 steps, so a colour can be read only to the nearest bar step. About 3% of the kept pixels, near noon, are paler than the bar's top step, and the figure gives no value for them.
+- Temperature's grid lines, axis ticks and asterisk are shown as missing (no data) strips and a small square, not filled in. The figure's black and its compression halo are also missing, so the lens cannot show whether a black area was unobserved or colder than 70 K.
 - Geometry is a 734.3 km mean-radius sphere, without the oblate figure or equatorial ridge. No qualified downloadable height raster was found in the 2026-09-06 source search; this does not establish that terrain models do not exist.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
@@ -92,6 +96,23 @@ Native detector apertures and sampled exposure geometry define support. Original
 Native source-camera reconstruction and dense independent aperture checks test detector support and between-pose boundary motion. A missing original background row and its local filtering dependencies are withheld without discarding the usable observation. These sampled support checks do not establish an integrated detector PSF or exact absolute pointing.
 
 The [body registration record](source/cassini-ice/evidence/registration.md), [preparation receipt](source/cassini-ice/preparation-receipt.json) and B9 source review contain source-selection and independent-check evidence. The B9 report gives reproduction commands and the shared measurement definitions.
+
+</details>
+
+<details>
+<summary>Methods: the Temperature figure (PIA07005)</summary>
+
+## Cassini CIRS temperature from a published figure
+
+The original 664 × 568 TIFF is downloaded from NASA's Photojournal ([acquisition plan](source/preparation/acquisition.json), group `cirs-temperature-figure`). Its plot is a simple-cylindrical map labelled "West Longitude" 180–0 and latitude −90 to +90.
+
+**Registration.** The labelled frame and the two centre lines (90° W and the equator) give 2.000 figure pixels per degree on both axes. The ten unlabelled ticks, every 30°, fall on that fit with 0 px residual. The drawn lines are 2 px wide, so the fit is good to about 0.25°. West longitude becomes east longitude as 360 − W, so the figure covers 180–360° E. As a check against the base mosaic, we looked along 60°, 75°, 105° and 120° W. The change from red to magenta falls where the mosaic brightens past grey level 140 (the edge of the dark Cassini Regio): 5° off on the first line and 0° on the others. The check samples every 5°, so it cannot show smaller offsets.
+
+**Scale.** The bar has 12 equal steps of 40 px. Its labels, 70 to 130 K, sit on every second step boundary to within 2.5–5.5 px (under 0.7 K). The legend shows the same 12 colours, sampled from the middle of each step, and only the figure's own labels.
+
+**Cleaning.** [`figures/pia07005-map.json`](source/figures/pia07005-map.json) names the plotted frame and 23 rectangles to withhold: the two grid lines, the frame edges, 16 axis ticks and the subsolar asterisk. Each rectangle includes a 2 px halo. Beyond 2 px, compression ringing from the lines is below 19 in RGB distance, and neighbouring bar steps differ by at least 46. Pixels whose brightest channel is 19 or less are also withheld: that is the halo measured on the figure's black background. `node tools/objects/figure-map/clean-figure-map.mts src/objects/iapetus/source/figures/pia07005-map.json` writes the 358 × 358 crop with withheld pixels set to black. Colour cannot pick out annotations here: a white line blended over pale yellow is darker than the palest data (#fffddc). The raster lane places the crop with the declared grid (`image-rgb-no-data`, centre 270° E, sample and line offset 178.5). The prepared texture is 1024 × 512, which still has more pixels than the figure.
+
+**Result.** The run on 2026-09-28 kept 38,022 pixels, 18.0% of the sphere by area. It withheld 8,380 annotation pixels and 81,762 background pixels. The cleaner's tests pass. The raster lane's own decoder (`readObservation`, at the 1024 × 512 lens size) keeps 17.3% of the sphere, from 198° to 353° E. It is slightly less than the crop because texels touching a withheld pixel are dropped. A preview blending it over the base mosaic puts the warm area on the dark leading side and the cooling at the Cassini Regio edge. The lens has not been baked or looked at in the app yet.
 
 </details>
 

@@ -1,0 +1,140 @@
+PDS_VERSION_ID                = PDS3                                          
+/* label standards identifiers PDS Version 3.8 */                             
+                                                                              
+/* File Characteristics */                                                    
+RECORD_TYPE                   = FIXED_LENGTH                                  
+RECORD_BYTES                  = 68                                            
+FILE_RECORDS                  = 110                                           
+MD5_CHECKSUM                  = "35c2cc260eab8166f82a3c359edbe6b9"            
+                                                                              
+/* Pointers to Data Objects */                                                
+^TABLE                        = "GRD_IRON_MAP.TAB"                            
+PRODUCER_FULL_NAME            = "PRETTYMAN"                                   
+PRODUCER_INSTITUTION_NAME     = "PLANETARY SCIENCE INSTITUTE"                 
+                                                                              
+/* Identification Data Elements */                                            
+MISSION_NAME                  = "DAWN MISSION TO VESTA AND CERES"             
+MISSION_ID                    = "DAWN"                                        
+MISSION_PHASE_NAME            = "CERES SCIENCE LAMO (CSL)"                    
+TARGET_NAME                   = "1 CERES"                                     
+TARGET_TYPE                   = "ASTEROID"                                    
+INSTRUMENT_HOST_NAME          = "DAWN"                                        
+INSTRUMENT_HOST_ID            = "DAWN"                                        
+INSTRUMENT_ID                 = "GRAND"                                       
+INSTRUMENT_NAME               = "GAMMA-RAY AND NEUTRON DETECTOR"              
+DATA_SET_ID                   = "DAWN-A-GRAND-5-CERES-IRON_MAP_V1.0"          
+DATA_SET_NAME = "DAWN GRAND MAP CERES IRON MAP V1.0"                          
+PRODUCT_ID                    = "GRD_IRON_MAP"                                
+PRODUCT_TYPE                  = "DATA"                                        
+PRODUCT_VERSION_ID            = "1.0"                                         
+START_TIME                    = 2015-12-16T01:01:10                           
+STOP_TIME                     = 2016-05-11T00:57:37                           
+SPACECRAFT_CLOCK_START_COUNT  = "0503499737.000"                              
+SPACECRAFT_CLOCK_STOP_COUNT   = "0516200397.000"                              
+PRODUCT_CREATION_TIME         = 2017-08-25T22:23:12                           
+                                                                              
+/* Data Object Definitions */                                                 
+OBJECT                        = TABLE                                         
+ ROWS                         = 110                                           
+ ROW_BYTES                    = 68                                            
+ COLUMNS                      = 7                                             
+ INTERCHANGE_FORMAT           = ASCII                                         
+ DESCRIPTION                  ="                                              
+    A global map of the concentration of iron within the regolith of asteroid 
+    1 Ceres on twenty-degree quasi-equal-area pixels is provided. Iron        
+    concentrations were determined from gamma ray counting data acquired by   
+    Dawn's Gamma Ray and Neutron Detector (GRaND) in a low altitude mapping   
+    orbit, about 385 km from Ceres' surface (about 0.8 body radii altitude).  
+    The concentrations are representative of Ceres's bulk regolith to depths  
+    up to a few decimeters with a spatial resolution of about 600-km          
+    full-width-at-half-maximum of arc length on the  surface. The methods     
+    used to determine iron concentration are described by PRETTYMANETAL2017.  
+  "                                                                           
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "PIXEL_INDEX"                                 
+  DATA_TYPE                   = ASCII_INTEGER                                 
+  START_BYTE                  = 1                                             
+  BYTES                       = 10                                            
+  FORMAT                      = "I10"                                         
+  DESCRIPTION                 = "                                             
+    Pixel index. The map covers -90 to 90 degrees latitude and -180 to 180    
+    degrees east longitude. Pixels are indexed from west to east and from     
+    south to north, starting with 0.                                          
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "MIN_LAT"                                     
+  DATA_TYPE                   = ASCII_REAL                                    
+  UNIT                        = "deg"                                         
+  START_BYTE                  = 11                                            
+  BYTES                       = 7                                             
+  FORMAT                      = "F7.1"                                        
+  DESCRIPTION                 = "                                             
+    Pixel latitude southernmost boundary.                                     
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "MAX_LAT"                                     
+  DATA_TYPE                   = ASCII_REAL                                    
+  UNIT                        = "deg"                                         
+  START_BYTE                  = 18                                            
+  BYTES                       = 7                                             
+  FORMAT                      = "F7.1"                                        
+  DESCRIPTION                 = "                                             
+    Pixel latitude northernmost boundary.                                     
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "MIN_LON"                                     
+  DATA_TYPE                   = ASCII_REAL                                    
+  UNIT                        = "deg"                                         
+  START_BYTE                  = 25                                            
+  BYTES                       = 7                                             
+  FORMAT                      = "F7.1"                                        
+  DESCRIPTION                 = "                                             
+    Pixel east longitude westernmost boundary.                                
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "MAX_LON"                                     
+  DATA_TYPE                   = ASCII_REAL                                    
+  UNIT                        = "deg"                                         
+  START_BYTE                  = 32                                            
+  BYTES                       = 7                                             
+  FORMAT                      = "F7.1"                                        
+  DESCRIPTION                 = "                                             
+    Pixel east longitude easternmost boundary.                                
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "IRON_CONCENTRATION"                          
+  DATA_TYPE                   = ASCII_REAL                                    
+  UNIT                        = "wt.%"                                        
+  START_BYTE                  = 39                                            
+  BYTES                       = 14                                            
+  FORMAT                      = "E14.4"                                       
+  DESCRIPTION                 = "                                             
+    Iron concentration.                                                       
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+ OBJECT                       = COLUMN                                        
+  NAME                        = "SIG_IRON_CONCENTRATION"                      
+  DATA_TYPE                   = ASCII_REAL                                    
+  UNIT                        = "wt.%"                                        
+  START_BYTE                  = 53                                            
+  BYTES                       = 14                                            
+  FORMAT                      = "E14.4"                                       
+  DESCRIPTION                 = "                                             
+    1-sigma uncertainty in iron concentration.                                
+   "                                                                          
+ END_OBJECT                   = COLUMN                                        
+                                                                              
+END_OBJECT                    = TABLE                                         
+END                                                                           

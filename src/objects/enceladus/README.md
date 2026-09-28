@@ -20,7 +20,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 - Ice absorption and Infrared ratio use six calibrated VIMS observations with matched navigation backplanes. The [source interpretation](source/vims-chemistry/INTERPRETATION.md) defines every channel, coordinate, mask, overlap rule and scientific limit.
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figures PIA06432 and PIA10360 were checked on 2026-09-28 as possible map views. None qualified: each lacks a labelled map grid, a colour scale with units, or both. The ledger gives the reason for each.
 
 ## Published global infrared mosaic
 

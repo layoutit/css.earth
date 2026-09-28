@@ -83,6 +83,17 @@
       "evidence": [
         "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465668427"
       ]
+    },
+    {
+      "id": "photojournal-pia06403-cirs-temperature",
+      "subject": "NASA PIA06403 Phoebe Temperature Maps (Cassini CIRS, 11 June 2004)",
+      "status": "excluded",
+      "finding": "Five rectangular panels at different local times, each with grid lines but no coordinate labels; the caption gives none. The 70-115 K bar is present, but the longitude origin, direction and grid spacing cannot be read, so no panel can be placed on the globe.",
+      "revisitWhen": "The panels are published with labelled coordinates, or the CIRS maps are archived as numeric products.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/phoebe-temperature-maps/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia06/pia06403/PIA06403.tif"
+      ]
     }
   ]
 }

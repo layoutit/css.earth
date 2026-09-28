@@ -1,0 +1,61 @@
+{
+  "id": "trek-io-stereo-dem-1km",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Voyager ISS and Galileo SSI DEM 1000 mpp, Global (IoDEM)",
+  "identifiers": [
+    {
+      "type": "Trek product label",
+      "value": "IoDEM"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://trek.nasa.gov/io/TrekWS/rest/cat/data/stream?uuid=7df000fc-0ba0-4c48-85fe-7ff4229c54f7"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://trek.nasa.gov/io/",
+      "label": "NASA Io Trek"
+    },
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
+      "label": "Trek catalogue record"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/io/source/manifest.json",
+      "locator": "/inputs/31"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "white-2014-io-stereo-topography",
+      "evidence": "Trek product description: 'Data source: https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2013JE004591'"
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "White, O. L., Schenk, P. M., Nimmo, F. and Hoogenboom, T. (2014); Voyager and Galileo imaging, NASA/JPL",
+      "scope": "citation",
+      "evidence": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM"
+    },
+    {
+      "kind": "limitation",
+      "text": "Gaps represent masked noise or absence of stereo coverage; a broad smoothing filter was applied to plains after mosaicking but not to mountains, layered plains and some paterae (Trek product description). The catalogue states no height unit or datum.",
+      "scope": "product",
+      "evidence": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM"
+    },
+    {
+      "kind": "rights",
+      "text": "No reuse terms are stated on the Trek product; its FGDC record leaves originator and use constraints empty.",
+      "scope": "reuse",
+      "evidence": "https://trek.nasa.gov/io/TrekWS/rest/cat/metadata/fgdc/html?label=IoDEM"
+    }
+  ]
+}

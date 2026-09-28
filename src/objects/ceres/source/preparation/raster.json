@@ -560,6 +560,126 @@
         "sampling": "nearest",
         "displaySampling": "nearest"
       }
+    },
+    {
+      "id": "hydrogen",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "science/grand/GRD_HYDROGEN_MAP.TAB",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "hydrogen",
+        "label": "Surface elements",
+        "format": "pds-equal-area-table",
+        "path": "science/grand/GRD_HYDROGEN_MAP.TAB",
+        "labelPath": "science/grand/GRD_HYDROGEN_MAP.LBL",
+        "datasetId": "DAWN-A-GRAND-5-CERES-HYDROGEN-MAP_V1.0",
+        "productId": "GRD_HYDROGEN_MAP",
+        "column": "H_CONC",
+        "columnDescription": "Hydrogen concentration with units of weight percent water equivalent hydrogen (wt.% WEH).",
+        "description": "Dawn GRaND · 20° pixels",
+        "title": "Hydrogen in the top few decimetres of regolith, given as the weight percent of water that would hold it (water-equivalent hydrogen), derived from the thermal and epithermal neutrons Dawn counted in its low orbit (Prettyman et al. 2017). The archive calls the map a lower bound. Weight percent water-equivalent hydrogen; divide by 9 for hydrogen itself. The 110 values run from 16.5 at the equator to 28.6 at the north pole, with a one-sigma uncertainty of about 0.8 from the composition models. The scale spans every value. Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system.",
+        "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+        "minimum": 16,
+        "maximum": 29,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "16",
+          "22.5",
+          "29"
+        ],
+        "units": "wt.% water-equivalent hydrogen",
+        "consumer": "hydrogen",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "iron",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "science/grand/GRD_IRON_MAP.TAB",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "iron",
+        "label": "Surface elements",
+        "format": "pds-equal-area-table",
+        "path": "science/grand/GRD_IRON_MAP.TAB",
+        "labelPath": "science/grand/GRD_IRON_MAP.LBL",
+        "datasetId": "DAWN-A-GRAND-5-CERES-IRON_MAP_V1.0",
+        "productId": "GRD_IRON_MAP",
+        "column": "IRON_CONCENTRATION",
+        "columnDescription": "Iron concentration.",
+        "description": "Dawn GRaND · 20° pixels",
+        "title": "Iron in the top few decimetres of regolith, in weight percent, from the 7.6 MeV gamma rays iron gives off when it captures a neutron, combined with the neutron counts (Prettyman et al. 2017). Weight percent iron. The 110 values run from 13.2 to 17.4, with a statistical one-sigma uncertainty of about 0.4; the highest values lie within 20° of the equator. The scale spans every value. Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system.",
+        "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+        "minimum": 13,
+        "maximum": 18,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "13",
+          "15.5",
+          "18"
+        ],
+        "units": "wt.% iron",
+        "consumer": "iron",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "neutron-counts",
+      "output": "ceres-{id}{suffix}.webp",
+      "thumbnail": "ceres-lens-{id}.webp",
+      "source": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.TAB",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "neutron-counts",
+        "label": "Surface elements",
+        "format": "pds-equal-area-table",
+        "path": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.TAB",
+        "labelPath": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.LBL",
+        "datasetId": "DAWN-A-GRAND-5-CERES-TPE-COUNTS-V1.0",
+        "productId": "GRD_TPE_NEUTRON_COUNTS_MAP",
+        "column": "TPE_COUNTING_RATE",
+        "columnDescription": "Corrected thermal plus epithermal neutron counting rate (counts/s).",
+        "description": "Dawn GRaND · 20° pixels",
+        "title": "How many thermal and epithermal neutrons from Ceres GRaND detected each second. This is the measurement the hydrogen map is derived from: counts are lowest at the poles, where the hydrogen map is highest. Prettyman et al. (2017) show this map in their Figure 1. Counts per second in GRaND's lithium-glass neutron sensor, corrected for cosmic-ray flux and for how much of the sky Ceres filled. The 110 values run from 2.67 to 3.70, with a statistical uncertainty of the mean of about 0.02; each pixel was sampled 276 to 2,885 times. The scale spans every value. Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system.",
+        "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+        "minimum": 2.6,
+        "maximum": 3.8,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "2.6",
+          "3.2",
+          "3.8"
+        ],
+        "units": "counts/s",
+        "consumer": "neutron-counts",
+        "sampling": "nearest",
+        "displaySampling": "nearest"
+      }
     }
   ],
   "lighting": {

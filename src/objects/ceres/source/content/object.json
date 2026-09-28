@@ -984,6 +984,264 @@
           }
         ],
         "notes": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (482.0 km equatorial radius, flattening 0.074896). Meters. The geoid stands up to 1,454 m above the ellipsoid near the poles and down to 1,067 m below it near the equator, so the equal-potential surface is rounder than the reference ellipsoid. JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients. Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+      },
+      {
+        "id": "hydrogen",
+        "label": "Surface elements",
+        "thumbnail": "ceres-lens-hydrogen.webp",
+        "surface": "ceres-hydrogen@2x.webp",
+        "poles": "ceres-poles-hydrogen@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Hydrogen",
+          "labels": [
+            "16",
+            "22.5",
+            "29"
+          ],
+          "meta": "wt.% water-equivalent hydrogen · Dawn GRaND, Dec 2015–May 2016",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "16",
+              "22.5",
+              "29"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-grand-ceres-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/"
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Hydrogen"
+        },
+        "qualification": "Water-equivalent hydrogen from Dawn GRaND thermal plus epithermal neutrons in LAMO (PDS4 grd_hydrogen_map 1.0; PDS3 DAWN-A-GRAND-5-CERES-HYDROGEN-MAP_V1.0), wt.% WEH on 110 twenty-degree quasi-equal-area pixels, a lower bound per the archive.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Hydrogen in the top few decimetres of regolith, given as the weight percent of water that would hold it (water-equivalent hydrogen), derived from the thermal and epithermal neutrons Dawn counted in its low orbit (Prettyman et al. 2017). The archive calls the map a lower bound."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Weight percent water-equivalent hydrogen; divide by 9 for hydrogen itself. The 110 values run from 16.5 at the equator to 28.6 at the north pole, with a one-sigma uncertainty of about 0.8 from the composition models. The scale spans every value."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn's gamma-ray and neutron detector (GRaND) measured from its low mapping orbit, about 385 km above the surface, 16 December 2015 to 11 May 2016. The neutron counts were corrected for cosmic-ray flux and viewing geometry, binned on 20° quasi-equal-area pixels and converted to hydrogen with composition models (Prettyman et al. 2017, Supplement)."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system."
+          }
+        ],
+        "notes": "Hydrogen in the top few decimetres of regolith, given as the weight percent of water that would hold it (water-equivalent hydrogen), derived from the thermal and epithermal neutrons Dawn counted in its low orbit (Prettyman et al. 2017). The archive calls the map a lower bound. Weight percent water-equivalent hydrogen; divide by 9 for hydrogen itself. The 110 values run from 16.5 at the equator to 28.6 at the north pole, with a one-sigma uncertainty of about 0.8 from the composition models. The scale spans every value. Dawn's gamma-ray and neutron detector (GRaND) measured from its low mapping orbit, about 385 km above the surface, 16 December 2015 to 11 May 2016. The neutron counts were corrected for cosmic-ray flux and viewing geometry, binned on 20° quasi-equal-area pixels and converted to hydrogen with composition models (Prettyman et al. 2017, Supplement). Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system."
+      },
+      {
+        "id": "iron",
+        "label": "Surface elements",
+        "thumbnail": "ceres-lens-iron.webp",
+        "surface": "ceres-iron@2x.webp",
+        "poles": "ceres-poles-iron@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Iron",
+          "labels": [
+            "13",
+            "15.5",
+            "18"
+          ],
+          "meta": "wt.% · Dawn GRaND, Dec 2015–May 2016",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "13",
+              "15.5",
+              "18"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-grand-ceres-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/"
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Iron"
+        },
+        "qualification": "Iron from Dawn GRaND 7.6 MeV neutron-capture gamma rays and thermal plus epithermal neutrons in LAMO (PDS4 grd_iron_map 1.0; PDS3 DAWN-A-GRAND-5-CERES-IRON_MAP_V1.0), wt.% on 110 twenty-degree quasi-equal-area pixels.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Iron in the top few decimetres of regolith, in weight percent, from the 7.6 MeV gamma rays iron gives off when it captures a neutron, combined with the neutron counts (Prettyman et al. 2017)."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Weight percent iron. The 110 values run from 13.2 to 17.4, with a statistical one-sigma uncertainty of about 0.4; the highest values lie within 20° of the equator. The scale spans every value."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn's gamma-ray and neutron detector (GRaND) measured from its low mapping orbit, about 385 km above the surface, 16 December 2015 to 11 May 2016. Gamma-ray counting rates from its bismuth germanate detector were corrected for cosmic-ray flux and viewing geometry, binned on 20° quasi-equal-area pixels and converted to iron with the neutron counts (Prettyman et al. 2017, Supplement)."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system."
+          }
+        ],
+        "notes": "Iron in the top few decimetres of regolith, in weight percent, from the 7.6 MeV gamma rays iron gives off when it captures a neutron, combined with the neutron counts (Prettyman et al. 2017). Weight percent iron. The 110 values run from 13.2 to 17.4, with a statistical one-sigma uncertainty of about 0.4; the highest values lie within 20° of the equator. The scale spans every value. Dawn's gamma-ray and neutron detector (GRaND) measured from its low mapping orbit, about 385 km above the surface, 16 December 2015 to 11 May 2016. Gamma-ray counting rates from its bismuth germanate detector were corrected for cosmic-ray flux and viewing geometry, binned on 20° quasi-equal-area pixels and converted to iron with the neutron counts (Prettyman et al. 2017, Supplement). Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system."
+      },
+      {
+        "id": "neutron-counts",
+        "label": "Surface elements",
+        "thumbnail": "ceres-lens-neutron-counts.webp",
+        "surface": "ceres-neutron-counts@2x.webp",
+        "poles": "ceres-poles-neutron-counts@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Neutron counts",
+          "labels": [
+            "2.6",
+            "3.2",
+            "3.8"
+          ],
+          "meta": "counts/s · Dawn GRaND, Dec 2015–May 2016",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "2.6",
+              "3.2",
+              "3.8"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-grand-ceres-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/"
+        },
+        "step": {
+          "group": "surface-elements",
+          "label": "Neutron counts"
+        },
+        "qualification": "Thermal plus epithermal neutron counting rate from Dawn GRaND in LAMO (PDS4 grd_tpe_neutron_counts_map 1.0; PDS3 DAWN-A-GRAND-5-CERES-TPE-COUNTS-V1.0), counts/s on 110 twenty-degree quasi-equal-area pixels.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How many thermal and epithermal neutrons from Ceres GRaND detected each second. This is the measurement the hydrogen map is derived from: counts are lowest at the poles, where the hydrogen map is highest. Prettyman et al. (2017) show this map in their Figure 1."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Counts per second in GRaND's lithium-glass neutron sensor, corrected for cosmic-ray flux and for how much of the sky Ceres filled. The 110 values run from 2.67 to 3.70, with a statistical uncertainty of the mean of about 0.02; each pixel was sampled 276 to 2,885 times. The scale spans every value."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Dawn's gamma-ray and neutron detector (GRaND) measured from its low mapping orbit, about 385 km above the surface, 16 December 2015 to 11 May 2016. The neutron counting rate was corrected for cosmic-ray flux and viewing geometry and binned at the point below the spacecraft on 20° quasi-equal-area pixels; bad data and data outside pointing limits were left out."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system."
+          }
+        ],
+        "notes": "How many thermal and epithermal neutrons from Ceres GRaND detected each second. This is the measurement the hydrogen map is derived from: counts are lowest at the poles, where the hydrogen map is highest. Prettyman et al. (2017) show this map in their Figure 1. Counts per second in GRaND's lithium-glass neutron sensor, corrected for cosmic-ray flux and for how much of the sky Ceres filled. The 110 values run from 2.67 to 3.70, with a statistical uncertainty of the mean of about 0.02; each pixel was sampled 276 to 2,885 times. The scale spans every value. Dawn's gamma-ray and neutron detector (GRaND) measured from its low mapping orbit, about 385 km above the surface, 16 December 2015 to 11 May 2016. The neutron counting rate was corrected for cosmic-ray flux and viewing geometry and binned at the point below the spacecraft on 20° quasi-equal-area pixels; bad data and data outside pointing limits were left out. Each value blends about 600 km of surface, the full width at half maximum the archive gives, about a fifth of the way around Ceres. Pixels are 20° tall (about 164 km); one pixel covers each polar cap above 80°. Craters and faculae are not resolved; the map shows only regional and pole-to-equator differences. The labels give east longitude from -180° to 180° but do not name the Ceres longitude system."
       }
     ]
   },

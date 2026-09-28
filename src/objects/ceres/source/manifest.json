@@ -1259,6 +1259,252 @@
           }
         ]
       }
+    },
+    {
+      "id": "dawn-grand-ceres-hydrogen-tab",
+      "path": "science/grand/GRD_HYDROGEN_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_HYDROGEN_MAP.TAB",
+      "credit": "Prettyman, T. H. and Yamashita, N. (2021), DAWN GRaND Ceres Bundle 1.0 (urn:nasa:pds:dawn-grand-ceres), NASA PDS Small Bodies Node, doi:10.26033/hf9h-pt31; methods in Prettyman et al. (2017), Science 355, 55-59, doi:10.1126/science.aah6765",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ],
+      "acquisition": "Retrieve the unmodified ASCII table from the PDS4 bundle urn:nasa:pds:dawn-grand-ceres 1.0 (urn:nasa:pds:dawn-grand-ceres:data_derived:grd_hydrogen_map::1.0); its bytes equal the PDS3 volume DWNCGRD_2 file (the MD5 in the PDS4 label matches). Excluded from Git.",
+      "redistribution": "Public NASA PDS data; original table restored from its origin or source cache, derived maps retain attribution.",
+      "consumers": [
+        "hydrogen"
+      ],
+      "lensId": "hydrogen",
+      "label": "Hydrogen",
+      "falseColor": true,
+      "format": "pds-equal-area-table",
+      "projection": {
+        "type": "quasi-equal-area-pixels",
+        "pixelDegrees": 20,
+        "pixels": 110,
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          -90,
+          90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Water-equivalent hydrogen (wt.% WEH) in the top decimetres of regolith on 110 twenty-degree quasi-equal-area pixels covering the whole globe; spatial resolution about 600 km FWHM. The archive calls it a lower bound.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_HYDROGEN_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-grand-ceres-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-grand-ceres:data_derived:grd_hydrogen_map::1.0; PDS3 product GRD_HYDROGEN_MAP in DAWN-A-GRAND-5-CERES-HYDROGEN-MAP_V1.0 (volume DWNCGRD_2)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-ceres-hydrogen-lbl",
+      "path": "science/grand/GRD_HYDROGEN_MAP.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/HYDROGEN/GRD_HYDROGEN_MAP.LBL",
+      "credit": "Prettyman, T. H. and Yamashita, N. (2021), DAWN GRaND Ceres Bundle 1.0 (urn:nasa:pds:dawn-grand-ceres), NASA PDS Small Bodies Node, doi:10.26033/hf9h-pt31; methods in Prettyman et al. (2017), Science 355, 55-59, doi:10.1126/science.aah6765",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ],
+      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the lens recipe.",
+      "redistribution": "Small native PDS3 label retained in Git byte for byte.",
+      "consumers": [
+        "hydrogen"
+      ],
+      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the lens recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-grand-ceres-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-grand-ceres:data_derived:grd_hydrogen_map::1.0; PDS3 product GRD_HYDROGEN_MAP in DAWN-A-GRAND-5-CERES-HYDROGEN-MAP_V1.0 (volume DWNCGRD_2)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-ceres-iron-tab",
+      "path": "science/grand/GRD_IRON_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_IRON_MAP.TAB",
+      "credit": "Prettyman, T. H. and Yamashita, N. (2021), DAWN GRaND Ceres Bundle 1.0 (urn:nasa:pds:dawn-grand-ceres), NASA PDS Small Bodies Node, doi:10.26033/hf9h-pt31; methods in Prettyman et al. (2017), Science 355, 55-59, doi:10.1126/science.aah6765",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ],
+      "acquisition": "Retrieve the unmodified ASCII table from the PDS4 bundle urn:nasa:pds:dawn-grand-ceres 1.0 (urn:nasa:pds:dawn-grand-ceres:data_derived:grd_iron_map::1.0); its bytes equal the PDS3 volume DWNCGRD_2 file (the MD5 in the PDS4 label matches). Excluded from Git.",
+      "redistribution": "Public NASA PDS data; original table restored from its origin or source cache, derived maps retain attribution.",
+      "consumers": [
+        "iron"
+      ],
+      "lensId": "iron",
+      "label": "Iron",
+      "falseColor": true,
+      "format": "pds-equal-area-table",
+      "projection": {
+        "type": "quasi-equal-area-pixels",
+        "pixelDegrees": 20,
+        "pixels": 110,
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          -90,
+          90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Iron concentration (wt.%) in the top decimetres of regolith on 110 twenty-degree quasi-equal-area pixels covering the whole globe; spatial resolution about 600 km FWHM. Uncertainties are statistical only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_IRON_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-grand-ceres-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-grand-ceres:data_derived:grd_iron_map::1.0; PDS3 product GRD_IRON_MAP in DAWN-A-GRAND-5-CERES-IRON_MAP_V1.0 (volume DWNCGRD_2)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-ceres-iron-lbl",
+      "path": "science/grand/GRD_IRON_MAP.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/IRON/GRD_IRON_MAP.LBL",
+      "credit": "Prettyman, T. H. and Yamashita, N. (2021), DAWN GRaND Ceres Bundle 1.0 (urn:nasa:pds:dawn-grand-ceres), NASA PDS Small Bodies Node, doi:10.26033/hf9h-pt31; methods in Prettyman et al. (2017), Science 355, 55-59, doi:10.1126/science.aah6765",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ],
+      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the lens recipe.",
+      "redistribution": "Small native PDS3 label retained in Git byte for byte.",
+      "consumers": [
+        "iron"
+      ],
+      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the lens recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-grand-ceres-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-grand-ceres:data_derived:grd_iron_map::1.0; PDS3 product GRD_IRON_MAP in DAWN-A-GRAND-5-CERES-IRON_MAP_V1.0 (volume DWNCGRD_2)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-ceres-neutron-counts-tab",
+      "path": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_TPE_NEUTRON_COUNTS_MAP.TAB",
+      "credit": "Prettyman, T. H. and Yamashita, N. (2021), DAWN GRaND Ceres Bundle 1.0 (urn:nasa:pds:dawn-grand-ceres), NASA PDS Small Bodies Node, doi:10.26033/hf9h-pt31; methods in Prettyman et al. (2017), Science 355, 55-59, doi:10.1126/science.aah6765",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ],
+      "acquisition": "Retrieve the unmodified ASCII table from the PDS4 bundle urn:nasa:pds:dawn-grand-ceres 1.0 (urn:nasa:pds:dawn-grand-ceres:data_derived:grd_tpe_neutron_counts_map::1.0); its bytes equal the PDS3 volume DWNCGRD_2 file (the MD5 in the PDS4 label matches). Excluded from Git.",
+      "redistribution": "Public NASA PDS data; original table restored from its origin or source cache, derived maps retain attribution.",
+      "consumers": [
+        "neutron-counts"
+      ],
+      "lensId": "neutron-counts",
+      "label": "Neutron counts",
+      "falseColor": true,
+      "format": "pds-equal-area-table",
+      "projection": {
+        "type": "quasi-equal-area-pixels",
+        "pixelDegrees": 20,
+        "pixels": 110,
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          -90,
+          90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Corrected thermal plus epithermal neutron counting rate (counts/s) on 110 twenty-degree quasi-equal-area pixels covering the whole globe; spatial resolution about 600 km FWHM.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/GRD_TPE_NEUTRON_COUNTS_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-grand-ceres-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-grand-ceres:data_derived:grd_tpe_neutron_counts_map::1.0; PDS3 product GRD_TPE_NEUTRON_COUNTS_MAP in DAWN-A-GRAND-5-CERES-TPE-COUNTS-V1.0 (volume DWNCGRD_2)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-ceres-neutron-counts-lbl",
+      "path": "science/grand/GRD_TPE_NEUTRON_COUNTS_MAP.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/HYDROGEN/GRD_TPE_NEUTRON_COUNTS_MAP.LBL",
+      "credit": "Prettyman, T. H. and Yamashita, N. (2021), DAWN GRaND Ceres Bundle 1.0 (urn:nasa:pds:dawn-grand-ceres), NASA PDS Small Bodies Node, doi:10.26033/hf9h-pt31; methods in Prettyman et al. (2017), Science 355, 55-59, doi:10.1126/science.aah6765",
+      "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.26033/hf9h-pt31"
+      ],
+      "acquisition": "Retrieve the producer's detached PDS3 label from volume DWNCGRD_2; the reader checks the data set, product, table layout, column bytes and value-column description against the lens recipe.",
+      "redistribution": "Small native PDS3 label retained in Git byte for byte.",
+      "consumers": [
+        "neutron-counts"
+      ],
+      "purpose": "Detached PDS3 label with inline COLUMN objects: identity, ROWS and ROW_BYTES, each column's START_BYTE and BYTES, and the value column's DESCRIPTION, all checked against the lens recipe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-grand-ceres-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-grand-ceres:data_derived:grd_tpe_neutron_counts_map::1.0; PDS3 product GRD_TPE_NEUTRON_COUNTS_MAP in DAWN-A-GRAND-5-CERES-TPE-COUNTS-V1.0 (volume DWNCGRD_2)"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

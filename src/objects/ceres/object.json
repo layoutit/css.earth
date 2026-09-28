@@ -111,6 +111,21 @@
               "id": "geoid",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "hydrogen",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "iron",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "neutron-counts",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
