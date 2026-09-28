@@ -1,0 +1,33 @@
+{
+  "id": "doi-10-1038-nature13156",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Trujillo & Sheppard (2014): A Sedna-like body with a perihelion of 80 astronomical units",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/nature13156"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/nature13156",
+      "label": "Published article"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/asteroid-2012-vp113/text.json",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Nature 507, 471–474",
+  "creators": [
+    "C. A. Trujillo",
+    "S. S. Sheppard"
+  ],
+  "publicationDate": "2014"
+}

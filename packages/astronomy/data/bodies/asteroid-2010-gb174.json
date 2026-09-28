@@ -1,0 +1,75 @@
+{
+  "id": "asteroid-2010-gb174",
+  "classification": "trans-neptunian",
+  "physical": {
+    "name": "2010 GB174",
+    "horizonsCode": "DES=2010 GB174;",
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "No size is measured. JPL SBDB (checked 2026-09-28) lists only H = 6.74; no paper states one diameter for it. Radius recorded as 0: not measured.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=2010 GB174;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2010+GB174%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 54028689164.57286,
+      "eccentricity": 0.8655954469442448,
+      "inclinationRad": 0.3226695982148935,
+      "ascendingNodeRad": 1.0747701117610107,
+      "argumentOfPeriapsisRad": 1.0438524435264012,
+      "meanAnomalyAtEpochRad": 0.06840771691617764,
+      "meanMotionRadPerDay": 0.000002506299187004859
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2010+GB174%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -10461348842.78211,
+          -3939231725.20869,
+          2449396012.957421
+        ],
+        "velocity": [
+          -114949.2774644668,
+          -375371.7472239005,
+          -25929.06864461916
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -10464793926.65472,
+          -3950492117.125366,
+          2448617228.761371
+        ],
+        "velocity": [
+          -114723.0562103838,
+          -375321.1089353677,
+          -25989.90738326427
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -10468232260.10335,
+          -3961751002.26277,
+          2447836618.488439
+        ],
+        "velocity": [
+          -114499.6665589728,
+          -375271.8954328421,
+          -26051.00878824405
+        ]
+      }
+    ]
+  }
+}

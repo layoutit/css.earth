@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "leleakuhonua",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Leleākūhonua",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 110
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/leleakuhonua-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        10768666894936.068,
+        1562170072502.9304,
+        3062839566334.5977
+      ],
+      "presentationToReference": [
+        0.9709972584508687,
+        2.4356826039297786e-17,
+        0.239090618973009,
+        0.21936135411675337,
+        0.3977771559319137,
+        -0.8908725669470253,
+        0.09510478642508435,
+        -0.9174820620691818,
+        -0.38624052788427193
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 478.2608695652174,
+      "bodyRadiusM": 110000
+    },
+    "catalog": {
+      "name": "Leleākūhonua",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 75.56409028198392,
+      "description": "Found in 2015; its orbit reaches more than 2,500 au from the Sun.",
+      "systemName": "Solar System",
+      "context": {},
+      "illustrationLenses": [
+        "model"
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { asteroidElements, asteroidPositionKm } from './asteroids.js'
+import { asteroidElements, asteroidPositionKm, isExtremeTransNeptunian } from './asteroids.js'
 import { ASTEROID_FIXTURES } from './__fixtures__/horizons.asteroids.js'
 import { SMALL_BODY_IDS } from './bodies.js'
 
@@ -9,7 +9,8 @@ describe('asteroid positions against JPL Horizons', () => {
       const epoch = asteroidElements(id).epochJdTt
       const row = ASTEROID_FIXTURES[id].rows.find(row => row.jd === epoch)!
       const actual = asteroidPositionKm(id, epoch)
-      expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(0.001)
+      // Printed-digit roundoff: 2017 OF201 (e = 0.945, 91 au away) measures 2.00 m, a relative 1.5e-13.
+      expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(0.003)
     }
   })
   it('bounds the measured propagation error at the two independent nearby dates', () => {
@@ -29,8 +30,10 @@ describe('asteroid positions against JPL Horizons', () => {
     // dates do not establish intervening-date accuracy. Exact errors and fixture
     // hashes are recorded in output/asteroids-wikipedia/orbit-errors.json.
     // The distant-world batch measures 519–549 km at epoch ±30 days;
+    // the extreme trans-Neptunian batch 531–549 km, bounded at ceil(measured * 1.05).
     // Independent vectors: docs/distant-worlds/orbit-errors.json, since removed (git history).
-    const maximumErrorKm = {"ixion": 547, "huya": 542, "asteroid-2003-vs2": 583, "asteroid-2002-tc302": 567, "asteroid-2002-tx300": 564, "deedee": 562, oumuamua: 600, sedna: 600, gonggong: 600, orcus: 600, salacia: 600, varuna: 600, varda: 600, mani: 600, achlys: 600,
+    const maximumErrorKm = {"ixion": 547, "huya": 542, "asteroid-2003-vs2": 583, "asteroid-2002-tc302": 567, "asteroid-2002-tx300": 564, "deedee": 562, "asteroid-2012-vp113": 563, "leleakuhonua": 559, "asteroid-2017-of201": 561, "alicanto": 567, "asteroid-2013-rf98": 570,
+      "asteroid-2007-tg422": 576, "asteroid-2010-gb174": 562, "asteroid-2015-bp519": 566, "asteroid-2023-kq14": 558, oumuamua: 600, sedna: 600, gonggong: 600, orcus: 600, salacia: 600, varuna: 600, varda: 600, mani: 600, achlys: 600,
       vesta: 300, eros: 200, itokawa: 400, bennu: 200, ryugu: 200, ida: 2000, gaspra: 850, mathilde: 230, lutetia: 200, steins: 220, didymos: 140, kleopatra: 250, toutatis: 340, pallas: 285, hygiea: 4000, juno: 240, psyche: 3300,
       interamnia: 300, davida: 550, sylvia: 6300, eunomia: 350, euphrosyne: 350, bamberga: 150, fortuna: 350, themis: 300, amphitrite: 250, egeria: 250, elektra: 2350, iris: 450, hebe: 1450, eugenia: 2450, daphne: 350, eleonora: 300, nemesis: 250, kalliope: 700, nemausa: 250, parthenope: 400, melpomene: 200, julia: 900, victoria: 2000, urania: 750,
       'flora': 200, 'europa-52': 2300, 'metis-9': 250, 'camilla': 3900, 'thisbe': 450, 'doris': 300, 'hermione': 300, 'diotima': 2000, 'herculina': 350, 'nausikaa': 250, 'astraea': 300, 'irene': 250, 'nysa': 450, 'sappho': 1700,
@@ -77,5 +80,13 @@ describe('asteroid positions against JPL Horizons', () => {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])
     }
+  })
+})
+
+describe('extreme trans-Neptunian objects', () => {
+  it('are the trans-Neptunian objects beyond a = 150 au with perihelion past 30 au', () => {
+    // Sedna (a 541 au, q 76 au) and Leleakuhonua qualify; Eris (a 68 au) and Quaoar (a 43 au) do not; an asteroid never does.
+    for (const id of ['sedna', 'leleakuhonua', 'asteroid-2013-rf98']) expect(isExtremeTransNeptunian(id), id).toBe(true)
+    for (const id of ['quaoar', 'gonggong', 'ceres', 'vesta', 'not-a-body']) expect(isExtremeTransNeptunian(id), id).toBe(false)
   })
 })

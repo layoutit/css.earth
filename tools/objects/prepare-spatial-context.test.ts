@@ -127,11 +127,17 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     await prepareSpatialContext({ sourcePath, solarGeometryPath, outputPath });
     const result = JSON.parse(await readFile(outputPath, 'utf8'));
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
-    // Catalogue entries first, then the bodies drawn from their astronomy records around a packaged host.
+    // Catalogue entries first, then the bodies drawn from their astronomy records: around a packaged host, or around the Sun
+    // for a trans-Neptunian object with no measured size.
     assert.deepEqual(result.bodies.filter((body: { unpackaged?: true }) => !body.unpackaged).map((body: { id: string }) => body.id), contextEntries.map(body => body.id));
+    const records = BODIES as Readonly<Record<string, { readonly parent: string | null; readonly meanRadiusKm: number }>>;
     for (const body of result.bodies.filter((body: { unpackaged?: true }) => body.unpackaged)) {
-      assert.ok(!contextEntries.some(entry => entry.id === body.id) && (HOSTED_PLANET_IDS as readonly string[]).includes(body.id), `${body.id} is a record-only hosted body`);
+      const heliocentric = records[body.id]?.parent === 'sun' && records[body.id]?.meanRadiusKm === 0;
+      assert.ok(!contextEntries.some(entry => entry.id === body.id) && ((HOSTED_PLANET_IDS as readonly string[]).includes(body.id) || heliocentric),
+        `${body.id} is a record-only hosted body or trans-Neptunian object`);
     }
+    assert.ok(result.bodies.some((body: { id: string; unpackaged?: true }) => body.id === 'asteroid-2013-rf98' && body.unpackaged),
+      'a trans-Neptunian object no paper sizes is drawn from its record');
     assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
       .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam'], 'Catalogue preparation must preserve the source records’ phase qualification.');
     // Independently parse the retained Horizons output, bypassing the snapshot

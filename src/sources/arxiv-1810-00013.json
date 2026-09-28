@@ -1,0 +1,35 @@
+{
+  "id": "arxiv-1810-00013",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sheppard et al. (2019): A New High Perihelion Inner Oort Cloud Object: 2015 TG387",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1810.00013"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1810.00013",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/leleakuhonua/text.json",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 157, 139",
+  "creators": [
+    "S. S. Sheppard",
+    "C. A. Trujillo",
+    "D. J. Tholen",
+    "N. Kaib"
+  ],
+  "publicationDate": "2019"
+}

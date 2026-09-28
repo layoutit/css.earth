@@ -1,0 +1,75 @@
+{
+  "id": "asteroid-2023-kq14",
+  "classification": "trans-neptunian",
+  "physical": {
+    "name": "2023 KQ14",
+    "horizonsCode": "DES=2023 KQ14;",
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "No size is measured. Chen et al. (2025, Nature Astronomy, https://doi.org/10.1038/s41550-025-02595-7) give 220-380 km for albedos 0.15-0.05, a range, not one value. Radius recorded as 0: not measured.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "DES=2023 KQ14;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2023+KQ14%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 37111007716.4399,
+      "eccentricity": 0.7342241755174406,
+      "inclinationRad": 0.5006290529538409,
+      "ascendingNodeRad": 0.3878627710621962,
+      "argumentOfPeriapsisRad": 4.375755224281845,
+      "meanAnomalyAtEpochRad": 6.224019006528852,
+      "meanMotionRadPerDay": 0.000004402662945552357
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D2023+KQ14%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -5300023278.51374,
+          -8491498757.513117,
+          -3204052373.212129
+        ],
+        "velocity": [
+          376917.9117412477,
+          -77443.1021668743,
+          -117223.2375810335
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -5288713424.562711,
+          -8493819198.183448,
+          -3207568020.855727
+        ],
+        "velocity": [
+          377072.2962598464,
+          -77252.97948857526,
+          -117153.2928295226
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -5277398973.486343,
+          -8496133945.313809,
+          -3211081570.279361
+        ],
+        "velocity": [
+          377223.9692189001,
+          -77064.13293850102,
+          -117083.5578918959
+        ]
+      }
+    ]
+  }
+}

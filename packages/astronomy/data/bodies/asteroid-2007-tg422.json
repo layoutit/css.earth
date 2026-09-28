@@ -1,0 +1,75 @@
+{
+  "id": "asteroid-2007-tg422",
+  "classification": "trans-neptunian",
+  "physical": {
+    "name": "2007 TG422",
+    "horizonsCode": "523622;",
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "No size is measured. JPL SBDB (checked 2026-09-28) lists only H = 6.47; no paper states one diameter for it. Radius recorded as 0: not measured.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "523622;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27523622%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 82306410515.20427,
+      "eccentricity": 0.935252980845099,
+      "inclinationRad": 0.4049141807663835,
+      "ascendingNodeRad": 0.8393570632351832,
+      "argumentOfPeriapsisRad": 6.184141251635967,
+      "meanAnomalyAtEpochRad": 0.010104659756746237,
+      "meanMotionRadPerDay": 0.000001332965983401906
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27523622%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          611047563.0389032,
+          5948657683.001959,
+          1508066853.468068
+        ],
+        "velocity": [
+          -472905.1919619026,
+          204453.5852295694,
+          209370.8619010336
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          596859534.4054854,
+          5954779560.162105,
+          1514344924.58615
+        ],
+        "velocity": [
+          -472963.0715723878,
+          203671.7248665964,
+          209167.1274432073
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          582669767.9928762,
+          5960877989.668228,
+          1520616877.77875
+        ],
+        "velocity": [
+          -473021.4630913197,
+          202889.8089367869,
+          208962.7993256956
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,205 @@
+{
+ "checkedOn": "2026-09-28",
+ "referenceDirectory": "output/extreme-tnos/references",
+ "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/extreme-tnos/inputs.json.",
+ "bodies": [
+  {
+   "id": "asteroid-2012-vp113",
+   "name": "2012 VP113",
+   "titleLabel": "2012 VP113",
+   "horizons": "DES=2012 VP113;",
+   "aliases": [
+    "2012 VP113"
+   ],
+   "classification": "trans-neptunian",
+   "population": "Extreme trans-Neptunian object",
+   "fullAxesKm": [
+    550,
+    550,
+    550
+   ],
+   "radiusKm": 275.0,
+   "axesStatus": "Illustrative equal axes at the diameter its discoverers estimate for an assumed albedo of 0.10; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the estimated diameter",
+   "source": "https://arxiv.org/abs/1608.08772",
+   "credit": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+   "papers": [
+    "https://arxiv.org/abs/1608.08772",
+    "https://doi.org/10.1038/nature13156",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere 550 km across, the diameter Sheppard & Trujillo (2016, Table 2) estimate from its brightness for an assumed moderate albedo of 0.10. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "2012 VP113 never comes closer to the Sun than about 80 au, and at the far end of its orbit it is about 450 au away. Its discoverers reported it in 2014 as a second Sedna-like body.",
+   "card": "A Sedna-like body that never comes closer than about 80 au.",
+   "datasetSummary": "A sphere 550 km across, the size its discoverers estimate for an assumed albedo.",
+   "distanceAu": 85.1083587027271,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-28",
+     "locator": "Record for 2012 VP113: q = 80.6 au, a = 267 au, e = 0.70 (Horizons elements at 2026-09-03 TDB)"
+    },
+    {
+     "catalogueId": "doi-10-1038-nature13156",
+     "url": "https://doi.org/10.1038/nature13156",
+     "label": "Trujillo & Sheppard (2014), Nature 507, 471",
+     "checked": "2026-09-28",
+     "locator": "Abstract: a second Sedna-like object, 2012 VP113, with perihelion 80 au"
+    }
+   ],
+   "references": [
+    {
+     "file": "sheppard-trujillo-2016.pdf",
+     "url": "https://arxiv.org/pdf/1608.08772v5",
+     "license": "Original paper remains author/publisher copyright and is restored from its public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+     "licenseEvidence": [
+      "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+     ],
+     "extraction": "Table 2, 2012 VP113 row: Dia 550 km; caption: diameter estimates assume a moderate albedo of 0.10."
+    }
+   ]
+  },
+  {
+   "id": "leleakuhonua",
+   "name": "Leleākūhonua",
+   "titleLabel": "Leleākūhonua",
+   "horizons": "541132;",
+   "aliases": [
+    "541132 Leleākūhonua",
+    "2015 TG387",
+    "Leleakuhonua"
+   ],
+   "classification": "trans-neptunian",
+   "population": "Extreme trans-Neptunian object",
+   "fullAxesKm": [
+    220,
+    220,
+    220
+   ],
+   "radiusKm": 110.0,
+   "axesStatus": "Equal axes at the occultation radius, which assumes a circular outline.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the occultation radius",
+   "source": "https://arxiv.org/abs/2011.03889",
+   "credit": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+   "papers": [
+    "https://arxiv.org/abs/2011.03889",
+    "https://arxiv.org/abs/1810.00013",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Sphere of radius 110 km (+14/−10 km), from one detection and one nearby non-detection of the 2018 October 20 stellar occultation (Buie et al. 2020). The radius assumes a circular outline; the shape is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Leleākūhonua never comes closer to the Sun than about 65 au, and its orbit reaches beyond 2,500 au. Its discoverers reported it as the third known member of the inner Oort cloud.",
+   "card": "Found in 2015; its orbit reaches more than 2,500 au from the Sun.",
+   "datasetSummary": "A sphere of radius 110 km, measured in a 2018 stellar occultation assuming a circular outline.",
+   "distanceAu": 75.56409028198392,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-28",
+     "locator": "Record for 541132 Leleākūhonua (2015 TG387): q = 64.7 au, a = 1322 au, e = 0.951 (Horizons elements at 2026-09-03 TDB); discovery 2015 Oct. 13 at Mauna Kea"
+    },
+    {
+     "catalogueId": "arxiv-1810-00013",
+     "url": "https://arxiv.org/abs/1810.00013",
+     "label": "Sheppard, Trujillo, Tholen & Kaib (2019), The Astronomical Journal 157, 139",
+     "checked": "2026-09-28",
+     "locator": "Abstract: the third known inner Oort cloud object after Sedna and 2012 VP113"
+    }
+   ],
+   "references": [
+    {
+     "file": "buie-2020.pdf",
+     "url": "https://arxiv.org/pdf/2011.03889v1",
+     "license": "Original paper remains author/publisher copyright and is restored from its public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+     "licenseEvidence": [
+      "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+     ],
+     "extraction": "Abstract: circular profile radius r = 110 +14/−10 km; geometric albedo 0.21 for adopted H_V = 5.6."
+    }
+   ]
+  },
+  {
+   "id": "asteroid-2017-of201",
+   "name": "2017 OF201",
+   "titleLabel": "2017 OF201",
+   "horizons": "DES=2017 OF201;",
+   "aliases": [
+    "2017 OF201"
+   ],
+   "classification": "trans-neptunian",
+   "population": "Extreme trans-Neptunian object",
+   "fullAxesKm": [
+    700,
+    700,
+    700
+   ],
+   "radiusKm": 350.0,
+   "axesStatus": "Illustrative equal axes at the diameter its discoverers estimate for an assumed albedo of 0.13; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at the estimated diameter",
+   "source": "https://arxiv.org/abs/2505.15806",
+   "credit": "Cheng, Li & Yang (2026), The Astrophysical Journal Letters 998, 6: diameter about 700 km for an assumed albedo of 0.13",
+   "papers": [
+    "https://arxiv.org/abs/2505.15806",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere 700 km across, the diameter Cheng, Li & Yang estimate from its brightness for an assumed albedo of 0.13. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "2017 OF201 never comes closer to the Sun than about 45 au, and its orbit reaches about 1,600 au. It was reported in 2025 from 24 observations spread over 20 years.",
+   "card": "Reported in 2025; its orbit reaches about 1,600 au from the Sun.",
+   "datasetSummary": "A sphere 700 km across, the size its discoverers estimate for an assumed albedo.",
+   "distanceAu": 91.41772937693106,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-28",
+     "locator": "Record for 2017 OF201: q = 45.1 au, a = 818 au, e = 0.945 (Horizons elements at 2026-09-03 TDB)"
+    }
+   ],
+   "references": [
+    {
+     "file": "cheng-2025.pdf",
+     "url": "https://arxiv.org/pdf/2505.15806v2",
+     "license": "Original paper remains author/publisher copyright and is restored from its public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+     "licenseEvidence": [
+      "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+     ],
+     "extraction": "Abstract: 24 observations over 20 years; assuming an albedo of 0.13, diameter about 700 km."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/sheppard-trujillo-2016.pdf",
+      "url": "https://arxiv.org/pdf/1608.08772v5"
+    }
+  ]
+}

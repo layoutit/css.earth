@@ -41,10 +41,12 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
     compact?: boolean;
     /** Bodies of a system: each body that orbits another, and each body something orbits. */
-    systemMembers?: ReadonlySet<string> }) {
+    systemMembers?: ReadonlySet<string>;
+    /** Bodies the map shows by their measured orbit even when their page is only an illustration (extreme trans-Neptunian objects). */
+    orbitFeatures?: ReadonlySet<string> }) {
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
-    const illustration = object.discovery.illustration;
+    const illustration = object.discovery.illustration && options.orbitFeatures?.has(object.id) !== true;
     // A star is named where there is more to find: a notable star (featured: an IAU proper name, or real imagery), or a star
     // of a system, with something orbiting it or orbiting something itself. Every other star is a dot that names itself on
     // hover, so the names on the map point to where there is more to click.

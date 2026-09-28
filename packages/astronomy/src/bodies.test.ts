@@ -63,8 +63,13 @@ describe('the body table', () => {
   it('has physically plausible radii and masses', () => {
     for (const id of BODY_IDS) {
       const data = bodyData(id)
-      // Zero radius is an unmeasured one, allowed only for a hosted star or black hole. Such a star has no published mass either;
-      // a hosted black hole's mass is what its orbit measures.
+      // Zero radius is an unmeasured one, allowed only for a hosted star or black hole, or a trans-Neptunian object known from its
+      // Horizons orbit alone. Such a body has no published mass either; a hosted black hole's mass is what its orbit measures.
+      if (data.meanRadiusKm === 0 && (SMALL_BODY_IDS as readonly string[]).includes(id)) {
+        expect(data.parent, id).toBe('sun')
+        expect(data.gravitationalParameterKm3PerS2, id).toBe(0)
+        continue
+      }
       if (data.meanRadiusKm === 0) {
         expect(HOSTED_STAR_IDS, id).toContain(id)
         if ((BLACK_HOLE_IDS as readonly string[]).includes(id)) expect(data.gravitationalParameterKm3PerS2, id).toBeGreaterThan(0)

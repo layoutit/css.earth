@@ -1,0 +1,75 @@
+{
+  "id": "alicanto",
+  "classification": "trans-neptunian",
+  "physical": {
+    "name": "Alicanto",
+    "horizonsCode": "474640;",
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "No size is measured. JPL SBDB (checked 2026-09-28) lists only H = 6.46; no paper states one diameter for it. Radius recorded as 0: not measured.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "474640;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27474640%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 50924819047.30439,
+      "eccentricity": 0.8608401788875081,
+      "inclinationRad": 0.7099350060716201,
+      "ascendingNodeRad": 0.6483864972341677,
+      "argumentOfPeriapsisRad": 0.020463645579459285,
+      "meanAnomalyAtEpochRad": 0.01684232554585119,
+      "meanMotionRadPerDay": 0.000002738894587829004
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27474640%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          3843190788.357295,
+          5962570186.157594,
+          2089767683.592057
+        ],
+        "velocity": [
+          -319746.5725843206,
+          217252.4276957286,
+          314751.8261857126
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          3833594433.403901,
+          5969080763.016409,
+          2099207745.622467
+        ],
+        "velocity": [
+          -320010.2750803725,
+          216785.9620559826,
+          314585.5109128534
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          3823990151.384255,
+          5975577333.035616,
+          2108642808.116125
+        ],
+        "velocity": [
+          -320275.4611389262,
+          216318.0388920697,
+          314418.322502048
+        ]
+      }
+    ]
+  }
+}

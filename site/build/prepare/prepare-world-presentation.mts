@@ -12,6 +12,7 @@ import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
+import { isExtremeTransNeptunian } from '@cssearth/astronomy';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
@@ -36,8 +37,10 @@ export function minorMoonOrbitIds(bodies: readonly { id: string; orbit?: { cente
   }).map(body => body.id);
 }
 
-/** The default context suppresses distant orbit classes and limits asteroid orbits to JPL spacecraft targets. */
+/** The default context suppresses distant orbit classes, except the extreme trans-Neptunian objects, and limits asteroid orbits
+ * to JPL spacecraft targets. */
 export function showsDefaultContextOrbit(object: { id: string; classification: string }): boolean {
+  if (object.classification === 'trans-neptunian' && isExtremeTransNeptunian(object.id)) return true;
   if (['trans-neptunian', 'interstellar'].includes(object.classification)) return false;
   return object.classification !== 'asteroid' || isJplMissionTarget(object);
 }
@@ -45,7 +48,12 @@ export function showsDefaultContextOrbit(object: { id: string; classification: s
 /** Discovery prominence describes prepared content. Asteroid context prominence is instead sourced from JPL. */
 export function isDefaultContextFeature(object: { id: string; classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
   if (object.classification === 'asteroid') return isJplMissionTarget(object);
-  return object.classification === 'dwarf-planet' || object.discovery.featured;
+  return object.classification === 'dwarf-planet' || object.discovery.featured || orbitFeature(object);
+}
+
+/** A body the map shows by its measured orbit even when its page is only an illustration: an extreme trans-Neptunian object. */
+export function orbitFeature(object: { id: string; classification: string }): boolean {
+  return object.classification === 'trans-neptunian' && isExtremeTransNeptunian(object.id);
 }
 
 export function prepareWorldPresentation() {
@@ -54,6 +62,7 @@ export function prepareWorldPresentation() {
     schema: 'cssearth-world-presentation@1',
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
+    orbitFeatureIds: SCENE_OBJECTS.filter(orbitFeature).map(object => object.id),
     hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },

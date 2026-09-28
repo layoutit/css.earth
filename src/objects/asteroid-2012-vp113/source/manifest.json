@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://arxiv.org/abs/1608.08772",
+      "credit": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/1608.08772"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere 550 km across, the diameter Sheppard & Trujillo (2016, Table 2) estimate from its brightness for an assumed moderate albedo of 0.10. The size is not measured. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 275000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/extreme-tnos/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1608-08772",
+            "role": "method",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 275000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/extreme-tnos/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json"
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/terrestrial.json"
+    },
+    {
+      "path": "presentation/minimap.json"
+    },
+    {
+      "path": "reference/horizons-elements.txt"
+    },
+    {
+      "path": "reference/horizons-vectors.txt"
+    },
+    {
+      "path": "reference/sheppard-trujillo-2016.pdf"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/1608.08772",
+      "credit": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

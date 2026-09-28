@@ -148,6 +148,40 @@
         "https://sdo.gsfc.nasa.gov/data/channels.php",
         "https://github.com/layoutit/css.earth/blob/main/tests/objects/interpretation/fits-map.test.mts"
       ]
+    },
+    {
+      "id": "extreme-tno-orbit-only",
+      "subject": "Extreme trans-Neptunian objects drawn from their orbit alone",
+      "status": "included",
+      "finding": "Alicanto (2004 VN112), 2013 RF98, 2007 TG422, 2010 GB174, 2015 BP519 and 2023 KQ14 have Horizons orbits but no paper states one size for them (JPL lists only H; Becker et al. 2018 and Chen et al. 2025 give ranges). They are drawn from their astronomy records as a dot and orbit with no page; each record notes why its radius is 0.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/alicanto.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2013-rf98.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2007-tg422.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2010-gb174.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2015-bp519.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/asteroid-2023-kq14.json"
+      ]
+    },
+    {
+      "id": "farfarout-2018-ag37",
+      "subject": "2018 AG37 (FarFarOut)",
+      "status": "excluded",
+      "finding": "JPL SBDB (checked 2026-09-28) fits its orbit to 11 observations over 740 days and gives it condition code 9, the scale's worst; the orbit is not determined, so it is not drawn.",
+      "revisitWhen": "JPL gives 2018 AG37 an orbit with a condition code of 6 or better.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2018%20AG37"
+      ]
+    },
+    {
+      "id": "farout-2018-vg18",
+      "subject": "2018 VG18 (Farout)",
+      "status": "excluded",
+      "finding": "No paper reports it; JPL SBDB (checked 2026-09-28) gives condition code 6 and no size. It is also not an extreme object (semimajor axis 82 au), so the map rule would hide its orbit.",
+      "revisitWhen": "A paper reports 2018 VG18's orbit or size.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2018%20VG18"
+      ]
     }
   ]
 }
