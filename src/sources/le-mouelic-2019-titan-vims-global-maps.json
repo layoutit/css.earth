@@ -1,0 +1,68 @@
+{
+  "id": "le-mouelic-2019-titan-vims-global-maps",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Cassini VIMS archive of Titan: from browse products to global infrared color maps (Le Mouélic et al. 2019, Icarus 319, 121-132)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2018.09.017"
+    },
+    {
+      "type": "arXiv",
+      "value": "1809.06545"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2018.09.017",
+      "label": "Le Mouélic et al. (2019), Icarus 319, 121-132"
+    },
+    {
+      "role": "mirror",
+      "url": "https://arxiv.org/abs/1809.06545",
+      "label": "arXiv:1809.06545 author manuscript"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/titan/source/manifest.json",
+      "locator": "/inputs/64"
+    },
+    {
+      "path": "src/objects/titan/source/manifest.json",
+      "locator": "/inputs/65"
+    },
+    {
+      "path": "src/objects/titan/source/manifest.json",
+      "locator": "/inputs/66"
+    }
+  ],
+  "creators": [
+    "S. Le Mouélic",
+    "T. Cornet",
+    "S. Rodriguez",
+    "C. Sotin",
+    "B. Seignovert",
+    "J. W. Barnes",
+    "R. H. Brown",
+    "K. H. Baines",
+    "B. J. Buratti",
+    "R. N. Clark",
+    "P. D. Nicholson",
+    "J. Lasue",
+    "V. Pasek",
+    "J. M. Soderblom"
+  ],
+  "publicationDate": "2019-02",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "The paper publishes the global maps as figures only; it points to vims.univ-nantes.fr for per-cube browse products and releases no numeric (I/F) global mosaic.",
+      "scope": "data availability",
+      "evidence": "https://arxiv.org/abs/1809.06545"
+    }
+  ]
+}

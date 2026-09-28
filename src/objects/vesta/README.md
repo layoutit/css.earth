@@ -13,6 +13,10 @@ Vesta uses Dawn framing-camera mosaics, spectral ratios and a terrain model in t
 | Shape and elevation | [DLR HAMO 64-pixel-per-degree terrain model](https://dawngis.dlr.de/data/Vesta/dtm_vesta.php) |
 | Hydrogen | [Dawn GRaND hydrogen map](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_HYDROGEN_MAP`; Prettyman et al. 2012, [Science 338, 242](https://doi.org/10.1126/science.1225354) |
 | Iron gamma rays | [Dawn GRaND corrected iron counting rate](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_IRON_CORRECTED_COUNTS_MAP`; Yamashita et al. 2013, [MAPS 48, 2237](https://doi.org/10.1111/maps.12139) |
+| Fast neutrons | [Dawn GRaND fast neutron residual map](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_FAST_NEUTRON_RESIDUAL_MAP`; Lawrence et al. 2013, [MAPS 48, 2271](https://doi.org/10.1111/maps.12187) |
+| High-energy gamma rays | [Dawn GRaND high-energy gamma-ray counts](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_HEGR_COUNTS_MAP`; Peplowski et al. 2013, [MAPS 48, 2252](https://doi.org/10.1111/maps.12176) |
+| Neutron absorption | [Dawn GRaND neutron absorption map](https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/), PDS4 `GRD_NEUTRON_ABSORPTION_MAP`; Prettyman et al. 2013, [MAPS 48, 2211](https://doi.org/10.1111/maps.12244) |
+| Geology | [Yingst et al. 2023 global geologic map linework](https://doi.org/10.5281/zenodo.19475473), Zenodo, CC BY 4.0; [PSJ 4:157](https://doi.org/10.3847/PSJ/acebe9) |
 | Physical placement | JPL Horizons solution #36 |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VESTA/target) Vesta centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -61,7 +65,7 @@ pins the label grid, the fallback order and the prepared coverage.
 ## Surface elements from GRaND
 
 Dawn's gamma-ray and neutron detector (GRaND) measured the top few decimetres
-of regolith from low orbit, about 210 km up. Two archived numeric maps are
+of regolith from low orbit, about 210 km up. Five archived numeric maps are
 shown, read from the PDS4 bundle `urn:nasa:pds:dawn-grand-vesta` 1.0, not from
 the colour renders in NASA Vesta Trek.
 
@@ -69,9 +73,13 @@ the colour renders in NASA Vesta Trek.
 | --- | --- | --- | --- | --- |
 | Hydrogen | Hydrogen abundance, µg/g | 16,200, 2° × 2° | 0.0 to 391.1 | 2011-12-08 to 2012-01-14 |
 | Iron gamma rays | Fe 7.6 MeV counting rate corrected for neutron density, counts/s | 178,698 equal-area, 0.5° tall | 0.0687 to 0.07746 | 2011-12-08 to 2012-04-27 |
+| Fast neutrons | Residual fast neutron counting rate, counts/s | 114 quasi-equal-area, 20° tall (10° polar caps) | 1.170 to 1.237 | 2011-12-09 to 2012-01-14 and 2012-04-03 to 2012-05-01 |
+| High-energy gamma rays | Corrected high-energy gamma-ray counting rate, counts/s, with 1σ uncertainty | 210 quasi-equal-area, 15° tall (7.5° polar caps) | 12.516 to 13.143 (1σ 0.117 to 0.311) | 2011-12-12 to 2012-05-01 |
+| Neutron absorption | DCP, unitless, with 1σ uncertainty | 204 quasi-equal-area, 15° tall (7.5° polar caps) | −0.0364 to 0.031 (1σ 0.0014 to 0.0075) | 2011-12-08 to 2012-01-14 |
 
 **Resolution.** The archive and papers give about 300 km full width at half
-maximum on the surface. The pixels are a sampling grid, not detail: features
+maximum on the surface; the neutron absorption catalogue and Prettyman et al.
+(2013) state the same ~300 km scale. The pixels are a sampling grid, not detail: features
 smaller than a few hundred kilometres are blurred together.
 
 **Frame.** The archive uses Claudia Double Prime; the other Vesta maps use
@@ -83,7 +91,9 @@ and writes the `.npy` grids the shared reader takes. It checks each table
 against its label's checksum, record count and units, and refuses overlaps,
 gaps and pixels that straddle a cell, so no value is resampled. The hydrogen
 label says rows start at −180° E; the longitude columns start each row at −30° E,
-and the columns are used.
+and the columns are used. The three coarse maps use rectangular cells that
+divide their pixel bounds (10° × 1.5° for fast neutrons, 7.5° × 1° for the other
+two); a polar cap is one pixel 360° wide and fills its whole row.
 
 **What the values mean.** Hydrogen is richest where dark, carbonaceous material
 fell on Vesta and poorest in the Rheasilvia basin (minimum at 303° E, 63° S in
@@ -93,14 +103,51 @@ rate. The catalogue's preliminary conversion (wt% = 189.2 × counts/s, scaled to
 the 13.8 wt% mean of howardites) comes with a caution and is not applied.
 Neither table carries a per-pixel uncertainty.
 
+Fast neutrons are the +Z sensor counts after the part that follows hydrogen
+(the epithermal-neutron trend) is removed. [Lawrence et al. (2013)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4461122/)
+show that what remains follows the regolith's average atomic mass, from about
+21.7 (diogenite) to 23 (basaltic eucrite) atomic mass units in HED meteorites.
+Their offset is arbitrary, so only differences count; the whole map spans about
+5%. The counts were smoothed (the paper gives a 5° binning, a Gaussian of 600 km
+sigma width and 20° pixels), so the catalogue reports no uncertainties.
+
+High-energy gamma rays are counts corrected for background, solid angle,
+orientation and cosmic-ray changes. The catalogue says they are proportional
+to the heavy major-element content and sample a few tens of decimetres.
+[Peplowski et al. (2013)](https://doi.org/10.1111/maps.12176) find eucrite-like
+regions and a diogenite-like Rheasilvia floor. The 1σ uncertainty per pixel is
+a large share of the range, so single-pixel differences can be noise.
+
+Neutron absorption is DCP, a unitless distance in a plot of epithermal against
+thermal-plus-epithermal counts that rises linearly with the thermal neutron
+absorption cross section. [Prettyman et al. (2013)](https://doi.org/10.1111/maps.12244)
+tie it to Fe, Ca, Al, Mg and other rock-forming elements and to the share of
+eucrite in howardite: Rheasilvia reads low, the dark hemisphere high. The
+catalogue's conversion, Σ = 216.4 × DCP + 66.3 in 10⁻⁴ cm²/g, assumes Vesta's
+mean regolith is howardite, which the catalogue says is not known; it is not
+applied. The PDS4 label's history names the iron dataset as its PDS3 source;
+the PDS3 catalogue gives `DAWN-A-GRAND-5-VESTA-ABSORPTION-V1.0`, which is used here.
+
 **Checks (2026-09-27).** 4,000 random points read through the
 shared `.npy` reader equal a direct lookup in the raw tables at Claudia minus
 210°. The hydrogen table's longitudes correlate best with the Trek hydrogen
 render at zero shift (r = 0.75 in its red channel, 10° steps), which confirms
 the archive columns are Claudia Double Prime.
 
-A global geologic map is not yet shown; see the
-[investigation ledger](investigations.json) entry `yingst-2023-global-geologic-map`.
+**Checks for the coarse maps (2026-09-27, on ccbf483de8).** For fast neutrons,
+high-energy gamma rays and neutron absorption, 4,000 random points each through
+the shared `.npy` reader equal a raw-table lookup at Claudia minus 210°. Lawrence
+et al. (2013) place the eucrite-rich band at 90° to 225° E (Claudia) near the
+equator, high in all three maps. With the shift, that band (latitudes within 30°)
+averages above each map's global mean: fast neutrons 1.221 against 1.206, gamma
+rays 12.885 against 12.776, DCP 0.0059 against −0.0072. Without the shift the
+contrast shrinks or reverses (1.208, 12.815, −0.0137). South of 60° S all three are
+below the mean, and the lowest gamma-ray pixel (67.5° to 82.5° S, 270° to 315° E)
+lies in Rheasilvia.
+
+**Geologic map.** The geology lens shows the global map of Yingst et al. (2023), [PSJ 4:157](https://doi.org/10.3847/PSJ/acebe9), from the authors' ArcGIS linework on [Zenodo](https://doi.org/10.5281/zenodo.19475473) (CC BY 4.0): 136 polygons in 18 hybrid units that pair landforms with Dawn colour-ratio classes. The unit colours are the authors' own: the layer file stores them as CIE L*a*b*, and ArcMap's conversion (Apple RGB primaries, gamma 1.8, D65 white) lands every one within 1e-6 of an integer RGB value.
+
+The linework is in Claudia Double Prime. `geology-grid.py` rasterizes it at 2048 x 1024 in its own coordinates and writes the Claudia central meridian (-150) into the GeoTIFF, so no pixel moves. **Checks (2026-09-27, on ccbf483de8).** The committed grid is read through the shared scientific GeoTIFF reader. At this placement crater-floor units average 1,120 m below a 10-degree high-pass of the HAMO terrain, against -146 to +217 m at every other 10-degree offset; 19 of 38 Gazetteer craters 20 to 150 km across fall in crater units, against 10 unshifted. 2,753 cells (0.13%) are unmapped in the source: the two south-pole rows and a thin line at 30 E south of 25 S. Contacts and linear features are not drawn. Evidence: [terrain anomaly by offset](evidence/geology/placement-dtm.json) and [the units over the HAMO mosaic](evidence/geology/units-over-hamo.png). The rasterization plan and receipt are [`source/geology/prepare-grid.json`](source/geology/prepare-grid.json) and [`vesta-geologic-units.json`](source/geology/vesta-geologic-units.json).
 
 ## Known problems
 
@@ -112,6 +159,8 @@ Feature notes: 9 of the labelled names carry a caption note, the lead summary of
 - Clear-filter photography retains the illumination and seams of the original low-altitude mosaic. Its 20 m/pixel source is downsampled for this display; it does not change the 800-face mesh or supply 20 m terrain geometry. North of the LAMO coverage the 60 m/pixel HAMO mosaic shows instead, so resolution and sun angle change across that boundary, and the last few degrees around the north pole are very dark in the source.
 - Spectral ratios are not mineral-abundance measurements.
 - GRaND maps resolve about 300 km; their 2° and 0.5° pixels are sampling, not detail. The iron lens is a counting rate, not a weight percent.
+- The geology lens leaves 2,753 cells (0.13%) grey where the source has no polygon: the two south-pole rows and a thin line at 30° E south of 25° S. Unit names describe Dawn colour-ratio classes, not the map colours.
+- The fast neutron, high-energy gamma-ray and neutron absorption maps have 114 to 210 pixels each and show blocks 15° to 20° tall. The fast neutron level has an arbitrary offset; DCP is not converted to a cross section; the gamma-ray and DCP uncertainties are archived but not drawn.
 - Terrain values are radii, despite contradictory generic label wording. Polar interpolation is not independent stereo coverage.
 - The 8 km simplification allowance is an approximation, not an error bound or source uncertainty. Placement uses osculating elements with limited temporal validity.
 

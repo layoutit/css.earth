@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "esriJsonPath": "Chloride_Salt-bearing_Material_THEMIS_clon0.query.json",
+  "symbolPath": "Chloride_Salt-bearing_Material_THEMIS_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "expectedRecords": 642,
+  "field": "jC_fillclr",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "0 153 51 255",
+      "label": "Chloride-bearing material",
+      "color": "#009933"
+    }
+  ],
+  "output": "mars-chloride-deposits.tif",
+  "receipt": "mars-chloride-deposits.json"
+}

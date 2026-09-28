@@ -2,6 +2,7 @@ import { createSceneLifetime } from '@cssearth/engine';
 import { labelOcclusionFor } from '@cssearth/renderer';
 import { prepareObjectResources, createRetainedGeometrySnapshot } from '@cssearth/renderer/universe';
 import { createCameraViewport } from '@cssearth/renderer/navigation';
+import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-label-edge.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
@@ -54,7 +55,7 @@ export function createApplicationWorldContext() {
           sources: prepared.catalogSources, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
-        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock));
+        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld()));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
           heliosphereEnabled: () => heliosphereEnabled }));
@@ -88,13 +89,13 @@ export function createApplicationWorldContext() {
           setNavigationInFlight: frames.setNavigationInFlight,
           connectNavigation: contextNavigation.connect,
           applyFocus: contextNavigation.apply,
-          previewSelection(id?: string | null, framingScale?: number) {
-            if (!lifetime.disposed) layer.previewSelection(id, framingScale);
+          previewSelection(id?: string | null, framingScale?: number, edge?: PreparedLabelEdge) {
+            if (!lifetime.disposed) layer.previewSelection(id, framingScale, edge);
           },
-          selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale?: number) {
+          selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale?: number, edge?: PreparedLabelEdge) {
             if (lifetime.disposed) return;
             visibility.selectObject(id);
-            layer.selectObject(id, frame, framingScale);
+            layer.selectObject(id, frame, framingScale, edge);
             moonLabels.selectObject(id);
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,

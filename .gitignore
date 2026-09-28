@@ -113,6 +113,10 @@ src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds
 
 # Numeric grids the missing-data lenses download through their acquisition plans.
+# Mars catalogue query pages are NASA Trek downloads the catalogues acquisition group restores; the rasterized
+# grids they make are small and tracked, like the geologic-unit grids.
+src/objects/mars/source/catalogues/*/*.query*.json
+!src/objects/mars/source/catalogues/*/mars-*.tif
 src/objects/venus/source/science/mgn-gravity/*.dat
 src/objects/mars/source/science/tes/*.img
 src/objects/mars/source/science/tes/*.vicar

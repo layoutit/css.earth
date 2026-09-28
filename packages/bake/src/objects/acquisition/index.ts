@@ -5,6 +5,7 @@
 // `DSK-RESTORATION.md`).
 export * from './dsk-mesh.ts';
 export * from './geotiff-grid.ts';
+export * from './diviner-gcp.ts';
 export * from './geotiff-image.ts';
 export * from './mapped-composition.ts';
 export * from './satellite-catalog.ts';

@@ -30,6 +30,21 @@
       "title": "Controlled infrared mosaic",
       "summary": "Infrared light shows the surface through the haze, along with clouds and seams."
     },
+    "vims-2um": {
+      "title": "Infrared surface mosaic at 2 microns",
+      "detail": "Cassini VIMS",
+      "summary": "At 2 µm light passes Titan’s haze to show the ground. Brightness is a display stretch; clouds and seams remain."
+    },
+    "vims-5um": {
+      "title": "Infrared surface mosaic at 5 microns",
+      "detail": "Cassini VIMS",
+      "summary": "At 5 µm the haze blurs the ground least. Levels are a display stretch, and Kraken Mare shows a bright sun glint."
+    },
+    "vims-color-ratio": {
+      "title": "Ratios of three infrared bands",
+      "detail": "Cassini VIMS",
+      "summary": "Colors compare infrared bands: dunes look brown, and bluish ground may hold more water ice. Not visible color."
+    },
     "radar": {
       "title": "RADAR global mosaic through T126",
       "summary": "Brightness is radar backscatter, not elevation or visible color."

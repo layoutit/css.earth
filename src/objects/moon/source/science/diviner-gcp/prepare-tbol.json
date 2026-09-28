@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-diviner-gcp-grid@1",
+  "datasetId": "LRO-L-DLRE-5-GCP-V1.0",
+  "productVersion": "1",
+  "column": "tbol",
+  "structure": "DLRE_GCP.FMT",
+  "tables": [
+    {
+      "label": "global_cumul_avg_cyl_90s80s_002.lbl",
+      "table": "global_cumul_avg_cyl_90s80s_002.tab",
+      "south": -90,
+      "north": -80
+    },
+    {
+      "label": "global_cumul_avg_cyl_80s70s_002.lbl",
+      "table": "global_cumul_avg_cyl_80s70s_002.tab",
+      "south": -80,
+      "north": -70
+    },
+    {
+      "label": "global_cumul_avg_cyl_70s60s_002.lbl",
+      "table": "global_cumul_avg_cyl_70s60s_002.tab",
+      "south": -70,
+      "north": -60
+    },
+    {
+      "label": "global_cumul_avg_cyl_60s50s_002.lbl",
+      "table": "global_cumul_avg_cyl_60s50s_002.tab",
+      "south": -60,
+      "north": -50
+    },
+    {
+      "label": "global_cumul_avg_cyl_50s40s_002.lbl",
+      "table": "global_cumul_avg_cyl_50s40s_002.tab",
+      "south": -50,
+      "north": -40
+    },
+    {
+      "label": "global_cumul_avg_cyl_40s30s_002.lbl",
+      "table": "global_cumul_avg_cyl_40s30s_002.tab",
+      "south": -40,
+      "north": -30,
+      "labelLatitudesSwapped": "The label gives MINIMUM_LATITUDE -30 and MAXIMUM_LATITUDE -40; its file name, the neighbouring strips and every row (clat -39.75 to -30.25) put the strip at 40S to 30S."
+    },
+    {
+      "label": "global_cumul_avg_cyl_30s20s_002.lbl",
+      "table": "global_cumul_avg_cyl_30s20s_002.tab",
+      "south": -30,
+      "north": -20
+    },
+    {
+      "label": "global_cumul_avg_cyl_20s10s_002.lbl",
+      "table": "global_cumul_avg_cyl_20s10s_002.tab",
+      "south": -20,
+      "north": -10
+    },
+    {
+      "label": "global_cumul_avg_cyl_10s00s_002.lbl",
+      "table": "global_cumul_avg_cyl_10s00s_002.tab",
+      "south": -10,
+      "north": 0
+    },
+    {
+      "label": "global_cumul_avg_cyl_00n10n_002.lbl",
+      "table": "global_cumul_avg_cyl_00n10n_002.tab",
+      "south": 0,
+      "north": 10
+    },
+    {
+      "label": "global_cumul_avg_cyl_10n20n_002.lbl",
+      "table": "global_cumul_avg_cyl_10n20n_002.tab",
+      "south": 10,
+      "north": 20
+    },
+    {
+      "label": "global_cumul_avg_cyl_20n30n_002.lbl",
+      "table": "global_cumul_avg_cyl_20n30n_002.tab",
+      "south": 20,
+      "north": 30
+    },
+    {
+      "label": "global_cumul_avg_cyl_30n40n_002.lbl",
+      "table": "global_cumul_avg_cyl_30n40n_002.tab",
+      "south": 30,
+      "north": 40
+    },
+    {
+      "label": "global_cumul_avg_cyl_40n50n_002.lbl",
+      "table": "global_cumul_avg_cyl_40n50n_002.tab",
+      "south": 40,
+      "north": 50
+    },
+    {
+      "label": "global_cumul_avg_cyl_50n60n_002.lbl",
+      "table": "global_cumul_avg_cyl_50n60n_002.tab",
+      "south": 50,
+      "north": 60
+    },
+    {
+      "label": "global_cumul_avg_cyl_60n70n_002.lbl",
+      "table": "global_cumul_avg_cyl_60n70n_002.tab",
+      "south": 60,
+      "north": 70
+    },
+    {
+      "label": "global_cumul_avg_cyl_70n80n_002.lbl",
+      "table": "global_cumul_avg_cyl_70n80n_002.tab",
+      "south": 70,
+      "north": 80
+    },
+    {
+      "label": "global_cumul_avg_cyl_80n90n_002.lbl",
+      "table": "global_cumul_avg_cyl_80n90n_002.tab",
+      "south": 80,
+      "north": 90
+    }
+  ],
+  "reductions": [
+    {
+      "id": "noon",
+      "kind": "local-time",
+      "fromHour": 11.5,
+      "toHour": 12.5,
+      "output": "tbol-noon-compact.tif",
+      "minimumBins": 1
+    },
+    {
+      "id": "maximum",
+      "kind": "maximum",
+      "output": "tbol-max-compact.tif"
+    }
+  ],
+  "receipt": "tbol-receipt.json"
+}

@@ -144,6 +144,97 @@
         "https://trek.nasa.gov/tiles/Moon/EQ/gggrx_1200a_anom_l660.eq/1.0.0/WMTSCapabilities.xml"
       ],
       "revisitWhen": "A lens needs a Trek layer whose numeric original the PDS does not archive."
+    },
+    {
+      "id": "lp-grs-elem-abundance-2deg",
+      "subject": "Lunar Prospector GRS elemental abundances (Prettyman et al. 2006), PDS LP-L-GRS-5-ELEM-ABUNDANCE-V1.0, 2 degree equal-area table",
+      "status": "included",
+      "finding": "Four views in one Surface elements group: Th and K in ppm, FeO and TiO2 in weight percent, from LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG. The data set says these four were the ones evaluated at 2 degrees; the other oxides are advised against there. The table is equal-area, not a grid, so it needs a new shared reader (drafted, not yet in packages). Every pixel matches an independent whitespace decode at its centre and corners. Checked on working changes above ccbf483de8.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat",
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl",
+        "https://doi.org/10.1029/2005JE002656"
+      ]
+    },
+    {
+      "id": "lp-grs-5deg-20deg-tables",
+      "subject": "The same release's 5 and 20 degree tables",
+      "status": "excluded",
+      "finding": "Not used: the 2 degree table carries the same analysis on finer pixels, and the data set names FeO, TiO2, K and Th at 2 degrees as evaluated by Prettyman et al. (2006). The 5 degree table matches the instrument's 5 degree resolution and is less noisy per pixel.",
+      "revisitWhen": "A view needs MgO, Al2O3, SiO2 or CaO, which the data set advises using at 5 or 20 degrees only.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat",
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_5deg.lbl"
+      ]
+    },
+    {
+      "id": "lp-special-products",
+      "subject": "Lunar Prospector reduced special products (0.5, 2 and 5 degree Th, K, Fe, Ti, H binaries, 2000-2002)",
+      "status": "excluded",
+      "finding": "Not used: the page says they are not a PDS peer-reviewed archive; the binaries have no PDS labels; the 2002 elemental maps were superseded by Prettyman et al. (2006), whose abstract says the new cross sections improve on results previously submitted to PDS.",
+      "revisitWhen": "A peer-reviewed PDS release of the half-degree Th or FeO maps (Lawrence et al. 2002-2003) appears.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html",
+        "https://doi.org/10.1029/2005JE002656"
+      ]
+    },
+    {
+      "id": "lp-ns-hydrogen",
+      "subject": "Lunar Prospector Neutron Spectrometer hydrogen abundance",
+      "status": "deferred",
+      "finding": "The best product is Lawrence et al. (2022): a global 0.5 degree map calibrated to Apollo samples and corrected for rare-earth absorption, archived as 'Global Hydrogen Abundances on the Moon' (CC BY 4.0, doi:10.48732/grc2-4b57, JHU Research Data Repository, v1.0, available 2026-06-02). Its landing page and API answered this machine with a Cloudflare block, so no file was fetched; the block was not bypassed. PDS holds no derived LP hydrogen map: LP-L-NS-3-RDR-V1.0 is time-series count rates. The 2001-2002 special-product hydrogen maps use the model-only calibration of Feldman et al. (2001), are unreviewed and unlabelled, and the page warns they are unreliable where Th and rare earths are high. Lawrence et al. (2022) put their recalibrated maxima about 25% below Lawrence et al. (2006). No archived copy of the 2006 maps was found at the PDS Geosciences Node.",
+      "revisitWhen": "The doi:10.48732/grc2-4b57 files are downloaded by hand into source/science/lp-ns/ (or the repository allows scripted download), or PDS archives an LP hydrogen map.",
+      "evidence": [
+        "https://doi.org/10.48732/grc2-4b57",
+        "https://doi.org/10.1029/2022JE007197",
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-ns-3-rdr-v1/",
+        "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html"
+      ]
+    },
+    {
+      "id": "lola-ldrm-32-50",
+      "subject": "LRO LOLA altimetric roughness LDRM_32_50 (2019, 25 m baseline) with its LDRC_32 counts",
+      "status": "excluded",
+      "finding": "Tried first and read correctly by the pds3-grid reader with the LDRC_32 count mask (331,175 probes matched an independent decode). The producer filled pixels without shots by interpolation; withholding them removes 37.3% of the area, and at the display textures (about 11 texels per degree, against 32 native pixels per degree) the withheld pixels showed as speckle across the whole globe. Replaced by LDRM_16.",
+      "revisitWhen": "The Moon's numeric lenses get texture levels finer than about 11 texels per degree, near the product's 32 pixels per degree, so withheld pixels stop reading as speckle.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_32_50.lbl",
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrc_32.lbl"
+      ]
+    },
+    {
+      "id": "lola-ldrm-16",
+      "subject": "LRO LOLA surface roughness LDRM_16 V2.0",
+      "status": "included",
+      "finding": "Roughness view: per-pixel mean of the residual standard deviation of altitudes from three successive shots after a plane fit, 30 to 120 m baseline, 16 pixels/degree, 2009-07-13 to 2011-12-11 (the label cites Zuber et al. 2012). Read by the existing pds3-grid reader; its MISSING_CONSTANT -32768 (4.4% of the area) is withheld, nothing is filled. Checked on working changes above ccbf483de8.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl",
+        "https://doi.org/10.1038/nature11216"
+      ]
+    },
+    {
+      "id": "lola-roughness-alternatives",
+      "subject": "Other LOLA roughness and slope grids: LDRM_32_N (mean), LDRM_32_25 and _75 quantiles, and the LDSM_16 slope map",
+      "status": "excluded",
+      "finding": "Not used: the 32 pixel/degree family shares LDRM_32_50's interpolated pixels (see lola-ldrm-32-50). Slope is a different quantity.",
+      "revisitWhen": "The lola-ldrm-32-50 condition is met and a view needs boulder-sensitive roughness (the 0.75 quantile or mean), or a view needs slope.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_32_n.lbl",
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldsm_16.lbl"
+      ]
+    },
+    {
+      "id": "diviner-gcp-noon-maximum",
+      "subject": "LRO Diviner Global Cumulative Products (LRO-L-DLRE-5-GCP-V1.0, Williams et al. 2017) for noon and maximum bolometric temperature",
+      "status": "included",
+      "finding": "Maximum temperature and Noon temperature views from the only archived global daytime product. GHRM, which feeds Midnight temperature, holds night-time fits only; the Level 3 GDR maps hold rock abundance, soil temperature and the Christiansen feature. GCP is eighteen 156 MB ASCII tables of bin-average temperatures per 0.5 degree cell and 0.25 hour of local time, 2009-07-05 to 2015-04-01, -9999 for an empty bin. The converter (packages/bake/cli/diviner-gcp-grid.mts) keeps archived bin averages only: maximum = the warmest bin of each cell (every cell has one; 82% fall within an hour of noon); noon = the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data (98.64% of the area). Measured on the converter's output: the 11:45-12:15 window covered 87.25% and left streaks and one large gap on the nearside; 11:00-13:00 covers 100% but moves the values by 1.89 K at the median and 10.66 K at the 95th percentile. The chosen window differs from 11:45-12:15 by 1.03 K at the median and 7.32 K at the 95th percentile where both exist. The equatorial maximum, 5th to 95th percentile 388-396 K within 5 degrees of the equator, matches Williams et al. (2017), about 387-397 K. Two label defects are recorded: the PDS4 labels give the paper DOI as 10.1026/j.icarus.2016.08.012 (it is 10.1016/...), and the 40S-30S PDS3 label exchanges its latitude bounds; the recipe names that strip and the converter checks its rows. The grids regenerate byte for byte.",
+      "evidence": [
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40s30s_002.lbl",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/label/dlre_gcp.fmt",
+        "https://doi.org/10.1016/j.icarus.2016.08.012",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/"
+      ]
     }
   ]
 }

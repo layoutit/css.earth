@@ -1,0 +1,32 @@
+{
+  "id": "hynek-2010-valley-networks",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Updated global map of Martian valley networks, Hynek et al. (2010)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1029/2009JE003548"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2009JE003548",
+      "label": "doi:10.1029/2009JE003548"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/57"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

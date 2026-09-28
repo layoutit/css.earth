@@ -1,0 +1,576 @@
+{
+  "tested": {
+    "base": "ccbf483de8",
+    "changes": "Uncommitted Titan VIMS lens records above this base; no bake was run."
+  },
+  "subject": "Le Mouélic et al. (2019) VIMS global mosaics served by NASA Titan Trek, and the USGS T104 SAR/HiSAR mosaic, checked against the shipped USGS ISS 938 nm and Cornell T126 MIDR lenses",
+  "checked": "2026-09-27",
+  "testedFiles": {
+    "source/vims/Titan_global_32ppd_2microns_v2.tif": {
+      "bytes": 66402666,
+      "sha256": "95bc64b4eb835a6d0f48950a9f26a88f37c9add61b7879092ca1db085d9f8aa4",
+      "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=90ee84fb-30fe-4a56-92e5-c4c3153a24b0"
+    },
+    "source/vims/Titan_global_32ppd_5microns_v2.tif": {
+      "bytes": 66402704,
+      "sha256": "1d16a7f08648a09a235de09fb315139a0c3c18bb600f587beb0c3a38116a295d",
+      "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=9f8686c4-d348-4b15-9364-bc37ec43fb27"
+    },
+    "source/vims/Titan_global_32ppd_ColorRatio_v2.tif": {
+      "bytes": 199113224,
+      "sha256": "f7cc4e07fbdf21d0d44d9b706954730f1687e82c68c2a1aebf6f9146b83a2960",
+      "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=7186b3f4-27a9-4219-8312-5a05808158d0"
+    },
+    "source/observations/titan-iss-2026.png": {
+      "origin": "shipped Near-infrared input, read from the main checkout; resampled to 32 px/deg with a 2 x 2 mean of nonzero ISS pixels"
+    },
+    "Titan_SAR_HiSAR_MosaicThru_T104_Jan2015_clon180_128ppd.tif": {
+      "bytes": 1061868159,
+      "etag": "b65d36dc72718e40385aae9acc3c5a37-127",
+      "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Titan_SAR_HiSAR_MosaicThru_T104_Jan2015_clon180_128ppd.tif",
+      "read": "every 16th of 23,040 rows by HTTP range (strips start at byte 184959, 46,080 bytes per row); not downloaded in full"
+    }
+  },
+  "vimsProducts": {
+    "format": "Uncompressed GeoTIFF, 11520 x 5760, uint8 (one band at 2 and 5 um; three bands for the ratios), no scale, offset or GDAL no-data tag; values are display levels, not I/F.",
+    "declaredGeoreference": "ModelTiepoint (0,0) -> (360, 90), ModelPixelScale (-0.03125, 0.03125); PE string Plate_Carree, central_meridian 180, metres. Read literally: left edge 360 E, longitude decreasing to the right.",
+    "frameFromContent": {
+      "method": "Correlation with the ISS mosaic over |lat| < 60 deg at 4 px/deg, every longitude shift 0-360 deg at 0.25 deg, both column orders.",
+      "2um": {
+        "literalFrame_r": 0.204,
+        "literalReversed_best_r": 0.532,
+        "storedOrderBestShiftDeg": 180.0,
+        "best_r": 0.845,
+        "nextBestOutside20deg_r": 0.605
+      },
+      "5um": {
+        "literalFrame_r": 0.405,
+        "literalReversed_best_r": 0.581,
+        "storedOrderBestShiftDeg": 180.0,
+        "best_r": 0.739,
+        "nextBestOutside20deg_r": 0.593
+      },
+      "result": "Left edge 180 E, longitude increasing to the right, centre column 0 E: the recipe's centerLongitude 0.",
+      "independentCheck": "In this frame the producer's unobserved south region lies at 83-170 E, 75-80 S; the paper places the never-observed region around 80 S, 120 E (arXiv:1809.06545, section 2.1, and its figure 1). The literal frame puts it at 10-97 E."
+    },
+    "featureRegistration": {
+      "frame": "stored column 0 = 180 E, east to the right",
+      "search": "+-1 degree, 1/16 degree steps",
+      "reference": "USGS 2026 ISS 938 nm mosaic resampled to 32 ppd",
+      "results": {
+        "2 um": [
+          {
+            "feature": "Selk",
+            "centreEastLon": 161.0,
+            "centreLat": 7.0,
+            "rAtZero": 0.843,
+            "rPeak": 0.927,
+            "issMinusVimsLonDeg": 0.0,
+            "issMinusVimsLatDeg": 0.25,
+            "offsetKm": 11.2,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Sinlap",
+            "centreEastLon": 344.0,
+            "centreLat": 11.3,
+            "rAtZero": 0.769,
+            "rPeak": 0.809,
+            "issMinusVimsLonDeg": 0.0,
+            "issMinusVimsLatDeg": -0.188,
+            "offsetKm": 8.4,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Menrva",
+            "centreEastLon": 272.8,
+            "centreLat": 20.1,
+            "rAtZero": 0.72,
+            "rPeak": 0.74,
+            "issMinusVimsLonDeg": 0.0,
+            "issMinusVimsLatDeg": -0.25,
+            "offsetKm": 11.2,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Xanadu (west margin)",
+            "centreEastLon": 210.0,
+            "centreLat": -10.0,
+            "rAtZero": 0.925,
+            "rPeak": 0.931,
+            "issMinusVimsLonDeg": -0.125,
+            "issMinusVimsLatDeg": 0.125,
+            "offsetKm": 7.9,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Shangri-La/Xanadu boundary",
+            "centreEastLon": 230.0,
+            "centreLat": 5.0,
+            "rAtZero": 0.952,
+            "rPeak": 0.955,
+            "issMinusVimsLonDeg": -0.125,
+            "issMinusVimsLatDeg": -0.188,
+            "offsetKm": 10.1,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Hotei Regio",
+            "centreEastLon": 282.0,
+            "centreLat": -26.0,
+            "rAtZero": 0.433,
+            "rPeak": 0.508,
+            "issMinusVimsLonDeg": 0.562,
+            "issMinusVimsLatDeg": -0.375,
+            "offsetKm": 28.3,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Kraken Mare",
+            "centreEastLon": 50.0,
+            "centreLat": 68.0,
+            "rAtZero": 0.326,
+            "rPeak": 0.403,
+            "issMinusVimsLonDeg": -1.0,
+            "issMinusVimsLatDeg": 1.0,
+            "offsetKm": 48.0,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Ligeia Mare",
+            "centreEastLon": 112.1,
+            "centreLat": 79.7,
+            "rAtZero": 0.424,
+            "rPeak": 0.514,
+            "issMinusVimsLonDeg": -1.0,
+            "issMinusVimsLatDeg": 1.0,
+            "offsetKm": 45.7,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Ontario Lacus",
+            "centreEastLon": 177.0,
+            "centreLat": -72.0,
+            "rAtZero": 0.296,
+            "rPeak": 0.309,
+            "issMinusVimsLonDeg": -0.062,
+            "issMinusVimsLatDeg": 0.25,
+            "offsetKm": 11.3,
+            "peakOnSearchEdge": false
+          }
+        ],
+        "5 um": [
+          {
+            "feature": "Selk",
+            "centreEastLon": 161.0,
+            "centreLat": 7.0,
+            "rAtZero": 0.685,
+            "rPeak": 0.79,
+            "issMinusVimsLonDeg": -0.062,
+            "issMinusVimsLatDeg": 0.25,
+            "offsetKm": 11.6,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Sinlap",
+            "centreEastLon": 344.0,
+            "centreLat": 11.3,
+            "rAtZero": 0.68,
+            "rPeak": 0.72,
+            "issMinusVimsLonDeg": 0.062,
+            "issMinusVimsLatDeg": -0.188,
+            "offsetKm": 8.9,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Menrva",
+            "centreEastLon": 272.8,
+            "centreLat": 20.1,
+            "rAtZero": 0.542,
+            "rPeak": 0.595,
+            "issMinusVimsLonDeg": -0.062,
+            "issMinusVimsLatDeg": -0.375,
+            "offsetKm": 17.1,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Xanadu (west margin)",
+            "centreEastLon": 210.0,
+            "centreLat": -10.0,
+            "rAtZero": 0.781,
+            "rPeak": 0.789,
+            "issMinusVimsLonDeg": -0.188,
+            "issMinusVimsLatDeg": 0.125,
+            "offsetKm": 10.0,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Shangri-La/Xanadu boundary",
+            "centreEastLon": 230.0,
+            "centreLat": 5.0,
+            "rAtZero": 0.87,
+            "rPeak": 0.871,
+            "issMinusVimsLonDeg": -0.062,
+            "issMinusVimsLatDeg": -0.125,
+            "offsetKm": 6.3,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Hotei Regio",
+            "centreEastLon": 282.0,
+            "centreLat": -26.0,
+            "rAtZero": 0.365,
+            "rPeak": 0.49,
+            "issMinusVimsLonDeg": 1.0,
+            "issMinusVimsLatDeg": -0.812,
+            "offsetKm": 54.5,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Kraken Mare",
+            "centreEastLon": 50.0,
+            "centreLat": 68.0,
+            "rAtZero": 0.365,
+            "rPeak": 0.419,
+            "issMinusVimsLonDeg": -1.0,
+            "issMinusVimsLatDeg": 0.75,
+            "offsetKm": 37.7,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Ligeia Mare",
+            "centreEastLon": 112.1,
+            "centreLat": 79.7,
+            "rAtZero": 0.222,
+            "rPeak": 0.351,
+            "issMinusVimsLonDeg": -1.0,
+            "issMinusVimsLatDeg": 1.0,
+            "offsetKm": 45.7,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Ontario Lacus",
+            "centreEastLon": 177.0,
+            "centreLat": -72.0,
+            "rAtZero": 0.173,
+            "rPeak": 0.207,
+            "issMinusVimsLonDeg": -0.375,
+            "issMinusVimsLatDeg": 0.438,
+            "offsetKm": 20.3,
+            "peakOnSearchEdge": false
+          }
+        ],
+        "colour ratio (mean of bands)": [
+          {
+            "feature": "Selk",
+            "centreEastLon": 161.0,
+            "centreLat": 7.0,
+            "rAtZero": 0.752,
+            "rPeak": 0.841,
+            "issMinusVimsLonDeg": 0.0,
+            "issMinusVimsLatDeg": 0.25,
+            "offsetKm": 11.2,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Sinlap",
+            "centreEastLon": 344.0,
+            "centreLat": 11.3,
+            "rAtZero": 0.698,
+            "rPeak": 0.74,
+            "issMinusVimsLonDeg": 0.0,
+            "issMinusVimsLatDeg": -0.188,
+            "offsetKm": 8.4,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Menrva",
+            "centreEastLon": 272.8,
+            "centreLat": 20.1,
+            "rAtZero": 0.682,
+            "rPeak": 0.702,
+            "issMinusVimsLonDeg": -0.062,
+            "issMinusVimsLatDeg": -0.25,
+            "offsetKm": 11.5,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Xanadu (west margin)",
+            "centreEastLon": 210.0,
+            "centreLat": -10.0,
+            "rAtZero": 0.892,
+            "rPeak": 0.905,
+            "issMinusVimsLonDeg": -0.125,
+            "issMinusVimsLatDeg": 0.188,
+            "offsetKm": 10.1,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Shangri-La/Xanadu boundary",
+            "centreEastLon": 230.0,
+            "centreLat": 5.0,
+            "rAtZero": 0.92,
+            "rPeak": 0.926,
+            "issMinusVimsLonDeg": -0.062,
+            "issMinusVimsLatDeg": -0.188,
+            "offsetKm": 8.9,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Hotei Regio",
+            "centreEastLon": 282.0,
+            "centreLat": -26.0,
+            "rAtZero": 0.419,
+            "rPeak": 0.47,
+            "issMinusVimsLonDeg": 0.438,
+            "issMinusVimsLatDeg": -0.312,
+            "offsetKm": 22.6,
+            "peakOnSearchEdge": false
+          },
+          {
+            "feature": "Kraken Mare",
+            "centreEastLon": 50.0,
+            "centreLat": 68.0,
+            "rAtZero": 0.086,
+            "rPeak": 0.161,
+            "issMinusVimsLonDeg": -1.0,
+            "issMinusVimsLatDeg": 1.0,
+            "offsetKm": 48.0,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Ligeia Mare",
+            "centreEastLon": 112.1,
+            "centreLat": 79.7,
+            "rAtZero": 0.101,
+            "rPeak": 0.189,
+            "issMinusVimsLonDeg": -1.0,
+            "issMinusVimsLatDeg": 1.0,
+            "offsetKm": 45.7,
+            "peakOnSearchEdge": true
+          },
+          {
+            "feature": "Ontario Lacus",
+            "centreEastLon": 177.0,
+            "centreLat": -72.0,
+            "rAtZero": 0.059,
+            "rPeak": 0.066,
+            "issMinusVimsLonDeg": 0.062,
+            "issMinusVimsLatDeg": 0.188,
+            "offsetKm": 8.5,
+            "peakOnSearchEdge": false
+          }
+        ]
+      }
+    },
+    "zeroPixels": {
+      "2um": {
+        "zeroComponents": 80,
+        "largest": [
+          {
+            "pixels": 1274202,
+            "latRange": [
+              -86.56,
+              -65.12
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              127
+            ]
+          },
+          {
+            "pixels": 367823,
+            "latRange": [
+              -90.0,
+              -88.41
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              360
+            ]
+          },
+          {
+            "pixels": 118719,
+            "latRange": [
+              89.56,
+              90.0
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              360
+            ]
+          },
+          {
+            "pixels": 8529,
+            "latRange": [
+              52.81,
+              55.91
+            ],
+            "eastLonDegreesSpanned": [
+              92.5,
+              100.5,
+              9
+            ]
+          }
+        ]
+      },
+      "5um": {
+        "zeroComponents": 698,
+        "largest": [
+          {
+            "pixels": 1253860,
+            "latRange": [
+              -86.56,
+              -65.12
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              127
+            ]
+          },
+          {
+            "pixels": 367934,
+            "latRange": [
+              -90.0,
+              -88.41
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              360
+            ]
+          },
+          {
+            "pixels": 118719,
+            "latRange": [
+              89.56,
+              90.0
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              360
+            ]
+          },
+          {
+            "pixels": 8529,
+            "latRange": [
+              52.81,
+              55.91
+            ],
+            "eastLonDegreesSpanned": [
+              92.5,
+              100.5,
+              9
+            ]
+          }
+        ]
+      },
+      "colorRatio": {
+        "zeroComponents": 26,
+        "largest": [
+          {
+            "pixels": 1253157,
+            "latRange": [
+              -86.56,
+              -65.12
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              127
+            ]
+          },
+          {
+            "pixels": 367823,
+            "latRange": [
+              -90.0,
+              -88.41
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              360
+            ]
+          },
+          {
+            "pixels": 118719,
+            "latRange": [
+              89.56,
+              90.0
+            ],
+            "eastLonDegreesSpanned": [
+              0.5,
+              359.5,
+              360
+            ]
+          },
+          {
+            "pixels": 1183,
+            "latRange": [
+              -71.62,
+              -70.53
+            ],
+            "eastLonDegreesSpanned": [
+              83.5,
+              86.5,
+              4
+            ]
+          }
+        ]
+      },
+      "areaFractionZero": {
+        "2um": 0.00616,
+        "5um": 0.00662,
+        "colorRatio": 0.006
+      },
+      "note": "Exact zero in every band is treated as missing. 2 um level 1 occurs in 29 pixels, so zero is not a clipped dark level there; at 5 um levels 1-2 occur about 8,000 times, so a few hundred isolated zero pixels may be clipped dark ground and are withheld with the gaps."
+    },
+    "sharedDecoder": {
+      "command": "node output/titan-more-data/decode-check.mts (scratch)",
+      "result": "readObservation at 2048 x 1024: missing texels 3.20% (2 um), 3.59% (5 um), 3.14% (ratio); r = 0.998 / 0.993 / 0.999 against an independent rasterio reading in the same frame, 0.21 / 0.55 / 0.29 mirrored. Peak RSS 1.44 GB."
+    }
+  },
+  "hisarT104": {
+    "label": "PDS3/ISIS3 labels: 46080 x 23040, 8-bit LSB unsigned, simple cylindrical, 128 px/deg (351.11 m), positive east, centre 180, 2575 km sphere, ProductVersionId 'July 2015'. Astropedia: preliminary; 'USGS stretched (in ISIS) using an 8bit logarithmic stretch'; stretch parameters not published.",
+    "sampledRows": 1440,
+    "observedAreaFraction": {
+      "T104": 0.6073,
+      "T126_MIDR_32ppd": 0.7456
+    },
+    "overlapCells32ppd": {
+      "both": 10873567,
+      "T104Only": 49249,
+      "T126Only": 1723381
+    },
+    "dnVersusT126dB": {
+      "pearson_r": 0.725,
+      "T126dBMedianByT104DN": {
+        "0-31": -16.0,
+        "32-63": -11.2,
+        "64-95": -9.6,
+        "96-127": -7.9,
+        "128-159": -5.9,
+        "160-191": -3.5,
+        "192-223": -1.0,
+        "224-255": 0.9
+      },
+      "interquartileRangeDb": [
+        10.3,
+        5.6,
+        3.6,
+        2.6,
+        2.4,
+        2.5,
+        2.6,
+        3.6
+      ]
+    },
+    "registrationToT126": "Best longitude shift 0 of +-8 cells (+-0.25 deg) at 32 px/deg, r 0.725.",
+    "conclusion": "Monotone with sigma-0 but not invertible to it; older and smaller than the T126 mosaic already shown as Radar."
+  }
+}

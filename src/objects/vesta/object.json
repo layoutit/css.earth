@@ -56,6 +56,26 @@
               "id": "iron",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "fast-neutrons",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "hegr",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "neutron-absorption",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

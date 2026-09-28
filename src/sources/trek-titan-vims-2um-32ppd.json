@@ -1,0 +1,61 @@
+{
+  "id": "trek-titan-vims-2um-32ppd",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Titan Cassini VIMS Global mosaic at 2 microns (32ppd) (Titan_global_32ppd_2microns_v2)",
+  "identifiers": [
+    {
+      "type": "Trek product label",
+      "value": "Titan_global_32ppd_2microns_v2"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=90ee84fb-30fe-4a56-92e5-c4c3153a24b0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://trek.nasa.gov/titan/",
+      "label": "NASA Titan Trek"
+    },
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/tiles/Titan/EQ/Titan_global_32ppd_2microns_v2/1.0.0/WMTSCapabilities.xml",
+      "label": "Trek layer service"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/titan/source/manifest.json",
+      "locator": "/inputs/64"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "le-mouelic-2019-titan-vims-global-maps",
+      "evidence": "Trek product description: 'For details on the approach used for generating this map, please refer to Le Mouelic et al. ... doi:10.1016/j.icarus.2018.09.017'"
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Stéphane Le Mouélic (producer); NASA/Caltech-JPL/University of Arizona/LPG Nantes",
+      "scope": "citation",
+      "evidence": "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_2microns_v2"
+    },
+    {
+      "kind": "limitation",
+      "text": "8-bit display levels without scale, offset or no-data tags; the mosaic may still contain artifacts and clouds, and its spatial and intensity calibration could be improved (Trek product description).",
+      "scope": "product",
+      "evidence": "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_2microns_v2"
+    },
+    {
+      "kind": "rights",
+      "text": "No reuse terms are stated on the Trek product. The producer's VIMS portal distributes its VIMS data under CC BY 4.0 with the credit NASA/Caltech-JPL/University of Arizona/Osuna-CNRS-Nantes Université.",
+      "scope": "reuse",
+      "evidence": "https://vims.univ-nantes.fr/"
+    }
+  ]
+}

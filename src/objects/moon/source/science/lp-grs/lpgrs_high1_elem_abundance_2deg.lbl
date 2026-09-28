@@ -1,0 +1,140 @@
+PDS_VERSION_ID                = PDS3
+
+/* File Characteristics */
+RECORD_TYPE                   = FIXED_LENGTH
+RECORD_BYTES                  = 880
+FILE_RECORDS                  = 11306
+
+/* Pointers to Data Objects */
+^TABLE                        = "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG.TAB"
+
+/* Identification Data Elements */
+MISSION_NAME                  = "LUNAR PROSPECTOR"
+MISSION_PHASE_NAME            = "HIGH ALTITUDE 1"
+TARGET_NAME                   = "MOON"
+INSTRUMENT_HOST_NAME          = "LUNAR PROSPECTOR"
+INSTRUMENT_NAME               = "GAMMA RAY SPECTROMETER"
+DATA_SET_ID                   = "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0"
+PRODUCT_ID                    = "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG"
+START_TIME                    = 'N/A'
+STOP_TIME                     = 'N/A'
+SPACECRAFT_CLOCK_START_COUNT  = 'N/A'
+SPACECRAFT_CLOCK_STOP_COUNT   = 'N/A'
+PRODUCER_FULL_NAME            = "T. H. PRETTYMAN"
+PRODUCER_INSTITUTION_NAME     = "PLANETARY SCIENCE INSTITUTE"
+PRODUCT_CREATION_TIME         = 2012-06-15T22:09:26
+SOFTWARE_NAME                 = "LP_GRS_FIT"
+SOFTWARE_VERSION_ID           = "1.0"
+
+/* Descriptive Data Elements */
+
+/* Data Object Definitions */
+OBJECT                        = TABLE
+  COLUMNS                     = 61
+  INTERCHANGE_FORMAT          = ASCII
+  ROW_BYTES                   = 880
+  ROWS                        = 11306
+  DESCRIPTION                 = "
+     This table provides a map of weight fractions and terms of the error
+     matrix for major oxides and K, Th, and U for the Moon from Lunar
+     Prospector Gamma Ray and Neutron Spectrometer data acquired at high
+     altitude (100 km) and binned on 5 degree equal area pixels.  The table
+     contains the original elemental abundances reported by PRETTYMANETAL2006.
+     The abundances were determined by gamma ray spectral unmixing.
+
+     The data were acquired during the high altitude (approximately 100 km)
+     phase (HIGH1) with a northward orientation for Lunar Prospector's spin
+     axis.  At this altitude, the spatial resolution of the gamma ray 
+     spectrometer was about 5 degrees of arc length on the surface
+     (PRETTYMANETAL2006). 
+
+     Each row of the table provides composition information for a
+     single pixel.  The format for each row is '(i10,4(f7.1),57(1x,e14.4))'.
+     East longitude convention is used (-180 to 180 degrees). The column 
+     description follows:
+
+     COLUMN    NAME           FORMAT    DESCRIPTION                      UNITS
+     0         PIXEL_INDEX    (I10)     N/A
+     1         MIN_LAT        (F7.1)    Pixel latitude lower boundary     deg
+     2         MAX_LAT        (F7.1)    Pixel latitude upper boundary     deg
+     3         MIN_LON        (F7.1)    Pixel longitude lower boundary    deg
+     4         MAX_LON        (F7.1)    Pixel longitude upper boundary    deg
+     5         AM            (E14.4)    Average atomic mass              g/mol
+     6         NEUTRON_DEN   (E14.4)    Neutron number density           g/cm3
+     7         W_MGO         (E14.4)    Weight fraction MgO               g/g
+     8         W_AL2O3       (E14.4)    Weight fraction Al2O3             g/g
+     9         W_SIO2        (E14.4)    Weight fraction SiO2              g/g
+     10        W_CAO         (E14.4)    Weight fraction CaO               g/g
+     11        W_TIO2        (E14.4)    Weight fraction TiO2              g/g
+     12        W_FEO         (E14.4)    Weight fraction FeO               g/g
+     13        W_K           (E14.4)    Weight fraction K                 ppm
+     14        W_TH          (E14.4)    Weight fraction Th                ppm
+     15        W_U           (E14.4)    Weight fraction U (tied U=0.27Th) ppm
+
+     Note that the unmixing algorithm tied the weight fraction of U (w_U) to
+     the weight fraction of Th (w_Th), such that w_U = 0.27 x w_Th.
+
+     The following columns are elements of the error matrix that contains
+     covariance terms used to estimate errors in parameters and derived
+     quantities. The square root of the diagonal of the error matrix gives the
+     propagated uncertainty in the oxides and elemental abundances.  Example
+     usage of the error matrix is given by PRETTYMANETAL2006 (Eqs. 9 and
+     10). In this data set description, the components of the error matrix are
+     denoted E[I,J], where I and J are the row and column index of the
+     component, respectively.  The indices refer to major oxides and elements
+     as follows:
+
+      (0 - MgO, 1 - Al2O3, 2 - SiO2, 3 - CaO, 4 - TiO2, 5 - FeO,
+       6 - K, 7 - Th, 8 - U)
+
+     COLUMN    NAME           FORMAT    DESCRIPTION                    
+     16        E[0,0]        (E14.4)    Error matrix component         
+     17        E[0,1]        (E14.4)    Error matrix component         
+     18        E[0,2]        (E14.4)    Error matrix component         
+     19        E[0,3]        (E14.4)    Error matrix component         
+     20        E[0,4]        (E14.4)    Error matrix component         
+     21        E[0,5]        (E14.4)    Error matrix component         
+     22        E[0,6]        (E14.4)    Error matrix component         
+     23        E[0,7]        (E14.4)    Error matrix component         
+     24        E[0,8]        (E14.4)    Error matrix component         
+     25        E[1,1]        (E14.4)    Error matrix component         
+     26        E[1,2]        (E14.4)    Error matrix component         
+     27        E[1,3]        (E14.4)    Error matrix component         
+     28        E[1,4]        (E14.4)    Error matrix component         
+     29        E[1,5]        (E14.4)    Error matrix component         
+     30        E[1,6]        (E14.4)    Error matrix component         
+     31        E[1,7]        (E14.4)    Error matrix component         
+     32        E[1,8]        (E14.4)    Error matrix component         
+     33        E[2,2]        (E14.4)    Error matrix component         
+     34        E[2,3]        (E14.4)    Error matrix component         
+     35        E[2,4]        (E14.4)    Error matrix component         
+     36        E[2,5]        (E14.4)    Error matrix component         
+     37        E[2,6]        (E14.4)    Error matrix component         
+     38        E[2,7]        (E14.4)    Error matrix component         
+     39        E[2,8]        (E14.4)    Error matrix component         
+     40        E[3,3]        (E14.4)    Error matrix component         
+     41        E[3,4]        (E14.4)    Error matrix component         
+     42        E[3,5]        (E14.4)    Error matrix component         
+     43        E[3,6]        (E14.4)    Error matrix component         
+     44        E[3,7]        (E14.4)    Error matrix component         
+     45        E[3,8]        (E14.4)    Error matrix component         
+     46        E[4,4]        (E14.4)    Error matrix component         
+     47        E[4,5]        (E14.4)    Error matrix component         
+     48        E[4,6]        (E14.4)    Error matrix component         
+     49        E[4,7]        (E14.4)    Error matrix component         
+     50        E[4,8]        (E14.4)    Error matrix component         
+     51        E[5,5]        (E14.4)    Error matrix component         
+     52        E[5,6]        (E14.4)    Error matrix component         
+     53        E[5,7]        (E14.4)    Error matrix component         
+     54        E[5,8]        (E14.4)    Error matrix component         
+     55        E[6,6]        (E14.4)    Error matrix component         
+     56        E[6,7]        (E14.4)    Error matrix component         
+     57        E[6,8]        (E14.4)    Error matrix component         
+     58        E[7,7]        (E14.4)    Error matrix component         
+     59        E[7,8]        (E14.4)    Error matrix component         
+     60        E[8,8]        (E14.4)    Error matrix component         
+  "
+  ^STRUCTURE                  = "LPGRS_ELEM_ABUNDANCE.FMT"
+
+END_OBJECT                    = TABLE
+END

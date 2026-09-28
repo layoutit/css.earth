@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-chloride-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Chloride Salt-bearing Materials, THEMIS (NASA Mars Trek GIS layer)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/95"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "osterloo-2010-chloride-deposits",
+      "evidence": "The Trek catalogue entry for this layer cites Mikki M. Osterloo, F. Scott Anderson, Victoria E. Hamilton and Brian M. Hynek (2010), JGR 115, E10012."
+    }
+  ],
+  "statements": []
+}

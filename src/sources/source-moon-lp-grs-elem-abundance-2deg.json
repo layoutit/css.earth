@@ -1,0 +1,72 @@
+{
+  "id": "source-moon-lp-grs-elem-abundance-2deg",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lunar Prospector GRS Elemental Abundance, high-altitude 2 degree equal-area table (LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG, LP-L-GRS-5-ELEM-ABUNDANCE-V1.0)",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:lp_grs_derived:data:lpgrs_high1_elem_abundance_2deg::1.1"
+    },
+    {
+      "type": "pds3-product-id",
+      "value": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0:LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/missions/lunarp/grs_elem_abundance.html",
+      "label": "PDS Geosciences Node: Lunar Prospector GRS Elemental Abundance"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab",
+      "label": "2 degree table"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat",
+      "label": "Data set description"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/46"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/55"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/56"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "T. H. Prettyman, Planetary Science Institute, and the Lunar Prospector spectrometer team; the table holds the abundances reported by Prettyman et al. (2006), Journal of Geophysical Research 111, E12007, doi:10.1029/2005JE002656. Archive assembled by the NASA PDS Geosciences Node.",
+      "scope": "The 2 degree elemental-abundance table.",
+      "evidence": "PDS3 label PRODUCER_FULL_NAME and DESCRIPTION; dataset.cat CITATION_DESC."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    },
+    {
+      "kind": "limitation",
+      "text": "Measured from about 100 km altitude, where the spectrometer resolved about 5 degrees of arc; the 2 degree pixels oversample it. The data set evaluates only FeO, TiO2, K and Th at 2 degrees and advises caution with the other oxides. U is tied to Th (U = 0.27 Th).",
+      "scope": "Spatial resolution and which columns are evaluated.",
+      "evidence": "dataset.cat DATA_SET_DESC and CONFIDENCE_LEVEL_NOTE (Limitations)."
+    }
+  ]
+}

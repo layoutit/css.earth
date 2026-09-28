@@ -1,0 +1,419 @@
+{
+  "passed": true,
+  "method": "Independent PDS3-labelled band-sequential byte offsets and explicit source-cell overlap sums; no production GeoTIFF reader or reduction helper. Checks representative footprints, poles, both sides of the seam and the equator; does not establish instrument accuracy.",
+  "native": "output/ceres-mercury-more-data/raw/Mercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m.tif",
+  "compactSha256": "f770d1818dd21126d2a471c49bbc8a7d6df5c5cc75b6979c3da311e958ea9aa1",
+  "labelSha256": "306eb59840c7c57dc6cf7d1c92d4298c5870b35d46216cdde2635d8ef9c5f68a",
+  "checks": [
+    {
+      "x": 0,
+      "y": 0,
+      "longitude": -179.9560546875,
+      "latitude": 89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 1024,
+      "y": 0,
+      "longitude": -89.9560546875,
+      "latitude": 89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 2048,
+      "y": 0,
+      "longitude": 0.0439453125,
+      "latitude": 89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 3071,
+      "y": 0,
+      "longitude": 89.9560546875,
+      "latitude": 89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 4095,
+      "y": 0,
+      "longitude": 179.9560546875,
+      "latitude": 89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 0,
+      "y": 512,
+      "longitude": -179.9560546875,
+      "latitude": 44.9560546875,
+      "expected": [
+        103,
+        102,
+        88
+      ],
+      "actual": [
+        103,
+        102,
+        88
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 1024,
+      "y": 512,
+      "longitude": -89.9560546875,
+      "latitude": 44.9560546875,
+      "expected": [
+        42,
+        39,
+        50
+      ],
+      "actual": [
+        42,
+        39,
+        50
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 2048,
+      "y": 512,
+      "longitude": 0.0439453125,
+      "latitude": 44.9560546875,
+      "expected": [
+        109,
+        117,
+        121
+      ],
+      "actual": [
+        109,
+        117,
+        121
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 3071,
+      "y": 512,
+      "longitude": 89.9560546875,
+      "latitude": 44.9560546875,
+      "expected": [
+        106,
+        86,
+        72
+      ],
+      "actual": [
+        106,
+        86,
+        72
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 4095,
+      "y": 512,
+      "longitude": 179.9560546875,
+      "latitude": 44.9560546875,
+      "expected": [
+        113,
+        115,
+        106
+      ],
+      "actual": [
+        113,
+        115,
+        106
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 0,
+      "y": 1024,
+      "longitude": -179.9560546875,
+      "latitude": -0.0439453125,
+      "expected": [
+        90,
+        93,
+        85
+      ],
+      "actual": [
+        90,
+        93,
+        85
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 1024,
+      "y": 1024,
+      "longitude": -89.9560546875,
+      "latitude": -0.0439453125,
+      "expected": [
+        112,
+        112,
+        112
+      ],
+      "actual": [
+        112,
+        112,
+        112
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 2048,
+      "y": 1024,
+      "longitude": 0.0439453125,
+      "latitude": -0.0439453125,
+      "expected": [
+        70,
+        77,
+        83
+      ],
+      "actual": [
+        70,
+        77,
+        83
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 3071,
+      "y": 1024,
+      "longitude": 89.9560546875,
+      "latitude": -0.0439453125,
+      "expected": [
+        88,
+        85,
+        79
+      ],
+      "actual": [
+        88,
+        85,
+        79
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 4095,
+      "y": 1024,
+      "longitude": 179.9560546875,
+      "latitude": -0.0439453125,
+      "expected": [
+        95,
+        98,
+        91
+      ],
+      "actual": [
+        95,
+        98,
+        91
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 0,
+      "y": 1535,
+      "longitude": -179.9560546875,
+      "latitude": -44.9560546875,
+      "expected": [
+        18,
+        22,
+        33
+      ],
+      "actual": [
+        18,
+        22,
+        33
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 1024,
+      "y": 1535,
+      "longitude": -89.9560546875,
+      "latitude": -44.9560546875,
+      "expected": [
+        108,
+        98,
+        90
+      ],
+      "actual": [
+        108,
+        98,
+        90
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 2048,
+      "y": 1535,
+      "longitude": 0.0439453125,
+      "latitude": -44.9560546875,
+      "expected": [
+        54,
+        64,
+        78
+      ],
+      "actual": [
+        54,
+        64,
+        78
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 3071,
+      "y": 1535,
+      "longitude": 89.9560546875,
+      "latitude": -44.9560546875,
+      "expected": [
+        58,
+        55,
+        52
+      ],
+      "actual": [
+        58,
+        55,
+        52
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 4095,
+      "y": 1535,
+      "longitude": 179.9560546875,
+      "latitude": -44.9560546875,
+      "expected": [
+        17,
+        21,
+        31
+      ],
+      "actual": [
+        17,
+        21,
+        31
+      ],
+      "observedFraction": 1,
+      "pass": true
+    },
+    {
+      "x": 0,
+      "y": 2047,
+      "longitude": -179.9560546875,
+      "latitude": -89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 1024,
+      "y": 2047,
+      "longitude": -89.9560546875,
+      "latitude": -89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 2048,
+      "y": 2047,
+      "longitude": 0.0439453125,
+      "latitude": -89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 3071,
+      "y": 2047,
+      "longitude": 89.9560546875,
+      "latitude": -89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    },
+    {
+      "x": 4095,
+      "y": 2047,
+      "longitude": 179.9560546875,
+      "latitude": -89.9560546875,
+      "expected": null,
+      "actual": [
+        82,
+        84,
+        82
+      ],
+      "observedFraction": 0,
+      "pass": true
+    }
+  ]
+}

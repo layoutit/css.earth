@@ -79,6 +79,57 @@
         "noData": true
       },
       {
+        "id": "vims-2um",
+        "label": "VIMS infrared",
+        "thumbnail": "titan-lens-vims-2um.webp",
+        "surface": "titan-vims-2um@2x.webp",
+        "poles": "titan-poles-vims-2um@2x.webp",
+        "source": {
+          "id": "trek-titan-vims-2um-32ppd",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/j.icarus.2018.09.017"
+        },
+        "notes": "Le Mouélic et al. (2019) mosaic of about 19,000 Cassini VIMS observations at 2 µm, where Titan's haze thins. Brightness is a display stretch; the producer published no reflectance values. Seams, clouds and blocky low-resolution patches remain, and a bright glint covers Kraken Mare. Gray grid marks areas VIMS did not observe. Added globe lighting is approximate.",
+        "noData": true,
+        "step": {
+          "group": "vims-infrared",
+          "label": "2 µm"
+        }
+      },
+      {
+        "id": "vims-5um",
+        "label": "VIMS infrared",
+        "thumbnail": "titan-lens-vims-5um.webp",
+        "surface": "titan-vims-5um@2x.webp",
+        "poles": "titan-poles-vims-5um@2x.webp",
+        "source": {
+          "id": "trek-titan-vims-5um-32ppd",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/j.icarus.2018.09.017"
+        },
+        "notes": "Le Mouélic et al. (2019) mosaic at 5 µm, the window least affected by haze. Brightness is a display stretch; the producer published no reflectance values. Seams, clouds and blocky low-resolution patches remain, and a bright glint covers Kraken Mare. Gray grid marks areas VIMS did not observe. Added globe lighting is approximate.",
+        "noData": true,
+        "step": {
+          "group": "vims-infrared",
+          "label": "5 µm"
+        }
+      },
+      {
+        "id": "vims-color-ratio",
+        "label": "Infrared band ratios",
+        "thumbnail": "titan-lens-vims-color-ratio.webp",
+        "surface": "titan-vims-color-ratio@2x.webp",
+        "poles": "titan-poles-vims-color-ratio@2x.webp",
+        "source": {
+          "id": "trek-titan-vims-color-ratio-32ppd",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/j.icarus.2018.09.017"
+        },
+        "falseColor": true,
+        "notes": "Red, green and blue show the 1.59/1.27, 2.03/1.27 and 1.27/1.08 µm brightness ratios after an empirical haze correction (Le Mouélic et al. 2019). Equatorial dunes look brown; bluish areas such as Sinlap, Menrva and Selk may hold more water ice. These are not visible colors. Polar areas stay pink from residual haze. Gray grid marks areas VIMS did not observe.",
+        "noData": true
+      },
+      {
         "id": "radar",
         "label": "Radar",
         "thumbnail": "titan-lens-radar.webp",

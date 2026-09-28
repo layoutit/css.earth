@@ -26,18 +26,19 @@ const payload: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 
   framingRadiusUnits: 1, pointVisibility: visibility, lenses: [{ id: 'optical', label: 'Optical', title: 'Optical',
     stars: { frame, points: [] }, description: 'Fixture', sourceUrl: 'https://example.org', brightness: { overall: 1, x: 1, y: 1, z: 1 },
     volume: { schema: 'cssearth-css-volume@1', id: 'fixture', frame, stacks: [], resources: [], provenance: {}, approximation: {} } }] };
-async function fixture() {
+async function fixture(attached = false) {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
   const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!;
   const lifetime = createSceneLifetime();
   const banks = createUniverseLensBanks({ root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
-    lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', payloadSha256: 'a'.repeat(64), contextVisibility: 'independent', attached: false }],
+    lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', payloadSha256: 'a'.repeat(64), contextVisibility: 'independent', attached }],
     frame, visibility, warmDomNodeBudget: 10000, load: async () => ({ payload, resolveResource: path => path }) });
   await banks.focusBank('fixture')!.load();
   const targets = [root.firstElementChild!, frontRoot.firstElementChild!] as HTMLElement[];
-  const publish = () => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
+  if (attached) banks.setEnabled('fixture', true);
+  const publish = (bodyContextOpacity = 1, detailedObjectId?: string) => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
-    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1);
+    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1, detailedObjectId, bodyContextOpacity);
   return { banks, targets, publish, lifetime };
 }
 
@@ -68,4 +69,19 @@ test('hidden banks wait for coast to stop; steady publication writes no styles',
   f.publish();
   for (const write of writes) { expect(write.opacity).not.toHaveBeenCalled(); expect(write.display).not.toHaveBeenCalled(); }
   f.lifetime.destroy();
+});
+
+test('close-ups suppress distant banks while attached shells and the selected nebula remain visible', async () => {
+  const distant = await fixture();
+  distant.publish(0);
+  for (const node of distant.targets) expect(node.style.display).toBe('none');
+  distant.publish(.5);
+  for (const node of distant.targets) expect(node.style.opacity).toBe('0.5');
+  distant.publish(0, 'fixture');
+  for (const node of distant.targets) expect(node.style.opacity).toBe('1');
+  distant.lifetime.destroy();
+  const attached = await fixture(true);
+  attached.publish(0);
+  for (const node of attached.targets) expect(node.style.opacity).toBe('1');
+  attached.lifetime.destroy();
 });

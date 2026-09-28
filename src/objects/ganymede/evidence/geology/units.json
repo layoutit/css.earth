@@ -1,0 +1,314 @@
+{
+ "frame": "source frame, pixel centres, -180..180 E, 8192 x 4096",
+ "sampler": "packages/bake/src/objects/raster/categorical-geology.ts (withhold-conflicts)",
+ "sphereRadiusKm": 2632.345,
+ "sphereKm2": 87075400,
+ "records": 3046,
+ "field": "UNITNAME",
+ "noPolygonShare": 0.0040211173705750605,
+ "overlapShare": 9.837374484328502e-06,
+ "mappedPolygonShare": 0.9959890084286777,
+ "units": [
+  {
+   "value": "Bright 3",
+   "label": "Young light grooved material",
+   "polygons": 272,
+   "mappedKm2": 5048863,
+   "shownKm2": 5049000,
+   "shownShare": 0.05798,
+   "mosaicMeanDN": 78.1
+  },
+  {
+   "value": "Bright 2",
+   "label": "Intermediate light grooved material",
+   "polygons": 244,
+   "mappedKm2": 4950450,
+   "shownKm2": 4950035,
+   "shownShare": 0.05685,
+   "mosaicMeanDN": 83.2
+  },
+  {
+   "value": "Bright 1",
+   "label": "Old light grooved material",
+   "polygons": 111,
+   "mappedKm2": 2096119,
+   "shownKm2": 2096315,
+   "shownShare": 0.02407,
+   "mosaicMeanDN": 74.4
+  },
+  {
+   "value": "Bright Subdued 3",
+   "label": "Young light subdued material",
+   "polygons": 116,
+   "mappedKm2": 3549928,
+   "shownKm2": 3549935,
+   "shownShare": 0.04077,
+   "mosaicMeanDN": 81.3
+  },
+  {
+   "value": "Bright Subdued 2",
+   "label": "Intermediate light subdued material",
+   "polygons": 174,
+   "mappedKm2": 4365787,
+   "shownKm2": 4365129,
+   "shownShare": 0.05013,
+   "mosaicMeanDN": 81.4
+  },
+  {
+   "value": "Bright Subdued 1",
+   "label": "Old light subdued material",
+   "polygons": 284,
+   "mappedKm2": 6745581,
+   "shownKm2": 6745201,
+   "shownShare": 0.07746,
+   "mosaicMeanDN": 84.8
+  },
+  {
+   "value": "Bright Irregular 3",
+   "label": "Young light irregular material",
+   "polygons": 7,
+   "mappedKm2": 111479,
+   "shownKm2": 111533,
+   "shownShare": 0.00128,
+   "mosaicMeanDN": 73.7
+  },
+  {
+   "value": "Bright Irregular 2",
+   "label": "Intermediate light irregular material",
+   "polygons": 60,
+   "mappedKm2": 1001769,
+   "shownKm2": 1001472,
+   "shownShare": 0.0115,
+   "mosaicMeanDN": 79.1
+  },
+  {
+   "value": "Bright Irregular 1",
+   "label": "Old light irregular material",
+   "polygons": 100,
+   "mappedKm2": 1986828,
+   "shownKm2": 1986407,
+   "shownShare": 0.02281,
+   "mosaicMeanDN": 82.4
+  },
+  {
+   "value": "Bright Undivided",
+   "label": "Light undivided material",
+   "polygons": 132,
+   "mappedKm2": 21979484,
+   "shownKm2": 21972525,
+   "shownShare": 0.25234,
+   "mosaicMeanDN": 75.8
+  },
+  {
+   "value": "Reticulate",
+   "label": "Reticulate material",
+   "polygons": 30,
+   "mappedKm2": 394166,
+   "shownKm2": 394155,
+   "shownShare": 0.00453,
+   "mosaicMeanDN": 82.7
+  },
+  {
+   "value": "Dark Lineated",
+   "label": "Dark lineated material",
+   "polygons": 118,
+   "mappedKm2": 2112722,
+   "shownKm2": 2112696,
+   "shownShare": 0.02426,
+   "mosaicMeanDN": 62.0
+  },
+  {
+   "value": "Dark Cratered",
+   "label": "Dark cratered material",
+   "polygons": 145,
+   "mappedKm2": 19738208,
+   "shownKm2": 19738105,
+   "shownShare": 0.22668,
+   "mosaicMeanDN": 62.2
+  },
+  {
+   "value": "Dark Undivided",
+   "label": "Dark undivided material",
+   "polygons": 297,
+   "mappedKm2": 5858623,
+   "shownKm2": 5865549,
+   "shownShare": 0.06736,
+   "mosaicMeanDN": 54.1
+  },
+  {
+   "value": "Crater materials C3",
+   "label": "Fresh crater material",
+   "polygons": 94,
+   "mappedKm2": 737703,
+   "shownKm2": 737493,
+   "shownShare": 0.00847,
+   "mosaicMeanDN": 100.4
+  },
+  {
+   "value": "Crater materials C2",
+   "label": "Partially degraded crater material",
+   "polygons": 201,
+   "mappedKm2": 1785780,
+   "shownKm2": 1785845,
+   "shownShare": 0.02051,
+   "mosaicMeanDN": 87.1
+  },
+  {
+   "value": "Crater materials C1",
+   "label": "Degraded crater material",
+   "polygons": 491,
+   "mappedKm2": 1668945,
+   "shownKm2": 1669319,
+   "shownShare": 0.01917,
+   "mosaicMeanDN": 78.0
+  },
+  {
+   "value": "Crater materials UC",
+   "label": "Undivided crater material",
+   "polygons": 83,
+   "mappedKm2": 290808,
+   "shownKm2": 290761,
+   "shownShare": 0.00334,
+   "mosaicMeanDN": 74.9
+  },
+  {
+   "value": "Basin Smooth",
+   "label": "Smooth basin material",
+   "polygons": 1,
+   "mappedKm2": 304287,
+   "shownKm2": 304296,
+   "shownShare": 0.00349,
+   "mosaicMeanDN": 94.8
+  },
+  {
+   "value": "Basin Rugged",
+   "label": "Rugged basin material",
+   "polygons": 1,
+   "mappedKm2": 471369,
+   "shownKm2": 471294,
+   "shownShare": 0.00541,
+   "mosaicMeanDN": 102.5
+  },
+  {
+   "value": "Basin interior",
+   "label": "Basin interior plains material",
+   "polygons": 1,
+   "mappedKm2": 14513,
+   "shownKm2": 14521,
+   "shownShare": 0.00017,
+   "mosaicMeanDN": 110.0
+  },
+  {
+   "value": "Palimpsests P2",
+   "label": "Young palimpsest material",
+   "polygons": 6,
+   "mappedKm2": 220470,
+   "shownKm2": 220540,
+   "shownShare": 0.00253,
+   "mosaicMeanDN": 70.2
+  },
+  {
+   "value": "Palimpsests P1",
+   "label": "Ancient palimpsest material",
+   "polygons": 34,
+   "mappedKm2": 672225,
+   "shownKm2": 672133,
+   "shownShare": 0.00772,
+   "mosaicMeanDN": 71.1
+  },
+  {
+   "value": "Palimpsests PU",
+   "label": "Undivided palimpsest material",
+   "polygons": 27,
+   "mappedKm2": 587772,
+   "shownKm2": 587878,
+   "shownShare": 0.00675,
+   "mosaicMeanDN": 67.8
+  },
+  {
+   "value": "Palimpsets interior",
+   "label": "Palimpsest interior plains material",
+   "polygons": 17,
+   "mappedKm2": 32261,
+   "shownKm2": 32266,
+   "shownShare": 0.00037,
+   "mosaicMeanDN": 70.1
+  }
+ ],
+ "areaMethod": "mappedKm2: ring area on the 2632.345 km source sphere, edges straight in longitude and sine of latitude; shownKm2: cos-latitude-weighted count of sampled pixel centres",
+ "mosaic": "USGS Voyager/Galileo 1 km monochrome mosaic (ganymede-mono.tif), averaged to 8192 x 4096; mean DN of valid (non-zero) pixels, cos-latitude weighted",
+ "attributeDisagreements": {
+  "note": "Polygons whose UNITNAME (colored) differs from TERRAIN; TERRAIN, Unit and the separate label points agree with each other there. Pixels at 8192 x 4096 in the mosaic frame; mean DN of the mosaic inside them.",
+  "records": [
+   {
+    "record": 1786,
+    "TERRAIN": "Dark Cratered",
+    "UNITNAME": "Dark Lineated",
+    "Unit": "dc",
+    "polygonKm2": 22953
+   },
+   {
+    "record": 1843,
+    "TERRAIN": "Bright Undivided",
+    "UNITNAME": "Bright Subdued 3",
+    "Unit": "l",
+    "polygonKm2": 306748
+   },
+   {
+    "record": 1946,
+    "TERRAIN": "Dark Cratered",
+    "UNITNAME": "Bright 3",
+    "Unit": "dc",
+    "polygonKm2": 545327
+   },
+   {
+    "record": 2101,
+    "TERRAIN": "Bright Subdued 1",
+    "UNITNAME": "Bright Irregular 1",
+    "Unit": "ls1",
+    "polygonKm2": 5803
+   }
+  ],
+  "unitOnly": {
+   "record": 2924,
+   "TERRAIN": "Bright 2",
+   "UNITNAME": "Bright 2",
+   "Unit": "l",
+   "polygonKm2": 31394
+  },
+  "mosaic": [
+   {
+    "disagreement": "Bright 3 (UNITNAME, shown) vs Dark Cratered (TERRAIN)",
+    "pixels": 138822,
+    "meanDN": 72.8
+   },
+   {
+    "disagreement": "Bright Subdued 3 (UNITNAME, shown) vs Bright Undivided (TERRAIN)",
+    "pixels": 75640,
+    "meanDN": 77.1
+   },
+   {
+    "disagreement": "Bright Irregular 1 (UNITNAME, shown) vs Bright Subdued 1 (TERRAIN)",
+    "pixels": 1473,
+    "meanDN": 102.6
+   },
+   {
+    "disagreement": "Dark Lineated (UNITNAME, shown) vs Dark Cratered (TERRAIN)",
+    "pixels": 5639,
+    "meanDN": 61.8
+   }
+  ]
+ },
+ "labelPoints": {
+  "pointField": "TERRAIN",
+  "polygonField": "UNITNAME",
+  "matches": 2913,
+  "mismatch": 129,
+  "ignoredCraterEjecta": 870,
+  "previousUnitFieldResult": {
+   "matches": 2918,
+   "mismatch": 124
+  },
+  "extraMismatches": "the five points inside records 1786, 1843, 1946, 2101 and 2924"
+ }
+}

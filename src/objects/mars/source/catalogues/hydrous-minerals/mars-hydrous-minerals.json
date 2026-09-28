@@ -1,0 +1,39 @@
+{
+  "sourceRecords": {
+    "OMEGA": 440,
+    "CRISM": 1208
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8387147,
+  "categories": [
+    {
+      "value": "CRISM",
+      "label": "CRISM detection",
+      "color": "#ff0000"
+    },
+    {
+      "value": "OMEGA",
+      "label": "OMEGA detection",
+      "color": "#0099ff"
+    },
+    {
+      "value": "more than one class",
+      "label": "CRISM and OMEGA detections in one cell",
+      "color": "#ffffff"
+    }
+  ],
+  "output": "mars-hydrous-minerals.tif",
+  "sha256": "0c15f34ce08e4aa7dcc75de787974c2d5884b1f9e78a451a224fe65ea0e23fd2",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

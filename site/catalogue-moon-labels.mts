@@ -68,7 +68,7 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   return placements.filter(point => admitted.has(moons[point.index].id));
 }
 
-export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock) {
+export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock, requestPublication?: () => boolean) {
   const moons = parseMoonLabels(prepared), parents = new Map(bodies.filter(body => moons.some(moon => moon.parentId === body.id)).map(body => [body.id, body]));
   const root = host.ownerDocument.createElement('div');
   root.className = 'catalogue-moon-labels';
@@ -81,9 +81,22 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
     label.ariaHidden = 'true'; label.style.opacity = '0'; label.style.visibility = 'hidden'; root.append(label); return label;
   });
   host.append(root);
-  let widths: number[] = [], measured = false;
-  const invalidate = () => { measured = false; };
-  host.ownerDocument.fonts?.addEventListener('loadingdone', invalidate);
+  const widths = labels.map(() => 0), measured = new Set<number>();
+  const indices = new Map<Element, number>(labels.map((label, index) => [label, index]));
+  // Browser-delivered sizes include font changes without a read after the
+  // world's DOM writes. The first publication used to flush the whole scene.
+  const observer = new ResizeObserver(entries => {
+    let changed = false;
+    for (const entry of entries) {
+      const index = indices.get(entry.target);
+      if (index === undefined) continue;
+      const width = entry.contentRect.width;
+      if (!measured.has(index) || widths[index] !== width) changed = true;
+      widths[index] = width; measured.add(index);
+    }
+    if (changed) requestPublication?.();
+  });
+  for (const label of labels) observer.observe(label);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, clock, { hideAtZero: true });
   const last = labels.map(() => ({ shown: false, transform: '' }));
   let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false;
@@ -93,8 +106,7 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
      * (docs/performance/motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, budget: LabelBudget) {
-      if (coasting && !measured) return;
-      if (!measured) { widths = labels.map(label => label.getBoundingClientRect().width); measured = true; }
+      if (measured.size !== labels.length) return;
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       const points = new Map<number, { x: number; y: number }>();
       const placements = compatible ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points) : [];
@@ -120,6 +132,6 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
         if (last[index].transform !== transform) { label.style.transform = transform; last[index].transform = transform; }
       }
     },
-    destroy() { host.ownerDocument.fonts?.removeEventListener('loadingdone', invalidate); fader.destroy(); root.remove(); },
+    destroy() { observer.disconnect(); fader.destroy(); root.remove(); },
   };
 }

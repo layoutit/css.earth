@@ -2,21 +2,43 @@
   "id": "source-ganymede-usgs-sim3237-geologic-units",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Geology",
-  "identifiers": [],
+  "title": "Geologic map of Ganymede (USGS SIM 3237), GIS unit polygons and symbology",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3133/sim3237"
+    }
+  ],
   "links": [
     {
       "role": "landing",
+      "url": "https://doi.org/10.3133/sim3237",
+      "label": "USGS Scientific Investigations Map 3237"
+    },
+    {
+      "role": "archive",
       "url": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
-      "label": "Source"
+      "label": "SIM 3237 GIS database"
+    },
+    {
+      "role": "original",
+      "url": "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf",
+      "label": "Map sheet with the Description of Map Units"
     }
   ],
   "evidence": [
     {
       "path": "src/objects/ganymede/source/manifest.json",
-      "locator": "/inputs/8"
+      "locator": "/inputs/5"
     }
   ],
   "relations": [],
-  "statements": []
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Collins, G.C., Patterson, G.W., Head, J.W., Pappalardo, R.T., Prockter, L.M., Lucchitta, B.K., and Kay, J.P. (2013), Global geologic map of Ganymede: U.S. Geological Survey Scientific Investigations Map 3237",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3133/sim3237"
+    }
+  ]
 }

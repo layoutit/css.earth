@@ -23,6 +23,23 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
+### Native 140 m cube against the WMS render (27 September 2026)
+
+The Monochrome lens already shows the 140 m mosaic (NASA Trek's "59 ppd" layer)
+at the full 4096 × 2048 prepared size, rendered by the USGS map server. We tested
+whether the original DLR cube, [`Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub`](https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub)
+(21,093 × 10,546 bytes, 58.59 pixels per degree), would show more. Reduced by
+pixel-area mean to the same frame on `ccbf483de8`, it has the same tone and
+registration. Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the
+WebP lane on both and 1.4% at half resolution. Between 34° N and 11° S only
+0.1–0.4% of pixels change; toward the south pole 16–19% change, where the server
+render shows resampling jaggies that the area mean does not
+([crops](evidence/native-mosaic/wms-vs-native.webp),
+[measurements](evidence/native-mosaic/measurements.json)). No resolution is gained,
+so the lens keeps the WMS render. Switching would need a reader for tiled ISIS3
+byte cubes, and the cube stores the south-polar gap as 1, the same value as
+clipped shadow. See the [investigation ledger](investigations.json).
+
 ### Band-centre maps (27 September 2026)
 
 **Clay band centre** and **Ammonium band centre** use the native

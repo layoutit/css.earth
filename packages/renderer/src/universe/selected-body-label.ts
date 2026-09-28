@@ -1,3 +1,4 @@
+import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import type { PreparedContextPoint } from '../prepared-data/world-context.js';
@@ -13,13 +14,13 @@ const VIEWPORT_EDGE_PX = 4;
 const HEADER_CLEARANCE_PX = 64;
 const FOOTER_CLEARANCE_PX = 30;
 
-interface SelectedLabelFlags { overview: boolean; focused: boolean; preview: string | null | undefined }
+interface SelectedLabelFlags { overview: boolean; focused: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge }
 interface SelectedLabelPlacement { left: number; top: number; rect: LabelScreenRect }
 
 /** Where the caption of `body` sits for this camera, or null when it is hidden: below the body's disc or point, clear of the
  * header and footer, or over the body's middle when its package asks. */
 function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint,
-  { overview, focused, preview }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
+  { overview, focused, preview, edge }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
   if (overview || focused || preview !== undefined && preview !== body.id) return null;
   const widthPixels = viewport.widthPixels, heightPixels = viewport.heightPixels;
   // The caption stays below the shell header where the viewport measures one, else below a fixed clearance.
@@ -39,7 +40,7 @@ function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraVie
       y + radiusPixels < -heightPixels / 2 || y - radiusPixels > heightPixels / 2) return null;
   if (width + 2 * VIEWPORT_EDGE_PX > widthPixels || height + FOOTER_CLEARANCE_PX > heightPixels) return null;
   const visualRadius = Math.max(radiusPixels, POINT_RADIUS_PX);
-  const meshBottom = y + visualRadius;
+  const meshBottom = radiusPixels > POINT_RADIUS_PX ? edge?.(world, viewport) ?? y + visualRadius : y + visualRadius;
   const maxTop = heightPixels / 2 - height - FOOTER_CLEARANCE_PX;
   const gap = Math.min(MAX_MESH_GAP_PX, 4 + radiusPixels * MESH_GAP_RADIUS_RATIO);
   const minimumGap = Math.min(16, gap);
@@ -61,7 +62,7 @@ function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraVie
 }
 
 /** One retained caption follows the selected body from point marker through detailed mesh. */
-export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityClock) {
+export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityClock, requestPublication?: () => boolean) {
   const label = host.ownerDocument.createElement('span');
   label.className = 'prepared-context-label prepared-selected-body-label';
   label.ariaHidden = 'true';
@@ -69,18 +70,26 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
   label.style.cssText = 'position:absolute;left:50%;top:50%;opacity:0;pointer-events:none;will-change:transform';
   host.appendChild(label);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
-  let measuredId = '', width = 0, height = 0;
+  let preparedId = '', measuredId = '', width = 0, height = 0;
+  const observer = new ResizeObserver(entries => {
+    const entry = entries.find(entry => entry.target === label);
+    if (!entry || !preparedId) return;
+    width = entry.contentRect.width; height = entry.contentRect.height;
+    measuredId = preparedId;
+    requestPublication?.();
+  });
   const measure = (body: PreparedContextPoint) => {
-    if (measuredId === body.id) return;
+    if (preparedId === body.id) return;
     label.textContent = body.name;
     label.dataset.selectedBodyLabel = body.id;
     if (body.labelCase === 'upper') label.dataset.labelCase = 'upper'; else if ('labelCase' in label.dataset) delete label.dataset.labelCase;
-    measuredId = body.id;
-    width = label.offsetWidth;
-    height = label.offsetHeight;
+    preparedId = body.id; measuredId = '';
+    // Re-observe even for equal-sized names. Delivery follows browser layout;
+    // a text write must never synchronously flush the entire pending scene.
+    observer.unobserve(label); observer.observe(label);
   };
   return Object.freeze({ label,
-    /** Set and measure the destination name before its first camera publication. */
+    /** Stage the destination name; browser layout reports its dimensions asynchronously. */
     prepare: measure,
     /** The caption's box for a camera the context is about to plan, so the context's own labels keep clear of it. */
     rect(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint, flags: SelectedLabelFlags): LabelScreenRect | null {
@@ -91,6 +100,7 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       const hide = () => { fader.set(label, 0); return null; };
       if (flags.overview || flags.focused || flags.preview !== undefined && flags.preview !== body.id) return hide();
       measure(body);
+      if (measuredId !== body.id) return hide();
       const placement = placeSelectedBodyLabel(world, viewport, body, flags, width, height);
       if (!placement) return hide();
       const transform = `translate(${Number(placement.left.toFixed(3))}px,${Number(placement.top.toFixed(3))}px) translate(-50%,0)`;
@@ -98,6 +108,6 @@ export function mountSelectedBodyLabel(host: HTMLElement, opacityClock: OpacityC
       fader.set(label, DEFAULT_CONTEXT_LABEL_OPACITY);
       return placement.rect;
     },
-    destroy() { fader.destroy(); label.remove(); },
+    destroy() { observer.disconnect(); fader.destroy(); label.remove(); },
   });
 }

@@ -1,7 +1,9 @@
+import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import type { WorldRotation } from '../navigation/world-camera-math.js';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/world-camera.js';
+import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport, worldCameraFromCenteredPresentation } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { viewSunDirectionToPhysicalLightDirection } from '../solar-system/directional-sun-coordinate.js';
@@ -16,7 +18,7 @@ export interface ObjectPreparationView { world: WorldCameraPose; viewport: World
 
 /** Prepared address selection uses the same camera orientation, LOD and
  * material resolver as the mounted presentation, without constructing a scene. */
-export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame) {
+export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame, initialTextures = true) {
   const selection = initialObjectSelection(definition.controls);
   const { camera, sun } = definition;
   const orientation = definition.materials.length ? createCameraOrientation({ cameraPlan: camera,
@@ -32,9 +34,13 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
     orientation?.setSceneRotation(presentation.rotation);
     const radius = frame.bodyRadiusM / frame.metersPerUnit;
     const diameter = worldCameraSilhouetteDiameter(presentation, radius);
-    return resolvePreparedPresentation(definition, { selection, initial: true, view: {
+    return resolvePreparedPresentation(definition, { selection, initial: initialTextures, view: {
       sceneMatrix: orientation?.scene() ?? '', sunViewDirection: light(), reference,
       levelOfDetail: levelOfDetailFor(camera.levelOfDetail, diameter),
+      ...(!initialTextures ? {
+        projection: physicalProjectionFromCamera(presentation.rotation, presentation.bodyCenterUnits, camera.sceneScale, worldCameraViewport(world, viewport)),
+        viewportWidth: viewport.widthPixels, viewportHeight: viewport.heightPixels, motionAtRest: true,
+      } : {}),
     } });
   };
 }
@@ -42,7 +48,26 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
 /** One readiness contract for both already-decoded and deferred object packages. */
 export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => Promise<ObjectRuntimeDefinition>, frame: PreparedWorldCameraFrame) {
   return Object.freeze({ frame,
+    async initialView(viewport: CameraViewport, mobile: boolean, arrival: { rotation: WorldRotation; distanceM: number }, signal: AbortSignal) {
+      const { camera } = await abortable(load(signal), signal);
+      const snapshot = viewport.read(camera.projection.cssPerspective);
+      const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
+      const radiusPixels = fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
+      const focalPixels = radiusPixels * Math.sqrt(arrival.distanceM ** 2 - frame.bodyRadiusM ** 2) / frame.bodyRadiusM;
+      const projectionScale = focalPixels / snapshot.focalPixels;
+      const { width, height, top } = snapshot.bounds;
+      const open = snapshot.openArea;
+      const offsetY = open ? (open.top + open.bottom) / 2 - (top + height / 2) : 0;
+      const optics = { focalPixels, projectionScale, widthPixels: width, heightPixels: height,
+        principalOffsetPixels: [0, 0] as const,
+        visibleRect: { left: -width / 2, right: width / 2, top: -height / 2 - offsetY, bottom: height / 2 - offsetY } };
+      const world = worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits: arrival.distanceM / frame.metersPerUnit }, frame, optics);
+      return { world, viewport: optics };
+    },
     /** The shared caption uses the same prepared shape extent before and after attachment. */
+    async labelEdge(signal: AbortSignal) {
+      return preparedLabelEdge(await abortable(load(signal), signal), frame);
+    },
     async framingScale(signal: AbortSignal) {
       return (await abortable(load(signal), signal)).camera.framingScale ?? 1;
     },
@@ -51,8 +76,8 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
       return fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
     },
-    async prepare({ signal, getView, cameraViewport, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
-      signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; ownerDocument?: Document;
+    async prepare({ signal, getView, cameraViewport, initialTextures = true, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
+      signal: AbortSignal; getView: () => ObjectPreparationView; initialTextures?: boolean; cameraViewport?: CameraViewport; ownerDocument?: Document;
     }) {
       const definition = await abortable(load(signal), signal);
       // Resolve a new authored projection while the outgoing scene is intact.
@@ -64,7 +89,7 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       const destroy = () => { resources.destroy(); tree?.destroy(); };
       let demand: ReturnType<typeof createObjectViewDemand> | null = null;
       const prepareView = (read: () => ObjectPreparationView) => {
-        demand ??= createObjectViewDemand(definition, frame);
+        demand ??= createObjectViewDemand(definition, frame, initialTextures);
         return resources.prepareDemand(() => demand!(read()));
       };
       try {

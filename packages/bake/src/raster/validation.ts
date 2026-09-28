@@ -122,6 +122,19 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             if ((science.kind === 'terrestrial-observed-color' || science.kind === 'disc-integrated-band-color' || validity?.kind === 'pds4-float-rgb') && !surface.falseColor)
                 throw new TypeError('Measured band composites must declare falseColor; display encoding does not establish natural color.');
         }
+        if (surface.underlay !== undefined) {
+            const underlay = record(surface.underlay, 'surface.underlay');
+            if (Object.keys(underlay).some(key => !['surface', 'brightness', 'grayscale', 'bits'].includes(key))) throw new TypeError(`${String(surface.id)}: surface.underlay takes only surface, brightness, grayscale and bits.`);
+            if (underlay.grayscale !== undefined && typeof underlay.grayscale !== 'boolean') throw new TypeError(`${String(surface.id)}: surface.underlay.grayscale must be boolean, not ${String(underlay.grayscale)}.`);
+            if (underlay.bits !== undefined && !(Number.isInteger(underlay.bits) && Number(underlay.bits) >= 1 && Number(underlay.bits) <= 8)) throw new TypeError(`${String(surface.id)}: surface.underlay.bits must be an integer from 1 to 8, not ${String(underlay.bits)}.`);
+            text(underlay.surface, 'surface.underlay.surface');
+            const base = (recipe.surfaces as Record<string, unknown>[]).find(other => other.id === underlay.surface);
+            if (surface.science === undefined || !base || underlay.surface === surface.id || !ids.has(String(underlay.surface)) || base.underlay !== undefined ||
+                (base.resolutionScale ?? 1) !== (surface.resolutionScale ?? 1) || recipe.resample !== 'density-before-pack' || recipe.emission !== undefined)
+                throw new TypeError(`${String(surface.id)}: surface.underlay needs a science lens drawn over an earlier surface ${String(underlay.surface)} of the same resolution, with no underlay of its own, in density-before-pack storage.`);
+            if (typeof underlay.brightness !== 'number' || !(underlay.brightness > 0 && underlay.brightness <= 1))
+                throw new TypeError(`${String(surface.id)}: surface.underlay.brightness must be in (0, 1], not ${String(underlay.brightness)}.`);
+        }
         if (surface.thumbnailCenterLongitudeDegrees !== undefined) {
             finite(surface.thumbnailCenterLongitudeDegrees, 'surface.thumbnailCenterLongitudeDegrees');
             if (recipe.resample !== 'density-before-pack')

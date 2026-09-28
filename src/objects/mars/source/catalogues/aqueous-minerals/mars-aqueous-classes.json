@@ -1,0 +1,57 @@
+{
+  "sourceRecords": {
+    "silica": 364,
+    "phyllosilicate": 3441,
+    "chloride": 344,
+    "carbonate": 36,
+    "sulfate": 387
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8386235,
+  "categories": [
+    {
+      "value": "phyllosilicate",
+      "label": "Phyllosilicates (clays)",
+      "color": "#0099ff"
+    },
+    {
+      "value": "sulfate",
+      "label": "Sulfates",
+      "color": "#ff6699"
+    },
+    {
+      "value": "silica",
+      "label": "Silica",
+      "color": "#9900cc"
+    },
+    {
+      "value": "chloride",
+      "label": "Chlorides",
+      "color": "#ffff00"
+    },
+    {
+      "value": "carbonate",
+      "label": "Carbonates",
+      "color": "#33cc00"
+    },
+    {
+      "value": "more than one class",
+      "label": "More than one class in the cell",
+      "color": "#ffffff"
+    }
+  ],
+  "output": "mars-aqueous-classes.tif",
+  "sha256": "751ac1303de814f86c882b8ac3470230173481c59c3327b9c6023a3ee628fbd7",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

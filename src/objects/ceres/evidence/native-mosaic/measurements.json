@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-evidence-ceres-native-mosaic@1",
+  "checked": "2026-09-27",
+  "base": "ccbf483de86e281069b2f17f12de1f50bb2c8d07",
+  "question": "Does the native DLR 140 m cube, reduced by pixel-area mean to the prepared 4096 x 2048 map, change what the Monochrome lens shows compared with the pinned WMS render of the same product?",
+  "current": {
+    "file": "src/objects/ceres/source/ceres-fc-global.png",
+    "origin": "USGS WMS layer Ceres_FC_global, 4096 x 2048, 0-360 E",
+    "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c"
+  },
+  "native": {
+    "url": "https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub",
+    "bytes": 224158431,
+    "sha256": "d384bd5d58305948e06085875042243987b1a0b2d7fee5a0199794132d5fd3b4",
+    "grid": {
+      "samples": 21093,
+      "lines": 10546,
+      "tile": [
+        267,
+        128
+      ],
+      "type": "UnsignedByte",
+      "pixelsPerDegree": 58.5926,
+      "west": -180.0,
+      "east": 179.9942,
+      "north": 89.9999,
+      "south": -89.9886
+    },
+    "values": {
+      "zero": 0,
+      "one": 24753789,
+      "twoFiftyFive": 5020156,
+      "note": "No ISIS Null (0) pixels. Under the WMS render's south-polar gap the native mean is 1.0, so the cube stores that gap as 1, the same value as clipped shadow elsewhere (11.1% of all pixels)."
+    }
+  },
+  "method": "Tile rows streamed from the cube (2.7 MB each). Native pixel-area mean onto the WMS frame (0-360 E, 90 N-90 S); 0 excluded. Pixelmatch threshold 0.1, includeAA. The same WebP q80 lane applied to both for the delivered comparison.",
+  "tone": {
+    "medianWmsForNativeValue": {
+      "20": 19,
+      "100": 100,
+      "120": 121,
+      "160": 160,
+      "200": 200,
+      "254": 254
+    },
+    "meanSignedDifferenceMidtones": 0.4,
+    "registrationBestShiftPixels": [
+      0,
+      0
+    ]
+  },
+  "pixelmatch": {
+    "map4096Percent": 7.228,
+    "afterLossyLaneQ80Percent": 7.821,
+    "halfResolution2048Percent": 1.436,
+    "wmsAgainstItsOwnQ80Percent": 0,
+    "map4096PercentBy11_25DegreeBandNorthToSouth": [
+      11.91,
+      11.39,
+      8.84,
+      4.95,
+      1.33,
+      0.27,
+      0.11,
+      0.11,
+      0.4,
+      1.79,
+      4.97,
+      8.94,
+      16.07,
+      19.4,
+      16.97,
+      8.18
+    ]
+  },
+  "pixelScaleEnergy": {
+    "meanAbsLaplacian": {
+      "wms": 51.994,
+      "nativeMean": 45.527,
+      "nativeNearest": 69.429
+    },
+    "note": "The WMS render has 14% more pixel-scale energy than the area mean and less than native nearest sampling."
+  },
+  "image": "wms-vs-native.webp: rows 71.7 S 131.8 E and 14.4 N 240.8 E (Occator); columns current WMS map, native area mean, pixelmatch difference; 200 x 200 map pixels at 3x.",
+  "conclusion": "Same product, same prepared size, same tone and registration. Between 34 N and 11 S, 0.1-0.4% of pixels change; outside it 1.3-19% change, most toward the poles (16-19% between 45 S and 79 S), where the WMS render shows resampling jaggies that the area mean does not. No resolution is gained."
+}

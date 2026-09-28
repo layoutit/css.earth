@@ -1,0 +1,212 @@
+{
+  "id": "source-moon-lro-diviner-gcp",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LRO Diviner Global Cumulative Products, 0.5 degree x 0.25 hour brightness temperatures (LRO-L-DLRE-5-GCP-V1.0)",
+  "identifiers": [
+    {
+      "type": "PDS4 LID",
+      "value": "urn:nasa:pds:lro_diviner_derived1:data_derived_gcp"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/",
+      "label": "PDS Geosciences Node: Diviner GCP collection"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/collection_data_derived_gcp.xml",
+      "label": "PDS4 collection label"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1016/j.icarus.2016.08.012",
+      "label": "Williams et al. (2017), Icarus 283, 300-325"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/48"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/49"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/50"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/51"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/52"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/53"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/54"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/55"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/56"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/57"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/58"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/59"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/60"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/61"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/62"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/63"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/64"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/65"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/generatedIntermediates/0"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/generatedIntermediates/1"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/58"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/59"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/60"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/61"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/62"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/63"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/64"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/65"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/66"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/67"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/68"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/69"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/70"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/71"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/72"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/73"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/74"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/75"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/76"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J.-P. Williams and the LRO Diviner team, University of California, Los Angeles (PRODUCER_FULL_NAME), from all Diviner nadir observations of 2009-07-05 to 2015-04-01; described in Williams et al. (2017), Icarus 283, 300-325, doi:10.1016/j.icarus.2016.08.012. NASA PDS Geosciences Node.",
+      "scope": "The 18 GCP strips and the two grids selected from them.",
+      "evidence": "PDS3 labels PRODUCER_FULL_NAME, START_TIME, STOP_TIME and DESCRIPTION."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    },
+    {
+      "kind": "limitation",
+      "text": "Bin averages of many passes, not single observations; -9999 marks a bin without data. The PDS4 labels give the paper DOI as 10.1026/j.icarus.2016.08.012 and the 40S-30S PDS3 label exchanges its latitude bounds.",
+      "scope": "Meaning of values and two label defects.",
+      "evidence": "PDS3 label DESCRIPTION; global_cumul_avg_cyl_00n10n_002.xml; global_cumul_avg_cyl_40s30s_002.lbl against its rows."
+    }
+  ]
+}

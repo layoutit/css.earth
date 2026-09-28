@@ -97,7 +97,7 @@ const transparentPlates = (offLimb: number, limb: number) => ({
 
 const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height: number, nearest: boolean,
   style: RasterRecipe['missingCoverage'] = 'gray'): InterpretedSurface =>
-  ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing, style) : rgb, channels: 3, nearest });
+  ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing, style) : rgb, channels: 3, nearest, ...(missing ? { missing } : {}) });
 
 /** Build the lane's `interpret` adapter once per prepared object. Decoded grids are cached per surface so the
  * two prepared densities decode each source once (the terrestrial lane painted a single @2x atlas). */
@@ -282,10 +282,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // Unchanged: the Moon/Pluto path (coverage grid, signed DEM, tonal presentation, GHRM science).
         const { kind: _kind, ...fields } = surface.science;
         const plan = parseObservationLens({ id: surface.id, input: surface.source, ...fields, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) });
-        const { data, info } = await observationRaster({ input: resolve(sourceDirectory, surface.source), plan, width, height });
+        const { data, info, missing } = await observationRaster({ input: resolve(sourceDirectory, surface.source), plan, width, height });
         if (![1, 2, 3, 4].includes(info.channels)) throw new TypeError(`Interpreted surface ${surface.id} has ${info.channels} channels.`);
         const scientific = plan.scientific;
-        return { data, channels: info.channels as 1 | 2 | 3 | 4, nearest: scientific?.displaySampling === 'nearest' || Array.isArray(scientific?.categories),
+        return { data, channels: info.channels as 1 | 2 | 3 | 4, nearest: scientific?.displaySampling === 'nearest' || Array.isArray(scientific?.categories), ...(missing ? { missing } : {}),
           ...(plan.nativeSourcePoles ? { nativePhotograph: await loadNativeObservationPoleSampler(resolve(sourceDirectory, surface.source), plan) } : {}) };
       }
       case 'terrestrial-observation': {

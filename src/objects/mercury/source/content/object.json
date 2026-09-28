@@ -158,6 +158,22 @@
         "noData": true
       },
       {
+        "id": "color",
+        "label": "Color",
+        "thumbnail": "mercury-lens-color.webp",
+        "surface": "mercury-surface-color@2x.webp",
+        "source": {
+          "id": "usgs-messenger-md3-native",
+          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m"
+        },
+        "poles": "mercury-poles-color@2x.webp",
+        "falseColor": true,
+        "filter": "USGS MESSENGER MDIS native MD3 color mosaic",
+        "view": "exterior",
+        "notes": "USGS MD3 color mosaic, edition 1 (2016), from MESSENGER's 3-color map campaign. Red, green and blue are the 1000, 750 and 430 nm filter images. Each was corrected to 30° incidence, 0° emission and 30° phase, and USGS stretched about 0–0.2 reflectance into 8 bits. Each pixel averages every image that met the scale, lighting and detector-temperature criteria. 1000 nm is beyond human vision, so these are not the colors an eye would see. Native spacing is about 665 m; the display is reduced to 4,096 pixels around the equator. Gray grid marks missing coverage, including the polar gaps.",
+        "noData": true
+      },
+      {
         "id": "enhanced",
         "label": "Enhanced",
         "thumbnail": "mercury-lens-enhanced.webp",
@@ -412,6 +428,7 @@
     ],
     "labels": {
       "normal": "Monochrome",
+      "color": "Color",
       "enhanced": "Enhanced color",
       "topography": "Elevation",
       "interior": "Cross section",

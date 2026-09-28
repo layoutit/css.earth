@@ -37,6 +37,11 @@ export interface SurfaceRasterRecipe {
     /** Scientific interpretation before packing (numeric grids, colour ramps, categorical palettes, tonal presentation,
      * missing-coverage grid): the static lane's observation fields, applied by an injected adapter. */
     science?: Record<string, unknown>;
+    /** Draw this science lens over an earlier surface: every cell its interpretation leaves empty takes that surface's
+     * pixel scaled by `brightness`, so ground with no catalogued feature shows terrain instead of the missing-data grid.
+     * The scale is a presentation choice the lens states in its notes. `grayscale` draws the terrain as Rec. 709 luma and
+     * `bits` keeps that many high bits per channel: the underlay is context, so it may cost fewer lossless bytes. */
+    underlay?: { surface: string; brightness: number; grayscale?: boolean; bits?: number };
 }
 /** An unlit body: per-lens off-limb context and limb plates written by the interpretation instead of a lighting bank. */
 export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
