@@ -1,5 +1,60 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-97658b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.18913406 Jupiter radii from Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract): 13,521.6 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+        "https://doi.org/10.3847/1538-3881/ac141a",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02611472 Jupiter masses: Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+        "https://doi.org/10.3847/1538-3881/ac141a",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 9.4897116 d (Ellis et al. 2021); a/R* 24.2 (Ellis et al. 2021); inclination 89.05 degrees (Ellis et al. 2021); e 0.063 (Rosenthal et al. 2021); omega -10 degrees, stored as 350 (Rosenthal et al. 2021); transit mid-time 2458904.9366 BJD, taken as BJD_TDB (Ellis et al. 2021). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2021ApJS..255....8R/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    }
+  ]
 }

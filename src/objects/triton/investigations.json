@@ -91,9 +91,25 @@
       "subject": "Level reference for the Voyager color lens: Rings Node GEOMED I/F against Bland's voycal I/F",
       "status": "included",
       "finding": "Where the two sets see the same ground, Bland's voycal I/F is darker than the GEOMED calibration by 1.35 (green), 1.19 (violet) and 1.28 (ultraviolet). The GEOMED green/violet ratio, 1.21, matches Nelson et al. (1990) geometric albedos (0.81/0.68 = 1.19); Bland's frames give 1.06. The recipe therefore scales every observation onto the 4.7 km/pixel GEOMED triplet band by band (bandLevels). Bland's frames keep their placement and detail; only their levels change.",
-      "revisitWhen": "A photometrically calibrated release of the Voyager 2 Triton colour frames, or a published per-filter comparison of voycal and the Rings Node CALIB pipeline, settles which absolute scale is right.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/66948cc1fa9919990594906473bb671c5a4c5923/src/objects/triton/README.md",
+        "https://doi.org/10.1029/GL017i010p01761",
+        "https://doi.org/10.3847/PSJ/ad33ca"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "66948cc1fa9919990594906473bb671c5a4c5923"
+        }
+      ]
+    },
+    {
+      "id": "voyager-color-absolute-scale",
+      "subject": "Which absolute I/F scale is right for the Voyager 2 Triton colour frames",
+      "status": "unresolved",
+      "finding": "The Rings Node GEOMED calibration and Bland's voycal I/F differ by 1.19 to 1.35 per filter. GEOMED's green/violet ratio agrees with Nelson et al. (1990) geometric albedos, which is why the colour lens is levelled on it, but no calibrated release or published per-filter comparison settles the absolute scale.",
+      "revisitWhen": "A photometrically calibrated release of the Voyager 2 Triton colour frames, or a published per-filter comparison of voycal and the Rings Node CALIB pipeline, settles which absolute scale is right.",
+      "evidence": [
         "https://doi.org/10.1029/GL017i010p01761",
         "https://doi.org/10.3847/PSJ/ad33ca"
       ],

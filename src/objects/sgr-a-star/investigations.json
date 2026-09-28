@@ -1,5 +1,41 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "sgr-a-star",
-  "entries": []
+  "entries": [
+    {
+      "id": "measurements",
+      "subject": "Measurements",
+      "status": "included",
+      "finding": "GRAVITY Collaboration (2022), A&A 657, L12 (distance, mass, radial velocity); EHT Collaboration (2022), ApJL 930, L12 (shadow diameter); Reid & Brunthaler (2020), ApJ 892, 39 (proper motion).",
+      "evidence": [
+        "https://arxiv.org/abs/2112.07478",
+        "https://datacommons.cyverse.org/browse/iplant/home/shared/commons_repo/curated/EHTC_FirstSgrAResults_May2022",
+        "https://arxiv.org/abs/2311.08680",
+        "https://arxiv.org/abs/2001.04386"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "5b8f93eae73fa1408fadefc5879e7f5ab4423dfe",
+          "pr": 554
+        }
+      ]
+    },
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "SIMBAD, CDS Strasbourg (position of `NAME Sgr A*`, reference 2011AJ....142...35P).",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "5b8f93eae73fa1408fadefc5879e7f5ab4423dfe",
+          "pr": 554
+        }
+      ]
+    }
+  ]
 }

@@ -1,5 +1,107 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "s2",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Habibi et al. (2017), ApJ 847, 120, Table 3: 5.53 (+1.77/-0.79) solar radii, model-atmosphere fit to SINFONI spectra.",
+      "evidence": [
+        "https://arxiv.org/abs/1708.06353",
+        "https://doi.org/10.3847/1538-4357/aa876f"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Habibi et al. (2017), ApJ 847, 120, Table 3: 13.60 (+2.2/-1.8) solar masses.",
+      "evidence": [
+        "https://arxiv.org/abs/1708.06353",
+        "https://doi.org/10.3847/1538-4357/aa876f"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "temperature",
+      "subject": "Temperature",
+      "status": "included",
+      "finding": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 28,513 (+2,388/-2,923) K.",
+      "evidence": [
+        "https://arxiv.org/abs/1708.06353",
+        "https://doi.org/10.3847/1538-4357/aa876f"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "GRAVITY Collaboration (2022), A&A 657, L12, Table 1.",
+      "evidence": [
+        "https://arxiv.org/abs/2112.07478"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).",
+      "evidence": [
+        "https://arxiv.org/abs/1708.06353",
+        "https://doi.org/10.3847/1538-4357/aa876f"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 28,513 K and log g 4.09: a model, since no fit of this star's limb exists.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451",
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    }
+  ]
 }

@@ -95,12 +95,13 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_albedo_g.xml",
         "https://doi.org/10.26033/y8wv-r303",
-        "source/validation/relative-albedo-anchors.json"
+        "https://github.com/layoutit/css.earth/blob/d508e7c204575a598ac3388c58eaf0416d3439bb/src/objects/mimas/source/validation/relative-albedo-anchors.json"
       ],
       "checked": [
         {
           "date": "2026-09-27",
-          "commit": "115e4abf6a46f82edcca1ddea4748ebb65954a1c"
+          "commit": "d508e7c204575a598ac3388c58eaf0416d3439bb",
+          "pr": 874
         }
       ]
     }

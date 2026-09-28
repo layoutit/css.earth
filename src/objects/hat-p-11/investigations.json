@@ -1,5 +1,75 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hat-p-11",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.76 +/- 0.01 solar radii from Basilicata et al. 2024, the stellar radius of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract); Mass 0.811 +/- 0.03 solar masses from An et al. 2025, the stellar mass of the default parameter set of HAT-P-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract); temperature from Basilicata et al. 2024, the stellar temperature of HAT-P-11 b's parameter set from Basilicata et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.127B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A/abstract",
+        "https://doi.org/10.3847/1538-3881/ad90b4",
+        "https://doi.org/10.1051/0004-6361/202347659",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "976afad210aece419ee1e5eaefb6feaa565b24d8",
+          "pr": 737
+        }
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 2086512227851023872, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "976afad210aece419ee1e5eaefb6feaa565b24d8",
+          "pr": 737
+        }
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,780 K and log g 4.59 (u1 0.718, u2 0.069): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451",
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "976afad210aece419ee1e5eaefb6feaa565b24d8",
+          "pr": 737
+        }
+      ]
+    },
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2086512227851023872: position, parallax, proper motion and radial velocity. Identifiers: SIMBAD, CDS, Strasbourg.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "976afad210aece419ee1e5eaefb6feaa565b24d8",
+          "pr": 737
+        }
+      ]
+    }
+  ]
 }

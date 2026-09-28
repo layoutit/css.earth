@@ -14,7 +14,8 @@
       "checked": [
         {
           "date": "2026-09-26",
-          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+          "commit": "6ed2cddf8b152fd032f658a308d5af89a4337240",
+          "pr": 840
         }
       ]
     },
@@ -30,7 +31,8 @@
       "checked": [
         {
           "date": "2026-09-26",
-          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+          "commit": "6ed2cddf8b152fd032f658a308d5af89a4337240",
+          "pr": 840
         }
       ]
     },
@@ -46,7 +48,8 @@
       "checked": [
         {
           "date": "2026-09-26",
-          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+          "commit": "6ed2cddf8b152fd032f658a308d5af89a4337240",
+          "pr": 840
         }
       ]
     },
@@ -57,12 +60,13 @@
       "finding": "The released file stops at +/-81.562 degrees. No extrapolation into the polar caps; these are grey in every slice.",
       "revisitWhen": "The authors release the missing polar rows or a documented continuation.",
       "evidence": [
-        "source/science/kreidberg-2018/pressure-temperature.dat"
+        "https://raw.githubusercontent.com/lkreidberg/2017_wasp103/425f2e8fe694760266398257a71eaa991ab322fd/Figures/GCM_From_Vivien/PTprofiles-WASP-103b-TiO-fix-3-Drag3-NEW-OPA-nit-1036800.dat"
       ],
       "checked": [
         {
           "date": "2026-09-26",
-          "commit": "425f2e8fe694760266398257a71eaa991ab322fd"
+          "commit": "6ed2cddf8b152fd032f658a308d5af89a4337240",
+          "pr": 840
         }
       ]
     }

@@ -1,5 +1,40 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "pds-70-b",
-  "entries": []
+  "entries": [
+    {
+      "id": "orbit-and-dynamical-mass",
+      "subject": "Orbit and dynamical mass",
+      "status": "included",
+      "finding": "Trevascus et al. (2025), A&A 698, A19.",
+      "evidence": [
+        "https://arxiv.org/abs/2504.11210",
+        "https://doi.org/10.1051/0004-6361/202553936"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "9974231a0fc12f1cd20fa3d6b68d02956db660e0",
+          "pr": 623
+        }
+      ]
+    },
+    {
+      "id": "radius-and-temperature",
+      "subject": "Radius and temperature",
+      "status": "included",
+      "finding": "The atmosphere fits of Wang et al. (2021), AJ 161, 148. No image or colour of the planet's surface exists: it is drawn as a sphere of the model radius in the shared neutral gray.",
+      "evidence": [
+        "https://arxiv.org/abs/2101.04187",
+        "https://doi.org/10.3847/1538-3881/abdb2d"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "9974231a0fc12f1cd20fa3d6b68d02956db660e0",
+          "pr": 623
+        }
+      ]
+    }
+  ]
 }

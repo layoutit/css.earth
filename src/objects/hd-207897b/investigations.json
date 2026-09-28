@@ -1,5 +1,60 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-207897b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.20903072 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 14,944 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "https://doi.org/10.3847/1538-4365/ad4484",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.04656601 Jupiter masses: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "https://doi.org/10.3847/1538-4365/ad4484",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 16.20166 d (Polanski et al. 2024); a/R* 32.13 (Heidari et al. 2022); inclination 88.757 degrees (Heidari et al. 2022); e 0 (Polanski et al. 2024); transit mid-time 2458796.49559 BJD, taken as BJD_TDB (Polanski et al. 2024). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...658A.176H/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    }
+  ]
 }

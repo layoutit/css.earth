@@ -116,7 +116,9 @@ no such source, and that count may only fall.
 Read the ledger before investigating an object, starting from the open-work index
 ([`docs/provenance/investigation-index.md`](investigation-index.md)), which
 groups every unresolved and deferred decision by what it waits on. Refresh it
-with `node packages/bake/cli/report-investigations.mts --index --write`; a test refuses a stale copy. Reopen an excluded, unresolved or
+with `node packages/bake/cli/report-investigations.mts --index --write`. CI runs `pnpm check:investigations`, which parses every
+object and facility ledger with the shared records they quote, so a ledger with no entries, a check without its commit or an
+evidence path that is not a link fails there. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node packages/bake/cli/report-investigations.mts` lists every open entry across objects.
 Use `--summary` for catalogue coverage and `--classification` to select an

@@ -1,5 +1,57 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hr-8799-d",
-  "entries": []
+  "entries": [
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "The planet's flux densities in JWST/NIRCam F460M, F430M and F410M, 319.2, 354.4 and 410.5 µJy (Balmer et al. 2025, Table 2), drive red, green and blue. The result, #e4efff, is infrared false colour, not what an eye would see, and one colour for the whole disc.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/adb1c6",
+        "https://arxiv.org/abs/2503.13608"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "4bc192c1d966e3900fcaea18b5849fa77ccde11d",
+          "pr": 605
+        }
+      ]
+    },
+    {
+      "id": "radius-and-temperature",
+      "subject": "Radius and temperature",
+      "status": "included",
+      "finding": "Nasedkin et al. (2024), A&A 687, A298, Table 3.",
+      "evidence": [
+        "https://arxiv.org/abs/2404.03776",
+        "https://doi.org/10.1051/0004-6361/202449328"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "4bc192c1d966e3900fcaea18b5849fa77ccde11d",
+          "pr": 605
+        }
+      ]
+    },
+    {
+      "id": "orbit-and-mass",
+      "subject": "Orbit and mass",
+      "status": "included",
+      "finding": "Derived: Kepler's third law with the semi-major axis below and the fitted masses of Zurlo et al. (2022, Table 3 model 1): the star 1.47 and this planet 9.19 Jupiter masses, 41021.8 d. Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. a 26.5206 au at their parallax, kept as the angular size 648.75 mas and placed at the Gaia DR3 distance: 3793.84 radii of the star's 1,045,756 km; inclination 26.8734 degrees. Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. e 0.1146003. Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. omega 29.0595 degrees, the planet's argument of periastron; stored as the star's, 209.0595 degrees. Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. mean anomaly at that epoch, MJD 51117.157, turned into the periastron passage MJD 44260.2 with the period above. Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. the common ascending node 62.1852 degrees east of north. GM from the dynamical mass 9.",
+      "evidence": [
+        "https://arxiv.org/abs/2207.10684",
+        "https://doi.org/10.1051/0004-6361/202243862"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "4bc192c1d966e3900fcaea18b5849fa77ccde11d",
+          "pr": 605
+        }
+      ]
+    }
+  ]
 }

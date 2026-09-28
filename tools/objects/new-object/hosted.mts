@@ -14,6 +14,7 @@ import { citedName, isCollaboration, type Archive, type Publication } from './ar
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { quoteSource } from './prose.mts';
+import { checkedCommit, writeLedger } from './ledger.mts';
 import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
@@ -198,6 +199,16 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
+  // The ledger records each value's source and the colour chosen, with the links they cite.
+  const unitName = star ? 'solar radii' : 'Jupiter radii';
+  writeLedger(files, id, [
+    { id: 'radius', subject: 'Radius', evidence: [radius.url], finding: `${radius.value}${radius.uncertainty ? ` +/- ${radius.uncertainty}` : ''} ${unitName} from ${radius.source}.` },
+    { id: 'mass', subject: 'Mass', evidence: [record.mass.url], finding: String(measurements.massSource) },
+    { id: 'orbit', subject: 'Orbit', evidence: record.orbitCitation.url ? [record.orbitCitation.url] : [], finding: `${Object.values(record.orbit.sources).join('; ')}.` },
+    ...star && t ? [{ id: 'colour', subject: 'Colour', evidence: [t.url], finding: `A Planck spectrum at ${t.value} K from ${t.source}: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}.${limbSentence ? ` The disc is ${limbSentence}.` : ''}` }]
+      : spec.photometry ? [{ id: 'colour', subject: 'Colour', evidence: [spec.photometry.source.url], finding: String(colorLine).replace('**Colour.** ', '') }]
+      : spec.thermal ? [{ id: 'colour', subject: 'Colour', evidence: [spec.thermal.url], finding: String(colorLine).replace('**Colour.** ', '') }] : [],
+  ], checkedCommit(root));
   // A planet's marker is its lens drawn as a disc (the companion star's comes from its colour lens, lens.mts).
   if (!star) lensMarkerEntry(files, id);
   bindInputs(files, id);

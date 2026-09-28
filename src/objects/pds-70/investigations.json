@@ -14,7 +14,8 @@
       "checked": [
         {
           "date": "2026-09-23",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "3bc0c40d707d847c2ebd0c3c6132e0137f256945",
+          "pr": 623
         }
       ]
     },
@@ -30,7 +31,8 @@
       "checked": [
         {
           "date": "2026-09-23",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "3bc0c40d707d847c2ebd0c3c6132e0137f256945",
+          "pr": 623
         }
       ]
     },
@@ -39,6 +41,7 @@
       "subject": "The proposed third planet, PDS 70 d",
       "status": "excluded",
       "finding": "Hammond et al. (2025) propose a compact source orbiting inside b as a third planet; Trevascus et al. (2025) find that including it makes their fitted system unstable, and Balsalobre-Ruza et al. (2026) discuss it as trojan material or inner-disc structure. It is not added as a planet.",
+      "revisitWhen": "A follow-up confirms the compact source inside b as a planet on a stable orbit.",
       "evidence": [
         "https://arxiv.org/abs/2504.11127",
         "https://arxiv.org/abs/2504.11210",
@@ -47,7 +50,8 @@
       "checked": [
         {
           "date": "2026-09-23",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "3bc0c40d707d847c2ebd0c3c6132e0137f256945",
+          "pr": 623
         }
       ]
     }

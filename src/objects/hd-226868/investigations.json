@@ -1,5 +1,56 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-226868",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 22.3 solar radii from Miller-Jones et al. (2021), Science 371, 1046, Table 1: R1 = 22.3 solar radii (median; 5th-95th percentile 20.6-24.1), derived from their dynamical model at 2.22 kpc (https://arxiv.org/abs/2102.09091); Mass 40.6 solar masses from Miller-Jones et al. (2021), Science 371, 1046, Table 1: M1 = 40.6 solar masses (median; 5th-95th percentile 33.5-48.3), fitted (https://arxiv.org/abs/2102.09091); temperature from Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted.",
+      "evidence": [
+        "https://arxiv.org/abs/2102.09091",
+        "https://doi.org/10.1126/science.abb3363"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at the temperature of Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted, through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).",
+      "evidence": [
+        "https://arxiv.org/abs/2102.09091",
+        "https://doi.org/10.1126/science.abb3363"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    },
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2059383668236814720: position, parallax, proper motion. Identifiers: SIMBAD, CDS, Strasbourg.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-27",
+          "commit": "e6b8e38cef06721143ce3191c1f6e0bb67533315",
+          "pr": 898
+        }
+      ]
+    }
+  ]
 }

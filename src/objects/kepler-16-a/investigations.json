@@ -13,7 +13,9 @@
       ],
       "checked": [
         {
-          "date": "2026-09-23"
+          "date": "2026-09-23",
+          "commit": "3410b33eb25f6ca45e5c0c13311647954aeb263d",
+          "pr": 619
         }
       ]
     },
@@ -22,26 +24,32 @@
       "subject": "SOPHIE dynamical masses of A and B",
       "status": "excluded",
       "finding": "Sebastian et al. (2025, EBLM XV) measure dynamical masses 2 to 7% above earlier values. Not adopted: the orbit elements this system is drawn with were fitted jointly with Doyle et al.'s masses, and mixing the two would move the barycentre without a matching orbit fit.",
+      "revisitWhen": "An orbit fit that uses the revised masses is published.",
       "evidence": [
         "https://arxiv.org/abs/2505.19718"
       ],
       "checked": [
         {
-          "date": "2026-09-23"
+          "date": "2026-09-23",
+          "commit": "3410b33eb25f6ca45e5c0c13311647954aeb263d",
+          "pr": 619
         }
       ]
     },
     {
       "id": "star-b-temperature",
       "subject": "A measured temperature for star B",
-      "status": "open",
+      "status": "unresolved",
       "finding": "None found. Bender et al. (2012) adopted 2800 K from the template star GJ 905 to cross-correlate B's spectrum, which is not a measurement of B; Doyle et al.'s supplement, which may discuss it, was not reachable (science.org refused the download). B is drawn in the shared neutral gray.",
+      "revisitWhen": "A measured temperature of star B is published, or Doyle et al.'s supplement can be read.",
       "evidence": [
         "https://arxiv.org/abs/1205.0259"
       ],
       "checked": [
         {
-          "date": "2026-09-23"
+          "date": "2026-09-23",
+          "commit": "3410b33eb25f6ca45e5c0c13311647954aeb263d",
+          "pr": 619
         }
       ]
     },
@@ -50,10 +58,15 @@
       "subject": "A resolved image of the photosphere",
       "status": "excluded",
       "finding": "Kepler-16 A subtends 0.08 mas, far below the resolution of CHARA or VLTI; no image exists.",
-      "evidence": [],
+      "revisitWhen": "An interferometer resolves Kepler-16 A.",
+      "evidence": [
+        "https://arxiv.org/abs/1109.3432"
+      ],
       "checked": [
         {
-          "date": "2026-09-23"
+          "date": "2026-09-23",
+          "commit": "3410b33eb25f6ca45e5c0c13311647954aeb263d",
+          "pr": 619
         }
       ]
     }

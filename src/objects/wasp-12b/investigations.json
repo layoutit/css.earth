@@ -7,6 +7,7 @@
       "subject": "NASA VTAD WASP-12b 3D model texture as an illustration lens",
       "status": "excluded",
       "finding": "Not shown. NASA's WASP-12b 3D Model (WASP-12b_1_249888.glb) is egg-shaped, as the planet is stretched by its star: semi-axes 640, 449 and 480 units, centred 62 units off its origin, 6.5% from the best-fitting centred ellipsoid where the illustration route allows 1%. Its texture coordinates are not the mesh's own longitude and latitude (median 5 degrees, up to 19 degrees apart), so no placement on the published sphere keeps NASA's texels where the model puts them. The base-colour texture is named JupiterColor_orange_w_hotspot.jpg: a recoloured Jupiter with a hot spot.",
+      "revisitWhen": "NASA publishes a WASP-12b illustration drawn on this planet, whose texture coordinates are the mesh's own longitude and latitude.",
       "evidence": [
         "https://science.nasa.gov/resource/wasp-12b-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"

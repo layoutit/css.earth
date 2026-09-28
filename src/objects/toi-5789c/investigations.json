@@ -1,5 +1,59 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "toi-5789c",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.25515255 Jupiter radii from Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract): 18,241.4 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+        "https://doi.org/10.1051/0004-6361/202557662",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01573176 Jupiter masses: Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+        "https://doi.org/10.1051/0004-6361/202557662",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 12.927748 d (Bonomo et al. 2026); a/R* derived from its semi-major axis 0.1009 au and stellar radius 0.833 solar radii (Bonomo et al. 2026); inclination 88.02 degrees (Bonomo et al. 2026); no archive row states an eccentricity; the orbit is taken as circular; transit mid-time 2460151.15868 BJD, taken as BJD_TDB (Bonomo et al. 2026). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    }
+  ]
 }

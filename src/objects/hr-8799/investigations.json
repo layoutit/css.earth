@@ -1,5 +1,56 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hr-8799",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Cross-identification HIP 114189, HD 218396: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HR%208799 Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): parallax 24.461952 +/- 0.045453 mas, inverted to 40.8798 pc. Zurlo et al. (2022) fit at 24.525662 mas, so the orbits below keep their angular size and are placed at this distance. Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): pmRA* 108.2836 mas/yr, pmDec -50.0402 mas/yr. Gaia DR3 source 2832463659640297472 (Gaia Collaboration 2023, A&A 674, A1): -10.412 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "4bc192c1d966e3900fcaea18b5849fa77ccde11d",
+          "pr": 605
+        }
+      ]
+    },
+    {
+      "id": "radius-and-temperature",
+      "subject": "Radius and temperature",
+      "status": "included",
+      "finding": "Baines et al. (2012), ApJ 761, 57, CHARA Array interferometry.",
+      "evidence": [
+        "https://arxiv.org/abs/1210.0556",
+        "https://doi.org/10.1088/0004-637X/761/1/57"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "4bc192c1d966e3900fcaea18b5849fa77ccde11d",
+          "pr": 605
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "GM from the stellar mass 1.47 solar masses that Zurlo et al. (2022, A&A 666, A133) adopt for the four-planet fit these orbits come from, times the JPL solar GM 132712440041.93938 km^3/s^2.",
+      "evidence": [
+        "https://arxiv.org/abs/2207.10684",
+        "https://doi.org/10.1051/0004-6361/202243862"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-23",
+          "commit": "4bc192c1d966e3900fcaea18b5849fa77ccde11d",
+          "pr": 605
+        }
+      ]
+    }
+  ]
 }

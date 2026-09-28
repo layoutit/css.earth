@@ -1,5 +1,60 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "pi-menc",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.1801145 Jupiter radii from Kunovac Hodžić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract): 12,876.7 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "https://doi.org/10.1093/mnras/stab237",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01321468 Jupiter masses: Harada et al. 2025 (2025AJ....170..343H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H/abstract",
+        "https://doi.org/10.3847/1538-3881/ae0b62",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 6.2678399 d (Kunovac Hodžić et al. 2021); a/R* 13.1 (Kokori et al. 2023); inclination 87.045 degrees (Kunovac Hodžić et al. 2021); e 0 (Kunovac Hodžić et al. 2021); transit mid-time 2458425.789204 BJD, taken as BJD_TDB (Kunovac Hodžić et al. 2021). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    }
+  ]
 }

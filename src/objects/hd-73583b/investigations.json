@@ -1,5 +1,59 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-73583b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.24890756 Jupiter radii from Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract): 17,794.9 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+        "https://doi.org/10.1093/mnras/stac638",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.03209279 Jupiter masses: Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+        "https://doi.org/10.1093/mnras/stac638",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 6.398042 d (Barragán et al. 2022); a/R* 19.98 (Barragán et al. 2022); inclination 88.37 degrees (Barragán et al. 2022); e 0.09 (Barragán et al. 2022); omega -76 degrees, stored as 284 (Barragán et al. 2022); transit mid-time 2458517.69013 BJD, taken as BJD_TDB (Barragán et al. 2022). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-24",
+          "commit": "4be9cafe66f1be1b17328383ece849e600b4b2ae",
+          "pr": 662
+        }
+      ]
+    }
+  ]
 }
