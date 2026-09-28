@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-75732e/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-75732e-orbits",
+      "title": "55 Cnc e: orbits around 55 Cnc",
+      "output": "hd-75732e-system-orbits.svg",
+      "system": "hd-75732",
+      "highlight": "hd-75732e",
+      "description": "The orbits of 55 Cnc's planets in this map from above, to scale, with 55 Cnc e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): P 0.7365474 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hd-75732e-transmission",
+      "title": "55 Cnc e: transmission spectrum",
+      "description": "55 Cnc e's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 25 measured bins from Tsiaras et al. 2016 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "hd-75732e-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2016ApJ...820...99T/abstract",
+        "table": "transitspec",
+        "bins": 25
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 25
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 1.75,
+        "ticks": [
+          1,
+          1.25,
+          1.5,
+          1.75
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.02,
+        "maximum": 0.05,
+        "ticks": [
+          0.02,
+          0.03,
+          0.04,
+          0.05
+        ]
+      },
+      "notes": [
+        "Tsiaras et al. 2016",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    }
+  ]
+}

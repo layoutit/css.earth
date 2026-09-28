@@ -10,6 +10,8 @@ It is the only planet known around K2-122. Its orbit and size follow Castro-Gonz
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by k2-122's measured colour (#ffc08b, the colour lens of k2-122 (src/objects/k2-122/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of K2-122's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-122b.json).

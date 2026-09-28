@@ -17,6 +17,7 @@ import { quoteSource } from './prose.mts';
 import { writeLedger } from './ledger.mts';
 import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
 import { installPhaseCurveLens } from './phase-curve-lens.mts';
+import { installPlanetCharts } from './planet-charts.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
 import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
@@ -217,6 +218,8 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
+  // The Charts tab: the system's orbits and any archive spectra (planet-charts.mts), with their README paragraph.
+  if (!star) await installPlanetCharts(files, id, spec.name, { id: record.hostId, name: String((hostBody as { physical?: { name?: unknown } } | undefined)?.physical?.name ?? record.system.replace(/ system$/u, '')) }, archive);
   // The ledger records each value's source and the colour chosen, with the links they cite.
   const unitName = star ? 'solar radii' : 'Jupiter radii';
   writeLedger(files, id, [

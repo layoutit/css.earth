@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-63433d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-63433d/hd-63433d-system-orbits.svg",
+      "alt": "The orbits of HD 63433's planets in this map from above, to scale, with HD 63433 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-63433d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

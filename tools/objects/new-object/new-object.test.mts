@@ -251,7 +251,13 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const { hostedPackage } = await import('./hosted.mts');
   const { EMISSION_COLUMNS } = await import('./planet-lenses.mts');
   const emission = [EMISSION_COLUMNS, 'HD 219134 b,4.5,1.0,300,45,-45,0,1400,80,-80,0,Spitzer,IRAC,"<a refstr=Y href=https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract target=ref>Kammer et al. 2018</a>"'].join('\n');
-  const archive: Archive = { async text(url) { if (url.includes('emissionspec')) return emission; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  // The Charts tab's archive spectra (planet-charts.mts): three measured transmission bins and a limit that is left out; no emission bins.
+  const { spectrumColumns } = await import('./planet-charts.mts'), cite = '"<a refstr=A href=https://arxiv.org/abs/2110.06729 target=ref>A et al. 2022</a>"';
+  const transit = [spectrumColumns('transmission'), `0.60,0.20,1.20,0.02,-0.03,0,Kepler,CCD,${cite}`, `1.40,0.20,1.25,0.02,-0.02,0,HST,WFC3,${cite}`, `4.50,1.00,1.31,0.04,-0.04,0,Spitzer,IRAC,${cite}`, `3.60,0.70,1.50,,,1,Spitzer,IRAC,${cite}`].join('\n');
+  const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? '');
+    if (query.includes('from transitspec')) return transit;
+    if (query.includes('from emissionspec')) return query.startsWith('select plntname') ? emission : `${spectrumColumns('emission')}\n`;
+    throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
   const paper = { id: 'arxiv-2110-06729', title: 'A paper', creators: ['A Author'], year: '2022', url: star.paper.url, arxiv: '2110.06729' };
   const host = { id: 'hd-219134', physical: { name: 'HD 219134', meanRadiusKm: 695700, gravitationalParameterKm3PerS2: 132712440041.9, parent: null }, star: { distanceParsecs: 10, rightAscensionDegrees: 0, declinationDegrees: 0, positionEpochJulianYear: 2016, properMotionRaMasPerYear: 0, properMotionDecMasPerYear: 0, radialVelocityKmPerS: 0 } };
   const orbit = { periodDays: 3, semiMajorAxisStellarRadii: 9, inclinationDegrees: 88, eccentricity: 0, transitTimeBmjdTdb: 59000, ascendingNodePositionAngleDegrees: 0, sources: { period: 'p', shape: 's', eccentricity: 'e', phase: 'ph', orientation: 'o' } };
@@ -264,9 +270,19 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
     const { files } = await hostedPackage(record, host, new Map([[star.paper.url, paper]]), archive, root, 2460000);
     const text = JSON.parse(String(files.get('src/objects/hd-219134b/text.json'))), content = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/object.json')));
     assertWholePackage(files, 'hd-219134b', true);
-    return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id), facts: content.panel.facts as { id: string; value: string }[] };
+    const charts = JSON.parse(String(files.get('src/objects/hd-219134b/source/content/charts.json'))) as { charts: Record<string, any>[] };
+    return { datasets: Object.keys(text.datasets), notes: String(content.lenses.controls[0].notes), lens: String(content.lenses.controls[0].id), facts: content.panel.facts as { id: string; value: string }[],
+      charts: charts.charts, chartControls: content.charts as { id: string; titleKey: string }[], readme: String(files.get('src/objects/hd-219134b/README.md')),
+      spectrum: JSON.parse(String(files.get('src/objects/hd-219134b/source/science/archive-spectra/transmission.json') ?? 'null')) as { measurements: { y: number; minus: number; plus: number }[] } | null };
   };
   const glow = await build({ thermal });
+  // Its Charts tab: the system's orbits, and the transmission bins of the one paper, as published; the limit is left out.
+  assert.deepEqual(glow.chartControls.map(chart => [chart.id, chart.titleKey]), [['hd-219134b-orbits', 'systemOrbits'], ['hd-219134b-transmission', 'transmissionSpectrum']]);
+  assert.deepEqual(glow.charts.map(chart => chart.kind), ['system-orbits', 'measured-spectrum']);
+  assert.deepEqual(glow.spectrum!.measurements.map(bin => [bin.y, bin.minus, bin.plus]), [[1.2, 0.03, 0.02], [1.25, 0.02, 0.02], [1.31, 0.04, 0.04]]);
+  const axis = glow.charts[1]!.y as { minimum: number; maximum: number };
+  assert.ok(axis.minimum <= 1.17 && axis.maximum >= 1.35, 'the axis holds every bar and its error');
+  assert.match(glow.readme, /\*\*Charts\.\*\* The orbits of HD 219134's planets from above, from their hosted-orbit records, and its transmission spectrum, 3 bins from A et al\. 2022/u);
   assert.deepEqual([glow.lens, glow.datasets], ['thermal', ['thermal']]);
   assert.match(glow.notes, /black body at the dayside brightness temperature/u);
   const shape = await build({});

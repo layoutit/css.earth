@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-101581c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-101581c-orbits",
+      "title": "HD 101581 c: orbits around HIP 56998",
+      "output": "hd-101581c-system-orbits.svg",
+      "system": "hip-56998",
+      "highlight": "hd-101581c",
+      "description": "The orbits of HIP 56998's planets in this map from above, to scale, with HD 101581 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): P 6.20401 d"
+      }
+    }
+  ]
+}

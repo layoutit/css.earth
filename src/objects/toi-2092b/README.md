@@ -10,6 +10,8 @@ It is the only planet known around TOI-2092. Its orbit and size follow Lafarga e
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by toi-2092's measured colour (#fff0eb, the colour lens of toi-2092 (src/objects/toi-2092/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of TOI-2092's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2092b.json).

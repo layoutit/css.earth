@@ -8,6 +8,8 @@ It is one of 3 planets known around HD 63433. Its orbit and size follow Mallorqu
 
 **Orbit.** Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): P 20.5438281 d Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): a/R* 33.479; Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): inclination 89.07 degrees Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0 Mallorquín et al. 2023 (2023A&A...671A.163M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): transit mid-time 2458844.0589381 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 63433's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-63433c.json).

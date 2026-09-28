@@ -8,6 +8,8 @@ It is one of 2 planets known around HD 73583. Its orbit and size follow Barragá
 
 **Orbit.** Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): P 6.398042 d Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): a/R* 19.98; Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): inclination 88.37 degrees Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): e 0.09 Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): omega -76 degrees, stored as 284 Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): transit mid-time 2458517.69013 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 73583's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-73583b.json).

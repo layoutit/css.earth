@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-6008b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-6008b-orbits",
+      "title": "TOI-6008 b: orbits around TOI-6008",
+      "output": "toi-6008b-system-orbits.svg",
+      "system": "toi-6008",
+      "highlight": "toi-6008b",
+      "description": "The orbits of TOI-6008's planets in this map from above, to scale, with TOI-6008 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): P 0.8574347 d"
+      }
+    }
+  ]
+}

@@ -214,8 +214,8 @@
     {
       "location": "public",
       "filename": "toi-2267b-arrival.webp",
-      "bytes": 31296,
-      "sha256": "619fc9e6698c2ff553e356ab1ae0288c3c74be078e5ef222f9f92e4aaf06991f"
+      "bytes": 31110,
+      "sha256": "d96b6ed5599c21f8dea20b88e5fea99cb7a7166eae63afd0738318b1b04bc442"
     },
     {
       "location": "public",
@@ -236,6 +236,12 @@
       "sha256": "be1dae84e36a271416e9a86da0c161bcf68d6c1aed8147359db4ee6877771c01"
     },
     {
+      "location": "public",
+      "filename": "toi-2267b-system-orbits.svg",
+      "bytes": 7944,
+      "sha256": "15f3ae61d98890969e265ecbde6fb68d6eafa7a7106077d132f8074d7fca4140"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 307,
@@ -251,13 +257,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1408,
-      "sha256": "11d191d2095c0065174e6d878dd0d9bff58caacbcdd26ea46d286fce5168e73d"
+      "sha256": "6028b88a2e855993cd52f077ce8a587b69bff0f427d16ce6cc03719c3abe04c9"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2053,
-      "sha256": "c0965e8c1fee4ffd511921426386e8f507952c7346b89363149f371a7c29b294"
+      "bytes": 2636,
+      "sha256": "97bb8af65f56ec59585d6420bc15866103ee2381ddafc4cb570146133093f70b"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -286,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 592538,
-      "sha256": "3fba265b7241f724621fbba68e7b19e3e7e6104de6a1b3b9d5cffce54b52a294"
+      "bytes": 576104,
+      "sha256": "815c18359dd4c97ee4f4131cc1fecd57c12e2e14442793f48c5b3022a1decc8b"
     },
     {
       "location": "prepared",

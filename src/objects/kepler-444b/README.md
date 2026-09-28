@@ -8,6 +8,8 @@ It is one of 5 planets known around Kepler-444. Its orbit and size follow Campan
 
 **Orbit.** Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): P 3.6001053 d Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): a/R* 11.951; Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): inclination 88 degrees Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0 Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive ps table (pl_refname CAMPANTE_ET_AL__2015): transit mid-time 2454966.2599 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of Kepler-444's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kepler-444b.json).

@@ -8,6 +8,8 @@ It is one of 3 planets known around HR 858. Its orbit and size follow Bonfanti e
 
 **Orbit.** Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): P 11.230511 d Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): a/R* 17.93; Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): inclination 87.72 degrees Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): e 0 Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2025): transit mid-time 2458409.7324 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HR 858's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hr-858d.json).

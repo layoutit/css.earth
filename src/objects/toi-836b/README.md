@@ -8,6 +8,8 @@ It is one of 2 planets known around TOI-836. Its orbit and size follow Hawthorn 
 
 **Orbit.** Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive ps table (pl_refname HAWTHORN_ET_AL_2023): P 3.81673 d Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive ps table (pl_refname HAWTHORN_ET_AL_2023): a/R* derived from its semi-major axis 0.0422 au and stellar radius 0.665 solar radii; Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive ps table (pl_refname HAWTHORN_ET_AL_2023): inclination 87.57 degrees Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive ps table (pl_refname HAWTHORN_ET_AL_2023): e 0.053 Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive ps table (pl_refname HAWTHORN_ET_AL_2023): omega 9 degrees Hawthorn et al. 2023 (2023MNRAS.520.3649H), via the NASA Exoplanet Archive ps table (pl_refname HAWTHORN_ET_AL_2023): transit mid-time 2458599.9953 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of TOI-836's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-836b.json).

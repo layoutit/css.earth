@@ -30,6 +30,8 @@ It is the only planet known around WASP-12. Its orbit and size follow Leonardi e
 
 **No illustration.** NASA's [WASP-12b 3D Model](https://science.nasa.gov/resource/wasp-12b-3d-model/) (NASA VTAD) is egg-shaped, as the planet is stretched by its star, and its texture cannot be placed on this package's sphere without moving it by up to 19 degrees; it is not used ([ledger](investigations.json)).
 
+**Charts.** The orbits of WASP-12's planets from above, from their hosted-orbit records, and its transmission spectrum, 29 bins from Stevenson et al. 2014 in the archive's transitspec table, the most of its 3 papers; its dayside emission, 20 bins from Crossfield et al. 2012 in the archive's emissionspec table, the most of its 2 papers. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`tests/objects/terrestrial/published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.

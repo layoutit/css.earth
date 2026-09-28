@@ -94,7 +94,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-75732e-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-75732e/hd-75732e-system-orbits.svg",
+      "alt": "The orbits of 55 Cnc's planets in this map from above, to scale, with 55 Cnc e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-75732e-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B"
+      }
+    },
+    {
+      "id": "hd-75732e-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/hd-75732e/hd-75732e-transmission.svg",
+      "alt": "55 Cnc e's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 25 measured bins from Tsiaras et al. 2016 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "hd-75732e-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...820...99T/abstract"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1899b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1899b-orbits",
+      "title": "TOI-1899 b: orbits around TOI-1899",
+      "output": "toi-1899b-system-orbits.svg",
+      "system": "toi-1899",
+      "highlight": "toi-1899b",
+      "description": "The orbits of TOI-1899's planets in this map from above, to scale, with TOI-1899 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): P 29.090312 d"
+      }
+    }
+  ]
+}

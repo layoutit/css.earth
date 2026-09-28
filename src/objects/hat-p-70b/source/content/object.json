@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hat-p-70b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-70b/hat-p-70b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-70's planets in this map from above, to scale, with HAT-P-70 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-70b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

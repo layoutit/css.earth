@@ -10,6 +10,8 @@ It is one of 4 planets known around Kepler-1542. Its orbit and size follow Morto
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by kepler-1542's measured colour (#ffefe6, the colour lens of kepler-1542 (src/objects/kepler-1542/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of Kepler-1542's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kepler-1542d.json).

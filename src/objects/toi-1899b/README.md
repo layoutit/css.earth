@@ -10,6 +10,8 @@ It is the only planet known around TOI-1899. Its orbit and size follow Lin et al
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by toi-1899's measured colour (#ffbe8a, the colour lens of toi-1899 (src/objects/toi-1899/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of TOI-1899's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-1899b.json).

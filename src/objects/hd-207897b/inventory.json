@@ -27,6 +27,12 @@
     },
     {
       "location": "public",
+      "filename": "hd-207897b-system-orbits.svg",
+      "bytes": 4606,
+      "sha256": "0d5c7afb5511f1fe7f2a725f50be7f9c744bc670c1ae3dee0254cfac443d0434"
+    },
+    {
+      "location": "public",
       "filename": "lighting-2x-billboard.webp",
       "bytes": 115740,
       "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
@@ -251,13 +257,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1409,
-      "sha256": "64b43a7dc915614316feb6caac3c489774b70726c558289275ad8b14e8bcc323"
+      "sha256": "0d5ea637d76fcbc7de716ab1de0e99d0c4c65647ae35fe8f29c9f8c0bc86116b"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1799,
-      "sha256": "300eaac52b3efbb0f6145264faa014ded8d42cce44e297bf3b2171bbff9b48a9"
+      "bytes": 2388,
+      "sha256": "d9a8dc0dab33ed44429c416d2fe23ed6b15fc17dc93baeda0c8e526a388fa9b7"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -286,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 593053,
-      "sha256": "7b866f56bc706c831ad6fade460fcfc7531651dc38f64813a698c254499350ff"
+      "bytes": 576609,
+      "sha256": "1c9d7084fca5c1040b66ef51b703a5b42cafc8b7180c73abd9443e8fa3f20d7a"
     },
     {
       "location": "prepared",

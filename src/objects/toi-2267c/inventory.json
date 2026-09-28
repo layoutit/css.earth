@@ -214,8 +214,8 @@
     {
       "location": "public",
       "filename": "toi-2267c-arrival.webp",
-      "bytes": 31088,
-      "sha256": "dbc69e217ef62fd6822a59c729f763066718c981567d46812b32a0447ad7a8f6"
+      "bytes": 31174,
+      "sha256": "3d6e66f44d1f3cc36c6a03b14def22db6d6c8dfac77bbe4180441a229c3d982e"
     },
     {
       "location": "public",
@@ -236,6 +236,12 @@
       "sha256": "be1dae84e36a271416e9a86da0c161bcf68d6c1aed8147359db4ee6877771c01"
     },
     {
+      "location": "public",
+      "filename": "toi-2267c-system-orbits.svg",
+      "bytes": 7946,
+      "sha256": "d09158553e771b2494e8cad1f838e0dd1b479e09ddc5cd3db286fd262c23696c"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 307,
@@ -251,13 +257,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1408,
-      "sha256": "f38a672cd401a3720cc29fba1f5dbefcb72374df423f1e69163b7d865b391677"
+      "sha256": "6ca64bd1f645d53e34c717b7fe8b433fc794cbfddde518092739865d127434b0"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2051,
-      "sha256": "bce4b1fa66f25c6fc4fddc1c0b5177cbccc6191253257ef7856b3402c2a85af9"
+      "bytes": 2634,
+      "sha256": "dd4e5e32e229ecac950583df0910f3fa952203369b6ee1028d2baf7b27390b87"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -286,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 592537,
-      "sha256": "bfd797a6c9504ba6d29c79f8686d9e3fc6bb0b1f1ff6144f8091da421ba971a7"
+      "bytes": 576099,
+      "sha256": "f8a84393ad59aeb5707e624f13d278f8156f7cafac8598ff78cc0df70a3cf745"
     },
     {
       "location": "prepared",

@@ -8,3 +8,4 @@ export * from './chart-svg.ts';
 export * from './fits-gallery-image.ts';
 export * from './measured-spectrum.ts';
 export * from './retrieved-profile.ts';
+export * from './system-orbits.ts';

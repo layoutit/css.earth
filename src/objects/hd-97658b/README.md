@@ -8,6 +8,8 @@ It is the only planet known around HD 97658. Its orbit and size follow Ellis et 
 
 **Orbit.** Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive ps table (pl_refname ELLIS_ET_AL__2021): P 9.4897116 d Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive ps table (pl_refname ELLIS_ET_AL__2021): a/R* 24.2; Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive ps table (pl_refname ELLIS_ET_AL__2021): inclination 89.05 degrees Rosenthal et al. 2021 (2021ApJS..255....8R), via the NASA Exoplanet Archive ps table (pl_refname ROSENTHAL_ET_AL__2021): e 0.063 Rosenthal et al. 2021 (2021ApJS..255....8R), via the NASA Exoplanet Archive ps table (pl_refname ROSENTHAL_ET_AL__2021): omega -10 degrees, stored as 350 Ellis et al. 2021 (2021AJ....162..118E), via the NASA Exoplanet Archive ps table (pl_refname ELLIS_ET_AL__2021): transit mid-time 2458904.9366 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 97658's planets from above, from their hosted-orbit records, and its transmission spectrum, 28 bins from Knutson et al. 2014 in the archive's transitspec table. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-97658b.json).

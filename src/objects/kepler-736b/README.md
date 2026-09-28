@@ -10,6 +10,8 @@ It is the only planet known around Kepler-736. Its orbit and size follow Morton 
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by kepler-736's measured colour (#ffe9d7, the colour lens of kepler-736 (src/objects/kepler-736/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of Kepler-736's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kepler-736b.json).

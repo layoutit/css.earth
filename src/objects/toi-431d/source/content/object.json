@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-431d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-431d/toi-431d-system-orbits.svg",
+      "alt": "The orbits of TOI-431's planets in this map from above, to scale, with TOI-431 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-431d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

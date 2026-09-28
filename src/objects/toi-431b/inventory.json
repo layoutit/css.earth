@@ -236,6 +236,12 @@
       "sha256": "7d2223bf68272efdbdb84bdbf7ef6f50711960a7db87b143d08502eca36523c0"
     },
     {
+      "location": "public",
+      "filename": "toi-431b-system-orbits.svg",
+      "bytes": 7984,
+      "sha256": "36c947f886f23cbbd4d73c9f3000f664e1ce6aedb6724d35306dd2536501b524"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 299,
@@ -251,13 +257,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1407,
-      "sha256": "29cf55288a00a2453b286c7f8b5ea86a663ac558d4e81a5c0036c07fb24a40f3"
+      "sha256": "7a33606cdf06c8675340d31b47e5bb88d4ce0a57d78284eb6e64e1257d7bc17d"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1782,
-      "sha256": "8036b45b0334b240ebae6db2508d50c24d9954ac7bd471b896bb7e77fd8ee064"
+      "bytes": 2359,
+      "sha256": "8fc8e5279c66c8ebe384ac5af8220fca80cf4a9b0800ce7da531c6f0a9a4a40d"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -286,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 592023,
-      "sha256": "f19b6e9e61a6c1931ae0eaec5de946d4a20d4213082c2e34273410c5dc66db7f"
+      "bytes": 575582,
+      "sha256": "e86e5f768aaed9b1931d44924428c02a2c3de08b57ffabef87c5c87852597a8f"
     },
     {
       "location": "prepared",

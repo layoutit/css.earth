@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-101581b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-101581b/hd-101581b-system-orbits.svg",
+      "alt": "The orbits of HIP 56998's planets in this map from above, to scale, with HD 101581 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-101581b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

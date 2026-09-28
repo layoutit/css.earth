@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-97658b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-97658b/hd-97658b-system-orbits.svg",
+      "alt": "The orbits of HD 97658's planets in this map from above, to scale, with HD 97658 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-97658b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E"
+      }
+    },
+    {
+      "id": "hd-97658b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/hd-97658b/hd-97658b-transmission.svg",
+      "alt": "HD 97658 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 28 measured bins from Knutson et al. 2014 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "hd-97658b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...794..155K/abstract"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

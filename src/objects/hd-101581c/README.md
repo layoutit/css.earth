@@ -8,6 +8,8 @@ It is one of 2 planets known around HIP 56998. Its orbit and size follow Kunimot
 
 **Orbit.** Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): P 6.20401 d Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): a/R* derived from its semi-major axis 0.0573 au and stellar radius 0.63 solar radii; Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): inclination 87.93 degrees No archive row states an eccentricity; the orbit is taken as circular Kunimoto et al. 2025 (2025AJ....169...47K), via the NASA Exoplanet Archive ps table (pl_refname KUNIMOTO_ET_AL__2025): transit mid-time 2460017.114 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HIP 56998's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-101581c.json).

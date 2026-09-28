@@ -8,6 +8,8 @@ It is the only planet known around TOI-2194. Its orbit and size follow Mistry et
 
 **Orbit.** Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): P 15.337597 d Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): a/R* 32.393; Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): inclination 89.27 degrees No archive row states an eccentricity; the orbit is taken as circular Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): transit mid-time 2459037.3678 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of TOI-2194's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2194b.json).

@@ -8,6 +8,8 @@ It is the only planet known around HD 88986. Its orbit and size follow Heidari e
 
 **Orbit.** Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): P 146.05 d Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): a/R* 81.1; Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): inclination 89.9 degrees Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): e 0.24 Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): omega 306 degrees Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): transit mid-time 2458891.69 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 88986's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-88986b.json).

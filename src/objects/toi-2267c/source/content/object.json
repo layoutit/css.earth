@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-2267c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-2267c/toi-2267c-system-orbits.svg",
+      "alt": "The orbits of TOI-2267's planets in this map from above, to scale, with TOI-2267 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-2267c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

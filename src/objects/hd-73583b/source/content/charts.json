@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-73583b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-73583b-orbits",
+      "title": "HD 73583 b: orbits around HD 73583",
+      "output": "hd-73583b-system-orbits.svg",
+      "system": "hd-73583",
+      "highlight": "hd-73583b",
+      "description": "The orbits of HD 73583's planets in this map from above, to scale, with HD 73583 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Barragán et al. 2022 (2022MNRAS.514.1606B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2022): P 6.398042 d"
+      }
+    }
+  ]
+}

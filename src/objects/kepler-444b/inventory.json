@@ -27,6 +27,12 @@
     },
     {
       "location": "public",
+      "filename": "kepler-444b-system-orbits.svg",
+      "bytes": 17927,
+      "sha256": "55f786f61d33e03accdd2475473201778fac0f7443426d8460d2c77e15d83d5c"
+    },
+    {
+      "location": "public",
       "filename": "lighting-2x-billboard.webp",
       "bytes": 115740,
       "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
@@ -251,13 +257,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1410,
-      "sha256": "ac93f5ae4078bc800b9335e06209e6b20810cafda92d57b730ec39bf8d961a0a"
+      "sha256": "1c8d68b4329feefb715fa8d3d36f92e7ec39bb9102f200a5094130d85669ee4c"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2034,
-      "sha256": "d1dec96ef987d107df50fc74ba67c5c8e6c8b6fc9e2493813d4f955362d2fb62"
+      "bytes": 2629,
+      "sha256": "87b4cd3fb80c80c6995db81c043e97167b657ead88d30ed51faf86b712d8cba1"
     },
     {
       "location": "prepared",
@@ -274,8 +280,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -286,8 +292,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 593553,
-      "sha256": "81dd69e3cc68eaa481e5934ab5714675039bbb16bbe99bfae6416e4d0b747724"
+      "bytes": 577118,
+      "sha256": "49b528343dd64ac1625f61de0a55372d4d0a9bfae93c7f042150bac57e585993"
     },
     {
       "location": "prepared",

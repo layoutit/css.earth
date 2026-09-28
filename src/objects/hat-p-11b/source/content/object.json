@@ -94,7 +94,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hat-p-11b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-11b/hat-p-11b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-11's planets in this map from above, to scale, with HAT-P-11 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-11b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...22A"
+      }
+    },
+    {
+      "id": "hat-p-11b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/hat-p-11b/hat-p-11b-transmission.svg",
+      "alt": "HAT-P-11 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 36 measured bins from Fraine et al. 2014 (The Kepler Mission, Kepler CCD camera; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "hat-p-11b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014Natur.513..526F/abstract"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

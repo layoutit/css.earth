@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-136352b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-136352b-orbits",
+      "title": "HD 136352 b: orbits around HD 136352",
+      "output": "hd-136352b-system-orbits.svg",
+      "system": "hd-136352",
+      "highlight": "hd-136352b",
+      "description": "The orbits of HD 136352's planets in this map from above, to scale, with HD 136352 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): P 11.57797 d"
+      }
+    }
+  ]
+}

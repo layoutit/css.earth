@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-60779b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-60779b-orbits",
+      "title": "HD 60779 b: orbits around HD 60779",
+      "output": "hd-60779b-system-orbits.svg",
+      "system": "hd-60779",
+      "highlight": "hd-60779b",
+      "description": "The orbits of HD 60779's planets in this map from above, to scale, with HD 60779 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): P 29.986175 d"
+      }
+    }
+  ]
+}

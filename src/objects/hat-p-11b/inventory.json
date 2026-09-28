@@ -45,6 +45,18 @@
     },
     {
       "location": "public",
+      "filename": "hat-p-11b-system-orbits.svg",
+      "bytes": 4592,
+      "sha256": "4e07d243ca4c0b9161a13ca967175c50e40a3715a71fa6f9ead480ccbc00a1f3"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-11b-transmission.svg",
+      "bytes": 11163,
+      "sha256": "87b4e26a74b787644475ce749948c06d4f1c2a3ecdeef61306822b8f46411abf"
+    },
+    {
+      "location": "public",
       "filename": "lighting-2x-billboard.webp",
       "bytes": 115740,
       "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
@@ -269,13 +281,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1408,
-      "sha256": "0638cdac30310c47baf6d8ea0cea5eab8a32e807715c07c569ed60e09a2d26bd"
+      "sha256": "0720a34d18ac14bc539b46112ca523e7f32814ef84491724ad4d940830dc855f"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1744,
-      "sha256": "9424ef196c1237b57ea8a8af61b7c6720fa5d3809fdc7fe0bc0c22ca82872036"
+      "bytes": 3137,
+      "sha256": "86c5bc5ff3c23de5c034ecfceaa859841a0ead74fbb35c9873991f314cedc031"
     },
     {
       "location": "prepared",
@@ -292,8 +304,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 165,
-      "sha256": "e50951d46a42e15b5df28729b4b69422b605c5f7766c7f8fa0753f8c9b705250"
+      "bytes": 203,
+      "sha256": "420fb4aeddbcce85bb38e15cfcfcfc3c0687c6c6b389b221bbd44d38849d8a6a"
     },
     {
       "location": "prepared",
@@ -310,8 +322,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 595119,
-      "sha256": "a3cd168c0d115ff6cebdf7bb394e9783ea48f99ad9ee810ce9dbb9dde24f225d"
+      "bytes": 578378,
+      "sha256": "83d7aa690dfe7cda3efd2dc9b97e1dd8924bd43d14481269953577d16ad74007"
     },
     {
       "location": "prepared",

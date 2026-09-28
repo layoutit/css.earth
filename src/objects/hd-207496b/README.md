@@ -8,6 +8,8 @@ It is the only planet known around HD 207496. Its orbit and size follow Barros e
 
 **Orbit.** Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): P 6.441008 d Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): a/R* 21.47; Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): inclination 88.79 degrees Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): e 0.231 Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): omega 57 degrees Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): transit mid-time 2458658.78978 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 207496's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-207496b.json).

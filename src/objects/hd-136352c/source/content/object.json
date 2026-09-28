@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-136352c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-136352c/hd-136352c-system-orbits.svg",
+      "alt": "The orbits of HD 136352's planets in this map from above, to scale, with HD 136352 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-136352c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

@@ -8,6 +8,8 @@ It is the only planet known around HD 207897. Its orbit and size follow MacDouga
 
 **Orbit.** Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): P 16.20166 d Heidari et al. 2022 (2022A&A...658A.176H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL__2022): a/R* 32.13; Heidari et al. 2022 (2022A&A...658A.176H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL__2022): inclination 88.757 degrees Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0 Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): transit mid-time 2458796.49559 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 207897's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-207897b.json).

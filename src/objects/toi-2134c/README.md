@@ -8,6 +8,8 @@ It is one of 2 planets known around TOI-2134. Its orbit and size follow Rescigno
 
 **Orbit.** Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): P 95.85284 d Saha 2025 (2025MNRAS.539..928S), via the NASA Exoplanet Archive ps table (pl_refname SAHA_2025): a/R* 70.1; Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): inclination 89.688 degrees Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): e 0.3125 Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): omega 160 degrees Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive ps table (pl_refname RESCIGNO_ET_AL_2026): transit mid-time 2459718.96933 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of TOI-2134's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2134c.json).

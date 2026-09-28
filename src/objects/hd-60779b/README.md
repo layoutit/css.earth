@@ -8,6 +8,8 @@ It is one of 2 planets known around HD 60779. Its orbit and size follow DiTomass
 
 **Orbit.** DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): P 29.986175 d DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): a/R* derived from its semi-major axis 0.1922 au and stellar radius 1.129 solar radii; DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): inclination 88.56 degrees No archive row states an eccentricity; the orbit is taken as circular DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): transit mid-time 2459252.9531 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 60779's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-60779b.json).

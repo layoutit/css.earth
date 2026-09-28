@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "kepler-1542d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-1542d/kepler-1542d-system-orbits.svg",
+      "alt": "The orbits of Kepler-1542's planets in this map from above, to scale, with Kepler-1542 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-1542d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

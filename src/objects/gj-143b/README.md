@@ -8,6 +8,8 @@ It is one of 2 planets known around GJ 143. Its orbit and size follow Dragomir e
 
 **Orbit.** Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): P 35.61253 d Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): a/R* 60.1; Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): inclination 89.33 degrees Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): e 0.188 Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): omega 98 degrees Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): transit mid-time 2458385.92502 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of GJ 143's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-143b.json).

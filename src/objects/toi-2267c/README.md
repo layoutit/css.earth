@@ -10,6 +10,8 @@ It is one of 3 planets known around TOI-2267 A. Its orbit and size follow Zúñi
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by toi-2267's measured colour (#ffd486, the colour lens of toi-2267 (src/objects/toi-2267/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of TOI-2267's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2267c.json).

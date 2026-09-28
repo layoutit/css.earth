@@ -8,6 +8,8 @@ It is one of 6 planets known around HD 219134. Its orbit and size follow Gillon 
 
 **Orbit.** Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): P 6.76458 d Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): a/R* derived from its semi-major axis 0.0653 au and stellar radius 0.778 solar radii; Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): inclination 87.28 degrees Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): e 0.062 Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): omega 70 degrees Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): transit mid-time 2457474.04591 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of HD 219134's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-219134c.json).

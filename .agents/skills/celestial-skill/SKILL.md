@@ -305,7 +305,7 @@ otherwise the neutral gray is lit by the host's measured colour; `telescope new-
 same for planets already in the tree, then `prepare-object.mts` bakes them. A paper's published phase-curve fit becomes a heat-map lens beside the
 colour lens (`tools/objects/new-object/phase-curve-lens.mts`): `phaseCurves` on a planet in a spec, or `--phase-curve entries.json` for planets in
 the tree, each entry the paper's table as `cssearth-published-phase-curve@1` plus who fitted what; the range, hottest longitude and reader text
-come from the drawn map. GJ and Gliese are one catalogue, so an article titled either way quotes. Before imagery work on
+come from the drawn map. GJ and Gliese are one catalogue, so an article titled either way quotes. Every generated planet gets a Charts tab (`tools/objects/new-object/planet-charts.mts`): its system's orbits from above (`system-orbits`), and the archive's transmission and dayside emission spectra where a paper lists three measured bins, one paper per chart; `--charts HOST...` adds them to planets in the tree. The drafted card and introduction say what the factsheet cannot (how and when the planet was found, how many its star has); `--retext HOST...` rewrites them after a template change. Before imagery work on
 a moon or small body, `node packages/bake/cli/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
 `--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.

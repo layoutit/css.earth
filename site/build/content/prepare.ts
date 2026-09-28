@@ -33,6 +33,8 @@ const SCIENTIFIC_CHART_TITLES = Object.freeze({
   reflectedLight: Object.freeze({ label: "Reflected light" }),
   broadbandAlbedo: Object.freeze({ label: "Broadband albedo" }),
   transmissionSpectrum: Object.freeze({ label: "Transmission spectrum" }),
+  emissionSpectrum: Object.freeze({ label: "Dayside emission" }),
+  systemOrbits: Object.freeze({ label: "Orbits" }),
 });
 
 /** The display fields of a shell title. Its font pin and input hash are the generator's receipt and stay in its own module. */

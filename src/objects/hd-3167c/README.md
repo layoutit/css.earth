@@ -10,6 +10,8 @@ It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by hd-3167's measured colour (#ffe9dd, the colour lens of hd-3167 (src/objects/hd-3167/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of HD 3167's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-3167c.json).

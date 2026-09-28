@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "pi-menc-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/pi-menc/pi-menc-system-orbits.svg",
+      "alt": "The orbits of HD 39091's planets in this map from above, to scale, with pi Men c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "pi-menc-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

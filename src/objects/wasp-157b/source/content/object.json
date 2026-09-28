@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "wasp-157b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-157b/wasp-157b-system-orbits.svg",
+      "alt": "The orbits of WASP-157's planets in this map from above, to scale, with WASP-157 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-157b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

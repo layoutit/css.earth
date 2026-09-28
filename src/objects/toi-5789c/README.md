@@ -8,6 +8,8 @@ It is one of 4 planets known around TOI-5789. Its orbit and size follow Bonomo e
 
 **Orbit.** Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2026): P 12.927748 d Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2026): a/R* derived from its semi-major axis 0.1009 au and stellar radius 0.833 solar radii; Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2026): inclination 88.02 degrees No archive row states an eccentricity; the orbit is taken as circular Bonomo et al. 2026 (2026A&A...707A.197B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2026): transit mid-time 2460151.15868 BJD, taken as BJD_TDB Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
+**Charts.** The orbits of TOI-5789's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-5789c.json).

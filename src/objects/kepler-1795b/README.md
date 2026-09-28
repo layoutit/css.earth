@@ -10,6 +10,8 @@ It is the only planet known around Kepler-1795. Its orbit and size follow Q1-Q17
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by kepler-1795's measured colour (#ffdebc, the colour lens of kepler-1795 (src/objects/kepler-1795/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of Kepler-1795's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/kepler-1795b.json).

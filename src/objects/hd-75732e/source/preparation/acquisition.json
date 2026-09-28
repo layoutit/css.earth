@@ -18,6 +18,15 @@
       ],
       "path": "illustration/55_Cancri_e_1_24364.glb",
       "url": "https://assets.science.nasa.gov/content/dam/science/astro/exo-explore/2023/09/55_Cancri_e_1_24364.glb"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/archive-spectra/transmission.csv",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%2755+Cnc+e%27+order+by+centralwavelng&format=csv"
     }
   ]
 }

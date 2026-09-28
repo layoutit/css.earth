@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-2049b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-2049b-orbits",
+      "title": "TOI-2049 b: orbits around TOI-2049",
+      "output": "toi-2049b-system-orbits.svg",
+      "system": "toi-2049",
+      "highlight": "toi-2049b",
+      "description": "The orbits of TOI-2049's planets in this map from above, to scale, with TOI-2049 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): P 5.303468 d"
+      }
+    }
+  ]
+}

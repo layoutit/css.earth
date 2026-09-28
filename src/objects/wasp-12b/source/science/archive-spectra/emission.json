@@ -1,0 +1,172 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive emissionspec, Crossfield et al. 2012",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "Infrared Telescope Facility, SpeX",
+  "measurements": [
+    {
+      "x": 1.5375,
+      "xLow": 1.525,
+      "xHigh": 1.55,
+      "y": 0.034,
+      "minus": 0.155,
+      "plus": 0.155
+    },
+    {
+      "x": 1.5625,
+      "xLow": 1.55,
+      "xHigh": 1.575,
+      "y": 0.206,
+      "minus": 0.11,
+      "plus": 0.11
+    },
+    {
+      "x": 1.5875,
+      "xLow": 1.575,
+      "xHigh": 1.6,
+      "y": 0.204,
+      "minus": 0.086,
+      "plus": 0.086
+    },
+    {
+      "x": 1.6125,
+      "xLow": 1.6,
+      "xHigh": 1.625,
+      "y": 0.133,
+      "minus": 0.135,
+      "plus": 0.135
+    },
+    {
+      "x": 1.6375,
+      "xLow": 1.625,
+      "xHigh": 1.65,
+      "y": 0.213,
+      "minus": 0.11,
+      "plus": 0.11
+    },
+    {
+      "x": 1.6625,
+      "xLow": 1.65,
+      "xHigh": 1.675,
+      "y": 0.153,
+      "minus": 0.113,
+      "plus": 0.113
+    },
+    {
+      "x": 1.6875,
+      "xLow": 1.675,
+      "xHigh": 1.7,
+      "y": 0.195,
+      "minus": 0.117,
+      "plus": 0.117
+    },
+    {
+      "x": 1.7125,
+      "xLow": 1.7,
+      "xHigh": 1.725,
+      "y": 0.143,
+      "minus": 0.116,
+      "plus": 0.116
+    },
+    {
+      "x": 1.7375,
+      "xLow": 1.725,
+      "xHigh": 1.75,
+      "y": 0.165,
+      "minus": 0.107,
+      "plus": 0.107
+    },
+    {
+      "x": 2.0875,
+      "xLow": 2.075,
+      "xHigh": 2.1,
+      "y": 0.135,
+      "minus": 0.09,
+      "plus": 0.09
+    },
+    {
+      "x": 2.1125,
+      "xLow": 2.1,
+      "xHigh": 2.125,
+      "y": 0.308,
+      "minus": 0.046,
+      "plus": 0.046
+    },
+    {
+      "x": 2.1375,
+      "xLow": 2.125,
+      "xHigh": 2.15,
+      "y": 0.202,
+      "minus": 0.121,
+      "plus": 0.121
+    },
+    {
+      "x": 2.1625,
+      "xLow": 2.15,
+      "xHigh": 2.175,
+      "y": 0.399,
+      "minus": 0.103,
+      "plus": 0.103
+    },
+    {
+      "x": 2.1875,
+      "xLow": 2.175,
+      "xHigh": 2.2,
+      "y": 0.271,
+      "minus": 0.062,
+      "plus": 0.062
+    },
+    {
+      "x": 2.2125,
+      "xLow": 2.2,
+      "xHigh": 2.225,
+      "y": 0.286,
+      "minus": 0.073,
+      "plus": 0.073
+    },
+    {
+      "x": 2.2375,
+      "xLow": 2.225,
+      "xHigh": 2.25,
+      "y": 0.314,
+      "minus": 0.065,
+      "plus": 0.065
+    },
+    {
+      "x": 2.2625,
+      "xLow": 2.25,
+      "xHigh": 2.275,
+      "y": 0.379,
+      "minus": 0.056,
+      "plus": 0.056
+    },
+    {
+      "x": 2.2875,
+      "xLow": 2.275,
+      "xHigh": 2.3,
+      "y": 0.368,
+      "minus": 0.067,
+      "plus": 0.067
+    },
+    {
+      "x": 2.3125,
+      "xLow": 2.3,
+      "xHigh": 2.325,
+      "y": 0.348,
+      "minus": 0.077,
+      "plus": 0.077
+    },
+    {
+      "x": 2.3375,
+      "xLow": 2.325,
+      "xHigh": 2.35,
+      "y": 0.248,
+      "minus": 0.087,
+      "plus": 0.087
+    }
+  ]
+}

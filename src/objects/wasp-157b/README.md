@@ -10,6 +10,8 @@ It is the only planet known around WASP-157. Its orbit and size follow Livingsto
 
 **Colour.** No image or measured colour exists. The neutral gray is lit by wasp-157's measured colour (#fff0ea, the colour lens of wasp-157 (src/objects/wasp-157/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of WASP-157's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-157b.json).
