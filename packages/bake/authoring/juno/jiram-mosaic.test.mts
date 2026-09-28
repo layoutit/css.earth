@@ -5,7 +5,7 @@ import {join} from 'node:path';
 import {test} from 'node:test';
 import {decodeFrame, detectorMask, parseRecipe, readArchivedFrame, subtractColumnBackground} from './jiram-mosaic.mts';
 
-const recipe = parseRecipe(JSON.parse(await readFile(new URL('../../../src/objects/io/source/science/jiram/recipe.json',import.meta.url),'utf8')));
+const recipe = parseRecipe(JSON.parse(await readFile(new URL('../../../../src/objects/io/source/science/jiram/recipe.json',import.meta.url),'utf8')));
 const frame = {productId:'JIR_IMG_RDR_2023212T042659_V01',volume:'jnojir_2053'};
 const label = `PDS_VERSION_ID = PDS3
 PRODUCT_ID = ${frame.productId}
