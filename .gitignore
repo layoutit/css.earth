@@ -359,3 +359,6 @@ src/objects/*/source/**/*.bpc
 src/objects/mars/source/crust/*.dat
 # Compact native-cell GeoTIFFs, restored by the USGS acquisition recipes or source cache.
 /src/objects/*/source/science/usgs/*.tif
+
+# Netlify functions bundled by tools/cli/bundle-netlify-functions.mts during build:deploy.
+netlify/functions-bundled/
