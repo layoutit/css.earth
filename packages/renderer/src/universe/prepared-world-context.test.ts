@@ -785,7 +785,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
     orbitCenters: { 'satellite-center': { centerBodyId: parent.id, positionM: parent.positionM } } });
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])), orbitRenderer });
-  layer.selectObject(parent.id); layer.setOverview(true);
+  layer.selectObject(parent.id); layer.setOverview(true); layer.previewSelection(null);
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100, 0, 40], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 100, principalOffsetPixels: [0, 0] });
   const opacity = (id: string) => {
@@ -803,9 +803,15 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
       const actual = opacity(body.id), normal = baseline.get(body.id)!;
       expect(normal.marker).toBeGreaterThan(0); expect(normal.line).toBeGreaterThan(0);
       expect(actual.marker / normal.marker, `${id} -> ${body.id} marker`).toBeCloseTo(expected, 1);
-      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(expected, 1);
+      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(body.id === parent.id ? .25 : expected, 1);
     }
   }
+  // Finishing the preview keeps orbit emphasis in the selected system overview.
+  layer.previewSelection(parent.id); document.defaultView.advance(200);
+  const arrival = new Map(context.bodies.map(body => [body.id, opacity(body.id).line]));
+  layer.previewSelection(undefined); document.defaultView.advance(200);
+  for (const body of context.bodies) expect(opacity(body.id).line).toBeCloseTo(arrival.get(body.id)!);
+  layer.previewSelection(parent.id); document.defaultView.advance(200);
   const marker = layer.inspect().find(body => body.id === unrelated.id)!.billboard;
   marker.dataset.objectHovered = 'true'; host.dispatchEvent(new Event('objecthoverchange'));
   document.defaultView.advance(200); document.defaultView.advance(200);
