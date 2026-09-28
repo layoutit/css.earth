@@ -1,3 +1,4 @@
+import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { WorldFramePresenter } from './world-frame-presenter.js';
 import { createObjectInteractionControls } from './object-interaction-controls.js';
 import type { InteractionServices } from './object-interaction-controls.js';
@@ -111,9 +112,10 @@ export function createRetainedCubicSkyOrbit({
   };
   try {
   // One physical observer owns rotation, distance and projection.
+  const motionSignal = cameraMotionSignalFor(inputSurface);
   const perspective = createPerspectiveDolly({
     cameraPlan, worldContext, cameraElement, sceneElement, sunDirection: directionalSunPlan?.localDirection,
-    stage, viewport, ...(revealGroups ? { revealGroups } : {}), ...(canReveal ? { canReveal } : {}), canStageReveal,
+    stage, viewport, isCameraMoving: () => motionSignal.active, ...(revealGroups ? { revealGroups } : {}), ...(canReveal ? { canReveal } : {}), canStageReveal,
   }, createCameraOrientation);
   const validateWorldFrame = (frame: PreparedWorldCameraFrame) => {
     if (Math.abs(frame.metersPerUnit / (worldContext.kilometersPerUnit * 1000) - 1) > 1e-9 ||
@@ -176,6 +178,9 @@ export function createRetainedCubicSkyOrbit({
     return framePresenter.present({
       world: captured.world, viewport: captured.viewport, commit, current, fail: retireFailure }, signal);
   };
+  lifetime.onDispose(motionSignal.subscribe(({ active }) => {
+    if (!active && perspective.retainedDetail()) publish();
+  }));
   const adoptWorldCamera = (world: WorldCameraPose, frame: PreparedWorldCameraFrame, signal?: AbortSignal, departing = false) => {
     if (lifetime.disposed) return;
     try {
