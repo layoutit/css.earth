@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { detailedFocusContextOpacity } from './detailed-focus-context.js';
+import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 
 const focus = { positionM: [1e12, -2e12, 3e12] as const, framingRadiusM: 1e6 };
@@ -14,4 +14,17 @@ test('close-up context covers native arrival, smoothly restores in physical focu
   const camera = world(6.1), before = structuredClone(camera);
   expect(detailedFocusContextOpacity(camera, null)).toBe(1);
   expect(camera).toEqual(before);
+});
+
+test('body close-ups suppress distant clouds by projected size across viewports and camera lenses', () => {
+  const body = { positionM: focus.positionM, radiusM: focus.framingRadiusM };
+  for (const height of [390, 820, 1440]) {
+    const viewport = { focalPixels: height, widthPixels: height, heightPixels: height * 1.5,
+      principalOffsetPixels: [0, 0] as const };
+    expect(selectedBodyContextOpacity(world(6), viewport, body)).toBe(0);
+    expect(selectedBodyContextOpacity(world(40), viewport, body)).toBe(1);
+    const mid = selectedBodyContextOpacity(world(16), viewport, body);
+    expect(mid).toBeGreaterThan(0); expect(mid).toBeLessThan(1);
+    expect(selectedBodyContextOpacity({ ...world(16), projectionScale: 2 }, viewport, body)).toBe(0);
+  }
 });

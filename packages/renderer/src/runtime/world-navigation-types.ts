@@ -8,6 +8,7 @@ export interface ObjectWorldNavigation {
   readonly frame: PreparedWorldCameraFrame;
   /** The body's volume-equivalent radius over its longest reach when below 1 (an elongated shape model). */
   readonly framingScale?: number;
+  readonly labelEdge?: import('../navigation/prepared-label-edge.js').PreparedLabelEdge;
   /** The retained surface may differ from the current overview focus. */
   readonly detailFrame?: PreparedWorldCameraFrame;
   capture(): WorldCameraPose;

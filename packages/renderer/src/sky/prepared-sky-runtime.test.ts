@@ -18,6 +18,11 @@ import { readCanonicalPointField } from '../../../../tests/renderer/canonical-po
 import { parseLensBillboards } from '../universe/lens-billboards.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 
+// linkedom has no layout delivery; caption geometry has explicit observer tests.
+beforeEach(() => vi.stubGlobal('ResizeObserver', class {
+  observe() {} unobserve() {} disconnect() {}
+}));
+
 beforeEach(() => vi.stubGlobal('Image', class {
   src = ''; decoding = 'async'; complete = true; naturalWidth = 1; naturalHeight = 1;
   async decode() {}

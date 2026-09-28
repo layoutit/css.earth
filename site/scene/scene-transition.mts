@@ -104,7 +104,8 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
     .then(async factory => {
       if (factory.navigation && request.subject.kind !== 'overview' && request.subject.kind !== 'focus') {
         const framingScale = await factory.navigation.framingScale(request.signal);
-        if (requests.owns(request)) getWorld()?.previewSelection(object.id, framingScale);
+        const edge = await factory.navigation.labelEdge?.(request.signal);
+        if (requests.owns(request)) getWorld()?.previewSelection(object.id, framingScale, edge);
       }
       request.timing.mark('factory-ready'); return factory;
     });
