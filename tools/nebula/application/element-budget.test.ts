@@ -5,7 +5,7 @@ import { mkdtemp, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { build } from 'esbuild';
-import { bundleRendererPackage } from '../../cli/bundle-renderer.mts';
+import { bundleRendererPackage } from '@cssearth/bake/preparation';
 
 // CI invokes this file directly. Bundle the typed cases just as the preparation runner does,
 // so renderer-source .js imports resolve to their TypeScript owners without a runtime loader.
