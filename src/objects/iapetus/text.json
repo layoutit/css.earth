@@ -43,6 +43,11 @@
       "title": "VIMS flyby water-ice absorption",
       "detail": "10 Sep 2007 · Partial VIMS",
       "summary": "Water-ice absorption near 2.02 µm where Cassini observed; it does not measure ice abundance."
+    },
+    "temperature": {
+      "title": "Cassini CIRS surface temperature",
+      "detail": "31 Dec 2004 · Partial CIRS",
+      "summary": "Daytime temperatures on the dark leading side at one moment of the flyby, drawn in NASA's published colours."
     }
   }
 }

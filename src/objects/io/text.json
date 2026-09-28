@@ -41,6 +41,11 @@
       "detail": "Interpreted units",
       "summary": "Fourteen interpreted units, such as plains, lava flows, patera floors and mountains, from Voyager and Galileo."
     },
+    "elevation": {
+      "title": "Stereo terrain model",
+      "detail": "Voyager and Galileo",
+      "summary": "Stereo heights above Io's reference ellipsoid, from Voyager and Galileo pairs. About half of Io has none."
+    },
     "spectral-slope": {
       "title": "Sulfur-sensitive visible spectral slope",
       "detail": "2019 MUSE",

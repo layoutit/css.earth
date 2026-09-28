@@ -5,7 +5,9 @@
  * about equal, so the table is not a regular grid.
  *
  * Columns are read at the START_BYTE and BYTES the detached format file (^STRUCTURE) gives them, never by splitting on
- * separators: that release's readme says commas separate its fields, while its tables separate them with spaces. The
+ * separators: that release's readme says commas separate its fields, while its tables separate them with spaces. A label
+ * that describes its COLUMN objects inline, as the Dawn GRaND Ceres maps (DWNCGRD_2) do, is read the same way with no
+ * format file; a COLUMN without COLUMN_NUMBER takes its place in the label, as PDS3 allows. The
  * pixels must tile the sphere exactly as printed: bands meet edge to edge from -90 to 90, and every band's pixels meet
  * edge to edge from its first to its last longitude, 360 degrees apart. Each cell keeps its archived value; a point
  * takes the value of the pixel whose bounds contain it, and nothing is interpolated. The release declares no missing
@@ -30,7 +32,8 @@ export function pdsTableColumns(structure: string, where: string): Column[] {
       if (raw === undefined) throw new Error(`${where}: column ${index + 1} has no ${key}.`);
       return raw;
     };
-    const column = { number: Number(field('COLUMN_NUMBER')), name: unquote(field('NAME'))!, start: Number(field('START_BYTE')),
+    const numbered = pds3Keyword(block, 'COLUMN_NUMBER');
+    const column = { number: numbered === undefined ? index + 1 : Number(numbered), name: unquote(field('NAME'))!, start: Number(field('START_BYTE')),
       bytes: Number(field('BYTES')), description: unquote(pds3Keyword(block, 'DESCRIPTION')) };
     if (column.number !== index + 1 || ![column.start, column.bytes].every(n => Number.isSafeInteger(n) && n > 0)) {
       throw new Error(`${where}: column ${index + 1} (${column.name}) has COLUMN_NUMBER ${column.number}, START_BYTE ${column.start}, BYTES ${column.bytes}.`);
@@ -44,14 +47,16 @@ export interface EqualAreaTablePolicy {
   errorColumn?: string; noData?: number; noDataEvidence?: string;
 }
 
-/** Decode the pixel bounds and one value column, and check that the pixels tile the sphere. */
-export function parsePdsEqualAreaTable(label: string, structure: string, structureName: string, text: string, policy: EqualAreaTablePolicy, where: string) {
+/** Decode the pixel bounds and one value column, and check that the pixels tile the sphere. A null structure name reads the
+ * COLUMN objects from the label itself, which must then carry no ^STRUCTURE pointer. */
+export function parsePdsEqualAreaTable(label: string, structure: string, structureName: string | null, text: string, policy: EqualAreaTablePolicy, where: string) {
   const field = (key: string) => {
     const raw = pds3Keyword(label, key);
     if (raw === undefined) throw new Error(`${where}: PDS3 label has no ${key}.`);
     return unquote(raw)!;
   };
-  const columns = pdsTableColumns(structure, `${where} ${structureName}`);
+  const columns = pdsTableColumns(structureName === null ? label : structure, `${where} ${structureName ?? 'label'}`);
+  const pointer = pds3Keyword(label, '^STRUCTURE');
   const rows = Number(field('ROWS')), rowBytes = Number(field('ROW_BYTES'));
   const named = (name: string) => columns.find(column => column.name === name);
   const bounds = ['PIXEL_INDEX', 'MIN_LAT', 'MAX_LAT', 'MIN_LON', 'MAX_LON'].map(named);
@@ -61,8 +66,9 @@ export function parsePdsEqualAreaTable(label: string, structure: string, structu
     field('DATA_SET_ID') !== policy.datasetId && `DATA_SET_ID ${field('DATA_SET_ID')}, recipe ${policy.datasetId}`,
     field('PRODUCT_ID') !== policy.productId && `PRODUCT_ID ${field('PRODUCT_ID')}, recipe ${policy.productId}`,
     field('INTERCHANGE_FORMAT') !== 'ASCII' && `INTERCHANGE_FORMAT ${field('INTERCHANGE_FORMAT')}`,
-    field('^STRUCTURE').toUpperCase() !== structureName.toUpperCase() && `^STRUCTURE ${field('^STRUCTURE')}, recipe ${structureName}`,
-    Number(field('COLUMNS')) !== columns.length && `COLUMNS ${field('COLUMNS')} but ${structureName} describes ${columns.length}`,
+    structureName === null ? pointer !== undefined && `^STRUCTURE ${pointer}, but the recipe reads inline columns`
+      : unquote(pointer)?.toUpperCase() !== structureName.toUpperCase() && `^STRUCTURE ${String(pointer)}, recipe ${structureName}`,
+    Number(field('COLUMNS')) !== columns.length && `COLUMNS ${field('COLUMNS')} but ${structureName ?? 'the label'} describes ${columns.length}`,
     !(Number.isSafeInteger(rows) && rows > 0 && rows <= 1_000_000) && `ROWS ${field('ROWS')}`,
     bounds.some(column => column === undefined) && 'PIXEL_INDEX, MIN_LAT, MAX_LAT, MIN_LON or MAX_LON column missing',
     bounds.slice(1).some(column => column !== undefined && column.description === undefined) && 'a bound column without DESCRIPTION',
@@ -130,8 +136,9 @@ export function equalAreaPixel(bands: readonly Band[], longitude: number, latitu
 export async function loadPdsEqualAreaTable(root: string, value: unknown) {
   const lens = requireRecord(value, 'pds-equal-area-table lens');
   const path = requireString(lens.path, 'pds-equal-area-table lens path');
-  const labelPath = requireString(lens.labelPath, `${path} labelPath`), structurePath = requireString(lens.structurePath, `${path} structurePath`);
-  for (const file of [path, labelPath, structurePath]) if (file.startsWith('/') || file.includes('\\') || file.split('/').includes('..')) throw new Error(`${path}: ${file} escapes the source directory.`);
+  const labelPath = requireString(lens.labelPath, `${path} labelPath`);
+  const structurePath = lens.structurePath === undefined ? null : requireString(lens.structurePath, `${path} structurePath`);
+  for (const file of [path, labelPath, ...(structurePath === null ? [] : [structurePath])]) if (file.startsWith('/') || file.includes('\\') || file.split('/').includes('..')) throw new Error(`${path}: ${file} escapes the source directory.`);
   if (lens.sampling !== undefined && lens.sampling !== 'nearest') throw new TypeError(`${path}: equal-area pixels require nearest sampling.`);
   const policy: EqualAreaTablePolicy = {
     datasetId: requireString(lens.datasetId, `${path} datasetId`), productId: requireString(lens.productId, `${path} productId`),
@@ -140,8 +147,8 @@ export async function loadPdsEqualAreaTable(root: string, value: unknown) {
     ...(lens.noData === undefined ? {} : { noData: requireFiniteNumber(lens.noData, `${path} noData`), noDataEvidence: requireString(lens.noDataEvidence, `${path} noDataEvidence`) }),
   };
   const where = `${path} ${policy.column}`;
-  const [label, structure, text] = await Promise.all([labelPath, structurePath, path].map(file => readFile(resolve(root, file), 'latin1')));
-  const table = parsePdsEqualAreaTable(label!, structure!, basename(structurePath), text!, policy, where);
+  const [label, structure, text] = await Promise.all([labelPath, structurePath ?? labelPath, path].map(file => readFile(resolve(root, file), 'latin1')));
+  const table = parsePdsEqualAreaTable(label!, structure!, structurePath === null ? null : basename(structurePath), text!, policy, where);
   const transform = lens.valueTransform === undefined ? null : requireRecord(lens.valueTransform, `${where} valueTransform`);
   const scale = transform ? requireFiniteNumber(transform.scale, `${where} valueTransform.scale`) : 1;
   const offset = transform ? requireFiniteNumber(transform.offset, `${where} valueTransform.offset`) : 0;

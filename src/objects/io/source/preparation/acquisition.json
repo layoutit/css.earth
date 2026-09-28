@@ -20,6 +20,14 @@
     {
       "kind": "download",
       "groups": [
+        "refresh"
+      ],
+      "path": "science/stereo-dem/IoDEM.tif",
+      "url": "https://trek.nasa.gov/io/TrekWS/rest/cat/data/stream?uuid=7df000fc-0ba0-4c48-85fe-7ff4229c54f7"
+    },
+    {
+      "kind": "download",
+      "groups": [
         "surface-chemistry"
       ],
       "path": "muse/485nm_slope_io_night_1.fits",

@@ -80,6 +80,21 @@
       "title": "CERES18D geoid height",
       "detail": "Dawn radio science",
       "summary": "Height of the surface where a global ocean would settle, above a reference ellipsoid. It rises toward the poles."
+    },
+    "hydrogen": {
+      "title": "GRaND hydrogen",
+      "detail": "Dawn GRaND",
+      "summary": "Water-equivalent hydrogen in the top decimetres, richest toward the poles; each value blends about 600 km."
+    },
+    "iron": {
+      "title": "GRaND iron",
+      "detail": "Dawn GRaND",
+      "summary": "Iron in the top decimetres of regolith, highest near the equator; each value blends about 600 km."
+    },
+    "neutron-counts": {
+      "title": "GRaND neutron counts",
+      "detail": "Dawn GRaND",
+      "summary": "Thermal and epithermal neutrons, fewest at the poles where hydrogen is richest; each value blends about 600 km."
     }
   }
 }

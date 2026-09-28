@@ -1,0 +1,34 @@
+{
+  "id": "white-2014-io-stereo-topography",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A new stereo topographic map of Io: Implications for geology from global to local scales (White, Schenk, Nimmo and Hoogenboom 2014, JGR Planets 119, 1276-1301)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1002/2013JE004591"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/2013JE004591",
+      "label": "White et al. (2014), JGR Planets 119(6), 1276-1301"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/io/source/manifest.json",
+      "locator": "/inputs/31"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "The authors mosaicked stereo terrain models from Voyager and Galileo images and controlled them to fit the triaxial ellipsoid defined by 25 Galileo limb profiles, directly or through overlapping controlled models; the map covers about 75% of Io and differs from the limb profiles by a mean absolute 0.61 km (LPSC abstract 1534).",
+      "scope": "method",
+      "evidence": "https://www.hou.usra.edu/meetings/lpsc2014/pdf/1534.pdf"
+    }
+  ]
+}

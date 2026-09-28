@@ -10,6 +10,8 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - The Geology view uses the original `Io_GeoUnits` polygon/attribute/projection members from [USGS SIM3168](https://pubs.usgs.gov/sim/3168/), Williams et al. (2011), at 1:15,000,000.
 
+- **Elevation:** the stereo terrain model of [White et al. (2014)](https://doi.org/10.1002/2013JE004591), served by NASA's [Io Trek](https://trek.nasa.gov/io/) as "Voyager ISS and Galileo SSI DEM 1000 mpp, Global" (product `IoDEM`, [catalogue record](https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM)). Heights come from Voyager and Galileo stereo pairs fitted to Galileo limb profiles. They cover 54% of the surface.
+
 - The VLT/MUSE views use original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 
 - **Volcanic heat:** our night-side 4.8 µm map uses the registered JIRAM images, geometry and detector masks released with [Perry et al. (2025)](https://doi.org/10.3847/PSJ/adbae3), from [ASU](https://rgcps.asu.edu/juno/). It covers **58.42% of Io's spherical surface**, up from 24.12%, using 378 frames on 17 visits between July 2017 and October 2023. Color shows band radiance above a cold-column background, not temperature or total heat flow. [The recipe](source/science/jiram/perry-recipe.json) selects the release; [the measured receipt](source/science/jiram/perry-receipt.json) records screening, registration and byte identities.
@@ -59,6 +61,29 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 - Six distributed anchors, exact source hashes, hole/seam behavior, and categorical exclusion rules are exercised by the focused geology/source tests.
 
 - Focused checks are defined in the unit tests.
+
+### Stereo elevation (28 September 2026)
+
+The Elevation lens colors the Trek GeoTIFF's heights from −2 km (blue) to 6 km (dark red) and adds fixed northwest relief lighting. The shared GeoTIFF sampler reads the original Float32 values; nothing is filled or smoothed. The map is prepared lossless.
+
+What the file is. 11,500 × 5,750 Float32 samples in geographic degrees on the `GCS_Io_2015` sphere (radius 1,821,490 m), east-positive, starting at 180° W and 90° N, 0.0313° per sample (about 1 km). No-data is −3.4 × 10³⁸. Neither the file, the [Trek record](https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM) nor its [FGDC metadata](https://trek.nasa.gov/io/TrekWS/rest/cat/metadata/fgdc/html?label=IoDEM) states the height unit or datum.
+
+Units and datum. The heights are metres relative to Io's limb-profile ellipsoid, not to the header sphere:
+
+- White and Schenk's [LPSC 2014 abstract 1534](https://www.hou.usra.edu/meetings/lpsc2014/pdf/1534.pdf) describes this map: 70 stereo models from Voyager and Galileo images, fitted to the triaxial ellipsoid from 25 Galileo limb profiles (35 directly, 32 through overlapping controlled models). Plains average 0.00 km and 89.9% lie within ±1 km. The map differs from the limb profiles by 0.61 km on average.
+- Our measurement agrees: 85.3% of all samples lie within ±1,000 m. Equatorial 20° boxes at the sub-Jovian and leading points average +219 m and +378 m. Heights above a sphere would differ there by 10 km, the difference between the IAU ellipsoid's 1,829.4 and 1,819.4 km axes.
+- The journal article returned HTTP 403, so its own datum statement was not read. The [ledger](investigations.json) keeps this open.
+
+Frame check. The Gazetteer centres share the Voyager/Galileo mosaic frame of the Monochrome lens, so named mountains test the registration independently of the DEM:
+
+- 24 of 30 covered mountains, mesas, plana and tholi stand above a ring twice their radius (mean +813 m). With longitudes mirrored, 13 of 29 do (mean +40 m).
+- Shifting all centres, the score peaks at 0 to −0.5° in longitude and 0 to +1° in latitude. Features hundreds of kilometres wide limit this check to about a degree (30 km).
+- The highest sample, 16,942 m at 88.83° E, 9.88° S, lies inside the Gazetteer extent of [Boösaule Montes](https://planetarynames.wr.usgs.gov/Feature/854).
+- The first and last columns differ by 6 m on average, so the map wraps across 180°.
+
+Coverage. Valid heights cover 53.8% of the sphere by area (45.5% of grid cells), from the south pole to 66.8° N. Trek and the abstract say about 75%; the difference is unexplained. The display range holds 99.7% of the covered area: 0.14% lies below −2 km and 0.19% above 6 km, mostly the tallest mountains.
+
+The recipe was checked with the shared validators and sampler (a 1024 × 512 dry run); the lead bake prepares the delivered images. The Trek slope, hillshade and color renderings are derived from this DEM and are not added; the [ledger](investigations.json) records why.
 
 ### Registered volcanic heat (27 September 2026)
 
@@ -244,6 +269,7 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 
 - **Geology source audit:** The separate label-point layer differs from final polygon classifications at 43 of 1,498 comparable points.
 
+- **Elevation covers 54% of Io,** none north of 66.8° N. Plains were smoothed with large stereo patches, so fine relief on the plains is not resolved; mountains, layered plains and some paterae keep finer detail. Heights are color only; the globe is not displaced.
 - The scene is a mean-radius sphere, not a topographic shape model.
 
 - **Volcanic heat covers about 58% of Io's surface.** Only qualified night-side observations are kept, reaching about 50°S. Gray grid marks missing and withheld measurements.
@@ -272,7 +298,7 @@ Io is Jupiter's innermost Galilean moon. The scene uses the shared standalone ob
 
 The vendored astronomy package supplies Io's 1821.49 km mean radius, IAU/WGCCRE body rotation and JPL parent-relative orbit. Solar and sky directions use the shared J2000 ICRF/ecliptic registration and the same prepared presentation frame as the body.
 
-NASA's [Io facts](https://science.nasa.gov/jupiter/jupiter-moons/io/facts/) support the introduction and facts: intense tidal volcanism, synchronous rotation, roughly 422,000 km distance from Jupiter, and a thin sulfur-dioxide atmosphere. The atmosphere does not justify a visible halo, so none is rendered. No simulated lava, plume, thermal measurement or elevation lens is supplied.
+NASA's [Io facts](https://science.nasa.gov/jupiter/jupiter-moons/io/facts/) support the introduction and facts: intense tidal volcanism, synchronous rotation, roughly 422,000 km distance from Jupiter, and a thin sulfur-dioxide atmosphere. The atmosphere does not justify a visible halo, so none is rendered. No simulated lava or plume is supplied.
 
 ## Observed surfaces
 

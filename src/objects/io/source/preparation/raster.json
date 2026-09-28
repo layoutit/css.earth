@@ -206,6 +206,69 @@
       }
     },
     {
+      "id": "elevation",
+      "output": "io-{id}{suffix}.webp",
+      "thumbnail": "io-lens-{id}.webp",
+      "source": "science/stereo-dem/IoDEM.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "science/stereo-dem/IoDEM.tif",
+        "consumer": "elevation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "description": "Voyager and Galileo stereo terrain model · shaded relief",
+        "title": "Stereo heights from Voyager and Galileo image pairs, fitted to Galileo limb profiles (White et al. 2014). Heights follow Io's limb-profile ellipsoid, not a sphere. Plains were smoothed; mountains, layered plains and some paterae keep finer relief. Color saturates below −2 km and above 6 km; Boösaule Montes reaches 16.9 km. Fixed northwest relief lighting shows slopes. Gray grid marks the 46% of Io without stereo heights.",
+        "sourceUrl": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
+        "minimum": -2000,
+        "maximum": 6000,
+        "colors": [
+          "#1c5599",
+          "#bbab80",
+          "#c9833f",
+          "#aa3e24",
+          "#5c1a12"
+        ],
+        "labels": [
+          "−2",
+          "0",
+          "2",
+          "4",
+          "6"
+        ],
+        "units": "km",
+        "grid": {
+          "width": 11500,
+          "height": 5750,
+          "coordinates": "degrees",
+          "origin": [
+            -180,
+            90
+          ],
+          "resolution": [
+            0.031304347826087,
+            -0.031304347826087
+          ],
+          "referenceRadiusMeters": 1821490,
+          "centerLongitude": 0,
+          "wrapLongitude": true,
+          "noData": -3.4028234663852886e+38
+        },
+        "relief": {
+          "referenceRadiusMeters": 1821490,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    },
+    {
       "id": "spectral-slope",
       "output": "io-{id}{suffix}.webp",
       "thumbnail": "io-lens-{id}.webp",

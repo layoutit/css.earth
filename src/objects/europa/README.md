@@ -18,7 +18,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - The VLT/SPHERE composition release of [King, Fletcher and Ligier (2022)](https://doi.org/10.3847/PSJ/ac596d) is pinned as [Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904). [reflectance-conversion.json](source/composition/reflectance-conversion.json) and [model-conversion.json](source/composition/model-conversion.json) bind the exact source bytes and converted fields. Its **Ice signature**, **Fine ice** and **Coarse ice** views are withheld from publication until reuse terms for the numerical data are explicit (see Known problems).
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figures PIA00846, PIA01098 and PIA26104 were checked on 2026-09-28 as possible map views. None qualified: each lacks a labelled map grid, a colour scale with units, or both. The ledger gives the reason for each.
 
 ## Evidence
 
