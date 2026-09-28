@@ -39,8 +39,9 @@ export interface WorldContextPointSource {
 /** `contextColor`: the colour its marker, orbit and caption take in the world, prepared from its swatch or catalogue colour
  * (`contextColour` in @cssearth/objects). `labelCase: 'upper'`: a star, black hole or planet, captioned in capitals. */
 /** `plainDot`: an asteroid that is not a map target (not a mission target, no real imagery). The world draws it as a plain
- * dot, and the planner reads its path only when it is named. */
-type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true };
+ * dot, and the planner reads its path only when it is named. `dotColor`: a star's colour dimmed by its luminosity, from its
+ * package's cited radius and effective temperature. */
+type WorldContextPresentation = { readonly contextColor?: string; readonly labelCase?: 'upper'; readonly classification?: string; readonly systemName?: string; readonly discovery?: Readonly<Record<string, unknown>>; readonly plainDot?: true; readonly dotColor?: string };
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 export interface VolumeOpacityProfile {
   readonly model: 'logarithmic-distance';
@@ -106,6 +107,7 @@ export interface PreparedWorldContext {
     readonly systemName?: string;
     readonly discovery?: Readonly<Record<string, unknown>>;
     readonly plainDot?: true;
+    readonly dotColor?: string;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
@@ -133,7 +135,8 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
     return { ...(value.contextColor === undefined ? {} : { contextColor: color(value.contextColor) }), ...(value.labelCase === 'upper' ? { labelCase: 'upper' as const } : {}),
       ...(value.classification === undefined ? {} : { classification: String(value.classification) }), ...(value.systemName === undefined ? {} : { systemName: text(value.systemName, `${label} system name`) }),
       ...(value.discovery === undefined ? {} : { discovery: freeze({ ...record(value.discovery, `${label} discovery`) }) }),
-      ...(value.plainDot === undefined ? {} : value.plainDot === true ? { plainDot: true as const } : (() => { throw new TypeError(`${label} plain dot is true or absent.`); })()) };
+      ...(value.plainDot === undefined ? {} : value.plainDot === true ? { plainDot: true as const } : (() => { throw new TypeError(`${label} plain dot is true or absent.`); })()),
+      ...(value.dotColor === undefined ? {} : { dotColor: color(value.dotColor) }) };
   };
   const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot'], 'world context focus');
   const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
@@ -141,7 +144,7 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const fromCatalog = input.bodies === 'catalog';
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
-    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot'], `world context body ${index}`);
+    const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot', 'dotColor'], `world context body ${index}`);
     if (body.labelPlacement !== undefined && body.labelPlacement !== 'centre') throw new TypeError(`World context body ${index} label placement is ${String(body.labelPlacement)}, not centre.`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     if (body.unpackaged !== undefined && body.unpackaged !== true) throw new TypeError('World context unpackaged is true or absent.');

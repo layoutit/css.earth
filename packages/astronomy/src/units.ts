@@ -16,6 +16,7 @@ export const M_PER_MPC = M_PER_PC * 1e6
 export const SOLAR_MASS_KG = 1.98892e30
 export const SOLAR_RADIUS_M = 6.957e8
 export const SOLAR_LUMINOSITY_W = 3.828e26
+export const SOLAR_EFFECTIVE_TEMPERATURE_K = 5772
 
 /** Speed of light, exact by definition. */
 export const C_M_PER_S = 299792458
