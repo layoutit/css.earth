@@ -333,6 +333,19 @@
         "https://science.nasa.gov/photojournal/map-of-ceres-bright-spots/",
         "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21914/PIA21914.tif"
       ]
+    },
+    {
+      "id": "alma-265ghz-thermal-images",
+      "subject": "ALMA Ceres Imaging and Spectrum V1.0 (urn:nasa:pds:gbo.ast-ceres.alma.images-spectra::1.0): 265 GHz thermal images as a surface lens",
+      "status": "excluded",
+      "finding": "All 86 calibrated 12-m images (3 epochs: 40 in Oct-Nov 2015, 31 in Sep 2017, 15 in Oct 2017) and the three imaging_parameters tables were read. From the tabulated beam axes and geocentric range, the beam at Ceres is 77-111 km x 63-86 km in 2015, 51-98 x 40-60 km in Sep 2017 and 47-78 x 31-41 km in Oct 2017 (geometric mean 38-96 km). Against the 939.4 km diameter this is 10-25 beams across the disc, about 67-430 beams per disc by area, matching the 10-20 beams the data description states. The app's Dawn 140 m map is 270-690 times finer. Each epoch covers a full rotation (largest sub-Earth longitude gap 55, 62 and 123 degrees; 31 degrees for all epochs combined), but sub-Earth latitude stays between +6.4 and -1.0 degrees, so the poles are only seen at the limb. The disc is dominated by a smooth limb-darkening and diurnal pattern that changes with local time, not location: it spans a median 51%, 31% and 23% of mean disc brightness per epoch. After removing a degree-4 smooth fit inside 0.85 R, the leftover structure is 2.9%, 1.2% and 1.6% RMS (median). The off-disc RMS is 5.4%, 1.1% and 1.5%, and the data description gives 3%, 1% and 2% as imaging artifacts. Surface-fixed test: residual maps rotated to Ceres north and compared between independent epochs looking at the same longitude (within 8 degrees) correlate at median r = 0.04 (n = 101; 0.05 for Sep vs Oct 2017 alone, n = 17). Pairs looking at opposite sides give r = 0.06 (n = 1178). Within one epoch r = 0.61, so the leftover pattern belongs to each epoch's imaging, not to the ground. A surface-fixed thermal map would show about 40-100 km blobs at the artifact level, with no feature that repeats between epochs. Li et al. (2020), the bundle's own paper, reports disc-integrated properties only. The lightcurves and spectrum are disc-integrated and have no surface to map onto. Nothing readable is added to Ceres' surface.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-ceres.alma.images-spectra_V1_0/",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-ceres.alma.images-spectra_V1_0/document/data_description.pdfa.pdf",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-ceres.alma.images-spectra_V1_0/data/imaging_parameters/",
+        "https://doi.org/10.3847/1538-3881/ab8305"
+      ],
+      "revisitWhen": "A published resolved thermal-inertia or emissivity map of Ceres from these ALMA data, or a new ALMA epoch whose surface-fixed residuals repeat between independent epochs."
     }
   ]
 }
