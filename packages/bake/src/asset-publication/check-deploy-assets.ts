@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
-import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry } from '../objects/sources/index.ts';
 import { parsePreparedSystemView, parsePreparedWorldContextSummary } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 const execFileAsync = promisify(execFile);
@@ -32,12 +32,16 @@ export function unknownRuntimeAssetUrls(referenced: readonly string[], inventori
   return [...new Set(referenced.filter(url => !inventoried.has(url)))].sort();
 }
 
+/** A dropped connection is retried, as the asset restore retries it; a read that still fails names its URL. */
+async function readPublishedText(url: string): Promise<string> {
+  try { return (await fetchWithRetry(fetch, url)).toString('utf8'); }
+  catch (cause) { throw new Error(`Could not read ${url}.`, { cause }); }
+}
+
 /** The site reads the Sun's world summary and each system's views as published, from their inventory hashes, while builds
  * regenerate them locally. A set re-pinned apart (2026-09-24: 48 systems, 44 views) passes every local build and breaks
  * in-app navigation, so every system the published summary names must have its published views, and they must parse. */
-export async function checkPublishedWorldPair(root: string, fetchText: (url: string) => Promise<string> = async url => {
-  const response = await fetch(url); if (!response.ok) throw new Error(`${url}: ${response.status}`); return response.text();
-}) {
+export async function checkPublishedWorldPair(root: string, fetchText: (url: string) => Promise<string> = readPublishedText) {
   const [summaryAsset] = await inventoryAssets(root, ['sun'], { location: 'prepared', filenames: ['world-context-summary.json'] });
   if (!summaryAsset) throw new Error('The Sun inventory lacks world-context-summary.json.');
   const summary = parsePreparedWorldContextSummary(JSON.parse(await fetchText(summaryAsset.url)));
@@ -49,8 +53,8 @@ export async function checkPublishedWorldPair(root: string, fetchText: (url: str
   if (missing.length) throw disagree(`the inventory lacks ${missing.join(', ')}.`);
   for (let start = 0; start < hosts.length; start += 16) {
     await Promise.all(hosts.slice(start, start + 16).map(async id => {
-      const asset = assets.find(entry => entry.filename === `system-views/${id}.json`)!;
-      try { parsePreparedSystemView(JSON.parse(await fetchText(asset.url)), summary, id); }
+      const asset = assets.find(entry => entry.filename === `system-views/${id}.json`)!, text = await fetchText(asset.url);
+      try { parsePreparedSystemView(JSON.parse(text), summary, id); }
       catch (error) { throw disagree(error instanceof Error ? error.message : String(error)); }
     }));
   }
