@@ -719,3 +719,31 @@ test('destination orbit fading completes during approach, before the detail sele
   input.selectedId = target.id; input.selectionPreview = undefined; input.navigationInFlight = false;
   expect(sample(.35)).toEqual(arrived);
 });
+
+// The app's own tiers from each body's classification, and the app's naming rule: of the stars beyond the Sun only one is named.
+async function namedAlphaCentauri() {
+  const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
+  const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
+  const points = [plan.focus, ...plan.bodies];
+  const priorities = Object.fromEntries(points.map(body => [body.id, labelImportance(kinds.get(body.id) ?? 'star')]));
+  const input = view();
+  for (const [index, body] of points.entries()) input.bodies[index]!.labelHidden = kinds.get(body.id) === 'star' && body.id !== 'alpha-centauri-a' && body.id !== plan.focus.id;
+  return { calculate: createWorldContextPlanner(plan, priorities), input, index: points.findIndex(body => body.id === 'alpha-centauri-a') };
+}
+
+test('a notable star beyond the Solar System is named before the Solar System comets once the label cap is full', async () => {
+  const { calculate, input, index } = await namedAlphaCentauri();
+  const frame = calculate(input), star = frame.projectedBodies.find(body => body.index === index)!;
+  expect(frame.projectedBodies.filter(body => body.labelShown).length, 'the cap is full').toBe(24);
+  expect(star.labelShown, 'Alpha Centauri A outranks the comets that filled the cap').toBe(true);
+});
+
+test('past the Local Group scale the stars give their names to the galaxies', async () => {
+  const { calculate, input } = await namedAlphaCentauri();
+  const named = (parsecs: number) => {
+    input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
+    return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+  };
+  expect(named(200e3), 'from 200 kpc, short of the Local Group scale, the Sun and Sgr A* keep their names').toEqual(expect.arrayContaining(['sun', 'sgr-a-star']));
+  expect(named(1e6), 'from 1 Mpc no star or planet is named').toEqual([]);
+});

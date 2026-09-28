@@ -6,6 +6,10 @@ export const UNIVERSE_LABEL_POLICY = Object.freeze({
   minimumExtentPixels: 12, fullExtentPixels: 48, spacingPixels: 3,
 });
 
+/** Where the Local Group scale begins: a camera moving out passes 300 kpc, one coming back 240 kpc (a UI threshold, not a
+ * physical boundary). Past it the galaxies are the named objects, and a star's name fades over the same band. */
+export const LOCAL_GROUP_SCALE = Object.freeze({ returnDistanceM: 240e3 * 3.085677581491367e16, enterDistanceM: 300e3 * 3.085677581491367e16 });
+
 export function labelEligible(facts: { named?: boolean; notable?: boolean }): boolean {
   return facts.named === true || facts.notable === true;
 }
