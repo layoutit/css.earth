@@ -55,7 +55,7 @@ export function createApplicationWorldContext() {
           sources: prepared.catalogSources, windowTarget }));
         lifetime.onDispose(suppressMinorMoonOrbitPaint(presentationHost, worldVisibilityPolicy.minorMoonIds));
         const planner = own(prepared.createFramePlanner());
-        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld()));
+        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
           heliosphereEnabled: () => heliosphereEnabled }));

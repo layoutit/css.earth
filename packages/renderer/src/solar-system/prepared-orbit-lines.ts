@@ -27,11 +27,11 @@ export interface PreparedOrbitLines {
   destroy(): void;
 }
 /** `color`: an orbit's own colour, for a body no swatch stylesheet colours (one drawn from its astronomy record). */
-export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, capacity = 0, id, color }:
-  { renderer?: OrbitRenderer; dashed?: boolean; capacity?: number; id?: string; color?: string } = {}): PreparedOrbitLines {
+export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, capacity = 0, id, color, depthBase = 0 }:
+  { renderer?: OrbitRenderer; dashed?: boolean; capacity?: number; id?: string; color?: string; depthBase?: number } = {}): PreparedOrbitLines {
   // An orbit-less body's root is never inserted; it has nothing to share.
   if (color) host.style.color = color;
-  return renderer === 'strokes' && host.parentElement ? mountOrbitStrokes(host, dashed, id, color) : mountOrbitBars(host, capacity);
+  return renderer === 'strokes' && host.parentElement ? mountOrbitStrokes(host, dashed, depthBase, id, color) : mountOrbitBars(host, capacity);
 }
 
 /** Fixed unit-line instances, bound once; each publication writes only the slots
@@ -70,14 +70,14 @@ export const ORBIT_OPACITY_LEVELS = 16;
  * coordinates are already centred screen pixels. A zero viewport would disable
  * SVG rendering, so it is 1×1. */
 const sharedSvgs = new WeakMap<Element, SVGSVGElement>();
-function sharedSvg(host: HTMLElement): SVGSVGElement {
+function sharedSvg(host: HTMLElement, depthBase: number): SVGSVGElement {
   const root = host.parentElement!.closest('.prepared-world-context') ?? host.parentElement!;
   let svg = sharedSvgs.get(root);
   if (!svg || !svg.isConnected) {
     svg = host.ownerDocument.createElementNS(SVG, 'svg');
     svg.setAttribute('class', 'context-orbit-strokes'); svg.setAttribute('width', '1'); svg.setAttribute('height', '1'); svg.setAttribute('aria-hidden', 'true');
     // Composited once: every orbit paints into this one layer instead of earning its own by overlap.
-    svg.style.cssText = 'position:absolute;left:50%;top:50%;overflow:visible;pointer-events:none;will-change:transform;z-index:var(--world-depth-base,0)';
+    svg.style.cssText = `position:absolute;left:50%;top:50%;overflow:visible;pointer-events:none;will-change:transform;z-index:${depthBase}`;
     root.appendChild(svg); sharedSvgs.set(root, svg);
   }
   return svg;
@@ -87,13 +87,13 @@ function sharedSvg(host: HTMLElement): SVGSVGElement {
  * invalidates layout and paint only, never style. Only a run whose points changed
  * is written. The group carries the orbit id, so the published swatch rules colour
  * it like its marker, and an approximate placement dashes it by stylesheet. */
-function mountOrbitStrokes(host: HTMLElement, dashed: boolean, id?: string, color?: string): PreparedOrbitLines {
+function mountOrbitStrokes(host: HTMLElement, dashed: boolean, depthBase: number, id?: string, color?: string): PreparedOrbitLines {
   const document = host.ownerDocument, group = document.createElementNS(SVG, 'g');
   if (id) group.dataset.contextOrbit = id;
   if (color) group.style.color = color;
   if (dashed) group.dataset.contextPlacement = 'approximate';
   group.style.display = 'none';
-  sharedSvg(host).appendChild(group);
+  sharedSvg(host, depthBase).appendChild(group);
   const elements: SVGPolylineElement[] = [];
   // Each run keeps its last coordinates as numbers, never as the string it wrote:
   // a retained string per run per frame would outlive a young-generation scavenge
