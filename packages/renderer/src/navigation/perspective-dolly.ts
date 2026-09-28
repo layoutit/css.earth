@@ -49,9 +49,12 @@ export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['pre
 // pointer leaves its disc, which at a far dolly (the body a few pixels wide,
 // the disc a fifth of the viewport) is nearly everywhere: measured as a
 // 0.99 roll share and 11-27 degrees per 240 px stroke off-centre against
-// 82 degrees of pure tumble at the centre. Rotation itself is unbounded on
-// every path; the control pitch anchors in the plan calibrate the affine
-// control-to-scene map and clamp nothing.
+// 82 degrees of pure tumble at the centre. A body's tumble turns about its own
+// pole and across it rather than about the screen axes, as Cesium holds a globe
+// to its axis, so drags never roll the pole (engine pole-drag.ts). Turns about
+// the pole are unbounded; the tilt stops with the pole facing the eye. The
+// control pitch anchors in the plan calibrate the affine control-to-scene map
+// and clamp nothing.
 //
 // The world context supplies the authored physical extent and publishes the
 // same eye to the retained contextual layers.
