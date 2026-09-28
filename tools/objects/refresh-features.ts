@@ -7,7 +7,7 @@ import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
+import { attachSurfaceFeatures, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
 import { parseRuntimeManifest } from '@cssearth/bake/delivery';
 

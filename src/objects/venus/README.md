@@ -166,7 +166,7 @@ independently with NumPy and h5py. As a standing guard, the reader also checks
 the grid's least-incidence cell against the product's own header and refuses any
 exposure that disagrees by more than 0.15°.
 
-**Processing.** `tools/objects/akatsuki/uvi-l3b.mts` reads the NetCDF-4 file with
+**Processing.** `packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts` reads the NetCDF-4 file with
 h5wasm, the HDF5 reader this repository already uses for NOAA's CoralTemp grid;
 its decode was checked bitwise identical against h5py 3.16.0 on HDF5 2.0.0 for
 the radiance, incidence and both axis arrays, with a maximum absolute difference

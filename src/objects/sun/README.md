@@ -55,7 +55,7 @@ preparation typechecks passed. Two wider checks skipped unrelated missing inputs
 inventory. No full application build or all-body suite is claimed.
 
 The 193 Å addition and AIA gap repair use the same CR2311 geometry and existing renderer.
-The [FITS map tests](../../../tools/objects/observation/fits-map.test.mts) check north/south
+The [FITS map tests](../../../tests/objects/interpretation/fits-map.test.mts) check north/south
 pixel centres, preserved zero and negative values, floating-point BLANK handling, native
 byte anchors, common observation dates and transparent off-limb plates. The prior row
 rounding displaced nearest-neighbour samples by half a source pixel; centre-based flooring

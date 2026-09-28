@@ -8,7 +8,7 @@ A cool white dwarf 24.76 parsecs away, about 1.3 times Earth's size, with a gian
 
 The white dwarf has no radial velocity of its own: its spectrum has no lines. The record uses the mean of Gaia DR3's values for its two co-moving companions, G 229-20 A and B (17.29 km/s), and says so.
 
-Gaia DR3 publishes only the continuous BP/RP coefficients for this star. They are sampled on the archive's 336–1020 nm grid with GaiaXPy 2.1.4 ([`xp-continuous-sample.py`](../../../tools/objects/observation/xp-continuous-sample.py)), the TRAPPIST-1 route. The shared stellar-colour preparer integrates the sampled spectrum against the CIE 1931 observer. Signal-to-noise is about 2 at 380 nm and 17 to 34 from 500 to 780 nm.
+Gaia DR3 publishes only the continuous BP/RP coefficients for this star. They are sampled on the archive's 336–1020 nm grid with GaiaXPy 2.1.4 ([`xp-continuous-sample.py`](../../../packages/bake/src/objects/stellar/xp-continuous-sample.py)), the TRAPPIST-1 route. The shared stellar-colour preparer integrates the sampled spectrum against the CIE 1931 observer. Signal-to-noise is about 2 at 380 nm and 17 to 34 from 500 to 780 nm.
 
 ## Evidence
 

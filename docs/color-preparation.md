@@ -149,7 +149,7 @@ stretch, not from calibration.
 The shared [Lupton et al. (2004)](https://doi.org/10.1086/382245) asinh display then
 maps the mean of the normalized bands and scales every band by the same factor.
 Pixels brighter than the display are scaled down as a whole, which keeps their hue.
-`tools/objects/color-transfer.oracle.test.mts` matches every byte of Astropy's
+`tests/objects/color/color-transfer.oracle.test.mts` matches every byte of Astropy's
 `make_lupton_rgb` for color and one-band cases.
 
 The WISE HiPS maps carry a separate level for each atlas tile, which shows as

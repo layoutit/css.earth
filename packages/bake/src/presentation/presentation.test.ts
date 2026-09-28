@@ -3,7 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { prepareCssPresentation, parsePresentationProfile } from './css-presentation.ts';
-import { presentationHostAdapters } from '../../../../tools/objects/geometry-adapters.ts';
+import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
+import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from './types.ts';
 
 const root = resolve(import.meta.dirname, '../../../..');
@@ -22,7 +23,7 @@ describe('retained presentation compiler compatibility', () => {
       read(`src/objects/${id}/source/presentation/solar-system.json`),
     ]);
     const input = { ...profile, scene, assets, lenses, sun, markers, controls, solarSource } as PresentationInputs;
-    const prepared = await prepareCssPresentation(input, presentationHostAdapters);
+    const prepared = await prepareCssPresentation(input, presentationHostAdapters(solarGeometry));
     // Runtime finalization adds motion/facing and can update marker/warm-bank
     // metadata. Compare compiler-owned structure, then every raw output byte
     // against the independently executed pre-migration JavaScript helpers.

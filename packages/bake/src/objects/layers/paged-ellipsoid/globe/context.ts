@@ -15,7 +15,7 @@ import type { SolarGeometry } from '../../../scene/index.ts';
 const json = readJsonSource;
 
 /** Read and check a paged ellipsoid's recipe and sources, and plan its scene. The preparation and each of its parallel
- * asset workers (tools/objects/paged-ellipsoid/asset-worker.mts) build their context here, so every stage reads the same inputs. */
+ * asset workers (packages/bake/cli/paged-ellipsoid-asset-worker.mts) build their context here, so every stage reads the same inputs. */
 export async function readPagedEllipsoid(solarGeometry: SolarGeometry, objectDirectory: string) {
   const { descriptor, entries, sources } = await readAuthoredSources(objectDirectory);
   const required = (id: string) => { const source = sources.get(id); if (!source) throw new TypeError(`Paged ellipsoid requires ${id}.`); return source.value; };

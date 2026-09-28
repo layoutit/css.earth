@@ -6,7 +6,7 @@ import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import sharp from 'sharp';
 import {imageFixture} from '../fixtures/fits/helpers.mts';
-import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '../../tools/objects/giant-observations/index.mts';
+import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '@cssearth/bake/objects/layers/giant';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '@cssearth/bake/objects/layers/giant';
 const sourceDirectory=new URL('../../src/objects/jupiter/source/',import.meta.url).pathname;

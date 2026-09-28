@@ -8,7 +8,7 @@ import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createProjectiveSurfaceRasterLayout } from '@cssearth/bake/scene';
 import { latitudeRasterBands } from '@cssearth/bake/objects/layers/giant';
-import { preparePagedSurfaceMap } from '../objects/paged-ellipsoid/assets.mts';
+import { preparePagedSurfaceMap } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 
 // Reverse only the declared lossless packing, before downsizing. Unrepresented
 // polar rows stay transparent; a polar sprite is not an equirectangular map.
