@@ -1,0 +1,30 @@
+{
+ "id": "epic-206426057",
+ "classification": "star",
+ "order": 2490,
+ "physical": {
+  "name": "EPIC 206426057",
+  "horizonsCode": null,
+  "meanRadiusKm": 5677607.7,
+  "gravitationalParameterKm3PerS2": 144351321033.61743,
+  "parent": null,
+  "effectiveTemperatureK": 4635
+ },
+ "physicalNotes": "Radius 8.161 +/- 0.3944 solar radii from Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 206426057 (K2 campaign 3): PARAM radius (solar radii) 8.161023 (16th-84th percentiles 7.776372-8.56525), MA09 pipeline with GALAH DR3 (https://doi.org/10.1051/0004-6361/202346196): 5,677,608 km at 695,700 km per solar radius. Mass 1.0877 +/- 0.1276 solar masses from Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 206426057 (K2 campaign 3): PARAM mass (solar masses) 1.087653 (16th-84th percentiles 0.965965-1.221175), MA09 pipeline with GALAH DR3 (https://doi.org/10.1051/0004-6361/202346196); GM is that mass times the JPL solar GM. Temperature 4635 +/- 109 K from Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 206426057: GALAH DR3 effective temperature 4635.134 +/- 109 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 332.93406899009165,
+  "declinationDegrees": -6.199140562483702,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 2885.3,
+  "properMotionRaMasPerYear": -4.777735295794378,
+  "properMotionDecMasPerYear": -2.771716548532278,
+  "radialVelocityKmPerS": -33.584576,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2620709608599541632 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/epic-206426057/source/photometry/gaia-dr3-source.csv",
+   "distance": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 206426057 (K2 campaign 3): PARAM asteroseismic distance (pc) 2885.3125 (16th-84th percentiles 2761.914062-3003.203125), MA09 pipeline with GALAH DR3 (https://doi.org/10.1051/0004-6361/202346196): 2885.3 +/- 120.6 pc; Gaia DR3 parallax 0.3467 +/- 0.0194 mas (same row, RUWE 0.97), 17.8 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -4.778, -2.772 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -33.58 +/- 2.34 km/s"
+  }
+ }
+}

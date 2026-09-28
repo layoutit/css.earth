@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "epic-247172620",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4737,
+      "lowerKelvin": 4610,
+      "upperKelvin": 4864,
+      "citation": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 247172620: GALAH DR3 effective temperature 4737.206 +/- 127 K (the catalogue's final uncertainty): 4737 +/- 127 K, https://doi.org/10.1051/0004-6361/202346196"
+    },
+    "note": "PARAM fits an extinction A_V = 0.31 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_gal, AV-M), and the colour routes do not remove extinction; GALAH measured its temperature, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

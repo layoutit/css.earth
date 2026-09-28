@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "epic-216786105",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4084775792744278528: position at J2016.0. Distance: Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 216786105 (K2 campaign 7): PARAM asteroseismic distance (pc) 3373.007812 (16th-84th percentiles 3252.5-3492.578125), MA09 pipeline with GALAH DR3 (https://doi.org/10.1051/0004-6361/202346196): 3373 +/- 120 pc; Gaia DR3 parallax 0.2983 +/- 0.0178 mas (same row, RUWE 0.92), 16.8 standard errors, is not used. Proper motion: Gaia DR3 (same row): -1.908, -4.157 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202346196"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 10.1374 +/- 0.4534 solar radii from Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 216786105 (K2 campaign 7): PARAM radius (solar radii) 10.137431 (16th-84th percentiles 9.702392-10.609236), MA09 pipeline with GALAH DR3 (https://doi.org/10.1051/0004-6361/202346196). Mass 1.0228 +/- 0.1083 solar masses from Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 216786105 (K2 campaign 7): PARAM mass (solar masses) 1.022799 (16th-84th percentiles 0.922358-1.139012), MA09 pipeline with GALAH DR3 (https://doi.org/10.1051/0004-6361/202346196). Temperature 4665 +/- 130 K from Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 216786105: GALAH DR3 effective temperature 4665.3467 +/- 130 K (the catalogue's final uncertainty).",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202346196"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,665 K, because pARAM fits an extinction A_V = 0.63 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_gal, AV-M), and the colour routes do not remove extinction; GALAH measured its temperature, through the CIE 1931 2-degree observer: #ffe1c3. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202346196"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,665 K and log g 2.44 (u1 0.725, u2 0.076): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

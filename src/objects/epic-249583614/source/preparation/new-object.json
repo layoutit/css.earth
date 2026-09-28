@@ -1,0 +1,56 @@
+{
+  "id": "epic-249583614",
+  "name": "EPIC 249583614",
+  "system": "EPIC 249583614 system",
+  "description": "A red giant in K2 campaign 15, 13.3 solar radii and 0.80 solar masses, weighed by its oscillations.",
+  "target": "EPIC 249583614",
+  "gaia": "6241758396551628160",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "credit": "Khan et al. (2023), A&A 677, A21"
+  },
+  "radius": {
+    "value": 13.2501,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 249583614 (K2 campaign 15): PARAM radius (solar radii) 13.250069 (16th-84th percentiles 12.720844-13.943873), MA09 pipeline with GALAH DR3",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.6115
+  },
+  "mass": {
+    "value": 0.7997,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 249583614 (K2 campaign 15): PARAM mass (solar masses) 0.799745 (16th-84th percentiles 0.725429-0.89826), MA09 pipeline with GALAH DR3",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.0864
+  },
+  "temperature": {
+    "value": 4734,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 249583614: GALAH DR3 effective temperature 4734.411 +/- 172 K (the catalogue's final uncertainty)",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 172
+  },
+  "distance": {
+    "value": 5997.3,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 249583614 (K2 campaign 15): PARAM asteroseismic distance (pc) 5997.265625 (16th-84th percentiles 5794.0625-6230.78125), MA09 pipeline with GALAH DR3",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 218.4
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "PARAM fits an extinction A_V = 0.39 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_gal, AV-M), and the colour routes do not remove extinction; GALAH measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A red giant 5,997 parsecs away, 13 times the Sun's width, weighed by its starquakes.",
+    "introduction": "Its oscillations, recorded in K2 campaign 15, give 0.80 solar masses and 13.3 solar radii; GALAH spectra give 4,734 K at its surface.",
+    "locator": "k2_gal, EPIC 249583614: Mass-M, Rad-M, Dist-M, Teff-G"
+  },
+  "notes": [],
+  "order": 2451
+}

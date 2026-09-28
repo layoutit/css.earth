@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "tic-150273833",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5482573414598380800: position at J2016.0. Distance: Khan et al. (2023), A&A 677, A21, tess_apo, TIC 150273833 (observed by TESS): PARAM asteroseismic distance (pc) 1001.728516 (16th-84th percentiles 981.445312-1022.490234), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 1001.7 +/- 20.5 pc; Gaia DR3 parallax 0.9782 +/- 0.0096 mas (same row, RUWE 0.96), 102.4 standard errors, is not used. Proper motion: Gaia DR3 (same row): 6.681, 13.834 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202346196"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 14.5512 +/- 0.4738 solar radii from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 150273833 (observed by TESS): PARAM radius (solar radii) 14.551231 (16th-84th percentiles 14.082955-15.030505), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). Mass 1.0103 +/- 0.0937 solar masses from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 150273833 (observed by TESS): PARAM mass (solar masses) 1.010286 (16th-84th percentiles 0.91983-1.107219), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). Temperature 4591 +/- 50 K from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 150273833: APOGEE DR17 effective temperature 4590.7856 +/- 50 K (the catalogue's final uncertainty).",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202346196"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,591 K, because pARAM fits an extinction A_V = 0.14 mag toward this star (Khan et al. (2023), A&A 677, A21, tess_apo, AV-M), and the colour routes do not remove extinction; APOGEE measured its temperature, through the CIE 1931 2-degree observer: #ffdfc0. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202346196"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,591 K and log g 2.12 (u1 0.744, u2 0.062): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "id": "tic-364541950",
+ "classification": "star",
+ "order": 2642,
+ "physical": {
+  "name": "TIC 364541950",
+  "horizonsCode": null,
+  "meanRadiusKm": 10635861.6,
+  "gravitationalParameterKm3PerS2": 121989274886.55067,
+  "parent": null,
+  "effectiveTemperatureK": 4344
+ },
+ "physicalNotes": "Radius 15.288 +/- 0.4224 solar radii from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 364541950 (observed by TESS): PARAM radius (solar radii) 15.288023 (16th-84th percentiles 14.918229-15.762931), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 10,635,862 km at 695,700 km per solar radius. Mass 0.9192 +/- 0.0728 solar masses from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 364541950 (observed by TESS): PARAM mass (solar masses) 0.919184 (16th-84th percentiles 0.857618-1.003287), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196); GM is that mass times the JPL solar GM. Temperature 4344 +/- 50 K from Khan et al. (2023), A&A 677, A21, tess_apo, TIC 364541950: APOGEE DR17 effective temperature 4344.1304 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 85.42251844523433,
+  "declinationDegrees": -73.11240088580969,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1203.1,
+  "properMotionRaMasPerYear": 8.336222324536084,
+  "properMotionDecMasPerYear": 11.83669044940061,
+  "radialVelocityKmPerS": 29.697487,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4650438172619032704 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tic-364541950/source/photometry/gaia-dr3-source.csv; cross-identification HD 271518: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4650438172619032704",
+   "distance": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 364541950 (observed by TESS): PARAM asteroseismic distance (pc) 1203.085938 (16th-84th percentiles 1182.275391-1226.015625), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196): 1203.1 +/- 21.9 pc; Gaia DR3 parallax 0.8020 +/- 0.0107 mas (same row, RUWE 0.80), 75.0 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 8.336, 11.837 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 29.70 +/- 0.14 km/s"
+  }
+ }
+}
