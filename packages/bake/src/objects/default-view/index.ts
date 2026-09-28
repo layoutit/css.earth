@@ -4,3 +4,4 @@
 // of its own, outside `objects/scene`, whose code the nebula lab's compiler identity reaches.
 export * from './default-view.ts';
 export * from './lens-coverage.ts';
+export * from './lens-facing.ts';
