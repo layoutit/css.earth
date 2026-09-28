@@ -231,7 +231,7 @@ its validators accept); the renderer never imports the bake.
     from this source folder, found by the package's name, so the path holds from `dist/`. `operations-acquisition.ts` runs a
     body's acquisition plan and restores its missing pinned sources. It imports `raster` and `objects/sources`, and loads
     `objects/layers/terrestrial` and `objects/layers/observation` for the plan steps that need them. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
-    coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
+    coverage comparison stays in `packages/bake/authoring/ganymede/` for per-body authoring.
   - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
     downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
     sets up a body's lens (`survey-setup.ts`, with the survey figure table `vernazza-2021-figures.json` read through the
