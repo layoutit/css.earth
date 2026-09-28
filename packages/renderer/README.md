@@ -68,3 +68,16 @@ pnpm build:renderer
 pnpm typecheck:renderer
 pnpm test:renderer
 ```
+
+## Prepared image transport
+
+The mounted object's image store deduplicates URLs across leases. For finite pools,
+up to six unfinished image loads (bounded by pool capacity, or the existing concurrency if larger) overlap network
+transport with the pool's explicit `decode()` calls. A slow download does not occupy a decode slot. Images retain their
+original URLs and native handles; transport does not create a separate fetch or blob cache. The browser still owns
+its internal decode and eviction decisions.
+
+Residency reserves the prepared decoded-byte cost before admitting a URL; download overlap does not change that
+budget or admit extra assets. Releasing the final lease cancels pending image
+loads and removes their listeners; completed warm handoffs preserve the decoded URL used by retained CSS. Detail
+publication and paced painting continue to wait on the same decoded-resource receipts.
