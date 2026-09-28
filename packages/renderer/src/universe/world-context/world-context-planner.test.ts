@@ -748,6 +748,16 @@ test('past the Local Group scale the stars give their names to the galaxies', as
   expect(named(1e6), 'from 1 Mpc no star or planet is named').toEqual([]);
 });
 
+test('past the Local Group scale no star is drawn as a dot; the selected body stays', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const dotted = (parsecs: number) => {
+    input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
+    return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+  };
+  expect(dotted(200e3).length, 'from 200 kpc the Milky Way\'s stars are still dots').toBeGreaterThan(100);
+  expect(dotted(1e6), 'from 1 Mpc only the selected Sun keeps its dot').toEqual([plan.focus.id]);
+});
+
 test('the moons of a framed planet keep their names before stars beyond the Solar System', async () => {
   const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
   const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
