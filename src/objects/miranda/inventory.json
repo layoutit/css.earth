@@ -214,8 +214,8 @@
     {
       "location": "public",
       "filename": "miranda-arrival.webp",
-      "bytes": 103900,
-      "sha256": "d1fa242e7c271f0be2939e196794ed845ef466a215f2832f43cb4f73b85bab53"
+      "bytes": 93246,
+      "sha256": "390f74b6e58413d58e9ddc020fc82c2dd4fc40c189c2d1d401be6773a9b655cc"
     },
     {
       "location": "public",
@@ -346,14 +346,14 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 319,
-      "sha256": "e262a61bc6b39f223b19bc97d196ee775ae4dc6ddf6e1f5bfea2df7f979c2781"
+      "bytes": 459,
+      "sha256": "86425b7114c9402f2c7afa8c3397170f9ac2dbdf2798aa9a3c74cc9408106744"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 10994,
-      "sha256": "9377d4a2d1c985d910445e1b6de28a50e7ef31184f084bbed49644519ef05f73"
+      "bytes": 11336,
+      "sha256": "9265dcca659b391e6f49d4ec1c36a00c81aaf68644aeac7456a6e001bc80c86d"
     },
     {
       "location": "prepared",
@@ -364,26 +364,26 @@
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 10308,
-      "sha256": "6ccc9b84d1666470171d19ae86a67b0c6b7927cff13828d8cf8ee85f2c37ed86"
+      "bytes": 10674,
+      "sha256": "04a5b40c02a9769c96dbada55428e0c0b3f038aa201573d21bdb7b8315da1f71"
     },
     {
       "location": "prepared",
       "filename": "minimaps/voyager-color.webp",
       "bytes": 7374,
-      "sha256": "321f00b0a14d06db7968f124cf582fcbf43de1d41d8fc1920c48032ed22ce086"
+      "sha256": "cfcad2b211c5ae75f0ab2592e0547db5f9b6933c6cb5d1d2efcf07fed68bbecd"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 607249,
-      "sha256": "7bef257ae311d2b552748727b85834dd0a5753653e73eefd0b6c61c2a4069506"
+      "bytes": 610341,
+      "sha256": "851aaf982efdeef568f0ec8813756af93ad77a83ad83de06ebf837a42aeb3bbb"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 397884,
-      "sha256": "e2cd2d2a0f475d2681708ad33cceeb4e3ba34b32f51e61bf4dc61f99b0986826"
+      "bytes": 397881,
+      "sha256": "5cd9a3212219173dd8d11cf36118dd354e9450195eb40d3b9fad18112c051907"
     },
     {
       "location": "prepared",
@@ -395,7 +395,7 @@
       "location": "prepared",
       "filename": "sun.json",
       "bytes": 614,
-      "sha256": "37895e81658a65f14b4247ea31b73dcef54a225e2d5c824802f099c77d906c85"
+      "sha256": "83e4852765ae2776007eb189008cfd68fa253ca00da8544a00595819b2585228"
     },
     {
       "location": "prepared",
@@ -412,8 +412,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1243,
-      "sha256": "3914bc0d2b4742e843a3d2271675fab85fa52ffe0f3d2cbaa4a8586e5c287c98"
+      "bytes": 1242,
+      "sha256": "1b81b73140c684d4636096e4602454947f242a233ce723b65f8e143290a6ca4d"
     }
   ]
 }
