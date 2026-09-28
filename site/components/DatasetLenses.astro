@@ -2,6 +2,7 @@
 import type { Props as ShellProps } from '../object-shell-types';
 import DatasetLegend from './DatasetLegend.astro';
 import DatasetDescription from './DatasetDescription.astro';
+import SequencePlayer from './SequencePlayer.astro';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
@@ -33,10 +34,6 @@ const stepMembers = (lens: Control) => lens.step ? lenses.controls.filter(candid
 const listed = (lens: Control) => !lens.step || stepMembers(lens)[0]?.id === lens.id;
 const defaultControl = lenses.controls.find(lens => lens.id === lenses.defaultLens);
 const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
-const stepOf = (lens: Control) => {
-  const members = stepMembers(lens), index = members.findIndex(member => member.id === lens.id);
-  return members.length ? { index, count: members.length, previous: members[index - 1], next: members[index + 1] } : undefined;
-};
 ---
 <section id={`${objectId}-lenses`} class="object-lenses">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
@@ -127,29 +124,9 @@ const stepOf = (lens: Control) => {
                   hidden
                 ></span>)}
               </>}
+              {lens.step && <SequencePlayer {objectId} {lens} members={stepMembers(lens)} {controlName} />}
             </div>}
-          {stepOf(lens) && (() => {
-            const step = stepOf(lens)!;
-            const arrow = (target: Control | undefined, next: boolean) => <button
-              class="object-lens-step"
-              type="submit"
-              form={`${objectId}-datasets`}
-              name={controlName}
-              value={target?.id ?? lens.id}
-              data-dataset-step={target ? target.id : ''}
-              data-focus-lens={focus ? true : undefined}
-              disabled={!target}
-              aria-label={target ? `${next ? 'Next' : 'Previous'}: ${target.step!.label}` : `No ${next ? 'next' : 'previous'} step`}
-            ><span class={`object-lens-step-chevron ${next ? 'is-next' : 'is-previous'}`} aria-hidden="true"></span></button>;
-            return <div class="object-lens-steps" role="group" aria-label={`${lens.label} steps`}>
-              {arrow(step.previous, false)}
-              {!focus && <button class="object-lens-step object-lens-play" type="button"
-                data-dataset-play={lens.step!.group} disabled aria-label="Play sequence" aria-pressed="false"
-                title="Loop through this sequence">Play</button>}
-              <span class="object-lens-step-label">{lens.step!.label} · {step.index + 1} of {step.count}</span>
-              {arrow(step.next, true)}
-            </div>;
-          })()}
+          {lens.step && !lens.texture && <SequencePlayer {objectId} {lens} members={stepMembers(lens)} {controlName} />}
           {borrowedLegend(lens) && <DatasetLegend {objectId} lens={borrowedLegend(lens)!} owner={lens.id} />}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>

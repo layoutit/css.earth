@@ -133,8 +133,10 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     if (!elements.get(map)!.config) return;
     const events = new AbortController();
     mapEvents.set(map, events);
+    // A sequence player sits over the map; its buttons take their own clicks and keys.
+    const onPlayer = (event: Event) => event.target instanceof windowTarget.Element && event.target.closest('[data-sequence-player]') !== null;
     map.addEventListener('pointerdown', event => {
-      if (!camera?.navigation || event.button !== 0) return;
+      if (!camera?.navigation || event.button !== 0 || onPlayer(event)) return;
       event.preventDefault(); event.stopPropagation();
       map.focus({ preventScroll: true });
       map.setPointerCapture(event.pointerId);
@@ -168,7 +170,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture'] as const) map.addEventListener(type, release, { signal: events.signal });
     map.addEventListener('wheel', event => wheel(map, event), { passive: false, signal: events.signal });
     map.addEventListener('keydown', event => {
-      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.altKey || event.ctrlKey || event.metaKey || onPlayer(event)) return;
       const moves: Record<string, readonly [number, number]> = { ArrowLeft: [-.02, 0], ArrowRight: [.02, 0], ArrowUp: [0, -.04], ArrowDown: [0, .04] };
       if (moves[event.key]) {
         event.preventDefault();

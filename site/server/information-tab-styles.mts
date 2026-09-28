@@ -7,14 +7,16 @@ const identifier = (value: string) => {
   return value;
 };
 
-/** One radio group's rules. Keep specificity below the shared mobile rule that stacks detail panels.
- * Native radios still own selection, including without JavaScript. */
+/** One radio group's rules. Native radios still own selection, including without JavaScript.
+ * Specificity sits between the shell's plain `.object-card-tabpanel` (0,1,0), which must lose whatever order the
+ * stylesheets load in (a dev server injects the shell's CSS after these), and the phone and tablet rules that stack
+ * every panel (0,3,0). The attribute selector names the panel at (0,1,0), where an id would be (1,0,0). */
 export function informationTabStyle(name: string, tabs: readonly { id: string; panelId: string }[]): InformationTabStyle {
   identifier(name);
   const css = tabs.map(tab => {
     const id = identifier(tab.id), panelId = identifier(tab.panelId);
-    return `.object-native-tabs ~ :where(#${panelId}) { display: none; }
-.object-native-tabs:has(> :where(#${id}):checked) ~ :where(#${panelId}) { display: block; }`;
+    return `.object-native-tabs ~ [id="${panelId}"] { display: none; }
+.object-native-tabs:has(> :where(#${id}):checked) ~ [id="${panelId}"] { display: block; }`;
   }).join('\n');
   return { key: `site/information-tabs/${name}`, css, name, panelIds: tabs.map(tab => tab.panelId) };
 }
