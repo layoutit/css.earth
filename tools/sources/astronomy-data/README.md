@@ -12,30 +12,29 @@ Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no applica
 From the repository root, with the project's supported Node version:
 
 ```sh
-node tools/sources/astronomy-data/serve.mts
+node tools/sources/astronomy-data/browse.mts
 node tools/sources/astronomy-data/slice.mts --source=opus --target=Mimas --format=json
 node tools/sources/astronomy-data/slice.mts --proposal=111 --format=tsv
 sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. It is one
-table of every body the ledger names, grouped by kind, with whether cssEarth has it,
-its proposals, best priority, blocked proposals, candidate and needs-review
-records, preview images, records and sources. Moons and exoplanets sit inside
-their system; a system row adds up its members, counting each record once. Kind
-and parent come from `packages/astronomy/data/bodies`, and the Sun and Sgr A*
-hold no systems. The table filters by name, kind, cssEarth membership,
-proposals and candidates, and sorts by any column. A row opens that body's, or
-that system's, proposals with their writeups and its records with previews.
+`browse.mts` opens the ledger in [Datasette](https://datasette.io/), read-only, at
+`http://127.0.0.1:8001/-/dashboards/overview`; `PORT` changes the port. The first run
+installs the pinned packages in `datasette/requirements.txt` into the ignored
+`output/ledger-venv`. The overview dashboard counts dataset families, bodies and
+archives; every table and view can be filtered, sorted and exported, and the
+`global_maps` view shows each map's preview grouped by body, with whether the app
+uses it. The settings, dark theme and map gallery live in `datasette/`.
+The [dashboard](evidence/datasette-dashboard.jpg) and [map gallery](evidence/datasette-global-maps.jpg)
+captures were taken from this ledger on 28 September 2026.
 
-Bodies cssEarth does not know and no proposal names, such as calibration stars and
-lightcurve asteroids, sit in one Other targets group. PDS4 and Maryland rows are
-read from their full `targets` lists, not their shortened target text. A
-Photojournal record that names a moon and its planet counts for the moon, and
-the Sun counts only when no other body is tagged. `slice.mts` keeps the
-filtered JSON and TSV exports. The server reads the ledger once; restart it
-after editing the database. `AUDIT_DB` selects another file for comparisons.
+`bodies` and `dataset_bodies` file each record under the bodies it names. PDS4 and
+Maryland rows are read from their full `targets` lists, not their shortened target
+text. A Photojournal record that names a moon and its planet counts for the moon,
+and the Sun counts only when no other body is tagged. Kind and parent come from
+`packages/astronomy/data/bodies`. `slice.mts` keeps the filtered JSON and TSV
+exports. `AUDIT_DB` selects another file for comparisons.
 Open `ledger.sqlite` in a SQLite browser for direct editing.
 
 | Table                 | Owns |
@@ -96,8 +95,9 @@ USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-f
 TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
 node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
 node tools/sources/astronomy-data/apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
-python tools/sources/astronomy-data/cleanup/collect_trek.py tools/sources/astronomy-data/ledger.sqlite --dry-run   # NASA Trek map layers; TREK_CACHE keeps pages
-python tools/sources/astronomy-data/cleanup/instruments.py tools/sources/astronomy-data/ledger.sqlite --dry-run   # needs sqlite-utils; rebuilds missions and instruments
+node tools/sources/astronomy-data/collect-trek.mts --dry-run        # NASA Trek map layers; TREK_CACHE keeps pages
+node tools/sources/astronomy-data/build-instruments.mts --dry-run   # rebuilds missions and instruments
+node tools/sources/astronomy-data/mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
 ```
 
 - **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a
@@ -190,9 +190,6 @@ and collection receipts remain queryable in `evidence` instead of separate files
 retained evidence hashes, OPUS partition reconciliation, label byte counts,
 proposal writeups/joins, filters and exports. These checks establish ledger
 consistency, not scientific acceptance of the proposed datasets.
-
-The [viewer capture](evidence/viewer-records.jpg) shows the body table filtered to
-bodies with candidates, sorted by candidates, with the Earth, Jupiter and Saturn systems open.
 
 The [browser capture](evidence/ledger-slice.jpg) records the SQLite migration viewer,
 before its heading was renamed to Astronomy data ledger.

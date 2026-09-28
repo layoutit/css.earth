@@ -89,7 +89,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Check the astronomy data ledger
         if: ${{ !cancelled() }}
-        # SQLite integrity, evidence hashes, source counts, proposal writeups and the viewer's filter and export rule.
+        # SQLite integrity, evidence hashes, source counts, proposal writeups and the export slices.
         # Nothing ran it after #869, so an edited ledger could drift from its own checks unseen.
         run: node tools/sources/astronomy-data/verify.mts
       - name: Lint every authored tree

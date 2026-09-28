@@ -1,0 +1,36 @@
+{% set maps = [] %}
+{% for row in display_rows %}
+  {% set ns = namespace(thumb='', title='', url='', body='', archive='', w='', h='', raster='', proj='', in_app=0) %}
+  {% for cell in row %}
+    {% if cell.column == 'thumbnail' %}{% set ns.thumb = cell.raw %}
+    {% elif cell.column == 'title' %}{% set ns.title = cell.raw %}
+    {% elif cell.column == 'url' %}{% set ns.url = cell.raw %}
+    {% elif cell.column == 'body' %}{% set ns.body = cell.raw %}
+    {% elif cell.column == 'archive' %}{% set ns.archive = cell.raw %}
+    {% elif cell.column == 'width' %}{% set ns.w = cell.raw %}
+    {% elif cell.column == 'height' %}{% set ns.h = cell.raw %}
+    {% elif cell.column == 'raster' %}{% set ns.raster = cell.raw %}
+    {% elif cell.column == 'projection' %}{% set ns.proj = cell.raw %}
+    {% elif cell.column == 'in_app' %}{% set ns.in_app = cell.raw %}
+    {% endif %}
+  {% endfor %}
+  {% set _ = maps.append({'thumb': ns.thumb, 'title': ns.title, 'url': ns.url, 'body': ns.body or 'No body', 'archive': ns.archive, 'w': ns.w, 'h': ns.h, 'raster': ns.raster, 'proj': ns.proj, 'in_app': ns.in_app}) %}
+{% endfor %}
+<div class="bodies">
+{% for group in maps|groupby('body') %}
+  {% set covered = group.list|selectattr('in_app')|list|length %}
+  {% set exact = group.list|selectattr('in_app', 'equalto', 'this product')|list|length %}
+  <details class="body-group"{% if covered < group.list|length %} open{% endif %}>
+    <summary><span class="name">{{ group.grouper }}</span><span class="count">{{ group.list|length }} map{% if group.list|length != 1 %}s{% endif %} · {{ exact }} in the app{% if covered > exact %}, {{ covered - exact }} same data{% endif %} · {{ group.list|map(attribute='archive')|unique|join(', ') }}</span></summary>
+    <div class="gallery">
+    {% for m in group.list %}
+      <a class="map" href="{{ m.url }}" target="_blank" rel="noopener">
+        <div class="frame">{% if m.thumb %}<img loading="lazy" src="{{ m.thumb }}" alt="">{% else %}<span>no preview</span>{% endif %}</div>
+        <div class="title">{% if m.in_app == 'this product' %}<span class="in-app" title="This map is used in the app"></span>{% elif m.in_app %}<span class="in-app same" title="The app shows the same data from another product"></span>{% endif %}{{ m.title }}</div>
+        <div class="meta">{{ m.archive }} · {{ m.proj }}{% if m.w %} · {{ m.w }} × {{ m.h }} px{% endif %}{% if m.raster %} · {{ m.raster }}{% endif %}</div>
+      </a>
+    {% endfor %}
+    </div>
+  </details>
+{% endfor %}
+</div>
