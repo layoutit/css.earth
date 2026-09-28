@@ -5,7 +5,7 @@ from the same pinned kernels that @cssearth/spice reads, and writes a fixture th
 dart-draco.oracle.test.mts beside this script compares against. The intercepts are read from the
 cube with NASA's pds4_tools, not with the pipeline's own decoder, so no pipeline
 code stands between the archive and the oracle.
-Usage: node tools/assets/restore-source-inputs.mts --object=dimorphos
+Usage: node packages/bake/cli/restore-source-inputs.mts --object=dimorphos
        .local/oracles/venv/bin/python tests/oracles/spice/dart-draco.py
 """
 import hashlib, json, platform, sys

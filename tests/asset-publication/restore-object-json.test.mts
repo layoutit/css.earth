@@ -3,9 +3,9 @@ import { createHash } from 'node:crypto';
 import { copyFile, mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { restoreObjectJson } from './restore-object-json.mts';
+import { restoreObjectJson } from '@cssearth/bake/asset-publication';
 
 test('restores a missing transport from its pinned runtime without rebaking or repinning', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-json-restore-'));

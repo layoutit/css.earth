@@ -1,5 +1,5 @@
 import { sha256 } from '@cssearth/core/node';
-import type { RuntimeAssetLocation } from '@cssearth/bake/delivery';
+import type { RuntimeAssetLocation } from '../delivery/index.ts';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
 const TRANSIENT_RETRIES = 3, RETRY_BACKOFF_MS = 500;
@@ -7,13 +7,12 @@ const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, m
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { pathToFileURL } from "node:url";
-import { publishSourceBytes } from "@cssearth/bake/delivery";
+import { publishSourceBytes } from "../delivery/index.ts";
 import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
 import { ASSET_LOCATIONS, type AssetLocation } from '@cssearth/objects/node';
-import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from '@cssearth/bake/delivery';
+import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from '../delivery/index.ts';
 
-/** `node tools/assets/setup.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
+/** `node packages/bake/cli/setup-assets.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
 export function readAllowMissingFlag(args: readonly string[] = []) {
   return args.includes("--allow-missing") || process.env.CSSEARTH_ALLOW_MISSING_ASSETS === "1";
 }
@@ -106,7 +105,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
 }
 
 /**
- * `node tools/assets/setup.mts [--object=<id>…] [--location=public|prepared] [--metadata] [--allow-missing]`
+ * `node packages/bake/cli/setup-assets.mts [--object=<id>…] [--location=public|prepared] [--metadata] [--allow-missing]`
  * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
  * prepared record and presentation of the volume and context objects, which is all a deploy catalogue reads.
  */
@@ -118,9 +117,8 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  * them is left alone, so a repeat run costs nothing. Needs the renderer build (`pnpm prepare:shell`); without it the
  * caller is told which command finishes the job instead of failing on an import.
  */
-export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string) {
+export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string, checkout = process.cwd()) {
   // A deploy runs setup before `pnpm build:tools` writes the scene catalogue; its second setup run derives the files.
-  const checkout = resolve(import.meta.dirname, "../..");
   if (Object.values(PREPARED_CATALOGUE).some(path => !existsSync(resolve(checkout, path)))) {
     console.log("Derived page data not written: the scene catalogue is not generated. Run pnpm build:tools && pnpm prepare:object-json.");
     return { pages: 0, provenance: 0 };
@@ -135,22 +133,22 @@ export async function deriveRestoredPreparedFiles(ids: readonly string[], root: 
     if (missing(id, "provenance.json") && await provenanceIsRegenerated(resolve(root, "src/objects", id))) provenance.push(id);
   }
   if (!pages.length && !provenance.length) return { pages: 0, provenance: 0 };
-  if (!existsSync(new URL("../../packages/renderer/dist/index.js", import.meta.url))) {
+  if (!existsSync(resolve(checkout, "packages/renderer/dist/index.js"))) {
     console.log(`Derived page data not written for ${pages.length + provenance.length} restored object(s): the renderer is not built. Run pnpm prepare:shell && pnpm prepare:object-json.`);
     return { pages: 0, provenance: 0 };
   }
   if (pages.length) {
-    const { restoreObjectJson } = await import("./restore-object-json.mts");
-    await restoreObjectJson(pages, root, { restoredOnly: true });
+    const { restoreObjectJson } = await import("./restore-object-json.ts");
+    await restoreObjectJson(pages, root, { restoredOnly: true, checkout });
   }
   if (provenance.length) {
-    const { recoverObjectProvenance } = await import("../prepare/prepare-provenance.mts");
-    await recoverObjectProvenance(provenance, { root, catalogue: false });
+    const { recoverObjectProvenance } = await import("../objects/provenance/index.ts");
+    await recoverObjectProvenance(provenance, { root, checkout, catalogue: false });
   }
   return { pages: pages.length, provenance: provenance.length };
 }
 
-export async function setupAssets(args: readonly string[], root = resolve(import.meta.dirname, "../..")) {
+export async function setupAssets(args: readonly string[], root = process.cwd()) {
   const allowMissing = readAllowMissingFlag(args), metadata = args.includes("--metadata");
   const locationArg = args.find(arg => arg.startsWith("--location="))?.slice("--location=".length);
   if (locationArg !== undefined && !(ASSET_LOCATIONS as readonly string[]).includes(locationArg)) throw new TypeError(`Unknown asset location: ${locationArg}.`);
@@ -167,8 +165,4 @@ export async function setupAssets(args: readonly string[], root = resolve(import
     if (derived.pages || derived.provenance) console.log(`Derived page data for ${derived.pages} object(s) and provenance for ${derived.provenance}.`);
   }
   return result;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await setupAssets(process.argv.slice(2));
 }

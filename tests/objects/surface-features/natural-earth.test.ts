@@ -20,7 +20,7 @@ async function unrestoredArchives(archives: readonly string[]): Promise<string |
   const missing = archives.map(archive => `features/${archive}`).filter(path => !existsSync(resolve(earthSource, path)));
   const undeclared = missing.filter(path => !downloads.has(path));
   if (undeclared.length) throw new Error(`Natural Earth archives are missing and not declared as downloads in Earth's source manifest: ${undeclared.join(', ')}`);
-  return missing.length ? `earth: ${missing.join(', ')} not restored; run node tools/assets/restore-source-inputs.mts --object=earth` : false;
+  return missing.length ? `earth: ${missing.join(', ')} not restored; run node packages/bake/cli/restore-source-inputs.mts --object=earth` : false;
 }
 
 test('an absent Natural Earth archive skips only when the source manifest declares it as a download', async () => {

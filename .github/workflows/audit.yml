@@ -159,7 +159,7 @@ jobs:
         # (a declared input with neither a tracked copy nor an acquisition operation). Neither reaches the
         # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
         # stay blocking in `Contract lint` (physical frame receipts and document pins).
-        run: node --test tools/assets/restore-source-inputs.test.mts
+        run: node --test tests/asset-publication/restore-source-inputs.test.mts
       - name: Reconcile the source catalogue, facility records and provenance receipts
         if: ${{ !cancelled() }}
         # Moved off the `Universe / sources` gate lane. These assert that every catalogue row, facility record
@@ -180,14 +180,14 @@ jobs:
           else
             node tools/prepare/cli/prepare-ci-inputs.mts universe
           fi
-          node tools/assets/restore-object-json.mts
+          node packages/bake/cli/restore-object-json.mts
           node tools/prepare/cli/prepare-provenance.mts --objects-only
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node tools/prepare/cli/prepare-facilities.mts --catalog-only
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             # Authoring replays volume provenance from pinned FITS.
-            node tools/assets/restore-source-inputs.mts --repository-volumes
+            node packages/bake/cli/restore-source-inputs.mts --repository-volumes
             CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tools/sources/*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           else
             CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tools/sources/*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
@@ -208,7 +208,7 @@ jobs:
           fi
           node tools/prepare/cli/prepare-ci-inputs.mts universe-preparation
           # The galaxy writer finishes before world/provenance readers in this workspace.
-          node tools/assets/restore-source-inputs.mts --repository-volumes
+          node packages/bake/cli/restore-source-inputs.mts --repository-volumes
           pnpm test:preparation --universe
       - name: Explain that this job does not gate the merge
         if: failure()

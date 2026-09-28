@@ -125,7 +125,7 @@ Read the current `package.json` and runner arguments before using commands:
 | --- | --- |
 | Install published prepared assets for one body | `pnpm setup:assets --object=<id>` |
 | Start the shared development site | `pnpm dev` |
-| Restore missing source inputs | `node tools/assets/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
+| Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update scene-body provenance and source/mission catalogues | `node tools/prepare/cli/prepare-provenance.mts [<id>]` |
 | Bind new inputs to catalogue records | `node tools/sources/author-source-records.mts <id>` |

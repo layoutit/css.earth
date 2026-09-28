@@ -101,7 +101,7 @@ export async function checkBodyReferences(root = process.cwd()): Promise<Finding
   for (const [objectId, files] of committed) {
     if (!files.has('manifest.json')) continue;
     const manifest = await json(`src/objects/${objectId}/source/manifest.json`);
-    // A volume package restores through its own repository-relative manifest (tools/assets/restore-source-inputs.mts).
+    // A volume package restores through its own repository-relative manifest (packages/bake/cli/restore-source-inputs.mts).
     if (record(manifest).schema !== 'cssearth-authoritative-sources@2') continue;
     const acquisition = files.has('preparation/acquisition.json') ? await json(`src/objects/${objectId}/source/preparation/acquisition.json`) : null;
     findings.push(...bodySourceFindings(objectId, manifest, acquisition, files));

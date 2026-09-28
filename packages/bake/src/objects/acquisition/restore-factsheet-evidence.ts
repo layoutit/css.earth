@@ -3,9 +3,8 @@ import { lstat, readFile, realpath } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { sourcePath } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
-import { assertSourceFile, containedPath, parseSourceManifest } from '@cssearth/bake/objects/sources';
-import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
-import { restoreMissingSources } from '@cssearth/bake/objects/acquisition';
+import { assertSourceFile, containedPath, parseSourceManifest } from '../sources/index.ts';
+import { parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
 export type FactsheetSourceTransport = NonNullable<Parameters<typeof restoreMissingSources>[0]['transport']>;
 
 /** Restore one missing cited document, without acquiring the body's other source assets. */

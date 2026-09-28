@@ -13,7 +13,7 @@ Use one preparation process at a time. The original preparation used a 3 GiB
 Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
 
 1. Restore a body's declared originals with
-   `node tools/objects/dist/operations.js acquire <id>`.
+   `node packages/bake/cli/object-operations.mts acquire <id>`.
 2. For ordinary regeneration, run the existing preparer directly:
    `node tools/objects/dist/prepare-authored.js <id> --write`.
    The checked-in radius table and source recipes are sufficient.

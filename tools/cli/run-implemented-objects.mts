@@ -76,7 +76,7 @@ export async function resolveObjectAssembly(
   { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {},
 ) {
   const script = await authoredObject(id, projectRoot)
-    ? resolve(projectRoot, 'tools/objects/dist/operations.js') : objectAssembleScript(id, projectRoot);
+    ? resolve(projectRoot, 'packages/bake/cli/object-operations.mts') : objectAssembleScript(id, projectRoot);
   try {
     await accessFile(script);
   } catch (cause) {
@@ -101,7 +101,7 @@ export async function resolveObjectCommand(
   const authored = await authoredObject(id, projectRoot);
   const script = authored
     ? mode === 'browser' ? resolveScript(id, projectRoot)
-      : resolve(projectRoot, 'tools/objects/dist', mode === 'prepare' ? 'prepare-authored.js' : 'operations.js')
+      : mode === 'prepare' ? resolve(projectRoot, 'tools/objects/dist/prepare-authored.js') : resolve(projectRoot, 'packages/bake/cli/object-operations.mts')
     : resolveScript(id, projectRoot);
   try {
     await accessFile(script);

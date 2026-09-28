@@ -2,7 +2,7 @@
 
 Requires numpy, scipy, astropy and spiceypy. No ephemerides are fetched here; kernels are not committed, so restore
 the body's sources first.
-Usage: node tools/assets/restore-source-inputs.mts --object=<id>
+Usage: node packages/bake/cli/restore-source-inputs.mts --object=<id>
        python prepare-archived-camera.py src/objects/<id>/source
 """
 from pathlib import Path

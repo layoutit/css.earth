@@ -2,19 +2,17 @@ import { existsSync } from 'node:fs';
 import {requireRecord} from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { serializeObjectJson } from '@cssearth/bake/contract';
-import { preparePageMetadata } from '@cssearth/bake/delivery';
-import { writePreparedText } from '@cssearth/bake/delivery';
-import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer';
+import { serializeObjectJson } from '../contract/index.ts';
+import { preparePageMetadata } from '../delivery/index.ts';
+import { writePreparedText } from '../delivery/index.ts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
-
-const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
-
-/** Restore only pinned JSON transports; never prepare geometry, bindings or assets. */
-export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id), root = projectRoot, { restoredOnly = false } = {}) {
+/** Restore only pinned JSON transports; never prepare geometry, bindings or assets. `ids` defaults to every registered scene
+ * object of `root`'s prepared catalogue, which also names the objects allowed. */
+export async function restoreObjectJson(ids?: readonly string[], root = process.cwd(), { restoredOnly = false, checkout = process.cwd() } = {}) {
+  const SCENE_OBJECTS = readPreparedObjects(checkout).sceneObjects;
+  ids ??= SCENE_OBJECTS.map(({ id }) => id);
   if (new Set(ids).size !== ids.length || ids.some(id => !SCENE_OBJECTS.some(object => object.id === id))) {
     throw new TypeError('Choose registered object ids.');
   }
@@ -41,11 +39,4 @@ export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id),
     await writePreparedText(resolve(directory, 'prepared/page.json'), preparePageMetadata(id, runtime).text);
   }
   return { objects: ids.length, written, skipped, reused: ids.length - written - skipped };
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2);
-  const restoredOnly = args.includes('--restored-only');
-  const ids = args.filter(arg => arg !== '--restored-only');
-  console.log(JSON.stringify(await restoreObjectJson(ids.length ? ids : undefined, undefined, { restoredOnly })));
 }

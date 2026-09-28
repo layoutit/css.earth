@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "astro build && node tools/cli/run-implemented-objects.mts assemble",
-    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:tool-inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && node tools/assets/restore-object-json.mts && pnpm prepare:dataset-sprites && node tools/prepare/cli/prepare-factsheets.mts --quiet && node tools/prepare/cli/prepare-provenance.mts --objects-only && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:lens-billboards && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts --catalog-only && astro build && node tools/cli/run-implemented-objects.mts assemble && node site/build/bundle-netlify-functions.mts",
+    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:tool-inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && node packages/bake/cli/restore-object-json.mts && pnpm prepare:dataset-sprites && node tools/prepare/cli/prepare-factsheets.mts --quiet && node tools/prepare/cli/prepare-provenance.mts --objects-only && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:lens-billboards && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts --catalog-only && astro build && node tools/cli/run-implemented-objects.mts assemble && node site/build/bundle-netlify-functions.mts",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build:core": "pnpm --filter @cssearth/core build",
@@ -64,7 +64,7 @@
     "prepare:lens-billboards": "node tools/prepare/cli/prepare-lens-billboards.mts",
     "prepare:search-thumbnails": "node packages/bake/cli/prepare-search-thumbnails.mts",
     "prepare:nebulae": "node packages/bake/cli/prepare-nebulae.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts",
-    "prepare:object-json": "node tools/assets/restore-object-json.mts && pnpm prepare:dataset-sprites && node tools/prepare/cli/prepare-factsheets.mts --quiet && node tools/prepare/cli/prepare-provenance.mts --objects-only && pnpm prepare:world-context && node site/build/prepare/prepare-feature-index.mts",
+    "prepare:object-json": "node packages/bake/cli/restore-object-json.mts && pnpm prepare:dataset-sprites && node tools/prepare/cli/prepare-factsheets.mts --quiet && node tools/prepare/cli/prepare-provenance.mts --objects-only && pnpm prepare:world-context && node site/build/prepare/prepare-feature-index.mts",
     "prepare:objects": "pnpm prepare:catalog && pnpm build:astronomy && node packages/bake/cli/prepare-solar-geometry.mts && pnpm build:catalog && node tools/prepare/cli/prepare-objects.mts && node site/build/prepare/prepare-feature-index.mts",
     "prepare:shell": "pnpm prepare:catalog && pnpm prepare:titles && pnpm prepare:shell-assets",
     "prepare:shell-assets": "node site/build/prepare/prepare-shell-icons.mts",
@@ -77,8 +77,8 @@
     "preview": "node site/server/preview.mts",
     "publish:runtime-assets": "node packages/bake/cli/publish-runtime-assets.mts",
     "setup:assets": "pnpm prepare:shell && pnpm setup:asset-data",
-    "setup:asset-data": "node tools/assets/setup.mts",
-    "setup:prepared": "node tools/assets/setup.mts --location=prepared",
+    "setup:asset-data": "node packages/bake/cli/setup-assets.mts",
+    "setup:prepared": "node packages/bake/cli/setup-assets.mts --location=prepared",
     "test": "pnpm test:packages && pnpm test:renderer && pnpm test:node && pnpm test:telescope-cli && pnpm test:preparation --universe && pnpm test:lab",
     "test:packages": "pnpm -r --filter \"./packages/**\" test",
     "test:preparation": "node tools/contract/test-preparation.mts",
@@ -110,7 +110,7 @@
     "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/!(rendered-page).test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \".github/scripts/**/*.test.mts\" \"tools/**/*.test.mts\" \"tools/**/*.test.ts\" \"labs/performance/*.test.mts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "test:universe:renderer": "pnpm test:renderer",
-    "test:universe:runtime": "node --test --test-concurrency=2 \"tests/presentation/prepared-activation-*.test.mts\" tools/prepare/prepare-context-availability.test.mts tools/assets/restore-object-json.test.mts site/test/object-directory.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node .github/scripts/checks/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
+    "test:universe:runtime": "node --test --test-concurrency=2 \"tests/presentation/prepared-activation-*.test.mts\" tools/prepare/prepare-context-availability.test.mts tests/asset-publication/restore-object-json.test.mts site/test/object-directory.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node .github/scripts/checks/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
     "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts site/test/serialize-prepared-scene.test.mts && pnpm typecheck:oracles"
   },
   "dependencies": {
