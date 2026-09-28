@@ -61,6 +61,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/objects/new-horizons',
   'tools/objects/observation',
   'tools/objects/observed-surfaces',
+  'tools/objects/paged-ellipsoid',
   'tools/objects/paged-ellipsoid/geographic',
   'tools/objects/pds',
   'tools/objects/shape-model',
