@@ -48,6 +48,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/objects/jwst/programs',
   'tools/objects/keck',
   'tools/objects/material-composition',
+  'tools/objects/observation',
   'tools/objects/observed-surfaces',
   'tools/objects/paged-ellipsoid/geographic',
   'tools/objects/pds',
