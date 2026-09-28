@@ -1,4 +1,3 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireArray,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 const parseSourceRef=shape({id:text,path:text});
@@ -9,12 +8,11 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { orderFacts } from '@cssearth/objects';
-import { writePreparedText } from '@cssearth/bake/delivery';
-import { verifyFactsheetSources } from '@cssearth/bake/sources';
-import { refreshPreparedInventory } from '@cssearth/bake/contract';
+import { writePreparedText } from '../delivery/index.ts';
+import { verifyFactsheetSources } from '../sources/index.ts';
+import { refreshPreparedInventory } from './prepared-object-pin.ts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 
 /** Re-publish authored facts without rebaking imagery or changing scene state. Reader text has its own publisher, prepare-text. */
@@ -60,14 +58,13 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };
 }
 
-/** Re-publish the facts of the named registered objects, or of every one when `ids` is empty. */
-export async function prepareFactsheets({ ids = [] as readonly string[], check = false } = {}) {
+/** Re-publish the facts of the named registered objects of the checkout at `root`, or of every one when `ids` is empty. */
+export async function prepareFactsheets({ ids = [] as readonly string[], check = false, root = process.cwd() } = {}) {
+  const SCENE_OBJECTS = readPreparedObjects(root).sceneObjects;
   assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
   const results = [];
   for (const object of SCENE_OBJECTS) if (!ids.length || ids.includes(object.id)) {
-    results.push(await prepareFactsheet(resolve(import.meta.dirname, '../../src/objects', object.id), { check }));
+    results.push(await prepareFactsheet(resolve(root, 'src/objects', object.id), { check }));
   }
   return results;
 }
-
-refuseDirectRun(import.meta);

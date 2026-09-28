@@ -1,18 +1,17 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
 import type {ResizeOptions,Sharp} from 'sharp';
-import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, readRgba, withAlpha } from '@cssearth/bake/raster';
-import type {SurfacePreviewDirectories} from '@cssearth/bake/surface-previews';
-import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from '@cssearth/bake/surface-previews';
+import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, readRgba, withAlpha } from '../raster/index.ts';
+import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
+import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.ts';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '@cssearth/bake/objects/interpretation';
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/interpretation/index.ts';
+import type { SolarGeometry } from '../objects/scene/index.ts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
-function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
+function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, solarGeometry: SolarGeometry, photographs = false) {
   const key = `${objectDirectory}:${photographs ? recipe.surfaces.map(s => s.id).join(',') : 'complete'}`;
   let pending = interpreters.get(key);
   if (!pending) {
@@ -22,7 +21,7 @@ function interpretFor(objectDirectory: string, objectId: string, recipe: Interpr
   }
   return pending;
 }
-import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.mts';
+import { recipeSurfacePreviews, assertSurfacePreviewCoverage } from './surface-preview-rasters.ts';
 
 // Preserve categorical/numeric cells only where the source contract requests it.
 // Ordinary images retain the established resize and WebP presentation.
@@ -44,7 +43,8 @@ const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutE
   ...(nearest ? { kernel: 'nearest' } : {}) });
 
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
-export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs }:SurfacePreviewDirectories & { photographs?: readonly string[] }) {
+/** `solarGeometry` is the generated scene geometry (`src/platform/solar-geometry.mts`) the host loads and passes in. */
+export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs, solarGeometry }:SurfacePreviewDirectories & { photographs?: readonly string[]; solarGeometry: SolarGeometry }) {
   const prepared = await optionalJson(resolve(outputDirectory, 'surfaces.json'));
   const rasterInput = await optionalJson(resolve(objectDirectory, 'source/preparation/raster.json'));
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);
@@ -81,7 +81,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
       const parsed = parseInterpreterRecipe(recipe);
       const subset = selected ? selectSurfaceDependencies(parsed, [...selected]) : parsed;
-      const interpreted = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
+      const interpreted = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, solarGeometry, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
       const emission = requireRecord(recipe).emission;
       // A shadow's sphere is not drawn: its preview is what is, the off-limb image with the shadow disc over its centre.
       if (limbPreviews.has(surface.id) && interpreted.plates?.limb) {
@@ -155,4 +155,3 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   return images;
 }
 
-refuseDirectRun(import.meta);

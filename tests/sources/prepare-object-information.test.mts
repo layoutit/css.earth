@@ -10,14 +10,14 @@ import {
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 
 import {
   OBJECT_INFORMATION_SOURCES,
   validateObjectInformationSnapshot,
 } from "@cssearth/bake/sources";
-import { publishObjectInformation } from "./prepare-object-information.mts";
+import { publishObjectInformation } from "@cssearth/bake/sources";
 import type { PathLike } from "node:fs";
 
 test("publishes the complete prepared batch atomically", async (context) => {

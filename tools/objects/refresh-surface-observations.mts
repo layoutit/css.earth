@@ -6,13 +6,14 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource, retainedPhotographicAtlas } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareSolidRasters, prepareSolidSurfacePoles } from '@cssearth/bake/objects/layers/terrestrial';
 import { lensBillboardColors } from '@cssearth/bake/objects/content';
-import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
+import { prepareSurfaceMinimaps } from '@cssearth/bake/surface-previews';
 import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { repinObjectJson } from '@cssearth/bake/contract';
 
@@ -88,7 +89,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   for (const filename of await readdir(stage)) if (lensIds.some(id => filename === `${id}-source-index.json`)) await copyFile(resolve(stage, filename), resolve(outputDirectory, filename));
   const nextInventory = { ...inventory, assets: assets.map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) };
   await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds, solarGeometry });
   await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   if (sha256(await readFile(resolve(outputDirectory, 'scene.json'))) !== sha256(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');

@@ -198,7 +198,7 @@ jobs:
         # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
-          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" \
             tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts tests/preparation/stale-builds.test.mts \
             "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
 
@@ -413,7 +413,7 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
             pnpm setup:asset-data
           else
-            node tools/prepare/cli/prepare-ci-inputs.mts universe
+            node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
           node packages/bake/cli/restore-object-json.mts
           node site/build/prepare/prepare-provenance.mts --objects-only
@@ -508,7 +508,7 @@ jobs:
           key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
       - name: Restore only the inputs consumed by preparation tests
-        run: node tools/prepare/cli/prepare-ci-inputs.mts universe-preparation
+        run: node .github/scripts/ci/prepare-ci-inputs.mts universe-preparation
       - name: Test the selected preparation lane
         run: |
           case "$CI_PREPARATION_LANE" in
