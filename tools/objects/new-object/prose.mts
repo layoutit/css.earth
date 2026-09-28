@@ -83,9 +83,10 @@ export function spelledOut(name: string): string {
 export async function wikipediaQuotes(archive: Archive, catalogueTitles: readonly string[], catalogueNames: readonly string[]): Promise<Quotes | undefined> {
   // Articles are titled with the constellation spelled out, and often a planet's letter against its star (Kepler-62f); a lead may
   // name the body any of these ways.
-  const titles = catalogueTitles.map(spelledOut), joined = (name: string) => name.replace(/ ([a-z])$/u, '$1');
-  const names = [...new Set(catalogueNames.flatMap(name => [name, spelledOut(name)]).flatMap(name => [name, joined(name)]))];
-  const key = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/gu, ''), host = titles[1] === undefined ? undefined : key(titles[1]);
+  // GJ and Gliese are one catalogue, and Wikipedia uses either ("Gliese 436", "GJ 1214"), so a title in one serves the other.
+  const titles = catalogueTitles.map(spelledOut), joined = (name: string) => name.replace(/ ([a-z])$/u, '$1'), gliese = (name: string) => name.replace(/^GJ (?=\d)/u, 'Gliese ');
+  const names = [...new Set(catalogueNames.flatMap(name => [name, spelledOut(name), gliese(name)]).flatMap(name => [name, joined(name)]))];
+  const key = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/gu, '').replace(/^gliese(?=\d)/u, 'gj'), host = titles[1] === undefined ? undefined : key(titles[1]);
   for (const [index, title] of titles.entries()) {
     const lead = await wikipediaLead(archive, title);
     if (!lead) continue;
