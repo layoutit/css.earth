@@ -95,8 +95,14 @@ function readJson(path: string): unknown {
   catch (error) { throw new Error(`${relative(REPOSITORY, path)} is not valid JSON`, { cause: error }); }
 }
 
-/** Every package with both a descriptor and a README, in sidebar order. */
-export function readNavigationPackages(): NavigationPackage[] {
+/** Every package with both a descriptor and a README, in sidebar order. Every object page renders the tree, so one
+ * process reads the packages once: the object set is fixed at startup, as the scene registry is. */
+let packages: readonly NavigationPackage[] | undefined;
+export function readNavigationPackages(): readonly NavigationPackage[] {
+  return packages ??= readPackages();
+}
+
+function readPackages(): NavigationPackage[] {
   const objects: NavigationPackage[] = [], { classifications: catalogued, focusIds, sections } = catalogueSubjects(), attached = attachedVolumes();
   for (const entry of readdirSync(OBJECTS_DIRECTORY, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;

@@ -7,6 +7,7 @@ import { pathToFileURL } from "node:url";
 
 import { readPreparedObjects } from "@cssearth/objects/node";
 import { authoredObject } from '@cssearth/bake/sources';
+import type * as OperationsModule from '../objects/operations.ts';
 
 /** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
@@ -323,12 +324,29 @@ async function main(mode = process.argv[2]) {
     return;
   }
 
+  // An authored body assembles through the shared operations module. Load it once and assemble in this process: a Node
+  // start per body cost the deploy build about 110 ms each, four minutes over the catalogue.
+  const runOperations = mode === "assemble" ? await loadOperations() : null;
   for (const { id } of SCENE_OBJECTS) {
+    if (runOperations && await authoredObject(id)) {
+      await runOperations(mode, id, process.argv.slice(3)).catch((cause: unknown) => {
+        throw new Error(`Implemented object ${id} failed to ${mode}.`, { cause });
+      });
+      continue;
+    }
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverObjectTests(id)]
       : [await resolveObjectCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
     await run(process.execPath, argumentsList, mode === "test" ? { ...process.env, CSSEARTH_TEST_OBJECTS: id } : undefined);
   }
+}
+
+/** The bundle `resolveObjectAssembly` runs for an authored body, loaded as a module. */
+async function loadOperations() {
+  const path = resolve("tools/objects/dist/operations.js"), module: unknown = await import(pathToFileURL(path).href);
+  const runOperations = typeof module === "object" && module !== null && "runOperations" in module ? module.runOperations : null;
+  if (typeof runOperations !== "function") throw new TypeError(`${path} exports no runOperations function; run pnpm build:tools.`);
+  return runOperations as typeof OperationsModule.runOperations;
 }
 
 function objectOwnedScript(id: string, path: string, projectRoot: string) {
