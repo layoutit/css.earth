@@ -1,7 +1,8 @@
 /** Extract a published *hypothetical* spot layout onto a stationary stellar limb plate.
  * The figure constrains an illustrative pattern, not the actual surface of the star. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { displayedLuminance, quadraticIntensity, type StellarColor } from './stellar-photometric-color.ts';
+import { displayedLuminance, type StellarColor } from './stellar-photometric-color.ts';
+import { limbIntensity as lawIntensity, type LimbLaw } from './limb-laws.ts';
 
 export interface SpotFigureModel {
   readonly source: string;
@@ -46,7 +47,7 @@ export function parseSpotFigureModel(value: unknown): SpotFigureModel {
 export interface SpotFigurePixels { readonly data: Uint8Array; readonly width: number; readonly height: number; readonly channels: number }
 
 export function addSpotFigureToLimbPlate(plate: { data: Uint8Array; size: number; lossless: boolean }, image: SpotFigurePixels, model: SpotFigureModel,
-  color: StellarColor, limb: { readonly u1: number; readonly u2: number }) {
+  color: StellarColor, limb: LimbLaw | { readonly u1: number; readonly u2: number }) {
   const { data, size } = plate, { panel } = model;
   if (data.length !== size * size * 4) throw new TypeError('The limb plate must be square RGBA.');
   if (image.channels !== 3 || image.data.length !== image.width * image.height * 3 ||
@@ -80,7 +81,7 @@ export function addSpotFigureToLimbPlate(plate: { data: Uint8Array; size: number
     if (!covered) continue;
     const x = (px + 0.5 - radius) / radius, y = (py + 0.5 - radius) / radius;
     const mu = Math.sqrt(Math.max(0, 1 - x * x - y * y));
-    const limbIntensity = Math.max(0, quadraticIntensity(mu, limb.u1, limb.u2));
+    const limbIntensity = Math.max(0, lawIntensity(mu, limb));
     const spotIntensity = 1 - (1 - model.spotToPhotosphereTessIntensityRatio) * covered / 4;
     // The paper's TESS contrast is a light-intensity ratio. Browser alpha acts on encoded
     // sRGB bytes; convert the combined linear intensity before baking black-plate alpha.

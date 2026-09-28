@@ -25,6 +25,10 @@
       "types": "./src/archives/interferometry/alma-disc-selfcal.mts",
       "default": "./src/archives/interferometry/alma-disc-selfcal.mts"
     },
+    "./archives/interferometry/disc-fit": {
+      "types": "./src/archives/interferometry/disc-fit.mts",
+      "default": "./src/archives/interferometry/disc-fit.mts"
+    },
     "./archives/jwst/imaging/bands": {
       "types": "./src/archives/jwst/imaging/bands.mts",
       "default": "./src/archives/jwst/imaging/bands.mts"

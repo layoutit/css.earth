@@ -1,0 +1,35 @@
+{
+  "id": "source-rigel-howarth-2011-t12000g20",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Rigel · rigel howarth 2011 t12000g20",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t12000g20.ucE",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/rigel/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "scope": "The rigel howarth 2011 t12000g20 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "VizieR catalogue data, public with citation of the paper and CDS",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

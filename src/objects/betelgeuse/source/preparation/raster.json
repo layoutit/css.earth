@@ -54,7 +54,7 @@
               "id": "matisse-2020-02-continuum",
               "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-05,
+              "backgroundMaximum": 0.00001,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -141,7 +141,7 @@
               "id": "matisse-2018-12-continuum",
               "path": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-05,
+              "backgroundMaximum": 0.00001,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -228,7 +228,7 @@
               "id": "matisse-2020-12-continuum",
               "path": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-05,
+              "backgroundMaximum": 0.00001,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -288,7 +288,24 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,600 K and log g -0.08 for 17.75 solar masses (u1 1.114, u2 -0.025); the model atmosphere is extended, and the law reaches zero at 99.6% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/neilson-2013-v-quadratic.tsv",
+          "grid": {
+            "teffK": 3600,
+            "logg": -0.08,
+            "massSolar": 17.75,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a(V)",
+            "u2": "b(V)",
+            "mass": "M"
+          }
+        }
       }
     }
   ],
@@ -310,7 +327,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

@@ -393,7 +393,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a model atmosphere.",
         "thumbnail": "betelgeuse-lens-color.webp",
         "surface": "betelgeuse-surface-color@2x.webp",
         "poles": "betelgeuse-poles-color@2x.webp",
@@ -403,7 +403,7 @@
           "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
         },
         "falseColor": false,
-        "notes": "The colour of Betelgeuse's VLT/X-shooter spectrum. It was taken on 12 October 2009, before the Great Dimming, and is not corrected for light lost at the slit, which can tilt the colour. No resolved image of the surface is cast here."
+        "notes": "The colour of Betelgeuse's VLT/X-shooter spectrum. It was taken on 12 October 2009, before the Great Dimming, and is not corrected for light lost at the slit, which can tilt the colour. No resolved image of the surface is cast here. The darkening toward the edge is the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,600 K and log g -0.08 for 17.75 solar masses (u1 1.114, u2 -0.025); the model atmosphere is extended, and the law reaches zero at 99.6% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used."
       }
     ]
   },

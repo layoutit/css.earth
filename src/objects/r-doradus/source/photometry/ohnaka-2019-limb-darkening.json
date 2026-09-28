@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "r-doradus",
+  "law": "power",
+  "source": "Ohnaka et al. (2019), ApJ 883, 89, Section 3.1, power-law limb-darkened disc fitted to the VLT/AMBER continuum (https://arxiv.org/abs/1908.06997)",
+  "band": "VLT/AMBER K-band continuum near 2.3 um; not a visible band",
+  "alpha": {
+    "value": 0.61,
+    "uncertainty": 0.24,
+    "cell": "\"We obtained a limb-darkened disk diameter and a limb-darkening parameter of 51.18 +/- 2.24 mas and 0.61 +/- 0.24, respectively, in the continuum\""
+  },
+  "note": "I(mu)/I(1) = mu^alpha (Hestroffer 1997), the mean over the continuum channels with the mean of their bootstrap errors, as the paper describes. The only measured limb of R Dor; the visible limb is not measured."
+}

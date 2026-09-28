@@ -7,6 +7,7 @@ import { linearToSrgb } from '../color/index.ts';
 import { gunzipSync } from 'node:zlib';
 import { binaryTable, numbers, readFitsHdus, tableColumn } from '../raster/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
+import { interpolateGrid, limbIntensity, readHowarthNode, readPublishedLimbDarkening, readPublishedPowerLaw, type GridRead, type LimbLaw } from './limb-laws.ts';
 
 export type StellarColorRecord = {
   readonly spectrum: 'planck'; readonly temperaturePath: string; readonly sourceId: string;
@@ -198,7 +199,15 @@ async function loadStellarColorOnly(read: (path: string) => Promise<Buffer>, sci
     const recipe = parseLimbDarkeningRecipe(science.limbDarkening);
     if (recipe.source === 'table') return { recipe, coefficients: readQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
     if (recipe.source === 'grid') return { recipe, coefficients: interpolateQuadraticLimbDarkening((await read(recipe.path)).toString('utf8'), recipe) };
-    if (recipe.source === 'published') return { recipe, coefficients: readPublishedLimbDarkening(JSON.parse((await read(recipe.path)).toString('utf8'))) };
+    if (recipe.source === 'published') {
+      const record: unknown = JSON.parse((await read(recipe.path)).toString('utf8'));
+      return { recipe, coefficients: recipe.law === 'power' ? readPublishedPowerLaw(record) : readPublishedLimbDarkening(record) };
+    }
+    if (recipe.source === 'howarth') {
+      const nodes = await Promise.all(recipe.paths.map(async path => readHowarthNode(path, (await read(path)).toString('utf8'), recipe.passband)));
+      const { u1, u2, u1Bounds, u2Bounds } = interpolateGrid(nodes, { teff: recipe.teffK, logg: recipe.logg });
+      return { recipe, coefficients: { u1, u2, u1Bounds, u2Bounds } };
+    }
     const [{ readTessLightCurve, fitTransitLimbDarkening }, { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry }] =
       await Promise.all([import('../raster/index.ts'), import('@cssearth/astronomy')]);
     if (!(HOSTED_PLANET_IDS as readonly string[]).includes(recipe.planet)) throw new TypeError(`Limb darkening from transits needs a hosted planet: ${recipe.planet}.`);
@@ -461,19 +470,35 @@ export type LimbDarkeningRecipe = {
 } | {
   /** Coefficients published in a paper's text or table (no machine-readable input): a transcription record at `path`
    * holds each value, uncertainty, quoted cell and whether it is a fit or a theoretical model prior. */
-  readonly law: 'quadratic'; readonly source: 'published'; readonly path: string;
+  readonly law: 'quadratic' | 'power'; readonly source: 'published'; readonly path: string;
+} | {
+  /** Howarth (2011, MNRAS 413, 1515): one coefficient file per ATLAS9 model (limb-laws.ts), for the gravities the other grids stop
+   * short of; the files around the star, read at its temperature and gravity in `passband`. */
+  readonly law: 'quadratic'; readonly source: 'howarth'; readonly paths: readonly string[]; readonly teffK: number; readonly logg: number; readonly passband: string;
 } | {
   /** A theoretical grid by effective temperature and surface gravity (a VizieR table of model-atmosphere coefficients), for a
    * star no measurement covers: bilinear between the four grid nodes around the star's own temperature and gravity, among the
    * rows whose model columns match `models`. */
   readonly law: 'quadratic'; readonly source: 'grid'; readonly path: string; readonly teffK: number; readonly logg: number;
-  readonly models: Readonly<Record<string, string>>; readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string };
+  /** Spherical grids (Neilson & Lester 2013) also tabulate the model's mass: the star's own, in solar masses, and its column. */
+  readonly massSolar?: number;
+  readonly models: Readonly<Record<string, string>>; readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string; readonly mass?: string };
 };
 export interface QuadraticLimbDarkening { readonly u1: number; readonly u2: number; readonly u1Bounds: readonly [number, number]; readonly u2Bounds: readonly [number, number]; readonly basis?: 'transit-fit' | 'model-prior' }
 
 export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
   const input = requireRecord(value, 'limbDarkening');
-  if (input.law !== 'quadratic') throw new TypeError('Limb darkening must name the quadratic law.');
+  if (input.law === 'power') {
+    if (input.published !== true || input.columns !== undefined) throw new TypeError('A power limb-darkening law is published: it names its transcription record.');
+    return { law: 'power', source: 'published', path: requireString(input.path, 'limbDarkening.path') };
+  }
+  if (input.law !== 'quadratic') throw new TypeError('Limb darkening must name the quadratic or power law.');
+  if (input.howarth !== undefined) {
+    const h = requireRecord(input.howarth, 'limbDarkening.howarth');
+    if (!Array.isArray(h.paths) || !h.paths.length) throw new TypeError('Howarth (2011) limb darkening names its coefficient files.');
+    return { law: 'quadratic', source: 'howarth', paths: h.paths.map((path, i) => requireString(path, `limbDarkening.howarth.paths.${i}`)),
+      teffK: requireFiniteNumber(h.teffK, 'limbDarkening.howarth.teffK'), logg: requireFiniteNumber(h.logg, 'limbDarkening.howarth.logg'), passband: requireString(h.passband, 'limbDarkening.howarth.passband') };
+  }
   if (input.transits !== undefined) {
     const transits = requireRecord(input.transits, 'limbDarkening.transits');
     if (input.path !== undefined || input.columns !== undefined || !Array.isArray(transits.lightCurves) || !transits.lightCurves.length) {
@@ -492,7 +517,8 @@ export function parseLimbDarkeningRecipe(value: unknown): LimbDarkeningRecipe {
     const grid = requireRecord(input.grid, 'limbDarkening.grid'), models = requireRecord(grid.models, 'limbDarkening.grid.models');
     return { law: 'quadratic', source: 'grid', path: requireString(input.path, 'limbDarkening.path'), teffK: requireFiniteNumber(grid.teffK, 'limbDarkening.grid.teffK'),
       logg: requireFiniteNumber(grid.logg, 'limbDarkening.grid.logg'), models: Object.fromEntries(Object.entries(models).map(([key, value]) => [key, requireString(value)])),
-      columns: { teff: column('teff'), logg: column('logg'), u1: column('u1'), u2: column('u2') } };
+      ...(grid.massSolar === undefined ? {} : { massSolar: requireFiniteNumber(grid.massSolar, 'limbDarkening.grid.massSolar') }),
+      columns: { teff: column('teff'), logg: column('logg'), u1: column('u1'), u2: column('u2'), ...(columns.mass === undefined ? {} : { mass: column('mass') }) } };
   }
   return { law: 'quadratic', source: 'table', path: requireString(input.path, 'limbDarkening.path'), star: requireString(input.star, 'limbDarkening.star'),
     columns: { u1: column('u1'), u2: column('u2'), u1Upper: column('u1Upper'), u1Lower: column('u1Lower'), u2Upper: column('u2Upper'), u2Lower: column('u2Lower') } };
@@ -514,48 +540,25 @@ export function readQuadraticLimbDarkening(tsv: string, recipe: Extract<LimbDark
   return coefficients;
 }
 
-/** Bilinear between the four grid nodes around the star; the bounds are the spread of the four nodes. */
+/** Linear between the grid nodes around the star (limb-laws.ts): bilinear in temperature and gravity, trilinear with a mass axis; the
+ * bounds are the spread of the corner nodes. A missing neighbour widens the bracket to the nearest complete set of nodes. */
 export function interpolateQuadraticLimbDarkening(tsv: string, recipe: Extract<LimbDarkeningRecipe, { source: 'grid' }>): QuadraticLimbDarkening {
+  const { u1, u2, u1Bounds, u2Bounds } = readLimbGrid(tsv, recipe);
+  return { u1, u2, u1Bounds, u2Bounds };
+}
+/** The grid read itself, with the corner nodes it used: the generator requests exactly those nodes. */
+export function readLimbGrid(tsv: string, recipe: Extract<LimbDarkeningRecipe, { source: 'grid' }>): GridRead {
   const lines = tsv.split(/\r?\n/u).filter(line => line.trim() && !line.startsWith('#') && !/^-+(\t-+)*$/u.test(line.trim()));
   const [header, , ...rows] = lines.map(line => line.split('\t').map(cell => cell.trim()));
   if (!header) throw new TypeError('The limb-darkening grid is empty.');
   const index = (name: string) => { const i = header.indexOf(name); if (i < 0) throw new TypeError(`The limb-darkening grid lacks ${name}.`); return i; };
+  const mass = recipe.columns.mass;
   const nodes = rows.filter(row => Object.entries(recipe.models).every(([key, value]) => row[index(key)] === value))
-    .map(row => ({ teff: Number(row[index(recipe.columns.teff)]), logg: Number(row[index(recipe.columns.logg)]), u1: Number(row[index(recipe.columns.u1)]), u2: Number(row[index(recipe.columns.u2)]) }));
-  const teffs = [...new Set(nodes.map(node => node.teff))].sort((a, b) => a - b), loggs = [...new Set(nodes.map(node => node.logg))].sort((a, b) => a - b);
-  // The two nodes around the value; a value on a node, the first one included, is inside the grid.
-  const bracket = (values: number[], value: number) => {
-    const lo = values.findIndex((v, i) => v <= value && i + 1 < values.length && values[i + 1]! >= value);
-    if (lo < 0) throw new RangeError(`${value} is outside the grid ${values.join(', ')}.`);
-    return [values[lo]!, values[lo + 1]!] as const;
-  };
-  const [t0, t1] = bracket(teffs, recipe.teffK), [g0, g1] = bracket(loggs, recipe.logg), ft = (recipe.teffK - t0) / (t1 - t0), fg = (recipe.logg - g0) / (g1 - g0);
-  const node = (t: number, g: number) => { const found = nodes.filter(n => n.teff === t && n.logg === g); if (found.length !== 1) throw new TypeError(`The grid must hold exactly one node at ${t} K, log g ${g}.`); return found[0]!; };
-  const corners = [node(t0, g0), node(t1, g0), node(t0, g1), node(t1, g1)], weights = [(1 - ft) * (1 - fg), ft * (1 - fg), (1 - ft) * fg, ft * fg];
-  const at = (key: 'u1' | 'u2') => corners.reduce((total, corner, k) => total + corner[key] * weights[k]!, 0);
-  const u1 = at('u1'), u2 = at('u2');
-  checkLimb(u1, u2);
-  return { u1, u2, u1Bounds: [Math.min(...corners.map(c => c.u1)), Math.max(...corners.map(c => c.u1))], u2Bounds: [Math.min(...corners.map(c => c.u2)), Math.max(...corners.map(c => c.u2))] };
+    .map(row => ({ teff: Number(row[index(recipe.columns.teff)]), logg: Number(row[index(recipe.columns.logg)]), ...(mass ? { mass: Number(row[index(mass)]) } : {}),
+      u1: Number(row[index(recipe.columns.u1)]), u2: Number(row[index(recipe.columns.u2)]) }));
+  // A grid with a mass axis is of spherical models, whose law may reach zero before the edge (checkLimbLaw).
+  return interpolateGrid(nodes, { teff: recipe.teffK, logg: recipe.logg, ...(recipe.massSolar === undefined ? {} : { mass: recipe.massSolar }) }, { darkEdge: recipe.massSolar !== undefined });
 }
-/** A transcription record (cssearth-published-limb-darkening@1): u1 and u2 with their one-sigma uncertainties, the band, the
- * source and the quoted cells. A coefficient the paper fixed to a model says so in `fixed`, and carries no uncertainty. */
-export function readPublishedLimbDarkening(value: unknown): QuadraticLimbDarkening {
-  const record = requireRecord(value, 'published limb darkening');
-  if (record.schema !== 'cssearth-published-limb-darkening@1') throw new TypeError('Published limb darkening must use cssearth-published-limb-darkening@1.');
-  requireString(record.source, 'source'); requireString(record.band, 'band');
-  if (record.basis !== undefined && record.basis !== 'transit-fit' && record.basis !== 'model-prior') throw new TypeError('Published limb-darkening basis must be transit-fit or model-prior.');
-  const coefficient = (key: 'u1' | 'u2') => {
-    const entry = requireRecord(record[key], key), value = requireFiniteNumber(entry.value, `${key}.value`);
-    if (entry.fixed !== undefined) { requireString(entry.fixed, `${key}.fixed`); return { value, bounds: [value, value] as const }; }
-    const sigma = requireFiniteNumber(entry.uncertainty, `${key}.uncertainty`); requireString(entry.cell, `${key}.cell`);
-    return { value, bounds: [value - sigma, value + sigma] as const };
-  };
-  const u1 = coefficient('u1'), u2 = coefficient('u2');
-  checkLimb(u1.value, u2.value);
-  return { u1: u1.value, u2: u2.value, u1Bounds: u1.bounds, u2Bounds: u2.bounds,
-    ...(record.basis === undefined ? {} : { basis: record.basis }) };
-}
-
 function checkLimb(u1: number, u2: number) {
   if (!(quadraticIntensity(0, u1, u2) >= 0 && quadraticIntensity(0, u1, u2) <= 1)) throw new TypeError('The limb-darkening law must keep the limb between dark and the centre brightness.');
 }
@@ -569,12 +572,12 @@ export const displayedLuminance = (linear: readonly number[]) => linear.reduce((
 /** A square RGBA limb plate `size` texels across whose disc fills it edge to edge: black, with alpha such that the photosphere colour
  * under it shows the displayed luminance of the colour dimmed by I(mu) / I(1), dithered to within one 8-bit step. Outside the disc it
  * is transparent. */
-export function limbDarkeningPlate(size: number, coefficients: Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, color: StellarColor) {
+export function limbDarkeningPlate(size: number, coefficients: LimbLaw | Pick<QuadraticLimbDarkening, 'u1' | 'u2'>, color: StellarColor) {
   const data = new Uint8Array(size * size * 4), centre = size / 2, full = displayedLuminance(color.linear);
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const radial = Math.hypot(x + 0.5 - centre, y + 0.5 - centre) / centre;
     if (radial > 1) continue;
-    const ratio = Math.max(0, quadraticIntensity(Math.sqrt(1 - radial * radial), coefficients.u1, coefficients.u2));
+    const ratio = Math.max(0, limbIntensity(Math.sqrt(1 - radial * radial), coefficients));
     const shown = displayedLuminance(color.linear.map(value => value * ratio)) / full;
     // A fixed ordered dither (4 x 4 Bayer) keeps the 8-bit alpha from banding when the plate is stretched over a close-up disc; it moves
     // no texel by more than one step from the exact value.

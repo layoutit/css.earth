@@ -98,30 +98,52 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "hr-8799-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://arxiv.org/abs/1210.0556",
+      "credit": "Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556): effective temperature 7193 +/- 87 K from the CHARA limb-darkened diameter and bolometric flux, https://arxiv.org/abs/1210.0556; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the published temperature and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored colour recipe naming the cited temperature; repinned when edited."
+      }
+    },
+    {
+      "id": "hr-8799-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 7000..7250 K, log g 4..4.5, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hr-8799-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
-    {
-      "id": "neutral-disc-context-marker",
-      "path": "presentation/context.png",
-      "origin": "https://arxiv.org/abs/0811.2606",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-object.mts",
-      "license": "Project-authored display derivative.",
-      "consumers": [
-        "navigation"
-      ],
-      "recipe": {
-        "generator": "tools/objects/new-object.mts",
-        "inputs": [
-          "hr-8799-observational-measurements"
-        ]
-      },
-      "generator": "tools/objects/new-object.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
-      }
-    },
     {
       "id": "hr-8799-jwst-nircam-f410m",
       "path": "jwst/hr-8799-nircam-f410m.webp",
@@ -138,6 +160,29 @@
         "reason": "Picture made here from our own reduction of pinned MAST exposures."
       },
       "generator": "packages/telescope-cli/src/archives/jwst/klip/reduce.mts hr-8799-1194 NIRCAM-F410M-MASKLWB"
+    },
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/1210.0556",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "inputs": [
+          "hr-8799-stellar-color",
+          "hr-8799-claret-2011-limb-darkening",
+          "hr-8799-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+      }
     }
   ],
   "documents": [

@@ -1730,6 +1730,38 @@
       ],
       "path": "observations/oifits/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
       "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-27T033110_alf_Ori_A0B2D0C1_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/neilson-2013-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/554/A98/table3",
+        "-out.max": "5000",
+        "Teff": "3500..3600",
+        "logg": "-0.25..0",
+        "M": "17.5..20",
+        "-out": "Teff,logg,M,a(V),b(V)"
+      },
+      "requiredText": [
+        "Teff\tlogg"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
     }
   ]
 }

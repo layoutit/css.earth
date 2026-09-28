@@ -5,7 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { matchVis2, vis2Agreement } from './author-comparison.mts';
 import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
-import { discStartImage, fitUniformDisc } from './disc-fit.mts';
+import { discStartImage, fitPowerLawDisc, fitUniformDisc } from './disc-fit.mts';
 import { parseSeason, TWIN_SCALES } from './image-star.mts';
 import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { selectOifits } from './oifits-select.mts';
@@ -53,6 +53,16 @@ test('the π¹ Gruis season parses, and malformed seasons fail', async () => {
   assert.throws(() => parseSeason({ ...raw, reconstruction: { ...(raw.reconstruction as object), code: 'mira' } }), /SQUEEZE/u);
   const { source: _, ...unsourced } = raw.referenceDiameter as Record<string, unknown>;
   assert.throws(() => parseSeason({ ...raw, referenceDiameter: unsourced }));
+});
+
+test("the first-lobe power law on the author file is the limb the package records", async () => {
+  const rows = readChannelRows(await readFile(authorFile));
+  const record = JSON.parse(await readFile(resolve(repository, 'src/objects/pi1-gruis/source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json'), 'utf8'));
+  const fit = fitPowerLawDisc(rows, { uniformMas: 18.17 });
+  assert.equal(fit.points, 341);
+  assert.ok(Math.abs(fit.alpha - record.alpha.value) < 0.005, `alpha ${fit.alpha}`);
+  assert.ok(Math.abs(Math.max(fit.alpha - fit.alphaRange[0], fit.alphaRange[1] - fit.alpha) - record.alpha.uncertainty) < 0.005, `range ${fit.alphaRange}`);
+  assert.ok(Math.abs(fit.diameterMas - 21.38) < 0.01, `${fit.diameterMas} mas`);
 });
 
 test('the disc fit on the author file lands on the package diameter, and the start image is that disc', async () => {

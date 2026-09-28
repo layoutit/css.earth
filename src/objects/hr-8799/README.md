@@ -18,6 +18,10 @@ HR 8799 is a young F0 star 41 parsecs away in Pegasus. In 2008 it became the fir
 
 **Shape lens.** A sphere of that radius in the shared neutral gray. The star is 0.34 milliarcseconds across: CHARA measures its size, and no image of its surface exists.
 
+**Colour lens.** A Planck spectrum at 7,193 K, because no archive holds a spectrum of this star (stis-ngsl: HD 218396 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 8799 is not in the catalogue; kiehling: HR 8799 is not among its 60 stars; kharitonov: HR 8799 is not in the catalogue; burnashev: BS 8799 is not in part2), through the CIE 1931 2° observer: #f0f0ff. Routes tried in order: stis-ngsl: HD 218396 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 8799 is not in the catalogue; kiehling: HR 8799 is not among its 60 stars; kharitonov: HR 8799 is not in the catalogue; burnashev: BS 8799 is not in part2; planck: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,193 K and log g 4.25 (u1 0.296, u2 0.339): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/hr-8799.json: 4.251.
+
 ## Evidence
 
 Run of 2026-09-23 (this version):
@@ -30,5 +34,6 @@ Run of 2026-09-23 (this version):
 
 - The shape lens is gray: no colour of the star is cast, though Gaia DR3 publishes its spectrum, as Beta Pictoris's colour uses.
 - The mass is the one the orbit fit assumed, not a measurement of this package.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

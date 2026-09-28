@@ -6,11 +6,24 @@
       "id": "colour",
       "subject": "A colour for Epsilon Indi Bb",
       "status": "unresolved",
-      "finding": "The only resolved spectra of Epsilon Indi Bb, from King et al. (2010, A&A 510, A99; VizieR J/A+A/510/A99), are flux-calibrated but start at 630 nm. The missing 380 to 630 nm carries most of what the eye would see: with the gap filled by a ramp through the resolved V limit it holds 63% of the luminance, and the colour moves from sRGB (255, 0, 0) with the gap empty to about (255, 42, 0) with it filled, so a colour would be the fill, not a measurement. A blackbody at the temperature would misrepresent a brown dwarf's absorbed spectrum as well. It stays the shared neutral gray.",
+      "finding": "The only resolved spectra of Epsilon Indi Bb, from King et al. (2010, A&A 510, A99; VizieR J/A+A/510/A99), are flux-calibrated but start at 630 nm. The missing 380 to 630 nm carries most of what the eye would see: with the gap filled by a ramp through the resolved V limit it holds 63% of the luminance, and the colour moves from sRGB (255, 0, 0) with the gap empty to about (255, 42, 0) with it filled, so a colour would be the fill, not a measurement. A blackbody at the temperature would misrepresent a brown dwarf's absorbed spectrum as well. It stays the shared neutral gray. Model spectra were tested on 2026-09-28 against Luhman 16 A, a dwarf of nearly the same temperature whose optical colour is measured (#ff2f96): the cloud-free Sonora Bobcat spectra (Marley et al. 2021) give violet (#7800ff) and the cloudy Sonora Diamondback fit to Luhman 16 of Mader et al. (2026) gives red (#ff656a), 54 levels from the measurement where two colours of one star may differ by 12; no cloudy-model fit of Epsilon Indi B is published to choose its clouds by. Below 1,000 K the Planck colour is refused as well.",
       "revisitWhen": "A flux-calibrated spectrum of the resolved component covering about 400 to 630 nm is published.",
       "evidence": [
         "https://arxiv.org/abs/0911.3143",
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/510/A99"
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/510/A99",
+        "https://doi.org/10.5281/zenodo.5063476",
+        "https://doi.org/10.5281/zenodo.18375777"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "excluded",
+      "finding": "The limb is drawn on the colour lens, which this dwarf does not have. PICASO 4.1 on the Sonora Bobcat atmospheres gives a V-band law at its temperature and gravity (node tools/objects/new-object.mts --star-limb), but from the same cloud-free models whose visible spectrum fails the Luhman 16 A test above, and there is no colour to draw it on. No law is published for this dwarf.",
+      "revisitWhen": "The colour entry is resolved, or a limb law is published for this dwarf.",
+      "evidence": [
+        "https://doi.org/10.5281/zenodo.5063476",
+        "https://doi.org/10.5281/zenodo.18375777"
       ]
     }
   ]

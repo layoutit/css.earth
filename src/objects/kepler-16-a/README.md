@@ -12,6 +12,10 @@ Star B has no page of its own. It is drawn from its astronomy record, [kepler-16
 
 The shape lens is a gray sphere of the published radius. No image of the star exists: at 0.08 milliarcseconds it is far below what any interferometer resolves. The display axis is celestial north, a convention (see [rotation.json](source/preparation/rotation.json)).
 
+**Colour lens.** Gaia DR3 XP spectrum, source 2133476355197071616, through the CIE 1931 2° observer: #ffc195. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,450 K and log g 4.65 (u1 0.765, u2 0.028): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/kepler-16-a.json: 4.652.
+
 ## Evidence
 
 `packages/astronomy/src/hostedOrbits.test.ts`, "Kepler-16: a circumbinary planet" (commit of this package): the orbit of B puts it in front of A at all 36 primary eclipses of the Kepler mission and behind A at every secondary, at the times of the Villanova Kepler Eclipsing Binary Catalogue, an ephemeris fitted to the eclipses themselves rather than to the papers these records use.
@@ -19,5 +23,6 @@ The shape lens is a gray sphere of the published radius. No image of the star ex
 ## Known problems
 
 The masses of Doyle et al. are kept although Sebastian et al. (2025, arXiv:2505.19718) measure both stars 2 to 7% heavier: Doyle's orbits were fitted with Doyle's masses, and the two sets are not mixed. The binary is drawn as a fixed ellipse; its slow apsidal and nodal precession is not modelled. Star B's colour is unmeasured.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

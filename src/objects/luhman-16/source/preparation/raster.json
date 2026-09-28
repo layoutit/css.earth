@@ -26,7 +26,12 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform colour of Faherty et al. (2014)'s measured optical spectrum of Luhman 16 A. No limb darkening is drawn: none is measured for it. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Uniform colour of Faherty et al. (2014)'s measured optical spectrum of Luhman 16 A. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law (u1 0.46, u2 0) de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225 fit to this star (VLT/CRIRES+ J1226 setting (1.1-1.4 um); not a visible band). The disc is dimmed toward the limb by the quadratic law (u1 0.46, u2 0) de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225 fit to this star (VLT/CRIRES+ J1226 setting (1.1-1.4 um); not a visible band). The disc is dimmed toward the limb by the quadratic law (u1 0.46, u2 0) de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225 fit to this star (VLT/CRIRES+ J1226 setting (1.1-1.4 um); not a visible band).",
+        "limbDarkening": {
+          "law": "quadratic",
+          "published": true,
+          "path": "photometry/deregt-2025-limb-darkening.json"
+        }
       }
     }
   ],
@@ -48,7 +53,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

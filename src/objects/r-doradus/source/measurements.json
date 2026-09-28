@@ -14,5 +14,7 @@
     "path": "shape/uniform-disc.tab",
     "stepDegrees": 5,
     "qualification": "A sphere at the published radius. The photosphere of an asymptotic giant branch star is not a solid surface and its limb is not sharp; the sphere is the reference surface the ALMA image is cast onto, not a measured shape. Its 338 GHz disc is 1.18 +/- 0.11 times the infrared photosphere."
-  }
+  },
+  "surfaceGravityLogg": -0.72,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/r-doradus.json: -0.723"
 }
