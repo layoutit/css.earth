@@ -73,7 +73,7 @@ inventory for changed prepared text; it does not compare source digest pins.
 Card lines, introductions and dataset text are not content:
 they live in the body's `text.json` and publish with `node site/build/prepare/prepare-text.mts`; see
 [reader text](reader-text.md). After a lens label change, run the body's content
-preparation, then `node tools/prepare/cli/prepare-object-json.mts <object-id>` with the
+preparation, then `node site/build/prepare/prepare-object-json.mts <object-id>` with the
 preparation tools built, and refresh provenance with `node site/build/prepare/prepare-provenance.mts <object-id>`.
 Imagery, legends, charts, settings, numeric scene data and lens inventory changes
 still require their preparation owners. Shared ordering keeps four initial rows

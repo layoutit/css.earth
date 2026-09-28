@@ -15,7 +15,7 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
 1. Restore a body's declared originals with
    `node packages/bake/cli/object-operations.mts acquire <id>`.
 2. For ordinary regeneration, run the existing preparer directly:
-   `node tools/objects/dist/prepare-authored.js <id> --write`.
+   `node site/build/prepare/prepare-authored.ts <id> --write`.
    The checked-in radius table and source recipes are sufficient.
 3. To update the selected numerical models, run
    `python3 tools/objects/source-authoring/distant-worlds/author.py`.
