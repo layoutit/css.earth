@@ -18,10 +18,10 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
    `node site/build/prepare/prepare-authored.ts <id> --write`.
    The checked-in radius table and source recipes are sufficient.
 3. To update the selected numerical models, run
-   `python3 tools/objects/source-authoring/distant-worlds/author.py`.
+   `python3 packages/bake/authoring/distant-worlds/author.py`.
    It updates the existing packages from the input table, keeping current source
    bindings and other package metadata. Run
-   `node tools/objects/source-authoring/distant-worlds/finalize-sources.mts`,
+   `node packages/bake/authoring/distant-worlds/finalize-sources.mts`,
    then prepare each changed body.
 4. Prepare changed marker sources with `node packages/bake/cli/prepare-navigation.mts <id>`.
    Prepare the selected body to bind its stable marker URL.

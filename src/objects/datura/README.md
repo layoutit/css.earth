@@ -19,7 +19,7 @@ Adopted diameter: **8.203 ± 0.152 km**, meaning NEOWISE best-fit effective sphe
 
 ## Evidence
 
-Checked 2026-09-21 by `tools/objects/source-authoring/damit-asteroids/author.mts` from the pinned [inputs](../../../tools/objects/source-authoring/damit-asteroids/inputs.json). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records, NEOWISE row and every derived record are pinned by bytes and SHA-256 in the [input manifest](source/manifest.json).
+Checked 2026-09-21 by `packages/bake/authoring/damit-asteroids/author.mts` from the pinned [inputs](../../../packages/bake/authoring/damit-asteroids/inputs.json). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records, NEOWISE row and every derived record are pinned by bytes and SHA-256 in the [input manifest](source/manifest.json).
 
 ## Known problems
 
