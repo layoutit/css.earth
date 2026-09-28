@@ -2,7 +2,8 @@
 // `public/navigation/search/<id>@2x.webp`: 40 CSS px at the one prepared density. Every scene object whose navigation
 // marker has a context sprite (`public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite; a
 // sprite photographed on black sky is cut out along the body's outline. A search list decodes dozens of these; the full
-// images would cost megabytes each.
+// images would cost megabytes each. The previews are committed beside their sprites: `prepare-navigation` and the
+// shape-material refresh remake them after drawing a sprite, so no build or deploy decodes a sprite.
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { availableParallelism } from 'node:os';
@@ -77,14 +78,14 @@ export async function prepareSearchThumbnails(projectRoot = root) {
   const output = resolve(projectRoot, 'public/navigation/search');
   await mkdir(output, { recursive: true });
   let written = 0, unchanged = 0, current = 0, next = 0;
-  // Each preview reads only its own sprite. One at a time, the deploy spent 1 min 42 s on 2,134 of them.
+  // Each preview reads only its own sprite, so they are made in parallel.
   const markers = Object.entries(PREPARED_NAVIGATION_MARKERS);
   await Promise.all(Array.from({ length: availableParallelism() }, async () => { while (next < markers.length) {
     const [id, marker] = markers[next++]!;
     if (!marker.context) continue;
     if (!/^\/navigation\/[a-z0-9-]+-context\.webp$/u.test(marker.context.url)) throw new TypeError(`${id}: unexpected context sprite ${marker.context.url}`);
     const spritePath = resolve(projectRoot, 'public', marker.context.url.slice(1)), path = resolve(output, `${id}@2x.webp`);
-    // A preview older than its sprite is rebuilt; one newer than it is current, so a routine predev decodes no sprites.
+    // A preview older than its sprite is rebuilt; one newer than it is current, so a run decodes only the sprites that were redrawn.
     const [spriteStat, previewStat] = await Promise.all([stat(spritePath), stat(path).catch(() => null)]);
     if (previewStat && previewStat.mtimeMs >= spriteStat.mtimeMs) { current++; continue; }
     const sprite = await readFile(spritePath);
