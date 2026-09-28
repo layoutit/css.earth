@@ -30,7 +30,7 @@ Run of 2026-09-16 (this version): `node tools/prepare/prepare-object.mts wasp-43
 - `object-discovery.test.mts` checks that WASP-43 and WASP-43b stay on the map under every discovery setting while Antares and Polaris stay hidden.
 - `default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, and the pole, identical to WASP-43b's orbit normal, up.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/wasp-43/` with the default camera, no console errors.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffdcb8 is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`tests/contract/object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts)) checks that the catalogue colour #ffdcb8 is the colour lens's prepared colour.
 
 ## Known problems
 
