@@ -51,6 +51,10 @@ preparation derives image dimensions from the generated SVG. The content
 recipe also records dimensions for consumers of the authored document.
 Keep its alt text, source reference and chart title meaningful.
 
+Generated exoplanets get their charts from `new-object` (`tools/objects/new-object/planet-charts.mts`): HD 3167 c's orbits, HAT-P-11 b's transmission spectrum from Fraine et al. (2014) and WASP-12 b's dayside emission from Crossfield et al. (2012), as the NASA Exoplanet Archive lists them.
+
+![Generated charts: HD 3167 system orbits, HAT-P-11 b transmission spectrum, WASP-12 b dayside emission](images/generated-exoplanet-charts.webp)
+
 ## Add or reuse one
 
 1. Copy the matching entry into the object's `source/content/charts.json`,
