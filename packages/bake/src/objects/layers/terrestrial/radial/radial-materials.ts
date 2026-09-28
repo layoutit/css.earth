@@ -8,7 +8,8 @@ import { requireArray, requireString, requireRecord, requireFiniteNumber, dotN a
 import { parseRadialSnapshot } from '../records/radial-source.ts';
 import { createRasterEmitter } from '../raster-output.ts';
 import { createSourceMeshLighting } from '../source-mesh-lighting.ts';
-import { prepareNativePhotographicAtlas } from '../native-photograph.ts';
+import { prepareNativePhotographicAtlas, samplePhotographicTexel } from '../native-photograph.ts';
+import { loadNativePhotograph } from '../native-photograph-source.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
 import { neutralShapeAtlas, shapeFillIllumination } from '../shape-material.ts';
 import { requireTerrainMesh, closestTrianglePoint } from '../../../geometry/index.ts';
@@ -18,7 +19,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
 import { createSourceSurfacePainter } from '../../../raster/index.ts';
-import { missingCoverageColor } from '../../../../raster/index.ts';
+import { missingCoverageColor, applyUnderlay } from '../../../../raster/index.ts';
 import { linearToSrgb, srgbToLinear } from '../../../color/index.ts';
 
 interface ObservationTransfer {
@@ -122,6 +123,16 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     if (sourceSurface && (!scientific || !sourceSurface.samplePoint || !scientific.surfaceSampling)) throw new Error('Terrain science requires its source-point sampler and bound profile.');
     const sampleScience = scientific && sourceSurface?.samplePoint
       ? createRadialScienceColorSampler({samplePoint: sourceSurface.samplePoint}, scientific, config) : null;
+    // A source-surface lens over an underlay shows its photograph where the source sampler finds no catalogued feature. The
+    // photograph is sampled as its own native atlas samples it: the same leaf transform and texel footprint, then dimmed.
+    const underlay = sampleScience && scientific?.underlay ? await (async (recipe) => {
+      const photograph = config.raster.observations?.find(observation => observation.id === recipe.surface);
+      const input = source.manifest.inputs.find(entry => requireRecord(entry).lensId === recipe.surface && entry.consumers.includes('surfaces'));
+      if (!photograph?.nativePhotographicSampling || !input || !sourceDirectory || scale !== 1)
+        throw new Error(`${config.namespace} ${surface.id}: a source-surface underlay needs ${recipe.surface} to be a native photograph at full atlas scale (sourceDirectory ${Boolean(sourceDirectory)}, scale ${scale}).`);
+      return { recipe, sampler: await loadNativePhotograph(sourceDirectory, input, photograph.validity), samplesPerAxis: photograph.nativePhotographicSampling.samplesPerAxis };
+    })(scientific.underlay) : null;
+    const underlayColor = [0, 0, 0], underlayPixel = new Uint8Array(4), underlayBase = new Uint8Array(4), underlayMask = Uint8Array.of(1);
     const scalarSources = ['pds3-scalar-map', 'facet-scalars', 'vtk-cell-categories', 'obj-uv-fits', 'circle-catalogue'].includes(scientific?.format ?? '') && Buffer.alloc(width * height * 4);
     const observation = radial.observationSurfaces?.get(surface.id);
     // Direct source samplers never consume the flat preview, including its
@@ -139,7 +150,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
       method: 'Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.' };
     const transfer = sourceSurface && scientific?.surfaceSampling && { sampledTexels: 0, withheldTexels: 0, maximumDistanceMeters: 0,
-      includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0,
+      includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0, ...(underlay ? { underlaidTexels: 0 } : {}),
       maximumAcceptedDistanceMeters: scientific.surfaceSampling.maximumDistanceMeters,
       method: scalarSources ? requireRecord(sourceSurface.report).registration : 'Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection.' };
     for (const { face, rect, geometry, matrix: m } of radial.plans) {
@@ -244,7 +255,17 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
           transfer.sampledTexels++;
           const interior = u >= 0 && v >= 0 && u + v <= 1;
           if (interior) transfer.triangleInteriorTexels++;
-          const color = sample.color;
+          let color = sample.color;
+          if (underlay && !('radius' in sample)) {
+            const observed = samplePhotographicTexel(underlay.sampler, m, px, py, 1, underlay.samplesPerAxis, underlayColor);
+            color = observed ? underlayColor.map(Math.round) : color;
+            if (observed) {
+              for (let channel = 0; channel < 3; channel++) underlayBase[channel] = color[channel];
+              applyUnderlay(underlayPixel, underlayMask, underlayBase, surface.id, underlay.recipe);
+              color = [underlayPixel[0], underlayPixel[1], underlayPixel[2]];
+              transfer.underlaidTexels = (transfer.underlaidTexels ?? 0) + 1;
+            }
+          }
           if ('radius' in sample) {
             if (scientific.format !== 'pds3-scalar-map') illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
             transfer.maximumDistanceMeters = Math.max(transfer.maximumDistanceMeters, sample.distanceMeters);

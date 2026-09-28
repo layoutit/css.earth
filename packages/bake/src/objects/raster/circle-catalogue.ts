@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { array, number, shape, text } from '@cssearth/core';
+import { array, number, optional, requireRecord, shape, text } from '@cssearth/core';
 import type { ClosestSurfacePoint, SourceMesh } from '../geometry/index.ts';
 import { parseCategory } from './source-records.ts';
 
@@ -8,12 +8,13 @@ import { parseCategory } from './source-records.ts';
  * (the Roberts Eros ponds catalogue: 334 ponds, centres on the Gaskell SPC shape, Thomas's characteristic diameters).
  * The circle is the set of source-surface points within half the published diameter of the centre, straight-line
  * distance, after the centre is projected onto the rendered source mesh. It is the catalogue's characteristic size,
- * never an outline. Category 1 is inside a circle, category 0 is surface outside every circle; nothing is interpolated. */
+ * never an outline. With two categories, 1 is inside a circle and 0 is surface outside every circle. A lens drawn over an
+ * underlay has one category: 0 inside, and surface outside every circle is missing so the underlay shows. Nothing is interpolated. */
 const local = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.includes('\\') && !p.split('/').includes('..');
 const parseField = shape({ name: text, unit: text });
 export const parseCircleCatalogueLens = shape({
   format: text, path: text, labelPath: text, meshPath: text, sampling: text, displaySampling: text,
-  categories: array(parseCategory),
+  categories: array(parseCategory), underlay: optional(requireRecord),
   table: shape({ expectedRecords: number, metersPerUnit: number, fields: array(parseField),
     idField: text, centerFields: array(text), diameterField: text, latitudeField: text, longitudeField: text, distanceField: text,
     consistency: shape({ angleDegrees: number, distanceMeters: number }) }),
@@ -33,9 +34,11 @@ export function validateCircleCatalogue(value: unknown, terrainValue: unknown) {
       !(t.consistency.angleDegrees > 0) || !(t.consistency.distanceMeters > 0) ||
       !(lens.registration.maximumDistanceMeters > 0) ||
       s.method !== 'closest-source-point' || !(s.maximumDistanceMeters > 0) || s.maximumDistanceMeters > terrain.simplification.maximumErrorMeters ||
-      lens.sampling !== 'nearest' || lens.displaySampling !== 'nearest' || lens.categories.length !== 2 ||
+      lens.sampling !== 'nearest' || lens.displaySampling !== 'nearest' || lens.categories.length !== (lens.underlay ? 1 : 2) ||
       lens.categories.some(c => !c.value || !c.label || !/^#[0-9a-f]{6}$/i.test(c.color)) ||
-      new Set(lens.categories.map(c => c.value)).size !== 2) throw new TypeError('Invalid surface circle catalogue profile.');
+      new Set(lens.categories.map(c => c.value)).size !== lens.categories.length) {
+    throw new TypeError(`${lens.path}: a surface circle catalogue needs ${lens.underlay ? 'one category over its underlay' : 'two categories'}, nearest sampling, its rendered mesh and a sampling distance within ${terrain.simplification.maximumErrorMeters} m.`);
+  }
   return lens;
 }
 
@@ -86,7 +89,7 @@ export function createCircleCatalogue(rows: ReturnType<typeof parseCircleRows>, 
     distances.push(hit.distanceMeters);
     accepted.push({ id: row.id, point: hit.point, radius: row.diameterMeters / 2 });
   }
-  const cellSize = Math.max(...accepted.map(circle => circle.radius)) * 2, cells = new Map<string, typeof accepted>();
+  const presence = lens.categories.length === 1, cellSize = Math.max(...accepted.map(circle => circle.radius)) * 2, cells = new Map<string, typeof accepted>();
   const key = (p: readonly number[]) => p.map(n => Math.floor(n / cellSize)).join(',');
   for (const circle of accepted) {
     const low = circle.point.map(n => Math.floor((n - circle.radius) / cellSize)), high = circle.point.map(n => Math.floor((n + circle.radius) / cellSize));
@@ -101,6 +104,7 @@ export function createCircleCatalogue(rows: ReturnType<typeof parseCircleRows>, 
       const score = Math.hypot(...hit.point.map((n, i) => n - circle.point[i]!)) / circle.radius;
       if (score <= 1 && (score < best || (score === best && selected && circle.id < selected.id))) { selected = circle; best = score; }
     }
+    if (presence) return selected ? { ...hit, value: 0, sourceCell: selected.id } : null;
     return { ...hit, value: selected ? 1 : 0, sourceCell: selected?.id ?? 0 };
   }
   function samplePoint(point: readonly number[]) {
@@ -121,7 +125,9 @@ export function createCircleCatalogue(rows: ReturnType<typeof parseCircleRows>, 
       centreRegistrationMeters: { median: sorted[Math.floor(sorted.length / 2)] ?? null, maximum: sorted.at(-1) ?? null, limit: lens.registration.maximumDistanceMeters },
       diameterMeters: { minimum: Math.min(...rows.map(r => r.diameterMeters)), maximum: Math.max(...rows.map(r => r.diameterMeters)) },
       registration: 'Each catalogued centre is projected to the closest point of the rendered source mesh within the stated limit; a texel takes the closest full-source surface point and is inside a circle when its straight-line distance to that projected centre is at most half the published diameter.',
-      policy: 'Published characteristic diameter drawn as a circle on the source surface; not an outline. Category 0 is surface outside every catalogued circle, not proof that no pond exists.' },
+      policy: 'Published characteristic diameter drawn as a circle on the source surface; not an outline. ' + (presence
+        ? 'Surface outside every catalogued circle is missing and shows the underlay; that is not proof that no feature exists.'
+        : 'Category 0 is surface outside every catalogued circle, not proof that no feature exists.') },
   };
 }
 

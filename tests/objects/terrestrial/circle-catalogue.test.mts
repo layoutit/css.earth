@@ -59,7 +59,23 @@ test('rows must reproduce their printed coordinates, and the label must describe
 test('the recipe is bound to the rendered mesh and its simplification allowance', () => {
   const terrain = { path: 'shape/sphere.tab', simplification: { maximumErrorMeters: 300 } };
   assert.doesNotThrow(() => validateCircleCatalogue(lens(1), terrain));
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), meshPath: 'shape/other.tab' }, terrain), /Invalid surface circle/);
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), surfaceSampling: { method: 'closest-source-point', maximumDistanceMeters: 400 } }, terrain), /Invalid surface circle/);
-  assert.throws(() => validateCircleCatalogue({ ...lens(1), displaySampling: 'bilinear' }, terrain), /Invalid surface circle/);
+  assert.throws(() => validateCircleCatalogue({ ...lens(1), meshPath: 'shape/other.tab' }, terrain), /surface circle catalogue needs/);
+  assert.throws(() => validateCircleCatalogue({ ...lens(1), surfaceSampling: { method: 'closest-source-point', maximumDistanceMeters: 400 } }, terrain), /surface circle catalogue needs/);
+  assert.throws(() => validateCircleCatalogue({ ...lens(1), displaySampling: 'bilinear' }, terrain), /surface circle catalogue needs/);
+});
+
+test('over an underlay, one category marks the circles and surface outside them is missing', () => {
+  const recipe = { ...lens(1), categories: [{ value: 'pond', label: 'Pond', color: '#00ffff' }], underlay: { surface: 'normal', brightness: 0.35, grayscale: true, bits: 6 } };
+  const terrain = { path: 'shape/sphere.tab', simplification: { maximumErrorMeters: 300 } };
+  assert.doesNotThrow(() => validateCircleCatalogue(recipe, terrain));
+  assert.throws(() => validateCircleCatalogue({ ...recipe, underlay: undefined }, terrain), /two categories/);
+  assert.throws(() => validateCircleCatalogue({ ...lens(1), underlay: recipe.underlay }, terrain), /one category over its underlay/);
+  const profile = parseCircleCatalogueLens(recipe);
+  const catalogue = createCircleCatalogue(parseCircleRows(row(1, 0, 0, 1, 0.2) + '\r\n', profile), profile, mesh);
+  const at = (degrees: number) => { const a = degrees * Math.PI / 180; return [Math.cos(a) * 1000, Math.sin(a) * 1000, 0]; };
+  assert.equal(catalogue.samplePoint(at(5))?.value, 0, 'inside is the one category');
+  assert.equal(catalogue.samplePoint(at(5))?.sourceCell, 1);
+  assert.equal(catalogue.samplePoint(at(7)), null, 'outside is missing, for the underlay to fill');
+  assert.equal(catalogue.sample(0, 0), 0);
+  assert.equal(catalogue.sample(180, 0), null);
 });

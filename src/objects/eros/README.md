@@ -18,12 +18,13 @@ Every band uses the same linear 0.05–0.40 I/F display range. The publisher cor
 
 ## Ponds
 
-Ponds are smooth, flat deposits of fine material in the floors of small hollows, found mostly near the equator at both ends of the long axis, as the catalogue's [bundle description](https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt) summarises; [Roberts et al. (2014)](https://doi.org/10.1111/maps.12348) discuss their origin and flatness. The Ponds view draws the [Roberts Eros Ponds Catalog V1.1](https://doi.org/10.26033/4dqc-8067) in cyan, the colour the catalogue's own SBMT table uses, over grey surface.
+Ponds are smooth, flat deposits of fine material in the floors of small hollows, found mostly near the equator at both ends of the long axis, as the catalogue's [bundle description](https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt) summarises; [Roberts et al. (2014)](https://doi.org/10.1111/maps.12348) discuss their origin and flatness. The Ponds view draws the [Roberts Eros Ponds Catalog V1.1](https://doi.org/10.26033/4dqc-8067) in cyan, the colour the catalogue's own SBMT table uses, over the 550 nm photograph in grey at 35% brightness and 6 bits per channel, as the Mars and Phobos catalogue views do. The dimming is a presentation choice. The cyan differs by at least 47 OKLab units from every dimmed photograph value (median 69.6; every fourth native sample of the 550 nm map, 14.25 million values).
 
 - Each pond is drawn at its published diameter (7.4 to 213.6 m, median 49.9 m): every point of the shape within half the diameter of the pond centre, measured in a straight line. Ponds are rarely round and some catalogue rows are parts of one long deposit, so the circle shows size, not outline.
 - Grey ground is not proof that no pond is there. Thomas found the ponds in images of uneven resolution, and the count follows image resolution, especially below 30 m ([Roberts et al. 2014, Icarus](https://doi.org/10.1016/j.icarus.2014.07.004), as the bundle description reports).
 - 8 of the 334 centres (ponds 1, 2, 10, 129, 216, 218, 219 and 255) lie 66 to 384 m from the Gaskell ver128q surface and are left out. The other 326 lie within 27.4 m of it (median 2.3 m).
 - The smallest ponds, a few metres across, can be smaller than one map pixel.
+- On the body, a map pixel that falls in no circle shows the photograph exactly as the 550 nm view samples it (the same pixel footprint on the original map), then dimmed. The flat minimap uses the 550 nm view's flat map the same way.
 
 ## Composition
 
@@ -86,7 +87,7 @@ Inspected evidence: [native map](evidence/spectral-bands/blue-native-map.webp), 
 
 ### Ponds registration, 28 September 2026
 
-The [registration record](evidence/ponds/registration.json) names the input bytes and results. The table's label, record count and field units match the recipe; every row's centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Centres were projected to the full ver128q mesh with a 60 m limit chosen before measuring (a little under half the 131.9 m median facet edge). No bake or browser check has been run yet. Drawn over the 550 nm map, most ponds are too small to see at 10 m pixels, so no offset between catalogue and photographs is claimed.
+The [registration record](evidence/ponds/registration.json) names the input bytes and results. The table's label, record count and field units match the recipe; every row's centre reproduces its printed latitude, longitude and distance within 0.009° and 1.1 m. Centres were projected to the full ver128q mesh with a 60 m limit chosen before measuring (a little under half the 131.9 m median facet edge). In the app on 28 September 2026 (headless Chromium, this bake), the Ponds view showed the cyan ponds over the dimmed photograph on the body and in the minimap. Compared with the 550 nm map, most ponds are too small to see at 10 m pixels, so no offset between catalogue and photographs is claimed.
 
 ## Known problems
 

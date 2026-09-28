@@ -153,7 +153,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     if (lens.underlay) {
       // The cells with no catalogued feature show an earlier observation lens, not the missing-coverage grid.
       const base = observations.get(lens.underlay.surface);
-      if (!base || !lens.categories || lens.textureScale || lens.previewGrid || lens.surfaceSampling || preview.width !== width || preview.height !== height)
+      // A source-surface lens is underlaid here for its flat map and preview, and again per texel in its radial atlas.
+      if (!base || !lens.categories || lens.textureScale || lens.previewGrid || preview.width !== width || preview.height !== height)
         throw new Error(`${lens.id}: underlay needs a categorical lens on the full raster grid over an earlier observation, not ${lens.underlay.surface}.`);
       rgb = underlaidRgb(rgb, missing, base.rgb, lens.id, lens.underlay);
     }

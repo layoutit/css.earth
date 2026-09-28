@@ -79,5 +79,22 @@
     "pondPixels": 707,
     "note": "Withheld pixels are radial rays that meet the surface more than once."
   },
-  "limits": "Registration is to the shape, not to the MSI photographs: the lens drawn over the 550 nm Golish map was inspected, but at 10 m pixels most ponds are not separately visible, so no image-to-catalogue offset is claimed. No bake or browser check has been run."
+  "limits": "Registration is to the shape, not to the MSI photographs: the lens drawn over the 550 nm Golish map was inspected, but at 10 m pixels most ponds are not separately visible, so no image-to-catalogue offset is claimed. The first bake's flat-grey version was replaced by the underlaid version before its second bake; neither has a browser check recorded here.",
+  "underlayContrast": {
+    "method": "output/eros-even-more/contrast-check.mts: every fourth valid native value of the Golish 550 nm map, display stretch 0.05–0.40 I/F, grey × 0.35, 6 bits (& 0xFC), OKLab distance ×100 to #00ffff.",
+    "samples": 14252095,
+    "dimmedGrey": {
+      "minimum": 0,
+      "p5": 20,
+      "median": 28,
+      "p95": 40,
+      "maximum": 88
+    },
+    "oklabDistance": {
+      "minimum": 47.1,
+      "p5": 64.7,
+      "median": 69.6
+    },
+    "shareAtLeast15": 1
+  }
 }
