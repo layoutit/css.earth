@@ -668,6 +668,7 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
   expect(() => expectAlignedContextOrigin([0, .002, 0], [0, 0, 0], 'near-origin displacement')).toThrow();
 });
 
+// Every malformed case parses the whole generated universe again, so the test's time grows with the number of bodies.
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const { readCatalog } = await import('../../../../tools/prepare/prepare-catalog.mts');
@@ -719,7 +720,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     expect(() => parsePreparedWorldContext({ ...source,
       bodies: bodies.map(body => body === parent ? { ...body, systemView } : body) })).toThrow();
   }
-});
+}, 20000);
 
 test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));

@@ -4,6 +4,7 @@ import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-nav
 /** `system` is the planetary system of the mounted star; the larger scopes are measured from the Sun. */
 export type OverviewScope = 'system' | 'milky-way' | 'local-group' | 'nearby-universe';
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
+import { LOCAL_GROUP_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
 const distance = (position: readonly number[], origin: readonly number[]) => Math.hypot(...position.map((value, axis) => value - origin[axis]));
@@ -31,7 +32,7 @@ export function overviewScopeAtCamera(world: WorldCameraPose, previous: Overview
   const range = distance(world.pose.positionM, plan.focus.positionM);
   const parsec = 3.085677581491367e16;
   if (range >= (previous === 'nearby-universe' ? 4 : 5) * 1e6 * parsec) return 'nearby-universe';
-  if (range >= (previous === 'local-group' || previous === 'nearby-universe' ? 240000 : 300000) * parsec) return 'local-group';
+  if (range >= (previous === 'local-group' || previous === 'nearby-universe' ? LOCAL_GROUP_SCALE.returnDistanceM : LOCAL_GROUP_SCALE.enterDistanceM)) return 'local-group';
   const { fadeStartDistanceM, fullDistanceM } = plan.volume;
   const threshold = previous !== 'system' ? fadeStartDistanceM
     : Math.sqrt(fadeStartDistanceM * fullDistanceM);
