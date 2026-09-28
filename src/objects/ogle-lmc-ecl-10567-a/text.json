@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ogle-lmc-ecl-10567-a",
+  "card": {
+    "text": "The primary star of OGLE-LMC-ECL-10567, a pair that eclipse each other every 117.975 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-aac2bf",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+        "label": "Graczyk et al. (2018), The Astrophysical Journal 860 1",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-LMC-ECL-10567: Mass, Radius and Period, from Graczyk et al. (2018ApJ...860....1G)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has 3.333 solar masses and 24.6 solar radii; its partner has 3.184 and 36.64, measured from the eclipses and the stars' motions.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-aac2bf",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G",
+        "label": "Graczyk et al. (2018), The Astrophysical Journal 860 1",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-LMC-ECL-10567: Mass, Radius and Period, from Graczyk et al. (2018ApJ...860....1G)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

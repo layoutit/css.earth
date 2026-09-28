@@ -1,0 +1,30 @@
+{
+ "id": "kic-11045572",
+ "classification": "star",
+ "order": 1866,
+ "physical": {
+  "name": "KIC 11045572",
+  "horizonsCode": null,
+  "meanRadiusKm": 6244116.2,
+  "gravitationalParameterKm3PerS2": 198365284130.68677,
+  "parent": null,
+  "effectiveTemperatureK": 4671
+ },
+ "physicalNotes": "Radius 8.9753 +/- 0.1556 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11045572 (Gold): Radius (Mosser scale, solar radii) 8.9753 +/- 0.1556 (https://arxiv.org/abs/2410.00102): 6,244,116 km at 695,700 km per solar radius. Mass 1.4947 +/- 0.0576 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11045572 (Gold): Mass (Mosser scale, solar masses) 1.4947 +/- 0.0576 (https://arxiv.org/abs/2410.00102); GM is that mass times the JPL solar GM. Temperature 4671 +/- 43 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11045572 (Gold): APOGEE effective temperature (K) 4671.069 +/- 42.5962 (https://arxiv.org/abs/2410.00102). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 298.2857227117602,
+  "declinationDegrees": 48.59285031070388,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1000.1065241521886,
+  "properMotionRaMasPerYear": 0.20605205887587827,
+  "properMotionDecMasPerYear": 1.1824243558927192,
+  "radialVelocityKmPerS": -20.237724,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2086551707191453568 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kic-11045572/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 0.9999 +/- 0.0133 mas (same row, RUWE 0.94): 1000.11 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 0.206, 1.182 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -20.24 +/- 0.19 km/s"
+  }
+ }
+}

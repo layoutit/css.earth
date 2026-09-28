@@ -12,8 +12,7 @@ The batch covered the nine models listed in the
 
 Two drag captures kept `before.png`/`after.png` and a 6 MB gzipped Chrome trace
 each. Nothing cites them and no tool reads them any more, so they were not
-restored; they remain in history at
-[`6e32bc459^`](https://github.com/layoutit/css.earth/tree/6e32bc459%5E/tools/audits/distant-worlds/evidence/outer-worlds).
+restored; they remain in git history.
 Their measured results stay in the `report.json` files linked below.
 
 The evidence came from these helpers, all now removed:
@@ -41,7 +40,7 @@ These variables apply to `qualify`, `fresh-sources`, `fresh-install`,
 `surface-fit`, `browser-check` and `contact-sheet`. `final-interactions`
 retains its original named scenarios. `contact-sheet` writes `worlds.webp`.
 
-Historical commands at [revision `d68eab6c31^`](https://github.com/layoutit/css.earth/tree/d68eab6c31%5E/tools/audits/distant-worlds):
+Historical commands in git history:
 `node tools/audits/distant-worlds/qualify.mjs` read the prepared packages, and
 `python3 tools/audits/distant-worlds/surface-fit.py` compared them with the
 adopted ellipsoids. These helpers are absent from the current checkout. Their
@@ -60,11 +59,10 @@ not start a server. Run only one acquisition, build, preparation or browser
 capture at a time. `drag-trace.mjs` accepts origin, DPR, output directory and
 body id as positional arguments.
 
-The original reports and inspected screenshots are preserved at
-[5ccf1eafa](https://github.com/layoutit/cssEarth/tree/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/distant-worlds).
-The [browser report](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/distant-worlds/browser-validation.json)
+The original reports and inspected screenshots are preserved in git history.
+The browser report
 records actual bytes, viewport and browser settings. The
-[drag comparison](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/distant-worlds/drag-comparison.json)
+drag comparison
 compares ʻOumuamua with an equal-face-count existing reference; their projected
 areas differ, so it does not claim identical GPU work or performance on every
 device. Keep new measurements separate from those original results.
@@ -89,7 +87,7 @@ The [image record](outer-worlds/images.json) identifies retained WebP
 captures; they do not establish pixel parity with observed surface imagery.
 
 The [run context](outer-worlds/run-context.json) records code revision
-`fc0c05a80`, prepared-data revision `9666f9dcc`, and the relevant byte pins.
+, prepared-data, and the relevant byte pins.
 These captures and traces use the development server. The earlier 942-page
 production build completed, but its output was removed during workstation
 cleanup; no new full-site build or complete-catalogue asset installation is
@@ -129,7 +127,7 @@ and [all-body independent position check](outer-worlds/spatial-context-focused.t
 pass. Unrelated ignored artifacts in the original local checkout prevent a
 clean all-directory local pass; fresh-checkout CI runs that complete gate.
 
-After integrating main’s TypeScript migration, revision `90baa56a3` passed the
+After integrating main’s TypeScript migration, passed the
 full TypeScript and ownership checks, all six package closures, and the
 [focused navigation/mobile browser check](outer-worlds/after-typescript/navigation.json).
 The six worlds remain searchable and mount alone with 480 raster triangles and

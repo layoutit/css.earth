@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-67p-dataset-upgrade-evidence@1",
   "date": "2026-09-27",
-  "baseCommit": "93517193d21885d253c0590cf37b21c94330b4af",
   "testedVersion": "Base commit plus the source files identified by the hashes below; browser screenshots and restoration use these inventoried assets.",
   "sources": [
     {
@@ -312,7 +311,6 @@
     }
   ],
   "baseline": {
-    "head": "93517193d21885d253c0590cf37b21c94330b4af",
     "sources": [
       {
         "file": "src/objects/comet-67p/prepared/surfaces.json",

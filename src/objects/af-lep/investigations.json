@@ -1,5 +1,54 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "af-lep",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3009908378049913216 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 source 3009908378049913216: parallax 37.2539 +/- 0.0195 mas (RUWE 0.92), inverted to 26.8429 pc with no zero-point correction. Gaia DR3 source 3009908378049913216: pmRA* 16.9150 mas/yr, pmDec -49.3180 mas/yr. Gaia DR3 source 3009908378049913216: 21.10 +/- 0.37 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "temperature-and-mass",
+      "subject": "Temperature and mass",
+      "status": "included",
+      "finding": "Baburaj et al. (2026), arXiv:2608.15912.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.15912"
+      ]
+    },
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Kervella et al. (2004), as adopted by Franson et al. (2023), ApJL.",
+      "evidence": [
+        "https://arxiv.org/abs/2302.05420",
+        "https://doi.org/10.3847/2041-8213/acd6f6"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "The Gaia DR3 BP/RP sampled spectrum of source 3009908378049913216 (De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3), weighted by the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3009908378049913216&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,076 K and log g 4.32: a model, since no fit of this star's limb exists.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451",
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
 }

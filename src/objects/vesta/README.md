@@ -28,10 +28,10 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 26704 × 13080 | 3.09 → 5.55 MB |
 
-Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/vesta/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 The [LAMO qualification record](evidence/lamo-2026-09-14.json) tests
-`86364a47f5ab7261a3716897b5e421e81abf5458`: three Vesta source/package checks,
+: three Vesta source/package checks,
 six image-reader checks and strict preparation types pass. Headless desktop
 checks at DPR 1 and 2 retain one scene and all 800 faces during drag, using
 the same photographic atlas. Shadows default off; the optional lighting bank
@@ -55,10 +55,10 @@ HAMO-1-2 clear mosaic every cell, with the 90–75° N band dim (mean 7 of 255,
 mosaic is pinned as the HAMO photography lens and declared the fallback base of
 the natural-color and LAMO lenses, so their gaps take HAMO texels in gray and the
 prepared report counts them (`monochromePixels`). Before-and-after minimaps are in
-[`evidence/hamo/`](evidence/hamo/); [the HAMO test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/vesta/hamo.test.mts)
+[`evidence/hamo/`](evidence/hamo/); the HAMO test
 pins the label grid, the fallback order and the prepared coverage.
 
-**Ground-based frames as a test of the observer-camera route.** Thirty deconvolved VLT/SPHERE/ZIMPOL frames of Vesta from 2018 are pinned under `source/observations/`, with Horizons rows for Paranal at each exposure, not as a texture source but because Vesta is the one body with both such frames and a mapped surface. [The registration test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/vesta/sphere-registration.test.mts) casts each frame through the shipped HAMO terrain with the camera the route derives from the pinned Dawn pole model and the exposure midpoint, and sweeps its correlation with the Dawn colour mosaic over a turn about the pole and over both mirrors. Over 30 frames the peak sits at +0.5° (median), 28 within 3° and all within 5°, and the model beats the better mirror 2.5 times over; one pixel of disc centre is about one degree of longitude here, so that is the level of the centre measurement. With the IAU 2015 pole model instead of Dawn's the same frames peak 210° away, the stated distance between the two prime meridians. The image below is the prediction from the Dawn mosaic beside the SPHERE frame of 2018-06-08 05:27 UT.
+**Ground-based frames as a test of the observer-camera route.** Thirty deconvolved VLT/SPHERE/ZIMPOL frames of Vesta from 2018 are pinned under `source/observations/`, with Horizons rows for Paranal at each exposure, not as a texture source but because Vesta is the one body with both such frames and a mapped surface. The registration test casts each frame through the shipped HAMO terrain with the camera the route derives from the pinned Dawn pole model and the exposure midpoint, and sweeps its correlation with the Dawn colour mosaic over a turn about the pole and over both mirrors. Over 30 frames the peak sits at +0.5° (median), 28 within 3° and all within 5°, and the model beats the better mirror 2.5 times over; one pixel of disc centre is about one degree of longitude here, so that is the level of the centre measurement. With the IAU 2015 pole model instead of Dawn's the same frames peak 210° away, the stated distance between the two prime meridians. The image below is the prediction from the Dawn mosaic beside the SPHERE frame of 2018-06-08 05:27 UT.
 
 ![Dawn mosaic predicted through the route beside the SPHERE frame](evidence/sphere-registration-2018-06-08.png)
 
@@ -128,7 +128,7 @@ mean regolith is howardite, which the catalogue says is not known; it is not
 applied. The PDS4 label's history names the iron dataset as its PDS3 source;
 the PDS3 catalogue gives `DAWN-A-GRAND-5-VESTA-ABSORPTION-V1.0`, which is used here.
 
-**Checks (2026-09-27, on 93517193d2).** 4,000 random points read through the
+**Checks (2026-09-27).** 4,000 random points read through the
 shared `.npy` reader equal a direct lookup in the raw tables at Claudia minus
 210°. The hydrogen table's longitudes correlate best with the Trek hydrogen
 render at zero shift (r = 0.75 in its red channel, 10° steps), which confirms

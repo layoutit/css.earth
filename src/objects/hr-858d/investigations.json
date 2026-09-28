@@ -1,5 +1,38 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hr-858d",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.17851757 Jupiter radii from Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract): 12,762.6 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "https://doi.org/10.1051/0004-6361/202451300",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0223391 Jupiter masses: Bonfanti et al. 2025 (2025A&A...693A..90B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "https://doi.org/10.1051/0004-6361/202451300",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 11.230511 d (Bonfanti et al. 2025); a/R* 17.93 (Bonfanti et al. 2025); inclination 87.72 degrees (Bonfanti et al. 2025); e 0 (Bonfanti et al. 2025); transit mid-time 2458409.7324 BJD, taken as BJD_TDB (Bonfanti et al. 2025). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

@@ -3,61 +3,51 @@
   "references": [
     {
       "originalPath": "labs/nebula/models/smc/image-candidates.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/image-candidates.json",
       "bytes": 29958
     },
     {
       "originalPath": "labs/nebula/models/smc/registration/alignment-report.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/registration/alignment-report.json",
       "bytes": 12990
     },
     {
       "originalPath": "labs/nebula/models/smc/stars/source/catalogue.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/stars/source/catalogue.json",
       "bytes": 1015
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/emission-envelope-ellipsoid.json",
       "bytes": 1724
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
       "bytes": 2224
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/fit.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/fit.json",
       "bytes": 4922
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/fit-evidence.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/fit-evidence.json",
       "bytes": 32306
     },
     {
       "originalPath": "labs/nebula/models/smc/vmc/recipe.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/vmc/recipe.json",
       "bytes": 817
     },
     {
       "originalPath": "labs/nebula/models/smc/vmc/density.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/vmc/density.json",
       "bytes": 626
     },
     {
       "originalPath": "labs/nebula/models/smc/full-density/source/provenance.json",
-      "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/full-density/source/provenance.json",
       "bytes": 5794
     }

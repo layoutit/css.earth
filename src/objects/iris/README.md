@@ -55,7 +55,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 The registration stage reports a conflict for this lens, and the lens ships on its published comparison instead, under the rule in the [surface-observations guide](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#registration-stage). The outline test scores 9 of 23 frames, whose outlines are barely elongated enough to define an angle, and finds 6.5°. The same measure between the paper's own model and its images gives −9.3° to +13.4°, so it would reject the published fit too. The relief sweep places all 23 frames at 0.75°.
 
-The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2151.6 m error; the authored stopping threshold is 2200 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1167.0 m and maximum 2456.1 m.
 

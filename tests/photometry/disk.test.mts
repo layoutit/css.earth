@@ -6,7 +6,7 @@ import { diskGain, diskValue, assertDiskModel, NORMAL_GEOMETRY, type DiskModel, 
 /**
  * Frozen copies of the photometric arithmetic the routes used before tools/photometry
  * existed (osiris-geo.mts, shape-camera-mosaic.mts and photometric-observations.mts at
- * main 5ca8c99d4). The library must equal them exactly, so moving a route onto it
+ *). The library must equal them exactly, so moving a route onto it
  * cannot change a prepared byte.
  */
 const legacy = {

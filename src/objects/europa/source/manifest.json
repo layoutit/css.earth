@@ -19693,7 +19693,7 @@
           {
             "catalogueId": "source-europa-jwst-carbon-dioxide",
             "role": "material",
-            "evidence": "src/objects/europa/source/manifest.json@d266669f68a885e642ecfc432854167a35233a91#/inputs/401"
+            "evidence": "src/objects/europa/source/manifest.json#/inputs/401"
           }
         ]
       }
@@ -19715,7 +19715,7 @@
           {
             "catalogueId": "source-europa-jwst-pck00011",
             "role": "material",
-            "evidence": "src/objects/europa/source/manifest.json@d266669f68a885e642ecfc432854167a35233a91#/inputs/404"
+            "evidence": "src/objects/europa/source/manifest.json#/inputs/404"
           }
         ]
       }

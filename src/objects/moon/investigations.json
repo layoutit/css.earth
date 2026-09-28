@@ -8,15 +8,9 @@
       "status": "included",
       "finding": "Selected 643 nm morphology product supplies Monochrome, with original shadows and gaps retained.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/source/manifest.json",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -25,15 +19,9 @@
       "status": "included",
       "finding": "Selected grid supplies Elevation above the stated reference sphere; spacing and quantization are not terrain accuracy.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/source/manifest.json",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -42,15 +30,9 @@
       "status": "included",
       "finding": "Three selected products supply Midnight temperature, heat anomaly and rock abundance with polar and internal gaps retained.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/source/manifest.json",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -59,15 +41,9 @@
       "status": "included",
       "finding": "Selected 49-unit map supplies categorical Geology, not observed color.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/source/manifest.json",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -76,15 +52,9 @@
       "status": "included",
       "finding": "Selected wavelength map supplies the silicate-signature lens; it is not mineral abundance.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/source/manifest.json",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -94,15 +64,9 @@
       "finding": "The documented survey found filled CGI polar coverage and color tiles limited to 70 degrees with less relief than the selected morphology product.",
       "revisitWhen": "A registered color product retains polar coverage and comparable source detail.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/moon/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/source/manifest.json",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -114,12 +78,6 @@
         "https://doi.org/10.1002/2013JE004580",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/WAC_HAPKEPARAMMAP/WAC_HAPKEPARAMMAP_README.TXT",
         "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
       ]
     },
     {
@@ -128,65 +86,41 @@
       "status": "excluded",
       "finding": "Replaced by the published Hapke law of Sato et al. (2014); the Moon now bakes its own bank.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/preparation/raster/lighting-banks.ts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
-      ]
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Eight 2016 Kaguya MI views plus a shared companion-fit coverage gate; FeO outside 0–100 weight percent is masked. Native samples and all compact-cell calibration and masks are checked. Checked on working changes above 4ac6f0aefe; the evidence records the tested file hashes.",
+      "finding": "Eight 2016 Kaguya MI views plus a shared companion-fit coverage gate; FeO outside 0–100 weight percent is masked. Native samples and all compact-cell calibration and masks are checked. The evidence records the tested file hashes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/moon/evidence/usgs-numeric/numeric-checks.json",
-        "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/moon/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md"
       ]
     },
     {
       "id": "grail-grgm1200a-l660",
       "subject": "GRAIL GRGM1200A gravity anomaly and Bouguer disturbance maps, degree 660",
       "status": "included",
-      "finding": "Two numeric views, Gravity (free-air anomaly) and Bouguer gravity (2,500 kg/m3 Bouguer disturbance), in mGal from the PDS RSDMAP products read through their EXTRAS GeoTIFF copies, which match the IMG values cell for cell. Degree 660 is the archived sum just above the label's degree-600 prior limit; its 8.3 km half-wavelength spans about three texels of the 4,096-pixel texture. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
+      "finding": "Two numeric views, Gravity (free-air anomaly) and Bouguer gravity (2,500 kg/m3 Bouguer disturbance), in mGal from the PDS RSDMAP products read through their EXTRAS GeoTIFF copies, which match the IMG values cell for cell. Degree 660 is the archived sum just above the label's degree-600 prior limit; its 8.3 km half-wavelength spans about three texels of the 4,096-pixel texture. The evidence records the tested file hashes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/moon/evidence/grail-gravity/checks.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/evidence/grail-gravity/checks.json",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/extrinfo.txt"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     },
     {
       "id": "grail-higher-degree-maps",
       "subject": "GRGM1200A maps summed to degree 900 and 1200",
       "status": "excluded",
-      "finding": "Not used: the label says a Kaula power-law prior constrains every term above degree 600, so these maps add increasingly prior-shaped detail. Degree 660 already resolves on the largest numeric texture. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
+      "finding": "Not used: the label says a Kaula power-law prior constrains every term above degree 600, so these maps add increasingly prior-shaped detail. Degree 660 already resolves on the largest numeric texture. The evidence records the tested file hashes.",
       "evidence": [
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l1200.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ],
       "revisitWhen": "A release constrains terms above degree 600 with data rather than the Kaula prior."
     },
@@ -194,16 +128,10 @@
       "id": "grail-gl1500e",
       "subject": "JPL GL1500E gravity field (Konopliv et al. 2014 lineage)",
       "status": "excluded",
-      "finding": "Not used: the archive holds only its spherical-harmonic coefficients (jggrx_1500e_sha.tab), with no gridded maps or updated covariance; a map would have to be summed here, while GRGM1200A ships archived maps and error maps. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
+      "finding": "Not used: the archive holds only its spherical-harmonic coefficients (jggrx_1500e_sha.tab), with no gridded maps or updated covariance; a map would have to be summed here, while GRGM1200A ships archived maps and error maps. The evidence records the tested file hashes.",
       "evidence": [
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/errata.txt",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ],
       "revisitWhen": "The PDS archives gridded GL1500E maps with their error maps."
     },
@@ -211,15 +139,9 @@
       "id": "trek-grail-gravity-layers",
       "subject": "NASA Moon Trek GRAIL LGRS gravity layers",
       "status": "excluded",
-      "finding": "Not used: Trek serves display tiles of the same GSFC products (for example gggrx_1200a_anom_l660.eq); the views read the numeric PDS originals instead. Trek's crust-mantle interface, crustal-thickness and grain-density layers were not examined here; Crust keeps its existing source. Checked on working changes above 56ebf377c7; the evidence records the tested file hashes.",
+      "finding": "Not used: Trek serves display tiles of the same GSFC products (for example gggrx_1200a_anom_l660.eq); the views read the numeric PDS originals instead. Trek's crust-mantle interface, crustal-thickness and grain-density layers were not examined here; Crust keeps its existing source. The evidence records the tested file hashes.",
       "evidence": [
         "https://trek.nasa.gov/tiles/Moon/EQ/gggrx_1200a_anom_l660.eq/1.0.0/WMTSCapabilities.xml"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ],
       "revisitWhen": "A lens needs a Trek layer whose numeric original the PDS does not archive."
     },
@@ -232,12 +154,6 @@
         "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat",
         "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl",
         "https://doi.org/10.1029/2005JE002656"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -249,12 +165,6 @@
       "evidence": [
         "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat",
         "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_5deg.lbl"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -266,12 +176,6 @@
       "evidence": [
         "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html",
         "https://doi.org/10.1029/2005JE002656"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -285,12 +189,6 @@
         "https://doi.org/10.1029/2022JE007197",
         "https://pds-geosciences.wustl.edu/lunar/lp-l-ns-3-rdr-v1/",
         "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -302,12 +200,6 @@
       "evidence": [
         "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_32_50.lbl",
         "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrc_32.lbl"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -318,12 +210,6 @@
       "evidence": [
         "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl",
         "https://doi.org/10.1038/nature11216"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -335,12 +221,6 @@
       "evidence": [
         "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_32_n.lbl",
         "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldsm_16.lbl"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     },
     {
@@ -354,12 +234,6 @@
         "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/label/dlre_gcp.fmt",
         "https://doi.org/10.1016/j.icarus.2016.08.012",
         "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07"
-        }
       ]
     }
   ]

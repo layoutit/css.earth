@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "uz-sct",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "UZ Sct",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 59551920
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/uz-sct-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "UZ Sct",
+      "classification": "star",
+      "color": "#ffe4cb",
+      "distanceAu": 636883976,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 14.7 days.",
+      "systemName": "UZ Sct system",
+      "order": 1941,
+      "context": {
+        "order": 1938
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        12672051043366020000,
+        -91992454665088650000,
+        -21317043012313290000
+      ],
+      "presentationToReference": [
+        0.13300292526787197,
+        -0.030531909754286702,
+        -0.9906452565661157,
+        -0.9655315884664217,
+        0.22164560909355593,
+        -0.13646235980318885,
+        -0.2237386277416067,
+        -0.9746491812217885,
+        8.941747696235846e-9
+      ],
+      "orbitUpReference": [
+        0.030531909754286702,
+        -0.22164560909355593,
+        0.9746491812217885
+      ],
+      "metersPerUnit": 192102967.7419355,
+      "bodyRadiusM": 59551920000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "doi-10-1088-0004-637x-748-2-107",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pejcha & Kochanek (2012): A GLOBAL PHYSICAL MODEL FOR CEPHEIDS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1112.3038"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/748/2/107"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012ApJ...748..107P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/748/2/107",
+      "label": "The Astrophysical Journal 748 107"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pejcha & Kochanek (2012), The Astrophysical Journal 748 107",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 748 107",
+  "creators": [
+    "Ondřej Pejcha",
+    "Christopher S. Kochanek"
+  ],
+  "publicationDate": "2012"
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cs-vel",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5308893149150949248 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/cs-vel/source/photometry/gaia-dr3-source.csv. Distance: Groenewegen (2013), A&A 550, A70, table10, CS Vel: Baade-Wesselink distance (pc) 3297.7 +/- 182.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 3297.7 +/- 182.7 pc; Gaia DR3 parallax 0.2611 +/- 0.0125 mas (same row, RUWE 0.91), 21.0 standard errors, is not used. Proper motion: Gaia DR3 (same row): -4.567, 3.131 mas/yr. Radial velocity: Gaia DR3 (same row): 31.00 +/- 4.64 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 43 +/- 2.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, CS Vel: Baade-Wesselink mean radius (solar radii) 43 +/- 2.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 29,915,100 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5375 +/- 177 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 58, Name='CS Vel', columns Teff, e_Teff (K): Teff 5375 +/- 177 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    }
+  ]
+}

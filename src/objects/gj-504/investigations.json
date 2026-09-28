@@ -1,5 +1,45 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "gj-504",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3732539683617410816 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 source 3732539683617410816: parallax 56.8577 +/- 0.1224 mas (RUWE 0.99), inverted to 17.5878 pc with no zero-point correction. Gaia DR3 source 3732539683617410816: pmRA* -335.4729 mas/yr, pmDec 191.0377 mas/yr. Gaia DR3 source 3732539683617410816: -27.25 +/- 0.13 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-temperature",
+      "subject": "Radius, temperature",
+      "status": "included",
+      "finding": "Bonnefoy et al. (2018), A&A 618, A63 (VEGA/CHARA interferometry).",
+      "evidence": [
+        "https://arxiv.org/abs/1807.00657",
+        "https://doi.org/10.1051/0004-6361/201832942"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at the published temperature, weighted by the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.",
+      "evidence": [
+        "https://arxiv.org/abs/1807.00657",
+        "https://doi.org/10.1051/0004-6361/201832942"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,200 K and log g 4.26: a model, since no fit of this star's limb exists.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451",
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
 }

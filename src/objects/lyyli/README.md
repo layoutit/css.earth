@@ -12,12 +12,12 @@ Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 27.
 
 ## Evidence
 
-Recorded five-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
+Recorded five-body results retain their original build identities.
 
-- Source, scalar and sampled surface-fit checks passed. [Validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/VALIDATION.md) · [Source fit](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/evidence/lyyli-surface-fit.json) · [Source/result view](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/evidence/lyyli-source-result.png).
+- Source, scalar and sampled surface-fit checks passed. Validation report · Source fit · Source/result view.
 - Production browser checks passed at DPR 1 and 2. The optional Shadows test used
   a bound control event because Settings was hidden; it did not test opening Settings.
-  [Browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/mars-crossing-population/browser-validation.json).
+  Browser record.
 
 ## Known problems
 

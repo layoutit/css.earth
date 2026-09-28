@@ -10,12 +10,6 @@
       "evidence": [
         "https://almascience.eso.org/alma-data/alma-data-b",
         "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
-        }
       ]
     },
     {
@@ -25,12 +19,6 @@
       "finding": "ALMA data are proprietary for 12 months, after which access and download are anonymous.",
       "evidence": [
         "https://almascience.eso.org/alma-data/alma-data-b"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
-        }
       ]
     },
     {
@@ -43,12 +31,6 @@
         "https://casa.nrao.edu/",
         "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
-        }
       ]
     },
     {
@@ -60,12 +42,6 @@
       "evidence": [
         "https://almascience.eso.org/tap",
         "https://www.nature.com/articles/s41586-024-07836-9"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
-        }
       ]
     },
     {
@@ -76,15 +52,8 @@
       "revisitWhen": "Pallas, Juno or another ALMA candidate is taken up.",
       "evidence": [
         "https://almascience.eso.org/tap/capabilities",
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
-        }
       ]
     }
   ]

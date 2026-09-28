@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kic-5944493",
+  "card": {
+    "text": "A red-clump giant in the Kepler field, 11 times the Sun's width, weighed by its starquakes.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2410-00102",
+        "url": "https://arxiv.org/abs/2410.00102",
+        "label": "Pinsonneault et al. (2024), The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+        "checked": "2026-09-28",
+        "locator": "table4, KIC 5944493: Mass, Radius, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its oscillations give 1.20 solar masses and 11.2 solar radii; APOGEE spectra give 4,970 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2410-00102",
+        "url": "https://arxiv.org/abs/2410.00102",
+        "label": "Pinsonneault et al. (2024), The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+        "checked": "2026-09-28",
+        "locator": "table4, KIC 5944493: Mass, Radius, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

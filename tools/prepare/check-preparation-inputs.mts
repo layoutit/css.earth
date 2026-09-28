@@ -64,6 +64,8 @@ export async function missingPreparedFiles(ids: readonly string[], { projectRoot
   }
   const missing: string[] = [];
   for (const asset of await inventoryAssets(projectRoot, objects, { location: 'prepared' })) {
+    // The Sun's world files are the bake's own output: its world and pins steps rebuild them, as restoreDriftedFiles leaves them too.
+    if (asset.id === 'sun' && worldStepOutput(asset)) continue;
     const size = await stat(asset.file).then(found => found.size, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return -1; throw error; });
     if (size !== asset.bytes) missing.push(`${asset.id}/prepared/${asset.filename}`);
   }

@@ -1,5 +1,4 @@
 {
-  "testedRevision": "bfc4ed3a682300c08cf324f23bbd5a6afd060fa1",
   "buildVersion": "0.461",
   "scope": "Production catalogue/navigation behavior at desktop 1440x1000 DPR 1 and mobile 390x844 DPR 1. Settings use prepared defaults; the script does not change Motion or Shadows. Screenshots are interface examples, without a matched baseline or pixel-parity claim.",
   "command": "node site/test/dataset-navigation-browser.mts http://127.0.0.1:4238",
@@ -156,7 +155,6 @@
     "failedResponses": []
   },
   "sourceAndOutputConservation": {
-    "base": "ee46ac802f813a6c121b8e16c5e4d265668c0732",
     "objects": 473,
     "unchangedSourceIdentities": 1623,
     "unchangedOutputIdentities": 3994
@@ -166,7 +164,6 @@
     "byteIdentical": true
   },
   "delivery": {
-    "base": "ee46ac802f813a6c121b8e16c5e4d265668c0732",
     "previousPreparedCatalogueBytes": 50943,
     "preparedCatalogueBytes": 773774,
     "html": [

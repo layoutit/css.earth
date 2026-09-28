@@ -17,12 +17,10 @@ type Exception = {
 };
 type Manifest = {
   schemaVersion: 1;
-  baselineCommit: string;
   legacyAuthored: string[];
   exceptions: Record<string, Exception>;
 };
 type Inventory = {
-  baselineCommit: string;
   counts: Record<Category, number>;
   categories: Record<Category, string[]>;
   violations: string[];
@@ -51,8 +49,6 @@ function validPath(value: unknown): value is string {
 function loadManifest(root: string): Manifest {
   const value: unknown = JSON.parse(readFileSync(resolve(root, manifestPath), 'utf8'));
   requireCondition(isRecord(value) && value.schemaVersion === 1, 'Invalid ownership manifest schema.');
-  requireCondition(typeof value.baselineCommit === 'string' && /^[a-f0-9]{40}$/u.test(value.baselineCommit),
-    'The ownership baseline must be a full source commit.');
   requireCondition(isArray(value.legacyAuthored) && value.legacyAuthored.every(validPath),
     'legacyAuthored must contain repository-relative file paths.');
   requireCondition(isRecord(value.exceptions), 'exceptions must be an exact path map.');
@@ -257,7 +253,6 @@ export function auditOwnership(root: string): Inventory {
     }
   }
   return {
-    baselineCommit: manifest.baselineCommit,
     counts: Object.fromEntries(categories.map(category => [category, classified[category].length])) as Record<Category, number>,
     categories: classified,
     violations: [...new Set(violations)].sort(),

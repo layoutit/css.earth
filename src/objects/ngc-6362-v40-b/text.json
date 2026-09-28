@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-6362-v40-b",
+  "card": {
+    "text": "The secondary star of NGC 6362 V40, a pair that eclipse each other every 5.296 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "label": "Kaluzny et al. 2015",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V40: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has 0.7947 solar masses and 0.997 solar radii; its partner has 0.8337 and 1.3253, measured from the eclipses and the stars' motions.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+        "label": "Kaluzny et al. 2015",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), NGC 6362 V40: Mass, Radius and Period, from Kaluzny et al. (2015AJ....150..155K)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

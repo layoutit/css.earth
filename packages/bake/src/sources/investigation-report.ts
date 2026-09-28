@@ -55,10 +55,8 @@ export function formatInvestigationReport(report: ReturnType<typeof investigatio
     INVESTIGATION_STATUSES.map(status => `${status}: ${report.counts[status]}`).join(' | ')];
   if (coverage.missingLedgers.length) lines.push(`Missing ledgers: ${coverage.missingLedgers.join(', ')}`);
   if (!summary) for (const entry of report.entries) {
-    const last = entry.checked.at(-1);
     lines.push(`\n- ${entry.objectId}: ${entry.subject} [${entry.status}; ${entry.id}]`, `  finding: ${entry.finding}`);
     if (entry.revisitWhen) lines.push(`  revisit when: ${entry.revisitWhen}`);
-    if (last) lines.push(`  checked: ${last.date} at ${last.commit}${last.pr === undefined ? '' : ` (#${last.pr})`}`);
     lines.push(`  evidence: ${entry.evidence.join(' ')}`);
   }
   return lines.join('\n') + '\n';

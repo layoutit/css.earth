@@ -66,7 +66,7 @@
   },
   "interpretation": "Independent registered optical raster coverage against actual XYZ field samples. Counterfactual deletes only the saved window from the same newly fitted field.",
   "schema": "cssearth-lab-optical-window-evidence@1",
-  "tested": "2026-09-13; d429e4b5b plus the optical-window implementation committed with this record. Screenshot and field result are the default recipe, Detail 90%, Faint 15%, Depth 1x.",
+  "tested": "2026-09-13; plus the optical-window implementation committed with this record. Screenshot and field result are the default recipe, Detail 90%, Faint 15%, Depth 1x.",
   "implementation": [
     {
       "path": "labs/nebula/src/reconstruction/compiler/bake-types.ts"

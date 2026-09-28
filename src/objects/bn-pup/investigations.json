@@ -1,0 +1,28 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bn-pup",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5596601154188852352 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/bn-pup/source/photometry/gaia-dr3-source.csv; cross-identification HIP 39666: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5596601154188852352. Distance: Groenewegen (2013), A&A 550, A70, table10, BN Pup: Baade-Wesselink distance (pc) 3570.8 +/- 95.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 3570.8 +/- 95.2 pc; Gaia DR3 parallax 0.2811 +/- 0.0147 mas (same row, RUWE 1.25), 19.2 standard errors, is not used. Proper motion: Gaia DR3 (same row): -1.618, 2.362 mas/yr. Radial velocity: SIMBAD's radial velocity for Gaia DR3 5596601154188852352 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5596601154188852352",
+        "https://arxiv.org/abs/1212.5478",
+        "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 76.3 +/- 1.9 solar radii from Groenewegen (2013), A&A 550, A70, table10, BN Pup: Baade-Wesselink mean radius (solar radii) 76.3 +/- 1.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 53,081,910 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5250 +/- 153 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 43, Name='BN Pup', columns Teff, e_Teff (K): Teff 5250 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    }
+  ]
+}

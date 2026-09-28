@@ -8,7 +8,7 @@ import { auditOwnership } from './typescript-ownership.mts';
 
 function fixture(files: Readonly<Record<string, string>>): string {
   const root = mkdtempSync(join(tmpdir(), 'typescript-ownership-'));
-  const manifest = { schemaVersion: 1, baselineCommit: '0'.repeat(40), legacyAuthored: [], exceptions: {} };
+  const manifest = { schemaVersion: 1, legacyAuthored: [], exceptions: {} };
   for (const [path, text] of Object.entries({ '.github/scripts/checks/typescript-ownership.json': JSON.stringify(manifest), ...files })) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     writeFileSync(join(root, path), text);

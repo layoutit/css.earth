@@ -12,13 +12,14 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorLens, json } from './lens.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker, scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { citedName, isCollaboration, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
+import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { Cited, StarSpec } from './spec.mts';
 import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
+import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
@@ -34,9 +35,10 @@ export function physicalValues(spec: StarSpec, row: GaiaRow) {
   };
   const cite = (value: Cited, label: string, unit: string) => ({ value: value.value, text: `${label} ${value.value}${value.uncertainty ? ` +/- ${value.uncertainty}` : ''} ${unit} from ${value.source} (${value.url})` });
   const radius = spec.radius === 'gaia-flame' ? flame('radiusFlame', 'Radius') : cite(spec.radius, 'Radius', 'solar radii');
-  const mass = spec.mass === 'gaia-flame' ? flame('massFlame', 'Mass') : cite(spec.mass, 'Mass', 'solar masses');
+  const mass = spec.mass === 'unmeasured' ? { value: 0, text: 'No mass is measured, so GM is 0, the records\' unpublished value' }
+    : spec.mass === 'gaia-flame' ? flame('massFlame', 'Mass') : cite(spec.mass, 'Mass', 'solar masses');
   const radiusKm = radius.value * SOLAR_RADIUS_KM, gm = GM_SUN * mass.value;
-  const exact = Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2);
+  const exact = gm > 0 ? Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2) : Number.NaN;
   const logg = spec.gravity ? spec.gravity.value : fixed(exact, 2);
   const gravitySource = spec.gravity ? `${spec.gravity.source} (${spec.gravity.url})`
     : `log g from the mass and radius in packages/astronomy/data/bodies/${spec.id}.json (sources in its physicalNotes), log10(GM/R^2) in cgs: ${exact.toFixed(3)}, rounded to two decimals`;
@@ -90,7 +92,7 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow, ids: Identifiers, 
   const cross = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter(Boolean).join(', ');
   return { id: spec.id, classification: 'star', order,
     physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(p.radiusKm, 1), gravitationalParameterKm3PerS2: fixed(p.gm, 5), parent: null, effectiveTemperatureK: t.value },
-    physicalNotes: `${p.radiusText}: ${Math.round(p.radiusKm).toLocaleString('en-US')} km at ${SOLAR_RADIUS_KM.toLocaleString('en-US')} km per solar radius. ${p.massText}; GM is that mass times the JPL solar GM. `
+    physicalNotes: `${p.radiusText}: ${Math.round(p.radiusKm).toLocaleString('en-US')} km at ${SOLAR_RADIUS_KM.toLocaleString('en-US')} km per solar radius. ${p.massText}${p.gm > 0 ? '; GM is that mass times the JPL solar GM' : ''}. `
       + `Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).`
       + (spec.spin ? ` Spin inclination ${spec.spin.inclinationDegrees} degrees${spec.spin.periodDays ? ` and rotation period ${spec.spin.periodDays} d` : ''} from ${spec.spin.source} (${spec.spin.url}).` : '')
       + ' presentationUp: the display axis is a sky-plane convention; the spin axis\'s position angle on the sky is not measured.',
@@ -129,14 +131,30 @@ export interface Generated {
   readonly todo: readonly string[];
 }
 
+/** Gaia DR3 spans 1,038 days (2014 July 25 to 2017 May 28). An orbit it saw at least ten times has a period it can measure; beyond that
+ * its eclipsing-binary periods are aliases (a 214-day LMC giant pair fitted at 3.0 d, a 118-day one at 187 d, 2026-09-28). */
+export const GAIA_EB_CHECKED_DAYS = 1038 / 10;
+/** A binary's primary must be the star Gaia sees eclipsing on the paper's period, or half or twice it: a namesake variable in a crowded
+ * cluster (M4's other "V66", 0.27 d against 8.11 d) is refused. No Gaia solution, or a period Gaia cannot measure, is not a check. */
+export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | undefined) {
+  if (gaiaDays === undefined || paperDays > GAIA_EB_CHECKED_DAYS) return true;
+  return [paperDays, paperDays / 2, paperDays * 2].some(period => Math.abs(gaiaDays - period) / period < 0.01);
+}
+
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
 export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
   const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' ? [value.url] : [])])];
+  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
   const [{ csv, row }, found] = await Promise.all([fetchGaiaRow(archive, ids.gaia), Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, physical = physicalValues(spec, row), place = placement(spec, row);
+  const binaryPeriods = spec.companions.flatMap(companion => 'elements' in companion.orbit ? [companion.orbit.elements.periodDays!] : []);
+  if (binaryPeriods.length) {
+    const gaiaDays = await fetchGaiaEclipsingPeriod(archive, row.sourceId);
+    for (const paperDays of binaryPeriods) if (!eclipsingPeriodAgrees(paperDays, gaiaDays))
+      throw new Error(`${id}: Gaia DR3 ${row.sourceId} eclipses every ${gaiaDays!.toFixed(4)} d, not on the orbit's ${paperDays} d (or half or twice it): it is probably another star of that name.`);
+  }
   // A star already placed under another id (a common name, another catalogue) is the same star: never a second package.
   const held = duplicateStar(universe ?? await existingBodies(root), { ra: row.ra, dec: row.dec, epoch: 2016 }, refresh ? id : undefined);
   if (held) throw new Error(`${id}: Gaia DR3 ${row.sourceId} is ${held}, already in the universe (within ${DUPLICATE_ARCSEC}" of its position); add its bodies with { "host": "${held}" }.`);
@@ -147,7 +165,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     if (radialVelocity.value !== 0) found.push([radialVelocity.url, await fetchPublication(archive, radialVelocity.url)]);
   }
   const body = astronomyRecord(spec, row, ids, order);
-  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none)]);
+  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none ?? (Number.isFinite(physical.logg) ? undefined : 'no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited'))]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
@@ -163,7 +181,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const measurements = read(`${s}/measurements.json`), distance = place.parsecs, out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(measurements)) {
     out[key] = value;
-    if (key === 'effectiveTemperatureSource') { out.surfaceGravityLogg = physical.logg; out.surfaceGravitySource = physical.gravitySource; }
+    if (key === 'effectiveTemperatureSource' && Number.isFinite(physical.logg)) { out.surfaceGravityLogg = physical.logg; out.surfaceGravitySource = physical.gravitySource; }
   }
   out.angularDiameterSource = `Computed here from the record's radius and distance: 2 x ${Math.round(physical.radiusKm).toLocaleString('en-US')} km at ${distance.toFixed(2)} pc = ${measurements.angularDiameterMas} mas. No interferometric diameter of this star is used.`;
   out.shape = { kind: 'uniform-disc-sphere', qualification: `A sphere at the published radius, coloured from ${colorWords} (photometry/stellar-color.json); no image of the photosphere exists.` };
@@ -237,7 +255,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter((name): name is string => Boolean(name) && name !== spec.name).join(', ');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
     spec.text ? `${spec.text.introduction}${names ? ` It is also ${names}.` : ''} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name}${names ? ` (${names})` : ''} is ${distance.toFixed(1)} parsecs away. ${TODO}: what the star is and why it is here, from ${spec.paper.credit}.`, '',
-    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}. log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.`, '',
+    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : ' No surface gravity is known.'}`, '',
     `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
@@ -259,6 +277,20 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
   for (const record of color.catalogue) files.set(`src/sources/${record.id}.json`, json(record.record));
 
+  // The ledger records each choice made above with the links it read.
+  const gaiaArchive = 'https://gea.esac.esa.int/archive/', vizier = (credit: string | undefined) => credit?.match(/VizieR (J\/[^\s.,)]+)/u)?.[1];
+  const colorLinks = color.inputs.map(input => String(input.origin)).filter(origin => origin.startsWith('https://') && !origin.includes('asu-tsv') && !origin.includes('/tap/'));
+  writeLedger(files, id, [
+    { id: 'placement', subject: 'Placement', evidence: [gaiaArchive, ...place.cited ? [place.cited.url] : [], ...row.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
+      finding: `Gaia DR3 source ${row.sourceId}: position at J2016.0. Distance: ${place.source}. Proper motion: ${place.properMotion.source}. Radial velocity ${row.radialVelocity !== undefined ? 'from the same row' : `from ${spec.radialVelocity!.source}`}.` },
+    { id: 'radius-mass-and-temperature', subject: 'Radius, mass and temperature', evidence: [...spec.radius === 'gaia-flame' || spec.mass === 'gaia-flame' ? [gaiaArchive] : [], spec.temperature.url],
+      finding: `${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value}${spec.temperature.uncertainty ? ` +/- ${spec.temperature.uncertainty}` : ''} K from ${spec.temperature.source}.` },
+    { id: 'colour', subject: 'Colour', evidence: color.route === 'planck' ? [spec.temperature.url] : colorLinks,
+      finding: `${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2-degree observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.` },
+    ...limb.limbDarkening && vizier(limb.credit) ? [{ id: 'limb-darkening', subject: 'Limb darkening', evidence: [`https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${vizier(limb.credit)}`], finding: `The disc is ${limb.sentence}.` }] : [],
+    ...spec.spin ? [{ id: 'spin', subject: 'Spin', evidence: [spec.spin.url], finding: `Inclination ${spec.spin.inclinationDegrees} degrees from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''}, from ${spec.spin.source}; the axis's direction on the sky is a convention.` }] : [],
+  ]);
+
   const todo = [...color.todo ? [color.todo] : [], ...spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the star and its evidence']];
   return { id, files, color, limb, hex: colorHex, todo };
 }
@@ -278,7 +310,9 @@ export async function reconcileSources(files: Map<string, string | Buffer>, root
   for (const [path, value] of files) {
     if (!path.startsWith('src/sources/')) continue;
     const record = JSON.parse(String(value)) as SourceIdentity, existing = key(record).map(identity => owners.get(identity)).find(owner => owner && owner !== record.id);
-    if (existing) { renames.set(record.id, existing); files.delete(path); }
+    if (existing) { renames.set(record.id, existing); files.delete(path); continue; }
+    // Two new records for one work in the same package (its paper by DOI, its distance by arXiv): the first one written is kept.
+    for (const identity of key(record)) if (!owners.has(identity)) owners.set(identity, record.id);
   }
   if (!renames.size) return renames;
   for (const [path, value] of files) {

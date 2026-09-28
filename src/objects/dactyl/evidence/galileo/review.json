@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-galileo-frame-review-result@1",
   "inputSha256": "aa569aec0a3896d17cd23ba055d3808160a7862910a974f3799b4520fc954686",
-  "baseCommit": "ef958900c9ecab2632fff75fd629fa4789947f79",
   "generatorSha256": "15c64c97b1bf1ede770044ab71530443f0eceea448bf85092ffb6a67c4158a13",
   "qualifiedSurface": false,
   "coordinates": "Crops use zero-based columns and rows in the decoded FITS storage array. No north-up or body-fixed interpretation is assigned.",

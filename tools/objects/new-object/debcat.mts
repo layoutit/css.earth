@@ -66,15 +66,20 @@ export function draftFromDebcat(row: DebcatRow): { readonly spec: Record<string,
   const [m1, m2] = row.mass, [r1, r2] = row.radius, id = slug(row.name);
   const separationAu = ((m1[0] + m2[0]) * (row.periodDays / YEAR_DAYS) ** 2) ** (1 / 3), aOverR1 = Number((separationAu * AU_SOLAR_RADII / r1[0]).toFixed(4));
   const words = (star: 'primary' | 'secondary', m: Measured, r: Measured) => `The ${star} star of the eclipsing binary ${row.name}, ${m[0]} solar masses and ${r[0]} solar radii; the two stars eclipse each other every ${row.periodDays} days.`;
+  const pair = (star: 'primary' | 'secondary', m: Measured, r: Measured, other: readonly [Measured, Measured]) => ({
+    card: `The ${star} star of ${row.name}, a pair that eclipse each other every ${row.periodDays} days.`,
+    introduction: `It has ${m[0]} solar masses and ${r[0]} solar radii; its partner has ${other[0][0]} and ${other[1][0]}, measured from the eclipses and the stars' motions.`,
+    locator: `${DEBCAT_CREDIT}, ${row.name}: Mass, Radius and Period, from ${paper.label}` });
   const spec = {
     id: `${id}-a`, name: `${row.name} A`, system: `${row.name} system`, description: words('primary', m1, r1), target: row.name,
     paper: { url: paper.url, credit: paper.label },
     radius: cite(r1, 'Primary radius (solar radii)'), mass: cite(m1, 'Primary mass (solar masses)'), temperature: temperature(row.logTeff[0], 'Primary'),
-    gravity: cite(row.logg[0], 'Primary log g'),
+    gravity: cite(row.logg[0], 'Primary log g'), text: pair('primary', m1, r1, [m2, r2]),
     planets: [],
     companions: [{
       id: `${id}-b`, name: `${row.name} B`, description: words('secondary', m2, r2), paper: { url: paper.url, credit: paper.label },
       radius: cite(r2, 'Secondary radius (solar radii)'), mass: cite(m2, 'Secondary mass (solar masses)'), temperature: temperature(row.logTeff[1], 'Secondary'),
+      text: pair('secondary', m2, r2, [m1, r1]),
       // DEBCat rounds the period to a thousandth of a day, too coarse to time eclipses years on: it only sizes the orbit here.
       orbit: { elements: { semiMajorAxisStellarRadii: aOverR1 },
         source: `Separation derived here by Kepler's third law from the two masses and the period ${row.periodDays} d ${from}: ${separationAu.toFixed(5)} au, ${aOverR1} primary radii`, url: paper.url },

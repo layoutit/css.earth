@@ -143,8 +143,7 @@ cover total accounting and rejection before package replacement.
   fail that image-stability gate. Neutral X/Y additionally exceeds the 0.05
   brightness limit. The optimizer's coarse target result is not a visual certificate.
 
-Local application preparation ran on 2026-09-20 using code at
-`862cdbed96bbca43cdf1f13549c94e4ca501add3` plus the uncommitted Omega object package
+Local application preparation ran on 2026-09-20 using main plus the uncommitted Omega object package
 and scoped provenance selector; native navigation was checked with the subsequent
 uncommitted shared focus and context-visibility fixes. The exact input and output inventories above
 identify that candidate; the commit alone does not contain its app package. The
@@ -161,7 +160,7 @@ pin those copies to the research files at that commit. No current Lab-file reads
 are required for compact replay.
 
 The [2026-09-21 merge check](evidence/2026-09-21/merge-validation.json) records
-integration with main at `3aebc31094dff8332755b394b88c708b7c3f1062`. A fresh
+integration with main. A fresh
 [native navigation run](evidence/2026-09-21/native-focus.json) preserves the
 204.5516-pixel cold/warm framing and close-up/background restoration behavior.
 The model, textures and recorded context-owner pins are unchanged; the six views

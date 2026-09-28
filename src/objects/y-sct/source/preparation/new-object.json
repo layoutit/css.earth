@@ -1,0 +1,53 @@
+{
+  "id": "y-sct",
+  "name": "Y Sct",
+  "system": "Y Sct system",
+  "description": "A Cepheid in the Milky Way that pulsates every 10.34 days; its mean radius is 71.1 solar radii.",
+  "target": "Y Sct",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 71.1,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, Y Sct: Baade-Wesselink mean radius (solar radii) 71.1 +/- 4.8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 4.8
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5250,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 417, Name='Y Sct', columns Teff, e_Teff (K): Teff 5250 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 189
+  },
+  "distance": {
+    "value": 1770,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, Y Sct: Baade-Wesselink distance (pc) 1770 +/- 119.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 119.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.757 +/- 0.012 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 71 times the Sun's width, that swells and shrinks every 10.3 days.",
+    "introduction": "Its mean radius, 71.1 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,770 parsecs away.",
+    "locator": "table10, Y Sct: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "order": 2032
+}

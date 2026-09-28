@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-usgs-numeric-evidence@1",
-  "baseCommit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
   "scope": "Working implementation atop this base; tested file hashes identify the relevant version. Native sample checks qualify decoding, coordinates and calibration before the separately audited quality masks. Range hashes identify only bytes actually read, never the full native product.",
   "testedFiles": {
     "tools/objects/acquisition/geotiff-grid.mts": "d377dd0968f9940cb9f0c1d99549dcb7844e8ccfc8c6b567814d6ebd13661e3c",

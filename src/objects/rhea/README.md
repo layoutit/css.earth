@@ -28,21 +28,21 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | normal | 11520 × 5760 | 6.66 → 9.69 MB |
 | enhanced | 12015 × 6008 | 15.34 → 20.46 MB |
 
-Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/rhea/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 Existing reports; no body tests were rerun for this documentation edit.
 
 - **Shape:** the mesh was closed and connected. The largest distance between the
   source shape and simplified display mesh in 8,000 sampled comparisons was
   5,700.82 m; sampling does not establish a full error bound.
-  [Shape and delivery results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/final/DELIVERY.md).
+  Shape and delivery results.
 - **VIMS:** reading and interpreting the original spectral files were checked independently.
   The mission team's earlier processing was not rerun.
-  [Source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/evidence/source/SOURCE-REVIEW.md).
+  Source review.
 - **Browser and delivery:** selected views at device pixel ratios (DPR) 1 and 2, with saved images and
   installation results. Settings access and full-suite checks remained incomplete.
-  [Visual review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/VISUAL-REVIEW.md) ·
-  [Run results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/evidence/integration/qualification.json).
+  Visual review ·
+  Run results.
 
 ## Known problems
 

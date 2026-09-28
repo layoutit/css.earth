@@ -2,7 +2,7 @@
 
 **Passed on 10 September 2026, on macOS arm64.** A fresh shallow GitHub clone started without `node_modules`, `.local`, downloaded originals, a Python environment or generated nebula textures. Dependency downloads used separate empty pnpm/pip caches. No source images or processing results were copied from the working repository.
 
-The cold bake ran at `4f3cdee28380f4a30cfa0f455d2f091d629b50c9`. After it finished, the clone fast-forwarded to `5fbe0d832` to use the new read-only verifier. That commit adds verification only; the baking algorithms, recipes and source pins are unchanged. The checkout stayed clean throughout processing.
+The cold bake ran. After it finished, the clone fast-forwarded to use the new read-only verifier. That commit adds verification only; the baking algorithms, recipes and source pins are unchanged. The checkout stayed clean throughout processing.
 
 ## Results
 

@@ -72,7 +72,7 @@ The [clay](evidence/band-centres/clay-centre.png) and
 on 27 September in Chromium at 1440 × 900, DPR 2, saved at 1440 pixels wide,
 with Shadows off. Switching lenses loaded each map's own title, units and image
 without page errors or failed requests; a 390 × 844, DPR 2 phone view also passed.
-The recipes and numeric checks are from `734ad10780629e11b09707ff5d0c0f5601ecb02e`;
+The recipes and numeric checks are;
 later changes retain main's Mineral signatures group and shorten these two
 selector subtitles to “Dawn VIR”. The shared focused checks and fresh delivery
 verification are recorded in [Io's qualification](../io/README.md#close-pass-volcanic-heat-27-september-2026).
@@ -84,7 +84,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | enhanced | 684.8 → 671.3 kB |
 | normal | 365.2 → 357.9 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ceres/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Lane change (this PR): the terrestrial solid-observation lane was retired for Ceres; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 2048 × 1024 (DPR 1) and 4096 × 2048 (DPR 2) — retired 4096 × 2048 atlas. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
@@ -96,7 +96,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - [source/manifest.json](source/manifest.json) pins acquisition URLs, byte counts, checksums, credits, and consumers.
 
-- Focused checks are defined in the [unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/ceres) and the shared browser conformance harness.
+- Focused checks are defined in the unit tests and the shared browser conformance harness.
 
 ### Ammonium band from our VIR reduction (21 September 2026)
 
@@ -121,7 +121,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 ### Clay band, and the archived maps (September 2026)
 
-- **Decoding.** `packages/bake/src/objects/raster/pds/pds-float-map.ts` reads both maps through their detached labels and checks every layout and projection field against the recipe. Six values per map at the label's pixel centres match an independent Python read of the archive bytes, and the painted colors match the scale ([unit tests](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/ceres/science-surfaces.test.mts)).
+- **Decoding.** `packages/bake/src/objects/raster/pds/pds-float-map.ts` reads both maps through their detached labels and checks every layout and projection field against the recipe. Six values per map at the label's pixel centres match an independent Python read of the archive bytes, and the painted colors match the scale (unit tests).
 - **Handedness and registration.** Frigeri et al. (2019) note that Haulani crater has a low 2.7 µm band depth; the archived map also dips at Cerealia Facula in Occator. Within 3° of their [IAU Gazetteer](https://planetarynames.wr.usgs.gov/Page/CERES/target) centres (10.77°E 5.80°N; 239.6°E 19.7°N) the median 2.7 µm band depth is 0.232 and 0.235, against 0.259 and 0.255 at the mirrored longitudes. The lowest 1% of pixels near Cerealia sit at 240.5°E 19.4°N, 0.9° from the Gazetteer centre. Dantu, high in the 3.1 µm band in the paper's figure, has its highest 1% at 138.3°E 26.1°N (Gazetteer 138.2°E 24.3°N).
 - **Values against the paper.** The archived 2.7 µm map has median 0.255 (1st to 99th percentile 0.2245 to 0.2859); the paper's histogram peaks near 0.20. The archived 3.1 µm map has median 0.064 (0.0432 to 0.0925); the paper peaks near 0.087. On the paper's scales most of Ceres was red in the Clay band lens and blue in the Ammonium band lens, so each scale now spans its map's own 2nd to 98th percentile.
 - **Why the values differ from the paper.** The archive's catalog says it follows Ammannito et al. (2016): Survey spectra only, a continuum between the two local maxima in 2.58–3.00 µm (OH) and 2.85–3.30 µm (NH4), and no artifact removal. Frigeri et al. (2019, Section 3.1) used Survey and HAMO spectra, other continuum points, and the artifact correction of Carrozzo et al. (2016), which includes "a new instrument response function" tied to ground-based telescope spectra of Ceres. That correction was never released: the PDS calibrated cubes still carry the 2016 V2 response. We reduced one HAMO cube (`VIR_IR_1B_1_493158996`, 18 August 2015) ourselves with Frigeri's continuum and the public calibration: after a three-channel boxcar for the odd/even detector pattern, its 2.7 µm band depth has median 0.272, near the archive's 0.255 and above the paper's 0.20. Thermal emission cannot close the gap: at 235 K it adds about 1.5% of the signal at 3.0 µm.
@@ -201,7 +201,7 @@ The globe is lit with the Hapke model that [Li et al. (2019)](https://doi.org/10
 - The default view, at 0° phase, lies outside the fitted phases. Its opposition surge comes from B0 and h, which Li et al. held at the values Helfenstein and Veverka (1989) measured from the ground at 1° to 21° phase. The law gives a radiance factor of 0.089 at the flood-lit centre, the same as Li et al.'s 0.089 geometric albedo at 749 nm.
 - [Schröder et al. (2017)](https://doi.org/10.1016/j.icarus.2017.01.026) fitted a clear-filter Hapke model (w 0.113, B_S0 4.0, h_S 0.02). The authors say its opposition values are not physical. At the flood-lit centre it gives 0.161, about twice the geometric albedo, so every Shadows frame would come out about half as bright as with Li et al.'s law. It is not used.
 - Not checked: the photometric model USGS and DLR used for the FC mosaic itself.
-- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js ceres --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false` in d090ce637d. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.000 at half the radius, 0.353 then 0.000 at 0.9 and 0.490 then 0.004 at 0.98.
+- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js ceres --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.000 at half the radius, 0.353 then 0.000 at 0.9 and 0.490 then 0.004 at 0.98.
 
 ## Elevation lens
 

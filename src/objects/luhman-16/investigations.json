@@ -10,28 +10,25 @@
       "revisitWhen": "A map of Luhman 16 A is deposited with its paper.",
       "evidence": [
         "https://arxiv.org/abs/2605.08544"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
-        }
       ]
     },
     {
       "id": "colour",
       "subject": "The colour of Luhman 16 A",
-      "status": "resolved",
+      "status": "included",
       "finding": "Faherty et al. (2014) published resolved MagE optical spectra of A and B, archived in the SIMPLE database; the colour lens is taken from A's. A blackbody colour would have been wrong: the spectrum is dominated by sodium and potassium absorption.",
+      "evidence": [
+        "https://arxiv.org/abs/1406.1518"
+      ]
+    },
+    {
+      "id": "colour-hue-uncertainty",
+      "subject": "The hue of Luhman 16 A below 650 nm",
+      "status": "unresolved",
+      "finding": "Below 650 nm the dwarf is so faint that single pixels of the MagE spectrum have a signal-to-noise ratio near 1. Moving the whole spectrum one standard error down or up gives #ff005e to #ff52c6, from red-pink to lilac.",
       "revisitWhen": "A resolved optical spectrum with higher signal below 650 nm is published.",
       "evidence": [
         "https://arxiv.org/abs/1406.1518"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "78354d5b06738f78624ec5f6a6fd297fda422fb5"
-        }
       ]
     },
     {
@@ -42,12 +39,6 @@
       "revisitWhen": "The world frame can place a binary's components around their barycentre.",
       "evidence": [
         "https://arxiv.org/abs/2403.08865"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-23",
-          "commit": "ed4eb1a1415285671a45a82f7864679a0d7f2bb5"
-        }
       ]
     }
   ]

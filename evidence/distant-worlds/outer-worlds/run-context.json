@@ -1,6 +1,4 @@
 {
-  "codeRevision": "fc0c05a80fc0a0fddcf5c8d47e09e70f55e91c85",
-  "preparedDataRevision": "9666f9dcc4036fd7e79d51cdb1f8e6b8677e0362",
   "build": "development",
   "notes": [
     "Browser captures ran from the original checkout after sequentially rebuilding shared packages, renderer and preparation entry points. No full-site build was repeated.",

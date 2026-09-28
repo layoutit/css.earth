@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ogle-smc-ecl-1421-a",
+  "displayName": "OGLE-SMC-ECL-1421 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "18 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+          "label": "Graczyk et al. (2020), The Astrophysical Journal 904 13",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "62,030 parsecs",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+          "url": "https://arxiv.org/abs/2010.08754",
+          "label": "Graczyk et al. (2020), ApJ 904, 13, the distance to OGLE-SMC-ECL-1421: 62.03 +/- 0.64 kpc",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ogle-smc-ecl-1421-a-lens-color.webp",
+        "surface": "ogle-smc-ecl-1421-a-surface-color@2x.webp",
+        "poles": "ogle-smc-ecl-1421-a-poles-color@2x.webp",
+        "source": {
+          "id": "ogle-smc-ecl-1421-a-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,395 K and log g 2.37 (u1 0.522, u2 0.218): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Graczyk et al. (2020ApJ...904...13G)",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+      "credit": "Graczyk et al. (2020ApJ...904...13G)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ogle-smc-ecl-1421-a.json",
+      "credit": "Primary radius radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "rx-aur",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 200708636406382720: position at J2016.0. Distance: Groenewegen (2013), A&A 550, A70, table10, RX Aur: Baade-Wesselink distance (pc) 1546.7 +/- 118.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1546.7 +/- 118.7 pc; Gaia DR3 parallax 0.6182 +/- 0.0211 mas (same row, RUWE 0.98), 29.3 standard errors, is not used. Proper motion: Gaia DR3 (same row): 1.307, -3.198 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 68.1 +/- 5.2 solar radii from Groenewegen (2013), A&A 550, A70, table10, RX Aur: Baade-Wesselink mean radius (solar radii) 68.1 +/- 5.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5500 +/- 302 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 138, Name='RX Aur', columns Teff, e_Teff (K): Teff 5500 +/- 302 K from a fit to the spectral energy distribution at mean light (not spectroscopic).",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,500 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.263 +/- 0.012 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2-degree observer: #ffede1. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    }
+  ]
+}

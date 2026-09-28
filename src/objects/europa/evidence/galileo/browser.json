@@ -1,6 +1,5 @@
 {
   "date": "2026-09-14",
-  "baseCommit": "4b74bbfd599a6ab4f60c2139f3b399ca7349a4db",
   "tested": "Updated Monochrome inserts in the uncommitted revision of PR #205; delivery.json binds its code, recipes and image bytes.",
   "browser": "Codex in-app Chromium",
   "server": "http://127.0.0.1:4294",

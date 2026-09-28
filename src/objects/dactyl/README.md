@@ -31,7 +31,7 @@ The dimensions describe a smooth envelope. Galileo’s resolved craters are evid
 ## Evidence
 
 The [native Galileo frame review](evidence/galileo/review.json), prepared on
-2026-09-14 against `ef958900c9ecab2632fff75fd629fa4789947f79`, preserves three
+2026-09-14, preserves three
 800 × 800, 8-bit SSI images, their original PDS labels, the bad-pixel records,
 and two mission kernels. [Input identities](evidence/galileo/inputs.json) bind
 every original to its download URL, byte count and SHA-256. This is source
@@ -71,18 +71,18 @@ The public scene retains its missing-imagery grid. Merged
 [PR #199](https://github.com/layoutit/css.earth/pull/199) preserves the earlier
 investigation; it did not qualify a photographic surface.
 
-The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken at
-`2c24ca749` on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and
+The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken
+on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and
 Celmis with neither place selected. Both names are visible while the whole moon
 fits on screen; rotating hides the far-side names. The catalog's coordinates,
 diameters and mesh anchors remain unchanged. All 68 catalog and terrain checks
 passed on this revision, including Dactyl's two names.
 
-The [browser conformance report](evidence/dactyl-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dactyl-dpr-1.webm) and [DPR 2 video](evidence/dactyl-dpr-2.webm) retain the input sequences. These were captured at `514f6b497`; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer at `66448c17d`. The production check below repeats the navigation and presentation affected by later changes.
+The [browser conformance report](evidence/dactyl-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dactyl-dpr-1.webm) and [DPR 2 video](evidence/dactyl-dpr-2.webm) retain the input sequences. These were captured; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer. The production check below repeats the navigation and presentation affected by later changes.
 
 ![Dactyl with Shadows off](evidence/dactyl-shadows-false.png)
 
-The [Shadows-on view](evidence/dactyl-shadows-true.png) was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer commit `66448c17d` and browser-review commit `437ecb0b2`. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
+The [Shadows-on view](evidence/dactyl-shadows-true.png) was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer and browser-review. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
 
 ![Dactyl’s approximate orbit around Ida](evidence/dactyl-approximate-orbit.png)
 
@@ -91,7 +91,7 @@ The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-
 ## Camera and orientation experiment
 
 The [retained report](evidence/registration/report.json) records a diagnostic
-run on 2026-09-14, based on `6644779ec06eb1e8cb3142d0b1336d94ac52382c`, with the
+run on 2026-09-14, with the
 new diagnostic and its dependencies identified by SHA-256. It does not prepare
 a photographic lens. [Pinned inputs](evidence/registration/inputs.json) include
 the original mission VICAR image, its label, the mission clock and leap-second

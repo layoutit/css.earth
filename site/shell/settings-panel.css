@@ -1,5 +1,5 @@
 /* The settings panel and the lens-bank switches. These rules lived in explorer-rail.css, which was deleted with the
-   unreachable rail (fd4a5fba7e) although the settings panel still carries .explorer-settings-panel. */
+   unreachable rail although the settings panel still carries .explorer-settings-panel. */
 
 .explorer-settings-panel h2 {
   display: flex;

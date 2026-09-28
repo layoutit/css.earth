@@ -1,0 +1,30 @@
+{
+ "id": "ry-cma",
+ "classification": "star",
+ "order": 2009,
+ "physical": {
+  "name": "RY CMa",
+  "horizonsCode": null,
+  "meanRadiusKm": 26923590,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5625
+ },
+ "physicalNotes": "Radius 38.7 +/- 3.1 solar radii from Groenewegen (2013), A&A 550, A70, table10, RY CMa: Baade-Wesselink mean radius (solar radii) 38.7 +/- 3.1 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 26,923,590 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5625 +/- 153 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 141, Name='RY CMa', columns Teff, e_Teff (K): Teff 5625 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 109.15680336849539,
+  "declinationDegrees": -11.487297328637455,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1248.2,
+  "properMotionRaMasPerYear": -2.668324262521957,
+  "properMotionDecMasPerYear": 1.7984660021359082,
+  "radialVelocityKmPerS": 46.413837,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3046774762417915136 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ry-cma/source/photometry/gaia-dr3-source.csv; cross-identification HD 56450, HIP 35212: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3046774762417915136",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, RY CMa: Baade-Wesselink distance (pc) 1248.2 +/- 99.5 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1248.2 +/- 99.5 pc; Gaia DR3 parallax 0.8006 +/- 0.0291 mas (same row, RUWE 1.29), 27.5 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -2.668, 1.798 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 46.41 +/- 2.51 km/s"
+  }
+ }
+}

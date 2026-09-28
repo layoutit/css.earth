@@ -1,0 +1,54 @@
+{
+  "id": "v495-cyg",
+  "name": "V495 Cyg",
+  "system": "V495 Cyg system",
+  "description": "A Cepheid in the Milky Way that pulsates every 6.72 days; its mean radius is 95.1 solar radii.",
+  "target": "V495 Cyg",
+  "gaia": "2055809495218465152",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 95.1,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, V495 Cyg: Baade-Wesselink mean radius (solar radii) 95.1 +/- 15.4 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 15.4
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5375,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 380, Name='V495 Cyg', columns Teff, e_Teff (K): Teff 5375 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 189
+  },
+  "distance": {
+    "value": 3181.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, V495 Cyg: Baade-Wesselink distance (pc) 3181.2 +/- 506.6 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 506.6
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.977 +/- 0.055 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way that swells and shrinks every 6.7 days.",
+    "introduction": "Its mean radius, 95.1 solar radii, comes from comparing how fast its surface moves with how its size changes, 3,181 parsecs away.",
+    "locator": "table10, V495 Cyg: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "order": 1940
+}

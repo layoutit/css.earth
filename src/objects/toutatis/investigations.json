@@ -8,16 +8,8 @@
       "status": "included",
       "finding": "[Release](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/) supplies exact model connectivity, scale and coordinate documentation. Its [JPL OBJ counterpart](https://echo.jpl.nasa.gov/asteroids/shapes/hirestoutatis.obj) adds no separate view.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L17",
         "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/",
         "https://echo.jpl.nasa.gov/asteroids/shapes/hirestoutatis.obj"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
-          "pr": 34
-        }
       ]
     },
     {
@@ -27,16 +19,8 @@
       "finding": "[JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) and [NASA 3D resource](https://science.nasa.gov/3d-resources/asteroid-4179-toutatis/) were reviewed. The scientific high-resolution release has clearer metadata and sufficient detail before budget reduction.",
       "revisitWhen": "A newer release adds detail or metadata beyond the PDS high-resolution model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L18",
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://science.nasa.gov/3d-resources/asteroid-4179-toutatis/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
-          "pr": 34
-        }
       ]
     },
     {
@@ -45,37 +29,15 @@
       "status": "included",
       "finding": "The earlier radial trial found multiple intersections in 7 of 8,192 sampled directions. One neck ray crosses radii 1,285.61, 1,363.00 and 1,734.56 m, so its first intersection cannot color every connected patch. The 13 September audit identified an existing closest-source-point sampler but had not prepared this body. The 14 September qualification now includes Elevation: the outer patch retains its 510.557 m height above the 1,224 m reference sphere instead of the incorrect first-ray 61.607 m. Independent full-source checks verify both overlapping patches and an offset point. All 5,775,099 triangle-interior texels pass the 50 m transfer limit; this is an atlas count, not observed area. Geometry stays at 800 faces, existing images are byte-identical, and headless DPR 1/2, mobile, rotation and lighting checks pass. Flat previews withhold ambiguous rays. The lens describes the radar model, including its differences from later photographs; fine triangle boundaries remain visible at close zoom.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L19",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/tests/objects/unit/toutatis/source.test.mts",
+        "https://github.com/layoutit/css.earth/pull/192",
         "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/obj-shape.mts#L272",
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/tools/objects/terrestrial-layers/source-surface.test.mts",
-        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/README.md",
-        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/independent.json",
-        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/preparation.json",
-        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/conformance.json",
-        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/browser.json",
-        "https://github.com/layoutit/css.earth/blob/256c455a34f2e9449e142e9f62471ce4cd005b77/src/objects/toutatis/evidence/source-surface/delivery.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
-          "pr": 34
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-14",
-          "commit": "256c455a34f2e9449e142e9f62471ce4cd005b77"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/obj-shape.ts#L272",
+        "https://github.com/layoutit/css.earth/blob/main/tests/objects/terrestrial/source-surface.test.mts",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/independent.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/preparation.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/conformance.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/browser.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/delivery.json"
       ]
     },
     {
@@ -85,16 +47,8 @@
       "finding": "[Flyby observations](https://arxiv.org/abs/1511.02131), [boulder study](https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/) and the 2016 paper *Radar model fusion of asteroid (4179) Toutatis via its optical images observed by Chang’e-2 probe*, Planetary and Space Science 125, 87–95, describe richer information. The flyby observed roughly 45% of the surface. A restorable released texture/mesh with full calibration and source-frame registration was not qualified in this survey; literature figures are not a global surface map. This is an unresolved release route, not evidence that the data do not exist.",
       "revisitWhen": "A restorable calibrated image set or fused mesh with its source-frame registration is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L20",
         "https://arxiv.org/abs/1511.02131",
         "https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
-          "pr": 34
-        }
       ]
     },
     {
@@ -104,15 +58,7 @@
       "finding": "[Stooke 1996](https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf) has tentative features in an older arbitrary mapping frame and discusses radar image reversals. It does not provide a registered calibrated raster for this mesh. The related CE2DEM2014 search result concerns the Moon, not Toutatis.",
       "revisitWhen": "A registered geological map in this model's frame is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L21",
         "https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-07",
-          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
-          "pr": 34
-        }
       ]
     },
     {
@@ -122,15 +68,7 @@
       "finding": "A camera direction from rotation angles quoted by Bu et al. (2015) and a scale and position matched by hand to Zou et al. (2014)'s radar rendering agreed within 1.0–2.2 figure pixels in three photo-to-photo check windows. Those windows compare two photographs, not photograph pixels with surface points, so the placement does not register the photograph to this mesh.",
       "revisitWhen": "Measured cameras or surface control points for this mesh, with disjoint holdouts, become available.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/a1570599b69cd007f21af69635a46e60987ebe40/src/planets/toutatis/source/reference/chang-e-2-method.md",
         "https://github.com/layoutit/css.earth/pull/183"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "a1570599b69cd007f21af69635a46e60987ebe40",
-          "pr": 183
-        }
       ]
     }
   ]

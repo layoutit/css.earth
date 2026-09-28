@@ -1,5 +1,38 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-88986b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.2221433 Jupiter radii from Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract): 15,881.5 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract",
+        "https://doi.org/10.1051/0004-6361/202347897",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.05411725 Jupiter masses: Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract",
+        "https://doi.org/10.1051/0004-6361/202347897",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 146.05 d (Heidari et al. 2024); a/R* 81.1 (Heidari et al. 2024); inclination 89.9 degrees (Heidari et al. 2024); e 0.24 (Heidari et al. 2024); omega 306 degrees (Heidari et al. 2024); transit mid-time 2458891.69 BJD, taken as BJD_TDB (Heidari et al. 2024). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

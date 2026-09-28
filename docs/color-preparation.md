@@ -253,8 +253,7 @@ Follow the [visual-comparison contract](provenance/CONTRACT.md#say-what-the-chec
 do not Pixelmatch different spectral combinations to claim fidelity.
 
 For the 2026-09-13 refresh, each body's capture records the exact recipe, runtime,
-transfer and delivered-image hashes, compared with retained geometry at
-`8cc1a2fae`. Source registrations and native observations are unchanged. Captures
+transfer and delivered-image hashes, compared with retained geometry. Source registrations and native observations are unchanged. Captures
 made before the final capture-helper edits remain applicable: those edits add an
 optional viewpoint, an installed-Chrome selector and larger diagnostic response
 buffers; they do not change prepared data or rendering. Europa's capture faces

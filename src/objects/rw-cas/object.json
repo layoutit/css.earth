@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "rw-cas",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "RW Cas",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 65813220
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rw-cas-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "RW Cas",
+      "classification": "star",
+      "color": "#ffede1",
+      "distanceAu": 660109098.3,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 14.8 days.",
+      "systemName": "RW Cas system",
+      "order": 1939,
+      "context": {
+        "order": 1936
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        48010904560006490000,
+        21686231281191137000,
+        83524868955793300000
+      ],
+      "presentationToReference": [
+        0.4861818295955085,
+        0.7708262442444805,
+        0.4116480654091702,
+        0.21960535211626606,
+        0.3481775683139347,
+        -0.9113428938905962,
+        0.8458136425318847,
+        -0.5334784738927557,
+        -3.839921587942738e-8
+      ],
+      "orbitUpReference": [
+        -0.7708262442444805,
+        -0.3481775683139347,
+        0.5334784738927557
+      ],
+      "metersPerUnit": 212300709.67741936,
+      "bodyRadiusM": 65813220000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

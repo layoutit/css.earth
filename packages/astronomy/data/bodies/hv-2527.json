@@ -1,0 +1,30 @@
+{
+ "id": "hv-2527",
+ "classification": "star",
+ "order": 1962,
+ "physical": {
+  "name": "HV 2527",
+  "horizonsCode": null,
+  "meanRadiusKm": 51342660,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5250
+ },
+ "physicalNotes": "Radius 73.8 +/- 3.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 2527: Baade-Wesselink mean radius (solar radii) 73.8 +/- 3.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 51,342,660 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5250 +/- 144 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC1954, columns Teffp, e_Teffp: Teff 5250 +/- 144 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 81.41298449281966,
+  "declinationDegrees": -71.11106756329379,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 49165.1,
+  "properMotionRaMasPerYear": 2.189076673309369,
+  "properMotionDecMasPerYear": 0.3109770296498202,
+  "radialVelocityKmPerS": 240.71054,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4651828195859897472 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hv-2527/source/photometry/gaia-dr3-source.csv",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, HV 2527: Baade-Wesselink distance (pc) 49165.1 +/- 2290.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 49165.1 +/- 2290.7 pc; Gaia DR3 parallax 0.0088 +/- 0.0175 mas (same row, RUWE 1.03), 0.5 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 2.189, 0.311 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 240.71 +/- 4.10 km/s"
+  }
+ }
+}

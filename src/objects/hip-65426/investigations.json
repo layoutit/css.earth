@@ -1,5 +1,45 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hip-65426",
-  "entries": []
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6070080754075553792 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0. Gaia DR3 source 6070080754075553792: parallax 9.3031 +/- 0.0346 mas (RUWE 1.08), inverted to 107.4912 pc with no zero-point correction. Gaia DR3 source 6070080754075553792: pmRA* -33.9213 mas/yr, pmDec -18.9174 mas/yr. Gaia DR3 source 6070080754075553792: 9.77 +/- 0.71 km/s. Chauvin et al. (2017, Table 1) measured -5.2 +/- 1.3 km/s; the star rotates at v sin i 299 km/s, which broadens its lines and makes either value uncertain.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-temperature-and-mass",
+      "subject": "Radius, temperature and mass",
+      "status": "included",
+      "finding": "Chauvin et al. (2017), A&A 605, L9.",
+      "evidence": [
+        "https://arxiv.org/abs/1707.01413",
+        "https://doi.org/10.1051/0004-6361/201731152"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "The Gaia DR3 BP/RP sampled spectrum of source 6070080754075553792 (De Angeli et al. 2023, A&A 674, A2; Montegriffo et al. 2023, A&A 674, A3), weighted by the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0). No image of the star's surface exists.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6070080754075553792&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 8,840 K and log g 4.23: a model, since no fit of this star's limb exists.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451",
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
 }

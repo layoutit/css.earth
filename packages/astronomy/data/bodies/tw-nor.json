@@ -1,0 +1,30 @@
+{
+ "id": "tw-nor",
+ "classification": "star",
+ "order": 2025,
+ "physical": {
+  "name": "TW Nor",
+  "horizonsCode": null,
+  "meanRadiusKm": 50786100,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5000
+ },
+ "physicalNotes": "Radius 73 +/- 6.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, TW Nor: Baade-Wesselink mean radius (solar radii) 73 +/- 6.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 50,786,100 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5000 +/- 204 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 183, Name='TW Nor', columns Teff, e_Teff (K): Teff 5000 +/- 204 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 241.23009532876074,
+  "declinationDegrees": -51.953527284315,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 2293.8,
+  "properMotionRaMasPerYear": -1.8907851520236574,
+  "properMotionDecMasPerYear": -2.8059655274872277,
+  "radialVelocityKmPerS": -56.1,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5981406000300438016 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tw-nor/source/photometry/gaia-dr3-source.csv; cross-identification HIP 78771: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5981406000300438016",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, TW Nor: Baade-Wesselink distance (pc) 2293.8 +/- 205.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 2293.8 +/- 205.6 pc; Gaia DR3 parallax 0.3175 +/- 0.0203 mas (same row, RUWE 0.89), 15.6 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -1.891, -2.806 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 5981406000300438016 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract)"
+  }
+ }
+}

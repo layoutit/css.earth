@@ -8,16 +8,8 @@
       "status": "included",
       "finding": "[PDS calibrated Cassini ISS](https://pds-rings.seti.org/cassini/iss/calibration.html) frames, the [2018 shape release and controlled camera table](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf) and shape-derived radial elevation supply the delivered views.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/calypso/README.md#L50",
         "https://pds-rings.seti.org/cassini/iss/calibration.html",
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-09",
-          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
-          "pr": 83
-        }
       ]
     },
     {
@@ -29,12 +21,6 @@
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf",
         "https://pds-rings.seti.org/cassini/iss/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "78e0164f7e892bda98f34aec8db0dcda72c60b37"
-        }
       ]
     },
     {
@@ -43,15 +29,8 @@
       "status": "included",
       "finding": "RED N1644757030_1, GRN N1644756997_1 and BL1 N1644756505_1 supply the retained False color view using the original PDS camera rows. The sequence spans changing phase and roughly nine minutes; it has no colorimetric transform or independent feature refinement.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/calypso/source/preparation/terrestrial.json",
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/calypso_document.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -59,13 +38,7 @@
       "survey": "legacy-voyager-stooke-maps",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/calypso/README.md"
       ]
     },
     {
@@ -73,13 +46,7 @@
       "survey": "integrated-spectroscopy",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/calypso/README.md"
       ]
     },
     {
@@ -88,14 +55,7 @@
       "status": "included",
       "finding": "The retained close-encounter extension adds the two published-camera views westward of the earlier selection. N1506184171_1 still supplies the coarse far side; emission beyond 70 degrees is withheld to prevent single pixels stretching into long strips.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/evidence/close-encounters/qualification.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/calypso/evidence/close-encounters/qualification.json"
       ]
     },
     {
@@ -105,14 +65,7 @@
       "finding": "The recorded fixed-camera diagnostic did not find the six independent feature patches required for refinement or an independent feature check. The released PDS camera-table registration remains the source basis; no camera was fitted by this failed diagnostic.",
       "revisitWhen": "Independent interior controls can qualify a refinement without weakening the existing criteria or replacing the published frame.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/calypso/source/preparation/terrestrial.json"
       ]
     }
   ]

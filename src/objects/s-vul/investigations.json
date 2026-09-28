@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "s-vul",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2027971514401523456 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/s-vul/source/photometry/gaia-dr3-source.csv; cross-identification HD 338867: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2027971514401523456. Distance: Groenewegen (2013), A&A 550, A70, table10, S Vul: Baade-Wesselink distance (pc) 3879.9 +/- 195.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 3879.9 +/- 195.8 pc; Gaia DR3 parallax 0.2051 +/- 0.0202 mas (same row, RUWE 1.03), 10.2 standard errors, is not used. Proper motion: Gaia DR3 (same row): -3.367, -6.086 mas/yr. Radial velocity: Gaia DR3 (same row): 5.18 +/- 2.00 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2027971514401523456",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 272.4 +/- 13.2 solar radii from Groenewegen (2013), A&A 550, A70, table10, S Vul: Baade-Wesselink mean radius (solar radii) 272.4 +/- 13.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 189,508,680 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4625 +/- 189 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 159, Name='S Vul', columns Teff, e_Teff (K): Teff 4625 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,625 K and log g 0.93 (u1 0.728, u2 0.067): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/635/A33/table1"
+      ]
+    }
+  ]
+}

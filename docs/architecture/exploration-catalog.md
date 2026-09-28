@@ -186,7 +186,7 @@ context cards.
 The Moon illustrates the distinction between a mission contribution and vehicle
 participation. GRAIL links to the Crust dataset, while GRAIL-A and GRAIL-B are
 labelled as mission participants. These desktop and phone examples were captured
-from the production build with application sources at `bfc4ed3a682300c08cf324f23bbd5a6afd060fa1`.
+from the production build with application sources.
 The [browser evidence](../../site/test/evidence/dataset-navigation-2026-09-10.json)
 records the cases, viewports, settings, build-file hashes and image hashes.
 
@@ -204,7 +204,7 @@ Run `pnpm test:node` for metadata, bindings and catalogue compilation. It covers
 malformed records, source conservation, reverse links and deterministic output.
 For changes to dataset selection or routing, also run the affected
 [selection](../../src/platform/object-selection-runtime.test.mts) and
-[router](https://github.com/layoutit/css.earth/blob/264ef405472f4713af68fa692b4b8fd0ccaf5690/site/test/navigation-router.test.mts) tests for cancellation and history.
+router tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run the affected
 [dataset response](../../site/test/dataset-response.test.mts),

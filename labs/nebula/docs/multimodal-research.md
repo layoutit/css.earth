@@ -1,7 +1,6 @@
 # Multimodal nebula reconstruction: evidence and next experiments
 
-Primary-source search checked 2026-09-12, against lab baseline
-`36ba61b89f62e1eca7a30af0fc04185131b6b728`. These are research recommendations,
+Primary-source search checked 2026-09-12, against the lab baseline. These are research recommendations,
 not a passed reconstruction or visual-quality result.
 
 **Use the registered images to discover projected structure, then test a small

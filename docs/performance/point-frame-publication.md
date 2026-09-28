@@ -147,8 +147,8 @@ rebuild test. These are recorded separately from the passing runtime checks;
 this document does not establish merge readiness or assert that every broad
 failure predates this change.
 
-The candidate is based on `d8d058662f692daf1cbc20a4bc8a4738ba752a30` plus the
-captured working patch. Fetched main is `9ee9c453c`; its eight newer commits were
+The candidate is a main checkout plus the
+captured working patch; eight newer main commits were
 not folded into this matched comparison. Source status, the patch and served
 bundle hashes are retained in each capture. The stable local server is
 `http://127.0.0.1:4244/sun/`. The shared main checkout was not modified.

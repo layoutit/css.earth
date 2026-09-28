@@ -39,7 +39,7 @@ A subsequent inspection recovered
 Inspection shows smooth lobe geometry; it does not establish recovered terrain
 or image registration. The file's existence corrects the acquisition account,
 but is not a reason to replace the present source-constrained ellipsoid envelope.
-The [Dinkinesh source check](https://github.com/layoutit/css.earth/blob/0d2c55a1f015d532c4a6392540a2406e74c2485c/src/objects/dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
+The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
 
@@ -60,11 +60,11 @@ targeted source check, not an exhaustive claim that no such release can exist.
 
 ## Evidence
 
-The [browser conformance report](evidence/selam-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/selam-dpr-1.webm) and [DPR 2 video](evidence/selam-dpr-2.webm) retain the input sequences. These were captured at `514f6b497`; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer at `66448c17d`. The production check below repeats the navigation and presentation affected by later changes.
+The [browser conformance report](evidence/selam-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/selam-dpr-1.webm) and [DPR 2 video](evidence/selam-dpr-2.webm) retain the input sequences. These were captured; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer. The production check below repeats the navigation and presentation affected by later changes.
 
 ![Selam with Shadows off](evidence/selam-shadows-false.png)
 
-The [Shadows-on view](evidence/selam-shadows-true.png) was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer commit `66448c17d` and browser-review commit `437ecb0b2`. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
+The [Shadows-on view](evidence/selam-shadows-true.png) was also inspected. These production captures use Chrome 152.0.7977.84, 1440 × 1000 at DPR 1, renderer and browser-review. Documentation-only moves preserve the original report and image bytes. They show the adopted shape with the missing-imagery grid; they do not establish photographic registration or mission-model parity.
 
 ![Selam’s approximate orbit around Dinkinesh](evidence/selam-approximate-orbit.png)
 

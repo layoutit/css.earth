@@ -25,10 +25,10 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-Photographic refresh, 12 September 2026, on base `3efdf2c9`: the new native
+Photographic refresh, 12 September 2026,: the new native
 LROC map replaces the 2K CGI texture. These are actual Chrome captures at the
 same Copernicus camera, 1280 × 720, DPR 1; the crops omit the sidebar. The
-before atlas was reproduced with the exact `53b262bd` delivery hash.
+before atlas was reproduced with the exact delivery hash.
 
 | Before | Current |
 | --- | --- |
@@ -44,9 +44,9 @@ qualification of the scientific views. Seven unrelated scientific thumbnails
 were unavailable in the local checkout; the cross-body search preview was
 restricted to Moon, Europa and Io.
 
-Earlier shared-lane migration (base `53b262bd`): the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
+Earlier shared-lane migration: the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
 
-[The September 2026 lunar thermal review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree of that review belong to the retired static lane; the current tree is the shared raster-lane sphere. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
+The September 2026 lunar thermal review records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree of that review belong to the retired static lane; the current tree is the shared raster-lane sphere. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
 
 [Earlier independent source anchors](source/validation/scientific-source-anchors.json) preserve LOLA and the superseded Diviner GDR L3 decoder evidence; they do not validate the new GHRM values.
 
@@ -112,7 +112,7 @@ The globe is lit with the Hapke model of [Sato et al. (2014)](https://doi.org/10
 - The WAC looks almost straight down, so the fit saw emission only up to 30°. Toward the limb the law is held at 30°. Beyond that the limb follows no measurement.
 - With the Sun behind the viewer the law hardly darkens the limb: 0.996 of the centre at 30° emission and beyond. The shared bank it replaces (Lambert with a 0.35 floor) darkened it much more.
 - One set of values lights the whole globe. The paper's maps vary by tile: w from 0.27 to 0.44 between the 16th and 84th percentiles over 30°S to 30°N.
-- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false` in d090ce637d. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
+- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
 
 ## Scene and sky
 
@@ -185,7 +185,7 @@ The three nighttime lenses use the [LRO Diviner GHRM v1.0 float32 mosaics](https
 produced by Powell and the UCLA Diviner team from 2009–2022 observations.
 The exact product labels, original hash pins, compact numeric grids and conversion
 receipts live in `source/science/diviner-ghrm/`; candidate selection and independent
-checks are recorded in the [lunar thermal source review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/source-review/INDEPENDENT-SCIENCE-REVIEW.md).
+checks are recorded in the lunar thermal source review.
 
 The [shared converter](../../../packages/bake/src/objects/acquisition/diviner-ghrm.py) runs
 each `prepare-*.json` in that source directory. Use its `--source-directory` and

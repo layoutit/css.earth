@@ -1,7 +1,5 @@
 {
-  "baseRevision": "0ff39d3bcc3f51ecbcbf802f9059379a746183ea",
   "workingChanges": "This photographic-coverage change, before commit. Body source and runtime manifests below identify the prepared inputs and delivered bytes.",
-  "beforeRevision": "d4330c6c1944c828b9abb767f3b0d2b0fccd5888",
   "captureCommand": "node tests/objects/browser/asteroid-photographic-coverage.mts lutetia after",
   "captureImplementationSha256": "32b947028b269527f102123a279ea24eb34d2a6d4c3a019b9c8fb62a2060e8de",
   "sourceManifestSha256": "f67bb95e9efe3907f5cc074c5a8d9747685371a2790650c9ad3d1a654cd48e73",

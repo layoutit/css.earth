@@ -1,11 +1,9 @@
 {
   "schema": "cssearth-charon-leisa-capture@1",
   "capturedAt": "2026-09-13T16:14:13.146Z",
-  "mainBase": "6841d90fa296094c745771beb606793360e07d65",
   "branch": "feat/charon-ice-chemistry",
   "revisionBinding": "Uncommitted Charon changes above main; input and output hashes below identify the tested revision. Documentation-only edits do not invalidate these checks.",
   "preview": {
-    "baseCommit": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
     "url": "http://127.0.0.1:53136/charon/",
     "limitation": "The preview omits unavailable Helix/Cats Eye volume banks through the two patches below. Their restoration requires the absent NOX model. Main subsequently added Ryugu and Saturn-moon data and preparation changes; it did not change the application runtime used for these captures. This is not an unmodified whole-app build or full-suite pass.",
     "patches": "diff --git a/site/application-world-context.mts b/site/application-world-context.mts\nindex 3cf6dd757..3abed1b00 100644\n--- a/site/application-world-context.mts\n+++ b/site/application-world-context.mts\n@@ -81,7 +81,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {\n     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)\n       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),\n         minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));\n-    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank')\n+    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank' && typeof assets[`../src/objects/${descriptor.id}/${descriptor.prepared.url}`] === 'string')\n       .map(async descriptor => {\n         const set = resourceSet(descriptor.id);\n         return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),\ndiff --git a/site/components/PreparedFocusLenses.astro b/site/components/PreparedFocusLenses.astro\nindex bed55449a..47d580197 100644\n--- a/site/components/PreparedFocusLenses.astro\n+++ b/site/components/PreparedFocusLenses.astro\n@@ -10,7 +10,7 @@ const descriptors = import.meta.glob<Descriptor>('../../src/objects/*/object.jso\n const prepared = import.meta.glob<{ data: PreparedVolumeLensBank }>('../../src/objects/*/prepared/*.json', { eager: true, import: 'default' });\n const presentations = import.meta.glob<unknown>('../../src/objects/*/prepared/presentation.json', { eager: true, import: 'default' });\n const provenanceDocuments = import.meta.glob<unknown>('../../src/objects/*/prepared/provenance.json', { eager: true, import: 'default' });\n-const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.type === 'volume-lens-bank').map(([path, descriptor]) => {\n+const banks = Object.entries(descriptors).filter(([path, descriptor]) => descriptor.type === 'volume-lens-bank' && prepared[path.replace(/object\\.json$/u, descriptor.prepared?.url ?? '')]?.data).map(([path, descriptor]) => {\n   const bank = prepared[path.replace(/object\\.json$/u, descriptor.prepared?.url ?? '')]?.data;\n   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);\n   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\\.json$/u, 'prepared/provenance.json')], bank.id);",
@@ -597,7 +595,6 @@
   },
   "sourceRestoration": {
     "record": "restoration.json",
-    "base": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
     "reuse": "Band recipe, spectral preparer, native pins and acquisition operation are unchanged since this empty-source restoration."
   },
   "checks": {
@@ -663,5 +660,5 @@
       "failure": "The local NOX model and a matching Mathilde feature catalogue are absent. The preview has a verified feature catalogue and records its actual generated index above."
     }
   ],
-  "baselineComparison": "Failure reproductions use ebd16155a. Relevant application and fixture files are unchanged through current main 6841d90fa; only unrelated body/preparation additions landed."
+  "baselineComparison": "Failure reproductions use. Relevant application and fixture files are unchanged; only unrelated body/preparation additions landed."
 }

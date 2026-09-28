@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The current LAM 3Dshape directory lists 324_Bamberga_mpcd.obj, matching the actual preparation input. The retained measurements describe 4498 vertices and 8992 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bamberga/README.md",
         "https://observations.lam.fr/astero/3Dshape/324_Bamberga_mpcd.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bamberga/source/reference/model-properties.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bamberga/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bamberga/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bamberga/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -32,20 +20,8 @@
       "status": "included",
       "finding": "The retained Table 1 and Table A.1 extract records diameter 227 km, ecliptic J2000 pole (17°, -57°), period 29.4403 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 113.55278545914152 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bamberga/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bamberga/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bamberga/source/reference/model-properties.json"
       ]
     },
     {
@@ -54,29 +30,9 @@
       "status": "included",
       "finding": "Included 2026-09-18 as the SPHERE photograph lens: 85 camera-1 deconvolved frames, 15 nights from 2017-06-23 to 2019-01-27, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/324Bamberga/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bamberga/README.md",
         "https://observations.lam.fr/astero/Data/324Bamberga/",
         "https://observations.lam.fr/astero/",
         "https://observations.lam.fr/astero/Data/324Bamberga/Deconv/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
-        }
       ]
     },
     {
@@ -87,23 +43,7 @@
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/324_Bamberga_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bamberga/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bamberga/source/reference/model-properties.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bamberga/source/reference/model-properties.json"
       ]
     },
     {
@@ -114,24 +54,6 @@
       "evidence": [
         "https://observations.lam.fr/astero/Data/324Bamberga/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/324_Bamberga_param.txt"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
-        },
-        {
-          "date": "2026-09-17",
-          "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
-        }
       ]
     },
     {
@@ -143,12 +65,6 @@
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/324Bamberga/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/324_Bamberga_adam.obj"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "7e02e664f981262c20127e6aa74197890c026c08"
-        }
       ]
     }
   ]

@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-source-restoration-check@1",
-  "baseCommit": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
   "destination": "/Users/ekrof/fed/cssEarth-comets/output/charon-leisa/restored-jKyspq",
   "transportNote": "The original empty-destination run restored all PDS inputs and regenerated both maps. Node could not validate the SwRI certificate chain; the method PDF was retried with system curl certificate validation enabled. No TLS verification was disabled.",
   "bootstrap": "Only the checked-in bands.json policy was copied; all native observations and method PDF were downloaded, and the two maps/report were regenerated.",

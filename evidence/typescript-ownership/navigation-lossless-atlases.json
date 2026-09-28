@@ -1,5 +1,4 @@
 {
-  "integratedMain": "a1471af189b25c1bed46683f06bc345025a7cf67",
   "generatorSha256": "0bdea0c50cf77a6ae7f9ee6dd3f9ea6ef4b1578d85cb53bcacb9ba1ac8636b71",
   "objectCount": 461,
   "recipePins": [
@@ -2340,7 +2339,6 @@
   "beforeLossyPublication": [
     {
       "filename": "planet-markers.webp",
-      "baseline": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
       "objects": 406,
       "records": [
         {
@@ -4783,7 +4781,6 @@
     },
     {
       "filename": "planet-markers@2x.webp",
-      "baseline": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
       "objects": 406,
       "records": [
         {
@@ -7225,12 +7222,9 @@
       ]
     }
   ],
-  "lossyPublicationCommit": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
   "explanation": "The Encke/LINEAR integration recompressed all marker tiles with Q75. Later incremental additions retained those decoded lossy pixels. Canonical preparation now rebuilds pinned source recipes with lossless row-copy assembly. Original pre-compression baseline comparison is reported separately from the current-main comparison.",
   "subsequentMerge": {
     "refs": {
-      "existing": "46870c229f8b7cc4ebb896615229b223fe59d963",
-      "incoming": "bbfbf86b5c9b71fc56ef5e6b4759fd00af11d8ec"
     },
     "objects": 464,
     "densities": [

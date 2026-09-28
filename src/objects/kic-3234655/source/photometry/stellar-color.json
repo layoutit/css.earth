@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "kic-3234655",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4964,
+      "lowerKelvin": 4907,
+      "upperKelvin": 5021,
+      "citation": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3234655 (Gold): APOGEE effective temperature (K) 4963.778 +/- 57.2926: 4964 +/- 57 K, https://arxiv.org/abs/2410.00102"
+    },
+    "note": "The star lies in the Galactic plane hundreds to thousands of parsecs away, where interstellar dust reddens its spectra, and the colour routes do not remove it; APOGEE measured its temperature, so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

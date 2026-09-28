@@ -76,6 +76,6 @@ regenerate geometry-dependent atlases, lighting, targeting data and companion
 images through their existing owners. Runtime consumes those prepared assets.
 
 Finish with the [matched visual and drag checks](qualification.md#measure-mesh-changes).
-Vesta at `1979293e` reached 800 faces from 16,128 source-sampled triangles using
+Vesta reached 800 faces from 16,128 source-sampled triangles using
 meshoptimizer 1.2.0, retaining 128px raster cells. Those are measured choices for
 that source and workload, not defaults for every irregular body.

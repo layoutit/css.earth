@@ -22,7 +22,7 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
       const {lock,digest}=await runtimeLock();
       // The committed fixture names the generator's path before the move until SBMT regenerates it.
       assert.ok(['tools/oracles/sbmt/projection.mts','tests/oracles/sbmt/projection.mts'].includes(fixture.generatedBy));
-      // Known gap: since 62cde1f331 the committed fixture's tool record holds no runtimeLockSha256 or generatorSha256, so the
+      // Known gap: since the committed fixture's tool record holds no runtimeLockSha256 or generatorSha256, so the
       // comparison below fails whenever this test runs past its restored-source skips. Recorded, not repaired here.
       assert.deepEqual(fixture.tool,{sbmt:lock.sbmt,release:lock.release,java:lock.java,'java-bridge':lock.bridge,runtimeLockSha256:digest,generatorSha256:await generatorFingerprint()});
       await assertPinnedInputs(fixture.inputs);

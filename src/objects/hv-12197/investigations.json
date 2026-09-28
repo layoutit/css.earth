@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hv-12197",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4663542079171750528 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hv-12197/source/photometry/gaia-dr3-source.csv. Distance: Groenewegen (2013), A&A 550, A70, table10, HV 12197: Baade-Wesselink distance (pc) 38519.9 +/- 1541.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 38519.9 +/- 1541.2 pc; Gaia DR3 parallax -0.0181 +/- 0.0323 mas (same row, RUWE 0.91), -0.6 standard errors, is not used. Proper motion: Gaia DR3 (same row): 1.636, 0.129 mas/yr. Radial velocity: No catalogued radial velocity: Gaia DR3 measures none for source 4663542079171750528 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 10,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/1212.5478",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204663542079171750528"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 22.6 +/- 0.9 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 12197: Baade-Wesselink mean radius (solar radii) 22.6 +/- 0.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 15,722,820 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5625 +/- 153 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC3723, columns Teffp, e_Teffp: Teff 5625 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2307.07559"
+      ]
+    }
+  ]
+}

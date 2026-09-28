@@ -1,11 +1,9 @@
 {
   "date": "2026-09-27",
   "testedVersion": {
-    "baseCommit": "fbb2de820404f154b8d3322cebfaa03030b0bf0a",
     "changes": "Implementation, source records, screenshots and Io delivery inventory at the implementation commit. This follow-up only pins the investigation ledger and qualification revision; the earlier passes still apply.",
     "imageSha256": "a8555dd327f6ea6c162ca7f528850c5ab598c9b21b8cf241f9347b046bd5c570",
-    "recipeSha256": "cb64acd6e2d4ce51fc1286683b69476d4550bd4bc933b83e492690fad42fa00d",
-    "implementationCommit": "c1df4ce5e5d853b0fb9737c3c7cce7be2b35ba47"
+    "recipeSha256": "cb64acd6e2d4ce51fc1286683b69476d4550bd4bc933b83e492690fad42fa00d"
   },
   "scientific": {
     "screenedFrames": 2374,
@@ -184,6 +182,6 @@
   "unrelatedFailure": {
     "command": "node tools/investigations/report-investigations.mts --index --write",
     "message": "ab-pic investigation ledger: expects at least one entry",
-    "base": "The same empty entries array is tracked at base fbb2de820404f154b8d3322cebfaa03030b0bf0a. Aggregate index was not refreshed. Io ledger parses and the three report unit tests pass."
+    "base": "The same empty entries array is tracked. Aggregate index was not refreshed. Io ledger parses and the three report unit tests pass."
   }
 }

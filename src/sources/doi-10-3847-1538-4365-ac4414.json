@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4365-ac4414",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Abdurro’uf et al. (2022): The Seventeenth Data Release of the Sloan Digital Sky Surveys: Complete Release of MaNGA, MaStar, and APOGEE-2 Data",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2112.02026"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ac4414"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJS..259...35A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...35A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ac4414",
+      "label": "The Astrophysical Journal Supplement Series 259 35"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...35A",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Abdurro’uf et al. (2022), The Astrophysical Journal Supplement Series 259 35",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...35A"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 259 35",
+  "creators": [
+    "Abdurro’uf",
+    "Katherine Accetta",
+    "Conny Aerts",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}
