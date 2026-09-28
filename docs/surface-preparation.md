@@ -315,6 +315,33 @@ declaration, a target pixel whose footprint crosses the edge counts as missing
 and receives the gray coverage grid. That drew a one-pixel line at 180° on Io's
 8K maps. Preparation rejects the declaration for a source that does not span 360°.
 
+### Where the prepared map starts
+
+`mapLeftEdgeLongitudeDeg` in a body's `source/presentation/surface-map.json` says which east longitude the prepared map's
+left edge shows. The world frame, the status-bar longitude and the feature anchors all read it, so they agree with each
+other even when it is wrong; only the imagery disagrees. It must equal the edge the decoder wrote. The raster lane's
+photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
+
+The authored preparation measures it for every lens with native photographic sampling
+(`assertMapsStartAtSurfaceMapEdge` in `tools/objects/prepare-authored.ts`). It reads the lens's pinned source through
+its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
+edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
+declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
+the declared edge plus (centre − 180°); the check allows for that, and so must anyone who draws Gazetteer rims on a
+minimap by hand. A redraw-only run carries the published feature anchors forward, so it runs the full preparation when
+the surface map's edge differs from the one the published feature record states.
+
+On 2026-09-28 this found eight bodies drawn half a turn from their frames: Iapetus, Ganymede, Ariel, Miranda, Oberon,
+Titania, Umbriel and Triton. Each kept the 180° E edge of the retired terrestrial atlas after moving to the raster
+lane. Their surface maps now declare 0° E, and each README records the correction.
+
+![Flying to a named feature on each body before and after the correction](images/map-edge-fly-to-2026-09-28.webp)
+
+Headless Chromium on the dev server, each capture after `window.__cssEarth.ready`, "fly to" one named feature per body.
+Before, Umbriel's Wunda and Triton's Xuuch land on the no-data grid and Oberon's Hamlet and Titania's Gertrude on smeared
+edges; after, each lands on its feature. The before row's Iapetus tile already has its fix; its own before and after are in
+its [evidence note](../src/objects/iapetus/evidence/map-edge-2026-09-28.md).
+
 ![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
 
 Gaspra registration example: detector image at left, published mosaic reprojected

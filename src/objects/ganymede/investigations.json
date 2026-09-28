@@ -203,6 +203,16 @@
         "https://science.nasa.gov/photojournal/nims-ganymede-surface-map/",
         "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia00/pia00500/PIA00500.tif"
       ]
+    },
+    {
+      "id": "map-left-edge-2026-09-28",
+      "subject": "Surface map left edge after the raster lane change",
+      "status": "included",
+      "finding": "The raster lane writes this map from 0° E, but surface-map.json still declared the retired atlas's 180° E left edge, so the globe, labels and status-bar longitude were half a turn from the imagery. Read through its georeferenced source, the prepared normal map correlates 0.90 from 0° E and -0.07 from 180° E. The declaration is now 0° E, and preparation refuses a declared edge the source contradicts.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/surface-preparation.md#where-the-prepared-map-starts"
+      ]
     }
   ]
 }

@@ -35,9 +35,9 @@ Map edge correction (2026-09-28): that edge check was run on the retired terrest
 
 - Equator luminance of the prepared Enhanced color atlas in 30° columns counted from the left edge: bright from 30° to 120°, dark from 150° to 360°. With a 0° E edge this places Cassini Regio at 150–360° E, centred near 255° E.
 - The largest Gazetteer craters drawn on the prepared minimap at a 0° E edge land on their basins: Engelier (95.3° E, 40.5° S), Gerin (127° E, 45.6° S), Turgis (331.6° E, 16.9° N) and Malprimis (241.8° E, 15.2° S). At 180° E none of them does.
-- The same overlay on Rhea, Dione, Tethys, Enceladus and Mimas (0° E), and on the Moon, Mars, Ganymede, Oberon, Titania and Umbriel (180° E), lands on their craters at the declared edge. Only Iapetus was off.
+- Read through its georeferenced source, the prepared Monochrome map correlates 0.82 from 0° E and 0.21 from 180° E; Enhanced color 0.96 and −0.58.
 
-The fix sets the left edge to 0° E. The texture, the rotation model and the status-bar formatting are unchanged. The body’s frame and feature anchors now follow the atlas. [Before and after at the same saved camera](evidence/map-edge-2026-09-28.md).
+The fix sets the left edge to 0° E. The texture, the rotation model and the status-bar formatting are unchanged. The body’s frame, feature anchors and arrival billboard now follow the atlas. The same source measurement found seven more bodies half a turn off (Ganymede and the Voyager moons of Uranus and Neptune); the preparation now refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)). [Before and after at the same saved camera](evidence/map-edge-2026-09-28.md).
 
 The B9 qualification report records exact source-map replay and selected package and interaction checks.
 

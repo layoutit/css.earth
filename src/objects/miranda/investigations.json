@@ -91,6 +91,16 @@
         "https://ntrs.nasa.gov/citations/19880051927"
       ],
       "revisitWhen": "A disc-resolved law for Miranda with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released."
+    },
+    {
+      "id": "map-left-edge-2026-09-28",
+      "subject": "Surface map left edge after the raster lane change",
+      "status": "included",
+      "finding": "The raster lane writes this map from 0° E, but surface-map.json still declared the retired atlas's 180° E left edge, so the globe, labels and status-bar longitude were half a turn from the imagery. Read through its georeferenced source, the prepared normal map correlates 0.88 from 0° E and 0.03 from 180° E. The declaration is now 0° E, and preparation refuses a declared edge the source contradicts.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/miranda/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/surface-preparation.md#where-the-prepared-map-starts"
+      ]
     }
   ]
 }
