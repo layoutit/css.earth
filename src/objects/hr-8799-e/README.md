@@ -23,7 +23,7 @@ HR 8799 e is the fourth planet, found by Marois et al. ([2010](https://arxiv.org
 Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places the planet 4.8 mas from JWST's measured position (above); the four planets miss by 11 mas RMS, under 2% of their separations.
-- [`disc-band-color.test.mts`](https://github.com/layoutit/css.earth/blob/a9ea4f6338b6cd25a5f132dbe64140e3df2f5388/tools/objects/observation/disc-band-color.test.mts) (now [`tests/objects/observation/disc-band-color.test.mts`](../../../tests/objects/observation/disc-band-color.test.mts)) turns the photometry records into the four colours and checks that they share one range.
+- [`disc-band-color.test.mts`](../../../tests/objects/observation/disc-band-color.test.mts) (now [`tests/objects/observation/disc-band-color.test.mts`](../../../tests/objects/observation/disc-band-color.test.mts)) turns the photometry records into the four colours and checks that they share one range.
 - [`new-hosted-planet.test.mts`](../../../tools/objects/new-hosted-planet.test.mts) checks that the self-luminous scaffold reproduces Beta Pictoris c's emissive build.
 
 ## Known problems

@@ -317,4 +317,4 @@ check uses native sidebar clicks during activation, holds the destination's
 prepared bank, and verifies that retained-world transforms change before
 releasing those bytes, then checks arrival at DPR 1 and 2.
 
-Recorded runs and their limits remain in the [7 September 2026 qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/flight-qualification.md). They describe those tested revisions, not a new result for this checkout.
+Recorded runs and their limits remain in the 7 September 2026 qualification. They describe those tested revisions, not a new result for this checkout.

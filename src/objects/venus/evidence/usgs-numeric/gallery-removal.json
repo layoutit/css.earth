@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-gallery-removal-check@1",
   "date": "2026-09-27T02:27:50.523Z",
-  "baseCommit": "847b5e6a35a18ab3bbf234a941cd6b32f52809fc",
   "scope": "Venus gallery removal above this commit; the file hashes identify the tested working version. All dataset controls, scientific images and reader text are unchanged. Earlier numerical and grouped-selector evidence remains applicable. Prior screenshots retain their original version; these captures show the removed section.",
   "testedFiles": {
     "object.json": "85c3fd434bc5ea6760bc94eec48b5c1ab3b752628e083f2c06ac52e7e08fba40",

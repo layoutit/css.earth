@@ -12,13 +12,6 @@
         "https://www.eaobservatory.org/jcmt/science/archive/",
         "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
-        }
       ]
     },
     {
@@ -31,13 +24,6 @@
         "https://www.eaobservatory.org/jcmt/data-access/",
         "https://www.eaobservatory.org/jcmt/observing/acknowledgement/",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
-        }
       ]
     },
     {
@@ -50,13 +36,6 @@
         "https://starlink.eao.hawaii.edu/",
         "https://www.eaobservatory.org/jcmt/data-reduction/",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
-        }
       ]
     },
     {
@@ -67,15 +46,8 @@
       "revisitWhen": "A Gemini or CFHT candidate from the screen is taken up.",
       "evidence": [
         "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/blob/main/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
-        }
       ]
     }
   ]

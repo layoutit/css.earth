@@ -35,7 +35,7 @@ and DPR 2 with retained triangle identity and Shadows off by default. The three
 lenses and both closed 800-face model banks pass the focused package checks;
 all 39 runtime files match their local inventory. Preparation TypeScript passes.
 The shared recipe and profile checks pass after integrating the observation
-recipe migration from `2f2752abb` (#175), which also fixes the previously recorded
+recipe migration (#175), which also fixes the previously recorded
 Dimorphos cube/SPICE test failures. Full application and aggregate browser suites
 were not run.
 
@@ -54,13 +54,13 @@ The photographic atlas now samples each pinned original grid directly with a 2 Ã
 
 The existing Monochrome and Elevation atlases remain 2048 Ã— 6400 pixels on their
 800-face display mesh. Their geometry and photographic sampling are retained
-from [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mathilde/prepared).
+from the previous main version.
 The new lens adds a second prepared model; only the selected model is visible.
 Sampling details and output hashes are in the surface metadata (`prepared/surfaces.json`).
 
 The retained notes report a successful 35-asset bake, eight downloads restored, a verified 35-file source closure and three focused source tests. Original report paths are `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json`; those reports are not checked in. The generic body test, browser checks, fresh runtime installation and aggregate checks were still pending in that record.
 
-[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/mathilde/source.test.mts).
+Source test definitions.
 
 ### Registration
 

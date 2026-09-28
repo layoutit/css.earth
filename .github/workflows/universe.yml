@@ -163,6 +163,10 @@ jobs:
         # retired tools/ folders, the nebula boundaries and declared workspace dependencies), which has no baseline. It reads every source file this sparse tree keeps, so a
         # missing one stops it as incomplete rather than passing. About eight seconds.
         run: pnpm check:architecture
+      - name: Check every investigation ledger
+        # Parses every object and facility ledger and the shared records they quote (packages/bake/src/sources), through the
+        # report the contract names, so an empty ledger, a check without its commit or a relative evidence path fails here.
+        run: pnpm check:investigations
       - name: Test the shared object libraries
         # The node tests of @cssearth/bake/objects/<topic> sit beside the pipelines in tools/objects/, under tests/objects/ or beside
         # their module in packages/bake/src/objects/, which no other PR step runs; .github/scripts/checks/test-bake-objects.mts selects

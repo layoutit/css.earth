@@ -5,7 +5,7 @@ These writeups describe scope, evidence and acceptance. Current work status, nex
 ## Scope
 
 
-These are proposals, not completed integrations. Use the [shared body guide](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/README.md), [celestial skill](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/.agents/skills/celestial-skill/SKILL.md) and [provenance contract](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/docs/provenance/CONTRACT.md). Keep the shared renderer, fixed existing body geometry and current shell. All scientific decoding, registration and raster preparation happen offline. Reuse existing band/date controls and source labels; do not add Dataset details or Surface photographs panels.
+These are proposals, not completed integrations. Use the [shared body guide](../../../src/objects/README.md), [celestial skill](../../../.agents/skills/celestial-skill/SKILL.md) and [provenance contract](../../../docs/provenance/CONTRACT.md). Keep the shared renderer, fixed existing body geometry and current shell. All scientific decoding, registration and raster preparation happen offline. Reuse existing band/date controls and source labels; do not add Dataset details or Surface photographs panels.
 
 An implementation must retain original quantity, units, source version, time support, coordinates, uncertainty and missingness. Update the owning body README and investigation ledger. Qualify a claimed measurement against independent native samples. For released assets, publish the prepared files and refresh the delivery inventory under the existing contract. Run only affected checks and inspect the real rendered result when appearance changes.
 
@@ -16,7 +16,7 @@ For a qualification proposal, a negative result is a documented source decision 
 
 ### Bennu: heat storage, roughness and predicted temperatures
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -24,7 +24,7 @@ Bennu has albedo, monochrome, four reflected-light bands, spectral color and ele
 
 Eight global maps: OTES and OVIRS thermal inertia, OTES and OVIRS thermal roughness, and four OTES-based temperature extremes at the nearest and farthest points from the Sun. Group related maps with the existing arrow selector.
 
-Content owners: [bennu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/bennu/README.md)
+Content owners: [bennu](../../../src/objects/bennu/README.md)
 
 #### Evidence
 
@@ -57,7 +57,7 @@ PDS bundle IDs: `urn:nasa:pds:orex.thermal`.
 
 ### Bennu: hydrated minerals and carbon-bearing material
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -65,7 +65,7 @@ The current spectral color is a MapCam visible/near-infrared composite, not an O
 
 Separate maps of the 2.74 µm absorption and the 3.2–3.6 µm band area. They show spectral signatures that are absent from the existing MapCam color maps.
 
-Content owners: [bennu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/bennu/README.md)
+Content owners: [bennu](../../../src/objects/bennu/README.md)
 
 #### Evidence
 
@@ -97,7 +97,7 @@ PDS bundle IDs: `urn:nasa:pds:orex.spectral_analysis`.
 
 ### Ceres: hydrogen and iron
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -105,7 +105,7 @@ Existing Ceres composition views use VIR mineral absorptions and band centres. N
 
 Two chemically distinct global measurements from Dawn GRaND, with their uncertainty columns.
 
-Content owners: [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md)
+Content owners: [ceres](../../../src/objects/ceres/README.md)
 
 #### Evidence
 
@@ -136,7 +136,7 @@ PDS bundle IDs: `urn:nasa:pds:dawn-grand-ceres`.
 
 ### Vesta: hydrogen and iron signal
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -144,7 +144,7 @@ The current Vesta package has imagery, spectral ratios and elevation. No GRaND m
 
 Hydrogen and corrected iron gamma-ray signal; neutron absorption is a possible later addition.
 
-Content owners: [vesta](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/vesta/README.md)
+Content owners: [vesta](../../../src/objects/vesta/README.md)
 
 #### Evidence
 
@@ -186,7 +186,7 @@ PDS bundle IDs: `urn:nasa:pds:dawn-grand-vesta`.
 
 ### Ceres and Vesta: gravity, anomalies and geoid
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -194,7 +194,7 @@ These gravity fields are not selected surface datasets in the three current pack
 
 Prepare Dawn's published gravity, Bouguer anomaly, geoid and associated errors for Ceres and Vesta. Give each physical quantity a clear label within one related group per body.
 
-Content owners: [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md), [vesta](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/vesta/README.md)
+Content owners: [ceres](../../../src/objects/ceres/README.md), [vesta](../../../src/objects/vesta/README.md)
 
 #### Evidence
 
@@ -227,7 +227,7 @@ PDS bundle IDs: `urn:nasa:pds:dawn-rss-der-ceres`, `urn:nasa:pds:dawn-rss-der-ve
 
 ### Bennu: gravity anomaly on the observed shape
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -235,7 +235,7 @@ These gravity fields are not selected surface datasets in the three current pack
 
 Prepare the published Bennu Bouguer anomaly, retaining its physical units and uniform-density reference model. Keep it separate from Dawn's regular-grid importer.
 
-Content owners: [bennu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/bennu/README.md)
+Content owners: [bennu](../../../src/objects/bennu/README.md)
 
 #### Evidence
 
@@ -266,7 +266,7 @@ PDS bundle IDs: `urn:nasa:pds:orex.derived_gravity`.
 
 ### Eros: 334 mapped pond locations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -274,7 +274,7 @@ Eros currently has IAU named features and seven reflected-light maps. The pond c
 
 A scientific feature catalogue of smooth deposits, placed through the existing surface-feature contract.
 
-Content owners: [eros](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/eros/README.md)
+Content owners: [eros](../../../src/objects/eros/README.md)
 
 #### Evidence
 
@@ -306,7 +306,7 @@ PDS bundle IDs: `urn:nasa:pds:ast-eros.roberts.ponds-catalog`.
 
 ### Mimas: relative reflectivity
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -314,7 +314,7 @@ The source bundle already supplies Mimas's shape and radius map, but its relativ
 
 Add the SPC relative-albedo GeoTIFF beside the existing photos and elevation.
 
-Content owners: [mimas](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mimas/README.md)
+Content owners: [mimas](../../../src/objects/mimas/README.md)
 
 #### Evidence
 
@@ -345,7 +345,7 @@ PDS bundle IDs: `urn:nasa:pds:satellite-mimas.cassini.shape-models-maps`.
 
 ### Moon: nine Kaguya reflected-light bands
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -353,7 +353,7 @@ Kaguya mineral, grain-size, iron and maturity products are already selected. The
 
 Add a single reflected-light group with nine wavelength choices and JAXA / Kaguya MI attribution.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -384,7 +384,7 @@ USGS catalogue IDs: `lunar-kaguya-multiband-imager-mosaics`, `kaguya_lunar_multi
 
 ### Moon: improve existing photography and height sampling
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -392,7 +392,7 @@ The current Moon uses coarser LROC morphology and LOLA inputs; its surface geome
 
 Replace an existing prepared map only where finer input produces visible or numerical improvement at the existing display budget.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -433,7 +433,7 @@ USGS catalogue IDs: `moon_lro_lola_selene_kaguya_tc_dem_merge_60n60s_59m`, `moon
 
 ### Europa: expand registered infrared coverage
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -441,7 +441,7 @@ Two registered NIMS products supply the current infrared composite. Other compos
 
 Use additional qualified NIMS observations to improve measured coverage and add a water-ice or hydrate signature only when the archived quantity supports it.
 
-Content owners: [europa](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/europa/README.md)
+Content owners: [europa](../../../src/objects/europa/README.md)
 
 #### Evidence
 
@@ -484,7 +484,7 @@ USGS catalogue IDs: `europa-galileo-nims-hyperspectral-map-products-registered-a
 
 ### Callisto: expand registered infrared coverage
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -492,7 +492,7 @@ Two NIMS products supply the existing infrared view.
 
 Increase measured infrared coverage and assess additional water-ice spectral information through the current surface-data controls.
 
-Content owners: [callisto](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/callisto/README.md)
+Content owners: [callisto](../../../src/objects/callisto/README.md)
 
 #### Evidence
 
@@ -535,7 +535,7 @@ USGS catalogue IDs: `callisto-galileo-nims-hyperspectral-map-products-registered
 
 ### Ryugu: thermal-corrected infrared spectra
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -543,7 +543,7 @@ Ryugu already has thermal inertia, visible spectral slope, monochrome, enhanced 
 
 Investigate an infrared absorption map using the 2026 NIRS3 thermal-excess-removed release, distinct from the existing visible spectral slope.
 
-Content owners: [ryugu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ryugu/README.md)
+Content owners: [ryugu](../../../src/objects/ryugu/README.md)
 
 #### Evidence
 
@@ -572,7 +572,7 @@ Join the 107 spectrum products and 109 geometry products by identifiers, not row
 
 ### Itokawa: more AMICA wavelengths
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -580,7 +580,7 @@ The current ten-frame v-band mosaic already uses this source family and has 84.2
 
 Investigate additional AMICA filters using the archived geometry backplanes.
 
-Content owners: [itokawa](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/itokawa/README.md)
+Content owners: [itokawa](../../../src/objects/itokawa/README.md)
 
 #### Evidence
 
@@ -612,7 +612,7 @@ PDS bundle IDs: `urn:nasa:pds:hay.amica`, `urn:nasa:pds:hay.amica.itokawa.backpl
 
 ### Ceres: qualified Urvara and crater close-ups
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -620,7 +620,7 @@ The current Ceres imagery is global; this would be an explicitly regional close-
 
 A controlled high-resolution mosaic of Urvara crater, with separate products for different source-resolution ranges.
 
-Content owners: [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md)
+Content owners: [ceres](../../../src/objects/ceres/README.md)
 
 #### Evidence
 
@@ -669,7 +669,7 @@ PDS bundle IDs: `urn:nasa:pds:dwarf_planet-ceres.dawn-fc.urvara-mosaics`.
 
 ### Ceres: millimetre observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -677,7 +677,7 @@ No ALMA dataset is selected in Ceres's current surface controls.
 
 A different wavelength range using the archived ALMA images, spectra and light curves.
 
-Content owners: [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md)
+Content owners: [ceres](../../../src/objects/ceres/README.md)
 
 #### Evidence
 
@@ -708,7 +708,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.ast-ceres.alma.images-spectra`.
 
 ### Small bodies: reconcile diameters and albedos
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -766,7 +766,7 @@ PDS bundle IDs: `urn:nasa:pds:iras`, `urn:nasa:pds:msx.mimps`, `urn:nasa:pds:ast
 
 ### Small bodies: measured rotation periods and light curves
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -813,7 +813,7 @@ PDS bundle IDs: `urn:nasa:pds:ast_lightcurve_derived_parameters`, `urn:nasa:pds:
 
 ### Small bodies: masses, densities and binary properties
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -857,7 +857,7 @@ PDS bundle IDs: `urn:nasa:pds:ast_binary_parameters_compilation`, `urn:nasa:pds:
 
 ### Asteroid spectral libraries and taxonomy
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -928,7 +928,7 @@ PDS bundle IDs: `urn:nasa:pds:ast_spectra_reddy_neos_marscrossers`, `urn:nasa:pd
 
 ### Asteroids: source-backed family membership
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -970,7 +970,7 @@ PDS bundle IDs: `urn:nasa:pds:ast-high-inclination.gil-hutton.families`, `urn:na
 
 ### Small bodies: measured colors, phase curves and polarization
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1026,7 +1026,7 @@ PDS bundle IDs: `urn:nasa:pds:asteroid_polarimetric_database`, `urn:nasa:pds:com
 
 ### Eros: qualify X-ray, gamma-ray and infrared composition data
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1034,7 +1034,7 @@ Gaspra and Ida NIMS are already recorded as unresolved in the body ledgers. Eros
 
 Establish whether NEAR XRS, GRS or NIS can support a distinct elemental or spectral map with useful measured coverage.
 
-Content owners: [eros](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/eros/README.md)
+Content owners: [eros](../../../src/objects/eros/README.md)
 
 #### Evidence
 
@@ -1066,7 +1066,7 @@ PDS bundle IDs: `urn:nasa:pds:near.grs`, `urn:nasa:pds:near.nis`, `urn:nasa:pds:
 
 ### Gaspra and Ida: resolve the existing NIMS blockers
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1074,7 +1074,7 @@ Gaspra and Ida NIMS are already recorded as unresolved in the body ledgers. Eros
 
 A bounded qualification PR resolving the recorded calibration and geometry issues in the NIMS cubes; a measured regional view is conditional on that result.
 
-Content owners: [gaspra](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/gaspra/README.md), [ida](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ida/README.md)
+Content owners: [gaspra](../../../src/objects/gaspra/README.md), [ida](../../../src/objects/ida/README.md)
 
 #### Evidence
 
@@ -1107,7 +1107,7 @@ PDS bundle IDs: `urn:nasa:pds:galileo.ast-gaspra.nims.spectra`, `urn:nasa:pds:ga
 
 ### Eros: qualify derived gravity and physical parameters
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1115,7 +1115,7 @@ Eros already has an observed shape and elevation. No new gravity map has been qu
 
 Read the derived NEAR radio-science products and determine which gravity or physical facts add information beyond the current package.
 
-Content owners: [eros](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/eros/README.md)
+Content owners: [eros](../../../src/objects/eros/README.md)
 
 #### Evidence
 
@@ -1145,7 +1145,7 @@ PDS bundle IDs: `urn:nasa:pds:near_rss_derived`.
 
 ### Preserve quantitative map precision and source support
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1153,7 +1153,7 @@ Bennu and Eros bands are shipped; several SPC moon packages already use albedo a
 
 Improve numeric decoding, masks and source-support evidence where the native products expose more precision, counts, uncertainty, XYZ or observing angles.
 
-Content owners: [bennu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/bennu/README.md), [eros](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/eros/README.md), [mimas](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mimas/README.md), [dione](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/dione/README.md), [rhea](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/rhea/README.md), [tethys](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/tethys/README.md), [phoebe](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/phoebe/README.md)
+Content owners: [bennu](../../../src/objects/bennu/README.md), [eros](../../../src/objects/eros/README.md), [mimas](../../../src/objects/mimas/README.md), [dione](../../../src/objects/dione/README.md), [rhea](../../../src/objects/rhea/README.md), [tethys](../../../src/objects/tethys/README.md), [phoebe](../../../src/objects/phoebe/README.md)
 
 #### Evidence
 
@@ -1202,7 +1202,7 @@ USGS catalogue IDs: `bennu_osiris_rex_ocams_global_pan_mosaic_5cm`, `bennu_osiri
 
 ### Mercury: qualify regional stereo maps
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1210,7 +1210,7 @@ Native global BDR, LOI, enhanced color and numeric elevation are already shipped
 
 Add only regional stereo height or orthophoto products that demonstrably improve a useful close-up on the current body.
 
-Content owners: [mercury](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mercury/README.md)
+Content owners: [mercury](../../../src/objects/mercury/README.md)
 
 #### Evidence
 
@@ -1250,7 +1250,7 @@ USGS catalogue IDs: `mercury_messenger_mdis_dtms_fassett_2016`, `mercury_messeng
 
 ### Moon: qualify regional terrain and photometric products
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1258,7 +1258,7 @@ The Moon already has global imagery, elevation, thermal, mineral and geology vie
 
 Prepare only local products whose numeric terrain or photometric information adds a measured improvement over those views.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -1301,7 +1301,7 @@ USGS catalogue IDs: `regional_topography_and_photometric_cube_data_for_lunar_loc
 
 ### Io: resolve the limits of the Tvashtar stereo product
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1309,7 +1309,7 @@ The existing Io package does not have a qualified global height field from this 
 
 Determine whether the regional product supports any defensible relative-height display, and record the result in Io's investigation ledger.
 
-Content owners: [io](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/io/README.md)
+Content owners: [io](../../../src/objects/io/README.md)
 
 #### Evidence
 
@@ -1339,7 +1339,7 @@ USGS catalogue IDs: `io_galileo_ssi_tvashtar_paterae_dem_and_orthoimages_900m`.
 
 ### Mercury: magnesium and other elemental measurements
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1347,7 +1347,7 @@ Current Mercury adds MDIS imaging, numeric height and a MASCS spectrum; XRS/GRS 
 
 Add qualified elemental ratios and neutron-absorption data from MESSENGER as one related measurement group.
 
-Content owners: [mercury](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mercury/README.md)
+Content owners: [mercury](../../../src/objects/mercury/README.md)
 
 #### Evidence
 
@@ -1383,7 +1383,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Vesta: qualify VIR mineral and rock signatures
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1391,7 +1391,7 @@ Vesta has FC spectral ratios. Its ledger already excludes the small NASA VIR pre
 
 Find and qualify the original VIR measurements or derived grids behind the mineral, hydration and rock-unit maps.
 
-Content owners: [vesta](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/vesta/README.md)
+Content owners: [vesta](../../../src/objects/vesta/README.md)
 
 #### Evidence
 
@@ -1439,7 +1439,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Vesta: mapped geological units
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1447,7 +1447,7 @@ The selected Vesta views include photographs, spectral ratios and elevation, wit
 
 Qualify published geological units and original bright/dark deposit catalogues for Vesta through existing categorical and feature content.
 
-Content owners: [vesta](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/vesta/README.md)
+Content owners: [vesta](../../../src/objects/vesta/README.md)
 
 #### Evidence
 
@@ -1487,7 +1487,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: observed infrared surface coverage
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1495,7 +1495,7 @@ Titan has current ISS, radar, terrain and geology. The ledger leaves the 2019 VI
 
 Qualify a VIMS surface product that distinguishes observed spectral coverage from filled or seam-repaired areas.
 
-Content owners: [titan](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/titan/README.md)
+Content owners: [titan](../../../src/objects/titan/README.md)
 
 #### Evidence
 
@@ -1539,7 +1539,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: measured seasonal temperature by latitude
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1547,7 +1547,7 @@ Titan's selected views do not include this seasonal surface-temperature series.
 
 Present Cassini CIRS seasonal temperatures as explicitly latitude-averaged observations, using the existing date selector or chart contract.
 
-Content owners: [titan](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/titan/README.md)
+Content owners: [titan](../../../src/objects/titan/README.md)
 
 #### Evidence
 
@@ -1583,7 +1583,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ganymede: infrared ice and grain-size signatures
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1591,7 +1591,7 @@ Ganymede has imaging, geology and an oxygen-signature view. A new NIMS product n
 
 Qualify Galileo NIMS ice-sensitive bands or published grain-size interpretations as measured regional data.
 
-Content owners: [ganymede](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ganymede/README.md)
+Content owners: [ganymede](../../../src/objects/ganymede/README.md)
 
 #### Evidence
 
@@ -1627,7 +1627,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ganymede: Galileo brightness temperatures
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1635,7 +1635,7 @@ No corresponding measured PPR temperature map is selected.
 
 A dated brightness-temperature view for the observed part of Ganymede, with the PPR footprint retained.
 
-Content owners: [ganymede](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ganymede/README.md)
+Content owners: [ganymede](../../../src/objects/ganymede/README.md)
 
 #### Evidence
 
@@ -1671,7 +1671,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Phoebe, Iapetus and Enceladus: measured heat radiation
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1679,7 +1679,7 @@ Reflectivity and infrared/ice data already exist on these moons. This proposal c
 
 Prepare selected dated CIRS temperature products and local-time comparisons, with one coherent source-qualified outcome per moon.
 
-Content owners: [phoebe](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/phoebe/README.md), [iapetus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/iapetus/README.md), [enceladus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/enceladus/README.md)
+Content owners: [phoebe](../../../src/objects/phoebe/README.md), [iapetus](../../../src/objects/iapetus/README.md), [enceladus](../../../src/objects/enceladus/README.md)
 
 #### Evidence
 
@@ -1723,7 +1723,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Enceladus: published geyser source locations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1731,7 +1731,7 @@ Existing named features do not establish this research catalogue. Enceladus VIMS
 
 Add the published jet-source catalogue through the existing feature contract, retaining uncertainty and research identifiers.
 
-Content owners: [enceladus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/enceladus/README.md)
+Content owners: [enceladus](../../../src/objects/enceladus/README.md)
 
 #### Evidence
 
@@ -1767,7 +1767,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ceres: catalogue of bright deposits
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1775,7 +1775,7 @@ Ceres has named features and composition maps; the more-than-300 bright-area cla
 
 Add source-backed deposit locations and their geological setting through existing feature content.
 
-Content owners: [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md)
+Content owners: [ceres](../../../src/objects/ceres/README.md)
 
 #### Evidence
 
@@ -1811,7 +1811,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Pluto: geological units around Sputnik Planitia
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1819,7 +1819,7 @@ Pluto already has imagery, height and three fitted ice fractions; geological ter
 
 Prepare the published regional geological mapping with a categorical legend and an honest footprint.
 
-Content owners: [pluto](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/pluto/README.md)
+Content owners: [pluto](../../../src/objects/pluto/README.md)
 
 #### Evidence
 
@@ -1857,7 +1857,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Io: dated volcanic changes and thermal observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1865,7 +1865,7 @@ Io already has a JIRAM volcanic-heat view from orbits 41, 43, 47 and 49, with 22
 
 Add qualified dated observations of surface change or heat that are distinct from the existing JIRAM map.
 
-Content owners: [io](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/io/README.md)
+Content owners: [io](../../../src/objects/io/README.md)
 
 #### Evidence
 
@@ -1949,7 +1949,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Jupiter: dated visible and infrared observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -1957,7 +1957,7 @@ Jupiter already has dated OPAL visible maps plus UV and methane views. More OPAL
 
 Add a small number of scientifically distinct historical observing sets, with regional NIMS/PPR products considered only if the original geometry and quantity are recoverable.
 
-Content owners: [jupiter](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/jupiter/README.md)
+Content owners: [jupiter](../../../src/objects/jupiter/README.md)
 
 #### Evidence
 
@@ -2097,7 +2097,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Saturn: coherent historical observing sets
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2105,7 +2105,7 @@ Saturn already has dated OPAL, UV and methane maps. Its ledger rejects a Cassini
 
 Qualify one coherent Voyager or Cassini visible/infrared set as a separately dated dataset if coverage supports the existing map contract.
 
-Content owners: [saturn](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/saturn/README.md)
+Content owners: [saturn](../../../src/objects/saturn/README.md)
 
 #### Evidence
 
@@ -2159,7 +2159,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Saturn rings: qualify radial spectral measurements
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2167,7 +2167,7 @@ Ring opacity uses a measured UVIS profile, but radius-indexed color is unresolve
 
 Find a calibrated radius-indexed VIMS spectral profile that can be prepared within the existing ring contract, or record why it cannot.
 
-Content owners: [saturn](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/saturn/README.md)
+Content owners: [saturn](../../../src/objects/saturn/README.md)
 
 #### Evidence
 
@@ -2209,7 +2209,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Tempel 1: qualify a body package and thermal observation
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2255,7 +2255,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Moon: GRAIL gravity anomalies
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2263,7 +2263,7 @@ The Moon already has crustal thickness and topography; a gravitational anomaly i
 
 Add a qualified GRAIL Bouguer anomaly map and retain local Orientale/dike illustrations as supporting leads only.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -2303,7 +2303,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Moon and Mercury: observed polar illumination
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2311,7 +2311,7 @@ Current temperature and elevation views do not themselves show an observed illum
 
 Prepare published polar illumination fractions with explicit observation windows and polar footprints.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md), [mercury](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mercury/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md), [mercury](../../../src/objects/mercury/README.md)
 
 #### Evidence
 
@@ -2351,7 +2351,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: measured soil moisture and freeze/thaw
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2359,7 +2359,7 @@ Earth has imagery, terrain, night lights and a temperature-anomaly view. SMAP mo
 
 Add one compact SMAP soil-moisture observation set; include freeze/thaw only from its own valid product and categorical definition.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2407,7 +2407,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: ocean salinity and sea-level anomalies
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2415,7 +2415,7 @@ The selected Earth ocean views include bathymetry and a temperature anomaly, not
 
 Prepare versioned salinity and sea-surface-height anomalies as separate measured quantities under existing dataset/date controls.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2457,7 +2457,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: monthly gravity changes from GRACE
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2465,7 +2465,7 @@ The existing Earth package does not establish this monthly gravity-anomaly serie
 
 A compact source-qualified set of GRACE gravity changes, or an explicitly interpreted mass-equivalent product if that is the selected release.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2501,7 +2501,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: thermal emissivity and mapped surface minerals
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2509,7 +2509,7 @@ Earth's photographic basemap does not measure infrared emission efficiency or EM
 
 Add separate ASTER emissivity and EMIT mineral data groups if their native coverage and quality masks support useful prepared views.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2549,7 +2549,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: atmospheric gases and microwave observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2557,7 +2557,7 @@ Existing Earth imagery and clouds do not establish measured CO₂, CO, dust, met
 
 Qualify a small set of atmosphere measurements that can be described faithfully on an existing map or chart, without adding atmospheric rendering.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2607,7 +2607,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: measured ice motion
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2615,7 +2615,7 @@ Earth has static terrain and imagery. Measured ice flow and regional cryosphere 
 
 Prepare a measured Antarctic ice-speed field, with separate qualification of Iceland ice motion and source snow-water products.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2659,7 +2659,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: qualify regional change and hazard maps
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2667,7 +2667,7 @@ The Earth package has global views; the supplied ARIA, ASTER, ECOSTRESS and rada
 
 A bounded intake PR identifying a small set of scientifically clear regional measurements, such as ground displacement, flood extent or surface temperature, that fit the existing map contract.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -2801,7 +2801,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Europa: measure the value of controlled regional mosaics
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2809,7 +2809,7 @@ Europa already uses a broad set of individual CLEAR images, plus global and othe
 
 Replace or extend existing photography only where the controlled mosaic release improves registration, measured coverage or useful close-up detail.
 
-Content owners: [europa](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/europa/README.md)
+Content owners: [europa](../../../src/objects/europa/README.md)
 
 #### Evidence
 
@@ -2862,7 +2862,7 @@ USGS catalogue IDs: `photogrammetrically_controlled_galileo_image_mosaics_of_eur
 
 ### Pluto, Ceres and Vesta: qualify historical telescope maps
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2870,7 +2870,7 @@ Spacecraft maps already provide better spatial detail. Historical telescope obse
 
 Determine whether one historical observing set supports a useful dated map or whole-object observation within current controls.
 
-Content owners: [pluto](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/pluto/README.md), [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md), [vesta](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/vesta/README.md)
+Content owners: [pluto](../../../src/objects/pluto/README.md), [ceres](../../../src/objects/ceres/README.md), [vesta](../../../src/objects/vesta/README.md)
 
 #### Evidence
 
@@ -2913,7 +2913,7 @@ PDS bundle IDs: `urn:nasa:pds:hst.ast-ceres.images-albedo-shape`.
 
 ### Ganymede: controlled close-up photography
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2921,7 +2921,7 @@ Global monochrome, enhanced color, geology and oxygen data already exist. New ph
 
 Qualify a small set of native Galileo SSI regional mosaics, starting with Uruk Sulcus and Galileo Regio.
 
-Content owners: [ganymede](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ganymede/README.md)
+Content owners: [ganymede](../../../src/objects/ganymede/README.md)
 
 #### Evidence
 
@@ -2971,7 +2971,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Callisto: controlled close-up photography
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -2979,7 +2979,7 @@ Callisto already has global photography, Galileo color and infrared observations
 
 Qualify additional SSI coverage around Valhalla, Asgard and the southern hemisphere where it adds useful observed detail.
 
-Content owners: [callisto](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/callisto/README.md)
+Content owners: [callisto](../../../src/objects/callisto/README.md)
 
 #### Evidence
 
@@ -3027,7 +3027,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Neptune: a dated Voyager cloud observation
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3035,7 +3035,7 @@ Neptune uses OPAL maps and a qualified color reference. Its ledger already defer
 
 Determine whether a separate Voyager epoch adds a faithful historical cloud observation through the current dataset controls.
 
-Content owners: [neptune](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/neptune/README.md)
+Content owners: [neptune](../../../src/objects/neptune/README.md)
 
 #### Evidence
 
@@ -3071,7 +3071,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth and Moon: historical Galileo spectral observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3079,7 +3079,7 @@ Modern global maps already supply better basemap detail. Galileo offers a differ
 
 Qualify a compact set of dated Galileo Earth/Moon bands where the scientific difference is useful.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md), [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md), [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -3135,7 +3135,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Venus: qualify regional Magellan radar detail
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3143,7 +3143,7 @@ Venus already has global radar, height, emissivity, reflectivity and roughness p
 
 Use finer native radar mosaics only where they improve useful regional detail at the existing asset budget.
 
-Content owners: [venus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/venus/README.md)
+Content owners: [venus](../../../src/objects/venus/README.md)
 
 #### Evidence
 
@@ -3181,7 +3181,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: calibrated radar mosaics and land measurements
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3189,7 +3189,7 @@ Earth's optical basemap does not show calibrated radar backscatter or radar-deri
 
 Qualify a broad radar mosaic first, with land-cover or biomass products treated as separate measured or modeled quantities.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -3235,7 +3235,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Eros: qualify low-altitude MSI close-ups
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3243,7 +3243,7 @@ Seven MSI bands and global photography are already selected. The repository also
 
 Add a bounded regional improvement from native close-flyby images if it survives a same-budget comparison.
 
-Content owners: [eros](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/eros/README.md)
+Content owners: [eros](../../../src/objects/eros/README.md)
 
 #### Evidence
 
@@ -3301,7 +3301,7 @@ PDS bundle IDs: `urn:nasa:pds:near.msi`, `urn:nasa:pds:nearmsi.shapebackplane`.
 
 ### Jupiter rings: qualify a measured radial profile
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3309,7 +3309,7 @@ A perspective ring photograph does not establish a radius-indexed measurement su
 
 Determine whether Galileo observations support a calibrated radial brightness profile usable by the existing ring preparation.
 
-Content owners: [jupiter](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/jupiter/README.md)
+Content owners: [jupiter](../../../src/objects/jupiter/README.md)
 
 #### Evidence
 
@@ -3345,7 +3345,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Mercury: historical and additional spectral observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3353,7 +3353,7 @@ Native global BDR, LOI, enhanced color, elevation and a MASCS spectrum are alrea
 
 Qualify a distinct Mariner 10 epoch or measured MDIS filter set beyond the existing enhanced-color view.
 
-Content owners: [mercury](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mercury/README.md)
+Content owners: [mercury](../../../src/objects/mercury/README.md)
 
 #### Evidence
 
@@ -3397,7 +3397,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: regional elevation and bathymetry improvements
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3405,7 +3405,7 @@ Earth already uses GEBCO 2026 for global terrain and bathymetry.
 
 Replace or supplement regional numeric height data only where SRTM, AIRSAR or ocean surveys demonstrably improve it.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -3449,7 +3449,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: spectral mosaics and vegetation observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3457,7 +3457,7 @@ Blue Marble photography does not preserve ASTER or AVIRIS spectral bands or meas
 
 Qualify one useful native spectral observing set, with separately defined vegetation products when their source retrieval is available.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -3505,7 +3505,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Saturn moons: controlled ISS regional photography
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3513,7 +3513,7 @@ These moons already have global photography. Enceladus VIMS composition work bel
 
 Qualify useful native ISS close-ups on the existing body geometry, starting with the strongest measurable detail gain.
 
-Content owners: [phoebe](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/phoebe/README.md), [rhea](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/rhea/README.md), [dione](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/dione/README.md), [tethys](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/tethys/README.md), [mimas](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/mimas/README.md), [enceladus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/enceladus/README.md)
+Content owners: [phoebe](../../../src/objects/phoebe/README.md), [rhea](../../../src/objects/rhea/README.md), [dione](../../../src/objects/dione/README.md), [tethys](../../../src/objects/tethys/README.md), [mimas](../../../src/objects/mimas/README.md), [enceladus](../../../src/objects/enceladus/README.md)
 
 #### Evidence
 
@@ -3569,7 +3569,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: dated ISS and radar observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3577,7 +3577,7 @@ Titan already uses the USGS 2026 ISS map, mission-end SAR, terrain and geology. 
 
 Qualify actual dated observations that support a useful regional or temporal comparison, including radar lake observations.
 
-Content owners: [titan](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/titan/README.md)
+Content owners: [titan](../../../src/objects/titan/README.md)
 
 #### Evidence
 
@@ -3647,7 +3647,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Enceladus and Titan: published fracture and terrain maps
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3655,7 +3655,7 @@ Titan already has a global geological map. Regional boundaries and Enceladus fra
 
 Qualify source-published Enceladus fracture traces and Titan local geological units through the existing feature or categorical-map contract.
 
-Content owners: [enceladus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/enceladus/README.md), [titan](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/titan/README.md)
+Content owners: [enceladus](../../../src/objects/enceladus/README.md), [titan](../../../src/objects/titan/README.md)
 
 #### Evidence
 
@@ -3697,7 +3697,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: qualify Huygens descent imaging
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3705,7 +3705,7 @@ Global Titan products do not resolve the Huygens landing region at descent-image
 
 Establish whether original DISR observations can be registered as a very small measured regional dataset on the existing body.
 
-Content owners: [titan](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/titan/README.md)
+Content owners: [titan](../../../src/objects/titan/README.md)
 
 #### Evidence
 
@@ -3749,7 +3749,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### HD 189733b: qualify a historical Spitzer thermal comparison
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3757,7 +3757,7 @@ The package already includes a JWST/Spitzer eclipse map, uncertainties and spect
 
 Resolve that specific source-availability condition for the 2007 Spitzer observations; add a historical result only if it is scientifically distinct and faithfully comparable.
 
-Content owners: [hd-189733b](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/hd-189733b/README.md)
+Content owners: [hd-189733b](../../../src/objects/hd-189733b/README.md)
 
 #### Evidence
 
@@ -3795,7 +3795,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Atlas: qualify additional observed ISS coverage
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3803,7 +3803,7 @@ Atlas already uses calibrated 2017 ISS images. Its ledger records a failed 2026 
 
 Assess the December 2015 anti-Saturn view only if its original frames and authoritative geometry add measured coverage beyond the current set.
 
-Content owners: [atlas](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/atlas/README.md)
+Content owners: [atlas](../../../src/objects/atlas/README.md)
 
 #### Evidence
 
@@ -3839,7 +3839,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Planck: qualified all-sky scientific maps
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3887,7 +3887,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### NED and the stellar halo: qualify catalogue measurements
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3933,7 +3933,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Nebulae: calibrated infrared image layers
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -3979,7 +3979,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### 3I/ATLAS: measured infrared coma spectra
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4023,7 +4023,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Earth: coastal water measurements and their interpretation
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4031,7 +4031,7 @@ The existing Earth layers do not establish the Belize protected-area measurement
 
 Qualify measured turbidity and water-temperature inputs, with any published protected-area risk score clearly retained as a separate model interpretation.
 
-Content owners: [earth](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/earth/README.md)
+Content owners: [earth](../../../src/objects/earth/README.md)
 
 #### Evidence
 
@@ -4067,7 +4067,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Jupiter: gravity-constrained deep winds
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4075,7 +4075,7 @@ Jupiter has cloud imagery and magnetic data; the audit has not established wheth
 
 Add only missing, source-backed facts or an existing-chart representation of the inferred wind-depth model.
 
-Content owners: [jupiter](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/jupiter/README.md)
+Content owners: [jupiter](../../../src/objects/jupiter/README.md)
 
 #### Evidence
 
@@ -4111,7 +4111,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Titan: the measured south-polar HCN signature
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4119,7 +4119,7 @@ Titan surface VIMS, thermal and geological products do not represent an atmosphe
 
 Qualify the observed polar-vortex spectrum as a dated atmospheric measurement using existing chart or factual content.
 
-Content owners: [titan](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/titan/README.md)
+Content owners: [titan](../../../src/objects/titan/README.md)
 
 #### Evidence
 
@@ -4155,7 +4155,7 @@ Every row below was separately reviewed. A related variant belongs to this work 
 
 ### Ceres: measured topography inside polar craters
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4163,7 +4163,7 @@ The current elevation view withholds polar caps because its source cannot separa
 
 Assess the separate nine-crater SPC release for genuinely measured regional height/albedo support within those withheld areas.
 
-Content owners: [ceres](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ceres/README.md)
+Content owners: [ceres](../../../src/objects/ceres/README.md)
 
 #### Evidence
 
@@ -4193,7 +4193,7 @@ PDS bundle IDs: `urn:nasa:pds:dwarf_planet-ceres.dawn.shape-models-maps`.
 
 ### Itokawa: calibrated near-infrared spectra
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4201,7 +4201,7 @@ AMICA photographic bands do not supply the NIRS spectral measurements.
 
 Qualify a useful measured spectrum first, followed by a regional spectral-signature map only if native geometry supports it.
 
-Content owners: [itokawa](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/itokawa/README.md)
+Content owners: [itokawa](../../../src/objects/itokawa/README.md)
 
 #### Evidence
 
@@ -4231,7 +4231,7 @@ PDS bundle IDs: `urn:nasa:pds:hay.nirs`.
 
 ### Ryugu: dated infrared temperature observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4239,7 +4239,7 @@ Ryugu already has a modeled thermal-inertia view. Actual dated TIR observations 
 
 Qualify a compact, useful temperature observing set that preserves local solar time and measured footprint.
 
-Content owners: [ryugu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ryugu/README.md)
+Content owners: [ryugu](../../../src/objects/ryugu/README.md)
 
 #### Evidence
 
@@ -4269,7 +4269,7 @@ PDS bundle IDs: `urn:jaxa:darts:hyb2_tir`.
 
 ### Ryugu: MASCOT's local temperature measurements
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4277,7 +4277,7 @@ Global thermal inertia does not represent the lander's local thermal time series
 
 Qualify a local temperature curve or measured thermal facts using existing chart content, with the landing-site context retained.
 
-Content owners: [ryugu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ryugu/README.md)
+Content owners: [ryugu](../../../src/objects/ryugu/README.md)
 
 #### Evidence
 
@@ -4308,7 +4308,7 @@ PDS bundle IDs: `urn:jaxa:darts:hyb2_mascot_mara`, `urn:jaxa:darts:hyb2_mascot_m
 
 ### Eros and Ryugu: measured magnetic constraints
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4316,7 +4316,7 @@ The audit has not compared these instrument results with each body's existing ma
 
 Add or correct published magnetic limits or a bounded measurement curve where it adds useful scientific content.
 
-Content owners: [eros](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/eros/README.md), [ryugu](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/ryugu/README.md)
+Content owners: [eros](../../../src/objects/eros/README.md), [ryugu](../../../src/objects/ryugu/README.md)
 
 #### Evidence
 
@@ -4347,7 +4347,7 @@ PDS bundle IDs: `urn:jaxa:darts:hyb2_mascot_mag`, `urn:nasa:pds:near.mag`.
 
 ### Moon and giant-planet systems: measured dust observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4355,7 +4355,7 @@ These detector and infrared measurements were outside the original surface-map s
 
 Qualify a small set of published dust-flux, particle-distribution or infrared-brightness measurements, with separate source decisions for each observing system.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md), [saturn](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/saturn/README.md), [jupiter](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/jupiter/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md), [saturn](../../../src/objects/saturn/README.md), [jupiter](../../../src/objects/jupiter/README.md)
 
 #### Evidence
 
@@ -4390,7 +4390,7 @@ PDS bundle IDs: `urn:nasa:pds:cassini_cda`, `urn:nasa:pds:cassini_high_rate_dete
 
 ### Explain spectral signatures with measured laboratory references
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4430,7 +4430,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.ices.mastrapa.lab-spectra`, `urn:nasa:pds:gbo.
 
 ### Pluto: observed atmospheric occultation profiles
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4438,7 +4438,7 @@ Pluto has surface ice and height data. A stellar occultation samples atmospheric
 
 Qualify the 2007 simultaneous visible/infrared occultation curve or published atmospheric constraints through existing charts and facts.
 
-Content owners: [pluto](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/pluto/README.md)
+Content owners: [pluto](../../../src/objects/pluto/README.md)
 
 #### Evidence
 
@@ -4468,7 +4468,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.pluto.benecchi-etal.occultation`.
 
 ### Small bodies: calibrated MSX infrared observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4506,7 +4506,7 @@ PDS bundle IDs: `urn:nasa:pds:msx.sb.images`.
 
 ### Small bodies: qualify historical map observations
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4545,7 +4545,7 @@ PDS bundle IDs: `urn:nasa:pds:ast-sat.thomas.shape-models`, `urn:nasa:pds:small_
 
 ### Moon: Clementine spectral bands and calibration comparison
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4553,7 +4553,7 @@ The Moon already has derived mineral signatures and Kaguya products. A Clementin
 
 Qualify a compact Clementine UVVIS/NIR band group if it adds useful wavelength or historical coverage beyond the selected products.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -4586,7 +4586,7 @@ USGS catalogue IDs: `moon_clementine_uvvis_global_mosaic_118m`, `moon_clementine
 
 ### Moon: qualify the published polar ice-favorability model
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4594,7 +4594,7 @@ Existing lunar thermal, rock and illumination inputs do not themselves establish
 
 Determine whether the published north/south polar index adds an understandable, reproducible model interpretation through an existing data view.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -4625,7 +4625,7 @@ USGS catalogue IDs: `moon_ice_favorability_index_north_pole_591mp`, `moon_ice_fa
 
 ### Venus: published regional geological units
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4633,7 +4633,7 @@ Venus radar and numeric surface measurements do not supply these interpreted reg
 
 Qualify original categorical mapping for the Snegurochka Planitia and Metis Mons quadrangles using the existing geological-map contract.
 
-Content owners: [venus](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/venus/README.md)
+Content owners: [venus](../../../src/objects/venus/README.md)
 
 #### Evidence
 
@@ -4664,7 +4664,7 @@ USGS catalogue IDs: `venus_geologic_map_of_the_snegurochka_planitia_quadrangle`,
 
 ### Moon: qualify historical and illumination-specific photographs
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4672,7 +4672,7 @@ Modern global lunar photography already exists. These sources would add a qualif
 
 Retain one genuinely distinct source-qualified observing set if its date or lighting adds scientific value within existing controls.
 
-Content owners: [moon](https://github.com/layoutit/css.earth/blob/60ef02395df5c466027b8a70214b09cbc1afc570/src/objects/moon/README.md)
+Content owners: [moon](../../../src/objects/moon/README.md)
 
 #### Evidence
 
@@ -4706,7 +4706,7 @@ USGS catalogue IDs: `moon_lunar_orbiter_digital_photographic_global_mosaic_59m`,
 
 ### Asteroids: measured radar Doppler spectra
 
-Compared with cssEarth at [60ef02395df5](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570). Proposed work only; original-source availability and scientific qualification are distinguished below.
+Compared with cssEarth. Proposed work only; original-source availability and scientific qualification are distinguished below.
 
 #### Problem and proposed result
 
@@ -4744,7 +4744,7 @@ PDS bundle IDs: `urn:nasa:pds:gbo.ast.radar.arecibo.doppler_spectra_of_asteroids
 
 ### Saturn rings: compare measured opacity profiles
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4752,7 +4752,7 @@ Saturn currently uses one Cassini UVIS occultation profile to prepare ring opaci
 
 Prepare a small set of measured radial profiles with instrument, wavelength, event time and uncertainty, using the existing chart and ring preparation contracts.
 
-Content owners: [saturn](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/saturn/README.md).
+Content owners: [saturn](../../../src/objects/saturn/README.md).
 
 #### Evidence
 
@@ -4782,7 +4782,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranus rings: replace broad opacity assumptions with measured profiles
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4790,7 +4790,7 @@ Uranus uses published ring dimensions and broad optical-depth values; the epsilo
 
 Qualify Voyager and Earth-based occultation profiles for prepared ring-opacity inputs and source-backed explanatory charts.
 
-Content owners: [uranus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/uranus/README.md).
+Content owners: [uranus](../../../src/objects/uranus/README.md).
 
 #### Evidence
 
@@ -4821,7 +4821,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Neptune rings: measured radial profiles and dated arc observations
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4829,7 +4829,7 @@ Current Neptune ring radii are sourced, but arc centres and widths remain schema
 
 Qualify native occultation profiles and calibrated Voyager/Hubble observations as separate constraints on the existing ring presentation.
 
-Content owners: [neptune](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/neptune/README.md).
+Content owners: [neptune](../../../src/objects/neptune/README.md).
 
 #### Evidence
 
@@ -4860,7 +4860,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Saturn moons: qualify additional infrared bands and coverage
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4868,7 +4868,7 @@ Dione, Rhea, Tethys, Iapetus and Phoebe already have infrared/ice views. Mimas a
 
 Start with measured VIMS bands for Mimas and Hyperion; extend another moon only when a native-source comparison establishes new coverage or a distinct useful spectral measurement.
 
-Content owners: [mimas](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/mimas/README.md), [hyperion](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/hyperion/README.md), [dione](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/dione/README.md), [rhea](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/rhea/README.md), [tethys](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/tethys/README.md), [iapetus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/iapetus/README.md), [phoebe](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/phoebe/README.md).
+Content owners: [mimas](../../../src/objects/mimas/README.md), [hyperion](../../../src/objects/hyperion/README.md), [dione](../../../src/objects/dione/README.md), [rhea](../../../src/objects/rhea/README.md), [tethys](../../../src/objects/tethys/README.md), [iapetus](../../../src/objects/iapetus/README.md), [phoebe](../../../src/objects/phoebe/README.md).
 
 #### Evidence
 
@@ -4900,7 +4900,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Saturn moons: measured ultraviolet spectra
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4908,7 +4908,7 @@ Visible/infrared composites do not expose the archived ultraviolet measurements 
 
 Qualify selected UVIS and Hubble STIS spectra as existing prepared charts; a surface band is optional only where resolved footprints and registration support it.
 
-Content owners: [mimas](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/mimas/README.md), [enceladus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/enceladus/README.md), [tethys](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/tethys/README.md), [dione](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/dione/README.md), [rhea](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/rhea/README.md), [iapetus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/iapetus/README.md), [phoebe](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/phoebe/README.md), [hyperion](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/hyperion/README.md).
+Content owners: [mimas](../../../src/objects/mimas/README.md), [enceladus](../../../src/objects/enceladus/README.md), [tethys](../../../src/objects/tethys/README.md), [dione](../../../src/objects/dione/README.md), [rhea](../../../src/objects/rhea/README.md), [iapetus](../../../src/objects/iapetus/README.md), [phoebe](../../../src/objects/phoebe/README.md), [hyperion](../../../src/objects/hyperion/README.md).
 
 #### Evidence
 
@@ -4938,7 +4938,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Jupiter moons: distinguish ultraviolet surface and atmospheric signals
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4946,7 +4946,7 @@ The earlier proposals cover NIMS, photography and volcanic changes. Hubble ultra
 
 Prepare selected measured spectra or spatially supported ultraviolet bands with clear labels for reflected light versus atmospheric emission.
 
-Content owners: [io](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/io/README.md), [europa](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/europa/README.md), [ganymede](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/ganymede/README.md), [callisto](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/callisto/README.md).
+Content owners: [io](../../../src/objects/io/README.md), [europa](../../../src/objects/europa/README.md), [ganymede](../../../src/objects/ganymede/README.md), [callisto](../../../src/objects/callisto/README.md).
 
 #### Evidence
 
@@ -4976,7 +4976,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranus: a dated Voyager cloud observation
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -4984,7 +4984,7 @@ Uranus already has dated OPAL maps. A Voyager-era view would extend the time bas
 
 Qualify one dated 1986 cloud/filter dataset through the existing surface/date selector.
 
-Content owners: [uranus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/uranus/README.md).
+Content owners: [uranus](../../../src/objects/uranus/README.md).
 
 #### Evidence
 
@@ -5014,7 +5014,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranian moons: qualify numeric Voyager filter measurements
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5022,7 +5022,7 @@ All five moons already have Voyager color datasets. A second color composite is 
 
 Assess whether calibrated individual filter values or measured ratios can support a distinct numeric dataset or chart beyond the current display colors.
 
-Content owners: [ariel](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/ariel/README.md), [miranda](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/miranda/README.md), [umbriel](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/umbriel/README.md), [titania](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/titania/README.md), [oberon](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/oberon/README.md).
+Content owners: [ariel](../../../src/objects/ariel/README.md), [miranda](../../../src/objects/miranda/README.md), [umbriel](../../../src/objects/umbriel/README.md), [titania](../../../src/objects/titania/README.md), [oberon](../../../src/objects/oberon/README.md).
 
 #### Evidence
 
@@ -5052,7 +5052,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Neptune moons: qualify useful native filter measurements
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5060,7 +5060,7 @@ Triton and Proteus already use calibrated Voyager photography and filter color. 
 
 Resolve a demonstrated calibration or registration gap before adding a numeric band or genuinely additional observed region. Unresolved small moons can contribute measured photometry, not fabricated textures.
 
-Content owners: [triton](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/triton/README.md), [proteus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/proteus/README.md), [nereid](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/nereid/README.md), [larissa](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/larissa/README.md).
+Content owners: [triton](../../../src/objects/triton/README.md), [proteus](../../../src/objects/proteus/README.md), [nereid](../../../src/objects/nereid/README.md), [larissa](../../../src/objects/larissa/README.md).
 
 #### Evidence
 
@@ -5090,7 +5090,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Pluto and Charon: native MVIC spectral bands
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5098,7 +5098,7 @@ Current enhanced-color displays combine MVIC filters. Native individual measurem
 
 Qualify selected blue, red, near-infrared and methane-filter observations on the existing surfaces, grouped with the existing selector.
 
-Content owners: [pluto](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/pluto/README.md), [charon](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/charon/README.md).
+Content owners: [pluto](../../../src/objects/pluto/README.md), [charon](../../../src/objects/charon/README.md).
 
 #### Evidence
 
@@ -5129,7 +5129,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Pluto small moons: preserve and resolve native-image blockers
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5137,7 +5137,7 @@ Nix/Hydra photographic registration is deferred, Nix MVIC color is excluded for 
 
 Use OPUS to document exact candidate/control products and their overlap with existing failed trials; reopen a surface only when its recorded condition is met.
 
-Content owners: [nix](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/nix/README.md), [hydra](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/hydra/README.md), [kerberos](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/kerberos/README.md), [styx](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/styx/README.md).
+Content owners: [nix](../../../src/objects/nix/README.md), [hydra](../../../src/objects/hydra/README.md), [kerberos](../../../src/objects/kerberos/README.md), [styx](../../../src/objects/styx/README.md).
 
 #### Evidence
 
@@ -5167,7 +5167,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Venus: native Galileo and Cassini cloud observations
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5175,7 +5175,7 @@ Venus has Magellan surface measurements and Akatsuki ultraviolet clouds. Histori
 
 Qualify one coherent dated cloud/filter observation through existing prepared datasets.
 
-Content owners: [venus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/venus/README.md).
+Content owners: [venus](../../../src/objects/venus/README.md).
 
 #### Evidence
 
@@ -5205,7 +5205,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Giant planets: measured ultraviolet and infrared spectra
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5213,7 +5213,7 @@ Several current spectrum/atmosphere charts are model outputs. OPUS supplies obse
 
 Add selected measured spectra to existing prepared charts, labeled by aperture, wavelength and observation time.
 
-Content owners: [jupiter](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/jupiter/README.md), [saturn](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/saturn/README.md), [uranus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/uranus/README.md), [neptune](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/neptune/README.md).
+Content owners: [jupiter](../../../src/objects/jupiter/README.md), [saturn](../../../src/objects/saturn/README.md), [uranus](../../../src/objects/uranus/README.md), [neptune](../../../src/objects/neptune/README.md).
 
 #### Evidence
 
@@ -5243,7 +5243,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Enceladus: measured ultraviolet occultation light curves
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5251,7 +5251,7 @@ The merged Enceladus VIMS mosaic concerns surface infrared data. UVIS occultatio
 
 Qualify selected normalized stellar light curves and, only with an independently supported retrieval, plume column-density values in existing prepared chart content.
 
-Content owners: [enceladus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/enceladus/README.md).
+Content owners: [enceladus](../../../src/objects/enceladus/README.md).
 
 #### Evidence
 
@@ -5281,7 +5281,7 @@ The product snapshot and exact queries are in [OPUS evidence](README.md#query-th
 
 ### Uranus: observed atmospheric occultation light curves
 
-Compared with [cssEarth f1493dccc15d](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3) on 27 September 2026. This is proposed work, not a qualified dataset.
+Compared with cssEarth on 27 September 2026. This is proposed work, not a qualified dataset.
 
 #### Problem and proposed result
 
@@ -5289,7 +5289,7 @@ Uranus currently explains its atmosphere using model-based charts. The ring arch
 
 Prepare an observed stellar-flux curve alongside an accurately described atmospheric explanation using existing chart support.
 
-Content owners: [uranus](https://github.com/layoutit/css.earth/blob/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3/src/objects/uranus/README.md).
+Content owners: [uranus](../../../src/objects/uranus/README.md).
 
 #### Evidence
 

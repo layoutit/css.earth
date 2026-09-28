@@ -124,8 +124,8 @@ The build bundles the renderer modules a topic imports and writes `dist/metafile
 
 ## Evidence
 
-The volume entries replaced the lab's `volume-core` and `volume-bake` packages at `5b05729dd9`, moving their sources
-unchanged apart from import paths. The outputs were compared byte for byte with those of the packages at `c83b4e4f18`:
+The volume entries replaced the lab's `volume-core` and `volume-bake` packages, moving their sources
+unchanged apart from import paths. The outputs were compared byte for byte with those of the packages:
 
 - The lab's density bake of `labs/nebula/models/{lmc,smc}/full-density` wrote the same 292 files.
 - `pnpm prepare:volume` for the Milky Way (192 prepared files) and `prepare-stars` for the stellar neighbourhood
@@ -135,5 +135,5 @@ unchanged apart from import paths. The outputs were compared byte for byte with 
   `@cssearth/volume-core`/`@cssearth/volume-bake` to `@cssearth/bake`. With main's identity substituted, every
   `delivery.json` matches main's bytes. LMC and SMC record no such identity and matched entirely. M1 fails on both
   commits with the same error (`Compact sampled replay changed accepted hubble-optical volume`).
-- The 52 moved tests pass under Vitest, and `node labs/nebula/run.mts test` keeps the same six failures as on
-  `c83b4e4f18`. `pnpm test:lab` stops at the same density-bake assertion on both commits.
+- The 52 moved tests pass under Vitest, and `node labs/nebula/run.mts test` keeps the same six failures as before
+  the move. `pnpm test:lab` stops at the same density-bake assertion both times.

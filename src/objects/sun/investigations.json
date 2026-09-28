@@ -8,17 +8,11 @@
       "status": "excluded",
       "finding": "The browse-JPEG strip mosaic sampled each day's disc on the wrong side of its central meridian between frames (tools/objects/observation/solar-synoptic.mts centerX + sin(delta)): 76% of its sunspot pixels lay within 1 degree of strong field in JSOC's hmi.mrsynop_small_720s[2311] map, 100% once the sign was reversed, and blended frames showed doubled, half-strength spots. Its disc detection, radial normalization and approximate B0 are replaced by the JSOC science frames and their recorded geometry.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/11ac994699be60f8de89ce3b07341e35d1ca17da/tools/objects/observation/solar-synoptic.mts#L95",
-        "https://github.com/layoutit/css.earth/blob/11ac994699be60f8de89ce3b07341e35d1ca17da/src/objects/sun/source/preparation/raster.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/layers/observation/solar-synoptic.ts#L95",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/preparation/raster.json",
         "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits"
       ],
-      "revisitWhen": "JSOC withdraws the hmi.Ic_noLimbDark_720s records for CR2311, leaving the browse images as the only continuum source.",
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        }
-      ]
+      "revisitWhen": "JSOC withdraws the hmi.Ic_noLimbDark_720s records for CR2311, leaving the browse images as the only continuum source."
     },
     {
       "id": "jsoc-hmi-continuum-mosaic",
@@ -29,12 +23,6 @@
         "https://jsoc1.stanford.edu/SUM96/D1995449626/S00003/continuum.fits",
         "https://jsoc1.stanford.edu/SUM11/D1995447909/S00003/continuum.fits",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        }
       ]
     },
     {
@@ -43,15 +31,7 @@
       "status": "included",
       "finding": "The Magnetic field lens uses the 720 by 360 radial field synoptic map, whose FITS grid is equally spaced in sine latitude; preparation resamples it to equal latitude and applies a declared bipolar blue-to-amber false-colour scale.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L11",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L92",
         "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -60,20 +40,8 @@
       "status": "included",
       "finding": "The Chromosphere lens uses the 3,600 by 1,080 AIA 304 synoptic FITS map in false colour on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the lenses stay registered (correlation with |B| 0.57). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L96",
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
-        "https://github.com/layoutit/css.earth/blob/11ac994699be60f8de89ce3b07341e35d1ca17da/src/objects/sun/source/preparation/raster.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        },
-        {
-          "date": "2026-09-21",
-          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/preparation/raster.json"
       ]
     },
     {
@@ -82,20 +50,8 @@
       "status": "included",
       "finding": "The Corona lens uses the 3,600 by 1,080 AIA 171 synoptic FITS map in false colour on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the lenses stay registered (correlation with |B| 0.55). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L13",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L98",
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits",
-        "https://github.com/layoutit/css.earth/blob/11ac994699be60f8de89ce3b07341e35d1ca17da/src/objects/sun/source/preparation/raster.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        },
-        {
-          "date": "2026-09-21",
-          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/preparation/raster.json"
       ]
     },
     {
@@ -104,21 +60,8 @@
       "status": "excluded",
       "finding": "The separate 27 May 2026 Earth-facing browse photographs no longer supply off-limb plates. A stationary photograph behind the rotating global maps misrepresents which structures belong to the selected map. The original inputs remain recorded; all current off-limb plates are transparent.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L14",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L117",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L121",
         "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000906_1024_0304.jpg",
-        "https://github.com/layoutit/css.earth/blob/7e6e703528dd56b27efc81ce33d346a88202fb4e/tools/objects/observation/fits-map.test.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "7e6e703528dd56b27efc81ce33d346a88202fb4e"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/tools/objects/observation/fits-map.test.mts"
       ],
       "revisitWhen": "A presentation can display each off-limb observation with its own recorded viewing geometry and time."
     },
@@ -129,21 +72,8 @@
       "finding": "The visible-surface and magnetic-field maps retain polar continuation. AIA 171, 193 and 304 Å maps now preserve nonfinite source samples as gray-grid gaps without latitude or Fourier continuation. Finite zero and negative counts remain observed dark samples.",
       "revisitWhen": "A synoptic release supplies observed polar coverage for these instruments.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L71",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L103",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L135",
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
-        "https://github.com/layoutit/css.earth/blob/7e6e703528dd56b27efc81ce33d346a88202fb4e/tools/objects/observation/fits-map.test.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "7e6e703528dd56b27efc81ce33d346a88202fb4e"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/tools/objects/observation/fits-map.test.mts"
       ]
     },
     {
@@ -153,14 +83,8 @@
       "finding": "The shared sphere closes each pole with one flat patch at the 78.75-degree band boundary, so from the equator the disc is about 1.9 percent of R short at each pole, roughly 6 CSS pixels at the default 310-pixel radius; the limb plate's rim alpha does not cover it and the README states a polar band extension of the shared geometry would remove it.",
       "revisitWhen": "The shared geometry gains a polar band extension, or another fix for the flat cap is adopted.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L64",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L70"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L64",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L70"
       ]
     },
     {
@@ -170,14 +94,8 @@
       "finding": "The Sun has no entry in the shared solar geometry tables, so its 7.25-degree presentation axis and world frame are authored in the package recipes rather than derived from an ephemeris, and the prepared sky keeps the retired lane's visual baseline registration without astrometric registration.",
       "revisitWhen": "The shared solar geometry tables gain an entry for the Sun, or an astrometric sky registration is prepared.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L73",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L77"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L73",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L77"
       ]
     },
     {
@@ -186,14 +104,7 @@
       "status": "included",
       "finding": "The shape radius is the IAU nominal 695,700 km used as the world frame's body radius; NASA's rounded 700,000 km stays a fact-sheet value only.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L78",
         "https://science.nasa.gov/sun/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -202,15 +113,8 @@
       "status": "included",
       "finding": "The object content carries the NASA Science facts with citations alongside the four lens descriptions and palette legends.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L79",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/source/manifest.json",
         "https://science.nasa.gov/sun/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -219,14 +123,8 @@
       "status": "included",
       "finding": "The overview hosted by this scene combines analytical models with retained Horizons states at the displayed scene epoch; the prepared positions and orbit paths are not live ephemerides, and each body keeps its own imagery, measurements and acknowledgments in its own package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L18",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L23"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L18",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L23"
       ]
     },
     {
@@ -236,14 +134,8 @@
       "finding": "The evidence section records package, source-closure, minimap and browser conformance checks and a headless Chrome probe, but states that no dated scientific review is cited for this version and that the lane change claims no new scientific review.",
       "revisitWhen": "A dated scientific review of the prepared solar maps is recorded in this package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L39",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L60"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L39",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sun/README.md#L60"
       ]
     },
     {
@@ -254,13 +146,7 @@
       "evidence": [
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0193/CR2311.fits",
         "https://sdo.gsfc.nasa.gov/data/channels.php",
-        "https://github.com/layoutit/css.earth/blob/7e6e703528dd56b27efc81ce33d346a88202fb4e/tools/objects/observation/fits-map.test.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "7e6e703528dd56b27efc81ce33d346a88202fb4e"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/tools/objects/observation/fits-map.test.mts"
       ]
     }
   ]

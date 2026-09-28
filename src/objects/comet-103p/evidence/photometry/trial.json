@@ -1,6 +1,5 @@
 {
   "status": "not-promoted",
-  "pipelineCommit": "e70004dbc235b55e2d76af63d28fd35e61e96a8d",
   "method": "Same source mesh, source frames and registered cameras. Fixed production level gains are tested at 48 barycentric points per display triangle, disjoint from the production fit samples. Each pair compares identical source points accepted by both treatments. Coverage uses the production area-weighted sampler and is separate from this overlap comparison.",
   "limitations": [
     "Diagnostic parameter trials, not qualified reproductions of the three original publications. The numerical parameters were checked in Li et al. 2013 Table 6; the original papers’ H-function approximation was not verified. These trials use the 1981 approximation.",

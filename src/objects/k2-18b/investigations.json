@@ -9,14 +9,7 @@
       "finding": "Benneke et al. (2019), Table 2, report 2.610 ± 0.087 Earth radii. At this project's 6378.137 km per Earth radius, the selected 16,646.9 km value was already in the measurement and astronomy records, while the scene and factsheet still used the older 2.37 Earth-radii value. The scene, world scale and factsheet now use the selected measurement; this does not imply a measured surface or colour.",
       "evidence": [
         "https://arxiv.org/html/1909.04642v2"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-22",
-          "commit": "905a650d10da23aa96c7ac410563bc99c6ca1917"
-        }
-      ],
-      "revisitWhen": "If the package adopts a different radius determination or Earth-radius convention."
+      ]
     },
     {
       "id": "jwst-archive-observations",
@@ -26,12 +19,6 @@
       "evidence": [
         "https://www.stsci.edu/jwst/science-execution/program-information?id=2372",
         "https://www.stsci.edu/jwst/science-execution/program-information?id=2722"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
-        }
       ],
       "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
     }

@@ -8,15 +8,9 @@
       "status": "included",
       "finding": "Selected products supply documented numeric scientific views; no-data and special values remain missing.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -26,15 +20,9 @@
       "finding": "The v2 DSK is retained as a source-intake and recipe proposal. Image-to-v2 alignment, prepared error, browser limb and feature qualification remain pending.",
       "revisitWhen": "Image alignment and the prepared-shape qualification record are completed for the v2 source.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -44,15 +32,9 @@
       "finding": "README records that NAIF reprocessed imagery after errors in the original model.",
       "revisitWhen": "A documented reconciled replacement changes the source decision.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -62,15 +44,9 @@
       "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior lens.",
       "revisitWhen": "A source-backed mapped product supports the claimed visible quantity.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -79,15 +55,9 @@
       "status": "included",
       "finding": "The selected six-observation set supplies Infrared ratio and Ice absorption under the pinned channel, mask, overlap and coverage rules. It remains partially supported and is not photometrically corrected.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
         "https://vims.univ-nantes.fr/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -99,13 +69,7 @@
         "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
         "https://doi.org/10.1016/j.icarus.2020.113848",
         "https://doi.org/10.1029/2018EA000399",
-        "https://github.com/layoutit/css.earth/blob/56ebf377c709190f7c97be24c1905225266fbed9/src/objects/enceladus/evidence/infrared-mosaic/published-grid.jpg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/evidence/infrared-mosaic/published-grid.jpg"
       ]
     },
     {
@@ -117,12 +81,6 @@
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2021.114803",
         "https://openaccess.inaf.it/entities/publication/30596495-3f2f-49f7-a7fb-a1aca47c3390"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
-        }
       ]
     },
     {
@@ -134,12 +92,6 @@
       "evidence": [
         "https://doi.org/10.5194/epsc-dps2025-400",
         "https://www.ipgp.fr/en/research/phds/__trashed-2/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
-        }
       ]
     },
     {
@@ -150,13 +102,7 @@
       "evidence": [
         "https://doi.org/10.1002/2015JE004818",
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
-        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
       ]
     },
     {
@@ -166,13 +112,7 @@
       "finding": "The heavily cratered plains polygon has no holes where subdued cratered plains and northern lineated material sit (15-105 E, 30-76 N); northern lineated material also lies inside subdued cratered plains, and two small subdued cratered plains rings overlap equatorial cratered plains and central LH. Under the shared withhold-conflicts rule 3.41% of the sphere was gray, northern lineated material showed no cells and subdued cratered plains 6 km2. The grid now gives each shared cell to the smallest covering unit (geology-grid.py nestedUnits inner): no conflicts remain, 0.072% of the sphere is unmapped, northern lineated material shows 8,544 km2 and subdued cratered plains 17,223 km2. The Trek MapServer rendering also puts subdued cratered plains over heavily cratered plains but hides northern lineated material; the grid differs there on purpose so that every published unit shows.",
       "evidence": [
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/export?bbox=-791995.5,-395997.75,791995.5,395997.75&size=2048,1024&format=png24&f=image",
-        "https://github.com/layoutit/css.earth/blob/43166e31ac615191ff63e87f04c7b61b11d994dd/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
       ]
     },
     {
@@ -183,12 +123,6 @@
       "revisitWhen": "A shared route for published line symbols exists.",
       "evidence": [
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapFeatures_Global/MapServer/0?f=json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "56ebf377c709190f7c97be24c1905225266fbed9"
-        }
       ]
     }
   ]

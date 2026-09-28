@@ -7,7 +7,6 @@
   "dpr": 2,
   "url": "http://127.0.0.1:4224/tethys/",
   "lens": "iss",
-  "revision": "800602a0511eae766b173f1646df67c879ec359f",
   "method": "The lens is selected through the application with motion paused, then each camera state is set and captured losslessly. The previous captures serve main's three ISS images in place of the re-prepared ones; every other served file is unchanged.",
   "crop": {
     "left": 700,

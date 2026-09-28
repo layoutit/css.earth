@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-telescope-output-checks@1",
-  "testedBase": "9a93ce772b4376f54844a8b5094ba0097563d66a",
   "scope": "Native exports, large arrays, physical-object handoffs, inactive sphere assets",
   "tests": {
     "existingFocusedPassed": 25,

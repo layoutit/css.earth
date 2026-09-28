@@ -8,15 +8,7 @@
       "status": "included",
       "finding": "The visible-colour surface is the October 2025 rotation-A composite of F467M, F547M and F657N from the OPAL Cycle 33 release.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L5",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L7",
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -25,15 +17,7 @@
       "status": "included",
       "finding": "The FQ727N and F845M FITS maps supply two separately prepared false-colour observation lenses whose palettes and percentile stretches are declared in the observation recipe; no browser filtering is used.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L8",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L10",
         "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -43,14 +27,8 @@
       "finding": "The OPAL map has observed northern coverage and an unobserved black southern region; preparation ends the usable observation six rows north of the map equator, fills the rest from a uniform chromatic baseline, and invents, reflects or extends no local feature outside the observed coverage.",
       "revisitWhen": "A global release observes Uranus's southern hemisphere at this geometry.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L37",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L46"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/uranus/README.md#L37",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/uranus/README.md#L46"
       ]
     },
     {
@@ -59,15 +37,7 @@
       "status": "included",
       "finding": "The checked PIA18182 full disc supplies the central-disc chromatic baseline that OPAL detail is feathered into across twelve prepared rows, and the same exact bytes are the adapter-owned navigation disc.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L40",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L64",
         "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -77,14 +47,7 @@
       "finding": "The checked Webb portrait is kept as a visual-composition reference only and is not sampled into the runtime surface.",
       "revisitWhen": "A Webb global map suitable for registration and resampling is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L62",
         "https://science.nasa.gov/asset/webb/uranus-nircam-image/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -93,15 +56,7 @@
       "status": "included",
       "finding": "Ring radii, widths and normal optical depths come from the PDS table, whose labels and measurements preparation verifies before baking one transparent ring texture and one planet-shadow texture; extremely narrow rings receive a recorded minimum-pixel presentation width while their radii and ordering stay put.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L17",
         "https://pds-rings.seti.org/uranus/uranus_rings_table.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -110,14 +65,7 @@
       "status": "included",
       "finding": "NASA's public facts supply the documented gray inner-ring, reddish Nu and blue Mu colour interpretation used for the prepared rings.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L19",
         "https://science.nasa.gov/uranus/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -126,15 +74,7 @@
       "status": "included",
       "finding": "The reflectance and temperature-pressure charts are rendered at preparation from the checked PSG configuration and its raw 253-sample I/F response at model date 2026-08-30 12:00, range 0.35-1.0 micrometres and resolving power 240; acquisition removes only the request timestamp and elapsed-time comments so the scientific rows stay reproducible.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L22",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L28",
         "https://psg.gsfc.nasa.gov/api.php"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -143,13 +83,7 @@
       "status": "included",
       "finding": "A third chart uses the pinned phase coefficients kept in the package's photometry record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L28"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/uranus/README.md#L28"
       ]
     },
     {
@@ -158,14 +92,7 @@
       "status": "included",
       "finding": "The equatorial and polar radii, 97.77-degree axial tilt, retrograde rotation, distance, day, year, temperature, winds and ring count are checked against NASA's facts page and the checked JPL physical-parameter page.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L83",
         "https://science.nasa.gov/uranus/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -175,15 +102,7 @@
       "finding": "The source records retain the selected JPL satellite values and keep the PIA01361 montage, with its disclosed incomplete Miranda and Ariel coverage, as pinned scientific source material; because the runtime mounts exactly one detailed object scene, the historical moon billboards and orbit-guide derivations are excluded from the consumer-derived asset inventory.",
       "revisitWhen": "The shared runtime gains a contract for rendering a moon system inside a planet scene.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L72",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L78",
         "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01361/PIA01361.tif"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -193,13 +112,7 @@
       "finding": "The evidence section records that no dated test report is cited in the existing source notes.",
       "revisitWhen": "A dated preparation or browser run for Uranus is recorded in this package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/uranus/README.md#L33"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/uranus/README.md#L33"
       ]
     },
     {
@@ -209,12 +122,6 @@
       "finding": "Hubble OPAL Minnaert coefficients of the colour map per channel (F657N 0.57, F547M 0.80, F467M 0.85), the correction OPAL removed before projection, put back relative to the flood-lit disc centre.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025_all_v1_readme.txt"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
       ]
     },
     {
@@ -223,12 +130,6 @@
       "status": "excluded",
       "evidence": [
         "https://psg.gsfc.nasa.gov/helpatm.php"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
       ]
     },
     {
@@ -237,15 +138,9 @@
       "status": "excluded",
       "finding": "Replaced by the OPAL Minnaert law of the colour map.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
-      ]
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "opal-dated-visible-maps",
@@ -264,14 +159,7 @@
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-30",
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-31",
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32",
-        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33",
-        "https://github.com/layoutit/css.earth/blob/323a8c2f52803627462db448e52ccfa3c073363d/src/objects/uranus/README.md#hubble-dates"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "323a8c2f52803627462db448e52ccfa3c073363d"
-        }
+        "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
       ]
     }
   ]

@@ -21,7 +21,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | enhanced | 17.7 → 23.9 kB |
 | normal | 216.9 → 227.4 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/callisto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Lane change (this PR): the terrestrial solid-observation lane was retired for Callisto; the same pinned inputs and the same decoders (`terrestrial-observation` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are now painted at one 8192 × 4096 density for every DPR (asset record (`prepared/assets.json`)); native 1 km mosaic 15,146 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
@@ -33,7 +33,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - The two training quadrants and two disjoint held-out quadrants are recorded in [source/validation/galileo-color-registration.json](source/validation/galileo-color-registration.json). An independent review sampled the original 15,138 × 7,569 reference at its exact GeoTIFF coordinates, without adjusting the fit: upper-right and lower-left unblurred correlations were 0.713 and 0.573.
 
-- Focused checks are defined in the [unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/callisto) and the shared browser conformance harness.
+- Focused checks are defined in the unit tests and the shared browser conformance harness.
 
 ## Known problems
 

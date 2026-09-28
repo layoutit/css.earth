@@ -36,25 +36,25 @@ The linked reports identify their tested sources, prepared files and limitations
 
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
-  [Surface verification results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md).
+  Surface verification results.
 - **Photographic source sampling, 12 September 2026:** the pinned July JPEG and
   cloud TIFF were sampled at the existing atlas footprints, then 58 current
   surface assets were staged and applied. The 29 clear-surface files total
   18,087,832 bytes, up 1,972,070 bytes (12.24%) from the baseline inventory;
   the 29 cloud files total 33,073,610 bytes, up 1,264,694 bytes (3.98%). The
   51,161,442-byte combined download is 3,236,764 bytes larger. This receipt
-  verifies source, recipe, raster-plan and texture-level pins. On revision
-  `3dc424757`, both views displayed at whole-globe scale with Shadows on and off
+  verifies source, recipe, raster-plan and texture-level pins. Both views
+  displayed at whole-globe scale with Shadows on and off
   in Chromium at DPR 1, without script errors. Close-zoom behavior has the
   limitation below; these captures do not qualify texture-level selection.
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
-  geographic registration. [Elevation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md) ·
-  [Tomography](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/planet-cross-sections.md) · [Night-light interpretation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-night-lights.md) ·
-  [MUR native pixel checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-enso/mur-native-witnesses.json).
+  geographic registration. Elevation ·
+  Tomography · Night-light interpretation ·
+  [MUR native pixel checks](../../../tests/objects/fixtures/earth-enso/mur-native-witnesses.json).
 - **Retired geographic release:** the September 5 report records 19,632 published objects and
   25,344,236,995 bytes verified for release `fef1519d5f243617`, with Chrome checks at
   device pixel ratios (DPR) 1 and 2. This is dated delivery evidence, not a live availability check or
-  application deployment. [Geometry delivery report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/global-earth-coverage.md).
+  application deployment. Geometry delivery report.
 
 ## Known problems
 
@@ -219,7 +219,7 @@ page. The Earth page's compressed HTML fell from 96 KB to 74 KB. Before the bake
 from its own image matched the unchanged build pixel for pixel, once settled, at 412 × 823 (DPR 2) and 1,280 × 800.
 Other bodies retain their existing lighting.
 
-The [cloud-free comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md) considered
+The cloud-free comparison considered
 December with clouds, cloud-free December and cloud-free July; July was selected for clearer
 northern land. Recent daily VIIRS imagery remains an unqualified candidate because of polar
 gaps and daily mosaic incompleteness. Sentinel-2 mosaics were surveyed but not qualified for
@@ -262,7 +262,7 @@ We selected GEBCO_2026 for the global numeric model. NOAA ETOPO 2022 remains an 
 alternative; the previous Blue Marble base plus relief is excluded because its land colors do
 not encode elevation. That exclusion still stands: the visible views take only the ocean of
 the Blue Marble topography and bathymetry edition, never its relief-shaded land. The
-[elevation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md)
+elevation report
 records the source download, numerical checks, browser views and file sizes.
 
 </details>
@@ -330,7 +330,7 @@ measurements; transparent land, ice and unavailable observations stay gray.
 
 Shared source restoration rebuilds a missing `source/science/mur-gibs.png` from
 the tile archive and verifies its expected mosaic hash before preparation.
-The [original acquisition, native witnesses and browser evidence](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-enso.md)
+The original acquisition, native witnesses and browser evidence
 record the qualified snapshot. The earlier CoralTemp comparison used a different
 1991–2020 baseline and display range, so it is not a resolution-only comparison.
 
@@ -454,8 +454,8 @@ palette prepares the legend and thumbnail. Crust, outer core and inner core rema
 Mantle textures use WebP q90; polar alpha textures remain lossless. This is display
 compression, not numeric source quantization. The original numeric values remain pinned.
 
-The [encoding
-comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/planet-cross-sections/tomography/encoding.json) records
+The encoding
+comparison records
 errors and size measurements for the tested version.
 
 To reproduce the source subset, install `numpy==2.3.5` and `h5py==3.14.0` in an isolated Python

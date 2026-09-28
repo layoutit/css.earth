@@ -508,6 +508,9 @@ test('a whole star package from fixtures is what the bake accepts: declared file
     resolver: async () => ({ mainId: 'Test Fixture Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
   assert.equal(generated.color.route, 'planck', 'no archive spectrum in the fixtures, so the Planck route');
   assertWholePackage(generated.files, spec.id, true);
+  const { parseInvestigationLedger } = await import('@cssearth/bake/sources');
+  const ledger = parseInvestigationLedger(JSON.parse(String(generated.files.get(`src/objects/${spec.id}/investigations.json`))), spec.id);
+  assert.deepEqual(ledger.entries.map(entry => entry.id), ['placement', 'radius-mass-and-temperature', 'colour'], 'the ledger records each choice the generator made');
   const stored = parseObjectSpecs({ stars: [JSON.parse(String(generated.files.get(`src/objects/${spec.id}/${STORED_SPEC}`)))] }).stars[0]!;
   assert.deepEqual(stored, { ...spec, order: 9999 }, 'the stored spec reads back to the spec that made the package');
 });

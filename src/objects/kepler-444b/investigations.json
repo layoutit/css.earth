@@ -1,5 +1,38 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "kepler-444b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.036 Jupiter radii from Campante et al. 2015 (2015ApJ...799..170C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract): 2,573.7 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+        "https://doi.org/10.1088/0004-637X/799/2/170",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.000118 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 3.6001053 d (Campante et al. 2015); a/R* 11.951 (Campante et al. 2015); inclination 88 degrees (Campante et al. 2015); e 0 (Weiss et al. 2024); transit mid-time 2454966.2599 BJD, taken as BJD_TDB (Campante et al. 2015). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..270....8W/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

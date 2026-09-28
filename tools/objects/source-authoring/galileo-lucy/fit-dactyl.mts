@@ -233,7 +233,7 @@ await sharp({ create: { width: 800, height: 490, channels: 3, background: '#1519
 
 const dependencies = ['packages/bake/src/objects/geometry/shape-camera-mosaic.ts', 'packages/fits/src/fits.ts', 'packages/spice/src/ck.ts', 'packages/spice/src/daf.ts', 'packages/spice/src/sclk.ts', 'packages/spice/src/lsk.ts', 'packages/spice/src/text-kernel.ts'];
 const report = { schema: 'cssearth-dactyl-registration-result@1', qualifiedSurface: false,
-  baseCommit: input.baseCommit, dependencies,
+  dependencies,
   runtime: { node: process.version, sharp: sharp.versions.sharp },
   originalDetector: { orientation, vicarPixelOffset: original.offset, width: 800, height: 800, originalLabelUtc: field(bytes('vicar-label').toString('ascii'), 'IMAGE_TIME') },
   pointing, oracleComparison: { oracle: oracle.tool, matrixMaxAbsoluteError: matrixError, etErrorSeconds: etError, clockErrorTicks: ticksError,

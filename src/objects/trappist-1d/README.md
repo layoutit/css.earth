@@ -32,7 +32,7 @@ surface, lit by its own star at the measured orbit, and the page says so.
 
 - Run of 2026-09-24: `node tools/prepare/prepare-object.mts` added the Illustration lens; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../tools/objects/observation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the lens opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 
-- [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
+- `source.test.mts` checks the pins, and that the planet turns synchronously
   with longitude 0 on its star and orbits it;
   [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.

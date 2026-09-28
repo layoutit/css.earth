@@ -45,7 +45,7 @@ Five files keep their bytes because body evidence pins their SHA-256: `isis-geot
 four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`.
 
 Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
-only. Since `62cde1f331` it holds no runtime-lock or generator digest, while
+only. It no longer holds a runtime-lock or generator digest, while
 `tests/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
 test runs past its restored-source skips. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside

@@ -36,7 +36,7 @@ test('application provenance inputs and recipes read source-owned files without 
   await assert.rejects(checked('labs/nebula/models/fixture.json'), /attempted a lab read/);
 });
 
-test('retained provenance copies preserve pins, revision identities and manifest coverage', async () => {
+test('retained provenance copies preserve pins and manifest coverage', async () => {
   let references = 0;
   for (const id of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name)) {
     const base = `src/objects/${id}/source`;
@@ -49,8 +49,8 @@ test('retained provenance copies preserve pins, revision identities and manifest
     const manifest = await json(`${base}/manifest.json`);
     const rows = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => sourceArray(manifest[key], sourceObject));
     for (const reference of sourceArray(ledger.references, sourceObject)) {
-      const path = sourceText(reference.path), original = sourceText(reference.originalPath), revision = sourceText(reference.revision);
-      assert.ok(path.startsWith(`${base}/`)); assert.match(revision, /^[a-f0-9]{40}$/);
+      const path = sourceText(reference.path), original = sourceText(reference.originalPath);
+      assert.ok(path.startsWith(`${base}/`));
       const bytes = await readFile(resolve(root, path));
       assert.ok(bytes.length > 0, path);
       assert.ok(original.startsWith('labs/nebula/models/'));

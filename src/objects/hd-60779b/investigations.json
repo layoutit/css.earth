@@ -1,5 +1,38 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-60779b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.28958922 Jupiter radii from DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract): 20,703.3 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
+        "https://doi.org/10.3847/1538-3881/ae819f",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.04464673 Jupiter masses: DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
+        "https://doi.org/10.3847/1538-3881/ae819f",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 29.986175 d (DiTomasso et al. 2026); a/R* derived from its semi-major axis 0.1922 au and stellar radius 1.129 solar radii (DiTomasso et al. 2026); inclination 88.56 degrees (DiTomasso et al. 2026); no archive row states an eccentricity; the orbit is taken as circular; transit mid-time 2459252.9531 BJD, taken as BJD_TDB (DiTomasso et al. 2026). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

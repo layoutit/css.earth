@@ -2,8 +2,7 @@
 
 This document records a historical input experiment. The browser helpers under
 `tests/experiments/native-scroll/` and `tests/experiments/native-resize/`, and
-the `perf:trace` package command, last existed before
-[revision `6e32bc459b`](https://github.com/layoutit/css.earth/tree/6e32bc459b%5E).
+the `perf:trace` package command, last existed in git history.
 Commands below that name those helpers or `perf:trace` describe the original
 runs; they cannot be run from this checkout. The previews and their launchers
 under `labs/experiments/` still exist, with the trace analyses beside them.

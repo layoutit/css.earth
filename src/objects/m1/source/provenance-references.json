@@ -3,73 +3,61 @@
   "references": [
     {
       "originalPath": "labs/nebula/models/m1/physical-evidence.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json",
       "bytes": 17007
     },
     {
       "originalPath": "labs/nebula/models/m1/chandra-xray-grid-transfer.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/01-chandra-xray-grid-transfer.json",
       "bytes": 1846
     },
     {
       "originalPath": "labs/nebula/models/m1/compiler.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/02-compiler.json",
       "bytes": 1132
     },
     {
       "originalPath": "labs/nebula/models/m1/hubble-2017-bridge-matched-stars.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/03-hubble-2017-bridge-matched-stars.json",
       "bytes": 28015
     },
     {
       "originalPath": "labs/nebula/models/m1/observation-structures.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/04-observation-structures.json",
       "bytes": 371
     },
     {
       "originalPath": "labs/nebula/models/m1/observations.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/05-observations.json",
       "bytes": 14682
     },
     {
       "originalPath": "labs/nebula/models/m1/sampled.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/07-sampled.json",
       "bytes": 5839
     },
     {
       "originalPath": "labs/nebula/models/m1/sitelle-alignment-check.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/08-sitelle-alignment-check.json",
       "bytes": 25298
     },
     {
       "originalPath": "labs/nebula/models/m1/spitzer-infrared-grid-transfer.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/09-spitzer-infrared-grid-transfer.json",
       "bytes": 1850
     },
     {
       "originalPath": "labs/nebula/models/m1/vla-radio-grid-transfer.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/10-vla-radio-grid-transfer.json",
       "bytes": 1843
     },
     {
       "originalPath": "labs/nebula/models/m1/webb-components-astrometric-calibration.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/11-webb-components-astrometric-calibration.json",
       "bytes": 1862
     },
     {
       "originalPath": "labs/nebula/models/m1/webb-components-matched-stars.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/12-webb-components-matched-stars.json",
       "bytes": 15572
     }

@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-352.txt. Model 352, version 2011-04-21, pole (328°, 56°), period 6.86788 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/352",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ducrosa/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ducrosa/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ducrosa/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ducrosa/source/reference/damit-model.json"
       ]
     },
     {
@@ -32,14 +20,7 @@
       "status": "included",
       "finding": "[Original shape table](https://damit.cuni.cz/projects/damit/stored_files/open/1322/shape.txt) — counted XYZ vertices and one-based triangle indices.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md",
         "https://damit.cuni.cz/projects/damit/stored_files/open/1322/shape.txt"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -47,13 +28,7 @@
       "survey": "survey-damit-documentation-3",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ducrosa/README.md"
       ]
     },
     {
@@ -61,13 +36,7 @@
       "survey": "survey-acua-primary-catalog",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ducrosa/README.md"
       ]
     },
     {
@@ -75,13 +44,7 @@
       "survey": "survey-hanu-et-al-2018-2",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ducrosa/README.md"
       ]
     },
     {
@@ -90,14 +53,7 @@
       "status": "included",
       "finding": "[Hanuš (2011), A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H)",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md",
         "https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -105,13 +61,7 @@
       "survey": "surface-imagery-6",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ducrosa/README.md"
       ]
     },
     {
@@ -121,20 +71,8 @@
       "finding": "Alternative archive models: Model 353: pole (158°, 62°), period 6.86789 h. The live DAMIT export lists these other models for this target: 353: pole (158°, 62°), 6.86789 h, version 2011-04-21. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ducrosa/README.md",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/353"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     }
   ]

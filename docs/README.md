@@ -74,7 +74,7 @@ Keep maintained Markdown guides here and their illustrations in `images/`.
 Link each guide from this index or another guide, and each illustration from a
 guide. Put processing code in `tools/`, test fixtures in `tests/`, and local source
 records beside the body. Shared published identities belong in the Sources catalogue.
-Link historical evidence at its exact Git revision from the account that uses it.
+Git history keeps removed evidence; never link it by commit.
 Plans, superseded proposals and raw run output do not need a permanent copy in
 the current tree.
 

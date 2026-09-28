@@ -29,19 +29,19 @@
       "kind": "credit",
       "text": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
     },
     {
       "kind": "rights",
       "text": "CC BY 4.0; full credit required",
       "scope": "Redistributed display derivatives",
-      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
     },
     {
       "kind": "limitation",
       "text": "Display-stretched optical photograph, not calibrated surface brightness. Its sky solution is a matched-star transfer through VISTA to SMASH, verified only inside the matched hull (50.5% of the field).",
       "scope": "Registration and photometry",
-      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8/registrationNote"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8/registrationNote"
     }
   ]
 }

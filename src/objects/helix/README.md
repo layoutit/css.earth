@@ -21,7 +21,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 - [Final app inspection](../../../site/test/evidence/nebulae/2026-09-14/final-helix-m8.json) records front/oblique views across all three lenses after restoring the wider-image cores. [Report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) documents incomplete historical capture metadata.
 - The final app report identifies cloud result `2794e4cc5c3a…`, and the [object descriptor](object.json) pins its installed bank; the field’s image-anchor receipt separates compact-source evidence, image-component offsets and Gaia angular associations.
-- [Historical registration](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md#aligned-observations-and-native-star-removal) records held-out RMS of 0.34″ for VISTA and 1.10″ for the wider ESO field relative to WFI. This verifies overlap registration, not absolute astrometry or stellar membership. No new cold replay or material acceptance is claimed.
+- [Historical registration](../../../labs/nebula/models/helix/README.md#aligned-observations-and-native-star-removal) records held-out RMS of 0.34″ for VISTA and 1.10″ for the wider ESO field relative to WFI. This verifies overlap registration, not absolute astrometry or stellar membership. No new cold replay or material acceptance is claimed.
 
 ## Known problems
 
@@ -32,7 +32,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed lab account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/helix/README.md) preserves the single-axis, disk/ring, tuned-shape and compiler trials as distinct results. The [joint-fit method](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/docs/joint-fit.md) records molecular sample-count, beam and front/back limitations. Wider Hubble/CTIO, CFHT and photographer candidates remain documented in the [investigation ledger](investigations.json). Preparation belongs in the [shared guide](../../../docs/nebulae/README.md).
+The [fixed lab account](../../../labs/nebula/models/helix/README.md) preserves the single-axis, disk/ring, tuned-shape and compiler trials as distinct results. The [joint-fit method](../../../labs/nebula/docs/joint-fit.md) records molecular sample-count, beam and front/back limitations. Wider Hubble/CTIO, CFHT and photographer candidates remain documented in the [investigation ledger](investigations.json). Preparation belongs in the [shared guide](../../../docs/nebulae/README.md).
 
 </details>
 

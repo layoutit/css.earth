@@ -24,7 +24,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 - [Recorded app checks](../../../site/test/evidence/nebulae/2026-09-14/field-defaults.json) cover the catalogue field, projection and star toggle; [evidence context](../../../site/test/evidence/nebulae/2026-09-14/README.md) states their version and limits.
 - The [object descriptor](object.json) pins the installed bank whose provenance identifies compiler result `3fac3e884fb5…`. The [delivery request](source/delivery.json) pins preparation inputs and retains the older accepted-lab reference separately. This documentation review did not perform a cold replay.
-- [Historical processing evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
+- [Historical processing evidence](../../../labs/nebula/models/m1/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
 
 ## Known problems
 
@@ -35,7 +35,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed processing account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/README.md) preserves the earlier result identities and failed material trials. [Physical evidence](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/physical-evidence.json) distinguishes SITELLE measurements, Ng–Romani torus parameters and authored terms; the [source dossier](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/labs/nebula/models/m1/source-dossier.json) preserves registration, epochs and alternatives. General preparation belongs in the [nebula guide](../../../docs/nebulae/README.md).
+The [fixed processing account](../../../labs/nebula/models/m1/README.md) preserves the earlier result identities and failed material trials. [Physical evidence](../../../labs/nebula/models/m1/physical-evidence.json) distinguishes SITELLE measurements, Ng–Romani torus parameters and authored terms; the [source dossier](../../../labs/nebula/models/m1/source-dossier.json) preserves registration, epochs and alternatives. General preparation belongs in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
 

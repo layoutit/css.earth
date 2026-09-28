@@ -18,7 +18,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 14400 × 7200 | 10.93 MB (7,680,016 + 3,252,062 bytes) |
 
-Each atlas is 5010 × 5217 pixels, with 1600 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/phobos/prepared). WebP quality is 95. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas is 5010 × 5217 pixels, with 1600 retained faces. The scene bytes match the previous main version. WebP quality is 95. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 - Exact GeoTIFF origin, scale and missing value are checked by the recipe.
 

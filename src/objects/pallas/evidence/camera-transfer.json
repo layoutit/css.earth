@@ -1,7 +1,6 @@
 {
   "status": "diagnostic-unqualified",
   "date": "2026-09-14",
-  "baselineCommit": "a138c0da555aa8571d98cce49c8a781eb0fcb22d",
   "purpose": "Test whether a native photograph predicts interior features in another observation before preparing a Pallas photographic surface.",
   "inputs": [
     {
@@ -3845,7 +3844,6 @@
   ],
   "jointFitAttempt": {
     "date": "2026-09-14",
-    "baselineCommit": "dc850b5cd46c5c5179e9eaf7a8ac30338b29a146",
     "status": "closed-unqualified",
     "method": "Joint detector center and roll for three images, robust Levenberg-Marquardt with equally weighted native-pixel limb distances and interior x/y residuals. Source mesh, spin, range, focal scale and solar geometry fixed. Recast reference rays at every step. Lit-edge eligibility fixed before optimization, as in the shared limb fitter.",
     "policy": {

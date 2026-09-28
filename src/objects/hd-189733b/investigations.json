@@ -10,12 +10,6 @@
       "evidence": [
         "https://zenodo.org/records/15103479",
         "https://arxiv.org/abs/2503.20895"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -26,12 +20,6 @@
       "evidence": [
         "https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/lib/utils.py",
         "https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/theresa.py"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -42,12 +30,6 @@
       "revisitWhen": "The SPARTA and Eureka! maps are found to differ in a way the lens should show.",
       "evidence": [
         "https://zenodo.org/records/15103479"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -59,14 +41,8 @@
       "evidence": [
         "https://www.stsci.edu/jwst/science-execution/program-information?id=2021",
         "https://mast.stsci.edu/search/ui/#/jwst",
-        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/tools/objects/eclipse-map/hd-189733b-raw-map.test.mts",
-        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/docs/eclipse-mapping.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/tests/objects/eclipse-map/hd-189733b-raw-map.test.mts",
+        "https://github.com/layoutit/css.earth/blob/main/docs/eclipse-mapping.md"
       ]
     },
     {
@@ -77,12 +53,6 @@
       "revisitWhen": "An earlier map is found deposited as a data file and is worth comparing on the planet.",
       "evidence": [
         "https://arxiv.org/abs/2503.20895"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -94,13 +64,7 @@
       "evidence": [
         "https://arxiv.org/abs/2503.20895",
         "https://zenodo.org/records/15103479",
-        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/docs/eclipse-mapping.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/docs/eclipse-mapping.md"
       ]
     },
     {
@@ -110,16 +74,6 @@
       "finding": "Lally et al. (2025) Table 1 labels t0 59838.6863112 UTC; the scene reads it as TDB. This project's TESS fit of HD 189733 puts the transit 6.4 +/- 0.9 s before that ephemeris, consistent with TDB and not with UTC, which would put it 69 s away. The difference is 0.1 percent of an orbit and the map is shown as fitted, so only the planet's displayed phase could move.",
       "evidence": [
         "https://arxiv.org/abs/2503.20895"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        },
-        {
-          "date": "2026-09-21",
-          "commit": "3f7319c1db44f92f99867f7ca059db64811d467e"
-        }
       ]
     },
     {
@@ -130,12 +84,6 @@
       "revisitWhen": "The orbit's sky orientation is measured.",
       "evidence": [
         "https://arxiv.org/abs/2503.20895"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -146,12 +94,6 @@
       "revisitWhen": "A rotation period of HD 189733b is measured.",
       "evidence": [
         "https://zenodo.org/records/15103479"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
       ]
     },
     {
@@ -160,13 +102,7 @@
       "status": "included",
       "finding": "The deposited temperature map seen from the host star in the lens palette, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/src/objects/hd-189733b/source/presentation/context.png"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733b/source/presentation/context.png"
       ]
     },
     {
@@ -179,13 +115,7 @@
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1185",
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2021"
       ],
-      "revisitWhen": "A reduction of these visits from raw, or a published map that uses them.",
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "3f7319c1db44f92f99867f7ca059db64811d467e"
-        }
-      ]
+      "revisitWhen": "A reduction of these visits from raw, or a published map that uses them."
     },
     {
       "id": "nasa-eyes-illustration",
@@ -195,12 +125,6 @@
       "evidence": [
         "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/HD_189733_b.jpg",
         "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-24",
-          "commit": "5e05f0df6d52838e06568ddb969662f08fd2cedc"
-        }
       ]
     },
     {
@@ -211,12 +135,6 @@
       "evidence": [
         "https://zenodo.org/records/15103479",
         "https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/theresa.py#L207"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
-        }
       ]
     },
     {
@@ -226,12 +144,6 @@
       "finding": "Table 1 supplies six bins from 290 to 570 nm, their flux-weighted centres and asymmetric errors. All are plotted without interpolation, including the -0.11 fitted albedo. The two wider channels rebin the same eclipse, so they are not independent extra points. The uncovered 570-780 nm interval stays empty.",
       "evidence": [
         "https://arxiv.org/abs/1307.3239"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
-        }
       ]
     },
     {
@@ -241,12 +153,6 @@
       "finding": "The thermally corrected geometric albedo is 0.076 +/- 0.016 in the 350-1100 nm CHEOPS band. It has a separate chart spanning the full passband, with no representative wavelength point or inferred spectral samples.",
       "evidence": [
         "https://arxiv.org/abs/2301.07731"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
-        }
       ]
     },
     {
@@ -257,12 +163,6 @@
       "evidence": [
         "https://zenodo.org/records/11459715",
         "https://www.nature.com/articles/s41586-024-07760-y"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
-        }
       ]
     },
     {
@@ -274,12 +174,6 @@
       "evidence": [
         "https://arxiv.org/abs/1307.3239",
         "https://arxiv.org/abs/2301.07731"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "54e578c8229d86d287d40d9985b88c836cfb0896"
-        }
       ]
     }
   ]

@@ -2,11 +2,9 @@
   "schema": "cssearth-arrival-handoff-evidence@1",
   "scenario": "Earth to Lutetia",
   "testedSource": {
-    "baseRevision": "86ec01713f9c09b4b936a90184947980d77ba2bb",
     "trackedChanges": true,
     "performanceBuild": {
       "schema": "cssearth-performance-build@1",
-      "head": "86ec01713f9c09b4b936a90184947980d77ba2bb",
       "sourceDigest": "f9c0cb80f8d0d7d4ce5368c6033e9f768ea68a8ff10a6ffd279cbe134f752dc7",
       "builtAt": "2026-09-27T02:18:31.056Z"
     }

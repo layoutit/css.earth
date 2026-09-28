@@ -1,6 +1,5 @@
 {
   "date": "2026-09-27",
-  "testedRevision": "dbc38a425a9e55baf6bf6ea11c6e593645829a46",
   "browser": "Chromium 154.0.8037.0",
   "devicePixelRatio": 1,
   "dataset": "temperature-p3",
@@ -43,7 +42,6 @@
       6
     ],
     "sameBodyNodesRetained": true,
-    "testedBeforeRebase": "6dae6ba2b3",
     "reuse": "The runtime hash, layer textures and pressure-control code are unchanged by the rebase and simulation catalogue qualification. The final reference layer and phone controls were inspected again."
   },
   "limits": [

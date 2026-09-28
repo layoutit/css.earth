@@ -62,8 +62,8 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
   // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
   // with must reproduce it exactly, so the outset changes nothing else about the leaves.
   const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0,projectivePoles:id==='mercury'}};});
-  // Four changes since this oracle was taken touched these leaves, each by name: d10c041091 draws every polar cap from
-  // both sides, 36198077d3 moved raster images to the canonical 2x density, leafRasterScale draws each leaf at two
+  // Four changes since this oracle was taken touched these leaves, each by name: draws every polar cap from
+  // both sides, moved raster images to the canonical 2x density, leafRasterScale draws each leaf at two
   // texels per CSS pixel instead of the recipe's raster scale (its caps already were), and a leaf binds its lens's
   // texture instead of inlining the profile's image. Undoing exactly those four reproduces the oracle, and every cap must
   // carry the both-sided suffix. A fifth change was taken into the hashes rather than undone: #712 grows each band

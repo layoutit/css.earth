@@ -8,19 +8,9 @@
       "status": "excluded",
       "finding": "Superseded 2026-09-16: the Celestia generic mesh was a shared illustration with no relation to this nucleus, and its catalogue radius was an estimate. The package now shows a smooth ellipsoid at the published effective radius (Lamy, Toth, Fernández and Weaver (2004), Comets II, 223); no mesh from Celestia is retained.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-55p/source/reference/source-record.json",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-55p/source/shape/model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-55p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-55p/source/shape/model.json",
         "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
-        },
-        {
-          "date": "2026-09-16",
-          "commit": "694e9130f7bdfb601972026adf3dcc33217d47b7"
-        }
       ],
       "revisitWhen": "A measured shape model of this nucleus (radar, spacecraft or a convex lightcurve inversion with a stated pole) would replace the ellipsoid."
     },
@@ -29,13 +19,7 @@
       "survey": "measured-shape-archive-route",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-55p/source/reference/source-record.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-55p/source/reference/source-record.json"
       ]
     },
     {
@@ -44,14 +28,8 @@
       "status": "included",
       "finding": "Retained intake decision: Tempel–Tuttle supplies the dust that makes the Leonid meteor shower. Earth encounters these particles as it crosses the comet’s trail each November. The cited material supplies explanatory context; it does not qualify photographic terrain on this nucleus.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-55p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-55p/source/reference/source-record.json",
         "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
-        }
       ]
     },
     {
@@ -59,14 +37,8 @@
       "survey": "context-as-surface-texture",
       "status": "excluded",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-55p/source/reference/source-record.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-55p/source/reference/source-record.json",
         "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "8475dd92009350873cd597f1c651c7ddec221a58"
-        }
       ]
     },
     {
@@ -76,12 +48,6 @@
       "finding": "Lamy, Toth, Fernández and Weaver (2004), Comets II, 223: effective radius 1.8 km. No verified axis ratio; a sphere is displayed. Used as the volume-equivalent radius of the displayed ellipsoid.",
       "evidence": [
         "https://doi.org/10.2307/j.ctv1v7zdq5.22"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "694e9130f7bdfb601972026adf3dcc33217d47b7"
-        }
       ]
     }
   ]

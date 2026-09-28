@@ -12,12 +12,6 @@
         "https://science.nrao.edu/facilities/vla/archive/scripted-access-to-the-nrao-archive",
         "https://data.nrao.edu/",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "fd15d9bdbf0c56042077d9fb3b2d49d70b387336"
-        }
       ]
     },
     {
@@ -30,13 +24,6 @@
         "https://science.nrao.edu/observing/policies/docs/manuals/users-policy/preparation-and-execution-of-observations/data-delivery-and-data-rights/proprietary-periods-and-observational-data-access",
         "https://science.nrao.edu/facilities/vla/docs/manuals/oss2013A/pub-guidelines/acknowledgement-to-nrao",
         "https://github.com/layoutit/css.earth/pull/293"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
-        }
       ]
     },
     {
@@ -48,12 +35,6 @@
       "evidence": [
         "https://casadocs.readthedocs.io/en/stable/api/tt/casatasks.calibration.fringefit.html",
         "https://science.nrao.edu/facilities/vla/data-processing"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "fd15d9bdbf0c56042077d9fb3b2d49d70b387336"
-        }
       ]
     },
     {
@@ -65,12 +46,6 @@
       "evidence": [
         "https://data.nrao.edu/portal/",
         "https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/resolution"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "fc74554fc2862c774b5ad4d02b6a499f6dc884a8"
-        }
       ]
     }
   ]

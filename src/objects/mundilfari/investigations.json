@@ -10,14 +10,7 @@
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
         "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/source/measurements.json",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mundilfari/source/measurements.json"
       ]
     },
     {
@@ -27,14 +20,7 @@
       "finding": "Cassini ISS and the Mundilfari observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour lens.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/"
       ]
     },
     {
@@ -45,14 +31,7 @@
       "revisitWhen": "A released Mundilfari mesh with a documented body frame, method and reuse route can be compared with this approximation.",
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf",
-        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/"
       ]
     },
     {
@@ -63,14 +42,7 @@
       "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified lens.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
-        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/"
       ]
     },
     {
@@ -80,14 +52,7 @@
       "finding": "Older 122-target overview nominal diameter 6.8 km differs from current Table 1C rounding/inputs. Adopt the individual source page’s radius 3.5 km and retain quoted diameter range; do not mix them as precise measurements.",
       "evidence": [
         "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
-        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/mundilfari/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://tilmanndenk.de/outersaturnianmoons/mundilfari/"
       ]
     }
   ]

@@ -1,5 +1,4 @@
 {
-  "testedRevision": "b7e79702738ceda157502dfef311890ba8cef85c",
   "browser": "153.0.8010.12",
   "viewport": {
     "width": 1440,
@@ -11,7 +10,6 @@
   "motion": false,
   "comparison": {
     "method": "Controlled texture-bank A/B: previous published eight-image assets and new ten-image assets in the same current application, unchanged scene and camera. Before uses three intercepted AMICA asset requests; after removes those overrides. Identical unscaled body crops exclude the current UI text, which describes ten images in both captures. This is an earlier-output comparison, not a native image oracle.",
-    "beforeRevision": "e609e66d66ea2d701253de4a3681a354324927ff",
     "beforeAssets": [
       {
         "filename": "itokawa-amica-shadow@2x.webp",

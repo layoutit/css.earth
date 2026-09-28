@@ -10,12 +10,6 @@
       "evidence": [
         "https://oidb.jmmc.fr/",
         "https://doi.org/10.1038/nature25001"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "4245a2b16294809184b678f0a55d1bdcecb09969"
-        }
       ]
     },
     {
@@ -26,12 +20,6 @@
       "evidence": [
         "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
         "https://doi.org/10.1038/nature25001"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "4245a2b16294809184b678f0a55d1bdcecb09969"
-        }
       ]
     },
     {
@@ -42,12 +30,6 @@
       "revisitWhen": "A measured position angle of the rotation axis, as ALMA gave for Betelgeuse, is published.",
       "evidence": [
         "https://doi.org/10.1038/nature25001"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "4245a2b16294809184b678f0a55d1bdcecb09969"
-        }
       ]
     },
     {
@@ -58,12 +40,6 @@
       "revisitWhen": "A catalogued heliocentric radial velocity with a bibcode is found.",
       "evidence": [
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "4245a2b16294809184b678f0a55d1bdcecb09969"
-        }
       ]
     }
   ]

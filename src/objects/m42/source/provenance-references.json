@@ -3,31 +3,26 @@
   "references": [
     {
       "originalPath": "labs/nebula/models/m42/physical-evidence.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m42/source/bake-inputs/references/05-physical-evidence.json",
       "bytes": 13110
     },
     {
       "originalPath": "labs/nebula/models/m42/compiler.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m42/source/bake-inputs/references/01-compiler.json",
       "bytes": 1039
     },
     {
       "originalPath": "labs/nebula/models/m42/observations.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m42/source/bake-inputs/references/02-observations.json",
       "bytes": 4085
     },
     {
       "originalPath": "labs/nebula/models/m42/observation-structures.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m42/source/bake-inputs/references/03-observation-structures.json",
       "bytes": 401
     },
     {
       "originalPath": "labs/nebula/models/m42/depth-model.json",
-      "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m42/source/bake-inputs/references/04-depth-model.json",
       "bytes": 3349
     }

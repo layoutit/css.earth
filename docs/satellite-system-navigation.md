@@ -1,7 +1,7 @@
 # Satellite-system navigation
 
 **Status:** Implemented on 26 September 2026. The counts below describe the
-prepared world context at `142a00fb6a`, not a permanent list of destinations.
+prepared world context, not a permanent list of destinations.
 
 ## Rule
 

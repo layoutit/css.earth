@@ -30,7 +30,7 @@ Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts) 
 
 Run of 2026-09-23 (this version):
 
-- [`latitude-belt-map.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/latitude-belt-map.test.mts) (now [`tests/objects/terrestrial/latitude-belt-map.test.mts`](../../../tests/objects/terrestrial/latitude-belt-map.test.mts)) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: chi1ori.dat: paper 41 G and 13 G, read 41.1 G and 13.1 G. So the files are the maps the paper measured.
+- [`latitude-belt-map.test.mts`](../../../tests/objects/terrestrial/latitude-belt-map.test.mts) (now [`tests/objects/terrestrial/latitude-belt-map.test.mts`](../../../tests/objects/terrestrial/latitude-belt-map.test.mts)) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: chi1ori.dat: paper 41 G and 13 G, read 41.1 G and 13.1 G. So the files are the maps the paper measured.
 - The reader's own tests check that a cell centre keeps its value, that the interpolation wraps at longitude 0, and that a table with a misplaced cell or belts out of order is refused.
 
 ## Known problems

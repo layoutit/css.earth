@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-omega-app-evidence@1",
   "recordedAt": "2026-09-20T21:50:32.736Z",
-  "baseRevision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
   "testedState": "Base revision plus the uncommitted app package, native focus readiness, shared context visibility, scoped provenance tooling and refreshed dependent asset inventories identified below. The base commit alone does not contain this app integration.",
   "environment": {
     "node": "v22.23.2",
@@ -383,7 +382,6 @@
     "meaning": "M31/M33 provenance generator identity changes with the scoped tool; Nearby Universe recomputation changes only tiny floating values and dependent hashes, with unchanged source data/frame/appearance."
   },
   "reusedLab": {
-    "revision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
     "reason": "No further Lab implementation or fitted-field/baked-bank changes after that revision. App inputs are exact pinned copies; native camera/context results are newly checked rather than inferred from old Lab captures.",
     "tests": {
       "total": 681,

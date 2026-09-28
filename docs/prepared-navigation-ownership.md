@@ -131,6 +131,6 @@ documents and descriptors, avoiding unnecessary Vite reloads. The binding
 comparison blocks the development WebSocket in its test page to keep hot reloads
 from invalidating a sample.
 
-The [September 7 implementation and subsequent integrations](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/prepared-navigation-ownership.md#september-7-implementation-evidence)
+The [September 7 implementation and subsequent integrations](prepared-navigation-ownership.md#september-7-implementation-evidence)
 retain the original browser, visual and performance results. The
-[adapter precedents](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/prepared-navigation-ownership.md#published-adapter-precedents) belong to that design record.
+[adapter precedents](prepared-navigation-ownership.md#published-adapter-precedents) belong to that design record.

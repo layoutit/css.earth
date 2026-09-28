@@ -90,25 +90,25 @@ Recorded results for the southern coverage update:
 
 - **Coverage:** estimated accepted area rose from 56.25% to 71.26%, using 24
   deterministic samples per triangle, weighted by area. This measures the displayed
-  mesh, not exact coverage of the nucleus. [Coverage record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/coverage.json).
-- **Browser:** 15 conformance cases passed before integration with `7ae81ba2d`.
+  mesh, not exact coverage of the nucleus. Coverage record.
+- **Browser:** 15 conformance cases passed before integration.
   Later production captures at DPR 1 and 2 are recorded separately.
-  [Conformance](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/conformance.json) · [Integration results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/integration.json).
+  Conformance · Integration results.
 - **Delivery:** a fresh installation verified all 56 runtime assets (21,933,880
   bytes) against their hashes, with no reused local files.
-  [Delivery record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/runtime-delivery.json).
+  Delivery record.
 - **Surface places, 2026-09-12:** preparation and the runtime parser accepted 28
   places (26 regions and two existing Philae sites). Three focused unit tests
-  passed. On base `53b262bd` with this addition, browser checks covered searching
+  passed. With this addition, browser checks covered searching
   for Hapi, clicking Seth on the surface, and the Regions dataset.
   [Captured Hapi card](evidence/surface-places.png). The published catalog was
   downloaded and its byte count and SHA-256 verified; surface assets are unchanged.
 
 The wider recorded runs include two missing Europa originals, three Earth fixture
-failures and two registry-audit failures. The [report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md#verification-records)
+failures and two registry-audit failures. The report
 separates those results from the comet checks. Earlier runs are retained below.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/osiris-geo.py`](https://github.com/layoutit/css.earth/blob/de8b0ae4187a49d17e32dff1f2b3a715f0217805/tools/oracles/pds3/osiris-geo.py) (now [`tests/oracles/pds3/osiris-geo.py`](../../../tests/oracles/pds3/osiris-geo.py)) reads the pinned geometry product `n20140805t194314611id50f22.IMG` and its quality companion with pvl and numpy, not with the pipeline. [`tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts) (now [`tests/objects/terrestrial/osiris-geo.oracle.test.mts`](../../../tests/objects/terrestrial/osiris-geo.oracle.test.mts)) requires the decoder to reproduce 48 sampled values from each of the nine geometry planes and from the quality planes exactly, the quality-flag histogram of all 4,194,304 pixels, and the count of finite sigma values.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/osiris-geo.py`](../../../tests/oracles/pds3/osiris-geo.py) (now [`tests/oracles/pds3/osiris-geo.py`](../../../tests/oracles/pds3/osiris-geo.py)) reads the pinned geometry product `n20140805t194314611id50f22.IMG` and its quality companion with pvl and numpy, not with the pipeline. [`tools/objects/terrestrial-layers/osiris-geo.oracle.test.mts`](../../../tests/objects/terrestrial/osiris-geo.oracle.test.mts) (now [`tests/objects/terrestrial/osiris-geo.oracle.test.mts`](../../../tests/objects/terrestrial/osiris-geo.oracle.test.mts)) requires the decoder to reproduce 48 sampled values from each of the nine geometry planes and from the quality planes exactly, the quality-flag histogram of all 4,194,304 pixels, and the count of finite sigma values.
 
 ### Registration
 
@@ -321,26 +321,26 @@ The retired six-image mosaic included September 13 and 20, 2014 exposures. Maxim
 errors on source pixels withheld from camera fitting were 0.00190 and 0.00161
 pixels. Their original [September 13](source/reference/n20140913-200612-geo.lbl)
 and [September 20](source/reference/n20140920-133916-geo.lbl) labels remain available.
-[Numerical results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-qualification.json).
+Numerical results.
 
 #### Earlier runs
 
-The [six-image report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/SURFACE-IMAGERY.md) recorded coverage
+The six-image report recorded coverage
 rising from 56.04% to 56.25%; the September pair supplied an estimated 1.76% of the
-displayed area. At application commit [87ddd9680f](https://github.com/layoutit/cssEarth/commit/87ddd9680f76082eedd9915e86bda3253311b0f3),
+displayed area. At that point,
 60 comet browser cases passed; the renderer suite had 367 passes and nine failures.
-[Browser results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-browser.json) · [Conformance](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-conformance.json) · [Suite results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-validation.json).
+Browser results · Conformance · Suite results.
 
 That four-comet run downloaded 16 new source files and installed 167 runtime files;
 sizes and hashes matched, while older inputs were copied.
-[Restoration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-source-restore.json) · [Installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-delivery.json).
-Its [matched comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/SURFACE-IMAGERY.md#matched-visual-comparisons)
+Restoration · Installation.
+Its matched comparisons
 include local-only screenshot links. Its Shadows test used a hidden input, so it
 did not prove a user could open Settings.
 
-The [initial photographic trial](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-OSIRIS-TRIAL.md) retains
-its original unnormalized camera comparison. [First integration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-OSIRIS-INTEGRATION.md),
-[four-image mosaic](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-OSIRIS-COVERAGE.md) and [original tests](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md)
+The initial photographic trial retains
+its original unnormalized camera comparison. First integration,
+four-image mosaic and original tests
 retain their earlier versions and results.
 
 </details>
@@ -365,7 +365,7 @@ feature sizes.
 
 Missing or unreliable surface correspondence remains gridded.
 
-See the [geology report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-GEOLOGY.md) for the projection checks and
+See the geology report for the projection checks and
 symbol rules.
 
 The Rosetta archive `RO-C-VIRTIS-5-67P-MAPS-V1.0` supplies albedo, spectral slope, 3.2 µm
@@ -382,7 +382,7 @@ A measured alternative confirms that later does not mean better coverage:
 the MTP006 albedo table has 166,159 valid cells (64.10%); MTP009 has 45,878
 (17.70%), adding only 662 cells while losing 120,943. These are grid-cell counts,
 not surface areas or a valid seasonal-change analysis. The current four maps
-remain selected. [Original-table comparison](evidence/virtis-albedo-comparison.json). The [VIRTIS report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-VIRTIS.md) contains the decoding and
+remain selected. [Original-table comparison](evidence/virtis-albedo-comparison.json). The VIRTIS report contains the decoding and
 registration method.
 
 </details>
