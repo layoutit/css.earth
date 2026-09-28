@@ -148,7 +148,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     if (radialVelocity.value !== 0) found.push([radialVelocity.url, await fetchPublication(archive, radialVelocity.url)]);
   }
   const body = astronomyRecord(spec, row, ids, order);
-  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none)]);
+  const [color, limb] = await Promise.all([chooseColor(spec, row, ids, archive, cmf), chooseLimb(id, spec.temperature.value, physical.logg, archive, spec.limb?.none ?? (Number.isFinite(physical.logg) ? undefined : 'no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited'))]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
@@ -164,7 +164,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const measurements = read(`${s}/measurements.json`), distance = place.parsecs, out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(measurements)) {
     out[key] = value;
-    if (key === 'effectiveTemperatureSource') { out.surfaceGravityLogg = physical.logg; out.surfaceGravitySource = physical.gravitySource; }
+    if (key === 'effectiveTemperatureSource' && Number.isFinite(physical.logg)) { out.surfaceGravityLogg = physical.logg; out.surfaceGravitySource = physical.gravitySource; }
   }
   out.angularDiameterSource = `Computed here from the record's radius and distance: 2 x ${Math.round(physical.radiusKm).toLocaleString('en-US')} km at ${distance.toFixed(2)} pc = ${measurements.angularDiameterMas} mas. No interferometric diameter of this star is used.`;
   out.shape = { kind: 'uniform-disc-sphere', qualification: `A sphere at the published radius, coloured from ${colorWords} (photometry/stellar-color.json); no image of the photosphere exists.` };
@@ -238,7 +238,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const names = [ids.hd && `HD ${ids.hd}`, ids.hr && `HR ${ids.hr}`, ids.hip && `HIP ${ids.hip}`].filter((name): name is string => Boolean(name) && name !== spec.name).join(', ');
   files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '',
     spec.text ? `${spec.text.introduction}${names ? ` It is also ${names}.` : ''} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name}${names ? ` (${names})` : ''} is ${distance.toFixed(1)} parsecs away. ${TODO}: what the star is and why it is here, from ${spec.paper.credit}.`, '',
-    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}. log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.`, '',
+    `**Star.** Placement: Gaia DR3 source ${row.sourceId}, ${place.readme}. ${physical.radiusText}. ${physical.massText}. Temperature ${spec.temperature.value.toLocaleString('en-US')} K from ${spec.temperature.source}.${Number.isFinite(physical.logg) ? ` log g ${physical.logg}${spec.gravity ? ` from ${spec.gravity.source}` : ' from the mass and radius'}.` : ' No surface gravity is known.'}`, '',
     `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],

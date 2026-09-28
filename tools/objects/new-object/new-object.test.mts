@@ -704,9 +704,10 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   assert.match(spec.color.reason, /E\(B-V\) = 0\.1 \+\/- 0\.005/u);
   assert.deepEqual(missing, ['temperature (a mean effective temperature, cited)', 'mass (cited, or "gaia-flame")']);
   assert.throws(() => parseStarSpec(spec), /hv-1005\.(mass|temperature)/u, 'refused until its mass and temperature are cited');
-  // No Cepheid here has a dynamical mass: "unmeasured" keeps GM 0 and needs the cited gravity log g then comes from.
+  // No Cepheid here has a dynamical mass: "unmeasured" keeps GM 0, and log g comes only from a cited gravity.
   const temperature = { value: 5500, source: 'a paper', url: star.paper.url }, gravity = { value: 1.2, source: 'a paper', url: star.paper.url };
-  assert.throws(() => parseStarSpec({ ...spec, temperature, mass: 'unmeasured' }), /hv-1005: a star with an unmeasured mass needs its cited gravity/u);
+  const bare = parseStarSpec({ ...spec, temperature, mass: 'unmeasured', gaia: '123456789' });
+  assert.ok(Number.isNaN((await import('./generate.mts')).physicalValues(bare, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false }).logg), 'no mass and no gravity: no log g, so no limb law');
   const measured = parseStarSpec({ ...spec, temperature, gravity, mass: 'unmeasured', gaia: '123456789' });
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
