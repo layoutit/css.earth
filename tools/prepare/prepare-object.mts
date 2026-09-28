@@ -63,7 +63,8 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   // view the world files read.
   { name: 'billboard', purpose: 'photograph the arrival billboard from the running site, then refresh the catalogue with it', scope: 'ids', commands: async ids => {
     const origin = billboardOrigin();
-    if (!await fetch(origin, { signal: AbortSignal.timeout(5000) }).then(response => response.ok, () => false)) throw new Error(`No site answers at ${origin}: start it with pnpm dev (or set CSSEARTH_BILLBOARD_ORIGIN), then resume from the billboard step.`);
+    // A dev server's first request compiles the page: it took over 5 s right after a restart (2026-09-27), so wait up to a minute.
+    if (!await fetch(origin, { signal: AbortSignal.timeout(60_000) }).then(response => response.ok, () => false)) throw new Error(`No site answers at ${origin}: start it with pnpm dev (or set CSSEARTH_BILLBOARD_ORIGIN), then resume from the billboard step.`);
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('tools/prepare/cli/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },

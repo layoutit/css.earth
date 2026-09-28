@@ -279,7 +279,9 @@ export async function reconcileSources(files: Map<string, string | Buffer>, root
   for (const [path, value] of files) {
     if (!path.startsWith('src/sources/')) continue;
     const record = JSON.parse(String(value)) as SourceIdentity, existing = key(record).map(identity => owners.get(identity)).find(owner => owner && owner !== record.id);
-    if (existing) { renames.set(record.id, existing); files.delete(path); }
+    if (existing) { renames.set(record.id, existing); files.delete(path); continue; }
+    // Two new records for one work in the same package (its paper by DOI, its distance by arXiv): the first one written is kept.
+    for (const identity of key(record)) if (!owners.has(identity)) owners.set(identity, record.id);
   }
   if (!renames.size) return renames;
   for (const [path, value] of files) {

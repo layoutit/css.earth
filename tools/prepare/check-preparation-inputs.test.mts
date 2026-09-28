@@ -71,5 +71,8 @@ test('a bake refuses to start while other objects\' prepared files are missing o
     await mkdir(join(root, 'src/objects/gamma'), { recursive: true });
     assert.deepEqual(await missingPreparedFiles([], { projectRoot: root }), ['alpha/prepared/lenses.json', 'beta/prepared/controls.json'], 'a wrong size and a missing file; an object with no inventory has nothing to miss');
     assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/lenses.json'], 'the bake writes the files of the objects it bakes');
+    await put(join(root, 'src/objects/sun/inventory.json'), inventory({ 'world-context.json': '{"old":1}', 'runtime.json': '{}' }));
+    await put(join(root, 'src/objects/sun/prepared/world-context.json'), '{"rebuilt":true}');
+    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/lenses.json', 'sun/prepared/runtime.json'], 'the Sun\'s world files are the bake\'s own output; its other files are not');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
