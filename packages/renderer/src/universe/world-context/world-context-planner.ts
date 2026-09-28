@@ -520,11 +520,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
       // The system the camera is in is named before the field behind it: a star thousands of parsecs beyond the Sun must not
-      // take the caption of a body orbiting it. Its major bodies come first, then the notable bodies beyond it (a star named
-      // there is one with more to find), then its minor bodies, then the rest of the field. A hovered or selected body keeps
-      // its place in the first pass.
+      // take the caption of a body orbiting it. Its planets, dwarf planets and moons come first, then the notable bodies
+      // beyond it (a star named there is one with more to find), then the comets and asteroids orbiting its star, then the
+      // rest of the field. A hovered or selected body keeps its place in the first pass.
       const ownSystem = (candidate: typeof candidates[number]) => candidate.pinned > 0 || systemFade.inShownSystem(candidate.projected.entry.index);
-      const major = (candidate: typeof candidates[number]) => candidate.pinned > 0 || (candidate.tier ?? 0) >= 3;
+      const moon = (candidate: typeof candidates[number]) => { const parent = candidate.projected.entry.parent; return parent !== null && !systemFade.isSystemStar(parent.id); };
+      const major = (candidate: typeof candidates[number]) => candidate.pinned > 0 || (ownSystem(candidate) ? moon(candidate) || (candidate.tier ?? 0) >= 2 : (candidate.tier ?? 0) >= 3);
       const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
         (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
       const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget))];
