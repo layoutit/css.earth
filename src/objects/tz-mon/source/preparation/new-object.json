@@ -3,6 +3,7 @@
   "name": "TZ Mon",
   "system": "TZ Mon system",
   "description": "A Cepheid in the Milky Way that pulsates every 7.43 days; its mean radius is 59.2 solar radii.",
+  "order": 1927,
   "target": "TZ Mon",
   "gaia": "3112475495616980992",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1927
+  ]
 }

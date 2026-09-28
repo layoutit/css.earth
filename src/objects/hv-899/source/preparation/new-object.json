@@ -3,6 +3,7 @@
   "name": "HV 899",
   "system": "HV 899 system",
   "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 31.05 days; its mean radius is 128 solar radii.",
+  "order": 1974,
   "gaia": "4661266369343899904",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -50,6 +51,5 @@
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
-  ],
-  "order": 1974
+  ]
 }

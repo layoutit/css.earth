@@ -3,6 +3,7 @@
   "name": "RS Ori",
   "system": "RS Ori system",
   "description": "A Cepheid in the Milky Way that pulsates every 7.57 days; its mean radius is 50.5 solar radii.",
+  "order": 2006,
   "target": "RS Ori",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -48,6 +49,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 2006
+  ]
 }

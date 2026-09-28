@@ -7,6 +7,42 @@
         "restore",
         "refresh"
       ],
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/529/A75/table-af",
+        "-out.max": "500",
+        "Teff": "5250..5500",
+        "logg": "1..1.5",
+        "Z": "=0",
+        "xi": "=2",
+        "Filt": "V",
+        "Met": "L",
+        "Mod": "A",
+        "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
       "path": "photometry/gaia-dr3-source.csv",
       "url": "https://gea.esac.esa.int/tap-server/tap/sync",
       "form": {
@@ -16,6 +52,22 @@
         "QUERY": "SELECT s.source_id, s.ref_epoch, s.ra, s.dec, s.parallax, s.parallax_error, s.pmra, s.pmdec, s.radial_velocity, s.radial_velocity_error, s.ruwe, s.phot_g_mean_mag, s.bp_rp, s.has_xp_sampled, a.mass_flame, a.mass_flame_lower, a.mass_flame_upper, a.radius_flame, a.radius_flame_lower, a.radius_flame_upper FROM gaiadr3.gaia_source AS s LEFT JOIN gaiadr3.astrophysical_parameters AS a ON a.source_id = s.source_id WHERE s.source_id = 3368698813404804352"
       },
       "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-vari-cepheid.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, pf, pf_error, fund_freq1, reference_time_g, zp_mag_g, num_harmonics_for_p1_g, fund_freq1_harmonic_ampl_g, fund_freq1_harmonic_phase_g, epoch_g, epoch_g_error, peak_to_peak_g, r21_g, phi21_g, mode_best_classification, type_best_classification FROM gaiadr3.vari_cepheid WHERE source_id = 3368698813404804352"
+      },
+      "requiredPrefix": "source_id,pf,"
     }
   ]
 }

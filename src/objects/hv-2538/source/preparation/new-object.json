@@ -3,6 +3,7 @@
   "name": "HV 2538",
   "system": "HV 2538 system",
   "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 13.87 days; its mean radius is 79.8 solar radii.",
+  "order": 1963,
   "gaia": "4658521644700967040",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -50,6 +51,5 @@
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
-  ],
-  "order": 1963
+  ]
 }

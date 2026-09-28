@@ -3,6 +3,7 @@
   "name": "UZ Sct",
   "system": "UZ Sct system",
   "description": "A Cepheid in the Milky Way that pulsates every 14.75 days; its mean radius is 85.6 solar radii.",
+  "order": 1941,
   "target": "UZ Sct",
   "gaia": "4104869264724284544",
   "paper": {
@@ -49,6 +50,5 @@
   "notes": [
     "The star pulsates; it is drawn at its mean radius.",
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
-  ],
-  "order": 1941
+  ]
 }

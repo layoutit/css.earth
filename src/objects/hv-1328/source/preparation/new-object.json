@@ -3,6 +3,7 @@
   "name": "HV 1328",
   "system": "HV 1328 system",
   "description": "A Cepheid in the Small Magellanic Cloud that pulsates every 15.84 days; its mean radius is 77.2 solar radii.",
+  "order": 1980,
   "gaia": "4688810475608636800",
   "paper": {
     "url": "https://arxiv.org/abs/1212.5478",
@@ -50,6 +51,5 @@
     "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
     "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
     "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
-  ],
-  "order": 1980
+  ]
 }

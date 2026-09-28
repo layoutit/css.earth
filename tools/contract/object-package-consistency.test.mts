@@ -121,8 +121,10 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
       if (isRecord(limb) && isRecord(limb.grid) && limb.path === 'photometry/claret-2011-v-quadratic.tsv') {
         const measurements = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/measurements.json'), 'utf8')) as unknown);
         assert.equal(limb.grid.teffK, readStarTemperature(measurements).kelvin, `${id}: the limb-darkening grid is read at the cited temperature`);
-        assert.equal(limb.grid.logg, requireFiniteNumber(measurements.surfaceGravityLogg), `${id}: the limb-darkening grid is read at the recorded gravity`);
-        requireString(measurements.surfaceGravitySource);
+        // The star's gravity, or, when none is measured or published, the display gravity inside its class's range (new-object/gravity.mts).
+        const display = measurements.surfaceGravityLogg === undefined;
+        assert.equal(limb.grid.logg, requireFiniteNumber(display ? measurements.limbDisplayGravityLogg : measurements.surfaceGravityLogg), `${id}: the limb-darkening grid is read at the recorded gravity`);
+        requireString(display ? measurements.limbDisplayGravitySource : measurements.surfaceGravitySource);
       }
     } else {
       const temperature = readStarTemperature(JSON.parse(await readFile(resolve(directory, 'source/measurements.json'), 'utf8')) as unknown);

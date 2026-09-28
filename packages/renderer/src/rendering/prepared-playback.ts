@@ -1,21 +1,23 @@
 export interface PreparedPlaybackSelection { readonly speed?: number; readonly [key: string]: unknown; }
 export type PreparedAnimationMode = "motion" | "pose";
 export type PreparedAnimation = Pick<Animation, "play" | "pause" | "cancel" | "playbackRate" | "currentTime" | "playState">;
-export interface PreparedAnimationOptions { mode?: PreparedAnimationMode; rate?: number; enabledWhen?: Readonly<Record<string, unknown>>; initialTime?: number; }
-interface PlaybackEntry { animation: PreparedAnimation; mode: PreparedAnimationMode; rate: number; enabledWhen: Readonly<Record<string, unknown>>; running: boolean | null; appliedRate: number | null; }
+/** `lightCurve` marks a pulsating star's opacity loop: it plays on the Light curves permission, not illustrative rotation's,
+ * at its prepared rate, and moves no texel, so texture placements may hold while it plays. */
+export interface PreparedAnimationOptions { mode?: PreparedAnimationMode; rate?: number; enabledWhen?: Readonly<Record<string, unknown>>; initialTime?: number; lightCurve?: boolean; }
+interface PlaybackEntry { animation: PreparedAnimation; mode: PreparedAnimationMode; rate: number; enabledWhen: Readonly<Record<string, unknown>>; lightCurve: boolean; running: boolean | null; appliedRate: number | null; }
 
 // The router grants permission. This owner applies it to retained native
 // animations; it creates no timer, frame loop, visibility or media observer.
 export function createPreparedPlayback() {
   const handles = new Map<PreparedAnimation, PlaybackEntry>();
-  let allowed = false, ready = false, destroyed = false, selection: PreparedPlaybackSelection = Object.freeze({ speed: 1 });
+  let allowed = false, lightCurves = false, ready = false, destroyed = false, selection: PreparedPlaybackSelection = Object.freeze({ speed: 1 });
   const enabled = (rules: Readonly<Record<string, unknown>>) => Object.entries(rules).every(([name, expected]) =>
     Array.isArray(expected) ? expected.includes(selection[name]) : Object.is(selection[name], expected));
   function apply(entry: PlaybackEntry) {
-    const { animation, mode, rate, enabledWhen } = entry;
+    const { animation, mode, rate, enabledWhen, lightCurve } = entry;
     const speed = speedOf(selection);
-    const nextRate = mode === "pose" ? rate : rate * speed;
-    const running = mode === "motion" && ready && allowed && speed !== 0 && enabled(enabledWhen);
+    const nextRate = mode === "pose" || lightCurve ? rate : rate * speed;
+    const running = mode === "motion" && ready && enabled(enabledWhen) && (lightCurve ? lightCurves : allowed && speed !== 0);
     if (entry.appliedRate !== nextRate) {
       animation.playbackRate = nextRate;
       entry.appliedRate = nextRate;
@@ -34,16 +36,16 @@ export function createPreparedPlayback() {
     if (errors.length) throw new AggregateError(errors, "Prepared native playback publication failed.");
   }
   return Object.freeze({
-    register(animation: PreparedAnimation, { mode = "motion", rate = 1, enabledWhen = {}, initialTime }: PreparedAnimationOptions = {}) {
+    register(animation: PreparedAnimation, { mode = "motion", rate = 1, enabledWhen = {}, initialTime, lightCurve = false }: PreparedAnimationOptions = {}) {
       if (!animation || (["play", "pause", "cancel"] as const).some(name => typeof animation[name] !== "function") ||
           !["motion", "pose"].includes(mode) || !Number.isFinite(rate) ||
-          (initialTime !== undefined && !Number.isFinite(initialTime)) ||
+          (initialTime !== undefined && !Number.isFinite(initialTime)) || typeof lightCurve !== "boolean" ||
           !enabledWhen || typeof enabledWhen !== "object" || Array.isArray(enabledWhen)) {
         throw new TypeError("Prepared playback requires a native animation and valid prepared role.");
       }
       if (destroyed) { animation.cancel(); return animation; }
       if (handles.has(animation)) return animation;
-      const entry: PlaybackEntry = { animation, mode, rate, enabledWhen: Object.freeze({ ...enabledWhen }), running: null, appliedRate: null };
+      const entry: PlaybackEntry = { animation, mode, rate, enabledWhen: Object.freeze({ ...enabledWhen }), lightCurve, running: null, appliedRate: null };
       handles.set(animation, entry);
       // Pose-addressed WAAPI is never reset as if it were rotation playback.
       if (initialTime !== undefined) animation.currentTime = initialTime;
@@ -60,9 +62,9 @@ export function createPreparedPlayback() {
       if (destroyed) return;
       for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = 0;
     },
-    /** Whether every motion animation is paused at its prepared start, the pose preparation measured. */
+    /** Whether every motion animation but a light curve is paused at its prepared start, the pose preparation measured. */
     motionAtRest() {
-      return [...handles.values()].every(({ animation, mode, running }) => mode !== "motion" || !running && Number(animation.currentTime ?? 0) === 0);
+      return [...handles.values()].every(({ animation, mode, lightCurve, running }) => mode !== "motion" || lightCurve || !running && Number(animation.currentTime ?? 0) === 0);
     },
     captureMotion() {
       return [...handles.values()].filter(entry => entry.mode === "motion")
@@ -81,6 +83,7 @@ export function createPreparedPlayback() {
       for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = times[index++];
     },
     setAllowed(value: boolean) { if (destroyed) return; allowed = value === true; applyAll(); },
+    setLightCurves(value: boolean) { if (destroyed) return; lightCurves = value === true; applyAll(); },
     setReady(value = true) { if (destroyed) return; ready = value === true; applyAll(); },
     setSelection(next: PreparedPlaybackSelection) {
       if (destroyed) return;
@@ -89,7 +92,7 @@ export function createPreparedPlayback() {
       applyAll();
     },
     stats() {
-      return Object.freeze({ allowed, ready, destroyed, speed: speedOf(selection), registeredCount: handles.size,
+      return Object.freeze({ allowed, lightCurves, ready, destroyed, speed: speedOf(selection), registeredCount: handles.size,
         animations: Object.freeze([...handles.values()].map(({ animation, mode, running, appliedRate }) => Object.freeze({
           mode, running, rate: appliedRate, currentTime: animation.currentTime, playState: animation.playState,
         }))) });

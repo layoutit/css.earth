@@ -38,15 +38,17 @@ test("only a keyboard-sized covering takes room from the sheet", () => {
 
 test("automatic playback has one complete readiness, intent and environment policy", () => {
   for (const sceneState of ["loading", "ready", "error", "destroyed"] as const) {
-    for (const motionRequested of [false, true]) {
+    for (const motionRequested of [false, true]) for (const lightCurvesRequested of [false, true]) {
       for (const documentHidden of [false, true]) {
         for (const reducedMotion of [false, true]) {
           const reason = sceneState !== "ready" ? "unavailable"
             : !motionRequested ? "motion-off" : documentHidden ? "hidden"
               : reducedMotion ? "reduced-motion" : "allowed";
+          // Light curves share every gate but the rotation setting, and have their own.
+          const lightCurves = sceneState === "ready" && lightCurvesRequested && !documentHidden && !reducedMotion;
           assert.deepEqual(automaticPlaybackPolicy({
-            sceneState, motionRequested, documentHidden, reducedMotion,
-          }), { allowed: reason === "allowed", reason });
+            sceneState, motionRequested, lightCurvesRequested, documentHidden, reducedMotion,
+          }), { allowed: reason === "allowed", reason, lightCurves });
         }
       }
     }
