@@ -34,7 +34,7 @@ END`;
 test('the Moon GCP recipe names the 18 strips once and the noon window on bin edges', async () => {
   const recipe = parseGcpRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
   assert.equal(recipe.tables.length, 18);
-  assert.deepEqual(recipe.reductions.map(r => r.kind === 'local-time' ? [r.id, r.fromHour, r.toHour, r.minimumBins] : [r.id]), [['noon', 11.75, 12.25, 1], ['maximum']]);
+  assert.deepEqual(recipe.reductions.map(r => r.kind === 'local-time' ? [r.id, r.fromHour, r.toHour, r.minimumBins] : [r.id]), [['noon', 11.5, 12.5, 1], ['maximum']]);
   const raw = JSON.parse(await readFile(recipePath, 'utf8'));
   assert.throws(() => parseGcpRecipe({ ...raw, tables: raw.tables.slice(1) }), /18 ten-degree strips/);
   assert.throws(() => parseGcpRecipe({ ...raw, reductions: [{ id: 'noon', kind: 'local-time', fromHour: 11.8, toHour: 12.2, output: 'x.tif' }] }), /bin edges/);
