@@ -1,12 +1,15 @@
-import { retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNativePhotographicAtlas } from '@cssearth/bake/objects/layers/terrestrial';
+/** `@cssearth/bake/refresh-terrain-photographs` (Node only): refresh selected native cylindrical photographic lenses,
+ * staged then applied. `packages/bake/cli/refresh-terrain-photographs.mts <object-id> <lensId>... [--apply-staged]` is
+ * its command. The generated solar geometry is written after the packages build, so the host passes it in
+ * (`SolarGeometry`). */
+import { retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNativePhotographicAtlas } from '../objects/layers/terrestrial/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
+import type { SolarGeometry } from '../objects/scene/index.ts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
+import { prepareObjectProvenance } from '../objects/provenance/index.ts';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));
 
 
@@ -86,10 +89,10 @@ async function loadReceipt(context:Awaited<ReturnType<typeof refreshContext>>) {
   stableAssets(context,results);return results;
 }
 
-export async function refreshTerrainPhotographs(id:string,ids:readonly string[]) {
+export async function refreshTerrainPhotographs(id:string,ids:readonly string[],solarGeometry:SolarGeometry) {
   sharp.concurrency(1);sharp.cache(false);
   const context=await refreshContext(id,ids);await mkdir(context.stage,{recursive:true});
-  const sunDirection=requireBodyFixedSunDirection(id),results=new Map<string,Awaited<ReturnType<typeof prepareNativePhotographicAtlas>>>();
+  const sunDirection=solarGeometry.requireBodyFixedSunDirection(id),results=new Map<string,Awaited<ReturnType<typeof prepareNativePhotographicAtlas>>>();
   for(const {lensId,observation,surface,input} of context.selected) {
     const result=await prepareNativePhotographicAtlas({radial:context.radial,sourceDirectory:context.sourceDirectory,source:input,validity:observation.validity,
       sampling:parseNativePhotographicSampling(observation.nativePhotographicSampling),publicDirectory:context.stage,
@@ -131,9 +134,4 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   await prepareObjectProvenance({objectDirectory:context.objectDirectory,publicDirectory:context.publicDirectory,outputDirectory:context.outputDirectory,basis:'recovered'});
   if(sha256(await readFile(resolve(context.outputDirectory,'scene.json')))!==sha256(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
   return results;
-}
-
-if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
-  const [id,...args]=process.argv.slice(2);if(args.includes('--apply-staged'))await applyStagedTerrainPhotographs(id,args.filter(arg=>arg!=='--apply-staged'));
-  else await refreshTerrainPhotographs(id,args);
 }
