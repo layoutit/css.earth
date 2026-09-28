@@ -104,7 +104,10 @@ releases them. Same-scene overview navigation keeps its existing selection behav
 
 A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
-billboard handoff. An adopted server-rendered tree is already connected and keeps its existing ownership.
+billboard handoff. Shared scene CSS gives each mesh parent an identity 3D translation before connection.
+This preserves its authored transform and makes its structural layer explicit while prepared leaves activate;
+otherwise WebKit can omit the parent layer and flatten the arriving faces. An adopted server-rendered tree
+is already connected and keeps its existing ownership.
 
 Initial mounts and fly-to preparation select texture levels from the destination camera. There is no forced 512px
 startup bank or first-input refinement gate. Saved reloads prepare the shared world before mounting detail, even
@@ -113,7 +116,9 @@ when their camera cannot use the default arrival billboard; world attachment mus
 World bodies use their prepared arrival billboard directly, with its baked body radius inside the image. There is no
 world marker atlas or separate context photograph swap. Unresolved bodies use colour dots without fetching images;
 menu and search icons remain UI assets. A mounting scene keeps its camera private until its frame presenter is enabled,
-so resource refreshes cannot expose it before activation.
+so resource refreshes cannot expose it before activation. The selected host keeps the same billboard/detail
+opacity split when a flight ends on its system card. Overview controls annotations and orbit context; it does
+not restore a second image over the mounted host.
 
 Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.
 

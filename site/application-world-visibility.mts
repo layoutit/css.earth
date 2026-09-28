@@ -6,6 +6,7 @@ import { discoveryVisibility } from '@cssearth/objects';
 import { labelImportance } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { PREPARED_WORLD_PRESENTATION as prepared } from './prepared-world-presentation.mts';
+import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { ApplicationWorldLayer } from './application-world-types.mts';
 
@@ -44,7 +45,7 @@ export const worldVisibilityPolicy = {
 };
 
 /** Visibility of retained world bodies, labels and highlights. */
-export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, lifetime: SceneLifetime) {
+export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility'>, lifetime: SceneLifetime) {
   let illustrations = false;
   let highlighted: string | null = null;
   let openSystem: ReadonlySet<string> = new Set();
@@ -54,7 +55,7 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, l
     const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures, systemMembers });
     layer.setBodyVisibility({
       bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
-      labelHidden: [...visibility.hiddenLabels.filter(id => !openSystem.has(id)), ...plainDotIds],
+      labelHidden: [...visibility.hiddenLabels, ...plainDotIds].filter(id => !openSystem.has(id)),
       highlighted: visibility.highlightedBodies,
       // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
       indicatorHidden: ordinaryAsteroidIds,
@@ -67,8 +68,10 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, l
   return {
     selectObject(id: string) {
       if (lifetime.disposed) return;
-      // Opening any member of a placed star's system reveals that whole system.
-      const system = placedSystemOf(id);
+      // A selected host or moon reveals its satellite family even when illustration models
+      // are disabled. Other stars retain their complete planetary system visibility.
+      const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
+      const system = family ? new Set([family.hostId, ...family.memberIds]) : placedSystemOf(id);
       if (system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) {
         openSystem = system;
         update();
