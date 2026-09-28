@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gaia-dr3-3619537376072412672",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gaia DR3 3619537376072412672",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 21527057.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gaia-dr3-3619537376072412672-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gaia DR3 3619537376072412672",
+      "classification": "star",
+      "color": "#ffe2c7",
+      "distanceAu": 2068769047,
+      "description": "A star about 10,000 parsecs away, 31 times the Sun's width, measured by Gaia.",
+      "systemName": "Gaia DR3 3619537376072412672 system",
+      "order": 2900,
+      "context": {
+        "order": 2897
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -267683208540170220000,
+        -150455414522120470000,
+        -38585884277035920000
+      ],
+      "presentationToReference": [
+        -0.8649354958120912,
+        0.10868656980353474,
+        -0.4899732825661349,
+        -0.48615013719763067,
+        0.06108896570870222,
+        0.8717374503664311,
+        -0.1246781143064694,
+        -0.9921972423933572,
+        2.402237591987904e-8
+      ],
+      "orbitUpReference": [
+        -0.10868656980353474,
+        -0.06108896570870222,
+        0.9921972423933572
+      ],
+      "metersPerUnit": 69442121.29032259,
+      "bodyRadiusM": 21527057600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

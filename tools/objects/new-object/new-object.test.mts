@@ -715,8 +715,8 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess']);
-  await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess/u);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia']);
+  await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 
 test('a K2 giant is drafted at its asteroseismic distance only when both pipelines agree on its radius', async () => {
@@ -755,6 +755,28 @@ test('a K2 star APOGEE did not observe is read from the K2 + GALAH table, and a 
   assert.deepEqual([star.id, star.name, star.gaia, star.radius.value], ['tic-261154892', 'TIC 261154892', '4623618644463488128', 10.9229]);
   assert.match(star.description, /^A red giant observed by TESS, 10\.9 solar radii/u);
   assert.doesNotThrow(() => parseStarSpec(star), 'a TESS draft is a whole spec');
+});
+
+test('a star anywhere on the sky drafts from Gaia DR3 alone when the archive flags vouch for its FLAME chain', async () => {
+  const { parseGaiaDraftRow, draftFromGaia } = await import('./gaia.mts');
+  // The row as the Gaia Archive serves it, 2026-09-28.
+  const header = 'source_id,parallax,parallax_error,ruwe,flags_flame,radius_flame,mass_flame,teff_gspphot,teff_gspphot_lower,teff_gspphot_upper,ag_gspphot';
+  const row = '6711869948052992,0.11950849172011525,0.015932519,1.145126,10,15.559747,3.3650587,6087.612,6071.958,6095.802,0.8901';
+  const star = draftFromGaia(parseGaiaDraftRow(`${header}\n${row}`, '6711869948052992'));
+  assert.deepEqual([star.id, star.gaia, star.radius, star.mass, star.temperature.value, star.temperature.uncertainty], ['gaia-dr3-6711869948052992', '6711869948052992', 'gaia-flame', 'gaia-flame', 6088, 11.9]);
+  assert.match(star.text.card, /^A star about 8,400 parsecs away, 16 times the Sun's width/u);
+  assert.doesNotThrow(() => parseStarSpec(star), 'a Gaia draft is a whole spec');
+  // FLAME from the GSP-Phot distance instead of the parallax (second digit 1), or no mass (first digit 2), is refused.
+  assert.throws(() => parseGaiaDraftRow(`${header}\n${row.replace(',10,', ',11,')}`, '6711869948052992'), /flags_flame is 11; only 00 and 10/u);
+  assert.throws(() => parseGaiaDraftRow(`${header}\n${row.replace(',10,', ',20,')}`, '6711869948052992'), /flags_flame is 20/u);
+  assert.throws(() => parseGaiaDraftRow(`${header}\n${row.replace(',1.145126,', ',1.52,')}`, '6711869948052992'), /RUWE 1.52 is not below 1.4/u);
+});
+
+test('a Gaia source SIMBAD never catalogued is identified by that source; a target without one is refused', async () => {
+  const { identify } = await import('./archives.mts');
+  const unknown = async () => undefined;
+  assert.deepEqual(await identify(unknown, 'Gaia DR3 6881624509796808576', '6881624509796808576', 'gaia-dr3-6881624509796808576'), { main: 'Gaia DR3 6881624509796808576', gaia: '6881624509796808576' });
+  await assert.rejects(identify(unknown, 'HV 9999', undefined, 'hv-9999'), /hv-9999: SIMBAD does not know HV 9999\./u);
 });
 
 test('a binary whose primary Gaia sees eclipsing on another period is refused; long orbits Gaia cannot measure are not checked', async () => {

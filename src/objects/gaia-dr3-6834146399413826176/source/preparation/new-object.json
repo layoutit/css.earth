@@ -1,0 +1,40 @@
+{
+  "id": "gaia-dr3-6834146399413826176",
+  "name": "Gaia DR3 6834146399413826176",
+  "system": "Gaia DR3 6834146399413826176 system",
+  "description": "A star 24.3 solar radii and 3.31 solar masses, about 8,800 parsecs away, measured by Gaia.",
+  "target": "Gaia DR3 6834146399413826176",
+  "gaia": "6834146399413826176",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4489,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6834146399413826176: teff_gspphot 4489.124 K (16th-84th percentiles 4386.1274-4531.3994), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 72.6
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.17 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the colour routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 8,800 parsecs away, 24 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 24.3 solar radii and 3.31 solar masses (FLAME) and 4,489 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6834146399413826176: radius_flame, mass_flame, teff_gspphot"
+  },
+  "notes": [],
+  "order": 2964
+}

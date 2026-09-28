@@ -20,6 +20,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   k2: { names: 'EPIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromK2(names, archive) },
   // A giant near the ecliptic poles, from the same paper's TESS + APOGEE table (k2.mts).
   tess: { names: 'TIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromTess(names, archive) },
+  // A star anywhere on the sky from Gaia DR3 alone: FLAME radius and mass, GSP-Phot temperature, its parallax (gaia.mts).
+  gaia: { names: 'SOURCE_ID', draft: async (names, { archive }) => (await import('./gaia.mts')).draftsFromGaia(names, archive) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */

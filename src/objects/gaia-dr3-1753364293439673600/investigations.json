@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gaia-dr3-1753364293439673600",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 1753364293439673600: position at J2016.0. Distance: Gaia DR3 parallax 0.0977 +/- 0.0137 mas (same row, RUWE 1.01): 10238.83 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -2.222, -1.742 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 24.623 (22.577 to 26.378) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Mass 3.783 (3.575 to 3.891) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 5327 +/- 32 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1753364293439673600: teff_gspphot 5326.625 K (16th-84th percentiles 5285.193-5349.1157), the temperature FLAME used.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243462"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,327 K, because gSP-Phot fits an extinction A_G = 1.12 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the colour routes do not remove extinction; GSP-Phot measured its temperature, through the CIE 1931 2-degree observer: #ffebdb. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243462"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,327 K and log g 2.23 (u1 0.538, u2 0.207): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}
