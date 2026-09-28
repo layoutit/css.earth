@@ -85,7 +85,7 @@ const xml = (value:unknown) => String(value).replaceAll('&', '&amp;').replaceAll
 async function main() {
   const args = process.argv.slice(2);
   if (args.some(a => a !== '--download' && a !== '--all-clear-mdm' && !a.startsWith('--output='))) {
-    throw new Error('Usage: node tools/objects/comet-1p/inspect-giotto.mts [--download] [--all-clear-mdm] [--output=directory]');
+    throw new Error('Usage: node packages/bake/authoring/comet-1p/inspect-giotto.mts [--download] [--all-clear-mdm] [--output=directory]');
   }
   const output = resolve(args.find(a => a.startsWith('--output='))?.slice(9) ?? resolve(root, 'output/comet-intake/halley-giotto/repro'));
   const input = resolve(output, 'source');

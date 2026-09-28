@@ -5,7 +5,7 @@
  * maximises the correlation is our residual against the controlled placement, and its mean over the frames is the datum
  * shift the recipe applies to every limb-placed frame.
  *
- *   node tools/objects/voyager-iss/oracle.mts <object> --frames <directory of *_GEOMED.IMG/.LBL> [--write]
+ *   node packages/bake/authoring/voyager-iss/oracle.mts <object> --frames <directory of *_GEOMED.IMG/.LBL> [--write]
  *
  * Two references, chosen by the recipe's `oracle.reference`:
  * - `controlled-orthophotos` (the default): the controlled release's own colour frames, which the recipe lists as

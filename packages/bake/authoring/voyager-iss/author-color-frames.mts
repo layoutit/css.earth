@@ -2,7 +2,7 @@
  * Author a body's Voyager colour frames as the per-frame products the observed-colour lens reads: an equirectangular float32
  * GeoTIFF of calibrated I/F and a geometry label (exposure epoch and body rotation) for each frame.
  *
- *   node tools/objects/voyager-iss/author-color-frames.mts <object> [--write]
+ *   node packages/bake/authoring/voyager-iss/author-color-frames.mts <object> [--write]
  *
  * Two kinds of frame, named by the recipe `source/preparation/voyager-color-frames.json`:
  * - `geomed`: a PDS Ring-Moon Systems Node GEOMED frame placed here by its recorded pointing and a limb fit (place.mts). A frame
