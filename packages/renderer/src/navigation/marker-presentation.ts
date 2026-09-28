@@ -90,19 +90,6 @@ export function markerStyle(marker: PreparedNavigationMarker, options: { color?:
   };
 }
 
-// Resolved context uses its prepared native-density image. Layout size is still
-// the same physical proxy basis used by the world camera; DPR never selects it.
-// Most markers are drawn a few pixels wide: they show the prepared @2x tile,
-// two texels per CSS pixel, and switch to the large context image only when
-// drawn wider than that tile can resolve. Neither image is resized at runtime.
-export function contextMarkerSprite(marker: PreparedNavigationMarker) {
-  const tile = { url: marker.url2x, index: marker.index, count: marker.count, size: marker.presentation.size };
-  if (!marker.context) return tile;
-  const detail = { url: marker.context.url, index: 0, count: 1 };
-  if (!(marker.url2xPixels && marker.url2xPixels > 0)) return { ...detail, size: marker.presentation.size };
-  return { ...tile, detail: { ...detail, fromDiameterPixels: marker.url2xPixels / 2 } };
-}
-
 // Existing scene annotation weights, supplied once from the object registry.
 export function contextAnnotationOpacity(classification: string): { line: number; label: number } {
   return {

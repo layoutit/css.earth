@@ -4,6 +4,8 @@
 // From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: the atlas draws it there,
 // and its megabytes of lenses are fetched only once it is large on screen. Inputs are the restored prepared
 // lens payloads; the output records each payload's pinned sha256 so a stale atlas cannot pass for a fresh one.
+// An image-layer galaxy (Andromeda, Triangulum) gets the same one view: its source-facing slices, seen from the Sun and
+// composited back to front as the page composites them, so the galaxy shows from afar before its slices load.
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -33,6 +35,80 @@ async function writeIfChanged(path: string, bytes: Uint8Array | string): Promise
   await writeFile(path, next);
 }
 
+/** The prepared payload a descriptor pins, checked against the object's inventory. */
+async function pinnedPayload(id: string, descriptor: Record<string, unknown>, objects: string) {
+  const pin = requireRecord(descriptor.prepared, `${id} prepared pin`);
+  const url = requireString(pin.url, `${id} prepared url`), filename = url.replace(/^prepared\//u, '');
+  const entry = (await readInventory(id, resolve(objects, id)))?.assets.find(asset => asset.location === 'prepared' && asset.filename === filename);
+  if (!entry) throw new TypeError(`${id}: src/objects/${id}/inventory.json lists no prepared ${filename}.`);
+  const bytes = await readFile(resolve(objects, id, url));
+  if (sha256(bytes) !== entry.sha256) throw new TypeError(`${id}: ${url} is ${sha256(bytes)}, but its inventory says ${entry.sha256}; run pnpm setup:prepared.`);
+  return { sha256: entry.sha256, data: requireRecord(JSON.parse(bytes.toString('utf8')), `${id} prepared payload`) };
+}
+
+const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+const unit = (a: readonly number[]): Vector => { const length = Math.hypot(a[0]!, a[1]!, a[2]!); return [a[0]! / length, a[1]! / length, a[2]! / length]; };
+const minus = (a: readonly number[], b: readonly number[]): Vector => [a[0]! - b[0]!, a[1]! - b[1]!, a[2]! - b[2]!];
+const along = (a: readonly number[], b: readonly number[], scale: number): Vector => [a[0]! - b[0]! * scale, a[1]! - b[1]! * scale, a[2]! - b[2]! * scale];
+
+/** An image-layer galaxy seen from the Sun: its source-facing (z) slices projected along the line of sight onto a plane
+ * through the frame origin, each resized to the size it covers there, then stacked far to near with the straight-alpha
+ * "over" the page applies to them, in sRGB as the page does. */
+async function imageLayerBillboard(id: string, descriptor: Record<string, unknown>, objects: string) {
+  const { sha256: payloadSha256, data } = await pinnedPayload(id, descriptor, objects);
+  const frame = requireRecord(data.frame, `${id} frame`) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
+  if (JSON.stringify(frame) !== JSON.stringify(requireRecord(descriptor.properties).frame)) throw new TypeError(`${id}: image-layer frame differs from the descriptor frame.`);
+  const toViewer = unit(presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, frame).positionUnits);
+  const bank = requireArray(data.banks, `${id} banks`).map(value => requireRecord(value)).find(value => value.axis === 'z');
+  if (!bank) throw new TypeError(`${id}: no source-facing (z) bank.`);
+  const leaves = requireArray(bank.leaves, `${id} z leaves`).map(value => requireRecord(value)).map(leaf => {
+    const corners = requireArray(leaf.verticesUnits, `${id} ${String(leaf.id)} vertices`).map((value, index) => vector(value, `${id} ${String(leaf.id)} vertex ${index}`));
+    const uvs = JSON.stringify(leaf.uvs);
+    if (corners.length !== 4 || uvs !== '[[0,0],[1,0],[1,1],[0,1]]') throw new TypeError(`${id} ${String(leaf.id)}: a slice must be one quad with corner UVs.`);
+    return { id: String(leaf.id), texture: requireString(leaf.texturePath, `${id} ${String(leaf.id)} texture`), corners, depth: dot(vector(leaf.centerUnits, `${id} centre`), toViewer) };
+  });
+  // The billboard's axes follow the slices' own image axes, laid flat across the line of sight.
+  const [origin, first, , last] = leaves[0]!.corners as [Vector, Vector, Vector, Vector];
+  const rightAxis = unit(along(minus(first, origin), toViewer, dot(minus(first, origin), toViewer)));
+  const downRaw = along(minus(last, origin), toViewer, dot(minus(last, origin), toViewer));
+  const downAxis = unit(along(downRaw, rightAxis, dot(downRaw, rightAxis)));
+  const flat = (point: Vector) => [dot(point, rightAxis), dot(point, downAxis)] as const;
+  const radiusUnits = Math.max(...leaves.flatMap(leaf => leaf.corners.flatMap(point => flat(point).map(Math.abs))));
+  const scale = CELL_PX / (2 * radiusUnits);
+  const pixel = (point: Vector) => { const [x, y] = flat(point); return [(x + radiusUnits) * scale, (y + radiusUnits) * scale] as const; };
+  const out = new Float64Array(CELL_PX * CELL_PX * 4);
+  for (const leaf of [...leaves].sort((a, b) => a.depth - b.depth || a.id.localeCompare(b.id))) {
+    const [p0, p1, , p3] = leaf.corners.map(pixel) as [readonly [number, number], readonly [number, number], unknown, readonly [number, number]];
+    const ax = p1[0] - p0[0], ay = p1[1] - p0[1], bx = p3[0] - p0[0], by = p3[1] - p0[1], determinant = ax * by - ay * bx;
+    const width = Math.max(1, Math.round(Math.hypot(ax, ay))), height = Math.max(1, Math.round(Math.hypot(bx, by)));
+    const { data: texels } = await sharp(await readFile(resolve(objects, id, 'prepared', leaf.texture))).ensureAlpha()
+      .resize(width, height, { fit: 'fill', kernel: 'lanczos3' }).raw().toBuffer({ resolveWithObject: true });
+    for (let py = 0; py < CELL_PX; py++) for (let px = 0; px < CELL_PX; px++) {
+      const dx = px + .5 - p0[0], dy = py + .5 - p0[1];
+      const u = (dx * by - dy * bx) / determinant, v = (ax * dy - ay * dx) / determinant;
+      if (u < 0 || u > 1 || v < 0 || v > 1) continue;
+      // Bilinear, as the page's texture sampling.
+      const sx = Math.min(width - 1, Math.max(0, u * width - .5)), sy = Math.min(height - 1, Math.max(0, v * height - .5));
+      const x0 = Math.floor(sx), y0 = Math.floor(sy), x1 = Math.min(width - 1, x0 + 1), y1 = Math.min(height - 1, y0 + 1), fx = sx - x0, fy = sy - y0;
+      const at = (x: number, y: number, channel: number) => texels[(y * width + x) * 4 + channel]!;
+      const sample = (channel: number) => (at(x0, y0, channel) * (1 - fx) + at(x1, y0, channel) * fx) * (1 - fy) + (at(x0, y1, channel) * (1 - fx) + at(x1, y1, channel) * fx) * fy;
+      const alpha = sample(3) / 255, index = (py * CELL_PX + px) * 4;
+      if (alpha <= 0) continue;
+      // Premultiplied "over": the new slice in front of what is already there.
+      for (let channel = 0; channel < 3; channel++) out[index + channel] = sample(channel) * alpha + out[index + channel]! * (1 - alpha);
+      out[index + 3] = alpha + out[index + 3]! * (1 - alpha);
+    }
+  }
+  const rgba = Buffer.alloc(CELL_PX * CELL_PX * 4);
+  for (let index = 0; index < CELL_PX * CELL_PX; index++) {
+    const alpha = out[index * 4 + 3]!;
+    for (let channel = 0; channel < 3; channel++) rgba[index * 4 + channel] = alpha > 0 ? Math.round(Math.min(255, out[index * 4 + channel]! / alpha)) : 0;
+    rgba[index * 4 + 3] = Math.round(alpha * 255);
+  }
+  const image = await sharp(rgba, { raw: { width: CELL_PX, height: CELL_PX, channels: 4 } }).png().toBuffer();
+  return { id, payloadSha256, contextVisibility: 'galactic' as const, attached: false, view: { back: toViewer, right: rightAxis, down: downAxis }, radiusUnits, image };
+}
+
 export async function prepareLensBillboards(projectRoot = root) {
   const objects = resolve(projectRoot, 'src/objects');
   const banks: { id: string; payloadSha256: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
@@ -41,15 +117,11 @@ export async function prepareLensBillboards(projectRoot = root) {
     let descriptor: Record<string, unknown>;
     try { descriptor = requireRecord(JSON.parse(await readFile(resolve(objects, id, 'object.json'), 'utf8'))); }
     catch (error) { if (isRecord(error) && error.code === 'ENOENT') continue; throw error; }
+    if (descriptor.type === 'image-layer-bank') { banks.push(await imageLayerBillboard(id, descriptor, objects)); continue; }
     if (descriptor.type !== 'volume-lens-bank') continue;
-    const pin = requireRecord(descriptor.prepared, `${id} prepared pin`);
-    const url = requireString(pin.url, `${id} prepared url`), filename = url.replace(/^prepared\//u, '');
     // The object's inventory is the one record of its baked bytes; descriptors carry no digest.
-    const entry = (await readInventory(id, resolve(objects, id)))?.assets.find(asset => asset.location === 'prepared' && asset.filename === filename);
-    if (!entry) throw new TypeError(`${id}: src/objects/${id}/inventory.json lists no prepared ${filename}.`);
-    const bytes = await readFile(resolve(objects, id, url));
-    if (sha256(bytes) !== entry.sha256) throw new TypeError(`${id}: ${url} is ${sha256(bytes)}, but its inventory says ${entry.sha256}; run pnpm setup:prepared.`);
-    const data = requireRecord(requireRecord(JSON.parse(bytes.toString('utf8'))).data, `${id} lenses`);
+    const payload = await pinnedPayload(id, descriptor, objects), entry = { sha256: payload.sha256 };
+    const data = requireRecord(payload.data.data, `${id} lenses`);
     const contextVisibility = data.contextVisibility ?? 'galactic';
     if (contextVisibility !== 'galactic' && contextVisibility !== 'independent') throw new TypeError(`${id}: unsupported context visibility.`);
     const lens = requireArray(data.lenses, `${id} lenses`).map(value => requireRecord(value)).find(value => value.id === data.defaultLens);

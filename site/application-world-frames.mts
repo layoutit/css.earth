@@ -47,15 +47,19 @@ export function createApplicationWorldFrames({ layer, planner, moonLabels, lifet
     },
     createFramePresenter() {
       let enabled = false, disposed = false;
+      let pending: Parameters<typeof queue.present>[0] | null = null;
       return { enable() {
         if (enabled || disposed || lifetime.disposed) return;
         enabled = true;
+        if (pending) { queue.remember(pending); pending = null; }
         queue.refresh();
-      }, destroy() { disposed = true; },
+      }, destroy() { disposed = true; pending = null; },
         present(request: Parameters<typeof queue.present>[0], signal?: AbortSignal) {
           if (disposed || lifetime.disposed || signal?.aborted || !request.current()) return signal ? Promise.resolve(false) : undefined;
           const owned = { ...request, current: () => !disposed && !lifetime.disposed && request.current() };
-          if (!enabled) { queue.remember(owned); request.commit(); return; }
+          // Resource/label refreshes may run while detail is still mounting.
+          // Keep its camera local until the selected scene is connected.
+          if (!enabled) { pending = owned; request.commit(); return; }
           if (signal) return queue.presentAndWait(owned, signal);
           queue.present(owned);
         } };

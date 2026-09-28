@@ -105,6 +105,31 @@ async function readLensVolumes(entries: readonly CatalogEntry[], projectRoot: st
   return volumes;
 }
 
+/** The galaxies the Local Group catalogue draws (its recipe's detail objects), each at its frame origin with the focus
+ * radius the recipe gives it: what the Local Group overview fits in view. The Milky Way has no focus radius there; the
+ * overview reads its volume directly. */
+async function readLocalGroupGalaxies(projectRoot: string) {
+  const recipePath = 'src/objects/local-group/source/catalogue.json';
+  let text: string;
+  // A project without the Local Group object has no Local Group galaxies to frame.
+  try { text = await readFile(resolve(projectRoot, recipePath), 'utf8'); }
+  catch (error) { if (hasErrorCode(error, 'ENOENT')) return {}; throw error; }
+  const recipe: unknown = JSON.parse(text);
+  if (!isRecord(recipe) || !isRecord(recipe.detailObjects)) throw new TypeError(`${recipePath}: detailObjects is missing.`);
+  const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
+  for (const [row, detail] of Object.entries(recipe.detailObjects)) {
+    if (!isRecord(detail) || typeof detail.id !== 'string') throw new TypeError(`${recipePath}: detailObjects.${row} has no id.`);
+    if (detail.focusRadiusM === undefined) continue;
+    if (typeof detail.focusRadiusM !== 'number' || !(detail.focusRadiusM > 0)) throw new TypeError(`${recipePath}: detailObjects.${row}.focusRadiusM is ${String(detail.focusRadiusM)}, not a positive number.`);
+    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', detail.id, 'object.json'), 'utf8'));
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
+      throw new TypeError(`src/objects/${detail.id}/object.json: the Local Group galaxy ${row} has no properties.frame.`);
+    }
+    galaxies[detail.id] = { originM: descriptor.properties.frame.originM, radiusM: detail.focusRadiusM };
+  }
+  return galaxies;
+}
+
 async function writeGenerated(output: string, text: string) {
   await mkdir(dirname(output), { recursive: true });
   try { if (await readFile(output, 'utf8') === text) return; }
@@ -139,6 +164,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.distances), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.focuses), JSON.stringify(focuses) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));

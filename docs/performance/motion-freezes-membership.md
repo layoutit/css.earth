@@ -103,6 +103,15 @@ A newly prepared detail tree receives its initial material, selection and camera
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
 billboard handoff. An adopted server-rendered tree is already connected and keeps its existing ownership.
 
+Initial mounts and fly-to preparation select texture levels from the destination camera. There is no forced 512px
+startup bank or first-input refinement gate. Saved reloads prepare the shared world before mounting detail, even
+when their camera cannot use the default arrival billboard; world attachment must not restyle a finished surface.
+
+World bodies use their prepared arrival billboard directly, with its baked body radius inside the image. There is no
+world marker atlas or separate context photograph swap. Unresolved bodies use colour dots without fetching images;
+menu and search icons remain UI assets. A mounting scene keeps its camera private until its frame presenter is enabled,
+so resource refreshes cannot expose it before activation.
+
 Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.
 
 ### Optional controls and scene retirement

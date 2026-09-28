@@ -21,7 +21,8 @@ await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host
 const context = parsePreparedWorldContext(contextInput);
 // Target calculation never requests native frames or queries absent shell nodes.
 const windowTarget = {} as Window;
-const documentTarget = {} as Document;
+// The navigation keeps one wheel listener for its lifetime; these tests never scroll.
+const documentTarget = { addEventListener() {}, removeEventListener() {} } as unknown as Document;
 const sun = required(required(SCENE_OBJECTS.find(object => object.id === 'sun')).worldFrame);
 const world: WorldCameraPose = { referenceFrame: sun.referenceFrame, epochJdTt: sun.epochJdTt,
   pose: { positionM: [0, 0, 1e15], orientationXyzw: [0,0,0,1] } };
@@ -234,4 +235,22 @@ test('a Solar System breadcrumb always restores the system framing from a Sun cl
   const target = required(navigation.overviewTarget({ scope: 'system', objectId: 'sun', fromId: 'sun', mount: camera }));
   assert.ok(target.world);
   assert.equal(bodyCardViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
+});
+
+test('the Local Group overview frames the Milky Way and every drawn member galaxy from any angle', async () => {
+  const { GALACTIC_VOLUME, localGroupZoomTarget } = await import('../system-framing.mts');
+  const members = (await import('../prepared-local-group-galaxies.json', { with: { type: 'json' } })).default as Record<string, { originM: number[] }>;
+  const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/renderer/navigation');
+  assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'smc'], 'the catalogue members with a drawn object');
+  for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {
+    const from: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw } };
+    const { world: target } = localGroupZoomTarget(from, optics, systemFramingRect(optics));
+    assert.deepEqual(target.pose.orientationXyzw, orientationXyzw, 'the view keeps its angle');
+    const view = cssViewFromOrientation(orientationXyzw);
+    for (const [id, originM] of [['milky-way', GALACTIC_VOLUME.originM], ...Object.entries(members).map(([id, frame]) => [id, frame.originM] as const)] as const) {
+      const [x, y, z] = rotateWorldPosition(view, position(originM.map((value, axis) => value - target.pose.positionM[axis]!)));
+      assert.ok(z < 0, `${id} is in front of the camera`);
+      assert.ok(Math.abs(x / z) * optics.focalPixels <= optics.widthPixels! / 2 && Math.abs(y / z) * optics.focalPixels <= optics.heightPixels! / 2, `${id} is on screen`);
+    }
+  }
 });
