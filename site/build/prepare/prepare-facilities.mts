@@ -1,4 +1,3 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure, readPreparedContextProvenance } from '@cssearth/bake/sources';
 import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
@@ -8,11 +7,13 @@ import { parsePreparedSources } from '@cssearth/objects/provenance';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { sourceInventory, metadataCitations, factsheetCitations } from '@cssearth/bake/sources';
 import { verifyFactsheetSources } from '@cssearth/bake/sources';
-import { sourcePath, sourceDigest } from '@cssearth/objects/sources';
+import { sourcePath } from '@cssearth/objects/sources';
 import type { SourceInventoryEntry } from '@cssearth/bake/sources';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import sharp from 'sharp';
 import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '@cssearth/objects/provenance';
 import { compileContributions } from '@cssearth/objects/provenance';
@@ -26,14 +27,14 @@ import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisition';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
-import { CONTEXT_ROUTE, DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
+import { CONTEXT_ROUTE, DATASET_ROUTES } from '../../../src/platform/dataset-destination.mts';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 export const explorationCompilerClosure = [
-  'tools/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
+  'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
   'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-provenance.ts', 'packages/objects/src/provenance/preparation-evidence.ts', 'packages/bake/src/sources/preparation-evidence.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
-  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'tools/prepare/prepare-catalog.mts',
+  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
   'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
@@ -57,7 +58,7 @@ interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareFacilities({ root = resolve(import.meta.dirname, '../..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null,
+export async function prepareFacilities({ root = resolve(import.meta.dirname, '../../..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null,
   restoredOnly = false,
   packageMode = publish === 'catalogues' ? 'published' : 'author' }: Options = {}) {
   if (!['author', 'published'].includes(packageMode) || publish === 'catalogues' && packageMode !== 'published')
@@ -190,4 +191,14 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
 
 }
 
-refuseDirectRun(import.meta);
+// Entry script: node site/build/prepare/prepare-facilities.mts [--catalog-only] [--restored-only].
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2);
+  if (args.some(arg => arg !== '--catalog-only' && arg !== '--restored-only'))
+    throw new TypeError('Usage: node site/build/prepare/prepare-facilities.mts [--catalog-only] [--restored-only]');
+  // The real CLI entry point: opts into the mirror explicitly (the library defaults it off).
+  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
+    publish: args.includes('--catalog-only') ? 'catalogues' : true, restoredOnly: args.includes('--restored-only') });
+  console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
+  console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
+}

@@ -192,7 +192,7 @@ Do not commit downloaded webpages as evidence.
 Follow [Sources authoring](../../../docs/sources-catalogue.md#add-or-update-a-source)
 when adding or changing inputs: reuse the published identity, preserve each local
 file and bind its actual role. Refreshing sources must preserve existing bindings.
-Run `node tools/prepare/cli/prepare-provenance.mts` when source records, bindings or generated attribution
+Run `node site/build/prepare/prepare-provenance.mts` when source records, bindings or generated attribution
 change. A README-only spelling correction does not trigger source preparation.
 For factsheets, put citations on the individual facts using the existing
 [factsheet fields](../../../docs/factsheets.md#editing-and-reproduction).

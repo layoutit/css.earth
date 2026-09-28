@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { parseArrivalView, parseArrivalBillboard, type ObjectDiscovery } from '@cssearth/objects';
-import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
+import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */

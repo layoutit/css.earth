@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-import { missingPreparedFiles, restoreDriftedFiles, textBudgetFindings, worldStepOutput } from './check-preparation-inputs.mts';
+import { missingPreparedFiles, restoreDriftedFiles, textBudgetFindings, worldStepOutput } from '../build/prepare/check-preparation-inputs.mts';
 const test = sourceTest();
 
 const put = async (path: string, bytes: string | Buffer) => { await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes); };

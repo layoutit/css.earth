@@ -4,10 +4,10 @@ const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { inspectContextAvailability, prepareContextAvailability } from './prepare-context-availability.mts';
+import { inspectContextAvailability, prepareContextAvailability } from '../build/prepare/prepare-context-availability.mts';
 import { parseContextAvailability } from '@cssearth/objects/provenance';
 import { writeContextPackage } from '../../tests/fixtures/context-package.mts';
-import { readPreparedVolumeProvenance } from './prepare-volume-provenance.mts';
+import { readPreparedVolumeProvenance } from '../build/prepare/prepare-volume-provenance.mts';
 
 test('a missing bank isolates one object; restoring it admits the complete package on the next startup', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));

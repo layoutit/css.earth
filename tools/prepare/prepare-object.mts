@@ -45,14 +45,14 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', scope: 'once', commands: async () =>
     [node('packages/bake/cli/check-stale-builds.mts', '--run')] },
   { name: 'inputs', purpose: "check the reader text budgets and restore the Sun's stale files before the long bake", scope: 'ids', commands: async ids =>
-    [node('tools/prepare/cli/check-preparation-inputs.mts', ...ids)] },
-  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
+    [node('site/build/prepare/check-preparation-inputs.mts', ...ids)] },
+  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
     (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('packages/bake/cli/prepare-solar-geometry.mts')] : [] },
   { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
     [node('tools/objects/dist/prepare-authored.js', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
-  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
-  { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('tools/sources/author-source-records.mts', id!)] },
+  { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
+  { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('site/build/prepare/author-source-records.mts', id!)] },
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-object-json.mts', ...ids)] },
   { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-text.mts', ...ids)] },
   { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('packages/bake/cli/prepare-navigation.mts', ...ids)] },
@@ -63,10 +63,10 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     const origin = billboardOrigin();
     // A dev server's first request compiles the page: it took over 5 s right after a restart (2026-09-27), so wait up to a minute.
     if (!await fetch(origin, { signal: AbortSignal.timeout(60_000) }).then(response => response.ok, () => false)) throw new Error(`No site answers at ${origin}: start it with pnpm dev (or set CSSEARTH_BILLBOARD_ORIGIN), then resume from the billboard step.`);
-    return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('tools/prepare/cli/prepare-catalog.mts')];
+    return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
-  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-provenance.mts', ...ids)] },
+  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-provenance.mts', ...ids)] },
   // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
   { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-object-json.mts', 'sun')] },
 ]);

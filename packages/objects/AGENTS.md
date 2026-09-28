@@ -19,7 +19,9 @@ world-rotation validation. `site/objects.mts` stays the one `OBJECTS` registry: 
 scene loader. The registry here never loads a scene, reads a file or lists an object. Preparation reads that same
 registry with `readPreparedObjects` (`src/node/prepared-registry.ts`): the prepared catalogue decoded with the same
 contracts, without a scene loader. It is a read of the one registry, never a second list; keep it assembled as
-`site/objects.mts` assembles `OBJECTS`.
+`site/objects.mts` assembles `OBJECTS`. The catalogue is prepared from the object folders themselves: `readCatalog` and
+`readContextObjects` (`src/node/catalog-directory.ts`) read the descriptors that opt into the catalogue and the context objects
+without an entry; the caller passes the navigation distance in (`prepareSceneDistance` in `@cssearth/bake/navigation`).
 Preparation must remain reproducible from source inputs and provenance outside packages.
 
 ## Shared package contract

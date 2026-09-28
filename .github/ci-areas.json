@@ -28,8 +28,6 @@
     "packages/objects/src/registry/**",
     "packages/objects/src/node/prepared-registry.ts",
     "site/build/prepare/**",
-    "tools/prepare/prepare-catalog.mts",
-    "tools/prepare/cli/prepare-catalog.mts",
     "tools/prepare/prepare-objects.mts",
     "tools/prepare/cli/prepare-objects.mts",
     "packages/bake/src/preparation/**",

@@ -9,7 +9,7 @@ import { compileSourceUsage } from '@cssearth/objects/provenance';
 import { parseAgencies, parseExplorationCatalog } from '@cssearth/objects/provenance';
 import { compileContributions } from '@cssearth/objects/provenance';
 import { productSourceIds } from '@cssearth/objects/provenance';
-import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
+import { prepareVolumeProvenance } from '../build/prepare/prepare-volume-provenance.mts';
 import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const root = resolve(import.meta.dirname, '../..');
@@ -200,7 +200,7 @@ test('image-layer deliveries retain authored documents and every layer in matchi
 test('sky band previews read their recipe with a warm cache and compose from the archive with a cold one', async () => {
   const { mkdtemp, mkdir, rm, writeFile } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
-  const { preparePreview } = await import('./prepare-volume-provenance.mts');
+  const { preparePreview } = await import('../build/prepare/prepare-volume-provenance.mts');
   const temporary = await mkdtemp(resolve(tmpdir(), 'sky-preview-'));
   try {
     const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid: { width: 16, height: 16, fovDeg: 0.01, centerIcrsDegrees: [270.9, -24.4] },
@@ -226,7 +226,7 @@ test('a sky band preview is served by the object mirror instead of the survey ar
   const { mkdtemp, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { createServer } = await import('node:http');
-  const { preparePreview } = await import('./prepare-volume-provenance.mts');
+  const { preparePreview } = await import('../build/prepare/prepare-volume-provenance.mts');
   const composite = await sharp({ create: { width: 16, height: 16, channels: 3, background: '#400' } }).png().toBuffer();
   const requests: string[] = [];
   let mirrorBehavior: 'serve' | 'miss' = 'serve';
@@ -278,7 +278,7 @@ test('a publisher preview tries the object mirror first and falls back to the pu
   const { mkdtemp, rm } = await import('node:fs/promises');
   const { tmpdir } = await import('node:os');
   const { createServer } = await import('node:http');
-  const { preparePreview } = await import('./prepare-volume-provenance.mts');
+  const { preparePreview } = await import('../build/prepare/prepare-volume-provenance.mts');
   const image = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#048' } }).jpeg().toBuffer();
   const requests: string[] = [];
   const filename = 'archive-original.jpg';

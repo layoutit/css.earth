@@ -1,7 +1,7 @@
 /**
  * Write a survey photograph lens into a body's package, from a fresh setup run.
  *
- *   node tools/objects/sphere-survey/install.mts <object-id>
+ *   node packages/bake/cli/sphere-survey-install.mts <object-id>
  *
  * The run is rebuilt first, so the package receives exactly what was just measured: the frames, the ADAM mesh, both
  * Horizons tables and the spin record where they are new, the recipe, the observer-cameras and comparison records and
@@ -13,18 +13,18 @@
 import { execFileSync } from 'node:child_process';
 import { access, copyFile, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { authorSourceRecords } from '../../sources/author-source-records.mts';
+import { authorSourceRecords } from '../../sources/index.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '@cssearth/bake/objects/layers/terrestrial';
-import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '@cssearth/bake/objects/layers/terrestrial';
-import { OBSERVER_CAMERAS_FILE } from '@cssearth/bake/objects/layers/terrestrial';
-import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from '@cssearth/bake/objects/sphere-survey';
-import { INVESTIGATION_SURVEY_DIRECTORY } from '@cssearth/bake/sources';
-import { writeHorizonsOperations } from '@cssearth/bake/objects/layers/terrestrial';
-import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './setup.mts';
+import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../layers/terrestrial/index.ts';
+import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '../layers/terrestrial/index.ts';
+import { OBSERVER_CAMERAS_FILE } from '../layers/terrestrial/index.ts';
+import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.ts';
+import { INVESTIGATION_SURVEY_DIRECTORY } from '../../sources/index.ts';
+import { writeHorizonsOperations } from '../layers/terrestrial/index.ts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './survey-setup.ts';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+/** The checkout the command runs in. */
+const ROOT = process.cwd();
 export const COMPARISON_ENTRY = `${LENS_ID}-published-comparison`;
 const readJson = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const writeJson = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
@@ -43,7 +43,7 @@ export function decisionFinding(figure: string, evidence: ComparisonEvidence, co
   const sweepText = `it peaks at our phase in ${count('at')} of ${evidence.columns.length} columns${count('step') ? `, one step from it in ${count('step')}` : ''}${elsewhere.length ? `, and elsewhere in ${elsewhere.length}: ${elsewhere.join('; ')}` : ''}`;
   const ours = evidence.columns.flatMap(column => column.axis.oursDegrees ?? []), theirs = evidence.columns.flatMap(column => column.axis.paperDegrees ?? []);
   const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
-  return `Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure ${figure}, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels ${span(models)} at our phase, against ${span(same)} for our own outline drawn at the paper’s pixel scale; over a full turn in ${PHASE_SWEEP_STEP_DEGREES}° steps ${sweepText}. With the paper’s photographs ${span(evidence.columns.map(column => column.overlapWithPhotograph))}. Turned in the image, our outline best overlaps the paper’s photographs at ${span(evidence.columns.map(column => column.imageTurnDegrees.photograph), 1)}° and its model panels at ${span(evidence.columns.map(column => column.imageTurnDegrees.model), 1)}°. The spin axis we project lies at ${span(ours, 1)}° on the sky against ${span(theirs, 1)}° for the figure’s arrows. Native outline residual ${evidence.nativeOutline.residualPixelsAtZero.toFixed(3)} px mean over ${evidence.nativeOutline.frames} frames at our phase${sweep[0].offset === 0 ? ', the lowest of a ±30° sweep' : `; the sweep’s lowest is ${sweep[0].pixels.toFixed(3)} px at ${sweep[0].offset}°`}. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads ${columnOrder.order}, ${columnOrder.separationDegrees}° from the published pole.`;
+  return `Measured with packages/bake/cli/sphere-survey-setup.mts against Vernazza et al. (2021) Figure ${figure}, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels ${span(models)} at our phase, against ${span(same)} for our own outline drawn at the paper’s pixel scale; over a full turn in ${PHASE_SWEEP_STEP_DEGREES}° steps ${sweepText}. With the paper’s photographs ${span(evidence.columns.map(column => column.overlapWithPhotograph))}. Turned in the image, our outline best overlaps the paper’s photographs at ${span(evidence.columns.map(column => column.imageTurnDegrees.photograph), 1)}° and its model panels at ${span(evidence.columns.map(column => column.imageTurnDegrees.model), 1)}°. The spin axis we project lies at ${span(ours, 1)}° on the sky against ${span(theirs, 1)}° for the figure’s arrows. Native outline residual ${evidence.nativeOutline.residualPixelsAtZero.toFixed(3)} px mean over ${evidence.nativeOutline.frames} frames at our phase${sweep[0].offset === 0 ? ', the lowest of a ±30° sweep' : `; the sweep’s lowest is ${sweep[0].pixels.toFixed(3)} px at ${sweep[0].offset}°`}. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads ${columnOrder.order}, ${columnOrder.separationDegrees}° from the published pole.`;
 }
 
 /** Nights as a reader says them: one date, two joined, or the first and last of several. */
@@ -325,11 +325,4 @@ export function noticeWithLens(notice: string, figure: string) {
   if (notice.includes(shapeOnly)) return notice.replace(shapeOnly, credit);
   const title = notice.indexOf('\n\n');
   return `${notice.slice(0, title)}\n\n${credit}${notice.slice(title)}`;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, ...rest] = process.argv.slice(2), because = rest.find(arg => arg.startsWith('--because='))?.slice('--because='.length), replace = rest.includes('--replace');
-  const leaveOuts = leaveOutArguments(rest.filter(arg => !arg.startsWith('--because=') && arg !== '--replace'));
-  if (!objectId || leaveOuts === null) { console.error('usage: node tools/objects/sphere-survey/install.mts <object-id> [--replace] [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…] [--because=<why>]'); process.exit(2); }
-  await installSetup(objectId, { ...leaveOuts, because, replace });
 }

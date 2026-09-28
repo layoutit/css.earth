@@ -4,7 +4,8 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readCatalog, readPreparedObjects } from '@cssearth/objects/node';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '@cssearth/bake/world-context';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '@cssearth/bake/world-context';
 
@@ -50,8 +51,7 @@ async function planckHex(kelvin: number): Promise<string> {
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
   if (input.bodies === 'catalog') {
-    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string; orbitsWithinAu?: number; labelPlacement?: 'centre' } }[]> };
-    const objects = await readCatalog(options.objectsDirectory);
+    const objects = await readCatalog(options.objectsDirectory ?? resolve(process.cwd(), 'src/objects'), prepareSceneDistance);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
       .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,

@@ -1,8 +1,8 @@
 /**
  * Set up a VLT/SPHERE survey body's photograph lens and measure it against the survey's own comparison figure.
  *
- *   node tools/objects/sphere-survey/setup.mts <object-id>    build and measure the lens in output/sphere-survey/<id>/
- *   node tools/objects/sphere-survey/install.mts <object-id>  write a measured setup into the body's package
+ *   node packages/bake/cli/sphere-survey-setup.mts <object-id>    build and measure the lens in output/sphere-survey/<id>/
+ *   node packages/bake/cli/sphere-survey-install.mts <object-id>  write a measured setup into the body's package
  *
  * The first form writes nothing in the package. It copies the package's source directory, finds the body's figure in
  * the pinned survey paper, reads the frame time printed over each column, lists the released frames, keeps one
@@ -14,25 +14,26 @@
 import { constants } from 'node:fs';
 import { access, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
 import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
-import { readPdfImage } from '@cssearth/bake/sources';
+import { readPdfImage } from '../../sources/index.ts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
-import { tableInput } from '@cssearth/bake/objects/layers/terrestrial';
-import { horizonsCommand, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
-import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
-import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
-import type { RadialSimplification } from '@cssearth/bake/objects/geometry';
-import { parseSpinState, spinOrientation } from '@cssearth/bake/objects/cameras';
-import { glyphTemplates, readLabel } from '@cssearth/bake/objects/sphere-survey';
-import { apparitionLinks, listedViews, meshFaces, releasedFrames } from '@cssearth/bake/objects/sphere-survey';
-import { anchorApparition, apparitions, selectFrames } from '@cssearth/bake/objects/sphere-survey';
-import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from '@cssearth/bake/objects/sphere-survey';
+import { measurePublishedComparison, writeComparisonEvidence } from './published-comparison.ts';
+import { tableInput } from '../layers/terrestrial/index.ts';
+import { horizonsCommand, horizonsTables } from '../layers/terrestrial/index.ts';
+import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../layers/terrestrial/index.ts';
+import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '../layers/terrestrial/index.ts';
+import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '../geometry/index.ts';
+import type { RadialSimplification } from '../geometry/index.ts';
+import { parseSpinState, spinOrientation } from '../cameras/index.ts';
+import { glyphTemplates, readLabel } from './figure-labels.ts';
+import { apparitionLinks, listedViews, meshFaces, releasedFrames } from './apparitions.ts';
+import { anchorApparition, apparitions, selectFrames } from './frames.ts';
+import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from './lam.ts';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
+/** The checkout the command runs in. */
+const ROOT = process.cwd();
 export const LENS_ID = 'zimpol';
 export const SETUP_SCHEMA = 'cssearth-sphere-survey-setup@1';
 const SPIN_RECORD_PATH = 'reference/release-parameters.txt', ADAM_METERS_PER_UNIT = 1000;
@@ -67,7 +68,7 @@ function releasedModelOf(value: Record<string, unknown>): ReleasedModel {
 }
 
 export async function surveyFigures() {
-  const table = requireRecord(await readJson(resolve(import.meta.dirname, 'vernazza-2021-figures.json')));
+  const table = requireRecord(await readJson(resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), 'src/objects/sphere-survey/vernazza-2021-figures.json')));
   const paper = requireRecord(table.paper);
   return { paper: { source: requireString(paper.source) },
     figures: requireArray(table.figures).map(value => {
@@ -371,7 +372,8 @@ function readFitsImageSize(bytes: Buffer) {
   return { width: requireFiniteNumber(header.NAXIS1, 'NAXIS1'), height: requireFiniteNumber(header.NAXIS2, 'NAXIS2') };
 }
 
-function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
+/** The command's report of a built setup. */
+export function surveySetupSummary(setup: Awaited<ReturnType<typeof buildSetup>>) {
   const lines = [`${setup.objectId}: (${setup.survey.number}) ${setup.survey.name}, Figure ${setup.survey.figure}; ${setup.cast.frames} of ${setup.cast.released} released camera-1 frames, ${setup.cast.nights.join(', ')}.`,
     ...setup.apparitions.map(entry => `  apparition ${entry.from} to ${entry.to}: ${entry.cast} of ${entry.frames} frames cast, sub-observer latitude ${entry.subObserverLatitude.join(' to ')}°; ${entry.anchor ? 'the figure\'s' : `${entry.sharedSamples} display samples shared with a cast frame at the level fit's angle limit`}`),
     `Spin record read ${setup.columnOrder.order}: ${setup.columnOrder.separationDegrees}° from the published pole, the other reading ${setup.columnOrder.otherSeparationDegrees ?? '—'}°.`,
@@ -385,10 +387,4 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
   if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
   lines.push(`Evidence: ${relative(ROOT, resolve(ROOT, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
   return lines.join('\n');
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, ...rest] = process.argv.slice(2), leaveOuts = leaveOutArguments(rest);
-  if (!objectId || leaveOuts === null) { console.error('usage: node tools/objects/sphere-survey/setup.mts <object-id> [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…]'); process.exit(2); }
-  console.log(summary(await buildSetup(objectId, leaveOuts)));
 }

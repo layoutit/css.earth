@@ -1,4 +1,4 @@
-import { refreshSourceRecord } from '../../../sources/source-authoring-templates.mts';
+import { refreshSourceRecord } from '../source-authoring-templates.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';

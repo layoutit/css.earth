@@ -70,7 +70,7 @@ export async function installColorLens(files: PackageFiles, id: string, color: C
 }
 
 /** Bind every manifest input that has no binding yet to its own catalogue record, `source-<object>-<entry>`, as the placed stars'
- * Gaia rows and limb grids are: tools/sources/author-source-records.mts writes the record in the bake. */
+ * Gaia rows and limb grids are: site/build/prepare/author-source-records.mts writes the record in the bake. */
 export function bindInputs(files: PackageFiles, id: string) {
   const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: Record<string, unknown>[] };
   for (const input of manifest.inputs) if (input.sourceBinding === undefined) {

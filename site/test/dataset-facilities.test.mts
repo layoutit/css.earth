@@ -13,7 +13,7 @@ import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 import { explorationArray, explorationId, explorationRecord, explorationText } from '@cssearth/objects/provenance';
 import type { Capture } from '@cssearth/objects/provenance';
 import type { ExplorationImage } from '@cssearth/objects/provenance';
-import { sourceTestVolumes as prepareVolumeProvenance } from '../../tools/sources/source-test-inputs.mts';
+import { sourceTestVolumes as prepareVolumeProvenance } from '../../tests/sources/source-test-inputs.mts';
 import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
 
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));

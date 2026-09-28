@@ -79,9 +79,9 @@ reads the files in ID order and rejects duplicate identities.
 
 ## Prepare and check
 
-Run `node tools/prepare/cli/prepare-provenance.mts` after changing catalogue metadata,
+Run `node site/build/prepare/prepare-provenance.mts` after changing catalogue metadata,
 bindings or capture records. This refreshes scene-body lineage and coordinates
-both shared catalogues. `node tools/prepare/cli/prepare-facilities.mts --catalog-only`
+both shared catalogues. `node site/build/prepare/prepare-facilities.mts --catalog-only`
 rebuilds the catalogues from installed provenance without generating previews;
 volume and catalogue provenance must already be installed from their inventories.
 
@@ -100,7 +100,7 @@ pnpm test:node
 ```
 
 This is the broad native suite. For a focused edit, run the affected tests under
-`tests/provenance/`, `tools/sources/` and `tools/prepare/` after preparing the inputs
+`tests/provenance/`, `tests/sources/`, `site/test/` and `tools/prepare/` after preparing the inputs
 they require. Source-dependent cases may skip on a bare checkout; report those
 separately. Neither a skipped case nor a catalogue refresh proves a surface bake.
 

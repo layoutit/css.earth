@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { authorSourceRecords, ENTRY_EVIDENCE } from './author-source-records.mts';
+import { authorSourceRecords, ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), 'author-records-'));

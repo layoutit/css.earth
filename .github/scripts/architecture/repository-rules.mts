@@ -57,6 +57,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/objects/paged-ellipsoid/geographic',
   'tools/objects/pds',
   'tools/objects/shape-model',
+  'tools/objects/sphere-survey',
   'tools/objects/spitzer',
   'tools/objects/static-surface',
   'tools/objects/surface-features',

@@ -127,7 +127,7 @@ existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
-[`prepare-facilities.mts`](../../tools/prepare/prepare-facilities.mts) compiles the Sources
+[`prepare-facilities.mts`](../../site/build/prepare/prepare-facilities.mts) compiles the Sources
 and Missions catalogues with their validated records and graphs. The common
 [site entry point](../../site/exploration-catalog.mts) parses the prepared records
 against the Sources catalogue; it no longer verifies a dependency-hash closure.

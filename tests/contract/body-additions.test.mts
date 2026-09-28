@@ -3,9 +3,11 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, mkdir, readFile, rm, writeFile, type FileHandle } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { contextObjectAssetUrls, contextObjectModule, readCatalog, prepareCatalog } from '../prepare/prepare-catalog.mts';
+import { contextObjectAssetUrls, contextObjectModule, prepareCatalog } from '../../site/build/prepare/prepare-catalog.mts';
+import { readCatalog } from '@cssearth/objects/node';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { prepareBodyRecords } from '../../packages/astronomy/tools/body-records.mts';
 import { literalRecords } from '../../packages/astronomy/tools/lib/write-record-sections.mts';
 import type { PathLike } from 'node:fs';
@@ -99,7 +101,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   await compile();
   assert.equal(git('status', '--porcelain'), '', 'Compilation must not write tracked shared files.');
   for (const [file, bytes] of before) assert.deepEqual(await readFile(resolve(root, file)), bytes, file);
-  assert.deepEqual((await readCatalog(resolve(root, 'src/objects'))).map(body => body.id),
+  assert.deepEqual((await readCatalog(resolve(root, 'src/objects'), prepareSceneDistance)).map(body => body.id),
     ['existing-body', 'new-asteroid', 'new-comet', 'new-moon', 'sun']);
   const compiled = await readFile(resolve(root, 'packages/astronomy/src/data/generated/bodies.ts'), 'utf8');
   for (const id of ['new-asteroid', 'new-moon', 'new-comet']) assert.ok(compiled.includes(JSON.stringify(id)));
@@ -111,10 +113,10 @@ test('an unfinished folder stays unpublished and a mismatched descriptor fails',
   await addBody(root, 'sun', 'star');
   const path = resolve(root, 'src/objects/planned/object.json');
   await write(path, { schema: 'cssearth-object@1', id: 'planned', properties: {} });
-  assert.deepEqual((await readCatalog(resolve(root, 'src/objects'))).map(body => body.id), ['sun']);
+  assert.deepEqual((await readCatalog(resolve(root, 'src/objects'), prepareSceneDistance)).map(body => body.id), ['sun']);
   const descriptor = JSON.parse(await readFile(resolve(root, 'src/objects/sun/object.json'), 'utf8'));
   await write(path, descriptor);
-  await assert.rejects(readCatalog(resolve(root, 'src/objects')), /identity differs/);
+  await assert.rejects(readCatalog(resolve(root, 'src/objects'), prepareSceneDistance), /identity differs/);
 });
 
 test('retained-record decoding accepts quoted body IDs and rejects executable source', () => {
