@@ -8,11 +8,12 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
 import { refreshObservationControls } from './refresh-surface-observations.mts';
-import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
+import { prepareSurfaceMinimaps } from '@cssearth/bake/surface-previews';
 import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '@cssearth/bake/navigation';
@@ -177,7 +178,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     await prepareSearchThumbnails();
   }
   await pretty(manifestPath, manifest);
-  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds, solarGeometry });
   await refreshObservationControls(id, lensIds, new Map(lensIds.map(lensId => [lensId, SHAPE_MATERIAL.color])));
   await refreshShapeMaterialDescriptions(id);
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });

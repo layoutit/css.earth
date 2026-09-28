@@ -73,9 +73,9 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write, reuseImages = false, acceptChanged = [] }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged });
   if (write || !result.definition) return result;
-  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-surface-minimaps.mts')).href);
+  const { prepareSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
   // Minimaps render from the raw imagery; a reuse-images stage already carries the published ones.
-  if (!reuseImages) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
+  if (!reuseImages) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, solarGeometry: await solarGeometry() });
   if (!reuseImages) await assertMapsStartAtSurfaceMapEdge(objectDirectory, outputDirectory);
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   await assertDefaultViewsFaceLenses(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);
