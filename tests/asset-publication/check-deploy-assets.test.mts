@@ -31,4 +31,7 @@ test('the published world summary and system views must describe the same system
   assert.ok(await checkPublishedWorldPair(root, read()) > 0);
   // A view for another system than its file names is caught.
   await assert.rejects(checkPublishedWorldPair(root, read((id, text) => id === 'trappist-1' ? text.replace('"id":"trappist-1"', '"id":"sun"') : text)), /published world summary and system views disagree/);
+  // A read that fails is reported as that read, not as a disagreement.
+  const unreachable = async (url: string) => { if (url.endsWith('/trappist-1.json')) throw new Error(`Could not read ${url}.`); return read()(url); };
+  await assert.rejects(checkPublishedWorldPair(root, unreachable), (error: Error) => /Could not read .*trappist-1\.json/.test(error.message) && !/disagree/.test(error.message));
 });
