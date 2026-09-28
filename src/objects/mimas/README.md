@@ -14,14 +14,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
-
-| View | Original grid | Both lighting images, before → current |
-| --- | --- | --- |
-| normal | 5760 × 2880 | 7.11 → 9.76 MB |
-| enhanced | 6356 × 3178 | 8.09 → 11.92 MB |
-
-Each atlas remains 4096 × 11520 pixels, with 720 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+The photographic atlases sample the original source grids directly with a 2 × 2 texel footprint. They retain the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains sampling and encoding. The current reduced atlas dimensions and real-device checks are recorded under Preparation below; earlier full-size atlas byte counts do not describe this delivery.
 
 - Herschel is at roughly 1.38° S, 111.76° W (248.24° E), independently documented in the [IAU gazetteer](https://planetarynames.wr.usgs.gov/Feature/2478).
 
@@ -62,7 +55,9 @@ Both use north at the top. Different control networks can leave positional diffe
 
 Preserve all supplied pixels, including black crater shadows; do not infer missing coverage from darkness. No inpainting, polar repetition, color synthesis, or patch blending is performed here.
 
-The retained 8192 × 4096 layout serves the latitude bands: monochrome is sourced at 5760 × 2880 and color at 6356 × 3178. The normal and enhanced photographic atlases sample those pinned original grids directly with a 2 × 2 footprint onto 720 native PolyCSS raster triangles, with 256-pixel atlas cells (4096 × 11520). The texture allocation is independent of geometry reduction. Those photographic atlases use WebP quality 95; latitude bands retain their existing encoding and alpha handling.
+The monochrome source is 5760 × 2880 and the enhanced-color source is 6356 × 3178. Both photographic atlases sample those original grids directly with a 2 × 2 footprint onto the same 720 retained triangles. Their prepared `textureScale: 0.25` writes a 1660 × 1773 image against the canonical 6640 × 7092 atlas layout; CSS addressing, geometry and lighting coordinates remain unchanged. Each decoded RGBA photograph is 11.2 MiB. Encoding uses the shared lossy WebP lane, including its quality constant; numeric and categorical assets keep their own existing sampling and lossless encoding. This display texture is coarser than the source and does not add scientific resolution.
+
+The [iPad A16 arrival checks](evidence/ipad-atlas-footprint.json) on 2026-09-28 (`tablet-saturn-mimas-rebaked-atlas-normal-2026-09-28T22-32-04-192Z`, based on `be56785c42` plus the photographic-scale repair) completed Saturn → Mimas in 4.35 seconds, with a longest reported frame of 46.9 ms and no console errors. The native filmstrip and final device screenshot were inspected. The preceding full-size atlas had multi-second compositor stalls. The same repair rebaked all Mimas assets together: the previous inventory paired a 6640 × 7092 layout with a 6611 × 7078 image. Publication now checks surface records against the image inventory and dimensions.
 
 ## Elevation
 

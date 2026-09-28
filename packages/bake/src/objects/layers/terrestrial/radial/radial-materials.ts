@@ -94,14 +94,14 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     }
     const photograph=config.raster.observations?.find(observation=>observation.id===surface.id);
     if(photograph?.nativePhotographicSampling) {
-      if(!sourceDirectory || lightingRecipe || artifactId || surface.textureScale || radial.observationSurfaces?.has(surface.id) || radial.scientificSurfaces?.has(surface.id)) {
+      if(!sourceDirectory || lightingRecipe || artifactId || radial.observationSurfaces?.has(surface.id) || radial.scientificSurfaces?.has(surface.id)) {
         throw new Error('Native photograph refresh requires the existing cylindrical-map terrain and lighting.');
       }
       const input=source.manifest.inputs.find(entry=>requireRecord(entry).lensId===surface.id && entry.consumers.includes('surfaces'));
       if(!input)throw new Error(`No pinned photograph for ${surface.id}.`);
       Object.assign(surface,await prepareNativePhotographicAtlas({radial,sourceDirectory,source:input,validity:photograph.validity,
         sampling:photograph.nativePhotographicSampling,publicDirectory,publicBase:config.publicBase,id:`${config.namespace}-${surface.id}`,
-        sunDirection,mapWidth:config.raster.width}));
+        sunDirection,mapWidth:config.raster.width,textureScale:surface.textureScale}));
       continue;
     }
     // The retained CSS background size stays canonical. Only prepared image
