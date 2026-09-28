@@ -321,9 +321,21 @@
     },
     {
       "location": "public",
+      "filename": "moon-lens-maximum-temperature.webp",
+      "bytes": 2536,
+      "sha256": "5bd2275a704cbd4a106d530d0548da1ee3003740a5106326c741d99a5c5890a6"
+    },
+    {
+      "location": "public",
       "filename": "moon-lens-midnight-temperature.webp",
       "bytes": 2886,
       "sha256": "d5e0ebb6708c40b868128a18e05f2fb0209631f1120ca7e3526de5e3cd7ec30a"
+    },
+    {
+      "location": "public",
+      "filename": "moon-lens-noon-temperature.webp",
+      "bytes": 2764,
+      "sha256": "aa2e0e4fcd02f14abba0faad9eba711d74f1449277a4fb3faeb2398b7f3b3b21"
     },
     {
       "location": "public",
@@ -411,9 +423,21 @@
     },
     {
       "location": "public",
+      "filename": "moon-maximum-temperature@2x.webp",
+      "bytes": 429368,
+      "sha256": "b4887940e27c24d54b3631ae33deb9253d00812a84a700a81514c9bafa9d8f6e"
+    },
+    {
+      "location": "public",
       "filename": "moon-midnight-temperature@2x.webp",
       "bytes": 13737686,
       "sha256": "481c2def7602ec744f87d2b916def9c3300664874a548fa4b0cc8a13a3f4938b"
+    },
+    {
+      "location": "public",
+      "filename": "moon-noon-temperature@2x.webp",
+      "bytes": 725246,
+      "sha256": "0fb0c266ea2e9cb22f7b876824ba5e882fad346683acd9c5deadd889bbdf2a36"
     },
     {
       "location": "public",
@@ -495,9 +519,21 @@
     },
     {
       "location": "public",
+      "filename": "moon-poles-maximum-temperature@2x.webp",
+      "bytes": 89166,
+      "sha256": "e57780d90a99b8970914c50cec89132ebbd6dcf4d8475eb1e136dfd832b54399"
+    },
+    {
+      "location": "public",
       "filename": "moon-poles-midnight-temperature@2x.webp",
       "bytes": 9464,
       "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec"
+    },
+    {
+      "location": "public",
+      "filename": "moon-poles-noon-temperature@2x.webp",
+      "bytes": 62840,
+      "sha256": "14f4a5b3b931ba7bcd2f8ae5949b56206a919c5ef3ff666e5b335ba5212d4c68"
     },
     {
       "location": "public",
@@ -646,14 +682,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 98999,
-      "sha256": "09545910ade13360ab87591fbff18c96fa94e5b6e24529b8fd4dc8ca08e68a75"
+      "bytes": 100114,
+      "sha256": "a9ff11861ff1e709180e95db7582f9bd6bdb6ee5a584e717be97ebe429a7706d"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1419,
-      "sha256": "fa1246ebaca2b9ca3ddeb2716c9f2ce0c849d5765897217ea9f54fad497db7e4"
+      "sha256": "3aa0dd3c41a3d7028ee9640f7849c92048c6960c18180e40a9483728ca3f6126"
     },
     {
       "location": "prepared",
@@ -664,8 +700,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 48457,
-      "sha256": "b4aae251d34b4b8a49344ef291450040d456e661bc8fecae6309c4660698b1cd"
+      "bytes": 53532,
+      "sha256": "46a9b25e474ca60b0a58293ac68a8df0f77333521444bf84f1b269e054232dc2"
     },
     {
       "location": "prepared",
@@ -682,14 +718,14 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 65807,
-      "sha256": "9af7918702187736f001d2edeaba46718e38edc797968f0a20e089af80f24676"
+      "bytes": 72322,
+      "sha256": "02d798a954a9d7434b128304e34a874ed2f7c3f643a464cb4f5f1ad25d6a53c0"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1912,
-      "sha256": "d682608c08edc89509c5b160054e0fbff7930e275270629251c33d5865b703e6"
+      "bytes": 2100,
+      "sha256": "78cefe666bd3fd647f86f6a952343a9ea8ceb905178ae5766279a48c181c95f2"
     },
     {
       "location": "prepared",
@@ -741,9 +777,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/maximum-temperature.webp",
+      "bytes": 18582,
+      "sha256": "b5479287661671661eff74980e7d0b4190ce3c3c399364e65f2e861c779a3453"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/midnight-temperature.webp",
       "bytes": 22560,
       "sha256": "e2ddfdf78de99739b3b23bde105cdd6dc433f8dff48f8dd9d25d1ba09a8a1a80"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/noon-temperature.webp",
+      "bytes": 20006,
+      "sha256": "8ff3ed246bbd3e36b6986f85e79532ae8ac7ed629866da58983f37897f28eb75"
     },
     {
       "location": "prepared",
@@ -838,8 +886,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 667869,
-      "sha256": "ec701ed317d3e09d0764246ce720461df745408c7f5cc1b55ad5832bc3934d8f"
+      "bytes": 677892,
+      "sha256": "f57b76a1d6d6f22a5669059e138c9ccc06e555f40a9074bfc293eeac6c9779c7"
     },
     {
       "location": "prepared",
@@ -862,8 +910,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 5280,
-      "sha256": "a97a88994281cd54612d80dd212ff3b56a7540afce736d72362f9ad05a9ba5f5"
+      "bytes": 5704,
+      "sha256": "c8d156396e95a4ba52beaddba3b0fc06931e3ea6f2835b09613605f2e2a136d7"
     },
     {
       "location": "prepared",

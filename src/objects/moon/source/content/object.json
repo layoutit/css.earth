@@ -189,6 +189,199 @@
         "noData": true
       },
       {
+        "id": "maximum-temperature",
+        "label": "Maximum temperature",
+        "thumbnail": "moon-lens-maximum-temperature.webp",
+        "surface": "moon-maximum-temperature@2x.webp",
+        "poles": "moon-poles-maximum-temperature@2x.webp",
+        "source": {
+          "id": "diviner-gcp-tbol-max-compact",
+          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Maximum temperature",
+          "labels": [
+            "\u2264220",
+            "310",
+            "\u2265400"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                36,
+                32,
+                79
+              ],
+              [
+                58,
+                70,
+                139
+              ],
+              [
+                37,
+                141,
+                164
+              ],
+              [
+                129,
+                201,
+                176
+              ],
+              [
+                244,
+                209,
+                123
+              ],
+              [
+                236,
+                128,
+                60
+              ],
+              [
+                155,
+                40,
+                58
+              ]
+            ],
+            "labels": [
+              "\u2264220",
+              "310",
+              "\u2265400"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color maximum bolometric temperature from LRO Diviner, July 2009 to March 2015 (Williams et al. 2017): the warmest quarter-hour bin average of each 0.5\u00b0 cell. Colors span 220\u2013400 K; values beyond share the end colors. Global coverage.",
+        "notes": "The hottest the ground gets in the lunar day. Dark maria run hotter than bright highlands and fresh craters, and it falls toward the poles. Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest. Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows its warmest quarter-hour average; for 82% of cells it falls within an hour of noon. Global: every cell has observations. An average of many days, not one day\u2019s peak. The display cells are 0.5\u00b0 wide, about 15 km.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The hottest the ground gets in the lunar day. Dark maria run hotter than bright highlands and fresh craters, and it falls toward the poles."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows its warmest quarter-hour average; for 82% of cells it falls within an hour of noon."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Global: every cell has observations."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "An average of many days, not one day\u2019s peak. The display cells are 0.5\u00b0 wide, about 15 km."
+          }
+        ]
+      },
+      {
+        "id": "noon-temperature",
+        "label": "Noon temperature",
+        "thumbnail": "moon-lens-noon-temperature.webp",
+        "surface": "moon-noon-temperature@2x.webp",
+        "poles": "moon-poles-noon-temperature@2x.webp",
+        "source": {
+          "id": "diviner-gcp-tbol-noon-compact",
+          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Noon temperature",
+          "labels": [
+            "\u2264220",
+            "310",
+            "\u2265400"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                36,
+                32,
+                79
+              ],
+              [
+                58,
+                70,
+                139
+              ],
+              [
+                37,
+                141,
+                164
+              ],
+              [
+                129,
+                201,
+                176
+              ],
+              [
+                244,
+                209,
+                123
+              ],
+              [
+                236,
+                128,
+                60
+              ],
+              [
+                155,
+                40,
+                58
+              ]
+            ],
+            "labels": [
+              "\u2264220",
+              "310",
+              "\u2265400"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color noon bolometric temperature from LRO Diviner, July 2009 to March 2015 (Williams et al. 2017): the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data. Colors span 220\u2013400 K. Covers 98.6%; gray grid marks cells never observed in that hour.",
+        "notes": "The temperature at local noon, when the Sun is highest. Near the equator it is close to the day\u2019s maximum. Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest. Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data. 98.6% of the Moon. Gray grid marks cells Diviner never saw between 11:30 and 12:30; they are thin streaks, mostly on the nearside. An average of many days, over an hour around noon rather than at noon itself. Against a narrower 11:45\u201312:15 window the values differ by 1 K at the median and 7 K for the 5% of cells that differ most.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The temperature at local noon, when the Sun is highest. Near the equator it is close to the day\u2019s maximum."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "98.6% of the Moon. Gray grid marks cells Diviner never saw between 11:30 and 12:30; they are thin streaks, mostly on the nearside."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "An average of many days, over an hour around noon rather than at noon itself. Against a narrower 11:45\u201312:15 window the values differ by 1 K at the median and 7 K for the 5% of cells that differ most."
+          }
+        ]
+      },
+      {
         "id": "heat-anomalies",
         "label": "Heat anomalies",
         "thumbnail": "moon-lens-heat-anomalies.webp",

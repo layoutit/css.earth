@@ -84,6 +84,16 @@
               "material": "lighting"
             },
             {
+              "id": "maximum-temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "noon-temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "heat-anomalies",
               "source": "content",
               "material": "lighting"

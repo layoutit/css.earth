@@ -4,6 +4,7 @@
 - Moon navigation sprite: NASA SVS CGI Moon Kit, LRO/LROC and LOLA. NASA media usage guidelines.
 - Physical and orbital facts: NASA JPL Solar System Dynamics.
 - Elevation lens: LRO LOLA LDEM16 numeric grid, David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node.
+- Maximum and noon temperature lenses: LRO Diviner Global Cumulative Products, LRO-L-DLRE-5-GCP-V1.0, J.-P. Williams and the UCLA Diviner team; reference Williams et al. (2017), doi:10.1016/j.icarus.2016.08.012; NASA PDS Geosciences Node. Publicly archived NASA mission data; retain producer and PDS citation.
 - Roughness lens: LRO LOLA LDRM_16 surface roughness, David E. Smith and NASA GSFC LRO LOLA team; reference Zuber et al. (2012), doi:10.1038/nature11216; NASA PDS Geosciences Node. Publicly archived NASA mission data; retain producer and PDS citation.
 - Surface elements lenses (thorium, potassium, iron, titanium): Lunar Prospector GRS Elemental Abundance, LP-L-GRS-5-ELEM-ABUNDANCE-V1.0, table LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG, T. H. Prettyman (Planetary Science Institute); reference Prettyman et al. (2006), doi:10.1029/2005JE002656; NASA PDS Geosciences Node. Publicly archived NASA mission data; retain producer and PDS citation.
 - Crustal thickness lens: NASA GSFC Scientific Visualization Studio; GRAIL. NASA media usage guidelines.

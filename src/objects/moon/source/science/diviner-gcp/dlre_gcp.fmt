@@ -1,0 +1,133 @@
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 1
+  NAME                 = clon
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 1
+  BYTES                = 7
+  DESCRIPTION          = "Center longitude of tile (degrees)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "degree"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 2
+  NAME                 = clat
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 10
+  BYTES                = 6
+  DESCRIPTION          = "Center latitude of tile (degrees)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "degree"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 3
+  NAME                 = ltim
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 18
+  BYTES                = 6
+  DESCRIPTION          = "Local time (hours)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "hour"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 4
+  NAME                 = t3
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 26
+  BYTES                = 9
+  DESCRIPTION          = "T3 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 5
+  NAME                 = t4
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 37
+  BYTES                = 9
+  DESCRIPTION          = "T4 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 6
+  NAME                 = t5
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 48
+  BYTES                = 9
+  DESCRIPTION          = "T5 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 7
+  NAME                 = t6
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 59
+  BYTES                = 9
+  DESCRIPTION          = "T6 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 8
+  NAME                 = t7
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 70
+  BYTES                = 9
+  DESCRIPTION          = "T7 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 9
+  NAME                 = t8
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 81
+  BYTES                = 9
+  DESCRIPTION          = "T8 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 10
+  NAME                 = t9
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 92
+  BYTES                = 9
+  DESCRIPTION          = "T9 average calibrated brightness temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN
+
+OBJECT                 = COLUMN
+  COLUMN_NUMBER        = 11
+  NAME                 = tbol
+  DATA_TYPE            = ASCII_REAL
+  START_BYTE           = 103
+  BYTES                = 9
+  DESCRIPTION          = "Bolometric average calibrated brightness
+                         temperature (K)"
+  UNKNOWN_CONSTANT     = -9999
+  INVALID_CONSTANT     = -9998
+  UNIT                 = "K"
+END_OBJECT             = COLUMN

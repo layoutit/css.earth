@@ -18,6 +18,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 | Gravity, Bouguer gravity | [GRAIL GRGM1200A maps](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/), NASA GSFC, PDS release 2016-04-01: free-air anomaly and Bouguer disturbance in mGal, summed to degree 660, 16 pixels/degree. See [GRAIL gravity views](#grail-gravity-views). |
 | Surface elements: thorium, potassium, iron (FeO), titanium (TiO₂) | [Lunar Prospector GRS elemental abundance, LP-L-GRS-5-ELEM-ABUNDANCE-V1.0](https://pds-geosciences.wustl.edu/missions/lunarp/grs_elem_abundance.html), table LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG: [Prettyman et al. (2006)](https://doi.org/10.1029/2005JE002656), 1998 gamma-ray spectra from 100 km, 2° equal-area pixels. See [Surface elements](#surface-elements). |
 | Roughness | [LRO LOLA LDRM_16 V2.0](https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl), mean height scatter about a plane over 30–120 m, July 2009 to December 2011, 16 pixels/degree; the label cites [Zuber et al. (2012)](https://doi.org/10.1038/nature11216). See [Roughness](#roughness). |
+| Maximum and noon temperature | [LRO Diviner Global Cumulative Products, LRO-L-DLRE-5-GCP-V1.0](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/): bin-average bolometric temperature per 0.5° cell and quarter-hour of local time, 2009–2015, [Williams et al. (2017)](https://doi.org/10.1016/j.icarus.2016.08.012). See [Daytime temperature](#daytime-temperature). |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MOON/target) the Moon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 | Lighting | The Hapke model of [Sato et al. (2014)](https://doi.org/10.1002/2013JE004580) at 643 nm, the model the monochrome mosaic was corrected with, recorded in [`source/photometry/sato-2014-hapke-643nm.json`](source/photometry/sato-2014-hapke-643nm.json). See [Lighting law](#lighting-law). |
 
@@ -377,6 +378,69 @@ limits: 1.0% of the Moon's area lies beyond the Gravity stretch and
   than mantle uplift.
 - Numeric colour does not displace the globe. Lighting and shading are the
   shared Moon lighting, not part of the data.
+
+## Daytime temperature
+
+Two views show how hot the Moon's surface gets by day, from the LRO Diviner
+[Global Cumulative Products](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/) (LRO-L-DLRE-5-GCP-V1.0, product version 1),
+made by J.-P. Williams and the UCLA Diviner team and described by
+[Williams et al. (2017)](https://doi.org/10.1016/j.icarus.2016.08.012). The
+archive compiles every nadir observation from 5 July 2009 to 1 April 2015 into
+eighteen tables, one per 10° of latitude. Each row is the average bolometric
+temperature of one 0.5° cell in one quarter-hour of local time; −9999 marks a
+bin with no observation. Midnight temperature comes from a different product,
+GHRM, which holds night-time fits only.
+
+| View | Rule | Coverage |
+| --- | --- | --- |
+| Maximum temperature | The warmest quarter-hour average of each cell | Every cell |
+| Noon temperature | The mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data | 98.64% of the area |
+
+No archived bin is centred on noon: the two nearest are centred 7.5 minutes
+either side. The window was chosen by measurement on the converter's output.
+Those two bins alone (11:45–12:15) cover 87.25% of the area and leave streaks
+and one large gap on the nearside. 11:30–12:30 covers 98.64% and differs from
+them by 1.03 K at the median and 7.32 K at the 95th percentile where both
+exist. 11:00–13:00 covers everything but moves the values by 1.89 K and
+10.66 K. Nothing is fitted or filled. For 82% of cells the maximum falls
+within an hour of noon.
+
+The shared converter `packages/bake/cli/diviner-gcp-grid.mts` reads the tables
+row by row (0.8 GB memory, 20 s) with the recipe
+[`source/science/diviner-gcp/prepare-tbol.json`](source/science/diviner-gcp/prepare-tbol.json)
+and writes the two 720 × 360 float32 grids beside it, with a receipt of every
+input and output hash. Two runs wrote byte-identical grids.
+
+**Colours.** Both views use the Midnight temperature palette over one shared
+range, 220 to 400 K, so they can be compared. 220 K is just below the 1st
+percentile of the noon view (222 K; the maximum's is 242 K) and 400 K just
+above both 99th percentiles (395 K). 0.41% of the area is colder than 220 K in
+the maximum view and 0.94% in the noon view; almost none is above 400 K.
+
+### Evidence
+
+- For three strips, including the one with the faulty label, a separate reading
+  of every row rebuilds both rules and matches the grids at all 43,200 cells
+  ([checks](evidence/diviner-gcp/checks.json)).
+- Within 5° of the equator the maximum's 5th to 95th percentile is 388 to 396 K;
+  Williams et al. (2017) report daytime maxima of about 387 to 397 K there.
+- Their abstract says dark surfaces reach higher maxima and bright ones lower.
+  Here Mare Tranquillitatis reaches 394.5 K and the farside highlands 389.9 K;
+  bright young Tycho 349.5 K and Aristarchus 376.2 K.
+- Flat previews painted with the lens palette were inspected; they are not in
+  the repository.
+
+### Known problems
+
+- Noon gaps are thin streaks, mostly on the nearside: coverage is lowest at
+  40–50°N (96.1%). They show as gray grid.
+- These are averages of many days, not one day's temperatures, and at 0.5°
+  (about 15 km) they blend terrain. Large craters still show as temperature
+  differences.
+- The PDS4 labels give the paper DOI as 10.1026/j.icarus.2016.08.012; it is
+  10.1016/j.icarus.2016.08.012. The PDS3 label of the 40°S–30°S strip exchanges
+  its minimum and maximum latitude; its rows and file name agree with 40°S–30°S,
+  and the recipe records the defect.
 
 ## Surface elements
 

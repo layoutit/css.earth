@@ -84,6 +84,104 @@
       }
     },
     {
+      "id": "maximum-temperature",
+      "source": "science/diviner-gcp/tbol-max-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tbol-max-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 220,
+          "maximum": 400,
+          "colors": [
+            "#24204f",
+            "#3a468b",
+            "#258da4",
+            "#81c9b0",
+            "#f4d17b",
+            "#ec803c",
+            "#9b283a"
+          ],
+          "units": "K",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 720,
+            "height": 360,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.5,
+              -0.5
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
+      "id": "noon-temperature",
+      "source": "science/diviner-gcp/tbol-noon-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tbol-noon-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 220,
+          "maximum": 400,
+          "colors": [
+            "#24204f",
+            "#3a468b",
+            "#258da4",
+            "#81c9b0",
+            "#f4d17b",
+            "#ec803c",
+            "#9b283a"
+          ],
+          "units": "K",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 720,
+            "height": 360,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.5,
+              -0.5
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
       "id": "heat-anomalies",
       "source": "science/diviner-ghrm/tbol_anom-compact.tif",
       "falseColor": true,
