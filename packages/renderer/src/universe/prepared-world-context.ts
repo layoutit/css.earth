@@ -11,6 +11,8 @@ import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
+/** The largest dot a star is drawn as, whatever its radius. */
+const STAR_DOT_MAX_DIAMETER_PIXELS = 2;
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -552,7 +554,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         // A twentieth of a pixel is below what a scaled sprite shows. Rotation changes
         // every marker's distance a little each frame; without this step every marker
         // and its ring and caption pseudo-elements would restyle on every frame.
-        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? entry.dotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
+        // A placed star's dot is capped: sized by radius, every giant reached the largest dot and thousands buried the view.
+        const dotDiameter = entry.dotDiameter === null ? null : entry.orbit === null && entry.body.id !== plan.focus.id ? Math.min(STAR_DOT_MAX_DIAMETER_PIXELS, entry.dotDiameter) : entry.dotDiameter;
+        const markerDiameter = Math.round((entry.plainDot ? Math.max(plainDots!.minimumDiameterPixels, diameter) : flatDot ? dotDiameter ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS :
           Math.max(entry.sprite?.minimumDiameterPixels ?? MINIMUM_BODY_MARKER_DIAMETER_PIXELS, diameter)) * 20) / 20;
         const wasShown = entry.paint.billboardShown === true;
         const hoverChanged = entry.paint.indicatorHovered !== entry.hovered;

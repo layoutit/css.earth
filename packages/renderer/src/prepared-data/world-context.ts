@@ -25,6 +25,9 @@ export interface PreparedContextPoint {
   readonly discovery?: Readonly<Record<string, unknown>>;
   /** Not a map target: drawn as a plain dot, its path in its own bank (packages/bake/src/world-context/spatial-context.ts). */
   readonly plainDot?: true;
+  /** A star's dot colour: its colour dimmed by its luminosity, prepared from its package's cited radius and effective
+   * temperature (tools/objects/prepare-spatial-context.ts). Absent, the dot takes `color`. */
+  readonly dotColor?: string;
   readonly positionM: PositionM;
   readonly radiusM: number;
 }
@@ -156,7 +159,12 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
     ...(input.systemName === undefined ? {} : { systemName: text(input.systemName, `point ${id} system name`) }),
     ...(input.discovery === undefined ? {} : { discovery: Object.freeze({ ...record(input.discovery, `point ${id} discovery`) }) }),
     ...(input.plainDot === undefined ? {} : input.plainDot === true ? { plainDot: true as const }
-      : (() => { throw new TypeError(`Context point ${id} plain dot is ${String(input.plainDot)}, not true.`); })()) });
+      : (() => { throw new TypeError(`Context point ${id} plain dot is ${String(input.plainDot)}, not true.`); })()),
+    ...(input.dotColor === undefined ? {} : { dotColor: (() => {
+      const hex = text(input.dotColor, `point ${id} dot colour`);
+      if (!/^#[a-f0-9]{6}$/i.test(hex)) throw new TypeError(`Context point ${id} dot colour ${hex} is not #rrggbb.`);
+      return hex;
+    })() }) });
 }
 export interface PreparedSystemViewCandidate { readonly cameraToReference: readonly number[];
   readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }
@@ -497,7 +505,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot', 'dotColor'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView, geometry);
