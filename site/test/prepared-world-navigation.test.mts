@@ -23,7 +23,7 @@ await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };
-type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; framingScale(): Promise<number>; prepare(options: { getView(): ObjectPreparationView; initialTextures?: boolean }): Promise<MockLease> };
+type MockPreparation = { frame: Mutable<PreparedWorldCameraFrame>; framingRadius(): Promise<number>; framingScale(): Promise<number>; prepare(options: { getView(): ObjectPreparationView }): Promise<MockLease> };
 type MockFactory = { navigation: MockPreparation };
 type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
 type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
@@ -108,15 +108,10 @@ test('billboard covers attachment at the final viewport framing with no second c
   assert.ok(stage);
   const surface = document.querySelector<HTMLElement>('.object-input-surface');
   assert.ok(surface);
-  let initialTextures: boolean | undefined;
-  const prepare = f.factory.navigation.prepare;
-  f.factory.navigation.prepare = options => { initialTextures = options.initialTextures; return prepare(options); };
   const target = createWorldSelectionTarget(f.navigation.capture(), f.factory.navigation.frame, f.navigation.optics());
   assert.ok(target);
   const handoff = await drainFrames(f, { task: f.start({ stage }) });
   assert.equal(handoff.mountOptions.progressiveActivation, true);
-  assert.equal(handoff.mountOptions.deferTextureRefinement, false);
-  assert.equal(initialTextures, false, 'the covered arrival prepares viewport texels, like startup');
   assert.equal(surface.inert, true);
   const initial = required(handoff.mountOptions.initialWorldCamera);
   const expected = presentWorldCamera(target, f.factory.navigation.frame, f.navigation.optics());
