@@ -1,4 +1,5 @@
 ---
+import { collectInformationTabStyle, informationTabStyle } from '../server/information-tab-styles.mts';
 interface Props {
   idPrefix: string;
   group?: string;
@@ -10,7 +11,9 @@ interface Props {
 }
 const { idPrefix, group, label = group === 'overview' ? 'Body overview' : 'Object information', panelSuffix = 'content',
   tabs = [{ id: 'dataset', label: 'Datasets' }, { id: 'factsheet', label: 'Factsheet' }, { id: 'moons', label: 'Moons' }], initialTab, hidden = false } = Astro.props;
-// Selection rules are prepared from these controls in ObjectLayout and retained in the scene head.
+// These controls' selection rules; ObjectLayout places them in the scene head, where navigation retains them.
+collectInformationTabStyle(Astro.locals, informationTabStyle(`${idPrefix}-information`,
+  tabs.map(tab => ({ id: `${idPrefix}-${tab.id}-tab`, panelId: `${idPrefix}-${tab.id}-${panelSuffix}` }))));
 ---
 <div class:list={[group === 'overview' ? 'object-tabs' : 'object-card-tabs', 'object-native-tabs']}
   data-body-overview={group === 'overview' ? true : undefined} role="radiogroup" aria-label={label} {hidden}>
