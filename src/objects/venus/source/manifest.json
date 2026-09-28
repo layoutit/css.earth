@@ -29,7 +29,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
       "redistribution": "checked NASA image with full credit and no endorsement claim",
       "consumers": [
         "navigation"
@@ -54,7 +54,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "scene",
@@ -121,7 +121,7 @@
         "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m",
         "https://www.usgs.gov/media/images/magellan-global-c3-mdir-colorized-topographic-mosaic"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh requests the declared complete USGS WMS extent",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh requests the declared complete USGS WMS extent",
       "redistribution": "public-domain USGS/NASA prepared scientific product with attribution",
       "consumers": [
         "scene",
@@ -158,7 +158,7 @@
         "https://www.isas.jaxa.jp/en/researchers/data-policy/",
         "https://doi.org/10.17597/isas.darts/vco-00016"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh downloads the pinned Level 3b exposure from the vco_uvi_l3 v1.1 volume vcouvi_7011, orbit r0257",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh downloads the pinned Level 3b exposure from the vco_uvi_l3 v1.1 volume vcouvi_7011, orbit r0257",
       "redistribution": "CC BY 4.0 with the data citation recorded in README.md",
       "consumers": [
         "scene",
@@ -1042,7 +1042,7 @@
         "https://www.wipo.int/wipolex/en/legislation/details/22974",
         "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1067,7 +1067,7 @@
         "https://www.wipo.int/wipolex/en/legislation/details/22974",
         "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1092,7 +1092,7 @@
         "https://www.wipo.int/wipolex/en/legislation/details/22974",
         "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1117,7 +1117,7 @@
         "https://www.wipo.int/wipolex/en/legislation/details/22974",
         "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
       ],
-      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "sourceBinding": {
         "kind": "catalogued",
