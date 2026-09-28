@@ -1,0 +1,30 @@
+{
+ "id": "sv-mon",
+ "classification": "star",
+ "order": 2013,
+ "physical": {
+  "name": "SV Mon",
+  "horizonsCode": null,
+  "meanRadiusKm": 49812120,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5375
+ },
+ "physicalNotes": "Radius 71.6 +/- 3.5 solar radii from Groenewegen (2013), A&A 550, A70, table10, SV Mon: Baade-Wesselink mean radius (solar radii) 71.6 +/- 3.5 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 49,812,120 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5375 +/- 406 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 157, Name='SV Mon', columns Teff, e_Teff (K): Teff 5375 +/- 406 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 95.35960712118661,
+  "declinationDegrees": 6.47015262947898,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1978.6,
+  "properMotionRaMasPerYear": 0.7453440488070137,
+  "properMotionDecMasPerYear": -1.8109739239236455,
+  "radialVelocityKmPerS": 34.459427,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3324153371114695680 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/sv-mon/source/photometry/gaia-dr3-source.csv; cross-identification HD 44320, HIP 30219: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3324153371114695680",
+   "distance": "Groenewegen (2013), A&A 550, A70, table10, SV Mon: Baade-Wesselink distance (pc) 1978.6 +/- 95 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1978.6 +/- 95 pc; Gaia DR3 parallax 0.4324 +/- 0.0321 mas (same row, RUWE 1.01), 13.5 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 0.745, -1.811 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 34.46 +/- 6.33 km/s"
+  }
+ }
+}

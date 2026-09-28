@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-202346196",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Khan et al. (2023): Investigating <i>Gaia</i> EDR3 parallax systematics using asteroseismology of Cool Giant Stars observed by <i>Kepler</i>, K2, and TESS",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346196"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/202346196",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202346196",
+      "checkedOn": "2026-09-28",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/202346196"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 677 A21",
+  "creators": [
+    "S. Khan",
+    "A. Miglio",
+    "E. Willett",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yz-sgr",
+  "card": {
+    "text": "A Cepheid in the Milky Way, 58 times the Sun's width, that swells and shrinks every 9.6 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1212-5478",
+        "url": "https://arxiv.org/abs/1212.5478",
+        "label": "Groenewegen (2012)",
+        "checked": "2026-09-28",
+        "locator": "table10, YZ Sgr: Per, Rad, Dist"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its mean radius, 58.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,120 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1212-5478",
+        "url": "https://arxiv.org/abs/1212.5478",
+        "label": "Groenewegen (2012)",
+        "checked": "2026-09-28",
+        "locator": "table10, YZ Sgr: Per, Rad, Dist"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light."
+    }
+  }
+}

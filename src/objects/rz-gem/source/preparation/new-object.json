@@ -1,0 +1,59 @@
+{
+  "id": "rz-gem",
+  "name": "RZ Gem",
+  "system": "RZ Gem system",
+  "description": "A Cepheid in the Milky Way that pulsates every 5.53 days; its mean radius is 39.2 solar radii.",
+  "target": "RZ Gem",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 39.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, RZ Gem: Baade-Wesselink mean radius (solar radii) 39.2 +/- 3.8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 3.8
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5750,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 145, Name='RZ Gem', columns Teff, e_Teff (K): Teff 5750 +/- 412 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 412
+  },
+  "distance": {
+    "value": 1990.3,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, RZ Gem: Baade-Wesselink distance (pc) 1990.3 +/- 193.9 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 193.9
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.563 +/- 0.025 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 39 times the Sun's width, that swells and shrinks every 5.5 days.",
+    "introduction": "Its mean radius, 39.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,990 parsecs away.",
+    "locator": "table10, RZ Gem: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ],
+  "radialVelocity": {
+    "value": 6.5,
+    "uncertainty": 2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 3423693395726613504 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 2011
+}

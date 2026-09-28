@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ry-sco",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "RY Sco",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 61639020
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ry-sco-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "RY Sco",
+      "classification": "star",
+      "color": "#ffe6d0",
+      "distanceAu": 224333569.6,
+      "description": "A Cepheid in the Milky Way, 89 times the Sun's width, that swells and shrinks every 20.3 days.",
+      "systemName": "RY Sco system",
+      "order": 2023,
+      "context": {
+        "order": 2020
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1111594399211037300,
+        -27896249684717280000,
+        -18623249466770020000
+      ],
+      "presentationToReference": [
+        -0.033122773272376456,
+        0.02209493626758639,
+        -0.9992070334430588,
+        -0.8312394827755591,
+        0.5544868059359941,
+        0.039815880222847544,
+        -0.5549268457785834,
+        -0.8318991500381705,
+        -4.263948532035518e-8
+      ],
+      "orbitUpReference": [
+        -0.02209493626758639,
+        -0.5544868059359941,
+        0.8318991500381705
+      ],
+      "metersPerUnit": 198835548.38709676,
+      "bodyRadiusM": 61639020000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -31,7 +31,7 @@ export { neutralDiscMarker, scaffoldStar, scaffoldStarFiles, solarRadii, starSty
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
   const specPath = option('spec'), handoff = option('hosted');
-  if (args.some(argument => /^--from-[a-z]+$/u.test(argument))) {
+  if (args.some(argument => /^--from-[a-z0-9]+$/u.test(argument))) {
     throw new TypeError('Drafts have one path: pnpm telescope new-object --from-<route> NAME... --out SPEC.json (new-object/drafts.mts).');
   } else if (handoff) {
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.

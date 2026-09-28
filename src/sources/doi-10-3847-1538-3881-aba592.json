@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aba592",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jönsson et al. (2020): APOGEE Data and Spectral Analysis from SDSS Data Release 16: Seven Years of Observations Including First Results from APOGEE-South",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2007.05537"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aba592"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....160..120J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..120J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aba592",
+      "label": "The Astronomical Journal 160 120"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..120J",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jönsson et al. (2020), The Astronomical Journal 160 120",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..120J"
+    }
+  ],
+  "publisher": "The Astronomical Journal 160 120",
+  "creators": [
+    "Henrik Jönsson",
+    "Jon A. Holtzman",
+    "Carlos Allende Prieto",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}
