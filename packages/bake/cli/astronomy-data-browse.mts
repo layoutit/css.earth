@@ -1,5 +1,5 @@
 // Entry script: node packages/bake/cli/astronomy-data-browse.mts. Opens the ledger in Datasette, read-only, with the
-// overview dashboard, the dark theme and the map gallery; the work is in @cssearth/bake/sources.
+// overview dashboard, the dark theme and the map gallery; the work is in @cssearth/bake/sources/astronomy-data.
 /**
  * The first run installs the pinned Datasette packages into output/ledger-venv (ignored); PORT changes the port
  * (default 8001).
@@ -7,7 +7,7 @@
 import { spawnSync, spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { databasePath, root, checkoutRoot } from "@cssearth/bake/sources";
+import { databasePath, root, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 
 const config = resolve(root, "datasette"), venv = resolve(checkoutRoot, "output/ledger-venv");
 const datasette = resolve(venv, "bin/datasette");

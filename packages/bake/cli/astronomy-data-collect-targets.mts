@@ -10,7 +10,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { batch, object, string, databasePath, checkoutRoot } from "@cssearth/bake/sources";
+import { batch, object, string, databasePath, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 
 const dir = resolve(checkoutRoot, process.env.TARGETS_WORK_DIR ?? "output/ledger-targets");
 await mkdir(dir + "/cache", { recursive: true });

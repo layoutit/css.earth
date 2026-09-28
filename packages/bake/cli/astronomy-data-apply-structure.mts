@@ -1,5 +1,5 @@
 // Entry script: node packages/bake/cli/astronomy-data-apply-structure.mts [--dry-run]. Gives the ledger a data structure
-// a query can rely on, in one transaction; the work is in @cssearth/bake/sources.
+// a query can rely on, in one transaction; the work is in @cssearth/bake/sources/astronomy-data.
 //
 // - Moves the listings that repeat datasets out of `datasets` into `inventory`, with their proposal links: OPUS volumes
 //   and geometry (the same 1,627,081 observations as `opus`, split two other ways), Maryland holdings (directory
@@ -12,7 +12,7 @@
 //   archive already lists one row per dataset, so each row is its own family.
 // Running it again rebuilds the two body tables and the families.
 import { DatabaseSync } from "node:sqlite";
-import { bodiesOf, databasePath, checkoutRoot, bodyCatalogue, type Body, object, string } from "@cssearth/bake/sources";
+import { bodiesOf, databasePath, checkoutRoot, bodyCatalogue, type Body, object, string } from "@cssearth/bake/sources/astronomy-data";
 
 const dry = process.argv.includes("--dry-run");
 // "Rosetta-Orbiter RSI Escort 3 67P Gravity Measurement - 2014-12-14T06:44" and its 1,659 siblings are one series.

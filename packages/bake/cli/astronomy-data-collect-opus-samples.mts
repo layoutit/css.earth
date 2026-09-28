@@ -1,8 +1,8 @@
 // Entry script: node packages/bake/cli/astronomy-data-collect-opus-samples.mts. OPUS pipeline stage: two-record samples
 // per instrument/target family and Cassini/Galileo/Voyager/New Horizons geometry facets, into OPUS_WORK_DIR; the shared
-// client is in @cssearth/bake/sources.
+// client is in @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile } from "node:fs/promises";
-import { array, object, string, number, get, batch, mults, workDir } from "@cssearth/bake/sources";
+import { array, object, string, number, get, batch, mults, workDir } from "@cssearth/bake/sources/astronomy-data";
 const families = array(
   JSON.parse(await readFile(workDir + "/families.json", "utf8")),
 ).map(object);

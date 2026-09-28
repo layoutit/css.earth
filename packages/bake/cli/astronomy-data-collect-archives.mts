@@ -1,10 +1,10 @@
 // Entry script: node packages/bake/cli/astronomy-data-collect-archives.mts umd|darts. Collects University of Maryland
 // Small Bodies Node or JAXA DARTS metadata into ignored scratch output (ARCHIVE_WORK_DIR); the work is in
-// @cssearth/bake/sources.
+// @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
-import { array, object, string, number, batch, screen, checkoutRoot } from "@cssearth/bake/sources";
+import { array, object, string, number, batch, screen, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 const dir = resolve(checkoutRoot, process.env.ARCHIVE_WORK_DIR ?? "output/archive-refresh");
 const mode = process.argv[2];
 if (mode !== "umd" && mode !== "darts") throw Error("Expected umd or darts");

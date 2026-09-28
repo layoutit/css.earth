@@ -1,9 +1,9 @@
 // Entry script: node packages/bake/cli/astronomy-data-collect-opus.mts. Collects OPUS catalogue, sample, volume,
 // product, label and review data into ignored scratch output (OPUS_WORK_DIR), running the astronomy-data-collect-opus-{
-// catalog,samples,volumes,products,labels,review}.mts stages in order; the shared client is in @cssearth/bake/sources.
+// catalog,samples,volumes,products,labels,review}.mts stages in order; the shared client is in @cssearth/bake/sources/astronomy-data.
 import { mkdir, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
-import { workDir, get } from "@cssearth/bake/sources";
+import { workDir, get } from "@cssearth/bake/sources/astronomy-data";
 await mkdir(workDir, { recursive: true });
 const response = await fetch(
   "https://opus.pds-rings.seti.org/opus/__help/bundles.html",

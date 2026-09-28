@@ -1,5 +1,5 @@
 // Entry script: node packages/bake/cli/astronomy-data-collect-trek.mts [--dry-run]. Collects NASA Solar System Treks map
-// products into the ledger; the work is in @cssearth/bake/sources.
+// products into the ledger; the work is in @cssearth/bake/sources/astronomy-data.
 /**
  * Each Trek portal lists its layers through TrekServices searchItems. A product with a category (Imagery, Topography,
  * Gravity, ...) is a map layer: one `datasets` row, source `trek`, with the full record in details_json. Items without a
@@ -11,7 +11,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 import { DatabaseSync } from "node:sqlite";
-import { databasePath } from "@cssearth/bake/sources";
+import { databasePath } from "@cssearth/bake/sources/astronomy-data";
 
 const PORTALS: Record<string, string> = { // Trek portal -> the body its layers show
   moon: "Moon", mars: "Mars", mercury: "Mercury", venus: "Venus", vesta: "Vesta", ceres: "Ceres",

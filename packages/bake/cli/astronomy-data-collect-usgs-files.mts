@@ -10,7 +10,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { batch, string, databasePath, checkoutRoot } from "@cssearth/bake/sources";
+import { batch, string, databasePath, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 
 const dir = resolve(checkoutRoot, process.env.USGS_WORK_DIR ?? "output/usgs-files");
 await mkdir(dir + "/cache", { recursive: true });

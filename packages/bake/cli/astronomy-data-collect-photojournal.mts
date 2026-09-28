@@ -10,7 +10,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
-import { array, object, string, batch, checkoutRoot } from "@cssearth/bake/sources";
+import { array, object, string, batch, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 
 const dir = resolve(checkoutRoot, process.env.PHOTOJOURNAL_WORK_DIR ?? "output/photojournal-refresh");
 const api = "https://science.nasa.gov/wp-json/wp/v2";

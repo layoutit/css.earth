@@ -1,5 +1,5 @@
 // Entry script: node packages/bake/cli/astronomy-data-mark-map-usage.mts [--ref=origin/main] [--dry-run]. Marks the
-// ledger's USGS and Photojournal maps that a cssEarth body already downloads; the work is in @cssearth/bake/sources.
+// ledger's USGS and Photojournal maps that a cssEarth body already downloads; the work is in @cssearth/bake/sources/astronomy-data.
 /**
  * A dataset is `this product` for a body when one of its map files has the same file name as an `origin` or `url` in
  * exactly one body's source/manifest.json at the given ref. Preview images are not maps. Rows already in map_usage,
@@ -8,7 +8,7 @@
 import { execFileSync } from "node:child_process";
 import { basename } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { databasePath, checkoutRoot } from "@cssearth/bake/sources";
+import { databasePath, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
 
 const ref = process.argv.find(arg => arg.startsWith("--ref="))?.slice("--ref=".length) ?? "origin/main";
 const dry = process.argv.includes("--dry-run");

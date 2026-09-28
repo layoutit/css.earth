@@ -12,7 +12,7 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { array, object, string, databasePath, reviewPhotojournal, checkoutRoot, type PhotojournalEntry } from "@cssearth/bake/sources";
+import { array, object, string, databasePath, reviewPhotojournal, checkoutRoot, type PhotojournalEntry } from "@cssearth/bake/sources/astronomy-data";
 
 const dry = process.argv.includes("--dry-run");
 const read = async (path: string) => object(JSON.parse(await readFile(resolve(checkoutRoot, path), "utf8")));
