@@ -168,7 +168,7 @@ test('an authored environment link is interactive only while its caption is admi
 test('a published stellar extent rings the volume and hangs its caption under the ring', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const labels = mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [], ringRadiusM: 150 });
-  const label = labels.inspect()['deep-cloud']!, ring = labels.root.children.find(node => node.dataset.volumeRing === 'deep-cloud')!;
+  const label = labels.inspect()['deep-cloud']!, ring = (labels.root as unknown as FakeElement).children.find(node => node.dataset.volumeRing === 'deep-cloud')!;
   expect(ring.className).toBe('prepared-context-marker');
   const publish = (z: number) => labels.publish({ world: world([0, 0, z]), viewport: { ...viewport, widthPixels: 800, heightPixels: 600 }, shellStats: [] });
   // 1.5 units seen from 3 units away spans 50 px of radius at a 100 px focal length.
@@ -192,7 +192,7 @@ test('a published stellar extent rings the volume and hangs its caption under th
 test('without a published extent the volume keeps its caption and has no ring', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const labels = mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [] });
-  expect(labels.root.children.some(node => node.dataset.volumeRing !== undefined)).toBe(false);
+  expect((labels.root as unknown as FakeElement).children.some(node => node.dataset.volumeRing !== undefined)).toBe(false);
   expect(() => mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [], ringRadiusM: 0 }))
     .toThrow(/deep-cloud: stellar extent must be a positive radius/);
   labels.destroy();
