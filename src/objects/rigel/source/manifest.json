@@ -178,11 +178,115 @@
           }
         ]
       }
+    },
+    {
+      "id": "rigel-howarth-2011-t12000g15",
+      "path": "photometry/howarth-2011/t12000g15.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t12000g15.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rigel-howarth-2011-t12000g15",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rigel-howarth-2011-t12000g20",
+      "path": "photometry/howarth-2011/t12000g20.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t12000g20.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rigel-howarth-2011-t12000g20",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rigel-howarth-2011-t12250g15",
+      "path": "photometry/howarth-2011/t12250g15.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t12250g15.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rigel-howarth-2011-t12250g15",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rigel-howarth-2011-t12250g20",
+      "path": "photometry/howarth-2011/t12250g20.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t12250g20.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-rigel-howarth-2011-t12250g20",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "stellar-color-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
@@ -196,7 +300,11 @@
           "rigel-stellar-color",
           "rigel-pulkovo-spectrophotometry",
           "rigel-cie-1931-2deg-cmf",
-          "rigel-preparation-raster"
+          "rigel-preparation-raster",
+          "rigel-howarth-2011-t12000g15",
+          "rigel-howarth-2011-t12000g20",
+          "rigel-howarth-2011-t12250g15",
+          "rigel-howarth-2011-t12250g20"
         ]
       },
       "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",

@@ -40,6 +40,15 @@
       "evidence": [
         "https://arxiv.org/abs/2403.08865"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law (u1 0.46, u2 0) de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225 fit to this star (VLT/CRIRES+ J1226 setting (1.1-1.4 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/luhman-16.json: 4.935.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.21266"
+      ]
     }
   ]
 }

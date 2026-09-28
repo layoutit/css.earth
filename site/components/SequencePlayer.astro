@@ -1,0 +1,40 @@
+---
+import type { Props as ShellProps } from '../object-shell-types';
+import MaterialSymbol from './MaterialSymbol.astro';
+type Control = NonNullable<ShellProps['lenses']>['controls'][number];
+interface Props {
+  objectId: string;
+  lens: Control;
+  members: Control[];
+  controlName: 'dataset' | 'focusLens';
+}
+const { objectId, lens, members, controlName } = Astro.props;
+const focus = controlName === 'focusLens';
+const index = members.findIndex(member => member.id === lens.id);
+---
+<!-- A sequence plays like a short video over its own map: one segment per step, filled up to the step on screen. -->
+<div class="object-sequence-player" data-sequence-player role="group" aria-label={`${lens.label} steps`}>
+  <div class="object-sequence-track">
+    {members.map((member, position) => <button
+      class:list={['object-sequence-segment', { 'is-past': position < index }]}
+      type="submit"
+      form={`${objectId}-datasets`}
+      name={controlName}
+      value={member.id}
+      data-dataset-step={member.id}
+      data-focus-lens={focus ? true : undefined}
+      aria-current={position === index ? 'step' : undefined}
+      aria-label={member.step!.label}
+      title={member.step!.label}
+    ><span class="object-sequence-segment-bar" aria-hidden="true"><span class="object-sequence-segment-fill"></span></span></button>)}
+  </div>
+  <div class="object-sequence-row">
+    {!focus && <button class="object-lens-play" type="button" data-dataset-play={lens.step!.group} disabled
+      aria-label="Play sequence" aria-pressed="false" title="Loop through this sequence">
+      <span class="object-lens-play-icon is-play"><MaterialSymbol name="play_arrow" /></span>
+      <span class="object-lens-play-icon is-pause"><MaterialSymbol name="pause" /></span>
+    </button>}
+    <span class="object-sequence-label">{lens.step!.label}</span>
+    <span class="object-sequence-count">{index + 1}/{members.length}</span>
+  </div>
+</div>

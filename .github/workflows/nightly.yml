@@ -62,7 +62,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Generate the object registry
-        # `tools/prepare/prepare-catalog.mts` reaches `tools/prepare/prepare-object-discovery.mts`, which imports the built
+        # `site/build/prepare/prepare-catalog.mts` reaches `site/build/prepare/prepare-object-discovery.mts`, which imports the built
         # `@cssearth/renderer/navigation`; `build:astronomy` alone never produces it, so the catalog step died with
         # ERR_MODULE_NOT_FOUND. `build:packages` is the step of `build:tools` that produces it (the renderer is one of the
         # packages), without the preparation bundles this job never reads.

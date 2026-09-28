@@ -4,14 +4,20 @@
     {
       "location": "public",
       "filename": "proxima-centauri-arrival.webp",
-      "bytes": 18718,
-      "sha256": "049a59a1560ae443c49ac51ba001fd924aa64fa4d68c11f5d23d30cc42270f1c"
+      "bytes": 30550,
+      "sha256": "9264e31491f0f70295674a999f451500c68cb4ed2ba61ba41b65df63683b37c2"
     },
     {
       "location": "public",
       "filename": "proxima-centauri-lens-color.webp",
       "bytes": 44,
       "sha256": "2172156ae50ed344ff3dd542b15cd68b7900e03b84c23871ee1d3fe273b93e2b"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-limb-color@2x.webp",
+      "bytes": 94358,
+      "sha256": "fc3bfc3c839edf672f9961dc50dce19cafdd9b9e503066ef8f49f4760f1e4848"
     },
     {
       "location": "public",
@@ -34,14 +40,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1780,
-      "sha256": "68d6189bfef855af1f81cbcbc10e39402cb1a0e24f4a42a83e915dd2de09d03c"
+      "bytes": 2278,
+      "sha256": "129a9996ca9c7f5887d7dbff5a1670bc63da6abd701836310805e10889258186"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1415,
-      "sha256": "e9ceb2592c829bfbfb36d0c95ff690d18167781bd418d746c2e19319302b8926"
+      "sha256": "0db209f95fc74ad1e70f5c8565e8fe5c7cec471529c86bb2939b53ffe6df5308"
     },
     {
       "location": "prepared",
@@ -58,8 +64,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 916,
-      "sha256": "32e0a2790a2abd157512190bfe3c18ea83891c9bdc18e902e2fc49e72cd1c3c7"
+      "bytes": 1115,
+      "sha256": "c1e8e838db19d92e5a4327309e1cbb2456d705a22251a1a87bb05082271b88c2"
     },
     {
       "location": "prepared",
@@ -76,14 +82,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 507494,
-      "sha256": "cb0ecdb0b638b8f3e384319a151c5c3f96050159b66b106eca58033febaf2b5d"
+      "bytes": 507636,
+      "sha256": "5199f52b6ff8a5ecad57555f46ac79917a19579bb9cb5ed660a47afc4cf15c1e"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 396988,
-      "sha256": "6b647f67c923d3743726b2d59b2a0fd52e0e7500a285e8c52756413b3b523bd4"
+      "bytes": 397000,
+      "sha256": "5acf82da1be382f368675e1f4113e836dc127451ead315eb8d6ac734044e8eef"
     },
     {
       "location": "prepared",

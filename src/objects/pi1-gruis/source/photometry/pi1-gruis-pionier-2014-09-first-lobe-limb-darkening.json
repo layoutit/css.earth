@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "pi1-gruis",
+  "source": "π¹ Gruis, VLTI/PIONIER, nights of 25/26 and 29/30 September 2014 (ESO programme 093.D-0598, Paladini et al. 2018), the calibrated visibilities in observations/PI_GRU_forImage.fits",
+  "fit": {
+    "tool": "fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), run by node tools/objects/new-object.mts --star-limb",
+    "input": "observations/PI_GRU_forImage.fits",
+    "data": "the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe"
+  },
+  "band": "VLTI/PIONIER H band (1.5-1.8 um); not a visible band",
+  "law": "power",
+  "basis": "fit",
+  "alpha": {
+    "value": 1.29,
+    "uncertainty": 0.11,
+    "cell": "alpha 1.29 (1.18 to 1.39 with the diameter refitted), limb-darkened diameter 21.38 mas, reduced chi-squared 5.97 over the 341 squared visibilities shorter than the first null of the 18.17 mas uniform disc; the uncertainty is the larger side"
+  },
+  "note": "No paper publishes a limb law for this star and no model grid reaches it. The first lobe is where the whole disc dominates; past it the surface structure does, and a law fitted there measures the structure, not the limb."
+}

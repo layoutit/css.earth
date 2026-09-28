@@ -115,6 +115,7 @@ test('TRAPPIST-1 bakes its cited I+z model-prior limb law without off-disc light
   const { limbDarkening, color } = await loadStellarPhotometricColor(source, science, 'photometry/stellar-color.json');
   assert.ok(limbDarkening);
   assert.equal(limbDarkening.recipe.source, 'published');
+  if ('alpha' in limbDarkening.coefficients) throw new TypeError('TRAPPIST-1 publishes a quadratic law.');
   assert.equal(limbDarkening.coefficients.u1, 0.65);
   assert.equal(limbDarkening.coefficients.u2, 0.28);
   assert.ok('basis' in limbDarkening.coefficients && limbDarkening.coefficients.basis === 'model-prior');

@@ -42,6 +42,15 @@
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau",
         "https://doi.org/10.1051/0004-6361/201731471"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Neilson & Lester (2013), A&A 554, A98 compute from spherical ATLAS (SATLAS) model atmospheres for the Johnson V band at 3,801 K and log g -0.12 for 14.37 solar masses (u1 1.111, u2 -0.000); the model atmosphere is extended, and the law reaches zero at 99.5% of the radius, where the disc is drawn dark: a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/ce-tauri.json: -0.119.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
+      ]
     }
   ]
 }

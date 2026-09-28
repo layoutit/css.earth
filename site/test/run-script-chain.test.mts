@@ -32,7 +32,7 @@ test('site chains restore prepared assets before discovery reads them, and a dep
     const commands = expandScriptChain(scripts, name).map(step => step.command);
     // Discovery reads each body's prepared/controls.json, which only the R2 restore provides on a clean checkout.
     const restore = commands.indexOf('node packages/bake/cli/setup-assets.mts');
-    const catalogue = commands.indexOf('node tools/prepare/cli/prepare-catalog.mts');
+    const catalogue = commands.indexOf('node site/build/prepare/prepare-catalog.mts');
     assert.ok(restore >= 0 && restore < catalogue, `${name}: first restore at step ${restore}, catalogue at step ${catalogue}`);
   }
   // The deploy bundles the published world context, so it restores once and never regenerates the world. A copy made on

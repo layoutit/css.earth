@@ -207,7 +207,7 @@ test('the provenance records and the runtime asset closure are followed into @cs
 
 test('the catalogue readers are followed into @cssearth/catalog, as when the spatial citations and navigation imported them by path', async () => {
   const CATALOGUE = ['packages/catalog/src/clusters.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/spatial.ts'];
-  for (const entry of ['packages/bake/src/sources/spatial-source-citations.ts', 'tools/prepare/prepare-facilities.mts', 'packages/bake/src/navigation/navigation-destinations.ts']) {
+  for (const entry of ['packages/bake/src/sources/spatial-source-citations.ts', 'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/navigation/navigation-destinations.ts']) {
     const paths = new Set((await implementationFingerprint(WORKSPACE, [entry])).files.map(file => file.path));
     for (const path of CATALOGUE) assert.ok(paths.has(path), `${entry} identity names ${path}`);
   }

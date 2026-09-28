@@ -127,11 +127,11 @@ Read the current `package.json` and runner arguments before using commands:
 | Start the shared development site | `pnpm dev` |
 | Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
-| Update scene-body provenance and source/mission catalogues | `node tools/prepare/cli/prepare-provenance.mts [<id>]` |
-| Bind new inputs to catalogue records | `node tools/sources/author-source-records.mts <id>` |
+| Update scene-body provenance and source/mission catalogues | `node site/build/prepare/prepare-provenance.mts [<id>]` |
+| Bind new inputs to catalogue records | `node site/build/prepare/author-source-records.mts <id>` |
 | Check shared body runtime behavior | `node --test tests/objects/unit/runtime-package.test.mts`; run affected scientific tests in `tests/objects/unit/` too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
-| Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "tools/sources/*.test.mts" "tests/sources/*.test.mts"`, or select the affected files |
+| Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "tests/sources/*.test.mts"`, or select the affected files |
 | Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, `node tests/oracles/run.mts`; see `tests/oracles/README.md` |
 | Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |

@@ -11,9 +11,10 @@ const categories = legend?.kind === 'categories' ? legend.items : undefined;
 const colors = categories?.map(item => item.color) ?? legend?.colors;
 const scaleLabel = `${legend?.title ?? ''}${legend?.meta ? ` (${legend.meta})` : ''}`;
 const labels = categories?.map(item => ({ text: item.label, detail: item.description }))
-  ?? legend?.labels?.map((text, index) => ({
-    text: `${text}${index === (legend.labels?.length ?? 0) - 1 && legend.meta ? ` ${legend.meta}` : ''}`,
-  })) ?? [];
+  ?? legend?.labels?.map(text => ({ text })) ?? [];
+// The scale's unit and stretch run the card's full width under the ticks; appended to the last tick they wrapped
+// inside its narrow column.
+const meta = categories ? undefined : legend?.meta;
 // The shell explains the shared no-data grid once, so dataset text never repeats it.
 const noData = lens.noData === true;
 ---
@@ -37,6 +38,7 @@ const noData = lens.noData === true;
   </ul> : <div class="object-lens-legend-labels" style={`--legend-label-count: ${labels.length}`}>
     {labels.map(label => <span>{label.text}</span>)}
   </div>)}
+  {meta && <p class="object-lens-legend-meta">{meta}</p>}
   {noData && <p class="object-lens-legend-no-data">
     <svg class="object-lens-legend-no-data-swatch" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       <rect width="12" height="12" fill="#525452" />

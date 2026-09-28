@@ -50,7 +50,7 @@ frames are combined.
 ## Set up and measure
 
 ```bash
-node tools/objects/sphere-survey/setup.mts <id>
+node packages/bake/cli/sphere-survey-setup.mts <id>
 ```
 
 This writes nothing in the package. In `output/sphere-survey/<id>/` it builds a
@@ -58,7 +58,7 @@ copy of the package's `source/` with the lens added, measures it, and writes
 `setup.json`, `evidence/published-comparison.json` and the evidence image. Along
 the way it:
 
-- finds the body's figure in [`vernazza-2021-figures.json`](../../../../tools/objects/sphere-survey/vernazza-2021-figures.json)
+- finds the body's figure in [`vernazza-2021-figures.json`](../../../../packages/bake/src/objects/sphere-survey/vernazza-2021-figures.json)
   by its Horizons number, and reads the frame time printed over each column
   from the figure's pixels;
 - lists the release's frames, and marks a column the release lacks as having no
@@ -115,7 +115,7 @@ them.
 ## Install and prepare
 
 ```bash
-node tools/objects/sphere-survey/install.mts <id>
+node packages/bake/cli/sphere-survey-install.mts <id>
 ```
 
 It reruns the setup and writes it into the package: the frames, mesh, tables
@@ -148,7 +148,7 @@ each group. Reset the package, then install again leaving out the fewest frames
 that fix it, never one the figure shows, with the measured reason:
 
 ```bash
-node tools/objects/sphere-survey/install.mts <id> --leave-out=<frame-id>,… --because="<measured reason>"
+node packages/bake/cli/sphere-survey-install.mts <id> --leave-out=<frame-id>,… --because="<measured reason>"
 ```
 
 The reason goes into the ledger decision, the `surface-imagery` entry and the

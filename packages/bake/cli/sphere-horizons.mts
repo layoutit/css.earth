@@ -27,6 +27,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const declared = await writeHorizonsTables(objectId, sourceDirectory, record.ephemeris, tables);
     await writeHorizonsOperations(objectId, sourceDirectory);
     console.log(`Wrote ${record.ephemeris.observer} and ${record.ephemeris.heliocentric}, pinned them in the manifest and wrote their refresh steps; run node tools/sources/pin-object-documents.mts ${objectId}.`);
-    if (declared.length) console.log(`Declared ${declared.join(' and ')} as new inputs; run node tools/sources/author-source-records.mts ${objectId} to bind them.`);
+    if (declared.length) console.log(`Declared ${declared.join(' and ')} as new inputs; run node site/build/prepare/author-source-records.mts ${objectId} to bind them.`);
   }
 }

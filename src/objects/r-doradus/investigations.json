@@ -88,6 +88,15 @@
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/II/345",
         "https://arxiv.org/abs/astro-ph/9701021"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^0.61 that Ohnaka et al. (2019), ApJ 883, 89 fit to the star's resolved disc (VLT/AMBER K-band continuum near 2.3 um; not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/r-doradus.json: -0.723.",
+      "evidence": [
+        "https://arxiv.org/abs/1908.06997"
+      ]
     }
   ]
 }

@@ -871,11 +871,37 @@
           }
         ]
       }
+    },
+    {
+      "id": "ce-tauri-neilson-2013-limb-darkening",
+      "path": "photometry/neilson-2013-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Neilson & Lester (2013), A&A 554, A98 (VizieR J/A+A/554/A98)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 3800..3900 K, log g -0.25..0, 12.5..15 solar masses, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ce-tauri-neilson-2013-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "reconstruction-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/614/A12",
       "credit": "Montargès et al. (2018) December 2016 image through the lens palette; marker written by this repository",
@@ -886,7 +912,8 @@
       "recipe": {
         "generator": "tools/objects/source-authoring/ce-tauri/author.mts",
         "inputs": [
-          "cds-dec-avg"
+          "cds-dec-avg",
+          "ce-tauri-neilson-2013-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/ce-tauri/author.mts",

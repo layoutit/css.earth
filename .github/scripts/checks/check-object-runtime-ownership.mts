@@ -15,7 +15,7 @@ import { readPreparedJsonExports } from '@cssearth/bake/contract';
 import { parseRuntimeSource, resolveRuntimeSource } from '@cssearth/bake/runtime-source';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '@cssearth/bake/contract';
 import { requireAuthoredWorldFrameReceipt } from '@cssearth/bake/sources';
-import { readContextObjects } from '../../../tools/prepare/prepare-catalog.mts';
+import { readContextObjects } from '@cssearth/objects/node';
 
 const registryPath = "site/objects.mts";
 // The registry assembles its entries with the shared registry contracts the objects package's main entry exports.

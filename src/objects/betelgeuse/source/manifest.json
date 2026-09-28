@@ -5,7 +5,13 @@
       "id": "betelgeuse-matisse-2020-02-continuum",
       "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
-      "sourceProcessing": [{ "name": "SQUEEZE", "version": "3.0 (4d34e877)", "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/reference/squeeze-command.txt" }],
+      "sourceProcessing": [
+        {
+          "name": "SQUEEZE",
+          "version": "3.0 (4d34e877)",
+          "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/reference/squeeze-command.txt"
+        }
+      ],
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
         "attributions": [
@@ -6446,7 +6452,13 @@
       "id": "betelgeuse-matisse-2018-12-continuum",
       "path": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
-      "sourceProcessing": [{ "name": "SQUEEZE", "version": "3.0 (4d34e877)", "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md" }],
+      "sourceProcessing": [
+        {
+          "name": "SQUEEZE",
+          "version": "3.0 (4d34e877)",
+          "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md"
+        }
+      ],
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
         "attributions": [
@@ -6484,7 +6496,13 @@
       "id": "betelgeuse-matisse-2020-12-continuum",
       "path": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
-      "sourceProcessing": [{ "name": "SQUEEZE", "version": "3.0 (4d34e877)", "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md" }],
+      "sourceProcessing": [
+        {
+          "name": "SQUEEZE",
+          "version": "3.0 (4d34e877)",
+          "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md"
+        }
+      ],
       "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
       "capture": {
         "attributions": [
@@ -6512,6 +6530,32 @@
         "references": [
           {
             "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-12-continuum",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "betelgeuse-neilson-2013-limb-darkening",
+      "path": "photometry/neilson-2013-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Neilson & Lester (2013), A&A 554, A98 (VizieR J/A+A/554/A98)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 3500..3600 K, log g -0.25..0, 17.5..20 solar masses, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-neilson-2013-limb-darkening",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
@@ -6585,7 +6629,7 @@
       }
     },
     {
-      "id": "reconstruction-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://oidb.jmmc.fr/",
       "credit": "ESO/VLTI/MATISSE calibrated data via JMMC OiDB; reconstruction with SQUEEZE (F. Baron, GPL-3.0)",
@@ -6596,7 +6640,8 @@
       "recipe": {
         "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
-          "betelgeuse-matisse-2020-02-continuum"
+          "betelgeuse-matisse-2020-02-continuum",
+          "betelgeuse-neilson-2013-limb-darkening"
         ]
       },
       "generator": "tools/objects/source-authoring/betelgeuse/author.mts",

@@ -38,7 +38,7 @@ function sequence(autoplay = true) {
     <form data-dataset-form>${ids.map(id => `<div data-lens-option ${id !== 'other' ? `data-step-group="dates" data-step-autoplay="${autoplay}"` : ''}>
       <button type="submit" name="dataset" value="${id}" aria-controls="details-${id}">${id}</button></div>`).join('')}</form></div>
     ${ids.map(id => `<div id="details-${id}" data-lens-details="${id}">${id !== 'other' ?
-      '<button type="button" data-dataset-play="dates" disabled>Play</button>' : ''}</div>`).join('')}
+      '<div data-sequence-player><button type="button" data-dataset-play="dates" disabled></button></div>' : ''}</div>`).join('')}
     </section>`);
   const form = document.querySelector('form')!;
   // Linkedom does not implement form.elements or button.value.
@@ -66,9 +66,11 @@ function sequence(autoplay = true) {
 test('sequence playback wraps, waits for the pending map, and pauses without another selection', () => {
   vi.useFakeTimers();
   const h = sequence();
-  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
+  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('false');
   h.click('#details-last [data-dataset-play]');
-  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Pause');
+  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('true');
+  // The on-screen step's fill runs with its hold.
+  expect(h.document.querySelector('#details-last [data-sequence-player]')?.getAttribute('data-sequence-running')).toBe('true');
   vi.advanceTimersByTime(1500);
   expect(h.actions).toEqual(['first']);
   vi.advanceTimersByTime(10000);
@@ -82,7 +84,8 @@ test('sequence playback wraps, waits for the pending map, and pauses without ano
   h.click('#details-last [data-dataset-play]');
   vi.advanceTimersByTime(10000);
   expect(h.actions).toEqual(['first', 'last']);
-  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
+  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('false');
+  expect(h.document.querySelector('#details-last [data-sequence-player]')?.getAttribute('data-sequence-running')).toBe('false');
   h.binding.publish();
   expect(vi.getTimerCount()).toBe(0);
   h.click('[value="other"]'); h.commit();
@@ -98,7 +101,7 @@ test.each([true, false])('a sequence stays paused even with legacy autoplay=%s u
   const h = sequence(autoplay);
   vi.advanceTimersByTime(10000);
   expect(h.actions).toEqual([]);
-  expect(h.document.querySelector('[data-dataset-play]')?.textContent).toBe('Play');
+  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('false');
   h.click('#details-last [data-dataset-play]');
   vi.advanceTimersByTime(1500);
   expect(h.actions).toEqual(['first']);

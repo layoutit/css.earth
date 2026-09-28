@@ -1,6 +1,6 @@
-import { refreshSourceRecord } from '../../../sources/source-authoring-templates.mts';
+import { refreshSourceRecord } from '../source-authoring-templates.mts';
 import assert from 'node:assert/strict';
-import { parseAuthoringSolid, parseAuthoringManifest } from '../../../sources/source-authoring-templates.mts';
+import { parseAuthoringSolid, parseAuthoringManifest } from '../source-authoring-templates.mts';
 import { shape, text, number, array, requireRecord, requireString } from '@cssearth/core';
 import { bodies } from './catalog.mts';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';

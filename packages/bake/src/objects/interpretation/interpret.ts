@@ -24,7 +24,7 @@ import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
 import { prepareGlbSurface } from '../layers/shape-model/index.ts';
-import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }
@@ -559,7 +559,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
             ...(gravity ? { gravityDarkening: { poleTemperatureK: gravity.record.poleTemperatureK, equatorTemperatureK: gravity.record.equatorTemperatureK ?? null,
               modelEquatorTemperatureK: Math.round(gravity.equatorK),
               meanTemperatureK: Math.round(gravity.meanK), omega: gravity.record.omega, beta: gravity.record.beta, poleSrgb: gravity.rows[0], equatorSrgb: gravity.rows[Math.floor(height / 2)] } } : {}),
-            ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2,
+            ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: limbIntensity(0, limbDarkening.coefficients),
               basis: modeledLimb ? 'model' : 'transit-fit',
               ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
             ...(spot ? { spotOccultation: spot } : {}),

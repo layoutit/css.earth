@@ -15,7 +15,7 @@ export type PackageFiles = Map<string, string | Buffer>;
 export async function installColorLens(files: PackageFiles, id: string, color: ColorChoice, limb: LimbChoice) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   for (const [path, bytes] of color.files) files.set(`${s}/${path}`, bytes);
-  if (limb.file) files.set(`${s}/${limb.file.path}`, limb.file.text);
+  for (const file of limb.files ?? []) files.set(`${s}/${file.path}`, file.text);
   files.set(`${s}/photometry/stellar-color.json`, json(color.record));
 
   const words = color.route === 'planck' ? "a blackbody at the star's published temperature" : color.route === 'gaia-xp' ? "the star's Gaia DR3 BP/RP spectrum" : `the star's measured spectrum (${color.summary.split(':')[0]})`;
@@ -54,8 +54,8 @@ export async function installColorLens(files: PackageFiles, id: string, color: C
 
   const manifest = read(`${s}/manifest.json`);
   // The CIE table is the shared reference bank (src/references/cie-1931-2deg); bodies no longer carry a copy.
-  manifest.inputs = [...manifest.inputs, ...color.inputs, ...limb.input ? [limb.input] : []];
-  const markerInputs = [`${id}-stellar-color`, ...color.inputs.filter(entry => entry.id !== `${id}-stellar-color` && entry.id !== `${id}-crosscheck-spectrum`).map(entry => String(entry.id)), ...limb.input ? [String(limb.input.id)] : [], `${id}-preparation-raster`];
+  manifest.inputs = [...manifest.inputs, ...color.inputs, ...limb.inputs ?? []];
+  const markerInputs = [`${id}-stellar-color`, ...color.inputs.filter(entry => entry.id !== `${id}-stellar-color` && entry.id !== `${id}-crosscheck-spectrum`).map(entry => String(entry.id)), ...(limb.inputs ?? []).map(input => String(input.id)), `${id}-preparation-raster`];
   manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter((entry: { path: string }) => entry.path !== 'presentation/context.png'), {
     id: limb.limbDarkening ? 'limb-darkened-disc-context-marker' : 'uniform-disc-context-marker', path: 'presentation/context.png', origin: String(color.inputs[0]?.origin),
     credit: `The colour lens as a disc${limb.limbDarkening ? ', dimmed toward the limb by its model law' : ''}; rendered by tools/objects/source-authoring/context-markers.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
@@ -63,14 +63,14 @@ export async function installColorLens(files: PackageFiles, id: string, color: C
     sourceBinding: { kind: 'local', reason: `The colour lens rendered as a disc${limb.limbDarkening ? ' with its limb darkening' : ''}; \`context-markers.mts --check\` recomputes it.` } }];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`);
-  plan.operations = [...plan.operations, ...color.acquisition, ...limb.acquisition ? [limb.acquisition] : []];
+  plan.operations = [...plan.operations, ...color.acquisition, ...limb.acquisitions ?? []];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   files.set(`${o}/.gitignore`, '# Archive downloads, restored by source/preparation/acquisition.json.\n/source/photometry/*.dat\n/source/photometry/*.gz\n');
   return { hex: colorHex, words, color: loaded.color };
 }
 
 /** Bind every manifest input that has no binding yet to its own catalogue record, `source-<object>-<entry>`, as the placed stars'
- * Gaia rows and limb grids are: tools/sources/author-source-records.mts writes the record in the bake. */
+ * Gaia rows and limb grids are: site/build/prepare/author-source-records.mts writes the record in the bake. */
 export function bindInputs(files: PackageFiles, id: string) {
   const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: Record<string, unknown>[] };
   for (const input of manifest.inputs) if (input.sourceBinding === undefined) {

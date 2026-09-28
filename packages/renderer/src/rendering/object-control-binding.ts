@@ -10,6 +10,8 @@ const isInput = (element: SettingInput): element is HTMLInputElement => element.
 
 // Every publication writes only what changed: a view-driven texture re-plan republishes this state, and an unchanged
 // attribute write still reaches the DOM (docs/performance/motion-freezes-membership.md).
+/** How long a playing sequence keeps each committed step on screen. The player's fill runs for the same time. */
+const SEQUENCE_HOLD_MS = 1500;
 const setAttribute = (element: Element, name: string, value: string) => { if (element.getAttribute(name) !== value) element.setAttribute(name, value); };
 
 /** Keep the collapsed dataset's image and text aligned with the committed option, including sequence steps. */
@@ -100,6 +102,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   });
   // The shell can move a dataset's details outside the form's original root.
   const playInputs = details.flatMap(({ panel }) => [...panel.querySelectorAll<HTMLButtonElement>('[data-dataset-play]')]);
+  for (const input of playInputs) input.closest<HTMLElement>('[data-sequence-player]')?.style.setProperty('--sequence-hold', `${SEQUENCE_HOLD_MS}ms`);
   const contexts = [...(information?.querySelectorAll<HTMLElement>('[data-dataset-context]') ?? [])];
   const busyRoots = new Set([lensRoot, settingsRoot].filter((root): root is Element => !!root));
   const lenses = new Map(lensInputs.map(input => [input.value, input]));
@@ -149,7 +152,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const members = playing ? sequences.get(playing) : undefined;
     if (!ready || document.hidden || next.error || !members?.includes(next.desired.lensId ?? '')) stopPlayback();
     if (next.pending) clearPlayTimer();
-    // Keep each committed map on screen for 1.5 seconds. Loading the next one never skips a date.
+    // Keep each committed map on screen for SEQUENCE_HOLD_MS. Loading the next one never skips a date.
     if (playing && members && members.length > 1 && !next.pending && playTimer === null) {
       playTimer = setTimeout(() => {
         playTimer = null;
@@ -158,15 +161,16 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
         const index = members.indexOf(state.committed?.lensId ?? '');
         if (index < 0) { stopPlayback(); publish(); return; }
         act({ kind: 'lens', id: members[(index + 1) % members.length] });
-      }, 1500);
+      }, SEQUENCE_HOLD_MS);
     }
     for (const input of playInputs) {
       const active = playing === input.dataset.datasetPlay;
       if (input.disabled !== !ready) input.disabled = !ready;
       setAttribute(input, 'aria-pressed', String(active));
       setAttribute(input, 'aria-label', active ? 'Pause sequence' : 'Play sequence');
-      const label = active ? 'Pause' : 'Play';
-      if (input.textContent !== label) input.textContent = label;
+      // The player fills the step on screen while its hold runs, so the fill starts with the timer, not the load.
+      const player = input.closest<HTMLElement>('[data-sequence-player]');
+      if (player) setAttribute(player, 'data-sequence-running', String(active && playTimer !== null));
     }
   }
   const nativeChanges = new Map<string, ObjectAction>();

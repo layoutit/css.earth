@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, shown in the shared neutral gray because no image of the photosphere is cast here (see investigations.json). The photosphere of a red supergiant is not a solid surface and its limb is not sharp."
-  }
+  },
+  "surfaceGravityLogg": -0.05,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/antares.json: -0.054"
 }

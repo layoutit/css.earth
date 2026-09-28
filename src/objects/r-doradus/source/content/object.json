@@ -132,7 +132,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured; darkening toward the edge from a published law.",
         "thumbnail": "r-doradus-lens-color.webp",
         "surface": "r-doradus-surface-color@2x.webp",
         "poles": "r-doradus-poles-color@2x.webp",
@@ -142,7 +142,7 @@
           "url": "https://www.eso.org/sci/observing/tools/uvespop.html"
         },
         "falseColor": false,
-        "notes": "The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. No resolved image of the surface is cast here."
+        "notes": "The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. No resolved image of the surface is cast here. The darkening toward the edge is the power law I(mu) = mu^0.61 that Ohnaka et al. (2019), ApJ 883, 89 fit to the star's resolved disc (VLT/AMBER K-band continuum near 2.3 um; not a visible band)."
       }
     ]
   },

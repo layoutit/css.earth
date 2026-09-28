@@ -159,7 +159,7 @@ export async function prepareTypecheck() {
   // the restored runtime. The two steps below read it, so it has to exist before they run.
   await run(projectRoot, ['packages/bake/cli/restore-object-json.mts', '--restored-only']);
   await run(projectRoot, ['site/build/prepare/prepare-feature-index.mts']);
-  await run(projectRoot, ['tools/prepare/cli/prepare-facilities.mts', '--catalog-only', '--restored-only']);
+  await run(projectRoot, ['site/build/prepare/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: source catalogues generated.');
 }
 
