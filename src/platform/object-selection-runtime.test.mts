@@ -293,3 +293,45 @@ test("blur while moving: a texture level waits for the camera to stop, then comm
   assert.ok(h.commits.length > before, "the held level commits once the camera stops");
   assert.notEqual(level(), startLevel);
 });
+
+test('departure holds a decoded texture request and resumes only the latest view on cancellation', async t => {
+  const h = harness(); t.after(h.restore); await h.ready();
+  const before = h.commits.length, frames = h.frameCount();
+  h.view(0, 0, 900); await flush(); // Demand exists before navigation starts.
+  const release = h.coordinator.holdPresentation();
+  const heldFrames = h.frameCount();
+  await h.resolveJobs();
+  assert.equal(h.commits.length, before, 'decode completion cannot repaint the departing surface');
+  h.view(0, 0, 1800);
+  assert.equal(h.frameCount(), heldFrames, 'held views do not publish material styles');
+  assert.ok(heldFrames >= frames);
+  release(); await h.resolveJobs();
+  assert.ok(h.commits.length > before);
+  assert.equal(h.coordinator.state().viewRevision, h.currentView().revision);
+  assert.equal(h.coordinator.stats().presentationHolds, 0);
+  release(); assert.equal(h.coordinator.stats().presentationHolds, 0);
+});
+
+test('superseded departures retain their hold and disposal never publishes held textures', async t => {
+  const h = harness(); t.after(h.restore); await h.ready();
+  const first = h.coordinator.holdPresentation(), second = h.coordinator.holdPresentation();
+  const before = h.commits.length, frames = h.frameCount(), requests = h.coordinator.stats().requests;
+  h.view(0, 0, 900); first(); await h.resolveJobs();
+  assert.equal(h.commits.length, before);
+  assert.equal(h.frameCount(), frames);
+  assert.equal(h.coordinator.stats().requests, requests, 'no departing view demand starts');
+  h.lifetime.destroy(); second(); await flush();
+  assert.equal(h.commits.length, before);
+});
+
+
+test('same-turn navigation supersession does not briefly publish the old surface', async t => {
+  const h = harness(); t.after(h.restore); await h.ready();
+  const release = h.coordinator.holdPresentation(), frames = h.frameCount();
+  h.view(0, 0, 900);
+  release();
+  const successor = h.coordinator.holdPresentation();
+  await h.resolveJobs();
+  assert.equal(h.frameCount(), frames);
+  h.lifetime.destroy(); successor();
+});

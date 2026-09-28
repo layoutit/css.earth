@@ -1045,6 +1045,70 @@
           }
         ]
       }
+    },
+    {
+      "id": "trek-io-stereo-dem-1km",
+      "path": "science/stereo-dem/IoDEM.tif",
+      "origin": "https://trek.nasa.gov/io/TrekWS/rest/cat/data/stream?uuid=7df000fc-0ba0-4c48-85fe-7ff4229c54f7",
+      "catalog": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
+      "credit": "White, Schenk, Nimmo and Hoogenboom (2014); NASA/JPL Voyager and Galileo imaging; served by NASA Solar System Treks",
+      "license": "Credit required. The Trek product states no reuse terms, so terms for this DEM are unresolved; cite White et al. (2014).",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
+        "https://trek.nasa.gov/io/TrekWS/rest/cat/metadata/fgdc/html?label=IoDEM",
+        "https://doi.org/10.1002/2013JE004591"
+      ],
+      "acquisition": "Trek product 'Voyager ISS and Galileo SSI DEM 1000 mpp, Global' (IoDEM, catalogue date 2024-08-08, 265,587,956 bytes). Download the uncompressed GeoTIFF unchanged: 11500 x 5750 single-band Float32, geographic GCS_Io_2015 sphere of radius 1821490 m, origin (-180, 90) degrees, pixel 0.031304347826087 degrees, GDAL no-data -3.4028234663852886e+38. The file and catalogue name no height unit or datum.",
+      "redistribution": "Original restored from its origin or the source cache; prepared display derivatives keep the credit.",
+      "consumers": [
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 11500,
+      "height": 5750,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1821490,
+        "centerLongitude": 0,
+        "frameEvidence": "GeoTIFF keys: geographic degrees, prime meridian 0, east-positive columns from -180. Independent check against the USGS Gazetteer, whose centres share the Voyager/Galileo mosaic frame used by the Monochrome lens: 24 of 30 covered mountains, mesas, plana and tholi stand above their surroundings (mean +813 m); with longitudes mirrored 13 of 29 (mean +40 m). The best longitude shift is 0 to -0.5 degrees and the best latitude shift 0 to +1 degree. The highest sample, 16,942 m at 88.83 E, 9.88 S, lies inside the Gazetteer extent of Boosaule Montes (README, Elevation)."
+      },
+      "coverage": "Stereo heights in metres over 53.8% of the sphere by area (45.5% of grid cells), from 90 S to 66.8 N; the Trek description states about 75%. Heights follow the limb-profile ellipsoid, not the 1821.49 km header sphere: sub-Jovian and leading equatorial plains differ by 0.16 km, not the 10 km of the IAU ellipsoid. No-data marks masked noise or missing stereo; plains were smoothed after mosaicking.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-io-stereo-dem-1km",
+            "role": "material",
+            "evidence": "Origin and Trek product label recorded on this manifest entry."
+          },
+          {
+            "catalogueId": "white-2014-io-stereo-topography",
+            "role": "method",
+            "evidence": "https://doi.org/10.1002/2013JE004591"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

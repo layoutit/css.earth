@@ -16,7 +16,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - The mapped VLT/SPHERE MCMC composition release of [King and Fletcher (2022)](https://doi.org/10.1029/2022JE007323), is pinned as [Zenodo 6390469](https://doi.org/10.5281/zenodo.6390469). Its **Ice fraction** and **Dark material** views are withheld from publication until reuse terms for the numerical data are explicit (see Known problems). The native source and conversion record are [fit_SPHERE.json.gz](https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz) and [model-conversion.json](source/composition/model-conversion.json).
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figures PIA01232 and PIA00500 were checked on 2026-09-28 as possible map views. None qualified: each lacks a labelled map grid, a colour scale with units, or both. The ledger gives the reason for each.
 
 ## Geologic map
 

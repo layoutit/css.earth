@@ -24,7 +24,7 @@ interface MarkerFrame {
 
 /** Retained DOM and cached writes for one world-context marker. Presentation decisions stay with the publisher. */
 export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement,
-  body: { readonly color: string; readonly contextColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {
+  body: { readonly color: string; readonly contextColor?: string; readonly dotColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {
   let billboardShown: boolean | undefined, markerShown: boolean | undefined;
   let markerDiameter = 0, flatDot = false, spriteApplied = false, indicatorHovered = false;
   let center: [number, number] = [0, 0];
@@ -57,7 +57,7 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       if (flatDot !== frame.flatDot) {
         flatDot = frame.flatDot;
         const leaf = spriteLeaf.style;
-        if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = body.color; leaf.borderRadius = '50%'; } else {
+        if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = body.dotColor ?? body.color; leaf.borderRadius = '50%'; } else {
           leaf.backgroundColor = leaf.borderRadius = '';
           if (sprite) applySpriteImage(spriteLeaf, sprite);
           spriteApplied = true;

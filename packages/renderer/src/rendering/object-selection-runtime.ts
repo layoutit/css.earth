@@ -53,6 +53,8 @@ export function createObjectSelectionRuntime({
   /** The one request in flight; a newer request supersedes it. */
   let active: SelectionRequest | null = null, destroyed = false, started = false, error: string | null = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
+  let presentationHolds = 0;
+  let resumed = Promise.resolve(), resumePresentation = () => {};
   const live = () => !destroyed && !lifetime.disposed;
   const state = (): Readonly<ObjectSelectionState> => Object.freeze({ desired, committed, plan: committedPlan, committedBy,
     pending: active !== null && active.intent.kind !== "frame", loadingMaterial: active?.intent.kind === "frame",
@@ -133,6 +135,10 @@ export function createObjectSelectionRuntime({
       let prepared = false;
       let preparation: Promise<void> | undefined;
       while (current()) {
+        if (presentationHolds > 0) {
+          await Promise.race([resumed, cancelled]);
+          continue;
+        }
         let ticket;
         try {
           const plan = resolve(selection);
@@ -153,6 +159,7 @@ export function createObjectSelectionRuntime({
           try { notify(); } catch (publicationFailure) { onFatalError(publicationFailure); throw publicationFailure; }
           throw failure;
         }
+        if (presentationHolds > 0) continue;
         if (kind === 'frame' && motion?.active && texturesChange(resolve(selection))) {
           const still = await Promise.race([lifetime.wait(untilStill()), cancelled]);
           if (!current() || ('cancelled' in still && still.cancelled)) { discard(request); return false; }
@@ -216,9 +223,26 @@ export function createObjectSelectionRuntime({
       const next = reduceObjectSelection(desired, valid);
       return run(next, "selection", options.signal, options.frameCamera);
     },
+    /** Navigation owns this lease from request through cancellation or scene disposal. */
+    holdPresentation() {
+      if (!live()) return () => {};
+      if (presentationHolds++ === 0) resumed = new Promise<void>(resolve => { resumePresentation = resolve; });
+      let released = false;
+      return () => {
+        if (released) return;
+        released = true;
+        if (--presentationHolds !== 0) return;
+        resumePresentation();
+        // A held camera still records its newest view. Cancellation resumes that
+        // view, never the texture demand from before the interrupted flight.
+        // Superseding navigation cancels and reacquires in the same turn.
+        queueMicrotask(() => { if (live() && presentationHolds === 0 && view) this.setView(view); });
+      };
+    },
     setView(next: PreparedView) {
       if (!live()) return;
       view = next;
+      if (presentationHolds > 0) return;
       try {
         const plan = committed ? resolve(committed) : null;
         const prepared = plan && committedPlan && sameDemand(plan, committedPlan) && plan.required.every(key => residency.resources.has(key));
@@ -240,10 +264,11 @@ export function createObjectSelectionRuntime({
       } catch (failure) { if (live()) onFatalError(failure); throw failure; }
     },
     state,
-    stats: () => Object.freeze({ ...state(), requests, passes, commits, framePublications, destroyed }),
+    stats: () => Object.freeze({ ...state(), requests, passes, commits, framePublications, presentationHolds, destroyed }),
     destroy() {
       if (destroyed) return;
       destroyed = true;
+      resumePresentation();
       active?.controller.abort();
       if (active) releaseDemand(active);
       active = null;

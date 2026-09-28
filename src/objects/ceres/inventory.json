@@ -75,6 +75,18 @@
     },
     {
       "location": "public",
+      "filename": "ceres-hydrogen@2x.webp",
+      "bytes": 5336,
+      "sha256": "a6480a81b7a305886a5468553d3f7e8e136249fb2388743221cab932ec5ad692"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-iron@2x.webp",
+      "bytes": 5346,
+      "sha256": "fad2433b7b6bb44da931fe3da418bbea9e83e18dee7179499ad06499c1c0a198"
+    },
+    {
+      "location": "public",
       "filename": "ceres-lens-ammonium-band.webp",
       "bytes": 3962,
       "sha256": "4ea7bbf76e6a16b212abadc0b0da56e6785bd02c4b78d5adb78daf13bd666661"
@@ -135,9 +147,33 @@
     },
     {
       "location": "public",
+      "filename": "ceres-lens-hydrogen.webp",
+      "bytes": 168,
+      "sha256": "815ddc7fbd7afafb5395dfbe6757abd68645e44934b2bf47569e7c60ecd0da95"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-lens-iron.webp",
+      "bytes": 180,
+      "sha256": "3e4496eb48920a19b37ee4865e9e6a118212d4570b8dd32455f32731f0a9cd06"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-lens-neutron-counts.webp",
+      "bytes": 182,
+      "sha256": "85354de2c06be7d263435ef2d629f20509e4c16b72cf248a53ef199ca457fde9"
+    },
+    {
+      "location": "public",
       "filename": "ceres-lens-normal.webp",
       "bytes": 854,
       "sha256": "39bebb57b23fdea57684a335339167e7392465f30addbe93190e4d176318ac05"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-neutron-counts@2x.webp",
+      "bytes": 5344,
+      "sha256": "89910d0c28348275d2650c0881b6098166ff505b8364f20e903aef9d43d1dcb1"
     },
     {
       "location": "public",
@@ -204,6 +240,24 @@
       "filename": "ceres-poles-gravity@2x.webp",
       "bytes": 44170,
       "sha256": "c6d26e38beb7b1b8c4746a22267065722c67c9b1f69fa9ad4d3efe7a5e5cb28c"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-poles-hydrogen@2x.webp",
+      "bytes": 3456,
+      "sha256": "c649a53804aab2b8f5cd7b47e0768f9bef457715c5d11bdf239683cc05a20acf"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-poles-iron@2x.webp",
+      "bytes": 3444,
+      "sha256": "68938f3273776f15151ec374c3e25c9c27c7f58f01ac9e6b736311a8a7b3e76a"
+    },
+    {
+      "location": "public",
+      "filename": "ceres-poles-neutron-counts@2x.webp",
+      "bytes": 3464,
+      "sha256": "a8e3c47fe01cfcdfbdc315692ecda5da7e03e61be16bc46b588d65dea0edcade"
     },
     {
       "location": "public",
@@ -430,14 +484,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 93221,
-      "sha256": "a95b0382466f40da9841336bf2ec73ae8453d178e1979a97bffe3422e35777b7"
+      "bytes": 94717,
+      "sha256": "5c1a85d41508c17ae6288960e0a381ffa0cf3499bbf73625bb32619dba99136c"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1420,
-      "sha256": "a683ea2e3b9f30e16ad302252cb20a83e28322dd7db273a84aeccad2d619e9a5"
+      "sha256": "6307e29dc47532afe4b45dfbcee8c2e08490d3caf36b5c0a421fa66f275af6b1"
     },
     {
       "location": "prepared",
@@ -448,8 +502,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 19561,
-      "sha256": "d543814f91e812198f88fd21047e38de0a0305e3a3ad274f27cc6eb059d06300"
+      "bytes": 28545,
+      "sha256": "229c372b9882da6b83f7fa543357f35c814ec0403376a43a291766fa242c7ea0"
     },
     {
       "location": "prepared",
@@ -460,8 +514,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 24508,
-      "sha256": "b280b5435366578d95177699072cd2ba5fdd34eea0a20889d4b9c95e95a898c7"
+      "bytes": 35473,
+      "sha256": "7462501b5d783df8d7c6dd49e8ad0669aef5361eb9d93588ed744e4b962f94e7"
     },
     {
       "location": "prepared",
@@ -472,8 +526,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 880,
-      "sha256": "67d91d22fddd7e03dec8e3144ff11acf0e9515754af640327ed323d66f3f1b67"
+      "bytes": 1109,
+      "sha256": "5cca4bcb206bac80eb3ee93d6796fc05d068f890197d3c527decb48f4c334ea1"
     },
     {
       "location": "prepared",
@@ -537,6 +591,24 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/hydrogen.webp",
+      "bytes": 494,
+      "sha256": "2aad48f149bfbcd5230a2a5ddb76b809207564e98edf3e70bbd8abd937a9ff46"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/iron.webp",
+      "bytes": 500,
+      "sha256": "5e764055a0227eac65a3eb0cee69191c8c06d9dd276afe6c0fafe9ff96b77550"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/neutron-counts.webp",
+      "bytes": 498,
+      "sha256": "bb43cd8919d7f89229e501fa835e4501437138006b59791acd12c8fa37cde57a"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/normal.webp",
       "bytes": 39370,
       "sha256": "5980b68da05e7ccef3b2512028c16dc63365e5d61dc30a142f7de729ac6df2c6"
@@ -544,8 +616,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 629973,
-      "sha256": "7a5cb22afa32d168c61aec516b11b5e07c2b35640193e694ae7a16888098e234"
+      "bytes": 645980,
+      "sha256": "31cad5569c17b839df8037cabc3f69dd901b94dff63c3bb61459629f3ed7d3c3"
     },
     {
       "location": "prepared",
@@ -574,8 +646,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2719,
-      "sha256": "4ffd9d77254310e0a7d21ae52b5eeb9514184003b375027628c91eb8f154161e"
+      "bytes": 3256,
+      "sha256": "a91f8a7e34a6154c5f4e2388137b313ee897eb81bd0d8703aa5769fb7b86b62c"
     },
     {
       "location": "prepared",

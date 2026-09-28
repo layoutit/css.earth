@@ -11,6 +11,8 @@ export interface ObjectWorldNavigation {
   readonly labelEdge?: import('../navigation/prepared-label-edge.js').PreparedLabelEdge;
   /** The retained surface may differ from the current overview focus. */
   readonly detailFrame?: PreparedWorldCameraFrame;
+  /** Retain the departing surface until navigation is cancelled or its scene is disposed. */
+  holdPresentation?(): () => void;
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose, options?: { signal: AbortSignal; departing?: boolean }): void | Promise<boolean>;
   preparedFocus(): PreparedNavigationFocus | null;

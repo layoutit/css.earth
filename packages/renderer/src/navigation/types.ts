@@ -10,6 +10,8 @@ export interface TrackballMetrics {
   viewportCenterX?: number; viewportCenterY?: number;
   angularDegreesPerTrackballRadius?: number; pitchResponse?: number;
   tumbleOnly?: boolean; sceneMatrix?: string | readonly number[];
+  /** The body's north pole as a unit view direction (CSS axes): body drags turn about it and never roll it. */
+  pole?: Vector3;
 }
 export interface CameraUpdate { rotX?: number; rotY?: number; zoom?: number; distance?: number; distanceKilometers?: number; }
 export interface NavigationCamera {

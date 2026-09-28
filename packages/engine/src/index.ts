@@ -6,6 +6,7 @@ export * from './runtime/scaled-focus-frame.js';
 export * from './runtime/prepared-point-field.js';
 export * from './navigation/camera-math.js';
 export * from './navigation/sphere-drag.js';
+export * from './navigation/pole-drag.js';
 export * from './navigation/destination-flight.js';
 export * from './navigation/trackball-drag-inertia.js';
 export * from './navigation/math-types.js';

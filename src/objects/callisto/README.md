@@ -10,7 +10,7 @@ The navigation marker uses its existing source map as a stylized identifier. The
 
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sq6-x165), observations G8CNADLIND01A and G8CNGLOBAL02A, Minnaert-corrected CIOF products.
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figure PIA00844 was checked on 2026-09-28 as a possible map view. It did not qualify: it lacks a labelled map grid and a colour scale with units. The ledger gives the details.
 
 ## Evidence
 
