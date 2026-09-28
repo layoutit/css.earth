@@ -16,6 +16,7 @@ export interface RepositoryRule {
 /** Folders whose code has moved to its canonical home (`packages/*`, `.github/scripts`, `evidence/`). A file under one
  * means code went back to a retired location. Each move that empties a folder appends it here. */
 export const RETIRED_FOLDERS: readonly string[] = [
+  'tools/assets',
   'tools/audits',
   'tools/ci',
   'tools/evidence',

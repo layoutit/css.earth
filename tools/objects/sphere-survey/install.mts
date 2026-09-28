@@ -217,7 +217,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   execFileSync(process.execPath, [resolve(ROOT, 'tools/sources/pin-object-documents.mts'), objectId], { cwd: ROOT, stdio: 'inherit' });
   const { restored, missing } = await restorePinnedInputs(objectId), moved = await moveUnownedSceneFiles(objectId);
   if (restored.length) console.log(`Copied ${restored.length} pinned input(s) from sibling checkouts by hash: ${restored.join(', ')}.`);
-  if (missing.length) console.log(`Still missing, restore them before preparing (node tools/objects/dist/operations.js acquire ${objectId}): ${missing.join(', ')}.`);
+  if (missing.length) console.log(`Still missing, restore them before preparing (node packages/bake/cli/object-operations.mts acquire ${objectId}): ${missing.join(', ')}.`);
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
   console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
     `  node tools/prepare/cli/prepare-object.mts ${objectId}`, `  node packages/bake/cli/report-registration.mts ${objectId} --write`,

@@ -6,7 +6,7 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import { prepareObjectProvenance } from '../objects/provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { productSourceIds, validateObjectProvenance } from '@cssearth/objects/provenance';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 

@@ -97,7 +97,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Restore the pinned preparation inputs
-        run: node tools/assets/restore-source-inputs.mts "--object=$OBJECT"
+        run: node packages/bake/cli/restore-source-inputs.mts "--object=$OBJECT"
       - name: Bake
         env:
           NODE_OPTIONS: --max-old-space-size=6144

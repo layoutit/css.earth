@@ -9,7 +9,7 @@ several products and published sources.
 Every registered scene package uses the same `prepared/provenance.json` contract,
 `cssearth-object-provenance@3`. It connects local inputs to prepared outputs.
 The file is generated and never committed. For layered scene bodies,
-`tools/prepare/prepare-provenance.mts` regenerates it from the source manifest,
+`packages/bake/src/objects/provenance/recover-provenance.ts` regenerates it from the source manifest,
 recipes and inventory during development and builds. Volume, image-layer and
 catalogue packages publish their baked provenance through `inventory.json`;
 asset setup restores it. To change the lineage, change its source records and

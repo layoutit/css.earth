@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseRetrievedProfile, readProfileTable, profileWindow, readRetrievedProfile, renderRetrievedProfile } from '@cssearth/bake/objects/charts';
-import { prepareObjectProvenance } from '../../../tools/objects/provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { productSourceIds } from '@cssearth/objects/provenance';
 
 const root = resolve(import.meta.dirname, '../../..');

@@ -4,11 +4,11 @@ import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { installRuntimeAssets, readAllowMissingFlag } from "./setup.mts";
-import { inspectContextAvailability } from "../prepare/prepare-context-availability.mts";
-import { writeContextPackage } from "../../tests/fixtures/context-package.mts";
+import { installRuntimeAssets, readAllowMissingFlag } from "@cssearth/bake/asset-publication";
+import { inspectContextAvailability } from "../../tools/prepare/prepare-context-availability.mts";
+import { writeContextPackage } from "../fixtures/context-package.mts";
 
 test("setup installs pinned files, reuses them offline, and repairs a corrupt file", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
@@ -162,7 +162,7 @@ test("restoring a body derives the page and provenance files R2 never holds, onc
     await cp(source, directory, { recursive: true });
     await cp(fileURLToPath(new URL("../../public/scenes/thetis", import.meta.url)), resolve(root, "public/scenes/thetis"), { recursive: true });
     for (const file of ["object.json", "page.json", "provenance.json"]) await rm(resolve(directory, "prepared", file));
-    const { deriveRestoredPreparedFiles } = await import("./setup.mts");
+    const { deriveRestoredPreparedFiles } = await import("@cssearth/bake/asset-publication");
     assert.deepEqual(await deriveRestoredPreparedFiles(["thetis", "not-a-scene-body"], root), { pages: 1, provenance: 1 });
     for (const file of ["object.json", "page.json", "provenance.json"]) assert.ok((await readFile(resolve(directory, "prepared", file))).length > 0, file);
     assert.deepEqual(await deriveRestoredPreparedFiles(["thetis"], root), { pages: 0, provenance: 0 }, "a body that has them is left alone");

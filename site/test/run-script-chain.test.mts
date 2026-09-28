@@ -31,7 +31,7 @@ test('site chains restore prepared assets before discovery reads them, and a dep
   for (const name of ['dev:prepare', 'build:prepare', 'build:deploy']) {
     const commands = expandScriptChain(scripts, name).map(step => step.command);
     // Discovery reads each body's prepared/controls.json, which only the R2 restore provides on a clean checkout.
-    const restore = commands.indexOf('node tools/assets/setup.mts');
+    const restore = commands.indexOf('node packages/bake/cli/setup-assets.mts');
     const catalogue = commands.indexOf('node tools/prepare/cli/prepare-catalog.mts');
     assert.ok(restore >= 0 && restore < catalogue, `${name}: first restore at step ${restore}, catalogue at step ${catalogue}`);
   }
@@ -39,5 +39,5 @@ test('site chains restore prepared assets before discovery reads them, and a dep
   // the runner differs from the published bytes, and restoring over it re-hashed every restored file.
   const deploy = expandScriptChain(scripts, 'build:deploy').map(step => step.command);
   assert.equal(deploy.findIndex(command => command.includes('prepare-spatial-context')), -1, 'build:deploy regenerates the world context');
-  assert.equal(deploy.filter(command => command === 'node tools/assets/setup.mts').length, 1, 'build:deploy restores once');
+  assert.equal(deploy.filter(command => command === 'node packages/bake/cli/setup-assets.mts').length, 1, 'build:deploy restores once');
 });

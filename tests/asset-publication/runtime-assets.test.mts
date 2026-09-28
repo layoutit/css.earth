@@ -3,10 +3,10 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { inventoriedObjectIds, inventoryAssets } from '@cssearth/bake/delivery';
-import { installRuntimeAssets } from './setup.mts';
+import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 
 
 const bytes = Buffer.from('prepared fixture');

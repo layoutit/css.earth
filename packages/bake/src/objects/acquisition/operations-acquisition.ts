@@ -8,14 +8,14 @@ import { pipeline } from 'node:stream/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { gzipSync } from 'node:zlib';
-import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
-import type { SourceManifest, SourceEntry } from '@cssearth/bake/objects/sources';
+import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream } from '../sources/index.ts';
+import type { SourceManifest, SourceEntry } from '../sources/index.ts';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
-import { sourceCacheUrl } from '@cssearth/bake/objects/sources';
-import { withIdleTimeout } from '@cssearth/bake/objects/sources';
-import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from '@cssearth/bake/objects/acquisition';
-import { prepareDskMesh, validateDskMeshRecipe } from '@cssearth/bake/objects/acquisition';
-import { missingCoverageColor } from '@cssearth/bake/raster';
+import { sourceCacheUrl } from '../sources/index.ts';
+import { withIdleTimeout } from '../sources/index.ts';
+import { prepareSatelliteCatalog, validateSatelliteCatalogRecipe } from './satellite-catalog.ts';
+import { prepareDskMesh, validateDskMeshRecipe } from './dsk-mesh.ts';
+import { missingCoverageColor } from '../../raster/index.ts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
 interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
 interface MappedComposition extends OperationBase {kind:'mapped-composition';path:string;recipePath:string;product:string;}
@@ -82,9 +82,9 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());
  const publish=async(path:string,data:Uint8Array)=>{const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===path);if(!entry)throw new Error(`Undeclared acquisition target: ${path}.`);return publishPinnedSource({sourceRoot,entry,bytes:data});};
  // Attempt every step so one unreachable host does not hide the others; report all failures together.
- const hriiResults=new Map<string,Awaited<ReturnType<typeof import('@cssearth/bake/objects/layers/terrestrial').prepareHriiFacets>>>();
- const spectralResults=new Map<string,Awaited<ReturnType<typeof import('@cssearth/bake/objects/layers/observation').prepareSpectralBandMaps>>>();
- const compositionResults=new Map<string,Awaited<ReturnType<typeof import('@cssearth/bake/objects/acquisition').prepareMappedComposition>>>();
+ const hriiResults=new Map<string,Awaited<ReturnType<typeof import('../layers/terrestrial/index.ts').prepareHriiFacets>>>();
+ const spectralResults=new Map<string,Awaited<ReturnType<typeof import('../layers/observation/index.ts').prepareSpectralBandMaps>>>();
+ const compositionResults=new Map<string,Awaited<ReturnType<typeof import('./mapped-composition.ts').prepareMappedComposition>>>();
  const failures:{step:(typeof selected)[number];error:unknown}[]=[];
  for(const step of selected){
   try{
@@ -150,19 +150,19 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   }
   else if(step.kind==='hrii-facets'){
    let result=hriiResults.get(step.recipePath);
-   if(!result){const {prepareHriiFacets}=await import('@cssearth/bake/objects/layers/terrestrial');result=await prepareHriiFacets(sourceRoot,step.recipePath);hriiResults.set(step.recipePath,result);}
+   if(!result){const {prepareHriiFacets}=await import('../layers/terrestrial/index.ts');result=await prepareHriiFacets(sourceRoot,step.recipePath);hriiResults.set(step.recipePath,result);}
    await publish(step.path,step.product==='fields'?result.bytes:new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'));
   }
   else if(step.kind==='spectral-band-maps'){
    let result=spectralResults.get(step.recipePath);
-   if(!result){const {prepareSpectralBandMaps}=await import('@cssearth/bake/objects/layers/observation');result=await prepareSpectralBandMaps(sourceRoot,step.recipePath);spectralResults.set(step.recipePath,result);}
+   if(!result){const {prepareSpectralBandMaps}=await import('../layers/observation/index.ts');result=await prepareSpectralBandMaps(sourceRoot,step.recipePath);spectralResults.set(step.recipePath,result);}
    const bytes=step.product==='report'?new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'):result.products[step.product];
    if(!bytes)throw new Error(`Unknown spectral band map ${step.product}.`);
    await publish(step.path,bytes);
   }
   else if(step.kind==='geotiff-grid'||step.kind==='geotiff-image'){
-   const {readGeoTiffGridRecipe,prepareGeoTiffGrid}=await import('@cssearth/bake/objects/acquisition');
-   const {readGeoTiffImageRecipe,prepareGeoTiffImage}=await import('@cssearth/bake/objects/acquisition');
+   const {readGeoTiffGridRecipe,prepareGeoTiffGrid}=await import('./geotiff-grid.ts');
+   const {readGeoTiffImageRecipe,prepareGeoTiffImage}=await import('./geotiff-image.ts');
    const recipe=step.kind==='geotiff-image'?await readGeoTiffImageRecipe(sourceRoot,step.recipePath):await readGeoTiffGridRecipe(sourceRoot,step.recipePath);
    if(mirrorOrigin){
     const entry=manifest.inputs.find(entry=>entry.path===step.path);
@@ -183,7 +183,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   }
   else if(step.kind==='mapped-composition'){
    let result=compositionResults.get(step.recipePath);
-   if(!result){const {prepareMappedComposition}=await import('@cssearth/bake/objects/acquisition');result=await prepareMappedComposition(sourceRoot,step.recipePath);compositionResults.set(step.recipePath,result);}
+   if(!result){const {prepareMappedComposition}=await import('./mapped-composition.ts');result=await prepareMappedComposition(sourceRoot,step.recipePath);compositionResults.set(step.recipePath,result);}
    const data=step.product==='report'?new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'):result.products[step.product];
    if(!data)throw new Error(`Unknown mapped composition product ${step.product}.`);
    await publish(step.path,data);
@@ -204,7 +204,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    await publish(step.path,new TextEncoder().encode(text));
   }
   else if(step.kind==='horizons-time-list'){
-   const {timeListRows,horizonsRows}=await import('@cssearth/bake/objects/layers/terrestrial');
+   const {timeListRows,horizonsRows}=await import('../layers/terrestrial/index.ts');
    const asked=await timeListRows(step.url,step.parameters,step.epochs,async url=>(await request(url)).text());
    const pinned=horizonsRows(await readFile(containedPath(sourceRoot,step.path),'utf8'));
    if(asked.length!==pinned.length||asked.some((row,index)=>row!==pinned[index]))throw new Error(`Horizons rows drifted from ${step.path}.`);

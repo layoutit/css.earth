@@ -195,8 +195,10 @@ its validators accept); the renderer never imports the bake.
     candidates (OPUS frames finer than a body ships, archive leads for a named body) and the resolved-star candidates. It
     imports no topic. `packages/bake/cli/imagery-candidates.mts` and `star-candidates.mts` print them.
   - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
-    and outputs each preparation family records); `tools/objects/provenance.mts` compiles the record from them. It imports
-    `objects/layers/terrestrial`.
+    and outputs each preparation family records); `object-provenance.ts` compiles the record from them, and
+    `recover-provenance.ts` writes every scene body's record, with the facilities catalogue compilation the application passes
+    in (`tools/prepare/cli/prepare-provenance.mts`). It imports `objects/layers/terrestrial`, `objects/acquisition`,
+    `objects/sources`, `delivery` and `sources`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
     solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; and the default
     lens's data coverage, read from its prepared minimap, that the default camera turns toward. It imports `objects/scene` and
@@ -209,8 +211,9 @@ its validators accept); the renderer never imports the bake.
     (a SPICE DSK to a welded mesh archive, GeoTIFF numeric grids and images read by byte range, mapped-composition fits, the
     JPL satellite catalogue), and beside them the Python converters the body manifests name as reproduction routes, with their
     pinned requirements and method notes (`MAPPED-SCIENCE.md`, `DSK-RESTORATION.md`). `dsk-mesh.ts` launches `dsk-mesh.py`
-    from this source folder, found by the package's name, so the path holds from `dist/`. It imports `raster` and
-    `objects/sources`. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
+    from this source folder, found by the package's name, so the path holds from `dist/`. `operations-acquisition.ts` runs a
+    body's acquisition plan and restores its missing pinned sources. It imports `raster` and `objects/sources`, and loads
+    `objects/layers/terrestrial` and `objects/layers/observation` for the plan steps that need them. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
     coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
   - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
     downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It

@@ -163,7 +163,7 @@ previews withhold ambiguous centre rays; the actual triangle atlases transfer
 through local 3D surface points, including the overlapping lobes.
 
 ```sh
-node tools/objects/dist/operations.js acquire arrokoth
+node packages/bake/cli/object-operations.mts acquire arrokoth
 node tools/objects/arrokoth/prepare-photographic-cameras.mts
 node tools/objects/arrokoth/qualify-photographs.mts
 node tools/objects/dist/prepare-authored.js arrokoth --write

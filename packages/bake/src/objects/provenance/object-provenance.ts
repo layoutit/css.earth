@@ -1,9 +1,10 @@
 import { sha256 } from '@cssearth/core/node';
 import type { ProductInputEvidence } from '@cssearth/objects/provenance';
-import { recordPreparationEvidence } from '@cssearth/bake/sources';
+import { recordPreparationEvidence } from '../../sources/index.ts';
 import {hasErrorCode} from '@cssearth/core';
-import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from '@cssearth/bake/objects/provenance';
-import type {ProvenanceRecipeSource, ProductBinding, GeographicProvenance} from '@cssearth/bake/objects/provenance';
+import {record, records, maybeRecord, text, namedRecords, identity, sourceEntry, provenanceManifest} from './provenance-records.ts';
+import type {ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.ts';
+import type {ProductBinding} from './provenance-records.ts';
 type Identity = ReturnType<typeof identity>;
 type BoundSource = ReturnType<typeof sourceEntry> & {id: string; kind: string; consumers?: readonly string[]};
 type BoundProduct = Omit<ProductBinding, 'inputPaths' | 'urls' | 'inputRoles'> & {
@@ -15,7 +16,7 @@ import { createReadStream } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '@cssearth/objects/provenance';
-import { provenanceProducts } from '@cssearth/bake/objects/provenance';
+import { provenanceProducts } from './provenance-recipes.ts';
 
 
 const json = async (path: string) => record(JSON.parse(await readFile(path, 'utf8')));
@@ -127,9 +128,9 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       ? [await bindSource(text(acquisitionOperation.fileSource), new Set([...visiting, path]))] : [];
     if (acquisitionOperation?.kind === 'geotiff-grid' || acquisitionOperation?.kind === 'geotiff-image') {
       const recipePath = text(acquisitionOperation.recipePath);
-      const {readGeoTiffGridRecipe} = await import('@cssearth/bake/objects/acquisition');
+      const {readGeoTiffGridRecipe} = await import('../acquisition/index.ts');
       if (acquisitionOperation.kind === 'geotiff-image') {
-        const {readGeoTiffImageRecipe} = await import('@cssearth/bake/objects/acquisition');
+        const {readGeoTiffImageRecipe} = await import('../acquisition/index.ts');
         await readGeoTiffImageRecipe(sourceDirectory, recipePath);
       } else await readGeoTiffGridRecipe(sourceDirectory, recipePath);
       dependencies.push(await bindSource(recipePath, new Set([...visiting, path])));
@@ -139,7 +140,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       if (!recipeEntry) throw new Error(`Unbound composition recipe: ${recipePath}.`);
       const bytes = await readFile(contained(sourceDirectory, recipePath));
       // Recovery reads this recipe to discover dependencies.
-      const {parseMappedCompositionRecipe} = await import('@cssearth/bake/objects/acquisition');
+      const {parseMappedCompositionRecipe} = await import('../acquisition/index.ts');
       const plan = parseMappedCompositionRecipe(JSON.parse(bytes.toString('utf8')));
       if (!byPath.has(plan.input)) throw new Error(`Composition input is undeclared: ${plan.input}.`);
       const ancestors = new Set([...visiting, path]);
@@ -212,7 +213,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   let document = validateObjectProvenance({
     schema: OBJECT_PROVENANCE_SCHEMA, objectId: id, basis,
     manifest: { path: 'source/manifest.json' },
-    generator: { path: 'tools/objects/provenance.mts' },
+    generator: { path: 'packages/bake/src/objects/provenance/object-provenance.ts' },
     recipes: [...recipes.values()].filter(recipe => usedRecipes.has(recipe.id)),
     sources: [...sources.values()].filter(source => usedSources.has(source.id)), products,
     coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved },

@@ -6,7 +6,8 @@ import { Readable } from 'node:stream';
 import { withIdleTimeout } from './idle-timeout.ts';
 
 /** The project's asset host: runtime assets under `runtime-assets/`, and the source mirror under `source-cache/`.
- * `tools/assets/asset-origin.mts` re-exports it for the source-input restore, whose test redirects it there. */
+ * The source-input restore (`restoreSourceInputs` in `@cssearth/bake/asset-publication`) takes it as a parameter, which its test
+ * points at a local server. */
 export const RUNTIME_ASSET_ORIGIN = "https://earth-assets.lowpoly.cc";
 
 /** `source-cache/<object id>/<manifest path>`: the mirror of one object's downloaded source input, addressed the way

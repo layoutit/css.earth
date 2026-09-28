@@ -1,11 +1,10 @@
-import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '@cssearth/bake/delivery';
-import { containedPath, parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
-import { fileURLToPath } from 'node:url';
-import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.js';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
-import { publishSourceBytes } from '@cssearth/bake/delivery';
+import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '../../delivery/index.ts';
+import { containedPath, parseSourceManifest, verifySources } from '../sources/index.ts';
+import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../sources/index.ts';
+import { publishSourceBytes } from '../../delivery/index.ts';
 import { readFile, lstat } from 'node:fs/promises';
-import { resolve, basename } from 'node:path';
+import { resolve } from 'node:path';
 
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 
@@ -55,8 +54,4 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
   return assembleRuntimeAssets({id,inventory:JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,productionRoot});
  }
  throw new TypeError(`Unknown object operation: ${mode}.`);
-}
-if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url) && basename(process.argv[1])==='operations.js') {
- const [mode,id,...args]=process.argv.slice(2);if(!mode||!id)throw new TypeError('Usage: operations.js <acquire|verify|manifest|assemble> <id>');
- console.log(JSON.stringify(await runOperations(mode,id,args)));
 }

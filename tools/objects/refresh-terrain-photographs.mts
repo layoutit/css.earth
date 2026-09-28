@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { prepareObjectProvenance } from './provenance.mts';
+import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));
 
 

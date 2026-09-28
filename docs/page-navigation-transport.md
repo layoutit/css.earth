@@ -7,7 +7,7 @@ an Earth alias. Object packages declare their authored stylesheet order in
 CSS, followed by the shared object shell CSS. The offline presentation compiler
 consumes the same list. There is no page-source regex or second object registry.
 
-`tools/assets/restore-object-json.mts` writes `prepared/object.json` and
+`packages/bake/cli/restore-object-json.mts` writes `prepared/object.json` and
 `prepared/page.json` from the installed runtime. The descriptor names the
 transport's format and URL; it has no digest pin, and page metadata has no
 `sceneSha256`. The first-load build serializes the decoded prepared tree into

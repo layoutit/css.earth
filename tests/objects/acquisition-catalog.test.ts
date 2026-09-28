@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
-import { executeAcquisition, parseAcquisitionPlan } from '#preparation/operations-acquisition';
+import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { prepareSatelliteCatalog } from '@cssearth/bake/objects/acquisition';
 import type { SourceEntry } from '@cssearth/bake/objects/sources';
 const test = sourceTest();

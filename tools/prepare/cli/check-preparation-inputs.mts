@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Entry script: node tools/prepare/cli/check-preparation-inputs.mts <object-id>.... The checks are in ../check-preparation-inputs.mts.
 import { resolve } from 'node:path';
-import { deriveRestoredPreparedFiles } from '../../assets/setup.mts';
+import { deriveRestoredPreparedFiles } from '@cssearth/bake/asset-publication';
 import { missingPreparedFiles, restoreDriftedFiles, textBudgetFindings, worldStepOutput } from '../check-preparation-inputs.mts';
 
 const root = resolve(import.meta.dirname, '../../..');

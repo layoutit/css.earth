@@ -7,7 +7,7 @@ import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { validateObjectPackageFiles } from '../../site/build/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
+import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { requireInventory } from '@cssearth/objects/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -19,18 +19,23 @@ const json = (path: string, value: unknown): Promise<void> => writeFile(path, JS
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['tools/assets', 'tools/sources', 'tools/objects/dist', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
+  for (const dir of ['packages/bake/cli', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
-  await copyFile(resolve(project, 'tools/assets/restore-source-inputs.mts'), resolve(root, 'tools/assets/restore-source-inputs.mts'));
-  // `restore-source-inputs.mts` imports `RUNTIME_ASSET_ORIGIN` from here, and a test redirects it to a local server.
-  await copyFile(resolve(project, 'tools/assets/asset-origin.mts'), resolve(root, 'tools/assets/asset-origin.mts'));
-  await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
+  await writeRestore(root);
+  await copyFile(resolve(project, 'packages/bake/cli/object-operations.mts'), resolve(root, 'packages/bake/cli/object-operations.mts'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
   await writeFile(resolve(root, 'site/objects.mts'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];\nexport const SCENE_OBJECTS = OBJECTS;`);
   await json(resolve(root, `src/objects/${id}/object.json`), { id });
   return root;
+}
+/** The restore command of this fixture checkout: `restoreSourceInputs` for the checkout it runs in, reading the source mirror
+ * at `assetOrigin` (the asset host when it is left out; a test points it at a local server). */
+const RESTORE = 'restore-source-inputs.mts';
+async function writeRestore(root: string, assetOrigin?: string): Promise<void> {
+  await writeFile(resolve(root, RESTORE), `import { restoreSourceInputs } from '@cssearth/bake/asset-publication';\n` +
+    `await restoreSourceInputs(process.argv.slice(2), { root: process.cwd()${assetOrigin === undefined ? '' : `, assetOrigin: ${JSON.stringify(assetOrigin)}`} });\n`);
 }
 async function run(root: string, args: readonly string[]): Promise<void> {
   await new Promise<void>((accept, reject) => {
@@ -108,7 +113,7 @@ test('checkout restores a missing compressed observation without refreshing exis
   await writeFile(resolve(source, 'preparation/acquisition.json'), plan);
   await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: records,
     documents: [{ ...pin('preparation/acquisition.json', plan), purpose: 'Acquisition plan' }], generatedIntermediates: [] });
-  await run(root, ['tools/assets/restore-source-inputs.mts', '--object=titan']);
+  await run(root, [RESTORE, '--object=titan']);
   assert.deepEqual(requests, ['/observation.IMG.gz']);
   assert.deepEqual(await readFile(resolve(source, 'observation.IMG.gz')), radar);
   assert.deepEqual(await readFile(resolve(source, 'existing.png')), existing);
@@ -120,7 +125,7 @@ test('checkout restores a missing compressed observation without refreshing exis
     generator: 'fixture-renderer' });
   await json(manifestPath, manifest);
   // A generated intermediate is not downloaded: absent from the source mirror, restore names the command that makes it.
-  await assert.rejects(run(root, ['tools/assets/restore-source-inputs.mts', '--object=titan']),
+  await assert.rejects(run(root, [RESTORE, '--object=titan']),
     /generated sources are missing[\s\S]*presentation\/context\.png: run node fixture-renderer/u);
 });
 
@@ -133,7 +138,7 @@ test('repository volume package restores a missing download from the object sour
   const address = server.address();
   assert.ok(address && typeof address !== 'string');
   const origin = `http://127.0.0.1:${address.port}`;
-  await writeFile(resolve(root, 'tools/assets/asset-origin.mts'), `export const RUNTIME_ASSET_ORIGIN = ${JSON.stringify(origin)};\n`);
+  await writeRestore(root, origin);
   await json(resolve(root, 'src/objects/nebula/source/manifest.json'), {
     schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', inputs: [{
       id: 'volume', path: 'src/objects/nebula/source.bin', origin: `${origin}/publisher.bin`,
@@ -143,14 +148,14 @@ test('repository volume package restores a missing download from the object sour
     schema: 'cssearth-volume-presentation-source@1',
   });
   await rm(resolve(root, 'site/objects.mts'));
-  await run(root, ['tools/assets/restore-source-inputs.mts', '--repository-volumes']);
+  await run(root, [RESTORE, '--repository-volumes']);
   assert.deepEqual(requests, ['/source-cache/nebula/src/objects/nebula/source.bin', '/source-cache/nebula/src/objects/nebula/preview.png']);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), bytes);
 
   const kept = Buffer.from('a present file is never replaced');
   await writeFile(resolve(root, 'src/objects/nebula/preview.png'), kept);
-  await run(root, ['tools/assets/restore-source-inputs.mts', '--repository-volumes']);
+  await run(root, [RESTORE, '--repository-volumes']);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), kept);
   assert.equal(requests.length, 2, 'a present file is not fetched again');
 });
@@ -174,7 +179,7 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
     ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso'],
     credit: 'Fixture', license: 'CC0', acquisition: 'Pinned archive', redistribution: 'Allowed',
   }], generatedIntermediates: [{ ...pin('science/mur-gibs.png', mosaic), generator: 'MUR archive restore' }], documents: [] });
-  const args = ['tools/assets/restore-source-inputs.mts', '--object=earth'];
+  const args = [RESTORE, '--object=earth'];
   await run(root, args);
   assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), mosaic);
 
@@ -196,7 +201,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   await json(resolve(prepared, 'controls.json'), { lenses: [{ thumbnailUrl: url('thumbnail') }] });
   await json(resolve(prepared, 'content.json'), { charts: [{ src: url('chart') }] });
   await json(resolve(prepared, 'surfaces.json'), { intermediateMap: url('source-map') });
-  await run(root, ['tools/objects/dist/operations.js', 'manifest', 'titan']);
+  await run(root, ['packages/bake/cli/object-operations.mts', 'manifest', 'titan']);
   const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/inventory.json'), 'utf8'));
   const manifest = requireRecord(manifestInput);
   assert.deepEqual(requireArray(manifest.assets).map(asset => requireString(requireRecord(asset).filename)), ['chart.webp', 'surface.webp', 'thumbnail.webp']);
