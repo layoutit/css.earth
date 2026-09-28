@@ -17,7 +17,6 @@ import { chooseGravity, type GravityChoice } from './gravity.mts';
 import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { StarSpec } from './spec.mts';
-import { TEXT_BUDGETS } from '../../../site/object-text.mts';
 
 const GM_SUN = 132712440041.93938;
 const PACKAGE_FILES = ['object.json', 'text.json', 'NOTICE.md', 'README.md', 'investigations.json', 'source/manifest.json', 'source/measurements.json',
@@ -57,7 +56,7 @@ function readmeWithLimb(readme: string, paragraph: string, problem: string) {
 }
 
 /** The law on an existing colour lens: recipe, plate, lens text, manifest, acquisition and credits. */
-function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice) {
+function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, progress: (line: string) => void) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const raster = read(`${s}/preparation/raster.json`), surface = raster.surfaces.find((entry: { science?: { kind?: string } }) => entry.science?.kind === 'stellar-photometric-color');
   surface.science.limbDarkening = limb.limbDarkening;
@@ -72,11 +71,10 @@ function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice) {
     control.notes = `${String(control.notes ?? '').replace(STALE, '').trim()} The darkening toward the edge is ${limb.sentence.replace(/^dimmed toward the limb by /u, '')}.`.trim();
   }
   files.set(`${s}/content/object.json`, json(content));
-  const text = read(`${o}/text.json`), dataset = text.datasets?.[surface.id];
-  // The reader's summary names the darkening only while it stays within its budget; the lens notes always describe the law.
-  const summary = dataset && `${String(dataset.summary).replace(/\.\s*$/u, '')}, dimmed toward the edge by ${limb.limbDarkening && 'published' in limb.limbDarkening ? 'its published law' : 'a model atmosphere'}.`;
-  if (dataset && summary && !/dimmed toward the edge/u.test(dataset.summary) && summary.length <= TEXT_BUDGETS.summary.characters) dataset.summary = summary;
-  files.set(`${o}/text.json`, json(text));
+  // The reader's summary is authored prose: it is not rewritten here, but a summary that still speaks of a uniform disc or of limb
+  // darkening is named so it can be corrected by hand.
+  const summary = String(read(`${o}/text.json`).datasets?.[surface.id]?.summary ?? '');
+  if (/\buniform\b|\blimb\b/iu.test(summary)) progress(`  ${id}: review ${o}/text.json datasets.${surface.id}.summary: "${summary}"`);
   const manifest = read(`${s}/manifest.json`), inputs = limb.inputs ?? [];
   manifest.inputs = [...manifest.inputs.filter((entry: { path: string }) => !inputs.some(input => input.path === entry.path)), ...inputs];
   manifest.generatedIntermediates = (manifest.generatedIntermediates ?? []).map((entry: Record<string, any>) => entry.path !== 'presentation/context.png' ? entry
@@ -120,7 +118,7 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     if (!limb.limbDarkening) { results.push({ id, limb: `NONE: ${limb.sentence}` }); progress(`  ${id}: no law (${limb.sentence.slice(0, 160)})`); continue; }
     const raster = read(`${s}/preparation/raster.json`), hasColor = raster.surfaces.some((entry: { science?: { kind?: string } }) => entry.science?.kind === 'stellar-photometric-color');
     let colour: string | undefined;
-    if (hasColor) installLimbOnly(files, id, limb);
+    if (hasColor) installLimbOnly(files, id, limb, progress);
     else {
       const spec = specFromRecords(id, body, measurements), gaia = /Gaia DR3 (?:source )?(\d{6,})/u.exec(JSON.stringify(host.star?.sources ?? {}))?.[1];
       const found = await resolver(body.physical.name), ids2: Identifiers = found ? readIdentifiers(found.mainId, found.identifiers) : readIdentifiers(body.physical.name, []);
