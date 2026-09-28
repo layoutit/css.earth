@@ -1,5 +1,4 @@
 {
-  "baseline": "f44516e6d77184e0adfa171619c6a8dc34137a29",
   "candidate": "baseline plus the navigation recipes, prepared images, comet snapshot lighting and checks in this PR",
   "method": "Decoded prepared images on #24242a. markers.png compares the original 15 fixes at 96 px; shading.png compares the additional 100 at 64 px. Context images use Lanczos3 and small markers nearest-neighbor. These are silhouette and curvature comparisons, not scientific registration or pixel parity.",
   "rows": [

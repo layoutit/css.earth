@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1843.txt. Model 1843, version 2017-09-21, pole (207°, -6°), period 6.081435 h match the retained metadata. The archive diameter field is 313 ±25 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/cybele/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1843",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/cybele/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/cybele/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/cybele/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/cybele/source/reference/damit-model.json"
       ]
     },
     {
@@ -31,13 +19,7 @@
       "survey": "surface-imagery-2",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/cybele/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/cybele/README.md"
       ]
     },
     {
@@ -48,13 +30,17 @@
       "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/783"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale in the astronomy record's mean radius 156.5 km (diameter 313 km) is outside the added Small Bodies Occultations V4.0 record 54, DAMIT model 783 diameter 247 ± 11 km (volume-equivalent; DAMIT model 783 fitted to 4 occultations). The display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

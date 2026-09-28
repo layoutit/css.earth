@@ -1,0 +1,53 @@
+{
+  "id": "v496-aql",
+  "name": "V496 Aql",
+  "system": "V496 Aql system",
+  "description": "A Cepheid in the Milky Way that pulsates every 6.81 days; its mean radius is 57.2 solar radii.",
+  "order": 2028,
+  "target": "V496 Aql",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 57.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, V496 Aql: Baade-Wesselink mean radius (solar radii) 57.2 +/- 6.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 6.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5500,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 227, Name='V496 Aql', columns Teff, e_Teff (K): Teff 5500 +/- 168 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 168
+  },
+  "distance": {
+    "value": 1157.4,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, V496 Aql: Baade-Wesselink distance (pc) 1157.4 +/- 123.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 123.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.397 +/- 0.01 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 57 times the Sun's width, that swells and shrinks every 6.8 days.",
+    "introduction": "Its mean radius, 57.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,157 parsecs away.",
+    "locator": "table10, V496 Aql: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

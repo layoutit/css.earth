@@ -1,7 +1,7 @@
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
-import { markerStyle } from '../../src/navigation/marker-presentation.mts';
+import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
 
 /** A search result row is 48 px (a 40 px preview beside a name and a subtitle) with an 8 px gap. */
 const ROW_PITCH = 56;
@@ -18,7 +18,7 @@ interface RowView {
 }
 export type CatalogueSelection = Readonly<{ kind: CatalogueIndexEntry['kind']; id: string }> | null;
 
-/** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare/prepare-search-thumbnails.mts`). */
+/** The prepared search thumbnail of a scene object with a context sprite (`packages/bake/src/site-assets/prepare-search-thumbnails.ts`). */
 export function searchPreviewUrl(objectId: string): string | null {
   return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
 }

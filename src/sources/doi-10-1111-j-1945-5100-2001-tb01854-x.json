@@ -1,0 +1,48 @@
+{
+  "id": "doi-10-1111-j-1945-5100-2001-tb01854-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Evans et al. (2001): Elemental composition from gamma-ray spectroscopy of the NEAR-Shoemaker landing site on 433 Eros",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1945-5100.2001.tb01854.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x",
+      "label": "Publisher"
+    },
+    {
+      "role": "mirror",
+      "url": "https://ui.adsabs.harvard.edu/abs/2001M%26PS...36.1639E",
+      "label": "NASA ADS"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x",
+      "checkedOn": "2026-09-28",
+      "locator": "Crossref record: title, authors, Meteoritics & Planetary Science 36, 1639-1660"
+    }
+  ],
+  "creators": [
+    "L. G. Evans",
+    "R. D. Starr",
+    "J. Brückner",
+    "et al."
+  ],
+  "publisher": "Meteoritics & Planetary Science 36, 1639-1660",
+  "publicationDate": "2001",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Evans et al. (2001), Meteoritics & Planetary Science 36, 1639-1660",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x"
+    }
+  ]
+}

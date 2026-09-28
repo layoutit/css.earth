@@ -8,23 +8,11 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1435.txt. Model 1435, version 2016-01-12, pole (123°, -37°), period 6.8337 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1435",
         "https://damit.cuni.cz/projects/damit/stored_files/open/5059/shape.txt",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aschera/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aschera/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/aschera/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/aschera/source/reference/damit-model.json"
       ]
     },
     {
@@ -32,13 +20,7 @@
       "survey": "survey-damit-documentation",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/aschera/README.md"
       ]
     },
     {
@@ -47,14 +29,7 @@
       "status": "included",
       "finding": "[Ďurech et al. (2016), Asteroid models from the Lowell Photometric Database](https://ui.adsabs.harvard.edu/abs/2016A%26A...587A..48D) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md",
         "https://ui.adsabs.harvard.edu/abs/2016A%26A...587A..48D"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -63,21 +38,9 @@
       "status": "included",
       "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 26.07 ± 0.34 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 214 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md",
         "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
         "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/aschera/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/aschera/source/reference/damit-model.json"
       ]
     },
     {
@@ -86,14 +49,7 @@
       "status": "included",
       "finding": "[Ďurech et al. (2016), A&A 587, A48](https://arxiv.org/pdf/1601.02909) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md",
         "https://arxiv.org/pdf/1601.02909"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -101,13 +57,7 @@
       "survey": "survey-usui-et-al-2011-pasj-63-1117-1138",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/aschera/README.md"
       ]
     },
     {
@@ -115,14 +65,7 @@
       "survey": "surface-imagery",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1436"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -132,20 +75,8 @@
       "finding": "Alternative archive solutions: model 1436, pole ['306', '-42'], [Model 1436](https://damit.cuni.cz/projects/damit/asteroid_models/view/1436) The live DAMIT export lists these other models for this target: 1436: pole (306°, -42°), 6.83369 h, version 2016-01-12. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1436",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -153,13 +84,18 @@
       "survey": "versioned-view-evidence",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/aschera/README.md#evidence"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/aschera/README.md#evidence"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"13.035 km (approximate thermal scale)\" (akari-acua-v1) implies a diameter of 26.07 km, outside the added NEOWISE V2.0 neowise_mainbelt.csv record 169 (Masiero et al. 2014) diameter 24.957 ± 0.152 km (NEOWISE, NEATM). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

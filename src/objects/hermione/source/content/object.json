@@ -45,7 +45,60 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Occultation diameter",
+        "value": "193 ± 15 km (volume-equivalent; DAMIT model 156 fitted to 10 occultations)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+          "label": "Herald et al. (2024), Small Bodies Occultations V4.0, asteroid diameters table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "small-bodies-occultations-v4",
+          "locator": "/occultations/rows/0/fields/Dia_2; /occultations/rows/0/fields/Uncert_2; /occultations/rows/0/fields/Events_2; /occultations/rows/0/fields/Model_Source_2; /occultations/rows/0/fields/Model_Number_2"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.70 × 10¹⁸ ± 2.00 × 10¹⁷ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Descamps et al. 2009",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/2/fields/MASS_KG; /masses/rows/2/fields/MASS_KG_UNC; /masses/rows/2/fields/BINARY_NOTE; /masses/rows/2/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "1.37 ± 0.14 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Descamps et al. 2009",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/2/fields/BULK_DENSITY; /masses/rows/2/fields/BULK_DENSITY_UNC; /masses/rows/2/fields/SIZE_REF_CODE; /masses/rows/2/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "S/2002 (121) 1: semimajor axis 747.0 ± 11.0 km, period 2.563 ± 0.00210 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Descamps et al. 2009",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

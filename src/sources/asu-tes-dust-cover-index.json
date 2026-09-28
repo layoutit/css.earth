@@ -1,0 +1,22 @@
+{
+  "id": "asu-tes-dust-cover-index",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MGS TES dust cover index, Ruff & Christensen (2002)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mars.asu.edu/data/tes_ruffdust/",
+      "label": "ASU TES dust cover index"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

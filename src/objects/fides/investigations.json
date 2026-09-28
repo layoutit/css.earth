@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-311.txt. Model 311, version 2011-04-21, pole (270°, 19°), period 7.332527 h match the retained metadata. The archive diameter field is 118 ±10 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/fides/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/311",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/fides/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/fides/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/fides/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/fides/source/reference/damit-model.json"
       ]
     },
     {
@@ -31,13 +19,18 @@
       "survey": "surface-imagery-2",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/fides/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/fides/README.md"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale in the astronomy record's mean radius 59 km (diameter 118 km) is outside the added Small Bodies Occultations V4.0 record 33, DAMIT model 311 diameter 88 ± 2 km (volume-equivalent; DAMIT model 311 fitted to 2 occultations). The display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -1,0 +1,499 @@
+{
+  "subject": "Mars catalogue lenses: eleven Trek catalogues as categorical grids drawn over the Viking mosaic",
+  "checkedOn": "2026-09-27",
+  "revision": {
+    "commit": "ccbf483de86e281069b2f17f12de1f50bb2c8d07",
+    "note": "Uncommitted additions under src/objects/mars/source/catalogues/ on feat/more-data-types, with the worktree's uncommitted geology-grid.py cell-presence mode and raster underlay option. Four grids (gullies, recent-activity, hydrous-minerals, aqueous-minerals) and valley-networks were written with output/mars-more-data/drafts/geology-grid-v2.py, which adds a null class field and a declared shared-cell class."
+  },
+  "environment": "Python 3.12, numpy 2.5.3, rasterio 1.4.3, pyshp 2.3.1 (packages/bake/src/objects/acquisition/requirements-mapped-science.txt).",
+  "inputs": {
+    "alluvial-fans/FanSurvey_2005_2008_clon0.query.json": {
+      "bytes": 23733,
+      "sha256": "60cd69c377092f87fce4b0e73fe4840da94bd48fa36e7a3fdf3f0e63072d5e0d"
+    },
+    "alluvial-fans/mars-alluvial-fans.tif": {
+      "bytes": 80668,
+      "sha256": "921780a949c494f2fc9f3fbac05edee75967b73dd57dfb57aadfb9fd78ecf791"
+    },
+    "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-01.json": {
+      "bytes": 297197,
+      "sha256": "d774db10af857970e6ab5223f79e31ffd41bb7368ea58a327db8c21de4c34bb8"
+    },
+    "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-02.json": {
+      "bytes": 303335,
+      "sha256": "e333fa9d371a9016c461827320ee099fdd3d75e4f6597183adb5561baaed6ce4"
+    },
+    "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-03.json": {
+      "bytes": 302035,
+      "sha256": "d36926552d7146a27fb99b94844344c8d578bab53c19aabde9466d84a1eff112"
+    },
+    "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-04.json": {
+      "bytes": 304994,
+      "sha256": "2fe78dab3681ec477f3bd8e415da915fb8650ed3b4d4712fbad6c2dab6c0bd7f"
+    },
+    "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-05.json": {
+      "bytes": 172670,
+      "sha256": "1e0afcc1f06cb2834edcdc602899f5e07d6a4c2cc1af6a8b829d7563c4d0d8b5"
+    },
+    "aqueous-minerals/mars-aqueous-classes.tif": {
+      "bytes": 91738,
+      "sha256": "751ac1303de814f86c882b8ac3470230173481c59c3327b9c6023a3ee628fbd7"
+    },
+    "chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.query.json": {
+      "bytes": 303555,
+      "sha256": "94a4a6090ccb7dd3508618a1831341e6c2d1195c0fb1fa5977958b33be98d0be"
+    },
+    "chloride/mars-chloride-deposits.tif": {
+      "bytes": 82411,
+      "sha256": "99632fafa452cccce9733a8b40d8614dfe16bd024a47928be3560894cf8d71a1"
+    },
+    "dune-fields/Dune_Field.query.json": {
+      "bytes": 1562973,
+      "sha256": "c6f14e24fdc3725b7e4afd47547fc8c04d4de30bf1e4338c7086194225b69c90"
+    },
+    "dune-fields/mars-dune-fields.tif": {
+      "bytes": 87227,
+      "sha256": "b109075f45179f2a27aa8eb3d2a6837c2fb7abd28e437335bb231ae6f948cece"
+    },
+    "glacial-valleys/Glacial_Valleys_2010_clon0.query.json": {
+      "bytes": 19658,
+      "sha256": "1a67a2e06efca710be7bfa615326fef69a0e898a2c02edafed81ba35e35d7a26"
+    },
+    "glacial-valleys/mars-glacial-valleys.tif": {
+      "bytes": 80863,
+      "sha256": "073418347ebe93f2e76207841e25eec064506367954102ee4f4f1a7109eaaa4d"
+    },
+    "glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-01.json": {
+      "bytes": 778006,
+      "sha256": "42637284f1ee9e8307c49932474cc3de8e5289339944e20b9f407a8682636c6b"
+    },
+    "glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-02.json": {
+      "bytes": 242805,
+      "sha256": "b4188950da44a8d251148766a89a92c52a0ec2d7e55a897b47fbb40970c238b4"
+    },
+    "glacier-like-forms/mars-glacier-like-forms.tif": {
+      "bytes": 84753,
+      "sha256": "6abf402e41fb155906af66406034a59a56fcb9db6c1b2bae364f3e416a00cbe8"
+    },
+    "gullies/Gullied_Landform_Survey_2015_clon0.query-01.json": {
+      "bytes": 308377,
+      "sha256": "03f1a92c4266702e24c020f401d9e2f307a46404d876af1714e1abb2feeae637"
+    },
+    "gullies/Gullied_Landform_Survey_2015_clon0.query-02.json": {
+      "bytes": 311968,
+      "sha256": "7249119a21a7b17c5646a7b875e73d7282d3795350cc10bff590a9228569a2ac"
+    },
+    "gullies/Gullied_Landform_Survey_2015_clon0.query-03.json": {
+      "bytes": 312775,
+      "sha256": "ec119309e45f5289c9a64ad21e3d740c592c7bdb9e8e34d077768022d5ed5229"
+    },
+    "gullies/Gullied_Landform_Survey_2015_clon0.query-04.json": {
+      "bytes": 313482,
+      "sha256": "a22e4f7efa91f2251d098b7b29b1ae62e1ab5f560b7ce8dc238858bd3fcf576e"
+    },
+    "gullies/Gullied_Landform_Survey_2015_clon0.query-05.json": {
+      "bytes": 304859,
+      "sha256": "a7717e150b283a698e4c52e18b9379c59fdb0c6abb12bd9404d17ba4d77f9732"
+    },
+    "gullies/mars-gullies.tif": {
+      "bytes": 100432,
+      "sha256": "019a3338c465cd20618910220e4eba351efcb5d5b52e234363b3b6d5aa8a9d66"
+    },
+    "hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-01.json": {
+      "bytes": 315731,
+      "sha256": "c6b34f52dd24d8a3813875aa273f76fd7f056afe27a3d76f81a35682b55908d9"
+    },
+    "hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-02.json": {
+      "bytes": 205039,
+      "sha256": "8318a23155bd71abc9c913d5eeab850ebaf0831713a9c810846c18e843f4b417"
+    },
+    "hydrous-minerals/mars-hydrous-minerals.tif": {
+      "bytes": 87890,
+      "sha256": "0c15f34ce08e4aa7dcc75de787974c2d5884b1f9e78a451a224fe65ea0e23fd2"
+    },
+    "recent-activity/RSLs_Gullies_New-IcyCraters_clon0.query.json": {
+      "bytes": 142470,
+      "sha256": "853c7ca9cfbc9d17a78337eb24f5fde14bce51380116c1dc94028156033ceeaf"
+    },
+    "recent-activity/mars-recent-activity.tif": {
+      "bytes": 83083,
+      "sha256": "6c351b349a755f0f5c9fb74a2a30d5839f1e8a2ec4cf5c1df238cdc46a596cde"
+    },
+    "recessional-glfs/Recessional_GLF_Options_2016_clon0.query.json": {
+      "bytes": 316947,
+      "sha256": "429e583f872ba616f7719ad070a32f0a1df80b670970216de91e095291a7c7e6"
+    },
+    "recessional-glfs/mars-recessional-glfs.tif": {
+      "bytes": 82002,
+      "sha256": "b864b880ea8065e24149fa496fc03887b74203ef7b1f80bad39d556c0dbb609e"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-01.json": {
+      "bytes": 4911291,
+      "sha256": "138284f21c12b9d232b3bf62ff576babe6cbd94dcdc6bcb2a23917fe897ed2bf"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-02.json": {
+      "bytes": 8024913,
+      "sha256": "4bcd6722fbceb6f4bafcf7ca03204a325b41acf69124f00da93dad16a8e43cf1"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-03.json": {
+      "bytes": 5974076,
+      "sha256": "35dc45143ac9be59d015b865e76eb4f1b176417a980183d4b06da1b21f954687"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-04.json": {
+      "bytes": 6602718,
+      "sha256": "1e8bafa5bb8eaa5315695c4fae5d3493154c19d51659d4ec44e58355e51aaed5"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-05.json": {
+      "bytes": 4804746,
+      "sha256": "583ae34d341c7823502e49ea917a1e485161bd873451518b99eb4f9c9dea6ccf"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-06.json": {
+      "bytes": 5914914,
+      "sha256": "0735f477d62b62a7fc325e0c1f13150575db62bceddec850aee61cd6d7c82b42"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-07.json": {
+      "bytes": 3207880,
+      "sha256": "d7067ec539fc8a382d12e85781fc3822138be832d159244ba62f3e7dac787280"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-08.json": {
+      "bytes": 3799765,
+      "sha256": "8fa05d642585205528b27c7c279d2d78dce282d21e595b1c82ba954c65103dc4"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-09.json": {
+      "bytes": 2842566,
+      "sha256": "8d2a121a150932d07b8d041068b8b5d5c319ec6bab4c72d7461a41526027a288"
+    },
+    "valley-networks/Hynek_Valley_Networks.query-10.json": {
+      "bytes": 2864676,
+      "sha256": "4940c67a8088a45f48bf79fcbea36c9d6994e705f80df5e7921f025e60ff0ed5"
+    },
+    "valley-networks/mars-valley-networks.tif": {
+      "bytes": 240359,
+      "sha256": "f2b90950eba8167c4585b5e710c8f6d4fa01a8ea05537fca87636a401f61ba5f"
+    }
+  },
+  "checks": [
+    {
+      "id": "usgs-original-identity",
+      "method": "Read Shapefiles/Geocentric/Dune_Field.shp from https://pubs.usgs.gov/of/2007/1158/Shapefiles.zip (60,597,152 bytes, Last-Modified 6 July 2007) with pyshp and compare with the Trek response record by record.",
+      "result": "547 records in both, same order, same vertex count per record, largest vertex difference 0 degrees. The USGS .prj names the flattened Mars 2000 ellipsoid, but its FGDC metadata defines the centroid latitude field as aerocentric and the folder is 'Geocentric'."
+    },
+    {
+      "id": "area-against-publication",
+      "method": "Area of cells whose centre falls in a polygon (cos-latitude weighted, 3,396.19 km sphere) against the database's own sinusoidal area field and a planar polygon-area estimate.",
+      "result": "Dune fields: 4,132 cells, 70,230 km2; Area_sinu_ sums to 69,750 km2 and the USGS abstract gives about 70,000 km2. Chloride: 676 cells, 15,632 km2 against 15,588 km2 of polygon area."
+    },
+    {
+      "id": "features-below-one-cell",
+      "method": "Rasterize each polygon alone at 4,096 by 2,048 (5.21 km cells at the equator) with pixel-centre inclusion.",
+      "result": "Dune fields: 89 of 547 hold no cell centre (median 8.1 km2, largest 30.3 km2; 1.19% of the mapped area). Chloride: 347 of 642 hold no cell centre (median 4.6 km2, largest 58.5 km2; 13.67% of the mapped area)."
+    },
+    {
+      "id": "sphere-request-identity",
+      "method": "Compare every committed response (outSR = Mars 2000 sphere WKT; pages of 1,000 FIDs where needed) with default responses in the server's native Esri 104905 reference, record by record.",
+      "result": "All eleven layers hold the same records, attributes and vertices (largest difference 0 degrees), except chloride FID 68, which straddles 180 degrees and is split into rings differently (vertices moved by under 0.00001 degrees). Where the layer also stores latitude and longitude as attributes (gullies, glacier-like forms, hydrous, aqueous, recent activity), they match the geometry within 5e-10 degrees."
+    },
+    {
+      "id": "cell-counts",
+      "method": "Count grid cells per category (4,096 by 2,048; cells holding two classes take the declared shared class where the plan declares one).",
+      "result": {
+        "dune-fields": {
+          "cells": 4132,
+          "perCategory": {
+            "Dune field (confident)": 3801,
+            "Dune field (fairly confident; needs a better image)": 328,
+            "Dune field (less confident; needs a better image)": 3
+          },
+          "areaKm2": 70230
+        },
+        "valley-networks": {
+          "cells": 163901,
+          "perCategory": {
+            "Mapped valley (centreline)": 163901
+          },
+          "areaKm2": 3809097
+        },
+        "alluvial-fans": {
+          "cells": 44,
+          "perCategory": {
+            "Large alluvial fan": 44
+          },
+          "areaKm2": 1072
+        },
+        "gullies": {
+          "cells": 4771,
+          "perCategory": {
+            "Pole-facing gullies": 2568,
+            "Equator-facing gullies": 1138,
+            "East- or west-facing gullies": 761,
+            "No preferred orientation": 270,
+            "More than one class in the cell": 34
+          },
+          "areaKm2": 94471
+        },
+        "glacier-like-forms": {
+          "cells": 1193,
+          "perCategory": {
+            "Glacier-like form": 1193
+          },
+          "areaKm2": 24693
+        },
+        "recessional-glfs": {
+          "cells": 407,
+          "perCategory": {
+            "Recessional glacier-like form": 407
+          },
+          "areaKm2": 8592
+        },
+        "glacial-valleys": {
+          "cells": 101,
+          "perCategory": {
+            "Supraglacial or proglacial valley": 101
+          },
+          "areaKm2": 2138
+        },
+        "recent-activity": {
+          "cells": 489,
+          "perCategory": {
+            "New impact craters (Daubar et al. 2013)": 348,
+            "Active gullies, including dune gullies (Dundas et al. 2015)": 59,
+            "Recurring slope lineae, confirmed or partial (McEwen et al. 2014; Ojha et al. 2014)": 58,
+            "New craters exposing ice (Dundas et al. 2014)": 6,
+            "More than one class in the cell": 18
+          },
+          "areaKm2": 11630
+        },
+        "hydrous-minerals": {
+          "cells": 1461,
+          "perCategory": {
+            "CRISM detection": 1024,
+            "OMEGA detection": 260,
+            "More than one class in the cell": 177
+          },
+          "areaKm2": 36393
+        },
+        "aqueous-classes": {
+          "cells": 2373,
+          "perCategory": {
+            "Phyllosilicates (clays)": 1605,
+            "Sulfates": 204,
+            "Silica": 173,
+            "Chlorides": 344,
+            "Carbonates": 36,
+            "More than one class in the cell": 11
+          },
+          "areaKm2": 58816
+        },
+        "chloride-deposits": {
+          "cells": 676,
+          "perCategory": {
+            "Chloride-bearing material": 676
+          },
+          "areaKm2": 15632
+        }
+      }
+    },
+    {
+      "id": "points-through-shared-reader",
+      "method": "Load each point lens with loadScienceSurface from @cssearth/bake/objects/raster and sample the output pixel centre holding every catalogue point.",
+      "result": "Every point reads its own class or the shared class; none reads empty or a wrong class. Shared-class points: gullies 72, recent activity 36 (16 of the 22 ice-exposing craters share a cell with a Daubar et al. new-crater entry), hydrous 356, aqueous 46."
+    },
+    {
+      "id": "valley-vertices",
+      "method": "Look up the cell holding each of the 1,172,096 valley-network vertices.",
+      "result": "All but 3 lie in a marked cell; those 3 sit on a cell edge and the neighbouring cell is marked."
+    },
+    {
+      "id": "underlay-brightness",
+      "method": "Reproduce the normal surface as prepareSurfaces does (sharp lanczos3 fill resize of the Viking MDIM 2.1 mosaic to 4,096 by 2,048, no exposure). For each legend colour, OKLab distance x100 to the dimmed terrain between 83 S and 82 N (every seventh pixel), 5th percentile.",
+      "result": {
+        "chosen": 0.4,
+        "reason": "The largest tenth-step brightness at which every legend colour stays at least 15 (the dataviz normal-vision floor) from 95% of the dimmed terrain. The limit is the alluvial-fan green #006633: 16.6 at 0.4, 14.2 at 0.5.",
+        "sweep": {
+          "0.3": [
+            [
+              20.5,
+              "#006633"
+            ],
+            [
+              30.7,
+              "#008300"
+            ],
+            [
+              33.6,
+              "#2a78d6"
+            ]
+          ],
+          "0.4": [
+            [
+              16.6,
+              "#006633"
+            ],
+            [
+              26.6,
+              "#008300"
+            ],
+            [
+              29.1,
+              "#2a78d6"
+            ]
+          ],
+          "0.42": [
+            [
+              15.9,
+              "#006633"
+            ],
+            [
+              25.9,
+              "#008300"
+            ],
+            [
+              28.2,
+              "#2a78d6"
+            ]
+          ],
+          "0.44": [
+            [
+              15.3,
+              "#006633"
+            ],
+            [
+              25.2,
+              "#008300"
+            ],
+            [
+              27.4,
+              "#2a78d6"
+            ]
+          ],
+          "0.46": [
+            [
+              14.8,
+              "#006633"
+            ],
+            [
+              24.5,
+              "#008300"
+            ],
+            [
+              26.6,
+              "#2a78d6"
+            ]
+          ],
+          "0.48": [
+            [
+              14.5,
+              "#006633"
+            ],
+            [
+              23.9,
+              "#008300"
+            ],
+            [
+              25.8,
+              "#2a78d6"
+            ]
+          ],
+          "0.5": [
+            [
+              14.2,
+              "#006633"
+            ],
+            [
+              23.3,
+              "#008300"
+            ],
+            [
+              25.1,
+              "#2a78d6"
+            ]
+          ],
+          "0.6": [
+            [
+              13.5,
+              "#006633"
+            ],
+            [
+              21.1,
+              "#008300"
+            ],
+            [
+              21.8,
+              "#2a78d6"
+            ]
+          ],
+          "0.7": [
+            [
+              13.6,
+              "#006633"
+            ],
+            [
+              19.4,
+              "#2a78d6"
+            ],
+            [
+              20.1,
+              "#008300"
+            ]
+          ],
+          "0.8": [
+            [
+              13.6,
+              "#006633"
+            ],
+            [
+              18.7,
+              "#2a78d6"
+            ],
+            [
+              19.8,
+              "#008300"
+            ]
+          ],
+          "1.0": [
+            [
+              13.7,
+              "#006633"
+            ],
+            [
+              14.8,
+              "#e87ba4"
+            ],
+            [
+              15.3,
+              "#eb6834"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "our-palette",
+      "method": "dataviz validate_palette.js --mode dark --surface #312524 (median terrain at 0.4) --pairs all on the recent-activity colours #3987e5,#d95926,#199e70,#eda100.",
+      "result": "CVD separation pass (worst 9.4, deutan), normal-vision floor pass (worst 17.5), contrast pass; lightness band flags the light yellow step. A six-type palette failed the normal-vision floor, so the lens colours the four source catalogues instead of the six types."
+    },
+    {
+      "id": "lossless-bytes",
+      "method": "Compose each lens as the underlay step does (category colours, Math.round(normal x 0.4) elsewhere) at 4,096 by 2,048 and encode with sharp WebP lossless, effort 6.",
+      "result": {
+        "alluvial-fans": 7564372,
+        "aqueous-classes": 7591258,
+        "chloride-deposits": 7568858,
+        "dune-fields": 7575306,
+        "glacial-valleys": 7563242,
+        "glacier-like-forms": 7575480,
+        "gullies": 7589792,
+        "hydrous-minerals": 7575174,
+        "recent-activity": 7571188,
+        "recessional-glfs": 7566528,
+        "valley-networks": 7821656
+      }
+    },
+    {
+      "id": "reproduction",
+      "method": "Re-download each acquisition URL; rerun geology-grid.py on scratch copies.",
+      "result": "Downloads byte-identical. Dune fields, chloride, alluvial fans, glacier-like forms, recessional GLFs and glacial valleys rebuild byte-identical with the worktree's geology-grid.py; the other five need the drafted null-field and shared-cell options."
+    }
+  ],
+  "omitted": "No bake, browser or delivery check was run; the lenses have not been seen mounted, and the pole images have not been checked for the underlay."
+}

@@ -5,7 +5,6 @@ import type { createOpacityFader } from '../../stars/opacity-fader.js';
 
 type ProjectedBody = PlannedWorldContext['projectedBodies'][number];
 type Fader = ReturnType<typeof createOpacityFader>;
-const SPRITE_DETAIL_RETURN = .75;
 
 interface MarkerFrame {
   readonly projected: ProjectedBody;
@@ -27,7 +26,7 @@ interface MarkerFrame {
 export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLElement, spriteLeaf: HTMLElement,
   body: { readonly color: string; readonly contextColor?: string }, sprite: SpriteWithUrl | undefined, locator: SVGSVGElement) {
   let billboardShown: boolean | undefined, markerShown: boolean | undefined;
-  let markerDiameter = 0, flatDot = false, spriteDetail = false, spriteApplied = false, indicatorHovered = false;
+  let markerDiameter = 0, flatDot = false, spriteApplied = false, indicatorHovered = false;
   let center: [number, number] = [0, 0];
   let markerTransform = '', spriteTransform = '', labelOffset = '';
   return {
@@ -54,23 +53,13 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       markerShown = frame.markerShown; markerDiameter = frame.markerDiameter;
       if (!frame.billboardShown) return;
 
-      // Load the prepared detail only when the marker needs it.
-      const detail = sprite?.detail;
       if (!spriteApplied && sprite && !frame.flatDot) { applySpriteImage(spriteLeaf, sprite); spriteApplied = true; }
-      if (detail && !frame.flatDot && !coast) {
-        const nextDetail = markerDiameter >= detail.fromDiameterPixels ||
-          (spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
-        if (nextDetail !== spriteDetail) {
-          spriteDetail = nextDetail;
-          if (!flatDot) applySpriteImage(spriteLeaf, nextDetail ? detail : sprite!);
-        }
-      }
       if (flatDot !== frame.flatDot) {
         flatDot = frame.flatDot;
         const leaf = spriteLeaf.style;
         if (flatDot) { leaf.backgroundImage = 'none'; leaf.backgroundColor = body.color; leaf.borderRadius = '50%'; } else {
           leaf.backgroundColor = leaf.borderRadius = '';
-          applySpriteImage(spriteLeaf, spriteDetail && detail ? detail : sprite!);
+          if (sprite) applySpriteImage(spriteLeaf, sprite);
           spriteApplied = true;
         }
       }
@@ -97,7 +86,7 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       fader.set(mover, frame.billboardShown && !plannedShown ? 0 : markerOpacity);
       const transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
       if (markerTransform !== transform) { mover.style.transform = transform; markerTransform = transform; }
-      const scale = `scale(${markerDiameter / BODY_INDICATOR_DIAMETER})`;
+      const scale = `scale(${markerDiameter / BODY_INDICATOR_DIAMETER * (flatDot ? 1 : sprite?.imageScale ?? 1)})`;
       if (spriteTransform !== scale) { spriteLeaf.style.transform = scale; spriteTransform = scale; }
       center = [x, y];
     },

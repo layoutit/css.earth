@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-5163.txt. Model 5163, version 2024-04-08, pole (185°, -61°), period 18.60888 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/5163",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/polyhymnia/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/polyhymnia/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/source/reference/damit-model.json"
       ]
     },
     {
@@ -32,14 +20,7 @@
       "status": "included",
       "finding": "[Original shape table](https://damit.cuni.cz/projects/damit/stored_files/open/129049/shape.txt) — counted XYZ vertices and one-based triangle indices.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md",
         "https://damit.cuni.cz/projects/damit/stored_files/open/129049/shape.txt"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -47,13 +28,7 @@
       "survey": "survey-damit-documentation-3",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/README.md"
       ]
     },
     {
@@ -61,13 +36,7 @@
       "survey": "survey-acua-primary-catalog",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/README.md"
       ]
     },
     {
@@ -75,13 +44,7 @@
       "survey": "survey-hanu-et-al-2018-2",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/README.md"
       ]
     },
     {
@@ -89,13 +52,7 @@
       "survey": "survey-broughton-s-occultation-synthesis",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/README.md"
       ]
     },
     {
@@ -104,14 +61,7 @@
       "status": "included",
       "finding": "[Franco et al. (2020), Spin-Shape Model for 33 Polyhymnia](https://ui.adsabs.harvard.edu/abs/2020MPBu...47..120F)",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md",
         "https://ui.adsabs.harvard.edu/abs/2020MPBu...47..120F"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -119,13 +69,7 @@
       "survey": "surface-imagery-6",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/polyhymnia/README.md"
       ]
     },
     {
@@ -135,20 +79,19 @@
       "finding": "Alternative archive models: Model 5164: pole (19°, -65°), period 18.6089 h. The live DAMIT export lists these other models for this target: 5164: pole (19°, -65°), 18.60888 h, version 2024-04-08. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/polyhymnia/README.md",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/5164"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"26.99 km (size-calibrated model)\" (akari-acua-v1) implies a diameter of 53.98 km, outside the added Small Bodies Occultations V4.0 record 29, DAMIT model 5163 diameter 62 ± 1 km (volume-equivalent; DAMIT model 5163 fitted to 1 occultation). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -189,6 +189,199 @@
         "noData": true
       },
       {
+        "id": "maximum-temperature",
+        "label": "Maximum temperature",
+        "thumbnail": "moon-lens-maximum-temperature.webp",
+        "surface": "moon-maximum-temperature@2x.webp",
+        "poles": "moon-poles-maximum-temperature@2x.webp",
+        "source": {
+          "id": "diviner-gcp-tbol-max-compact",
+          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Maximum temperature",
+          "labels": [
+            "\u2264220",
+            "310",
+            "\u2265400"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                36,
+                32,
+                79
+              ],
+              [
+                58,
+                70,
+                139
+              ],
+              [
+                37,
+                141,
+                164
+              ],
+              [
+                129,
+                201,
+                176
+              ],
+              [
+                244,
+                209,
+                123
+              ],
+              [
+                236,
+                128,
+                60
+              ],
+              [
+                155,
+                40,
+                58
+              ]
+            ],
+            "labels": [
+              "\u2264220",
+              "310",
+              "\u2265400"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color maximum bolometric temperature from LRO Diviner, July 2009 to March 2015 (Williams et al. 2017): the warmest quarter-hour bin average of each 0.5\u00b0 cell. Colors span 220\u2013400 K; values beyond share the end colors. Global coverage.",
+        "notes": "The hottest the ground gets in the lunar day. Dark maria run hotter than bright highlands and fresh craters, and it falls toward the poles. Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest. Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows its warmest quarter-hour average; for 82% of cells it falls within an hour of noon. Global: every cell has observations. An average of many days, not one day\u2019s peak. The display cells are 0.5\u00b0 wide, about 15 km.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The hottest the ground gets in the lunar day. Dark maria run hotter than bright highlands and fresh craters, and it falls toward the poles."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows its warmest quarter-hour average; for 82% of cells it falls within an hour of noon."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Global: every cell has observations."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "An average of many days, not one day\u2019s peak. The display cells are 0.5\u00b0 wide, about 15 km."
+          }
+        ]
+      },
+      {
+        "id": "noon-temperature",
+        "label": "Noon temperature",
+        "thumbnail": "moon-lens-noon-temperature.webp",
+        "surface": "moon-noon-temperature@2x.webp",
+        "poles": "moon-poles-noon-temperature@2x.webp",
+        "source": {
+          "id": "diviner-gcp-tbol-noon-compact",
+          "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Noon temperature",
+          "labels": [
+            "\u2264220",
+            "310",
+            "\u2265400"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                36,
+                32,
+                79
+              ],
+              [
+                58,
+                70,
+                139
+              ],
+              [
+                37,
+                141,
+                164
+              ],
+              [
+                129,
+                201,
+                176
+              ],
+              [
+                244,
+                209,
+                123
+              ],
+              [
+                236,
+                128,
+                60
+              ],
+              [
+                155,
+                40,
+                58
+              ]
+            ],
+            "labels": [
+              "\u2264220",
+              "310",
+              "\u2265400"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color noon bolometric temperature from LRO Diviner, July 2009 to March 2015 (Williams et al. 2017): the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data. Colors span 220\u2013400 K. Covers 98.6%; gray grid marks cells never observed in that hour.",
+        "notes": "The temperature at local noon, when the Sun is highest. Near the equator it is close to the day\u2019s maximum. Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest. Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data. 98.6% of the Moon. Gray grid marks cells Diviner never saw between 11:30 and 12:30; they are thin streaks, mostly on the nearside. An average of many days, over an hour around noon rather than at noon itself. Against a narrower 11:45\u201312:15 window the values differ by 1 K at the median and 7 K for the 5% of cells that differ most.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The temperature at local noon, when the Sun is highest. Near the equator it is close to the day\u2019s maximum."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Kelvin: 273 K is 0 \u00b0C and 373 K is 100 \u00b0C. Red is hotter; 220 K or colder shares the darkest color, 400 K or hotter the reddest."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Diviner measured infrared heat from the ground on every nadir pass from July 2009 to March 2015. The archive averages them in 0.5\u00b0 cells and quarter-hour steps of local time. Each cell shows the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "98.6% of the Moon. Gray grid marks cells Diviner never saw between 11:30 and 12:30; they are thin streaks, mostly on the nearside."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "An average of many days, over an hour around noon rather than at noon itself. Against a narrower 11:45\u201312:15 window the values differ by 1 K at the median and 7 K for the 5% of cells that differ most."
+          }
+        ]
+      },
+      {
         "id": "heat-anomalies",
         "label": "Heat anomalies",
         "thumbnail": "moon-lens-heat-anomalies.webp",
@@ -376,6 +569,73 @@
         "falseColor": true,
         "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
         "notes": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent \u221212 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
+      },
+      {
+        "id": "roughness",
+        "label": "Roughness",
+        "thumbnail": "moon-lens-roughness.webp",
+        "surface": "moon-roughness@2x.webp",
+        "poles": "moon-poles-roughness@2x.webp",
+        "source": {
+          "id": "lro-lola-ldrm-16",
+          "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.img"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface roughness",
+          "meta": "m, 30\u2013120 m baseline",
+          "labels": [
+            "\u22640.5",
+            "1.25",
+            "\u22652"
+          ],
+          "recipe": {
+            "palette": [
+              "#440154",
+              "#3b528b",
+              "#21918c",
+              "#5ec962",
+              "#fde725"
+            ],
+            "labels": [
+              "\u22640.5",
+              "1.25",
+              "\u22652"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color LOLA surface roughness (LDRM_16): per-pixel mean of the height scatter about a plane fitted to runs of laser shots, 30\u2013120 m baseline, July 2009 to December 2011, 16 pixels per degree. Colors span 0.5\u20132 m; values beyond share the end colors. Gray grid marks pixels without a value.",
+        "notes": "How bumpy the ground is over tens of metres. Smooth lava plains read low; old highlands and young crater ejecta read high. Metres of height scatter left after fitting a flat plane to a short run of laser shots. Yellow is rougher; 2 m or more share the top color, 0.5 m or less the bottom one. LOLA measured heights along its ground track. Along each run of three shots, a plane was fitted and the leftover scatter kept; each 2 km pixel averages them, July 2009 to December 2011. Global. Gray grid marks the 4% of the Moon, in scattered pixels, where the archive holds no value. The distance the scatter is measured over varies from 30 to 120 m with the spacecraft\u2019s speed and height, so nearby pixels are not all measured at the same scale.",
+        "noData": true,
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How bumpy the ground is over tens of metres. Smooth lava plains read low; old highlands and young crater ejecta read high."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Metres of height scatter left after fitting a flat plane to a short run of laser shots. Yellow is rougher; 2 m or more share the top color, 0.5 m or less the bottom one."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "LOLA measured heights along its ground track. Along each run of three shots, a plane was fitted and the leftover scatter kept; each 2 km pixel averages them, July 2009 to December 2011."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Global. Gray grid marks the 4% of the Moon, in scattered pixels, where the archive holds no value."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The distance the scatter is measured over varies from 30 to 120 m with the spacecraft\u2019s speed and height, so nearby pixels are not all measured at the same scale."
+          }
+        ]
       },
       {
         "id": "crust",
@@ -727,6 +987,144 @@
         "falseColor": true,
         "qualification": "NASA GRAIL crustal-thickness map with shaded relief",
         "notes": "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust."
+      },
+      {
+        "id": "gravity",
+        "label": "Gravity",
+        "thumbnail": "moon-lens-gravity.webp",
+        "surface": "moon-gravity@2x.webp",
+        "poles": "moon-poles-gravity@2x.webp",
+        "source": {
+          "id": "grail-grgm1200a-gravity-anomaly-l660",
+          "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Free-air gravity anomaly",
+          "labels": [
+            "\u2264\u2212400",
+            "0",
+            "\u2265400"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "\u2264\u2212400",
+              "0",
+              "\u2265400"
+            ]
+          },
+          "meta": "mGal",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color GRAIL free-air gravity anomaly from the GRGM1200A field summed to degree 660, in mGal on a 1,738 km sphere. Blue is weaker and red stronger gravity than a uniform Moon; colors span \u2212400 to +400 mGal and stronger values share the end colors. Topography is not removed, so high ground reads positive. Mission data 2012; the whole globe is covered.",
+        "notes": "False-color GRAIL free-air gravity anomaly from the GRGM1200A field summed to degree 660, in mGal on a 1,738 km sphere. Blue is weaker and red stronger gravity than a uniform Moon; colors span \u2212400 to +400 mGal and stronger values share the end colors. Topography is not removed, so high ground reads positive. Mission data 2012; the whole globe is covered."
+      },
+      {
+        "id": "bouguer-gravity",
+        "label": "Bouguer gravity",
+        "thumbnail": "moon-lens-bouguer-gravity.webp",
+        "surface": "moon-bouguer-gravity@2x.webp",
+        "poles": "moon-poles-bouguer-gravity@2x.webp",
+        "source": {
+          "id": "grail-grgm1200a-bouguer-disturbance-l660",
+          "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_boug_l660.tif"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Bouguer gravity disturbance",
+          "labels": [
+            "\u2264\u2212600",
+            "0",
+            "\u2265600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "\u2264\u2212600",
+              "0",
+              "\u2265600"
+            ]
+          },
+          "meta": "mGal",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color GRAIL Bouguer disturbance from the GRGM1200A field summed to degree 660, in mGal: gravity after the pull of LOLA topography, taken as rock of 2,500 kg/m\u00b3, is removed. Colors span \u2212600 to +600 mGal and stronger values share the end colors. Red usually marks dense mantle nearer the surface; mare basalt is not removed. The Crust view is a model derived from maps like this one.",
+        "notes": "False-color GRAIL Bouguer disturbance from the GRGM1200A field summed to degree 660, in mGal: gravity after the pull of LOLA topography, taken as rock of 2,500 kg/m\u00b3, is removed. Colors span \u2212600 to +600 mGal and stronger values share the end colors. Red usually marks dense mantle nearer the surface; mare basalt is not removed. The Crust view is a model derived from maps like this one."
       },
       {
         "id": "silicate-signature",
@@ -1596,6 +1994,286 @@
             "value": "50\u00b0 south to 50\u00b0 north. Gray grid marks the polar regions, missing measurements, or cells without a usable model fit."
           }
         ]
+      },
+      {
+        "id": "thorium",
+        "label": "Surface elements",
+        "thumbnail": "moon-lens-thorium.webp",
+        "surface": "moon-thorium@2x.webp",
+        "poles": "moon-poles-thorium@2x.webp",
+        "source": {
+          "id": "lp-grs-elem-abundance-2deg",
+          "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Thorium",
+          "meta": "ppm",
+          "labels": [
+            "0",
+            "5",
+            "\u226510"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "5",
+              "\u226510"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color thorium in ppm from Lunar Prospector\u2019s gamma-ray spectrometer, 1998, in 2\u00b0 equal-area cells (Prettyman et al. 2006, PDS release 2012). Colors span 0\u201310 ppm; higher values share the top color. Global, no gaps; detail below about 150 km is blurred.",
+        "notes": "Thorium is a radioactive element. On the Moon it is richest in KREEP, rock from the last few percent of the ancient magma ocean to solidify, gathered around Mare Imbrium and Oceanus Procellarum. Parts per million by weight. Yellow means more; values of 10 ppm or more share the brightest color. Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it. Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw. Each value carries an uncertainty of about 0.3 ppm (one standard deviation, from the release\u2019s error matrix).",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Thorium is a radioactive element. On the Moon it is richest in KREEP, rock from the last few percent of the ancient magma ocean to solidify, gathered around Mare Imbrium and Oceanus Procellarum."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Parts per million by weight. Yellow means more; values of 10 ppm or more share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value carries an uncertainty of about 0.3 ppm (one standard deviation, from the release\u2019s error matrix)."
+          }
+        ],
+        "step": {
+          "group": "surface-elements",
+          "label": "Thorium"
+        }
+      },
+      {
+        "id": "potassium",
+        "label": "Surface elements",
+        "thumbnail": "moon-lens-potassium.webp",
+        "surface": "moon-potassium@2x.webp",
+        "poles": "moon-poles-potassium@2x.webp",
+        "source": {
+          "id": "lp-grs-elem-abundance-2deg",
+          "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Potassium",
+          "meta": "ppm",
+          "labels": [
+            "0",
+            "1750",
+            "\u22653500"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "1750",
+              "\u22653500"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color potassium in ppm from Lunar Prospector\u2019s gamma-ray spectrometer, 1998, in 2\u00b0 equal-area cells (Prettyman et al. 2006). Colors span 0\u20133,500 ppm; higher values share the top color. Uncertainty is about 230 ppm per cell.",
+        "notes": "Potassium travels with thorium in KREEP-rich rock, so both maps light up the same nearside region. Parts per million by weight. Yellow means more; values of 3,500 ppm or more share the brightest color. Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it. Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw. Each value carries an uncertainty of about 230 ppm (one standard deviation), as large as many highland values, so single cells are noisy. Zero means the fit found none at that precision.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Potassium travels with thorium in KREEP-rich rock, so both maps light up the same nearside region."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Parts per million by weight. Yellow means more; values of 3,500 ppm or more share the brightest color."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value carries an uncertainty of about 230 ppm (one standard deviation), as large as many highland values, so single cells are noisy. Zero means the fit found none at that precision."
+          }
+        ],
+        "step": {
+          "group": "surface-elements",
+          "label": "Potassium"
+        }
+      },
+      {
+        "id": "iron-gamma",
+        "label": "Surface elements",
+        "thumbnail": "moon-lens-iron-gamma.webp",
+        "surface": "moon-iron-gamma@2x.webp",
+        "poles": "moon-poles-iron-gamma@2x.webp",
+        "source": {
+          "id": "lp-grs-elem-abundance-2deg",
+          "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Iron as FeO",
+          "meta": "weight % FeO",
+          "labels": [
+            "0",
+            "12.5",
+            "\u226525"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "12.5",
+              "\u226525"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color FeO in weight % from Lunar Prospector\u2019s gamma-ray spectrometer, 1998, in 2\u00b0 equal-area cells (Prettyman et al. 2006). Colors span 0\u201325%; higher values share the top color. Global; detail below about 150 km is blurred.",
+        "notes": "Iron is abundant in the dark mare lavas and scarce in the bright highlands, so this map outlines the maria. FeO weight percent: 10% means 10 parts FeO per 100 parts of soil by weight. Yellow means more; 25% or more share one color. Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it. Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw. Each value carries an uncertainty of about 1 weight % (one standard deviation). The Iron content view estimates the same quantity from reflected sunlight, far more finely but only within 50\u00b0 of the equator.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Iron is abundant in the dark mare lavas and scarce in the bright highlands, so this map outlines the maria."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "FeO weight percent: 10% means 10 parts FeO per 100 parts of soil by weight. Yellow means more; 25% or more share one color."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value carries an uncertainty of about 1 weight % (one standard deviation). The Iron content view estimates the same quantity from reflected sunlight, far more finely but only within 50\u00b0 of the equator."
+          }
+        ],
+        "step": {
+          "group": "surface-elements",
+          "label": "Iron (FeO)"
+        }
+      },
+      {
+        "id": "titanium",
+        "label": "Surface elements",
+        "thumbnail": "moon-lens-titanium.webp",
+        "surface": "moon-titanium@2x.webp",
+        "poles": "moon-poles-titanium@2x.webp",
+        "source": {
+          "id": "lp-grs-elem-abundance-2deg",
+          "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Titanium as TiO\u2082",
+          "meta": "weight % TiO\u2082",
+          "labels": [
+            "0",
+            "4",
+            "\u22658"
+          ],
+          "recipe": {
+            "palette": [
+              "#292544",
+              "#426f85",
+              "#5ca595",
+              "#bad367",
+              "#fff2aa"
+            ],
+            "labels": [
+              "0",
+              "4",
+              "\u22658"
+            ]
+          },
+          "sourceUrl": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl"
+        },
+        "falseColor": true,
+        "qualification": "False-color TiO\u2082 in weight % from Lunar Prospector\u2019s gamma-ray spectrometer, 1998, in 2\u00b0 equal-area cells (Prettyman et al. 2006). Colors span 0\u20138%; higher values share the top color. Uncertainty is about 0.5% per cell.",
+        "notes": "Titanium separates the maria: high-titanium basalts in Mare Tranquillitatis and Oceanus Procellarum, low-titanium ones elsewhere. TiO\u2082 weight percent. Yellow means more; 8% or more share one color. Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it. Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw. Each value carries an uncertainty of about 0.5 weight % (one standard deviation), so the highlands\u2019 values near zero are not distinguishable from none. Zero, in a fifth of the Moon, means the fit found none at that precision.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Titanium separates the maria: high-titanium basalts in Mare Tranquillitatis and Oceanus Procellarum, low-titanium ones elsewhere."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "TiO\u2082 weight percent. Yellow means more; 8% or more share one color."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "Lunar Prospector\u2019s gamma-ray spectrometer counted gamma rays from the surface in 1998, from about 100 km up. A model split each spectrum into the elements that made it."
+          },
+          {
+            "id": "coverage",
+            "label": "Map detail",
+            "value": "Each map cell is a 2\u00b0 patch of equal area, about 60 km across, but the instrument blurred detail smaller than about 150 km, so neighbouring cells overlap in what they saw."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value carries an uncertainty of about 0.5 weight % (one standard deviation), so the highlands\u2019 values near zero are not distinguishable from none. Zero, in a fifth of the Moon, means the fit found none at that precision."
+          }
+        ],
+        "step": {
+          "group": "surface-elements",
+          "label": "Titanium (TiO\u2082)"
+        }
       }
     ]
   },

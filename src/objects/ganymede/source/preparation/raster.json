@@ -43,6 +43,37 @@
       }
     },
     {
+      "id": "dlr-juno",
+      "output": "ganymede-{id}{suffix}.webp",
+      "thumbnail": "ganymede-lens-{id}.webp",
+      "source": "ganymede-dlr-juno.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "dlr-voyager-galileo-juno",
+        "id": "dlr-juno",
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 180,
+          "wrapLongitude": true,
+          "resolutionMeters": 358.77424436424997,
+          "origin": [
+            -8266158.5901523195,
+            4133079.2950761598
+          ],
+          "displayRange": [
+            0,
+            255
+          ]
+        },
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      }
+    },
+    {
       "id": "enhanced",
       "output": "ganymede-{id}{suffix}.webp",
       "thumbnail": "ganymede-lens-{id}.webp",
@@ -89,7 +120,7 @@
         "overlapPolicy": "withhold-conflicts",
         "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
         "description": "USGS SIM 3237 interpreted geologic units",
-        "title": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height.",
+        "title": "Categorical map of interpreted geologic units; unit colors are the authors’ published GIS symbology, not measurements of surface color or height.",
         "grid": {
           "attributePath": "science/geology-sim3237/GeologyUnits.dbf",
           "projectionPath": "science/geology-sim3237/GeologyUnits.prj",
@@ -101,7 +132,7 @@
             -180,
             180
           ],
-          "field": "Unit",
+          "field": "UNITNAME",
           "expectedRecords": 3046,
           "expectedBounds": [
             -180,
@@ -123,119 +154,129 @@
         },
         "categories": [
           {
-            "value": "dc",
-            "label": "Dark cratered terrain",
-            "color": "#79574a"
+            "value": "Bright 3",
+            "label": "Young light grooved material",
+            "color": "#bed2ff"
           },
           {
-            "value": "dl",
-            "label": "Dark lineated terrain",
-            "color": "#98705b"
+            "value": "Bright 2",
+            "label": "Intermediate light grooved material",
+            "color": "#73b2ff"
           },
           {
-            "value": "d",
-            "label": "Dark terrain, undivided",
-            "color": "#b38e78"
+            "value": "Bright 1",
+            "label": "Old light grooved material",
+            "color": "#005ce6"
           },
           {
-            "value": "r",
-            "label": "Reticulate terrain",
-            "color": "#998781"
+            "value": "Bright Subdued 3",
+            "label": "Young light subdued material",
+            "color": "#beffe8"
           },
           {
-            "value": "lg1",
-            "label": "Light grooved terrain 1",
-            "color": "#729e83"
+            "value": "Bright Subdued 2",
+            "label": "Intermediate light subdued material",
+            "color": "#73ffdf"
           },
           {
-            "value": "lg2",
-            "label": "Light grooved terrain 2",
-            "color": "#98bd94"
+            "value": "Bright Subdued 1",
+            "label": "Old light subdued material",
+            "color": "#00e6a9"
           },
           {
-            "value": "lg3",
-            "label": "Light grooved terrain 3",
-            "color": "#c4d9a1"
+            "value": "Bright Irregular 3",
+            "label": "Young light irregular material",
+            "color": "#c29ed7"
           },
           {
-            "value": "ls1",
-            "label": "Light subdued terrain 1",
-            "color": "#77aeb2"
+            "value": "Bright Irregular 2",
+            "label": "Intermediate light irregular material",
+            "color": "#ca7af5"
           },
           {
-            "value": "ls2",
-            "label": "Light subdued terrain 2",
-            "color": "#9bc9c6"
+            "value": "Bright Irregular 1",
+            "label": "Old light irregular material",
+            "color": "#aa66cd"
           },
           {
-            "value": "ls3",
-            "label": "Light subdued terrain 3",
-            "color": "#c3e4d9"
+            "value": "Bright Undivided",
+            "label": "Light undivided material",
+            "color": "#0084a8"
           },
           {
-            "value": "li1",
-            "label": "Light irregular terrain 1",
-            "color": "#8079a9"
+            "value": "Reticulate",
+            "label": "Reticulate material",
+            "color": "#ed5192"
           },
           {
-            "value": "li2",
-            "label": "Light irregular terrain 2",
-            "color": "#aaa0c6"
+            "value": "Dark Lineated",
+            "label": "Dark lineated material",
+            "color": "#cd8966"
           },
           {
-            "value": "li3",
-            "label": "Light irregular terrain 3",
-            "color": "#d3c4e0"
+            "value": "Dark Cratered",
+            "label": "Dark cratered material",
+            "color": "#894444"
           },
           {
-            "value": "l",
-            "label": "Light terrain, undivided",
-            "color": "#d0d0bd"
+            "value": "Dark Undivided",
+            "label": "Dark undivided material",
+            "color": "#d7b09e"
           },
           {
-            "value": "p",
-            "label": "Palimpsest material",
-            "color": "#daac75"
+            "value": "Crater materials C3",
+            "label": "Fresh crater material",
+            "color": "#ffffd4"
           },
           {
-            "value": "pi",
-            "label": "Palimpsest interior",
-            "color": "#b88957"
+            "value": "Crater materials C2",
+            "label": "Partially degraded crater material",
+            "color": "#ffebaf"
           },
           {
-            "value": "bi",
-            "label": "Basin interior",
-            "color": "#c87770"
+            "value": "Crater materials C1",
+            "label": "Degraded crater material",
+            "color": "#dc7e15"
           },
           {
-            "value": "br",
-            "label": "Rugged basin material",
-            "color": "#a34f51"
+            "value": "Crater materials UC",
+            "label": "Undivided crater material",
+            "color": "#988523"
           },
           {
-            "value": "bs",
+            "value": "Basin Smooth",
             "label": "Smooth basin material",
-            "color": "#dea398"
+            "color": "#ff7f7f"
           },
           {
-            "value": "c1",
-            "label": "Crater material 1",
-            "color": "#ad8c27"
+            "value": "Basin Rugged",
+            "label": "Rugged basin material",
+            "color": "#ff4500"
           },
           {
-            "value": "c2",
-            "label": "Crater material 2",
-            "color": "#dbbc42"
+            "value": "Basin interior",
+            "label": "Basin interior plains material",
+            "color": "#fff5f5"
           },
           {
-            "value": "c3",
-            "label": "Crater material 3",
-            "color": "#f4df86"
+            "value": "Palimpsests P2",
+            "label": "Young palimpsest material",
+            "color": "#89cd66"
           },
           {
-            "value": "cu",
-            "label": "Crater material, undivided",
-            "color": "#d1c59f"
+            "value": "Palimpsests P1",
+            "label": "Ancient palimpsest material",
+            "color": "#898944"
+          },
+          {
+            "value": "Palimpsests PU",
+            "label": "Undivided palimpsest material",
+            "color": "#5c8944"
+          },
+          {
+            "value": "Palimpsets interior",
+            "label": "Palimpsest interior plains material",
+            "color": "#ffffff"
           }
         ]
       }

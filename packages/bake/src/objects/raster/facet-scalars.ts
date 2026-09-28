@@ -115,46 +115,84 @@ function fitsHeader(bytes: Buffer, start: number) {
   return { keys: Object.fromEntries(Object.entries(hdu.header).filter(([, v]) => v !== undefined).map(([k, v]) => [k, typeof v === 'boolean' ? v ? 'T' : 'F' : String(v)])), offset: hdu.dataOffset };
 }
 
-/** The selected PDS products have an empty primary HDU and one 1J+5E table.
- * FACET_NUM is zero-based. A requested, verified centroid bijection reconciles
- * a source OBJ exporter with a different order; original table IDs are retained. */
+/** A PDS4 facet table: an empty primary HDU and one binary table whose columns are read from TFORMn (J, E or D).
+ * FACET_NUM counts from facetNumberBase. Declared label/FITS disagreements are checked, never inferred. A requested,
+ * verified centroid bijection reconciles a source OBJ exporter with a different order; original table IDs are retained. */
+const WIDTH: Record<string, number> = { J: 4, E: 4, D: 8 };
+const LABEL_TYPE: Record<string, string> = { J: 'SignedMSB4', E: 'IEEE754MSBSingle', D: 'IEEE754MSBDouble' };
+
+
+
+
+/** Column layout from TFORMn. A FITS repeat count defaults to 1, so `E` and `1E` are the same column. */
+export function facetColumns(k: Record<string, string>) {
+  const columns: { name: string; unit?: string; type: string; offset: number }[] = [];
+  let offset = 0;
+  for (let i = 1; i <= Number(k.TFIELDS); i++) {
+    const form = /^1?([JED])$/.exec(k['TFORM' + i] ?? '');
+    if (!form || typeof k['TTYPE' + i] !== 'string') throw new Error('Unsupported FITS facet column ' + i + ': ' + k['TFORM' + i]);
+    columns.push({ name: k['TTYPE' + i], unit: k['TUNIT' + i], type: form[1], offset });
+    offset += WIDTH[form[1]];
+  }
+  if (String(offset) !== k.NAXIS1) throw new Error('FITS facet columns do not fill NAXIS1.');
+  return columns;
+}
+
 export function parseFacetFits(bytes: Buffer, xml: string, value: unknown, mesh: SourceMesh) {
-  const profile=parseFacetFitsTable(value);
+  const profile = parseFacetFitsTable(value);
   const primary = fitsHeader(bytes, 0), table = fitsHeader(bytes, primary.offset);
   const p = primary.keys, k = table.keys, count = profile.expectedRows;
-  if (p.SIMPLE !== 'T' || p.NAXIS !== '0' || p.TARGET !== profile.target || p.OBJ_FILE !== profile.meshFile ||
-      mesh.faces !== count || k.XTENSION !== 'BINTABLE' || k.BITPIX !== '8' || k.NAXIS !== '2' ||
-      k.NAXIS1 !== '24' || k.NAXIS2 !== String(count) || k.PCOUNT !== '0' || k.GCOUNT !== '1' || k.TFIELDS !== '6' ||
-      bytes.length !== table.offset + Math.ceil(count * 24 / 2880) * 2880) throw new Error('FITS facet table identity or dimensions changed.');
-  const names = ['FACET_NUM', 'LATITUDE', 'LONGITUDE', 'RADIUS', profile.field, 'SIGMA'];
-  const units = [undefined, 'DEGREES', 'DEGREES', 'KILOMETERS', profile.units, profile.units];
-  for (let i = 0; i < 6; i++) {
-    if (k['TTYPE' + (i + 1)] !== names[i] || k['TFORM' + (i + 1)] !== (i ? '1E' : '1J') ||
-        (units[i] !== undefined && k['TUNIT' + (i + 1)] !== units[i])) throw new Error('FITS facet column or unit changed: ' + names[i]);
-  }
-  const fieldXml = [...xml.matchAll(/<Field_Binary>([\s\S]*?)<\/Field_Binary>/g)].map(m => m[1]);
   const tag = (text: string, name: string) => new RegExp('<' + name + '(?:\\s[^>]*)?>([^<]+)</' + name + '>').exec(text)?.[1]?.trim();
-  if (tag(xml, 'records') !== String(count) || tag(xml, 'record_length') !== '24' ||
-      tag(xml, 'file_name') !== p.PRODNAME || !xml.includes(profile.meshFile) || fieldXml.length !== 6 ||
-      fieldXml.some((field, i) => tag(field, 'name') !== names[i] || tag(field, 'field_location') !== String(i * 4 + 1) ||
-        tag(field, 'field_length') !== '4' || tag(field, 'data_type') !== (i ? 'IEEE754MSBSingle' : 'SignedMSB4'))) {
+  const base = profile.facetNumberBase ?? 0, sigmaName = profile.withoutSigma ? '' : profile.sigmaField ?? 'SIGMA';
+  if (![0, 1].includes(base) || p.SIMPLE !== 'T' || p.NAXIS !== '0' || p.TARGET !== profile.target ||
+      p.OBJ_FILE !== (profile.headerMeshFile ?? profile.meshFile) || p.PRODNAME !== (profile.productName ?? tag(xml, 'file_name')) ||
+      mesh.faces !== count || k.XTENSION !== 'BINTABLE' || k.BITPIX !== '8' || k.NAXIS !== '2' || k.NAXIS2 !== String(count) ||
+      k.PCOUNT !== '0' || k.GCOUNT !== '1' ||
+      bytes.length !== table.offset + Math.ceil(count * Number(k.NAXIS1) / 2880) * 2880) throw new Error('FITS facet table identity or dimensions changed.');
+  const columns = facetColumns(k);
+  const column = (name: string, unit?: string) => {
+    const found = columns.filter(c => c.name === name);
+    if (found.length !== 1 || (unit !== undefined && found[0].unit !== unit)) throw new Error('FITS facet column or unit changed: ' + name);
+    return found[0];
+  };
+  const facet = column(profile.facetField ?? 'FACET_NUM'), used = [facet, column('LATITUDE', 'DEGREES'), column('LONGITUDE', 'DEGREES'),
+    column('RADIUS', profile.radiusUnits ?? 'KILOMETERS'), column(profile.field, profile.units),
+    ...(sigmaName ? [column(sigmaName, profile.sigmaUnits ?? profile.units)] : [])];
+  if (facet.type !== 'J' || used.slice(1).some(c => c.type === 'J')) throw new Error('FITS facet column types changed.');
+  const fieldXml = [...xml.matchAll(/<Field_Binary>([\s\S]*?)<\/Field_Binary>/g)].map(m => m[1]);
+  const labelName = (name: string) => profile.labelNames?.[name] ?? name;
+  if (tag(xml, 'records') !== String(profile.labelRecords ?? count) || tag(xml, 'record_length') !== k.NAXIS1 ||
+      (profile.headerMeshFile === undefined && !xml.includes(profile.meshFile)) || fieldXml.length !== columns.length ||
+      fieldXml.some((field, i) => tag(field, 'field_location') !== String(columns[i].offset + 1) ||
+        tag(field, 'field_length') !== String(WIDTH[columns[i].type]) || tag(field, 'data_type') !== LABEL_TYPE[columns[i].type] ||
+        (used.includes(columns[i]) && tag(field, 'name') !== labelName(columns[i].name)))) {
     throw new Error('PDS facet label differs from its FITS table.');
   }
-  const result = tableResult(count);
+  const read = (offset: number, c: { type: string; offset: number }) => c.type === 'D' ? bytes.readDoubleBE(offset + c.offset) : bytes.readFloatBE(offset + c.offset);
+  const [, lat, lon, radius, field, sigma] = used;
+  const values = new Float64Array(count).fill(NaN), sigmas = new Float64Array(count).fill(NaN);
+  const report = { rows: count, validRows: 0, withheldRows: 0, zeroSigmaRows: 0, remappedRows: 0, missingValueRows: 0,
+    minimum: Infinity, maximum: -Infinity, maximumCentroidErrorMeters: 0 };
+  const width = Number(k.NAXIS1), sourceRows = Uint32Array.from({ length: count }, (_, i) => i);
   const match = profile.registration === 'centroid-bijection' ? centroidBijection(mesh, profile.maximumCentroidErrorMeters) : null;
   for (let i = 0; i < count; i++) {
-    const offset = table.offset + i * 24, faceId = bytes.readInt32BE(offset);
-    if (faceId !== i) throw new Error('FITS facet IDs changed at row ' + i);
-    const lat = bytes.readFloatBE(offset + 4) * Math.PI / 180;
-    const lon = bytes.readFloatBE(offset + 8) * Math.PI / 180, radius = bytes.readFloatBE(offset + 12) * 1000;
-    const point = [radius * Math.cos(lat) * Math.cos(lon), radius * Math.cos(lat) * Math.sin(lon), radius * Math.sin(lat)];
-    const matched = match ? match(point) : {faceId:i, error:centroidError(mesh, i, point, profile.maximumCentroidErrorMeters)};
-    result.sourceRows[matched.faceId] = i;
-    if(matched.faceId !== i)result.report.remappedRows++;
-    const value = bytes.readFloatBE(offset + 16), sigma = bytes.readFloatBE(offset + 20);
-    record(result, matched.faceId, value, sigma, true, matched.error);
+    const offset = table.offset + i * width;
+    if (bytes.readInt32BE(offset + facet.offset) !== i + base) throw new Error('FITS facet IDs changed at row ' + i);
+    const la = read(offset, lat) * Math.PI / 180, lo = read(offset, lon) * Math.PI / 180, r = read(offset, radius) * 1000;
+    const point = [r * Math.cos(la) * Math.cos(lo), r * Math.cos(la) * Math.sin(lo), r * Math.sin(la)];
+    const matched = match ? match(point) : { faceId: i, error: centroidError(mesh, i, point, profile.maximumCentroidErrorMeters) };
+    report.maximumCentroidErrorMeters = Math.max(report.maximumCentroidErrorMeters, matched.error);
+    const id = matched.faceId; sourceRows[id] = i;
+    if (id !== i) report.remappedRows++;
+    const v = read(offset, field), s = sigma ? read(offset, sigma) : NaN;
+    if (profile.missingValue !== undefined && v === profile.missingValue) { report.missingValueRows++; report.withheldRows++; continue; }
+    if (!Number.isFinite(v)) { report.withheldRows++; continue; }
+    values[id] = v;
+    if (Number.isFinite(s) && s >= 0) { sigmas[id] = s; if (s === 0) report.zeroSigmaRows++; }
+    report.validRows++;
+    report.minimum = Math.min(report.minimum, v); report.maximum = Math.max(report.maximum, v);
   }
-  return result;
+  return { values, sigmas, sourceRows, report };
 }
 
 export function createFacetScalarSampler(mesh: SourceMesh, table: Pick<ReturnType<typeof tableResult>,"values"|"sigmas"|"sourceRows">, value: unknown) {

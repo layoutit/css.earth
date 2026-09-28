@@ -116,12 +116,27 @@
               "material": "lighting"
             },
             {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
             },
             {
               "id": "topography",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "crust",
               "source": "content",
               "material": "lighting"
             },

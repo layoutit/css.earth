@@ -1,0 +1,61 @@
+{
+  "id": "hv-12815",
+  "name": "HV 12815",
+  "system": "HV 12815 system",
+  "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 26.12 days; its mean radius is 105.2 solar radii.",
+  "order": 1955,
+  "gaia": "4660363361045224192",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 105.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, HV 12815: Baade-Wesselink mean radius (solar radii) 105.2 +/- 11 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 11
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5125,
+    "source": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC4066, columns Teffp, e_Teffp: Teff 5125 +/- 88 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2307.07559",
+    "uncertainty": 88
+  },
+  "radialVelocity": {
+    "value": 289.2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4660363361045224192 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract",
+    "uncertainty": 0.1
+  },
+  "distance": {
+    "value": 39034.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, HV 12815: Baade-Wesselink distance (pc) 39034.2 +/- 3812 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 3812
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.07 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 26.1 days.",
+    "introduction": "Its mean radius, 105.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 39,034 parsecs away.",
+    "locator": "table10, HV 12815: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
+    "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
+    "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
+  ]
+}

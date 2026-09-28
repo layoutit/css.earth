@@ -14,7 +14,7 @@ import { prepareSolidRasters, prepareSolidSurfacePoles } from '@cssearth/bake/ob
 import { lensBillboardColors } from '@cssearth/bake/objects/content';
 import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
-import { repinObjectJson } from '../prepare/prepare-object-json.mts';
+import { repinObjectJson } from '@cssearth/bake/contract';
 
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));

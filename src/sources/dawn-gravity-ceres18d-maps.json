@@ -1,0 +1,105 @@
+{
+  "id": "dawn-gravity-ceres18d-maps",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Dawn Ceres gravity maps from model CERES18D (Dawn Ceres Gravity Science Derived Data Bundle, maps collection)",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17189/c2eg-7x61"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-ceres:maps:jgdwn_cer18d_accel_0018::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-ceres:maps:jgdwn_cer18d_accerr_0018::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-ceres:maps:jgdwn_cer18d_bou_0018::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-rss-der-ceres:maps:jgdwn_cer18d_geoid_0018::1.0"
+    },
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-RSS-5-CEGR-V4.0"
+    }
+  ],
+  "creators": [
+    "R. S. Park",
+    "A. S. Konopliv",
+    "S. W. Asmar",
+    "D. R. Buccino"
+  ],
+  "publisher": "NASA Planetary Data System",
+  "publicationDate": "2025",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17189/c2eg-7x61",
+      "label": "Dawn Ceres Gravity Science Derived Data Bundle 1.0"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/",
+      "label": "PDS4 maps collection"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNCGRS_2_v4/DATA/RSDMAP/",
+      "label": "PDS3 volume DWNCGRS_2 (version 4): the same image bytes with their detached PDS3 labels"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1016/j.icarus.2017.08.005",
+      "label": "Konopliv et al. (2018), the Ceres gravity field from Dawn tracking"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1038/nature18955",
+      "label": "Park et al. (2016), A partially differentiated interior for (1) Ceres"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/document/dawn-rss-der-ceres-bundle-desc.txt",
+      "checkedOn": "2026-09-28",
+      "locator": "CERES18D Description; Description of the Digital Map of the Radial Gravity, Radial Gravity Error, Bouguer and Ceres GEOID"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/bundle-dawn-rss-der-ceres.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, Citation_Information (authors, publication_year 2025, doi)"
+    },
+    {
+      "path": "src/objects/ceres/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar); NASA Planetary Data System Small Bodies Node.",
+      "scope": "The CERES18D radial gravity, radial gravity error, Bouguer and geoid maps.",
+      "evidence": "PDS3 label DESCRIPTION and PRODUCER_ID; PDS4 label Citation_Information."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve the producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://pds.nasa.gov/datastandards/documents/policy/"
+    },
+    {
+      "kind": "limitation",
+      "text": "The PDS4 labels' value-added corner coordinates put the first column's edge at 0 degrees east; the producer's PDS3 labels put its centre there. The PDS3 placement is used.",
+      "scope": "Longitude placement, half a one-degree cell.",
+      "evidence": "PDS4 cart:upperleft_corner_x -1514250 m with 8412.5 m pixels; PDS3 WESTERNMOST_LONGITUDE 0.0, EASTERNMOST_LONGITUDE 359.0 at pixel centres (rss-simple-cylindrical-map-desc.txt)."
+    }
+  ]
+}

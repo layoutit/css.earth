@@ -158,7 +158,7 @@ export async function prepareTypecheck() {
   // `prepared/page.json` is a build output, not a tracked file: restore-object-json writes it from
   // the restored runtime. The two steps below read it, so it has to exist before they run.
   await run(projectRoot, ['tools/assets/restore-object-json.mts', '--restored-only']);
-  await run(projectRoot, ['tools/prepare/cli/prepare-feature-index.mts']);
+  await run(projectRoot, ['site/build/prepare/prepare-feature-index.mts']);
   await run(projectRoot, ['tools/prepare/cli/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: source catalogues generated.');
 }

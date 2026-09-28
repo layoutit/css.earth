@@ -1,7 +1,7 @@
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 // Every world body's classification and discovery come with the world summary, not the object registry.
 import { WORLD_OBJECTS as SCENE_OBJECTS } from './world-objects.mts';
-import { contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
+import { contextAnnotationOpacity } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { discoveryVisibility } from '@cssearth/objects';
 import { labelImportance } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
@@ -31,6 +31,8 @@ function placedSystemOf(id: string): ReadonlySet<string> {
   return new Set([root, ...[...orbitCenters.keys()].filter(member => !Object.hasOwn(applicationContext.orbitCenters ?? {}, member) && rootOf(member) === root)]);
 }
 const hiddenOrbitIds = prepared.hiddenOrbitIds;
+// Every body that orbits another and every centre something orbits; a barycentre's own centre is its host star.
+const systemMembers: ReadonlySet<string> = new Set([...orbitCenters].flat());
 const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
   [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, defaultFeatures.has(object.id) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]),
   // A body drawn from its astronomy record is a star or planet hosted by a placed star; its tier is that role in its host's
@@ -49,7 +51,7 @@ export function createApplicationWorldVisibility(layer: ApplicationWorldLayer, l
 
   function update() {
     if (lifetime.disposed) return;
-    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures });
+    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures, systemMembers });
     layer.setBodyVisibility({
       bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
       labelHidden: [...visibility.hiddenLabels.filter(id => !openSystem.has(id)), ...plainDotIds],

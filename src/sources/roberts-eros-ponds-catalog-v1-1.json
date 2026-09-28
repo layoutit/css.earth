@@ -1,0 +1,60 @@
+{
+  "id": "roberts-eros-ponds-catalog-v1-1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "version": "1.1",
+  "title": "Roberts Eros Ponds Catalog V1.1",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26033/4dqc-8067"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:ast-eros.roberts.ponds-catalog::1.1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.26033/4dqc-8067",
+      "label": "doi:10.26033/4dqc-8067"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/",
+      "label": "PDS Small Bodies Node archive"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arcnav.psi.edu/urn:nasa:pds:ast-eros.roberts.ponds-catalog",
+      "checkedOn": "2026-09-28",
+      "locator": "Version 1.1: DOI 10.26033/4dqc-8067; version 1.0: DOI 10.26033/71nh-8062"
+    },
+    {
+      "path": "src/objects/eros/source/manifest.json",
+      "locator": "/inputs/12"
+    }
+  ],
+  "creators": [
+    "J. H. Roberts"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Roberts, J. (2021), Roberts Eros Ponds Catalog V1.1, NASA Planetary Data System, doi:10.26033/4dqc-8067. Pond identifications and diameters from P. C. Thomas's database.",
+      "scope": "citation",
+      "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt"
+    },
+    {
+      "kind": "limitation",
+      "text": "Ponds are generally not circular; each row gives one characteristic diameter. Some rows are parts of one elongated deposit.",
+      "scope": "data",
+      "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt"
+    }
+  ]
+}

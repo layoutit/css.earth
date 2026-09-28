@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hv-876",
+  "card": {
+    "text": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 22.7 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1212-5478",
+        "url": "https://arxiv.org/abs/1212.5478",
+        "label": "Groenewegen (2012)",
+        "checked": "2026-09-28",
+        "locator": "table10, HV 876: Per, Rad, Dist"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its mean radius, 97.4 solar radii, comes from comparing how fast its surface moves with how its size changes, 44,757 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1212-5478",
+        "url": "https://arxiv.org/abs/1212.5478",
+        "label": "Groenewegen (2012)",
+        "checked": "2026-09-28",
+        "locator": "table10, HV 876: Per, Rad, Dist"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

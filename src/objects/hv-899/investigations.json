@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hv-899",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4661266369343899904 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hv-899/source/photometry/gaia-dr3-source.csv. Distance: Groenewegen (2013), A&A 550, A70, table10, HV 899: Baade-Wesselink distance (pc) 47670.4 +/- 1397.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 47670.4 +/- 1397.6 pc; Gaia DR3 parallax -0.0028 +/- 0.0154 mas (same row, RUWE 1.07), -0.2 standard errors, is not used. Proper motion: Gaia DR3 (same row): 1.699, -0.071 mas/yr. Radial velocity: Gaia DR3 (same row): 260.23 +/- 1.93 km/s.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 128 +/- 3.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 899: Baade-Wesselink mean radius (solar radii) 128 +/- 3.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 89,049,600 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5250 +/- 125 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0986, columns Teffp, e_Teffp: Teff 5250 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2307.07559"
+      ]
+    },
+    {
+      "id": "light-curve",
+      "subject": "Light curve",
+      "status": "included",
+      "finding": "Gaia DR3 vari_cepheid, source 4661266369343899904: 3 G-band harmonics of a 31.056210162235836 d period, peak-to-peak 1.032 mag; the harmonics reproduce the row's epoch of maximum and peak-to-peak amplitude. The page plays it as a veil over the disc from the scene date, phase known to 0.02 of a cycle there.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243990"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,250 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.11 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2-degree observer: #ffead9. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2307.07559"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,250 K and log g 0.1 (u1 0.574, u2 0.146): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 0.1 from 2022A&A...658A..29R; the 1 published value span log g 0.1 to 0.1, across which the limb law changes by at most 0.0% of the centre brightness.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A%26A...658A..29R"
+      ]
+    }
+  ]
+}

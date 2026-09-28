@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The current LAM 3Dshape directory lists 7_Iris_mpcd.obj, matching the actual preparation input. The retained measurements describe 13970 vertices and 27936 facets in km; the recipe preserves that source scale. This review checked the release listing and local source/recipe binding, not a fresh mesh reconstruction or new source-fit test.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iris/README.md",
         "https://observations.lam.fr/astero/3Dshape/7_Iris_mpcd.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/iris/source/reference/model-properties.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/iris/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iris/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iris/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -32,29 +20,9 @@
       "status": "included",
       "finding": "The retained Table 1 and Table A.1 extract records diameter 199 km, ecliptic J2000 pole (20°, 23°), period 7.138843 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 101.9582450701366 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass. Re-read 2026-09-18: the release rotation record, 19.0414 25.8850 7.13884337, is the solution of Hanuš et al. (2019) read longitude-first, 0.1° from its Table 1 pole (19°, 26°); Table A.1’s (20°, 23°) is 3.0° from it. The display pole keeps Table A.1.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iris/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/iris/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iris/source/reference/model-properties.json",
         "https://doi.org/10.1051/0004-6361/201834541"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
-        }
       ]
     },
     {
@@ -63,30 +31,10 @@
       "status": "included",
       "finding": "Included 2026-09-18 as the SPHERE photograph lens: the 23 camera-1 deconvolved frames of 2017 October 10 and 11, the epochs Hanuš et al. (2019) published, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The 20 frames of 2019 February and March are not used: the paper’s figure covers 2017, and a lens keeps one apparition. Earlier directory-level finding, kept: The live source folder https://observations.lam.fr/astero/Data/7Iris/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/iris/README.md",
         "https://observations.lam.fr/astero/Data/7Iris/",
         "https://observations.lam.fr/astero/",
         "https://observations.lam.fr/astero/Data/7Iris/Deconv/",
         "https://doi.org/10.1051/0004-6361/201834541"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
-        }
       ]
     },
     {
@@ -97,24 +45,8 @@
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/7_Iris_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/iris/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/iris/source/reference/model-properties.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/iris/source/reference/model-properties.json",
         "https://doi.org/10.1051/0004-6361/201834541"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
-        }
       ]
     },
     {
@@ -127,20 +59,6 @@
         "https://observations.lam.fr/astero/3Dshape/",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
         "https://doi.org/10.1051/0004-6361/201834541"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
-        }
       ]
     },
     {
@@ -154,20 +72,6 @@
         "https://arxiv.org/abs/1902.09242",
         "https://observations.lam.fr/astero/Data/7Iris/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "78c6b5e67424a52a5990316bc1ebb1c7dd1524b5"
-        }
       ]
     },
     {
@@ -179,16 +83,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/201834541",
         "https://arxiv.org/abs/1902.09242"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
-        },
-        {
-          "date": "2026-09-18",
-          "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
-        }
       ]
     },
     {
@@ -199,13 +93,19 @@
       "revisitWhen": "The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or a released frame is found that shares surface with both apparitions within the level fit's angle limit.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/7Iris/Deconv/",
-        "https://github.com/layoutit/css.earth/blob/86dba0be4d4a0f103c48ea5f69cb9717e3c08c3f/tools/objects/sphere-survey/apparitions.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "86dba0be4d4a0f103c48ea5f69cb9717e3c08c3f"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/sphere-survey/apparitions.ts"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Small Bodies Occultations V4.0 record 7, DAMIT model 107 diameter 217 ± 8 km (volume-equivalent; DAMIT model 107 fitted to 8 occultations) is not shown: the astronomy record takes its size from a publication (\"Vernazza et al. (2021), Table 1: mean ADAM/MPCD radii and masses; GM = G * mass.\"), and it differs from the astronomy record's mean radius 99.5 km (diameter 199 km). Baer et al. mass 1.25 × 10¹⁹ ± 1.99 × 10¹⁷ kg (record 70, Pitjeva 2005) is not shown: the astronomy record already carries GM 0.9010305 km³/s² (about 1.35e+19 kg with CODATA 2018 G), outside the catalogue uncertainty.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

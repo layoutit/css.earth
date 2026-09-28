@@ -13,23 +13,8 @@
         "https://doi.org/10.5281/zenodo.6390469",
         "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/README.md",
         "https://github.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/blob/v1.0.1/fit_SPHERE.json.gz",
-        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/browser.json",
-        "https://github.com/layoutit/css.earth/blob/78038ef3913db7d48cde75d9fe97248b6db67d98/src/objects/ganymede/evidence/composition/registration.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
-        },
-        {
-          "date": "2026-09-14",
-          "commit": "f8fbdaa0b203f11b4f121b867eb478d38d6c311e"
-        },
-        {
-          "date": "2026-09-14",
-          "commit": "78038ef3913db7d48cde75d9fe97248b6db67d98"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/evidence/composition/browser.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/evidence/composition/registration.json"
       ]
     },
     {
@@ -40,12 +25,6 @@
       "revisitWhen": "Inspect the paper's data-availability route and retrieve the numerical map or reproducible source closure before selecting a surface quantity.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202347326"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
-        }
       ]
     },
     {
@@ -56,12 +35,6 @@
       "revisitWhen": "Reconsider only for a scientifically supported observation view that preserves the atmospheric and reflected-light distinction; this is not a candidate for literal surface chemistry under the current fixed-scene scope.",
       "evidence": [
         "https://zenodo.org/records/17964985"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "a15706943fcf4dae2c337bdf2ae3e432a3c50393"
-        }
       ]
     },
     {
@@ -70,15 +43,8 @@
       "status": "included",
       "finding": "Selected 16,539 by 8,270 source provides Monochrome; variable 400 m to 20 km detail, original shadows, and zero-marked gaps remain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_global_mosaic_1km"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -87,15 +53,8 @@
       "status": "included",
       "finding": "Selected SSI 991/559/413 nm product provides False color, not natural color; missing color falls back to observed monochrome.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -105,32 +64,21 @@
       "finding": "The source synthesized red while green and blue were observed. The package uses monochrome from 110–150 degrees east rather than present synthesized red as measurement.",
       "revisitWhen": "A release supplies an observed red channel and coverage evidence for that sector.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ganymede_voyager_galileo_ssi_color_global_mosaic_1_4km"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
       "id": "sim3237-geology",
       "subject": "USGS SIM 3237 GeologyUnits polygons",
       "status": "included",
-      "finding": "Selected 3,046-record, 23-unit source supplies categorical Geology. The known degenerate one-point ring is excluded while valid multipart geometry, no-data and uncovered poles remain explicit.",
+      "finding": "Selected the 3,046-record GeologyUnits polygons for categorical Geology, now colored by UNITNAME (25 units, keeping the p1/p2/pu palimpsest split that the 23-symbol Unit field merged, as used until 2026-09-27). The known degenerate one-point ring is excluded while valid multipart geometry, no-data and uncovered poles remain explicit. Polygons cover 99.60% of the sphere; 0.40% is gray, mostly beyond 80 degrees latitude; overlapping units withheld on 0.001%. Gazetteer centres of 15 features named in the map text land in the expected unit 13 times read east-positive and 3 times read west-positive.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
-        "https://pubs.usgs.gov/sim/3237/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
+        "https://pubs.usgs.gov/sim/3237/",
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_pamphlet.pdf",
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf"
       ]
     },
     {
@@ -139,15 +87,8 @@
       "status": "included",
       "finding": "Pinned native maps supply Oxygen signature under the documented first-valid-night, coordinate, coverage, registration and residual-night limits.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ganymede/source/manifest.json",
         "https://doi.org/10.5281/zenodo.11402374"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -160,12 +101,85 @@
         "https://doi.org/10.1016/0019-1035(81)90203-7",
         "https://doi.org/10.1016/j.icarus.2021.114631"
       ],
-      "revisitWhen": "A global disc-resolved Ganymede law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
+      "revisitWhen": "A global disc-resolved Ganymede law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values."
+    },
+    {
+      "id": "sim3237-unit-symbology",
+      "subject": "SIM 3237 unit colors from the authors' ArcMap project",
+      "status": "included",
+      "finding": "Ganymede_Geology_SIM3237_ArcMap10.mxd in the SIM 3237 database ZIP holds four copies of the GeologyUnits layer, each a unique-value renderer on UNITNAME with the same 25 values and fill colors, stored as CIE L*a*b*. Converted with Apple RGB primaries, gamma 1.8 and a D65 white, every color lands within 6e-7 of an integer RGB and the 20 units NASA Trek also serves match Trek's RGB exactly; sRGB or other primaries miss by up to 13 L*a*b* units. These colors replace the authored display palette used before. Unit names come from the map sheet's Description of Map Units.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf",
+        "https://trek.nasa.gov/ganymede/trekarcgis/rest/services/ganymede/Ganymede_Voyager_GalileoSSI_GeologicMapUnits/MapServer/2?f=json"
+      ]
+    },
+    {
+      "id": "sim3237-unitname-attribute",
+      "subject": "Which GeologyUnits attribute names each polygon's unit",
+      "status": "included",
+      "finding": "UNITNAME, TERRAIN and Unit agree on 3,041 of 3,046 polygons. Four polygons (records 1786, 1843, 1946, 2101; largest 545,327 km2) have a UNITNAME that differs from TERRAIN, Unit and the separate label points, and record 2924 has Unit l against light grooved material in both name fields. UNITNAME is used because it is the field the authors' map project colors. The monochrome mosaic inside record 1946 averages 72.8 DN, between the dark cratered (62.5) and young light grooved (78.8) means, so brightness does not decide it. Label-point agreement is 2,913 of 3,042 against UNITNAME and 2,918 against Unit.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+        "https://pubs.usgs.gov/sim/3237/SIM3237_metadata/sim3237_Ganymede_metadata.txt"
+      ]
+    },
+    {
+      "id": "sim3237-layer-symbology-lyr",
+      "subject": "layerSymbology/GanymedeUnits.lyr in the SIM 3237 database",
+      "status": "excluded",
+      "finding": "The layer file renders UNITNAME with one Palimpsests value and a Crater ejecta value; the shipped polygons carry Palimpsests P1, P2 and PU and no crater ejecta, so three units would fall to its default symbol. Its other colors equal the ArcMap project's.",
+      "revisitWhen": "USGS republishes a layer file whose values match the shipped GeologyUnits attributes.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+        "https://pubs.usgs.gov/sim/3237/SIM3237_readme/sim3237_Ganymede_readme.txt"
+      ]
+    },
+    {
+      "id": "trek-ganymede-geologic-units",
+      "subject": "NASA Trek layer Voyager Multi Instruments and Galileo SSI Geologic Map Units, Global",
+      "status": "excluded",
+      "finding": "Trek serves the same 25 UNITNAME values on the Ganymede_2015 2,631.2 km sphere. Its renderer matches the SIM 3237 project for 20 units but colors p1, p2, pu, pi and reticulate material differently (pi and reticulate share one color). The USGS GIS download is reachable and is the authors' own release, so Trek is used only as an independent check of the color conversion.",
+      "revisitWhen": "Trek documents a source for its five differing colors, or the USGS download becomes unavailable.",
+      "evidence": [
+        "https://trek.nasa.gov/ganymede/trekarcgis/rest/services/ganymede/Ganymede_Voyager_GalileoSSI_GeologicMapUnits/MapServer/2?f=json",
+        "https://trek.nasa.gov/ganymede/"
+      ]
+    },
+    {
+      "id": "sim3237-map-sheet-colors",
+      "subject": "Printed SIM 3237 map sheet unit colors",
+      "status": "unresolved",
+      "finding": "The map sheet PDF fills units with CMYK process colors; its unit boxes were not matched one by one against the GIS colors. The lens uses the GIS project's RGB colors.",
+      "revisitWhen": "The sheet's Description of Map Units boxes are decoded and compared unit by unit with the GIS colors.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/pdf/sim3237_mapsheet.pdf"
+      ]
+    },
+    {
+      "id": "sim3237-intermediate-grid",
+      "subject": "Offline categorical GeoTIFF of the SIM 3237 units (the Enceladus route)",
+      "status": "excluded",
+      "finding": "The shared raster lane reads the SIM 3237 shapefile directly (geologic-shapefile), and the polygons tile the sphere without nested units, so a checked-in grid from geology-grid.py would add a step without changing any cell.",
+      "revisitWhen": "The shared lane stops reading shapefiles directly or a unit needs the nested-units rule.",
+      "evidence": [
+        "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip"
+      ]
+    },
+    {
+      "id": "dlr-voyager-galileo-juno-mosaic",
+      "subject": "DLR Voyager-Galileo-Juno global mosaic, 359 m (ESA PSA DLR_Ganymede_Voyager-Galileo-Juno_V1.0; NASA Trek Ganymede_global_equi_000_359m_Juno)",
+      "status": "included",
+      "finding": "DLR_Ganymede_Voyager-Galileo-Juno_V1.0 (Kersten et al. 2021; ESA PSA Guest Storage Facility, doi:10.57780/esa-fcj5pf3), 359 m, 46080 x 23040. Measured 2026-09-28 at the prepared 2 km texel: Juno sharpens 13% of the globe (310-60 E, 14 S-70 N around Tros; fine-detail 0.55 against 0.50 for the USGS mosaic); elsewhere it is no sharper; imagery on 99.88% of the sphere against 99.57%. Its control network differs from the USGS mosaic that labels, geology and false colour follow: features sit a median 14 km away (90th percentile 30 km), and pixelmatch at 0.1 flags 40.6% of texels. Included as its own view (DLR mosaic), not a Monochrome replacement, so the labels, Geology and False color's monochrome fallback keep the USGS frame; the offset is stated in the view notes. Licence: data in the ESA Space Science Archives, PSA included, are distributed under CC BY-NC 3.0 IGO (commercial use needs an ESA licence; credit required, no implied endorsement); the data set page states no licence of its own and asks for the citation 'European Space Agency, 2022, DLR_Ganymede_Voyager-Galileo_Juno_V1.0, 10.57780/esa-fcj5pf3'; the DOI's DataCite record has no rightsList. cssEarth is non-commercial. Trek serves a re-encoded copy of the same file (403,022,788 vs 425,503,420 bytes for the 0-centred GeoTIFF); the recipe reads the PSA original. The bake's geotiff-byte-monochrome decoder reads it with 0 differences from the scratch check.",
+      "evidence": [
+        "https://doi.org/10.57780/esa-fcj5pf3",
+        "https://www.cosmos.esa.int/web/psa/dlr_ganymede_voyager-galileo-juno_v1.0",
+        "https://www.cosmos.esa.int/web/esdc/terms-and-conditions",
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/PUG-DLR-Ganymede-v2.pdf",
+        "https://doi.org/10.1016/j.pss.2021.105310",
+        "https://doi.org/10.5194/epsc2022-450",
+        "https://trek.nasa.gov/ganymede/",
+        "src/objects/ganymede/evidence/dlr-juno/measure.json"
       ]
     }
   ]

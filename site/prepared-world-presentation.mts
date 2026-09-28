@@ -1,4 +1,4 @@
-// Written by tools/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets and the galaxy and
+// Written by site/build/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets and the galaxy and
 // cluster presentation recipes; the browser only validates it.
 import prepared from './prepared-world-presentation.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';

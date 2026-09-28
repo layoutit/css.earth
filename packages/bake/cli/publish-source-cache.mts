@@ -9,7 +9,7 @@
 //   node packages/bake/cli/publish-source-cache.mts --file=<path> --key=<object id>/<manifest path>
 //     Publishes exactly one file under the key a restorer will ask for.
 //
-// Same verify-after-publish contract as tools/assets/publish-runtime-assets.mts: HEAD every key, retry a miss with a per-key
+// Same verify-after-publish contract as @cssearth/bake/asset-publication (publish-runtime-assets.ts): HEAD every key, retry a miss with a per-key
 // `wrangler r2 object put`, byte-verify, exit non-zero on any remaining failure.
 import { sha256 } from '@cssearth/core/node';
 import { spawn } from 'node:child_process';

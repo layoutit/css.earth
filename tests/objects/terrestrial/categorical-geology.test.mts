@@ -55,7 +55,8 @@ for (const id of ['io', 'ganymede']) test(`${id} archived geography, attribute i
     assert.ok(bytes.length > 0, receipt.path);
   }
   assert.equal(surface.report.records, id === 'io' ? 1502 : 3046);
-  assert.equal(Object.keys(surface.report.counts).length, id === 'io' ? 15 : 23);
+  // Ganymede reads the authors' UNITNAME field, which keeps the three palimpsest classes the older Unit field merged.
+  assert.equal(Object.keys(surface.report.counts).length, id === 'io' ? 15 : 25);
   assert.equal(surface.sample(0, 90), null);
   assert.equal(surface.sample(0, id === 'io' ? -89.5 : 89.9), null, 'Source polar gaps are preserved');
   for (const delta of [{sampling: 'bilinear'}, {relief: {referenceRadiusMeters: 1}}, {valueTransform: {scale: 1, offset: 0}}]) {

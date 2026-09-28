@@ -6,17 +6,19 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { answerParent } from '@cssearth/core/node';
 import { prepareObjects } from '../../prepare/prepare-object.mts';
-import { formatNewObject, runNewObject, specFromArchive } from './generate.mts';
+import { liveArchive } from './archives.mts';
+import { writeDrafts } from './drafts.mts';
+import { formatNewObject, runNewObject } from './generate.mts';
 import { refreshSpec } from './refresh.mts';
 
-export interface NewObjectOptions {readonly spec?:string;readonly ids?:readonly string[];readonly hosts?:readonly string[];readonly out?:string;readonly check:boolean;readonly bake:boolean;readonly refresh:boolean;readonly skipExisting:boolean;readonly json:boolean}
+export interface NewObjectOptions {readonly spec?:string;readonly ids?:readonly string[];readonly from?:string;readonly names?:readonly string[];readonly out?:string;readonly check:boolean;readonly bake:boolean;readonly refresh:boolean;readonly skipExisting:boolean;readonly json:boolean}
 
 /** The options the telescope parsed, read back from its JSON argument. */
 export function parseNewObjectOptions(value:unknown):NewObjectOptions{
   const record=requireRecord(value,'new-object options'),flag=(name:string)=>{const found=record[name];if(typeof found!=='boolean')throw new TypeError(`new-object option ${name} must be a boolean.`);return found;};
   const strings=(name:string)=>record[name]===undefined?{}:{[name]:requireArray(record[name],`new-object ${name}`).map(entry=>requireString(entry,`new-object ${name}`))};
   const string=(name:string)=>record[name]===undefined?{}:{[name]:requireString(record[name],`new-object ${name}`)};
-  return {...string('spec'),...strings('ids'),...strings('hosts'),...string('out'),check:flag('check'),bake:flag('bake'),refresh:flag('refresh'),skipExisting:flag('skipExisting'),json:flag('json')};
+  return {...string('spec'),...strings('ids'),...string('from'),...strings('names'),...string('out'),check:flag('check'),bake:flag('bake'),refresh:flag('refresh'),skipExisting:flag('skipExisting'),json:flag('json')};
 }
 
 /** The result text and exit code for one parsed `new-object` command. */
@@ -32,8 +34,8 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
   }else if(options.ids){
     const baked=await prepareObjects(options.ids,{progress});
     text=options.json?`${JSON.stringify({baked:baked?options.ids:[]})}\n`:baked?`${options.ids.length} object(s) baked.\n`:'';code=baked?0:1;
-  }else if(options.hosts){
-    const result=await specFromArchive(options.hosts,options.out!,{root,progress:line=>stderr(`${line}\n`)});
+  }else if(options.from){
+    const result=await writeDrafts(options.from,options.names??[],options.out!,{root,archive:liveArchive,progress:line=>stderr(`${line}\n`)});
     text=options.json?`${JSON.stringify(result)}\n`:`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`;code=result.entries?0:3;
   }else{
     const results=await runNewObject(options.spec!,{root,progress:line=>stderr(`${line}\n`),skipExisting:options.skipExisting});

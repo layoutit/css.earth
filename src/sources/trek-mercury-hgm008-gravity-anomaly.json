@@ -1,0 +1,45 @@
+{
+  "id": "trek-mercury-hgm008-gravity-anomaly",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MSGR MLA, Gravity Anomaly Global (Anomaly_Map_HgM008_Lmax90_16ppd)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://trek.nasa.gov/mercury/",
+      "label": "NASA Mercury Trek"
+    },
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/tiles/Mercury/EQ/Anomaly_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
+      "label": "Trek layer service"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mercury/source/manifest.json",
+      "locator": "/inputs/29"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "genova-2019-mercury-hgm008",
+      "evidence": "Trek product description: 'free-air gravity anomaly (mGal) of the Hermean gravity field (HgM008) ... produced by Antonio Genova'"
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Antonio Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center",
+      "scope": "citation",
+      "evidence": "https://trek.nasa.gov/mercury/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=HgM008"
+    }
+  ]
+}

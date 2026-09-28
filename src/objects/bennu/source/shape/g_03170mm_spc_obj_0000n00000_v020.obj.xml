@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model 
+    href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1700.sch" 
+	  schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational 
+	xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1     
+                        https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1700.xsd                      
+                       ">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:orex.altimetry:data_derived_altimetry_global_models:g_03170mm_spc_obj_0000n00000_v020.obj</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Bennu Shape Model, g_03170mm_spc_obj_0000n00000_v020.obj</title>
+    <information_model_version>1.7.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Barnouin, O.; Daly, M.; Espiritu, R.; OSIRIS-REx Altimetry Working Group</author_list>
+      <publication_year>2026</publication_year>
+      <description>The shape of (101955) Bennu is obtained using stereophotoclinometry and/or lidar techniques.
+                                                                              
+The model has the format
+                                                                              
+v x1 y1 z1
+v x2 y2 z2
+v x3 y3 z3
+(etc.)       
+                                                                                     
+f i1 j1 k1
+f i2 j2 k2
+(etc.)
+                                                                              
+where the letter 'v' denotes a vertex and the letter 'f' denotes a triangular facet.
+A comment with # is provided at the beginning of the file providing
+More details about the shape. See OSIRIS-REx Altimetry SIS for more
+details.
+</description>
+    </Citation_Information>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2026-02-17</modification_date>
+        <version_id>1.0</version_id>
+        <description>Initial PDS4 Version</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable"></start_date_time>
+      <stop_date_time xsi:nil="true" nilReason="inapplicable"></stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    
+    <Investigation_Area>
+      <name>Origins, Spectral Interpretation, Resource Identification, Security, Regolith Explorer (OSIRIS-REx)</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.orex</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>OSIRIS-REx Spacecraft</name>
+        <type>Spacecraft</type>
+        <description>
+          The sub-systems that comprise the OSIRIS-REx spacecraft are the telecommunications subsystem; the power sub-system; the propulsion sub-system; and the guidance, navigation, control (GNC) sub-system. These sub-systems work together to communicate  with the Earth, deliver the spacecraft to the target asteroid, and navigate around the asteroid. The spacecraft hosts a navigation camera system (TAGCAMS), a science camera system (OCAMS), a visible and infrared spectrometer (OVIRS), a thermal emission spectrometer (OTES), and a laser altimeter (OLA). The collection, retrieval, storage and return of the asteroid sample is conducted using the Touch-And-Go Sample Acquisition System (TAGSAM), and the Sample Return Capsule (SRC). The combined spacecraft sub-systems and the hosted complement of instrumentation allows the OSIRIS-REx mission to gather data, collect a sample, and safely return the sample to Earth.
+        </description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.orex</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>   
+      <Observing_System_Component>
+        <name>OLA</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:ola.orex</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    
+    <Target_Identification>
+      <name>(101955) Bennu</name>
+      <alternate_designation>1999 RQ36</alternate_designation>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.101955_bennu</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification> 
+    
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>g_03170mm_spc_obj_0000n00000_v020.obj</file_name>
+    </File>
+    
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">3540</object_length>
+      <parsing_standard_id>UTF-8 Text</parsing_standard_id>
+    </Header>
+
+    <Table_Character>
+      <local_identifier>VERTEX_TABLE</local_identifier>
+      <offset unit="byte">3540</offset>
+      <records>99846</records>
+      <description>The VERTEX_TABLE is the first part, describing the positions of the vertices of the
+shape model. The floating point numbers x1 y1 z1 are the coordinates of vertex 1, and
+so on (vertices  are implicitly numbered beginning with 1). The origin is the center
+of mass, and the axes are the principal axes of the shape model. This coordinate
+system should not be used to define a cartographic system, as the principal axes are
+not uniquely determined due to the symmetry  of the shape. The z-axis is the spin
+axis or positive pole. The units are kilometers. The linking of vertices into facets
+is provided in the
+FACET_TABLE.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">66</record_length>
+        <Field_Character>
+          <name>Vertex Flag</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>UTF8_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>A 'v', indicating this record contains the coordinates of a vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>X Vertex Coordinate</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">4</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">19</field_length>
+          <field_format>%19.16f</field_format>
+          <unit>km</unit>
+          <description>The x coordinate of the vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Y Vertex Coordinate</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">25</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">19</field_length>
+          <field_format>%19.16f</field_format>
+          <unit>km</unit>
+          <description>The y coordinate of the vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Z Vertex Coordinate</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">46</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">19</field_length>
+          <field_format>%19.16f</field_format>
+          <unit>km</unit>
+          <description>The z coordinate of the vertex</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>FACET_TABLE</local_identifier>
+      <offset unit="byte">6593376</offset>
+      <records>196608</records>
+      <description>The FACET_TABLE is the second part of the shape model file providing the linking of
+vertices into facets. The integers i1 j1 k1 are the indices of the 3 vertices that
+form triangular facet 1, and so on.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">42</record_length>
+        <Field_Character>
+          <name>Facet Flag</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>UTF8_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>An 'f', indicating this record contain the indices of three vertices defining a
+single, triangular facet</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Vertex 1</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">12</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9d</field_format>
+          <description>Index of the first vertex (record number in the preceding table)</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Vertex 2</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">22</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9d</field_format>
+          <description>Index of the second vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Vertex 3</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">32</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9d</field_format>
+          <description>Index of the third vertex</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

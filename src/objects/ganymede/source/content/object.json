@@ -79,6 +79,19 @@
         "noData": true
       },
       {
+        "id": "dlr-juno",
+        "label": "DLR mosaic",
+        "thumbnail": "ganymede-lens-dlr-juno.webp",
+        "surface": "ganymede-dlr-juno@2x.webp",
+        "poles": "ganymede-poles-dlr-juno@2x.webp",
+        "source": {
+          "id": "dlr-voyager-galileo-juno",
+          "path": "../manifest.json"
+        },
+        "notes": "DLR's 2022 global mosaic (Kersten et al. 2021, 2022): 118 Voyager and 88 Galileo images on a newer control network, with JunoCam photographs from Juno's 7 June 2021 flyby laid on top at 0.9–3 km per pixel. The Juno images cover 13% of the globe, from about 310° to 60° east and 14° S to 70° N, around Tros crater; there they show craters and grooves the USGS mosaic blurs. Map grid 359 m. Because the control networks differ, features sit a median 14 km (up to about 57 km) from the labels and from the Monochrome, False color and Geology views. DLR matched brightness and contrast by hand, so brightness is not comparable with the USGS mosaic. Photographed shadows remain; gray grid marks missing imagery. Credit: ESA/DLR, Kersten et al. (2021); European Space Agency, 2022, DLR_Ganymede_Voyager-Galileo_Juno_V1.0, doi:10.57780/esa-fcj5pf3. Licence: CC BY-NC 3.0 IGO.",
+        "noData": true
+      },
+      {
         "id": "enhanced",
         "label": "False color",
         "thumbnail": "ganymede-lens-enhanced.webp",
@@ -122,133 +135,143 @@
           {
             "id": "coverage",
             "label": "Coverage",
-            "value": "Mapped polygons; uncovered areas retained"
+            "value": "99.6% mapped; gaps near the poles"
           }
         ],
         "legend": {
           "kind": "categories",
           "title": "Geologic units",
-          "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+          "meta": "Unit names and symbols from the map sheet; colors from the authors’ GIS project.",
           "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
           "items": [
             {
-              "label": "dc",
-              "description": "Dark cratered terrain",
-              "color": "#79574a"
-            },
-            {
-              "label": "dl",
-              "description": "Dark lineated terrain",
-              "color": "#98705b"
-            },
-            {
-              "label": "d",
-              "description": "Dark terrain, undivided",
-              "color": "#b38e78"
-            },
-            {
-              "label": "r",
-              "description": "Reticulate terrain",
-              "color": "#998781"
-            },
-            {
-              "label": "lg1",
-              "description": "Light grooved terrain 1",
-              "color": "#729e83"
+              "label": "lg3",
+              "description": "Young light grooved material",
+              "color": "#bed2ff"
             },
             {
               "label": "lg2",
-              "description": "Light grooved terrain 2",
-              "color": "#98bd94"
+              "description": "Intermediate light grooved material",
+              "color": "#73b2ff"
             },
             {
-              "label": "lg3",
-              "description": "Light grooved terrain 3",
-              "color": "#c4d9a1"
-            },
-            {
-              "label": "ls1",
-              "description": "Light subdued terrain 1",
-              "color": "#77aeb2"
-            },
-            {
-              "label": "ls2",
-              "description": "Light subdued terrain 2",
-              "color": "#9bc9c6"
+              "label": "lg1",
+              "description": "Old light grooved material",
+              "color": "#005ce6"
             },
             {
               "label": "ls3",
-              "description": "Light subdued terrain 3",
-              "color": "#c3e4d9"
+              "description": "Young light subdued material",
+              "color": "#beffe8"
             },
             {
-              "label": "li1",
-              "description": "Light irregular terrain 1",
-              "color": "#8079a9"
+              "label": "ls2",
+              "description": "Intermediate light subdued material",
+              "color": "#73ffdf"
             },
             {
-              "label": "li2",
-              "description": "Light irregular terrain 2",
-              "color": "#aaa0c6"
+              "label": "ls1",
+              "description": "Old light subdued material",
+              "color": "#00e6a9"
             },
             {
               "label": "li3",
-              "description": "Light irregular terrain 3",
-              "color": "#d3c4e0"
+              "description": "Young light irregular material",
+              "color": "#c29ed7"
+            },
+            {
+              "label": "li2",
+              "description": "Intermediate light irregular material",
+              "color": "#ca7af5"
+            },
+            {
+              "label": "li1",
+              "description": "Old light irregular material",
+              "color": "#aa66cd"
             },
             {
               "label": "l",
-              "description": "Light terrain, undivided",
-              "color": "#d0d0bd"
+              "description": "Light undivided material",
+              "color": "#0084a8"
             },
             {
-              "label": "p",
-              "description": "Palimpsest material",
-              "color": "#daac75"
+              "label": "r",
+              "description": "Reticulate material",
+              "color": "#ed5192"
             },
             {
-              "label": "pi",
-              "description": "Palimpsest interior",
-              "color": "#b88957"
+              "label": "dl",
+              "description": "Dark lineated material",
+              "color": "#cd8966"
             },
             {
-              "label": "bi",
-              "description": "Basin interior",
-              "color": "#c87770"
+              "label": "dc",
+              "description": "Dark cratered material",
+              "color": "#894444"
             },
             {
-              "label": "br",
-              "description": "Rugged basin material",
-              "color": "#a34f51"
+              "label": "d",
+              "description": "Dark undivided material",
+              "color": "#d7b09e"
+            },
+            {
+              "label": "c3",
+              "description": "Fresh crater material",
+              "color": "#ffffd4"
+            },
+            {
+              "label": "c2",
+              "description": "Partially degraded crater material",
+              "color": "#ffebaf"
+            },
+            {
+              "label": "c1",
+              "description": "Degraded crater material",
+              "color": "#dc7e15"
+            },
+            {
+              "label": "cu",
+              "description": "Undivided crater material",
+              "color": "#988523"
             },
             {
               "label": "bs",
               "description": "Smooth basin material",
-              "color": "#dea398"
+              "color": "#ff7f7f"
             },
             {
-              "label": "c1",
-              "description": "Crater material 1",
-              "color": "#ad8c27"
+              "label": "br",
+              "description": "Rugged basin material",
+              "color": "#ff4500"
             },
             {
-              "label": "c2",
-              "description": "Crater material 2",
-              "color": "#dbbc42"
+              "label": "bi",
+              "description": "Basin interior plains material",
+              "color": "#fff5f5"
             },
             {
-              "label": "c3",
-              "description": "Crater material 3",
-              "color": "#f4df86"
+              "label": "p2",
+              "description": "Young palimpsest material",
+              "color": "#89cd66"
             },
             {
-              "label": "cu",
-              "description": "Crater material, undivided",
-              "color": "#d1c59f"
+              "label": "p1",
+              "description": "Ancient palimpsest material",
+              "color": "#898944"
+            },
+            {
+              "label": "pu",
+              "description": "Undivided palimpsest material",
+              "color": "#5c8944"
+            },
+            {
+              "label": "pi",
+              "description": "Palimpsest interior plains material",
+              "color": "#ffffff"
             }
           ]
         },
-        "notes": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "notes": "Twenty-five interpreted units from Collins et al. (2013): light and dark materials, reticulate material, crater, basin and palimpsest materials. Light units are split into old (1), intermediate (2) and young (3). Colors are the authors’ own GIS symbology; they mark units, not surface color or composition. Gray marks cells with no polygon, mostly beyond 80° latitude. No measured relief is added.",
         "noData": true
       },
       {

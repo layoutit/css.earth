@@ -8,17 +8,20 @@
       "status": "included",
       "finding": "Monochrome samples the orthorectified, body-fixed Dawn FC2 mosaic through WMS at 4096 by 2048 over 0-360 degrees east and 90N-90S; the PDS record documents a bundle-block adjustment using Dawn orbit and attitude, the high-resolution shape model and the Kait-anchored longitude system, so the image-to-Ceres frame is documented and no visual crater match is performed here. It is visible-light grayscale, not an unlit albedo map, and the release states the extreme south pole was unilluminated with gaps remaining.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L7",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L38",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L53",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/source/manifest.json",
         "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+      ]
+    },
+    {
+      "id": "dlr-fc-140m-native-cube",
+      "subject": "Native DLR/USGS Dawn FC 140 m global mosaic cube (Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub, the product behind NASA Trek's 59 ppd layer) instead of the WMS render",
+      "status": "excluded",
+      "finding": "Not adopted. The Monochrome lens already shows this mosaic, rendered by the USGS WMS at the full 4096 x 2048 prepared size, so the cube adds no resolution. Reduced by pixel-area mean to the same frame, it keeps the same tone (median transfer is identity) and registration (best shift 0, 0). Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the WebP q80 lane on both and 1.4% at half resolution. Between 34 N and 11 S only 0.1-0.4% change; toward the poles 16-19% change, where the WMS render shows resampling jaggies the area mean does not. Switching needs a reader for tiled ISIS3 byte cubes that the shared reducer lacks, and the cube stores the south-polar gap as value 1, the same value as clipped shadow (11% of its pixels), so the gap cannot be told from terrain by value.",
+      "revisitWhen": "A shared reader for tiled ISIS3 byte cubes exists and DLR or USGS documents the cube's fill value, or the high-latitude crops are judged worth the change.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m",
+        "https://astrogeology.usgs.gov/search/map/Ceres/Dawn/DLR/FramingCamera/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016",
+        "https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub"
       ]
     },
     {
@@ -27,16 +30,7 @@
       "status": "included",
       "finding": "Enhanced color uses the 3078 by 1537 false-colour image from 920, 750 and 440 nm filters, retained as a distinct map interpretation rather than calibrated monochrome; it keeps its published equirectangular map frame, and the review asserts no pixel-for-pixel pairing with the DTM.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L8",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L46",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L49",
         "https://science.nasa.gov/resource/hints-at-ceres-composition-from-color/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -46,13 +40,7 @@
       "finding": "The last two columns of the enhanced-colour source are brighter than their neighbours, mean brightness 173 and 193 against about 135, so a thin light line can show along 0 degrees at close zoom.",
       "revisitWhen": "A corrected release of the enhanced-colour map removes the bright edge columns.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L69"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L69"
       ]
     },
     {
@@ -61,16 +49,7 @@
       "status": "included",
       "finding": "Elevation uses the 21,600 by 10,800 signed 16-bit DTM sampled without filling missing values, as metres above a 470 km sphere including the body's overall shape, mapped to a fixed -30 to +20 km scale with shading derived from neighbouring model heights.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L11",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L100",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L104",
         "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -80,13 +59,7 @@
       "finding": "The publisher describes approximately 98 percent coverage with interpolation in permanently shadowed polar areas but supplies no validity mask separating interpolation from stereo samples, so the lens withholds both caps at latitudes of 60 degrees or more as a conservative display boundary.",
       "revisitWhen": "A validity mask separating interpolated from stereo samples is published.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L66"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L66"
       ]
     },
     {
@@ -96,15 +69,9 @@
       "finding": "Both pinned rasters have three colour channels and no alpha or validity mask, so southern-edge-connected exact black is used as a conservative indication of fill and marked with the neutral gray grid; the README calls this a heuristic, not a surveyed coverage boundary, and JPEG compression can make fill pixels nonzero.",
       "revisitWhen": "A validity mask or alpha channel is published with these maps.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L64",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L88",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L90"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L64",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L88",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L90"
       ]
     },
     {
@@ -113,15 +80,7 @@
       "status": "included",
       "finding": "Named features use the Ceres centre-point export, snapshot 2026-09-11 and public domain per its FGDC metadata; preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and folds repeated rows, and labels appear at the closest zoom only.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L9",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L60",
         "https://planetarynames.wr.usgs.gov/Page/CERES/target"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -130,13 +89,7 @@
       "status": "included",
       "finding": "31 labelled names carry a caption note from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L62"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L62"
       ]
     },
     {
@@ -145,15 +98,9 @@
       "status": "included",
       "finding": "Physical and orbital data come from the vendored JPL body data, Kepler state vectors and IAU rotation, with mean radius 469.7 km and a fixed geometry epoch of 2026-09-03T00:00:00 TT; the mesh is a sphere at that mean radius and claims no resolved shape.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L85",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L92",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L119"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L85",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L92",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L119"
       ]
     },
     {
@@ -162,14 +109,7 @@
       "status": "included",
       "finding": "The prepared facts summarise the NASA page: asteroid-belt location, Dawn observations, about nine hours per rotation and no moons.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L86",
         "https://science.nasa.gov/dwarf-planets/ceres/facts/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -178,14 +118,8 @@
       "status": "included",
       "finding": "The lighting decision is to retain the published Dawn observations including their original crater shadows; the optional Shadows setting adds approximate directional illumination and neither mode reconstructs unlit albedo or relights the photographed shadows.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L68",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L96"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L68",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L96"
       ]
     },
     {
@@ -194,15 +128,8 @@
       "status": "included",
       "finding": "The archived CMT_MOSAIC-BI_DEPTH and CMT_MOSAIC-BII_DEPTH maps supply the Clay band and Ammonium band lenses, each colored over its own 2nd to 98th percentile (0.229 to 0.283; 0.047 to 0.089) with the rainbow core of Frigeri et al. (2019), Figure 7. On the paper's own ranges most of Ceres sat in the bar's dark ends: the archive (Survey spectra, Ammannito et al. 2016 continuum, no artifact removal) differs from the paper (Survey and HAMO, Carrozzo et al. 2016 correction). A one-cube HAMO reduction with Frigeri's continuum and the public calibration gives a 2.7 um median of 0.272, near the archive's 0.255.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/e80b240ec4162f6765c8bf39d6692eedc9d9d27a/src/objects/ceres/README.md",
         "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
         "https://doi.org/10.1016/j.icarus.2018.04.019"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "e80b240ec4162f6765c8bf39d6692eedc9d9d27a"
-        }
       ]
     },
     {
@@ -214,18 +141,7 @@
         "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/",
         "https://doi.org/10.1016/j.icarus.2018.04.019",
         "https://www.hou.usra.edu/meetings/lpsc2016/pdf/3020.pdf",
-        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/ceres/README.md",
-        "https://github.com/layoutit/css.earth/blob/734ad10780629e11b09707ff5d0c0f5601ecb02e/src/objects/ceres/evidence/band-centres/measurements.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "f067baedf12d3aea944f786105b63d151c84d9d8"
-        },
-        {
-          "date": "2026-09-27",
-          "commit": "734ad10780629e11b09707ff5d0c0f5601ecb02e"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/evidence/band-centres/measurements.json"
       ]
     },
     {
@@ -236,12 +152,6 @@
       "evidence": [
         "https://github.com/afrigeri/ceres_spectral_parameter_maps",
         "https://sbnarchive.psi.edu/pds3/dawn/vir/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "e80b240ec4162f6765c8bf39d6692eedc9d9d27a"
-        }
       ],
       "revisitWhen": "The maps are released in the PDS or another public archive."
     },
@@ -255,12 +165,6 @@
         "https://doi.org/10.1063/1.4972256",
         "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/",
         "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCAVIR_I1B/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "48d4206bee09d28b04f28dc517c9a2296dcb9389"
-        }
       ]
     },
     {
@@ -271,12 +175,6 @@
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2018.12.038",
         "https://arxiv.org/abs/1812.08361"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
       ]
     },
     {
@@ -288,13 +186,7 @@
         "https://doi.org/10.1016/j.icarus.2017.01.026",
         "https://arxiv.org/abs/1701.08550"
       ],
-      "revisitWhen": "A clear-filter fit whose opposition surge is constrained by low-phase data, or a statement that the FC mosaic was corrected with this model.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
-      ]
+      "revisitWhen": "A clear-filter fit whose opposition surge is constrained by low-phase data, or a statement that the FC mosaic was corrected with this model."
     },
     {
       "id": "authored-limb-lighting",
@@ -302,15 +194,46 @@
       "status": "excluded",
       "finding": "Replaced by the published Hapke law of Li et al. (2019); Ceres now bakes its own bank.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/preparation/raster/lighting-banks.ts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
+    },
+    {
+      "id": "dawn-gravity-ceres18d-maps",
+      "subject": "Dawn radio-science gravity maps of Ceres: radial gravity, its error, Bouguer anomaly and geoid",
+      "status": "included",
+      "finding": "The PDS4 bundle urn:nasa:pds:dawn-rss-der-ceres 1.0 (doi:10.17189/c2eg-7x61, migrated from PDS3 DAWN-A-RSS-5-CEGR-V4.0, volume DWNCGRS_2 version 4) archives gridded maps only for the degree-18 model CERES18D: JGDWN_CER18D_ACCEL_0018 (radial gravity, degrees 2 to 18 without the hydrostatic J2 and J4, on a 482.0 x 445.9 km ellipsoid), ACCERR_0018 (its one-sigma error from the covariance), BOU_0018 (Bouguer, same degrees), GEOID_0018 and GEOIDERR_0018 (metres above an ellipsoid of a = 482.0 km, f = 0.074896). Each is 181 x 360 little-endian float64, cell centres at whole degrees from 0 E and from 90 N to 90 S; the image bytes are identical in both archives (the MD5 in the PDS4 labels and the PDS3 checksum file agree). The PDS4 labels' value-added corners put the first column's edge at 0 E, half a cell from the producer's PDS3 labels; the PDS3 placement is used and the 360 cells of each pole row are equal, which fixes the rows. Values: radial gravity -272.2 to 212.5 mGal, error 17.6 to 79.0, Bouguer -319.1 to 405.9, geoid -1066.6 to 1454.1 m. Checks against papers: the gravity low and Bouguer high fall on Urvara; Kerwan reads +348 mGal Bouguer (100th percentile), as Bland et al. (2018) infer; Yalode +180; Hanami Planum -225 (4th percentile), the compensated-topography pattern of Park et al. (2016, 2017); Ahuna Mons +153 mGal free-air (99th percentile), where Ruesch et al. (2019) find about 100 mGal at degrees 5 to 14. Ruesch et al. quote about 10 mGal accuracy at the equator for CERES18C; the archived error map gives 17.6 mGal there. Resolution: about 82 km at the equator (degree 18), accurate globally to degree 14, about 105 km. No degree-strength map is archived. Shown as the gravity, gravity-uncertainty, bouguer and geoid lenses through the pds3-grid reader, which needs to accept the detached pointer (\"FILE\",1).",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/document/dawn-rss-der-ceres-bundle-desc.txt",
+        "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNCGRS_2_v4/DATA/RSDMAP/",
+        "https://doi.org/10.1016/j.icarus.2017.08.005",
+        "https://doi.org/10.1038/s41561-019-0378-7",
+        "https://doi.org/10.1002/2017GL075526",
+        "https://doi.org/10.1002/2017JE005302",
+        "https://meetingorganizer.copernicus.org/EGU2017/EGU2017-3380.pdf",
+        "evidence/gravity/feature-values.json"
       ]
+    },
+    {
+      "id": "dawn-gravity-ceres70e-coefficients",
+      "subject": "CERES70E degree-70 gravity model (Park et al. 2020)",
+      "status": "deferred",
+      "finding": "The same bundle archives CERES70E, its ISOSIG and KAULA variants as spherical-harmonic coefficients only (data-shadr), with no gridded map. Showing it would need our own summation of the coefficients, which this package does not do.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/data-shadr/",
+        "https://doi.org/10.1038/s41550-020-1019-1"
+      ],
+      "revisitWhen": "A gridded CERES70E product is archived, or a shared coefficient-synthesis capability is approved."
+    },
+    {
+      "id": "dawn-gravity-ceres18d-geoid-error",
+      "subject": "CERES18D geoid error map (JGDWN_CER18D_GEOIDERR_0018)",
+      "status": "excluded",
+      "finding": "Archived and decoded (22.0 to 27.4 m, one sigma, nearly uniform) but not shown: it is under 3% of the geoid range and the radial gravity error lens already shows where the model is weak, as Venus shows only its gravity error.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
+      ],
+      "revisitWhen": "Readers ask how far the geoid itself may be off."
     }
   ]
 }

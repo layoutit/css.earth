@@ -7,7 +7,7 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
       "credit": "DLR/Lucy shape team, Stefano Mottola and Frank Preusker; Marchi et al. (2026), Science, doi:10.1126/science.aec0503; NASA PDS/NAIF",
       "license": "Public NASA PDS scientific mission data; retain DLR/Lucy authorship and source notices. See NOTICE.md.",
-      "acquisition": "Checked gzip OBJ exported without resampling using tools/objects/acquisition/export-dsk.py (spiceypy 7.0.0) from the separately pinned original DSK.",
+      "acquisition": "Checked gzip OBJ exported without resampling using packages/bake/src/objects/acquisition/export-dsk.py (spiceypy 7.0.0) from the separately pinned original DSK.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "terrain",
@@ -419,6 +419,20 @@
             "catalogueId": "jpl-small-body-database",
             "role": "reference",
             "evidence": "JPL SBDB API response for Donaldjohanson: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
+    },
+    {
+      "path": "reference/sbn-catalogues.json",
+      "purpose": "Rows of the PDS Small Bodies Node catalogues that the factsheet cites, as their PDS4 labels read them, with each selection rule.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "reference",
+            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           }
         ]
       }

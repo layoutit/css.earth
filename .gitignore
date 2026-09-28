@@ -75,6 +75,7 @@ src/objects/venus/source/akatsuki/*.nc
 # Previews a package's own author draws from its pinned downloads; no checkout without those downloads can redraw them.
 !src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
 !src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
+!src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
 !src/objects/beta-pictoris-disc/source/previews/colour.png
@@ -110,6 +111,18 @@ src/objects/*/source/**/*.IMG.gz
 src/objects/*/source/**/*.tab
 src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds
+
+# Numeric grids the missing-data lenses download through their acquisition plans.
+# Mars catalogue query pages are NASA Trek downloads the catalogues acquisition group restores; the rasterized
+# grids they make are small and tracked, like the geologic-unit grids.
+src/objects/mars/source/catalogues/*/*.query*.json
+!src/objects/mars/source/catalogues/*/mars-*.tif
+# The Phobos crater catalogue pages restore the same way; its rim grid is tracked.
+src/objects/phobos/source/craters/*.query*.json
+!src/objects/phobos/source/craters/phobos-*.tif
+src/objects/venus/source/science/mgn-gravity/*.dat
+src/objects/mars/source/science/tes/*.img
+src/objects/mars/source/science/tes/*.vicar
 
 # Radar volume slices restored by range request. The small delay frame stays tracked as reader evidence.
 src/objects/*/source/telescopes/**/slices/*.dat
@@ -250,6 +263,7 @@ src/objects/*/source/**/*.bpc
 /site/prepared-object-catalog.mts
 /site/prepared-object-discovery.json
 /site/prepared-lens-volumes.json
+/site/prepared-local-group-galaxies.json
 /site/prepared-context-objects.mts
 /site/prepared-feature-index.json
 /site/prepared-lens-billboards.json
@@ -289,6 +303,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/titan/source/science/b2-intake/topo_4PPD_interp.cub
 
 /src/objects/betelgeuse-shell/.prepared-*/
+/src/objects/eps-eridani-disc/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
 /src/objects/pds-70-disc/.prepared-*/
 /src/objects/m42/.prepared-*/
@@ -347,3 +362,6 @@ src/objects/*/source/**/*.bpc
 src/objects/mars/source/crust/*.dat
 # Compact native-cell GeoTIFFs, restored by the USGS acquisition recipes or source cache.
 /src/objects/*/source/science/usgs/*.tif
+
+# Netlify functions bundled by tools/cli/bundle-netlify-functions.mts during build:deploy.
+netlify/functions-bundled/

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "v916-aql",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "V916 Aql",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 63099990
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/v916-aql-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "V916 Aql",
+      "classification": "star",
+      "color": "#ffede1",
+      "distanceAu": 740882591.9,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 13.4 days.",
+      "systemName": "V916 Aql system",
+      "order": 1935,
+      "context": {
+        "order": 1932
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        32537036321469250000,
+        -103183497588230620000,
+        24057934554580787000
+      ],
+      "presentationToReference": [
+        0.2935642486962531,
+        0.06527806898332063,
+        -0.9537079246798852,
+        -0.9309694235228753,
+        -0.20701385959084764,
+        -0.3007344250377505,
+        0.217062120953634,
+        -0.9761577923917371,
+        -1.8089589668627582e-8
+      ],
+      "orbitUpReference": [
+        -0.06527806898332063,
+        0.20701385959084764,
+        0.9761577923917371
+      ],
+      "metersPerUnit": 203548354.83870968,
+      "bodyRadiusM": 63099990000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

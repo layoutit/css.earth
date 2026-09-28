@@ -14,10 +14,14 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 | --- | --- |
 | Visible surface | [Viking MDIM 2.1](https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg), colorized by NASA Ames |
 | Elevation | [USGS MOLA numeric DEM](https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m), meters above the GMM-2B areoid |
+| Albedo | [MGS TES bolometric albedo](https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m), Christensen et al. (2001), 8 pixels per degree |
+| Thermal inertia | [MGS TES nightside thermal inertia](https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html), Putzig and Mellon (2007), 20 pixels per degree |
+| Dust cover | [MGS TES dust cover index](https://www.mars.asu.edu/~ruff/DCI/dci.html), Ruff and Christensen (2002), 16 pixels per degree |
 | Infrared display | Mars Odyssey THEMIS daytime infrared mosaic from the [USGS Astrogeology WMS](source/manifest.json) |
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Dimensions, placement and charts | USGS, JPL and NASA PSG records below |
+| Landform and mineral catalogues | Eleven published surveys through their [NASA Trek](https://trek.nasa.gov/mars/) GIS layers, listed [below](#landform-and-mineral-catalogues-27-september-2026) |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MARS/target) Mars centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
@@ -32,9 +36,87 @@ The [26 September 2026 browser and delivery record](evidence/showcase/browser.js
 | Water equivalent, chlorine, iron, silicon, potassium, thorium | [Odyssey GRS ELEMTS v1](https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html), observations 4 June 2002–3 April 2005. Unsmoothed 5° bins retain their native boundaries, negative estimates and each product's missing cells. Water equivalent is hydrogen expressed as H₂O, not a map of exposed ice. Five maps use weight percent; thorium converts weight percent to ppm by multiplying by 10,000. |
 | Magnetic field | [Langlais et al. (2019)](https://doi.org/10.1029/2018JE005854), degree/order 134, evaluated by pyshtools on the 3,393.5 km sphere of Figure 6b. This is a model inferred from MGS and MAVEN, with about 160 km resolution. The 0.5° grid displays radial field, blue inward and red outward, with zero neutral. |
 
+### TES albedo, thermal inertia, dust cover and the remaining candidates (27 September 2026)
+
+| View | Source, processing and limits |
+| --- | --- |
+| Albedo | [MGS TES global bolometric albedo](https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m), ASU product `GLOBAL_ALBEDO_8PPD` from [Christensen et al. (2001)](https://doi.org/10.1029/2000JE001370), distributed by USGS as a float32 GeoTIFF. Lambert albedo measured by the TES visible and near-infrared bolometer (0.3–2.9 µm), 2,880 × 1,440 cells at 8 pixels per degree (about 7.4 km) on a 3,396 km sphere. The existing scientific GeoTIFF reader checks size, projection, radius, origin, spacing and missing value against [the raster recipe](source/preparation/raster.json) and samples native cells by nearest neighbour. The publisher's [PDS3](source/science/usgs/tes-albedo-pds.lbl) and [ISIS](source/science/usgs/tes-albedo-isis.lbl) labels are kept beside it. |
+
+The label declares no missing value, but every cell poleward of about 87° (131,653
+cells, 3.2%) holds exactly 0.06, a constant fill beyond TES coverage; the next-lowest
+value anywhere is 0.061. A quality mask on the same file withholds values below
+0.0605, so the polar caps show as missing data. The measured values span 0.061–0.32,
+and the legend shows 0.06–0.32. Each cell averages observations from several seasons, so dust that moves
+between seasons is blended. The USGS grid rounds its spacing to 7,410 m; across
+the full width this displaces cells by at most 0.2 of a cell. The values agree with the
+examples in [Ruff and Christensen (2002)](https://doi.org/10.1029/2001JE001580),
+where dark ground measures about 0.12 and bright ground about 0.26: Syrtis Major is
+dark and Arabia and Tharsis are bright in this grid. These spot values do not
+validate the instrument calibration.
+
+Two more TES layers now read their numeric originals through new shared readers:
+
+| View | Source and reading |
+| --- | --- |
+| Thermal inertia | [Putzig and Mellon (2007)](https://doi.org/10.1016/j.icarus.2007.05.013) nightside map, PDS product `GLOBAL_TI_NIGHT_2007` in [MGS-M-TES-5-TIMAP-V1.0](https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html): big-endian 16-bit integers in J m⁻² K⁻¹ s⁻½, 7,200 × 3,600 cells at 20 pixels per degree. The `pds3-grid` reader checks the detached label's size, sample type and extent (cell edges at 180° W and 90° N). The data set catalogue gives the derived range as 5 to 5,000 and says other values are not computed, so 0 reads as no value. The product's interpolation mask marks infilled cells with 0; they are withheld (8.46% of the planet), leaving 5 to 4,999. The existing Thermal infrared view shows THEMIS daytime brightness, not thermal inertia. |
+| Dust cover | [Ruff and Christensen (2002)](https://doi.org/10.1029/2001JE001580) dust cover index from [the author's page](https://www.mars.asu.edu/~ruff/DCI/dci.html): a VICAR REAL file (little-endian floats, 5,760 × 2,880 cells, 16 pixels per degree). VICAR carries no projection; the recipe places the left edge at 180° W, as [ASU's catalogue](https://mars.asu.edu/data/tes_ruffdust/) describes the grid, and that placement reproduces the paper: Arabia 0.922, Syrtis Major 0.973, Mare Erythraeum 0.968 against its 0.970 regional average. Exactly 0.85 fills 21% of cells, all poleward of about 60° N and 80° S and below every value the paper discusses; the `vicar-grid` reader withholds it. |
+
+Checks: thermal-inertia spot values read Syrtis Major 193, Arabia 47 and Arsia 11; the 1st to 99th area-weighted percentiles are 24 to 476, and values above the 600 display maximum cover 0.4%.
+
+Two candidates stay deferred in the [investigation ledger](investigations.json):
+
+- Mineral abundances: plagioclase, high-Ca pyroxene and sheet silicates/high-Si glass,
+  [Bandfield (2002)](https://doi.org/10.1029/2001JE001510), as VICAR float exports from
+  [ASU](https://mars.asu.edu/data/tes_plagioclase/). The shared VICAR reader now reads
+  them, but 17 to 33% of cells hold exact zeros, 94% of them on bright dusty ground.
+  Whether a zero is a measured absence or a cell the authors masked needs the paper's
+  masking rule, which has not been read.
+- Roughness: [Kreslavsky and Head (2000)](https://doi.org/10.1029/2000JE001259),
+  byte grids with a published logarithmic scale, [Zenodo 15734221](https://zenodo.org/records/15734221).
+  Its missing-value code is not documented.
+
+The Mars Trek layers for these quantities are display images, not measured values, and
+are not used.
+
+### Landform and mineral catalogues (27 September 2026)
+
+Eleven lenses draw published catalogues over the Viking colour mosaic, drawn in grey at 35% brightness. All come from [NASA Trek](https://trek.nasa.gov/mars/) ArcGIS layers, asked for in the Mars 2000 sphere (east-positive longitude, planetocentric latitude; the vertices equal the server's native response). The shared [`geology-grid.py`](../../../packages/bake/src/objects/acquisition/geology-grid.py) paints each into a 4,096 × 2,048 categorical grid, 5.2 km cells at the equator, the same size as the Visible colour texture.
+
+| Lens | Source | Drawn as | Cells |
+| --- | --- | --- | --- |
+| Dune fields | [Hayward et al. (2007)](https://pubs.usgs.gov/of/2007/1158/), USGS OFR 2007-1158, 547 fields, 65° N–65° S | Cells whose centre is inside a field outline | 4,132 |
+| Water-related landforms: valley networks | [Hynek et al. (2010)](https://doi.org/10.1029/2009JE003548), 9,879 networks | Every cell a valley centreline crosses | 163,901 |
+| … alluvial fans | [Moore and Howard (2005)](https://doi.org/10.1029/2004JE002352), [Kraal et al. (2008)](https://doi.org/10.1016/j.icarus.2007.09.028), 44 fans | One cell per fan | 44 |
+| … gullies | [Harrison et al. (2015)](https://doi.org/10.1016/j.icarus.2015.01.022), 4,978 sites, by slope orientation | One cell per site | 4,771 |
+| … glacier-like forms | [Souness et al. (2012)](https://doi.org/10.1016/j.icarus.2011.10.020), 1,309 | One cell per centre | 1,193 |
+| … recessional glacier-like forms | [Brough et al. (2016)](https://doi.org/10.1016/j.icarus.2016.03.006), 436 | One cell per centre | 407 |
+| … glacial valleys | [Fassett et al. (2010)](https://doi.org/10.1016/j.icarus.2010.02.021), 102 | One cell per valley point | 101 |
+| Present-day changes | Trek compilation of [Daubar et al. (2013)](https://doi.org/10.1016/j.icarus.2013.04.009), [Dundas et al. (2014)](https://doi.org/10.1002/2013JE004482), [(2015)](https://doi.org/10.1016/j.icarus.2014.05.013), [McEwen et al. (2014)](https://doi.org/10.1038/ngeo2014), [Ojha et al. (2014)](https://doi.org/10.1016/j.icarus.2013.12.021), 508 HiRISE sites | One cell per site, coloured by source catalogue | 489 |
+| Aqueous minerals: hydrous detections | [Carter et al. (2013)](https://doi.org/10.1029/2012JE004145), 1,648 (CRISM 1,208, OMEGA 440) | One cell per detection, by instrument | 1,461 |
+| … mineral classes | [Ehlmann and Edwards (2014)](https://doi.org/10.1146/annurev-earth-060313-055024), 4,572 in five classes | One cell per site, by class | 2,373 |
+| … chloride deposits | [Osterloo et al. (2010)](https://doi.org/10.1029/2010JE003613), 642 THEMIS deposits | Cells whose centre is inside a deposit outline | 676 |
+
+What a coloured cell means:
+
+- For a point or line catalogue, the cell holds at least one catalogued feature. None of these catalogues publishes a footprint or a line width (Trek draws screen-sized symbols), so no size is drawn. Dune fields and chloride deposits are published outlines.
+- A white cell holds features of more than one class (gullies facing different ways, both instruments, two mineral classes, two HiRISE catalogues). That colour is ours; so is the four-colour palette of Present-day changes, because Trek tells its types apart only by symbol shape. It colours the four source catalogues, because a six-type palette failed the colour-separation check. Every other colour is the layer's own: the renderer symbol, or the `jC_fillclr` fill attribute the records carry.
+- Unmarked ground is not proof of absence. Each survey covers only the images it searched, and small features fall below 5.2 km: 89 of 547 dune fields (1.2% of their area) and 347 of 642 chloride deposits (13.7%) hold no cell centre.
+
+The dimmed photograph is a presentation choice: the Viking mosaic as grey at 35% brightness, 6 bits per channel. At that level every legend colour differs by at least 15 OKLab units from 95% of the terrain; the alluvial-fan green is the limit (15.7 at 0.35, 13.8 at 0.4). Grey and 6 bits keep each lens lossless at about 2 MB instead of 7.6 MB for the colour mosaic. Each lens states this in its notes.
+
+Byte cost: the photograph now travels in the lossless categorical lane. Each composed lens measures about 7.6 MB as lossless WebP at 4,096 × 2,048 (valley networks 7.8 MB), against 1.9 MB for the lossy Visible colour texture.
+
+Checks, with the byte identity of every grid and response, are in [the catalogue checks](evidence/catalogues/checks.json):
+
+- The USGS dune shapefile matches the Trek layer vertex for vertex. Its projection file names the flattened ellipsoid although its metadata calls the latitudes aerocentric, which is why the Trek response is the input. Dune area is 70,230 km² on the grid against the database's 69,750 km².
+- Every catalogue point, read back through the shared scientific reader, lands in a cell of its own class or the shared class. All but 3 of 1,172,096 valley vertices lie in a marked cell; those 3 sit on a cell edge.
+- The grids are not yet seen in a browser, and the pole images have not been checked for the underlay.
+
+Author supplements for the valley, gully, chloride and hydrous catalogues were not retrieved; each decision is in the [investigation ledger](investigations.json).
+
 The crust-thickness view uses `Mars-thick-Khan2022-39-2900-2900.dat`, the precomputed [Wieczorek et al. (2022) Figure 2 example](https://doi.org/10.1029/2022JE007298) from [Zenodo 6477509](https://zenodo.org/records/6477509). It assumes 39 km beneath InSight and uniform crust density of 2,900 kg/m³. Its mean is about 57 km; the full model family spans 30–72 km. This example is not a unique consensus model. The deposited 0.25° node grid spans 5.579–116.811 km, consistent with the paper’s rounded 6–117 km. [The converter](../../../packages/bake/cli/prepare-mars-crust.mts) only reverses rows and adds explicit coordinates for the existing Tecplot reader; it does not recalculate thickness.
 
-The GRS value and uncertainty columns are decoded independently: a missing correction-factor error does not erase a concentration. The first four maps have 1,508 valid bins; potassium and thorium have all 2,592. Uncertainties remain in the original tables rather than becoming separate lenses. [Reader checks](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/pds-binned-table.test.mts) (now [`tests/objects/terrestrial/pds-binned-table.test.mts`](../../../tests/objects/terrestrial/pds-binned-table.test.mts)) compare six published cells and exercise missing values, units, wrap and bin edges. Geology decoding finds all 44 declared units. The magnetic grid spans −8,365 to 11,206 nT; its coarser sampling is consistent with Figure 6b's reported extrema (−8,520 to 11,260 nT), not an exact reproduction of that figure's raster.
+The GRS value and uncertainty columns are decoded independently: a missing correction-factor error does not erase a concentration. The first four maps have 1,508 valid bins; potassium and thorium have all 2,592. Uncertainties remain in the original tables rather than becoming separate lenses. [Reader checks](../../../tests/objects/terrestrial/pds-binned-table.test.mts) (now [`tests/objects/terrestrial/pds-binned-table.test.mts`](../../../tests/objects/terrestrial/pds-binned-table.test.mts)) compare six published cells and exercise missing values, units, wrap and bin edges. Geology decoding finds all 44 declared units. The magnetic grid spans −8,365 to 11,206 nT; its coarser sampling is consistent with Figure 6b's reported extrema (−8,520 to 11,260 nT), not an exact reproduction of that figure's raster.
 
 The [magnetic recipe](source/preparation/magnetic.json) is evaluated by [the preparation command](../../../packages/bake/cli/prepare-magnetic-map.mts) with the versions in [the toolchain record](../../../packages/telescope/toolchains/magnetic-toolchain.json). No harmonic evaluation occurs in the browser. Quantitative and categorical textures use the existing lossless lane; the 5° GRS grid is deliberately not smoothed.
 
@@ -45,7 +127,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | --- | --- |
 | normal | 524,794 bytes |
 
-This download size refers only to the polar sprite, as listed in `prepared/assets.json`. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+This download size refers only to the polar sprite, as listed in `prepared/assets.json`. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 The lane change was verified with the package, source-closure and browser conformance checks listed in the pull request that made it. No dated oracle report is cited for the new lane; the source and acquisition records identify every input.
 

@@ -20,3 +20,5 @@ Lighting: the shared prepared Lambert row bank follows the OpenSpace globebrowsi
 Landing, touchdown and impact sites (1): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.
 
 Feature caption notes: 58 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
+
+VIMS infrared and band-ratio mosaics: NASA/Caltech-JPL/University of Arizona/LPG Nantes (CNRS, Nantes Université), Le Mouélic et al. (2019), Icarus 319, 121–132, doi:10.1016/j.icarus.2018.09.017; files served by NASA Solar System Treks. The producer's VIMS portal distributes its data under CC BY 4.0 with this credit; the Trek files state no separate terms. Prepared images are resampled display derivatives; missing observations stay missing.

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "x-pup",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "X Pup",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 74926890
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/x-pup-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "X Pup",
+      "classification": "star",
+      "color": "#ffe8d4",
+      "distanceAu": 522633967.1,
+      "description": "A Cepheid in the Milky Way, 108 times the Sun's width, that swells and shrinks every 26.0 days.",
+      "systemName": "X Pup system",
+      "order": 2017,
+      "context": {
+        "order": 2014
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -28767207979248607000,
+        67131995424902275000,
+        -27903870695020995000
+      ],
+      "presentationToReference": [
+        -0.36793800888138445,
+        0.1405731328672743,
+        0.9191631062745512,
+        0.8586308670167333,
+        -0.3280455001099319,
+        0.3938771179742707,
+        -0.35689586131880985,
+        -0.934144177401703,
+        2.282013988124112e-8
+      ],
+      "orbitUpReference": [
+        -0.1405731328672743,
+        0.3280455001099319,
+        0.934144177401703
+      ],
+      "metersPerUnit": 241699645.16129032,
+      "bodyRadiusM": 74926890000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

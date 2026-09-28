@@ -1,6 +1,4 @@
 {
-  "implementationRevision": "3b2bc4bedebf5009bf1450cf2b9c9654528b85c4",
-  "baselineRevision": "5e9e1a4ade55496357cd4a70bb4ffd0afec34157",
   "browser": "152.0.7977.84",
   "mode": "Installed Google Chrome, headless, production Astro build",
   "method": "Before substitutes the baseline surface atlas at its original URL. All other production files, viewport, camera and system transform stay identical. After uses the clean R2 installation. Each loaded body asset is hashed. Differences are absolute RGB values without amplification.",

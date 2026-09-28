@@ -423,7 +423,7 @@
         "cassini-ice/evidence/license-about.html",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-phoebe-surfaces.py and cassini-ice/prepare.json.",
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with packages/bake/src/objects/acquisition/cassini-phoebe-surfaces.py and cassini-ice/prepare.json.",
       "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
       "consumers": [
         "ice-absorption"
@@ -473,7 +473,7 @@
         "cassini-ice/evidence/license-about.html",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-phoebe-surfaces.py and cassini-ice/prepare.json.",
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with packages/bake/src/objects/acquisition/cassini-phoebe-surfaces.py and cassini-ice/prepare.json.",
       "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
       "consumers": [
         "surfaces"

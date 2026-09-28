@@ -14,7 +14,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ![Elevation on the source shape, Shadows off](evidence/source-surface/elevation.webp)
 
-The 14 September 2026 qualification at `22530863b602e90684fe778b16136de3d890fe2d` passed both body source/package checks, three focused source-surface regressions, the independent full-source verifier and strict TypeScript. [Headless browser conformance](evidence/source-surface/conformance.json) passed mobile and dataset interactions at DPR 1 and 2. [Additional views](evidence/source-surface/browser.json) cover both sides, a close-up, an extreme angle and Shadows on/off. [Close-up](evidence/source-surface/close.webp): fine triangle boundaries remain visible at close zoom; small gray patches mark withheld transfers. These are focused checks, not a full-suite pass.
+The 14 September 2026 qualification passed both body source/package checks, three focused source-surface regressions, the independent full-source verifier and strict TypeScript. [Headless browser conformance](evidence/source-surface/conformance.json) passed mobile and dataset interactions at DPR 1 and 2. [Additional views](evidence/source-surface/browser.json) cover both sides, a close-up, an extreme angle and Shadows on/off. [Close-up](evidence/source-surface/close.webp): fine triangle boundaries remain visible at close zoom; small gray patches mark withheld transfers. These are focused checks, not a full-suite pass.
 
 The 56 m transfer limit withholds 13,810 of 5,778,049 triangle-interior texels (0.239%); those texels retain the ordinary grid. These are atlas sample counts, not measured surface-area coverage. The [preparation comparison](evidence/source-surface/preparation.json) verifies unchanged geometry, camera, retained leaves and every pre-existing image hash. Elevation adds 587,310 image bytes. The [fresh-install record](evidence/source-surface/delivery.json) verifies published asset hashes in an empty destination.
 
@@ -35,7 +35,7 @@ Reproduce the new camera with `node packages/bake/cli/prepare-llorri-overlap.mts
 
 The [camera record](source/observations/llorri-camera.json) retains the pointing fit and withheld landmark: 1.31 px maximum coordinate residual, below the 3 px limit. Sixteen independent Astropy projection anchors agreed within 0.0000001 px; that tests encoding, not pointing accuracy. The original image, camera, mesh and projection anchors are unchanged in the two-image expansion.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/fits/llorri.py`](https://github.com/layoutit/css.earth/blob/de8b0ae4187a49d17e32dff1f2b3a715f0217805/tools/oracles/fits/llorri.py) (now [`tests/oracles/fits/llorri.py`](../../../tests/oracles/fits/llorri.py)) reads the pinned product with astropy. [`tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts) (now [`tests/objects/terrestrial/llorri-geo.oracle.test.mts`](../../../tests/objects/terrestrial/llorri-geo.oracle.test.mts)) requires DN per second and the quality decisions to match the three HDUs, the bound SIP coefficients to equal the header's, and the TAN-SIP distortion to agree with `astropy.wcs` within 10⁻⁹ px at 65 pixels, with the inverse returning each pixel.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/fits/llorri.py`](../../../tests/oracles/fits/llorri.py) (now [`tests/oracles/fits/llorri.py`](../../../tests/oracles/fits/llorri.py)) reads the pinned product with astropy. [`tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts`](../../../tests/objects/terrestrial/llorri-geo.oracle.test.mts) (now [`tests/objects/terrestrial/llorri-geo.oracle.test.mts`](../../../tests/objects/terrestrial/llorri-geo.oracle.test.mts)) requires DN per second and the quality decisions to match the three HDUs, the bound SIP coefficients to equal the header's, and the TAN-SIP distortion to agree with `astropy.wcs` within 10⁻⁹ px at 65 pixels, with the inverse returning each pixel.
 
 ### Registration
 
@@ -84,7 +84,7 @@ The scene uses 800 native PolyCSS u raster leaves, 128 px cells and baked direct
 
 **Reproduction**
 
-The checked gzip OBJ is reproduced by `tools/objects/acquisition/export-dsk.py` from `source/shape/lcy_donj_k548_iso20m_v10.bds`, using `spiceypy==7.0.0`. CSPICE preserves the released vertex and plate data.
+The checked gzip OBJ is reproduced by `packages/bake/src/objects/acquisition/export-dsk.py` from `source/shape/lcy_donj_k548_iso20m_v10.bds`, using `spiceypy==7.0.0`. CSPICE preserves the released vertex and plate data.
 
 **Controlled L’LORRI observation (2026-09-08)**
 

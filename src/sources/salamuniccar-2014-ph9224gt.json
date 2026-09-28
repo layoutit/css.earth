@@ -1,0 +1,47 @@
+{
+  "id": "salamuniccar-2014-ph9224gt",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PH9224GT global catalogue of 9,224 Phobos impact craters, Salamunićcar et al. (2014)",
+  "creators": [
+    "Salamunićcar, G.",
+    "Lončarić, S.",
+    "Pina, P.",
+    "Bandeira, L.",
+    "Saraiva, J."
+  ],
+  "publicationDate": "2014",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1016/j.asr.2013.11.006"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.asr.2013.11.006",
+      "label": "doi:10.1016/j.asr.2013.11.006"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer",
+      "label": "NASA Trek GIS layer PH9224GT_Phobos2000"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/phobos/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Craters found by an automated detector in topography and images, with candidates checked by hand; each record gives a centre and an angular radius on the 11.1 km sphere. The four largest entries (8.6 to 17.9 km) are wider than Stickney and carry no IAU name.",
+      "scope": "Whole catalogue",
+      "evidence": "https://doi.org/10.1016/j.asr.2013.11.006"
+    }
+  ]
+}

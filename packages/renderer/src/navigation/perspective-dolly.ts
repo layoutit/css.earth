@@ -24,7 +24,9 @@ export interface PerspectiveDollyOptions { sunDirection?: Vector3 | null; camera
   /** False while the mesh has no committed material; it stays hidden until then. */
   canReveal?: () => boolean;
   /** Initial connected activation owns the groups until it finishes. */
-  canStageReveal?: () => boolean; }
+  canStageReveal?: () => boolean;
+  /** Keep already-presented detail resident through a driven gesture and its coast. */
+  isCameraMoving?: () => boolean; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['prepare']>['commit']>;
 
@@ -97,12 +99,11 @@ export function validatePerspectiveCameraPlan(plan: CameraPlan): PerspectiveCame
   return plan;
 }
 
-// The stage from the projected disc. Presentation policy: a resolving body goes
-// from its marker straight to its mesh; no billboard disc is drawn. The marker
-// fades in over the mesh, which stays painted until the marker is opaque and
-// then hides. The prepared billboard band only times the selected navigation
-// marker's fade over the mesh (`proxyOpacity`).
+// The prepared proxy remains opaque throughout the billboard band. Detail starts
+// only when it outgrows that band; the shared world owns the visible proxy.
 export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDiameter: number) {
+  // Context image resolution does not qualify its geometry or viewing direction.
+  // The prepared body owns when its real mesh must replace the navigation icon.
   const proxyOpacity = clamp(
     (levelOfDetail.billboardFadeStartDiscPixels - silhouetteDiameter) /
       (levelOfDetail.billboardFadeStartDiscPixels -
@@ -117,11 +118,11 @@ export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDia
     0,
     1,
   );
-  const stage = markerOpacity >= 1 ? "marker" : "geometry";
+  const stage = markerOpacity >= 1 ? "marker" : proxyOpacity >= 1 ? "billboard" : "geometry";
   return Object.freeze({
     stage,
     silhouetteDiameter,
-    billboardOpacity: 0,
+    billboardOpacity: proxyOpacity * (1 - markerOpacity),
     markerOpacity,
     proxyOpacity,
   });
@@ -146,6 +147,7 @@ export function createPerspectiveDolly({
   revealGroups = [],
   canReveal,
   canStageReveal = () => true,
+  isCameraMoving = () => false,
   sunDirection,
 }: PerspectiveDollyOptions, createOrientation = createCameraOrientation) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
@@ -185,6 +187,7 @@ export function createPerspectiveDolly({
   let publishedSceneTransform: string | null = null;
   let publishedProjectionScale = 1;
   let transformWrites = 0;
+  let presentedDetail = false, retainedDetail = false;
 
   const measure = () => {
     const snapshot = viewport.read(cameraPlan.projection.cssPerspective);
@@ -260,11 +263,17 @@ export function createPerspectiveDolly({
       }
       const genericBody = genericBodyProjection(genericPresentation, bodyRadius, focal);
       projectedBody = genericBody;
-      lod = levelOfDetailFor(levelOfDetail, genericBody.silhouetteDiameter);
+      const requestedLod = levelOfDetailFor(levelOfDetail, genericBody.silhouetteDiameter);
+      retainedDetail = presentedDetail && isCameraMoving() && requestedLod.stage !== 'geometry';
+      // An input reversal must not retire textures and reset every reveal batch.
+      // The already-mounted mesh follows the camera until motion settles; cold
+      // marker mounts still wait for actual detail demand before loading assets.
+      // Proxy opacity still follows its projected size while detail stays resident.
+      lod = retainedDetail ? Object.freeze({ ...requestedLod, stage: 'geometry' }) : requestedLod;
       // A marker-stage body is its proxy (see the presentation policy above).
       // An undrawn mesh publishes no material, so it also waits for the one its
       // resolving camera commits instead of revealing an untextured globe.
-      const hidden = lod.stage === 'marker' || (canReveal !== undefined && !canReveal());
+      const hidden = lod.stage !== 'geometry' || (canReveal !== undefined && !canReveal());
       // A hidden scene draws nothing: its transform is formatted and written only
       // while shown, so marker-stage motion and fly-tos skip it, and the entry
       // below writes the current pose before the scene is shown.
@@ -288,6 +297,7 @@ export function createPerspectiveDolly({
         }
       }
       if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;
+      presentedDetail = !hidden;
       // Raw prepared scene coordinates to the physical eye. Overlay and page
       // consumers compose their own retained body transforms after this matrix.
       const scale = cameraPlan.sceneScale;
@@ -370,6 +380,7 @@ export function createPerspectiveDolly({
       });
     },
     levelOfDetail: () => lod,
+    retainedDetail: () => retainedDetail,
     stats({ wheelDollies = 0 } = {}) {
       const { maximumDistance } = camera;
       return Object.freeze({

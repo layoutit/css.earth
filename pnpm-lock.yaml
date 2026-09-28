@@ -241,6 +241,9 @@ importers:
 
   packages/bake:
     dependencies:
+      '@cesium/engine':
+        specifier: 26.3.0
+        version: 26.3.0
       '@cssearth/astronomy':
         specifier: workspace:*
         version: link:../astronomy
@@ -277,6 +280,9 @@ importers:
       cwebp-bin:
         specifier: 8.0.0
         version: 8.0.0
+      esbuild:
+        specifier: 0.27.7
+        version: 0.27.7
       geotiff:
         specifier: 3.0.5
         version: 3.0.5
@@ -298,6 +304,12 @@ importers:
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
+      three:
+        specifier: 0.180.0
+        version: 0.180.0
+      undici:
+        specifier: 7.29.1
+        version: 7.29.1
       vite:
         specifier: 7.3.1
         version: 7.3.1(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(tsx@4.23.15)(yaml@2.9.0)
@@ -311,6 +323,9 @@ importers:
       '@types/node':
         specifier: ^26.4.0
         version: 26.4.0
+      '@types/three':
+        specifier: 0.180.0
+        version: 0.180.0
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)

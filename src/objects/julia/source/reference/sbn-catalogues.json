@@ -1,0 +1,127 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "julia",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 89,
+    "by": "SBDB record des 89"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 89,
+        "fields": {
+          "Number": "89",
+          "Name": "Julia",
+          "Desig": "-",
+          "Family": "540",
+          "CSource": "S",
+          "Class": "K",
+          "DiamSource": "D",
+          "DiamFlag": "-",
+          "Diam": "139.23",
+          "HSource": "M",
+          "H": "6.75",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.24",
+          "G2": "-9.99",
+          "AlbSource": "D",
+          "AlbFlag": "-",
+          "Albedo": "0.1818",
+          "PFlag": "-",
+          "Period": "11.387",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.10",
+          "AmpMax": "0.25",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "-",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 60,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "89",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00089",
+          "Absolute_mag": "6.60",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455206.1058145",
+          "N_W1": "5",
+          "N_W2": "5",
+          "N_W3": "5",
+          "N_W4": "5",
+          "Fit_code": "DVBI",
+          "Diameter": "145.483",
+          "Diameter_err": "1.265",
+          "V_albedo": "0.189",
+          "V_albedo_err": "0.025",
+          "IR_albedo": "0.339",
+          "IR_albedo_err": "0.040",
+          "Beaming_param": "0.884",
+          "Beaming_param_err": "0.031",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139490,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "89",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00089",
+          "Absolute_mag": "6.60",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455520.2823175",
+          "N_W1": "13",
+          "N_W2": "13",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "137.079",
+          "Diameter_err": "4.758",
+          "V_albedo": "0.215",
+          "V_albedo_err": "0.036",
+          "IR_albedo": "0.386",
+          "IR_albedo_err": "0.082",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

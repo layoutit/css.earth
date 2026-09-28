@@ -21,6 +21,7 @@ test('the shell-owned setting names are exactly the setting inputs the shared sh
 const settingsMarkup = (speed: boolean) => `<section><h2>Settings</h2><div class="object-settings">
   <label class="object-motion-setting-control"><input class="object-motion-setting" name="motion" type="checkbox" disabled>
     <span id="motion-blocked" class="object-motion-blocked" hidden>Reduced motion</span></label>
+  <label><input class="object-light-curves-setting" name="lightCurves" type="checkbox" checked disabled></label>
   ${speed ? '<label><input class="object-speed-setting" name="speed" type="range" disabled></label>' : ''}
   <label><input class="object-heliosphere-setting" name="heliosphere" type="checkbox" disabled></label>
   <label><input class="object-illustration-models-setting" name="illustrationModels" type="checkbox" disabled></label>
@@ -95,4 +96,17 @@ test('selection refresh changes only links whose selection changes', async () =>
   assert.equal(link.hasAttribute('aria-current'), false);
   assert.equal(link.classList.contains('is-active'), false);
   observer.disconnect();
+});
+
+test('Light curves is on by default and is its own preference, apart from illustrative rotation', () => {
+  const { document, window } = parseHTML(`<html><body>${settingsMarkup(false)}</body></html>`);
+  const lifetime = createSceneLifetime(), changes: string[] = [];
+  const preferences = createWorldPreferences({ getWorld: () => null, onMotionChange() { changes.push('playback'); } });
+  createSettingsController(document, window as unknown as BrowserWindow, preferences, lifetime);
+  const light = document.querySelector<HTMLInputElement>('[name="lightCurves"]')!, motion = document.querySelector<HTMLInputElement>('[name="motion"]')!;
+  assert.equal(preferences.state.lightCurvesEnabled, true); assert.equal(light.checked, true); assert.equal(motion.checked, false);
+  light.checked = false; light.dispatchEvent(new window.Event('change'));
+  assert.equal(preferences.state.lightCurvesEnabled, false); assert.equal(preferences.state.motionEnabled, false);
+  assert.deepEqual(changes, ['playback'], 'the switch republishes playback');
+  lifetime.destroy();
 });

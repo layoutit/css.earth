@@ -1,0 +1,56 @@
+{
+  "id": "u-1",
+  "name": "U 1",
+  "system": "U 1 system",
+  "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 22.54 days; its mean radius is 113.2 solar radii.",
+  "order": 1977,
+  "gaia": "4655402261473987968",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 113.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, U 1: Baade-Wesselink mean radius (solar radii) 113.2 +/- 5.1 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 5.1
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5125,
+    "source": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0079, columns Teffp, e_Teffp: Teff 5125 +/- 88 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2307.07559",
+    "uncertainty": 88
+  },
+  "distance": {
+    "value": 52497.2,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, U 1: Baade-Wesselink distance (pc) 52497.2 +/- 2528.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 2528.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.1 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 22.5 days.",
+    "introduction": "Its mean radius, 113.2 solar radii, comes from comparing how fast its surface moves with how its size changes, 52,497 parsecs away.",
+    "locator": "table10, U 1: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
+    "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
+    "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.",
+    "SIMBAD does not resolve \"U 1\", the name Groenewegen (2013) gives it; it is placed by its Gaia DR3 source, OGLE-LMC-CEP-0079 in the OGLE catalogue."
+  ]
+}

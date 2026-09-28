@@ -10,12 +10,6 @@
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/390",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
-        }
       ]
     },
     {
@@ -25,12 +19,6 @@
       "finding": "16.4 ± 1.3 km, thermophysical volume-equivalent diameter fitted with this shape model. DAMIT marks model 390 as size-calibrated by the thermophysical fit of Hanuš et al. (2015): D = 16.4 ± 1.3 km, thermal inertia 170 (90–260), geometric albedo 0.21 ± 0.04. The mirror pole, model 391, fits D = 16.8 ± 1.5 km. NEOWISE lists 15.812 ± 0.111 km (Masiero et al. 2014) and 17.739 ± 0.894 km (Masiero et al. 2012).",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/390"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
-        }
       ]
     },
     {
@@ -41,12 +29,17 @@
       "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/390"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"8.2 km (size-calibrated model)\" (damit-models) implies a diameter of 16.4 km, outside the added NEOWISE V2.0 neowise_mainbelt.csv record 666 (Masiero et al. 2014) diameter 15.812 ± 0.111 km (NEOWISE, NEATM). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

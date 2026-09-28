@@ -1,5 +1,4 @@
 {
-  "testedRevision": "323a8c2f52803627462db448e52ccfa3c073363d",
   "date": "2026-09-27",
   "method": "Pearson correlation between the first listed component FITS plane and RGB channel sum, sampling every third row and column. Ignore nonpositive or nonfinite FITS samples and zero RGB sums. Compare stored row order with north/south reversal. This is an orientation diagnostic, not colour calibration or absolute geolocation.",
   "correlationOrder": [

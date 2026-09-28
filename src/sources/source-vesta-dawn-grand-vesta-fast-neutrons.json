@@ -1,0 +1,35 @@
+{
+  "id": "source-vesta-dawn-grand-vesta-fast-neutrons",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Vesta · dawn grand vesta fast neutrons",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/vesta/source/manifest.json",
+      "locator": "/inputs/53"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "scope": "The dawn grand vesta fast neutrons input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA PDS scientific data; retain source credit",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

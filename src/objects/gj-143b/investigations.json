@@ -1,5 +1,38 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "gj-143b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.2328486 Jupiter radii from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract): 16,646.8 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "https://doi.org/10.3847/2041-8213/ab12ed",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.07142183 Jupiter masses: Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "https://doi.org/10.3847/2041-8213/ab12ed",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 35.61253 d (Dragomir et al. 2019); a/R* 60.1 (Dragomir et al. 2019); inclination 89.33 degrees (Dragomir et al. 2019); e 0.188 (Dragomir et al. 2019); omega 98 degrees (Dragomir et al. 2019); transit mid-time 2458385.92502 BJD, taken as BJD_TDB (Dragomir et al. 2019). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

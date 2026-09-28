@@ -44,7 +44,7 @@ weather path did not alter the Cassini UVIS ring recipe.
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
 The recipe binds Saturn's settings to the shared
-[material-composition preparer](../../../tools/objects/material-composition/index.mts),
+[material-composition preparer](../../../packages/bake/src/objects/layers/material-composition/object.ts),
 which uses the shared radial, cutaway, sky and content preparation modules.
 
 - The material overlay has one colour and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean colour and approximate for colours far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.
@@ -571,7 +571,7 @@ Source inspection compared the TIFF rows with the component FITS rows; all selec
 
 ### Date sequence evidence
 
-Checked on 27 September 2026 at `323a8c2f52803627462db448e52ccfa3c073363d`; subsequent changes add documentation and retained evidence only. Chrome exercised all 8 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
+Checked on 27 September 2026; subsequent changes add documentation and retained evidence only. Chrome exercised all 8 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
 
 [Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 

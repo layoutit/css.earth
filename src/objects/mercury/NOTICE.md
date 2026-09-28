@@ -2,7 +2,7 @@
 
 NASA, NASA Solar System Treks, NASA/JHU APL/Carnegie, NASA/PDS, USGS Astrogeology, and NASA GSFC data are credited in the interface and source manifest. Their inclusion does not imply endorsement.
 
-Native BDR, LOI and enhanced-color maps: Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins Applied Physics Laboratory; Carnegie Science; published by USGS Astrogeology, edition 1 (2016). USGS states no access restrictions and requests author credit. cssEarth reduces the original GeoTIFFs for display and marks missing coverage. The legacy NASA Trek BDR snapshot remains in the interior illustration.
+Native BDR, LOI, MD3 color and enhanced-color maps: Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins Applied Physics Laboratory; Carnegie Science; published by USGS Astrogeology, edition 1 (2016). USGS states no access restrictions and requests author credit. cssEarth reduces the original GeoTIFFs for display and marks missing coverage. The legacy NASA Trek BDR snapshot remains in the interior illustration.
 
 The global MESSENGER MASCS spectrum is derived from M. D'Amore's DLR dataset, DOI 10.5281/zenodo.7433033, under CC-BY-4.0. See `source/spectrum/LICENSE.md`.
 

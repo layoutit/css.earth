@@ -8,21 +8,9 @@
       "status": "included",
       "finding": "The live NASA SVS 5069 source page was examined against the selected release filenames. It separately supplies the 6.25 cm zero-phase albedo and 5 cm PolyCam basemap, with distinct acquisition/control and photometric histories. The selected package keeps them separate; SVS’s example blend is not a single calibrated albedo dataset.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bennu/README.md",
         "https://svs.gsfc.nasa.gov/5069",
         "https://svs.gsfc.nasa.gov/5069/",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/bennu/source/preparation/acquisition.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bennu/source/preparation/acquisition.json"
       ]
     },
     {
@@ -31,15 +19,8 @@
       "status": "included",
       "finding": "[USGS MapCam](https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm), [DellaGiustina et al. 2020](https://figshare.com/articles/journal_contribution/Maps_DellaGiustina_et_al_Science_2020_abc3660/12996494). False color: red x/v (847/550 nm), green 698 nm band strength, blue b′/v (473/550 nm); no mineral abundance is inferred.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bennu/README.md",
         "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
         "https://figshare.com/articles/journal_contribution/Maps_DellaGiustina_et_al_Science_2020_abc3660/12996494"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -48,14 +29,7 @@
       "status": "included",
       "finding": "[OLA v20 PTM](https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj); radius minus 241 m, not gravitational height.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/bennu/README.md",
         "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -67,13 +41,6 @@
       "evidence": [
         "https://svs.gsfc.nasa.gov/5069/",
         "https://sbmt.jhuapl.edu/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -84,13 +51,6 @@
       "revisitWhen": "A scientific use explicitly requires the derivative, with its modifications and original source correspondence preserved.",
       "evidence": [
         "https://svs.gsfc.nasa.gov/5069/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -99,15 +59,113 @@
       "status": "included",
       "finding": "The USGS v2 ZIP supplies four original float32 GeoTIFFs at 473, 550, 698 and 847 nm with a common cartographic grid. All four are included as one Reflected light group on the existing OLA v20 display shape. A fixed 0–0.08 I/F grayscale range preserves inter-band brightness differences. Independent native-byte probes pass; gaps remain missing and source extremes clip only for display. Physical map-to-shape registration and the existing display-lighting model are not newly qualified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/0667d877dd91b62b9828d5ede2155bb604899de9/src/objects/bennu/README.md",
-        "https://github.com/layoutit/css.earth/blob/0667d877dd91b62b9828d5ede2155bb604899de9/src/objects/bennu/evidence/spectral-bands/native-values.json",
-        "https://github.com/layoutit/css.earth/blob/0667d877dd91b62b9828d5ede2155bb604899de9/src/objects/bennu/evidence/spectral-bands/delivery-and-browser.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "0667d877dd91b62b9828d5ede2155bb604899de9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bennu/evidence/spectral-bands/native-values.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bennu/evidence/spectral-bands/delivery-and-browser.json"
+      ]
+    },
+    {
+      "id": "selected-rswg-gravity-anomaly",
+      "subject": "Gravity anomaly (Radio Science Working Group)",
+      "status": "included",
+      "finding": "orex.derived_gravity v1.1 holds one facet map, RSWG_bouguer_map_shape_Oct2021 (LIDVID ...:rswg_bouguer_map_shape_oct2021.fits::1.0): measured minus uniform-density surface acceleration for field grav_20_particles on SPC v42 (196,608 facets). Rows are one-based and match the SPC v42 OBJ face centroids within 0.015 mm. The normalized column spans -3.49% to +2.61%, matching the \"vary between ±3%\" of Scheeres et al. 2020 Fig. 2A. The paper map is degree 4 and the archived field is degree 10, so only the range is checked; the sign convention is the collection overview's. Shown on its own SPC v42 mesh. The label and FITS disagree on column names and there is no sigma column; the draft parser in output/bennu-even-more/drafts takes these as declared differences.",
+      "evidence": [
+        "https://doi.org/10.1126/sciadv.abc3350",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.xml",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.txt"
+      ]
+    },
+    {
+      "id": "selected-ola-v20-slope-and-geopotential",
+      "subject": "OLA v20 slope and geopotential height",
+      "status": "included",
+      "finding": "The orex.altimetry OLAv20 collection archives per-facet slope, elevation (geopotential height), potential, gravity and albedo tables at 0.88, 1.68, 3.25, 6.37 and 12.61 m. Only the albedo table sits on the display PTM mesh; the others sit on the ICQ ALT OBJ of the same point cloud. The 0.88 m slope and gravity tables reproduce Daly et al. 2020 Table 1 (slopes 0.0-113.0 deg, median 24.6 deg; gravity -0.0000748 to 0.0000806 m/s2). The 1.68 m tables are used: slope 0.03-107.9 deg, median 21.3 deg; geopotential height 0-84.7 m, zero at the lowest surface potential as the altimetry SIS defines it. Every row matches its OBJ centroid within 0.08 mm. The header names the mesh shape3.obj, so the identity rests on the centroids.",
+      "evidence": [
+        "https://doi.org/10.1126/sciadv.abd3649",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/document/altimetry_sis.xml",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits.xml"
+      ]
+    },
+    {
+      "id": "ola-v20-0880mm-facet-tables",
+      "subject": "OLA v20 0.88 m facet tables",
+      "status": "deferred",
+      "finding": "These are the tables Daly et al. 2020 quote. They sit on a 3,145,728-facet OBJ (225 MB). Baking it next to the 3,366,134-facet display PTM would hold two multi-million-facet meshes in one bake, so the 1.68 m tables of the same v20 model are used.",
+      "revisitWhen": "The terrestrial bake can hold two 3-million-facet source meshes within the machine memory budget.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/"
+      ]
+    },
+    {
+      "id": "ola-v20-gravity-magnitude",
+      "subject": "OLA v20 gravitational magnitude",
+      "status": "deferred",
+      "finding": "The 1.68 m table spans -7.2e-5 to 8.0e-5 m/s2, consistent with Daly et al. 2020 Table 1. 915 rows carry a negative sigma, and the SIS does not define that. The Bouguer map and slope already cover gravity.",
+      "revisitWhen": "An archive document defines a negative sigma in the ALTWG gravity tables.",
+      "evidence": [
+        "https://doi.org/10.1126/sciadv.abd3649"
+      ]
+    },
+    {
+      "id": "ola-v20-ptm-albedo",
+      "subject": "OLA v20 albedo on the display PTM mesh",
+      "status": "deferred",
+      "finding": "g_00880mm_ptm_alb_0000n00000_v020 is the only derived table on the exact display mesh (3,366,134 rows). The label calls it relative albedo and the FITS header calls it intensity. PRODNAME (g_00830mm...) and the label field name disagree with the file. The SIS describes OLA intensity on a relative 1-199 scale. Not selected: no paper quotes its values yet.",
+      "revisitWhen": "A publication or archive document gives the scale and meaning of the OLA intensity albedo.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_00880mm_ptm_alb_0000n00000_v020.fits.xml"
+      ]
+    },
+    {
+      "id": "selected-otes-thermal-inertia",
+      "subject": "OTES thermal inertia (Rozitis et al. 2020)",
+      "status": "included",
+      "finding": "orex.thermal global map g_06330mm_ta_thermin_otesdsv1-7_v001 (the published version, per its log) on SPO v34 (49,152 facets). Rows match the SPO v34 OBJ centroids within 0.08 mm. 48,958 facets have values from 190 to 383 (mean 296, SD 28, mean sigma 8.1). The paper gives 300 ± 30 with mean uncertainty 8 J m-2 K-1 s-1/2, and an equator 40-60 higher than latitudes above 60 deg; the zonal means are 327 at the equator and 263-280 at high latitudes. 194 NaN facets stay missing. PRODNAME and the label field name differ from the file; these are declared in the recipe.",
+      "evidence": [
+        "https://doi.org/10.1126/sciadv.abc3699",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.xml"
+      ]
+    },
+    {
+      "id": "thermal-roughness-ovirs-ti-and-temperature-maps",
+      "subject": "Thermal roughness, OVIRS-based inertia and predicted temperatures",
+      "status": "deferred",
+      "finding": "The same collection holds OTES and OVIRS roughness, the OVIRS-based inertia (offset +20 in the paper) and predicted perihelion and aphelion temperature maps on the same SPO v34 mesh. They are further lenses on an existing mesh, not selected for this change.",
+      "revisitWhen": "A lens for surface roughness or predicted temperature is requested.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/"
+      ]
+    },
+    {
+      "id": "selected-ovirs-hydration-and-carbon",
+      "subject": "OVIRS 2.74 µm band depth and 3.2-3.6 µm band area (Simon et al. 2020)",
+      "status": "included",
+      "finding": "orex.spectral_analysis Detailed Survey EQ3 maps on SPC v20 (196,608 facets; the labels wrongly say 49,152 records). Rows match the SPC v20 OBJ centroids within 0.08 mm. 367 facets hold -9999 in both value and sigma. The SAWG SIS uses -9999 as its null, so these stay missing. The 2.74 µm depth is stored as a fraction although the label says percent; valid facets span 8.6-17.4% (5th-95th percentile 12.2-15.4%), matching the 12 to 17% of Simon et al. 2020, and are deeper toward the poles. The band area is in %·µm (label unit) and spans -0.007 to 1.12. Both use the producer readme stretch, mean ± 2 SD.",
+      "evidence": [
+        "https://doi.org/10.1126/science.abc3522",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/document/sawg_sis.xml"
+      ]
+    },
+    {
+      "id": "ovirs-otes-other-global-maps",
+      "subject": "Other OVIRS and OTES global maps",
+      "status": "deferred",
+      "finding": "The EQ3 set also has 550 nm reflectance, 920 nm pyroxene ratio and two spectral slopes on SPC v20, and OTES band depths at 350 and 440 cm-1 and a spectral slope on SPC v20 at 6.31 m. Not selected; the OTES maps would need a fifth mesh.",
+      "revisitWhen": "A lens for these indices is requested.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_tir_maps/detailed_survey/"
+      ]
+    },
+    {
+      "id": "derived-products-on-other-meshes",
+      "subject": "Placing derived tables on the display mesh",
+      "status": "excluded",
+      "finding": "None of the selected tables sits on the display PTM mesh, and facet science requires the table's own mesh. Each lens is therefore drawn on the archived mesh its table was computed on (radialTerrainAlternatives), with no cross-mesh transfer. The four meshes share the Bennu body-fixed frame; their equivalent radii (244.7-245.2 m) and centres of figure agree within 0.5 m.",
+      "revisitWhen": "A lens needs to be shown on the display mesh itself.",
+      "evidence": [
+        "Volumes of the four archived OBJ files: SPC v42 0.06167, OLA v20 1.68 m 0.06135, SPO v34 0.06175, SPC v20 0.06156 km3",
+        "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/"
       ]
     }
   ]

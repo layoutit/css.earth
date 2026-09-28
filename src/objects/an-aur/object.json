@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "an-aur",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "AN Aur",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 65117520
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/an-aur-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "AN Aur",
+      "classification": "star",
+      "color": "#ffede1",
+      "distanceAu": 1093533501.1,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 10.3 days.",
+      "systemName": "AN Aur system",
+      "order": 1925,
+      "context": {
+        "order": 1922
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        32194476064846950000,
+        119509330321828860000,
+        106971101084193540000
+      ],
+      "presentationToReference": [
+        0.19679942618860433,
+        0.17008875932955747,
+        0.9655774437100154,
+        0.7305404686240828,
+        0.6313876966682781,
+        -0.2601157438496021,
+        0.6538964822923744,
+        -0.7565840273529824,
+        -1.4458557918487135e-8
+      ],
+      "orbitUpReference": [
+        -0.17008875932955747,
+        -0.6313876966682781,
+        0.7565840273529824
+      ],
+      "metersPerUnit": 210056516.12903225,
+      "bodyRadiusM": 65117520000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

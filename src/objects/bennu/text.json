@@ -81,6 +81,36 @@
       "title": "OSIRIS-REx MapCam · 847 nm",
       "detail": "OSIRIS-REx MapCam",
       "summary": "Brightness in near infrared light, corrected for illumination. All bands share one scale; gray marks missing data."
+    },
+    "geopotential": {
+      "title": "OLA geopotential height",
+      "detail": "OLA v20 · derived",
+      "summary": "Height above the lowest point of the surface potential, with Bennu’s spin; material moves from high to low."
+    },
+    "slope": {
+      "title": "OLA slope relative to gravity",
+      "detail": "OLA v20 · derived",
+      "summary": "Surface tilt against gravity plus spin, from the laser shape and a uniform-density model."
+    },
+    "gravity-anomaly": {
+      "title": "Gravity anomaly map",
+      "detail": "Radio science · derived",
+      "summary": "Measured surface gravity minus a uniform-density Bennu, in percent; positive is stronger than uniform."
+    },
+    "thermal-inertia": {
+      "title": "OTES thermal inertia",
+      "detail": "OTES · derived",
+      "summary": "How slowly the surface heats and cools; low values mark porous boulders. Gray marks facets with no fit."
+    },
+    "hydration": {
+      "title": "OVIRS 2.7 µm band depth",
+      "detail": "OVIRS · derived",
+      "summary": "Strength of the absorption of water-bearing clay minerals. Gray marks facets with no value."
+    },
+    "carbon": {
+      "title": "OVIRS 3.4 µm band area",
+      "detail": "OVIRS · derived",
+      "summary": "Strength of the absorption linked to organics and carbonates; not an abundance. Gray marks facets with no value."
     }
   }
 }

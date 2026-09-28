@@ -610,6 +610,380 @@
         ],
         "notes": "Wavelength of the ammonium absorption in clays, measured by Dawn VIR. Band position is nearly uniform across Ceres; color differences do not establish mineral abundance or changing composition. Scan stripes and checkerboard artifacts remain in the archive. The fixed 3.02–3.08 µm range follows Ammannito et al. (2016), LPSC 3020, Fig. 2; the black-to-white heat palette is a display choice. Values outside the scale use its end colors. Gray grid marks unmeasured pixels and the poles beyond 60° latitude.",
         "noData": true
+      },
+      {
+        "id": "gravity",
+        "label": "Gravity",
+        "thumbnail": "ceres-lens-gravity.webp",
+        "surface": "ceres-gravity@2x.webp",
+        "poles": "ceres-poles-gravity@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial gravity anomaly",
+          "labels": [
+            "≤−250",
+            "0",
+            "≥250"
+          ],
+          "meta": "mGal on a 482 × 446 km ellipsoid",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/",
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "≤−250",
+              "0",
+              "≥250"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-gravity-ceres18d-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
+        },
+        "step": {
+          "group": "gravity-field",
+          "label": "Gravity anomaly"
+        },
+        "qualification": "Dawn radial gravity from JPL model CERES18D to degree and order 18, without the hydrostatic J2 and J4 (PDS4 jgdwn_cer18d_accel_0018 1.0; PDS3 DAWN-A-RSS-5-CEGR-V4.0), in mGal on a 482.0 × 445.9 km ellipsoid, 1° cells.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How much harder or weaker Ceres pulls than a smooth body would: radial gravity on a 482 × 446 km ellipsoid near the surface, from degrees 2 to 18 of the field without the J2 and J4 terms the archive calls hydrostatic."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal): 1 mGal is 0.00001 m/s², and Ceres's mean surface gravity is about 28,400 mGal. Red pulls harder and blue weaker; values beyond ±250 mGal (0.08% of the surface, the floor of Urvara crater) use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+          }
+        ],
+        "notes": "How much harder or weaker Ceres pulls than a smooth body would: radial gravity on a 482 × 446 km ellipsoid near the surface, from degrees 2 to 18 of the field without the J2 and J4 terms the archive calls hydrostatic. Milligals (mGal): 1 mGal is 0.00001 m/s², and Ceres's mean surface gravity is about 28,400 mGal. Red pulls harder and blue weaker; values beyond ±250 mGal (0.08% of the surface, the floor of Urvara crater) use endpoint colors. JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients. Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+      },
+      {
+        "id": "gravity-uncertainty",
+        "label": "Gravity",
+        "thumbnail": "ceres-lens-gravity-uncertainty.webp",
+        "surface": "ceres-gravity-uncertainty@2x.webp",
+        "poles": "ceres-poles-gravity-uncertainty@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Gravity uncertainty",
+          "labels": [
+            "0",
+            "40",
+            "80"
+          ],
+          "meta": "mGal, one sigma",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "40",
+              "80"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-gravity-ceres18d-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
+        },
+        "step": {
+          "group": "gravity-field",
+          "label": "Uncertainty"
+        },
+        "qualification": "One-sigma radial gravity error of CERES18D from its covariance to degree 18 (PDS4 jgdwn_cer18d_accerr_0018 1.0), in mGal on a 482.0 × 445.9 km ellipsoid, 1° cells.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The one-sigma uncertainty of the radial gravity map at each place, mapped by JPL from the model's error covariance to degree 18."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal). Yellow is least certain: the error grows from 17.6 mGal near the equator to 79 mGal at the south pole. Ruesch et al. (2019) quote about 10 mGal at the equator for the previous version, CERES18C."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+          }
+        ],
+        "notes": "The one-sigma uncertainty of the radial gravity map at each place, mapped by JPL from the model's error covariance to degree 18. Milligals (mGal). Yellow is least certain: the error grows from 17.6 mGal near the equator to 79 mGal at the south pole. Ruesch et al. (2019) quote about 10 mGal at the equator for the previous version, CERES18C. JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients. Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+      },
+      {
+        "id": "bouguer",
+        "label": "Gravity",
+        "thumbnail": "ceres-lens-bouguer.webp",
+        "surface": "ceres-bouguer@2x.webp",
+        "poles": "ceres-poles-bouguer@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Bouguer anomaly",
+          "labels": [
+            "≤−400",
+            "0",
+            "≥400"
+          ],
+          "meta": "mGal on a 482 × 446 km ellipsoid",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/",
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "≤−400",
+              "0",
+              "≥400"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-gravity-ceres18d-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
+        },
+        "step": {
+          "group": "gravity-field",
+          "label": "Bouguer anomaly"
+        },
+        "qualification": "Dawn Bouguer anomaly from JPL model CERES18D, degrees 2 to 18 without the hydrostatic J2 and J4 (PDS4 jgdwn_cer18d_bou_0018 1.0), in mGal on a 482.0 × 445.9 km ellipsoid, 1° cells. The archive does not state the density it used.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Radial gravity minus the pull the shape of Ceres would have at one uniform density. Positive means more mass below than the shape explains. High ground reads negative and the large basins positive, the pattern of compensated topography (Park et al. 2016)."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal). Red marks extra mass below, blue a deficit; values beyond ±400 mGal (four cells in Urvara crater) use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+          }
+        ],
+        "notes": "Radial gravity minus the pull the shape of Ceres would have at one uniform density. Positive means more mass below than the shape explains. High ground reads negative and the large basins positive, the pattern of compensated topography (Park et al. 2016). Milligals (mGal). Red marks extra mass below, blue a deficit; values beyond ±400 mGal (four cells in Urvara crater) use endpoint colors. JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients. Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+      },
+      {
+        "id": "geoid",
+        "label": "Gravity",
+        "thumbnail": "ceres-lens-geoid.webp",
+        "surface": "ceres-geoid@2x.webp",
+        "poles": "ceres-poles-geoid@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Geoid height",
+          "labels": [
+            "−1500",
+            "0",
+            "1500"
+          ],
+          "meta": "m above the reference ellipsoid",
+          "sourceUrl": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/",
+          "recipe": {
+            "palette": [
+              [
+                52,
+                78,
+                153
+              ],
+              [
+                64,
+                158,
+                181
+              ],
+              [
+                155,
+                206,
+                209
+              ],
+              [
+                229,
+                226,
+                215
+              ],
+              [
+                233,
+                190,
+                128
+              ],
+              [
+                214,
+                119,
+                67
+              ],
+              [
+                162,
+                44,
+                53
+              ]
+            ],
+            "labels": [
+              "−1500",
+              "0",
+              "1500"
+            ]
+          }
+        },
+        "source": {
+          "id": "dawn-gravity-ceres18d-maps",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
+        },
+        "step": {
+          "group": "gravity-field",
+          "label": "Geoid"
+        },
+        "qualification": "Dawn geoid from JPL model CERES18D, degrees 2 to 18 (PDS4 jgdwn_cer18d_geoid_0018 1.0), in meters above an ellipsoid of 482.0 km semi-major axis and flattening 0.074896, 1° cells.",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (482.0 km equatorial radius, flattening 0.074896)."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Meters. The geoid stands up to 1,454 m above the ellipsoid near the poles and down to 1,067 m below it near the equator, so the equal-potential surface is rounder than the reference ellipsoid."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
+          }
+        ],
+        "notes": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (482.0 km equatorial radius, flattening 0.074896). Meters. The geoid stands up to 1,454 m above the ellipsoid near the poles and down to 1,067 m below it near the equator, so the equal-potential surface is rounder than the reference ellipsoid. JPL's Dawn gravity team fitted CERES18D to Deep Space Network Doppler and range tracking and optical landmarks from Dawn's approach to the end of its low orbit, February 2015 to September 2016. It is the degree-18 model the archive publishes as maps; the degree-70 model CERES70E (Park et al. 2020) is archived only as coefficients. Degree 18 resolves features about 82 km across at the equator; the field is accurate globally to degree 14, about 105 km (Ruesch et al. 2019; Park et al. 2017). Each 1° cell holds the model value at its centre."
       }
     ]
   },

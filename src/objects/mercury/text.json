@@ -31,6 +31,11 @@
       "detail": "MESSENGER MDIS",
       "summary": "Images taken with the Sun low in the sky bring out crater rims and ridges."
     },
+    "color": {
+      "title": "MDIS 3-color mosaic",
+      "detail": "MESSENGER MDIS",
+      "summary": "Three filters, from violet light to near-infrared, show Mercury's subtle color differences, not the colors an eye would see."
+    },
     "enhanced": {
       "title": "MDIS Enhanced Color Mosaic",
       "detail": "MESSENGER MDIS",
@@ -50,6 +55,16 @@
       "title": "Higher-Sun monochrome map",
       "detail": "MESSENGER MDIS",
       "summary": "Images taken with the Sun higher in the sky show surface brightness patterns. The two maps use different brightness scales."
+    },
+    "gravity": {
+      "title": "Gravity anomaly",
+      "detail": "MESSENGER",
+      "summary": "Radio tracking of MESSENGER measured where Mercury pulls a little harder or weaker. Detail is finer in the north."
+    },
+    "crust": {
+      "title": "Crustal-thickness model",
+      "detail": "MESSENGER",
+      "summary": "Thickness inferred from gravity and topography. It depends on assumed rock densities."
     }
   }
 }

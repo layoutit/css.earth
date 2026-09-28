@@ -1,0 +1,12 @@
+Global Thermal Inertia map from OTES data measured during all 7 Equatorial Stations.
+OTES data were used to derive this product.
+Map was created using the ATPM thermophysical model.
+The mapping algorithm used is averaging (avrg).
+Spot radiance spectra were fit directly (rather than fitting derived temperatures).
+Bond albedo was assumed to be constant across the surface.
+Sub-facet surface roughness was fit simultaneously with thermal inertia.
+Includes variable scale factor to optimize fitting of the shape of radiance spectra.
+Actual uncertainties are not strictly symmetric or Gaussian.
+anc6 version provides average 1-sigma uncertainties.
+anc10 version provides upper and lower 1- and 3-sigma uncertainties.
+This is the version published in Rozitis et al. (2020; Science Advances)

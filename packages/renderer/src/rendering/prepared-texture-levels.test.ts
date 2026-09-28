@@ -11,10 +11,10 @@ const variants = ['a', 'b'].map(lensId => ({ when: { lensId }, required: [lensId
   writes: [{ kind: 'texture' as const, resource: lensId, target: 2, name: 'backgroundImage', quoted: true }] }));
 const definition = { textureLevels, variants, materials: [] } as unknown as PreparedPresentationDefinition;
 
-test('startup is coarse even for a close URL; selection demand contains only the selected dataset', () => {
+test('startup demands the camera texture level and only the selected dataset', () => {
   const view = { sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } };
-  const initial = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view, initial: true });
-  expect(initial.required).toEqual(['a-small']);
+  const initial = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view });
+  expect(initial.required).toEqual(['a']);
   const refined = resolvePreparedPresentation(definition, { selection: { lensId: 'a' }, view, previousPlan: initial });
   expect(refined.required).toEqual(['a']);
   expect(resolvePreparedPresentation(definition, { selection: { lensId: 'b' }, view }).required).toEqual(['b']);
@@ -28,11 +28,10 @@ test('zoom hysteresis retains detail at a boundary and downgrades outside it', (
   expect(selectPreparedTextureLevel(textureLevels, null, 0)).toBe(1);
 });
 
-test('a fixed level keeps the same texture through zoom once the prepared first pass is shown', () => {
+test('a fixed level applies from the first demand and stays fixed through zoom', () => {
   const fixed = { ...textureLevels, fixedLevel: 0 };
-  expect(selectPreparedTextureLevel(fixed, 900, undefined, true)).toBe(0);
-  // The first pass is the small prepared bank the page already shows; the fixed level follows it and never swaps on zoom.
-  expect(selectPreparedTextureLevel({ ...textureLevels, fixedLevel: 1 }, 900, undefined, true)).toBe(0);
+  expect(selectPreparedTextureLevel(fixed, 900, undefined)).toBe(0);
+  expect(selectPreparedTextureLevel({ ...textureLevels, fixedLevel: 1 }, 900, undefined)).toBe(1);
   expect(selectPreparedTextureLevel({ ...textureLevels, fixedLevel: 1 }, 10, 0)).toBe(1);
   expect(selectPreparedTextureLevel(fixed, 900, 0)).toBe(0);
   expect(selectPreparedTextureLevel(fixed, null, 0)).toBe(0);
@@ -97,7 +96,7 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
     ({ kind: 'texture' as const, resource, target: i, name: `--page-${i}`, quoted: true })) }];
   const paged = { textureLevels: sheet, variants: both, materials: [] } as unknown as PreparedPresentationDefinition;
   const view = { sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter: 900, billboardOpacity: 0, markerOpacity: 0 } };
-  const initial = resolvePreparedPresentation(paged, { selection: { lensId: 'a' }, view, initial: true });
+  const initial = resolvePreparedPresentation(paged, { selection: { lensId: 'a' }, view: { ...view, levelOfDetail: { ...view.levelOfDetail, silhouetteDiameter: 100 } } });
   // One decode for both pages.
   expect(initial.required).toEqual(['sheet']);
   expect(initial.textureTiles).toEqual(sheet.levels[0]!.tiles);
@@ -109,4 +108,19 @@ test('a sheet level plans each page as a tile of one shared image; the page leve
   expect(textureTileStyles('--page-1', undefined)).toEqual([['--page-1-x', '0'], ['--page-1-y', '0'], ['--page-1-scale', '1']]);
   expect(() => requireTextureLevels(sheet, both, new Set(['a', 'b', 'sheet']))).not.toThrow();
   expect(() => requireTextureLevels({ ...sheet, levels: [{ ...sheet.levels[0], tiles: { a: { x: 0, y: 0, scale: 0.5 } } }, sheet.levels[1]] }, both, new Set(['a', 'b', 'sheet']))).toThrow(/tile a/);
+});
+
+
+test('system-scale proxies require no detail images and acquire them on geometry entry', () => {
+  const at = (stage: string) => ({sceneMatrix: '', sunViewDirection: null,
+    levelOfDetail: {stage, silhouetteDiameter: 13, billboardOpacity: 1, markerOpacity: 0}});
+  for (const stage of ['marker', 'billboard']) {
+    const plan = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at(stage)});
+    expect(plan.deferredTextures).toBe(true);
+    expect(plan.required).toEqual([]);
+    expect(plan.prewarm).toEqual([]);
+  }
+  const detail = resolvePreparedPresentation(definition, {selection: {lensId: 'a'}, view: at('geometry')});
+  expect(detail.required).toEqual(['a-small']);
+  expect(detail.deferredTextures).toBeUndefined();
 });

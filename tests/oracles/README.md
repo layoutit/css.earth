@@ -8,9 +8,9 @@ are older standalone audits; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
-| Astropy ICRS geometry, NumPy vectors | The declared circular hosted-orbit contract: sky frames, phase/state vectors, and the synchronous body orientation derived from them (not physical ephemeris accuracy) | `astronomy/hosted-orbit.py` | `tools/objects/hosted-orbit.oracle.test.mts` |
-| SpiceyPy (CSPICE N0067) | Eccentric hosted-orbit position and velocity, including a sourced TRAPPIST-1f convention conversion; both implementations receive the same representable BMJD_TDB timestamp | `astronomy/hosted-eccentric.py` | `tools/objects/hosted-eccentric.oracle.test.mts` |
-| Astropy blackbody, constants and units | Frequency-form Planck intensity and brightness-temperature inversion used by ALMA preparation, plus the HST flux-density-to-Rayleigh conversion | `physical-units/spectral.py` | `tools/objects/spectral-units.oracle.test.mts` |
+| Astropy ICRS geometry, NumPy vectors | The declared circular hosted-orbit contract: sky frames, phase/state vectors, and the synchronous body orientation derived from them (not physical ephemeris accuracy) | `astronomy/hosted-orbit.py` | `tests/objects/hosted-orbits/hosted-orbit.oracle.test.mts` |
+| SpiceyPy (CSPICE N0067) | Eccentric hosted-orbit position and velocity, including a sourced TRAPPIST-1f convention conversion; both implementations receive the same representable BMJD_TDB timestamp | `astronomy/hosted-eccentric.py` | `tests/objects/hosted-orbits/hosted-eccentric.oracle.test.mts` |
+| Astropy blackbody, constants and units | Frequency-form Planck intensity and brightness-temperature inversion used by ALMA preparation, plus the HST flux-density-to-Rayleigh conversion | `physical-units/spectral.py` | `tests/objects/units/spectral-units.oracle.test.mts` |
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `eclipse-map/theresa-eigenbasis.py` | `tests/objects/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | NumPy, Astropy, following pinned ThERESA source | Eclipse-map harmonic normalization and signs, weighted linear fit and posterior covariance, Planck radiance and single/band brightness temperatures | `eclipse-map/numerics.py` | `tests/objects/eclipse-map/numerics.oracle.test.mts` |
 | [Native SBMT](sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
@@ -28,7 +28,7 @@ are older standalone audits; the groups below are fixture oracles.
 | astropy | `@cssearth/fits` `skyImageAxes` and `skyDisplayRaster`: which way RA and Dec run along columns and rows at the reference pixel (CDELT, CD, PC and CROTA2; linear and zenithal axes; SQUEEZE, hips2fits and ZIMPOL headers), the north-up east-left display raster, and refusal of rotated or skewed images | `fits/sky-orientation.py` | `tests/oracles/fits/sky-orientation.oracle.test.mts` |
 | astropy | `@cssearth/fits` `skyProjection` and `@cssearth/fits/node` `readFitsFileRegion`: pixel to ICRS and back for rotated, skewed and near-pole TAN headers, including a JWST NIRCam level-3 mosaic's WCS; refusal of SIP, TPV, SIN and FK4; one image region read from disk | `fits/sky-projection.py` | `tests/oracles/fits/sky-projection.oracle.test.mts` |
 | astropy | `packages/bake/src/objects/raster/fits/fits-table.ts`: every OIFITS column type including complex C and M, TNULL read as NaN, HIERARCH keys, and refusal of TSCAL/TZERO-scaled columns | `fits/binary-table.py` | `packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts` |
-| astropy | `color-transfer.ts` (`@cssearth/bake/objects/color`) asinh band display: every byte of `make_lupton_rgb` (Lupton et al. 2004) for colour and one-band cases | `fits/lupton-asinh.py` | `tools/objects/color-transfer.oracle.test.mts` |
+| astropy | `color-transfer.ts` (`@cssearth/bake/objects/color`) asinh band display: every byte of `make_lupton_rgb` (Lupton et al. 2004) for colour and one-band cases | `fits/lupton-asinh.py` | `tests/objects/color/color-transfer.oracle.test.mts` |
 | astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tests/oracles/fits/pallas.test.mts` |
 | astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tests/oracles/fits/synoptic.test.mts` |
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `fits/charon-leisa.py` | `observation/spectral-band-maps.test.mts` |
@@ -45,8 +45,8 @@ Five files keep their bytes because body evidence pins their SHA-256: `isis-geot
 four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`.
 
 Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
-only. Since `62cde1f331` it holds no runtime-lock or generator digest, while
-`tools/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
+only. It no longer holds a runtime-lock or generator digest, while
+`tests/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
 test runs past its restored-source skips. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
@@ -56,7 +56,7 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
 
 - A fixture is evidence. Its current envelope records oracle/interpreter
   versions, input paths and byte counts. External references name a commit in
-  their URL and record a size. `tools/contract/oracle-fixtures.test.mts`, included
+  their URL and record a size. `tests/contract/oracle-fixtures.test.mts`, included
   in `pnpm test:node`, checks tool versions, permitted input declarations and
   reference URLs. Body inputs must appear in their manifest; the shared reader
   also accepts the declared FITS, SBMT and hosted-orbit test fixtures. These checks

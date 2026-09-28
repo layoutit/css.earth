@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-6256-145-2-43",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kaluzny et al. (2013): THE CLUSTER AGES EXPERIMENT (CASE). V. ANALYSIS OF THREE ECLIPSING BINARIES IN THE GLOBULAR CLUSTER M4",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1301.2946"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/145/2/43"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013AJ....145...43K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-6256/145/2/43",
+      "label": "The Astronomical Journal 145 43"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kaluzny et al. (2013), The Astronomical Journal 145 43",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K"
+    }
+  ],
+  "publisher": "The Astronomical Journal 145 43",
+  "creators": [
+    "J. Kaluzny",
+    "I. B. Thompson",
+    "M. Rozyczka",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

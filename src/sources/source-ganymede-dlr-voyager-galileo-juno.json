@@ -1,0 +1,65 @@
+{
+  "id": "source-ganymede-dlr-voyager-galileo-juno",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "DLR_Ganymede_Voyager-Galileo-Juno_V1.0: Ganymede global mosaic from Voyager, Galileo and Juno images, 359 m",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.57780/esa-fcj5pf3"
+    },
+    {
+      "type": "ESA PSA Guest Storage Facility data set",
+      "value": "DLR_Ganymede_Voyager-Galileo-Juno_V1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.57780/esa-fcj5pf3",
+      "label": "doi:10.57780/esa-fcj5pf3"
+    },
+    {
+      "role": "archive",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/",
+      "label": "ESA PSA Guest Storage Facility"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.cosmos.esa.int/web/esdc/terms-and-conditions",
+      "label": "ESA Space Science Archive terms and conditions"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ganymede/source/manifest.json",
+      "locator": "/inputs/28"
+    },
+    {
+      "url": "https://www.cosmos.esa.int/web/psa/dlr_ganymede_voyager-galileo-juno_v1.0",
+      "checkedOn": "2026-09-28",
+      "locator": "DOI, Version History, Citation Guidelines, Associated Publication(s); no licence stated on the page"
+    }
+  ],
+  "creators": [
+    "E. Kersten, A. E. Zubarev, I. E. Nadezhdina, T. Roatsch, K.-D. Matz, C. C. Szczech (DLR)"
+  ],
+  "publisher": "European Space Agency, Planetary Science Archive",
+  "publicationDate": "2022",
+  "version": "1.0",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/DLR; Kersten, E., Zubarev, A. E., Roatsch, Th., and Matz, K.-D. (2021), Controlled Global Ganymede Mosaic from Voyager and Galileo Images, Planetary and Space Science 206, 105310, doi:10.1016/j.pss.2021.105310; European Space Agency, 2022, DLR_Ganymede_Voyager-Galileo_Juno_V1.0, 10.57780/esa-fcj5pf3",
+      "scope": "Global mosaic GeoTIFFs and previews of the data set",
+      "evidence": "https://www.cosmos.esa.int/web/psa/dlr_ganymede_voyager-galileo-juno_v1.0"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-NonCommercial 3.0 IGO (CC BY-NC 3.0 IGO), the terms for data in the ESA Space Science Archives including the PSA; commercial use needs a licence from ESA; credit is required and must not imply ESA endorsement. The data set page states no licence of its own and the DOI's DataCite record has no rights list.",
+      "scope": "All files of the data set",
+      "evidence": "https://www.cosmos.esa.int/web/esdc/terms-and-conditions"
+    }
+  ]
+}

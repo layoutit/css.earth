@@ -30,7 +30,7 @@ Full steps: CONTRIBUTING.md, "Checklist: a change that bakes or rebakes assets".
 -->
 
 - [ ] Baked the object (`pnpm prepare:objects --object=<id>`, or `pnpm prepare:volume src/objects/<id>`).
-- [ ] Published the bytes (`node tools/assets/publish-runtime-assets.mts --object=<id>`).
+- [ ] Published the bytes (`node packages/bake/cli/publish-runtime-assets.mts --object=<id>`).
 - [ ] Committed the refreshed `inventory.json`, and no baked files.
 - [ ] No R2 credentials — say so here so a maintainer publishes for you: [ ]
 
@@ -52,11 +52,11 @@ revisions. For local or reused evidence, name the tested revision and relevant
 differences, including uncommitted changes.
 Explain why reused evidence still applies and what added evidence or unusually large files support.
 Do not repeat source inventories or paste run logs here.
-For images, use GitHub attachments or repository URLs pinned to a commit.
+For images, use GitHub attachments or repository `blob/<branch>` URLs; never a commit.
 Pixelmatch is conditional on a meaningful matched reference, not required for every visual PR.
 For matched visual comparisons, link the retained inputs, Pixelmatch diff at threshold 0.1 and
 recorded settings/results required by the provenance contract.
-A relative link does not resolve in a PR body; pin repository links to a commit too.
+A relative link does not resolve in a PR body; use full `blob/main` or branch links.
 Reload the published PR and inspect every image and link; fix broken ones before handoff.
 If required visual evidence is unavailable, keep the PR in draft and say what is missing.
 -->

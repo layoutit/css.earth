@@ -166,17 +166,13 @@ The added Maryland/DARTS scopes include [lunar magnetic maps](PROPOSALS.md#p111)
 [EPOCh transit curves](PROPOSALS.md#p131). Related sources extend existing proposals
 through database joins. These are work scopes, not 131 ready datasets.
 
-The Maryland/DARTS comparison also read the Moon, Venus, Sun and 67P READMEs at
-[`93517193d218`](https://github.com/layoutit/css.earth/tree/93517193d21885d253c0590cf37b21c94330b4af).
+The Maryland/DARTS comparison also read the Moon, Venus, Sun and 67P READMEs.
 67P already uses VIRTIS derived maps, Venus already uses an Akatsuki UVI exposure,
 and the Sun has prepared magnetic and solar-band maps. Those archives alone are
 not new opportunities. The new scopes require additional measurements with
 explicit dates, calibration and coverage. Mars stays deferred.
 
-The OPUS repository baseline is
-[`f1493dccc15d`](https://github.com/layoutit/css.earth/tree/f1493dccc15df52aaf55b7c8fc1c6dcec0d1eee3).
-The earlier 95 proposals retain their comparison with
-[`60ef02395df5`](https://github.com/layoutit/css.earth/tree/60ef02395df5c466027b8a70214b09cbc1afc570).
+The earlier 95 proposals retain their earlier comparison.
 Their older Enceladus “owned elsewhere” note is historical: its infrared mosaic
 subsequently merged. The preserved repository comparison records that change.
 Nix/Hydra registration, Nix color resolution and earlier photometric blockers

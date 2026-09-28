@@ -1,6 +1,5 @@
 {
   "body": "telesto",
-  "baseline": "ebd16155a",
   "purpose": "The current unchanged main preparer reproduces the unaffected elevation dataset using its main recipe, unchanged source mesh and byte-identical elevation map. Both atlases exactly match this branch; the shadow drift predates the new imagery.",
   "recipeSha256": "f28e5f15bd74af463fbed7198303332f2665ab31d5124547476e0840620a9e8d",
   "assets": [

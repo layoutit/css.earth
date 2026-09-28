@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-dataset-ui-removal-check@1",
   "date": "2026-09-27T02:35:43.856Z",
-  "baseCommit": "47737daa41fcc2594d0a11085143d89ad75382fb",
   "scope": "Shared Dataset details markup and styles removed above this commit. Venus Surface photographs was removed in the base. No dataset inputs, controls, prepared images or inventories changed. Earlier numerical, delivery and grouping checks retain their original scope. Phone capture was taken after the layout settled and shared playback was paused.",
   "testedFiles": {
     "site/components/DatasetLenses.astro": "62a0322d210f2cdcea768c84c3d6f4f9dcc24eb109c743077a2491b526d1a4c9",

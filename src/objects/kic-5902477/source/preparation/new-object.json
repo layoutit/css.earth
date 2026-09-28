@@ -1,0 +1,56 @@
+{
+  "id": "kic-5902477",
+  "name": "KIC 5902477",
+  "system": "KIC 5902477 system",
+  "description": "A red-clump giant burning helium in its core in the Kepler field, 9.8 solar radii and 1.86 solar masses, weighed by its oscillations.",
+  "target": "KIC 5902477",
+  "gaia": "2073829361222498176",
+  "paper": {
+    "url": "https://arxiv.org/abs/2410.00102",
+    "credit": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)"
+  },
+  "radius": {
+    "value": 9.7642,
+    "source": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Radius (Mosser scale, solar radii) 9.7642 +/- 0.181",
+    "url": "https://arxiv.org/abs/2410.00102",
+    "uncertainty": 0.181
+  },
+  "mass": {
+    "value": 1.8625,
+    "source": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Mass (Mosser scale, solar masses) 1.8625 +/- 0.0764",
+    "url": "https://arxiv.org/abs/2410.00102",
+    "uncertainty": 0.0764
+  },
+  "temperature": {
+    "value": 4902,
+    "source": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): APOGEE effective temperature (K) 4902.303 +/- 46.5204",
+    "url": "https://arxiv.org/abs/2410.00102",
+    "uncertainty": 47
+  },
+  "gravity": {
+    "value": 2.7316,
+    "source": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Asteroseismic log g 2.7316 +/- 0.0041",
+    "url": "https://arxiv.org/abs/2410.00102",
+    "uncertainty": 0.0041
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "The star lies in the Galactic plane hundreds to thousands of parsecs away, where interstellar dust reddens its spectra, and the colour routes do not remove it; APOGEE measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A red-clump giant in the Kepler field, 10 times the Sun's width, weighed by its starquakes.",
+    "introduction": "Its oscillations give 1.86 solar masses and 9.8 solar radii; APOGEE spectra give 4,902 K at its surface.",
+    "locator": "table4, KIC 5902477: Mass, Radius, Teff"
+  },
+  "notes": [],
+  "order": 1867
+}

@@ -1,0 +1,59 @@
+{
+  "id": "tw-nor",
+  "name": "TW Nor",
+  "system": "TW Nor system",
+  "description": "A Cepheid in the Milky Way that pulsates every 10.79 days; its mean radius is 73 solar radii.",
+  "order": 2025,
+  "target": "TW Nor",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 73,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, TW Nor: Baade-Wesselink mean radius (solar radii) 73 +/- 6.4 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 6.4
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5000,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 183, Name='TW Nor', columns Teff, e_Teff (K): Teff 5000 +/- 204 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 204
+  },
+  "radialVelocity": {
+    "value": -56.1,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5981406000300438016 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract",
+    "uncertainty": 0.2
+  },
+  "distance": {
+    "value": 2293.8,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, TW Nor: Baade-Wesselink distance (pc) 2293.8 +/- 205.6 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 205.6
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 1.157 +/- 0.013 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 73 times the Sun's width, that swells and shrinks every 10.8 days.",
+    "introduction": "Its mean radius, 73 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,294 parsecs away.",
+    "locator": "table10, TW Nor: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

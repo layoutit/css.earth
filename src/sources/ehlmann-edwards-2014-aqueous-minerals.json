@@ -1,0 +1,32 @@
+{
+  "id": "ehlmann-edwards-2014-aqueous-minerals",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mineralogy of the Martian surface, Ehlmann and Edwards (2014)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1146/annurev-earth-060313-055024"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1146/annurev-earth-060313-055024",
+      "label": "doi:10.1146/annurev-earth-060313-055024"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/88"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

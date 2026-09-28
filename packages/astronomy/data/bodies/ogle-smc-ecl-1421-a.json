@@ -1,0 +1,30 @@
+{
+ "id": "ogle-smc-ecl-1421-a",
+ "classification": "star",
+ "order": 2000,
+ "physical": {
+  "name": "OGLE-SMC-ECL-1421 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 12313890,
+  "gravitationalParameterKm3PerS2": 360977836914.07513,
+  "parent": null,
+  "effectiveTemperatureK": 5395
+ },
+ "physicalNotes": "Radius 17.7 +/- 0.3 solar radii from Primary radius (solar radii) 17.7 +/- 0.3, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G): 12,313,890 km at 695,700 km per solar radius. Mass 2.72 +/- 0.02 solar masses from Primary mass (solar masses) 2.72 +/- 0.02, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G) (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G); GM is that mass times the JPL solar GM. Temperature 5395 +/- 99 K from Primary log Teff 3.732 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2020ApJ...904...13G): 5395 K (https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 12.094565276113734,
+  "declinationDegrees": -72.81360973303593,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 62030,
+  "properMotionRaMasPerYear": 0.5419715215224459,
+  "properMotionDecMasPerYear": -1.181638134395818,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4688970798174366464 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ogle-smc-ecl-1421-a/source/photometry/gaia-dr3-source.csv",
+   "distance": "Graczyk et al. (2020), ApJ 904, 13, the distance to OGLE-SMC-ECL-1421: 62.03 +/- 0.64 kpc (https://arxiv.org/abs/2010.08754): 62030 +/- 640 pc; Gaia DR3 parallax 0.0577 +/- 0.0521 mas (same row, RUWE 1.06), 1.1 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 0.542, -1.182 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 4688970798174366464 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204688970798174366464)"
+  }
+ }
+}

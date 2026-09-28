@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eps-eridani-disc",
+  "entries": [
+    {
+      "id": "lens-dust",
+      "subject": "ALMA band 6 continuum of project 2019.1.00696.S, December 2019: the ALMA pipeline image at the beam and in the colour map of Booth et al. (2023) Figure 1",
+      "status": "included",
+      "finding": "Booth et al. (2023) deposited no image. The archive holds the pipeline's continuum image of the same observations (CASA 5.6.1-8, beam 1.288 x 0.955 arcsec, 0.19 arcsec pixels) and its primary beam. With the star and two background sources of their Table 2 removed, multiplied by the primary beam as their figure is shown, and smoothed to their 1.6 x 1.2 arcsec beam, its noise is 16.4 microJy per beam in a 4 to 12 arcsec annulus against their 14. The ring's median is 24 microJy per beam and its brightest spots reach about 60. The figure's colour bar, decoded from the PDF in the paper's arXiv source, is matplotlib's inferno map to 0 of 255 in every channel, linear from -50.66 to 90.00 microJy per beam.",
+      "evidence": [
+        "https://arxiv.org/abs/2303.13584",
+        "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S"
+      ]
+    },
+    {
+      "id": "ring-geometry-and-depth",
+      "subject": "How the ALMA image is given depth",
+      "status": "included",
+      "finding": "The ring's ridge in this image rises above five times the per-pixel noise in only 5 of 24 azimuths, so the drawn ring takes Booth et al.'s Table 3 fit to the same observations: 69.6 au, 10.5 au FWHM, 33.7 degrees, position angle -1.1. A disc of that geometry following the image's deprojected radial profile leaves a residual of 1.50e-5 Jy per beam, against 1.68e-5 for a spherical shell and 1.73e-5 for constant depth. The height, 0.0615 of the radius, is the inclination dispersion 0.087 of the Wolff et al. (2025) DiskDyn model of this belt over the square root of two. The east side is drawn nearer, on Wolff et al.'s assumption that the belt shares planet b's orbital plane, whose orbit (Thompson et al. 2025) comes nearest the observer at position angle 96 degrees.",
+      "evidence": [
+        "https://arxiv.org/abs/2303.13584",
+        "https://arxiv.org/abs/2509.24976",
+        "https://arxiv.org/abs/2502.20561"
+      ]
+    },
+    {
+      "id": "thickness-literature",
+      "subject": "Is the belt's vertical thickness measured?",
+      "status": "included",
+      "finding": "No. Booth et al. (2023) fit a flat ring. The ARKS survey measured vertical aspect ratios only for its 13 most inclined discs (arXiv:2601.12128); at 34 degrees this belt's thickness is not resolved. The only published value is a model input: Wolff et al. (2025) Table 4, disk aspect ratio 0.087, and their radiative-transfer model's separate 1 au at 100 au.",
+      "evidence": [
+        "https://arxiv.org/abs/2601.12128",
+        "https://arxiv.org/abs/2509.24976"
+      ]
+    },
+    {
+      "id": "paper-recipe-reimaging",
+      "subject": "Re-imaging the raw visibilities with the paper's recipe",
+      "status": "deferred",
+      "finding": "The five executions (about 60 GB of raw data) need a CASA restore before imaging. Run on this Mac, even alone and throttled, it crashed the machine twice on 2026-09-27. The archive image stands in until the reduction runs on another machine.",
+      "revisitWhen": "The CASA restore and imaging of the five executions run on a machine that can hold them.",
+      "evidence": [
+        "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S"
+      ]
+    }
+  ]
+}

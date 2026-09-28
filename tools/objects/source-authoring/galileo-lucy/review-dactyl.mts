@@ -60,7 +60,6 @@ for (const item of requireArray(record.frames)) {
 }
 await writeFile(resolve(output, 'review.json'), JSON.stringify({
   schema: 'cssearth-galileo-frame-review-result@1',
-  baseCommit: record.baseCommit,
   qualifiedSurface: false, coordinates: record.coordinateConvention, frames,
   scanPlatformKernel: { segments: ck.summaries.length, frameId: -77001, referenceFrame: 'B1950', type: 3, evaluatedAttitude: false },
   limitations: ['No radiometric or geometric calibration.', 'No camera fit, surface reprojection, or registration residual is claimed.',

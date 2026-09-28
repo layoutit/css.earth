@@ -8,16 +8,10 @@
       "status": "included",
       "finding": "29 calibrated files from 8 and 19 February 2020 (stations A0-B2-D0-C1 and K0-G2-D0-J3) are public in the OiDB at calibration level 3. Averaged over beam-commuter repeats in the paper's pseudo-continuum windows they give 780 squared visibilities and 520 closure phases. A uniform-disc fit gives 42.45 mas; the paper reports 43.8 mas for this epoch. The night of 25 February (A0-G1-J2-J3) is also public but was not used by the paper and is not used here.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/source/manifest.json",
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/tools/objects/source-authoring/betelgeuse/author.mts",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/tools/objects/source-authoring/betelgeuse/author.mts",
         "https://oidb.jmmc.fr/",
         "https://arxiv.org/abs/2401.12404"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        }
       ]
     },
     {
@@ -26,16 +20,9 @@
       "status": "included",
       "finding": "The public SQUEEZE code at a pinned commit, with the paper's prior and hyperparameter, gives a near-uniform disc (maximum over median inside the disc 1.30 after the 4 mas beam) that fits the data at reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases, and looks like the paper's February 2020 panel. Three settings (entropy 10 and 1, total variation 1) agree with one another. The lens casts the entropy-10 image convolved to the 4 mas beam; the raw posterior mean is retained as a document. An earlier hand-written solver in the pilot produced a bright western limb at two to four times the median with every prior; it was an artefact of that solver and is not used. Negating every closure phase fits equally well (1.30 against 1.28) and correlates best with the image rotated by 180 degrees, so the handedness of the faint asymmetry is weakly constrained.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/e1a9f82c8707f01cb4db28ded79928ddda80ccf5/src/objects/betelgeuse/source/reference/squeeze-command.txt",
-        "https://github.com/layoutit/css.earth/blob/e1a9f82c8707f01cb4db28ded79928ddda80ccf5/tests/objects/unit/betelgeuse/reconstruction.test.mts",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/reference/squeeze-command.txt",
         "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
         "https://arxiv.org/abs/2401.12404"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "e1a9f82c8707f01cb4db28ded79928ddda80ccf5"
-        }
       ]
     },
     {
@@ -45,14 +32,7 @@
       "finding": "The ESO pipeline flags every channel above 4.001 um in the pinned files. Using the flagged channels anyway, SQUEEZE fits their squared visibilities (reduced chi-squared 1.2 with visibilities alone) but not their closure phases: 25.6 as delivered, 24.8 with every phase negated, 23.5 on a 100 mas field. The paper shows an SiO image from the same nights, so either its reduction kept channels the archive flags or its closure-phase errors were inflated. Not shipped.",
       "revisitWhen": "A reduction that keeps the SiO channels unflagged, or a stated closure-phase error model, fits them at reduced chi-squared near 1.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
         "https://arxiv.org/abs/2401.12404"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        }
       ]
     },
     {
@@ -61,21 +41,10 @@
       "status": "included",
       "finding": "The December 2018 and December 2020 MATISSE epochs are cast as lenses matisse-2018-12 and matisse-2020-12 from the 111 and 48 calibrated OiDB files of Drevon et al.'s collection, with the February 2020 recipe; neither passes the reconstruction check (see the README), so their patches are labelled unconfirmed. The ESO archive also holds raw PIONIER, GRAVITY and AMBER frames and ALMA six public projects, which each need their pipeline run first. Revisit when: a raw-pipeline epoch that passes the reconstruction check.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
         "https://archive.eso.org/",
         "https://almascience.org/",
         "https://oidb.jmmc.fr/",
         "https://arxiv.org/abs/2401.12404"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        },
-        {
-          "date": "2026-09-21",
-          "commit": "cf0e44e4cf7c565d8144e290a7737ac3761f4cfa"
-        }
       ]
     },
     {
@@ -84,14 +53,7 @@
       "status": "excluded",
       "finding": "The public V-band polarimetric product resolves the disc at about 14 pixels of 3.6 mas with a 16 mas beam: three resolution elements. The deep H-alpha products in the same collection are differential-imaging companion searches with the star subtracted. Not a surface.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        }
       ],
       "revisitWhen": "A public image of the photosphere with at least ten resolution elements across the disc."
     },
@@ -102,14 +64,8 @@
       "finding": "ALMA gives the pole position angle, 48.0 +/- 3.5 degrees, and P/sin i; the inclination is not measured. Hubble spectra (Uitenbroek et al. 1998) suggested the pole points about 20 degrees from the line of sight. The pole is placed in the plane of the sky; a measured inclination would tilt the sphere and move the photographed hemisphere's latitude.",
       "revisitWhen": "A published inclination with a stated method.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/source/preparation/rotation.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/preparation/rotation.json",
         "https://arxiv.org/abs/1711.07983"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        }
       ]
     },
     {
@@ -118,15 +74,9 @@
       "status": "included",
       "finding": "Joyce et al. (2020) 168 (+27/-15) pc is adopted; it agrees with the Hipparcos parallax (153 pc, van Leeuwen 2007) and with the interferometric radius, and differs from the radio astrometric 222 pc of Harper et al. (2017). The choice moves the physical radius by 40 percent and nothing else in the scene.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/measurements.json",
         "https://arxiv.org/abs/2006.09837",
         "https://arxiv.org/abs/1706.06020"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        }
       ]
     },
     {
@@ -135,15 +85,9 @@
       "status": "unresolved",
       "finding": "Run through image-star.mts with --calibrated on the 29 pinned files, the season merges byte-identically to the pinned continuum OIFITS and SQUEEZE fits it at reduced chi-squared 0.31 and 1.20; its patches come back from two interleaved halves (correlation 0.57, limit 0.5). Spotless twins at 0.98 to 1.02 times the fitted 43.08 mas leave patch maps at 0.49 to 0.81 of the image's strength (spot ratios 2.02 to 1.24, limit 2); the twin of 42.45 mas this lens was first checked with gave 2.73. On one half of the data, twins between 42.0 and 44.3 mas range from rms 0.03 to 0.14 against the image's 0.13, and 10 000 iterations, four chains or half-size pixels did not make a spotty twin clean. π¹ Gruis's twins stay clean over the same relative range. The lens is kept by the user's decision and its notes say the patches are not confirmed.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/docs/interferometric-imaging.md#measured-checks",
-        "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/tools/objects/interferometry/image-star.mts",
-        "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-17",
-          "commit": "03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/docs/interferometric-imaging.md#measured-checks",
+        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/interferometry/image-star.mts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
       ],
       "revisitWhen": "A reconstruction of these or more data (the public 25 February 2020 night, another recipe or another code) whose spotless twins stay clean across ±2 percent in size, or a published spotless-disc test of the MATISSE images."
     }

@@ -3,7 +3,7 @@
 // (docs/performance/motion-freezes-membership.md). Only `transform` and `opacity` may change then, plus the documented
 // paint exceptions; anything else is printed and the command exits 1.
 //
-// The page is served separately (the production build: `node tools/cli/preview.mts`, or the dev server). The fling is a
+// The page is served separately (the production build: `node site/server/preview.mts`, or the dev server). The fling is a
 // real mouse drag through the page's own input code; writes come from the same MutationObserver as `ios-capture
 // --style-writes`, so a take on the iPad and this check count the same things.
 import { writeFile } from 'node:fs/promises';

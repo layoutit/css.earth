@@ -14,15 +14,15 @@ both rings are schematic.
 
 2026-09-09: corrected acquisition instructions and recovered provenance from
 existing pins. Source and prepared output identities are unchanged; no new
-preparation or browser run. The [original prepared record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/quaoar/prepared/provenance.json) remains available.
+preparation or browser run. The original prepared record remains available.
 
-The [three-body qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/qualification.json)
-and [production browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/browser-validation.json)
-retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity). All three routes passed at DPR 1 and 2;
+The three-body qualification
+and production browser record
+retain their original build identities. All three routes passed at DPR 1 and 2;
 those captures predate the combined population build.
 
 The recorded scene has 480 body triangles and 20 retained ring tiles.
-[Ring-image check](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/ring-image-check.json) · [Inspected views](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/README.md#delivered-browser-evidence).
+Ring-image check · Inspected views.
 
 ## Known problems
 
@@ -69,6 +69,6 @@ resolved surface texture. It was not downloaded for the published numeric fit.
 Surface spectra and unresolved observations are not reconstructed surface textures.
 The oblate/triaxial and spin-period alternatives remain open.
 
-[Family source and preparation account](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/README.md).
+Family source and preparation account.
 
 </details>

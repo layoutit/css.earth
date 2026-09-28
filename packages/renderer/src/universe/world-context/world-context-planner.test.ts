@@ -612,7 +612,7 @@ test('the Solar System begins revealing context as the distance readout hands fr
 
 test('inside its authored range a system draws every member orbit, named or not, and retires beyond it', () => {
   const recorded = plan.bodies.filter(body => body.unpackaged === true);
-  expect(recorded.map(body => body.id)).toEqual(expect.arrayContaining(['s2', 's301', 's1']));
+  expect(recorded.map(body => body.id)).toEqual(expect.arrayContaining(['s29', 's301', 's1']));
   // The application gives a recorded body the tier of a planet of its host's system.
   const calculate = createWorldContextPlanner(plan, Object.fromEntries(recorded.map(body => [body.id, labelImportance('planet')]))), input = view();
   const host = plan.bodies.find(body => body.id === 'sgr-a-star')!;
@@ -718,4 +718,51 @@ test('destination orbit fading completes during approach, before the detail sele
   expect(arrived.every(body => body.opacity === 0)).toBe(true);
   input.selectedId = target.id; input.selectionPreview = undefined; input.navigationInFlight = false;
   expect(sample(.35)).toEqual(arrived);
+});
+
+// The app's own tiers from each body's classification, and the app's naming rule: of the stars beyond the Sun only one is named.
+async function namedAlphaCentauri() {
+  const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
+  const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
+  const points = [plan.focus, ...plan.bodies];
+  const priorities = Object.fromEntries(points.map(body => [body.id, labelImportance(kinds.get(body.id) ?? 'star')]));
+  const input = view();
+  for (const [index, body] of points.entries()) input.bodies[index]!.labelHidden = kinds.get(body.id) === 'star' && body.id !== 'alpha-centauri-a' && body.id !== plan.focus.id;
+  return { calculate: createWorldContextPlanner(plan, priorities), input, index: points.findIndex(body => body.id === 'alpha-centauri-a') };
+}
+
+test('a notable star beyond the Solar System is named before the Solar System comets once the label cap is full', async () => {
+  const { calculate, input, index } = await namedAlphaCentauri();
+  const frame = calculate(input), star = frame.projectedBodies.find(body => body.index === index)!;
+  expect(frame.projectedBodies.filter(body => body.labelShown).length, 'the cap is full').toBe(24);
+  expect(star.labelShown, 'Alpha Centauri A outranks the comets that filled the cap').toBe(true);
+});
+
+test('past the Local Group scale the stars give their names to the galaxies', async () => {
+  const { calculate, input } = await namedAlphaCentauri();
+  const named = (parsecs: number) => {
+    input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
+    return calculate(input).projectedBodies.filter(body => body.labelShown).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
+  };
+  expect(named(200e3), 'from 200 kpc, short of the Local Group scale, the Sun and Sgr A* keep their names').toEqual(expect.arrayContaining(['sun', 'sgr-a-star']));
+  expect(named(1e6), 'from 1 Mpc no star or planet is named').toEqual([]);
+});
+
+test('the moons of a framed planet keep their names before stars beyond the Solar System', async () => {
+  const summary = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')) as { bodies: { id: string; classification: string }[] };
+  const kinds = new Map(summary.bodies.map(body => [body.id, body.classification]));
+  const points = [plan.focus, ...plan.bodies], jupiter = plan.bodies.find(body => body.id === 'jupiter')!;
+  // Plain tiers: a moon ranks with the comets (1) and every star is named (3), so the 24-label cap is contested.
+  const calculate = createWorldContextPlanner(plan, Object.fromEntries(points.map(body => [body.id, labelImportance(kinds.get(body.id) ?? 'star')])));
+  const input = view();
+  input.viewport = { ...input.viewport, widthPixels: 900, heightPixels: 900, principalOffsetPixels: [0, 0] };
+  input.selectedId = 'jupiter';
+  // Looking past Jupiter toward the Kepler field (RA 290.7°, Dec +44.5°), where dozens of catalogued giants sit behind its moons.
+  const ra = 290.7 * Math.PI / 180, dec = 44.5 * Math.PI / 180, toward = [Math.cos(dec) * Math.cos(ra), Math.cos(dec) * Math.sin(ra), Math.sin(dec)];
+  // The rotation that turns the camera's forward axis (-z) onto that direction.
+  const axis = [toward[1]!, -toward[0]!, 0], w = 1 - toward[2]!, norm = Math.hypot(...axis, w);
+  input.world = { ...input.world, pose: { orientationXyzw: [axis[0]! / norm, axis[1]! / norm, axis[2]! / norm, w / norm],
+    positionM: [0, 1, 2].map(index => jupiter.positionM[index]! - toward[index]! * .08 * 149597870700) as [number, number, number] } };
+  const named = new Set(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!.id));
+  for (const moon of ['io', 'europa', 'ganymede', 'callisto']) expect(named.has(moon), `${moon} is named`).toBe(true);
 });

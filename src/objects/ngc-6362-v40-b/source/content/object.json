@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ngc-6362-v40-b",
+  "displayName": "NGC 6362 V40 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+          "label": "Kaluzny et al. 2015",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "5.3 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+          "url": "https://arxiv.org/abs/1508.04894",
+          "label": "Kaluzny et al. 2015",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.79 solar masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-150-5-155",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+          "label": "Kaluzny et al. 2015",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ngc-6362-v40-b-lens-color.webp",
+        "surface": "ngc-6362-v40-b-surface-color@2x.webp",
+        "poles": "ngc-6362-v40-b-poles-color@2x.webp",
+        "source": {
+          "id": "ngc-6362-v40-b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,095 K and log g 4.34 (u1 0.400, u2 0.294): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kaluzny et al. (2015AJ....150..155K)",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K",
+      "credit": "Kaluzny et al. (2015AJ....150..155K)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ngc-6362-v40-b.json",
+      "credit": "Radius from Secondary radius (solar radii) 0.997 +/- 0.013, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K); mass from Secondary mass (solar masses) 0.7947 +/- 0.0048, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K); orbit from NGC 6362 V40: P 5.2961725 d and primary-eclipse time HJD 2453915.50966 (Section II.1, after Equation (1)); i 88.22 degrees (Table 4, column V40); e 0.05054, omega 206.6 degrees (Table 4, column V40); stored +180 degrees: as published the companion would pass behind 7.3 h from the published secondary-minimum ephemeris (Eq. 1); +180 puts it within 0.01 h, and it fits the paper's Table 3 radial velocities. HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses"
+    }
+  }
+}

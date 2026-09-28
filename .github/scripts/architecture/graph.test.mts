@@ -118,6 +118,22 @@ test('template-literal dynamic imports become edges in .ts and .astro files; com
   });
 });
 
+test('a computed import typed with a literal typeof import() still reaches the graph as an edge to site/build', async () => {
+  const load = "import { pathToFileURL } from 'node:url';\nexport const load = async () => (await import(pathToFileURL('site/build/prepare/t.mts').href)";
+  await withFixture({
+    'site/build/prepare/t.mts': 'export const target = (id: string): boolean => id.length > 0;\n',
+    'tools/objects/typed.ts': `${load} as typeof import('../../site/build/prepare/t.mts')).target;\n`,
+    'tools/objects/untyped.ts': `${load} as { target(id: string): boolean }).target;\n`,
+  }, async root => {
+    const graph = await buildImportGraph(root, { details: false });
+    assert.deepEqual(targets(graph, 'tools/objects/typed.ts'), ['site/build/prepare/t.mts'], 'the typeof import() names the file the computed import loads');
+    assert.deepEqual(targets(graph, 'tools/objects/untyped.ts'), [], 'a hand-written interface hides the edge');
+    assert.deepEqual(evaluateRules(graph).get('nothing-imports-applications')?.filter(item => item.from.startsWith('tools/')),
+      [{ from: 'tools/objects/typed.ts', to: 'site/build/prepare/t.mts' }],
+      'so the tools -> site/build edge is held to the application rule and its baseline');
+  });
+});
+
 test('a workspace import the graph cannot place stops the check instead of vanishing', async () => {
   await withFixture({ 'site/gone.mts': "import '@x/bake/gone';\n" }, async root => {
     await assert.rejects(buildImportGraph(root, { details: false }), (error: unknown) =>

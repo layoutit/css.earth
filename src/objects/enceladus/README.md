@@ -16,6 +16,8 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 - Infrared color: [NASA PIA24027](https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/), the published Robidel (2020) infrared / Bland (2018) visible-camera composite.
 
+- Geology: [Crow-Willard and Pappalardo (2015)](https://doi.org/10.1002/2015JE004818), the global geologic map units served as GIS by [NASA Solar System Treks](https://trek.nasa.gov/enceladus/).
+
 - Ice absorption and Infrared ratio use six calibrated VIMS observations with matched navigation backplanes. The [source interpretation](source/vims-chemistry/INTERPRETATION.md) defines every channel, coordinate, mask, overlap rule and scientific limit.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
@@ -72,7 +74,7 @@ recorded in the investigation ledger.
 
 ### Delivery checks for this view
 
-The 2026-09-27 checks used `b33089487811511e7015aa5a629e692f4a328e2d`
+The 2026-09-27 checks used
 plus this PR's Enceladus source, recipe, reader text and inventory changes.
 [Desktop](evidence/infrared-mosaic/globe.png) and
 [south-polar](evidence/infrared-mosaic/south-pole.png) captures show the delivered
@@ -101,6 +103,76 @@ this is the texture body size, not the full page transfer. No full-site build
 was run. The all-object sprite preparation encountered an unrelated missing
 Moon texture; it had already generated the Enceladus sprite.
 
+## Geologic map
+
+**Geology** shows the interpreted units of
+[Crow-Willard and Pappalardo (2015)](https://doi.org/10.1002/2015JE004818),
+mapped on the April 2010 Cassini camera mosaic. NASA Solar System Treks serves the
+map as the GIS layer
+[Cassini ISS Geologic Map Units, Global](https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer)
+(created 2023-09-29). Trek's file download answered "Access denied" on 2026-09-27,
+so we keep the layer's public ArcGIS query response: 13 polygon records, one per
+unit, with the layer description that holds the unit colors. Both are in
+`source/geology/`. The paper page returned HTTP 403 to our requests, so its
+figure colors were not compared with the GIS colors.
+
+The layer uses a Plate Carrée grid in metres on a 252.1 km sphere, central
+meridian 180°, east-positive longitude. We rasterize each polygon at pixel
+centres into a 2048 × 1024 grid in that same frame (about 0.77 km per cell at
+the equator; the source vertices are 2–16 km apart). Holes are kept. The published
+polygons nest without holes (see Known problems), so where units overlap the
+smallest unit covering the cell takes it; cells no unit covers stay gray. Unit names and colors are the layer's own; only the first letter is
+capitalised. LH and TH are the leading- and trailing-hemisphere terrains. The
+colors mark map units, not surface color or composition.
+
+| Unit | Color | Mapped km² | Shown km² |
+| --- | --- | ---: | ---: |
+| LH curvilinear material | `#df73ff` | 131,902 | 131,808 |
+| LH smooth material | `#2f5b00` | 26,411 | 26,411 |
+| TH curvilinear material | `#9700b4` | 38,448 | 38,388 |
+| Central LH | `#005ce6` | 44,142 | 43,233 |
+| Central south polar material | `#bee8ff` | 49,086 | 49,060 |
+| Equatorial cratered plains | `#d7c29e` | 33,475 | 33,475 |
+| Heavily cratered plains | `#d7c29e` | 293,585 | 267,563 |
+| Northern lineated material | `#ffff73` | 8,544 | 8,544 |
+| Ridged material | `#e60000` | 25,411 | 25,411 |
+| Southern curvilinear material | `#4c0073` | 45,134 | 45,134 |
+| Striated plains | `#e8beff` | 33,839 | 33,808 |
+| Subdued cratered plains | `#ffebaf` | 26,629 | 17,223 |
+| Transitional material | `#e9ffbe` | 78,078 | 78,016 |
+
+Areas are on the 252.1 km sphere; the whole sphere is 798,648 km².
+Gray covers 0.072% of the sphere, all unmapped slivers; no overlap is left
+unresolved.
+
+**Registration.** The central LH unit is centred near 271° E (89° W), the
+leading-hemisphere apex, so longitudes are east-positive with no flip. Every
+named tiger stripe (Alexandria, Baghdad, Cairo, Camphor, Damascus Sulci) falls in
+central south polar material, Cufa Dorsa and Ebony Dorsum in ridged material,
+Sarandib Planitia in striated plains and Sind Sulci in central LH. Drawn over
+the Schenk 2024 mosaic, the unit edges follow the cratered and tectonized
+contacts with no visible shift. This is a visual check, not a measured offset;
+the map was drawn on an older mosaic with a different control solution.
+
+Reproduce the grid from the repository root with the mapped-science Python
+environment:
+
+    python packages/bake/src/objects/acquisition/geology-grid.py src/objects/enceladus/source/geology/prepare-grid.json
+
+**Known problems.**
+
+- The heavily cratered plains polygon has no holes where subdued cratered plains
+  and northern lineated material sit (15–105° E, 30–76° N), and northern lineated
+  material lies inside subdued cratered plains. The smallest covering unit is
+  shown, so both appear. Trek's own rendering also draws subdued cratered plains
+  over heavily cratered plains, but it hides northern lineated material; this map
+  shows it. The rule is opt-in (`nestedUnits: "inner"` in
+  `source/geology/prepare-grid.json`); other geology grids keep overlaps gray.
+- Equatorial and heavily cratered plains share one color (`#d7c29e`) in the
+  layer, so their shared boundary is invisible.
+- The companion line layer (ridges, troughs, scarps, contacts) is not shown.
+- No browser check has been made yet.
+
 ## Evidence
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
@@ -109,10 +181,10 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 16098 × 8049 | 8.31 → 12.18 MB |
 
-Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/enceladus/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 The [browser comparison](evidence/native-source-sampling.png) uses identical camera
-coordinates at 4× zoom, Shadows off, Chromium at DPR 1, on revision `3dc424757`.
+coordinates at 4× zoom, Shadows off, Chromium at DPR 1.
 It separates the previous quality-90 image, the same intermediate-map sampling
 encoded at quality 95, and native-grid sampling at quality 95. The native result
 retains finer fracture detail; some improvement also comes from encoding quality.
@@ -121,7 +193,7 @@ not scientific registration accuracy or full browser conformance.
 
 A fresh [Pixelmatch comparison](evidence/native-pixelmatch/comparison.png) uses
 Chrome 153.0.8010.12, 1280 × 720, DPR 1 and an unchanged 520 × 480 crop. It runs
-on the merge of `e0487eff5` with main `c13f3643b`, whose renderer and scene are
+on the merge, whose renderer and scene are
 retained. [Capture settings and byte pins](evidence/native-pixelmatch/capture.json)
 identify the exact previous-main atlas and the encoding-only control.
 
@@ -141,7 +213,7 @@ The four input crops and three diffs are retained beside their reports. Reproduc
 a comparison with `node labs/investigations/compare-visual-evidence.mts <reference.png>
 <result.png> <diff.png> <report.json>` from the repository root.
 
-- The formal pinned Python environment reproduced the exact ZIP hash (see [docs/moons/b2-preparation/enceladus-dsk-reproduction.json](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/enceladus-dsk-reproduction.json)).
+- The formal pinned Python environment reproduced the exact ZIP hash (see docs/moons/b2-preparation/enceladus-dsk-reproduction.json).
 
 - The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound.
 

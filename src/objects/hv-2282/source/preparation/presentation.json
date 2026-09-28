@@ -1,0 +1,8 @@
+{
+  "schema": "cssearth-css-presentation-profile@1",
+  "namespace": "hv-2282",
+  "mode": "emissive",
+  "lightCurve": {
+    "model": "photometry/gaia-dr3-vari-cepheid.csv"
+  }
+}

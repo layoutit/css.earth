@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "yz-aur",
+  "angularDiameterMas": 0.23,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 72,144,090 km at 4245.20 pc = 0.23 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 4245.2,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, YZ Aur: Baade-Wesselink distance (pc) 4245.2 +/- 428.5 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 4245.2 +/- 428.5 pc; Gaia DR3 parallax 0.1932 +/- 0.0156 mas (same row, RUWE 0.99), 12.4 standard errors, is not used",
+  "radiusKm": 72144090,
+  "radiusSource": "Radius 103.7 +/- 10.7 solar radii from Groenewegen (2013), A&A 550, A70, table10, YZ Aur: Baade-Wesselink mean radius (solar radii) 103.7 +/- 10.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 72,144,090 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5125 +/- 243 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 286, Name='YZ Aur', columns Teff, e_Teff (K): Teff 5125 +/- 243 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5125,
+  "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 286, Name='YZ Aur', columns Teff, e_Teff (K): Teff 5125 +/- 243 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
+  "surfaceGravityLogg": 0.82,
+  "surfaceGravitySource": "log g 0.82 from 2011AJ....142..136L; the 2 published values span log g 0.82 to 1.059, across which the limb law changes by at most 0.4% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2011AJ....142..136L)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

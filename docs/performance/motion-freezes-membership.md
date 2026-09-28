@@ -50,12 +50,21 @@ gesture.
   over 25 ms the pacer waits a frame and halves the slice. Leaf-box steps use it and hold during any motion, because a
   resized leaf repaints.
 
+## Mesh detail survives input reversals
+
+Once a mesh is presented, its geometry and material demand remain resident throughout driven motion and its coast.
+Crossing the distant billboard threshold must not hide the scene or reset its prepared reveal groups during that
+motion: a quick reversal would recreate the same composited leaves repeatedly. Proxy opacity still follows projected
+size. When the shared motion signal becomes inactive, the camera publishes the current level once and retires detail
+if it is still distant. A cold distant mount does not activate detail merely because the camera is moving, and a mesh
+without committed material still cannot reveal.
+
 ## Hidden stays out of compositing
 
 Opacity 0 does not free a layer. A hidden element is `display:none`, or `visibility:hidden` without `will-change`:
 
 - #750: 735 of 753 hidden world markers cost nothing only because they drop `will-change`.
-- 6579cd4e2c: cutaways needed `display:none` to take the iPhone Earth page from 1,049 to 477 layers.
+-: cutaways needed `display:none` to take the iPhone Earth page from 1,049 to 477 layers.
 
 A coast may fade an element to 0. The pacer retires it once the coast stops.
 
@@ -93,6 +102,15 @@ navigation readiness gate releases them. Busy status uses ARIA, without a cosmet
 A newly prepared detail tree receives its initial material, selection and camera values before its roots connect to
 the stage. Connection does not mean ready: the existing paced texture activation and paint gate still precede the
 billboard handoff. An adopted server-rendered tree is already connected and keeps its existing ownership.
+
+Initial mounts and fly-to preparation select texture levels from the destination camera. There is no forced 512px
+startup bank or first-input refinement gate. Saved reloads prepare the shared world before mounting detail, even
+when their camera cannot use the default arrival billboard; world attachment must not restyle a finished surface.
+
+World bodies use their prepared arrival billboard directly, with its baked body radius inside the image. There is no
+world marker atlas or separate context photograph swap. Unresolved bodies use colour dots without fetching images;
+menu and search icons remain UI assets. A mounting scene keeps its camera private until its frame presenter is enabled,
+so resource refreshes cannot expose it before activation.
 
 Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.
 

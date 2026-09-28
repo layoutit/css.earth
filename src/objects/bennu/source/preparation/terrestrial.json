@@ -209,6 +209,296 @@
           "method": "closest-source-point",
           "maximumDistanceMeters": 10
         }
+      },
+      {
+        "id": "gravity-anomaly",
+        "label": "Gravity anomaly",
+        "consumer": "gravity-anomaly",
+        "path": "science/gravity/RSWG_bouguer_map_shape_Oct2021.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/g_03170mm_spc_obj_0000n00000_v042.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "table": {
+          "format": "pds4-fits",
+          "expectedRows": 196608,
+          "maximumCentroidErrorMeters": 0.001,
+          "meshFile": "g_03170mm_spc_obj_0000n00000_v042.obj",
+          "field": "NORMALIZED GRAVITY ANOMALY",
+          "units": "none",
+          "labelPath": "science/gravity/RSWG_bouguer_map_shape_Oct2021.xml",
+          "target": "Bennu",
+          "facetField": "FACET NUMBER",
+          "facetNumberBase": 1,
+          "radiusUnits": "KM",
+          "withoutSigma": true,
+          "labelNames": {
+            "FACET NUMBER": "FACET_NUM",
+            "NORMALIZED GRAVITY ANOMALY": "Normalized Gravity Anomaly"
+          }
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 10
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "valueTransform": {
+          "scale": 100,
+          "offset": 0
+        },
+        "minimum": -3.5,
+        "maximum": 3.5,
+        "colors": [
+          "#2c5d9e",
+          "#8fb7d6",
+          "#f2efe6",
+          "#e8a36b",
+          "#b33a2c"
+        ]
+      },
+      {
+        "id": "slope",
+        "label": "Slope",
+        "consumer": "slope",
+        "path": "science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 396294,
+          "expectedFaces": 786432
+        },
+        "table": {
+          "format": "pds4-fits",
+          "expectedRows": 786432,
+          "maximumCentroidErrorMeters": 0.001,
+          "meshFile": "g_01680mm_alt_obj_0000n00000_v020.obj",
+          "field": "SLOPE",
+          "units": "DEGREES",
+          "labelPath": "science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits.xml",
+          "target": "101955 BENNU",
+          "headerMeshFile": "shape3.obj"
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 10
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 0,
+        "maximum": 80,
+        "colors": [
+          "#20204b",
+          "#2d75b9",
+          "#4ebba7",
+          "#f1c45c",
+          "#cc543d"
+        ]
+      },
+      {
+        "id": "geopotential",
+        "label": "Geopotential height",
+        "consumer": "geopotential",
+        "path": "science/altimetry/g_01680mm_alt_elv_0000n00000_v020.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 396294,
+          "expectedFaces": 786432
+        },
+        "table": {
+          "format": "pds4-fits",
+          "expectedRows": 786432,
+          "maximumCentroidErrorMeters": 0.001,
+          "meshFile": "g_01680mm_alt_obj_0000n00000_v020.obj",
+          "field": "ELEVATION",
+          "units": "METERS",
+          "labelPath": "science/altimetry/g_01680mm_alt_elv_0000n00000_v020.fits.xml",
+          "target": "101955 BENNU",
+          "headerMeshFile": "shape3.obj"
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 10
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 0,
+        "maximum": 90,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ]
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "consumer": "thermal-inertia",
+        "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/g_06330mm_spo_obj_0000n00000_v034.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 25350,
+          "expectedFaces": 49152
+        },
+        "table": {
+          "format": "pds4-fits",
+          "expectedRows": 49152,
+          "maximumCentroidErrorMeters": 0.001,
+          "meshFile": "g_06330mm_spo_obj_0000n00000_v034.obj",
+          "field": "VALUE",
+          "units": "J m^-2 K^-1 s^-1/2",
+          "labelPath": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.xml",
+          "target": "101955 BENNU",
+          "productName": "thermal-inertia_anc6_ES1-7_Rozitis-etal-2020_OTES_49k.fits",
+          "labelNames": {
+            "VALUE": "THERMAL INERTIA"
+          }
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 10
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 180,
+        "maximum": 400,
+        "colors": [
+          "#18234b",
+          "#236d98",
+          "#59b59e",
+          "#d6d879",
+          "#f19a46",
+          "#b92b35"
+        ]
+      },
+      {
+        "id": "hydration",
+        "label": "2.7 µm band depth",
+        "consumer": "hydration",
+        "path": "science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "table": {
+          "format": "pds4-fits",
+          "expectedRows": 196608,
+          "maximumCentroidErrorMeters": 0.001,
+          "meshFile": "g_03170mm_spc_obj_0000n00000_v020.obj",
+          "field": "VALUE",
+          "units": "BAND_DEPTH",
+          "sigmaUnits": "SIGMA_UNITS",
+          "labelPath": "science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml",
+          "target": "101955 BENNU",
+          "productName": "g_3170mm_SP_OVIRS_OH2700nm_EQ3_wavc_20190607_hk.fits",
+          "labelRecords": 49152,
+          "labelNames": {
+            "VALUE": "BAND DEPTH"
+          },
+          "missingValue": -9999
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 10
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "valueTransform": {
+          "scale": 100,
+          "offset": 0
+        },
+        "minimum": 11.8,
+        "maximum": 15.9,
+        "colors": [
+          "#f4f1ea",
+          "#9ec6de",
+          "#2f6fae",
+          "#16305f"
+        ]
+      },
+      {
+        "id": "carbon",
+        "label": "3.4 µm band area",
+        "consumer": "carbon",
+        "path": "science/spectral/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "table": {
+          "format": "pds4-fits",
+          "expectedRows": 196608,
+          "maximumCentroidErrorMeters": 0.001,
+          "meshFile": "g_03170mm_spc_obj_0000n00000_v020.obj",
+          "field": "VALUE",
+          "units": "VALUE",
+          "sigmaUnits": "SIGMA_UNITS",
+          "labelPath": "science/spectral/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.xml",
+          "target": "101955 BENNU",
+          "productName": "g_3170mm_SP_OVIRS_BandArea3200to3600nm_EQ3_wavc_20190612_hk.fits",
+          "labelRecords": 49152,
+          "labelNames": {
+            "VALUE": "BAND AREA"
+          },
+          "missingValue": -9999
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 10
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 0.28,
+        "maximum": 0.7,
+        "colors": [
+          "#2b4c9b",
+          "#8fb8d8",
+          "#f0e6cf",
+          "#e58e5a",
+          "#b0302b"
+        ]
       }
     ],
     "observedColors": []
@@ -247,7 +537,91 @@
         "regularize": true,
         "prune": true
       }
-    }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "lensId": "gravity-anomaly",
+        "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "faceBudget": 850,
+        "texelsPerFace": 16384,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 800,
+          "maximumErrorMeters": 10,
+          "regularize": true
+        }
+      },
+      {
+        "lensId": "slope",
+        "additionalLensIds": [
+          "geopotential"
+        ],
+        "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 396294,
+          "expectedFaces": 786432
+        },
+        "faceBudget": 850,
+        "texelsPerFace": 16384,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 800,
+          "maximumErrorMeters": 11,
+          "regularize": true
+        }
+      },
+      {
+        "lensId": "thermal-inertia",
+        "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 25350,
+          "expectedFaces": 49152
+        },
+        "faceBudget": 850,
+        "texelsPerFace": 16384,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 800,
+          "maximumErrorMeters": 10,
+          "regularize": true
+        }
+      },
+      {
+        "lensId": "hydration",
+        "additionalLensIds": [
+          "carbon"
+        ],
+        "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "faceBudget": 850,
+        "texelsPerFace": 16384,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 800,
+          "maximumErrorMeters": 10,
+          "regularize": true
+        }
+      }
+    ]
   },
   "celestial": {
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"

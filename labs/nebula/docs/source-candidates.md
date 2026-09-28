@@ -62,13 +62,13 @@ actual tested result, source receipts, camera checks and unresolved limitations.
 
 ## Historical intake checks
 
-The original source-intake revision `47c459707` passed native source pins/dimensions, strict
+The original source-intake passed native source pins/dimensions, strict
 lab TypeScript, 15 affected unit tests, and real-browser decoding/switching of all
 18 images. Browser checks also cover source/paper display, unchanged camera,
 alignment-only routing and absence of processing requests. Ordinary SIN rays
 match independent Astropy 6.0.1/WCSLIB fixtures. The curation follow-up changes no
 source bytes or accepted transform, so those numerical checks still apply.
-The historical curation revision `6096f65da` checked a 4/1/3 selection.
+The historical curation checked a 4/1/3 selection.
 The subsequent correction restored all six Crab views (4/6/3 overall). Strict lab
 TypeScript, six affected unit tests and the source-candidate browser flow passed:
 registration evidence and per-image status are preserved, excluded images are

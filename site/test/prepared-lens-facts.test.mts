@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { loadObjectContent } from './load-object-content.mts';
-import { prepareObjectContent } from '#preparation/content/prepare';
+import { prepareObjectContent } from '../build/content/prepare.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { ObjectContentSource } from '@cssearth/bake/objects/content';
 

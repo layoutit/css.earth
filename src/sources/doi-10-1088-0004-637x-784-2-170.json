@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-784-2-170",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Xue et al. (2014): THE SEGUE K GIANT SURVEY. II. A CATALOG OF DISTANCE DETERMINATIONS FOR THE SEGUE K GIANTS IN THE GALACTIC HALO",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1211.0549"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/784/2/170"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014ApJ...784..170X"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784..170X",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/784/2/170",
+      "label": "The Astrophysical Journal 784 170"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784..170X",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Xue et al. (2014), The Astrophysical Journal 784 170",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784..170X"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 784 170",
+  "creators": [
+    "Xiang-Xiang Xue",
+    "Zhibo Ma",
+    "Hans-Walter Rix",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

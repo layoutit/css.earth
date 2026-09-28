@@ -1,0 +1,28 @@
+{
+  "sourceRecords": {
+    "crater rim": 9224
+  },
+  "width": 2880,
+  "height": 1440,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 3926481,
+  "categories": [
+    {
+      "value": "crater rim",
+      "label": "Catalogued crater rim",
+      "color": "#73dfff"
+    }
+  ],
+  "output": "phobos-crater-rims.tif",
+  "sha256": "cda541d17e7b27d2209923e47f9a0695bcc270ff77e40d4fb21b9afdee1082af",
+  "transform": [
+    24.172810140121463,
+    0.0,
+    -34808.84660177491,
+    0.0,
+    -24.172810140121463,
+    17404.423300887454
+  ],
+  "radiusMeters": 11080,
+  "policy": "Every cell the catalogued circle (centre and published angular radius) crosses, and the cell holding its centre; cells holding two categories withheld; source edges clipped by global raster extent."
+}

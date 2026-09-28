@@ -58,7 +58,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.35 × 10¹² ± 9.94 × 10¹⁰ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Ostro et al. 2006",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/0/fields/MASS_KG; /masses/rows/0/fields/MASS_KG_UNC; /masses/rows/0/fields/BINARY_NOTE; /masses/rows/0/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "1.97 ± 0.24 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Ostro et al. 2006",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/0/fields/BULK_DENSITY; /masses/rows/0/fields/BULK_DENSITY_UNC; /masses/rows/0/fields/SIZE_REF_CODE; /masses/rows/0/fields/MASS_REF"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

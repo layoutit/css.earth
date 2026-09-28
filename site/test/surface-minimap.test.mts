@@ -7,7 +7,7 @@ import type { SurfaceAxes } from '../minimap/surface-minimap-math.mts';
 import { required, position } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { cesiumMinimapExcerpts } from '../../tools/prepare/prepare-cesium-minimap.mts';
+import { cesiumMinimapExcerpts } from '@cssearth/bake/site-assets';
 import { directionOnMap, mapDirection, orbitMapCamera } from '../minimap/surface-minimap-math.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import Camera from '@cesium/engine/Source/Scene/Camera.js';

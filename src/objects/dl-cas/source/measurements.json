@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "dl-cas",
+  "angularDiameterMas": 0.31,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 42,228,990 km at 1845.10 pc = 0.31 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 1845.1,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, DL Cas: Baade-Wesselink distance (pc) 1845.1 +/- 182.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1845.1 +/- 182.6 pc; Gaia DR3 parallax 0.5528 +/- 0.0274 mas (same row, RUWE 1.88), 20.2 standard errors, is not used",
+  "radiusKm": 42228990,
+  "radiusSource": "Radius 60.7 +/- 6 solar radii from Groenewegen (2013), A&A 550, A70, table10, DL Cas: Baade-Wesselink mean radius (solar radii) 60.7 +/- 6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 42,228,990 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5500 +/- 177 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 69, Name='DL Cas', columns Teff, e_Teff (K): Teff 5500 +/- 177 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5500,
+  "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 69, Name='DL Cas', columns Teff, e_Teff (K): Teff 5500 +/- 177 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
+  "surfaceGravityLogg": 1.17,
+  "surfaceGravitySource": "log g 1.17 from 2024A&A...690A.246T; the 4 published values span log g 1.17 to 1.7, across which the limb law changes by at most 0.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

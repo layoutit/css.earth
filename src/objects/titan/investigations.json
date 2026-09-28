@@ -8,15 +8,8 @@
       "status": "included",
       "finding": "Selected 32-pixels-per-degree ISS mosaic supplies Near-infrared; exact zero is missing while dark dunes and lakes remain observed.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://doi.org/10.5066/P14FAEKS"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -25,15 +18,8 @@
       "status": "included",
       "finding": "Paired MIDR products supply Radar; mapped backscatter is not visible-light color.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -42,15 +28,8 @@
       "status": "included",
       "finding": "GTIED products supply measured Topography on the stated reference surface and retain missing regions.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -59,15 +38,8 @@
       "status": "included",
       "finding": "GTDED products supply Interpolated topography as its own quantity rather than filling measured-height gaps.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -76,15 +48,8 @@
       "status": "included",
       "finding": "GTFED products supply Coverage distance, preserving its diagnostic meaning instead of treating it as terrain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -93,33 +58,21 @@
       "status": "included",
       "finding": "Mendeley geomorphology data supplies categorical Geology; source classes are not observation pixels or elevation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://doi.org/10.17632/f6jrtyfp66.2"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
       "id": "vims-iss-2019-composite",
       "subject": "2019 VIMS/ISS enhanced-color composite",
       "status": "unresolved",
-      "finding": "The candidate fills missing VIMS color and removes seams without a validity mask, so observed coverage cannot be established.",
+      "finding": "The candidate fills missing VIMS color and removes seams without a validity mask, so observed coverage cannot be established. Rechecked 2026-09-27: its float bands are VIMS ratios blended with the 938 nm ISS mosaic ('1.59/1.27 μm + 938 nm'), still without a mask. Its VIMS input is now shown on its own (vims-le-mouelic-2019-*), with gaps kept.",
       "revisitWhen": "A validity mask and registration distinguish observed VIMS pixels from fills.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
-        "https://data.caltech.edu/records/8q9an-yt176"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
+        "https://data.caltech.edu/records/8q9an-yt176",
+        "https://data.caltech.edu/records/8q9an-yt176/files/Titan_VIMS-ISS.hdr"
       ]
     },
     {
@@ -129,15 +82,8 @@
       "finding": "They remain research evidence but are not rendered after selection of retained GTDR products.",
       "revisitWhen": "A source review establishes a distinct mapped quantity with preserved values and coverage.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/titan/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/titan/source/manifest.json",
         "https://data.astro.cornell.edu/RADAR/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -149,12 +95,74 @@
         "https://doi.org/10.5066/P14FAEKS",
         "https://ui.adsabs.harvard.edu/abs/2018DPS....5021602K/abstract"
       ],
-      "revisitWhen": "A published centre-to-limb law for Titan's disc at 938 nm with its fitted emission range, or a radiative-transfer limb profile the preparation can read.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
+      "revisitWhen": "A published centre-to-limb law for Titan's disc at 938 nm with its fitted emission range, or a radiative-transfer limb profile the preparation can read."
+    },
+    {
+      "id": "vims-le-mouelic-2019-2um",
+      "subject": "Le Mouélic et al. (2019) VIMS global mosaic at 2 µm, 32 px/deg (Trek Titan_global_32ppd_2microns_v2)",
+      "status": "included",
+      "finding": "Selected for the VIMS infrared 2 µm lens as a display image: 8-bit levels with no published mapping to I/F. The TIFF georeference is unusable; the pixels register to the ISS mosaic with the left edge at 180 E (r 0.85 against 0.20 for the literal frame), within about 6-17 km at Selk, Sinlap, Menrva and the Xanadu margin. Exact zero is missing.",
+      "evidence": [
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_2microns_v2",
+        "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=90ee84fb-30fe-4a56-92e5-c4c3153a24b0",
+        "https://doi.org/10.1016/j.icarus.2018.09.017"
+      ]
+    },
+    {
+      "id": "vims-le-mouelic-2019-5um",
+      "subject": "Le Mouélic et al. (2019) VIMS global mosaic at 5 µm, 32 px/deg (Trek Titan_global_32ppd_5microns_v2)",
+      "status": "included",
+      "finding": "Selected for the VIMS infrared 5 µm lens as a display image in the same corrected frame as the 2 µm mosaic (r 0.74 against 0.41 literal). Kraken Mare shows the specular glint the paper describes, so northern lake shorelines cannot be registered; equatorial features agree within about 6-17 km.",
+      "evidence": [
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_5microns_v2",
+        "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=9f8686c4-d348-4b15-9364-bc37ec43fb27",
+        "https://doi.org/10.1016/j.icarus.2018.09.017"
+      ]
+    },
+    {
+      "id": "vims-le-mouelic-2019-color-ratio",
+      "subject": "Le Mouélic et al. (2019) VIMS band-ratio colour mosaic (1.59/1.27, 2.03/1.27, 1.27/1.08 µm), 32 px/deg",
+      "status": "included",
+      "finding": "Selected as a false-colour image lens: three 8-bit display bands of empirically airmass-corrected ratios, not visible colour and not numeric ratios. Same corrected frame; equatorial features agree within about 8-12 km; the polar pink is residual haze according to the paper.",
+      "evidence": [
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_ColorRatio_v2",
+        "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=7186b3f4-27a9-4219-8312-5a05808158d0",
+        "https://doi.org/10.1016/j.icarus.2018.09.017"
+      ]
+    },
+    {
+      "id": "vims-numeric-if-mosaics",
+      "subject": "Numeric I/F versions of the Le Mouélic et al. (2019) global VIMS mosaics",
+      "status": "unresolved",
+      "finding": "No numeric release found. The paper shows the maps as figures and points only to per-cube browse products on the Nantes portal; the Trek files are 8-bit display levels without scale or offset. The corrected maps come from about 19,000 cubes and empirical corrections, so rebuilding them would be our own derived product.",
+      "revisitWhen": "The producer publishes the mosaics as floating-point I/F (or ratio) grids, or states the stretch that maps each 8-bit level back to I/F.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2018.09.017",
+        "https://arxiv.org/abs/1809.06545",
+        "https://vims.univ-nantes.fr/",
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_5microns_v2"
+      ]
+    },
+    {
+      "id": "hisar-t104-usgs-351m",
+      "subject": "USGS Titan SAR + HiSAR global mosaic through T104, 351 m (Trek 'Titan Cassini SAR HiSAR Global Mosaic 351m T104')",
+      "status": "excluded",
+      "finding": "Not added. The USGS original is a preliminary 8-bit mosaic made with an unpublished logarithmic stretch, so its levels cannot be turned into sigma-0 (DN against T126 dB: r 0.73, interquartile spread 2.4-10 dB). It covers 61% of Titan against 75% for the calibrated T126 mosaic already shown as Radar, and registers to it with no measurable shift.",
+      "revisitWhen": "USGS publishes the stretch parameters or a calibrated sigma-0 version that covers ground the T126 mosaic lacks.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/titan_cassini_sar_hisar_global_mosaic_351m",
+        "https://planetarymaps.usgs.gov/mosaic/Titan_SAR_HiSAR_MosaicThru_T104_Jan2015_clon180_128ppd.tif",
+        "https://hdl.handle.net/1813/116147"
+      ]
+    },
+    {
+      "id": "cassini-radar-midr-128ppd",
+      "subject": "Cassini RADAR MIDR S00 through T126 at 128 px/deg (351 m, MIBEH tiles)",
+      "status": "deferred",
+      "finding": "The calibrated 351 m successor of the T104 mosaic exists at Cornell with the same DN-to-dB scaling as the shipped 32 px/deg Radar source. The raster lane prepares one atlas at 1.98 km per equatorial texel, coarser than the 1.4 km source already used, so the finer tiles would add no visible detail.",
+      "revisitWhen": "The raster lane supports surface texture levels finer than 32 px/deg for Titan.",
+      "evidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/"
       ]
     }
   ]

@@ -1,0 +1,32 @@
+{
+  "id": "harrison-2015-gullies",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Global documentation of gullies with MRO CTX, Harrison et al. (2015)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1016/j.icarus.2015.01.022"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2015.01.022",
+      "label": "doi:10.1016/j.icarus.2015.01.022"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/70"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

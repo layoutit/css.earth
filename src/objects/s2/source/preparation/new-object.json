@@ -1,0 +1,41 @@
+{
+  "host": "sgr-a-star",
+  "companions": [
+    {
+      "id": "s2",
+      "name": "S2",
+      "description": "A hot young star on a 16-year orbit around Sagittarius A*, the Milky Way's central black hole.",
+      "paper": {
+        "url": "https://arxiv.org/abs/2112.07478",
+        "credit": "GRAVITY Collaboration (2022), A&A 657, L12"
+      },
+      "radius": {
+        "value": 5.53,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: 5.53 (+1.77/-0.79) solar radii, model-atmosphere fit to SINFONI spectra",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "mass": {
+        "value": 13.6,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: 13.60 (+2.2/-1.8) solar masses",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "temperature": {
+        "value": 28513,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 28,513 (+2,388/-2,923) K",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "orbit": {
+        "record": true,
+        "source": "GRAVITY Collaboration (2022), A&A 657, L12, Table 1",
+        "url": "https://arxiv.org/abs/2112.07478"
+      },
+      "text": {
+        "card": "A hot young star that swings around the Milky Way's central black hole every 16 years.",
+        "introduction": "At its closest, in 2018, it passed 120 au from Sagittarius A*, four times Neptune's distance from the Sun.",
+        "locator": "Table 1: a, e and t_peri"
+      },
+      "colorReason": "S2 is observed only in the near-infrared (the SINFONI H- and K-band spectra of Habibi et al. 2017); no spectrum of it covers visible light",
+      "order": 1253
+    }
+  ]
+}

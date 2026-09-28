@@ -1,6 +1,5 @@
 {
   "checkedOn": "2026-09-13T18:18:27.394Z",
-  "baseRevision": "0b53ca718880f83180f5577d030ccfeda399ddae",
   "scope": "Full application at /dinkinesh/ with the shared shell and persistent universe; focused browser checks, not complete conformance or photographic qualification.",
   "localChanges": "The attached browser-profile and conformance test changes. Missing Helix, M2-9 and M42 banks rebuilt from their saved recipes, LMC reused, and prepare-machines refreshed. The rebuilt M2-9 descriptor and a pre-existing unrelated orbit-renderer edit were present locally; neither changes the Dinkinesh package.",
   "baseUrl": "http://127.0.0.1:4278",
@@ -144,7 +143,7 @@
   "limitations": [
     {
       "check": "dpr-1 complete conformance",
-      "result": "Fails the shared wheel-notch distance expectation: observed ratio 0.49891966917638764, expected 0.5488116360940265. The policy, wheel implementation and expectation match origin/main d63ac090; the expectation models the commanded step without the new wheel inertia. Complete DPR-2 conformance was not run after this failure; dataset interactions passed at both DPRs."
+      "result": "Fails the shared wheel-notch distance expectation: observed ratio 0.49891966917638764, expected 0.5488116360940265. The policy, wheel implementation and expectation match; the expectation models the commanded step without the new wheel inertia. Complete DPR-2 conformance was not run after this failure; dataset interactions passed at both DPRs."
     },
     {
       "check": "generic surface-features conformance",

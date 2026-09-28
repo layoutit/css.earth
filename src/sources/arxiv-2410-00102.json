@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2410-00102",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pinsonneault et al. (2024): APOKASC-3: The Third Joint Spectroscopic and Asteroseismic catalog for Evolved Stars in the Kepler Fields",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.00102"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ad9fef"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2410.00102",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ad9fef",
+      "label": "The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2410.00102",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pinsonneault et al. (2024), The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2410.00102"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series, Volume 276, Issue 2, id.69, 35 pp. (2025)",
+  "creators": [
+    "Marc H. Pinsonneault",
+    "Joel C. Zinn",
+    "Jamie Tayar",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

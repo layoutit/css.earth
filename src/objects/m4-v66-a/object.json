@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "m4-v66-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M4 V66 A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 650270.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/m4-v66-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M4 V66 A",
+      "classification": "star",
+      "color": "#fff5f5",
+      "distanceAu": 375401947.4,
+      "description": "The primary star of M4 V66, a pair that eclipse each other every 8.111 days.",
+      "systemName": "M4 V66 system",
+      "order": 1988,
+      "context": {
+        "order": 1985
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -20529815246467340000,
+        -45861112187453280000,
+        -25082975175864996000
+      ],
+      "presentationToReference": [
+        -0.365563919061262,
+        0.18248804288662382,
+        -0.9127218279870274,
+        -0.8166253666922139,
+        0.4076568971069556,
+        0.40858152762445865,
+        -0.4466385916547946,
+        -0.8947144619623284,
+        2.8799953870464925e-7
+      ],
+      "orbitUpReference": [
+        -0.18248804288662382,
+        -0.4076568971069556,
+        0.8947144619623284
+      ],
+      "metersPerUnit": 2097647.7419354836,
+      "bodyRadiusM": 650270800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

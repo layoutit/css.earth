@@ -19,7 +19,7 @@
  * One image cannot say which side of an inclined ring is nearer the observer: the tilt's sign is a stated convention
  * (`nearSide`), never a measurement. */
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
-import { skyProjection } from '@cssearth/fits';
+import { skyProjection, type FitsHeader, type SkyProjection } from '@cssearth/fits';
 
 const DEG = Math.PI / 180;
 
@@ -35,6 +35,15 @@ export interface SkyPlaneRequest {
   /** Where the image is: the SCI extension of a JWST or HST product (the default), or the primary HDU of an archive image such as an
    * ALMA pipeline product. */
   readonly imageHdu?: 'SCI' | 'primary';
+  /** Unresolved sources a paper models as points, subtracted before anything is measured: each the image's own restoring beam
+   * (BMAJ, BMIN, BPA) at the published position with the published peak, in the image's unit. */
+  readonly pointSources?: readonly { readonly raDeg: number; readonly decDeg: number; readonly peak: number }[];
+  /** The primary beam on the image's own pixels: the image is multiplied by it after the point sources are removed, which
+   * undoes a primary-beam correction, so it is shown as a publisher who shows it uncorrected does and its noise is even. */
+  readonly primaryBeam?: ArrayLike<number>;
+  /** A publisher's restoring beam to smooth the image to (full widths at half maximum, position angle east of north): the image is
+   * convolved with the gaussian that takes its own beam to that one, and rescaled to the larger beam's Jy per beam. */
+  readonly smoothTo?: { readonly majorArcsec: number; readonly minorArcsec: number; readonly positionAngleDeg: number };
 }
 export interface SkyPlane {
   readonly size: number; readonly halfUnits: number; readonly step: number;
@@ -47,6 +56,71 @@ export interface SkyPlane {
 
 const quantile = (sorted: ArrayLike<number>, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))]!;
 
+/** The image with each point source's restoring beam removed: a gaussian of the header's BMAJ and BMIN (full widths at half
+ * maximum) along BPA (east of north), peaking at the source's published peak, out to four major-axis widths. */
+export function subtractPointSources(mosaic: string, input: ArrayLike<number>, width: number, height: number, header: FitsHeader, projection: SkyProjection,
+  sources: NonNullable<SkyPlaneRequest['pointSources']>): Float64Array {
+  const bmaj = Number(header.BMAJ) * 3600, bmin = Number(header.BMIN) * 3600, bpa = Number(header.BPA) * DEG;
+  if (!(bmaj > 0 && bmin > 0 && Number.isFinite(bpa))) throw new Error(`${mosaic} states no restoring beam to subtract point sources with: BMAJ ${String(header.BMAJ)}, BMIN ${String(header.BMIN)}, BPA ${String(header.BPA)}.`);
+  const sigmaMajor = bmaj / (2 * Math.sqrt(2 * Math.LN2)), sigmaMinor = bmin / (2 * Math.sqrt(2 * Math.LN2)), values = Float64Array.from(input);
+  const reach = Math.ceil(4 * bmaj / projection.scaleArcsec);
+  for (const source of sources) {
+    const at = projection.pixelOf(source.raDeg, source.decDeg), cosDec = Math.cos(source.decDeg * DEG);
+    if (!at || !(at[0] >= 0 && at[0] < width && at[1] >= 0 && at[1] < height)) throw new RangeError(`${mosaic}: the point source at RA ${source.raDeg}, Dec ${source.decDeg} is outside the image.`);
+    for (let y = Math.max(0, Math.floor(at[1]) - reach); y <= Math.min(height - 1, Math.ceil(at[1]) + reach); y++)
+      for (let x = Math.max(0, Math.floor(at[0]) - reach); x <= Math.min(width - 1, Math.ceil(at[0]) + reach); x++) {
+        const [ra, dec] = projection.skyOf(x, y), east = (ra - source.raDeg) * cosDec * 3600, north = (dec - source.decDeg) * 3600;
+        const along = east * Math.sin(bpa) + north * Math.cos(bpa), across = east * Math.cos(bpa) - north * Math.sin(bpa);
+        values[y * width + x]! -= source.peak * Math.exp(-((along / sigmaMajor) ** 2 + (across / sigmaMinor) ** 2) / 2);
+      }
+  }
+  return values;
+}
+
+/** A beam's covariance on the sky, in square arcseconds, east and north: full widths at half maximum along and across the
+ * position angle (east of north). */
+function beamCovariance(majorArcsec: number, minorArcsec: number, positionAngleDeg: number): [number, number, number] {
+  const toSigma = 1 / (2 * Math.sqrt(2 * Math.LN2)), a = (majorArcsec * toSigma) ** 2, b = (minorArcsec * toSigma) ** 2;
+  const s = Math.sin(positionAngleDeg * DEG), c = Math.cos(positionAngleDeg * DEG);
+  return [a * s * s + b * c * c, (a - b) * s * c, a * c * c + b * s * s];
+}
+
+/** The image at a larger restoring beam: convolved with the gaussian whose covariance is the target beam's less the image's
+ * own, over the pixels that hold data (a normalised convolution, so the edge of the data is not darkened), and multiplied by
+ * the ratio of the beams' areas, since a Jy per beam of extended light grows with the beam. Pixels without data stay empty. */
+export function smoothToBeam(mosaic: string, input: ArrayLike<number>, width: number, height: number, header: FitsHeader, projection: SkyProjection,
+  target: NonNullable<SkyPlaneRequest['smoothTo']>): Float64Array {
+  const bmaj = Number(header.BMAJ) * 3600, bmin = Number(header.BMIN) * 3600, bpa = Number(header.BPA);
+  if (!(bmaj > 0 && bmin > 0 && Number.isFinite(bpa))) throw new Error(`${mosaic} states no restoring beam to smooth from: BMAJ ${String(header.BMAJ)}, BMIN ${String(header.BMIN)}, BPA ${String(header.BPA)}.`);
+  const want = beamCovariance(target.majorArcsec, target.minorArcsec, target.positionAngleDeg), have = beamCovariance(bmaj, bmin, bpa);
+  const kee = want[0] - have[0], ken = want[1] - have[1], knn = want[2] - have[2], det = kee * knn - ken * ken;
+  if (!(kee > 0 && knn > 0 && det > 0)) throw new RangeError(`${mosaic}: its beam (${bmaj.toFixed(3)} x ${bmin.toFixed(3)} arcsec at ${bpa.toFixed(1)} deg) does not fit inside the target beam (${target.majorArcsec} x ${target.minorArcsec} arcsec at ${target.positionAngleDeg} deg).`);
+  // East and north per pixel step, at the image centre.
+  const cx = (width - 1) / 2, cy = (height - 1) / 2, [ra0, dec0] = projection.skyOf(cx, cy), cosDec = Math.cos(dec0 * DEG);
+  const step = (x: number, y: number) => { const [ra, dec] = projection.skyOf(x, y); return [(ra - ra0) * cosDec * 3600, (dec - dec0) * 3600] as const; };
+  const [ex, nx] = step(cx + 1, cy), [ey, ny] = step(cx, cy + 1);
+  const iee = knn / det, ien = -ken / det, inn = kee / det;
+  const reach = Math.ceil(4 * Math.sqrt(Math.max(kee, knn)) / projection.scaleArcsec);
+  const kernel: { dx: number; dy: number; w: number }[] = [];
+  for (let dy = -reach; dy <= reach; dy++) for (let dx = -reach; dx <= reach; dx++) {
+    const e = dx * ex + dy * ey, n = dx * nx + dy * ny;
+    kernel.push({ dx, dy, w: Math.exp(-(iee * e * e + 2 * ien * e * n + inn * n * n) / 2) });
+  }
+  const gain = (target.majorArcsec * target.minorArcsec) / (bmaj * bmin), out = new Float64Array(width * height);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    if (!Number.isFinite(input[y * width + x]!)) { out[y * width + x] = NaN; continue; }
+    let sum = 0, weight = 0;
+    for (const { dx, dy, w } of kernel) {
+      const u = x + dx, v = y + dy;
+      if (u < 0 || v < 0 || u >= width || v >= height) continue;
+      const value = input[v * width + u]!;
+      if (Number.isFinite(value)) { sum += w * value; weight += w; }
+    }
+    out[y * width + x] = gain * sum / weight;
+  }
+  return out;
+}
+
 /** The mosaic about the star, on the volume's sky plane. */
 export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Promise<SkyPlane> {
   const { size, halfUnits, arcsecPerUnit } = request;
@@ -54,8 +128,15 @@ export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Pr
   const hdus = await readFitsFileHdus(mosaic), sci = request.imageHdu === 'primary' ? hdus[0] : hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
   if (!sci) throw new Error(`${mosaic} has no ${request.imageHdu === 'primary' ? 'primary HDU' : 'SCI extension'}.`);
   const [width, height] = sci.dimensions as [number, number];
-  const { values } = await readFitsFileRegion(mosaic, sci, { x0: 0, y0: 0, width, height }, 1024 ** 3);
-  const projection = skyProjection(sci.header), star = projection.pixelOf(request.starRaDeg, request.starDecDeg);
+  const read = await readFitsFileRegion(mosaic, sci, { x0: 0, y0: 0, width, height }, 1024 ** 3), projection = skyProjection(sci.header);
+  let values: ArrayLike<number> = request.pointSources?.length ? subtractPointSources(mosaic, read.values, width, height, sci.header, projection, request.pointSources) : read.values;
+  if (request.primaryBeam) {
+    const beam = request.primaryBeam;
+    if (beam.length !== width * height) throw new RangeError(`${mosaic}: the primary beam has ${beam.length} pixels, not the image's ${width} x ${height}.`);
+    values = Float64Array.from(values, (value, index) => value * beam[index]!);
+  }
+  if (request.smoothTo) values = smoothToBeam(mosaic, values, width, height, sci.header, projection, request.smoothTo);
+  const star = projection.pixelOf(request.starRaDeg, request.starDecDeg);
   if (!star) throw new Error('The star is on the far side of the tangent plane.');
   const arcsecPerPixel = projection.scaleArcsec;
   // Background and noise in the empty annulus, on the mosaic's own pixels.
@@ -322,7 +403,7 @@ export interface EnvelopeFit {
 }
 
 /** Score the candidate envelopes against the image and keep the ring, or refuse. */
-export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: { innerMaskUnits: number; outerUnits: number; nearSidePositionAngleDeg: number; heightOfRadius: number; search?: EnvelopeSearch; depthSamples?: number }): EnvelopeFit {
+export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: { innerMaskUnits: number; outerUnits: number; nearSidePositionAngleDeg: number; heightOfRadius: number; search?: EnvelopeSearch; depthSamples?: number; publishedWidthUnits?: number }): EnvelopeFit {
   const { size, halfUnits, step, plane } = sky, search = options.search ?? DEFAULT_SEARCH, depth = options.depthSamples ?? size;
   const scored: number[] = [];
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
@@ -351,7 +432,8 @@ export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: 
   if (!(options.heightOfRadius > 0)) throw new RangeError('The ring needs a stated vertical height.');
   let ring: EnvelopeFit['ring'] | undefined;
   const heightResiduals: { heightOfRadius: number; residualRms: number }[] = [];
-  const widths = range(search.widthOfRadius);
+  // A published ring brings its own radial width, which is scored as it is rather than searched.
+  const widths = options.publishedWidthUnits ? [options.publishedWidthUnits / R] : range(search.widthOfRadius);
   for (const heightOfRadius of [...new Set([options.heightOfRadius, ...search.heightOfRadius])].sort((a, b) => a - b)) {
     let bestForHeight: EnvelopeFit['ring'] | undefined;
     for (const widthOfRadius of widths) {
@@ -362,7 +444,8 @@ export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: 
     heightResiduals.push({ heightOfRadius, residualRms: bestForHeight!.residualRms });
     if (heightOfRadius === options.heightOfRadius) ring = bestForHeight;
   }
-  const ridgeMean = geometry.ridge.reduce((total, point) => total + point.radiusUnits, 0) / geometry.ridge.length;
+  // A published ring has no ridge samples; its radius is the ridge's.
+  const ridgeMean = geometry.ridge.length ? geometry.ridge.reduce((total, point) => total + point.radiusUnits, 0) / geometry.ridge.length : R;
   let shell = { radiusUnits: 0, gaussianWidthUnits: 0, residualRms: Infinity };
   for (const radiusOfRidge of range(search.shellRadiusOfRidge)) for (const widthOfRadius of range(search.shellWidthOfRadius)) {
     const radius = radiusOfRidge * ridgeMean, width = widthOfRadius * radius;
@@ -371,7 +454,7 @@ export function fitDiscEnvelope(sky: SkyPlane, geometry: RingGeometry, options: 
   }
   const flat = score(() => 1).residualRms;
   const widthOfRadius = ring!.gaussianWidthUnits / R;
-  if (widthOfRadius <= search.widthOfRadius[0] || widthOfRadius >= search.widthOfRadius[1])
+  if (!options.publishedWidthUnits && (widthOfRadius <= search.widthOfRadius[0] || widthOfRadius >= search.widthOfRadius[1]))
     throw new Error(`The ring's best width sits on the edge of the search (${widthOfRadius.toFixed(3)} of the radius), so it is not a fit.`);
   if (!(ring!.residualRms < shell.residualRms && ring!.residualRms < flat))
     throw new Error(`No inclined ring beats the alternatives (ring ${ring!.residualRms.toExponential(3)}, shell ${shell.residualRms.toExponential(3)}, constant depth ${flat.toExponential(3)}).`);

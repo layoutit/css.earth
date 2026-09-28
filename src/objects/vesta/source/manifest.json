@@ -1419,6 +1419,1038 @@
           }
         ]
       }
+    },
+    {
+      "id": "dawn-grand-vesta-hydrogen-table",
+      "path": "grand/GRD_HYDROGEN_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-HYDROGEN-MAP-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hydrogen"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hydrogen-label",
+      "path": "grand/GRD_HYDROGEN_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 16,200 fixed-width records, the Claudia Double Prime frame, micrograms/gram and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hydrogen"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-iron-counts-table",
+      "path": "grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (migrated from PDS3 DAWN-A-GRAND-5-VESTA-GAMMA-IRON-COR-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-iron-counts-label",
+      "path": "grand/GRD_IRON_CORRECTED_COUNTS_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 178,698 fixed-width records on 0.5-degree equal-area pixels, counts/s and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hydrogen",
+      "path": "grand/vesta-hydrogen.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hydrogen"
+      ],
+      "lensId": "hydrogen",
+      "label": "Hydrogen",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "stepDegrees": 2
+      },
+      "coverage": "Hydrogen abundance (micrograms per gram of regolith) on 2-degree pixels from epithermal neutrons measured in low orbit, 2011-12-08 to 2012-01-14; effective resolution about 300 km FWHM. Every pixel has a value; no per-pixel uncertainty is archived.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-iron-counts",
+      "path": "grand/vesta-iron-counts.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "iron"
+      ],
+      "lensId": "iron",
+      "label": "Iron gamma rays",
+      "falseColor": true,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "stepDegrees": 0.5
+      },
+      "coverage": "Fe 7.6 MeV gamma-ray counting rate (counts/s) corrected for neutron number density, 0.5-degree equal-area pixels expanded onto 0.5-degree cells, 2011-12-08 to 2012-04-27; effective resolution about 300 km. Not an iron weight percent.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-fast-neutrons-table",
+      "path": "grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-FAST-RESIDUAL-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "fast-neutrons"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-fast-neutrons-label",
+      "path": "grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 114 fixed-width records on quasi-equal-area pixels 20 degrees tall (10-degree polar caps), the residual fast neutron counting rate in counts/s and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "fast-neutrons"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hegr-counts-table",
+      "path": "grand/GRD_HEGR_COUNTS_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-HEGR-COUNTS-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hegr"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hegr-counts-label",
+      "path": "grand/GRD_HEGR_COUNTS_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 210 fixed-width records on quasi-equal-area pixels 15 degrees tall (7.5-degree polar caps), the corrected high-energy gamma-ray counting rate and its 1-sigma uncertainty in counts/s, samples per pixel and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hegr"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-neutron-absorption-table",
+      "path": "grand/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Download the unmodified PDS4 table (bundle urn:nasa:pds:dawn-grand-vesta, version 1.0, migrated from PDS3 DAWN-A-GRAND-5-VESTA-ABSORPTION-V1.0). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "neutron-absorption"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-table",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-neutron-absorption-label",
+      "path": "grand/GRD_NEUTRON_ABSORPTION_MAP.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.xml",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Unmodified PDS4 label, tracked. Declares 204 fixed-width records on quasi-equal-area pixels 15 degrees tall (7.5-degree polar caps), the unitless neutron absorption parameter DCP and its 1-sigma uncertainty, and the table checksum.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "neutron-absorption"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-label",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-fast-neutrons",
+      "path": "grand/vesta-fast-neutrons.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "fast-neutrons"
+      ],
+      "lensId": "fast-neutrons",
+      "label": "Fast neutrons",
+      "falseColor": true,
+      "width": 240,
+      "height": 18,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "latitudeStepDegrees": 10,
+        "longitudeStepDegrees": 1.5
+      },
+      "coverage": "Residual fast neutron counting rate (counts/s) from the GRaND +Z sensor, detrended against the epithermal neutron map (Lawrence et al. 2013); 114 quasi-equal-area pixels 20 degrees tall expanded onto 10 x 1.5 degree cells; 2011-12-09 to 2012-05-01. Relates to average atomic mass; the level carries an arbitrary offset. No per-pixel uncertainty is archived.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-hegr-counts",
+      "path": "grand/vesta-hegr-counts.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "hegr"
+      ],
+      "lensId": "hegr",
+      "label": "High-energy gamma rays",
+      "falseColor": true,
+      "width": 360,
+      "height": 24,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "latitudeStepDegrees": 7.5,
+        "longitudeStepDegrees": 1
+      },
+      "coverage": "Corrected high-energy gamma-ray counting rate (counts/s), sensitive to heavy major-element content (Peplowski et al. 2013); 210 quasi-equal-area pixels 15 degrees tall expanded onto 7.5 x 1 degree cells; 2011-12-12 to 2012-05-01; effective resolution about 300 km. The archived 1-sigma uncertainty (0.117 to 0.311 counts/s) is not drawn.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-grand-vesta-neutron-absorption",
+      "path": "grand/vesta-neutron-absorption.npy",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB",
+      "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
+      "license": "NASA PDS scientific data; retain source credit",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "neutron-absorption"
+      ],
+      "lensId": "neutron-absorption",
+      "label": "Neutron absorption",
+      "falseColor": true,
+      "width": 360,
+      "height": 24,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "Dawn Claudia; archive longitudes (Claudia Double Prime) plus 210 degrees",
+        "latitudeStepDegrees": 7.5,
+        "longitudeStepDegrees": 1
+      },
+      "coverage": "Unitless parameter DCP, linear in the macroscopic thermal neutron absorption cross section (Prettyman et al. 2013); 204 quasi-equal-area pixels 15 degrees tall expanded onto 7.5 x 1 degree cells; 2011-12-08 to 2012-01-14; effective resolution about 300 km. The label's howardite conversion to cross section is not applied; the archived 1-sigma uncertainty (0.0014 to 0.0075) is not drawn.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-shapefile",
+      "path": "geology/Vesta_Global_Yingst_HybridMap_polys24.shp",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-attributes",
+      "path": "geology/Vesta_Global_Yingst_HybridMap_polys24.dbf",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-projection",
+      "path": "geology/Vesta_Global_Yingst_HybridMap_polys24.prj",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-symbology",
+      "path": "geology/0005GeoUnits.lyr",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Extracted unmodified from Yingst_Vesta_Global_Map_2024.lpk (a 7-zip archive, Zenodo 10.5281/zenodo.19475473); tracked because the acquisition kinds do not open 7-zip.",
+      "redistribution": "Retain authors and interpretation.",
+      "consumers": [
+        "geology"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Zenodo record and file name recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "yingst-2023-geologic-units-grid",
+      "path": "geology/vesta-geologic-units.tif",
+      "origin": "https://doi.org/10.5281/zenodo.19475473",
+      "credit": "Mest, Yingst, Berman, Garry, Williams and Gregg; Yingst et al. (2023), The Planetary Science Journal 4:157, doi:10.3847/PSJ/acebe9",
+      "license": "CC BY 4.0; cite Yingst et al. (2023)",
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the shapefile using geology/prepare-grid.json; outputFrame names the Claudia central meridian (-150) for the source's Claudia Double Prime 0, so no pixel moves.",
+      "redistribution": "Retain authors and interpretation; unit colours come from the authors' ArcMap layer and are not observations.",
+      "consumers": [
+        "geology"
+      ],
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": -150,
+        "referenceRadiusMeters": 255000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "frame": "Dawn Claudia; source Claudia Double Prime central meridian 0 plus 210 degrees"
+      },
+      "coverage": "18 hybrid units in 136 polygons at pixel-centre inclusion; 2,753 cells (0.13%) have no polygon: the two southernmost rows over 1,621 columns, and one column at 30 E Claudia south of 25 S where the source polygons stop at 179.896 E (source frame).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yingst-2023-vesta-global-geologic-map-linework",
+            "role": "material",
+            "evidence": "Derived from the shapefile entries above."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accel-img",
+      "path": "gravity/JGDWN_VES20H_ACCEL_0020.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCEL_0020.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity"
+      ],
+      "lensId": "gravity",
+      "label": "Radial gravity without J2",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "How strongly Vesta pulls at each place: radial gravity on a 290 × 265 km ellipsoid close to the surface, from degrees 2 to 20 of the field without J2, its overall flattening. JPL maps radial gravity because the series does not converge on the geoid, so a true gravity anomaly cannot be computed. Milligals (mGal): 1 mGal is 0.00001 m/s², and Vesta's mean surface gravity is about 25,300 mGal. Red pulls harder and blue weaker; values beyond ±2,000 mGal (0.16% of the surface, in Vestalia Terra) use endpoint colors.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCEL_0020.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0; PDS3 product JGDWN_VES20H_ACCEL_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accel-lbl",
+      "path": "gravity/JGDWN_VES20H_ACCEL_0020.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCEL_0020.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCEL_0020.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accel_0020::1.0; PDS3 product JGDWN_VES20H_ACCEL_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accerr-img",
+      "path": "gravity/JGDWN_VES20H_ACCERR_0020.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCERR_0020.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity-uncertainty"
+      ],
+      "lensId": "gravity-uncertainty",
+      "label": "Gravity uncertainty",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "The one-sigma uncertainty of the radial gravity map at each place, mapped by JPL from the model's error covariance to degree 20. Milligals (mGal). Yellow is least certain: the error runs from 19 mGal near the equator to 169 mGal near the south pole.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_ACCERR_0020.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0; PDS3 product JGDWN_VES20H_ACCERR_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-accerr-lbl",
+      "path": "gravity/JGDWN_VES20H_ACCERR_0020.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCERR_0020.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "gravity-uncertainty"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_ACCERR_0020.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_accerr_0020::1.0; PDS3 product JGDWN_VES20H_ACCERR_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-bou-img",
+      "path": "gravity/JGDWN_VES20H_BOU_0015.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_BOU_0015.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "bouguer"
+      ],
+      "lensId": "bouguer",
+      "label": "Bouguer anomaly",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "Radial gravity minus the pull the shape of Vesta would have at one uniform density: positive means denser material below. Raymond et al. (2013) describe a large positive anomaly at Vestalia Terra, a weaker one over the central mound of Rheasilvia and another over the equatorial troughs; all three read positive here. Milligals (mGal). Red marks extra mass below and blue a deficit. Values run from −156 to +238 mGal, inside the scale.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_BOU_0015.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0; PDS3 product JGDWN_VES20H_BOU_0015.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-bou-lbl",
+      "path": "gravity/JGDWN_VES20H_BOU_0015.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_BOU_0015.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "bouguer"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_BOU_0015.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_bou_0015::1.0; PDS3 product JGDWN_VES20H_BOU_0015.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-geoid-img",
+      "path": "gravity/JGDWN_VES20H_GEOID_0020.IMG",
+      "origin": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_GEOID_0020.IMG",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "Download the unmodified image from the PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0); its bytes equal DWNVGRS_2 (the MD5 in both archives agree). Excluded from Git.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "geoid"
+      ],
+      "lensId": "geoid",
+      "label": "Geoid height",
+      "falseColor": true,
+      "width": 360,
+      "height": 181,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "coordinateType": "planetocentric",
+        "frame": "VESTA20H body frame close to Claudia Double Prime; drawn at Claudia longitude + 150 degrees (Claudia - 210)",
+        "cellCentres": "longitudes -180 to 179, latitudes 90 to -90, whole degrees",
+        "referenceEllipsoidKm": [
+          290.0,
+          290.0,
+          265.0
+        ]
+      },
+      "coverage": "Height of the geoid, the surface of equal gravity potential where a global ocean would settle, above JPL's reference ellipsoid (281.0 km equatorial radius, flattening 0.1957). Meters. Values beyond ±9,000 m (0.26% of the shown area) use endpoint colors. The gray grid covers latitudes beyond 60°, where the archive says the geoid is not valid.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/JGDWN_VES20H_GEOID_0020.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0; PDS3 product JGDWN_VES20H_GEOID_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-gravity-vesta20h-geoid-lbl",
+      "path": "gravity/JGDWN_VES20H_GEOID_0020.LBL",
+      "origin": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_GEOID_0020.LBL",
+      "credit": "JPL Dawn Gravity Science Team (A. S. Konopliv, R. S. Park, S. W. Asmar), model VESTA20H; Konopliv et al. (2014), Icarus, doi:10.1016/j.icarus.2013.09.005; Park, Konopliv, Asmar and Buccino (2025), Dawn Vesta Gravity Science Derived Data Bundle 1.0, NASA PDS Small Bodies Node, doi:10.17189/av2q-ka20",
+      "license": "NASA PDS scientific data; retain source credit",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/",
+        "https://doi.org/10.17189/av2q-ka20"
+      ],
+      "acquisition": "The producer's detached PDS3 label from DWNVGRS_2 (DAWN-A-RSS-5-VEGR-V2.0), tracked; the reader checks the data set, product, sample type, size and cell-centre extents against the recipe.",
+      "redistribution": "Scientific data with NASA/PDS and author credit",
+      "consumers": [
+        "geoid"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/JGDWN_VES20H_GEOID_0020.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dawn-gravity-vesta20h-maps",
+            "role": "material",
+            "evidence": "PDS4 product urn:nasa:pds:dawn-rss-der-vesta:maps:jgdwn_ves20h_geoid_0020::1.0; PDS3 product JGDWN_VES20H_GEOID_0020.IMG in DAWN-A-RSS-5-VEGR-V2.0"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1548,6 +2580,170 @@
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
       "acquisition": "Extracted unmodified from the released PDS zip archive beside the pinned mosaic."
+    },
+    {
+      "path": "grand/vesta-hydrogen-longitude.npy",
+      "purpose": "Claudia east longitudes of the hydrogen grid columns (1 to 359 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-hydrogen-latitude.npy",
+      "purpose": "Latitudes of the hydrogen grid rows (-89 to 89 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hydrogen-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HYDROGEN_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-iron-counts-longitude.npy",
+      "purpose": "Claudia east longitudes of the iron grid columns (0.25 to 359.75 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-iron-counts-latitude.npy",
+      "purpose": "Latitudes of the iron grid rows (-89.75 to 89.75 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-iron-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_IRON_CORRECTED_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-fast-neutrons-longitude.npy",
+      "purpose": "Claudia east longitudes of the fast neutron grid columns (0.75 to 359.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-fast-neutrons-latitude.npy",
+      "purpose": "Latitudes of the fast neutron grid rows (-85 to 85 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-fast-neutrons-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-hegr-counts-longitude.npy",
+      "purpose": "Claudia east longitudes of the high-energy gamma-ray grid columns (0.5 to 359.5 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-hegr-counts-latitude.npy",
+      "purpose": "Latitudes of the high-energy gamma-ray grid rows (-86.25 to 86.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-hegr-counts-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_HEGR_COUNTS_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-neutron-absorption-longitude.npy",
+      "purpose": "Claudia east longitudes of the neutron absorption grid columns (0.5 to 359.5 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/vesta-neutron-absorption-latitude.npy",
+      "purpose": "Latitudes of the neutron absorption grid rows (-86.25 to 86.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dawn-grand-vesta-neutron-absorption-table",
+            "role": "material",
+            "evidence": "src/objects/vesta/source/grand/GRD_NEUTRON_ABSORPTION_MAP.TAB"
+          }
+        ]
+      }
+    },
+    {
+      "path": "grand/prepare-grids.json",
+      "purpose": "Frame shift and table layout for the GRaND grids, citing the archive catalogue and coordinate document.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities."
+      }
+    },
+    {
+      "path": "geology/prepare-grid.json",
+      "purpose": "Rasterization plan: unit codes, labels and the colours read from 0005GeoUnits.lyr, and the 210-degree output frame.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities."
+      }
+    },
+    {
+      "path": "geology/vesta-geologic-units.json",
+      "purpose": "Receipt written by geology-grid.py.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated receipt of the project's rasterization."
+      }
     }
   ]
 }

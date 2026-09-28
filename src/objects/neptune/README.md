@@ -140,7 +140,7 @@ Source inspection compared the TIFF rows with the component FITS rows; all selec
 
 ### Date sequence evidence
 
-Checked on 27 September 2026 at `323a8c2f52803627462db448e52ccfa3c073363d`; subsequent changes add documentation and retained evidence only. Chrome exercised all 9 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
+Checked on 27 September 2026; subsequent changes add documentation and retained evidence only. Chrome exercised all 9 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
 
 [Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. It also retains the two examined but deferred early releases. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 

@@ -76,6 +76,11 @@
               "id": "infrared-ratio",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

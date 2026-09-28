@@ -1,5 +1,39 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "hd-219134b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.14292087 Jupiter radii from Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract): 10,217.7 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+        "https://doi.org/10.1038/s41550-017-0056",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01491363 Jupiter masses: Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+        "https://doi.org/10.1038/s41550-017-0056",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 3.092926 d (Gillon et al. 2017); a/R* 10.714 (Kokori et al. 2023); inclination 85.05 degrees (Gillon et al. 2017); e 0 (Gillon et al. 2017); transit mid-time 2457126.69913 BJD, taken as BJD_TDB (Gillon et al. 2017). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

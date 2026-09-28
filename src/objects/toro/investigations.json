@@ -8,25 +8,13 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1862.txt. Model 1862, version 2017-11-21, pole (71°, -69°), period 10.19782 h match the retained metadata. The archive diameter field is 3.5 ±0.4 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/toro/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/toro/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toro/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toro/source/reference/damit-model.json",
         "https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt",
         "https://damit.cuni.cz/projects/damit/pages/documentation",
         "https://ui.adsabs.harvard.edu/abs/2018A%26A...609A..86D"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -34,18 +22,7 @@
       "survey": "surface-imagery-11",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/toro/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toro/README.md"
       ]
     },
     {
@@ -55,18 +32,22 @@
       "finding": "Ďurech et al. (2018) and its later Toro analysis report a secular YORP term alongside the 10.19782 h reference period. The prepared display retains the selected DAMIT period with an arbitrary phase; it does not propagate that acceleration into a current attitude. This is a deliberate runtime scope decision, not a finding that YORP is absent.",
       "revisitWhen": "A source-frame phase epoch, propagation convention and validation target are selected for a time-dependent rotational attitude.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/toro/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/toro/source/reference/calibration.json",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862",
         "https://arxiv.org/abs/1711.05987",
         "https://astro.troja.mff.cuni.cz/davok/papers/yorp_AA2022.pdf",
         "https://arxiv.org/html/1711.05987"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "NEOWISE V2.0 neowise_neos.csv record 5 (Mainzer et al. 2011) diameter 3.810 ± 0.049 km (NEOWISE, NEATM) is not shown: the astronomy record takes its size from a publication (\"PDS Becker radar meshes: source-volume radii; GM unknown in Horizons.\"), and it differs from the astronomy record's mean radius 1.75 km (diameter 3.5 km).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

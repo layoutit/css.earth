@@ -25,7 +25,7 @@ README and linked source records.
 
 ## Acquisition and display
 
-The shared [GeoTIFF grid operator](../tools/objects/acquisition/geotiff-grid.mts)
+The shared [GeoTIFF grid operator](../packages/bake/src/objects/acquisition/geotiff-grid.ts)
 checks native dimensions, encoding, missing value, projection, radius, origin and
 pixel spacing. It requires bounded HTTP range responses and a stable entity tag
 or modification date. Eight workers read at most eight MiB of decoded native

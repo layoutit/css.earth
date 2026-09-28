@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "cv-mon",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CV Mon",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 28314990
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cv-mon-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CV Mon",
+      "classification": "star",
+      "color": "#ffecdd",
+      "distanceAu": 329054266.5,
+      "description": "A Cepheid in the Milky Way, 41 times the Sun's width, that swells and shrinks every 5.4 days.",
+      "systemName": "CV Mon system",
+      "order": 2004,
+      "context": {
+        "order": 2001
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -7918468493823686000,
+        48513462045679560000,
+        2631154899876333000
+      ],
+      "presentationToReference": [
+        -0.16086007026797913,
+        -0.008610398218013203,
+        0.9869396632195447,
+        0.9855288203391712,
+        0.05275265980772807,
+        0.1610903509341635,
+        0.053450744375197,
+        -0.9985704872094595,
+        9.650448818128668e-10
+      ],
+      "orbitUpReference": [
+        0.008610398218013203,
+        -0.05275265980772807,
+        0.9985704872094595
+      ],
+      "metersPerUnit": 91338677.41935484,
+      "bodyRadiusM": 28314990000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

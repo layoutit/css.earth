@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "epic-211488374",
+  "displayName": "EPIC 211488374",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "9.9 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346196",
+          "url": "https://doi.org/10.1051/0004-6361/202346196",
+          "label": "Khan et al. (2023), Astronomy & Astrophysics 677 A21",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3,015 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346196",
+          "url": "https://doi.org/10.1051/0004-6361/202346196",
+          "label": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 211488374 (K2 campaign 5): PARAM asteroseismic distance (pc) 3015.429688 (16th-84th percentiles 2957.539062-3070.625), MA09 pipeline with APOGEE DR17",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "epic-211488374-lens-color.webp",
+        "surface": "epic-211488374-surface-color@2x.webp",
+        "poles": "epic-211488374-poles-color@2x.webp",
+        "source": {
+          "id": "epic-211488374-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202346196"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,050 K and log g 2.39 (u1 0.610, u2 0.160): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Khan et al. (2023), A&A 677, A21",
+      "href": "https://doi.org/10.1051/0004-6361/202346196"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202346196",
+      "credit": "Khan et al. (2023), A&A 677, A21"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/epic-211488374.json",
+      "credit": "Khan et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -129,8 +129,5 @@
   },
   "nativeExportByteIdentical": true,
   "verification": "Independent Astropy reopen of real Telescope API outputs; no preparation code shared with the assertions.",
-  "profileCommits": [
-    "b73cf67071",
-    "111075f98c"
-  ]
+  "profileCommits": []
 }

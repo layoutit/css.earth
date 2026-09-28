@@ -182,7 +182,7 @@
         "https://pds.nasa.gov/datastandards/citing/",
         "https://doi.org/10.17189/4sq6-x165"
       ],
-      "acquisition": "Checked-in compact derived RGB map. Reproduce with tools/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
+      "acquisition": "Checked-in compact derived RGB map. Reproduce with packages/bake/src/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
       "redistribution": "Credited derived scientific visualization; authored channel display stretches are documented.",
       "consumers": [
         "surfaces"

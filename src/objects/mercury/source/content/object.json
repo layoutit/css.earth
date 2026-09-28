@@ -158,6 +158,22 @@
         "noData": true
       },
       {
+        "id": "color",
+        "label": "Color",
+        "thumbnail": "mercury-lens-color.webp",
+        "surface": "mercury-surface-color@2x.webp",
+        "source": {
+          "id": "usgs-messenger-md3-native",
+          "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m"
+        },
+        "poles": "mercury-poles-color@2x.webp",
+        "falseColor": true,
+        "filter": "USGS MESSENGER MDIS native MD3 color mosaic",
+        "view": "exterior",
+        "notes": "USGS MD3 color mosaic, edition 1 (2016), from MESSENGER's 3-color map campaign. Red, green and blue are the 1000, 750 and 430 nm filter images. Each was corrected to 30° incidence, 0° emission and 30° phase, and USGS stretched about 0–0.2 reflectance into 8 bits. Each pixel averages every image that met the scale, lighting and detector-temperature criteria. 1000 nm is beyond human vision, so these are not the colors an eye would see. Native spacing is about 665 m; the display is reduced to 4,096 pixels around the equator. Gray grid marks missing coverage, including the polar gaps.",
+        "noData": true
+      },
+      {
         "id": "enhanced",
         "label": "Enhanced",
         "thumbnail": "mercury-lens-enhanced.webp",
@@ -242,6 +258,132 @@
         ]
       },
       {
+        "id": "gravity",
+        "label": "Gravity",
+        "thumbnail": "mercury-lens-gravity.webp",
+        "surface": "mercury-surface-gravity@2x.webp",
+        "poles": "mercury-poles-gravity@2x.webp",
+        "source": {
+          "id": "trek-mercury-hgm008-gravity-anomaly",
+          "url": "https://doi.org/10.1029/2018GL081135"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Gravity anomaly",
+          "meta": "mGal at 2,440 km radius",
+          "labels": [
+            "≤−150",
+            "0",
+            "≥150"
+          ],
+          "recipe": {
+            "palette": [
+              "#344e99",
+              "#409eb5",
+              "#9bced1",
+              "#e5e2d7",
+              "#e9be80",
+              "#d67743",
+              "#a22c35"
+            ],
+            "labels": [
+              "≤−150",
+              "0",
+              "≥150"
+            ]
+          },
+          "sourceUrl": "https://doi.org/10.1029/2018GL081135"
+        },
+        "falseColor": true,
+        "qualification": "MESSENGER gravity model HgM008 (Genova et al. 2019), free-air gravity anomaly to degree 90, from the NASA Goddard grid published by NASA Mercury Trek. Values are mGal at a 2,440 km reference radius.",
+        "notes": "How much Mercury’s gravity differs from the pull of a perfectly round, evenly dense planet, at a radius of 2,440 km. Extra mass below the surface pulls harder. Milligals (mGal): 1 mGal is 0.00001 m/s², and Mercury’s surface gravity is about 370,000 mGal. Red pulls harder and blue weaker; values beyond −150 or +150 mGal use endpoint colors. NASA Goddard’s HgM008 gravity model (Genova et al. 2019) comes from radio tracking of the MESSENGER spacecraft, 2008–2015. This map adds its terms up to degree 90. Detail depends on how low MESSENGER flew. The model resolves features about 105–125 km across near the north pole, but only about 500–700 km across south of 30° S. Southern patterns are broad because they are not resolved.",
+        "view": "exterior",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How much Mercury’s gravity differs from the pull of a perfectly round, evenly dense planet, at a radius of 2,440 km. Extra mass below the surface pulls harder."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Milligals (mGal): 1 mGal is 0.00001 m/s², and Mercury’s surface gravity is about 370,000 mGal. Red pulls harder and blue weaker; values beyond −150 or +150 mGal use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "NASA Goddard’s HgM008 gravity model (Genova et al. 2019) comes from radio tracking of the MESSENGER spacecraft, 2008–2015. This map adds its terms up to degree 90."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Detail depends on how low MESSENGER flew. The model resolves features about 105–125 km across near the north pole, but only about 500–700 km across south of 30° S. Southern patterns are broad because they are not resolved."
+          }
+        ]
+      },
+      {
+        "id": "crust",
+        "label": "Crust",
+        "thumbnail": "mercury-lens-crust.webp",
+        "surface": "mercury-surface-crust@2x.webp",
+        "poles": "mercury-poles-crust@2x.webp",
+        "source": {
+          "id": "trek-mercury-hgm008-crustal-thickness",
+          "url": "https://doi.org/10.1029/2018GL081135"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Crustal thickness",
+          "meta": "km",
+          "labels": [
+            "≤0",
+            "35",
+            "≥70"
+          ],
+          "recipe": {
+            "palette": [
+              "#440154",
+              "#3b528b",
+              "#21918c",
+              "#5ec962",
+              "#fde725"
+            ],
+            "labels": [
+              "≤0",
+              "35",
+              "≥70"
+            ]
+          },
+          "sourceUrl": "https://doi.org/10.1029/2018GL081135"
+        },
+        "falseColor": true,
+        "qualification": "Crustal-thickness model of Genova et al. (2019) from HgM008 gravity and MESSENGER laser-altimeter topography, degrees 2–60; crust 2,800 kg/m³, crust–mantle density contrast 400 kg/m³, mean thickness 35 km. Grid published by NASA Mercury Trek.",
+        "notes": "Estimated depth from the surface to the bottom of the rocky crust, in kilometers. It is a model, not a measurement. Kilometers. Purple is thinner and yellow is thicker; values below 0 or above 70 km use endpoint colors. Genova et al. (2019) combined the HgM008 gravity model with MESSENGER laser-altimeter heights. They assumed a crust density of 2,800 kg/m³, a mantle 400 kg/m³ denser, and an average thickness of 35 km, using degrees 2 to 60. Other densities or another average thickness give a different map. Detail follows the gravity model: finer in the north, coarse in the south. Under Rachmaninoff basin the model falls slightly below zero, to −3 km, which is not physical.",
+        "view": "exterior",
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Estimated depth from the surface to the bottom of the rocky crust, in kilometers. It is a model, not a measurement."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Kilometers. Purple is thinner and yellow is thicker; values below 0 or above 70 km use endpoint colors."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Genova et al. (2019) combined the HgM008 gravity model with MESSENGER laser-altimeter heights. They assumed a crust density of 2,800 kg/m³, a mantle 400 kg/m³ denser, and an average thickness of 35 km, using degrees 2 to 60."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Other densities or another average thickness give a different map. Detail follows the gravity model: finer in the north, coarse in the south. Under Rachmaninoff basin the model falls slightly below zero, to −3 km, which is not physical."
+          }
+        ]
+      },
+      {
         "id": "interior",
         "label": "Interior",
         "thumbnail": "mercury-lens-interior.webp",
@@ -286,10 +428,13 @@
     ],
     "labels": {
       "normal": "Monochrome",
+      "color": "Color",
       "enhanced": "Enhanced color",
       "topography": "Elevation",
       "interior": "Cross section",
-      "loi": "Monochrome"
+      "loi": "Monochrome",
+      "gravity": "Gravity",
+      "crust": "Crust"
     }
   },
   "settings": {

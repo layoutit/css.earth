@@ -15,6 +15,7 @@ interface ScenePublicationInput {
   objectId: string;
   subject: SceneSubject;
   motionEnabled: boolean;
+  lightCurvesEnabled: boolean;
   reducedMotionActive: boolean;
   mountedObjectCount: number;
   playing: boolean;
@@ -31,11 +32,11 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
   getWorld(): WorldContextMount | null;
 }) {
   function readPublication() {
-    const { state, mountedObjectCount, playing, pending, objectId, subject, motionEnabled, reducedMotionActive } = read();
+    const { state, mountedObjectCount, playing, pending, objectId, subject, motionEnabled, lightCurvesEnabled, reducedMotionActive } = read();
     const sceneState: SceneState = state.kind === 'failed' ? 'error' : state.kind === 'disposed' ? 'destroyed' : state.kind;
     const selected: SelectionTarget = pending?.subject ?? subject;
     const playback = Object.freeze({ motionRequested: motionEnabled, ...automaticPlaybackPolicy({
-      sceneState: pending ? 'loading' : sceneState, motionRequested: motionEnabled,
+      sceneState: pending ? 'loading' : sceneState, motionRequested: motionEnabled, lightCurvesRequested: lightCurvesEnabled,
       documentHidden: documentTarget.hidden, reducedMotion: reducedMotionActive,
     }) });
     return { sceneState, playing, playback, scene: Object.freeze({

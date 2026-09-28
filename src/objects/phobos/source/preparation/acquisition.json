@@ -32,6 +32,54 @@
       ],
       "path": "features/PHOBOS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOBOS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "craters/PH9224GT_Phobos2000.query-01.json",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer/0/query?where=FID%3E%3D0+AND+FID%3C%3D1999&outFields=*&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22Phobos_2015%5C%22%2CDATUM%5B%5C%22Phobos_2015%5C%22%2CSPHEROID%5B%5C%22Phobos_2015%5C%22%2C11080.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "craters/PH9224GT_Phobos2000.query-02.json",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer/0/query?where=FID%3E%3D2000+AND+FID%3C%3D3999&outFields=*&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22Phobos_2015%5C%22%2CDATUM%5B%5C%22Phobos_2015%5C%22%2CSPHEROID%5B%5C%22Phobos_2015%5C%22%2C11080.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "craters/PH9224GT_Phobos2000.query-03.json",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer/0/query?where=FID%3E%3D4000+AND+FID%3C%3D5999&outFields=*&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22Phobos_2015%5C%22%2CDATUM%5B%5C%22Phobos_2015%5C%22%2CSPHEROID%5B%5C%22Phobos_2015%5C%22%2C11080.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "craters/PH9224GT_Phobos2000.query-04.json",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer/0/query?where=FID%3E%3D6000+AND+FID%3C%3D7999&outFields=*&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22Phobos_2015%5C%22%2CDATUM%5B%5C%22Phobos_2015%5C%22%2CSPHEROID%5B%5C%22Phobos_2015%5C%22%2C11080.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "craters/PH9224GT_Phobos2000.query-05.json",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer/0/query?where=FID%3E%3D8000+AND+FID%3C%3D9223&outFields=*&returnGeometry=true&outSR=%7B%22wkt%22%3A%22GEOGCS%5B%5C%22Phobos_2015%5C%22%2CDATUM%5B%5C%22Phobos_2015%5C%22%2CSPHEROID%5B%5C%22Phobos_2015%5C%22%2C11080.0%2C0.0%5D%5D%2CPRIMEM%5B%5C%22Reference_Meridian%5C%22%2C0.0%5D%2CUNIT%5B%5C%22Degree%5C%22%2C0.0174532925199433%5D%5D%22%7D&f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "catalogues"
+      ],
+      "path": "craters/PH9224GT_Phobos2000.layer.json",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer/0?f=json"
     }
   ]
 }

@@ -1,0 +1,55 @@
+{
+  "id": "hv-1023",
+  "name": "HV 1023",
+  "system": "HV 1023 system",
+  "description": "A Cepheid in the Large Magellanic Cloud that pulsates every 26.55 days; its mean radius is 120.3 solar radii.",
+  "order": 1945,
+  "gaia": "4659292024370712576",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 120.3,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, HV 1023: Baade-Wesselink mean radius (solar radii) 120.3 +/- 5.5 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 5.5
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5250,
+    "source": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC3158, columns Teffp, e_Teffp: Teff 5250 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2307.07559",
+    "uncertainty": 153
+  },
+  "distance": {
+    "value": 48109.6,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, HV 1023: Baade-Wesselink distance (pc) 48109.6 +/- 2438.1 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 2438.1
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.07 +/- 0.005 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Large Magellanic Cloud that swells and shrinks every 26.6 days.",
+    "introduction": "Its mean radius, 120.3 solar radii, comes from comparing how fast its surface moves with how its size changes, 48,110 parsecs away.",
+    "locator": "table10, HV 1023: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured.",
+    "No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.",
+    "Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth."
+  ]
+}

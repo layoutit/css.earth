@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hv-2538",
+  "displayName": "HV 2538",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "80 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1212-5478",
+          "url": "https://arxiv.org/abs/1212.5478",
+          "label": "Groenewegen (2012)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "48,046 parsecs",
+        "source": {
+          "catalogueId": "arxiv-1212-5478",
+          "url": "https://arxiv.org/abs/1212.5478",
+          "label": "Groenewegen (2013), A&A 550, A70, table10, HV 2538: Baade-Wesselink distance (pc) 48045.6 +/- 4496.4 (Monte-Carlo)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hv-2538-lens-color.webp",
+        "surface": "hv-2538-surface-color@2x.webp",
+        "poles": "hv-2538-poles-color@2x.webp",
+        "source": {
+          "id": "hv-2538-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2307.07559"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,125 K and log g 0.85 (u1 0.591, u2 0.156): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Groenewegen (2013), A&A 550, A70",
+      "href": "https://arxiv.org/abs/1212.5478"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1212.5478",
+      "credit": "Groenewegen (2013), A&A 550, A70"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hv-2538.json",
+      "credit": "Groenewegen radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

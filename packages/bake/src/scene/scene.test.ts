@@ -13,7 +13,8 @@ import type { RasterRecipe } from '../raster/index.ts';
 import { prepareProjectiveTextureLayer, TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';
-import { presentationHostAdapters } from '../../../../tools/objects/geometry-adapters.ts';
+import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
+import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from '../presentation/types.ts';
 const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
@@ -62,8 +63,8 @@ for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
   // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
   // with must reproduce it exactly, so the outset changes nothing else about the leaves.
   const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0,projectivePoles:id==='mercury'}};});
-  // Four changes since this oracle was taken touched these leaves, each by name: d10c041091 draws every polar cap from
-  // both sides, 36198077d3 moved raster images to the canonical 2x density, leafRasterScale draws each leaf at two
+  // Four changes since this oracle was taken touched these leaves, each by name: draws every polar cap from
+  // both sides, moved raster images to the canonical 2x density, leafRasterScale draws each leaf at two
   // texels per CSS pixel instead of the recipe's raster scale (its caps already were), and a leaf binds its lens's
   // texture instead of inlining the profile's image. Undoing exactly those four reproduces the oracle, and every cap must
   // carry the both-sided suffix. A fifth change was taken into the hashes rather than undone: #712 grows each band
@@ -224,7 +225,7 @@ test('every lens reaches the leaves: a leaf binds its lens texture and each comp
   ...['scene','assets','lenses','sun','controls'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/uranus/source/presentation/solar-system.json')]);
  const scene={...published as {body:object},body:{...(published as {body:object}).body,leaves:result.body.leaves}};
  // No browser here: the CSSOM reads only rescale leaf addresses, which this test does not read.
- const adapters={...presentationAdapters(presentationHostAdapters),prepareCssomDeclarationReads:async()=>new Map()};
+ const adapters={...presentationAdapters(presentationHostAdapters(solarGeometry)),prepareCssomDeclarationReads:async()=>new Map()};
  const draft=await prepareComposite({namespace:'uranus',mode:'composite',scene,assets,lenses,sun,controls,solarSource} as unknown as PresentationInputs,adapters);
  const body=draft.tree.nodes.findIndex(node=>node.className==='polycss-mesh uranus-body'),defaultLens=(lenses as {defaultLens:string}).defaultLens;
  const lensIds=[...new Set(draft.variants.map(variant=>variant.when.lensId))];

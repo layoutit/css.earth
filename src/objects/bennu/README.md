@@ -7,12 +7,39 @@
 | Albedo and Monochrome | [NASA SVS release](https://svs.gsfc.nasa.gov/5069): 6.25 cm zero-phase albedo on OLA v20 and separate 5 cm PolyCam basemap. They use different normalization/control and do not fill each other’s gaps. |
 | Spectral composite | [USGS MapCam](https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm), [DellaGiustina et al. 2020](https://figshare.com/articles/journal_contribution/Maps_DellaGiustina_et_al_Science_2020_abc3660/12996494). False color: red x/v (847/550 nm), green 698 nm band strength, blue b′/v (473/550 nm); no mineral abundance is inferred. |
 | Shape and Elevation | [OLA v20 PTM](https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj); radius minus 241 m, not gravitational height. |
+| Geopotential height and Slope | [OLA v20 1.68 m facet tables](https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/) (orex.altimetry): height above the lowest surface potential and slope against gravity plus spin, uniform density 1194 kg/m³. |
+| Gravity anomaly | [RSWG_bouguer_map_shape_Oct2021](https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/) (orex.derived_gravity v1.1) on SPC v42: measured minus uniform-density surface acceleration, in percent. |
+| Thermal inertia | [OTES global map, Detailed Survey stations 1–7](https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/) (orex.thermal) on SPO v34; [Rozitis et al. 2020](https://doi.org/10.1126/sciadv.abc3699). |
+| 2.7 µm and 3.4 µm bands | [OVIRS EQ3 maps](https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/) (orex.spectral_analysis) on SPC v20; [Simon et al. 2020](https://doi.org/10.1126/science.abc3522). |
 
 ## Reflected light
 
 The wavelength arrows select four [OSIRIS-REx MapCam maps](https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm), from the USGS v2 release (4 August 2025): blue at 473 nm, green at 550 nm, red at 698 nm and near infrared at 847 nm. Darker areas reflect less light in the selected band. The maps were corrected for illumination with the mission’s ROLO model. Their measured coverage extends to about 65° north and south. They are grayscale measurements; the separate Spectral color view remains the published composite.
 
 All four use a linear 0–0.08 I/F display range. This common range preserves brightness differences when changing wavelengths. It is a display choice, not a claim that every source value lies inside that interval. Small negative estimates remain valid data and display black; values above 0.08 display white. The native missing-value code is withheld before interpolation. The gray grid shows missing coverage, including the poles.
+
+## Derived maps
+
+Six lenses show the mission's own derived facet tables. Each table gives one value per triangle of the shape model it was computed on. None of those meshes is the display PTM, so each lens is drawn on its own archived mesh, simplified to 800 triangles like the default shape (the OLA v20 mesh within 11 m of its source, since 800 triangles need 10.6 m there; the others within 10 m). A texel takes the released value of the nearest triangle of that full mesh, within 10 m; nothing is interpolated between triangles. The four meshes share Bennu's body-fixed frame. Their equivalent radii are 244.7 m (OLA v20) to 245.2 m (SPO v34), so switching lenses barely changes the outline.
+
+| Lens | Product (PDS4 LIDVID ends `::1.0`) | Mesh | Archived values | Display range |
+| --- | --- | --- | --- | --- |
+| Geopotential height | `g_01680mm_alt_elv_0000n00000_v020` | OLA v20, 786,432 facets | 0 to 84.7 m | 0–90 m |
+| Slope | `g_01680mm_alt_slp_0000n00000_v020` | OLA v20, 786,432 facets | 0.03° to 107.9°, median 21.3° | 0–80° |
+| Gravity anomaly | `rswg_bouguer_map_shape_oct2021` | SPC v42, 196,608 facets | −3.49% to +2.61% | ±3.5% |
+| Thermal inertia | `g_06330mm_ta_thermin_otesdsv1-7_v001` | SPO v34, 49,152 facets | 190 to 383 J m⁻² K⁻¹ s⁻½; 194 facets empty | 180–400 |
+| 2.7 µm band | `g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000` | SPC v20, 196,608 facets | 8.6% to 17.4%; 367 facets empty | 11.8–15.9% |
+| 3.4 µm band | `g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000` | SPC v20, 196,608 facets | −0.007 to 1.12 %·µm; 367 facets empty | 0.28–0.70 %·µm |
+
+Checks against the papers:
+
+- OLA v20: the archive's 0.88 m tables reproduce [Daly et al. 2020](https://doi.org/10.1126/sciadv.abd3649) Table 1, which uses that model. Slopes run 0.0° to 113.0° with a median of 24.6°, and gravity from −0.0000748 to 0.0000806 m/s². The lenses use the 1.68 m tables of the same model, whose median slope is lower (21.3°). Geopotential height is (U − Umin)/|g|, with Umin the lowest surface potential (altimetry SIS §5), so its minimum is 0.
+- Gravity anomaly: [Scheeres et al. 2020](https://doi.org/10.1126/sciadv.abc3350) say the variations "vary between ±3%" (Fig. 2A); the archived map spans −3.49% to +2.61%. That figure is built to degree 4, while the archived map belongs to the degree-10 field `grav_20_particles`, so only the range is compared. The sign follows the collection overview: positive is stronger than uniform density.
+- Thermal inertia: the mean is 296 (SD 28) and the mean sigma is 8.1. [Rozitis et al. 2020](https://doi.org/10.1126/sciadv.abc3699) give 300 ± 30 and a mean uncertainty of 8 for OTES. Equatorial facets average 327 and facets above 60° average 263–280, matching the paper's equator being 40–60 higher.
+- 2.7 µm band: the 5th–95th percentiles are 12.2–15.4% and the depth grows toward both poles. [Simon et al. 2020](https://doi.org/10.1126/science.abc3522) report 12 to 17% that correlates with latitude. The 3.4 µm band area has no published range to compare.
+- Every table row matches the centroid of the same-numbered triangle of its OBJ within 0.08 mm. This is the identity check between each table and its mesh.
+
+The display ranges come from the data or the producer. OLA and thermal-inertia ranges cover the archived values. The OVIRS ranges are the [producer readme](https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/ovirs_eq3_maps_readme.txt)'s suggested stretch, mean ± 2 standard deviations, rounded to the shown digits.
 
 ## Evidence
 
@@ -40,6 +67,20 @@ The [delivery and browser record](evidence/spectral-bands/delivery-and-browser.j
 Inspected evidence: [native map](evidence/spectral-bands/green-native-map.webp), [overview](evidence/spectral-bands/overview.webp), [lighting](evidence/spectral-bands/lighting.webp), [close view](evidence/spectral-bands/close.webp), [phone controls](evidence/spectral-bands/phone.webp). The flat native map and rendered body are different projections, so no pixel-parity claim is made.
 
 ## Known problems
+
+Derived-map labels disagree with their FITS tables in places. The recipe declares each disagreement, and the table decides:
+
+- The OVIRS labels give 49,152 records; the tables and byte lengths hold 196,608.
+- The 2.7 µm label unit is percent, but the values are fractions (0.139 median). The lens multiplies by 100, which matches the paper's 12–17%.
+- The thermal-inertia and OVIRS FITS headers name the value column `VALUE` and carry a working product name.
+- The OLA headers name their mesh `shape3.obj`, so every row is checked against the archived OBJ instead.
+- The gravity map numbers its facets from 1 and has no uncertainty column.
+
+Missing values: the thermal-inertia map has 194 NaN facets. The OVIRS maps have 367 facets with value and sigma both −9999, the null value the spectral-analysis SIS uses. Both stay gray.
+
+Uniform density: slope and geopotential height assume uniform density. The gravity anomaly map shows why that is only an approximation.
+
+Map ages differ. The OVIRS maps sit on a January 2019 SPC model (v20) and the thermal-inertia map on a June 2019 SPC+OLA model (v34). Neither is the OLA v20 display shape, and each is drawn on its own mesh.
 
 Shadows on uses the package’s existing diffuse display lighting. It does not reconstruct the mission’s photometric model. Compare band brightness with Shadows off.
 

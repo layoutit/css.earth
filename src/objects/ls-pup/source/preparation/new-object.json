@@ -1,0 +1,54 @@
+{
+  "id": "ls-pup",
+  "name": "LS Pup",
+  "system": "LS Pup system",
+  "description": "A Cepheid in the Milky Way that pulsates every 14.15 days; its mean radius is 79.3 solar radii.",
+  "order": 1926,
+  "target": "LS Pup",
+  "gaia": "5597327141100381568",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 79.3,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, LS Pup: Baade-Wesselink mean radius (solar radii) 79.3 +/- 2.1 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 2.1
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5500,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 116, Name='LS Pup', columns Teff, e_Teff (K): Teff 5500 +/- 226 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 226
+  },
+  "distance": {
+    "value": 4470.1,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, LS Pup: Baade-Wesselink distance (pc) 4470.1 +/- 120.8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 120.8
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.461 +/- 0.015 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way that swells and shrinks every 14.1 days.",
+    "introduction": "Its mean radius, 79.3 solar radii, comes from comparing how fast its surface moves with how its size changes, 4,470 parsecs away.",
+    "locator": "table10, LS Pup: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

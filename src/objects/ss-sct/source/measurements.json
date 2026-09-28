@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ss-sct",
+  "angularDiameterMas": 0.3,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 31,723,920 km at 1394.40 pc = 0.3 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 1394.4,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, SS Sct: Baade-Wesselink distance (pc) 1394.4 +/- 111.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1394.4 +/- 111.2 pc; Gaia DR3 parallax 0.8985 +/- 0.0227 mas (same row, RUWE 0.84), 39.5 standard errors, is not used",
+  "radiusKm": 31723920,
+  "radiusSource": "Radius 45.6 +/- 3.6 solar radii from Groenewegen (2013), A&A 550, A70, table10, SS Sct: Baade-Wesselink mean radius (solar radii) 45.6 +/- 3.6 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 31,723,920 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5750 +/- 125 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 152, Name='SS Sct', columns Teff, e_Teff (K): Teff 5750 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5750,
+  "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 152, Name='SS Sct', columns Teff, e_Teff (K): Teff 5750 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
+  "surfaceGravityLogg": 1.71,
+  "surfaceGravitySource": "log g 1.71 from 2024A&A...690A.246T, the median of its 2 spectra; the 8 published values span log g 1.4 to 2.29, across which the limb law changes by at most 0.5% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

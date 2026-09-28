@@ -7,7 +7,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
-import { prepareObjectContentAssets } from './content/prepare.js';
+import type { SolarGeometry } from '@cssearth/bake/objects/scene';
+import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts';
 import { parseRuntimeManifest } from '@cssearth/bake/delivery';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 
@@ -24,9 +25,10 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   if (lensIds.some(id => !config.surfaces.some(surface => surface.id === id))) throw new TypeError('Unknown photographic lens.');
   const selected = { ...config, surfaces: config.surfaces.filter(surface => lensIds.includes(surface.id)),
     lighting: undefined, atmosphere: undefined, interior: undefined };
-  const { createSurfaceInterpreter, selectSurfaceDependencies } = await import(pathToFileURL(resolve('tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts');
+  const { createSurfaceInterpreter, selectSurfaceDependencies } = await import('@cssearth/bake/objects/interpretation');
   const interpret = await createSurfaceInterpreter({ objectId: id, displayName: id, sourceDirectory,
-    recipe: selectSurfaceDependencies(config, lensIds), sourceVerification: 'photographs' });
+    recipe: selectSurfaceDependencies(config, lensIds), sourceVerification: 'photographs',
+    solarGeometry: await import(pathToFileURL(resolve('src/platform/solar-geometry.mts')).href) as SolarGeometry });
   const stageRoot = resolve('.local/photographic-refresh'); await mkdir(stageRoot, { recursive: true });
   const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
   // One encoder worker and no libvips image cache: the previous surface need not remain resident.
@@ -80,7 +82,7 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
   }
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
   const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
-  const { repinObjectJson } = await import(pathToFileURL(resolve('tools/prepare/prepare-object-json.mts')).href) as typeof import('../prepare/prepare-object-json.mts');
+  const { repinObjectJson } = await import('@cssearth/bake/contract');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
   const labels = new Map(requireArray(requireRecord(updatedControls.lenses).controls).map(value => { const lens = requireRecord(value); return [requireString(lens.id), lens] as const; }));
   const controls = requireRecord(runtime.controls), lenses = requireRecord(controls.lenses);

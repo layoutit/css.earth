@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hv-12202",
+  "angularDiameterMas": 0.01,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 15,096,690 km at 35765.20 pc = 0.01 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 35765.2,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, HV 12202: Baade-Wesselink distance (pc) 35765.2 +/- 2234.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 35765.2 +/- 2234.2 pc; Gaia DR3 parallax 0.0022 +/- 0.0409 mas (same row, RUWE 1.23), 0.1 standard errors, is not used",
+  "radiusKm": 15096690,
+  "radiusSource": "Radius 21.7 +/- 1.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 12202: Baade-Wesselink mean radius (solar radii) 21.7 +/- 1.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 15,096,690 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5625 +/- 277 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC4646, columns Teffp, e_Teffp: Teff 5625 +/- 277 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5625,
+  "effectiveTemperatureSource": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC4646, columns Teffp, e_Teffp: Teff 5625 +/- 277 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559)",
+  "limbDisplayGravityLogg": 0.4,
+  "limbDisplayGravitySource": "no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 1.9% of the centre brightness from the one drawn, at log g 0.4, the gravity closest to all of them; log g 0.4 is a display choice, not a measurement (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

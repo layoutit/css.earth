@@ -73,7 +73,7 @@ brightness-bound relaxation was introduced to include them.
 [Preparation and restoration measurements](evidence/close-up-priority/preparation.json).
 
 The comparison swaps the previous eight-image bank and the new ten-image bank
-in the same Chrome 153 application at `b7e797027`, with the same scene, camera,
+in the same Chrome 153 application, with the same scene, camera,
 1440×1000 viewport and DPR 1. Identical unscaled body crops exclude the current
 UI text. Pixelmatch 7.2.0 at threshold 0.1 finds 26,682 changed pixels among
 353,280; this locates texture changes, not sharpness or scientific accuracy.
@@ -100,7 +100,7 @@ failure remains outside this change. Full repository suites were not run.
 ### Eight-image expansion, 13 September 2026
 
 This historical record predates the current transfer implementation. The same
-eight inputs are the baseline at `e609e66d66ea2d701253de4a3681a354324927ff`, but
+eight inputs are the baseline, but
 their current coverage is reported above.
 
 The new southern view `2473604354` fills additional coverage while retaining the same 794 triangles, camera and hit mesh. At the same 64 stratified samples per triangle, area-weighted coverage is **61.88% → 73.41%** across this PR (72.66% before the final southern addition). The eighth frame contributes 5.60% of displayed area, mostly replacing more foreshortened views.
@@ -114,7 +114,7 @@ Four additional southern frames were decoded in the same batch; the selected fra
 
 ### Initial seven-image qualification
 
-The following record describes the earlier seven-image outputs at commit `55fe2579fa741da71a0bd5498712d0f3d7e5fe25`. Its photographs and source checks remain relevant because those native inputs and camera fitting are unchanged; the new capture and eight-frame measurements above supersede its displayed-area and pixel-difference results.
+The following record describes the earlier seven-image outputs. Its photographs and source checks remain relevant because those native inputs and camera fitting are unchanged; the new capture and eight-frame measurements above supersede its displayed-area and pixel-difference results.
 
 [Before](evidence/photographic-coverage/before.webp) ·
 [After](evidence/photographic-coverage/after.webp) ·
@@ -123,7 +123,7 @@ The following record describes the earlier seven-image outputs at commit `55fe25
 [Native XYZ/source-mesh checks](evidence/photographic-coverage/source-transfer.json)
 
 The matched Chrome 152 captures use 1440×1000, DPR 1, the AMICA view, motion
-paused and Shadows off. Before is `d4330c6c1`; after is `0ff39d3bc` plus this
+paused and Shadows off. Before is the base; after is the base plus this
 change, with exact input/output pins in the evidence. Camera, retained tree
 and hit mesh are byte-equivalent. Pixelmatch 7.2.0 at threshold 0.1 reports
 303,866 changed pixels out of 1,440,000; independent unchanged captures differ
@@ -175,9 +175,9 @@ were not added. The selected four use its supported paired-exposure format.
 
 The controlled-camera holdouts reached maximum residuals of 0.00000842/0.00000876/0.00002017 px, testing agreement with archived Cartesian coordinates rather than absolute navigation. Source-mesh checks and independent image/flat/brightness anchors are retained below. Earlier Chrome 152 DPR 1/2 checks covered the then-selected lenses; that record does not establish qualification of the later three-image mosaic.
 
-[Source test definitions](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/itokawa/amica.test.mts).
+Source test definitions.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/amica-ddr.py`](https://github.com/layoutit/css.earth/blob/de8b0ae4187a49d17e32dff1f2b3a715f0217805/tools/oracles/pds3/amica-ddr.py) (now [`tests/oracles/pds3/amica-ddr.py`](../../../tests/oracles/pds3/amica-ddr.py)) reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/6c4bf2f7ffbfa0c1d392a57ed84d63bf180bc8b3/tools/objects/terrestrial-layers/amica-geo.oracle.test.mts) (now [`tests/objects/terrestrial/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts)) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/amica-ddr.py`](../../../tests/oracles/pds3/amica-ddr.py) (now [`tests/oracles/pds3/amica-ddr.py`](../../../tests/oracles/pds3/amica-ddr.py)) reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts) (now [`tests/objects/terrestrial/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts)) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
 
 ### Registration
 

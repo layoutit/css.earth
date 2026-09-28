@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "tw-nor",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TW Nor",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 50786100
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tw-nor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TW Nor",
+      "classification": "star",
+      "color": "#ffe6d0",
+      "distanceAu": 473130086.3,
+      "description": "A Cepheid in the Milky Way, 73 times the Sun's width, that swells and shrinks every 10.8 days.",
+      "systemName": "TW Nor system",
+      "order": 2025,
+      "context": {
+        "order": 2022
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -20994634783907750000,
+        -38236645397801705000,
+        -55739456233405960000
+      ],
+      "presentationToReference": [
+        -0.296621363578099,
+        0.3790238437099245,
+        -0.8765595773068845,
+        -0.5402240150060813,
+        0.6903004463124294,
+        0.4812933694032884,
+        -0.7875111302577118,
+        -0.6163004297582596,
+        7.703175028045603e-8
+      ],
+      "orbitUpReference": [
+        -0.3790238437099245,
+        -0.6903004463124294,
+        0.6163004297582596
+      ],
+      "metersPerUnit": 163826129.03225806,
+      "bodyRadiusM": 50786100000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -8,14 +8,7 @@
       "status": "included",
       "finding": "The paper’s stated model dimensions are used through the existing ellipsoid recipe.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/achlys/README.md#L36"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-10",
-          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
-          "pr": 99
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achlys/README.md#L36"
       ]
     },
     {
@@ -25,15 +18,18 @@
       "finding": "The [JWST/NIRSpec spectrum of 2003 AZ84](https://doi.org/10.1051/0004-6361/202346998) explicitly treats the target as spatially unresolved. A spectrum cannot become registered surface texels.",
       "revisitWhen": "A spatially resolved surface map or registered imaging of this object is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/achlys/README.md#L37",
         "https://doi.org/10.1051/0004-6361/202346998"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-10",
-          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
-          "pr": 99
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"About 6.75 hours in the adopted shape interpretation; display phase is illustrative\" (arxiv-1705-10895) differs from the LCDB V4.0 summary record 27880 period 13.42 h (U 2, synodic); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

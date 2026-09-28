@@ -23,7 +23,7 @@ test('extracted Haumea helper preserves its existing annular geometry and image 
     { url: '/scenes/haumea/haumea-ring.webp', width: 2048, height: 64 },
     1161,
   );
-  // Captured from the original helper at 1fb76e44d6bf831e7ebcf0516b83c0b10e1716da.
+  // Captured from the original helper.
   // This checks every transform, texture projection, style and leaf order.
   assert.equal(leaves.length, 128);
   assert.equal(createHash('sha256').update(JSON.stringify(leaves)).digest('hex'),

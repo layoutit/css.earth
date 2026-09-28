@@ -1,0 +1,41 @@
+{
+  "id": "source-bennu-thermal-inertia",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "OTES Based Bennu Global Thermal Inertia Map",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:orex.thermal:data_thermal_maps:g_06330mm_ta_thermin_otesdsv1-7_v001.fits::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.fits",
+      "label": "PDS Small Bodies Node"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/sciadv.abc3699",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/23"
+    },
+    {
+      "path": "src/objects/bennu/source/science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.xml",
+      "locator": "/Product_Observational/Identification_Area"
+    }
+  ],
+  "creators": [
+    "B. Rozitis"
+  ],
+  "publisher": "NASA Planetary Data System Small Bodies Node",
+  "version": "1.0",
+  "relations": [],
+  "statements": []
+}

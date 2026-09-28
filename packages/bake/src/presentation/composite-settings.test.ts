@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { expect, it } from 'vitest';
 import { prepareCssPresentation, parsePresentationProfile } from './css-presentation.ts';
-import { presentationHostAdapters } from '../../../../tools/objects/geometry-adapters.ts';
+import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
+import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from './types.ts';
 
 const root = resolve(import.meta.dirname, '../../../..');
@@ -15,7 +16,7 @@ for (const id of ['neptune', 'uranus']) it(`${id} Rings controls the prepared ri
     ...['scene', 'assets', 'lenses', 'sun', 'controls'].map(file => read(`${base}/${file}.json`)),
     read(`src/objects/${id}/source/presentation/solar-system.json`),
   ]);
-  const prepared = await prepareCssPresentation({ ...profile, scene, assets, lenses, sun, controls, solarSource } as PresentationInputs, presentationHostAdapters);
+  const prepared = await prepareCssPresentation({ ...profile, scene, assets, lenses, sun, controls, solarSource } as PresentationInputs, presentationHostAdapters(solarGeometry));
   const variants = [false, true].map(rings => prepared.variants.find(variant =>
     variant.when.lensId === prepared.controls.lenses?.defaultLens && variant.when.shadows === false && variant.when.rings === rings));
   for (const [index, variant] of variants.entries()) {

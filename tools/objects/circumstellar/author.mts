@@ -25,12 +25,14 @@ import sharp from 'sharp';
 import { sha256, sha256File } from '@cssearth/core/node';
 import { encodeDensityKtx2, gainForTopAlpha, spreadColumns } from '@cssearth/bake/density';
 import { readFitsFileHdus } from '@cssearth/fits/node';
+import { readFitsImage } from '@cssearth/fits';
+import { gunzipSync } from 'node:zlib';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
 import { mastDownloadUrl, mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
 import { JWST_BANDS } from '@cssearth/telescope-cli/archives/jwst/imaging/bands';
-import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, readArrayPlane, scoreEnvelope, readSkyPlane, ringGeometry, type SkyPlane } from './disc-envelope.mts';
+import { DEFAULT_SEARCH, discDensity, fitDiscEnvelope, profileDiscDensity, readArrayPlane, scoreEnvelope, readSkyPlane, ringGeometry, type RingGeometry, type SkyPlane } from './disc-envelope.mts';
 import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type PlanetRegistration } from './edge-on-disc.mts';
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';
 
@@ -56,7 +58,16 @@ export interface CircumstellarLens {
     readonly band: string; readonly path: string; readonly url: string; readonly landing: string; readonly bytes: number;
     readonly unit: string; readonly filter: string; readonly instrument: string; readonly observed: string;
     readonly title: string; readonly credit: string; readonly displayCredit: string; readonly license: string; readonly acquisition: string;
+    /** The same product's primary beam, gzipped FITS on the image's own pixels: the image is multiplied by it, undoing the
+     * primary-beam correction, when the publisher shows the image uncorrected. */
+    readonly primaryBeam?: { readonly path: string; readonly url: string; readonly bytes: number; readonly title: string; readonly source: string };
   };
+  /** Archive image only: the publisher's restoring beam, which the image is smoothed to (disc-envelope.mts smoothToBeam) so it is
+   * shown at the resolution of the published figure and in its Jy per beam. */
+  readonly smoothTo?: { readonly beamArcsec: readonly [number, number]; readonly positionAngleDeg: number; readonly source: string };
+  /** Archive image only: unresolved sources the paper models as points, removed as the image's own beam at their published
+   * positions and peaks (disc-envelope.mts subtractPointSources), so a background source is not drawn as the disc's material. */
+  readonly pointSources?: { readonly sources: readonly { readonly id: string; readonly raDeg: number; readonly decDeg: number; readonly peak: number }[]; readonly source: string };
   /** The publisher's own colour map, shown in place of a stretch: the figure's colour bar, sampled evenly from `range[0]` to
    * `range[1]` in the image's unit times `unitScale`, as the recipe's `path` (under source/) holds it with how it was read. */
   readonly colorMap?: { readonly path: string; readonly range: readonly [number, number]; readonly unitScale: number; readonly unit: string; readonly source: string };
@@ -96,14 +107,17 @@ export interface CircumstellarLens {
   readonly outerUnits: number;
   readonly backgroundAnnulusArcsec: readonly [number, number];
   /** Conventions, stated: which end of the minor axis is nearer the observer, and the ring's vertical height as a fraction of its
-   * radius (a ring only: an edge-on disc's height is fitted, and this is 0). */
-  readonly nearSidePositionAngleDeg: number; readonly nearSideSource: string; readonly heightOfRadius: number;
+   * radius (a ring only: an edge-on disc's height is fitted, and this is 0), and the published model it comes from, when one gives it. */
+  readonly nearSidePositionAngleDeg: number; readonly nearSideSource: string; readonly heightOfRadius: number; readonly heightSource?: string;
+  /** A ring only: why its geometry is the published fit rather than measured on the image, when the image's ridge is too faint to
+   * trace. The paper's fit must be to the same observations. */
+  readonly adoptPublishedRing?: string;
   /** Why this lens's image is drawn only to the grid's edge, when its light reaches past it. Stated, and kept as a limitation. */
   readonly beyondGrid?: string;
   /** The alpha the brightest column reaches. */
   readonly topAlpha: number;
   /** The published geometry the measured ring is checked against. */
-  readonly published: { readonly citation: string; readonly url: string; readonly radiusUnits?: number; readonly inclinationDeg: number; readonly positionAngleDeg: number; readonly toleranceDeg: number; readonly radiusTolerance?: number };
+  readonly published: { readonly citation: string; readonly url: string; readonly radiusUnits?: number; readonly widthFwhmUnits?: number; readonly inclinationDeg: number; readonly positionAngleDeg: number; readonly toleranceDeg: number; readonly radiusTolerance?: number };
 }
 export interface CircumstellarRecipe {
   readonly schema: 'cssearth-circumstellar-volume@1';
@@ -144,9 +158,25 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
     const archive = lens.archive === undefined ? undefined : (() => {
       const a = requireRecord(lens.archive, 'archive'), text = (key: string) => requireString(a[key], `archive ${key}`);
       if (a.sha256 !== undefined) throw new TypeError(`${String(lens.id)}: an archive image is named by its path and origin, not pinned by a hash (CLAUDE.md, sources and prepared delivery).`);
+      const beam = a.primaryBeam === undefined ? undefined : (() => { const b = requireRecord(a.primaryBeam, 'archive primaryBeam'), field = (key: string) => requireString(b[key], `archive primaryBeam ${key}`);
+        return { path: field('path'), url: field('url'), bytes: requireFiniteNumber(b.bytes, 'archive primaryBeam bytes'), title: field('title'), source: field('source') }; })();
       return { band: text('band'), path: text('path'), url: text('url'), landing: text('landing'), bytes: requireFiniteNumber(a.bytes, 'archive bytes'),
         unit: text('unit'), filter: text('filter'), instrument: text('instrument'), observed: text('observed'), title: text('title'), credit: text('credit'),
-        displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition') };
+        displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition'), ...(beam ? { primaryBeam: beam } : {}) };
+    })();
+    const pointSources = lens.pointSources === undefined ? undefined : (() => {
+      const p = requireRecord(lens.pointSources, 'pointSources');
+      if (!archive) throw new TypeError(`${String(lens.id)}: point sources are subtracted from an archive image only.`);
+      const sources = requireArray(p.sources).map(raw => { const q = requireRecord(raw, 'point source');
+        return { id: requireString(q.id, 'point source id'), raDeg: requireFiniteNumber(q.raDeg, 'point source raDeg'), decDeg: requireFiniteNumber(q.decDeg, 'point source decDeg'), peak: requireFiniteNumber(q.peak, 'point source peak') }; });
+      if (!sources.length) throw new TypeError(`${String(lens.id)}: pointSources lists no source.`);
+      return { sources, source: requireString(p.source, 'pointSources source') };
+    })();
+    const smoothTo = lens.smoothTo === undefined ? undefined : (() => {
+      const m = requireRecord(lens.smoothTo, 'smoothTo'), beam = requireArray(m.beamArcsec).map(v => requireFiniteNumber(v, 'smoothTo beamArcsec'));
+      if (!archive) throw new TypeError(`${String(lens.id)}: only an archive image is smoothed to a publisher's beam.`);
+      if (beam.length !== 2 || !(beam[0]! >= beam[1]! && beam[1]! > 0)) throw new TypeError(`${String(lens.id)}: smoothTo beamArcsec is [major, minor], not ${beam.join(', ')}.`);
+      return { beamArcsec: [beam[0]!, beam[1]!] as const, positionAngleDeg: requireFiniteNumber(m.positionAngleDeg, 'smoothTo positionAngleDeg'), source: requireString(m.source, 'smoothTo source') };
     })();
     const colorMap = lens.colorMap === undefined ? undefined : (() => {
       const c = requireRecord(lens.colorMap, 'colorMap'), range = requireArray(c.range).map(v => requireFiniteNumber(v, 'colorMap range'));
@@ -179,7 +209,7 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
     // A ring is shown as its publisher shows it: through a stretch fitted to the published panel, or through the panel's own colour map.
     if (geometry === 'ring' && stretch && stretch.fit === undefined) throw new TypeError(`${String(lens.id)}: a ring's stretch is fitted to the published panel.`);
     return { id: requireString(lens.id, 'lens id'), label: requireString(lens.label), title: requireString(lens.title), summary: requireString(lens.summary), description: requireString(lens.description),
-      program: deposit || hst || archive ? '' : requireString(lens.program), ...(deposit ? { deposit } : {}), ...(hst ? { hst } : {}), ...(archive ? { archive } : {}), ...(colorMap ? { colorMap } : {}), geometry, ...(lens.midplaneHalfHeightUnits === undefined ? {} : { midplaneHalfHeightUnits: number('midplaneHalfHeightUnits') }),
+      program: deposit || hst || archive ? '' : requireString(lens.program), ...(deposit ? { deposit } : {}), ...(hst ? { hst } : {}), ...(archive ? { archive } : {}), ...(pointSources ? { pointSources } : {}), ...(smoothTo ? { smoothTo } : {}), ...(colorMap ? { colorMap } : {}), geometry, ...(lens.midplaneHalfHeightUnits === undefined ? {} : { midplaneHalfHeightUnits: number('midplaneHalfHeightUnits') }),
       ...(lens.registration === undefined ? {} : { registration: (() => { const r = requireRecord(lens.registration, 'registration'), f = requireRecord(r.fwhmArcsec, 'registration fwhm');
         return { planet: requireString(r.planet), searchArcsec: requireFiniteNumber(r.searchArcsec), fwhmArcsec: Object.fromEntries(Object.entries(f).map(([band, v]) => [band, requireFiniteNumber(v)])), source: requireString(r.source) }; })() }),
       ...(lens.noiseFade === undefined ? {} : { noiseFade: (() => { const r = requireRecord(lens.noiseFade, 'noise fade'), from = requireFiniteNumber(r.fromNoise), to = requireFiniteNumber(r.toNoise);
@@ -190,14 +220,18 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
       innerMaskArcsec: number('innerMaskArcsec'), innerMaskSource: requireString(lens.innerMaskSource),
       outerUnits: number('outerUnits'), backgroundAnnulusArcsec: [requireFiniteNumber(annulus[0]), requireFiniteNumber(annulus[1])] as const,
       nearSidePositionAngleDeg: number('nearSidePositionAngleDeg'), nearSideSource: requireString(lens.nearSideSource),
-      // A ring's thickness is a stated convention; an edge-on disc's is fitted, so its recipe states none.
+      // A ring's thickness is stated, from a published model or as a convention; an edge-on disc's is fitted, so its recipe states none.
       heightOfRadius: geometry === 'ring' ? number('heightOfRadius') : 0,
+      ...(lens.heightSource === undefined ? {} : { heightSource: requireString(lens.heightSource) }),
+      ...(lens.adoptPublishedRing === undefined ? {} : { adoptPublishedRing: requireString(lens.adoptPublishedRing) }),
       topAlpha: number('topAlpha'),
       ...(lens.beyondGrid === undefined ? {} : { beyondGrid: requireString(lens.beyondGrid) }),
       published: { citation: requireString(published.citation), url: requireString(published.url), inclinationDeg: number('inclinationDeg', published),
         positionAngleDeg: number('positionAngleDeg', published), toleranceDeg: number('toleranceDeg', published),
         // A ring's published radius is checked against the ridge; an edge-on disc's image gives no radius to check.
-        ...(geometry === 'ring' ? { radiusUnits: number('radiusUnits', published), radiusTolerance: number('radiusTolerance', published) } : {}) } };
+        ...(geometry === 'ring' ? { radiusUnits: number('radiusUnits', published), radiusTolerance: number('radiusTolerance', published) } : {}),
+        // The ring's radial width, full width at half maximum, taken with its geometry when the recipe adopts the published ring.
+        ...(published.widthFwhmUnits === undefined ? {} : { widthFwhmUnits: number('widthFwhmUnits', published) }) } };
   });
   if (!lenses.length || new Set(lenses.map(lens => lens.id)).size !== lenses.length) throw new TypeError('Lenses need distinct ids.');
   for (const lens of lenses) if (lens.deposit) DEPOSIT_FILTERS.set(lens.deposit.band, lens.deposit.band.toLowerCase().replace(/^[a-z]+-/u, ''));
@@ -270,6 +304,15 @@ export async function hstChannels(lens: CircumstellarLens, distancePc: number, h
   return { channels, planes };
 }
 
+/** The ring a paper fitted to the same observations, as a ridge ellipse centred on the star: used when the image's ridge is too
+ * faint to trace, so there are no ridge samples and no binning spread. */
+function publishedRing(published: CircumstellarLens['published']): RingGeometry {
+  const radius = published.radiusUnits!, inclination = published.inclinationDeg;
+  return { ridge: [], centreUnits: [0, 0], semiMajorUnits: radius, semiMinorUnits: radius * Math.cos(inclination * Math.PI / 180),
+    positionAngleDeg: ((published.positionAngleDeg % 180) + 180) % 180, inclinationDeg: inclination, ridgeResidualUnits: 0,
+    binningSpread: { semiMajorUnits: 0, inclinationDeg: 0, positionAngleDeg: 0 } };
+}
+
 async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, distancePc: number, downloads: string, sources: readonly string[], inputsOnly = false) {
   const { size, halfUnits } = recipe.grid, count = size * size, step = 2 * halfUnits / size, innerMaskUnits = lens.innerMaskArcsec * distancePc;
   const registrations = new Map<string, PlanetRegistration>();
@@ -309,7 +352,14 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
     if (!Number.isFinite(years)) throw new Error(`${lens.id}: ${archive.path} DATE-OBS ${observed} is not a date.`);
     const starDecDeg = host.declinationDegrees + host.properMotionDecMasPerYear * years / 3.6e6;
     const starRaDeg = host.rightAscensionDegrees + host.properMotionRaMasPerYear * years / 3.6e6 / Math.cos(host.declinationDegrees * Math.PI / 180);
-    const plane = await readSkyPlane(file, { starRaDeg, starDecDeg, arcsecPerUnit: 1 / distancePc, halfUnits, size, backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec, imageHdu: 'primary' });
+    const primaryBeam = archive.primaryBeam ? await (async () => {
+      const beam = archive.primaryBeam!, packed = await readFile(resolve(repositoryRoot, beam.path)).catch(() => { throw new Error(`${lens.id}: ${beam.path} is missing; download it from ${beam.url}.`); });
+      if (packed.byteLength !== beam.bytes) throw new Error(`${lens.id}: ${beam.path} is ${packed.byteLength} bytes, not the ${beam.bytes} the recipe names; download it again from ${beam.url}.`);
+      return readFitsImage(beam.path.endsWith('.gz') ? gunzipSync(packed) : packed).values;
+    })() : undefined;
+    const plane = await readSkyPlane(file, { starRaDeg, starDecDeg, arcsecPerUnit: 1 / distancePc, halfUnits, size, backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec, imageHdu: 'primary',
+      ...(lens.pointSources ? { pointSources: lens.pointSources.sources } : {}), ...(primaryBeam ? { primaryBeam } : {}),
+      ...(lens.smoothTo ? { smoothTo: { majorArcsec: lens.smoothTo.beamArcsec[0], minorArcsec: lens.smoothTo.beamArcsec[1], positionAngleDeg: lens.smoothTo.positionAngleDeg } } : {}) });
     read = { channels: CHANNELS.map(() => Float32Array.from(plane.plane)), planes: new Map([[archive.band, plane]]) };
     bands.push({ band: archive.band, mosaic: file, primary: { 'DATE-OBS': observed, starRaDecDeg: [starRaDeg, starDecDeg] }, sky: plane, mosaicSha256: digest,
       origin: { file: archive.path.replace(/^.*\//u, ''), url: archive.url, bytes: archive.bytes, title: archive.title, credit: archive.credit, displayCredit: archive.displayCredit, license: archive.license,
@@ -333,12 +383,15 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
   const noise = Math.sqrt(CHANNELS.reduce((total, channel) => total + lens.channels[channel].reduce((sum, band) => sum + (read.planes.get(band)!.noise / lens.stellarFluxJy[band]!) ** 2, 0) / lens.channels[channel].length ** 2, 0)) / 3;
   const sky: SkyPlane = { ...bands[0]!.sky, plane: mean, background: 0, noise, unit: lens.deposit ? lens.deposit.unit : lens.archive ? lens.archive.unit : 'reflectance (MJy/sr per Jy of starlight)' };
   if (lens.geometry === 'edge-on') return buildEdgeOnLens(recipe, lens, sky, read.channels, bands, innerMaskUnits, registrations, inputsOnly);
-  const geometry = ringGeometry(sky, { innerMaskUnits, outerUnits: lens.outerUnits });
-  const { published } = lens, angle = (a: number, b: number) => Math.abs(((a - b) % 180 + 270) % 180 - 90);
+  const { published } = lens;
+  const geometry = lens.adoptPublishedRing ? publishedRing(published) : ringGeometry(sky, { innerMaskUnits, outerUnits: lens.outerUnits });
+  const angle = (a: number, b: number) => Math.abs(((a - b) % 180 + 270) % 180 - 90);
   const differences = { radius: Math.abs(geometry.semiMajorUnits / published.radiusUnits! - 1), inclinationDeg: Math.abs(geometry.inclinationDeg - published.inclinationDeg), positionAngleDeg: angle(geometry.positionAngleDeg, published.positionAngleDeg) };
   if (differences.radius > published.radiusTolerance! || differences.inclinationDeg > published.toleranceDeg || differences.positionAngleDeg > published.toleranceDeg)
     throw new Error(`${lens.id}: the measured ring (radius ${geometry.semiMajorUnits.toFixed(1)}, inclination ${geometry.inclinationDeg.toFixed(1)}, position angle ${geometry.positionAngleDeg.toFixed(1)}) does not match ${published.citation} (${published.radiusUnits}, ${published.inclinationDeg}, ${published.positionAngleDeg}).`);
-  const fit = fitDiscEnvelope(sky, geometry, { innerMaskUnits, outerUnits: lens.outerUnits, nearSidePositionAngleDeg: lens.nearSidePositionAngleDeg, heightOfRadius: lens.heightOfRadius });
+  if (lens.adoptPublishedRing && !(published.widthFwhmUnits! > 0)) throw new TypeError(`${lens.id}: an adopted published ring states its width (published.widthFwhmUnits).`);
+  const fit = fitDiscEnvelope(sky, geometry, { innerMaskUnits, outerUnits: lens.outerUnits, nearSidePositionAngleDeg: lens.nearSidePositionAngleDeg, heightOfRadius: lens.heightOfRadius,
+    ...(lens.adoptPublishedRing ? { publishedWidthUnits: published.widthFwhmUnits! / (2 * Math.sqrt(2 * Math.LN2)) } : {}) });
   // Where the light ends: the median brightness in rings of the disc plane, deprojected with the geometry just measured,
   // falls to the per-pixel noise. The taper starts there, and a grid that would cut light above the noise is refused.
   const cosI = Math.cos(geometry.inclinationDeg * Math.PI / 180), phi = geometry.positionAngleDeg * Math.PI / 180, ringWidth = 2 * step;
@@ -623,7 +676,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
       starPixel: band.sky.starPixel, mosaicArcsecPerPixel: band.sky.mosaicArcsecPerPixel, background: band.sky.background, noise: band.sky.noise, backgroundPixels: band.sky.backgroundPixels, unit: band.sky.unit })),
     channels: b.lens.channels, stellarFluxJy: b.lens.stellarFluxJy, stellarFluxSource: b.lens.stellarFluxSource, stretch: b.lens.stretch,
     innerMaskUnits: b.innerMaskUnits, lightEndsUnits: b.taperFromUnits, radialProfile: b.radialProfile.filter(ring => ring.radiusUnits <= halfUnits), ridgeSamples: b.geometry.ridge.length, ringCentreUnits: b.geometry.centreUnits, semiMajorUnits: b.geometry.semiMajorUnits, semiMinorUnits: b.geometry.semiMinorUnits,
-    inclinationDeg: b.geometry.inclinationDeg, positionAngleDeg: b.geometry.positionAngleDeg, ridgeResidualUnits: b.geometry.ridgeResidualUnits, binningSpread: b.geometry.binningSpread,
+    inclinationDeg: b.geometry.inclinationDeg, positionAngleDeg: b.geometry.positionAngleDeg, ridgeResidualUnits: b.geometry.ridgeResidualUnits, binningSpread: b.geometry.binningSpread, ...(b.lens.adoptPublishedRing ? { ringGeometry: 'published fit, not measured' } : {}),
     published: b.lens.published, differences: b.differences,
     envelope: { shape: 'measured-profile-disc', residualRms: b.profileScore.residualRms, cubeFaceShare: b.cubeFaceShare, heightUnits: b.fit.ring.gaussianHeightUnits,
       fittedRing: { gaussianWidthUnits: b.fit.ring.gaussianWidthUnits, gaussianHeightUnits: b.fit.ring.gaussianHeightUnits, residualRms: b.fit.ring.residualRms }, signalRms: b.fit.signalRms, scoredPixels: b.fit.scoredPixels,
@@ -635,19 +688,25 @@ export async function author(id: string, options: { sources?: readonly string[] 
     authors: [], organizations: [...new Set(built.map(b => b.lens.deposit ? b.lens.deposit.displayCredit : b.lens.archive ? b.lens.archive.displayCredit : 'NASA/ESA/CSA JWST; MAST (STScI)'))],
     license: { spdx: recipe.license.spdx, dataLicenseDeclaration: recipe.license.url, note: recipe.license.note },
     sources: built.flatMap(b => b.bands.map(band => ({ id: inputOf(b.lens, band), url: band.origin.url, landing: band.origin.landing, bytes: band.origin.bytes,
-      role: b.lens.deposit || b.lens.hst || b.lens.archive ? band.origin.role : `${band.origin.role}; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/${b.lens.program}.${band.band}.reproduction.json` }))),
+      role: b.lens.deposit || b.lens.hst || b.lens.archive ? band.origin.role : `${band.origin.role}; reproduced by packages/telescope-cli/src/archives/jwst/imaging/coron3.mts in programs/${b.lens.program}.${band.band}.reproduction.json` }))
+      .concat(b.lens.archive?.primaryBeam ? [{ id: `${b.lens.id}-primary-beam`, url: b.lens.archive.primaryBeam.url, landing: b.lens.archive.landing, bytes: b.lens.archive.primaryBeam.bytes,
+        role: `the primary beam of ${b.lens.archive.title}, which the ${b.lens.id} image is multiplied by` }] : [])),
     paper: built.map(b => ({ lens: b.lens.id, citation: b.lens.published.citation, url: b.lens.published.url })),
     measured: { sceneOriginRaDecDeg: [raDeg, decDeg], distancePc, arcsecPerUnit: 1 / distancePc, grid: recipe.grid, lenses: measured },
     models: Object.fromEntries(built.map(b => [b.lens.id, b.kind === 'edge-on' ? `Fitted edge-on disc. ${b.lens.deposit
       ? `The deposited image (${b.lens.deposit.title}) is read about its star at the array centre with ${(b.lens.deposit.pixelArcsec * 1000).toFixed(2)} mas pixels, north up and east left (${b.lens.deposit.orientationSource}), onto a sky plane in astronomical units; its background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and it is shown in its own ${b.lens.deposit.unit} in every channel.`
       : b.lens.hst ? `Each band's two telescope rolls, PSF-subtracted and drizzled north up here (packages/telescope-cli/src/archives/hst/psf-subtract.mts ${b.lens.hst.subtraction}, the reference star divided by the flux ratio the paper states), are read about the star where that subtraction found it, through each product's own WCS, onto a sky plane in astronomical units. Each roll's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted; the rolls are averaged, each one standing alone where the other is blank; and the band is divided by the star's own count rate in it, ${Object.keys(b.lens.hst.products).map(band => `${filterOf(band)} ${b.lens.stellarFluxJy[band]!.toExponential(3)} e-/s`).join(', ')} (${b.lens.stellarFluxSource}; ${b.lens.hst.zeropointSource}), its contrast. The channels: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`
-      : `Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star is placed by ${b.lens.registration ? `planet ${b.lens.registration.planet}'s orbit` : "the observation's target position (TARG_RA, TARG_DEC)"}. Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), its contrast. The channels: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`} The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle ${b.geometry.positionAngleDeg.toFixed(2)}° (published ${b.lens.published.positionAngleDeg}°) with the star ${b.geometry.starOffsetUnits.toFixed(1)} au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted ${(90 - b.lens.published.inclinationDeg).toFixed(1)}° from the sky toward the ${compass(b.lens.nearSidePositionAngleDeg)} side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to ${JSON.stringify(b.reconstruction.checks.relativeProjectionError)} (relative error by channel); ${b.reconstruction.ktx2.path} and ${reconstructionPath(b.lens)} record it.` : `${b.lens.archive ? `Fitted ring, in the colour map the publisher shows. The archive image (${b.lens.archive.title}) is read through its own WCS onto a sky plane in astronomical units, about the star where its catalogue position and proper motion put it on ${String(b.bands[0]!.primary['DATE-OBS'])}. Its background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted; it is the dust's own glow, not starlight, so it is not divided by the star, and the one band feeds every channel.` : `Fitted ring, in the reflectance colour the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`} The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.lens.published.citation}'s ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}° and ${b.lens.published.positionAngleDeg}°. Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is a stated ${b.lens.heightOfRadius} of its radius (the projection changes by ${heightSpread(b)}% across the heights tried), and which side is nearer is a convention: ${b.lens.nearSideSource}. ${b.lens.colorMap ? `Each column is shown in the colour the publisher's map gives its value, linear from ${b.lens.colorMap.range[0]} to ${b.lens.colorMap.range[1]} ${b.lens.colorMap.unit} (${b.lens.colorMap.source}).` : `Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / ${b.lens.stretch!.top} and a = ${b.lens.stretch!.a}; ${b.lens.stretch!.source}.`} Every channel shares one depth profile, so each column is spread along the ring and keeps its colour. The top of the ${b.lens.colorMap ? 'map' : 'stretch'} reaches an alpha of ${b.lens.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean ${b.lens.archive ? 'brightness' : 'reflectance'} in the disc plane falls to its per-pixel noise.`])),
+      : `Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star is placed by ${b.lens.registration ? `planet ${b.lens.registration.planet}'s orbit` : "the observation's target position (TARG_RA, TARG_DEC)"}. Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), its contrast. The channels: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`} The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle ${b.geometry.positionAngleDeg.toFixed(2)}° (published ${b.lens.published.positionAngleDeg}°) with the star ${b.geometry.starOffsetUnits.toFixed(1)} au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted ${(90 - b.lens.published.inclinationDeg).toFixed(1)}° from the sky toward the ${compass(b.lens.nearSidePositionAngleDeg)} side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to ${JSON.stringify(b.reconstruction.checks.relativeProjectionError)} (relative error by channel); ${b.reconstruction.ktx2.path} and ${reconstructionPath(b.lens)} record it.` : `${b.lens.archive ? `Fitted ring, in the colour map the publisher shows. The archive image (${b.lens.archive.title}) is read through its own WCS onto a sky plane in astronomical units, about the star where its catalogue position and proper motion put it on ${String(b.bands[0]!.primary['DATE-OBS'])}. ${b.lens.pointSources ? `${b.lens.pointSources.sources.length === 1 ? 'One point source' : `${b.lens.pointSources.sources.length} point sources`} (${b.lens.pointSources.sources.map(p => p.id).join(', ')}) ${b.lens.pointSources.sources.length === 1 ? 'is' : 'are'} removed first, each the image's own beam at its published position and peak (${b.lens.pointSources.source}). ` : ''}${b.lens.archive.primaryBeam ? `It is multiplied by the same product's primary beam (${b.lens.archive.primaryBeam.source}). ` : ''}${b.lens.smoothTo ? `It is smoothed to a ${b.lens.smoothTo.beamArcsec[0]}″ × ${b.lens.smoothTo.beamArcsec[1]}″ beam at ${b.lens.smoothTo.positionAngleDeg}° and rescaled to Jy per that beam (${b.lens.smoothTo.source}). ` : ''}Its background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted; it is the dust's own glow, not starlight, so it is not divided by the star, and the one band feeds every channel.` : `Fitted ring, in the reflectance colour the publisher shows. Each of the ${b.bands.length} mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the ${b.lens.backgroundAnnulusArcsec.join('–')}″ annulus, is subtracted, and the band is divided by the star's own flux in it (${b.lens.stellarFluxSource}), which leaves how the dust reflects starlight at that wavelength. The channels average them in pairs: ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}.`} ${b.lens.adoptPublishedRing ? `The ring's geometry is not measured on this image: it is the fit of ${b.lens.published.citation} to the same observations, ${b.lens.published.radiusUnits} au, ${b.lens.published.widthFwhmUnits} au wide at half maximum, inclination ${b.lens.published.inclinationDeg}°, line of nodes at position angle ${b.lens.published.positionAngleDeg}°, centred on the star (${b.lens.adoptPublishedRing}).` : `The ring is measured on the mean of the channels: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis ${b.geometry.semiMajorUnits.toFixed(1)} au, axis ratio ${(b.geometry.semiMinorUnits / b.geometry.semiMajorUnits).toFixed(3)} (inclination ${b.geometry.inclinationDeg.toFixed(1)}°), line of nodes at position angle ${b.geometry.positionAngleDeg.toFixed(1)}°, centre ${Math.hypot(...b.geometry.centreUnits).toFixed(1)} au from the star; the single binnings scatter by ${b.geometry.binningSpread.semiMajorUnits.toFixed(1)} au, ${b.geometry.binningSpread.inclinationDeg.toFixed(1)}° and ${b.geometry.binningSpread.positionAngleDeg.toFixed(1)}°. This stands against ${b.lens.published.citation}'s ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}° and ${b.lens.published.positionAngleDeg}°.`} Depth is not the image pushed backwards: a disc of that geometry whose surface density follows the image's own deprojected radial profile, halo included, projects to the mean image with a residual of ${b.profileScore.residualRms.toExponential(2)} against a signal of ${b.fit.signalRms.toExponential(2)}, where a single gaussian ring of radial width ${b.fit.ring.gaussianWidthUnits.toFixed(1)} au leaves ${b.fit.ring.residualRms.toExponential(2)}, a spherical shell ${b.fit.shell.residualRms.toExponential(2)} and constant depth, what an extrusion assumes, ${b.fit.constantDepthResidualRms.toExponential(2)}. A narrow ring would also put the light of sight lines through the halo on the cube's faces, where its density along them peaks; the profile disc puts every column where it crosses the disc plane. The ring's vertical height is ${b.lens.heightSource ? `${b.lens.heightOfRadius} of its radius, from ${b.lens.heightSource}` : `a stated ${b.lens.heightOfRadius} of its radius`} (the projection changes by ${heightSpread(b)}% across the heights tried), and which side is nearer is a convention: ${b.lens.nearSideSource}. ${b.lens.colorMap ? `Each column is shown in the colour the publisher's map gives its value, linear from ${b.lens.colorMap.range[0]} to ${b.lens.colorMap.range[1]} ${b.lens.colorMap.unit} (${b.lens.colorMap.source}).` : `Each channel is shown as log(1 + a u) / log(1 + a) with u = reflectance / ${b.lens.stretch!.top} and a = ${b.lens.stretch!.a}; ${b.lens.stretch!.source}.`} Every channel shares one depth profile, so each column is spread along the ring and keeps its colour. The top of the ${b.lens.colorMap ? 'map' : 'stretch'} reaches an alpha of ${b.lens.topAlpha}, the renderer's convention for a volume; the median drawn line of sight reaches ${b.opacity.median.toFixed(2)}. The image is drawn from ${b.innerMaskUnits.toFixed(0)} au to the grid edge at ${halfUnits} au, tapering from ${b.taperFromUnits.toFixed(0)} au, where the mean ${b.lens.archive ? 'brightness' : 'reflectance'} in the disc plane falls to its per-pixel noise.`])),
     limitations: built.some(b => b.kind === 'edge-on') ? edgeOnLimitations(built.map(b => b.lens)) : built.some(b => b.lens.archive) ? [
       'One image, one epoch, one wavelength: no third axis was observed. The depth is the ring that best projects to the image, an inference from that projection, not a measurement.',
       'Which side of the inclined ring is nearer the observer is stated in the recipe from the literature; the image alone cannot tell.',
-      'The ring’s vertical thickness is a stated convention; at this inclination the projection barely changes with it.',
+      built.every(b => b.lens.heightSource)
+        ? 'The ring’s vertical thickness is not measured: it is a published model’s, which the recipe names; at this inclination the projection barely changes with it.'
+        : 'The ring’s vertical thickness is a stated convention; at this inclination the projection barely changes with it.',
       'Azimuthal brightness differences in the image are kept as measured; the ring model supplies only the depth.',
-      'The image is the archive pipeline’s, not the paper’s own: it is not self-calibrated and not combined with other data, so it is noisier than the published figure. Emission fainter than the drawn noise, such as the dust around a planet, is not claimed.',
+      built.some(b => b.lens.smoothTo)
+        ? 'The image is the archive pipeline’s, not the paper’s own: made from the same observations with other weighting and cleaning, it is noisier and its ring fainter than the published figure even at the paper’s resolution. Emission fainter than the drawn noise is not claimed.'
+        : 'The image is the archive pipeline’s, not the paper’s own: it is not self-calibrated and not combined with other data, so it is noisier than the published figure. Emission fainter than the drawn noise, such as the dust around a planet, is not claimed.',
       'The colours are the publisher’s colour map for brightness at one wavelength, not colours an eye would see.',
       'Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model.',
       'Nothing finer than the image’s beam, its pixels or the grid’s cells is in the drawn volume.',
@@ -698,7 +757,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
         { id: 'colour', label: 'Colour', value: b.lens.colorMap ? `Brightness in ${b.lens.colorMap.unit}, from ${b.lens.colorMap.range[0]} to ${b.lens.colorMap.range[1]}, in the publisher's colour map` : b.lens.deposit ? `Brightness only: one filter (${b.lens.deposit.filter}) in every channel, in the deposit's ${b.lens.deposit.unit}` : `Reflectance: each filter over the star's own flux, ${CHANNELS.map(channel => `${channel} ${b.lens.channels[channel].map(filterOf).join(' + ')}`).join(', ')}` },
         ...(b.kind === 'edge-on'
           ? [{ id: 'midplane', label: 'Midplane measured here', value: `Position angle ${b.geometry.positionAngleDeg.toFixed(1)}° (published ${b.lens.published.positionAngleDeg}°); the ${compass(b.geometry.positionAngleDeg)} side is ${b.geometry.sideBrightness.ratio.toFixed(2)} times as bright as the ${compass(b.geometry.positionAngleDeg + 180)}` }]
-          : [{ id: 'ring', label: 'Ring measured here', value: `${b.geometry.semiMajorUnits.toFixed(0)} au, tilted ${b.geometry.inclinationDeg.toFixed(0)}°, nodes at position angle ${b.geometry.positionAngleDeg.toFixed(0)}°; published ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}°, ${b.lens.published.positionAngleDeg}°` }]),
+          : [b.lens.adoptPublishedRing ? { id: 'ring', label: 'Ring', value: `${b.lens.published.radiusUnits} au, tilted ${b.lens.published.inclinationDeg}°, nodes at position angle ${b.lens.published.positionAngleDeg}°: the published fit to these observations, not measured on this image` } : { id: 'ring', label: 'Ring measured here', value: `${b.geometry.semiMajorUnits.toFixed(0)} au, tilted ${b.geometry.inclinationDeg.toFixed(0)}°, nodes at position angle ${b.geometry.positionAngleDeg.toFixed(0)}°; published ${b.lens.published.radiusUnits} au, ${b.lens.published.inclinationDeg}°, ${b.lens.published.positionAngleDeg}°` }]),
         { id: 'extent', label: 'Drawn extent', value: `${b.innerMaskUnits.toFixed(0)} to ${halfUnits} au; the light reaches the noise at ${b.taperFromUnits.toFixed(0)} au` },
         { id: 'depth', label: 'Depth', value: b.kind === 'edge-on' ? `Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its ${compass(b.lens.nearSidePositionAngleDeg)} side by convention` : `Not measured; the inclined ring that best projects to the images, with its ${compass(b.lens.nearSidePositionAngleDeg)} side nearer by convention` },
       ],
@@ -713,12 +772,21 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const pinnedEvidence = new Map((pinned.inputs ?? []).flatMap(input => (input.sourceBinding?.references ?? []).map(reference => [`${input.id}/${reference.catalogueId}`, reference.evidence])));
   const inputs = built.flatMap(b => b.bands.map(band => ({ lens: b.lens, band }))).map(({ lens, band }, index) => {
     const inputId = inputOf(lens, band), catalogueId = `source-${id}-${inputId}`;
-    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json@${'0'.repeat(40)}#/inputs/${index}`;
+    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${index}`;
     return { id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] },
       path: lens.deposit ? lens.deposit.path : lens.archive ? lens.archive.path : lens.hst ? `${lens.hst.work}/psf-subtracted/${band.origin.file}` : `${downloadsBase}/observations/${band.origin.file}`, origin: band.origin.url, sourceUrl: band.origin.landing,
       title: band.origin.title, credit: band.origin.credit, displayCredit: band.origin.displayCredit, acquisition: band.origin.acquisition,
       license: band.origin.license, lensId: lens.id };
   });
+  for (const b of built) {
+    const beam = b.lens.archive?.primaryBeam;
+    if (!beam) continue;
+    const inputId = `${b.lens.id}-primary-beam`, catalogueId = `source-${id}-${inputId}`, index = inputs.length;
+    const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${index}`;
+    inputs.push({ id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] }, path: beam.path, origin: beam.url,
+      sourceUrl: b.lens.archive!.landing, title: beam.title, credit: b.lens.archive!.credit, displayCredit: b.lens.archive!.displayCredit, acquisition: b.lens.archive!.acquisition,
+      license: b.lens.archive!.license, lensId: b.lens.id });
+  }
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
   const local = (path: string, reason: string) => ({ id: path.replace(/[^a-z0-9-]+/gu, '-').toLowerCase(), path: `${packageBase}/${path}`, sourceBinding: { kind: 'local', reason } });
   const intermediates = outputs.filter(([name]) => name.endsWith('.ktx2') || name.startsWith('volume-') || name.startsWith('previews/')).map(([name]) =>

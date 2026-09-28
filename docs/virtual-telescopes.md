@@ -457,7 +457,7 @@ Native source selection does not establish that a scientifically registered body
 ## Archive acquisition
 
 The virtual-telescope routes use one pinned archive client where Astroquery has the required public operation. Install it with
-`node tools/objects/astronomy-toolchains.mts astroquery install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
+`node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install` and check it with the same command's `verify` mode. The hashed lock installs Astroquery 0.4.11 and its exact Python dependency closure once under `~/.cache/css-earth/astroquery/<pin digest>` (or `CSS_EARTH_ASTROQUERY_CACHE/<pin digest>`). Checkouts with the same pins reuse it without copying the environment. A valid older `output/toolchains/astroquery` install still works; a dangling link there no longer hides a valid shared cache. Installation holds a per-pin lock, verifies the packages, and writes the completion marker last. A query never starts an installation itself.
 
 Astroquery is the archive client for MAST catalogue queries and complete-file downloads, ALMA TAP and DataLink, and the VizieR
 JMDC cone query. cssEarth does not implement those protocols beside it. cssEarth still checks catalogue fields, observation
@@ -1257,8 +1257,7 @@ Chromium's scrollbar/resizer styling and CSS view timelines. Firefox and real
 mobile hardware are not qualified. Unsupported prepared camera bindings are
 refused instead of producing an incomplete view.
 
-The following browser check is historical. Its helper last existed at
-[revision `6e32bc459b^`](https://github.com/layoutit/css.earth/blob/6e32bc459b%5E/tests/experiments/native-scroll/sphere-browser.mts)
+The following browser check is historical. Its helper remains in git history
 and is absent from this checkout:
 
 ```sh
@@ -1331,7 +1330,7 @@ The example uses the archive cube
 already pinned by the Europa 1250 reproduction record. This run checks those
 archive bytes; it does not claim a new Spec3 reproduction. Its 4.2–4.3 µm
 brightness image uses the explicit independent-sample uncertainty assumption.
-The disc registration reuses the [previous Europa fit](https://github.com/layoutit/css.earth/blob/4ac4a4a9eb076d63760768e9f4ca3408882f2bcc/src/objects/europa/evidence/jwst-band-maps.json), converted from top-row-first
+The disc registration reuses the [previous Europa fit](../src/objects/europa/evidence/jwst-band-maps.json), converted from top-row-first
 coordinates to native FITS coordinates; the map excludes emission angles above 65°.
 
 ![Europa projected brightness](images/telescopes/europa-projected-brightness.png)

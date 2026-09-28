@@ -35,7 +35,7 @@ live website currently serves; deployment parity was not audited here.
 | Chaos / Dysts | Prepared trajectories and handoff controls, worker formatting, transferable coordinates | Source and 7 passing transport/playback tests |
 | Blackhole / Luminet | Shared prepared trajectory samples plus indexed descriptors and sparse repairs; chunked worker output | Source; numerical/browser qualification not rerun |
 
-The cssEarth comparison uses the working source rooted at `d8d058662f692daf1cbc20a4bc8a4738ba752a30`
+The cssEarth comparison uses the working source rooted
 plus its existing uncommitted performance changes. These are not all changes in
 that commit. The trace matched the existing candidate build's bundle names;
 that match is not an exact source-map or clean-commit attribution.

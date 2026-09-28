@@ -15,6 +15,10 @@ The navigation marker uses its existing source map as a stylized identifier. The
 | Geology | [USGS Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), 49 units |
 | Silicate signature | [Lucey et al. (2021)](https://zenodo.org/records/4558194), Christiansen-feature wavelength |
 | Crust thickness | [NASA GRAIL visualization](https://svs.gsfc.nasa.gov/4014/), based on gravity and topography models |
+| Gravity, Bouguer gravity | [GRAIL GRGM1200A maps](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/), NASA GSFC, PDS release 2016-04-01: free-air anomaly and Bouguer disturbance in mGal, summed to degree 660, 16 pixels/degree. See [GRAIL gravity views](#grail-gravity-views). |
+| Surface elements: thorium, potassium, iron (FeO), titanium (TiO₂) | [Lunar Prospector GRS elemental abundance, LP-L-GRS-5-ELEM-ABUNDANCE-V1.0](https://pds-geosciences.wustl.edu/missions/lunarp/grs_elem_abundance.html), table LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG: [Prettyman et al. (2006)](https://doi.org/10.1029/2005JE002656), 1998 gamma-ray spectra from 100 km, 2° equal-area pixels. See [Surface elements](#surface-elements). |
+| Roughness | [LRO LOLA LDRM_16 V2.0](https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl), mean height scatter about a plane over 30–120 m, July 2009 to December 2011, 16 pixels/degree; the label cites [Zuber et al. (2012)](https://doi.org/10.1038/nature11216). See [Roughness](#roughness). |
+| Maximum and noon temperature | [LRO Diviner Global Cumulative Products, LRO-L-DLRE-5-GCP-V1.0](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/): bin-average bolometric temperature per 0.5° cell and quarter-hour of local time, 2009–2015, [Williams et al. (2017)](https://doi.org/10.1016/j.icarus.2016.08.012). See [Daytime temperature](#daytime-temperature). |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MOON/target) the Moon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 | Lighting | The Hapke model of [Sato et al. (2014)](https://doi.org/10.1002/2013JE004580) at 643 nm, the model the monochrome mosaic was corrected with, recorded in [`source/photometry/sato-2014-hapke-643nm.json`](source/photometry/sato-2014-hapke-643nm.json). See [Lighting law](#lighting-law). |
 
@@ -22,10 +26,10 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-Photographic refresh, 12 September 2026, on base `3efdf2c9`: the new native
+Photographic refresh, 12 September 2026,: the new native
 LROC map replaces the 2K CGI texture. These are actual Chrome captures at the
 same Copernicus camera, 1280 × 720, DPR 1; the crops omit the sidebar. The
-before atlas was reproduced with the exact `53b262bd` delivery hash.
+before atlas was reproduced with the exact delivery hash.
 
 | Before | Current |
 | --- | --- |
@@ -41,9 +45,9 @@ qualification of the scientific views. Seven unrelated scientific thumbnails
 were unavailable in the local checkout; the cross-body search preview was
 restricted to Moon, Europa and Io.
 
-Earlier shared-lane migration (base `53b262bd`): the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
+Earlier shared-lane migration: the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
 
-[The September 2026 lunar thermal review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree of that review belong to the retired static lane; the current tree is the shared raster-lane sphere. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
+The September 2026 lunar thermal review records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree of that review belong to the retired static lane; the current tree is the shared raster-lane sphere. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
 
 [Earlier independent source anchors](source/validation/scientific-source-anchors.json) preserve LOLA and the superseded Diviner GDR L3 decoder evidence; they do not validate the new GHRM values.
 
@@ -109,7 +113,7 @@ The globe is lit with the Hapke model of [Sato et al. (2014)](https://doi.org/10
 - The WAC looks almost straight down, so the fit saw emission only up to 30°. Toward the limb the law is held at 30°. Beyond that the limb follows no measurement.
 - With the Sun behind the viewer the law hardly darkens the limb: 0.996 of the centre at 30° emission and beyond. The shared bank it replaces (Lambert with a 0.35 floor) darkened it much more.
 - One set of values lights the whole globe. The paper's maps vary by tile: w from 0.27 to 0.44 between the 16th and 84th percentiles over 30°S to 30°N.
-- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false` in d090ce637d. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
+- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js moon --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.004 at half the radius, 0.353 then 0.004 at 0.9 and 0.490 then 0.004 at 0.98.
 
 ## Scene and sky
 
@@ -182,9 +186,9 @@ The three nighttime lenses use the [LRO Diviner GHRM v1.0 float32 mosaics](https
 produced by Powell and the UCLA Diviner team from 2009–2022 observations.
 The exact product labels, original hash pins, compact numeric grids and conversion
 receipts live in `source/science/diviner-ghrm/`; candidate selection and independent
-checks are recorded in the [lunar thermal source review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/source-review/INDEPENDENT-SCIENCE-REVIEW.md).
+checks are recorded in the lunar thermal source review.
 
-The [shared converter](../../../tools/objects/acquisition/diviner-ghrm.py) runs
+The [shared converter](../../../packages/bake/src/objects/acquisition/diviner-ghrm.py) runs
 each `prepare-*.json` in that source directory. Use its `--source-directory` and
 `--output-directory` options to reproduce the compact grid separately and compare
 it with the pinned output.
@@ -286,13 +290,281 @@ Residual viewing/topographic effects remain, especially above 50 degrees.
 The older 2011 PDS noon map was inspected and rejected for its sparse coverage.
 
 Exact bytes, coordinates and validity rules are in the intake plans and receipts.
-See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
+See the [mapped-science conversion method](../../../packages/bake/src/objects/acquisition/MAPPED-SCIENCE.md).
 
 </details>
 
+## GRAIL gravity views
+
+Two views show the Moon's gravity field as GRAIL measured it. Both use the
+GRGM1200A field from NASA Goddard's GRAIL team, built from the whole mission's
+tracking data (1 March to 14 December 2012). The PDS label names
+[Lemoine et al. (2014)](https://doi.org/10.1002/2014GL060027) as the field's
+reference.
+
+| View | Product | What it shows |
+| --- | --- | --- |
+| Gravity | [GGGRX_1200A_ANOM_L660](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl) | Free-air gravity anomaly in mGal: the measured field minus that of a uniform sphere, with nothing removed for topography |
+| Bouguer gravity | [GGGRX_1200A_BOUG_L660](https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl) | Bouguer disturbance in mGal: the same field after the GRAIL team removed the pull of LOLA topography, taken as rock of 2,500 kg/m³ |
+
+One mGal is 0.01 mm/s². Both maps give values on a 1,738.0 km reference sphere
+in the lunar principal-axis frame of DE430. They are 16 pixels per degree
+(about 1.9 km at the equator), global, with no missing cells.
+
+**How the views relate to Crust.** The Crust view is not a measurement. It is
+a model of crustal thickness that GRAIL scientists inverted from gravity and
+topography, and it depends on the densities they assumed for crust and mantle.
+The Bouguer view is the step before such a model: gravity with the
+topography's pull removed, under one stated density. A crustal-thickness model
+then turns what is left into a thickness, with its own density choices. The
+Gravity view is the measured field itself, before either step. Positive Bouguer values usually mean dense mantle lies closer to
+the surface, as under the mare basins' mascons
+([Neumann et al. 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4646831/)).
+
+**Degree 660.** The field is a sum of spherical harmonics up to degree 1200.
+The archive publishes each map summed to several degrees. The label says that
+terms above degree 600 are held toward a power-law prior (Kaula,
+3.6 × 10⁻⁴/n²). Degree 660 is the archived sum just above that limit. Its
+shortest half-wavelength, π × 1,738 km / 660 ≈ 8.3 km, spans about three
+texels of the 4,096-pixel numeric texture (2.7 km), so the texture keeps every
+term the map carries. The degree-900 and degree-1200 maps add terms that the
+prior increasingly shapes.
+
+**Colours.** Blue is below zero and red above, the same palette as Heat
+anomalies. Gravity spans ±400 mGal and Bouguer gravity ±600 mGal.
+These are display stretches chosen from each map's own spread, not scientific
+limits: 1.0% of the Moon's area lies beyond the Gravity stretch and
+1.3% beyond the Bouguer one. Those areas show the end colours.
+
+### Evidence
+
+- The lenses read the archive's EXTRAS GeoTIFF copies. The volume's
+  [extrinfo.txt](source/science/grail/extrinfo.txt) says they hold the same data
+  as the RSDMAP images. A byte-level comparison agreed on all 16,588,800 cells
+  of each map after shifting the GeoTIFF's −180° left edge to the image's 0°.
+- The GeoTIFF tags a 1,737.4 km Moon_2000 ellipsoid. That is a setting of the
+  GIS container: the RSDMAP label, which governs the values, gives the 1,738.0 km
+  sphere. The geographic grid reads the same either way.
+- The migrated PDS4 labels (`.xml`) swap the upper-left corner coordinates. The
+  original PDS3 labels are kept here and used instead.
+- The Moon's recipe block, read through the shared scientific loader, returns
+  the IMG value at all 831 probe points, including the seam and both poles.
+- Published comparison: [Neumann et al. (2015), Table 1](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4646831/)
+  gives the Bouguer contrast of the central high of each lunar basin. For the 14
+  basins from Orientale to Mendeleev, the peak-minus-trough of this map's
+  azimuthally averaged profile is 1.04 to 1.44 times theirs (median 1.13,
+  correlation 0.987). Orientale: 798 mGal here, 720 ± 28 there. They used the
+  earlier GRGM900C field filtered to degrees 6 to 540, so a somewhat larger
+  contrast is expected from a field kept to degree 660.
+- The largest Bouguer value, +741 mGal, lies at 19.5° N, 55.5° E in the
+  Crisium basin. The free-air extremes, −1,330 and +1,782 mGal, lie in the farside
+  highlands between 201° and 210° E near the equator; that map keeps the pull
+  of topography.
+- [All check results](evidence/grail-gravity/checks.json), with the tested
+  file sizes and hashes. Flat previews painted with the lens palette were
+  inspected; they are not in the repository.
+
+### Known problems
+
+- Gravity is in the principal-axis frame; the surface and other views are in
+  the mean-Earth frame. Positions differ by about 1 km at the surface
+  ([LRO coordinate white paper](https://science.nasa.gov/wp-content/uploads/2024/01/luncoordwhitepaper-10-08.pdf)),
+  under half a numeric texel. No frame conversion is applied.
+- Values above degree 600 are partly shaped by the prior. Formal uncertainty
+  varies across the Moon; the archived error map gives 0.6 to 5.3 mGal (1σ) at
+  the 14 basin centres checked.
+- The Bouguer view assumes one density everywhere. Dense mare basalt is not
+  removed, so part of the positive signal over the maria is basalt fill rather
+  than mantle uplift.
+- Numeric colour does not displace the globe. Lighting and shading are the
+  shared Moon lighting, not part of the data.
+
+## Daytime temperature
+
+Two views show how hot the Moon's surface gets by day, from the LRO Diviner
+[Global Cumulative Products](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/) (LRO-L-DLRE-5-GCP-V1.0, product version 1),
+made by J.-P. Williams and the UCLA Diviner team and described by
+[Williams et al. (2017)](https://doi.org/10.1016/j.icarus.2016.08.012). The
+archive compiles every nadir observation from 5 July 2009 to 1 April 2015 into
+eighteen tables, one per 10° of latitude. Each row is the average bolometric
+temperature of one 0.5° cell in one quarter-hour of local time; −9999 marks a
+bin with no observation. Midnight temperature comes from a different product,
+GHRM, which holds night-time fits only.
+
+| View | Rule | Coverage |
+| --- | --- | --- |
+| Maximum temperature | The warmest quarter-hour average of each cell | Every cell |
+| Noon temperature | The mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data | 98.64% of the area |
+
+No archived bin is centred on noon: the two nearest are centred 7.5 minutes
+either side. The window was chosen by measurement on the converter's output.
+Those two bins alone (11:45–12:15) cover 87.25% of the area and leave streaks
+and one large gap on the nearside. 11:30–12:30 covers 98.64% and differs from
+them by 1.03 K at the median and 7.32 K at the 95th percentile where both
+exist. 11:00–13:00 covers everything but moves the values by 1.89 K and
+10.66 K. Nothing is fitted or filled. For 82% of cells the maximum falls
+within an hour of noon.
+
+The shared converter `packages/bake/cli/diviner-gcp-grid.mts` reads the tables
+row by row (0.8 GB memory, 20 s) with the recipe
+[`source/science/diviner-gcp/prepare-tbol.json`](source/science/diviner-gcp/prepare-tbol.json)
+and writes the two 720 × 360 float32 grids beside it, with a receipt of every
+input and output hash. Two runs wrote byte-identical grids.
+
+**Colours.** Both views use the Midnight temperature palette over one shared
+range, 220 to 400 K, so they can be compared. 220 K is just below the 1st
+percentile of the noon view (222 K; the maximum's is 242 K) and 400 K just
+above both 99th percentiles (395 K). 0.41% of the area is colder than 220 K in
+the maximum view and 0.94% in the noon view; almost none is above 400 K.
+
+### Evidence
+
+- For three strips, including the one with the faulty label, a separate reading
+  of every row rebuilds both rules and matches the grids at all 43,200 cells
+  ([checks](evidence/diviner-gcp/checks.json)).
+- Within 5° of the equator the maximum's 5th to 95th percentile is 388 to 396 K;
+  Williams et al. (2017) report daytime maxima of about 387 to 397 K there.
+- Their abstract says dark surfaces reach higher maxima and bright ones lower.
+  Here Mare Tranquillitatis reaches 394.5 K and the farside highlands 389.9 K;
+  bright young Tycho 349.5 K and Aristarchus 376.2 K.
+- Flat previews painted with the lens palette were inspected; they are not in
+  the repository.
+
+### Known problems
+
+- Noon gaps are thin streaks, mostly on the nearside: coverage is lowest at
+  40–50°N (96.1%). They show as gray grid.
+- These are averages of many days, not one day's temperatures, and at 0.5°
+  (about 15 km) they blend terrain. Large craters still show as temperature
+  differences.
+- The PDS4 labels give the paper DOI as 10.1026/j.icarus.2016.08.012; it is
+  10.1016/j.icarus.2016.08.012. The PDS3 label of the 40°S–30°S strip exchanges
+  its minimum and maximum latitude; its rows and file name agree with 40°S–30°S,
+  and the recipe records the defect.
+
+## Surface elements
+
+Four views, grouped under Surface elements, show what Lunar Prospector's
+gamma-ray spectrometer found in the lunar soil: thorium and potassium in parts
+per million, iron as FeO and titanium as TiO₂ in weight percent. They come from
+one PDS table, [LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG](https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl),
+in the data set LP-L-GRS-5-ELEM-ABUNDANCE-V1.0 (PDS release 2012-10-24, PDS4
+version 1.1). It holds the abundances of [Prettyman et al. (2006)](https://doi.org/10.1029/2005JE002656),
+found by splitting each map pixel's spectrum into modelled element spectra.
+Its [data set description](https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat)
+explains the method, errors and limits used here.
+
+| View | Column | Display | Median uncertainty (1σ) |
+| --- | --- | --- | --- |
+| Thorium | W_TH, ppm | 0 to 10 ppm | 0.26 ppm |
+| Potassium | W_K, ppm | 0 to 3,500 ppm | 228 ppm |
+| Iron (FeO) | W_FEO, g/g × 100 | 0 to 25 weight % | 1.0 weight % |
+| Titanium (TiO₂) | TIO2, g/g × 100 | 0 to 8 weight % | 0.52 weight % |
+
+**Where the data come from.** The spectra were taken from about 100 km up
+between 17 January and 7 October 1998. At that height the instrument blurred
+the surface over about 5° of arc, some 150 km. The table uses equal-area pixels
+2° high (about 60 km), so neighbouring pixels share much of what they saw. The
+data set says FeO, TiO₂, K and Th are the columns Prettyman et al. evaluated at
+2°; it advises caution with the other oxides at that size, so they are not shown.
+
+**Reading the table.** The table is not a grid. Each of its 91 latitude bands is
+split into as many pixels as keeps their areas about equal (the smallest,
+around the 1° polar caps, has 0.75 of the largest area). A new shared reader
+(`pds-equal-area-table`, drafted for `packages/bake/src/objects/raster/pds/`)
+cuts each row at the byte positions of the release's format file, checks that
+the pixels tile the sphere exactly as printed, and colours every display texel
+with the pixel that contains it. Nothing is interpolated. The display grid is
+the same numeric texture as the other views, so pixel edges show as steps.
+
+**Colours.** The palette is the one the mineral views use. Each range is a
+round value just above the 99th percentile by area, so under 1% of the Moon
+shows the top colour: 0.46% for thorium, 0.76% for potassium, 0.55% for FeO
+(the same 0–25% range as the Kaguya Iron content view) and 0.49% for TiO₂.
+
+**Zeros.** The release has no negative values. TiO₂ is exactly zero over 18.7%
+of the Moon's area and potassium over 3.8%: there the fit found none at a
+precision of about 0.5% TiO₂ or 230 ppm K. They are shown as zero, as archived.
+
+### Evidence
+
+- Every one of the 11,306 pixels, probed at its centre and just inside its four
+  corners, returns the value an independent whitespace split of the row gives,
+  for all four views (226,120 probes, no mismatch).
+- Thorium and potassium light up the nearside KREEP region and iron and
+  titanium the maria, as expected. Thorium peaks at 11.6 ppm near 0°N, 18.75°W, beside the Apollo 14 site (10.7
+  ppm), inside the Procellarum KREEP region; the farside highlands at 0°N, 180°E
+  hold 0.86 ppm. Titanium peaks at 12.0% at 12°N, 25°E in Mare Tranquillitatis.
+  FeO runs from 2.6% on the farside to 21% at the Apollo 12 and Luna 16 sites.
+- [Lawrence et al. (2022)](https://doi.org/10.1029/2022JE007197) report Th above
+  12 ppm at Timocharis and the Apennine Bench in a sharper 0.5° reconstruction.
+  This table's coarser pixels there hold less, as the 150 km footprint predicts.
+- [All check results](evidence/lp-grs/checks.json), with pixel values at nine
+  landing and sample sites and the tested file sizes and hashes. Flat previews
+  painted with the lens palette were inspected; they are not in the repository.
+
+### Known problems
+
+- The full text of Prettyman et al. (2006) could not be read from this machine
+  (the publisher served a challenge page), so no value was compared with the
+  paper's own tables. The checks above are the archive's values and their
+  geographic pattern.
+- The largest FeO, 30.7% at 30°N, 57°W in Oceanus Procellarum, is above any
+  returned soil; the paper notes western Procellarum is not well represented by
+  the sample collection. It shows the top colour.
+- The label's description says "5 degree" pixels and the readme says columns are
+  comma-separated; the file name, row count and format file give 2° pixels and
+  fixed-width, space-separated columns. The column for TiO₂ is named TIO2, not
+  W_TIO2. The reader follows the format file.
+- Lunar Prospector has no mission record in the facility catalogue, so these
+  views carry no mission attribution edge yet.
+
+## Roughness
+
+The Roughness view shows how bumpy the ground is over tens of metres. It reads
+[LDRM_16](https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl), product version V2.0 of the LOLA gridded data set
+LRO-L-LOLA-4-GDR-V1.0, made by David E. Smith's GSFC team in 2012 from laser
+shots of 13 July 2009 to 11 December 2011 (mission phases through LRO_SM_17).
+The label cites [Zuber et al. (2012)](https://doi.org/10.1038/nature11216).
+
+The label defines each value as the residual standard deviation of altitudes
+from three successive laser shots after fitting a plane to their 5 to 15
+returns, averaged over the shots in each 1/16° pixel (about 1.9 km). The
+distance the fit spans, the baseline, varies from 30 to 120 m with orbital
+speed, detection and altitude. Values are metres (signed 16-bit millimetres);
+the existing `pds3-grid` reader decodes them and withholds the label's
+MISSING_CONSTANT, −32768. That covers 4.4% of the Moon's area in scattered
+pixels, most at 70–90° latitude (up to 11% of a 10° band). Nothing is filled.
+
+**Colours.** 0.5 to 2 m, the 1st and 99th percentiles by area (0.50 and 1.93 m)
+rounded; 1.0% of the area lies below and 0.74% above, and shows the end colours.
+Viridis, as on the Mars thermal-inertia view. The median is 0.92 m.
+
+### Evidence
+
+- 331,175 lattice probes, including the seam and both poles, return the value of
+  an independent decode of the image, and are missing exactly where it holds
+  −32768 ([checks](evidence/lola-roughness/checks.json)).
+- Registration and pattern: Tycho, the roughest large feature, lands at its IAU
+  position (median 3.0 m within 0.3° of 43.3°S, 348.7°E); the maria read smooth
+  (Tranquillitatis 0.73 m, Serenitatis 0.81 m, Imbrium 0.91 m) and the farside
+  highlands rough (1.20 m at 0°N, 180°E).
+- The label cites no values to compare with. Flat previews were inspected; they
+  are not in the repository.
+
+### Known problems
+
+- Because the baseline varies from 30 to 120 m, pixels are not all measured at
+  the same scale; the product is not the fixed-baseline roughness of the later
+  LDRM_32 family.
+- The newer LDRM_32 products (2019, 25 m baseline, noise-corrected) were tried
+  first. At the display textures (about 11 texels per degree) the pixels the
+  producer had interpolated, 37% of the area, showed as speckle once withheld;
+  see the [investigation ledger](investigations.json).
+
 ## Catalogue attribution
 
-The GRAIL crustal-thickness print is attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.
+The GRAIL crustal-thickness print and the two GRGM1200A gravity maps are attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.
 
 ## Kaguya numeric views
 

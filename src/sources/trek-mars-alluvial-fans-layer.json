@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-alluvial-fans-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Alluvial Fans (NASA Mars Trek GIS layer FanSurvey_2005_2008)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/2",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/69"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "moore-kraal-alluvial-fans",
+      "evidence": "The Trek catalogue entry for this layer cites Jeffrey M. Moore and Alan D. Howard (2005), JGR 110, E04005."
+    }
+  ],
+  "statements": []
+}

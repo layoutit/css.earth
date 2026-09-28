@@ -63,8 +63,8 @@ export interface PreparedPresentationDefinition {
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
-  /** Authored infinite motion, resolved from source CSS during preparation. */
-  motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
+  /** Infinite motion: a spin resolved from source CSS, or a star's light curve as opacity. */
+  motion?: readonly { target: number; id: string; keyframes: ({ offset: number; transform: string } | { offset: number; opacity: string })[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
   features?: PreparedSurfaceFeaturePlan;
   depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
@@ -88,10 +88,10 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;
 }
-export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan, initial = false }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null; initial?: boolean }): PreparedPresentationPlan {
+export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
   const variant = selectedPreparedVariant(definition, selection);
   const textureLevel = definition.textureLevels ? selectPreparedTextureLevel(definition.textureLevels,
-    view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel, initial) : undefined;
+    view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel) : undefined;
   // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
   const fallback = activeResourceFallbacks(definition.assets?.fallbacks);
   const levelChoice = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);
@@ -99,18 +99,19 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
   const textureResources = levelResources === undefined && !Object.keys(fallback).length ? undefined
     : { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([key, level]) => [key, fallback[level] ?? level])) };
   const content = variant.required.map(key => textureResources?.[key] ?? key);
-  // An opaque proxy stands for a marker-stage body, so its mesh is not drawn
+  // An opaque proxy stands for a marker- or billboard-stage body, so its mesh is not drawn
   // (see perspective-dolly.ts). Mounting one there decoded a full surface set
   // for pixels no one sees. Its group is neither required nor warmed until the
   // camera resolves the body, which re-plans and decodes before it appears.
-  const deferredTextures = (view?.levelOfDetail?.stage ?? "geometry") === "marker";
+  const deferredTextures = (view?.levelOfDetail?.stage ?? "geometry") !== "geometry";
   const required = new Set(definition.resourceOrder === "materials-first" || deferredTextures ? [] : content);
   const prewarm = new Set<string>(), materials: Record<string, PreparedMaterialDemand> = {};
   for (const selected of variant.materials) {
     if (!view) throw new TypeError('Prepared material demand requires a view.');
     const track = definition.materials.find(track => track.id === selected.track);
     if (!track) throw new TypeError(`Unprepared material track: ${selected.track}.`);
-    const state = resolvePreparedMaterialDemand(track, selected, view);
+    const resolved = resolvePreparedMaterialDemand(track, selected, view);
+    const state = deferredTextures ? { ...resolved, required: [], prewarm: [] } : resolved;
     for (const key of state.required) required.add(key);
     for (const key of state.prewarm) prewarm.add(key);
     materials[track.id] = state;
@@ -205,7 +206,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const motion = (definition.motion ?? []).map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
     animation.id = plan.id;
-    context.registerAnimation(animation, { mode: 'motion', initialTime: 0 });
+    // A light curve (opacity keyframes) plays on its own permission and moves no texel.
+    context.registerAnimation(animation, { mode: 'motion', initialTime: 0, ...(plan.keyframes.every(frame => 'opacity' in frame) ? { lightCurve: true } : {}) });
     return { animation, plan, duration: plan.duration };
   });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.

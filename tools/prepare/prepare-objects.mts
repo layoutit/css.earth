@@ -25,7 +25,7 @@ import { readPreparedObjects } from "@cssearth/objects/node";
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
-const sharedSteps = ["cli/prepare-shell-titles.mts", "cli/prepare-scientific-charts.mts"];
+const sharedSteps = ["site/build/prepare/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 const traceModule = new URL("../../packages/bake/cli/preparation-trace.mts", import.meta.url).href;
 
@@ -112,12 +112,12 @@ export async function prepareObjects({ projectRoot = process.cwd(), force = fals
   const start = performance.now();
   try {
     for (const script of sharedSteps) {
-      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, "tools/prepare", script)], cwd: root });
+      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, script)], cwd: root });
       assert.equal(result.exitCode, 0, `${script} failed`); assert.equal(result.signal, null);
     }
     const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });
     const navigation = await runObjectCommand({ command: process.execPath,
-      argumentsList: [resolve(root, "tools/prepare/cli/prepare-navigation.mts"), ...objectIds], cwd: root });
+      argumentsList: [resolve(root, "packages/bake/cli/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
     // Inventory every prepared body's baked prepared/ files, even when `prepare:object-json` does not run afterward.
     for (const id of objectIds) {

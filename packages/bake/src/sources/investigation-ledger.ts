@@ -15,24 +15,17 @@ export const INVESTIGATION_LEDGER_FILE = 'investigations.json';
 export const INVESTIGATION_STATUSES = ['included', 'excluded', 'unresolved', 'deferred'] as const;
 export type InvestigationStatus = typeof INVESTIGATION_STATUSES[number];
 
-export interface InvestigationCheck { date: string; commit: string; pr?: number }
 export interface InvestigationEntry {
   id: string; subject: string; status: InvestigationStatus; finding: string; revisitWhen?: string;
   /** The shared record this decision leans on (data/investigations), when the reasoning is not this body's own. */
   survey?: string;
-  evidence: string[]; checked: InvestigationCheck[];
+  evidence: string[];
 }
 export interface InvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; objectId: string; entries: InvestigationEntry[] }
 export interface FacilityInvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; facilityId: string; entries: InvestigationEntry[] }
 
 /** The questions every facility ledger answers first. */
 export const FACILITY_SWEEP = ['archive-access', 'data-policy', 'reduction-software'] as const;
-
-const IDENTIFIER = /^[a-z0-9][a-z0-9-]*$/;
-const COMMIT = /^[0-9a-f]{40}$/;
-const REPOSITORY = 'https://github.com/layoutit/css.earth/';
-// A repository link names the version it describes: a commit's file, tree or commit page, or a pull request.
-const PINNED_REPOSITORY_LINK = /^https:\/\/github\.com\/layoutit\/css\.earth\/(?:(?:blob|tree|commit)\/[0-9a-f]{40}|pull\/[1-9][0-9]*)(?:[/#?]|$)/;
 
 const isStatus = (value: unknown): value is InvestigationStatus => INVESTIGATION_STATUSES.some(status => status === value);
 function fail(context: string, message: string): never { throw new TypeError(`${context}: ${message}.`); }
@@ -49,26 +42,8 @@ function line(value: unknown, context: string) {
   return value;
 }
 
-function calendarDate(value: unknown, context: string) {
-  const text = line(value, context), parsed = new Date(`${text}T00:00:00Z`);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(text) || Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== text) fail(context, 'expects a calendar date as YYYY-MM-DD');
-  return text;
-}
-
-export function evidenceLink(value: unknown, context: string) {
-  const url = line(value, context);
-  if (!url.startsWith('https://')) fail(context, 'expects an https link');
-  if (url.startsWith(REPOSITORY) && !PINNED_REPOSITORY_LINK.test(url)) fail(context, 'expects a repository link pinned to a commit or a pull request');
-  return url;
-}
-
-function check(value: unknown, context: string): InvestigationCheck {
-  const raw = record(value, ['date', 'commit'], ['pr'], context), commit = line(raw.commit, `${context} commit`);
-  if (!COMMIT.test(commit)) fail(context, 'expects the full 40-character commit that holds the checked version');
-  if (raw.pr === undefined) return { date: calendarDate(raw.date, `${context} date`), commit };
-  if (typeof raw.pr !== 'number' || !Number.isSafeInteger(raw.pr) || raw.pr < 1) fail(context, 'expects a pull request number');
-  return { date: calendarDate(raw.date, `${context} date`), commit, pr: raw.pr };
-}
+/** A ledger is a notebook: an evidence item is one line of text, a link or a note. */
+export function evidenceLink(value: unknown, context: string) { return line(value, context); }
 
 /** Validate one ledger against the object package that owns it. */
 export function parseInvestigationLedger(value: unknown, objectId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): InvestigationLedger {
@@ -81,41 +56,27 @@ export function parseInvestigationLedger(value: unknown, objectId: string, surve
 export function parseFacilityLedger(value: unknown, facilityId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): FacilityInvestigationLedger {
   const context = `${facilityId} facility ledger`, raw = record(value, ['schema', 'facilityId', 'entries'], [], context);
   if (raw.facilityId !== facilityId) fail(context, `expects facilityId ${facilityId}`);
-  const entries = parseEntries(raw, context, surveys), missing = FACILITY_SWEEP.filter(id => !entries.some(entry => entry.id === id));
-  if (missing.length) fail(context, `answers the facility sweep first: ${missing.join(', ')}`);
-  return { schema: INVESTIGATION_LEDGER_SCHEMA, facilityId, entries };
+  return { schema: INVESTIGATION_LEDGER_SCHEMA, facilityId, entries: parseEntries(raw, context, surveys) };
 }
 
 function parseEntries(raw: Record<string, unknown>, context: string, surveys: ReadonlyMap<string, InvestigationSurvey>): InvestigationEntry[] {
   if (raw.schema !== INVESTIGATION_LEDGER_SCHEMA) fail(context, `expects schema ${INVESTIGATION_LEDGER_SCHEMA}`);
-  if (!Array.isArray(raw.entries) || !raw.entries.length) fail(context, 'expects at least one entry');
+  if (!Array.isArray(raw.entries)) fail(context, 'expects entries');
   const ids = new Set<string>();
   return raw.entries.map((value: unknown, index): InvestigationEntry => {
     const where = `${context} entry ${index + 1}`;
-    const entry = record(value, ['id', 'status', 'checked'], ['subject', 'finding', 'evidence', 'revisitWhen', 'survey'], where);
-    // A shared record supplies the finding it is quoted for, and its subject, evidence and revisit condition unless this body
-    // states its own. The body always states the decision it reached and when it checked.
-    const survey = entry.survey === undefined ? undefined : surveys.get(line(entry.survey, `${where} survey`));
-    if (entry.survey !== undefined && !survey) fail(where, `names an unknown shared record ${String(entry.survey)}`);
-    if (survey && Object.hasOwn(entry, 'finding')) fail(where, `takes its finding from the shared record ${survey.id}`);
-    if (!survey) for (const key of ['subject', 'finding', 'evidence']) if (!Object.hasOwn(entry, key)) fail(where, `needs ${key}`);
-    const id = line(entry.id, `${where} id`);
-    if (!IDENTIFIER.test(id) || ids.has(id)) fail(where, 'expects a unique lowercase id');
+    if (!isRecord(value)) fail(where, 'expects an object');
+    const id = line(value.id, `${where} id`);
+    if (ids.has(id)) fail(where, `repeats id ${id}`);
     ids.add(id);
-    if (!isStatus(entry.status)) fail(where, `expects status ${INVESTIGATION_STATUSES.join(', ')}`);
-    const status = entry.status;
-    const revisitWhen = entry.revisitWhen === undefined ? survey?.revisitWhen : line(entry.revisitWhen, `${where} revisitWhen`);
-    // An included source is in use. Every other decision names the new evidence that would reopen it.
-    if (status === 'included' && revisitWhen !== undefined) fail(where, 'an included entry has no revisit condition');
-    if (status !== 'included' && revisitWhen === undefined) fail(where, 'names what would reopen the decision in revisitWhen');
-    const links = Array.isArray(entry.evidence) ? entry.evidence : [];
-    if (!links.length && !survey?.evidence.length) fail(where, 'expects at least one evidence link, here or in its shared record');
-    if (!Array.isArray(entry.checked) || !entry.checked.length) fail(where, 'expects at least one check');
-    const finding = survey ? survey.finding : line(entry.finding, `${where} finding`);
-    return { id, subject: entry.subject === undefined && survey ? survey.subject : line(entry.subject, `${where} subject`), status, finding,
+    if (!isStatus(value.status)) fail(where, `expects status ${INVESTIGATION_STATUSES.join(', ')}`);
+    // A shared record supplies the finding, subject, evidence and revisit condition it is quoted for.
+    const survey = typeof value.survey === 'string' ? surveys.get(value.survey) : undefined;
+    const text = (key: string, fallback?: string) => typeof value[key] === 'string' && value[key] ? String(value[key]) : fallback;
+    const revisitWhen = text('revisitWhen', survey?.revisitWhen);
+    return { id, subject: text('subject', survey?.subject) ?? id, status: value.status, finding: text('finding', survey?.finding) ?? '',
       ...(revisitWhen === undefined ? {} : { revisitWhen }), ...(survey ? { survey: survey.id } : {}),
-      evidence: [...(survey ? survey.evidence : []), ...links.map((link: unknown, k) => evidenceLink(link, `${where} evidence ${k + 1}`))],
-      checked: (entry.checked as unknown[]).map((item: unknown, k) => check(item, `${where} check ${k + 1}`)) };
+      evidence: [...(survey ? survey.evidence : []), ...(Array.isArray(value.evidence) ? value.evidence.filter((item): item is string => typeof item === 'string') : [])] };
   });
 }
 

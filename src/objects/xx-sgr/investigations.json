@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "xx-sgr",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4096979650282842112: position at J2016.0. Distance: Groenewegen (2013), A&A 550, A70, table10, XX Sgr: Baade-Wesselink distance (pc) 1327.3 +/- 77.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 1327.3 +/- 77.2 pc; Gaia DR3 parallax 0.6870 +/- 0.0271 mas (same row, RUWE 1.10), 25.4 standard errors, is not used. Proper motion: Gaia DR3 (same row): -0.238, -0.489 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 45.8 +/- 2.7 solar radii from Groenewegen (2013), A&A 550, A70, table10, XX Sgr: Baade-Wesselink mean radius (solar radii) 45.8 +/- 2.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5625 +/- 367 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 276, Name='XX Sgr', columns Teff, e_Teff (K): Teff 5625 +/- 367 K from a fit to the spectral energy distribution at mean light (not spectroscopic).",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186",
+        "https://arxiv.org/abs/1212.5478"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,625 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.521 +/- 0.016 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2-degree observer: #ffefe5. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,625 K and log g 1.3 (u1 0.481, u2 0.228): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 1.3 from 2023A&A...678A.195D, the median of its 12 spectra; the 18 published values span log g 1 to 1.89, across which the limb law changes by at most 0.6% of the centre brightness.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D"
+      ]
+    }
+  ]
+}

@@ -70,7 +70,7 @@ this color repair does not promote its unresolved registration cases:
 
 - `controlled-shape-color`: Pan, Atlas, Daphnis, Prometheus, Pandora, Janus,
   Epimetheus, Hyperion and Proteus, through the
-  [shared surface-observation pipeline](../tools/objects/surface-observations/README.md).
+  [shared surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md).
   Each band set names its red, green and blue photographs, and native labels
   must agree with the selected filters and calibrated reflectance units. A point
   is colored only where all three bands qualify, and it keeps the one band set
@@ -104,7 +104,7 @@ this color repair does not promote its unresolved registration cases:
   Its values are derived band values, not untouched I/F. The reader validates
   the archived wavelengths and applies its explicit common display range once.
 - `nh-mvic-camera`: Arrokoth's registered, PSF-matched MVIC cube, through the
-  [shared surface-observation pipeline](../tools/objects/surface-observations/README.md).
+  [shared surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md).
   Its native PDS label binds BLUE/RED/NIR/CH4 order, wavelengths and data-number
   units. The selected NIR/red/blue values remain floating through the shared
   footprint, photometry and surface transfer; the same encoder finishes the
@@ -124,7 +124,7 @@ published image or a claim that every body has measured natural color.
 
 ## Sky survey bands
 
-The [sky band composer](../tools/objects/observation/sky-band-composite.mts) turns
+The [sky band composer](../packages/telescope-cli/src/sky/sky-band-composite.mts) turns
 calibrated infrared survey bands into the nebula lab's working images. Its route
 table owns the calibration: the WISE Explanatory Supplement DN-to-Jy factors for
 1.375 arcsec atlas pixels, and the IRAC Handbook surface-brightness corrections
@@ -149,7 +149,7 @@ stretch, not from calibration.
 The shared [Lupton et al. (2004)](https://doi.org/10.1086/382245) asinh display then
 maps the mean of the normalized bands and scales every band by the same factor.
 Pixels brighter than the display are scaled down as a whole, which keeps their hue.
-`tools/objects/color-transfer.oracle.test.mts` matches every byte of Astropy's
+`tests/objects/color/color-transfer.oracle.test.mts` matches every byte of Astropy's
 `make_lupton_rgb` for color and one-band cases.
 
 The WISE HiPS maps carry a separate level for each atlas tile, which shows as
@@ -253,8 +253,7 @@ Follow the [visual-comparison contract](provenance/CONTRACT.md#say-what-the-chec
 do not Pixelmatch different spectral combinations to claim fidelity.
 
 For the 2026-09-13 refresh, each body's capture records the exact recipe, runtime,
-transfer and delivered-image hashes, compared with retained geometry at
-`8cc1a2fae`. Source registrations and native observations are unchanged. Captures
+transfer and delivered-image hashes, compared with retained geometry. Source registrations and native observations are unchanged. Captures
 made before the final capture-helper edits remain applicable: those edits add an
 optional viewpoint, an installed-Chrome selector and larger diagnostic response
 buffers; they do not change prepared data or rendering. Europa's capture faces

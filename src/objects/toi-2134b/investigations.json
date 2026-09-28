@@ -1,5 +1,39 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "toi-2134b",
-  "entries": []
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "Radius 0.24400078 Jupiter radii from Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract): 17,444.1 km at 71,492 km per Jupiter radius.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+        "https://doi.org/10.1093/mnras/stag1265",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02948132 Jupiter masses: Rescigno et al. 2026 (2026MNRAS.550g1265R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+        "https://doi.org/10.1093/mnras/stag1265",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "NASA Exoplanet Archive ps table: P 9.229198 d (Rescigno et al. 2026); a/R* 23.66 (Rescigno et al. 2024); inclination 89.69 degrees (Rescigno et al. 2026); e 0.067 (Rescigno et al. 2026); omega 163 degrees (Rescigno et al. 2026); transit mid-time 2459010.68937 BJD, taken as BJD_TDB (Rescigno et al. 2026). Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.5385R/abstract",
+        "https://exoplanetarchive.ipac.caltech.edu/"
+      ]
+    }
+  ]
 }

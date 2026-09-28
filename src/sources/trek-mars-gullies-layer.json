@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-gullies-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Global Distribution of Gullies (NASA Mars Trek GIS layer Gullied_Landform_Survey_2015)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/71"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "harrison-2015-gullies",
+      "evidence": "The Trek catalogue entry for this layer cites Tanya N. Harrison, Gordon R. Osinski, Livio L. Tornabene and Eriita Jones (2015), Icarus 252, 236-254."
+    }
+  ],
+  "statements": []
+}

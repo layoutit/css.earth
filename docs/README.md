@@ -15,6 +15,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
+| Compact numeric maps from USGS products for the Moon, Venus, Mercury and Mars, and how they are read | [Numeric USGS surface maps](usgs-numeric-surfaces.md) |
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
@@ -73,7 +74,7 @@ Keep maintained Markdown guides here and their illustrations in `images/`.
 Link each guide from this index or another guide, and each illustration from a
 guide. Put processing code in `tools/`, test fixtures in `tests/`, and local source
 records beside the body. Shared published identities belong in the Sources catalogue.
-Link historical evidence at its exact Git revision from the account that uses it.
+Git history keeps removed evidence; never link it by commit.
 Plans, superseded proposals and raw run output do not need a permanent copy in
 the current tree.
 

@@ -1,9 +1,6 @@
 {
   "schema": "cssearth-usgs-integration-check@1",
   "date": "2026-09-27T02:14:33.376Z",
-  "testedCommit": "60172133f120a6865887329827ea6faa3c9a5d03",
-  "upstreamCommit": "b4d1062330ddc107e405fa7925301f68d134ad7c",
-  "previousImplementation": "be87c8a3ce14a06d1ed1f6045bd3b64c8d3cbff5",
   "scope": "The integrated implementation plus refreshed authored-preparation inventories recorded in delivery.json. This report and README edits were added after these checks. Earlier browser, decoding and calibration records retain their original version identities.",
   "reuse": {
     "readerContent": "All 13 text.json files are byte-identical and all lens controls match the previous implementation. Body content differs only in chart heights on Venus, Mercury and Mars. The prior 81-row source-label audit still applies; Venus source labels were inspected again.",

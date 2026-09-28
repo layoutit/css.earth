@@ -20,7 +20,7 @@ The final expansion is also qualified through main's shared surface-observation 
 [Measured evidence](evidence/photographic-coverage/evidence.json)
 
 The matched Chrome 152 captures use 1440×1000, DPR 1, OSIRIS, motion paused
-and Shadows off. Before is `d4330c6c1`; after is `0ff39d3bc` plus this change,
+and Shadows off. Before is the base; after is the base plus this change,
 with exact input/output pins in the evidence. Camera, retained tree and hit mesh
 are byte-equivalent. Pixelmatch 7.2.0 at threshold 0.1 reports 29,007 changed
 pixels out of 1,440,000; independent unchanged captures differ by zero pixels.
@@ -66,7 +66,7 @@ Camera preparation also repairs two stale `.mjs` helper paths left by the
 TypeScript migration. The selected image, profile, camera and their byte pins
 are in [the source manifest](source/manifest.json).
 
-[The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
+The 9 September 2026 mosaic report records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. Validation identifies tested and; these are historical results.
 
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 

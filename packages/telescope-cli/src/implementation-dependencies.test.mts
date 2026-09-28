@@ -125,6 +125,51 @@ test('the galaxy-field and layered-provenance libraries are followed into their 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test('the facility-render poses are followed into their bake source, as when they sat under tools/facility-renders', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b10-'));
+  try {
+    const directory = 'packages/bake/src/facility-renders';
+    await writeFile(resolve(root, 'entry.mts'), "import { v0 } from '@cssearth/bake/facility-renders';\nexport const used=[v0];\n");
+    await mkdir(resolve(root, directory), { recursive: true });
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
+    await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('the asset-publication commands are followed into their bake source, as when they sat under tools/assets', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b8-'));
+  try {
+    const directory = 'packages/bake/src/asset-publication';
+    await writeFile(resolve(root, 'entry.mts'), "import { v0 } from '@cssearth/bake/asset-publication';\nexport const used=[v0];\n");
+    await mkdir(resolve(root, directory), { recursive: true });
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
+    await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('the site-assets preparers are followed into their bake source, as when they sat under tools/prepare', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b7-'));
+  try {
+    const directory = 'packages/bake/src/site-assets';
+    await writeFile(resolve(root, 'entry.mts'), "import { v0 } from '@cssearth/bake/site-assets';\nexport const used=[v0];\n");
+    await mkdir(resolve(root, directory), { recursive: true });
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
+    await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
+    const before = await implementationFingerprint(root, ['entry.mts']);
+    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
+    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
+    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test('the astronomy package loader is followed into its bake source, as when it sat under tools/prepare/astronomy', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b5-'));
   try {
@@ -235,7 +280,7 @@ test('the telescope library is followed into its sources, as when its modules sa
 
 test('the shared object libraries are followed into their bake sources, as when they sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-bake-objects-'));
-  const topics = ['cameras', 'candidates', 'charts', 'color', 'content', 'geometry', 'raster', 'scene', 'sources', 'stellar', 'surface-features', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
+  const topics = ['acquisition', 'cameras', 'candidates', 'celestial', 'charts', 'color', 'content', 'default-view', 'geometry', 'host-adapters', 'interpretation', 'raster', 'scene', 'sources', 'sphere-survey', 'stellar', 'surface-features', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
   try {
     await writeFile(resolve(root, 'entry.mts'), `${topics.map(topic => `import * as ${topic.replace(/\W/gu, '_')} from '@cssearth/bake/objects/${topic}';`).join(' ')}\nexport const used=[${topics.map(topic => topic.replace(/\W/gu, '_')).join(',')}];\n`);
     for (const topic of topics) {
@@ -292,7 +337,7 @@ test('the telescope command package is followed into its sources, as when its mo
 
 test('a telescope command subpath is followed to the source its package exports declare, digits included (imaging/image3)', async () => {
   const specifier = '@cssearth/telescope-cli/archives/jwst/imaging/image3', source = 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts';
-  const composite = await implementationFingerprint(WORKSPACE, ['tools/objects/observation/sky-band-composite.mts']);
+  const composite = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sky/sky-band-composite.mts']);
   assert.ok(composite.files.some(file => file.path === source), 'the observation composite identity holds the JWST image3 source it imports');
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-cli-exports-'));
   try {

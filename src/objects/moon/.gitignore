@@ -8,3 +8,6 @@ source/geology/*.cpg
 
 # Original GHRM archives are restored from pinned PDS URLs.
 source/science/diviner-ghrm/*.img
+
+# LOLA roughness grid, restored from its PDS URL (lowercase .img is not matched by the root *.IMG rule on case-sensitive checkouts).
+source/science/lola/*.img

@@ -46,6 +46,56 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "hydrogen",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "iron",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "fast-neutrons",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "hegr",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "neutron-absorption",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity-uncertainty",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "bouguer",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geoid",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -104,13 +154,13 @@
       "presentationToReference": [
         0.9866615380804484,
         0,
-        0.1627851629379154,
+        0.16278516293791545,
         0.14935246696654644,
-        0.3977771559319137,
-        -0.9052442625224005,
+        0.39777715593191365,
+        -0.9052442625224006,
         0.06475221914135726,
         -0.9174820620691819,
-        -0.39247142048504824
+        -0.39247142048504846
       ],
       "orbitUpReference": [
         0,

@@ -1,6 +1,6 @@
 # Helix compiler: novelty assessment
 
-Assessed **12 September 2026**, against implementation **`68932f3e7044a4e8403bd5f0efd19eb5c53a04d3`**. This assesses the implemented Helix compiler, not the separate Wenger-based M2–9 experiment or planned future algorithms.
+Assessed **12 September 2026**, against implementation ****. This assesses the implemented Helix compiler, not the separate Wenger-based M2–9 experiment or planned future algorithms.
 
 ## Verdict
 

@@ -24,7 +24,7 @@ accepted cell counts for all three ice maps. The unchanged native maps give
 69.31% methane-rich ice and 19.88% nitrogen-rich ice averaged over 60–90° N,
 matching the paper's rounded 69% and 20% in section 3 and Figure 9.
 [Pinned reference values](../../../tests/objects/fixtures/pluto/leisa-astropy.json)
-and [the comparison test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/pluto/leisa.test.mts)
+and the comparison test
 identify the exact source files and oracle versions. These checks establish
 decoding, source sampling and the declared mask; they do not validate the
 authors' spectral inversion.
@@ -46,12 +46,12 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | monochrome | 147.4 → 172.8 kB |
 | surface | 207.2 → 209.6 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/pluto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Pluto uses the shared raster lane used by Mercury, Venus and Mars. Photographs,
 elevation and composition share the existing geometry, camera and lighting bank.
 
-The retained notes point to [unit checks](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/pluto) and the shared browser conformance harness, and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
+The retained notes point to unit checks and the shared browser conformance harness, and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
 Declared inputs are checked by the shared source manifest coverage check.
 
@@ -63,7 +63,7 @@ The globe is lit with the lunar-Lambert law of [Buratti et al. (2017)](https://d
 - With the Sun behind the viewer the law darkens the limb to 0.56 of the centre at 86.8° emission.
 - The paper computes the surface phase function f(α) from the disc-integrated phase curve and prints no values, so the frames with Shadows on carry no phase term: only the disk function changes with the Sun.
 - One law lights the whole body. The authors say it under-corrects the brightest regions and over-corrects the darkest. It was fitted at low phase with the haze included; it does not describe the haze-lit limb at high phase, which the paper left out because of atmospheric contamination.
-- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js pluto --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false` in d090ce637d. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.031 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.188 at 0.98. The redraw also rebuilt `scene.json` and `runtime.json` with Pluto's system transform turned 180 degrees, which would show the far side at opening; those two files were restored to the published bytes, so only the lighting changed.
+- The bank was redrawn on 2026-09-25 with `node tools/objects/dist/prepare-authored.js pluto --write --reuse-images --accept-changed=raster`. Outside `lighting`, the only difference between the published recipe and this one is main's removal of `"polesCombined": false`. That changes no image: `false` already meant each lens writes its own poles, now the only path. The shadowless overlay's alpha along its centre row, main then this version: 0.000 then 0.000 at the centre, 0.086 then 0.031 at half the radius, 0.353 then 0.129 at 0.9 and 0.490 then 0.188 at 0.98. The redraw also rebuilt `scene.json` and `runtime.json` with Pluto's system transform turned 180 degrees, which would show the far side at opening; those two files were restored to the published bytes, so only the lighting changed.
 
 ## Known problems
 

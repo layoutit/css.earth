@@ -1,0 +1,53 @@
+{
+  "id": "vy-sgr",
+  "name": "VY Sgr",
+  "system": "VY Sgr system",
+  "description": "A Cepheid in the Milky Way that pulsates every 13.56 days; its mean radius is 98 solar radii.",
+  "order": 2029,
+  "target": "VY Sgr",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 98,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, VY Sgr: Baade-Wesselink mean radius (solar radii) 98 +/- 5.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 5.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4250,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 255, Name='VY Sgr', columns Teff, e_Teff (K): Teff 4250 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 189
+  },
+  "distance": {
+    "value": 2702,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, VY Sgr: Baade-Wesselink distance (pc) 2702 +/- 143.9 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 143.9
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 1.283 +/- 0.077 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 98 times the Sun's width, that swells and shrinks every 13.6 days.",
+    "introduction": "Its mean radius, 98 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,702 parsecs away.",
+    "locator": "table10, VY Sgr: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

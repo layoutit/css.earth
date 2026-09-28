@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1903-08096",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Pietrzynski et al. (2019): A distance to the Large Magellanic Cloud that is precise to one per cent",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1903.08096"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-019-0999-4"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1903.08096",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-019-0999-4",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1903.08096",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Pietrzynski et al. (2019)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1903.08096"
+    }
+  ],
+  "creators": [
+    "G. Pietrzynski",
+    "D. Graczyk",
+    "A. Gallenne",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

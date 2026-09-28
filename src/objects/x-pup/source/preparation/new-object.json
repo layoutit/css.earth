@@ -1,0 +1,53 @@
+{
+  "id": "x-pup",
+  "name": "X Pup",
+  "system": "X Pup system",
+  "description": "A Cepheid in the Milky Way that pulsates every 25.97 days; its mean radius is 107.7 solar radii.",
+  "order": 2017,
+  "target": "X Pup",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 107.7,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, X Pup: Baade-Wesselink mean radius (solar radii) 107.7 +/- 4.8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 4.8
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5125,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 270, Name='X Pup', columns Teff, e_Teff (K): Teff 5125 +/- 301 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 301
+  },
+  "distance": {
+    "value": 2533.8,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, X Pup: Baade-Wesselink distance (pc) 2533.8 +/- 104.8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 104.8
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.402 +/- 0.009 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 108 times the Sun's width, that swells and shrinks every 26.0 days.",
+    "introduction": "Its mean radius, 107.7 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,534 parsecs away.",
+    "locator": "table10, X Pup: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

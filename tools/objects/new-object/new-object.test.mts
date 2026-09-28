@@ -65,6 +65,49 @@ test('the colour comes from the first route that reads, the cross-check from the
   const none = await chooseColor(spec, row, { main: 'x' }, archive, cmf);
   assert.equal(none.route, 'planck');
   assert.match(String((none.record.temperature as { published: { citation: string } }).published.citation), /no uncertainty/u);
+  // Routes the spec skips are not archives that lack the star: the spec's reason is the Planck colour's reason, said once.
+  const reason = 'Dust reddens every spectrum of this star';
+  const skipped = await chooseColor(parseStarSpec({ ...star, color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'], reason } }), row, { main: 'x', hd: 39587, hr: 2047 }, archive, cmf);
+  assert.equal(skipped.route, 'planck');
+  assert.equal(skipped.summary.split(reason.toLowerCase()).length + skipped.summary.split(reason).length - 2, 1, skipped.summary);
+  assert.doesNotMatch(skipped.summary, /[Nn]o archive holds a spectrum/u);
+  assert.deepEqual(skipped.tried, ['stis-ngsl: skipped', 'gaia-xp: skipped', 'pulkovo: skipped', 'kiehling: skipped', 'kharitonov: skipped', 'burnashev: skipped']);
+});
+
+test('a black hole companion is a record only: a mass, no temperature, and no radius unless one is measured', async () => {
+  const cited = { value: 21.2, source: 'Miller-Jones et al. (2021), Table 1', url: 'https://arxiv.org/abs/2102.09091' };
+  const orbit = { elements: { periodDays: 5.599836, semiMajorAxisStellarRadii: 2.3528, inclinationDegrees: 152.49, eccentricity: 0.0189, argumentOfPeriapsisDegrees: 126.6, transitTimeBmjdTdb: 41160.8322, ascendingNodePositionAngleDegrees: 64.1 }, epoch: 'periastron', source: 's', url: cited.url };
+  const hole = { id: 'test-hole', name: 'Test Hole', description: 'A black hole.', paper: star.paper, blackHole: true, mass: cited, orbit };
+  const spec = parseStarSpec({ ...star, companions: [hole] }).companions[0]!;
+  assert.equal(spec.blackHole, true);
+  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...hole, temperature: { ...cited, value: 1e4 } }] }), /a black hole has no effective temperature/u);
+  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...hole, mass: undefined }] }), /a black hole needs its cited mass/u);
+  assert.throws(() => parseStarSpec({ ...star, planets: [{ ...hole, radius: cited }] }), /only a companion may be a black hole/u);
+  const { hostedRecord } = await import('./hosted.mts');
+  const host = { spec: { id: 'test-star', system: 'Test system' } as never, body: { physical: { meanRadiusKm: 15514110 }, star: { distanceParsecs: 2252.75 } } };
+  const record = await hostedRecord(spec, host, 1, {} as Archive, root);
+  const body = record.body as { classification: string; physical: Record<string, unknown>; physicalNotes: string };
+  assert.equal(body.classification, 'black-hole');
+  assert.equal(body.physical.meanRadiusKm, 0, 'no source measures its size');
+  assert.equal(body.physical.effectiveTemperatureK, undefined);
+  assert.match(body.physicalNotes, /No source measures a size/u);
+  assert.equal(record.radius, undefined);
+});
+
+test('a body another owner records is packaged from that record, and the spec\'s cited values must reproduce it', async () => {
+  const s2 = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/s2.json'), 'utf8'));
+  const cite = (value: number) => ({ value, source: 'Habibi et al. (2017), Table 3', url: 'https://arxiv.org/abs/1708.06353' });
+  const entry = { id: 's2', name: 'S2', description: 'A star.', paper: { url: 'https://arxiv.org/abs/2112.07478', credit: 'GRAVITY (2022)' }, radius: cite(5.53), mass: cite(13.6), temperature: cite(28513),
+    orbit: { record: true, source: 'GRAVITY Collaboration (2022), Table 1', url: 'https://arxiv.org/abs/2112.07478' } };
+  const spec = parseObjectSpecs([{ host: 'sgr-a-star', companions: [entry] }]).additions[0]!.companions[0]!;
+  assert.throws(() => parseObjectSpecs([{ host: 'sgr-a-star', companions: [{ ...entry, orbit: { record: 'yes' } }] }]), /record is true or absent/u);
+  const { hostedRecord } = await import('./hosted.mts'), host = { spec: { id: 'sgr-a-star', system: 'Sagittarius A* system' } as never, body: {} };
+  const kept = await hostedRecord(spec, host, 0, {} as Archive, root);
+  assert.equal(kept.kept, true);
+  assert.deepEqual(kept.body, s2, 'the record is kept as its owner wrote it');
+  assert.deepEqual(kept.orbit, s2.hostedOrbit);
+  await assert.rejects(hostedRecord({ ...spec, radius: cite(5.6) }, host, 0, {} as Archive, root), /s2\.json physical\.meanRadiusKm is 3847221; the spec's cited value gives 3895920/u);
+  await assert.rejects(hostedRecord(spec, { ...host, spec: { id: 'vega', system: 'x' } as never }, 0, {} as Archive, root), /has parent sgr-a-star, not vega/u);
 });
 
 test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', async () => {
@@ -465,8 +508,51 @@ test('a whole star package from fixtures is what the bake accepts: declared file
     resolver: async () => ({ mainId: 'Test Fixture Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
   assert.equal(generated.color.route, 'planck', 'no archive spectrum in the fixtures, so the Planck route');
   assertWholePackage(generated.files, spec.id, true);
+  const { parseInvestigationLedger } = await import('@cssearth/bake/sources');
+  const ledger = parseInvestigationLedger(JSON.parse(String(generated.files.get(`src/objects/${spec.id}/investigations.json`))), spec.id);
+  assert.deepEqual(ledger.entries.map(entry => entry.id), ['placement', 'radius-mass-and-temperature', 'colour'], 'the ledger records each choice the generator made');
   const stored = parseObjectSpecs({ stars: [JSON.parse(String(generated.files.get(`src/objects/${spec.id}/${STORED_SPEC}`)))] }).stars[0]!;
   assert.deepEqual(stored, { ...spec, order: 9999 }, 'the stored spec reads back to the spec that made the package');
+});
+
+test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or missing parallax without one is refused', async () => {
+  const { generateStar, placement, PARALLAX_FLOOR_SIGMA } = await import('./generate.mts'), { parseGaiaRow } = await import('./archives.mts');
+  const gaia = '303374445376245632', header = 'source_id,ref_epoch,ra,dec,parallax,parallax_error,pmra,pmdec,radial_velocity,radial_velocity_error,ruwe,phot_g_mean_mag,bp_rp,has_xp_sampled,mass_flame,mass_flame_lower,mass_flame_upper,radius_flame,radius_flame_lower,radius_flame_upper';
+  // A two-parameter solution: a position and a magnitude, as Gaia DR3 gives a star in another galaxy.
+  const twoParameter = [header, `${gaia},2016.0,23.4424,30.7444,,,,,,,,19.2,-0.1,false,,,,,,`].join('\n');
+  const row = parseGaiaRow(twoParameter, gaia);
+  assert.equal(row.parallax, undefined); assert.equal(row.pmra, undefined); assert.equal(row.ruwe, undefined);
+  assert.throws(() => parseGaiaRow([header, `${gaia},2016.0,23.4,30.7,0.1,,1,1,,,1.0,19.2,-0.1,false,,,,,,`].join('\n'), gaia), /parallax_error empty while parallax, pmra, pmdec, ruwe are given/u);
+  const base = { ...star, id: 'test-far-star', name: 'Test Far Star', gaia, target: undefined, radius: { value: 12, source: 'a paper', url: star.paper.url }, mass: { value: 33, source: 'a paper', url: star.paper.url },
+    temperature: { value: 37000, source: 'a paper', url: star.paper.url }, radialVelocity: { value: -180, source: 'a paper', url: star.paper.url } };
+  assert.throws(() => placement(parseStarSpec(base), row), /has no parallax \(a two-parameter solution\); give distance with its source/u);
+  const distance = { value: 964000, uncertainty: 54000, source: 'Bonanos et al. (2006), ApJ 652, 313', url: star.paper.url };
+  const far = parseStarSpec({ ...base, distance });
+  const placed = placement(far, row);
+  assert.equal(placed.parsecs, 964000);
+  assert.match(placed.source, /Bonanos et al\. \(2006\).*964000 \+\/- 54000 pc; Gaia DR3 gives this source no parallax/u);
+  assert.deepEqual([placed.properMotion.ra, placed.properMotion.dec], [0, 0]);
+  assert.match(placed.properMotion.source, /two-parameter solution with no proper motion; zero is assumed \(at 964,000 pc, 1 mas\/yr would be 4,570 km\/s/u);
+  // A parallax under the floor places nothing by itself; a cited distance replaces it and says so.
+  const weak = { ...row, parallax: 0.4, parallaxError: 0.1, pmra: 1, pmdec: 2, ruwe: 1 } as GaiaRow;
+  assert.throws(() => placement(parseStarSpec(base), weak), new RegExp(`is 4\\.0 standard errors, under the ${PARALLAX_FLOOR_SIGMA} that places a star`, 'u'));
+  assert.match(placement(far, weak).source, /Gaia DR3 parallax 0\.4000 \+\/- 0\.1000 mas \(same row, RUWE 1\.00\), 4\.0 standard errors, is not used/u);
+  assert.equal(placement(parseStarSpec(base), { ...weak, parallax: 2, parallaxError: 0.1 }).parsecs, 500);
+  // The whole package: the record, the distance fact and the README all name the cited distance.
+  const arxiv = '<feed><entry><title>A paper</title><published>2006-01-01T00:00:00Z</published><author><name>A Bonanos</name></author></entry></feed>';
+  const archive: Archive = {
+    async text(url) { if (url.includes('gea.esac.esa.int/tap')) return twoParameter; if (url.includes('export.arxiv.org')) return arxiv; if (url.includes('asu-tsv')) return '#\n'; throw new Error(`unexpected ${url}`); },
+    async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
+  const spec = parseStarSpec({ ...base, distance, limb: { none: 'a test fixture' }, text: { card: 'A far star.', introduction: 'A star in another galaxy made from fixtures.', locator: 'fixture' } });
+  const generated = await generateStar(spec, { archive, root, order: 9998, universe: { ids: new Set(), names: new Map(), stars: [] },
+    resolver: async () => ({ mainId: 'Test Far Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
+  assertWholePackage(generated.files, spec.id, true);
+  const body = JSON.parse(String(generated.files.get(`packages/astronomy/data/bodies/${spec.id}.json`)));
+  assert.equal(body.star.distanceParsecs, 964000);
+  const facts = JSON.parse(String(generated.files.get(`src/objects/${spec.id}/source/content/object.json`))).panel.facts;
+  assert.deepEqual(facts.find((fact: { id: string }) => fact.id === 'distance').value, '964,000 parsecs');
+  assert.equal(facts.find((fact: { id: string }) => fact.id === 'distance').source.label, distance.source);
+  assert.match(String(generated.files.get(`src/objects/${spec.id}/README.md`)), /distance 964,000 pc from Bonanos et al\. \(2006\), ApJ 652, 313; Gaia DR3 gives it no parallax/u);
 });
 
 test('an imaged planet\'s K, H and J magnitudes become the band colour, each cited to its paper; a planet missing a band is named', async () => {
@@ -551,4 +637,111 @@ test('a planet found without a transit is placed only on one paper\'s whole orbi
   // An inclination fixed at 90, or one with no error bar, is an assumption, not a measurement: the planet is left out.
   const fixed = parse([header, `"Q b",${ref('Y_ET_AL__2015', '2015A&A...1..3Y', 'Y et al. 2015')},1,14.65,,90,0.003,98,,,0.83,0.115,0.96,0.95,0,,,,2450000.8,0,Mass`].join('\n'));
   assert.throws(() => assembleMeasuredOrbit(fixed, undefined, calculated), /Q b: found without a transit, and no paper's row measures its whole orbit together/u);
+});
+
+test('a DEBCat row drafts both stars of an eclipsing binary, and the draft is refused until the paper\'s orbit is copied in', async () => {
+  const { parseDebcat, draftFromDebcat } = await import('./debcat.mts');
+  // Rows in the page's own format (https://www.astro.keele.ac.uk/jkt/debcat/, 2026-09-27): a whole row, one with a value but no error,
+  // and one with an empty temperature.
+  const td = (html: string) => `<TD STYLE="WHITE-SPACE: NOWRAP" ALIGN="CENTER"> ${html} </TD>`;
+  const row = (name: string, logT: string) => `<TR BGCOLOR="#ffffff">${td(`<A HREF="http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${name}">${name}</A>`)}${td('4.271')}${td('13.71 <BR> -0.18')}${td('O7.5_V <BR> O7.5_V')}`
+    + `${td('19.62 &plusmn; 0.19 <BR> 19.05 &plusmn; 0.14')}${td('8.83 &plusmn; 0.08 <BR> 7.70 &plusmn; 0.05')}${td('3.839 &plusmn; 0.008 <BR> 3.945 &plusmn; 0.006')}${td(logT)}${td('<BR>')}${td('&nbsp;')}`
+    + `${td('Taormina et al. (<A HREF="http://arxiv.org/abs/2604.05029">arXiv:2604.05029</A>) <BR> Taormina et al. (<A HREF="http://adsabs.harvard.edu/abs/2020ApJ...890..137T">2020ApJ...890..137T</A>)')}</TR>`;
+  const rows = parseDebcat(`<TABLE>${row('OGLE-LMC-ECL-06782', '4.544 &plusmn; 0.006 <BR> 4.531 &plusmn; 0.006')}${row('AK Lac', '3.749 <BR> 3.740')}${row('TYC 459-771-1', ' <BR> ')}</TABLE>`);
+  assert.deepEqual(rows.map(entry => entry.name), ['OGLE-LMC-ECL-06782', 'AK Lac', 'TYC 459-771-1']);
+  assert.match('error' in rows[2]! ? rows[2].error : '', /TYC 459-771-1: log Teff "" is not a value/u);
+  assert.ok('row' in rows[1]! && rows[1].row.logTeff[0][1] === undefined, 'a value without its error reads, with no error');
+  assert.ok('row' in rows[0]!);
+  const read = rows[0].row;
+  assert.deepEqual(read.references.map(reference => reference.url), ['https://arxiv.org/abs/2604.05029', 'https://ui.adsabs.harvard.edu/abs/2020ApJ...890..137T']);
+  const { spec, missing } = draftFromDebcat(read);
+  assert.match(missing[0]!, /periodDays with the eclipse ephemeris it belongs to \(DEBCat's 4\.271 d is rounded\)/u);
+  // The draft names what it lacks by refusing to parse; the separation is Kepler's third law: ((19.62 + 19.05) x (4.271 / 365.25)^2)^(1/3) au over 8.83 solar radii.
+  assert.throws(() => parseStarSpec(spec), /periodDays/u);
+  const companion = (spec.companions as Record<string, any>[])[0]!;
+  assert.equal(companion.orbit.elements.semiMajorAxisStellarRadii, 4.2425);
+  const filled = { ...spec, companions: [{ ...companion, orbit: { ...companion.orbit, epoch: 'superior-conjunction',
+    elements: { ...companion.orbit.elements, periodDays: 4.2710, inclinationDegrees: 80, eccentricity: 0.01, argumentOfPeriapsisDegrees: 90, transitTimeBmjdTdb: 59000 } } }] };
+  const parsed = parseStarSpec(filled);
+  assert.equal(parsed.radius !== 'gaia-flame' && parsed.radius.value, 8.83);
+  assert.equal(parsed.temperature.value, 34995);
+  assert.match(parsed.temperature.source, /log Teff 4\.544 \+\/- 0\.006, as DEBCat \(Southworth 2015, ASPC 496, 164\) lists it from Taormina et al\. \(arXiv:2604\.05029\): 34995 K/u);
+  assert.equal(parsed.companions[0]!.orbit && 'elements' in parsed.companions[0]!.orbit && parsed.companions[0]!.orbit.epoch, 'superior-conjunction');
+});
+
+test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY grid, and its restore rewrites the download the same way', async () => {
+  const { chooseLimb } = await import('./limb.mts');
+  // The four Reeve & Howarth (2016) summary1 rows around HD 226868 (31,138 K, log g 3.348) as VizieR serves them, 2026-09-27.
+  const tlusty = ['#RESOURCE=yCat_J_MNRAS_456_1294', '', 'FileName\tquad2.2\tquad2.3', ' \t \t', '--------------\t------------\t------------',
+    'OG30000g325v10\t 1.31065e-01\t 3.33968e-01', 'OG30000g350v10\t 1.19605e-01\t 3.02762e-01', 'OG32500g325v10\t 1.37878e-01\t 3.47654e-01', 'OG32500g350v10\t 9.45336e-02\t 3.28943e-01', ''].join('\n');
+  const archive: Archive = { async text(_url, form) { return form?.['-source'] === 'J/MNRAS/456/1294/summary1' ? tlusty : '#\n'; }, async bytes() { return Buffer.from(''); }, async exists() { return false; } };
+  const limb = await chooseLimb('hd-226868', 31138, 3.348, archive);
+  assert.equal(limb.grid, 'tlusty');
+  assert.ok(limb.coefficients!.u1 >= 0.0945336 && limb.coefficients!.u1 <= 0.137878 && limb.coefficients!.u2 >= 0.302762 && limb.coefficients!.u2 <= 0.347654, 'inside the four nodes');
+  // Every node is read: the first data row too, which the reader would take for a units line without the one the rewrite adds.
+  assert.match(limb.file!.text, /^logg\tTeff\ta\tb\n\[cgs\]\tK\t\t\n/mu);
+  assert.match(limb.sentence, /Reeve & Howarth \(2016\), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3\.348/u);
+  const replayed = (limb.acquisition!.replacements as { pattern: string; flags: string; replacement: string }[]).reduce((text, { pattern, flags, replacement }) => text.replace(new RegExp(pattern, flags), replacement), tlusty);
+  assert.equal(replayed, limb.file!.text, 'the restore recipe reproduces the stored table');
+  assert.match(limb.file!.text, /^logg\tTeff\ta\tb$/mu); assert.match(limb.file!.text, /^3\.25\t30000\t 1\.31065e-01\t 3\.33968e-01$/mu);
+  // A star ATLAS reaches keeps its ATLAS law: the new grid only fills the gap.
+  assert.equal((await chooseLimb('cool', 5800, 4.4, { ...archive, async text(_url, form) { return form?.['-source'] === 'J/A+A/529/A75/table-af' ? ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cgs]\tK\t[Sun]\tkm/s\t\t\t\t\t', ...[4, 4.5].flatMap(g => [5750, 5875].map(t => `${g}\t${t}\t0\t2\t0.45\t0.26\tV\tL\tA`))].join('\n') : tlusty; } })).grid, 'atlas');
+});
+
+test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one route table; what a catalogue lacks is left to cite', async () => {
+  const { parseApokascRow, draftFromApokasc } = await import('./apokasc.mts'), { parseCepheidRow, draftFromCepheid } = await import('./cepheids.mts'), { writeDrafts, DRAFT_ROUTES } = await import('./drafts.mts');
+  // Rows as VizieR serves them, 2026-09-27: J/ApJS/276/69 table4 and J/A+A/550/A70 table10.
+  const apokasc = ['KIC\tCatTab\tEvolSt\tMass\te_Mass\tRadius\te_Radius\tTeff\te_Teff\tloggSeis\te_loggSeis\tGaiaDR3', ' \t \t \tMsun\tMsun\tRsun\tRsun\tK\tK\t[cm.s-2]\t[cm.s-2]\t', '--------\t--------',
+    '  893214\tGold    \tRGB    \t    1.4404\t    0.0602\t   11.0014\t    0.2055\t 4718.9233\t   44.7811\t    2.5146\t    0.0050\t2050237616959273728',
+    ' 1026180\tDetectOl\tRC     \t    1.5334\t    0.0633\t   12.2361\t    0.2278\t 4576.1016\t   40.5161\t    2.4512\t    0.0050\t2050237174589477888'].join('\n');
+  const giant = draftFromApokasc(parseApokascRow(apokasc, '893214'));
+  assert.deepEqual([giant.id, giant.gaia, giant.radius.value, giant.mass.value, giant.temperature.value], ['kic-893214', '2050237616959273728', 11.0014, 1.4404, 4719]);
+  assert.match(giant.description, /^A red giant climbing its first giant branch in the Kepler field, 11\.0 solar radii and 1\.44 solar masses/u);
+  assert.doesNotThrow(() => parseStarSpec(giant), 'an APOKASC draft is a whole spec');
+  assert.throws(() => parseApokascRow(apokasc, '1026180'), /KIC 1026180 is in category DetectOl; only Gold and Silver/u);
+  const cepheids = ['recno\tLoc\tName\tE(B-V)\te_E(B-V)\tPer\tDist\te.D\tRad\te.R', ' \t \t \tmag\tmag\td\tpc\tpc\tRsun\tRsun', '--------\t-',
+    '     129\tL\tHV 1005  \t 0.100\t 0.005\t18.714651\t44096.6\t1141.7\t 82.6\t 2.1'].join('\n');
+  const { spec, missing } = draftFromCepheid(parseCepheidRow(cepheids, 'hv 1005'));
+  assert.deepEqual([spec.id, spec.radius.value, spec.distance.value, spec.distance.uncertainty], ['hv-1005', 82.6, 44096.6, 1141.7]);
+  assert.match(spec.description, /Large Magellanic Cloud that pulsates every 18\.71 days/u);
+  assert.match(spec.color.reason, /E\(B-V\) = 0\.1 \+\/- 0\.005/u);
+  assert.deepEqual(missing, ['temperature (a mean effective temperature, cited)', 'mass (cited, or "gaia-flame")']);
+  assert.throws(() => parseStarSpec(spec), /hv-1005\.(mass|temperature)/u, 'refused until its mass and temperature are cited');
+  // No Cepheid here has a dynamical mass: "unmeasured" keeps GM 0, and log g comes only from a cited gravity.
+  const temperature = { value: 5500, source: 'a paper', url: star.paper.url }, gravity = { value: 1.2, source: 'a paper', url: star.paper.url };
+  const bare = parseStarSpec({ ...spec, temperature, mass: 'unmeasured', gaia: '123456789' });
+  assert.ok(Number.isNaN((await import('./generate.mts')).physicalValues(bare, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false }).logg), 'no mass and no gravity: no log g, so no limb law');
+  const measured = parseStarSpec({ ...spec, temperature, gravity, mass: 'unmeasured', gaia: '123456789' });
+  const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
+  assert.deepEqual([values.gm, values.logg], [0, 1.2]);
+  assert.match(values.massText, /No mass is measured, so GM is 0/u);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2']);
+  await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2/u);
+});
+
+test('a K2 giant is drafted at its asteroseismic distance only when both pipelines agree on its radius', async () => {
+  const { parseK2Row, draftFromK2 } = await import('./k2.mts');
+  // Rows as VizieR serves them, 2026-09-28: J/A+A/677/A21 k2_apo, one request per EPIC number.
+  const k2 = (row: string) => ['K2-ID\tK2-camp\tGaiaEDR3\tTeff-A\te_Tefffin-A\tMass-M\tb_Mass-M\tB_Mass-M\tRad-M\tb_Rad-M\tB_Rad-M\tRad-E\tb_Rad-E\tB_Rad-E\tDist-M\tb_Dist-M\tB_Dist-M\tAV-M\tFlags-A',
+    ' \t \t \tK\tK\tMsun\tMsun\tMsun\tRsun\tRsun\tRsun\tRsun\tRsun\tRsun\tpc\tpc\tpc\tmag\t', '-----------------\t----', row].join('\n');
+  const far = k2('KTWO201541578-C01\t 1.0\t3796334722650394496\t5195.2929999999997\t 50\t  1.696545\t  1.680289\t  1.716048\t 20.088517\t 19.919159\t 20.310380\t 21.922053\t 20.673548\t 25.007332\t 18070.781250\t 17810.937500\t 18341.875000\t  0.335329\t');
+  const giant = draftFromK2(parseK2Row(far, '201541578'));
+  assert.deepEqual([giant.id, giant.gaia, giant.radius.value, giant.mass.value, giant.distance.value, giant.distance.uncertainty, giant.temperature.value],
+    ['epic-201541578', '3796334722650394496', 20.0885, 1.6965, 18070.8, 265.5, 5195]);
+  assert.match(giant.radius.source, /16th-84th percentiles 19\.919159-20\.31038\), MA09 pipeline/u);
+  assert.doesNotThrow(() => parseStarSpec(giant), 'a K2 draft is a whole spec');
+  const split = k2('KTWO201483992-C10\t10.0\t3698838449635055360\t5165.8612999999996\t 50\t  2.652693\t  2.550345\t  2.738523\t 21.259744\t 20.746631\t 21.731653\t 10.627683\t 10.278545\t 11.072674\t 17795.781250\t 17453.125000\t 18132.343750\t -0.076852\t');
+  assert.throws(() => parseK2Row(split, '201483992'), /EPIC 201483992: the two pipelines disagree on its radius, MA09 21\.259744 .* and E20 10\.627683/u);
+  assert.throws(() => parseK2Row(far, '201483992'), /k2_apo has 0 rows for EPIC 201483992/u);
+});
+
+test('a binary whose primary Gaia sees eclipsing on another period is refused; long orbits Gaia cannot measure are not checked', async () => {
+  const { eclipsingPeriodAgrees, GAIA_EB_CHECKED_DAYS } = await import('./generate.mts');
+  // Gaia DR3 vari_eclipsing_binary, 2026-09-28: 6045477944460616704 (Cl* NGC 6121 SAW V66) 0.26988 d; the M4 V66 of Kaluzny et al.
+  // (2013) is an 8.11-day pair. 4658260373306002944 (OGLE-LMC-ECL-09114, the right star by position) 2.99898 d for a 214.37-day orbit.
+  assert.equal(eclipsingPeriodAgrees(8.11130346, 0.2698801868), false, 'the namesake variable is refused');
+  assert.equal(eclipsingPeriodAgrees(8.11130346, 8.1113 / 2), true, 'half the period is the same binary');
+  assert.equal(eclipsingPeriodAgrees(8.11130346, undefined), true, 'no Gaia solution is not a check');
+  assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
+  assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });

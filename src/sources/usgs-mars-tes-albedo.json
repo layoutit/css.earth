@@ -1,0 +1,31 @@
+{
+  "id": "usgs-mars-tes-albedo",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mars MGS TES Global Bolometric Albedo Map 7410m",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_TES_Albedo_mosaic_global_7410m.tif"
+    },
+    {
+      "type": "doi",
+      "value": "10.1029/2000JE001370"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/science/usgs/tes-albedo-pds.lbl",
+      "locator": "/PRODUCT_ID"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

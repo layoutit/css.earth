@@ -1,0 +1,28 @@
+{
+  "sourceRecords": {
+    "point": 1309
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8387415,
+  "categories": [
+    {
+      "value": "point",
+      "label": "Glacier-like form",
+      "color": "#00ccff"
+    }
+  ],
+  "output": "mars-glacier-like-forms.tif",
+  "sha256": "6abf402e41fb155906af66406034a59a56fcb9db6c1b2bae364f3e416a00cbe8",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

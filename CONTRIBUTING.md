@@ -27,7 +27,7 @@ preview`; the build first runs `setup:assets` itself, which only downloads
 files that are missing or changed.
 
 Maintainer flow after baking a body or a context object: bake locally, `node
-tools/assets/publish-runtime-assets.mts --object=<id>` to publish every file its
+packages/bake/cli/publish-runtime-assets.mts --object=<id>` to publish every file its
 `inventory.json` lists (public textures and baked `prepared/*` files alike;
 see [Publishing prepared assets](#publishing-prepared-assets-maintainers)),
 then commit the refreshed inventory — never the baked files themselves. A change across many bodies adds
@@ -60,12 +60,12 @@ inventory; R2 holds the bytes.
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, restore that object's sources with
    `node tools/assets/restore-source-inputs.mts --object=<id>` first.
-2. Publish the bytes: `node tools/assets/publish-runtime-assets.mts --object=<id>`.
+2. Publish the bytes: `node packages/bake/cli/publish-runtime-assets.mts --object=<id>`.
    Safe to repeat — keys are content-addressed, so it uploads only what is
    missing.
 3. Commit the refreshed `inventory.json`.
    **Never commit the baked files themselves**; they are gitignored.
-4. Confirm before pushing: `node tools/assets/check-assets-published.mts --object=<id>`.
+4. Confirm before pushing: `node packages/bake/cli/check-assets-published.mts --object=<id>`.
    **Run this yourself.** PRs do not run a publication sweep. The default R2
    deployment separately requires every inventoried key to be verified before
    publishing; the nightly sweep checks them again.
@@ -103,12 +103,12 @@ A page embeds only the hashes its first view reads: files its prepared markup an
 After baking, publish and commit the refreshed inventory:
 
 ```sh
-node tools/assets/publish-runtime-assets.mts --object=<id>
+node packages/bake/cli/publish-runtime-assets.mts --object=<id>
 ```
 
 Omit `--object` to publish everything under `src/objects/`. The publisher is incremental: it checks every key first, uploads only the missing ones, then checks every key again, retries anything the bulk upload dropped, and byte-verifies every JSON key plus a sample of the rest. A publish that reports success has confirmed the files are live. JSON keys upload as `application/json`; everything else as `application/octet-stream`.
 
-`node tools/assets/check-assets-published.mts [--object=<id> ...]` checks the selected inventories without uploading. It retries a miss before reporting it: longest (about two minutes, two at a time) for a network error, which it reports by its socket code. With `--added-since=<git ref>` it checks only the keys the branch's inventories add; `--added-since-last-green` compares with the last green `main` run. By default only a real 404 fails it; other answers and unverified (network) keys are warnings. `--require-verified`, used by the default R2 deploy, fails on any unverified key; `--report-only` is observational. A nightly workflow checks every key; pull requests check none.
+`node packages/bake/cli/check-assets-published.mts [--object=<id> ...]` checks the selected inventories without uploading. It retries a miss before reporting it: longest (about two minutes, two at a time) for a network error, which it reports by its socket code. With `--added-since=<git ref>` it checks only the keys the branch's inventories add; `--added-since-last-green` compares with the last green `main` run. By default only a real 404 fails it; other answers and unverified (network) keys are warnings. `--require-verified`, used by the default R2 deploy, fails on any unverified key; `--report-only` is observational. A nightly workflow checks every key; pull requests check none.
 
 A second cache, `source-cache/<object id>/<manifest path>`, mirrors downloaded
 inputs by the same path their source manifest names. Restorers try it before the
@@ -130,7 +130,7 @@ browser writes. A maintainer applies it with
 `npx --yes wrangler@4.129.0 r2 bucket cors set cssearth-assets --file tools/assets/r2-cors.json`
 and verifies it with `npx --yes wrangler@4.129.0 r2 bucket cors list cssearth-assets`.
 
-`node tools/assets/prune-runtime-assets.mts --dry-run` reports, and never deletes, the `runtime-assets/<sha256>/...` keys that are live in R2 but referenced by no current inventory. It never lists or reports on `scenes/` or `source-cache/`. It needs a separate read-only R2 API token, because `wrangler` cannot list a bucket's objects; the comment at the top of that file explains how to get and set one.
+`node packages/bake/cli/prune-runtime-assets.mts --dry-run` reports, and never deletes, the `runtime-assets/<sha256>/...` keys that are live in R2 but referenced by no current inventory. It never lists or reports on `scenes/` or `source-cache/`. It needs a separate read-only R2 API token, because `wrangler` cannot list a bucket's objects; the comment at the top of that file explains how to get and set one.
 
 ## Check your change
 
@@ -222,7 +222,9 @@ boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 dependencies: a `packages/*` file imports another workspace package only when
 its own `package.json` declares it, and outside tests of a package tsup builds
 only when `dependencies` ships it, since tsup inlines a `devDependencies` package
-(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. Not yet enforced:
+(`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. And pre-install imports: a
+script a workflow job runs before it installs dependencies imports, with everything it reaches, only `node:`
+built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). Not yet enforced:
 unused files in library folders (untangle item K).
 
 Reference implementations live under `tests/oracles/` with their own pinned
@@ -241,7 +243,7 @@ changes" job) — a job it skips still reports success, never failure, so it nev
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
 
-`node tools/ci/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
+`node .github/scripts/checks/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
 (it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
 `prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
 

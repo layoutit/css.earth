@@ -31,6 +31,11 @@
       "detail": "Global mosaic",
       "summary": "Detail ranges from 400 m to 20 km per pixel; shadows in the photographs remain."
     },
+    "dlr-juno": {
+      "title": "Global mosaic with Juno photographs",
+      "detail": "DLR · Voyager to Juno",
+      "summary": "Juno's 2021 photographs sharpen 13% of the globe around Tros. Features sit about 14 km from the USGS maps."
+    },
     "enhanced": {
       "title": "False-color mosaic",
       "detail": "Infrared color",
@@ -39,7 +44,7 @@
     "geology": {
       "title": "Global geologic map",
       "detail": "Interpreted units",
-      "summary": "Twenty-three map symbols for interpreted dark and light terrain and crater and basin materials."
+      "summary": "Twenty-five units of dark, light, crater, basin and palimpsest material, in the authors’ map colors."
     },
     "oxygen-signature": {
       "title": "Oxygen-sensitive reflectance ratio",

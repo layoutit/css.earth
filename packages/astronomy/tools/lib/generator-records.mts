@@ -1,6 +1,8 @@
 import type { KeplerianElements } from '../../src/kepler.ts';
 import type { VectorRow } from './horizons.mts';
 
+const HOSTED_EPOCHS = ['inferior-conjunction', 'superior-conjunction', 'periastron'] as const;
+const isHostedEpoch = (value: unknown): value is typeof HOSTED_EPOCHS[number] => (HOSTED_EPOCHS as readonly unknown[]).includes(value);
 export interface ElementRecord { query: string; elements: KeplerianElements }
 export interface VectorFixture { query: string; rows: VectorRow[] }
 export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: number; declinationDegrees: number; positionEpochJulianYear: number; distanceParsecs: number;
@@ -10,7 +12,7 @@ export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: numbe
   sources: { position: string; distance: string; properMotion: string; radialVelocity: string; binary?: string } }
 
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
-  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'periastron';
+  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'superior-conjunction' | 'periastron';
   transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord; weaklyConstrained?: true;
   barycentreCompanion?: string;
   sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string; barycentre?: string } }
@@ -93,9 +95,9 @@ export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   const eccentricity = numberValue(record.eccentricity, 'hosted eccentricity');
   if (!(eccentricity >= 0 && eccentricity < 1)) throw new TypeError('Hosted eccentricity must be in [0, 1).');
   const epochDefinition = record.epochDefinition;
-  if (epochDefinition !== undefined && epochDefinition !== 'inferior-conjunction' && epochDefinition !== 'periastron') throw new TypeError('Unsupported hosted orbit epoch definition.');
+  if (epochDefinition !== undefined && !isHostedEpoch(epochDefinition)) throw new TypeError(`Unsupported hosted orbit epoch definition: ${String(epochDefinition)}.`);
   if (eccentricity > 0 && (record.argumentOfPeriapsisDegrees === undefined || epochDefinition === undefined ||
-      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs a periapsis argument, an epoch definition (inferior-conjunction or periastron) and sources for both eccentricity and periapsis.');
+      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs a periapsis argument, an epoch definition (inferior-conjunction, superior-conjunction or periastron) and sources for both eccentricity and periapsis.');
   const orbit: HostedOrbitRecord = { periodDays: numberValue(record.periodDays), semiMajorAxisStellarRadii: numberValue(record.semiMajorAxisStellarRadii),
     inclinationDegrees: numberValue(record.inclinationDegrees), eccentricity, transitTimeBmjdTdb: numberValue(record.transitTimeBmjdTdb),
     ...(record.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: numberValue(record.argumentOfPeriapsisDegrees) }),

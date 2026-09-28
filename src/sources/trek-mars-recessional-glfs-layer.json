@@ -1,0 +1,28 @@
+{
+  "id": "trek-mars-recessional-glfs-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Recessional Glacier-Like Forms (NASA Mars Trek GIS layer Recessional_GLF_Options_2016)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/4",
+      "label": "NASA Trek ArcGIS MapServer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/80"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "brough-2016-recessional-glfs",
+      "evidence": "The Trek catalogue entry for this layer cites Stephen Brough, Bryn Hubbard and Alun Hubbard (2016), Icarus 274, 37-49."
+    }
+  ],
+  "statements": []
+}

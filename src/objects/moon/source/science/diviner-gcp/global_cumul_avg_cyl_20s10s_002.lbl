@@ -1,0 +1,70 @@
+PDS_VERSION_ID               = PDS3
+
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 113
+FILE_RECORDS                 = 1382401
+
+DESCRIPTION                  = "This table contains brightness temperatures
+                                and bolometric brightness temperatures from
+                                the Diviner Lunar Radiometer Experiment
+                                binned at 0.5 degree latitude and longitude
+                                and 0.25 hours of local time derived from a
+                                compilation of all nadir observations acquired
+                                from 5-July-2009 to 1-April-2015. Negative
+                                brightness temperatures result from negative
+                                radiance values obtained by a sensor when
+                                temperatures are below the sensitivity of a
+                                Diviner channel. Constant -9999 corresponds to
+                                bins that contained no observations.
+                                For more information, please see:
+                                Williams et al. (2017) 'The global surface
+                                temperatures of the Moon as measured by
+                                the Diviner Lunar Radiometer
+                                Experiment', Icarus, 283, 300-325.
+                               "
+^HEADER                      = ("GLOBAL_CUMUL_AVG_CYL_20S10S_002.TAB", 1)
+^TABLE                       = ("GLOBAL_CUMUL_AVG_CYL_20S10S_002.TAB", 2)
+DATA_SET_ID                  = "LRO-L-DLRE-5-GCP-V1.0"
+FILE_NAME                    = "GLOBAL_CUMUL_AVG_CYL_20S10S_002.LBL"
+MISSION_NAME                 = "LUNAR RECONNAISSANCE ORBITER"
+INSTRUMENT_HOST_NAME         = "LUNAR RECONNAISSANCE ORBITER"
+INSTRUMENT_HOST_ID           = "LRO"
+INSTRUMENT_NAME              = "DIVINER LUNAR RADIOMETER EXPERIMENT"
+INSTRUMENT_ID                = "DLRE"
+PRODUCT_TYPE                 = "GCP"
+PRODUCT_ID                   = "GLOBAL_CUMUL_AVG_CYL_20S10S_002.TAB"
+LRO:CALIBRATION_SOFTWARE_VER_ID = "4.0"
+PRODUCER_ID               = LRO_DLRE_TEAM
+PRODUCER_FULL_NAME        = "JEAN-PIERRE WILLIAMS"
+PRODUCER_INSTITUTION_NAME = "UNIVERSITY OF CALIFORNIA, LOS ANGELES"
+A_AXIS_RADIUS                = 1737.4 <km>
+B_AXIS_RADIUS                = 1737.4 <km>
+C_AXIS_RADIUS                = 1737.4 <km>
+TARGET_NAME                  = "MOON"
+START_TIME                   = 2009-07-05T16:50:26.195
+STOP_TIME                    = 2015-04-01T00:00:00.000
+SPACECRAFT_CLOCK_START_COUNT = "0268505426.15400"
+SPACECRAFT_CLOCK_STOP_COUNT  = "0449539200.05636"
+PRODUCT_CREATION_TIME        = 2016-05-27T12:00:00
+PRODUCT_VERSION_ID           = "1"
+MAXIMUM_LATITUDE             = -10.00000 <deg>
+MINIMUM_LATITUDE             = -20.00000 <deg>
+WESTERNMOST_LONGITUDE        = -180.00000 <deg>
+EASTERNMOST_LONGITUDE        = 180.00000 <deg>
+POSITIVE_LONGITUDE_DIRECTION = "EAST"
+
+OBJECT                       = HEADER
+  BYTES                      = 113
+  HEADER_TYPE                = "TEXT"
+END_OBJECT                   = HEADER
+
+OBJECT                       = TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 113
+  ROWS                       = 1382400
+  COLUMNS                    = 11
+  ^STRUCTURE                 = "DLRE_GCP.FMT"
+END_OBJECT                   = TABLE
+
+END
+

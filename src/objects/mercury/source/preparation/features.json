@@ -15,8 +15,11 @@
   },
   "lensIds": [
     "normal",
+    "color",
     "enhanced",
-    "topography"
+    "topography",
+    "gravity",
+    "crust"
   ],
   "kinds": {
     "point": [

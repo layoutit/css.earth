@@ -1029,6 +1029,1095 @@
             ]
           }
         }
+      },
+      {
+        "id": "albedo",
+        "label": "Albedo",
+        "shortLabel": "Albedo",
+        "thumbnail": "mars-lens-albedo.webp",
+        "surface": "mars-surface-albedo@2x.webp",
+        "poles": "mars-poles-albedo@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "MGS TES bolometric Lambert albedo · 8 pixels per degree · Christensen et al. (2001)",
+        "notes": "How much sunlight the ground reflects, from 0 (none) to 1 (all), measured by the TES visible and near-infrared bolometer (0.3–2.9 µm) on Mars Global Surveyor. Dark regions such as Syrtis Major are dust-poor; bright regions such as Tharsis and Arabia are dust-covered. The source grid is 8 pixels per degree, about 7.4 km. TES did not observe poleward of about 87°; the publisher filled those cells with a constant 0.06, shown here as missing data.",
+        "source": {
+          "id": "usgs-mars-tes-albedo",
+          "url": "https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Albedo",
+          "meta": "Lambert albedo, 0.3–2.9 µm",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0.06",
+              "0.32"
+            ]
+          }
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "The fraction of sunlight the ground reflects across visible and near-infrared light. Dust makes Mars bright; sand and rock make it dark."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Lambert albedo from 0.06 to 0.32, the range of the source grid. Purple is darker ground; yellow is brighter ground."
+          },
+          {
+            "id": "method",
+            "label": "How it was measured",
+            "value": "The Thermal Emission Spectrometer on Mars Global Surveyor measured reflected sunlight between 0.3 and 2.9 µm; the ASU TES team gridded the values at 8 pixels per degree."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each cell is about 7.4 km across and averages many observations, so seasonal dust changes are smoothed together."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray marks the polar caps poleward of about 87°, which the publisher filled with a constant rather than a measurement."
+          }
+        ]
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "shortLabel": "Inertia",
+        "thumbnail": "mars-lens-thermal-inertia.webp",
+        "surface": "mars-surface-thermal-inertia@2x.webp",
+        "poles": "mars-poles-thermal-inertia@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "MGS TES nightside thermal inertia, Putzig & Mellon (2007), PDS MGS-M-TES-5-TIMAP-V1.0 product GLOBAL_TI_NIGHT_2007, 20 pixels per degree; interpolated cells withheld.",
+        "notes": "How slowly the ground heats by day and cools by night. Loose dust changes temperature quickly and has low thermal inertia; sand, crusted soil and rock change slowly and have high thermal inertia. Units of J m⁻² K⁻¹ s⁻½. Dusty Tharsis and Arabia sit near 10 to 50, sandy Syrtis Major near 190, Acidalia near 340. Values above 600 (0.4% of the planet) use the endpoint color. Putzig & Mellon (2007) fitted a thermal model to nightside surface temperatures measured by the Thermal Emission Spectrometer on Mars Global Surveyor, 1999–2004, and gridded the results at 20 pixels per degree (about 3 km). Each value assumes a uniform surface in the cell; layered or mixed ground gives an apparent value. Nightside coverage leaves gaps. Gray marks cells without a value and the 8.5% of the planet the producer filled by interpolation, which the product's mask flags.",
+        "source": {
+          "id": "pds-mgs-tes-thermal-inertia",
+          "url": "https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Thermal inertia",
+          "meta": "J m⁻² K⁻¹ s⁻½ (tiu)",
+          "sourceUrl": "https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "300",
+              "≥600"
+            ]
+          }
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "How slowly the ground heats by day and cools by night. Loose dust changes temperature quickly and has low thermal inertia; sand, crusted soil and rock change slowly and have high thermal inertia."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "Units of J m⁻² K⁻¹ s⁻½. Dusty Tharsis and Arabia sit near 10 to 50, sandy Syrtis Major near 190, Acidalia near 340. Values above 600 (0.4% of the planet) use the endpoint color."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Putzig & Mellon (2007) fitted a thermal model to nightside surface temperatures measured by the Thermal Emission Spectrometer on Mars Global Surveyor, 1999–2004, and gridded the results at 20 pixels per degree (about 3 km)."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Each value assumes a uniform surface in the cell; layered or mixed ground gives an apparent value. Nightside coverage leaves gaps."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray marks cells without a value and the 8.5% of the planet the producer filled by interpolation, which the product's mask flags."
+          }
+        ]
+      },
+      {
+        "id": "dust-cover",
+        "label": "Dust cover",
+        "shortLabel": "Dust",
+        "thumbnail": "mars-lens-dust-cover.webp",
+        "surface": "mars-surface-dust-cover@2x.webp",
+        "poles": "mars-poles-dust-cover@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": true,
+        "qualification": "MGS TES dust cover index, Ruff & Christensen (2002), JGR 107(E12), 5127, 16 pixels per degree; the 0.85 polar fill is withheld.",
+        "notes": "Where fine dust blankets the surface. A thin dust layer lowers the surface's thermal emission in one infrared band, so the index tracks dust cover rather than brightness. The authors class 0.940 or lower as dust-covered and 0.962 or higher as dust-free. Arabia reads 0.922 and Syrtis Major 0.973. Darker colors mean more dust. Ruff & Christensen (2002) averaged Thermal Emission Spectrometer emissivity between 1350 and 1400 cm⁻¹ over the mapping mission and gridded it at 16 pixels per degree. The index responds to fine particulate dust a few tens of micrometers thick; it does not measure dust depth. Gray marks the polar regions, where the published grid holds a constant fill instead of data.",
+        "source": {
+          "id": "asu-tes-dust-cover-index",
+          "url": "https://mars.asu.edu/data/tes_ruffdust/"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Dust cover index",
+          "meta": "Mean emissivity, 1350–1400 cm⁻¹",
+          "sourceUrl": "https://doi.org/10.1029/2001JE001580",
+          "recipe": {
+            "palette": [
+              [
+                253,
+                231,
+                37
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                68,
+                1,
+                84
+              ]
+            ],
+            "labels": [
+              "≤0.92",
+              "0.95",
+              "≥0.99"
+            ]
+          }
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Where fine dust blankets the surface. A thin dust layer lowers the surface's thermal emission in one infrared band, so the index tracks dust cover rather than brightness."
+          },
+          {
+            "id": "scale",
+            "label": "Reading the scale",
+            "value": "The authors class 0.940 or lower as dust-covered and 0.962 or higher as dust-free. Arabia reads 0.922 and Syrtis Major 0.973. Darker colors mean more dust."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Ruff & Christensen (2002) averaged Thermal Emission Spectrometer emissivity between 1350 and 1400 cm⁻¹ over the mapping mission and gridded it at 16 pixels per degree."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The index responds to fine particulate dust a few tens of micrometers thick; it does not measure dust depth."
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Gray marks the polar regions, where the published grid holds a constant fill instead of data."
+          }
+        ]
+      },
+      {
+        "id": "dune-fields",
+        "label": "Dune fields",
+        "shortLabel": "Dunes",
+        "thumbnail": "mars-lens-dune-fields.webp",
+        "surface": "mars-surface-dune-fields@2x.webp",
+        "poles": "mars-poles-dune-fields@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Hayward et al. (2007), Mars Global Digital Dune Database MC2–MC29, USGS Open-File Report 2007-1158; 547 fields, 65° N–65° S.",
+        "notes": "Where moderate to large dune fields are mapped. Purple fills the map cells whose centre lies inside a mapped field outline. Hayward et al. (2007) outlined about 550 dune fields in THEMIS infrared images at 100 m per pixel, checked with THEMIS visible and MOC images. Unmarked ground is not proof of no sand: small fields and fields in THEMIS coverage gaps are missing. 89 of the 547 fields are smaller than one 5.2 km cell and do not show. The polar dune seas are outside this release. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the Trek layer's fill symbol.",
+        "source": {
+          "id": "usgs-mars-dune-database-2007",
+          "path": "../catalogues/dune-fields/Dune_Field.query.json",
+          "url": "https://pubs.usgs.gov/of/2007/1158/"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Dune fields",
+          "meta": "USGS OFR 2007-1158 · 65° N–65° S · NASA Trek layer colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://pubs.usgs.gov/of/2007/1158/",
+          "items": [
+            {
+              "label": "Dune field",
+              "description": "Mapped moderate to large dune field (all three confidence classes)",
+              "color": "#df73ff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Where moderate to large dune fields are mapped. Purple fills the map cells whose centre lies inside a mapped field outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Hayward et al. (2007) outlined about 550 dune fields in THEMIS infrared images at 100 m per pixel, checked with THEMIS visible and MOC images."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Unmarked ground is not proof of no sand: small fields and fields in THEMIS coverage gaps are missing. 89 of the 547 fields are smaller than one 5.2 km cell and do not show. The polar dune seas are outside this release."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the Trek layer's fill symbol."
+          }
+        ]
+      },
+      {
+        "id": "valley-networks",
+        "label": "Water-related landforms",
+        "shortLabel": "Valleys",
+        "thumbnail": "mars-lens-valley-networks.webp",
+        "surface": "mars-surface-valley-networks@2x.webp",
+        "poles": "mars-poles-valley-networks@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Hynek, Beach and Hoke (2010), JGR 115, E09008: 9,879 valley networks traced as centrelines, as published in the NASA Trek layer.",
+        "notes": "Valleys cut by flowing water, most over 3.7 billion years old. A coloured cell is crossed by a mapped valley centreline; valley width is not published and not drawn. Each coloured cell is one 5.2 km map cell holding at least one catalogued valley centreline; it is not the valley's size or outline. Hynek et al. (2010) traced valleys by hand on the THEMIS daytime infrared mosaic and MOLA topography, with MOC and Viking images, finding eight times as many as Viking-era maps. Valleys too small for those images are missing, and unmarked ground is not proof that no valley exists. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the Trek layer's line symbol.",
+        "source": {
+          "id": "hynek-2010-valley-networks",
+          "path": "../catalogues/valley-networks/Hynek_Valley_Networks.query-01.json",
+          "url": "https://doi.org/10.1029/2009JE003548"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Valley networks",
+          "meta": "Hynek et al. (2010) · cells crossed by a valley centreline · NASA Trek layer colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1029/2009JE003548",
+          "items": [
+            {
+              "label": "Mapped valley (centreline)",
+              "description": "Mapped valley (centreline)",
+              "color": "#edffe8"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Valleys cut by flowing water, most over 3.7 billion years old. A coloured cell is crossed by a mapped valley centreline; valley width is not published and not drawn."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued valley centreline; it is not the valley's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Hynek et al. (2010) traced valleys by hand on the THEMIS daytime infrared mosaic and MOLA topography, with MOC and Viking images, finding eight times as many as Viking-era maps."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Valleys too small for those images are missing, and unmarked ground is not proof that no valley exists."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the Trek layer's line symbol."
+          }
+        ],
+        "step": {
+          "group": "water-landforms",
+          "label": "Valley networks"
+        }
+      },
+      {
+        "id": "alluvial-fans",
+        "label": "Water-related landforms",
+        "shortLabel": "Fans",
+        "thumbnail": "mars-lens-alluvial-fans.webp",
+        "surface": "mars-surface-alluvial-fans@2x.webp",
+        "poles": "mars-poles-alluvial-fans@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Moore and Howard (2005), JGR 110, E04005 (31 fans) and Kraal et al. (2008), Icarus 194, 101–110 (13 fans), as published in the NASA Trek layer.",
+        "notes": "Broad sloping fans of sediment that water carried out of crater walls. Each fan is one catalogued point. Each coloured cell is one 5.2 km map cell holding at least one catalogued fan; it is not the fan's size or outline. Moore and Howard (2005) and Kraal et al. (2008) identified large fans in THEMIS daytime infrared images and measured their size, relief and slope. Only large fans inside impact craters were catalogued; unmarked ground is not proof that no fan exists. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr).",
+        "source": {
+          "id": "moore-kraal-alluvial-fans",
+          "path": "../catalogues/alluvial-fans/FanSurvey_2005_2008_clon0.query.json",
+          "url": "https://doi.org/10.1029/2004JE002352"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Alluvial fans",
+          "meta": "Moore & Howard (2005); Kraal et al. (2008) · one 5.2 km cell per fan · layer colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1029/2004JE002352",
+          "items": [
+            {
+              "label": "Large alluvial fan",
+              "description": "Large alluvial fan",
+              "color": "#006633"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Broad sloping fans of sediment that water carried out of crater walls. Each fan is one catalogued point."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued fan; it is not the fan's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Moore and Howard (2005) and Kraal et al. (2008) identified large fans in THEMIS daytime infrared images and measured their size, relief and slope."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Only large fans inside impact craters were catalogued; unmarked ground is not proof that no fan exists."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr)."
+          }
+        ],
+        "step": {
+          "group": "water-landforms",
+          "label": "Alluvial fans"
+        }
+      },
+      {
+        "id": "gullies",
+        "label": "Water-related landforms",
+        "shortLabel": "Gullies",
+        "thumbnail": "mars-lens-gullies.webp",
+        "surface": "mars-surface-gullies@2x.webp",
+        "poles": "mars-poles-gullies@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Harrison, Osinski, Tornabene and Jones (2015), Icarus 252, 236–254: 4,978 gully sites from CTX images, as published in the NASA Trek layer.",
+        "notes": "Geologically young gullies on crater walls, massifs and other slopes, coloured by the direction the gullied slope faces. White cells hold gullies facing different ways. Each coloured cell is one 5.2 km map cell holding at least one catalogued gully site; it is not the site's size or outline. Harrison et al. (2015) searched over 54,000 CTX images at about 6 m per pixel, covering about 85% of Mars. Ground outside CTX coverage was not searched, so unmarked ground is not proof that no gully exists. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr), which follows the orientation class. White, for a cell holding more than one class, is ours.",
+        "source": {
+          "id": "harrison-2015-gullies",
+          "path": "../catalogues/gullies/Gullied_Landform_Survey_2015_clon0.query-01.json",
+          "url": "https://doi.org/10.1016/j.icarus.2015.01.022"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Gullies",
+          "meta": "Harrison et al. (2015) · one 5.2 km cell per gully site · layer colours; white is ours · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2015.01.022",
+          "items": [
+            {
+              "label": "Pole-facing gullies",
+              "description": "Pole-facing gullies",
+              "color": "#00ffff"
+            },
+            {
+              "label": "Equator-facing gullies",
+              "description": "Equator-facing gullies",
+              "color": "#ff0000"
+            },
+            {
+              "label": "East- or west-facing gullies",
+              "description": "East- or west-facing gullies",
+              "color": "#ffff00"
+            },
+            {
+              "label": "No preferred orientation",
+              "description": "No preferred orientation",
+              "color": "#cc00cc"
+            },
+            {
+              "label": "More than one class in the cell",
+              "description": "More than one class in the cell",
+              "color": "#ffffff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Geologically young gullies on crater walls, massifs and other slopes, coloured by the direction the gullied slope faces. White cells hold gullies facing different ways."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued gully site; it is not the site's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Harrison et al. (2015) searched over 54,000 CTX images at about 6 m per pixel, covering about 85% of Mars."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Ground outside CTX coverage was not searched, so unmarked ground is not proof that no gully exists."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr), which follows the orientation class. White, for a cell holding more than one class, is ours."
+          }
+        ],
+        "step": {
+          "group": "water-landforms",
+          "label": "Gullies"
+        }
+      },
+      {
+        "id": "glacier-like-forms",
+        "label": "Water-related landforms",
+        "shortLabel": "GLFs",
+        "thumbnail": "mars-lens-glacier-like-forms.webp",
+        "surface": "mars-surface-glacier-like-forms@2x.webp",
+        "poles": "mars-poles-glacier-like-forms@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Souness, Hubbard, Milliken and Quincey (2012), Icarus 217, 243–255: 1,309 glacier-like forms from 8,058 CTX images, as published in the NASA Trek layer.",
+        "notes": "Glacier-like forms: valley glaciers of ice under debris that flowed in the recent geological past. Each is one point at its measured centre. Each coloured cell is one 5.2 km map cell holding at least one catalogued glacier-like form; it is not the glacier's size or outline. Souness et al. (2012) inspected 8,058 CTX images and found 727 in the north and 582 in the south, clustered near 39° N and 41° S. Ground outside the images searched is not covered; unmarked ground is not proof that no glacier exists. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr).",
+        "source": {
+          "id": "souness-2012-glacier-like-forms",
+          "path": "../catalogues/glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-01.json",
+          "url": "https://doi.org/10.1016/j.icarus.2011.10.020"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Glacier-like forms",
+          "meta": "Souness et al. (2012) · one 5.2 km cell per glacier-like form · layer colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2011.10.020",
+          "items": [
+            {
+              "label": "Glacier-like form",
+              "description": "Glacier-like form",
+              "color": "#00ccff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Glacier-like forms: valley glaciers of ice under debris that flowed in the recent geological past. Each is one point at its measured centre."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued glacier-like form; it is not the glacier's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Souness et al. (2012) inspected 8,058 CTX images and found 727 in the north and 582 in the south, clustered near 39° N and 41° S."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Ground outside the images searched is not covered; unmarked ground is not proof that no glacier exists."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr)."
+          }
+        ],
+        "step": {
+          "group": "water-landforms",
+          "label": "Glacier-like forms"
+        }
+      },
+      {
+        "id": "recessional-glfs",
+        "label": "Water-related landforms",
+        "shortLabel": "Receding GLFs",
+        "thumbnail": "mars-lens-recessional-glfs.webp",
+        "surface": "mars-surface-recessional-glfs@2x.webp",
+        "poles": "mars-poles-recessional-glfs@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Brough, Hubbard and Hubbard (2016), Icarus 274, 37–49: 436 of 1,293 glacier-like forms with strong evidence of recession, as published in the NASA Trek layer.",
+        "notes": "Glacier-like forms whose old moraines show they were once larger: records of recent climate change. Each coloured cell is one 5.2 km map cell holding at least one catalogued glacier-like form; it is not the glacier's size or outline. Brough et al. (2016) examined 1,293 glacier-like forms in CTX images and found strong evidence of recession at 197 in the north and 239 in the south. Only glacier-like forms already in the inventory were examined; unmarked ground is not proof of no recession. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr).",
+        "source": {
+          "id": "brough-2016-recessional-glfs",
+          "path": "../catalogues/recessional-glfs/Recessional_GLF_Options_2016_clon0.query.json",
+          "url": "https://doi.org/10.1016/j.icarus.2016.03.006"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Recessional GLFs",
+          "meta": "Brough et al. (2016) · one 5.2 km cell per glacier-like form · layer colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2016.03.006",
+          "items": [
+            {
+              "label": "Recessional glacier-like form",
+              "description": "Recessional glacier-like form",
+              "color": "#ff33cc"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Glacier-like forms whose old moraines show they were once larger: records of recent climate change."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued glacier-like form; it is not the glacier's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Brough et al. (2016) examined 1,293 glacier-like forms in CTX images and found strong evidence of recession at 197 in the north and 239 in the south."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Only glacier-like forms already in the inventory were examined; unmarked ground is not proof of no recession."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr)."
+          }
+        ],
+        "step": {
+          "group": "water-landforms",
+          "label": "Recessional GLFs"
+        }
+      },
+      {
+        "id": "glacial-valleys",
+        "label": "Water-related landforms",
+        "shortLabel": "Glacial valleys",
+        "thumbnail": "mars-lens-glacial-valleys.webp",
+        "surface": "mars-surface-glacial-valleys@2x.webp",
+        "poles": "mars-poles-glacial-valleys@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Fassett, Dickson, Head, Levy and Marchant (2010), Icarus 208, 86–100: 102 supraglacial and proglacial valleys from CTX images, as published in the NASA Trek layer.",
+        "notes": "Small valleys cut by meltwater on top of glaciers (supraglacial) or just in front of them (proglacial), formed in the Amazonian. Each coloured cell is one 5.2 km map cell holding at least one catalogued valley; it is not the valley's size or outline. Fassett et al. (2010) surveyed CTX images; the catalogue publishes each valley as one point, not as a trace. Only ground in the images surveyed was searched; unmarked ground is not proof that no valley exists. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr).",
+        "source": {
+          "id": "fassett-2010-glacial-valleys",
+          "path": "../catalogues/glacial-valleys/Glacial_Valleys_2010_clon0.query.json",
+          "url": "https://doi.org/10.1016/j.icarus.2010.02.021"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Glacial valleys",
+          "meta": "Fassett et al. (2010) · one 5.2 km cell per valley · layer colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2010.02.021",
+          "items": [
+            {
+              "label": "Supraglacial or proglacial valley",
+              "description": "Supraglacial or proglacial valley",
+              "color": "#ffffff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Small valleys cut by meltwater on top of glaciers (supraglacial) or just in front of them (proglacial), formed in the Amazonian."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued valley; it is not the valley's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Fassett et al. (2010) surveyed CTX images; the catalogue publishes each valley as one point, not as a trace."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Only ground in the images surveyed was searched; unmarked ground is not proof that no valley exists."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr)."
+          }
+        ],
+        "step": {
+          "group": "water-landforms",
+          "label": "Glacial valleys"
+        }
+      },
+      {
+        "id": "recent-activity",
+        "label": "Present-day changes",
+        "shortLabel": "Changes",
+        "thumbnail": "mars-lens-recent-activity.webp",
+        "surface": "mars-surface-recent-activity@2x.webp",
+        "poles": "mars-poles-recent-activity@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "NASA Trek compilation of Daubar et al. (2013), Dundas et al. (2014, 2015), McEwen et al. (2014) and Ojha et al. (2014): 508 HiRISE sites.",
+        "notes": "Surface changes caught in repeat HiRISE images: new impact craters, craters exposing ice, gullies that changed, and recurring slope lineae (dark streaks that grow each warm season). Each coloured cell is one 5.2 km map cell holding at least one catalogued site; it is not the site's size or outline. The Trek layer combines four HiRISE catalogues; the colour follows the catalogue each site comes from. White cells hold sites from more than one. HiRISE images a small part of Mars, so unmarked ground is not proof that nothing changed. 16 of the 22 ice-exposing craters share a cell with a new-crater entry and show white. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from our categorical palette, validated for all-pair separation (Trek draws every type in #d3ffbe and tells them apart by symbol shape). White, for a cell holding more than one class, is ours.",
+        "source": {
+          "id": "hirise-surface-change-sites",
+          "path": "../catalogues/recent-activity/RSLs_Gullies_New-IcyCraters_clon0.query.json",
+          "url": "https://doi.org/10.1016/j.icarus.2013.04.009"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Present-day changes",
+          "meta": "HiRISE catalogues · one 5.2 km cell per site · colours ours (Trek uses one colour with symbol shapes) · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2013.04.009",
+          "items": [
+            {
+              "label": "New impact craters (Daubar et al. 2013)",
+              "description": "New impact craters (Daubar et al. 2013)",
+              "color": "#3987e5"
+            },
+            {
+              "label": "Active gullies, including dune gullies (Dundas et al. 2015)",
+              "description": "Active gullies, including dune gullies (Dundas et al. 2015)",
+              "color": "#d95926"
+            },
+            {
+              "label": "Recurring slope lineae, confirmed or partial (McEwen et al. 2014; Ojha et al. 2014)",
+              "description": "Recurring slope lineae, confirmed or partial (McEwen et al. 2014; Ojha et al. 2014)",
+              "color": "#199e70"
+            },
+            {
+              "label": "New craters exposing ice (Dundas et al. 2014)",
+              "description": "New craters exposing ice (Dundas et al. 2014)",
+              "color": "#eda100"
+            },
+            {
+              "label": "More than one class in the cell",
+              "description": "More than one class in the cell",
+              "color": "#ffffff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Surface changes caught in repeat HiRISE images: new impact craters, craters exposing ice, gullies that changed, and recurring slope lineae (dark streaks that grow each warm season)."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued site; it is not the site's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "The Trek layer combines four HiRISE catalogues; the colour follows the catalogue each site comes from. White cells hold sites from more than one."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "HiRISE images a small part of Mars, so unmarked ground is not proof that nothing changed. 16 of the 22 ice-exposing craters share a cell with a new-crater entry and show white."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from our categorical palette, validated for all-pair separation (Trek draws every type in #d3ffbe and tells them apart by symbol shape). White, for a cell holding more than one class, is ours."
+          }
+        ]
+      },
+      {
+        "id": "hydrous-minerals",
+        "label": "Aqueous minerals",
+        "shortLabel": "Hydrous",
+        "thumbnail": "mars-lens-hydrous-minerals.webp",
+        "surface": "mars-surface-hydrous-minerals@2x.webp",
+        "poles": "mars-poles-hydrous-minerals@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Carter, Poulet, Bibring, Mangold and Murchie (2013), JGR Planets 118, 831–858: 1,648 detections (CRISM 1,208, OMEGA 440), as published in the NASA Trek layer.",
+        "notes": "Detections of hydrous minerals, such as clays and hydrated salts, that formed when water altered the crust. Each coloured cell is one 5.2 km map cell holding at least one catalogued detection; it is not the detection's size or outline. Carter et al. (2013) surveyed near-infrared spectra from CRISM on Mars Reconnaissance Orbiter and OMEGA on Mars Express. White cells hold detections from both instruments. A detection exists only where the instruments observed; unmarked ground may be unobserved, dusty or free of these minerals. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr), by instrument. White, for a cell holding more than one class, is ours.",
+        "source": {
+          "id": "carter-2013-hydrous-minerals",
+          "path": "../catalogues/hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-01.json",
+          "url": "https://doi.org/10.1029/2012JE004145"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Hydrous detections",
+          "meta": "Carter et al. (2013) · one 5.2 km cell per detection · layer colours; white is ours · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1029/2012JE004145",
+          "items": [
+            {
+              "label": "CRISM detection",
+              "description": "CRISM detection",
+              "color": "#ff0000"
+            },
+            {
+              "label": "OMEGA detection",
+              "description": "OMEGA detection",
+              "color": "#0099ff"
+            },
+            {
+              "label": "CRISM and OMEGA detections in one cell",
+              "description": "CRISM and OMEGA detections in one cell",
+              "color": "#ffffff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Detections of hydrous minerals, such as clays and hydrated salts, that formed when water altered the crust."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued detection; it is not the detection's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Carter et al. (2013) surveyed near-infrared spectra from CRISM on Mars Reconnaissance Orbiter and OMEGA on Mars Express. White cells hold detections from both instruments."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "A detection exists only where the instruments observed; unmarked ground may be unobserved, dusty or free of these minerals."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr), by instrument. White, for a cell holding more than one class, is ours."
+          }
+        ],
+        "step": {
+          "group": "aqueous-minerals",
+          "label": "Hydrous detections"
+        }
+      },
+      {
+        "id": "aqueous-classes",
+        "label": "Aqueous minerals",
+        "shortLabel": "Mineral classes",
+        "thumbnail": "mars-lens-aqueous-classes.webp",
+        "surface": "mars-surface-aqueous-classes@2x.webp",
+        "poles": "mars-poles-aqueous-classes@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Ehlmann and Edwards (2014), Annual Review of Earth and Planetary Sciences 42, 291–315: 4,572 sites in five classes, as published in the NASA Trek layer.",
+        "notes": "Minerals that form in water, grouped in five classes. Which ones formed depends on temperature, salinity and acidity, so the classes record past environments. White cells hold more than one class. Each coloured cell is one 5.2 km map cell holding at least one catalogued site; it is not the site's size or outline. Ehlmann and Edwards (2014) compiled detections from CRISM, OMEGA and THEMIS spectra. Detections exist only where the instruments observed; unmarked ground is not proof that no such mineral is there. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr), by class. White, for a cell holding more than one class, is ours.",
+        "source": {
+          "id": "ehlmann-edwards-2014-aqueous-minerals",
+          "path": "../catalogues/aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-01.json",
+          "url": "https://doi.org/10.1146/annurev-earth-060313-055024"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Mineral classes",
+          "meta": "Ehlmann & Edwards (2014) · one 5.2 km cell per site · layer colours; white is ours · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1146/annurev-earth-060313-055024",
+          "items": [
+            {
+              "label": "Phyllosilicates (clays)",
+              "description": "Phyllosilicates (clays)",
+              "color": "#0099ff"
+            },
+            {
+              "label": "Sulfates",
+              "description": "Sulfates",
+              "color": "#ff6699"
+            },
+            {
+              "label": "Silica",
+              "description": "Silica",
+              "color": "#9900cc"
+            },
+            {
+              "label": "Chlorides",
+              "description": "Chlorides",
+              "color": "#ffff00"
+            },
+            {
+              "label": "Carbonates",
+              "description": "Carbonates",
+              "color": "#33cc00"
+            },
+            {
+              "label": "More than one class in the cell",
+              "description": "More than one class in the cell",
+              "color": "#ffffff"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Minerals that form in water, grouped in five classes. Which ones formed depends on temperature, salinity and acidity, so the classes record past environments. White cells hold more than one class."
+          },
+          {
+            "id": "cell",
+            "label": "Reading a cell",
+            "value": "Each coloured cell is one 5.2 km map cell holding at least one catalogued site; it is not the site's size or outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Ehlmann and Edwards (2014) compiled detections from CRISM, OMEGA and THEMIS spectra."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "Detections exist only where the instruments observed; unmarked ground is not proof that no such mineral is there."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr), by class. White, for a cell holding more than one class, is ours."
+          }
+        ],
+        "step": {
+          "group": "aqueous-minerals",
+          "label": "Mineral classes"
+        }
+      },
+      {
+        "id": "chloride-deposits",
+        "label": "Aqueous minerals",
+        "shortLabel": "Chloride",
+        "thumbnail": "mars-lens-chloride-deposits.webp",
+        "surface": "mars-surface-chloride-deposits@2x.webp",
+        "poles": "mars-poles-chloride-deposits@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "qualification": "Osterloo, Anderson, Hamilton and Hynek (2010), JGR 115, E10012: 642 THEMIS chloride-bearing deposits, as published in the NASA Trek GIS layer.",
+        "notes": "Deposits interpreted to contain chloride salts. Green fills the map cells whose centre lies inside a mapped deposit outline. Osterloo et al. (2010) found about 640 deposits by their distinct colour in decorrelation-stretched THEMIS infrared images and outlined each one. The salt is inferred from infrared spectra, not sampled. 347 of the 642 deposits are smaller than one 5.2 km cell and do not show; unmarked ground is not proof that no salt is there. Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain. Colours come from the layer's published fill attribute (jC_fillclr); Trek draws outlines only.",
+        "source": {
+          "id": "osterloo-2010-chloride-deposits",
+          "path": "../catalogues/chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.query.json",
+          "url": "https://doi.org/10.1029/2010JE003613"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Chloride deposits",
+          "meta": "Osterloo et al. (2010) · THEMIS infrared · layer fill colour · grey terrain at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1029/2010JE003613",
+          "items": [
+            {
+              "label": "Chloride-bearing material",
+              "description": "Chloride-bearing material",
+              "color": "#009933"
+            },
+            {
+              "label": "No catalogued feature",
+              "description": "Viking mosaic in grey at 35% brightness (median shown); not proof of absence",
+              "color": "#202020"
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "meaning",
+            "label": "What it shows",
+            "value": "Deposits interpreted to contain chloride salts. Green fills the map cells whose centre lies inside a mapped deposit outline."
+          },
+          {
+            "id": "method",
+            "label": "How it was made",
+            "value": "Osterloo et al. (2010) found about 640 deposits by their distinct colour in decorrelation-stretched THEMIS infrared images and outlined each one."
+          },
+          {
+            "id": "limit",
+            "label": "Limits",
+            "value": "The salt is inferred from infrared spectra, not sampled. 347 of the 642 deposits are smaller than one 5.2 km cell and do not show; unmarked ground is not proof that no salt is there."
+          },
+          {
+            "id": "presentation",
+            "label": "Unmarked ground",
+            "value": "Unmarked ground is the Viking colour mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: at that level every legend colour differs by at least 15 OKLab units from 95% of the dimmed terrain."
+          },
+          {
+            "id": "colours",
+            "label": "Colours",
+            "value": "Colours come from the layer's published fill attribute (jC_fillclr); Trek draws outlines only."
+          }
+        ],
+        "step": {
+          "group": "aqueous-minerals",
+          "label": "Chloride deposits"
+        }
       }
     ]
   },

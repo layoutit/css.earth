@@ -8,23 +8,11 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1817.txt. Model 1817, version 2017-06-07, pole (154°, 17°), period 7.02264 h match the retained metadata. The archive diameter field is 143 ±5 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1817",
         "https://damit.cuni.cz/projects/damit/stored_files/open/284/shape.txt",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/alexandra/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/alexandra/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/alexandra/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/alexandra/source/reference/damit-model.json"
       ]
     },
     {
@@ -32,13 +20,7 @@
       "survey": "survey-damit-documentation-2",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/alexandra/README.md"
       ]
     },
     {
@@ -46,13 +28,7 @@
       "survey": "survey-hanu-et-al-2017-volumes-and-bulk-densities-of-forty-asteroids-fro",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/alexandra/README.md"
       ]
     },
     {
@@ -62,21 +38,9 @@
       "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the selected archive model has a physical size calibration. Its fitted nonrotating-sphere diameter is 144.46 ± 1.8 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 54 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
       "revisitWhen": "A source-specific comparison with the selected shape and physical calibration justifies changing the adopted scale.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md",
         "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
         "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/alexandra/source/reference/damit-model.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/alexandra/source/reference/damit-model.json"
       ]
     },
     {
@@ -85,23 +49,11 @@
       "status": "included",
       "finding": "The live DAMIT model-to-reference export binds selected model 1817 to Volumes and bulk densities of forty asteroids from ADAM shape modeling (2017). That publication supports the selected reconstruction. The imported entry conflated three surveys; listing them together did not establish three usable models or a registered reflectance mosaic.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md",
         "https://arxiv.org/abs/1702.01996",
         "https://arxiv.org/abs/1708.05191",
         "https://damit.cuni.cz/projects/damit/references/view/660",
         "https://damit.cuni.cz/projects/damit/references/view/169",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models_references"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -109,13 +61,7 @@
       "survey": "survey-hanu-et-al-2018",
       "status": "included",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/alexandra/README.md"
       ]
     },
     {
@@ -123,14 +69,7 @@
       "survey": "surface-imagery",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/136"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
       ]
     },
     {
@@ -140,20 +79,19 @@
       "finding": "Alternative archive solutions: model 136, pole ['156', '13'], [Model 136](https://damit.cuni.cz/projects/damit/asteroid_models/view/136) The live DAMIT export lists these other models for this target: 136: pole (156°, 13°), 7.022641 h, version 2011-03-28, archive diameter 135 km. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/alexandra/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/136",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"71.5 km (size-calibrated model)\" (damit-models) implies a diameter of 143 km, outside the added NEOWISE V2.0 neowise_mainbelt.csv record 139473 (Masiero et al. 2012) diameter 160.120 ± 1.857 km (NEOWISE, NEATM). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -11,12 +11,6 @@
         "https://observations.lam.fr/astero/3Dshape/145_Adeona_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
         "https://doi.org/10.1051/0004-6361/202141781"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "145e36d8b599d9273594adfa06c087168890a812"
-        }
       ]
     },
     {
@@ -27,12 +21,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://cdsarc.cds.unistra.fr/ftp/J/A+A/654/A56/table1.dat"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "145e36d8b599d9273594adfa06c087168890a812"
-        }
       ]
     },
     {
@@ -44,12 +32,6 @@
         "https://observations.lam.fr/astero/Data/145Adeona/",
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/145Adeona/Deconv/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "145e36d8b599d9273594adfa06c087168890a812"
-        }
       ]
     },
     {
@@ -60,12 +42,17 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/145Adeona/Deconv/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "145e36d8b599d9273594adfa06c087168890a812"
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "NEOWISE V2.0 neowise_mainbelt.csv record 108 (Masiero et al. 2014) diameter 127.783 ± 0.355 km (NEOWISE, NEATM) is not shown: the astronomy record takes its size from a publication (\"Vernazza et al. (2021), Table 1: volume-equivalent diameter 144 km and mass 2.4e18 kg; GM = G * mass.\"), and it differs from the astronomy record's mean radius 72 km (diameter 144 km).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

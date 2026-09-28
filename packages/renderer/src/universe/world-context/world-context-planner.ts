@@ -11,54 +11,14 @@ import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
-
-const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
+import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
 const ANNOTATION_ENTRY_MARGIN = .05;
-
-function orbitPresentation(segments: readonly OrbitSegment[] | number) {
-  if (typeof segments === 'number') return orbitPresentationForExtent(segments);
-  let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
-  for (const [x0, y0, x1, y1] of segments) {
-    left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
-    top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
-  }
-  return orbitPresentationForExtent(Math.max(1, right - left, bottom - top));
-}
-
-/** The extent fade in 1/64 steps: rotation changes every orbit's extent a little
- * each frame, and a step this small cannot change a composited pixel, so a body's
- * marker and orbit keep their alpha instead of restyling on every frame. */
-const EXTENT_FADE_STEPS = 64;
-const quantizeAlpha = (alpha: number) => Math.round(alpha * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
-function orbitPresentationForExtent(extent: number) {
-  const opacity = Math.round(logarithmicFade(extent, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS) * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
-  // Orbit paint has its own fade; label admission does not depend on this value.
-  return { width: CONTEXT_LINE_WIDTH, opacity };
-}
-
-// Clip already-projected chords at the UI marker, preserving the prepared orbit.
-export function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number, y: number, radius: number): readonly OrbitSegment[] {
-  const radiusSquared = radius ** 2;
-  const result: OrbitSegment[] = [];
-  for (const segment of segments) {
-    const [x0, y0, x1, y1, weight] = segment;
-    const dx = x1 - x0, dy = y1 - y0, sx = x0 - x, sy = y0 - y;
-    const a = dx * dx + dy * dy, b = sx * dx + sy * dy;
-    const discriminant = b * b - a * (sx * sx + sy * sy - radiusSquared);
-    if (discriminant <= 0) { result.push(segment); continue; }
-    const root = Math.sqrt(discriminant);
-    const enter = Math.max(0, (-b - root) / a), leave = Math.min(1, (-b + root) / a);
-    if (enter >= leave) { result.push(segment); continue; }
-    if (enter * Math.sqrt(a) >= 0.05) result.push([x0, y0, x0 + dx * enter, y0 + dy * enter, weight]);
-    if ((1 - leave) * Math.sqrt(a) >= 0.05) result.push([x0 + dx * leave, y0 + dy * leave, x1, y1, weight]);
-  }
-  return result;
-}
+export { orbitOutsideMarker } from './orbit-presentation.js';
+import { orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
 
 /** UI measurements and the last committed annotation state, without DOM handles. */
 export interface WorldBodyPresentation {
@@ -96,7 +56,6 @@ export interface WorldContextView {
   bodies: readonly WorldBodyPresentation[];
   contextCommittedId?: number;
 }
-
 /** Project the prepared bank and resolve annotations without reading or writing DOM.
  * Segment buffers are borrowed until the next plan. A transport must copy/send
  * the result into its frame packet before requesting another view. */
@@ -152,6 +111,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   // Only the selected path fades with depth; one shared scratch pool serves it.
   const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0))));
   const planFrame = (view: WorldContextView) => {
+    const labelMeasurements: number[] = [];
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
       rotationActive = false, preserveCommittedAnnotations = false } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
@@ -447,10 +407,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // The destination stays named through the whole flight, across its preview fade.
         // A planet of the framed system keeps its name whatever its orbit measures on screen. The extent fade is for bodies
         // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
-        const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
+        // Past the Local Group scale the galaxies are named, not the stars inside them: a name fades with the body's distance
+        // from the camera over the band where the overview becomes the Local Group.
+        const galactic = 1 - logarithmicFade(Math.hypot(...frame.eye(body)), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
+        const alpha = flightDestination ? 1 : referenceAnnotationOnly ? galactic : targeted ? markerOpacity : Math.min(markerOpacity, galactic, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.
-        projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
+        projected.nameable = !(entry.labelSuppressed || !annotationVisible ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
             (!targeted && !resolvedDisc && !referenceAnnotationOnly && (!inContext || unrelatedMinor)));
         if (referenceAnnotationOnly) { projected.orbitVisibility = 0; projected.segments = []; }
@@ -458,6 +421,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // final admission below retires an on-screen context orbit with the caption.
         // Selection/hover can still reveal the complete annotation.
         if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
+        if (size.width === 0) { labelMeasurements.push(entry.index); projected.nameable = false; continue; }
         const gap = Math.max(5, diameter / 2, circle || referenceAnnotationOnly ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
@@ -516,7 +480,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // Use the same admission during motion and at rest. Clear committed
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
-      const accepted = [...acceptedLandmarks, ...admitStableLabels(otherCandidates, labelBudget)];
+      // The system the camera is in is named before the field behind it: a star thousands of parsecs beyond the Sun must not
+      // take the caption of a body orbiting it. Its planets, dwarf planets and moons come first, then the notable bodies
+      // beyond it (a star named there is one with more to find), then the comets and asteroids orbiting its star, then the
+      // rest of the field. A hovered or selected body keeps its place in the first pass.
+      const ownSystem = (candidate: typeof candidates[number]) => candidate.pinned > 0 || systemFade.inShownSystem(candidate.projected.entry.index);
+      const moon = (candidate: typeof candidates[number]) => { const parent = candidate.projected.entry.parent; return parent !== null && !systemFade.isSystemStar(parent.id); };
+      const major = (candidate: typeof candidates[number]) => candidate.pinned > 0 || (ownSystem(candidate) ? moon(candidate) || (candidate.tier ?? 0) >= 2 : (candidate.tier ?? 0) >= 3);
+      const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
+        (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
+      const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget))];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {
@@ -573,7 +546,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance;
       return output;
     };
-    return { emphasizedId, opacity, width, height, projectedBodies: projectedBodies.map(plannedBody) };
+    return { emphasizedId, opacity, width, height, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
   };
   return Object.assign(planFrame, {
     /** Give bodies the paths their centre's bank decoded; each keeps its retained projection and per-frame state. */

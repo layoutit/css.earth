@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hv-876",
+  "angularDiameterMas": 0.02,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 67,761,180 km at 44756.60 pc = 0.02 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 44756.6,
+  "distanceSource": "Groenewegen (2013), A&A 550, A70, table10, HV 876: Baade-Wesselink distance (pc) 44756.6 +/- 1883.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 44756.6 +/- 1883.9 pc; Gaia DR3 parallax 0.0456 +/- 0.0196 mas (same row, RUWE 2.03), 2.3 standard errors, is not used",
+  "radiusKm": 67761180,
+  "radiusSource": "Radius 97.4 +/- 3.8 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 876: Baade-Wesselink mean radius (solar radii) 97.4 +/- 3.8 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 67,761,180 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5375 +/- 125 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0467, columns Teffp, e_Teffp: Teff 5375 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5375,
+  "effectiveTemperatureSource": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0467, columns Teffp, e_Teffp: Teff 5375 +/- 125 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559)",
+  "surfaceGravityLogg": 1.63,
+  "surfaceGravitySource": "log g 1.63 from 2022AJ....163..152S (APOGEE Net, a survey pipeline: no analysis of this star's own spectra is published); the 2 published values span log g 0.67 to 1.63, across which the limb law changes by at most 1.4% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2022AJ....163..152S)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

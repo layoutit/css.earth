@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Add NASA's artist's concept of a hosted planet as a second, non-default Illustration lens.
 //
-//   node packages/bake/cli/illustration-lens.mts --object=trappist-1e --map=<local copy of TRAPPIST-1_e.jpg> --checked=<date> --commit=<sha>
+//   node packages/bake/cli/illustration-lens.mts --object=trappist-1e --map=<local copy of TRAPPIST-1_e.jpg> --checked=<date>
 //   node packages/bake/cli/illustration-lens.mts --object=wasp-12b --model=<local copy of the GLB> --origin=<GLB url> --landing=<resource page> ...
 //
 // A map is the texture NASA's Eyes on Exoplanets app wraps around the planet (credited NASA/JPL-Caltech; NASA calls each planet's look
@@ -27,10 +27,10 @@ const read = async (path: string): Promise<Json> => JSON.parse(await readFile(re
 const write = (path: string, value: unknown) => writeFile(resolve(root, path), `${JSON.stringify(value, null, 2)}\n`);
 
 const { values } = parseArgs({ options: { object: { type: 'string' }, map: { type: 'string' }, model: { type: 'string' }, origin: { type: 'string' },
-  landing: { type: 'string' }, checked: { type: 'string' }, commit: { type: 'string' } } });
-const { object: id, map, model, checked, commit } = values;
-if (!id || !checked || !commit || !map === !model || model && (!values.origin || !values.landing))
-  throw new TypeError('Usage: --object=<id> (--map=<Eyes map> | --model=<GLB> --origin=<GLB url> --landing=<NASA resource page>) --checked=<YYYY-MM-DD> --commit=<commit the ledger entry was checked at>');
+  landing: { type: 'string' }, checked: { type: 'string' } } });
+const { object: id, map, model, checked } = values;
+if (!id || !checked || !map === !model || model && (!values.origin || !values.landing))
+  throw new TypeError('Usage: --object=<id> (--map=<Eyes map> | --model=<GLB> --origin=<GLB url> --landing=<NASA resource page>) --checked=<YYYY-MM-DD>');
 const local = (map ?? model)!, file = basename(local), o = `src/objects/${id}`, s = `${o}/source`, sourcePath = `illustration/${file}`;
 
 const content = await read(`${s}/content/object.json`), name = String(content.displayName);
@@ -111,7 +111,7 @@ await write(`${o}/object.json`, descriptor);
 
 const ledger = await read(`${o}/investigations.json`);
 ledger.entries.push({ id: model ? 'nasa-vtad-illustration' : 'nasa-eyes-illustration', subject: model ? `NASA VTAD ${name} 3D model texture as an illustration lens` : 'NASA Eyes on Exoplanets artist\'s concept map as an illustration lens',
-  status: 'included', finding: `Shown as the non-default Illustration lens, never as imagery: ${kind.finding}`, evidence: kind.evidence, checked: [{ date: checked, commit }] });
+  status: 'included', finding: `Shown as the non-default Illustration lens, never as imagery: ${kind.finding}`, evidence: kind.evidence });
 await write(`${o}/investigations.json`, ledger);
 
 await writeFile(resolve(root, o, 'NOTICE.md'), `${(await readFile(resolve(root, o, 'NOTICE.md'), 'utf8')).trimEnd()}\n\nIllustration lens: ${kind.notice}, used unchanged under NASA's media guidelines (${NASA_MEDIA}). An artist's ${model ? 'illustration' : 'concept'}, not an observation.\n`);

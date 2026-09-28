@@ -43,7 +43,7 @@ async function assertLocalBuiltPreview(origin: URL): Promise<void> {
   const owner = (await exec('lsof', ['-nP', '-a', '-p', pid, '-d', 'cwd', '-Fn'])).stdout.split('\n').find(line => line.startsWith('n'))?.slice(1);
   if (!owner || resolve(owner) !== root) throw new Error(`Port ${origin.port} belongs to ${owner ?? 'an unknown checkout'}, not ${root}.`);
   const command = (await exec('ps', ['-p', pid, '-o', 'command='])).stdout;
-  if (!/\b(?:astro|vite)(?:\.mjs)?\s+preview\b/u.test(command) && !command.includes('tools/cli/preview.mts'))
+  if (!/\b(?:astro|vite)(?:\.mjs)?\s+preview\b/u.test(command) && !command.includes('site/server/preview.mts'))
     throw new Error(`Port ${origin.port} is not a built preview. Server: ${command.trim()}`);
   const response = await fetch(new URL('/index.html', origin), { signal: AbortSignal.timeout(12_000) });
   await response.body?.cancel();
@@ -53,7 +53,7 @@ async function assertLocalBuiltPreview(origin: URL): Promise<void> {
 async function ensureCurrentBuild(): Promise<void> {
   const built = await stat(resolve(root, 'dist/index.html')).catch(() => null);
   const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
-  const sourcePaths = ['site', 'src', 'packages', 'astro.config.mts', 'tools/prepared', 'tools/prepare'];
+  const sourcePaths = ['site', 'src', 'packages', 'astro.config.mts', 'tools/prepare'];
   const diff = await exec('git', ['diff', '--binary', 'HEAD', '--', ...sourcePaths], { cwd: root, maxBuffer: 64 * 1024 * 1024 });
   const untracked = await exec('git', ['ls-files', '--others', '--exclude-standard', '-z', '--', ...sourcePaths], { cwd: root });
   const digest = createHash('sha256').update(diff.stdout);

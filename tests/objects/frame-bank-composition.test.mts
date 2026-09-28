@@ -6,7 +6,7 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
-import {assertLayeredGiantFrameBank} from '../../tools/objects/giant-layers/object.mts';
+import {assertLayeredGiantFrameBank} from '@cssearth/bake/objects/layers/giant';
 
 const readJson=async (path: string|URL)=>JSON.parse(await readFile(new URL(path,import.meta.url),'utf8'));
 const input=async (id: string)=>{

@@ -32,7 +32,60 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "5.225 hours (synodic; LCDB quality 3)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+          "label": "Warner, Harris & Pravec (2021), Asteroid Lightcurve Database (LCDB) V4.0, summary table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-lightcurve-database-v4",
+          "locator": "/lcdb/rows/0/fields/Period; /lcdb/rows/0/fields/PFlag; /lcdb/rows/0/fields/Notes; /lcdb/rows/0/fields/U"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.086 ± 0.015 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "S/2003 (130) 1: semimajor axis 1298 ± 0.540 km, period 5.287 ± 0.00100 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Yang et al. 2016",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      },
+      {
+        "id": "companion-2",
+        "label": "Companion",
+        "value": "S/2014 (130) 1: semimajor axis 497.6 ± 0.330 km, period 1.256 ± 0.00300 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Yang et al. 2016",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/1/fields/COMPANION_DESIGNATION; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

@@ -5,10 +5,8 @@
     "model": "iPad15,7",
     "system": "26.6"
   },
-  "baseRevision": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
   "finalBuild": {
     "schema": "cssearth-performance-build@1",
-    "head": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
     "sourceDigest": "e945a2aa96fa1e47b9f8252cd487dc766232b70c375e49f0195bcce53cd1030c",
     "builtAt": "2026-09-27T03:13:42.903Z"
   },
@@ -72,7 +70,6 @@
     "retainAtHandoff": {
       "build": {
         "schema": "cssearth-performance-build@1",
-        "head": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
         "sourceDigest": "e415ec1022503c40acbe298f6e6ec79c601a61b0cd7d52f85ebd177f6a5cf4b1",
         "builtAt": "2026-09-27T03:00:18.967Z"
       },
@@ -136,7 +133,6 @@
     "installDuringPreparation": {
       "build": {
         "schema": "cssearth-performance-build@1",
-        "head": "60f9a882f80c2d901122dfc5506420a3d670d5e6",
         "sourceDigest": "180523f45ff577200be91b9bfd8ffe53a7d376892087b309b0236d6a9f2f4d22",
         "builtAt": "2026-09-27T03:05:27.668Z"
       },

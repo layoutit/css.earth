@@ -1,0 +1,32 @@
+{
+ "id": "ngc-6362-v41-b",
+ "classification": "star",
+ "order": 1995,
+ "physical": {
+  "name": "NGC 6362 V41 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 508348,
+  "gravitationalParameterKm3PerS2": 96614656350.53,
+  "parent": "ngc-6362-v41-a",
+  "effectiveTemperatureK": 5741
+ },
+ "physicalNotes": "Radius 0.7307 +/- 0.0046 solar radii from Secondary radius (solar radii) 0.7307 +/- 0.0046, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K) (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K): 508,348 km at 695,700 km per solar radius. GM from the mass 0.728 +/- 0.0047 solar masses (Secondary mass (solar masses) 0.728 +/- 0.0047, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K), https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K) times the JPL solar GM. Temperature 5741 +/- 119 K from Secondary log Teff 3.759 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2015AJ....150..155K): 5741 K (https://ui.adsabs.harvard.edu/abs/2015AJ....150..155K). A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 17.8888441,
+  "semiMajorAxisStellarRadii": 31.017,
+  "inclinationDegrees": 89.547,
+  "eccentricity": 0.3125,
+  "argumentOfPeriapsisDegrees": 321.23,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 54263.15242,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "NGC 6362 V41: P 17.8888441 d and primary-eclipse time HJD 2454263.65242 (Section II.1, before Equation (2)); i 89.547 degrees (Table 4, column V41); e 0.3125, omega 321.23 degrees (Table 4, column V41); used as published: fitting the paper's Table 3 radial velocities with it leaves 0.59 km/s rms against 29 km/s for omega + 180 (V40 needs + 180 only because the paper counts V40's phase from its secondary minimum). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1508.04894): P 17.8888441 d",
+   "shape": "NGC 6362 V41: P 17.8888441 d and primary-eclipse time HJD 2454263.65242 (Section II.1, before Equation (2)); i 89.547 degrees (Table 4, column V41); e 0.3125, omega 321.23 degrees (Table 4, column V41); used as published: fitting the paper's Table 3 radial velocities with it leaves 0.59 km/s rms against 29 km/s for omega + 180 (V40 needs + 180 only because the paper counts V40's phase from its secondary minimum). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1508.04894): a/R* 31.017, inclination 89.547 degrees",
+   "eccentricity": "NGC 6362 V41: P 17.8888441 d and primary-eclipse time HJD 2454263.65242 (Section II.1, before Equation (2)); i 89.547 degrees (Table 4, column V41); e 0.3125, omega 321.23 degrees (Table 4, column V41); used as published: fitting the paper's Table 3 radial velocities with it leaves 0.59 km/s rms against 29 km/s for omega + 180 (V40 needs + 180 only because the paper counts V40's phase from its secondary minimum). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1508.04894): e 0.3125",
+   "argumentOfPeriapsis": "NGC 6362 V41: P 17.8888441 d and primary-eclipse time HJD 2454263.65242 (Section II.1, before Equation (2)); i 89.547 degrees (Table 4, column V41); e 0.3125, omega 321.23 degrees (Table 4, column V41); used as published: fitting the paper's Table 3 radial velocities with it leaves 0.59 km/s rms against 29 km/s for omega + 180 (V40 needs + 180 only because the paper counts V40's phase from its secondary minimum). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1508.04894): omega 321.23 degrees (the star's)",
+   "phase": "NGC 6362 V41: P 17.8888441 d and primary-eclipse time HJD 2454263.65242 (Section II.1, before Equation (2)); i 89.547 degrees (Table 4, column V41); e 0.3125, omega 321.23 degrees (Table 4, column V41); used as published: fitting the paper's Table 3 radial velocities with it leaves 0.59 km/s rms against 29 km/s for omega + 180 (V40 needs + 180 only because the paper counts V40's phase from its secondary minimum). HJD is taken as BJD_TDB (under a minute apart); at the primary eclipse the secondary is in front, the component these papers call primary being the one eclipsed at phase 0. Separation from Kepler's third law with DEBCat's masses (https://arxiv.org/abs/1508.04894): transit (inferior conjunction) at 54263.15242 BMJD_TDB",
+   "orientation": "Display convention: the orbit's position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

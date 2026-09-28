@@ -7,6 +7,7 @@ import { loadImageDemScience } from './image-dem-science.ts';
 import {loadPdsImage} from './pds/pds-image.ts';
 import {loadFacetScalarSurface} from './facet-scalars.ts';
 import {loadVtkCategories} from './vtk-categories.ts';
+import {loadCircleCatalogue} from './circle-catalogue.ts';
 import {loadGeologySurface, categoryColorForValue} from './categorical-geology.ts';
 import { loadScalarMap } from './pds/pds-scalar-map.ts';
 import { resolve } from 'node:path';
@@ -22,6 +23,8 @@ import { loadObjUvFits } from './obj-uv-fits.ts';
 import { loadFitsImageMap } from './fits-image-map.ts';
 import { loadNpyDictionaryMap } from './numpy/npy-dictionary-map.ts';
 import { loadNpyLonLatGrid } from './numpy/npy-lonlat-grid.ts';
+import { loadPds3Grid } from './pds/pds3-grid.ts';
+import { loadVicarGrid } from './vicar-grid.ts';
 import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit } from './eclipse-map/eclipse-map-fit.ts';
 import { loadPublishedPhaseCurveMap } from './eclipse-map/published-phase-curve-map.ts';
 import { loadEigenspectraTemperature } from './eclipse-map/eigenspectra-map.ts';
@@ -29,7 +32,14 @@ import { loadHealpixNpyMap } from './healpix-map.ts';
 import { loadTecplotLonLatMap } from './tecplot-lonlat-map.ts';
 import { loadLatitudeBeltMap } from './latitude-belt-map.ts';
 import { loadPdsBinnedTable } from './pds/pds-binned-table.ts';
+import { loadPdsEqualAreaTable } from './pds/pds-equal-area-table.ts';
 import { loadLonLatSliceTable } from './lonlat-slice-table.ts';
+
+/** A GeoTIFF that declares NaN as its no-data value matches a grid recorded without one: NaN cells are non-finite and
+ * are already skipped as missing. */
+function sameNoData(declared: number | null, recorded: number | null | undefined) {
+  return declared === recorded || (recorded === null && declared !== null && Number.isNaN(declared));
+}
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -128,6 +138,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'pds-image') return loadPdsImage(root, lens);
   if (lens.format === 'facet-scalars') return loadFacetScalarSurface(root, lens, sourceMesh);
   if (lens.format === 'vtk-cell-categories') { if(!sourceMesh)throw new Error('Categorical science requires source mesh'); return loadVtkCategories(root, lens, sourceMesh); }
+  if (lens.format === 'circle-catalogue') return loadCircleCatalogue(root, lens, sourceMesh);
   if (lens.format === 'geologic-shapefile') return loadGeologySurface(root, lens);
   if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
   if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
@@ -155,6 +166,8 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'fits-image-map') return loadFitsImageMap(root, lens);
   if (lens.format === 'npy-dictionary-map') return loadNpyDictionaryMap(root, lens);
   if (lens.format === 'npy-lonlat-grid') return loadNpyLonLatGrid(root, value);
+  if (lens.format === 'pds3-grid') return loadPds3Grid(root, value);
+  if (lens.format === 'vicar-grid') return loadVicarGrid(root, value);
   if (lens.format === 'eclipse-map-fit') return loadEclipseMapFit(root, value);
   if (lens.format === 'published-phase-curve-map') return loadPublishedPhaseCurveMap(root, value);
   if (lens.format === 'eigenspectra-temperature') return loadEigenspectraTemperature(root, value);
@@ -163,6 +176,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'latitude-belt-map') return loadLatitudeBeltMap(root, value);
   if (lens.format === 'lonlat-slice-table') return loadLonLatSliceTable(root, value);
   if (lens.format === 'pds-binned-table') return loadPdsBinnedTable(root, value);
+  if (lens.format === 'pds-equal-area-table') return loadPdsEqualAreaTable(root, value);
   if (lens.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (lens.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
   if (lens.format === 'isis3') {
@@ -193,7 +207,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
       : keys.ProjCoordTransGeoKey === 17 && keys.ProjCenterLongGeoKey === grid.centerLongitude;
     if (image.getWidth() !== grid.width || image.getHeight() !== grid.height || !projectionMatches ||
         keys.GeogSemiMajorAxisGeoKey !== grid.referenceRadiusMeters ||
-        image.getGDALNoData() !== grid.noData) throw new Error(`Scientific source grid changed: ${lens.path}`);
+        !sameNoData(image.getGDALNoData(), grid.noData)) throw new Error(`Scientific source grid changed: ${lens.path}`);
     const origin = image.getOrigin(), resolution = image.getResolution();
     if (resolution[0] <= 0 || resolution[1] >= 0 || image.getSamplesPerPixel() !== 1 ||
         (grid.origin && (origin[0] !== grid.origin[0] || origin[1] !== grid.origin[1])) ||

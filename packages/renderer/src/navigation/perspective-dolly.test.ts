@@ -12,23 +12,14 @@ function place(dolly: PerspectiveDolly, bodyCenterUnits: PositionM) {
   dolly.camera.restore({}, undefined, [x * .001, y * .001, z * .001]);
 }
 
-it('crossfades mesh and marker in two stages, drawing no billboard disc', () => {
+it('keeps detail hidden through the prepared billboard band', () => {
   const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,
     billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 };
-  const samples = [40, 17, 13, 7, 4.5, 4].map(diameter => levelOfDetailFor(lod, diameter));
-  // A resolving body goes from its marker straight to its mesh: the marker fades
-  // in over the mesh, which stays painted until the marker is opaque.
-  expect(samples.map(sample => sample.stage)).toEqual(['geometry', 'geometry', 'geometry', 'geometry', 'marker', 'marker']);
-  // No billboard disc is drawn at any size.
-  expect(samples.map(sample => sample.billboardOpacity)).toEqual([0, 0, 0, 0, 0, 0]);
-  expect(samples.map(sample => sample.markerOpacity)).toEqual([0, 0, 0, 1 / 3.5, 1, 1]);
-  // The prepared billboard band only times the selected navigation marker's
-  // fade over the mesh, so it is complete well before the mesh hides.
-  expect(samples.map(sample => sample.proxyOpacity)).toEqual([0, .5, 1, 1, 1, 1]);
-  for (const sample of samples) {
-    expect(sample.stage).toBe(sample.markerOpacity >= 1 ? 'marker' : 'geometry');
-    if (sample.markerOpacity > 0) expect(sample.proxyOpacity).toBe(1);
-  }
+  const samples = [40, 17, 14, 13, 7, 4.5, 4].map(diameter => levelOfDetailFor(lod, diameter));
+  expect(samples.map(sample => sample.stage)).toEqual(['geometry', 'geometry', 'billboard', 'billboard', 'billboard', 'marker', 'marker']);
+  expect(samples.map(sample => sample.proxyOpacity)).toEqual([0, .5, 1, 1, 1, 1, 1]);
+  expect(samples[2]!.billboardOpacity).toBe(1);
+  expect(samples[5]!.billboardOpacity).toBe(0);
 });
 
 
@@ -162,12 +153,12 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   const view = { getComputedStyle: () => ({ perspective: '1247px', perspectiveOrigin: '720px 450px' }) };
   const make = () => ({ style: {}, ownerDocument: { defaultView: view },
     getBoundingClientRect: () => ({ width: 1440, height: 900, x: 0, y: 0, left: 0, top: 0 }) });
-  let hidden = false, visibilityWrites = 0;
+  let hidden = false, visibilityWrites = 0, moving = false;
   const element = { style: {} as Record<string, string>, get hidden() { return hidden; },
     set hidden(value: boolean) { hidden = value; visibilityWrites++; } };
   const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [1e8, 0, 0],
     presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 };
-  const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
+  const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null, isCameraMoving: () => moving,
     worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
       maximumExtentUnits: 1e9 },
     cameraElement: make(), viewport: { read: () => ({ bounds: make().getBoundingClientRect(), focalPixels: 1247, previewTop: null, openArea: null }), subscribe: () => () => {}, destroy() {} }, stage: make(), sceneElement: element,
@@ -195,6 +186,26 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   expect(outside.prepare().commit().levelOfDetail!.stage).toBe('geometry');
   expect(hidden).toBe(false);
   expect(element.style.transform, 'The shown scene carries the current pose').toMatch(/^translate3d\(/);
+  const writes = visibilityWrites;
+  moving = true;
+  for (const distance of [1e7, 1200, 1e7, 1200, 1e7]) {
+    place(outside, [0, 0, -distance]);
+    expect(outside.prepare().commit().levelOfDetail!.stage).toBe('geometry');
+    expect(hidden).toBe(false);
+  }
+  expect(visibilityWrites, 'Reversals retain the presented mesh instead of restarting reveal').toBe(writes);
+  expect(outside.retainedDetail()).toBe(true);
+  expect(outside.levelOfDetail().markerOpacity, 'The distant marker still follows projected size').toBe(1);
+  moving = false;
+  expect(outside.prepare().commit().levelOfDetail!.stage).toBe('marker');
+  expect(hidden).toBe(true);
+  expect(outside.retainedDetail()).toBe(false);
+  moving = true;
+  const cold = create(frame.originM);
+  place(cold, [0, 0, -1e7]);
+  expect(cold.prepare().commit().levelOfDetail!.stage).toBe('marker');
+  expect(hidden, 'Motion alone must not activate a cold distant mesh').toBe(true);
+
 });
 
 it('stops the zoom where one CSS pixel shows the least surface arc the imagery supports', () => {
@@ -216,4 +227,16 @@ it('stops the zoom where one CSS pixel shows the least surface arc the imagery s
   expect(build(.001, 1500).minimumDistance()).toBeCloseTo(Math.max(plain, 100 + 150), 9);
   // A body without a declared arc keeps the prepared radius floor.
   expect(plain).toBeLessThan(200);
+});
+
+
+it('uses the prepared geometry threshold before a context icon fills a body view', () => {
+  const plan = scene.camera.levelOfDetail;
+  expect(levelOfDetailFor(plan, 13).stage).toBe('billboard');
+  expect(levelOfDetailFor(plan, 14).proxyOpacity).toBe(1);
+  expect(levelOfDetailFor(plan, 17).proxyOpacity).toBe(.5);
+  expect(levelOfDetailFor(plan, 20).proxyOpacity).toBe(0);
+  // Saturn's 900px context image previously overrode the threshold to 450px.
+  expect(levelOfDetailFor(plan, 37).stage).toBe('geometry');
+  expect(levelOfDetailFor(plan, 439).proxyOpacity).toBe(0);
 });

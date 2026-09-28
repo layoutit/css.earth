@@ -4,8 +4,14 @@
     {
       "location": "public",
       "filename": "ganymede-arrival.webp",
-      "bytes": 93116,
-      "sha256": "8e4ed0c4ae9e9009c05b313ef9446df5a40cbea2e742a8f762b8efcdcc68dc33"
+      "bytes": 92846,
+      "sha256": "219496be380114fa8b6e4e571dfe5193bc54796e01ee56fce941ef67a6bf16b7"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-dlr-juno@2x.webp",
+      "bytes": 5797280,
+      "sha256": "e6bff0a410a1be22545ef90b4ce2348c96557ba05d63d6cb0a2bc96afdc341f0"
     },
     {
       "location": "public",
@@ -22,8 +28,14 @@
     {
       "location": "public",
       "filename": "ganymede-geology@2x.webp",
-      "bytes": 519220,
-      "sha256": "84ec33a5e16159597629e5340f6a84505d76578d9bd5d429dfafd0fa02a49280"
+      "bytes": 522226,
+      "sha256": "c6c31c1b2c317b9465e53184374a075c5a936454e8eece68112abace97af19cd"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-lens-dlr-juno.webp",
+      "bytes": 850,
+      "sha256": "6462193301f5fdfb97b42e8a5af31e7932ac6cb092d6b7f2cb600fd0d49a22e4"
     },
     {
       "location": "public",
@@ -34,8 +46,8 @@
     {
       "location": "public",
       "filename": "ganymede-lens-geology.webp",
-      "bytes": 1388,
-      "sha256": "592f356e5beeb0f3c92530e2ba2ae1888b43e6bf1bae867a5b52ddd704a3d8f7"
+      "bytes": 1402,
+      "sha256": "7d0dd26e1fa14603aa25d1785c8b5847380149fbd7c91a3be2689648262a8450"
     },
     {
       "location": "public",
@@ -63,6 +75,12 @@
     },
     {
       "location": "public",
+      "filename": "ganymede-poles-dlr-juno@2x.webp",
+      "bytes": 164434,
+      "sha256": "c5248b1ae44d443b3d33e0268922eeb1f892dbf43aca03713b5b19046df84b3c"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-poles-enhanced@2x.webp",
       "bytes": 226008,
       "sha256": "43dd5bbe8377315f24d93938407f564f3ed69b4d8ec02f49aea9302e763cc929"
@@ -70,8 +88,8 @@
     {
       "location": "public",
       "filename": "ganymede-poles-geology@2x.webp",
-      "bytes": 11260,
-      "sha256": "d0a72f2188303c037b1db6b635e8e33bfdfd3741d06fa612b3e8c550f2faedba"
+      "bytes": 11242,
+      "sha256": "367f44b489dd03e518e954b232f41c28902755d2151be0896c81b75732c3e6bc"
     },
     {
       "location": "public",
@@ -304,14 +322,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91058,
-      "sha256": "3110b39d6b44c99a4ad5fc7bec83da42967bfec84e6aa5581e5fa057629a7fae"
+      "bytes": 91579,
+      "sha256": "02905080636f7e110db4fd65467df6825a1fc70983958aa6f475325aef942d90"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1423,
-      "sha256": "353f30d775adb1efb2246aa3131b3531e4b52f64dbf2a52a9ecaf4803d6cea05"
+      "sha256": "4a36f19aaa732d092c977b6d3c93f08865f3f02f3859a718a48d97c4cb55b604"
     },
     {
       "location": "prepared",
@@ -322,8 +340,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 4510,
-      "sha256": "7f04a31dba1585ccc217f65f5d4b9ed018fdc309b4c5cc6b87d0b58f9757c1e2"
+      "bytes": 4919,
+      "sha256": "e93897a59465f505e4f69fdb1af3c7021e6e7234aca48475e542b1b44745afaf"
     },
     {
       "location": "prepared",
@@ -334,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 5917,
-      "sha256": "942f2e2c91210c9d83dccb070f942ed682271d35d98520d34b75992ee322a15c"
+      "bytes": 6666,
+      "sha256": "3097fd7af6efce29c10d3d5e8a2658cfc5ac5463f4a32bfc45e00be5931bdfa1"
     },
     {
       "location": "prepared",
@@ -346,8 +364,14 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 323,
-      "sha256": "c816beff57ef26038cdcd2da510491e4e2111024430d5a550533eefcd9ffd5c8"
+      "bytes": 398,
+      "sha256": "588e02e3e0d018fa8295581ed7905aa93ee43aa9697f661dc504c4a301fde4c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/dlr-juno.webp",
+      "bytes": 14138,
+      "sha256": "1d6cbe98225cb2a07955d03e9f432e5aab9f7fd5149cab89d461a34887fe21ee"
     },
     {
       "location": "prepared",
@@ -358,8 +382,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/geology.webp",
-      "bytes": 21310,
-      "sha256": "524704b376ebf5e8d24d1dd8ed9155db46249a63c60ad7413e7b4ac699484cad"
+      "bytes": 21438,
+      "sha256": "e75174caa1aa4ee25058eb2221dc4a21817d6d4e51d7dc0ef2ccd03173ca86d2"
     },
     {
       "location": "prepared",
@@ -376,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 580023,
-      "sha256": "961c71978a3070fa1fbd0e9b6c840d31f28f3d7ebf7f774ef4943784387055e3"
+      "bytes": 584628,
+      "sha256": "c170036886ff564e1bdc69e727367823ec08fb4f074d5dcac186b2459b33ea8b"
     },
     {
       "location": "prepared",
@@ -406,8 +430,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1453,
-      "sha256": "34f81c259880ab2188220062fe07f2d0976a4091dddcfaf3e9267567f3086611"
+      "bytes": 1672,
+      "sha256": "2b1ffa621d24b5fb0eeb3771f5896aa261b17ccaf23f6ea3d2967d72971c6edb"
     },
     {
       "location": "prepared",

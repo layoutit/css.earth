@@ -10,12 +10,6 @@
       "evidence": [
         "https://doi.org/10.3847/PSJ/ace52a",
         "https://arxiv.org/abs/2307.04848"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -27,12 +21,6 @@
       "evidence": [
         "https://doi.org/10.3847/1538-3881/aad9f2",
         "https://ssd.jpl.nasa.gov/horizons/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -44,12 +32,6 @@
         "https://doi.org/10.1016/j.icarus.2020.114130",
         "https://arxiv.org/abs/2009.13733",
         "https://ssd.jpl.nasa.gov/horizons/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -63,12 +45,6 @@
         "https://arxiv.org/abs/2403.12782",
         "https://arxiv.org/abs/2503.16142",
         "https://doi.org/10.1088/0004-6256/137/6/4766"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -81,12 +57,6 @@
         "https://doi.org/10.3847/PSJ/ace52a",
         "https://doi.org/10.1051/0004-6361/202245234",
         "https://arxiv.org/abs/2211.07987"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -99,12 +69,6 @@
         "https://doi.org/10.3847/PSJ/acdd5f",
         "https://arxiv.org/abs/2303.13445",
         "https://doi.org/10.1051/0004-6361/202245234"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -115,12 +79,6 @@
       "revisitWhen": "Resolved spectrophotometry of Dysnomia, such as a JWST NIRSpec extraction, supplies absolute colour.",
       "evidence": [
         "https://doi.org/10.3847/PSJ/acdd5f"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -132,12 +90,6 @@
       "evidence": [
         "https://doi.org/10.3847/PSJ/ace52a",
         "https://sbn.psi.edu/pds/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -149,12 +101,6 @@
       "evidence": [
         "https://www.stsci.edu/jwst-program-info/program/?program=6064",
         "https://www.stsci.edu/jwst-program-info/program/?program=1191"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
       ]
     },
     {
@@ -165,13 +111,7 @@
       "revisitWhen": "Eris is re-prepared onto the moon-supplied state, after which this entry closes and the remaining preparation steps run.",
       "evidence": [
         "https://ssd.jpl.nasa.gov/horizons/",
-        "https://github.com/layoutit/css.earth/blob/b0539bf1a0cd83049528c0330af05d52e4541f8d/src/objects/dysnomia/source/validation/epoch-state.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dysnomia/source/validation/epoch-state.json"
       ]
     },
     {
@@ -183,12 +123,6 @@
         "https://archive.eso.org/tap_obs",
         "https://almascience.eso.org/tap",
         "https://psa.esa.int/psa-tap/tap"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
-        }
       ],
       "revisitWhen": "When a resolved image, an occultation shape or a thermal diameter of this body is published, or a telescope ledger records a completed search for it."
     }

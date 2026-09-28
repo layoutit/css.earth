@@ -1,0 +1,61 @@
+{
+  "id": "epic-201207854",
+  "name": "EPIC 201207854",
+  "system": "EPIC 201207854 system",
+  "description": "A red giant in K2 campaign 1, 12.0 solar radii and 0.98 solar masses, weighed by its oscillations.",
+  "target": "EPIC 201207854",
+  "gaia": "3600365879014013440",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "credit": "Khan et al. (2023), A&A 677, A21"
+  },
+  "radius": {
+    "value": 11.9788,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201207854 (K2 campaign 1): PARAM radius (solar radii) 11.978808 (16th-84th percentiles 11.447291-12.584121), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.5684
+  },
+  "mass": {
+    "value": 0.9815,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201207854 (K2 campaign 1): PARAM mass (solar masses) 0.981451 (16th-84th percentiles 0.87156-1.115825), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.1221
+  },
+  "temperature": {
+    "value": 4576,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201207854: APOGEE DR17 effective temperature 4576.335 +/- 66 K (the catalogue's final uncertainty)",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 66
+  },
+  "distance": {
+    "value": 7778.5,
+    "source": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201207854 (K2 campaign 1): PARAM asteroseismic distance (pc) 7778.515625 (16th-84th percentiles 7476.171875-8098.75), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 311.3
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "PARAM fits an extinction A_V = 0.12 mag toward this star (Khan et al. (2023), A&A 677, A21, k2_apo, AV-M), and the colour routes do not remove extinction; APOGEE measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A red giant 7,779 parsecs away, 12 times the Sun's width, weighed by its starquakes.",
+    "introduction": "Its oscillations, recorded in K2 campaign 1, give 0.98 solar masses and 12.0 solar radii; APOGEE spectra give 4,576 K at its surface.",
+    "locator": "k2_apo, EPIC 201207854: Mass-M, Rad-M, Dist-M, Teff-A"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 3600365879014013440 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 3,000,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%203600365879014013440"
+  },
+  "order": 2035
+}

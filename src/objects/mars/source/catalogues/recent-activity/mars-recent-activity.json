@@ -1,0 +1,51 @@
+{
+  "sourceRecords": {
+    "Daubar et al. (2013, Icarus)": 365,
+    "Dundas et al. (2014, JGR)": 22,
+    "McEwen et al. (2014, Nature Geoscience) and Ojha et al. (2014, Icarus)": 60,
+    "Dundas et al. (2015, Icarus)": 61
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8388119,
+  "categories": [
+    {
+      "value": "Daubar et al. (2013, Icarus)",
+      "label": "New impact craters (Daubar et al. 2013)",
+      "color": "#3987e5"
+    },
+    {
+      "value": "Dundas et al. (2015, Icarus)",
+      "label": "Active gullies, including dune gullies (Dundas et al. 2015)",
+      "color": "#d95926"
+    },
+    {
+      "value": "McEwen et al. (2014, Nature Geoscience) and Ojha et al. (2014, Icarus)",
+      "label": "Recurring slope lineae, confirmed or partial (McEwen et al. 2014; Ojha et al. 2014)",
+      "color": "#199e70"
+    },
+    {
+      "value": "Dundas et al. (2014, JGR)",
+      "label": "New craters exposing ice (Dundas et al. 2014)",
+      "color": "#eda100"
+    },
+    {
+      "value": "more than one class",
+      "label": "More than one class in the cell",
+      "color": "#ffffff"
+    }
+  ],
+  "output": "mars-recent-activity.tif",
+  "sha256": "6c351b349a755f0f5c9fb74a2a30d5839f1e8a2ec4cf5c1df238cdc46a596cde",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

@@ -60,6 +60,26 @@
       "title": "Dawn VIR 3.1 µm band centre",
       "detail": "Dawn VIR",
       "summary": "Position of the ammonium absorption, not its depth or abundance. Archive striping remains; poles are unmeasured."
+    },
+    "gravity": {
+      "title": "CERES18D radial gravity anomaly",
+      "detail": "Dawn radio science",
+      "summary": "How much harder or weaker Ceres pulls than a smooth body would. Red pulls harder, blue weaker."
+    },
+    "gravity-uncertainty": {
+      "title": "CERES18D gravity uncertainty",
+      "detail": "Dawn radio science",
+      "summary": "How far the gravity map may be off at each place. It is smallest at the equator and grows toward the poles."
+    },
+    "bouguer": {
+      "title": "CERES18D Bouguer anomaly",
+      "detail": "Dawn radio science",
+      "summary": "Gravity left after removing the pull of the visible shape. Red marks extra mass underground."
+    },
+    "geoid": {
+      "title": "CERES18D geoid height",
+      "detail": "Dawn radio science",
+      "summary": "Height of the surface where a global ocean would settle, above a reference ellipsoid. It rises toward the poles."
     }
   }
 }

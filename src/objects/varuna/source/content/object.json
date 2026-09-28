@@ -58,6 +58,19 @@
           "catalogueId": "arxiv-1909-04698",
           "locator": "/numericEvidence/axisRatioBA; /numericEvidence/axisRatioCB; /radiusKm"
         }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "0.992 +0.086/−0.015 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Lacerda et al. 2007",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/6/fields/DENSITY; /tno/rows/6/fields/DENSITY_ERROR_UPPER; /tno/rows/6/fields/DENSITY_ERROR_LOWER; /tno/rows/6/fields/METHOD_DENSITY; /tno/rows/6/fields/REFERENCE_CODE"
+        }
       }
     ]
   },

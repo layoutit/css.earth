@@ -78,8 +78,9 @@ export const gaiaRowQuery = (sourceId: string) => `SELECT s.source_id, s.ref_epo
 export const gaiaRowForm = (sourceId: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: gaiaRowQuery(sourceId) });
 
 export interface GaiaRow {
-  readonly sourceId: string; readonly ra: number; readonly dec: number; readonly parallax: number; readonly parallaxError: number;
-  readonly pmra: number; readonly pmdec: number; readonly radialVelocity?: number; readonly radialVelocityError?: number; readonly ruwe: number;
+  /** Parallax, proper motion and RUWE are absent for a two-parameter solution: a position only, as for stars in other galaxies. */
+  readonly sourceId: string; readonly ra: number; readonly dec: number; readonly parallax?: number; readonly parallaxError?: number;
+  readonly pmra?: number; readonly pmdec?: number; readonly radialVelocity?: number; readonly radialVelocityError?: number; readonly ruwe?: number;
   readonly g: number; readonly hasXpSampled: boolean;
   readonly massFlame?: readonly [number, number, number]; readonly radiusFlame?: readonly [number, number, number];
 }
@@ -95,15 +96,25 @@ export function parseGaiaRow(csv: string, sourceId: string): GaiaRow {
   if (cell('source_id') !== sourceId) throw new TypeError(`Gaia DR3 ${sourceId}: the row is source ${cell('source_id')}.`);
   const triple = (name: string) => { const v = optional(`${name}_flame`), lo = optional(`${name}_flame_lower`), hi = optional(`${name}_flame_upper`); return v === undefined || lo === undefined || hi === undefined ? undefined : [v, lo, hi] as const; };
   const radialVelocity = optional('radial_velocity'), radialVelocityError = optional('radial_velocity_error'), massFlame = triple('mass'), radiusFlame = triple('radius');
-  return { sourceId, ra: number('ra'), dec: number('dec'), parallax: number('parallax'), parallaxError: number('parallax_error'), pmra: number('pmra'), pmdec: number('pmdec'),
-    ...(radialVelocity === undefined ? {} : { radialVelocity, ...(radialVelocityError === undefined ? {} : { radialVelocityError }) }),
-    ruwe: number('ruwe'), g: number('phot_g_mean_mag'), hasXpSampled: cell('has_xp_sampled') === 'true' || cell('has_xp_sampled') === 'True',
+  // A five-parameter solution has all of parallax, proper motion and RUWE; a two-parameter one has none of them.
+  const astrometry = ['parallax', 'parallax_error', 'pmra', 'pmdec', 'ruwe'].map(name => [name, optional(name)] as const), given = astrometry.filter(([, value]) => value !== undefined);
+  if (given.length && given.length !== astrometry.length) throw new TypeError(`Gaia DR3 ${sourceId}: ${astrometry.filter(([, value]) => value === undefined).map(([name]) => name).join(', ')} empty while ${given.map(([name]) => name).join(', ')} are given.`);
+  const [parallax, parallaxError, pmra, pmdec, ruwe] = astrometry.map(([, value]) => value);
+  return { sourceId, ra: number('ra'), dec: number('dec'), ...(given.length ? { parallax: parallax!, parallaxError: parallaxError!, pmra: pmra!, pmdec: pmdec!, ruwe: ruwe! } : {}),
+    ...(radialVelocity === undefined ? {} : { radialVelocity, ...(radialVelocityError === undefined ? {} : { radialVelocityError }) }), g: number('phot_g_mean_mag'), hasXpSampled: cell('has_xp_sampled') === 'true' || cell('has_xp_sampled') === 'True',
     ...(massFlame ? { massFlame } : {}), ...(radiusFlame ? { radiusFlame } : {}) };
 }
 
 export async function fetchGaiaRow(archive: Archive, sourceId: string) {
   const csv = await archive.text(GAIA_TAP, gaiaRowForm(sourceId));
   return { csv, row: parseGaiaRow(csv, sourceId) };
+}
+
+/** Gaia DR3's eclipsing-binary period of a source, in days, when its variability pipeline fitted one (gaiadr3.vari_eclipsing_binary). */
+export async function fetchGaiaEclipsingPeriod(archive: Archive, sourceId: string): Promise<number | undefined> {
+  const csv = await archive.text(GAIA_TAP, { REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: `SELECT frequency FROM gaiadr3.vari_eclipsing_binary WHERE source_id = ${sourceId}` });
+  const value = csv.trim().split(/\r?\n/u)[1]?.trim();
+  return value ? 1 / Number(value) : undefined;
 }
 
 export interface Identifiers { readonly main: string; readonly gaia?: string; readonly hd?: number; readonly hr?: number; readonly hip?: number }
@@ -125,8 +136,10 @@ export const telescopeResolver = (root: string): Resolver => async name => {
 };
 /** SIMBAD's identifiers for a spec's target or Gaia source; a target and a Gaia id that name different stars are refused. */
 export async function identify(resolver: Resolver, target: string | undefined, gaia: string | undefined, id: string): Promise<Identifiers & { readonly gaia: string }> {
-  const name = target ?? `Gaia DR3 ${gaia}`, found = await resolver(name);
-  if (!found) throw new Error(`${id}: SIMBAD does not know ${name}.`);
+  // A catalogue name SIMBAD does not hold (some KIC numbers) is not fatal when the spec also gives the star's Gaia DR3 source.
+  const byTarget = target ? await resolver(target) : undefined, name = byTarget || !gaia ? target ?? `Gaia DR3 ${gaia}` : `Gaia DR3 ${gaia}`;
+  const found = byTarget ?? await resolver(name);
+  if (!found) throw new Error(`${id}: SIMBAD does not know ${target ? `${target}${gaia ? ` or Gaia DR3 ${gaia}` : ''}` : name}.`);
   const ids = readIdentifiers(found.mainId, found.identifiers);
   if (gaia && ids.gaia && ids.gaia !== gaia) throw new Error(`${id}: SIMBAD names ${name} Gaia DR3 ${ids.gaia}, not the spec's ${gaia}.`);
   const source = gaia ?? ids.gaia;
@@ -134,6 +147,9 @@ export async function identify(resolver: Resolver, target: string | undefined, g
   return { ...ids, gaia: source };
 }
 
+/** How a citation names one author: the surname, or a collaboration's whole name ("GRAVITY Collaboration", not "Collaboration"). */
+export const isCollaboration = (creator: string) => /\b(collaboration|consortium|team)\b/iu.test(creator);
+export const citedName = (creator: string) => isCollaboration(creator) ? creator.trim() : creator.split(' ').at(-1)!;
 export interface Publication { readonly id: string; readonly title: string; readonly creators: readonly string[]; readonly year: string; readonly publisher?: string; readonly doi?: string; readonly arxiv?: string; readonly bibcode?: string; readonly wikipedia?: { readonly revision?: string }; readonly url: string; readonly page?: true }
 // arXiv's Atom feed and Crossref's JSON both carry HTML entities in titles and journal names ("A&amp;A").
 const clean = (value: string) => decodeEntities(value).replace(/\s+/gu, ' ').trim();
@@ -187,6 +203,7 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
   const doi = /doi\.org\/(10\.\S+)$/u.exec(url)?.[1];
   if (doi) return parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, url);
   // Any other page (an archive's documentation, ExoFOP): a reference page named by its address.
-  const { hostname, pathname } = new URL(url), id = `page-${`${hostname}${pathname}`.toLowerCase().replace(/\.(html?|php)$/u, '').replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;
+  // The query names the record when there is one: SIMBAD's sim-id page is one path for every star.
+  const { hostname, pathname, search } = new URL(url), id = `page-${`${hostname}${pathname.replace(/\.(html?|php)$/u, '')}${decodeURIComponent(search)}`.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;
   return { id, title: `${hostname}${pathname}`, creators: [], year: '', url, page: true };
 }

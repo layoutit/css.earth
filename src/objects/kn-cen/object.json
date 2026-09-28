@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kn-cen",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KN Cen",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 119382120
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kn-cen-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KN Cen",
+      "classification": "star",
+      "color": "#ffe4cb",
+      "distanceAu": 772997898.5,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 34.0 days.",
+      "systemName": "KN Cen system",
+      "order": 1932,
+      "context": {
+        "order": 1929
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -45328355000008180000,
+        -20327273444894330000,
+        -104424534605336040000
+      ],
+      "presentationToReference": [
+        -0.3919821570738163,
+        0.8239645696222226,
+        -0.4091850150518996,
+        -0.17578243226254786,
+        0.36950360356969547,
+        0.9124514362183185,
+        -0.9030229925332027,
+        -0.4295922193851684,
+        3.2342743978155466e-7
+      ],
+      "orbitUpReference": [
+        -0.8239645696222226,
+        -0.36950360356969547,
+        0.4295922193851684
+      ],
+      "metersPerUnit": 385103612.9032258,
+      "bodyRadiusM": 119382120000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

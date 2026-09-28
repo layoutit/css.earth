@@ -82,7 +82,14 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const activeLens = lensId ?? definition.controls.lenses?.defaultLens;
   const scene = region(html, 'prepared-scene');
   const stage = requiredElement<HTMLElement>(scene.document, '.object-stage');
-  if (stage.dataset.objectId !== objectId || stage.dataset.preparedObject !== objectId) throw new Error('Prepared scene identity drifted.');
+  // A page with an arrival billboard ships an empty stage without the prepared-object mark (ObjectLayout's startup). A
+  // dataset request is never the default view, so it renders the full scene into that stage and marks it, as the client
+  // expects for any non-default view (usesDefaultStartupView).
+  const startupPage = /\sdata-startup-discovery[\s>=]/u.test(html);
+  const prepared = stage.dataset.preparedObject ?? (startupPage ? objectId : undefined);
+  if (stage.dataset.objectId !== objectId || prepared !== objectId)
+    throw new Error(`Prepared scene identity drifted: requested ${objectId}, stage object ${String(stage.dataset.objectId)}, prepared ${String(stage.dataset.preparedObject)}, startup page ${startupPage}.`);
+  stage.dataset.preparedObject = objectId;
   for (const name of stage.getAttributeNames()) {
     if (!['aria-label', 'data-object-id', 'data-prepared-object'].includes(name)) stage.removeAttribute(name);
   }

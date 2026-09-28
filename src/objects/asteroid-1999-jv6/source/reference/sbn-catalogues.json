@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "asteroid-1999-jv6",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 85990,
+    "by": "SBDB record des 85990"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 90,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_neos_csv::2.0",
+          "Asteroid_Number": "85990",
+          "Prov_desig": "1999 JV6",
+          "MPC_packed_name": "85990",
+          "Absolute_mag": "19.90",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455332.9398061",
+          "N_W1": "0",
+          "N_W2": "6",
+          "N_W3": "9",
+          "N_W4": "0",
+          "Fit_code": "DVB-",
+          "Diameter": "0.451",
+          "Diameter_err": "0.026",
+          "V_albedo": "0.095",
+          "V_albedo_err": "0.023",
+          "IR_albedo": "0.152",
+          "IR_albedo_err": "0.037",
+          "Beaming_param": "1.256",
+          "Beaming_param_err": "0.119",
+          "Stacked_flag": "-",
+          "Reference": "Mai11",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mai11": "Mainzer, A., T. Grav, J. Bauer, J. Masiero, R.S. McMillan, and 32 others, NEOWISE Observations of Near-Earth Objects: Preliminary Results, Astroph. J. 743, 156, doi:10.1088/0004-637X/743/2/156, 2011."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

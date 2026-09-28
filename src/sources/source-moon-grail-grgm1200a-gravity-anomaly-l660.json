@@ -1,0 +1,55 @@
+{
+  "id": "source-moon-grail-grgm1200a-gravity-anomaly-l660",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GRAIL GRGM1200A Gravity Anomaly Map, degree 660, 16 pixel/degree (GGGRX_1200A_ANOM_L660, PDS release 2016-04-01)",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:grail_gravity_derived:data_rsdmap:gggrx_1200a_anom_l660::1.0"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif",
+      "label": "EXTRAS GeoTIFF with the same values"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/44"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA GSFC GRAIL Level-2 team, GRGM1200A gravity field; the label names Lemoine et al. (2014), Geophysical Research Letters, doi:10.1002/2014GL060027, as its current best reference. NASA PDS Geosciences Node.",
+      "scope": "The GGGRX_1200A_ANOM_L660 map.",
+      "evidence": "PDS3 label DESCRIPTION and PRODUCER_ID."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    },
+    {
+      "kind": "limitation",
+      "text": "Values lie on a 1738.0 km reference sphere in the lunar principal-axis frame of DE430; the EXTRAS GeoTIFF's Moon_2000 1737.4 km ellipsoid tag is a GIS container setting, not the product's reference.",
+      "scope": "Georeference.",
+      "evidence": "PDS3 label IMAGE_MAP_PROJECTION and DESCRIPTION; GeoTIFF GeoKeys."
+    }
+  ]
+}

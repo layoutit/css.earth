@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "Glacier-like_Forms_GLFs_2012_clon0.layer.json",
+  "projectionWkt": "GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"D_Mars_2000_Sphere\",SPHEROID[\"Mars_2000_Sphere_IAU_IAG\",3396190.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 3396190,
+  "width": 4096,
+  "height": 2048,
+  "cellPresence": "point",
+  "field": "Feature",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "point",
+      "label": "Glacier-like form",
+      "color": "#00ccff"
+    }
+  ],
+  "layers": [
+    {
+      "esriJsonPath": "Glacier-like_Forms_GLFs_2012_clon0.query-01.json",
+      "expectedRecords": 1000
+    },
+    {
+      "esriJsonPath": "Glacier-like_Forms_GLFs_2012_clon0.query-02.json",
+      "expectedRecords": 309
+    }
+  ],
+  "output": "mars-glacier-like-forms.tif",
+  "receipt": "mars-glacier-like-forms.json"
+}

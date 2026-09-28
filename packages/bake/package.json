@@ -201,6 +201,36 @@
       "import": "./dist/objects/provenance.js",
       "default": "./dist/objects/provenance.js"
     },
+    "./objects/acquisition": {
+      "types": "./dist/objects/acquisition.d.ts",
+      "import": "./dist/objects/acquisition.js",
+      "default": "./dist/objects/acquisition.js"
+    },
+    "./objects/sphere-survey": {
+      "types": "./dist/objects/sphere-survey.d.ts",
+      "import": "./dist/objects/sphere-survey.js",
+      "default": "./dist/objects/sphere-survey.js"
+    },
+    "./objects/default-view": {
+      "types": "./dist/objects/default-view.d.ts",
+      "import": "./dist/objects/default-view.js",
+      "default": "./dist/objects/default-view.js"
+    },
+    "./objects/celestial": {
+      "types": "./dist/objects/celestial.d.ts",
+      "import": "./dist/objects/celestial.js",
+      "default": "./dist/objects/celestial.js"
+    },
+    "./objects/host-adapters": {
+      "types": "./dist/objects/host-adapters.d.ts",
+      "import": "./dist/objects/host-adapters.js",
+      "default": "./dist/objects/host-adapters.js"
+    },
+    "./objects/interpretation": {
+      "types": "./dist/objects/interpretation.d.ts",
+      "import": "./dist/objects/interpretation.js",
+      "default": "./dist/objects/interpretation.js"
+    },
     "./runtime-source": {
       "types": "./dist/runtime-source.d.ts",
       "import": "./dist/runtime-source.js",
@@ -231,6 +261,21 @@
       "import": "./dist/astronomy.js",
       "default": "./dist/astronomy.js"
     },
+    "./asset-publication": {
+      "types": "./dist/asset-publication.d.ts",
+      "import": "./dist/asset-publication.js",
+      "default": "./dist/asset-publication.js"
+    },
+    "./facility-renders": {
+      "types": "./dist/facility-renders.d.ts",
+      "import": "./dist/facility-renders.js",
+      "default": "./dist/facility-renders.js"
+    },
+    "./site-assets": {
+      "types": "./dist/site-assets.d.ts",
+      "import": "./dist/site-assets.js",
+      "default": "./dist/site-assets.js"
+    },
     "./navigation": {
       "types": "./dist/navigation.d.ts",
       "import": "./dist/navigation.js",
@@ -259,6 +304,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@cesium/engine": "26.3.0",
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/catalog": "workspace:*",
     "@cssearth/core": "workspace:*",
@@ -271,6 +317,7 @@
     "@layoutit/polycss": "0.2.11",
     "@typescript-eslint/parser": "^8.69.0",
     "cwebp-bin": "8.0.0",
+    "esbuild": "0.27.7",
     "geotiff": "3.0.5",
     "h5wasm": "0.10.3",
     "linkedom": "^0.18.13",
@@ -278,12 +325,15 @@
     "playwright": "1.60.0",
     "robust-predicates": "3.0.3",
     "sharp": "0.35.3",
+    "three": "0.180.0",
+    "undici": "7.29.1",
     "vite": "7.3.1",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@types/estree": "^1.0.9",
     "@types/node": "^26.4.0",
+    "@types/three": "0.180.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^3.1.1"

@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
-import { restoreDriftedFiles, textBudgetFindings, worldStepOutput } from './check-preparation-inputs.mts';
+import { missingPreparedFiles, restoreDriftedFiles, textBudgetFindings, worldStepOutput } from './check-preparation-inputs.mts';
 const test = sourceTest();
 
 const put = async (path: string, bytes: string | Buffer) => { await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes); };
@@ -57,5 +57,22 @@ test("the Sun's stale and missing files are restored by hash, and the world step
     assert.equal(await readFile(join(root, 'public/scenes/sun/sun-surface@2x.webp'), 'utf8'), 'surface');
     assert.equal(await readFile(join(prepared, 'world-context.json'), 'utf8'), '{"bodies":["new"]}\n');
     assert.deepEqual(await restoreDriftedFiles('sun', { projectRoot: root, keep: worldStepOutput, fetcher }), [], 'a current checkout downloads nothing');
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a bake refuses to start while other objects\' prepared files are missing or the wrong size; the objects it bakes are its own', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-inputs-'));
+  try {
+    const inventory = (files: Record<string, string>) => JSON.stringify({ schema: 'cssearth-inventory@1', assets: Object.entries(files).map(([filename, text]) => ({ location: 'prepared', filename, bytes: Buffer.byteLength(text), sha256: createHash('sha256').update(text).digest('hex') })) });
+    await put(join(root, 'src/objects/alpha/inventory.json'), inventory({ 'controls.json': '{"a":1}', 'lenses.json': '{}' }));
+    await put(join(root, 'src/objects/alpha/prepared/controls.json'), '{"a":1}');
+    await put(join(root, 'src/objects/alpha/prepared/lenses.json'), '{"stale":true}');
+    await put(join(root, 'src/objects/beta/inventory.json'), inventory({ 'controls.json': '{}' }));
+    await mkdir(join(root, 'src/objects/gamma'), { recursive: true });
+    assert.deepEqual(await missingPreparedFiles([], { projectRoot: root }), ['alpha/prepared/lenses.json', 'beta/prepared/controls.json'], 'a wrong size and a missing file; an object with no inventory has nothing to miss');
+    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/lenses.json'], 'the bake writes the files of the objects it bakes');
+    await put(join(root, 'src/objects/sun/inventory.json'), inventory({ 'world-context.json': '{"old":1}', 'runtime.json': '{}' }));
+    await put(join(root, 'src/objects/sun/prepared/world-context.json'), '{"rebuilt":true}');
+    assert.deepEqual(await missingPreparedFiles(['beta'], { projectRoot: root }), ['alpha/prepared/lenses.json', 'sun/prepared/runtime.json'], 'the Sun\'s world files are the bake\'s own output; its other files are not');
   } finally { await rm(root, { recursive: true, force: true }); }
 });

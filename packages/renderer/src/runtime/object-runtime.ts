@@ -1,4 +1,6 @@
 /// <reference types="vite/client" />
+import { initialStageSelection } from './initial-stage-selection.js';
+import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
@@ -24,7 +26,7 @@ import { createPreparedPlayback } from "../rendering/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
-import { initialObjectSelection, requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
+import { requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
@@ -38,29 +40,20 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, diagnostics = false, capabilities = {}, worldContext, cameraMotion, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, onFeatureSelect, datasetEffects, inputSurface, runtimePolicy, diagnostics = false, capabilities = {}, worldContext, cameraMotion, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arriving = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
     }
     if (!worldContext || !viewport || !framePresenter || !cameraMotion) throw new TypeError('Object mount requires its shared world, viewport and frame presenter.');
     const worldFrame = worldContext.frame;
-    const initialLens = stage.dataset.preparedDataset;
     if (stage.dataset.preparedView) {
       const saved = parseSharedView(`v=${stage.dataset.preparedView}`);
       if (!saved) throw new TypeError('A prepared view requires its shared world frame.');
       initialWorldCamera ??= savedWorldCamera(saved, worldFrame, { focalPixels: 1, principalOffsetPixels: [0, 0] });
       delete stage.dataset.preparedView;
     }
-    const initialSettings: Record<string, boolean | number> = {};
-    for (const control of definition.controls.settings?.controls ?? []) {
-      const input = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].find(input => input.name === control.name);
-      if (input) initialSettings[control.name] = control.kind === 'toggle' ? input.checked : Number(input.value);
-    }
-    // Validate the server's transported selection even when the user has since
-    // changed a native control. The current controls then own that newer intent.
-    if (stage.dataset.preparedSettings) initialObjectSelection(definition.controls, initialLens, JSON.parse(stage.dataset.preparedSettings));
-    const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
+    const { initialLens, initialSettings, selection: initialSelection } = initialStageSelection(definition.controls, stage);
     if (stage.dataset.preparedDataset !== undefined) delete stage.dataset.preparedDataset;
     if (stage.dataset.preparedSettings !== undefined) delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
@@ -77,7 +70,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const live = () => phase === 'ready' && !lifetime.disposed;
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
-    let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arrivingByFlight;
+    let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arriving;
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
@@ -166,6 +159,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       subscribe(listener: () => void) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
     });
     const navigation: ObjectWorldNavigation = Object.freeze({ frame: worldFrame, motion: cameraMotion,
+      labelEdge: preparedLabelEdge(definition, worldFrame),
       ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
@@ -227,9 +221,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Only the native owner knows when these capabilities can use its camera and selection.
       get navigation() { return live() ? navigation : undefined; },
       get datasets() { return live() ? datasets : undefined; },
-      refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
+      setLightCurves(allowed: boolean) { if (!lifetime.disposed) guarded(() => playback.setLightCurves(allowed)); },
       destroy(options: { preserveControls?: boolean } = {}) {
         preserveControls = options.preserveControls === true;
         resolveReady();
@@ -306,8 +300,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Commit the first hidden view so material and feature owners retire their
       // visible state. Later departure frames still acknowledge the world camera,
       // but must not schedule detail/readout work for the scene being left behind.
-      const hiddenDeparture = departing && publication.levelOfDetail.stage === 'marker'
-        && previousPublication?.levelOfDetail.stage === 'marker';
+      const hiddenDeparture = departing && publication.levelOfDetail.stage !== 'geometry'
+        && previousPublication?.levelOfDetail.stage !== 'geometry';
       reference ??= publication;
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision, motionAtRest: playback.motionAtRest() });
       previousPublication = publication;
@@ -350,7 +344,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       syncPagePlayback();
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
-      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens, initialSettings,
+      selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, initialLens, initialSettings,
         motion: inputSurface ? cameraMotionSignalFor(inputSurface) : null,
         prepareSelection: datasetEffects && ((next, signal) => datasetEffects.prepare(selectedLensVolume(definition.controls, next.lensId), signal)),
         onCommit: (next, _plan, intent) => {
@@ -423,10 +417,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       phase = 'ready';
       if ((import.meta.env?.PROD !== true || import.meta.env?.MODE === 'performance') && diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, surfaceFeatures, getCurrentView: () => currentView });
       resolveReady();
-      // First paint owns the small prepared bank. Refinement uses the same
-      // selection transaction after visibility, including direct URL loads.
-      // Nondeferred hosts refine after first paint. The site defers this until actual input.
-      if (definition.textureLevels && !deferTextureRefinement) selection.refineTextures();
     }
   };
 }

@@ -1,5 +1,24 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "beta-pictoris-d",
-  "entries": []
+  "entries": [
+    {
+      "id": "shape",
+      "subject": "Shape",
+      "status": "included",
+      "finding": "A sphere of the model radius (Sutlieff et al. 2026); no image of the planet exists. The gray is a display convention.",
+      "evidence": [
+        "https://arxiv.org/abs/2606.23801"
+      ]
+    },
+    {
+      "id": "orbit-and-mass",
+      "subject": "Orbit and mass",
+      "status": "included",
+      "finding": "Sutlieff, Bonse et al. (2026), arXiv:2606.23801: the published semi-major axis, inclination and node, with a circular display orbit phased to their six measured positions.",
+      "evidence": [
+        "https://arxiv.org/abs/2606.23801"
+      ]
+    }
+  ]
 }

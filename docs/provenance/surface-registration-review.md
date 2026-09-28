@@ -1,7 +1,6 @@
 # All-object surface-registration review
 
 **Review date:** 2026-09-11
-**Reviewed revision:** `310fb173f62381afbeab3ec4855bf04b55f3c505`
 **Purpose:** one faithfulness PR covering every registered object without changing the renderer, retained-DOM contract, geometry topology, shell, or navigation.
 
 This is a catalog review, not a claim that every body has a photograph. The audit starts at every package and then separates source maps, source-camera observations, scientific fields, inferred/model surfaces, and packages with no surface input. A surface is eligible for a photographic lens only when the producer supplied a body-fixed map or a measured camera/body-shape relationship. A limb or terminator fit, a generic sphere, a visual match, or an approximate attitude is pointing evidence; it is not image-to-shape registration.
@@ -78,12 +77,12 @@ These inputs are valuable, but they are not direct photographic albedo maps. The
 
 ## Comet surface-place review — 2026-09-12
 
-**Review base:** `53b262bd`. This section reviews all 32 current comet
+**Review base:**. This section reviews all 32 current comet
 `object.json` packages once, for source-backed clickable surface places. It
 does not change the renderer, scene topology, or camera. It also does
 not treat a future preparation result as browser evidence.
 
-The follow-up, integrated with main at `e986b9280`, qualifies image registration for Wild 2 and
+The follow-up, integrated with main, qualifies image registration for Wild 2 and
 Borrelly. The current source-qualified total is **41 places**: 28 on 67P,
 one on Tempel 1, three on Hartley 2, two inferred-anatomy points on Tuttle,
 three named depressions on Wild 2 and four mapped terrains on Borrelly. “Accepted” in

@@ -24,7 +24,7 @@ text. They do not configure rendering, geometry, simulation or camera scale.
 
 Check angle units and spin-axis conventions before comparing axial tilts. Keep
 solar activity and complete magnetic cycles distinct, and specify latitude for
-differential rotation. The [September 2026 source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/factsheets.md#corrections-requiring-care)
+differential rotation. The [September 2026 source review](factsheets.md#corrections-requiring-care)
 retains the selected values, source-access limits and the original pass's
 uncertainty threshold; those dated selections are not a current catalogue.
 
@@ -71,7 +71,7 @@ The facts-only preparer preserves the other content and scene data, checks the
 content's manifest declaration and validates its citations. It refreshes the
 inventory for changed prepared text; it does not compare source digest pins.
 Card lines, introductions and dataset text are not content:
-they live in the body's `text.json` and publish with `node tools/prepare/cli/prepare-text.mts`; see
+they live in the body's `text.json` and publish with `node site/build/prepare/prepare-text.mts`; see
 [reader text](reader-text.md). After a lens label change, run the body's content
 preparation, then `node tools/prepare/cli/prepare-object-json.mts <object-id>` with the
 preparation tools built, and refresh provenance with `node tools/prepare/cli/prepare-provenance.mts <object-id>`.

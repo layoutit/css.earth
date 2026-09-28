@@ -1,21 +1,22 @@
 import { refuseDirectRun } from '../cli/library-entry.mts';
 import { isArray, isRecord, requireRecord, requireArray, requireString, requireFiniteNumber, shape, text, number, array, optional } from '@cssearth/core';
 import type {ResizeOptions,Sharp} from 'sharp';
-import { DECORATIVE_WEBP, composeLimbPreview } from '@cssearth/bake/raster';
+import { DECORATIVE_WEBP, applyUnderlay, composeLimbPreview, readRgba, withAlpha } from '@cssearth/bake/raster';
 import type {SurfacePreviewDirectories} from '@cssearth/bake/surface-previews';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from '@cssearth/bake/surface-previews';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeLenses:optional(array(text))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/observation/interpret.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '@cssearth/bake/objects/interpretation';
+import * as solarGeometry from '../../src/platform/solar-geometry.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
 function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
   const key = `${objectDirectory}:${photographs ? recipe.surfaces.map(s => s.id).join(',') : 'complete'}`;
   let pending = interpreters.get(key);
   if (!pending) {
-    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe,
+    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe, solarGeometry,
       sourceVerification: photographs ? 'photographs' : 'complete' });
     interpreters.set(key, pending);
   }
@@ -97,7 +98,20 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
           for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.round(plate.data[i * 4 + c]! * alpha * (1 - covered));
         }
         pipeline = sharp(rgb, { raw: { width: plate.size, height: plate.size, channels: 3 } }).resize(minimapResize(false));
-      } else pipeline = sharp(interpreted.data, { raw: { width, height, channels: interpreted.channels } }).resize(minimapResize(nearest));
+      } else {
+        // A lens drawn over another surface previews with that same underlay, as the raster lane packs it.
+        const lens = requireArray(recipe.surfaces).map(value => requireRecord(value)).find(value => value.id === surface.id);
+        const underlay = lens && isRecord(lens.underlay) ? lens.underlay : null;
+        if (underlay) {
+          const base = requireArray(recipe.surfaces).map(value => requireRecord(value)).find(value => value.id === underlay.surface);
+          if (!base || base.science !== undefined || base.exposure !== undefined || !interpreted.missing)
+            throw new TypeError(`${basename(objectDirectory)}/${surface.id}: the minimap previews an underlay only from a plain photograph surface without exposure and with this lens's missing-cell mask (underlay ${String(underlay.surface)}).`);
+          const baseRgba = await readRgba(resolve(objectDirectory, 'source', requireString(base.source)), width, height, true, typeof base.sharpen === 'number' ? base.sharpen : undefined);
+          const drawn = applyUnderlay(Uint8Array.from(withAlpha(interpreted, width, height)), interpreted.missing, baseRgba, surface.id,
+            { brightness: requireFiniteNumber(underlay.brightness), ...(typeof underlay.grayscale === 'boolean' ? { grayscale: underlay.grayscale } : {}), ...(typeof underlay.bits === 'number' ? { bits: underlay.bits } : {}) });
+          pipeline = sharp(drawn, { raw: { width, height, channels: 4 } }).resize(minimapResize(nearest));
+        } else pipeline = sharp(interpreted.data, { raw: { width, height, channels: interpreted.channels } }).resize(minimapResize(nearest));
+      }
     } else pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');

@@ -1,19 +1,6 @@
 /* Application geometry. Tune the dock here, not in planet or component styles. */
-html[data-shell-context="pending"] :is(.object-sidebar, .object-dataset-context-rail, .object-footer) {
+html[data-shell-context="pending"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories, .object-dataset-context-rail, .object-footer) {
   visibility: hidden;
-}
-html[data-shell-context="pending"] .object-sidebar-frame::before {
-  content: "Loading view…";
-  display: block;
-  position: absolute;
-  inset: 0 0 auto;
-  box-sizing: border-box;
-  padding: 20px;
-  min-height: 140px;
-  border-radius: 16px;
-  background: #141414;
-  color: #aaa;
-  font: var(--shell-font-content);
 }
 body[data-object-shell] {
   --explorer-header-left: 16px;
@@ -560,6 +547,21 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-information-panel > .object-dataset-content:not([open]) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
 @media (min-width: 821px) and (orientation: landscape) {
+  /* Only this layout gives the pending card a positioned sidebar slot. */
+  html[data-shell-context="pending"] .object-sidebar-frame::before {
+    content: "Loading view…";
+    display: block;
+    position: absolute;
+    inset: 0 0 auto;
+    box-sizing: border-box;
+    padding: 20px;
+    min-height: 140px;
+    border-radius: 16px;
+    background: #141414;
+    color: #aaa;
+    font: var(--shell-font-content);
+  }
+
   .object-information-panel > .object-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .object-dataset-context-rail { display: none; }
 }
 

@@ -26,7 +26,7 @@ units. This fixes screen encoding; it does not reconstruct natural color.
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
 [Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
 
@@ -78,17 +78,17 @@ for this presentation change.
 
 2026-09-09: corrected acquisition instructions and recovered provenance from
 existing pins. Source and prepared output identities are unchanged; no new
-preparation or browser run. The [original prepared record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/arrokoth/prepared/provenance.json) remains available.
+preparation or browser run. The original prepared record remains available.
 
-The [three-body qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/qualification.json)
-and [production browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/browser-validation.json)
-retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity). All three routes passed at DPR 1 and 2;
+The three-body qualification
+and production browser record
+retain their original build identities. All three routes passed at DPR 1 and 2;
 those captures predate the combined population build.
 
 The [PNG/FITS registration check](../../../tests/objects/fixtures/arrokoth/arrokoth-registration.json)
-compares 24 decoded anchors. A [recorded albedo drag](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trans-neptunian/drag-report.json)
+compares 24 decoded anchors. A recorded albedo drag
 retained all 111,002 scene nodes and made no interaction requests. It covered one
-local headless workload, mostly facing uniform source fill; [inspected images](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/README.md#delivered-browser-evidence)
+local headless workload, mostly facing uniform source fill; inspected images
 show mapped southern detail separately.
 
 </details>
@@ -171,7 +171,7 @@ node --test tests/objects/terrestrial/new-horizons-geo.test.mts
 ```
 
 The Astropy fixture was captured with the repository's pinned Astropy 8.0.1 and
-NumPy 2.5.3 environment ([`node tools/oracles/setup.mts`](https://github.com/layoutit/css.earth/blob/8cceedc858ed08aa201c34b75ee48d5c2c18f1ed/tools/oracles/setup.mts);
+NumPy 2.5.3 environment ([`node tools/oracles/setup.mts`](../../../tests/oracles/setup.mts);
 now `node tests/oracles/setup.mts`) using
 `fits.open` for each original HDU and `WCS.all_pix2world(pixels, 0)` for a 5×5
 detector grid. It records exact input hashes. The native files are restored by
@@ -247,6 +247,6 @@ period an orbital period. Buie et al. (2020) gives 15.9380 ±0.0005 h; the Porte
 archive labels 0.6632553 days as an orbital period. The panel reports only about
 15.9 hours. No precision spin rate is installed.
 
-[Family source and preparation account](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/README.md).
+Family source and preparation account.
 
 </details>

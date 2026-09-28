@@ -17,7 +17,7 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
-| Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../tools/objects/acquisition/geotiff-image.mts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
+| Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
@@ -48,7 +48,7 @@ faces sit at rest; while the globe spins, every page takes the selected level. A
 holds less detail than the finest level stops earlier (`maximumTextureWidth` in the paged recipe): its
 finer levels read that level's files, and its lens keeps the matching camera limit. The camera's
 closest approach follows the atlas density, so a denser atlas also lets the camera come closer. These texture levels are separate from its retired geographic paging.
-The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
+The texture-level implementation and measurements
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
 current datasets and retained source history. The shared raster lane prepares
 each image once, at the canonical @2x density, so its bodies have no texture
@@ -105,7 +105,7 @@ LROC mosaic delivered in #151; Europa and Io retain that change's 8K photographi
 bands and Io's corrected feature positions. Low-resolution or unobserved source
 areas cannot gain measured detail from this change.
 
-The 12 September 2026 review used revision `3dc424757`: all 51 selected views
+The 12 September 2026 review used: all 51 selected views
 across 35 bodies were captured in Chromium at DPR 1 with Shadows on and off
 (102 captures), then inspected for visible texture, coverage and lighting.
 There were no script errors in those captures. Some unchanged scientific-view
@@ -119,7 +119,7 @@ separates source sampling from WebP quality at an identical camera position.
 shows a complete product view. These examples demonstrate the prepared result;
 they do not establish new observational resolution or remove the sources' seams.
 The [Enceladus Pixelmatch evidence](../src/objects/enceladus/README.md#evidence)
-adds fresh matched crops on the `e0487eff5` / `c13f3643b` merge: Pixelmatch diffs
+adds fresh matched crops: Pixelmatch diffs
 at threshold 0.1, an independent repeat, byte pins and reproduction commands.
 Anti-aliasing is included. The repeat has zero mismatches; most photographic
 changes are subtle.
@@ -163,9 +163,9 @@ source processing occurs in the browser.
 [readObservation](../packages/bake/src/objects/raster/observed/observation-raster.ts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
-and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
+and encoding. [Acquisition tools](../packages/bake/src/objects/acquisition/) handle
 instrument-specific calibration and geometry. The
-[surface-observation pipeline](../tools/objects/surface-observations/README.md)
+[surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md)
 also fits and validates cameras and applies photometric corrections.
 
 [loadScienceSurface](../packages/bake/src/objects/raster/scientific-raster.ts)
@@ -194,7 +194,7 @@ explains why darkness alone cannot define missing data.
 ![Cassini VIMS maps with observed patches surrounded by gray missing coverage](images/cassini-coverage.png)
 
 Cassini VIMS example: infrared false color at left, ice absorption at right;
-gray marks unsupported data. The [original input record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/source-review/source-maps.json)
+gray marks unsupported data. The original input record
 identifies the cubes and processing behind this illustration.
 
 ## FITS support
@@ -220,7 +220,7 @@ other than ICRS or FK5 and is checked against Astropy in both directions.
 | Sky images | A celestial image states RA along columns and Dec along rows, unprojected (SQUEEZE) or with one zenithal projection, through `CDELT`, `CD`, `PC` or `CROTA2`. The display raster puts north on the first row and east on the first column. Rotated, skewed or axis-swapped images, other projections, a `LONPOLE` other than 180 and a reference point on a pole are refused, since a flip cannot display them. |
 | Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
 | Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. Decoding alone does not qualify a camera or a registration; Kleopatra's `zimpol` lens adds that separately, by computing the camera from the release's own spin record and an ephemeris rather than from the frames' inherited world-coordinate solution, which describes an uncropped frame and not the product. |
-| MUSE acquisition | The existing [Python converter](../tools/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
+| MUSE acquisition | The existing [Python converter](../packages/bake/src/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
 
 Value cards support quoted strings (including slashes and doubled quotes),
 booleans, finite numbers with `D` or `E` exponents and undefined optional values.
@@ -282,7 +282,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 | --- | --- |
 | Geographic or projected map | [scienceMapPoint](../packages/bake/src/objects/raster/scientific-raster.ts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../packages/bake/src/scene/solid-body-surface.ts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../packages/bake/src/objects/raster/obj-uv-fits.ts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts) selects among qualified frames. |
+| Registered photograph | The [surface-observation pipeline](../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../packages/bake/src/objects/layers/terrestrial/surface-observations/levels.ts) selects among qualified frames. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler
@@ -336,7 +336,7 @@ distance are separate quantities.
 
 Mesh reduction example: each pair shows the source mesh at left and prepared mesh
 at right. Each is normalized to its own maximum radius, so compare shape rather
-than physical scale. The [original comparison method](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/main-belt-asteroids.md)
+than physical scale. The original comparison method
 records the camera settings and remaining views. These three illustrations are
 historical processing examples, not new browser checks.
 
@@ -462,7 +462,7 @@ declares a seam outset, preparation writes two corrections instead:
   `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
   0.38–0.6 CSS pixels on each edge. The runtime only selects a prepared step.
 
-The [historical seam browser test](https://github.com/layoutit/css.earth/blob/6e32bc459b%5E/site/test/surface-seams-browser.mts)
+The historical seam browser test
 measured saved Venus radar views over black and white backdrops and compared
 brightness across seams. The current
 [`rendered-page.test.mts`](../site/test/rendered-page.test.mts) checks built HTML
@@ -726,7 +726,7 @@ records released scene resources, DOM counts and WebKit memory categories.
 
 ### Arrival evidence
 
-The 2026-09-26 preparation at `95d442c8c0` covers all 722 body scenes:
+The 2026-09-26 preparation covers all 722 body scenes:
 1,444 inventoried files and 28,064,758 image bytes. Each image is 1024 square;
 its receipt matched the runtime, default dataset, camera rotation and both
 inventory hashes. Quaoar's rings required a distance of 16 radii; the other
@@ -881,7 +881,7 @@ surface geometry.
 
 The common compiler prepares this during normal object finalization. To refresh
 only this metadata from existing local assets, run
-`node tools/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
+`node site/build/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
 preserves surface assets, motion, lighting and depth partitions, and regenerates
 scene and page metadata. Source graphs are retained only after checking that
 their inputs changed solely in those scene references.

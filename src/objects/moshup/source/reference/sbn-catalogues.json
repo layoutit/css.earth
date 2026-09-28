@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "moshup",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 66391,
+    "by": "Horizons command 66391;"
+  },
+  "masses": {
+    "catalogueId": "asteroid-masses-baer-2012",
+    "product": "urn:nasa:pds:compil.ast.masses:data:astmass12_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+    "rows": [
+      {
+        "recordNumber": 218,
+        "fields": {
+          "AST_NUMBER": "66391",
+          "AST_NAME": "-",
+          "PROV_DESIG": "1999 KW4",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "1.183E-18",
+          "MASS_SOL_UNC": "5.00E-20",
+          "MASS_KG": "2.35E+12",
+          "MASS_KG_UNC": "9.94E+10",
+          "BULK_DENSITY": "1.97",
+          "BULK_DENSITY_UNC": "0.24",
+          "AXIS_A": "1.532",
+          "AXIS_B": "1.495",
+          "AXIS_C": "1.347",
+          "EQUIV_RADIUS_UNC": "0.045",
+          "SIZE_REF_CODE": "Ostro et al. 2006",
+          "BINARY_NOTE": "pri",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Ostro et al. 2006"
+        }
+      },
+      {
+        "recordNumber": 219,
+        "fields": {
+          "AST_NUMBER": "66391",
+          "AST_NAME": "-",
+          "PROV_DESIG": "1999 KW4",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "6.788E-20",
+          "MASS_SOL_UNC": "1.21E-20",
+          "MASS_KG": "1.35E+11",
+          "MASS_KG_UNC": "2.40E+10",
+          "BULK_DENSITY": "2.81",
+          "BULK_DENSITY_UNC": "0.82",
+          "AXIS_A": "0.571",
+          "AXIS_B": "0.463",
+          "AXIS_C": "0.349",
+          "EQUIV_RADIUS_UNC": "0.034",
+          "SIZE_REF_CODE": "Ostro et al. 2006",
+          "BINARY_NOTE": "sec",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Ostro et al. 2006"
+        }
+      }
+    ],
+    "references": {
+      "Ostro et al. 2006": "Ostro, S.J., J.-L. Margot, L.A.M. Benner, J.D. Giorgini, D.J. Scheeres, E.G. Fahnestock, S.B. Broschart, J. Bellerose, M.C. Nolan, C. Magri, P. Pravec, P. Scheirich, R. Rose, R.F. Jurgens, E.M. De Jong, and S. Suzuki, Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276-1280, 2006."
+    },
+    "selected": {
+      "mass": 0
+    },
+    "rule": "The determination with the smallest stated mass uncertainty, excluding rows the compilation flags (DENSITY_NOTE N), rows for a secondary, and rows under three times their uncertainty. Density from the same row, when it is at least three times its uncertainty. 1 of 2 rows were excluded by that rule."
+  }
+}

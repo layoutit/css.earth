@@ -10,11 +10,6 @@
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1834",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -24,11 +19,6 @@
       "finding": "125 ± 3 km, volume-equivalent diameter of the archived ADAM model. DAMIT marks model 1834 as size-calibrated (D = 125 km, σ = 3 km), the volume-equivalent diameter of this ADAM solution. Hanuš et al. (2017) Table 4 lists 125 ± 3 km for the publication fit; the archived release is kept as archived. The fit used 47 light curves, 1 adaptive-optics image and 1 occultation (Table 3). Both pole solutions reproduce the adaptive-optics and occultation data; the paper says the second pole (this model) \"might be preferred\" but does not reject the first.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1834"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
       ]
     },
     {
@@ -39,11 +29,17 @@
       "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1834"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25"
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"62.5 km (size-calibrated model)\" (damit-models) implies a diameter of 125 km, outside the added Small Bodies Occultations V4.0 record 241, DAMIT model 1833 diameter 121 ± 1 km (volume-equivalent; DAMIT model 1833 fitted to 2 occultations). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

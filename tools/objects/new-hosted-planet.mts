@@ -236,6 +236,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
   put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: what is measured, what is not, and where each number comes from.\n\n## Evidence\n\n${TODO}\n\n## Known problems\n\n${TODO}\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the sources this package redistributes and their terms.\n`);
+  // Empty, like the TODO prose: `pnpm check:investigations` refuses it until the sources examined are recorded (new-object
+  // writes its own choices over it, ledger.mts).
   put(`${o}/investigations.json`, { schema: 'cssearth-investigation-ledger@1', objectId: id, entries: [] });
   return files;
 }
@@ -265,7 +267,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     ...(glowK === undefined ? {} : { selfLuminous: { temperatureK: Number(glowK), source: glowSource! } }),
   }, body, await read(`packages/astronomy/data/bodies/${hostId}.json`), SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
-  const { neutralDiscMarker } = await import('./new-object/scaffold.mts');
+  const { neutralDiscMarker } = await import('@cssearth/bake/navigation');
   const presentation = resolve(root, 'src/objects', id, 'source/presentation');
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   console.log(`${files.size + 1} files written. Replace every ${TODO}, then: node tools/prepare/cli/prepare-object.mts ${id}`);

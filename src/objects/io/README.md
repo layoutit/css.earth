@@ -25,9 +25,9 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | enhanced | 247.3 → 244.8 kB |
 | normal | 118.5 → 118.9 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/io/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
-Photographic refresh, 12 September 2026, on base `3efdf2c9`:
+Photographic refresh, 12 September 2026,:
 [monochrome detail](evidence/photographic-detail/monochrome.png) and
 [the Pele hemisphere in false color](evidence/photographic-detail/pele-hemisphere.png)
 were inspected in Chrome, 1280 × 720, with Shadows on/off and DPR 1 and 2.
@@ -50,7 +50,7 @@ photograph decoder already outputs 0–360° E. The previous origin put all 260
 named features on the opposite hemisphere. Pele now selects its red deposit
 at 18.71° S, 104.72° E, consistent with the [Gazetteer](https://planetarynames.wr.usgs.gov/Feature/4638).
 
-Earlier run at base `53b262bd` (12 September 2026): `node tools/objects/dist/prepare-authored.js io --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/io/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+Earlier run (12 September 2026): `node tools/objects/dist/prepare-authored.js io --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/io/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, geology, spectral-slope, visible-absorption) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 3459).
 
@@ -58,7 +58,7 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 - Six distributed anchors, exact source hashes, hole/seam behavior, and categorical exclusion rules are exercised by the focused geology/source tests.
 
-- Focused checks are defined in the [unit tests](https://github.com/layoutit/css.earth/tree/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/io).
+- Focused checks are defined in the unit tests.
 
 ### Registered volcanic heat (27 September 2026)
 
@@ -140,8 +140,7 @@ base inventory.
 
 ### Six-visit volcanic heat baseline (27 September 2026)
 
-The following results describe the preceding version at
-`734ad10780629e11b09707ff5d0c0f5601ecb02e`. They establish its own processing
+The following results describe the preceding version. They establish its own processing
 and coverage; the registered release above supersedes that map.
 
 
@@ -194,7 +193,7 @@ The [corrected map in the browser](evidence/jiram-close-passes/volcanic-heat.png
 was inspected on 27 September in Chromium at 1440 × 900, DPR 1 and 2,
 with Shadows off and on, and at 390 × 844, DPR 2. No page errors or failed
 desktop asset requests occurred. The preparation code and map are from
-`734ad10780629e11b09707ff5d0c0f5601ecb02e`; later changes update delivery metadata,
+; later changes update delivery metadata,
 captions and evidence only. The 20 focused JIRAM, PDS-reader, object-contract,
 dataset-selection and investigation-report tests and preparation typecheck pass.
 A fresh restore verified every file in the Io and Ceres inventories, and the
@@ -214,8 +213,7 @@ its recipe, label and measured receipt.
 
 ### Four-visit baseline (21 September 2026)
 
-The following results describe the four-visit version at
-`943c34c8bac83509725d55ab91b48832fd65a4e8`. Its decoding and registration method
+The following results describe the four-visit version. Its decoding and registration method
 still applies; its integrated-output comparison is not reused as validation of
 the new dates or finer map.
 
@@ -224,7 +222,7 @@ the new dates or finer map.
 - **Pointing.** The fitted offsets are constant within an orbit: about 5 lines for orbits 41 and 43, and about 530 lines (7°) for orbits 47 and 49, after JIRAM stopped using its despinning mirror from orbit 44 (Mura et al. 2024, Section 2.1). Good fits sit within 4 lines of their orbit's offset; false fits, on nearly empty frames, sit 13 or more away. Frames more than 8 lines from their orbit's offset are rejected.
 - **Accepted.** 34 frames, at 13.5 to 27 km per pixel, median correlation 0.92. Rejected: 8 with too little sunlit disc, 7 off their orbit's offset, 7 below a correlation of 0.5, 3 with the best offset on the search edge. [One registered frame per orbit](evidence/volcanic-heat/registration.png) shows the fitted limb (red) and terminator (blue).
 - **Against the paper's figure.** [Our four per-orbit maps under Figure 2A](evidence/volcanic-heat/figure-2.png), on its axes and scale: the hot spots fall in the same places at similar brightness.
-- **Against the paper's numbers.** Table 3 of Mura et al. (2024) gives each hot spot's total M-band output. Integrating our radiance within 2.5° of each, above the local background, gives a median ratio of 1.06 (middle half 0.72 to 1.32) over 94 measurements in the per-orbit maps, and 0.83 (0.46 to 1.11) for the 46 hot spots fully inside the merged map, where spots can be stitched from different orbits ([test](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/io/volcanic-heat.test.mts), [table extract](source/science/mura-2024/table3-m-band.json)).
+- **Against the paper's numbers.** Table 3 of Mura et al. (2024) gives each hot spot's total M-band output. Integrating our radiance within 2.5° of each, above the local background, gives a median ratio of 1.06 (middle half 0.72 to 1.32) over 94 measurements in the per-orbit maps, and 0.83 (0.46 to 1.11) for the 46 hot spots fully inside the merged map, where spots can be stitched from different orbits (test, [table extract](source/science/mura-2024/table3-m-band.json)).
 - **Against an independent catalogue.** Of 24 local peaks above 0.03 W sr⁻¹ m⁻², 22 lie within 3° of a hot spot in Table A1 of [Davies et al. (2024)](https://doi.org/10.3847/PSJ/ad4346) (Galileo, Keck, Gemini and JIRAM detections); with longitudes mirrored, 4 do. The unmatched peaks are Monan Patera, Volund B and Kotar Patera in Mura et al.'s Table 2, which Davies et al. place 3 to 5° away.
 
 Edge meridian, 13 September 2026: the Normal and Enhanced GeoTIFFs span 360° of longitude, and their recipe now declares `wrapLongitude`. Before, the 2× maps kept one missing column at 180°, filled by the gray coverage grid. A [matched crop](evidence/wrap-longitude/crop.json) of the Normal 2× map, taken from main's published file and from this version, has 33 of 36,864 pixels over the Pixelmatch threshold of 0.1 ([report](evidence/wrap-longitude/change.json)). The largest change is 36 levels at the 180° column; no other column changes by more than 7, which is WebP re-encoding. The [comparison](evidence/wrap-longitude/comparison.png) shows the map pixels and this version in the browser.
@@ -316,7 +314,7 @@ Fourteen base-unit categories distinguish plains, flows, patera floors and mount
 
 Exact raw members and archive/member CRC32/SHA-256 receipts are retained in `source/science/geology-sim3168/`. The actual SHP is signed east-positive planetocentric degrees on a 1,821,460 m sphere. West-longitude point attributes independently verify the sign: the same first point is −97.1448317468° in SHP X and +97.144831747° in `Long_W`. The displayed 1,821,490 m radius retains those angular positions; the 30 m radius difference is not height. `NoData` polygons, unmapped polar areas and conflicting overlapping categories remain missing.
 
-These source discrepancies and the explicit `Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases are retained in the registration audit, rather than forcing label points to replace the polygon `Unit` attribute. The [original preparation and browser qualification](https://github.com/layoutit/cssEarth/tree/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/) records retain the tested version and results.
+These source discrepancies and the explicit `Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases are retained in the registration audit, rather than forcing label points to replace the polygon `Unit` attribute. The original preparation and browser qualification records retain the tested version and results.
 
 ## Visible spectral surface views
 

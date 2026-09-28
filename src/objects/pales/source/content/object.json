@@ -58,7 +58,60 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Thermal diameter",
+        "value": "166.252 ± 2.166 km (NEOWISE, NEATM)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2012 (Mas12)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/Diameter; /neowise/rows/0/fields/Diameter_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.048 ± 0.009 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2012 (Mas12)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.69 × 10¹⁸ ± 4.97 × 10¹⁷ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Baer et al. 2008",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/0/fields/MASS_KG; /masses/rows/0/fields/MASS_KG_UNC; /masses/rows/0/fields/BINARY_NOTE; /masses/rows/0/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "1.52 ± 0.30 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Baer et al. 2008",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/0/fields/BULK_DENSITY; /masses/rows/0/fields/BULK_DENSITY_UNC; /masses/rows/0/fields/SIZE_REF_CODE; /masses/rows/0/fields/MASS_REF"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

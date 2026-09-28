@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "m4-v69-a",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 6081,
+      "lowerKelvin": 5955,
+      "upperKelvin": 6207,
+      "citation": "Primary log Teff 3.784 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 6081 K: 6081 +/- 126 K, https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

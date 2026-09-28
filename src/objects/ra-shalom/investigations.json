@@ -8,22 +8,10 @@
       "status": "included",
       "finding": "The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original rashalom.obj](https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf): Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe. Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 1.15 km sphere, from -0.33 to 0.37 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments. The live JPL index was checked against the actual preparation input shape/rashalom.obj; it still links this exact model. The page is dated 2024-08-10, not a new scientific-model release. This confirms the published source route, not new mesh bytes, optical imagery or independent source-fit accuracy.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ra-shalom/README.md",
         "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
         "https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj",
         "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ra-shalom/source/preparation/terrestrial.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/source/preparation/terrestrial.json"
       ]
     },
     {
@@ -33,13 +21,7 @@
       "finding": "This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied.",
       "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ra-shalom/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/README.md"
       ]
     },
     {
@@ -48,13 +30,7 @@
       "status": "included",
       "finding": "The PDS radar bundle (Lawrence and Benner, 2020; https://doi.org/10.26033/xtkf-wz81) supplies the corresponding a2100rashalom.obj and XML label. Every parsed vertex and triangle index matches the consumed JPL file exactly, despite formatting differences. The pinned bundle description explicitly identifies kilometer units, center-of-mass origin, principal axes and positive-Z spin axis. Its label describes radar image resolution of 75–150 m; 128 px display cells add no observational detail.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ra-shalom/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/README.md"
       ]
     },
     {
@@ -63,13 +39,7 @@
       "status": "included",
       "finding": "The pinned PDS spin table records the adopted ecliptic pole (75°,16°), 19.793 h period, and phase 17° at 2003-08-22 00:00:00. These are archival model parameters. The app retains the model axes and period but deliberately uses arbitrary display phase; the archival epoch is not propagated into a current attitude.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ra-shalom/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/README.md"
       ]
     },
     {
@@ -79,13 +49,7 @@
       "finding": "The original 2008 multi-wavelength study combines radar, spectroscopy and thermal observations. Its disk-integrated spectra and thermal/roughness results are not a registered surface map. The radar fit did not include the optical lightcurves and could not rule out a retrograde interpretation; the adopted pole was not unique. The independent [JPL 2016 observation planning summary](https://echo.jpl.nasa.gov/asteroids/Ra-Shalom/Ra-Shalom_2016_planning.html), pinned as source evidence, reports Ďurech et al. (2012) lightcurve values of 19.8201 ± 0.0004 h and pole (313°,-45°). Later [lightcurve modeling](https://academic.oup.com/mnras/article/527/3/6814/7419864) also concerns another convex-model solution. A newer pole is not applied to the older radar mesh without a source registration.",
       "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ra-shalom/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/README.md"
       ]
     },
     {
@@ -95,13 +59,18 @@
       "finding": "The radar images are delay-Doppler measurements, not an optical texture. Disk-integrated spectra, thermal modeling and unregistered alternate convex shapes do not qualify additional surface lenses. No resolved optical map or independently registered composition, temperature, gravity or slope grid was identified in this bounded source survey. No resolved optical surface map is supplied.",
       "revisitWhen": "An acquired field with defined units, coverage and registration to the selected radar mesh; a bulk quantity or unregistered alternative shape does not qualify it.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ra-shalom/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/README.md"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Volume-equivalent radius \"1.15 ± 0.10 km\" (jpl-small-body-database) differs from the NEOWISE V2.0 neowise_neos.csv record 1209 (Masiero et al. 2017) diameter 3.050 ± 0.367 km (NEOWISE, NEATM); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "mathilde",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 253,
+    "by": "SBDB record des 253"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 253,
+        "fields": {
+          "Number": "253",
+          "Name": "Mathilde",
+          "Desig": "-",
+          "Family": "9105",
+          "CSource": "S",
+          "Class": "C",
+          "DiamSource": "D",
+          "DiamFlag": "-",
+          "Diam": "57.83",
+          "HSource": "M",
+          "H": "10.39",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.20",
+          "G2": "-9.99",
+          "AlbSource": "D",
+          "AlbFlag": "-",
+          "Albedo": "0.0369",
+          "PFlag": "-",
+          "Period": "417.7",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.45",
+          "AmpMax": "0.50",
+          "U": "3",
+          "Notes": "T",
+          "IsBinary": "-",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  }
+}

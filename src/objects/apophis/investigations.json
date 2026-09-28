@@ -8,21 +8,9 @@
       "status": "included",
       "finding": "The live PDS product label identifies urn:nasa:pds:gbo.ast-apophis.jpl.radar.shape_model:data:apophis_v233s7_obj version 1.0 as Model B of Brozović 2018. It describes 2000 vertices, kilometer coordinates and longitude zero along the long positive X principal axis. Its 2025 file creation and 2026 archive publication are not new radar observations or a newer physical solution. The retained original mesh and spin labels support the selected shape; optical imagery remains unqualified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/apophis/README.md",
         "https://sbn.psi.edu/pds/resource/apophis_shape.html",
         "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.xml",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/apophis/source/reference/apophis_v233s7.xml"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/apophis/source/reference/apophis_v233s7.xml"
       ]
     },
     {
@@ -30,19 +18,18 @@
       "survey": "surface-imagery-8",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/apophis/README.md",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/apophis/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/apophis/source/manifest.json"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"265.7 hours\" (source-apophis-apophis-research-apophis-2018) differs from the LCDB V4.0 summary record 21838 period 30.56 h (U 3, synodic); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

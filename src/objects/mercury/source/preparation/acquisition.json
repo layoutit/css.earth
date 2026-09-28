@@ -141,6 +141,48 @@
       "groups": [
         "refresh-native-labels"
       ]
+    },
+    {
+      "kind": "geotiff-image",
+      "path": "maps/native/md3.png",
+      "recipePath": "maps/native/md3.json",
+      "groups": [
+        "refresh-native"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "maps/native/md3.lbl",
+      "url": "https://astrogeology.usgs.gov/ckan/dataset/fc37692f-e806-4632-b300-0250bb61c3de/resource/0313deb7-ad46-4ad9-96fd-cd7e8886443c/download/mercury_messenger_mdis_basemap_md3color_mosaic_global_665m_pds3.lbl",
+      "groups": [
+        "refresh-native-labels"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "path": "science/gravity/anomaly-hgm008.tif",
+      "url": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe",
+      "member": "Anomaly_Map_HgM008_Lmax90_16ppd.tif",
+      "groups": [
+        "refresh-gravity"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "path": "science/gravity/crustal-thickness-hgm008.tif",
+      "url": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6",
+      "member": "CrustalThickness_Map_HgM008_16ppd.tif",
+      "groups": [
+        "refresh-gravity"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "science/gravity/ggmes_100v08_sha.lbl",
+      "url": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl",
+      "groups": [
+        "refresh-gravity"
+      ]
     }
   ]
 }

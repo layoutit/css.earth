@@ -668,6 +668,7 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
   expect(() => expectAlignedContextOrigin([0, .002, 0], [0, 0, 0], 'near-origin displacement')).toThrow();
 });
 
+// Every malformed case parses the whole generated universe again, so the test's time grows with the number of bodies.
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const { readCatalog } = await import('../../../../tools/prepare/prepare-catalog.mts');
@@ -719,7 +720,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     expect(() => parsePreparedWorldContext({ ...source,
       bodies: bodies.map(body => body === parent ? { ...body, systemView } : body) })).toThrow();
   }
-});
+}, 20000);
 
 test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
@@ -2279,6 +2280,7 @@ test('world presentation leaves the detail scope while retaining its input regis
   expect(screenPicking(presentationHost as unknown as HTMLElement).pick(30, -20)).toBeNull();
   // Focus, like hover, changes annotations only: the plan in flight stays valid
   // and a publication is still requested so the change reaches the screen.
+  request.mockClear(); // Initial eligible-caption measurement requests its own follow-up.
   const stale = layer.captureFrame(world, viewport);
   presentationHost.dispatchEvent(new Event('focusin'));
   document.defaultView.advance(16);
@@ -2294,6 +2296,7 @@ test('world presentation leaves the detail scope while retaining its input regis
 test('opacity-only ticks do not reproject, republish picking or measure retained annotations', () => {
   const request = vi.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
   const clock = root.ownerDocument.defaultView;
+  request.mockClear(); // Measure eligible captions once at activation.
   const nodes = all(root), measurements = nodes.map(node => node.measurements);
   const transforms = nodes.map(node => node.style.transform);
   const picking = screenPicking(root.parentNode! as unknown as HTMLElement);
@@ -2336,6 +2339,8 @@ test('the main thread draws worker frames from the orbit summary exactly as from
   for (const distance of [1000, 500, 50]) {
     world.pose.positionM[2] = distance;
     for (const { layer, root } of layers) {
+      layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
+      // Consume the measurement response, just as the worker queue does.
       layer.publish(world, viewport, structuredClone(calculate(layer.captureFrame(world, viewport).view)));
       root.ownerDocument.defaultView.advance(50);
     }
@@ -2686,5 +2691,19 @@ test('a coast around Earth writes only transform and opacity, and the orbit stro
 test('a driven drag around Earth keeps revealing and retiring bodies', async () => {
   const { layer, writes } = await orbitEarth({ coast: false });
   expect(writes.filter(write => / style\.visibility$/u.test(write)).length).toBeGreaterThan(0);
+  layer.destroy();
+});
+
+ test('activation measures only captions the planner can name and caches those bounds', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const sun = find(root, 'contextLabel', 'sun'), mercury = find(root, 'contextLabel', 'mercury');
+  const venus = find(root, 'contextLabel', 'venus');
+  expect(sun.measurements).toBe(1);
+  expect(mercury.measurements).toBe(1);
+  expect(venus.measurements).toBe(0); // Occluded by the Sun; its text cannot contribute.
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  expect(sun.measurements).toBe(1); expect(mercury.measurements).toBe(1); expect(venus.measurements).toBe(0);
   layer.destroy();
 });

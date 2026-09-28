@@ -578,6 +578,20 @@
     },
     {
       "path": "reference/release-parameters.txt"
+    },
+    {
+      "path": "reference/sbn-catalogues.json",
+      "purpose": "Rows of the PDS Small Bodies Node catalogues that the factsheet cites, as their PDS4 labels read them, with each selection rule.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "reference",
+            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+          }
+        ]
+      }
     }
   ]
 }

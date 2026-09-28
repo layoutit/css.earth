@@ -1,0 +1,59 @@
+{
+  "id": "vz-pup",
+  "name": "VZ Pup",
+  "system": "VZ Pup system",
+  "description": "A Cepheid in the Milky Way that pulsates every 23.17 days; its mean radius is 97.3 solar radii.",
+  "order": 1929,
+  "target": "VZ Pup",
+  "gaia": "5600052040150252800",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 97.3,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, VZ Pup: Baade-Wesselink mean radius (solar radii) 97.3 +/- 2.3 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 2.3
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5125,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 258, Name='VZ Pup', columns Teff, e_Teff (K): Teff 5125 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 189
+  },
+  "radialVelocity": {
+    "value": 63,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5600052040150252800 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
+  },
+  "distance": {
+    "value": 4134.1,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, VZ Pup: Baade-Wesselink distance (pc) 4134.1 +/- 98.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 98.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.459 +/- 0.011 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way that swells and shrinks every 23.2 days.",
+    "introduction": "Its mean radius, 97.3 solar radii, comes from comparing how fast its surface moves with how its size changes, 4,134 parsecs away.",
+    "locator": "table10, VZ Pup: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

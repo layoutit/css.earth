@@ -1,0 +1,53 @@
+{
+  "id": "rx-aur",
+  "name": "RX Aur",
+  "system": "RX Aur system",
+  "description": "A Cepheid in the Milky Way that pulsates every 11.62 days; its mean radius is 68.1 solar radii.",
+  "order": 2008,
+  "target": "RX Aur",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 68.1,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, RX Aur: Baade-Wesselink mean radius (solar radii) 68.1 +/- 5.2 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 5.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5500,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 138, Name='RX Aur', columns Teff, e_Teff (K): Teff 5500 +/- 302 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 302
+  },
+  "distance": {
+    "value": 1546.7,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, RX Aur: Baade-Wesselink distance (pc) 1546.7 +/- 118.7 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 118.7
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.263 +/- 0.012 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 68 times the Sun's width, that swells and shrinks every 11.6 days.",
+    "introduction": "Its mean radius, 68.1 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,547 parsecs away.",
+    "locator": "table10, RX Aur: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

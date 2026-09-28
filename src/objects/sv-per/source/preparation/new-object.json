@@ -1,0 +1,53 @@
+{
+  "id": "sv-per",
+  "name": "SV Per",
+  "system": "SV Per system",
+  "description": "A Cepheid in the Milky Way that pulsates every 11.13 days; its mean radius is 80.4 solar radii.",
+  "order": 2014,
+  "target": "SV Per",
+  "paper": {
+    "url": "https://arxiv.org/abs/1212.5478",
+    "credit": "Groenewegen (2013), A&A 550, A70"
+  },
+  "radius": {
+    "value": 80.4,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, SV Per: Baade-Wesselink mean radius (solar radii) 80.4 +/- 7.3 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 7.3
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 5375,
+    "source": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 158, Name='SV Per', columns Teff, e_Teff (K): Teff 5375 +/- 253 K from a fit to the spectral energy distribution at mean light (not spectroscopic)",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 253
+  },
+  "distance": {
+    "value": 2809,
+    "source": "Groenewegen (2013), A&A 550, A70, table10, SV Per: Baade-Wesselink distance (pc) 2809 +/- 249.8 (Monte-Carlo)",
+    "url": "https://arxiv.org/abs/1212.5478",
+    "uncertainty": 249.8
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "Interstellar dust reddens every spectrum of this star, E(B-V) = 0.408 +/- 0.018 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the Milky Way, 80 times the Sun's width, that swells and shrinks every 11.1 days.",
+    "introduction": "Its mean radius, 80.4 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,809 parsecs away.",
+    "locator": "table10, SV Per: Per, Rad, Dist"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius.",
+    "No dynamical mass is measured for this Cepheid; its mass is left unmeasured."
+  ]
+}

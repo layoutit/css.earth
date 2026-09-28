@@ -183,7 +183,21 @@ test('native samples keep their time, thread and stack, and one process when ask
     '<row><sample-time id="8" fmt="00:00.002">2000000</sample-time><thread ref="2"/><weight ref="4"/><backtrace ref="5"/></row>' +
     '<row><sample-time id="9" fmt="00:00.002">2000000</sample-time><thread id="10" fmt="main 0x9 (SpringBoard, pid: 60)"/><weight ref="4"/><backtrace ref="5"/></row>';
   assert.deepEqual(timeProfileSamples(xml, 459), [
-    { ns: 1000000, weightNs: 1000000, pid: 459, thread: 'Main Thread 0x1', frames: ['WebCore::GraphicsLayer::flush', 'WebKit::main'] },
-    { ns: 2000000, weightNs: 1000000, pid: 459, thread: 'Main Thread 0x1', frames: ['WebCore::GraphicsLayer::flush', 'WebKit::main'] }]);
+    { ns: 1000000, weightNs: 1000000, pid: 459, process: 'com.apple.WebKit.WebContent', thread: 'Main Thread 0x1', frames: ['WebCore::GraphicsLayer::flush', 'WebKit::main'] },
+    { ns: 2000000, weightNs: 1000000, pid: 459, process: 'com.apple.WebKit.WebContent', thread: 'Main Thread 0x1', frames: ['WebCore::GraphicsLayer::flush', 'WebKit::main'] }]);
   assert.equal(timeProfileSamples(xml, null).length, 3);
+});
+
+
+test('native threads with the same name in different processes retain independent samples', () => {
+  const sample = { ns: 1000000, weightNs: 1000000, thread: 'main', frames: ['work'] };
+  const trace = traceEvents([], 0, null, {}, undefined, {offsetUs: 0, samples: [
+    {...sample, pid: 10, process: 'WebContent'},
+    {...sample, pid: 20, process: 'GPU', ns: 1500000},
+  ]});
+  const events = trace.traceEvents.filter(event => event.ph === 'X');
+  assert.equal(events.length, 2);
+  assert.notEqual(events[0]!.pid, events[1]!.pid);
+  assert.deepEqual(events.map(event => event.dur), [1000, 1000]);
+  assert.deepEqual(events.map(event => (event.args as {nativePid: number}).nativePid), [10, 20]);
 });

@@ -32,7 +32,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.077 ± 0.008 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Vilenius et al. 2012",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/3/fields/ALBEDO; /tno/rows/3/fields/ALBEDO_ERROR_UPPER; /tno/rows/3/fields/ALBEDO_ERROR_LOWER; /tno/rows/3/fields/ALBEDO_COLOR; /tno/rows/3/fields/REFERENCE_CODE"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "1.315 ± 0.175 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Dotto et al. 2008",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/0/fields/DENSITY; /tno/rows/0/fields/DENSITY_ERROR_UPPER; /tno/rows/0/fields/DENSITY_ERROR_LOWER; /tno/rows/0/fields/METHOD_DENSITY; /tno/rows/0/fields/REFERENCE_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

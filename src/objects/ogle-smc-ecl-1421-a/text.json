@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ogle-smc-ecl-1421-a",
+  "card": {
+    "text": "The primary star of OGLE-SMC-ECL-1421, a pair that eclipse each other every 102.834 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+        "label": "Graczyk et al. (2020), The Astrophysical Journal 904 13",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-SMC-ECL-1421: Mass, Radius and Period, from Graczyk et al. (2020ApJ...904...13G)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has 2.72 solar masses and 17.7 solar radii; its partner has 2.85 and 23.8, measured from the eclipses and the stars' motions.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-abbb2b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...904...13G",
+        "label": "Graczyk et al. (2020), The Astrophysical Journal 904 13",
+        "checked": "2026-09-28",
+        "locator": "DEBCat (Southworth 2015, ASPC 496, 164), OGLE-SMC-ECL-1421: Mass, Radius and Period, from Graczyk et al. (2020ApJ...904...13G)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

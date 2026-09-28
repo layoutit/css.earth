@@ -19,7 +19,7 @@ derive the radius from the photodynamic stellar density and the mass from the Ma
 15.62 only the basis-function coefficients are released. They are pinned as
 `source/photometry/gaia-dr3-xp-continuous.csv` and sampled here onto the archive's own
 336-1020 nm grid with GaiaXPy, the archive's library, by
-[`xp-continuous-sample.py`](../../../tools/objects/observation/xp-continuous-sample.py). Through the CIE 1931 2-degree observer
+[`xp-continuous-sample.py`](../../../packages/bake/src/objects/stellar/xp-continuous-sample.py). Through the CIE 1931 2-degree observer
 that gives **255, 205, 106 (#ffcd6a)**.
 
 The star is faint in blue light: from 380 to 450 nm its samples have a mean signal-to-noise of 0.2 and sixteen of them are at or
@@ -52,7 +52,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 
 - [`stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts) covers the colour
   path, including the rule for samples consistent with zero and the quadratic limb plate.
-- [`source.test.mts`](https://github.com/layoutit/css.earth/blob/943c34c8bac83509725d55ab91b48832fd65a4e8/tests/objects/unit/trappist-1/source.test.mts) checks every package's source pins, and that each planet turns
+- `source.test.mts` checks every package's source pins, and that each planet turns
   synchronously with longitude 0 on the star and orbits it.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the system holds all seven planets.
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined

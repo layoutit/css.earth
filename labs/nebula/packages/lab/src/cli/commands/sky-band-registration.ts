@@ -182,7 +182,7 @@ export async function registerSkyBands(root: string, recipePath: string) {
       diagnostic: { receipt: { path: transfer.diagnostic, sha256: hash(await readFile(resolve(root, transfer.diagnostic))) }, pass: diagnostic.pass, gates: diagnostic.gates,
         uniqueMatchedStars: diagnostic.uniqueMatchedStars, reservedCheckResidualNativeWisePixels: diagnostic.reservedCheckResidualNativeWisePixels,
         shiftedControls: diagnostic.shiftedControls, detectedStars: diagnostic.detectedStars },
-      implementation: [await implementation('labs/nebula/packages/lab/src/cli/commands/sky-band-registration.ts'), await implementation('tools/objects/observation/sky-band-composite.mts'), operator],
+      implementation: [await implementation('labs/nebula/packages/lab/src/cli/commands/sky-band-registration.ts'), await implementation('packages/telescope-cli/src/sky/sky-band-composite.mts'), operator],
       interpretation: 'The composite is pinned to bytes that only the sky band compositor produces after checking every hips2fits band header against this exact TAN grid (no rotation, distortion or unit cards). The grid itself is qualified by the reference composite, which passed the unchanged fixed-WCS catalogue gate on the identical grid.',
       limitations: ['The transfer qualifies the request grid and its pixel convention. It does not independently measure this survey\'s own HiPS astrometry; the diagnostic receipt records what its own stars show.',
         'Catalogue and reference image share the AllWISE mission.'] };

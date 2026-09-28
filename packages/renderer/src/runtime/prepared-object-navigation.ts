@@ -1,12 +1,17 @@
+import { initialStageSelection } from './initial-stage-selection.js';
+import { savedWorldCamera } from '../navigation/saved-world-camera.js';
+import type { SharedView } from '../navigation/view-url.js';
+import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import type { WorldRotation } from '../navigation/world-camera-math.js';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/world-camera.js';
+import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport, worldCameraFromCenteredPresentation } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { viewSunDirectionToPhysicalLightDirection } from '../solar-system/directional-sun-coordinate.js';
 import { initialObjectSelection } from './object-contract.js';
-import { resolvePreparedPresentation, selectedPreparedVariant } from '../rendering/prepared-presentation.js';
+import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
 import type { CameraViewport } from '../navigation/camera-viewport.js';
@@ -16,29 +21,27 @@ export interface ObjectPreparationView { world: WorldCameraPose; viewport: World
 
 /** Prepared address selection uses the same camera orientation, LOD and
  * material resolver as the mounted presentation, without constructing a scene. */
-export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame) {
-  const selection = initialObjectSelection(definition.controls);
-  if (!selectedPreparedVariant(definition, selection).materials.length) {
-    const plan = resolvePreparedPresentation(definition, { selection, view: null, initial: true });
-    return (_view: ObjectPreparationView) => plan;
-  }
+export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame,
+  selection = initialObjectSelection(definition.controls)) {
   const { camera, sun } = definition;
-  const orientation = createCameraOrientation({ cameraPlan: camera,
+  const orientation = definition.materials.length ? createCameraOrientation({ cameraPlan: camera,
     controlPitch: camera.defaultControlPitchDegrees, controlYaw: camera.defaultControlYawDegrees,
-    sunDirection: sun?.localDirection });
+    sunDirection: sun?.localDirection }) : null;
   const light = () => {
-    const direction = orientation.sunViewDirection();
+    const direction = orientation?.sunViewDirection() ?? null;
     return direction && sun ? viewSunDirectionToPhysicalLightDirection(direction) : direction;
   };
-  const reference = { sceneMatrix: orientation.scene(), sunViewDirection: light() };
+  const reference = { sceneMatrix: orientation?.scene() ?? '', sunViewDirection: light() };
   return ({ world, viewport }: ObjectPreparationView) => {
     const presentation = presentWorldCamera(world, frame, viewport);
-    orientation.setSceneRotation(presentation.rotation);
+    orientation?.setSceneRotation(presentation.rotation);
     const radius = frame.bodyRadiusM / frame.metersPerUnit;
     const diameter = worldCameraSilhouetteDiameter(presentation, radius);
-    return resolvePreparedPresentation(definition, { selection, initial: true, view: {
-      sceneMatrix: orientation.scene(), sunViewDirection: light(), reference,
+    return resolvePreparedPresentation(definition, { selection, view: {
+      sceneMatrix: orientation?.scene() ?? '', sunViewDirection: light(), reference,
       levelOfDetail: levelOfDetailFor(camera.levelOfDetail, diameter),
+      projection: physicalProjectionFromCamera(presentation.rotation, presentation.bodyCenterUnits, camera.sceneScale, worldCameraViewport(world, viewport)),
+      viewportWidth: viewport.widthPixels, viewportHeight: viewport.heightPixels, motionAtRest: true,
     } });
   };
 }
@@ -46,7 +49,35 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
 /** One readiness contract for both already-decoded and deferred object packages. */
 export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => Promise<ObjectRuntimeDefinition>, frame: PreparedWorldCameraFrame) {
   return Object.freeze({ frame,
+    async initialView(viewport: CameraViewport, mobile: boolean, arrival: { rotation: WorldRotation; distanceM: number } | { saved: SharedView }, signal: AbortSignal) {
+      const { camera } = await abortable(load(signal), signal);
+      const snapshot = viewport.read(camera.projection.cssPerspective);
+      if ('saved' in arrival) {
+        const { width, height, top } = snapshot.bounds, open = snapshot.openArea;
+        const offsetY = open ? (open.top + open.bottom) / 2 - (top + height / 2) : 0;
+        const viewport = { focalPixels: snapshot.focalPixels, widthPixels: width, heightPixels: height,
+          principalOffsetPixels: [0, 0] as const,
+          visibleRect: { left: -width / 2, right: width / 2, top: -height / 2 - offsetY, bottom: height / 2 - offsetY } };
+        const world = savedWorldCamera(arrival.saved, frame, viewport);
+        return { world, viewport: worldCameraViewport(world, viewport) };
+      }
+      const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
+      const radiusPixels = fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
+      const focalPixels = radiusPixels * Math.sqrt(arrival.distanceM ** 2 - frame.bodyRadiusM ** 2) / frame.bodyRadiusM;
+      const projectionScale = focalPixels / snapshot.focalPixels;
+      const { width, height, top } = snapshot.bounds;
+      const open = snapshot.openArea;
+      const offsetY = open ? (open.top + open.bottom) / 2 - (top + height / 2) : 0;
+      const optics = { focalPixels, projectionScale, widthPixels: width, heightPixels: height,
+        principalOffsetPixels: [0, 0] as const,
+        visibleRect: { left: -width / 2, right: width / 2, top: -height / 2 - offsetY, bottom: height / 2 - offsetY } };
+      const world = worldCameraFromCenteredPresentation({ rotation: arrival.rotation, distanceUnits: arrival.distanceM / frame.metersPerUnit }, frame, optics);
+      return { world, viewport: optics };
+    },
     /** The shared caption uses the same prepared shape extent before and after attachment. */
+    async labelEdge(signal: AbortSignal) {
+      return preparedLabelEdge(await abortable(load(signal), signal), frame);
+    },
     async framingScale(signal: AbortSignal) {
       return (await abortable(load(signal), signal)).camera.framingScale ?? 1;
     },
@@ -55,24 +86,25 @@ export function createPreparedObjectNavigation(load: (signal?: AbortSignal) => P
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport, mobile });
       return fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
     },
-    async prepare({ signal, getView, cameraViewport, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
-      signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; ownerDocument?: Document;
+    async prepare({ signal, getView, cameraViewport, selectionStage, ownerDocument = typeof document === 'undefined' ? undefined : document }: {
+      signal: AbortSignal; getView: () => ObjectPreparationView; cameraViewport?: CameraViewport; selectionStage?: HTMLElement; ownerDocument?: Document;
     }) {
       const definition = await abortable(load(signal), signal);
       // Resolve a new authored projection while the outgoing scene is intact.
       // Attachment only consumes this application-owned snapshot.
       cameraViewport?.read(definition.camera.projection.cssPerspective);
-      const resources = prepareObjectResources(definition.assets, { signal, assetOrigin: definition.assetOrigin });
+      const resources = prepareObjectResources(definition.assets, { signal, startup: false, assetOrigin: definition.assetOrigin });
       let tree: PreparedTreeLease | undefined;
-      const construction = ownerDocument ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
+      // A server-rendered scene is already prepared DOM; attachment adopts it.
+      const construction = ownerDocument && !selectionStage?.dataset.preparedObject ? preparePresentationTree(definition.tree, ownerDocument, signal, undefined, definition.assetOrigin).then(value => { tree = value; }) : Promise.resolve();
       const destroy = () => { resources.destroy(); tree?.destroy(); };
       let demand: ReturnType<typeof createObjectViewDemand> | null = null;
       const prepareView = (read: () => ObjectPreparationView) => {
-        demand ??= createObjectViewDemand(definition, frame);
+        demand ??= createObjectViewDemand(definition, frame, selectionStage ? initialStageSelection(definition.controls, selectionStage).selection : undefined);
         return resources.prepareDemand(() => demand!(read()));
       };
       try {
-        // One bounded bank completes startup, then follows the incoming view.
+        // The incoming camera owns demand; the default close-up startup bank must not decode first.
         await Promise.all([prepareView(getView), construction]);
         return Object.freeze({ frame, definition, resources, tree, prepareView, destroy,
           projection(view: ObjectPreparationView) {

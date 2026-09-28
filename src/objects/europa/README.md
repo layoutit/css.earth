@@ -48,11 +48,11 @@ The 14 September 2026 **Monochrome** update inserts 301 equirectangular products
 
 The 14 September 2026 composition preparation added **Ice signature**, **Fine ice**, and **Coarse ice** as a local preview. They are now withheld from publication until reuse terms are explicit; the evidence below records that preview. [Reflectance evidence](evidence/composition/reflectance-values.json) and [model evidence](evidence/composition/model-values.json) compare all 64,800 geographic nodes in each of five converted grids, including the two retained uncertainty products, with the original release. Values agree exactly after float32 rounding; missing samples and the periodic seam retain their source meaning. [Fresh restoration](evidence/composition/restoration.json) downloads both original archives into an empty source root and reproduces all eleven composition manifest entries.
 
-[Ice signature](evidence/composition/ice-signature.png) · [Fine ice](evidence/composition/fine-ice.png) · [Coarse ice](evidence/composition/coarse-ice.png) · [DPR 2](evidence/composition/ice-signature-dpr2.png) · [Mobile](evidence/composition/coarse-ice-mobile.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above `f8fbdaa0b`, viewport, camera, selected textures and inspected captures. Dataset switching retains 450 surface leaves; minimap rotation and keyboard zoom work. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; fifteen added image files total 222,678 bytes.
+[Ice signature](evidence/composition/ice-signature.png) · [Fine ice](evidence/composition/fine-ice.png) · [Coarse ice](evidence/composition/coarse-ice.png) · [DPR 2](evidence/composition/ice-signature-dpr2.png) · [Mobile](evidence/composition/coarse-ice-mobile.png). The [browser receipt](evidence/composition/browser.json) pins the tested files above, viewport, camera, selected textures and inspected captures. Dataset switching retains 450 surface leaves; minimap rotation and keyboard zoom work. [Delivery evidence](evidence/composition/delivery.json) verifies the unchanged scene and prior assets; fifteen added image files total 222,678 bytes.
 
-Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced on base `a15706943`; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks. Mobile keeps the texture without horizontal overflow, but shared orbit/label clutter and the open information sheet limit visual review. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
+Focused checks pass: numeric conversion/acquisition (15), body behavior and content (14 across both moons), source/provenance (30), source-usage conservation (1), and strict preparation/tool TypeScript. Eight shared startup-fixture/import-closure failures across the two bodies were reproduced; these remain outside this surface change. Full application checks and public asset installation are not qualified. The local preview omits six unavailable unrelated nebula context banks. Mobile keeps the texture without horizontal overflow, but shared orbit/label clutter and the open information sheet limit visual review. The texture bake receipt retains its original source hashes; later content and provenance refreshes do not claim another full bake.
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
 [Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The capture faces the measured color region (control pitch 20°, yaw 180°); the application’s initial viewpoint is unchanged. Its polar assets are byte-identical because this color footprint does not reach the caps.
 
@@ -62,11 +62,11 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | --- | --- |
 | normal | 175.2 → 178.0 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/europa/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
-Photographic refresh, 12 September 2026, on base `3efdf2c9`: these matched
+Photographic refresh, 12 September 2026,: these matched
 Chrome crops show Pwyll at 1280 × 720, DPR 1. The before atlas was reproduced
-with the exact `53b262bd` delivery hash. The fractures gain detail without moving
+with the exact delivery hash. The fractures gain detail without moving
 the crater or filling missing observations.
 
 | Before | Current |
@@ -82,13 +82,13 @@ decoded atlas is 195 MiB. Three unrelated scientific thumbnails were unavailable
 locally, and the cross-body search preview covered only these three moons;
 this is not aggregate browser or scientific-lens qualification.
 
-Earlier shared-lane migration (base `53b262bd`) qualified the sphere, lighting,
+Earlier shared-lane migration qualified the sphere, lighting,
 source interpretation and feature placement. This photographic refresh retains
 those source files, coordinate transforms, masks, geometry and scene structure.
 Its new evidence concerns finer sampling of the photographs; it does not repeat
 the scientific-lens review.
 
-Earlier run at base `53b262bd` (12 September 2026): `node tools/objects/dist/prepare-authored.js europa --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+Earlier run (12 September 2026): `node tools/objects/dist/prepare-authored.js europa --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, elevation, geology, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 4878).
 
@@ -219,7 +219,7 @@ Colors use the released ArcGIS CMYK symbols converted to RGB; sub-pixel vector d
 
 Following the archive guide, RGB selects same-parity bands near 1.50, 1.35 and 0.74 µm; exact wavelengths and band numbers are pinned in `source/nims/prepare-composite.json`. Fixed I/F ranges are R 0–0.6, G 0–1.2, B 0–1.5. Endpoint clipping retains calibrated noise and outliers. The first observation has priority in overlap. The USGS 2010 registration grid matches this body's global visible mosaic; it is not the newer 2021 control grid.
 
-Exact bytes, coordinates and validity rules are in the intake plans and receipts. Reproduction: `tools/objects/acquisition/MAPPED-SCIENCE.md`.
+Exact bytes, coordinates and validity rules are in the intake plans and receipts. Reproduction: `packages/bake/src/objects/acquisition/MAPPED-SCIENCE.md`.
 
 The official USGS archive browser maps Individual Investigations to its working CloudFront endpoint in [main.js](https://pdsimage2.wr.usgs.gov/index-style/js/main.js). The original guides prescribe registered GeoTIFF geometry rather than COC backplanes. Unobserved cells remain the shared gray grid; no gap fill is used.
 

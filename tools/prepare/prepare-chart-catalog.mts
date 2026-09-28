@@ -2,9 +2,9 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
 import { inventoriedObjectIds } from '@cssearth/bake/delivery';
-import { parseChartAssetRecipe } from '../objects/charts/charts.ts';
+import { parseChartAssetRecipe } from '../../site/build/charts/charts.ts';
 import { escapeXml } from '@cssearth/bake/objects/charts';
-import { refreshObjectCharts } from '../objects/content/refresh-charts.mts';
+import { refreshObjectCharts } from './refresh-charts.mts';
 import { refuseDirectRun } from '../cli/library-entry.mts';
 
 // Illustrations use the same source recipes and SVG renderer as the live panels.

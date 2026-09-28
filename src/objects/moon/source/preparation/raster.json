@@ -84,6 +84,104 @@
       }
     },
     {
+      "id": "maximum-temperature",
+      "source": "science/diviner-gcp/tbol-max-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tbol-max-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 220,
+          "maximum": 400,
+          "colors": [
+            "#24204f",
+            "#3a468b",
+            "#258da4",
+            "#81c9b0",
+            "#f4d17b",
+            "#ec803c",
+            "#9b283a"
+          ],
+          "units": "K",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 720,
+            "height": 360,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.5,
+              -0.5
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
+      "id": "noon-temperature",
+      "source": "science/diviner-gcp/tbol-noon-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tbol-noon-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 220,
+          "maximum": 400,
+          "colors": [
+            "#24204f",
+            "#3a468b",
+            "#258da4",
+            "#81c9b0",
+            "#f4d17b",
+            "#ec803c",
+            "#9b283a"
+          ],
+          "units": "K",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 720,
+            "height": 360,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.5,
+              -0.5
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
       "id": "heat-anomalies",
       "source": "science/diviner-ghrm/tbol_anom-compact.tif",
       "falseColor": true,
@@ -234,11 +332,147 @@
       }
     },
     {
+      "id": "roughness",
+      "source": "science/lola/ldrm_16.img",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "ldrm_16.img",
+          "labelPath": "ldrm_16.lbl",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.5,
+          "maximum": 2.0,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "m residual standard deviation, 30-120 m baseline",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "pixelsPerDegree": 16,
+            "firstCentreLongitude": 0.03125,
+            "firstCentreLatitude": 89.96875,
+            "labelExtent": "edges",
+            "datasetId": "LRO-L-LOLA-4-GDR-V1.0",
+            "productId": "LDRM_16",
+            "noData": -32768
+          }
+        }
+      }
+    },
+    {
       "id": "crust",
       "source": "lenses/grail-crustal-thickness-print.jpg",
       "falseColor": true,
       "output": "moon-{id}{suffix}.webp",
       "thumbnail": "moon-lens-{id}.webp"
+    },
+    {
+      "id": "gravity",
+      "source": "science/grail/gggrx_1200a_anom_l660.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "gggrx_1200a_anom_l660.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -400.0,
+          "maximum": 400.0,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.0625,
+              -0.0625
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -32767
+          }
+        }
+      }
+    },
+    {
+      "id": "bouguer-gravity",
+      "source": "science/grail/gggrx_1200a_boug_l660.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "gggrx_1200a_boug_l660.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -600.0,
+          "maximum": 600.0,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
+          ],
+          "units": "mGal",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              0.0625,
+              -0.0625
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -32767
+          }
+        }
+      }
     },
     {
       "id": "silicate-signature",
@@ -1158,6 +1392,154 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "id": "thorium",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "W_TH",
+          "columnDescription": "Weight fraction Th, ppm",
+          "errorColumn": "E[7,7]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 10,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "ppm",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "potassium",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "W_K",
+          "columnDescription": "Weight fraction K, ppm",
+          "errorColumn": "E[6,6]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 3500,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "ppm",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "iron-gamma",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "W_FEO",
+          "columnDescription": "Weight fraction FeO, g/g",
+          "errorColumn": "E[5,5]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 25,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "weight % FeO",
+          "valueTransform": {
+            "scale": 100,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "titanium",
+      "source": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds-equal-area-table",
+          "path": "lpgrs_high1_elem_abundance_2deg.tab",
+          "labelPath": "lpgrs_high1_elem_abundance_2deg.lbl",
+          "structurePath": "lpgrs_elem_abundance.fmt",
+          "datasetId": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+          "productId": "LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG",
+          "column": "TIO2",
+          "columnDescription": "Weight fraction TiO2, g/g",
+          "errorColumn": "E[4,4]",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 8,
+          "colors": [
+            "#292544",
+            "#426f85",
+            "#5ca595",
+            "#bad367",
+            "#fff2aa"
+          ],
+          "units": "weight % TiO2",
+          "valueTransform": {
+            "scale": 100,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180
         }
       }
     }

@@ -20,11 +20,11 @@ The source mesh has 1,148 vertices and 2,292 faces, in kilometres. Its computed 
 
 The navigation marker now uses a lossless render of the [retained recipe](source/preparation/navigation.json). Its earlier tile had shared-atlas compression. The body mesh and surface images are unchanged.
 
-Source inputs and generated records are pinned in [the manifest](source/manifest.json). At revision `ea88f6feab53`, source/runtime closure, fresh runtime installation, all 11 shared browser conformance cases and DPR 1/2 DOM cleanliness passed for this body. The original [qualification](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/README.md#qualification), [visual review](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/VISUAL-REVIEW.md), [browser receipt](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/browser.json) and [source restoration receipt](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/source-restoration.json) remain at that revision.
+Source inputs and generated records are pinned in [the manifest](source/manifest.json). Source/runtime closure, fresh runtime installation, all 11 shared browser conformance cases and DPR 1/2 DOM cleanliness passed for this body. The original qualification, visual review, browser receipt and source restoration receipt remain at that revision.
 
-The later [integration receipt](https://github.com/layoutit/cssEarth/blob/bbfbf86b5c9b71fc56ef5e6b4759fd00af11d8ec/src/planets/asteroid-2001-sn263/evidence/main-integration.json) records 679/679 astronomy tests and 91/92 focused checks. The Phobos partition fixture failed. That integration changed shared renderer and navigation code and did not repeat browser qualification.
+The later integration receipt records 679/679 astronomy tests and 91/92 focused checks. The Phobos partition fixture failed. That integration changed shared renderer and navigation code and did not repeat browser qualification.
 
-The original [final checks](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/final-checks.json) also record a missing local Polymele package. These historical results do not establish a current full build or all-body browser pass.
+The original final checks also record a missing local Polymele package. These historical results do not establish a current full build or all-body browser pass.
 
 ## Known problems
 
@@ -37,5 +37,5 @@ The original PDS file is retained byte for byte. The existing source-mesh simpli
 
 The PDS catalog landing page says 2003 observations, while the native product labels and paper identify January–March 2008; the latter control this package. The archive's rotation uncertainty columns also differ from the paper, so no uncertainty is silently taken from those columns. JPL's unnamed satellite API rows pair physical values with inconsistent inner/outer orbits; component identity follows the native mesh labels and papers.
 
-Resolved optical imagery, mapped composition and a present spin-phase solution were not located. The published shape is the selected useful dataset. The [original orbit interpretation and limits](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/README.md#orbit-interpretation-and-limits) retain the source epoch, frame assumptions and long-extrapolation limits.
+Resolved optical imagery, mapped composition and a present spin-phase solution were not located. The published shape is the selected useful dataset. The original orbit interpretation and limits retain the source epoch, frame assumptions and long-extrapolation limits.
 </details>

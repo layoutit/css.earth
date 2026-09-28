@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "vz-pup",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5600052040150252800 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/vz-pup/source/photometry/gaia-dr3-source.csv; cross-identification HIP 37207: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5600052040150252800. Distance: Groenewegen (2013), A&A 550, A70, table10, VZ Pup: Baade-Wesselink distance (pc) 4134.1 +/- 98.2 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 4134.1 +/- 98.2 pc; Gaia DR3 parallax 0.2011 +/- 0.0147 mas (same row, RUWE 1.24), 13.7 standard errors, is not used. Proper motion: Gaia DR3 (same row): -1.363, 2.153 mas/yr. Radial velocity: SIMBAD's radial velocity for Gaia DR3 5600052040150252800 (quality A), from 2012ApJ...748..107P; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract).",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5600052040150252800",
+        "https://arxiv.org/abs/1212.5478",
+        "https://ui.adsabs.harvard.edu/abs/2012ApJ...748..107P/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 97.3 +/- 2.3 solar radii from Groenewegen (2013), A&A 550, A70, table10, VZ Pup: Baade-Wesselink mean radius (solar radii) 97.3 +/- 2.3 (Monte-Carlo) (https://arxiv.org/abs/1212.5478): 67,691,610 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5125 +/- 189 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 258, Name='VZ Pup', columns Teff, e_Teff (K): Teff 5125 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1212.5478",
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "light-curve",
+      "subject": "Light curve",
+      "status": "included",
+      "finding": "Gaia DR3 vari_cepheid, source 5600052040150252800: 6 G-band harmonics of a 23.172331970443697 d period, peak-to-peak 1.095 mag; the harmonics reproduce the row's epoch of maximum and peak-to-peak amplitude. The page plays it as a veil over the disc from the scene date, phase known to 0.02 of a cycle there.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1051/0004-6361/202243990"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,125 K, because interstellar dust reddens every spectrum of this star, E(B-V) = 0.459 +/- 0.011 (Groenewegen (2013), A&A 550, A70, table10), and its light changes through each pulsation, through the CIE 1931 2-degree observer: #ffe8d4. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,125 K and log g 0.24 (u1 0.603, u2 0.133): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 0.24 from 2024A&A...690A.246T, the median of its 2 spectra; the 7 published values span log g 0.06 to 2.2, across which the limb law changes by at most 2.7% of the centre brightness.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T"
+      ]
+    }
+  ]
+}

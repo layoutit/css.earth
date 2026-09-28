@@ -14,7 +14,8 @@ import {packProjectiveSurfaceRaster} from '../../../scene/index.ts';
 import { readFitsPrimary } from '@cssearth/fits';
 import {planetographicRowsToMeshLatitude} from '../../geometry/index.ts';
 import {verifyObservationSources} from '../observed-surfaces/index.ts';
-import {validateMaterialRecipe,validateRelativePath} from './recipe.ts';
+import {validateMaterialRecipe} from './recipe.ts';
+import {validateRelativePath} from '../giant/index.ts';
 /** Compose source-selected scalar/thermal surfaces and the corresponding material variants. */
 export async function prepareSpectralMaterialVariants({sourceDirectory,publicDirectory,stagingDirectory,config: input}: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown}) {
 const config = parse(input, spectralRecipe, 'spectral material recipe');

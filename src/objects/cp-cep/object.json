@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "cp-cep",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CP Cep",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 59273640
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cp-cep-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CP Cep",
+      "classification": "star",
+      "color": "#ffe4cb",
+      "distanceAu": 633954790.4,
+      "description": "A Cepheid in the Milky Way that swells and shrinks every 17.9 days.",
+      "systemName": "CP Cep system",
+      "order": 1942,
+      "context": {
+        "order": 1939
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        45486464687797500000,
+        -26826206336236960000,
+        78775864449069650000
+      ],
+      "presentationToReference": [
+        0.4796212018682278,
+        0.7154737817955437,
+        -0.5079968211334196,
+        -0.2828625485155677,
+        -0.4219591792211257,
+        -0.8613589435991896,
+        0.8306336625527254,
+        -0.5568192872325964,
+        -1.6863739140180143e-7
+      ],
+      "orbitUpReference": [
+        -0.7154737817955437,
+        0.4219591792211257,
+        0.5568192872325964
+      ],
+      "metersPerUnit": 191205290.32258064,
+      "bodyRadiusM": 59273640000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

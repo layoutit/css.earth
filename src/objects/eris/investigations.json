@@ -8,15 +8,8 @@
       "status": "included",
       "finding": "The render sphere uses the nominal 1,163 ± 6 km radius from the 6 November 2010 occultation, which the README says is consistent with a spherical body and is not a claim of a resolved shape mesh.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L7",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/manifest.json",
         "https://doi.org/10.1038/nature10550"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -26,14 +19,8 @@
       "finding": "Replaced by the measured whole-disc colour. The gray was a display convention; published colour indices and a V geometric albedo now give Eris a measured uniform colour, which the shape-only convention does not supersede.",
       "revisitWhen": "The published colour or albedo is withdrawn or shown not to describe the whole disc.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json",
-        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/docs/shape-only-material.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/main/docs/shape-only-material.md"
       ]
     },
     {
@@ -44,12 +31,6 @@
       "revisitWhen": "A disc-resolved image, a 30 m class telescope observation or a flyby is published.",
       "evidence": [
         "https://doi.org/10.1038/nature10550"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
       ]
     },
     {
@@ -59,13 +40,7 @@
       "finding": "B-V 0.823 +/-0.023, V-R 0.391 +/-0.023, V-I 0.777 +/-0.013 (section 4, weighted means over five nights in 2005; V-R stable night to night) give the uniform Color lens through the disc-integrated-color method.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0610619",
-        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/photometry/disc-color.json"
       ]
     },
     {
@@ -75,13 +50,7 @@
       "finding": "p_V 0.96 +0.09/-0.04 from the 2010 occultation radius scales the colour; the same value was already pinned in measurements.json.",
       "evidence": [
         "https://doi.org/10.1038/nature10550",
-        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/measurements.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/measurements.json"
       ]
     },
     {
@@ -92,12 +61,6 @@
       "revisitWhen": "A newer multi-epoch colour set disagrees with Carraro et al. (2006) beyond their uncertainties.",
       "evidence": [
         "https://doi.org/10.26093/cds/vizier.35460115"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
       ]
     },
     {
@@ -107,14 +70,8 @@
       "finding": "The nominal colour is linear sRGB 0.999, 0.952, 0.827. Measured with the same method: B-V +0.023, V-R +0.023 or an albedo of 1.00 put red above 1, and the method refuses the colour. B-V -0.023 gives 255, 250, 237; V-R -0.023 gives 253, 249, 235; the albedo's lower bound 0.92 gives 250, 245, 230.",
       "revisitWhen": "The colour or albedo is revised, or the shared method gains a stated rule for colours brighter than sRGB white.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/src/objects/eris/source/photometry/disc-color.json",
-        "https://github.com/layoutit/css.earth/blob/05a455edfa12b5da7a597390f556b57facbbb7c0/tools/objects/observation/disc-integrated-color.mts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/source/photometry/disc-color.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/color/disc-integrated-color.ts"
       ]
     },
     {
@@ -125,12 +82,6 @@
       "revisitWhen": "Published colours that separate Eris from Dysnomia.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0610619"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "62b79ce0b779d632320674c24fe8af450f62cf3a"
-        }
       ]
     },
     {
@@ -139,15 +90,7 @@
       "status": "included",
       "finding": "Rotation content states the 15.771 ± 0.008-day photometric period, consistent with synchronous rotation at Dysnomia's 15.78590-day orbital period; the README notes the period is content only and drives no absolute rotational ephemeris.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L17",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L33",
         "https://arxiv.org/abs/2303.13445"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -157,14 +100,7 @@
       "finding": "The README records that the adopted 15.771-day period supersedes the 25.9-hour value still present on NASA's overview page, so that value is not used.",
       "revisitWhen": "A new published determination reinstates a sub-day rotation period for Eris.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L17",
         "https://arxiv.org/abs/2303.13445"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -173,13 +109,7 @@
       "status": "included",
       "finding": "The existing vendored JPL elements determine Eris's orbital position at the shared preparation epoch, as recorded under known problems.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L17"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/README.md#L17"
       ]
     },
     {
@@ -189,14 +119,8 @@
       "finding": "Known problems record that Eris has no measured longitude origin and no established spin-pole registration, so the display pole and meridian are explicitly arbitrary.",
       "revisitWhen": "A published pole solution or longitude system for Eris allows the displayed orientation to be registered.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L13",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/eris/README.md#L17"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/README.md#L13",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/README.md#L17"
       ]
     },
     {
@@ -207,12 +131,6 @@
       "evidence": [
         "https://science.nasa.gov/resource/eris-3d-model/",
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "36198077d3d3c9548154ca9ce2c85f044cc72cdf"
-        }
       ]
     },
     {
@@ -222,13 +140,7 @@
       "finding": "Eris is placed from the direct JPL Horizons geometric state at the fixed scene epoch, retained in its moon's package as dysnomia/source/orbit/eris-epoch.txt, instead of from propagating its own osculating elements. This is the existing pattern for a parent with a moon: Haumea is placed from hiiaka/source/orbit/haumea-epoch.txt and Sylvia from romulus/source/orbit/sylvia-heliocentric.txt. Eris keeps its own dwarfPlanet element block for its orbit line. The change moved Eris by 92,802 km, 6.5e-6 of its 95.465 au heliocentric distance and about 1.3 arcsec seen from the Sun. The earlier elements osculate at JD 2461041.5 and were propagated 245 days; the direct state needs no propagation. Shape, size, material, lenses, text and datasets are unchanged.",
       "evidence": [
         "https://ssd.jpl.nasa.gov/horizons/",
-        "https://github.com/layoutit/css.earth/blob/b0539bf1a0cd83049528c0330af05d52e4541f8d/src/objects/dysnomia/source/validation/epoch-state.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-21",
-          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dysnomia/source/validation/epoch-state.json"
       ]
     },
     {
@@ -237,14 +149,19 @@
       "status": "unresolved",
       "finding": "No image resolves Eris's surface, so no disc-resolved photometric law exists. Eris keeps the shared sphere bank.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/7387444f62423f84fde33abc338b634681508d31/src/objects/eris/README.md"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/README.md"
       ],
-      "revisitWhen": "A resolved image of Eris with a fitted disk law.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
+      "revisitWhen": "A resolved image of Eris with a fitted disk law."
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"About 15.8 days\" (doi-10-3847-psj-acdd5f) differs from the LCDB V4.0 summary record 24480 period 25.9 h (U 2, synodic); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -3,12 +3,10 @@ import { LENS_VISIBILITY } from './runtime-policy.mts';
 import lensBillboardText from './prepared-lens-billboards.json?raw';
 import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
-import type { PreparedAssets } from '@cssearth/renderer/rendering/prepared-residency.ts';
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createPreparedUniverse, parseLensBillboards, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE } from './world-context-plan.mts';
-import { contextMarkerSprite } from '../src/navigation/marker-presentation.mts';
-import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
+import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
@@ -77,9 +75,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
     });
     const plainDots = new Set(plainDotIds);
-    const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS).filter(([id]) => !plainDots.has(id))
-      .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),
-        minimumDiameterPixels: asteroidIds.includes(id) ? ASTEROID_MINIMUM_PIXELS : 2.4 }]));
+    const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
+      id => asteroidIds.includes(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
     const volumeLensDescriptors = parsedDescriptors
@@ -119,19 +116,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
-    const markerPool = 'context-markers';
-    const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
-      .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
     return {
       ...universe, loadShells,
       catalogSources: () => catalogs ? [...catalogs.galaxies.sources, ...catalogs.clusters.sources, ...catalogs.nebulae.sources] : [],
-      assets: {
-        entries: [...universe.assets.entries, ...markerEntries],
-        pools: [...universe.assets.pools, { id: markerPool, retention: 'mount', capacity: markerEntries.length,
-          concurrency: 4, reuse: false, decoding: 'async' }],
-        // Markers decode through retained leaves, avoiding eager decoding of the entire pool.
-        startup: universe.assets.startup,
-      } satisfies PreparedAssets,
     };
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;

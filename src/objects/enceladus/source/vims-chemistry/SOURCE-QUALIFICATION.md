@@ -164,7 +164,7 @@ independent qualification pass. Image panels were visually inspected. Browser,
 runtime and prepared object integration remain the parent task's responsibility.
 
 Reproduction uses existing numpy/rasterio/Pillow dependencies, one process:
-`python tools/objects/acquisition/enceladus-vims-spectral.py <recipe>`.
+`python packages/bake/src/objects/acquisition/enceladus-vims-spectral.py <recipe>`.
 Run the adjacent `test_enceladus_vims_spectral.py` and then `qualify.py`.
 No dependency installation, full object bake, application build or browser job
 was run by this source lane.

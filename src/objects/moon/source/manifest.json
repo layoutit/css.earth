@@ -170,7 +170,7 @@
         "https://zenodo.org/records/4558194",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Checked-in compact numeric grid. Reproduce using tools/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
+      "acquisition": "Checked-in compact numeric grid. Reproduce using packages/bake/src/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
       "redistribution": "Adapted under CC-BY-4.0; coordinate sampling and authored palette identified.",
       "consumers": [
         "lenses"
@@ -198,7 +198,7 @@
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
         "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
       ],
-      "acquisition": "Checked-in compact lossless unit grid, reproduced by tools/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by packages/bake/src/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
       "redistribution": "Retain authors, scale and interpretation; palette colors are not observations.",
       "consumers": [
         "lenses"
@@ -393,7 +393,7 @@
       "licenseEvidence": [
         "https://doi.org/10.25346/S6/LFAVXU"
       ],
-      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_m.json",
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_m.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
         "lenses"
@@ -450,7 +450,7 @@
       "licenseEvidence": [
         "https://doi.org/10.25346/S6/LFAVXU"
       ],
-      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_anom.json",
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_anom.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
         "lenses"
@@ -507,7 +507,7 @@
       "licenseEvidence": [
         "https://doi.org/10.25346/S6/LFAVXU"
       ],
-      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-ra_sam.json",
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; packages/bake/src/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-ra_sam.json",
       "redistribution": "Scientific data with source attribution; original restored from its pin",
       "consumers": [
         "lenses"
@@ -1135,9 +1135,826 @@
           }
         ]
       }
+    },
+    {
+      "id": "grail-grgm1200a-gravity-anomaly-l660",
+      "path": "science/grail/gggrx_1200a_anom_l660.tif",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_anom_l660.tif",
+      "credit": "NASA GSFC GRAIL Level-2 team (GRGM1200A; Lemoine et al. 2014, doi:10.1002/2014GL060027); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
+      ],
+      "acquisition": "Exact public PDS GRAIL_1001 EXTRAS GeoTIFF download of the gravity anomaly map; the volume's extrinfo.txt states it holds the same data as RSDMAP GGGRX_1200A_ANOM_L660.IMG. Original float32 mGal samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "grail",
+            "evidence": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-gravity-anomaly-l660",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "grail-grgm1200a-bouguer-disturbance-l660",
+      "path": "science/grail/gggrx_1200a_boug_l660.tif",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/geotiff/gggrx_1200a_boug_l660.tif",
+      "credit": "NASA GSFC GRAIL Level-2 team (GRGM1200A; Lemoine et al. 2014, doi:10.1002/2014GL060027); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl"
+      ],
+      "acquisition": "Exact public PDS GRAIL_1001 EXTRAS GeoTIFF download of the Bouguer disturbance map; the volume's extrinfo.txt states it holds the same data as RSDMAP GGGRX_1200A_BOUG_L660.IMG. Original float32 mGal samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "grail",
+            "evidence": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-bouguer-disturbance-l660",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "lp-grs-elem-abundance-2deg",
+      "path": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.tab",
+      "credit": "T. H. Prettyman (Planetary Science Institute) and the Lunar Prospector spectrometer team (Prettyman et al. 2006, doi:10.1029/2005JE002656); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat"
+      ],
+      "acquisition": "Exact public PDS ASCII table LPGRS_HIGH1_ELEM_ABUNDANCE_2DEG of LP-L-GRS-5-ELEM-ABUNDANCE-V1.0 (volume LP_9001): weight fractions of FeO and TiO2, K and Th in ppm, with the error matrix, on 2 degree equal-area pixels. Original numeric values, not a rendered map",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "lro-lola-ldrm-16",
+      "path": "science/lola/ldrm_16.img",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.img",
+      "credit": "David E. Smith and NASA GSFC LRO LOLA team (Zuber et al. 2012, doi:10.1038/nature11216); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl"
+      ],
+      "acquisition": "Exact public PDS binary download of LDRM_16 (LRO-L-LOLA-4-GDR-V1.0, product version V2.0): per-pixel mean of the residual standard deviation of altitudes after a plane fit, 16 pixels/degree, signed 16-bit millimetres. Original numeric samples, not a rendered image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-lola-ldrm-16",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-90s80s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_90s80s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_90s80s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_90s80s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_90S80S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -90 to -80 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_90s80s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-80s70s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_80s70s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80s70s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80s70s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_80S70S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -80 to -70 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80s70s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-70s60s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_70s60s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70s60s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70s60s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_70S60S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -70 to -60 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70s60s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-60s50s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_60s50s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60s50s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60s50s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_60S50S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -60 to -50 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60s50s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-50s40s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_50s40s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50s40s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50s40s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_50S40S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -50 to -40 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50s40s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-40s30s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_40s30s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40s30s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40s30s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_40S30S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -40 to -30 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40s30s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-30s20s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_30s20s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30s20s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30s20s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_30S20S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -30 to -20 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30s20s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-20s10s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_20s10s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20s10s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20s10s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_20S10S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -20 to -10 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20s10s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-10s00s",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_10s00s_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10s00s_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10s00s_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_10S00S_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, -10 to 0 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10s00s_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-00n10n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_00n10n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_00N10N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 0 to 10 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-10n20n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_10n20n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10n20n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10n20n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_10N20N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 10 to 20 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10n20n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-20n30n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_20n30n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20n30n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20n30n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_20N30N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 20 to 30 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20n30n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-30n40n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_30n40n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30n40n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30n40n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_30N40N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 30 to 40 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30n40n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-40n50n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_40n50n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40n50n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40n50n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_40N50N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 40 to 50 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40n50n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-50n60n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_50n60n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50n60n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50n60n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_50N60N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 50 to 60 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50n60n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-60n70n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_60n70n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60n70n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60n70n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_60N70N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 60 to 70 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60n70n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-70n80n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_70n80n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70n80n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70n80n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_70N80N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 70 to 80 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70n80n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-80n90n",
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_80n90n_002.tab",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.tab",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.lbl"
+      ],
+      "acquisition": "Exact public PDS ASCII table GLOBAL_CUMUL_AVG_CYL_80N90N_002.TAB of LRO-L-DLRE-5-GCP-V1.0 (product version 1): bin-average channel and bolometric brightness temperatures per 0.5 degree cell and 0.25 hour of local time, 80 to 90 degrees latitude, 2009-07-05 to 2015-04-01. Read only by the grid converter",
+      "redistribution": "Not redistributed; the two compact grids derived from it are",
+      "consumers": [
+        "gcp-source"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
-  "generatedIntermediates": [],
+  "generatedIntermediates": [
+    {
+      "id": "diviner-gcp-tbol-max-compact",
+      "path": "science/diviner-gcp/tbol-max-compact.tif",
+      "generator": "node packages/bake/cli/diviner-gcp-grid.mts src/objects/moon/source/science/diviner-gcp/prepare-tbol.json (packages/bake/src/objects/acquisition/diviner-gcp.ts)",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "acquisition": "Float32 GeoTIFF, 720 x 360, north up, left edge -180 degrees, NaN without a value: the warmest 0.25 hour bin-average bolometric temperature of each 0.5 degree cell, selected from the 18 GCP strips; no fitting or filling. Regenerated byte for byte by its generator",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Grid selected from the archived GCP bin averages by the recorded converter."
+          }
+        ]
+      }
+    },
+    {
+      "id": "diviner-gcp-tbol-noon-compact",
+      "path": "science/diviner-gcp/tbol-noon-compact.tif",
+      "generator": "node packages/bake/cli/diviner-gcp-grid.mts src/objects/moon/source/science/diviner-gcp/prepare-tbol.json (packages/bake/src/objects/acquisition/diviner-gcp.ts)",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/",
+      "credit": "J.-P. Williams and the UCLA LRO Diviner team (Williams et al. 2017, doi:10.1016/j.icarus.2016.08.012); NASA PDS Geosciences Node",
+      "acquisition": "Float32 GeoTIFF, 720 x 360, north up, left edge -180 degrees, NaN without a value: the mean of the four quarter-hour bin averages from 11:30 to 12:30 that hold data (bins centred 11:37.5, 11:52.5, 12:07.5 and 12:22.5), for each 0.5 degree cell, selected from the 18 GCP strips; no fitting or filling. Regenerated byte for byte by its generator",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Grid selected from the archived GCP bin averages by the recorded converter."
+          }
+        ]
+      }
+    }
+  ],
   "documents": [
     {
       "path": "editorial/factsheet-review.json",
@@ -1652,6 +2469,379 @@
         "kind": "local",
         "reason": "Project-authored presentation link, read by site/prepare-body-overview.mts."
       }
+    },
+    {
+      "path": "science/grail/gggrx_1200a_anom_l660.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
+      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the lens reads.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-gravity-anomaly-l660",
+            "role": "material",
+            "evidence": "Detached PDS3 label of the RSDMAP product whose values the EXTRAS GeoTIFF carries."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/grail/gggrx_1200a_boug_l660.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl",
+      "purpose": "Original PDS3 label of the RSDMAP product: identity, units (mGal), GRGM1200A model details, 1738.0 km reference sphere, principal-axis frame and 16 pixel/degree grid registration. It governs the values of the EXTRAS GeoTIFF the lens reads.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-grail-grgm1200a-bouguer-disturbance-l660",
+            "role": "material",
+            "evidence": "Detached PDS3 label of the RSDMAP product whose values the EXTRAS GeoTIFF carries."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/grail/extrinfo.txt",
+      "origin": "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/extrinfo.txt",
+      "purpose": "GRAIL_1001 EXTRAS description: the GeoTIFF directory holds non-PDS-standard copies with the same data as the RSDMAP maps, and users should refer to the RSDMAP labels."
+    },
+    {
+      "path": "science/lp-grs/lpgrs_high1_elem_abundance_2deg.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_2deg.lbl",
+      "purpose": "Original PDS3 label of the 2 degree table: identity, producer, row count and size, the column list and its units, and the high-altitude (100 km) mission phase.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
+            "role": "material",
+            "evidence": "Detached PDS3 label of the table the surface-element lenses read."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/lp-grs/lpgrs_elem_abundance.fmt",
+      "origin": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_elem_abundance.fmt",
+      "purpose": "Original PDS3 format file the label points to (^STRUCTURE): the START_BYTE, BYTES and description of each of the 61 columns, which the reader uses to cut each row.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lp-grs-elem-abundance-2deg",
+            "role": "material",
+            "evidence": "Format file of the table the surface-element lenses read."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/lola/ldrm_16.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl",
+      "purpose": "Original PDS3 label of LDRM_16: identity, mission phases through LRO_SM_17, method (residual standard deviation of three successive shots after a plane fit to 5 to 15 returns, 30 to 120 m baseline, averaged per pixel), millimetre scaling, missing constant and grid registration.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-lola-ldrm-16",
+            "role": "material",
+            "evidence": "Detached PDS3 label the roughness reader checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_90s80s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_90s80s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_80s70s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80s70s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_70s60s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70s60s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_60s50s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60s50s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_50s40s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50s40s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_40s30s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40s30s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format. Its MINIMUM_LATITUDE and MAXIMUM_LATITUDE are exchanged; the recipe records it.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_30s20s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30s20s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_20s10s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20s10s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_10s00s_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10s00s_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_00n10n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_00n10n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_10n20n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_10n20n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_20n30n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_20n30n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_30n40n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_30n40n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_40n50n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_40n50n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_50n60n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_50n60n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_60n70n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_60n70n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_70n80n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_70n80n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/global_cumul_avg_cyl_80n90n_002.lbl",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/global_cumul_avg_cyl_80n90n_002.lbl",
+      "purpose": "Original PDS3 label of one GCP strip: identity, time span, latitude bounds, row count and pointer to the column format.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Detached PDS3 label of a GCP strip the converter checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/dlre_gcp.fmt",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/label/dlre_gcp.fmt",
+      "purpose": "Original PDS3 format file of the GCP tables: the 11 columns, their units and descriptions.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-moon-lro-diviner-gcp",
+            "role": "material",
+            "evidence": "Format file of the GCP tables."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/diviner-gcp/prepare-tbol.json",
+      "purpose": "Converter recipe: the 18 strips, the noon window (11:30 to 12:30, at least one of its four bins) and the maximum, and the one known label defect."
+    },
+    {
+      "path": "science/diviner-gcp/tbol-receipt.json",
+      "purpose": "Converter receipt: SHA-256 of every strip and label read, and of the two grids written, with cell counts, ranges and the local-time histogram of the maximum."
     }
   ]
 }

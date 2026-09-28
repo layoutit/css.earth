@@ -1,0 +1,59 @@
+{
+  "id": "source-moon-lro-lola-ldrm-16",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LRO LOLA surface roughness, 16 pixel/degree (LDRM_16 V2.0, LRO-L-LOLA-4-GDR-V1.0)",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldrm_16::1.0"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.img"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.lbl",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldrm_16.img",
+      "label": "IMG"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/inputs/47"
+    },
+    {
+      "path": "src/objects/moon/source/manifest.json",
+      "locator": "/documents/57"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "David E. Smith and the NASA GSFC LRO LOLA team; the label cites Zuber et al. (2012), Nature 486, 378-381, doi:10.1038/nature11216. NASA PDS Geosciences Node.",
+      "scope": "The LDRM_16 map.",
+      "evidence": "PDS3 label PRODUCER_FULL_NAME and DESCRIPTION [ZUBERETAL2012]; LOLA ref.cat."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    },
+    {
+      "kind": "limitation",
+      "text": "Roughness is the residual standard deviation of altitudes from three successive laser shots after fitting a plane to 5 to 15 profile returns, averaged per pixel; the baseline varies from 30 to 120 m with orbital velocity, detection and altitude, so values are not tied to one scale. Data through mission phase LRO_SM_17 (2009-07-13 to 2011-12-11). -32768 marks pixels without a value.",
+      "scope": "Method, baseline and coverage.",
+      "evidence": "PDS3 label DESCRIPTION and IMAGE object."
+    }
+  ]
+}

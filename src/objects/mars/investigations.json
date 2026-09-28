@@ -8,16 +8,10 @@
       "status": "included",
       "finding": "The visible surface is the 21,339 by 10,670 MDIM 2.1 mosaic at about 1 km per pixel with NASA Ames colour processing, resampled directly from its checked bytes with no exposure or sharpening curve.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L9",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L90",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L9",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L90",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/source/manifest.json",
         "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -27,13 +21,7 @@
       "finding": "The first column of the MDIM 2.1 colour source has mean brightness 4 against about 100, so a thin dark line can show along 180 degrees east at close zoom.",
       "revisitWhen": "A corrected release of the Viking colour mosaic removes the dark first column.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L40"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L40"
       ]
     },
     {
@@ -42,16 +30,10 @@
       "status": "included",
       "finding": "The elevation display is the MOLA pseudo-colour shaded relief with its published palette legend, stitched from NASA Trek zoom-3 WMTS tiles and pinned in the source manifest; it is false colour.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L10",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L37",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L92",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L10",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L37",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L92",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/source/manifest.json"
       ]
     },
     {
@@ -60,16 +42,10 @@
       "status": "included",
       "finding": "The infrared display is a USGS Astrogeology WMS GetMap of the global day-IR mosaic taken on 2026-09-16 and pinned in the manifest, shown as a qualified visual representation of daytime thermal response rather than a calibrated temperature retrieval or a single observation date.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L11",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L37",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L94",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/source/manifest.json"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L11",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L37",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L94",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/source/manifest.json"
       ]
     },
     {
@@ -79,13 +55,7 @@
       "finding": "The pinned mosaic (sha256 1e9123a6...) has fully black rows 0-28, north of about 87.5 degrees north, and rows 2034-2047, south of about 88.8 degrees south, with 2.6 percent zero samples overall; the shared raster lane has no source-validity mask, so those bands render black under the shared lighting.",
       "revisitWhen": "A validity mask accompanies the mosaic, or a gap-free day-IR product is released.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L36"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L36"
       ]
     },
     {
@@ -94,15 +64,9 @@
       "status": "included",
       "finding": "The atmosphere material is a 32-frame phase bank derived from the authored scattering record, atmosphere height 76.98 km over a 3,386.19 km source radius with Rayleigh and Mie coefficients, scale heights and an average ground reflectance of 0.1; it is a display approximation, not an epoch-specific observation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L12",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L38",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L114"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L12",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L38",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L114"
       ]
     },
     {
@@ -111,13 +75,7 @@
       "status": "included",
       "finding": "The reflectance spectrum and temperature-pressure profile are prepared from a pinned PSG configuration and raw I/F response as static SVG outputs; the browser performs no PSG request or scientific calculation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L127"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L127"
       ]
     },
     {
@@ -126,15 +84,9 @@
       "status": "included",
       "finding": "Named features use the Mars centre-point export, snapshot 2026-09-11 and public domain per its FGDC metadata; preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and folds repeated rows, and labels appear at the closest zoom only.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L14",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L30",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L14",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L30",
         "https://planetarynames.wr.usgs.gov/Page/MARS/target"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -143,13 +95,7 @@
       "status": "included",
       "finding": "14 landing, touchdown or impact sites and 2 published traverse paths are labelled beside the IAU names, each coordinate quoting the NASA NSSDCA, PDS, LROC, agency or paper page it was read from with the stated latitude kind and longitude convention.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L32"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L32"
       ]
     },
     {
@@ -158,13 +104,7 @@
       "status": "included",
       "finding": "644 labelled names carry a caption note from the CC BY-SA 4.0 Wikipedia lead summary retrieved 2026-09-12, joined through Wikidata's Gazetteer id property and pinned with the article link and revision.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L34"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L34"
       ]
     },
     {
@@ -173,14 +113,8 @@
       "status": "included",
       "finding": "The navigation marker uses the ESA/Hubble CC BY 4.0 full-disc portrait, cropped and resized for the prepared navigation atlas with the full source credit preserved in the scene.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L98",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L98",
         "https://esahubble.org/images/heic1609a/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
       ]
     },
     {
@@ -190,13 +124,7 @@
       "finding": "The README records that the Hubble portrait is no longer used as a limb-brightness reference; it serves only the navigation marker.",
       "revisitWhen": "A calibrated full-disc observation is adopted as a limb-brightness reference for Mars.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L103"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L103"
       ]
     },
     {
@@ -205,14 +133,8 @@
       "status": "included",
       "finding": "The recipe declares 3,396.19 km equatorial and 3,376.20 km polar radii from the USGS Viking MDIM product and the pinned JPL physical parameters; the 25.19-degree tilt and 1.02595676-day sidereal rotation are recorded for presentation while the world frame, pole and prime meridian come from the IAU/WGCCRE model in the astronomy package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L50",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L62"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L50",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L62"
       ]
     },
     {
@@ -221,13 +143,7 @@
       "status": "included",
       "finding": "Build-time editorial information comes from the NASA Science topic and its structured block endpoint, committed as a prepared snapshot, with factsheet values citing the pinned JPL references.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L139"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L139"
       ]
     },
     {
@@ -238,16 +154,6 @@
       "evidence": [
         "https://www.nature.com/articles/s41586-023-06601-8"
       ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        },
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
-      ],
       "revisitWhen": "A numerical radial profile and a selected interpretation, including the molten-layer dispute, are qualified for the existing interior view."
     },
     {
@@ -257,13 +163,7 @@
       "finding": "The mosaic retains its collective Viking-orbiter capture credit; the catalogue distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors, and the Missions tab presents that limit without guessing.",
       "revisitWhen": "A source identifies the individual orbiter contributions to the pinned mosaic.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L166"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L166"
       ]
     },
     {
@@ -273,29 +173,17 @@
       "finding": "The lane change was verified with package, source-closure and browser conformance checks listed in its pull request, but no dated oracle report is cited for the new lane; the source and acquisition records identify every input.",
       "revisitWhen": "A dated oracle run for the Mars raster lane is recorded in this package.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L26"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "ade60d022899e38561cb1b56027ce2a299e444b9"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md#L26"
       ]
     },
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17\u00b0, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
+      "finding": "Mean Mars surface phase function from OMEGA and CRISM with the atmosphere removed (Vincendon 2013: Hapke w 0.85, roughness 17°, b 0.12, c 0.6, B0 1, h 0.05), one law for all channels as the paper finds the shape wavelength-independent.",
       "evidence": [
         "https://doi.org/10.1016/j.pss.2012.12.005",
         "https://arxiv.org/abs/1208.4518"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
       ]
     },
     {
@@ -306,13 +194,7 @@
       "evidence": [
         "https://ui.adsabs.harvard.edu/abs/2006Icar..184..401S/abstract"
       ],
-      "revisitWhen": "An open copy of the tables, or a need for a whole-disc law that includes the atmosphere over the disc.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
-      ]
+      "revisitWhen": "An open copy of the tables, or a need for a whole-disc law that includes the atmosphere over the disc."
     },
     {
       "id": "limb-halo",
@@ -322,12 +204,6 @@
       "evidence": [
         "https://psg.gsfc.nasa.gov/images/help/handbook.pdf",
         "https://hub.docker.com/r/nasapsg/psg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
       ]
     },
     {
@@ -339,12 +215,6 @@
       "evidence": [
         "https://sdc.emiratesmarsmission.ae/",
         "https://www.hou.usra.edu/meetings/tenthmars2024/pdf/3197.pdf"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "7387444f62423f84fde33abc338b634681508d31"
-        }
       ]
     },
     {
@@ -353,15 +223,9 @@
       "status": "excluded",
       "finding": "Removed with atmosphere/model.json; the disc takes Vincendon's law.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c83b4e4f1831e259e982d823e01398eeb957906e/src/preparation/raster/lighting-banks.ts"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists.",
-      "checked": [
-        {
-          "date": "2026-09-25",
-          "commit": "c83b4e4f1831e259e982d823e01398eeb957906e"
-        }
-      ]
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "sim3292-geology",
@@ -370,12 +234,6 @@
       "finding": "Selected the published 44-unit global polygon map and its original legend fills; all 1,311 polygons decode through the existing categorical reader.",
       "evidence": [
         "https://pubs.usgs.gov/sim/3292/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
       ]
     },
     {
@@ -385,12 +243,6 @@
       "finding": "Six unsmoothed 5-degree concentration maps retain negative estimates and product-specific missing bins. Water equivalent is hydrogen expressed as H2O; thorium converts weight percent to ppm.",
       "evidence": [
         "https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
       ]
     },
     {
@@ -400,12 +252,6 @@
       "finding": "Degree/order 134 radial field evaluated by pinned pyshtools on the 3393.5 km sphere of Figure 6b, with zero neutral and no invented small-scale field.",
       "evidence": [
         "https://zenodo.org/records/3876714"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
       ]
     },
     {
@@ -415,12 +261,6 @@
       "finding": "Selected Figure 2 grid Mars-thick-Khan2022-39-2900-2900.dat: uniform density 2900 kg/m3 and 39 km under InSight. It is one published example, not a unique reference solution.",
       "evidence": [
         "https://zenodo.org/records/6477509"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
       ]
     },
     {
@@ -430,12 +270,6 @@
       "finding": "The published regional composite is a separate interpretation combining several instruments, not the GRS hydrogen measurement now drawn. It remains outside this surface release.",
       "evidence": [
         "https://pubs.usgs.gov/publication/70233244"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
       ],
       "revisitWhen": "The native numerical composite, coverage and score semantics are acquired and qualified."
     },
@@ -447,12 +281,6 @@
       "evidence": [
         "https://ode.rsl.wustl.edu/mars/"
       ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
-      ],
       "revisitWhen": "A particular downloadable map, its registration and measurement units are selected."
     },
     {
@@ -463,29 +291,240 @@
       "evidence": [
         "https://www.msss.com/msss_images/subject/weather_reports.html"
       ],
-      "checked": [
-        {
-          "date": "2026-09-26",
-          "commit": "091ac9fb57538fad8f5ab5b7ef22a7e41fd2e021"
-        }
-      ],
       "revisitWhen": "A matched dated pair is chosen and prepared with its archive coverage."
     },
     {
       "id": "usgs-numeric-surfaces",
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
-      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid.",
+      "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid. The evidence records the tested file hashes.",
       "evidence": [
-        "evidence/usgs-numeric/numeric-checks.json",
-        "README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "4ac6f0aefe965acc4cd9bb1cea65d12e691e4343",
-          "scope": "Working changes above the named base; evidence records tested file hashes."
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/evidence/usgs-numeric/numeric-checks.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md"
+      ]
+    },
+    {
+      "id": "tes-bolometric-albedo",
+      "subject": "MGS TES global bolometric Lambert albedo, USGS 7410 m GeoTIFF",
+      "status": "included",
+      "finding": "The USGS float32 GeoTIFF (2,880 by 1,440 cells, 8 pixels per degree, simple cylindrical on a 3,396 km sphere, ASU product GLOBAL_ALBEDO_8PPD, Christensen et al. 2001) is read natively by the existing scientific GeoTIFF reader. Measured values span 0.061 to 0.32. The label declares no missing value, but 131,653 cells (3.2 percent) poleward of about 87 degrees hold exactly 0.06, a constant fill beyond TES coverage; the next-lowest value is 0.061. A quality mask on the same file withholds values below 0.0605. It is a numeric reflectance quantity, distinct from the colorized Viking visible mosaic.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m",
+        "https://doi.org/10.1029/2000JE001370"
+      ]
+    },
+    {
+      "id": "tes-thermal-inertia-putzig-2007",
+      "subject": "MGS TES nightside thermal inertia, Putzig and Mellon (2007), PDS MGS-M-TES-5-TIMAP-V1.0",
+      "status": "included",
+      "finding": "This is the selected numeric original: GLOBAL_TI_NIGHT_2007.IMG, 7,200 by 3,600 MSB 16-bit integers in tiu (J m-2 K-1 s-1/2), 20 pixels per degree from -180 to 180 degrees east, with an interpolation mask. It differs from the existing thermal lens, which is qualitative THEMIS daytime infrared brightness rather than thermal inertia. No shared reader accepts it: pds-image requires LSB integers centred on 180 degrees east with a MISSING_CONSTANT and UNIT, and this label has neither; its null value 0 is stated only on the producer page. The 2007 maps supersede the 2003 map and the 8 pixel-per-degree Christensen et al. (2001) inertia grid. The shared pds3-grid reader now reads the product and its interpolation mask; the thermal-inertia lens shows it with interpolated cells withheld.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2007.05.013",
+        "https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat",
+        "https://pds-geosciences.wustl.edu/missions/mgs/tes-timap.html",
+        "https://se.psi.edu/inertia/2007/"
+      ]
+    },
+    {
+      "id": "tes-bandfield-2002-mineral-abundances",
+      "subject": "MGS TES plagioclase, high-Ca pyroxene and sheet silicate/high-Si glass abundances, Bandfield (2002)",
+      "status": "deferred",
+      "finding": "The numeric values come from ASU's JMARS map server as VICAR REAL exports (1,440 by 720 cells, 4 pixels per degree, 0 to 360 degrees east, little-endian float), with -1 for no data and exact zeros over high-albedo surfaces. Trek and the ASU PNGs are colorized renders and are not used. No shared reader decodes a VICAR REAL global map, and the server truncated one of three first downloads, so an acquisition needs a byte-count check. The zero-valued dusty regions need the paper's masking rule before they can be shown as measured abundance.",
+      "revisitWhen": "The paper’s masking rule for zero cells is read and recorded (the shared VICAR REAL reader now exists).",
+      "evidence": [
+        "https://mars.asu.edu/data/tes_plagioclase/",
+        "https://mars.asu.edu/data/tes_clinopyroxene/",
+        "https://mars.asu.edu/data/tes_silicates/",
+        "https://doi.org/10.1029/2001JE001510"
+      ]
+    },
+    {
+      "id": "tes-dust-cover-index",
+      "subject": "MGS TES dust cover index, Ruff and Christensen (2002)",
+      "status": "included",
+      "finding": "The author's page publishes floating-point ISIS and VICAR versions of the 16 pixel-per-degree map (5,760 by 2,880 cells, mean emissivity at 1350-1400 per cm). The ISIS qube label carries no map projection or missing value; the grid comes from the ASU catalogue page. The paper classes 0.940 or less as dust-covered and 0.962 or more as dust-free. The TIF, JPG and PNG versions are colorized. No shared reader decodes either numeric file. The shared vicar-grid reader now reads the VICAR REAL file (dci_lo_ice_dust_16ppd_shifted.vicar); its left edge at 180 degrees W reproduces the paper’s Arabia, Syrtis Major and Mare Erythraeum values, and the exact 0.85 polar fill is withheld.",
+      "evidence": [
+        "https://www.mars.asu.edu/~ruff/DCI/dci.html",
+        "https://mars.asu.edu/data/tes_ruffdust/",
+        "https://doi.org/10.1029/2001JE001580"
+      ]
+    },
+    {
+      "id": "mola-roughness-kreslavsky",
+      "subject": "MOLA kilometre-scale roughness, Kreslavsky and Head (2000), Zenodo 15734221",
+      "status": "deferred",
+      "finding": "Numeric originals exist: E8R0, E8R1 and E8R2.raw, 2,880 by 1,440 bytes at 8 pixels per degree for the 0.6, 2.4 and 9.2 km baselines, CC BY 4.0. The read-me gives C = (1/l) 10^((DN-511)/80), the interquartile range of profile curvature. It recommends the colour composite for qualitative use, gives no missing-value code, and the files have no label. Trek and ASU show only the RGB composite. No shared reader decodes a headerless byte grid.",
+      "revisitWhen": "A shared headerless-grid reader with an authored exponential DN transform exists, and the missing-value code is confirmed.",
+      "evidence": [
+        "https://zenodo.org/records/15734221",
+        "https://doi.org/10.1029/2000JE001259"
+      ]
+    },
+    {
+      "id": "trek-tes-display-renders",
+      "subject": "NASA Mars Trek TES and MOLA roughness layers",
+      "status": "excluded",
+      "finding": "Trek serves these as display tiles and renders; the numeric values are taken from their originals (USGS, PDS, ASU and Zenodo) in the entries above.",
+      "revisitWhen": "Trek publishes the numeric originals with labels.",
+      "evidence": [
+        "https://trek.nasa.gov/mars/"
+      ]
+    },
+    {
+      "id": "trek-landform-layers",
+      "subject": "Trek landform and detection layers as a group (split into one entry per catalogue on 2026-09-27)",
+      "status": "included",
+      "finding": "Earlier finding (checked 2026-09-27 at 56ebf377): Mars supports IAU named features and curated landing sites and traverses, not dataset point or line layers; placing thousands of unnamed survey points in the named-feature lane would misrepresent them. Update: the two polygon layers need no new capability and are included as categorical lenses (dune-fields-hayward-2007, chloride-deposits-osterloo-2010). The point and line layers stay deferred, each in its own entry below. Second update: the point and line layers are now included too, through the cell-presence mode and the raster underlay; each has its own entry.",
+      "evidence": [
+        "https://trek.nasa.gov/mars/"
+      ]
+    },
+    {
+      "id": "dune-fields-hayward-2007",
+      "subject": "Mars Global Digital Dune Database MC2-MC29, Hayward et al. (2007), USGS OFR 2007-1158",
+      "status": "included",
+      "finding": "547 dune-field polygons, 65 N to 65 S, USGS public domain. The USGS shapefile names the flattened Mars 2000 ellipsoid in its .prj while its metadata calls the latitudes aerocentric, and neither shared polygon reader accepts a flattened ellipsoid. The Trek layer asked for the Mars 2000 sphere returns the same 547 polygons vertex for vertex, so the Enceladus route (geology-grid.py on the ArcGIS response) is used. Grid: 4,096 by 2,048 cells, pixel-centre inclusion, 70,230 km2 against the database's 69,750 km2; 89 fields (1.2% of the area) are smaller than one cell centre and do not show. Colour: the Trek layer's fill, #df73ff. The grid keeps the authors' confidence class (1: 424, 2: 115, 3: 8 fields) under one colour. Update: both polygon lenses are now drawn over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay) instead of the no-data grid; the chloride lens joins the Aqueous minerals group.",
+      "evidence": [
+        "https://pubs.usgs.gov/of/2007/1158/",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Dune_Field/MapServer/0"
+      ]
+    },
+    {
+      "id": "chloride-deposits-osterloo-2010",
+      "subject": "Chloride-bearing materials from THEMIS, Osterloo et al. (2010), NASA Trek layer",
+      "status": "included",
+      "finding": "642 deposit polygons in the Mars 2000 sphere, the layer's own source reference; the paper expanded the known sites from about 200 to about 640. Same route as the dune fields. 347 deposits (13.7% of the mapped area) are smaller than one 5.2 km cell centre and do not show; 676 cells hold the rest. The Trek renderer draws outlines only (#bee8ff); the fill is the layer's published jC_fillclr attribute, #009933, which every record carries. The DCS_spectr field (1 to 5) is not used because its meaning has not been read in the paper. The authors' own shapefile release, reportedly with the paper, was not retrieved: Wiley refused automated access. Update: both polygon lenses are now drawn over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay) instead of the no-data grid; the chloride lens joins the Aqueous minerals group.",
+      "evidence": [
+        "https://doi.org/10.1029/2010JE003613",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer/0"
+      ]
+    },
+    {
+      "id": "valley-networks-hynek-2010",
+      "subject": "Valley networks, Hynek et al. (2010), NASA Trek layers Hynek_Valleys and Hynek_Valley_Networks",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 59,419 polyline segments with Strahler order (VNOrder 1 to 7) and 9,879 whole networks, Mars 2000 geographic degrees, about 720,000 km of valleys on the sphere. The source maps centrelines and gives no width; the Trek symbol is a 2-point screen stroke. No existing route draws a line: the categorical grid paints polygons only and the feature labels cap at about 40 visible names. At one 5.2 km cell per crossed cell the map covers 163,905 cells and reproduces the published pattern (output preview). The paper says the map was released on USGS PIGWAD; that original was not located. Update: Included as one category from Hynek_Valley_Networks (9,879 networks, 10 pages; the 59,419-segment layer carries the same vertices and Strahler order, but orders meet at junctions and a cell cannot hold two). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 163,901 cells; all but 3 of 1,172,096 vertices lie in a marked cell (the 3 sit on a cell edge). Colour: the Trek line symbol #edffe8. Needs the drafted null class field, because the layer has no class attribute. The paper's USGS PIGWAD release was not located.",
+      "evidence": [
+        "https://doi.org/10.1029/2009JE003548",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valleys/MapServer/0",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hynek_Valley_Networks/MapServer/0"
+      ]
+    },
+    {
+      "id": "gullies-harrison-2015",
+      "subject": "Global distribution of gullies, Harrison et al. (2015), Trek layer Gullied_Landform_Survey_2015",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 4,978 points (Mars 2000 sphere, east-positive -180 to 180) with setting and orientation (poleward 2,739, equatorward 1,166, east or west 797, none 276); the layer's jC_fillclr attribute colours the orientation classes. A point has no published footprint, so painting it on the texture would invent a size, and the feature labels cannot show thousands of unnamed points. Journal supplement not retrieved. Update: Included. 4,978 points in four orientation classes coloured by the layer's jC_fillclr attribute (pole-facing #00ffff, equator-facing #ff0000, east or west #ffff00, none #cc00cc). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 4,771 cells; 34 cells hold two orientations and take a declared shared class (white, ours). Journal supplement not retrieved.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2015.01.022",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/3"
+      ]
+    },
+    {
+      "id": "glacier-like-forms-souness-2012",
+      "subject": "Glacier-like forms, Souness et al. (2012), Trek layer Glacier-like_Forms_GLFs_2012",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 1,309 points (727 north, 582 south) with head, terminus and centre coordinates and measured length, width and area; most are 1 to 10 km long, below or near one 5.2 km cell. Same gap as the gullies. The head-to-terminus line with the measured width would be a source-backed footprint, but no route draws it. Update: Included. 1,309 points at each GLF's measured centre, colour #00ccff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 1,193 cells. The measured head-to-terminus line and width are not drawn.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2011.10.020",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1"
+      ]
+    },
+    {
+      "id": "recessional-glfs-brough-2016",
+      "subject": "Recessional glacier-like forms, Brough et al. (2016), Trek layer Recessional_GLF_Options_2016",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 436 points (197 north, 239 south) with the same measured fields as the GLF inventory. Same gap as the gullies; it would join a glacial-landforms group with the GLFs. Update: Included. 436 points, colour #ff33cc from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 407 cells.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2016.03.006",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/4"
+      ]
+    },
+    {
+      "id": "glacial-valleys-fassett-2010",
+      "subject": "Supraglacial and proglacial valleys, Fassett et al. (2010), Trek layer Glacial_Valleys_2010",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 102 points with no attributes beyond a symbol; the valleys themselves are published as points, not traces. Same gap as the gullies. Update: Included. 102 points (the catalogue publishes each valley as a point), colour #ffffff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 101 cells.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2010.02.021",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/0"
+      ]
+    },
+    {
+      "id": "alluvial-fans-moore-kraal",
+      "subject": "Large alluvial fans, Moore and Howard (2005) and Kraal et al. (2008), Trek layer FanSurvey_2005_2008",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 44 points (31 and 13) with fan labels, area, relief, gradient and length. Same gap as the gullies; the small named set could also be feature labels, but those appear on the photograph lenses, not as a lens of their own. Update: Included. 44 points, colour #006633 from jC_fillclr; this dark green sets the underlay brightness (0.4 keeps it 16.6 OKLab units from 95% of the terrain). Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 44 cells.",
+      "evidence": [
+        "https://doi.org/10.1029/2004JE002352",
+        "https://doi.org/10.1016/j.icarus.2007.09.028",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/2"
+      ]
+    },
+    {
+      "id": "hydrous-minerals-carter-2013",
+      "subject": "Hydrous mineral detections from CRISM and OMEGA, Carter et al. (2013), Trek layer",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 1,648 points (CRISM 1,208 red, OMEGA 440 blue in the layer's attributes). At one cell per point, 177 cells hold both instruments; the rule for a shared cell would have to be declared. Same gap as the gullies. Journal supplement not retrieved (Wiley refused automated access). Update: Included. 1,648 points by instrument, CRISM #ff0000 and OMEGA #0099ff from jC_fillclr. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 1,461 cells; 177 hold both instruments and take a declared shared class (white, ours). Journal supplement not retrieved (Wiley refused automated access).",
+      "evidence": [
+        "https://doi.org/10.1029/2012JE004145",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Hydrous_Mineral_Detections_OMEGA_CRISM_clon0/MapServer/0"
+      ]
+    },
+    {
+      "id": "aqueous-minerals-ehlmann-edwards-2014",
+      "subject": "Aqueous mineral distribution, Ehlmann and Edwards (2014), Trek layer",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 4,572 points in five classes (phyllosilicate 3,441, sulfate 387, silica 364, chloride 344, carbonate 36) with per-class colours in the layer's attributes, compiled from CRISM, OMEGA and THEMIS. 11 cells would hold two classes. Same gap as the gullies. Its chloride points overlap the Osterloo deposits, which are included as polygons. Update: Included. 4,572 points in five classes coloured by jC_fillclr (phyllosilicate #0099ff, sulfate #ff6699, silica #9900cc, chloride #ffff00, carbonate #33cc00), the colours the Trek description names. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 2,373 cells; 11 hold two classes and take the shared class (white, ours).",
+      "evidence": [
+        "https://doi.org/10.1146/annurev-earth-060313-055024",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/Aquieous_Mineral_Distribution_Options_clon0/MapServer/0"
+      ]
+    },
+    {
+      "id": "rsl-gullies-new-icy-craters",
+      "subject": "RSLs, fresh gullies, new and icy craters, Trek layer compiled from Daubar et al. (2013), Dundas et al. (2014, 2015), McEwen et al. (2014) and Ojha et al. (2014)",
+      "status": "included",
+      "finding": "Earlier finding (2026-09-27): 508 HiRISE-located points with planetocentric latitude (LAT_oc): new craters 365, RSL 26 confirmed and 34 partial, active gullies 34, dune gullies 27, icy impact sites 22. The renderer symbols are picture markers per type. Same gap as the gullies. Update: Included as its own lens, not in the water group: 365 of the 508 sites are new impact craters. Trek draws every type in #d3ffbe and tells them apart by symbol shape, which a cell cannot carry, so the lens colours the four source catalogues (the layer's Ref field) with our palette, validated all-pairs; a six-type palette failed the normal-vision floor. Drawn with geology-grid.py's cell-presence mode: one 5.2 km cell per catalogued point (every cell a line crosses for the valleys), no size or width drawn, over the Viking mosaic in grey at 0.35 brightness, 6 bits per channel (raster underlay). 489 cells; 18 hold two catalogues (16 are ice-exposing craters also listed as new craters) and take the shared class (white, ours).",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2013.04.009",
+        "https://doi.org/10.1002/2013JE004482",
+        "https://doi.org/10.1016/j.icarus.2014.05.013",
+        "https://doi.org/10.1038/ngeo2014",
+        "https://doi.org/10.1016/j.icarus.2013.12.021",
+        "https://trek.nasa.gov/mars/trekarcgis/rest/services/RSLs_Gullies_New_IcyCraters_clon0/MapServer/0"
+      ]
+    },
+    {
+      "id": "catalogue-points-as-feature-labels",
+      "subject": "Surface-feature labels (sites or landmarks) as the route for catalogue points",
+      "status": "excluded",
+      "finding": "Feature rows are named labels with a dot, shown only on the lenses the features recipe lists (visible, elevation, thermal), admitted by overlap with about 40 visible at once and only when zoomed in. A distribution of thousands of unnamed detections cannot be read that way, and it would crowd the IAU names. Site kinds are also fixed to landers, impacts, sample sites and traverses.",
+      "revisitWhen": "A feature layer can be scoped to one lens and draw unlabelled markers.",
+      "evidence": [
+        "https://trek.nasa.gov/mars/"
+      ]
+    },
+    {
+      "id": "catalogue-underlay-brightness",
+      "subject": "Underlay brightness for the eleven catalogue lenses (presentation choice)",
+      "status": "included",
+      "finding": "One underlay for every catalogue lens: the Viking colour mosaic as Rec. 709 grey at 0.35 brightness, keeping 6 bits per channel. Grey and 6 bits keep each lens lossless at about 2.0 MB at the 4,096 x 2,048 bake canvas, against 7.6 MB for the colour mosaic at 0.4 and 3.5 MB for 8-bit grey; 5 bits (1.3 MB) left visible blotches in the dimmed terrain. 0.35 is the brightest 0.05 step at which every legend colour stays at least 15 OKLab units (the dataviz normal-vision floor) from 95% of the grey terrain; the limit is the alluvial-fan green #006633 (15.7 at 0.35, 13.8 at 0.4, 18.0 at 0.3). Measured 2026-09-28 on the Viking MDIM 2.1 colour mosaic resampled to 1,024 x 512.",
+      "evidence": [
+        "https://trek.nasa.gov/mars/",
+        "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
+      ]
+    },
+    {
+      "id": "mola-hrsc-blended-dem-200m",
+      "subject": "USGS Mars MGS MOLA - MEX HRSC Blended DEM Global 200m, v2 (Fergason et al. 2018), as a replacement for the MOLA 463 m elevation source",
+      "status": "excluded",
+      "finding": "No visible gain at the size the app shows. The Elevation view samples a 2,048 x 1,024 grid (drawn nearest onto the 4,096 x 2,048 canvas). Converted to that grid with the same GeoTIFF grid reader as MOLA (native cell under each output centre, no averaging), reading 218.5 MB of the 11.38 GB file by range requests, both maps agree on datum (metres above the areoid; mean difference -0.04 m). Height differences: median 4 m, 90th percentile 34 m, 99th percentile 118 m, largest 1,506 m; the 21 cells over 1 km sit on steep walls (Valles Marineris, crater rims) where the two nearest cells fall at different points. Painted by the app's own science painter on the 4,096 x 2,048 canvas, 10% of texels change by at least one colour level (at most 27 in one channel) and pixelmatch at threshold 0.1 finds 0 differing pixels. The blend would also add HRSC's CC BY-SA 3.0 IGO share-alike terms to this view.",
+      "revisitWhen": "The Elevation view gets a grid finer than about 1 km per cell, where the HRSC 200 m relief could differ visibly from MOLA.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_mex_hrsc_blended_dem_global_200m",
+        "https://planetarymaps.usgs.gov/mosaic/Mars/HRSC_MOLA_Blend/Mars_HRSC_MOLA_BlendDEM_Global_200mp_v2.tif",
+        "Measured 2026-09-28 against the current science/usgs/elevation.tif grid: 2,097,152 cells, both fully valid, 310,728 identical."
       ]
     }
   ]

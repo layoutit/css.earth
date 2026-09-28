@@ -2,7 +2,7 @@
  * reader's behaviour on every FITS file the repository tracks. The readers are parameters: the recorded digests in
  * `tests/fixtures/fits/repository-inputs.json` were written by the three readers that preceded `@cssearth/fits`
  * (`tools/fits/fits.mts` with its rice and sky modules, `tools/objects/observation/fits.mts` and
- * `tools/nebula/application/fits.ts` at 7e47cf4489), and the test reads the same files through the package.
+ * `tools/nebula/application/fits.ts`), and the test reads the same files through the package.
  *
  *   node tests/fits/repository-inputs.mts --write   rewrite the digests from the package, after an intended change */
 import { createHash } from 'node:crypto';

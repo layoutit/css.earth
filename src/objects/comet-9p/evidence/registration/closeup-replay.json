@@ -7,12 +7,10 @@
   "frame": "iv05070405_9000675_001_r",
   "comparison": [
     {
-      "commit": "fc4dfc18e42b5abf7bd898a2da85ae26571a211b",
       "matcherSha256": "c4871aa719fdc3d89b9b6b4768169a4b14190d99005d513d1f5b55aabdb47307",
       "outcome": "Encounter camera exceeds its source-scale registration budget."
     },
     {
-      "commit": "8475dd92009350873cd597f1c651c7ddec221a58",
       "matcherSha256": "c6932f526b30e8728e9e6836682383bc3c86f98704c41170e08991398bf325b7",
       "outcome": "Encounter camera exceeds its source-scale registration budget."
     }

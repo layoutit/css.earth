@@ -8,25 +8,13 @@
       "status": "included",
       "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-271.txt. Model 271, version 2016-04-22, pole (334°, 39°), period 4.795168 h match the retained metadata. The archive diameter field is 7.4 ±0.2 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ivar/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/271",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ivar/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ivar/source/reference/damit-model.json",
         "https://damit.cuni.cz/projects/damit/stored_files/open/913/shape.txt",
         "https://damit.cuni.cz/projects/damit/pages/documentation",
         "https://ui.adsabs.harvard.edu/abs/2004Icar..167..178K"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -34,18 +22,7 @@
       "survey": "surface-imagery-11",
       "status": "unresolved",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ivar/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
-        },
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ivar/README.md"
       ]
     },
     {
@@ -56,13 +33,6 @@
       "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/272"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
       ]
     },
     {
@@ -71,17 +41,21 @@
       "status": "included",
       "finding": "The selected DAMIT 271 mesh keeps its 7.4 ± 0.2 km fixed-shape archive scale. Hanuš et al. (2015), Table 4, reports a wider varied-shape thermophysical result of 8.0 km with −0.9/+0.3 km bounds. The latter is not substituted onto this mesh; it shows that the selected archive error is not total physical-size uncertainty and supplies no local terrain constraint.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/reference/calibration.json",
-        "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/ivar/source/reference/damit-model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ivar/source/reference/calibration.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ivar/source/reference/damit-model.json",
         "https://arxiv.org/html/1504.04199",
         "https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
-          "pr": 192
-        }
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "NEOWISE V2.0 neowise_neos.csv record 4 (Mainzer et al. 2011) diameter 8.370 ± 0.075 km (NEOWISE, NEATM) is not shown: the astronomy record takes its size from a publication (\"PDS Becker radar meshes: source-volume radii; GM unknown in Horizons.\"), and it differs from the astronomy record's mean radius 3.7 km (diameter 7.4 km).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -45,7 +45,47 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Occultation diameter",
+        "value": "247 ± 11 km (volume-equivalent; DAMIT model 783 fitted to 4 occultations)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+          "label": "Herald et al. (2024), Small Bodies Occultations V4.0, asteroid diameters table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "small-bodies-occultations-v4",
+          "locator": "/occultations/rows/0/fields/Dia_2; /occultations/rows/0/fields/Uncert_2; /occultations/rows/0/fields/Events_2; /occultations/rows/0/fields/Model_Source_2; /occultations/rows/0/fields/Model_Number_2"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.78 × 10¹⁹ ± 1.21 × 10¹⁸ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Baer et al. 2008",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/1/fields/MASS_KG; /masses/rows/1/fields/MASS_KG_UNC; /masses/rows/1/fields/BINARY_NOTE; /masses/rows/1/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "1.67 ± 0.19 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Baer et al. 2008",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/1/fields/BULK_DENSITY; /masses/rows/1/fields/BULK_DENSITY_UNC; /masses/rows/1/fields/SIZE_REF_CODE; /masses/rows/1/fields/MASS_REF"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

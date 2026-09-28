@@ -8,15 +8,9 @@
       "status": "included",
       "finding": "Selected products supply documented numeric scientific views; no-data and special values remain missing.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -26,15 +20,9 @@
       "finding": "The v2 DSK is retained as a source-intake and recipe proposal. Image-to-v2 alignment, prepared error, browser limb and feature qualification remain pending.",
       "revisitWhen": "Image alignment and the prepared-shape qualification record are completed for the v2 source.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -44,15 +32,9 @@
       "finding": "README records that NAIF reprocessed imagery after errors in the original model.",
       "revisitWhen": "A documented reconciled replacement changes the source decision.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -62,15 +44,9 @@
       "finding": "No selected observed surface map supports a visible atmosphere, invented plume animation or interior lens.",
       "revisitWhen": "A source-backed mapped product supports the claimed visible quantity.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/manifest.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/manifest.json",
         "https://doi.org/10.1029/2023JE008054"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -79,15 +55,9 @@
       "status": "included",
       "finding": "The selected six-observation set supplies Infrared ratio and Ice absorption under the pinned channel, mask, overlap and coverage rules. It remains partially supported and is not photometrically corrected.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/vims-chemistry/INTERPRETATION.md",
         "https://vims.univ-nantes.fr/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-13",
-          "commit": "65b64105aefbc30658164868ba85e905f030950a"
-        }
       ]
     },
     {
@@ -99,13 +69,7 @@
         "https://science.nasa.gov/photojournal/enceladus-in-the-infrared-map-view/",
         "https://doi.org/10.1016/j.icarus.2020.113848",
         "https://doi.org/10.1029/2018EA000399",
-        "evidence/infrared-mosaic/published-grid.jpg"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/evidence/infrared-mosaic/published-grid.jpg"
       ]
     },
     {
@@ -117,12 +81,6 @@
       "evidence": [
         "https://doi.org/10.1016/j.icarus.2021.114803",
         "https://openaccess.inaf.it/entities/publication/30596495-3f2f-49f7-a7fb-a1aca47c3390"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
-        }
       ]
     },
     {
@@ -134,12 +92,50 @@
       "evidence": [
         "https://doi.org/10.5194/epsc-dps2025-400",
         "https://www.ipgp.fr/en/research/phds/__trashed-2/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-27",
-          "commit": "b33089487811511e7015aa5a629e692f4a328e2d"
-        }
+      ]
+    },
+    {
+      "id": "crow-willard-2015-geologic-units",
+      "subject": "Global geologic map units (Crow-Willard and Pappalardo 2015)",
+      "status": "included",
+      "finding": "NASA Trek serves the published map as a 13-polygon GIS layer with unit names and colors. Its file download answered 'Access denied'; the public ArcGIS REST query returned the full geometry in the native frame (Plate Carree, central meridian 180, 252.1 km sphere, east-positive). Units are rasterized at pixel centers to a 2048 x 1024 grid with conflicts withheld. Gazetteer centres and an overlay on the Schenk 2024 mosaic show no longitude flip or visible offset. The paper itself returned HTTP 403, so its figure colors were not compared with the GIS renderer; equatorial and heavily cratered plains share one renderer color.",
+      "evidence": [
+        "https://doi.org/10.1002/2015JE004818",
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
+      ]
+    },
+    {
+      "id": "crow-willard-2015-nested-overlaps",
+      "subject": "Overlapping unit polygons in the geologic map",
+      "status": "included",
+      "finding": "The heavily cratered plains polygon has no holes where subdued cratered plains and northern lineated material sit (15-105 E, 30-76 N); northern lineated material also lies inside subdued cratered plains, and two small subdued cratered plains rings overlap equatorial cratered plains and central LH. Under the shared withhold-conflicts rule 3.41% of the sphere was gray, northern lineated material showed no cells and subdued cratered plains 6 km2. The grid now gives each shared cell to the smallest covering unit (geology-grid.py nestedUnits inner): no conflicts remain, 0.072% of the sphere is unmapped, northern lineated material shows 8,544 km2 and subdued cratered plains 17,223 km2. The Trek MapServer rendering also puts subdued cratered plains over heavily cratered plains but hides northern lineated material; the grid differs there on purpose so that every published unit shows.",
+      "evidence": [
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/export?bbox=-791995.5,-395997.75,791995.5,395997.75&size=2048,1024&format=png24&f=image",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/enceladus/source/geology/enceladus-geologic-units.json"
+      ]
+    },
+    {
+      "id": "crow-willard-2015-linework",
+      "subject": "Geologic map line features (ridges, troughs, scarps, contacts)",
+      "status": "excluded",
+      "finding": "The companion Trek layer Cassini_ISS_GeologicMapFeatures_Global holds 13 polyline records in 13 symbol classes. Geology lenses on other bodies show polygon units only; drawing line symbols would need a renderer feature.",
+      "revisitWhen": "A shared route for published line symbols exists.",
+      "evidence": [
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapFeatures_Global/MapServer/0?f=json"
+      ]
+    },
+    {
+      "id": "trek-cassini-iss-dem-375m",
+      "subject": "NASA Enceladus Trek layer Cassini ISS DEM 375mpp, Global (Cassini_ISS_DEM_375m_Global) as a replacement for the Schenk 200 m elevation",
+      "status": "excluded",
+      "finding": "Not a usable release and not an improvement. The Trek record (created 2023-09-25) names no producer, version or citation and says the data is not publicly released; the Schenk and McKinnon DEM that the view already uses is the producer's release (USGS/PDS, 2024-08-12, 200 m). Numbers come only from Trek's ArcGIS image service: a 4,224 x 2,112 float grid, -5,230 to +5,725 m, mean -851 m. These are radii minus an unstated sphere (the fit gives 252,157 m; the service states a 252,000 m sphere, the Trek record 252,100 m), not heights above the 256.2 x 251.4 x 248.6 km ellipsoid. The grid is labelled -180 to 180 degrees, but its craters line up with Schenk's only after a 179.3 degree roll (high-pass correlation 0.435, against 0.00 as labelled). At the 8,192 x 4,096 display with relief shading, pixelmatch at threshold 0.1 differs on 94.2% of texels as served and on 80.8% even after converting it to Schenk's ellipsoid for measurement; converted radii still differ by a median 446 m (90th percentile 1.16 km) in long-wavelength shape, its relief is smoother, and 303,248 polar texels are missing only in the Trek grid.",
+      "revisitWhen": "Trek or USGS publishes this 375 m model with a producer, datum, correct longitude registration and release terms.",
+      "evidence": [
+        "https://trek.nasa.gov/enceladus/TrekServices/ws/index/eq/searchItems?start=0&rows=200&facetKeys=productCat2&facetValues=DEM&proj=urn:ogc:def:crs:IAU2000::60200",
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_DEM_375m_Global/ImageServer?f=json",
+        "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
+        "Measured 2026-09-28 against the current Schenk 200 m grid with the Elevation lens palette and relief."
       ]
     }
   ]

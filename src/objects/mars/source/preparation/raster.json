@@ -652,6 +652,802 @@
         "sourceUrl": "https://doi.org/10.1029/2022JE007298"
       },
       "resolutionScale": 0.5
+    },
+    {
+      "id": "albedo",
+      "source": "science/usgs/tes-albedo.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tes-albedo.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.06,
+          "maximum": 0.32,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "Lambert albedo (0.3–2.9 µm)",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 2880,
+            "height": 1440,
+            "origin": [
+              -10670400,
+              5335200
+            ],
+            "resolutionMeters": 7410,
+            "referenceRadiusMeters": 3396000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": -3.4028226550889045e+38
+          },
+          "qualityMasks": [
+            {
+              "format": "geotiff",
+              "path": "tes-albedo.tif",
+              "sampling": "nearest",
+              "minimum": 0.0605,
+              "grid": {
+                "width": 2880,
+                "height": 1440,
+                "origin": [
+                  -10670400,
+                  5335200
+                ],
+                "resolutionMeters": 7410,
+                "referenceRadiusMeters": 3396000,
+                "centerLongitude": 0,
+                "wrapLongitude": true,
+                "noData": -3.4028226550889045e+38
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "thermal-inertia",
+      "source": "science/tes/global_ti_night_2007.img",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "pds3-grid",
+          "path": "global_ti_night_2007.img",
+          "labelPath": "global_ti_night_2007.lbl",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 600,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "J m⁻² K⁻¹ s⁻½",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 7200,
+            "height": 3600,
+            "pixelsPerDegree": 20,
+            "firstCentreLongitude": -179.975,
+            "firstCentreLatitude": 89.975,
+            "labelExtent": "edges",
+            "datasetId": "MGS-M-TES-5-TIMAP-V1.0",
+            "productId": "GLOBAL_TI_NIGHT_2007",
+            "noData": 0,
+            "noDataEvidence": "The data set catalogue gives the derived range as 5 to 5000 and says higher and lower values are not computed; 0 marks a cell without a value (https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat)."
+          },
+          "mask": {
+            "path": "global_ti_msk_night_2007.img",
+            "labelPath": "global_ti_msk_night_2007.lbl",
+            "productId": "GLOBAL_TI_msk_NIGHT_2007",
+            "withholdWhere": [
+              0
+            ],
+            "evidence": "datainfo.txt: a mask value of 0 marks pixels infilled by interpolation; the catalogue removes them by multiplying the map by the mask (https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/data/datainfo.txt, https://pds-geosciences.wustl.edu/mgs/mgs-m-tes-5-timap-v1/mgst_9001/catalog/dataset.cat)."
+          }
+        }
+      }
+    },
+    {
+      "id": "dust-cover",
+      "source": "science/tes/dci.vicar",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "vicar-grid",
+          "path": "dci.vicar",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0.92,
+          "maximum": 0.99,
+          "colors": [
+            "#fde725",
+            "#5ec962",
+            "#21918c",
+            "#3b528b",
+            "#440154"
+          ],
+          "units": "mean emissivity, 1350–1400 cm⁻¹",
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "pixelsPerDegree": 16,
+            "westEdgeLongitude": -180,
+            "northEdgeLatitude": 90,
+            "georeferenceEvidence": "ASU's catalogue record gives a 16 pixel-per-degree global grid (https://mars.asu.edu/data/tes_ruffdust/); at a −180° east left edge the map reproduces Ruff & Christensen (2002): Arabia 0.922 (dust-covered, ≤ 0.940), Syrtis Major 0.973 and Mare Erythraeum 0.968 (their regional average 0.970).",
+            "noData": [
+              0.85
+            ],
+            "noDataEvidence": "Exactly 0.85, 21% of cells, all poleward of about 60° N and 80° S, below every value the paper discusses (0.90 and up): a constant fill where TES data are excluded, not a measurement."
+          }
+        }
+      }
+    },
+    {
+      "id": "dune-fields",
+      "source": "catalogues/dune-fields/mars-dune-fields.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "dune-fields",
+          "label": "Dune fields",
+          "format": "geotiff",
+          "path": "mars-dune-fields.tif",
+          "consumer": "dune-fields",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "1",
+              "label": "Dune field (confident)",
+              "color": "#df73ff"
+            },
+            {
+              "value": "2",
+              "label": "Dune field (fairly confident; needs a better image)",
+              "color": "#df73ff"
+            },
+            {
+              "value": "3",
+              "label": "Dune field (less confident; needs a better image)",
+              "color": "#df73ff"
+            }
+          ],
+          "description": "Hayward et al. (2007), Mars Global Digital Dune Database MC2–MC29, USGS Open-File Report 2007-1158; 547 fields, 65° N–65° S.",
+          "title": "USGS dune database fields",
+          "sourceUrl": "https://pubs.usgs.gov/of/2007/1158/",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "valley-networks",
+      "source": "catalogues/valley-networks/mars-valley-networks.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "valley-networks",
+          "label": "Valley networks",
+          "format": "geotiff",
+          "path": "mars-valley-networks.tif",
+          "consumer": "valley-networks",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "valley network",
+              "label": "Mapped valley (centreline)",
+              "color": "#edffe8"
+            }
+          ],
+          "description": "Hynek, Beach and Hoke (2010), JGR 115, E09008: 9,879 valley networks traced as centrelines, as published in the NASA Trek layer.",
+          "title": "Hynek global valley network map",
+          "sourceUrl": "https://doi.org/10.1029/2009JE003548",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "alluvial-fans",
+      "source": "catalogues/alluvial-fans/mars-alluvial-fans.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "alluvial-fans",
+          "label": "Alluvial fans",
+          "format": "geotiff",
+          "path": "mars-alluvial-fans.tif",
+          "consumer": "alluvial-fans",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "point",
+              "label": "Large alluvial fan",
+              "color": "#006633"
+            }
+          ],
+          "description": "Moore and Howard (2005), JGR 110, E04005 (31 fans) and Kraal et al. (2008), Icarus 194, 101–110 (13 fans), as published in the NASA Trek layer.",
+          "title": "Large alluvial fans in craters",
+          "sourceUrl": "https://doi.org/10.1029/2004JE002352",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "gullies",
+      "source": "catalogues/gullies/mars-gullies.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "gullies",
+          "label": "Gullies",
+          "format": "geotiff",
+          "path": "mars-gullies.tif",
+          "consumer": "gullies",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "0 255 255 255",
+              "label": "Pole-facing gullies",
+              "color": "#00ffff"
+            },
+            {
+              "value": "255 0 0 255",
+              "label": "Equator-facing gullies",
+              "color": "#ff0000"
+            },
+            {
+              "value": "255 255 0 255",
+              "label": "East- or west-facing gullies",
+              "color": "#ffff00"
+            },
+            {
+              "value": "204 0 204 255",
+              "label": "No preferred orientation",
+              "color": "#cc00cc"
+            },
+            {
+              "value": "more than one class",
+              "label": "More than one class in the cell",
+              "color": "#ffffff"
+            }
+          ],
+          "description": "Harrison, Osinski, Tornabene and Jones (2015), Icarus 252, 236–254: 4,978 gully sites from CTX images, as published in the NASA Trek layer.",
+          "title": "CTX global gully survey",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2015.01.022",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "glacier-like-forms",
+      "source": "catalogues/glacier-like-forms/mars-glacier-like-forms.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "glacier-like-forms",
+          "label": "Glacier-like forms",
+          "format": "geotiff",
+          "path": "mars-glacier-like-forms.tif",
+          "consumer": "glacier-like-forms",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "point",
+              "label": "Glacier-like form",
+              "color": "#00ccff"
+            }
+          ],
+          "description": "Souness, Hubbard, Milliken and Quincey (2012), Icarus 217, 243–255: 1,309 glacier-like forms from 8,058 CTX images, as published in the NASA Trek layer.",
+          "title": "Martian glacier-like form inventory",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2011.10.020",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "recessional-glfs",
+      "source": "catalogues/recessional-glfs/mars-recessional-glfs.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "recessional-glfs",
+          "label": "Recessional GLFs",
+          "format": "geotiff",
+          "path": "mars-recessional-glfs.tif",
+          "consumer": "recessional-glfs",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "point",
+              "label": "Recessional glacier-like form",
+              "color": "#ff33cc"
+            }
+          ],
+          "description": "Brough, Hubbard and Hubbard (2016), Icarus 274, 37–49: 436 of 1,293 glacier-like forms with strong evidence of recession, as published in the NASA Trek layer.",
+          "title": "Glacier-like forms that have shrunk",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2016.03.006",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "glacial-valleys",
+      "source": "catalogues/glacial-valleys/mars-glacial-valleys.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "glacial-valleys",
+          "label": "Glacial valleys",
+          "format": "geotiff",
+          "path": "mars-glacial-valleys.tif",
+          "consumer": "glacial-valleys",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "point",
+              "label": "Supraglacial or proglacial valley",
+              "color": "#ffffff"
+            }
+          ],
+          "description": "Fassett, Dickson, Head, Levy and Marchant (2010), Icarus 208, 86–100: 102 supraglacial and proglacial valleys from CTX images, as published in the NASA Trek layer.",
+          "title": "Valleys cut by glacial meltwater",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2010.02.021",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "recent-activity",
+      "source": "catalogues/recent-activity/mars-recent-activity.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "recent-activity",
+          "label": "Present-day changes",
+          "format": "geotiff",
+          "path": "mars-recent-activity.tif",
+          "consumer": "recent-activity",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "Daubar et al. (2013, Icarus)",
+              "label": "New impact craters (Daubar et al. 2013)",
+              "color": "#3987e5"
+            },
+            {
+              "value": "Dundas et al. (2015, Icarus)",
+              "label": "Active gullies, including dune gullies (Dundas et al. 2015)",
+              "color": "#d95926"
+            },
+            {
+              "value": "McEwen et al. (2014, Nature Geoscience) and Ojha et al. (2014, Icarus)",
+              "label": "Recurring slope lineae, confirmed or partial (McEwen et al. 2014; Ojha et al. 2014)",
+              "color": "#199e70"
+            },
+            {
+              "value": "Dundas et al. (2014, JGR)",
+              "label": "New craters exposing ice (Dundas et al. 2014)",
+              "color": "#eda100"
+            },
+            {
+              "value": "more than one class",
+              "label": "More than one class in the cell",
+              "color": "#ffffff"
+            }
+          ],
+          "description": "NASA Trek compilation of Daubar et al. (2013), Dundas et al. (2014, 2015), McEwen et al. (2014) and Ojha et al. (2014): 508 HiRISE sites.",
+          "title": "Changes seen by HiRISE",
+          "sourceUrl": "https://doi.org/10.1016/j.icarus.2013.04.009",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "hydrous-minerals",
+      "source": "catalogues/hydrous-minerals/mars-hydrous-minerals.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "hydrous-minerals",
+          "label": "Hydrous detections",
+          "format": "geotiff",
+          "path": "mars-hydrous-minerals.tif",
+          "consumer": "hydrous-minerals",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "CRISM",
+              "label": "CRISM detection",
+              "color": "#ff0000"
+            },
+            {
+              "value": "OMEGA",
+              "label": "OMEGA detection",
+              "color": "#0099ff"
+            },
+            {
+              "value": "more than one class",
+              "label": "CRISM and OMEGA detections in one cell",
+              "color": "#ffffff"
+            }
+          ],
+          "description": "Carter, Poulet, Bibring, Mangold and Murchie (2013), JGR Planets 118, 831–858: 1,648 detections (CRISM 1,208, OMEGA 440), as published in the NASA Trek layer.",
+          "title": "CRISM and OMEGA hydrous detections",
+          "sourceUrl": "https://doi.org/10.1029/2012JE004145",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "aqueous-classes",
+      "source": "catalogues/aqueous-minerals/mars-aqueous-classes.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "aqueous-classes",
+          "label": "Mineral classes",
+          "format": "geotiff",
+          "path": "mars-aqueous-classes.tif",
+          "consumer": "aqueous-classes",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "phyllosilicate",
+              "label": "Phyllosilicates (clays)",
+              "color": "#0099ff"
+            },
+            {
+              "value": "sulfate",
+              "label": "Sulfates",
+              "color": "#ff6699"
+            },
+            {
+              "value": "silica",
+              "label": "Silica",
+              "color": "#9900cc"
+            },
+            {
+              "value": "chloride",
+              "label": "Chlorides",
+              "color": "#ffff00"
+            },
+            {
+              "value": "carbonate",
+              "label": "Carbonates",
+              "color": "#33cc00"
+            },
+            {
+              "value": "more than one class",
+              "label": "More than one class in the cell",
+              "color": "#ffffff"
+            }
+          ],
+          "description": "Ehlmann and Edwards (2014), Annual Review of Earth and Planetary Sciences 42, 291–315: 4,572 sites in five classes, as published in the NASA Trek layer.",
+          "title": "Water-formed mineral classes",
+          "sourceUrl": "https://doi.org/10.1146/annurev-earth-060313-055024",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
+    },
+    {
+      "id": "chloride-deposits",
+      "source": "catalogues/chloride/mars-chloride-deposits.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-lens-{id}.webp",
+      "underlay": {
+        "surface": "normal",
+        "brightness": 0.35,
+        "grayscale": true,
+        "bits": 6
+      },
+      "science": {
+        "scientific": {
+          "id": "chloride-deposits",
+          "label": "Chloride deposits",
+          "format": "geotiff",
+          "path": "mars-chloride-deposits.tif",
+          "consumer": "chloride-deposits",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "0 153 51 255",
+              "label": "Chloride-bearing material",
+              "color": "#009933"
+            }
+          ],
+          "description": "Osterloo, Anderson, Hamilton and Hynek (2010), JGR 115, E10012: 642 THEMIS chloride-bearing deposits, as published in the NASA Trek GIS layer.",
+          "title": "THEMIS chloride-bearing deposits",
+          "sourceUrl": "https://doi.org/10.1029/2010JE003613",
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 3396190,
+            "noData": -32768,
+            "origin": [
+              -10669445.554195119,
+              5334722.7770975595
+            ],
+            "resolution": [
+              5209.6902120093355,
+              -5209.6902120093355
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
+      }
     }
   ],
   "atmosphere": {

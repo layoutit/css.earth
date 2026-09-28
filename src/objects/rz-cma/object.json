@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "rz-cma",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "RZ CMa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 21775410
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rz-cma-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "RZ CMa",
+      "classification": "star",
+      "color": "#fff3f0",
+      "distanceAu": 336892375.7,
+      "description": "A Cepheid in the Milky Way, 31 times the Sun's width, that swells and shrinks every 4.3 days.",
+      "systemName": "RZ CMa system",
+      "order": 2010,
+      "context": {
+        "order": 2007
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -16817290429359974000,
+        45252012042196206000,
+        -14471733234013671000
+      ],
+      "presentationToReference": [
+        -0.3336871045575418,
+        0.10002981182955277,
+        0.9373616980639589,
+        0.8978861926176646,
+        -0.26916043190614575,
+        0.3483576423772717,
+        -0.28714682891955845,
+        -0.9578865792156404,
+        2.17076794042632e-8
+      ],
+      "orbitUpReference": [
+        -0.10002981182955277,
+        0.26916043190614575,
+        0.9578865792156404
+      ],
+      "metersPerUnit": 70243258.06451613,
+      "bodyRadiusM": 21775410000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

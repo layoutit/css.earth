@@ -15,9 +15,9 @@ L5 Jupiter Trojan. Source records checked 2026-09-09.
 
 ## Evidence
 
-- [Recorded qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trojan-population.md#preparation-and-validation) includes source/package checks, [independent mesh/scalar comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/numerical-summary.json), and fresh source/runtime installation.
-- [Headless Chrome](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/browser.json) passed this body at DPR 1/2, Shape/Elevation and both shadow states in `performance` build `c09191cb2d`. Diagnostic APIs were enabled. These focused checks do not establish full-catalog browser or physical-device qualification.
-- [Integration of `bd265cf3a`](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/main-integration.json) checked unchanged scene, terrain and image inventories plus non-marker runtime fields. It did not repeat the browser matrix; captures keep their original revision.
+- Recorded qualification includes source/package checks, independent mesh/scalar comparisons, and fresh source/runtime installation.
+- Headless Chrome passed this body at DPR 1/2, Shape/Elevation and both shadow states in `performance` build. Diagnostic APIs were enabled. These focused checks do not establish full-catalog browser or physical-device qualification.
+- Integration checked unchanged scene, terrain and image inventories plus non-marker runtime fields. It did not repeat the browser matrix; captures keep their original revision.
 
 ## Known problems
 
@@ -44,7 +44,7 @@ Original +Z spin axis and +X reference meridian are retained. The selected eclip
 
 The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and targets at most 800 native PolyCSS `u` raster triangles with 128 px raster cells. Its error allowance is 1262.88 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.
 
-Shadows and asteroid orbit visibility are off by default. The [family report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trojan-population.md#preparation-and-validation) records source/result comparisons, numerical checks, runtime cases and delivery. [Orbit fixtures](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/orbit-errors.json) sample the epoch and ±30 days; they do not bound the whole interval or establish long-term accuracy.
+Shadows and asteroid orbit visibility are off by default. The family report records source/result comparisons, numerical checks, runtime cases and delivery. Orbit fixtures sample the epoch and ±30 days; they do not bound the whole interval or establish long-term accuracy.
 
 [Grav et al. (2012), WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy](https://arxiv.org/abs/1209.1549).
 

@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-226868",
+  "displayName": "HD 226868",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "22 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2102-09091",
+          "url": "https://arxiv.org/abs/2102.09091",
+          "label": "Miller-Jones et al. (2021)",
+          "checked": "2026-09-27",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "2,253 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-226868",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-27",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-226868-lens-color.webp",
+        "surface": "hd-226868-surface-color@2x.webp",
+        "poles": "hd-226868-poles-color@2x.webp",
+        "source": {
+          "id": "hd-226868-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2102.09091"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 31,138 K and log g 3.348 (u1 0.124, u2 0.330): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Miller-Jones et al. (2021), Science 371, 1046",
+      "href": "https://arxiv.org/abs/2102.09091"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2102.09091",
+      "credit": "Miller-Jones et al. (2021), Science 371, 1046"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-226868.json",
+      "credit": "Miller-Jones et al. radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

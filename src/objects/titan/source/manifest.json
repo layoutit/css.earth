@@ -1550,7 +1550,7 @@
         "https://creativecommons.org/licenses/by/4.0/",
         "https://doi.org/10.17632/f6jrtyfp66.2"
       ],
-      "acquisition": "Checked-in compact lossless grid; reproduce with tools/objects/acquisition/geology-grid.py source/geology/prepare-grid.json.",
+      "acquisition": "Checked-in compact lossless grid; reproduce with packages/bake/src/objects/acquisition/geology-grid.py source/geology/prepare-grid.json.",
       "redistribution": "Derived pixel-center unit raster; map palette adapted from NASA/JPL PIA23174.",
       "consumers": [
         "geology"
@@ -1787,6 +1787,198 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "trek-titan-vims-2um-32ppd",
+      "path": "vims/Titan_global_32ppd_2microns_v2.tif",
+      "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=90ee84fb-30fe-4a56-92e5-c4c3153a24b0",
+      "credit": "NASA/Caltech-JPL/University of Arizona/LPG Nantes (CNRS, Nantes Université); Le Mouélic et al. (2019); served by NASA Solar System Treks",
+      "license": "Credit required. The Trek product states no reuse terms, so terms for this global mosaic are unresolved. The producer's VIMS portal distributes its VIMS data under CC BY 4.0 with the credit above; the TIFF copyright tag names NASA/Caltech-JPL/University of Arizona/LPG Nantes.",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/",
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_2microns_v2"
+      ],
+      "acquisition": "Trek product 'Titan Cassini VIMS Global mosaic at 2 microns (32ppd)' (Titan_global_32ppd_2microns_v2, catalogue date 2018-09-28, producer Stéphane Le Mouélic). Download the uncompressed GeoTIFF unchanged: 11520 x 5760, one 8-bit band, no scale, offset or no-data tag; TIFF date 2018-09-12, artist 'LPG - Univ. of Nantes - Univ. Arizona- CNRS'. The server answers without a Content-Length.",
+      "redistribution": "Original restored from its origin or the source cache; prepared display derivatives keep the credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "vims-2um",
+      "label": "VIMS infrared",
+      "falseColor": false,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000,
+        "pixelsPerDegree": 32,
+        "centerLongitude": 0,
+        "frameEvidence": "The TIFF georeference cannot be used: it pairs degree tie points (360 E at the left edge, pixel size -0.03125) with a metre-unit Plate Carree whose central meridian is 180. Read literally it puts 360 E at the left edge and mirrors the map. The pixels match the USGS ISS mosaic and the paper's never-observed region near 80 S, 120 E only as a normal east-positive map whose left edge is 180 E and centre column 0 E (README, Registration)."
+      },
+      "coverage": "Exact zero in every band is missing: a region never observed within the producer's selection limits (about 65-87 S, 83-170 E), caps within about 1.6 degrees of the south pole and 0.4 degrees of the north pole, and small holes. No validity band is supplied; about 0.6% of the area is zero.",
+      "photometry": "2 um atmospheric-window mosaic of about 19,000 VIMS cubes (T0-T126) in I/F, merged by the producer with an empirical surface photometric correction, band-wing haze subtraction, then written as 8-bit display levels with no published mapping back to I/F. Clouds, seams and variable source resolution remain.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_2microns_v2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-titan-vims-2um-32ppd",
+            "role": "material",
+            "evidence": "Origin and Trek product label recorded on this manifest entry."
+          },
+          {
+            "catalogueId": "le-mouelic-2019-titan-vims-global-maps",
+            "role": "method",
+            "evidence": "https://doi.org/10.1016/j.icarus.2018.09.017"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trek-titan-vims-5um-32ppd",
+      "path": "vims/Titan_global_32ppd_5microns_v2.tif",
+      "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=9f8686c4-d348-4b15-9364-bc37ec43fb27",
+      "credit": "NASA/Caltech-JPL/University of Arizona/LPG Nantes (CNRS, Nantes Université); Le Mouélic et al. (2019); served by NASA Solar System Treks",
+      "license": "Credit required. The Trek product states no reuse terms, so terms for this global mosaic are unresolved. The producer's VIMS portal distributes its VIMS data under CC BY 4.0 with the credit above; the TIFF copyright tag names NASA/Caltech-JPL/University of Arizona/LPG Nantes.",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/",
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_5microns_v2"
+      ],
+      "acquisition": "Trek product 'Titan Cassini VIMS Global mosaic at 5 microns (32ppd)' (Titan_global_32ppd_5microns_v2, catalogue date 2018-09-28, producer Stéphane Le Mouélic). Download the uncompressed GeoTIFF unchanged: 11520 x 5760, one 8-bit band, no scale, offset or no-data tag; TIFF date 2018-09-18, artist 'LPG - Univ. of Nantes - Univ. Arizona- CNRS'. The server answers without a Content-Length.",
+      "redistribution": "Original restored from its origin or the source cache; prepared display derivatives keep the credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "vims-5um",
+      "label": "VIMS infrared",
+      "falseColor": false,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000,
+        "pixelsPerDegree": 32,
+        "centerLongitude": 0,
+        "frameEvidence": "The TIFF georeference cannot be used: it pairs degree tie points (360 E at the left edge, pixel size -0.03125) with a metre-unit Plate Carree whose central meridian is 180. Read literally it puts 360 E at the left edge and mirrors the map. The pixels match the USGS ISS mosaic and the paper's never-observed region near 80 S, 120 E only as a normal east-positive map whose left edge is 180 E and centre column 0 E (README, Registration)."
+      },
+      "coverage": "Exact zero in every band is missing: a region never observed within the producer's selection limits (about 65-87 S, 83-170 E), caps within about 1.6 degrees of the south pole and 0.4 degrees of the north pole, and small holes. No validity band is supplied; about 0.6% of the area is zero.",
+      "photometry": "5 um atmospheric-window mosaic of about 19,000 VIMS cubes (T0-T126) in I/F, merged by the producer with an empirical surface photometric correction, band-wing haze subtraction, then written as 8-bit display levels with no published mapping back to I/F. Clouds, seams and variable source resolution remain.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_5microns_v2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-titan-vims-5um-32ppd",
+            "role": "material",
+            "evidence": "Origin and Trek product label recorded on this manifest entry."
+          },
+          {
+            "catalogueId": "le-mouelic-2019-titan-vims-global-maps",
+            "role": "method",
+            "evidence": "https://doi.org/10.1016/j.icarus.2018.09.017"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trek-titan-vims-color-ratio-32ppd",
+      "path": "vims/Titan_global_32ppd_ColorRatio_v2.tif",
+      "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=7186b3f4-27a9-4219-8312-5a05808158d0",
+      "credit": "NASA/Caltech-JPL/University of Arizona/LPG Nantes (CNRS, Nantes Université); Le Mouélic et al. (2019); served by NASA Solar System Treks",
+      "license": "Credit required. The Trek product states no reuse terms, so terms for this global mosaic are unresolved. The producer's VIMS portal distributes its VIMS data under CC BY 4.0 with the credit above; the TIFF copyright tag names NASA/Caltech-JPL/University of Arizona/LPG Nantes.",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/",
+        "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_ColorRatio_v2"
+      ],
+      "acquisition": "Trek product 'Titan Cassini VIMS Global color ratio mosaic (32ppd)' (Titan_global_32ppd_ColorRatio_v2, catalogue date 2018-09-28, producer Stéphane Le Mouélic). Download the uncompressed GeoTIFF unchanged: 11520 x 5760, three 8-bit bands (red 1.59/1.27, green 2.03/1.27, blue 1.27/1.08 um, from the GDAL band metadata), no scale, offset or no-data tag; TIFF date 2018-09-18, artist 'LPG - Univ. of Nantes - Univ. Arizona- CNRS'. The server answers without a Content-Length.",
+      "redistribution": "Original restored from its origin or the source cache; prepared display derivatives keep the credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "vims-color-ratio",
+      "label": "Infrared band ratios",
+      "falseColor": true,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000,
+        "pixelsPerDegree": 32,
+        "centerLongitude": 0,
+        "frameEvidence": "The TIFF georeference cannot be used: it pairs degree tie points (360 E at the left edge, pixel size -0.03125) with a metre-unit Plate Carree whose central meridian is 180. Read literally it puts 360 E at the left edge and mirrors the map. The pixels match the USGS ISS mosaic and the paper's never-observed region near 80 S, 120 E only as a normal east-positive map whose left edge is 180 E and centre column 0 E (README, Registration)."
+      },
+      "coverage": "Exact zero in every band is missing: a region never observed within the producer's selection limits (about 65-87 S, 83-170 E), caps within about 1.6 degrees of the south pole and 0.4 degrees of the north pole, and small holes. No validity band is supplied; about 0.6% of the area is zero.",
+      "photometry": "RGB of the 1.59/1.27, 2.03/1.27 and 1.27/1.08 um ratios of about 19,000 VIMS cubes (T0-T126) in I/F, merged by the producer with an empirical surface photometric correction, band-wing haze subtraction and an empirical airmass correction of the ratios, then written as 8-bit display levels with no published mapping back to I/F. Clouds, seams and variable source resolution remain.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://trek.nasa.gov/titan/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=Titan_global_32ppd_ColorRatio_v2"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-titan-vims-color-ratio-32ppd",
+            "role": "material",
+            "evidence": "Origin and Trek product label recorded on this manifest entry."
+          },
+          {
+            "catalogueId": "le-mouelic-2019-titan-vims-global-maps",
+            "role": "method",
+            "evidence": "https://doi.org/10.1016/j.icarus.2018.09.017"
+          }
+        ]
       }
     }
   ],

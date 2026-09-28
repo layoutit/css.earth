@@ -27,7 +27,8 @@ const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star, black hole and hosted star, and every exoplanet', () => {
     expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length + HOSTED_STAR_IDS.length)
-    for (const id of BLACK_HOLE_IDS) expect(STAR_IDS as readonly string[]).toContain(id)
+    // A black hole is placed by its astrometry (Sgr A*) or hosted by the star it orbits (Cygnus X-1).
+    for (const id of BLACK_HOLE_IDS) expect([...STAR_IDS, ...HOSTED_STAR_IDS] as readonly string[]).toContain(id)
     for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS, ...HOSTED_STAR_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
@@ -62,10 +63,12 @@ describe('the body table', () => {
   it('has physically plausible radii and masses', () => {
     for (const id of BODY_IDS) {
       const data = bodyData(id)
-      // Zero radius is an unmeasured one, allowed only for a hosted star, and such a star has no published mass either.
+      // Zero radius is an unmeasured one, allowed only for a hosted star or black hole. Such a star has no published mass either;
+      // a hosted black hole's mass is what its orbit measures.
       if (data.meanRadiusKm === 0) {
         expect(HOSTED_STAR_IDS, id).toContain(id)
-        expect(data.gravitationalParameterKm3PerS2, id).toBe(0)
+        if ((BLACK_HOLE_IDS as readonly string[]).includes(id)) expect(data.gravitationalParameterKm3PerS2, id).toBeGreaterThan(0)
+        else expect(data.gravitationalParameterKm3PerS2, id).toBe(0)
         continue
       }
       expect(data.meanRadiusKm).toBeGreaterThan(0)

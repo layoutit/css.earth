@@ -14,7 +14,7 @@ export interface RadialMaterialSurface extends Record<string, unknown> {
   surface?:RasterAsset;shadowSurface?:RasterAsset;thumbnail?:RasterAsset;polesUrl?:string;layout?:unknown;
 }
 export type ScientificLens = SciencePalette & {id: string; format: string; displaySampling?: string; symbols?: unknown;
-  surfaceSampling?: {maximumDistanceMeters: number}};
+  surfaceSampling?: {maximumDistanceMeters: number}; underlay?: {surface: string; brightness: number; grayscale?: boolean; bits?: number}};
 export type RadialState = NonNullable<Awaited<ReturnType<typeof loadRadialTerrain>>> & {
   scientificSurfaces?: Map<string, Awaited<ReturnType<typeof loadScienceSurface>>>;
   observationSurfaces?: Map<string, SurfaceObservation>;

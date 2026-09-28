@@ -121,6 +121,431 @@
           ],
           "ambient": 0.55
         }
+      },
+      {
+        "id": "hydrogen",
+        "label": "Hydrogen",
+        "consumer": "hydrogen",
+        "path": "grand/vesta-hydrogen.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 180,
+          "height": 90,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-hydrogen-longitude.npy",
+          "latitudePath": "grand/vesta-hydrogen-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "micrograms/gram",
+        "displayUnits": "\u00b5g/g",
+        "minimum": 0,
+        "maximum": 391.1,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "iron",
+        "label": "Iron gamma rays",
+        "consumer": "iron",
+        "path": "grand/vesta-iron-counts.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-iron-counts-longitude.npy",
+          "latitudePath": "grand/vesta-iron-counts-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "counts/s",
+        "displayUnits": "counts/s",
+        "minimum": 0.0687,
+        "maximum": 0.07746,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "fast-neutrons",
+        "label": "Fast neutrons",
+        "consumer": "fast-neutrons",
+        "path": "grand/vesta-fast-neutrons.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 240,
+          "height": 18,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-fast-neutrons-longitude.npy",
+          "latitudePath": "grand/vesta-fast-neutrons-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "counts/s",
+        "displayUnits": "counts/s",
+        "minimum": 1.17,
+        "maximum": 1.237,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "hegr",
+        "label": "High-energy gamma rays",
+        "consumer": "hegr",
+        "path": "grand/vesta-hegr-counts.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 360,
+          "height": 24,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-hegr-counts-longitude.npy",
+          "latitudePath": "grand/vesta-hegr-counts-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "counts/s",
+        "displayUnits": "counts/s",
+        "minimum": 12.516,
+        "maximum": 13.143,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "neutron-absorption",
+        "label": "Neutron absorption",
+        "consumer": "neutron-absorption",
+        "path": "grand/vesta-neutron-absorption.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 360,
+          "height": 24,
+          "projection": "equirectangular",
+          "longitudePath": "grand/vesta-neutron-absorption-longitude.npy",
+          "latitudePath": "grand/vesta-neutron-absorption-latitude.npy",
+          "longitudeDirection": "east"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "unitless",
+        "displayUnits": "unitless",
+        "minimum": -0.0364,
+        "maximum": 0.031,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "geology/vesta-geologic-units.tif",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "categories": [
+          {
+            "value": "c1",
+            "label": "Crater material, undifferentiated",
+            "color": "#ffff00"
+          },
+          {
+            "value": "c2",
+            "label": "Crater material, greenish-yellow",
+            "color": "#e9ffbe"
+          },
+          {
+            "value": "c3",
+            "label": "Crater material, purple",
+            "color": "#ffffbe"
+          },
+          {
+            "value": "c4",
+            "label": "Crater material, light blue",
+            "color": "#ffd37f"
+          },
+          {
+            "value": "c5",
+            "label": "Crater material, orange",
+            "color": "#e69800"
+          },
+          {
+            "value": "cf1",
+            "label": "Crater floor material, undifferentiated",
+            "color": "#d3ffbe"
+          },
+          {
+            "value": "cf3",
+            "label": "Crater floor material, dark purple",
+            "color": "#d1ff73"
+          },
+          {
+            "value": "cf4",
+            "label": "Crater floor material, light blue",
+            "color": "#55ff00"
+          },
+          {
+            "value": "cf5",
+            "label": "Crater floor material, orange",
+            "color": "#38a800"
+          },
+          {
+            "value": "ch",
+            "label": "Cratered highlands",
+            "color": "#d7c29e"
+          },
+          {
+            "value": "ct1",
+            "label": "Cratered terrain, greenish-yellow",
+            "color": "#bed2ff"
+          },
+          {
+            "value": "ct2",
+            "label": "Cratered terrain, purple, blue, and orange mix",
+            "color": "#73b2ff"
+          },
+          {
+            "value": "ct3",
+            "label": "Cratered terrain, purple and orange, orange rims",
+            "color": "#005ce6"
+          },
+          {
+            "value": "ct4",
+            "label": "Cratered terrain, light blue, orange and blue rims",
+            "color": "#002673"
+          },
+          {
+            "value": "lm",
+            "label": "Landslide material",
+            "color": "#a8a800"
+          },
+          {
+            "value": "Rof1",
+            "label": "Rheasilvia outer flank, greenish-yellow",
+            "color": "#73ffdf"
+          },
+          {
+            "value": "Rof2",
+            "label": "Rheasilvia outer flank, blue, greenish rims",
+            "color": "#00e6a9"
+          },
+          {
+            "value": "rtR",
+            "label": "Rheasilvia ridge and trough terrain",
+            "color": "#00a884"
+          }
+        ],
+        "description": "Interpreted geologic units",
+        "title": "Yingst et al. (2023) global geologic map, Zenodo linework release",
+        "sourceUrl": "https://doi.org/10.3847/PSJ/acebe9",
+        "grid": {
+          "width": 2048,
+          "height": 1024,
+          "centerLongitude": -150,
+          "referenceRadiusMeters": 255000,
+          "noData": -32768,
+          "origin": [
+            -801106.1266653972,
+            400553.0633326986
+          ],
+          "resolution": [
+            782.330201821677,
+            -782.330201821677
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.25,
+        "minimum": 0,
+        "maximum": 17,
+        "colors": [
+          "#ffff00",
+          "#e9ffbe",
+          "#ffffbe",
+          "#ffd37f",
+          "#e69800",
+          "#d3ffbe",
+          "#d1ff73",
+          "#55ff00",
+          "#38a800",
+          "#d7c29e",
+          "#bed2ff",
+          "#73b2ff",
+          "#005ce6",
+          "#002673",
+          "#a8a800",
+          "#73ffdf",
+          "#00e6a9",
+          "#00a884"
+        ]
+      },
+      {
+        "id": "gravity",
+        "label": "Gravity",
+        "consumer": "gravity",
+        "path": "gravity/JGDWN_VES20H_ACCEL_0020.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_ACCEL_0020.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_ACCEL_0020.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "mGal",
+        "displayUnits": "mGal",
+        "outputLongitudeOrigin": 150,
+        "minimum": -2000,
+        "maximum": 2000,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ]
+      },
+      {
+        "id": "gravity-uncertainty",
+        "label": "Gravity",
+        "consumer": "gravity-uncertainty",
+        "path": "gravity/JGDWN_VES20H_ACCERR_0020.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_ACCERR_0020.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_ACCERR_0020.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "mGal",
+        "displayUnits": "mGal, one sigma",
+        "outputLongitudeOrigin": 150,
+        "minimum": 0,
+        "maximum": 170,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ]
+      },
+      {
+        "id": "bouguer",
+        "label": "Gravity",
+        "consumer": "bouguer",
+        "path": "gravity/JGDWN_VES20H_BOU_0015.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_BOU_0015.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_BOU_0015.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "mGal",
+        "displayUnits": "mGal",
+        "outputLongitudeOrigin": 150,
+        "minimum": -250,
+        "maximum": 250,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ]
+      },
+      {
+        "id": "geoid",
+        "label": "Gravity",
+        "consumer": "geoid",
+        "path": "gravity/JGDWN_VES20H_GEOID_0020.IMG",
+        "labelPath": "gravity/JGDWN_VES20H_GEOID_0020.LBL",
+        "format": "pds3-grid",
+        "grid": {
+          "width": 360,
+          "height": 181,
+          "pixelsPerDegree": 1,
+          "firstCentreLongitude": -180,
+          "firstCentreLatitude": 90,
+          "labelExtent": "centres",
+          "datasetId": "DAWN-A-RSS-5-VEGR-V2.0",
+          "productId": "JGDWN_VES20H_GEOID_0020.IMG",
+          "noData": null
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "meters",
+        "displayUnits": "m",
+        "outputLongitudeOrigin": 150,
+        "minimum": -9000,
+        "maximum": 9000,
+        "colors": [
+          "#344e99",
+          "#409eb5",
+          "#9bced1",
+          "#e5e2d7",
+          "#e9be80",
+          "#d67743",
+          "#a22c35"
+        ],
+        "latitudeLimit": {
+          "maximumAbsolute": 60,
+          "evidence": "Bundle errata and map description: the geoid is not valid for all points on the surface due to divergence of the spherical harmonics; the valid region is roughly between +-60 degrees latitude (https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/document/errata.txt)."
+        }
       }
     ],
     "observedColors": []

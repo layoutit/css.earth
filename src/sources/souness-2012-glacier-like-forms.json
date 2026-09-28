@@ -1,0 +1,32 @@
+{
+  "id": "souness-2012-glacier-like-forms",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Inventory of martian glacier-like forms, Souness et al. (2012)",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1016/j.icarus.2011.10.020"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2011.10.020",
+      "label": "doi:10.1016/j.icarus.2011.10.020"
+    },
+    {
+      "role": "archive",
+      "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Mars_Fans_Glaciers_Gullies/MapServer/1",
+      "label": "NASA Trek GIS layer"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/76"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -774,18 +774,24 @@ async function exportTimeProfile(native: string, pid: number | null): Promise<{ 
     };
     const startMs = await exportClock();
     const stdout = await symbolicateNativeXml(await exportTable(), native);
-    const samples = timeProfileSamples(stdout, pid);
+    const allSamples = timeProfileSamples(stdout, null);
+    await writeFile(resolve(native, '..', 'native-samples.json.gz'), gzipSync(JSON.stringify({
+      schema: 'cssearth-native-samples@1', startMs, selectedPid: pid,
+      alignment: 'Host wall-clock approximation; not synchronized to WebKit or proof of event-level causality.',
+      samples: allSamples,
+    })));
+    const samples = pid === null ? allSamples : allSamples.filter(sample => sample.pid === pid);
     if (!samples.length) throw new Error(`Native trace contains no samples for ${pid === null ? 'the recorded processes' : `page PID ${pid}`}.`);
     return { summary: summariseTimeProfile(stdout), samples, startMs };
   } catch (error) { return { summary: { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }, samples: [], startMs: null }; }
 }
 
-export type NativeSample = { ns: number; weightNs: number; pid: number; thread: string; frames: string[] };
+export type NativeSample = { ns: number; weightNs: number; pid: number; process?: string; thread: string; frames: string[] };
 
 /** Every Time Profiler sample with its time from the recording start, its thread and its stack (leaf first), keeping one
  * process when pid is given. xctrace writes each repeated value once with an id and refers to it after (ref="…"). */
 export function timeProfileSamples(xml: string, pid: number | null): NativeSample[] {
-  const text = new Map<string, string>(), numbers = new Map<string, number>(), stacks = new Map<string, string[]>(), threads = new Map<string, { name: string; pid: number }>();
+  const text = new Map<string, string>(), numbers = new Map<string, number>(), stacks = new Map<string, string[]>(), threads = new Map<string, { name: string; pid: number; process: string }>();
   const decode = (value: string) => value.replace(/&amp;/gu, '&').replace(/&lt;/gu, '<').replace(/&gt;/gu, '>').replace(/&quot;/gu, '"').replace(/&apos;/gu, "'");
   const samples: NativeSample[] = [];
   for (const row of xml.split('<row>').slice(1)) {
@@ -796,15 +802,16 @@ export function timeProfileSamples(xml: string, pid: number | null): NativeSampl
     const timeId = ref('sample-time'), weightId = ref('weight'), threadId = ref('thread'), backtraceId = ref('backtrace');
     if (threadId && !threads.has(threadId)) {
       const fmt = text.get(threadId) ?? '', owner = Number(fmt.match(/pid: (\d+)\)/u)?.[1] ?? NaN);
-      threads.set(threadId, { name: fmt.replace(/ \(.*$/u, ''), pid: owner });
+      threads.set(threadId, { name: fmt.replace(/ \(.*$/u, ''), pid: owner, process: fmt.match(/\((.*), pid: \d+\)/u)?.[1] ?? 'unknown' });
     }
     const thread = threadId ? threads.get(threadId) : undefined;
-    if (!thread || (pid !== null && thread.pid !== pid)) continue;
+    if (!thread) continue;
     if (backtraceId && !stacks.has(backtraceId)) {
       const block = row.slice(row.indexOf('<backtrace'), row.indexOf('</backtrace>'));
       stacks.set(backtraceId, [...block.matchAll(/<frame (?:id="\d+" name="([^"]*)"|ref="(\d+)")/gu)].map(m => decode(m[1] ?? text.get(m[2]!) ?? '?')));
     }
-    samples.push({ ns: numbers.get(timeId ?? '') ?? 0, weightNs: numbers.get(weightId ?? '') ?? 1e6, pid: thread.pid, thread: thread.name, frames: stacks.get(backtraceId ?? '') ?? [] });
+    if (pid !== null && thread.pid !== pid) continue;
+    samples.push({ ns: numbers.get(timeId ?? '') ?? 0, weightNs: numbers.get(weightId ?? '') ?? 1e6, pid: thread.pid, process: thread.process, thread: thread.name, frames: stacks.get(backtraceId ?? '') ?? [] });
   }
   return samples;
 }
@@ -1110,7 +1117,11 @@ export function options(args: readonly string[]) {
   if (!name || !/^[a-z0-9-]+$/u.test(name)) throw new TypeError('Pass --name <lowercase-words-and-dashes>.');
   const stepsFile = value('--steps'), seconds = value('--seconds'), replay = value('--replay');
   if ([stepsFile, seconds, replay].filter(Boolean).length !== 1) throw new TypeError('Pass one of --steps <file.json>, --seconds <n> or --replay <capture dir>.');
-  return { name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
+  const coldLoad = args.includes('--cold-load');
+  if (coldLoad && !value('--open')) throw new TypeError('--cold-load requires --open.');
+  if (coldLoad && (args.includes('--debug') || args.includes('--style-writes') || replay))
+    throw new TypeError('--cold-load records startup without injected debug hooks or replay.');
+  return { coldLoad, name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
     open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes') || args.includes('--debug'), debug: args.includes('--debug'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
@@ -1232,20 +1243,32 @@ export function traceEvents(records: readonly unknown[], stopwatchEpochMs: numbe
   // Instruments' native samples of the page's process, one slice per sample on its own thread's track, named by the
   // leaf frame with the stack in args: what WebKit did when its timeline records nothing.
   if (native?.samples.length) {
-    events.push({ ph: 'M', name: 'process_name', pid: 3, tid: 0, args: { name: 'Page process native stacks (Instruments)' } });
+    const pids = new Map<number, number>();
     const tids = new Map<string, number>(), next = new Map<NativeSample, number>(), last = new Map<string, NativeSample>();
-    // A sample is drawn until the next one on its thread at most: samples closer than their 1 ms weight would overlap,
-    // and Perfetto drops overlapping slices ("slice_drop_overlapping_complete_event", 17 in one take).
+    const key = (sample: NativeSample) => `${sample.pid}:${sample.thread}`;
+    // Thread names are not unique across processes. Never clip GPU samples against WebContent samples.
     for (const sample of [...native.samples].sort((a, b) => a.ns - b.ns)) {
-      const previous = last.get(sample.thread);
+      const previous = last.get(key(sample));
       if (previous) next.set(previous, sample.ns);
-      last.set(sample.thread, sample);
+      last.set(key(sample), sample);
     }
     for (const sample of native.samples) {
-      if (!tids.has(sample.thread)) { tids.set(sample.thread, tids.size + 1); events.push({ ph: 'M', name: 'thread_name', pid: 3, tid: tids.get(sample.thread), args: { name: sample.thread } }); }
+      if (!pids.has(sample.pid)) {
+        const pid = 3 + pids.size;
+        pids.set(sample.pid, pid);
+        events.push({ ph: 'M', name: 'process_name', pid, tid: 0,
+          args: { name: `${sample.process ?? "Native process"} (${sample.pid}; approximate clock)` } });
+      }
+      const pid = pids.get(sample.pid)!;
+      if (!tids.has(key(sample))) {
+        tids.set(key(sample), tids.size + 1);
+        events.push({ ph: 'M', name: 'thread_name', pid, tid: tids.get(key(sample)), args: { name: sample.thread } });
+      }
       const ts = Math.round(native.offsetUs + sample.ns / 1e3), end = Math.round(native.offsetUs + Math.min(sample.ns + sample.weightNs, next.get(sample) ?? Infinity) / 1e3);
-      events.push({ ph: 'X', name: sample.frames[0] ?? '?', cat: 'native', pid: 3, tid: tids.get(sample.thread), ts, dur: Math.max(0, end - ts),
-        args: { stack: sample.frames.slice(0, 40).join(' < '), weightMs: sample.weightNs / 1e6 } });
+      events.push({ ph: 'X', name: sample.frames[0] ?? '?', cat: 'native', pid, tid: tids.get(key(sample)), ts, dur: Math.max(0, end - ts),
+        args: { stack: sample.frames.slice(0, 40).join(' < '), weightMs: sample.weightNs / 1e6,
+          nativePid: sample.pid, process: sample.process, thread: sample.thread, nativeSampleNs: sample.ns,
+          alignment: 'Host wall-clock approximation; overlap does not establish event-level causality.' } });
     }
   }
   if (device) {
@@ -1394,7 +1417,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const device = target.kind === 'device' ? await deviceInfo(udid) : null;
   stage('device ready');
   const out = resolve(root, 'output/performance/ios-captures', `${option.name}-${new Date().toISOString().replace(/[:.]/gu, '-')}`);
-  const { page, proxy } = await connectProxy(option.port, target, option.expectUrl);
+  const { page, proxy } = await connectProxy(option.port, target, option.open ? null : option.expectUrl);
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
   stage('visible page attached');
@@ -1420,8 +1443,12 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const enableDomains = async () => {
     stopwatchEpochMs = Date.now();
     for (const domain of ['Page', 'Console', 'Network', 'Timeline', 'Worker']) await session.send(`${domain}.enable`);
-    // Real visits keep Safari's cache; --no-cache measures a cold load (it also refetches repeated images).
-    if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
+    // Request cache bypass explicitly; response sources still determine whether a load was cold.
+    {
+      const cacheReply = await session.send('Network.setResourceCachingDisabled', { disabled: option.noCache });
+      if ('error' in cacheReply || 'timeout' in cacheReply)
+        throw new Error(`Web Inspector rejected cache bypass: ${JSON.stringify(cacheReply)}`);
+    }
   };
   await enableDomains();
   stage('Web Inspector ready');
@@ -1433,7 +1460,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     throw new Error(`Requested --open ${open} differs from --expect-url ${option.expectUrl}. Safari was not navigated.`);
   }
   // iPadOS 26's page target has no Page.navigate ("'Page.navigate' was not found"), so the page navigates itself.
-  if (open) {
+  if (open && !option.coldLoad) {
     workers.clear();
     const swapsBefore = session.swaps();
     await session.send('Runtime.evaluate', { expression: `location.assign(${JSON.stringify(open)})` });
@@ -1443,9 +1470,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     await wait(option.settle * 1000);
   }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
-  const url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
+  let url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
   const expected = option.expectUrl ?? open;
-  if (expected && !sameCapturePage(expected, url)) {
+  if (!option.coldLoad && expected && !sameCapturePage(expected, url)) {
     session.close(); proxy?.kill();
     throw new Error(`Safari is on ${url}; expected ${expected}. No recording or screen grab started.`);
   }
@@ -1581,6 +1608,50 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   // Full screen and viewport captures have separate actions and provenance.
   const captureScreen = target.kind === 'device' ? (file: string) => deviceScreensSession?.screenshot(file) ?? deviceScreen(option.pymobiledevice3, udid, file)
     : async (file: string) => { await run('axe', ['screenshot', '--output', file, '--udid', udid]); };
+  let coldLoad: { url: string; requestedUrl: string; navigationUrl: string; cacheBypassRequested: boolean; at: number; readyAt: number } | null = null;
+  if (option.coldLoad && open) {
+    if (new URL(open).origin !== new URL(url).origin)
+      throw new Error('Cold-load capture needs the visible tab on the same origin so its Inspector clock survives navigation.');
+    const previousOrigin = await evaluate('performance.timeOrigin');
+    const swaps = session.swaps(), at = Date.now() - started;
+    workers.clear();
+    // Reload has WebKit's explicit cache-bypass contract; location.assign can
+    // reuse decoded images even with Network resource caching disabled.
+    const prepareReload = await session.send('Runtime.evaluate', {
+      expression: `history.replaceState(null, '', ${JSON.stringify(open)})`,
+    });
+    if ('error' in prepareReload || 'timeout' in prepareReload || isRecord(prepareReload.result) && prepareReload.result.wasThrown === true)
+      throw new Error(`Could not select the startup route: ${JSON.stringify(prepareReload)}`);
+    const reload = await session.send('Page.reload', { ignoreCache: true });
+    if ('error' in reload || 'timeout' in reload)
+      throw new Error(`Web Inspector rejected startup reload: ${JSON.stringify(reload)}`);
+    const deadline = Date.now() + 120_000;
+    let navigated = false;
+    while (Date.now() < deadline) {
+      const response = await session.send('Runtime.evaluate', { expression: 'performance.timeOrigin', returnByValue: true });
+      const origin = isRecord(response.result) && isRecord(response.result.result) ? response.result.result.value : null;
+      if (typeof origin === 'number' && origin !== previousOrigin) { navigated = true; break; }
+      await wait(50);
+    }
+    if (!navigated || session.swaps() !== swaps)
+      throw new Error('Cold-load navigation did not preserve the recording target; capture is incomplete.');
+    const ready = await awaitRoute(new URL(open).pathname);
+    url = isRecord(ready) && typeof ready.url === 'string' ? ready.url : open;
+    const navigationUrl = await evaluate("performance.getEntriesByType('navigation')[0]?.name");
+    if (typeof navigationUrl !== 'string' || new URL(navigationUrl).href !== new URL(open).href)
+      throw new Error(`Cold load requested ${open} but actually navigated to ${String(navigationUrl)}.`);
+    coldLoad = { url, requestedUrl: open, navigationUrl, cacheBypassRequested: true, at, readyAt: Date.now() - started };
+    marks.push({ label: JSON.stringify({ coldLoad: open }), at, value: coldLoad });
+    // Reload discards page-owned probes. Timeline, network and native screens
+    // span navigation; reinstall endpoint probes only after the mount is ready.
+    residencySnapshots.push(await evaluate(INSTALL_RESIDENCY_PROBE));
+    // Do not install input listeners into the newly mounted scene. WebKit's
+    // wheel-region invalidation restyled the whole tree and caused a 149 ms
+    // composite in the startup trace. Cold-load timing uses native timeline
+    // frames; interactive journeys install this logger before recording.
+    await wait(option.settle * 1000);
+    stage('cold scene ready');
+  }
   if (replay) {
     marks.push({ label: JSON.stringify({ replay: relative(root, resolve(option.replay!)), contacts: replay.plan.events.length }), at: 0, value: { skippedFingers: replay.plan.skippedFingers } });
     await playTouches(option.pymobiledevice3, udid, replay.plan.events, resolve(out, 'replay-plan.json'));
@@ -1598,6 +1669,13 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
       // Preserve the app error before the outer cleanup tears down Inspector.
       await writeFile(resolve(out, 'failure.json'), JSON.stringify({ error: error instanceof Error ? error.message : String(error),
         steps: marks, console: events.filter(event => event.method === 'Console.messageAdded') }, null, 2) + '\n');
+      // A device crash can make every further Inspector request time out. Preserve
+      // events already received before cleanup; --rebuild can export this partial take.
+      const moment = events.slice(recordingStart).filter(event => !String(event.method).startsWith('DOM.'));
+      await writeFile(resolve(out, 'raw.json.gz'), gzipSync(JSON.stringify({ schema: 'cssearth-ios-capture-raw@1',
+        moment, stopwatchEpochMs, deviceSamples: null, workers: [...workers], pagePid,
+        evidence: { snapshots: residencySnapshots }, metadata: { url, target: target.kind, partial: true, debug: option.debug } })));
+      await writeFile(resolve(out, 'residency.json'), JSON.stringify({ snapshots: residencySnapshots, partial: true }) + '\n');
       throw error;
     }
   }
@@ -1638,7 +1716,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const nativeExport: Promise<Awaited<ReturnType<typeof exportTimeProfile>> | { error: string }> = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
     : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 120 s.' });
   await wait(1500);
-  const moment = events.slice(recordingStart);
+  const moment = events.slice(recordingStart).filter(event => !String(event.method).startsWith('DOM.'));
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
   await residencyCheckpoint(steps.length);
@@ -1711,7 +1789,7 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   const revision = (await run('git', ['-C', root, 'rev-parse', 'HEAD']).catch(() => ({ stdout: '' }))).stdout.trim() || null;
   const trackedChanges = await run('git', ['-C', root, 'status', '--porcelain']).then(result => result.stdout.trim().length > 0, () => null);
   const report = {
-    schema: 'cssearth-ios-capture@1', name: option.name, url, endUrl, checkout: root, checkoutRole: 'capture-tool', revision, trackedChanges, udid, target: target.kind,
+    schema: 'cssearth-ios-capture@1', name: option.name, url, endUrl, coldLoad, checkout: root, checkoutRole: 'capture-tool', revision, trackedChanges, udid, target: target.kind,
     ...(device ? { device, deviceMetrics: deviceSummary } : {}), durationMs, steps: marks,
     screenshots: marks.flatMap(mark => isRecord(mark.value) && typeof mark.value.file === 'string' && typeof mark.value.source === 'string' ? [mark.value] : []),
     filmstrip: screens ? { source: 'device-screen', frames: filmstripCount } : null, workers: Object.fromEntries(workers),

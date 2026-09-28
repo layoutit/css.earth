@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-226868",
+  "card": {
+    "text": "A blue supergiant 40 times the Sun's mass, circling a black hole of 21 solar masses every 5.6 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2102-09091",
+        "url": "https://arxiv.org/abs/2102.09091",
+        "label": "Miller-Jones et al. (2021)",
+        "checked": "2026-09-27",
+        "locator": "Table 1: M1, M_BH, R1, Teff and a"
+      },
+      {
+        "catalogueId": "wikipedia-cygnus-x-1",
+        "url": "https://en.wikipedia.org/wiki/Cygnus_X-1",
+        "label": "Wikipedia, \"Cygnus X-1\"",
+        "checked": "2026-09-27",
+        "locator": "Lead section, revision 1374065663",
+        "quote": "Cygnus X-1 (abbreviated Cyg X-1) is a galactic X-ray source in the constellation Cygnus and was the first such source widely accepted to be a black hole."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The star is 22 times as wide as the Sun and 31,000 K at its surface. Its black hole, Cygnus X-1, orbits 0.24 au away, closer than Mercury is to the Sun.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2102-09091",
+        "url": "https://arxiv.org/abs/2102.09091",
+        "label": "Miller-Jones et al. (2021)",
+        "checked": "2026-09-27",
+        "locator": "Table 1: M1, M_BH, R1, Teff and a"
+      },
+      {
+        "catalogueId": "wikipedia-cygnus-x-1",
+        "url": "https://en.wikipedia.org/wiki/Cygnus_X-1",
+        "label": "Wikipedia, \"Cygnus X-1\"",
+        "checked": "2026-09-27",
+        "locator": "Lead section, revision 1374065663",
+        "quote": "It was discovered in 1964 during a rocket flight and is one of the strongest X-ray sources detectable from Earth, producing a peak X-ray flux density of 2.3×10−23 W/(m2⋅Hz) (2.3×103 jansky)."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

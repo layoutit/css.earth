@@ -11,12 +11,6 @@
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
         "https://doi.org/10.1051/0004-6361/202661023",
         "https://doi.org/10.1051/0004-6361/201527134"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        }
       ]
     },
     {
@@ -27,12 +21,6 @@
       "evidence": [
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
         "https://doi.org/10.1051/0004-6361/202661023"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "9e8b176ca252641a1e6f61c673c9b430212ceb5a"
-        }
       ]
     },
     {
@@ -43,12 +31,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202347719",
         "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "8c8c14b9845821ec0ea8529f89ce5b873cc7f187"
-        }
       ]
     },
     {
@@ -59,12 +41,6 @@
       "evidence": [
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
         "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
       ]
     },
     {
@@ -75,12 +51,6 @@
       "evidence": [
         "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits",
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
       ]
     },
     {
@@ -91,13 +61,7 @@
       "evidence": [
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
       ],
-      "revisitWhen": "A self-calibrated SiO cube of this member, or another epoch of the line, which would show whether the northern emission and its continuum peak persist.",
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
-      ]
+      "revisitWhen": "A self-calibrated SiO cube of this member, or another epoch of the line, which would show whether the northern emission and its continuum peak persist."
     },
     {
       "id": "sio-clump-identity",
@@ -108,13 +72,7 @@
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
         "https://arxiv.org/abs/2201.10551"
       ],
-      "revisitWhen": "A second ALMA epoch of the same line, which would show whether any part of the ring moves outward.",
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
-      ]
+      "revisitWhen": "A second ALMA epoch of the same line, which would show whether any part of the ring moves outward."
     },
     {
       "id": "product-registration",
@@ -124,12 +82,6 @@
       "evidence": [
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
         "https://doi.org/10.1051/0004-6361/202661023"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "640a2a870133f46e57d14c59df37bae53f22721b"
-        }
       ]
     },
     {
@@ -140,12 +92,6 @@
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202661023",
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "2024e6574788c8e66aa5547c52eb2031435ed374"
-        }
       ]
     },
     {
@@ -157,12 +103,6 @@
         "https://doi.org/10.1038/s41586-021-03546-8",
         "https://arxiv.org/abs/2201.10551",
         "https://www.eso.org/public/images/eso2109a/"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
       ]
     },
     {
@@ -173,13 +113,7 @@
       "evidence": [
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
       ],
-      "revisitWhen": "A published separation of the limb polarisation from the envelope in this filter, or a deeper N_I epoch.",
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        }
-      ]
+      "revisitWhen": "A published separation of the limb polarisation from the envelope in this filter, or a deeper N_I epoch."
     },
     {
       "id": "occultation-by-absorption",
@@ -189,12 +123,6 @@
       "evidence": [
         "https://arxiv.org/abs/2201.10551",
         "https://drafts.csswg.org/css-transforms-2/#3d-rendering-contexts"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
-        }
       ]
     },
     {
@@ -205,12 +133,6 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/310",
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "813f59caca90e7717f5cfeaa708b4018e56b8d99"
-        }
       ]
     },
     {
@@ -220,13 +142,7 @@
       "finding": "The grid is right: its axes are read from the products' own WCS, where increasing column is west and increasing row is north, and its sky plane reproduces the published figure's patch layout (Montarges et al. 2026, Fig. B.1) with east on the left; the mirrored fits to that figure score 0.455 and 0.421 against 0.798. The rendered frame is now checked too. Betelgeuse's default view is pinned by its default-view test with celestial north 42 degrees counterclockwise of screen-right and east 90 degrees beyond it. Rendered headless at that view on 18 September 2026, the light the SiO dataset adds over the MATISSE dataset lies at 147 degrees, 1.4 disc radii out, where the ring's east-south-east weight predicts 164 and a mirrored volume would put it at 280. Every lens of this package shares one bank frame, so the check covers them all. An earlier reading of the capture camera's east axis to the screen's right was made at a saved world camera of unknown roll, before the world-handedness fix.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202661023",
-        "https://github.com/layoutit/css.earth/blob/2d5df092687e5ba0fe765cde33a58686e19c5abe/src/objects/betelgeuse/README.md"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md"
       ]
     },
     {
@@ -238,12 +154,6 @@
         "https://almascience.eso.org/tap/sync",
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
         "https://almascience.org/aq/?result_view=observation&projectCode=2015.1.00206.S"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-18",
-          "commit": "6aa298d3b884003b126a5cc2a9f5578268467093"
-        }
       ]
     }
   ]

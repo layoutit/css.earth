@@ -124,12 +124,12 @@ hashes; routine navigation screenshots remain scratch. The final historical
 visual report omitted browser version and viewport, a limitation recorded
 beside it rather than filled retrospectively.
 
-The screenshots above show the delivered clouds at `5569fa211`. Their original
+The screenshots above show the delivered clouds. Their original
 source-card text predates the attribution corrections. All seven prepared
 volume-bank identities remain unchanged during the contract alignment; that
 comparison permits reuse of cloud appearance findings, not old metadata claims.
 
-The [earlier integration account](https://github.com/layoutit/css.earth/blob/5569fa211db447927cb9c30284f13d2a37049695/docs/nebulae/README.md#integration-evidence)
+The [earlier integration account](README.md#integration-evidence)
 retains its original scope and limitations. Cold native-processing replay,
 quantitative axis-handoff requalification and unrelated planet suites are not
 claimed by a provenance-only update. Existing material defects remain in the
@@ -195,20 +195,15 @@ is separately pinned; changing its method remains research work.
 Application replay and source-catalogue preparation read evidence from each
 object's `source/` directory. `source/provenance-references.json` maps the
 provenance compiler's retained evidence and recipe copies to their original
-research paths, Git revisions, SHA-256 hashes and byte counts. Existing compact
+research paths, SHA-256 hashes and byte counts. Existing compact
 replay copies are reused; the copied JSON bytes and scientific pins are unchanged.
 The source manifest covers those copies and the mapping itself.
 
 A research path inside a retained JSON record is historical metadata, not an
 instruction for application preparation to load that file. The shared
-`src/sources/` records likewise retain their original revision-pinned evidence;
-their statement links use GitHub permalinks to that same revision. These records
+`src/sources/` records likewise retain their original evidence. These records
 do not need a second copy merely to cite an earlier processing account. Full
 research processing remains an explicit lab operation.
 
-Routine provenance tests verify the retained current bytes, manifest coverage,
-revision syntax and portable links without requiring Git history. The separate
-`node tools/sources/nebula-provenance-history.gate.mts` audit compares every retained copy
-and historical source-record hash with its recorded Git revision. Run that audit
-from a checkout containing those revisions; it fails if history is missing rather
-than substituting current bytes or skipping verification.
+Routine provenance tests verify the retained current bytes, manifest coverage
+and portable links.

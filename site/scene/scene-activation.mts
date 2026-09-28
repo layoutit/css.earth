@@ -1,4 +1,3 @@
-import { bindInputEvent } from '@cssearth/renderer';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -42,12 +41,11 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
     }
     let interrupted = false;
     if (handoff?.afterMount) {
-      if (!request) throw new Error('A world handoff requires its navigation request.');
       try {
         const completed = await session.wait(handoff.afterMount(mount));
-        if (completed.cancelled || !isCurrent(session) || request.signal.aborted) return;
+        if (completed.cancelled || !isCurrent(session) || request?.signal.aborted) return;
       } catch (error) {
-        if ((!isRecord(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || !isCurrent(session) ||
+        if ((!isRecord(error) && !(error instanceof Error)) || error.name !== 'AbortError' || !('preserveView' in error) || error.preserveView !== true || !request || !isCurrent(session) ||
             request.signal.aborted) throw error;
         // The detailed destination already owns the camera. Real input ends
         // its flight without retiring that scene or restoring the endpoint.
@@ -99,24 +97,6 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
   function connectControls(session: SceneSession) {
     const { mount, shell } = session;
     if (!mount || !shell) return;
-    // Restore the incoming camera before arming optional texture detail. An
-    // untouched page keeps its prepared coarse surface; the first real input
-    // admits higher detail outside the cold-load critical path.
-    if (mount.refineTextures) {
-      const releaseRefinement = () => {
-        removeRefinementListeners();
-        if (isCurrent(session)) mount.refineTextures?.();
-      };
-      const surface = windowTarget.document.querySelector<HTMLElement>('.object-input-surface');
-      const releases = ['pointerdown', 'wheel', 'keydown'].map(type => {
-        if (surface) return bindInputEvent(surface, `refinement:${type}`, windowTarget, type, releaseRefinement,
-          type === 'wheel' ? { passive: true } : {});
-        windowTarget.addEventListener(type, releaseRefinement);
-        return () => windowTarget.removeEventListener(type, releaseRefinement);
-      });
-      const removeRefinementListeners = () => { for (const release of releases) release(); };
-      session.own(removeRefinementListeners);
-    }
     shell.setCamera?.(mount);
     session.own(() => { shell.setCamera?.(null); });
   }

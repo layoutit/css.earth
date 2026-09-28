@@ -1,4 +1,4 @@
-import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '../../raster/index.ts';
+import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateCircleCatalogue, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '../../raster/index.ts';
 import { validateTerrestrialRings } from './rings.ts';
 import { parseSolidPreparationSource } from './records/profile-source.ts';
 import { scientificPreviewGrid, lensTextureGrid } from './raster-grid.ts';
@@ -27,13 +27,14 @@ type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnT
  * both the radial-terrain lane and the generic-lane interpreter apply the same rule. */
 export function validateCategoricalGrid(lens: ReturnType<typeof parseSolidScience>) {
   if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
-    lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < 2 ||
+    // A presence catalogue drawn over an underlay has one class: its empty cells show the underlay, not a second unit.
+    lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < (lens.underlay ? 1 : 2) ||
     lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
     lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
       typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
     new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
     !lens.grid || typeof lens.grid.noData !== 'number' || !Number.isFinite(lens.grid.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
-    throw new TypeError('Categorical scientific grids require discrete units, nearest sampling and separate missing data.');
+    throw new TypeError(`${lens.id}: categorical scientific grids require discrete units (${lens.underlay ? 'one or more' : 'two or more'} categories, minimum 0, maximum categories - 1), nearest sampling and a missing value apart from the unit codes; got ${isArray(lens.categories) ? lens.categories.length : 0} categories, minimum ${String(lens.minimum)}, maximum ${String(lens.maximum)}, sampling ${String(lens.sampling)}, noData ${String(lens.grid?.noData)}.`);
   }
 }
 
@@ -77,6 +78,7 @@ export function parseTerrestrialProfile(input:unknown) {
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
     if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, terrain); continue;}
+    if (lens.format === 'circle-catalogue') {validateCircleCatalogue(lens, terrain); continue;}
     validateCategoricalGrid(lens);
     const facetTable = lens.format === 'facet-scalars';
     const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
@@ -91,9 +93,12 @@ export function parseTerrestrialProfile(input:unknown) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'npy-lonlat-grid', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'npy-lonlat-grid', 'pds3-grid', 'vicar-grid', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && !facetTable && (typeof lens.grid.width !== 'number' || !Number.isSafeInteger(lens.grid.width) || typeof lens.grid.height !== 'number' || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
-        !(typeof lens.minimum === 'number' && typeof lens.maximum === 'number' && lens.minimum < lens.maximum) || !isArray(lens.colors) || lens.colors.length < 2 ||
+        // A continuous ramp spans two or more colours over minimum < maximum; a categorical grid (checked above) spans its
+        // category indices 0..n-1 with one colour per category, which allows a one-class presence catalogue.
+        !(typeof lens.minimum === 'number' && typeof lens.maximum === 'number' && (lens.categories ? lens.minimum === 0 && lens.maximum === lens.categories.length - 1 : lens.minimum < lens.maximum)) ||
+        !isArray(lens.colors) || lens.colors.length < (lens.categories ? lens.categories.length : 2) ||
         lens.colors.some(color => typeof color !== "string" || !/^#[0-9a-f]{6}$/i.test(color)) ||
         (lens.sampling !== undefined && !['nearest', 'bilinear'].includes(lens.sampling)) ||
         (lens.valueTransform && (!Number.isFinite(lens.valueTransform.scale) || lens.valueTransform.scale <= 0 ||

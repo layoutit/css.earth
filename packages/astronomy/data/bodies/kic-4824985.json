@@ -1,0 +1,30 @@
+{
+ "id": "kic-4824985",
+ "classification": "star",
+ "order": 1895,
+ "physical": {
+  "name": "KIC 4824985",
+  "horizonsCode": null,
+  "meanRadiusKm": 7827251.1,
+  "gravitationalParameterKm3PerS2": 125745036939.73756,
+  "parent": null,
+  "effectiveTemperatureK": 4626
+ },
+ "physicalNotes": "Radius 11.2509 +/- 0.1992 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 4824985 (Gold): Radius (Mosser scale, solar radii) 11.2509 +/- 0.1992 (https://arxiv.org/abs/2410.00102): 7,827,251 km at 695,700 km per solar radius. Mass 0.9475 +/- 0.0369 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 4824985 (Gold): Mass (Mosser scale, solar masses) 0.9475 +/- 0.0369 (https://arxiv.org/abs/2410.00102); GM is that mass times the JPL solar GM. Temperature 4626 +/- 57 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 4824985 (Gold): APOGEE effective temperature (K) 4625.9746 +/- 56.9987 (https://arxiv.org/abs/2410.00102). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 288.53962146744607,
+  "declinationDegrees": 39.95681968628519,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 3252.5003879474393,
+  "properMotionRaMasPerYear": -2.0548908184427823,
+  "properMotionDecMasPerYear": -3.4323410363856857,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2101285540957271168 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kic-4824985/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 0.3075 +/- 0.0101 mas (same row, RUWE 0.96): 3252.50 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -2.055, -3.432 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 2101285540957271168 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 1,000,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202101285540957271168)"
+  }
+ }
+}

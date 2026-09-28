@@ -1,3 +1,5 @@
+import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
+import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
 import { mountPreparedVolumeLod, samePreparedVolumeTopology } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
@@ -290,6 +292,23 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         // The bank's visibility is written on its roots from outside. A lens that composites in front of the body
         // lives in the second root, so both must be gated or a disabled cloud keeps drawing over the star.
         return Object.freeze({ root, frontRoot, publish, state, destroy,
+          /** Distant approach warms the contributing axis. Detail admission owns the selected lens's
+           * full rotation bank, so dragging cannot release an axis and hide the cloud to decode it again. */
+          textureUrls(publication: VolumeCameraPublication, approaching = false): readonly string[] {
+            const volume = lensById.get(selected)!.volume;
+            const projection = volume.impostors ? projectVolumeImpostors(publication, volume.frame, volume.impostors) : null;
+            const paths = new Set<string>();
+            if (!projection || (projection.visible && projection.volumeMix > 0)) {
+              for (const stack of volume.stacks) for (const leaf of stack.leaves) paths.add(leaf.texturePath);
+              for (const leaf of volume.detailPlanes ?? []) paths.add(leaf.texturePath);
+            } else if (projection.visible && approaching) {
+              for (const path of preparedVolumeTexturePaths(volume, publication)) paths.add(path);
+            }
+            if (projection?.visible && projection.volumeMix < 1) {
+              for (const view of projection.views) paths.add(volume.impostors!.views.find(candidate => candidate.id === view.id)!.texturePath);
+            }
+            return [...paths].map(resolvePrepared);
+          },
           subscribe(listener: (state: PreparedVolumeLensState) => void) {
             if (!destroyed) listeners.add(listener);
             return () => { listeners.delete(listener); };

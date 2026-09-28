@@ -683,6 +683,134 @@
         "kind": "local",
         "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
       }
+    },
+    {
+      "id": "trek-mercury-hgm008-gravity-anomaly",
+      "path": "science/gravity/anomaly-hgm008.tif",
+      "origin": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe",
+      "credit": "A. Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center; NASA Solar System Treks",
+      "license": "United States Government scientific data; cite Genova et al. (2019)",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/Anomaly_Map_HgM008_Lmax90_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://doi.org/10.1029/2018GL081135"
+      ],
+      "acquisition": "Trek product 'MSGR MLA, Gravity Anomaly Global' (Anomaly_Map_HgM008_Lmax90_16ppd, dated 2020-06-11). Extract member Anomaly_Map_HgM008_Lmax90_16ppd.tif from the Trek download archive, unchanged: 3600 x 1800 float64 GeoTIFF, geographic degrees on a 2,439.7 km sphere, 0.1 degree cells from -180 E, 90 N; values in mGal; declared no-data 9.969209968386869e+36 (no such cells). The file name says 16ppd; the grid is 10 cells per degree.",
+      "redistribution": "Original numeric product restored from its origin or source cache; prepared display images with credit.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "lensId": "gravity",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-mercury-hgm008-gravity-anomaly",
+            "role": "material",
+            "evidence": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=4bd584f5-2294-45eb-9362-ffe0272f4fbe"
+          },
+          {
+            "catalogueId": "genova-2019-mercury-hgm008",
+            "role": "method",
+            "evidence": "src/objects/mercury/source/science/gravity/ggmes_100v08_sha.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trek-mercury-hgm008-crustal-thickness",
+      "path": "science/gravity/crustal-thickness-hgm008.tif",
+      "origin": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6",
+      "credit": "A. Genova, MESSENGER Radio Science, NASA Goddard Space Flight Center; NASA Solar System Treks",
+      "license": "United States Government scientific data; cite Genova et al. (2019)",
+      "licenseEvidence": [
+        "https://trek.nasa.gov/tiles/Mercury/EQ/CrustalThickness_Map_HgM008_16ppd/1.0.0/WMTSCapabilities.xml",
+        "https://doi.org/10.1029/2018GL081135"
+      ],
+      "acquisition": "Trek product 'MSGR MLA, Crustal Thickness Global' (CrustalThickness_Map_HgM008_16ppd, dated 2020-06-11). Extract member CrustalThickness_Map_HgM008_16ppd.tif from the Trek download archive, unchanged: 5760 x 2880 float32 GeoTIFF, geographic degrees on a 2,439.7 km sphere, 0.0625 degree cells from -180 E, 90 N; values in km; declared no-data NaN (no such cells).",
+      "redistribution": "Original numeric product restored from its origin or source cache; prepared display images with credit.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "lensId": "crust",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "trek-mercury-hgm008-crustal-thickness",
+            "role": "material",
+            "evidence": "https://trek.nasa.gov/mercury/TrekWS/rest/cat/data/stream?uuid=9ef7603c-d393-4a35-a834-afc50cfde9c6"
+          },
+          {
+            "catalogueId": "genova-2019-mercury-hgm008",
+            "role": "method",
+            "evidence": "https://doi.org/10.1029/2018GL081135"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-md3-native",
+      "path": "maps/native/md3.png",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Mercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m.tif",
+      "credit": "Applied Coherent Technology Corporation; MESSENGER team; Arizona State University; Johns Hopkins APL; Carnegie Science; USGS Astrogeology",
+      "license": "United States government work / NASA-PDS data; cite USGS authors",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m"
+      ],
+      "acquisition": "Native USGS GeoTIFF, edition 1 (2016), reduced by the pixel-area mean in maps/native/md3.json; output retains -180 to 180 degrees east and north-up ordering. All-zero no-data footprints become gray grid. Partial footprints use only observed pixels. No new contrast stretch.",
+      "redistribution": "Derived scientific display image with source credit. Original pixels and their display stretch remain qualified by the publisher product.",
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ],
+      "title": "MESSENGER MDIS MD3 color global mosaic",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-md3-native",
+            "role": "material",
+            "evidence": "USGS native GeoTIFF, edition 1 (2016), PDS data set MESS-H-MDIS-5-RDR-MD3-V1.0; product and grid are declared by the acquisition recipe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mercury-native-md3-recipe",
+      "path": "maps/native/md3.json",
+      "origin": "Repository-authored reduction recipe for the linked USGS GeoTIFF.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Declares native byte-image encoding, cartographic frame and compact display dimensions."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -928,6 +1056,65 @@
             "catalogueId": "source-mercury-usgs-messenger-enhanced-native",
             "role": "reference",
             "evidence": "USGS publisher metadata, including the display stretch and illumination selection."
+          }
+        ]
+      }
+    },
+    {
+      "path": "science/gravity/ggmes_100v08_sha.lbl",
+      "purpose": "PDS3 label of the HgM008 spherical-harmonic model (GGMES_100V08): reference radius, GM, Kaula constraint, producer and citation. The Trek grids carry no label of their own.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "genova-2019-mercury-hgm008",
+            "role": "reference",
+            "evidence": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl"
+          }
+        ]
+      },
+      "origin": "https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/ggmes_100v08_sha.lbl"
+    },
+    {
+      "id": "usgs-messenger-md3-native-label",
+      "path": "maps/native/md3.lbl",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/fc37692f-e806-4632-b300-0250bb61c3de/resource/0313deb7-ad46-4ad9-96fd-cd7e8886443c/download/mercury_messenger_mdis_basemap_md3color_mosaic_global_665m_pds3.lbl",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "Publisher detached PDS3 label.",
+      "redistribution": "Original source metadata.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-md3-native",
+            "role": "reference",
+            "evidence": "Detached label linked from the USGS product page."
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-messenger-md3-native-metadata",
+      "path": "maps/native/md3-metadata.json",
+      "origin": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_md3_color_global_mosaic_665m",
+      "credit": "USGS Astrogeology; MESSENGER team",
+      "license": "United States government work; cite authors",
+      "acquisition": "USGS catalogue fields retrieved 2026-09-27 and checked against the native TIFF header and detached PDS3 label on 2026-09-27.",
+      "redistribution": "Source metadata transcription.",
+      "consumers": [
+        "assets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-md3-native",
+            "role": "reference",
+            "evidence": "USGS publisher metadata, including the filter-to-channel assignment, photometric normalization and display stretch."
           }
         ]
       }

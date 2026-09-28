@@ -1,0 +1,28 @@
+{
+  "sourceRecords": {
+    "point": 436
+  },
+  "width": 4096,
+  "height": 2048,
+  "unknownOrConflictingPixels": 0,
+  "missingPixels": 8388201,
+  "categories": [
+    {
+      "value": "point",
+      "label": "Recessional glacier-like form",
+      "color": "#ff33cc"
+    }
+  ],
+  "output": "mars-recessional-glfs.tif",
+  "sha256": "b864b880ea8065e24149fa496fc03887b74203ef7b1f80bad39d556c0dbb609e",
+  "transform": [
+    5209.6902120093355,
+    0.0,
+    -10669445.554195119,
+    0.0,
+    -5209.6902120093355,
+    5334722.7770975595
+  ],
+  "radiusMeters": 3396190,
+  "policy": "One cell per catalogued point; no feature size or width drawn; cells holding two categories withheld; source edges clipped by global raster extent."
+}

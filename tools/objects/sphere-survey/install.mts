@@ -19,7 +19,7 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '@cssearth/bake/objects/layers/terrestrial';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '@cssearth/bake/objects/layers/terrestrial';
 import { OBSERVER_CAMERAS_FILE } from '@cssearth/bake/objects/layers/terrestrial';
-import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
+import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from '@cssearth/bake/objects/sphere-survey';
 import { INVESTIGATION_SURVEY_DIRECTORY } from '@cssearth/bake/sources';
 import { writeHorizonsOperations } from '@cssearth/bake/objects/layers/terrestrial';
 import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './setup.mts';
@@ -80,7 +80,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const { number, name, figure } = setup.survey, evidence = parseComparisonEvidence(setup.evidence);
   const disagreeing = evidence.columns.filter(column => phaseAgreement(column) === 'elsewhere');
   if (disagreeing.length > 0) throw new Error(`${objectId}'s rotation and the paper's model disagree in ${disagreeing.map(column => `${column.label} (best at ${column.bestTurnDegrees}°)`).join(', ')}; nothing installed.`);
-  const today = new Date().toISOString().slice(0, 10), commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
+  const today = new Date().toISOString().slice(0, 10);
   const lensFrames = setup.cast.frames, nights = setup.cast.nights, onAdam = setup.lensMesh === 'adam', castApparitions = setup.apparitions.filter(entry => entry.cast > 0).length;
   // The mesh the lens rides, named as the Shape view's source when the release has no ADAM mesh for the body.
   const primaryPath = requireString(requireRecord(requireRecord(recipe.geometry).radialTerrain).path);
@@ -148,12 +148,12 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
 
   // The ledger: the decision, and the entries it answers.
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
-  const check = { date: today, commit }, listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
+  const listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
   const unused = setup.cast.released - lensFrames - leaveOut.length - setup.leftOutApparitions.reduce((sum, entry) => sum + entry.frames, 0);
   const decision = {
     id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
     finding: [decisionFinding(figure, evidence, setup.columnOrder), leftOutText].filter(Boolean).join(' '),
-    evidence: [setup.evidence.source, listing, ...(onAdam ? [adam] : [])], checked: [check] };
+    evidence: [setup.evidence.source, listing, ...(onAdam ? [adam] : [])] };
   const at = entries.findIndex(entry => entry.id === COMPARISON_ENTRY);
   if (at >= 0) entries[at] = decision; else entries.push(decision);
   // An entry the decision answers that quotes a shared record takes the record's subject and finding as its own first,
@@ -163,7 +163,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     const shared = requireRecord(await readJson(resolve(ROOT, INVESTIGATION_SURVEY_DIRECTORY, `${requireString(entry.survey)}.json`)));
     const { survey: _survey, ...own } = entry;
     entries[index] = { id: own.id, subject: requireString(shared.subject), status: own.status, finding: requireString(shared.finding),
-      evidence: [...(Array.isArray(shared.evidence) ? shared.evidence : []), ...requireArray(own.evidence)], checked: own.checked };
+      evidence: [...(Array.isArray(shared.evidence) ? shared.evidence : []), ...requireArray(own.evidence)] };
   }
   // An install run again the same day finds its own words at the front or back of an entry; it replaces them.
   const earlierWords = (text: string) => {
@@ -179,8 +179,6 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     const links = requireArray(entry.evidence).map(value => requireString(value));
     if (link && !links.includes(link)) links.push(link);
     entry.evidence = links;
-    const checked = requireArray(entry.checked).map(value => requireRecord(value));
-    entry.checked = checked.some(earlier => earlier.date === check.date && earlier.commit === check.commit) ? checked : [...checked, check];
   };
   close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: ${unusedWords(setup.apparitions, SURVEY_LENS_SETTINGS.levelMatching.minimumPairs)}.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
   // A lens that casts more than one apparition answers the entry that kept the other apparition's frames out on levels.

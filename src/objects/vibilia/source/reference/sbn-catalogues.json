@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "vibilia",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 144,
+    "by": "Horizons command 144;"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 112,
+        "fields": {
+          "Designation": "144",
+          "Name": "Vibilia",
+          "Diameter_Nominal": "145.5",
+          "Uncert": "8.2",
+          "Dia_1": "144",
+          "Uncert_1": "3",
+          "Events_1": "15",
+          "Invalid_1": "0",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "1099",
+          "Dia_2": "144",
+          "Uncert_2": "4",
+          "Events_2": "12",
+          "Invalid_2": "0",
+          "Model_Source_2": "DAMIT",
+          "Model_Number_2": "1824",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_1": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 153196,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "144",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00144",
+          "Absolute_mag": "7.91",
+          "Slope_param": "+0.17",
+          "Mean_JD": "2456999.6681758",
+          "N_W1": "17",
+          "N_W2": "17",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "147.478",
+          "Diameter_err": "48.498",
+          "V_albedo": "0.028",
+          "V_albedo_err": "0.018",
+          "IR_albedo": "0.042",
+          "IR_albedo_err": "0.042",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153197,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "144",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00144",
+          "Absolute_mag": "7.91",
+          "Slope_param": "+0.17",
+          "Mean_JD": "2456807.4544734",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "131.355",
+          "Diameter_err": "33.304",
+          "V_albedo": "0.046",
+          "V_albedo_err": "0.015",
+          "IR_albedo": "0.069",
+          "IR_albedo_err": "0.035",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 161980,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "144",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00144",
+          "Absolute_mag": "7.91",
+          "Slope_param": "+0.17",
+          "Mean_JD": "2457339.5002146",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "193.613",
+          "Diameter_err": "39.172",
+          "V_albedo": "0.023",
+          "V_albedo_err": "0.006",
+          "IR_albedo": "0.034",
+          "IR_albedo_err": "0.014",
+          "Beaming_param": "1.200",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Nug16": "Nugent, C.R., A. Mainzer, J. Bauer, R.M. Cutri, E.A. Kramer, and 4 others, NEOWISE Reactivation Mission Year Two: Asteroid Diameters and Albedos, Astron. J. 152, 63, doi:10.3847/0004-6256/152/3/63, 2016."
+    },
+    "selected": {
+      "diameter": 2
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

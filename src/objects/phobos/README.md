@@ -8,6 +8,8 @@
 
 - Relative albedo preserves the archive scale without an absolute-albedo claim. Slope is gravity-relative under the source authors’ rotation, uniform-density and Mars-distance assumptions.
 
+- Crater catalogue draws the rims of the 9,224 craters in the [PH9224GT catalogue](https://doi.org/10.1016/j.asr.2013.11.006) of Salamunićcar et al. (2014), from the [NASA Phobos Trek GIS layer](https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer). Each crater is a centre and an angular radius; `packages/bake/src/objects/acquisition/geology-grid.py` marks every 0.125° cell (24 m) its rim circle crosses, plus the centre cell, in `source/craters/phobos-crater-rims.tif` (plan `source/craters/prepare-grid.json`, receipt beside it: 220,719 rim cells). Other cells show the Monochrome mosaic in grey at 35% brightness and 6 bits per channel.
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Evidence
@@ -18,9 +20,11 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 14400 × 7200 | 10.93 MB (7,680,016 + 3,252,062 bytes) |
 
-Each atlas is 5010 × 5217 pixels, with 1600 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/phobos/prepared). WebP quality is 95. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
+Each atlas is 5010 × 5217 pixels, with 1600 retained faces. The scene bytes match the previous main version. WebP quality is 95. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 - Exact GeoTIFF origin, scale and missing value are checked by the recipe.
+
+- **Crater catalogue registration.** The catalogue names 15 of its craters. Their centres lie 0.16–0.95 km from the IAU Gazetteer centres (Skyresh 3.25 km, where the Gazetteer itself is 3.1 km from the crater's dip in the shape). Measured against the dip each crater makes in the SPC shape (depth-weighted centre below a plane fitted to a ring at 1.4–2 radii), the catalogue centres are 0.06–0.64 km off: Stickney 0.63 km (radius 3.9 km), Hall 0.28 km (3.1 km), Roche 0.42 km (1.0 km). Over the Stooke mosaic the Stickney, Limtoc and Hall rims follow the photographed bowls. Catalogue and mesh both use planetocentric east longitude, so the rim grid lands on the mesh by direction, as the Monochrome map does.
 
 - Four barycentric samples per retained face gave a maximum distance of 201.67 m for Phobos; these are sampled rendering errors, not source measurement uncertainty or an exhaustive bound.
 
@@ -32,9 +36,21 @@ Feature notes: 3 of the labelled names carry a caption note, the lead summary of
 
 - This is an illuminated observation mosaic, not recovered albedo. Stooke explicitly describes artistic adjustments where opposing lighting meets and an approximate registration to DLR control. We retain that limitation and do not claim that local crater shadows have been removed.
 
+- **Crater catalogue:** the rims come from an automated detector with hand-checked candidates, so unmarked ground is not proof of no crater. The four largest entries, 8.6–17.9 km across, are wider than Stickney, carry no IAU name and are shown as published. Craters smaller than a 24 m cell show as one cell.
+
 - This is radial height, not elevation above a geoid. This presentation is a low-resolution approximation of the released model, not the original scientific mesh.
 
 - **Relative albedo and slope:** Complete atlas transfer qualification remains a separate preparation check. The authored support policy withholds any facet whose released Albedo field is non-finite in both new views; this is not a complete photographic coverage mask.
+
+## Mars Express and Trek layers reviewed
+
+We checked the Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobos/) offers from Mars Express work, and traced each to its producer, on 2026-09-27 and 2026-09-28. Only the crater catalogue became a lens. The [investigation ledger](investigations.json) keeps each decision and what would reopen it.
+
+- **HRSC 100 m DEM** ([Willner et al. 2010](https://doi.org/10.1016/j.epsl.2009.07.033); USGS GeoTIFF and the 2016 PDS release MEX-MSA-HRSC-5-REFDR-PHOBOS-MAPS-V1.0). Its label calls the values “Height above Spheroid” on the 11.1 km sphere: the quantity Elevation already shows. Sampled in the app's frame, HRSC minus SPC height has mean −15 m and RMS 284 m (r = 0.975); the difference is a smooth two-hemisphere pattern of about ±0.5 km, not new terrain. The HRSC atlas's dynamic heights exist only as contours on map sheets.
+- **MExLab SRC and Viking DEM** ([Karachevtseva et al. 2014](https://doi.org/10.1016/j.pss.2013.12.015)). Trek's copy is a 1° grid of height above the 11.08 km sphere (RMS 340 m against SPC). Same quantity, coarser.
+- **Roughness, 1 km baseline** (both the MExLab and the HRSC versions). Trek credits them to JPL and states no formula or unit. The values are signed and follow the DEM minus its local mean (r = 0.93 for both), so they show local relief from an older DEM.
+- **HRSC V/NIR spectral index.** The only public copy is a colour picture with seven legend classes and an unexplained white class. The producer's PDS release holds four regional colour image sets, not an index grid.
+- **PH9224GT crater catalogue.** Added as the Crater catalogue lens (above). Trek's crater count and abundance maps are binnings of the same catalogue and were not added.
 
 [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 

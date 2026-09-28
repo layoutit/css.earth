@@ -236,7 +236,7 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 2632345
       },
-      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "coverage": "Archived nondegenerate unit polygons colored by UNITNAME; 99.6% of the sphere mapped, gaps mostly beyond 80° latitude. Cells where polygons of different units overlap (0.001%) are withheld; no extrapolation.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -376,7 +376,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "oxygen-signature"
@@ -432,7 +432,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "oxygen-signature"
@@ -488,7 +488,7 @@
         "https://doi.org/10.5281/zenodo.11402374",
         "muse/datacite-license.json"
       ],
-      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "acquisition": "Reproduce with packages/bake/src/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
       "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
       "consumers": [
         "oxygen-signature"
@@ -730,7 +730,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -755,7 +755,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -805,7 +805,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -830,7 +830,7 @@
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.6390469"
       ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
+      "acquisition": "Decode the pinned coordinate-bound JSON using packages/bake/src/objects/acquisition/mapped-composition.ts.",
       "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
       "consumers": [
         "composition-source"
@@ -842,6 +842,81 @@
             "catalogueId": "ganymede-sphere-composition-2022",
             "role": "material",
             "evidence": "https://doi.org/10.5281/zenodo.6390469"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dlr-voyager-galileo-juno",
+      "path": "ganymede-dlr-juno.tif",
+      "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/Ganymede_global_equi_180_359m_Juno.tif",
+      "catalog": "https://doi.org/10.57780/esa-fcj5pf3",
+      "credit": "ESA/DLR; NASA/JPL Voyager, Galileo SSI and JunoCam images; Kersten et al. (2021), doi:10.1016/j.pss.2021.105310; European Space Agency, 2022, DLR_Ganymede_Voyager-Galileo_Juno_V1.0, 10.57780/esa-fcj5pf3",
+      "license": "CC BY-NC 3.0 IGO (ESA Space Science Archive terms); credit ESA/DLR and cite the data set; no implied ESA endorsement; commercial use needs an ESA licence",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/esdc/terms-and-conditions",
+        "https://www.cosmos.esa.int/web/psa/dlr_ganymede_voyager-galileo-juno_v1.0",
+        "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/PUG-DLR-Ganymede-v2.pdf"
+      ],
+      "acquisition": "Restore the published GeoTIFF through source/preparation/acquisition.json.",
+      "redistribution": "Reacquirable 423 MB source TIFF excluded from Git; prepared textures retain the ESA/DLR credit, the data-set citation and the CC BY-NC 3.0 IGO terms.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "dlr-juno",
+      "label": "DLR mosaic",
+      "falseColor": false,
+      "width": 46080,
+      "height": 23040,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "DLR_Ganymede_Voyager-Galileo-Juno_V1.0: 118 Voyager and 88 Galileo images on the Zubarev et al. (2016) control network, with JunoCam Perijove 34 images (7 June 2021, 880-3000 m per pixel) laid on top over the leading side; 128 pixels per degree (358.77 m at the equator). GDAL_NODATA=0; gaps keep the shared gray grid. DLR removed artefacts by cutting or interpolating from surrounding pixels and matched brightness and contrast by hand; those producer edits remain. Its control network puts features a median 14 km from the USGS mosaic that the labels and Geology follow.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "voyager-1",
+            "missionId": "voyager-1",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/PUG-DLR-Ganymede-v2.pdf"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/PUG-DLR-Ganymede-v2.pdf"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/PUG-DLR-Ganymede-v2.pdf"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "juno",
+            "missionId": "juno",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/PUG-DLR-Ganymede-v2.pdf"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-dlr-voyager-galileo-juno",
+            "role": "material",
+            "evidence": "Origin, DOI 10.57780/esa-fcj5pf3 and version V1.0 recorded on this manifest entry."
           }
         ]
       }
@@ -1036,14 +1111,14 @@
       "id": "sim3237-display-categories-json",
       "path": "science/geology-sim3237/display-categories.json",
       "origin": "https://pubs.usgs.gov/sim/3237/",
-      "credit": "USGS source data; cssEarth intake record",
+      "credit": "Collins et al. (2013), USGS; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
-      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "acquisition": "Unit colors read from the GeologyUnits renderer in member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_ArcMap10.mxd of the official USGS ZIP (fetched by HTTP byte range, not vendored) and converted from the stored CIE L*a*b* with the ArcGIS conversion recorded in the file; unit names and symbols from the Description of Map Units on the SIM 3237 map sheet.",
       "redistribution": "Metadata only; retained in Git.",
       "consumers": [
         "geology-validation"
       ],
-      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+      "purpose": "Unit values, names, symbols and published GIS colors of the Geology lens; the recipe categories must equal them."
     },
     {
       "id": "sim3237-registration-anchors",
@@ -1051,12 +1126,12 @@
       "origin": "https://pubs.usgs.gov/sim/3237/",
       "credit": "USGS point and polygon layers; cssEarth comparison",
       "license": "Repository-authored validation metadata of public domain GIS data",
-      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained.",
+      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes (point TERRAIN against polygon UNITNAME). Original discrepancies are retained.",
       "redistribution": "Small source-validation metadata.",
       "consumers": [
         "geology-validation"
       ],
-      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
+      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes (point TERRAIN against polygon UNITNAME). Original discrepancies are retained."
     },
     {
       "path": "muse/source-qualification.json",

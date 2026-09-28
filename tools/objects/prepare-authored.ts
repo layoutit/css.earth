@@ -10,12 +10,14 @@ import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects
 import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
-import { prepareCelestialAssets } from './celestial/index.js';
-import { prepareObjectContentAssets } from './content/prepare.js';
-import { loadGeometryAdapters, presentationHostAdapters } from './geometry-adapters.js';
+import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
+import { checkGaiaCepheidModel, parseGaiaCepheidRow, pulsationTrack } from '@cssearth/bake/photometry';
+import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view';
+import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts';
+import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
-import { attachSurfaceFeatures, writeFeatureContent } from './surface-features/attach.js';
+import { attachSurfaceFeatures, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
   /** Write mode: regenerated reviewed images replace their source copies and pins instead of failing. */
@@ -102,7 +104,7 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
 const solarGeometry = async () =>
   await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href) as typeof import('../../src/platform/solar-geometry.mts');
 
-/** A photograph lens states the body point its frame looks at; the default camera must look there too (default-view/geometry.mts). The check
+/** A photograph lens states the body point its frame looks at; the default camera must look there too (@cssearth/bake/objects/default-view). The check
  * reads the final frame, which follows the body as drawn. */
 async function assertDefaultViewsFaceLenses(objectDirectory: string, definition: Record<string, unknown>, frame: unknown): Promise<void> {
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
@@ -113,8 +115,7 @@ async function assertDefaultViewsFaceLenses(objectDirectory: string, definition:
     const frames = record(science.lens, 'surface-observation lens').frames;
     const lensFrame = Array.isArray(frames) && frames.length === 1 ? record(frames[0], 'lens frame') : null;
     if (!lensFrame || typeof lensFrame.observerWestLongitude !== 'number' || typeof lensFrame.observerLatitude !== 'number') continue;
-    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view/geometry.mts')).href) as typeof import('./default-view/geometry.mts');
-    assertDefaultViewFacesLens(descriptor.id, definition.camera as never, frame as never, { longitudeDegrees: -lensFrame.observerWestLongitude, latitudeDegrees: lensFrame.observerLatitude });
+    assertDefaultViewFacesLens(await solarGeometry(), descriptor.id, definition.camera as never, frame as never, { longitudeDegrees: -lensFrame.observerWestLongitude, latitudeDegrees: lensFrame.observerLatitude });
   }
 }
 
@@ -162,6 +163,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         };
         await Promise.all([cp(outputDirectory, stagedData, { recursive: true, filter: published('prepared', outputDirectory) }),
           cp(publicDirectory, stagedPublic, { recursive: true, filter: published('public', publicDirectory) })]);
+      }
+      else {
+        // The arrival billboard belongs to navigation, not to this bake: a full run carries the published record and the image it
+        // names, or the page that the billboard step photographs could not start without them (packages/bake/cli/prepare-arrival-billboard.mts).
+        const record: unknown = await readFile(resolve(outputDirectory, 'arrival-billboard.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
+        const url = record && typeof record === 'object' && 'url' in record && typeof record.url === 'string' ? record.url : null;
+        const image = url?.startsWith(`/scenes/${id}/`) ? url.slice(`/scenes/${id}/`.length) : null;
+        if (image && await access(resolve(publicDirectory, image)).then(() => true, () => false)) {
+          await mkdir(stagedPublic, { recursive: true }); await mkdir(stagedData, { recursive: true });
+          await Promise.all([cp(resolve(outputDirectory, 'arrival-billboard.json'), resolve(stagedData, 'arrival-billboard.json')), cp(resolve(publicDirectory, image), resolve(stagedPublic, image))]);
+        }
       }
       const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages, reuseImages, acceptChanged });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
@@ -230,16 +242,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const sourceDirectory = resolve(objectDirectory, 'source');
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@1') {
     genericLaneOnly();
-    const { prepareLayeredOblateObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/material-composition/index.mts')).href) as typeof import('./material-composition/index.mts');
+    const { prepareLayeredOblateObject } = await import('@cssearth/bake/objects/layers/material-composition');
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
   }
   if (source(sources, 'paged-ellipsoid')) {
-    const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mts')).href) as typeof import('./paged-ellipsoid/index.mts');
+    const { preparePagedEllipsoidObject } = await import('@cssearth/bake/objects/layers/paged-ellipsoid');
     // A reuse-images run carries the published feature anchors; read them before the lane rewrites this directory.
     const publishedFeatures = reuseImages ? {
       runtime: record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'published runtime'),
       content: record(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')), 'published content') } : null;
-    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets, reuseImages, acceptChanged });
+    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
+      solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged });
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
     const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, prepared.definition as unknown as Record<string, unknown>, publishedFeatures)
       : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
@@ -254,7 +267,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   }
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
     genericLaneOnly();
-    const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mts')).href) as typeof import('./giant-layers/object.mts');
+    const { prepareLayeredGiantObject } = await import('@cssearth/bake/objects/layers/giant');
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
@@ -317,8 +330,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(reused)}\n`);
   }
   const raster = reused ?? await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig, shape,
-      interpret: await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts'))
-        .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig }) });
+      interpret: await (await import('@cssearth/bake/objects/interpretation'))
+        .createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig, solarGeometry: await solarGeometry() }) });
   // A body may take its surfaces from an observed-surfaces recipe rather than this lane, which then prepares only its
   // lighting bank. The observed products are published beside it and the lenses name them, as they name any other surface.
   const observationsSource = source(sources, 'observations');
@@ -335,7 +348,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     : null;
   const celestial = reuseImages
     ? { sky: await publishedJson('sky'), sun: await publishedJson('sun') } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
-    : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value });
+    : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value, solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
   // A body outside the ephemeris tables (the Sun) frames its scene from the authored world context.
   const contextSource = source(sources, 'world-context');
@@ -360,10 +373,15 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return width ?? Number.NaN;
   });
   const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
-    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory, imagePixels });
+    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(await solarGeometry()), outputDirectory, imagePixels });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
-  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters);
+  // A pulsating star plays its published light curve from the scene epoch: Gaia's model, checked against its own row.
+  const lightCurve = presentation.lightCurve ? await (async (path: string) => {
+    const where = `${descriptor.id}: ${path}`, model = parseGaiaCepheidRow(await readFile(resolve(sourceDirectory, path), 'utf8'), where);
+    return pulsationTrack(model, checkGaiaCepheidModel(model, where), Number((scene.worldFrame as { epochJdTt?: unknown } | null)?.epochJdTt), path, where);
+  })(presentation.lightCurve.model) : undefined;
+  const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.lensFocus ? { lensFocus: presentation.lensFocus } : {}), ...(lightCurve ? { lightCurve } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], lenses: content.lenses as unknown as PresentationInputs['lenses'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters(await solarGeometry()));
   const attached = publishedFeatures ? carryPublishedFeatures(descriptor.id, definition as unknown as Record<string, unknown>, publishedFeatures)
     : await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
   const runtime = attached.definition, features = attached.features !== null;

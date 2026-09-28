@@ -23,8 +23,7 @@
     "../../tools/nebula/**/*.test.mts",
     "../../tools/nebula/**/*.test.ts",
     "../../tools/nebula/application-isolation*.ts",
-    "../../tools/sources/nebula-provenance-source-closure.test.mts",
-    "../../tools/sources/nebula-provenance-history.gate.mts"
+    "../../tests/sources/nebula-provenance-source-closure.test.mts"
   ],
   "exclude": [
     "**/node_modules/**",
