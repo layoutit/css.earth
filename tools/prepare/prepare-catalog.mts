@@ -105,6 +105,23 @@ async function readLensVolumes(entries: readonly CatalogEntry[], projectRoot: st
   return volumes;
 }
 
+/** The frames of the galaxies the universe draws that the Local Group catalogue lists as members (their published
+ * membership), which the Local Group overview fits in view. */
+async function readLocalGroupVolumes(projectRoot: string) {
+  const catalogue: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects/local-group/prepared/catalogue.json'), 'utf8'));
+  const objects = isRecord(catalogue) && Array.isArray(catalogue.objects) ? catalogue.objects : [];
+  const volumes: Record<string, unknown> = {};
+  for (const object of objects) {
+    if (!isRecord(object) || typeof object.detailedObjectId !== 'string' || !isRecord(object.membership) || object.membership.group !== 'local-group') continue;
+    const descriptor: unknown = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', object.detailedObjectId, 'object.json'), 'utf8'));
+    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || !isRecord(descriptor.properties.frame)) {
+      throw new TypeError(`src/objects/${object.detailedObjectId}/object.json: the Local Group member ${String(object.id)} has no properties.frame.`);
+    }
+    volumes[object.detailedObjectId] = descriptor.properties.frame;
+  }
+  return volumes;
+}
+
 async function writeGenerated(output: string, text: string) {
   await mkdir(dirname(output), { recursive: true });
   try { if (await readFile(output, 'utf8') === text) return; }
@@ -138,6 +155,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.distances), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
   await writeGenerated(resolve(projectRoot, PREPARED_CATALOGUE.focuses), JSON.stringify(focuses) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
+  await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-volumes.json'), JSON.stringify(await readLocalGroupVolumes(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));

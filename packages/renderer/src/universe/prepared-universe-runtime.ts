@@ -138,15 +138,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
         const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock, requestPublication));
         const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
+        // The galaxy backdrop is opaque black: it mounts first, so the lens banks' billboards, which mount at once, paint over it.
+        const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
+          prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM });
         const lenses = createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: volumeLensBanks, facts: lensFacts, frame: plan.frame, visibility: lensVisibility,
           billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication });
-        const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
-          prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM });
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeLensBanks,
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;
@@ -243,7 +244,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           /** Label suppression follows the selection here; callers set the other flags. */
           setBodyVisibility(next: Omit<BodyVisibility, 'labelSuppressed'>) { spatial.setBodyVisibility(next); },
           setRotationActive(active: boolean) { spatial.setRotationActive(active); },
-          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); lenses.setCoasting(active); },
+          setCoasting(active: boolean) { spatial.setCoasting(active); focusPoint?.setCoasting(active); lenses.setCoasting(active); catalogBanks.setCoasting(active); },
           setLabelBlockers(rects: readonly LabelScreenRect[]) { labelBlockers = rects; spatial.setLabelBlockers(rects); },
           labelBudget() { return labelBudget; },
           inspect() {

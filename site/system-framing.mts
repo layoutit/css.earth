@@ -14,6 +14,7 @@ interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import lensVolumes from './prepared-lens-volumes.json' with { type: 'json' };
+import localGroupVolumes from './prepared-local-group-volumes.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
@@ -80,6 +81,29 @@ export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithi
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 /** Volumes a body shows through one of its lenses, by volume id (tools/prepare/prepare-catalog.mts). */
 export const LENS_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(lensVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
+
+/** The Local Group as the universe draws it: the Milky Way and every drawn galaxy the catalogue lists as a member
+ * (tools/prepare/prepare-catalog.mts), one box in reference axes around all their prepared bounds. */
+const LOCAL_GROUP_BOX = (() => {
+  const corners = [GALACTIC_VOLUME, ...Object.values(localGroupVolumes).map(frame => parseDensityVolumeFrame(frame))].flatMap(volume => {
+    const rotation = worldRotationFromQuaternion(volume.localToReferenceXyzw), { min, max } = volume.boundsUnits;
+    return [0, 1, 2, 3, 4, 5, 6, 7].map(corner => {
+      const local = tuple(axis => ((corner >> axis) & 1 ? max : min)[axis]! * volume.metersPerUnit);
+      const offset = rotateWorldPosition(rotation, local);
+      return tuple(axis => volume.originM[axis]! + offset[axis]);
+    });
+  });
+  const minimum = tuple(axis => Math.min(...corners.map(corner => corner[axis]!))), maximum = tuple(axis => Math.max(...corners.map(corner => corner[axis]!)));
+  const centre = tuple(axis => (minimum[axis] + maximum[axis]) / 2);
+  return { centre, candidate: { minimumM: tuple(axis => minimum[axis] - centre[axis]), maximumM: tuple(axis => maximum[axis] - centre[axis]),
+    cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } };
+})();
+
+/** Fit the Local Group's drawn galaxies at the current viewing angle, centred on them. */
+export function localGroupZoomTarget(from: WorldCameraPose, optics: Optics, rect: MapViewport) {
+  const frame = { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt, originM: LOCAL_GROUP_BOX.centre, bodyRadiusM: 0 };
+  return { world: systemViewTarget(from, frame, optics, { candidates: [LOCAL_GROUP_BOX.candidate] }, rect), focusPositionM: LOCAL_GROUP_BOX.centre };
+}
 
 /** Fit the volume along the current viewing ray, keeping its anchor and orientation. */
 export function volumeZoomTarget(from: WorldCameraPose, volume: DensityVolumeFrame, optics: Optics, rect: MapViewport, referencePositionM: PositionM) {
