@@ -2607,7 +2607,7 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   expect(() => decodeWorldOrbitBank(summary, 'earth', earth.slice(0, earth.byteLength - 8))).toThrow(/its summary says/);
   expect(() => decodeWorldOrbitBank(summary, 'nowhere', earth)).toThrow(/summary says undefined/);
   expect(() => decodeWorldOrbitBank({ ...summary, orbitBanks: { ...summary.orbitBanks, mars: earth.byteLength } }, 'mars', earth)).toThrow(/lacks its path/);
-});
+}, 20000); // Reads and decodes all 1,359 coarse and fine banks.
 
 test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {
   const dot = (radiusM: number) => indicatorDotDiameter(radiusM, 1e9, 2.4);
