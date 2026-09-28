@@ -2,9 +2,10 @@
  * dependencies imports only Node built-ins (`node:` specifiers) and repository files that job's checkout keeps, and so
  * does everything those files import. Such a job has no `node_modules`, and a sparse one holds only what its
  * `sparse-checkout` list names: any other import fails with ERR_MODULE_NOT_FOUND in CI alone, never on a full local checkout.
- * A job's install is the first `pnpm install` (`pnpm i`), `npm ci` or `npm install` command in its steps' `run` text, comments aside;
- * the commands before it, in that step too, run before install, and a job without one runs every step before install.
- * Sparse lists are read in non-cone mode, as every workflow here declares them. */
+ * The rule over-approximates rather than parse shell: a job's pre-install steps are every `run` step up to and including the
+ * first whose text mentions an install anywhere (`pnpm install`, `pnpm i`, `npm ci`, `npm install`, `npm i`, in a comment
+ * or a quoted string too), and every script path in their text is checked, whatever command names it. A wrong guess
+ * is a loud finding, never a silent miss. Sparse lists are read in non-cone mode, as every workflow here declares them. */
 import { existsSync, readFileSync } from 'node:fs';
 import { posix, resolve } from 'node:path';
 import { parse } from 'yaml';
@@ -13,10 +14,8 @@ import { importedSpecifiers } from './declared-dependencies.mts';
 
 const WORKFLOW = /^\.github\/workflows\/[^/]+\.ya?ml$/u;
 const SCRIPT = /\.[cm]?[jt]s$/u;
-/** An install command where a command starts: a line, or after `;`, `&&`, `||`, `|` or `(`; not an argument such as `echo "pnpm install"`. */
-const INSTALL = /(?:^|[;&|(])[ \t]*(?:pnpm[ \t]+(?:install|i)|npm[ \t]+(?:ci|install|i))(?![\w-])/mu;
-/** One `node …` command inside a step's shell text, up to the end of that command. */
-const NODE_COMMAND = /(?<![\w./-])node\s[^\n;&|)]*/gu;
+/** Text that mentions an install anywhere: the step that holds it is the job's last pre-install step. */
+const INSTALL = /pnpm install|pnpm i\s|npm ci|npm install|npm i\s/u;
 /** A repository path (or glob) to a script, quoted or bare. */
 const SCRIPT_TOKEN = /(?<=^|[\s"'=])([\w.*@/-]+\.[cm]?[jt]s)(?=$|[\s"'])/gu;
 
@@ -54,21 +53,6 @@ export function sparseKeeps(patterns: readonly string[], path: string): boolean 
   return kept;
 }
 
-/** Shell text without its comments: a `#` that starts a word, outside quotes, to the end of its line. */
-export function withoutComments(text: string): string {
-  return text.split('\n').map(line => {
-    let quote = '';
-    for (let at = 0; at < line.length; at++) {
-      const char = line[at]!;
-      if (quote) { if (char === quote) quote = ''; else if (char === '\\' && quote === '"') at++; }
-      else if (char === '"' || char === "'") quote = char;
-      else if (char === '\\') at++;
-      else if (char === '#' && (at === 0 || /\s/u.test(line[at - 1]!))) return line.slice(0, at);
-    }
-    return line;
-  }).join('\n');
-}
-
 const globMatcher = (glob: string) => patternMatcher(`/${glob}`);
 
 /** The scripts each job of `workflow` (its YAML `text`) runs before its install, globs expanded against `tracked`.
@@ -80,24 +64,18 @@ export function preInstallScripts(workflow: string, text: string, tracked: reado
   for (const [job, definition] of Object.entries(jobs)) {
     const steps = isRecord(definition) && Array.isArray(definition.steps) ? definition.steps.filter(isRecord) : [];
     let sparse: string[] | null = null;
-    let installed = false;
     for (const step of steps) {
-      if (installed) break;
       if (typeof step.uses === 'string' && step.uses.startsWith('actions/checkout@') && isRecord(step.with)
         && typeof step.with['sparse-checkout'] === 'string') {
         sparse = step.with['sparse-checkout'].split('\n').map(line => line.trim()).filter(Boolean);
       }
-      // Shell comments name no command, and only the text before the install command runs without dependencies.
-      let run = typeof step.run === 'string' ? withoutComments(step.run.replace(/\\\n/gu, ' ')) : '';
-      const install = INSTALL.exec(run);
-      if (install) { run = run.slice(0, install.index); installed = true; }
-      for (const command of run.match(NODE_COMMAND) ?? []) {
-        for (const [, token] of command.matchAll(SCRIPT_TOKEN)) {
-          const path = token!.replace(/^\.\//u, '');
-          const scripts = path.includes('*') ? tracked.filter(file => globMatcher(path).test(file)) : [path];
-          for (const script of scripts) found.push({ workflow, job, script, sparse });
-        }
+      const run = typeof step.run === 'string' ? step.run : '';
+      for (const [, token] of run.matchAll(SCRIPT_TOKEN)) {
+        const path = token!.replace(/^\.\//u, '');
+        const scripts = path.includes('*') ? tracked.filter(file => globMatcher(path).test(file)) : [path];
+        for (const script of scripts) found.push({ workflow, job, script, sparse });
       }
+      if (INSTALL.test(`${run} `)) break;
     }
   }
   return found;

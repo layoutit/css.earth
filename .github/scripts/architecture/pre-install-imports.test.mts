@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 import { repositoryFiles } from './graph.mts';
-import { checkPreInstallImports, preInstallFindings, preInstallScripts, sparseKeeps, withoutComments } from './pre-install-imports.mts';
+import { checkPreInstallImports, preInstallFindings, preInstallScripts, sparseKeeps } from './pre-install-imports.mts';
 import { REPOSITORY_RULES } from './repository-rules.mts';
 
 const WORKFLOW = `
@@ -36,26 +36,31 @@ test('the scripts a job runs before its install are read from the workflow, with
   ], 'command substitutions and test globs count; nothing from the install step on does');
 });
 
-test('commands before the install in the same step are pre-install, and a comment that mentions installing is not an install', () => {
+test('the install step is checked in full, and a comment or quoted install before a node command leaves that command checked', () => {
   const workflow = `
 jobs:
   same-step:
     steps:
-      - run: node ci/early.mts && pnpm install --frozen-lockfile && node ci/late.mts
+      - run: node ci/early.mts && pnpm install --frozen-lockfile && node ci/after.mts
+      - run: node ci/late.mts
   commented:
     steps:
       - run: |
-          # Runs before pnpm install; npm ci would be too slow here.
-          node ci/first.mts # not npm install either
+          # Runs before pnpm install.
+          node ci/first.mts
+      - run: node ci/late.mts
+  quoted:
+    steps:
       - run: |
-          echo "pnpm install comes next"
-          node ci/second.mts
-      - run: pnpm i
+          echo "pnpm install | comes next"
+          node --test \\
+            ci/second.mts
       - run: node ci/late.mts
 `;
-  const scripts = preInstallScripts('w.yml', workflow, ['ci/early.mts', 'ci/first.mts', 'ci/second.mts', 'ci/late.mts']);
-  assert.deepEqual(scripts.map(item => `${item.job} ${item.script}`), ['same-step ci/early.mts', 'commented ci/first.mts', 'commented ci/second.mts']);
-  assert.equal(withoutComments(`echo "a # b" 'c # d' # e\n# f\nnode x.mts#g`), `echo "a # b" 'c # d' \n\nnode x.mts#g`);
+  const scripts = preInstallScripts('w.yml', workflow, ['ci/early.mts', 'ci/after.mts', 'ci/first.mts', 'ci/second.mts', 'ci/late.mts']);
+  assert.deepEqual(scripts.map(item => `${item.job} ${item.script}`), [
+    'same-step ci/early.mts', 'same-step ci/after.mts', 'commented ci/first.mts', 'quoted ci/second.mts',
+  ], 'every script in the step that mentions an install is checked; the steps after it are not');
 });
 
 test('a sparse list keeps a path by its last matching pattern, parent directories included', () => {
