@@ -40,6 +40,9 @@
     "packages/bake/src/astronomy/**",
     "packages/bake/cli/prepare-solar-geometry.mts",
     "tools/objects/**",
+    "site/build/charts/**",
+    "site/build/content/**",
+    "site/overview/**",
     "packages/bake/src/objects/**"
   ],
   "production": [

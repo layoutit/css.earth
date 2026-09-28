@@ -16,8 +16,11 @@ function producerPath(path: string): boolean {
     // `packages/spice/` is an owner since the sky-band composite reads the WISE atlas grid through `@cssearth/bake/objects/raster`,
     // whose entry (followed whole, like every topic entry) reaches the observer cameras. `packages/objects/` is an owner since
     // the renderer's world-rotation validation joined `@cssearth/objects`, whose main entry is followed whole.
+    // `packages/telescope-cli/src/` (`.mts`) is where the sky-band composite moved from `tools/objects/observation/`; its
+    // relative imports now reach the JWST imaging archive modules it read as external `@cssearth/telescope-cli` entries before.
     /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:fits|sources)\/.+\.[cm]?ts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path) ||
-    /^packages\/(?:bake|engine|fits|objects|renderer|spice|telescope)\/(?:src\/.+\.ts|package\.json)$/.test(path);
+    /^packages\/(?:bake|engine|fits|objects|renderer|spice|telescope)\/(?:src\/.+\.ts|package\.json)$/.test(path) ||
+    /^packages\/telescope-cli\/src\/.+\.mts$/.test(path);
 }
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {

@@ -29,7 +29,7 @@ export const BUILD_RULES: readonly BuildRule[] = Object.freeze([
   { name: '@cssearth/renderer', command: 'pnpm build:renderer', sources: ['packages/renderer/src'], output: 'packages/renderer/dist/index.js', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
   // The bake's output is a declaration stub written after `tsc` emits its declarations, so a failed type build reads stale.
   { name: '@cssearth/bake', command: 'pnpm build:bake', sources: ['packages/bake/src'], output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
-  { name: 'preparation tools bundle', command: 'pnpm build:preparation:bundle', sources: ['tools/objects'], output: 'tools/objects/dist/prepare-authored.js', inputs: 'tools/objects/dist/metafile-esm.json', base: 'packages/engine' },
+  { name: 'preparation tools bundle', command: 'pnpm build:preparation:bundle', sources: ['tools/objects', 'site/build/charts', 'site/build/content', 'site/overview'], output: 'tools/objects/dist/prepare-authored.js', inputs: 'tools/objects/dist/metafile-esm.json', base: 'packages/engine' },
 ]);
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);

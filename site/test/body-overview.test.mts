@@ -9,8 +9,8 @@ import { prepareBodyOverview, overviewMeasurements } from '../prepare-body-overv
 import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
 import { hasErrorCode } from '@cssearth/core';
-import { parseSpectrumRecipe, readSpectrumData } from '../../tools/objects/charts/spectrum-data.mts';
-import { renderCompactSpectrum } from '../../tools/objects/charts/compact-spectrum.mts';
+import { parseSpectrumRecipe, readSpectrumData } from '../overview/spectrum-data.mts';
+import { renderCompactSpectrum } from '../overview/compact-spectrum.mts';
 
 test('overview charts retain every supplied spectrum sample across the registry', async () => {
   let charts = 0;

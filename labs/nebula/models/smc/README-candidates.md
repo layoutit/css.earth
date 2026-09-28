@@ -27,7 +27,7 @@ The PIA25164 astrometry transfer uses official Herschel `nhsc2022-001c` (4950 ×
 
 ## Survey band composites
 
-Four composites were built on 2026-09-17 from calibrated or archival survey bands with the shared [sky band compositor](../../../../tools/objects/observation/sky-band-composite.mts). Every band is pinned, and each recipe lives in [candidates/source/sky-bands](candidates/source/sky-bands/). All four share one exact grid: TAN, 4000 × 4000, 10° field, centre RA 13.19°, Dec −72.83° (ICRS). `prepare-overlays` checks each recipe and its tile lists on every run, including when the composite is already cached. It rebuilds a missing composite under a file name that includes its hash.
+Four composites were built on 2026-09-17 from calibrated or archival survey bands with the shared [sky band compositor](../../../../packages/telescope-cli/src/sky/sky-band-composite.mts). Every band is pinned, and each recipe lives in [candidates/source/sky-bands](candidates/source/sky-bands/). All four share one exact grid: TAN, 4000 × 4000, 10° field, centre RA 13.19°, Dec −72.83° (ICRS). `prepare-overlays` checks each recipe and its tile lists on every run, including when the composite is already cached. It rebuilds a missing composite under a file name that includes its hash.
 
 | Composite | Bands and channels | Acquisition and units | Known limits |
 | --- | --- | --- | --- |

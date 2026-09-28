@@ -124,7 +124,7 @@ published image or a claim that every body has measured natural color.
 
 ## Sky survey bands
 
-The [sky band composer](../tools/objects/observation/sky-band-composite.mts) turns
+The [sky band composer](../packages/telescope-cli/src/sky/sky-band-composite.mts) turns
 calibrated infrared survey bands into the nebula lab's working images. Its route
 table owns the calibration: the WISE Explanatory Supplement DN-to-Jy factors for
 1.375 arcsec atlas pixels, and the IRAC Handbook surface-brightness corrections

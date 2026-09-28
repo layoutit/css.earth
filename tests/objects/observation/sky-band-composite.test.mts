@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '@cssearth/core/node';
-import { card } from '../../../tests/fixtures/fits/helpers.mts';
+import { card } from '../../fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '@cssearth/bake/objects/color';
-import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
+import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from '@cssearth/telescope-cli/sky/sky-band-composite';
 import { gridWcs } from '@cssearth/bake/objects/raster';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };

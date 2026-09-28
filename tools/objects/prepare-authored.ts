@@ -13,7 +13,7 @@ import { parsePresentationProfile, prepareCssPresentation, type PresentationInpu
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
 import { checkGaiaCepheidModel, parseGaiaCepheidRow, pulsationTrack } from '@cssearth/bake/photometry';
 import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view';
-import { prepareObjectContentAssets } from './content/prepare.js';
+import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts';
 import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';

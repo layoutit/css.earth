@@ -1,7 +1,7 @@
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { readSpectrumData, type SpectrumRecipe } from './spectrum-data.mts';
+import { readSpectrumData, type SpectrumRecipe } from '../../overview/spectrum-data.mts';
 import { parseFitsGalleryImageRecipe, parseMeasuredSpectrum, parseRetrievedProfile, readMeasuredSpectrum, readRetrievedProfile, renderFitsGalleryImage, renderLightCurveChart, renderMeasuredSpectrum, renderPhotometricPhaseChart, renderReflectanceChart, renderRetrievedProfile, renderTemperaturePressureChart } from '@cssearth/bake/objects/charts';
 import type { ChartIdentity, MeasuredSpectrumRecipe, RetrievedProfileRecipe } from '@cssearth/bake/objects/charts';
 type JsonMap=Record<string,unknown>;
