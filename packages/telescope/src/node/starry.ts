@@ -1,7 +1,7 @@
 /** starry owns spherical-harmonic brightness maps, their intensities and the star-planet light curves they make (Luger et al. 2019).
  * cssEarth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
- * (starry-toolchain.json says why). Install: node tools/objects/astronomy-toolchains.mts starry install */
+ * (starry-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install */
 import { createHash } from 'node:crypto';
 import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
@@ -41,8 +41,8 @@ export function starryToolchainSync(): StarryToolchain {
   const { entry, digest } = descriptor(), bin = resolve(STARRY_ROOT, 'env/bin'), python = resolve(bin, 'python');
   let marker: Record<string, unknown>;
   try { marker = requireRecord(JSON.parse(readFileSync(resolve(STARRY_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The starry toolchain is not installed: node tools/objects/astronomy-toolchains.mts starry install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The starry toolchain was installed from other pins; reinstall it: node tools/objects/astronomy-toolchains.mts starry install');
+  catch { throw new Error('The starry toolchain is not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install'); }
+  if (marker.pinsSha256 !== digest) throw new Error('The starry toolchain was installed from other pins; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install');
   try { accessSync(python); } catch { throw new Error(`The starry toolchain has no python at ${python}.`); }
   // Theano writes its compiled operators under the toolchain, and an empty home keeps a user's ~/.theanorc out of the result.
   const home = resolve(STARRY_ROOT, 'home'); mkdirSync(home, { recursive: true });

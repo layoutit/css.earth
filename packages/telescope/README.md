@@ -16,7 +16,7 @@ The library is archive-neutral. It is built by `pnpm build:telescope` and import
 
 The pinned toolchains are in [`toolchains/`](toolchains/): each descriptor, its hash-locked requirements, the licences and
 notices of what it installs ([NOTICE.md](toolchains/NOTICE.md)), and the [package ownership map](toolchains/ownership.json).
-Install or check one with `node tools/objects/astronomy-toolchains.mts astroquery|pds|starry|spiderman install|verify`.
+Install or check one with `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery|pds|starry|spiderman install|verify`.
 A descriptor's or lock's bytes are the identity of an installed environment: changing any of them asks every checkout to
 reinstall.
 
