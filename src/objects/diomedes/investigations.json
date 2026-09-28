@@ -66,6 +66,17 @@
         "https://doi.org/10.1098/rsta.2024.0187",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/diomedes/source/reference/calibration.json"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"59.4 km (size-calibrated model)\" (dutra-2025-trojan-occultations) differs from the Small Bodies Occultations V4.0 record 461, DAMIT model 4215 diameter 115 ± 1 km (volume-equivalent; DAMIT model 4215 fitted to 3 occultations); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

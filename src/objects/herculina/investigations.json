@@ -31,6 +31,17 @@
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/222"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "excluded",
+      "finding": "All 1 Baer et al. mass rows are excluded by the rule (flagged, secondary, or under three times their uncertainty).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

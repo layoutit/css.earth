@@ -1,0 +1,119 @@
+PDS_VERSION_ID               = PDS3
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 2880
+FILE_RECORDS                 = 360       
+^IMAGE                       = ("JGDWN_VES20H_BOU_0015.IMG",1)            
+INSTRUMENT_HOST_NAME         = "DAWN"
+MISSION_PHASE_NAME           = {
+                               "VESTA SCIENCE APPROACH (VSA)",
+                               "VESTA SCIENCE SURVEY (VSS)",
+                               "VESTA TRANSFER TO HAMO (VTH)",
+                               "VESTA SCIENCE HAMO (VSH)",
+                               "VESTA TRANSFER TO LAMO (VTL)",
+                               "VESTA SCIENCE LAMO (VSL)",
+                               "VESTA TRANSFER TO HAMO 2 (VT2)",
+                               "VESTA SCIENCE HAMO 2 (VH2)" }
+TARGET_NAME                  = "4 VESTA"
+INSTRUMENT_NAME              = "GRAVITY SCIENCE INSTRUMENT"
+DATA_SET_ID                  = "DAWN-A-RSS-5-VEGR-V2.0"
+ORIGINAL_PRODUCT_ID          = "VESTA20H_BOUGHER"
+PRODUCT_ID                   = "JGDWN_VES20H_BOU_0015.IMG"
+PRODUCT_RELEASE_DATE         = 2017-02-22
+DESCRIPTION                  = "
+This file contains a digital map of the Bouguer gravity derived from 
+the JPL VESTA20H model of the Vesta gravity field.  Each point gives the 
+Vesta gravity radial acceleration minus the gravity derived from 
+integration of Vesta shape assuming uniform density in milligals on a 
+290-km x 265-km ellipsoid of revolution, which is the surface closest
+to Vesta that has minimal convergence errors for the spherical harmonic
+expansion. The JGDWN_VES20H_BOU gravity acceleration is computed from 
+the truncated VESTA20H solution (from degree 2 up to degree 15).
+
+Please note thtat the Bouguer anomaly map is computed up to degree 15,
+for detailed information see Section 4, Figure 5 of the below 
+publication [KONOPLIVETAL2014B]. At degree 15, the Bouguer spectrum
+and sigma curve of the gravity field become close for the Bouguer
+anomaly to be applicable.
+
+The reference for this gravity field is Konopliv et al., 
+The Vesta gravity field, spin pole and rotation, landmark
+positions, and ephemeris from the Dawn tracking and optical data,
+Icarus, 2013, http://dx.doi.org/10.1016/j.icarus.2013.09.005. 
+[KONOPLIVETAL2014B].
+
+The original published gravity field is in the Claudia coordinate
+system with the prime meridian location defined by the Claudia crater.
+To be consistent with IAU standards, this version of the VESTA20H
+gravity field has been rotated by 210 degrees to be similar to the
+Claudia double-prime coordinate system. The difference between the 
+Claudia coordinate system and Claudia double-prime coordinate system is
+documented in DOCUMENT/VESTA_COORDINATES_131018.PDF. Note that because the
+pole and spin rate are jointly estimated with the gravity field, the
+coordinate system used in this map differs slightly from the official
+Claudia double-prime coordinate system. For details about the gravity 
+coordinate frame, see DATA/SHADR/JGDWN_VES20H_SHA.LBL.
+
+The map is delivered as a Radio Science Digital Map (RSDMAP) product. Each
+pixel represents the Bouguer gravity on a simple cylindrical projection.
+Latitude and longitude are gridded and intersect one another at right angles.
+The map has 181 lines with 360 samples per line. For example, the first 8
+bytes (PC_REAL) represent the first pixel at -180 degrees longitude and
++90 degrees latitude. The last 8 bytes represent the last pixel at
++179 degrees longitude and -90 degrees latitude.
+
+The map is produced at JPL by the Dawn Radio Science Team (Alex Konopliv, 
+Ryan Park, Sami Asmar)."
+
+START_TIME                   = 2011-07-13T02:30:00.000
+STOP_TIME                    = 2012-07-25T12:15:00.000
+SPACECRAFT_CLOCK_START_COUNT = "1/0363796266.082"
+SPACECRAFT_CLOCK_STOP_COUNT  = "1/0396490567.253"
+SOFTWARE_NAME                = "GRVMAP;V1.0"
+PRODUCT_CREATION_TIME        = 2014-10-28T00:00:00.000
+PRODUCER_ID                  = "DAWN GRAVITY TEAM"
+
+OBJECT               = IMAGE
+  LINES                      = 181
+  LINE_SAMPLES               = 360
+  SAMPLE_TYPE                = "PC_REAL"
+  SAMPLE_BITS                = 64
+  UNIT                       = "MILLIGALS"
+  OFFSET                     = 0.0E+00
+  SCALING_FACTOR             = 1.0E+00
+  DESCRIPTION                = "The Digital Map contains
+   values of the gravity anomaly.  The values can be obtained
+   by multiplying the sample in the map by SCALING_FACTOR
+   and then adding OFFSET.  One milligal equals 0.01 mm/s/s."
+END_OBJECT           = IMAGE
+
+OBJECT               = IMAGE_MAP_PROJECTION
+  ^DATA_SET_MAP_PROJECTION     = "DSMAP.CAT"
+  COORDINATE_SYSTEM_TYPE       = "BODY-FIXED ROTATING"
+  COORDINATE_SYSTEM_NAME       = PLANETOCENTRIC
+  MAP_PROJECTION_TYPE          = "SIMPLE CYLINDRICAL"
+  A_AXIS_RADIUS                = 290.0 <KM>
+  B_AXIS_RADIUS                = 290.0 <KM>
+  C_AXIS_RADIUS                = 265.0 <KM>
+  FIRST_STANDARD_PARALLEL      = "N/A"
+  SECOND_STANDARD_PARALLEL     = "N/A"
+  POSITIVE_LONGITUDE_DIRECTION = "EAST"
+  CENTER_LATITUDE              = 0.0 <DEGREES>
+  CENTER_LONGITUDE             = -0.5 <DEGREES>
+  REFERENCE_LATITUDE           = 0.0 <DEGREES>
+  REFERENCE_LONGITUDE          = 0.0 <DEGREES>
+  LINE_FIRST_PIXEL             = 1
+  LINE_LAST_PIXEL              = 181
+  SAMPLE_FIRST_PIXEL           = 1
+  SAMPLE_LAST_PIXEL            = 360
+  MAP_PROJECTION_ROTATION      = 0.0 <DEGREES>
+  MAP_RESOLUTION               = 1.0E+00
+  MAP_SCALE                    = "N/A"
+  MAXIMUM_LATITUDE             = 90.0 <DEGREES>
+  MINIMUM_LATITUDE             = -90.0 <DEGREES>
+  EASTERNMOST_LONGITUDE        = 179.0 <DEGREES>
+  WESTERNMOST_LONGITUDE        = -180.0 <DEGREES>
+  LINE_PROJECTION_OFFSET       = 0.0
+  SAMPLE_PROJECTION_OFFSET     = 0.0
+END_OBJECT           = IMAGE_MAP_PROJECTION
+
+END

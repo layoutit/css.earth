@@ -58,7 +58,21 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Occultation diameter",
+        "value": "141 ± 3 km (volume-equivalent; DAMIT model 1091 fitted to 5 occultations)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+          "label": "Herald et al. (2024), Small Bodies Occultations V4.0, asteroid diameters table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "small-bodies-occultations-v4",
+          "locator": "/occultations/rows/0/fields/Dia_1; /occultations/rows/0/fields/Uncert_1; /occultations/rows/0/fields/Events_1; /occultations/rows/0/fields/Model_Source_1; /occultations/rows/0/fields/Model_Number_1"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

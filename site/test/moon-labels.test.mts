@@ -9,9 +9,9 @@ import world from '../../src/objects/sun/prepared/world-context.json' with { typ
 import catalogue from '../source/moon-catalogues.json' with { type: 'json' };
 import { parseMoonLabels, projectMoonLabels } from '../catalogue-moon-labels.mts';
 import { hasProperMoonName, prepareBodyMoons } from '../prepare-body-moons.mts';
-import { parseMoonVector } from '../../tools/prepare/prepare-moon-labels.mts';
+import { parseMoonVector } from '../build/prepare/prepare-moon-labels.mts';
 import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
-import { minorMoonOrbitIds } from '../../tools/prepare/prepare-world-presentation.mts';
+import { minorMoonOrbitIds } from '../build/prepare/prepare-world-presentation.mts';
 
 test('prepared unavailable moon labels cover proper names and match pinned Horizons vectors', async () => {
   const bytes = await readFile(new URL('../source/moon-horizons.json.gz', import.meta.url));
@@ -59,6 +59,12 @@ test('disabled captions respect foreground labels, planet occlusion and overview
     pose: { positionM: [0, 0, 100] as const, orientationXyzw: [0, 0, 0, 1] as const } };
   const viewport = { focalPixels: 100, widthPixels: 500, heightPixels: 300, principalOffsetPixels: [0, 0] as const };
   const parents = new Map([[parent.id, parent]]);
+  const demand = new Set<number>();
+  assert.deepEqual(projectMoonLabels(moons, [0, 0], parents, parent, pose, viewport, [], undefined, undefined, undefined, demand), []);
+  assert.deepEqual([...demand], [0]); // The occluded caption never needs a DOM measurement.
+  demand.clear();
+  projectMoonLabels(moons, [0, 0], parents, parent, { ...pose, pose: { ...pose.pose, positionM: [0, 0, 10000] } }, viewport, [], undefined, undefined, undefined, demand);
+  assert.equal(demand.size, 0);
   assert.deepEqual(projectMoonLabels(moons, [30, 30], parents, parent, pose, viewport, []).map(point => point.index), [0]);
   assert.equal(projectMoonLabels(moons, [30, 30], parents, parent, pose, viewport, [{ left: 20, right: 60, top: -20, bottom: 20 }]).length, 0);
   assert.equal(projectMoonLabels(moons, [30, 30], parents, parent, { ...pose, pose: { ...pose.pose, positionM: [0, 0, 10000] } }, viewport, []).length, 0);

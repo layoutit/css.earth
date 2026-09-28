@@ -191,6 +191,41 @@
         "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_NEUTRON_ABSORP_MAP_DS.CAT",
         "https://doi.org/10.1111/maps.12244"
       ]
+    },
+    {
+      "id": "dawn-gravity-vesta20h-maps",
+      "subject": "Dawn radio-science gravity maps of Vesta: radial gravity, its error, Bouguer anomaly and geoid",
+      "status": "included",
+      "finding": "The PDS4 bundle urn:nasa:pds:dawn-rss-der-vesta 1.0 (doi:10.17189/av2q-ka20, migrated from PDS3 DAWN-A-RSS-5-VEGR-V2.0, volume DWNVGRS_2) archives gridded maps only for the degree-20 model VESTA20H (Konopliv et al. 2014): ACCEL_0020 (radial gravity without J2 on a 290 x 265 km ellipsoid; the archive says a true anomaly cannot be computed because the series does not converge on the geoid), ACCERR_0020, BOU_0015 (Bouguer to degree 15 only, where the Bouguer spectrum meets the error curve), GEOID_0020 and GEOIDERR_0020 (a = 281.0 km, f = 0.195729537). Each is 181 x 360 little-endian float64 with cell centres at whole degrees from -180 E and 90 N; bytes identical in PDS3 and PDS4. Frame: the field was rotated 210 degrees from the published Claudia frame to near Claudia Double Prime (W0 284.59521, Claudia at 146 E), so the lenses sample the grid at Claudia longitude + 150. Check: the radial gravity correlates with the DLR HAMO radius at r = 0.896 at exactly that shift, against -0.13 unshifted and 0.753 at the best other shift; the geoid peaks at 149 (r = 0.71). Bouguer features against Raymond et al. (2013): maximum 238 mGal inside Vestalia Terra's Gazetteer extent where the Rheasilvia and Veneneia rims approach, +87 over the Rheasilvia centre (91st percentile), +53 over Divalia Fossae (81st); the Veneneia centre reads -1 (48th percentile), not the negative the abstract describes. The geoid is withheld beyond 60 degrees latitude, where the errata say it is not valid (it reaches -2.4e7 m there). Values: radial gravity -1233.6 to 2045.8 mGal, error 19.3 to 169.2, Bouguer -156.4 to 238.2, geoid within 60 degrees -9196.9 to 6912.9 m. Degree 20 is about 42 km at 265 km; Raymond et al. (2013) call the field accurate to about degree 20. No degree-strength map is archived. The pds3-grid reader needs the detached-pointer and latitude-limit additions drafted with this change.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/document/dawn-rss-der-vesta-bundle-desc.txt",
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/document/errata.txt",
+        "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNVGRS_2/DATA/RSDMAP/",
+        "https://doi.org/10.1016/j.icarus.2013.09.005",
+        "https://meetingorganizer.copernicus.org/EGU2013/EGU2013-12408.pdf",
+        "evidence/gravity/registration.json"
+      ]
+    },
+    {
+      "id": "dawn-gravity-vesta26j-coefficients",
+      "subject": "VESTA26J degree-26 gravity model (Park et al. 2025)",
+      "status": "deferred",
+      "finding": "The same bundle archives VESTA26J as coefficients only (data-shadr and data-shbdr), with no gridded map; showing it would need our own summation, which this package does not do.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/data-shadr/",
+        "https://doi.org/10.1038/s41550-025-02533-7"
+      ],
+      "revisitWhen": "A gridded VESTA26J product is archived, or a shared coefficient-synthesis capability is approved."
+    },
+    {
+      "id": "dawn-gravity-vesta20h-geoid-error",
+      "subject": "VESTA20H geoid error map (JGDWN_VES20H_GEOIDERR_0020)",
+      "status": "excluded",
+      "finding": "Archived and decoded (40.5 to 88.9 m, one sigma) but not shown: the same errata limit it to about 60 degrees of latitude, and the radial gravity error lens already shows where the model is weak.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-vesta_v1.0/maps/"
+      ],
+      "revisitWhen": "Readers ask how far the geoid itself may be off."
     }
   ]
 }

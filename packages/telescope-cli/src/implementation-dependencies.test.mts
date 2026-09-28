@@ -280,7 +280,7 @@ test('the telescope library is followed into its sources, as when its modules sa
 
 test('the shared object libraries are followed into their bake sources, as when they sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-bake-objects-'));
-  const topics = ['acquisition', 'cameras', 'candidates', 'celestial', 'charts', 'color', 'content', 'default-view', 'geometry', 'raster', 'scene', 'sources', 'sphere-survey', 'stellar', 'surface-features', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
+  const topics = ['acquisition', 'cameras', 'candidates', 'celestial', 'charts', 'color', 'content', 'default-view', 'geometry', 'host-adapters', 'interpretation', 'raster', 'scene', 'sources', 'sphere-survey', 'stellar', 'surface-features', 'layers/observation', 'layers/shape-model', 'layers/cutaway', 'layers/giant', 'layers/material-composition', 'layers/observed-surfaces', 'layers/paged-ellipsoid', 'layers/terrestrial'];
   try {
     await writeFile(resolve(root, 'entry.mts'), `${topics.map(topic => `import * as ${topic.replace(/\W/gu, '_')} from '@cssearth/bake/objects/${topic}';`).join(' ')}\nexport const used=[${topics.map(topic => topic.replace(/\W/gu, '_')).join(',')}];\n`);
     for (const topic of topics) {
@@ -337,7 +337,7 @@ test('the telescope command package is followed into its sources, as when its mo
 
 test('a telescope command subpath is followed to the source its package exports declare, digits included (imaging/image3)', async () => {
   const specifier = '@cssearth/telescope-cli/archives/jwst/imaging/image3', source = 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts';
-  const composite = await implementationFingerprint(WORKSPACE, ['tools/objects/observation/sky-band-composite.mts']);
+  const composite = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sky/sky-band-composite.mts']);
   assert.ok(composite.files.some(file => file.path === source), 'the observation composite identity holds the JWST image3 source it imports');
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-cli-exports-'));
   try {

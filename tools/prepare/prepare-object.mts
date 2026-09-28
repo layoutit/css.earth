@@ -20,7 +20,6 @@ import { refuseDirectRun } from '../cli/library-entry.mts';
 import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { staleBuilds, staleInstall } from '../ci/check-stale-builds.mts';
 
 export interface PreparationOptions { readonly reuseImages?: boolean }
 /** `once`: the command does not name an object. `ids`: the tool takes every id in one call. `each`: one command per object,
@@ -41,11 +40,10 @@ const exists = (path: string) => access(path).then(() => true, () => false);
 
 /** The chain, in order. A step's purpose says what the next one needs from it. */
 export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<PreparationStep[]>([
-  { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', scope: 'once', commands: async () => {
-    const install = await staleInstall();
-    if (install) throw new Error(install);
-    return (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' '));
-  } },
+  // The check loads from source and imports only Node built-ins, so it runs, and rebuilds, while the bake itself is unbuilt;
+  // it refuses a stale install before building anything.
+  { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', scope: 'once', commands: async () =>
+    [node('packages/bake/cli/check-stale-builds.mts', '--run')] },
   { name: 'inputs', purpose: "check the reader text budgets and restore the Sun's stale files before the long bake", scope: 'ids', commands: async ids =>
     [node('tools/prepare/cli/check-preparation-inputs.mts', ...ids)] },
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
@@ -56,7 +54,7 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'discovery', purpose: 'recompute discovery now that prepared lenses exist', scope: 'once', commands: async () => [node('tools/prepare/cli/prepare-catalog.mts')] },
   { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('tools/sources/author-source-records.mts', id!)] },
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-object-json.mts', ...ids)] },
-  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('tools/prepare/cli/prepare-text.mts', ...ids)] },
+  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-text.mts', ...ids)] },
   { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('packages/bake/cli/prepare-navigation.mts', ...ids)] },
   // Every body arrives through its billboard: without one the camera flies in onto a mesh still loading. The renderer photographs the
   // delivered body in the running site and skips a body whose prepared runtime has not changed; the catalogue then carries the arrival
@@ -105,7 +103,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
       if (failures.length) { console.error(`\nStep "${step.name}" failed running: ${failures[0]}\nFix it, then resume: ${resume(step)}`); return false; }
       continue;
     }
-    // A step may refuse while it plans, before running anything (the builds step on a stale install).
+    // A step may refuse while it plans, before running anything (the billboard step with no site answering).
     const commands = await step.commands(ids, { reuseImages }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
     if (commands instanceof Error) { console.error(`\nStep "${step.name}" refused: ${commands.message}\nFix it, then resume: ${resume(step)}`); return false; }
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);

@@ -31,10 +31,14 @@ const chord = (x0: number, y0: number, x1: number, y1: number, weight: number): 
 test('strokes share one svg per world context, name each group by its body and join chords into polylines per opacity level', () => {
   const { root, orbit } = world();
   const mars = orbit('mars'), earth = orbit('earth');
-  const a = mountPreparedOrbitLines(mars.root, { renderer: 'strokes', id: 'mars' });
-  const b = mountPreparedOrbitLines(earth.root, { renderer: 'strokes', id: 'earth', dashed: true });
+  const a = mountPreparedOrbitLines(mars.root, { renderer: 'strokes', id: 'mars', depthBase: 700 });
+  const b = mountPreparedOrbitLines(earth.root, { renderer: 'strokes', id: 'earth', dashed: true, depthBase: 700 });
+  expect(root.children.filter(child => child.tagName === 'svg')).toHaveLength(0);
+  a.publish([chord(0, 0, 10, 0, 1), chord(10, 0, 10, 10, 1), chord(20, 20, 30, 20, .5), chord(30, 20, 30, 30, .3)]);
+  b.publish([chord(0, 0, 1, 0, 1)]);
   const svgs = root.children.filter(child => child.tagName === 'svg');
   expect(svgs).toHaveLength(1);
+  expect(svgs[0]!.style.cssText).toContain('z-index:700');
   const [groupA, groupB] = svgs[0]!.children;
   // No inline colour: the published swatch rule for [data-context-orbit] colours the group like its marker.
   expect(groupA!.style.color).toBeUndefined(); expect(groupA!.dataset.contextOrbit).toBe('mars');
@@ -76,4 +80,18 @@ test('bars keep their host as presentation and an orbit-less root gets bars what
   const detached = new FakeDocument().createElement('div') as unknown as HTMLElement;
   const fallback = mountPreparedOrbitLines(detached, { renderer: 'strokes', capacity: 4 });
   expect(fallback.presentation).toBe(detached);
+});
+
+
+test('detached orbit owners attach only a populated group on demand and reuse it', () => {
+  const { root } = world(), host = root.ownerDocument.createElement('div');
+  const orbit = mountPreparedOrbitLines(host as unknown as HTMLElement, { renderer: 'strokes', strokeHost: root as unknown as HTMLElement, id: 'test', depthBase: 7 });
+  orbit.publish([]);
+  expect(root.children).toHaveLength(0);
+  orbit.publish([chord(0, 0, 10, 10, 1)]);
+  const svg = root.children[0]!, group = svg.children[0]!, line = group.children[0]!;
+  expect(line.getAttribute('points')).toBe('0,0 10,10');
+  orbit.publish([]); orbit.publish([chord(0, 0, 10, 10, 1)]);
+  expect(root.children).toEqual([svg]); expect(svg.children).toEqual([group]); expect(group.children).toEqual([line]);
+  orbit.destroy(); expect(svg.children).toHaveLength(0);
 });

@@ -11,6 +11,18 @@ export function openLedger(): DatabaseSync {
   db.exec("PRAGMA foreign_keys=ON");
   return db;
 }
+// The bodies a target field names, lowercased and without a minor-planet number ("(162173) Ryugu" is "ryugu"). The
+// Photojournal tags a body with its parents too ("mars; sun"); the Sun counts only when it is the only body tagged, so
+// filtering by the Sun does not return 1,965 images of the planets that orbit it. SIMBAD's star prefix ("* bet Tau") is
+// dropped.
+export function bodiesOf(target: string): string[] {
+  const tagged = target
+    .split(";")
+    .map((t) => t.trim().toLowerCase().replace(/^\(\d+\)\s*/, "").replace(/^\*\s+/, ""))
+    // "+6 more" ends a shortened list, and "Unspecified" or "none" says there is no target; neither names a body.
+    .filter((t) => t && !/^\+\d+ mor/.test(t) && !/^'?(unspecified|unknown|none|n\/a|unk)'?$/.test(t));
+  return tagged.length > 1 ? tagged.filter((t) => t !== "sun") : tagged;
+}
 export type Row = {
   id: string;
   source: string;
@@ -56,22 +68,25 @@ export function loadProposals(): Proposal[] {
     db.close();
   }
 }
-export function loadRows(): Row[] {
+// `datasets` holds datasets; `inventory` holds the listings that repeat them (OPUS volumes and geometry, Maryland
+// holdings, DARTS collections and indexes).
+export function loadRows(table: "datasets" | "inventory" = "datasets"): Row[] {
   const db = openLedger();
   try {
     const joins = new Map<string, string[]>();
+    const [links, column] = table === "datasets" ? ["dataset_proposals", "dataset_id"] : ["inventory_proposals", "inventory_id"];
     for (const r of db
       .prepare(
-        "SELECT * FROM dataset_proposals ORDER BY CAST(proposal_id AS INTEGER)",
+        `SELECT source, ${column} AS row_id, proposal_id FROM ${links} ORDER BY CAST(proposal_id AS INTEGER)`,
       )
       .all()) {
-      const key = JSON.stringify([r.source, r.dataset_id]);
+      const key = JSON.stringify([r.source, r.row_id]);
       const ids = joins.get(key) ?? [];
       ids.push(string(r.proposal_id));
       joins.set(key, ids);
     }
     return db
-      .prepare("SELECT * FROM datasets ORDER BY source,id")
+      .prepare(`SELECT * FROM ${table} ORDER BY source,id`)
       .all()
       .map((r) => ({
         id: string(r.id),
@@ -113,10 +128,7 @@ export function slice(rows: Row[], params: URLSearchParams): Row[] {
       (!params.get("instrument") ||
         r.instrument === params.get("instrument")) &&
       (!params.get("target") ||
-        r.target
-          .toLowerCase()
-          .split(/;\s*/)
-          .includes(params.get("target")!.toLowerCase())) &&
+        bodiesOf(r.target).includes(bodiesOf(params.get("target")!)[0])) &&
       (!params.get("decision") || r.decision === params.get("decision")) &&
       (!params.get("proposal") ||
         r.proposals.includes(String(Number(params.get("proposal"))))) &&

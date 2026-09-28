@@ -34,7 +34,7 @@ export function parseMoonLabels(input: unknown): readonly Moon[] {
 export function projectMoonLabels(moons: readonly Moon[], widths: readonly number[], parents: ReadonlyMap<string, Point>,
   selected: Point, world: WorldCameraPose, viewport: WorldCameraViewport, exclusions: readonly LabelScreenRect[],
   budget = createLabelBudget(viewport.widthPixels ?? 1000, viewport.heightPixels ?? 800, [], exclusions), previous: ReadonlySet<number> = new Set(),
-  projectedPoints?: Map<number, { x: number; y: number }>) {
+  projectedPoints?: Map<number, { x: number; y: number }>, measurementDemand?: Set<number>) {
   const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const eye = (point: readonly number[]) => rotateWorldPosition(rotation, [point[0] - world.pose.positionM[0], point[1] - world.pose.positionM[1], point[2] - world.pose.positionM[2]]);
   const parentEyes = new Map([...parents].map(([id, point]) => [id, eye(point.positionM)]));
@@ -60,6 +60,7 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
     const rect = { left: x - widths[index] / 2, right: x + widths[index] / 2, top: y - 9, bottom: y + 9 };
     projectedPoints?.set(index, { x: rect.left, y: rect.top });
     if (scaleOpacity <= (previous.has(index) ? .5 : .55) || rect.left < -halfWidth || rect.right > halfWidth || rect.top < -halfHeight || rect.bottom > halfHeight) continue;
+    if (measurementDemand && widths[index] === 0) { measurementDemand.add(index); continue; }
     placements.push({ index, x: rect.left, y: rect.top, opacity });
     candidates.push({ id: moon.id, navigable: false, pinned: 0, priority: -moon.parentDistanceM,
       shown: previous.has(index), previousPlacement: 0, placements: [{ slot: 0, rect }] });
@@ -68,20 +69,20 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   return placements.filter(point => admitted.has(moons[point.index].id));
 }
 
-export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock, requestPublication?: () => boolean) {
+export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock, requestPublication?: () => boolean, depthBase = 0) {
   const moons = parseMoonLabels(prepared), parents = new Map(bodies.filter(body => moons.some(moon => moon.parentId === body.id)).map(body => [body.id, body]));
   const root = host.ownerDocument.createElement('div');
   root.className = 'catalogue-moon-labels';
+  root.style.zIndex = String(depthBase);
   const labels = moons.map(moon => {
     const label = host.ownerDocument.createElement('span');
     label.className = 'prepared-context-label catalogue-moon-label';
     label.dataset.catalogueMoon = moon.id; label.dataset.moonParent = moon.parentId;
     label.textContent = moon.name; label.setAttribute('aria-disabled', 'true');
     label.setAttribute('aria-label', `${moon.name}, not available`);
-    label.ariaHidden = 'true'; label.style.opacity = '0'; label.style.visibility = 'hidden'; root.append(label); return label;
+    label.ariaHidden = 'true'; label.style.opacity = '0'; label.style.visibility = 'hidden'; return label;
   });
-  host.append(root);
-  const widths = labels.map(() => 0), measured = new Set<number>();
+  const widths = labels.map(() => 0);
   const indices = new Map<Element, number>(labels.map((label, index) => [label, index]));
   // Browser-delivered sizes include font changes without a read after the
   // world's DOM writes. The first publication used to flush the whole scene.
@@ -91,12 +92,11 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
       const index = indices.get(entry.target);
       if (index === undefined) continue;
       const width = entry.contentRect.width;
-      if (!measured.has(index) || widths[index] !== width) changed = true;
-      widths[index] = width; measured.add(index);
+      if (width <= 0 || widths[index] === width) continue;
+      changed = true; widths[index] = width;
     }
     if (changed) requestPublication?.();
   });
-  for (const label of labels) observer.observe(label);
   const fader = createOpacityFader(host.ownerDocument.defaultView!, clock, { hideAtZero: true });
   const last = labels.map(() => ({ shown: false, transform: '' }));
   let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false;
@@ -106,10 +106,10 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
      * (docs/performance/motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, budget: LabelBudget) {
-      if (measured.size !== labels.length) return;
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       const points = new Map<number, { x: number; y: number }>();
-      const placements = compatible ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points) : [];
+      const measurements = new Set<number>();
+      const placements = compatible ? projectMoonLabels(moons, widths, parents, selected, world, viewport, [], budget, previous, points, measurements) : [];
       if (coasting) {
         for (const [index, label] of labels.entries()) {
           const point = last[index].shown ? points.get(index) : undefined;
@@ -119,9 +119,17 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
         }
         return;
       }
+      for (const index of measurements) {
+        const label = labels[index];
+        if (label.parentNode) continue;
+        root.append(label);
+        if (!root.parentNode) host.append(root);
+        observer.observe(label);
+      }
       const admitted = new Map(placements.map(point => [point.index, point]));
       previous = new Set(admitted.keys());
       for (const [index, label] of labels.entries()) {
+        if (!label.parentNode) continue;
         const placement = admitted.get(index);
         // A shown caption moves as its own small layer; a hidden one has none.
         if (last[index].shown !== Boolean(placement)) { last[index].shown = Boolean(placement); label.ariaHidden = String(!placement); label.style.willChange = placement ? 'transform' : ''; }

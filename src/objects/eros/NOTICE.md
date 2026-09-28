@@ -9,3 +9,7 @@ Feature names, centres, diameters, extents and name origins are from the Gazette
 Feature caption notes: 2 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
 
 Landing, touchdown and impact sites (1): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.
+
+Ponds: Roberts, J. (2021), Roberts Eros Ponds Catalog V1.1, NASA Planetary Data System, https://doi.org/10.26033/4dqc-8067. Pond identifications and diameters by P. C. Thomas; NASA/JHUAPL/NEAR MSI.
+
+Composition facts cite Lim and Nittler (2009), Peplowski et al. (2015) and Evans et al. (2001); see `source/editorial/factsheet-review.json`.

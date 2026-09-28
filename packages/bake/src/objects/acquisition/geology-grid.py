@@ -15,6 +15,11 @@ from the central meridian are unchanged, so no pixel moves or is resampled; only
 A plan may instead declare `"cellPresence": "point"` or `"cellPresence": "polyline"` for an ArcGIS point or polyline
 catalogue that publishes no footprint or width. A point then marks the one grid cell holding it and a polyline every
 cell it crosses. The grid states presence at its own resolution; it never gives a feature a size of its own.
+
+`"cellPresence": "circle"` is for a point catalogue that publishes each feature's angular radius (a crater catalogue):
+`radiusField` names that attribute, in degrees of arc on the plan's sphere. Every cell the small circle of that radius
+around the point crosses is marked, and so is the cell holding the point, so a feature smaller than a cell still marks
+one. The catalogue's own radius is the size drawn; the grid adds none.
 """
 import hashlib
 import json
@@ -58,18 +63,46 @@ def paint_polygon(grid, geometry, bounds, transform, category):
     return (y0, x0, hit)
 
 
-def paint_presence(grid, geometry, transform, category, kind, shared=-2):
+def circle_paths(x, y, radius, steps):
+    """The small circle of `radius` degrees of arc around (x, y) east longitude and latitude, as unwrapped polyline paths.
+
+    Longitudes stay continuous around the circle, so a circle over the antimeridian or around a pole is one path; the
+    copies shifted by 360 degrees draw the part that falls off either side of the grid."""
+    lat1, lon1, d = math.radians(y), math.radians(x), math.radians(radius)
+    points, previous = [], None
+    for k in range(steps + 1):
+        bearing = 2 * math.pi * k / steps
+        lat2 = math.asin(math.sin(lat1) * math.cos(d) + math.cos(lat1) * math.sin(d) * math.cos(bearing))
+        lon2 = lon1 + math.atan2(math.sin(bearing) * math.sin(d) * math.cos(lat1), math.cos(d) - math.sin(lat1) * math.sin(lat2))
+        lon = math.degrees(lon2)
+        if previous is not None:
+            lon += 360 * round((previous - lon) / 360)
+        points.append((lon, math.degrees(lat2)))
+        previous = lon
+    return [[(lon + shift, lat) for lon, lat in points] for shift in (-360, 0, 360)]
+
+
+def paint_presence(grid, geometry, transform, category, kind, shared=-2, radius=None):
     """Mark the cell holding a point, or every cell a polyline crosses, under the same overlap rule as polygons.
 
     A cell two categories reach is withheld, or takes the plan's declared `sharedCellCategory` (a true statement:
     the cell holds catalogued features of more than one class)."""
-    if kind == 'point':
+    if kind in ('point', 'circle'):
         x, y = float(geometry['x']), float(geometry['y'])
         col, row = (~transform) * (x, y)
         col, row = min(grid.shape[1] - 1, math.floor(col)), min(grid.shape[0] - 1, math.floor(row))
         if not (0 <= col and 0 <= row):
             raise ValueError(f'Point outside the grid: {x}, {y}')
         hit = np.zeros(grid.shape, dtype=bool); hit[row, col] = True
+        if kind == 'circle':
+            if not (isinstance(radius, (int, float)) and 0 < radius < 90):
+                raise ValueError(f'Circle radius must be a positive angle under 90 degrees, not {radius} at {x}, {y}')
+            # Vertices at most a quarter cell apart along the circle, so all_touched follows it cell by cell.
+            cell = min(abs(transform.a), abs(transform.e))
+            steps = max(16, math.ceil(2 * math.pi * radius / (cell / 4)))
+            lines = {'type': 'MultiLineString', 'coordinates': circle_paths(x, y, radius, steps)}
+            hit |= rasterize([(lines, 1)], out_shape=grid.shape, transform=transform, fill=0,
+                             all_touched=True, dtype='uint8').astype(bool)
     else:
         lines = {'type': 'MultiLineString', 'coordinates': geometry['paths']}
         hit = rasterize([(lines, 1)], out_shape=grid.shape, transform=transform, fill=0,
@@ -95,7 +128,7 @@ def resolve_nested(grid, footprints):
     grid[withheld] = resolved[withheld]
 
 
-CELL_PRESENCE = {'point': 'esriGeometryPoint', 'polyline': 'esriGeometryPolyline'}
+CELL_PRESENCE = {'point': 'esriGeometryPoint', 'polyline': 'esriGeometryPolyline', 'circle': 'esriGeometryPoint'}
 
 
 def esri_json_records(root, layer, plan):
@@ -184,7 +217,10 @@ def prepare(plan_path):
         raise ValueError('A null field needs cellPresence and exactly one category; sharedCellCategory needs cellPresence and a declared category')
     shared_index = -2 if shared is None else categories[shared]
     if presence not in (None, *CELL_PRESENCE) or presence and (nested or any('esriJsonPath' not in layer for layer in plan.get('layers', [plan]))):
-        raise ValueError('cellPresence must be "point" or "polyline", on ArcGIS layers (one per page), without nestedUnits')
+        raise ValueError('cellPresence must be "point", "polyline" or "circle", on ArcGIS layers (one per page), without nestedUnits')
+    radius_field = plan.get('radiusField')
+    if (presence == 'circle') != isinstance(radius_field, str):
+        raise ValueError('radiusField names the angular radius attribute of a "circle" presence plan, and only of one')
     if plan.get('nestedUnits') not in (None, 'inner'):
         raise ValueError('nestedUnits must be "inner" when present')
     footprints = []
@@ -202,7 +238,8 @@ def prepare(plan_path):
                 category = categories.get(value, -2)
                 if presence:
                     if shape:
-                        paint_presence(grid, shape, transform, category, presence, shared_index)
+                        paint_presence(grid, shape, transform, category, presence, shared_index,
+                                       radius=record[radius_field] if radius_field else None)
                     continue
                 footprint = paint_polygon(grid, shape.__geo_interface__, shape.bbox, transform, category)
                 if nested and footprint is not None:
@@ -224,7 +261,8 @@ def prepare(plan_path):
                    categories=plan['categories'], output=plan['output'],
                    sha256=hashlib.sha256(output.read_bytes()).hexdigest(),
                    transform=list(output_transform)[:6], radiusMeters=radius,
-                   policy=({'point': 'One cell per catalogued point', 'polyline': 'Every cell a catalogued polyline crosses'}[presence] + '; no feature size or width drawn; cells holding two categories withheld' if presence else 'Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld') + ('; the smallest unit covering a withheld pixel takes it (nestedUnits inner)' if nested else '') + '; source edges clipped by global raster extent.')
+                   policy=({'point': 'One cell per catalogued point; no feature size or width drawn', 'polyline': 'Every cell a catalogued polyline crosses; no feature size or width drawn',
+                            'circle': 'Every cell the catalogued circle (centre and published angular radius) crosses, and the cell holding its centre'}[presence] + '; cells holding two categories withheld' if presence else 'Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld') + ('; the smallest unit covering a withheld pixel takes it (nestedUnits inner)' if nested else '') + '; source edges clipped by global raster extent.')
     if center:
         receipt['centerLongitude'] = center
     if frame:

@@ -1,0 +1,51 @@
+/* cssEarth shell colours for Datasette */
+:root { color-scheme: dark; }
+html, body, .bd, .hd, .ft, section.content { background: #000 !important; color: #dfdfdf !important; }
+.hd, .ft { border-color: rgb(255 255 255 / 12%) !important; }
+.hd a, .ft a, .crumbs a { color: #b0b0b0 !important; }
+a, a:link, a:visited { color: #dfdfdf; text-decoration-color: rgb(255 255 255 / 30%); }
+a:hover { color: #fff; }
+h1, h2, h3, h4, strong, b { color: #dfdfdf !important; border-color: #444 !important; }
+p, li, dt, dd, label, .facet-info, .suggested-facets, .facet-info-total { color: #b0b0b0 !important; }
+table.rows-and-columns, table { background: #000 !important; border-color: rgb(255 255 255 / 12%) !important; }
+table.rows-and-columns th, th { background: #141414 !important; color: #b0b0b0 !important; border-color: rgb(255 255 255 / 20%) !important; }
+table.rows-and-columns td, td { background: #000 !important; color: #dfdfdf !important; border-color: rgb(255 255 255 / 12%) !important; }
+table.rows-and-columns tr:hover td { background: #212121 !important; }
+input, select, textarea, button, .select-wrapper, .select-wrapper select { background: #141414 !important; color: #dfdfdf !important; border-color: rgb(255 255 255 / 20%) !important; }
+input[type=submit], button { background: #262626 !important; }
+pre, code, .CodeMirror, .cm-editor, .cm-content, .cm-gutters { background: #141414 !important; color: #dfdfdf !important; }
+.facet-results, .facet-info, details, .dropdown-menu, .actions-menu-links, .dropdown-menu li, .column-actions { background: #141414 !important; color: #dfdfdf !important; border-color: rgb(255 255 255 / 20%) !important; }
+.dropdown-menu a, .dropdown-menu li a { color: #dfdfdf !important; }
+.dropdown-menu .hook, .hook { border-bottom-color: #141414 !important; }
+.type-int, .type-float { color: #dfdfdf !important; }
+.null, .type-none { color: #858585 !important; }
+header, header.hd, nav, .hd nav, .not-footer > header { background: #141414 !important; border-bottom: 1px solid rgb(255 255 255 / 12%) !important; }
+.page-header, h1.page-header, .page-header h1 { border-left-color: #444 !important; }
+.dashboard-card, .dashboard-grid > div, .card, [class*="dashboard"] { background: #0a0a0a !important; border-color: rgb(255 255 255 / 12%) !important; color: #dfdfdf !important; }
+.metric, .metric * { color: #dfdfdf !important; }
+/* The SQL editor is for Claude's terminal, not the page. */
+form.sql, a[href*="?sql="], a[href*="&sql="], .show-hide-sql, a[href$="/-/dashboards/overview?sql"], .dashboard-card a[href*="sql"] { display: none !important; }
+/* global_maps gallery */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px 16px; margin: 16px 0 40px; }
+.gallery .map { display: block; text-decoration: none !important; color: #dfdfdf !important; }
+.gallery .frame { aspect-ratio: 2 / 1; background: #141414; border-radius: 4px; overflow: hidden; display: grid; place-items: center; color: #858585; font-size: 12px; }
+.gallery .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery .map:hover .frame { outline: 1px solid #858585; }
+.gallery .body { font-size: 15px; font-weight: 500; margin-top: 8px; }
+.gallery .title { font-size: 13px; color: #b0b0b0; margin-top: 2px; line-height: 1.35; }
+.gallery .meta { font-size: 12px; color: #858585; margin-top: 4px; }
+.gallery .meta.unstated { color: #e0b46a; }
+/* one accordion per body */
+.bodies { margin: 16px 0 40px; border-top: 1px solid rgb(255 255 255 / 12%); }
+.body-group { border-bottom: 1px solid rgb(255 255 255 / 12%); background: none !important; }
+.body-group summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 12px; padding: 12px 4px; }
+.body-group summary::-webkit-details-marker { display: none; }
+.body-group summary::before { content: "▸"; color: #858585; width: 12px; }
+.body-group[open] summary::before { content: "▾"; }
+.body-group summary:hover { background: #141414; }
+.body-group .name { font-size: 16px; font-weight: 500; color: #dfdfdf; }
+.body-group .count { font-size: 13px; color: #858585; }
+.body-group .gallery { margin: 4px 0 20px; }
+.gallery .title { font-size: 14px; color: #dfdfdf; margin-top: 8px; }
+.gallery .in-app { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #3fb950; margin-right: 7px; vertical-align: 1px; }
+.gallery .in-app.same { background: none; box-shadow: inset 0 0 0 1.5px #3fb950; }

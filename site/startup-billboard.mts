@@ -12,9 +12,11 @@ export function usesDefaultStartupView(url: string): boolean {
   return !['v', 'view', 'overview', 'focus', 'focusLens', 'feature', 'dataset', 'settings'].some(key => query.has(key));
 }
 
-/** Static previews restore from the URL; server-rendered focus responses carry a resolved camera. */
+/** Static previews restore from the URL; server-rendered focus responses carry a resolved camera. Only the `v` parameter is
+ * a saved camera: a page URL also carries `overview`, `focus`, `dataset` and the rest, which the shared-view parser refuses. */
 export function readStartupSavedView(url: string, preparedView?: string) {
-  return parseSharedView(preparedView ? `v=${preparedView}` : new URL(url).search);
+  const saved = preparedView ?? new URL(url).searchParams.get('v');
+  return saved === null ? null : parseSharedView(new URLSearchParams({ v: saved }).toString());
 }
 
 /** The same prepared cover and resource lease as fly-to, owned by the initial session. */

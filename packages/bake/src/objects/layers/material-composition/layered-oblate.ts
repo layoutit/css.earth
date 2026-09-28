@@ -27,7 +27,7 @@ import {parse,object,number} from '@cssearth/core/schema';
 import { layeredRecipe } from './layered-recipe.ts';
 import { polarQuad } from './texture-geometry.ts';
 import { extractRgbaBounds, visibleRgbaMatches } from './rgba.ts';
-import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.ts';
+import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from '../giant/index.ts';
 import { validateMaterialRecipe } from './recipe.ts';
 import {interiorSource} from '../cutaway/index.ts';
 import type {prepareCutawayMaterials} from './cutaway-materials.ts';

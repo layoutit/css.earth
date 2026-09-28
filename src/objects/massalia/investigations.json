@@ -102,6 +102,17 @@
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/118",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/119"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"73.5 km (size-calibrated model)\" (ali-lagoa-2020-herschel) differs from the Small Bodies Occultations V4.0 record 19, ISAM model A20-103 diameter 121 ± 13 km (volume-equivalent; ISAM model A20-103 fitted to 7 occultations); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

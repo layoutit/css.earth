@@ -66,6 +66,36 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geopotential",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "slope",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity-anomaly",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "thermal-inertia",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "hydration",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "carbon",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

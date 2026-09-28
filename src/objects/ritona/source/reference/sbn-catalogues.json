@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "ritona",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 145452,
+    "by": "Horizons command 145452;"
+  },
+  "tno": {
+    "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+    "product": "urn:nasa:pds:tno-centaur_diam-albedo-density:data:tno_centaur_diam_alb_dens_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+    "rows": [
+      {
+        "recordNumber": 470,
+        "fields": {
+          "ASTEROID_NUMBER": "145452",
+          "ASTEROID_NAME": "-",
+          "PROVISIONAL_DESIGNATION": "2005 RN43",
+          "SEMIMAJOR_AXIS": "41.5",
+          "ECCENTRICITY": "0.02",
+          "INCLINATION": "19.",
+          "DYNAMICAL_TYPE": "TNO",
+          "NUMBER_OF_COMPANIONS": "0",
+          "ABSOLUTE_MAGNITUDE_MPC": "3.7",
+          "ABSOLUTE_MAGNITUDE": "3.890",
+          "ABSOLUTE_MAGNITUDE_UNCERTAINTY": "0.050",
+          "EFFECTIVE_DIAMETER": "679.0",
+          "EFFECTIVE_DIAMETER_ERROR_UPPER": "55.0",
+          "EFFECTIVE_DIAMETER_ERROR_LOWER": "73.0",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "PRIMARY_DIAMETER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "SECONDARY_DIAMETER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "SECONDARY_DIAMETER_CODE": "-",
+          "ALBEDO": "0.107",
+          "ALBEDO_ERROR_UPPER": "0.029",
+          "ALBEDO_ERROR_LOWER": "0.018",
+          "ALBEDO_COLOR": "V",
+          "ALBEDO_CODE": "-",
+          "DENSITY": "-9.999",
+          "DENSITY_ERROR_UPPER": "-9.999",
+          "DENSITY_ERROR_LOWER": "-9.999",
+          "DENSITY_CODE": "-",
+          "METHOD_DIAMETER_ALBEDO": "T",
+          "METHOD_DENSITY": "-",
+          "REFERENCE_CODE": "V12a"
+        }
+      },
+      {
+        "recordNumber": 471,
+        "fields": {
+          "ASTEROID_NUMBER": "145452",
+          "ASTEROID_NAME": "-",
+          "PROVISIONAL_DESIGNATION": "2005 RN43",
+          "SEMIMAJOR_AXIS": "41.5",
+          "ECCENTRICITY": "0.02",
+          "INCLINATION": "19.",
+          "DYNAMICAL_TYPE": "TNO",
+          "NUMBER_OF_COMPANIONS": "0",
+          "ABSOLUTE_MAGNITUDE_MPC": "3.7",
+          "ABSOLUTE_MAGNITUDE": "-99.999",
+          "ABSOLUTE_MAGNITUDE_UNCERTAINTY": "-99.999",
+          "EFFECTIVE_DIAMETER": "-999.9",
+          "EFFECTIVE_DIAMETER_ERROR_UPPER": "-999.9",
+          "EFFECTIVE_DIAMETER_ERROR_LOWER": "-999.9",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "PRIMARY_DIAMETER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "SECONDARY_DIAMETER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "SECONDARY_DIAMETER_CODE": "-",
+          "ALBEDO": "-9.999",
+          "ALBEDO_ERROR_UPPER": "-9.999",
+          "ALBEDO_ERROR_LOWER": "-9.999",
+          "ALBEDO_COLOR": "-",
+          "ALBEDO_CODE": "-",
+          "DENSITY": "0.200",
+          "DENSITY_ERROR_UPPER": "-9.999",
+          "DENSITY_ERROR_LOWER": "-9.999",
+          "DENSITY_CODE": "G",
+          "METHOD_DIAMETER_ALBEDO": "-",
+          "METHOD_DENSITY": "H",
+          "REFERENCE_CODE": "H18a"
+        }
+      }
+    ],
+    "selected": {
+      "diameter": 0
+    },
+    "references": {
+      "V12a": "Vilenius, E., et al., 2012, \"TNOs are cool\": A survey of the trans-Neptunian region. VI. Herschel/PACS observations and thermal modeling of 19 classical Kuiper belt objects, Astron. & Astrophys., 541:A94."
+    },
+    "rule": "Rows with an unqualified diameter (code blank: not assumed, derived or a limit); method rank occultation, imaging, mutual events, thermal, combined; the latest entry of the best method. A binary system shows its primary diameter when one is given. Density: the latest unqualified entry."
+  }
+}

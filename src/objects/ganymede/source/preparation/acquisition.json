@@ -20,6 +20,14 @@
     {
       "kind": "download",
       "groups": [
+        "refresh"
+      ],
+      "path": "ganymede-dlr-juno.tif",
+      "url": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/DLR_Ganymede_Voyager-Galileo-Juno_V1.0/Ganymede_global_equi_180_359m_Juno.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
         "surface-chemistry"
       ],
       "path": "muse/577.3nm_band_ganymede_night_1.fits",

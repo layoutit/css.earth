@@ -197,6 +197,43 @@
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
       "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
+    },
+    {
+      "id": "dawn-gravity-ceres18d-maps",
+      "subject": "Dawn radio-science gravity maps of Ceres: radial gravity, its error, Bouguer anomaly and geoid",
+      "status": "included",
+      "finding": "The PDS4 bundle urn:nasa:pds:dawn-rss-der-ceres 1.0 (doi:10.17189/c2eg-7x61, migrated from PDS3 DAWN-A-RSS-5-CEGR-V4.0, volume DWNCGRS_2 version 4) archives gridded maps only for the degree-18 model CERES18D: JGDWN_CER18D_ACCEL_0018 (radial gravity, degrees 2 to 18 without the hydrostatic J2 and J4, on a 482.0 x 445.9 km ellipsoid), ACCERR_0018 (its one-sigma error from the covariance), BOU_0018 (Bouguer, same degrees), GEOID_0018 and GEOIDERR_0018 (metres above an ellipsoid of a = 482.0 km, f = 0.074896). Each is 181 x 360 little-endian float64, cell centres at whole degrees from 0 E and from 90 N to 90 S; the image bytes are identical in both archives (the MD5 in the PDS4 labels and the PDS3 checksum file agree). The PDS4 labels' value-added corners put the first column's edge at 0 E, half a cell from the producer's PDS3 labels; the PDS3 placement is used and the 360 cells of each pole row are equal, which fixes the rows. Values: radial gravity -272.2 to 212.5 mGal, error 17.6 to 79.0, Bouguer -319.1 to 405.9, geoid -1066.6 to 1454.1 m. Checks against papers: the gravity low and Bouguer high fall on Urvara; Kerwan reads +348 mGal Bouguer (100th percentile), as Bland et al. (2018) infer; Yalode +180; Hanami Planum -225 (4th percentile), the compensated-topography pattern of Park et al. (2016, 2017); Ahuna Mons +153 mGal free-air (99th percentile), where Ruesch et al. (2019) find about 100 mGal at degrees 5 to 14. Ruesch et al. quote about 10 mGal accuracy at the equator for CERES18C; the archived error map gives 17.6 mGal there. Resolution: about 82 km at the equator (degree 18), accurate globally to degree 14, about 105 km. No degree-strength map is archived. Shown as the gravity, gravity-uncertainty, bouguer and geoid lenses through the pds3-grid reader, which needs to accept the detached pointer (\"FILE\",1).",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/document/dawn-rss-der-ceres-bundle-desc.txt",
+        "https://sbnarchive.psi.edu/pds3/dawn/grav/DWNCGRS_2_v4/DATA/RSDMAP/",
+        "https://doi.org/10.1016/j.icarus.2017.08.005",
+        "https://doi.org/10.1038/s41561-019-0378-7",
+        "https://doi.org/10.1002/2017GL075526",
+        "https://doi.org/10.1002/2017JE005302",
+        "https://meetingorganizer.copernicus.org/EGU2017/EGU2017-3380.pdf",
+        "evidence/gravity/feature-values.json"
+      ]
+    },
+    {
+      "id": "dawn-gravity-ceres70e-coefficients",
+      "subject": "CERES70E degree-70 gravity model (Park et al. 2020)",
+      "status": "deferred",
+      "finding": "The same bundle archives CERES70E, its ISOSIG and KAULA variants as spherical-harmonic coefficients only (data-shadr), with no gridded map. Showing it would need our own summation of the coefficients, which this package does not do.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/data-shadr/",
+        "https://doi.org/10.1038/s41550-020-1019-1"
+      ],
+      "revisitWhen": "A gridded CERES70E product is archived, or a shared coefficient-synthesis capability is approved."
+    },
+    {
+      "id": "dawn-gravity-ceres18d-geoid-error",
+      "subject": "CERES18D geoid error map (JGDWN_CER18D_GEOIDERR_0018)",
+      "status": "excluded",
+      "finding": "Archived and decoded (22.0 to 27.4 m, one sigma, nearly uniform) but not shown: it is under 3% of the geoid range and the radial gravity error lens already shows where the model is weak, as Venus shows only its gravity error.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/dawn/gravity/dawn-rss-der-ceres_v1.0/maps/"
+      ],
+      "revisitWhen": "Readers ask how far the geoid itself may be off."
     }
   ]
 }

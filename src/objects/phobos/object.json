@@ -71,6 +71,11 @@
               "id": "slope",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "craters",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

@@ -70,6 +70,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dike/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"33.25 km (size-calibrated model)\" (hanus-2018-thermophysical-models) differs from the Small Bodies Occultations V4.0 record 81, DAMIT model 1144 diameter 69 ± 2 km (volume-equivalent; DAMIT model 1144 fitted to 7 occultations); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

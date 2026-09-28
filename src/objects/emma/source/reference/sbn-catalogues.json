@@ -1,0 +1,289 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "emma",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 283,
+    "by": "Horizons command 283;"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 231,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "283",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00283",
+          "Absolute_mag": "8.72",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455219.7347755",
+          "N_W1": "16",
+          "N_W2": "19",
+          "N_W3": "14",
+          "N_W4": "18",
+          "Fit_code": "DVBI",
+          "Diameter": "132.385",
+          "Diameter_err": "0.258",
+          "V_albedo": "0.033",
+          "V_albedo_err": "0.009",
+          "IR_albedo": "0.060",
+          "IR_albedo_err": "0.004",
+          "Beaming_param": "0.839",
+          "Beaming_param_err": "0.003",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139611,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "283",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00283",
+          "Absolute_mag": "8.72",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455505.4682530",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "156.392",
+          "Diameter_err": "0.450",
+          "V_albedo": "0.023",
+          "V_albedo_err": "0.004",
+          "IR_albedo": "0.043",
+          "IR_albedo_err": "0.003",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153284,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "283",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00283",
+          "Absolute_mag": "8.72",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2456834.2973724",
+          "N_W1": "12",
+          "N_W2": "12",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "97.365",
+          "Diameter_err": "28.169",
+          "V_albedo": "0.054",
+          "V_albedo_err": "0.017",
+          "IR_albedo": "0.080",
+          "IR_albedo_err": "0.044",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 162080,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "283",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00283",
+          "Absolute_mag": "8.72",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457307.9532593",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "161.596",
+          "Diameter_err": "61.298",
+          "V_albedo": "0.028",
+          "V_albedo_err": "0.020",
+          "IR_albedo": "0.042",
+          "IR_albedo_err": "0.052",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 162081,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "283",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00283",
+          "Absolute_mag": "8.72",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457010.4492087",
+          "N_W1": "13",
+          "N_W2": "13",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "108.944",
+          "Diameter_err": "39.458",
+          "V_albedo": "0.049",
+          "V_albedo_err": "0.038",
+          "IR_albedo": "0.073",
+          "IR_albedo_err": "0.091",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "masses": {
+    "catalogueId": "asteroid-masses-baer-2012",
+    "product": "urn:nasa:pds:compil.ast.masses:data:astmass12_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+    "rows": [
+      {
+        "recordNumber": 174,
+        "fields": {
+          "AST_NUMBER": "283",
+          "AST_NAME": "Emma",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "6.938E-13",
+          "MASS_SOL_UNC": "1.51E-14",
+          "MASS_KG": "1.38E+18",
+          "MASS_KG_UNC": "3.00E+16",
+          "BULK_DENSITY": "0.81",
+          "BULK_DENSITY_UNC": "0.08",
+          "AXIS_A": "148.000",
+          "AXIS_B": "148.000",
+          "AXIS_C": "148.000",
+          "EQUIV_RADIUS_UNC": "2.300",
+          "SIZE_REF_CODE": "Tedesco et al. 2002",
+          "BINARY_NOTE": "sys",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Marchis et al. 2008b"
+        }
+      }
+    ],
+    "references": {
+      "Marchis et al. 2008b": "Marchis, F., P. Descamps, J. Berthier, D. Hestroffer, F. Vachier, M. Baek, A.W. Harris, and D. Nesvorny, Main belt binary asteroidal systems with eccentric mutual orbits, Icarus 195, 295-316, 2008."
+    },
+    "selected": {
+      "mass": 0
+    },
+    "rule": "The determination with the smallest stated mass uncertainty, excluding rows the compilation flags (DENSITY_NOTE N), rows for a secondary, and rows under three times their uncertainty. Density from the same row, when it is at least three times its uncertainty."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 19,
+        "fields": {
+          "AST_NUMBER": "283",
+          "AST_NAME": "Emma",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2003 (283) 1",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "3.05",
+          "SYSTEM_ECCENTRICITY": "0.14",
+          "SYSTEM_INCLINATION": "8.",
+          "EFFECTIVE_DIAMETER": "134.70",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "2.35",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.067",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.037",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "134.70",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "2.35",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "9.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "5.00",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "6.888",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.007",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "5.810E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "3.60E+00",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "3.353E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "9.30E-04",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.120",
+          "BINARY_ECCENTRICITY_ERROR": "0.010",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.032",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.004",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "1.38E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "3.00E+16",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "0.70",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.20",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "M08c": "Marchis, F., P. Descamps, J. Berthier, D. Hestroffer, F. Vachier, M. Baek, A. W. Harris, and D. Nesvorny, 2008, Main belt binary asteroidal systems with eccentric mutual orbits, Icarus, 195:295-316."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 19,
+        "fields": {
+          "AST_NUMBER": "283",
+          "AST_NAME": "Emma",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2003 (283) 1",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2003",
+          "YEAR_UPDATE": "2013",
+          "REF_CODE_EFFECTIVE_DIAMETER": "M11c",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "M11c",
+          "REF_CODE_COMPANION_DIAMETER": "M08c",
+          "REF_CODE_PRIMARY_SPIN": "S78a",
+          "REF_CODE_BINARY_SEMIMAJOR": "M08c",
+          "REF_CODE_BINARY_PERIOD": "M08c",
+          "REF_CODE_BINARY_ECCENTRICITY": "M08c",
+          "REF_CODE_PRIMARY_ALBEDO": "M11c",
+          "REF_CODE_SYSTEM_MASS": "M08c",
+          "REF_CODE_SYSTEM_DENSITY": "M08c"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

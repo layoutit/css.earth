@@ -80,7 +80,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const registry = readPreparedObjects(process.cwd()).sceneObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
-    const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/jpl-mission-targets.mts')).href) as typeof import('../prepare/jpl-mission-targets.mts');
+    const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('../../site/build/prepare/jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records (site/prepared-object-discovery.json): what the world's visibility reads per body.

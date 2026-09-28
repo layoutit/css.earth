@@ -101,9 +101,9 @@ body {
   background-color: var(--shell-background);
 }
 
-/* The selected detail occupies the depth band from --world-depth-base to base + 3. Persistent world bodies sit before or
+/* The selected detail occupies the depth band from its directly assigned depth base to base + 3. Persistent world bodies sit before or
    after that band without inheriting its changing object selectors. */
-.object-world-stage > .object-stage { background-color: transparent; z-index: var(--world-depth-base, 0); }
+.object-world-stage > .object-stage { background-color: transparent; z-index: 0; }
 
 .object-stage > .object-render-root {
   transform-origin: 50% 50%;

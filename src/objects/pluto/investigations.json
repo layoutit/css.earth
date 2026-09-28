@@ -192,6 +192,17 @@
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
       "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Mean radius \"1,188.3 km\" (source-pluto-orbit-jpl-physical-values) differs from the TNO and Centaur compilation record 379 (Nimmo et al. 2017) diameter 2379.8 ± 0.8 km; the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

@@ -23,6 +23,10 @@ export const PREPARATION_CODE = ['tools/', 'packages/bake/', 'packages/telescope
 /** The runtime: the site and the CSS renderer package's sources. */
 export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 
+/** Site-owned preparation: build plugins and the preparers that read site modules. Build-time code, so it may import the bake;
+ * the runtime never imports it, and packages never import any of `site/`. */
+export const SITE_BUILD = 'site/build/';
+
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
  * (`astro.config.mts` wires `site/build` and `tools/prepare` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
@@ -47,8 +51,13 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'runtime-imports-no-preparation',
-    description: 'site/ and packages/renderer/src/ must not import tools/, @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
-    forbids: (from, to) => under(from, ...RUNTIME_CODE) && under(to, ...PREPARATION_CODE),
+    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import tools/, @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
+    forbids: (from, to) => under(from, ...RUNTIME_CODE) && !from.startsWith(SITE_BUILD) && under(to, ...PREPARATION_CODE),
+  },
+  {
+    id: 'runtime-imports-no-site-build',
+    description: 'site/build/ is site-owned preparation: the rest of site/ never imports it (type-only imports count; tests and entry glue may)',
+    forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && to.startsWith(SITE_BUILD),
   },
   {
     id: 'nothing-imports-prepare-scripts',

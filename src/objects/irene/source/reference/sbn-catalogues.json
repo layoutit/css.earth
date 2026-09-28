@@ -1,0 +1,163 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "irene",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 14,
+    "by": "SBDB record des 14"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 9,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "14",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00014",
+          "Absolute_mag": "6.30",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455341.5021735",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "8",
+          "N_W4": "8",
+          "Fit_code": "DVBI",
+          "Diameter": "140.761",
+          "Diameter_err": "8.406",
+          "V_albedo": "0.269",
+          "V_albedo_err": "0.037",
+          "IR_albedo": "0.394",
+          "IR_albedo_err": "0.057",
+          "Beaming_param": "0.839",
+          "Beaming_param_err": "0.149",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139445,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "14",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00014",
+          "Absolute_mag": "6.30",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455511.6503230",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "145.681",
+          "Diameter_err": "5.274",
+          "V_albedo": "0.251",
+          "V_albedo_err": "0.041",
+          "IR_albedo": "0.353",
+          "IR_albedo_err": "0.069",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "masses": {
+    "catalogueId": "asteroid-masses-baer-2012",
+    "product": "urn:nasa:pds:compil.ast.masses:data:astmass12_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+    "rows": [
+      {
+        "recordNumber": 94,
+        "fields": {
+          "AST_NUMBER": "14",
+          "AST_NAME": "Irene",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "4.130E-12",
+          "MASS_SOL_UNC": "7.30E-13",
+          "MASS_KG": "8.21E+18",
+          "MASS_KG_UNC": "1.45E+18",
+          "BULK_DENSITY": "4.42",
+          "BULK_DENSITY_UNC": "1.59",
+          "AXIS_A": "167.000",
+          "AXIS_B": "153.000",
+          "AXIS_C": "139.000",
+          "EQUIV_RADIUS_UNC": "8.000",
+          "SIZE_REF_CODE": "JPLSBD",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Baer et al. 2008"
+        }
+      },
+      {
+        "recordNumber": 95,
+        "fields": {
+          "AST_NUMBER": "14",
+          "AST_NAME": "Irene",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "3.490E-12",
+          "MASS_SOL_UNC": "8.20E-13",
+          "MASS_KG": "6.94E+18",
+          "MASS_KG_UNC": "1.63E+18",
+          "BULK_DENSITY": "3.73",
+          "BULK_DENSITY_UNC": "1.47",
+          "AXIS_A": "167.000",
+          "AXIS_B": "153.000",
+          "AXIS_C": "139.000",
+          "EQUIV_RADIUS_UNC": "8.000",
+          "SIZE_REF_CODE": "JPLSBD",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Baer et al. 2011"
+        }
+      },
+      {
+        "recordNumber": 96,
+        "fields": {
+          "AST_NUMBER": "14",
+          "AST_NAME": "Irene",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "1.910E-12",
+          "MASS_SOL_UNC": "8.10E-13",
+          "MASS_KG": "3.80E+18",
+          "MASS_KG_UNC": "1.61E+18",
+          "BULK_DENSITY": "2.04",
+          "BULK_DENSITY_UNC": "1.08",
+          "AXIS_A": "167.000",
+          "AXIS_B": "153.000",
+          "AXIS_C": "139.000",
+          "EQUIV_RADIUS_UNC": "8.000",
+          "SIZE_REF_CODE": "JPLSBD",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Konopliv et al. 2011"
+        }
+      }
+    ],
+    "references": {
+      "Baer et al. 2008": "Baer, J., A. Milani, S. Chesley, and R.D. Matson, An observational error model, and application to asteroid mass determination, American Astronomical Society, DPS meeting #40, #52.09, 2008."
+    },
+    "selected": {
+      "mass": 0
+    },
+    "rule": "The determination with the smallest stated mass uncertainty, excluding rows the compilation flags (DENSITY_NOTE N), rows for a secondary, and rows under three times their uncertainty. Density from the same row, when it is at least three times its uncertainty. 1 of 3 rows were excluded by that rule."
+  }
+}

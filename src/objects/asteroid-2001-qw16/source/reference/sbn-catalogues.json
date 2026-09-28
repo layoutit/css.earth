@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "asteroid-2001-qw16",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 77777,
+    "by": "SBDB record des 77777"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 47545,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "77777",
+          "Prov_desig": "2001 QW16",
+          "MPC_packed_name": "77777",
+          "Absolute_mag": "13.20",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455327.9074070",
+          "N_W1": "0",
+          "N_W2": "0",
+          "N_W3": "11",
+          "N_W4": "13",
+          "Fit_code": "DVB-",
+          "Diameter": "10.403",
+          "Diameter_err": "0.259",
+          "V_albedo": "0.086",
+          "V_albedo_err": "0.023",
+          "IR_albedo": "0.128",
+          "IR_albedo_err": "0.035",
+          "Beaming_param": "1.355",
+          "Beaming_param_err": "0.048",
+          "Stacked_flag": "-",
+          "Reference": "Mas11",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas11": "Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 13 others, Main Belt Asteroids with WISE/NEOWISE. I. Preliminary Albedos and Diameters, Astroph. J. 741, 68, doi:10.1088/0004-637X/741/2/68, 2011."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

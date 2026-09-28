@@ -53,7 +53,7 @@ async function assertLocalBuiltPreview(origin: URL): Promise<void> {
 async function ensureCurrentBuild(): Promise<void> {
   const built = await stat(resolve(root, 'dist/index.html')).catch(() => null);
   const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
-  const sourcePaths = ['site', 'src', 'packages', 'astro.config.mts', 'tools/prepared', 'tools/prepare'];
+  const sourcePaths = ['site', 'src', 'packages', 'astro.config.mts', 'tools/prepare'];
   const diff = await exec('git', ['diff', '--binary', 'HEAD', '--', ...sourcePaths], { cwd: root, maxBuffer: 64 * 1024 * 1024 });
   const untracked = await exec('git', ['ls-files', '--others', '--exclude-standard', '-z', '--', ...sourcePaths], { cwd: root });
   const digest = createHash('sha256').update(diff.stdout);

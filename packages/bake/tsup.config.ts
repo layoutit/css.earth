@@ -48,6 +48,8 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/sphere-survey': 'src/objects/sphere-survey/index.ts',
     'objects/default-view': 'src/objects/default-view/index.ts',
     'objects/celestial': 'src/objects/celestial/index.ts',
+    'objects/host-adapters': 'src/objects/host-adapters/index.ts',
+    'objects/interpretation': 'src/objects/interpretation/index.ts',
     'runtime-source': 'src/runtime-source/index.ts',
     'prepared-presentation': 'src/prepared-presentation/index.ts',
     'delivery': 'src/delivery/index.ts',
@@ -69,7 +71,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
  * is declared with Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the renderer
  * types they name use it); `tsconfig.json` keeps both out of the browser-safe sources. */
 async function emitDeclarations(): Promise<void> {
-  // A failed pass leaves no stubs, so the exports stop resolving and tools/ci/check-stale-builds.mts reads the build stale.
+  // A failed pass leaves no stubs, so the exports stop resolving and packages/bake/cli/check-stale-builds.mts reads the build stale.
   for (const name of Object.keys(entry)) await rm(resolve(root, 'dist', `${name}.d.ts`), { force: true })
   const tsc = createRequire(import.meta.url).resolve('typescript/bin/tsc')
   const run = spawnSync(process.execPath, [tsc, '-p', resolve(root, 'tsconfig.build.json')], { cwd: root, stdio: 'inherit' })
@@ -114,7 +116,7 @@ export default defineConfig(options => ({
   // Those subpaths are TypeScript whose sibling imports name `.js`, which Node cannot load, so they are bundled; the
   // renderer's built entries would be too, but no topic imports one.
   noExternal: [/^@cssearth\/renderer\//],
-  // tools/ci/check-stale-builds.mts reads the inputs to know when this bundle is stale.
+  // packages/bake/cli/check-stale-builds.mts reads the inputs to know when this bundle is stale.
   metafile: true,
   target: 'es2022',
   // Keep `node:` specifiers so a browser bundler can never mistake the node entry's imports for polyfillable modules.

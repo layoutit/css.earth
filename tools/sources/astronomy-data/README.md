@@ -5,33 +5,51 @@ contains the 131 proposed work scopes and their acceptance conditions. IDs are
 permanent. There is one database, no database service and no ORM.
 
 The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland
-Small Bodies Node, and JAXA DARTS. It changes no application or prepared assets.
+Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets.
 
 ## Query the ledger
 
 From the repository root, with the project's supported Node version:
 
 ```sh
-node tools/sources/astronomy-data/serve.mts
+node tools/sources/astronomy-data/browse.mts
 node tools/sources/astronomy-data/slice.mts --source=opus --target=Mimas --format=json
 node tools/sources/astronomy-data/slice.mts --proposal=111 --format=tsv
 sqlite3 -header -column tools/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-The viewer runs at `http://127.0.0.1:4319`; `PORT` changes the port. Filters cover
-source, target, instrument, decision, proposal and text. Exports contain every
-matching row, independently of pagination. An empty source filter searches all
-sources. Proposal pages read current work status from SQLite on each request;
-restart the viewer after changing dataset rows. `AUDIT_DB` selects another file
-for comparisons. Open `ledger.sqlite` in a SQLite browser for direct editing.
+`browse.mts` opens the ledger in [Datasette](https://datasette.io/), read-only, at
+`http://127.0.0.1:8001/-/dashboards/overview`; `PORT` changes the port. The first run
+installs the pinned packages in `datasette/requirements.txt` into the ignored
+`output/ledger-venv`. The overview dashboard counts dataset families, bodies and
+archives; every table and view can be filtered, sorted and exported, and the
+`global_maps` view shows each map's preview grouped by body, with whether the app
+uses it. The settings, dark theme and map gallery live in `datasette/`.
+The [dashboard](evidence/datasette-dashboard.jpg) and [map gallery](evidence/datasette-global-maps.jpg)
+captures were taken from this ledger on 28 September 2026.
 
-| Table               | Owns                                                                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `datasets`          | Stable source/id, title, target, instrument, count, decision, reason, source URL; native metadata and retrieval records in `details_json` |
-| `proposals`         | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date                                             |
-| `dataset_proposals` | Many-to-many links between records and proposed work                                                                                      |
-| `evidence`          | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes                                       |
+`bodies` and `dataset_bodies` file each record under the bodies it names. PDS4 and
+Maryland rows are read from their full `targets` lists, not their shortened target
+text. A Photojournal record that names a moon and its planet counts for the moon,
+and the Sun counts only when no other body is tagged. Kind and parent come from
+`packages/astronomy/data/bodies`. `slice.mts` keeps the filtered JSON and TSV
+exports. `AUDIT_DB` selects another file for comparisons.
+Open `ledger.sqlite` in a SQLite browser for direct editing.
+
+| Table                 | Owns |
+| --------------------- | ---- |
+| `datasets`            | One row per dataset (9,214): stable source/id, title, target text, instrument, count, decision, reason, source URL, family; native metadata in `details_json`. Maryland archives Rosetta per tracking pass and mission phase, so `family` groups those rows by title (6,509 families in all) |
+| `inventory`           | Listings that repeat datasets (6,369): OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
+| `bodies`              | Every body a dataset names: cssEarth id when cssEarth catalogues it, name, kind, parent, cssEarth package |
+| `dataset_bodies`      | Dataset-to-body links with the name the source used; `role` is `parent` for a Photojournal tag of a tagged body's parent |
+| `missions`            | Every spacecraft, telescope or programme an instrument belongs to (117): id, name, kind, other names (DARTS "KAGUYA" is also "SELENE") |
+| `instruments`         | Every instrument (389), keyed by mission (`rosetta/osinac`, `mro/hirise`): name and abbreviation, one row even when archives spell it differently |
+| `dataset_instruments` | Dataset-to-instrument links with the name the source used; USGS and PSI PDS4 state no instrument |
+| `ledger_log`          | Each cleanup run: date, operation and the rules it applied |
+| `proposals`           | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date |
+| `dataset_proposals`   | Links between datasets and proposed work (`inventory_proposals` for inventory rows) |
+| `evidence`            | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes |
 
 Use `proposed`, `qualifying`, `blocked`, `in-progress`, `shipped`, `rejected` or
 `deferred` for proposal status. A source row's `decision` describes that source;
@@ -76,6 +94,10 @@ PHOTOJOURNAL_WORK_DIR=output/photojournal-refresh node tools/sources/astronomy-d
 USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-files.mts
 TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
 node tools/sources/astronomy-data/apply-ledger-fixes.mts --dry-run   # then without --dry-run
+node tools/sources/astronomy-data/apply-structure.mts --dry-run     # rebuilds bodies and dataset_bodies
+node tools/sources/astronomy-data/collect-trek.mts --dry-run        # NASA Trek map layers; TREK_CACHE keeps pages
+node tools/sources/astronomy-data/build-instruments.mts --dry-run   # rebuilds missions and instruments
+node tools/sources/astronomy-data/mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
 ```
 
 - **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a

@@ -1,0 +1,43 @@
+{
+  "id": "small-bodies-occultations-v4",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Small Bodies Occultations V4.0",
+  "identifiers": [
+    {
+      "type": "PDS4 LIDVID",
+      "value": "urn:nasa:pds:smallbodiesoccultations::4.0"
+    },
+    {
+      "type": "DOI",
+      "value": "10.26033/ehqs-jp27"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.26033/ehqs-jp27",
+      "label": "Small Bodies Occultations V4.0"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/bundle_smallbodiesoccultations.xml",
+      "label": "PDS4 bundle label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/bundle_smallbodiesoccultations.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, title, Citation_Information"
+    }
+  ],
+  "creators": [
+    "D. Herald, D. Gault, N. Carlson, E. Frappa, B. Giacchini, K. Guhl, T. Hayamizu, S. Kerr, J. Moore"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2024",
+  "version": "4.0",
+  "relations": [],
+  "statements": []
+}

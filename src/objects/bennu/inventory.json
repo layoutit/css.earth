@@ -39,6 +39,42 @@
     },
     {
       "location": "public",
+      "filename": "bennu-carbon-legend.webp",
+      "bytes": 230,
+      "sha256": "9137dd6cf34cf67e63184371593ebccacff0f9d316164242b312298696c7549f"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-carbon-shadow-alpha@2x.webp",
+      "bytes": 2854580,
+      "sha256": "7f6dcb932b217ee8e1b76133f3fa0ba003efe75c82811433d807b4733b27ad8e"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-carbon-shadow@2x.webp",
+      "bytes": 2195194,
+      "sha256": "15e6cf4f6bf23ead87e5a8f1777f7ae3bc632b9f09738b8fbf85f7e50808ad5d"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-carbon-surface-alpha@2x.webp",
+      "bytes": 2723266,
+      "sha256": "8f0072cc13406ecba85d95d5c6db07a3dac372aa8fe7d1ec1f3e9afa26d4e205"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-carbon-surface@2x.webp",
+      "bytes": 2034926,
+      "sha256": "0d660233bb65afddc0c83d69d4a0c0b3900fb7a6a6b0a3785c28dd9d5ddb395a"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-carbon-thumbnail.webp",
+      "bytes": 1482,
+      "sha256": "b5fa56138455cd365b2c1ac95f01dba5e8b2599b5cd3575bd93e9650d9e8ea71"
+    },
+    {
+      "location": "public",
       "filename": "bennu-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -76,8 +112,80 @@
     {
       "location": "public",
       "filename": "bennu-features.json",
-      "bytes": 36759,
-      "sha256": "30a79b44f12fb46bcf1ff6b3ff19e414376dd5dc6686da0ad7104f4a9e621202"
+      "bytes": 36778,
+      "sha256": "0e3a1f38f2beacc789bd8627b52f64d784e6dd7624bbd4365c1fca050d323caa"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-geopotential-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-geopotential-shadow-alpha@2x.webp",
+      "bytes": 3687482,
+      "sha256": "7288874134d8abcc91780bf46e178c45950a5225d9f91e8200edacd725b1887d"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-geopotential-shadow@2x.webp",
+      "bytes": 3045326,
+      "sha256": "d1f17882e541cc6035e306b879573761a3d9f79d3ac858281ae7d3ae37c8971a"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-geopotential-surface-alpha@2x.webp",
+      "bytes": 2477800,
+      "sha256": "e9e789123216e0142d6038956f531d5053cac23c5acdb97caea473ef57abb18c"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-geopotential-surface@2x.webp",
+      "bytes": 1444330,
+      "sha256": "d77d36f907865a8cfe356a9c77489a1238aa47d849b67cc035a1c11541d1437e"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-geopotential-thumbnail.webp",
+      "bytes": 1338,
+      "sha256": "47d1ffe2b8f9e72ca49f081d82cebaafbf9e73178f58c76158322accecf61471"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-gravity-anomaly-legend.webp",
+      "bytes": 234,
+      "sha256": "80dcf1a217c9b98f023fa5252d38bbc882da9927191acb048044e8f6276d2ed0"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-gravity-anomaly-shadow-alpha@2x.webp",
+      "bytes": 2012496,
+      "sha256": "ce21850f44fe9421210fd3a3604483080b4c2a38a44770d32c36a68f7e90461b"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-gravity-anomaly-shadow@2x.webp",
+      "bytes": 1369824,
+      "sha256": "7e9d6d007f1fef0a40e5da162d0b674c2dfa519e86d29afc0458b756c45c90ea"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-gravity-anomaly-surface-alpha@2x.webp",
+      "bytes": 1413472,
+      "sha256": "4366883ebeb4739f7ae8b63ea5821a9f9ce6d947d84d80e52f4b39fd8465e7b2"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-gravity-anomaly-surface@2x.webp",
+      "bytes": 676912,
+      "sha256": "7087217ab700a053cc480f47a7a9256308ef10e4d01ede8686bcb88f1178470c"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-gravity-anomaly-thumbnail.webp",
+      "bytes": 1408,
+      "sha256": "16b77f48858e804f04667081970fa614aa891fc5d058b041c7e269f3febe712e"
     },
     {
       "location": "public",
@@ -108,6 +216,42 @@
       "filename": "bennu-green-thumbnail.webp",
       "bytes": 2796,
       "sha256": "bb76b74b79458507c99dca0e33045aab31ad0168afcd9de9bb4940acf3abebf0"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-hydration-legend.webp",
+      "bytes": 182,
+      "sha256": "0fa0fbadf1477ab1d033644e049aee6c12d6efbca2f10db762789274e8e6817b"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-hydration-shadow-alpha@2x.webp",
+      "bytes": 2369862,
+      "sha256": "381cc16a213d16f1adc4beb8280172787d00f3a7392f3d465ab6b2c362aa4ae5"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-hydration-shadow@2x.webp",
+      "bytes": 1718716,
+      "sha256": "20e12160fc46c311f7d812993778677527e63e9e4c23ffac4eaaed238427b42f"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-hydration-surface-alpha@2x.webp",
+      "bytes": 2217440,
+      "sha256": "cebe338b39780fb7e8020929ead22aa8deaddb1235193006ce9b39a8600cee99"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-hydration-surface@2x.webp",
+      "bytes": 1545374,
+      "sha256": "c489677025df12b1da37ced369162225515d0496efabab41a2014a796e792504"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-hydration-thumbnail.webp",
+      "bytes": 1382,
+      "sha256": "9b545efb46d680253ceaec0a225e0ddb9ee35613784d2368b34b3de6ba3689bb"
     },
     {
       "location": "public",
@@ -201,6 +345,42 @@
     },
     {
       "location": "public",
+      "filename": "bennu-slope-legend.webp",
+      "bytes": 232,
+      "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-slope-shadow-alpha@2x.webp",
+      "bytes": 5889864,
+      "sha256": "1adb0dc4805654d669acee7dc3dfcb224da16c355f1671a02daa658bafd4dc95"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-slope-shadow@2x.webp",
+      "bytes": 5354342,
+      "sha256": "7e5a894f5b5c730c09276f94abbe441350451c9cc88644e5b57818686c0d70cc"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-slope-surface-alpha@2x.webp",
+      "bytes": 4052718,
+      "sha256": "33424aa58c9032ac9372cc361225c94c89bdad118714b744f017178fb420d922"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-slope-surface@2x.webp",
+      "bytes": 3216964,
+      "sha256": "e76e4cfdfd92037341851c955328f9756bfb39f076fa7d7148ec432b73515c6b"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-slope-thumbnail.webp",
+      "bytes": 1426,
+      "sha256": "5546d0d0474d066ba6d845b31d090b682f6027b5d655c8df0348ef85f85eb270"
+    },
+    {
+      "location": "public",
       "filename": "bennu-spectral-shadow-alpha@2x.webp",
       "bytes": 1264946,
       "sha256": "de93586392ccd907ff8df32fc699024beac10e34c73ee34a38f7ca02eebacbb9"
@@ -260,6 +440,42 @@
       "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e"
     },
     {
+      "location": "public",
+      "filename": "bennu-thermal-inertia-legend.webp",
+      "bytes": 266,
+      "sha256": "8aacc5d3e9a207839d3c0689fd98ad74502229e5f29ce47ef6f163210bb2842c"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-thermal-inertia-shadow-alpha@2x.webp",
+      "bytes": 1679394,
+      "sha256": "73262afe6e1b3dac35145523b67c9fb53d6be5589b687a895495c86a76309726"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-thermal-inertia-shadow@2x.webp",
+      "bytes": 1016086,
+      "sha256": "10ee6f57f2748ae0c91ec3039a534f30f556e87f1014e15342473693329ff919"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-thermal-inertia-surface-alpha@2x.webp",
+      "bytes": 1727208,
+      "sha256": "6f0b0f4b479a47f289227cc8dba0a667b9125fa32ea5d98b763bdc6505da4ead"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-thermal-inertia-surface@2x.webp",
+      "bytes": 1054028,
+      "sha256": "050474bcca974879f942f1246fe004aeac6a286d699187eb5d6752925b9a251c"
+    },
+    {
+      "location": "public",
+      "filename": "bennu-thermal-inertia-thumbnail.webp",
+      "bytes": 1254,
+      "sha256": "a5ab5ea3dece3aea17384aceafe168a54434ef043ec27a99247e524075910f4c"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 294,
@@ -268,44 +484,44 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1882,
-      "sha256": "531b48fea8b152fb5c76d9a335723e6e025f8677523ee05c0adaf7bfef12b060"
+      "bytes": 3386,
+      "sha256": "5eeac795a1ad9bd0244309b7c321a62c37e6fbeaf23d0bc8f732e92ced3f862a"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2209,
-      "sha256": "b46321f4fa7864b81ab6db821bd368133ae3e488203ddcd9e31f698c0a3c8cc4"
+      "bytes": 2345,
+      "sha256": "5542eab6c2f508ef36a324e9be0f5219820bf46680218e0425a3264faea34d69"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1740,
-      "sha256": "f0a850de55f0190f00e07e4868fe1d47def7e0ffe89ec6674d527cc114de08e6"
+      "bytes": 3945,
+      "sha256": "448e6a13c31d887a3ee3a3a9b154dddca93e043650ac6147508bf08244c209ec"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 659,
-      "sha256": "ade44df3f9da52196f0edd7f9c41fda3f1a462b5d020e57d973f3cd2e1e3df58"
+      "sha256": "4391c4f3ff6bf6b2f2d838e1f84e3ab63e4659ebcdd46ebae72047c0713e7d32"
     },
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 4293,
-      "sha256": "ce2308855fd586b7e95d2f5c37c46b2d07399f98b12dc520225299ca52090413"
+      "bytes": 8922,
+      "sha256": "a0dae06ff2ace90231b4f68deda21395e28be3019a7c6777ac044569b3a98073"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 14750,
-      "sha256": "6a7b55f21a9c3ff2a02f88bb033a83dfbc5f57567bdc888f4d7fe39b35491120"
+      "bytes": 33806,
+      "sha256": "11f410447899a6268a29d6eb4fb115ac9b4c15b1b7a19a5b91d92d5fe84be407"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 595,
-      "sha256": "803ea530daf495ee89f715606fc51f787a0424b6b8dd0da465570039702e698e"
+      "bytes": 1073,
+      "sha256": "8c2b8c600d4cb5bcc0828de2ed46b25977c073b496a9d0c5e14ebde786baf335"
     },
     {
       "location": "prepared",
@@ -315,15 +531,39 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/carbon.webp",
+      "bytes": 46202,
+      "sha256": "fe2249c324852305458d5ce803068204d24cc77205485deaa7fb5b7add85f700"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/elevation.webp",
       "bytes": 18918,
       "sha256": "84b9da1ba67abd85b190ab74a618287709b1b02c92870268f99170e12faeb440"
     },
     {
       "location": "prepared",
+      "filename": "minimaps/geopotential.webp",
+      "bytes": 5112,
+      "sha256": "4b08648a349ff90117a94e6624f63f4370adf1657f85756bd280b29a8baa1ab7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/gravity-anomaly.webp",
+      "bytes": 2328,
+      "sha256": "231ce3c8fbe1d1eb5b3362514608d1253340c7a9dac5f88414d2fa609819d93d"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/green.webp",
       "bytes": 11208,
       "sha256": "ba7680c1e3de027bba2a7d3ea565c39b0641ab10a7ffddcbdacbd4cbf10e7ce6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/hydration.webp",
+      "bytes": 11996,
+      "sha256": "1b6a55afcd80d5a3a13b3187b6e3e7b5d44d09ca1c829b3d44e822c32eb844d0"
     },
     {
       "location": "prepared",
@@ -345,6 +585,12 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/slope.webp",
+      "bytes": 84810,
+      "sha256": "ac62a1d210d954df9a9b65768644eb5d95cf19c3b4a7d5946836af49e4a600b7"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/spectral.webp",
       "bytes": 26714,
       "sha256": "9251b7ef5fd0ee3c615ff40c0550837c4fa418d1fa214154e4833e98b6f18621"
@@ -357,15 +603,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/thermal-inertia.webp",
+      "bytes": 6868,
+      "sha256": "9e4fd20425f452161d316fe8af8085df7fb50d7de25099baf56ec536c6ac0aae"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 646305,
-      "sha256": "2bbfeec638d4ac26b0ba48518d6a80021bcf3e8c0a90c24d9013bd809a2f71ff"
+      "bytes": 3406295,
+      "sha256": "ed7cb6b3f8f015cc29c2f0afee4533dffcdda9ceffdb1595cf13dbae78e4a56e"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 595509,
-      "sha256": "bab96564c422f28aa23d9bf9d516c4b88b56471e707d59f90b44f8374906bd51"
+      "bytes": 3271923,
+      "sha256": "f0d2ddb741fc5d70b88ebf59cbac9c9742d7db68e08e5e07c96ea5380c62076f"
     },
     {
       "location": "prepared",
@@ -382,14 +634,14 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 14753,
-      "sha256": "9631138a239e9aa6542025e9c31dd64b4fc9c3ba3fe1ba7d829159c0ab876dc2"
+      "bytes": 33809,
+      "sha256": "d292ee450fa687627e77aae1bd7da7fc8c438c1105bad3c61a8736d6668f6cdb"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3007,
-      "sha256": "618ca88bdcfeb0896d5e300eec6696773bb71ae3ad65afc480d256f4321a9c3b"
+      "bytes": 4166,
+      "sha256": "686ef7dfe5ad27e2ad9dec85cc4fbc2a53b70f7356c7f6041a1033a7e5922e14"
     },
     {
       "location": "prepared",

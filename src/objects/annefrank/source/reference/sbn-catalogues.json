@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "annefrank",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 5535,
+    "by": "SBDB record des 5535"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 4469,
+        "fields": {
+          "Number": "5535",
+          "Name": "Annefrank",
+          "Desig": "1942 EM",
+          "Family": "402",
+          "CSource": "A",
+          "Class": "S",
+          "DiamSource": "C",
+          "DiamFlag": "-",
+          "Diam": "4.20",
+          "HSource": "M",
+          "H": "13.81",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.24",
+          "G2": "-9.99",
+          "AlbSource": "A",
+          "AlbFlag": "-",
+          "Albedo": "0.30",
+          "PFlag": "-",
+          "Period": "15.12",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.17",
+          "AmpMax": "0.25",
+          "U": "2",
+          "Notes": "A",
+          "IsBinary": "-",
+          "Pole": "N",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 141869,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "5535",
+          "Prov_desig": "-",
+          "MPC_packed_name": "05535",
+          "Absolute_mag": "13.70",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455537.6753685",
+          "N_W1": "10",
+          "N_W2": "12",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "4.339",
+          "Diameter_err": "0.231",
+          "V_albedo": "0.311",
+          "V_albedo_err": "0.056",
+          "IR_albedo": "0.437",
+          "IR_albedo_err": "0.098",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas12": "Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 2 others, Preliminary Analysis of WISE/NEOWISE 3-Band Cryogenic and Post-cryogenic Observations of Main Belt Asteroids, Astroph. J. 759, L8, doi:10.1088/2041-8205/759/1/L8, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

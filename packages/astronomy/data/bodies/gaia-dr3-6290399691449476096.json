@@ -1,0 +1,30 @@
+{
+ "id": "gaia-dr3-6290399691449476096",
+ "classification": "star",
+ "order": 2953,
+ "physical": {
+  "name": "Gaia DR3 6290399691449476096",
+  "horizonsCode": null,
+  "meanRadiusKm": 17063576.5,
+  "gravitationalParameterKm3PerS2": 451961318636.2114,
+  "parent": null,
+  "effectiveTemperatureK": 4542
+ },
+ "physicalNotes": "Radius 24.527 (22.374 to 27.579) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 17,063,577 km at 695,700 km per solar radius. Mass 3.406 (3.365 to 3.446) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 4542 +/- 24.6 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6290399691449476096: teff_gspphot 4541.8994 K (16th-84th percentiles 4505.152-4554.439), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 212.2192683347936,
+  "declinationDegrees": -18.367658793468884,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 9277.577051590453,
+  "properMotionRaMasPerYear": -4.874090885419474,
+  "properMotionDecMasPerYear": -5.53208776343081,
+  "radialVelocityKmPerS": 161.40704,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6290399691449476096 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gaia-dr3-6290399691449476096/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 0.1078 +/- 0.0150 mas (same row, RUWE 1.10): 9277.58 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -4.874, -5.532 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 161.41 +/- 1.29 km/s"
+  }
+ }
+}

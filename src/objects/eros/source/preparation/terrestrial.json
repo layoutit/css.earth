@@ -205,6 +205,94 @@
           "method": "closest-source-point",
           "maximumDistanceMeters": 300
         }
+      },
+      {
+        "id": "ponds",
+        "label": "Ponds",
+        "consumer": "ponds",
+        "format": "circle-catalogue",
+        "path": "ponds/erosshiftedponds_20190226_circles.csv",
+        "labelPath": "ponds/erosshiftedponds_20190226_circles.xml",
+        "meshPath": "shape/ver128q.tab",
+        "table": {
+          "expectedRecords": 334,
+          "metersPerUnit": 1000,
+          "fields": [
+            {
+              "name": "Pond Number",
+              "unit": "none"
+            },
+            {
+              "name": "X",
+              "unit": "km"
+            },
+            {
+              "name": "Y",
+              "unit": "km"
+            },
+            {
+              "name": "Z",
+              "unit": "km"
+            },
+            {
+              "name": "Latitude",
+              "unit": "degree"
+            },
+            {
+              "name": "Longitude",
+              "unit": "degree"
+            },
+            {
+              "name": "Distance",
+              "unit": "km"
+            },
+            {
+              "name": "Diameter",
+              "unit": "km"
+            }
+          ],
+          "idField": "Pond Number",
+          "centerFields": [
+            "X",
+            "Y",
+            "Z"
+          ],
+          "diameterField": "Diameter",
+          "latitudeField": "Latitude",
+          "longitudeField": "Longitude",
+          "distanceField": "Distance",
+          "consistency": {
+            "angleDegrees": 0.01,
+            "distanceMeters": 2
+          }
+        },
+        "registration": {
+          "maximumDistanceMeters": 60
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 300
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0,
+        "maximum": 0,
+        "categories": [
+          {
+            "value": "pond",
+            "label": "Catalogued pond, published diameter",
+            "color": "#00ffff"
+          }
+        ],
+        "colors": [
+          "#00ffff"
+        ],
+        "underlay": {
+          "surface": "normal",
+          "brightness": 0.35,
+          "grayscale": true,
+          "bits": 6
+        }
       }
     ],
     "observedColors": []

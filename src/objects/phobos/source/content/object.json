@@ -68,7 +68,8 @@
       "normal": "Monochrome",
       "elevation": "Elevation",
       "albedo": "Relative albedo",
-      "slope": "Slope"
+      "slope": "Slope",
+      "craters": "Crater catalogue"
     },
     "controls": [
       {
@@ -164,6 +165,38 @@
           "image": "/scenes/phobos/phobos-slope-legend.webp"
         },
         "notes": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
+      },
+      {
+        "id": "craters",
+        "label": "Crater catalogue",
+        "thumbnail": "/scenes/phobos/phobos-craters-thumbnail.webp",
+        "surface": "phobos-craters-surface@2x.webp",
+        "poles": "phobos-craters-surface@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "ph9224gt-crater-rims-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/j.asr.2013.11.006"
+        },
+        "legend": {
+          "kind": "categories",
+          "title": "Crater catalogue",
+          "meta": "PH9224GT, Salamunićcar et al. (2014) · NASA Trek layer colour · grey mosaic at 35% brightness",
+          "sourceUrl": "https://doi.org/10.1016/j.asr.2013.11.006",
+          "items": [
+            {
+              "label": "Catalogued crater rim",
+              "description": "Circle of the crater’s published centre and radius",
+              "color": "#73dfff"
+            },
+            {
+              "label": "No catalogued rim",
+              "description": "Monochrome mosaic in grey at 35% brightness (median shown); not proof of no crater",
+              "color": "#303030"
+            }
+          ]
+        },
+        "notes": "Rims of the 9,224 craters in the PH9224GT catalogue, each drawn as a circle of its published centre and radius on a 24 m grid. An automated detector found them in topography and images, and candidates were checked by hand. The four largest entries, 8.6 to 17.9 km across, are wider than Stickney and carry no IAU name; they are shown as published. Unmarked ground is the Monochrome mosaic in grey at 35% brightness and 6 bits per channel, a presentation choice: the rim colour differs by at least 40 OKLab units from every dimmed grey. The colour is the Trek layer’s symbol for its smallest class."
       }
     ]
   },

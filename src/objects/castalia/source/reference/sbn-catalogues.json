@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "castalia",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 4769,
+    "by": "SBDB record des 4769"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 1215,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_neos_csv::2.0",
+          "Asteroid_Number": "4769",
+          "Prov_desig": "-",
+          "MPC_packed_name": "04769",
+          "Absolute_mag": "16.90",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457513.1116975",
+          "N_W1": "5",
+          "N_W2": "5",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DVB-",
+          "Diameter": "1.395",
+          "Diameter_err": "0.033",
+          "V_albedo": "0.092",
+          "V_albedo_err": "0.014",
+          "IR_albedo": "0.146",
+          "IR_albedo_err": "0.023",
+          "Beaming_param": "2.724",
+          "Beaming_param_err": "0.048",
+          "Stacked_flag": "-",
+          "Reference": "Mas17",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas17": "Masiero, J.R., C. Nugent, A.K. Mainzer, E.L. Wright, J.M. Bauer, and 4 others, NEOWISE Reactivation Mission Year Three: Asteroid Diameters and Albedos, Astron. J. 154, 168, doi:10.3847/1538-3881/aa89ec, 2017."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

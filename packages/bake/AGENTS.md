@@ -2,7 +2,7 @@
 
 Own the build-time preparation code: what the preparation tools and the nebula lab run to turn source records into
 prepared delivery. Nothing here runs in the application. The runtime (`@cssearth/renderer` and
-`site/**`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
+`site/**`, apart from its build-time `site/build/`) must never import `@cssearth/bake`; a type the renderer needs belongs in the renderer's own contracts.
 
 Each topic is one subpath entry. Topics must not import each other sideways. A topic may import a lower topic, and only
 through that topic's `index.ts`, when `LOWER_TOPICS` in `src/entries.test.ts` declares it; the declared order has no
@@ -25,7 +25,7 @@ its validators accept); the renderer never imports the bake.
   and directional-Sun contracts and preparers it validates, and the material-track source planning (frame lookups and banks)
   the layer presentations build on. It imports `scene` and `raster`. The host passes material
   tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
-  tests are `node --test` suites in `tests/presentation/` (the activation groups) and, until they move, `tools/prepared/`.
+  tests are `node --test` suites in `tests/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
   slice stacks and detail planes into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
   It imports `scene` and `volume`.
@@ -92,7 +92,7 @@ its validators accept); the renderer never imports the bake.
   against the descriptor (`check-prepared-presentation.ts`, `prepared-object-source.ts`; the prepared format constant comes
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
-  `tools/ci/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
+  `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
   and spatial-context finalization before it stays in `tools/prepare/prepare-object-json.mts`, which reads the `tools/objects` bundle.
   Its tests are in `tests/contract/`.
@@ -111,7 +111,8 @@ its validators accept); the renderer never imports the bake.
   the catalogue and search destinations are built from, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,
   supernova and action marker sources in `marker-descriptors.ts`) that writes the marker atlases, action markers and
-  `site/prepared-navigation-markers.mjs`. It reads the registry on first use, not at import, and validates marker
+  `site/prepared-navigation-markers.mjs`, and the flat neutral disc (`neutral-disc-marker.ts`) that marks an unresolved,
+  self-luminous surface in generated and authored packages. It reads the registry on first use, not at import, and validates marker
   presentation with the renderer's rules (`@cssearth/renderer/navigation/marker-presentation.ts`, which the shell uses to
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
@@ -133,8 +134,11 @@ its validators accept); the renderer never imports the bake.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace. `packages/bake/cli/preparation-trace.mts` is the trace itself, which
   `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
-  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. Its tests
-  are `node --test` suites in `tests/preparation/`.
+  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
+  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `tools/prepare/prepare-object.mts` run through
+  `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
+  Its tests are `node --test` suites in `tests/preparation/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.
@@ -167,19 +171,22 @@ its validators accept); the renderer never imports the bake.
     idle-timeout stream relay pinned downloads go through.
   - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,
     reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style. It imports
-    no topic. The recipe dispatcher, spectrum reader and compact spectrum stay in
-    `tools/objects/charts/`: `site/prepare-body-overview.mts` uses them, and the runtime may not import the bake.
+    no topic. The recipe dispatcher is site-owned preparation in
+    `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
+    `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
   - `objects/content`: the object-content contract (facts, labels, lens, legend and gallery recipes, the prepared shell
     payload), the shared lens vocabulary, lens steps and prepared legends, each lens control's billboard colour, and the legend
     labels a palette lens derives from the stretch its report states. It
-    imports no topic. The content preparer that reads factsheets and writes the payload stays in `tools/objects/content/`.
+    imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`
+    (it reads the prepared shell titles).
   - `objects/surface-features`: named surface features and their prepared banks (IAU nomenclature archives, Natural Earth
     vectors, landing sites, shape-model landmarks, ellipsoid projection), source-backed feature notes, and the image-control
     fits behind encounter and orthophoto landmarks and the projected-control check (`packages/bake/cli/` holds those three
-    commands). It imports `objects/geometry`, `objects/raster` and `objects/layers/terrestrial`; attaching the banks to a
-    globe stays in `tools/objects/surface-features/`.
+    commands), and attaching the banks to a prepared globe (`attach.ts`). It imports `objects/geometry`, `objects/raster`,
+    `objects/scene`, `objects/layers/paged-ellipsoid` and `objects/layers/terrestrial`.
   - `objects/stellar`: a star's colour lens from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
-    from a published figure or occultation, and Roche-von Zeipel gravity darkening. It imports `objects/color`,
+    from a published figure or occultation, and Roche-von Zeipel gravity darkening, with the GaiaXPy script that samples a
+    continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
     compiler identity reaches, so that identity does not pin the source-manifest readers.
   - `objects/candidates`: what public archives hold for a body or a star before it is reworked: read-only searches of
@@ -209,23 +216,35 @@ its validators accept); the renderer never imports the bake.
     imports `objects/cameras`, `objects/geometry` and `objects/layers/terrestrial`. `packages/bake/cli/sphere-survey-apparitions.mts`
     audits the shipped survey lenses; the setup and install commands stay in `tools/objects/sphere-survey/`, since setup imports
     `tools/objects/published-comparison.mts` and install imports `tools/sources/author-source-records.mts`.
+  - `objects/interpretation`: the observation interpreter the raster lane packs surfaces through (`createSurfaceInterpreter`
+    picks each surface's decoder: solar synoptic maps, terrestrial, shape-model, stellar and static observations, the
+    Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,
+    `objects/geometry`, `objects/raster`, `objects/scene`, `objects/sources`, `objects/stellar` and the observation,
+    shape-model and terrestrial layers. It is a topic of its own, outside `objects/layers/observation`, whose code the nebula
+    lab's compiler identity reaches. Its tests are in `tests/objects/interpretation/`.
+  - `objects/host-adapters`: what the authored preparation passes the scene and presentation compilers
+    (`loadGeometryAdapters`, `presentationHostAdapters`), each bound to the solar geometry the host passes in. It imports
+    `presentation`, `scene`, `objects/scene` and `objects/layers/terrestrial`.
   - `objects/layers/<kind>` (`terrestrial`, `giant`, `paged-ellipsoid`, `material-composition`, `cutaway`, `observed-surfaces`,
     `observation`, `shape-model`):
     the libraries each layer pipeline shares, one entry per kind. A layer imports the object topics and bake topics above and,
     as `LOWER_TOPICS` declares, another layer (`material-composition` → `giant` → `observed-surfaces`, and `material-composition` → `cutaway`). The cutaway
     material bake lives in `material-composition` (`cutaway-materials.ts`): it reads that topic's recipe checks, and only the
     layered-oblate preparation uses it, so `cutaway` stays the contract below both. `layered-oblate.ts` and
-    `cutaway-materials.ts` moved over the 600-line limit and are exempt in `eslint.config.mts` until they are split. The giant
-    material bake, layered presentation, object preparation and observed polar surfaces stay in `tools/objects/`: they use
-    `material-composition`'s atlas tile writer and path check, and `material-composition` reads `giant`'s radial fields, so
-    in `giant` they would close a topic cycle. Code that reads
+    `cutaway-materials.ts` moved over the 600-line limit and are exempt in `eslint.config.mts` until they are split, as is
+    the paged-ellipsoid `assets.ts`. The material atlas tile writer, bilinear samplers and relative-path check live in `giant`
+    (`material-atlas.ts`, `relative-path.ts`), below `material-composition`, so the giant material bake, layered
+    presentation, object preparation (`object.ts`) and observed polar surfaces sit in `giant` without a topic cycle.  The
+    layered-oblate object preparation is `material-composition`'s `object.ts`. Code that reads
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
     entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
-    `SolidSceneSolarGeometry`) and the shape-model entry (`shape-model.ts`) take it from `tools/objects/prepare-authored.ts`,
-    which loads the generated module. They reach the astronomy package through `astronomy`, the object runtime contract through
+    `SolidSceneSolarGeometry`), the shape-model entry (`shape-model.ts`) and the paged-ellipsoid object (`object.ts`) take it
+    from `tools/objects/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
+    asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
-    `objects/content`, as lower topics. The pipelines' other entry scripts and modules that still read platform files stay in
-    `tools/objects/`; the terrestrial commands that derive
+    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `tools/objects/paged-ellipsoid/`
+    for its per-body authoring and read the MUR colour table through `globe/mur-image.ts`; the mantle-tomography extraction script
+    (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
     with the band-alignment, camera-reference and L'LORRI overlap commands and the archived-camera Python that runs the
     camera reference beside it. A source manifest's `generator` records

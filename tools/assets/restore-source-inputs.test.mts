@@ -5,7 +5,7 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node
 import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
+import { validateObjectPackageFiles } from '../../site/build/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '#preparation/operations-acquisition';
 import { requireInventory } from '@cssearth/objects/node';

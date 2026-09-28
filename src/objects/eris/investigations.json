@@ -152,6 +152,17 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/eris/README.md"
       ],
       "revisitWhen": "A resolved image of Eris with a fitted disk law."
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"About 15.8 days\" (doi-10-3847-psj-acdd5f) differs from the LCDB V4.0 summary record 24480 period 25.9 h (U 2, synodic); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

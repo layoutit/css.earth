@@ -56,7 +56,9 @@ export const numericRasterBands = array(numericRaster);
 export const parseGeoImageEntry = shape({...dimensions,id:optional(text),projection:shape({referenceRadiusMeters:number})});
 export const facetTableFields = {field:text,units:text,expectedRows:number,maximumCentroidErrorMeters:number,validityField:optional(text),registration:optional(text)};
 export const parseFacetTable = shape({...facetTableFields,format:optional(text),member:optional(text),labelPath:optional(text),target:optional(text),meshFile:optional(text)});
-export const parseFacetFitsTable = shape({...facetTableFields,target:text,meshFile:text});
+export const parseFacetFitsTable = shape({...facetTableFields,target:text,meshFile:text,facetField:optional(text),facetNumberBase:optional(number),
+  radiusUnits:optional(text),sigmaField:optional(text),withoutSigma:optional(boolean),sigmaUnits:optional(text),labelNames:optional(dictionary(text)),
+  productName:optional(text),labelRecords:optional(number),headerMeshFile:optional(text),missingValue:optional(number)});
 const facetProfileFields = {meshPath:text,table:parseFacetTable,surfaceSampling:parseSurfaceSampling,sampling:text,additionalGrids:optional(array(requireRecord)),valueTransform:optional(parseTransform)};
 export const parseFacetProfile = shape(facetProfileFields);
 export const parseFacetLens = shape({path:text,minimum:number,maximum:number,...facetProfileFields});

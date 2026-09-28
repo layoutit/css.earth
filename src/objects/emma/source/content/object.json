@@ -58,7 +58,60 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Thermal diameter",
+        "value": "132.385 ± 0.258 km (NEOWISE, NEATM)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/Diameter; /neowise/rows/0/fields/Diameter_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.033 ± 0.009 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "System mass",
+        "value": "1.38 × 10¹⁸ ± 3.00 × 10¹⁶ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Marchis et al. 2008b",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/0/fields/MASS_KG; /masses/rows/0/fields/MASS_KG_UNC; /masses/rows/0/fields/BINARY_NOTE; /masses/rows/0/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "S/2003 (283) 1: semimajor axis 581.0 ± 3.60 km, period 3.353 ± 9.30 × 10⁻⁴ days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Marchis et al. 2008",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

@@ -7,6 +7,10 @@
     {
       "type": "IRSA table",
       "value": "neowisesbpropv2"
+    },
+    {
+      "type": "PDS4 LIDVID",
+      "value": "urn:nasa:pds:neowise_diameters_albedos::2.0"
     }
   ],
   "links": [
@@ -14,12 +18,22 @@
       "role": "landing",
       "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
       "label": "NEOWISE Diameters and Albedos V2.0"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+      "label": "PDS4 bundle label"
     }
   ],
   "evidence": [
     {
       "path": "src/objects/agenor/source/content/object.json",
       "locator": "/panel/facts/0/source"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, title, Citation_Information"
     }
   ],
   "relations": [],

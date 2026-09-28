@@ -1,0 +1,56 @@
+{
+  "id": "tic-350716309",
+  "name": "TIC 350716309",
+  "system": "TIC 350716309 system",
+  "description": "A red giant observed by TESS, 15.9 solar radii and 1.98 solar masses, weighed by its oscillations.",
+  "target": "TIC 350716309",
+  "gaia": "4767289835999601024",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "credit": "Khan et al. (2023), A&A 677, A21"
+  },
+  "radius": {
+    "value": 15.8996,
+    "source": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 350716309 (observed by TESS): PARAM radius (solar radii) 15.899561 (16th-84th percentiles 15.491731-16.363421), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.4358
+  },
+  "mass": {
+    "value": 1.9793,
+    "source": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 350716309 (observed by TESS): PARAM mass (solar masses) 1.979345 (16th-84th percentiles 1.846614-2.130634), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 0.142
+  },
+  "temperature": {
+    "value": 4747,
+    "source": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 350716309: APOGEE DR17 effective temperature 4747.0024 +/- 50 K (the catalogue's final uncertainty)",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 50
+  },
+  "distance": {
+    "value": 1715.4,
+    "source": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 350716309 (observed by TESS): PARAM asteroseismic distance (pc) 1715.449219 (16th-84th percentiles 1677.949219-1749.277344), MA09 pipeline with APOGEE DR17",
+    "url": "https://doi.org/10.1051/0004-6361/202346196",
+    "uncertainty": 35.7
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "PARAM fits an extinction A_V = 0.15 mag toward this star (Khan et al. (2023), A&A 677, A21, tess_apo, AV-M), and the colour routes do not remove extinction; APOGEE measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A red giant 1,715 parsecs away, 16 times the Sun's width, weighed by its starquakes.",
+    "introduction": "Its oscillations, recorded by TESS, give 1.98 solar masses and 15.9 solar radii; APOGEE spectra give 4,747 K at its surface.",
+    "locator": "tess_apo, TIC 350716309: Mass-M, Rad-M, Dist-M, Teff-A"
+  },
+  "notes": [],
+  "order": 2563
+}

@@ -1,5 +1,8 @@
-// `@cssearth/bake/objects/layers/paged-ellipsoid` (Node only): the shared libraries of the paged-ellipsoid layer pipeline; its entry scripts,
-// manifest-named generators and host-bound modules stay in tools/objects.
+// `@cssearth/bake/objects/layers/paged-ellipsoid` (Node only): the paged-ellipsoid layer pipeline, from its recipe contracts
+// to the asset preparation and the paged object (`object.ts`), which the host calls with its content preparer, the solar
+// geometry and its asset worker (`packages/bake/cli/paged-ellipsoid-asset-worker.mts`). Earth's MUR and CoralTemp
+// acquisition commands stay in tools/objects/paged-ellipsoid for its per-body authoring.
+export * from './assets.ts';
 export * from './contracts.ts';
 export * from './deep-ocean-fill.ts';
 export * from './display-tone.ts';
@@ -16,10 +19,12 @@ export * from './globe/asset-contract.ts';
 export * from './globe/atmosphere.ts';
 export * from './globe/attitude.ts';
 export * from './globe/context.ts';
+export * from './globe/mur-image.ts';
 export * from './globe/profile-source.ts';
 export * from './globe/scene.ts';
 export * from './interior-poles.ts';
 export * from './night-lights.ts';
+export * from './object.ts';
 export * from './parallel-assets.ts';
 export * from './presentation.ts';
 export * from './refresh-source.ts';

@@ -11,7 +11,8 @@
       "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
       "consumers": [
         "terrain",
-        "elevation"
+        "elevation",
+        "ponds"
       ],
       "lensId": "elevation",
       "projection": {
@@ -433,6 +434,52 @@
       },
       "productVersion": "Golish et al. 2023, PDS4 label version 1.0",
       "productId": "urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter7::1.0"
+    },
+    {
+      "id": "eros-ponds",
+      "path": "ponds/erosshiftedponds_20190226_circles.csv",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/data/erosshiftedponds_20190226_circles.csv",
+      "credit": "J. H. Roberts (JHU/APL); pond identifications and diameters by P. C. Thomas; NASA/JHUAPL/NEAR MSI; PDS Small Bodies Node",
+      "license": "Public PDS archive data; cite the data set (https://doi.org/10.26033/4dqc-8067) and retain the archive notices.",
+      "acquisition": "Unmodified PDS4 table downloaded from the SBN archive; see preparation/acquisition.json.",
+      "redistribution": "Prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "ponds"
+      ],
+      "lensId": "ponds",
+      "label": "Ponds",
+      "falseColor": true,
+      "title": "Roberts Eros Ponds Catalog V1.1: pond centres and diameters",
+      "productId": "urn:nasa:pds:ast-eros.roberts.ponds-catalog:data:erosshiftedponds_20190226_circles::1.1",
+      "productVersion": "Bundle version 1.1 (2021-05-21); table created 2019-10-03",
+      "projection": {
+        "kind": "body-fixed-point-table",
+        "frame": "IAU_EROS (eros_alex.tpc rotation constants)",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "km"
+      },
+      "coverage": "334 ponds identified by P. C. Thomas in NEAR MSI images and relocated on the Gaskell SPC shape with SBMT. Each row is a centre and one characteristic diameter; ponds are generally not circular and some rows are parts of one elongated deposit. Detection depends on image resolution, so ground without a pond is not proof of absence.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-eros.roberts.ponds-catalog_V1_1/document/bundle_description.txt"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "roberts-eros-ponds-catalog-v1-1",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -704,6 +751,26 @@
       "consumers": [
         "surfaces"
       ]
+    },
+    {
+      "path": "ponds/erosshiftedponds_20190226_circles.xml",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "roberts-eros-ponds-catalog-v1-1",
+            "role": "reference",
+            "evidence": "PDS4 label of the ponds table: record count, delimiters and field units the lens recipe checks."
+          }
+        ]
+      }
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded extracts of the NEAR X-ray and gamma-ray composition values the factsheet cites, with each paper's table, units and uncertainty."
+      }
     }
   ]
 }

@@ -76,6 +76,18 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/bacchus/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"15.0 ± 0.2 hours\" (source-bacchus-bacchus-research-bacchus) differs from the LCDB V4.0 summary record 2002 period 14.904 h (U 3, synodic); the shown value is kept. Shown size Model equivalent radius \"0.315 km\" (source-bacchus-bacchus-research-bacchus) differs from the NEOWISE V2.0 neowise_neos.csv record 963 (Nugent et al. 2016) diameter 1.024 ± 0.020 km (NEOWISE, NEATM); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

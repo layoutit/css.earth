@@ -61,7 +61,7 @@
       "finding": "The separate 27 May 2026 Earth-facing browse photographs no longer supply off-limb plates. A stationary photograph behind the rotating global maps misrepresents which structures belong to the selected map. The original inputs remain recorded; all current off-limb plates are transparent.",
       "evidence": [
         "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000906_1024_0304.jpg",
-        "https://github.com/layoutit/css.earth/blob/main/tools/objects/observation/fits-map.test.mts"
+        "https://github.com/layoutit/css.earth/blob/main/tests/objects/interpretation/fits-map.test.mts"
       ],
       "revisitWhen": "A presentation can display each off-limb observation with its own recorded viewing geometry and time."
     },
@@ -73,7 +73,7 @@
       "revisitWhen": "A synoptic release supplies observed polar coverage for these instruments.",
       "evidence": [
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
-        "https://github.com/layoutit/css.earth/blob/main/tools/objects/observation/fits-map.test.mts"
+        "https://github.com/layoutit/css.earth/blob/main/tests/objects/interpretation/fits-map.test.mts"
       ]
     },
     {
@@ -146,7 +146,7 @@
       "evidence": [
         "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0193/CR2311.fits",
         "https://sdo.gsfc.nasa.gov/data/channels.php",
-        "https://github.com/layoutit/css.earth/blob/main/tools/objects/observation/fits-map.test.mts"
+        "https://github.com/layoutit/css.earth/blob/main/tests/objects/interpretation/fits-map.test.mts"
       ]
     }
   ]

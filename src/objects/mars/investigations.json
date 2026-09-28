@@ -514,6 +514,18 @@
         "https://trek.nasa.gov/mars/",
         "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
       ]
+    },
+    {
+      "id": "mola-hrsc-blended-dem-200m",
+      "subject": "USGS Mars MGS MOLA - MEX HRSC Blended DEM Global 200m, v2 (Fergason et al. 2018), as a replacement for the MOLA 463 m elevation source",
+      "status": "excluded",
+      "finding": "No visible gain at the size the app shows. The Elevation view samples a 2,048 x 1,024 grid (drawn nearest onto the 4,096 x 2,048 canvas). Converted to that grid with the same GeoTIFF grid reader as MOLA (native cell under each output centre, no averaging), reading 218.5 MB of the 11.38 GB file by range requests, both maps agree on datum (metres above the areoid; mean difference -0.04 m). Height differences: median 4 m, 90th percentile 34 m, 99th percentile 118 m, largest 1,506 m; the 21 cells over 1 km sit on steep walls (Valles Marineris, crater rims) where the two nearest cells fall at different points. Painted by the app's own science painter on the 4,096 x 2,048 canvas, 10% of texels change by at least one colour level (at most 27 in one channel) and pixelmatch at threshold 0.1 finds 0 differing pixels. The blend would also add HRSC's CC BY-SA 3.0 IGO share-alike terms to this view.",
+      "revisitWhen": "The Elevation view gets a grid finer than about 1 km per cell, where the HRSC 200 m relief could differ visibly from MOLA.",
+      "evidence": [
+        "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_mex_hrsc_blended_dem_global_200m",
+        "https://planetarymaps.usgs.gov/mosaic/Mars/HRSC_MOLA_Blend/Mars_HRSC_MOLA_BlendDEM_Global_200mp_v2.tif",
+        "Measured 2026-09-28 against the current science/usgs/elevation.tif grid: 2,097,152 cells, both fully valid, 310,728 identical."
+      ]
     }
   ]
 }

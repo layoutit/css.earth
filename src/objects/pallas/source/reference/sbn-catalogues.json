@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "pallas",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 2,
+    "by": "SBDB record des 2"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 2,
+        "fields": {
+          "Number": "2",
+          "Name": "Pallas",
+          "Desig": "-",
+          "Family": "801",
+          "CSource": "S",
+          "Class": "B",
+          "DiamSource": "C",
+          "DiamFlag": "-",
+          "Diam": "512.22",
+          "HSource": "L",
+          "H": "4.13",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.24",
+          "G2": "-9.99",
+          "AlbSource": "L",
+          "AlbFlag": "-",
+          "Albedo": "0.150",
+          "PFlag": "-",
+          "Period": "7.8132",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.03",
+          "AmpMax": "0.16",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "-",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  }
+}

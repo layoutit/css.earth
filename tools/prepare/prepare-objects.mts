@@ -25,7 +25,7 @@ import { readPreparedObjects } from "@cssearth/objects/node";
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
 
-const sharedSteps = ["tools/prepare/cli/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
+const sharedSteps = ["site/build/prepare/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
 const cacheRoot = ".local/preparation";
 const traceModule = new URL("../../packages/bake/cli/preparation-trace.mts", import.meta.url).href;
 

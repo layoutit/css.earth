@@ -1,0 +1,313 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "eugenia",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 45,
+    "by": "SBDB record des 45"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 45,
+        "fields": {
+          "Number": "45",
+          "Name": "Eugenia",
+          "Desig": "-",
+          "Family": "9106",
+          "CSource": "S",
+          "Class": "C",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "206.27",
+          "HSource": "L",
+          "H": "7.422",
+          "HBand": "V",
+          "GSource": "L",
+          "G": "0.13",
+          "G2": "-9.99",
+          "AlbSource": "L",
+          "AlbFlag": "-",
+          "Albedo": "0.0446",
+          "PFlag": "-",
+          "Period": "5.699",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.09",
+          "AmpMax": "0.30",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "M",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 28,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "45",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00045",
+          "Absolute_mag": "7.46",
+          "Slope_param": "+0.07",
+          "Mean_JD": "2455307.8941260",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "9",
+          "N_W4": "10",
+          "Fit_code": "DVBI",
+          "Diameter": "202.327",
+          "Diameter_err": "2.168",
+          "V_albedo": "0.045",
+          "V_albedo_err": "0.006",
+          "IR_albedo": "0.071",
+          "IR_albedo_err": "0.013",
+          "Beaming_param": "0.875",
+          "Beaming_param_err": "0.009",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153135,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "45",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00045",
+          "Absolute_mag": "7.46",
+          "Slope_param": "+0.07",
+          "Mean_JD": "2456888.4739008",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "181.921",
+          "Diameter_err": "59.392",
+          "V_albedo": "0.051",
+          "V_albedo_err": "0.026",
+          "IR_albedo": "0.077",
+          "IR_albedo_err": "0.065",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 161897,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "45",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00045",
+          "Absolute_mag": "7.46",
+          "Slope_param": "+0.07",
+          "Mean_JD": "2457360.1240641",
+          "N_W1": "5",
+          "N_W2": "5",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "149.458",
+          "Diameter_err": "45.608",
+          "V_albedo": "0.073",
+          "V_albedo_err": "0.043",
+          "IR_albedo": "0.110",
+          "IR_albedo_err": "0.111",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 3,
+        "fields": {
+          "AST_NUMBER": "45",
+          "AST_NAME": "Eugenia",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "I Petit-Prince",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "2.72",
+          "SYSTEM_ECCENTRICITY": "0.08",
+          "SYSTEM_INCLINATION": "7.",
+          "EFFECTIVE_DIAMETER": "206.14",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "6.22",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.034",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.010",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "206.14",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "6.22",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "7.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "2.00",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.699",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "1.164E+03",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "3.00E-02",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "4.716E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "7.00E-04",
+          "BINARY_ORBITAL_PERIOD_CODE": "D",
+          "BINARY_ECCENTRICITY": "0.002",
+          "BINARY_ECCENTRICITY_ERROR": "0.001",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.046",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.006",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "5.69E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "1.20E+17",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.10",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.10",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      },
+      {
+        "recordNumber": 4,
+        "fields": {
+          "AST_NUMBER": "45",
+          "AST_NAME": "Eugenia",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2004 (45) 1",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "2.72",
+          "SYSTEM_ECCENTRICITY": "0.08",
+          "SYSTEM_INCLINATION": "7.",
+          "EFFECTIVE_DIAMETER": "206.14",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "6.22",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.024",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.005",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "206.14",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "6.22",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "5.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "1.00",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.699",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "6.106E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "6.00E-02",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "1.793E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "8.00E-04",
+          "BINARY_ORBITAL_PERIOD_CODE": "D",
+          "BINARY_ECCENTRICITY": "0.110",
+          "BINARY_ECCENTRICITY_ERROR": "0.020",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.046",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.006",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "5.69E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "1.20E+17",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.10",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.10",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "B14a": "Beauvalet, L., and F. Marchis, 2014, Multiple asteroid systems (45) Eugenia and (87) Sylvia: Sensitivity to external and internal perturbations, Icarus, 241:13-25.",
+      "M10a": "Marchis, F., et al., 2010, A dynamical solution of the triple asteroid system (45) Eugenia, Icarus, 210:635-643."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 3,
+        "fields": {
+          "AST_NUMBER": "45",
+          "AST_NAME": "Eugenia",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "I Petit-Prince",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "1999",
+          "YEAR_UPDATE": "2015",
+          "REF_CODE_EFFECTIVE_DIAMETER": "M11c",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "M11c",
+          "REF_CODE_COMPANION_DIAMETER": "M10a",
+          "REF_CODE_PRIMARY_SPIN": "M90a",
+          "REF_CODE_BINARY_SEMIMAJOR": "B14a",
+          "REF_CODE_BINARY_PERIOD": "M10a",
+          "REF_CODE_BINARY_ECCENTRICITY": "B14a",
+          "REF_CODE_PRIMARY_ALBEDO": "M11c",
+          "REF_CODE_SYSTEM_MASS": "M08d",
+          "REF_CODE_SYSTEM_DENSITY": "M08d"
+        }
+      },
+      {
+        "recordNumber": 4,
+        "fields": {
+          "AST_NUMBER": "45",
+          "AST_NAME": "Eugenia",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2004 (45) 1",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2007",
+          "YEAR_UPDATE": "2015",
+          "REF_CODE_EFFECTIVE_DIAMETER": "M11c",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "M11c",
+          "REF_CODE_COMPANION_DIAMETER": "M10a",
+          "REF_CODE_PRIMARY_SPIN": "M90a",
+          "REF_CODE_BINARY_SEMIMAJOR": "B14a",
+          "REF_CODE_BINARY_PERIOD": "M10a",
+          "REF_CODE_BINARY_ECCENTRICITY": "B14a",
+          "REF_CODE_PRIMARY_ALBEDO": "M11c",
+          "REF_CODE_SYSTEM_MASS": "M08d",
+          "REF_CODE_SYSTEM_DENSITY": "M08d"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

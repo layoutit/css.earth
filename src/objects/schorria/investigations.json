@@ -43,6 +43,17 @@
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/5956"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"1304.1 hours\" (damit-models) differs from the LCDB V4.0 summary record 1227 period 1265. h (U 3, synodic); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

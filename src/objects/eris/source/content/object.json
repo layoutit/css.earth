@@ -32,7 +32,21 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.960 +0.090/−0.040 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Sicardy et al. 2011",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/6/fields/ALBEDO; /tno/rows/6/fields/ALBEDO_ERROR_UPPER; /tno/rows/6/fields/ALBEDO_ERROR_LOWER; /tno/rows/6/fields/ALBEDO_COLOR; /tno/rows/6/fields/REFERENCE_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

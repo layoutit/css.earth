@@ -1,0 +1,188 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "sylvia",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 87,
+    "by": "SBDB record des 87"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 87,
+        "fields": {
+          "Number": "87",
+          "Name": "Sylvia",
+          "Desig": "-",
+          "Family": "603",
+          "CSource": "S",
+          "Class": "X",
+          "DiamSource": "D",
+          "DiamFlag": "-",
+          "Diam": "261.05",
+          "HSource": "M",
+          "H": "6.9",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.12",
+          "G2": "-9.99",
+          "AlbSource": "D",
+          "AlbFlag": "-",
+          "Albedo": "0.0450",
+          "PFlag": "-",
+          "Period": "5.184",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.22",
+          "AmpMax": "0.50",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "M",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 59,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "87",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00087",
+          "Absolute_mag": "6.94",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455307.8961635",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "9",
+          "N_W4": "9",
+          "Fit_code": "DVBI",
+          "Diameter": "253.051",
+          "Diameter_err": "2.953",
+          "V_albedo": "0.046",
+          "V_albedo_err": "0.004",
+          "IR_albedo": "0.082",
+          "IR_albedo_err": "0.005",
+          "Beaming_param": "0.862",
+          "Beaming_param_err": "0.008",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 6,
+        "fields": {
+          "AST_NUMBER": "87",
+          "AST_NAME": "Sylvia",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "II Remus",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "3.48",
+          "SYSTEM_ECCENTRICITY": "0.09",
+          "SYSTEM_INCLINATION": "11.",
+          "EFFECTIVE_DIAMETER": "286.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "11.00",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.037",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.006",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "286.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "11.00",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "10.60",
+          "COMPANION_DIAMETER_UNCERTAINTY": "1.60",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.184",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "7.016E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "2.00E-02",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "1.373E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "1.00E-02",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.093",
+          "BINARY_ECCENTRICITY_ERROR": "0.021",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.036",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.008",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "1.48E+19",
+          "SYSTEM_MASS_UNCERTAINTY": "1.50E+17",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.20",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.10",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "B14a": "Beauvalet, L., and F. Marchis, 2014, Multiple asteroid systems (45) Eugenia and (87) Sylvia: Sensitivity to external and internal perturbations, Icarus, 241:13-25.",
+      "F12b": "Fang, J., J.-L. Margot, and P. Rojo, 2012, Orbits, masses, and evolution of main belt triple (87) Sylvia, Astron. J., 144:70-82."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 6,
+        "fields": {
+          "AST_NUMBER": "87",
+          "AST_NAME": "Sylvia",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "II Remus",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2005",
+          "YEAR_UPDATE": "2015",
+          "REF_CODE_EFFECTIVE_DIAMETER": "M05a",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "M05a",
+          "REF_CODE_COMPANION_DIAMETER": "F12b",
+          "REF_CODE_PRIMARY_SPIN": "M90a",
+          "REF_CODE_BINARY_SEMIMAJOR": "B14a",
+          "REF_CODE_BINARY_PERIOD": "F12b",
+          "REF_CODE_BINARY_ECCENTRICITY": "B14a",
+          "REF_CODE_PRIMARY_ALBEDO": "M11c",
+          "REF_CODE_SYSTEM_MASS": "F12b",
+          "REF_CODE_SYSTEM_DENSITY": "M05a"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

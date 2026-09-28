@@ -1,0 +1,272 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "daphne",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 41,
+    "by": "SBDB record des 41"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 41,
+        "fields": {
+          "Number": "41",
+          "Name": "Daphne",
+          "Desig": "-",
+          "Family": "9106",
+          "CSource": "S",
+          "Class": "C",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "186.96",
+          "HSource": "M",
+          "H": "7.12",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.12",
+          "G2": "-9.99",
+          "AlbSource": "D",
+          "AlbFlag": "-",
+          "Albedo": "0.0717",
+          "PFlag": "-",
+          "Period": "5.988",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.18",
+          "AmpMax": "0.45",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "B",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 139464,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "41",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00041",
+          "Absolute_mag": "7.12",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2455589.3544875",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "205.495",
+          "Diameter_err": "1.881",
+          "V_albedo": "0.059",
+          "V_albedo_err": "0.007",
+          "IR_albedo": "0.063",
+          "IR_albedo_err": "0.007",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153133,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "41",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00041",
+          "Absolute_mag": "7.12",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2456858.3115902",
+          "N_W1": "19",
+          "N_W2": "19",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "198.745",
+          "Diameter_err": "61.710",
+          "V_albedo": "0.046",
+          "V_albedo_err": "0.065",
+          "IR_albedo": "0.070",
+          "IR_albedo_err": "0.158",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 161896,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "41",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00041",
+          "Absolute_mag": "7.12",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2457023.8514965",
+          "N_W1": "4",
+          "N_W2": "4",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "194.622",
+          "Diameter_err": "57.133",
+          "V_albedo": "0.049",
+          "V_albedo_err": "0.019",
+          "IR_albedo": "0.073",
+          "IR_albedo_err": "0.046",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 172013,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "41",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00041",
+          "Absolute_mag": "7.12",
+          "Slope_param": "+0.10",
+          "Mean_JD": "2457730.3873239",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "184.783",
+          "Diameter_err": "60.202",
+          "V_albedo": "0.052",
+          "V_albedo_err": "0.056",
+          "IR_albedo": "0.078",
+          "IR_albedo_err": "0.085",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas17",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas12": "Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 2 others, Preliminary Analysis of WISE/NEOWISE 3-Band Cryogenic and Post-cryogenic Observations of Main Belt Asteroids, Astroph. J. 759, L8, doi:10.1088/2041-8205/759/1/L8, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 2,
+        "fields": {
+          "AST_NUMBER": "41",
+          "AST_NAME": "Daphne",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2008 (41) 1",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "2.76",
+          "SYSTEM_ECCENTRICITY": "0.28",
+          "SYSTEM_INCLINATION": "16.",
+          "EFFECTIVE_DIAMETER": "174.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "11.70",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.011",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "-9.999",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "174.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "11.70",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "2.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "-9.99",
+          "COMPANION_DIAMETER_CODE": "L",
+          "PRIMARY_SPIN": "5.988",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "4.430E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "-9.99E+00",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "S",
+          "BINARY_ORBITAL_PERIOD": "1.100E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "-9.99E+00",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "-9.999",
+          "BINARY_ECCENTRICITY_ERROR": "-9.999",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.083",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.012",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "6.31E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "1.10E+17",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.95",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.15",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "C08a": "Conrad, A. R., et al., 2008, S/2008 (41) 1, IAUC 8930.",
+      "C08b": "Conrad, A., B. Carry, J. D. Drummond, W. J. Merline, C. Dumas, W. M. Owen, C. R. Chapman, P. M. Tamblyn, R. W. Goodrich, and R. D. Campbell, 2008, Shape and size of asteroid (41) Daphne from AO imaging, BAAS, 40:438."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 2,
+        "fields": {
+          "AST_NUMBER": "41",
+          "AST_NAME": "Daphne",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "S/2008 (41) 1",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2008",
+          "YEAR_UPDATE": "2013",
+          "REF_CODE_EFFECTIVE_DIAMETER": "T04c",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "T04c",
+          "REF_CODE_COMPANION_DIAMETER": "C08a",
+          "REF_CODE_PRIMARY_SPIN": "K02a",
+          "REF_CODE_BINARY_SEMIMAJOR": "C08a",
+          "REF_CODE_BINARY_PERIOD": "C08b",
+          "REF_CODE_BINARY_ECCENTRICITY": "-",
+          "REF_CODE_PRIMARY_ALBEDO": "T04c",
+          "REF_CODE_SYSTEM_MASS": "C12a",
+          "REF_CODE_SYSTEM_DENSITY": "C08b"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

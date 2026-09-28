@@ -45,7 +45,60 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Occultation diameter",
+        "value": "242 ± 18 km (volume-equivalent; DAMIT model 1813 fitted to 10 occultations)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+          "label": "Herald et al. (2024), Small Bodies Occultations V4.0, asteroid diameters table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "small-bodies-occultations-v4",
+          "locator": "/occultations/rows/0/fields/Dia_2; /occultations/rows/0/fields/Uncert_2; /occultations/rows/0/fields/Events_2; /occultations/rows/0/fields/Model_Source_2; /occultations/rows/0/fields/Model_Number_2"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.059 ± 0.012 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "S/2001 (107) 1: semimajor axis 1248 ± 3.80 km, period 3.712 ± 4.00 × 10⁻⁵ days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Pajuelo et al. 2018",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      },
+      {
+        "id": "companion-2",
+        "label": "Companion",
+        "value": "S/2016 (107) 1: semimajor axis 643.8 ± 3.90 km, period 1.376 ± 0.0160 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Pajuelo et al. 2018",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/1/fields/COMPANION_DESIGNATION; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

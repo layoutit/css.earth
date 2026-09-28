@@ -78,6 +78,8 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/sphere-survey': 'packages/bake/src/objects/sphere-survey/index.ts',
   '@cssearth/bake/objects/default-view': 'packages/bake/src/objects/default-view/index.ts',
   '@cssearth/bake/objects/celestial': 'packages/bake/src/objects/celestial/index.ts',
+  '@cssearth/bake/objects/host-adapters': 'packages/bake/src/objects/host-adapters/index.ts',
+  '@cssearth/bake/objects/interpretation': 'packages/bake/src/objects/interpretation/index.ts',
   '@cssearth/bake/runtime-source': 'packages/bake/src/runtime-source/index.ts',
   '@cssearth/bake/prepared-presentation': 'packages/bake/src/prepared-presentation/index.ts',
   '@cssearth/bake/delivery': 'packages/bake/src/delivery/index.ts',

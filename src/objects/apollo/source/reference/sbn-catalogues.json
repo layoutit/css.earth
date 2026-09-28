@@ -1,0 +1,168 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "apollo",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 1862,
+    "by": "SBDB record des 1862"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 718,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_neos_csv::2.0",
+          "Asteroid_Number": "1862",
+          "Prov_desig": "-",
+          "MPC_packed_name": "01862",
+          "Absolute_mag": "16.25",
+          "Slope_param": "+0.09",
+          "Mean_JD": "2456803.1440289",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "1.395",
+          "Diameter_err": "0.042",
+          "V_albedo": "0.287",
+          "V_albedo_err": "0.041",
+          "IR_albedo": "0.542",
+          "IR_albedo_err": "0.122",
+          "Beaming_param": "1.400",
+          "Beaming_param_err": "0.500",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 719,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_neos_csv::2.0",
+          "Asteroid_Number": "1862",
+          "Prov_desig": "-",
+          "MPC_packed_name": "01862",
+          "Absolute_mag": "16.25",
+          "Slope_param": "+0.09",
+          "Mean_JD": "2456960.6518296",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "1.264",
+          "Diameter_err": "0.037",
+          "V_albedo": "0.350",
+          "V_albedo_err": "0.048",
+          "IR_albedo": "0.587",
+          "IR_albedo_err": "0.135",
+          "Beaming_param": "1.400",
+          "Beaming_param_err": "0.500",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Nug15": "Nugent, C.R., A. Mainzer, J. Masiero, J. Bauer, R.M. Cutri, and 5 others, NEOWISE Reactivation Mission Year One: Preliminary Asteroid Diameters and Albedos, Astroph. J. 814, 117, doi:10.1088/0004-637X/814/2/117, 2015."
+    },
+    "selected": {
+      "diameter": 1
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 44,
+        "fields": {
+          "AST_NUMBER": "1862",
+          "AST_NAME": "Apollo",
+          "PROV_DESIG": "1932 HA",
+          "COMPANION_DESIGNATION": "-",
+          "DYNAMICAL_TYPE": "APO",
+          "SYSTEM_SEMIMAJOR_AXIS": "1.47",
+          "SYSTEM_ECCENTRICITY": "0.56",
+          "SYSTEM_INCLINATION": "6.",
+          "EFFECTIVE_DIAMETER": "1.55",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "0.07",
+          "EFFECTIVE_DIAMETER_CODE": "D",
+          "D2_TO_D1_RATIO": "0.052",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.039",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "1.55",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "0.07",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "0.08",
+          "COMPANION_DIAMETER_UNCERTAINTY": "0.06",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "3.065",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "3.750E+00",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "2.50E-01",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "1.140E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "1.00E-02",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "-9.999",
+          "BINARY_ECCENTRICITY_ERROR": "-9.999",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.200",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.020",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "5.68E+12",
+          "SYSTEM_MASS_UNCERTAINTY": "1.43E+12",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "2.85",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.58",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "F14a": "Ford, T. F., L. A. M. Benner, M. Brozovic, C. B. Ledford, M. C. Nolan, J. D. Giorgini, S. J. Ostro, and J. L. Margot, 2014, Radar observations and physical modeling of binary near-Earth asteroid (1862) Apollo, DPS 46th Annual Meeting, 213.15."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 44,
+        "fields": {
+          "AST_NUMBER": "1862",
+          "AST_NAME": "Apollo",
+          "PROV_DESIG": "1932 HA",
+          "COMPANION_DESIGNATION": "-",
+          "DISCOVERY_METHOD_CODE": "R",
+          "YEAR_ANNOUNCEMENT": "2005",
+          "YEAR_UPDATE": "2015",
+          "REF_CODE_EFFECTIVE_DIAMETER": "-",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "R13a",
+          "REF_CODE_COMPANION_DIAMETER": "O05a",
+          "REF_CODE_PRIMARY_SPIN": "K07a",
+          "REF_CODE_BINARY_SEMIMAJOR": "F14a",
+          "REF_CODE_BINARY_PERIOD": "F14a",
+          "REF_CODE_BINARY_ECCENTRICITY": "-",
+          "REF_CODE_PRIMARY_ALBEDO": "R13a",
+          "REF_CODE_SYSTEM_MASS": "R13a",
+          "REF_CODE_SYSTEM_DENSITY": "R13a"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

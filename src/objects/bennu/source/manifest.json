@@ -376,6 +376,829 @@
         ]
       },
       "productVersion": "USGS MapCam photometric mosaics v2, 2025-08-04"
+    },
+    {
+      "id": "bennu-spc-v42-shape",
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv42/g_03170mm_spc_obj_0000n00000_v042.obj",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "gravity-anomaly"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "Closed global SPC v42 model, 196,608 facets at 3.17 m; the mesh the gravity anomaly map was computed on.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv42/g_03170mm_spc_obj_0000n00000_v042.obj"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-spc-v42-shape",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-spc-v42-shape-label",
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv42/g_03170mm_spc_obj_0000n00000_v042.obj.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "gravity-anomaly"
+      ],
+      "coverage": "PDS4 label of the SPC v42 model.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv42/g_03170mm_spc_obj_0000n00000_v042.obj.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-spc-v42-shape",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-gravity-anomaly",
+      "path": "science/gravity/RSWG_bouguer_map_shape_Oct2021.fits",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.fits",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "gravity-anomaly"
+      ],
+      "lensId": "gravity-anomaly",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "fraction of uniform-density surface acceleration",
+        "facetNumberBase": 1
+      },
+      "coverage": "Every SPC v42 facet has a value; the map expands a spherical-harmonic field fitted to tracked particles and spacecraft.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-gravity-anomaly",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-gravity-anomaly-label",
+      "path": "science/gravity/RSWG_bouguer_map_shape_Oct2021.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "gravity-anomaly"
+      ],
+      "coverage": "PDS4 label of the gravity anomaly map.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/RSWG_bouguer_map_shape_Oct2021.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-gravity-anomaly",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-gravity-overview",
+      "path": "science/gravity/overview.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.txt",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "gravity-anomaly"
+      ],
+      "coverage": "Collection overview: field format, sign convention of the anomaly map and source papers.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.txt"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-gravity-overview",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-gravity-overview-label",
+      "path": "science/gravity/overview.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "gravity-anomaly"
+      ],
+      "coverage": "PDS4 label of the collection overview.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.derived_gravity_v1.1/data/overview.txt"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-gravity-overview",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-ola-v20-shape-1680",
+      "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_obj_0000n00000_v020.obj",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "slope",
+        "geopotential"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "Closed global OLA v20 model, 786,432 facets at 1.68 m, built from the same lidar point cloud as the display shape.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_obj_0000n00000_v020.obj"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-ola-v20-shape-1680",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-ola-v20-shape-1680-label",
+      "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_obj_0000n00000_v020.obj.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "slope",
+        "geopotential"
+      ],
+      "coverage": "PDS4 label of the OLA v20 1.68 m model.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_obj_0000n00000_v020.obj.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-ola-v20-shape-1680",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-slope",
+      "path": "science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "slope"
+      ],
+      "lensId": "slope",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "degrees",
+        "facetNumberBase": 0
+      },
+      "coverage": "Every facet has a value; uniform density 1194 kg/m³ and the header rotation rate.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-slope",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-slope-label",
+      "path": "science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "slope"
+      ],
+      "coverage": "PDS4 label of the slope table.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-slope",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-geopotential",
+      "path": "science/altimetry/g_01680mm_alt_elv_0000n00000_v020.fits",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_elv_0000n00000_v020.fits",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "geopotential"
+      ],
+      "lensId": "geopotential",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "meters",
+        "facetNumberBase": 0
+      },
+      "coverage": "Every facet has a value; zero is the lowest surface potential (altimetry SIS §5).",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_elv_0000n00000_v020.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-geopotential",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-geopotential-label",
+      "path": "science/altimetry/g_01680mm_alt_elv_0000n00000_v020.fits.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_elv_0000n00000_v020.fits.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "geopotential"
+      ],
+      "coverage": "PDS4 label of the elevation table.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_elv_0000n00000_v020.fits.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-geopotential",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-spo-v34-shape",
+      "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPOv34/g_06330mm_spo_obj_0000n00000_v034.obj",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "thermal-inertia"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "Closed global SPC+OLA v34 model, 49,152 facets at 6.33 m; the mesh the thermal inertia map was computed on.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPOv34/g_06330mm_spo_obj_0000n00000_v034.obj"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-spo-v34-shape",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-spo-v34-shape-label",
+      "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPOv34/g_06330mm_spo_obj_0000n00000_v034.obj.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "thermal-inertia"
+      ],
+      "coverage": "PDS4 label of the SPO v34 model.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPOv34/g_06330mm_spo_obj_0000n00000_v034.obj.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-spo-v34-shape",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-thermal-inertia",
+      "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.fits",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.fits",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "thermal-inertia"
+      ],
+      "lensId": "thermal-inertia",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "J m^-2 K^-1 s^-1/2",
+        "facetNumberBase": 0
+      },
+      "coverage": "48,958 of 49,152 facets have a fitted value; 194 are NaN in the archived table and stay missing.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-thermal-inertia",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-thermal-inertia-label",
+      "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7_v001.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "thermal-inertia"
+      ],
+      "coverage": "PDS4 label of the thermal inertia map.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7_v001.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-thermal-inertia",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-thermal-inertia-notes",
+      "path": "science/thermal/g_06330mm_ta_thermin_otesdsv1-7logfile.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7logfile.txt",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "thermal-inertia"
+      ],
+      "coverage": "Producer log: model, stations and the publication the map belongs to.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.thermal/data_thermal_maps/global_thermal_inertia_maps/g_06330mm_ta_thermin_otesdsv1-7logfile.txt"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-thermal-inertia",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-spc-v20-shape",
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "hydration",
+        "carbon"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "Closed global SPC v20 model, 196,608 facets at 3.17 m; the mesh the OVIRS maps were made on.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-spc-v20-shape",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-spc-v20-shape-label",
+      "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "hydration",
+        "carbon"
+      ],
+      "coverage": "PDS4 label of the SPC v20 model.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_global_models/global_digital_terrain_models/SPCv20/g_03170mm_spc_obj_0000n00000_v020.obj.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-spc-v20-shape",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-hydration",
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "hydration"
+      ],
+      "lensId": "hydration",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "band depth fraction",
+        "facetNumberBase": 0
+      },
+      "coverage": "196,241 of 196,608 facets have a value; 367 carry −9999 with sigma −9999 and stay missing.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-hydration",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-hydration-label",
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "hydration"
+      ],
+      "coverage": "PDS4 label; its record count (49,152) and unit (percent) disagree with the FITS table, see the README.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-hydration",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-carbon",
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.fits",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.fits",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "carbon"
+      ],
+      "lensId": "carbon",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "%·µm",
+        "facetNumberBase": 0
+      },
+      "coverage": "196,241 of 196,608 facets have a value; 367 carry −9999 with sigma −9999 and stay missing.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-carbon",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bennu-carbon-label",
+      "path": "science/spectral/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.xml",
+      "credit": "NASA/University of Arizona/OSIRIS-REx; PDS Small Bodies Node",
+      "license": "NASA PDS scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Unmodified original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "carbon"
+      ],
+      "coverage": "PDS4 label; its record count (49,152) disagrees with the FITS table, see the README.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "osiris-rex",
+            "missionId": "osiris-rex",
+            "evidence": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_bandarea3200to3600nm_wavc_0000n00000.xml"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bennu-carbon",
+            "role": "material",
+            "evidence": "Origin and PDS4 product identifier recorded on this manifest entry and its label."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -65,12 +65,13 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
 
 /** One caption and one circle follow the destination through the entire flight. Its preview sprite has a
  * separate lifetime and fades at 14–20px, long before the close-up has arrived. */
-function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixels: start, billboardFullDiscPixels: full }: PreparedWorldContext['camera']['presentation']['levelOfDetail']) {
+function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixels: start, billboardFullDiscPixels: full }: PreparedWorldContext['camera']['presentation']['levelOfDetail'], depthBase: number) {
   const leaf = (className: string, key: 'contextFlightLabel' | 'contextFlightCircle') => {
     const element = root.ownerDocument.createElement('span');
     element.className = className;
     element.dataset[key] = '';
     element.style.visibility = 'hidden';
+    element.style.zIndex = String(depthBase + 4);
     element.setAttribute('aria-hidden', 'true');
     root.appendChild(element);
     return element;
@@ -198,7 +199,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // marker's visibility or cue change lays out these three boxes, not the document.
     mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size;visibility:hidden`;
     mover.appendChild(marker);
-    root.appendChild(mover);
+    // Retain the owner detached until the prepared view requests paint or label measurement.
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
     const orbitRoot = host.ownerDocument.createElement('div');
     orbitRoot.className = 'context-orbit';
@@ -209,8 +210,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = orbitRenderer === 'bars' ? 'position:absolute;inset:0;width:0;height:0;pointer-events:none' : 'pointer-events:none';
     if (approximate) orbitRoot.dataset.contextPlacement = 'approximate';
     if (body.contextColor) orbitRoot.style.color = body.contextColor;
-    if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
+
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, depthBase, strokeHost: root, dashed: approximate, capacity: orbitProjectionCapacity(orbit?.vertexCount ?? 0), id: body.id,
       ...(colour ? { color: colour } : {}) });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
@@ -233,7 +234,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
-  const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail);
+  const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const clock = opacityClock ?? opacityClockFor(windowTarget);
@@ -258,7 +259,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let labelBlockers: readonly LabelScreenRect[] = [];
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
-  // The prepared bank stays mounted. Only owners currently contributing paint
+  // The prepared bank stays retained. Only owners currently contributing paint
   // participate in camera-depth updates and picking/sprite aggregation.
   const paintedBodies = new Set<(typeof bodies)[number]>();
   let paintedOrder: typeof bodies = [], paintMembershipChanged = false;
@@ -417,7 +418,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       refresh();
     },
     opacityStats: fader.stats,
-    publicationStats: () => ({ skippedPublications, bodyPublications, depthPublications, paintedBodies: paintedBodies.size }),
+    publicationStats: () => ({ skippedPublications, bodyPublications, depthPublications, paintedBodies: paintedBodies.size,
+      attachedBodies: bodies.filter(entry => entry.mover.parentNode === root).length, retainedBodies: bodies.length }),
     inspect() {
       return Object.freeze(bodies.map(entry => Object.freeze({
         id: entry.body.id, billboard: entry.marker, mover: entry.mover,
@@ -445,9 +447,12 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       // The planner alone owns eligibility. Read only newly eligible captions,
       // before any writes, then replan once with their actual CSS bounds.
       let measured = false;
-      for (const index of preparedFrame.labelMeasurements ?? []) {
+      const attachMarkers = new Set<(typeof bodies)[number]>();
+      const attachOrbits = new Set<(typeof bodies)[number]>();
+      for (const index of coasting ? [] : preparedFrame.labelMeasurements ?? []) {
         const entry = bodies[index];
         if (entry.labelSize.width !== 0) continue;
+        if (!entry.mover.parentNode) { attachMarkers.add(entry); continue; }
         const text = windowTarget.getComputedStyle(entry.marker, '::after');
         const width = Math.ceil(parseFloat(text.width)), height = Math.ceil(parseFloat(text.height));
         if (width > 0 && height > 0) { entry.labelSize = { width, height }; measured = true; }
@@ -571,6 +576,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const plannedOrbit = orbitVisibility > 0 && segments.length > 0;
         // Coasting: a drawn orbit stays drawn (fading if the plan drops it), an undrawn one waits for the coast to stop.
         const orbitShown = coast ? entry.previousCount > 0 : plannedOrbit;
+        if (!coast && billboardShown && !entry.mover.parentNode) attachMarkers.add(entry);
+        if (!coast && orbitShown && !entry.orbitRoot.parentNode) attachOrbits.add(entry);
         const contributesPaint = billboardShown || orbitShown;
         if (paintedBodies.has(entry) !== contributesPaint) {
           if (contributesPaint) paintedBodies.add(entry); else paintedBodies.delete(entry);
@@ -617,7 +624,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       interactions.commit(paintedOrder, depthOrder.rank, captionBody,
         captionBody ? bodies[captionBody.index].labelSize : undefined, pickingChanged, navigationInFlight);
       });
-      if (measured) { invalidatePolicy(); refresh(); }
+      // Publish first, then attach populated owners. A later view reads only requested caption sizes.
+      for (const entry of attachMarkers) root.appendChild(entry.mover);
+      for (const entry of attachOrbits) root.appendChild(entry.orbitRoot);
+      if (measured || attachMarkers.size > 0) { invalidatePolicy(); refresh(); }
     },
     destroy() { if (!destroyed) { destroyed = true; interactions.destroy();
       if (annotationFrame !== null) clock.cancel(annotationFrame);

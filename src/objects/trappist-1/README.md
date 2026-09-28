@@ -19,7 +19,7 @@ derive the radius from the photodynamic stellar density and the mass from the Ma
 15.62 only the basis-function coefficients are released. They are pinned as
 `source/photometry/gaia-dr3-xp-continuous.csv` and sampled here onto the archive's own
 336-1020 nm grid with GaiaXPy, the archive's library, by
-[`xp-continuous-sample.py`](../../../tools/objects/observation/xp-continuous-sample.py). Through the CIE 1931 2-degree observer
+[`xp-continuous-sample.py`](../../../packages/bake/src/objects/stellar/xp-continuous-sample.py). Through the CIE 1931 2-degree observer
 that gives **255, 205, 106 (#ffcd6a)**.
 
 The star is faint in blue light: from 380 to 450 nm its samples have a mean signal-to-noise of 0.2 and sixteen of them are at or

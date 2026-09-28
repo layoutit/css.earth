@@ -13,7 +13,7 @@ const logg = (gravityMps2: number) => Number(Math.log10(gravityMps2 * 100).toFix
 
 export function fromPicaso(id: string, teffK: number, starLogg: number): LimbChoice {
   const available = bobcatNodes().map(node => ({ ...node, teff: node.teffK, logg: logg(node.gravityMps2), u1: 0, u2: 0 }));
-  if (!available.length) throw new Error('the PICASO toolchain holds no Bobcat profiles: node tools/objects/astronomy-toolchains.mts picaso install');
+  if (!available.length) throw new Error('the PICASO toolchain holds no Bobcat profiles: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install');
   const { corners } = interpolateGrid(available, { teff: teffK, logg: starLogg });
   const chosen = corners.map(corner => available.find(node => node.teff === corner.teff && node.logg === corner.logg)!);
   const run = picasoLimbNodes(chosen.map(({ teffK: t, gravityMps2, file }) => ({ teffK: t, gravityMps2, file })));

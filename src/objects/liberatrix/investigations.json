@@ -78,6 +78,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/liberatrix/README.md#evidence"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"25.55 km (size-calibrated model)\" (hanus-2018-thermophysical-models) differs from the NEOWISE V2.0 neowise_mainbelt.csv record 93 (Masiero et al. 2014) diameter 48.418 ± 0.533 km (NEOWISE, NEATM); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

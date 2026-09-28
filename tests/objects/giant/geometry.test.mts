@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
 import { TEXELS_PER_CSS_PIXEL, leafRasterScale, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from '@cssearth/bake/objects/layers/giant';
-import { publishedLeafImages } from '../../../tools/objects/giant-layers/object.mts';
+import { publishedLeafImages } from '@cssearth/bake/objects/layers/giant';
 import { readFile } from 'node:fs/promises';
 import { assertPolarCaps, poleOfClass } from '../polar-caps.mts';
-import { polarImageProjection } from '../../../tools/objects/giant-observations/index.mts';
+import { polarImageProjection } from '@cssearth/bake/objects/layers/giant';
 import { writeDomeRings } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 

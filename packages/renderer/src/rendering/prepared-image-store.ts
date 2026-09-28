@@ -1,6 +1,8 @@
 export interface PreparedImage {
   src: string; decoding: "async" | "sync" | "auto"; naturalWidth: number; naturalHeight: number;
   decode(): Promise<void>; removeAttribute?(name: string): void;
+  addEventListener?(type: "load" | "error", listener: () => void): void;
+  removeEventListener?(type: "load" | "error", listener: () => void): void;
 }
 export interface PreparedImagePool { id: string | null; capacity: number; concurrency: number; reuse: boolean; decoding?: PreparedImage["decoding"];
   /** A pool that budgets decoded bytes holds images large enough to overflow the browser's own decode budget. */
@@ -10,18 +12,22 @@ export interface PreparedImageLease {
   readonly role: string; load(url: string, options?: { pool?: string | null }): Promise<PreparedImage | null>;
   handoff(url: string): boolean; release(url: string): boolean; destroy(): void; keys(): readonly string[];
 }
-interface PoolState extends PreparedImagePool { active: number; slots: ImageSlot[]; }
+interface PoolState extends PreparedImagePool { active: number; pending: number; slots: ImageSlot[]; }
 interface ImageSlot { image: PreparedImage; entry: ImageEntry | null; }
 interface ImageReceipt { entry: ImageEntry; pool: PoolState; promise: Promise<PreparedImage | null>; resolve(value: PreparedImage | null): void; reject(reason: unknown): void; }
-interface ImageEntry { url: string; pool: PoolState; owners: Map<PreparedImageLease, ImageReceipt>; started: boolean; ready: boolean; retired: boolean; slot: ImageSlot | null; handedOff?: boolean; }
+interface ImageEntry { url: string; pool: PoolState; owners: Map<PreparedImageLease, ImageReceipt>; started: boolean; ready: boolean; retired: boolean; slot: ImageSlot | null; loaded?: boolean; stopLoading?: () => void; handedOff?: boolean; }
 
 /** `retry`: whether a failed decode is still wanted, and so tried once more. */
 export async function decodePreparedImage(image: PreparedImage, selectedUrl: string, retry: () => boolean = () => false) {
   if (typeof selectedUrl !== "string" || !selectedUrl || typeof image?.decode !== "function") {
     throw new TypeError("Prepared image decoding requires an image and selected URL.");
   }
+  image.src = selectedUrl;
+  return decodePreparedPixels(image, selectedUrl, retry);
+}
+
+async function decodePreparedPixels(image: PreparedImage, selectedUrl: string, retry: () => boolean) {
   try {
-    image.src = selectedUrl;
     // Chromium rejects a decode that would overflow its decoded-image budget (about 256 MB per page) before evicting
     // older images, then accepts the same image: measured 2026-09-24, every fifth 16 MP page failed once. Only large
     // images (a pool with a decoded-byte budget) are retried; any other failure is final at once.
@@ -58,7 +64,7 @@ export function createPreparedImageStore({
         (policy.decoding !== undefined && !["auto", "sync", "async"].includes(policy.decoding))) {
       throw new TypeError("Prepared image pool policy is invalid.");
     }
-    poolStates.set(policy.id, { ...policy, active: 0, slots: [] });
+    poolStates.set(policy.id, { ...policy, active: 0, pending: 0, slots: [] });
   }
 
   function settle(entry: ImageEntry, error: unknown, value: PreparedImage | null = null) {
@@ -74,8 +80,10 @@ export function createPreparedImageStore({
     entries.delete(entry.url);
     entry.retired = true;
     if (entry.started && !entry.ready) entry.pool.active--;
+    entry.stopLoading?.();
     const slot = entry.slot;
     if (!slot) return;
+    if (!entry.ready) entry.pool.pending--;
     slot.entry = null;
     releases++;
     // A successful warm handoff drops our native handle without invalidating
@@ -103,6 +111,38 @@ export function createPreparedImageStore({
     settle(entry, error);
   }
 
+  // A small window overlaps transport with decoding without accumulating every
+  // requested image. Pool capacity and decode concurrency remain authoritative.
+  const downloadLimit = (pool: PoolState) => Math.min(pool.capacity, Math.max(6, pool.concurrency));
+
+  function startDownload(entry: ImageEntry, image: PreparedImage) {
+    // Decode-only image adapters have no separate load notification.
+    if (!image.addEventListener || !image.removeEventListener) {
+      image.src = entry.url;
+      entry.loaded = true;
+      return;
+    }
+    const loaded = () => {
+      entry.stopLoading?.();
+      if (entry.retired) return;
+      entry.loaded = true;
+      pump();
+    };
+    const failed = () => {
+      if (entry.retired) return;
+      fail(entry, new Error(`Prepared image did not load: ${entry.url}.`));
+      pump();
+    };
+    entry.stopLoading = () => {
+      image.removeEventListener?.("load", loaded);
+      image.removeEventListener?.("error", failed);
+      entry.stopLoading = undefined;
+    };
+    image.addEventListener("load", loaded);
+    image.addEventListener("error", failed);
+    image.src = entry.url;
+  }
+
   function pump() {
     if (pumping || destroyed || retiringOwners) return;
     pumping = true;
@@ -114,7 +154,8 @@ export function createPreparedImageStore({
         if (!entry.slot || [...entry.owners.values()].some(owner => owner.pool === entry.pool)) continue;
         const destination = [...entry.owners.values()].map(owner => owner.pool).find(pool =>
           pool.slots.filter(slot => slot.entry !== null).length < pool.capacity &&
-          (entry.ready || pool.active < pool.concurrency));
+          (entry.ready || pool.pending < downloadLimit(pool)) &&
+          (!entry.started || entry.ready || pool.active < pool.concurrency));
         if (!destination) continue;
         const previous = entry.pool;
         previous.slots.splice(previous.slots.indexOf(entry.slot), 1);
@@ -122,30 +163,38 @@ export function createPreparedImageStore({
           destination.slots.splice(destination.slots.findIndex(slot => slot.entry === null), 1);
         }
         destination.slots.push(entry.slot);
+        if (!entry.ready) { previous.pending--; destination.pending++; }
         if (entry.started && !entry.ready) { previous.active--; destination.active++; }
         entry.pool = destination;
       }
       for (const entry of entries.values()) {
         const pool = entry.pool;
-        if (entry.started || pool.active >= pool.concurrency) continue;
-        let slot = pool.slots.find((candidate) => candidate.entry === null);
-        if (!slot && pool.slots.length >= pool.capacity) continue;
+        if (entry.started) continue;
         try {
-          if (!slot) {
-            const image = createImage();
-            slot = { image, entry: null };
-            pool.slots.push(slot);
-            allocations++;
+          if (!entry.slot) {
+            if (pool.pending >= downloadLimit(pool)) continue;
+            let slot = pool.slots.find(candidate => candidate.entry === null);
+            if (!slot && pool.slots.length >= pool.capacity) continue;
+            if (!slot) {
+              slot = { image: createImage(), entry: null };
+              pool.slots.push(slot);
+              allocations++;
+            }
+            slot.entry = entry;
+            entry.slot = slot;
+            slot.image.decoding = pool.decoding ?? decoding;
+            pool.pending++;
+            startDownload(entry, slot.image);
           }
-          slot.entry = entry;
-          entry.slot = slot;
-          slot.image.decoding = pool.decoding ?? decoding;
+          if (entry.retired || !entry.loaded || pool.active >= pool.concurrency) continue;
           entry.started = true;
           pool.active++;
+          const slot = entry.slot;
           const activeSlot = slot;
-          decodePreparedImage(activeSlot.image, entry.url, () => entry.pool.maximumDecodedBytes !== undefined && !entry.retired && activeSlot.entry === entry).then((image) => {
+          decodePreparedPixels(activeSlot.image, entry.url, () => entry.pool.maximumDecodedBytes !== undefined && !entry.retired && activeSlot.entry === entry).then((image) => {
             if (entry.retired || activeSlot.entry !== entry) return;
             entry.pool.active--;
+            entry.pool.pending--;
             entry.ready = true;
             settle(entry, null, image);
             pump();
@@ -266,11 +315,11 @@ export function createPreparedImageStore({
       return Object.freeze({
         allocations, releases,
         entries: Object.freeze([...entries.values()].map((entry) => Object.freeze({
-          url: entry.url, ready: entry.ready, started: entry.started,
+          url: entry.url, ready: entry.ready, started: entry.started, loaded: entry.loaded === true,
           owners: Object.freeze([...entry.owners.keys()].map(({ role }) => role)),
         }))),
         pools: Object.freeze([...poolStates.values()].filter(({ id }) => id !== null).map((pool) => Object.freeze({
-          id: pool.id, active: pool.active, slots: pool.slots.length,
+          id: pool.id, active: pool.active, pending: pool.pending, slots: pool.slots.length,
           occupied: pool.slots.filter(({ entry }) => entry !== null).length,
         }))),
       });

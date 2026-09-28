@@ -168,6 +168,19 @@
         "https://doi.org/10.3847/0004-637X/829/2/121"
       ],
       "revisitWhen": "The gallery is prepared and inspected with its dispute and registration evidence."
+    },
+    {
+      "id": "trek-junocam-pj45-mosaics",
+      "subject": "NASA Trek Juno JNC (Color) Mosaic 1450, 2100, 3225 and 4340 mpp (JUNO_JNC_ClrMosaic_*_V01-V04)",
+      "status": "excluded",
+      "finding": "Nothing new at the prepared size. Each Trek product is one of the four 29 September 2022 JunoCam photographs the JunoCam view already uses (V01 1450 mpp to V04 4340 mpp), made by Trek with Ames Stereo Pipeline, ISIS and ArcGIS Pro. No producer original was found: Trek's catalogue and FGDC record name no originator, date or use terms and offer no file download, only WMTS tiles (V04 at 2048 x 1024, V01 at 4096 x 2048); Hansen et al. (2024) do not archive their mosaics. Measured on 4096 x 2048: the four cover 11.7-21.8% of the sphere, the JunoCam view 22.1%; the extra 3.7% in their union is, on inspection of the coverage map, a thin ring along the limb and the terminator, where the JunoCam view's 80 deg emission and 85 deg incidence limits withhold pixels, plus colour-fringed limb pixels. Against the Monochrome base, the JunoCam view is offset a median 2.8 texels (7 km, p90 12 km); the Trek products 5.8-12.6 texels (14-30 km, p90 up to 54 km). Pixelmatch 0.1 flags 54-95% of shared texels, from different colour processing. Inspected at the prepared scale, the JunoCam view is as sharp as V01 and sharper than V04.",
+      "revisitWhen": "Reopen if the producer publishes the georeferenced GeoTIFFs with processing notes and reuse terms, or a controlled JunoCam mosaic registered to the Galileo control network.",
+      "evidence": [
+        "https://trek.nasa.gov/europa/TrekServices/ws/index/eq/getItem?productLabel=JUNO_JNC_ClrMosaic_4340mpp_V04",
+        "https://trek.nasa.gov/europa/TrekWS/rest/cat/metadata/fgdc/html?label=JUNO_JNC_ClrMosaic_4340mpp_V04",
+        "https://trek.nasa.gov/tiles/Europa/EQ/JUNO_JNC_ClrMosaic_4340mpp_V04/1.0.0/WMTSCapabilities.xml",
+        "https://doi.org/10.3847/PSJ/ad24f4"
+      ]
     }
   ]
 }

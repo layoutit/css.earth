@@ -67,6 +67,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/didymos/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Small Bodies Occultations V4.0 record 511, DAMIT model 20004 diameter 0.82 ± 0.04 km (volume-equivalent; DAMIT model 20004 fitted to 7 occultations) is not shown: the astronomy record takes its size from a publication (\"DART s547 GM and released encounter-mesh reference radii; body source records.\"), and it differs from the astronomy record's mean radius 0.365 km (diameter 0.73 km).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

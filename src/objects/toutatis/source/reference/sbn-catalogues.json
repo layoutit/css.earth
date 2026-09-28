@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "toutatis",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 4179,
+    "by": "SBDB record des 4179"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 3609,
+        "fields": {
+          "Number": "4179",
+          "Name": "Toutatis",
+          "Desig": "1989 AC",
+          "Family": "9101",
+          "CSource": "A",
+          "Class": "S*",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "2.59",
+          "HSource": "L",
+          "H": "15.3",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.24",
+          "G2": "-9.99",
+          "AlbSource": "A",
+          "AlbFlag": "-",
+          "Albedo": "0.20",
+          "PFlag": "-",
+          "Period": "176",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.50",
+          "AmpMax": "1.46",
+          "U": "3",
+          "Notes": "T",
+          "IsBinary": "-",
+          "Pole": "N",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  }
+}
