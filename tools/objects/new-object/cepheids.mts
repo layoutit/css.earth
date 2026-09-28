@@ -30,7 +30,7 @@ export function draftFromCepheid(row: ReturnType<typeof parseCepheidRow>) {
       id, name: row.name, system: `${row.name} system`, target: row.name, paper: { url: CEPHEIDS.paper, credit: CEPHEIDS.credit },
       description: `A Cepheid in ${row.where} that pulsates every ${row.periodDays.toFixed(2)} days; its mean radius is ${row.radius[0]} solar radii.`,
       radius: cite(row.radius, 'Baade-Wesselink mean radius (solar radii)'), distance: cite(row.distance, 'Baade-Wesselink distance (pc)'),
-      text: { card: `A Cepheid in ${row.where} that swells and shrinks every ${row.periodDays.toFixed(1)} days.`,
+      text: { card: `A Cepheid in ${row.where}, ${Math.round(row.radius[0])} times the Sun's width, that swells and shrinks every ${row.periodDays.toFixed(1)} days.`,
         introduction: `Its mean radius, ${row.radius[0]} solar radii, comes from comparing how fast its surface moves with how its size changes, ${Math.round(row.distance[0]).toLocaleString('en-US')} parsecs away.`,
         locator: `table10, ${row.name}: Per, Rad, Dist` },
       color: { skip: ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'],

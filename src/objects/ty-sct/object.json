@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ty-sct",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TY Sct",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 40837590
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ty-sct-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TY Sct",
+      "classification": "star",
+      "color": "#ffead9",
+      "distanceAu": 413437197.1,
+      "description": "A Cepheid in the Milky Way, 59 times the Sun's width, that swells and shrinks every 11.1 days.",
+      "systemName": "TY Sct system",
+      "order": 2026,
+      "context": {
+        "order": 2023
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        11274403069168136000,
+        -60636509427804950000,
+        -4630386853139335000
+      ],
+      "presentationToReference": [
+        0.18228821891939978,
+        -0.013685504546184462,
+        -0.9831498930521783,
+        -0.9803908231125069,
+        0.07360398199344094,
+        -0.18280122480850788,
+        -0.07486547401823083,
+        -0.9971936425790257,
+        4.283783819096455e-9
+      ],
+      "orbitUpReference": [
+        0.013685504546184462,
+        -0.07360398199344094,
+        0.9971936425790257
+      ],
+      "metersPerUnit": 131734161.29032259,
+      "bodyRadiusM": 40837590000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

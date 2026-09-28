@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ry-cma",
+  "displayName": "RY CMa",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "39 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1212-5478",
+          "url": "https://arxiv.org/abs/1212.5478",
+          "label": "Groenewegen (2012)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1,248 parsecs",
+        "source": {
+          "catalogueId": "arxiv-1212-5478",
+          "url": "https://arxiv.org/abs/1212.5478",
+          "label": "Groenewegen (2013), A&A 550, A70, table10, RY CMa: Baade-Wesselink distance (pc) 1248.2 +/- 99.5 (Monte-Carlo)",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "thumbnail": "ry-cma-lens-color.webp",
+        "surface": "ry-cma-surface-color@2x.webp",
+        "poles": "ry-cma-poles-color@2x.webp",
+        "source": {
+          "id": "ry-cma-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2002.02186"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Groenewegen (2013), A&A 550, A70",
+      "href": "https://arxiv.org/abs/1212.5478"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1212.5478",
+      "credit": "Groenewegen (2013), A&A 550, A70"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ry-cma.json",
+      "credit": "Groenewegen radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

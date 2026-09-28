@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "rw-cam",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "RW Cam",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 67830750
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/rw-cam-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "RW Cam",
+      "classification": "star",
+      "color": "#ffe8d4",
+      "distanceAu": 405887800.9,
+      "description": "A Cepheid in the Milky Way, 98 times the Sun's width, that swells and shrinks every 16.4 days.",
+      "systemName": "RW Cam system",
+      "order": 2007,
+      "context": {
+        "order": 2004
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        16461727182319278000,
+        26958803896801200000,
+        51856984583723640000
+      ],
+      "presentationToReference": [
+        0.2711090171959294,
+        0.4450789618894358,
+        0.85346623745669,
+        0.44398590429135804,
+        0.7288903451610991,
+        -0.521148137789553,
+        0.8540353725611383,
+        -0.520214938668966,
+        4.025531273336247e-8
+      ],
+      "orbitUpReference": [
+        -0.4450789618894358,
+        -0.7288903451610991,
+        0.520214938668966
+      ],
+      "metersPerUnit": 218808870.96774194,
+      "bodyRadiusM": 67830750000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

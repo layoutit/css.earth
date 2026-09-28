@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "bm-per",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BM Per",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 63934830
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bm-per-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BM Per",
+      "classification": "star",
+      "color": "#ffe2c6",
+      "distanceAu": 464797017.4,
+      "description": "A Cepheid in the Milky Way, 92 times the Sun's width, that swells and shrinks every 23.0 days.",
+      "systemName": "BM Per system",
+      "order": 2003,
+      "context": {
+        "order": 2000
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        17722656738536421000,
+        42605542561280655000,
+        52014072882148360000
+      ],
+      "presentationToReference": [
+        0.2548825232251802,
+        0.28730289816422405,
+        0.923304903085001,
+        0.6127415517665676,
+        0.690680631550865,
+        -0.3840677751897404,
+        0.7480525984802567,
+        -0.6636394426998262,
+        1.5357334056209934e-9
+      ],
+      "orbitUpReference": [
+        -0.28730289816422405,
+        -0.690680631550865,
+        0.6636394426998262
+      ],
+      "metersPerUnit": 206241387.0967742,
+      "bodyRadiusM": 63934830000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -16,6 +16,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   apokasc: { names: 'KIC', draft: async (names, { archive }) => (await import('./apokasc.mts')).draftsFromApokasc(names, archive) },
   // A Cepheid's Baade-Wesselink radius and distance from Groenewegen (2013) (cepheids.mts).
   cepheids: { names: 'NAME', draft: async (names, { archive }) => (await import('./cepheids.mts')).draftsFromCepheids(names, archive) },
+  // A K2-field giant, far above or below the Galactic plane, weighed by its oscillations, from Khan et al. (2023) (k2.mts).
+  k2: { names: 'EPIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromK2(names, archive) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */

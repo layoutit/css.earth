@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "xx-sgr",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "XX Sgr",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 31863060
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xx-sgr-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "XX Sgr",
+      "classification": "star",
+      "color": "#ffefe5",
+      "distanceAu": 273775284.4,
+      "description": "A Cepheid in the Milky Way, 46 times the Sun's width, that swells and shrinks every 6.4 days.",
+      "systemName": "XX Sgr system",
+      "order": 2031,
+      "context": {
+        "order": 2028
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4224599854767527000,
+        -38980494957892780000,
+        -11835710993624453000
+      ],
+      "presentationToReference": [
+        0.10314921618943648,
+        -0.031137036608552854,
+        -0.9941784166590737,
+        -0.9517605548003261,
+        0.2873022284579747,
+        -0.10774634958669113,
+        -0.2889845766224915,
+        -0.9573337529170897,
+        3.562475818630835e-9
+      ],
+      "orbitUpReference": [
+        0.031137036608552854,
+        -0.2873022284579747,
+        0.9573337529170897
+      ],
+      "metersPerUnit": 102784064.51612903,
+      "bodyRadiusM": 31863060000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
