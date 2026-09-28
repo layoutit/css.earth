@@ -324,7 +324,7 @@ test('turning the view preserves projected paths through caption admission chang
   expect(paths, 'admitted bodies still draw their paths').toBeGreaterThan(0);
   expect(uncaptionedPaths, 'caption collisions do not retire on-screen paths').toBeGreaterThan(0);
   expect(offScreenPaths, 'paths keep crossing after their bodies leave the frame').toBeGreaterThan(0);
-});
+}, 20000); // Plans every prepared orbit through a full turn; CI measured 4.4 s at 60 points.
 
 test('an active camera drag preserves the committed inner-system annotations', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
@@ -389,7 +389,7 @@ test('major planets remain identified through a full active-drag rotation', () =
         indicatorShown: body.indicatorShown });
     }
   }
-});
+}, 20000); // Plans every prepared orbit through a full drag rotation; CI measured 4.0 s at 60 points.
 
 test('an off-screen body keeps an orbit path that crosses the viewport', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
