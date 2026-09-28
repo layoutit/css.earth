@@ -23,7 +23,7 @@ make records are in [`packages/bake/cli/`](../../cli/) (`fit-epic-limb.mts`,
 | `roughness.ts` | Hapke (1984) macroscopic roughness, step for step as ISIS computes it. |
 | `normalization.ts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |
 | `model-record.ts` | Reading and validating model records and the recipe block that names them. |
-| `light-curve.ts` | A pulsating star's published light curve: Gaia DR3's Cepheid harmonic model (vari_cepheid) read as published, held to the same row's peak-to-peak amplitude, epoch of maximum and Fourier ratios, and turned into one period of veil opacity over the disc from the scene epoch (the flux ratio through the sRGB encoding). The display rate, one day per second, is its only presentation choice. |
+| `light-curve.ts` | A pulsating star's published light curve: Gaia DR3's Cepheid harmonic model (vari_cepheid) read as published, held to the same row's peak-to-peak amplitude, epoch of maximum and Fourier ratios, and turned into one period of veil opacity over the disc from the scene epoch (the flux ratio through the sRGB encoding). The display rate, four days per second, is its only presentation choice. |
 | `whole-disc-colour.ts` (`objects/raster`) | A planet's whole-disc colour record, computed once from a published spectrum, and the band-ratio policy that ties a colour map to it through its limb law's disc means (`floodDiscMean` in `limb.ts`); `keepLuminance` then restores the map's untied mean luminance with a soft shoulder. |
 
 Angles are radians in code and degrees in records and recipes.

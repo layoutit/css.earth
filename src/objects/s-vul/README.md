@@ -10,7 +10,7 @@ Its mean radius, 272.4 solar radii, comes from comparing how fast its surface mo
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,625 K and log g 0.93 (u1 0.728, u2 0.067): a model, because no fit of this star's limb is used.
 
-**Brightness.** Gaia DR3 fits the star's G-band light with 2 harmonics of a 69.47-day period (vari_cepheid, source 2027971514401523456; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 0.425 mag, so at minimum the star gives 68% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, one day of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.24 of a cycle after maximum. It plays when Motion is on.
+**Brightness.** Gaia DR3 fits the star's G-band light with 2 harmonics of a 69.47-day period (vari_cepheid, source 2027971514401523456; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 0.425 mag, so at minimum the star gives 68% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 4 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.24 of a cycle after maximum. It plays when Motion is on.
 
 ## Evidence
 

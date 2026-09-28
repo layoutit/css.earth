@@ -10,8 +10,9 @@ import { linearToSrgb } from './limb.ts';
 /** Gaia DR3 times are barycentric Julian days in TCB minus this offset (Gaia DR3 documentation, time scales). */
 export const GAIA_TIME_OFFSET_JD = 2455197.5;
 
-/** Presentation, not science: one day of pulsation plays in one second, so every star keeps its period ratio to the others. */
-export const PULSATION_SECONDS_PER_DAY = 1;
+/** Presentation, not science: four days of pulsation play in one second, so every star keeps its period ratio to the others.
+ * At one day per second a 13-day fade went unnoticed; at four the loops run 0.66 s (HV 12199) to 17 s (S Vul). */
+export const PULSATION_SECONDS_PER_DAY = 0.25;
 
 /** Half an 8-bit display level: keyframes are added until linear interpolation between them stays within it. */
 const DISPLAY_TOLERANCE = 0.5 / 255;

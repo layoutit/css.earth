@@ -10,14 +10,14 @@ Its mean radius, 54.4 solar radii, comes from comparing how fast its surface mov
 
 **Limb.** No limb darkening is drawn: no surface gravity is known: the mass is unmeasured and no spectroscopic log g is cited.
 
-**Brightness.** Gaia DR3 fits the star's G-band light with 6 harmonics of a 13.48-day period (vari_cepheid, source 4688863797635493248; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 1.346 mag, so at minimum the star gives 29% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, one day of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.67 of a cycle after maximum. It plays when Motion is on.
+**Brightness.** Gaia DR3 fits the star's G-band light with 6 harmonics of a 13.48-day period (vari_cepheid, source 4688863797635493248; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 1.346 mag, so at minimum the star gives 29% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 4 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.67 of a cycle after maximum. It plays when Motion is on.
 
 ## Evidence
 
 Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
-- The bake reads Gaia's harmonics as published and holds them to the same row's peak-to-peak amplitude, epoch of maximum, R21 and phi21 ([light-curve.ts](../../../packages/bake/src/photometry/light-curve.ts)); on 2026-09-28 the model's maximum fell 0.0009 d from epoch_g (stated error 0.0004 d; 0.00007 of a period).
 - [light-curve-phases.png](evidence/light-curve-phases.png): the page at eight evenly spaced phases after maximum light, captured headless from the baked page with the animation paused at each phase (2026-09-28). The brighter tile at half a cycle is a second rise in Gaia's model itself, not in the capture.
+- The bake reads Gaia's harmonics as published and holds them to the same row's peak-to-peak amplitude, epoch of maximum, R21 and phi21 ([light-curve.ts](../../../packages/bake/src/photometry/light-curve.ts)); on 2026-09-28 the model's maximum fell 0.0009 d from epoch_g (stated error 0.0004 d; 0.00007 of a period).
 
 ## Known problems
 
