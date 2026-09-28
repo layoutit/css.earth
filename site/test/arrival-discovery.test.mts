@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparedDefaultViewRotation } from '@cssearth/renderer/navigation';
-import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
+import { prepareObjectDiscovery } from '../build/prepare/prepare-object-discovery.mts';
 import { parseObjectDiscovery } from '@cssearth/objects';
 
 test('a shape-only body gets a prepared arrival without becoming photographic', async () => {

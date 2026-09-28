@@ -1,8 +1,8 @@
 /**
  * Set up a VLT/SPHERE survey body's photograph lens and measure it against the survey's own comparison figure.
  *
- *   node tools/objects/sphere-survey/setup.mts <object-id>    build and measure the lens in output/sphere-survey/<id>/
- *   node tools/objects/sphere-survey/install.mts <object-id>  write a measured setup into the body's package
+ *   node packages/bake/cli/sphere-survey-setup.mts <object-id>    build and measure the lens in output/sphere-survey/<id>/
+ *   node packages/bake/cli/sphere-survey-install.mts <object-id>  write a measured setup into the body's package
  *
  * The first form writes nothing in the package. It copies the package's source directory, finds the body's figure in
  * the pinned survey paper, reads the frame time printed over each column, lists the released frames, keeps one
@@ -14,25 +14,24 @@
 import { constants } from 'node:fs';
 import { access, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
 import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
-import { readPdfImage } from '@cssearth/bake/sources';
+import { readPdfImage } from '../../sources/index.ts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
-import { tableInput } from '@cssearth/bake/objects/layers/terrestrial';
-import { horizonsCommand, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
-import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
-import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
-import type { RadialSimplification } from '@cssearth/bake/objects/geometry';
-import { parseSpinState, spinOrientation } from '@cssearth/bake/objects/cameras';
-import { glyphTemplates, readLabel } from '@cssearth/bake/objects/sphere-survey';
-import { apparitionLinks, listedViews, meshFaces, releasedFrames } from '@cssearth/bake/objects/sphere-survey';
-import { anchorApparition, apparitions, selectFrames } from '@cssearth/bake/objects/sphere-survey';
-import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from '@cssearth/bake/objects/sphere-survey';
+import { measurePublishedComparison, writeComparisonEvidence } from './published-comparison.ts';
+import { tableInput } from '../layers/terrestrial/index.ts';
+import { horizonsCommand, horizonsTables } from '../layers/terrestrial/index.ts';
+import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../layers/terrestrial/index.ts';
+import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure, radialTerrainForLens, spinRecordReading } from '../layers/terrestrial/index.ts';
+import { loadCameraShape, loadObjShape, requireTerrainMesh, simplifyRadialShape } from '../geometry/index.ts';
+import type { RadialSimplification } from '../geometry/index.ts';
+import { parseSpinState, spinOrientation } from '../cameras/index.ts';
+import { glyphTemplates, readLabel } from './figure-labels.ts';
+import { apparitionLinks, listedViews, meshFaces, releasedFrames } from './apparitions.ts';
+import { anchorApparition, apparitions, selectFrames } from './frames.ts';
+import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from './lam.ts';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
 export const LENS_ID = 'zimpol';
 export const SETUP_SCHEMA = 'cssearth-sphere-survey-setup@1';
 const SPIN_RECORD_PATH = 'reference/release-parameters.txt', ADAM_METERS_PER_UNIT = 1000;
@@ -67,7 +66,7 @@ function releasedModelOf(value: Record<string, unknown>): ReleasedModel {
 }
 
 export async function surveyFigures() {
-  const table = requireRecord(await readJson(resolve(import.meta.dirname, 'vernazza-2021-figures.json')));
+  const table = requireRecord(await readJson(resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), 'src/objects/sphere-survey/vernazza-2021-figures.json')));
   const paper = requireRecord(table.paper);
   return { paper: { source: requireString(paper.source) },
     figures: requireArray(table.figures).map(value => {
@@ -82,9 +81,9 @@ export async function surveyFigures() {
  * A file already on this machine: the package's own copy, then the same path in any sibling checkout's package or in the
  * survey downloads a checkout kept.
  */
-export async function localCopy(objectId: string, path: string): Promise<Buffer | null> {
-  const siblings = (await readdir(dirname(ROOT))).filter(name => name.startsWith('css.earth')).map(name => resolve(dirname(ROOT), name));
-  const candidates = [resolve(ROOT, 'src/objects', objectId, 'source', path), ...siblings.flatMap(checkout =>
+export async function localCopy(objectId: string, path: string, root: string): Promise<Buffer | null> {
+  const siblings = (await readdir(dirname(root))).filter(name => name.startsWith('css.earth')).map(name => resolve(dirname(root), name));
+  const candidates = [resolve(root, 'src/objects', objectId, 'source', path), ...siblings.flatMap(checkout =>
     [resolve(checkout, 'src/objects', objectId, 'source', path), resolve(checkout, 'output/sphere-survey', objectId, 'downloads', path)])];
   for (const candidate of candidates) {
     const size = await stat(candidate).then(entry => entry.size, () => -1);
@@ -96,10 +95,10 @@ export async function localCopy(objectId: string, path: string): Promise<Buffer 
 
 
 /** A file for the package, from this machine when present, else from its origin, kept in the run's download folder. */
-async function fetchOnce(objectId: string, path: string, url: string, downloads: string) {
+async function fetchOnce(objectId: string, path: string, url: string, downloads: string, root: string) {
   const cached = resolve(downloads, path);
   if (await exists(cached)) return readFile(cached);
-  const bytes = await localCopy(objectId, path) ?? await lamBytes(url);
+  const bytes = await localCopy(objectId, path, root) ?? await lamBytes(url);
   await mkdir(dirname(cached), { recursive: true });
   await writeFile(cached, bytes);
   return bytes;
@@ -111,12 +110,15 @@ function objCounts(text: string) {
   return { vertices, faces };
 }
 
-export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
-  const objectDirectory = resolve(ROOT, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
-  const work = resolve(ROOT, 'output/sphere-survey', objectId), source = resolve(work, 'source'), downloads = resolve(work, 'downloads');
+/** `root` is the checkout the body's package is read from and whose `output/sphere-survey/<id>` receives the setup; the
+ * command passes it in. */
+export async function buildSetup(objectId: string, options: LeaveOuts & { root: string }) {
+  const { root } = options;
+  const objectDirectory = resolve(root, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
+  const work = resolve(root, 'output/sphere-survey', objectId), source = resolve(work, 'source'), downloads = resolve(work, 'downloads');
 
   // Who the body is in the survey, from the Horizons target its astronomy record already queries.
-  const command = horizonsCommand(await readJson(resolve(ROOT, 'packages/astronomy/data/bodies', `${objectId}.json`)));
+  const command = horizonsCommand(await readJson(resolve(root, 'packages/astronomy/data/bodies', `${objectId}.json`)));
   const number = Number(command.replace(/;$/u, ''));
   const { paper: paperPin, figures } = await surveyFigures();
   const figure = figures.find(entry => entry.number === number);
@@ -140,7 +142,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   const bands = figureBands(image);
   if (bands.some(band => band.y1 - band.y0 > 3 * PANEL + PANEL / 2)) throw new Error(`Figure ${figure.figure} uses a layout other than the survey's rows of ${PANEL}-pixel panels.`);
   const rows = Math.round((bands[0].y1 - bands[0].y0) / PANEL);
-  const reference = parseComparisonSpec(await readJson(resolve(ROOT, 'src/objects', REFERENCE_FIGURE.objectId, 'source', COMPARISON_SPEC_FILE)));
+  const reference = parseComparisonSpec(await readJson(resolve(root, 'src/objects', REFERENCE_FIGURE.objectId, 'source', COMPARISON_SPEC_FILE)));
   if (reference.document.object !== REFERENCE_FIGURE.object) throw new Error('The reference figure moved; update REFERENCE_FIGURE.');
   const referenceImage: Raster = readPdfImage(paper, reference.document.object);
   const templates = glyphTemplates(referenceImage, figureCells(referenceImage, reference.rows.count, reference.columns.length)[0], reference.columns.map(column => column.label));
@@ -183,7 +185,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
     ? { ...figure.releasedModel, spin: figure.releasedModel.spin, shape: figure.releasedModel.shape } : undefined;
   const archiveSlug = withheld ? withheld.model.toLowerCase().replace(/[^a-z0-9]+/gu, '-') : '';
   const adamPath = withheld ? `shape/${archiveSlug}-shape.obj` : `shape/${number}_${figure.name}_adam.obj`, adamUrl = withheld ? withheld.shape : shapeUrl(number, figure.name, 'adam');
-  const adam = await fetchOnce(objectId, adamPath, adamUrl, downloads).catch((error: unknown) => {
+  const adam = await fetchOnce(objectId, adamPath, adamUrl, downloads, root).catch((error: unknown) => {
     if (error instanceof Error && error.message.startsWith('LAM answered 404 ')) return null;
     throw error;
   });
@@ -192,7 +194,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   const spinRecordUrl = withheld ? withheld.spin : `${LAM}/3Dshape/${recordName}`;
   // A package that already keeps the release's record under its archive name reads that copy rather than adding a second.
   const spinRecordPath = withheld || await exists(resolve(packageSource, `reference/${recordName}`)) ? `reference/${recordName}` : SPIN_RECORD_PATH;
-  const spinRecord = await exists(resolve(packageSource, spinRecordPath)) ? await readFile(resolve(packageSource, spinRecordPath)) : await fetchOnce(objectId, spinRecordPath, spinRecordUrl, downloads);
+  const spinRecord = await exists(resolve(packageSource, spinRecordPath)) ? await readFile(resolve(packageSource, spinRecordPath)) : await fetchOnce(objectId, spinRecordPath, spinRecordUrl, downloads, root);
   await put(spinRecordPath, spinRecord);
 
   // The column order the survey's pole supports.
@@ -228,7 +230,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   if (!columns.some(column => column.frame)) throw new Error(`None of Figure ${figure.figure}'s columns shows a released camera-1 frame.`);
   const frames = [];
   for (const frame of selected) {
-    const path = `observations/${frame.file}`, bytes = await fetchOnce(objectId, path, frame.url, downloads);
+    const path = `observations/${frame.file}`, bytes = await fetchOnce(objectId, path, frame.url, downloads, root);
     await put(path, bytes);
     frames.push({ frame, id: frameId(frame), path, bytes, exposure: zimpolExposure(readFitsHdu(bytes).header) });
   }
@@ -253,7 +255,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
     document: { url: SURVEY_PAPER_URL, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
-  const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, ROOT);
+  const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, root);
   // The recipe states each frame's limb-fitted centre, so a fit that has not settled cannot be stated.
   const unsettled = cameras.filter(camera => !limbSettled(camera.limb));
   if (unsettled.length > 0) throw new Error(`The limb fit does not settle on ${unsettled.map(camera => `${camera.id} (last move ${camera.limb.movedPixels.toFixed(2)} px)`).join(', ')}; leave those frames out with --leave-out and say why.`);
@@ -282,7 +284,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   await put('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
 
   // The measurement, through the same cameras the recipe states.
-  const result = await measurePublishedComparison(objectId, { sourceDirectory: source });
+  const result = await measurePublishedComparison(objectId, { root: root, sourceDirectory: source });
   await writeComparisonEvidence(result, resolve(work, 'evidence'));
   const setup = { schema: SETUP_SCHEMA, objectId, survey: { number, name: figure.name, figure: figure.figure, command }, lensId: LENS_ID,
     listing: framesUrl(number, figure.name), spinRecordUrl, cast: { nights, frames: frames.length, released: listing.length },
@@ -371,7 +373,8 @@ function readFitsImageSize(bytes: Buffer) {
   return { width: requireFiniteNumber(header.NAXIS1, 'NAXIS1'), height: requireFiniteNumber(header.NAXIS2, 'NAXIS2') };
 }
 
-function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
+/** The command's report of a built setup. */
+export function surveySetupSummary(setup: Awaited<ReturnType<typeof buildSetup>>, root: string) {
   const lines = [`${setup.objectId}: (${setup.survey.number}) ${setup.survey.name}, Figure ${setup.survey.figure}; ${setup.cast.frames} of ${setup.cast.released} released camera-1 frames, ${setup.cast.nights.join(', ')}.`,
     ...setup.apparitions.map(entry => `  apparition ${entry.from} to ${entry.to}: ${entry.cast} of ${entry.frames} frames cast, sub-observer latitude ${entry.subObserverLatitude.join(' to ')}°; ${entry.anchor ? 'the figure\'s' : `${entry.sharedSamples} display samples shared with a cast frame at the level fit's angle limit`}`),
     `Spin record read ${setup.columnOrder.order}: ${setup.columnOrder.separationDegrees}° from the published pole, the other reading ${setup.columnOrder.otherSeparationDegrees ?? '—'}°.`,
@@ -383,12 +386,6 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
   if (setup.primaryIsAdam) lines.push('  the body’s own shape is the release’s ADAM mesh; the lens rides it');
   else if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
   if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
-  lines.push(`Evidence: ${relative(ROOT, resolve(ROOT, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
+  lines.push(`Evidence: ${relative(root, resolve(root, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
   return lines.join('\n');
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, ...rest] = process.argv.slice(2), leaveOuts = leaveOutArguments(rest);
-  if (!objectId || leaveOuts === null) { console.error('usage: node tools/objects/sphere-survey/setup.mts <object-id> [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…]'); process.exit(2); }
-  console.log(summary(await buildSetup(objectId, leaveOuts)));
 }

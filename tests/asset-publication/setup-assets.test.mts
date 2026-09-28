@@ -7,7 +7,7 @@ import { join, resolve } from "node:path";
 import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { installRuntimeAssets, readAllowMissingFlag } from "@cssearth/bake/asset-publication";
-import { inspectContextAvailability } from "../../tools/prepare/prepare-context-availability.mts";
+import { inspectContextAvailability } from "../../site/build/prepare/prepare-context-availability.mts";
 import { writeContextPackage } from "../fixtures/context-package.mts";
 
 test("setup installs pinned files, reuses them offline, and repairs a corrupt file", async () => {

@@ -8,13 +8,14 @@ const test = sourceTest();
 import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToParentKm,
   systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedBarycentreCompanion, hostedOrbitCentreStateKm } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
-import { readCatalog } from '../prepare/prepare-catalog.mts';
+import { readCatalog } from '@cssearth/objects/node';
+import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseSpatialContextCommand, prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
-const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
+const contextEntries = (await readCatalog(resolve(import.meta.dirname, '../../src/objects'), prepareSceneDistance)).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
 
 test('the command takes its paths and refuses unknown options', () => {

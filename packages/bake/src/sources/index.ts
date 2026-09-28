@@ -1,7 +1,8 @@
 // `@cssearth/bake/sources` (Node only): source records preparation reads beside an object. An object's authored
 // descriptor (`object.json`, when it names a recipe), the independent records of the source catalogue (`src/sources/`),
 // the authored physical world frame checked against a prepared scene and runtime, and the images embedded in a
-// published PDF figure; the factsheet source checks, the object-information source records and the pinned-fact
+// published PDF figure; binding an object's manifest inputs to catalogue records (`author-source-records.ts`, whose command
+// `site/build/prepare/author-source-records.mts` also rewrites volume provenance); the factsheet source checks, the object-information source records and the pinned-fact
 // citations; the source records a context manifest lists, the factsheet citations and source inventory the source
 // catalogue compiles, the bibliography citations of the prepared galaxy and cluster catalogues, and the digest that
 // says whether a recorded preparation still applies to a provenance record; the context packages' provenance, compiled
@@ -11,6 +12,7 @@
 // (`packages/bake/cli/report-investigations.mts`). It imports `runtime-source`, `objects/content` and `delivery`.
 export * from './authored-object.ts';
 export * from './authored-world-frame.ts';
+export * from './author-source-records.ts';
 export * from './cite-pinned-facts.ts';
 export * from './context-source-records.ts';
 export * from './facility-artwork-refresh.ts';

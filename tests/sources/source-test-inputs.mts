@@ -2,8 +2,8 @@
  * audits. This selects real inputs, never suppresses assertions or invents prepared data. */
 import { relative, resolve } from 'node:path';
 import { readFile, readdir } from 'node:fs/promises';
-import { prepareFacilities } from '../prepare/prepare-facilities.mts';
-import { prepareVolumeProvenance, readPreparedVolumeProvenance } from '../prepare/prepare-volume-provenance.mts';
+import { prepareFacilities } from '../../site/build/prepare/prepare-facilities.mts';
+import { prepareVolumeProvenance, readPreparedVolumeProvenance } from '../../site/build/prepare/prepare-volume-provenance.mts';
 import { prepareContextProvenance, readPreparedContextProvenance } from '@cssearth/bake/sources';
 import { CONTEXT_ROUTE } from '../../src/platform/dataset-destination.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';

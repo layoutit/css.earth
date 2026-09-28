@@ -29,7 +29,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 **Navigation marker.** A uniform disc in the spectrum's colour, rendered by [author.mts](../../../tools/objects/source-authoring/hd-189733/author.mts) (`--check` recomputes it).
 
-**On the map.** B has no surface image and hosts no planet, but its colour comes from its own spectrum. Preparation marks its discovery `sourceColor` ([prepare-object-discovery.mts](../../../tools/prepare/prepare-object-discovery.mts)), and `discoveryVisibility` keeps such a star visible.
+**On the map.** B has no surface image and hosts no planet, but its colour comes from its own spectrum. Preparation marks its discovery `sourceColor` ([prepare-object-discovery.mts](../../../site/build/prepare/prepare-object-discovery.mts)), and `discoveryVisibility` keeps such a star visible.
 
 **In the system.** The pair is bound: El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list it in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4. B's astrometry record states that with `boundTo`, and preparation carries it into the world context with the pair's **centre of mass**, 19.3% of the way from A to B for masses 0.807 and 0.193 solar, 44 au from A. The system's members come from the prepared orbit chains and that bound pair ([object-systems.mts](../../../site/object-systems.mts)), so B's breadcrumb and card are the system's. It frames nothing: the system view still frames the planet's 0.031 AU orbit, and B's own page keeps its scene until the camera leaves B as well as the system ([overview-selection.mts](../../../site/overview-selection.mts)).
 

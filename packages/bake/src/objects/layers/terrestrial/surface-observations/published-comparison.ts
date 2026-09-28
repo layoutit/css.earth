@@ -273,7 +273,7 @@ export function comparisonBlock(evidence: ComparisonEvidence): string {
   const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
   const lowest = sweep[0], native = evidence.nativeOutline;
   return [
-    `Measured by \`tools/objects/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.`,
+    `Measured by \`packages/bake/cli/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.`,
     '',
     '| Figure column | Overlap with the paper\'s model | With the paper\'s photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure\'s |',
     '| --- | --- | --- | --- | --- | --- | --- |',

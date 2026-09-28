@@ -7,7 +7,6 @@
  */
 import { access, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { parseSourceCatalog } from '@cssearth/objects/sources';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
@@ -82,19 +81,4 @@ export async function authorSourceRecords({ root, objectId, write = true }: Auth
   }
   if (write && manifestChanged) await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   return result;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const ids = process.argv.slice(2);
-  if (ids.length !== 1 || ids[0].startsWith('--')) throw new TypeError('Usage: author-source-records <object-id>');
-  const root = process.cwd(), manifestPath = resolve(root, 'src/objects', ids[0], 'source/manifest.json'), before = await readFile(manifestPath);
-  console.log(JSON.stringify(await authorSourceRecords({ root, objectId: ids[0] }), null, 1));
-  // A body's provenance record is generated from its manifest on every checkout. A volume package's is still written by the volume compiler.
-  const presentation = await readFile(resolve(root, 'src/objects', ids[0], 'source/presentation.json'), 'utf8').then(text => JSON.parse(text) as { schema?: unknown }, () => null);
-  if (!before.equals(await readFile(manifestPath)) && presentation?.schema === 'cssearth-volume-presentation-source@1') {
-    const { writeVolumeProvenance } = await import('../prepare/prepare-volume-provenance.mts');
-    const { RUNTIME_ASSET_ORIGIN } = await import('@cssearth/bake/objects/sources');
-    const results = await writeVolumeProvenance({ root, mirrorOrigin: RUNTIME_ASSET_ORIGIN });
-    console.log(`Volume provenance recorded again for the changed manifest: ${results.length} volume packages.`);
-  }
 }

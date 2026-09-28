@@ -6,7 +6,7 @@ import { SITE_ORIGIN } from "./site/seo.mts";
 import { performanceSourceMaps } from "./site/build/source-maps.mts";
 import { packageSources } from "./site/build/package-sources.mts";
 import { searchServer } from './site/server/search-server.mts';
-import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
+import { prepareContextAvailability } from "./site/build/prepare/prepare-context-availability.mts";
 import { preparedMotionCss } from "./site/build/prepared-motion-css.mts";
 import { assetOrigin } from "./site/asset-origin.mts";
 

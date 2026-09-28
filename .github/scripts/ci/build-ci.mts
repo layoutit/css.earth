@@ -47,7 +47,7 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
   const tasks: CiBuildTask[] = [
     { id: 'packages', after: [], command: 'pnpm', args: ['-r', '--filter', './packages/**', 'build'], outputs: packageOutputs(root) },
     node('titles', 'site/build/prepare/prepare-shell-titles.mts'),
-    node('catalog', 'tools/prepare/cli/prepare-catalog.mts', ['packages']),
+    node('catalog', 'site/build/prepare/prepare-catalog.mts', ['packages']),
     node('solar', 'packages/bake/cli/prepare-solar-geometry.mts', ['catalog']),
     { id: 'preparation', after: ['packages', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],
       outputs: [{ path: 'tools/objects/dist', required: ['prepare-authored.js', 'prepare-spatial-context.js'] }] },

@@ -1,51 +1,17 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
-import { catalogEntry, defineObjects, type CatalogEntry } from '@cssearth/objects';
-import { PREPARED_CATALOGUE } from '@cssearth/objects/node';
+import { pathToFileURL } from 'node:url';
+import { defineObjects, type CatalogEntry } from '@cssearth/objects';
+import { PREPARED_CATALOGUE, readCatalog, readContextObjects } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES } from '@cssearth/astronomy';
-import { assetOrigin } from '../../site/asset-origin.mts';
+import { assetOrigin } from '../../asset-origin.mts';
 import { readInventory } from '@cssearth/objects/node';
 
-const root = resolve(import.meta.dirname, '../..');
-const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
-
-/** A folder alone is not a published destination. Its descriptor must opt in. */
-export async function readCatalog(objectsDirectory = resolve(root, 'src/objects')) {
-  const entries: CatalogEntry[] = [];
-  for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
-    if (!directory.isDirectory()) continue;
-    let descriptor: unknown;
-    try { descriptor = JSON.parse(await readFile(resolve(objectsDirectory, directory.name, 'object.json'), 'utf8')); }
-    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
-    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog === undefined) continue;
-    if (descriptor.id !== directory.name) throw new TypeError(`Catalogue identity differs: ${directory.name}.`);
-    entries.push(catalogEntry(descriptor, async () => { throw new Error('Catalogue preparation cannot mount a scene.'); }, prepareSceneDistance(descriptor)));
-  }
-  entries.sort(byOrder);
-  defineObjects(entries.map(({ order, context, ...object }) => object));
-  return entries;
-}
-
-/** Registered descriptors without a catalog entry are application context: the world loads their prepared resources directly. */
-export async function readContextObjects(objectsDirectory = resolve(root, 'src/objects')) {
-  const contexts: { id: string; type: string }[] = [];
-  for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
-    if (!directory.isDirectory()) continue;
-    let descriptor: unknown;
-    try { descriptor = JSON.parse(await readFile(resolve(objectsDirectory, directory.name, 'object.json'), 'utf8')); }
-    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
-    if (!isRecord(descriptor) || !isRecord(descriptor.properties) || descriptor.properties.catalog !== undefined) continue;
-    if (descriptor.id !== directory.name || typeof descriptor.type !== 'string') throw new TypeError(`Context object identity differs: ${directory.name}.`);
-    contexts.push({ id: directory.name, type: descriptor.type });
-  }
-  return contexts.sort((a, b) => a.id.localeCompare(b.id, 'en'));
-}
+const root = resolve(import.meta.dirname, '../../..');
 
 /** Every object shares one folder, so the application globs only the context objects it loads, each by name. */
 export function contextObjectModule(contexts: readonly { id: string; type: string }[], remoteAssets: Readonly<Record<string, string>> = {}) {
@@ -138,7 +104,7 @@ async function writeGenerated(output: string, text: string) {
 }
 
 export async function prepareCatalog({ projectRoot = root } = {}) {
-  const entries = await readCatalog(resolve(projectRoot, 'src/objects'));
+  const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance);
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
   if (!host) throw new TypeError('Prepared focus destinations need a shared world host.');
   const focuses = await readPreparedFocusObjects(resolve(projectRoot, 'src/objects'), host.id);
@@ -171,4 +137,5 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   return entries;
 }
 
-refuseDirectRun(import.meta);
+// Entry script: `pnpm prepare:catalog`.
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) await prepareCatalog();

@@ -1,7 +1,7 @@
 /**
  * Write a survey photograph lens into a body's package, from a fresh setup run.
  *
- *   node tools/objects/sphere-survey/install.mts <object-id>
+ *   node packages/bake/cli/sphere-survey-install.mts <object-id>
  *
  * The run is rebuilt first, so the package receives exactly what was just measured: the frames, the ADAM mesh, both
  * Horizons tables and the spin record where they are new, the recipe, the observer-cameras and comparison records and
@@ -13,18 +13,16 @@
 import { execFileSync } from 'node:child_process';
 import { access, copyFile, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { authorSourceRecords } from '../../sources/author-source-records.mts';
+import { authorSourceRecords } from '../../sources/index.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '@cssearth/bake/objects/layers/terrestrial';
-import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '@cssearth/bake/objects/layers/terrestrial';
-import { OBSERVER_CAMERAS_FILE } from '@cssearth/bake/objects/layers/terrestrial';
-import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from '@cssearth/bake/objects/sphere-survey';
-import { INVESTIGATION_SURVEY_DIRECTORY } from '@cssearth/bake/sources';
-import { writeHorizonsOperations } from '@cssearth/bake/objects/layers/terrestrial';
-import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './setup.mts';
+import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../layers/terrestrial/index.ts';
+import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '../layers/terrestrial/index.ts';
+import { OBSERVER_CAMERAS_FILE } from '../layers/terrestrial/index.ts';
+import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.ts';
+import { INVESTIGATION_SURVEY_DIRECTORY } from '../../sources/index.ts';
+import { writeHorizonsOperations } from '../layers/terrestrial/index.ts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './survey-setup.ts';
 
-const ROOT = resolve(import.meta.dirname, '../../..');
 export const COMPARISON_ENTRY = `${LENS_ID}-published-comparison`;
 const readJson = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const writeJson = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
@@ -43,7 +41,7 @@ export function decisionFinding(figure: string, evidence: ComparisonEvidence, co
   const sweepText = `it peaks at our phase in ${count('at')} of ${evidence.columns.length} columns${count('step') ? `, one step from it in ${count('step')}` : ''}${elsewhere.length ? `, and elsewhere in ${elsewhere.length}: ${elsewhere.join('; ')}` : ''}`;
   const ours = evidence.columns.flatMap(column => column.axis.oursDegrees ?? []), theirs = evidence.columns.flatMap(column => column.axis.paperDegrees ?? []);
   const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
-  return `Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure ${figure}, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels ${span(models)} at our phase, against ${span(same)} for our own outline drawn at the paper’s pixel scale; over a full turn in ${PHASE_SWEEP_STEP_DEGREES}° steps ${sweepText}. With the paper’s photographs ${span(evidence.columns.map(column => column.overlapWithPhotograph))}. Turned in the image, our outline best overlaps the paper’s photographs at ${span(evidence.columns.map(column => column.imageTurnDegrees.photograph), 1)}° and its model panels at ${span(evidence.columns.map(column => column.imageTurnDegrees.model), 1)}°. The spin axis we project lies at ${span(ours, 1)}° on the sky against ${span(theirs, 1)}° for the figure’s arrows. Native outline residual ${evidence.nativeOutline.residualPixelsAtZero.toFixed(3)} px mean over ${evidence.nativeOutline.frames} frames at our phase${sweep[0].offset === 0 ? ', the lowest of a ±30° sweep' : `; the sweep’s lowest is ${sweep[0].pixels.toFixed(3)} px at ${sweep[0].offset}°`}. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads ${columnOrder.order}, ${columnOrder.separationDegrees}° from the published pole.`;
+  return `Measured with packages/bake/cli/sphere-survey-setup.mts against Vernazza et al. (2021) Figure ${figure}, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels ${span(models)} at our phase, against ${span(same)} for our own outline drawn at the paper’s pixel scale; over a full turn in ${PHASE_SWEEP_STEP_DEGREES}° steps ${sweepText}. With the paper’s photographs ${span(evidence.columns.map(column => column.overlapWithPhotograph))}. Turned in the image, our outline best overlaps the paper’s photographs at ${span(evidence.columns.map(column => column.imageTurnDegrees.photograph), 1)}° and its model panels at ${span(evidence.columns.map(column => column.imageTurnDegrees.model), 1)}°. The spin axis we project lies at ${span(ours, 1)}° on the sky against ${span(theirs, 1)}° for the figure’s arrows. Native outline residual ${evidence.nativeOutline.residualPixelsAtZero.toFixed(3)} px mean over ${evidence.nativeOutline.frames} frames at our phase${sweep[0].offset === 0 ? ', the lowest of a ±30° sweep' : `; the sweep’s lowest is ${sweep[0].pixels.toFixed(3)} px at ${sweep[0].offset}°`}. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads ${columnOrder.order}, ${columnOrder.separationDegrees}° from the published pole.`;
 }
 
 /** Nights as a reader says them: one date, two joined, or the first and last of several. */
@@ -65,8 +63,10 @@ export function unusedWords(apparitions: readonly { from: string; to: string; fr
 }
 const span = (values: readonly number[], digits = 3) => { const low = Math.min(...values).toFixed(digits), high = Math.max(...values).toFixed(digits); return low === high ? low : `${low} to ${high}`; };
 
-export async function installSetup(objectId: string, options: { leaveOut?: readonly string[]; leaveOutApparitions?: readonly string[]; because?: string; replace?: boolean } = {}) {
-  const objectDirectory = resolve(ROOT, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
+/** `root` is the checkout whose body package receives the setup; the command passes it in. */
+export async function installSetup(objectId: string, options: { root: string; leaveOut?: readonly string[]; leaveOutApparitions?: readonly string[]; because?: string; replace?: boolean }) {
+  const { root } = options;
+  const objectDirectory = resolve(root, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
   const recipe = await readJson(resolve(packageSource, 'preparation/terrestrial.json'));
   const lenses = requireRecord(recipe.raster).surfaceObservations;
   const earlier = Array.isArray(lenses) ? lenses.map(lens => requireRecord(lens)).find(lens => lens.id === LENS_ID) : undefined;
@@ -74,7 +74,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const earlierFrames = earlier ? requireArray(earlier.frames).map(frame => requireString(requireRecord(frame).path)) : [];
   const leaveOut = options.leaveOut ?? [], leaveOutApparitions = options.leaveOutApparitions ?? [];
   if (leaveOut.length + leaveOutApparitions.length > 0 && !options.because?.trim()) throw new Error('A frame or apparition left out needs its reason: --because=<why>.');
-  const setup = await buildSetup(objectId, { leaveOut, leaveOutApparitions }), work = resolve(ROOT, 'output/sphere-survey', objectId), scratch = resolve(work, 'source');
+  const setup = await buildSetup(objectId, { root, leaveOut, leaveOutApparitions }), work = resolve(root, 'output/sphere-survey', objectId), scratch = resolve(work, 'source');
   const named = [...leaveOut, ...setup.leftOutApparitions.map(entry => `the ${entry.from === entry.to ? entry.from : `${entry.from} to ${entry.to}`} apparition (${entry.frames} frames)`)];
   const leftOutText = named.length ? `Left out by name: ${named.join(', ')}. ${options.because?.trim()}` : '';
   const { number, name, figure } = setup.survey, evidence = parseComparisonEvidence(setup.evidence);
@@ -103,7 +103,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const dropped = earlierFrames.filter(path => !setup.written.includes(path));
   if (dropped.length > 0) {
     const manifest = await readJson(resolve(packageSource, 'manifest.json')), inputs = requireArray(manifest.inputs).map(value => requireRecord(value));
-    for (const input of inputs) if (dropped.includes(requireString(input.path))) await rm(resolve(ROOT, 'src/sources', `source-${objectId}-${requireString(input.id)}.json`), { force: true });
+    for (const input of inputs) if (dropped.includes(requireString(input.path))) await rm(resolve(root, 'src/sources', `source-${objectId}-${requireString(input.id)}.json`), { force: true });
     manifest.inputs = inputs.filter(input => !dropped.includes(requireString(input.path)));
     await writeJson(resolve(packageSource, 'manifest.json'), manifest);
     for (const path of dropped) await rm(resolve(packageSource, path), { force: true });
@@ -112,7 +112,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const declared = new Set(requireArray((await readJson(resolve(packageSource, 'manifest.json'))).inputs).map(value => requireString(requireRecord(value).path)));
   for (const file of await readdir(resolve(packageSource, 'observations')).catch(() => [] as string[])) if (!declared.has(`observations/${file}`)) await rm(resolve(packageSource, 'observations', file), { force: true });
   // Every new input is bound to a catalogue record now, because the first preparation step validates the manifest.
-  const bound = await authorSourceRecords({ root: ROOT, objectId });
+  const bound = await authorSourceRecords({ root: root, objectId });
   const cameras = await readJson(resolve(packageSource, OBSERVER_CAMERAS_FILE));
   cameras.publishedComparison = { ledgerEntry: COMPARISON_ENTRY };
   await writeJson(resolve(packageSource, OBSERVER_CAMERAS_FILE), cameras);
@@ -160,7 +160,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   // so this body's answer can be added to it without rewriting the record every other body quotes.
   for (const [index, entry] of entries.entries()) {
     if (!ANSWERED.includes(requireString(entry.id)) || entry.survey === undefined) continue;
-    const shared = requireRecord(await readJson(resolve(ROOT, INVESTIGATION_SURVEY_DIRECTORY, `${requireString(entry.survey)}.json`)));
+    const shared = requireRecord(await readJson(resolve(root, INVESTIGATION_SURVEY_DIRECTORY, `${requireString(entry.survey)}.json`)));
     const { survey: _survey, ...own } = entry;
     entries[index] = { id: own.id, subject: requireString(shared.subject), status: own.status, finding: requireString(shared.finding),
       evidence: [...(Array.isArray(shared.evidence) ? shared.evidence : []), ...requireArray(own.evidence)] };
@@ -190,7 +190,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
 
   // The asteroid package anchors list each package's lenses; a body with a row gains this one, edited in place so the
   // file's own number formatting survives.
-  const anchorsPath = resolve(ROOT, 'tests/objects/unit/anchors/asteroid-packages.json');
+  const anchorsPath = resolve(root, 'tests/objects/unit/anchors/asteroid-packages.json');
   await writeFile(anchorsPath, withAnchoredLens(await readFile(anchorsPath, 'utf8'), objectId, LENS_ID));
 
   // Evidence, README and credits.
@@ -214,8 +214,8 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     await writeFile(resolve(objectDirectory, 'NOTICE.md'), noticeWithLens(await readFile(resolve(objectDirectory, 'NOTICE.md'), 'utf8'), figure));
   }
 
-  execFileSync(process.execPath, [resolve(ROOT, 'tools/sources/pin-object-documents.mts'), objectId], { cwd: ROOT, stdio: 'inherit' });
-  const { restored, missing } = await restorePinnedInputs(objectId), moved = await moveUnownedSceneFiles(objectId);
+  execFileSync(process.execPath, [resolve(root, 'tools/sources/pin-object-documents.mts'), objectId], { cwd: root, stdio: 'inherit' });
+  const { restored, missing } = await restorePinnedInputs(objectId, root), moved = await moveUnownedSceneFiles(objectId, root);
   if (restored.length) console.log(`Copied ${restored.length} pinned input(s) from sibling checkouts by hash: ${restored.join(', ')}.`);
   if (missing.length) console.log(`Still missing, restore them before preparing (node packages/bake/cli/object-operations.mts acquire ${objectId}): ${missing.join(', ')}.`);
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
@@ -237,13 +237,13 @@ export function withAnchoredLens(text: string, objectId: string, lensId: string)
 }
 
 /** Every pinned input and document preparation will read, copied from a sibling checkout when it is missing here and a byte-identical copy exists. */
-export async function restorePinnedInputs(objectId: string) {
-  const source = resolve(ROOT, 'src/objects', objectId, 'source'), manifest = await readJson(resolve(source, 'manifest.json'));
+export async function restorePinnedInputs(objectId: string, root: string) {
+  const source = resolve(root, 'src/objects', objectId, 'source'), manifest = await readJson(resolve(source, 'manifest.json'));
   const restored: string[] = [], missing: string[] = [];
   for (const value of [...requireArray(manifest.inputs), ...(Array.isArray(manifest.documents) ? manifest.documents : [])]) {
     const input = requireRecord(value), path = requireString(input.path);
     if (await access(resolve(source, path)).then(() => true, () => false)) continue;
-    const bytes = await localCopy(objectId, path);
+    const bytes = await localCopy(objectId, path, root);
     if (!bytes) { missing.push(path); continue; }
     await mkdir(dirname(resolve(source, path)), { recursive: true });
     await writeFile(resolve(source, path), bytes);
@@ -253,14 +253,14 @@ export async function restorePinnedInputs(objectId: string) {
 }
 
 /** Scene files an earlier preparation left that the body's runtime inventory does not own, moved aside rather than deleted. */
-export async function moveUnownedSceneFiles(objectId: string) {
-  const scenes = resolve(ROOT, 'public/scenes', objectId), owned = await readFile(resolve(ROOT, 'src/objects', objectId, 'inventory.json'), 'utf8').catch(() => null);
+export async function moveUnownedSceneFiles(objectId: string, root: string) {
+  const scenes = resolve(root, 'public/scenes', objectId), owned = await readFile(resolve(root, 'src/objects', objectId, 'inventory.json'), 'utf8').catch(() => null);
   if (owned === null) return [];
   const files = await readdir(scenes).catch(() => [] as string[]), moved: string[] = [];
   for (const file of files) {
     if (owned.includes(`"${file}"`) || owned.includes(`/${file}"`)) continue;
-    await mkdir(resolve(ROOT, 'output/stale-public', objectId), { recursive: true });
-    await rename(resolve(scenes, file), resolve(ROOT, 'output/stale-public', objectId, file));
+    await mkdir(resolve(root, 'output/stale-public', objectId), { recursive: true });
+    await rename(resolve(scenes, file), resolve(root, 'output/stale-public', objectId, file));
     moved.push(file);
   }
   return moved;
@@ -325,11 +325,4 @@ export function noticeWithLens(notice: string, figure: string) {
   if (notice.includes(shapeOnly)) return notice.replace(shapeOnly, credit);
   const title = notice.indexOf('\n\n');
   return `${notice.slice(0, title)}\n\n${credit}${notice.slice(title)}`;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, ...rest] = process.argv.slice(2), because = rest.find(arg => arg.startsWith('--because='))?.slice('--because='.length), replace = rest.includes('--replace');
-  const leaveOuts = leaveOutArguments(rest.filter(arg => !arg.startsWith('--because=') && arg !== '--replace'));
-  if (!objectId || leaveOuts === null) { console.error('usage: node tools/objects/sphere-survey/install.mts <object-id> [--replace] [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…] [--because=<why>]'); process.exit(2); }
-  await installSetup(objectId, { ...leaveOuts, because, replace });
 }

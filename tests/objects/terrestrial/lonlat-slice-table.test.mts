@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { parseLonLatSliceTable } from '@cssearth/bake/objects/raster';
 import { sourceTest } from '../source-test.mts';
 import { requireRecord } from '@cssearth/core';
-import { deriveObjectDiscovery } from '../../../tools/prepare/prepare-object-discovery.mts';
+import { deriveObjectDiscovery } from '../../../site/build/prepare/prepare-object-discovery.mts';
 import { parseObjectDiscovery, discoveryDescription } from '@cssearth/objects';
 
 const specification = { columns: { longitude: 2, latitude: 3, value: 5 }, slice: { column: 4, value: 0.1 }, coordinateToleranceDegrees: 0 };

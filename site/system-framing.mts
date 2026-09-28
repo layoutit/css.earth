@@ -79,11 +79,11 @@ export function loadSystemView(id: string, read?: (id: string) => Promise<unknow
 /** A host's authored orbit range: its system overview never places the camera beyond the distance its orbits are drawn to. */
 export const SYSTEM_RANGES = new Map(context.bodies.flatMap(body => 'orbitsWithinM' in body && body.orbitsWithinM !== undefined ? [[body.id, body.orbitsWithinM] as const] : []));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
-/** Volumes a body shows through one of its lenses, by volume id (tools/prepare/prepare-catalog.mts). */
+/** Volumes a body shows through one of its lenses, by volume id (site/build/prepare/prepare-catalog.mts). */
 export const LENS_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Object.entries(lensVolumes).map(([id, frame]) => [id, parseDensityVolumeFrame(frame)]));
 
 /** The Local Group as the universe draws it: the Milky Way's volume and the other galaxies the Local Group catalogue draws,
- * each a sphere of its recipe focus radius (tools/prepare/prepare-catalog.mts), in one box in reference axes. */
+ * each a sphere of its recipe focus radius (site/build/prepare/prepare-catalog.mts), in one box in reference axes. */
 const LOCAL_GROUP_BOX = (() => {
   const rotation = worldRotationFromQuaternion(GALACTIC_VOLUME.localToReferenceXyzw), { min, max } = GALACTIC_VOLUME.boundsUnits;
   const galaxy = [0, 1, 2, 3, 4, 5, 6, 7].map(corner => {

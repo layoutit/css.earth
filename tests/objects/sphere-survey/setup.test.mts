@@ -1,12 +1,11 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '@cssearth/bake/objects/layers/terrestrial';
-import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, unusedWords, withAnchoredLens, withRefreshedLens } from './install.mts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArguments, surveyFigures } from './setup.mts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, latitudeSpan, leaveOutArguments, nightsText, noticeWithLens, readmeWithLens, surveyFigures, unusedWords, withAnchoredLens, withRefreshedLens } from '@cssearth/bake/objects/sphere-survey';
 import { horizonsCommand } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
@@ -73,7 +72,7 @@ test('every shipped comparison\'s README section is its evidence, read', () => {
     if (!existsSync(evidence)) continue;
     const readme = readFileSync(resolve(OBJECTS, id, 'README.md'), 'utf8'), begin = readme.indexOf(COMPARISON_BLOCK_BEGIN), end = readme.indexOf(COMPARISON_BLOCK_END);
     assert.ok(begin >= 0 && end > begin, `${id}/README.md carries the comparison markers`);
-    assert.equal(readme.slice(begin + COMPARISON_BLOCK_BEGIN.length, end).trim(), comparisonBlock(parseComparisonEvidence(json(evidence))), `${id}: run node tools/objects/published-comparison.mts ${id} --write`);
+    assert.equal(readme.slice(begin + COMPARISON_BLOCK_BEGIN.length, end).trim(), comparisonBlock(parseComparisonEvidence(json(evidence))), `${id}: run node packages/bake/cli/published-comparison.mts ${id} --write`);
     bodies++;
   }
   assert.ok(bodies >= 2);

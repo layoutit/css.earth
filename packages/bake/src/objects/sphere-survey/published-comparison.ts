@@ -1,8 +1,8 @@
 /**
  * Measure how a ground-based photograph lens reproduces the comparison figure of the paper that published its frames.
  *
- *   node tools/objects/published-comparison.mts <object-id>          report the measurements
- *   node tools/objects/published-comparison.mts <object-id> --write  also write evidence/published-comparison.json and its image
+ *   node packages/bake/cli/published-comparison.mts <object-id>          report the measurements
+ *   node packages/bake/cli/published-comparison.mts <object-id> --write  also write evidence/published-comparison.json and its image
  *
  * The body's `source/preparation/published-comparison.json` names the figure: a pinned paper, the figure's image object
  * and its pixels' digest, which rows hold photographs and the model the lens rides, and which lens frame each column
@@ -14,13 +14,12 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { readPdfImage } from '@cssearth/bake/sources';
-import { lamBytes } from '@cssearth/bake/objects/sphere-survey';
-import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForLens, observerCaster, turnedOrientation, type TurnableCaster } from '@cssearth/bake/objects/layers/terrestrial';
-import { decodeCalibratedCamera, loadCameraShape } from '@cssearth/bake/objects/geometry';
-import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from '@cssearth/bake/objects/layers/terrestrial';
+import { readPdfImage } from '../../sources/index.ts';
+import { lamBytes } from './lam.ts';
+import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForLens, observerCaster, turnedOrientation, type TurnableCaster } from '../layers/terrestrial/index.ts';
+import { decodeCalibratedCamera, loadCameraShape } from '../geometry/index.ts';
+import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from '../layers/terrestrial/index.ts';
 
-const ROOT = resolve(import.meta.dirname, '../..');
 const SWEEP = { from: -30, to: 30, step: 2 };
 const round = (value: number, digits = 3) => Number(value.toFixed(digits));
 const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
@@ -29,7 +28,8 @@ const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
 const UNPINNED = '0'.repeat(64);
 
 /** The measurement for a body's package, or for any source directory laid out like one, such as a setup run's scratch copy. */
-export async function measurePublishedComparison(objectId: string, { adopt = false, sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source') } = {}) {
+/** `root` is the checkout the body's package, orientation and camera inputs are read from; the command passes it in. */
+export async function measurePublishedComparison(objectId: string, { root, adopt = false, sourceDirectory = resolve(root, 'src/objects', objectId, 'source') }: { root: string; adopt?: boolean; sourceDirectory?: string }) {
   const specPath = resolve(sourceDirectory, COMPARISON_SPEC_FILE);
   const stated = JSON.parse(await readFile(specPath, 'utf8')), spec = parseComparisonSpec(stated);
   const { record, recipe, frames } = await loadObserverCameraInputs(sourceDirectory);
@@ -44,10 +44,10 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   const figure: Raster = image, cell = columnCells(figure, spec);
 
   // The native outline over a sweep of rotational phase, through the same derivation the recipe's cameras come from.
-  const base = await loadOrientation(sourceDirectory, record.rotation, ROOT);
+  const base = await loadOrientation(sourceDirectory, record.rotation, root);
   const sweep: Record<string, number> = {}; let atZero: DerivedCamera[] = [];
   for (let offset = SWEEP.from; offset <= SWEEP.to; offset += SWEEP.step) {
-    const derived = await deriveObserverCameras(sourceDirectory, record, frames, mesh, ROOT, { orientation: offset === 0 ? base : turnedOrientation(base, offset) });
+    const derived = await deriveObserverCameras(sourceDirectory, record, frames, mesh, root, { orientation: offset === 0 ? base : turnedOrientation(base, offset) });
     sweep[offset] = round(derived.reduce((sum, camera) => sum + camera.limb.residualPixels, 0) / derived.length);
     if (offset === 0) atZero = derived;
   }
@@ -133,19 +133,4 @@ async function evidenceImage(result: Awaited<ReturnType<typeof measurePublishedC
   }
   const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><text x="2" y="20" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#e6e6e6">Paper photographs, with the outlines of <tspan fill="#ffb000">the paper's model</tspan> and <tspan fill="#00dcff">ours</tspan> centred on each</text></svg>`;
   await sharp(canvas, { raw: { width, height, channels: 3 } }).composite([{ input: Buffer.from(svg) }]).webp({ quality: 86 }).toFile(path);
-}
-
-if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
-  const [objectId, flag] = process.argv.slice(2);
-  if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/published-comparison.mts <object-id> [--write]'); process.exit(2); }
-  const result = await measurePublishedComparison(objectId, { adopt: flag === '--write' }), { evidence } = result;
-  for (const c of evidence.columns) console.log(`${c.label}  overlap with the paper's model ${c.overlapWithModel}, with its photograph ${c.overlapWithPhotograph}, same shape at both scales ${c.sameShapeOverlap}; best turn ${c.bestTurnDegrees}°; image turn onto the model ${c.imageTurnDegrees.model}°, onto the photograph ${c.imageTurnDegrees.photograph}°; axis ours ${c.axis.oursDegrees}° against ${c.axis.paperDegrees}° (${c.axis.differenceDegrees}°)`);
-  const o = evidence.nativeOutline;
-  console.log(`native outline over ${o.frames} frames: ${o.residualPixelsAtZero} px at our phase, smallest at ${o.bestOffsetDegrees}°`);
-  if (flag === '--write') {
-    await writeComparisonEvidence(result, resolve(ROOT, 'src/objects', objectId, 'evidence'));
-    const readmePath = resolve(ROOT, 'src/objects', objectId, 'README.md'), { readme, replaced } = withComparisonBlock(await readFile(readmePath, 'utf8'), comparisonBlock(parseComparisonEvidence(evidence)));
-    if (replaced) { await writeFile(readmePath, readme); console.log(`Wrote the comparison block into ${objectId}/README.md.`); }
-    console.log(`Wrote evidence/published-comparison.json and its image for ${objectId}.`);
-  }
 }
