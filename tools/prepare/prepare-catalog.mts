@@ -110,7 +110,11 @@ async function readLensVolumes(entries: readonly CatalogEntry[], projectRoot: st
  * overview reads its volume directly. */
 async function readLocalGroupGalaxies(projectRoot: string) {
   const recipePath = 'src/objects/local-group/source/catalogue.json';
-  const recipe: unknown = JSON.parse(await readFile(resolve(projectRoot, recipePath), 'utf8'));
+  let text: string;
+  // A project without the Local Group object has no Local Group galaxies to frame.
+  try { text = await readFile(resolve(projectRoot, recipePath), 'utf8'); }
+  catch (error) { if (hasErrorCode(error, 'ENOENT')) return {}; throw error; }
+  const recipe: unknown = JSON.parse(text);
   if (!isRecord(recipe) || !isRecord(recipe.detailObjects)) throw new TypeError(`${recipePath}: detailObjects is missing.`);
   const galaxies: Record<string, { originM: unknown; radiusM: number }> = {};
   for (const [row, detail] of Object.entries(recipe.detailObjects)) {
