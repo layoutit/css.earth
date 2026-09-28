@@ -75,6 +75,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/prepare/astronomy',
   'tools/prepared',
   'tools/references',
+  'tools/sources',
   'tools/spice',
 ];
 
