@@ -5,7 +5,7 @@
  * Each host is drafted again from the NASA Exoplanet Archive (from-archive.mts), as if the universe held none of it, and only the
  * drafted fields are written back: the card and introduction with their archive locator in text.json, the stored spec and the
  * README's opening, and a planet's radius and mass facts in the units hosted.mts gives them. Orbits, lenses and every other file
- * stay as they are, so a template change is not a regeneration. Nothing is baked here (tools/prepare/prepare-object.mts does it). */
+ * stay as they are, so a template change is not a regeneration. Nothing is baked here (packages/bake/cli/prepare-object.mts does it). */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
