@@ -3,7 +3,7 @@
  * The EHT image of a black hole, made the way its collaboration made it: EHT's own eht-imaging pipeline, run on the
  * released calibrated data for a drawn sample of its published Top Set parameter combinations, and averaged.
  *
- *   node tools/objects/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]
+ *   node packages/bake/authoring/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]
  *
  * The recipe is the object's `source/preparation/eht-topset.json`: the data and pipeline releases by commit and git blob id,
  * the one change made to the pipeline, the toolchain it needs and the drawn combinations. Files are fetched from the releases
@@ -22,10 +22,10 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 interface ReleaseFile { readonly role: string; readonly path: string; readonly blob: string }
 interface Release { readonly repository: string; readonly commit: string; readonly files: readonly ReleaseFile[] }
 
-const root = resolve(import.meta.dirname, '../../..');
+const root = resolve(import.meta.dirname, '../../../..');
 const args = process.argv.slice(2), objectId = args.find(arg => !arg.startsWith('--') && !/^\d+$/u.test(arg) && !arg.includes('/'));
 const option = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
-if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Usage: node tools/objects/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]');
+if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Usage: node packages/bake/authoring/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]');
 const python = option('python') ?? resolve(root, 'output/toolchains/ehtim/env/bin/python');
 const workers = Number(option('workers') ?? 2);
 if (!Number.isSafeInteger(workers) || workers < 1) throw new Error(`--workers is a positive integer, not ${option('workers')}.`);

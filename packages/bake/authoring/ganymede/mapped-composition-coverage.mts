@@ -71,7 +71,7 @@ export async function ganymedeCompositionCoverage(root:string,fitPath:string){
     throw new Error('Published coverage relationship changed.');
   return {
     schema:'cssearth-ganymede-sphere-composition-coverage@1',
-    command:'node --experimental-strip-types tools/objects/acquisition/mapped-composition-coverage.mts output/moon-composition/source-review src/objects/ganymede/source/composition/fit_SPHERE.json.gz > src/objects/ganymede/evidence/composition/registration.json',
+    command:'node --experimental-strip-types packages/bake/authoring/ganymede/mapped-composition-coverage.mts output/moon-composition/source-review src/objects/ganymede/source/composition/fit_SPHERE.json.gz > src/objects/ganymede/evidence/composition/registration.json',
     grid:{latitudeNodes:'-90 through 89 degrees',longitudeNodes:'0 through 359 degrees east-positive',cells},
     fittingBandsMicrometres:[.95,1.65],
     sources:sources.map(source=>({...source,validNodes:count(reflectanceMasks[sources.indexOf(source)])})),

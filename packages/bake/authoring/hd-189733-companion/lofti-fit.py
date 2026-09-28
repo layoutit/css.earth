@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fit the orbits a wide binary's measurements allow, with LOFTI (Pearce et al. 2020).
 
-    python tools/objects/binary-orbits/lofti-fit.py <mode> <orbits> <output.txt>
+    python packages/bake/authoring/hd-189733-companion/lofti-fit.py <mode> <orbits> <output.txt>
 
 LOFTI ("Orbits for the Impatient") draws orbits from the standard priors, scales and rotates each one onto the measured
 separation and position angle, and keeps it with the probability of its chi-squared against the measured relative proper
