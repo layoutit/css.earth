@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4357-ab7fa4",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dietz et al. (2020): The Metallicity Gradient and Complex Formation History of the Outermost Halo of the Milky Way",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1911.11140"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ab7fa4"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020ApJ...894...34D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...894...34D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ab7fa4",
+      "label": "The Astrophysical Journal 894 34"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...894...34D",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dietz et al. (2020), The Astrophysical Journal 894 34",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020ApJ...894...34D"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 894 34",
+  "creators": [
+    "Sarah E. Dietz",
+    "Jinmi Yoon",
+    "Timothy C. Beers",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}
