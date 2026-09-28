@@ -54,6 +54,19 @@
       "revisitWhen": "The native single-exposure/subwindow calibration is implemented and checked against the archive, followed by model-registration and transfer checks."
     },
     {
+      "id": "amica-backplane-remainder",
+      "subject": "Other products in Hayabusa AMICA Images with Geometry Backplanes V1.0 (HAY-A-AMICA-3-AMICAGEOM-V1.0)",
+      "status": "excluded",
+      "finding": "This is the same data set the AMICA mosaic already uses, so the question was what its other products would add. 718 of the 773 Gaskell-controlled labels were read; the other 55 kept returning HTTP 503. They hold 663 v-band frames and 55 in other filters (W 16, P 14, B 11, UL 5, X 5, ZS 4). The Sun stays within 0.40-1.82 degrees of Itokawa's equator in every v-band label, and the camera within -20.6 to +22.9 degrees latitude. The display map leaves 919,236 of 5,836,800 atlas texels without a photograph (15.7%, about 62,400 m2). 63% of that lies south of -20 degrees latitude and 30% north of +20. A 43-frame sample was streamed, one frame per observing period, latitude band and 60-degree longitude sector, closest first. Each frame's XYZ, incidence and emission backplanes were matched to those texels in 1 m cells, under the mosaic's own limits (70 degrees incidence and emission, gain 1.5). Together the 43 frames reach 10.6% of the missing area, about 6,600 m2 or 1.7% of the surface. No single frame reaches more than 1.8%. This is an upper bound: the same test credits the ten frames already in the mosaic with 2.8% of texels the full preparation rejected. It also skips the visibility, 5 m separation and 1.35 overlap-gain checks, which earlier rejected 2495806075 and 2506694595. The sample's September and 1 October frames measure 0.72-0.78 m per pixel on their backplanes; later October frames measure 0.31-0.81 m. The atlas texel is 0.26 m (396,465 m2 over 5,836,800 interior texels), and the current best frame is 0.316 m, so these frames are coarser than both. The labels for the 1 October descent give ranges down to 0.187 km, which would mean 0.019 m pixels. That frame's own backplane gives 0.78 m, so the label ranges are not a usable resolution measure. The only sampled frame finer than the atlas is November 2530292409 at 0.126 m. It reaches 9 m2 of the missing area. Its detector format was not checked because the archive returned HTTP 503. November frames otherwise fall in the single-exposure class this ledger already defers. Two sampled products, 2486649845 and 2516321279, gave pixel scales of zero and reached nothing. Most of the missing terrain stays out of reach because the Sun sat near the equator for the whole mission.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/index/index.tab",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2474616313_v_ddr.lbl",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2422895458_v_ddr.lbl",
+        "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2530292409_v_ddr.lbl"
+      ],
+      "revisitWhen": "A qualified reader for the November single-exposure frames together with a finer atlas, or a lighting treatment that accepts incidence above 70 degrees on the polar terrain."
+    },
+    {
       "id": "sbmt-native-preparation-oracle",
       "subject": "Native SBMT preparation comparison",
       "status": "unresolved",

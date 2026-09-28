@@ -73,6 +73,11 @@
               "material": "lighting"
             },
             {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "spectral-slope",
               "source": "content",
               "material": "lighting"

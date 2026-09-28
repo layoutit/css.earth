@@ -9,7 +9,7 @@
 | Infrared and Ice absorption | [Nantes Cassini VIMS archive](https://vims.univ-nantes.fr/), 11 June 2004, observation IR 1465671822_1. False-color infrared channels and continuum-relative near-2.02 µm absorption use 41 accepted native pixels. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PHOEBE/target) Phoebe centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json). NASA Photojournal figure PIA06403 was checked on 2026-09-28 as a possible map view. It did not qualify: it has a 70-115 K colour scale but no coordinate labels on its grids. The ledger gives the details.
 
 ## Evidence
 

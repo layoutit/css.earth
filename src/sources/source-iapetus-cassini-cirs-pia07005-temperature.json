@@ -1,0 +1,35 @@
+{
+  "id": "source-iapetus-cassini-cirs-pia07005-temperature",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PIA07005: Iapetus Temperature Map (cleaned plotted frame)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/photojournal/iapetus-temperature-map/",
+      "label": "NASA release and caption"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/iapetus/source/manifest.json",
+      "locator": "/inputs/13"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL/GSFC; cssEarth crop and annotation mask",
+      "scope": "The cassini cirs pia07005 temperature input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA/JPL image use policy; retain the published credit",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

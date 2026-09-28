@@ -1,7 +1,7 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
+import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { readPreparedObjects } from '@cssearth/objects/node';
@@ -99,6 +99,18 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       // Only notable asteroids are map targets: JPL mission targets and those with real imagery. The rest are plain dots.
       const imagery = (discoveries[object.id] as { imagery?: unknown } | undefined)?.imagery === true;
       if (object.classification === 'asteroid' && !isJplMissionTarget(object) && !imagery) body.plainDot = true;
+      // A star's dot is its colour dimmed by its luminosity, L/L☉ = (R/R☉)²(T/T☉)⁴ from the radius and effective temperature
+      // its package cites, against the IAU 2015 nominal solar values. Baked here, so the map writes nothing per frame for it.
+      // A star whose package cites neither keeps its full colour.
+      if (object.classification === 'star' && body !== input.focus && typeof body.color === 'string') {
+        const measured = await readFile(resolve(objectsRoot, object.id, 'source/measurements.json'), 'utf8').then(text => JSON.parse(text) as Record<string, unknown>,
+          (error: unknown) => { if (isMissingFile(error)) return undefined; throw error; });
+        const radiusKm = measured?.radiusKm, temperatureK = measured?.effectiveTemperatureK;
+        if (typeof radiusKm === 'number' && typeof temperatureK === 'number') {
+          const luminosity = (radiusKm * M_PER_KM / SOLAR_RADIUS_M) ** 2 * (temperatureK / SOLAR_EFFECTIVE_TEMPERATURE_K) ** 4;
+          body.dotColor = dimHex(body.color, starDotBrightness(luminosity));
+        }
+      }
     };
     await present(input.focus);
     for (const body of input.bodies as Record<string, unknown>[]) await present(body);
@@ -252,6 +264,16 @@ function positionToleranceM(a: Vector3, b: Vector3): number {
   return Math.max(.001, 8 * Number.EPSILON * Math.max(...a.map(Math.abs), ...b.map(Math.abs)));
 }
 
+/** Presentation choices, not measurements: a star of a thousand Suns or more draws its full colour, one of ten or fewer this
+ * share of it, and the magnitudes between fall evenly. Over the black sky, scaling the colour is the dot at that opacity. */
+const STAR_DOT_FULL_LUMINOSITY = 1000, STAR_DOT_FLOOR_LUMINOSITY = 10, STAR_DOT_FLOOR_BRIGHTNESS = 0.6;
+function starDotBrightness(luminositySolar: number): number {
+  const fall = Math.max(0, Math.min(1, Math.log10(STAR_DOT_FULL_LUMINOSITY / luminositySolar) / Math.log10(STAR_DOT_FULL_LUMINOSITY / STAR_DOT_FLOOR_LUMINOSITY)));
+  return 1 - (1 - STAR_DOT_FLOOR_BRIGHTNESS) * fall;
+}
+function dimHex(hex: string, brightness: number): string {
+  return `#${[1, 3, 5].map(at => Math.round(parseInt(hex.slice(at, at + 2), 16) * brightness).toString(16).padStart(2, '0')).join('')}`;
+}
 function isMissingFile(error: unknown): boolean {
   return typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT';
 }

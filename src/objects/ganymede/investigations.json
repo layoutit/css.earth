@@ -181,6 +181,28 @@
         "https://trek.nasa.gov/ganymede/",
         "src/objects/ganymede/evidence/dlr-juno/measure.json"
       ]
+    },
+    {
+      "id": "photojournal-pia01232-ppr-temperature",
+      "subject": "NASA PIA01232 Temperature Map of Ganymede (Galileo PPR)",
+      "status": "excluded",
+      "finding": "A globe picture (432 x 540 px) with an unlabelled graticule. The caption places it only relative to another image (rotated about 30 degrees west), and it states the date as 26 June 1996 but also the seventh orbit, which disagree. The 90-160 K bar is present, but the map frame and observation cannot be fixed.",
+      "revisitWhen": "The PPR observation is identified in the PDS archive and mapped, or a labelled-grid version of the figure is found.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/temperature-map-of-ganymede/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia01/pia01232/PIA01232.tif"
+      ]
+    },
+    {
+      "id": "photojournal-pia00500-nims-surface",
+      "subject": "NASA PIA00500 NIMS Ganymede Surface Map",
+      "status": "excluded",
+      "finding": "Three globe pictures (1950 x 1500 px) with unlabelled graticules. The NIMS panels have no colour scale: the caption only says brighter means more water, red means minerals and blue shades mean grain size.",
+      "revisitWhen": "The NIMS cubes behind the panels are identified and mapped with defined quantities.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/nims-ganymede-surface-map/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia00/pia00500/PIA00500.tif"
+      ]
     }
   ]
 }

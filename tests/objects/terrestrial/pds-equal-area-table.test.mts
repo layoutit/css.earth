@@ -67,3 +67,19 @@ test('equal-area lens samples the containing pixel, scales units and reports the
     await assert.rejects(loadPdsEqualAreaTable(root,{...lens,noData:0}),/noDataEvidence/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
+
+// The Dawn GRaND Ceres maps (volume DWNCGRD_2) describe their columns inline, without COLUMN_NUMBER or ^STRUCTURE.
+const inline=label.replace('  ^STRUCTURE = "TEST.FMT"\n','').replace('END_OBJECT = TABLE',structure.replace(/\n *COLUMN_NUMBER = \d+/g,'')+'\nEND_OBJECT = TABLE');
+
+test('equal-area table reads COLUMN objects from its own label when the recipe names no format file',async()=>{
+  const parsed=parsePdsEqualAreaTable(inline,'',null,table,policy,'test');
+  assert.deepEqual([...parsed.values],[1.5,2.5,0,11.25]);
+  assert.throws(()=>parsePdsEqualAreaTable(label,structure,null,table,policy,'test'),/inline columns/);
+  assert.throws(()=>parsePdsEqualAreaTable(inline,structure,'test.fmt',table,policy,'test'),/STRUCTURE/);
+  const root=await mkdtemp(join(tmpdir(),'pds-equal-area-inline-'));
+  try{
+    await writeFile(join(root,'t.lbl'),inline);await writeFile(join(root,'t.tab'),table);
+    const surface=await loadPdsEqualAreaTable(root,{path:'t.tab',labelPath:'t.lbl',...policy,sampling:'nearest'});
+    assert.equal(surface.sample(-90,10),2.5);assert.equal(surface.sample(0,60),11.25);
+  }finally{await rm(root,{recursive:true,force:true});}
+});

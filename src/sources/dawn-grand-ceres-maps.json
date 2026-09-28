@@ -1,0 +1,113 @@
+{
+  "id": "dawn-grand-ceres-maps",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Dawn GRaND Ceres derived maps: hydrogen, iron and thermal plus epithermal neutron counts (DAWN GRaND Ceres Bundle, data_derived collection)",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26033/hf9h-pt31"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-grand-ceres:data_derived:grd_hydrogen_map::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-grand-ceres:data_derived:grd_iron_map::1.0"
+    },
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dawn-grand-ceres:data_derived:grd_tpe_neutron_counts_map::1.0"
+    },
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-GRAND-5-CERES-HYDROGEN-MAP_V1.0"
+    },
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-GRAND-5-CERES-IRON_MAP_V1.0"
+    },
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-GRAND-5-CERES-TPE-COUNTS-V1.0"
+    }
+  ],
+  "creators": [
+    "T. H. Prettyman",
+    "N. Yamashita"
+  ],
+  "publisher": "NASA Planetary Data System",
+  "publicationDate": "2021",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.26033/hf9h-pt31",
+      "label": "DAWN GRaND Ceres Bundle 1.0"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/data_derived/",
+      "label": "PDS4 data_derived collection"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/DATA/",
+      "label": "PDS3 volume DWNCGRD_2: the same tables with their PDS3 labels"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/science.aah6765",
+      "label": "Prettyman et al. (2017), Extensive water ice within Ceres' aqueously altered regolith: evidence from nuclear spectroscopy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/bundle_dawn-grand-ceres.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, Citation_Information (Prettyman, T.H.; Yamashita, N.; 2021; doi 10.26033/hf9h-pt31)"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-ceres_1.0/document/Dawn_GRaND_Ceres_bundle_description.pdf",
+      "checkedOn": "2026-09-28",
+      "locator": "Data Derived Collection"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/grand/DWNCGRD_2/CATALOG/",
+      "checkedOn": "2026-09-28",
+      "locator": "GRD_HYDROGEN_MAP_DATASET.CAT, GRD_IRON_MAP_DATASET.CAT, GRD_TPE_NEUTRON_COUNTS_MAP_DATASET.CAT: DATA_SET_DESC"
+    },
+    {
+      "path": "src/objects/ceres/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "T. H. Prettyman and N. Yamashita (Planetary Science Institute), Dawn GRaND team; NASA Planetary Data System Small Bodies Node.",
+      "scope": "The Ceres hydrogen, iron and thermal plus epithermal neutron count maps.",
+      "evidence": "PDS4 bundle Citation_Information; PDS3 labels PRODUCER_FULL_NAME and PRODUCER_INSTITUTION_NAME."
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly archived NASA mission scientific data; preserve the producer and PDS citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://pds.nasa.gov/datastandards/documents/policy/"
+    },
+    {
+      "kind": "limitation",
+      "text": "Each map has 110 twenty-degree quasi-equal-area pixels; the archive gives a spatial resolution of about 600 km full width at half maximum. The hydrogen map is a lower bound. The labels give east longitude from -180 to 180 degrees without naming the Ceres longitude system.",
+      "scope": "All three maps.",
+      "evidence": "PDS4 and PDS3 label TABLE descriptions; GRD_HYDROGEN_MAP_DATASET.CAT."
+    },
+    {
+      "kind": "limitation",
+      "text": "The PDS3 label of GRD_TPE_NEUTRON_COUNTS_MAP gives MD5_CHECKSUM -1; the PDS4 label gives d0554d60c20cb8a02acc529d169ddced, which the archived table matches.",
+      "scope": "Neutron count table identity.",
+      "evidence": "DWNCGRD_2/DATA/HYDROGEN/GRD_TPE_NEUTRON_COUNTS_MAP.LBL; dawn-grand-ceres_1.0/data_derived/GRD_TPE_NEUTRON_COUNTS_MAP.xml"
+    }
+  ]
+}

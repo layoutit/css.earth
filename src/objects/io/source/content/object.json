@@ -221,6 +221,87 @@
         "noData": true
       },
       {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "io-lens-elevation.webp",
+        "surface": "io-elevation@2x.webp",
+        "poles": "io-poles-elevation@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "labels": [
+            "−2",
+            "0",
+            "2",
+            "4",
+            "6"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM",
+          "recipe": {
+            "palette": [
+              [
+                28,
+                85,
+                153
+              ],
+              [
+                187,
+                171,
+                128
+              ],
+              [
+                201,
+                131,
+                63
+              ],
+              [
+                170,
+                62,
+                36
+              ],
+              [
+                92,
+                26,
+                18
+              ]
+            ],
+            "labels": [
+              "−2",
+              "0",
+              "2",
+              "4",
+              "6"
+            ]
+          }
+        },
+        "source": {
+          "id": "trek-io-stereo-dem-1km",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1002/2013JE004591"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Stereo heights from Voyager and Galileo image pairs"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "54% of the surface; none north of 66.8° N"
+          },
+          {
+            "id": "datum",
+            "label": "Heights",
+            "value": "Relative to Io's limb-profile ellipsoid"
+          }
+        ],
+        "notes": "Stereo heights from Voyager and Galileo image pairs, fitted to Galileo limb profiles (White et al. 2014). Heights follow Io's limb-profile ellipsoid, not a sphere. Plains were smoothed; mountains, layered plains and some paterae keep finer relief. Color saturates below −2 km and above 6 km; Boösaule Montes reaches 16.9 km. Fixed northwest relief lighting shows slopes. Gray grid marks the 46% of Io without stereo heights.",
+        "noData": true
+      },
+      {
         "id": "spectral-slope",
         "label": "Spectral slope",
         "thumbnail": "io-lens-spectral-slope.webp",
@@ -580,6 +661,12 @@
       "role": "surface",
       "description": "Interpreted geologic map and GIS · SIM3168",
       "href": "https://pubs.usgs.gov/sim/3168/"
+    },
+    {
+      "label": "Stereo DEM",
+      "role": "surface",
+      "description": "Voyager and Galileo stereo terrain model · White et al. (2014)",
+      "href": "https://doi.org/10.1002/2013JE004591"
     },
     {
       "label": "VLT / MUSE",

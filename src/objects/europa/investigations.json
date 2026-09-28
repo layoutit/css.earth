@@ -181,6 +181,39 @@
         "https://trek.nasa.gov/tiles/Europa/EQ/JUNO_JNC_ClrMosaic_4340mpp_V04/1.0.0/WMTSCapabilities.xml",
         "https://doi.org/10.3847/PSJ/ad24f4"
       ]
+    },
+    {
+      "id": "photojournal-pia00846-nims-e4",
+      "subject": "NASA PIA00846 NIMS E4 Observations of Europa Trailing Hemisphere",
+      "status": "excluded",
+      "finding": "Orthographic globe with a labelled graticule (0, 315, 270 W; +-45). The NIMS patches E4ENSUCOMP01-03 are shown in grey at 0.7 micrometres with no scale or units, over a 1979 Voyager mosaic.",
+      "revisitWhen": "The E4ENSUCOMP NIMS cubes are mapped from the archive, like the included 17ENGLOBAL observations.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/nims-e4-observations-of-europa-trailing-hemisphere/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia00/pia00846/PIA00846.tif"
+      ]
+    },
+    {
+      "id": "photojournal-pia01098-tyre-composition",
+      "subject": "NASA PIA01098 A Compositional Map of the Tyre Region of Europa",
+      "status": "excluded",
+      "finding": "No grid or coordinates in the image. The caption gives only the centre (34, 146.5, no longitude direction), the width (214 km) and 'projected like a map', without naming the projection. The colours are qualitative (blue salts, yellow-orange ice) with no scale.",
+      "revisitWhen": "The NIMS observation is mapped from the archive with a defined quantity.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/a-compositional-map-of-the-tyre-region-of-europa/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia01/pia01098/PIA01098.tif"
+      ]
+    },
+    {
+      "id": "photojournal-pia26104-manannan-water",
+      "subject": "NASA PIA26104 Map of Water Signatures at Europa's Manannan Crater",
+      "status": "excluded",
+      "finding": "No grid, no coordinates and no colour scale. The caption describes colours only qualitatively (blue ice, yellow and red hydrates) and names no observation.",
+      "revisitWhen": "The study's NIMS map is released with coordinates and a quantity scale.",
+      "evidence": [
+        "https://science.nasa.gov/photojournal/map-of-water-signatures-at-europas-manannan-crater/",
+        "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia26/pia26104/PIA26104.tif"
+      ]
     }
   ]
 }

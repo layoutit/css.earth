@@ -96,6 +96,14 @@
       ],
       "path": "features/IAPETUS_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IAPETUS_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "cirs-temperature-figure"
+      ],
+      "path": "figures/PIA07005.tif",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia07/pia07005/PIA07005.tif"
     }
   ]
 }
