@@ -10,8 +10,8 @@ import { sunBarycentricAu, M_PER_AU } from '@cssearth/astronomy';
 const sourceDirectory = 'src/objects/milky-way/source';
 const readRecipe = async () => parseVolumeRecipe(JSON.parse(await readFile(`${sourceDirectory}/volume.json`, 'utf8')) as unknown);
 
-test('OpenSpace Galactic placement, rotation, physical extent and Sun offset match its pinned asset', async () => {
-  const descriptor=JSON.parse(await readFile('src/objects/milky-way/object.json','utf8')) as {properties:{volume:{originM:number[];epochJdTt:number;localToReferenceXyzw:number[];metersPerUnit:number;boundsUnits:{min:number[];max:number[]}}}};
+test('the galaxy sits on Sgr A* in the Galactic plane: OpenSpace extent and in-plane rotation, measured centre, no tilt', async () => {
+  const descriptor=JSON.parse(await readFile('src/objects/milky-way/object.json','utf8')) as {properties:{volume:{referenceFrame:string;originM:number[];epochJdTt:number;localToReferenceXyzw:number[];metersPerUnit:number;boundsUnits:{min:number[];max:number[]}}}};
   const provenance=JSON.parse(await readFile(`${sourceDirectory}/provenance.json`,'utf8')) as {frame:{centerIcrfM:number[];rotationRadians:number[];fullExtentM:number[]};references:{path:string;sha256:string}[]};
   const asset=await readFile(`${sourceDirectory}/openspace/volume.asset`,'utf8');
   assert.match(asset,/KiloParsec = 3\.086E19/);assert.match(asset,/8 \* KiloParsec, 0, 0/);
@@ -23,23 +23,32 @@ test('OpenSpace Galactic placement, rotation, physical extent and Sun offset mat
     -.4838350155487132,.7469822444972189,.4559837761750669];
   const recorded=provenance.frame.centerIcrfM;
   for(let axis=0;axis<3;axis++) assert(Math.abs(recorded[axis]!/(8*3.086e19)-gal[axis*3]!)<1e-14);
-  const barycentric=sunBarycentricAu(descriptor.properties.volume.epochJdTt);
-  const expected=recorded.map((value,axis)=>value-barycentric[axis]!*M_PER_AU);
-  for(let axis=0;axis<3;axis++) assert(Math.abs(descriptor.properties.volume.originM[axis]!-expected[axis]!)<=1e-12*Math.abs(expected[axis]!),`originM[${axis}]`);
-  assert.notDeepEqual(recorded,expected,'dropping the barycentric conversion must be detectable');
+  // OpenSpace centres the model 8 kpc down the Galactic x axis. The descriptor instead centres it on the Sgr A* package,
+  // placed at the GRAVITY (2022) distance in the same frame and epoch, so the bulge surrounds the black hole it draws.
   const volume=descriptor.properties.volume;
+  const sgr=(JSON.parse(await readFile('src/objects/sgr-a-star/object.json','utf8')) as {properties:{worldFrame:{referenceFrame:string;epochJdTt:number;originM:number[]}}}).properties.worldFrame;
+  assert.equal(sgr.referenceFrame,volume.referenceFrame); assert.equal(sgr.epochJdTt,volume.epochJdTt);
+  assert.deepEqual(volume.originM,sgr.originM,'the volume centre is the Sgr A* package position');
+  const barycentric=sunBarycentricAu(volume.epochJdTt);
+  const openSpace=recorded.map((value,axis)=>value-barycentric[axis]!*M_PER_AU);
+  const offsetPc=Math.hypot(...openSpace.map((value,axis)=>value-volume.originM[axis]!))/3.0856775814913673e16;
+  assert(offsetPc>250&&offsetPc<300,`OpenSpace's 8.00 kpc centre lies ${offsetPc} pc from Sgr A* at 8.28 kpc`);
   for(let axis=0;axis<3;axis++) assert.equal((volume.boundsUnits.max[axis]!-volume.boundsUnits.min[axis]!)*volume.metersPerUnit,provenance.frame.fullExtentM[axis]);
-  // Apply Z then Y then X to basis vectors, independent of preparation's matrix-to-quaternion calculation.
+  // OpenSpace's asset tilts the model 0.96 degrees out of the Galactic plane (Ry = 3.1248, not pi), which put the Sun
+  // 134 pc below the disc. The descriptor keeps its x and z rotations and lies in the plane (Ry = pi). Apply Z then Y
+  // then X to basis vectors, independent of preparation's matrix-to-quaternion calculation.
+  const rotation=[provenance.frame.rotationRadians[0]!,Math.PI,provenance.frame.rotationRadians[2]!];
+  assert.equal(provenance.frame.rotationRadians[1],3.1248,'the source record keeps the asset\'s own tilt');
   const [qx,qy,qz,qw]=volume.localToReferenceXyzw as [number,number,number,number];
   for(const basis of [[1,0,0],[0,1,0],[0,0,1]]) {
     let [x,y,z]=basis as [number,number,number];
-    for(const axis of [2,1,0]) { const a=provenance.frame.rotationRadians[axis]!,c=Math.cos(a),s=Math.sin(a);
+    for(const axis of [2,1,0]) { const a=rotation[axis]!,c=Math.cos(a),s=Math.sin(a);
       if(axis===2) [x,y]=[c*x-s*y,s*x+c*y]; else if(axis===1) [x,z]=[c*x+s*z,-s*x+c*z]; else [y,z]=[c*y-s*z,s*y+c*z]; }
     const wanted=[0,1,2].map(row=>gal[row*3]!*x+gal[row*3+1]!*y+gal[row*3+2]!*z);
     const [bx,by,bz]=basis as [number,number,number];
     const tx=2*(qy*bz-qz*by),ty=2*(qz*bx-qx*bz),tz=2*(qx*by-qy*bx);
     const actual=[bx+qw*tx+qy*tz-qz*ty,by+qw*ty+qz*tx-qx*tz,bz+qw*tz+qx*ty-qy*tx];
-    assert(Math.hypot(...actual.map((v,i)=>v-wanted[i]!))<1e-13,'raw volume axes must use the published rotation, not the retired model orientation');
+    assert(Math.hypot(...actual.map((v,i)=>v-wanted[i]!))<1e-13,'volume axes must use the OpenSpace rotation laid into the Galactic plane');
   }
 });
 

@@ -238,8 +238,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           setOverview(enabled: boolean, scope?: string) {
             overview = enabled;
             spatial.setOverview(enabled);
-            // The background galaxy is an overview destination, not a catalogue focus.
-            background.setDetail(enabled && scope === plan.volume.objectId);
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

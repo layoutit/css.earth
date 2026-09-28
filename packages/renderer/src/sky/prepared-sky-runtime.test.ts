@@ -116,7 +116,7 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
   mounted.destroy(); expect(catalogRuntime.destroy).toHaveBeenCalledTimes(1);
 });
 
-test('the galaxy overview enables its depth layers and leaving it restores populated distant views', () => {
+test('the galaxy is its bulge slices at every overview scope, with no disc plane and no impostor views', () => {
   const base = new URL('../../../../src/', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
@@ -126,20 +126,18 @@ test('the galaxy overview enables its depth layers and leaving it restores popul
   try {
     const root = mounted.root as unknown as FakeElement;
     const image = root.children.find(node => node.className === 'prepared-volume-context')!.children[0]!;
-    const detail = image.children.find(node => node.className === 'css-volume-detail')!;
-    const distant = image.children.find(node => node.className === 'css-volume-impostors')!;
+    const descendants = (node: FakeElement): FakeElement[] => node.children.flatMap(child => [child, ...descendants(child)]);
+    expect(volume.impostors, 'the prepared galaxy carries no impostor views').toBeUndefined();
+    const radiusM = Math.hypot(...volume.frame.boundsUnits.max) * volume.frame.metersPerUnit;
     const camera: WorldCameraPose = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
-      pose: { positionM: [volume.frame.originM[0], volume.frame.originM[1],
-        volume.frame.originM[2] + 2.5 * volume.impostors!.radiusUnits * volume.frame.metersPerUnit], orientationXyzw: [0, 0, 0, 1] } };
+      pose: { positionM: [volume.frame.originM[0], volume.frame.originM[1], volume.frame.originM[2] + 2.5 * radiusM], orientationXyzw: [0, 0, 0, 1] } };
     for (const scope of ['local-group', 'milky-way', 'system', 'milky-way', undefined]) {
       mounted.setOverview(scope !== undefined, scope);
-      // Catalogue camera publications must not clear the overview's detail selection.
       mounted.selectGalaxy(null);
       mounted.publish(camera, viewport, spatialFrame);
-      const selected = scope === 'milky-way';
-      expect(detail.style.display).toBe(selected ? 'block' : 'none');
-      expect(distant.style.display).toBe(selected ? 'none' : 'block');
-      if (!selected) expect(Number(distant.dataset.activeViews)).toBeGreaterThan(0);
+      const nodes = descendants(image);
+      expect(nodes.filter(node => node.dataset.volumeImpostor !== undefined)).toHaveLength(0);
+      expect(nodes.some(node => node.className === 'css-volume-camera')).toBe(true);
     }
   } finally { mounted.destroy(); }
 });
@@ -255,13 +253,10 @@ test.each([
   expect(volumeRoot.style.background).toBe('#000');
   expect(volumeRoot.style.transformStyle).toBe('flat');
   expect(volumeImage.style.transformStyle).toBe('flat');
-  // The galaxy is mounted through its level of detail: the slice stack sits under the detail container, beside the
-  // billboard views that present it from outside the galaxy.
-  const detailHost = volumeImage.children.find(node => node.className === 'css-volume-detail')!;
-  expect(volumeImage.children.some(node => node.className === 'css-volume-impostors')).toBe(true);
-  const projections = detailHost.children.filter(node => node.className === 'css-volume-projection');
-  const axes = projections.filter(node => node.dataset.volumePlanes === undefined);
-  expect(projections.filter(node => node.dataset.volumePlanes !== undefined)).toHaveLength(data.detailPlanes ? 1 : 0);
+  // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
+  expect(volumeImage.children.some(node => node.className === 'css-volume-impostors')).toBe(false);
+  const projections = volumeImage.children.filter(node => node.className === 'css-volume-projection');
+  const axes = projections;
   expect(axes).toHaveLength(3);
   for (const axis of axes) {
     expect(axis.children[0]!.style.opacity).toBeUndefined();

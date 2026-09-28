@@ -10,17 +10,6 @@ import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
 import { logarithmicFade, preparedVolumeOpacity } from './world-context/context-scale.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
-/** A galaxy seen from outside is one billboard: of its prepared impostor views only the face-on one, looking down the
- * axis the volume is thinnest along (its disc's normal), which the impostor projection turns to face the camera wherever
- * it stands. Blending the views nearest the camera superimposed differently shaped galaxies. */
-export function faceOnImpostorView(payload: PreparedCssVolume): string | undefined {
-  const impostors = payload.impostors;
-  if (!impostors) return undefined;
-  const { min, max } = payload.frame.boundsUnits;
-  const thinnest = [0, 1, 2].reduce((best, axis) => max[axis]! - min[axis]! < max[best]! - min[best]! ? axis : best, 0);
-  return impostors.views.reduce((best, candidate) => candidate.back[thinnest]! > best.back[thinnest]! ? candidate : best).id;
-}
-
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
   prefetchUrls, prefetchDistanceM }: {
@@ -63,11 +52,10 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       }
       stellarPoints = mountStellarPoints({ host: root, before: volumeHost, field: pointAppearance });
       lifetime.onDispose(() => stellarPoints?.destroy());
-      volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource, impostorView: faceOnImpostorView(payload) }, () => 1);
+      // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
+      volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
       lifetime.onDispose(() => volumeLayer?.destroy());
-      if (payload.impostors) volumeLayer.setDetail(false);
     },
-    setDetail(enabled: boolean) { if (!lifetime.disposed && payload.impostors) volumeLayer?.setDetail(enabled); },
     setStellarPointsEnabled(enabled: boolean) {
       const next = enabled === true;
       if (lifetime.disposed || stellarEnabled === next) return false;

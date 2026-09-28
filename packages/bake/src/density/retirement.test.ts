@@ -7,7 +7,6 @@ import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
 import { bundleRendererPackage } from '../preparation/bundle-renderer.ts';
 import { zstdCompressSync } from 'node:zlib';
-import sharp from 'sharp';
 import { encodeDensityKtx2 } from './acquisition.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.ts';
@@ -90,28 +89,21 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
       await assert.rejects(readFile(join(prepared, path)), { code: 'ENOENT' });
     assert.equal(await readFile(join(prepared, 'slices/z/unrelated.png'), 'utf8'), 'keep');
     const envelope = JSON.parse(await readFile(join(prepared, 'volume.json'), 'utf8')) as { data: { resources: { path: string; sha256: string }[] } };
-    // Three volume slabs and six sky faces in the recipe's WebP, and the 26 distant views every density volume hands off to,
-    // which share the nebulae's PNG impostor format.
+    // Three volume slabs and six sky faces in the recipe's WebP; a density volume bakes no impostor views.
     const paths = envelope.data.resources.map(resource => resource.path);
     assert.deepEqual(paths.filter(path => path.startsWith('slices/')), ['slices/x/00.webp', 'slices/y/00.webp', 'slices/z/00.webp']);
     assert.equal(paths.filter(path => /^sky\/[pn][xyz]\.webp$/u.test(path)).length, 6);
-    assert.equal(paths.filter(path => /^impostors\/view-[np0]{3}\.png$/u.test(path)).length, 26);
-    assert.equal(paths.length, 35);
+    assert.equal(paths.length, 9);
     for (const resource of envelope.data.resources) assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256);
-    const originalZ = await sharp(await readFile(join(prepared, 'slices/z/00.webp'))).ensureAlpha().raw().toBuffer();
     Object.assign(recipe, { hybrid: { coreRadiusUnits: .65, fadeStartUnits: .35 } });
     await prepare();
     const hybrid = JSON.parse(await readFile(join(prepared, 'volume.json'), 'utf8')).data;
-    assert.equal(hybrid.detailPlanes.length, 1);
-    assert.deepEqual(hybrid.detailPlanes[0].centerUnits, [0, 0, 0]);
-    assert.equal(hybrid.detailPlanes[0].widthPx, 8);
+    assert.equal(hybrid.detailPlanes, undefined, 'the bulge alone is drawn; the outer disc has no plane');
     assert.deepEqual(hybrid.frame.boundsUnits, bounds);
     assert(hybrid.stacks.every((stack: { leaves: { texturePath: string }[] }) => stack.leaves.length > 0 &&
       stack.leaves.every(leaf => leaf.texturePath.startsWith('core/slices/'))));
     await assert.rejects(readFile(join(prepared, 'slices/z/00.webp')), { code: 'ENOENT' });
-    const disc = await sharp(await readFile(join(prepared, 'outer-disc.png'))).ensureAlpha().raw().toBuffer();
-    assert.deepEqual(disc.subarray(0, 4), originalZ.subarray(0, 4), 'outer pixels retain the original source colors and alpha');
-    assert.equal(disc[(4 * 8 + 4) * 4 + 3], 0, 'the bulge is removed from the arm image');
+    await assert.rejects(readFile(join(prepared, 'outer-disc.png')), { code: 'ENOENT' });
     for (const resource of hybrid.resources) assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256);
     // Returning to an ordinary volume retires all previously published core slices.
     Reflect.deleteProperty(recipe, 'hybrid');

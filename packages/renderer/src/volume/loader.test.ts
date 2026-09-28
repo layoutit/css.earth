@@ -21,26 +21,19 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   expect(read).toHaveBeenCalledExactlyOnceWith(descriptor.prepared.url);
   // A sky with baked stars ships both cubes: the plain faces and the near ones.
   const slices = payload.stacks.flatMap(stack => stack.leaves);
-  const planes = payload.detailPlanes ?? [];
   const sky = [...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []];
   expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
-  // The published bank owns cropped bulge slices and one fixed arm plane;
-  // the full-galaxy bake is intermediate data, retired after the hybrid compile.
+  // The published bank owns cropped bulge slices only: no flat disc plane and no whole-galaxy impostor views.
+  // The full-galaxy bake is intermediate data, retired after the hybrid compile.
   const images = inventory.assets.filter(asset => asset.location === 'prepared' && /\.(?:png|webp)$/iu.test(asset.filename));
   expect(slices.map(leaf => leaf.texturePath).sort()).toEqual(images.map(asset => asset.filename).filter(path => path.startsWith('core/slices/')).sort());
-  expect(planes).toHaveLength(1);
-  expect(planes[0]).toMatchObject({ id: 'outer-disc', texturePath: 'outer-disc.png', centerUnits: [0, 0, 0] });
-  // The bank also carries one billboard view per prepared direction, which is what a distant camera renders
-  // instead of the slice stack.
-  const views = payload.impostors?.views ?? [];
-  expect(views).toHaveLength(26);
-  expect(payload.resources).toHaveLength(slices.length + planes.length + sky.length + views.length);
+  expect(payload.impostors).toBeUndefined();
+  expect(payload.resources).toHaveLength(slices.length + sky.length);
   // The prepared traversal owns presentation order; source depth order is not
   // a loader instruction. Keep every leaf and transport the authored ordering.
   const prepared = JSON.parse(new TextDecoder().decode(bytes));
   expect(payload.stacks).toEqual(prepared.data.stacks);
-  expect(payload.detailPlanes).toEqual(prepared.data.detailPlanes);
-  const used = [...slices, ...planes, ...sky, ...views].map(image => image.texturePath).sort();
+  const used = [...slices, ...sky].map(image => image.texturePath).sort();
   expect(payload.resources.map(resource => resource.path).sort()).toEqual(used);
   expect(payload.resources.map(({ path, bytes, sha256 }) => ({ filename: path, bytes, sha256 }))
     .sort((a, b) => a.filename.localeCompare(b.filename))).toEqual(images.map(({ filename, bytes, sha256 }) => ({ filename, bytes, sha256 }))
@@ -49,7 +42,7 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path)).sort();
   expect(ownedImages).toEqual(used);
   const skyPaths = new Set(sky.map(face => face.texturePath));
-  const banks = { volume: { images: slices.length + planes.length + views.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
+  const banks = { volume: { images: slices.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
   for (const resource of payload.resources) {
     const image = await readFile(new URL(resource.path, directory)), metadata = await sharp(image).metadata();
     expect(image.byteLength, resource.path).toBe(resource.bytes);

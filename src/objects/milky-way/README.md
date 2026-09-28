@@ -16,8 +16,7 @@ milky-way/
 └── prepared/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
-    ├── core/slices/{x,y,z}/*.png  Generated, ignored 62 / 63 / 26 bulge textures
-    ├── outer-disc.png          One 1024px image in the physical Galactic midplane
+    ├── core/slices/{x,y,z}/*.png  Generated, ignored 88 / 87 / 26 bulge textures
     ├── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
     └── sky-near/{px,nx,py,ny,pz,nz}.webp  Committed: the same faces with the neighbourhood stars baked in
 ```
@@ -43,9 +42,8 @@ orbit alignment, and PolyCSS pixel-to-world mapping. The normal
 volume after building tools, use `pnpm prepare:volume <object-directory>`.
 Preparation reads the local pinned inputs; no sibling checkout or network
 source is required. The checked volume source is 41.77 MiB. Preparation first integrates the original 256 / 256 / 32 slabs at 1024px,
-then keeps only the central volume and composites the outer Z slabs onto one
-fixed image plane. The detailed bank is 10.41 MiB compressed and 15.54 MiB
-decoded: 151 bulge slabs plus one arm image. Bulge textures keep the original
+then keeps only the central volume. The bank is 15.29 MiB compressed and
+21.00 MiB decoded: 201 bulge slabs and nothing else. Bulge textures keep the original
 slice pitch and decoded RGB; lossless PNG avoids another lossy encoding pass.
 Four samples per original Z slab integrate all 128 source Z layers.
 
@@ -59,25 +57,33 @@ of the exact shape of our galaxy.
 RGB channels emit independently after squaring filtered UNORM values; alpha
 is dust, decoded with exponent 1.4. The recipe preserves emission 250,
 absorption 200, extinction tint [0.3, 0.54, 0.85], cylindrical support and the
-source's channel transfer. The source already contains its bulge. The 8 kpc
-Galactic centre, authored Euler rotation and full physical
-extent are converted to the shared Sun-centred ICRF frame.
+source's channel transfer. The source already contains its bulge. The full
+physical extent and the asset's Euler rotation about the Galactic x and z axes
+are converted to the shared Sun-centred ICRF frame, with two corrections:
 
-The arm billboard uses those same prepared OpenSpace slab pixels, not the NASA
-interior panorama. Its corners span the original model XY bounds, [-10, 10]
-units in each direction, at local Z=0; it shares the volume's physical frame,
-centre, rotation and 6e19 metres per unit. It remains fixed in the Galactic
-plane while the shared camera moves.
+- **Centre.** The asset puts the Galactic centre 8.00 kpc from the Sun. The
+  volume is centred on the [Sgr A* package](../sgr-a-star/README.md) instead, at
+  the GRAVITY (2022) distance of 8277 pc in the same frame and epoch, so the
+  bulge surrounds the black hole it is drawn around. OpenSpace's centre lay
+  277 pc short of it.
+- **Tilt.** The asset's rotation about y is 3.1248 rad, not π: it tilts the
+  model 0.96° out of the Galactic plane, which put the Sun 134 pc below the
+  disc instead of about 20 pc above it. The volume uses π, so the model plane
+  is the Galactic plane; Sgr A* then sits 6.7 pc below the Sun's plane
+  (Reid et al. 2019 measure the Sun 5.5 ± 5.8 pc above the plane).
 
-The display split keeps full volumetric support inside 1.25 model units and
-smoothly reduces it to zero at 2.5 units. These radii are presentation choices,
-not measured bulge boundaries. Each original slab's alpha is divided through
-complementary optical-depth weights; the decoded RGB stays unchanged. The
-outer Z contribution is composited in its original order into the flat image.
-This removes outer-disc thickness and vertical parallax, and does not retain
-its depth ordering with the bulge. The original whole-galaxy distant impostors
-remain the far-view presentation. No source emission, dust model, colour grade,
-physical bounds or placement is changed.
+[`volume.test.ts`](../../../packages/bake/src/density/volume.test.ts) checks
+both against the asset and the Sgr A* package.
+
+Only the bulge and inner disc are drawn. The display keeps full volumetric
+support inside 1.5 model units (2.9 kpc) and smoothly reduces it to zero at
+3.5 units (6.8 kpc). These radii are presentation choices, not measured bulge
+boundaries: the simulation's outer disc and arms are not a map of the real
+ones, so they fade out before the Sun's neighbourhood. Each original slab's
+alpha is divided through that support; the decoded RGB stays unchanged. There
+is no flat disc image and no whole-galaxy impostor view: the same slices draw
+the galaxy at every distance. No source emission, dust model or colour grade
+is changed.
 
 The 512 MiB unmodified upstream raw file stays outside Git. To reacquire it
 and verify/recreate the checked derivative from a clean checkout:
@@ -135,8 +141,8 @@ slab transfer, optical correction, and labels retain their separate behavior.
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
 images are mixed. Integer optical gains are exact; fractional gains approximate
-the continuous transfer without extra image resources. The 151 bulge slabs
-use 453 image elements; the arms use one more, compared with the original
+the continuous transfer without extra image resources. The 201 bulge slabs
+use 603 image elements, compared with the original
 1,632-element full volume. This is an element count, not a measured frame-rate
 result. Keeping the axis scenes separate avoids
 browser cracks and expensive sorting at intersections between planes.
@@ -153,7 +159,7 @@ usage notice live together under `source/sky/`.
 Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**,
 and the near set below adds **0.44 MiB download and 54 MiB decoded**. The complete
 sky contribution is unchanged by the exterior billboard. The exterior bank
-figures above exclude these sky faces and the unchanged distant impostors. Sky faces use quality 90. Original source chunks are offline
+figures above exclude these sky faces. Sky faces use quality 90. Original source chunks are offline
 inputs and are never sent to the browser.
 
 The offline baker samples linear RGB before applying a fixed exposure of 4.5
@@ -209,11 +215,14 @@ features across independent depth layers. Neither geometry nor imagery is
 generated in the browser. The NASA source epoch stays in provenance; shared
 camera metadata uses the volume's Sun-centered ICRF frame and epoch.
 
-## Billboard UI evidence
+## Bulge evidence
 
-The [inspected browser capture](evidence/2026-09-23/billboard-and-labels.jpg) shows
-the fixed arm image, volumetric centre and black Sagittarius A* caption and
-circle. The [capture settings](evidence/2026-09-23/capture.json) preserve the
-camera, viewport, pixel ratio and observed DOM count. The browser engine version
-was not exposed by the capture tool. This checks the displayed composition and
-contrast; it is not native-renderer pixel parity or a frame-rate measurement.
+Two [browser captures](evidence/2026-09-28/capture.json) of this version show the
+galaxy as its bulge slices only: 603 slice elements, no disc image and no impostor
+view. From the [Milky Way overview](evidence/2026-09-28/bulge-overview.jpg) the
+bulge surrounds the Sagittarius A* circle. From 39,183 light-years above the
+[Sun's neighbourhood](evidence/2026-09-28/near-sun.jpg) the inner disc fades out
+before the Sun. On css.earth before this change the same camera showed a 344 px
+face-on impostor picture of the whole galaxy beside the Sun, although the camera
+is inside the galaxy. These check the displayed composition and element counts;
+they are not frame-rate measurements.

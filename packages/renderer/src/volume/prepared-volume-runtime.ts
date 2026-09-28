@@ -253,9 +253,6 @@ export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publicati
       if (preparedLeafMayContribute(leaf.boundsCssPixels, planes)) paths.add(leaf.texturePath);
     }
   }
-  for (const leaf of payload.detailPlanes ?? []) {
-    if (preparedLeafMayContribute(leaf.boundsCssPixels, planes)) paths.add(leaf.texturePath);
-  }
   return [...paths];
 }
 
