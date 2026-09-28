@@ -26,7 +26,7 @@ this package.
   effects ([package-sources.mts](../../site/build/package-sources.mts)), so modules declare and export only.
   Worker entries keep their load-time effects.
 - Node code built by esbuild with `packages: 'external'` must bundle this package
-  ([bundle-renderer.mts](../../tools/cli/bundle-renderer.mts)): the sources name their siblings `.js`, which Node cannot
+  ([bundle-renderer.ts](../bake/src/preparation/bundle-renderer.ts)): the sources name their siblings `.js`, which Node cannot
   load unbundled. The lab's builder and the implementation fingerprints follow the sources the same way.
 
 ## Source size and package maintenance

@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
-import { bundleRendererPackage } from '../../../../tools/cli/bundle-renderer.mts';
+import { bundleRendererPackage } from '../preparation/bundle-renderer.ts';
 import { zstdCompressSync } from 'node:zlib';
 import sharp from 'sharp';
 import { encodeDensityKtx2 } from './acquisition.ts';

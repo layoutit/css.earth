@@ -31,8 +31,13 @@ ephemerides. The footer's provider list combines the existing prepared source
 credits of the bodies in this overview.
 
 The [world navigation recipe](source/navigation/universe.json) samples every
-prepared orbit at 60 vertices, including open comet paths. This changes the
-display path, not the source positions or orbital model. A host detail view
+prepared orbit at 90 vertices, including open comet paths. This changes the
+display path, not the source positions or orbital model. Seen from its centre,
+a chord of an N-vertex circle strays (π/N)²/2 of the radius. On a 1,440 px
+view with the 60° field, that is 1.7 px at 60 vertices and 0.8 px at 90, so a
+moon's orbit seen from its planet no longer shows corners
+([60 against 90](evidence/orbit-points-20260928/moon-and-ganymede.png): the
+Moon's orbit from 1.1 million km and Ganymede's from 1.9 million km). A host detail view
 defers its satellites' paths until the satellite system is opened or a
 satellite is targeted.
 
@@ -208,7 +213,7 @@ native disk-map inputs through `telescope:query`: 28 HMI continuum frames, the H
 and AIA 171/193/304 synoptic maps. The declarations also include a COR1-A density cube. No solar branch is required in the shared query or qualification code.
 
 ```sh
-node tools/cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
+node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 

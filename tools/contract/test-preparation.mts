@@ -4,7 +4,7 @@ import { mkdir, readdir } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { bundleRendererPackage } from '../cli/bundle-renderer.mts';
+import { bundleRendererPackage } from '@cssearth/bake/preparation';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const engineRequire = createRequire(resolve(root, 'packages/engine/package.json'));

@@ -28,7 +28,7 @@ export default {
   tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
   format: ['esm'],
   external: ['@cssearth/catalog', '@cssearth/core', '@cssearth/engine', '@cssearth/fits', '@cssearth/objects', '@layoutit/polycss'],
-  dts: true,
+  dts: process.env.CSSEARTH_SKIP_DECLARATIONS !== '1',
   sourcemap: process.env.CSSEARTH_PERFORMANCE_SOURCEMAPS === '1',
   clean: true,
   // packages/bake/cli/check-stale-builds.mts reads the inputs to know when this bundle is stale.

@@ -6,7 +6,7 @@ export default defineConfig({
   // ESM only: the node entry finds its own package, and through it the checkout's kernel banks, from `import.meta.url`.
   format: ['esm'],
   // Only the node entry needs Node's types; `tsconfig.json` keeps them out of the browser-safe sources.
-  dts: { compilerOptions: { types: ['node'] } },
+  dts: process.env.CSSEARTH_SKIP_DECLARATIONS !== '1' && { compilerOptions: { types: ['node'] } },
   clean: true,
   target: 'es2022',
   // Keep `node:` specifiers so a browser bundler can never mistake the node entry's imports for polyfillable modules.

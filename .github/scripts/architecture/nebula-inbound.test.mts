@@ -142,9 +142,6 @@ test('root research dependencies remain development-only and computed policy sta
     f.write('package.json', JSON.stringify({ devDependencies: { '@cssearth/bake': 'workspace:*' } }));
     f.write('site/plugin.mts', 'export const load = (plugin: string) => import(plugin);');
     assert.deepEqual(f.check(), []);
-    f.write('tools/nebula/application/load.ts', 'export const load = (plugin: string) => import(plugin);');
-    assert.ok(f.check().some(error => error.includes('unchecked computed nebula')));
-    f.write('tools/nebula/application/load.ts', 'export {};');
     f.write('packages/bake/cli/prepare-nebulae.mts', 'export const load = (plugin: string) => import(plugin);');
     assert.ok(f.check().some(error => error.includes('unchecked computed nebula')), 'the application nebula entry is the compact adapter');
     f.write('packages/bake/cli/prepare-nebulae.mts', 'export {};');
