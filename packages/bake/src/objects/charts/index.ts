@@ -9,3 +9,4 @@ export * from './fits-gallery-image.ts';
 export * from './measured-spectrum.ts';
 export * from './retrieved-profile.ts';
 export * from './system-orbits.ts';
+export * from './folded-transit.ts';

@@ -11,8 +11,37 @@
       "highlight": "hd-219134c",
       "description": "The orbits of HD 219134's planets in this map from above, to scale, with HD 219134 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Gillon et al. 2017 (2017NatAs...1E..56G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2017): P 6.76458 d"
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.7650398 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-219134c-transit",
+      "title": "HD 219134 c: its transit",
+      "description": "HD 219134 c crossing its star, as TESS recorded it: 3 sectors (57, 77, 84) of the SPOC pipeline's 2-minute light curves of TIC 283722336, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-219134c-transit.svg",
+      "metadata": {
+        "tic": "TIC 283722336",
+        "sectors": [
+          57,
+          77,
+          84
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-219134c",
+      "sources": [
+        "photometry/tess/tess2022273165103-s0057-0000000283722336-0245-s_lc.fits",
+        "photometry/tess/tess2024085201119-s0077-0000000283722336-0272-s_lc.fits",
+        "photometry/tess/tess2024274222008-s0084-0000000283722336-0281-s_lc.fits"
+      ],
+      "durationHours": 1.66,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 57, 77, 84",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

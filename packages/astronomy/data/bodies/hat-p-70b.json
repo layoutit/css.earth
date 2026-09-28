@@ -1,28 +1,28 @@
 {
- "id": "hat-p-70b",
- "classification": "exoplanet",
- "order": 2997,
- "physical": {
-  "name": "HAT-P-70 b",
-  "horizonsCode": null,
-  "meanRadiusKm": 133690,
-  "gravitationalParameterKm3PerS2": 858934686.28,
-  "parent": "hat-p-70"
- },
- "physicalNotes": "Radius 1.87 Jupiter radii from Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract): 133,690 km at 71,492 km per Jupiter radius. GM from the mass 6.78 Jupiter masses (Zhou et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..141Z), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
- "hostedOrbit": {
-  "periodDays": 2.74432452,
-  "semiMajorAxisStellarRadii": 5.45,
-  "inclinationDegrees": 96.5,
-  "eccentricity": 0,
-  "transitTimeBmjdTdb": 58439.07519,
-  "ascendingNodePositionAngleDegrees": 0,
-  "sources": {
-   "period": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): P 2.74432452 d",
-   "shape": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): a/R* 5.45; Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): inclination 96.5 degrees",
-   "eccentricity": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): e 0",
-   "phase": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): transit mid-time 2458439.57519 BJD, taken as BJD_TDB",
-   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  "id": "hat-p-70b",
+  "classification": "exoplanet",
+  "order": 2997,
+  "physical": {
+    "name": "HAT-P-70 b",
+    "horizonsCode": null,
+    "meanRadiusKm": 133690,
+    "gravitationalParameterKm3PerS2": 858934686.28,
+    "parent": "hat-p-70"
+  },
+  "physicalNotes": "Radius 1.87 Jupiter radii from Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract): 133,690 km at 71,492 km per Jupiter radius. GM from the mass 6.78 Jupiter masses (Zhou et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..141Z), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "hostedOrbit": {
+    "periodDays": 2.7443245,
+    "semiMajorAxisStellarRadii": 5.45,
+    "inclinationDegrees": 96.5,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 59188.27414,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): P 2.7443245 d",
+      "shape": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): a/R* 5.45; Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): inclination 96.5 degrees",
+      "eccentricity": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): e 0",
+      "phase": "Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): transit mid-time 2459188.77414 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
   }
- }
 }

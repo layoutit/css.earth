@@ -46,8 +46,14 @@
     {
       "location": "public",
       "filename": "hat-p-11b-system-orbits.svg",
-      "bytes": 4592,
-      "sha256": "4e07d243ca4c0b9161a13ca967175c50e40a3715a71fa6f9ead480ccbc00a1f3"
+      "bytes": 4624,
+      "sha256": "3ce80b3d70ad283393924d81897cbaecd4ca223e04b2ef430c2231b0d26294b4"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-11b-transit.svg",
+      "bytes": 12850,
+      "sha256": "e827a45417c45b7b5417d0233f3277c40bd853e7abb04e490b122d4981161981"
     },
     {
       "location": "public",
@@ -281,13 +287,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1408,
-      "sha256": "0720a34d18ac14bc539b46112ca523e7f32814ef84491724ad4d940830dc855f"
+      "sha256": "38b1aa91ea2af6cc8114f957396039a4ecb414fd4d58ce82e9a2af60bcf11cf8"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 3137,
-      "sha256": "86c5bc5ff3c23de5c034ecfceaa859841a0ead74fbb35c9873991f314cedc031"
+      "bytes": 3828,
+      "sha256": "e988348d22deb16cb08b8800fe26bdeb1a85c3916d3f29522a5d0955de6ade80"
     },
     {
       "location": "prepared",

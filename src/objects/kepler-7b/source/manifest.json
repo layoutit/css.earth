@@ -125,6 +125,93 @@
           }
         ]
       }
+    },
+    {
+      "id": "kepler-7b-tess-sector-75",
+      "path": "photometry/tess/tess2024030031500-s0075-0000000121660904-0270-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024030031500-s0075-0000000121660904-0270-s_lc.fits",
+      "productId": "tess2024030031500-s0075-0000000121660904-0270-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of Kepler-7 b's star (TIC 121660904), sector 75",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-121660904",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024030031500-s0075-0000000121660904-0270-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-7b-tess-sector-80",
+      "path": "photometry/tess/tess2024170053053-s0080-0000000121660904-0275-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024170053053-s0080-0000000121660904-0275-s_lc.fits",
+      "productId": "tess2024170053053-s0080-0000000121660904-0275-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of Kepler-7 b's star (TIC 121660904), sector 80",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-121660904",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024170053053-s0080-0000000121660904-0275-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler-7b-tess-sector-81",
+      "path": "photometry/tess/tess2024196212429-s0081-0000000121660904-0276-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000121660904-0276-s_lc.fits",
+      "productId": "tess2024196212429-s0081-0000000121660904-0276-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of Kepler-7 b's star (TIC 121660904), sector 81",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-121660904",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000121660904-0276-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

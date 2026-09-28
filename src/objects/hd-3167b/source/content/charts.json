@@ -13,6 +13,31 @@
       "metadata": {
         "orbitSource": "Coy et al. 2026 (2026ApJ..1005L..77C), via the NASA Exoplanet Archive ps table (pl_refname COY_ET_AL_2026): P 0.95965451 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-3167b-transit",
+      "title": "HD 3167 b: its transit",
+      "description": "HD 3167 b crossing its star, as TESS recorded it: 1 sector (70) of the SPOC pipeline's 2-minute light curves of TIC 318707987, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-3167b-transit.svg",
+      "metadata": {
+        "tic": "TIC 318707987",
+        "sectors": [
+          70
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-3167b",
+      "sources": [
+        "photometry/tess/tess2023263165758-s0070-0000000318707987-0265-s_lc.fits"
+      ],
+      "durationHours": 1.636,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sector 70",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

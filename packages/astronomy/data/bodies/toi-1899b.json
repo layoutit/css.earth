@@ -1,31 +1,31 @@
 {
- "id": "toi-1899b",
- "classification": "exoplanet",
- "order": 2978,
- "physical": {
-  "name": "TOI-1899 b",
-  "horizonsCode": null,
-  "meanRadiusKm": 70777.1,
-  "gravitationalParameterKm3PerS2": 84879976.37,
-  "parent": "toi-1899"
- },
- "physicalNotes": "Radius 0.99 Jupiter radii from Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract): 70,777.1 km at 71,492 km per Jupiter radius. GM from the mass 0.67 Jupiter masses (Lin et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166...90L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
- "hostedOrbit": {
-  "periodDays": 29.090312,
-  "semiMajorAxisStellarRadii": 54.01,
-  "inclinationDegrees": 89.64,
-  "eccentricity": 0.044,
-  "argumentOfPeriapsisDegrees": 307,
-  "epochDefinition": "inferior-conjunction",
-  "transitTimeBmjdTdb": 58711.459171,
-  "ascendingNodePositionAngleDegrees": 0,
-  "sources": {
-   "period": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): P 29.090312 d",
-   "shape": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): a/R* 54.01; Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): inclination 89.64 degrees",
-   "eccentricity": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): e 0.044",
-   "argumentOfPeriapsis": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): omega -53 degrees, stored as 307",
-   "phase": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): transit mid-time 2458711.959171 BJD, taken as BJD_TDB",
-   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  "id": "toi-1899b",
+  "classification": "exoplanet",
+  "order": 2978,
+  "physical": {
+    "name": "TOI-1899 b",
+    "horizonsCode": null,
+    "meanRadiusKm": 70777.1,
+    "gravitationalParameterKm3PerS2": 84879976.37,
+    "parent": "toi-1899"
+  },
+  "physicalNotes": "Radius 0.99 Jupiter radii from Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract): 70,777.1 km at 71,492 km per Jupiter radius. GM from the mass 0.67 Jupiter masses (Lin et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166...90L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "hostedOrbit": {
+    "periodDays": 29.09023727744,
+    "semiMajorAxisStellarRadii": 54.01,
+    "inclinationDegrees": 89.64,
+    "eccentricity": 0.044,
+    "argumentOfPeriapsisDegrees": 307,
+    "epochDefinition": "inferior-conjunction",
+    "transitTimeBmjdTdb": 58711.459967,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 29.09023727744 d",
+      "shape": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): a/R* 54.01; Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): inclination 89.64 degrees",
+      "eccentricity": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): e 0.044",
+      "argumentOfPeriapsis": "Lin et al. 2023 (2023AJ....166...90L), via the NASA Exoplanet Archive ps table (pl_refname LIN_ET_AL__2023): omega -53 degrees, stored as 307",
+      "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458711.959967 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
   }
- }
 }

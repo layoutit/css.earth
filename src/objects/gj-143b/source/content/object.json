@@ -90,6 +90,17 @@
         "path": "../manifest.json",
         "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D"
       }
+    },
+    {
+      "id": "gj-143b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gj-143b/gj-143b-transit.svg",
+      "alt": "GJ 143 b crossing its star, as TESS recorded it: 3 sectors (95, 96, 97) of the SPOC pipeline's 2-minute light curves of TIC 279741379, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gj-143b-tess-sector-95",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025206162959-s0095-0000000279741379-0292-s_lc.fits"
+      }
     }
   ],
   "resources": [

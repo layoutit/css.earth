@@ -99,6 +99,35 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "toi-5789c-tess-sector-81",
+      "path": "photometry/tess/tess2024196212429-s0081-0000000087216634-0276-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000087216634-0276-s_lc.fits",
+      "productId": "tess2024196212429-s0081-0000000087216634-0276-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of TOI-5789 c's star (TIC 87216634), sector 81",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-87216634",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000087216634-0276-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

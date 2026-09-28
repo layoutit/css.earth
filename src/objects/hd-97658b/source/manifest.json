@@ -137,6 +137,64 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-97658b-tess-sector-22",
+      "path": "photometry/tess/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+      "productId": "tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 97658 b's star (TIC 82308728), sector 22",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-82308728",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-97658b-tess-sector-49",
+      "path": "photometry/tess/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits",
+      "productId": "tess2022057073128-s0049-0000000082308728-0221-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 97658 b's star (TIC 82308728), sector 49",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-82308728",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

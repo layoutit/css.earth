@@ -47,7 +47,13 @@
       "location": "public",
       "filename": "kepler-7b-system-orbits.svg",
       "bytes": 4599,
-      "sha256": "0a154351b4a11e690f88bda263fc6f56bf7aa489230dd2ba34fd0886b5742206"
+      "sha256": "519b606832dc08c441302b6597a83f49a2632375900dc47aa70c53c1e7437f3a"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-7b-transit.svg",
+      "bytes": 11934,
+      "sha256": "be16b922de46b252eccbf67cdad3935b108545056db908e9e4e3d2b4d7a5cab8"
     },
     {
       "location": "public",
@@ -275,13 +281,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1408,
-      "sha256": "cad8e3a1b9c7d8b0fee7cc2929f02b081339a030b0cec78dcf3e5f7210f33da8"
+      "sha256": "2cda8defecf8605e7206aec3645c64329c34cb558982f8214b383f597aa87a08"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2336,
-      "sha256": "3b3cce3c1b0ffe60f894e2cb715c74d829926e15af1dc299c75b6b5bb5b3773f"
+      "bytes": 3029,
+      "sha256": "722d95f76390ec7d8fa7cc706df731de0e23767b17a8c6ea158b984a3b3a42bf"
     },
     {
       "location": "prepared",

@@ -1,28 +1,28 @@
 {
- "id": "kepler-1542b",
- "classification": "exoplanet",
- "order": 2981,
- "physical": {
-  "name": "Kepler-1542 b",
-  "horizonsCode": null,
-  "meanRadiusKm": 4847.3,
-  "gravitationalParameterKm3PerS2": 144422.65,
-  "parent": "kepler-1542"
- },
- "physicalNotes": "Radius 0.06780266 Jupiter radii from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 4,847.3 km at 71,492 km per Jupiter radius. GM from the mass 0.00114 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
- "hostedOrbit": {
-  "periodDays": 3.95116882,
-  "semiMajorAxisStellarRadii": 10.4072,
-  "inclinationDegrees": 87.66,
-  "eccentricity": 0,
-  "transitTimeBmjdTdb": 54966.72178,
-  "ascendingNodePositionAngleDegrees": 0,
-  "sources": {
-   "period": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): P 3.95116882 d",
-   "shape": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): a/R* derived by Kepler's third law from its period 3.95116882 d, stellar mass 0.94 and radius 0.99 solar units; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 87.66 degrees",
-   "eccentricity": "Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0",
-   "phase": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): transit mid-time 2454967.22178 BJD, taken as BJD_TDB",
-   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  "id": "kepler-1542b",
+  "classification": "exoplanet",
+  "order": 2981,
+  "physical": {
+    "name": "Kepler-1542 b",
+    "horizonsCode": null,
+    "meanRadiusKm": 4847.3,
+    "gravitationalParameterKm3PerS2": 144422.65,
+    "parent": "kepler-1542"
+  },
+  "physicalNotes": "Radius 0.06780266 Jupiter radii from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 4,847.3 km at 71,492 km per Jupiter radius. GM from the mass 0.00114 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "hostedOrbit": {
+    "periodDays": 3.9511863912,
+    "semiMajorAxisStellarRadii": 10.4072,
+    "inclinationDegrees": 87.66,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 54966.71269,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 3.9511863912 d",
+      "shape": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): a/R* derived by Kepler's third law from its period 3.95116882 d, stellar mass 0.94 and radius 0.99 solar units; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 87.66 degrees",
+      "eccentricity": "Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0",
+      "phase": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2454967.21269 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 33 min)",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
   }
- }
 }

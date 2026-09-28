@@ -11,7 +11,7 @@
       "highlight": "wasp-12b",
       "description": "The orbits of WASP-12's planets in this map from above, to scale, with WASP-12 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive ps table (pl_refname LEONARDI_ET_AL__2024): P 1.091418901 d"
+        "orbitSource": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.09141866569 d"
       }
     },
     {
@@ -107,6 +107,35 @@
         "Infrared Telescope Facility, SpeX",
         "Bars: wavelength bins and 1σ errors.",
         "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-12b-transit",
+      "title": "WASP-12 b: its transit",
+      "description": "WASP-12 b crossing its star, as TESS recorded it: 3 sectors (45, 71, 72) of the SPOC pipeline's 2-minute light curves of TIC 86396382, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-12b-transit.svg",
+      "metadata": {
+        "tic": "TIC 86396382",
+        "sectors": [
+          45,
+          71,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-12b",
+      "sources": [
+        "photometry/tess/tess2021310001228-s0045-0000000086396382-0216-s_lc.fits",
+        "photometry/tess/tess2023289093419-s0071-0000000086396382-0266-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000086396382-0267-s_lc.fits"
+      ],
+      "durationHours": 3.001,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 45, 71, 72",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
       ]
     }
   ]

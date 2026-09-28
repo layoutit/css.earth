@@ -11,8 +11,37 @@
       "highlight": "hd-207496b",
       "description": "The orbits of HD 207496's planets in this map from above, to scale, with HD 207496 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Barros et al. 2023 (2023A&A...673A...4B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL__2023): P 6.441008 d"
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.441006 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-207496b-transit",
+      "title": "HD 207496 b: its transit",
+      "description": "HD 207496 b crossing its star, as TESS recorded it: 3 sectors (101, 102, 103) of the SPOC pipeline's 2-minute light curves of TIC 290348383, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-207496b-transit.svg",
+      "metadata": {
+        "tic": "TIC 290348383",
+        "sectors": [
+          101,
+          102,
+          103
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-207496b",
+      "sources": [
+        "photometry/tess/tess2026060005000-s0101-0000000290348383-0303-s_lc.fits",
+        "photometry/tess/tess2026086090000-s0102-0000000290348383-0304-s_lc.fits",
+        "photometry/tess/tess2026111101500-s0103-0000000290348383-0305-s_lc.fits"
+      ],
+      "durationHours": 1.762,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 101, 102, 103",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

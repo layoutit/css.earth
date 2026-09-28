@@ -3,8 +3,8 @@
   "id": "kepler-1542d",
   "radiusKm": 5548.9,
   "radiusSource": "Radius 0.0776162 Jupiter radii from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 5,548.9 km at 71,492 km per Jupiter radius. GM from the mass 0.00186 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
-  "orbitalPeriodDays": 5.99273738,
-  "orbitalPeriodSource": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): P 5.99273738 d",
+  "orbitalPeriodDays": 5.9921809271,
+  "orbitalPeriodSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 5.9921809271 d",
   "shape": {
     "kind": "sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-1542 d is measured; only its size, mass and orbit are."

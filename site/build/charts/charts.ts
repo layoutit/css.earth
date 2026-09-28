@@ -2,25 +2,27 @@ import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { readSpectrumData, type SpectrumRecipe } from '../../overview/spectrum-data.mts';
-import { parseFitsGalleryImageRecipe, parseMeasuredSpectrum, parseRetrievedProfile, parseSystemOrbits, readMeasuredSpectrum, readRetrievedProfile, readSystemOrbits, renderFitsGalleryImage, renderLightCurveChart, renderMeasuredSpectrum, renderPhotometricPhaseChart, renderReflectanceChart, renderRetrievedProfile, renderSystemOrbits, renderTemperaturePressureChart } from '@cssearth/bake/objects/charts';
+import { parseFitsGalleryImageRecipe, parseMeasuredSpectrum, parseRetrievedProfile, parseSystemOrbits, readMeasuredSpectrum, readRetrievedProfile, readSystemOrbits, renderFitsGalleryImage, renderFoldedTransit, renderLightCurveChart, renderMeasuredSpectrum, renderPhotometricPhaseChart, renderReflectanceChart, renderRetrievedProfile, renderSystemOrbits, renderTemperaturePressureChart } from '@cssearth/bake/objects/charts';
 import type { ChartIdentity, MeasuredSpectrumRecipe, RetrievedProfileRecipe, SystemOrbitsRecipe } from '@cssearth/bake/objects/charts';
 type JsonMap=Record<string,unknown>;
 interface Identity {id:string;title:string;description:string;output:string;metadata:JsonMap;}
 type Spectrum=SpectrumRecipe;
 interface Pressure extends Identity {kind:'pressure';source:string;layerCount:number;temperatureMinimum:number;temperatureMaximum:number;temperatureRoundingStep?:number;includePressureRangeMetadata?:boolean;pressureTicks:{pressure:number;label:string}[];}
 interface Phase extends Identity {kind:'phase';sampleCount:number;maximumAngleDegrees:number;segments:({maximumAngleDegrees:number;coefficients:number[];kind:'polynomialMagnitude'}|{maximumAngleDegrees:number;coefficients:number[];kind:'albedoPolynomialMagnitude';constant:number})[];}
+interface FoldedTransit extends Identity {kind:'folded-transit';planet:string;sources:string[];durationHours:number;binMinutes:number;notes:string[];}
 interface LightCurve extends Identity {kind:'light-curve';source:string;timeField:string;fluxField:string;maskField?:string;binMinutes:number;axisLabel:string;events:{time:number;label:string}[];}
-export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase|LightCurve|MeasuredSpectrumRecipe|RetrievedProfileRecipe|SystemOrbitsRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
+export interface ChartAssetRecipe {schema:'cssearth-chart-assets@1';publicBase:string;charts:(Spectrum|Pressure|Phase|LightCurve|FoldedTransit|MeasuredSpectrumRecipe|RetrievedProfileRecipe|SystemOrbitsRecipe)[];gallery?:{source:string;schema:string;itemCount:number};}
 function record(value:unknown,label:string):JsonMap {if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError(`${label} must be an object.`);return value as JsonMap;}
 function string(value:unknown,label:string):asserts value is string {if(typeof value!=='string'||!value.trim())throw new TypeError(`${label} must be text.`);}
 function path(root:string,value:string):string {if(value.startsWith('/')||value.includes('\\')||value.split('/').includes('..'))throw new TypeError('Unsafe chart source path.');return resolve(root,value);}
 function numericArray(value:unknown,label:string):number[]{if(!Array.isArray(value)||value.some(item=>typeof item!=='number'||!Number.isFinite(item)))throw new TypeError(`${label} must contain finite samples.`);return value;}
 export function parseChartAssetRecipe(value:unknown):ChartAssetRecipe {
  const recipe=record(value,'charts');if(recipe.schema!=='cssearth-chart-assets@1'||!Array.isArray(recipe.charts))throw new TypeError('Unknown chart recipe schema.');string(recipe.publicBase,'publicBase');if(!recipe.publicBase.startsWith('/')||!recipe.publicBase.endsWith('/'))throw new TypeError('Chart asset base must be an absolute URL prefix.');
- for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase','light-curve','measured-spectrum','retrieved-profile','system-orbits'].includes(String(chart.kind)))throw new TypeError(`${String(chart.id)}: unknown chart operator ${String(chart.kind)}.`);
+ for(const value of recipe.charts){const chart=record(value,'chart');for(const key of ['id','title','description','output'])string(chart[key],key);path('.',String(chart.output));record(chart.metadata,'metadata');if(!['spectrum','pressure','phase','light-curve','measured-spectrum','retrieved-profile','system-orbits','folded-transit'].includes(String(chart.kind)))throw new TypeError(`${String(chart.id)}: unknown chart operator ${String(chart.kind)}.`);
   if(chart.kind==='measured-spectrum')parseMeasuredSpectrum(chart);
   if(chart.kind==='retrieved-profile')parseRetrievedProfile(chart);
   if(chart.kind==='system-orbits')parseSystemOrbits(chart);
+  if(chart.kind==='folded-transit'){string(chart.planet,'planet');if(!Array.isArray(chart.sources)||!chart.sources.length)throw new TypeError(`${String(chart.id)}: a folded transit names its light-curve files.`);for(const source of chart.sources){string(source,'light-curve source');path('.',source);}if(typeof chart.durationHours!=='number'||!(chart.durationHours>0)||typeof chart.binMinutes!=='number'||!(chart.binMinutes>0)||!Array.isArray(chart.notes))throw new TypeError(`${String(chart.id)}: a folded transit needs a positive duration, bin width and notes.`);}
   if(chart.kind==='light-curve'){for(const key of ['source','timeField','fluxField','axisLabel'])string(chart[key],key);if(chart.maskField!==undefined)string(chart.maskField,'maskField');if(typeof chart.binMinutes!=='number'||!(chart.binMinutes>0)||!Array.isArray(chart.events))throw new TypeError('Invalid light curve profile.');for(const value of chart.events){const event=record(value,'event');if(typeof event.time!=='number'||!Number.isFinite(event.time))throw new TypeError('Invalid light curve event.');string(event.label,'event label');}}
   if(chart.kind==='spectrum'){string(chart.source,'source');if(!['json-columns','numeric-lines'].includes(String(chart.format))||typeof chart.pointCount!=='number'||!Number.isSafeInteger(chart.pointCount)||chart.pointCount<2||typeof chart.maximum!=='number'||!Number.isFinite(chart.maximum)||chart.maximum<=0||(chart.maximumRoundingScale!==undefined&&(typeof chart.maximumRoundingScale!=='number'||!Number.isFinite(chart.maximumRoundingScale)||chart.maximumRoundingScale<=0)))throw new TypeError('Invalid spectrum sampling profile.');}
   if(chart.kind==='pressure'){string(chart.source,'source');if(typeof chart.layerCount!=='number'||chart.layerCount<2||typeof chart.temperatureMinimum!=='number'||typeof chart.temperatureMaximum!=='number'||!Array.isArray(chart.pressureTicks)||(chart.temperatureRoundingStep!==undefined&&(typeof chart.temperatureRoundingStep!=='number'||!Number.isFinite(chart.temperatureRoundingStep)||chart.temperatureRoundingStep<=0))||(chart.includePressureRangeMetadata!==undefined&&typeof chart.includePressureRangeMetadata!=='boolean'))throw new TypeError('Invalid pressure profile.');}
@@ -35,6 +37,18 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
  for(const chart of recipe.charts){const identity:ChartIdentity={id:chart.id,title:chart.title,description:chart.description,metadata:{...chart.metadata}};let svg:string;
   if(chart.kind==='measured-spectrum'){
    svg=renderMeasuredSpectrum(await readMeasuredSpectrum(sourceDirectory,chart));
+  }else if(chart.kind==='folded-transit'){
+   // The host's light curves, each transit divided by its baseline line and folded onto the planet's orbit (foldTransits), then
+   // averaged in bins of fixed width; a bin's error is the standard error of its samples.
+   const {foldTransits,readTessLightCurve,transitWindow}=await import('@cssearth/bake/objects/raster');const {hostedOrbit}=await import('@cssearth/astronomy');
+   const curves=await Promise.all(chart.sources.map(async source=>readTessLightCurve(await readFile(path(sourceDirectory,source)))));
+   const orbit=hostedOrbit(chart.planet as Parameters<typeof hostedOrbit>[0]),folded=foldTransits(curves,orbit,transitWindow(chart.durationHours));
+   if(!folded.transits)throw new TypeError(`${chart.id}: no transit of ${chart.planet} in ${chart.sources.join(', ')} has enough samples on both sides.`);
+   const width=chart.binMinutes/60,groups=new Map<number,number[]>();
+   folded.time.forEach((time,i)=>{const bin=Math.round((time-orbit.transitTimeBmjdTdb)*24/width);groups.set(bin,[...(groups.get(bin)??[]),folded.flux[i]!]);});
+   const bins=[...groups].filter(([,values])=>values.length>=3).sort(([a],[b])=>a-b).map(([bin,values])=>{const mean=values.reduce((sum,value)=>sum+value,0)/values.length,spread=Math.sqrt(values.reduce((sum,value)=>sum+(value-mean)**2,0)/(values.length-1));return {hours:bin*width,ppm:(mean-1)*1e6,error:spread/Math.sqrt(values.length)*1e6,samples:values.length};});
+   identity.metadata={...identity.metadata,sectors:curves.map(curve=>curve.sector),binMinutes:chart.binMinutes};
+   svg=renderFoldedTransit({...identity,bins,transits:folded.transits,notes:chart.notes});
   }else if(chart.kind==='system-orbits'){
    const orbits=parseSystemOrbits(chart);svg=renderSystemOrbits(orbits,readSystemOrbits(orbits));
   }else if(chart.kind==='retrieved-profile'){

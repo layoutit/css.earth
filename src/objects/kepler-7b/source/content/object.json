@@ -105,6 +105,17 @@
         "path": "../manifest.json",
         "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E"
       }
+    },
+    {
+      "id": "kepler-7b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-7b/kepler-7b-transit.svg",
+      "alt": "Kepler-7 b crossing its star, as TESS recorded it: 3 sectors (75, 80, 81) of the SPOC pipeline's 2-minute light curves of TIC 121660904, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 21-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-7b-tess-sector-75",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024030031500-s0075-0000000121660904-0270-s_lc.fits"
+      }
     }
   ],
   "resources": [

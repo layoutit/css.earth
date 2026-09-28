@@ -11,8 +11,37 @@
       "highlight": "hd-136352c",
       "description": "The orbits of HD 136352's planets in this map from above, to scale, with HD 136352 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Delrez et al. 2021 (2021NatAs...5..775D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2021): P 27.59221 d"
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 27.59207175355 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-136352c-transit",
+      "title": "HD 136352 c: its transit",
+      "description": "HD 136352 c crossing its star, as TESS recorded it: 3 sectors (65, 102, 103) of the SPOC pipeline's 2-minute light curves of TIC 136916387, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-136352c-transit.svg",
+      "metadata": {
+        "tic": "TIC 136916387",
+        "sectors": [
+          65,
+          102,
+          103
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-136352c",
+      "sources": [
+        "photometry/tess/tess2023124020739-s0065-0000000136916387-0259-s_lc.fits",
+        "photometry/tess/tess2026086090000-s0102-0000000136916387-0304-s_lc.fits",
+        "photometry/tess/tess2026111101500-s0103-0000000136916387-0305-s_lc.fits"
+      ],
+      "durationHours": 3.251,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 65, 102, 103",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

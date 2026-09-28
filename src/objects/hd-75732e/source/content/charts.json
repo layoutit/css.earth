@@ -11,7 +11,7 @@
       "highlight": "hd-75732e",
       "description": "The orbits of 55 Cnc's planets in this map from above, to scale, with 55 Cnc e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Bourrier et al. 2018 (2018A&A...619A...1B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2018): P 0.7365474 d"
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 0.73654625 d"
       }
     },
     {
@@ -59,6 +59,35 @@
         "Hubble Space Telescope satellite, Wide Field Camera…",
         "Bars: wavelength bins and 1σ errors.",
         "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-75732e-transit",
+      "title": "55 Cnc e: its transit",
+      "description": "55 Cnc e crossing its star, as TESS recorded it: 3 sectors (44, 46, 72) of the SPOC pipeline's 2-minute light curves of TIC 332064670, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-75732e-transit.svg",
+      "metadata": {
+        "tic": "TIC 332064670",
+        "sectors": [
+          44,
+          46,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-75732e",
+      "sources": [
+        "photometry/tess/tess2021284114741-s0044-0000000332064670-0215-s_lc.fits",
+        "photometry/tess/tess2021336043614-s0046-0000000332064670-0217-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000332064670-0267-s_lc.fits"
+      ],
+      "durationHours": 1.5439,
+      "binMinutes": 6,
+      "notes": [
+        "TESS 2-min SPOC · sectors 44, 46, 72",
+        "Folded on the app's orbit; 6-min bins.",
+        "Bars: standard error of each bin."
       ]
     }
   ]

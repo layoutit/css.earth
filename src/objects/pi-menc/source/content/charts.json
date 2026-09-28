@@ -11,8 +11,37 @@
       "highlight": "pi-menc",
       "description": "The orbits of HD 39091's planets in this map from above, to scale, with pi Men c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive ps table (pl_refname KUNOVAC_HODZIC_ET_AL_2021): P 6.2678399 d"
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.26781391964 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "pi-menc-transit",
+      "title": "pi Men c: its transit",
+      "description": "pi Men c crossing its star, as TESS recorded it: 3 sectors (93, 94, 95) of the SPOC pipeline's 2-minute light curves of TIC 261136679, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "pi-menc-transit.svg",
+      "metadata": {
+        "tic": "TIC 261136679",
+        "sectors": [
+          93,
+          94,
+          95
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "pi-menc",
+      "sources": [
+        "photometry/tess/tess2025154050500-s0093-0000000261136679-0290-s_lc.fits",
+        "photometry/tess/tess2025180145000-s0094-0000000261136679-0291-s_lc.fits",
+        "photometry/tess/tess2025206162959-s0095-0000000261136679-0292-s_lc.fits"
+      ],
+      "durationHours": 2.952024,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 93, 94, 95",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

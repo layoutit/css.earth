@@ -90,6 +90,17 @@
         "path": "../manifest.json",
         "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G"
       }
+    },
+    {
+      "id": "toi-2049b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-2049b/toi-2049b-transit.svg",
+      "alt": "TOI-2049 b crossing its star, as TESS recorded it: 3 sectors (57, 77, 84) of the SPOC pipeline's 2-minute light curves of TIC 314835525, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 20-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-2049b-tess-sector-57",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022273165103-s0057-0000000314835525-0245-s_lc.fits"
+      }
     }
   ],
   "resources": [

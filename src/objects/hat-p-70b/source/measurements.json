@@ -3,8 +3,8 @@
   "id": "hat-p-70b",
   "radiusKm": 133690,
   "radiusSource": "Radius 1.87 Jupiter radii from Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract): 133,690 km at 71,492 km per Jupiter radius. GM from the mass 6.78 Jupiter masses (Zhou et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..141Z), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
-  "orbitalPeriodDays": 2.74432452,
-  "orbitalPeriodSource": "Zhou et al. 2019 (2019AJ....158..141Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL__2019): P 2.74432452 d",
+  "orbitalPeriodDays": 2.7443245,
+  "orbitalPeriodSource": "Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): P 2.7443245 d",
   "shape": {
     "kind": "sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HAT-P-70 b is measured; only its size, mass and orbit are."

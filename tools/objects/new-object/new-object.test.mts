@@ -120,7 +120,7 @@ test('an imaged orbit from the paper\'s posterior is the orbit GJ 504 b ships', 
 });
 
 test('a transiting orbit is one paper\'s archive row, with gaps filled from other rows and a/R* derived when no row has it', async () => {
-  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov';
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov,pl_orbpererr1,pl_tranmiderr1';
   const anchor = (ref: string, bib: string, label: string) => `"<a refstr=${ref} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   const csv = [header,
     `"WASP-121 b",${anchor('BOURRIER_ET_AL__2020', '2020A&A...635A.205B', 'Bourrier et al. 2020')},0,1.27492504,3.8131,88.49,0,10,2458119.72074,1.753,1.157,,1.458,1.353,0`,
@@ -147,6 +147,15 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   assert.equal(z.orbit.inclinationDegrees, Number((Math.acos(0.05) * 180 / Math.PI).toFixed(3)));
   assert.match(z.orbit.sources.shape!, /inclination derived from its impact parameter 0.5 with its a\/R\* 10 \(Winn 2010, eq. 7\)/u);
   assert.throws(() => assembleArchiveOrbit(rows.filter(row => row.name === 'W b'), undefined, small), /impact parameter 12 with a\/R\* 10 allows none/u);
+  // The period and transit time come from one row, the one that predicts 2026 best: HAT-P-11 b's default row (4.888 d, 2009) drifts
+  // 5.3 hours by 2024; a newer row with a precise period does not. Its 22 empty columns are the row's own, then pl_orbpererr1, pl_tranmiderr1.
+  const hat = parseArchiveRows([header,
+    `"HAT-P-11 b",${anchor('BAKOS_ET_AL__2010', '2010ApJ...710.1724B', 'Bakos et al. 2010')},1,4.888,15.58,88.5,0,,2454957.8132,0.422,0.081,,0.75,0.81,0,,,,,,,0.001,0.0002`,
+    `"HAT-P-11 b",${anchor('HUBER_ET_AL__2017', '2017AJ....153..181H', 'Huber et al. 2017')},0,4.887802443,16.0,89.0,0,,2454605.89146,,,,,,0,,,,,,,0.000000034,0.00003`].join('\n'));
+  const timed = assembleArchiveOrbit(hat, undefined, { value: 0.081, provenance: 'Mass', limit: false, label: 'Bakos et al. 2010' });
+  assert.deepEqual([timed.orbit.periodDays, timed.orbit.transitTimeBmjdTdb], [4.887802443, Number((2454605.89146 - 2400000.5).toFixed(6))], 'the precise newer ephemeris');
+  assert.equal(timed.orbit.semiMajorAxisStellarRadii, 15.58, 'the shape stays the default row\'s');
+  assert.match(timed.orbit.sources.phase!, /Huber et al\. 2017.*predicts 2026-01-01 best \(1 sigma 1 min\)/u);
   // Kepler's law in solar units: the Earth's year around the Sun is 215 solar radii (it was 766 times too large before 2026-09-24).
   const { keplerRatio } = await import('./orbit.mts');
   assert.equal(Number(keplerRatio(1, 365.25, 1).toFixed(1)), 215.0);
@@ -256,6 +265,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
   const transit = [spectrumColumns('transmission'), `0.60,0.20,1.20,0.02,-0.03,0,Kepler,CCD,${cite}`, `1.40,0.20,1.25,0.02,-0.02,0,HST,WFC3,${cite}`, `4.50,1.00,1.31,0.04,-0.04,0,Spitzer,IRAC,${cite}`, `3.60,0.70,1.50,,,1,Spitzer,IRAC,${cite}`].join('\n');
   const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? '');
     if (query.includes('from transitspec')) return transit;
+    if (query.startsWith('select tic_id,pl_trandur')) return 'tic_id,pl_trandur\n';
     if (query.includes('from emissionspec')) return query.startsWith('select plntname') ? emission : `${spectrumColumns('emission')}\n`;
     throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
   const paper = { id: 'arxiv-2110-06729', title: 'A paper', creators: ['A Author'], year: '2022', url: star.paper.url, arxiv: '2110.06729' };
@@ -303,7 +313,7 @@ test('a generated planet with a measured dayside temperature keeps its thermal l
 test('a planet whose archive mass is only an upper limit gets GM 0, the records\' unpublished value, and the limit in its notes', async () => {
   const { hostedRecord } = await import('./hosted.mts');
   const anchor = '"<a refstr=BORUCKI_ET_AL__2013 href=https://ui.adsabs.harvard.edu/abs/2013Sci...340..587B/abstract target=ref>Borucki et al. 2013</a>"';
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov,pl_orbpererr1,pl_tranmiderr1',
     `"Kepler-62 f",${anchor},1,267.291,,89.9,0,,2454967.3,0.126,0.11,0.718,0.64,0.69,1,`].join('\n');
   const composite = `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"Kepler-62 f",0.11,1,Mass,${anchor}`;
   const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); if (query.includes('from pscomppars')) return composite; if (query.includes('from ps where pl_name')) return ps; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
@@ -338,7 +348,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `HD 1 d,HD 1,1,${ref('Three et al. 2021', '2021AJ....1....3T')},${ref('Three et al. 2021', '2021AJ....1....3T')},0.8,,5000,,0.85,,20.5,2021,Radial Velocity,0,d,HD 1,,Gaia DR3 123456789,0,1,K2,3`].join('\n');
   // GJ 436's case: the default row leaves the stellar temperature empty and another paper's row gives it.
   const gapped = stars.replaceAll(',5000,50,', ',,,').replace(',5000,,', ',,,') + `\nHD 1 b,HD 1,0,${ref('Four et al. 2022', '2022AJ....1....4F')},${ref('Four et al. 2022', '2022AJ....1....4F')},0.81,,5010,40,0.86,,20.5,2019,Transit,1,b,HD 1,,Gaia DR3 123456789,0,1,K2,3`;
-  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov',
+  const ps = ['pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov,pl_orbpererr1,pl_tranmiderr1',
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
   const composite = (name: string, mass: number) => `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"${name}",${mass},0,Mass,${ref('One et al. 2019', '2019AJ....1....1O')}`;
@@ -638,7 +648,7 @@ test('an archive answering a server error or a rate limit is asked again; a 404 
 
 test('a planet found without a transit is placed only on one paper\'s whole orbit, tilt measured, and its model size says so', async () => {
   const { assembleMeasuredOrbit, parseArchiveRows: parse } = await import('./orbit.mts');
-  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov';
+  const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov,pl_orbpererr1,pl_tranmiderr1';
   const ref = (key: string, bib: string, label: string) => `"<a refstr=${key} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   // pi Men b's case: the default paper gives no inclination; an astrometric paper fits the whole orbit and a true mass with it.
   const rows = parse([header,

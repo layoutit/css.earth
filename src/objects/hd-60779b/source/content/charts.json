@@ -13,6 +13,35 @@
       "metadata": {
         "orbitSource": "DiTomasso et al. 2026 (2026AJ....172...97D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL_2026): P 29.986175 d"
       }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-60779b-transit",
+      "title": "HD 60779 b: its transit",
+      "description": "HD 60779 b crossing its star, as TESS recorded it: 3 sectors (7, 34, 88) of the SPOC pipeline's 2-minute light curves of TIC 65672998, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-60779b-transit.svg",
+      "metadata": {
+        "tic": "TIC 65672998",
+        "sectors": [
+          7,
+          34,
+          88
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-60779b",
+      "sources": [
+        "photometry/tess/tess2019006130736-s0007-0000000065672998-0131-s_lc.fits",
+        "photometry/tess/tess2021014023720-s0034-0000000065672998-0204-s_lc.fits",
+        "photometry/tess/tess2025014115807-s0088-0000000065672998-0285-s_lc.fits"
+      ],
+      "durationHours": 2.822,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 7, 34, 88",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
     }
   ]
 }

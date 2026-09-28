@@ -28,8 +28,14 @@
     {
       "location": "public",
       "filename": "hd-219134b-system-orbits.svg",
-      "bytes": 7944,
-      "sha256": "9aa708a3c053311884109d47322422c8b6e5d7632b61031b108a25e876496b9c"
+      "bytes": 7902,
+      "sha256": "aa8da5f2fce45a3b1c9baab35b92544416e9ae11174820375ab5a63692f17a08"
+    },
+    {
+      "location": "public",
+      "filename": "hd-219134b-transit.svg",
+      "bytes": 11669,
+      "sha256": "b2d77e6188db58a0db6e75ac80333edca4ce5d941107e4b44648500ba4153237"
     },
     {
       "location": "public",
@@ -257,13 +263,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1409,
-      "sha256": "f1185566f09241bec913ddca0525580a1bdca15cf3129b79e0357041a354dd62"
+      "sha256": "270b5cf3c30cfa67934783d5f284cd991b9a5d60e29cd7c3d35c7e01bb7fc148"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2369,
-      "sha256": "4e174810c7a1861f82a275618e6aee72df422f47beddc72c42d5086933dd795a"
+      "bytes": 3066,
+      "sha256": "0be85810a553112b24057e0be72d9e14039ae7909d384faf6f391881b558b1e2"
     },
     {
       "location": "prepared",

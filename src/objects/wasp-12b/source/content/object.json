@@ -240,6 +240,17 @@
         "path": "../manifest.json",
         "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...746...46C/abstract"
       }
+    },
+    {
+      "id": "wasp-12b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-12b/wasp-12b-transit.svg",
+      "alt": "WASP-12 b crossing its star, as TESS recorded it: 3 sectors (45, 71, 72) of the SPOC pipeline's 2-minute light curves of TIC 86396382, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-12b-tess-sector-45",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021310001228-s0045-0000000086396382-0216-s_lc.fits"
+      }
     }
   ],
   "resources": [

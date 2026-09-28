@@ -15,6 +15,7 @@ import { resolve } from 'node:path';
 import type { Archive } from './archives.mts';
 import { bindInputs, json, type PackageFiles } from './lens.mts';
 import { decodeEntities, NASA_TAP } from './orbit.mts';
+import { installTransitChart, liveTessArchive, type TessArchive } from './transit-chart.mts';
 
 const SPECTRA = {
   transmission: { table: 'transitspec', depth: 'plntransdep', label: 'Transit depth (%)', titleKey: 'transmissionSpectrum', title: 'transmission spectrum',
@@ -65,7 +66,25 @@ export function niceAxis(low: number, high: number) {
 const short = (text: string, length = 52) => text.length <= length ? text : `${text.slice(0, length - 1)}…`;
 
 /** Add the orbits chart and any archive spectra to a planet's package. `hostName` titles the orbits chart. */
-export async function installPlanetCharts(files: PackageFiles, id: string, name: string, host: { id: string; name: string }, archive: Archive) {
+/** The fold of planet `id` in these light-curve files, with the bake's own reader, fold and window: how many whole transits, the
+ * dip's depth (the middle 60% of the transit below the baseline) and its standard error (the baseline's scatter over the in-transit
+ * count). A planet the astronomy records do not hold, or files the reader refuses, fold no transit. */
+async function transitsIn(id: string) {
+  const [{ foldTransits, readTessLightCurve, transitWindow }, { hostedOrbit }] = await Promise.all([import('@cssearth/bake/objects/raster'), import('@cssearth/astronomy')]);
+  return (curves: readonly Buffer[], durationHours: number) => {
+    try {
+      const orbit = hostedOrbit(id as Parameters<typeof hostedOrbit>[0]), window = transitWindow(durationHours);
+      const folded = foldTransits(curves.map(bytes => readTessLightCurve(bytes)), orbit, window), inside: number[] = [], outside: number[] = [];
+      folded.time.forEach((time, i) => { const offset = Math.abs(time - orbit.transitTimeBmjdTdb); if (offset < 0.3 * durationHours / 24) inside.push(folded.flux[i]!); else if (offset > window.outsideDays) outside.push(folded.flux[i]!); });
+      if (inside.length < 3 || outside.length < 3) return { transits: 0, depthPpm: 0, errorPpm: Infinity };
+      const mean = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / values.length, base = mean(outside);
+      const scatter = Math.sqrt(outside.reduce((sum, value) => sum + (value - base) ** 2, 0) / (outside.length - 1));
+      return { transits: folded.transits, depthPpm: (base - mean(inside)) * 1e6, errorPpm: scatter / Math.sqrt(inside.length) * 1e6 };
+    } catch { return { transits: 0, depthPpm: 0, errorPpm: Infinity }; }
+  };
+}
+
+export async function installPlanetCharts(files: PackageFiles, id: string, name: string, host: { id: string; name: string }, archive: Archive, tess?: TessArchive) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const measurements = read(`${s}/measurements.json`), orbitUrl = String(read(`${s}/content/object.json`).panel.facts.find((fact: { id: string }) => fact.id === 'period')?.source?.url ?? '');
   const orbits = { kind: 'system-orbits', id: `${id}-orbits`, title: `${name}: orbits around ${host.name}`, output: `${id}-system-orbits.svg`, system: host.id, highlight: id,
@@ -100,19 +119,23 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
     report.push(`${id}: ${spec.title} from ${first.label}, ${rows.length} bins${chosen.papers > 1 ? ` (of ${chosen.papers} papers)` : ''}`);
     drawn.push(`its ${spec.title}, ${rows.length} bins from ${first.label} in the archive's ${spec.table} table${chosen.papers > 1 ? `, the most of its ${chosen.papers} papers` : ''}`);
   }
+  // The transit as TESS recorded it (transit-chart.mts), after the spectra.
+  const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitsIn(id));
+  report.push(transit.report);
+  if (transit.recipe) { charts.push(transit.recipe); controls.push(transit.control); inputs.push(...transit.inputs); operations.push(...transit.operations); drawn.push(transit.readme); }
   files.set(`${s}/content/charts.json`, json({ schema: 'cssearth-chart-assets@1', publicBase: `/scenes/${id}/`, charts }));
   const content = read(`${s}/content/object.json`);
   content.charts = controls;
   files.set(`${s}/content/object.json`, json(content));
   const manifest = read(`${s}/manifest.json`);
-  manifest.inputs = [...manifest.inputs.filter((input: { id: string }) => !String(input.id).startsWith(`${id}-archive-`)), ...inputs];
+  manifest.inputs = [...manifest.inputs.filter((input: { id: string }) => !String(input.id).startsWith(`${id}-archive-`) && !String(input.id).startsWith(`${id}-tess-sector-`)), ...inputs];
   manifest.documents = [...(manifest.documents ?? []).filter((document: { path: string }) => document.path !== 'content/charts.json'),
     { path: 'content/charts.json', sourceBinding: { kind: 'local', reason: 'Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths.' } }];
   files.set(`${s}/manifest.json`, json(manifest));
   // The archive rows are bound to their own catalogue record, as a planet's emission-table rows are (lens.mts).
   bindInputs(files, id);
   const plan = read(`${s}/preparation/acquisition.json`);
-  plan.operations = [...plan.operations.filter((operation: { path?: string }) => !String(operation.path ?? '').startsWith('science/archive-spectra/')), ...operations];
+  plan.operations = [...plan.operations.filter((operation: { path?: string }) => !/^(science\/archive-spectra|photometry\/tess)\//u.test(String(operation.path ?? ''))), ...operations];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   // The README, the package's source record, says what each chart draws; a rerun replaces its paragraph.
   const readme = `**Charts.** The orbits of ${host.name}'s planets from above, from their hosted-orbit records${drawn.length ? `, and ${drawn.join('; ')}` : ''}. Upper limits and rows without an error are left out.`;
@@ -123,7 +146,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
 
 /** `--charts HOST_ID...`: the archive planets of hosts already in the tree get their charts; nothing is baked. */
 export async function chartHosts(root: string, hostIds: readonly string[], archive: Archive, progress = (_line: string) => {}) {
-  const { readdir, mkdir, writeFile } = await import('node:fs/promises'), { dirname } = await import('node:path');
+  const { readdir, mkdir, rm, writeFile } = await import('node:fs/promises'), { dirname } = await import('node:path');
   const lines: string[] = [], paths = ['README.md', 'source/measurements.json', 'source/content/object.json', 'source/manifest.json', 'source/preparation/acquisition.json'];
   for (const hostId of hostIds) {
     const host = JSON.parse(await readFile(resolve(root, 'src/objects', hostId, 'source/content/object.json'), 'utf8')) as { displayName: string };
@@ -134,6 +157,9 @@ export async function chartHosts(root: string, hostIds: readonly string[], archi
       const files: PackageFiles = new Map();
       for (const path of paths) files.set(`src/objects/${id}/${path}`, await readFile(resolve(root, 'src/objects', id, path), 'utf8'));
       const report = await installPlanetCharts(files, id, spec.planets[0].name, { id: hostId, name: host.displayName }, archive);
+      // Light curves a planet no longer charts (the gate refused it) are not left for the manifest check to find undeclared.
+      const tess = resolve(root, 'src/objects', id, 'source/photometry/tess');
+      for (const name of await readdir(tess).catch(() => [] as string[])) if (!files.has(`src/objects/${id}/source/photometry/tess/${name}`)) await rm(resolve(tess, name));
       for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
       lines.push(`${id}: orbits${report.length ? `; ${report.join('; ').replaceAll(`${id}: `, '')}` : ''}`); progress(lines.at(-1)!);
     }

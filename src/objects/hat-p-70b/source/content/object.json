@@ -90,6 +90,17 @@
         "path": "../manifest.json",
         "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z"
       }
+    },
+    {
+      "id": "hat-p-70b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-70b/hat-p-70b-transit.svg",
+      "alt": "HAT-P-70 b crossing its star, as TESS recorded it: 2 sectors (32, 98) of the SPOC pipeline's 2-minute light curves of TIC 399870368, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 14-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-70b-tess-sector-32",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020324010417-s0032-0000000399870368-0200-s_lc.fits"
+      }
     }
   ],
   "resources": [
