@@ -46,7 +46,7 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
     ({ id, after, command: process.execPath, args: [file, ...args] });
   const tasks: CiBuildTask[] = [
     { id: 'packages', after: [], command: 'pnpm', args: ['-r', '--filter', './packages/**', 'build'], outputs: packageOutputs(root) },
-    node('titles', 'tools/prepare/cli/prepare-shell-titles.mts'),
+    node('titles', 'site/build/prepare/prepare-shell-titles.mts'),
     node('catalog', 'tools/prepare/cli/prepare-catalog.mts', ['packages']),
     node('solar', 'packages/bake/cli/prepare-solar-geometry.mts', ['catalog']),
     { id: 'preparation', after: ['packages', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],
@@ -54,11 +54,11 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
   ];
   if (mode === 'full') tasks.push(
     // Hashes icon sources with @cssearth/core/node, so it waits for the packages build.
-    node('icons', 'tools/prepare/cli/prepare-shell-icons.mts', ['packages']),
+    node('icons', 'site/build/prepare/prepare-shell-icons.mts', ['packages']),
     node('navigation', 'packages/bake/cli/prepare-navigation.mts', ['solar'], ['--catalog-only']),
     node('world', 'tools/objects/dist/prepare-spatial-context.js', ['preparation', 'navigation'], ['src/objects/sun/source/navigation/universe.json', 'src/objects/sun/prepared/world-context.json']),
-    node('moon-labels', 'tools/prepare/cli/prepare-moon-labels.mts', ['world']),
-    node('world-presentation', 'tools/prepare/cli/prepare-world-presentation.mts', ['world']),
+    node('moon-labels', 'site/build/prepare/prepare-moon-labels.mts', ['world']),
+    node('world-presentation', 'site/build/prepare/prepare-world-presentation.mts', ['world']),
   );
   return tasks;
 }

@@ -38,8 +38,9 @@ function policy(path: string): Policy {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/.test(path) || /^site\/test\/[^/]+-browser\.mts$/.test(path) || path.startsWith('tests/')) return 'test';
   // `@cssearth/telescope-cli` is the telescope command, preparation tooling that was `tools/objects/telescopes/` before it
   // became a package: it imports the bake by design, as that folder did.
-  // `.github/scripts` holds the CI and repository checks: tooling, like `tools/`.
-  if (path.startsWith('tools/') || path.startsWith('.github/scripts/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
+  // `.github/scripts` holds the CI and repository checks: tooling, like `tools/`. `site/build/` is site-owned preparation (build
+  // plugins and the preparers that read site modules); runtime code that reaches it is still checked through its own closure.
+  if (path.startsWith('tools/') || path.startsWith('site/build/') || path.startsWith('.github/scripts/') || path.startsWith('packages/bake/') || path.startsWith('packages/telescope-cli/') ||
       /^[^/]+\.config\.[cm]?ts$/.test(path)) return 'preparation';
   return 'runtime';
 }

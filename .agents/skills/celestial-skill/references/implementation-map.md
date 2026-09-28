@@ -37,7 +37,7 @@ The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
 where body docs and evidence go. Every file under `source/` needs a manifest
 entry. Keep test logs and browser screenshots outside it.
 
-Use `tools/contract/object-package-contract.mts` for actual required files. Its authored
+Use `site/build/object-package-contract.mts` for actual required files. Its authored
 branch is selected through `packages/bake/src/sources/authored-object.ts`; the legacy branch still
 mentions `runtime/client.mjs`, package Astro pages, and per-body tools. Those
 fallback requirements are not the current authored-package template.

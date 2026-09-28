@@ -4,12 +4,12 @@ import { resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { previewSite } from "../../site/server/preview.mts";
+import { previewSite } from "../../server/preview.mts";
 import { inventoriedObjectIds } from "@cssearth/bake/delivery";
 import { writeLossyWebp } from "@cssearth/bake/raster";
 import { readPreparedObjects } from "@cssearth/objects/node";
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../..")).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, "../../..")).sceneObjects;
 
 // Plain captures of the built CSS scenes: no added artwork, text, or branding.
 // Card captures use the shared sidebar background and omit the surrounding sky.
@@ -18,7 +18,7 @@ const { values } = parseArgs({ options: {
   "base-url": { type: "string" },
   object: { type: "string", multiple: true, default: [] },
 } });
-const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`), resolve(import.meta.dirname, "../.."));
+const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`), resolve(import.meta.dirname, "../../.."));
 const outputDirectory = values.card ? "public/overview" : "public/social";
 export const PORTRAIT_WIDTH = 600, PORTRAIT_HEIGHT = 315;
 await mkdir(outputDirectory, { recursive: true });

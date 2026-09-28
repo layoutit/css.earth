@@ -11,7 +11,7 @@ camera fragments do not change metadata. The sitemap contains one canonical
 URL per registered object, and `/robots.txt` advertises it.
 
 Bodies without a committed capture advertise the default Earth capture, so a
-share preview never points at a missing file. `node tools/prepare/prepare-social-images.mts --object=<id>`
+share preview never points at a missing file. `node site/build/prepare/prepare-social-images.mts --object=<id>`
 adds a body's own capture and the page then advertises it.
 
 Social previews are plain screenshots of each actual CSS scene, with the
@@ -26,8 +26,8 @@ Use prepared assets matching the inventories and real Chrome:
 ```sh
 pnpm setup:assets
 pnpm build
-node tools/prepare/prepare-social-images.mts                  # all registered objects
-# node tools/prepare/prepare-social-images.mts --object=earth # one object
+node site/build/prepare/prepare-social-images.mts                  # all registered objects
+# node site/build/prepare/prepare-social-images.mts --object=earth # one object
 pnpm build                          # include the new images
 node --test site/test/seo-discovery.test.mts
 ```

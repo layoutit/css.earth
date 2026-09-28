@@ -1,13 +1,13 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { datasetContributors } from '../../site/dataset-context.mts';
+import { datasetContributors } from '../../dataset-context.mts';
 import {
   PREPARED_TEXT_SCHEMA, catalogueTextWarnings, compositionWarnings, parseObjectText, readerTextErrors, readerTextWarnings,
-} from '../../site/object-text.mts';
-import type { ObjectText, TextContext, TextFinding } from '../../site/object-text.mts';
+} from '../../object-text.mts';
+import type { ObjectText, TextContext, TextFinding } from '../../object-text.mts';
 import { validateObjectProvenance } from '@cssearth/objects/provenance';
 import { parsePreparedExploration } from '@cssearth/objects/provenance';
 import { sourceResolver } from '@cssearth/objects/sources';
@@ -16,11 +16,11 @@ import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssea
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
-import { DATASET_ROUTES } from '../../src/platform/dataset-destination.mts';
+import { DATASET_ROUTES } from '../../../src/platform/dataset-destination.mts';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../..');
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
 export const describe = (findings: readonly TextFinding[]) => findings.map(({ objectId, slot, rule, detail }) => `  ${objectId} ${slot}: ${rule} — ${detail}`).join('\n');
 
@@ -111,4 +111,11 @@ export function reviewWarnings(warnings: readonly TextFinding[], ids: readonly s
   return [...new Map(own.map(warning => [JSON.stringify(warning), warning])).values()];
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const check = process.argv.includes('--check');
+  const ids = process.argv.slice(2).filter(argument => !['--', '--check'].includes(argument));
+  const { objects, warnings, composition } = await prepareText({ ids, check });
+  const review = reviewWarnings(warnings, ids);
+  if (review.length) console.warn(`Review ${review.length} reader-text warnings${ids.length ? ` about ${ids.join(', ')}` : ''}:\n${describe(review)}`);
+  console.log(JSON.stringify({ check, objects, warnings: warnings.length, composition }));
+}

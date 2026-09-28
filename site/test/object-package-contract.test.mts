@@ -16,7 +16,7 @@ import {
   validateObjectPackageFiles,
   validateObjectData,
   validateInventory,
-} from "../../tools/contract/object-package-contract.mts";
+} from "../build/object-package-contract.mts";
 
 const implemented = SCENE_OBJECTS;
 

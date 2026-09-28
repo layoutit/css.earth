@@ -9,9 +9,9 @@ import world from '../../src/objects/sun/prepared/world-context.json' with { typ
 import catalogue from '../source/moon-catalogues.json' with { type: 'json' };
 import { parseMoonLabels, projectMoonLabels } from '../catalogue-moon-labels.mts';
 import { hasProperMoonName, prepareBodyMoons } from '../prepare-body-moons.mts';
-import { parseMoonVector } from '../../tools/prepare/prepare-moon-labels.mts';
+import { parseMoonVector } from '../build/prepare/prepare-moon-labels.mts';
 import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
-import { minorMoonOrbitIds } from '../../tools/prepare/prepare-world-presentation.mts';
+import { minorMoonOrbitIds } from '../build/prepare/prepare-world-presentation.mts';
 
 test('prepared unavailable moon labels cover proper names and match pinned Horizons vectors', async () => {
   const bytes = await readFile(new URL('../source/moon-horizons.json.gz', import.meta.url));

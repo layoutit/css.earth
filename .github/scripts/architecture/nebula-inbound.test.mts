@@ -105,6 +105,16 @@ test('relative, absolute and URL paths cannot enter the bake sources past the pu
   } finally { f.cleanup(); }
 });
 
+test('site/build is site-owned preparation: it imports the public bake entries, and the runtime cannot reach the bake through it', () => {
+  const f = fixture();
+  try {
+    f.write('site/build/prepare/p.mts', "import {value} from '@cssearth/bake/public'; export {value};");
+    assert.deepEqual(f.check(), []);
+    f.write('site/runtime.mts', "import '../site/build/prepare/p.mts';");
+    assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via site/build/prepare/p.mts')));
+  } finally { f.cleanup(); }
+});
+
 test('test exceptions and preparation wrappers cannot be used as inbound runtime bypasses', () => {
   const f = fixture();
   try {

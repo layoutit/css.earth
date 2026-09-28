@@ -3,7 +3,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { OverlayOptions } from 'sharp';
-import { parseDatasetLens } from '../../site/prepared-panel-content.mts';
+import { parseDatasetLens } from '../../prepared-panel-content.mts';
 import { sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
 

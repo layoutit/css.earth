@@ -61,30 +61,17 @@
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/compact-spectrum.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/spectrum-data.mts"},
       {"from":"tools/ci/check-object-runtime-ownership.mts","to":"site/objects.mts"},
-      {"from":"tools/contract/object-package-contract.mts","to":"site/object-page-contract.mts"},
       {"from":"tools/objects/content/prepare.ts","to":"site/prepared-shell-titles.d.mts"},
+      {"from":"tools/objects/prepare-spatial-context.ts","to":"site/build/prepare/jpl-mission-targets.mts"},
       {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"tools/prepare/check-preparation-inputs.mts","to":"site/object-text.mts"},
-      {"from":"tools/prepare/jpl-mission-targets.mts","to":"site/source/jpl-small-body-mission-targets.json"},
       {"from":"tools/prepare/prepare-catalog.mts","to":"site/asset-origin.mts"},
       {"from":"tools/prepare/prepare-context-availability.mts","to":"site/volume-presentation.mts"},
-      {"from":"tools/prepare/prepare-feature-index.mts","to":"site/asset-origin.mts"},
-      {"from":"tools/prepare/prepare-interior-fills.mts","to":"site/object-page-contract.mts"},
-      {"from":"tools/prepare/prepare-moon-labels.mts","to":"site/prepare-body-moons.mts"},
-      {"from":"tools/prepare/prepare-moon-labels.mts","to":"site/source/moon-catalogues.json"},
       {"from":"tools/prepare/prepare-object-discovery.mts","to":"site/asset-origin.mts"},
       {"from":"tools/prepare/prepare-object-json.mts","to":"site/object-page-contract.mts"},
-      {"from":"tools/prepare/prepare-shell-icons.mts","to":"site/source/icons/manifest.mts"},
-      {"from":"tools/prepare/prepare-shell-titles.mts","to":"site/source/titles/manifest.mts"},
-      {"from":"tools/prepare/prepare-sidebar-thumbnails.mts","to":"site/prepared-panel-content.mts"},
-      {"from":"tools/prepare/prepare-social-images.mts","to":"site/server/preview.mts"},
-      {"from":"tools/prepare/prepare-text.mts","to":"site/dataset-context.mts"},
-      {"from":"tools/prepare/prepare-text.mts","to":"site/object-text.mts"},
       {"from":"tools/prepare/prepare-volume-provenance.mts","to":"site/dataset-content.mts"},
       {"from":"tools/prepare/prepare-volume-provenance.mts","to":"site/object-shell-types.ts"},
-      {"from":"tools/prepare/prepare-volume-provenance.mts","to":"site/volume-presentation.mts"},
-      {"from":"tools/prepare/prepare-world-presentation.mts","to":"site/source/major-moons.json"},
-      {"from":"tools/prepare/prepare-world-presentation.mts","to":"site/world-context-plan.mts"}
+      {"from":"tools/prepare/prepare-volume-provenance.mts","to":"site/volume-presentation.mts"}
     ],
     "nothing-imports-cli-entries": [],
     "nothing-imports-prepare-scripts": [],
@@ -230,6 +217,7 @@
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/compact-spectrum.mts"},
       {"from":"site/prepare-body-overview.mts","to":"tools/objects/charts/spectrum-data.mts"}
     ],
+    "runtime-imports-no-site-build": [],
     "telescope-imports-no-bake": []
   }
 }

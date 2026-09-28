@@ -1,12 +1,12 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { pathToFileURL } from 'node:url';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
 import { normalizeDestinationQuery } from '@cssearth/objects';
-import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
+import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 /** One search index over every body's prepared named features, so a feature can be found
  * from any page. Each body's catalogue stays the byte-verified source; the index carries
@@ -119,4 +119,6 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   return pin;
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  console.log(JSON.stringify(await prepareFeatureIndex()));
+}

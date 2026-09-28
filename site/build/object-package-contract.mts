@@ -1,4 +1,4 @@
-import { objectPageStyles } from '../../site/object-page-contract.mts';
+import { objectPageStyles } from '../object-page-contract.mts';
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { ObjectEntry } from '@cssearth/objects';

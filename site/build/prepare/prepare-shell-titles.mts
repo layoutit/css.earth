@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import { refuseDirectRun } from '../cli/library-entry.mts';
+import { pathToFileURL } from 'node:url';
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
-import { SHELL_TITLE_SOURCES } from "../../site/source/titles/manifest.mts";
+import { SHELL_TITLE_SOURCES } from "../../source/titles/manifest.mts";
 
 const SAFE_FILE = /^title-[a-z0-9-]+\.svg$/u;
 const SAFE_KEY = /^[a-z][A-Za-z0-9]*$/u;
@@ -12,9 +12,9 @@ const SVG_ROOT = /<svg\b[^>]*\bviewBox="0 0 ([0-9.]+) ([0-9.]+)"[^>]*\bwidth="([
 const SVG_METADATA = /<metadata>([^<]+)<\/metadata>/u;
 
 export async function prepareShellTitles({
-  sourceRoot = resolve(import.meta.dirname, "../../site/source/titles"),
-  publicRoot = resolve(import.meta.dirname, "../../public/shell"),
-  moduleOutput = resolve(import.meta.dirname, "../../site/prepared-shell-titles.mjs"),
+  sourceRoot = resolve(import.meta.dirname, "../../source/titles"),
+  publicRoot = resolve(import.meta.dirname, "../../../public/shell"),
+  moduleOutput = resolve(import.meta.dirname, "../../prepared-shell-titles.mjs"),
 } = {}) {
   validateManifest();
   await mkdir(publicRoot, { recursive: true });
@@ -52,7 +52,7 @@ export async function prepareShellTitles({
       source: SHELL_TITLE_SOURCES.font.source,
       sourceUrl: SHELL_TITLE_SOURCES.font.sourceUrl,
       fontSize: SHELL_TITLE_SOURCES.recipe.fontSize,
-      generator: "tools/prepare/prepare-shell-titles.mts",
+      generator: "site/build/prepare/prepare-shell-titles.mts",
     });
   }
   const moduleSource = [
@@ -90,4 +90,6 @@ function validateManifest() {
   }
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  await prepareShellTitles();
+}
