@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../objects/source-test.mts';
 const test = sourceTest();
 import { mkdtemp, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -15,7 +15,7 @@ test('element-budget executes all 9 typed application cases', async t => {
   const directory = await mkdtemp(resolve(parent, 'element-budget-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const outfile = resolve(directory, 'cases.test.mjs');
-  await build({ entryPoints: [resolve(root, 'tools/nebula/application/element-budget.cases.ts')], outfile,
+  await build({ entryPoints: [resolve(root, 'tests/nebula/application/element-budget.cases.ts')], outfile,
     bundle: true, platform: 'node', format: 'esm', target: 'node22', packages: 'external',
     plugins: [bundleRendererPackage, { name: 'retain-native-modules', setup(builder) {
       builder.onResolve({ filter: /\.m[jt]s$/ }, args => ({ path: resolve(args.resolveDir, args.path), external: true }));
