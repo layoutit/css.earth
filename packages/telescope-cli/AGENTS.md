@@ -19,8 +19,9 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
   it; `toolchains.json` still names the ROTIR environment at its former path, because an installed toolchain records the
   digest of that text, and `currentArchivePath` in `src/archives/programs.mts` finds it here. Per-body
-  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps) stays in
-  `tools/objects/<archive>/`; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. A receipt or ledger written before
+  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
+  discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
+  other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. A receipt or ledger written before
   a move keeps the path it recorded; `src/archives/programs.mts` maps a recorded program path to its current location, for
   qualification, receipt writing and query display alike. No archive module names a body (`archives/archive-scope.test.mts`).
   That per-body JSON sits outside the module fingerprint closure, and a lock's `Regenerate:` header still naming the old tool

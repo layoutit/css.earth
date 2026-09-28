@@ -155,6 +155,11 @@ export default [
     rules: { 'max-lines': 'off' },
   },
   {
+    // Moved unchanged from tools/objects/circumstellar, where the limit only warned; splitting it is separate work.
+    files: ['packages/telescope-cli/authoring/circumstellar/author.mts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
     // Moved unchanged from tools/objects, which warns instead of failing on the line limit; splitting them is separate work.
     // The layered-oblate and cutaway bakes were held byte-identical across the move, so neither module is split here. The navigation
     // preparation moved with only its imports, checkout root and a lazy registry read changed; its outputs stayed byte-identical.
