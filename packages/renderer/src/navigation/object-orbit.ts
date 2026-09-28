@@ -29,6 +29,8 @@ export interface OrbitServices extends InteractionServices { createCameraOrienta
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 
 import { createSceneLifetime } from "@cssearth/engine";
+import { multiplyPreparedMatrix4, readPreparedMatrix4 } from "@cssearth/core";
+import { readPreparedTransform } from "./prepared-camera-basis.js";
 import { sampleDestinationFlight } from "@cssearth/engine";
 import { viewSunDirectionToPhysicalLightDirection } from "../solar-system/directional-sun-coordinate.js";
 import { createPerspectiveDolly, validatePerspectiveCameraPlan } from "./perspective-dolly.js";
@@ -205,13 +207,23 @@ export function createRetainedCubicSkyOrbit({
   lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage,
     () => viewport.read(cameraPlan.projection.cssPerspective).bounds,
     (x, y) => stage.dataset.lod === 'geometry' && surfaceHitTest(x, y)));
+  // Every prepared body draws its system node first under the scene, with the body's north pole on its +Z axis. Drags
+  // turn about that pole. A focused neighbour is not this body, so its drag keeps the screen axes.
+  const bodyPole = (): { pole?: Vector3 } => {
+    if (camera.focus()) return {};
+    const system = sceneElement.querySelector<HTMLElement>(':scope > .polycss-mesh');
+    if (!system) return {};
+    const m = multiplyPreparedMatrix4(readPreparedMatrix4(camera.scene()), readPreparedTransform(system.style.transform || 'none'));
+    const length = Math.hypot(m[8]!, m[9]!, m[10]!);
+    return length > 0 ? { pole: [m[8]! / length, m[9]! / length, m[10]! / length] } : {};
+  };
   const controls = createObjectInteractionControls({
     inputSurface,
     cameraMotion,
     runtimePolicy,
     onError: retireFailure,
     camera,
-    trackballMetrics: () => perspective.trackball(),
+    trackballMetrics: () => ({ ...perspective.trackball(), ...bodyPole() }),
     sceneMatrix: () => camera.scene(),
     rotate: publishCameraDelta,
     minimumZoom: minimumZoom(),

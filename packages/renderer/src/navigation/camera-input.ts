@@ -8,11 +8,12 @@ import type { ActiveMode, InterruptionMode } from './camera-input-diagnostics.js
 import { bindCameraInputListeners } from './camera-input-listeners.js';
 import { errorMessage } from './types.js';
 import type { TrackballMetrics, CameraDelta, ControlsUpdate, Quaternion } from './types.js';
+import type { Vector3 } from "@cssearth/engine";
 import type { SphereDragInput } from "@cssearth/engine";
 import type { DragThrow } from "@cssearth/engine";
 export type MatrixDragControls = ReturnType<typeof createUnboundedMatrixDragControls>;
 import { createSceneLifetime } from "@cssearth/engine";
-import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
+import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity, poleTumbleTurn, poleTurnRotation, rotateVector } from "@cssearth/engine";
 import { advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_INERTIA, projectTrackballDelta, recordDragSample, resetDragHistory } from "@cssearth/engine";
 import { SURFACE_FLY_TO, planSurfaceFlyTo, sampleSurfaceFlyTo } from "./surface-fly-to.js";
 import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
@@ -42,7 +43,7 @@ export function createUnboundedMatrixDragControls({
     }
   };
   let drag = true, wheel = true;
-  type Throw = { -readonly [K in keyof DragThrow]: DragThrow[K] } & { previousTimestamp: number };
+  type Throw = { -readonly [K in keyof DragThrow]: DragThrow[K] } & { previousTimestamp: number; pole: Vector3 | null };
   /** One pressed pointer: its trackball, its latest sample and the orbit it has recorded. It ends with the press. */
   interface Press {
     readonly pointerId: number;
@@ -53,6 +54,8 @@ export function createUnboundedMatrixDragControls({
     /** Started over the body's surface, for the pressed cursor. */
     readonly surface: boolean;
     trackball: TrackballMetrics;
+    /** The body's pole as the drag has turned it so far; null where the object publishes none. */
+    pole: Vector3 | null;
     trackballInvalidated: boolean;
     x: number; y: number; timestamp: number;
     pitch: number; yaw: number;
@@ -78,12 +81,24 @@ export function createUnboundedMatrixDragControls({
   };
   const announceRotation = (active: boolean) =>
     inputSurface.dispatchEvent(new CustomEvent('objectrotationchange', { bubbles: true, detail: { active } }));
-  const projectSkyRotation = (trackball: TrackballMetrics, pointer: SphereDragInput) => {
+  const projectSkyTurn = (trackball: TrackballMetrics, pointer: SphereDragInput, pole: Vector3) =>
+    poleTumbleTurn(projectTrackballDelta({ ...trackball, ...pointer, radius: trackball.radius }), pole);
+  // A body with a pole tumbles about it and across it; otherwise about the screen axes.
+  const projectSkyRotation = (trackball: TrackballMetrics, pointer: SphereDragInput, pole: Vector3 | null = null) => {
+    if (pole) return poleTurnRotation(projectSkyTurn(trackball, pointer, pole), pole);
     const projected = projectTrackballDelta({ ...trackball, ...pointer, radius: trackball.radius });
     return rotationFromAngularVelocity([
       -projected.pitchDegrees * Math.PI / 180,
       projected.yawDegrees * Math.PI / 180, 0,
     ], 1);
+  };
+  // A pole throw coasts about the pole as it turns; the others keep one axis.
+  const coastRotation = (state: Throw, elapsedMilliseconds: number): Quaternion => {
+    const turn = state.poleTurnPerMillisecond;
+    if (turn === null || state.pole === null) return rotationFromAngularVelocity(state.angularVelocity, elapsedMilliseconds);
+    const rotation = poleTurnRotation({ spin: turn.spin * elapsedMilliseconds, tilt: turn.tilt * elapsedMilliseconds }, state.pole);
+    state.pole = rotateVector(rotation, state.pole);
+    return rotation;
   };
   const history = createDragHistory();
   let inertiaStarts = 0, inertiaFrames = 0, inertiaCancels = 0;
@@ -279,8 +294,8 @@ export function createUnboundedMatrixDragControls({
       rotate({
         controlPitchDelta: step.pitchDeltaDegrees,
         controlYawDelta: step.yawDeltaDegrees,
-        rotation: rotationFromAngularVelocity(
-          inertiaState.angularVelocity,
+        rotation: coastRotation(
+          inertiaState,
           elapsedMilliseconds * Math.hypot(
             step.pitchDegreesPerMillisecond, step.yawDegreesPerMillisecond,
           ) / inertiaState.initialSpeedDegreesPerMillisecond,
@@ -294,13 +309,15 @@ export function createUnboundedMatrixDragControls({
   };
   const startInertia = (throwState: DragThrow, released: Press, releaseTimestamp: number, releaseFrameTimestamp: number | null) => {
     const { frameMilliseconds } = released;
+    const coasting: Throw = { ...throwState, previousTimestamp: 0,
+      pole: released.pole && rotateVector(throwState.launchRotation, released.pole) };
     const firstStep = advanceDragThrow({
       ...throwState,
       elapsedMilliseconds: frameMilliseconds,
     });
     rotate({
       rotation: composeDragRotation(
-        rotationFromAngularVelocity(throwState.angularVelocity,
+        coastRotation(coasting,
           frameMilliseconds * Math.hypot(firstStep.pitchDegreesPerMillisecond,
             firstStep.yawDegreesPerMillisecond) /
               throwState.initialSpeedDegreesPerMillisecond),
@@ -313,7 +330,7 @@ export function createUnboundedMatrixDragControls({
     });
     if (lifetime.disposed) return false;
     const state: Throw = {
-      ...throwState,
+      ...coasting,
       pitchDegreesPerMillisecond: firstStep.pitchDegreesPerMillisecond,
       yawDegreesPerMillisecond: firstStep.yawDegreesPerMillisecond,
       previousTimestamp: releaseFrameTimestamp ?? releaseTimestamp,
@@ -371,7 +388,7 @@ export function createUnboundedMatrixDragControls({
     const surface = overSurface(event.clientX, event.clientY);
     pointerPosition = { x: event.clientX, y: event.clientY };
     const current: Press = press = { pointerId: event.pointerId, dragging: false, sky: startsOnSky || tumbleOnly, surface,
-      trackball: measuredTrackball, trackballInvalidated: false, x: event.clientX, y: event.clientY, timestamp: event.timeStamp,
+      trackball: measuredTrackball, pole: measuredTrackball.pole ?? null, trackballInvalidated: false, x: event.clientX, y: event.clientY, timestamp: event.timeStamp,
       pitch: 0, yaw: 0, pending: null, cadenceFrame: null, cadenceTimestamp: null, frameMilliseconds: 1000 / 60 };
     current.cadenceFrame = requestFrame(measureCadence);
     resetDragHistory(history);
@@ -405,6 +422,7 @@ export function createUnboundedMatrixDragControls({
           throw new TypeError("Unbounded matrix drag trackball is invalid.");
         }
         current.trackball = measuredTrackball;
+        current.pole = measuredTrackball.pole ?? null;
         current.trackballInvalidated = false;
         resetDragHistory(history);
         current.pitch = 0;
@@ -418,7 +436,9 @@ export function createUnboundedMatrixDragControls({
       const spherePointer = { ...pointer, centerX: trackball.centerX, centerY: trackball.centerY,
         opticalCenterX: trackball.opticalCenterX, opticalCenterY: trackball.opticalCenterY,
         radius: trackball.surfaceRadius, focalLength: trackball.focalLength };
-      const sampleRotation = current.sky ? projectSkyRotation(trackball, spherePointer) : projectSphereDrag(spherePointer);
+      const pole = current.pole;
+      const sampleRotation = current.sky ? projectSkyRotation(trackball, spherePointer, pole) : projectSphereDrag(spherePointer);
+      if (pole && current.sky) current.pole = rotateVector(sampleRotation, pole);
       rotation = composeDragRotation(sampleRotation, rotation);
       pitchDelta += fittedPitch;
       yawDelta += projected.yawDegrees;
@@ -481,9 +501,11 @@ export function createUnboundedMatrixDragControls({
     const freshRelease = releaseAge >= 0 &&
       releaseAge <= TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds;
     const { trackball } = current;
+    const releasePole = current.sky ? current.pole : null;
     const throwState = current.dragging && event.type === "pointerup" && freshRelease
       ? estimateDragThrow({ history, releaseTimestamp: event.timeStamp, trackball, frameMilliseconds: current.frameMilliseconds,
-        projectRotation: current.sky ? pointer => projectSkyRotation(trackball, pointer) : undefined }) : null;
+        projectRotation: current.sky ? pointer => projectSkyRotation(trackball, pointer) : undefined,
+        pole: releasePole, projectTurn: releasePole && (pointer => projectSkyTurn(trackball, pointer, releasePole)) }) : null;
     if (throwState !== null) flushPendingDrag();
     else current.pending = null;
     if (lifetime.disposed) return;
