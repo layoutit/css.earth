@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
-import { refreshObjectCharts } from './refresh-charts.mts';
+import { refreshObjectCharts } from '../build/prepare/refresh-charts.mts';
 
 test('partial refresh changes only chart bytes and sizes; refuses local content edits', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'chart-refresh-test-'));

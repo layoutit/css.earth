@@ -1,11 +1,11 @@
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { selectedObjectIds } from '@cssearth/bake/delivery';
-import { parseChartAssetRecipe } from '../../site/build/charts/charts.ts';
+import { parseChartAssetRecipe } from '../charts/charts.ts';
 import { refreshObjectCharts } from './refresh-charts.mts';
-import { refuseDirectRun } from '../cli/library-entry.mts';
 
-export async function prepareCharts(args: readonly string[] = [], root = resolve(import.meta.dirname, '../..')) {
+export async function prepareCharts(args: readonly string[] = [], root = resolve(import.meta.dirname, '../../..')) {
   const write = args.includes('--write');
   const explicit = args.some(arg => arg.startsWith('--object='));
   let count = 0;
@@ -22,4 +22,5 @@ export async function prepareCharts(args: readonly string[] = [], root = resolve
   console.log(`${count} charts. Publish changed assets before committing their inventories.`);
 }
 
-refuseDirectRun(import.meta);
+// Entry script: node site/build/prepare/prepare-charts.mts [--object=<id>] [--write].
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) await prepareCharts(process.argv.slice(2));
