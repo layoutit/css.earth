@@ -1,14 +1,14 @@
-// Entry script: node tools/sources/astronomy-data/mark-map-usage.mts [--ref=origin/main] [--dry-run]
+// Entry script: node packages/bake/cli/astronomy-data-mark-map-usage.mts [--ref=origin/main] [--dry-run]. Marks the
+// ledger's USGS and Photojournal maps that a cssEarth body already downloads; the work is in @cssearth/bake/sources.
 /**
- * Mark the ledger's USGS and Photojournal maps that a cssEarth body already downloads. A dataset is `this product` for
- * a body when one of its map files has the same file name as an `origin` or `url` in exactly one body's
- * source/manifest.json at the given ref. Preview images are not maps. Rows already in map_usage, including the hand
- * judgements marked `same data`, are kept.
+ * A dataset is `this product` for a body when one of its map files has the same file name as an `origin` or `url` in
+ * exactly one body's source/manifest.json at the given ref. Preview images are not maps. Rows already in map_usage,
+ * including the hand judgements marked `same data`, are kept.
  */
 import { execFileSync } from "node:child_process";
-import { basename, resolve } from "node:path";
+import { basename } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { databasePath, root } from "./model.mts";
+import { databasePath, checkoutRoot } from "@cssearth/bake/sources";
 
 const ref = process.argv.find(arg => arg.startsWith("--ref="))?.slice("--ref=".length) ?? "origin/main";
 const dry = process.argv.includes("--dry-run");
@@ -17,7 +17,7 @@ const fileName = (url: string) => {
 };
 
 const lines = execFileSync("git", ["grep", "-E", '"(origin|url)": "https?://', ref, "--", "src/objects/*/source/manifest.json"],
-  { cwd: resolve(root, "../../.."), encoding: "utf8", maxBuffer: 256 * 1024 * 1024 }).split("\n");
+  { cwd: checkoutRoot, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 }).split("\n");
 const bodiesByFile = new Map<string, Set<string>>();
 for (const line of lines) {
   const match = /^[^:]+:src\/objects\/([^/]+)\/source\/manifest\.json:.*"(?:origin|url)": "([^"]+)"/.exec(line);

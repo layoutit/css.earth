@@ -1,7 +1,7 @@
 // Proposed decisions for Photojournal map entries the ledger has not reviewed. Each reason is built from the entry's own
 // evidence (what chose it, its instrument, date and largest file), never one sentence copied across rows. Rules suggest a
 // scope; they do not replace reading the product before it is used.
-import { bodiesOf } from "../model.mts";
+import { bodiesOf } from "../model.ts";
 export type PhotojournalEntry = {
   post: number; pia: string; title: string; date: string; page: string; target: string; mission: string; instrument: string;
   titleMatch: boolean; captionPhrases: string[]; files: { url: string; mime: string; width: number | null; height: number | null; bytes: number | null }[];

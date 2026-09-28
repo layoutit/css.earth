@@ -1,14 +1,15 @@
-// Entry script: node tools/sources/astronomy-data/browse.mts
+// Entry script: node packages/bake/cli/astronomy-data-browse.mts. Opens the ledger in Datasette, read-only, with the
+// overview dashboard, the dark theme and the map gallery; the work is in @cssearth/bake/sources.
 /**
- * Open the ledger in Datasette, read-only, with the overview dashboard, the dark theme and the map gallery. The first
- * run installs the pinned Datasette packages into output/ledger-venv (ignored); PORT changes the port (default 8001).
+ * The first run installs the pinned Datasette packages into output/ledger-venv (ignored); PORT changes the port
+ * (default 8001).
  */
 import { spawnSync, spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { databasePath, root } from "./model.mts";
+import { databasePath, root, checkoutRoot } from "@cssearth/bake/sources";
 
-const repo = resolve(root, "../../.."), config = resolve(root, "datasette"), venv = resolve(repo, "output/ledger-venv");
+const config = resolve(root, "datasette"), venv = resolve(checkoutRoot, "output/ledger-venv");
 const datasette = resolve(venv, "bin/datasette");
 function run(command: string, args: string[]): void {
   const result = spawnSync(command, args, { stdio: "inherit" });

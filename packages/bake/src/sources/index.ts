@@ -9,7 +9,13 @@
 // from their manifests or read as installed, at the application route passed in; the facility artwork refresh, which
 // swaps model-render bytes under unchanged attribution; and the investigation ledgers beside each object and facility,
 // the shared investigation surveys they quote (`data/investigations/`) and the report over them
-// (`packages/bake/cli/report-investigations.mts`). It imports `runtime-source`, `objects/content` and `delivery`.
+// (`packages/bake/cli/report-investigations.mts`); and the astronomy data audit ledger (`astronomy-data/`), whose
+// document is `src/sources/astronomy-data/README.md`. It imports `runtime-source`, `objects/content` and `delivery`.
+export * from './astronomy-data/bodies.ts';
+export * from './astronomy-data/collect/archive-review.ts';
+export * from './astronomy-data/collect/client.ts';
+export * from './astronomy-data/collect/photojournal-review.ts';
+export * from './astronomy-data/model.ts';
 export * from './authored-object.ts';
 export * from './authored-world-frame.ts';
 export * from './author-source-records.ts';

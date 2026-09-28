@@ -1,3 +1,5 @@
+// Entry script: node packages/bake/cli/astronomy-data-verify.mts. Checks the astronomy data ledger's integrity, snapshot
+// coverage, retained evidence hashes and document links; the work is in @cssearth/bake/sources.
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile, stat } from "node:fs/promises";
@@ -14,7 +16,7 @@ import {
   array,
   string,
   number,
-} from "./model.mts";
+} from "@cssearth/bake/sources";
 const db = openLedger();
 assert.equal(db.prepare("PRAGMA integrity_check").get()?.integrity_check, "ok");
 assert.deepEqual(db.prepare("PRAGMA foreign_key_check").all(), []);

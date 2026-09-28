@@ -1,22 +1,21 @@
 // Apply reviewed collector output to the ledger in one transaction.
 //
-//   node tools/sources/astronomy-data/apply-ledger-fixes.mts [--dry-run]
+//   node packages/bake/cli/astronomy-data-apply-ledger-fixes.mts [--dry-run]
 //
-// Reads the scratch output of collect-photojournal.mts, collect-usgs-files.mts and collect-targets.mts and:
+// Reads the scratch output of astronomy-data-collect-photojournal.mts, astronomy-data-collect-usgs-files.mts and
+// astronomy-data-collect-targets.mts and:
 // - adds the Photojournal map entries the first title list missed, each with a decision and a reason built from its own
-//   evidence (collect/photojournal-review.mts), and records every Photojournal row's files, pixel sizes and caption phrases;
+//   evidence (photojournal-review.ts), and records every Photojournal row's files, pixel sizes and caption phrases;
 // - records each USGS product's files and replaces the two copied screen reasons with what that product's page offers;
 // - fills the target an archive label states, and records why a row has none.
 // Decisions already made on existing rows are kept; PIA24027, the Enceladus infrared mosaic, is now an input (PR #857).
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { array, object, string } from "./collect/client.mts";
-import { databasePath } from "./model.mts";
-import { reviewPhotojournal, type PhotojournalEntry } from "./collect/photojournal-review.mts";
+import { array, object, string, databasePath, reviewPhotojournal, checkoutRoot, type PhotojournalEntry } from "@cssearth/bake/sources";
 
 const dry = process.argv.includes("--dry-run");
-const read = async (path: string) => object(JSON.parse(await readFile(resolve(path), "utf8")));
+const read = async (path: string) => object(JSON.parse(await readFile(resolve(checkoutRoot, path), "utf8")));
 const photojournal = await read(`${process.env.PHOTOJOURNAL_WORK_DIR ?? "output/photojournal-refresh"}/photojournal-maps.json`);
 const usgsFiles = await read(`${process.env.USGS_WORK_DIR ?? "output/usgs-files"}/usgs-files.json`);
 const usgs = object(usgsFiles.products), collections = object(usgsFiles.collections ?? {});

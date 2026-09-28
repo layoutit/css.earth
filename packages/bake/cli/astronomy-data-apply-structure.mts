@@ -1,22 +1,18 @@
-// Give the ledger a data structure a query can rely on, in one transaction.
-//
-//   node tools/sources/astronomy-data/apply-structure.mts [--dry-run]
+// Entry script: node packages/bake/cli/astronomy-data-apply-structure.mts [--dry-run]. Gives the ledger a data structure
+// a query can rely on, in one transaction; the work is in @cssearth/bake/sources.
 //
 // - Moves the listings that repeat datasets out of `datasets` into `inventory`, with their proposal links: OPUS volumes
 //   and geometry (the same 1,627,081 observations as `opus`, split two other ways), Maryland holdings (directory
 //   listings of Maryland datasets), and DARTS collections and indexes (containers).
 // - Rebuilds `bodies` and `dataset_bodies` from each dataset's full target list (details.targets when a source shortened
-//   the target text) through bodies.mts: every body keyed by its cssEarth id when cssEarth catalogues it, otherwise by
+//   the target text) through bodies.ts: every body keyed by its cssEarth id when cssEarth catalogues it, otherwise by
 //   its own name with a kind read from its designation. A Photojournal tag of a tagged body's parent is role `parent`.
 // - Sets `datasets.family`. Maryland archives Rosetta per tracking pass and per mission phase (1,660 rows are one RSI
 //   gravity series), so its rows group by title without the session date, mission phase and version; every other
 //   archive already lists one row per dataset, so each row is its own family.
 // Running it again rebuilds the two body tables and the families.
-import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { bodiesOf, databasePath, root } from "./model.mts";
-import { bodyCatalogue, type Body } from "./bodies.mts";
-import { object, string } from "./collect/client.mts";
+import { bodiesOf, databasePath, checkoutRoot, bodyCatalogue, type Body, object, string } from "@cssearth/bake/sources";
 
 const dry = process.argv.includes("--dry-run");
 // "Rosetta-Orbiter RSI Escort 3 67P Gravity Measurement - 2014-12-14T06:44" and its 1,659 siblings are one series.
@@ -30,7 +26,7 @@ function marylandFamily(title: string): string {
     .trim();
 }
 const inventorySources = ["opus-volumes", "opus-geometry", "umd-holdings", "darts-collections", "darts-index"];
-const catalogue = await bodyCatalogue(resolve(root, "../../.."));
+const catalogue = await bodyCatalogue(checkoutRoot);
 const db = new DatabaseSync(databasePath);
 db.exec("PRAGMA foreign_keys=ON");
 const counts = { families: 0, inventoryMoved: 0, inventoryLinksMoved: 0, bodies: 0, links: 0, parentLinks: 0, datasetsWithoutBody: 0 };

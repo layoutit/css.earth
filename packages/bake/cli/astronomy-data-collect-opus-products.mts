@@ -1,6 +1,8 @@
+// Entry script: node packages/bake/cli/astronomy-data-collect-opus-products.mts. OPUS pipeline stage: named product
+// records the review rules cite (rings, spectra, occultations, encounters), into OPUS_WORK_DIR; the shared client is
+// in @cssearth/bake/sources.
 import { writeFile } from "node:fs/promises";
-import { get, batch, object, array, string } from "./client.mts";
-import { workDir } from "./client.mts";
+import { get, batch, object, array, string, workDir } from "@cssearth/bake/sources";
 const choices: [string, Record<string, string>][] = [
   ["saturn-opacity", { instrument: "Cassini RSS", target: "Saturn Rings" }],
   ["uranus-opacity", { instrument: "Voyager PPS", target: "Uranus Rings" }],

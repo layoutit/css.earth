@@ -1,8 +1,15 @@
 import { DatabaseSync } from "node:sqlite";
-import { resolve } from "node:path";
-import { array, object, string, number } from "./collect/client.mts";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { array, object, string, number } from "./collect/client.ts";
 export { array, object, string, number };
-export const root = import.meta.dirname;
+// The checkout this module's own @cssearth/bake install sits in, independent of the caller's cwd (as
+// packages/bake/src/navigation/prepare-navigation.ts and check-deploy-assets.ts resolve it).
+/** The checkout this command's own package install belongs to, for other astronomy-data modules and CLI commands that
+ * resolve scratch output directories the same way instead of against the caller's cwd. */
+export const checkoutRoot = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+/** The astronomy data ledger and its documents, in the checkout this command's own package install belongs to. */
+export const root = resolve(checkoutRoot, "src/sources/astronomy-data");
 export const databasePath = resolve(
   process.env.AUDIT_DB ?? root + "/ledger.sqlite",
 );

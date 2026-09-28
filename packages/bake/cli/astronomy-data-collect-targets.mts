@@ -1,6 +1,6 @@
 // Read the targets a record's own archive label states, for ledger rows collected without one.
 //
-//   TARGETS_WORK_DIR=output/ledger-targets node tools/sources/astronomy-data/collect-targets.mts
+//   TARGETS_WORK_DIR=output/ledger-targets node packages/bake/cli/astronomy-data-collect-targets.mts
 //
 // PDS4 bundles and collections name their targets in <Target_Identification><name>; PDS3 data sets name theirs as
 // TARGET_NAME in catalog/dataset.cat, including non-body values such as CHECKOUT or CALIBRATION, which are kept as stated.
@@ -10,10 +10,9 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { batch, object, string } from "./collect/client.mts";
-import { databasePath } from "./model.mts";
+import { batch, object, string, databasePath, checkoutRoot } from "@cssearth/bake/sources";
 
-const dir = resolve(process.env.TARGETS_WORK_DIR ?? "output/ledger-targets");
+const dir = resolve(checkoutRoot, process.env.TARGETS_WORK_DIR ?? "output/ledger-targets");
 await mkdir(dir + "/cache", { recursive: true });
 
 async function text(url: string): Promise<string | null> {

@@ -1,6 +1,9 @@
+// Entry script: node packages/bake/cli/astronomy-data-collect-opus.mts. Collects OPUS catalogue, sample, volume,
+// product, label and review data into ignored scratch output (OPUS_WORK_DIR), running the astronomy-data-collect-opus-{
+// catalog,samples,volumes,products,labels,review}.mts stages in order; the shared client is in @cssearth/bake/sources.
 import { mkdir, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
-import { workDir, get } from "./collect/client.mts";
+import { workDir, get } from "@cssearth/bake/sources";
 await mkdir(workDir, { recursive: true });
 const response = await fetch(
   "https://opus.pds-rings.seti.org/opus/__help/bundles.html",
@@ -13,8 +16,8 @@ await writeFile(
   JSON.stringify(await get("fields.json"), null, 2) + "\n",
 );
 for (const script of [
-  "collect",
-  "sample",
+  "catalog",
+  "samples",
   "volumes",
   "products",
   "labels",
@@ -22,7 +25,7 @@ for (const script of [
 ]) {
   const result = spawnSync(
     process.execPath,
-    [import.meta.dirname + "/collect/" + script + ".mts"],
+    [import.meta.dirname + "/astronomy-data-collect-opus-" + script + ".mts"],
     { stdio: "inherit" },
   );
   if (result.error) throw result.error;

@@ -8,7 +8,7 @@
 // bodies, or a sample named by a laboratory or meteorite row.
 import { readFile, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
-import { bodiesOf } from "./model.mts";
+import { bodiesOf } from "./model.ts";
 
 export type Body = { key: string; label: string; kind: string; parent: string; object: string; catalogued: boolean };
 type Known = { kind: string; parent: string; name: string };

@@ -1,6 +1,6 @@
 // List the files each USGS Astrogeology (Astropedia) product in the ledger actually offers, from its own product page.
 //
-//   USGS_WORK_DIR=output/usgs-files node tools/sources/astronomy-data/collect-usgs-files.mts
+//   USGS_WORK_DIR=output/usgs-files node packages/bake/cli/astronomy-data-collect-usgs-files.mts
 //
 // The first USGS screen recorded "No TIFF evidence found" without reading each product. An Astropedia product page links
 // every resource it serves (CKAN downloads under /ckan/dataset/<id>/resource/, and external files such as planetarynames
@@ -10,10 +10,9 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { batch, string } from "./collect/client.mts";
-import { databasePath } from "./model.mts";
+import { batch, string, databasePath, checkoutRoot } from "@cssearth/bake/sources";
 
-const dir = resolve(process.env.USGS_WORK_DIR ?? "output/usgs-files");
+const dir = resolve(checkoutRoot, process.env.USGS_WORK_DIR ?? "output/usgs-files");
 await mkdir(dir + "/cache", { recursive: true });
 export const RASTER = /\.(tif|tiff|cub|img|jp2)$/i;
 export const PREVIEW = /(^|\/)(browse|thumb|full)[^/]*\.(jpg|jpeg|png|gif)$/i;

@@ -1,7 +1,8 @@
+// Entry script: node packages/bake/cli/astronomy-data-collect-opus-labels.mts. OPUS pipeline stage: reads the original
+// scientific PDS label/XML for each product sample, into OPUS_WORK_DIR; the shared client is in @cssearth/bake/sources.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { array, object, string, batch } from "./client.mts";
-import { workDir } from "./client.mts";
+import { array, object, string, batch, workDir } from "@cssearth/bake/sources";
 const products = array(
   JSON.parse(await readFile(workDir + "/products.json", "utf8")),
 ).map(object);

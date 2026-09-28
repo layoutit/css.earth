@@ -1,6 +1,7 @@
+// Entry script: node packages/bake/cli/astronomy-data-collect-opus-volumes.mts. OPUS pipeline stage: one-record samples
+// per instrument/bundle volume, into OPUS_WORK_DIR; the shared client is in @cssearth/bake/sources.
 import { readFile, writeFile } from "node:fs/promises";
-import { get, batch, object, array, number } from "./client.mts";
-import { workDir } from "./client.mts";
+import { get, batch, object, array, number, workDir } from "@cssearth/bake/sources";
 const html = await readFile(workDir + "/bundles.html", "utf8");
 const entries = [
   ...html.matchAll(/<h3>([^<]+)<\/h3>\s*<ul>\s*<li>([^<]+)<\/li>/g),
