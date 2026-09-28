@@ -5,6 +5,7 @@
 // images would cost megabytes each.
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
+import { availableParallelism } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
@@ -75,8 +76,11 @@ export async function prepareSearchThumbnails(projectRoot = root) {
     { PREPARED_NAVIGATION_MARKERS: Record<string, { context?: { url: string } }> };
   const output = resolve(projectRoot, 'public/navigation/search');
   await mkdir(output, { recursive: true });
-  let written = 0, unchanged = 0, current = 0;
-  for (const [id, marker] of Object.entries(PREPARED_NAVIGATION_MARKERS)) {
+  let written = 0, unchanged = 0, current = 0, next = 0;
+  // Each preview reads only its own sprite. One at a time, the deploy spent 1 min 42 s on 2,134 of them.
+  const markers = Object.entries(PREPARED_NAVIGATION_MARKERS);
+  await Promise.all(Array.from({ length: availableParallelism() }, async () => { while (next < markers.length) {
+    const [id, marker] = markers[next++]!;
     if (!marker.context) continue;
     if (!/^\/navigation\/[a-z0-9-]+-context\.webp$/u.test(marker.context.url)) throw new TypeError(`${id}: unexpected context sprite ${marker.context.url}`);
     const spritePath = resolve(projectRoot, 'public', marker.context.url.slice(1)), path = resolve(output, `${id}@2x.webp`);
@@ -97,7 +101,7 @@ export async function prepareSearchThumbnails(projectRoot = root) {
     catch (error) { if (!isRecord(error) || error.code !== 'ENOENT') throw error; }
     await writeFile(path, image);
     written++;
-  }
+  } }));
   return { written, unchanged, current };
 }
 

@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "astro build && node tools/cli/run-implemented-objects.mts assemble",
-    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm build:tools && pnpm setup:asset-data && node tools/assets/restore-object-json.mts && pnpm prepare:dataset-sprites && node tools/prepare/cli/prepare-factsheets.mts --quiet && node tools/prepare/cli/prepare-provenance.mts --objects-only && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:lens-billboards && pnpm prepare:search-thumbnails && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts --catalog-only && astro build && node tools/cli/run-implemented-objects.mts assemble && node tools/cli/bundle-netlify-functions.mts",
+    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:tools && pnpm setup:asset-data && node tools/assets/restore-object-json.mts && pnpm prepare:dataset-sprites && node tools/prepare/cli/prepare-factsheets.mts --quiet && node tools/prepare/cli/prepare-provenance.mts --objects-only && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:lens-billboards && pnpm prepare:search-thumbnails && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node tools/prepare/cli/prepare-facilities.mts --catalog-only && astro build && node tools/cli/run-implemented-objects.mts assemble && node tools/cli/bundle-netlify-functions.mts",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build:core": "pnpm --filter @cssearth/core build",
@@ -29,7 +29,8 @@
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "build:preparation:bundle": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
     "build:renderer": "pnpm --filter @cssearth/renderer build",
-    "build:tools": "pnpm build:packages && pnpm prepare:catalog && pnpm prepare:titles && node packages/bake/cli/prepare-solar-geometry.mts && node packages/bake/cli/prepare-navigation.mts --catalog-only && pnpm build:preparation:bundle && pnpm prepare:world-context && pnpm prepare:shell-assets",
+    "build:tools": "pnpm build:packages && pnpm prepare:tools",
+    "prepare:tools": "pnpm prepare:catalog && pnpm prepare:titles && node packages/bake/cli/prepare-solar-geometry.mts && node packages/bake/cli/prepare-navigation.mts --catalog-only && pnpm build:preparation:bundle && pnpm prepare:world-context && pnpm prepare:shell-assets",
     "arch:map": "node .github/scripts/architecture/index.mts map",
     "check:architecture": "node .github/scripts/architecture/index.mts check",
     "check:assets-published": "node packages/bake/cli/check-assets-published.mts",
