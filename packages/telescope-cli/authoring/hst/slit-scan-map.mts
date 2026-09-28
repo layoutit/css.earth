@@ -233,7 +233,7 @@ export function scanProduct(definition: SlitScanDefinition, run: SlitScanRun): B
     CONTORD: String(definition.band.continuumOrder), ACROSSLT: definition.acrossSlitDirection,
     NVISITS: String(run.visits.length), NFRAMES: String(run.used.length), SCANID: definition.id,
     COMMONER: String(quantiles(run.referenceSigmas, [0.5])[0] ?? 0),
-    ORIGIN: 'cssEarth packages/telescope-cli/authoring/hst/slit-scan-map.mts',
+    ORIGIN: 'cssEarth tools/objects/hst/slit-scan-map.mts',
   }, [
     { name: definition.band.quantity, units: definition.band.units, values: map.depth },
     { name: `${definition.band.quantity} ERROR`, units: definition.band.units, values: map.error },
