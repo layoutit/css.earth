@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "herculina",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 532,
+    "by": "SBDB record des 532"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 283,
+        "fields": {
+          "Designation": "532",
+          "Name": "Herculina",
+          "Diameter_Nominal": "195.0",
+          "Uncert": "11.1",
+          "Dia_1": "182",
+          "Uncert_1": "5",
+          "Events_1": "5",
+          "Invalid_1": "0",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "1814",
+          "Dia_2": "189",
+          "Uncert_2": "1",
+          "Events_2": "1",
+          "Invalid_2": "2",
+          "Model_Source_2": "DAMIT",
+          "Model_Number_2": "222",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_2": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 429,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "532",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00532",
+          "Absolute_mag": "5.81",
+          "Slope_param": "+0.26",
+          "Mean_JD": "2455356.7519340",
+          "N_W1": "13",
+          "N_W2": "13",
+          "N_W3": "13",
+          "N_W4": "13",
+          "Fit_code": "DVBI",
+          "Diameter": "167.791",
+          "Diameter_err": "0.890",
+          "V_albedo": "0.285",
+          "V_albedo_err": "0.029",
+          "IR_albedo": "0.340",
+          "IR_albedo_err": "0.052",
+          "Beaming_param": "0.870",
+          "Beaming_param_err": "0.021",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

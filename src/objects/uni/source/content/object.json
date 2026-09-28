@@ -32,7 +32,47 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.104 +0.011/−0.010",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Lellouch et al. 2017",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/7/fields/ALBEDO; /tno/rows/7/fields/ALBEDO_ERROR_UPPER; /tno/rows/7/fields/ALBEDO_ERROR_LOWER; /tno/rows/7/fields/ALBEDO_COLOR; /tno/rows/7/fields/REFERENCE_CODE"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "0.780 ± 0.100 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Kovalenko et al. 2017",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/8/fields/DENSITY; /tno/rows/8/fields/DENSITY_ERROR_UPPER; /tno/rows/8/fields/DENSITY_ERROR_LOWER; /tno/rows/8/fields/METHOD_DENSITY; /tno/rows/8/fields/REFERENCE_CODE"
+        }
+      },
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "Unnamed in the catalogue: semimajor axis 4770 ± 40.0 km, period 8.309 ± 2.00 × 10⁻⁴ days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Brown 2013",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

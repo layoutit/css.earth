@@ -1,0 +1,41 @@
+{
+  "id": "source-bennu-hydration",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "OVIRS Based Bennu Global Detailed Survey Equitorial Station 3 Band Depth at 2.7 um Map",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:orex.spectral_analysis:data_vnir_maps:g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.spectral_analysis_v1_0/data_vnir_maps/detailed_survey/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.fits",
+      "label": "PDS Small Bodies Node"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/science.abc3522",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/28"
+    },
+    {
+      "path": "src/objects/bennu/source/science/spectral/g_3170mm_sp_ovirs_eq3_oh2700nm_wavc_0000n00000.xml",
+      "locator": "/Product_Observational/Identification_Area"
+    }
+  ],
+  "creators": [
+    "H. Kaplan"
+  ],
+  "publisher": "NASA Planetary Data System Small Bodies Node",
+  "version": "1.0",
+  "relations": [],
+  "statements": []
+}

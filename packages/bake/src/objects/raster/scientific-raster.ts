@@ -7,6 +7,7 @@ import { loadImageDemScience } from './image-dem-science.ts';
 import {loadPdsImage} from './pds/pds-image.ts';
 import {loadFacetScalarSurface} from './facet-scalars.ts';
 import {loadVtkCategories} from './vtk-categories.ts';
+import {loadCircleCatalogue} from './circle-catalogue.ts';
 import {loadGeologySurface, categoryColorForValue} from './categorical-geology.ts';
 import { loadScalarMap } from './pds/pds-scalar-map.ts';
 import { resolve } from 'node:path';
@@ -137,6 +138,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (lens.format === 'pds-image') return loadPdsImage(root, lens);
   if (lens.format === 'facet-scalars') return loadFacetScalarSurface(root, lens, sourceMesh);
   if (lens.format === 'vtk-cell-categories') { if(!sourceMesh)throw new Error('Categorical science requires source mesh'); return loadVtkCategories(root, lens, sourceMesh); }
+  if (lens.format === 'circle-catalogue') return loadCircleCatalogue(root, lens, sourceMesh);
   if (lens.format === 'geologic-shapefile') return loadGeologySurface(root, lens);
   if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
   if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {

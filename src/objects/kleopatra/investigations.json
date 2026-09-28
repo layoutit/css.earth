@@ -117,6 +117,17 @@
         "https://observations.lam.fr/astero/Data/216Kleopatra/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_adam.obj"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Baer et al. mass 4.64 × 10¹⁸ ± 2.00 × 10¹⁷ kg (record 248, Descamps et al. 2011) is not shown: the astronomy record already carries GM 0.1982 km³/s² (about 2.97e+18 kg with CODATA 2018 G), outside the catalogue uncertainty.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

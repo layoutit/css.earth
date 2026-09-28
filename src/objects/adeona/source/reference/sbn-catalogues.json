@@ -1,0 +1,183 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "adeona",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 145,
+    "by": "SBDB record des 145"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 145,
+        "fields": {
+          "Number": "145",
+          "Name": "Adeona",
+          "Desig": "-",
+          "Family": "505",
+          "CSource": "S",
+          "Class": "C",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "150.95",
+          "HSource": "L",
+          "H": "8.05",
+          "HBand": "V",
+          "GSource": "L",
+          "G": "0.09",
+          "G2": "-9.99",
+          "AlbSource": "L",
+          "AlbFlag": "-",
+          "Albedo": "0.0467",
+          "PFlag": "-",
+          "Period": "15.071",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.04",
+          "AmpMax": "0.15",
+          "U": "3",
+          "Notes": "-",
+          "IsBinary": "-",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 107,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "145",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00145",
+          "Absolute_mag": "8.13",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455400.3406730",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "10",
+          "N_W4": "10",
+          "Fit_code": "DVBI",
+          "Diameter": "124.474",
+          "Diameter_err": "0.508",
+          "V_albedo": "0.064",
+          "V_albedo_err": "0.014",
+          "IR_albedo": "0.060",
+          "IR_albedo_err": "0.008",
+          "Beaming_param": "0.915",
+          "Beaming_param_err": "0.011",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 108,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "145",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00145",
+          "Absolute_mag": "8.13",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455225.0576355",
+          "N_W1": "13",
+          "N_W2": "15",
+          "N_W3": "15",
+          "N_W4": "15",
+          "Fit_code": "DVBI",
+          "Diameter": "127.783",
+          "Diameter_err": "0.355",
+          "V_albedo": "0.061",
+          "V_albedo_err": "0.010",
+          "IR_albedo": "0.053",
+          "IR_albedo_err": "0.002",
+          "Beaming_param": "0.923",
+          "Beaming_param_err": "0.004",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153198,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "145",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00145",
+          "Absolute_mag": "8.13",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2456818.4113709",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "115.515",
+          "Diameter_err": "37.633",
+          "V_albedo": "0.047",
+          "V_albedo_err": "0.022",
+          "IR_albedo": "0.071",
+          "IR_albedo_err": "0.054",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 172047,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "145",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00145",
+          "Absolute_mag": "8.13",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457715.9398454",
+          "N_W1": "7",
+          "N_W2": "7",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "120.464",
+          "Diameter_err": "49.084",
+          "V_albedo": "0.046",
+          "V_albedo_err": "0.047",
+          "IR_albedo": "0.068",
+          "IR_albedo_err": "0.071",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas17",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 1
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

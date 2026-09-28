@@ -81,6 +81,18 @@
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/3234",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"73.525 km (approximate thermal scale)\" (akari-acua-v1) implies a diameter of 147.05 km, outside the added Small Bodies Occultations V4.0 record 43, DAMIT model 3233 diameter 133 ± 3 km (volume-equivalent; DAMIT model 3233 fitted to 4 occultations). Both are shown; the display scale is not changed. All 1 Baer et al. mass rows are excluded by the rule (flagged, secondary, or under three times their uncertainty).",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

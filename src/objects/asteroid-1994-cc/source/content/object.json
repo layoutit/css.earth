@@ -58,7 +58,34 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "companion-1",
+        "label": "Companion",
+        "value": "Unnamed in the catalogue: semimajor axis 1.729 ± 0.00800 km, period 1.243 ± 0.0329 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Fang et al. 2011",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/0/fields/COMPANION_DESIGNATION; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/0/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/0/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      },
+      {
+        "id": "companion-2",
+        "label": "Companion",
+        "value": "Unnamed in the catalogue: semimajor axis 6.130 ± 0.108 km, period 8.376 ± 0.404 days",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+          "label": "Johnston (2019), Binary Minor Planets V3.0, values from Fang et al. 2011",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "binary-minor-planets-v3",
+          "locator": "/binary/rows/1/fields/COMPANION_DESIGNATION; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS_UNCERT; /binary/rows/1/fields/BINARY_SEMIMAJOR_AXIS_CODE; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD_UNCERT; /binary/rows/1/fields/BINARY_ORBITAL_PERIOD_CODE"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

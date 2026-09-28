@@ -7,7 +7,7 @@ import { renderRadialSnapshot } from '../radial-snapshot.ts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from '../shape-material.ts';
 import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerrainMesh } from '../../../geometry/index.ts';
 import type { WebpOptions } from 'sharp';
-import { writeLossyWebp, paintMissingCoverage } from '../../../../raster/index.ts';
+import { writeLossyWebp, paintMissingCoverage, applyUnderlay } from '../../../../raster/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
 import type { RadialState } from './solid-contract.ts';
 import { encodeBandColor, interpolatePalette } from '../../../color/index.ts';
@@ -115,7 +115,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, width: requireRecord(input).width, height: requireRecord(input).height};
     });
-    const renderedMeshPath = lens.format === 'vtk-cell-categories' ? requireString(lens.surfaceSampling?.renderedMeshPath) : ['facet-scalars', 'obj-uv-fits'].includes(lens.format) ? lens.meshPath : lens.path;
+    const renderedMeshPath = lens.format === 'vtk-cell-categories' ? requireString(lens.surfaceSampling?.renderedMeshPath) : ['facet-scalars', 'obj-uv-fits', 'circle-catalogue'].includes(lens.format) ? lens.meshPath : lens.path;
     const terrain = lens.surfaceSampling ? requireRecord(scienceConfig.geometry).radialTerrain : undefined;
     const terrainPath = terrain === undefined ? undefined : requireString(requireRecord(terrain).path);
     if (lens.surfaceSampling && (!scienceRadial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && renderedMeshPath !== terrainPath))) {
@@ -127,7 +127,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       }
     }
     const dependencies = lens.format === 'facet-scalars' ? [lens.meshPath, lens.table?.labelPath].filter(Boolean)
-      : lens.format === 'obj-uv-fits' ? [lens.meshPath, lens.labelPath]
+      : lens.format === 'obj-uv-fits' || lens.format === 'circle-catalogue' ? [lens.meshPath, lens.labelPath]
       : lens.format === 'vtk-cell-categories' ? [requireString(lens.surfaceSampling?.renderedMeshPath), lens.symbols?.paths, lens.symbols?.locations].filter(Boolean)
       : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
       : lens.format === 'geologic-shapefile' ? [requireString(requireRecord(lens.grid).attributePath), requireString(requireRecord(lens.grid).projectionPath)]
@@ -148,7 +148,16 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     }
     const grid = lensTextureGrid(lens, config.raster);
     const preview = scientificPreviewGrid(lens, { ...config.raster, ...grid });
-    const { rgb, missing } = paintScienceSurface(raster, lens, preview.width, preview.height);
+    const painted = paintScienceSurface(raster, lens, preview.width, preview.height), missing = painted.missing;
+    let rgb: Uint8Array = painted.rgb;
+    if (lens.underlay) {
+      // The cells with no catalogued feature show an earlier observation lens, not the missing-coverage grid.
+      const base = observations.get(lens.underlay.surface);
+      // A source-surface lens is underlaid here for its flat map and preview, and again per texel in its radial atlas.
+      if (!base || !lens.categories || lens.textureScale || lens.previewGrid || preview.width !== width || preview.height !== height)
+        throw new Error(`${lens.id}: underlay needs a categorical lens on the full raster grid over an earlier observation, not ${lens.underlay.surface}.`);
+      rgb = underlaidRgb(rgb, missing, base.rgb, lens.id, lens.underlay);
+    }
     const scale = Buffer.alloc(256 * 3);
     for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.categories ? Math.min(lens.categories.length - 1, Math.floor(x * lens.categories.length / 256)) : lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
     const legend = await emit(`${config.namespace}-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: lens.categories ? 'nearest' : 'lanczos3' }));
@@ -162,7 +171,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
         previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),
       ...(lens.textureScale ? { textureScale: lens.textureScale } : {}),
-      missingPixels: missing.reduce((sum, value) => sum + value, 0) }, { categorical: Boolean(lens.categories), displaySampling: lens.displaySampling, ...preview, gutter: grid.gutter }));
+      ...(lens.underlay ? { underlay: { ...lens.underlay, pixels: missing.reduce((sum, value) => sum + value, 0) } }
+        : { missingPixels: missing.reduce((sum, value) => sum + value, 0) }) }, { categorical: Boolean(lens.categories), displaySampling: lens.displaySampling, ...preview, gutter: grid.gutter }));
   }
   for (const recipe of config.raster.observedColors ?? []) {
     const photometry=recipe.photometry?{profile:recipe.photometry.profile,geometry:await loadControlledObservationGeometry({sourceDirectory,entries:(await source.validateGroup(recipe.photometry.consumer)).map(shape({path:text,id:text,imageId:text})),vectors:recipe.photometry.vectors})}:null;
@@ -204,6 +214,17 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   await writeFile(resolve(outputDirectory, 'surfaces.json'), `${JSON.stringify({ objectId: config.namespace, surfaces })}\n`);
   return surfaces;
+}
+
+/** Three-channel form of the raster lane's applyUnderlay, for the terrestrial maps. */
+export function underlaidRgb(rgb: Uint8Array, missing: Uint8Array, base: Uint8Array, id: string, underlay: { brightness: number; grayscale?: boolean; bits?: number }) {
+  const count = missing.length, rgba = new Uint8Array(count * 4), under = new Uint8Array(count * 4);
+  if (rgb.length !== count * 3 || base.length !== count * 3) throw new RangeError(`${id}: underlay needs equal grids, not ${rgb.length / 3}, ${base.length / 3} and ${count} cells.`);
+  for (let i = 0; i < count; i++) for (let c = 0; c < 3; c++) { rgba[i * 4 + c] = rgb[i * 3 + c]!; under[i * 4 + c] = base[i * 3 + c]!; }
+  applyUnderlay(rgba, missing, under, id, underlay);
+  const out = new Uint8Array(count * 3);
+  for (let i = 0; i < count; i++) for (let c = 0; c < 3; c++) out[i * 3 + c] = rgba[i * 4 + c]!;
+  return out;
 }
 
 export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; config: Pick<SolidMaterialConfig, 'namespace' | 'publicBase' | 'raster'>; radial?: boolean}) {

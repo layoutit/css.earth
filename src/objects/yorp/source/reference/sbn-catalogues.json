@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "yorp",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 54509,
+    "by": "SBDB record des 54509"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 16595,
+        "fields": {
+          "Number": "54509",
+          "Name": "YORP",
+          "Desig": "2000 PH5",
+          "Family": "9101",
+          "CSource": "A",
+          "Class": "S*",
+          "DiamSource": "D",
+          "DiamFlag": "-",
+          "Diam": "0.086",
+          "HSource": "L",
+          "H": "22.7",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.24",
+          "G2": "-9.99",
+          "AlbSource": "A",
+          "AlbFlag": "-",
+          "Albedo": "0.20",
+          "PFlag": "-",
+          "Period": "0.2029",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.77",
+          "AmpMax": "0.89",
+          "U": "3",
+          "Notes": "N",
+          "IsBinary": "-",
+          "Pole": "Y",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  }
+}

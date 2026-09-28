@@ -96,6 +96,26 @@
       "title": "Yingst et al. global geologic map",
       "detail": "Yingst et al. 2023",
       "summary": "Interpreted rock units: crater floors, ejecta, cratered terrain and Rheasilvia's flanks, in the authors' colours."
+    },
+    "gravity": {
+      "title": "VESTA20H radial gravity",
+      "detail": "Dawn radio science",
+      "summary": "How strongly Vesta pulls at each place, with its overall flattening removed. Red pulls harder, blue weaker."
+    },
+    "gravity-uncertainty": {
+      "title": "VESTA20H gravity uncertainty",
+      "detail": "Dawn radio science",
+      "summary": "How far the gravity map may be off at each place. It is least certain toward the south pole."
+    },
+    "bouguer": {
+      "title": "VESTA20H Bouguer anomaly, degree 15",
+      "detail": "Dawn radio science",
+      "summary": "Gravity left after removing the pull of the visible shape. Red marks denser rock underground."
+    },
+    "geoid": {
+      "title": "VESTA20H geoid height",
+      "detail": "Dawn radio science",
+      "summary": "Height of the surface where a global ocean would settle. Shown within 60° of the equator, where it is valid."
     }
   }
 }

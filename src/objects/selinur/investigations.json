@@ -31,6 +31,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/selinur/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"20.414 km (size-calibrated model)\" (masiero-2014-neowise) implies a diameter of 40.828 km, outside the added NEOWISE V2.0 neowise_mainbelt.csv record 400 (Masiero et al. 2014) diameter 42.406 ± 0.652 km (NEOWISE, NEATM). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

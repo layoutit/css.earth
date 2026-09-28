@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "asteroid-2003-vs2",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 84922,
+    "by": "SBDB record des 84922"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 20286,
+        "fields": {
+          "Number": "84922",
+          "Name": "2003 VS2",
+          "Desig": "2003 VS2",
+          "Family": "9301",
+          "CSource": "A",
+          "Class": "C*",
+          "DiamSource": "C",
+          "DiamFlag": "-",
+          "Diam": "894.46",
+          "HSource": "M",
+          "H": "3.97",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.12",
+          "G2": "-9.99",
+          "AlbSource": "A",
+          "AlbFlag": "-",
+          "Albedo": "0.057",
+          "PFlag": "-",
+          "Period": "7.42",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.14",
+          "AmpMax": "0.23",
+          "U": "3-",
+          "Notes": "-",
+          "IsBinary": "-",
+          "Pole": "N",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  }
+}

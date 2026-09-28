@@ -58,7 +58,47 @@
         }
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.241 ± 0.018 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2012 (Mas12)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.34 × 10¹⁸ ± 6.96 × 10¹⁷ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Baer et al. 2011",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/2/fields/MASS_KG; /masses/rows/2/fields/MASS_KG_UNC; /masses/rows/2/fields/BINARY_NOTE; /masses/rows/2/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "2.08 ± 0.59 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Baer et al. 2011",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/2/fields/BULK_DENSITY; /masses/rows/2/fields/BULK_DENSITY_UNC; /masses/rows/2/fields/SIZE_REF_CODE; /masses/rows/2/fields/MASS_REF"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",

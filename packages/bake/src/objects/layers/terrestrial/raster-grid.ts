@@ -8,7 +8,7 @@ export interface TextureGridLens {textureScale?:number;monochromeBase?:string;pr
 export function scientificPreviewGrid(lens:TextureGridLens, raster:Pick<SolidRasterGrid,'width'|'height'|'bandCount'>) {
   const grid = lens.previewGrid;
   if (grid === undefined) return { width: raster.width, height: raster.height };
-  if (lens.format !== 'facet-scalars' || !grid ||
+  if (!['facet-scalars', 'circle-catalogue'].includes(lens.format ?? '') || !grid ||
       Object.keys(grid).some(key => !['width', 'height'].includes(key)) ||
       ![grid.width, grid.height].every(n => Number.isSafeInteger(n) && n > 0) ||
       grid.width !== grid.height * 2 || grid.width > raster.width || grid.height > raster.height ||

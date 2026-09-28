@@ -1,0 +1,50 @@
+{
+  "id": "asteroid-masses-baer-2012",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Asteroid Masses",
+  "identifiers": [
+    {
+      "type": "PDS4 LIDVID",
+      "value": "urn:nasa:pds:compil.ast.masses::1.0"
+    },
+    {
+      "type": "PDS3 data set ID",
+      "value": "EAR-A-COMPIL-5-ASTMASS-V3.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/",
+      "label": "Asteroid Masses"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/bundle_compil.ast.masses.xml",
+      "label": "PDS4 bundle label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/bundle_compil.ast.masses.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, title, Citation_Information"
+    }
+  ],
+  "creators": [
+    "J. Baer, S. Chesley, D. Britt (editors)"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2012",
+  "version": "1.0",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "The compilation reflects the literature as of 18 April 2012.",
+      "scope": "All values",
+      "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/bundle_compil.ast.masses.xml#Citation_Information"
+    }
+  ]
+}

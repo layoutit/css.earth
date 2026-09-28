@@ -45,6 +45,32 @@
           "catalogueId": "arxiv-2607-06450",
           "locator": "/fullAxesKm/0; /fullAxesKm/2"
         }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "8.840 hours (synodic; ambiguous period; LCDB quality 2)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+          "label": "Warner, Harris & Pravec (2021), Asteroid Lightcurve Database (LCDB) V4.0, summary table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-lightcurve-database-v4",
+          "locator": "/lcdb/rows/0/fields/Period; /lcdb/rows/0/fields/PFlag; /lcdb/rows/0/fields/Notes; /lcdb/rows/0/fields/U"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.109 ± 0.007",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Braga-Ribas et al. 2014",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/11/fields/ALBEDO; /tno/rows/11/fields/ALBEDO_ERROR_UPPER; /tno/rows/11/fields/ALBEDO_ERROR_LOWER; /tno/rows/11/fields/ALBEDO_COLOR; /tno/rows/11/fields/REFERENCE_CODE"
+        }
       }
     ]
   },

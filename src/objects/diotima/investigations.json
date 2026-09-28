@@ -31,6 +31,17 @@
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/217"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale in the astronomy record's mean radius 104.5 km (diameter 209 km) is outside the added Small Bodies Occultations V4.0 record 242, DAMIT model 1836 diameter 197 ± 6 km (volume-equivalent; DAMIT model 1836 fitted to 8 occultations). The display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

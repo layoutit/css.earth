@@ -1,0 +1,117 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "eros",
+  "checked": "2026-09-28",
+  "references": [
+    {
+      "url": "https://doi.org/10.1016/j.icarus.2008.09.018",
+      "citation": "Lim, L. F. and Nittler, L. R. (2009), Elemental composition of 433 Eros: New calibration of the NEAR-Shoemaker XRS data, Icarus 200, 129-146",
+      "locator": "Table 9, 'Uncorrected elemental ratios' column (average of eight solar flares); the same values are in the abstract",
+      "instrument": "NEAR-Shoemaker X-ray spectrometer (XRS), orbital X-ray fluorescence during eight solar flares, 2000 May 4 to 2001 January 2",
+      "footprint": "Whole-body average: each flare sampled the sunlit part of Eros in the field of view; the paper states the averaged composition 'probably represents the light-element composition of the whole of Eros' and that the XRS data alone can neither establish nor rule out spatial variation (section 7).",
+      "samplingDepth": "Top tens to hundreds of micrometres (section 7)",
+      "ratios": {
+        "Mg/Si": {
+          "value": 0.753,
+          "plus": 0.078,
+          "minus": 0.055
+        },
+        "Al/Si": {
+          "value": 0.069,
+          "plus": 0.055,
+          "minus": 0.055
+        },
+        "S/Si": {
+          "value": 0.005,
+          "plus": 0.008,
+          "minus": 0.008
+        },
+        "Ca/Si": {
+          "value": 0.06,
+          "plus": 0.023,
+          "minus": 0.024
+        },
+        "Fe/Si": {
+          "value": 1.678,
+          "plus": 0.338,
+          "minus": 0.32
+        }
+      },
+      "chondritesTable9": {
+        "H": {
+          "Mg/Si": 0.82,
+          "S/Si": 0.114,
+          "Fe/Si": 1.59
+        },
+        "L": {
+          "Mg/Si": 0.8,
+          "S/Si": 0.114,
+          "Fe/Si": 1.18
+        },
+        "LL": {
+          "Mg/Si": 0.8,
+          "S/Si": 0.111,
+          "Fe/Si": 1.03
+        }
+      },
+      "note": "Uncertainties as published in Table 9: photon statistics combined with the spread over plausible solar-spectrum models. No mineral-mixing correction applied; the corrected column (Mg/Si 0.783, Fe/Si 2.383) is not used. Supersedes the calibration of Nittler et al. (2001), https://doi.org/10.1111/j.1945-5100.2001.tb01856.x, whose results the paper finds consistent within uncertainties."
+    },
+    {
+      "url": "https://doi.org/10.1111/maps.12434",
+      "citation": "Peplowski, P. N., Bazell, D., Evans, L. G., Goldsten, J. O., Lawrence, D. J. and Nittler, L. R. (2015), Hydrogen and major element concentrations on 433 Eros, Meteoritics & Planetary Science 50, 353-367",
+      "locator": "Table 2, 'This study' BGO column (abundance ratios); hydrogen from the abstract and the Hydrogen Abundance section",
+      "instrument": "NEAR gamma-ray spectrometer, BGO anticoincidence shield, on the surface after the 2001 February 12 landing",
+      "footprint": "Landing site only: after the landing the instrument was 'just centimeters from the surface' (Methods). The paper describes the site as a ponded regolith deposit (Veverka et al. 2001).",
+      "samplingDepth": "Tens of centimetres (Discussion)",
+      "ratios": {
+        "Fe/Si": {
+          "value": 1.19,
+          "plusMinus": 0.3,
+          "basis": "weight ratio"
+        },
+        "Mg/Si": {
+          "value": 0.84,
+          "plusMinus": 0.27,
+          "basis": "weight ratio"
+        },
+        "Si/O": {
+          "value": 0.43,
+          "plusMinus": 0.17,
+          "basis": "weight ratio"
+        },
+        "Mg/O": {
+          "value": 0.36,
+          "plusMinus": 0.14,
+          "basis": "weight ratio"
+        },
+        "Fe(846)/O": {
+          "value": 0.51,
+          "plusMinus": 0.21,
+          "basis": "weight ratio"
+        }
+      },
+      "hydrogenPpm": {
+        "value": 1100,
+        "minus": 700,
+        "plus": 1600,
+        "range": [
+          400,
+          2700
+        ]
+      },
+      "note": "Uncertainties are 2 standard deviations, statistical and systematic, as the Table 2 footnote states. The paper reports weight ratios ('Our reported weight ratios, listed in Table 2'). It reuses the potassium abundance of Evans et al. (2001) rather than remeasuring it."
+    },
+    {
+      "url": "https://doi.org/10.1111/j.1945-5100.2001.tb01854.x",
+      "citation": "Evans, L. G. et al. (2001), Elemental composition from gamma-ray spectroscopy of the NEAR-Shoemaker landing site on 433 Eros, Meteoritics & Planetary Science 36, 1639-1660",
+      "locator": "Table 1, K(1461) row, Anticoincidence column: 'Composition 0.07%'; uncertainty from the text before the Discussion ('we assume that this 40% uncertainty applies for all the GRS results')",
+      "instrument": "NEAR gamma-ray spectrometer, NaI detector, on the surface after the 2001 February 12 landing",
+      "footprint": "Landing site only",
+      "potassiumPercent": {
+        "value": 0.07,
+        "relativeUncertainty": 0.4
+      },
+      "note": "Peplowski et al. (2015) quote the same result as 700 ppm."
+    }
+  ]
+}

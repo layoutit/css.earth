@@ -67,6 +67,17 @@
         "https://observations.lam.fr/astero/Data/3Juno/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Baer et al. mass 3.00 × 10¹⁹ ± 5.97 × 10¹⁷ kg (record 36, Pitjeva 2005) is not shown: the astronomy record already carries GM 1.802061 km³/s² (about 2.70e+19 kg with CODATA 2018 G), outside the catalogue uncertainty.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

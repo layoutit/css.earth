@@ -74,6 +74,17 @@
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/5986"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"83.345 km (size-calibrated model)\" (akari-acua-v1) implies a diameter of 166.69 km, outside the added Small Bodies Occultations V4.0 record 110, DAMIT model 5985 diameter 153 ± 3 km (volume-equivalent; DAMIT model 5985 fitted to 6 occultations). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

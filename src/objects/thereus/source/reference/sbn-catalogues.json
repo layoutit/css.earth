@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "thereus",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 32532,
+    "by": "Horizons command 32532;"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 4,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_centaurs_csv::2.0",
+          "Asteroid_Number": "32532",
+          "Prov_desig": "-",
+          "Comet_desig": "-",
+          "MPC_packed_name": "32532",
+          "Absolute_mag": "9.00",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455238.7796291",
+          "N_W1": "13",
+          "N_W2": "13",
+          "N_W3": "13",
+          "N_W4": "13",
+          "Fit_code": "DVB-",
+          "Diameter": "86.500",
+          "Diameter_err": "1.900",
+          "V_albedo": "0.059",
+          "V_albedo_err": "0.013",
+          "IR_albedo": "-.999",
+          "IR_albedo_err": "-.999",
+          "Beaming_param": "1.325",
+          "Beaming_param_err": "0.049",
+          "Stacked_flag": "S",
+          "Reference": "Bau13"
+        }
+      }
+    ],
+    "references": {
+      "Bau13": "Bauer, J.M., T. Grav, E. Blauvelt, A.K. Mainzer, J.R. Masiero, and 20 others, Centaurs and Scattered Disk Objects in the Thermal Infrared: Analysis of WISE/NEOWISE Observations, Astroph. J. 773, 22, doi:10.1088/0004-637X/773/1/22, 2013."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

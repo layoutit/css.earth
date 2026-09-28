@@ -35,8 +35,10 @@ class GeologyTests(unittest.TestCase):
                     writer.poly(polygon(*bounds)['coordinates'])
                     writer.record(unit)
                 layers.append(dict(shapePath=name+'.shp',attributePath=name+'.dbf',expectedRecords=1))
-            (root/'source.prj').write_text('pinned test projection')
-            plan=dict(pins={},projectionPath='source.prj',projectionWkt='pinned test projection',
+            # The plan names the source sphere, whose radius the script checks against radiusMeters.
+            wkt='GEOGCS["GCS_Test",DATUM["D_Test",SPHEROID["Test",2575000.0,0.0]],PRIMEM["Reference_Meridian",0.0],UNIT["Degree",0.0174532925199433]]'
+            (root/'source.prj').write_text(wkt)
+            plan=dict(pins={},projectionPath='source.prj',projectionWkt=wkt,
                 width=32,height=16,radiusMeters=2575000,coordinateUnits='degrees',
                 field='UNIT',unknownValues=[],categories=[dict(value='A'),dict(value='B')],
                 layers=layers,output='units.tif',receipt='receipt.json')
@@ -61,6 +63,23 @@ class GeologyTests(unittest.TestCase):
         self.assertTrue((grid[:2,:3]==-2).all());self.assertTrue((grid[2:4,2]==1).all())
         geo.paint_polygon(grid,polygon(0,0,6,6),[0,0,6,6],transform,0)
         self.assertTrue((grid[:2,:3]==-2).all(),'conflicts must not be repainted as known')
+    def test_circle_presence_draws_the_published_radius(self):
+        # A 0.5 degree cell grid; a 10.2 degree circle on the equator crosses the cells about 10 degrees east and west of its centre.
+        transform=from_origin(-180,90,.5,.5)
+        grid=np.full((360,720),-1,dtype='int16')
+        geo.paint_presence(grid,dict(x=.25,y=.25),transform,0,'circle',radius=10.2)
+        self.assertEqual(grid[179,360],0,'the cell holding the centre is marked')
+        self.assertEqual(grid[179,340],0);self.assertEqual(grid[179,380],0)
+        self.assertEqual(grid[179,350],-1,'the interior is not filled');self.assertEqual(grid[179,381],-1)
+        # Across the antimeridian the circle wraps onto the other edge of the grid.
+        grid=np.full((360,720),-1,dtype='int16')
+        geo.paint_presence(grid,dict(x=179.25,y=.25),transform,0,'circle',radius=5.1)
+        self.assertEqual(grid[179,8],0);self.assertEqual(grid[179,708],0)
+        # A circle smaller than a cell still marks the cell holding it.
+        grid=np.full((360,720),-1,dtype='int16')
+        geo.paint_presence(grid,dict(x=10.1,y=10.1),transform,0,'circle',radius=.05)
+        self.assertEqual(int((grid==0).sum()),1)
+        with self.assertRaises(ValueError):geo.paint_presence(grid,dict(x=0,y=0),transform,0,'circle',radius=None)
     def test_pixel_centers_do_not_include_every_touched_cell(self):
         grid=np.full((4,4),-1,dtype='int16')
         geo.paint_polygon(grid,polygon(.9,0,1.1,4),[.9,0,1.1,4],from_origin(0,4,1,1),0)

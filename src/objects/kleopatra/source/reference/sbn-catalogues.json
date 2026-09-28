@@ -1,0 +1,237 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "kleopatra",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 216,
+    "by": "SBDB record des 216"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 171,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "216",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00216",
+          "Absolute_mag": "7.30",
+          "Slope_param": "+0.29",
+          "Mean_JD": "2455324.4647610",
+          "N_W1": "13",
+          "N_W2": "13",
+          "N_W3": "13",
+          "N_W4": "13",
+          "Fit_code": "DVBI",
+          "Diameter": "119.194",
+          "Diameter_err": "3.404",
+          "V_albedo": "0.149",
+          "V_albedo_err": "0.031",
+          "IR_albedo": "0.226",
+          "IR_albedo_err": "0.014",
+          "Beaming_param": "1.342",
+          "Beaming_param_err": "0.107",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139569,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "216",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00216",
+          "Absolute_mag": "7.30",
+          "Slope_param": "+0.29",
+          "Mean_JD": "2455588.9941205",
+          "N_W1": "16",
+          "N_W2": "17",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "102.930",
+          "Diameter_err": "3.815",
+          "V_albedo": "0.200",
+          "V_albedo_err": "0.028",
+          "IR_albedo": "0.432",
+          "IR_albedo_err": "0.061",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 16,
+        "fields": {
+          "AST_NUMBER": "216",
+          "AST_NAME": "Kleopatra",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "I Alexhelios",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "2.79",
+          "SYSTEM_ECCENTRICITY": "0.25",
+          "SYSTEM_INCLINATION": "13.",
+          "EFFECTIVE_DIAMETER": "135.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "5.80",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.066",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.012",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "135.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "5.80",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "8.90",
+          "COMPANION_DIAMETER_UNCERTAINTY": "1.60",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.385",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "6.780E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "1.30E+01",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "2.320E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "2.00E-02",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.000",
+          "BINARY_ECCENTRICITY_ERROR": "-9.999",
+          "BINARY_ECCENTRICITY_CODE": "A",
+          "PRIMARY_ALBEDO": "0.087",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.007",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "4.64E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "2.00E+16",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "3.60",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.40",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      },
+      {
+        "recordNumber": 17,
+        "fields": {
+          "AST_NUMBER": "216",
+          "AST_NAME": "Kleopatra",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "II Cleoselene",
+          "DYNAMICAL_TYPE": "MB",
+          "SYSTEM_SEMIMAJOR_AXIS": "2.79",
+          "SYSTEM_ECCENTRICITY": "0.25",
+          "SYSTEM_INCLINATION": "13.",
+          "EFFECTIVE_DIAMETER": "135.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "5.80",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.051",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.012",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "135.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "5.80",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "6.90",
+          "COMPANION_DIAMETER_UNCERTAINTY": "1.60",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.385",
+          "PRIMARY_SPIN_UNCERTAINTY": "0.000",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "4.540E+02",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "6.00E+00",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "1.240E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "2.00E-02",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.000",
+          "BINARY_ECCENTRICITY_ERROR": "-9.999",
+          "BINARY_ECCENTRICITY_CODE": "A",
+          "PRIMARY_ALBEDO": "0.087",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.007",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "4.64E+18",
+          "SYSTEM_MASS_UNCERTAINTY": "2.00E+16",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "3.60",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.40",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "D11b": "Descamps, P., et al., 2011, Triplicity and physical characteristics of asteroid (216) Kleopatra, Icarus, 211:1022-1033."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 16,
+        "fields": {
+          "AST_NUMBER": "216",
+          "AST_NAME": "Kleopatra",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "I Alexhelios",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2008",
+          "YEAR_UPDATE": "2013",
+          "REF_CODE_EFFECTIVE_DIAMETER": "D11b",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "D11b",
+          "REF_CODE_COMPANION_DIAMETER": "D11b",
+          "REF_CODE_PRIMARY_SPIN": "D95a",
+          "REF_CODE_BINARY_SEMIMAJOR": "D11b",
+          "REF_CODE_BINARY_PERIOD": "D11b",
+          "REF_CODE_BINARY_ECCENTRICITY": "D11b",
+          "REF_CODE_PRIMARY_ALBEDO": "D11b",
+          "REF_CODE_SYSTEM_MASS": "D11b",
+          "REF_CODE_SYSTEM_DENSITY": "D11b"
+        }
+      },
+      {
+        "recordNumber": 17,
+        "fields": {
+          "AST_NUMBER": "216",
+          "AST_NAME": "Kleopatra",
+          "PROV_DESIG": "-",
+          "COMPANION_DESIGNATION": "II Cleoselene",
+          "DISCOVERY_METHOD_CODE": "A",
+          "YEAR_ANNOUNCEMENT": "2008",
+          "YEAR_UPDATE": "2013",
+          "REF_CODE_EFFECTIVE_DIAMETER": "D11b",
+          "REF_CODE_DIAMETER_RATIO": "-",
+          "REF_CODE_PRIMARY_DIAMETER": "D11b",
+          "REF_CODE_COMPANION_DIAMETER": "D11b",
+          "REF_CODE_PRIMARY_SPIN": "D95a",
+          "REF_CODE_BINARY_SEMIMAJOR": "D11b",
+          "REF_CODE_BINARY_PERIOD": "D11b",
+          "REF_CODE_BINARY_ECCENTRICITY": "D11b",
+          "REF_CODE_PRIMARY_ALBEDO": "D11b",
+          "REF_CODE_SYSTEM_MASS": "D11b",
+          "REF_CODE_SYSTEM_DENSITY": "D11b"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

@@ -235,6 +235,20 @@
         "https://doi.org/10.1016/j.icarus.2016.08.012",
         "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/"
       ]
+    },
+    {
+      "id": "change-2-ccd-dem-20m",
+      "subject": "Chang'e-2 stereo camera global DEM (CE2TMap2015 DEM, 20 m; NASA Moon Trek layer CE-2 CCD DEM, CE2_GRAS_DEM_20m) as a replacement for LOLA LDEM_16 in the Elevation view",
+      "status": "excluded",
+      "finding": "No visible gain and no usable release. The view paints LDEM_16 (about 1.9 km cells) nearest onto a 4,096 x 2,048 canvas, about 2.7 km per texel at the equator, so the LOLA grid is already finer than the display. The producer, the Ground Research and Application System of the Chinese Lunar Exploration Program, releases the DEM through the Lunar and Planetary Data Release System only after registration, with an acknowledgement request and no stated reuse licence. Trek's copy is one 256 GB tar.gz that cannot be read by range, and its record states no height datum. The only part that can be measured is Trek's north-polar CE-2 20 m image service (60-90 N): 100 exports of 512 x 512 px, about 364 m per pixel, nearest. Painted like LDEM_16 on the same 1,396,736 cap texels, pixelmatch at threshold 0.1 finds 135 differing pixels (0.01%), all within 12 degrees of the pole. CE-2 minus LOLA: median -4.6 m, 34 m median absolute spread, 90th percentile 133 m; near 89.25 N, CE-2 sits 400-550 m lower. Coverage south of 60 N was not measured.",
+      "revisitWhen": "The Elevation view gets a grid finer than LDEM_16's 1.9 km cells, and CE2TMap2015 is published with a reuse licence and a range-readable file or service.",
+      "evidence": [
+        "https://trek.nasa.gov/moon/TrekServices/ws/index/eq/searchItems?start=0&rows=300&facetKeys=productCat2&facetValues=DEM&proj=urn:ogc:def:crs:EPSG::104903",
+        "https://trek.nasa.gov/moon/trekarcgis/rest/services/CE2_DEM_20m_NP/ImageServer?f=json",
+        "https://doi.org/10.3390/rs12030526",
+        "https://moon.bao.ac.cn",
+        "Measured 2026-09-28 against the current ldem_16.img with the Elevation lens palette."
+      ]
     }
   ]
 }

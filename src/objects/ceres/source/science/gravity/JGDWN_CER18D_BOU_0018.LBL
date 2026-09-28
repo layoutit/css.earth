@@ -1,0 +1,82 @@
+PDS_VERSION_ID               = PDS3
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 2880
+FILE_RECORDS                 = 360       
+^IMAGE                       = ("JGDWN_CER18D_BOU_0018.IMG",1)       
+INSTRUMENT_HOST_NAME         = "DAWN"
+MISSION_PHASE_NAME           = {                                              
+                               "CERES SCIENCE SURVEY (CSS)",                  
+                               "CERES SCIENCE HAMO (CSH)",                    
+                               "CERES SCIENCE LAMO (CSL)" }   
+TARGET_NAME                  = "1 CERES" 
+INSTRUMENT_NAME              = "GRAVITY SCIENCE INSTRUMENT"
+DATA_SET_ID                  = "DAWN-A-RSS-5-CEGR-V4.0"
+ORIGINAL_PRODUCT_ID          = "CERES18D_BOUGHER"
+PRODUCT_ID                   = "JGDWN_CER18D_BOU_0018.IMG"
+PRODUCT_RELEASE_DATE         = 2018-05-08
+DESCRIPTION                  = "
+ This file contains a digital map of the Bouguer gravity derived from 
+ the JPL CERES18D model of the Ceres gravity field.  Each point gives the 
+ Ceres gravity radial acceleration minus the gravity derived from 
+ integration Ceres shape assuming uniform density in milligals on a 
+ 482.0-km x 445.9-km ellipsoid of revolution, which is close to the 
+ surface of Ceres. The hydrostatic coefficients J2 and J4 are not included.
+ The JGDWN_CER18D_BOU_0018 gravity acceleration is computed from the full
+ CERES18D solution (from degree 2 up to degree 18).
+
+ The map is produced at JPL by the Dawn Radio Science Team (Alex Konopliv, 
+ Ryan Park, Sami Asmar)."
+
+START_TIME                   = 2015-02-02T07:00:00.000
+STOP_TIME                    = 2016-09-02T15:00:00.000
+SPACECRAFT_CLOCK_START_COUNT = "1/0476132467.030"                             
+SPACECRAFT_CLOCK_STOP_COUNT  = "1/0526100468.004"   
+SOFTWARE_NAME                = "GRVMAP;V1.0"
+PRODUCT_CREATION_TIME        = 2018-05-08T00:00:00.000
+PRODUCER_ID                  = "DAWN GRAVITY TEAM"
+
+OBJECT               = IMAGE
+  LINES                      = 181
+  LINE_SAMPLES               = 360
+  SAMPLE_TYPE                = PC_REAL
+  SAMPLE_BITS                = 64
+  UNIT                       = "MILLIGALS"
+  OFFSET                     = 0.0E+00
+  SCALING_FACTOR             = 1.0E+00
+  DESCRIPTION                = "The Digital Map contains
+   values of the gravity anomaly.  The values can be obtained
+   by multiplying the sample in the map by SCALING_FACTOR
+   and then adding OFFSET.  One milligal equals 0.01 mm/s/s."
+END_OBJECT           = IMAGE
+
+OBJECT               = IMAGE_MAP_PROJECTION
+  ^DATA_SET_MAP_PROJECTION     = "DSMAP.CAT"
+  COORDINATE_SYSTEM_TYPE       = "BODY-FIXED ROTATING"
+  COORDINATE_SYSTEM_NAME       = PLANETOCENTRIC
+  MAP_PROJECTION_TYPE          = "SIMPLE CYLINDRICAL"
+  A_AXIS_RADIUS                = 482.0 <KM>
+  B_AXIS_RADIUS                = 482.0 <KM>
+  C_AXIS_RADIUS                = 445.9 <KM>
+  FIRST_STANDARD_PARALLEL      = "N/A"
+  SECOND_STANDARD_PARALLEL     = "N/A"
+  POSITIVE_LONGITUDE_DIRECTION = "EAST"
+  CENTER_LATITUDE              = 0.0 <DEGREES>
+  CENTER_LONGITUDE             = 179.5 <DEGREES>
+  REFERENCE_LATITUDE           = 0.0 <DEGREES>
+  REFERENCE_LONGITUDE          = 0.0 <DEGREES>
+  LINE_FIRST_PIXEL             = 1
+  LINE_LAST_PIXEL              = 181
+  SAMPLE_FIRST_PIXEL           = 1
+  SAMPLE_LAST_PIXEL            = 360
+  MAP_PROJECTION_ROTATION      = 0.0 <DEGREES>
+  MAP_RESOLUTION               = 1.0E+00
+  MAP_SCALE                    = "N/A"
+  MAXIMUM_LATITUDE             = 90.0 <DEGREES>
+  MINIMUM_LATITUDE             = -90.0 <DEGREES>
+  EASTERNMOST_LONGITUDE        = 359.0 <DEGREES>
+  WESTERNMOST_LONGITUDE        = 0.0 <DEGREES>
+  LINE_PROJECTION_OFFSET       = 0.0
+  SAMPLE_PROJECTION_OFFSET     = 0.0
+END_OBJECT           = IMAGE_MAP_PROJECTION
+
+END

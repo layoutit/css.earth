@@ -79,6 +79,19 @@
         "noData": true
       },
       {
+        "id": "dlr-juno",
+        "label": "DLR mosaic",
+        "thumbnail": "ganymede-lens-dlr-juno.webp",
+        "surface": "ganymede-dlr-juno@2x.webp",
+        "poles": "ganymede-poles-dlr-juno@2x.webp",
+        "source": {
+          "id": "dlr-voyager-galileo-juno",
+          "path": "../manifest.json"
+        },
+        "notes": "DLR's 2022 global mosaic (Kersten et al. 2021, 2022): 118 Voyager and 88 Galileo images on a newer control network, with JunoCam photographs from Juno's 7 June 2021 flyby laid on top at 0.9–3 km per pixel. The Juno images cover 13% of the globe, from about 310° to 60° east and 14° S to 70° N, around Tros crater; there they show craters and grooves the USGS mosaic blurs. Map grid 359 m. Because the control networks differ, features sit a median 14 km (up to about 57 km) from the labels and from the Monochrome, False color and Geology views. DLR matched brightness and contrast by hand, so brightness is not comparable with the USGS mosaic. Photographed shadows remain; gray grid marks missing imagery. Credit: ESA/DLR, Kersten et al. (2021); European Space Agency, 2022, DLR_Ganymede_Voyager-Galileo_Juno_V1.0, doi:10.57780/esa-fcj5pf3. Licence: CC BY-NC 3.0 IGO.",
+        "noData": true
+      },
+      {
         "id": "enhanced",
         "label": "False color",
         "thumbnail": "ganymede-lens-enhanced.webp",

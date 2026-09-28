@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "bacchus",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 2063,
+    "by": "SBDB record des 2063"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 963,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_neos_csv::2.0",
+          "Asteroid_Number": "2063",
+          "Prov_desig": "-",
+          "MPC_packed_name": "02063",
+          "Absolute_mag": "17.30",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457130.4189789",
+          "N_W1": "5",
+          "N_W2": "5",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "1.024",
+          "Diameter_err": "0.020",
+          "V_albedo": "0.203",
+          "V_albedo_err": "0.022",
+          "IR_albedo": "0.209",
+          "IR_albedo_err": "0.044",
+          "Beaming_param": "1.400",
+          "Beaming_param_err": "0.500",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Nug16": "Nugent, C.R., A. Mainzer, J. Bauer, R.M. Cutri, E.A. Kramer, and 4 others, NEOWISE Reactivation Mission Year Two: Asteroid Diameters and Albedos, Astron. J. 152, 63, doi:10.3847/0004-6256/152/3/63, 2016."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

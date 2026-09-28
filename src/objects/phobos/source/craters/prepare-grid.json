@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "symbolPath": "PH9224GT_Phobos2000.layer.json",
+  "projectionWkt": "GEOGCS[\"Phobos_2015\",DATUM[\"Phobos_2015\",SPHEROID[\"Phobos_2015\",11080.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 11080,
+  "width": 2880,
+  "height": 1440,
+  "cellPresence": "circle",
+  "radiusField": "Radius_deg",
+  "field": null,
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "crater rim",
+      "label": "Catalogued crater rim",
+      "color": "#73dfff"
+    }
+  ],
+  "layers": [
+    { "esriJsonPath": "PH9224GT_Phobos2000.query-01.json", "expectedRecords": 2000 },
+    { "esriJsonPath": "PH9224GT_Phobos2000.query-02.json", "expectedRecords": 2000 },
+    { "esriJsonPath": "PH9224GT_Phobos2000.query-03.json", "expectedRecords": 2000 },
+    { "esriJsonPath": "PH9224GT_Phobos2000.query-04.json", "expectedRecords": 2000 },
+    { "esriJsonPath": "PH9224GT_Phobos2000.query-05.json", "expectedRecords": 1224 }
+  ],
+  "output": "phobos-crater-rims.tif",
+  "receipt": "phobos-crater-rims.json"
+}

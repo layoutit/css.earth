@@ -76,6 +76,26 @@
               "id": "geology",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "gravity",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "gravity-uncertainty",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "bouguer",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geoid",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

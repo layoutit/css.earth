@@ -43,6 +43,37 @@
       }
     },
     {
+      "id": "dlr-juno",
+      "output": "ganymede-{id}{suffix}.webp",
+      "thumbnail": "ganymede-lens-{id}.webp",
+      "source": "ganymede-dlr-juno.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "dlr-voyager-galileo-juno",
+        "id": "dlr-juno",
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 180,
+          "wrapLongitude": true,
+          "resolutionMeters": 358.77424436424997,
+          "origin": [
+            -8266158.5901523195,
+            4133079.2950761598
+          ],
+          "displayRange": [
+            0,
+            255
+          ]
+        },
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        }
+      }
+    },
+    {
       "id": "enhanced",
       "output": "ganymede-{id}{suffix}.webp",
       "thumbnail": "ganymede-lens-{id}.webp",

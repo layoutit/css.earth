@@ -1,0 +1,33 @@
+{
+  "id": "trek-phobos-ph9224gt-layer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Phobos Crater Catalog, Global (NASA Phobos Trek GIS layer PH9224GT_Phobos2000)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://trek.nasa.gov/phobos/trekarcgis/rest/services/phobos/PH9224GT_Phobos2000/MapServer",
+      "label": "NASA Trek ArcGIS MapServer"
+    },
+    {
+      "role": "landing",
+      "url": "https://trek.nasa.gov/phobos/TrekWS/rest/cat/metadata/fgdc/html?label=PH9224GT_Phobos2000",
+      "label": "Trek FGDC metadata"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/phobos/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "derived-from",
+      "catalogueId": "salamuniccar-2014-ph9224gt",
+      "evidence": "The layer metadata cites Salamunićcar et al. (2014) and holds 9,224 point records with Lon_E, Lat and Radius_deg; Radius_m equals Radius_deg on the 11.1 km sphere for every record."
+    }
+  ],
+  "statements": []
+}

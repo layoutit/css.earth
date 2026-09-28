@@ -1,0 +1,43 @@
+{
+  "id": "asteroid-lightcurve-database-v4",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Asteroid Lightcurve Database (LCDB) V4.0",
+  "identifiers": [
+    {
+      "type": "PDS4 LIDVID",
+      "value": "urn:nasa:pds:ast-lightcurve-database::4.0"
+    },
+    {
+      "type": "DOI",
+      "value": "10.26033/j3xc-3359"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.26033/j3xc-3359",
+      "label": "Asteroid Lightcurve Database (LCDB) V4.0"
+    },
+    {
+      "role": "archive",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/bundle_ast-lightcurve-database.xml",
+      "label": "PDS4 bundle label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/bundle_ast-lightcurve-database.xml",
+      "checkedOn": "2026-09-28",
+      "locator": "Identification_Area: logical_identifier, version_id, title, Citation_Information"
+    }
+  ],
+  "creators": [
+    "B. D. Warner, A. W. Harris, P. Pravec"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2021",
+  "version": "4.0",
+  "relations": [],
+  "statements": []
+}

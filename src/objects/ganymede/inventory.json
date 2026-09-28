@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "ganymede-dlr-juno@2x.webp",
+      "bytes": 5797280,
+      "sha256": "e6bff0a410a1be22545ef90b4ce2348c96557ba05d63d6cb0a2bc96afdc341f0"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-enhanced@2x.webp",
       "bytes": 4588056,
       "sha256": "ba0d7db23bf758b3b1b08b6611826368d7fc2c5e47287b3bc64850ddafcdc434"
@@ -24,6 +30,12 @@
       "filename": "ganymede-geology@2x.webp",
       "bytes": 522226,
       "sha256": "c6c31c1b2c317b9465e53184374a075c5a936454e8eece68112abace97af19cd"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-lens-dlr-juno.webp",
+      "bytes": 850,
+      "sha256": "6462193301f5fdfb97b42e8a5af31e7932ac6cb092d6b7f2cb600fd0d49a22e4"
     },
     {
       "location": "public",
@@ -60,6 +72,12 @@
       "filename": "ganymede-oxygen-signature@2x.webp",
       "bytes": 109940,
       "sha256": "54354d741b1f5c27ac45c17279ca80029299584a68f43c2633ff0742293c653e"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-poles-dlr-juno@2x.webp",
+      "bytes": 164434,
+      "sha256": "c5248b1ae44d443b3d33e0268922eeb1f892dbf43aca03713b5b19046df84b3c"
     },
     {
       "location": "public",
@@ -304,14 +322,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91058,
-      "sha256": "e686a42e769c84c75627ebbb7127b7a332de5a17eb11685e91bc58a70ad02b40"
+      "bytes": 91579,
+      "sha256": "02905080636f7e110db4fd65467df6825a1fc70983958aa6f475325aef942d90"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1423,
-      "sha256": "56b0d7f3efa6bed3198818247523396cf2d72b0176b289fafed86a8dcf2a57dc"
+      "sha256": "4a36f19aaa732d092c977b6d3c93f08865f3f02f3859a718a48d97c4cb55b604"
     },
     {
       "location": "prepared",
@@ -322,8 +340,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 4804,
-      "sha256": "d6344634f65a04e0d43be2377468062c987ae908e16837a7aa4e0c7d441a7081"
+      "bytes": 4919,
+      "sha256": "e93897a59465f505e4f69fdb1af3c7021e6e7234aca48475e542b1b44745afaf"
     },
     {
       "location": "prepared",
@@ -334,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 6211,
-      "sha256": "aeaae873d9bf665339745cde385d3b9403b2177dfdc5594ca4635f9c340642b4"
+      "bytes": 6666,
+      "sha256": "3097fd7af6efce29c10d3d5e8a2658cfc5ac5463f4a32bfc45e00be5931bdfa1"
     },
     {
       "location": "prepared",
@@ -346,8 +364,14 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 323,
-      "sha256": "c816beff57ef26038cdcd2da510491e4e2111024430d5a550533eefcd9ffd5c8"
+      "bytes": 398,
+      "sha256": "588e02e3e0d018fa8295581ed7905aa93ee43aa9697f661dc504c4a301fde4c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/dlr-juno.webp",
+      "bytes": 14138,
+      "sha256": "1d6cbe98225cb2a07955d03e9f432e5aab9f7fd5149cab89d461a34887fe21ee"
     },
     {
       "location": "prepared",
@@ -376,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 582145,
-      "sha256": "26e872d04f96b93b13accc391a3f14aa1436dc135915b6d3a7c9ea044f21936e"
+      "bytes": 584628,
+      "sha256": "c170036886ff564e1bdc69e727367823ec08fb4f074d5dcac186b2459b33ea8b"
     },
     {
       "location": "prepared",
@@ -406,8 +430,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1460,
-      "sha256": "c6838aeb5cba0260b8265f39209f2e13939b88efeaaedb443d414fa745d853e9"
+      "bytes": 1672,
+      "sha256": "2b1ffa621d24b5fb0eeb3771f5896aa261b17ccaf23f6ea3d2967d72971c6edb"
     },
     {
       "location": "prepared",

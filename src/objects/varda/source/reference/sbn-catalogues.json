@@ -1,0 +1,240 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "varda",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 174567,
+    "by": "SBDB record des 174567"
+  },
+  "lcdb": {
+    "catalogueId": "asteroid-lightcurve-database-v4",
+    "product": "urn:nasa:pds:ast-lightcurve-database:data:lc_summary.csv::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+    "rows": [
+      {
+        "recordNumber": 26578,
+        "fields": {
+          "Number": "174567",
+          "Name": "Varda",
+          "Desig": "2003 MW12",
+          "Family": "9301",
+          "CSource": "A",
+          "Class": "C*",
+          "DiamSource": "L",
+          "DiamFlag": "-",
+          "Diam": "740",
+          "HSource": "D",
+          "H": "3.75",
+          "HBand": "V",
+          "GSource": "A",
+          "G": "0.12",
+          "G2": "-9.99",
+          "AlbSource": "L",
+          "AlbFlag": "-",
+          "Albedo": "0.102",
+          "PFlag": "-",
+          "Period": "5.91",
+          "PerDesc": "-",
+          "AmpFlag": "-",
+          "AmpMin": "0.04",
+          "AmpMax": "0.06",
+          "U": "2-",
+          "Notes": "-",
+          "IsBinary": "B",
+          "Pole": "N",
+          "Survey": "-",
+          "ExNotes": "N",
+          "Private": "N"
+        }
+      }
+    ],
+    "selected": {
+      "summary": 0
+    },
+    "rule": "LCDB summary row; shown when U is 2- or better, the period is numeric with PFlag blank or S, and the row is not private. Notes T (tumbling), T? and T+ (possibly tumbling) and A (ambiguous) are carried into the shown value."
+  },
+  "tno": {
+    "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+    "product": "urn:nasa:pds:tno-centaur_diam-albedo-density:data:tno_centaur_diam_alb_dens_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+    "rows": [
+      {
+        "recordNumber": 484,
+        "fields": {
+          "ASTEROID_NUMBER": "174567",
+          "ASTEROID_NAME": "Varda",
+          "PROVISIONAL_DESIGNATION": "2003 MW12",
+          "SEMIMAJOR_AXIS": "46.0",
+          "ECCENTRICITY": "0.14",
+          "INCLINATION": "21.",
+          "DYNAMICAL_TYPE": "TNO",
+          "NUMBER_OF_COMPANIONS": "1",
+          "ABSOLUTE_MAGNITUDE_MPC": "3.2",
+          "ABSOLUTE_MAGNITUDE": "-99.999",
+          "ABSOLUTE_MAGNITUDE_UNCERTAINTY": "-99.999",
+          "EFFECTIVE_DIAMETER": "411.5",
+          "EFFECTIVE_DIAMETER_ERROR_UPPER": "-999.9",
+          "EFFECTIVE_DIAMETER_ERROR_LOWER": "-999.9",
+          "EFFECTIVE_DIAMETER_CODE": "L",
+          "PRIMARY_DIAMETER": "366.0",
+          "PRIMARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "PRIMARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "PRIMARY_DIAMETER_CODE": "L",
+          "SECONDARY_DIAMETER": "188.0",
+          "SECONDARY_DIAMETER_ERROR_UPPER": "-999.9",
+          "SECONDARY_DIAMETER_ERROR_LOWER": "-999.9",
+          "SECONDARY_DIAMETER_CODE": "L",
+          "ALBEDO": "0.090",
+          "ALBEDO_ERROR_UPPER": "-9.999",
+          "ALBEDO_ERROR_LOWER": "-9.999",
+          "ALBEDO_COLOR": "V",
+          "ALBEDO_CODE": "G",
+          "DENSITY": "1.110",
+          "DENSITY_ERROR_UPPER": "-9.999",
+          "DENSITY_ERROR_LOWER": "-9.999",
+          "DENSITY_CODE": "G",
+          "METHOD_DIAMETER_ALBEDO": "D",
+          "METHOD_DENSITY": "H",
+          "REFERENCE_CODE": "T14a"
+        }
+      },
+      {
+        "recordNumber": 485,
+        "fields": {
+          "ASTEROID_NUMBER": "174567",
+          "ASTEROID_NAME": "Varda",
+          "PROVISIONAL_DESIGNATION": "2003 MW12",
+          "SEMIMAJOR_AXIS": "46.0",
+          "ECCENTRICITY": "0.14",
+          "INCLINATION": "21.",
+          "DYNAMICAL_TYPE": "TNO",
+          "NUMBER_OF_COMPANIONS": "1",
+          "ABSOLUTE_MAGNITUDE_MPC": "3.2",
+          "ABSOLUTE_MAGNITUDE": "3.610",
+          "ABSOLUTE_MAGNITUDE_UNCERTAINTY": "0.050",
+          "EFFECTIVE_DIAMETER": "792.0",
+          "EFFECTIVE_DIAMETER_ERROR_UPPER": "91.0",
+          "EFFECTIVE_DIAMETER_ERROR_LOWER": "84.0",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "PRIMARY_DIAMETER": "705.0",
+          "PRIMARY_DIAMETER_ERROR_UPPER": "81.0",
+          "PRIMARY_DIAMETER_ERROR_LOWER": "75.0",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "SECONDARY_DIAMETER": "361.0",
+          "SECONDARY_DIAMETER_ERROR_UPPER": "42.0",
+          "SECONDARY_DIAMETER_ERROR_LOWER": "38.0",
+          "SECONDARY_DIAMETER_CODE": "-",
+          "ALBEDO": "0.102",
+          "ALBEDO_ERROR_UPPER": "0.024",
+          "ALBEDO_ERROR_LOWER": "0.020",
+          "ALBEDO_COLOR": "V",
+          "ALBEDO_CODE": "-",
+          "DENSITY": "1.270",
+          "DENSITY_ERROR_UPPER": "0.410",
+          "DENSITY_ERROR_LOWER": "0.440",
+          "DENSITY_CODE": "-",
+          "METHOD_DIAMETER_ALBEDO": "T",
+          "METHOD_DENSITY": "Y",
+          "REFERENCE_CODE": "V14a"
+        }
+      }
+    ],
+    "selected": {
+      "diameter": 1,
+      "density": 1
+    },
+    "references": {
+      "V14a": "Vilenius, E., et al., 2014, \"TNOs are cool\": A survey of the trans-Neptunian region. X. Analysis of classical Kuiper belt objects from Herschel and Spitzer observations, Astron. & Astrophys., 564:A35."
+    },
+    "rule": "Rows with an unqualified diameter (code blank: not assumed, derived or a limit); method rank occultation, imaging, mutual events, thermal, combined; the latest entry of the best method. A binary system shows its primary diameter when one is given. Density: the latest unqualified entry."
+  },
+  "binary": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binarytable_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binarytable.tab",
+    "rows": [
+      {
+        "recordNumber": 272,
+        "fields": {
+          "AST_NUMBER": "174567",
+          "AST_NAME": "Varda",
+          "PROV_DESIG": "2003 MW12",
+          "COMPANION_DESIGNATION": "I Ilmare",
+          "DYNAMICAL_TYPE": "CUB",
+          "SYSTEM_SEMIMAJOR_AXIS": "46.12",
+          "SYSTEM_ECCENTRICITY": "0.14",
+          "SYSTEM_INCLINATION": "22.",
+          "EFFECTIVE_DIAMETER": "792.00",
+          "EFFECTIVE_DIAMETER_UNCERTAINTY": "88.00",
+          "EFFECTIVE_DIAMETER_CODE": "-",
+          "D2_TO_D1_RATIO": "0.450",
+          "D2_TO_D1_RATIO_UNCERTAINTY": "0.009",
+          "D2_TO_D1_RATIO_CODE": "D",
+          "PRIMARY_DIAMETER": "722.00",
+          "PRIMARY_DIAMETER_UNCERTAINTY": "79.00",
+          "PRIMARY_DIAMETER_CODE": "-",
+          "COMPANION_DIAMETER": "326.00",
+          "COMPANION_DIAMETER_UNCERTAINTY": "38.00",
+          "COMPANION_DIAMETER_CODE": "-",
+          "PRIMARY_SPIN": "5.910",
+          "PRIMARY_SPIN_UNCERTAINTY": "-9.999",
+          "PRIMARY_SPIN_CODE": "-",
+          "BINARY_SEMIMAJOR_AXIS": "4.809E+03",
+          "BINARY_SEMIMAJOR_AXIS_UNCERT": "3.90E+01",
+          "BINARY_SEMIMAJOR_AXIS_CODE": "-",
+          "BINARY_ORBITAL_PERIOD": "5.751E+00",
+          "BINARY_ORBITAL_PERIOD_UNCERT": "1.50E-04",
+          "BINARY_ORBITAL_PERIOD_CODE": "-",
+          "BINARY_ECCENTRICITY": "0.022",
+          "BINARY_ECCENTRICITY_ERROR": "0.008",
+          "BINARY_ECCENTRICITY_CODE": "-",
+          "PRIMARY_ALBEDO": "0.102",
+          "PRIMARY_ALBEDO_UNCERTAINTY": "0.022",
+          "PRIMARY_ALBEDO_CODE": "-",
+          "SYSTEM_MASS": "2.66E+20",
+          "SYSTEM_MASS_UNCERTAINTY": "6.40E+18",
+          "SYSTEM_MASS_CODE": "-",
+          "SYSTEM_DENSITY": "1.24",
+          "SYSTEM_DENSITY_UNCERTAINTY": "0.04",
+          "SYSTEM_DENSITY_CODE": "-"
+        }
+      }
+    ],
+    "references": {
+      "G15b": "Grundy, W. M., et al., 2015, The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmare, Icarus, 257:130-138."
+    },
+    "rule": "Every companion row for this primary that the app does not show as a body of its own: semimajor axis (or separation, code S) and orbital period with their stated uncertainties and codes (E estimated, D derived, G greater than, L less than, H half period possible, Q questionable)."
+  },
+  "binary-sources": {
+    "catalogueId": "binary-minor-planets-v3",
+    "product": "urn:nasa:pds:ast_binary_parameters_compilation:data:binaryothref_tab::3.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast_binary_parameters_compilation_V3_0/data/binaryothref.tab",
+    "rows": [
+      {
+        "recordNumber": 272,
+        "fields": {
+          "AST_NUMBER": "174567",
+          "AST_NAME": "Varda",
+          "PROV_DESIG": "2003 MW12",
+          "COMPANION_DESIGNATION": "I Ilmare",
+          "DISCOVERY_METHOD_CODE": "H",
+          "YEAR_ANNOUNCEMENT": "2011",
+          "YEAR_UPDATE": "2019",
+          "REF_CODE_EFFECTIVE_DIAMETER": "V14a",
+          "REF_CODE_DIAMETER_RATIO": "G15b",
+          "REF_CODE_PRIMARY_DIAMETER": "G15b",
+          "REF_CODE_COMPANION_DIAMETER": "G15b",
+          "REF_CODE_PRIMARY_SPIN": "T14b",
+          "REF_CODE_BINARY_SEMIMAJOR": "G15b",
+          "REF_CODE_BINARY_PERIOD": "G15b",
+          "REF_CODE_BINARY_ECCENTRICITY": "G15b",
+          "REF_CODE_PRIMARY_ALBEDO": "V14a",
+          "REF_CODE_SYSTEM_MASS": "G15b",
+          "REF_CODE_SYSTEM_DENSITY": "G15b"
+        }
+      }
+    ],
+    "rule": "Discovery and per-value reference codes for the companion rows above, in the same order."
+  }
+}

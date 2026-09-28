@@ -31,6 +31,17 @@
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/783"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale in the astronomy record's mean radius 156.5 km (diameter 313 km) is outside the added Small Bodies Occultations V4.0 record 54, DAMIT model 783 diameter 247 ± 11 km (volume-equivalent; DAMIT model 783 fitted to 4 occultations). The display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

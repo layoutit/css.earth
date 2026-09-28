@@ -87,6 +87,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/klotho/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"42.5 km (size-calibrated model)\" (damit-models) implies a diameter of 85 km, outside the added Small Bodies Occultations V4.0 record 79, DAMIT model 321 diameter 94 ± 2 km (volume-equivalent; DAMIT model 321 fitted to 2 occultations). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

@@ -1,0 +1,114 @@
+{
+ "claim": "The VESTA20H grids are in Claudia Double Prime: drawn at Claudia longitude + 150 degrees (Claudia - 210) they line up with the DLR HAMO terrain and Gazetteer features of the Claudia-frame maps.",
+ "method": {
+  "terrain": "Pearson r between the DLR HAMO radius (Claudia, sampled 1 degree) and each gravity grid sampled at Claudia longitude + shift, |lat|<=60, rows demeaned, cos-lat weights. Terrain read with the shared PDS scalar-grid reader at 361 x 181 points; grids with the draft pds3-grid reader. Run 2026-09-28 on f01a41ff00 plus this change.",
+  "features": "Bouguer value at IAU/USGS Gazetteer centres (Claudia Double Prime, as the grid) and 210 degrees away; percentile among all cells."
+ },
+ "inputs": [
+  {
+   "path": "src/objects/vesta/source/gravity/JGDWN_VES20H_ACCEL_0020.IMG",
+   "bytes": 521280,
+   "sha256": "dc4cb2bb07123d11fb1fa0921945ba101a30a00bf03f0528beb4eaa96b7078bb"
+  },
+  {
+   "path": "src/objects/vesta/source/gravity/JGDWN_VES20H_BOU_0015.IMG",
+   "bytes": 521280,
+   "sha256": "b51771e6c0ce3ae79b2610229d5b90b5b30f23a450f760bad18b969a0944cfbd"
+  },
+  {
+   "path": "src/objects/vesta/source/gravity/JGDWN_VES20H_GEOID_0020.IMG",
+   "bytes": 521280,
+   "sha256": "7e2435aa9d08c9753db46cf3f5ff419f7aaacba7c94c2871600d2e350f03f957"
+  },
+  {
+   "path": "src/objects/vesta/source/science/vesta-hamo-dtm-64.pds.zip",
+   "note": "restored by the acquisition plan"
+  }
+ ],
+ "terrainCorrelation": {
+  "ACCEL_0020": {
+   "bestShiftDegrees": 150,
+   "bestR": 0.896,
+   "atShift150": 0.896,
+   "atShift0": -0.13,
+   "atShift210": -0.137,
+   "nextBestOutside10": 0.753
+  },
+  "BOU_0015": {
+   "bestShiftDegrees": 322,
+   "bestR": 0.427,
+   "atShift150": -0.152,
+   "atShift0": 0.268,
+   "atShift210": -0.241,
+   "nextBestOutside10": 0.413
+  },
+  "GEOID_0020": {
+   "bestShiftDegrees": 149,
+   "bestR": 0.71,
+   "atShift150": 0.71,
+   "atShift0": -0.015,
+   "atShift210": -0.28,
+   "nextBestOutside10": 0.625
+  }
+ },
+ "reference": "Raymond et al. (2013), EGU2013-12408, https://meetingorganizer.copernicus.org/EGU2013/EGU2013-12408.pdf: large positive Bouguer anomaly at Vestalia Terra at the western intersection of the Rheasilvia and Veneneia basins, a weaker positive over the central mound of Rheasilvia, a positive over the equatorial troughs at the north-eastern edge of Rheasilvia, negative anomalies over most of Veneneia.",
+ "bouguerAtFeatures": {
+  "Vestalia Terra": {
+   "claudiaDoublePrime": [
+    -36.045,
+    28
+   ],
+   "shifted210": [
+    36.955,
+    75
+   ]
+  },
+  "Rheasilvia (centre)": {
+   "claudiaDoublePrime": [
+    87.278,
+    91
+   ],
+   "shifted210": [
+    -26.359,
+    34
+   ]
+  },
+  "Veneneia": {
+   "claudiaDoublePrime": [
+    -1.0027,
+    48
+   ],
+   "shifted210": [
+    -99.689,
+    6
+   ]
+  },
+  "Divalia Fossae": {
+   "claudiaDoublePrime": [
+    53.142,
+    81
+   ],
+   "shifted210": [
+    -19.5,
+    37
+   ]
+  },
+  "vestaliaTerraBoxMean": {
+   "claudiaDoublePrime": -11.1,
+   "shifted210": -12.3
+  },
+  "globalMean": -0.2,
+  "maximum": {
+   "value": 238.23,
+   "at": [
+    11,
+    -32
+   ]
+  }
+ },
+ "notes": [
+  "The Bouguer maximum, 238.23 mGal at 11 E 32 S (Claudia Double Prime), lies inside the Gazetteer extent of Vestalia Terra (0.3 to 75.9 E, 32.4 S to 23.6 N), 6.6 degrees outside the Rheasilvia rim and 7.7 degrees outside the Veneneia rim (rims from the Gazetteer centres and diameters on a 265 km sphere).",
+  "At the Veneneia centre the grid reads -1.0 mGal (48th percentile), not the negative the abstract describes; 210 degrees away it reads -99.7.",
+  "The mean over the whole Vestalia Terra box does not separate the two placements (-11.1 against -12.3 mGal)."
+ ]
+}

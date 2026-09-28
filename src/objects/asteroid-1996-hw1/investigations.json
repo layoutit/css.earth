@@ -76,6 +76,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-1996-hw1/README.md"
       ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Model equivalent radius \"1.01 km\" (source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1) differs from the NEOWISE V2.0 neowise_neos.csv record 739 (Nugent et al. 2015) diameter 2.928 ± 0.066 km (NEOWISE, NEATM); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_neos.csv",
+        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+      ]
     }
   ]
 }

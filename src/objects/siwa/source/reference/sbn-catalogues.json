@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "siwa",
+  "generator": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 140,
+    "by": "Horizons command 140;"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 111,
+        "fields": {
+          "Designation": "140",
+          "Name": "Siwa",
+          "Diameter_Nominal": "106.7",
+          "Uncert": "6.0",
+          "Dia_1": "98",
+          "Uncert_1": "5",
+          "Events_1": "14",
+          "Invalid_1": "0",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "5987",
+          "Dia_2": "104",
+          "Uncert_2": "1",
+          "Events_2": "1",
+          "Invalid_2": "5",
+          "Model_Source_2": "DAMIT",
+          "Model_Number_2": "5988",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_2": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  }
+}

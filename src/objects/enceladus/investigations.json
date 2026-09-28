@@ -124,6 +124,19 @@
       "evidence": [
         "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapFeatures_Global/MapServer/0?f=json"
       ]
+    },
+    {
+      "id": "trek-cassini-iss-dem-375m",
+      "subject": "NASA Enceladus Trek layer Cassini ISS DEM 375mpp, Global (Cassini_ISS_DEM_375m_Global) as a replacement for the Schenk 200 m elevation",
+      "status": "excluded",
+      "finding": "Not a usable release and not an improvement. The Trek record (created 2023-09-25) names no producer, version or citation and says the data is not publicly released; the Schenk and McKinnon DEM that the view already uses is the producer's release (USGS/PDS, 2024-08-12, 200 m). Numbers come only from Trek's ArcGIS image service: a 4,224 x 2,112 float grid, -5,230 to +5,725 m, mean -851 m. These are radii minus an unstated sphere (the fit gives 252,157 m; the service states a 252,000 m sphere, the Trek record 252,100 m), not heights above the 256.2 x 251.4 x 248.6 km ellipsoid. The grid is labelled -180 to 180 degrees, but its craters line up with Schenk's only after a 179.3 degree roll (high-pass correlation 0.435, against 0.00 as labelled). At the 8,192 x 4,096 display with relief shading, pixelmatch at threshold 0.1 differs on 94.2% of texels as served and on 80.8% even after converting it to Schenk's ellipsoid for measurement; converted radii still differ by a median 446 m (90th percentile 1.16 km) in long-wavelength shape, its relief is smoother, and 303,248 polar texels are missing only in the Trek grid.",
+      "revisitWhen": "Trek or USGS publishes this 375 m model with a producer, datum, correct longitude registration and release terms.",
+      "evidence": [
+        "https://trek.nasa.gov/enceladus/TrekServices/ws/index/eq/searchItems?start=0&rows=200&facetKeys=productCat2&facetValues=DEM&proj=urn:ogc:def:crs:IAU2000::60200",
+        "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_DEM_375m_Global/ImageServer?f=json",
+        "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
+        "Measured 2026-09-28 against the current Schenk 200 m grid with the Elevation lens palette and relief."
+      ]
     }
   ]
 }

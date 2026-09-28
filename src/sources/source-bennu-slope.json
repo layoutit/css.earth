@@ -1,0 +1,38 @@
+{
+  "id": "source-bennu-slope",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Table of global Slope Relative to Gravity at each facet for shape model of (101955) Bennu. g_01680mm_alt_slp_0000n00000_v020.fits",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:orex.altimetry:data_derived_altimetry_lidar_global_models:g_01680mm_alt_slp_0000n00000_v020.fits::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/orex/orex.altimetry/data_derived_altimetry_lidar_global_models/global_digital_terrain_models/OLAv20/g_01680mm_alt_slp_0000n00000_v020.fits",
+      "label": "PDS Small Bodies Node"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/sciadv.abd3649",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bennu/source/manifest.json",
+      "locator": "/inputs/17"
+    },
+    {
+      "path": "src/objects/bennu/source/science/altimetry/g_01680mm_alt_slp_0000n00000_v020.fits.xml",
+      "locator": "/Product_Observational/Identification_Area"
+    }
+  ],
+  "publisher": "NASA Planetary Data System Small Bodies Node",
+  "version": "1.0",
+  "relations": [],
+  "statements": []
+}

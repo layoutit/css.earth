@@ -45,6 +45,36 @@
     },
     {
       "location": "public",
+      "filename": "phobos-craters-shadow-alpha@2x.webp",
+      "bytes": 5554394,
+      "sha256": "33d56d9d3d27ebdf9bd2f1b667227c711e0d63c252ace110166843dd0a04130a"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-craters-shadow@2x.webp",
+      "bytes": 4457954,
+      "sha256": "3fba42c3f872b32795ae78118bc3189610a15d1efd2ad9b130aa7d7f66384623"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-craters-surface-alpha@2x.webp",
+      "bytes": 5101176,
+      "sha256": "b2957ef0c88e9cdf31b0fc237ad7e5c65cf99007e738cd3fc8c2b9902477026c"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-craters-surface@2x.webp",
+      "bytes": 4404252,
+      "sha256": "bc2332c9b66cd4accec3d1f2e424b1737718307ac3e6a145c8d7dce753699210"
+    },
+    {
+      "location": "public",
+      "filename": "phobos-craters-thumbnail.webp",
+      "bytes": 2114,
+      "sha256": "e7fc0577e628bd7579791a4af3ad3e8bb3ccc9a55b3edf78b7549979fa0dc66c"
+    },
+    {
+      "location": "public",
       "filename": "phobos-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -160,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 973,
-      "sha256": "cae9070ecd7e8f98365fdf5594b700bf98e33c6ba22dc8284566cd6ecdb36ec7"
+      "bytes": 1215,
+      "sha256": "f481a1522ba690e3fafb0e6f9b38676b23ee38cbf34e391f0f8cd083fd8e0c5e"
     },
     {
       "location": "prepared",
@@ -172,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1397,
-      "sha256": "ff320c927c6f9602c7de3542b076bec04797a555e8c607deed544a5a13ee29e6"
+      "bytes": 2016,
+      "sha256": "cafd447052584848c17b0e6d6d2eaac9bc13da3766dc1ffc19924513154b7370"
     },
     {
       "location": "prepared",
@@ -183,21 +213,27 @@
     },
     {
       "location": "prepared",
+      "filename": "image-quality.json",
+      "bytes": 1359,
+      "sha256": "ab8bc39863ad159de2d3bb346fcafaf5e7590f6e3494888ce935ec2049ed01ac"
+    },
+    {
+      "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 2818,
-      "sha256": "01d1a03b5b17c40a78f68da7d9ceb7071bf870033cd61de560e0cdbf5d9ab283"
+      "bytes": 3846,
+      "sha256": "1c9cd9080cbc485f1627dd8eeb02aa4a1cca41842e0651f09a4e96821d5eacf1"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 9627,
-      "sha256": "b8eba0ba9d02f85e25bf94bbc9d12025c2116107510c5f907736ce83558458ce"
+      "bytes": 11455,
+      "sha256": "09e250eb848bf6bcc0a4cad8a815ecf9fbc8069501c20b446d88a617eb2017da"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 301,
-      "sha256": "2aa7560b5516038f9ea9ea5a9080364b9f98f0a4ca1f7fd67c81ae2e5804aab5"
+      "bytes": 374,
+      "sha256": "0d5323cbcc1c8a68e42dc49e4a78bc4b3598d04fd8247eb4fea09db857c2dad8"
     },
     {
       "location": "prepared",
@@ -207,15 +243,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/craters.webp",
+      "bytes": 31972,
+      "sha256": "650c34b591fc1285000f411fe3b8a39b4f4426e589d2f14d3d58b1519648378e"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 6206,
-      "sha256": "2db8b5b092f9a05cf8c81e9abc90c7509ba757b764b320a59830622c5e52e9ae"
+      "bytes": 6164,
+      "sha256": "3794ab592759b69963911d5898ceba28a02ef74d76b00b490128e792c6548a22"
     },
     {
       "location": "prepared",
       "filename": "minimaps/normal.webp",
-      "bytes": 19536,
-      "sha256": "737356836baaf8dda39aaa6248e50fd813e256e5326ed7debfbb974f5fdad0e3"
+      "bytes": 19308,
+      "sha256": "ef28eff23275b5acb4a5ce3d1c22879810897a0cd1eb448d401731995a8125cc"
     },
     {
       "location": "prepared",
@@ -226,14 +268,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1226472,
-      "sha256": "78f14de1cf48ce3633f0de68f28d0cd3bed4a31ed78a926c0ed57b3b345b3d3a"
+      "bytes": 1235756,
+      "sha256": "5e8aeeb84dc5cb4ac455175b445c050e362bd148f7f56fd5bb8e0770404b4070"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 1187421,
-      "sha256": "50377d7f58a4d322c7ce9e67da8ef0a8f0a818541718f7db4f44cf3e46b977fd"
+      "sha256": "028e2bf353cb73df8ac7eba7c5c61e99aa873a978fc32fff70ae5a3373ce59c0"
     },
     {
       "location": "prepared",
@@ -250,14 +292,14 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 9631,
-      "sha256": "43ca9348282d6809f79865bf7023d41495b7fcadd733a3f3f9c52f1fa38fb6d2"
+      "bytes": 11459,
+      "sha256": "54dd79b9163d3a4bd591efbd5f08ad3140ef75a26a335e3208fb40bfd4b6e900"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1399,
-      "sha256": "7136f1822f0ae3acb4fcfabde26ef64a74898ef6f54a51af206021c0068e6dd5"
+      "bytes": 1610,
+      "sha256": "94fb390a0e7c769e36c1d4307827bab819f79aabadd6d4a54297009d7014f2e2"
     },
     {
       "location": "prepared",

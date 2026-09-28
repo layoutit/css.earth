@@ -32,6 +32,58 @@
           "catalogueId": "arxiv-1801-07221",
           "locator": "/fullAxesKm/0; /diameterUncertaintyKm/plus; /diameterUncertaintyKm/minus"
         }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "13.188 hours (synodic; LCDB quality 2)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+          "label": "Warner, Harris & Pravec (2021), Asteroid Lightcurve Database (LCDB) V4.0, summary table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-lightcurve-database-v4",
+          "locator": "/lcdb/rows/0/fields/Period; /lcdb/rows/0/fields/PFlag; /lcdb/rows/0/fields/Notes; /lcdb/rows/0/fields/U"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.230 ± 0.020",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Brown et al. 2018",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/10/fields/ALBEDO; /tno/rows/10/fields/ALBEDO_ERROR_UPPER; /tno/rows/10/fields/ALBEDO_ERROR_LOWER; /tno/rows/10/fields/ALBEDO_COLOR; /tno/rows/10/fields/REFERENCE_CODE"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "System mass",
+        "value": "6.32 × 10²⁰ ± 1.00 × 10¹⁸ kg",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+          "label": "Baer, Chesley & Britt (2012), Asteroid Masses V1.0, determination by Brown et al. 2010",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "asteroid-masses-baer-2012",
+          "locator": "/masses/rows/0/fields/MASS_KG; /masses/rows/0/fields/MASS_KG_UNC; /masses/rows/0/fields/BINARY_NOTE; /masses/rows/0/fields/MASS_REF"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Bulk density",
+        "value": "1.400 ± 0.200 g/cm³",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
+          "label": "Johnston (2018), TNO and Centaur Diameters, Albedos, and Densities V1.0, entry from Brown et al. 2018",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
+          "locator": "/tno/rows/10/fields/DENSITY; /tno/rows/10/fields/DENSITY_ERROR_UPPER; /tno/rows/10/fields/DENSITY_ERROR_LOWER; /tno/rows/10/fields/METHOD_DENSITY; /tno/rows/10/fields/REFERENCE_CODE"
+        }
       }
     ]
   },
