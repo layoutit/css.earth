@@ -267,7 +267,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     ...(glowK === undefined ? {} : { selfLuminous: { temperatureK: Number(glowK), source: glowSource! } }),
   }, body, await read(`packages/astronomy/data/bodies/${hostId}.json`), SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
-  const { neutralDiscMarker } = await import('./new-object/scaffold.mts');
+  const { neutralDiscMarker } = await import('@cssearth/bake/navigation');
   const presentation = resolve(root, 'src/objects', id, 'source/presentation');
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   console.log(`${files.size + 1} files written. Replace every ${TODO}, then: node tools/prepare/cli/prepare-object.mts ${id}`);
