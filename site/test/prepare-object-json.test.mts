@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import { refuseStaleKeptBindings } from './prepare-object-json.mts';
+import { refuseStaleKeptBindings } from '../build/prepare/prepare-object-json.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 

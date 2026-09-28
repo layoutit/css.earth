@@ -4,12 +4,6 @@
   "private": true,
   "license": "MIT",
   "type": "module",
-  "imports": {
-    "#preparation/*": {
-      "types": "./tools/objects/*.ts",
-      "default": "./tools/objects/dist/*.js"
-    }
-  },
   "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": "^22.18.0 || >=24.0.0"
@@ -27,10 +21,9 @@
     "build:bake": "pnpm --filter @cssearth/bake build",
     "build:objects": "pnpm --filter @cssearth/objects build",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
-    "build:preparation:bundle": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
     "build:renderer": "pnpm --filter @cssearth/renderer build",
     "build:tools": "pnpm build:packages && pnpm prepare:tools",
-    "prepare:tool-inputs": "pnpm prepare:catalog && pnpm prepare:titles && node packages/bake/cli/prepare-solar-geometry.mts && node packages/bake/cli/prepare-navigation.mts --catalog-only && pnpm build:preparation:bundle",
+    "prepare:tool-inputs": "pnpm prepare:catalog && pnpm prepare:titles && node packages/bake/cli/prepare-solar-geometry.mts && node packages/bake/cli/prepare-navigation.mts --catalog-only",
     "prepare:tools": "pnpm prepare:tool-inputs && pnpm prepare:world-context && pnpm prepare:shell-assets",
     "arch:map": "node .github/scripts/architecture/index.mts map",
     "check:architecture": "node .github/scripts/architecture/index.mts check",
@@ -72,7 +65,7 @@
     "prepare:titles": "node site/build/prepare/prepare-shell-titles.mts",
     "prepare:volume": "node packages/bake/cli/prepare-volume.mts",
     "prepare:world-presentation": "node site/build/prepare/prepare-moon-labels.mts && node site/build/prepare/prepare-world-presentation.mts",
-    "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && pnpm prepare:world-presentation",
+    "prepare:world-context": "node site/build/prepare/prepare-spatial-context.ts src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && pnpm prepare:world-presentation",
     "pretest": "pnpm prepare:shell",
     "preview": "node site/server/preview.mts",
     "publish:runtime-assets": "node packages/bake/cli/publish-runtime-assets.mts",

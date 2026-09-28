@@ -16,7 +16,7 @@ const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'as
 const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
-// Only notable asteroids are map targets; preparation marks the rest as plain dots (tools/objects/prepare-spatial-context.ts),
+// Only notable asteroids are map targets; preparation marks the rest as plain dots (site/build/prepare/prepare-spatial-context.ts),
 // with no sprite, caption, hover or click. Their pages stay reachable through search.
 const plainDotIds = applicationContext.bodies.filter(body => body.plainDot).map(body => body.id);
 const minorMoonIds = prepared.moons.minor;

@@ -4,7 +4,7 @@
  * prepared file the stage writes is byte-identical to the object's current one, so no lens, scene or image drifts. Pins are
  * refreshed first; provenance is recorded afterwards, per object.
  *
- *   node tools/objects/refresh-content.mts <object-id> [<object-id> ...] */
+ *   node site/build/prepare/refresh-content.mts <object-id> [<object-id> ...] */
 import { spawnSync } from 'node:child_process';
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -20,7 +20,7 @@ export async function refreshContent(id: string, root = process.cwd()) {
   const { descriptor } = await readAuthoredSources(objectDirectory);
   const content = descriptor.recipe.sources.find(source => source.id === 'content');
   if (!content) throw new TypeError(`${id} has no content source.`);
-  const { prepareObjectContentAssets } = await import(pathToFileURL(resolve(root, 'tools/objects/dist/content/prepare.js')).href) as { prepareObjectContentAssets: (context: unknown) => Promise<unknown> };
+  const { prepareObjectContentAssets } = await import(pathToFileURL(resolve(root, 'site/build/content/prepare.ts')).href) as { prepareObjectContentAssets: (context: unknown) => Promise<unknown> };
   await mkdir(resolve(root, '.local/content-refresh'), { recursive: true });
   const stage = await mkdtemp(resolve(root, '.local/content-refresh', `${id}-`));
   try {

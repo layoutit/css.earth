@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
-import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts';
+import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { parseRuntimeManifest } from '@cssearth/bake/delivery';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 

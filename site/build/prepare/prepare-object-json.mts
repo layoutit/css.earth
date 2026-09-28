@@ -1,4 +1,4 @@
-import { refuseDirectRun } from '../cli/library-entry.mts';
+// Entry script: node site/build/prepare/prepare-object-json.mts [<object-id>...] [--keep-bindings].
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition, pinPreparedObject} from '@cssearth/bake/contract';
 import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
@@ -24,12 +24,12 @@ import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
-import { objectPageStyles } from '../../site/object-page-contract.mts';
+import { objectPageStyles } from '../../object-page-contract.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
-const root = fileURLToPath(new URL('../../', import.meta.url));
+const root = fileURLToPath(new URL('../../../', import.meta.url));
 
 export async function writeObjectJson(id:string, definitionValue:unknown, options?:BindingOptions) {
   // A refusal names the body it stopped on: a run over hundreds of bodies otherwise leaves only the failing check.
@@ -54,7 +54,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
-  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('#preparation/prepare-world-navigation');
+  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
   if (options?.keepBindings) refuseStaleKeptBindings(id, preparedNavigation.systemTransform);
@@ -91,7 +91,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');
   // Contexts consume finalized body frames. Preparing them first can retain a
   // previous radius and make an otherwise valid destination fail at handoff.
-  const { prepareSpatialContext } = await import('#preparation/prepare-spatial-context');
+  const { prepareSpatialContext } = await import('./prepare-spatial-context.ts');
   for (const object of SCENE_OBJECTS) {
     const directory = resolve(root, 'src/objects', object.id);
     const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));
@@ -106,4 +106,8 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   return results;
 }
 
-refuseDirectRun(import.meta);
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  // --keep-bindings: a default camera or world frame change, which needs no browser or image work.
+  const args = process.argv.slice(2), ids = args.filter(arg => arg !== '--keep-bindings');
+  for (const result of await prepareObjectJson(ids.length ? ids : null, { keepBindings: args.includes('--keep-bindings') })) console.log(JSON.stringify(result));
+}

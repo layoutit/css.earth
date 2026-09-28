@@ -10,7 +10,7 @@ import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, com
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseSpatialContextCommand, prepareSpatialContext } from './prepare-spatial-context.js';
+import { parseSpatialContextCommand, prepareSpatialContext } from '../build/prepare/prepare-spatial-context.ts';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');

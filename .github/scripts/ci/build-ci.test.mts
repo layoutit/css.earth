@@ -25,12 +25,10 @@ function fixture(t: TestContext) {
 
 test('cold lint builds every compiled owner and regenerates the complete minimal source prerequisites', async t => {
   const f = fixture(t), results = await buildCi({ ...f, mode: 'lint', digest });
-  assert.deepEqual([...f.executed].sort(), ['catalog', 'packages', 'preparation', 'solar', 'titles']);
+  assert.deepEqual([...f.executed].sort(), ['catalog', 'packages', 'solar', 'titles']);
   assert.ok(results.every(result => !result.cached));
   assert.ok(f.executed.indexOf('packages') < f.executed.indexOf('catalog'));
   assert.ok(f.executed.indexOf('catalog') < f.executed.indexOf('solar'));
-  assert.ok(f.executed.indexOf('solar') < f.executed.indexOf('preparation'));
-  assert.ok(f.executed.indexOf('packages') < f.executed.indexOf('preparation'));
 });
 
 test('an exact full hit reuses only compiled output while all generated source and shell preparation still runs', async t => {
@@ -38,7 +36,7 @@ test('an exact full hit reuses only compiled output while all generated source a
   await buildCi({ ...f, mode: 'lint', digest });
   f.executed.length = 0;
   const results = await buildCi({ ...f, mode: 'full', digest, cacheHit: true });
-  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation']);
+  assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages']);
   assert.deepEqual([...f.executed].sort(), ['astronomy-data', 'catalog', 'icons', 'moon-labels', 'navigation', 'solar', 'titles', 'world', 'world-presentation']);
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('moon-labels'));
   assert.ok(f.executed.indexOf('world') < f.executed.indexOf('world-presentation'));
@@ -59,9 +57,9 @@ test('cache hits with missing JS, declarations, nested chunks or receipt rebuild
 test('a different exact identity or corrupted output cannot reuse compiled files', async t => {
   const f = fixture(t);
   await buildCi({ ...f, mode: 'lint', digest });
-  f.write('tools/objects/dist/prepare-authored.js', 'wrong output');
+  f.write('packages/renderer/dist/index.js', 'wrong output');
   const corrupted = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
-  assert.equal(corrupted.find(result => result.id === 'preparation')?.cached, false);
+  assert.equal(corrupted.find(result => result.id === 'packages')?.cached, false);
   const different = await buildCi({ ...f, mode: 'lint', digest: 'b'.repeat(64), cacheHit: true });
   assert.ok(different.every(result => !result.cached));
 });
@@ -79,35 +77,22 @@ test('native package graph and the real renderer package → catalogue dependenc
   assert.equal(plan.find(task => task.id === 'renderer'), undefined, 'the renderer builds with the other packages');
   assert.deepEqual(plan.find(task => task.id === 'packages')?.outputs?.find(output => output.path === 'packages/renderer/dist')?.required, ['index.js', 'index.d.ts']);
   assert.deepEqual(plan.find(task => task.id === 'catalog')?.after, ['packages']);
-  assert.deepEqual(plan.find(task => task.id === 'preparation')?.after, ['packages', 'solar', 'titles']);
-  assert.deepEqual(plan.find(task => task.id === 'world')?.after, ['preparation', 'navigation']);
+  assert.deepEqual(plan.find(task => task.id === 'world')?.after, ['navigation']);
   assert.deepEqual(plan.find(task => task.id === 'icons')?.after, ['packages']);
 });
 
-test('CI-only changes can reuse package outputs, the renderer included, while preparation keeps its full input identity', async t => {
+test('CI-only changes can reuse package outputs, the renderer included, while shell preparation still runs every time', async t => {
   const f = fixture(t), packageDigest = 'b'.repeat(64);
   await buildCi({ ...f, mode: 'lint', digest, packageDigest });
   f.executed.length = 0;
   const results = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest,
     cacheHit: false, packageCacheHit: true });
   assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages']);
-  assert.ok(f.executed.includes('preparation'));
+  assert.ok(f.executed.includes('catalog'));
   unlinkSync(resolve(f.root, 'packages/astronomy/dist/index.d.ts'));
   const missing = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest,
     cacheHit: true, packageCacheHit: true });
   assert.equal(missing.find(result => result.id === 'packages')?.cached, false);
-});
-
-test('a preparation hit still proves its JS entrypoints and nested files', async t => {
-  const f = fixture(t), options = { ...f, mode: 'full' as const, digest };
-  await buildCi(options);
-  const warm = await buildCi({ ...options, cacheHit: true });
-  assert.deepEqual(warm.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation']);
-  for (const file of ['prepare-authored.js', 'prepare-spatial-context.js', 'nested/chunk.js']) {
-    unlinkSync(resolve(f.root, 'tools/objects/dist', file));
-    const missing = await buildCi({ ...options, cacheHit: true });
-    assert.equal(missing.find(result => result.id === 'preparation')?.cached, false, file);
-  }
 });
 
 test('an exports-only package lists each compiled output once', t => {

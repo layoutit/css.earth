@@ -24,7 +24,7 @@ const universeEntries = [
   'packages/bake/src/volume-leaves/volume.test.ts',
   'packages/bake/src/volume-leaves/volume-impostors.test.ts',
   'packages/bake/src/world-context/spatial-context.test.ts',
-  'tools/objects/prepare-spatial-context.test.ts',
+  'site/test/prepare-spatial-context.test.ts',
   'tests/objects/scene/world-navigation.test.ts',
   'packages/bake/src/stars/stars.test.ts',
   'packages/bake/src/shell/shell.test.ts',

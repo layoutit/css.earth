@@ -12,7 +12,7 @@ const safe = (name: unknown): name is string => typeof name === 'string' && /^[a
 
 /** Validate consumer JSON before publication; private preparation folders stay staged. */
 /** Folders a prepared set may carry, each beside the JSON that owns it: the spatial-context step writes one orbit bank
- * per centre and one system view per host next to `world-context.json` (tools/objects/prepare-spatial-context.ts). */
+ * per centre and one system view per host next to `world-context.json` (site/build/prepare/prepare-spatial-context.ts). */
 const PREPARED_FOLDERS: Readonly<Record<string, { owner: string; extension: string }>> = {
   'world-orbits': { owner: 'world-context.json', extension: '.bin' }, 'system-views': { owner: 'world-context.json', extension: '.json' } };
 export async function readPreparedBinaryOutputs(directory: string) {
