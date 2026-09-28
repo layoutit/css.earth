@@ -2,7 +2,7 @@
  * Author a DAMIT asteroid package from one archived model (convex, or nonconvex with `model.nonconvex` and `model.basis`)
  * and a separately published physical size.
  *
- *   node tools/objects/source-authoring/damit-asteroids/author.mts [--inputs=<path>] [--object=<id>]
+ *   node packages/bake/authoring/damit-asteroids/author.mts [--inputs=<path>] [--object=<id>]
  *
  * Every value that is not measured from the downloaded files comes from `inputs.json`, where each carries its source.
  * The tool downloads the pinned DAMIT shape and spin files, the JPL records and, for a NEOWISE scale, the IRSA row; it
@@ -48,7 +48,7 @@ interface Body {
 }
 
 const args = process.argv.slice(2);
-const inputsPath = args.find(arg => arg.startsWith('--inputs='))?.slice(9) ?? 'tools/objects/source-authoring/damit-asteroids/inputs.json';
+const inputsPath = args.find(arg => arg.startsWith('--inputs='))?.slice(9) ?? 'packages/bake/authoring/damit-asteroids/inputs.json';
 const only = args.find(arg => arg.startsWith('--object='))?.slice(9);
 const inputs = requireRecord(JSON.parse(await readFile(inputsPath, 'utf8')));
 /** The date the current body's sources were checked: its own `checked`, else the table's. */
@@ -489,7 +489,7 @@ Adopted diameter: **${calibration.diameterKm} ± ${calibration.uncertaintyKm} km
 
 ## Evidence
 
-Checked ${checked} by \`tools/objects/source-authoring/damit-asteroids/author.mts\` from the pinned [inputs](../../../tools/objects/source-authoring/damit-asteroids/inputs.json). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic ${facts.mesh.euler}. The shape, spin, JPL records${facts.neowise ? ', NEOWISE row' : ''} and every derived record are declared in the [input manifest](source/manifest.json).
+Checked ${checked} by \`packages/bake/authoring/damit-asteroids/author.mts\` from the pinned [inputs](../../../packages/bake/authoring/damit-asteroids/inputs.json). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic ${facts.mesh.euler}. The shape, spin, JPL records${facts.neowise ? ', NEOWISE row' : ''} and every derived record are declared in the [input manifest](source/manifest.json).
 
 ## Known problems
 
