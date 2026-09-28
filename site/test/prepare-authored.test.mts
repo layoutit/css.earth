@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
-import { redrawOnlyDecision } from './prepare-authored.ts';
+import { redrawOnlyDecision } from '../build/prepare/prepare-authored.ts';
 
 // A published copy of Iapetus whose recipes match the working tree, so only the feature record's left edge can decide.
 async function publishedIapetus(publishedEdge: number) {
