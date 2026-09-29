@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "ciardullo-pne",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/614/167/table2.dat",
+    "bytes": 11856,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        3
+      ],
+      "raH": [
+        5,
+        5
+      ],
+      "raM": [
+        7,
+        8
+      ],
+      "raS": [
+        10,
+        14
+      ],
+      "decSign": [
+        15,
+        15
+      ],
+      "decD": [
+        16,
+        17
+      ],
+      "decM": [
+        19,
+        20
+      ],
+      "decS": [
+        22,
+        25
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M33's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "sech2",
+      "scaleHeightPc": 175,
+      "source": "ciardullo-2004-m33-pne",
+      "basis": "Ciardullo et al. (2004, Sect. 6) adopt z0 ≈ 175 pc (at least ±25%) for the isothermal sheet sech²(z/z0) of M33's planetary nebulae, and their data exclude z0 ≲ 90 pc beyond 6 kpc. It is the only M33 disc scale height these sources state; young tracers (HII regions, Cepheids, clusters) are thinner in disc galaxies, so for them it is an upper value, used as a presentation choice. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "ciardullo-2004-m33-pne",
+  "meaning": "Planetary nebula candidates of Ciardullo et al. (2004), from [O III] 5007 imaging of the whole galaxy: one dot per candidate at its catalogue sky position. Those the authors mark as possible halo objects are placed on the disc like the rest.",
+  "appearance": {
+    "colorCss": "#9dffcf",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the planetary-nebula colour M31's dots share."
+  }
+}

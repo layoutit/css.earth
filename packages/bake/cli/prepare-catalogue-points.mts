@@ -7,7 +7,8 @@
  *
  * `frame.placement: 'image-layer-disc'` places ICRS rows without a distance: each lies where its sight line crosses the
  * midplane of the inclined disc the object's image layers are baked on (`source/recipe.json`, through the image-layer
- * bake's own intersection), so a galaxy's catalogued objects sit on its photograph. Right ascension and declination may
+ * bake's own intersection), so a galaxy's catalogued objects sit on its photograph; `frame.discThickness` spreads them
+ * along their sight lines through the disc's published thickness. Right ascension and declination may
  * also be sexagesimal columns (`raH`, `raM`, `raS`, `decSign`, `decD`, `decM`, `decS`).
  *
  * `appearance.colorByClass` colours each row by the class its column's value falls in (below each class's `below`, the
@@ -51,7 +52,10 @@ const table = recipe.table as { path: string; bytes: number; format: 'whitespace
   distanceByFlag?: { flag: Column; columns: Record<string, Column> }; distanceFirstOf?: Column[];
   distanceUnit?: 'pc' | 'kpc' | 'parallax-mas' | 'distance-modulus'; missingDistance?: number;
   /** Several rows per object (one per observation): keep the first row with a distance for each name. */
-  onePerName?: boolean };
+  onePerName?: boolean;
+  /** Leave out every ICRS row within `withinArcsec` of a position listed in another table (a CSV with a header), such as
+   * the foreground stars a published criterion identifies; `source` and `basis` say whose list and radius they are. */
+  exclude?: { path: string; raDegColumn: string; decDegColumn: string; withinArcsec: number; source: string; basis: string } };
 const discPlacement = (recipe.frame as { placement?: unknown } | undefined)?.placement === 'image-layer-disc';
 if ([table.columns.distance, table.distanceByFlag, table.distanceFirstOf].filter(value => value !== undefined).length !== (discPlacement ? 0 : 1) ||
     (discPlacement ? table.distanceUnit !== undefined : table.distanceUnit === undefined)) {
@@ -63,6 +67,11 @@ const sexagesimal = ['raH', 'raM', 'raS', 'decSign', 'decD', 'decM', 'decS'] as 
 if (icrsInput ? (table.columns.raDeg === undefined || table.columns.decDeg === undefined) && !sexagesimal.every(key => table.columns[key] !== undefined)
   : !table.galacticFromName && (table.columns.lDeg === undefined || table.columns.bDeg === undefined)) {
   throw new TypeError(`${at('table.columns')} needs raDeg and decDeg (or all of ${sexagesimal.join(', ')}) for ICRS input, or lDeg and bDeg (or galacticFromName) for Galactic input.`);
+}
+if (table.exclude !== undefined && (!icrsInput || typeof table.exclude.path !== 'string' || !table.exclude.path || typeof table.exclude.raDegColumn !== 'string'
+    || typeof table.exclude.decDegColumn !== 'string' || !(table.exclude.withinArcsec > 0) || typeof table.exclude.source !== 'string' || !table.exclude.source
+    || typeof table.exclude.basis !== 'string' || !table.exclude.basis)) {
+  throw new TypeError(`${at('table.exclude')} needs ICRS input, a CSV path, its RA and Dec column names, a positive withinArcsec, a source and a basis; got ${JSON.stringify(table.exclude)}.`);
 }
 if (!filters.every(filter => ['==', '!=', '>', '<'].includes(filter.op))) throw new TypeError(`${at('filters')} ops are ==, !=, > or <.`);
 /** A kinematic distance's uncertainty, by Hou & Han (2014, Sect. 2.4): a ±σv velocity uncertainty carried through a flat
@@ -81,6 +90,9 @@ type Spectrum = { path: string; bytes: number; wavelength: string; flux: string;
   endsNm?: { value: number; basis: string } };
 const appearance = recipe.appearance as { colorCss: string; radiusPx: number; opacity: number;
   colorBy?: { column: Column; stops: [number, string][]; steps: number };
+  /** Each row's measured B-V through the app's own catalogue star colour (@cssearth/engine catalogueColor), quantised to
+   * `steps` colours across `range`; a colour outside the range takes its end. */
+  colorByBv?: { column: Column; range: [number, number]; steps: number; basis: string };
   colorByClass?: { column: Column; classes: { label: string; below?: number; spectrum: Spectrum }[]; missing: { label: string; colorCss: string; basis: string } };
   toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string } };
 if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new TypeError(`${at('table.format')} must be whitespace, fixed-width or csv (with a header row).`);
@@ -91,7 +103,11 @@ if (discPlacement && (!icrsInput || frame.unit === 'Mpc' || kinematicUncertainty
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
 if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex colour, a positive radius and an opacity in (0, 1].`);
-const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, toneBy = appearance.toneBy;
+const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, colorByBv = appearance.colorByBv, toneBy = appearance.toneBy;
+if (colorByBv && (colorBy || colorByClass || !Array.isArray(colorByBv.range) || !(colorByBv.range[0] < colorByBv.range[1]) || !Number.isInteger(colorByBv.steps)
+    || colorByBv.steps < 2 || colorByBv.steps > 64 || typeof colorByBv.basis !== 'string' || !colorByBv.basis)) {
+  throw new TypeError(`${at('appearance.colorByBv')} takes no other colouring, a rising [low, high] B-V range, 2-64 steps and a basis; got ${JSON.stringify(colorByBv)}.`);
+}
 if (discPlacement && toneBy) throw new TypeError(`${at('appearance.toneBy')} needs each row's own distance; a disc placement has none.`);
 if (toneBy && (typeof toneBy.band !== 'string' || !(toneBy.faintMagnitude > toneBy.brightMagnitude) || !(toneBy.faintTone > 0 && toneBy.faintTone < 1) ||
     !Number.isInteger(toneBy.steps) || toneBy.steps < 2 || toneBy.steps > 16 || typeof toneBy.basis !== 'string' || !toneBy.basis)) {
@@ -121,8 +137,25 @@ opener = gzip.open if r['gzip'] else open
 def field(line, column):
   if isinstance(column, list): return line[column[0] - 1:column[1]].strip()
   parts = line.rstrip('\n').split(',') if r['csv'] else line.split(); return parts[column - 1].strip() if column - 1 < len(parts) else ''
-rows, kept, missing, named = 0, [], 0, set()
-import math
+rows, kept, missing, named, excluded = 0, [], 0, set(), 0
+import math, csv
+# Rows within the exclusion radius of a listed position (another catalogue's sources) are left out; a grid of
+# cells as wide as the radius finds the candidates.
+exclusion = None
+if r['exclude']:
+  radius = r['exclude']['withinArcsec'] / 3600
+  exclusion = {}
+  with open(r['exclude']['path'], newline='', encoding='utf8') as listed:
+    for row in csv.DictReader(listed):
+      ra, dec = float(row[r['exclude']['raDegColumn']]), float(row[r['exclude']['decDegColumn']])
+      exclusion.setdefault((math.floor(dec / radius), math.floor(ra * math.cos(math.radians(dec)) / radius)), []).append((ra, dec))
+def excluded_at(ra, dec):
+  cy, cx = math.floor(dec / radius), math.floor(ra * math.cos(math.radians(dec)) / radius)
+  for y in (cy - 1, cy, cy + 1):
+    for x in (cx - 1, cx, cx + 1):
+      for lra, ldec in exclusion.get((y, x), ()):
+        if math.hypot((ra - lra) * math.cos(math.radians(dec)), dec - ldec) <= radius: return True
+  return False
 def is_kinematic(line):
   rule = r['weight']['kinematic']
   if rule in ('always', 'never'): return rule == 'always'
@@ -176,6 +209,7 @@ with opener(r['table'], 'rt', encoding='utf8') as handle:
       b = sign * (float(field(line, c['decD'])) + float(field(line, c['decM'])) / 60 + float(field(line, c['decS'])) / 3600)
     elif r['icrs']: l, b = float(field(line, r['columns']['raDeg'])), float(field(line, r['columns']['decDeg']))
     else: l, b = float(field(line, r['columns']['lDeg'])), float(field(line, r['columns']['bDeg']))
+    if exclusion is not None and excluded_at(l, b): excluded += 1; continue
     text = field(line, r['colorColumn']) if r['colorColumn'] is not None else ''
     color = float(text) if text else None
     magnitude = None
@@ -190,7 +224,7 @@ out = u.Mpc if r['outUnit'] == 'Mpc' else u.kpc
 if r['disc']: xyz = []
 elif r['icrs']: xyz = SkyCoord(ra=[k[1] for k in kept] * u.deg, dec=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='icrs').cartesian.xyz.to(out).value.T
 else: xyz = SkyCoord(l=[k[1] for k in kept] * u.deg, b=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='galactic').icrs.cartesian.xyz.to(out).value.T
-json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': missing, 'astropy': astropy.__version__,
+json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': missing, 'excluded': excluded, 'astropy': astropy.__version__,
   'points': [[round(float(v), 4) for v in p] for p in xyz], 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'sky': [[k[1], k[2]] for k in kept] if r['disc'] else None,
   'maxDistanceKpc': 0 if r['disc'] else max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus') else 1)}, sys.stdout)`;
 const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
@@ -198,19 +232,40 @@ const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit ?? null,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
-    disc: discPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
+    exclude: table.exclude ? { ...table.exclude, path: resolve(sourceDirectory, table.exclude.path) } : null,
+    disc: discPlacement, filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? colorByBv?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
-const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; astropy: string; points: number[][]; colors: (number | null)[];
+const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; colors: (number | null)[];
   magnitudes: (number | null)[];
   sigmas: (number | null)[]; sky: [number, number][] | null; maxDistanceKpc: number };
+/** A disc placement may spread the rows through the disc's published thickness: each row stays on its own sight line (its
+ * sky position is the catalogue's) and moves along it to a height above the midplane drawn from an isothermal sheet,
+ * sech²(z / z0), with z0 the source's scale height. The draw is seeded by the bank and the row's order, so a bake repeats
+ * it exactly. Only the spread is published; no row's own height is measured. */
+const discThickness = (recipe.frame as { discThickness?: unknown } | undefined)?.discThickness as undefined | {
+  profile: 'sech2'; scaleHeightPc: number; source: string; basis: string };
+if (discThickness !== undefined && (!discPlacement || discThickness.profile !== 'sech2' || !(discThickness.scaleHeightPc > 0)
+    || typeof discThickness.source !== 'string' || !discThickness.source || typeof discThickness.basis !== 'string' || !discThickness.basis)) {
+  throw new TypeError(`${at('frame.discThickness')} needs frame.placement image-layer-disc, profile sech2, a positive scaleHeightPc, a source and a basis; got ${JSON.stringify(discThickness)}.`);
+}
 if (discPlacement) {
   // Each row on the image layers' disc midplane: its sight line's unit vector times the distance to the midplane, in kpc.
   const { parseImageLayerRecipe, imageLayerDisc, imageLayerDiscDistanceKpc } = await import('@cssearth/bake/image-layers');
   const disc = imageLayerDisc(parseImageLayerRecipe(JSON.parse(await readFile(resolve(objectDirectory, 'source', 'recipe.json'), 'utf8'))));
-  converted.points = converted.sky!.map(([ra, dec]) => {
-    const distance = imageLayerDiscDistanceKpc(disc, ra, dec), r = ra * Math.PI / 180, d = dec * Math.PI / 180;
+  // The disc normal in Sun-centred ICRS, from its components along the target's east, north and sight-line axes.
+  const normal = [0, 1, 2].map(axis => disc.diskNormal[0] * disc.east[axis]! + disc.diskNormal[1] * disc.north[axis]! + disc.diskNormal[2] * disc.target[axis]!);
+  const { createHash } = await import('node:crypto');
+  const height = (index: number) => {
+    // A uniform draw in (0, 1) from the row's seed, through the sech² profile's inverse cumulative distribution.
+    const u = (Number(createHash('sha256').update(`${id}:${index}`).digest().readBigUInt64BE(0) >> 11n) + 0.5) / 2 ** 53;
+    return discThickness!.scaleHeightPc / 1000 * Math.atanh(2 * u - 1);
+  };
+  converted.points = converted.sky!.map(([ra, dec], index) => {
+    const r = ra * Math.PI / 180, d = dec * Math.PI / 180, ray = [Math.cos(d) * Math.cos(r), Math.cos(d) * Math.sin(r), Math.sin(d)];
+    const along = discThickness ? height(index) / (ray[0]! * normal[0]! + ray[1]! * normal[1]! + ray[2]! * normal[2]!) : 0;
+    const distance = imageLayerDiscDistanceKpc(disc, ra, dec) + along;
     converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
-    return [Math.cos(d) * Math.cos(r), Math.cos(d) * Math.sin(r), Math.sin(d)].map(value => Math.round(value * distance * 1e4) / 1e4);
+    return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
   });
 }
 
@@ -223,8 +278,16 @@ const ramp = (value: number) => {
   const [v0, c0] = stops[lower]!, [v1, c1] = stops[upper]!;
   return mix(c0, c1, v1 === v0 ? 0 : (clamped - v0) / (v1 - v0));
 };
-const palette = colorBy ? Array.from({ length: colorBy.steps }, (_, step) => ramp(colorBy.stops[0]![0] + (colorBy.stops.at(-1)![0] - colorBy.stops[0]![0]) * step / (colorBy.steps - 1))) : null;
+const { catalogueColor } = await import('@cssearth/engine');
+const bvColour = (bv: number) => '#' + catalogueColor(Number.NaN, bv).map(channel => Math.round(channel).toString(16).padStart(2, '0')).join('');
+const palette = colorBy ? Array.from({ length: colorBy.steps }, (_, step) => ramp(colorBy.stops[0]![0] + (colorBy.stops.at(-1)![0] - colorBy.stops[0]![0]) * step / (colorBy.steps - 1)))
+  : colorByBv ? Array.from({ length: colorByBv.steps }, (_, step) => bvColour(colorByBv.range[0] + (colorByBv.range[1] - colorByBv.range[0]) * step / (colorByBv.steps - 1))) : null;
 const paletteIndex = (value: number | null) => {
+  if (colorByBv) {
+    if (value === null || !Number.isFinite(value)) throw new TypeError(`${at('appearance.colorByBv')}: a kept row has no ${JSON.stringify(colorByBv.column)} value.`);
+    const [low, high] = colorByBv.range;
+    return Math.round((Math.max(low, Math.min(high, value)) - low) / (high - low) * (colorByBv.steps - 1));
+  }
   if (!colorBy || value === null || !Number.isFinite(value)) throw new TypeError(`${at('appearance.colorBy')}: a kept row has no ${JSON.stringify(colorBy?.column)} value.`);
   const [low, high] = [colorBy.stops[0]![0], colorBy.stops.at(-1)![0]];
   return Math.round((Math.max(low, Math.min(high, value)) - low) / (high - low) * (colorBy.steps - 1));
@@ -292,7 +355,9 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
     spectrum: spectrum.path, ...(spectrum.endsNm ? { endsNm: spectrum.endsNm } : {}), colorCss: classColours![index],
     points: converted.colors.filter(value => classIndex(value) === index).length })),
     { label: colorByClass.missing.label, colorCss: colorByClass.missing.colorCss, basis: colorByClass.missing.basis, points: converted.colors.filter(value => classIndex(value) === colorByClass.classes.length).length }] } : {}),
-  counts: { rows: converted.rows, selected: converted.selected, points: converted.points.length, missingDistance: converted.missingDistance },
+  counts: { rows: converted.rows, selected: converted.selected, points: converted.points.length, missingDistance: converted.missingDistance,
+    ...(table.exclude ? { excluded: converted.excluded } : {}) },
+  ...(table.exclude ? { exclusion: { path: table.exclude.path, withinArcsec: table.exclude.withinArcsec, source: table.exclude.source, basis: table.exclude.basis } } : {}),
   conversion: discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
@@ -302,4 +367,4 @@ const outputPath = resolve(objectDirectory, 'prepared', `${id}.json`);
 await writeFile(outputPath, JSON.stringify(bank) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
-console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance) into ${outputPath}.`);
+console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance${table.exclude ? `, ${converted.excluded} excluded` : ''}) into ${outputPath}.`);

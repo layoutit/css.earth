@@ -24,7 +24,7 @@ const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 // src/objects/m33/README.md).
 const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
   m31: ['dots'],
-  m33: ['lggs-stars', 'hodge-hii', 'pellerin-cepheids', 'sarajedini-clusters', 'ciardullo-pne', 'long-snr'],
+  m33: ['stars', 'dots'],
 };
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
