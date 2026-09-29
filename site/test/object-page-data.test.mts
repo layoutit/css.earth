@@ -4,7 +4,6 @@ const test = sourceTest();
 import {mkdtemp,mkdir,readFile,writeFile,rm,access} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import {createHash} from 'node:crypto';
 import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mts';
 import {objectPageStyles} from '../object-page-contract.mts';
 import {preparePageMetadata} from '@cssearth/bake/delivery';
