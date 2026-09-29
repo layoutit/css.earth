@@ -57,7 +57,7 @@ export interface VolumeSliceQuad {
   /** Image top-left first: required by PolyCSS's image/projective backend. */
   vertices: [Vector3, Vector3, Vector3, Vector3];
   uvs: [[number, number], [number, number], [number, number], [number, number]];
-  center: Vector3; normal: Vector3; sha256: string; bytes: number; alphaCoverage: number;
+  center: Vector3; normal: Vector3; bytes: number; alphaCoverage: number;
   slab?: VolumeSlabInterval;
 }
 export interface VolumeSlices {

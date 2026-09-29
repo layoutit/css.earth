@@ -1,11 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { prepareVolumeAtlases } from './atlas.ts';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const AXES = ['x', 'y', 'z'] as const;
 const TRANSFORM = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,3,4,5,1)';
 
@@ -28,7 +26,7 @@ async function fixture() {
       style: { width: '3px', height: '2px', transform: TRANSFORM,
         backgroundSize: '3px 2px', backgroundPosition: '0px 0px' },
     })) })),
-    resources: [...files].map(([path, bytes]) => ({ path, sha256: sha256(bytes), bytes: bytes.byteLength, width: 3, height: 2 })),
+    resources: [...files].map(([path, bytes]) => ({ path, bytes: bytes.byteLength, width: 3, height: 2 })),
     provenance: { source: 'fixture' }, approximation: { method: 'fixture' },
   };
   return { volume, files, pixels };
@@ -71,7 +69,6 @@ test('atlas preserves geometry, frame, anchors and non-slice resources; deduplic
     assert.equal(resource.width, 14);
     assert.equal(resource.height, 6);
     assert.equal(resource.bytes, bytes.byteLength);
-    assert.equal(resource.sha256, sha256(bytes));
     const decoded = await sharp(bytes).metadata();
     assert.equal(decoded.format, 'webp');
     assert.equal(decoded.width, 14);
@@ -113,7 +110,7 @@ test('rejects corrupt source bytes before writing an atlas', async () => {
   const { volume, files } = await fixture();
   files.set('slices/a.png', Buffer.from('corrupt'));
   const options = io(files);
-  await assert.rejects(prepareVolumeAtlases({ volume, ...options }), /hash mismatch/);
+  await assert.rejects(prepareVolumeAtlases({ volume, ...options }), /unsupported image format/);
   assert.equal(options.written.size, 0);
 });
 
@@ -122,7 +119,7 @@ test('rejects actual image dimensions that disagree with declared slice geometry
   const bytes = await sharp({ create: { width: 4, height: 2, channels: 4, background: '#ff0000' } }).png().toBuffer();
   files.set('slices/a.png', bytes);
   const resources = volume.resources.map(resource => resource.path === 'slices/a.png'
-    ? { ...resource, bytes: bytes.length, sha256: sha256(bytes) } : resource);
+    ? { ...resource, bytes: bytes.length } : resource);
   await assert.rejects(prepareVolumeAtlases({ volume: { ...volume, resources }, ...io(files) }), /dimensions mismatch/);
 });
 

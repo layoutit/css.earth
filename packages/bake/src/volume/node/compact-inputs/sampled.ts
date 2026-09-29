@@ -1,7 +1,6 @@
 import { readCompactPin as pinned } from './io.ts';
 /** Replay retained measured samples and emitter colors without fitting or native images. */
 import { gunzipSync } from 'node:zlib';
-import { hash as geometrySha } from './io.ts';
 import { readSampledRecipe } from '../../contracts/sampled-recipe.ts';
 import { readCompilerBakeResult, type CompilerPin } from '../../contracts/compiler-bake.ts';
 import { prepareSampledMaterial, type SampledColor } from '../../materials/sampled.ts';
@@ -94,12 +93,7 @@ export async function prepareCompactSampledInputs(
   const lensIds = lensInputs.map(lens => text(lens.id));
   if (new Set(lensIds).size !== lensIds.length || lensIds.length !== original.lenses.length ||
       original.lenses.some(lens => !lensIds.includes(lens.id))) throw new TypeError('Compact lenses differ from the retained scene.');
-  const expectedInput = object(m.expected), expected: Record<string, string> = {};
-  for (const id of lensIds) {
-    const digest = expectedInput[id];
-    if (typeof digest !== 'string' || !/^[a-f0-9]{64}$/.test(digest)) throw new TypeError('Missing accepted compact sampled volume hash.');
-    expected[id] = digest;
-  }
+  if (Object.hasOwn(m, 'expected')) throw new TypeError(`Compact sampled inputs for ${id} carry the removed volume digest field expected.`);
   const load = async (l: Record<string, unknown>) => {
     const sourceId = text(l.id),
       weights = recipe.lensComponents[sourceId];
@@ -192,7 +186,7 @@ export async function prepareCompactSampledInputs(
   const lenses = [];
   for (const input of lensInputs) lenses.push(input === reference ? ref : await load(input));
   const sources = lensInputs.map(l => ({ id: text(l.id), label: text(l.label), credit: text(l.credit), page: text(l.page) }));
-  return { id, original, recipe, neutralField, lenses, sources, expected,
+  return { id, original, recipe, neutralField, lenses, sources,
     samplePlanningEmission: maximumPlanningEmission([neutralField.sampleEmission, ...lenses.map(lens => lens.field.sampleEmission)]) };
 }
 
@@ -200,7 +194,7 @@ export async function replayCompactSampled(root: string, inputPin: CompilerPin, 
   const bakeCompiler = (options: BakeCompilerOptions) => bake(options, backend);
   const prepareCompilerStarSprites = backend.prepareStarSprites, signal = new AbortController().signal;
   const input = await prepareCompactSampledInputs(root, inputPin, backend, signal);
-  const { id, original, neutralField, expected, sources } = input;
+  const { id, original, neutralField, sources } = input;
   const base = {
     root,
     id,
@@ -244,12 +238,7 @@ export async function replayCompactSampled(root: string, inputPin: CompilerPin, 
         },
       ],
     });
-    lenses.push(
-      ...bank.lenses.map((lens) => ({
-        ...lens,
-        alphaSha256: bank.alphaSha256,
-      })),
-    );
+    lenses.push(...bank.lenses);
   }
   const registered = await register(
     root,
@@ -260,16 +249,6 @@ export async function replayCompactSampled(root: string, inputPin: CompilerPin, 
     pin => pinned(root, pin),
     backend,
   );
-  for (const lens of registered.lenses) {
-    const volume = object(
-      JSON.parse((await pinned(root, lens.volume)).toString()),
-    );
-    const { provenance: _provenance, ...rendered } = volume;
-    if (geometrySha(JSON.stringify(rendered)) !== expected[lens.id])
-      throw new Error(
-        `Compact sampled replay changed accepted ${lens.id} volume`,
-      );
-  }
   const sprites = await prepareCompilerStarSprites(
     root,
     `${outputDirectory}/stars`,

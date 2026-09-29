@@ -11,7 +11,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { sha256 } from '@cssearth/core/node';
 import { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
@@ -145,15 +144,15 @@ export async function promoteDensityVolumeLensBank(request: DensityVolumeLensBan
     // The existing loader owns parsing its raw descriptor boundary; passing the
     // derived DensityVolumeObjectDescriptor would add its convenience fields.
     const source = await loadPreparedCssVolume(authoredDescriptor, { read: path => readArrayBuffer(local(sourceDirectory, path)) });
-    const preparedPath = local(sourceDirectory, descriptor.prepared!.url), preparedBytes = await readFile(preparedPath);
+    const preparedPath = local(sourceDirectory, descriptor.prepared!.url);
     const preparedDirectory = dirname(preparedPath), resources = await Promise.all(source.resources.map(async resource => {
-      const bytes = await readFile(local(preparedDirectory, resource.path));
-      if (bytes.length !== resource.bytes || sha256(bytes) !== resource.sha256) {
-        throw new TypeError(`Source density-volume resource pin mismatch: ${resource.path}`);
-      }
+      const path = local(preparedDirectory, resource.path);
+      const bytes = await readFile(path).catch((error: unknown) => {
+        throw new Error(`${descriptor.id}: prepared resource ${resource.path} is missing at ${path}; restore it with pnpm setup:assets.`, { cause: error });
+      });
       return { resource, bytes };
     }));
-    return { requestSource, descriptorBytes, descriptor, source, resources, preparedBytes };
+    return { requestSource, descriptor, source, resources };
   }));
   const presentationFrame = request.presentationFrame ?? loaded[0]!.source.frame;
   for (const { source } of loaded) {
@@ -168,10 +167,10 @@ export async function promoteDensityVolumeLensBank(request: DensityVolumeLensBan
     title: requestSource.title, description: requestSource.description, sourceUrl: requestSource.sourceUrl,
     volume: rewrittenVolume(source, request.id, requestSource.lensId, presentationFrame),
     stars: { frame: presentationFrame, points: [] }, brightness: { overall: 1, x: 1, y: 1, z: 1 } }));
-  const sourceReceipts = loaded.map(({ requestSource, descriptorBytes, descriptor, source, resources, preparedBytes }) => ({ lensId: requestSource.lensId,
-    id: descriptor.id, descriptor: { path: 'object.json', sha256: sha256(descriptorBytes) },
-    prepared: { path: descriptor.prepared!.url, sha256: sha256(preparedBytes) }, frame: source.frame, provenance: source.provenance,
-    resources: resources.map(({ resource }) => ({ path: resource.path, sha256: resource.sha256, bytes: resource.bytes })) }));
+  const sourceReceipts = loaded.map(({ requestSource, descriptor, source, resources }) => ({ lensId: requestSource.lensId,
+    id: descriptor.id, descriptor: { path: 'object.json' },
+    prepared: { path: descriptor.prepared!.url }, frame: source.frame, provenance: source.provenance,
+    resources: resources.map(({ resource }) => ({ path: resource.path, bytes: resource.bytes })) }));
   const provenance = loaded.length === 1
     ? { sourceDensityVolume: loaded[0]!.source.provenance, measurementFrame: loaded[0]!.source.frame, presentationFrame,
       interpretation: reanchored

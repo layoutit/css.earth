@@ -61,7 +61,7 @@ export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
 }
 
 /** x is west, y north, z away. The density is relative light per angular-depth unit, not calibrated flux. */
-export function samplePhotometricMge(recipe: PhotometricMgeRecipe): Omit<SimulationDepthPrior, 'identity'> {
+export function samplePhotometricMge(recipe: PhotometricMgeRecipe): SimulationDepthPrior {
   const parsed = readPhotometricMgeRecipe(recipe);
   const inclination = parsed.inclinationDegrees * Math.PI / 180, pa = parsed.positionAngleEastOfNorthDegrees * Math.PI / 180;
   const sinI = Math.sin(inclination), cosI = Math.cos(inclination), sign = parsed.lineOfSightTiltSign;

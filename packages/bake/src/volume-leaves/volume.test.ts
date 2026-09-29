@@ -120,9 +120,8 @@ console.log('PASS actual PolyCSS PNG-to-world mapping; old vertex-order mutation
 
 });
 
-test('prepared volume descriptor and external PNG bank form a complete pinned closure', async () => {
+test('prepared volume descriptor and external PNG bank form a complete closure', async () => {
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { sha256 } = await import('@cssearth/core/node');
   const root = resolve('src/objects/milky-way');
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8')) as unknown);
   assert(descriptor.prepared);
@@ -135,7 +134,7 @@ test('prepared volume descriptor and external PNG bank form a complete pinned cl
     const resource = record(value), path = text(resource.path);
     assert(!path.startsWith('/') && !path.split('/').includes('..'));
     const png = await readFile(resolve(root, 'prepared', path));
-    assert.equal(sha256(png), text(resource.sha256)); assert.equal(png.length, finite(resource.bytes));
+    assert.equal(png.length, finite(resource.bytes));
   }
   assert(!bytes.includes(Buffer.from('data:image/')), 'Production payload must reference external PNGs');
 });

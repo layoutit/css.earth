@@ -1,7 +1,7 @@
 /** Data-only deformation and material recipe for a prepared transparent surface. */
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
-import { text, triple, type Vector3 } from '../volume/index.ts';
+import { refuseDigestFields, text, triple, type Vector3 } from '../volume/index.ts';
 
 export interface ShellDisplaySubdivision { method: 'radial-linear'; segmentsPerEdge: number; }
 interface ShellShapeSource { path: string; displaySubdivision?: ShellDisplaySubdivision; }
@@ -69,6 +69,7 @@ function parseDisplaySubdivision(value: unknown): ShellDisplaySubdivision {
 }
 function pinnedSource(p: Record<string, unknown>): { path: string } {
   const path = text(p.path, 'source path');
+  refuseDigestFields(p, `Shell recipe source ${path}`);
   if (path.startsWith('/') || path.split('/').includes('..') || /[\\\u0000]/.test(path)) {
     throw new TypeError('Source must be relative.');
   }

@@ -1,9 +1,13 @@
 /** Pinned local bake inputs. No acquisition, repository models, jobs or application path rewriting. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises';
-import { dirname, isAbsolute, relative, resolve } from 'node:path';
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 export interface Pin { path: string }
-export const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
+/** Where a download of `url` is kept in a throwaway local cache: the escaped URL itself, cut into directory names short
+ * enough for any file system. The caller creates the parent directory. */
+export function urlCachePath(directory: string, url: string, extension: string): string {
+  const parts = encodeURIComponent(url).match(/.{1,200}/gu) ?? ['_'];
+  return join(directory, ...parts) + extension;
+}
 export function localPath(root: string, path: string) {
   const full = resolve(root, path), offset = relative(root, full);
   if (isAbsolute(path) || !offset || offset === '..' || offset.startsWith('../')) throw new Error(`Invalid recipe path: ${path}`);

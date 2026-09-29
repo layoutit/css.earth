@@ -5,12 +5,11 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { parseImageLayerRecipe, prepareImageLayers } from '../image-layers/index.ts';
 import { containedPath, sourceBytes } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import { prepareSurfaceShellObject } from '../shell/index.ts';
 import { prepareDensityVolumeObject } from '../density/index.ts';
 import { prepareStarsObject } from '../stars/index.ts';
 
-interface Resource { path: string; sha256: string; bytes: number }
+interface Resource { path: string; bytes: number }
 interface Descriptor {
   id: string; type: string;
   properties: { preparation: { source: string } };
@@ -97,7 +96,7 @@ export async function restoreEnvironmentObject(objectDirectory: string, verifyRe
       await writeFile(pending, await sourceBytes(temporary, resource));
       await rename(pending, destination);
     }
-    console.log(`ENVIRONMENT_READY ${descriptor.id}: ${resources.length} byte-identical images`);
+    console.log(`ENVIRONMENT_READY ${descriptor.id}: ${resources.length} replayed images`);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 }
 

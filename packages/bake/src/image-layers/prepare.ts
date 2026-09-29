@@ -1,7 +1,6 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
 import { catalogueColor } from '@cssearth/engine';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
@@ -15,12 +14,12 @@ import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
   verticesUnits: [Vec3, Vec3, Vec3, Vec3]; uvs: [[number, number], [number, number], [number, number], [number, number]];
   style: { width: string; height: string; transform: string; backgroundSize: string; backgroundPosition: string };
-  sha256: string; bytes: number };
+  bytes: number };
 export interface PreparedImageLayerBank {
   schema: 'cssearth-image-layer-bank@1'; id: string; frame: { referenceFrame: 'sun-icrf'; epochJdTt: 2461286.5;
     originM: Vec3; localToReferenceXyzw: [number, number, number, number]; metersPerUnit: number;
     boundsUnits: { min: Vec3; max: Vec3 } }; observation: ImageLayerRecipe['observation'];
-  banks: { axis: LayerAxis; normalUnits: Vec3; samplingStepUnits: number; leaves: Quad[] }[]; resources: { path: string; sha256: string; bytes: number; width: number; height: number }[];
+  banks: { axis: LayerAxis; normalUnits: Vec3; samplingStepUnits: number; leaves: Quad[] }[]; resources: { path: string; bytes: number; width: number; height: number }[];
   provenance: unknown; approximation: { model: string; canonicalRecomposition: string; limitations: string[] };
 }
 const M_PER_PC = 3.0856775814913673e16, M_PER_KPC = M_PER_PC * 1000;
@@ -169,15 +168,15 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     diffuse[i+3]=Math.round(255*ad);residual[i+3]=Math.round(255*(a-ad)/Math.max(1-ad,1e-9));}
   await mkdir(resolve(options.outputDirectory,'layers'),{recursive:true});
   const leaves: Quad[]=[], resources: PreparedImageLayerBank['resources']=[];
-  const encode=async(rgba:Buffer,width:number,height:number,path:string)=>{ const bytes=await sharp(rgba,{raw:{width,height,channels:4}}).webp({quality:recipe.bake.encoding.quality,alphaQuality:recipe.bake.encoding.alphaQuality??100,effort:5}).toBuffer(); await writeFile(resolve(options.outputDirectory,path),bytes); resources.push({path,sha256:sha256(bytes),bytes:bytes.length,width,height}); return bytes; };
+  const encode=async(rgba:Buffer,width:number,height:number,path:string)=>{ const bytes=await sharp(rgba,{raw:{width,height,channels:4}}).webp({quality:recipe.bake.encoding.quality,alphaQuality:recipe.bake.encoding.alphaQuality??100,effort:5}).toBuffer(); await writeFile(resolve(options.outputDirectory,path),bytes); resources.push({path,bytes:bytes.length,width,height}); return bytes; };
   const cropWidth=right-left+1,cropHeight=bottom-top+1,u0=2*left/info.width-1,u1=2*(right+1)/info.width-1,v0=1-2*top/info.height,v1=1-2*(bottom+1)/info.height;
   const diffuseCrop=extractSized(diffuse,info.width,left,top,right+1,bottom+1),residualCrop=extractSized(residual,info.width,left,top,right+1,bottom+1);
   const diffuseScale=Math.min(1,recipe.bake.diffuseFacePixels/Math.max(cropWidth,cropHeight)),dw=Math.max(1,Math.round(cropWidth*diffuseScale)),dh=Math.max(1,Math.round(cropHeight*diffuseScale));
   const diffuseSmall=dw===cropWidth&&dh===cropHeight?diffuseCrop:resizeRgbaLanczos3(diffuseCrop,cropWidth,cropHeight,dw,dh);
   for(let layer=0;layer<recipe.geometry.depthWeights.length;layer++){const w=recipe.geometry.depthWeights[layer],rgba=Buffer.from(diffuseSmall);for(let p=0;p<dw*dh;p++){const i=4*p,a=rgba[i+3]/255;rgba[i+3]=Math.round(255*(1-(1-a)**w));}
     const offset=thickness*(layer/(recipe.geometry.depthWeights.length-1)-.5),path=`layers/z-${String(layer).padStart(2,'0')}.webp`,bytes=await encode(rgba,dw,dh,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,offset),intersect(u1,v0,offset),intersect(u1,v1,offset),intersect(u0,v1,offset)];
-    leaves.push({id:`z-${layer}`,axis:'z',offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:dw,heightPx:dh,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,dw,dh,leaves.length),sha256:sha256(bytes),bytes:bytes.length});}
-  {const path='layers/z-detail.webp',bytes=await encode(residualCrop,cropWidth,cropHeight,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,0),intersect(u1,v0,0),intersect(u1,v1,0),intersect(u0,v1,0)];leaves.push({id:'z-detail',axis:'z',offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,cropWidth,cropHeight,leaves.length),sha256:sha256(bytes),bytes:bytes.length});}
+    leaves.push({id:`z-${layer}`,axis:'z',offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:dw,heightPx:dh,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,dw,dh,leaves.length),bytes:bytes.length});}
+  {const path='layers/z-detail.webp',bytes=await encode(residualCrop,cropWidth,cropHeight,path),v:[Vec3,Vec3,Vec3,Vec3]=[intersect(u0,v0,0),intersect(u1,v0,0),intersect(u1,v1,0),intersect(u0,v1,0)];leaves.push({id:'z-detail',axis:'z',offsetKpc:0,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:cropWidth,heightPx:cropHeight,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,cropWidth,cropHeight,leaves.length),bytes:bytes.length});}
   const weightAt=(z:number)=>{const q=(z+1)/2*(recipe.geometry.depthWeights.length-1),i=Math.min(recipe.geometry.depthWeights.length-2,Math.max(0,Math.floor(q))),t=q-i;return ((recipe.geometry.depthWeights[i]??0)*(1-t)+(recipe.geometry.depthWeights[i+1]??0)*t)*recipe.geometry.depthWeights.length;};
   const side=async(axis:'x'|'y')=>{const slices=recipe.bake.crossAxisSlices,sourceAlong=axis==='x'?info.height:info.width,along=Math.min(sourceAlong,recipe.bake.crossAxisAlongPixels),depth=recipe.bake.crossAxisDepthPixels,crossSize=axis==='x'?info.width:info.height;
     for(let s=0;s<slices;s++){const rgba=Buffer.alloc(along*depth*4);
@@ -191,7 +190,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const alongA=2*aMin/along-1,alongB=2*(aMax+1)/along-1;
       const v:Quad['verticesUnits']=axis==='x'?[intersect(coordinate,-alongA,hi),intersect(coordinate,-alongB,hi),intersect(coordinate,-alongB,lo),intersect(coordinate,-alongA,lo)]:[intersect(alongA,-coordinate,hi),intersect(alongB,-coordinate,hi),intersect(alongB,-coordinate,lo),intersect(alongA,-coordinate,lo)];
       const offset=axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2;
-      leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,sideWidth,depth,leaves.length),sha256:sha256(bytes),bytes:bytes.length}); }};
+      leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,sideWidth,depth,leaves.length),bytes:bytes.length}); }};
   await side('x');await side('y');
   if(bulgeModel&&bulgeTau){
     // The bulge's light, spread along each of our sight lines by the spheroid's density: slices parallel to the disc for the
@@ -212,7 +211,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const scaleAt=(u:number,v:number,tau:number)=>{const ray=rayLocal(u,v),path=step/Math.abs(dot(diskNormal,norm(ray)));let sum=0;for(const z of offsets)sum+=bulgeModel.density(intersect(u,v,z))*path;return sum>0?tau/sum:0;};
     const grid=Array.from({length:sw*sh},(_,k)=>{const i=k%sw,j=Math.floor(k/sw),{tau,colour}=cell(i,j,sw,sh),{u,v}=at(i,j,sw,sh);return {u,v,colour,scale:scaleAt(u,v,tau),path:step/Math.abs(dot(diskNormal,norm(rayLocal(u,v))))};});
     const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path);
-      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,width,height,leaves.length),sha256:sha256(bytes),bytes:bytes.length});};
+      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,width,height,leaves.length),bytes:bytes.length});};
     for(const [k,z] of offsets.entries()){const rgba=Buffer.alloc(sw*sh*4);
       for(const [t,g] of grid.entries()){const tau=g.scale*bulgeModel.density(intersect(g.u,g.v,z))*g.path,o=4*t;for(let c=0;c<3;c++)rgba[o+c]=Math.round(g.colour[c]);rgba[o+3]=Math.round(255*(1-Math.exp(-tau)));}
       await push(`bulge-z-${String(k).padStart(2,'0')}`,'z',rgba,sw,sh,[intersect(bu0,bv0,z),intersect(bu1,bv0,z),intersect(bu1,bv1,z),intersect(bu0,bv1,z)],z);}

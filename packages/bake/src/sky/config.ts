@@ -1,5 +1,5 @@
 /** Renderer-independent, pinned celestial radiance image and fixed offline display transfer. */
-import { text } from '../volume/index.ts';
+import { refuseDigestFields, text } from '../volume/index.ts';
 import { requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 export interface SkyReference { path: string; }
 export interface SkyShadowFloor { blackPoint: number; fullSignal: number; }
@@ -21,6 +21,7 @@ export interface SkyRecipe {
 export interface SkyStars { object: string; cssPixelsPerDegree: number; }
 export function reference(value: unknown): SkyReference {
   const r = record(value, 'sky source reference'), path = text(r.path, 'sky path');
+  refuseDigestFields(r, `Sky reference ${path}`);
   if (path.startsWith('/') || /[\\\u0000]/u.test(path) || path.split('/').includes('..')) throw new TypeError('Sky source needs a contained path.');
   return { path };
 }
@@ -31,6 +32,7 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   const r = record(value, 'sky recipe'), s = record(r.source, 'sky source'), p = record(r.projection, 'sky projection'), b = record(r.bake, 'sky bake');
   if (r.schema !== 'cssearth-sky-recipe@1' || s.format !== 'rgb16f-le-zstd-rows' || p.frame !== 'icrf-j2000' ||
     p.mapping !== 'equirectangular-ra-left' || p.centerRaDegrees !== 0 || b.transfer !== 'linear-to-srgb') throw new TypeError('Unsupported sky recipe.');
+  refuseDigestFields(s, 'Sky recipe source');
   const width = positive(s.width, 'sky width', true), height = positive(s.height, 'sky height', true);
   if (width !== height * 2 || width * height > 268435456 || !Array.isArray(s.chunks)) throw new TypeError('Sky source must be a bounded 2:1 image.');
   let nextRow = 0;

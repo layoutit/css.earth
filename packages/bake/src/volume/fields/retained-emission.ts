@@ -17,6 +17,7 @@ export function readRetainedEmissionField(v: unknown): EmissionFieldModel {
       !Array.isArray(v.components) || v.components.length > 10000 || !v.components.every(component)) throw new TypeError('Invalid retained emission field.');
   const maximum = v.bounds.max;
   if (v.bounds.min.some((n, i) => n >= maximum[i]!)) throw new TypeError('Invalid retained emission bounds.');
+  if (/^[a-f0-9]{64}$/.test(v.identity)) throw new TypeError(`Retained emission field identity is a content digest (${v.identity}); name the field instead.`);
   return { schema: v.schema, identity: v.identity, controls: readCompilerControls(v.controls), bounds: { min: v.bounds.min, max: v.bounds.max },
     ...(v.emissionWindow === undefined ? {} : { emissionWindow: readEmissionWindow(v.emissionWindow) }),
     ...(v.photometricEnvelope === undefined ? {} : { photometricEnvelope: readPhotometricEnvelope(v.photometricEnvelope) }),

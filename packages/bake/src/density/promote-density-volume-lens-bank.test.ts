@@ -3,7 +3,6 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import { sha256 } from '@cssearth/core/node';
 import { loadPreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { promoteDensityVolumeLensBank } from './promote-density-volume-lens-bank.ts';
@@ -20,7 +19,7 @@ const record = (value: unknown): Record<string, unknown> => {
 async function fixture() {
   const root = await mkdtemp(resolve(tmpdir(), 'density-volume-bank-')), source = resolve(root, 'source'), destination = resolve(root, 'bank');
   const assets = new Map(['x', 'y', 'z'].map(axis => [`slices/${axis}.bin`, Buffer.from(`exact-${axis}`)]));
-  const resource = (path: string) => { const bytes = assets.get(path)!; return { path, sha256: sha256(bytes), bytes: bytes.length, width: 1, height: 1 }; };
+  const resource = (path: string) => { const bytes = assets.get(path)!; return { path, bytes: bytes.length, width: 1, height: 1 }; };
   const leaf = (axis: string) => ({ id: `${axis}-0`, centerUnits: [0, 0, 0], texturePath: `slices/${axis}.bin`, widthPx: 1, heightPx: 1,
     style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } });
   const volume = { schema: 'cssearth-css-volume@1', id: 'source-grid', frame, anchors: [], stacks: ['x', 'y', 'z'].map(axis => ({ axis, leaves: [leaf(axis)] })),
@@ -28,7 +27,7 @@ async function fixture() {
   const prepared = json({ schema: 'cssearth-prepared-object@1', id: 'source-grid', type: 'density-volume', format: 'cssearth-density-volume@1', data: volume });
   const recipe = Buffer.from('{"source":"fixture"}\n');
   const descriptor = json({ schema: 'cssearth-object@1', id: 'source-grid', type: 'density-volume', properties: { volume: frame,
-    preparation: { source: 'source/recipe.json', sha256: sha256(recipe) } }, prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json', sha256: sha256(prepared) } });
+    preparation: { source: 'source/recipe.json' } }, prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } });
   await Promise.all([mkdir(resolve(source, 'source'), { recursive: true }), mkdir(resolve(source, 'prepared/slices'), { recursive: true })]);
   await Promise.all([writeFile(resolve(source, 'source/recipe.json'), recipe), writeFile(resolve(source, 'prepared/volume.json'), prepared), writeFile(resolve(source, 'object.json'), descriptor),
     ...[...assets].map(([path, bytes]) => writeFile(resolve(source, 'prepared', path), bytes))]);
@@ -63,13 +62,13 @@ test('promotes an authenticated physical density volume into one exact selectabl
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 
-test('refuses a source resource whose bytes no longer match the density-volume closure', async () => {
+test('refuses a source whose prepared resource is missing, naming the object and file', async () => {
   const f = await fixture();
   try {
-    await writeFile(resolve(f.source, 'prepared/slices/x.bin'), 'changed');
+    await rm(resolve(f.source, 'prepared/slices/x.bin'));
     await assert.rejects(promoteDensityVolumeLensBank({ sourceDirectory: f.source, destinationDirectory: f.destination, id: 'dust-bank', lensId: 'mean',
       label: 'Posterior mean', title: 'Dust density posterior mean', description: 'Native physical-grid density display.', sourceUrl: 'https://example.org/source', framingRadiusUnits: 18 }),
-    /Source density-volume resource pin mismatch: slices\/x\.bin/u);
+    /source-grid: prepared resource slices\/x\.bin is missing/u);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 

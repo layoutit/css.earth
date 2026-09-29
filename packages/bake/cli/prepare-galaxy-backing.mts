@@ -11,7 +11,6 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { encodeLossyWebp } from '@cssearth/bake/raster';
 import type { VolumeSliceQuad } from '@cssearth/bake/volume';
@@ -89,10 +88,10 @@ const toLocal = (u: number, v: number): Vector3 => {
 const vertices = [toLocal(left, top), toLocal(right + 1, top), toLocal(right + 1, bottom + 1), toLocal(left, bottom + 1)] as [Vector3, Vector3, Vector3, Vector3];
 const north = rotateToLocal(toIcrs([0, 0, 1]));
 const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath, widthPx, heightPx, vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
-  center: toLocal((left + right + 1) / 2, (top + bottom + 1) / 2), normal: north.map(value => -value) as Vector3, sha256: sha256(webp), bytes: webp.length, alphaCoverage: 1 };
+  center: toLocal((left + right + 1) / 2, (top + bottom + 1) / 2), normal: north.map(value => -value) as Vector3, bytes: webp.length, alphaCoverage: 1 };
 // The compiler wants a normal for every axis; empty quads carry the other two and compile to no leaf.
 const empty = (axis: 'x' | 'y', normal: Vector3): VolumeSliceQuad => ({ id: `${axis}-empty`, axis, sliceIndex: 0, texturePath: `${id}/${axis}-empty`, widthPx: 1, heightPx: 1,
-  vertices: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal, sha256: '', bytes: 0, alphaCoverage: 0 });
+  vertices: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal, bytes: 0, alphaCoverage: 0 });
 const compiled = compileCssVolume({ id, frame, recipe: { anchors: [] }, slices: { quads: [quad, empty('x', [-1, 0, 0]), empty('y', [0, 1, 0])],
   boundsUnits: { min: [...frame.boundsUnits.min] as Vector3, max: [...frame.boundsUnits.max] as Vector3 }, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
     exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 1 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } } });

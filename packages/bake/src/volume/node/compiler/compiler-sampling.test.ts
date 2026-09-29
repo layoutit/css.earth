@@ -81,7 +81,7 @@ test('a small historical compiler replay keeps unreflected source geometry, samp
   onTestFinished(() => rm(root, { recursive: true, force: true }));
   const compiled: VolumeSlices[] = [];
   const sampling = { sliceCounts: { x: 1, y: 1, z: 2 }, imageWidth: 512 as const, samplesPerSlab: 4 as const };
-  const scene = await bakeCompiler({ root, outputDirectory: 'bake', id: 'historical', fieldIdentity: 'a'.repeat(64),
+  const scene = await bakeCompiler({ root, outputDirectory: 'bake', id: 'historical', fieldIdentity: 'historical-field',
     boundsArcsec: { min: [10, 20, 30], max: [12, 22, 32] }, skyBoundsArcsec: { min: [10, 20], max: [12, 22] },
     sampling, historicalReplay: true, preparedPhysical: false, samplePlanningEmission() { throw new Error('Saved replay must skip the optimizer.'); },
     sampleEmission(_x, _y, _z, out) { out[0] = out[1] = out[2] = .2; },
@@ -91,7 +91,7 @@ test('a small historical compiler replay keeps unreflected source geometry, samp
   }, { compileVolume({ frame, slices }) {
     assert.equal(frame.referenceFrame, 'lab-sky-angular');
     compiled.push(structuredClone(slices));
-    return { resources: slices.quads.map(q => ({ path: q.texturePath, sha256: q.sha256, bytes: q.bytes })) };
+    return { resources: slices.quads.map(q => ({ path: q.texturePath, bytes: q.bytes })) };
   }, async prepareStarSprites() { return {}; } });
   assert.deepEqual(scene.sampling, sampling);
   assert.equal(scene.frame.referenceFrame, 'lab-sky-angular');
