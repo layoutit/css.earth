@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "dist/scene/compiler-viewer.js",
   "exports": {
     "./camera/framing": "./src/camera/framing.ts",
     "./camera/inspection": "./src/camera/inspection.ts",
@@ -21,9 +22,13 @@
     "./scene/image-plane": "./src/scene/image-plane.ts"
   },
   "scripts": {
+    "build": "tsup",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@cssearth/bake": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1"
   }
 }
