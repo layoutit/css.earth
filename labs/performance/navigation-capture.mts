@@ -1,6 +1,6 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createGzip } from 'node:zlib';
 import { createWriteStream } from 'node:fs';
 import { Readable } from 'node:stream';
@@ -10,7 +10,6 @@ import { resolve, dirname } from 'node:path';
 import os from 'node:os';
 import { chromium } from 'playwright';
 import type { Browser, CDPSession, Page } from 'playwright';
-import { previewSite } from '../../site/server/preview.mts';
 import { errorMessage, recordOf } from './trace-model.mts';
 
 // A real, adaptive input journey. No request interception, cache disabling,
@@ -70,7 +69,43 @@ const report: CaptureReport = { sourceHead: git('rev-parse', 'HEAD').trim(), sou
 await writeFile(output + '/source.patch', git('diff', 'HEAD', '--binary'));
 await writeFile(output + '/capture.mts', await readFile(import.meta.filename));
 report.captureSha256 = sha256(await readFile(import.meta.filename));
-const server = process.env.CSSEARTH_CAPTURE_ORIGIN ? { close: async () => {} } : await previewSite({ port: 4241 });
+// Start the site's existing preview entry as a separate application process.
+// The capture only needs its HTTP surface, not its server implementation.
+async function startPreview(): Promise<{ close(): Promise<void> }> {
+  const child = spawn(process.execPath, [resolve(root, 'site/server/preview.mts'), '--port', '4241'],
+    { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+  let output = '';
+  let startError: Error | undefined;
+  child.on('error', error => { startError = error; });
+  child.stdout?.on('data', chunk => { output += String(chunk); });
+  child.stderr?.on('data', chunk => { output += String(chunk); });
+  try {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      if (startError) throw startError;
+      if (child.exitCode !== null || child.signalCode !== null) throw Error(`Preview exited before serving: ${output}`);
+      if (!output.includes('http://127.0.0.1:4241/')) {
+        await new Promise(resolveWait => setTimeout(resolveWait, 100));
+        continue;
+      }
+      try {
+        const response = await fetch(origin + route);
+        if (response.ok) return { close: async () => {
+          if (child.exitCode !== null || child.signalCode !== null) return;
+          await new Promise<void>(resolveExit => {
+            child.once('exit', () => resolveExit());
+            child.kill('SIGTERM');
+          });
+        } };
+      } catch { /* Wait for the preview listener. */ }
+      await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    }
+    throw Error(`Preview did not serve ${origin + route}: ${output}`);
+  } catch (error) {
+    child.kill('SIGTERM');
+    throw error;
+  }
+}
+const server = process.env.CSSEARTH_CAPTURE_ORIGIN ? { close: async () => {} } : await startPreview();
 let browser: Browser | undefined, page: Page | undefined, cdp: CDPSession | undefined, recording: unknown, tracing = false, trace = false;
 const frames: VideoFrame[] = [], writes: Promise<void>[] = [], urls = new Set<string>();
 try {
