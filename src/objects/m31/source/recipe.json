@@ -147,7 +147,8 @@
     "backgroundFloor": 0.006,
     "encoding": {
       "format": "webp",
-      "quality": 82
+      "quality": 82,
+      "alphaQuality": 60
     },
     "diffuseFacePixels": 80,
     "crossAxisAlongPixels": 384,

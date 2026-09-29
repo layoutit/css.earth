@@ -1,0 +1,41 @@
+{
+  "id": "noirlab-noao-m31lgs",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Panorama of Spiral Galaxy, M31",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "noao-m31lgs_ubvIha"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m31lgs_ubvIha.jpg",
+      "label": "Large JPEG, 48327 x 12185 px"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
+      "checkedOn": "2026-09-29",
+      "locator": "Credit: Local Group Survey Team and T.A. Rector (University of Alaska Anchorage). 48327 x 12185 px; 217.62 x 54.87 arcmin; centre RA 0h42m49.08s, Dec +41 12 36.78; north 125.8 deg right of vertical; U, B, V, I and H-alpha with the Mosaic camera on the NSF Mayall 4-meter telescope, ten pointings along the galaxy. Found by `telescope explore m31` (WorldWide Telescope curated imagery)."
+    }
+  ],
+  "publisher": "NSF NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Local Group Survey Team and T.A. Rector (University of Alaska Anchorage)/NOIRLab/NSF/AURA",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/"
+    }
+  ]
+}

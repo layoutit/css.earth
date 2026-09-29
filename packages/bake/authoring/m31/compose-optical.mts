@@ -6,7 +6,7 @@
  * per-channel histogram matching over the pixels both cover, and the two are faded together inside the mosaic's edge.
  *
  * Inputs: `source/lggs-panorama.jpg` (the publisher Large JPEG, restored from its origin) and `source/source.jpg`.
- * Output: `source/optical-composite.jpg`, the recipe's `source.path`, and `source/optical-composite.json`, what was measured.
+ * Output: `source/optical-composite.jpg`, the recipe's `source.path`, and `evidence/2026-09-29/optical-composite.json`, what was measured.
  */
 import sharp from 'sharp';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -110,5 +110,5 @@ await sharp(rgb, { raw: { width, height, channels: 3 } }).jpeg({ quality: 92, ch
 const report = { schema: 'cssearth-m31-optical-composite@1', dimensions: [width, height], arcsecPerPixel: frame.arcsecPerPixel,
   pixels: { survey: fromSurvey, fill: fromFill, total: width * height }, featherArcsec: composition.featherArcsec,
   histogramMatch: lookup.map((table, c) => ({ channel: 'rgb'[c], at: [0, 16, 32, 64, 128, 192, 255].map(v => [v, Math.round(table[v]!)]) })) };
-await writeFile(resolve(sourceDirectory, 'optical-composite.json'), JSON.stringify(report, null, 2) + '\n');
+await writeFile(resolve(sourceDirectory, '../evidence/2026-09-29/optical-composite.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(`Composed ${width}x${height}: ${fromSurvey} survey pixels, ${fromFill} fill pixels.`);

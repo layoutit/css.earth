@@ -27,7 +27,8 @@ export interface ImageLayerRecipe {
      * the light-weighted mean over the disc matches the catalogue colour of that index; green and all structure stay. */
     colourTie?: { bv: number; source: string; basis: string }; bulgeSlices?: number; bulgeFacePixels?: number; bulgeCrossSlices?: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
     backgroundFloor: number; edgeTaperFraction: number; diffuseFraction: number; diffuseSigmaPixels: number;
-    encoding: { format: 'webp'; quality: number } };
+    /** `alphaQuality` (0-100, default 100: lossless) is WebP's alpha quality; a lower one trades faint alpha noise for bytes. */
+    encoding: { format: 'webp'; quality: number; alphaQuality?: number } };
   provenance: { path: string };
 }
 
@@ -60,6 +61,9 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
     disc: { centralSurfaceBrightness: finite(d.centralSurfaceBrightness, 'geometry.bulge.disc.centralSurfaceBrightness'), scaleLengthKpc: positive(d.scaleLengthKpc, 'geometry.bulge.disc.scaleLengthKpc'),
       skyEllipticity: ellipticity(d.skyEllipticity, 'geometry.bulge.disc.skyEllipticity') },
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height') } };
+};
+const alphaQualityOf = (v: unknown): number => {
+  const n = finite(v, 'encoding.alphaQuality'); if (!Number.isInteger(n) || n < 0 || n > 100) throw new TypeError(`encoding.alphaQuality must be an integer 0-100; got ${n}.`); return n;
 };
 const colourTieOf = (v: unknown): NonNullable<ImageLayerRecipe['bake']['colourTie']> => {
   const t = object(v, 'bake.colourTie'), bv = finite(t.bv, 'bake.colourTie.bv');
@@ -135,5 +139,5 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(b.colourTie===undefined?{}:{colourTie:colourTieOf(b.colourTie)}),
       ...(g.bulge===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
-      encoding: { format: 'webp', quality } }, provenance: { path: path(p.path) } };
+      encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };
 }
