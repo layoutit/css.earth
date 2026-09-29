@@ -9,11 +9,11 @@ const unit = (value: unknown): value is number => finite(value) && value >= 0 &&
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const point = (value: unknown): value is Point => Array.isArray(value) && value.length === 2 && value.every(finite);
 
-/** Independent file identity is checked before this source/map association boundary. */
+/** Prepared shapes belong to one image and structure analysis run, at its working size. */
 export function readGeometryMap(value: unknown, image: StructureImage): GeometryMap {
   if (!record(value) || value.schema !== 'cssearth-observation-geometry@1' || value.imageId !== image.id ||
-      value.sourceSha256 !== image.sourceSha256 || value.mapSha256 !== image.mapSha256 || value.width !== image.width || value.height !== image.height)
-    throw new Error('Prepared shapes do not match their registered source and structure map.');
+      value.mapDirectory !== image.directory || value.width !== image.width || value.height !== image.height)
+    throw new Error(`Prepared shapes do not match image ${image.id} and its structure map ${image.directory}.`);
   if (!Array.isArray(value.candidates) || !Array.isArray(value.groups)) throw new Error('Invalid prepared shape lists.');
   const candidates = value.candidates.map((item: unknown): GeometryCandidate => {
     if (!record(item) || !text(item.id) || !point(item.center) || !point(item.radii) || item.radii[0] < item.radii[1] || item.radii[1] <= 0 ||

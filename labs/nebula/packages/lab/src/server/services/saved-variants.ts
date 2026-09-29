@@ -7,8 +7,8 @@ import { randomUUID } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-export const variantNamePattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-export const isVariantName = (value: unknown): value is string => typeof value === 'string' && variantNamePattern.test(value);
+import { isVariantName } from '../../features/variant-name.ts';
+export { isVariantName, variantNamePattern } from '../../features/variant-name.ts';
 
 /** The same request serialized the same way; key order is part of the request as its builder writes it. */
 export const sameRequest = (saved: unknown, expected: unknown) => JSON.stringify(saved) === JSON.stringify(expected);

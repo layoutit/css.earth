@@ -24,7 +24,8 @@ const emptyIds = new Set<string>();
 const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 const registered = (image: StructureImage) => ({ imageToFrame: image.imageToFrame, source: { width: image.nativeWidth, height: image.nativeHeight } });
 const identity = (image: StructureImage) => ({ id: image.id, source: { url: image.sourceUrl } });
-const asset = (image: StructureImage, file: string, hash = image.mapSha256) => `${localFile(`${image.directory}/${file}`)}?v=${hash}`;
+/** Each analysis run has its own directory, so a file URL never serves an earlier run's bytes. */
+const asset = (image: StructureImage, file: string) => localFile(`${image.directory}/${file}`);
 
 const StructurePlane = memo(function StructurePlane({ image, map, matrix, active, layer, visibleIds, selectedId, highlights, onSelect, onError,
   geometry, shapes, shapeIds, selectedShapeId, onSelectShape }: {
@@ -46,7 +47,7 @@ const StructurePlane = memo(function StructurePlane({ image, map, matrix, active
         hidden={!active || !highlights || !visibleIds.has(region.id)}
         style={{ left: region.bounds.x, top: region.bounds.y, width: region.bounds.width, height: region.bounds.height }}
         onClick={() => onSelect(region.id)}>
-        <img src={asset(image, atlas.file, atlas.sha256)} alt="" draggable={false} aria-hidden="true"
+        <img src={asset(image, atlas.file)} alt="" draggable={false} aria-hidden="true"
           style={{ left: -region.atlas.x, top: -region.atlas.y, width: atlas.width, height: atlas.height }} onError={() => onError(image.id)} />
       </button>;
     })}
@@ -87,20 +88,14 @@ export function ObservationStructures({ cataloguePath, observationManifest }: { 
       })));
       setSelected(next.images.find(item => item.id === preset?.imageId)?.id ?? next.images[0]?.id ?? ''); setData(next);
       for (const image of next.images) {
-        if (image.geometry) void fetch(asset(image, image.geometry.file, image.geometry.sha256), { signal: controller.signal, cache: 'no-store' }).then(async result => {
+        if (image.geometry) void fetch(asset(image, image.geometry.file), { signal: controller.signal, cache: 'no-store' }).then(async result => {
           if (!result.ok) throw new Error(`Prepared shapes unavailable (${result.status}).`);
-          const bytes = await result.arrayBuffer();
-          const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
-          if (digest !== image.geometry?.sha256) throw new Error('Prepared shape identity changed; reload the catalogue.');
-          const geometry = readGeometryMap(JSON.parse(new TextDecoder().decode(bytes)), image);
+          const geometry = readGeometryMap(await result.json(), image);
           if (!controller.signal.aborted) setGeometries(current => ({ ...current, [image.id]: geometry }));
         }).catch((reason: unknown) => { if (!controller.signal.aborted) setGeometryErrors(current => ({ ...current, [image.id]: reason instanceof Error ? reason.message : 'Prepared shapes unavailable.' })); });
         void fetch(asset(image, 'map.json'), { signal: controller.signal, cache: 'no-store' }).then(async result => {
         if (!result.ok) throw new Error(`Prepared map unavailable (${result.status}).`);
-        const bytes = await result.arrayBuffer();
-        const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
-        if (digest !== image.mapSha256) throw new Error('Prepared map identity changed; reload the catalogue.');
-        const map = readReviewMap(JSON.parse(new TextDecoder().decode(bytes)), image);
+        const map = readReviewMap(await result.json(), image);
         if (!controller.signal.aborted) setMaps(current => ({ ...current, [image.id]: map }));
       }).catch((reason: unknown) => { if (!controller.signal.aborted) setMapErrors(current => ({ ...current, [image.id]: reason instanceof Error ? reason.message : 'Prepared map unavailable.' })); });
       }

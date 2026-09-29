@@ -3,11 +3,12 @@ import type { ShapeCloudSettings } from '@cssearth/bake/volume';
 export type {ShapeCloudComponent,ShapeCloudSettings} from '@cssearth/bake/volume';
 export type ShapeCloudQuality = 'draft' | 'detailed';
 export interface ShapeCloudRequest {
-  action: 'apply'; imageId: string; cataloguePath: string; geometrySha256: string;
-  geometryFile?: string;
+  action: 'apply'; imageId: string; cataloguePath: string;
+  /** The detected geometry file in the image's structure directory. */
+  geometryFile: string;
   width: number; height: number; settings: ShapeCloudSettings; quality?: ShapeCloudQuality;
 }
-export interface ShapeCloudPin { path: string; sha256: string }
+export interface ShapeCloudPin { path: string }
 export interface ShapeCloudComparisonLevel {
   gain: number; source: ShapeCloudPin; model: ShapeCloudPin;
   sourceEdges: ShapeCloudPin; modelEdges: ShapeCloudPin; difference: ShapeCloudPin;
@@ -20,7 +21,7 @@ export interface ShapeCloudComparison {
 }
 export interface ShapeCloudResult {
   schema: 'cssearth-shape-cloud-result@1'; id: string; imageId: string;
-  sourceSha256: string; mapSha256: string; geometrySha256: string;
+  geometryFile: string;
   width: number; height: number; unitsPerPixel: number;
   settings: ShapeCloudSettings; empty: boolean; quality: ShapeCloudQuality; preparationVersion?: string;
   neutral?: ShapeCloudPin; textured?: ShapeCloudPin;

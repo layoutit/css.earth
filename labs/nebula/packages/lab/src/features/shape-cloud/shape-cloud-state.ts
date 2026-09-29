@@ -30,7 +30,7 @@ const object = (value: unknown): value is Record<string, unknown> => value !== n
 
 /** Input schedules bounded drafts; release schedules a detailed result. Mount only observes a saved job before deciding whether work is needed. */
 export function useShapeCloudState(image: StructureImage, geometry: GeometryMap, cataloguePath: string, initialQuality: PreviewQuality = 'detailed', preset?: { id: string; settings: ShapeCloudSettings }) {
-  const key = `nebula:shape-cloud:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}${preset ? `:fit:${preset.id}` : ''}`;
+  const key = `nebula:shape-cloud:2:${cataloguePath}:${image.id}:${image.directory}:${image.geometry?.file}${preset ? `:fit:${preset.id}` : ''}`;
   const initial = useMemo(() => preset?.settings ?? initializeShapeCloud(geometry), [geometry, preset]);
   const [settings, setSettings] = useState(initial), [storageError, setStorageError] = useState('');
   const [job, setJob] = useState<CloudJob | null>(null), [result, setResult] = useState<ShapeCloudResult | null>(null);
@@ -45,13 +45,12 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
     currentSettings.current = valid; setSettings(valid);
     function checkResult(value: unknown) {
       const completed = readShapeCloudResult(value);
-      if (completed.imageId !== image.id || completed.sourceSha256 !== image.sourceSha256 || completed.mapSha256 !== image.mapSha256 ||
-          completed.geometrySha256 !== image.geometry?.sha256 || completed.width !== image.width || completed.height !== image.height)
+      if (completed.imageId !== image.id || completed.geometryFile !== image.geometry?.file || completed.width !== image.width || completed.height !== image.height)
         throw new Error('Saved cloud result belongs to different source data.');
       return completed;
     }
     const client = createShapeCloudClient({ request: { action: 'apply', imageId: image.id, width: image.width, height: image.height,
-      cataloguePath, geometrySha256: image.geometry?.sha256 ?? '', geometryFile: image.geometry?.file },
+      cataloguePath, geometryFile: image.geometry?.file ?? '' },
       onJob(next) { if (!disposed) { setStarting(false); setJob(next); } },
       save(id, ticket) {
         try {
@@ -126,6 +125,6 @@ export function useShapeCloudState(image: StructureImage, geometry: GeometryMap,
   return { settings, edit, reset: () => edit(initial, true), result, job, error, storageError, loaded, retry,
     begin() { dragging.current = true; scheduler.current?.begin(); },
     settle() { dragging.current = false; scheduler.current?.settle(); },
-    active: starting || activeCloudJob(job) || !loaded, dirty: Boolean(result && (result.geometrySha256 !== image.geometry?.sha256 || settingsKey(result.settings) !== settingsKey(settings))),
+    active: starting || activeCloudJob(job) || !loaded, dirty: Boolean(result && (result.geometryFile !== image.geometry?.file || settingsKey(result.settings) !== settingsKey(settings))),
   };
 }

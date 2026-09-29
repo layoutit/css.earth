@@ -20,7 +20,7 @@ export function GeometryDetectionControls({ detector, image }: {
   const status = active ? job?.progress?.message || 'Updating structures…' : ready ?
     `${detector.effectiveGeometry?.candidates.length ?? 0} structures · ${detector.quality === 'draft' ? 'refining…' : 'live'}` : 'Loading detector…';
   return <section className="geometry-detection-controls" aria-label="Detector" data-job-id={job?.id ?? ''} data-job-status={job?.status ?? ''}
-    data-active={active} data-applied-sha={detector.appliedPin?.sha256 ?? ''} data-quality={detector.quality}>
+    data-active={active} data-applied-geometry={detector.appliedPin?.file ?? ''} data-quality={detector.quality}>
     <h3>Detector</h3>
     {controls.map(control => <div className="structure-slider" key={control.id}>
       <label htmlFor={`detector-${control.id}`} title={control.title}>{control.label}</label>
