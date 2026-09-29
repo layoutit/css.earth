@@ -1,6 +1,6 @@
 # SBMT preparation oracle
 
-This is an optional native backend for the [shared oracle framework](../../../packages/core/src/node/oracle/README.md).
+This is an optional native backend for the [shared oracle framework](../../../../../../../core/src/node/oracle/README.md).
 It runs the released Small Body Mapping Tool's readers, mesh intersection and
 texture-coordinate code, then compares saved results with cssEarth preparation
 code. It supplies test evidence; it never supplies production source data,
@@ -26,12 +26,12 @@ flowchart LR
   transport. Its complete dependency lock is [package-lock.json](package-lock.json).
   All authored orchestration and comparison code is strict TypeScript. No
   patched SBMT code or generated Java implementation stands in for the oracle.
-- [Eros sources](../../../src/objects/eros/README.md): Gaskell ver128q and the
+- [Eros sources](../../../../../../../../src/objects/eros/README.md): Gaskell ver128q and the
   archived NEAR MSI exposure M0146235607, with corrected SUM and SPICE INFO
   pointing tested separately. These two pointing solutions are not identical.
-- [Itokawa sources](../../../src/objects/itokawa/README.md): Gaskell ver128q,
+- [Itokawa sources](../../../../../../../../src/objects/itokawa/README.md): Gaskell ver128q,
   AMICA ST_2402987304 and its archived SUM file.
-- [The synthetic concave prism](../../../tests/fixtures/sbmt/concave.tab) is
+- [The synthetic concave prism](inputs/concave.tab) is
   labelled test geometry. It is not a celestial-body approximation or asset.
 
 The official binary release is the executed reference. Public
@@ -50,7 +50,7 @@ Ordinary regression checks need neither Java nor SBMT:
 node tests/oracles/test-sbmt.mts --unit     # checked-in synthetic case, identity and rejection tests; also runs in CI
 node tests/oracles/test-sbmt.mts --restore  # restore only missing selected archive inputs, then test every case
 node tests/oracles/test-sbmt.mts           # every case, offline after restoration
-node --max-old-space-size=512 tests/oracles/sbmt/check.mts
+node --max-old-space-size=512 packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/check.mts
 ```
 
 The last command writes `output/oracles/sbmt/comparison.json` and exits nonzero
@@ -79,7 +79,7 @@ its own verified release lock. The committed comparison fixtures are portable.
 
 ## Coverage and limits
 
-[cases.json](../../../tests/fixtures/sbmt/cases.json) is the case inventory.
+[cases.json](inputs/cases.json) is the case inventory.
 The generator has no body-specific algorithms. Every case uses the same native
 reader, locator, UV probes and comparison path. Missing cases, duplicated probes,
 changed inputs, wrong software bytes and incomplete stages fail explicitly.
@@ -92,8 +92,8 @@ changed inputs, wrong software bytes and incomplete stages fail explicitly.
 | Footprints | Native `SmallBodyModel.computeFrustumIntersection` | SBMT footprint cell counts are retained diagnostics; they do not prove a cssEarth footprint implementation |
 | Image coordinates and UVs | Native `PolyDataUtil.generateTextureCoordinates` versus cssEarth `project` | Identity, both axis flips, three quarter turns, central crop; every boundary, interior grid, off-image and behind-camera cases |
 | FITS image values | SBMT's bundled nom-tam-fits versus `readFitsImage` | Pinned raw axes, encoding and up to 65 distinct samples per image; no photometric normalization claim |
-| FITS encodings, missing values and extensions | Existing [FITS oracle](../../../packages/core/src/node/oracle/README.md) and `tests/oracles/fits/core.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
-| PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../../../packages/core/src/node/oracle/README.md) | Label-driven dimensions, offsets, quality and units; this backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
+| FITS encodings, missing values and extensions | Existing [FITS oracle](../../../../../../../core/src/node/oracle/README.md) and `tests/oracles/fits/core.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
+| PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../../../../../../../core/src/node/oracle/README.md) | Label-driven dimensions, offsets, quality and units; this backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
 | Released OBJ UV islands and raster sampling | `packages/bake/src/objects/raster/obj-uv-fits.test.mts` | Barycentric transfer, seams, nearest/bilinear sampling policy, orientation and missing support; existing unit checks, **not native SBMT qualification** |
 | Bad or unsupported inputs | `projection.test.mts` | Missing/duplicate fields, unsafe paths, hash drift, dimensions, degenerate cameras, non-affine frusta and unsupported SUM distortion/K matrices |
 
@@ -133,7 +133,7 @@ does not establish their physical registration or certify a new surface lens.
 
 Two consecutive [`node tests/oracles/run.mts sbmt/projection`](https://github.com/layoutit/cssEarth/blob/beb2b9343efb112af8a6d6e4856d3ce6173a6985/tests/oracles/run.mts) (now `node packages/core/src/node/oracle/run.mts sbmt/projection`) runs against the same pinned
 inputs and locked SBMT/Java bytes do not agree byte for byte: 1,643 of 34,777
-numeric leaves in `tests/oracles/sbmt/projection.json` differ between runs, with
+numeric leaves in [`tests/oracles/sbmt/projection.json`](https://github.com/layoutit/cssEarth/blob/beb2b9343efb112af8a6d6e4856d3ce6173a6985/tests/oracles/sbmt/projection.json) (now `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json`) differ between runs, with
 a maximum absolute difference of about 1.6e-4 and a maximum relative difference
 of about 3.1e-4 (checked 2026-09-18, macOS ARM release above). The drift sits far
 under the 0.25-pixel UV comparison limit and the 5 cm mesh-distance limit above,
@@ -148,7 +148,7 @@ committed fixture, at its documented tolerance.
 
 1. Pin the selected native inputs in the body's existing source manifest and
    acquisition plan, with source catalogue bindings. Update its investigation
-   ledger. A synthetic case belongs in `tests/fixtures/sbmt` and must say so.
+   ledger. A synthetic case belongs in `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs` and must say so.
 2. Add the file identities and dimensions to `cases.json`. Reuse the generic
    path; add a new format adapter only when its scientific convention is known.
 3. Run the native generator twice into separate test/scratch files and compare.

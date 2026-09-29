@@ -4,13 +4,13 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { startNative, hashFile } from './runtime.mts';
 import { call, construct, nativeArray } from './java.mts';
-import { cases, vector, count, orientations, queryFractions } from './cases.mts';
+import { cases, vector, count, orientations, queryFractions, sourceFile } from './cases.mts';
 import { ORACLE_ROOT, assertPinnedInputs } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber } from '@cssearth/core';
 
 const definitions = await cases();
 const inputPaths = [...new Set(['tests/fixtures/sbmt/cases.json', ...definitions.flatMap(c => [c.shape, c.pointing, c.image])])].sort();
-const inputs = await Promise.all(inputPaths.map(async path => ({ path, ...await hashFile(resolve(ORACLE_ROOT, path)) })));
+const inputs = await Promise.all(inputPaths.map(async path => ({ path, ...await hashFile(sourceFile(path)) })));
 await assertPinnedInputs(inputs);
 const { java, tool } = await startNative();
 const Poly = java.type('edu.jhuapl.saavtk.util.PolyDataUtil');
@@ -19,12 +19,12 @@ const norm = (v: number[]) => v.map(n => n / Math.hypot(...v));
 const getPoint = (obj: unknown, i: number) => vector(call(obj, 'GetPointSync', i));
 for (const c of definitions) {
   console.log(`SBMT ${c.id}`);
-  const reader = construct(java.type(`edu.jhuapl.sbmt.pointing.io.${c.format === 'sum' ? 'Sum' : 'Info'}FileReader`), resolve(ORACLE_ROOT, c.pointing));
+  const reader = construct(java.type(`edu.jhuapl.sbmt.pointing.io.${c.format === 'sum' ? 'Sum' : 'Info'}FileReader`), sourceFile(c.pointing));
   call(reader, 'readSync');
   const origin = vector(call(reader, 'getSpacecraftPositionSync'));
   const frustum = [1,2,3,4].map(i => vector(call(reader, `getFrustum${i}Sync`)));
   if (frustum.some(v => Math.abs(Math.hypot(...v) - 1) > 1e-6)) throw new Error('Native reader did not produce four unit rays');
-  const mesh = call(Poly, 'loadPDSShapeModelSync', resolve(ORACLE_ROOT, c.shape));
+  const mesh = call(Poly, 'loadPDSShapeModelSync', sourceFile(c.shape));
   const vertices = count(call(mesh, 'GetNumberOfPointsSync')), faces = count(call(mesh, 'GetNumberOfCellsSync'));
   if (vertices !== c.vertices || faces !== c.faces) throw new Error('Native shape dimensions differ from declared case');
   const tree = construct(java.type('vtk.vtkOBBTree'));
@@ -76,7 +76,7 @@ for (const c of definitions) {
   const footprintCells = footprint === null ? 0 : count(call(footprint,'GetNumberOfCellsSync'));
   // SBMT ships nom-tam-fits. Read native axes and kernel; applying FITS BSCALE
   // and BZERO below is the documented encoding, not a camera/image correction.
-  const fits = construct(java.type('nom.tam.fits.Fits'), resolve(ORACLE_ROOT,c.image));
+  const fits = construct(java.type('nom.tam.fits.Fits'), sourceFile(c.image));
   const hdu = call(fits,'readHDUSync'), axes = vector(call(hdu,'getAxesSync'),2);
   const header = call(hdu,'getHeaderSync');
   const bitpix = requireFiniteNumber(call(header,'getIntValueSync','BITPIX'));
@@ -95,8 +95,8 @@ for (const c of definitions) {
   call(hitPoints,'DeleteSync'); call(ids,'DeleteSync'); call(tree,'DeleteSync'); call(mesh,'DeleteSync');
   call(java.type('java.lang.System'),'gcSync');
 }
-await mkdir(resolve(ORACLE_ROOT,'tests/oracles/sbmt'),{recursive:true});
-const destination = process.argv[2] ?? resolve(ORACLE_ROOT,'tests/oracles/sbmt/projection.json');
-if (!resolve(destination).startsWith(resolve(ORACLE_ROOT,'tests/oracles')+'/') && !resolve(destination).startsWith(resolve(ORACLE_ROOT,'output')+'/')) throw new Error('Oracle output must be test evidence or scratch');
+await mkdir(import.meta.dirname,{recursive:true});
+const destination = process.argv[2] ?? resolve(import.meta.dirname,'projection.json');
+if (!resolve(destination).startsWith(import.meta.dirname+'/') && !resolve(destination).startsWith(resolve(ORACLE_ROOT,'output')+'/')) throw new Error('Oracle output must be test evidence or scratch');
 await writeFile(destination, JSON.stringify({schema:'cssearth-oracle-fixture@1',oracle:'SBMT',generatedBy:'tests/oracles/sbmt/projection.mts',tool,inputs,references:[],cases:output},null,2)+'\n');
 console.log(`Wrote ${destination}`);

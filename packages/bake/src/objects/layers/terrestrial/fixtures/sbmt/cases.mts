@@ -43,8 +43,13 @@ export function parseCase(value: unknown) {
     width, height, vertices, faces };
 }
 export async function cases() {
-  const result = requireArray(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'tests/fixtures/sbmt/cases.json'), 'utf8'))).map(parseCase);
+  const result = requireArray(JSON.parse(await readFile(resolve(import.meta.dirname, 'inputs/cases.json'), 'utf8'))).map(parseCase);
   if (new Set(result.map(c => c.id)).size !== result.length) throw new Error('Duplicate SBMT case identity');
   return result;
 }
 export type Case = ReturnType<typeof parseCase>;
+
+/** Resolve preserved evidence identities without rewriting the recorded inputs. */
+export const sourceFile = (path: string) => path.startsWith('tests/fixtures/sbmt/')
+  ? resolve(import.meta.dirname, 'inputs', path.slice('tests/fixtures/sbmt/'.length))
+  : resolve(ORACLE_ROOT, path);

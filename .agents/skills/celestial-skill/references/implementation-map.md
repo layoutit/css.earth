@@ -407,7 +407,7 @@ photometric models are checked against the truth files of their unit tests,
 which need no ISIS install. See `packages/core/src/node/oracle/README.md`.
 
 For SUM/INFO image-to-shape investigations, use the optional
-[native SBMT preparation oracle](../../../../tests/oracles/sbmt/README.md).
+[native SBMT preparation oracle](../../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 Add a source-pinned case to its shared inventory rather than writing a body-only
 reference script. Its staged comparison separates pointing, visible intercepts,
 FITS samples and UV projection. SBMT's angular UV approximation is not exact

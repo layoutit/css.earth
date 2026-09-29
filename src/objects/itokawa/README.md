@@ -12,7 +12,7 @@
 
 ### Native SBMT comparison, 14 September 2026
 
-The [shared SBMT oracle](../../../tests/oracles/sbmt/README.md) independently
+The [shared SBMT oracle](https://github.com/layoutit/cssEarth/blob/897b286a62cc2a4d325fe9177690339fdb71d2f1/tests/oracles/sbmt/README.md) (now [here](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)) independently
 reads the full Gaskell ver128q shape, the 1024×1024 ST_2402987304 v-band FITS
 image and its [archived SUM pointing](source/observations/N2402987304.SUM).
 Pointing, sampled FITS values and visible surface intersections agree with the
@@ -22,7 +22,7 @@ result is retained as a difference in the oracle's report and regression test.
 It is consistent with SBMT's angular UV approximation differing from a pinhole
 camera; it is not a solved registration or a measured ground-truth error.
 
-The [fixture](../../../tests/oracles/sbmt/projection.json) pins the inputs,
+The [fixture](https://github.com/layoutit/cssEarth/blob/897b286a62cc2a4d325fe9177690339fdb71d2f1/tests/oracles/sbmt/projection.json) (now [here](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)) pins the inputs,
 generator and native software. The existing AMICA mosaic continues to use its
 controlled DDR route described below. This test does not replace that route or
 change its published texture. The SUM download uses SBMT's published public

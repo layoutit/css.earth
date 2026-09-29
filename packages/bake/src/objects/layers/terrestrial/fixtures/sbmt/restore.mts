@@ -14,7 +14,7 @@ export async function restoreInputs() {
     const match=/^src\/objects\/([a-z0-9-]+)\/source\/(.+)$/.exec(input.path);
     if(!match)throw new Error(`Missing checked-in oracle fixture ${input.path}`);
     const sourceRoot=resolve(ORACLE_ROOT,'src/objects',match[1],'source');
-    const {parseSourceManifest,parseAcquisitionPlan,executeAcquisition}=({...await import('@cssearth/bake/objects/sources'), ...await import('@cssearth/bake/objects/acquisition')});
+    const {parseSourceManifest,parseAcquisitionPlan,executeAcquisition}=({...await import('../../../../sources/source-files.ts'), ...await import('../../../../acquisition/operations-acquisition.ts')});
     const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')),match[1]);
     const plan=parseAcquisitionPlan(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')));
     const operations=plan.operations.filter(step=>'path' in step&&step.path===match[2]);

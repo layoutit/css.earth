@@ -13,7 +13,7 @@ are older standalone audits; the groups below are fixture oracles.
 | Astropy blackbody, constants and units | Frequency-form Planck intensity and brightness-temperature inversion used by ALMA preparation, plus the HST flux-density-to-Rayleigh conversion | `physical-units/spectral.py` | `tests/objects/units/spectral-units.oracle.test.mts` |
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py` | `packages/bake/src/objects/raster/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | NumPy, Astropy, following pinned ThERESA source | Eclipse-map harmonic normalization and signs, weighted linear fit and posterior covariance, Planck radiance and single/band brightness temperatures | `packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py` | `packages/bake/src/objects/raster/eclipse-map/numerics.oracle.test.mts` |
-| [Native SBMT](../../../../../tests/oracles/sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
+| [Native SBMT](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
 | SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tests/oracles/spice/dart-draco.oracle.test.mts`, and `packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts` for the LSK and PCK alone |
 | SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
@@ -95,7 +95,7 @@ SBMT is an opt-in native backend: `node packages/core/src/node/oracle/setup.mts 
 `node packages/core/src/node/oracle/run.mts sbmt/projection`. It uses the same fixture envelope with a
 pinned executable/software lock (its fixture records no digest; see the known gap above). `node tests/oracles/test-sbmt.mts --unit`
 runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
-and runs all cases. See its [coverage and known differences](../../../../../tests/oracles/sbmt/README.md).
+and runs all cases. See its [coverage and known differences](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 The commands below operate on the Python backends.
 
 ```bash
