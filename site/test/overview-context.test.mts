@@ -72,6 +72,23 @@ test('overview leaves the Solar System when its bodies fade and restores correct
   assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
 });
 
+test("another star's system overview is left by the distance from that star, not from the Sun", () => {
+  const { hiddenDistanceM: hidden } = context.system, parsec = 3.085677581491367e16, star = [12.47 * parsec, 0, 0];
+  const near = { ...camera(0), pose: { ...camera(0).pose, positionM: [star[0]! + 1.5e11, 0, 0] as const } };
+  assert.equal(overviewScopeAtCamera(near, 'system', context, { originM: star }), 'system', 'one astronomical unit from its star');
+  const far = { ...camera(0), pose: { ...camera(0).pose, positionM: [star[0]! + hidden, 0, 0] as const } };
+  assert.equal(overviewScopeAtCamera(far, 'system', context, { originM: star }), 'milky-way');
+  // A binary in the Large Magellanic Cloud keeps its overview before the scopes measured from the Sun.
+  const lmc = [49.9e3 * parsec, 0, 0], at = (offsetM: number) => ({ ...camera(0), pose: { ...camera(0).pose, positionM: [lmc[0]! + offsetM, 0, 0] as const } });
+  assert.equal(overviewScopeAtCamera(at(1e12), 'system', context, { originM: lmc }), 'system');
+  assert.equal(overviewScopeAtCamera(at(hidden), 'system', context, { originM: lmc }), 'local-group');
+  // A host that authors its own orbit range (Sgr A*) keeps its overview while the world context still draws its orbits.
+  const range = 1.5e16, sgr = [8.2e3 * parsec, 0, 0];
+  const around = (offsetM: number) => ({ ...camera(0), pose: { ...camera(0).pose, positionM: [sgr[0]! + offsetM, 0, 0] as const } });
+  assert.equal(overviewScopeAtCamera(around(range * 1.9), 'system', context, { originM: sgr, orbitsWithinM: range }), 'system');
+  assert.equal(overviewScopeAtCamera(around(range * 2), 'system', context, { originM: sgr, orbitsWithinM: range }), 'milky-way');
+});
+
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
   const plan = { ...context, focus: { ...context.focus, positionM: [100, 200, 300] as const } };
   const world = camera(500, plan), frame = frameAt([100, 200, 400], 20);

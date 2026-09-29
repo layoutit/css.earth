@@ -58,7 +58,7 @@ test('catalogue window bounds connected rows, reuses them while scrolling, and c
   assert.equal(list.querySelector('[data-catalogue-index="1"]')?.getAttribute('aria-setsize'), '2', 'marking the selection keeps the list size');
   assert.equal(list.querySelector('[data-catalogue-index="0"] a')?.getAttribute('aria-current'), null,
     'objects with the same display name must not share selection');
-  const focus: CatalogueRow = { ...entry(91), kind: 'prepared-focus', id: 'm42', route: '/sun/?focus=m42',
+  const focus: CatalogueRow = { ...entry(91), kind: 'prepared-focus', id: 'm42', route: '/m42/',
     source: { subject: 'focus:m42', document: '/sources/m42/', label: 'Sources M42' },
     marker: { kind: 'focus', thumbnail: null } };
   catalogue.setRows(2, 0, [entry(91), focus]);
