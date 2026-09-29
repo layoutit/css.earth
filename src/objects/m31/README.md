@@ -24,6 +24,7 @@ The catalogues give sky positions only, so each object is placed where its sight
 | Supernova remnant candidates (Lee & Lee 2014) | 156 | none |
 | Planetary nebulae (Merrett et al. 2006) | 2,475 | 99 beyond the photograph, 726 flagged by the authors |
 
+- **Centred on M31:** the bank is written around M31's centre (`centreOnGalaxy`), because the app thins a bank by the camera's distance from its origin. Around the Sun it drew only 300 of the dots.
 - **Where the dots stop:** only inside the image layers' 35 kpc support radius, so every dot sits on the photograph. Planetary nebulae also trace the bulge and halo. One far along the minor axis lands at a large disc radius, up to 126 kpc, when put on the disc; those are the ones this drops.
 - **Colours:** each catalogue takes the Milky Way colour for its kind of object (supernova remnants and planetary nebulae take the M33 dots' colours), mixed halfway to white and raised to the power 1.6 as the Milky Way's dots are. These are presentation choices.
 - **PHAT clusters are not drawn:** the survey covers only the north-east third of the disc, so its 2,753 clusters would crowd that third and leave the rest as it is. The bank is prepared but left out of the dots.

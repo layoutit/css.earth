@@ -10,6 +10,8 @@
  * (presentation: it deepens the coloured dots so they sit in the galaxy's backing while the whitest keep their
  * sparkle). A bank's `paletteTone` (prepare-catalogue-points.mts `toneBy`) then scales each colour, so a dimmer object is
  * a darker dot. The points are written in a fixed shuffled order, so a thinned prefix thins every region alike.
+ * `centreOnGalaxy` writes them around the galaxy's centre instead of the Sun (same axes and unit): the app thins a bank
+ * by the camera's distance from its origin, so another galaxy's dots must have that galaxy as their origin.
  *
  * `densityCap` evens the dots across space. Every catalogue is complete only out to some distance from the Sun, so
  * together they pile up around it. A point is kept, in the shuffled order, while fewer dots already kept lie within the
@@ -84,7 +86,9 @@ const graded = (colour: string) => '#' + [1, 3, 5].map(i => {
 const toned = (colour: string, tone: number) => tone === 1 ? colour
   : '#' + [1, 3, 5].map(i => Math.round(parseInt(colour.slice(i, i + 2), 16) * tone).toString(16).padStart(2, '0')).join('');
 // The galaxy's centre: its volume frame origin, read only by the rules that need it.
-const needsCentre = cap?.mode === 'disc' || entries.some(value => value.withinPcOfCentre !== undefined);
+const centreOnGalaxy = recipe.centreOnGalaxy === true;
+if (recipe.centreOnGalaxy !== undefined && (typeof recipe.centreOnGalaxy !== 'boolean' || cap)) fail('centreOnGalaxy is a boolean, for a bank without a density cap.');
+const needsCentre = centreOnGalaxy || cap?.mode === 'disc' || entries.some(value => value.withinPcOfCentre !== undefined);
 // A density-volume galaxy (prepared/volume.json) or one drawn as image layers (prepared/image-layers.json).
 const galaxyFrameValue = async () => {
   const volume = await readFile(resolve(prepared, 'volume.json'), 'utf8').catch(() => null);
@@ -191,13 +195,17 @@ if (cap) {
   if (recipe.within) console.log(`Already drawn by ${(recipe.within as string[]).join(', ')}: ${JSON.stringify(drawnOutside)}.`);
 }
 const palette = [...new Set(ordered.map(point => point.colour))], paletteIndex = new Map(palette.map((colour, index) => [colour, index]));
+// Around the galaxy's centre: its frame origin, the Sun-centred frame's axes and unit, bounds reaching the farthest dot.
+const written = centreOnGalaxy ? ordered.map(point => point.reference.map((value, axis) => Math.round((value - centreKpc![axis]!) * 1e4) / 1e4)) : ordered.map(point => point.reference);
+const reach = Math.ceil(Math.max(...written.map(point => Math.hypot(...point))));
+const outputFrame = centreOnGalaxy ? { ...(rawFrame as object), originM: galaxyFrame!.originM, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } } : rawFrame;
 const output = { schema: 'cssearth-catalogue-points@1', id, source: 'merge', meaning: recipe.meaning,
   order: 'A fixed shuffle, so a thinned prefix thins every region alike.', banks: entries.map(value => ({ ...value, kept: kept[value.bank] })),
   ...(recipe.within ? { within: recipe.within } : {}),
   ...(maxSigma === undefined ? {} : { unplaced: { maxKinematicSigmaKpc: maxSigma, basis: recipe.maxKinematicSigmaBasis, left: unplaced } }),
   ...(cap ? { densityCap: { ...recipe.densityCap as object, left: capped } } : {}),
-  frame: rawFrame, appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette },
-  counts: { points: ordered.length }, points: ordered.map(point => [...point.reference, paletteIndex.get(point.colour)!]) };
+  frame: outputFrame, appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette },
+  counts: { points: ordered.length }, points: ordered.map((point, index) => [...written[index]!, paletteIndex.get(point.colour)!]) };
 await writeFile(resolve(prepared, `${id}.json`), JSON.stringify(output) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
