@@ -140,16 +140,22 @@ for (let face = 0; face < 6; face++) for (let i = 0; i < patches; i++) for (let 
   const flat = corners.map(corner => { const offset = corner.reduce((sum, value, axis) => sum + (value - centre[axis]!) * normal[axis]!, 0);
     return corner.map((value, axis) => value - offset * normal[axis]!) as Vector3; }) as [Vector3, Vector3, Vector3, Vector3];
   const row = Math.floor(index / columns), column = index % columns;
-  const u0 = column * tile / atlasWidth, u1 = (column + 1) * tile / atlasWidth, v0 = row * tile / atlasHeight, v1 = (row + 1) * tile / atlasHeight;
-  // The tile's rows run down from v's top (t = 1) to its bottom (t = 0).
-  const polygon: Polygon = { vertices: flat, uvs: [[u0, v1], [u1, v1], [u1, v0], [u0, v0]], texture: texturePath,
-    textureImageSource: { url: texturePath, width: atlasWidth, height: atlasHeight },
+  // The leaf is compiled for one tile-sized image, so its box is the tile and nothing beyond the patch is drawn (no
+  // clipping: a leaf shows its whole box). The tile's rows run down from the patch's top (t = 1) to its bottom (t = 0).
+  const polygon: Polygon = { vertices: flat, uvs: [[0, 1], [1, 1], [1, 0], [0, 0]], texture: texturePath,
+    textureImageSource: { url: texturePath, width: tile, height: tile },
     texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' }, doubleSided: false };
   const plan = computeTextureAtlasPlanPublic(polygon, index, { tileSize: 50, layerElevation: 50, seamBleed: 0 });
   const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
   if (!geometry) throw new TypeError(`PolyCSS could not prepare patch ${index} of ${id}.`);
+  const leaf = compileVolumeLeaf(geometry, tile);
+  // Then the background is the whole atlas at the leaf's scale, shifted so the leaf's box shows this patch's tile.
+  const [sizeX, sizeY] = leaf.style.backgroundSize.split(' ').map(value => Number.parseFloat(value));
+  const [offsetX, offsetY] = leaf.style.backgroundPosition.split(' ').map(value => Number.parseFloat(value));
+  const scaleX = sizeX! / tile, scaleY = sizeY! / tile, px = (value: number) => `${Number(value.toFixed(4))}px`;
   leaves.push({ id: `${face}-${i}-${j}`, centerUnits: centre.map(value => Number(value.toFixed(3))), normalUnits: normal.map(value => Number(value.toFixed(6))),
-    ...compileVolumeLeaf(geometry, atlasWidth) });
+    ...leaf, style: { ...leaf.style, backgroundSize: `${px(atlasWidth * scaleX)} ${px(atlasHeight * scaleY)}`,
+      backgroundPosition: `${px(offsetX! - column * tile * scaleX)} ${px(offsetY! - row * tile * scaleY)}` } });
   index++;
 }
 const reach = Math.ceil(R);

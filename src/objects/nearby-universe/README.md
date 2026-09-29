@@ -75,8 +75,21 @@ overview reads **Observable Universe** from 1 Gpc out, and the camera reaches
   colour its light arrives with. At redshift 0.8 and beyond the visible range
   is 211 to 433 nm in the quasar's frame, inside the composite's range. They are
   drawn whole within 6,600 Mpc.
-- **The cosmic microwave background** ([recipe](source/cmb/sphere.json)): see
-  below.
+- **The cosmic microwave background** ([recipe](source/cmb/sphere.json)):
+  Planck's 2018 SMICA map (HEALPix Nside 2048) drawn on the sphere its light
+  left from, the surface of last scattering: the comoving distance of
+  z* = 1089.80 (Planck 2018 VI, Table 2) in the Planck 2018 cosmology,
+  13,884 Mpc or 45.3 billion light-years. The sphere is 384 flat patches (a cube
+  with each face cut 8 by 8, the corners pushed out to the sphere), each a
+  PolyCSS leaf showing its 64-texel tile of one atlas
+  ([`prepare-map-sphere.mts`](../../../packages/bake/cli/prepare-map-sphere.mts)).
+  Each texel averages 2 by 2 samples of the map at its direction, turned from
+  ICRS into the map's Galactic coordinates, and takes the Planck style-guide
+  colour for its temperature over ±300 µK. Each patch shows only its front, so
+  from outside the far side never shows through, and it fades in as the camera
+  leaves it, from its radius to twice that: it is the edge of the observable
+  universe, seen from outside. From inside it would be the whole sky, which the
+  app does not draw.
 
 ## Tests and evidence
 
