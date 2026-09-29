@@ -1,5 +1,5 @@
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
-import {numericRaster} from '@cssearth/bake/objects/raster';
+import {numericRaster} from '../index.js';
 import { array, dictionary, number, optional, shape, text, requireFiniteNumber, invertPreparedAffineMatrix4 } from '@cssearth/core';
 import {required} from '@cssearth/objects/node/contract';
 import type {GeoTIFFImage} from 'geotiff';

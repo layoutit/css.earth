@@ -1,4 +1,4 @@
-import {SHAPE_MATERIAL, ellipsoidParameterMesh} from '@cssearth/bake/objects/layers/terrestrial';
+import {SHAPE_MATERIAL, ellipsoidParameterMesh} from '../../index.js';
 import {preparedModelTerrain, modelConfig, modelSurfaces, modelSettings} from './model-fixture.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -6,7 +6,7 @@ const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '@cssearth/objects/node';
-import {readAuthoredRotation} from '@cssearth/bake/objects/scene';
+import {readAuthoredRotation} from '../../../../scene/index.js';
 import {requireObjectRotationReference} from '../radial-fixture.mts';
 const json=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 const near=(a:number,b:number,t:number)=>assert.ok(Math.abs(a-b)<t,`${a} differs from ${b}`);

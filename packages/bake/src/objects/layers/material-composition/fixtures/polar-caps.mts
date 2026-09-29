@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { POLAR_CAP_STYLE } from '@cssearth/bake/scene';
+import { POLAR_CAP_STYLE } from '../../../../scene/index.js';
 
 export type Pole = 'north' | 'south';
 export interface PreparedCap { readonly pole: Pole; readonly style: string; readonly label?: string }

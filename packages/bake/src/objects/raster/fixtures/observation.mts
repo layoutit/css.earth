@@ -1,8 +1,8 @@
 import { pathToFileURL } from 'node:url';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
-import { readObservation } from '@cssearth/bake/objects/raster';
-import { paintMissingCoverage } from '@cssearth/bake/raster';
+import { readObservation } from '../index.js';
+import { paintMissingCoverage } from '../../../raster/index.js';
 
 // Exercise the source conversion without requiring an intermediate image in
 // the installable runtime. Browser captures cover the delivered packed atlas.

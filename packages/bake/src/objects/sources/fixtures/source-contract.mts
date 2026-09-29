@@ -3,7 +3,7 @@ import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { parseSourceManifest, verifySources } from '@cssearth/bake/objects/sources';
+import { parseSourceManifest, verifySources } from '../index.js';
 const test = sourceTest();
 
 // Each destination remains independently discoverable by the generic object

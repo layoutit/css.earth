@@ -1,5 +1,5 @@
 import { array, boolean, dictionary, number, shape, text } from '@cssearth/core';
-import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidPreparationSource } from '../index.js';
 
 export function irregularSatelliteConfig(input: unknown) {
   const config = parseSolidPreparationSource(input);

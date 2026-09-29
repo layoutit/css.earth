@@ -6,7 +6,7 @@ import { TEXELS_PER_CSS_PIXEL, leafRasterScale, packProjectiveSurfaceRaster } fr
 import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from '@cssearth/bake/objects/layers/giant';
 import { publishedLeafImages } from '@cssearth/bake/objects/layers/giant';
 import { readFile } from 'node:fs/promises';
-import { assertPolarCaps, poleOfClass } from './polar-caps.mts';
+import { assertPolarCaps, poleOfClass } from './fixtures/polar-caps.mts';
 import { polarImageProjection } from '@cssearth/bake/objects/layers/giant';
 import { writeDomeRings } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();

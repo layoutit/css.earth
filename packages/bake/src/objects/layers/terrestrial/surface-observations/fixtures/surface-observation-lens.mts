@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { parseRadialLoaderConfig } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseRadialLoaderConfig } from '../../index.js';
+import { loadRadialTerrain } from '../../index.js';
+import { requireTerrainMesh } from '../../../../geometry/index.js';
+import { loadSurfaceObservation } from '../../index.js';
 
 export async function loadLens(body: string, lensId: string, change: (recipe: Record<string, unknown>) => void = () => {}) {
   const sourceDirectory = resolve('src/objects', body, 'source');

@@ -12,7 +12,7 @@ import { floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, loadWholeDiscColour } from '@cssearth/bake/objects/raster';
 import { prepareSurfaceColour, widestPublishedImage } from '@cssearth/bake/objects/layers/material-composition';
 import { polarQuad } from '@cssearth/bake/objects/layers/material-composition';
-import { assertCapFacesOut } from './polar-caps.mts';
+import { assertCapFacesOut } from './fixtures/polar-caps.mts';
 
 const image = (path: string, width: number, height: number) =>
   sharp({ create: { width, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).webp({ lossless: true }).toFile(path);

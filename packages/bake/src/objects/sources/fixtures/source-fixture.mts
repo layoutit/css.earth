@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {array, boolean, dictionary, number, optional, shape, text, requireRecord} from '@cssearth/core';
-import {parseRadialSource} from '@cssearth/bake/objects/layers/terrestrial';
+import {parseRadialSource} from '../../layers/terrestrial/index.js';
 
 const acquisition = shape({operations:array(shape({path:text,kind:optional(text),url:optional(text)}))});
 const damit = shape({modelId:number,fields:dictionary(text)});
