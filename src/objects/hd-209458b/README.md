@@ -34,7 +34,7 @@ Measured and not shown: mass, 0.685 (+0.015/−0.014) Jupiter masses (Torres et 
 
 Run of 2026-09-25 (this version):
 
-- [`published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`tests/objects/terrestrial/published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts)) integrates the map over the visible hemisphere and gets the Fourier curve back to 1e-9. It holds the lens to the table above: the curve's maximum and minimum within Table 2's uncertainties, the peak and trough 40.81° before eclipse and transit, the Table 3 temperatures within theirs, and the hottest longitude at 40.8° east with every latitude alike.
+- [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) integrates the map over the visible hemisphere and gets the Fourier curve back to 1e-9. It holds the lens to the table above: the curve's maximum and minimum within Table 2's uncertainties, the peak and trough 40.81° before eclipse and transit, the Table 3 temperatures within theirs, and the hottest longitude at 40.8° east with every latitude alike.
 
 [2026-09-22 exoplanet radius and route check](../../../site/test/evidence/exoplanets/2026-09-22/README.md): the 97,158 km source radius agrees with the scene and world frame; the prepared runtime contract passed. That run predates the map lens; the radius and frame have not changed since.
 

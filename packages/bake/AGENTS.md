@@ -274,12 +274,14 @@ its validators accept); the renderer never imports the bake.
     `surface-observations/`, described in its README (its tests are in `tests/objects/surface-observations/`, its evidence in
     `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
-  Their tests stay outside the package, beside the pipelines in `packages/bake/authoring/<body>/` or under `tests/objects/<topic>/` once the
-  pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the
-  repository's test helpers; they import the entries. The terrestrial tests, the source-surface fixture and its independent
-  Python verifier are in `tests/objects/terrestrial/`. A node test that needs none of those helpers sits beside its module
+  Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under
+  `tests/objects/<topic>/` pending later moves. The moved terrestrial Node suites live in
+  `packages/bake/src/objects/{cameras,geometry,raster,layers/terrestrial}/`. The source-surface
+  test and independent Python verifier are in `packages/bake/src/objects/geometry/`, with the
+  source-surface fixture in its `fixtures/` directory. Tests read body sources, kernel banks and
+  oracle fixtures through test helpers and import the entries. Self-contained Node tests sit beside their modules
   (`objects/layers/paged-ellipsoid/*.test.ts`, `objects/layers/terrestrial/triangle-alpha-atlas.test.ts`,
-  `objects/raster/observed/observed-geotiff.test.ts`); Vitest skips `src/objects/**/*.test.ts`. `pnpm test:bake-objects`
+  `objects/raster/observed/observed-geotiff.test.ts`); Vitest skips `src/objects/**/*.test.{ts,mts}`. `pnpm test:bake-objects`
   (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
   identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,

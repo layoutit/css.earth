@@ -66,7 +66,7 @@ function run(args: string[]) {
 }
 // `.mts` entries load natively; esbuild refuses to mark an entry point itself external.
 const native = ['site/test/prepare-spatial-context.test.mts',
-  ...(universeOnly ? [] : [...await discover('tests/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mts'), ...await discover('packages/bake/authoring', '.test.mjs'), ...await discover('packages/bake/authoring', '.test.mts'), ...await discover('packages/telescope-cli/authoring', '.test.mjs'), ...await discover('packages/telescope-cli/authoring', '.test.mts')])];
+  ...(universeOnly ? [] : [...await discover('tests/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mts'), ...await discover('packages/bake/src/objects', '.test.mts'), ...await discover('packages/bake/authoring', '.test.mjs'), ...await discover('packages/bake/authoring', '.test.mts'), ...await discover('packages/telescope-cli/authoring', '.test.mjs'), ...await discover('packages/telescope-cli/authoring', '.test.mts')])];
 // Individual suites decode large pinned imagery/terrain. Keep file-level work
 // bounded as the registry grows; this does not omit any preparation cases.
 run(['--test', '--test-concurrency=1', ...compiled, ...native]);
