@@ -67,8 +67,8 @@ elif operation in ('discover-target', 'discover-product'):
     identifiers = target + (lidvid or '')
     if not target.startswith('urn:nasa:pds:context:target:') or (lidvid is not None and not lidvid.startswith('urn:nasa:pds:')) or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:._-' for c in identifiers):
         raise ValueError('PDS identifiers contain unsupported characters')
-    fields = ['lid','vid','lidvid','ops:Label_File_Info.ops:file_ref','ops:Label_File_Info.ops:file_size','ops:Label_File_Info.ops:md5_checksum',
-      'ops:Data_File_Info.ops:file_ref','ops:Data_File_Info.ops:file_size','ops:Data_File_Info.ops:md5_checksum','pds:Target_Identification.pds:name',
+    fields = ['lid','vid','lidvid','ops:Label_File_Info.ops:file_ref','ops:Label_File_Info.ops:file_size',
+      'ops:Data_File_Info.ops:file_ref','ops:Data_File_Info.ops:file_size','pds:Target_Identification.pds:name',
       'ref_lid_target','pds:Observing_System_Component.pds:name','pds:Time_Coordinates.pds:start_date_time','pds:Time_Coordinates.pds:stop_date_time',
       'pds:Primary_Result_Summary.pds:processing_level','ops:Harvest_Info.ops:harvest_date_time']
     query = pep.Products(pep.PDSRegistryClient()).has_target(target).observationals()

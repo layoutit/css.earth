@@ -11,7 +11,6 @@ import { calibrationDependencies, verifyCalibrationDependencies, calibrationOrig
 import { qualifySourceProduct } from './qualify-source.mts';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
-import { sha256File } from '@cssearth/core/node';
 import { recordQualification, QUALIFICATION_SCHEMA, type QualificationResult } from './qualify.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import type { SourceProduct } from './source-product-contract.mts';
@@ -130,7 +129,7 @@ test('delivery outputs preserve masked spectrum gaps, label plots, and refuse ch
  const {listOutputs,exportOutput}=await import('./outputs.mts');
  const file=resolve(root,'output.fits'),record=resolve(root,'output-input.product.json'),result=resolve(root,'result.json');
  await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{},software:[]},[{path:'output.fits',file}]);
- await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'output.fits',record:'output-input.product.json',receipt:'output-input.product.json',facts:{target:'test',verified:true},context:{kind:'scientific-request',request:{target:'test',wavelengthMicrometres:[1,2],kind:'cube',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'},assessment:{status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}}},files:[{path:'output.fits',...await sha256File(file)},{path:'output-input.product.json',...await sha256File(record)}]}));
+ await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'output.fits',record:'output-input.product.json',receipt:'output-input.product.json',facts:{target:'test',verified:true},context:{kind:'scientific-request',request:{target:'test',wavelengthMicrometres:[1,2],kind:'cube',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'},assessment:{status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}}},files:[{path:'output.fits',...await fileSize(file)},{path:'output-input.product.json',...await fileSize(record)}]}));
  const options=await listOutputs(result);assert.ok(options.outputs.some(o=>o.kind==='spectrum'&&o.available));assert.ok(options.outputs.some(o=>o.kind==='sphere'&&!o.available));
  await assert.rejects(exportOutput(result,{kind:'image',hdu:1},resolve(root,'missing-plane')),/explicit/);
  const image=await exportOutput(result,{kind:'image',hdu:1,plane:0},resolve(root,'image-output'));

@@ -3,7 +3,6 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { loadSourceProducts, sourceRun } from './source-products.mts';
 import { parseSourceProducts, SOURCE_PRODUCTS_SCHEMA } from './source-product-contract.mts';
 import { qualifySourceProduct } from './qualify-source.mts';
@@ -19,7 +18,6 @@ import { listArtifactOutputs } from './artifact-outputs.mts';
 const test = sourceTest();
 
 const args = ['--target', 'test-body', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'telescope-product'];
-const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const label = (multiplier = 1) => `Object = IsisCube
   Object = Core
     StartByte = 1
@@ -177,7 +175,7 @@ test('exploration is immutable, revalidates its exact choice, and delivers with 
 
 test('saved exploration carries its pinned Keck source evidence into the run directory', async () => {
   const f = await fixture(); try {
-    const body = `${JSON.stringify({source:'https://koa.ipac.caltech.edu/TAP',request:'SELECT TOP 1 ...',rows:[]})}\n`, pin = digest(body);
+    const body = `${JSON.stringify({source:'https://koa.ipac.caltech.edu/TAP',request:'SELECT TOP 1 ...',rows:[]})}\n`, pin = 'koa.ipac.caltech.edu-20260929000000000';
     const archive = resolve(f.root, 'output/telescopes/archive-leads');
     await mkdir(archive, {recursive:true}); await writeFile(resolve(archive, `${pin}.json`), body);
     const lead = {service:'https://koa.ipac.caltech.edu/TAP',state:'sampled' as const,scope:'public object frames',reason:'sampled',

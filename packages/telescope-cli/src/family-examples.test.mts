@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
 import {readdir,readFile,stat} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
@@ -10,7 +9,6 @@ import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root=WORKSPACE,base=resolve(root,'tests/fixtures/telescope-family-examples');
 const assigned=['F01','F02','F03','F04','F05','F06','F07','F08','F09','F10','F11','F12','F13','F14','F15','F16','F17','F18'];
-const sha256=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 
 test('checked family examples contain exactly one pinned representative per assigned family',async()=>{
   const manifest=JSON.parse(await readFile(resolve(base,'manifest.json'),'utf8')) as any;

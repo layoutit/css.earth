@@ -6,13 +6,12 @@ import { resolve } from 'node:path';
 import { parseGeometry } from './projection.mts';
 import { verifiedProduct, localOutput } from './verified-product.mts';
 import { parseCli } from './cli-arguments.mts';
-import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { writeProductRecord, WORKSPACE, fileSize } from '@cssearth/telescope/node';
 import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { inspectMeasurementSphere } from './sphere/sphere-lane.mts';
 import { bodyMapFits } from '@cssearth/bake/objects/layers/observation';
 import { formatBodyMapProduct, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { sha256File } from '@cssearth/core/node';
 import sharp from 'sharp';
 const test = sourceTest();
 const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};
@@ -23,9 +22,9 @@ const fits=(value=1)=>bodyMapFits({width:4,height:2},{},[{name:'VALUE',units:'K'
 async function measurementFixture(root:string){
   const native=resolve(root,'native.fits'),producer=resolve(root,'native.product.json');await writeFile(native,fits());
   await writeProductRecord(producer,{telescope:'Fixture',stage:'qualified-native',inputs:[],parameters:{},software:[]},[{path:'native.fits',file:native}]);
-  const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'native.fits',record:'native.product.json',receipt:'native.product.json',facts:{target:'mercury',verified:true},context:{kind:'scientific-request',request:sourceRequest,assessment:sourceAssessment},files:[{path:'native.fits',...await sha256File(native)},{path:'native.product.json',...await sha256File(producer)}]}));
+  const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'native.fits',record:'native.product.json',receipt:'native.product.json',facts:{target:'mercury',verified:true},context:{kind:'scientific-request',request:sourceRequest,assessment:sourceAssessment},files:[{path:'native.fits',...await fileSize(native)},{path:'native.product.json',...await fileSize(producer)}]}));
   const image=resolve(root,'image.fits'),record=resolve(root,'output.product.json');await writeFile(image,fits(2));
-  await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-output',inputs:[{role:'delivery',identity:result,...await sha256File(result)}],parameters:{selection:{kind:'image',hdu:1},definition:'Native image',metadata:{structure:'VALUE'},measurement:{unit:'K'},sourceRequest,sourceSatisfaction:sourceAssessment},software:[]},[{path:'image.fits',file:image}]);
+  await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-output',inputs:[{role:'delivery',identity:result,...await fileSize(result)}],parameters:{selection:{kind:'image',hdu:1},definition:'Native image',metadata:{structure:'VALUE'},measurement:{unit:'K'},sourceRequest,sourceSatisfaction:sourceAssessment},software:[]},[{path:'image.fits',file:image}]);
   return {record,result,image};
 }
 async function mapFixture(root:string,target='mercury'){

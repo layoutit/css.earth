@@ -11,7 +11,6 @@ alongside Astropy because this example belongs to the repository's pinned
 from __future__ import annotations
 
 import argparse
-import hashlib
 import importlib.metadata
 import re
 import sys
@@ -28,8 +27,6 @@ RECORD = "10658339"
 DOI = "10.5281/zenodo.10658339"
 URL = "https://zenodo.org/records/10658339/files/mean_and_std_xyz.fits?download=1"
 PARENT_BYTES = 15_662_543_040
-PARENT_MD5 = "13ddd81b5e35e01582b74e0ec8db0fe5"
-OUTPUT_SHA256 = "c4338d130262e349b41951edbdf18b5fcb064ae9f6d0b1ba0d688c20627abd33"
 OUTPUT_BYTES = 7_087_680
 CROP_START = (400, 450, 500)  # FITS X, Y, Z; end-exclusive below.
 CROP_STOP = (496, 546, 596)
@@ -257,7 +254,7 @@ def fetch_cube(fetcher: Fetcher, url: str, data_offset: int, progress: Progress 
     return np.stack(planes).copy()
 
 
-def restore(output: Path, *, url: str = URL, fetcher: Fetcher = http_fetch, expected_sha256: str | None = OUTPUT_SHA256, progress: Progress | None = None) -> tuple[int, str]:
+def restore(output: Path, *, url: str = URL, fetcher: Fetcher = http_fetch, progress: Progress | None = None) -> int:
     primary, primary_bytes = read_header(fetcher, url, 0)
     mean_offset = primary_bytes
     mean, mean_header_bytes = read_header(fetcher, url, mean_offset)
@@ -280,13 +277,10 @@ def restore(output: Path, *, url: str = URL, fetcher: Fetcher = http_fetch, expe
         + audited_extension_header("MEAN") + encode_image(mean_crop)
         + audited_extension_header("STD.") + encode_image(std_crop)
     )
-    payload = output.read_bytes()
-    digest = hashlib.sha256(payload).hexdigest()
-    if len(payload) != OUTPUT_BYTES:
-        raise RestoreError(f"Output has {len(payload)} bytes; expected {OUTPUT_BYTES}.")
-    if expected_sha256 is not None and digest != expected_sha256:
-        raise RestoreError(f"Output SHA-256 {digest} differs from pinned {expected_sha256}.")
-    return len(payload), digest
+    written = output.stat().st_size
+    if written != OUTPUT_BYTES:
+        raise RestoreError(f"Output {output} has {written} bytes; expected {OUTPUT_BYTES}.")
+    return written
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -303,8 +297,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         if transferred >= next_report:
             print(f"range restoration transferred {transferred / 1_000_000:.1f} MB", file=sys.stderr)
             next_report += 10 * 1024 * 1024
-    bytes_written, digest = restore(args.out, url=args.url, progress=report)
-    print(f"restored {args.out}: {bytes_written} bytes sha256 {digest}")
+    bytes_written = restore(args.out, url=args.url, progress=report)
+    print(f"restored {args.out}: {bytes_written} bytes")
     return 0
 
 
