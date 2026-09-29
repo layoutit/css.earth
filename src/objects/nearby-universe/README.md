@@ -13,6 +13,10 @@ drawn: nothing here is invented.
 | [Cosmicflows-4, Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) | Table 2: PGC number, J2000 position and the distance modulus from all methods, for 27,277 of its 55,877 galaxies, those between 3 and 200 Mpc. |
 | [HyperLEDA, Makarov et al. (2014)](https://doi.org/10.1051/0004-6361/201423496) | The numerical morphological type T of 25,877 of those galaxies and the corrected total B magnitude (btc) of 26,310, joined by PGC number. |
 | [Kinney et al. (1996)](https://doi.org/10.1086/177583) | The elliptical, S0, Sa, Sb and Sc template spectra from the STScI reference atlases. |
+| [DESI Data Release 1 (2025)](https://arxiv.org/abs/2503.14745), clustering catalogues of [Ross et al. (2025)](https://arxiv.org/abs/2405.16593) | BGS BRIGHT-21.5 (300,043 galaxies, redshift 0.1 to 0.4, volume-limited to absolute r magnitude -21.5) with dereddened g, r and z fluxes; QSO (1,223,391 quasars, redshift 0.8 to 3.5). |
+| [Francis et al. (1991)](https://doi.org/10.1086/170066) | The Large Bright Quasar Survey composite spectrum, from the STScI reference atlases. |
+| [Planck 2018 VI](https://arxiv.org/abs/1807.06209) | The cosmology that turns a redshift into a distance (Astropy's Planck18) and the redshift of last scattering, z* = 1089.80. |
+| [Planck 2018 IV](https://arxiv.org/abs/1807.06208) | The SMICA map of the cosmic microwave background (PR3, HEALPix Nside 2048), and the collaboration's style-guide colour table. |
 
 The [galaxy recipe](source/galaxies/points.json) records both queries and the
 join. The tracked table ([cf4-hyperleda.csv.gz](source/galaxies/cf4-hyperleda.csv.gz),
@@ -46,6 +50,34 @@ records what was used, replaced and left out.
    narrows past the level's radius, so a level's edge is never on screen and a
    dot you have seen stays while you zoom in.
 
+## Beyond the Cosmicflows-4 field
+
+Past 200 Mpc the view is DESI's first data release, drawn as the same dots, in
+two shells on DESI's footprint (about a third of the sky, north and south of the
+Milky Way's plane), and at the edge the cosmic microwave background. The
+overview reads **Observable Universe** from 1 Gpc out, and the camera reaches
+45 Gpc, three times the microwave background's distance.
+
+- **Bright galaxies** ([recipe](source/desi-bright-galaxies/points.json)): one
+  in 10 of BGS BRIGHT-21.5 (30,005 galaxies, 670 to 1,575 Mpc for the 5th to
+  95th percentile), each at its comoving distance in the Planck 2018 cosmology.
+  Each galaxy's colour is its g, r and z fluxes drawn as the Legacy Surveys
+  viewer draws them (legacypipe `sdss_rgb`: z red times 2.2, r green times 3.4,
+  g blue times 6.0), the brightest channel full: the colour its light arrives
+  with, so galaxies at redshift 0.3 look orange. Each tone is its r magnitude
+  at its luminosity distance, without k-correction: full at -23.4, 40% at
+  -22.5. The sample is volume-limited, so it is drawn as a plain random share
+  with no density cap, keeping the web's real contrast; they are drawn whole
+  within 1,600 Mpc of the Milky Way.
+- **Quasars** ([recipe](source/desi-quasars/points.json)): one in 150 of the
+  QSO catalogue (8,157 quasars, 3.3 to 6.4 Gpc), each in the colour of the
+  Francis et al. composite stretched to its redshift (in steps of 0.1): the
+  colour its light arrives with. At redshift 0.8 and beyond the visible range
+  is 211 to 433 nm in the quasar's frame, inside the composite's range. They are
+  drawn whole within 6,600 Mpc.
+- **The cosmic microwave background** ([recipe](source/cmb/sphere.json)): see
+  below.
+
 ## Tests and evidence
 
 A [browser capture](evidence/2026-09-29/capture.json) of this version shows
@@ -59,6 +91,12 @@ stacked bank only adds dots as the view narrows
 verify output and inventory pins.
 
 ## Known problems
+
+- DESI covers only its footprint, so the far view is two cones, not a sphere.
+  Projected through 1.5 Gpc of depth, the cosmic web's filaments are faint;
+  surveys show them in thin slices.
+- The bright galaxies' tones have no k-correction, and their colours are
+  observed-frame, redder than the galaxies' own light.
 
 - The field is not a complete survey. CF4 is flux-limited, so the even density
   is set by what it holds at its edge, and real concentrations above it are

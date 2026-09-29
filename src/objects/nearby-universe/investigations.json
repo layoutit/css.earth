@@ -70,6 +70,46 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/958"
       ]
+    },
+    {
+      "id": "desi-dr1-bgs",
+      "subject": "DESI DR1 BGS BRIGHT-21.5 clustering catalogues",
+      "status": "included",
+      "finding": "Volume-limited to absolute r magnitude -21.5 from redshift 0.1 to 0.4 (300,043 galaxies), so its density does not fall with distance: drawn as a plain random share (one in 10), no density cap. The flux-limited BGS BRIGHT catalogue (340 MB) would pile up near us.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.14745",
+        "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/"
+      ]
+    },
+    {
+      "id": "desi-dr1-qso",
+      "subject": "DESI DR1 QSO clustering catalogues",
+      "status": "included",
+      "finding": "1,223,391 quasars from redshift 0.8 to 3.5; one in 150 drawn. No photometry in the clustering files, so the colour is the Francis et al. (1991) composite at each redshift and there is no tone.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.14745",
+        "https://doi.org/10.1086/170066"
+      ]
+    },
+    {
+      "id": "planck-smica-pr3",
+      "subject": "Planck 2018 SMICA CMB map",
+      "status": "included",
+      "finding": "The standard component-separated CMB temperature map (PR3, Nside 2048), sampled onto a 384-patch sphere at the comoving distance of z* = 1089.80. The 2015 SMICA map at Nside 1024 (176 MB) was the smaller option; the 2018 release is the final one.",
+      "evidence": [
+        "https://arxiv.org/abs/1807.06208",
+        "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/"
+      ]
+    },
+    {
+      "id": "cosmic-web-slice",
+      "subject": "A thin slice to show the cosmic web's filaments",
+      "status": "deferred",
+      "finding": "Projected through 1.5 Gpc of depth the DESI galaxies look evenly speckled; surveys show filaments in slices a few degrees thick. A slice would be a new view control, not a change to the data.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.14745"
+      ],
+      "revisitWhen": "The observable-universe view gets a slice or depth control."
     }
   ]
 }
