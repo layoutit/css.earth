@@ -299,6 +299,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const definition = attached.definition as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory,
       allowPreparationArtifacts: true,
       values: [definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, definition);
@@ -310,6 +311,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory,
       values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ ...prepared });
@@ -318,7 +320,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     genericLaneOnly();
     const { prepareShapeModel } = await import('@cssearth/bake/objects/layers/shape-model');
     const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets, solarGeometry: await solarGeometry() });
-    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: outputDirectory, allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: outputDirectory, preparedDirectory: outputDirectory, allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
@@ -336,6 +338,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const prepared = { ...terrestrialPrepared, definition: terrestrialDefinition as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory,
       allowPreparationArtifacts: true,
       values: [prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
