@@ -14,7 +14,7 @@ It is one of 3 planets known around HD 73344. Its orbit and size follow Sulis et
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-73344b.json).
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-73344b.json).
 
 
 ## Known problems

@@ -14,7 +14,7 @@ It is the only planet known around GJ 238. Its orbit and size follow Tey et al. 
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-238b.json).
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-238b.json).
 
 
 ## Known problems

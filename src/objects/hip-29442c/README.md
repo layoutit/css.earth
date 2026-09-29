@@ -14,7 +14,7 @@ It is one of 3 planets known around TOI-469. Its orbit and size follow Egger et 
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hip-29442c.json).
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hip-29442c.json).
 
 
 ## Known problems

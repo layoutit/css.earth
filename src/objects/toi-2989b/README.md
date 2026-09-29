@@ -14,7 +14,7 @@ It is the only planet known around TOI-2989. Its orbit and size follow Frensch e
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2989b.json).
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2989b.json).
 
 
 ## Known problems
