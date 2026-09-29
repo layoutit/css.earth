@@ -3,39 +3,39 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/091a46d432385f2a5417dce2f1183576119761640482815eb6bb838c24152066.webp",
-      "bytes": 5446,
-      "sha256": "091a46d432385f2a5417dce2f1183576119761640482815eb6bb838c24152066"
+      "filename": "datasets/chandra-xray.webp",
+      "bytes": 4464,
+      "sha256": "f1003f7dda2f71284e34864cac22d813741436c701f9acbc48d70e4a9c87e44d"
     },
     {
       "location": "public",
-      "filename": "datasets/521878436753b876ccf57600a37e6e49f2fff3140950bfff58173517295560c5.webp",
-      "bytes": 24098,
-      "sha256": "521878436753b876ccf57600a37e6e49f2fff3140950bfff58173517295560c5"
-    },
-    {
-      "location": "public",
-      "filename": "datasets/53507d986cbe3b15755973f1fbd014985cb6bfd9162d970caf433c47c12d5972.webp",
+      "filename": "datasets/hubble-optical.webp",
       "bytes": 33070,
       "sha256": "53507d986cbe3b15755973f1fbd014985cb6bfd9162d970caf433c47c12d5972"
     },
     {
       "location": "public",
-      "filename": "datasets/997084d4eefa56cefd3deb16d31cc177506c9146886e6a2c3778a9b36d446814.webp",
+      "filename": "datasets/spitzer-infrared.webp",
       "bytes": 3424,
       "sha256": "997084d4eefa56cefd3deb16d31cc177506c9146886e6a2c3778a9b36d446814"
     },
     {
       "location": "public",
-      "filename": "datasets/c4298c5c2399c167e0c88e3ec3da07aadaf688d7c4a95fc8c2f983a6606ae8f1.webp",
+      "filename": "datasets/vla-radio.webp",
+      "bytes": 5446,
+      "sha256": "091a46d432385f2a5417dce2f1183576119761640482815eb6bb838c24152066"
+    },
+    {
+      "location": "public",
+      "filename": "datasets/webb-components.webp",
       "bytes": 23986,
       "sha256": "c4298c5c2399c167e0c88e3ec3da07aadaf688d7c4a95fc8c2f983a6606ae8f1"
     },
     {
       "location": "public",
-      "filename": "datasets/f1003f7dda2f71284e34864cac22d813741436c701f9acbc48d70e4a9c87e44d.webp",
-      "bytes": 4464,
-      "sha256": "f1003f7dda2f71284e34864cac22d813741436c701f9acbc48d70e4a9c87e44d"
+      "filename": "datasets/webb-infrared.webp",
+      "bytes": 24098,
+      "sha256": "521878436753b876ccf57600a37e6e49f2fff3140950bfff58173517295560c5"
     },
     {
       "location": "prepared",
@@ -400,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 10855,
-      "sha256": "c2ddce8896a652180a09d875e989b7982291ab329c31d73d95055a92a64bb8e2"
+      "bytes": 10245,
+      "sha256": "5d7371927ab56152287bd749d3f40aacc9059f73fe9a2c1ad40aa8dadc9888d3"
     },
     {
       "location": "prepared",

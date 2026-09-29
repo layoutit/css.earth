@@ -3,19 +3,19 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/63442a6918bc58f40b1f340285a6a8098eee1e90ae52cab86e8ed4310688f1fd.webp",
+      "filename": "datasets/eso-optical.webp",
       "bytes": 21732,
       "sha256": "63442a6918bc58f40b1f340285a6a8098eee1e90ae52cab86e8ed4310688f1fd"
     },
     {
       "location": "public",
-      "filename": "datasets/ee595f9a4dd1b62008d24cd72859c567f5e9d690db69513e5831754903d78599.webp",
+      "filename": "datasets/eso-vista.webp",
       "bytes": 51638,
       "sha256": "ee595f9a4dd1b62008d24cd72859c567f5e9d690db69513e5831754903d78599"
     },
     {
       "location": "public",
-      "filename": "datasets/f305e0459548e9aa955e3945aea26f6594f5b89ebe9f7acb1d49c1982f1fea59.webp",
+      "filename": "datasets/spitzer-mid-infrared.webp",
       "bytes": 36602,
       "sha256": "f305e0459548e9aa955e3945aea26f6594f5b89ebe9f7acb1d49c1982f1fea59"
     },
@@ -382,8 +382,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 5564,
-      "sha256": "2965873106a8854ded19e95b07c67e7ca6ab9feae678c5a0506740bcb8a5df30"
+      "bytes": 5260,
+      "sha256": "aab50c7b8ef7a09ec9c298b6ca2fb63543c3027038c0d4c03f4c739d1e4923dc"
     },
     {
       "location": "prepared",

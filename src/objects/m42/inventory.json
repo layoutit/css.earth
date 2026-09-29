@@ -3,15 +3,15 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/775d2bc1decb89e944da6992f210dd7ab758222de394d2f9a07f2ce088338bfe.webp",
-      "bytes": 16000,
-      "sha256": "775d2bc1decb89e944da6992f210dd7ab758222de394d2f9a07f2ce088338bfe"
+      "filename": "datasets/eso-optical.webp",
+      "bytes": 10124,
+      "sha256": "c38dfe26cf81b31463ebd80e39b58952ac3d759882fef6b06bcc77b8868d2626"
     },
     {
       "location": "public",
-      "filename": "datasets/c38dfe26cf81b31463ebd80e39b58952ac3d759882fef6b06bcc77b8868d2626.webp",
-      "bytes": 10124,
-      "sha256": "c38dfe26cf81b31463ebd80e39b58952ac3d759882fef6b06bcc77b8868d2626"
+      "filename": "datasets/eso-vista.webp",
+      "bytes": 16000,
+      "sha256": "775d2bc1decb89e944da6992f210dd7ab758222de394d2f9a07f2ce088338bfe"
     },
     {
       "location": "prepared",
@@ -376,8 +376,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 3447,
-      "sha256": "126eab9142a7172deb4a9769c2056b36c31ad49e5639a0874030c6c1879b147d"
+      "bytes": 3231,
+      "sha256": "76e13fffaf43c905a74cb77c1d0c60d37cdc9c55507a77f2a27318eb1c4fa270"
     }
   ]
 }

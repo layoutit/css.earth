@@ -3,7 +3,7 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/72f7576c0a11938573b0e6d2d81a9f607abc3a7554eb0c7491c9cee37bc1db56.webp",
+      "filename": "datasets/hst-optical.webp",
       "bytes": 14756,
       "sha256": "72f7576c0a11938573b0e6d2d81a9f607abc3a7554eb0c7491c9cee37bc1db56"
     },
@@ -196,8 +196,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 1945,
-      "sha256": "c6722b60297e18eab24a0a4b33a116bfe1101f6c3c9c5aec37ba711c2fa74dd9"
+      "bytes": 1839,
+      "sha256": "91c734ff57baaf38d72c73c060d5f08eb248271afd0362d044e734b4365f298b"
     }
   ]
 }

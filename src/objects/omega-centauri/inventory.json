@@ -3,13 +3,13 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/02ce9f288e4bb7b656153833c64fc41dbdfce9502c8d6780721ee680903aef6b.webp",
+      "filename": "datasets/eso0844a.webp",
       "bytes": 74642,
       "sha256": "02ce9f288e4bb7b656153833c64fc41dbdfce9502c8d6780721ee680903aef6b"
     },
     {
       "location": "public",
-      "filename": "datasets/6bcfba73ffa33a2f54c81bf3c0a291373a3c50dd13796e52d1eb03647031350c.webp",
+      "filename": "datasets/eso1119b.webp",
       "bytes": 54638,
       "sha256": "6bcfba73ffa33a2f54c81bf3c0a291373a3c50dd13796e52d1eb03647031350c"
     },
@@ -376,8 +376,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 4200,
-      "sha256": "819db4dff6f8f4f561be8fb73bb9f9abbe0265eed005f07ffa860a2624fd6aff"
+      "bytes": 3976,
+      "sha256": "b3490471e5a12fdbc8f1d01e25968d8205be9fa020a8316885b707ce35cd32aa"
     }
   ]
 }

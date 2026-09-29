@@ -3,19 +3,19 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/1092ca8d84b849fa87ec2013e574a943665f1154feef4326beb0c984b47e042b.webp",
+      "filename": "datasets/colour.webp",
       "bytes": 5534,
       "sha256": "1092ca8d84b849fa87ec2013e574a943665f1154feef4326beb0c984b47e042b"
     },
     {
       "location": "public",
-      "filename": "datasets/7215dab7d7bb3435ffab69b08c938e82220a05ae1f588b900bdf239aee3afc8d.webp",
+      "filename": "datasets/contrast.webp",
       "bytes": 4522,
       "sha256": "7215dab7d7bb3435ffab69b08c938e82220a05ae1f588b900bdf239aee3afc8d"
     },
     {
       "location": "public",
-      "filename": "datasets/fe5c9bdd24b74de35ba12fb1fc286d31e156f75c5e0f9d3b11bc9f07765a843d.webp",
+      "filename": "datasets/visible.webp",
       "bytes": 1562,
       "sha256": "fe5c9bdd24b74de35ba12fb1fc286d31e156f75c5e0f9d3b11bc9f07765a843d"
     },
@@ -382,8 +382,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 9869,
-      "sha256": "78398f2c9b0985ec20f4a81cd351c88ec1685693955ff05be7423895c728edde"
+      "bytes": 9527,
+      "sha256": "cf529f0f030e9a207743dd3f2f5f2e4e90ec36d3deb2e80eb56c458e0a7936a7"
     },
     {
       "location": "prepared",
