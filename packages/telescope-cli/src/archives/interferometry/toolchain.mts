@@ -1,26 +1,24 @@
 #!/usr/bin/env node
-import { sha256File } from '@cssearth/core/node';
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/interferometry/toolchain.mts install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...]
  *   node packages/telescope-cli/src/archives/interferometry/toolchain.mts verify <id>
  *
- * Downloads are verified by size and sha256; a file already present in a --cache directory with the same hash is linked
- * instead of downloaded again. Git sources are checked out at their pinned commit, the Julia environment is instantiated from
+ * Downloads are verified by size; a file already present in a --cache directory at that size is linked instead of downloaded
+ * again. Git sources are checked out at their pinned commit, the Julia environment is instantiated from
  * the checked-in Project.toml and Manifest.toml, the PIONIER pipeline is built from ESO's Yorick source package and kit, and on
  * macOS the MATISSE pipeline is rebuilt with LLVM's OpenMP runtime.
- * An installed toolchain records the sha256 of its descriptor; `verify` and `toolchainPath` refuse one built from another.
+ * An installed toolchain keeps the text of its descriptor entry; `verify` and `toolchainPath` refuse one built from another.
  * Verified archives are deleted after the build: toolchains are large and the data they reduce are larger. */
-import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { access, copyFile, link, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, link, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 import { currentArchivePath } from '../programs.mts';
 
 const DESCRIPTOR = resolve(import.meta.dirname, 'toolchains.json');
@@ -29,15 +27,16 @@ export const TOOLCHAIN_ROOT = resolve(WORKSPACE, 'output/toolchains');
 const exists = (path: string) => access(path).then(() => true, () => false);
 
 
-export async function toolchainDescriptor(id: string) {
+/** One toolchains.json entry, as the pins an installed toolchain keeps: the entry's own text, and no lock. */
+export async function toolchainDescriptor(id: string): Promise<ToolchainPins> {
   const text = await readFile(DESCRIPTOR, 'utf8');
   const all = requireRecord(requireRecord(JSON.parse(text) as unknown, 'toolchains.json').toolchains, 'toolchains');
   const entry = requireRecord(all[id], `toolchain ${id}`);
-  return { entry, digest: createHash('sha256').update(JSON.stringify(entry)).digest('hex') };
+  return { id, file: `packages/telescope-cli/src/archives/interferometry/toolchains.json (${id})`, descriptor: JSON.stringify(entry), lock: null, entry };
 }
 
 /** The Julia environment a toolchain entry names, found in this checkout: the entry keeps the repository path it was written with,
- * because its text is the digest an installed toolchain records, and `currentArchivePath` finds that path where it is now. */
+ * because an installed toolchain keeps the entry's text, and `currentArchivePath` finds that path where it is now. */
 export function toolchainEnvironment(entry: Readonly<Record<string, unknown>>) {
   return resolve(WORKSPACE, currentArchivePath(requireString(entry.environment, 'environment')));
 }
@@ -49,8 +48,8 @@ function run(command: string, args: readonly string[], options: { cwd: string; e
 }
 
 async function fetchDownload(record: Record<string, unknown>, directory: string, caches: readonly string[]) {
-  const name = requireString(record.path), sha256 = requireString(record.sha256), bytes = requireFiniteNumber(record.bytes), target = resolve(directory, name);
-  const good = async (path: string) => await exists(path) && (await sha256File(path)).sha256 === sha256;
+  const name = requireString(record.path, 'download path'), bytes = requireFiniteNumber(record.bytes, `${name} bytes`), target = resolve(directory, name);
+  const good = async (path: string) => (await stat(path).catch(() => null))?.size === bytes;
   if (await good(target)) return target;
   for (const cache of caches) {
     const candidate = resolve(cache, name);
@@ -59,12 +58,12 @@ async function fetchDownload(record: Record<string, unknown>, directory: string,
   const response = await fetch(requireString(record.url));
   if (!response.ok || !response.body) throw new Error(`${record.url} answered ${response.status}.`);
   await pipeline(Readable.fromWeb(response.body as never), createWriteStream(target));
-  if (!await good(target)) throw new Error(`${name} does not match its pinned sha256 (${bytes} bytes expected).`);
+  if (!await good(target)) throw new Error(`${name} (${String(record.url)}) is not its pinned ${bytes} bytes.`);
   return target;
 }
 
 export async function installToolchain(id: string, caches: readonly string[] = []) {
-  const { entry, digest } = await toolchainDescriptor(id), root = resolve(TOOLCHAIN_ROOT, id), downloads = resolve(root, 'downloads');
+  const pins = await toolchainDescriptor(id), { entry } = pins, root = resolve(TOOLCHAIN_ROOT, id), downloads = resolve(root, 'downloads');
   if (await toolchainPath(id).then(() => true, () => false)) return root;
   await mkdir(downloads, { recursive: true });
   const files = await Promise.all(requireArray(entry.downloads ?? []).map(record => fetchDownload(requireRecord(record), downloads, caches)));
@@ -120,7 +119,7 @@ export async function installToolchain(id: string, caches: readonly string[] = [
   } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit" or "python-venv".`);
   // The archives were verified and unpacked; the disk is kept for data. A reinstall fetches or links them again.
   await rm(downloads, { recursive: true, force: true });
-  await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id, descriptorSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(root, pins);
   return root;
 }
 
@@ -168,10 +167,8 @@ async function buildYorick(entry: Record<string, unknown>, files: readonly strin
 
 /** The installed toolchain's root, refusing a missing install or one built from a different descriptor. */
 export async function toolchainPath(id: string) {
-  const { digest } = await toolchainDescriptor(id), root = resolve(TOOLCHAIN_ROOT, id);
-  const marker = await readFile(resolve(root, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error(`Toolchain ${id} is not installed: node packages/telescope-cli/src/archives/interferometry/toolchain.mts install ${id}`);
-  if (marker.descriptorSha256 !== digest) throw new Error(`Toolchain ${id} was built from another toolchains.json entry; reinstall it.`);
+  const pins = await toolchainDescriptor(id), root = resolve(TOOLCHAIN_ROOT, id);
+  assertInstalledMarker(root, pins, id, `node packages/telescope-cli/src/archives/interferometry/toolchain.mts install ${id}`);
   return root;
 }
 

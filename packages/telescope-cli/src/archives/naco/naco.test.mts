@@ -13,7 +13,7 @@ import { readProductRecord } from '@cssearth/telescope/node';
 import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles, type NacoFrame, type NacoProgram } from './archive.mts';
 import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRunner } from './reduce.mts';
 import { addComparisonEvidence, overlapOf, repositoryPath } from './compare.mts';
-import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
+import { nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
 import { bucketOf, nacoLedgerGuide, observationsOf, NACO_LEDGER, NACO_TARGET_NAMES } from './archive-ledger.mts';
 import { matchNumberedTarget, parseNumberedTarget } from '../targets.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
@@ -22,7 +22,7 @@ import { median, supportOf, traceDirection, widthOf } from './spectrum.mts';
 /** Archive responses kept exactly as the services returned them on 19 September 2026. */
 const FIXTURES = resolve(import.meta.dirname, 'fixtures');
 
-test('the toolchain pins one ESO kit with both digests ESO can be held to', async () => {
+test('the toolchain pins one ESO kit by URL and size', async () => {
   const { entry } = await nacoToolchainDescriptor();
   assert.equal(entry.schema, 'cssearth-naco-toolchain@1');
   assert.equal(entry.instrument, 'NAOS+CONICA');
@@ -30,15 +30,8 @@ test('the toolchain pins one ESO kit with both digests ESO can be held to', asyn
   assert.equal(downloads.length, 1);
   const kit = requireRecord(downloads[0], 'kit');
   assert.match(requireString(kit.url), /^https:\/\/ftp\.eso\.org\/pub\/dfs\/pipelines\/instruments\/naco\//u);
-  // ESO states a cksum beside every kit, and it names the file: the pin repeats it verbatim so a swapped file is caught.
-  assert.equal(requireString(kit.cksum).split(' ').at(-1), requireString(kit.path));
-  assert.equal(Number(requireString(kit.cksum).split(' ')[1]), kit.bytes);
-});
-
-test('cksum reproduces the BSD CRC ESO publishes', () => {
-  // The values POSIX states for cksum: the empty input, and a short known string.
-  assert.deepEqual(cksum(new Uint8Array()), { crc: 4294967295, bytes: 0 });
-  assert.deepEqual(cksum(new TextEncoder().encode('a')), { crc: 1220704766, bytes: 1 });
+  assert.equal(requireString(kit.url).split('/').at(-1), requireString(kit.path));
+  assert.ok(Number.isSafeInteger(kit.bytes) && Number(kit.bytes) > 0);
 });
 
 test('the recipes the descriptor names are the ones this route runs', async () => {
@@ -224,9 +217,9 @@ const fitsBytes = (cards: readonly string[] = []) => {
 };
 
 /** One imaging night on disk and the program that pins it: two object templates of four frames, three sky frames, two darks
- * and two twilight flats, each a header-only FITS, each pinned by the digest of the file written here. The byte count the
+ * and two twilight flats, each a header-only FITS, each pinned at the size of the file written here. The byte count the
  * program states is the data portal's, of the compressed stream it serves, and deliberately not the file's own: that is
- * what a program records, and it is the digest that pins the file a recipe reads.
+ * what a program records, and the run pins the file a recipe reads at its own size.
  *
  * The recipes are a runner of the test's own, which writes a product per category and records what it was asked for. No ESO
  * pipeline is installed or run: what is under test is what the reduction checks before it asks for one, and what it records
@@ -279,10 +272,9 @@ test('a reduction writes the record of what made its product, with the pins the 
   assert.equal(record.stage, 'imaging/naco_img_jitter');
   assert.equal(record.parameters.template, 'A');
   assert.deepEqual(record.evidence, [], 'a run establishes nothing about its own product');
-  assert.equal(record.toolchainDigest, (await nacoToolchainDescriptor()).digest);
   assert.ok(record.software.some(item => item.name === 'naco' && item.version === '4.4.13'), 'the pipeline version the product states');
 
-  // Every frame the run consumed, by its own id and the digest the program pins for it. The other template's frames went
+  // Every frame the run consumed, by its own id and the size of the file the recipes read. The other template's frames went
   // nowhere near this product and are not in the record.
   const consumed = [...templateFrames(fixture.program.science, 'A'), ...fixture.program.calibration];
   const sizes = new Map(consumed.map(frame => [frame.dpId, frame.bytes]));

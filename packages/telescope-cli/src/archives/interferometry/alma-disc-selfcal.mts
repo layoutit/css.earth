@@ -27,8 +27,7 @@ import { pathToFileURL } from 'node:url';
 import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { sha256 } from '@cssearth/core/node';
-import { fileSize, readProductRecord, runKey, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput, ProductRun } from '@cssearth/telescope';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);
@@ -552,10 +551,10 @@ export async function discSelfCalibrate(options: DiscSelfCalibrationOptions) {
    * repeats none of it. */
   const toolchain = await toolchainDescriptor('casa'), software = requireArray(toolchain.entry.requirements, 'casa requirements').map(requirement => { const [name, version] = requireString(requirement, 'requirement').split('=='); return { name: name!, version: version ?? 'unpinned' }; });
   const source = await measurementSetIdentity(options.visibilities);
-  const stages: { stage: string; product: string; record: string; reused: boolean; runKey: string }[] = [];
+  const stages: { stage: string; product: string; record: string; reused: boolean }[] = [];
   const stage = async (script: string, name: string, products: readonly string[]) => {
     const product = products[0]!, path = resolve(options.out, name), recordPath = resolve(options.out, `${product}.product.json`);
-    const run: ProductRun = { telescope: 'ALMA', stage: `disc-selfcal/${name.replace(/\.py$/u, '')}`, inputs: [source], parameters: { script: sha256(script) }, software, toolchainDigest: toolchain.digest };
+    const run: ProductRun = { telescope: 'ALMA', stage: `disc-selfcal/${name.replace(/\.py$/u, '')}`, inputs: [source], parameters: { script }, software };
     const reused = await sameRun(await readProductRecord(recordPath), run, recorded => resolve(options.out, recorded));
     await writeFile(path, script);
     if (!reused) {
@@ -566,7 +565,7 @@ export async function discSelfCalibrate(options: DiscSelfCalibrationOptions) {
       if (result.status !== 0) throw new Error(`${name} failed (status ${result.status}).`);
       await writeProductRecord(recordPath, run, products.map(made => ({ path: made, file: resolve(options.out, made) })));
     }
-    stages.push({ stage: run.stage, product, record: `${product}.product.json`, reused, runKey: runKey(run) });
+    stages.push({ stage: run.stage, product, record: `${product}.product.json`, reused });
   };
 
   const geometry = await ephemerisDistanceAu(options.visibilities, options.scratch, casa);

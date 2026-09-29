@@ -9,11 +9,11 @@ import { resolve } from 'node:path';
 import { checkReceipt, modeStates } from './archive-ledger.mts';
 
 const FRAMES = { imaging: 231_839, spectroscopy: 9438 };
-const DIGESTS = ['a'.repeat(64), 'b'.repeat(64)];
+const SIDES = [0, 1];
 const program = (id: string, mode: string) => ({ schema: 'cssearth-naco-program@1', program: id, instrument: 'NAOS+CONICA', programme: '080.C-0881(C)',
   object: 'CERES', mode, night: '2007-11-11', objectTemplates: ['2007-11-11T02:38:47', '2007-11-11T02:45:32'], skyTemplates: [] });
 const receipt = (changes: Record<string, unknown> = {}) => ({ schema: 'cssearth-naco-reproduction@1', program: 'ceres-night', product: 'COADDED_IMG', kind: 'two-templates',
-  sequences: DIGESTS.map((sha256, index) => ({ template: ['2007-11-11T02:38:47', '2007-11-11T02:45:32'][index], path: `.local/naco/${index}.fits`, sha256, bytes: 100 })), ...changes });
+  sequences: SIDES.map(index => ({ template: ['2007-11-11T02:38:47', '2007-11-11T02:45:32'][index], path: `.local/naco/${index}.fits`, bytes: 100 })), ...changes });
 
 /** A scratch programs directory holding one imaging program and one spectroscopy program, and whatever a case writes beside. */
 async function scratch(files: Readonly<Record<string, unknown>>) {
@@ -40,10 +40,10 @@ test('an accepted receipt reduces the mode of the program it names, and the othe
 
 test('a receipt that cannot be read, names another program or pins only one side reduces nothing and is reported', async () => {
   for (const [why, value] of [['unreadable', '{ "schema": "cssearth-naco-repro'], ['another schema', receipt({ schema: 'cssearth-naco-nothing@1' })],
-    ['another program', receipt({ program: 'europa-night' })], ['one side', receipt({ sequences: [{ template: '2007-11-11T02:38:47', path: 'a', sha256: DIGESTS[0], bytes: 1 }] })],
-    ['the same side twice', receipt({ sequences: DIGESTS.map(() => ({ template: '2007-11-11T02:38:47', path: 'a', sha256: DIGESTS[0], bytes: 1 })) })],
-    ['a template the program does not pin', receipt({ sequences: [{ template: '2007-11-11T09:00:00', path: 'a', sha256: DIGESTS[0], bytes: 1 },
-      { template: '2007-11-11T02:45:32', path: 'b', sha256: DIGESTS[1], bytes: 1 }] })]] as const) {
+    ['another program', receipt({ program: 'europa-night' })], ['one side', receipt({ sequences: [{ template: '2007-11-11T02:38:47', path: 'a', bytes: 1 }] })],
+    ['the same side twice', receipt({ sequences: SIDES.map(() => ({ template: '2007-11-11T02:38:47', path: 'a', bytes: 1 })) })],
+    ['a template the program does not pin', receipt({ sequences: [{ template: '2007-11-11T09:00:00', path: 'a', bytes: 1 },
+      { template: '2007-11-11T02:45:32', path: 'b', bytes: 1 }] })]] as const) {
     const directory = await scratch({ 'ceres-night.COADDED_IMG.reproduction.json': value });
     try {
       const { modes, problems } = await modeStates(FRAMES, directory);
@@ -56,7 +56,7 @@ test('a receipt that cannot be read, names another program or pins only one side
 
 test('a spectrum receipt has to name the object and the night its program pins', async () => {
   const spectrum = (changes: Record<string, unknown> = {}) => ({ schema: 'cssearth-naco-spectrum@1', program: 'europa-night', object: 'CERES', night: '2007-11-11', kind: 'two-nod-halves',
-    halves: DIGESTS.map((sha256, index) => ({ half: `${'ab'[index]}-half`, path: `.local/naco/${index}.fits`, sha256, bytes: 100 })), ...changes });
+    halves: SIDES.map(index => ({ half: `${'ab'[index]}-half`, path: `.local/naco/${index}.fits`, bytes: 100 })), ...changes });
   const accepted = await scratch({ 'europa-night.spectrum.reproduction.json': spectrum() });
   try {
     const { modes, problems } = await modeStates(FRAMES, accepted);

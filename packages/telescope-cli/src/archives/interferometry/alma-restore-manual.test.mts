@@ -142,19 +142,18 @@ test('a manual restore is identified by the delivery it replays, the script it g
     // The ASDM is identified by the tables that say what was observed, not by the tens of gigabytes of visibilities beside them.
     assert.equal(pins[0]!.bytes, Object.values(XML).join('').length);
     assert.ok(pins.every(pin => pin.bytes > 0), 'every input is recorded by size');
-    const run = manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, casa, 'f'.repeat(64));
+    const run = manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, casa);
     assert.equal(run.telescope, 'ALMA');
     assert.equal(run.stage, 'restore-manual');
     assert.equal(run.parameters.target, 'Europa');
     assert.equal(run.parameters.mask, 'calibrated_final_cont.mask.tgz');
     assert.deepEqual(run.software, casa);
-    assert.equal(run.toolchainDigest, 'f'.repeat(64));
     const base = runKey(run);
     // Cleaning without the mask the reducer drew, another CASA, and any changed delivery file are each another run.
-    assert.notEqual(runKey(manualRestoreRun(pins, { target: 'Europa', script: maskless(), mask: null }, casa, 'f'.repeat(64))), base);
-    assert.notEqual(runKey(manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, casa, 'a'.repeat(64))), base);
+    assert.notEqual(runKey(manualRestoreRun(pins, { target: 'Europa', script: maskless(), mask: null }, casa)), base);
+    assert.notEqual(runKey(manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, [{ name: 'casatasks', version: '0.0.0' }])), base);
     await writeFile(files.imagingScript, 'a delivery that imaged something else');
-    assert.notEqual(runKey(manualRestoreRun(await manualDeliveryPins(files), { target: 'Europa', script: script(), mask: files.mask }, casa, 'f'.repeat(64))), base);
+    assert.notEqual(runKey(manualRestoreRun(await manualDeliveryPins(files), { target: 'Europa', script: script(), mask: files.mask }, casa)), base);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
@@ -170,7 +169,7 @@ test('the archive comparison is written beside the restored image and added to i
     // The restore writes the record; the comparison only adds what it established, so an image no run recorded is refused.
     await assert.rejects(recordArchiveComparison(image, archive, comparison), /no product record at/u);
     const run = manualRestoreRun([{ role: 'raw ASDM (ASDM, ExecBlock, Main and Antenna tables)', identity: 'uid___A002_Xad2439_Xee6.asdm.sdm', bytes: 36 }],
-      { target: 'Europa', script: script(), mask: null }, casa, 'f'.repeat(64));
+      { target: 'Europa', script: script(), mask: null }, casa);
     await writeProductRecord(productRecordPath(image), run, [{ path: basename(image), file: image, units: 'Jy/beam' }]);
     const receipt = await recordArchiveComparison(image, archive, comparison);
     assert.equal(basename(receipt), 'Europa.restored.archive-comparison.json');

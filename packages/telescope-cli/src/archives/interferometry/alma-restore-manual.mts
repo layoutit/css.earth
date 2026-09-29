@@ -21,7 +21,7 @@
  *     drew, which the delivery ships in `product/`. Nothing here invents a mask or a stopping threshold.
  *
  * The run writes a `cssearth-telescope-product@1` record beside the restored image (`<image>.fits.product.json`): the delivery
- * files it replayed at their digests, the generated CASA script, the pinned CASA, and the image with the units and conventions
+ * files it replayed at their sizes, the generated CASA script, the pinned CASA, and the image with the units and conventions
  * its own header states. Its evidence list starts empty; with `--archive`, the comparison with the archive's own image of the
  * same execution is written beside the image and added to that record as `archive-agreement` evidence. An image whose record
  * says this same restore made it is not restored again.
@@ -40,7 +40,6 @@ import {
 } from './alma-manual-calibration.mts';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
 import { addProductEvidence, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 
@@ -320,7 +319,7 @@ const run = (command: string, args: readonly string[], cwd: string) => {
   if (result.status !== 0) throw new Error(`${command} ${args[0]} failed (status ${result.status}).`);
 };
 
-/** The delivery files one restore replays, at their bytes and digests.
+/** The delivery files one restore replays, at their sizes.
  *
  * An ASDM holds tens of gigabytes of binary visibilities whose bytes say nothing another execution's do not, and reading them
  * all would cost more than the import does; the XML tables that state which execution, which antennas and which scans these
@@ -345,16 +344,16 @@ export async function manualDeliveryPins(files: { readonly asdm: string; readonl
 /** What identifies one manual restore: the delivery files it replays, the CASA script generated from them (which carries every
  * parameter, path and substitution this route makes), and the pinned CASA that runs it. */
 export const manualRestoreRun = (inputs: readonly ProductInput[], parameters: { readonly target: string; readonly script: string; readonly mask: string | null },
-  software: readonly ProductSoftware[], toolchainDigest: string): ProductRun => ({
+  software: readonly ProductSoftware[]): ProductRun => ({
   telescope: 'ALMA', stage: 'restore-manual', inputs,
-  parameters: { target: parameters.target, restoreScript: sha256(parameters.script), mask: parameters.mask === null ? 'none' : basename(parameters.mask) },
-  software, toolchainDigest,
+  parameters: { target: parameters.target, restoreScript: parameters.script, mask: parameters.mask === null ? 'none' : basename(parameters.mask) },
+  software,
 });
 
 /** The pinned CASA a replay runs on, as the record states it. */
-export async function casaSoftware(): Promise<{ toolchainDigest: string; software: readonly ProductSoftware[] }> {
+export async function casaSoftware(): Promise<{ software: readonly ProductSoftware[] }> {
   const toolchain = await toolchainDescriptor('casa');
-  return { toolchainDigest: toolchain.digest, software: requireArray(toolchain.entry.requirements, 'casa requirements')
+  return { software: requireArray(toolchain.entry.requirements, 'casa requirements')
     .map(requirement => { const [name, version] = requireString(requirement, 'requirement').split('=='); return { name: name!, version: version ?? 'unpinned' }; }) };
 }
 
@@ -434,7 +433,7 @@ export async function restoreManualExecution(directory: string, options: { reado
 
   const casaPins = await casaSoftware();
   const productRun = manualRestoreRun(await manualDeliveryPins({ asdm, calibrationScript: script, imagingScript, preparationScript, log: mapLog,
-    tables: bundle, mask: maskArchive }), { target: options.target, script: source, mask: maskArchive }, casaPins.software, casaPins.toolchainDigest);
+    tables: bundle, mask: maskArchive }), { target: options.target, script: source, mask: maskArchive }, casaPins.software);
   // A restore is an import, five calibration stages and a clean; it runs for hours. It is skipped only when the record beside
   // the image says this same delivery, script and CASA made it and the image is still the file that run wrote.
   const recordPath = productRecordPath(image);

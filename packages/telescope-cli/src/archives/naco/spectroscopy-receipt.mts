@@ -19,10 +19,9 @@
  * says where on the sky the slit was.
  *
  * The receipt is written to packages/telescope-cli/src/archives/naco/programs/<program id>.spectrum.reproduction.json. */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { archiveHeader, type EsoHeader, WORKSPACE } from '@cssearth/telescope/node';
 import { PROGRAMS, readProgram, type NacoProgram } from './archive.mts';
 import { readReduction, type ReductionResult } from './reduce.mts';
@@ -119,7 +118,7 @@ export interface SpectrumReproduction {
   readonly kind: 'two-nod-halves';
   readonly note: string;
   readonly oracle: string;
-  readonly halves: readonly { readonly half: string; readonly path: string; readonly sha256: string; readonly bytes: number; readonly frames: number }[];
+  readonly halves: readonly { readonly half: string; readonly path: string; readonly bytes: number; readonly frames: number }[];
   /** Which detector axis the slit runs along, and the contiguous trace runs that decided it. */
   readonly slitAxis: { readonly axis: 'x' | 'y'; readonly runAlongX: number; readonly runAlongY: number };
   readonly geometry: SlitGeometry;
@@ -162,8 +161,8 @@ export async function writeSpectrumReceipt(programId: string, work: string): Pro
   const spectrum = await statistics(visit => { for (let index = 0; index < a.length; index++) visit(a[index]!, b[index]!); }, a.length);
 
   const halves = await Promise.all(([['a-half', first], ['b-half', second]] as const).map(async ([half, result]) => {
-    const digest = await sha256File(result.combined);
-    return { half, path: repositoryPath(result.combined), sha256: digest.sha256, bytes: digest.bytes, frames: result.objectFrames };
+    const { size: bytes } = await stat(result.combined);
+    return { half, path: repositoryPath(result.combined), bytes, frames: result.objectFrames };
   }));
 
   const value: SpectrumReproduction = {
