@@ -66,10 +66,9 @@ test('adding a test never fails the ratchet, so the rule cannot discourage testi
 test('the real count comes from git, so generated output cannot enter the baseline', async () => {
   const files = await trackedFiles();
   // src/platform/solar-geometry.mts is 26,968 generated lines and is gitignored; site's
-  // prepared-object-catalog.mts is generated too. Counting the working tree would put both in the
+  // prepared-context-objects.mts is generated too. Counting the working tree would put both in the
   // baseline and make it depend on whether `pnpm prebuild` had run.
-  for (const generated of ['src/platform/solar-geometry.mts', 'site/prepared-object-catalog.mts',
-    'site/prepared-context-objects.mts']) {
+  for (const generated of ['src/platform/solar-geometry.mts', 'site/prepared-context-objects.mts']) {
     assert.equal(files.includes(generated), false, `${generated} must not be counted`);
   }
   const counts = await countModules();

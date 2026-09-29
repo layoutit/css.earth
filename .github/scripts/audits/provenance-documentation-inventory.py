@@ -89,7 +89,7 @@ def summarize(label, entries):
     selected.add(registry)
     content = blobs(entries, selected)
     registry_source = content[registry].decode()
-    if re.search(r"from ['\"]\./prepared-object-catalog\.m[jt]s['\"]", registry_source):
+    if re.search(r"from ['\"]\./prepared-(?:object-catalog\.m[jt]s|catalogue\.mjs)['\"]", registry_source):
         registry_basis = 'descriptor properties.catalog'
         registry_ids = []
         for path, raw in content.items():
