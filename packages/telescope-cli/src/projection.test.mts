@@ -76,7 +76,7 @@ test('terminal products verify current output bytes without reopening historical
     const html=resolve(root,'sphere.html');await writeFile(html,'<!doctype html>');const record=resolve(root,'sphere.product.json');
     await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-sphere',inputs:[{role:'historical source',identity:resolve(root,'absent.fits'),bytes:1}],parameters:{target:'mercury',sourceContext:explorationContext},software:[]},[{path:'sphere.html',file:html}]);
     const terminal=await listArtifactOutputs(record);assert.equal(terminal.terminal,true);assert.deepEqual(terminal.outputs,[]);
-    await writeFile(html,'changed');await assert.rejects(listArtifactOutputs(record),/pins changed/);
+    await writeFile(html,'changed');await assert.rejects(listArtifactOutputs(record),/no longer its recorded size/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 test('projection and sphere cannot consume changed outputs or raw sky-image records',async()=>{
@@ -85,7 +85,7 @@ test('projection and sphere cannot consume changed outputs or raw sky-image reco
     const file=resolve(root,'image.fits'),record=resolve(root,'output.product.json');await writeFile(file,'original');
     await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-output',inputs:[],parameters:{},software:[]},[{path:'image.fits',file}]);
     await assert.rejects(exportSphere(record,resolve(root,'sphere')),/registered body-map/);
-    await writeFile(file,'changed');await assert.rejects(verifiedProduct(record),/pins changed/);
+    await writeFile(file,'changed');await assert.rejects(verifiedProduct(record),/no longer its recorded size/);
     assert.throws(()=>localOutput(root,'../outside'),/escapes/);
   }finally{await rm(root,{recursive:true,force:true});}
 });

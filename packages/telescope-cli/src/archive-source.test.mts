@@ -158,7 +158,7 @@ test('OPUS selects a native raw image with its label and support file, rejecting
     assert.equal((await readFile(resolve(root, 'staged/holdings/volumes/COISS/data/PREFIX.FMT'))).toString(), 'native');
     assert.notEqual(await readFile(resolve(root, 'staged/holdings/volumes/COISS/data/N1.LBL'), 'utf8'), '');
     await writeFile(result.files[0]!, 'changed');
-    await assert.rejects(openPdsSource(result.receipt), /pins changed/u);
+    await assert.rejects(openPdsSource(result.receipt), /no longer its recorded size/u);
     const unsafe = await fetchOpusSource(exploration, 1, resolve(root, 'unsafe'), async () => listing,
       async input => fileResponse(Buffer.from(String(input).endsWith('.LBL')
         ? 'PDS_VERSION_ID = PDS3\n^STRUCTURE = "../../not-pinned.fmt"\nEND\n' : 'native'), 'application/octet-stream'));
@@ -226,8 +226,8 @@ test('an authentic Chandra ACIS event source enters the existing event operation
     const changedCode = await main(['family-assess', request, fetched.receipt, '--out', resolve(root, 'changed-assessment'), '--json'],
       root, value => output.push(value), io);
     assert.equal(changedCode, 1, output.at(-1) ?? 'No CLI error output');
-    assert.match(JSON.parse(output.at(-1)!).error, /pins changed/u);
-    await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /pins changed/u);
+    assert.match(JSON.parse(output.at(-1)!).error, /no longer its recorded size/u);
+    await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /no longer its recorded size/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

@@ -53,7 +53,7 @@ test('WWT FITS keeps original numeric bytes and reports missing scientific metad
     delete old.parameters.fitsSource;await writeFile(result.receipt,JSON.stringify(old));
     assert.ok((await listArtifactOutputs(result.receipt)).outputs.some(choice=>choice.kind==='image'&&choice.available));
     await writeFile(result.source,'changed');
-    await assert.rejects(listArtifactOutputs(result.receipt),/pins changed/u);
+    await assert.rejects(listArtifactOutputs(result.receipt),/no longer its recorded size/u);
     await assert.rejects(acquireWwtFits(snapshot, 'Science', 1, 2, 0, resolve(root, 'outside'), async () => new Response(new Uint8Array(bytes))), /outside this level/u);
     await writeFile(resolve(root, 'collection.wtml'), 'changed');
     await assert.rejects(acquireWwtFits(snapshot, 'Science', 0, 0, 0, resolve(root, 'changed'), async () => new Response(new Uint8Array(bytes))), /differs from the pinned catalog/u);

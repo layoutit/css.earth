@@ -9,7 +9,7 @@ An observation here is one public level-3 product set: one target, one instrumen
 | Mode | What it records | What it could draw | Observations | Targets | Of moving targets | Shipped objects | Bands | Programs | Checked |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|
 | NIRCAM/IMAGE | pictures, 0.6–5 µm | nebulae and shells as volumes; pictures of Solar System bodies | 19,434 | 2,058 | 480 | 24 | 7 | 1 | 0 |
-| NIRCAM/CORON | pictures with the star blocked out | discs and rings attached to their star | 285 | 79 | 0 | 5 | 75 | 3 | 0 |
+| NIRCAM/CORON | pictures with the star blocked out | discs and rings attached to their star | 285 | 79 | 0 | 5 | 75 | 4 | 0 |
 | NIRCAM/GRISM | slitless spectra: time series of one star, or every source in a field | exoplanet maps from eclipses and phase curves | 8,520 | 177 | 0 | 3 | 0 | 0 | 0 |
 | MIRI/IMAGE | pictures, 5–26 µm, and time series of one star through a filter | nebulae as volumes; exoplanet maps from eclipse photometry | 6,879 | 2,132 | 173 | 27 | 4 | 12 | 1 |
 | MIRI/CORON | pictures with the star nulled by a phase mask | discs and rings attached to their star | 69 | 41 | 0 | 4 | 0 | 0 | 0 |
@@ -168,7 +168,7 @@ One star watched for hours, which is what an exoplanet map is fitted from. These
 
 ## Receipts
 
-A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
+A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the size of what it compared. A receipt that says anything else is reported here and proves nothing.
 
 None: every receipt beside a pinned program was accepted.
 

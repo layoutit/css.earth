@@ -38,8 +38,8 @@ test('verified product software matches exact ASCL alias and never invents use',
     assert.deepEqual(result.sourceProcessing?.map(item=>item.matches.map(match=>match.id)),[['2601.001']]);
     assert.match(formatAscl(result),/Source-declared earlier processing/u);
     assert.match(result.caveat,/does not verify the software version/u);
-    await writeFile(file,'altered');
-    await assert.rejects(matchProductSoftware(receipt,response),/pins changed/u);
+    await writeFile(file,'altered science');
+    await assert.rejects(matchProductSoftware(receipt,response),/no longer its recorded size/u);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

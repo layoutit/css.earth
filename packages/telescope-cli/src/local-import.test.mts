@@ -48,7 +48,7 @@ test('one pinned local FITS science member uses the shared image output route wi
     assert.ok(record?.inputs.some(input=>input.role==='FITS source'&&input.bytes>0));
     assert.match(await readFile(exported.values,'utf8'),/x_pixel,y_pixel,value/u);
     await writeFile(resolve(imported.directory,'files','float32.fits'),'changed');
-    await assert.rejects(listArtifactOutputs(imported.receipt),/pins changed/u);
+    await assert.rejects(listArtifactOutputs(imported.receipt),/no longer its recorded size/u);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 
