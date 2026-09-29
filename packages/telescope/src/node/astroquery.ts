@@ -2,7 +2,7 @@
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchain } from './toolchain.js';
+import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from './vo-contracts.js';
 export class ArchiveTransportError extends Error {}
 export type VoFailureCode = 'authentication' | 'no-content' | 'byte-limit' | 'protocol' | 'transport' | 'interrupted' | 'identity' | 'local-io';

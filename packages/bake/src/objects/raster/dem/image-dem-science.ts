@@ -1,5 +1,5 @@
-import type { SourceMesh } from '../geometry/index.ts';
-import {parseDemScience} from './source-records.ts';
+import type { SourceMesh } from '../../geometry/index.ts';
+import {parseDemScience} from '../source-records.ts';
 import {shape,number} from '@cssearth/core';
 import { resolve } from 'node:path';
 import { loadImageDem } from './image-dem.ts';

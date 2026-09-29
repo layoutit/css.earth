@@ -1,9 +1,9 @@
 /** Install and locate the one Peppi+pdr environment under output/toolchains/pds (ignored by git). */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './process.js';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { TOOLCHAINS, WORKSPACE } from '../paths.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const PDS_TOOLCHAIN_ROOT = resolve(WORKSPACE, 'output/toolchains/pds');

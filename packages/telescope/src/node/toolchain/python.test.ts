@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { it as test } from 'vitest';
-import { toolchainPython } from './toolchain-python.js';
+import { toolchainPython } from './python.js';
 
 const python = (() => { try { execFileSync('python3', ['--version']); return 'python3'; } catch { return null; } })();
 

@@ -1,11 +1,11 @@
 /** Install one pinned astronomy environment per user; read legacy checkout-local environments when valid. */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './process.js';
 import { accessSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { dirname, resolve } from 'node:path';
-import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { TOOLCHAINS, WORKSPACE } from '../paths.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const ASTROQUERY_ROOT = resolve(WORKSPACE, 'output/toolchains/astroquery');

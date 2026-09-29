@@ -3,7 +3,7 @@
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, readdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
