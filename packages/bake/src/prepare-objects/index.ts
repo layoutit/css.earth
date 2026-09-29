@@ -1,12 +1,11 @@
 // `@cssearth/bake/prepare-objects` (Node only): the preparation cache (verified receipts skip an unchanged object) and the
 // concurrency-scheduled catalogue-wide preparation run. It imports `preparation` and `run-implemented-objects`.
 // `packages/bake/cli/prepare-objects.mts` is its command.
-import { sha256 } from '@cssearth/core/node';
 import { isArray, hasErrorCode, requireString } from '@cssearth/core';
 import assert from "node:assert/strict";
 import { randomUUID } from 'node:crypto';
 import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
+import { createRequire, findPackageJSON } from "node:module";
 import { basename, dirname, resolve } from "node:path";
 import sharp from "sharp";
 import type { PreparationOptions, PreparationEvent } from '../run-implemented-objects/index.ts';
@@ -42,16 +41,23 @@ export async function sharedPreparationFiles(_root?: string) {
   return ["package.json", "pnpm-lock.yaml"];
 }
 
+/** The installed version of a dependency, from the package.json that owns its entry module. */
+async function installedVersion(name: string) {
+  const path = findPackageJSON(require.resolve(name));
+  if (!path) throw new Error(`Preparation environment: ${name} has no package.json above ${require.resolve(name)}.`);
+  const manifest: unknown = JSON.parse(await readFile(path, "utf8"));
+  const version = manifest !== null && typeof manifest === "object" && "version" in manifest ? manifest.version : undefined;
+  return requireString(version, `${path} version`);
+}
+
+/** The toolchain a receipt was prepared with. pnpm-lock.yaml, a receipt input, pins the installed packages; the versions
+ * here name the native pieces a reinstall can change without the lockfile. */
 export async function preparationEnvironment() {
   const dependencies: Record<string, string> = {};
-  for (const name of ["@layoutit/polycss", "sharp"]) dependencies[name] = sha256(await readFile(require.resolve(name)));
-  for (const file of Object.keys(require.cache).filter(file => file.endsWith(".node") && file.includes("sharp")).sort()) {
-    dependencies[basename(file)] = sha256(await readFile(file));
-  }
+  for (const name of ["@layoutit/polycss", "sharp", "cwebp-bin"]) dependencies[name] = await installedVersion(name);
   assert.equal(typeof cwebpPath, "string", "Pinned WebP encoder path is unavailable");
   return { node: process.version, platform: process.platform, arch: process.arch,
-    sharp: sharp.versions, sharpConcurrency: sharp.concurrency(),
-    cwebpSha256: sha256(await readFile(requireString(cwebpPath))), dependencies };
+    sharp: sharp.versions, sharpConcurrency: sharp.concurrency(), dependencies };
 }
 
 /** The environment of a traced preparation: the trace directory, and the trace loaded into every Node process. */

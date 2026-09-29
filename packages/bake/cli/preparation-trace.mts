@@ -10,7 +10,7 @@ import { resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import workerThreads from 'node:worker_threads';
-import { CATALOG_MODULE, DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, descriptorDigest,
+import { CATALOG_MODULE, DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, descriptorTextViews,
   type PreparationAccess, type PreparationTrace, type TracedCommand, type TracedState } from '@cssearth/bake/preparation';
 
 const directory = process.env[PREPARATION_TRACE_VARIABLE];
@@ -41,7 +41,7 @@ function firstState(path: string): TracedState {
   const state: TracedState = { size: stats.size, modified: stats.mtimeMs, ...(stats.isDirectory() ? { directory: true as const } : {}) };
   if (stats.isFile() && DESCRIPTOR_PATH.test(path)) {
     const text = original.readFileSync(path, 'utf8');
-    state.views = { registry: descriptorDigest(text, 'registry'), recipe: descriptorDigest(text, 'recipe'), pins: descriptorDigest(text, 'pins') };
+    state.views = descriptorTextViews(text);
   }
   return state;
 }

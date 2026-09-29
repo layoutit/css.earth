@@ -1,22 +1,22 @@
-import { sha256 } from '@cssearth/core/node';
 import { isArray, hasErrorCode } from '@cssearth/core';
 import assert from "node:assert/strict";
-import { createHash, randomUUID } from "node:crypto";
-import { createReadStream } from "node:fs";
+import { randomUUID } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, realpath, rename, rm, stat, writeFile } from "node:fs/promises";
 import { basename, isAbsolute, join, relative, resolve, sep } from "node:path";
-import { DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, REGISTRY_MODULE, descriptorDigest,
+import { isDeepStrictEqual } from "node:util";
+import { DESCRIPTOR_PATH, PREPARATION_TRACE_SCHEMA, REGISTRY_MODULE, descriptorTextView,
   type DescriptorView, type PreparationAccess, type TracedCommand, type TracedState } from './preparation-trace-format.ts';
 
-export const PREPARATION_RECEIPT_SCHEMA = "cssearth-preparation-receipt@2";
+export const PREPARATION_RECEIPT_SCHEMA = "cssearth-preparation-receipt@3";
 
 /**
- * How a receipt fingerprints one path. bytes: file contents; absent: no entry; file or directory: an entry of
+ * What a receipt checks about one path. bytes: file contents; absent: no entry; file or directory: an entry of
  * that kind; names: a directory's entry names; tree: every name and file below a directory; descriptor-*: one
- * owner's view of an object.json (see descriptorView).
+ * owner's view of an object.json (see descriptorView). Receipts live in ignored local state and hold no content
+ * fingerprint: contents count as unchanged while nothing under the path changed after the receipt was written.
  */
 export type PreparationEvidence = 'bytes' | 'absent' | 'file' | 'directory' | 'names' | 'tree' | `descriptor-${DescriptorView}`;
-export interface PreparationRecord { evidence: PreparationEvidence; bytes?: number; sha256?: string; }
+export interface PreparationRecord { evidence: PreparationEvidence; names?: string[]; view?: unknown; }
 export type PreparationRecords = Record<string, PreparationRecord>;
 export interface PreparationReceipt { schema: string; inputs: PreparationRecords; outputs: PreparationRecords; programs: string[]; metadata: Readonly<Record<string, unknown>> | null; }
 export interface PreparationTraces {
@@ -35,31 +35,22 @@ function safePath(root: string, path: string) {
   return absolute;
 }
 
-async function fileDigest(path: string) {
-  const hash = createHash("sha256");
-  let bytes = 0;
-  for await (const value of createReadStream(path)) {
-    const chunk: unknown = value;
-    assert.ok(chunk instanceof Uint8Array, "Preparation stream must contain bytes");
-    bytes += chunk.length;
-    hash.update(chunk);
+/** The latest change below a path: its own entry and, for a tree, every entry beneath it. A link counts its own change
+ * and its target's. */
+async function latestChange(path: string, tree: boolean): Promise<number> {
+  const [link, entry] = await Promise.all([lstat(path), stat(path)]);
+  let latest = Math.max(link.mtimeMs, link.ctimeMs, entry.mtimeMs, entry.ctimeMs);
+  if (tree && entry.isDirectory()) {
+    for (const child of await readdir(path)) latest = Math.max(latest, await latestChange(join(path, child), true));
   }
-  return { bytes, sha256: hash.digest("hex") };
-}
-
-async function treeDigest(path: string): Promise<string> {
-  const entry = await stat(path);
-  if (entry.isFile()) return (await fileDigest(path)).sha256;
-  const lines = [];
-  for (const child of (await readdir(path, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-    lines.push(`${child.name}${child.isDirectory() ? '/' : ''} ${await treeDigest(join(path, child.name))}`);
-  }
-  return sha256(lines.join("\n"));
+  return latest;
 }
 
 /**
  * The current state of one path under the requested evidence, or null when the path no longer has that shape.
  * A link is observed through its target: the receipt records what preparation read through the checkout path.
+ * A record holds no fingerprint of the contents. `names` records the entry names; a descriptor view records the
+ * view itself. Whether file contents changed after the receipt was written is decided by `changedAfter`.
  */
 export async function observePreparationPath(root: string, path: string, evidence: PreparationEvidence): Promise<PreparationRecord | null> {
   const absolute = safePath(root, path);
@@ -75,12 +66,30 @@ export async function observePreparationPath(root: string, path: string, evidenc
   if (evidence === 'names') {
     if (!entry.isDirectory()) return null;
     const names = (await readdir(canonical, { withFileTypes: true })).map(child => `${child.name}${child.isDirectory() ? '/' : ''}`).sort();
-    return { evidence, sha256: sha256(names.join("\n")) };
+    return { evidence, names };
   }
-  if (evidence === 'tree') return { evidence, sha256: await treeDigest(canonical) };
+  if (evidence === 'tree') return { evidence };
   if (!entry.isFile()) return null;
-  if (evidence === 'bytes') return { evidence, ...await fileDigest(canonical) };
-  return { evidence, sha256: descriptorDigest(await readFile(canonical, "utf8"), evidence.slice('descriptor-'.length) as DescriptorView) };
+  if (evidence === 'bytes') return { evidence };
+  return { evidence, view: descriptorTextView(await readFile(canonical, "utf8"), evidence.slice('descriptor-'.length) as DescriptorView) };
+}
+
+/** Whether any of `paths` (absolute files or directory trees) changed after `time`, or is missing. Local skip receipts
+ * compare their own modification time with their inputs this way instead of recording a fingerprint of them. */
+export async function anyChangedAfter(paths: readonly string[], time: number): Promise<boolean> {
+  for (const path of paths) {
+    const latest = await latestChange(path, true).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return Infinity; throw error; });
+    if (latest > time) return true;
+  }
+  return false;
+}
+
+/** Whether a path's contents changed after `time`, a receipt's own modification time. Presence, names and descriptor
+ * views are compared by `observePreparationPath`; file contents and trees by their latest change, the way make compares
+ * a target with its prerequisites. The status-change time also counts, so a copy that keeps an older modification time is seen. */
+export async function changedAfter(root: string, path: string, evidence: PreparationEvidence, time: number) {
+  if (evidence !== 'bytes' && evidence !== 'tree') return false;
+  return await latestChange(safePath(root, path), evidence === 'tree') > time;
 }
 
 /** Merge every process record in a trace directory. A process that started without leaving a record makes the trace incomplete. */
@@ -204,7 +213,7 @@ async function unchangedSinceFirstAccess(root: string, path: string, evidence: P
     if (!current) return false;
     if (evidence.startsWith('descriptor-')) {
       const view = evidence.slice('descriptor-'.length) as DescriptorView;
-      if (state.views?.[view] !== descriptorDigest(await readFile(absolute, 'utf8'), view)) return false;
+      if (!isDeepStrictEqual(state.views?.[view], descriptorTextView(await readFile(absolute, 'utf8'), view))) return false;
     } else if (evidence === 'names' || evidence === 'tree') {
       // The run's own outputs change the directories it writes into.
       if (![...outputs.keys()].some(output => output.startsWith(`${path}/`)) && current.mtimeMs !== state.modified) return false;
@@ -266,8 +275,12 @@ export async function readPreparationReceipt({ root, path }: {root: string; path
     assert.ok(receipt.metadata === null || isRecord(receipt.metadata));
     assert.ok(Object.keys(receipt.outputs).length, "Preparation receipt has no outputs");
     assert.ok(!Object.hasOwn(receipt.outputs, path), "Preparation receipt cannot verify itself");
+    const written = (await stat(safePath(root, path))).mtimeMs;
     for (const records of [receipt.inputs, receipt.outputs]) {
-      for (const [file, record] of Object.entries(records)) assert.deepEqual(await observePreparationPath(root, file, record.evidence), record, `${file} changed`);
+      for (const [file, record] of Object.entries(records)) {
+        assert.deepEqual(await observePreparationPath(root, file, record.evidence), record, `${file} changed`);
+        assert.ok(!await changedAfter(root, file, record.evidence, written), `${file} changed after the receipt`);
+      }
     }
     // The shape checks and the observations above validate every record.
     return receipt as unknown as PreparationReceipt;
