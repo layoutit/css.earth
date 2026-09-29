@@ -124,6 +124,10 @@ banks and oracle fixtures through the repository's test helpers; they import the
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 
+## Fixed surface paint order
+
+The prepared-presentation pass resolves whole-surface visibility priorities before packing depth groups. It uses the measured CSS facing of every source face. Groups with a fixed order keep that order as the camera rotates; an inseparable visibility cycle stays together in native 3D, even when it exceeds the 64-leaf packing target. Source-edge plane splitting is reserved for inputs without a proven facing contract. This avoids introducing runtime `z-index` changes merely because a surface admits a geometric split.
+
 ## Evidence
 
 The volume entries replaced the lab's `volume-core` and `volume-bake` packages, moving their sources
