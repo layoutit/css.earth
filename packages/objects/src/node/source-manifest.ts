@@ -2,7 +2,7 @@ import { safeRelativePath } from './source-path.js';
 import { isArray } from '@cssearth/core';
 import { parseSourceBinding } from '../sources/catalog.js';
 import type { SourceBinding } from '../sources/catalog.js';
-/** One byte range of a remote member, for archive files too large to keep whole. The pin covers exactly the kept bytes. */
+/** One byte range of a remote member, for archive files too large to keep whole. The range names exactly the kept bytes. */
 export interface SourceRange { offset: number; length: number; }
 /** A declared source file. Git holds authored files; a download is fetched by its origin. Nothing here carries a hash. */
 export interface SourceEntry { path: string; range?: SourceRange; sourceBinding?: SourceBinding; }
@@ -25,7 +25,7 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot }:
     JSON.parse(await readFile(resolve(sourceRoot, "manifest.json"), "utf8")),
   );
   // A lens may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
-  // archive's coefficients. Both are pinned the same way, and both are verified by their bytes before they are read.
+  // archive's coefficients. Both are declared the same way, and both must be present before they are read.
   const inputsByPath = new Map<string, SourceEntry>([
     ...manifest.documents.map((entry) => [entry.path, entry] as const),
     ...manifest.generatedIntermediates.map((entry) => [entry.path, entry] as const),
@@ -54,8 +54,8 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot }:
       await validateSourceEntry({ entry, objectName, sourceRoot });
       return entry;
     },
-    /** The one way a preparation reads a source file: a download is verified against its manifest pin, a file
-     * authored here is read as it is. Nothing else needs to remember a hash. */
+    /** The one way a preparation reads a source file: it must be declared in the manifest, and it is read as it is.
+     * The repository holds authored files; a download is restored by its origin or the source mirror. */
     async readSource(sourcePath: string): Promise<Buffer> {
       const normalized = sourcePath.replaceAll("\\", "/");
       if (normalized.startsWith("/") || normalized.split("/").includes("..")) throw new Error(`${objectName} source path escapes the package: ${normalized}.`);
@@ -166,11 +166,11 @@ export async function verifySourceManifest({ manifest, objectName, sourceRoot }:
   });
 }
 
-/** A ranged input asks for exactly its pinned bytes. Acquisition owns the request; this owns what the request must say. */
+/** A ranged input asks for exactly its declared bytes. Acquisition owns the request; this owns what the request must say. */
 export const rangeRequestHeader = (range: SourceRange) => `bytes=${range.offset}-${range.offset + range.length - 1}`;
 /**
  * A ranged member is far too large to fetch whole, so a full-body answer is refused rather than consumed: the server
- * must honour the request as 206 Partial Content over exactly the pinned offset and length.
+ * must honour the request as 206 Partial Content over exactly the declared offset and length.
  */
 export function assertRangeResponse(
   response: { status: number; headers: { get(name: string): string | null } },
@@ -203,13 +203,18 @@ function validateEntryBase(objectId: string, entry: SourceEntry, kind: string, p
   if (paths.has(entry.path)) {
     throw new TypeError(`Object ${objectId} repeats source path ${entry.path}.`);
   }
+  // A manifest names files by path; the repository or the source mirror identifies their bytes.
+  const hashField = Object.keys(entry).find((key) => /sha256/iu.test(key));
+  if (hashField !== undefined) {
+    throw new TypeError(`Object ${objectId} source ${kind} ${entry.path} carries ${hashField}; a manifest records no hash.`);
+  }
   assertSourceRange(entry, `Object ${objectId} source ${kind} ${entry.path}`);
   paths.add(entry.path);
 }
 
 /**
- * An input may pin one byte range of a remote member instead of the whole file: acquisition asks for exactly those
- * bytes and the pin covers exactly those bytes, so local verification keeps streaming the local file unchanged.
+ * An input may declare one byte range of a remote member instead of the whole file: acquisition asks for exactly those
+ * bytes, and the local file holds exactly those bytes.
  */
 export function assertSourceRange(entry: { path: string; range?: SourceRange; origin?: string }, label: string) {
   const range = entry.range;

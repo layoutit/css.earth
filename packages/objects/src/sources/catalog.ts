@@ -68,9 +68,6 @@ export function sourcePath(input: unknown): string {
   if (path.startsWith('/') || path.includes('\\') || path.includes('\0') || path.split('/').some(part => !part || part === '.' || part === '..')) throw new TypeError('Invalid source record path.');
   return path;
 }
-export function sourceDigest(input: unknown): string {
-  const value = sourceText(input); if (!/^[a-f0-9]{64}$/.test(value)) throw new TypeError('Invalid source digest.'); return value;
-}
 export function sourceUnique(values: readonly string[], label: string): void {
   if (new Set(values).size !== values.length) throw new TypeError(`Duplicate source ${label}.`);
 }

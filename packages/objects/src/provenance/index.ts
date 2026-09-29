@@ -3,7 +3,6 @@
 // contribution graph and prepared form, source usage and prepared sources, and context availability. The dataset URLs in them
 // are the application's routes, which the host passes in as `DatasetRoutes`.
 export * from './object-provenance.js';
-export * from './preparation-evidence.js';
 export * from './product-input-evidence.js';
 export * from './exploration-catalog.js';
 export * from './exploration-contributions.js';
