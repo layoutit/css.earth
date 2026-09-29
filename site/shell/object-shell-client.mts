@@ -130,7 +130,7 @@ export function mountObjectShell({
     else if (leftPage && !focus) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
       if (scene?.kind === 'scene') presentPage(scene.route, objectSeo(scene));
-    }
+    } else pendingPage = null;
     focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
     if (focus) loadFocusBanks();
     objectBrowser.refreshSelection();
@@ -175,7 +175,9 @@ export function mountObjectShell({
     showDataset() { informationCard.show('dataset'); },
     setDatasetNotice(message: string | null) {
       const notice = drawer.querySelector<HTMLElement>('[data-dataset-notice]');
-      if (notice) { notice.textContent = message ?? ''; notice.hidden = message === null; }
+      // Written on change: a camera-driven overview change clears it, possibly while the camera coasts.
+      if (notice && notice.textContent !== (message ?? '')) notice.textContent = message ?? '';
+      if (notice && notice.hidden !== (message === null)) notice.hidden = message === null;
     },
     beginNavigation,
     setObject,

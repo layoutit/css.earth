@@ -5,6 +5,7 @@ import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.m
 import { overviewScopeFromUrl, preparedFocusFromUrl, satelliteSystemFromUrl, withOverviewScope, withPreparedFocus, withSatelliteSystemView } from '../navigation/navigation-scope.mts';
 import { SOLAR_SYSTEM_ID, systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
+import { SYSTEM_RANGES } from '../system-framing.mts';
 
 export interface SceneOverview { readonly scope: OverviewScope; readonly systemId: string; }
 export type SceneContext =
@@ -84,7 +85,9 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, s
     followCamera(world: WorldCameraPose) {
       const context = selectionContext(subject);
       if (context.kind !== 'overview') return false;
-      const scope = overviewScopeAtCamera(world, context.overview.scope, undefined, systemById(systems, context.overview.systemId)?.originM);
+      const star = systemById(systems, context.overview.systemId);
+      const scope = overviewScopeAtCamera(world, context.overview.scope, undefined,
+        star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined);
       if (scope === context.overview.scope) return false;
       const next: SceneContext = { kind: 'overview', overview: { ...context.overview, scope } };
       return publish(subject.kind === 'focus' ? { ...subject, context: next } : next);

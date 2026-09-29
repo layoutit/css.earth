@@ -7,6 +7,7 @@ export type OverviewScope = 'system' | 'milky-way' | 'local-group' | 'nearby-uni
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
+import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
 
 const distance = (position: readonly number[], origin: readonly number[]) => Math.hypot(...position.map((value, axis) => value - origin[axis]));
 
@@ -29,24 +30,25 @@ export function bodyCardViewAtCamera(world: WorldCameraPose | null | undefined, 
 
 /** The scope the camera frames, with a separate return threshold at each step to avoid flicker. UI scale thresholds, not
  * physical boundaries or membership claims:
- * - the Milky Way once the mounted system's own bodies have faded out (the world plan's system fade, about a light-year
- *   from the system's star, `systemOriginM`), and back below the middle of that fade: beyond it the view is the stars of
- *   the galaxy;
+ * - the mounted system's overview until its own bodies have faded out, by the camera's distance from its star and over
+ *   the distances the world context fades them (systemFadeDistances: the plan's, about a light-year, or its host's
+ *   authored orbit range), and back below the middle of that fade. It is decided first, so a system far from the Sun
+ *   (in the Magellanic Clouds) keeps its overview before the scopes the Sun measures;
+ * - the Milky Way beyond it: the stars of the galaxy;
  * - the Local Group once the galaxy's own captions (its nebulae) have mostly faded, at the middle of the world plan's
  *   volume fade that fades them, and back below its start: the Milky Way card is the view from inside the galaxy;
  * - the nearby universe from 5 Mpc (back below 4 Mpc). */
 export function overviewScopeAtCamera(world: WorldCameraPose, previous: OverviewScope = 'system', plan = context,
-  systemOriginM: readonly number[] = plan.focus.positionM): OverviewScope {
+  system: { readonly originM: readonly number[]; readonly orbitsWithinM?: number } = { originM: plan.focus.positionM }): OverviewScope {
+  const { fadeOutStartDistanceM, hiddenDistanceM } = systemFadeDistances(plan.system, system.orbitsWithinM);
+  const leave = previous !== 'system' ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM;
+  if (distance(world.pose.positionM, system.originM) < leave) return 'system';
   const range = distance(world.pose.positionM, plan.focus.positionM);
   const parsec = 3.085677581491367e16;
   if (range >= (previous === 'nearby-universe' ? 4 : 5) * 1e6 * parsec) return 'nearby-universe';
   const { fadeStartDistanceM, fullDistanceM } = plan.volume;
   if (range >= (previous === 'local-group' || previous === 'nearby-universe' ? fadeStartDistanceM : Math.sqrt(fadeStartDistanceM * fullDistanceM))) return 'local-group';
-  // A system's bodies fade with the camera's distance from their own star (world-context-planner.ts), so its overview
-  // gives way to the Milky Way by that distance, not the Sun's: another star is light-years from the Sun already.
-  const { fadeOutStartDistanceM, hiddenDistanceM } = plan.system;
-  const threshold = previous !== 'system' ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM;
-  return distance(world.pose.positionM, systemOriginM) >= threshold ? 'milky-way' : 'system';
+  return 'milky-way';
 }
 
 export function viewDistance(world: WorldCameraPose, frame: PreparedWorldCameraFrame, scope: OverviewScope, plan = context, focus: Pick<PreparedCatalogObject, 'name' | 'positionM'> | null = null) {
