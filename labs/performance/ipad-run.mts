@@ -8,7 +8,7 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { requireFiniteNumber } from '@cssearth/core';
-import { requireSceneObject } from '../../site/objects.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
 import { captureIosMoment } from './ios-capture.mts';
 import { startIpadDeviceSession, type IpadDeviceSession } from './ipad-device-session.mts';
 import { JOURNEY_INPUT_SOURCE, compileJourney, parseJourney, parseJourneyArgs } from './ipad-journey.mts';
@@ -16,6 +16,7 @@ import { makeIpadStrip } from './ipad-strip.mts';
 
 const exec = promisify(execFile);
 const root = resolve(import.meta.dirname, '../..');
+const requireSceneObject = readPreparedObjects(root).requireSceneObject;
 
 function localAddress(): string {
   const address = networkInterfaces().en0?.find(entry => entry.family === 'IPv4' && !entry.internal)?.address;

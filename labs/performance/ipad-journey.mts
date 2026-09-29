@@ -7,10 +7,13 @@
  * touch.  The generated script returns that provenance into the capture report.
  */
 import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { OBJECTS } from '../../site/objects.mts';
+import { readPreparedObjects } from '@cssearth/objects/node';
 import type { Step } from './ios-capture.mts';
+
+const OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).objects;
 
 export const JOURNEY_INPUT_SOURCE = 'page-dispatched' as const;
 export type FlightSource = 'scene-router' | 'objectnavigate';
