@@ -13,7 +13,7 @@ test('every tracked FITS file is pinned, and every pin names a tracked file', ()
 });
 
 // A sparse checkout (CI's code-and-text tree leaves out body FITS) skips the files it does not hold.
-for (const [path, expected] of Object.entries(pins)) test(`@cssearth/fits reads ${path} as the pre-package readers did`,
+for (const [path, expected] of Object.entries(pins)) test(`@cssearth/fits reads or refuses each reading of ${path} as recorded`,
   { skip: !existsSync(resolve(ROOT, path)) && `${path} is not checked out` }, async () => {
   assert.deepEqual(await summarize({ ...fits, readFitsFileHdus }, path), expected);
 });

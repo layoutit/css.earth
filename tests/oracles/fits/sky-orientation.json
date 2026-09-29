@@ -46,7 +46,7 @@
    ]
   },
   "hips2fits-tan": {
-   "from": "M8 Spitzer IRAC band from CDS hips2fits (cached by sha256 under .local/nebula-lab/sky-bands/hips2fits)",
+   "from": "M8 Spitzer IRAC band from CDS hips2fits (cached under .local/nebula-lab/sky-bands/hips2fits)",
    "derivatives": [
     -0.0003388930498659904,
     0.0,

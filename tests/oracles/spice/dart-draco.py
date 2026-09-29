@@ -8,7 +8,7 @@ code stands between the archive and the oracle.
 Usage: node packages/bake/cli/restore-source-inputs.mts --object=dimorphos
        .local/oracles/venv/bin/python tests/oracles/spice/dart-draco.py
 """
-import hashlib, json, platform, sys
+import json, platform, sys
 from pathlib import Path
 import numpy as np
 import spiceypy as spice

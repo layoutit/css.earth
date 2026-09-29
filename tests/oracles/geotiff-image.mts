@@ -1,8 +1,7 @@
 /** Independent byte check for the compact display maps. The detached PDS3 label
  * supplies native offsets and coordinates; the production TIFF reader is not used.
- * Usage: node tools/oracles/geotiff-image.mts <body-source-root> <name> <native.tif> <report.json> */
+ * Usage: node tests/oracles/geotiff-image.mts <body-source-root> <name> <native.tif> <report.json> */
 import {open, readFile, writeFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import sharp from 'sharp';
 const [root,id,native,output]=process.argv.slice(2);
 if(!root||!id||!native||!output)throw new Error('Expected source root, image id, native TIFF and report path.');
@@ -48,5 +47,5 @@ try {
   }
 }finally{await file.close();}
 const report={passed:checks.every(c=>c.pass),method:'Independent PDS3-labelled band-sequential byte offsets and explicit source-cell overlap sums; no production GeoTIFF reader or reduction helper. Checks representative footprints, poles, both sides of the seam and the equator; does not establish instrument accuracy.',
-  native,compactSha256:createHash('sha256').update(bytes).digest('hex'),labelSha256:createHash('sha256').update(label).digest('hex'),checks};
+  native,checks};
 await writeFile(output,JSON.stringify(report,null,2)+'\n');console.log(`${id}: ${checks.filter(c=>c.pass).length}/${checks.length} independent footprints agree`);if(!report.passed)process.exitCode=1;

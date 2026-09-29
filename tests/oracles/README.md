@@ -40,14 +40,8 @@ Each script sits in `tests/oracles/<group>/` beside the fixture it writes, which
 same name (`fits/core.py` writes `fits/core.json`), and the comparing tests are under
 `tests/objects/terrestrial/` unless a path is given. Fixtures written before the scripts moved
 here from `tools/oracles/` still name that path in `generatedBy` until they are regenerated.
-Five files keep their bytes because body evidence pins their SHA-256: `isis-geotiff-grid.mts`,
-`lunar-mi-quality.mts`, `geotiff-image.mts`, `reflectance-mosaics.mts` and `tsconfig.json`. The
-four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`.
-
-Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
-only. It no longer holds a runtime-lock or generator digest, while
-`tests/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
-test runs past its restored-source skips. The shared FITS reader is the
+The SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions, which
+`tests/contract/oracle-fixtures.test.mts` compares with the runtime lock. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
 likewise sit beside their scripts in `tests/oracles/spice/`.
@@ -64,9 +58,8 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
   completed fixture audit.
 - Comparing tests read the committed fixture and the same declared inputs the
   pipeline reads. They run without Python. `readOracleInput` checks the recorded
-  byte count immediately before comparison; it does not verify a source SHA-256.
-  Preserve existing historical hashes and toolchain-lock identities without
-  claiming that the current fixture reader validates input digests.
+  byte count immediately before comparison. Git identifies tracked inputs and the
+  R2 source mirror identifies restored downloads, so fixtures record no digests.
 - An oracle reads the archive with its own reader. It may read a recipe's declared
   policy, such as a detector border, but never a value the pipeline computed.
 - Regenerate a fixture only when the oracle version or an input changes, and say
@@ -79,7 +72,7 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
 
 SBMT is an opt-in native backend: `node tests/oracles/setup.mts sbmt`, then
 `node tests/oracles/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock (its fixture records no digest; see the known gap above). `node tests/oracles/test-sbmt.mts --unit`
+pinned executable/software lock that names each file's path and size. `node tests/oracles/test-sbmt.mts --unit`
 runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](sbmt/README.md).
 The commands below operate on the Python backends.

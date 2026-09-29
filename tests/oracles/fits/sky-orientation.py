@@ -20,7 +20,7 @@ WIDTH, HEIGHT = 3, 2
 CASES = [
     ('squeeze-reconstruction', 'src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits',
      {'CTYPE1': 'RA', 'CTYPE2': 'DEC', 'CDELT1': -0.78, 'CDELT2': 0.78, 'CRVAL1': 0.0, 'CRVAL2': 0.0, 'CRPIX1': 65, 'CRPIX2': 65}),
-    ('hips2fits-tan', 'M8 Spitzer IRAC band from CDS hips2fits (cached by sha256 under .local/nebula-lab/sky-bands/hips2fits)',
+    ('hips2fits-tan', 'M8 Spitzer IRAC band from CDS hips2fits (cached under .local/nebula-lab/sky-bands/hips2fits)',
      {'CRPIX1': 878.5, 'CRPIX2': 708.5, 'CDELT1': -0.00033889304998681, 'CDELT2': 0.00033889304998682, 'CUNIT1': 'deg', 'CUNIT2': 'deg', 'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRVAL1': 270.92629672565, 'CRVAL2': -24.373393603218, 'LONPOLE': 180.0, 'RADESYS': 'ICRS'}),
     ('zimpol-cd-tan', 'src/objects/psyche/source/observations/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits',
      {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 512.0, 'CRPIX2': 512.0, 'CRVAL1': 230.50211, 'CRVAL2': -14.02336, 'CD1_1': -1.00833333333333e-06, 'CD2_1': 0.0, 'CD1_2': 0.0, 'CD2_2': 1.00833333333333e-06, 'CUNIT1': 'deg', 'CUNIT2': 'deg', 'EQUINOX': 2000.0}),

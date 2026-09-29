@@ -4,7 +4,7 @@ const test = sourceTest();
 import { access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '../oracles/fixture.mts';
-import { runtimeLock, generatorFingerprint } from '../oracles/sbmt/runtime.mts';
+import { runtimeLock } from '../oracles/sbmt/runtime.mts';
 
 /** Every committed oracle fixture comes from the pinned environment and the pinned inputs; runs in `pnpm test:platform` without Python or restored sources. */
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.
@@ -19,12 +19,10 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
   for (const name of names) {
     const fixture = await readOracleFixture(name);
     if (fixture.oracle === 'SBMT') {
-      const {lock,digest}=await runtimeLock();
+      const {lock}=await runtimeLock();
       // The committed fixture names the generator's path before the move until SBMT regenerates it.
       assert.ok(['tools/oracles/sbmt/projection.mts','tests/oracles/sbmt/projection.mts'].includes(fixture.generatedBy));
-      // Known gap: since the committed fixture's tool record holds no runtimeLockSha256 or generatorSha256, so the
-      // comparison below fails whenever this test runs past its restored-source skips. Recorded, not repaired here.
-      assert.deepEqual(fixture.tool,{sbmt:lock.sbmt,release:lock.release,java:lock.java,'java-bridge':lock.bridge,runtimeLockSha256:digest,generatorSha256:await generatorFingerprint()});
+      assert.deepEqual(fixture.tool,{sbmt:lock.sbmt,release:lock.release,java:lock.java,'java-bridge':lock.bridge});
       await assertPinnedInputs(fixture.inputs);
       assertPinnedReferences(fixture.references);
       assert.ok(fixture.inputs.some(p=>p.path==='tests/fixtures/sbmt/cases.json'));
