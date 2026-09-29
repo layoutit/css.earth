@@ -28,15 +28,11 @@
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
       {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"site/objects.mts"},
-      {"from":"labs/nebula/packages/lab/src/adapters/viewer/inspection-camera-renderer.ts","to":"site/runtime-policy.mts"},
       {"from":"labs/performance/ipad-journey.mts","to":"site/objects.mts"},
-      {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"},
-      {"from":"labs/performance/navigation-capture.mts","to":"site/server/preview.mts"}
+      {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"}
     ],
     "nothing-imports-cli-entries": [],
     "packages-import-only-packages": [
-      {"from":"packages/renderer/src/navigation/prepared-wheel-zoom.test.mts","to":"site/runtime-policy.mts"},
-      {"from":"packages/renderer/src/navigation/world-camera-picking.test.mts","to":"site/runtime-policy.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/objects.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/system-framing.mts"},
       {"from":"packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts","to":"tests/oracles/fixture.mts"},
