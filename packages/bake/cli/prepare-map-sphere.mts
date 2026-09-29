@@ -7,7 +7,8 @@
  * The sphere is a cube-sphere: each face of a cube around the Sun is cut into `patchesPerEdge`² patches, each patch's
  * corners pushed out to the sphere and flattened onto their mean plane, so every patch is one planar PolyCSS leaf. Each
  * patch's tile of the atlas samples the map at its texels' directions (ICRS, turned into the map's Galactic
- * coordinates), `samplesPerTexel`² samples averaged. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
+ * coordinates), `samplesPerTexel`² samples averaged, with a one-texel border sampled past the patch; each leaf reaches
+ * into that border, so neighbouring patches overlap by a texel and no seam opens between them. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
  * (`cssearth-image-mesh@1`, read by packages/renderer/src/universe/image-mesh.ts) and `prepared/<id>/<id>.webp`.
  *
  * Usage: node packages/bake/cli/prepare-map-sphere.mts <object-directory> <id>
@@ -61,6 +62,8 @@ const direction = (face: number, u: number, v: number): Vector3 => {
   return point.map(value => value / length) as Vector3;
 };
 const columns = Math.ceil(Math.sqrt(6 * patches * patches)), rows = Math.ceil(6 * patches * patches / columns);
+/** Border texels sampled past each patch's edge, and the tile's full side with them. */
+const GUTTER = 1, cell = tile + 2 * GUTTER;
 
 // The map sampled into the atlas, in the toolchain's Python (Astropy, astropy-healpix).
 const python = String.raw`import json, sys, numpy as np
@@ -79,9 +82,10 @@ table = np.loadtxt(r['table'])
 if table.shape != (256, 3): raise ValueError('colour table must be 256 RGB rows')
 icrs_to_gal = np.array(r['icrsToGalactic'])
 faces = [np.array(f, dtype=float) for f in r['faces']]
-P, T, S = r['patches'], r['tile'], r['samples']
+P, T, S, G = r['patches'], r['tile'], r['samples'], r['gutter']
+C = T + 2 * G
 cols, rows = r['columns'], r['rows']
-atlas = np.zeros((rows * T, cols * T, 3), dtype=np.uint8)
+atlas = np.zeros((rows * C, cols * C, 3), dtype=np.uint8)
 lo, hi = r['min'], r['max']
 k = 0
 for face in range(6):
@@ -89,7 +93,7 @@ for face in range(6):
   for i in range(P):
     for j in range(P):
       # texel centres of this patch, with S x S subsamples each
-      steps = (np.arange(T * S) + 0.5) / (T * S)
+      steps = (np.arange(C * S) + 0.5) / (T * S) - G / T
       uu = -1 + 2 * (i + steps) / P
       vv = -1 + 2 * (j + steps) / P
       U, V = np.meshgrid(uu, vv)  # V rows (down the tile), U columns
@@ -99,12 +103,14 @@ for face in range(6):
       lon = np.degrees(np.arctan2(gal[..., 1], gal[..., 0])) % 360
       lat = np.degrees(np.arcsin(np.clip(gal[..., 2], -1, 1)))
       pix = hp.lonlat_to_healpix(lon.ravel() * u.deg, lat.ravel() * u.deg)
-      v = values[pix].reshape(T * S, T * S).astype(float)
-      v = v.reshape(T, S, T, S).mean(axis=(1, 3))
+      v = values[pix].reshape(C * S, C * S).astype(float)
+      v = v.reshape(C, S, C, S).mean(axis=(1, 3))
       idx = np.clip(np.round((v - lo) / (hi - lo) * 255), 0, 255).astype(int)
       rgb = table[idx].astype(np.uint8)
       row, col = divmod(k, cols)
-      atlas[row * T:(row + 1) * T, col * T:(col + 1) * T] = rgb[::-1]  # image rows run down, v runs up
+      # PolyCSS lays a leaf's image on its vertices in order: top-left on corner (0, 0), top-right on (1, 0), bottom-right
+      # on (1, 1). So the tile's rows run with t, from the patch's (s, 0) edge.
+      atlas[row * C:(row + 1) * C, col * C:(col + 1) * C] = rgb
       k += 1
 open(r['out'], 'wb').write(atlas.tobytes())
 d = Planck18.comoving_distance(r['redshift']).to(u.Mpc).value
@@ -117,19 +123,19 @@ const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   input: JSON.stringify({ map: resolve(sourceDirectory, map!.path as string), column: map!.column, table: resolve(sourceDirectory, colourTable!.path as string),
-    icrsToGalactic: ICRS_TO_GALACTIC, faces: FACES, patches, tile, samples, columns, rows, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift }) });
+    icrsToGalactic: ICRS_TO_GALACTIC, faces: FACES, patches, tile, samples, gutter: GUTTER, columns, rows, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift }) });
 if (run.status !== 0) throw new Error(`Map sampling failed: ${run.stderr.slice(-2000)}`);
 const sampled = JSON.parse(run.stdout) as { nside: number; ordering: string; radiusMpc: number; min: number; max: number };
 const atlasBytes = await readFile(resolve(rawPath));
 await rm(rawPath);
-const webp = await encodeLossyWebp(sharp(atlasBytes, { raw: { width: columns * tile, height: rows * tile, channels: 3 } }));
+const webp = await encodeLossyWebp(sharp(atlasBytes, { raw: { width: columns * cell, height: rows * cell, channels: 3 } }));
 const texturePath = `${id}/${id}.webp`;
 await rm(resolve(prepared, id), { recursive: true, force: true });
 await mkdir(resolve(prepared, id), { recursive: true });
 await writeFile(resolve(prepared, texturePath), webp);
 
 // Each patch: its four corners on the sphere, flattened onto their mean plane, and its tile of the atlas.
-const R = sampled.radiusMpc, atlasWidth = columns * tile, atlasHeight = rows * tile;
+const R = sampled.radiusMpc, atlasWidth = columns * cell, atlasHeight = rows * cell, reachOut = cell / tile;
 const leaves = [];
 let index = 0;
 for (let face = 0; face < 6; face++) for (let i = 0; i < patches; i++) for (let j = 0; j < patches; j++) {
@@ -137,25 +143,26 @@ for (let face = 0; face < 6; face++) for (let i = 0; i < patches; i++) for (let 
   const corners = [at(0, 0), at(1, 0), at(1, 1), at(0, 1)];
   const centre = [0, 1, 2].map(axis => corners.reduce((sum, corner) => sum + corner[axis]!, 0) / 4) as Vector3;
   const normalLength = Math.hypot(...centre), normal = centre.map(value => value / normalLength) as Vector3;
+  // Flattened onto the mean plane, then widened about the centre to the tile's border.
   const flat = corners.map(corner => { const offset = corner.reduce((sum, value, axis) => sum + (value - centre[axis]!) * normal[axis]!, 0);
-    return corner.map((value, axis) => value - offset * normal[axis]!) as Vector3; }) as [Vector3, Vector3, Vector3, Vector3];
+    return corner.map((value, axis) => centre[axis]! + (value - offset * normal[axis]! - centre[axis]!) * reachOut) as Vector3; }) as [Vector3, Vector3, Vector3, Vector3];
   const row = Math.floor(index / columns), column = index % columns;
   // The leaf is compiled for one tile-sized image, so its box is the tile and nothing beyond the patch is drawn (no
-  // clipping: a leaf shows its whole box). The tile's rows run down from the patch's top (t = 1) to its bottom (t = 0).
-  const polygon: Polygon = { vertices: flat, uvs: [[0, 1], [1, 1], [1, 0], [0, 0]], texture: texturePath,
-    textureImageSource: { url: texturePath, width: tile, height: tile },
+  // clipping: a leaf shows its whole box). The image's corners follow the vertices' order (see the sampling above).
+  const polygon: Polygon = { vertices: flat, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], texture: texturePath,
+    textureImageSource: { url: texturePath, width: cell, height: cell },
     texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' }, doubleSided: false };
   const plan = computeTextureAtlasPlanPublic(polygon, index, { tileSize: 50, layerElevation: 50, seamBleed: 0 });
   const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
   if (!geometry) throw new TypeError(`PolyCSS could not prepare patch ${index} of ${id}.`);
-  const leaf = compileVolumeLeaf(geometry, tile);
+  const leaf = compileVolumeLeaf(geometry, cell);
   // Then the background is the whole atlas at the leaf's scale, shifted so the leaf's box shows this patch's tile.
   const [sizeX, sizeY] = leaf.style.backgroundSize.split(' ').map(value => Number.parseFloat(value));
   const [offsetX, offsetY] = leaf.style.backgroundPosition.split(' ').map(value => Number.parseFloat(value));
-  const scaleX = sizeX! / tile, scaleY = sizeY! / tile, px = (value: number) => `${Number(value.toFixed(4))}px`;
+  const scaleX = sizeX! / cell, scaleY = sizeY! / cell, px = (value: number) => `${Number(value.toFixed(4))}px`;
   leaves.push({ id: `${face}-${i}-${j}`, centerUnits: centre.map(value => Number(value.toFixed(3))), normalUnits: normal.map(value => Number(value.toFixed(6))),
     ...leaf, style: { ...leaf.style, backgroundSize: `${px(atlasWidth * scaleX)} ${px(atlasHeight * scaleY)}`,
-      backgroundPosition: `${px(offsetX! - column * tile * scaleX)} ${px(offsetY! - row * tile * scaleY)}` } });
+      backgroundPosition: `${px(offsetX! - column * cell * scaleX)} ${px(offsetY! - row * cell * scaleY)}` } });
   index++;
 }
 const reach = Math.ceil(R);
