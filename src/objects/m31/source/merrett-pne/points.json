@@ -78,14 +78,25 @@
     "output": "sun-icrf",
     "epochJdTt": 2461286.5,
     "placement": "image-layer-disc",
-    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 770,
+      "source": "dalcanton-2023-m31-thick-disk",
+      "basis": "Dalcanton et al. (2023, Sect. 3.3) measure an exponential scale height of 770 ± 80 pc for M31's red giant branch stars. Planetary nebulae come from the same older stellar disc, so they take its thickness, as a presentation choice. Each row's own height is drawn, not measured."
+    },
+    "bulge": {
+      "source": "dorman-2013-m31-structural-decomposition",
+      "basis": "Planetary nebulae come from old stars, which fill M31's bulge as well as its disc. Each is a bulge member with the bulge's share of Dorman et al.'s (2013) fitted light at its sky position, and then sits at a depth drawn from the bulge's density along its sight line, as the image layers' bulge does. HII regions, Cepheids and supernova remnants are young and stay in the disc. Membership is drawn, not measured."
+    }
   },
   "source": "merrett-2006-m31-planetary-nebulae",
   "meaning": "Planetary nebulae of M31 from the Planetary Nebula Spectrograph survey of Merrett et al. (2006): one dot per nebula at its catalogue sky position. Of 3,300 emission-line objects, 2,574 remain once the authors' own flags for HII regions, background objects and other galaxies are applied. The planetary nebulae trace M31's old stars, bulge and disc alike.",
   "appearance": {
     "colorCss": "#9dffcf",
     "radiusPx": 1,
-    "opacity": 1,
-    "note": "Presentation only: the planetary-nebula colour of the M33 dots, so the two galaxies read alike."
+    "opacity": 0.6,
+    "note": "Presentation only: the planetary-nebula colour of the M33 dots, so the two galaxies read alike. Disc members are toned to 60% like M31's other dots; bulge members keep full tone, since a dimmed dot reads as a dark speck on the bright bulge.",
+    "bulgeOpacity": 1
   }
 }

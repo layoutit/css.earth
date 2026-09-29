@@ -40,6 +40,20 @@ test('a stacked bank adds its inner levels\' dots as the view narrows, only once
     .toThrow(/test-stars: level 1 appears over a shrinking window/);
 });
 
+test('seen from outside, a bank draws only as many dots as its projected shape holds', async () => {
+  const { pointSpread, screenPointCount } = await import('./catalogue-points.js');
+  // A flat disc of radius 10 in the x-y plane.
+  const disc = Array.from({ length: 2000 }, (_, i) => ({ positionUnits: [10 * Math.sqrt((i + .5) / 2000) * Math.cos(i * 2.4), 10 * Math.sqrt((i + .5) / 2000) * Math.sin(i * 2.4), 0] as const }));
+  const spread = pointSpread(disc);
+  expect(Math.abs(spread.normal[2])).toBeCloseTo(1, 6);
+  expect(spread.across).toBeGreaterThan(9); expect(spread.along).toBeCloseTo(0, 6);
+  expect(screenPointCount(spread, [0, 0, 5], 1000), 'within its reach there is no limit').toBe(Infinity);
+  const faceOn = screenPointCount(spread, [0, 0, 1000], 1000), tilted = screenPointCount(spread, [0, 800, 600], 1000), far = screenPointCount(spread, [0, 0, 4000], 1000);
+  expect(faceOn).toBe(Math.floor(Math.PI * (1000 * spread.across / 1000) ** 2 / 64));
+  expect(tilted).toBeLessThan(faceOn);
+  expect(far, 'four times farther holds a sixteenth').toBe(Math.floor(Math.PI * (1000 * spread.across / 4000) ** 2 / 64));
+});
+
 test('a palette bank colours each point by its index and refuses an index outside the palette', () => {
   const coloured = { ...bank, appearance: { ...bank.appearance, palette: ['#8ec9ff', '#ffc070'] }, points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
   expect(parseCataloguePoints(coloured).points.map(point => point.colorCss)).toEqual(['#8ec9ff', '#ffc070']);

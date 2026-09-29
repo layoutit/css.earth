@@ -8,11 +8,12 @@ export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly 
 
 /** Project a bounded 3D field through eight retained CSS nodes. Each node carries a
  * batch of circular box shadows, so camera motion changes paint but never DOM shape.
- * `drawnCount`, given the camera's distance from the frame origin, draws only the first points of the list. */
+ * `drawnCount`, given the camera's distance from the frame origin and its position in the frame, draws only the first
+ * points of the list. */
 export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, className, stylePoint, drawnCount }: {
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; points: readonly T[]; className: string;
   stylePoint(point: T, distanceUnits: number): BatchedSpatialPointStyle | null;
-  drawnCount?(cameraDistanceUnits: number): number;
+  drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
 }) {
   const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
   Object.assign(root.style,{position:'absolute',inset:'0',overflow:'hidden',pointerEvents:'none'});
@@ -32,7 +33,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     previousCamera=camera;
     let visible = 0;
     const shadows: string[][]=nodes.map(()=>[]);
-    const count = drawnCount ? Math.max(0, Math.min(points.length, Math.round(drawnCount(Math.hypot(...local.positionUnits))))) : points.length;
+    const count = drawnCount ? Math.max(0, Math.min(points.length, Math.round(drawnCount(Math.hypot(...local.positionUnits), local.positionUnits)))) : points.length;
     points.slice(0, count).forEach((point,index)=>{
       const x=point.positionUnits[0]-local.positionUnits[0], y=point.positionUnits[1]-local.positionUnits[1], z=point.positionUnits[2]-local.positionUnits[2];
       const depth=-(r[2]!*x+r[5]!*y+r[8]!*z);

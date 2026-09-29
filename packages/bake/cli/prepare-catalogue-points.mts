@@ -238,34 +238,83 @@ if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${t
 const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; excluded: number; astropy: string; points: number[][]; colors: (number | null)[];
   magnitudes: (number | null)[];
   sigmas: (number | null)[]; sky: [number, number][] | null; maxDistanceKpc: number };
-/** A disc placement may spread the rows through the disc's published thickness: each row stays on its own sight line (its
- * sky position is the catalogue's) and moves along it to a height above the midplane drawn from an isothermal sheet,
- * sech²(z / z0), with z0 the source's scale height. The draw is seeded by the bank and the row's order, so a bake repeats
- * it exactly. Only the spread is published; no row's own height is measured. */
+/** A disc placement may spread the rows through the disc's published thickness: each row keeps its place in the disc (the
+ * midplane point under its catalogue position) and moves along the disc's normal to a height drawn from the source's vertical
+ * profile: an isothermal sheet, sech²(z / z0), or an exponential, exp(-|z| / h). A scale height that grows with disc
+ * radius (a flaring layer) is given as its value at the centre plus a linear rise per kpc. The draw is seeded by the bank
+ * and the row's order, so a bake repeats it exactly. Only the spread is published; no row's own height is measured. */
 const discThickness = (recipe.frame as { discThickness?: unknown } | undefined)?.discThickness as undefined | {
-  profile: 'sech2'; scaleHeightPc: number; source: string; basis: string };
-if (discThickness !== undefined && (!discPlacement || discThickness.profile !== 'sech2' || !(discThickness.scaleHeightPc > 0)
+  profile: 'sech2' | 'exponential'; scaleHeightPc: number | { atCentrePc: number; perKpcPc: number }; source: string; basis: string };
+const flare = typeof discThickness?.scaleHeightPc === 'object' && discThickness.scaleHeightPc !== null ? discThickness.scaleHeightPc : null;
+if (discThickness !== undefined && (!discPlacement || !['sech2', 'exponential'].includes(discThickness.profile)
+    || (flare ? !(flare.atCentrePc > 0) || !(flare.perKpcPc >= 0) : !(typeof discThickness.scaleHeightPc === 'number' && discThickness.scaleHeightPc > 0))
     || typeof discThickness.source !== 'string' || !discThickness.source || typeof discThickness.basis !== 'string' || !discThickness.basis)) {
-  throw new TypeError(`${at('frame.discThickness')} needs frame.placement image-layer-disc, profile sech2, a positive scaleHeightPc, a source and a basis; got ${JSON.stringify(discThickness)}.`);
+  throw new TypeError(`${at('frame.discThickness')} needs frame.placement image-layer-disc, profile sech2 or exponential, a positive scaleHeightPc (or { atCentrePc > 0, perKpcPc >= 0 }), a source and a basis; got ${JSON.stringify(discThickness)}.`);
+}
+/** A disc placement may also put rows in the galaxy's bulge (the image layers' `geometry.bulge` fit): a row is a bulge
+ * member with the bulge's share of the fitted light at its sky position, and sits along its sight line at a depth drawn
+ * from the bulge's density there. Both draws are seeded like the height, so a bake repeats them. */
+const bulgePlacement = (recipe.frame as { bulge?: unknown } | undefined)?.bulge as undefined | { source: string; basis: string };
+if (bulgePlacement !== undefined && (!discPlacement || typeof bulgePlacement.source !== 'string' || !bulgePlacement.source || typeof bulgePlacement.basis !== 'string' || !bulgePlacement.basis)) {
+  throw new TypeError(`${at('frame.bulge')} needs frame.placement image-layer-disc, a source and a basis; got ${JSON.stringify(bulgePlacement)}.`);
+}
+let bulgeMembers = 0;
+const inBulge: boolean[] = [];
+// A bulge member may take its own tone (`appearance.bulgeOpacity`): a dimmed dot reads as a dark speck on the bright bulge.
+const bulgeOpacity = (recipe.appearance as { bulgeOpacity?: unknown }).bulgeOpacity;
+if (bulgeOpacity !== undefined && (!bulgePlacement || typeof bulgeOpacity !== 'number' || !(bulgeOpacity > 0 && bulgeOpacity <= 1) || toneBy || colorBy || colorByClass || colorByBv)) {
+  throw new TypeError(`${at('appearance.bulgeOpacity')} needs frame.bulge, a single-colour bank and a value in (0, 1]; got ${JSON.stringify(bulgeOpacity)}.`);
 }
 if (discPlacement) {
   // Each row on the image layers' disc midplane: its sight line's unit vector times the distance to the midplane, in kpc.
-  const { parseImageLayerRecipe, imageLayerDisc, imageLayerDiscDistanceKpc } = await import('@cssearth/bake/image-layers');
-  const disc = imageLayerDisc(parseImageLayerRecipe(JSON.parse(await readFile(resolve(objectDirectory, 'source', 'recipe.json'), 'utf8'))));
+  const { parseImageLayerRecipe, imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerBulgeModel } = await import('@cssearth/bake/image-layers');
+  const layerRecipe = parseImageLayerRecipe(JSON.parse(await readFile(resolve(objectDirectory, 'source', 'recipe.json'), 'utf8')));
+  const disc = imageLayerDisc(layerRecipe);
+  const bulgeModel = bulgePlacement ? imageLayerBulgeModel(layerRecipe) : null;
+  if (bulgeModel && bulgePlacement!.source !== bulgeModel.bulge.source) {
+    throw new TypeError(`${at('frame.bulge.source')} is ${JSON.stringify(bulgePlacement!.source)}, but the image layers' bulge fit is ${JSON.stringify(bulgeModel.bulge.source)} (source/recipe.json geometry.bulge).`);
+  }
   // The disc normal in Sun-centred ICRS, from its components along the target's east, north and sight-line axes.
   const normal = [0, 1, 2].map(axis => disc.diskNormal[0] * disc.east[axis]! + disc.diskNormal[1] * disc.north[axis]! + disc.diskNormal[2] * disc.target[axis]!);
+  const centre = disc.target.map(value => value * disc.distanceKpc);
   const { createHash } = await import('node:crypto');
-  const height = (index: number) => {
-    // A uniform draw in (0, 1) from the row's seed, through the sech² profile's inverse cumulative distribution.
-    const u = (Number(createHash('sha256').update(`${id}:${index}`).digest().readBigUInt64BE(0) >> 11n) + 0.5) / 2 ** 53;
-    return discThickness!.scaleHeightPc / 1000 * Math.atanh(2 * u - 1);
+  // A uniform draw in (0, 1) from the row's seed (and a salt for draws after the first).
+  const draw = (index: number, salt = '') => (Number(createHash('sha256').update(`${id}:${index}${salt}`).digest().readBigUInt64BE(0) >> 11n) + 0.5) / 2 ** 53;
+  const height = (index: number, radiusKpc: number) => {
+    // Through the profile's inverse cumulative distribution.
+    const u = draw(index);
+    const scaleKpc = (flare ? flare.atCentrePc + flare.perKpcPc * radiusKpc : discThickness!.scaleHeightPc as number) / 1000;
+    return discThickness!.profile === 'sech2' ? scaleKpc * Math.atanh(2 * u - 1) : -Math.sign(2 * u - 1) * scaleKpc * Math.log(1 - Math.abs(2 * u - 1));
   };
   converted.points = converted.sky!.map(([ra, dec], index) => {
     const r = ra * Math.PI / 180, d = dec * Math.PI / 180, ray = [Math.cos(d) * Math.cos(r), Math.cos(d) * Math.sin(r), Math.sin(d)];
-    const along = discThickness ? height(index) / (ray[0]! * normal[0]! + ray[1]! * normal[1]! + ray[2]! * normal[2]!) : 0;
-    const distance = imageLayerDiscDistanceKpc(disc, ra, dec) + along;
-    converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
-    return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
+    const midplane = imageLayerDiscDistanceKpc(disc, ra, dec), radiusKpc = Math.hypot(...ray.map((value, axis) => value * midplane - centre[axis]!));
+    if (bulgeModel) {
+      // The sight line in the galaxy's local frame (east, north, away from the Sun), and the row's sky offset in kpc.
+      const local = [disc.east, disc.north, disc.target].map(axis => ray[0]! * axis[0] + ray[1]! * axis[1] + ray[2]! * axis[2]) as [number, number, number];
+      const [east, north] = [local[0] / local[2] * disc.distanceKpc, local[1] / local[2] * disc.distanceKpc];
+      if (draw(index, ':bulge') < bulgeModel.share(east, north)) {
+        // Depth from the density along the line, within the bulge's reach either side of where it crosses the midplane.
+        const reach = bulgeModel.bulge.extentKpc.radius, samples = 400, weights: number[] = [];
+        for (let k = 0; k < samples; k++) {
+          const t = midplane - reach + (k + 0.5) / samples * 2 * reach;
+          weights.push(bulgeModel.density([local[0] * t, local[1] * t, local[2] * t - disc.distanceKpc]));
+        }
+        const total = weights.reduce((a, b) => a + b, 0), target = draw(index, ':depth') * total;
+        let k = 0, running = weights[0]!;
+        while (running < target && k < samples - 1) running += weights[++k]!;
+        const distance = midplane - reach + (k + 0.5) / samples * 2 * reach;
+        bulgeMembers++; inBulge[index] = true;
+        converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
+        return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
+      }
+    }
+    // The height is taken along the disc's normal from the midplane point under the row, so seen face-on every row keeps
+    // its place in the disc. Along the sight line instead, a height z would move it z tan(i) across the disc (3.5 z for
+    // M31), scattering the arms. Seen from the Sun a row then sits z sin(i) from its catalogue position.
+    const h = discThickness ? height(index, radiusKpc) : 0, position = ray.map((value, axis) => value * midplane + h * normal[axis]!);
+    converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, Math.hypot(...position));
+    return position.map(value => Math.round(value * 1e4) / 1e4);
   });
 }
 
@@ -342,12 +391,18 @@ const pointIndex = converted.points.map((_, index) => {
   }
   return combos.get(key)!;
 });
+// Disc and bulge members as two tones of the one colour: the layer carries the brighter, paletteTone scales each.
+const bulgeTone = typeof bulgeOpacity === 'number' ? (() => {
+  const layer = Math.max(appearance.opacity, bulgeOpacity);
+  return { layer, tones: [Number((appearance.opacity / layer).toFixed(4)), Number((bulgeOpacity / layer).toFixed(4))] };
+})() : null;
 const magnitudes = converted.magnitudes.filter((value): value is number => value !== null && Number.isFinite(value)).sort((a, b) => a - b);
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
-  appearance: { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
-    ...(toneBy ? { palette: tonedPalette, paletteTone } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
+  appearance: bulgeTone ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: bulgeTone.layer, palette: [appearance.colorCss, appearance.colorCss], paletteTone: bulgeTone.tones }
+    : { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
+      ...(toneBy ? { palette: tonedPalette, paletteTone } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
   ...(toneBy ? { tone: { band: toneBy.band, brightMagnitude: toneBy.brightMagnitude, faintMagnitude: toneBy.faintMagnitude, faintTone: toneBy.faintTone, basis: toneBy.basis,
     absoluteMagnitudePercentiles: Object.fromEntries([5, 25, 50, 75, 95].map(q => [q, Number(magnitudes[Math.floor(magnitudes.length * q / 100)]?.toFixed(2))])),
     withoutMagnitude: converted.magnitudes.length - magnitudes.length } } : {}),
@@ -356,15 +411,17 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
     points: converted.colors.filter(value => classIndex(value) === index).length })),
     { label: colorByClass.missing.label, colorCss: colorByClass.missing.colorCss, basis: colorByClass.missing.basis, points: converted.colors.filter(value => classIndex(value) === colorByClass.classes.length).length }] } : {}),
   counts: { rows: converted.rows, selected: converted.selected, points: converted.points.length, missingDistance: converted.missingDistance,
-    ...(table.exclude ? { excluded: converted.excluded } : {}) },
+    ...(table.exclude ? { excluded: converted.excluded } : {}), ...(bulgePlacement ? { bulge: bulgeMembers } : {}) },
+  ...(bulgePlacement ? { bulge: { source: bulgePlacement.source, basis: bulgePlacement.basis } } : {}),
   ...(table.exclude ? { exclusion: { path: table.exclude.path, withinArcsec: table.exclude.withinArcsec, source: table.exclude.source, basis: table.exclude.basis } } : {}),
   conversion: discPlacement ? 'Right ascension and declination onto the midplane of the image layers\' inclined disc (source/recipe.json, packages/bake/src/image-layers/disc.ts), heliocentric ICRS Cartesian, kpc, rounded to 0.1 pc.'
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
-  points: toneBy || colorByClass || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
+  points: bulgeTone ? converted.points.map((point, index) => [...point, inBulge[index] ? 1 : 0])
+    : toneBy || colorByClass || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
 const outputPath = resolve(objectDirectory, 'prepared', `${id}.json`);
 await writeFile(outputPath, JSON.stringify(bank) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
-console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance${table.exclude ? `, ${converted.excluded} excluded` : ''}) into ${outputPath}.`);
+console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance${table.exclude ? `, ${converted.excluded} excluded` : ''}${bulgePlacement ? `, ${bulgeMembers} in the bulge` : ''}) into ${outputPath}.`);

@@ -35,14 +35,23 @@
     "output": "sun-icrf",
     "epochJdTt": 2461286.5,
     "placement": "image-layer-disc",
-    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": {
+        "atCentrePc": 182,
+        "perKpcPc": 16
+      },
+      "source": "braun-1991-m31-neutral-gas",
+      "basis": "Braun (1991, Sect. 5.3, eq. 13) fits M31's H I layer with an exponential whose scale height rises linearly with radius, 182 + 16 R_kpc pc (about 340 pc at the 10 kpc star-forming ring), with considerable scatter. It is the gas these young objects form from; young stars sit in the cold, thinner part of it, so for them it is an upper value, used as a presentation choice. Each row's own height is drawn, not measured."
+    }
   },
   "source": "lee-2014-m31-snr-candidates",
   "meaning": "Supernova remnant candidates found by Lee & Lee (2014) in the Local Group Galaxies Survey H-alpha and [S II] images: one dot per candidate at its catalogue sky position.",
   "appearance": {
     "colorCss": "#9fe8ff",
     "radiusPx": 1,
-    "opacity": 1,
-    "note": "Presentation only: the supernova-remnant colour of the M33 dots, so the two galaxies read alike."
+    "opacity": 0.6,
+    "note": "Presentation only: the supernova-remnant colour of the M33 dots, so the two galaxies read alike. Toned to 60% on M31, whose photograph is darker than the Milky Way backing: at full tone these dots outshone the disc. Planetary nebulae keep full tone, since dimmed dots read as dark specks on the bright bulge."
   }
 }

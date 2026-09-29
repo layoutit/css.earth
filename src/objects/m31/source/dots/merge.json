@@ -6,23 +6,23 @@
   "banks": [
     {
       "bank": "azimlu-hii",
-      "withinPcOfCentre": 35000,
-      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json)."
+      "withinPcOfCentre": 27200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 27.2 kpc support radius (recipe.json)."
     },
     {
       "bank": "pandromeda-cepheids",
-      "withinPcOfCentre": 35000,
-      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json)."
+      "withinPcOfCentre": 27200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 27.2 kpc support radius (recipe.json)."
     },
     {
       "bank": "lee-snr",
-      "withinPcOfCentre": 35000,
-      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json)."
+      "withinPcOfCentre": 27200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 27.2 kpc support radius (recipe.json)."
     },
     {
       "bank": "merrett-pne",
-      "withinPcOfCentre": 35000,
-      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json). Planetary nebulae also trace the bulge and halo; one far along the minor axis lands at a large disc radius when placed on the disc, and those are the ones this leaves out."
+      "withinPcOfCentre": 27200,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 27.2 kpc support radius (recipe.json). Planetary nebulae also trace the bulge and halo; one far along the minor axis lands at a large disc radius when placed on the disc, and those are the ones this leaves out."
     }
   ],
   "colourTowardWhite": 0.5,

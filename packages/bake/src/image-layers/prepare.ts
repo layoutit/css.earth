@@ -2,11 +2,14 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sha256 } from '@cssearth/core/node';
+import { catalogueColor } from '@cssearth/engine';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.ts';
 import { resizeRgbaLanczos3 } from './resize-rgba.ts';
-import { imageLayerDisc, norm, rad, unit } from './disc.ts';
+import { imageLayerDisc, imageLayerView, norm, rad } from './disc.ts';
+import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, type ForegroundRemoval } from './foreground.ts';
+import { imageLayerBulgeModel } from './bulge.ts';
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
@@ -22,6 +25,7 @@ export interface PreparedImageLayerBank {
 }
 const M_PER_PC = 3.0856775814913673e16, M_PER_KPC = M_PER_PC * 1000;
 const scale = (a: Vec3, n: number): Vec3 => [a[0] * n, a[1] * n, a[2] * n];
+const difference3 = (a: Vec3, b: Vec3): Vec3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], difference = difference3;
 const add = (...v: Vec3[]): Vec3 => v.reduce<Vec3>((a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]], [0, 0, 0]);
 function quaternionFromBasis(x: Vec3, y: Vec3, z: Vec3): [number, number, number, number] {
   const m00=x[0],m01=y[0],m02=z[0],m10=x[1],m11=y[1],m12=z[1],m20=x[2],m21=y[2],m22=z[2], tr=m00+m11+m22;
@@ -42,23 +46,77 @@ function compileStyle(vertices: Quad['verticesUnits'], texture: string, width: n
   // 8205×8964 device pixels on a DPR 3 phone.
   return compileVolumeLeaf(g,width).style;
 }
+/** The recipe's foreground star table (CSV with a header row) placed on the face image and removed from it in place. */
+async function removeCataloguedForeground(rgb: Buffer, width: number, height: number, recipe: ImageLayerRecipe, sourceDirectory: string): Promise<ForegroundRemoval> {
+  const table=recipe.source.foregroundStars!, lines=(await readFile(resolve(sourceDirectory,table.path),'utf8')).trim().split(/\r?\n/), header=lines[0]!.split(',');
+  const column=(name:string)=>{const index=header.indexOf(name);if(index<0)throw new TypeError(`${recipe.id}: ${table.path} has no ${JSON.stringify(name)} column (source.foregroundStars); its header is ${lines[0]}.`);return index;};
+  const ra=column(table.raDegColumn),dec=column(table.decDegColumn),g=column(table.gMagColumn),view=imageLayerView(recipe);
+  const stars=lines.slice(1).flatMap((line,row)=>{
+    const cells=line.split(','),values=[Number(cells[ra]),Number(cells[dec]),Number(cells[g])];
+    if(values.some(value=>!Number.isFinite(value)))throw new TypeError(`${recipe.id}: ${table.path} row ${row+2} has no finite ${table.raDegColumn}, ${table.decDegColumn} or ${table.gMagColumn}: ${line}.`);
+    const crop=view.crop(values[0]!,values[1]!);
+    return crop?[{x:(crop[0]+1)/2*width-.5,y:(1-crop[1])/2*height-.5,gMag:values[2]!}]:[];
+  }).sort((a,b)=>a.gMag-b.gMag);
+  return removeForegroundStars(rgb,width,height,stars);
+}
+/** Scales red and blue in linear light so the photograph's light-weighted mean colour over the disc (unclipped pixels
+ * inside the support radius) matches the catalogue colour of the recipe's integrated B-V. Returns the ratios and gains. */
+function tieColour(rgb: Buffer, width: number, height: number, recipe: ImageLayerRecipe) {
+  const tie=recipe.bake.colourTie!,disc=imageLayerDisc(recipe),view=imageLayerView(recipe),pa=rad(recipe.geometry.lineOfNodesPaDeg);
+  const nodes:Vec3=[Math.sin(pa),Math.cos(pa),0],minor=norm(cross(disc.diskNormal,nodes)),support=recipe.geometry.supportRadiusKpc;
+  const toLinear=Array.from({length:256},(_,v)=>{const s=v/255;return s<=.04045?s/12.92:((s+.055)/1.055)**2.4;});
+  const toByte=(l:number)=>{const c=Math.max(0,Math.min(1,l)),s=c<=.0031308?12.92*c:1.055*c**(1/2.4)-.055;return Math.round(255*s);};
+  const sums=[0,0,0];
+  for(let py=0;py<height;py+=2)for(let px=0;px<width;px+=2){const i=3*(py*width+px);if(Math.max(rgb[i]!,rgb[i+1]!,rgb[i+2]!)>=250)continue;
+    const ray=view.ray(2*(px+.5)/width-1,1-2*(py+.5)/height),local:Vec3=[dot(ray,disc.east),dot(ray,disc.north),dot(ray,disc.target)];
+    const t=dot(disc.diskNormal,[0,0,disc.distanceKpc])/dot(disc.diskNormal,local),point:Vec3=[t*local[0],t*local[1],t*local[2]-disc.distanceKpc];
+    if(Math.hypot(dot(point,nodes),dot(point,minor))>support)continue;
+    for(let c=0;c<3;c++)sums[c]+=toLinear[rgb[i+c]!]!;}
+  const targetRgb=catalogueColor(Number.NaN,tie.bv),target=targetRgb.map(v=>toLinear[v]!);
+  const measured=[sums[0]!/sums[1]!,1,sums[2]!/sums[1]!],wanted=[target[0]!/target[1]!,1,target[2]!/target[1]!],gains=wanted.map((w,c)=>w/measured[c]!);
+  const tables=gains.map(g=>Array.from({length:256},(_,v)=>toByte(toLinear[v]!*g)));
+  for(let i=0;i<rgb.length;i++)rgb[i]=tables[i%3]![rgb[i]!]!;
+  const round=(values:number[])=>values.map(v=>Number(v.toFixed(3)));
+  return {bv:tie.bv,source:tie.source,targetRgb:[...targetRgb],measured:round(measured),target:round(wanted),gains:round(gains)};
+}
+/** The recipe's companion galaxies, from their catalogue rows, as half-light ellipses on the face image, removed in place. */
+async function removeCatalogueCompanions(rgb: Buffer, width: number, height: number, recipe: ImageLayerRecipe, sourceDirectory: string): Promise<{ keys: string[]; extentHalfLight: number[] }> {
+  const companions=recipe.source.companions!,path=resolve(sourceDirectory,'../../../..',companions.catalogue),lines=(await readFile(path,'utf8')).trim().split(/\r?\n/);
+  // The catalogue's cells hold no quoted commas in the columns read here; a quoted cell elsewhere keeps its commas out of the split.
+  const cells=(line:string)=>line.match(/("([^"]|"")*"|[^,]*)(,|$)/g)!.map(cell=>cell.replace(/,$/,'').replace(/^"|"$/g,''));
+  const header=cells(lines[0]!),column=(name:string)=>{const index=header.indexOf(name);if(index<0)throw new TypeError(`${recipe.id}: ${companions.catalogue} has no ${JSON.stringify(name)} column (source.companions).`);return index;};
+  const [key,ra,dec,rhalf,pa,ellipticity]=['key','ra','dec','rhalf','position_angle','ellipticity'].map(column) as [number,number,number,number,number,number];
+  const rows=new Map(lines.slice(1).map(line=>{const row=cells(line);return [row[key]!,row] as const;})),view=imageLayerView(recipe);
+  const pixel=(raDeg:number,decDeg:number)=>{const crop=view.crop(raDeg,decDeg);if(!crop)throw new TypeError(`${recipe.id}: ${raDeg}, ${decDeg} is behind the photograph.`);return [(crop[0]+1)/2*width-.5,(1-crop[1])/2*height-.5] as const;};
+  const ellipses=companions.keys.map(name=>{
+    const row=rows.get(name);if(!row)throw new TypeError(`${recipe.id}: ${companions.catalogue} has no row with key ${JSON.stringify(name)} (source.companions.keys).`);
+    const values=[ra,dec,rhalf,pa,ellipticity].map(index=>Number(row[index]));
+    if(values.some(value=>!Number.isFinite(value))||row[pa]===''||row[ellipticity]==='')throw new TypeError(`${recipe.id}: ${companions.catalogue} row ${name} needs ra, dec, rhalf, position_angle and ellipticity; got ${[ra,dec,rhalf,pa,ellipticity].map(index=>JSON.stringify(row[index])).join(', ')}.`);
+    const [r,d,half,angle,e]=values as [number,number,number,number,number],[x,y]=pixel(r,d),theta=rad(angle);
+    // One half-light radius along the position angle (east of north), onto the image.
+    const [ex,ey]=pixel(r+half/60*Math.sin(theta)/Math.cos(rad(d)),d+half/60*Math.cos(theta)),halfLightPx=Math.hypot(ex-x,ey-y);
+    return {x,y,halfLightPx,axisRatio:1-e,major:[(ex-x)/halfLightPx,(ey-y)/halfLightPx]} satisfies CompanionEllipse;
+  });
+  return {keys:companions.keys,...removeCompanionGalaxies(rgb,width,height,ellipses)};
+}
 export async function prepareImageLayers(options: { sourceDirectory: string; outputDirectory: string; recipe: ImageLayerRecipe }): Promise<PreparedImageLayerBank> {
   const { recipe }=options, source=await readFile(resolve(options.sourceDirectory,recipe.source.path));
   const metadata=await sharp(source).metadata();
   if(metadata.width!==recipe.source.dimensions[0]||metadata.height!==recipe.source.dimensions[1]) throw new TypeError('Image source dimensions mismatch.');
   const resized=sharp(source).rotate().resize({width:recipe.bake.maxFacePixels,height:recipe.bake.maxFacePixels,fit:'inside',withoutEnlargement:true});
   const {data:rgb,info}=await resized.removeAlpha().toColourspace('srgb').raw().toBuffer({resolveWithObject:true});
+  const foreground=recipe.source.foregroundStars?await removeCataloguedForeground(rgb,info.width,info.height,recipe,options.sourceDirectory):null;
+  const companions=recipe.source.companions?await removeCatalogueCompanions(rgb,info.width,info.height,recipe,options.sourceDirectory):null;
+  if(recipe.bake.levels){const {black,white,gamma}=recipe.bake.levels,table=Array.from({length:256},(_,v)=>Math.round(255*Math.max(0,Math.min(1,(v/255-black)/(white-black)))**(1/gamma)));for(let i=0;i<rgb.length;i++)rgb[i]=table[rgb[i]!]!;}
+  const colourTie=recipe.bake.colourTie?tieColour(rgb,info.width,info.height,recipe):null;
   const base=Buffer.alloc(info.width*info.height*4), floor=recipe.bake.backgroundFloor*255;
   for(let p=0;p<info.width*info.height;p++) { const i=p*3,o=p*4,r=Math.max(0,rgb[i]-floor),g=Math.max(0,rgb[i+1]-floor),b=Math.max(0,rgb[i+2]-floor),a=Math.max(r,g,b);
     base[o]=a?Math.round(r*255/a):0;base[o+1]=a?Math.round(g*255/a):0;base[o+2]=a?Math.round(b*255/a):0;base[o+3]=Math.round(a*255/(255-floor)); }
-  const pa=rad(recipe.geometry.lineOfNodesPaDeg), theta=rad(recipe.observation.northClockwiseDeg);
+  const pa=rad(recipe.geometry.lineOfNodesPaDeg);
   const { target, north, east, diskNormal }=imageLayerDisc(recipe);
   const origin=scale(target,recipe.target.distancePc*M_PER_PC), q=quaternionFromBasis(east,north,target);
-  const obs=unit(recipe.observation.centerRaDeg,recipe.observation.centerDecDeg),obsNorth=norm([-Math.cos(rad(recipe.observation.centerRaDeg))*Math.sin(rad(recipe.observation.centerDecDeg)),-Math.sin(rad(recipe.observation.centerRaDeg))*Math.sin(rad(recipe.observation.centerDecDeg)),Math.cos(rad(recipe.observation.centerDecDeg))]);
-  const obsEast=norm(cross(obsNorth,obs)),imageRight=add(scale(obsNorth,Math.sin(theta)),scale(obsEast,-Math.cos(theta))),imageUp=add(scale(obsNorth,Math.cos(theta)),scale(obsEast,Math.sin(theta)));
-  const tanX=Math.tan(rad(recipe.observation.fieldOfViewDeg[0])/2),tanY=Math.tan(rad(recipe.observation.fieldOfViewDeg[1])/2),distanceKpc=recipe.target.distancePc/1000;
-  const rayLocal=(u:number,v:number):Vec3=>{let fullU=u,fullV=v;const window=recipe.source.parentPixelWindow;if(window){const [x,y,w,h]=window,[ow,oh]=recipe.source.originalDimensions;fullU=2*(x+(u+1)*w/2)/ow-1;fullV=1-2*(y+(1-v)*h/2)/oh;}
-    const ray=norm(add(obs,scale(imageRight,fullU*tanX),scale(imageUp,fullV*tanY)));return [dot(ray,east),dot(ray,north),dot(ray,target)];};
+  const view=imageLayerView(recipe),distanceKpc=recipe.target.distancePc/1000;
+  const rayLocal=(u:number,v:number):Vec3=>{const ray=view.ray(u,v);return [dot(ray,east),dot(ray,north),dot(ray,target)];};
   const intersect=(u:number,v:number,offset:number):Vec3=>{const ray=rayLocal(u,v),t=(dot(diskNormal,[0,0,distanceKpc])+offset)/dot(diskNormal,ray);return [t*ray[0],t*ray[1],t*ray[2]-distanceKpc];};
   const thickness=recipe.geometry.thicknessKpc;
   const lineNodes:Vec3=[Math.sin(pa),Math.cos(pa),0],diskMinor=norm(cross(diskNormal,lineNodes)),support=recipe.geometry.supportRadiusKpc,taper=support*recipe.geometry.supportTaperFraction;
@@ -66,6 +124,28 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     if(radius>=support)factor=0;else if(radius>taper){const t=(support-radius)/(support-taper);factor=t*t*(3-2*t);}
     const edge=Math.min(px/Math.max(1,info.width-1),(info.width-1-px)/Math.max(1,info.width-1),py/Math.max(1,info.height-1),(info.height-1-py)/Math.max(1,info.height-1)),et=Math.min(1,edge/recipe.bake.edgeTaperFraction),edgeFactor=et*et*(3-2*et);
     base[4*(py*info.width+px)+3]=Math.round(base[4*(py*info.width+px)+3]*factor*edgeFactor);}
+  // A bulge fit splits each pixel's light (as optical depth) between the disc, which keeps its share here, and the bulge.
+  const bulgeModel=recipe.geometry.bulge?imageLayerBulgeModel(recipe):null,bulgeTau=bulgeModel?new Float32Array(info.width*info.height):null;
+  // Where the photograph is saturated it holds no split: there the fit's own bulge and disc light stand in, scaled to the
+  // photograph by the median ratio of optical depth to fitted light just below saturation.
+  let saturatedPixels=0,lightScale=0;
+  if(bulgeModel&&bulgeTau){const reach=recipe.geometry.bulge!.extentKpc.radius,SATURATED=.97,NEAR=.85,ratios:number[]=[],nearColour:number[][]=[[],[],[]];
+    const skyAt=(px:number,py:number)=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc,ray[1]/ray[2]*distanceKpc] as const;};
+    for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const [east,north]=skyAt(px,py),a=base[4*(py*info.width+px)+3]/255;
+      if(Math.hypot(east,north)<=reach&&a>=NEAR&&a<SATURATED){const l=bulgeModel.light(east,north),o=4*(py*info.width+px);ratios.push(-Math.log(1-a)/(l.bulge+l.disc));for(let c=0;c<3;c++)nearColour[c]!.push(base[o+c]!);}}
+    ratios.sort((x,y)=>x-y);lightScale=ratios.length?ratios[ratios.length>>1]!:0;
+    // Saturated pixels are clipped white; they take the median colour of the light just below saturation.
+    const coreColour=nearColour.map(values=>{values.sort((x,y)=>x-y);return values.length?values[values.length>>1]!:255;});
+    for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const [east,north]=skyAt(px,py);
+      if(Math.hypot(east,north)>reach)continue;
+      const i=4*(py*info.width+px)+3,a=Math.min(base[i]/255,.998),tau=-Math.log(1-a);
+      if(a>=SATURATED&&lightScale>0){const l=bulgeModel.light(east,north);saturatedPixels++;for(let c=0;c<3;c++)base[i-3+c]=coreColour[c]!;bulgeTau[py*info.width+px]=lightScale*l.bulge;base[i]=Math.round(255*(1-Math.exp(-lightScale*l.disc)));continue;}
+      // Near the centre the photograph's display stretch compresses bright light, so its disc share keeps the bulge's
+      // rounder sky shape and deprojects into a streak; there the disc takes the fit's disc light, blending back to the
+      // photograph's split as the bulge's share falls to half.
+      const share=bulgeModel.share(east,north),w=Math.min(1,share/.5),l=bulgeModel.light(east,north);
+      const discTau=(1-w)*(1-share)*tau+w*Math.min(tau,lightScale*l.disc);
+      bulgeTau[py*info.width+px]=tau-discTau;base[i]=Math.round(255*(1-Math.exp(-discTau)));}}
   let left=info.width,top=info.height,right=-1,bottom=-1;
   for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(base[4*(py*info.width+px)+3]){left=Math.min(left,px);right=Math.max(right,px);top=Math.min(top,py);bottom=Math.max(bottom,py);}
   if(right<left)throw new TypeError('Physical support removed the complete observation.');
@@ -104,14 +184,49 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const offset=axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2;
       leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,sideWidth,depth,leaves.length),sha256:sha256(bytes),bytes:bytes.length}); }};
   await side('x');await side('y');
+  if(bulgeModel&&bulgeTau){
+    // The bulge's light, spread along each of our sight lines by the spheroid's density: slices parallel to the disc for the
+    // z bank, curtains through image columns and rows for the side banks. Along every sight line from the Sun the slices
+    // add up to the photograph's bulge light, so the view from the Sun is unchanged.
+    let bl=info.width,bt=info.height,br=-1,bb=-1;for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(bulgeTau[py*info.width+px]>1e-3){bl=Math.min(bl,px);br=Math.max(br,px);bt=Math.min(bt,py);bb=Math.max(bb,py);}
+    if(br<bl)throw new TypeError(`${recipe.id}: the bulge fit (${recipe.geometry.bulge!.source}) leaves no light inside ${recipe.geometry.bulge!.extentKpc.radius} kpc.`);
+    const bw=br-bl+1,bh=bb-bt+1,fscale=Math.min(1,recipe.bake.bulgeFacePixels!/Math.max(bw,bh)),sw=Math.max(2,Math.round(bw*fscale)),sh=Math.max(2,Math.round(bh*fscale));
+    const bu0=2*bl/info.width-1,bu1=2*(br+1)/info.width-1,bv0=1-2*bt/info.height,bv1=1-2*(bb+1)/info.height,height=recipe.geometry.bulge!.extentKpc.height;
+    // Bulge optical depth and colour on a coarser grid (texel centres in crop u, v), box-averaged from the face image.
+    const cell=(i:number,j:number,cols:number,rows:number)=>{const x0=bl+Math.floor(i*bw/cols),x1=Math.max(x0+1,bl+Math.floor((i+1)*bw/cols)),y0=bt+Math.floor(j*bh/rows),y1=Math.max(y0+1,bt+Math.floor((j+1)*bh/rows));
+      let tau=0;const colour=[0,0,0];for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const t=bulgeTau[y*info.width+x],k=4*(y*info.width+x);tau+=t;for(let c=0;c<3;c++)colour[c]+=t*base[k+c];}
+      const n=(x1-x0)*(y1-y0);return {tau:tau/n,colour:colour.map(c=>tau?c/tau:0)};};
+    const at=(i:number,j:number,cols:number,rows:number)=>({u:bu0+(bu1-bu0)*(i+.5)/cols,v:bv0+(bv1-bv0)*(j+.5)/rows});
+    // Optical depth per unit density along the Sun's sight line through (u, v): the bulge light over the density summed
+    // across the z slices, each weighted by its path length there.
+    const slices=recipe.bake.bulgeSlices!,offsets=Array.from({length:slices},(_,k)=>height*((k+.5)/slices*2-1)),step=2*height/slices;
+    const scaleAt=(u:number,v:number,tau:number)=>{const ray=rayLocal(u,v),path=step/Math.abs(dot(diskNormal,norm(ray)));let sum=0;for(const z of offsets)sum+=bulgeModel.density(intersect(u,v,z))*path;return sum>0?tau/sum:0;};
+    const grid=Array.from({length:sw*sh},(_,k)=>{const i=k%sw,j=Math.floor(k/sw),{tau,colour}=cell(i,j,sw,sh),{u,v}=at(i,j,sw,sh);return {u,v,colour,scale:scaleAt(u,v,tau),path:step/Math.abs(dot(diskNormal,norm(rayLocal(u,v))))};});
+    const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path);
+      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,width,height,leaves.length),sha256:sha256(bytes),bytes:bytes.length});};
+    for(const [k,z] of offsets.entries()){const rgba=Buffer.alloc(sw*sh*4);
+      for(const [t,g] of grid.entries()){const tau=g.scale*bulgeModel.density(intersect(g.u,g.v,z))*g.path,o=4*t;for(let c=0;c<3;c++)rgba[o+c]=Math.round(g.colour[c]);rgba[o+3]=Math.round(255*(1-Math.exp(-tau)));}
+      await push(`bulge-z-${String(k).padStart(2,'0')}`,'z',rgba,sw,sh,[intersect(bu0,bv0,z),intersect(bu1,bv0,z),intersect(bu1,bv1,z),intersect(bu0,bv1,z)],z);}
+    // Side curtains: through image columns (x) or rows (y) across the bulge, each carrying the density in its own plane
+    // times the curtain spacing, so looking across them adds the density along that line.
+    const crossSlices=recipe.bake.bulgeCrossSlices!,depthPx=Math.max(8,Math.round(sh*2*height/Math.max(1e-9,Math.hypot(...difference3(intersect(bu0,bv0,0),intersect(bu0,bv1,0)))))),alongPx=(axis:'x'|'y')=>axis==='x'?sh:sw;
+    for(const axis of ['x','y'] as const){const along=alongPx(axis);
+      for(let s=0;s<crossSlices;s++){const fraction=(s+.5)/crossSlices,rgba=Buffer.alloc(along*depthPx*4);
+        const place=(a:number,z:number)=>{const i=axis==='x'?Math.min(sw-1,Math.floor(fraction*sw)):a,j=axis==='x'?a:Math.min(sh-1,Math.floor(fraction*sh));return {g:grid[j*sw+i]!,u:axis==='x'?bu0+(bu1-bu0)*fraction:grid[j*sw+i]!.u,v:axis==='x'?grid[j*sw+i]!.v:bv0+(bv1-bv0)*fraction,z};};
+        const first=place(0,0),spacing=Math.hypot(...difference3(intersect(axis==='x'?bu0:first.u,axis==='x'?first.v:bv0,0),intersect(axis==='x'?bu1:first.u,axis==='x'?first.v:bv1,0)))/crossSlices;
+        let any=false;
+        for(let a=0;a<along;a++)for(let d=0;d<depthPx;d++){const z=height-(d+.5)/depthPx*2*height,{g,u,v}=place(a,z),tau=g.scale*bulgeModel.density(intersect(u,v,z))*spacing,o=4*(d*along+a);
+          for(let c=0;c<3;c++)rgba[o+c]=Math.round(g.colour[c]);rgba[o+3]=Math.round(255*(1-Math.exp(-tau)));if(rgba[o+3])any=true;}
+        if(!any)continue;
+        const ends=[place(0,0),place(along-1,0)],v=[intersect(ends[0].u,ends[0].v,height),intersect(ends[1].u,ends[1].v,height),intersect(ends[1].u,ends[1].v,-height),intersect(ends[0].u,ends[0].v,-height)] as Quad['verticesUnits'];
+        await push(`bulge-${axis}-${String(s).padStart(2,'0')}`,axis,rgba,along,depthPx,v,axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2);}}}
   const provenanceBytes=await readFile(resolve(options.sourceDirectory,recipe.provenance.path));
   const provenance=JSON.parse(provenanceBytes.toString('utf8')) as unknown;
   const allVertices=leaves.flatMap(l=>l.verticesUnits),bounds={min:[0,1,2].map(i=>Math.min(...allVertices.map(v=>v[i]))) as Vec3,max:[0,1,2].map(i=>Math.max(...allVertices.map(v=>v[i]))) as Vec3};
-  const difference=(a:Vec3,b:Vec3):Vec3=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
-  const bank=(axis:LayerAxis)=>{const selected=leaves.filter(l=>l.axis===axis),middle=selected[Math.floor(selected.length/2)],normal=axis==='z'?diskNormal:norm(cross(difference(middle.verticesUnits[1],middle.verticesUnits[0]),difference(middle.verticesUnits[2],middle.verticesUnits[1])));let samplingStepUnits=thickness/(recipe.geometry.depthWeights.length-1);
-    if(axis!=='z'){const values=selected.map(l=>dot(l.centerUnits,normal)),span=Math.max(...values)-Math.min(...values);samplingStepUnits=selected.length>1?span/(selected.length-1):recipe.geometry.supportRadiusKpc*2;}
+    const bank=(axis:LayerAxis)=>{const selected=leaves.filter(l=>l.axis===axis),sampled=selected.filter(l=>!l.id.startsWith('bulge-')),middle=sampled[Math.floor(sampled.length/2)],normal=axis==='z'?diskNormal:norm(cross(difference(middle.verticesUnits[1],middle.verticesUnits[0]),difference(middle.verticesUnits[2],middle.verticesUnits[1])));let samplingStepUnits=thickness/(recipe.geometry.depthWeights.length-1);
+    if(axis!=='z'){const values=sampled.map(l=>dot(l.centerUnits,normal)),span=Math.max(...values)-Math.min(...values);samplingStepUnits=sampled.length>1?span/(sampled.length-1):recipe.geometry.supportRadiusKpc*2;}
     return {axis,normalUnits:normal,samplingStepUnits,leaves:selected};};
   const result:PreparedImageLayerBank={schema:'cssearth-image-layer-bank@1',id:recipe.id,frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5,originM:origin,localToReferenceXyzw:q,metersPerUnit:M_PER_KPC,boundsUnits:bounds},observation:recipe.observation,
-    banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.','Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.']}};
+    banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.',foreground?`Milky Way foreground stars from ${recipe.source.foregroundStars!.source} were removed where they show (${foreground.removed} of the ${foreground.inImage} catalogued in the image; ${foreground.extended} left where the light is an extended object); fainter ones and uncatalogued stars remain.`:'Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.',...(colourTie?[`Whole-galaxy colour tied to B-V ${colourTie.bv} (${colourTie.source}): red/green and blue/green in linear light measured ${colourTie.measured[0]}, ${colourTie.measured[2]}, target ${colourTie.target[0]}, ${colourTie.target[2]}; gains red ${colourTie.gains[0]}, blue ${colourTie.gains[2]}.`]:[]),...(bulgeModel?[`The bulge fit (${recipe.geometry.bulge!.source}) stands in for ${saturatedPixels} saturated pixels, scaled by ${lightScale.toPrecision(4)} optical depth per unit fitted light.`]:[]),...(companions?[`Companion galaxies ${companions.keys.join(', ')} from ${recipe.source.companions!.source} were replaced by the light around them, out to ${companions.extentHalfLight.join(', ')} half-light radii.`]:[])]}};
   await writeFile(resolve(options.outputDirectory,'image-layers.json'),JSON.stringify(result,null,2)+'\n');return result;
 }
