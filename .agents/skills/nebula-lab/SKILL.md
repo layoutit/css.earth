@@ -62,7 +62,7 @@ remain unchanged and report when over budget. See
 
 `pnpm check:nebula-boundaries` (an alias of `pnpm check:architecture`, whose `nebula-boundaries` rule this is) enforces the graph: a package may import itself, anything may
 import `@cssearth/bake/volume`, and only `lab` may import the rest. **In the cssEarth app only preparation code
-(`tools/` and `packages/bake/`) may import `@cssearth/bake`; the runtime imports
+(`packages/bake/`, `packages/telescope-cli/` and `site/build/`) may import `@cssearth/bake`; the runtime imports
 nothing from it, not even a type.** Never widen the rule to make code fit;
 move the pure part down and keep a lab-side re-export shim. Moving code between packages
 changes the `implementationSha256` recorded in each delivery receipt, because the pins name the owning package.
