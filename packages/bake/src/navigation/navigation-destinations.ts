@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
-import { parsePreparedClusterCatalog, isPreparedCluster } from '@cssearth/catalog';
+import { parsePreparedClusterCatalog, isPreparedCluster, isNavigableCatalogObject } from '@cssearth/catalog';
 import { parsePreparedNebulaCatalog, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import { defineObjects, definePreparedFocus, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
@@ -31,10 +31,9 @@ export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: s
     }))], classification,
     systemName: isPreparedNebula(object) ? 'Milky Way' : isPreparedCluster(object) ? 'Galaxy clusters'
       : object.membership.group === 'local-group' ? 'Local Group' : 'Galaxy catalogue',
-    sceneHostId, route: `/${sceneHostId}/?focus=${encodeURIComponent(object.id)}`,
+    sceneHostId, route: `/${object.id}/`,
     distance: { ...(object.distance.subject ? { subject: object.distance.subject } : {}), meters: object.distance.valuePc * PC_M, value: object.distance.valuePc, unit: 'pc',
-      quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null },
-    ...(classification === 'galaxy' && 'status' in object && object.status === 'candidate' ? { candidate: true } : {}) });
+      quantity: isPreparedCluster(object) ? 'comoving' : 'catalogue', referencePoint: 'observer', epochJdTt: null } });
 }
 
 /** Source catalogues own identity. Rendering-resource descriptors do not add destinations. */
@@ -53,6 +52,7 @@ export async function readPreparedFocusObjects(objectsDirectory: string, sceneHo
       else if (path === 'source/nebula.json') objects.push(...parsePreparedNebulaCatalog(value).objects);
     }
   }
-  const destinations = objects.map(object => prepareFocusObject(object, sceneHostId)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  // Only a subject the application can open has a page (isNavigableCatalogObject); the rest stay labels.
+  const destinations = objects.filter(isNavigableCatalogObject).map(object => prepareFocusObject(object, sceneHostId)).sort((a, b) => a.id.localeCompare(b.id, 'en'));
   return destinations.length ? defineObjects(destinations) : Object.freeze(destinations);
 }

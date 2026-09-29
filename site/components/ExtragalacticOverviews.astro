@@ -5,17 +5,18 @@ import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../overview-titles.mts';
+import { appNavigationDestination } from '../navigation/navigation-destination.mts';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/catalog';
 import galaxies from '../../src/objects/local-group/prepared/catalogue.json';
 import milkyWay from '../../src/objects/milky-way/object.json';
 import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json';
 const localGalaxies = parsePreparedGalaxyCatalog(galaxies).objects;
 const principal = [
-  { id: 'milky-way', focusId: undefined, name: 'Milky Way', href: '/sun/?overview=milky-way', distancePc: null, positionM: milkyWay.properties.volume.originM },
+  { id: 'milky-way', focusId: undefined, name: 'Milky Way', href: appNavigationDestination('milky-way')!.href, distancePc: null, positionM: milkyWay.properties.volume.originM },
   ...[['lmc', 'LMC'], ['smc', 'SMC'], ['m31', 'M31 (Andromeda)'], ['m33', 'M33 (Triangulum)']].map(([id, name]) => {
     const object = localGalaxies.find(object => object.detailedObjectId === id);
     if (!object) throw new Error('Missing principal Local Group galaxy: ' + id);
-    return { id: object.id, focusId: object.id, positionM: object.positionM, name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) };
+    return { id: object.id, focusId: object.id, positionM: object.positionM, name, distancePc: object.distance.valuePc, href: `/${object.id}/` };
   }),
 ];
 const distance = (pc: number) => {
@@ -29,7 +30,7 @@ const groups = [
     objects: principal },
   { id: 'nearby-universe' as const, name: 'Nearby Universe', section: 'Galaxy clusters',
     introduction: 'Selected nearby galaxy clusters. This view is not a complete map of the observable universe.',
-    objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) })) },
+    objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: `/${object.id}/` })) },
   { id: 'observable-universe' as const, name: 'Observable Universe', section: 'Galaxy clusters',
     introduction: 'Everything whose light has had time to reach us: DESI\'s galaxies and quasars out to 6.6 Gpc, and at its edge the cosmic microwave background, light from 380,000 years after the Big Bang, 14 Gpc away.',
     objects: [] },

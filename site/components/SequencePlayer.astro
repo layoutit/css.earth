@@ -6,10 +6,9 @@ interface Props {
   objectId: string;
   lens: Control;
   members: Control[];
-  controlName: 'dataset' | 'focusLens';
+  focus: boolean;
 }
-const { objectId, lens, members, controlName } = Astro.props;
-const focus = controlName === 'focusLens';
+const { objectId, lens, members, focus } = Astro.props;
 const index = members.findIndex(member => member.id === lens.id);
 ---
 <!-- A sequence plays like a short video over its own map: one segment per step, filled up to the step on screen. -->
@@ -19,7 +18,7 @@ const index = members.findIndex(member => member.id === lens.id);
       class:list={['object-sequence-segment', { 'is-past': position < index }]}
       type="submit"
       form={`${objectId}-datasets`}
-      name={controlName}
+      name="dataset"
       value={member.id}
       data-dataset-step={member.id}
       data-focus-lens={focus ? true : undefined}

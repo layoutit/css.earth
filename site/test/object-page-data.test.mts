@@ -45,10 +45,11 @@ test('all registry objects own ordered CSS and scene-bound page metadata',async(
  }
 });
 
-test('generic routes derive membership from SCENE_OBJECTS and never import scene transports',async()=>{
- for(const path of ['../pages/[id].astro','../pages/navigation/[id].astro']){
+test('generic routes derive membership from the registry and never import scene transports',async()=>{
+ // Every registry object has a page; a catalogue focus's page renders its host scene. Navigation fragments are per scene.
+ for(const [path,membership] of [['../pages/[id].astro',/OBJECTS\.map/],['../pages/navigation/[id].astro',/SCENE_OBJECTS\.map/]] as const){
   const source=await readFile(new URL(path,import.meta.url),'utf8');
-  assert.match(source,/SCENE_OBJECTS\.map/); assert.match(source,/getStaticPaths/);
+  assert.match(source,membership); assert.match(source,/getStaticPaths/);
  }
  const page=await readFile(new URL('../components/ObjectPage.astro',import.meta.url),'utf8');
  assert.match(page,/loadObjectPageData\(objectId\)/);

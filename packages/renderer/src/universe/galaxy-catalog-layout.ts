@@ -1,4 +1,4 @@
-import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
+import { isNavigableCatalogObject, isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -77,7 +77,7 @@ export function admitGalaxyLabels(candidates: readonly ProjectedGalaxy[], blocke
   budget: LabelBudget = createLabelBudget(Infinity, Infinity, [], blockers)) {
   const ranked = [...candidates].sort((a, b) => priority(b.object) - priority(a.object) || a.distanceM - b.distanceM || a.object.id.localeCompare(b.object.id));
   const stable = ranked.map((candidate, index) => ({
-    id: candidate.object.id, candidate, navigable: candidate.navigable ?? (isPreparedCluster(candidate.object) || Boolean(candidate.object.detailedObjectId)),
+    id: candidate.object.id, candidate, navigable: candidate.navigable ?? isNavigableCatalogObject(candidate.object),
     pinned: Number(candidate.object.id === selectedId), priority: ranked.length - index,
     shown: candidate.shown ?? false, previousPlacement: candidate.placement ?? 0,
     placements: [candidate.labelRect, ...candidate.alternateLabelRects ?? []].map((rect, slot) => ({ slot, rect })),

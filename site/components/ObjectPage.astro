@@ -9,8 +9,9 @@ import shellCss from '../object-shell.css?inline';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { rewriteSceneCss, resolveSceneAddressesDeep, withPreparedAssetOrigin } from '../asset-origin.mts';
 
-interface Props { objectId: string; navigation?: boolean; }
-const { objectId, navigation = false } = Astro.props;
+/** `objectId` owns the scene; `pageId` is the object the page is, a catalogue focus that scene draws when it differs. */
+interface Props { objectId: string; pageId?: string; navigation?: boolean; }
+const { objectId, pageId = objectId, navigation = false } = Astro.props;
 const preparedPage = await loadObjectPageData(objectId);
 const scene = navigation ? undefined : await loadPreparedSceneMarkup(objectId);
 const contentFiles = import.meta.glob('../../src/objects/*/prepared/content.json', { import: 'default' });
@@ -23,7 +24,7 @@ const styles = await Promise.all(objectPageStyles(descriptor, { navigation })
   .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/object-shell.css' ? shellCss : await cssFiles[`../../${path}`]()) })));
 ---
 
-<ObjectLayout objectId={objectId} navigation={navigation} scene={scene} descriptor={descriptor}>
+<ObjectLayout objectId={objectId} pageId={pageId} navigation={navigation} scene={scene} descriptor={descriptor}>
   <Fragment slot="object-head">
     {styles.map(({ path, css }) => <style is:inline data-object-style={path} set:html={css} />)}
     {!navigation && !requireSceneObject(objectId).discovery?.arrival?.billboard && <PreparedObjectHead preparedAssets={preparedPage.assets} />}

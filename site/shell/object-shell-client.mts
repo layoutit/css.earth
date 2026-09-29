@@ -1,4 +1,6 @@
 import { createObjectBrowserController } from '../object-browser.mts';
+import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
+import { knownObject } from '../object-directory.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
@@ -93,13 +95,29 @@ export function mountObjectShell({
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
     if (information && information.dataset.cardSubject !== subject) information.dataset.cardSubject = subject;
   }
+  /** The page the shell shows changed in place: its head, and the forms and links that return to it. */
+  function presentPage(route: string, seo: Parameters<typeof applySeoHead>[1]) {
+    applySeoHead(documentTarget, seo);
+    for (const [selector, attribute] of [['.object-sidebar-search-card', 'action'], ['.object-sidebar-search-clear', 'href'], ['[data-settings-form]', 'action']] as const) {
+      const element = documentTarget.querySelector(selector);
+      if (element && element.getAttribute(attribute) !== route) element.setAttribute(attribute, route);
+    }
+  }
   let presentedSubject: ReturnType<typeof readSelection> | null = null;
   function presentSelection() {
     if (lifetime.disposed) return;
     const subject = readSelection();
     if (presentedSubject === subject) { updateBodyCard(); return; }
+    const leftFocus = presentedSubject?.kind === 'focus';
     presentedSubject = subject;
     const focus = subject.kind === 'focus' ? subject : null;
+    // A focus is its own page; clearing it returns to the scene's page, whose head and forms a scene change would
+    // otherwise write (object-browser.mts bindObject).
+    if (focus?.record) presentPage(`/${focus.record.id}/`, focusSeo(focus.record));
+    else if (leftFocus) {
+      const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
+      if (scene?.kind === 'scene') presentPage(scene.route, objectSeo(scene));
+    }
     focusCard.set(focus?.record ?? null, focus?.sources ?? [], focus?.presentation ?? null);
     if (focus) loadFocusBanks();
     objectBrowser.refreshSelection();
