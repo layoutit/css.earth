@@ -12,6 +12,8 @@ import { fetchGaiaRow, type Archive } from './archives.mts';
 import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './identity.mts';
 import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
+import { hasArchiveSpectrum, orbitFold, timingSigma } from './planet-charts.mts';
+import { detectTransit, type TessArchive } from './transit-chart.mts';
 import { thermalFromArchive } from './planet-lenses.mts';
 
 const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum,disc_facility,sy_pnum';
@@ -38,7 +40,18 @@ export interface ArchiveSpecResult { readonly spec: Record<string, unknown>; rea
 
 /** The spec entry for one host: its transiting planets on their default rows. A body the universe already holds (by id or by name,
  * identity.mts) is not generated again; a host it holds becomes a host addition. */
-export async function archiveSpec(archive: Archive, hostname: string, universe: Existing): Promise<ArchiveSpecResult> {
+/** Why an archive planet has nothing measured to show, or undefined when it has one. A draft adds a planet for a measurement: a
+ * dayside temperature (its thermal lens), an archive spectrum, or its transit in TESS at DETECTION_SIGMA (transit-chart.mts);
+ * the orbit is the one the draft assembled. */
+export type PlanetEvidence = (planet: string, orbit: { readonly periodDays: number; readonly transitTimeBmjdTdb: number }) => Promise<string | undefined>;
+export const measuredEvidence = (archive: Archive, tess: TessArchive): PlanetEvidence => async (planet, orbit) => {
+  if (await hasArchiveSpectrum(archive, planet)) return undefined;
+  const detected = await detectTransit(archive, planet, tess, await orbitFold(() => orbit), await timingSigma(archive, planet));
+  return 'reason' in detected ? detected.reason : undefined;
+};
+
+/** `evidence` chooses the planets: without it (a redraft of planets already added) every planet with an orbit is drafted. */
+export async function archiveSpec(archive: Archive, hostname: string, universe: Existing, evidence?: PlanetEvidence): Promise<ArchiveSpecResult> {
   // The star rows and the orbit rows are read at once: each NASA TAP answer takes about a second.
   const [text, orbitText] = await Promise.all([archive.text(`${NASA_TAP}?${new URLSearchParams({ query: `select ${STAR_COLUMNS} from ps where hostname = '${hostname.replaceAll("'", "''")}'`, format: 'csv' })}`),
     archive.text(`${NASA_TAP}?${new URLSearchParams({ query: archiveHostQuery(hostname), format: 'csv' })}`)]);
@@ -80,6 +93,9 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     // divides the paper's semi-major axis by the host's recorded radius, which may be Gaia's and unknown here.
     try { assembled = measured ? assembleMeasuredOrbit(planetRows, composite, archiveRadius, all.find(entry => entry.rad !== undefined)?.rad ?? 1) : assembleArchiveOrbit(planetRows, undefined, composite); }
     catch (error) { return { skip: `${(error as Error).message.replace(/\.$/u, '')}${measured ? ` (found by ${method})` : ''}`, note }; }
+    // A planet is added for what was measured of it; one with no dayside temperature, spectrum or TESS transit is left out and named.
+    const missing = thermal || !evidence ? undefined : await evidence(row.planet, assembled.orbit);
+    if (missing) return { skip: `${name}: nothing measured to show (no dayside temperature or archive spectrum; ${missing})`, note };
     const period = assembled.orbit.periodDays, year = row.year ? `, found in ${row.year}` : '', radius = assembled.radius.value, mass = assembled.mass.value;
     const modelSize = assembled.radius.row.reference === 'CALCULATED_VALUE';
     const defaultRow = assembled.row ?? planetRows.find(entry => entry.isDefault)!;

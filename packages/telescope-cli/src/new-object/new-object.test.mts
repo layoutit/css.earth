@@ -429,6 +429,14 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   const ticMass = (await archiveSpec(massArchive(''), 'HD 1', { ids: new Set(), names: new Map(), stars: [] })).spec.mass as { value: number; uncertainty: number; source: string };
   assert.deepEqual([ticMass.value, ticMass.uncertainty], [0.84, 0.1]);
   assert.match(ticMass.source, /TIC 42 \(VizieR IV\/39\/tic82\); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME$/u);
+  // The draft chooses the planets by what was measured: HD 1 b has its dayside temperature; HD 1 c, with no spectrum or TESS transit,
+  // is left out and named; a host left with nothing measured is not drafted at all.
+  const asked: string[] = [], evidence = async (planet: string) => { asked.push(planet); return 'TESS holds no 2-minute SPOC light curve of TIC 42'; };
+  const chosen = await archiveSpec(archive, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }, evidence);
+  assert.deepEqual([(chosen.spec.planets as { id: string }[]).map(planet => planet.id), asked], [['hd-1b'], ['HD 1 c']], 'a planet with a dayside temperature is not asked again');
+  assert.match(chosen.skipped.join('; '), /HD 1 c: nothing measured to show \(no dayside temperature or archive spectrum; TESS holds no 2-minute SPOC light curve of TIC 42\)/u);
+  const unmeasured = { ...archive, async text(url: string) { return url.includes('emissionspec') ? (await archive.text(url)).split('\n')[0]! + '\n' : archive.text(url); } };
+  await assert.rejects(archiveSpec(unmeasured, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }, evidence), /HD 1: no planet to add; .*HD 1 b: nothing measured to show/u);
 });
 
 test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
@@ -875,12 +883,3 @@ test('a binary whose primary Gaia sees eclipsing on another period is refused; l
   assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });
 
-test('an archive planet is added only for a measurement: a TESS transit, an archive spectrum or its dayside temperature', async () => {
-  const { measuredPlanet } = await import('./generate.mts');
-  const charts = (...kinds: string[]) => JSON.stringify({ charts: kinds.map(kind => ({ kind })) });
-  const at = 'src/objects/p/source';
-  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits')]]), 'p'), false, 'an orbit map alone shows nothing measured');
-  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits', 'folded-transit')]]), 'p'), true);
-  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits', 'measured-spectrum')]]), 'p'), true);
-  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits')], [`${at}/photometry/thermal-color.json`, '{}']]), 'p'), true);
-});
