@@ -314,7 +314,7 @@ export interface SatelliteRecord {
 
 /**
  * Mean elements for the selected moons, derived from Horizons as described in
- * \`tools/generate-satellites.mts\`. These are a FIT, not a satellite theory:
+ * \`cli/generate-satellites.mts\`. These are a FIT, not a satellite theory:
  * see that file and README.md for the residual each one leaves.
  */
 export const SATELLITE_ELEMENTS = {

@@ -103,7 +103,7 @@ for body in INPUTS['bodies']:
     write(source/'preparation/rotation.json',dict(schema='cssearth-display-orientation@1',rightAscensionDegrees=body['poleIcrfDegrees'][0],declinationDegrees=body['poleIcrfDegrees'][1],displayMeridianDegrees=0,phase='arbitrary-display-phase',source=body.get('poleSource',body['source']),qualification=body['orientationMeaning']))
     write(source/'measurements.json',dict(schema='cssearth-distant-world-model@1',checkedOn=INPUTS['checkedOn'],**body))
     for kind in ['elements','vectors']:
-        record = ROOT / 'packages/astronomy/tools/.cache/horizons' / f'asteroid-{kind}-{ident}.txt'
+        record = ROOT / 'packages/astronomy/cli/.cache/horizons' / f'asteroid-{kind}-{ident}.txt'
         if record.exists():
             write(source/'reference'/f'horizons-{kind}.txt',record.read_text())
     # Citations do not need downloaded pages. Only explicit file inputs are restored.

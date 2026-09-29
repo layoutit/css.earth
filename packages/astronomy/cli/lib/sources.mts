@@ -5,7 +5,7 @@ import { dirname } from 'node:path'
 
 export const CACHE_DIR = new URL('../.cache/', import.meta.url).pathname
 
-/** Download once into `tools/.cache`, which is gitignored. */
+/** Download once into `cli/.cache`, which is gitignored. */
 export async function cached(url: string, name: string) {
   const file = CACHE_DIR + name
   mkdirSync(dirname(file), { recursive: true })

@@ -9,7 +9,7 @@
  * measures the mesh (signed volume, closure, extents, radial range), converts the ecliptic pole to the equatorial one,
  * and writes the package in the layout of the existing DAMIT bodies (Achilles, Ajax). It then renders the marker
  * snapshot and writes the source manifest. The astronomy record is written without elements; run
- * `node packages/astronomy/tools/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
+ * `node packages/astronomy/cli/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
  */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
@@ -17,7 +17,7 @@ import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
 import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
-import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
+import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';

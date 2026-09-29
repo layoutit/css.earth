@@ -8,8 +8,8 @@ const test = sourceTest();
 import { contextObjectAssetUrls, contextObjectModule, prepareCatalog } from '../../site/build/prepare/prepare-catalog.mts';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { prepareBodyRecords } from '../../packages/astronomy/tools/body-records.mts';
-import { literalRecords } from '../../packages/astronomy/tools/lib/write-record-sections.mts';
+import { prepareBodyRecords } from '../../packages/astronomy/cli/body-records.mts';
+import { literalRecords } from '../../packages/astronomy/cli/lib/write-record-sections.mts';
 import type { PathLike } from 'node:fs';
 
 const write = async (path: string, value: unknown) => {

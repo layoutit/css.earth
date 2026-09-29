@@ -25,7 +25,7 @@
  * { "archive": "nasa-ps", "reference"? } for one paper's transit fit in the NASA Exoplanet Archive ("measured": true for a planet
  * found without a transit whose paper measures its whole orbit, inclination included, orbit.mts assembleMeasuredOrbit); { "elements": { … },
  * "source", "url" }; or { "record": true, "source", "url" } for a body whose astronomy record another owner already writes (the
- * S-stars of packages/astronomy/tools/generate-s-stars.mts): the record is kept as it is and only the package is written, and the spec's
+ * S-stars of packages/astronomy/cli/generate-s-stars.mts): the record is kept as it is and only the package is written, and the spec's
  * cited radius and mass must reproduce the record's. A planet's radius and mass are in Jupiter units and default to the archive row's;
  * a planet with a cited `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units,
  * temperature required; `colorReason` says why its colour is a Planck spectrum when that is not because the archives cannot separate it

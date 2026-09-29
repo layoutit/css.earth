@@ -20,7 +20,7 @@ export const satelliteRecord = (id: SatelliteId): SatelliteRecord => {
  * ascending node on the ICRF equator, the completing axis, and the pole.
  *
  * The x-axis choice is this package's, not a published convention, and it
- * matches `planeBasis` in `tools/generate-satellites.mjs` exactly — the
+ * matches `planeBasis` in `cli/generate-satellites.mjs` exactly — the
  * elements and this rotation are two halves of one definition and are
  * meaningless apart. `satellites.test.ts` pins the pair by asserting a moon's
  * position against Horizons, which is the only thing that can catch them

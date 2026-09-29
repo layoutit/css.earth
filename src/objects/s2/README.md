@@ -20,7 +20,7 @@ Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src
 ## Known problems
 
 - **Keplerian orbit.** The orbit is a fixed ellipse. S2's orbit precesses by about 12 arcminutes per revolution; that is not drawn.
-- **Record kept by its owner.** The orbit, radius and mass live in the S-star record that `packages/astronomy/tools/generate-s-stars.mts` writes. The package's spec cites the same values, and the generator refuses to write the package when the two disagree.
+- **Record kept by its owner.** The orbit, radius and mass live in the S-star record that `packages/astronomy/cli/generate-s-stars.mts` writes. The package's spec cites the same values, and the generator refuses to write the package when the two disagree.
 - **Drafted text.** The card and introduction were drafted for this package from GRAVITY Collaboration (2022)'s Table 1 values (the 120 au is a(1 − e) = 1034.2 au × 0.11559).
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

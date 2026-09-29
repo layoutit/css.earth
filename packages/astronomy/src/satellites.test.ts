@@ -19,7 +19,7 @@ import {
  *
  * The moons are not a satellite theory. They are precessing Keplerian ellipses
  * whose elements were fitted to Horizons' own osculating elements over the
- * fit window recorded on each satellite (`tools/generate-satellites.mjs`).
+ * fit window recorded on each satellite (`cli/generate-satellites.mjs`).
  * So the numbers below are FIT RESIDUALS, not an independent accuracy claim,
  * and the honest reading is:
  * "this is how well a precessing ellipse can do", not "this is how well the
