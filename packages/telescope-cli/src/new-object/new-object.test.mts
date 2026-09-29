@@ -874,3 +874,13 @@ test('a binary whose primary Gaia sees eclipsing on another period is refused; l
   assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
   assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });
+
+test('an archive planet is added only for a measurement: a TESS transit, an archive spectrum or its dayside temperature', async () => {
+  const { measuredPlanet } = await import('./generate.mts');
+  const charts = (...kinds: string[]) => JSON.stringify({ charts: kinds.map(kind => ({ kind })) });
+  const at = 'src/objects/p/source';
+  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits')]]), 'p'), false, 'an orbit map alone shows nothing measured');
+  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits', 'folded-transit')]]), 'p'), true);
+  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits', 'measured-spectrum')]]), 'p'), true);
+  assert.equal(measuredPlanet(new Map([[`${at}/content/charts.json`, charts('system-orbits')], [`${at}/photometry/thermal-color.json`, '{}']]), 'p'), true);
+});

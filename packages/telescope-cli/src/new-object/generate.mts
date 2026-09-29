@@ -4,7 +4,7 @@
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
  * tests/contract/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
 import { execFileSync } from 'node:child_process';
-import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
@@ -385,7 +385,9 @@ export interface NewObjectResult { readonly id: string; readonly kind: 'star' | 
   /** On a refresh: what a person wrote that was kept. */
   readonly kept?: readonly string[];
   /** Why this body was not written; the rest of the batch still is. */
-  readonly failed?: string }
+  readonly failed?: string;
+  /** Why this body was left out on purpose: an archive planet with nothing measured to show, or a star whose planets all were. */
+  readonly leftOut?: string }
 const HANDOFF = 'output/new-object/hosted.json';
 const reason = (error: unknown) => (error as Error).message.split('\n')[0]!;
 
@@ -426,6 +428,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   const orders = new Map<string, number>();
   for (const spec of specs) { orders.set(spec.id, spec.order ?? next++); for (const entry of [...spec.planets, ...spec.companions]) orders.set(entry.id, entry.order ?? next++); }
   for (const addition of additions) for (const entry of [...addition.planets, ...addition.companions]) orders.set(entry.id, entry.order ?? next++);
+  const starFiles = new Map<string, { system: string; written: string[] }>();
   const failed = (id: string, kind: NewObjectResult['kind'], error: unknown) => { results.push({ id, kind, files: 0, todo: [], failed: reason(error) }); progress(`  ${id}: FAILED, not written: ${reason(error)}`); };
   // Three systems at a time: enough to overlap the archives' latency, few enough to stay polite to them.
   const system = async (spec: StarSpec) => {
@@ -435,7 +438,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     catch (error) { failed(spec.id, 'star', error); for (const entry of [...spec.planets, ...spec.companions]) failed(entry.id, entry.kind, new Error(`its star ${spec.id} failed`)); return; }
     const result: NewObjectResult = { id: spec.id, kind: 'star', files: written.written.length, hex: generated.hex, color: generated.color.route, ...(generated.color.crossCheck ? { crossCheck: generated.color.crossCheck } : {}),
       limb: generated.limb.grid ?? 'none', todo: generated.todo, ...(written.kept.length ? { kept: written.kept } : {}) };
-    results.push(result);
+    results.push(result); starFiles.set(spec.id, { system: spec.system, written: written.written });
     progress(`  ${spec.id}: colour ${result.hex} from ${result.color}${result.crossCheck ? ` (cross-check ${result.crossCheck.route}, ${result.crossCheck.difference} levels)` : ''}, limb ${result.limb}, ${written.written.length} files${written.kept.length ? `; kept ${written.kept.join(', ')}` : ''} (${elapsed()})`);
     const body = JSON.parse(String(generated.files.get(`packages/astronomy/data/bodies/${spec.id}.json`))) as Record<string, any>;
     await Promise.all([...spec.planets, ...spec.companions].map(entry => hostedRecordFor(entry, { spec, body })));
@@ -470,11 +473,36 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     const out = execFileSync(process.execPath, [resolve(import.meta.dirname, 'new-object-cli.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
     for (const result of JSON.parse(out) as NewObjectResult[]) { results.push(result); if (result.failed) progress(`  ${result.id}: FAILED, not written: ${result.failed}`); }
   }
-  const failures = results.filter(result => result.failed);
+  // A system this run drafted planets for and kept none of is not a system to add: its new stars go too, wide companions included.
+  const planetSystems = new Map<string, { drafted: number; kept: number }>();
+  for (const record of hosted as { spec: { id: string; kind: string }; hostId: string }[]) {
+    const system = starFiles.get(record.hostId)?.system;
+    if (!system || record.spec.kind !== 'planet') continue;
+    const count = planetSystems.get(system) ?? { drafted: 0, kept: 0 }, result = results.find(entry => entry.id === record.spec.id);
+    planetSystems.set(system, { drafted: count.drafted + 1, kept: count.kept + (result && !result.failed && !result.leftOut ? 1 : 0) });
+  }
+  let removed = false;
+  for (const [id, { system, written }] of starFiles) {
+    if (!(planetSystems.get(system)?.drafted && !planetSystems.get(system)?.kept)) continue;
+    for (const path of written) await rm(resolve(root, path), { force: true });
+    await rm(resolve(root, 'src/objects', id), { recursive: true, force: true });
+    const at = results.findIndex(entry => entry.id === id);
+    results[at] = { id, kind: 'star', files: 0, todo: [], leftOut: `no planet of ${system} has anything measured to show` };
+    progress(`  ${id}: left out, ${results[at]!.leftOut}`); removed = true;
+  }
+  if (removed || results.some(result => result.leftOut && result.kind === 'planet')) execFileSync('pnpm', ['-s', 'build:astronomy'], { cwd: root, stdio: ['ignore', 'ignore', 'inherit'] });
+  const failures = results.filter(result => result.failed), leftOut = results.filter(result => result.leftOut);
+  if (leftOut.length) progress(`${leftOut.length} bodies left out with nothing measured to show: ${leftOut.map(result => result.id).join(', ')}`);
   if (failures.length) progress(`${failures.length} of ${results.length} bodies failed and were not written: ${failures.map(result => result.id).join(', ')}`);
   return results;
 }
 
+/** Whether a generated planet package shows a measurement: a TESS transit or archive spectrum chart, or a thermal colour. */
+export function measuredPlanet(files: ReadonlyMap<string, string | Buffer>, id: string) {
+  const charts = files.get(`src/objects/${id}/source/content/charts.json`);
+  const kinds = charts === undefined ? [] : ((JSON.parse(String(charts)) as { charts?: { kind?: string }[] }).charts ?? []).map(chart => chart.kind);
+  return kinds.some(kind => kind === 'folded-transit' || kind === 'measured-spectrum') || files.has(`src/objects/${id}/source/photometry/thermal-color.json`);
+}
 /** Hosts whose planets are written at once (runHostedPhase). */
 export const HOSTED_CONCURRENCY = 8;
 /** Phase two, in a process that loads the rebuilt astronomy package: every hosted body's package. */
@@ -489,6 +517,12 @@ export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_
       const publications = new Map<string, Publication>();
       for (const url of new Set(urls)) { const publication = await fetchPublication(liveArchive, url); if (publication) publications.set(url, publication); }
       const { files, hex } = await hostedPackage(record, hostBody, publications, liveArchive, root, SOLAR_GEOMETRY_EPOCH_JD_TT);
+      // An archive planet is added for what was measured of it: a TESS transit at DETECTION_SIGMA, an archive spectrum or its
+      // dayside temperature. Without one it would be a sphere on a fitted orbit, so it is left out and its record removed.
+      if (record.spec.kind === 'planet' && 'archive' in record.spec.orbit && !refresh && !measuredPlanet(files, record.spec.id)) {
+        await rm(resolve(root, `packages/astronomy/data/bodies/${record.spec.id}.json`), { force: true });
+        return { id: record.spec.id, kind: record.spec.kind, files: 0, todo: [], leftOut: 'nothing measured to show: no TESS transit at 5 sigma, archive spectrum or dayside temperature' };
+      }
       for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
       const { written, kept } = await writePackageFiles(files, record.spec.id, root, refresh);
       const presentation = resolve(root, `src/objects/${record.spec.id}/source/presentation`);
@@ -512,7 +546,7 @@ export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_
   for (const saved of records) results.push(written.get(saved)!);
   return results;
 }
-export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n${result.todo.length ? `  Still to write: ${result.todo.join('; ')}.` : ''}`).join('\n')}\nReplace every ${TODO}, then bake: node packages/bake/cli/prepare-object.mts <id>\n`;
+export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : result.leftOut ? `${result.id} (${result.kind}): left out, ${result.leftOut}.` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n${result.todo.length ? `  Still to write: ${result.todo.join('; ')}.` : ''}`).join('\n')}\nReplace every ${TODO}, then bake: node packages/bake/cli/prepare-object.mts <id>\n`;
 
 /** A spec file for planet hosts, from the NASA Exoplanet Archive (from-archive.mts); hosts already in the universe get their
  * new planets as host additions. */
