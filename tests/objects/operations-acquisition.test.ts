@@ -4,14 +4,13 @@ import { mkdtemp, readFile, writeFile, rm, readdir, mkdir } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
 import { convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 const test = sourceTest();
 
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const rawSource = (_bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img'});
 const rawManifest = (bytes: Uint8Array): SourceManifest => ({schema:'cssearth-authoritative-sources@2',
   inputs:[rawSource(bytes)],generatedIntermediates:[],documents:[]});
@@ -53,7 +52,7 @@ test('mapped composition acquisition restores the pinned map and report through 
     latitudes:Array.from({length:180},(_,i)=>i-90),longitudes:Array.from({length:360},(_,i)=>i)},
     best_estimate_abundance:{ice:values},lower_bound_abundance:{ice:values},upper_bound_abundance:{ice:values}}));
   const recipe=parseMappedCompositionRecipe({schema:'cssearth-mapped-composition@1',target:'Fixture',observationName:'published',
-    referenceRadiusMeters:1000,input:'native.json.gz',sha256:sha256(original),selections:[{id:'ice',kind:'posterior',field:'ice',statistic:'median'}]});
+    referenceRadiusMeters:1000,input:'native.json.gz',selections:[{id:'ice',kind:'posterior',field:'ice',statistic:'median'}]});
   const converted=convertMappedComposition(original,recipe),report=Buffer.from(JSON.stringify(converted.report,null,2)+'\n');
   await writeFile(join(directory,'native.json.gz'),original);
   await writeFile(join(directory,'recipe.json'),JSON.stringify(recipe));
@@ -239,15 +238,16 @@ test('gzip and pretty-json downloads preserve their existing transformations and
 
 test('ZIP restoration verifies both the streamed archive and its exact extracted member', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-zip-source-'));
-  const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
-  let cache: string | undefined;
+  // The archive cache is local state; remove whatever this test added to it.
+  const archives = resolve('.local/source-archives');
+  const listArchives = async () => new Set(await readdir(archives).catch(() => []));
+  const before = await listArchives();
   try {
     const content = Buffer.from(`Pinned source fixture ${randomUUID()}\n`);
     await mkdir(join(directory, 'transit spectrum'));
     await writeFile(join(directory, 'transit spectrum/source.bin'), content);
     execFileSync('zip', ['-q', 'archive.zip', 'transit spectrum/source.bin'], {cwd: directory});
     const archive = await readFile(join(directory, 'archive.zip'));
-    cache = resolve('.local/source-archives', `${digest(Buffer.from('https://example.test/archive.zip'))}.zip`);
     const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip', member:'transit spectrum/source.bin', groups:['restore']};
     const plan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1', operations:[step]});
     const manifest = {schema:'cssearth-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
@@ -261,7 +261,10 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     for (const member of ['../escape', '/absolute', '*.bin', '-option']) {
       assert.throws(()=>parseAcquisitionPlan({schema:plan.schema,operations:[{...step,member}]}));
     }
-  } finally { if(cache) await rm(cache,{force:true}); await rm(directory,{recursive:true,force:true}); }
+  } finally {
+    for (const name of await listArchives()) if (!before.has(name)) await rm(join(archives, name), { recursive: true, force: true });
+    await rm(directory,{recursive:true,force:true});
+  }
 });
 
 // A pinned slice of an archive member too large to keep whole: the request must be honoured as 206 Partial Content,

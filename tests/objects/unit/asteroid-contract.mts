@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { validateClosedMesh } from '@cssearth/bake/objects/geometry';
@@ -59,10 +58,10 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
  assert.ok(body, 'Asteroid is reachable through the application context');assert.equal(body.radiusM,radiusM);
  assert.deepEqual(body.positionM,recordAt(descriptorProperties,'worldFrame','world frame').originM);
  const assets=arrayAt(manifest,'assets','runtime assets').map((asset,index)=>requireRecord(asset,`runtime asset ${index}`)).filter(asset=>asset.location==='public');
- for(const asset of assets){const filename=requireString(asset.filename,'runtime asset filename'),bytes=await readFile(resolve(root,'public/scenes',id,filename));assert.equal(bytes.length,requireFiniteNumber(asset.bytes,`runtime asset ${filename} bytes`));assert.equal(createHash('sha256').update(bytes).digest('hex'),requireString(asset.sha256,`runtime asset ${filename} hash`));}
+ for(const asset of assets){const filename=requireString(asset.filename,'runtime asset filename'),bytes=await readFile(resolve(root,'public/scenes',id,filename));assert.equal(bytes.length,requireFiniteNumber(asset.bytes,`runtime asset ${filename} bytes`));}
  const descriptorId=requireString(descriptor.id,'descriptor id');
  // A photograph lens that keeps its acquisition illumination is never lit again, so it has no epoch-lit shadow atlas.
  const recipe=requireRecord(await readJsonSource(resolve(root,'src/objects',id,'source/preparation/terrestrial.json')),'terrestrial recipe'),observations=recordAt(recipe,'raster','raster').surfaceObservations;
  const retained=new Set((Array.isArray(observations)?observations:[]).map(value=>requireRecord(value,'surface observation')).filter(lens=>requireRecord(lens.photometry,'photometry').model==='retained-observation').map(lens=>requireString(lens.id,'lens id')));
- for(const lensId of expectedLenses){const flood=assets.find(asset=>asset.filename===`${descriptorId}-${lensId}-surface@2x.webp`),shadow=assets.find(asset=>asset.filename===`${descriptorId}-${lensId}-shadow@2x.webp`);assert.ok(flood);if(retained.has(lensId)){assert.equal(shadow,undefined,`${lensId} keeps its acquisition illumination and has no shadow atlas`);continue;}assert.ok(shadow);assert.notEqual(flood.sha256,shadow.sha256,'Directional lighting must have distinct prepared texels');}
+ for(const lensId of expectedLenses){const flood=assets.find(asset=>asset.filename===`${descriptorId}-${lensId}-surface@2x.webp`),shadow=assets.find(asset=>asset.filename===`${descriptorId}-${lensId}-shadow@2x.webp`);assert.ok(flood);if(retained.has(lensId)){assert.equal(shadow,undefined,`${lensId} keeps its acquisition illumination and has no shadow atlas`);continue;}assert.ok(shadow);const texels=(asset:Record<string,unknown>)=>readFile(resolve(root,'public/scenes',id,requireString(asset.filename,'runtime asset filename')));assert.ok(!(await texels(flood)).equals(await texels(shadow)),'Directional lighting must have distinct prepared texels');}
 }

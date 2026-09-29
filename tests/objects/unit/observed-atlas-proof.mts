@@ -4,16 +4,15 @@ import {required} from '@cssearth/objects/node/contract';
 import type {GeoTIFFImage} from 'geotiff';
 import assert from 'node:assert/strict';
 import {readFile, type FileHandle} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {resolve,basename} from 'node:path';
 import sharp from 'sharp';
 import type { PathLike } from 'node:fs';
 
 const root=resolve(import.meta.dirname,'../../..');
 const contexts=new Map<string,ReturnType<typeof loadContext>>();
-const asset=shape({bytes:number,sha256:text});
-const manifestShape=shape({assets:array(shape({filename:text,bytes:number,sha256:text}))});
-const materialShape=shape({surfaces:array(shape({id:text,surface:shape({url:text,bytes:number,sha256:text}),polesUrl:text,missingPixels:number,monochromePixels:optional(number),withheldSyntheticPixels:optional(number),
+const asset=shape({bytes:number});
+const manifestShape=shape({assets:array(shape({filename:text,bytes:number}))});
+const materialShape=shape({surfaces:array(shape({id:text,surface:shape({url:text,bytes:number}),polesUrl:text,missingPixels:number,monochromePixels:optional(number),withheldSyntheticPixels:optional(number),
  sourceGeoreference:optional(shape({origin:array(number),resolution:array(number)})),
  photometry:optional(shape({observations:dictionary(shape({correctedPixels:number,withheldPixels:number}))})),
  observationCoverage:optional(dictionary(shape({pixels:number}))),
@@ -50,8 +49,8 @@ async function decode(body:string,url: string,manifest:ReturnType<typeof manifes
   assert.ok(url.startsWith(`/scenes/${body}/`));
   const entry=manifest.assets.find(asset=>asset.filename===basename(url));assert.ok(entry,`${url} belongs to the canonical runtime inventory`);
   const bytes=await readFile(resolve(root,'public',url.slice(1)));
-  const sha=createHash('sha256').update(bytes).digest('hex');assert.equal(bytes.length,entry.bytes);assert.equal(sha,entry.sha256);
-  if(expected){assert.equal(sha,expected.sha256);assert.equal(bytes.length,expected.bytes);}
+  assert.equal(bytes.length,entry.bytes);
+  if(expected)assert.equal(bytes.length,expected.bytes);
   const image=await sharp(bytes).toColourspace('srgb').ensureAlpha().raw().toBuffer({resolveWithObject:true});
   return {...image,url};
 }

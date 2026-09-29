@@ -20,7 +20,7 @@ function atlasTile(coaddId: string, ra: number, dec: number, sky: (ra: number, d
   }
   return gzipSync(Buffer.concat([header, data]));
 }
-const pins = parseTilePins({ schema: 'cssearth-wise-atlas-tiles@1', band: 'W4', tiles: [{ coaddId: '0544p242_ac51', sha256: 'a'.repeat(64), bytes: 4000 }] });
+const pins = parseTilePins({ schema: 'cssearth-wise-atlas-tiles@1', band: 'W4', tiles: [{ coaddId: '0544p242_ac51', bytes: 4000 }] });
 const grid = { width: 120, height: 80, fovDeg: 1.1, centerIcrsDegrees: [56.5, 24.2] as [number, number] };
 
 test('tile pixels bin into the hips2fits grid and overlap medians recover per-tile levels up to one constant', () => {
