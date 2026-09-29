@@ -1,5 +1,5 @@
 /**
- * Stack nested merged levels (merge-catalogue-points.mts, each naming the levels it lies `within`) into one bank the app draws as a
+ * Stack nested merged levels (or one level, for a bank thinned only by the camera's distance) (merge-catalogue-points.mts, each naming the levels it lies `within`) into one bank the app draws as a
  * growing prefix, so zooming in adds dots one at a time and never takes one away. `source/<id>/stack.json` lists the
  * levels from the outermost in: the first with `fullDetailUnits` (the camera distance within which it is drawn whole;
  * farther, a share that falls with distance), each next one with `appearUnits: [from, to]`, the half-width of the view
@@ -24,7 +24,7 @@ if (recipe.schema !== 'cssearth-catalogue-points-stack@1' || recipe.id !== id ||
   fail(`needs schema cssearth-catalogue-points-stack@1, id ${id}, its meaning and the basis of its windows.`);
 }
 const levels = recipe.levels;
-if (!Array.isArray(levels) || levels.length < 2) fail('stacks two or more levels.');
+if (!Array.isArray(levels) || levels.length < 1) fail('stacks one or more levels.');
 const [outer, ...inner] = levels!;
 if (typeof outer!.bank !== 'string' || !(typeof outer!.fullDetailUnits === 'number' && outer!.fullDetailUnits > 0) || outer!.appearUnits !== undefined) {
   fail('the first level is { bank, fullDetailUnits }.');

@@ -263,7 +263,7 @@ const searchCategories = [
     <div class="object-selected-content">
     {!navigation && <div class="object-context" hidden><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="object-selected-panel">
-          {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
+          {(['milky-way', 'local-group', 'nearby-universe', 'observable-universe'] as const).map(scope =>
             <ObjectBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
           <div class="object-title-row">
             <p class="object-title object-title-text" data-focus-name></p>

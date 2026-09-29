@@ -91,7 +91,7 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
 
 function parseLevels(value: unknown, total: number, id: string): readonly CataloguePointLevel[] {
   const positive = (number: unknown): number is number => typeof number === 'number' && Number.isFinite(number) && number > 0;
-  if (!Array.isArray(value) || value.length < 2) throw new TypeError(`${id}: a stacked bank has two or more levels.`);
+  if (!Array.isArray(value) || value.length < 1) throw new TypeError(`${id}: a stacked bank has one or more levels.`);
   let before = Infinity, sum = 0;
   const parsed = value.map((raw: unknown, index: number): CataloguePointLevel => {
     const level = raw as { points?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown };

@@ -67,7 +67,11 @@ test('overview leaves the Solar System when its bodies fade and restores correct
   const { fadeOutStartDistanceM: start, hiddenDistanceM: hidden } = context.system, middle = Math.sqrt(start * hidden);
   assert.equal(overviewScopeAtCamera(camera(hidden * .99)), 'system');
   assert.equal(overviewScopeAtCamera(camera(hidden)), 'milky-way');
-  assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'nearby-universe');
+  assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'observable-universe');
+  const gpc = 1e9 * 3.085677581491367e16;
+  assert.equal(overviewScopeAtCamera(camera(.9 * gpc)), 'nearby-universe', 'short of 1 Gpc the view is the nearby universe');
+  assert.equal(overviewScopeAtCamera(camera(.9 * gpc), 'observable-universe'), 'observable-universe', 'and returns only below 800 Mpc');
+  assert.equal(overviewScopeAtCamera(camera(.7 * gpc), 'observable-universe'), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(middle * 1.01), 'milky-way'), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
 });
@@ -78,10 +82,16 @@ test("another star's system overview is left by the distance from that star, not
   assert.equal(overviewScopeAtCamera(near, 'system', context, { originM: star }), 'system', 'one astronomical unit from its star');
   const far = { ...camera(0), pose: { ...camera(0).pose, positionM: [star[0]! + hidden, 0, 0] as const } };
   assert.equal(overviewScopeAtCamera(far, 'system', context, { originM: star }), 'milky-way');
-  // A binary in the Large Magellanic Cloud keeps its overview before the scopes measured from the Sun.
+  // A binary in the Large Magellanic Cloud keeps its overview, then has no Milky Way step: it lies past the galaxy's own
+  // boundary. Zooming out of it gives the same sequence whichever way the camera backs away, even toward the Sun.
   const lmc = [49.9e3 * parsec, 0, 0], at = (offsetM: number) => ({ ...camera(0), pose: { ...camera(0).pose, positionM: [lmc[0]! + offsetM, 0, 0] as const } });
   assert.equal(overviewScopeAtCamera(at(1e12), 'system', context, { originM: lmc }), 'system');
-  assert.equal(overviewScopeAtCamera(at(hidden), 'system', context, { originM: lmc }), 'local-group');
+  for (const side of [1, -1]) {
+    assert.equal(overviewScopeAtCamera(at(side * hidden), 'system', context, { originM: lmc }), 'local-group');
+    assert.equal(overviewScopeAtCamera(at(side * 38e3 * parsec), 'local-group', context, { originM: lmc }), 'local-group',
+      side < 0 ? '12 kpc from the Sun, 38 kpc from its star' : '88 kpc from the Sun');
+    assert.equal(overviewScopeAtCamera(at(side * 6e6 * parsec), 'local-group', context, { originM: lmc }), 'nearby-universe');
+  }
   // A host that authors its own orbit range (Sgr A*) keeps its overview while the world context still draws its orbits.
   const range = 1.5e16, sgr = [8.2e3 * parsec, 0, 0];
   const around = (offsetM: number) => ({ ...camera(0), pose: { ...camera(0).pose, positionM: [sgr[0]! + offsetM, 0, 0] as const } });

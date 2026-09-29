@@ -15,6 +15,7 @@ const currentPage = requestedCurrentPage ?? (Boolean(scope) || satelliteSystem |
 const object = SCENE_OBJECTS.find(object => object.id === objectId);
 // Each overview is its own page.
 const galactic: { scope: OverviewScope; label: string }[] = [
+  { scope: 'observable-universe', label: 'Observable Universe' },
   { scope: 'nearby-universe', label: 'Nearby Universe' },
   { scope: 'local-group', label: 'Local Group' },
   { scope: 'milky-way', label: 'Milky Way' },

@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-catalogue-points-stack@1",
+  "id": "bright-galaxy-dots",
+  "meaning": "DESI's bright galaxies, drawn whole while the camera is within their reach.",
+  "levels": [
+    {
+      "bank": "bright-galaxies",
+      "fullDetailUnits": 1600
+    }
+  ],
+  "basis": "Presentation choice: every dot is drawn within 1,600 Mpc of the Milky Way, the sample's reach; farther out a share that falls with distance."
+}

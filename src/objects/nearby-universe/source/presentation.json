@@ -127,6 +127,152 @@
         "limitations": [
           "The appearance windows are presentation choices."
         ]
+      },
+      {
+        "id": "desi-bright-galaxies",
+        "label": "DESI bright galaxies",
+        "process": "Place each galaxy at its comoving distance in the Planck 2018 cosmology; colour it from its g, r, z fluxes as the Legacy Surveys draw them; tone it by its r magnitude.",
+        "recipe": "source/desi-bright-galaxies/points.json",
+        "inputs": [
+          "desi-bright-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/desi-bright-galaxies.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
+        "id": "desi-quasars",
+        "label": "DESI quasars",
+        "process": "Place each quasar at its comoving distance in the Planck 2018 cosmology; colour it by the composite quasar spectrum stretched to its redshift.",
+        "recipe": "source/desi-quasars/points.json",
+        "inputs": [
+          "desi-quasars-sample",
+          "quasar-template"
+        ],
+        "outputs": [
+          "prepared/desi-quasars.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
+        "id": "bright-galaxies",
+        "label": "Bright-galaxy dots",
+        "process": "Every row of the tracked sample, in catalogue order.",
+        "recipe": "source/bright-galaxies/merge.json",
+        "inputs": [
+          "desi-bright-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/bright-galaxies.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
+        "id": "quasars",
+        "label": "Quasar dots",
+        "process": "One in 3 of the tracked sample, in catalogue order.",
+        "recipe": "source/quasars/merge.json",
+        "inputs": [
+          "desi-quasars-sample"
+        ],
+        "outputs": [
+          "prepared/quasars.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
+        "id": "bright-galaxy-dots",
+        "label": "Bright-galaxy bank",
+        "process": "One level, drawn whole within 1,600 Mpc.",
+        "recipe": "source/bright-galaxy-dots/stack.json",
+        "inputs": [
+          "desi-bright-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/bright-galaxy-dots.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
+        "id": "quasar-dots",
+        "label": "Quasar bank",
+        "process": "One level, drawn whole within 6,600 Mpc.",
+        "recipe": "source/quasar-dots/stack.json",
+        "inputs": [
+          "desi-quasars-sample"
+        ],
+        "outputs": [
+          "prepared/quasar-dots.json"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+        ]
+      },
+      {
+        "id": "cmb",
+        "label": "Cosmic microwave background sphere",
+        "process": "Sample the SMICA temperature map onto the planets' standard sphere (16 latitude bands of 32 cells and two round polar caps, 450 leaves), coloured with the Planck table over plus and minus 300 microkelvin, at the comoving distance of z* = 1089.80; draw a camera-facing limb plate over it.",
+        "recipe": "source/cmb/sphere.json",
+        "inputs": [
+          "planck-smica-map",
+          "planck-colour-table"
+        ],
+        "outputs": [
+          "prepared/cmb.json",
+          "prepared/cmb/cmb.webp",
+          "prepared/cmb/cmb-limb.webp"
+        ],
+        "selector": "",
+        "interpretation": {
+          "kind": "published-sky-map-on-sphere",
+          "sourceKind": "published-map"
+        },
+        "limitations": [
+          "Texels are about 10.5 arcminutes at the equator, coarser than the map's 5 arcminute beam.",
+          "The whole sky is drawn, including the 15.8% outside the map's own temperature confidence mask (TMASK), where Milky Way foreground remains.",
+          "The colour table's gamma of 1.6 and the linear limb (u = 0.6) are presentation choices recorded in the recipe; nothing sees this surface from outside."
+        ]
       }
     ]
   }

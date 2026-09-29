@@ -19,7 +19,7 @@ import { withOverviewScope } from './navigation/navigation-scope.mts';
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
-const ASTRONOMICAL_UNIT_M = 149_597_870_700;
+const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -108,7 +108,13 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
-      backgroundCataloguePoints: [backgroundPointSet.resolve('prepared/dots.json')],
+      // DESI's shells (0.7 Gpc and beyond) begin past the Cosmicflows-4 field, 300 Mpc out, so the Local Group and Nearby
+      // Universe pages never download them.
+      backgroundCataloguePoints: [{ url: backgroundPointSet.resolve('prepared/dots.json') },
+        ...['bright-galaxy-dots', 'quasar-dots'].map(id => ({ url: backgroundPointSet.resolve(`prepared/${id}.json`), fromDistanceM: 300e6 * PARSEC_M }))],
+      // The cosmic microwave background sphere, where this checkout has baked it (the experimental cosmic-web branch).
+      imageMeshes: typeof CONTEXT_OBJECT_ASSET_URLS['../src/objects/nearby-universe/prepared/cmb.json'] === 'string'
+        ? [{ url: backgroundPointSet.resolve('prepared/cmb.json'), resolveResource: (path: string) => backgroundPointSet.resolve(`prepared/${path}`) }] : [],
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },

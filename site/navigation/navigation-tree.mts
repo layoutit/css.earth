@@ -6,7 +6,7 @@ import { datasetHref } from '../dataset-url.mts';
 
 /** The places' names as the app's breadcrumb gives them (site/components/ObjectBreadcrumbs.astro). */
 const PLACE_LABELS: Record<string, string> = {
-  'nearby-universe': 'Nearby Universe', 'local-group': 'Local Group', 'milky-way': 'Milky Way',
+  'observable-universe': 'Observable Universe', 'nearby-universe': 'Nearby Universe', 'local-group': 'Local Group', 'milky-way': 'Milky Way',
   'galaxy-clusters': 'Galaxy clusters', 'stellar-neighbourhood': 'Stellar neighbourhood',
 };
 
