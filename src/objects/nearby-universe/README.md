@@ -93,6 +93,15 @@ overview reads **Observable Universe** from 1 Gpc out, and the camera reaches
 
 ## Tests and evidence
 
+On the experimental cosmic-web branch, two more [captures](evidence/2026-09-29/capture.json)
+show [the cosmic microwave background from outside](evidence/2026-09-29/cmb-from-outside.jpg)
+at 40 Gpc, seamless across its 384 patches, and, 7.6 billion light-years out,
+[DESI's two cones](evidence/2026-09-29/desi-cones.jpg) of bright galaxies either
+side of the Milky Way's plane, with the Cosmicflows-4 field between them.
+Dragging at 0.9 and 2.2 billion light-years, with every DESI dot drawn, runs at
+a median 8.3 ms and a 90th percentile under 10 ms per frame (headless Chromium,
+GPU, device scale 2).
+
 A [browser capture](evidence/2026-09-29/capture.json) of this version shows
 [the whole field](evidence/2026-09-29/field.jpg) from 200 Mpc: sharp dots in
 their type colours and brightness tones, even across the view.
