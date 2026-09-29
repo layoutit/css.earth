@@ -195,9 +195,9 @@ from. It groups the files into folders and fails when a change adds:
 
 - an import that closes a folder cycle;
 - an import from `packages/*` into any other tree;
-- an import into `tools/`, `site/` or `labs/` from outside that tree (Netlify
+- an import into `site/`, `labs/` or `.github/` from outside that tree (Netlify
   functions and root `*.config.*` files are allowed);
-- an import of `tools/` or `@cssearth/bake` from `site/` or
+- an import of `@cssearth/bake` or `@cssearth/telescope-cli` from `site/` or
   `packages/renderer/src/` (renderer tests may use bake);
 - an import of a `packages/*/cli/` command entry, including from another
   entry or the package itself (tests included);
@@ -215,8 +215,8 @@ import of a shared package names no entry it can trace to a source file.
 `output/architecture/`.
 
 The same check applies repository rules that have no baseline, so any finding
-fails it: no file under a retired `tools/` folder (`RETIRED_FOLDERS` in
-`repository-rules.mts`; a move that empties a folder adds it), the nebula
+fails it: no file under the retired `tools/` folder (`RETIRED_FOLDERS` in
+`repository-rules.mts`), the nebula
 boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 `pnpm check:nebula-boundaries` is an alias of the check), and declared
 dependencies: a `packages/*` file imports another workspace package only when
