@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "local-100pc",
+  "meaning": "A nested level of the Milky Way's star dots around the Sun, out to 100 pc: the dots it adds to the levels around it bring it to its own even density, so zooming in never empties the view.",
+  "banks": [
+    "nearby-stars"
+  ],
+  "maxKinematicSigmaKpc": 1,
+  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose \u00b17 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: each catalogue colour mixed halfway to white before the gamma, because the saturated colours read as neon over the backing. The hue order of every catalogue is kept.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each colour channel raised to the power 1.6, so the coloured dots sink into the painted arms and the whitest keep their sparkle.",
+  "densityCap": {
+    "atSunPerKpc2": 50000,
+    "scaleLengthKpc": 2.6,
+    "kernelKpc": 0.012,
+    "taperKpc": [
+      0.05,
+      0.1
+    ],
+    "basis": "The same disc law as the galaxy level (tracers/merge.json): exponential in Galactocentric radius with the thin disc's 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, https://arxiv.org/abs/1602.07702). Presentation choice: 50,000 dots per kpc\u00b2, about half the 165,000 the tracked GCNS sample holds face-on. It puts about 1,000 dots on screen when the level first covers the view, as the 800 pc level does; the first try, 100,000, put 2,000 there and read as too dense. The taper softens the level's edge."
+  },
+  "within": [
+    "tracers",
+    "local-3kpc",
+    "local-800pc"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "nearby-stars-20pc",
+  "table": {
+    "path": "gcns-20pc.csv.gz",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=2000000&QUERY=SELECT+RA_ICRS,DE_ICRS,Dist50+FROM+%22J/A%2BA/649/A6/table1c%22+WHERE+Dist50%3C0.02",
+    "bytes": 34606,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 1,
+      "decDeg": 2,
+      "distance": 3
+    },
+    "distanceUnit": "kpc"
+  },
+  "sample": "Every row the query returns: the complete census within 20 pc, for the 20 pc level of the Milky Way's dots.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "gaia-2021-gcns",
+  "meaning": "Every star of the Gaia Catalogue of Nearby Stars within 20 pc of the Sun (Gaia Collaboration, Smart et al. 2021), each at its median distance (Dist50).",
+  "appearance": {
+    "colorCss": "#ffe6cc",
+    "radiusPx": 0.75,
+    "opacity": 1
+  }
+}

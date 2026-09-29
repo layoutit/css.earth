@@ -1,0 +1,59 @@
+{
+  "id": "gaia-2021-gcns",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gaia Early Data Release 3: The Gaia Catalogue of Nearby Stars",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/202039498"
+    },
+    {
+      "type": "arxiv",
+      "value": "2012.02061"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2012.02061",
+      "label": "arXiv:2012.02061"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/202039498",
+      "label": "A&A 649, A6"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/649/A6",
+      "label": "CDS J/A+A/649/A6"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/649/A6/ReadMe",
+      "checkedOn": "2026-09-28",
+      "locator": "table1c: RA_ICRS, DE_ICRS, Dist50 (kpc)"
+    }
+  ],
+  "creators": [
+    "Gaia Collaboration",
+    "R. L. Smart",
+    "L. M. Sarro",
+    "J. Rybizki",
+    "C. Reyl\u00e9",
+    "A. C. Robin"
+  ],
+  "publisher": "A&A 649, A6",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Gaia Collaboration, Smart et al. (2021), A&A 649, A6.",
+      "scope": "Star positions",
+      "evidence": "https://arxiv.org/abs/2012.02061"
+    }
+  ]
+}

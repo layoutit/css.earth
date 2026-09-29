@@ -340,11 +340,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
         // so without this every star of the Milky Way stayed a dot from intergalactic distances.
         const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
-        // Past the system a star gives way to the galaxy's catalogue dots (its planets already fade with their system); the
-        // world's focus stays as the reference point, a featured star stays as a landmark, and a body of another kind (a
-        // black hole) keeps its dot.
-        const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
-          (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
+        // Past the system a star gives way to the galaxy's catalogue dots (its planets fade with their system); the world's
+        // focus stays as the reference point, a featured star as a landmark, and a body of another kind (a black hole) keeps its dot.
+        const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
         const atGalaxyScale = galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *

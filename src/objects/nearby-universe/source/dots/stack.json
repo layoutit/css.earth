@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-catalogue-points-stack@1",
+  "id": "dots",
+  "meaning": "The galaxies of Cosmicflows-4 at every zoom: the whole field, then the nested levels around the Milky Way, each adding galaxies as its region fills the view.",
+  "levels": [
+    {
+      "bank": "galaxies-200mpc",
+      "fullDetailUnits": 100
+    },
+    {
+      "bank": "galaxies-60mpc",
+      "appearUnits": [
+        60,
+        20
+      ]
+    },
+    {
+      "bank": "galaxies-20mpc",
+      "appearUnits": [
+        20,
+        10
+      ]
+    },
+    {
+      "bank": "galaxies-10mpc",
+      "appearUnits": [
+        10,
+        3
+      ]
+    }
+  ],
+  "basis": "Presentation choice: the field is drawn whole within 100 Mpc, half its radius; each level starts to appear when the view's half-width at the Milky Way shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 10 Mpc level is whole at 3 Mpc, where the Local Group catalogue takes over."
+}

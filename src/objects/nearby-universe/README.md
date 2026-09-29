@@ -22,7 +22,7 @@ records what was used, replaced and left out.
 
 ## Processing
 
-1. `tools/objects/catalogue-points/prepare.mts` places each galaxy at
+1. `packages/bake/cli/prepare-catalogue-points.mts` places each galaxy at
    10^(DM/5 + 1) pc in its J2000 direction, in the Sun-centred frame, in Mpc.
 2. It colours each galaxy by its type class: the template spectrum of that class
    through the CIE 1931 observer into sRGB, the route the app uses for star
