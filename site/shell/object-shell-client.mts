@@ -273,7 +273,7 @@ export function mountObjectShell({
     disposeContent();
     content.apply();
     objectId = content.id;
-    presentedSubject = null;
+    presentedSubject = null; pendingPage = null;
     objectBrowser.bindObject(content.id);
     mountContent(content.id);
   }

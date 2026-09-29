@@ -541,6 +541,8 @@ export function createSceneRouter({
     const selection = context?.selection;
     if (selection?.followCamera(frame) && scenes.state.kind === 'ready') {
       view.replace(session, selection.url(session.url ?? windowTarget.location.href));
+      // An overview's page carries no scene dataset; the scene's page gets its lens back on the way in.
+      view.syncDataset(session);
     }
   }
   function publishSelection() {
@@ -600,6 +602,7 @@ export function createSceneRouter({
             : { kind: 'object', objectId }, objectId);
           if (next.overview) aimAtSystemCenter(ready);
           view.replace(session, current.url(windowTarget.location.href));
+          view.syncDataset(session);
           session.viewUrl?.flush();
           return;
         }
