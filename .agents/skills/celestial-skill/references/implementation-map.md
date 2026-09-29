@@ -427,7 +427,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
 | Restore missing declared source files | `node packages/bake/cli/object-operations.mts acquire <id>` |
 | Check declared source-file coverage without acquiring | `node packages/bake/cli/object-operations.mts acquire <id> --verify-only`; this does not verify source digests |
-| Prepare selected objects through the cache and shared steps | `pnpm prepare:objects -- --object=<id>` |
+| Prepare selected objects and the shared steps | `pnpm prepare:objects -- --object=<id>` |
 | Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, then `node tests/oracles/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node site/build/prepare/prepare-authored.ts <id> --write` |
 | Prepare one authored object end to end, resumable by step | `node packages/bake/cli/prepare-object.mts <id> [--from <step>] [--reuse-images]` (a paged-ellipsoid or raster body redraws only its lighting and atmosphere banks by default when nothing else changed; `prepare-authored.ts <id> --write --full` bakes everything; `--reuse-images` forces the redraw-only run and stops after the prepare step): stale install and builds, reader text budgets and the Sun's installed files, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |

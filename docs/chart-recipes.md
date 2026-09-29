@@ -96,8 +96,7 @@ node site/build/prepare/prepare-chart-catalog.mts --write
 The partial refresh preserves all other inventory entries, textures, galleries
 and content fields. It restores only missing content and refuses local content
 that differs from its inventory. New chart URLs require normal object
-preparation. It leaves the receipt for the last full authored preparation
-unchanged; it does not claim a surface rebake. Publish the refreshed files to
+preparation. It does not claim a surface rebake. Publish the refreshed files to
 R2 before committing inventories. The catalogue generator also emits contact
 sheets of every chart under `output/chart-recipes/` for visual inspection.
 

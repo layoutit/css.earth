@@ -1,7 +1,6 @@
 /** Say which build a preparation run would read stale, before the run fails with an unrelated-looking error (a digest
  * mismatch from an old objects package, a missing module after main moved). A build is stale when a source it compiles is
  * newer than its output, or its output is missing. Modification times are enough for a local preflight; CI builds fresh.
- * An install older than pnpm-lock.yaml is refused first: no rebuild fixes a missing dependency.
  *
  * It imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
  * runs, and `--run` still rebuilds, when this package's own build is missing or stale. */
@@ -75,21 +74,6 @@ export async function staleBuilds(root = process.cwd(), rules: readonly BuildRul
     if (source > output.mtimeMs) stale.push({ name: rule.name, command: rule.command, reason: `${newestPath} changed after ${relative(root, resolve(root, rule.output))} was built` });
   }
   return stale;
-}
-
-/** pnpm keeps a copy of the lockfile it installed at node_modules/.pnpm/lock.yaml. When pnpm-lock.yaml moves on without an
- * install, a tool fails deep inside ("Cannot find package '@cssearth/telescope'"); say which command fixes it instead.
- * Returns null when the install matches the lockfile, or in a directory without one. */
-export async function staleInstall(root = process.cwd()) {
-  const read = (path: string) => readFile(resolve(root, path), 'utf8').catch((error: unknown) => {
-    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
-    throw error;
-  });
-  const wanted = await read('pnpm-lock.yaml');
-  if (wanted === null) return null;
-  const installed = await read('node_modules/.pnpm/lock.yaml');
-  if (installed === wanted) return null;
-  return `${installed === null ? 'node_modules holds no pnpm install' : 'pnpm-lock.yaml changed after the last install'}; run pnpm install --frozen-lockfile`;
 }
 
 /** Rebuild only what is stale, in rule order, so a dependent build never runs before its dependency. */
