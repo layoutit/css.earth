@@ -56,7 +56,9 @@ Once a mesh is presented, its geometry and material demand remain resident throu
 Crossing the distant billboard threshold must not hide the scene or reset its prepared reveal groups during that
 motion: a quick reversal would recreate the same composited leaves repeatedly. Proxy opacity still follows projected
 size. When the shared motion signal becomes inactive, the camera publishes the current level once and retires detail
-if it is still distant. A cold distant mount does not activate detail merely because the camera is moving, and a mesh
+if it is still distant. A cold distant or off-screen mount does not activate detail merely because the camera is moving. Detail demand first
+tests the physical sphere against the measured viewport: an oblique silhouette can be large yet entirely outside it.
+This also prevents a hidden departing mesh from restarting its reveal groups off-screen. A mesh
 without committed material still cannot reveal.
 
 ## Hidden stays out of compositing

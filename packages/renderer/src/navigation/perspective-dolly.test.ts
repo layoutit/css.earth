@@ -205,6 +205,29 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   place(cold, [0, 0, -1e7]);
   expect(cold.prepare().commit().levelOfDetail!.stage).toBe('marker');
   expect(hidden, 'Motion alone must not activate a cold distant mesh').toBe(true);
+  // Recorded Earth departure: its oblique silhouette is large but millions of
+  // pixels off-screen. A hidden source must not restart all its reveal groups.
+  for (const center of [[-20023716, 318451, -4017], [20023716, -318451, -4017],
+    [20000, 0, -50], [0, 20000, -50], [0, 0, 1000]] as const) {
+    place(cold, center);
+    const view = cold.prepare().commit();
+    expect(view.levelOfDetail.stage, `Offscreen body at ${center}`).toBe('marker');
+    expect(hidden).toBe(true);
+  }
+  // A partly clipped sphere still needs its mesh, even with its centre outside.
+  place(cold, [750, 0, -1200]);
+  expect(cold.prepare().commit().levelOfDetail.stage).toBe('geometry');
+  expect(hidden).toBe(false);
+  place(cold, [20000, 0, -50]);
+  expect(cold.prepare().commit().levelOfDetail.stage, 'Coast retains admitted detail').toBe('geometry');
+  expect(hidden).toBe(false);
+  moving = false;
+  expect(cold.prepare().commit().levelOfDetail.stage).toBe('marker');
+  expect(hidden).toBe(true);
+  place(cold, [0, 0, -1200]);
+  expect(cold.prepare().commit().levelOfDetail.stage, 'Returning to the viewport restores detail').toBe('geometry');
+  expect(hidden).toBe(false);
+
 
 });
 
