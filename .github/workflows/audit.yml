@@ -166,7 +166,7 @@ jobs:
             echo "This change selects no universe area; the source catalogue has nothing to reconcile."
             exit 0
           fi
-          if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
+          if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then
             pnpm setup:asset-data
           else
             node .github/scripts/ci/prepare-ci-inputs.mts universe
@@ -176,7 +176,7 @@ jobs:
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node site/build/prepare/prepare-facilities.mts --catalog-only
-          if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
+          if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then
             # Authoring replays volume provenance from pinned FITS.
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
             CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" tests/contract/prepare-factsheets-cli.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
