@@ -109,3 +109,9 @@ No readiness is claimed.
 The recipe declares a sphere of 2574.76 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 15.9464-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>
+
+## iPad atlas footprint
+
+The default photographic normal surface uses quarter dimensions through the existing raster resolutionScale contract. Pole textures and the other lenses retain their existing resolutions.
+
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.

@@ -1,0 +1,51 @@
+{
+  "testedAt": "2026-09-28",
+  "base": "225f2f1e6b",
+  "changes": "Seven Saturn moon recipe, inventory and closed-surface culling changes in this commit. Application JavaScript and arrival handoff unchanged.",
+  "device": "iPad15,7 A16, iPadOS 26.6",
+  "capture": "tablet-saturn-seven-atlases-final-normal-2026-09-29T00-37-47-983Z",
+  "mode": "normal; page-dispatched flight, drag and zoom; JavaScript sampling off; native device screenshots",
+  "defaultTexture": {
+    "location": "public",
+    "filename": "phoebe-normal-surface-alpha@2x.webp",
+    "bytes": 2919518,
+    "sha256": "f520917301e25aa6b331bdaca3bdbfdce3a70a8cbacddd8bae04ca791e5b4374",
+    "width": 3736,
+    "height": 3837,
+    "estimatedDecodedRgbaBytes": 57340128,
+    "previous": {
+      "location": "public",
+      "filename": "phoebe-normal-surface-alpha@2x.webp",
+      "bytes": 6727742,
+      "sha256": "adf8591b3a7d1010fd1a91036a4cab282eaa5c842fa67588f85e8b38a04af3dd",
+      "width": 7472,
+      "height": 7674,
+      "estimatedDecodedRgbaBytes": 229360512
+    }
+  },
+  "previousObservedArrivalWorstTaskMs": 6389.952,
+  "arrivals": [
+    {
+      "label": "08 iapetus → phoebe",
+      "outcome": "finished",
+      "durationMs": 16738.033,
+      "worstTaskMs": 41.3,
+      "worstTaskExclusiveMs": {
+        "gc": 0,
+        "style": 0,
+        "layout": 0,
+        "prepaint": 0,
+        "paint": 0.189,
+        "layers": 0,
+        "commit": 41.111,
+        "compile": 0,
+        "script": 0,
+        "other": 0
+      },
+      "maxPaintMs": 10.47
+    }
+  ],
+  "visualCheck": "Native full-device arrival screenshots and route filmstrip inspected. Complete visible surfaces. Existing texture seams and source coverage gaps remain.",
+  "limits": "Decoded RGBA is an image-size estimate, not measured process memory. Display detail is reduced; preserved source data is unchanged. Different route/capture conditions prevent an isolated percentage-speedup claim. All 56 steps finished with zero console errors. Residual route tasks include 146.346 ms style leaving Phoebe and 523.778 ms composite returning to Saturn; no zero-jank claim.",
+  "previousCapture": "tablet-titan-iapetus-hyperion-phoebe-normal-2026-09-28T23-38-06-908Z"
+}
