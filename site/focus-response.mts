@@ -18,7 +18,7 @@ import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
  * presentation shows the card and dataset-response.mts opens the sheet, as for every other selection. */
 export async function renderNativeFocus(shell: Document, stage: HTMLElement, url: URL, definition: ObjectRuntimeDefinition,
   frame: PreparedWorldCameraFrame, saved: SharedView | null, fetcher: typeof fetch): Promise<SharedView | null> {
-  const selection = readPreparedFocusSelection(url.searchParams);
+  const selection = readPreparedFocusSelection(url, definition.id);
   if (!selection) return saved;
   const catalogs = await loadFocusCatalogs(url.origin, fetcher);
   const catalog = [catalogs.galaxies, catalogs.clusters, catalogs.nebulae].find(catalog => catalog.objects.some(record => record.id === selection.id));
@@ -83,6 +83,8 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   });
   card.set(selected, preparedFocusCitations(selected, catalog.sources), presentation);
   card.destroy();
+  // A page the build already rendered its focus into answers a query again: one initial record, the latest.
+  for (const previous of root.querySelectorAll(':scope > script[data-initial-focus]')) previous.remove();
   const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
   initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
   return saved;

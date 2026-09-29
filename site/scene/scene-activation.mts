@@ -3,7 +3,7 @@ import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
-import { withDataset } from '../dataset-url.mts';
+import { withSceneDataset } from '../dataset-url.mts';
 import type { createPreparedWorldNavigation, WorldHandoff } from '../prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 import type { SceneSession } from './scene-session.mts';
@@ -72,7 +72,7 @@ export function createSceneActivation({ windowTarget, navigation, view, isCurren
       // navigation publishes the destination's actual default selection.
       if (request) {
         const datasets = mount.datasets, current = datasets?.current();
-        request.url = session.url = withDataset(new URL(request.url), current && current !== datasets?.defaultId ? current : null).href;
+        request.url = session.url = withSceneDataset(new URL(request.url), session.objectId, current && current !== datasets?.defaultId ? current : null).href;
       }
     }
     return { interrupted, feature: request ? request.feature : initialSelection?.feature ?? null };

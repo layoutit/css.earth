@@ -13,7 +13,7 @@ test('object navigation leaves focus and overview links to the same scene unsele
   assert.equal(objectLinkIsCurrent(link('/sun/'), origin, '/sun/'), true);
   assert.equal(objectLinkIsCurrent(link('/sun/?dataset=corona'), origin, '/sun/'), true);
   assert.equal(objectLinkIsCurrent(link('/sun/?overview=system'), origin, '/sun/'), false);
-  assert.equal(objectLinkIsCurrent(link('/sun/?focus=m42'), origin, '/sun/'), false);
+  assert.equal(objectLinkIsCurrent(link('/m42/'), origin, '/sun/'), false);
   assert.equal(objectLinkIsCurrent(link('/sun/', true), origin, '/sun/'), false);
   assert.equal(objectLinkIsCurrent(link('https://elsewhere.test/sun/'), origin, '/sun/'), false);
 });

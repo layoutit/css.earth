@@ -8,7 +8,6 @@ export interface ObjectSearchLabels {
   classificationName: string;
   systemName: string;
   illustration?: boolean;
-  candidate?: boolean;
 }
 
 /** One matching policy for the native form response and its live enhancement. */
@@ -22,7 +21,7 @@ export function searchObjects<T extends ObjectSearchLabels>(items: readonly T[],
     || item.classificationName === 'galaxy' && query === 'galaxies' || query === item.classification)?.classification;
   const systemName = items.find(item => query === item.systemName)?.systemName;
   const matches = items.filter(item => classification
-    ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations) && !item.candidate
+    ? matchesObjectClassification(item.classification, classification) && (!item.illustration || illustrations)
     : showAll || (systemName ? item.systemName === systemName
       : item.name.includes(query) || normalized.length > 0 && item.names.some(name => name.includes(normalized))));
   // A typed name lists exact names first, then names that begin with it, then the rest, each in catalogue order:

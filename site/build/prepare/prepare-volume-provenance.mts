@@ -178,7 +178,7 @@ export async function readPreparedVolumeProvenance({ root = process.cwd(), input
     const bankUrl = `${base}/${descriptor.prepared!.url}`;
     if (!provenance.products.flatMap(product => product.outputs).some(output => output.url === bankUrl)) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
     const hostedBy = await hostedDatasets(root, base, id, prepared.controls.map(control => control.id), input);
-    results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/sun/?focus=${id}`, base,
+    results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/${id}/`, base,
       controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
   }
   return results;
@@ -338,7 +338,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
     const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);
     outputs.push({ path: resolve(root, `${base}/inventory.json`), text: inventoryText(next) });
     const hostedBy = await hostedDatasets(root, base, record.objectId, record.lenses.map(lens => lens.id), input);
-    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
+    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
       ...(hostedBy === undefined ? {} : { hostedBy }) });
   }
   if (objectId !== undefined && results.length !== 1) throw new TypeError(`No volume presentation for ${objectId}.`);

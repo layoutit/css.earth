@@ -10,7 +10,7 @@ import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { objectIdAtPath } from '../root-object.mts';
-import { overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
+import { overviewScopeFromUrl, preparedFocusFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */
@@ -46,13 +46,14 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
       }
     }
   }
-  const clear = new URL(`/${objectId}/`, url.origin);
-  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)]) {
+  // A catalogue focus's page keeps its path, which names the focus.
+  const clear = new URL(preparedFocusFromUrl(url, objectId) === null ? `/${objectId}/` : url.pathname, url.origin);
+  for (const name of ['v', 'overview', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)]) {
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
   // Clearing the search keeps the view context, normalized the way the router resolves it.
-  withOverviewScope(clear, overviewScopeFromUrl(url));
+  withOverviewScope(clear, overviewScopeFromUrl(url, objectId));
   document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.object-browser');
   const presentation = createSearchPresentation(document);
@@ -60,11 +61,8 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
   if (searching) requiredElement(document, '.object-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
   if (searching) {
-    const requestedCategory = url.searchParams.get('category');
-    // Retain old category-only URLs; live search is driven solely by its query.
-    const category = ['planet', 'satellite', 'nebula', 'galaxy', 'galaxy-cluster', 'asteroid'].includes(requestedCategory ?? '') ? requestedCategory : null;
     // The same matcher and order as the find function; with no JavaScript the page lists every match at once.
-    const found = findObjects(await data.catalogue(), value || category || 'all objects', { pageRows: Infinity });
+    const found = findObjects(await data.catalogue(), value || 'all objects', { pageRows: Infinity });
     renderCatalogueRows(document, requiredElement<HTMLUListElement>(browser, '[data-catalogue-list]'), found.objects.rows);
     const overviewCount = presentOverviewResults(browser, value);
     presentation.markCategory(found.classification);
@@ -90,21 +88,25 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
   const url = new URL(request.url);
   const objectId = url.pathname === '/.netlify/functions/search' ? url.searchParams.get('object')
     : objectIdAtPath(url.pathname);
-  if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) return new Response('Object not found', { status: 404 });
+  if (!objectId || !/^[a-z0-9][a-z0-9_.+-]*$/u.test(objectId)) return new Response('Object not found', { status: 404 });
   // No query on this fetch: it retrieves the static page without recursing into search.
   const response = await fetcher(new URL(`/${objectId}/`, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
   if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) return response;
   const page = await response.text();
-  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher), target, data);
+  // The page's own address: a catalogue focus's page is named by its path, which the rewrite to the function drops.
+  const address = new URL(url);
+  if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${objectId}/`; address.searchParams.delete('object'); }
+  const focusPage = (await data.catalogue()).some(entry => entry.kind === 'prepared-focus' && entry.id === objectId);
+  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher, { focusPage }), target, data);
   let html: string;
   try {
-    try { html = await render(url); }
+    try { html = await render(address); }
     catch (error) {
       if (!(error instanceof UnreadableSavedView)) throw error;
       // An unreadable shared view (an older format, a damaged copy) renders the page as if it were absent; the browser
       // reports and ignores the same value, and its next camera change rewrites it. Not a redirect: Netlify appends
       // the original query to a function redirect whose target has none, which looped on the root page.
-      const withoutView = new URL(url);
+      const withoutView = new URL(address);
       withoutView.searchParams.delete('v');
       html = await render(withoutView);
     }

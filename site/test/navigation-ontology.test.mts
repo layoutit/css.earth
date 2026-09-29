@@ -19,9 +19,9 @@ test('every prepared spatial subject and every scene has exactly one searchable 
   assert.deepEqual(OBJECTS.filter(object => object.kind === 'prepared-focus'), prepared);
   assert.deepEqual(new Set(SEARCH_OBJECTS.map(object => object.id)), new Set(OBJECTS.map(object => object.id)));
   assert.deepEqual(objectAdapter.routes(SCENE_OBJECTS), SCENE_OBJECTS.map(object => object.route));
-  assert.equal(requireObject('m_031').kind, 'prepared-focus');
-  assert.throws(() => requireSceneObject('m_031'), /not a scene owner/);
-  for (const [query, id] of [['Andromeda', 'm_031'], ['M31', 'm_031'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
+  assert.equal(requireObject('m31').kind, 'prepared-focus');
+  assert.throws(() => requireSceneObject('m31'), /not a scene owner/);
+  for (const [query, id] of [['Andromeda', 'm31'], ['M31', 'm31'], ['LMC', 'lmc'], ['SMC', 'smc'], ['NGC 1976', 'm42'], ['Virgo', 'virgo-cluster']]) {
     const object = requireObject(id!);
     assert.equal(object.kind, 'prepared-focus');
     assert.ok(object.kind === 'prepared-focus' && object.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))), query);
@@ -61,7 +61,7 @@ test('galaxy citations resolve across the full prepared catalogue, including the
   assert.equal(resolveSpatialCitation('Graczyk2020ApJ...904...13G', catalogue.sources)?.url, 'https://arxiv.org/abs/2010.08754');
   const galaxy = catalogue.objects[0]!;
   const future = prepareFocusObject({ ...galaxy, id: 'future_galaxy', name: 'Future galaxy', aliases: ['New alias'] }, 'sun');
-  assert.equal(future.route, '/sun/?focus=future_galaxy');
+  assert.equal(future.route, '/future_galaxy/');
   assert.ok(future.searchNames.includes('new alias'));
   const broken = { ...catalogue, objects: [{ ...galaxy, distance: { ...galaxy.distance, sourceRef: 'missing-paper' } }] };
   assert.throws(() => parsePreparedGalaxyCatalog(broken), /Unresolved distance reference/);
@@ -71,10 +71,11 @@ test('galaxy citations resolve across the full prepared catalogue, including the
 test('physical hosts remain distinct from scene hosts and M45 retains its measured subject', async () => {
   const raw: unknown = JSON.parse(await readFile('src/objects/local-group/prepared/catalogue.json', 'utf8'));
   const catalogue = parsePreparedGalaxyCatalog(raw), satellite = catalogue.objects.find(o => o.id === 'andromeda_01')!;
-  assert.equal(satellite.hostId, 'm_031');
+  assert.equal(satellite.hostId, 'm31', 'a host its object package details takes the package id');
   assert.equal(prepareFocusObject(satellite, 'sun').sceneHostId, 'sun');
-  assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'mw')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
-  assert.equal(OBJECTS.some(o => o.id === 'mw'), false, 'a physical host does not fabricate a destination');
+  // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
+  assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
+  assert.equal(OBJECTS.some(o => o.id === 'milky-way'), false, 'a physical host does not fabricate a destination');
   const m45 = OBJECTS.find(o => o.id === 'm45')!;
   assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
   assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
@@ -100,11 +101,11 @@ test('every row of the application navigation tree opens a route the application
       continue;
     }
     const url = new URL(row.href, 'https://example.test');
+    // A catalogue focus has its own page, the route the registry gives it.
+    if (row.focusId !== null) { assert.equal(focuses.get(row.focusId), row.href, `${id} must use the registered focus route`); continue; }
     assert.ok(pages.has(url.pathname), `${id} leads to an unserved page: ${row.href}`);
-    const focus = url.searchParams.get('focus'), overview = url.searchParams.get('overview'), dataset = url.searchParams.get('dataset');
-    assert.equal(focus, row.focusId, `${id} must name the subject it selects in place`);
-    if (focus !== null) assert.equal(focuses.get(focus), row.href, `${id} must use the registered focus route`);
-    else if (overview !== null) assert.ok(overviews.has(overview), `${id} names an unknown overview: ${overview}`);
+    const overview = url.searchParams.get('overview'), dataset = url.searchParams.get('dataset');
+    if (overview !== null) assert.ok(overviews.has(overview), `${id} names an unknown overview: ${overview}`);
     else if (dataset !== null) {
       // A volume a body presents opens that body on a lens that shows it.
       const host = url.pathname.slice(1, -1);
@@ -114,20 +115,4 @@ test('every row of the application navigation tree opens a route the application
     } else assert.equal(row.href, `/${id}/`, `${id} must open its own page`);
   }
 
-});
-
-test('an unconfirmed LVDB galaxy is searchable by name as a candidate galaxy, and the galaxy listing leaves it out', async () => {
-  const prepared = await readPreparedFocusObjects(resolve('src/objects'), 'sun');
-  const byName = (name: string) => prepared.find(object => object.name === name)!;
-  // LVDB candidate-table rows: Camargo 1105 and Minni 01 are unconfirmed; Hydra I is confirmed real but not a galaxy.
-  for (const name of ['Camargo 1105', 'Minni 01', 'Hydra I']) assert.equal(byName(name).candidate, true, name);
-  for (const name of ['Draco II', 'Segue 1', 'Sagittarius']) assert.equal(byName(name).candidate, undefined, name);
-  const { searchObjects } = await import('../search/object-search.mts');
-  const labels = prepared.filter(object => object.classification === 'galaxy').map(object => ({ name: object.name.toLocaleLowerCase('en'), names: object.searchNames,
-    classification: object.classification, classificationName: object.candidate ? 'candidate galaxy' : 'galaxy', systemName: object.systemName.toLocaleLowerCase('en'),
-    candidate: object.candidate === true }));
-  const listed = searchObjects(labels, 'galaxies').matches;
-  assert.equal(listed.some(label => label.candidate), false);
-  assert.equal(listed.length, labels.filter(label => !label.candidate).length);
-  assert.deepEqual(searchObjects(labels, 'minni 01').matches.map(label => label.classificationName), ['candidate galaxy']);
 });
