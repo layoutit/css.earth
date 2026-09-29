@@ -56,7 +56,7 @@ const relocatedScripts: Readonly<Record<string, string>> = {
 };
 const directories = await readdir(resolve(ORACLE_ROOT, 'tests/oracles'), { withFileTypes: true });
 const names = (await Promise.all(directories.filter(d => d.isDirectory()).map(async d => (await readdir(resolve(ORACLE_ROOT, 'tests/oracles', d.name))).filter(f => f.endsWith('.json')).map(f => `${d.name}/${f}`)))).flat()
-  .filter(name => !NOT_FIXTURES.has(name)).concat(Object.keys(relocatedFixtures));
+  .filter(name => !NOT_FIXTURES.has(name)).concat(Object.keys(relocatedFixtures)).sort();
 const pins = await pinnedOracleVersions();
 
 test('oracle fixtures name their generator, a pinned tool version and pinned inputs', async () => {
