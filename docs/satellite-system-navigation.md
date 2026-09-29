@@ -110,6 +110,6 @@ not derive orbits, geometry, imagery or scientific facts.
 derived membership, required framing, URL identity and camera boundaries.
 The browser check covers Earth and Moon navigation, browser history, Moon
 zoom-out, Jupiter and Didymos system cards, and the Earth card at phone width.
-Repository type checks, the Astro page build and rendered-page checks cover the shared shell and
+Repository type checks and the Astro page build cover the shared shell and
 prepared pages. These checks establish navigation behavior; they do not add
 scientific orbits or qualify an image source.

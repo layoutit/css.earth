@@ -296,7 +296,7 @@ node --test site/test/scene-session.test.mts
 node --test site/test/rendered-page.test.mts
 ```
 
-The rendered-page test parses built HTML for Saturn, Earth and Mercury; it does
+The rendered-page test parses built HTML for the information-tab rules; it does
 not use the preview server, exercise flights or compare DPRs. The lifecycle and
 activation tests cover their named state transitions. These checks do not prove
 browser interaction behavior or a guaranteed frame rate.

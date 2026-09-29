@@ -187,8 +187,8 @@ Worker reuse, cancellation and disposal are covered by
 in the renderer suite. Browser checks should hold a destination's actual scene
 request and verify an immediate complete card, one scene swap, retained camera
 and correct interruption behavior.
-The rendered-page test parses built HTML only; it does not perform those browser
-interactions.
+The rendered-page test parses built HTML for the information-tab rules only; it
+does not perform those browser interactions.
 
 The progressive enhancement browser check disables JavaScript at desktop and
 phone widths, exercises native controls and links, then holds and releases

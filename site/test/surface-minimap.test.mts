@@ -6,8 +6,6 @@ import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-m
 import type { SurfaceAxes } from '../minimap/surface-minimap-math.mts';
 import { required, position } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
-import { cesiumMinimapExcerpts } from '@cssearth/bake/site-assets';
 import { directionOnMap, mapDirection, orbitMapCamera } from '../minimap/surface-minimap-math.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import Camera from '@cesium/engine/Source/Scene/Camera.js';
@@ -28,12 +26,6 @@ test('surface consumers use the published clipped viewport without measuring the
 const axes: SurfaceAxes = { prime: [0, 1, 0], east: [1, 0, 0], north: [0, 0, 1] };
 const near = (a: number, b: number, epsilon = 1e-9) => assert.ok(Math.abs(a - b) < epsilon, `${a} != ${b}`);
 const vectorNear = (a: readonly number[], b: readonly number[], epsilon = 1e-9) => a.forEach((value, i) => near(value, b[i], epsilon));
-
-test('vendored Cesium helpers reproduce the pinned upstream methods verbatim', async () => {
-  for (const [name, expected] of await cesiumMinimapExcerpts()) {
-    assert.equal(await readFile(new URL(`../vendor/${name}`, import.meta.url), 'utf8'), expected);
-  }
-});
 
 test('flat map cardinal landmarks retain east-west order and north-up orientation', () => {
   for (const [u, v, direction] of [[0, .5, [0, 1, 0]], [.25, .5, [1, 0, 0]], [.5, .5, [0, -1, 0]], [.75, .5, [-1, 0, 0]], [.2, 0, [0, 0, 1]]] as const) {

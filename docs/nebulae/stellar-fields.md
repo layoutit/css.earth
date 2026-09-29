@@ -100,9 +100,6 @@ lens, including cores detected beyond that image’s coverage. Front and oblique
 views of all three lenses retain their geometry and source appearance. Their
 roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
 
-[`site/test/rendered-page.test.mts`](../../site/test/rendered-page.test.mts)
-parses built Saturn, Earth and Mercury HTML for one prepared scene, a camera,
-texture references and unique IDs. It does not switch stellar lenses or inspect
-their attribution. The merged-visibility regression was fixed in
+No repository test switches stellar lenses or inspects their attribution. The merged-visibility regression was fixed in
 `prepared-sky-runtime`;
 the HTML check does not test that interaction.

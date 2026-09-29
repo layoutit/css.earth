@@ -71,5 +71,4 @@ graphs in the same transaction; it refuses changed source records or artwork
 membership. The fixed lighting recipe is in
 [`packages/bake/src/facility-renders/render.ts`](../packages/bake/src/facility-renders/render.ts).
 Rerenders on another GPU or browser may differ at antialiased edges. Normal
-builds reuse the committed images, and the artwork test in
-`site/test/dataset-facilities.test.mts` checks their byte counts, sizes and credits.
+builds reuse the committed images.

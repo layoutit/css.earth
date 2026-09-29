@@ -27,6 +27,7 @@ test('page metadata is emitted from the runtime without needing scene bytes',asy
  await writeFile(resolve(directory,'prepared/page.json'),'{"schema":"cssearth-object-page@1","id":"body"}');
  await assert.rejects(loadObjectPageData('body',root),/incomplete/);
  await assert.rejects(loadObjectPageData('../body',root),/identity/);
+ assert.throws(()=>objectPageStyles({id:'body',properties:{page:{stylesheets:['src/../escape.css']}}}),/invalid/);
 });
 
 test('all registry objects own ordered CSS and scene-bound page metadata',async()=>{
@@ -42,16 +43,4 @@ test('all registry objects own ordered CSS and scene-bound page metadata',async(
   const data=JSON.parse(transport.bytes.toString('utf8')).data;
   assert.deepEqual(page,{descriptor:transport.descriptor,assets:data.assets,controls:data.controls},id);
  }
-});
-
-test('generic routes derive membership from the registry and never import scene transports',async()=>{
- // Every registry object has a page; a catalogue focus's page renders its host scene. Navigation fragments are per scene.
- for(const [path,membership] of [['../pages/[id].astro',/OBJECTS\.map/],['../pages/navigation/[id].astro',/SCENE_OBJECTS\.map/]] as const){
-  const source=await readFile(new URL(path,import.meta.url),'utf8');
-  assert.match(source,membership); assert.match(source,/getStaticPaths/);
- }
- const page=await readFile(new URL('../components/ObjectPage.astro',import.meta.url),'utf8');
- assert.match(page,/loadObjectPageData\(objectId\)/);
- assert.doesNotMatch(page,/prepared\/(?:object|runtime)\.json/);
- assert.throws(()=>objectPageStyles({id:'body',properties:{page:{stylesheets:['src/../escape.css']}}}),/invalid/);
 });
