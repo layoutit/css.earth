@@ -140,7 +140,7 @@ export default [
   {
     // Moved unchanged from src/renderers/css, which had no line limit; splitting them is separate work. The site bundle's
     // bytes were held identical across the move, so the runtime module is not split here.
-    files: ['packages/renderer/src/universe/prepared-world-context.ts', 'packages/renderer/src/universe/prepared-world-context.test.ts',
+    files: ['packages/renderer/src/universe/prepared-world-context.ts', 'site/test/prepared-world-context.test.ts',
       'packages/renderer/src/universe/world-context/world-context-planner.test.ts', 'packages/renderer/src/sky/prepared-sky-runtime.test.ts'],
     rules: { 'max-lines': 'off' },
   },

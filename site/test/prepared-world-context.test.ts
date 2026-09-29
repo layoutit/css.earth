@@ -1,25 +1,25 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import type { WorldCameraPose } from '../navigation/world-camera.js';
+import type { WorldCameraPose } from '../../packages/renderer/src/navigation/world-camera.js';
 import { required } from '@cssearth/objects/node/contract';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
-import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../prepared-data/world-context.js';
-import { mountPreparedWorldContext } from './prepared-world-context.js';
-import { worldContextGeometry } from '../prepared-data/world-context.js';
-import type { WorldContextFrame } from './world-context/world-context-frame.js';
-import type { PlannedWorldContext } from './world-context/world-context-planner.js';
-import { preparedVolumeOpacity } from './world-context/context-scale.js';
-import { labelRectsOverlap } from '../labels/screen-label-layout.js';
-import { screenPicking } from '../navigation/screen-picking.js';
-import { createWorldContextFrameEncoder } from './world-context/world-context-frame.js';
-import { createWorldContextPlanner } from './world-context/world-context-planner.js';
-import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from './world-context/context-scale.js';
-import { SCENE_OBJECTS } from '../../../../site/objects.mts';
-import { labelImportance } from '../labels/universe-label-policy.js';
-import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedWorldContext, parsePreparedWorldContextSummary } from '../../packages/renderer/src/prepared-data/world-context.js';
+import { mountPreparedWorldContext } from '../../packages/renderer/src/universe/prepared-world-context.js';
+import { worldContextGeometry } from '../../packages/renderer/src/prepared-data/world-context.js';
+import type { WorldContextFrame } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
+import type { PlannedWorldContext } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
+import { preparedVolumeOpacity } from '../../packages/renderer/src/universe/world-context/context-scale.js';
+import { labelRectsOverlap } from '../../packages/renderer/src/labels/screen-label-layout.js';
+import { screenPicking } from '../../packages/renderer/src/navigation/screen-picking.js';
+import { createWorldContextFrameEncoder } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
+import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
+import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
+import { SCENE_OBJECTS } from '../objects.mts';
+import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 
 // The production publisher only accepts encoded frames. Tests run the actual
 // planner inline and supply that same protocol without starting a browser worker.
@@ -674,12 +674,12 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
 
 // Every malformed case parses the whole generated universe again, so the test's time grows with the number of bodies.
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
-  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
+  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the generated catalogue.
-  const distances = JSON.parse(await readFile(fileURLToPath(new URL('../../../../site/prepared-object-distances.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
+  const distances = JSON.parse(await readFile(fileURLToPath(new URL('../prepared-object-distances.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const distance = (descriptor: unknown) => parseNavigationDistance(distances[(descriptor as { id: string }).id]);
-  const contextEntries = (await readCatalog(fileURLToPath(new URL('../../../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
+  const contextEntries = (await readCatalog(fileURLToPath(new URL('../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
   // Bodies drawn from their astronomy records around a packaged host follow the catalogue's own entries.
   expect(parsePreparedWorldContext(source).bodies.filter(body => !body.unpackaged).map(body => body.id)).toEqual(contextEntries.map(body => body.id));
@@ -730,7 +730,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
 }, 20000);
 
 test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -752,7 +752,7 @@ test('the Earth reference remains painted when its physical marker has faded at 
 });
 
 test('prepared planetary systems retain identified moon paths and retire offscreen context annotations', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -842,7 +842,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
 });
 
 test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits stay complete across selection, hover, flight and zoom', async planet => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
@@ -884,7 +884,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
 });
 
 test('initial Jupiter system framing makes the four large moons and their labels readable', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
@@ -2567,7 +2567,7 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
 });
 
 test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', async () => {
-  const prepared = new URL('../../../../src/objects/sun/prepared/', import.meta.url);
+  const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
   const bankOf = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
@@ -2637,7 +2637,7 @@ test('a body circle holds a dot in the body colour until its own disc outgrows t
 });
 
 test('inside the Solar System, moons without a circle stay inside their planet dot and other stars are dimmed', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -2664,7 +2664,7 @@ test('inside the Solar System, moons without a circle stay inside their planet d
 // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, retained DOM changes only
 // transform and opacity, plus the orbit strokes' paint exception. Production shape: strokes, and a coast reports rotation.
 async function orbitEarth(options: { coast: boolean }) {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 820; host.clientHeight = 1094; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, orbitRenderer: 'strokes',
