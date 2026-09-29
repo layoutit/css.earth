@@ -15,12 +15,6 @@
     },
     {
       "location": "prepared",
-      "filename": "hadfield-wr.json",
-      "bytes": 6674,
-      "sha256": "46f4f23753cdf679298e3787e91b18699a5d176a614010ca7493c359f4da38a8"
-    },
-    {
-      "location": "prepared",
       "filename": "image-layers.json",
       "bytes": 155800,
       "sha256": "730ab9ab7270ade836c62512885de7b264a8c3b80da15e0d18afd13c26f93f4a"
@@ -513,12 +507,6 @@
     },
     {
       "location": "prepared",
-      "filename": "long-hii.json",
-      "bytes": 8696,
-      "sha256": "f288a84c9b00e61ef293ee76bb108951d0793a82caee63330ca9b41f894599b4"
-    },
-    {
-      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1537,
       "sha256": "67331c3e37ed555324e46387917b77b1f7e7b76a26f3e304d5506255624ddc3a"
@@ -528,12 +516,6 @@
       "filename": "provenance.json",
       "bytes": 34758,
       "sha256": "0a6a1d46b94b65a763090d4cf1be155bce0fe627e8011738839f420c0d305a0f"
-    },
-    {
-      "location": "prepared",
-      "filename": "winkler-snr.json",
-      "bytes": 15575,
-      "sha256": "c04f123019d1c45eb31fe54143d60054abbbc4caa110a1d30e3f17fb97c00377"
     }
   ]
 }

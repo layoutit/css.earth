@@ -531,24 +531,6 @@
     },
     {
       "location": "prepared",
-      "filename": "pena-pne.json",
-      "bytes": 4764,
-      "sha256": "27d8c25abd8c4f04e43b6a496e34bfd1d9062aa320b636e7e60b541c4f4b6b46"
-    },
-    {
-      "location": "prepared",
-      "filename": "pietrzynski-cepheids.json",
-      "bytes": 5453,
-      "sha256": "650b36975c09ca9bfc334627a040a27a77989f80881781a284d6b1b224c4886e"
-    },
-    {
-      "location": "prepared",
-      "filename": "pietrzynski-ob.json",
-      "bytes": 5576,
-      "sha256": "db2df698eeee451b7da8b42564572e7f94c96f118739370af83ab8be0cc0d032"
-    },
-    {
-      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1514,
       "sha256": "490368f424b83ea4036366a43337eef05c23e0f23ff45bfd1916bf1890d795da"
@@ -558,18 +540,6 @@
       "filename": "provenance.json",
       "bytes": 36118,
       "sha256": "916d17edd857bc251fbfa5410278f4e20adf8cfdc5dce7095b40090484a6346b"
-    },
-    {
-      "location": "prepared",
-      "filename": "soffner-hii.json",
-      "bytes": 4087,
-      "sha256": "7368ae8df9ea77b8e79647b7c43a8edfb1143ebff0398c5ba17128d43766d7a6"
-    },
-    {
-      "location": "prepared",
-      "filename": "vucetic-snr.json",
-      "bytes": 1835,
-      "sha256": "4a1e35ca6632923819eb68261ad028a6471fb048286e69c30dddce87e4b68774"
     }
   ]
 }
