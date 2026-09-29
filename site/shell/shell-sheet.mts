@@ -14,12 +14,10 @@ interface SheetGesture {
 export function createSheetController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime, readSelectionKey: () => string) {
   const sheet = documentTarget.querySelector(".object-sidebar");
   const handle = documentTarget.querySelector(".object-sheet-handle");
-  const search = documentTarget.querySelector(".object-sidebar-search");
   const toolbar = documentTarget.querySelector(".object-search-toolbar");
   const categories = documentTarget.querySelector(".object-search-categories");
   if (!(sheet instanceof windowTarget.HTMLElement) ||
       !(handle instanceof windowTarget.HTMLInputElement) ||
-      !(search instanceof windowTarget.HTMLInputElement) ||
       !(toolbar instanceof windowTarget.HTMLElement) ||
       !(categories instanceof windowTarget.HTMLElement)) {
     throw new Error("Object shell sheet is incomplete.");
@@ -32,9 +30,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   const { signal } = events;
   lifetime.onDispose(() => events.abort());
   let state: SheetState = handle.checked ? "full" : "peek";
-  // Search opens the whole sheet; leaving search returns to the earlier height.
+  // Search results open the whole sheet; closing them returns to the earlier height.
   let searchReturn: SheetState | null = null;
-  let deferredSearchFocus = false;
   let gesture: SheetGesture | null = null;
   let dragged = false;
   let snapFrame = 0, settleTimer = 0;
@@ -174,10 +171,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
         return;
       }
       drag.active = true;
-      if (deferredSearchFocus) {
-        deferredSearchFocus = false;
-        if (documentTarget.activeElement === search) search.blur();
-      }
       drag.capture.setPointerCapture(event.pointerId);
       endSettle();
       sheet.classList.add("is-dragging");
@@ -197,11 +190,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     const drag = gesture;
     if (drag === null || event.pointerId !== drag.pointerId) return;
     gesture = null;
-    if (!drag.active) {
-      if (deferredSearchFocus) { deferredSearchFocus = false; openSearch(); }
-      return;
-    }
-    deferredSearchFocus = false;
+    if (!drag.active) return;
     dragged = true;
     searchReturn = null;
     if (event.type === "pointercancel") {
@@ -246,8 +235,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
 
   const openSearch = () => {
     if (!mobile.matches || state === "full") return;
-    // Pointer focus happens before a drag can clear its click. Wait until release to distinguish a tap from a swipe.
-    if (gesture?.capture === toolbar && !gesture.active) { deferredSearchFocus = true; return; }
     searchReturn = state;
     settle("full");
   };
@@ -257,8 +244,8 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     searchReturn = null;
     settle(previous);
   };
-  // Focus alone makes room for the keyboard; the results follow the object browser (`followSearch`).
-  search.addEventListener("focus", openSearch, { signal });
+  // Focus alone leaves the sheet where it is: the keyboard lifts it (`--sheet-keyboard`), and only results open it
+  // (`followSearch`, from the object browser).
   // The facility card sits inside the sheet, so opening it has to show it.
   const facilityToggle = documentTarget.querySelector(".object-facility-toggle");
   facilityToggle?.addEventListener("click", () => {
@@ -266,12 +253,11 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   }, { signal });
   mobile.addEventListener("change", () => {
     gesture = null;
-    deferredSearchFocus = false;
     endSettle();
     sheet.classList.remove("is-dragging");
     clearOffset();
   }, { signal });
-  // Typing in search opens a keyboard over the sheet it just opened. The layout
+  // Typing in search opens a keyboard over the sheet. The layout
   // viewport keeps its height, so the visual viewport reports the lost room.
   const visual = windowTarget.visualViewport ?? null;
   const followKeyboard = () => {
@@ -302,7 +288,6 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     destroy() {
       events.abort();
       gesture = null;
-      deferredSearchFocus = false;
       endSettle();
       sheet.classList.remove("is-dragging");
       clearOffset();
