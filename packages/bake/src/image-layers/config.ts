@@ -100,8 +100,6 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   const r = object(value, 'recipe');
   if (r.schema !== 'cssearth-image-layer-recipe@1') throw new TypeError('Unsupported image-layer recipe schema.');
   const s = object(r.source, 'source'), o = object(r.observation, 'observation'), t = object(r.target, 'target');
-  for (const [at, pin] of [['source', s], ['provenance', r.provenance]] as const) if (pin !== null && typeof pin === 'object') for (const key of Object.keys(pin))
-    if (/sha256/iu.test(key)) throw new TypeError(`Image-layer recipe ${String(r.id)} ${at} carries the removed content digest field ${key}.`);
   const g = object(r.geometry, 'geometry'), b = object(r.bake, 'bake'), e = object(b.encoding, 'encoding');
   const p = object(r.provenance, 'provenance');
   const kind = g.kind;

@@ -129,7 +129,6 @@ test('generic indexed reader preserves an open non-axis-aligned triangle and its
     const source = { schema: 'cssearth-indexed-surface@1', positionsUnits: [[1, 2, 3], [5, 1, 6], [3, 5, 3]], triangles: [[0, 1, 2]] };
     const bytes = Buffer.from(JSON.stringify(source)); await writeFile(join(temporary, 'mesh.json'), bytes);
     const base = await recipe(), r = parseShellRecipe({ ...base, shape: { kind: 'indexed-mesh', path: 'mesh.json' } });
-    assert.throws(() => parseShellRecipe({ ...base, shape: { kind: 'indexed-mesh', path: 'mesh.json', sha256: 'recorded' } }), /removed content digest field sha256/);
     const mesh = await loadShellMesh(temporary, r);
     assert.deepEqual(mesh.positionsUnits, source.positionsUnits); assert.deepEqual(mesh.triangles, source.triangles);
     const data = compileCssSurfaceShell({ id: 'test-open-surface', recipe: r, mesh,

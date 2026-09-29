@@ -37,7 +37,7 @@ export function createPhotometricEmission(model: EmissionFieldModel) {
   const finite = createEmissionField(model), retained = model.photometricEnvelope;
   const envelope = retained && readPhotometricEnvelope(retained);
   const sampleEnvelope = envelope && createEnvelopeSampler({ ...envelope, gain: Float32Array.from(envelope.gain) },
-    { identity: envelope.priorIdentity, ...samplePhotometricMge(envelope.recipe) });
+    samplePhotometricMge(envelope.recipe));
   const bounds = envelope ? { min: [...finite.bounds.min] as EmissionVector3, max: [...finite.bounds.max] as EmissionVector3 } : finite.bounds;
   if (envelope) for (let axis = 0; axis < 3; axis++) {
     bounds.min[axis] = Math.min(bounds.min[axis]!, axis === 2 ? envelope.zRange[0] : envelope.bounds.min[axis]!);

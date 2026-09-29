@@ -6,7 +6,6 @@ import { pipeline } from 'node:stream/promises';
 import { dirname } from 'node:path';
 import { zstdCompressSync, zstdDecompressSync, constants } from 'node:zlib';
 import { sourceBytes, containedPath, urlCachePath } from '../volume/node/index.ts';
-import { refuseDigestFields } from '../volume/index.ts';
 import { requireRecord as record } from '@cssearth/core';
 import { decodeExrRgbHalf, halfToFloat, type LinearHalfImage } from './exr.ts';
 import type { SkyRecipe } from './config.ts';
@@ -25,7 +24,6 @@ export const HALF_LINEAR = Float64Array.from({ length: 65536 }, (_, bits) => hal
 export async function acquireSkySource(directory: string, recipe: SkyRecipe, cacheDirectory: string): Promise<void> {
   const acquisition = record(JSON.parse((await sourceBytes(directory, recipe.source.acquisition)).toString('utf8')), 'sky acquisition');
   const source = record(acquisition.source, 'sky original source'), compression = record(acquisition.compression, 'sky source compression');
-  refuseDigestFields(source, `Sky acquisition ${String(source.url)}`);
   if (acquisition.schema !== 'cssearth-exr-sky-acquisition@1' || typeof source.url !== 'string' || new URL(source.url).protocol !== 'https:' ||
     !Number.isSafeInteger(source.bytes) || Number(source.bytes) < 1 ||
     compression.format !== 'rgb16f-le-zstd-rows' || !Number.isInteger(compression.level) || Number(compression.level) < 1 || Number(compression.level) > 19) throw new TypeError('Invalid sky acquisition.');

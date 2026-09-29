@@ -11,8 +11,6 @@ export interface CompilerLensVolume {
   id: string;
   label: string;
   volume: CompilerPin;
-  /** Explicit emission support for a physical component mixture; RGB-only lenses use the scene alpha. */
-  alphaSha256?: string;
   coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number };
 }
 export interface CompilerStarMaterial { rgb: [number, number, number]; diameterUnits: number; alpha: number }
@@ -41,8 +39,9 @@ export interface CompilerStarSprites {
 export interface CompilerBakeResult {
   schema: 'cssearth-compiler-bake@1';
   id: string;
-  /** Immutable cloud bank retained during an independently prepared stellar update. */
+  /** Name of the immutable cloud bank retained during an independently prepared stellar update. */
   volumeId?: string;
+  /** Name of the fitted field the scene transports, given by its host. */
   fieldIdentity: string;
   frame: DensityVolumeFrame;
   boundsArcsec: EmissionBounds;
@@ -58,7 +57,6 @@ export interface CompilerBakeResult {
   lenses: CompilerLensVolume[];
   stars: PreparedCompilerStar[];
   starSprites?: CompilerStarSprites;
-  alphaSha256: string;
   sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: 512; samplesPerSlab: 4;
     layerPlan?: VolumeLayerPlan; layerOptimization?: LayerOptimizationReport; renderBudget?: RenderElementBudget };
 }
@@ -67,6 +65,9 @@ const record = (v: unknown): v is Record<string, unknown> => v !== null && typeo
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const triple = (v: unknown): v is EmissionVector3 => Array.isArray(v) && v.length === 3 && v.every(finite);
 const safeId = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
+/** A scene, field or bank is named by its id. */
+export const validCompilerName = (v: unknown): v is string => safeId(v) && !/^[a-f0-9]{64}$/.test(v);
+
 export function validCompilerStarSize(value: { widthPx?: unknown; diameterUnits?: unknown }): boolean {
   if (value.diameterUnits !== undefined) return value.widthPx === undefined && finite(value.diameterUnits) && value.diameterUnits > 0 && value.diameterUnits <= 1e8;
   return finite(value.widthPx) && value.widthPx >= .5 && value.widthPx <= 12;
@@ -128,12 +129,11 @@ export function validCompilerStarSprites(value: unknown, stars: readonly Prepare
 
 /** Strict worker/browser validation; no Node, DOM, or renderer imports. */
 export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
-  if (record(value) && value.volumeId !== undefined && (typeof value.volumeId !== 'string' || !/^[a-z0-9][a-z0-9-]{0,159}$/.test(value.volumeId)))
-    throw new TypeError('Invalid retained compiler cloud identity.');
-  if (!record(value) || value.schema !== 'cssearth-compiler-bake@1' || !safeId(value.id) ||
-      typeof value.fieldIdentity !== 'string' || !/^[a-z0-9][a-z0-9-]{0,159}$/.test(value.fieldIdentity) ||
+  if (record(value) && value.volumeId !== undefined && !validCompilerName(value.volumeId))
+    throw new TypeError(`Invalid retained compiler cloud name: ${JSON.stringify(value.volumeId)}.`);
+  if (!record(value) || value.schema !== 'cssearth-compiler-bake@1' || !validCompilerName(value.id) ||
+      !validCompilerName(value.fieldIdentity) ||
       !bounds3(value.boundsArcsec) || !bounds2(value.skyBoundsArcsec) || !pin(value.neutral) ||
-      typeof value.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.alphaSha256) ||
       !finite(value.spanArcsec) || value.spanArcsec <= 0 || !record(value.sourceImage) ||
       value.sourceImage.width !== 512 || value.sourceImage.height !== 512 || !record(value.frame) ||
       !record(value.coordinates) || !record(value.sampling)) throw new TypeError('Invalid compiler bake result.');
@@ -167,7 +167,6 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
     if (!record(item)) throw new TypeError('Invalid compiler lens volume.');
     const coverage = item.coverage;
     if (!safeId(item.id) || lensIds.has(item.id) || typeof item.label !== 'string' || !item.label.trim() || !pin(item.volume) || !record(coverage) ||
-        (item.alphaSha256 !== undefined && (typeof item.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(item.alphaSha256))) ||
         !['positiveAlphaTexels', 'recoloredTexels', 'outsideImageTexels'].every(k => Number.isInteger(coverage[k]) && Number(coverage[k]) >= 0))
       throw new TypeError('Invalid compiler lens volume.');
     lensIds.add(item.id);

@@ -100,7 +100,6 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
   assert.ok(Array.isArray(gain) && gain.length === Number(gw) * Number(gh) &&
     gain.every(value => typeof value === 'number' && Number.isFinite(value) && value >= 0), 'Invalid simulation envelope record');
   const prior = record(input.priorCloud, 'prior cloud');
-  assert.ok(!Object.hasOwn(envelopeRecord, 'priorIdentity'), `${input.envelope && JSON.stringify(input.envelope)}: envelope carries the removed prior digest field priorIdentity.`);
   const depthPrior = await loadSimulationPrior(root, parsePin(prior.recipe, 'prior recipe'), distance, modelTangent);
   const zRange = numbers(envelopeRecord.zRange, 2, 'envelope depth range');
   const envelopeGrid = { width: Number(gw), height: Number(gh), bounds: bounds2(envelopeRecord.bounds, 'envelope bounds'),
