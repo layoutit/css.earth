@@ -7,7 +7,7 @@ from pathlib import Path
 import hashlib, json, math, shutil, sys
 
 ROOT = Path(__file__).resolve().parents[4]
-INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('tools/objects/source-authoring/distant-worlds/inputs.json')
+INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('packages/bake/authoring/distant-worlds/inputs.json')
 INPUTS = json.loads((ROOT / INPUT_PATH).read_text())
 REFERENCE_ROOT = ROOT / INPUTS.get('referenceDirectory', 'output/distant-worlds/references')
 
@@ -129,7 +129,7 @@ for body in INPUTS['bodies']:
             shutil.copyfile(available,target)
     manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     for entry in manifest['inputs']:
-        entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py.'))
+        entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with packages/bake/authoring/distant-worlds/author.py.'))
         entry.setdefault('redistribution','Retain source attribution and model qualifications; upstream papers are not relicensed.')
     previous = {entry['id']: entry for entry in reviewed[ident]['inputs']}
     for entry in manifest['inputs']:

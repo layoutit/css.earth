@@ -29,7 +29,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 16000
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using packages/bake/authoring/irregular-moons/inputs.json.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with packages/bake/authoring/distant-worlds/author.py using packages/bake/authoring/irregular-moons/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
@@ -56,7 +56,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 16000
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using packages/bake/authoring/irregular-moons/inputs.json.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with packages/bake/authoring/distant-worlds/author.py using packages/bake/authoring/irregular-moons/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     }
   ],

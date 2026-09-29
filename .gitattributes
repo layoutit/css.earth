@@ -2,7 +2,7 @@
 # Original JPL responses.
 src/objects/comet-*/source/reference/horizons-elements.txt -text -whitespace
 src/objects/comet-*/source/reference/horizons-vectors.txt -text -whitespace
-tools/objects/source-authoring/galileo-lucy/source/GPL-2.0-or-later.txt -text -whitespace
+packages/bake/authoring/galileo-lucy/source/GPL-2.0-or-later.txt -text -whitespace
 src/objects/pluto/source/lenses/pluto-dem.lbl -whitespace
 src/objects/pluto/source/lenses/usgs-dem-metadata.html -whitespace
 src/objects/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace

@@ -7,15 +7,15 @@ New object packages: Dactyl, Dinkinesh and Selam. All use the existing authored-
 Run from the repository root, serially. The checked-in body inputs are sufficient for normal `prepare-authored`; the authoring commands below reconstruct them from the selected originals and published measurements.
 
 1. Restore missing imagery/font inputs using each package’s acquisition recipe. Shape parameters, original CMOD, converted OBJ, reference records and attribution are checked in.
-2. To reconvert Dinkinesh, run `python3 tools/objects/source-authoring/galileo-lucy/cmod.py src/objects/dinkinesh/source/shape/dinkinesh.cmod src/objects/dinkinesh/source/shape/model.obj --volume-equivalent-radius-km 0.369`. Dactyl and Selam’s checked-in `shape/model.json` files transcribe the cited dimensions directly.
-3. Run `node tools/objects/source-authoring/galileo-lucy/orbits.mts` to regenerate illustrative mutual orbits and display orientation. Its retained Celestia input may be copied from Dactyl’s source/reference directory to `output/galileo-lucy/celestia/asteroids.ssc`.
+2. To reconvert Dinkinesh, run `python3 packages/bake/authoring/galileo-lucy/cmod.py src/objects/dinkinesh/source/shape/dinkinesh.cmod src/objects/dinkinesh/source/shape/model.obj --volume-equivalent-radius-km 0.369`. Dactyl and Selam’s checked-in `shape/model.json` files transcribe the cited dimensions directly.
+3. Run `node packages/bake/authoring/galileo-lucy/orbits.mts` to regenerate illustrative mutual orbits and display orientation. Its retained Celestia input may be copied from Dactyl’s source/reference directory to `output/galileo-lucy/celestia/asteroids.ssc`.
 4. Run `node packages/astronomy/tools/generate-asteroids.mts --object=dinkinesh` and `node packages/astronomy/tools/generate-scene-satellites.mts --object=dactyl,selam` when refreshing ephemerides. Retain the Horizons responses in the body source directory. The asteroid generator uses independent vector fixtures.
-5. Catalogue entries live in each descriptor’s `properties.catalog`; physical values, retained orbit states and independent fixtures live in `packages/astronomy/data/bodies/<id>.json`. Run `pnpm prepare:catalog`, build the packages, regenerate solar geometry, and run `node site/build/prepare/prepare-authored.ts <id> --write` once per new body. To rebuild title/context source images, run `node tools/objects/source-authoring/galileo-lucy/initialize.mts` first. Keep document paths and source bindings current after authored changes; the old `pin.mts` helper is retired.
+5. Catalogue entries live in each descriptor’s `properties.catalog`; physical values, retained orbit states and independent fixtures live in `packages/astronomy/data/bodies/<id>.json`. Run `pnpm prepare:catalog`, build the packages, regenerate solar geometry, and run `node site/build/prepare/prepare-authored.ts <id> --write` once per new body. To rebuild title/context source images, run `node packages/bake/authoring/galileo-lucy/initialize.mts` first. Keep document paths and source bindings current after authored changes; the old `pin.mts` helper is retired.
 6. Run `node packages/bake/cli/prepare-navigation.mts dactyl dinkinesh selam` for the three body-owned marker images. Ida already has a prepared context image; for a new parent without one, include that parent in the command. The selected-body serializer binds stable marker URLs with one tile, so other bodies’ transports do not change. Run `pnpm prepare:world-context` to rebuild the ignored world context. Approximate orbit cues come from the retained astronomy state’s `provenance.placement`; no shared Sun body list needs editing.
 
 The checked-in `source/preparation/photometry.json` files in Ida and Dinkinesh are authored inputs for the shared parent-point brightness calculation. Ida retains the original JPL SBDB response; Dinkinesh cites the pre-encounter WISE estimate and its uncertainty. Neither supplies a surface texture or an independently measured moon albedo.
 
-Run `python3 -m unittest discover -s tools/objects/source-authoring/galileo-lucy -p 'test_*.py'`, the adjacent `orbits.test.mjs`, and the three body `source.test.mjs` suites. Shared spatial-context and retained-renderer tests verify that approximate placement survives preparation and changes only the displayed cues.
+Run `python3 -m unittest discover -s packages/bake/authoring/galileo-lucy -p 'test_*.py'`, the adjacent `orbits.test.mjs`, and the three body `source.test.mjs` suites. Shared spatial-context and retained-renderer tests verify that approximate placement survives preparation and changes only the displayed cues.
 
 The CMOD converter rotates `[x,y,z]` to `[x,-z,y]`, centers the source bounding box and scales uniformly. It removes only exactly zero-area source triangles, whose original indices are recorded in `shape/model.json`. The remaining triangles retain their source winding and UVs. The shared preparer then reduces the mesh under its error bound. The original model has no qualified observed/fill texture mask, so no photographic texture is imported.
 
@@ -23,7 +23,7 @@ The moon orbit sources separate published constraints from assumed planes, peria
 
 ## Dactyl photographic source review
 
-Run `node tools/objects/source-authoring/galileo-lucy/review-dactyl.mts` from the
+Run `node packages/bake/authoring/galileo-lucy/review-dactyl.mts` from the
 repository root. It verifies the retained native inputs against
 `src/objects/dactyl/evidence/galileo/inputs.json`, decodes the three FITS frames
 with the shared reader, checks the CK segment identities, and writes
@@ -36,7 +36,7 @@ for the inspected result and remaining registration requirements.
 
 ## Dactyl camera and orientation diagnostic
 
-Run `node tools/objects/source-authoring/galileo-lucy/fit-dactyl.mts` from the
+Run `node packages/bake/authoring/galileo-lucy/fit-dactyl.mts` from the
 repository root with Node 24. It uses only checked-in inputs and writes to
 `output/dactyl-registration/`; an optional first argument changes that directory.
 It runs serially and does not prepare or mount a scene.
@@ -60,7 +60,7 @@ Append `--limb-extent` after the output directory to reproduce the two additiona
 outline cases, for example:
 
 ```sh
-node tools/objects/source-authoring/galileo-lucy/fit-dactyl.mts output/dactyl-registration --limb-extent
+node packages/bake/authoring/galileo-lucy/fit-dactyl.mts output/dactyl-registration --limb-extent
 ```
 
 This adds lower and then upper bright-cap crossings and reruns the same search
@@ -90,7 +90,7 @@ SSI credit and their declared display gain.
 With the complete publisher PDF available locally, run:
 
 ```sh
-node tools/objects/source-authoring/galileo-lucy/fit-dactyl-published-controls.mts /path/to/1-s2.0-S0019103596900457-main.pdf
+node packages/bake/authoring/galileo-lucy/fit-dactyl-published-controls.mts /path/to/1-s2.0-S0019103596900457-main.pdf
 ```
 
 An optional second argument changes the default `output/dactyl-published-controls/`
@@ -121,7 +121,7 @@ explains the remaining map/model correspondence and visibility requirements.
 Run with Node 24 and the same pinned local publisher PDF:
 
 ```sh
-node tools/objects/source-authoring/galileo-lucy/review-dactyl-map.mts /path/to/1-s2.0-S0019103596900457-main.pdf
+node packages/bake/authoring/galileo-lucy/review-dactyl-map.mts /path/to/1-s2.0-S0019103596900457-main.pdf
 ```
 
 An optional second argument changes `output/dactyl-map-review/`. The command
