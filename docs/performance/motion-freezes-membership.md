@@ -122,6 +122,11 @@ not restore a second image over the mounted host.
 
 Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.
 
+Departure history checkpoints reuse the view already saved after a drag. The URL, history entry identity and saved
+view must all match before a replacement can be skipped. A new camera pose or stale history state still publishes;
+explicit pushes remain distinct entries even when they name the same URL. Back restoration still remembers the
+departed view before adopting the incoming entry.
+
 ### Optional controls and scene retirement
 
 Disabled surface labels do not attach their feature root or allocate outline segments. The first catalogue request
