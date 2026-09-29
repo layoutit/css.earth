@@ -48,14 +48,7 @@
     "note": "Presentation only: a violet a shade deeper than the Miville-Desch\u00eanes clouds.",
     "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
   },
-  "mapWeight": {
-    "kind": {
-      "column": [
-        161,
-        166
-      ],
-      "log10Of": 10
-    },
+  "kinematicUncertainty": {
     "kinematic": {
       "column": [
         61,
@@ -68,6 +61,6 @@
       "theta0KmS": 239,
       "sigmaVKmS": 7
     },
-    "basis": "Hou & Han (2014), Sect. 2.4 and Eq. 2: a weight for the kind of tracer, times 0.5/\u03c3 in each disc axis (1 when \u03c3 < 0.5 kpc) for a kinematic distance, with \u03c3 from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set). W_GMC = log10(M / 10^4 Msun), M8.3 in 10^5 Msun."
+    "basis": "Hou & Han (2014), Sect. 2.4: a kinematic distance's uncertainty from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set)."
   }
 }

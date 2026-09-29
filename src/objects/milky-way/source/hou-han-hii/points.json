@@ -49,15 +49,7 @@
     "note": "Presentation only: the pink of ionised hydrogen, a shade deeper than the WISE layer.",
     "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
   },
-  "mapWeight": {
-    "kind": {
-      "column": [
-        217,
-        222
-      ],
-      "scale": 0.01,
-      "missing": 0.1
-    },
+  "kinematicUncertainty": {
     "kinematic": {
       "column": [
         103,
@@ -70,6 +62,6 @@
       "theta0KmS": 239,
       "sigmaVKmS": 7
     },
-    "basis": "Hou & Han (2014), Sect. 2.4 and Eq. 2: a weight for the kind of tracer, times 0.5/\u03c3 in each disc axis (1 when \u03c3 < 0.5 kpc) for a kinematic distance, with \u03c3 from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set). W_HII = U/100 from the excitation parameter U8.3; 0.1 where no radio flux gives U."
+    "basis": "Hou & Han (2014), Sect. 2.4: a kinematic distance's uncertainty from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set)."
   }
 }

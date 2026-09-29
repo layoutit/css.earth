@@ -1,73 +1,66 @@
 # Nearby Universe galaxy field
 
-A sparse view of galaxies between 3 and 200 Mpc. The 1,800 points preserve
-catalogue positions; 160 faint clouds show concentrations of catalogue entries.
-The clouds are **not gas or measured mass density**. Colors, exposure and
-sampling are authored display choices; no measured luminosities are imported.
+Every galaxy of Cosmicflows-4 between 3 and 200 Mpc, drawn as one sharp dot at
+its measured distance, in the colour of its morphological type. The dots are
+thinned to an even density at every zoom, so the field never piles up around
+the Milky Way and never empties as you zoom in. No brightness, glow or cloud is
+drawn: nothing here is invented.
 
 ## Sources
 
 | Source | Measurement used |
 | --- | --- |
-| [Cosmicflows-4 — Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) | Table 2: 55,877 galaxy identities, J2000 coordinates and individual distance moduli. |
-| [HyperLEDA I — Paturel et al. (2003)](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) | PGC identities, J2000 coordinates, morphology and angular diameter; retain the largest 50,000 by diameter. |
-| [HyperLEDA II — Paturel et al. (2003)](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/238) | Positive HI radial velocities for fallback distance estimates. |
+| [Cosmicflows-4, Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) | Table 2: PGC number, J2000 position and the distance modulus from all methods, for 27,277 of its 55,877 galaxies, those between 3 and 200 Mpc. |
+| [HyperLEDA, Makarov et al. (2014)](https://doi.org/10.1051/0004-6361/201423496) | The numerical morphological type T of 25,877 of those galaxies, joined by PGC number. |
+| [Kinney et al. (1996)](https://doi.org/10.1086/177583) | The elliptical, S0, Sa, Sb and Sc template spectra from the STScI reference atlases. |
 
-[Manifest](source/manifest.json) binds the downloaded bytes and authored
-records to canonical published sources. [Acquisition pins](source/catalogue.json)
-retain exact ADQL queries, URLs, row counts and hashes. These are CDS-distributed
-catalogue inputs, not a borrowed application catalogue. Original source terms
-apply; no blanket redistribution license is established. Downloads stay ignored.
-See the [investigation ledger](investigations.json) for selected and rejected work.
+The [galaxy recipe](source/galaxies/points.json) records both queries and the
+join. The tracked table ([cf4-hyperleda.csv.gz](source/galaxies/cf4-hyperleda.csv.gz),
+369 KB) and the five templates are the inputs; the [manifest](source/manifest.json)
+binds them to their source records. The [investigation ledger](investigations.json)
+records what was used, replaced and left out.
 
-## Evidence
+## Processing
 
-The [contract conversion comparison](evidence/contract-reproduction.json)
-records exact equality of frame, point and cloud data against PR #215's initial
-commit. A prior cold-cache acquisition reproduced the two runtime assets
-byte-for-byte; it is an acquisition/reproduction check, not scientific acceptance.
+1. `tools/objects/catalogue-points/prepare.mts` places each galaxy at
+   10^(DM/5 + 1) pc in its J2000 direction, in the Sun-centred frame, in Mpc.
+2. It colours each galaxy by its type class: the template spectrum of that class
+   through the CIE 1931 observer into sRGB, the route the app uses for star
+   colours. Class bounds are the midpoints between the types the templates stand
+   for (E −5, S0 −2, Sa 1, Sb 3, Sc 5). The colours are E #ffdec0, S0 #ffdfc1,
+   Sa #ffdcc7, Sb #ffe1cb and Sc #d9d7ff. The 1,400 galaxies HyperLEDA gives no
+   type are white.
+3. `merge.mts` thins the galaxies into four nested levels. The field holds 0.18
+   galaxies per 1,000 Mpc³ out to 200 Mpc, half what CF4 still holds at its
+   edge. Around the Milky Way, levels out to 60, 20 and 10 Mpc bring that up to
+   5, 25 and 90, each under what CF4 holds there. Each level only adds galaxies
+   the levels around it do not draw, and its density falls to nothing over its
+   outer half.
+4. `stack.mts` joins the levels into [one bank](source/dots/stack.json) of
+   7,077 dots. The app draws a growing share of it as you zoom in: the whole
+   field within 100 Mpc, then each level's galaxies one at a time as the view
+   narrows past the level's radius, so a level's edge is never on screen and a
+   dot you have seen stays while you zoom in.
 
-[Context provenance tests](../../../tests/contract/context-provenance.test.mts) verify
-output and inventory pins and reject changed bytes.
-[Catalogue tests](../../../tests/galaxy-field/catalogue.test.mts) check distance
-modulus scale and Cartesian axes. Runtime setup tests exercise installation,
-verified reuse, manifest mirrors and unsafe paths. The renderer uses 170 field
-elements; that bound does not prove a frame rate.
+## Tests and evidence
+
+The renderer's catalogue point tests parse the prepared bank and check that a
+stacked bank only adds dots as the view narrows
+(`packages/renderer/src/universe/catalogue-points.test.ts`). The
+[context provenance tests](../../../tests/contract/context-provenance.test.mts)
+verify output and inventory pins.
 
 ## Known problems
 
-The display is neither a complete galaxy survey nor a map of the observable
-universe. Selection effects and gaps cannot establish cosmic voids. Hubble-law
-fallback distances have no peculiar-velocity correction; uncertainty is not
-shown. Morphology colors are illustrative. No calibrated brightness or mass
-interpretation, native-image fidelity or measured performance claim is made.
-
-<details>
-<summary>Preparation and delivery</summary>
-
-The [recipe](source/preparation/field.json) owns sampling, covariance fitting and
-texture settings. Preparation joins PGC identities, uses `10^((DM−25)/5)` Mpc
-when a CF4 modulus exists, and otherwise positive `VHI/H0`, with H0 declared in
-the recipe. Coordinates are equatorial Cartesian axes in `sun-icrf`; the shared
-navigation epoch tags static context and does not imply a measurement epoch.
-
-The standard descriptor binds the prepared field hash. Generated provenance
-uses the shared object-lineage schema. Identical root and prepared runtime
-inventories list every delivered field and presentation asset. Shared setup
-can install this resource explicitly; the bake restores it from scientific
-inputs without requiring published runtime mirrors. Source publication and
-runtime publication are different operations.
-
-See the [shared setup guide](../../../README.md) for installation.
-
-`prepare:galaxy-field` acquires sources, bakes assets and regenerates provenance
-and source usage. Production builds use the same preparation. Generated images
-and source downloads are ignored. No additional scene or camera is mounted.
-
-</details>
-
-Each sampled point retains its PGC identity and distance method. Cosmicflows-4
-points also retain DM and the reported e_DM uncertainty, including the asymmetric
-distance interval obtained from DM +/- e_DM. Missing errors and Hubble-law
-errors are null, not zero. These uncertainties are metadata; the current scene
-still draws a single position and does not visualize the interval.
+- The field is not a complete survey. CF4 is flux-limited, so the even density
+  is set by what it holds at its edge, and real concentrations above it are
+  thinned. The zone the Milky Way's disc hides is empty in the catalogue, not
+  in space.
+- Beyond about 150 Mpc only the SDSS fundamental-plane sample reaches, over
+  part of the northern sky; the field stops at 200 Mpc.
+- The templates are spectra of galaxy centres (Kinney et al. 1996 used the IUE
+  aperture), not whole-galaxy light, so every colour but Sc is a close warm
+  white. Types later than Sc take the Sc template, the latest in the atlas.
+- Distance uncertainties (CF4's e_DM) are not drawn.
+- Nearer than 3 Mpc, the [Local Group catalogue](../local-group/README.md) draws
+  each galaxy as a marker instead.

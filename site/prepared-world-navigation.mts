@@ -29,8 +29,8 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, localGroupZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
-import { bodyCardViewAtCamera } from './overview-context.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, LENS_VOLUMES, localGroupZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { bodyCardViewAtCamera, milkyWayOverviewDistanceM } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
 
@@ -112,8 +112,13 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
           distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
       }
-      return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
-        (owner?.frame ?? frames.get(fromId))!.originM);
+      // The Milky Way card is the view from inside the galaxy (overview-context.mts): the flight lands in the middle of that
+      // range, looking the way the camera already looks.
+      const frame = frames.get(objectId);
+      if (!frame) return null;
+      const projection = presentWorldCamera(from, frame, optics);
+      return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: milkyWayOverviewDistanceM() / frame.metersPerUnit },
+        frame, optics), focusPositionM: frame.originM };
     },
     /** Fit a volume the body shows through its lens, when the view does not already hold it. Null when the view is
      * already as far out as the fit, or the volume is unknown. */

@@ -11,7 +11,7 @@ import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, GALAXY_SCALE, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -161,9 +161,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const orbitOverview = selectionPreview ? false : overview;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected);
-      // The galaxy handoff (GALAXY_SCALE): one value for the whole field, from the selected body as the galaxy volume is,
-      // shared with the galaxy's tracers.
-      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), GALAXY_SCALE.handoffStartM, GALAXY_SCALE.handoffEndM);
+      // Past a system (its bodies' fade), a host star that is not featured gives way to the galaxy's catalogue dots: one
+      // value for the whole field, from the selected body, shared with those dots (universe-background.ts).
+      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
       const selectedDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter);
@@ -340,9 +340,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
         // so without this every star of the Milky Way stayed a dot from intergalactic distances.
         const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
-        // At galaxy scale a planet host and its planets give way to the galaxy's own tracers; the world's focus stays as
-        // the reference point, and a body of another kind (a black hole) keeps its dot.
-        const galaxyHost = body.id !== plan.focus.id && (entry.orbit !== null || body.classification === 'star');
+        // Past the system a star gives way to the galaxy's catalogue dots (its planets already fade with their system); the
+        // world's focus stays as the reference point, a featured star stays as a landmark, and a body of another kind (a
+        // black hole) keeps its dot.
+        const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
+          (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
         const atGalaxyScale = galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
