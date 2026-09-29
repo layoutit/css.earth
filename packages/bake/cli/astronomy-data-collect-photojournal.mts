@@ -8,9 +8,8 @@
 // media records, and the caption phrases that chose it. Collection writes only scratch output; review the result and the
 // proposed decisions (photojournal-review.ts) before one SQLite transaction (astronomy-data-apply-ledger-fixes.mts).
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
-import { resolve } from "node:path";
-import { array, object, string, batch, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
+import { dirname, resolve } from "node:path";
+import { array, object, string, batch, checkoutRoot, urlCachePath } from "@cssearth/bake/sources/astronomy-data";
 
 const dir = resolve(checkoutRoot, process.env.PHOTOJOURNAL_WORK_DIR ?? "output/photojournal-refresh");
 const api = "https://science.nasa.gov/wp-json/wp/v2";
@@ -27,7 +26,7 @@ const CAPTION_SEARCHES = ["simple cylindrical", "cylindrical projection", "polar
 await mkdir(dir + "/cache", { recursive: true });
 
 async function get(url: string): Promise<{ body: unknown; pages: number }> {
-  const key = createHash("sha256").update(url).digest("hex"), path = `${dir}/cache/${key}.json`;
+  const path = urlCachePath(`${dir}/cache`, url, ".json");
   try {
     const saved = object(JSON.parse(await readFile(path, "utf8")));
     if (saved.url === url) return { body: saved.body, pages: Number(saved.pages) };
@@ -40,6 +39,7 @@ async function get(url: string): Promise<{ body: unknown; pages: number }> {
       const r = await fetch(url, { signal: AbortSignal.timeout(90000) });
       if (!r.ok) throw Error(`HTTP ${r.status} ${url}`);
       const body: unknown = await r.json(), pages = Number(r.headers.get("X-WP-TotalPages") ?? "1");
+      await mkdir(dirname(path), { recursive: true });
       await writeFile(path, JSON.stringify({ url, retrievedAt: new Date().toISOString(), pages, body }) + "\n");
       return { body, pages };
     } catch (e) {

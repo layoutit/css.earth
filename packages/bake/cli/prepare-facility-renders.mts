@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { dirname, resolve, relative, extname, sep } from 'node:path';
@@ -129,12 +128,11 @@ try {
     entry.bytes = webp.length; entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
     entry.composition = { scale: 1, offsetXCssPixels: 0 };
     entry.processing = { recipe: 'packages/bake/src/facility-renders/render.ts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, camera: result.report.camera, pose: result.report.pose };
-    reports.push({ ...result.report, bytes: webp.length, sha256: sha256(webp), subject: entry.subject });
+    reports.push({ ...result.report, bytes: webp.length, subject: entry.subject });
     console.log(`${id}: ${result.report.triangles} triangles; ${webp.length} bytes`);
   }
   if (!inspectAxes && !inspectRolls) {
-    library.renderer = { ...await page.evaluate(() => { if (!('FacilityRender' in window)) throw new Error('Renderer not loaded'); return window.FacilityRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
-      implementation: Object.fromEntries(await Promise.all(['packages/bake/cli/prepare-facility-renders.mts', 'packages/bake/src/facility-renders/render.ts', 'packages/bake/src/facility-renders/poses.ts', 'packages/bake/src/sources/facility-artwork-refresh.ts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
+    library.renderer = { ...await page.evaluate(() => { if (!('FacilityRender' in window)) throw new Error('Renderer not loaded'); return window.FacilityRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp };
     library.composition = { background: 'transparent for model renders', displaySize: [296, 148], preserveAspectRatio: true, fitPolicy: 'Center retained source geometry; alpha bounds with 6px padding supply sidebar crop.' };
     await writeFile(resolve(output, 'render-report.json'), JSON.stringify(reports, null, 2) + '\n');
     await writeFile(resolve(output, 'render-library.candidate.json'), JSON.stringify(library, null, 2) + '\n');

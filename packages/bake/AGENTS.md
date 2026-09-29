@@ -75,8 +75,8 @@ its validators accept); the renderer never imports the bake.
   the checks of a factsheet's cited source evidence, the object-information source records, and the citations of
   factsheet values from the records a body pins (`packages/bake/cli/cite-pinned-facts.mts` is their command); the source
   records a context manifest lists, the factsheet citations and source inventory the prepared source catalogue compiles, the
-  bibliography citations of the prepared galaxy and cluster catalogues, and the digest that says whether a recorded
-  preparation still applies to a provenance record; the context packages' provenance, compiled from their manifests or read
+  bibliography citations of the prepared galaxy and cluster catalogues, and the record of which object a byte-verified
+  preparation ran for; the context packages' provenance, compiled from their manifests or read
   as installed, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
   shared surveys they quote (`data/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
   is its command). The application passes in the route its context objects show at

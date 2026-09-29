@@ -148,9 +148,9 @@ unchanged apart from import paths. The outputs were compared byte for byte with 
 - `pnpm prepare:volume` for the Milky Way (192 prepared files) and `prepare-stars` for the stellar neighbourhood
   (4 files) wrote identical files.
 - `tools/nebula/prepare.mts` for the eleven deliveries that bake wrote identical files, except each `delivery.json`
-  receipt's `implementationSha256`. That identity hashes the owners by package-relative name, and the name changed from
+  receipt's implementation identity. That identity named the owners by package, and the name changed from
   `@cssearth/volume-core`/`@cssearth/volume-bake` to `@cssearth/bake`. With main's identity substituted, every
-  `delivery.json` matches main's bytes. LMC and SMC record no such identity and matched entirely. M1 fails on both
+  `delivery.json` matched main's bytes. LMC and SMC record no such identity and matched entirely. M1 fails on both
   commits with the same error (`Compact sampled replay changed accepted hubble-optical volume`).
 - The 52 moved tests pass under Vitest, and `node labs/nebula/run.mts test` keeps the same six failures as before
   the move. `pnpm test:lab` stops at the same density-bake assertion both times.

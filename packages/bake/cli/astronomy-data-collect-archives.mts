@@ -2,9 +2,8 @@
 // Small Bodies Node or JAXA DARTS metadata into ignored scratch output (ARCHIVE_WORK_DIR); the work is in
 // @cssearth/bake/sources/astronomy-data.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
-import { resolve } from "node:path";
-import { array, object, string, number, batch, screen, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
+import { dirname, resolve } from "node:path";
+import { array, object, string, number, batch, screen, checkoutRoot, urlCachePath } from "@cssearth/bake/sources/astronomy-data";
 const dir = resolve(checkoutRoot, process.env.ARCHIVE_WORK_DIR ?? "output/archive-refresh");
 const mode = process.argv[2];
 if (mode !== "umd" && mode !== "darts") throw Error("Expected umd or darts");
@@ -43,8 +42,7 @@ function links(html: string, url: string): { url: string; text: string }[] {
 }
 type Page = { url: string; retrievedAt: string; status: number; html: string };
 async function page(url: string): Promise<Page> {
-  const path =
-    dir + "/cache/" + createHash("sha256").update(url).digest("hex") + ".json";
+  const path = urlCachePath(dir + "/cache", url, ".json");
   try {
     const r = object(JSON.parse(await readFile(path, "utf8")));
     if (r.url !== url) throw Error("Cache URL mismatch");
@@ -64,6 +62,7 @@ async function page(url: string): Promise<Page> {
     status: response.status,
     html: await response.text(),
   };
+  await mkdir(dirname(path), { recursive: true });
   await writeFile(path, JSON.stringify(p));
   return p;
 }

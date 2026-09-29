@@ -6,13 +6,9 @@ Usage: node packages/bake/cli/restore-source-inputs.mts --object=<id>
        python prepare-archived-camera.py src/objects/<id>/source
 """
 from pathlib import Path
-import argparse, hashlib, json, re, subprocess, tempfile
+import argparse, json, re, subprocess, tempfile
 import numpy as np
 import spiceypy as sp
-
-
-def digest(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def field(text, key):
@@ -182,13 +178,13 @@ def main():
     paths=[args.profile,profile['image'],*profile['kernels'],*profile['references'],profile['mesh']]
     pins={e['path']:e for e in manifest['inputs']};provenance=[]
     for path in paths:
-        # A cited paper or archive document is named by its URL and recorded as cited; package files are checked against their pins.
+        # A cited paper or archive document is named by its URL and recorded as cited; a package file must be a manifest input.
         if path.startswith('https://'):
             provenance.append(dict(url=path));continue
-        expected=pins[path]
-        # A download is verified against its manifest pin; a file authored here is its own record.
-        if 'expectedSha256' in expected and (digest(source/path)!=expected['expectedSha256'] or (source/path).stat().st_size!=expected['expectedBytes']):
-            raise ValueError('Changed source pin: '+path)
+        if path not in pins:
+            raise ValueError(f'{source.parent.name}: {args.profile} names {path}, which manifest.json inputs do not list')
+        if not (source/path).is_file():
+            raise FileNotFoundError(f'{source.parent.name}: manifest input {path} is missing; restore the body sources first')
         provenance.append(dict(path=path))
     sp.kclear()
     for path in profile['kernels']:
@@ -199,7 +195,7 @@ def main():
         if profile.get('registrationWindows'):
             register_osiris(source,profile,camera,Path(t))
     destination=source/profile['output'];destination.write_text(json.dumps(camera,indent=2)+'\n')
-    print(json.dumps(dict(output=str(destination),sha256=digest(destination),checks=camera['checks'])))
+    print(json.dumps(dict(output=str(destination),checks=camera['checks'])))
 
 
 if __name__=='__main__':
