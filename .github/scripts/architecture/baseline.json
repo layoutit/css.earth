@@ -31,12 +31,10 @@
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
       {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"site/objects.mts"},
-      {"from":"labs/experiments/native-scroll/preview.mts","to":"site/prepared/serialize-prepared-scene.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/viewer/inspection-camera-renderer.ts","to":"site/runtime-policy.mts"},
       {"from":"labs/performance/ipad-journey.mts","to":"site/objects.mts"},
       {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"},
-      {"from":"labs/performance/navigation-capture.mts","to":"site/server/preview.mts"},
-      {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"}
+      {"from":"labs/performance/navigation-capture.mts","to":"site/server/preview.mts"}
     ],
     "nothing-imports-cli-entries": [],
     "packages-import-only-packages": [
@@ -148,14 +146,12 @@
       {"from":"packages/telescope-cli/src/observation-families.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/opus.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/output-handoffs.test.mts","to":"tests/objects/source-test.mts"},
-      {"from":"packages/telescope-cli/src/output-handoffs.test.mts","to":"tools/objects/telescope-sphere/sphere-assets.mts"},
       {"from":"packages/telescope-cli/src/papers.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/pds-decode.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/product-descriptor.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/product-science.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/product-type.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/projection.test.mts","to":"tests/objects/source-test.mts"},
-      {"from":"packages/telescope-cli/src/projection.test.mts","to":"tools/objects/telescope-sphere/sphere-lane.mts"},
       {"from":"packages/telescope-cli/src/qualified-observations.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/qualify.test.mts","to":"tests/fixtures/fits/helpers.mts"},
       {"from":"packages/telescope-cli/src/qualify.test.mts","to":"tests/objects/source-test.mts"},
