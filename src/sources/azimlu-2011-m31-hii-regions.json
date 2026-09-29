@@ -1,0 +1,51 @@
+{
+  "id": "azimlu-2011-m31-hii-regions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A new catalog of H II regions in M31",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-6256/142/4/139"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/142/139"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-6256/142/4/139",
+      "label": "AJ 142, 139"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/142/139",
+      "label": "CDS J/AJ/142/139"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/142/139/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table2.dat: RAdeg, DEdeg (J2000); 3,961 HII regions"
+    }
+  ],
+  "creators": [
+    "M. Azimlu",
+    "R. Marciniak",
+    "P. Barmby"
+  ],
+  "publisher": "AJ 142, 139",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Azimlu et al. (2011), AJ 142, 139.",
+      "scope": "HII region positions",
+      "evidence": "https://doi.org/10.1088/0004-6256/142/4/139"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "azimlu-hii",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/142/139/table2.dat",
+    "bytes": 380256,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        4
+      ],
+      "raDeg": [
+        10,
+        17
+      ],
+      "decDeg": [
+        19,
+        25
+      ]
+    }
+  },
+  "filters": [],
+  "source": "azimlu-2011-m31-hii-regions",
+  "meaning": "HII regions of M31 found by Azimlu et al. (2011) in the Local Group Galaxies Survey H-alpha images, which cover the whole disc: one dot per region at its catalogue sky position. The catalogue gives no distance along the line of sight; every region lies in M31's disc."
+}

@@ -9,6 +9,13 @@ A publisher optical image supplies the color of an authored 1 kpc depth envelope
 | [Wide-field view of the Andromeda Galaxy](https://esahubble.org/images/heic1112f/) | `heic1112f`; 4783 × 5000 pixels; High-resolution crop/resample derived offline from the publisher Large JPEG. |
 | Geometry reference | Chemin, Carignan & Foster 2009, arXiv:0909.3846. Adopted parameters remain in the [recipe](source/recipe.json); exact source-field qualification is unresolved. |
 | [Ibata et al. (2005)](https://arxiv.org/abs/astro-ph/0504164) | [Stellar extent](source/stellar-extent.json): an extended disc-like structure of M31 stars spanning out to about 40 kpc (scattered detections to 70 kpc). The universe rings M31 at 40 kpc; it marks where stars are still measured, not a boundary. |
+| [Azimlu et al. (2011)](https://doi.org/10.1088/0004-6256/142/4/139) | [HII regions](source/azimlu-hii/points.json): 3,961 regions from H-alpha images of the whole disc (CDS J/AJ/142/139). |
+| [Kodric et al. (2013)](https://doi.org/10.1088/0004-6256/145/4/106) | [Cepheids](source/pandromeda-cepheids/points.json): 2,009 Cepheids from the first year of Pan-STARRS1 PAndromeda monitoring, whole disc (CDS J/AJ/145/106). |
+| [Lee & Lee (2014)](https://doi.org/10.1088/0004-637X/786/2/130) | [Supernova remnant candidates](source/lee-snr/points.json): 156 candidates from H-alpha and [S II] images (CDS J/ApJ/786/130). |
+| [Merrett et al. (2006)](https://doi.org/10.1111/j.1365-2966.2006.10268.x) | [Planetary nebulae](source/merrett-pne/points.json): 2,574 of 3,300 emission-line objects, after the authors' own flags for HII regions, background objects and other galaxies (CDS J/MNRAS/369/120). |
+| [Johnson et al. (2015)](https://doi.org/10.1088/0004-637X/802/2/127) | [Star clusters](source/phat-clusters/points.json): 2,753 clusters from the PHAT Hubble imaging, which covers only the north-east third of the disc (CDS J/ApJ/802/127). |
+
+The five catalogues give sky positions only. They are recorded for a future layer of catalogue dots over the image, in the Milky Way's style; nothing reads them yet. Placing them needs M31's disc orientation, which the geometry reference above leaves unqualified.
 
 The image is publisher-prepared display RGB, not common calibrated flux or a qualified natural-color measurement. Observation dates are not retained in the selected records. The 361.93 × 234.08 arcmin field describes the parent image, not the 4783 × 5000 crop; crop coordinates and conversion are retained in the acquisition record.
 

@@ -1,0 +1,64 @@
+{
+  "id": "merrett-2006-m31-planetary-nebulae",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1111/j.1365-2966.2006.10268.x"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/369/120"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1111/j.1365-2966.2006.10268.x",
+      "label": "MNRAS 369, 120"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/369/120",
+      "label": "CDS J/MNRAS/369/120"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table3.dat: RAh/RAm/RAs, DE-/DEd/DEm/DEs (J2000), HV, Note (E/R = probable HII region or background galaxy), Host (non-M31 sources); 3,300 emission-line objects"
+    }
+  ],
+  "creators": [
+    "H. R. Merrett",
+    "M. R. Merrifield",
+    "N. G. Douglas",
+    "K. Kuijken",
+    "A. J. Romanowsky",
+    "N. R. Napolitano",
+    "M. Arnaboldi",
+    "M. Capaccioli",
+    "K. C. Freeman",
+    "O. Gerhard",
+    "L. Coccato",
+    "D. Carter",
+    "N. W. Evans",
+    "M. I. Wilkinson",
+    "C. Halliday",
+    "T. J. Bridges"
+  ],
+  "publisher": "MNRAS 369, 120",
+  "publicationDate": "2006",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Merrett et al. (2006), MNRAS 369, 120.",
+      "scope": "Planetary nebula positions",
+      "evidence": "https://doi.org/10.1111/j.1365-2966.2006.10268.x"
+    }
+  ]
+}

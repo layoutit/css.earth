@@ -1,0 +1,78 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "merrett-pne",
+  "table": {
+    "path": "table3.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/table3.dat",
+    "bytes": 330000,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        4
+      ],
+      "raH": [
+        6,
+        7
+      ],
+      "raM": [
+        9,
+        10
+      ],
+      "raS": [
+        12,
+        15
+      ],
+      "decSign": [
+        17,
+        17
+      ],
+      "decD": [
+        18,
+        19
+      ],
+      "decM": [
+        21,
+        22
+      ],
+      "decS": [
+        24,
+        27
+      ],
+      "velocityKmS": [
+        35,
+        41
+      ],
+      "note": [
+        43,
+        47
+      ],
+      "host": [
+        49,
+        58
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": "note",
+      "keepEmpty": true,
+      "empty": [
+        "",
+        "-"
+      ],
+      "reason": "Note E or R marks a probable HII region or background galaxy, and 'other' an object excluded as a planetary nebula by its flux (ReadMe note 1)."
+    },
+    {
+      "column": "host",
+      "keepEmpty": true,
+      "empty": [
+        "",
+        "-"
+      ],
+      "reason": "A host marks an object of M32, NGC 205, Andromeda IV, the Northern Spur, a possible Southern Stream extension or a background source (ReadMe note 2)."
+    }
+  ],
+  "source": "merrett-2006-m31-planetary-nebulae",
+  "meaning": "Planetary nebulae of M31 from the Planetary Nebula Spectrograph survey of Merrett et al. (2006): one dot per nebula at its catalogue sky position. Of 3,300 emission-line objects, 2,574 remain once the authors' own flags for HII regions, background objects and other galaxies are applied. The planetary nebulae trace M31's old stars, bulge and disc alike."
+}

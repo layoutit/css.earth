@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "pandromeda-cepheids",
+  "table": {
+    "path": "table.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/145/106/table.dat",
+    "bytes": 1271697,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        5,
+        21
+      ],
+      "raDeg": [
+        23,
+        30
+      ],
+      "decDeg": [
+        32,
+        39
+      ],
+      "periodDaysR": [
+        61,
+        66
+      ],
+      "periodDaysI": [
+        68,
+        73
+      ]
+    }
+  },
+  "filters": [],
+  "source": "kodric-2013-m31-cepheids",
+  "meaning": "Cepheids found by Kodric et al. (2013) in the first year of Pan-STARRS1 PAndromeda monitoring, which covers the whole disc: one dot per Cepheid at its catalogue sky position. The periods are kept for a later age cut; none is applied here."
+}
