@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Write a body's JWST band maps from its record, src/objects/<id>/source/preparation/jwst-band-maps.json.
  *
- *   node tools/objects/jwst/cubes/author-body-maps.mts <object id> [--check] [--raw <dir>]...
+ *   node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts <object id> [--check] [--raw <dir>]...
  *
  * The record names the body's rotation model (a text PCK and a NAIF body code) and, for each map, the pinned cubes (each an
  * imaging program and its cube band, with its own Horizons tables; several cubes seen from different sides make one map), the band and continuum windows with the publication they come from, the grid and the emission
@@ -35,7 +35,7 @@ import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observa
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../..');
+const REPOSITORY = resolve(import.meta.dirname, '../../../../..');
 export const JWST_HORIZONS_CENTER = '500@-170';
 const DEGREE = Math.PI / 180;
 

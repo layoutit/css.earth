@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Turn one checked NACO jitter product into a registered body map through the shared resolved-disc boundary.
  *
- *   node tools/objects/naco/author-body-map.mts <target> <program> <naco_img_jitter.fits> --raw <raw-dir> [--out <map.fits>] [--check]
+ *   node packages/telescope-cli/authoring/naco/author-body-map.mts <target> <program> <naco_img_jitter.fits> --raw <raw-dir> [--out <map.fits>] [--check]
  *
  * NACO's recipe drops WCS because shift-and-add changes the mosaic origin. It does not rotate the detector. This adapter
  * therefore proves the axes from every pinned raw frame (north up, east left, one common scale and zero position angle),
@@ -24,7 +24,7 @@ import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
 import { readProgram } from '@cssearth/telescope-cli/archives/naco/archive';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../..');
+const REPOSITORY = resolve(import.meta.dirname, '../../../..');
 const PCK = 'src/spice/cassini/pck/pck00011.tpc';
 const DEGREE = Math.PI / 180, ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8;
 

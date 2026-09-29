@@ -21,7 +21,7 @@ const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
     subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 }, angularResolution: { majorArcsec: 0.1, minorArcsec: 0.1, basis: 'disc-edge fit' } }] });
 const selection: ObservationSelection = { satisfaction: { status: 'unresolved', acceptance: 'all-requested-constraints', constraints: {} }, schema: 'cssearth-telescope-observation-selection@1', request: { target: 'europa', wavelengthMicrometres: [4.24, 4.28], kind: 'cube', result: 'body-map', time: { any: true }, angularResolutionArcsec: 0.3 },
   telescope: 'JWST', mode: 'NIRSPEC/IFU', programme: 'europa-1250', toolkitLevel: 'proven', constraints: {},
-  bodyMapSupport: { answer: 'yes', author: 'tools/objects/jwst/cubes/author-body-maps.mts', reason: 'the body-map author' }, unresolved: [],
+  bodyMapSupport: { answer: 'yes', author: 'packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts', reason: 'the body-map author' }, unresolved: [],
   evidence: { ledger: 'data/jwst/ledger.json', archiveDate: '2026-09-19', receipts: [], targetAssociations: [], bodyMaps: [], investigations: [] } };
 
 async function fixture(value = product(), measured = true) {

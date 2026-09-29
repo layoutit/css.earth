@@ -45,10 +45,10 @@ const verdict = (answer: ConstraintAnswer, reason: string): ConstraintVerdict =>
 const round = (value: number): number => Number(value.toPrecision(3));
 const NO_CAPABILITIES = 'Capabilities not recorded: modes.json has no sourced entry for this mode, so nothing here states what it can do.';
 const BODY_MAP_AUTHORS: Readonly<Record<string, string>> = Object.freeze({
-  'JWST :: NIRSPEC/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
-  'JWST :: MIRI/IFU': 'tools/objects/jwst/cubes/author-body-maps.mts',
-  'Hubble :: STIS/CCD': 'tools/objects/hst/slit-scan-map.mts',
-  'VLT/NACO :: imaging': 'tools/objects/naco/author-body-map.mts',
+  'JWST :: NIRSPEC/IFU': 'packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts',
+  'JWST :: MIRI/IFU': 'packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts',
+  'Hubble :: STIS/CCD': 'packages/telescope-cli/authoring/hst/slit-scan-map.mts',
+  'VLT/NACO :: imaging': 'packages/telescope-cli/authoring/naco/author-body-map.mts',
 });
 
 const bodyMapSupport = (mode: TargetMode): Candidate['bodyMapSupport'] => {

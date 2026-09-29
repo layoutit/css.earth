@@ -36,6 +36,12 @@ export const APPLICATION_TREES = ['tools', 'site', 'labs', '.github'] as const;
 
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
 
+/** Per-body and per-mission authoring folders: `authoring-is-leaf` forbids importing into them from outside. */
+const AUTHORING_ROOTS = ['packages/bake/authoring/', 'packages/telescope-cli/authoring/'] as const;
+/** The one file the nebula lab reads a circumstellar authoring module from directly (path + dynamic import), named
+ * explicitly rather than opening the leaf rule to all of `labs/`. */
+const AUTHORING_LEAF_EXCEPTIONS = new Set(['labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts']);
+
 export const LAYER_RULES: readonly LayerRule[] = [
   {
     id: 'packages-import-only-packages',
@@ -79,8 +85,10 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'authoring-is-leaf',
-    description: 'packages/bake/authoring/ holds per-body and per-mission authoring scripts: nothing imports them except their own tests (tests and type-only imports count)',
-    forbids: (from, to) => to.startsWith('packages/bake/authoring/') && !from.startsWith('packages/bake/authoring/'),
+    description: 'packages/bake/authoring/ and packages/telescope-cli/authoring/ hold per-body and per-mission authoring scripts: '
+      + 'nothing imports them except their own tests, and the one lab entry named in AUTHORING_LEAF_EXCEPTIONS (tests and type-only imports count)',
+    forbids: (from, to) => AUTHORING_ROOTS.some(root => to.startsWith(root))
+      && !AUTHORING_ROOTS.some(root => from.startsWith(root)) && !AUTHORING_LEAF_EXCEPTIONS.has(from),
     includeTests: true,
   },
 ];
