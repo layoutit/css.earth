@@ -19,7 +19,7 @@ function fixture() {
   return { ...files, data, transport };
 }
 
-test('decodes the checked prepared point field and verifies its manifest and bank pins once each', async () => {
+test('decodes the checked prepared point field and reads its manifest and bank once each', async () => {
   const { descriptor, url, bankUrl, bankBytes, data, transport } = fixture();
   const payload = decodePreparedCssPointField(parsePreparedCssPointFieldManifest(data), bankBytes);
   expect(payload.schema).toBe('cssearth-css-point-field@1');
