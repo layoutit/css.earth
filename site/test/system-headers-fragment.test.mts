@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SYSTEM_HEADERS_FRAGMENT_URL, fetchSystemHeaders, spliceSystemHeaders } from '../system-headers-fragment.mts';
 

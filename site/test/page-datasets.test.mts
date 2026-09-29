@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { presentPageDatasets, readPageDatasets, selectedPageLens } from '../page-datasets.mts';
 import { parsePageDatasets } from '../page-dataset-cards.mts';
 

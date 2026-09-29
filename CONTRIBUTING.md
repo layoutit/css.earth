@@ -178,7 +178,7 @@ The required universe matrix separates runtime, shell and renderer checks;
 every selected lane must pass. The preparation gate checks publication. Source
 catalogue reconciliation and broad bake reproduction run in the separate advisory
 audit. Native tests needing unavailable sources, prepared outputs or toolchains
-can skip through `tests/objects/source-test.mts`; a pass with skips does not prove
+can skip through `@cssearth/objects/node/source-test`; a pass with skips does not prove
 those inputs or rendering paths. Run focused tests with the needed inputs installed.
 Compiled artifacts use exact-input caches; these never cache a test verdict.
 Package caches, the renderer's included, follow compiler inputs; preparation retains a

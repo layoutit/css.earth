@@ -2,7 +2,7 @@ import { requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import PREPARED_MERCURY_SKY from "../../src/objects/mercury/prepared/sky.json" with {type: "json"};
 import PREPARED_VENUS_SKY from "../../src/objects/venus/prepared/sky.json" with {type: "json"};

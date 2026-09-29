@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { FOCUS_FRAGMENT_URL, fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
 

@@ -35,6 +35,11 @@
       "types": "./dist/node/contract.d.ts",
       "import": "./dist/node/contract.js",
       "require": "./dist/node/contract.cjs"
+    },
+    "./node/source-test": {
+      "types": "./dist/node/source-test.d.ts",
+      "import": "./dist/node/source-test.js",
+      "require": "./dist/node/source-test.cjs"
     }
   },
   "scripts": {

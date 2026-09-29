@@ -1,6 +1,6 @@
 import { testDistance } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { selectionAtCamera, watchOverviewSelection } from '../overview-selection.mts';
 import { systemById } from '../object-systems.mts';

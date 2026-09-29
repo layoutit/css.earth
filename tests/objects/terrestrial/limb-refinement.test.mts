@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { subdividedOctahedron, refineCameraByLimb, rotateCamera, rotationOf, limbThreshold, observedLimb } from '@cssearth/bake/objects/layers/terrestrial';
 import { parseObjShape } from '@cssearth/bake/objects/geometry';

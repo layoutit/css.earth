@@ -1,6 +1,6 @@
 import { fixtureRecord } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { parseTerrestrialProfile } from '@cssearth/bake/objects/layers/terrestrial';
 import { alternativeForLens, radialModelForLens } from '@cssearth/bake/objects/layers/terrestrial';

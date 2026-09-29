@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { mkdir,mkdtemp,readFile,rm,writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseCli } from './cli-arguments.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';

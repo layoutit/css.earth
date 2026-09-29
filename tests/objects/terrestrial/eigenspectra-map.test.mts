@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { deflateRawSync } from 'node:zlib';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { fitScaleAndOffset, mapPhaseCurve, mirrorGrid, type EmissionGrid, loadEigenspectraGroups, loadEigenspectraTemperature, readNpz } from '@cssearth/bake/objects/raster';
 
 const test = sourceTest('wasp-18b');

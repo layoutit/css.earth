@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import assert from 'node:assert/strict';import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();import {readFile} from 'node:fs/promises';import {resolve} from 'node:path';
 import {member} from './common.mts';import {describeStandaloneSpectrum,exportSpectrumCsv,F03_SPECTRUM_HANDLER,selectSpectrumRange,spectrumChartData} from './f03-spectrum.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';

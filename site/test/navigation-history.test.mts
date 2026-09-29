@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createNavigationHistory } from '../navigation/navigation-history.mts';
 import { ROOT_OBJECT_ID } from '../root-object.mts';

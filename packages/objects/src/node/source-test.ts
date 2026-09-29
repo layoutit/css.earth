@@ -3,7 +3,8 @@ import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 
-const root = resolve(import.meta.dirname, '../..');
+// Both src/node and tsup's dist/node are four levels below the repository root.
+const root = resolve(import.meta.dirname, '../../../..');
 const RESTORE = (objectId: string) => `node packages/bake/cli/restore-source-inputs.mts --object=${objectId}`;
 
 type TestBody = (t: TestContext) => void | Promise<void>;

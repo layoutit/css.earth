@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {sourceTest} from '../source-test.mts';
+import {sourceTest} from '@cssearth/objects/node/source-test';
 import {parsePdsBinnedTable,loadPdsBinnedTable} from '@cssearth/bake/objects/raster';
 const test=sourceTest();
 const label=`PDS_VERSION_ID = PDS3

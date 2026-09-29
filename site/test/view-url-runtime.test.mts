@@ -1,6 +1,6 @@
 import { unusedMountOptions } from './navigation-test-values.mts';
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createSceneView } from '../scene/scene-view.mts';
 import { createSceneSessions } from '../scene/scene-session.mts';

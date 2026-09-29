@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { prepareSolidBodySurface, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from "@cssearth/bake/scene";
 import { assertPolarCaps } from "../objects/polar-caps.mts";

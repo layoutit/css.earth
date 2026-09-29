@@ -1,7 +1,7 @@
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import {shape,array,text,number,optional} from '@cssearth/core';
 import {required} from '@cssearth/objects/node/contract';
-import { sourceTest } from './source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

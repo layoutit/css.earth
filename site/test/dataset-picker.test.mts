@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { bindDatasetPicker } from '../dataset-picker.mts';
 

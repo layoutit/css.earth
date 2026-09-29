@@ -1,7 +1,7 @@
 import { fixtureRecord } from '@cssearth/objects/node/contract';
 import { requireArray } from '@cssearth/core';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import {createHash} from 'node:crypto';
 import {readFile,mkdtemp,readdir,rm,writeFile} from 'node:fs/promises';

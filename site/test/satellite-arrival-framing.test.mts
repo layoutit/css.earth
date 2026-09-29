@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { selectPreparedResponsiveZoom } from '@cssearth/renderer/navigation/camera-layout.ts';
 import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';

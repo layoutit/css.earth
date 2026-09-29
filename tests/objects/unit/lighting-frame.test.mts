@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../../site/objects.mts';
 import { projectRoot } from '../fixtures.mts';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 
 const test = sourceTest();
 const json = async (path: string) => JSON.parse(await readFile(resolve(projectRoot, path), 'utf8')) as Record<string, any>;

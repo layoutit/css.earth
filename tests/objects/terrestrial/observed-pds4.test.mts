@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from '@cssearth/bake/objects/raster';
 import {linearToSrgb} from '@cssearth/bake/objects/color';

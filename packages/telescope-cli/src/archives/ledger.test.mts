@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { WORKSPACE } from '@cssearth/telescope/node';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { ledgerJson, type ArchiveLedger } from './ledger.mts';
 const test = sourceTest();
 

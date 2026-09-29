@@ -2,7 +2,7 @@
  * vari_cepheid row. */
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parsePresentationProfile } from '@cssearth/bake/presentation';
 import { installLightCurve, LIGHT_CURVE_MODEL } from './light-curve.mts';
 import { loadSolarEpoch } from './solar-epoch.mts';
