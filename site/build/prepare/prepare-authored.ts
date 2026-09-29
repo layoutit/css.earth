@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects/sources';
-import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
+import { parseRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
@@ -412,7 +412,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (!url.startsWith(rasterConfig.publicBase)) throw new TypeError(`${descriptor.id}: leaf image ${url} is not under ${rasterConfig.publicBase}.`);
     const path = resolve(publicDirectory, url.slice(rasterConfig.publicBase.length));
     const { width } = await sharp(path).metadata().catch((error: unknown) => { throw new Error(`${descriptor.id}: leaf image ${url} (${path}) cannot be measured.`, { cause: error }); });
-    return width ?? Number.NaN;
+    return surfaceCoordinateWidth(raster, url, width ?? Number.NaN);
   });
   const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
     assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(await solarGeometry()), outputDirectory, imagePixels });
