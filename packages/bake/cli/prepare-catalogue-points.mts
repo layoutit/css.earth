@@ -2,7 +2,9 @@
  * Prepare a published point catalogue beside an object as a bank of fixed 3D points. `source/<id>/points.json` names
  * the table, its columns, the rows the authors' own selection keeps, an optional colour column and the citation;
  * Astropy converts each kept row's Galactic longitude, latitude and distance to Sun-centred ICRS Cartesian
- * coordinates (kpc, or Mpc when `frame.unit` says so), and the bank is written to `prepared/<id>.json` and inventoried.
+ * coordinates (kpc, or Mpc when `frame.unit` says so). The bank is written where the recipe says: `published: true` for a
+ * bank the app fetches (`prepared/<id>.json`, inventoried), otherwise a bake input for merge-catalogue-points or
+ * stack-catalogue-points in the ignored `output/catalogue-points/<object>/` (packages/bake/src/volume/node/catalogue-banks.ts).
  * Rows without a distance are counted and left out; no value is filled.
  *
  * `frame.placement: 'image-layer-disc'` places ICRS rows without a distance: each lies where its sight line crosses the
@@ -31,6 +33,7 @@ import { readFitsHdus, binaryTable, tableColumn, numbers } from '@cssearth/bake/
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { spectrumLinearSrgb } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
+import { recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
 if (!objectDirectoryArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-catalogue-points.mts <object-directory> <id>');
@@ -39,6 +42,7 @@ const recipePath = resolve(sourceDirectory, 'points.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as Record<string, unknown>;
 const at = (key: string) => `${recipePath}: ${key}`;
 if (recipe.schema !== 'cssearth-catalogue-points-source@1' || recipe.id !== id) throw new TypeError(`${at('schema')} must be cssearth-catalogue-points-source@1 for ${id}.`);
+const published = recipePublished(recipe, recipePath);
 /** A column is a 1-based whitespace or comma-separated field, or a 1-based inclusive byte range of a fixed-width table. */
 type Column = number | [number, number];
 /** Galactic coordinates come from columns, or from a `G<l><±b>` identifier in the name column (as in G305.20+00.01).
@@ -520,8 +524,5 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   ...(photographLook ? { photographLook: { toneFloor: PHOTOGRAPH_TONE_FLOOR, colourMix: PHOTOGRAPH_COLOUR_MIX, referenceLight: photographLook.reference } } : {}),
   points: photographLook ? converted.points.map((point, index) => [...point, photographLook.indices[index]!])
     : toneBy || colorByClass || colorByBands || colorBySpectrumAtRedshift || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
-const outputPath = resolve(objectDirectory, 'prepared', `${id}.json`);
-await writeFile(outputPath, JSON.stringify(bank) + '\n');
-const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
-await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
+const outputPath = await writeCatalogueBank({ objectDirectory, id, bank, published });
 console.log(`Prepared ${converted.points.length} of ${converted.selected} selected rows of ${converted.rows} (${converted.missingDistance} without a distance${table.exclude ? `, ${converted.excluded} excluded` : ''}${bulgePlacement ? `, ${bulgeMembers} in the bulge` : ''}) into ${outputPath}.`);

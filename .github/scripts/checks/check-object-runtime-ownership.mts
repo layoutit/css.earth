@@ -538,11 +538,12 @@ function requireApplicationWorldContextSource(mountSource: string, resourceSourc
 }
 
 /** The generated module names each context object; each must reach its descriptor and prepared assets, binary banks included. */
-function requireContextObjectModuleSource(source: string, contexts: readonly { id: string; type: string }[]) {
+function requireContextObjectModuleSource(source: string, contexts: readonly { id: string; type: string }[], jsonSource: string) {
   function fail(): never { throw new TypeError('Generated context object module does not match the current prepared context inventory.'); }
   const globs = new Map<string, unknown[]>();
   const records = new Map<string, ObjectExpression>();
-  for (const statement of parseRuntimeSource(source, "source.mts").body) {
+  // The runtime module carries descriptors and asset URLs; the build-only module carries the prepared JSON the site reads.
+  for (const statement of [...parseRuntimeSource(source, "source.mts").body, ...parseRuntimeSource(jsonSource, "json.mts").body]) {
     if (statement.type !== 'ExportNamedDeclaration' || statement.declaration?.type !== 'VariableDeclaration') continue;
     for (const declaration of statement.declaration.declarations) {
       const call = astKind(declaration.init, 'CallExpression'), callee = astKind(call?.callee, 'MemberExpression');
@@ -558,7 +559,7 @@ function requireContextObjectModuleSource(source: string, contexts: readonly { i
   const exact = (actual: readonly unknown[], expected: readonly string[]) => actual.length === expected.length &&
     new Set(actual).size === actual.length && expected.every(value => actual.includes(value));
   if (!exact(descriptors, contexts.map(({ id }) => `../src/objects/${id}/object.json`)) ||
-      !exact(preparedJson, contexts.map(({ id }) => `../src/objects/${id}/prepared/*.json`))) fail();
+      !exact(preparedJson, contexts.map(({ id }) => `../src/objects/${id}/prepared/{datasets,lenses,presentation,provenance}.json`))) fail();
   if (localAssets) {
     const expected = [...contexts.map(({ id }) => `../src/objects/${id}/prepared/**/*.{json,png,webp,bin}`),
       ...contexts.filter(({ type }) => type === 'point-field').map(({ id }) => `!../src/objects/${id}/prepared/*.bin`)];
@@ -808,7 +809,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   if (sharedClosure.has(applicationContextPath)) {
     try {
       requireApplicationWorldContextSource(await source(applicationContextPath), await source(resolve(root, 'site/application-world-resources.mts')));
-      requireContextObjectModuleSource(await source(resolve(root, 'site/prepared-context-objects.mts')), await readContextObjects(resolve(root, 'src/objects')));
+      requireContextObjectModuleSource(await source(resolve(root, 'site/prepared-context-objects.mts')), await readContextObjects(resolve(root, 'src/objects')),
+        await source(resolve(root, 'site/prepared-context-json.mts')));
       const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/objects/sun/prepared/world-context.json'))), 'sun');
       await requireContextPointField(root, context, source);
     } catch (error) { sharedViolations.push({ file: 'site/application-world-context.mts', line: 1, reason: errorMessage(error) }); }

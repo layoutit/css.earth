@@ -1,4 +1,5 @@
-import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_PREPARED_JSON } from './prepared-context-objects.mts';
+import { CONTEXT_OBJECT_ASSET_URLS } from './prepared-context-objects.mts';
+import { CONTEXT_OBJECT_PREPARED_JSON } from './prepared-context-json.mts';
 import { parsePageDatasets } from './page-dataset-cards.mts';
 
 /** The datasets a drawn page's package prepares (`prepared/datasets.json`, packages/bake/cli/prepare-map-sphere.mts), as

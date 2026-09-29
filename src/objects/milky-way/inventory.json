@@ -15,18 +15,6 @@
     },
     {
       "location": "prepared",
-      "filename": "bulge-rr-lyrae.json",
-      "bytes": 1796530,
-      "sha256": "ba1924bc03b917f6aa4df3c34d80336e80b409446022bd9e2fb02e6f62790852"
-    },
-    {
-      "location": "prepared",
-      "filename": "cepheids.json",
-      "bytes": 7128,
-      "sha256": "58ff6989a62e3636e1bb858c9cdf6f74818cdb1d24b4bc1a2768229cd6932202"
-    },
-    {
-      "location": "prepared",
       "filename": "dots.json",
       "bytes": 889774,
       "sha256": "4bc9cd6319721a367d75eaa686235ddb514e182328b06447bdf0917cb450feac"
@@ -36,90 +24,6 @@
       "filename": "globular-clusters.json",
       "bytes": 5156,
       "sha256": "e36938c674e2fb83a245a894ffe3b8ce709f6c0a6a8bd272b589ae92115bdbae"
-    },
-    {
-      "location": "prepared",
-      "filename": "hot-stars.json",
-      "bytes": 2760597,
-      "sha256": "9458b3b5aae6e10f7829d2852ba01516d827e6ee752e9981aeb8a8b617f9b985"
-    },
-    {
-      "location": "prepared",
-      "filename": "hou-han-gmc.json",
-      "bytes": 43008,
-      "sha256": "22f87006c44eda8227bfd9a5a4b8b6659559d936d0a1b596be5c79abe01d8692"
-    },
-    {
-      "location": "prepared",
-      "filename": "hou-han-hii.json",
-      "bytes": 59211,
-      "sha256": "da0268901bca4959338a55e67adff640c3d9a5f15e748171697c247baed431ab"
-    },
-    {
-      "location": "prepared",
-      "filename": "hou-han-masers.json",
-      "bytes": 24713,
-      "sha256": "bea98bd66516a06d52ecfe6ce35b218c2e4fe89fdb6587acf1220c50bb92d41f"
-    },
-    {
-      "location": "prepared",
-      "filename": "local-100pc.json",
-      "bytes": 31356,
-      "sha256": "ba03037978f85e7bfe1cfb95090bd55224a6aa2c6a8da953f7b36f813732001c"
-    },
-    {
-      "location": "prepared",
-      "filename": "local-20pc.json",
-      "bytes": 25173,
-      "sha256": "f0eeb4ba5c1d47ec967cc60291e0f6b5afe7b2b56e3436c0ac16aeb99ed536de"
-    },
-    {
-      "location": "prepared",
-      "filename": "local-3kpc.json",
-      "bytes": 84026,
-      "sha256": "01d0f689af38402c1ff9e81fafcb6df75e3be1fccb35dc14bbc8ec8e9e14dc87"
-    },
-    {
-      "location": "prepared",
-      "filename": "local-800pc.json",
-      "bytes": 48839,
-      "sha256": "08bb8b03463edce17cf701cfd7098905cbf314af1887a9cca848a08259dc7fca"
-    },
-    {
-      "location": "prepared",
-      "filename": "local-sky.json",
-      "bytes": 508812,
-      "sha256": "622ed2e958cbbad2900ad7bbf7d425adfe67041e3b0af7934f104c9015cd72db"
-    },
-    {
-      "location": "prepared",
-      "filename": "masers.json",
-      "bytes": 5585,
-      "sha256": "400fd14ff211484284eaa9ae75d4d0ef64a54c6b060eea2f078554103ded1c94"
-    },
-    {
-      "location": "prepared",
-      "filename": "nearby-stars-20pc.json",
-      "bytes": 68632,
-      "sha256": "b3f7971fecd4ba7979e281dede851b62a7fcbb428984b6ed50c6996aebb7d900"
-    },
-    {
-      "location": "prepared",
-      "filename": "nearby-stars-sky.json",
-      "bytes": 543315,
-      "sha256": "5511d02e27fffc0e9ec480503dd873c32b7d42325ed0f1241bbb70022c46539a"
-    },
-    {
-      "location": "prepared",
-      "filename": "nearby-stars.json",
-      "bytes": 136772,
-      "sha256": "e835c4a860f509df13e125d25fe00a889630f28d3ae12b64fbf135e1e3494fa2"
-    },
-    {
-      "location": "prepared",
-      "filename": "open-clusters.json",
-      "bytes": 41235,
-      "sha256": "1ecd83d49930b6c7d2b5c79447ee961b1bdcc55634805d2d0c2404db3384f2bd"
     },
     {
       "location": "prepared",
@@ -192,12 +96,6 @@
       "filename": "sky/pz.webp",
       "bytes": 52212,
       "sha256": "d1e2900e423cff11bfee6456ab866c84c8b90db43394ececbc32eefbdf714c62"
-    },
-    {
-      "location": "prepared",
-      "filename": "tracers.json",
-      "bytes": 181390,
-      "sha256": "533169930ba18d13fc79ad9da77abac5d07d852d32f7ebb0f07b1f9766d18fc5"
     },
     {
       "location": "prepared",
