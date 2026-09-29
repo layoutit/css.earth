@@ -294,7 +294,7 @@ with `main`:
   committed: the repository ignores `captures/` folders, and no copy remains.
   The sheets above are the kept visual evidence.
 
-[`tools/compare-visual-evidence.mts`](../../../../../../../labs/investigations/compare-visual-evidence.mts) (now
+[`tools/compare-visual-evidence.mts`](https://github.com/layoutit/css.earth/blob/f2f7d0f2ad/tools/compare-visual-evidence.mts) (now
 [`labs/investigations/compare-visual-evidence.mts`](../../../../../../../labs/investigations/compare-visual-evidence.mts)) made each diff from the exact committed
 bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
 locates change. The sheets were inspected against `main` at native resolution,
