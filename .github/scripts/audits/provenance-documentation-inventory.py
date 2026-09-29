@@ -3,7 +3,6 @@
 import argparse
 import collections
 import datetime
-import hashlib
 import json
 import re
 import subprocess
@@ -181,7 +180,6 @@ for ref in args.ref:
     snapshots.append(result)
 if args.index:
     result = summarize('index', index_tree(initial_index))
-    result['lsFilesStageSha256'] = hashlib.sha256(initial_index).hexdigest()
     snapshots.append(result)
 report = {
     'schema':'cssearth-provenance-documentation-inventory@1',

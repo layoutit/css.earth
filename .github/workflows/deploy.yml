@@ -54,7 +54,7 @@ jobs:
         # bucket instead of bundling public/scenes (1.44 GB) into the deploy; astro.config.mts
         # removes dist/scenes once the build finishes and the assemble step tolerates its absence.
         # Publication proof: with no restored cache, the build's first setup downloads every inventoried key from that
-        # R2 origin and checks its bytes and sha256 (about 30 s for 19,954 keys); a key R2 does not serve fails the
+        # R2 origin and checks its bytes against the inventory's content address (about 30 s for 19,954 keys); a key R2 does not serve fails the
         # build. A HEAD sweep of the same keys (check:assets-published) took 8 to 12 minutes here and proved less; the
         # nightly sweep keeps it.
         env:
