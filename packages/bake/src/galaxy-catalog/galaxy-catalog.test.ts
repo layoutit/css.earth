@@ -31,6 +31,8 @@ test('canonical catalogue rebakes byte-for-byte from the independently pinned or
   const objectDirectory = resolve(temporary, 'local-group'), out = resolve(objectDirectory, 'prepared');
   try {
     await cp(resolve(directory, 'source'), resolve(objectDirectory, 'source'), { recursive: true });
+    // The descriptor's authored properties (its overview entry) survive the rebake; only the preparation pin is the bake's.
+    await cp(resolve(directory, 'object.json'), resolve(objectDirectory, 'object.json'));
     const data = await prepareGalaxyCatalogObject({ objectDirectory });
     assert.deepEqual(await readFile(resolve(objectDirectory, 'object.json')), await readFile(resolve(directory, 'object.json')));
     assert.deepEqual(await readFile(resolve(out, 'catalogue.json')), await readFile(resolve(directory, 'prepared/catalogue.json')));
@@ -44,7 +46,7 @@ test('canonical catalogue rebakes byte-for-byte from the independently pinned or
       assert(row.distance.sourceRef && row.skyPosition.sourceRef);
       assert(!['host', 'nam', 'redshift', 'hubble'].includes(row.distance.method));
     }
-    assert.equal(data.objects.filter(row => row.detailedObjectId).length, 4);
+    assert.deepEqual(data.objects.flatMap(row => row.detailedObjectId ?? []).sort(), ['lmc', 'm31', 'm33', 'm81', 'm83', 'ngc-253', 'ngc-300', 'smc']);
     assert(data.exclusions.some(row => row.id === 'mw' && row.reason.includes('distance modulus')));
     assert(data.exclusions.some(row => row.id === 'andromeda_36' && row.reason.includes('host')));
     assert.equal(data.objects.find(row => row.id === 'aquarius_4')?.status, 'candidate');

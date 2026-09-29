@@ -1,0 +1,52 @@
+{
+  "id": "soffner-1996-ngc300-hii",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Planetary nebulae and HII regions in NGC 300",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1996A&A...306....9S"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/306/9"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1996A&A...306....9S",
+      "label": "1996A&A...306....9S"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/306/9",
+      "label": "CDS J/A+A/306/9"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/306/9/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "tab3-5: 90 HII regions in three fields (C, E, W) with J2000 positions."
+    }
+  ],
+  "creators": [
+    "T. Soffner",
+    "R. H. Mendez",
+    "G. H. Jacoby",
+    "R. Ciardullo"
+  ],
+  "publisher": "A&A 306, 9",
+  "publicationDate": "1996",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Soffner et al. (1996), A&A 306, 9.",
+      "scope": "NGC 300 HII regions",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/306/9/ReadMe"
+    }
+  ]
+}

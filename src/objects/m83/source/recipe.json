@@ -1,0 +1,140 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m83",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      2373,
+      2164
+    ],
+    "originalDimensions": [
+      2373,
+      2164
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/m83/",
+    "downloadUrl": "https://cdn.eso.org/images/large/m83.jpg",
+    "credit": "ESO",
+    "license": "CC-BY-4.0",
+    "foregroundStars": {
+      "path": "gaia-dr3-foreground.csv",
+      "raDegColumn": "RA_ICRS",
+      "decDegColumn": "DE_ICRS",
+      "gMagColumn": "Gmag",
+      "source": "gaia-2023-dr3",
+      "basis": "Milky Way foreground stars by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc, or a proper motion above 0.2 mas/yr plus 2 sigma measured to better than 20%. Applied to Gaia DR3 over the photograph's field; the query is in the Gaia DR3 source record."
+    }
+  },
+  "observation": {
+    "centerRaDeg": 204.249327,
+    "centerDecDeg": -29.8718663,
+    "fieldOfViewDeg": [
+      0.26,
+      0.23716666666666666
+    ],
+    "northClockwiseDeg": 0.1
+  },
+  "target": {
+    "centerRaDeg": 204.2504167,
+    "centerDecDeg": -29.8678,
+    "distancePc": 4897788.193684456
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 24,
+    "lineOfNodesPaDeg": 45,
+    "thicknessKpc": 2.08,
+    "depthWeights": [
+      0.005071712283319262,
+      0.006152827245707049,
+      0.007464398806696247,
+      0.009055552402236456,
+      0.010985885324895311,
+      0.013327698964222584,
+      0.016168706884133847,
+      0.019615320169432304,
+      0.023796633095433166,
+      0.028869258405536103,
+      0.03502319330399566,
+      0.04248893587698894,
+      0.051546118490369525,
+      0.06253398153146472,
+      0.07586407979309205,
+      0.09203569742247679,
+      0.09203569742247679,
+      0.07586407979309207,
+      0.06253398153146471,
+      0.051546118490369525,
+      0.04248893587698894,
+      0.03502319330399568,
+      0.028869258405536093,
+      0.023796633095433166,
+      0.019615320169432304,
+      0.016168706884133854,
+      0.013327698964222584,
+      0.010985885324895311,
+      0.009055552402236456,
+      0.007464398806696249,
+      0.006152827245707049,
+      0.005071712283319262
+    ],
+    "supportRadiusKpc": 9.3,
+    "supportTaperFraction": 0.75,
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 2400,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.006,
+    "encoding": {
+      "format": "webp",
+      "quality": 82
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "colourTie": {
+      "bv": 0.66,
+      "source": "rc3-1991",
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.66 as observed; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
+    }
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

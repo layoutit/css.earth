@@ -1,0 +1,41 @@
+{
+  "id": "eso-m83",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The Southern Pinwheel",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "m83"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/m83/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/m83.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/m83/",
+      "checkedOn": "2026-09-29",
+      "locator": "2373 x 2164 px; 15.60 x 14.23 arcmin; Danish 1.54-metre telescope in B, V and R; page orientation 1.6 deg right of vertical, re-measured as 0.1 deg with the centre moved 67 and 87 px from 41 Gaia stars (the recipe's observation). Found in the WorldWide Telescope image index (data/wwt/core-imagesets.jsonl)."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/IDA/Danish 1.5 m/R. Gendler, S. Guisard and C. Thöne",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/m83/"
+    }
+  ]
+}
