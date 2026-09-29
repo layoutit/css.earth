@@ -1,0 +1,39 @@
+{
+  "id": "toi-2136",
+  "name": "TOI-2136",
+  "system": "TOI-2136 system",
+  "description": "Star of 3,342 K, 33.4 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2136",
+  "gaia": "2096535783864546944",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+    "credit": "Gan et al. 2022"
+  },
+  "radius": {
+    "value": 0.34,
+    "source": "Gan et al. 2022, the stellar radius of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.34,
+    "source": "Gan et al. 2022, the stellar mass of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3342,
+    "source": "Gan et al. 2022, the stellar temperature of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2136 b crosses TOI-2136 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gan et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL_2022): st_teff 3342, st_rad 0.34, st_mass 0.34"
+  },
+  "notes": [],
+  "order": 4258
+}

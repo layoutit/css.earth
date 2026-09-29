@@ -1,0 +1,44 @@
+{
+  "id": "wikipedia-gj-1252",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Wikipedia article: GJ 1252",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://en.wikipedia.org/wiki/GJ_1252"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://en.wikipedia.org/wiki/GJ_1252",
+      "label": "Wikipedia, GJ 1252"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://en.wikipedia.org/wiki/GJ_1252",
+      "checkedOn": "2026-09-29",
+      "locator": "Lead section, as the REST summary API serves it; the quotes name the revision"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wikipedia contributors, \"GJ 1252\", Wikipedia, The Free Encyclopedia",
+      "scope": "citation",
+      "evidence": "https://en.wikipedia.org/wiki/GJ_1252"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution",
+      "scope": "Quoted text",
+      "evidence": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ],
+  "creators": [
+    "Wikipedia contributors"
+  ]
+}

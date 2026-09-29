@@ -1,0 +1,31 @@
+{
+  "host": "hd-89345",
+  "planets": [
+    {
+      "id": "hd-89345b",
+      "name": "HD 89345 b",
+      "description": "Transiting planet of HD 89345 with a 11.8-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract",
+        "credit": "Yu et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "YU_ET_AL__2018"
+      },
+      "text": {
+        "card": "HD 89345 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around HD 89345. Its orbit and size follow Yu et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YU_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 11.8144024, pl_radj 0.66, pl_bmassj 0.11",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HD_89345_b",
+          "title": "HD 89345 b",
+          "revision": "1266399281",
+          "card": "HD 89345 b is a Neptune-like exoplanet that orbits a G-type star.",
+          "introduction": "It is also called K2-234b."
+        }
+      },
+      "order": 3243
+    }
+  ]
+}

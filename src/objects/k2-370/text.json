@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-370",
+  "card": {
+    "text": "K2-370 b crosses K2-370 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2323",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract",
+        "label": "Sozzetti et al. (2024), Monthly Notices of the Royal Astronomical Society 535 531-550",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL_2024): st_teff 5662, st_rad 0.945, st_mass 0.962"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sozzetti et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2323",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract",
+        "label": "Sozzetti et al. (2024), Monthly Notices of the Royal Astronomical Society 535 531-550",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL_2024): st_teff 5662, st_rad 0.945, st_mass 0.962"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

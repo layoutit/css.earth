@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "toi-1695b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-1695 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12118.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-1695b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-1695 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 9280331.6,
+      "description": "TOI-1695 b was found in 2022 by TESS as it crossed its star.",
+      "systemName": "TOI-1695 system",
+      "order": 4096,
+      "context": {
+        "order": 4096
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        391642645307931300,
+        157617738262800930,
+        1322572919905048300
+      ],
+      "presentationToReference": [
+        0.26352569480975596,
+        0.38667514502442085,
+        -0.8837627172467611,
+        0.15871013602559333,
+        -0.9210410924742433,
+        -0.3556605104542677,
+        0.9515068580403262,
+        0.04653641793472806,
+        0.30408725870715353
+      ],
+      "orbitUpReference": [
+        -0.38667514502442085,
+        0.9210410924742433,
+        -0.04653641793472806
+      ],
+      "metersPerUnit": 39091.6129032258,
+      "bodyRadiusM": 12118400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

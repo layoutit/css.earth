@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "toi-1036",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-1036",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 817823.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-1036-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-1036",
+      "classification": "star",
+      "color": "#fff1ec",
+      "distanceAu": 37704795.4,
+      "description": "TOI-1036 b crosses TOI-1036 as seen from Earth, which is how it was found.",
+      "systemName": "TOI-1036 system",
+      "order": 3908,
+      "context": {
+        "order": 3905
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3868155455176476700,
+        1573278491633300500,
+        -3791840276924145700
+      ],
+      "presentationToReference": [
+        -0.6857772785788273,
+        0.6227075803444174,
+        0.37675561517596323,
+        0.2789232891355148,
+        -0.25327177565727865,
+        0.9263126936586993,
+        -0.6722434997549948,
+        -0.7403301135554395,
+        -3.825717931282729e-7
+      ],
+      "orbitUpReference": [
+        -0.6227075803444174,
+        0.25327177565727865,
+        0.7403301135554395
+      ],
+      "metersPerUnit": 2638139.35483871,
+      "bodyRadiusM": 817823200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

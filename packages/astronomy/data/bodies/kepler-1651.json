@@ -1,0 +1,30 @@
+{
+ "id": "kepler-1651",
+ "classification": "star",
+ "order": 3690,
+ "physical": {
+  "name": "Kepler-1651",
+  "horizonsCode": null,
+  "meanRadiusKm": 349937.1,
+  "gravitationalParameterKm3PerS2": 69275893701.89236,
+  "parent": null,
+  "effectiveTemperatureK": 3713
+ },
+ "physicalNotes": "Radius 0.503 +/- 0.03 solar radii from Mann et al. 2017, the stellar radius of the default parameter set of Kepler-1651 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract): 349,937 km at 695,700 km per solar radius. Mass 0.522 +/- 0.033 solar masses from Mann et al. 2017, the stellar mass of the default parameter set of Kepler-1651 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract); GM is that mass times the JPL solar GM. Temperature 3713 +/- 57 K from Mann et al. 2017, the stellar temperature of the default parameter set of Kepler-1651 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 283.62825795229014,
+  "declinationDegrees": 48.390801356988064,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 66.29031464282592,
+  "properMotionRaMasPerYear": -10.895811028065495,
+  "properMotionDecMasPerYear": -48.67251831353383,
+  "radialVelocityKmPerS": 5.8689437,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2131725447350716032 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-1651/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 15.0852 +/- 0.0093 mas (same row, RUWE 1.00): 66.29 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -10.896, -48.673 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 5.87 +/- 1.59 km/s"
+  }
+ }
+}

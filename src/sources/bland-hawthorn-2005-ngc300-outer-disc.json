@@ -1,0 +1,52 @@
+{
+  "id": "bland-hawthorn-2005-ngc300-outer-disc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "NGC 300: an extremely faint, outer stellar disk observed to 10 scale lengths",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2005ApJ...629..239B"
+    },
+    {
+      "type": "arxiv",
+      "value": "astro-ph/0503488"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2005ApJ...629..239B",
+      "label": "2005ApJ...629..239B"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0503488",
+      "label": "arXiv:astro-ph/0503488"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0503488",
+      "checkedOn": "2026-09-29",
+      "locator": "Abstract: star counts trace the stellar disk \"out to a radius of 24'\", \"about 14.4 kpc at a cepheid distance of 2.0 +/- 0.07 Mpc\", with no truncation."
+    }
+  ],
+  "creators": [
+    "J. Bland-Hawthorn",
+    "M. Vlajic",
+    "K. C. Freeman",
+    "B. T. Draine"
+  ],
+  "publisher": "ApJ 629, 239",
+  "publicationDate": "2005",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Bland-Hawthorn et al. (2005), ApJ 629, 239.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/astro-ph/0503488"
+    }
+  ]
+}

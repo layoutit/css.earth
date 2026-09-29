@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-5628-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-5628-a-b-orbits",
+      "title": "TOI-5628 A b: orbits around TOI-5628 A",
+      "output": "toi-5628-a-b-system-orbits.svg",
+      "system": "toi-5628-a",
+      "highlight": "toi-5628-a-b",
+      "description": "The orbits of TOI-5628 A's planets in this map from above, to scale, with TOI-5628 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2026): P 4.3416612 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-5628-a-b-transit",
+      "title": "TOI-5628 A b: its transit",
+      "description": "TOI-5628 A b crossing its star, as TESS recorded it: 1 sector (49) of the SPOC pipeline's 2-minute light curves of TIC 135100529, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-5628-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 135100529",
+        "sectors": [
+          49
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-5628-a-b",
+      "sources": [
+        "photometry/tess/tess2022057073128-s0049-0000000135100529-0221-s_lc.fits"
+      ],
+      "durationHours": 1.7793909,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sector 49",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

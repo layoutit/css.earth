@@ -1,0 +1,46 @@
+{
+  "id": "hd-17156",
+  "name": "HD 17156",
+  "system": "HD 17156 system",
+  "description": "Star of 6,046 K, 78.1 parsecs away, with 1 transiting planet.",
+  "target": "HD 17156",
+  "gaia": "545560867790611072",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
+    "credit": "Kane et al. 2023"
+  },
+  "radius": {
+    "value": 1.517,
+    "source": "Kane et al. 2023, the stellar radius of the default parameter set of HD 17156 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
+    "uncertainty": 0.038
+  },
+  "mass": {
+    "value": 1.285,
+    "source": "Kane et al. 2023, the stellar mass of the default parameter set of HD 17156 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
+    "uncertainty": 0.064
+  },
+  "temperature": {
+    "value": 6046,
+    "source": "Kane et al. 2023, the stellar temperature of the default parameter set of HD 17156 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
+    "uncertainty": 76
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 17156 b crosses HD 17156 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kane et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KANE_ET_AL__2023): st_teff 6046, st_rad 1.517, st_mass 1.285",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_17156",
+      "title": "HD 17156",
+      "revision": "1370777783",
+      "card": "HD 17156, named Nushagak by the IAU, is a yellow subgiant star approximately 253 light-years away in the constellation of Cassiopeia.",
+      "introduction": "The apparent magnitude is 8.16, which means it is not visible to the naked eye but can be seen with good binoculars."
+    }
+  },
+  "notes": [],
+  "order": 3175
+}

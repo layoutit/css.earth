@@ -1,4 +1,4 @@
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { WorldRotation } from '@cssearth/renderer/navigation/world-camera-math.ts';

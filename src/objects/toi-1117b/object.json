@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "toi-1117b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-1117 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 15690.1
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-1117b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-1117 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 34405288,
+      "description": "TOI-1117 b was found in 2025 by TESS as it crossed its star.",
+      "systemName": "TOI-1117 system",
+      "order": 3922,
+      "context": {
+        "order": 3922
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        129350582658701470,
+        -2054858126565246700,
+        -4717202709091227000
+      ],
+      "presentationToReference": [
+        0.056468568241138974,
+        -0.9967425835525241,
+        0.05758057774836446,
+        -0.39706693857714564,
+        -0.07533572412635525,
+        -0.9146925029534958,
+        -0.9160508430702792,
+        -0.0287880322946413,
+        0.40002762667950026
+      ],
+      "orbitUpReference": [
+        0.9967425835525241,
+        0.07533572412635525,
+        0.0287880322946413
+      ],
+      "metersPerUnit": 50613.22580645161,
+      "bodyRadiusM": 15690100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

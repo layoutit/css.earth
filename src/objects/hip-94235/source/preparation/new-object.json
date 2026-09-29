@@ -1,0 +1,39 @@
+{
+  "id": "hip-94235",
+  "name": "HIP 94235",
+  "system": "HIP 94235 system",
+  "description": "Star of 5,991 K, 58.5 parsecs away, with 1 transiting planet.",
+  "target": "HIP 94235",
+  "gaia": "6632318361397624960",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract",
+    "credit": "Zhou et al. 2022"
+  },
+  "radius": {
+    "value": 1.08,
+    "source": "Zhou et al. 2022, the stellar radius of the default parameter set of HIP 94235 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract",
+    "uncertainty": 0.11
+  },
+  "mass": {
+    "value": 1.094,
+    "source": "Zhou et al. 2022, the stellar mass of the default parameter set of HIP 94235 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract",
+    "uncertainty": 0.024
+  },
+  "temperature": {
+    "value": 5991,
+    "source": "Zhou et al. 2022, the stellar temperature of the default parameter set of HIP 94235 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HIP 94235 b crosses HIP 94235 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Zhou et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL_2022): st_teff 5991, st_rad 1.08, st_mass 1.094"
+  },
+  "notes": [],
+  "order": 3264
+}

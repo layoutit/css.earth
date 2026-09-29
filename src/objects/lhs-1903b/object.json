@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lhs-1903b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LHS 1903 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8814.5
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lhs-1903b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LHS 1903 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 7352871,
+      "description": "LHS 1903 b was found in 2026 by TESS as it crossed its star.",
+      "systemName": "LHS 1903 system",
+      "order": 3815,
+      "context": {
+        "order": 3815
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -224368197949802900,
+        696094584826127600,
+        821616515147105400
+      ],
+      "presentationToReference": [
+        -0.21945146087570086,
+        0.9483301286782264,
+        0.22915283843029147,
+        0.6277474351642492,
+        0.31705209398003986,
+        -0.7109227295195862,
+        0.7468428308313788,
+        0.012162924977590897,
+        0.6648893511643588
+      ],
+      "orbitUpReference": [
+        -0.9483301286782264,
+        -0.31705209398003986,
+        -0.012162924977590897
+      ],
+      "metersPerUnit": 28433.870967741936,
+      "bodyRadiusM": 8814500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-519b",
+ "classification": "exoplanet",
+ "order": 4496,
+ "physical": {
+  "name": "TOI-519 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 73636.8,
+  "gravitationalParameterKm3PerS2": 58655864.27,
+  "parent": "toi-519"
+ },
+ "physicalNotes": "Radius 1.03 Jupiter radii from Kagetani et al. 2023 (2023PASJ...75..713K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract): 73,636.8 km at 71,492 km per Jupiter radius. GM from the mass 0.463 Jupiter masses (Kagetani et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023PASJ...75..713K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.26523248,
+  "semiMajorAxisStellarRadii": 9.7686,
+  "inclinationDegrees": 88.9,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59012.65299,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hartman et al. 2023 (2023AJ....166..163H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2023): P 1.26523248 d",
+   "shape": "Kagetani et al. 2023 (2023PASJ...75..713K), via the NASA Exoplanet Archive ps table (pl_refname KAGETANI_ET_AL_2023): a/R* derived from its semi-major axis 0.0159 au and stellar radius 0.35 solar radii; Kagetani et al. 2023 (2023PASJ...75..713K), via the NASA Exoplanet Archive ps table (pl_refname KAGETANI_ET_AL_2023): inclination 88.9 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Hartman et al. 2023 (2023AJ....166..163H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2023): transit mid-time 2459013.15299 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "id": "ngts-11b",
+ "classification": "exoplanet",
+ "order": 3845,
+ "physical": {
+  "name": "NGTS-11 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 58409,
+  "gravitationalParameterKm3PerS2": 43580166.97,
+  "parent": "ngts-11"
+ },
+ "physicalNotes": "Radius 0.817 Jupiter radii from Gill et al. 2020 (2020ApJ...898L..11G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract): 58,409 km at 71,492 km per Jupiter radius. GM from the mass 0.344 Jupiter masses (Gill et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020ApJ...898L..11G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 35.455984,
+  "semiMajorAxisStellarRadii": 54.6,
+  "inclinationDegrees": 89.16,
+  "eccentricity": 0.13,
+  "argumentOfPeriapsisDegrees": 32,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58390.20545,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 35.455984 d",
+   "shape": "Gill et al. 2020 (2020ApJ...898L..11G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL__2020): a/R* 54.6; Gill et al. 2020 (2020ApJ...898L..11G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL__2020): inclination 89.16 degrees",
+   "eccentricity": "Gill et al. 2020 (2020ApJ...898L..11G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL__2020): e 0.13",
+   "argumentOfPeriapsis": "Gill et al. 2020 (2020ApJ...898L..11G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL__2020): omega 32 degrees",
+   "phase": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2458390.70545 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

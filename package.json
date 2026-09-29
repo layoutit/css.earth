@@ -75,7 +75,7 @@
     "test:preparation": "node packages/bake/cli/test-preparation.mts",
     "test:bake-objects": "node .github/scripts/checks/test-bake-objects.mts",
     "test:telescope-cli": "node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=180000 \"packages/telescope-cli/src/**/*.test.mts\"",
-    "test:renderer": "pnpm --filter @cssearth/renderer exec vitest run",
+    "test:renderer": "pnpm --filter @cssearth/renderer exec vitest run && pnpm --filter @cssearth/renderer exec vitest run --root ../.. site/test/prepared-world-context.test.ts",
     "typecheck": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula",
     "typecheck:astro": "astro check --tsconfig site/astro.tsconfig.json",
     "typecheck:configs": "tsc -p tsconfig.configs.json",
@@ -96,11 +96,13 @@
     "typecheck:tests": "tsc -p tests/tsconfig.json --pretty false",
     "typecheck:scripts": "tsc -p tsconfig.scripts.json",
     "telescope": "node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/cli.mts",
-    "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/!(rendered-page).test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \".github/scripts/**/*.test.mts\" \"packages/bake/authoring/**/*.test.mts\" \"packages/telescope-cli/authoring/**/*.test.mts\" \"labs/performance/*.test.mts\" \"packages/volume-viewer/src/**/*.test.ts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
+    "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/!(rendered-page).test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \".github/scripts/**/*.test.mts\" \"packages/bake/src/objects/**/*.test.mts\" \"packages/bake/authoring/**/*.test.mts\" \"packages/telescope-cli/authoring/**/*.test.mts\" \"labs/performance/*.test.mts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "test:universe:renderer": "pnpm test:renderer",
     "test:universe:runtime": "node --test --test-concurrency=2 \"tests/presentation/prepared-activation-*.test.mts\" site/test/prepare-context-availability.test.mts tests/asset-publication/restore-object-json.test.mts site/test/object-directory.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts",
-    "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts && pnpm typecheck:oracles"
+    "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts && pnpm typecheck:oracles",
+    "oracles:setup": "node packages/core/src/node/oracle/setup.mts",
+    "oracles:run": "node packages/core/src/node/oracle/run.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

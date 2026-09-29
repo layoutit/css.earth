@@ -1,0 +1,46 @@
+{
+  "id": "wasp-67",
+  "name": "WASP-67",
+  "system": "WASP-67 system",
+  "description": "Star of 5,200 K, 189 parsecs away, with 1 transiting planet.",
+  "target": "WASP-67",
+  "gaia": "6868476691490044672",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 0.88,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of WASP-67 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.08
+  },
+  "mass": {
+    "value": 0.91,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of WASP-67 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.28
+  },
+  "temperature": {
+    "value": 5200,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-67 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-67 b crosses WASP-67 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5200, st_rad 0.88, st_mass 0.91",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-67",
+      "title": "WASP-67",
+      "revision": "1374437321",
+      "card": "WASP-67 is a K-type main-sequence star about 620 light-years away in the constellation Sagittarius.",
+      "introduction": "The star's age is poorly constrained."
+    }
+  },
+  "notes": [],
+  "order": 4830
+}

@@ -1,4 +1,4 @@
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();import assert from 'node:assert/strict';
 import {areaSampler,parseControlledFrames,parseControlledMapProfile,controlledMapPoint,controlledMapBounds,samplePolarCell,matchControlledMapLevels} from '@cssearth/bake/objects/layers/observation';
 const profile=parseControlledMapProfile({referenceRadiusMeters:100,wavelengthMicrometers:.611,filter:'CLEAR',displayRange:[0,2],polarBoundaryDegrees:78.75});

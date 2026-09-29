@@ -1,0 +1,28 @@
+{
+ "id": "toi-6109b",
+ "classification": "exoplanet",
+ "order": 4614,
+ "physical": {
+  "name": "TOI-6109 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 31063.9,
+  "gravitationalParameterKm3PerS2": 8411985.72,
+  "parent": "toi-6109"
+ },
+ "physicalNotes": "Radius 0.43450873 Jupiter radii from Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract): 31,063.9 km at 71,492 km per Jupiter radius. GM from the mass 0.0664 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.690476,
+  "semiMajorAxisStellarRadii": 12.6318,
+  "inclinationDegrees": 85.6909,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58790.5538,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): P 5.690476 d",
+   "shape": "Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): a/R* 12.6318; Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): inclination 85.6909 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Dattilo et al. 2025 (2025AJ....170..318D), via the NASA Exoplanet Archive ps table (pl_refname DATTILO_ET_AL_2025): transit mid-time 2458791.0538 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-815",
+  "planets": [
+    {
+      "id": "toi-815b",
+      "name": "TOI-815 b",
+      "description": "Transiting planet of TOI-815 with a 11.2-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...685A...5P/abstract",
+        "credit": "Psaridi et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PSARIDI_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-815 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-815. Its orbit and size follow Psaridi et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PSARIDI_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 11.1972769, pl_radj 0.26228968, pl_bmassj 0.02391227"
+      },
+      "order": 4727
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-1132",
+  "card": {
+    "text": "GJ 1132 b crosses GJ 1132 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract",
+        "label": "Xue et al. (2024), The Astrophysical Journal Letters 973 L8",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname XUE_ET_AL_2024): st_teff 3229, st_rad 0.2211, st_mass 0.1945"
+      },
+      {
+        "catalogueId": "wikipedia-gj-1132",
+        "url": "https://en.wikipedia.org/wiki/GJ_1132",
+        "label": "Wikipedia, \"GJ 1132\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442266",
+        "quote": "GJ 1132 is a small red dwarf star 41.1 light-years away from Earth in the constellation Vela."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Xue et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract",
+        "label": "Xue et al. (2024), The Astrophysical Journal Letters 973 L8",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname XUE_ET_AL_2024): st_teff 3229, st_rad 0.2211, st_mass 0.1945"
+      },
+      {
+        "catalogueId": "wikipedia-gj-1132",
+        "url": "https://en.wikipedia.org/wiki/GJ_1132",
+        "label": "Wikipedia, \"GJ 1132\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442266",
+        "quote": "In 2015, it was revealed to have a hot rocky Earth-sized planet orbiting it every 1.6 days."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

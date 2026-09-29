@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1052b",
+  "radiusKm": 18305.1,
+  "radiusSource": "Radius 0.25604469 Jupiter radii from Armstrong et al. 2023 (2023MNRAS.524.5804A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract): 18,305.1 km at 71,492 km per Jupiter radius. GM from the mass 0.05317335 Jupiter masses (Armstrong et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023MNRAS.524.5804A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.13980396599,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.13980396599 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1052 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.05317335 Jupiter masses: Armstrong et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023MNRAS.524.5804A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract)."
+}

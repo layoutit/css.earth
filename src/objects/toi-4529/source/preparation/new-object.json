@@ -1,0 +1,39 @@
+{
+  "id": "toi-4529",
+  "name": "TOI-4529",
+  "system": "TOI-4529 system",
+  "description": "Star of 3,697 K, 28.4 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4529",
+  "gaia": "2584622022068408576",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+    "credit": "Poultourtzidis et al. 2026"
+  },
+  "radius": {
+    "value": 0.48,
+    "source": "Poultourtzidis et al. 2026, the stellar radius of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+    "uncertainty": 0.019
+  },
+  "mass": {
+    "value": 0.482,
+    "source": "Poultourtzidis et al. 2026, the stellar mass of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+    "uncertainty": 0.023
+  },
+  "temperature": {
+    "value": 3697,
+    "source": "Poultourtzidis et al. 2026, the stellar temperature of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+    "uncertainty": 71
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4529 b crosses TOI-4529 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Poultourtzidis et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname POULTOURTZIDIS_ET_AL_2026): st_teff 3697, st_rad 0.48, st_mass 0.482"
+  },
+  "notes": [],
+  "order": 4441
+}

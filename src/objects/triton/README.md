@@ -124,7 +124,7 @@ squarely, own those texels instead of leaving them grey. Both policies are
 documented in [the colour preparation guide](../../../docs/color-preparation.md#current-routes-and-scope-of-the-repair).
 The whole lens then takes one brightness gain against the monochrome base, the median over every footprint boundary (a per-observation match would re-open the seams, and the two coarsest sets never border the base); the brightest 0.1 % of texels may clip.
 
-Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts` (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
+Tests. `node --test tools/objects/voyager-iss/*.test.mts packages/bake/src/objects/raster/photometric-observations.test.mts` (then [`tests/objects/terrestrial/photometric-observations.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/photometric-observations.test.mts); now [`packages/bake/src/objects/raster/photometric-observations.test.mts`](../../../packages/bake/src/objects/raster/photometric-observations.test.mts)) (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer and both composer policies on synthetic
 data; `node --test tests/objects/unit/triton/*.test.mts` pins the placement
 report, the manifest pins, the solved gains and the withheld counts of this run.

@@ -1,0 +1,28 @@
+{
+ "id": "toi-3693b",
+ "classification": "exoplanet",
+ "order": 4365,
+ "physical": {
+  "name": "TOI-3693 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 80357,
+  "gravitationalParameterKm3PerS2": 129220262.54,
+  "parent": "toi-3693"
+ },
+ "physicalNotes": "Radius 1.124 Jupiter radii from Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...70Y/abstract): 80,357 km at 71,492 km per Jupiter radius. GM from the mass 1.02 Jupiter masses (Yee et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....164...70Y), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....164...70Y/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 9.088516,
+  "semiMajorAxisStellarRadii": 22.13,
+  "inclinationDegrees": 89.57,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58806.18164,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): P 9.088516 d",
+   "shape": "Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): a/R* 22.13; Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): inclination 89.57 degrees",
+   "eccentricity": "Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): e 0",
+   "phase": "Yee et al. 2022 (2022AJ....164...70Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2022): transit mid-time 2458806.68164 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

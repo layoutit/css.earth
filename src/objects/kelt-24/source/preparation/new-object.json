@@ -1,0 +1,46 @@
+{
+  "id": "kelt-24",
+  "name": "KELT-24",
+  "system": "KELT-24 system",
+  "description": "Star of 6,426 K, 96.5 parsecs away, with 1 transiting planet.",
+  "target": "KELT-24",
+  "gaia": "1076970406751899008",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+    "credit": "Giovinazzi et al. 2024"
+  },
+  "radius": {
+    "value": 1.338,
+    "source": "Giovinazzi et al. 2024, the stellar radius of the default parameter set of KELT-24 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+    "uncertainty": 0.032
+  },
+  "mass": {
+    "value": 1.268,
+    "source": "Giovinazzi et al. 2024, the stellar mass of the default parameter set of KELT-24 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+    "uncertainty": 0.063
+  },
+  "temperature": {
+    "value": 6426,
+    "source": "Giovinazzi et al. 2024, the stellar temperature of the default parameter set of KELT-24 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+    "uncertainty": 93
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-24 b crosses KELT-24 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Giovinazzi et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GIOVINAZZI_ET_AL__2024): st_teff 6426, st_rad 1.338, st_mass 1.268",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/KELT-24",
+      "title": "KELT-24",
+      "revision": "1329899560",
+      "card": "KELT-24 is a multiple star system in the constellation Ursa Major at a distance of approximately 316 light-years from Sun.",
+      "introduction": "The apparent magnitude of the primary star is +8.33."
+    }
+  },
+  "notes": [],
+  "order": 3637
+}

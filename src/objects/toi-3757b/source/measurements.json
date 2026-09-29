@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-3757b",
+  "radiusKm": 76537.2,
+  "radiusSource": "Radius 1.07057014 Jupiter radii from Kanodia et al. 2022 (2022AJ....164...81K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract): 76,537.2 km at 71,492 km per Jupiter radius. GM from the mass 0.26838381 Jupiter masses (Kanodia et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....164...81K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.438753,
+  "orbitalPeriodSource": "Kanodia et al. 2022 (2022AJ....164...81K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2022): P 3.438753 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-3757 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.26838381 Jupiter masses: Kanodia et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....164...81K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)."
+}

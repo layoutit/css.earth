@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "toi-1444b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TOI-1444 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 9043.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/toi-1444b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TOI-1444 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 25854447.8,
+      "description": "TOI-1444 b was found in 2021 by TESS as it crossed its star.",
+      "systemName": "TOI-1444 system",
+      "order": 4042,
+      "context": {
+        "order": 4042
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        732880954223137000,
+        -1028396134061291600,
+        3655808287911884300
+      ],
+      "presentationToReference": [
+        0.30097643019920406,
+        -0.7800732564544667,
+        -0.5485425261810313,
+        -0.18253373669262768,
+        -0.6117036213039655,
+        0.7697402903919224,
+        0.935999264654396,
+        0.13154616774402236,
+        0.32649805867461346
+      ],
+      "orbitUpReference": [
+        0.7800732564544667,
+        0.6117036213039655,
+        -0.13154616774402236
+      ],
+      "metersPerUnit": 29173.225806451614,
+      "bodyRadiusM": 9043700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

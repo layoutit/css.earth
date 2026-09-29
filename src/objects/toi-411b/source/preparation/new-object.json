@@ -1,0 +1,24 @@
+{
+  "host": "toi-411",
+  "planets": [
+    {
+      "id": "toi-411b",
+      "name": "TOI-411 b",
+      "description": "Transiting planet of HD 22946 with a 4.04-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+        "credit": "Garai et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GARAI_ET_AL__2023"
+      },
+      "text": {
+        "card": "TOI-411 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around HD 22946. Its orbit and size follow Garai et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GARAI_ET_AL__2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 4.04030073094, pl_radj 0.12150971, pl_bmassj 0.04313648"
+      },
+      "order": 3197
+    }
+  ]
+}

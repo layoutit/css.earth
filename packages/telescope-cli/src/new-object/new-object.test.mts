@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { readIdentifiers, type Archive, type GaiaRow } from './archives.mts';
@@ -369,10 +369,15 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.deepEqual([planets[0]!.thermal !== undefined, planets[1]!.thermal !== undefined], [true, false]);
   assert.match(skipped.join('; '), /HD 1 d: found by radial velocity, and the archive gives no orbit rows for it/u);
   assert.match(notes.join('; '), /HD 1 c: no measured dayside brightness temperature/u);
+  // WASP-8 b's dayside, 938 K (archive, 2026-09-29), is too cool for a black-body colour: it takes its host's light, and says why.
+  const cool = { ...archive, async text(url: string) { return (await archive.text(url)).replace(',1400,80,-80,', ',938,40,-40,'); } };
+  const cooled = await archiveSpec(cool, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
+  assert.equal((cooled.spec.planets as { thermal?: unknown }[])[0]!.thermal, undefined);
+  assert.match(cooled.notes.join('; '), /HD 1 b: its dayside brightness temperature, 938 K \(Four et al\. 2022\), is too cool to glow \(a black-body colour needs over 1000 K\); its gray takes the host's light/u);
   assert.equal((spec.temperature as { value: number }).value, 5000);
   assert.equal(spec.gaia, '123456789', 'the archive\'s Gaia DR3 id, which SIMBAD must agree with');
   // A host the universe holds under another id, found by the name its planets use: its new planets become an addition to it.
-  const held = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-1b-host']), names: new Map([['hd1', 'hd-1b-host']]), stars: [] });
+  const held = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-1b-host']), names: new Map([['hd1', 'hd-1b-host']]), stars: [{ id: 'hd-1b-host', ra: 1, dec: 1, epoch: 2016, pmra: 0, pmdec: 0 }] });
   assert.equal(held.spec.host, 'hd-1b-host');
   assert.deepEqual((held.spec.planets as { id: string }[]).map(planet => planet.id), ['hd-1b-host-b', 'hd-1b-host-c']);
   // The text says what the factsheet cannot: how and when each planet was found, how many its star has, and the star's planets.
@@ -409,6 +414,29 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.equal((fromTic.text as { introduction: string }).introduction, 'Its radius follows One et al. 2019, and its temperature the TESS Input Catalog v8.2.');
   const noGaia = { ...ticArchive, async text(url: string) { return url.includes('asu-tsv') ? '' : ticArchive.text(url); } };
   await assert.rejects(archiveSpec(noGaia, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }), /no archive row gives a stellar temperature, nor does TIC v8.2 for Gaia DR3 123456789/u);
+  // A companion's planet: TOI-2267 d orbits TOI-2267 B (archive, 2026-09-29). The planet TOI-2267 b is not its host, nor is the
+  // placed primary its name prefix finds; B is drafted as its own star in the primary's system.
+  const companionHost = stars.replaceAll(',HD 1,1,', ',HD 1 B,1,');
+  const companion = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? companionHost : archive.text(url); } };
+  const pair = { ids: new Set(['hd-1', 'hd-1b']), names: new Map([['hd1', 'hd-1'], ['hd1b', 'hd-1b']]), stars: [{ id: 'hd-1', ra: 1, dec: 1, epoch: 2016, pmra: 0, pmdec: 0 }] };
+  const b = (await archiveSpec(companion, 'HD 1 B', pair)).spec as { id: string; host?: string; system: string };
+  assert.deepEqual([b.id, b.host, b.system], ['hd-1-b', undefined, 'HD 1 system']);
+  // No archive row gives a mass: Gaia DR3 FLAME's when it has one, else TIC v8.2's (the Lafarga et al. 2026 TIC hosts, 2026-09-29).
+  const noMass = stars.replaceAll(',0.85,0.03,', ',,,').replace(',0.85,,', ',,,');
+  const gaiaRow = (mass: string) => `source_id,ref_epoch,ra,dec,parallax,parallax_error,pmra,pmdec,radial_velocity,radial_velocity_error,ruwe,phot_g_mean_mag,bp_rp,has_xp_sampled,mass_flame,mass_flame_lower,mass_flame_upper,radius_flame,radius_flame_lower,radius_flame_upper\n123456789,2016.0,10,20,50,0.02,1,1,,,1.0,9.0,1.0,true,${mass},0.79,0.8,0.8,0.78,0.82`;
+  const massArchive = (mass: string) => ({ ...ticArchive, async text(url: string) { if (url.includes('tap-server')) return gaiaRow(mass); if (url.includes('asu-tsv')) return tic; const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? noMass : archive.text(url); } });
+  assert.equal((await archiveSpec(massArchive('0.8'), 'HD 1', { ids: new Set(), names: new Map(), stars: [] })).spec.mass, 'gaia-flame');
+  const ticMass = (await archiveSpec(massArchive(''), 'HD 1', { ids: new Set(), names: new Map(), stars: [] })).spec.mass as { value: number; uncertainty: number; source: string };
+  assert.deepEqual([ticMass.value, ticMass.uncertainty], [0.84, 0.1]);
+  assert.match(ticMass.source, /TIC 42 \(VizieR IV\/39\/tic82\); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME$/u);
+  // The draft chooses the planets by what was measured: HD 1 b has its dayside temperature; HD 1 c, with no spectrum or TESS transit,
+  // is left out and named; a host left with nothing measured is not drafted at all.
+  const asked: string[] = [], evidence = async (planet: string) => { asked.push(planet); return 'TESS holds no 2-minute SPOC light curve of TIC 42'; };
+  const chosen = await archiveSpec(archive, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }, evidence);
+  assert.deepEqual([(chosen.spec.planets as { id: string }[]).map(planet => planet.id), asked], [['hd-1b'], ['HD 1 c']], 'a planet with a dayside temperature is not asked again');
+  assert.match(chosen.skipped.join('; '), /HD 1 c: nothing measured to show \(no dayside temperature or archive spectrum; TESS holds no 2-minute SPOC light curve of TIC 42\)/u);
+  const unmeasured = { ...archive, async text(url: string) { return url.includes('emissionspec') ? (await archive.text(url)).split('\n')[0]! + '\n' : archive.text(url); } };
+  await assert.rejects(archiveSpec(unmeasured, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }, evidence), /HD 1: no planet to add; .*HD 1 b: nothing measured to show/u);
 });
 
 test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
@@ -502,6 +530,18 @@ test('a hosted body\'s package is written after phase one wrote its astronomy re
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
+test('a DOI Crossref does not hold is read from DataCite, as the CDS VizieR catalogues are', async () => {
+  const { fetchPublication } = await import('./archives.mts');
+  const datacite = JSON.stringify({ data: { attributes: { titles: [{ title: 'Gaia DR2' }], publicationYear: 2018, publisher: 'Centre de Donnees Strasbourg (CDS)', creators: [{ name: 'European Space Agency' }] } } });
+  const archive: Archive = { async text(url) { if (url.includes('api.crossref.org')) throw new Error(`${url} answered 404 Not Found.`); if (url.includes('api.datacite.org')) return datacite; throw new Error(`unexpected ${url}`); },
+    async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  const found = (await fetchPublication(archive, 'https://doi.org/10.26093/cds/vizier.1345'))!;
+  assert.deepEqual([found.id, found.title, found.year, found.publisher, found.creators], ['doi-10-26093-cds-vizier-1345', 'Gaia DR2', '2018', 'Centre de Donnees Strasbourg (CDS)', ['European Space Agency']]);
+  // Any other Crossref failure is not a missing DOI, and is reported as it is.
+  const down: Archive = { ...archive, async text(url) { throw new Error(`${url} answered 503 Service Unavailable.`); } };
+  await assert.rejects(fetchPublication(down, 'https://doi.org/10.26093/cds/vizier.1345'), /503/u);
+});
+
 test('a reference the archive cites only by its ADS bibcode is read as the paper it links to, keeping the bibcode', async () => {
   const { fetchPublication } = await import('./archives.mts');
   const { publicationRecord } = await import('./generate.mts');
@@ -516,6 +556,9 @@ test('a reference the archive cites only by its ADS bibcode is read as the paper
   const preprint = (await fetchPublication({ ...linked, async location(url) { return url.endsWith('/EPRINT_HTML') ? 'https://arxiv.org/abs/1703.01430' : undefined; } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
   assert.equal(preprint.id, 'arxiv-1703-01430', 'no DOI: the arXiv record');
   assert.deepEqual(record.identifiers.map((identifier: { type: string }) => identifier.type), ['arXiv', 'DOI', 'bibliography-key']);
+  // A DOI record without authors (a correction, as 2024MNRAS.533..109G is): the linked preprint's authors.
+  const authorless = (await fetchPublication({ ...linked, async text(url) { return url.includes('api.crossref.org') ? crossref.replace(/"author":\[[^\]]*\],/u, '') : linked.text(url); } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
+  assert.deepEqual([authorless.id, authorless.creators.length], ['doi-10-1038-s41550-017-0056', 3]);
   // No gateway answer: the bibcode record as before.
   const alone = (await fetchPublication({ ...linked, async location() { return undefined; } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
   assert.equal(alone.id, 'publication-2017natas-1e-56g');
@@ -819,6 +862,16 @@ test('a Gaia source SIMBAD never catalogued is identified by that source; a targ
   await assert.rejects(identify(unknown, 'HV 9999', undefined, 'hv-9999'), /hv-9999: SIMBAD does not know HV 9999\./u);
 });
 
+test('a binary component the archive writes apart is looked up under the name SIMBAD joins', async () => {
+  const { identify } = await import('./archives.mts');
+  // SIMBAD, 2026-09-29: "K2-288 B", the archive's hostname, is not an identifier; K2-288B is LP 413-32 B, with Gaia DR2
+  // 44838019756570112 and no DR3 source (Gaia's dr2_neighbourhood maps that DR2 source to K2-288 A, 0.79 arcsec away), so it is refused.
+  const simbad = async (name: string) => name === 'K2-288B' ? { mainId: 'LP 413-32 B', identifiers: ['LP 413-32 B', 'Gaia DR2 44838019756570112', 'NAME K2-288B'] } : undefined;
+  await assert.rejects(identify(simbad, 'K2-288 B', undefined, 'k2-288-b'), /k2-288-b: SIMBAD lists no Gaia DR3 identifier for K2-288 B/u);
+  const withDr3 = async (name: string) => name === 'Star 1B' ? { mainId: 'Star 1B', identifiers: ['Gaia DR3 1'] } : undefined;
+  assert.deepEqual(await identify(withDr3, 'Star 1 B', undefined, 'star-1-b'), { main: 'Star 1B', gaia: '1' });
+});
+
 test('a binary whose primary Gaia sees eclipsing on another period is refused; long orbits Gaia cannot measure are not checked', async () => {
   const { eclipsingPeriodAgrees, GAIA_EB_CHECKED_DAYS } = await import('./generate.mts');
   // Gaia DR3 vari_eclipsing_binary, 2026-09-28: 6045477944460616704 (Cl* NGC 6121 SAW V66) 0.26988 d; the M4 V66 of Kaluzny et al.
@@ -829,3 +882,4 @@ test('a binary whose primary Gaia sees eclipsing on another period is refused; l
   assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
   assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });
+

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "k2-25",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "K2-25",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 203979.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/k2-25-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "K2-25",
+      "classification": "star",
+      "color": "#ffcd83",
+      "distanceAu": 9225955.4,
+      "description": "K2-25 b crosses K2-25 as seen from Earth, which is how it was found.",
+      "systemName": "K2-25 system",
+      "order": 3426,
+      "context": {
+        "order": 3423
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        598845346304261000,
+        1189343586349101600,
+        362976552679704000
+      ],
+      "presentationToReference": [
+        0.43388816314726986,
+        0.11827432190766614,
+        0.8931697748233366,
+        0.8617285033922941,
+        0.2348962177260892,
+        -0.4497196385963756,
+        0.26299248719681156,
+        -0.9647978812555816,
+        0.0000016659678175434037
+      ],
+      "orbitUpReference": [
+        -0.11827432190766614,
+        -0.2348962177260892,
+        0.9647978812555816
+      ],
+      "metersPerUnit": 657997.4193548387,
+      "bodyRadiusM": 203979200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

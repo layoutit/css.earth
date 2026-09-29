@@ -1,0 +1,28 @@
+{
+ "id": "hip-65-a-b",
+ "classification": "exoplanet",
+ "order": 3046,
+ "physical": {
+  "name": "HIP 65 A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 145128.8,
+  "gravitationalParameterKm3PerS2": 407043826.99,
+  "parent": "hip-65-a"
+ },
+ "physicalNotes": "Radius 2.03 Jupiter radii from Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract): 145,128.8 km at 71,492 km per Jupiter radius. GM from the mass 3.213 Jupiter masses (Nielsen et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...639A..76N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.98097217,
+  "semiMajorAxisStellarRadii": 5.289,
+  "inclinationDegrees": 77.18,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58658.153779,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 0.98097217 d",
+   "shape": "Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): a/R* 5.289; Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): inclination 77.18 degrees",
+   "eccentricity": "Nielsen et al. 2020 (2020A&A...639A..76N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): e 0",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458658.653779 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

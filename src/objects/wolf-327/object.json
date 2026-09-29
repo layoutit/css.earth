@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wolf-327",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Wolf 327",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 282454.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wolf-327-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Wolf 327",
+      "classification": "star",
+      "color": "#ffc787",
+      "distanceAu": 5893503.5,
+      "description": "Wolf 327 b crosses Wolf 327 as seen from Earth, which is how it was found.",
+      "systemName": "Wolf 327 system",
+      "order": 4857,
+      "context": {
+        "order": 4854
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -610665975710021600,
+        376007732337594750,
+        512856519064818500
+      ],
+      "presentationToReference": [
+        -0.6926309878343593,
+        -0.49533801193298205,
+        0.5243115186851046,
+        0.4264763675442625,
+        0.3049925844329773,
+        0.8515265300430425,
+        0.5817045836314606,
+        -0.8134001336213157,
+        -0.00000264099780751704
+      ],
+      "orbitUpReference": [
+        0.49533801193298205,
+        -0.3049925844329773,
+        0.8134001336213157
+      ],
+      "metersPerUnit": 911142.5806451613,
+      "bodyRadiusM": 282454200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

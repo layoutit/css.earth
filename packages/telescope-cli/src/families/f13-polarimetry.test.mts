@@ -1,4 +1,4 @@
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest(); import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'; import { tmpdir } from 'node:os'; import { resolve } from 'node:path'; import {spawn} from 'node:child_process'; import { headerBlock, padBlock } from '@cssearth/bake/objects/raster'; import { member } from './common.mts';
 import { BETELGEUSE_ZIMPOL_V, describeDegreeLinearPolarization, describeStokesFits, exportIntensityDolp, extractStokesFits, inspectIntensityDolp, inspectStokesFits } from './f13-polarimetry.mts'; import { astroqueryToolchain } from '@cssearth/telescope/node';import{executeFamilyOperation}from'../family-operation.mts';

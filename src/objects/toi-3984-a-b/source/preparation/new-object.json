@@ -1,0 +1,24 @@
+{
+  "host": "toi-3984-a",
+  "planets": [
+    {
+      "id": "toi-3984-a-b",
+      "name": "TOI-3984 A b",
+      "description": "Transiting planet of TOI-3984 A with a 4.35-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract",
+        "credit": "Cañas et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CA_NTILDE_AS_ET_AL__2023"
+      },
+      "text": {
+        "card": "TOI-3984 A b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-3984 A. Its orbit and size follow Cañas et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CA_NTILDE_AS_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.353326, pl_radj 0.71, pl_bmassj 0.14"
+      },
+      "order": 4377
+    }
+  ]
+}

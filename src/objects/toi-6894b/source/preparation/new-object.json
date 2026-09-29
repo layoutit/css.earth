@@ -1,0 +1,24 @@
+{
+  "host": "toi-6894",
+  "planets": [
+    {
+      "id": "toi-6894b",
+      "name": "TOI-6894 b",
+      "description": "Transiting planet of TOI-6894 with a 3.37-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+        "credit": "Bryant et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BRYANT_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-6894 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-6894. Its orbit and size follow Bryant et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRYANT_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.37077196, pl_radj 0.855, pl_bmassj 0.168"
+      },
+      "order": 4662
+    }
+  ]
+}

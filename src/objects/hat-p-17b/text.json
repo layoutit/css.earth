@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-17b",
+  "card": {
+    "text": "HAT-P-17 b was found in 2012 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility HATNet, sy_pnum 2; pl_orbper 10.33853522, pl_radj 1.05, pl_bmassj 0.58"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-17",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-17",
+        "label": "Wikipedia, \"HAT-P-17\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370776716",
+        "quote": "It is the host of two planets, HAT-P-17b and HAT-P-17c, both discovered in 2010."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HAT-P-17. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility HATNet, sy_pnum 2; pl_orbper 10.33853522, pl_radj 1.05, pl_bmassj 0.58"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-17",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-17",
+        "label": "Wikipedia, \"HAT-P-17\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370776716",
+        "quote": "A search for a binary companion star using adaptive optics at the MMT Observatory was negative."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

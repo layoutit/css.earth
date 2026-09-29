@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "v1298-tau-d",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "V1298 Tau d",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 41649
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/v1298-tau-d-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "V1298 Tau d",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 22280367.7,
+      "description": "V1298 Tau d was found in 2019 by K2 as it crossed its star.",
+      "systemName": "V1298 Tau system",
+      "order": 4764,
+      "context": {
+        "order": 4764
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1501078034819477000,
+        2745376815951369000,
+        1148562968894130000
+      ],
+      "presentationToReference": [
+        0.42412806220470023,
+        0.8903855205565103,
+        -0.1653148863042833,
+        0.8375411825969363,
+        -0.45509242884296847,
+        -0.30235020863881173,
+        0.3444418010413533,
+        0.010222817279001458,
+        0.938752011823287
+      ],
+      "orbitUpReference": [
+        -0.8903855205565103,
+        0.45509242884296847,
+        -0.010222817279001458
+      ],
+      "metersPerUnit": 134351.61290322582,
+      "bodyRadiusM": 41649000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "toi-205",
+  "name": "TOI-205",
+  "system": "TOI-205 system",
+  "description": "Star of 6,303 K, 178 parsecs away, with 1 transiting planet.",
+  "target": "TOI-205",
+  "gaia": "4918753025923909504",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 1.45382,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-205 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 6302.74,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-205 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-205 b crosses TOI-205 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 6302.74, st_rad 1.45382"
+  },
+  "notes": [],
+  "order": 4222
+}

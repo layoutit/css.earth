@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-178d",
+  "radiusKm": 17189,
+  "radiusSource": "Radius 0.24043221 Jupiter radii from Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract): 17,189 km at 71,492 km per Jupiter radius. GM from the mass 0.01636103 Jupiter masses (Leleu et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.211L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.5578513,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.5578513 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-178 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01636103 Jupiter masses: Leleu et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract)."
+}

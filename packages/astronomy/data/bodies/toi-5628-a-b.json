@@ -1,0 +1,28 @@
+{
+ "id": "toi-5628-a-b",
+ "classification": "exoplanet",
+ "order": 4550,
+ "physical": {
+  "name": "TOI-5628 A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 52904.1,
+  "gravitationalParameterKm3PerS2": 11401787.87,
+  "parent": "toi-5628-a"
+ },
+ "physicalNotes": "Radius 0.74 Jupiter radii from Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract): 52,904.1 km at 71,492 km per Jupiter radius. GM from the mass 0.09 Jupiter masses (Gan et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026ApJ..1006L..63G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.3416612,
+  "semiMajorAxisStellarRadii": 22.5498,
+  "inclinationDegrees": 88.98,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59640.1193,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2026): P 4.3416612 d",
+   "shape": "Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2026): a/R* 22.5498; Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2026): inclination 88.98 degrees",
+   "eccentricity": "Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2026): e 0",
+   "phase": "Gan et al. 2026 (2026ApJ..1006L..63G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL_2026): transit mid-time 2459640.6193 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

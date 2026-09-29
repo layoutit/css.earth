@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "k2-141b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "K2-141 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 9630.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/k2-141b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "K2-141 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 12787410.6,
+      "description": "K2-141 b was found in 2018 by K2 as it crossed its star.",
+      "systemName": "K2-141 system",
+      "order": 3317,
+      "context": {
+        "order": 3317
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1888577436101830000,
+        -301912620043333900,
+        -39698513673956880
+      ],
+      "presentationToReference": [
+        0.9953777372602928,
+        -0.0938255574456244,
+        0.02049207009058429,
+        -0.09377790733309858,
+        -0.995587751584309,
+        -0.0032761244672584386,
+        -0.020709038191194573,
+        -0.001339277909184619,
+        0.9997846478476642
+      ],
+      "orbitUpReference": [
+        0.0938255574456244,
+        0.995587751584309,
+        0.001339277909184619
+      ],
+      "metersPerUnit": 31067.41935483871,
+      "bodyRadiusM": 9630900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

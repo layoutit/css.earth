@@ -5,7 +5,7 @@
  * number astropy's own WCS gives for the same two headers, so the projection in compare.mts is tested against an independent
  * implementation rather than against itself. */
 import { strict as assert } from 'node:assert';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { combinedNames, declaredBias, mjdToIso, parseGeminiProgram, scienceSequences, requireProgramId,
   configurationComplete, sameConfiguration, type GeminiProgram } from './archive.mts';

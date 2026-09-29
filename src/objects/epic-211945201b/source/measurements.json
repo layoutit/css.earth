@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "epic-211945201b",
+  "radiusKm": 36737.8,
+  "radiusSource": "Radius 0.51387278 Jupiter radii from Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract): 36,737.8 km at 71,492 km per Jupiter radius. GM from the mass 0.03460987 Jupiter masses (Howard et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025ApJS..278...52H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 19.4921473,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 19.4921473 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of EPIC 211945201 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.03460987 Jupiter masses: Howard et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025ApJS..278...52H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)."
+}

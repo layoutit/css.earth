@@ -1,0 +1,39 @@
+{
+  "id": "kelt-11",
+  "name": "KELT-11",
+  "system": "KELT-11 system",
+  "description": "Star of 5,375 K, 99.2 parsecs away, with 1 transiting planet.",
+  "target": "KELT-11",
+  "gaia": "3761497761876022400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+    "credit": "Mounzer et al. 2022"
+  },
+  "radius": {
+    "value": 2.69,
+    "source": "Mounzer et al. 2022, the stellar radius of the default parameter set of KELT-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 1.44,
+    "source": "Mounzer et al. 2022, the stellar mass of the default parameter set of KELT-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+    "uncertainty": 0.07
+  },
+  "temperature": {
+    "value": 5375,
+    "source": "Mounzer et al. 2022, the stellar temperature of the default parameter set of KELT-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+    "uncertainty": 25
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-11 b crosses KELT-11 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mounzer et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MOUNZER_ET_AL__2022): st_teff 5375, st_rad 2.69, st_mass 1.44"
+  },
+  "notes": [],
+  "order": 3629
+}

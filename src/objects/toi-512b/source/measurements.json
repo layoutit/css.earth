@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-512b",
+  "radiusKm": 9822.3,
+  "radiusSource": "Radius 0.13738983 Jupiter radii from Rodrigues et al. 2025 (2025A&A...695A.237R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract): 9,822.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01123248 Jupiter masses (Rodrigues et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...695A.237R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 7.18873321304,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.18873321304 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-512 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01123248 Jupiter masses: Rodrigues et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...695A.237R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract)."
+}

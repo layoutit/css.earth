@@ -1,0 +1,24 @@
+{
+  "host": "toi-1272",
+  "planets": [
+    {
+      "id": "toi-1272b",
+      "name": "TOI-1272 b",
+      "description": "Transiting planet of TOI-1272 with a 3.32-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+        "credit": "Mancini et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANCINI_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-1272 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1272. Its orbit and size follow Mancini et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANCINI_ET_AL_2026): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.3159765, pl_radj 0.3800524, pl_bmassj 0.07582708"
+      },
+      "order": 3997
+    }
+  ]
+}

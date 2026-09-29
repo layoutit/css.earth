@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { readOracleFixture, readOracleInput } from '../../../../../tests/oracles/fixture.mts';
+import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { binaryTable, findTable, numbers, readFitsHdus, tableColumn, text, writeCell } from '@cssearth/bake/objects/raster';
 

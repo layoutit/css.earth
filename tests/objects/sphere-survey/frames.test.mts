@@ -1,4 +1,4 @@
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { anchorApparition, apparitions, selectFrames, series } from '@cssearth/bake/objects/sphere-survey';

@@ -1,0 +1,39 @@
+{
+  "id": "toi-5205",
+  "name": "TOI-5205",
+  "system": "TOI-5205 system",
+  "description": "Star of 3,430 K, 86.4 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5205",
+  "gaia": "1842656663520849024",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract",
+    "credit": "Kanodia et al. 2023"
+  },
+  "radius": {
+    "value": 0.394,
+    "source": "Kanodia et al. 2023, the stellar radius of the default parameter set of TOI-5205 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.392,
+    "source": "Kanodia et al. 2023, the stellar mass of the default parameter set of TOI-5205 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract",
+    "uncertainty": 0.015
+  },
+  "temperature": {
+    "value": 3430,
+    "source": "Kanodia et al. 2023, the stellar temperature of the default parameter set of TOI-5205 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract",
+    "uncertainty": 54
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5205 b crosses TOI-5205 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kanodia et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KANODIA_ET_AL__2023): st_teff 3430, st_rad 0.394, st_mass 0.392"
+  },
+  "notes": [],
+  "order": 4497
+}

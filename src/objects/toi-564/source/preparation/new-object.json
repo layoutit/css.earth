@@ -1,0 +1,39 @@
+{
+  "id": "toi-564",
+  "name": "TOI-564",
+  "system": "TOI-564 system",
+  "description": "Star of 5,640 K, 200 parsecs away, with 1 transiting planet.",
+  "target": "TOI-564",
+  "gaia": "5710154317045164416",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract",
+    "credit": "Davis et al. 2020"
+  },
+  "radius": {
+    "value": 1.088,
+    "source": "Davis et al. 2020, the stellar radius of the default parameter set of TOI-564 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.998,
+    "source": "Davis et al. 2020, the stellar mass of the default parameter set of TOI-564 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract",
+    "uncertainty": 0.068
+  },
+  "temperature": {
+    "value": 5640,
+    "source": "Davis et al. 2020, the stellar temperature of the default parameter set of TOI-564 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract",
+    "uncertainty": 34
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-564 b crosses TOI-564 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Davis et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DAVIS_ET_AL__2020): st_teff 5640, st_rad 1.088, st_mass 0.998"
+  },
+  "notes": [],
+  "order": 4553
+}

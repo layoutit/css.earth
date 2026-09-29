@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-21520b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 21520 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 17201.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-21520b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 21520 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 16383720.2,
+      "description": "HD 21520 b was found in 2024 by TESS as it crossed its star.",
+      "systemName": "HD 21520 system",
+      "order": 3188,
+      "context": {
+        "order": 3188
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1101258617281518800,
+        1391453744948638000,
+        -1690662059236684800
+      ],
+      "presentationToReference": [
+        0.4387371759530074,
+        0.7900980223017283,
+        0.42808270882117816,
+        0.5760043778374678,
+        -0.6129104214989626,
+        0.5408879476657208,
+        -0.6897308512375329,
+        -0.009269863691644245,
+        0.7240065072071431
+      ],
+      "orbitUpReference": [
+        -0.7900980223017283,
+        0.6129104214989626,
+        0.009269863691644245
+      ],
+      "metersPerUnit": 55489.354838709674,
+      "bodyRadiusM": 17201700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

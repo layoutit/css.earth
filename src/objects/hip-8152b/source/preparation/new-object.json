@@ -1,0 +1,24 @@
+{
+  "host": "hip-8152",
+  "planets": [
+    {
+      "id": "hip-8152b",
+      "name": "HIP 8152 b",
+      "description": "Transiting planet of HIP 8152 with a 10.8-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HIP 8152 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HIP 8152. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 10.75112478343, pl_radj 0.22627021, pl_bmassj 0.02800253"
+      },
+      "order": 3262
+    }
+  ]
+}

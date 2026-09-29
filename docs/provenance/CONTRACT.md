@@ -49,7 +49,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `prepared/object.json`, `prepared/page.json` | Transport and page metadata regenerated from the installed runtime; not inventoried or committed |
 | Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed; audit-only terrain reports and source-index rasters are excluded |
 | `inventory.json` at the body root | Generated inventory of every baked file (public textures and `prepared/*`) used by installation and publication |
-| `site/prepared-sources.json` and `site/prepared-facilities.json` | Ignored source usage and mission attribution outputs; prepare together |
+| `site/prepared-sources.json`, `site/prepared-source-credits.json` and `site/prepared-facilities.json` | Ignored source usage, page credit and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures and shared harnesses under `tests/`; preparation code under `packages/bake/` (`src/`, `cli/`, `authoring/`), telescope code under `packages/telescope-cli/`, site build steps under `site/build/`, CI checks under `.github/scripts/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |

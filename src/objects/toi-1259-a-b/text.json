@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1259-a-b",
+  "card": {
+    "text": "TOI-1259 A b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556348",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract",
+        "label": "Veldhuis et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname VELDHUIS_ET_AL_2026): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.4779792, pl_radj 1.03488447, pl_bmassj 0.44363561"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1259 A. Its orbit and size follow Veldhuis et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556348",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract",
+        "label": "Veldhuis et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname VELDHUIS_ET_AL_2026): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.4779792, pl_radj 1.03488447, pl_bmassj 0.44363561"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

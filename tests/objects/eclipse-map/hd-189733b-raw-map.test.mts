@@ -10,7 +10,7 @@
  * scatter, because Eureka! 1.4's error estimate (227 ppm) is below our measured scatter (352 ppm); the deposit's errors need
  * a factor of 0.95 to 0.99. Their map also fits Spitzer, so the comparison is on shape and position, not exact values. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

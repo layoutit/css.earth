@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lp-890-9",
+  "card": {
+    "text": "2 planets cross LP 890-9 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244041",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+        "label": "Delrez et al. (2022), Astronomy & Astrophysics 667 A59",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DELREZ_ET_AL_2022): st_teff 2850, st_rad 0.1556, st_mass 0.118"
+      },
+      {
+        "catalogueId": "wikipedia-lp-890-9",
+        "url": "https://en.wikipedia.org/wiki/LP_890-9",
+        "label": "Wikipedia, \"LP 890-9\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442800",
+        "quote": "LP 890-9 is a red dwarf star located 105 light-years (32 pc) away from the Solar System in the constellation of Eridanus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Delrez et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244041",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+        "label": "Delrez et al. (2022), Astronomy & Astrophysics 667 A59",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DELREZ_ET_AL_2022): st_teff 2850, st_rad 0.1556, st_mass 0.118"
+      },
+      {
+        "catalogueId": "wikipedia-lp-890-9",
+        "url": "https://en.wikipedia.org/wiki/LP_890-9",
+        "label": "Wikipedia, \"LP 890-9\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442800",
+        "quote": "The star has 12% the mass and 15% the radius of the Sun, and a temperature of 2,871 K. It is extremely faint and, with an apparent magnitude of 18, is the faintest star with exoplanets discovered by the Transiting Exoplanet Survey Satellite (TESS)."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

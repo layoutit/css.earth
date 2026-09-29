@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mascara-1b",
+  "card": {
+    "text": "MASCARA-1 b was found in 2017 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202141645",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+        "label": "Hooton et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOOTON_ET_AL__2022): disc_year 2017, disc_facility Multiple Observatories, sy_pnum 1; pl_orbper 2.1425095, pl_radj 1.597, pl_bmassj 3.7"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around MASCARA-1. Its orbit and size follow Hooton et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202141645",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+        "label": "Hooton et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOOTON_ET_AL__2022): disc_year 2017, disc_facility Multiple Observatories, sy_pnum 1; pl_orbper 2.1425095, pl_radj 1.597, pl_bmassj 3.7"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

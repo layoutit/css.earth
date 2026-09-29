@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-677b",
+  "card": {
+    "text": "TOI-677 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad2855",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..175H/abstract",
+        "label": "Hu et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HU_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.2365985, pl_radj 1.17, pl_bmassj 1.234"
+      },
+      {
+        "catalogueId": "wikipedia-toi-677-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-677_b",
+        "label": "Wikipedia, \"TOI-677 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374392731",
+        "quote": "TOI-677 b (TOI-677b) is a warm super-Jupiter type exoplanet orbiting the F-type main sequence star TOI-677 in the constellation of Ophiuchus about 466 ly (143 pc) away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-677. Its orbit and size follow Jordán et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad2855",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..175H/abstract",
+        "label": "Hu et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HU_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.2365985, pl_radj 1.17, pl_bmassj 1.234"
+      },
+      {
+        "catalogueId": "wikipedia-toi-677-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-677_b",
+        "label": "Wikipedia, \"TOI-677 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374392731",
+        "quote": "The mass of the planet has been found to be 1.252 Jupiter masses and the radius of the planet is 1.179 Jupiter radii."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

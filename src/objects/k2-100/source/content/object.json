@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-100",
+  "displayName": "K2-100",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stz2569",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B",
+          "label": "Barragán et al. (2019), Monthly Notices of the Royal Astronomical Society 490 698-708",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "183 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-100",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "k2-100-lens-color.webp",
+        "surface": "k2-100-surface-color@2x.webp",
+        "poles": "k2-100-poles-color@2x.webp",
+        "source": {
+          "id": "k2-100-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=664337230586013312&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,945 K and log g 4.31 (u1 0.424, u2 0.281): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Barragán et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+      "credit": "Barragán et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-100.json",
+      "credit": "Barragán et al. 2019, the stellar radius of the default parameter set of K2-100 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

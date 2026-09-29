@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "pm-j02489-1432-e",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "PM J02489-1432E",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 310977.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/pm-j02489-1432-e-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "PM J02489-1432E",
+      "classification": "star",
+      "color": "#ffca8d",
+      "distanceAu": 7772116,
+      "description": "PM J02489-1432E is a star of 3,450 K, bound to TOI-1201 314 AU away.",
+      "systemName": "TOI-1201 system",
+      "order": 3946,
+      "context": {
+        "order": 3943
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        833082601829342300,
+        756735555048108900,
+        -291851607764361150
+      ],
+      "presentationToReference": [
+        0.7165114191789855,
+        -0.18580629916371091,
+        0.6723744532455123,
+        0.650847425340884,
+        -0.1687750997910385,
+        -0.7402111824457039,
+        -0.251015965853287,
+        -0.9679829465861527,
+        -0.000002265149467399673
+      ],
+      "orbitUpReference": [
+        0.18580629916371091,
+        0.1687750997910385,
+        0.9679829465861527
+      ],
+      "metersPerUnit": 1003154.5161290322,
+      "bodyRadiusM": 310977900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

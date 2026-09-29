@@ -1,0 +1,24 @@
+{
+  "host": "tic-46432937",
+  "planets": [
+    {
+      "id": "tic-46432937b",
+      "name": "TIC 46432937 b",
+      "description": "Transiting planet of TIC 46432937 with a 1.44-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract",
+        "credit": "Hartman et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HARTMAN_ET_AL_2024"
+      },
+      "text": {
+        "card": "TIC 46432937 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TIC 46432937. Its orbit and size follow Hartman et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.44044527, pl_radj 1.188, pl_bmassj 3.2"
+      },
+      "order": 3898
+    }
+  ]
+}

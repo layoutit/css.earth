@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ngts-11b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGTS-11 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 58409
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngts-11b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGTS-11 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 38960131.8,
+      "description": "NGTS-11 b was found in 2020 by TESS as it crossed its star.",
+      "systemName": "NGTS-11 system",
+      "order": 3845,
+      "context": {
+        "order": 3845
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5175740245721794000,
+        2252784068180032500,
+        -1451334827650933200
+      ],
+      "presentationToReference": [
+        0.8820819705565,
+        0.4120681992919098,
+        0.22832257083233226,
+        0.3999216379249327,
+        -0.9111456921160932,
+        0.09937912888390918,
+        -0.24898610551314213,
+        -0.0036505986643907986,
+        0.9685001767634275
+      ],
+      "orbitUpReference": [
+        -0.4120681992919098,
+        0.9111456921160932,
+        0.0036505986643907986
+      ],
+      "metersPerUnit": 188416.12903225806,
+      "bodyRadiusM": 58409000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

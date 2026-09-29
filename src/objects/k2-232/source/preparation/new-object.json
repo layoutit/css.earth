@@ -1,0 +1,39 @@
+{
+  "id": "k2-232",
+  "name": "K2-232",
+  "system": "K2-232 system",
+  "description": "Star of 6,100 K, 131 parsecs away, with 2 planets.",
+  "target": "K2-232",
+  "gaia": "3406687485600728192",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+    "credit": "Ranshaw et al. 2026"
+  },
+  "radius": {
+    "value": 1.21,
+    "source": "Ranshaw et al. 2026, the stellar radius of the default parameter set of K2-232 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+    "uncertainty": 0.036
+  },
+  "mass": {
+    "value": 1.121,
+    "source": "Ranshaw et al. 2026, the stellar mass of the default parameter set of K2-232 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+    "uncertainty": 0.063
+  },
+  "temperature": {
+    "value": 6100,
+    "source": "Ranshaw et al. 2026, the stellar temperature of the default parameter set of K2-232 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-232's planets b, c are placed on the orbits their papers measured.",
+    "introduction": "Its radius and temperature follow Ranshaw et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname RANSHAW_ET_AL_2026): st_teff 6100, st_rad 1.21, st_mass 1.121"
+  },
+  "notes": [],
+  "order": 3406
+}

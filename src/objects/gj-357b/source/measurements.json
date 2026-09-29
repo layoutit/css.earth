@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "gj-357b",
+  "radiusKm": 7653.7,
+  "radiusSource": "Radius 0.10705701 Jupiter radii from Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract): 7,653.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00575782 Jupiter masses (Weisserman et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A.165W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...709A.165W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.9306,
+  "orbitalPeriodSource": "Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): P 3.9306 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of GJ 357 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00575782 Jupiter masses: Weisserman et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A.165W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.165W/abstract)."
+}

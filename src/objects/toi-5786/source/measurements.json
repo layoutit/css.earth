@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-5786",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 946,152 km at 193.78 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 193.7820989229601,
+  "distanceSource": "Gaia DR3 parallax 5.1604 +/- 0.0125 mas (same row, RUWE 0.84): 193.78 pc, no zero-point correction",
+  "radiusKm": 946152,
+  "radiusSource": "Radius 1.36 +/- 0.03 solar radii from Thomas et al. 2025, the stellar radius of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract): 946,152 km at 695,700 km per solar radius. Mass 1.23 +/- 0.04 solar masses from Thomas et al. 2025, the stellar mass of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract); GM is that mass times the JPL solar GM. Temperature 6235 +/- 50 K from Thomas et al. 2025, the stellar temperature of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6235,
+  "effectiveTemperatureSource": "Thomas et al. 2025, the stellar temperature of the default parameter set of TOI-5786 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract)",
+  "surfaceGravityLogg": 4.26,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5786.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.261, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

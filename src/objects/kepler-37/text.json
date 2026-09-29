@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-37",
+  "card": {
+    "text": "3 planets cross Kepler-37 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5357, st_rad 0.789, st_mass 0.79"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-37",
+        "url": "https://en.wikipedia.org/wiki/Kepler-37",
+        "label": "Wikipedia, \"Kepler-37\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406300",
+        "quote": "Kepler-37, also known as UGA-1785, is a G-type main-sequence star located in the constellation Lyra 209 light-years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonomo et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5357, st_rad 0.789, st_mass 0.79"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-37",
+        "url": "https://en.wikipedia.org/wiki/Kepler-37",
+        "label": "Wikipedia, \"Kepler-37\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406300",
+        "quote": "It is host to exoplanets Kepler-37b, Kepler-37c, Kepler-37d and possibly Kepler-37e, all of which orbit very close to it."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

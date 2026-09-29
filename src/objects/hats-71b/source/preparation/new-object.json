@@ -1,0 +1,24 @@
+{
+  "host": "hats-71",
+  "planets": [
+    {
+      "id": "hats-71b",
+      "name": "HATS-71 b",
+      "description": "Transiting planet of HATS-71 with a 3.8-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+        "credit": "Bakos et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BAKOS_ET_AL__2020"
+      },
+      "text": {
+        "card": "HATS-71 b was found in 2020 by HATSouth as it crossed its star.",
+        "introduction": "It is the only planet known around HATS-71. Its orbit and size follow Bakos et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BAKOS_ET_AL__2020): disc_year 2020, disc_facility HATSouth, sy_pnum 1; pl_orbper 3.7955195, pl_radj 1.024, pl_bmassj 0.37"
+      },
+      "order": 3136
+    }
+  ]
+}

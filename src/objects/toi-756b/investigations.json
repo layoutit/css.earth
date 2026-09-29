@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-756b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.25069184 Jupiter radii from Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.03092864 Jupiter masses: Parc et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...702A.138P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): P 1.2392495 d; Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): a/R* derived from its semi-major axis 0.018 au and stellar radius 0.505 solar radii; Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): inclination 85.53 degrees; Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): e 0; Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): transit mid-time 2458570.65234 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract"
+      ]
+    }
+  ]
+}

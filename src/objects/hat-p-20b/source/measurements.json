@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hat-p-20b",
+  "radiusKm": 61983.6,
+  "radiusSource": "Radius 0.867 Jupiter radii from Bakos et al. 2010 (2010arXiv1008.3388B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract): 61,983.6 km at 71,492 km per Jupiter radius. GM from the mass 7.246 Jupiter masses (Bakos et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1008.3388B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.87531773,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.87531773 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HAT-P-20 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "7.246 Jupiter masses: Bakos et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1008.3388B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)."
+}

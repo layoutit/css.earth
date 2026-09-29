@@ -1,0 +1,31 @@
+{
+  "host": "iras-04125-2902",
+  "planets": [
+    {
+      "id": "iras-04125-2902b",
+      "name": "IRAS 04125+2902 b",
+      "description": "Transiting planet of IRAS 04125+2902 with a 8.83-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+        "credit": "Barber et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARBER_ET_AL__2024"
+      },
+      "text": {
+        "card": "IRAS 04125+2902 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around IRAS 04125+2902. Its orbit and size follow Barber et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARBER_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.834978, pl_radj 0.958, pl_bmassj 0.254",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/IRAS_04125%2B2902_b",
+          "title": "IRAS 04125+2902 b",
+          "revision": "1339486124",
+          "card": "IRAS 04125+2902 b, also known as TIDYE-1b, is an extremely young exoplanet orbiting the young protostar IRAS 04125+2902 approximately 520 light-years from Earth in the constellation of Taurus.",
+          "introduction": "It is the youngest transiting exoplanet so far discovered, with an age of just three million years."
+        }
+      },
+      "order": 3269
+    }
+  ]
+}

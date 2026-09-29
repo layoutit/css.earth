@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-23472c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.16683051 Jupiter radii from Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01072906 Jupiter masses: Barros et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...665A.154B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 29.79753862878 d; Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): a/R* 50.2; Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): inclination 89.095 degrees; Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): e 0.063; Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive ps table (pl_refname BARROS_ET_AL_2022): omega 2 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460932.688545 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract"
+      ]
+    }
+  ]
+}

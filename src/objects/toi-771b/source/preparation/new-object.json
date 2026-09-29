@@ -1,0 +1,24 @@
+{
+  "host": "toi-771",
+  "planets": [
+    {
+      "id": "toi-771b",
+      "name": "TOI-771 b",
+      "description": "Transiting planet of TOI-771 with a 2.33-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+        "credit": "Lacedelli et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LACEDELLI_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-771 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-771. Its orbit and size follow Lacedelli et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LACEDELLI_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.3260155, pl_radj 0.12133128, pl_bmassj 0.00777149"
+      },
+      "order": 4714
+    }
+  ]
+}

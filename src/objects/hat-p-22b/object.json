@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hat-p-22b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-22 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 82215.8
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-22b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-22 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 16806341.6,
+      "description": "HAT-P-22 b was found in 2010 by HATNet as it crossed its star.",
+      "systemName": "HAT-P-22 system",
+      "order": 3125,
+      "context": {
+        "order": 3125
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1468740454845135400,
+        663737900103158000,
+        1929616416990793700
+      ],
+      "presentationToReference": [
+        -0.6055955556654402,
+        0.37961480147244986,
+        0.6993901811301751,
+        0.21432845991358365,
+        0.9242131555763953,
+        -0.3160590994269792,
+        0.7663663185639998,
+        0.041504765540287314,
+        0.6410616352645881
+      ],
+      "orbitUpReference": [
+        -0.37961480147244986,
+        -0.9242131555763953,
+        -0.041504765540287314
+      ],
+      "metersPerUnit": 265212.2580645161,
+      "bodyRadiusM": 82215800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

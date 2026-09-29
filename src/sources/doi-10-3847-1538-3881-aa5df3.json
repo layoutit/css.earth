@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-3847-1538-3881-aa5df3",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Stassun et al. (2017): Accurate Empirical Radii and Masses of Planets and Their Host Stars with Gaia Parallaxes",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1609.04389"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aa5df3"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017AJ....153..136S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aa5df3",
+      "label": "The Astronomical Journal 153 136"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Stassun et al. (2017), The Astronomical Journal 153 136",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S"
+    }
+  ],
+  "publisher": "The Astronomical Journal 153 136",
+  "creators": [
+    "Keivan G. Stassun",
+    "Karen A. Collins",
+    "B. Scott Gaudi"
+  ],
+  "publicationDate": "2017"
+}

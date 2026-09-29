@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kelt-10",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KELT-10",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 841101.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kelt-10-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KELT-10",
+      "classification": "star",
+      "color": "#fff3f2",
+      "distanceAu": 39040208.8,
+      "description": "KELT-10 b crosses KELT-10 as seen from Earth, which is how it was found.",
+      "systemName": "KELT-10 system",
+      "order": 3627,
+      "context": {
+        "order": 3624
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1000481390103954000,
+        -3855140103922716000,
+        -4271581774108266000
+      ],
+      "presentationToReference": [
+        0.1713057131372559,
+        -0.18372408253886063,
+        -0.9679358522866017,
+        -0.6600897640666337,
+        0.707941606007338,
+        -0.25119750368625643,
+        -0.7313930926806679,
+        -0.6819561158747716,
+        -5.538018603660554e-8
+      ],
+      "orbitUpReference": [
+        0.18372408253886063,
+        -0.707941606007338,
+        0.6819561158747716
+      ],
+      "metersPerUnit": 2713230,
+      "bodyRadiusM": 841101300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

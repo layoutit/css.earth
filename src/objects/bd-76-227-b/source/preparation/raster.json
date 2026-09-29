@@ -1,0 +1,78 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/bd-76-227-b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "bd-76-227-b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssbd-76-227-b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "bd-76-227-b-surface-{id}{suffix}.webp",
+      "thumbnail": "bd-76-227-b-lens-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 3470,
+            "logg": 4.82,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        },
+        "qualification": "Photosphere colour from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,470 K and log g 4.82 (u1 0.171, u2 0.432): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "bd-76-227-b-context-{id}{suffix}.webp",
+    "limbOutput": "bd-76-227-b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssbd-76-227-b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

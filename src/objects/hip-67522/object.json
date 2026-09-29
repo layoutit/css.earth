@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-67522",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 67522",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 960066
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-67522-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 67522",
+      "classification": "star",
+      "color": "#ffefe7",
+      "distanceAu": 25728313,
+      "description": "2 planets cross HIP 67522 as seen from Earth: b, c.",
+      "systemName": "HIP 67522 system",
+      "order": 3258,
+      "context": {
+        "order": 3255
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2582385325325585000,
+        -1345787731348120600,
+        -2516779513041529300
+      ],
+      "presentationToReference": [
+        -0.6709416529833679,
+        0.579874701192425,
+        -0.4621500072584027,
+        -0.349655427555504,
+        0.302198132341806,
+        0.8868017652159371,
+        -0.6538947776767479,
+        -0.7565855006052655,
+        9.778678404210012e-7
+      ],
+      "orbitUpReference": [
+        -0.579874701192425,
+        -0.302198132341806,
+        0.7565855006052655
+      ],
+      "metersPerUnit": 3096987.0967741935,
+      "bodyRadiusM": 960066000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

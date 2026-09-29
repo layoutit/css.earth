@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4507b",
+  "card": {
+    "text": "TOI-4507 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae2bfa",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract",
+        "label": "Espinoza-Retamal et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 104.616063, pl_radj 0.73155626, pl_bmassj 0.06292704"
+      },
+      {
+        "catalogueId": "wikipedia-toi-4507-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-4507_b",
+        "label": "Wikipedia, \"TOI-4507 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374091145",
+        "quote": "TOI-4507 b is an exoplanet discovered in October 2025 that is roughly 578 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-4507. Its orbit and size follow Espinoza-Retamal et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae2bfa",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract",
+        "label": "Espinoza-Retamal et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 104.616063, pl_radj 0.73155626, pl_bmassj 0.06292704"
+      },
+      {
+        "catalogueId": "wikipedia-toi-4507-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-4507_b",
+        "label": "Wikipedia, \"TOI-4507 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374091145",
+        "quote": "It is a similar size to Jupiter; however, it is roughly 30 times the mass of Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

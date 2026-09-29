@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-969b",
+  "card": {
+    "text": "TOI-969 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243879",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A.109L/abstract",
+        "label": "Lillo-Box et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LILLO_BOX_ET_AL_2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.8237305, pl_radj 0.2466772, pl_bmassj 0.0286318"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-969. Its orbit and size follow Lillo-Box et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243879",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A.109L/abstract",
+        "label": "Lillo-Box et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LILLO_BOX_ET_AL_2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.8237305, pl_radj 0.2466772, pl_bmassj 0.0286318"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

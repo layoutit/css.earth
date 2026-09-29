@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { bandDepth } from './vir-projection.mts';
 import { parseRecipe } from './vir-mosaic.mts';
 const test = sourceTest();

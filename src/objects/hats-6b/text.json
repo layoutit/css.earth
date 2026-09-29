@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hats-6b",
+  "card": {
+    "text": "HATS-6 b was found in 2015 by HATSouth as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-149-5-166",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+        "label": "Hartman et al. 2015",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2015): disc_year 2015, disc_facility HATSouth, sy_pnum 1; pl_orbper 3.32526424, pl_radj 0.998, pl_bmassj 0.319"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HATS-6. Its orbit and size follow Hartman et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-149-5-166",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+        "label": "Hartman et al. 2015",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2015): disc_year 2015, disc_facility HATSouth, sy_pnum 1; pl_orbper 3.32526424, pl_radj 0.998, pl_bmassj 0.319"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

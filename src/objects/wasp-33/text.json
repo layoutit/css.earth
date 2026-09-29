@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-33",
+  "card": {
+    "text": "WASP-33 b crosses WASP-33 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 7430, st_rad 1.444, st_mass 1.495"
+      },
+      {
+        "catalogueId": "wikipedia-hd-15082",
+        "url": "https://en.wikipedia.org/wiki/HD_15082",
+        "label": "Wikipedia, \"HD 15082\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370777457",
+        "quote": "A hot Jupiter type extrasolar planet, named WASP-33b or HD 15082b, orbits this star with an orbital period of 1.22 days."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Chakrabarty & Sengupta 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 7430, st_rad 1.444, st_mass 1.495"
+      },
+      {
+        "catalogueId": "wikipedia-hd-15082",
+        "url": "https://en.wikipedia.org/wiki/HD_15082",
+        "label": "Wikipedia, \"HD 15082\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370777457",
+        "quote": "It is the first Delta Scuti variable known to host a planet."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

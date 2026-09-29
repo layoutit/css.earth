@@ -1,0 +1,28 @@
+{
+ "id": "wasp-145-a-b",
+ "classification": "exoplanet",
+ "order": 4792,
+ "physical": {
+  "name": "WASP-145 A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 64342.8,
+  "gravitationalParameterKm3PerS2": 112751013.39,
+  "parent": "wasp-145-a"
+ },
+ "physicalNotes": "Radius 0.9 Jupiter radii from Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract): 64,342.8 km at 71,492 km per Jupiter radius. GM from the mass 0.89 Jupiter masses (Hellier et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019MNRAS.482.1379H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.76903814,
+  "semiMajorAxisStellarRadii": 8.74,
+  "inclinationDegrees": 83.3,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59037.27335,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 1.76903814 d",
+   "shape": "Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive ps table (pl_refname HELLIER_ET_AL__2019): a/R* 8.74; Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive ps table (pl_refname HELLIER_ET_AL__2019): inclination 83.3 degrees",
+   "eccentricity": "Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive ps table (pl_refname HELLIER_ET_AL__2019): e 0",
+   "phase": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2459037.77335 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

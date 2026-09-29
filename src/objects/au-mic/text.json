@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "au-mic",
+  "card": {
+    "text": "2 planets cross AU Mic as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450047",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+        "label": "Mallorquín et al. (2024), Astronomy & Astrophysics 689 A132",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MALLORQUIN_ET_AL_2024): st_teff 3540, st_rad 0.862, st_mass 0.635"
+      },
+      {
+        "catalogueId": "wikipedia-au-microscopii",
+        "url": "https://en.wikipedia.org/wiki/AU_Microscopii",
+        "label": "Wikipedia, \"AU Microscopii\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1376711247",
+        "quote": "AU Microscopii is a young red dwarf star located 31.7 light-years away – about 8 times as far as the closest star after the Sun."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mallorquín et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450047",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+        "label": "Mallorquín et al. (2024), Astronomy & Astrophysics 689 A132",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MALLORQUIN_ET_AL_2024): st_teff 3540, st_rad 0.862, st_mass 0.635"
+      },
+      {
+        "catalogueId": "wikipedia-au-microscopii",
+        "url": "https://en.wikipedia.org/wiki/AU_Microscopii",
+        "label": "Wikipedia, \"AU Microscopii\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1376711247",
+        "quote": "The apparent visual magnitude of AU Microscopii is 8.73, which is too dim to be seen with the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

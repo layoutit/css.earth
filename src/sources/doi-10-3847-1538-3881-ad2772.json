@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-3881-ad2772",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Peluso et al. (2024): Confirming the Warm and Dense Sub-Saturn TIC 139270665 b with the Automated Planet Finder and Unistellar Citizen Science Network",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad2772"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....167..170P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Peluso et al. (2024), The Astronomical Journal 167 170",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P"
+    }
+  ],
+  "publisher": "The Astronomical Journal 167 170",
+  "creators": [
+    "Daniel O’Conner Peluso",
+    "Paul A. Dalba",
+    "Duncan Wright",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

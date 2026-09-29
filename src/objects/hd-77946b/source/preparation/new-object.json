@@ -1,0 +1,24 @@
+{
+  "host": "hd-77946",
+  "planets": [
+    {
+      "id": "hd-77946b",
+      "name": "HD 77946 b",
+      "description": "Transiting planet of HD 77946 with a 6.53-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HD 77946 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 77946. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.527282, pl_radj 0.25840541, pl_bmassj 0.03429524"
+      },
+      "order": 3234
+    }
+  ]
+}

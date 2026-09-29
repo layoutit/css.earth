@@ -1,0 +1,30 @@
+{
+ "id": "toi-905",
+ "classification": "star",
+ "order": 4745,
+ "physical": {
+  "name": "TOI-905",
+  "horizonsCode": null,
+  "meanRadiusKm": 638652.6,
+  "gravitationalParameterKm3PerS2": 128465641960.59732,
+  "parent": null,
+  "effectiveTemperatureK": 5570
+ },
+ "physicalNotes": "Radius 0.918 +/- 0.038 solar radii from Davis et al. 2020, the stellar radius of the default parameter set of TOI-905 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract): 638,653 km at 695,700 km per solar radius. Mass 0.968 +/- 0.061 solar masses from Davis et al. 2020, the stellar mass of the default parameter set of TOI-905 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract); GM is that mass times the JPL solar GM. Temperature 5570 +/- 150 K from Davis et al. 2020, the stellar temperature of the default parameter set of TOI-905 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 227.65866390370456,
+  "declinationDegrees": -71.36163735973503,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 157.1693312968411,
+  "properMotionRaMasPerYear": -25.998979679628857,
+  "properMotionDecMasPerYear": -41.0569369859991,
+  "radialVelocityKmPerS": 41.989452,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5795534040654879744 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-905/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.3626 +/- 0.0132 mas (same row, RUWE 0.83): 157.17 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -25.999, -41.057 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 41.99 +/- 0.44 km/s"
+  }
+ }
+}

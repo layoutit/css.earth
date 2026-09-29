@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-102e",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-102 e",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 13840.5
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-102e-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-102 e",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 22294652.4,
+      "description": "Kepler-102 e was found in 2013 by Kepler as it crossed its star.",
+      "systemName": "Kepler-102 system",
+      "order": 3653,
+      "context": {
+        "order": 3653
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        451034649083353100,
+        -2220419804605823200,
+        2447463925606087000
+      ],
+      "presentationToReference": [
+        0.14398714517323427,
+        -0.9787380910554423,
+        -0.14608029005314366,
+        -0.6639407574675342,
+        -0.20500914475683643,
+        0.7191341468318044,
+        0.7337917774125702,
+        0.006557414369939688,
+        0.6793427910256221
+      ],
+      "orbitUpReference": [
+        0.9787380910554423,
+        0.20500914475683643,
+        -0.006557414369939688
+      ],
+      "metersPerUnit": 44646.77419354839,
+      "bodyRadiusM": 13840500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-1422",
+  "name": "TOI-1422",
+  "system": "TOI-1422 system",
+  "description": "Star of 5,811 K, 155 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1422",
+  "gaia": "1920333449169516288",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N/abstract",
+    "credit": "Naponiello et al. 2026"
+  },
+  "radius": {
+    "value": 1.0235,
+    "source": "MacDougall et al. 2023, the stellar radius of TOI-1422 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0183
+  },
+  "mass": {
+    "value": 0.9903,
+    "source": "MacDougall et al. 2023, the stellar mass of TOI-1422 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0358
+  },
+  "temperature": {
+    "value": 5811,
+    "source": "MacDougall et al. 2023, the stellar temperature of TOI-1422 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 82
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1422 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5811, st_rad 1.0235, st_mass 0.9903"
+  },
+  "notes": [],
+  "order": 4027
+}

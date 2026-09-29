@@ -51,7 +51,7 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     throw new TypeError(`${id} has a cyclic orbit chain.`);
   };
   const rootIds = points.map(point => rootOf(point.id));
-  const roots = [...new Set([plan.focus.id, ...rootIds.filter((id, index) => id !== points[index]!.id)])];
+  const roots = [...new Set([plan.focus.id, ...rootIds.filter((id, index) => id !== points[index]!.id)])], rootSet = new Set(roots);
   const positions = roots.map(id => byId.get(id)!.positionM);
   const rootIndex = rootIds.map(id => roots.indexOf(id));
   const values = new Float64Array(roots.length);
@@ -75,7 +75,8 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     /** The opacity of the system the indexed context point belongs to; a star outside every system is never faded. */
     of(pointIndex: number) { const root = rootIndex[pointIndex]!; return root < 0 ? 1 : values[root]!; },
     /** A system's star: the focus or a placed star that bodies orbit. */
-    isSystemStar(id: string) { return roots.includes(id); },
+    // A set: the planner asks this several times per body per frame, and a scan grew with systems times bodies.
+    isSystemStar(id: string) { return rootSet.has(id); },
     /** The indexed point belongs to a system this camera still draws; a star outside every system never does. */
     inShownSystem(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && values[root]! > 0; },
     /** The indexed point belongs to the focus star's own system. */

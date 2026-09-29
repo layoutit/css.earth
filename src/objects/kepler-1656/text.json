@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-1656",
+  "card": {
+    "text": "Kepler-1656 b crosses Kepler-1656 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac6094",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract",
+        "label": "Angelo et al. (2022), The Astronomical Journal 163 227",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019, ANGELO_ET_AL__2022): st_teff 5696, st_rad 1.1, st_mass 1.03"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius follows Angelo et al. 2022, and its temperature TICv8.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac6094",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract",
+        "label": "Angelo et al. (2022), The Astronomical Journal 163 227",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019, ANGELO_ET_AL__2022): st_teff 5696, st_rad 1.1, st_mass 1.03"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

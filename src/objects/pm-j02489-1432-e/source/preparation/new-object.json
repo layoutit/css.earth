@@ -1,0 +1,40 @@
+{
+  "id": "pm-j02489-1432-e",
+  "name": "PM J02489-1432E",
+  "system": "TOI-1201 system",
+  "description": "Star bound to TOI-1201, 314 AU away.",
+  "gaia": "5157183324996789760",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.447,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 29960109 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.443,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 29960109 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3450,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 29960109 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "PM J02489-1432E is a star of 3,450 K, bound to TOI-1201 314 AU away.",
+    "introduction": "PM J02489-1432E shares its motion through space with TOI-1201, 314 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 5157183324996790272 and 5157183324996789760, sep_AU 314.411232014184748, R_chance_align 1.371087568802774837e-07"
+  },
+  "notes": [
+    "PM J02489-1432E's orbit around TOI-1201 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 3946
+}

@@ -1,0 +1,32 @@
+{
+  "id": "toi-5486",
+  "name": "TOI-5486",
+  "system": "TOI-5486 system",
+  "description": "Star of 3,750 K, 89.7 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5486",
+  "gaia": "3704041819694603904",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.553216,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-5486 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 3750.17,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-5486 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5486 b crosses TOI-5486 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 3750.17, st_rad 0.553216"
+  },
+  "notes": [],
+  "order": 4524
+}

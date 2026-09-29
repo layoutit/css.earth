@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-715b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.07 Jupiter radii from Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.635 Jupiter masses: Venner et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....172..162V), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): P 56.4 d; Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): a/R* 28.9; Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): inclination 88.91 degrees; Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): e 0.21; Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): omega 196 degrees; Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): transit mid-time 2460231.5482 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3830 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract"
+      ]
+    }
+  ]
+}

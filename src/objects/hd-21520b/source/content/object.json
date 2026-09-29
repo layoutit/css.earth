@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-21520b",
+  "displayName": "HD 21520 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.7 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N",
+          "label": "Nies et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "25.1 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N",
+          "label": "Nies et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 18 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae2079",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N",
+          "label": "Nies et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 21520; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-21520b-lens-shape.webp",
+        "surface": "hd-21520b-surface-shape@2x.webp",
+        "poles": "hd-21520b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-21520b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 21520 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-21520's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-21520b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-21520b/hd-21520b-system-orbits.svg",
+      "alt": "The orbits of HD 21520's planets in this map from above, to scale, with HD 21520 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-21520b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N"
+      }
+    },
+    {
+      "id": "hd-21520b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-21520b/hd-21520b-transit.svg",
+      "alt": "HD 21520 b crossing its star, as TESS recorded it: 3 sectors (97, 105, 106) of the SPOC pipeline's 2-minute light curves of TIC 404518509, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 30 minutes at these dates, then averaged in 20-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-21520b-tess-sector-97",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025258001959-s0097-0000000404518509-0294-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Nies et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+      "credit": "Nies et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-21520b.json",
+      "credit": "Radius from Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive; mass from Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive; orbit from Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive"
+    }
+  }
+}

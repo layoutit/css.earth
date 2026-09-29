@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-912b",
+  "radiusKm": 12309.7,
+  "radiusSource": "Radius 0.17218336 Jupiter radii from Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract): 12,309.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01604639 Jupiter masses (Lacedelli et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...705A.260L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.67806593172,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.67806593172 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-912 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01604639 Jupiter masses: Lacedelli et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...705A.260L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)."
+}

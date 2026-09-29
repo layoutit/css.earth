@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hat-p-3-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-3B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 196883.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-3-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-3B",
+      "classification": "star",
+      "color": "#ffc180",
+      "distanceAu": 28322214.7,
+      "description": "HAT-P-3B is a star of 3,300 K, bound to HAT-P-3 1,321 AU away.",
+      "systemName": "HAT-P-3 system",
+      "order": 3047,
+      "context": {
+        "order": 3044
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2544677667381080600,
+        -1246489662110698800,
+        3150010343334409700
+      ],
+      "presentationToReference": [
+        -0.6005920265326686,
+        -0.6676645176951715,
+        -0.439901477010769,
+        -0.29419512019597255,
+        -0.3270512814983214,
+        0.8980460403137374,
+        0.7434638181635065,
+        -0.6687761591752353,
+        -7.489012660676417e-7
+      ],
+      "orbitUpReference": [
+        0.6676645176951715,
+        0.3270512814983214,
+        0.6687761591752353
+      ],
+      "metersPerUnit": 635106.7741935484,
+      "bodyRadiusM": 196883100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

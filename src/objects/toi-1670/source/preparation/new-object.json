@@ -1,0 +1,39 @@
+{
+  "id": "toi-1670",
+  "name": "TOI-1670",
+  "system": "TOI-1670 system",
+  "description": "Star of 6,170 K, 168 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1670",
+  "gaia": "1651911084230149248",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract",
+    "credit": "Tran et al. 2022"
+  },
+  "radius": {
+    "value": 1.316,
+    "source": "Tran et al. 2022, the stellar radius of the default parameter set of TOI-1670 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract",
+    "uncertainty": 0.019
+  },
+  "mass": {
+    "value": 1.21,
+    "source": "Tran et al. 2022, the stellar mass of the default parameter set of TOI-1670 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 6170,
+    "source": "Tran et al. 2022, the stellar temperature of the default parameter set of TOI-1670 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract",
+    "uncertainty": 61
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1670 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Tran et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TRAN_ET_AL_2022): st_teff 6170, st_rad 1.316, st_mass 1.21"
+  },
+  "notes": [],
+  "order": 4080
+}

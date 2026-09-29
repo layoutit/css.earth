@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "qatar-1b",
+  "card": {
+    "text": "Qatar-1 b was found in 2010 by Qatar as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-153-2-78",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+        "label": "Collins et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COLLINS_ET_AL__2017): disc_year 2010, disc_facility Qatar, sy_pnum 1; pl_orbper 1.420024291, pl_radj 1.143, pl_bmassj 1.294"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Qatar-1. Its orbit and size follow Collins et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-153-2-78",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+        "label": "Collins et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COLLINS_ET_AL__2017): disc_year 2010, disc_facility Qatar, sy_pnum 1; pl_orbper 1.420024291, pl_radj 1.143, pl_bmassj 1.294"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

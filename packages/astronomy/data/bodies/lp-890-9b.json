@@ -1,0 +1,28 @@
+{
+ "id": "lp-890-9b",
+ "classification": "exoplanet",
+ "order": 3830,
+ "physical": {
+  "name": "LP 890-9 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8419.1,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "lp-890-9"
+ },
+ "physicalNotes": "Radius 0.11776272 Jupiter radii from Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract): 8,419.1 km at 71,492 km per Jupiter radius. No mass is measured: Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract) gives only an upper limit of 0.04153184 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.7299025,
+  "semiMajorAxisStellarRadii": 26.32,
+  "inclinationDegrees": 89.67,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59447.32637,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): P 2.7299025 d",
+   "shape": "Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): a/R* 26.32; Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): inclination 89.67 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): transit mid-time 2459447.82637 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

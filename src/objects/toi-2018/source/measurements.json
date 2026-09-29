@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-2018",
+  "angularDiameterMas": 0.21,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 431,334 km at 28.04 pc = 0.21 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 28.03760047136383,
+  "distanceSource": "Gaia DR3 parallax 35.6664 +/- 0.0146 mas (same row, RUWE 1.23): 28.04 pc, no zero-point correction",
+  "radiusKm": 431334,
+  "radiusSource": "Radius 0.62 +/- 0.01 solar radii from Dai et al. 2023, the stellar radius of the default parameter set of TOI-2018 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract): 431,334 km at 695,700 km per solar radius. Mass 0.57 +/- 0.02 solar masses from Dai et al. 2023, the stellar mass of the default parameter set of TOI-2018 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract); GM is that mass times the JPL solar GM. Temperature 4174 +/- 34 K from Dai et al. 2023, the stellar temperature of the default parameter set of TOI-2018 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4174,
+  "effectiveTemperatureSource": "Dai et al. 2023, the stellar temperature of the default parameter set of TOI-2018 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
+  "surfaceGravityLogg": 4.61,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2018.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.609, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

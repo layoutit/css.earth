@@ -1,0 +1,39 @@
+{
+  "id": "hd-23472",
+  "name": "HD 23472",
+  "system": "HD 23472 system",
+  "description": "Star of 4,684 K, 39 parsecs away, with 5 transiting planets.",
+  "target": "HD 23472",
+  "gaia": "4674216245427964416",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+    "credit": "Barros et al. 2022"
+  },
+  "radius": {
+    "value": 0.71,
+    "source": "Barros et al. 2022, the stellar radius of the default parameter set of HD 23472 d in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.67,
+    "source": "Barros et al. 2022, the stellar mass of the default parameter set of HD 23472 d in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 4684,
+    "source": "Barros et al. 2022, the stellar temperature of the default parameter set of HD 23472 d in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+    "uncertainty": 99
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "5 planets cross HD 23472 as seen from Earth: b, c, d, e, f.",
+    "introduction": "Its radius and temperature follow Barros et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARROS_ET_AL_2022): st_teff 4684, st_rad 0.71, st_mass 0.67"
+  },
+  "notes": [],
+  "order": 3200
+}

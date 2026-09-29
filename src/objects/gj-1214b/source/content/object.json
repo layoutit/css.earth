@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-1214b",
+  "displayName": "GJ 1214 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.7 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad29f3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
+          "label": "Mahajan et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "38 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad29f3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
+          "label": "Mahajan et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "8.4 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad29f3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
+          "label": "Mahajan et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by GJ 1214; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gj-1214b-lens-shape.webp",
+        "surface": "gj-1214b-surface-shape@2x.webp",
+        "poles": "gj-1214b-poles-shape@2x.webp",
+        "source": {
+          "id": "gj-1214b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of GJ 1214 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-1214's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "gj-1214b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gj-1214b/gj-1214b-system-orbits.svg",
+      "alt": "The orbits of GJ 1214's planets in this map from above, to scale, with GJ 1214 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gj-1214b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M"
+      }
+    },
+    {
+      "id": "gj-1214b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/gj-1214b/gj-1214b-transmission.svg",
+      "alt": "GJ 1214 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 22 measured bins from Kreidberg et al. 2014 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "gj-1214b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014Natur.505...69K/abstract"
+      }
+    },
+    {
+      "id": "gj-1214b-emission",
+      "titleKey": "emissionSpectrum",
+      "src": "/scenes/gj-1214b/gj-1214b-emission.svg",
+      "alt": "GJ 1214 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 14 measured bins from Kempton et al. 2023 (NASA 6.5m James Webb Space Telescope (JWST) Satellite Mission, Mid-Infrared Instrument (MIRI) - LRS), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "gj-1214b-archive-emission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023arXiv230506240K/abstract"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mahajan et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract",
+      "credit": "Mahajan et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-1214b.json",
+      "credit": "Radius from Mahajan et al. 2024 (2024ApJ...963L..37M), via the NASA Exoplanet Archive; mass from Mahajan et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...963L..37M), via the NASA Exoplanet Archive; orbit from Mahajan et al. 2024 (2024ApJ...963L..37M), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-5678b",
+  "radiusKm": 31316.5,
+  "radiusSource": "Radius 0.43804161 Jupiter radii from Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract): 31,316.5 km at 71,492 km per Jupiter radius. GM from the mass 0.06292704 Jupiter masses (Ulmer-Moll et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...674A..43U), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 47.73022,
+  "orbitalPeriodSource": "Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): P 47.73022 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-5678 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.06292704 Jupiter masses: Ulmer-Moll et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...674A..43U), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)."
+}

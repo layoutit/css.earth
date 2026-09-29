@@ -1,0 +1,30 @@
+{
+ "id": "epic-211945201",
+ "classification": "star",
+ "order": 3066,
+ "physical": {
+  "name": "EPIC 211945201",
+  "horizonsCode": null,
+  "meanRadiusKm": 967023,
+  "gravitationalParameterKm3PerS2": 155273554849.06906,
+  "parent": null,
+  "effectiveTemperatureK": 6069
+ },
+ "physicalNotes": "Radius 1.39 +/- 0.02 solar radii from Livingston et al. 2018, the stellar radius of the default parameter set of EPIC 211945201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract): 967,023 km at 695,700 km per solar radius. Mass 1.17 +/- 0.04 solar masses from Livingston et al. 2018, the stellar mass of the default parameter set of EPIC 211945201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract); GM is that mass times the JPL solar GM. Temperature 6069 +/- 90 K from Livingston et al. 2018, the stellar temperature of the default parameter set of EPIC 211945201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 136.5741998168127,
+  "declinationDegrees": 19.402050777548748,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 180.79653101775872,
+  "properMotionRaMasPerYear": 45.45909786767152,
+  "properMotionDecMasPerYear": -41.73512427543154,
+  "radialVelocityKmPerS": 0.47625482,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 636363799347569408 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/epic-211945201/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.5311 +/- 0.0170 mas (same row, RUWE 1.10): 180.80 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 45.459, -41.735 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 0.48 +/- 0.27 km/s"
+  }
+ }
+}

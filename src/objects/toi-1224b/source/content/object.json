@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-1224b",
+  "displayName": "TOI-1224 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.1 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T",
+          "label": "Thao et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.18 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4993",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T",
+          "label": "Thao et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "5.1 Earth masses (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-1224; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-1224b-lens-shape.webp",
+        "surface": "toi-1224b-surface-shape@2x.webp",
+        "poles": "toi-1224b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-1224b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-1224 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1224's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-1224b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-1224b/toi-1224b-system-orbits.svg",
+      "alt": "The orbits of TOI-1224's planets in this map from above, to scale, with TOI-1224 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-1224b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T"
+      }
+    },
+    {
+      "id": "toi-1224b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-1224b/toi-1224b-transit.svg",
+      "alt": "TOI-1224 b crossing its star, as TESS recorded it: 3 sectors (68, 93, 95) of the SPOC pipeline's 2-minute light curves of TIC 299798795, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 6 minutes at these dates, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-1224b-tess-sector-68",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023209231226-s0068-0000000299798795-0262-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Thao et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+      "credit": "Thao et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-1224b.json",
+      "credit": "Radius from Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive"
+    }
+  }
+}

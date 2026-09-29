@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gliese-12b",
+  "card": {
+    "text": "Gliese 12 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1703",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract",
+        "label": "Turner et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TURNER_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 12.761418, pl_radj 0.08296919, pl_bmassj 0.00298903"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Gliese 12. Its orbit and size follow Turner et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1703",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract",
+        "label": "Turner et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TURNER_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 12.761418, pl_radj 0.08296919, pl_bmassj 0.00298903"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

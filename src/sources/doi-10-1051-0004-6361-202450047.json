@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202450047",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mallorquín et al. (2024): Revisiting the dynamical masses of the transiting planets in the young AU Mic system: Potential AU Mic b inflation at ~20 Myr",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2407.16461"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202450047"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...689A.132M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202450047",
+      "label": "Astronomy & Astrophysics 689 A132"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mallorquín et al. (2024), Astronomy & Astrophysics 689 A132",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 689 A132",
+  "creators": [
+    "M. Mallorquín",
+    "V. J. S. Béjar",
+    "N. Lodieu",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

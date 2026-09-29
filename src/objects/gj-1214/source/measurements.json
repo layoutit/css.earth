@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-1214",
+  "angularDiameterMas": 0.14,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 150,410 km at 14.64 pc = 0.14 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 14.641578284118195,
+  "distanceSource": "Gaia DR3 parallax 68.2986 +/- 0.0652 mas (same row, RUWE 1.01): 14.64 pc, no zero-point correction",
+  "radiusKm": 150410.3,
+  "radiusSource": "Radius 0.2162 +/- 0.0025 solar radii from Mahajan et al. 2024, the stellar radius of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract): 150,410 km at 695,700 km per solar radius. Mass 0.182 +/- 0.0042 solar masses from Mahajan et al. 2024, the stellar mass of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract); GM is that mass times the JPL solar GM. Temperature 3101 +/- 43 K from Mahajan et al. 2024, the stellar temperature of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3101,
+  "effectiveTemperatureSource": "Mahajan et al. 2024, the stellar temperature of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract)",
+  "surfaceGravityLogg": 5.03,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-1214.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.028, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

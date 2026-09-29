@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-71",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 296,368 km at 154.32 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 154.31640817275607,
+  "distanceSource": "Gaia DR3 parallax 6.4802 +/- 0.0317 mas (same row, RUWE 1.07): 154.32 pc, no zero-point correction",
+  "radiusKm": 296368.2,
+  "radiusSource": "Radius 0.426 +/- 0.049 solar radii from Crossfield et al. 2016, the stellar radius of the default parameter set of K2-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract): 296,368 km at 695,700 km per solar radius. Mass 0.477 +/- 0.063 solar masses from Crossfield et al. 2016, the stellar mass of the default parameter set of K2-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract); GM is that mass times the JPL solar GM. Temperature 4006 +/- 133 K from Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4006,
+  "effectiveTemperatureSource": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract)",
+  "surfaceGravityLogg": 4.86,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-71.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.858, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

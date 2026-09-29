@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive emissionspec, Kempton et al. 2023",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "NASA 6.5m James Webb Space Telescope (JWST) Satellite Mission, Mid-Infrared Instrument (MIRI) - LRS",
+  "measurements": [
+    {
+      "x": 5.25,
+      "xLow": 5,
+      "xHigh": 5.5,
+      "y": 0.0134,
+      "minus": 0.0028,
+      "plus": 0.003
+    },
+    {
+      "x": 5.75,
+      "xLow": 5.5,
+      "xHigh": 6,
+      "y": 0.0184,
+      "minus": 0.0031,
+      "plus": 0.003
+    },
+    {
+      "x": 6.25,
+      "xLow": 6,
+      "xHigh": 6.5,
+      "y": 0.0228,
+      "minus": 0.0029,
+      "plus": 0.003
+    },
+    {
+      "x": 6.75,
+      "xLow": 6.5,
+      "xHigh": 7,
+      "y": 0.0241,
+      "minus": 0.0033,
+      "plus": 0.0033
+    },
+    {
+      "x": 7.25,
+      "xLow": 7,
+      "xHigh": 7.5,
+      "y": 0.0324,
+      "minus": 0.0039,
+      "plus": 0.0039
+    },
+    {
+      "x": 7.75,
+      "xLow": 7.5,
+      "xHigh": 8,
+      "y": 0.0426,
+      "minus": 0.0041,
+      "plus": 0.0046
+    },
+    {
+      "x": 8.25,
+      "xLow": 8,
+      "xHigh": 8.5,
+      "y": 0.0474,
+      "minus": 0.004,
+      "plus": 0.0039
+    },
+    {
+      "x": 8.75,
+      "xLow": 8.5,
+      "xHigh": 9,
+      "y": 0.0631,
+      "minus": 0.0047,
+      "plus": 0.0045
+    },
+    {
+      "x": 9.25,
+      "xLow": 9,
+      "xHigh": 9.5,
+      "y": 0.0604,
+      "minus": 0.0049,
+      "plus": 0.0049
+    },
+    {
+      "x": 9.75,
+      "xLow": 9.5,
+      "xHigh": 10,
+      "y": 0.0758,
+      "minus": 0.0057,
+      "plus": 0.0057
+    },
+    {
+      "x": 10.25,
+      "xLow": 10,
+      "xHigh": 10.5,
+      "y": 0.0881,
+      "minus": 0.007,
+      "plus": 0.0069
+    },
+    {
+      "x": 10.75,
+      "xLow": 10.5,
+      "xHigh": 11,
+      "y": 0.0962,
+      "minus": 0.0083,
+      "plus": 0.0083
+    },
+    {
+      "x": 11.25,
+      "xLow": 11,
+      "xHigh": 11.5,
+      "y": 0.1174,
+      "minus": 0.0114,
+      "plus": 0.011
+    },
+    {
+      "x": 11.75,
+      "xLow": 11.5,
+      "xHigh": 12,
+      "y": 0.118,
+      "minus": 0.015,
+      "plus": 0.0148
+    }
+  ]
+}

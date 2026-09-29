@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-270d",
+  "radiusKm": 12756.2,
+  "radiusSource": "Radius 0.17842836 Jupiter radii from Kaye et al. 2022 (2022MNRAS.510.5464K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract): 12,756.2 km at 71,492 km per Jupiter radius. GM from the mass 0.01321468 Jupiter masses (Kaye et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.510.5464K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 11.37969912166,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.37969912166 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-270 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01321468 Jupiter masses: Kaye et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.510.5464K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract)."
+}

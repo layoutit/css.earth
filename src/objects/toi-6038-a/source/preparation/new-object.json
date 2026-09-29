@@ -1,0 +1,39 @@
+{
+  "id": "toi-6038-a",
+  "name": "TOI-6038 A",
+  "system": "TOI-6038 system",
+  "description": "Star of 6,110 K, 179 parsecs away, with 1 transiting planet.",
+  "target": "TOI-6038 A",
+  "gaia": "237640407346340736",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+    "credit": "Baliwal et al. 2025"
+  },
+  "radius": {
+    "value": 1.648,
+    "source": "Baliwal et al. 2025, the stellar radius of the default parameter set of TOI-6038 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+    "uncertainty": 0.045
+  },
+  "mass": {
+    "value": 1.291,
+    "source": "Baliwal et al. 2025, the stellar mass of the default parameter set of TOI-6038 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+    "uncertainty": 0.066
+  },
+  "temperature": {
+    "value": 6110,
+    "source": "Baliwal et al. 2025, the stellar temperature of the default parameter set of TOI-6038 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-6038 A b crosses TOI-6038 A as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Baliwal et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BALIWAL_ET_AL_2025): st_teff 6110, st_rad 1.648, st_mass 1.291"
+  },
+  "notes": [],
+  "order": 4603
+}

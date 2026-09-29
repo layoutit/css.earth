@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { compare, tolerances } from './compare.mts';
 import { cases, parseCase, vector, assertQueryCoverage, queryGrid } from './cases.mts';
 import { readPointing, camera } from './candidate.mts';
-import { verifyOracleBytes, readOracleFixture, ORACLE_ROOT } from '../fixture.mts';
+import { verifyOracleBytes, readOracleFixture, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { pin } from './runtime.mts';
 import { nativeArray, call, construct } from './java.mts';
 

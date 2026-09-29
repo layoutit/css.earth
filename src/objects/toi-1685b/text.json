@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1685b",
+  "card": {
+    "text": "TOI-1685 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202453325",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract",
+        "label": "Egger et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname EGGER_ET_AL__2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.66913856, pl_radj 0.12677335, pl_bmassj 0.0096593"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1685-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1685_b",
+        "label": "Wikipedia, \"TOI-1685 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086968",
+        "quote": "TOI-1685 b is a terrestrial super-Earth that orbits around the red dwarf star TOI-1685 which is located around 122.6 light years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1685. Its orbit and size follow Egger et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202453325",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract",
+        "label": "Egger et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname EGGER_ET_AL__2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.66913856, pl_radj 0.12677335, pl_bmassj 0.0096593"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1685-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1685_b",
+        "label": "Wikipedia, \"TOI-1685 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086968",
+        "quote": "It is a hot and barren planet with a mass of about 3 Earths and a radius of 1.4 Earths."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

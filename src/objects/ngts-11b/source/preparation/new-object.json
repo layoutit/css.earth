@@ -1,0 +1,24 @@
+{
+  "host": "ngts-11",
+  "planets": [
+    {
+      "id": "ngts-11b",
+      "name": "NGTS-11 b",
+      "description": "Transiting planet of NGTS-11 with a 35.5-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+        "credit": "Gill et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GILL_ET_AL__2020"
+      },
+      "text": {
+        "card": "NGTS-11 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around NGTS-11. Its orbit and size follow Gill et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILL_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 35.455984, pl_radj 0.817, pl_bmassj 0.344"
+      },
+      "order": 3845
+    }
+  ]
+}

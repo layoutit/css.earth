@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-1538-3873-128-964-064401",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Turner et al. (2016): WASP-120 b, WASP-122 b, and WASP-123 b: Three Newly Discovered Planets from the WASP-South Survey",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1509.02210"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/1538-3873/128/964/064401"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016PASP..128f4401T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/1538-3873/128/964/064401",
+      "label": "Publications of the Astronomical Society of the Pacific 128 064401"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Turner et al. (2016), Publications of the Astronomical Society of the Pacific 128 064401",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of the Pacific 128 064401",
+  "creators": [
+    "O. D. Turner",
+    "D. R. Anderson",
+    "A. Collier Cameron",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

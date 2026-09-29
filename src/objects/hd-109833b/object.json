@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-109833b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 109833 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 18420
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-109833b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 109833 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 16411190.2,
+      "description": "HD 109833 b was found in 2022 by TESS as it crossed its star.",
+      "systemName": "HD 109833 system",
+      "order": 3150,
+      "context": {
+        "order": 3150
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -643552349853168400,
+        -110874756165464580,
+        -2366634862147148000
+      ],
+      "presentationToReference": [
+        -0.2564502700335172,
+        -0.17825723258420156,
+        -0.9499776934387238,
+        -0.0772979352730491,
+        0.9834809913890863,
+        -0.16367702581261528,
+        -0.9634616173996033,
+        -0.031456296790338796,
+        0.2659928818408088
+      ],
+      "orbitUpReference": [
+        0.17825723258420156,
+        -0.9834809913890863,
+        0.031456296790338796
+      ],
+      "metersPerUnit": 59419.354838709674,
+      "bodyRadiusM": 18420000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

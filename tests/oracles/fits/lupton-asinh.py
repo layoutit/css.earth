@@ -9,7 +9,7 @@ import astropy
 from astropy.io import fits
 from astropy.visualization import make_lupton_rgb
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT, write
 
 rng = np.random.default_rng(20260916)

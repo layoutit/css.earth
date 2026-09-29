@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201424752",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Smith et al. (2014): WASP-104b and WASP-106b: two transiting hot Jupiters in 1.75-day and 9.3-day orbits",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1408.0887"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201424752"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014A&A...570A..64S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201424752",
+      "label": "Astronomy & Astrophysics 570 A64"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Smith et al. (2014), Astronomy & Astrophysics 570 A64",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 570 A64",
+  "creators": [
+    "A. M. S. Smith",
+    "D. R. Anderson",
+    "D. J. Armstrong",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

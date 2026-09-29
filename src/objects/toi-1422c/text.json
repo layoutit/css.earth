@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1422c",
+  "card": {
+    "text": "TOI-1422 c was found in 2025 by Roque de los Muchachos Observatory as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf2030",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N/abstract",
+        "label": "Naponiello et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2026): disc_year 2025, disc_facility Roque de los Muchachos Observatory, sy_pnum 2; pl_orbper 34.5633, pl_radj 0.232849, pl_bmassj 0.04404893"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1422. Its orbit and size follow Naponiello et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf2030",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N/abstract",
+        "label": "Naponiello et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2026): disc_year 2025, disc_facility Roque de los Muchachos Observatory, sy_pnum 2; pl_orbper 34.5633, pl_radj 0.232849, pl_bmassj 0.04404893"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

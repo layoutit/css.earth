@@ -1,0 +1,24 @@
+{
+  "host": "hats-75",
+  "planets": [
+    {
+      "id": "hats-75b",
+      "name": "HATS-75 b",
+      "description": "Transiting planet of HATS-75 with a 2.79-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract",
+        "credit": "Jordán et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "JORD_AACUTE_N_ET_AL__2022"
+      },
+      "text": {
+        "card": "HATS-75 b was found in 2021 by HATSouth as it crossed its star.",
+        "introduction": "It is the only planet known around HATS-75. Its orbit and size follow Jordán et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JORD_AACUTE_N_ET_AL__2022): disc_year 2021, disc_facility HATSouth, sy_pnum 1; pl_orbper 2.7886556, pl_radj 0.884, pl_bmassj 0.491"
+      },
+      "order": 3140
+    }
+  ]
+}

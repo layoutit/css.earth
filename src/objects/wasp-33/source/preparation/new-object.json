@@ -1,0 +1,46 @@
+{
+  "id": "wasp-33",
+  "name": "WASP-33",
+  "system": "WASP-33 system",
+  "description": "Star of 7,430 K, 122 parsecs away, with 1 transiting planet.",
+  "target": "WASP-33",
+  "gaia": "328636019723252096",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "credit": "Chakrabarty & Sengupta 2019"
+  },
+  "radius": {
+    "value": 1.444,
+    "source": "Chakrabarty & Sengupta 2019, the stellar radius of the default parameter set of WASP-33 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "uncertainty": 0.034
+  },
+  "mass": {
+    "value": 1.495,
+    "source": "Chakrabarty & Sengupta 2019, the stellar mass of the default parameter set of WASP-33 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "uncertainty": 0.031
+  },
+  "temperature": {
+    "value": 7430,
+    "source": "Chakrabarty & Sengupta 2019, the stellar temperature of the default parameter set of WASP-33 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-33 b crosses WASP-33 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Chakrabarty & Sengupta 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 7430, st_rad 1.444, st_mass 1.495",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_15082",
+      "title": "HD 15082",
+      "revision": "1370777457",
+      "card": "A hot Jupiter type extrasolar planet, named WASP-33b or HD 15082b, orbits this star with an orbital period of 1.22 days.",
+      "introduction": "It is the first Delta Scuti variable known to host a planet."
+    }
+  },
+  "notes": [],
+  "order": 4808
+}

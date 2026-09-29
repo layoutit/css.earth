@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-50554",
+  "card": {
+    "text": "HD 50554's planets b, c, d are placed on the orbits their papers measured.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae7deb",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract",
+        "label": "刘 et al. (2026), The Astronomical Journal 172 72",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LIU_ET_AL_2026): st_teff 5968, st_rad 1.146, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-hd-50554",
+        "url": "https://en.wikipedia.org/wiki/HD_50554",
+        "label": "Wikipedia, \"HD 50554\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374435497",
+        "quote": "HD 50554 is a single, Sun-like star with an exoplanetary companion in the northern constellation of Gemini."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Liu et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae7deb",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract",
+        "label": "刘 et al. (2026), The Astronomical Journal 172 72",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LIU_ET_AL_2026): st_teff 5968, st_rad 1.146, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-hd-50554",
+        "url": "https://en.wikipedia.org/wiki/HD_50554",
+        "label": "Wikipedia, \"HD 50554\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374435497",
+        "quote": "It has an apparent visual magnitude of +6.84, which makes it a 7th magnitude star; it is not visible to the naked eye, but can be viewed with binoculars or a telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-411",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-411",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 570474
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-411-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-411",
+      "classification": "star",
+      "color": "#ffd7bc",
+      "distanceAu": 31581114.7,
+      "description": "2 planets cross Kepler-411 as seen from Earth: c, d.",
+      "systemName": "Kepler-411 system",
+      "order": 3745,
+      "context": {
+        "order": 3742
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        927609149601839700,
+        -2923173512939051500,
+        3593771156562593300
+      ],
+      "presentationToReference": [
+        0.19634191108244942,
+        0.23007624627391604,
+        -0.9531604140190654,
+        -0.6187320103587435,
+        -0.7250417051526834,
+        -0.3024652461799823,
+        0.760671120333827,
+        -0.6491374636313897,
+        5.356113022286017e-7
+      ],
+      "orbitUpReference": [
+        -0.23007624627391604,
+        0.7250417051526834,
+        0.6491374636313897
+      ],
+      "metersPerUnit": 1840238.7096774194,
+      "bodyRadiusM": 570474000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

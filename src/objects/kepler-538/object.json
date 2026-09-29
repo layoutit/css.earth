@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-538",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-538",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 606441.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-538-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-538",
+      "classification": "star",
+      "color": "#ffefe7",
+      "distanceAu": 32098289.5,
+      "description": "Kepler-538 b crosses Kepler-538 as seen from Earth, which is how it was found.",
+      "systemName": "Kepler-538 system",
+      "order": 3765,
+      "context": {
+        "order": 3762
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1435690020349618700,
+        -2759544010523513000,
+        3658051077757303000
+      ],
+      "presentationToReference": [
+        0.29898758981226115,
+        0.3516026766909775,
+        -0.8871200476158767,
+        -0.5746849257128225,
+        -0.6758100436100475,
+        -0.4615387536428913,
+        0.7618028992440913,
+        -0.6478088782191285,
+        -0.0000019420246967593002
+      ],
+      "orbitUpReference": [
+        -0.3516026766909775,
+        0.6758100436100475,
+        0.6478088782191285
+      ],
+      "metersPerUnit": 1956263.5483870967,
+      "bodyRadiusM": 606441700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "gj-3090",
+  "name": "GJ 3090",
+  "system": "GJ 3090 system",
+  "description": "Star of 3,707 K, 22.5 parsecs away, with 1 transiting planet.",
+  "target": "GJ 3090",
+  "gaia": "4933912198895807104",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+    "credit": "Lamontagne et al. 2026"
+  },
+  "radius": {
+    "value": 0.516,
+    "source": "Lamontagne et al. 2026, the stellar radius of the default parameter set of GJ 3090 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 0.519,
+    "source": "Lamontagne et al. 2026, the stellar mass of the default parameter set of GJ 3090 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 3707,
+    "source": "Lamontagne et al. 2026, the stellar temperature of the default parameter set of GJ 3090 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract",
+    "uncertainty": 32
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 3090 b crosses GJ 3090 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lamontagne et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAMONTAGNE_ET_AL_2026): st_teff 3707, st_rad 0.516, st_mass 0.519"
+  },
+  "notes": [
+    "GJ 3090 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3082
+}

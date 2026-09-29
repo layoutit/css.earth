@@ -1,0 +1,24 @@
+{
+  "host": "toi-4666",
+  "planets": [
+    {
+      "id": "toi-4666b",
+      "name": "TOI-4666 b",
+      "description": "Transiting planet of TOI-4666 with a 2.91-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+        "credit": "Dransfield et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DRANSFIELD_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-4666 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4666. Its orbit and size follow Dransfield et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRANSFIELD_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.9089168, pl_radj 1.118, pl_bmassj 0.489"
+      },
+      "order": 4460
+    }
+  ]
+}

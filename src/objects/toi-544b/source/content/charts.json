@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-544b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-544b-orbits",
+      "title": "TOI-544 b: orbits around TOI-544",
+      "output": "toi-544b-system-orbits.svg",
+      "system": "toi-544",
+      "highlight": "toi-544b",
+      "description": "The orbits of TOI-544's planets in this map from above, to scale, with TOI-544 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Osborne et al. 2024 (2024MNRAS.52711138O), via the NASA Exoplanet Archive ps table (pl_refname OSBORNE_ET_AL_2024): P 1.548352 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-544b-transit",
+      "title": "TOI-544 b: its transit",
+      "description": "TOI-544 b crossing its star, as TESS recorded it: 3 sectors (6, 32, 98) of the SPOC pipeline's 2-minute light curves of TIC 50618703, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-544b-transit.svg",
+      "metadata": {
+        "tic": "TIC 50618703",
+        "sectors": [
+          6,
+          32,
+          98
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-544b",
+      "sources": [
+        "photometry/tess/tess2018349182500-s0006-0000000050618703-0126-s_lc.fits",
+        "photometry/tess/tess2020324010417-s0032-0000000050618703-0200-s_lc.fits",
+        "photometry/tess/tess2025312202959-s0098-0000000050618703-0298-s_lc.fits"
+      ],
+      "durationHours": 1.21,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 6, 32, 98",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

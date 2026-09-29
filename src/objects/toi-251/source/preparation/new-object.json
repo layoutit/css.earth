@@ -1,0 +1,39 @@
+{
+  "id": "toi-251",
+  "name": "TOI-251",
+  "system": "TOI-251 system",
+  "description": "Star of 5,875 K, 99.5 parsecs away, with 1 transiting planet.",
+  "target": "TOI-251",
+  "gaia": "6539037542941988736",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract",
+    "credit": "Zhou et al. 2021"
+  },
+  "radius": {
+    "value": 0.881,
+    "source": "Zhou et al. 2021, the stellar radius of the default parameter set of TOI-251 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract",
+    "uncertainty": 0.038
+  },
+  "mass": {
+    "value": 1.036,
+    "source": "Zhou et al. 2021, the stellar mass of the default parameter set of TOI-251 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 5875,
+    "source": "Zhou et al. 2021, the stellar temperature of the default parameter set of TOI-251 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-251 b crosses TOI-251 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Zhou et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL__2021): st_teff 5875, st_rad 0.881, st_mass 1.036"
+  },
+  "notes": [],
+  "order": 4322
+}

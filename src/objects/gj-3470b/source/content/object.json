@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-3470b",
+  "displayName": "GJ 3470 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.41 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw2148",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A",
+          "label": "Awiphan et al. 2016",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.34 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw2148",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A",
+          "label": "Awiphan et al. 2016",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.044 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw2148",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A",
+          "label": "Awiphan et al. 2016",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by GJ 3470; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gj-3470b-lens-shape.webp",
+        "surface": "gj-3470b-surface-shape@2x.webp",
+        "poles": "gj-3470b-poles-shape@2x.webp",
+        "source": {
+          "id": "gj-3470b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of GJ 3470 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-3470's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "gj-3470b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gj-3470b/gj-3470b-system-orbits.svg",
+      "alt": "The orbits of GJ 3470's planets in this map from above, to scale, with GJ 3470 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gj-3470b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A"
+      }
+    },
+    {
+      "id": "gj-3470b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/gj-3470b/gj-3470b-transmission.svg",
+      "alt": "GJ 3470 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 28 measured bins from Benneke et al. 2019 (Hubble Space Telescope satellite, Space Telescope Imaging Spectrograph; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "gj-3470b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019NatAs...3..813B/abstract"
+      }
+    },
+    {
+      "id": "gj-3470b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gj-3470b/gj-3470b-transit.svg",
+      "alt": "GJ 3470 b crossing its star, as TESS recorded it: 3 sectors (46, 71, 72) of the SPOC pipeline's 2-minute light curves of TIC 19028197, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gj-3470b-tess-sector-46",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021336043614-s0046-0000000019028197-0217-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Awiphan et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract",
+      "credit": "Awiphan et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-3470b.json",
+      "credit": "Radius from Awiphan et al. 2016 (2016MNRAS.463.2574A), via the NASA Exoplanet Archive; mass from Awiphan et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.463.2574A), via the NASA Exoplanet Archive; orbit from Awiphan et al. 2016 (2016MNRAS.463.2574A), via the NASA Exoplanet Archive"
+    }
+  }
+}

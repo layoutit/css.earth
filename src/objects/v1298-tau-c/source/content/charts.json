@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/v1298-tau-c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "v1298-tau-c-orbits",
+      "title": "V1298 Tau c: orbits around V1298 Tau",
+      "output": "v1298-tau-c-system-orbits.svg",
+      "system": "v1298-tau",
+      "highlight": "v1298-tau-c",
+      "description": "The orbits of V1298 Tau's planets in this map from above, to scale, with V1298 Tau c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Livingston et al. 2026 (2026Natur.649..310L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL_2026): P 8.249164 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "v1298-tau-c-transit",
+      "title": "V1298 Tau c: its transit",
+      "description": "V1298 Tau c crossing its star, as TESS recorded it: 2 sectors (43, 44) of the SPOC pipeline's 2-minute light curves of TIC 15756231, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 5 minutes at these dates, then averaged in 20-minute bins. Error bars are each bin's standard error.",
+      "output": "v1298-tau-c-transit.svg",
+      "metadata": {
+        "tic": "TIC 15756231",
+        "sectors": [
+          43,
+          44
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "v1298-tau-c",
+      "sources": [
+        "photometry/tess/tess2021258175143-s0043-0000000015756231-0214-s_lc.fits",
+        "photometry/tess/tess2021284114741-s0044-0000000015756231-0215-s_lc.fits"
+      ],
+      "durationHours": 4.89,
+      "binMinutes": 20,
+      "alignMinutes": -4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 43, 44",
+        "Aligned on TESS's dip, 4 min early; 20-min bins.",
+        "The ephemeris's own 1σ there is 2 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "host": "hat-p-20",
+  "planets": [
+    {
+      "id": "hat-p-20b",
+      "name": "HAT-P-20 b",
+      "description": "Transiting planet of HAT-P-20 with a 2.88-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+        "credit": "Bakos et al. 2010"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BAKOS_ET_AL__2010"
+      },
+      "text": {
+        "card": "HAT-P-20 b was found in 2010 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around HAT-P-20. Its orbit and size follow Bakos et al. 2010's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BAKOS_ET_AL__2010): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 2.87531773, pl_radj 0.867, pl_bmassj 7.246"
+      },
+      "order": 3123
+    }
+  ]
+}

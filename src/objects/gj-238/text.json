@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-238",
+  "card": {
+    "text": "GJ 238 b crosses GJ 238 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad3df1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+        "label": "Tey et al. (2024), The Astronomical Journal 167 283",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TEY_ET_AL__2024): st_teff 3485, st_rad 0.4314, st_mass 0.4193"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Tey et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad3df1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+        "label": "Tey et al. (2024), The Astronomical Journal 167 283",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TEY_ET_AL__2024): st_teff 3485, st_rad 0.4314, st_mass 0.4193"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

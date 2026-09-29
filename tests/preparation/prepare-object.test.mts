@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import packageJson from '../../package.json' with { type: 'json' };
 import { PREPARATION_STEPS } from '@cssearth/bake/prepare-object';

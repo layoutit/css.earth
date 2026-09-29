@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-4336-a-c",
+  "displayName": "TOI-4336 A c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202558308",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P",
+          "label": "Parc et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "7.59 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202558308",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P",
+          "label": "Parc et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.6 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202558308",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P",
+          "label": "Parc et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-4336; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-4336-a-c-lens-shape.webp",
+        "surface": "toi-4336-a-c-surface-shape@2x.webp",
+        "poles": "toi-4336-a-c-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-4336-a-c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-4336 A c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-4336-a's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-4336-a-c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-4336-a-c/toi-4336-a-c-system-orbits.svg",
+      "alt": "The orbits of TOI-4336 A's planets in this map from above, to scale, with TOI-4336 A c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-4336-a-c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P"
+      }
+    },
+    {
+      "id": "toi-4336-a-c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-4336-a-c/toi-4336-a-c-transit.svg",
+      "alt": "TOI-4336 A c crossing its star, as TESS recorded it: 3 sectors (38, 64, 101) of the SPOC pipeline's 2-minute light curves of TIC 166184428, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-4336-a-c-tess-sector-38",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021118034608-s0038-0000000166184428-0209-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Parc et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract",
+      "credit": "Parc et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-4336-a-c.json",
+      "credit": "Radius from Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive; mass from Parc et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...708A..81P), via the NASA Exoplanet Archive; orbit from Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive"
+    }
+  }
+}

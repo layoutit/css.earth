@@ -1,0 +1,40 @@
+{
+  "host": "wasp-33",
+  "planets": [
+    {
+      "id": "wasp-33b",
+      "name": "WASP-33 b",
+      "description": "Transiting planet of WASP-33 with a 1.22-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "credit": "Chakrabarty & Sengupta 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CHAKRABARTY__AMP__SENGUPTA_2019"
+      },
+      "text": {
+        "card": "WASP-33 b was found in 2010 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-33. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.21987089, pl_radj 1.593, pl_bmassj 2.093",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-33b",
+          "title": "WASP-33b",
+          "revision": "1374243508",
+          "card": "WASP-33b is an extrasolar planet orbiting the star HD 15082.",
+          "introduction": "It was the first transiting planet discovered to orbit a Delta Scuti variable star."
+        }
+      },
+      "thermal": {
+        "temperatureK": 3398,
+        "uncertaintyK": 302,
+        "wavelengthMicrometres": 1.05,
+        "facility": "LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory Large Binocular Camera",
+        "source": "von Essen et al. 2015, dayside brightness temperature at 1.05 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...584A..75V/abstract",
+        "chosen": "1 measured of 111 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 4809
+    }
+  ]
+}

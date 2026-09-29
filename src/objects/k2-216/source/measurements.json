@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-216",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 500,904 km at 115.10 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 115.09556592848554,
+  "distanceSource": "Gaia DR3 parallax 8.6884 +/- 0.0226 mas (same row, RUWE 1.60): 115.10 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 500904,
+  "radiusSource": "Radius 0.72 +/- 0.03 solar radii from Persson et al. 2018, the stellar radius of the default parameter set of K2-216 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract): 500,904 km at 695,700 km per solar radius. Mass 0.7 +/- 0.03 solar masses from Persson et al. 2018, the stellar mass of the default parameter set of K2-216 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract); GM is that mass times the JPL solar GM. Temperature 4503 +/- 69 K from Persson et al. 2018, the stellar temperature of the default parameter set of K2-216 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4503,
+  "effectiveTemperatureSource": "Persson et al. 2018, the stellar temperature of the default parameter set of K2-216 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract)",
+  "surfaceGravityLogg": 4.57,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-216.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.569, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

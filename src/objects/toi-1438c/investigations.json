@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1438c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.24533899 Jupiter radii from Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.03335133 Jupiter masses: Persson et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...702A..69P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): P 9.428089 d; Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): a/R* 21.6; Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): inclination 87.61 degrees; Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): e 0; Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): transit mid-time 2458689.9136 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract"
+      ]
+    }
+  ]
+}

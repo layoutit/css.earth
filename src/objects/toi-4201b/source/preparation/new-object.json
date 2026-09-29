@@ -1,0 +1,24 @@
+{
+  "host": "toi-4201",
+  "planets": [
+    {
+      "id": "toi-4201b",
+      "name": "TOI-4201 b",
+      "description": "Transiting planet of TOI-4201 with a 3.58-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..165G/abstract",
+        "credit": "Gan et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GAN_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-4201 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4201. Its orbit and size follow Gan et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GAN_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.5819134, pl_radj 1.22, pl_bmassj 2.48"
+      },
+      "order": 4388
+    }
+  ]
+}

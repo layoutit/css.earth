@@ -1,0 +1,39 @@
+{
+  "id": "toi-2094",
+  "name": "TOI-2094",
+  "system": "TOI-2094 system",
+  "description": "Star of 3,435 K, 50 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2094",
+  "gaia": "1649377156604531712",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+    "credit": "Jiang et al. 2026"
+  },
+  "radius": {
+    "value": 0.384,
+    "source": "Jiang et al. 2026, the stellar radius of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+    "uncertainty": 0.018
+  },
+  "mass": {
+    "value": 0.425,
+    "source": "Jiang et al. 2026, the stellar mass of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+    "uncertainty": 0.059
+  },
+  "temperature": {
+    "value": 3435,
+    "source": "Jiang et al. 2026, the stellar temperature of the default parameter set of TOI-2094 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+    "uncertainty": 55
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2094 b crosses TOI-2094 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Jiang et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname JIANG_ET_AL_2026): st_teff 3435, st_rad 0.384, st_mass 0.425"
+  },
+  "notes": [],
+  "order": 4242
+}

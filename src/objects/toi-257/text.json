@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-257",
+  "card": {
+    "text": "TOI-257 b crosses TOI-257 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa3960",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+        "label": "Addison et al. (2021), Monthly Notices of the Royal Astronomical Society 502 3704-3722",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2021): st_teff 6095, st_rad 1.867, st_mass 1.407"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Addison et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa3960",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+        "label": "Addison et al. (2021), Monthly Notices of the Royal Astronomical Society 502 3704-3722",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2021): st_teff 6095, st_rad 1.867, st_mass 1.407"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

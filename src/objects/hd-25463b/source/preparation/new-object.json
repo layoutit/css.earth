@@ -1,0 +1,24 @@
+{
+  "host": "hd-25463",
+  "planets": [
+    {
+      "id": "hd-25463b",
+      "name": "HD 25463 b",
+      "description": "Transiting planet of HD 25463 with a 7.05-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HD 25463 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 25463. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 7.049144, pl_radj 0.22708203, pl_bmassj 0.02737326"
+      },
+      "order": 3209
+    }
+  ]
+}

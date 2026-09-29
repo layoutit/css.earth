@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "bd-20-761-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BD-20 761B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 433421.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bd-20-761-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BD-20 761B",
+      "classification": "star",
+      "color": "#ffbe8e",
+      "distanceAu": 24002631.6,
+      "description": "BD-20 761B is a star of 3,968 K, bound to WASP-140 845 AU away.",
+      "systemName": "WASP-140 system",
+      "order": 4790,
+      "context": {
+        "order": 4787
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1662469345147093500,
+        2924997675749277700,
+        -1254598172498790400
+      ],
+      "presentationToReference": [
+        0.46298743691769223,
+        -0.17264835500989492,
+        0.8693878183922084,
+        0.8145937733151472,
+        -0.3037633342670977,
+        -0.49413036865904747,
+        -0.3493989377954327,
+        -0.9369740563469795,
+        3.32597732330942e-7
+      ],
+      "orbitUpReference": [
+        0.17264835500989492,
+        0.3037633342670977,
+        0.9369740563469795
+      ],
+      "metersPerUnit": 1398132.5806451612,
+      "bodyRadiusM": 433421100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

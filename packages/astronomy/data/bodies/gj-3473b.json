@@ -1,0 +1,28 @@
+{
+ "id": "gj-3473b",
+ "classification": "exoplanet",
+ "order": 3089,
+ "physical": {
+  "name": "GJ 3473 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8061.9,
+  "gravitationalParameterKm3PerS2": 741393.66,
+  "parent": "gj-3473"
+ },
+ "physicalNotes": "Radius 0.11276653 Jupiter radii from Kemmer et al. 2020 (2020A&A...642A.236K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract): 8,061.9 km at 71,492 km per Jupiter radius. GM from the mass 0.00585219 Jupiter masses (Kemmer et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...642A.236K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.19800484,
+  "semiMajorAxisStellarRadii": 9.39,
+  "inclinationDegrees": 87.95,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58491.70415,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holmberg et al. 2026 (2026AJ....171..251H), via the NASA Exoplanet Archive ps table (pl_refname HOLMBERG_ET_AL_2026): P 1.19800484 d",
+   "shape": "Kemmer et al. 2020 (2020A&A...642A.236K), via the NASA Exoplanet Archive ps table (pl_refname KEMMER_ET_AL__2020): a/R* 9.39; Kemmer et al. 2020 (2020A&A...642A.236K), via the NASA Exoplanet Archive ps table (pl_refname KEMMER_ET_AL__2020): inclination 87.95 degrees",
+   "eccentricity": "Kemmer et al. 2020 (2020A&A...642A.236K), via the NASA Exoplanet Archive ps table (pl_refname KEMMER_ET_AL__2020): e 0",
+   "phase": "Holmberg et al. 2026 (2026AJ....171..251H), via the NASA Exoplanet Archive ps table (pl_refname HOLMBERG_ET_AL_2026): transit mid-time 2458492.20415 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

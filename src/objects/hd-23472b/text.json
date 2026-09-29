@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-23472b",
+  "card": {
+    "text": "HD 23472 b was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244293",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+        "label": "Barros et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL_2022): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 17.66717347343, pl_radj 0.17842836, pl_bmassj 0.02617765"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around HD 23472. Its orbit and size follow Barros et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244293",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+        "label": "Barros et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL_2022): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 17.66717347343, pl_radj 0.17842836, pl_bmassj 0.02617765"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

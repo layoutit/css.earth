@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram } from './archive.mts';
 import { naifIdFromHorizonsCode, observationRecords } from './archive-ledger.mts';

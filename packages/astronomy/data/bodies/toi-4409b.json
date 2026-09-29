@@ -1,0 +1,28 @@
+{
+ "id": "toi-4409b",
+ "classification": "exoplanet",
+ "order": 4412,
+ "physical": {
+  "name": "TOI-4409 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 47453.1,
+  "gravitationalParameterKm3PerS2": 5954267,
+  "parent": "toi-4409"
+ },
+ "physicalNotes": "Radius 0.66375348 Jupiter radii from Reller et al. 2026 (2026A&A...712A.142R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract): 47,453.1 km at 71,492 km per Jupiter radius. GM from the mass 0.047 Jupiter masses (Reller et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...712A.142R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 92.491789,
+  "semiMajorAxisStellarRadii": 113,
+  "inclinationDegrees": 90,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59445.81536,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Reller et al. 2026 (2026A&A...712A.142R), via the NASA Exoplanet Archive ps table (pl_refname RELLER_ET_AL_2026): P 92.491789 d",
+   "shape": "Reller et al. 2026 (2026A&A...712A.142R), via the NASA Exoplanet Archive ps table (pl_refname RELLER_ET_AL_2026): a/R* 113; Reller et al. 2026 (2026A&A...712A.142R), via the NASA Exoplanet Archive ps table (pl_refname RELLER_ET_AL_2026): inclination 90 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Reller et al. 2026 (2026A&A...712A.142R), via the NASA Exoplanet Archive ps table (pl_refname RELLER_ET_AL_2026): transit mid-time 2459446.31536 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

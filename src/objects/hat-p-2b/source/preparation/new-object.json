@@ -1,0 +1,31 @@
+{
+  "host": "hat-p-2",
+  "planets": [
+    {
+      "id": "hat-p-2b",
+      "name": "HAT-P-2 b",
+      "description": "Transiting planet of HAT-P-2 with a 5.63-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract",
+        "credit": "Ment et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MENT_ET_AL__2018"
+      },
+      "text": {
+        "card": "HAT-P-2 b was found in 2007 by HATNet as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HAT-P-2. Its orbit and size follow Ment et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MENT_ET_AL__2018): disc_year 2007, disc_facility HATNet, sy_pnum 2; pl_orbper 5.633477, pl_radj 1.157, pl_bmassj 9.02",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-2b",
+          "title": "HAT-P-2b",
+          "revision": "1374168637",
+          "card": "HAT-P-2b is an extrasolar planet detected by the HATNet Project in May 2007.",
+          "introduction": "It orbits a class F star HAT-P-2,, located about 420 light-years away in the constellation Hercules."
+        }
+      },
+      "order": 3121
+    }
+  ]
+}

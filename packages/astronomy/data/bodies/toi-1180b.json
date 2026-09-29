@@ -1,0 +1,28 @@
+{
+ "id": "toi-1180b",
+ "classification": "exoplanet",
+ "order": 3941,
+ "physical": {
+  "name": "TOI-1180 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 19593.5,
+  "gravitationalParameterKm3PerS2": 3986004.23,
+  "parent": "toi-1180"
+ },
+ "physicalNotes": "Radius 0.27406595 Jupiter radii from Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract): 19,593.5 km at 71,492 km per Jupiter radius. GM from the mass 0.03146352 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 9.686760378,
+  "semiMajorAxisStellarRadii": 23.8005,
+  "inclinationDegrees": 89.20777,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59949.82735,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): P 9.686760378 d",
+   "shape": "Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): a/R* derived from its semi-major axis 0.080799 au and stellar radius 0.73 solar radii; Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): inclination 89.20777 degrees",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): transit mid-time 2459950.32735 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

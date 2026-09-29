@@ -1,4 +1,4 @@
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { deflateSync } from 'node:zlib';

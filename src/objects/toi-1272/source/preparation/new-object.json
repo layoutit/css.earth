@@ -1,0 +1,39 @@
+{
+  "id": "toi-1272",
+  "name": "TOI-1272",
+  "system": "TOI-1272 system",
+  "description": "Star of 4,985 K, 138 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1272",
+  "gaia": "1556242405699527424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+    "credit": "Mancini et al. 2026"
+  },
+  "radius": {
+    "value": 0.8,
+    "source": "Mancini et al. 2026, the stellar radius of the default parameter set of TOI-1272 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.828,
+    "source": "Mancini et al. 2026, the stellar mass of the default parameter set of TOI-1272 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+    "uncertainty": 0.037
+  },
+  "temperature": {
+    "value": 4985,
+    "source": "Mancini et al. 2026, the stellar temperature of the default parameter set of TOI-1272 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1272 b crosses TOI-1272 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mancini et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANCINI_ET_AL_2026): st_teff 4985, st_rad 0.8, st_mass 0.828"
+  },
+  "notes": [],
+  "order": 3996
+}

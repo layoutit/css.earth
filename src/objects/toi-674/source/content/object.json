@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-674",
+  "displayName": "TOI-674",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.42 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202140718",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M",
+          "label": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "46.2 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-674",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "toi-674-lens-color.webp",
+        "surface": "toi-674-surface-color@2x.webp",
+        "poles": "toi-674-poles-color@2x.webp",
+        "source": {
+          "id": "toi-674-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5400949450924312576&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,514 K and log g 4.81 (u1 0.396, u2 0.375): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Murgas et al. 2021",
+      "href": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+      "credit": "Murgas et al. 2021"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-674.json",
+      "credit": "Murgas et al. 2021, the stellar radius of the default parameter set of TOI-674 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

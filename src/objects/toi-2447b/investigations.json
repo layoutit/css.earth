@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2447b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.857 Jupiter radii from Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.393 Jupiter masses: Gill et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.533..109G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL_2024): P 69.33684 d; Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL_2024): a/R* 77.82101; Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL_2024): inclination derived from its impact parameter 0.277 with its a/R* 77.821 and the orbit's e 0.17, omega -105 degrees (Winn 2010, eq. 7); Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL_2024): e 0.17; Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL_2024): omega -105 degrees, stored as 255; Gill et al. 2024 (2024MNRAS.533..109G), via the NASA Exoplanet Archive ps table (pl_refname GILL_ET_AL_2024): transit mid-time 2459168.98798 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract"
+      ]
+    }
+  ]
+}

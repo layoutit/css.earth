@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-199",
+  "displayName": "TOI-199",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.82 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acfc1d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H",
+          "label": "Hobson et al. (2023), The Astronomical Journal 166 201",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "102 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-199",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "toi-199-lens-color.webp",
+        "surface": "toi-199-surface-color@2x.webp",
+        "poles": "toi-199-poles-color@2x.webp",
+        "source": {
+          "id": "toi-199-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4762582895440787712&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,255 K and log g 4.58 (u1 0.585, u2 0.175): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hobson et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract",
+      "credit": "Hobson et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-199.json",
+      "credit": "Hobson et al. 2023, the stellar radius of the default parameter set of TOI-199 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "host": "toi-5624",
+  "planets": [
+    {
+      "id": "toi-5624d",
+      "name": "TOI-5624 d",
+      "description": "Transiting planet of TOI-5624 with a 13.7-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "credit": "Bonfanti et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONFANTI_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5624 d was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 5 planets known around TOI-5624. Its orbit and size follow Bonfanti et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 13.731468, pl_radj 0.31974361, pl_bmassj 0.01541712",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-5624_d",
+          "title": "TOI-5624 d",
+          "revision": "1374248168",
+          "card": "TOI-5624 d is the third and largest discovered exoplanet orbiting the star TOI-5624, with a size approximately three and a half times the diameter of Earth.",
+          "introduction": "The planet was confirmed in late April 2026 using the transit method."
+        }
+      },
+      "order": 4547
+    }
+  ]
+}

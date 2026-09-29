@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-86226c",
+  "displayName": "HD 86226 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.2 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab9f95",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T",
+          "label": "Teske et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.98 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab9f95",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T",
+          "label": "Teske et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "7.2 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab9f95",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T",
+          "label": "Teske et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 86226; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-86226c-lens-shape.webp",
+        "surface": "hd-86226c-surface-shape@2x.webp",
+        "poles": "hd-86226c-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-86226c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 86226 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-86226's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-86226c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-86226c/hd-86226c-system-orbits.svg",
+      "alt": "The orbits of HD 86226's planets in this map from above, to scale, with HD 86226 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-86226c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T"
+      }
+    },
+    {
+      "id": "hd-86226c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-86226c/hd-86226c-transit.svg",
+      "alt": "HD 86226 c crossing its star, as TESS recorded it: 3 sectors (89, 99, 100) of the SPOC pipeline's 2-minute light curves of TIC 22221375, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-86226c-tess-sector-89",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025042113628-s0089-0000000022221375-0286-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Teske et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T/abstract",
+      "credit": "Teske et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-86226c.json",
+      "credit": "Radius from Teske et al. 2020 (2020AJ....160...96T), via the NASA Exoplanet Archive; mass from Teske et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....160...96T), via the NASA Exoplanet Archive; orbit from Teske et al. 2020 (2020AJ....160...96T), via the NASA Exoplanet Archive"
+    }
+  }
+}

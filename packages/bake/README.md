@@ -139,6 +139,18 @@ Ring wedges and full ring planes carry the same projective leaf metadata as body
 
 The Neptune and Uranus deliveries retain all 16 wedges and the same image bytes. [iPad evidence](evidence/ring-leaf-backings.json) records the resulting layer-memory reduction and the remaining timing limits.
 
+## Catalogue point banks
+
+A galaxy's dots are catalogue point banks (`cssearth-catalogue-points@1`). `prepare-catalogue-points.mts` places one
+published catalogue; `merge-catalogue-points.mts` thins several into one bank; `stack-catalogue-points.mts` joins merged
+levels. A recipe says where its bank belongs with `published: true`: the app fetches that bank by URL, so it is written
+to `prepared/<id>.json`, inventoried and published to R2, and it holds at most `MAX_CATALOGUE_POINTS` (40,000,
+`@cssearth/objects`), the same bound the renderer enforces. Every other bank is a bake input for a later merge or
+stack and is written to the ignored `output/catalogue-points/<object>/`: never inventoried, never published, and
+never imported as a module (`packages/bake/src/volume/node/catalogue-banks.ts`). Vite serves an imported JSON file as an
+array literal, which Safari cannot compile past about a hundred thousand elements, and the site's build reads only
+`datasets`, `lenses` and `presentation` from a context object's `prepared/`, plus its source manifest (`site/prepared-context-json.mts`).
+
 ## Evidence
 
 The volume entries replaced the lab's `volume-core` and `volume-bake` packages, moving their sources

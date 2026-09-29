@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1634b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1634b-orbits",
+      "title": "TOI-1634 b: orbits around TOI-1634",
+      "output": "toi-1634b-system-orbits.svg",
+      "system": "toi-1634",
+      "highlight": "toi-1634b",
+      "description": "The orbits of TOI-1634's planets in this map from above, to scale, with TOI-1634 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Palethorpe et al. 2026 (2026MNRAS.548ag520P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2026): P 0.98934551 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-1634b-transit",
+      "title": "TOI-1634 b: its transit",
+      "description": "TOI-1634 b crossing its star, as TESS recorded it: 2 sectors (18, 86) of the SPOC pipeline's 2-minute light curves of TIC 201186294, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-1634b-transit.svg",
+      "metadata": {
+        "tic": "TIC 201186294",
+        "sectors": [
+          18,
+          86
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-1634b",
+      "sources": [
+        "photometry/tess/tess2019306063752-s0018-0000000201186294-0162-s_lc.fits",
+        "photometry/tess/tess2024326142117-s0086-0000000201186294-0283-s_lc.fits"
+      ],
+      "durationHours": 0.9747,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 18, 86",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

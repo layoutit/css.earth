@@ -71,13 +71,18 @@ const short = (text: string, length = 52) => text.length <= length ? text : `${t
  * count), with the ephemeris moved by `shiftMinutes`. A planet the astronomy records do not hold, or files the reader refuses, fold
  * no transit. */
 async function transitFold(id: string): Promise<Fold> {
-  const [{ foldTransits, readTessLightCurve, transitWindow }, { hostedOrbit }] = await Promise.all([import('@cssearth/bake/objects/raster'), import('@cssearth/astronomy')]);
+  const { hostedOrbit } = await import('@cssearth/astronomy');
+  return orbitFold(() => hostedOrbit(id as Parameters<typeof hostedOrbit>[0]));
+}
+/** The same fold on an orbit given directly: the draft folds a planet on the archive orbit it assembled, before any record exists. */
+export async function orbitFold(orbitOf: () => { readonly periodDays: number; readonly transitTimeBmjdTdb: number }): Promise<Fold> {
+  const { foldTransits, readTessLightCurve, transitWindow } = await import('@cssearth/bake/objects/raster');
   const read = (curves: readonly Buffer[]) => curves.map(bytes => readTessLightCurve(bytes)), none = { transits: 0, depthPpm: 0, errorPpm: Infinity };
   return {
     midBmjd(curves) { const times = read(curves).flatMap(curve => [curve.time[0]!, curve.time.at(-1)!]); return (Math.min(...times) + Math.max(...times)) / 2; },
     measure(curves, durationHours, shiftMinutes) {
       try {
-        const base = hostedOrbit(id as Parameters<typeof hostedOrbit>[0]), orbit = { ...base, transitTimeBmjdTdb: base.transitTimeBmjdTdb + shiftMinutes / 1440 }, window = transitWindow(durationHours);
+        const base = orbitOf(), orbit = { ...base, transitTimeBmjdTdb: base.transitTimeBmjdTdb + shiftMinutes / 1440 }, window = transitWindow(durationHours);
         const folded = foldTransits(read(curves), orbit, window), inside: number[] = [], outside: number[] = [];
         folded.time.forEach((time, i) => { const offset = Math.abs(time - orbit.transitTimeBmjdTdb); if (offset < 0.3 * durationHours / 24) inside.push(folded.flux[i]!); else if (offset > window.outsideDays) outside.push(folded.flux[i]!); });
         if (inside.length < 3 || outside.length < 3) return none;
@@ -91,12 +96,20 @@ async function transitFold(id: string): Promise<Fold> {
 
 /** The uncertainty of the ephemeris the orbit took (orbit.mts bestEphemeris, the same rows) at a date, or undefined when no row gives
  * its errors. */
-async function timingSigma(archive: Archive, name: string) {
+export async function timingSigma(archive: Archive, name: string) {
   const best = bestEphemeris(await archiveRows(archive, name).catch(() => []));
   return best ? (epochBjd: number) => ephemerisSigmaDays(best.row, epochBjd) : undefined;
 }
 
-export async function installPlanetCharts(files: PackageFiles, id: string, name: string, host: { id: string; name: string }, archive: Archive, tess?: TessArchive) {
+/** Whether the archive lists a transmission or emission spectrum of planet `name` with three measured bins from one paper. */
+export async function hasArchiveSpectrum(archive: Archive, name: string) {
+  for (const kind of Object.keys(SPECTRA) as Spectrum[]) if (chosenPaper(parseSpectrumRows(kind, await archive.text(spectrumUrl(kind, name))))) return true;
+  return false;
+}
+
+/** `archiveName` is the name the archive's tables know the planet by, when it still lists it by a survey number (TOI-1203.01 for
+ * TOI-1203 d): every table is asked by it, and `name` titles the charts. */
+export async function installPlanetCharts(files: PackageFiles, id: string, name: string, host: { id: string; name: string }, archive: Archive, tess?: TessArchive, archiveName = name) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const measurements = read(`${s}/measurements.json`), orbitUrl = String(read(`${s}/content/object.json`).panel.facts.find((fact: { id: string }) => fact.id === 'period')?.source?.url ?? '');
   const orbits = { kind: 'system-orbits', id: `${id}-orbits`, title: `${name}: orbits around ${host.name}`, output: `${id}-system-orbits.svg`, system: host.id, highlight: id,
@@ -106,7 +119,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
     source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: orbitUrl } }];
   const inputs: Record<string, unknown>[] = [], operations: Record<string, unknown>[] = [], report: string[] = [], drawn: string[] = [];
   for (const kind of Object.keys(SPECTRA) as Spectrum[]) {
-    const spec = SPECTRA[kind], url = spectrumUrl(kind, name), csv = await archive.text(url), chosen = chosenPaper(parseSpectrumRows(kind, csv));
+    const spec = SPECTRA[kind], url = spectrumUrl(kind, archiveName), csv = await archive.text(url), chosen = chosenPaper(parseSpectrumRows(kind, csv));
     if (!chosen) { report.push(`${id}: no ${spec.title} with three measured rows in the archive's ${spec.table}`); continue; }
     // A paper may combine several facilities; each is named, in the order its rows first use it.
     const rows = chosen.rows, first = rows[0]!, facilities = [...new Set(rows.map(row => row.facility))].join('; '), path = `science/archive-spectra/${kind}`, chartId = `${id}-${kind}`;
@@ -132,7 +145,7 @@ export async function installPlanetCharts(files: PackageFiles, id: string, name:
     drawn.push(`its ${spec.title}, ${rows.length} bins from ${first.label} in the archive's ${spec.table} table${chosen.papers > 1 ? `, the most of its ${chosen.papers} papers` : ''}`);
   }
   // The transit as TESS recorded it (transit-chart.mts), after the spectra.
-  const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitFold(id), await timingSigma(archive, name));
+  const transit = await installTransitChart(files, id, name, archive, tess ?? await liveTessArchive(), await transitFold(id), await timingSigma(archive, archiveName), archiveName);
   report.push(transit.report);
   if (transit.recipe) { charts.push(transit.recipe); controls.push(transit.control); inputs.push(...transit.inputs); operations.push(...transit.operations); drawn.push(transit.readme); }
   files.set(`${s}/content/charts.json`, json({ schema: 'cssearth-chart-assets@1', publicBase: `/scenes/${id}/`, charts }));
@@ -164,11 +177,11 @@ export async function chartHosts(root: string, hostIds: readonly string[], archi
     const host = JSON.parse(await readFile(resolve(root, 'src/objects', hostId, 'source/content/object.json'), 'utf8')) as { displayName: string };
     for (const id of await readdir(resolve(root, 'src/objects'))) {
       const stored = await readFile(resolve(root, 'src/objects', id, 'source/preparation/new-object.json'), 'utf8').catch(() => undefined);
-      const spec = stored ? JSON.parse(stored) as { host?: string; planets?: { name: string; orbit?: { archive?: string } }[] } : undefined;
+      const spec = stored ? JSON.parse(stored) as { host?: string; planets?: { name: string; orbit?: { archive?: string; planetName?: string } }[] } : undefined;
       if (spec?.host !== hostId || spec.planets?.[0]?.orbit?.archive !== 'nasa-ps') continue;
       const files: PackageFiles = new Map();
       for (const path of paths) files.set(`src/objects/${id}/${path}`, await readFile(resolve(root, 'src/objects', id, path), 'utf8'));
-      const report = await installPlanetCharts(files, id, spec.planets[0].name, { id: hostId, name: host.displayName }, archive);
+      const report = await installPlanetCharts(files, id, spec.planets[0].name, { id: hostId, name: host.displayName }, archive, undefined, spec.planets[0].orbit?.planetName);
       // Light curves a planet no longer charts (the gate refused it) are not left for the manifest check to find undeclared.
       const tess = resolve(root, 'src/objects', id, 'source/photometry/tess');
       for (const name of await readdir(tess).catch(() => [] as string[])) if (!files.has(`src/objects/${id}/source/photometry/tess/${name}`)) await rm(resolve(tess, name));

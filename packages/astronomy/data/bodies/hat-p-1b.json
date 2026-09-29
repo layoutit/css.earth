@@ -1,0 +1,28 @@
+{
+ "id": "hat-p-1b",
+ "classification": "exoplanet",
+ "order": 3110,
+ "physical": {
+  "name": "HAT-P-1 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 94297.9,
+  "gravitationalParameterKm3PerS2": 66510429.25,
+  "parent": "hat-p-1"
+ },
+ "physicalNotes": "Radius 1.319 Jupiter radii from Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract): 94,297.9 km at 71,492 km per Jupiter radius. GM from the mass 0.525 Jupiter masses (Nikolov et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014MNRAS.437...46N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.4652986,
+  "semiMajorAxisStellarRadii": 9.853,
+  "inclinationDegrees": 85.634,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60605.936882,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.4652986 d",
+   "shape": "Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2014): a/R* 9.853; Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2014): inclination 85.634 degrees",
+   "eccentricity": "Ment et al. 2018 (2018AJ....156..213M), via the NASA Exoplanet Archive ps table (pl_refname MENT_ET_AL__2018): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460606.436882 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

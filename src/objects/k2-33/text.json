@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-33",
+  "card": {
+    "text": "K2-33 b crosses K2-33 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-152-3-61",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract",
+        "label": "Mann et al. (2016), The Astronomical Journal 152 61",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL__2016): st_teff 3540, st_rad 1.05, st_mass 0.56"
+      },
+      {
+        "catalogueId": "wikipedia-k2-33",
+        "url": "https://en.wikipedia.org/wiki/K2-33",
+        "label": "Wikipedia, \"K2-33\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366881676",
+        "quote": "K2-33 is an extremely young pre-main-sequence star located about 453 light-years (139 pc) away from the Earth in the constellation of Scorpius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mann et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-152-3-61",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract",
+        "label": "Mann et al. (2016), The Astronomical Journal 152 61",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL__2016): st_teff 3540, st_rad 1.05, st_mass 0.56"
+      },
+      {
+        "catalogueId": "wikipedia-k2-33",
+        "url": "https://en.wikipedia.org/wiki/K2-33",
+        "label": "Wikipedia, \"K2-33\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366881676",
+        "quote": "It is known to host one planet, a super-Neptune, named K2-33b."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

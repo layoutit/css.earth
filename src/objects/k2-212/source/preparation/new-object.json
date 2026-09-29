@@ -1,0 +1,39 @@
+{
+  "id": "k2-212",
+  "name": "K2-212",
+  "system": "K2-212 system",
+  "description": "Star of 4,349 K, 109 parsecs away, with 1 transiting planet.",
+  "target": "K2-212",
+  "gaia": "2538824923230146560",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..136D/abstract",
+    "credit": "Duck et al. 2021"
+  },
+  "radius": {
+    "value": 0.678,
+    "source": "Duck et al. 2021, the stellar radius of the default parameter set of K2-212 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..136D/abstract",
+    "uncertainty": 0.052
+  },
+  "mass": {
+    "value": 0.622,
+    "source": "Duck et al. 2021, the stellar mass of the default parameter set of K2-212 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..136D/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4349,
+    "source": "Duck et al. 2021, the stellar temperature of the default parameter set of K2-212 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..136D/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-212 b crosses K2-212 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Duck et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DUCK_ET_AL__2021): st_teff 4349, st_rad 0.678, st_mass 0.622"
+  },
+  "notes": [],
+  "order": 3393
+}

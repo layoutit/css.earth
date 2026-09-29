@@ -1,0 +1,30 @@
+{
+ "id": "k2-141",
+ "classification": "star",
+ "order": 3316,
+ "physical": {
+  "name": "K2-141",
+  "horizonsCode": null,
+  "meanRadiusKm": 473771.7,
+  "gravitationalParameterKm3PerS2": 93960407549.69307,
+  "parent": null,
+  "effectiveTemperatureK": 4570
+ },
+ "physicalNotes": "Radius 0.681 +/- 0.018 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of K2-141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 473,772 km at 695,700 km per solar radius. Mass 0.708 +/- 0.028 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of K2-141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract); GM is that mass times the JPL solar GM. Temperature 4570 +/- 100 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of K2-141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 350.9170625673834,
+  "declinationDegrees": -1.1891792403354395,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 61.995150486069484,
+  "properMotionRaMasPerYear": 116.32476036497832,
+  "properMotionDecMasPerYear": 25.21354227268836,
+  "radialVelocityKmPerS": -3.1390147,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2643952940813536768 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-141/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 16.1303 +/- 0.0176 mas (same row, RUWE 1.29): 62.00 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 116.325, 25.214 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -3.14 +/- 0.20 km/s"
+  }
+ }
+}

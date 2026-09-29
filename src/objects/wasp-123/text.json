@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-123",
+  "card": {
+    "text": "WASP-123 b crosses WASP-123 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1002-asna-20224012",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL__2016): st_teff 5740, st_rad 1.285, st_mass 1.166"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Turner et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1002-asna-20224012",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL__2016): st_teff 5740, st_rad 1.285, st_mass 1.166"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

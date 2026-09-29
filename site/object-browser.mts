@@ -124,6 +124,13 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     },
   });
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
+  // A windowed tree branch's "more" row opens the pill that lists the rest of its members.
+  browser.addEventListener('click', event => {
+    const more = event.target instanceof windowTarget.Element ? event.target.closest<HTMLElement>('.atlas-tree-more[data-search-classification]') : null;
+    if (!more) return;
+    event.preventDefault();
+    categoryButtons.find(button => button.dataset.searchClassification === more.dataset.searchClassification)?.click();
+  }, { signal: events.signal });
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Coalesce synchronous selection updates before notifying the scene.
   let reportedCategory: string | null = null, pendingCategory: string | null = null, reportQueued = false;

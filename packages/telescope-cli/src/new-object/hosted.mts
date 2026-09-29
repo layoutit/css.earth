@@ -150,7 +150,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     colorHex = installed.hex; colorCredit = installed.credit;
     colorLine = `**Colour.** Infrared false colour from the flux densities ${spec.photometry.source.citation} publishes (${spec.photometry.source.locator}): ${colorHex}. ${spec.photometry.displayRangeSource}`;
   } else if (!star && spec.thermal) {
-    const { csv } = await thermalFromArchive(archive, spec.name);
+    const { csv } = await thermalFromArchive(archive, 'archive' in spec.orbit ? spec.orbit.planetName ?? spec.name : spec.name);
     const installed = await installThermalLens(files, id, spec.name, spec.thermal, csv);
     colorHex = installed.hex; colorCredit = installed.credit;
     colorLine = `**Colour.** A black body at the ${spec.thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse at ${spec.thermal.wavelengthMicrometres} µm (${spec.thermal.source}): ${colorHex}. Chosen from the archive's emission rows by rule: ${spec.thermal.chosen}. Reflected starlight is not included.`;
@@ -219,7 +219,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
   // The Charts tab: the system's orbits and any archive spectra (planet-charts.mts), with their README paragraph.
-  if (!star) await installPlanetCharts(files, id, spec.name, { id: record.hostId, name: String((hostBody as { physical?: { name?: unknown } } | undefined)?.physical?.name ?? record.system.replace(/ system$/u, '')) }, archive);
+  if (!star) await installPlanetCharts(files, id, spec.name, { id: record.hostId, name: String((hostBody as { physical?: { name?: unknown } } | undefined)?.physical?.name ?? record.system.replace(/ system$/u, '')) }, archive, undefined, 'archive' in spec.orbit ? spec.orbit.planetName : undefined);
   // The ledger records each value's source and the colour chosen, with the links they cite.
   const unitName = star ? 'solar radii' : 'Jupiter radii';
   writeLedger(files, id, [

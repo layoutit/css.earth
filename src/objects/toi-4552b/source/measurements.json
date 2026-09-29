@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-4552b",
+  "radiusKm": 7079.7,
+  "radiusSource": "Radius 0.09902774 Jupiter radii from Srivastava et al. 2026 (2026A&A...709A..73S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract): 7,079.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00575782 Jupiter masses (Srivastava et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A..73S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.30110032,
+  "orbitalPeriodSource": "Srivastava et al. 2026 (2026A&A...709A..73S), via the NASA Exoplanet Archive ps table (pl_refname SRIVASTAVA_ET_AL_2026): P 0.30110032 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-4552 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00575782 Jupiter masses: Srivastava et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A..73S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)."
+}

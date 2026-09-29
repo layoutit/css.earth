@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-50b",
+  "card": {
+    "text": "WASP-50 b was found in 2011 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2011, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.955092447, pl_radj 1.166, pl_bmassj 1.4688"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-50. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2011, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.955092447, pl_radj 1.166, pl_bmassj 1.4688"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

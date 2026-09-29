@@ -1,0 +1,31 @@
+{
+  "host": "wasp-7",
+  "planets": [
+    {
+      "id": "wasp-7b",
+      "name": "WASP-7 b",
+      "description": "Transiting planet of WASP-7 with a 4.95-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract",
+        "credit": "Southworth et al. 2011"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SOUTHWORTH_ET_AL__2011"
+      },
+      "text": {
+        "card": "WASP-7 b was found in 2008 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-7. Its orbit and size follow Southworth et al. 2011's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOUTHWORTH_ET_AL__2011): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.95464865738, pl_radj 1.33, pl_bmassj 0.96",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-7_b",
+          "title": "WASP-7 b",
+          "revision": "1374239566",
+          "card": "WASP-7 b is an extrasolar planet discovered in 2008.",
+          "introduction": "This 5-day period planet, orbiting a round the star WASP-7, is slightly smaller than Jupiter, roughly the same mass and more dense."
+        }
+      },
+      "order": 4835
+    }
+  ]
+}

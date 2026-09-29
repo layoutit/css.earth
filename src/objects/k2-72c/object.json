@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "k2-72c",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "K2-72 c",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7398.6
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/k2-72c-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "K2-72 c",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 13719240.8,
+      "description": "K2-72 c was found in 2016 by K2 as it crossed its star.",
+      "systemName": "K2-72 system",
+      "order": 3609,
+      "context": {
+        "order": 3609
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1828304749997798400,
+        -867229352910619900,
+        -342687025548789250
+      ],
+      "presentationToReference": [
+        0.8942341730468991,
+        -0.4214102686872671,
+        0.1508596340975727,
+        -0.41529216463392904,
+        -0.9068691131439587,
+        -0.07155997218526117,
+        -0.16696604968913215,
+        -0.0013405485500826814,
+        0.9859617341361636
+      ],
+      "orbitUpReference": [
+        0.4214102686872671,
+        0.9068691131439587,
+        0.0013405485500826814
+      ],
+      "metersPerUnit": 23866.451612903227,
+      "bodyRadiusM": 7398600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

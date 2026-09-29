@@ -1,0 +1,24 @@
+{
+  "host": "toi-2458",
+  "planets": [
+    {
+      "id": "toi-2458b",
+      "name": "TOI-2458 b",
+      "description": "Transiting planet of TOI-2458 with a 3.74-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.235S/abstract",
+        "credit": "&Scaron;ubjak et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SUBJAK_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-2458 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-2458. Its orbit and size follow &Scaron;ubjak et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SUBJAK_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.73659, pl_radj 0.25247612, pl_bmassj 0.04187794"
+      },
+      "order": 4319
+    }
+  ]
+}

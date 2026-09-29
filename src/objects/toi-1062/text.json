@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1062",
+  "card": {
+    "text": "TOI-1062 b crosses TOI-1062 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202040247",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+        "label": "Otegi et al. (2021), Astronomy & Astrophysics 653 A105",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname OTEGI_ET_AL__2021): st_teff 5328, st_rad 0.84, st_mass 0.94"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Otegi et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202040247",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+        "label": "Otegi et al. (2021), Astronomy & Astrophysics 653 A105",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname OTEGI_ET_AL__2021): st_teff 5328, st_rad 0.84, st_mass 0.94"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

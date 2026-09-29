@@ -17,7 +17,7 @@ import { bindInputs, json, type PackageFiles } from './lens.mts';
 import { decodeEntities, NASA_TAP } from './orbit.mts';
 import type { Cited, PhotometrySpec, ThermalSpec } from './spec.mts';
 import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
+import { loadStellarPhotometricColor, PLANCK_FLOOR_KELVIN } from '@cssearth/bake/objects/stellar';
 import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { hostedPlanetStylesheet } from './new-hosted-planet.mts';
@@ -56,11 +56,13 @@ export function pickThermalRow(rows: readonly EmissionRow[]): EmissionRow | unde
   return [...measured].sort((a, b) => relative(a) - relative(b) || b.wavelengthMicrometres - a.wavelengthMicrometres)[0];
 }
 
-/** The archive's emission rows for a planet and the spec's thermal entry, or undefined with no measured temperature. */
-export async function thermalFromArchive(archive: Archive, planet: string): Promise<{ rows: EmissionRow[]; csv: string; thermal?: ThermalSpec }> {
+/** The archive's emission rows for a planet and the spec's thermal entry, or undefined with no measured temperature or one too
+ * cool to glow (`why` says which). */
+export async function thermalFromArchive(archive: Archive, planet: string): Promise<{ rows: EmissionRow[]; csv: string; thermal?: ThermalSpec; why?: string }> {
   const csv = await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: emissionQuery(planet), format: 'csv' })}`);
   const rows = parseEmissionRows(csv), row = pickThermalRow(rows);
-  if (!row) return { rows, csv };
+  if (!row) return { rows, csv, why: "no measured dayside brightness temperature in the archive's emission table" };
+  if (row.temperatureK! <= PLANCK_FLOOR_KELVIN) return { rows, csv, why: `its dayside brightness temperature, ${row.temperatureK} K (${row.label}), is too cool to glow (a black-body colour needs over ${PLANCK_FLOOR_KELVIN} K)` };
   return { rows, csv, thermal: { temperatureK: row.temperatureK!, ...(row.temperatureErrorK === undefined ? {} : { uncertaintyK: row.temperatureErrorK }), wavelengthMicrometres: row.wavelengthMicrometres,
     facility: `${row.facility}${row.instrument ? ` ${row.instrument}` : ''}`.trim(), source: `${row.label}, dayside brightness temperature at ${row.wavelengthMicrometres} µm (NASA Exoplanet Archive emission table)`,
     url: row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', chosen: `${rows.filter(r => r.temperatureK !== undefined && !r.temperatureLimit).length} measured of ${rows.length} rows; the smallest relative uncertainty, then the longest wavelength` } };
@@ -237,8 +239,8 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
     } else if (mode === 'thermal') {
       if (kind === 'dayside-thermal-color') { ensureStylesheet(files, id); lines.push(`${id}: keeps its thermal lens; stylesheet refreshed`); for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } progress(lines.at(-1)!); continue; }
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} lens`); continue; }
-      const { csv, thermal } = await thermalFromArchive(archive, descriptor.displayName);
-      if (!thermal) { lines.push(`${id}: no measured dayside brightness temperature in the archive's emission table`); continue; }
+      const { csv, thermal, why } = await thermalFromArchive(archive, descriptor.displayName);
+      if (!thermal) { lines.push(`${id}: ${why}`); continue; }
       const { hex } = await installThermalLens(files, id, descriptor.displayName, thermal, csv);
       lines.push(`${id}: thermal glow ${hex} at ${thermal.temperatureK} K (${thermal.wavelengthMicrometres} µm, ${thermal.facility})`);
     } else {

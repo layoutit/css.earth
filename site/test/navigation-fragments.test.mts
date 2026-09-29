@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { bindNavigationIntent, createNavigationFragments, navigationFragments, type NavigationFragments } from '../navigation/navigation-fragments.mts';

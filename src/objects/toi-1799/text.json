@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1799",
+  "card": {
+    "text": "TOI-1799 b crosses TOI-1799 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad9aa6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+        "label": "Crossfield et al. (2025), The Astronomical Journal 169 89",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 5690, st_rad 0.957, st_mass 1.01"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Crossfield et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad9aa6",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+        "label": "Crossfield et al. (2025), The Astronomical Journal 169 89",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 5690, st_rad 0.957, st_mass 1.01"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

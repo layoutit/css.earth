@@ -1,0 +1,31 @@
+{
+  "host": "toi-1452",
+  "planets": [
+    {
+      "id": "toi-1452b",
+      "name": "TOI-1452 b",
+      "description": "Transiting planet of TOI-1452 with a 11.1-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...96C/abstract",
+        "credit": "Cadieux et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CADIEUX_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-1452 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1452. Its orbit and size follow Cadieux et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.06199374459, pl_radj 0.14916611, pl_bmassj 0.01516542",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-1452_b",
+          "title": "TOI-1452 b",
+          "revision": "1374086980",
+          "card": "TOI-1452 b is a confirmed super-Earth exoplanet, possibly a water world, orbiting a red dwarf star TOI-1452 about 100 light-years away in the Draco constellation.",
+          "introduction": "The exoplanet is about 70% larger in diameter than Earth, and roughly five times as massive."
+        }
+      },
+      "order": 4050
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hats-72b",
+  "displayName": "HATS-72 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.72 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
+          "label": "Hartman et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "7.33 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
+          "label": "Hartman et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.13 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab7821",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
+          "label": "Hartman et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HATS-72; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hats-72b-lens-shape.webp",
+        "surface": "hats-72b-surface-shape@2x.webp",
+        "poles": "hats-72b-poles-shape@2x.webp",
+        "source": {
+          "id": "hats-72b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HATS-72 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hats-72's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hats-72b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hats-72b/hats-72b-system-orbits.svg",
+      "alt": "The orbits of HATS-72's planets in this map from above, to scale, with HATS-72 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hats-72b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H"
+      }
+    },
+    {
+      "id": "hats-72b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hats-72b/hats-72b-transit.svg",
+      "alt": "HATS-72 b crossing its star, as TESS recorded it: 3 sectors (42, 92, 96) of the SPOC pipeline's 2-minute light curves of TIC 188570092, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hats-72b-tess-sector-42",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021232031932-s0042-0000000188570092-0213-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hartman et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+      "credit": "Hartman et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hats-72b.json",
+      "credit": "Radius from Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive; mass from Hartman et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....159..173H), via the NASA Exoplanet Archive; orbit from Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive"
+    }
+  }
+}

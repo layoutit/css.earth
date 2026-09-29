@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ltt-1445-a",
+  "card": {
+    "text": "2 planets cross LTT 1445 A as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac50a9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..168W/abstract",
+        "label": "Winters et al. (2022), The Astronomical Journal 163 168",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WINTERS_ET_AL_2022): st_teff 3340, st_rad 0.265, st_mass 0.257"
+      },
+      {
+        "catalogueId": "wikipedia-ltt-1445",
+        "url": "https://en.wikipedia.org/wiki/LTT_1445",
+        "label": "Wikipedia, \"LTT 1445\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374742774",
+        "quote": "The primary LTT 1445 A hosts two exoplanets—one discovered in 2019 that transits the star every 5.36 days, and another found in 2021 that transits the star every 3.12 days, close to a 12:7 resonance."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Winters et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac50a9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..168W/abstract",
+        "label": "Winters et al. (2022), The Astronomical Journal 163 168",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WINTERS_ET_AL_2022): st_teff 3340, st_rad 0.265, st_mass 0.257"
+      },
+      {
+        "catalogueId": "wikipedia-ltt-1445",
+        "url": "https://en.wikipedia.org/wiki/LTT_1445",
+        "label": "Wikipedia, \"LTT 1445\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374742774",
+        "quote": "As of October 2022 it is the second closest transiting exoplanet system discovered, with the closest being HD 219134 bc."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "lundgren-2004-m83-molecular-kinematics",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Molecular gas in the galaxy M83. II - Kinematics of the molecular gas",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2004A&A...422..865L"
+    },
+    {
+      "type": "arxiv",
+      "value": "astro-ph/0404026"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...422..865L",
+      "label": "2004A&A...422..865L"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0404026",
+      "label": "arXiv:astro-ph/0404026"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0404026",
+      "checkedOn": "2026-09-29",
+      "locator": "Table 1: position angle 45 deg (Comte 1981) and inclination 24 deg (Talbot et al. 1979), adopted for the CO kinematics of the entire optical disc and in agreement with the HI iso-velocity contours (Sect. 3.2)."
+    }
+  ],
+  "creators": [
+    "A. A. Lundgren",
+    "H. Olofsson",
+    "T. Wiklind",
+    "G. Rydbeck"
+  ],
+  "publisher": "A&A 422, 865",
+  "publicationDate": "2004",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Lundgren et al. (2004), A&A 422, 865.",
+      "scope": "M83 disc orientation",
+      "evidence": "https://arxiv.org/abs/astro-ph/0404026"
+    }
+  ]
+}

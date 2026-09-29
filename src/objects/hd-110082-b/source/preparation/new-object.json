@@ -1,0 +1,45 @@
+{
+  "id": "hd-110082-b",
+  "name": "HD 110082B",
+  "system": "HD 110082 system",
+  "description": "Star bound to HD 110082, 6,239 AU away.",
+  "gaia": "5765748511163760640",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.267,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 383400718 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.239,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 383400718 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3262,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 383400718 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 110082B is a star of 3,262 K, bound to HD 110082 6,239 AU away.",
+    "introduction": "HD 110082B shares its motion through space with HD 110082, 6,239 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 5765748511163751936 and 5765748511163760640, sep_AU 6239.017902410248098, R_chance_align 9.292407085543662355e-04"
+  },
+  "notes": [
+    "HD 110082B's orbit around HD 110082 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 5765748511163760640 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 30,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205765748511163760640"
+  },
+  "order": 3154
+}

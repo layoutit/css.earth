@@ -1,0 +1,40 @@
+{
+  "id": "bd-20-761-b",
+  "name": "BD-20 761B",
+  "system": "WASP-140 system",
+  "description": "Star bound to WASP-140, 845 AU away.",
+  "gaia": "5094154336332482176",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.623,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 178284729 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.019
+  },
+  "mass": {
+    "value": 0.606,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 178284729 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3968,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 178284729 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "BD-20 761B is a star of 3,968 K, bound to WASP-140 845 AU away.",
+    "introduction": "BD-20 761B shares its motion through space with WASP-140, 845 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 5094154336332482304 and 5094154336332482176, sep_AU 844.939609021909519, R_chance_align 2.809327392705491240e-08"
+  },
+  "notes": [
+    "BD-20 761B's orbit around WASP-140 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4790
+}

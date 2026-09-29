@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-41378",
+  "card": {
+    "text": "5 planets cross HIP 41378 as seen from Earth: b, c, d, e, f.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab5280",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract",
+        "label": "Lund et al. (2019), The Astronomical Journal 158 248",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUND_ET_AL_2019): st_teff 6290, st_rad 1.3, st_mass 1.22"
+      },
+      {
+        "catalogueId": "wikipedia-hip-41378",
+        "url": "https://en.wikipedia.org/wiki/HIP_41378",
+        "label": "Wikipedia, \"HIP 41378\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1376204991",
+        "quote": "HIP 41378 is a star located 346 light-years away in the constellation of Cancer."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lund et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab5280",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract",
+        "label": "Lund et al. (2019), The Astronomical Journal 158 248",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUND_ET_AL_2019): st_teff 6290, st_rad 1.3, st_mass 1.22"
+      },
+      {
+        "catalogueId": "wikipedia-hip-41378",
+        "url": "https://en.wikipedia.org/wiki/HIP_41378",
+        "label": "Wikipedia, \"HIP 41378\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1376204991",
+        "quote": "The star has an apparent magnitude of 8.92."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

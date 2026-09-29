@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-7b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-7b-orbits",
+      "title": "WASP-7 b: orbits around WASP-7",
+      "output": "wasp-7b-system-orbits.svg",
+      "system": "wasp-7",
+      "highlight": "wasp-7b",
+      "description": "The orbits of WASP-7's planets in this map from above, to scale, with WASP-7 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.95464865738 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-7b-transit",
+      "title": "WASP-7 b: its transit",
+      "description": "WASP-7 b crossing its star, as TESS recorded it: 3 sectors (94, 95, 105) of the SPOC pipeline's 2-minute light curves of TIC 389352124, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-7b-transit.svg",
+      "metadata": {
+        "tic": "TIC 389352124",
+        "sectors": [
+          94,
+          95,
+          105
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-7b",
+      "sources": [
+        "photometry/tess/tess2025180145000-s0094-0000000389352124-0291-s_lc.fits",
+        "photometry/tess/tess2025206162959-s0095-0000000389352124-0292-s_lc.fits",
+        "photometry/tess/tess2026164183000-s0105-0000000389352124-0307-s_lc.fits"
+      ],
+      "durationHours": 3.7752,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 94, 95, 105",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

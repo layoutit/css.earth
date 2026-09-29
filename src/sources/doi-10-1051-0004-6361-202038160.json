@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202038160",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bluhm et al. (2020): Precise mass and radius of a transiting super-Earth planet orbiting the M dwarf TOI-1235: a planet in the radius gap?",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2004.06218"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202038160"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020A&A...639A.132B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202038160",
+      "label": "Astronomy & Astrophysics 639 A132"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 639 A132",
+  "creators": [
+    "P. Bluhm",
+    "R. Luque",
+    "N. Espinoza",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-10b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-10 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 77211.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-10b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-10 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 29167440.1,
+      "description": "WASP-10 b was found in 2008 by SuperWASP as it crossed its star.",
+      "systemName": "WASP-10 system",
+      "order": 4766,
+      "context": {
+        "order": 4766
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3653416903283443000,
+        -710606478109913900,
+        2277439109415378200
+      ],
+      "presentationToReference": [
+        0.8420294568494122,
+        -0.16879803138650953,
+        -0.5123413104541961,
+        -0.13693468417670895,
+        -0.9855546930317484,
+        0.09965359658597997,
+        0.5217617138764675,
+        0.013753968268656618,
+        0.8529803879864741
+      ],
+      "orbitUpReference": [
+        0.16879803138650953,
+        0.9855546930317484,
+        -0.013753968268656618
+      ],
+      "metersPerUnit": 249069.03225806452,
+      "bodyRadiusM": 77211400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

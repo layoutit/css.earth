@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/epic-211945201b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "epic-211945201b-orbits",
+      "title": "EPIC 211945201 b: orbits around EPIC 211945201",
+      "output": "epic-211945201b-system-orbits.svg",
+      "system": "epic-211945201",
+      "highlight": "epic-211945201b",
+      "description": "The orbits of EPIC 211945201's planets in this map from above, to scale, with EPIC 211945201 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 19.4921473 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "epic-211945201b-transit",
+      "title": "EPIC 211945201 b: its transit",
+      "description": "EPIC 211945201 b crossing its star, as TESS recorded it: 3 sectors (45, 46, 72) of the SPOC pipeline's 2-minute light curves of TIC 243244680, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 16-minute bins. Error bars are each bin's standard error.",
+      "output": "epic-211945201b-transit.svg",
+      "metadata": {
+        "tic": "TIC 243244680",
+        "sectors": [
+          45,
+          46,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "epic-211945201b",
+      "sources": [
+        "photometry/tess/tess2021310001228-s0045-0000000243244680-0216-s_lc.fits",
+        "photometry/tess/tess2021336043614-s0046-0000000243244680-0217-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000243244680-0267-s_lc.fits"
+      ],
+      "durationHours": 3.91,
+      "binMinutes": 16,
+      "notes": [
+        "TESS 2-min SPOC · sectors 45, 46, 72",
+        "Folded on the app's orbit; 16-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

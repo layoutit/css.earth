@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-10",
+  "card": {
+    "text": "2 planets cross Kepler-10 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-789-2-154",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract",
+        "label": "Dumusque et al. (2014), The Astrophysical Journal 789 154",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DUMUSQUE_ET_AL__2014): st_teff 5708, st_rad 1.065, st_mass 0.91"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-10",
+        "url": "https://en.wikipedia.org/wiki/Kepler-10",
+        "label": "Wikipedia, \"Kepler-10\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374405025",
+        "quote": "Kepler-10, formerly known as KOI-72, is a Sun-like star in the constellation of Draco that lies 607 light-years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Dumusque et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-789-2-154",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract",
+        "label": "Dumusque et al. (2014), The Astrophysical Journal 789 154",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DUMUSQUE_ET_AL__2014): st_teff 5708, st_rad 1.065, st_mass 0.91"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-10",
+        "url": "https://en.wikipedia.org/wiki/Kepler-10",
+        "label": "Wikipedia, \"Kepler-10\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374405025",
+        "quote": "Kepler-10 was targeted by NASA's Kepler space telescope, as it was seen as the first star identified by the Kepler mission that could be a possible host to a small, transiting exoplanet."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

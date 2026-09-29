@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-512",
+  "card": {
+    "text": "TOI-512 b crosses TOI-512 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452887",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+        "label": "Rodrigues et al. (2025), Astronomy & Astrophysics 695 A237",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUES_ET_AL_2025): st_teff 5277, st_rad 0.89, st_mass 0.74"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Rodrigues et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452887",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+        "label": "Rodrigues et al. (2025), Astronomy & Astrophysics 695 A237",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUES_ET_AL_2025): st_teff 5277, st_rad 0.89, st_mass 0.74"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

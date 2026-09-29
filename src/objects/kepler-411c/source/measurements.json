@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-411c",
+  "radiusKm": 28197.5,
+  "radiusSource": "Radius 0.3944152 Jupiter radii from Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract): 28,197.5 km at 71,492 km per Jupiter radius. GM from the mass 0.08306327 Jupiter masses (Sun et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...624A..15S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 7.83443074,
+  "orbitalPeriodSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 7.83443074 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-411 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.08306327 Jupiter masses: Sun et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...624A..15S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract)."
+}

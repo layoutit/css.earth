@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "tic-139270665b",
+  "radiusKm": 46112.3,
+  "radiusSource": "Radius 0.645 Jupiter radii from Peluso et al. 2024 (2024AJ....167..170P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract): 46,112.3 km at 71,492 km per Jupiter radius. GM from the mass 0.463 Jupiter masses (Peluso et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....167..170P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 23.624,
+  "orbitalPeriodSource": "Peluso et al. 2024 (2024AJ....167..170P), via the NASA Exoplanet Archive ps table (pl_refname PELUSO_ET_AL__2024): P 23.624 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TIC 139270665 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.463 Jupiter masses: Peluso et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....167..170P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)."
+}

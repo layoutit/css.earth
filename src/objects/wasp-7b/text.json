@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-7b",
+  "card": {
+    "text": "WASP-7 b was found in 2008 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201016183",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract",
+        "label": "Southworth et al. 2011",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOUTHWORTH_ET_AL__2011): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.95464865738, pl_radj 1.33, pl_bmassj 0.96"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-7-b",
+        "url": "https://en.wikipedia.org/wiki/WASP-7_b",
+        "label": "Wikipedia, \"WASP-7 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374239566",
+        "quote": "WASP-7 b is an extrasolar planet discovered in 2008."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-7. Its orbit and size follow Southworth et al. 2011's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201016183",
+        "url": "https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract",
+        "label": "Southworth et al. 2011",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOUTHWORTH_ET_AL__2011): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.95464865738, pl_radj 1.33, pl_bmassj 0.96"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-7-b",
+        "url": "https://en.wikipedia.org/wiki/WASP-7_b",
+        "label": "Wikipedia, \"WASP-7 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374239566",
+        "quote": "This 5-day period planet, orbiting a round the star WASP-7, is slightly smaller than Jupiter, roughly the same mass and more dense."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

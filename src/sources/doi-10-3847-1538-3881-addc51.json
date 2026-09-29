@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-addc51",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fernandes et al. (2025): Searching for GEMS: Confirmation of TOI-5573 b, a Cool, Saturn-like Planet Orbiting an M Dwarf<sup>*</sup>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2505.08947"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/addc51"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....170...55F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/addc51",
+      "label": "The Astronomical Journal 170 55"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fernandes et al. (2025), The Astronomical Journal 170 55",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F"
+    }
+  ],
+  "publisher": "The Astronomical Journal 170 55",
+  "creators": [
+    "Rachel B. Fernandes",
+    "Shubham Kanodia",
+    "Megan Delamer",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

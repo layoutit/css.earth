@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-145-a-b",
+  "displayName": "WASP-145 A b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.90 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-sty2741",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H",
+          "label": "Hellier et al. 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "42 hours",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-sty2741",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H",
+          "label": "Hellier et al. 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.89 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-sty2741",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H",
+          "label": "Hellier et al. 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WASP-145; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wasp-145-a-b-lens-shape.webp",
+        "surface": "wasp-145-a-b-surface-shape@2x.webp",
+        "poles": "wasp-145-a-b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-145-a-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of WASP-145 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wasp-145-a's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-145-a-b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-145-a-b/wasp-145-a-b-system-orbits.svg",
+      "alt": "The orbits of WASP-145 A's planets in this map from above, to scale, with WASP-145 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-145-a-b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H"
+      }
+    },
+    {
+      "id": "wasp-145-a-b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-145-a-b/wasp-145-a-b-transit.svg",
+      "alt": "WASP-145 A b crossing its star, as TESS recorded it: 3 sectors (102, 104, 105) of the SPOC pipeline's 2-minute light curves of TIC 381856447, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-145-a-b-tess-sector-102",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026086090000-s0102-0000000381856447-0304-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hellier et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract",
+      "credit": "Hellier et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-145-a-b.json",
+      "credit": "Radius from Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive; mass from Hellier et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019MNRAS.482.1379H), via the NASA Exoplanet Archive; orbit from Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive"
+    }
+  }
+}

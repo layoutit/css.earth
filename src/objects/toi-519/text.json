@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-519",
+  "card": {
+    "text": "TOI-519 b crosses TOI-519 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-pasj-psad031",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+        "label": "Kagetani et al. (2023), Publications of the Astronomical Society of Japan 75 713-721",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KAGETANI_ET_AL_2023): st_teff 3322, st_rad 0.35, st_mass 0.335"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kagetani et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-pasj-psad031",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+        "label": "Kagetani et al. (2023), Publications of the Astronomical Society of Japan 75 713-721",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KAGETANI_ET_AL_2023): st_teff 3322, st_rad 0.35, st_mass 0.335"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

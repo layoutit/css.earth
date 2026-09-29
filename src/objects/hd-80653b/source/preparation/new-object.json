@@ -1,0 +1,24 @@
+{
+  "host": "hd-80653",
+  "planets": [
+    {
+      "id": "hd-80653b",
+      "name": "HD 80653 b",
+      "description": "Transiting planet of HD 80653 with a 0.72-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+        "credit": "Naponiello et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NAPONIELLO_ET_AL_2026"
+      },
+      "text": {
+        "card": "HD 80653 b was found in 2020 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 80653. Its orbit and size follow Naponiello et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2026): disc_year 2020, disc_facility K2, sy_pnum 2; pl_orbper 0.71957926, pl_radj 0.14461618, pl_bmassj 0.01765103"
+      },
+      "order": 3239
+    }
+  ]
+}

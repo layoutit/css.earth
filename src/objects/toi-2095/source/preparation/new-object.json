@@ -1,0 +1,39 @@
+{
+  "id": "toi-2095",
+  "name": "TOI-2095",
+  "system": "TOI-2095 system",
+  "description": "Star of 3,759 K, 41.9 parsecs away, with 2 transiting planets.",
+  "target": "TOI-2095",
+  "gaia": "2268372099615724288",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract",
+    "credit": "Murgas et al. 2023"
+  },
+  "radius": {
+    "value": 0.44,
+    "source": "Murgas et al. 2023, the stellar radius of the default parameter set of TOI-2095 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.44,
+    "source": "Murgas et al. 2023, the stellar mass of the default parameter set of TOI-2095 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3759,
+    "source": "Murgas et al. 2023, the stellar temperature of the default parameter set of TOI-2095 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract",
+    "uncertainty": 87
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-2095 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Murgas et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2023): st_teff 3759, st_rad 0.44, st_mass 0.44"
+  },
+  "notes": [],
+  "order": 4244
+}

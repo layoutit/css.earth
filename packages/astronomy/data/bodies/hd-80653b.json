@@ -1,0 +1,28 @@
+{
+ "id": "hd-80653b",
+ "classification": "exoplanet",
+ "order": 3239,
+ "physical": {
+  "name": "HD 80653 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 10338.9,
+  "gravitationalParameterKm3PerS2": 2236147.78,
+  "parent": "hd-80653"
+ },
+ "physicalNotes": "Radius 0.14461618 Jupiter radii from Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract): 10,338.9 km at 71,492 km per Jupiter radius. GM from the mass 0.01765103 Jupiter masses (Naponiello et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260719325N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.71957926,
+  "semiMajorAxisStellarRadii": 2.973,
+  "inclinationDegrees": 81.7,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58095.06741,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): P 0.71957926 d",
+   "shape": "Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): a/R* 2.973; Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): inclination 81.7 degrees",
+   "eccentricity": "Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): e 0",
+   "phase": "Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): transit mid-time 2458095.56741 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

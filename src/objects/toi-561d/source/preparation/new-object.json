@@ -1,0 +1,24 @@
+{
+  "host": "toi-561",
+  "planets": [
+    {
+      "id": "toi-561d",
+      "name": "TOI-561 d",
+      "description": "Transiting planet of TOI-561 with a 25.7-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+        "credit": "Piotto et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PIOTTO_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-561 d was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-561. Its orbit and size follow Piotto et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PIOTTO_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 25.7124, pl_radj 0.23329508, pl_bmassj 0.04194087"
+      },
+      "order": 4542
+    }
+  ]
+}

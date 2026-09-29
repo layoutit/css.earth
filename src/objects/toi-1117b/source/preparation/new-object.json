@@ -1,0 +1,24 @@
+{
+  "host": "toi-1117",
+  "planets": [
+    {
+      "id": "toi-1117b",
+      "name": "TOI-1117 b",
+      "description": "Transiting planet of TOI-1117 with a 2.23-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+        "credit": "Lockley et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LOCKLEY_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-1117 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around TOI-1117. Its orbit and size follow Lockley et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LOCKLEY_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 2.22816, pl_radj 0.21946688, pl_bmassj 0.02800253"
+      },
+      "order": 3922
+    }
+  ]
+}

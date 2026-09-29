@@ -2,7 +2,7 @@
 // per-body runtime-contract files that stamped the same checks with the body's name filled in.
 // CSSEARTH_TEST_OBJECTS=<id>[,<id>] limits a run to those bodies (see anchor-table.mts).
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-149026b",
+  "displayName": "HD 149026 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.74 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.88 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.38 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body colour at its measured dayside temperature, 2,300 K. The disc itself is unresolved.",
+        "thumbnail": "hd-149026b-lens-thermal.webp",
+        "surface": "hd-149026b-surface-thermal@2x.webp",
+        "poles": "hd-149026b-poles-thermal@2x.webp",
+        "source": {
+          "id": "hd-149026b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2007Natur.447..691H/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of HD 149026 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 8 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-149026b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-149026b/hd-149026b-system-orbits.svg",
+      "alt": "The orbits of HD 149026's planets in this map from above, to scale, with HD 149026 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-149026b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S"
+      }
+    },
+    {
+      "id": "hd-149026b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-149026b/hd-149026b-transit.svg",
+      "alt": "HD 149026 b crossing its star, as TESS recorded it: 3 sectors (52, 78, 79) of the SPOC pipeline's 2-minute light curves of TIC 255930614, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-149026b-tess-sector-52",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022138205153-s0052-0000000255930614-0224-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stassun et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-149026b.json",
+      "credit": "Radius from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive; mass from Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive; orbit from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive"
+    }
+  }
+}

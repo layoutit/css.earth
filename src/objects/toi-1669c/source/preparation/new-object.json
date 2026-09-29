@@ -1,0 +1,24 @@
+{
+  "host": "toi-1669",
+  "planets": [
+    {
+      "id": "toi-1669c",
+      "name": "TOI-1669 c",
+      "description": "Transiting planet of TOI-1669 with a 2.68-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1669 c was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1669. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.6800536, pl_radj 0.20487123, pl_bmassj 0.04090257"
+      },
+      "order": 4079
+    }
+  ]
+}

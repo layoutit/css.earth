@@ -1,0 +1,39 @@
+{
+  "id": "toi-1478",
+  "name": "TOI-1478",
+  "system": "TOI-1478 system",
+  "description": "Star of 5,597 K, 153 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1478",
+  "gaia": "5723638723350902400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..104R/abstract",
+    "credit": "Rice et al. 2022"
+  },
+  "radius": {
+    "value": 1.048,
+    "source": "Rodriguez et al. 2021, the stellar radius of TOI-1478 b's parameter set from Rodriguez et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.947,
+    "source": "Rodriguez et al. 2021, the stellar mass of TOI-1478 b's parameter set from Rodriguez et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "uncertainty": 0.059
+  },
+  "temperature": {
+    "value": 5597,
+    "source": "Rodriguez et al. 2021, the stellar temperature of TOI-1478 b's parameter set from Rodriguez et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "uncertainty": 83
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1478 b crosses TOI-1478 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Rodriguez et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUEZ_ET_AL__2021): st_teff 5597, st_rad 1.048, st_mass 0.947"
+  },
+  "notes": [],
+  "order": 4065
+}

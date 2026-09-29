@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-6894",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 158,341 km at 73.08 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 73.07693075727921,
+  "distanceSource": "Gaia DR3 parallax 13.6842 +/- 0.0532 mas (same row, RUWE 1.01): 73.08 pc, no zero-point correction",
+  "radiusKm": 158341.3,
+  "radiusSource": "Radius 0.2276 +/- 0.0057 solar radii from Bryant et al. 2025, the stellar radius of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract): 158,341 km at 695,700 km per solar radius. Mass 0.207 +/- 0.011 solar masses from Bryant et al. 2025, the stellar mass of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract); GM is that mass times the JPL solar GM. Temperature 3007 +/- 58 K from Bryant et al. 2025, the stellar temperature of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3007,
+  "effectiveTemperatureSource": "Bryant et al. 2025, the stellar temperature of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract)",
+  "surfaceGravityLogg": 5.04,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6894.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.040, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

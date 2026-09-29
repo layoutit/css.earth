@@ -1,0 +1,45 @@
+{
+  "id": "wasp-104-b",
+  "name": "WASP-104B",
+  "system": "WASP-104 system",
+  "description": "Star bound to WASP-104, 1,276 AU away.",
+  "gaia": "3868603212468513280",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.26,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 393495969 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.231,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 393495969 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.024
+  },
+  "temperature": {
+    "value": 3317,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 393495969 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 164
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-104B is a star of 3,317 K, bound to WASP-104 1,276 AU away.",
+    "introduction": "WASP-104B shares its motion through space with WASP-104, 1,276 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 3868603216762016256 and 3868603212468513280, sep_AU 1275.561350191084330, R_chance_align 1.000148571890046542e-05"
+  },
+  "notes": [
+    "WASP-104B's orbit around WASP-104 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 3868603212468513280 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 60,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%203868603212468513280"
+  },
+  "order": 4769
+}

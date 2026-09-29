@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import {mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { astroqueryToolchain, WORKSPACE } from '@cssearth/telescope/node';
 import {describeMixedNd,extractMixedNd,inspectMixedNd} from './f02-mixed-nd.mts';import{member}from'./common.mts';import{executeFamilyOperation}from'../family-operation.mts';

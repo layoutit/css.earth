@@ -1,0 +1,24 @@
+{
+  "host": "toi-2345",
+  "planets": [
+    {
+      "id": "toi-2345c",
+      "name": "TOI-2345 c",
+      "description": "Transiting planet of TOI-2345 with a 21.1-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract",
+        "credit": "Eschen et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESCHEN_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-2345 c was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-2345. Its orbit and size follow Eschen et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESCHEN_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 21.064302, pl_radj 0.21866395, pl_bmassj 0.02287398"
+      },
+      "order": 4286
+    }
+  ]
+}

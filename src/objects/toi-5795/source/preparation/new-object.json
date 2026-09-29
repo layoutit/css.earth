@@ -1,0 +1,39 @@
+{
+  "id": "toi-5795",
+  "name": "TOI-5795",
+  "system": "TOI-5795 system",
+  "description": "Star of 5,715 K, 157 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5795",
+  "gaia": "4216036349838071424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+    "credit": "Manni et al. 2025"
+  },
+  "radius": {
+    "value": 1.082,
+    "source": "Manni et al. 2025, the stellar radius of the default parameter set of TOI-5795 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+    "uncertainty": 0.026
+  },
+  "mass": {
+    "value": 0.901,
+    "source": "Manni et al. 2025, the stellar mass of the default parameter set of TOI-5795 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+    "uncertainty": 0.055
+  },
+  "temperature": {
+    "value": 5715,
+    "source": "Manni et al. 2025, the stellar temperature of the default parameter set of TOI-5795 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+    "uncertainty": 55
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5795 b crosses TOI-5795 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Manni et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANNI_ET_AL_2025): st_teff 5715, st_rad 1.082, st_mass 0.901"
+  },
+  "notes": [],
+  "order": 4580
+}

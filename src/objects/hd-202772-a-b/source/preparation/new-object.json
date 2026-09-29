@@ -1,0 +1,24 @@
+{
+  "host": "hd-202772-a",
+  "planets": [
+    {
+      "id": "hd-202772-a-b",
+      "name": "HD 202772 A b",
+      "description": "Transiting planet of HD 202772 A with a 3.31-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+        "credit": "Jofré et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "JOFRE_ET_AL_2025"
+      },
+      "text": {
+        "card": "HD 202772 A b was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 202772 A. Its orbit and size follow Jofré et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOFRE_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.3088775, pl_radj 1.627, pl_bmassj 1.018"
+      },
+      "order": 3184
+    }
+  ]
+}

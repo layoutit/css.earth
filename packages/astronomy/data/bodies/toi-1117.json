@@ -1,0 +1,30 @@
+{
+ "id": "toi-1117",
+ "classification": "star",
+ "order": 3921,
+ "physical": {
+  "name": "TOI-1117",
+  "horizonsCode": null,
+  "meanRadiusKm": 730485,
+  "gravitationalParameterKm3PerS2": 128731066840.6812,
+  "parent": null,
+  "effectiveTemperatureK": 5635
+ },
+ "physicalNotes": "Radius 1.05 +/- 0.03 solar radii from Lockley et al. 2025, the stellar radius of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract): 730,485 km at 695,700 km per solar radius. Mass 0.97 +/- 0.02 solar masses from Lockley et al. 2025, the stellar mass of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract); GM is that mass times the JPL solar GM. Temperature 5635 +/- 62 K from Lockley et al. 2025, the stellar temperature of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 273.6020552126747,
+  "declinationDegrees": -66.41997959733357,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 166.8018130534357,
+  "properMotionRaMasPerYear": -15.490936974136805,
+  "properMotionDecMasPerYear": -38.740688707315286,
+  "radialVelocityKmPerS": -24.727884,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6436995652638923392 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1117/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.9951 +/- 0.0154 mas (same row, RUWE 1.00): 166.80 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -15.491, -38.741 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -24.73 +/- 0.24 km/s"
+  }
+ }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wolf-327b",
+  "radiusKm": 7908.8,
+  "radiusSource": "Radius 0.11062558 Jupiter radii from Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract): 7,908.8 km at 71,492 km per Jupiter radius. GM from the mass 0.00796027 Jupiter masses (Murgas et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...684A..83M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.5734745,
+  "orbitalPeriodSource": "Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2024): P 0.5734745 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Wolf 327 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00796027 Jupiter masses: Murgas et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...684A..83M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)."
+}

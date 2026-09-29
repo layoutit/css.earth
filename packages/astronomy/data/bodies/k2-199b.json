@@ -1,0 +1,31 @@
+{
+ "id": "k2-199b",
+ "classification": "exoplanet",
+ "order": 3377,
+ "physical": {
+  "name": "K2-199 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 11034.1,
+  "gravitationalParameterKm3PerS2": 2750343.07,
+  "parent": "k2-199"
+ },
+ "physicalNotes": "Radius 0.15434053 Jupiter radii from Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract): 11,034.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02170983 Jupiter masses (Akana Murphy et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts (2021AJ....162..294A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.2253993,
+  "semiMajorAxisStellarRadii": 12.07,
+  "inclinationDegrees": 88.8,
+  "eccentricity": 0.02,
+  "argumentOfPeriapsisDegrees": 170,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57218.23733,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): P 3.2253993 d",
+   "shape": "Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): a/R* 12.07; Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): inclination 88.8 degrees",
+   "eccentricity": "Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): e 0.02",
+   "argumentOfPeriapsis": "Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): omega 170 degrees",
+   "phase": "Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): transit mid-time 2457218.73733 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-2096",
+  "name": "TOI-2096",
+  "system": "TOI-2096 system",
+  "description": "Star of 3,300 K, 48.5 parsecs away, with 2 transiting planets.",
+  "target": "TOI-2096",
+  "gaia": "1126422935076082176",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract",
+    "credit": "Pozuelos et al. 2023"
+  },
+  "radius": {
+    "value": 0.235,
+    "source": "Pozuelos et al. 2023, the stellar radius of the default parameter set of TOI-2096 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.231,
+    "source": "Pozuelos et al. 2023, the stellar mass of the default parameter set of TOI-2096 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract",
+    "uncertainty": 0.012
+  },
+  "temperature": {
+    "value": 3300,
+    "source": "Pozuelos et al. 2023, the stellar temperature of the default parameter set of TOI-2096 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-2096 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Pozuelos et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname POZUELOS_ET_AL_2023): st_teff 3300, st_rad 0.235, st_mass 0.231"
+  },
+  "notes": [],
+  "order": 4247
+}

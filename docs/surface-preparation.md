@@ -273,8 +273,8 @@ no Pallas body recipe or surface output changes here.
 `node tests/oracles/test-fits.mts --unit` runs the offline subset, including small checked-in
 Astropy-generated FITS files. CI runs this subset. It does not prove that the
 large archive files are available or that complete body preparation passed.
-Regenerate the small reference fixtures with `node tests/oracles/setup.mts`, then
-`node tests/oracles/run.mts fits/core`; normal tests need no Python environment.
+Regenerate the small reference fixtures with `node packages/core/src/node/oracle/setup.mts`, then
+`node packages/core/src/node/oracle/run.mts fits/core`; normal tests need no Python environment.
 
 The retained runner's full and `--restore` paths still name four removed per-body
 test files under `tests/objects/unit/`. They are not a working complete gate.
@@ -726,7 +726,7 @@ after building the tools and restoring Arrokoth's inputs:
 ```sh
 node packages/bake/cli/object-operations.mts acquire arrokoth --verify-only
 node site/build/prepare/prepare-authored.ts arrokoth --write
-node --test tests/objects/terrestrial/obj-uv-fits.test.mts
+node --test packages/bake/src/objects/raster/obj-uv-fits.test.mts
 ```
 
 The UV test checks interpolation, row order, missing values and bounded transfer.

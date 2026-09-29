@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1408b",
+  "radiusKm": 159452.5,
+  "radiusSource": "Radius 2.23035445 Jupiter radii from Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract): 159,452.5 km at 71,492 km per Jupiter radius. GM from the mass 1.86578665 Jupiter masses (Korth et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...971L..28K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.4247042,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.4247042 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1408 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.86578665 Jupiter masses: Korth et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...971L..28K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)."
+}

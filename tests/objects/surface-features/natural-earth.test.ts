@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { loadNaturalEarthRows, naturalEarthZoomShare, parseNaturalEarthConfig } from '@cssearth/bake/objects/surface-features';
 

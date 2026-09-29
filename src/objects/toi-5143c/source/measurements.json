@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-5143c",
+  "radiusKm": 103663.4,
+  "radiusSource": "Radius 1.45 Jupiter radii from Radzom et al. 2025 (2025AJ....169..189R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract): 103,663.4 km at 71,492 km per Jupiter radius. No mass is measured: the NASA Exoplanet Archive's composite table, which adopts no mass for TOI-5143 c (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html), so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.2097118,
+  "orbitalPeriodSource": "Radzom et al. 2025 (2025AJ....169..189R), via the NASA Exoplanet Archive ps table (pl_refname RADZOM_ET_AL__2025): P 5.2097118 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-5143 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Not measured: the NASA Exoplanet Archive's composite table, which adopts no mass for TOI-5143 c (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html)."
+}

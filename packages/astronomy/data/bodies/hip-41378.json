@@ -1,0 +1,30 @@
+{
+ "id": "hip-41378",
+ "classification": "star",
+ "order": 3252,
+ "physical": {
+  "name": "HIP 41378",
+  "horizonsCode": null,
+  "meanRadiusKm": 904410,
+  "gravitationalParameterKm3PerS2": 161909176851.16605,
+  "parent": null,
+  "effectiveTemperatureK": 6290
+ },
+ "physicalNotes": "Radius 1.3 +/- 0.009 solar radii from Lund et al. 2019, the stellar radius of the default parameter set of HIP 41378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract): 904,410 km at 695,700 km per solar radius. Mass 1.22 +/- 0.03 solar masses from Lund et al. 2019, the stellar mass of the default parameter set of HIP 41378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract); GM is that mass times the JPL solar GM. Temperature 6290 +/- 77 K from Lund et al. 2019, the stellar temperature of the default parameter set of HIP 41378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..248L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 126.61582118661032,
+  "declinationDegrees": 10.08037088200523,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 105.97687147974301,
+  "properMotionRaMasPerYear": -48.00195708069586,
+  "properMotionDecMasPerYear": 0.06248682239045799,
+  "radialVelocityKmPerS": 50.42,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 600698184764497664 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hip-41378/source/photometry/gaia-dr3-source.csv; cross-identification HIP 41378: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+600698184764497664",
+   "distance": "Gaia DR3 parallax 9.4360 +/- 0.0208 mas (same row, RUWE 0.98): 105.98 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -48.002, 0.062 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 600698184764497664 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract)"
+  }
+ }
+}

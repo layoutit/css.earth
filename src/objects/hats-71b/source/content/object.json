@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hats-71b",
+  "displayName": "HATS-71 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.0 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab8ad1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B",
+          "label": "Bakos et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.8 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab8ad1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B",
+          "label": "Bakos et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.37 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab8ad1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B",
+          "label": "Bakos et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HATS-71; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hats-71b-lens-shape.webp",
+        "surface": "hats-71b-surface-shape@2x.webp",
+        "poles": "hats-71b-poles-shape@2x.webp",
+        "source": {
+          "id": "hats-71b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HATS-71 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hats-71's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hats-71b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hats-71b/hats-71b-system-orbits.svg",
+      "alt": "The orbits of HATS-71's planets in this map from above, to scale, with HATS-71 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hats-71b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B"
+      }
+    },
+    {
+      "id": "hats-71b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hats-71b/hats-71b-transit.svg",
+      "alt": "HATS-71 b crossing its star, as TESS recorded it: 3 sectors (96, 103, 104) of the SPOC pipeline's 2-minute light curves of TIC 234523599, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hats-71b-tess-sector-96",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025232030459-s0096-0000000234523599-0293-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bakos et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+      "credit": "Bakos et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hats-71b.json",
+      "credit": "Radius from Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive; mass from Bakos et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....159..267B), via the NASA Exoplanet Archive; orbit from Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive"
+    }
+  }
+}

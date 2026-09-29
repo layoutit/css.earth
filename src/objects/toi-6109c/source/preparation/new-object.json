@@ -1,0 +1,24 @@
+{
+  "host": "toi-6109",
+  "planets": [
+    {
+      "id": "toi-6109c",
+      "name": "TOI-6109 c",
+      "description": "Transiting planet of TOI-6109 with a 8.54-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+        "credit": "Dattilo et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DATTILO_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-6109 c was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-6109. Its orbit and size follow Dattilo et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DATTILO_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 8.538878, pl_radj 0.43113644, pl_bmassj 0.0655"
+      },
+      "order": 4615
+    }
+  ]
+}

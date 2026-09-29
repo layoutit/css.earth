@@ -1,0 +1,46 @@
+{
+  "id": "toi-1431",
+  "name": "TOI-1431",
+  "system": "TOI-1431 system",
+  "description": "Star of 7,690 K, 149 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1431",
+  "gaia": "2188906825165621120",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+    "credit": "Addison et al. 2021"
+  },
+  "radius": {
+    "value": 1.92,
+    "source": "Addison et al. 2021, the stellar radius of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+    "uncertainty": 0.07
+  },
+  "mass": {
+    "value": 1.9,
+    "source": "Addison et al. 2021, the stellar mass of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+    "uncertainty": 0.1
+  },
+  "temperature": {
+    "value": 7690,
+    "source": "Addison et al. 2021, the stellar temperature of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+    "uncertainty": 400
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1431 b crosses TOI-1431 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Addison et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2021): st_teff 7690, st_rad 1.92, st_mass 1.9",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-1431_b",
+      "title": "TOI-1431 b",
+      "revision": "1366872522",
+      "card": "TOI-1431 b, also known as MASCARA-5b, is an ultra-hot Jupiter exoplanet orbiting TOI-1431 in the constellation of Cepheus.",
+      "introduction": "It has an orbital period of 2.7 days."
+    }
+  },
+  "notes": [],
+  "order": 4030
+}

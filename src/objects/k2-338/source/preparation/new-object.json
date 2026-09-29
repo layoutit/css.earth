@@ -1,0 +1,39 @@
+{
+  "id": "k2-338",
+  "name": "K2-338",
+  "system": "K2-338 system",
+  "description": "Star of 4,558 K, 157 parsecs away, with 1 transiting planet.",
+  "target": "K2-338",
+  "gaia": "656201703533465088",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "credit": "de Leon et al. 2021"
+  },
+  "radius": {
+    "value": 0.63,
+    "source": "de Leon et al. 2021, the stellar radius of the default parameter set of K2-338 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.66,
+    "source": "de Leon et al. 2021, the stellar mass of the default parameter set of K2-338 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4558,
+    "source": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-338 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 91
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-338 b crosses K2-338 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow de Leon et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DE_LEON_ET_AL_2021): st_teff 4558, st_rad 0.63, st_mass 0.66"
+  },
+  "notes": [],
+  "order": 3514
+}

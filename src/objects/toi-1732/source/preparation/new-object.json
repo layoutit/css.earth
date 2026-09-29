@@ -1,0 +1,37 @@
+{
+  "id": "toi-1732",
+  "name": "TOI-1732",
+  "system": "TOI-1732 system",
+  "description": "Star of 4,202 K, 74.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1732",
+  "gaia": "983858058396166016",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.632571,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-1732 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": {
+    "value": 0.614,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 470987100 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4201.93,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-1732 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1732 b crosses TOI-1732 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 4201.93, st_rad 0.632571"
+  },
+  "notes": [],
+  "order": 4889
+}

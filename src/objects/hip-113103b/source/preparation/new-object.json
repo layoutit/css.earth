@@ -1,0 +1,24 @@
+{
+  "host": "hip-113103",
+  "planets": [
+    {
+      "id": "hip-113103b",
+      "name": "HIP 113103 b",
+      "description": "Transiting planet of HIP 113103 with a 7.61-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.1146L/abstract",
+        "credit": "Lowson et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LOWSON_ET_AL_2024"
+      },
+      "text": {
+        "card": "HIP 113103 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HIP 113103. Its orbit and size follow Lowson et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LOWSON_ET_AL_2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 7.610303, pl_radj 0.16317273, pl_bmassj 0.0126"
+      },
+      "order": 3248
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-1221",
+  "planets": [
+    {
+      "id": "toi-1221b",
+      "name": "TOI-1221 b",
+      "description": "Transiting planet of TOI-1221 with a 91.7-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+        "credit": "Mann et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANN_ET_AL__2023"
+      },
+      "text": {
+        "card": "TOI-1221 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1221. Its orbit and size follow Mann et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 91.68278, pl_radj 0.25961326, pl_bmassj 3.5"
+      },
+      "order": 3953
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "id": "toi-5595",
+ "classification": "star",
+ "order": 4905,
+ "physical": {
+  "name": "TOI-5595",
+  "horizonsCode": null,
+  "meanRadiusKm": 517144.4,
+  "gravitationalParameterKm3PerS2": 85599523827.0509,
+  "parent": null,
+  "effectiveTemperatureK": 4417.3
+ },
+ "physicalNotes": "Radius 0.743344 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-5595 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 517,144 km at 695,700 km per solar radius. Mass 0.645 +/- 0.077 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 302908969 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 4417.3 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-5595 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 110.46015164232968,
+  "declinationDegrees": 35.22197805002176,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 136.68854064492214,
+  "properMotionRaMasPerYear": -78.00507404463796,
+  "properMotionDecMasPerYear": -35.15053391259142,
+  "radialVelocityKmPerS": 114.99004,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 897068039338406400 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-5595/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 7.3159 +/- 0.0202 mas (same row, RUWE 1.17): 136.69 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -78.005, -35.151 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 114.99 +/- 2.62 km/s"
+  }
+ }
+}

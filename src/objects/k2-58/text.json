@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-58",
+  "card": {
+    "text": "3 planets cross K2-58 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0067-0049-226-1-7",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+        "label": "Crossfield et al. (2016), The Astrophysical Journal Supplement Series 226 7",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL__2016): st_teff 5413, st_rad 0.86, st_mass 0.89"
+      },
+      {
+        "catalogueId": "wikipedia-k2-58",
+        "url": "https://en.wikipedia.org/wiki/K2-58",
+        "label": "Wikipedia, \"K2-58\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1358599853",
+        "quote": "K2-58 is a G-type main-sequence star in the constellation of Aquarius, approximately 596 light-years from the Solar System."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Crossfield et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0067-0049-226-1-7",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+        "label": "Crossfield et al. (2016), The Astrophysical Journal Supplement Series 226 7",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL__2016): st_teff 5413, st_rad 0.86, st_mass 0.89"
+      },
+      {
+        "catalogueId": "wikipedia-k2-58",
+        "url": "https://en.wikipedia.org/wiki/K2-58",
+        "label": "Wikipedia, \"K2-58\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1358599853",
+        "quote": "The star is metal-rich, having 155% of the Solar abundance of elements heavier than helium."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

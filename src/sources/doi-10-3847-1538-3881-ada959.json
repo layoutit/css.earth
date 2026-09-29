@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ada959",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baliwal et al. (2025): TOI-6038 A b: A Dense Sub-Saturn in the Transition Regime between the Neptunian Ridge and Savanna",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2501.02272"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ada959"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....169..147B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ada959",
+      "label": "The Astronomical Journal 169 147"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Baliwal et al. (2025), The Astronomical Journal 169 147",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B"
+    }
+  ],
+  "publisher": "The Astronomical Journal 169 147",
+  "creators": [
+    "Sanjay Baliwal",
+    "Rishikesh Sharma",
+    "Abhijit Chakraborty",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

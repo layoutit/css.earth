@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1052",
+  "card": {
+    "text": "TOI-1052 b crosses TOI-1052 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad2183",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+        "label": "Armstrong et al. (2023), Monthly Notices of the Royal Astronomical Society 524 5804-5816",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ARMSTRONG_ET_AL_2023): st_teff 6146, st_rad 1.264, st_mass 1.204"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Armstrong et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad2183",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+        "label": "Armstrong et al. (2023), Monthly Notices of the Royal Astronomical Society 524 5804-5816",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ARMSTRONG_ET_AL_2023): st_teff 6146, st_rad 1.264, st_mass 1.204"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

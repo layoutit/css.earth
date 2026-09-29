@@ -68,8 +68,12 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     const kept = current?.assets.filter(asset => asset.location === 'prepared' && !receipt.outputs.some(output => output.path === asset.filename)) ?? [];
     await updateInventory({ objectId: basename(objectDirectory), objectDirectory, location: 'prepared',
       assets: [...kept, { filename: 'catalogue.json', bytes: bytes.length, sha256: sha256(bytes) }, { filename: 'display-sample.json', bytes: displayBytes.length, sha256: sha256(displayBytes) }] });
+    // Authored descriptor properties (an overview entry, for one) stay; the preparation pin is this bake's.
+    const existing = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').then(text => record(JSON.parse(text), 'object.json'), (error: unknown) => {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
+    const authored = existing?.properties === undefined ? {} : record(existing.properties, 'object.json properties');
     const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
-      properties: { preparation: { source: 'source/catalogue.json' } },
+      properties: { ...authored, preparation: { source: 'source/catalogue.json' } },
       prepared: { format: data.schema, url: 'prepared/catalogue.json' } };
     await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify(descriptor, null, 2) + '\n');
   }

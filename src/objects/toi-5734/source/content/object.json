@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-5734",
+  "displayName": "TOI-5734",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.64 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202555931",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F",
+          "label": "Filomeno et al. (2026), Astronomy & Astrophysics 708 A90",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "32.6 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-5734",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "toi-5734-lens-color.webp",
+        "surface": "toi-5734-surface-color@2x.webp",
+        "poles": "toi-5734-poles-color@2x.webp",
+        "source": {
+          "id": "toi-5734-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,750 K and log g 4.69 (u1 0.726, u2 0.061): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Filomeno et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract",
+      "credit": "Filomeno et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-5734.json",
+      "credit": "Filomeno et al. 2026, the stellar radius of the default parameter set of TOI-5734 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

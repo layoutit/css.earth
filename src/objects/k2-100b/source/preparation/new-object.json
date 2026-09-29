@@ -1,0 +1,24 @@
+{
+  "host": "k2-100",
+  "planets": [
+    {
+      "id": "k2-100b",
+      "name": "K2-100 b",
+      "description": "Transiting planet of K2-100 with a 1.67-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+        "credit": "Barragán et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARRAG_AACUTE_N_ET_AL__2019"
+      },
+      "text": {
+        "card": "K2-100 b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-100. Its orbit and size follow Barragán et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAG_AACUTE_N_ET_AL__2019): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 1.6739035, pl_radj 0.34615101, pl_bmassj 0.06859047"
+      },
+      "order": 3271
+    }
+  ]
+}

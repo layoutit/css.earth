@@ -1,0 +1,46 @@
+{
+  "id": "toi-4342",
+  "name": "TOI-4342",
+  "system": "TOI-4342 system",
+  "description": "Star of 3,866 K, 61.5 parsecs away, with 2 transiting planets.",
+  "target": "TOI-4342",
+  "gaia": "6355915466181029376",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract",
+    "credit": "Parc et al. 2026"
+  },
+  "radius": {
+    "value": 0.598,
+    "source": "Parc et al. 2026, the stellar radius of the default parameter set of TOI-4342 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract",
+    "uncertainty": 0.018
+  },
+  "mass": {
+    "value": 0.587,
+    "source": "Parc et al. 2026, the stellar mass of the default parameter set of TOI-4342 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract",
+    "uncertainty": 0.013
+  },
+  "temperature": {
+    "value": 3866,
+    "source": "Parc et al. 2026, the stellar temperature of the default parameter set of TOI-4342 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract",
+    "uncertainty": 92
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-4342 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Parc et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PARC_ET_AL_2026): st_teff 3866, st_rad 0.598, st_mass 0.587",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-4342",
+      "title": "TOI-4342",
+      "revision": "1374441490",
+      "card": "TOI-4342 is a red dwarf star in the constellation Octans located 201 light-years from Earth.",
+      "introduction": "It hosts two transiting exoplanets."
+    }
+  },
+  "notes": [],
+  "order": 4402
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hip-116454b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hip-116454b-orbits",
+      "title": "HIP 116454 b: orbits around HIP 116454",
+      "output": "hip-116454b-system-orbits.svg",
+      "system": "hip-116454",
+      "highlight": "hip-116454b",
+      "description": "The orbits of HIP 116454's planets in this map from above, to scale, with HIP 116454 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): P 9.1004157 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hip-116454b-transit",
+      "title": "HIP 116454 b: its transit",
+      "description": "HIP 116454 b crossing its star, as TESS recorded it: 3 sectors (42, 70, 92) of the SPOC pipeline's 2-minute light curves of TIC 422618449, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "output": "hip-116454b-transit.svg",
+      "metadata": {
+        "tic": "TIC 422618449",
+        "sectors": [
+          42,
+          70,
+          92
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hip-116454b",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000422618449-0213-s_lc.fits",
+        "photometry/tess/tess2023263165758-s0070-0000000422618449-0265-s_lc.fits",
+        "photometry/tess/tess2025127075000-s0092-0000000422618449-0289-s_lc.fits"
+      ],
+      "durationHours": 2.431,
+      "binMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sectors 42, 70, 92",
+        "Folded on the app's orbit; 10-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

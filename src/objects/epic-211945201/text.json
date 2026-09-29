@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "epic-211945201",
+  "card": {
+    "text": "EPIC 211945201 b crosses EPIC 211945201 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aae778",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+        "label": "Livingston et al. (2018), The Astronomical Journal 156 277",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 6069, st_rad 1.39, st_mass 1.17"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Livingston et al. 2018.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aae778",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+        "label": "Livingston et al. (2018), The Astronomical Journal 156 277",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 6069, st_rad 1.39, st_mass 1.17"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

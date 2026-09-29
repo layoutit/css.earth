@@ -1,0 +1,41 @@
+{
+  "id": "toi-1669",
+  "name": "TOI-1669",
+  "system": "TOI-1669 system",
+  "description": "Star of 5,497 K, 111 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1669",
+  "gaia": "569673024645542528",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 1.0561,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1669 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0188
+  },
+  "mass": {
+    "value": 0.9867,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1669 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0322
+  },
+  "temperature": {
+    "value": 5497,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1669 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 73
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1669 c crosses TOI-1669 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5497, st_rad 1.0561, st_mass 0.9867"
+  },
+  "notes": [
+    "TOI-1669 b: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4078
+}

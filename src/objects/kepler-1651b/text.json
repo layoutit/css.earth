@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-1651b",
+  "card": {
+    "text": "Kepler-1651 b was found in 2017 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa7140",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+        "label": "Mann et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2017): disc_year 2017, disc_facility Kepler, sy_pnum 1; pl_orbper 9.87863917, pl_radj 0.1641538, pl_bmassj 0.0127"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Kepler-1651. Its orbit and size follow Mann et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa7140",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+        "label": "Mann et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2017): disc_year 2017, disc_facility Kepler, sy_pnum 1; pl_orbper 9.87863917, pl_radj 0.1641538, pl_bmassj 0.0127"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

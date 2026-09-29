@@ -1,0 +1,48 @@
+{
+  "id": "kepler-10",
+  "name": "Kepler-10",
+  "system": "Kepler-10 system",
+  "description": "Star of 5,708 K, 186 parsecs away, with 2 transiting planets.",
+  "target": "Kepler-10",
+  "gaia": "2132155017099178624",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract",
+    "credit": "Dumusque et al. 2014"
+  },
+  "radius": {
+    "value": 1.065,
+    "source": "Dumusque et al. 2014, the stellar radius of the default parameter set of Kepler-10 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract",
+    "uncertainty": 0.009
+  },
+  "mass": {
+    "value": 0.91,
+    "source": "Dumusque et al. 2014, the stellar mass of the default parameter set of Kepler-10 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract",
+    "uncertainty": 0.021
+  },
+  "temperature": {
+    "value": 5708,
+    "source": "Dumusque et al. 2014, the stellar temperature of the default parameter set of Kepler-10 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract",
+    "uncertainty": 28
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross Kepler-10 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Dumusque et al. 2014.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DUMUSQUE_ET_AL__2014): st_teff 5708, st_rad 1.065, st_mass 0.91",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-10",
+      "title": "Kepler-10",
+      "revision": "1374405025",
+      "card": "Kepler-10, formerly known as KOI-72, is a Sun-like star in the constellation of Draco that lies 607 light-years from Earth.",
+      "introduction": "Kepler-10 was targeted by NASA's Kepler space telescope, as it was seen as the first star identified by the Kepler mission that could be a possible host to a small, transiting exoplanet."
+    }
+  },
+  "notes": [
+    "Kepler-10 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3645
+}

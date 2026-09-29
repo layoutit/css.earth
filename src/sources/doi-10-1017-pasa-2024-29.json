@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1017-pasa-2024-29",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mistry et al. (2024): VaTEST III: Validation of eight potential super-earths from TESS data",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2311.00688"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1017/pasa.2024.29"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024PASA...41...30M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1017/pasa.2024.29",
+      "label": "Publications of the Astronomical Society of Australia 41 e030"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of Australia 41 e030",
+  "creators": [
+    "Priyashkumar Mistry",
+    "Aniket Prasad",
+    "Mousam Maity",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '../../objects/source-test.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { utcToEt, etToUtc, encodeClock, clockToEt, etToClock, apply, transpose, spiceCamera } from '@cssearth/spice';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../fixture.mts';
+import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '@cssearth/core/oracle';
 
 /**
  * The SPICE toolkit as the oracle. tests/oracles/spice/dart-draco.py runs

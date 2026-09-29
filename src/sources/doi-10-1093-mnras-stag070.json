@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stag070",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Scott et al. (2026): Two temperate Earth- and Neptune-sized planets orbiting fully convective M dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2601.05799"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stag070"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.547ag070S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stag070",
+      "label": "Monthly Notices of the Royal Astronomical Society 547 stag070"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Scott et al. (2026), Monthly Notices of the Royal Astronomical Society 547 stag070",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 547 stag070",
+  "creators": [
+    "Madison G Scott",
+    "Georgina Dransfield",
+    "Mathilde Timmermans",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

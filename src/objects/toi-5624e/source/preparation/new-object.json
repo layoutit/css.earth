@@ -1,0 +1,31 @@
+{
+  "host": "toi-5624",
+  "planets": [
+    {
+      "id": "toi-5624e",
+      "name": "TOI-5624 e",
+      "description": "Transiting planet of TOI-5624 with a 21.5-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "credit": "Bonfanti et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONFANTI_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5624 e was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 5 planets known around TOI-5624. Its orbit and size follow Bonfanti et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 21.489936, pl_radj 0.28967844, pl_bmassj 0.02800253",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-5624_e",
+          "title": "TOI-5624 e",
+          "revision": "1374248216",
+          "card": "TOI-5624 e is the fourth and the second largest exoplanet discovered in the TOI-5624 system, located approximately 331 light-years from Earth in the constellation Ursa Major.",
+          "introduction": "The discovery of the object was officially announced by an international team of astronomers led by Andrea Bonfant in late April 2026."
+        }
+      },
+      "order": 4548
+    }
+  ]
+}

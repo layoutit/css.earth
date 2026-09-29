@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stae1804",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gill et al. (2024): Correction to: TOI-2447 b / NGTS-29 b: a 69-day Saturn around a Solar analogue",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2405.07367"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stae1804"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024MNRAS.533..109G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stae1804",
+      "label": "Monthly Notices of the Royal Astronomical Society 533 109-109"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gill et al. (2024), Monthly Notices of the Royal Astronomical Society 533 109-109",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 533 109-109",
+  "creators": [
+    "Samuel Gill",
+    "Daniel Bayliss",
+    "Solène Ulmer-Moll",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

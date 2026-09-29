@@ -1,0 +1,24 @@
+{
+  "host": "toi-5319",
+  "planets": [
+    {
+      "id": "toi-5319b",
+      "name": "TOI-5319 b",
+      "description": "Transiting planet of TOI-5319 with a 4.08-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+        "credit": "Peláez-Torres et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-5319 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5319. Its orbit and size follow Peláez-Torres et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.07853, pl_radj 0.25247612, pl_bmassj 0.0264"
+      },
+      "order": 4508
+    }
+  ]
+}

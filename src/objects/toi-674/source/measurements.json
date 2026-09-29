@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-674",
+  "angularDiameterMas": 0.08,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 292,194 km at 46.25 pc = 0.08 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 46.24741868628548,
+  "distanceSource": "Gaia DR3 parallax 21.6228 +/- 0.0157 mas (same row, RUWE 1.35): 46.25 pc, no zero-point correction",
+  "radiusKm": 292194,
+  "radiusSource": "Radius 0.42 +/- 0.013 solar radii from Murgas et al. 2021, the stellar radius of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract): 292,194 km at 695,700 km per solar radius. Mass 0.42 +/- 0.01 solar masses from Murgas et al. 2021, the stellar mass of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract); GM is that mass times the JPL solar GM. Temperature 3514 +/- 57 K from Murgas et al. 2021, the stellar temperature of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3514,
+  "effectiveTemperatureSource": "Murgas et al. 2021, the stellar temperature of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
+  "surfaceGravityLogg": 4.81,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-674.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.815, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stag087",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barragán et al. (2026): Mass estimates of the young TOI-451 transiting planets: multidimensional Gaussian Process on stellar spectroscopic and photometric signals",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2601.09438"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stag087"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.546ag087B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stag087",
+      "label": "Monthly Notices of the Royal Astronomical Society 546 stag087"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barragán et al. (2026), Monthly Notices of the Royal Astronomical Society 546 stag087",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 546 stag087",
+  "creators": [
+    "Oscar Barragán",
+    "Manuel Mallorquín",
+    "Jorge Fernández-Fernández",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

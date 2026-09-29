@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac69e5",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Turtelboom et al. (2022): The TESS-Keck Survey. XI. Mass Measurements for Four Transiting Sub-Neptunes Orbiting K Dwarf TOI–1246",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2204.11895"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac69e5"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....163..293T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac69e5",
+      "label": "The Astronomical Journal 163 293"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Turtelboom et al. (2022), The Astronomical Journal 163 293",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T"
+    }
+  ],
+  "publisher": "The Astronomical Journal 163 293",
+  "creators": [
+    "Emma V. Turtelboom",
+    "Lauren M. Weiss",
+    "Courtney D. Dressing",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

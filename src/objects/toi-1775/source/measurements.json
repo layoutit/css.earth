@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-1775",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 576,596 km at 149.57 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 149.57177839737668,
+  "distanceSource": "Gaia DR3 parallax 6.6858 +/- 0.0197 mas (same row, RUWE 1.03): 149.57 pc, no zero-point correction",
+  "radiusKm": 576596.2,
+  "radiusSource": "Radius 0.8288 +/- 0.0115 solar radii from MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1775 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract): 576,596 km at 695,700 km per solar radius. Mass 0.9218 +/- 0.0143 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1775 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract); GM is that mass times the JPL solar GM. Temperature 5284 +/- 50 K from MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1775 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5284,
+  "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1775 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "surfaceGravityLogg": 4.57,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1775.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.566, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

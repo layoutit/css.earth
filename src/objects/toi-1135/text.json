@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1135",
+  "card": {
+    "text": "TOI-1135 b crosses TOI-1135 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae18c7",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+        "label": "Dugan et al. (2025), The Astrophysical Journal Letters 994 L23",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DUGAN_ET_AL_2025): st_teff 6320, st_rad 1.202, st_mass 1.119"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Dugan et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae18c7",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+        "label": "Dugan et al. (2025), The Astrophysical Journal Letters 994 L23",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DUGAN_ET_AL_2025): st_teff 6320, st_rad 1.202, st_mass 1.119"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

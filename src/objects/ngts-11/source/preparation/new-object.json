@@ -1,0 +1,39 @@
+{
+  "id": "ngts-11",
+  "name": "NGTS-11",
+  "system": "NGTS-11 system",
+  "description": "Star of 5,050 K, 190 parsecs away, with 1 transiting planet.",
+  "target": "NGTS-11",
+  "gaia": "2453680078509741056",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+    "credit": "Gill et al. 2020"
+  },
+  "radius": {
+    "value": 0.832,
+    "source": "Gill et al. 2020, the stellar radius of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.862,
+    "source": "Gill et al. 2020, the stellar mass of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 5050,
+    "source": "Gill et al. 2020, the stellar temperature of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "NGTS-11 b crosses NGTS-11 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gill et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GILL_ET_AL__2020): st_teff 5050, st_rad 0.832, st_mass 0.862"
+  },
+  "notes": [],
+  "order": 3844
+}

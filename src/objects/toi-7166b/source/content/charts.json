@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-7166b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-7166b-orbits",
+      "title": "TOI-7166 b: orbits around TOI-7166",
+      "output": "toi-7166b-system-orbits.svg",
+      "system": "toi-7166",
+      "highlight": "toi-7166b",
+      "description": "The orbits of TOI-7166's planets in this map from above, to scale, with TOI-7166 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Barkaoui et al. 2025 (2025MNRAS.544.2637B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2025): P 12.92063621 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-7166b-transit",
+      "title": "TOI-7166 b: its transit",
+      "description": "TOI-7166 b crossing its star, as TESS recorded it: 1 sector (82) of the SPOC pipeline's 2-minute light curves of TIC 288421619, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-7166b-transit.svg",
+      "metadata": {
+        "tic": "TIC 288421619",
+        "sectors": [
+          82
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-7166b",
+      "sources": [
+        "photometry/tess/tess2024223182411-s0082-0000000288421619-0278-s_lc.fits"
+      ],
+      "durationHours": 1.75,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sector 82",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

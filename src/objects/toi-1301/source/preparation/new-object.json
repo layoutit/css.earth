@@ -1,0 +1,39 @@
+{
+  "id": "toi-1301",
+  "name": "TOI-1301",
+  "system": "TOI-1301 system",
+  "description": "Star of 4,820 K, 90.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1301",
+  "gaia": "2266490873877571712",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 0.732,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1301.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.048
+  },
+  "mass": {
+    "value": 0.77,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1301.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.09
+  },
+  "temperature": {
+    "value": 4820,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1301.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 32
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1301 b crosses TOI-1301 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 4820, st_rad 0.732, st_mass 0.77"
+  },
+  "notes": [],
+  "order": 4919
+}

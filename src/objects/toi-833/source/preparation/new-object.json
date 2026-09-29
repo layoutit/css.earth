@@ -1,0 +1,39 @@
+{
+  "id": "toi-833",
+  "name": "TOI-833",
+  "system": "TOI-833 system",
+  "description": "Star of 3,920 K, 41.7 parsecs away, with 1 transiting planet.",
+  "target": "TOI-833",
+  "gaia": "5250780970316845696",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "credit": "Giacalone et al. 2022"
+  },
+  "radius": {
+    "value": 0.6,
+    "source": "Giacalone et al. 2022, the stellar radius of the default parameter set of TOI-833 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.61,
+    "source": "Giacalone et al. 2022, the stellar mass of the default parameter set of TOI-833 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3920,
+    "source": "Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-833 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 160
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-833 b crosses TOI-833 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Giacalone et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GIACALONE_ET_AL__2022): st_teff 3920, st_rad 0.6, st_mass 0.61"
+  },
+  "notes": [],
+  "order": 4731
+}

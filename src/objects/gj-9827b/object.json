@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gj-9827b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 9827 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 9184.5
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-9827b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 9827 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 6116214,
+      "description": "GJ 9827 b was found in 2017 by K2 as it crossed its star.",
+      "systemName": "GJ 9827 system",
+      "order": 3104,
+      "context": {
+        "order": 3104
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        905328771424777300,
+        -130896300256667840,
+        -20513599242569670
+      ],
+      "presentationToReference": [
+        0.9945823490663422,
+        -0.10155588154140727,
+        0.022189047974715048,
+        -0.10150951216752481,
+        -0.9948293927152514,
+        -0.0032091010135311335,
+        -0.022400220203999954,
+        -0.0009393157890538422,
+        0.9997486423199887
+      ],
+      "orbitUpReference": [
+        0.10155588154140727,
+        0.9948293927152514,
+        0.0009393157890538422
+      ],
+      "metersPerUnit": 29627.41935483871,
+      "bodyRadiusM": 9184500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

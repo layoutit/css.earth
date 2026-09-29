@@ -1,0 +1,46 @@
+{
+  "id": "lhs-1903",
+  "name": "LHS 1903",
+  "system": "LHS 1903 system",
+  "description": "Star of 3,664 K, 35.7 parsecs away, with 4 transiting planets.",
+  "target": "LHS 1903",
+  "gaia": "978086481343568128",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract",
+    "credit": "Wilson et al. 2026"
+  },
+  "radius": {
+    "value": 0.539,
+    "source": "Wilson et al. 2026, the stellar radius of the default parameter set of LHS 1903 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.538,
+    "source": "Wilson et al. 2026, the stellar mass of the default parameter set of LHS 1903 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract",
+    "uncertainty": 0.039
+  },
+  "temperature": {
+    "value": 3664,
+    "source": "Wilson et al. 2026, the stellar temperature of the default parameter set of LHS 1903 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "4 planets cross LHS 1903 as seen from Earth: b, c, d, e.",
+    "introduction": "Its radius and temperature follow Wilson et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname WILSON_ET_AL_2026): st_teff 3664, st_rad 0.539, st_mass 0.538",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/LHS_1903",
+      "title": "LHS 1903",
+      "revision": "1364987995",
+      "card": "LHS 1903 is a red dwarf star located about 116 light years from Earth in the constellation Lynx, near to 21 Lyncis.",
+      "introduction": "It is thought to be a member of the Milky Way's thick disk."
+    }
+  },
+  "notes": [],
+  "order": 3814
+}

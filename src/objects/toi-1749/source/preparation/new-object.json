@@ -1,0 +1,39 @@
+{
+  "id": "toi-1749",
+  "name": "TOI-1749",
+  "system": "TOI-1749 system",
+  "description": "Star of 3,985 K, 99.6 parsecs away, with 3 transiting planets.",
+  "target": "TOI-1749",
+  "gaia": "2253774094189458432",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract",
+    "credit": "Fukui et al. 2021"
+  },
+  "radius": {
+    "value": 0.55,
+    "source": "Fukui et al. 2021, the stellar radius of the default parameter set of TOI-1749 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.58,
+    "source": "Fukui et al. 2021, the stellar mass of the default parameter set of TOI-1749 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3985,
+    "source": "Fukui et al. 2021, the stellar temperature of the default parameter set of TOI-1749 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract",
+    "uncertainty": 55
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross TOI-1749 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Fukui et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname FUKUI_ET_AL__2021): st_teff 3985, st_rad 0.55, st_mass 0.58"
+  },
+  "notes": [],
+  "order": 4122
+}

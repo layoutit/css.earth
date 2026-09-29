@@ -1,0 +1,32 @@
+{
+  "id": "tic-231949697",
+  "name": "TIC 231949697",
+  "system": "TIC 231949697 system",
+  "description": "Star of 3,451 K, 50.2 parsecs away, with 1 transiting planet.",
+  "target": "TIC 231949697",
+  "gaia": "5568467262960106624",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.492584,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 231949697 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 3451.32,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 231949697 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TIC 231949697 b crosses TIC 231949697 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 3451.32, st_rad 0.492584"
+  },
+  "notes": [],
+  "order": 3876
+}

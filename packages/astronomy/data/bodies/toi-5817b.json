@@ -1,0 +1,28 @@
+{
+ "id": "toi-5817b",
+ "classification": "exoplanet",
+ "order": 4591,
+ "physical": {
+  "name": "TOI-5817 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 19644.5,
+  "gravitationalParameterKm3PerS2": 4105583.65,
+  "parent": "toi-5817"
+ },
+ "physicalNotes": "Radius 0.27477967 Jupiter radii from Naponiello et al. 2025 (2025A&A...701A..79N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract): 19,644.5 km at 71,492 km per Jupiter radius. GM from the mass 0.03240742 Jupiter masses (Naponiello et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...701A..79N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 15.61031,
+  "semiMajorAxisStellarRadii": 18.44,
+  "inclinationDegrees": 88.72,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59798.8065,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Naponiello et al. 2025 (2025A&A...701A..79N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2025): P 15.61031 d",
+   "shape": "Naponiello et al. 2025 (2025A&A...701A..79N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2025): a/R* 18.44; Naponiello et al. 2025 (2025A&A...701A..79N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2025): inclination 88.72 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Naponiello et al. 2025 (2025A&A...701A..79N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2025): transit mid-time 2459799.3065 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 14 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

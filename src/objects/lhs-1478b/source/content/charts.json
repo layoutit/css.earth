@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/lhs-1478b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "lhs-1478b-orbits",
+      "title": "LHS 1478 b: orbits around LHS 1478",
+      "output": "lhs-1478b-system-orbits.svg",
+      "system": "lhs-1478",
+      "highlight": "lhs-1478b",
+      "description": "The orbits of LHS 1478's planets in this map from above, to scale, with LHS 1478 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "August et al. 2025 (2025A&A...695A.171A), via the NASA Exoplanet Archive ps table (pl_refname AUGUST_ET_AL_2025): P 1.94953941 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "lhs-1478b-transit",
+      "title": "LHS 1478 b: its transit",
+      "description": "LHS 1478 b crossing its star, as TESS recorded it: 3 sectors (73, 79, 86) of the SPOC pipeline's 2-minute light curves of TIC 396562848, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "lhs-1478b-transit.svg",
+      "metadata": {
+        "tic": "TIC 396562848",
+        "sectors": [
+          73,
+          79,
+          86
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "lhs-1478b",
+      "sources": [
+        "photometry/tess/tess2023341045131-s0073-0000000396562848-0268-s_lc.fits",
+        "photometry/tess/tess2024142205832-s0079-0000000396562848-0274-s_lc.fits",
+        "photometry/tess/tess2024326142117-s0086-0000000396562848-0283-s_lc.fits"
+      ],
+      "durationHours": 0.7133,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 73, 79, 86",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

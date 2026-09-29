@@ -1,0 +1,39 @@
+{
+  "id": "toi-778",
+  "name": "TOI-778",
+  "system": "TOI-778 system",
+  "description": "Star of 6,643 K, 162 parsecs away, with 1 transiting planet.",
+  "target": "TOI-778",
+  "gaia": "3607877948613218304",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+    "credit": "Clark et al. 2023"
+  },
+  "radius": {
+    "value": 1.71,
+    "source": "Clark et al. 2023, the stellar radius of the default parameter set of TOI-778 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+    "uncertainty": 0.05
+  },
+  "mass": {
+    "value": 1.4,
+    "source": "Clark et al. 2023, the stellar mass of the default parameter set of TOI-778 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 6643,
+    "source": "Clark et al. 2023, the stellar temperature of the default parameter set of TOI-778 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+    "uncertainty": 150
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-778 b crosses TOI-778 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Clark et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CLARK_ET_AL__2023): st_teff 6643, st_rad 1.71, st_mass 1.4"
+  },
+  "notes": [],
+  "order": 4718
+}

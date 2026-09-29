@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-25463",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 25463",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 986641.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-25463-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 25463",
+      "classification": "star",
+      "color": "#fff7fa",
+      "distanceAu": 9320046.9,
+      "description": "HD 25463 b crosses HD 25463 as seen from Earth, which is how it was found.",
+      "systemName": "HD 25463 system",
+      "order": 3208,
+      "context": {
+        "order": 3205
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        672516201673750700,
+        1200796171799292400,
+        223090041051686240
+      ],
+      "presentationToReference": [
+        0.4823459492495087,
+        0.07819056415878166,
+        0.872484166572163,
+        0.8612419565641649,
+        0.13960986058729632,
+        -0.4886423836307336,
+        0.160014616507742,
+        -0.9871146450657731,
+        7.437313939600939e-7
+      ],
+      "orbitUpReference": [
+        -0.07819056415878166,
+        -0.13960986058729632,
+        0.9871146450657731
+      ],
+      "metersPerUnit": 3182715.1612903224,
+      "bodyRadiusM": 986641700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

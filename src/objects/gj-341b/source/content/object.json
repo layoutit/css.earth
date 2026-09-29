@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-341b",
+  "displayName": "GJ 341 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.88 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D",
+          "label": "DiTomasso et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "7.58 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D",
+          "label": "DiTomasso et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 4.0 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D",
+          "label": "DiTomasso et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by GJ 341; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gj-341b-lens-shape.webp",
+        "surface": "gj-341b-surface-shape@2x.webp",
+        "poles": "gj-341b-poles-shape@2x.webp",
+        "source": {
+          "id": "gj-341b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of GJ 341 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-341's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "gj-341b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gj-341b/gj-341b-system-orbits.svg",
+      "alt": "The orbits of GJ 341's planets in this map from above, to scale, with GJ 341 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gj-341b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D"
+      }
+    },
+    {
+      "id": "gj-341b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gj-341b/gj-341b-transit.svg",
+      "alt": "GJ 341 b crossing its star, as TESS recorded it: 3 sectors (62, 64, 89) of the SPOC pipeline's 2-minute light curves of TIC 359271092, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 22 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 22 minutes at these dates, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gj-341b-tess-sector-62",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023043185947-s0062-0000000359271092-0254-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "DiTomasso et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+      "credit": "DiTomasso et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-341b.json",
+      "credit": "Radius from DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive; mass from DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive; orbit from DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive"
+    }
+  }
+}

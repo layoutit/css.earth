@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/tres-1b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "tres-1b-orbits",
+      "title": "TrES-1 b: orbits around TrES-1",
+      "output": "tres-1b-system-orbits.svg",
+      "system": "tres-1",
+      "highlight": "tres-1b",
+      "description": "The orbits of TrES-1's planets in this map from above, to scale, with TrES-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.030069476 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "tres-1b-emission",
+      "title": "TrES-1 b: dayside emission",
+      "description": "TrES-1 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 4 measured bins from Cubillos et al. 2014 (Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "tres-1b-emission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2014ApJ...797...42C/abstract",
+        "table": "emissionspec",
+        "bins": 4
+      },
+      "source": {
+        "path": "science/archive-spectra/emission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 4
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 2.5,
+        "maximum": 10,
+        "ticks": [
+          2.5,
+          5,
+          7.5,
+          10
+        ]
+      },
+      "y": {
+        "label": "Eclipse depth (%)",
+        "minimum": 0,
+        "maximum": 0.3,
+        "ticks": [
+          0,
+          0.1,
+          0.2,
+          0.3
+        ]
+      },
+      "notes": [
+        "Cubillos et al. 2014",
+        "Spitzer Space Telescope satellite, Infrared Array C…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "tres-1b-transit",
+      "title": "TrES-1 b: its transit",
+      "description": "TrES-1 b crossing its star, as TESS recorded it: 3 sectors (74, 80, 81) of the SPOC pipeline's 2-minute light curves of TIC 120757718, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "output": "tres-1b-transit.svg",
+      "metadata": {
+        "tic": "TIC 120757718",
+        "sectors": [
+          74,
+          80,
+          81
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "tres-1b",
+      "sources": [
+        "photometry/tess/tess2024003055635-s0074-0000000120757718-0269-s_lc.fits",
+        "photometry/tess/tess2024170053053-s0080-0000000120757718-0275-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000120757718-0276-s_lc.fits"
+      ],
+      "durationHours": 2.508,
+      "binMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sectors 74, 80, 81",
+        "Folded on the app's orbit; 10-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { FILTER_COMBINATIONS, INDEX_COLUMNS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from '@cssearth/telescope-cli/archives/juno/archive';
 import { ellipsoidMesh } from '@cssearth/telescope-cli/archives/juno/measure';

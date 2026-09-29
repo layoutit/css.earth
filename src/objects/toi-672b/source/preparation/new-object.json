@@ -1,0 +1,31 @@
+{
+  "host": "toi-672",
+  "planets": [
+    {
+      "id": "toi-672b",
+      "name": "TOI-672 b",
+      "description": "Transiting planet of TOI-672 with a 3.63-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract",
+        "credit": "Osborn et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "OSBORN_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-672 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-672. Its orbit and size follow Osborn et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORN_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.633575, pl_radj 0.47372729, pl_bmassj 0.16014931",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-672_b",
+          "title": "TOI-672 b",
+          "revision": "1212743387",
+          "card": "TOI-672 b is a Neptune-like exoplanet, located 218 light-years away.",
+          "introduction": "The exoplanet was discovered in the year 2023."
+        }
+      },
+      "order": 4656
+    }
+  ]
+}

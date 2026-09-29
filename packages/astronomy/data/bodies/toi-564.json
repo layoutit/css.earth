@@ -1,0 +1,30 @@
+{
+ "id": "toi-564",
+ "classification": "star",
+ "order": 4553,
+ "physical": {
+  "name": "TOI-564",
+  "horizonsCode": null,
+  "meanRadiusKm": 756921.6,
+  "gravitationalParameterKm3PerS2": 132447015161.8555,
+  "parent": null,
+  "effectiveTemperatureK": 5640
+ },
+ "physicalNotes": "Radius 1.088 +/- 0.014 solar radii from Davis et al. 2020, the stellar radius of the default parameter set of TOI-564 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract): 756,922 km at 695,700 km per solar radius. Mass 0.998 +/- 0.068 solar masses from Davis et al. 2020, the stellar mass of the default parameter set of TOI-564 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract); GM is that mass times the JPL solar GM. Temperature 5640 +/- 34 K from Davis et al. 2020, the stellar temperature of the default parameter set of TOI-564 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 130.29515313751065,
+  "declinationDegrees": -16.03632892020325,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 198.7996559151975,
+  "properMotionRaMasPerYear": -2.660562022207401,
+  "properMotionDecMasPerYear": -10.919532047103557,
+  "radialVelocityKmPerS": 7.512387,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5710154317045164416 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-564/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.0302 +/- 0.0192 mas (same row, RUWE 1.13): 198.80 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -2.661, -10.920 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 7.51 +/- 0.21 km/s"
+  }
+ }
+}

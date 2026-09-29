@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1710",
+  "card": {
+    "text": "TOI-1710 b crosses TOI-1710 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae7711",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..15E/abstract",
+        "label": "Espinoza-Retamal et al. (2026), The Astrophysical Journal Letters 1005 L15",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESPINOZA_RETAMAL_ET_AL_2026): st_teff 5775, st_rad 0.93, st_mass 1.02"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Espinoza-Retamal et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae7711",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..15E/abstract",
+        "label": "Espinoza-Retamal et al. (2026), The Astrophysical Journal Letters 1005 L15",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESPINOZA_RETAMAL_ET_AL_2026): st_teff 5775, st_rad 0.93, st_mass 1.02"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

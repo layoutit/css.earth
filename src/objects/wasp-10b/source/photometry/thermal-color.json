@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wasp-10b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1152,
+      "lowerKelvin": 1116,
+      "upperKelvin": 1188,
+      "citation": "Kammer et al. 2015, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table): 1152 +/- 36 K, https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)) and nobody has imaged it, so the colour is a Planck spectrum at its published temperature.",
+    "chosen": "2 measured of 3 rows; the smallest relative uncertainty, then the longest wavelength",
+    "wavelengthMicrometres": 3.6,
+    "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+    "rows": "photometry/emission-spectroscopy.csv"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

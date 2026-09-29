@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202452916",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barkaoui et al. (2025): TOI-2015 b: A sub-Neptune in strong gravitational interaction with an outer non-transiting planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2502.07074"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202452916"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...695A.281B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202452916",
+      "label": "Astronomy & Astrophysics 695 A281"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barkaoui et al. (2025), Astronomy & Astrophysics 695 A281",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 695 A281",
+  "creators": [
+    "K. Barkaoui",
+    "J. Korth",
+    "E. Gaidos",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

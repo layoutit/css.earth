@@ -1,8 +1,56 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
-import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById } from '../object-systems.mts';
+import { WORLD_OBJECTS } from '../world-objects.mts';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
+
+test('planetary systems follow prepared orbit chains to their stars', () => {
+  const systems = allPlanetarySystems(SCENE_OBJECTS);
+  // Every archive batch adds systems (exoplanet batch 1, 2026-09-29), so the list is held to its rules, not pinned: the Solar
+  // System first, each system named and routed after its star, each once, and the hand-built systems all present.
+  assert.deepEqual([systems[0]!.id, systems[0]!.name, systems[0]!.route], [SOLAR_SYSTEM_ID, 'Solar System', '/sun/']);
+  assert.equal(new Set(systems.map(system => system.id)).size, systems.length);
+  for (const system of systems.slice(1)) {
+    const star = SCENE_OBJECTS.find(object => object.id === system.id);
+    assert.ok(star, `${system.id} is a registered star`);
+    assert.deepEqual([system.name, system.route], [star.systemName, `/${system.id}/`]);
+  }
+  for (const id of ['wasp-43', 'hd-189733', 'hd-209458', 'k2-18', 'kepler-186', 'kepler-452', 'trappist-1', 'wasp-39', 'beta-pictoris', 'hr-8799', 'sgr-a-star', 'hd-110067', 'hd-29391', 'kepler-16-a', 'wd-1856-534', 'kelt-9', 'vhs-1256-1257', 'gq-lup', 'dh-tau', 'roxs-42b', 'wasp-76', 'pds-70', 'wasp-18', 'wasp-121', 'luhman-16', 'hip-65426', 'af-lep', 'ab-pic', 'yses-1', 'hd-206893', 'hd-95086', 'gj-504', 'hd-135344-a', 'eps-indi-a', 'hd-219134', 'hip-56998', 'hd-136352', 'gj-143', 'hd-39091', 'toi-2194', 'toi-5789', 'hd-97658', 'hd-63433', 'toi-2134', 'hd-207496', 'toi-836', 'hd-207897', 'hd-73583', 'hr-858', 'toi-431', 'hd-88986', 'hd-60779', 'kepler-444']) assert.ok(systems.some(system => system.id === id), `${id} keeps its system`);
+  // A page builds its systems from the world summary alone; they match the registry's.
+  assert.deepEqual(allPlanetarySystems(WORLD_OBJECTS), systems);
+  // HD 189733 B has no measured orbit; it belongs to the system through the Gaia measurement that binds it to A (boundTo).
+  // VHS 1256-1257 B and ROXs 42B B do have one: each circles A on its measured orbit, and the planet circles the pair.
+  for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],
+    ['hd-189733b', 'hd-189733'], ['hd-189733-companion', 'hd-189733'], ['hd-189733', 'hd-189733'],
+    ['trappist-1e', 'trappist-1'], ['trappist-1h', 'trappist-1'], ['trappist-1', 'trappist-1'],
+    ['beta-pictoris-b', 'beta-pictoris'], ['beta-pictoris-d', 'beta-pictoris'], ['hr-8799-b', 'hr-8799'], ['hr-8799-e', 'hr-8799'], ['hd-29391-b', 'hd-29391'],
+    ['kelt-9b', 'kelt-9'], ['kelt-9', 'kelt-9'], ['wasp-76b', 'wasp-76'], ['wasp-76', 'wasp-76'], ['pds-70-b', 'pds-70'], ['pds-70-c', 'pds-70'], ['pds-70', 'pds-70'], ['wasp-18b', 'wasp-18'], ['wasp-121b', 'wasp-121'], ['wasp-121', 'wasp-121'], ['luhman-16b', 'luhman-16'], ['luhman-16', 'luhman-16'],
+    ['vhs-1256-1257-companion', 'vhs-1256-1257'], ['vhs-1256-1257-b', 'vhs-1256-1257'], ['gq-lup-b', 'gq-lup'], ['dh-tau-b', 'dh-tau'],
+    ['roxs-42b-companion', 'roxs-42b'], ['roxs-42b-b', 'roxs-42b'],
+    ['hip-65426-b', 'hip-65426'], ['af-lep-b', 'af-lep'], ['ab-pic-b', 'ab-pic'], ['yses-1-b', 'yses-1'],
+    ['hd-206893-b', 'hd-206893'], ['hd-206893-c', 'hd-206893'], ['hd-95086-b', 'hd-95086'], ['gj-504-b', 'gj-504'], ['hd-135344-ab', 'hd-135344-a'],
+    ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-a'], ['eps-indi-bb', 'eps-indi-a']] as const) {
+    assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
+  }
+  assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
+  assert.equal(systemById(SCENE_OBJECTS, 'jupiter'), null, "A planet's moons are not a planetary system");
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'wasp-43')!.memberIds, ['wasp-43b']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-189733')!.memberIds, ['hd-189733b', 'hd-189733-companion']);
+  // Seven planets around one star: the largest system this application holds after the Solar System.
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'trappist-1')!.memberIds,
+    ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'beta-pictoris')!.memberIds,
+    ['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-110067')!.memberIds,
+    ['hd-110067b', 'hd-110067c', 'hd-110067d', 'hd-110067e', 'hd-110067f', 'hd-110067g']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'wd-1856-534')!.memberIds, ['wd-1856-534b']);
+  // Epsilon Indi Ba is bound to A and Bb circles Ba: one system, whose host is A; Ba does not open a system of its own.
+  assert.deepEqual([...systemById(SCENE_OBJECTS, 'eps-indi-a')!.memberIds].sort(), ['eps-indi-ab', 'eps-indi-ba', 'eps-indi-bb']);
+  assert.equal(systemById(SCENE_OBJECTS, 'eps-indi-ba'), null);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'vhs-1256-1257')!.memberIds, ['vhs-1256-1257-companion', 'vhs-1256-1257-b']);
+  assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
+});
 
 test("a system's exit distance scales the Sun's 100 AU by the prepared framing radius", () => {
   const au = 149_597_870_700, sun = systemById(SCENE_OBJECTS, SOLAR_SYSTEM_ID)!, wasp = systemById(SCENE_OBJECTS, 'wasp-43')!;

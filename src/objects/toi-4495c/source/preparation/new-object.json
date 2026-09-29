@@ -1,0 +1,24 @@
+{
+  "host": "toi-4495",
+  "planets": [
+    {
+      "id": "toi-4495c",
+      "name": "TOI-4495 c",
+      "description": "Transiting planet of TOI-4495 with a 5.18-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract",
+        "credit": "Wang et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WANG_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-4495 c was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-4495. Its orbit and size follow Wang et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WANG_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 5.1830043, pl_radj 0.35953314, pl_bmassj 0.07299536"
+      },
+      "order": 3023
+    }
+  ]
+}

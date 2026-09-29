@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-191939d",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 191939 d",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 19102.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-191939d-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 191939 d",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 11032124.2,
+      "description": "HD 191939 d was found in 2020 by TESS as it crossed its star.",
+      "systemName": "HD 191939 system",
+      "order": 3182,
+      "context": {
+        "order": 3182
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        344083880909395300,
+        -550076391945380540,
+        1517492650316640800
+      ],
+      "presentationToReference": [
+        0.21601894823606077,
+        -0.8459212493560958,
+        -0.48759927593343294,
+        -0.3285730988201317,
+        -0.5332450245619471,
+        0.7795443941891085,
+        0.9194430557325025,
+        0.008184355060147886,
+        0.3931379956167139
+      ],
+      "orbitUpReference": [
+        0.8459212493560958,
+        0.5332450245619471,
+        -0.008184355060147886
+      ],
+      "metersPerUnit": 61620.645161290326,
+      "bodyRadiusM": 19102400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

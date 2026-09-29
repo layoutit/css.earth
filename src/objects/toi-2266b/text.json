@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2266b",
+  "card": {
+    "text": "TOI-2266 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347431",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract",
+        "label": "Parviainen et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PARVIAINEN_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.326318, pl_radj 0.13738983, pl_bmassj 0.0094"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-2266. Its orbit and size follow Parviainen et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347431",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract",
+        "label": "Parviainen et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PARVIAINEN_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.326318, pl_radj 0.13738983, pl_bmassj 0.0094"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

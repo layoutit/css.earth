@@ -1,0 +1,24 @@
+{
+  "host": "toi-1260",
+  "planets": [
+    {
+      "id": "toi-1260d",
+      "name": "TOI-1260 d",
+      "description": "Transiting planet of TOI-1260 with a 16.6-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+        "credit": "Lam et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LAM_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-1260 d was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around TOI-1260. Its orbit and size follow Lam et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAM_ET_AL_2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 16.608164, pl_radj 0.27834824, pl_bmassj 0.03725281"
+      },
+      "order": 3987
+    }
+  ]
+}

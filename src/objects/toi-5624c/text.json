@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5624c",
+  "card": {
+    "text": "TOI-5624 c was found in 2026 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558740",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "label": "Bonfanti et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 7.885385, pl_radj 0.22071588, pl_bmassj 0.01510249"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5624-c",
+        "url": "https://en.wikipedia.org/wiki/TOI-5624_c",
+        "label": "Wikipedia, \"TOI-5624 c\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374248102",
+        "quote": "TOI-5624 c is the second closest of the discovered exoplanets orbiting the star TOI-5624, located approximately 331 light-years from Earth in the constellation Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around TOI-5624. Its orbit and size follow Bonfanti et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558740",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "label": "Bonfanti et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 7.885385, pl_radj 0.22071588, pl_bmassj 0.01510249"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5624-c",
+        "url": "https://en.wikipedia.org/wiki/TOI-5624_c",
+        "label": "Wikipedia, \"TOI-5624 c\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374248102",
+        "quote": "The planet was confirmed in April 2026 using the transit method."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

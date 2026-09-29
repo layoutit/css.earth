@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gliese-12b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gliese 12 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5931.6
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gliese-12b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gliese 12 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 2509608.4,
+      "description": "Gliese 12 b was found in 2024 by TESS as it crossed its star.",
+      "systemName": "Gliese 12 system",
+      "order": 3108,
+      "context": {
+        "order": 3108
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        364097655001574200,
+        25204044412545430,
+        88016463300446290
+      ],
+      "presentationToReference": [
+        0.9688252696815867,
+        0.08171382090444225,
+        -0.23388126966389974,
+        0.08015416405332726,
+        -0.9966511103183134,
+        -0.016182530277590156,
+        0.23442036347406628,
+        0.003068513397323967,
+        0.9721304837387917
+      ],
+      "orbitUpReference": [
+        -0.08171382090444225,
+        0.9966511103183134,
+        -0.003068513397323967
+      ],
+      "metersPerUnit": 19134.1935483871,
+      "bodyRadiusM": 5931600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

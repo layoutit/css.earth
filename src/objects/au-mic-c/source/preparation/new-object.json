@@ -1,0 +1,24 @@
+{
+  "host": "au-mic",
+  "planets": [
+    {
+      "id": "au-mic-c",
+      "name": "AU Mic c",
+      "description": "Transiting planet of AU Mic with a 18.9-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+        "credit": "Mallorquín et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MALLORQUIN_ET_AL_2024"
+      },
+      "text": {
+        "card": "AU Mic c was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around AU Mic. Its orbit and size follow Mallorquín et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQUIN_ET_AL_2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 18.859019, pl_radj 0.24890756, pl_bmassj 0.04549625"
+      },
+      "order": 3050
+    }
+  ]
+}

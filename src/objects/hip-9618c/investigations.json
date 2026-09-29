@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hip-9618c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.3058761 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.02202446 Jupiter masses: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Osborn et al. 2023 (2023MNRAS.523.3069O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2023): P 52.563491 d; Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): a/R* derived from its semi-major axis 0.269 au and stellar radius 0.9593 solar radii; Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): inclination derived from its impact parameter 0.290877 with its a/R* 60.2978 (Winn 2010, eq. 7); Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0; Osborn et al. 2023 (2023MNRAS.523.3069O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2023): transit mid-time 2458779.1919 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3069O/abstract"
+      ]
+    }
+  ]
+}

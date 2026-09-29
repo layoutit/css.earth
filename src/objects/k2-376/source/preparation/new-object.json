@@ -1,0 +1,39 @@
+{
+  "id": "k2-376",
+  "name": "K2-376",
+  "system": "K2-376 system",
+  "description": "Star of 5,937 K, 162 parsecs away, with 1 transiting planet.",
+  "target": "K2-376",
+  "gaia": "690025807939789184",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "credit": "Christiansen et al. 2022"
+  },
+  "radius": {
+    "value": 1.149,
+    "source": "Christiansen et al. 2022, the stellar radius of the default parameter set of K2-376 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "uncertainty": 0.067
+  },
+  "mass": {
+    "value": 0.908,
+    "source": "Christiansen et al. 2022, the stellar mass of the default parameter set of K2-376 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "uncertainty": 0.394
+  },
+  "temperature": {
+    "value": 5937,
+    "source": "Christiansen et al. 2022, the stellar temperature of the default parameter set of K2-376 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "uncertainty": 138
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-376 b crosses K2-376 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Christiansen et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHRISTIANSEN_ET_AL_2022): st_teff 5937, st_rad 1.149, st_mass 0.908"
+  },
+  "notes": [],
+  "order": 3548
+}

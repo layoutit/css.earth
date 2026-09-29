@@ -1,0 +1,39 @@
+{
+  "id": "toi-622",
+  "name": "TOI-622",
+  "system": "TOI-622 system",
+  "description": "Star of 6,400 K, 123 parsecs away, with 1 transiting planet.",
+  "target": "TOI-622",
+  "gaia": "5516690878153930240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract",
+    "credit": "Psaridi et al. 2023"
+  },
+  "radius": {
+    "value": 1.415,
+    "source": "Psaridi et al. 2023, the stellar radius of the default parameter set of TOI-622 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract",
+    "uncertainty": 0.047
+  },
+  "mass": {
+    "value": 1.313,
+    "source": "Psaridi et al. 2023, the stellar mass of the default parameter set of TOI-622 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract",
+    "uncertainty": 0.079
+  },
+  "temperature": {
+    "value": 6400,
+    "source": "Psaridi et al. 2023, the stellar temperature of the default parameter set of TOI-622 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-622 b crosses TOI-622 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Psaridi et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PSARIDI_ET_AL__2023): st_teff 6400, st_rad 1.415, st_mass 1.313"
+  },
+  "notes": [],
+  "order": 4620
+}

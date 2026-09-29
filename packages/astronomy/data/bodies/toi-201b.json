@@ -1,0 +1,31 @@
+{
+ "id": "toi-201b",
+ "classification": "exoplanet",
+ "order": 4208,
+ "physical": {
+  "name": "TOI-201 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 72710.3,
+  "gravitationalParameterKm3PerS2": 65370467.09,
+  "parent": "toi-201"
+ },
+ "physicalNotes": "Radius 1.01704163 Jupiter radii from Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract): 72,710.3 km at 71,492 km per Jupiter radius. GM from the mass 0.51600171 Jupiter masses (Mireles et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026SciA...12f2618M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 52.978197,
+  "semiMajorAxisStellarRadii": 49.7364,
+  "inclinationDegrees": 91.18,
+  "eccentricity": 0.275,
+  "argumentOfPeriapsisDegrees": 83,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59011.29063,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 52.978197 d",
+   "shape": "Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): a/R* derived from its semi-major axis 0.303 au and stellar radius 1.31 solar radii; Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): inclination 91.18 degrees",
+   "eccentricity": "Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): e 0.275",
+   "argumentOfPeriapsis": "Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): omega 83 degrees",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2459011.79063 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

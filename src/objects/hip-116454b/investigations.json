@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hip-116454b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.22026981 Jupiter radii from Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.03051961 Jupiter masses: Thygesen et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..161T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): P 9.1004157 d; Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): a/R* 22.46; Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): inclination 88.91 degrees; Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): e 0.215; Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): omega 88 degrees; Thygesen et al. 2024 (2024AJ....168..161T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2024): transit mid-time 2458072.29291 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract"
+      ]
+    }
+  ]
+}

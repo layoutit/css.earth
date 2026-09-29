@@ -1,0 +1,48 @@
+{
+  "id": "wasp-84",
+  "name": "WASP-84",
+  "system": "WASP-84 system",
+  "description": "Star of 5,300 K, 101 parsecs away, with 1 transiting planet.",
+  "target": "WASP-84",
+  "gaia": "3078836109158636928",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+    "credit": "Maciejewski et al. 2023"
+  },
+  "radius": {
+    "value": 0.768,
+    "source": "Maciejewski et al. 2023, the stellar radius of the default parameter set of WASP-84 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+    "uncertainty": 0.019
+  },
+  "mass": {
+    "value": 0.853,
+    "source": "Maciejewski et al. 2023, the stellar mass of the default parameter set of WASP-84 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+    "uncertainty": 0.038
+  },
+  "temperature": {
+    "value": 5300,
+    "source": "Bonomo et al. 2017, the stellar temperature of WASP-84 b's parameter set from Bonomo et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-84 b crosses WASP-84 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Maciejewski et al. 2023, and its temperature Bonomo et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017, MACIEJEWSKI_ET_AL_2023): st_teff 5300, st_rad 0.768, st_mass 0.853",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-84",
+      "title": "WASP-84",
+      "revision": "1374406445",
+      "card": "WASP-84, also known as BD+02 2056, is a G-type main-sequence star 327 light-years away in the constellation Hydra.",
+      "introduction": "Its surface temperature is 5350±31 K and is slightly enriched in heavy elements compared to the Sun, with a metallicity Fe/H index of 0.05±0.02."
+    }
+  },
+  "notes": [
+    "WASP-84 c: Maciejewski et al. 2023's mass 0.048 Jupiter masses in 0.174 Jupiter radii is 11.3 g/cm^3, outside what the records accept"
+  ],
+  "order": 4845
+}

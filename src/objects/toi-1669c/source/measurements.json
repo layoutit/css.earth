@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1669c",
+  "radiusKm": 14646.7,
+  "radiusSource": "Radius 0.20487123 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 14,646.7 km at 71,492 km per Jupiter radius. No mass is measured: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) gives only an upper limit of 0.04090257 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.6800536,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.6800536 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1669 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.04090257 Jupiter masses: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)."
+}

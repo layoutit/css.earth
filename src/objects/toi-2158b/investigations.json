@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2158b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.96 Jupiter radii from Knudstrup et al. 2022 (2022A&A...667A..22K), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.82 Jupiter masses: Knudstrup et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...667A..22K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.6007557 d; Knudstrup et al. 2022 (2022A&A...667A..22K), via the NASA Exoplanet Archive ps table (pl_refname KNUDSTRUP_ET_AL_2022): a/R* 11.4; Knudstrup et al. 2022 (2022A&A...667A..22K), via the NASA Exoplanet Archive ps table (pl_refname KNUDSTRUP_ET_AL_2022): inclination 85.7 degrees; Knudstrup et al. 2022 (2022A&A...667A..22K), via the NASA Exoplanet Archive ps table (pl_refname KNUDSTRUP_ET_AL_2022): e 0.07; Knudstrup et al. 2022 (2022A&A...667A..22K), via the NASA Exoplanet Archive ps table (pl_refname KNUDSTRUP_ET_AL_2022): omega 52 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459758.586312 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract"
+      ]
+    }
+  ]
+}

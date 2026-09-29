@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-16",
+  "displayName": "WASP-16",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "193 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-wasp-16",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "wasp-16-lens-color.webp",
+        "surface": "wasp-16-surface-color@2x.webp",
+        "poles": "wasp-16-poles-color@2x.webp",
+        "source": {
+          "id": "wasp-16-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,700 K and log g 4.57 (u1 0.476, u2 0.249): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stassun et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-16.json",
+      "credit": "Stassun et al. 2017, the stellar radius of the default parameter set of WASP-16 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

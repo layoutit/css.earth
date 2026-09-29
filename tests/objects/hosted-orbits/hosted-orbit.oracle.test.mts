@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { bodyFixedToIcrf, hostSkyFrame, hostedOrbitPhase, hostedOrbitStateRelativeKm, type HostedOrbit } from '@cssearth/astronomy';
-import { readOracleFixture } from '../../oracles/fixture.mts';
+import { readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { synchronousRotationElements } from '@cssearth/bake/objects/scene';
 
-const fixture = await readOracleFixture('astronomy/hosted-orbit.json');
+const fixture = await readOracleFixture(new URL('../../../packages/bake/src/objects/scene/fixtures/hosted-orbit.json', import.meta.url).pathname);
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));
 const vector = (value: unknown) => numbers(value) as [number, number, number];
 function close(actual: number, expected: number, label: string, relative = 3e-12) {

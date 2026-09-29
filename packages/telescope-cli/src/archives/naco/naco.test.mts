@@ -1,7 +1,7 @@
 import { sampleStatistics as statistics } from '@cssearth/fits';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

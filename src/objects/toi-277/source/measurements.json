@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-277",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 251,843 km at 64.91 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 64.9107963182771,
+  "distanceSource": "Gaia DR3 parallax 15.4058 +/- 0.0190 mas (same row, RUWE 1.28): 64.91 pc, no zero-point correction",
+  "radiusKm": 251843.4,
+  "radiusSource": "Radius 0.362 +/- 0.008 solar radii from Magliano et al. 2023, the stellar radius of the default parameter set of TOI-277 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M/abstract): 251,843 km at 695,700 km per solar radius. Mass 0.16 +/- 0.01 solar masses from Magliano et al. 2023, the stellar mass of the default parameter set of TOI-277 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M/abstract); GM is that mass times the JPL solar GM. Temperature 4031 +/- 21 K from Magliano et al. 2023, the stellar temperature of the default parameter set of TOI-277 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4031,
+  "effectiveTemperatureSource": "Magliano et al. 2023, the stellar temperature of the default parameter set of TOI-277 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M/abstract)",
+  "surfaceGravityLogg": 4.52,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-277.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.525, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "lp-890-9b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.11776272 Jupiter radii from Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.04153184 Jupiter masses: Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): P 2.7299025 d; Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): a/R* 26.32; Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): inclination 89.67 degrees; No archive row states an eccentricity; the orbit is taken as circular; Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): transit mid-time 2459447.82637 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "host": "toi-1774",
+  "planets": [
+    {
+      "id": "toi-1774b",
+      "name": "TOI-1774 b",
+      "description": "Transiting planet of TOI-1774 with a 16.7-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1934L/abstract",
+        "credit": "Lienhard et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIENHARD_ET_AL_2026",
+        "planetName": "TOI-1774.01"
+      },
+      "text": {
+        "card": "TOI-1774 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1774. Its orbit and size follow Lienhard et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIENHARD_ET_AL_2026): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 16.70988, pl_radj 0.24801541, pl_bmassj 0.02674399"
+      },
+      "order": 4936
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "wasp-7",
+  "name": "WASP-7",
+  "system": "WASP-7 system",
+  "description": "Star of 6,400 K, 162 parsecs away, with 1 transiting planet.",
+  "target": "WASP-7",
+  "gaia": "6681720724498802176",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract",
+    "credit": "Southworth et al. 2011"
+  },
+  "radius": {
+    "value": 1.432,
+    "source": "Southworth et al. 2011, the stellar radius of the default parameter set of WASP-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract",
+    "uncertainty": 0.092
+  },
+  "mass": {
+    "value": 1.276,
+    "source": "Southworth et al. 2011, the stellar mass of the default parameter set of WASP-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract",
+    "uncertainty": 0.065
+  },
+  "temperature": {
+    "value": 6400,
+    "source": "Southworth et al. 2011, the stellar temperature of the default parameter set of WASP-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-7 b crosses WASP-7 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Southworth et al. 2011.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SOUTHWORTH_ET_AL__2011): st_teff 6400, st_rad 1.432, st_mass 1.276",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-7",
+      "title": "WASP-7",
+      "revision": "1374434258",
+      "card": "WASP-7, also identified as HD 197286, is a type F star located about 527 light-years away in the constellation Microscopium.",
+      "introduction": "This star is a little larger and about 28% more massive than the Sun and is also brighter and hotter."
+    }
+  },
+  "notes": [],
+  "order": 4834
+}

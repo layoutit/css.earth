@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
-import { sourceTest } from '../../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';

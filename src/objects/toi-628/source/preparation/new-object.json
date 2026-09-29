@@ -1,0 +1,39 @@
+{
+  "id": "toi-628",
+  "name": "TOI-628",
+  "system": "TOI-628 system",
+  "description": "Star of 6,250 K, 179 parsecs away, with 1 transiting planet.",
+  "target": "TOI-628",
+  "gaia": "3126717023056016256",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "credit": "Rodriguez et al. 2021"
+  },
+  "radius": {
+    "value": 1.345,
+    "source": "Rodriguez et al. 2021, the stellar radius of the default parameter set of TOI-628 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "uncertainty": 0.046
+  },
+  "mass": {
+    "value": 1.311,
+    "source": "Rodriguez et al. 2021, the stellar mass of the default parameter set of TOI-628 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "uncertainty": 0.066
+  },
+  "temperature": {
+    "value": 6250,
+    "source": "Rodriguez et al. 2021, the stellar temperature of the default parameter set of TOI-628 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+    "uncertainty": 220
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-628 b crosses TOI-628 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Rodriguez et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUEZ_ET_AL__2021): st_teff 6250, st_rad 1.345, st_mass 1.311"
+  },
+  "notes": [],
+  "order": 4626
+}

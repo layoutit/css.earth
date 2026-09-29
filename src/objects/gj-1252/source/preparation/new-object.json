@@ -1,0 +1,46 @@
+{
+  "id": "gj-1252",
+  "name": "GJ 1252",
+  "system": "GJ 1252 system",
+  "description": "Star of 3,458 K, 20.4 parsecs away, with 1 transiting planet.",
+  "target": "GJ 1252",
+  "gaia": "6468968316900356736",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S/abstract",
+    "credit": "Shporer et al. 2020"
+  },
+  "radius": {
+    "value": 0.391,
+    "source": "Shporer et al. 2020, the stellar radius of the default parameter set of GJ 1252 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.381,
+    "source": "Shporer et al. 2020, the stellar mass of the default parameter set of GJ 1252 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S/abstract",
+    "uncertainty": 0.019
+  },
+  "temperature": {
+    "value": 3458,
+    "source": "Shporer et al. 2020, the stellar temperature of the default parameter set of GJ 1252 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S/abstract",
+    "uncertainty": 140
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 1252 b crosses GJ 1252 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Shporer et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SHPORER_ET_AL__2020): st_teff 3458, st_rad 0.391, st_mass 0.381",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/GJ_1252",
+      "title": "GJ 1252",
+      "revision": "1367392674",
+      "card": "GJ 1252 is a red dwarf star located 66.5 light-years away from the Solar System in the constellation of Telescopium.",
+      "introduction": "The star has about 38% the mass and 39% the radius of the Sun, and a temperature of about 3,458 K. GJ 1252 is orbited by one known exoplanet."
+    }
+  },
+  "notes": [],
+  "order": 3078
+}

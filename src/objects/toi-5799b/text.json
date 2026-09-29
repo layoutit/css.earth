@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5799b",
+  "card": {
+    "text": "TOI-5799 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556293",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+        "label": "Yalçinkaya et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YALCINKAYA_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.164507, pl_radj 0.15460817, pl_bmassj 0.0115"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-5799. Its orbit and size follow Yalçinkaya et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556293",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+        "label": "Yalçinkaya et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YALCINKAYA_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.164507, pl_radj 0.15460817, pl_bmassj 0.0115"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

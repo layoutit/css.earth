@@ -56,6 +56,10 @@ Generated exoplanets get their charts from `new-object` (`packages/telescope-cli
 
 ![Generated charts: HD 3167 system orbits, HAT-P-11 b transit from TESS, HAT-P-11 b transmission spectrum](images/generated-exoplanet-charts.webp)
 
+The generator keeps an archive planet only when one of these charts shows a measurement: a TESS transit, an archive spectrum, or its dayside colour. Batch 1 (every transiting host within 200 pc) kept 729 of 1,045:
+
+![Charts tabs of GJ 1214 b, WASP-107 b and GJ 486 b: orbits, published spectra and TESS transits](images/exoplanet-batch-1.webp)
+
 ## Add or reuse one
 
 1. Copy the matching entry into the object's `source/content/charts.json`,

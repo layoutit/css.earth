@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1470c",
+  "radiusKm": 15753.9,
+  "radiusSource": "Radius 0.22035902 Jupiter radii from González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract): 15,753.9 km at 71,492 km per Jupiter radius. GM from the mass 0.02277959 Jupiter masses (González-Álvarez et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.177G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 18.08816,
+  "orbitalPeriodSource": "González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): P 18.08816 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1470 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02277959 Jupiter masses: González-Álvarez et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.177G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract)."
+}

@@ -1,0 +1,41 @@
+{
+  "id": "toi-1052",
+  "name": "TOI-1052",
+  "system": "TOI-1052 system",
+  "description": "Star of 6,146 K, 130 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1052",
+  "gaia": "6357524189130820992",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+    "credit": "Armstrong et al. 2023"
+  },
+  "radius": {
+    "value": 1.264,
+    "source": "Armstrong et al. 2023, the stellar radius of the default parameter set of TOI-1052 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+    "uncertainty": 0.033
+  },
+  "mass": {
+    "value": 1.204,
+    "source": "Armstrong et al. 2023, the stellar mass of the default parameter set of TOI-1052 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+    "uncertainty": 0.025
+  },
+  "temperature": {
+    "value": 6146,
+    "source": "Armstrong et al. 2023, the stellar temperature of the default parameter set of TOI-1052 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+    "uncertainty": 62
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1052 b crosses TOI-1052 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Armstrong et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ARMSTRONG_ET_AL_2023): st_teff 6146, st_rad 1.264, st_mass 1.204"
+  },
+  "notes": [
+    "TOI-1052 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3910
+}

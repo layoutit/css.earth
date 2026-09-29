@@ -1,0 +1,24 @@
+{
+  "host": "gj-806",
+  "planets": [
+    {
+      "id": "gj-806b",
+      "name": "GJ 806 b",
+      "description": "Transiting planet of GJ 806 with a 0.926-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+        "credit": "Palle et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PALLE_ET_AL__2023"
+      },
+      "text": {
+        "card": "GJ 806 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around GJ 806. Its orbit and size follow Palle et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALLE_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 0.9263237, pl_radj 0.11874407, pl_bmassj 0.00597807"
+      },
+      "order": 3102
+    }
+  ]
+}

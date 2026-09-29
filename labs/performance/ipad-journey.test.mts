@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { runInNewContext } from 'node:vm';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { JOURNEY_INPUT_SOURCE, compileJourney, parseJourney, parseJourneyArgs } from './ipad-journey.mts';
 
 const test = sourceTest();

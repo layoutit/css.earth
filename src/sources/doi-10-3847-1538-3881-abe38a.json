@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-abe38a",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rodriguez et al. (2021): TESS Delivers Five New Hot Giant Planets Orbiting Bright Stars from the Full-frame Images",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2101.01726"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abe38a"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....161..194R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abe38a",
+      "label": "The Astronomical Journal 161 194"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rodriguez et al. (2021), The Astronomical Journal 161 194",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R"
+    }
+  ],
+  "publisher": "The Astronomical Journal 161 194",
+  "creators": [
+    "Joseph E. Rodriguez",
+    "Samuel N. Quinn",
+    "George Zhou",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

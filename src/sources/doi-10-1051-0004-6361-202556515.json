@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202556515",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Luque et al. (2025): Improved characterization of the TOI-2141 system: A dense sub-Neptune with non-transiting inner and outer companions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2509.00762"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202556515"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...704A.174L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202556515",
+      "label": "Astronomy & Astrophysics 704 A174"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Luque et al. (2025), Astronomy & Astrophysics 704 A174",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 704 A174",
+  "creators": [
+    "R. Luque",
+    "K. W. F. Lam",
+    "J. Cabrera",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

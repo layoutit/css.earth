@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202450472",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Egger et al. (2024): Unveiling the internal structure and formation history of the three planets transiting HIP 29442 (TOI-469) with CHEOPS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2406.18653"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202450472"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...688A.223E"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202450472",
+      "label": "Astronomy & Astrophysics 688 A223"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Egger et al. (2024), Astronomy & Astrophysics 688 A223",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 688 A223",
+  "creators": [
+    "J. A. Egger",
+    "H. P. Osborn",
+    "D. Kubyshkina",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

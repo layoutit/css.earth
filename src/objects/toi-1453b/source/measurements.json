@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1453b",
+  "radiusKm": 7481.5,
+  "radiusSource": "Radius 0.10464823 Jupiter radii from Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract): 7,481.5 km at 71,492 km per Jupiter radius. No mass is measured: Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract) gives only an upper limit of 0.00729954 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.3135263,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.3135263 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1453 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.00729954 Jupiter masses: Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract)."
+}

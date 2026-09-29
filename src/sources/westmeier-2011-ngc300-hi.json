@@ -1,0 +1,51 @@
+{
+  "id": "westmeier-2011-ngc300-hi",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gas and dark matter in the Sculptor group: NGC 300",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2011MNRAS.410.2217W"
+    },
+    {
+      "type": "arxiv",
+      "value": "1009.0317"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011MNRAS.410.2217W",
+      "label": "2011MNRAS.410.2217W"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1009.0317",
+      "label": "arXiv:1009.0317"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1009.0317",
+      "checkedOn": "2026-09-29",
+      "locator": "Table 1: inner-disc position angle 290.0 +/- 0.5 deg; Sect. 4: a geometric inclination of about 44 deg from the HI column-density contour, consistent with the tilted-ring model (40 to 50 deg)."
+    }
+  ],
+  "creators": [
+    "T. Westmeier",
+    "R. Braun",
+    "B. S. Koribalski"
+  ],
+  "publisher": "MNRAS 410, 2217",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Westmeier et al. (2011), MNRAS 410, 2217.",
+      "scope": "NGC 300 disc orientation",
+      "evidence": "https://arxiv.org/abs/1009.0317"
+    }
+  ]
+}

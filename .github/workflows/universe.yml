@@ -178,8 +178,8 @@ jobs:
         run: |
           node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" \
             tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts tests/preparation/stale-builds.test.mts \
-            "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts \
-            packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
+            "tests/inventory/runtime-asset-*.test.mts" \
+            tests/objects/survey-install-spawns.test.mts packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
 
   typecheck:
     name: Typecheck
@@ -238,7 +238,8 @@ jobs:
       - name: Typecheck shared code and enforce TypeScript ownership
         # Application types here; the parallel test-file and nebula jobs own their compiler programs.
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          # The site typecheck used 4.2 GB with 4,043 objects (exoplanet batch 1, 2026-09-29).
+          NODE_OPTIONS: --max-old-space-size=6144
         run: |
           pnpm typecheck:pr
 

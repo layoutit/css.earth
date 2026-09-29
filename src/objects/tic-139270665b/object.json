@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "tic-139270665b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TIC 139270665 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 46112.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tic-139270665b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TIC 139270665 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 38438615.9,
+      "description": "TIC 139270665 b was found in 2024 by TESS as it crossed its star.",
+      "systemName": "TIC 139270665 system",
+      "order": 3859,
+      "context": {
+        "order": 3859
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2690203051478558000,
+        3983297622031600600,
+        3156343023411678700
+      ],
+      "presentationToReference": [
+        -0.4713007506250624,
+        0.8267396632255144,
+        0.3072086126885374,
+        0.6903569483132531,
+        0.5625799879775525,
+        -0.45487475313847564,
+        0.5488924178524103,
+        0.002299212243346757,
+        0.8358898415743518
+      ],
+      "orbitUpReference": [
+        -0.8267396632255144,
+        -0.5625799879775525,
+        -0.002299212243346757
+      ],
+      "metersPerUnit": 148749.35483870967,
+      "bodyRadiusM": 46112300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

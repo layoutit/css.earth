@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "lp-412-34",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3100,
+      "lowerKelvin": 2943,
+      "upperKelvin": 3257,
+      "citation": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 303432811 (VizieR IV/39/tic82): 3100 +/- 157 K, https://doi.org/10.3847/1538-3881/ab3467"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

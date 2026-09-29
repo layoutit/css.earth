@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-762-a",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 295,673 km at 98.84 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 98.83689856754314,
+  "distanceSource": "Gaia DR3 parallax 10.1177 +/- 0.0231 mas (same row, RUWE 1.03): 98.84 pc, no zero-point correction",
+  "radiusKm": 295672.5,
+  "radiusSource": "Radius 0.425 +/- 0.0091 solar radii from Hartman et al. 2024, the stellar radius of the default parameter set of TOI-762 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract): 295,673 km at 695,700 km per solar radius. Mass 0.442 +/- 0.025 solar masses from Hartman et al. 2024, the stellar mass of the default parameter set of TOI-762 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract); GM is that mass times the JPL solar GM. Temperature 3266 +/- 36 K from Hartman et al. 2024, the stellar temperature of the default parameter set of TOI-762 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3266,
+  "effectiveTemperatureSource": "Hartman et al. 2024, the stellar temperature of the default parameter set of TOI-762 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
+  "surfaceGravityLogg": 4.83,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-762-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.827, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

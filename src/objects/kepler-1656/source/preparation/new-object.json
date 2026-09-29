@@ -1,0 +1,41 @@
+{
+  "id": "kepler-1656",
+  "name": "Kepler-1656",
+  "system": "Kepler-1656 system",
+  "description": "Star of 5,696 K, 186 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-1656",
+  "gaia": "2103392720630278656",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract",
+    "credit": "Angelo et al. 2022"
+  },
+  "radius": {
+    "value": 1.1,
+    "source": "Angelo et al. 2022, the stellar radius of the default parameter set of Kepler-1656 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract",
+    "uncertainty": 0.13
+  },
+  "mass": {
+    "value": 1.03,
+    "source": "Angelo et al. 2022, the stellar mass of the default parameter set of Kepler-1656 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5696,
+    "source": "TICv8, the stellar temperature of Kepler-1656 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "uncertainty": 81.83
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-1656 b crosses Kepler-1656 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Angelo et al. 2022, and its temperature TICv8.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019, ANGELO_ET_AL__2022): st_teff 5696, st_rad 1.1, st_mass 1.03"
+  },
+  "notes": [
+    "Kepler-1656 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3692
+}

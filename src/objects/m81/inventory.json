@@ -21,12 +21,6 @@
     },
     {
       "location": "prepared",
-      "filename": "jacoby-pne.json",
-      "bytes": 7705,
-      "sha256": "1e96f7f0cea5544ad3ff4d061d177acc6d700b130bede941fea444f777db4f10"
-    },
-    {
-      "location": "prepared",
       "filename": "layers/bulge-x-01.webp",
       "bytes": 912,
       "sha256": "9e9a09b695a375a24a3340404fbe03759f97351e36ad5aa9b7f15b6b9d6127b1"
@@ -927,21 +921,9 @@
     },
     {
       "location": "prepared",
-      "filename": "nantais-gc.json",
-      "bytes": 5470,
-      "sha256": "e66cbbcf279e49fa7afb7ca3e16004dc5b23682da7192104b183c3c8f288670b"
-    },
-    {
-      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1546,
       "sha256": "10fdfa34edd7889c5d7798a2478de8440dc4cb51457d37c342ac15a6e6187188"
-    },
-    {
-      "location": "prepared",
-      "filename": "vucetic-snr.json",
-      "bytes": 2540,
-      "sha256": "44b44a8933033531edecf6fb2f34d07045a879cd0e9cd20b8222655de74f198f"
     }
   ]
 }

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1470b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.19448691 Jupiter radii from González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0230313 Jupiter masses: González-Álvarez et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.177G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): P 2.527093 d; González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): a/R* 13.05; González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): inclination 87.42 degrees; No archive row states an eccentricity; the orbit is taken as circular; González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): transit mid-time 2458766.4702 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract"
+      ]
+    }
+  ]
+}

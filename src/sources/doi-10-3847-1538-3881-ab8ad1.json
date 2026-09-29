@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-3881-ab8ad1",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bakos et al. (2020): HATS-71b: A Giant Planet Transiting an M3 Dwarf Star in TESS Sector 1",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab8ad1"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....159..267B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bakos et al. (2020), The Astronomical Journal 159 267",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B"
+    }
+  ],
+  "publisher": "The Astronomical Journal 159 267",
+  "creators": [
+    "G. Á. Bakos",
+    "D. Bayliss",
+    "J. Bento",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

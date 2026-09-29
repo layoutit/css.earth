@@ -1,0 +1,39 @@
+{
+  "id": "hats-71",
+  "name": "HATS-71",
+  "system": "HATS-71 system",
+  "description": "Star of 3,405 K, 140 parsecs away, with 1 transiting planet.",
+  "target": "HATS-71",
+  "gaia": "4710594412266148352",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+    "credit": "Bakos et al. 2020"
+  },
+  "radius": {
+    "value": 0.4783,
+    "source": "Bakos et al. 2020, the stellar radius of the default parameter set of HATS-71 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+    "uncertainty": 0.006
+  },
+  "mass": {
+    "value": 0.4861,
+    "source": "Bakos et al. 2020, the stellar mass of the default parameter set of HATS-71 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+    "uncertainty": 0.006
+  },
+  "temperature": {
+    "value": 3405,
+    "source": "Bakos et al. 2020, the stellar temperature of the default parameter set of HATS-71 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+    "uncertainty": 10
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HATS-71 b crosses HATS-71 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Bakos et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2020): st_teff 3405, st_rad 0.4783, st_mass 0.4861"
+  },
+  "notes": [],
+  "order": 3135
+}

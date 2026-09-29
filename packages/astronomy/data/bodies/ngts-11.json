@@ -1,0 +1,30 @@
+{
+ "id": "ngts-11",
+ "classification": "star",
+ "order": 3844,
+ "physical": {
+  "name": "NGTS-11",
+  "horizonsCode": null,
+  "meanRadiusKm": 578822.4,
+  "gravitationalParameterKm3PerS2": 114398123316.15175,
+  "parent": null,
+  "effectiveTemperatureK": 5050
+ },
+ "physicalNotes": "Radius 0.832 +/- 0.013 solar radii from Gill et al. 2020, the stellar radius of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract): 578,822 km at 695,700 km per solar radius. Mass 0.862 +/- 0.028 solar masses from Gill et al. 2020, the stellar mass of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract); GM is that mass times the JPL solar GM. Temperature 5050 +/- 80 K from Gill et al. 2020, the stellar temperature of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 23.521451276969074,
+  "declinationDegrees": -14.419147353144997,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 188.8838084736839,
+  "properMotionRaMasPerYear": 11.104870937251667,
+  "properMotionDecMasPerYear": 13.875930667037013,
+  "radialVelocityKmPerS": 21.9896,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2453680078509741056 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ngts-11/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.2943 +/- 0.0180 mas (same row, RUWE 0.95): 188.88 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 11.105, 13.876 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 21.99 +/- 0.57 km/s"
+  }
+ }
+}

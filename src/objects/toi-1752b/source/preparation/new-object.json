@@ -1,0 +1,24 @@
+{
+  "host": "toi-1752",
+  "planets": [
+    {
+      "id": "toi-1752b",
+      "name": "TOI-1752 b",
+      "description": "Transiting planet of TOI-1752 with a 0.935-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract",
+        "credit": "Peláez-Torres et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PELAEZ_TORRES_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-1752 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1752. Its orbit and size follow Peláez-Torres et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PELAEZ_TORRES_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 0.9351861, pl_radj 0.1510396, pl_bmassj 0.011"
+      },
+      "order": 4131
+    }
+  ]
+}

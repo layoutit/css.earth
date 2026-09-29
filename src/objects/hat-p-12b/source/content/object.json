@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hat-p-12b",
+  "displayName": "HAT-P-12 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.96 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H",
+          "label": "Hartman et al. 2009",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.21 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H",
+          "label": "Hartman et al. 2009",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.21 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H",
+          "label": "Hartman et al. 2009",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HAT-P-12; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hat-p-12b-lens-shape.webp",
+        "surface": "hat-p-12b-surface-shape@2x.webp",
+        "poles": "hat-p-12b-poles-shape@2x.webp",
+        "source": {
+          "id": "hat-p-12b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HAT-P-12 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hat-p-12's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-12b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-12b/hat-p-12b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-12's planets in this map from above, to scale, with HAT-P-12 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-12b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H"
+      }
+    },
+    {
+      "id": "hat-p-12b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-12b/hat-p-12b-transit.svg",
+      "alt": "HAT-P-12 b crossing its star, as TESS recorded it: 3 sectors (50, 76, 77) of the SPOC pipeline's 2-minute light curves of TIC 198108326, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-12b-tess-sector-50",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022085151738-s0050-0000000198108326-0222-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hartman et al. 2009",
+      "href": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+      "credit": "Hartman et al. 2009"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-12b.json",
+      "credit": "Radius from Hartman et al. 2009 (2009ApJ...706..785H), via the NASA Exoplanet Archive; mass from Hartman et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...706..785H), via the NASA Exoplanet Archive; orbit from Hartman et al. 2009 (2009ApJ...706..785H), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-715b",
+  "card": {
+    "text": "TOI-715 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1439",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract",
+        "label": "Dransfield et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRANSFIELD_ET_AL_2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 19.288004, pl_radj 0.13828198, pl_bmassj 0.00951"
+      },
+      {
+        "catalogueId": "wikipedia-toi-715-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-715_b",
+        "label": "Wikipedia, \"TOI-715 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086698",
+        "quote": "TOI-715 b is a super-Earth exoplanet in the habitable zone of its parent M-type star, TOI-715."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-715. Its orbit and size follow Dransfield et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1439",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract",
+        "label": "Dransfield et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRANSFIELD_ET_AL_2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 19.288004, pl_radj 0.13828198, pl_bmassj 0.00951"
+      },
+      {
+        "catalogueId": "wikipedia-toi-715-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-715_b",
+        "label": "Wikipedia, \"TOI-715 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086698",
+        "quote": "The planet is 1.55 times larger than Earth, and is located at 0.083 astronomical units (12,400,000 km) from its star."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

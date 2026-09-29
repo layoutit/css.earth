@@ -1,0 +1,24 @@
+{
+  "host": "toi-500",
+  "planets": [
+    {
+      "id": "toi-500b",
+      "name": "TOI-500 b",
+      "description": "Transiting planet of TOI-500 with a 0.548-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract",
+        "credit": "Serrano et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SERRANO_ET_AL_2022"
+      },
+      "text": {
+        "card": "TOI-500 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-500. Its orbit and size follow Serrano et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SERRANO_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 0.5481579, pl_radj 0.10402373, pl_bmassj 0.00446782"
+      },
+      "order": 4476
+    }
+  ]
+}

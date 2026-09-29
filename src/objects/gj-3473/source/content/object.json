@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-3473",
+  "displayName": "GJ 3473",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.36 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202038967",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K",
+          "label": "Kemmer et al. (2020), Astronomy & Astrophysics 642 A236",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "27.3 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-gj-3473",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gj-3473-lens-color.webp",
+        "surface": "gj-3473-surface-color@2x.webp",
+        "poles": "gj-3473-poles-color@2x.webp",
+        "source": {
+          "id": "gj-3473-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3094290054327367168&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,347 K and log g 4.87 (u1 0.160, u2 0.451): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kemmer et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+      "credit": "Kemmer et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-3473.json",
+      "credit": "Kemmer et al. 2020, the stellar radius of the default parameter set of GJ 3473 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-238",
+  "name": "TOI-238",
+  "system": "TOI-238 system",
+  "description": "Star of 5,059 K, 80.5 parsecs away, with 2 transiting planets.",
+  "target": "TOI-238",
+  "gaia": "2405081733281425280",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract",
+    "credit": "Egger et al. 2025"
+  },
+  "radius": {
+    "value": 0.756,
+    "source": "Egger et al. 2025, the stellar radius of the default parameter set of TOI-238 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract",
+    "uncertainty": 0.007
+  },
+  "mass": {
+    "value": 0.781,
+    "source": "Egger et al. 2025, the stellar mass of the default parameter set of TOI-238 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5059,
+    "source": "Egger et al. 2025, the stellar temperature of the default parameter set of TOI-238 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract",
+    "uncertainty": 89
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-238 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Egger et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname EGGER_ET_AL__2025): st_teff 5059, st_rad 0.756, st_mass 0.781"
+  },
+  "notes": [],
+  "order": 4293
+}

@@ -1,0 +1,28 @@
+{
+ "id": "qatar-2b",
+ "classification": "exoplanet",
+ "order": 3851,
+ "physical": {
+  "name": "Qatar-2 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 89651,
+  "gravitationalParameterKm3PerS2": 315956210.56,
+  "parent": "qatar-2"
+ },
+ "physicalNotes": "Radius 1.254 Jupiter radii from Mancini et al. 2014 (2014MNRAS.443.2391M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract): 89,651 km at 71,492 km per Jupiter radius. GM from the mass 2.494 Jupiter masses (Mancini et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014MNRAS.443.2391M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.33711644,
+  "semiMajorAxisStellarRadii": 5.966,
+  "inclinationDegrees": 86.12,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57217.610131,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 1.33711644 d",
+   "shape": "Mancini et al. 2014 (2014MNRAS.443.2391M), via the NASA Exoplanet Archive ps table (pl_refname MANCINI_ET_AL__2014): a/R* derived from its semi-major axis 0.02153 au and stellar radius 0.776 solar radii; Mancini et al. 2014 (2014MNRAS.443.2391M), via the NASA Exoplanet Archive ps table (pl_refname MANCINI_ET_AL__2014): inclination 86.12 degrees",
+   "eccentricity": "Mancini et al. 2014 (2014MNRAS.443.2391M), via the NASA Exoplanet Archive ps table (pl_refname MANCINI_ET_AL__2014): e 0",
+   "phase": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): transit mid-time 2457218.1101306 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

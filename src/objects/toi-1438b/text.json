@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1438b",
+  "card": {
+    "text": "TOI-1438 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555318",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract",
+        "label": "Persson et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PERSSON_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 5.1396666, pl_radj 0.2712111, pl_bmassj 0.02957571"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1438. Its orbit and size follow Persson et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555318",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract",
+        "label": "Persson et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PERSSON_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 5.1396666, pl_radj 0.2712111, pl_bmassj 0.02957571"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hats-72b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hats-72b-orbits",
+      "title": "HATS-72 b: orbits around HATS-72",
+      "output": "hats-72b-system-orbits.svg",
+      "system": "hats-72",
+      "highlight": "hats-72b",
+      "description": "The orbits of HATS-72's planets in this map from above, to scale, with HATS-72 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 7.3279496 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hats-72b-transit",
+      "title": "HATS-72 b: its transit",
+      "description": "HATS-72 b crossing its star, as TESS recorded it: 3 sectors (42, 92, 96) of the SPOC pipeline's 2-minute light curves of TIC 188570092, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "hats-72b-transit.svg",
+      "metadata": {
+        "tic": "TIC 188570092",
+        "sectors": [
+          42,
+          92,
+          96
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hats-72b",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000188570092-0213-s_lc.fits",
+        "photometry/tess/tess2025127075000-s0092-0000000188570092-0289-s_lc.fits",
+        "photometry/tess/tess2025232030459-s0096-0000000188570092-0293-s_lc.fits"
+      ],
+      "durationHours": 3.08472,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 42, 92, 96",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

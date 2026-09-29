@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "gj-3929b",
+  "radiusKm": 6952.1,
+  "radiusSource": "Radius 0.09724345 Jupiter radii from Beard et al. 2022 (2022ApJ...936...55B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract): 6,952.1 km at 71,492 km per Jupiter radius. GM from the mass 0.00550612 Jupiter masses (Beard et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022ApJ...936...55B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.616235,
+  "orbitalPeriodSource": "Beard et al. 2022 (2022ApJ...936...55B), via the NASA Exoplanet Archive ps table (pl_refname BEARD_ET_AL_2022): P 2.616235 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of GJ 3929 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00550612 Jupiter masses: Beard et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022ApJ...936...55B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5126",
+  "card": {
+    "text": "2 planets cross TOI-5126 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad3036",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+        "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname FAIRNINGTON_ET_AL_2024): st_teff 6150, st_rad 1.241, st_mass 1.24"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Fairnington et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad3036",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+        "label": "Fairnington et al. (2024), Monthly Notices of the Royal Astronomical Society 527 8768-8783",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname FAIRNINGTON_ET_AL_2024): st_teff 6150, st_rad 1.241, st_mass 1.24"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

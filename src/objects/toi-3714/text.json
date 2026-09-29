@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-3714",
+  "card": {
+    "text": "TOI-3714 b crosses TOI-3714 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac7804",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+        "label": "Cañas et al. (2022), The Astronomical Journal 164 50",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CANAS_ET_AL_2022): st_teff 3660, st_rad 0.51, st_mass 0.53"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Cañas et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac7804",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+        "label": "Cañas et al. (2022), The Astronomical Journal 164 50",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CANAS_ET_AL_2022): st_teff 3660, st_rad 0.51, st_mass 0.53"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

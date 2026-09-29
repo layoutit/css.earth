@@ -1,0 +1,24 @@
+{
+  "host": "k2-275",
+  "planets": [
+    {
+      "id": "k2-275b",
+      "name": "K2-275 b",
+      "description": "Transiting planet of K2-275 with a 3.28-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+        "credit": "Castro-González et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022"
+      },
+      "text": {
+        "card": "K2-275 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-275. Its orbit and size follow Castro-González et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 3.2809626, pl_radj 0.20876118, pl_bmassj 0.0191"
+      },
+      "order": 3449
+    }
+  ]
+}

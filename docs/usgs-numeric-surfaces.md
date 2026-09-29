@@ -60,7 +60,7 @@ photographic bytes and check the numeric palette through every companion image.
 
 ## Independent checks
 
-[The native-byte oracle](../tests/oracles/isis-geotiff-grid.mts) computes sample
+[The native-byte oracle](../packages/bake/src/objects/raster/fixtures/isis-geotiff-grid.mts) computes sample
 coordinates and byte offsets from the detached ISIS label, then decodes native
 values with `DataView`. It does not call the acquisition mapper or native
 GeoTIFF reader. It checks both hemispheres, the longitude seam, extrema, valid
@@ -71,7 +71,7 @@ converts fractions to percentages.
 For example, the Mercury check takes these arguments:
 
 ```sh
-node tests/oracles/isis-geotiff-grid.mts \
+node packages/bake/src/objects/raster/fixtures/isis-geotiff-grid.mts \
   src/objects/mercury/source/science/usgs/elevation.json \
   src/objects/mercury/source/science/usgs/elevation-isis.lbl \
   src/objects/mercury/source/science/usgs/elevation.tif \

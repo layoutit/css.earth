@@ -1,0 +1,30 @@
+{
+ "id": "toi-6034",
+ "classification": "star",
+ "order": 4600,
+ "physical": {
+  "name": "TOI-6034",
+  "horizonsCode": null,
+  "meanRadiusKm": 340197.3,
+  "gravitationalParameterKm3PerS2": 68214194181.55684,
+  "parent": null,
+  "effectiveTemperatureK": 3635
+ },
+ "physicalNotes": "Radius 0.489 +/- 0.015 solar radii from Kanodia et al. 2024, the stellar radius of the default parameter set of TOI-6034 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract): 340,197 km at 695,700 km per solar radius. Mass 0.514 +/- 0.025 solar masses from Kanodia et al. 2024, the stellar mass of the default parameter set of TOI-6034 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract); GM is that mass times the JPL solar GM. Temperature 3635 +/- 88 K from Kanodia et al. 2024, the stellar temperature of the default parameter set of TOI-6034 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 317.9001382870204,
+  "declinationDegrees": 68.40207548054711,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 117.48104488136192,
+  "properMotionRaMasPerYear": -2.4297512753611024,
+  "properMotionDecMasPerYear": -5.108950734492819,
+  "radialVelocityKmPerS": 9.377768,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2270404997834401664 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-6034/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 8.5120 +/- 0.0163 mas (same row, RUWE 1.06): 117.48 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -2.430, -5.109 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 9.38 +/- 2.18 km/s"
+  }
+ }
+}

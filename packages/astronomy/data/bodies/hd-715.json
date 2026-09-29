@@ -1,0 +1,30 @@
+{
+ "id": "hd-715",
+ "classification": "star",
+ "order": 3231,
+ "physical": {
+  "name": "HD 715",
+  "horizonsCode": null,
+  "meanRadiusKm": 1739250,
+  "gravitationalParameterKm3PerS2": 212339904067.10303,
+  "parent": null,
+  "effectiveTemperatureK": 6070
+ },
+ "physicalNotes": "Radius 2.5 +/- 0.07 solar radii from Venner et al. 2026, the stellar radius of the default parameter set of HD 715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract): 1,739,250 km at 695,700 km per solar radius. Mass 1.6 +/- 0.04 solar masses from Venner et al. 2026, the stellar mass of the default parameter set of HD 715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract); GM is that mass times the JPL solar GM. Temperature 6070 +/- 50 K from Venner et al. 2026, the stellar temperature of the default parameter set of HD 715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 2.892727790027721,
+  "declinationDegrees": 4.767215157373631,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 166.43300812051487,
+  "properMotionRaMasPerYear": 35.57826133614506,
+  "properMotionDecMasPerYear": 21.08041838948949,
+  "radialVelocityKmPerS": 11.987472,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2741377642494388864 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-715/source/photometry/gaia-dr3-source.csv; cross-identification HD 715: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2741377642494388864",
+   "distance": "Gaia DR3 parallax 6.0084 +/- 0.0194 mas (same row, RUWE 0.90): 166.43 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 35.578, 21.080 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 11.99 +/- 0.18 km/s"
+  }
+ }
+}

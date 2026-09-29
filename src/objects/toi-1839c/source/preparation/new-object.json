@@ -1,0 +1,24 @@
+{
+  "host": "toi-1839",
+  "planets": [
+    {
+      "id": "toi-1839c",
+      "name": "TOI-1839 c",
+      "description": "Transiting planet of TOI-1839 with a 4.02-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+        "credit": "Castro-González et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CASTRO_GONZALEZ_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-1839 c was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1839. Its orbit and size follow Castro-González et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZALEZ_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.0239478, pl_radj 0.22303545, pl_bmassj 0.01887811"
+      },
+      "order": 4187
+    }
+  ]
+}

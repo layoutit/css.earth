@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-1",
+  "card": {
+    "text": "HAT-P-1 b crosses HAT-P-1 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stt1859",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+        "label": "Nikolov et al. (2014), Monthly Notices of the Royal Astronomical Society 437 46-66",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NIKOLOV_ET_AL__2014): st_teff 5980, st_rad 1.174, st_mass 1.151"
+      },
+      {
+        "catalogueId": "wikipedia-ads-16402",
+        "url": "https://en.wikipedia.org/wiki/ADS_16402",
+        "label": "Wikipedia, \"ADS 16402\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1369429338",
+        "quote": "The secondary star ADS 16402 B is also designated HAT-P-1."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Nikolov et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stt1859",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+        "label": "Nikolov et al. (2014), Monthly Notices of the Royal Astronomical Society 437 46-66",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NIKOLOV_ET_AL__2014): st_teff 5980, st_rad 1.174, st_mass 1.151"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

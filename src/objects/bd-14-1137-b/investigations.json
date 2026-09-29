@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bd-14-1137-b",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2984582227215748224: position at J2016.0. Distance: Gaia DR3 parallax 13.3248 +/- 0.0215 mas (same row, RUWE 1.18): 75.05 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -36.190, 50.607 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.357 +/- 0.011 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 94986312 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Mass 0.342 +/- 0.02 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 94986312 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Temperature 3388 +/- 157 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 94986312 (VizieR IV/39/tic82).",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ab3467"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 2984582227215748224, through the CIE 1931 2-degree observer: #ffc984. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2984582227215748224&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,388 K and log g 4.87 (u1 0.162, u2 0.445): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/600/A30"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad7796",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kanodia et al. (2024): Searching for GEMS: Characterizing Six Giant Planets Around Cool Dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2408.14694"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad7796"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....168..235K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad7796",
+      "label": "The Astronomical Journal 168 235"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kanodia et al. (2024), The Astronomical Journal 168 235",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K"
+    }
+  ],
+  "publisher": "The Astronomical Journal 168 235",
+  "creators": [
+    "Shubham Kanodia",
+    "Arvind F. Gupta",
+    "Caleb I. Cañas",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

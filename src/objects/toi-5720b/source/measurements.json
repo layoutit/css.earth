@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-5720b",
+  "radiusKm": 6952.1,
+  "radiusSource": "Radius 0.09724345 Jupiter radii from Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract): 6,952.1 km at 71,492 km per Jupiter radius. No mass is measured: Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract) gives only an upper limit of 0.01352931 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.4344555,
+  "orbitalPeriodSource": "Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): P 1.4344555 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-5720 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.01352931 Jupiter masses: Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)."
+}

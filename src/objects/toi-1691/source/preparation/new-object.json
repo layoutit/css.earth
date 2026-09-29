@@ -1,0 +1,39 @@
+{
+  "id": "toi-1691",
+  "name": "TOI-1691",
+  "system": "TOI-1691 system",
+  "description": "Star of 5,759 K, 111 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1691",
+  "gaia": "2303587361109316224",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 1,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1691 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.05
+  },
+  "mass": {
+    "value": 1.03,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1691 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.14
+  },
+  "temperature": {
+    "value": 5759,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1691 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 187
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1691 b crosses TOI-1691 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 5759, st_rad 1, st_mass 1.03"
+  },
+  "notes": [],
+  "order": 4089
+}

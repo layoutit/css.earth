@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-5624d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.31974361 Jupiter radii from Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01541712 Jupiter masses: Bonfanti et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A.265B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): P 13.731468 d; Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): a/R* 27.97; Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): inclination 89.69 degrees; Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): e 0; Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): transit mid-time 2459655.2041 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract"
+      ]
+    }
+  ]
+}

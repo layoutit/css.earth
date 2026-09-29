@@ -1,0 +1,45 @@
+{
+  "id": "toi-1273",
+  "name": "TOI-1273",
+  "system": "TOI-1273 system",
+  "description": "Star of 5,690 K, 177 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1273",
+  "gaia": "1611685004650291840",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract",
+    "credit": "Serrano Bell et al. 2024"
+  },
+  "radius": {
+    "value": 1.06,
+    "source": "Serrano Bell et al. 2024, the stellar radius of the default parameter set of TOI-1273 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 1.06,
+    "source": "Serrano Bell et al. 2024, the stellar mass of the default parameter set of TOI-1273 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 5690,
+    "source": "Serrano Bell et al. 2024, the stellar temperature of the default parameter set of TOI-1273 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1273 b crosses TOI-1273 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Serrano Bell et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SERRANO_BELL_ET_AL_2024): st_teff 5690, st_rad 1.06, st_mass 1.06"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -43.56,
+    "uncertainty": 0.34,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1611685004650291840 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract"
+  },
+  "order": 3998
+}

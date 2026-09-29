@@ -1,0 +1,39 @@
+{
+  "id": "toi-1451",
+  "name": "TOI-1451",
+  "system": "TOI-1451 system",
+  "description": "Star of 5,801 K, 91.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1451",
+  "gaia": "1581799694493008384",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 1.0162,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1451 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0181
+  },
+  "mass": {
+    "value": 1.0022,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1451 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0364
+  },
+  "temperature": {
+    "value": 5801,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1451 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 77
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1451 b crosses TOI-1451 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5801, st_rad 1.0162, st_mass 1.0022"
+  },
+  "notes": [],
+  "order": 4047
+}

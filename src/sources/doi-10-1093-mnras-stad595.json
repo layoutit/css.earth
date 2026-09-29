@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad595",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rodriguez et al. (2023): Another shipment of six short-period giant planets from <i>TESS</i>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2205.05709"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad595"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.521.2765R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad595",
+      "label": "Monthly Notices of the Royal Astronomical Society 521 2765-2785"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rodriguez et al. (2023), Monthly Notices of the Royal Astronomical Society 521 2765-2785",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.2765R"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 521 2765-2785",
+  "creators": [
+    "Joseph E Rodriguez",
+    "Samuel N Quinn",
+    "Andrew Vanderburg",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

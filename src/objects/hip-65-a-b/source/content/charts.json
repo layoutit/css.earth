@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hip-65-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hip-65-a-b-orbits",
+      "title": "HIP 65 A b: orbits around HIP 65 A",
+      "output": "hip-65-a-b-system-orbits.svg",
+      "system": "hip-65-a",
+      "highlight": "hip-65-a-b",
+      "description": "The orbits of HIP 65 A's planets in this map from above, to scale, with HIP 65 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 0.98097217 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hip-65-a-b-transit",
+      "title": "HIP 65 A b: its transit",
+      "description": "HIP 65 A b crossing its star, as TESS recorded it: 3 sectors (102, 104, 105) of the SPOC pipeline's 2-minute light curves of TIC 201248411, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "hip-65-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 201248411",
+        "sectors": [
+          102,
+          104,
+          105
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hip-65-a-b",
+      "sources": [
+        "photometry/tess/tess2026086090000-s0102-0000000201248411-0304-s_lc.fits",
+        "photometry/tess/tess2026137223500-s0104-0000000201248411-0306-s_lc.fits",
+        "photometry/tess/tess2026164183000-s0105-0000000201248411-0307-s_lc.fits"
+      ],
+      "durationHours": 0.78576,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 102, 104, 105",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

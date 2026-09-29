@@ -1,0 +1,39 @@
+{
+  "id": "k2-152",
+  "name": "K2-152",
+  "system": "K2-152 system",
+  "description": "Star of 4,044 K, 108 parsecs away, with 1 transiting planet.",
+  "target": "K2-152",
+  "gaia": "3596508242468505216",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "credit": "Livingston et al. 2018"
+  },
+  "radius": {
+    "value": 0.61,
+    "source": "Livingston et al. 2018, the stellar radius of the default parameter set of K2-152 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.63,
+    "source": "Livingston et al. 2018, the stellar mass of the default parameter set of K2-152 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 4044,
+    "source": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-152 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 34
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-152 b crosses K2-152 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Livingston et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 4044, st_rad 0.61, st_mass 0.63"
+  },
+  "notes": [],
+  "order": 3333
+}

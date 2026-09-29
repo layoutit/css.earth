@@ -1,0 +1,39 @@
+{
+  "id": "toi-1680",
+  "name": "TOI-1680",
+  "system": "TOI-1680 system",
+  "description": "Star of 3,225 K, 37.2 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1680",
+  "gaia": "2242756094328104576",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract",
+    "credit": "Ghachoui et al. 2023"
+  },
+  "radius": {
+    "value": 0.2106,
+    "source": "Ghachoui et al. 2023, the stellar radius of the default parameter set of TOI-1680 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract",
+    "uncertainty": 0.0061
+  },
+  "mass": {
+    "value": 0.1798,
+    "source": "Ghachoui et al. 2023, the stellar mass of the default parameter set of TOI-1680 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract",
+    "uncertainty": 0.0044
+  },
+  "temperature": {
+    "value": 3225,
+    "source": "Ghachoui et al. 2023, the stellar temperature of the default parameter set of TOI-1680 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract",
+    "uncertainty": 99
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1680 b crosses TOI-1680 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Ghachoui et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GHACHOUI_ET_AL_2023): st_teff 3225, st_rad 0.2106, st_mass 0.1798"
+  },
+  "notes": [],
+  "order": 4083
+}

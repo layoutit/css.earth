@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ltt-3780b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.11820879 Jupiter radii from Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.00774003 Jupiter masses: Bonfanti et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...682A..66B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): P 0.76837931 d; Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): a/R* 6.79; Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): inclination 86.1 degrees; Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): e 0; Bonfanti et al. 2024 (2024A&A...682A..66B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL__2024): transit mid-time 2459606.58098 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract"
+      ]
+    }
+  ]
+}

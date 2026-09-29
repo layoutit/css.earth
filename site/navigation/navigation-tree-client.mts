@@ -1,6 +1,7 @@
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload, type NavigationTreeRecord } from '../../src/navigation/navigation-tree-schema.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
+import { moreLabel, windowRows } from './navigation-window.mts';
 
 
 function parsePayload(value: unknown): NavigationTreePayload {
@@ -14,12 +15,12 @@ function parsePayload(value: unknown): NavigationTreePayload {
       || !raw.children.every(child => typeof child === 'string') || !(raw.marker === null || isRecord(raw.marker)
         && typeof raw.marker.className === 'string' && typeof raw.marker.style === 'string')
       || !(typeof raw.href === 'string' && raw.href.startsWith('/') || raw.href === null)
-      || !(typeof raw.focusId === 'string' || raw.focusId === null)) {
+      || !(typeof raw.focusId === 'string' || raw.focusId === null) || !(typeof raw.search === 'string' || raw.search === null)) {
       throw new TypeError(`Invalid navigation tree node: ${key}.`);
     }
     nodes[key] = { label: raw.label, objectId: raw.objectId, place: raw.place, count: Number(raw.count),
       marker: raw.marker as NavigationTreeRecord['marker'], children: [...raw.children],
-      href: raw.href, focusId: raw.focusId };
+      href: raw.href, focusId: raw.focusId, search: raw.search };
   }
   if (!value.roots.every(key => typeof key === 'string' && nodes[key])) throw new TypeError('Invalid navigation tree roots.');
   for (const node of Object.values(nodes)) if (!node.children.every(key => nodes[key])) throw new TypeError('Invalid navigation tree child.');
@@ -86,7 +87,18 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
     item.append(details);
     return item;
   };
-  const materialize = async (details: HTMLDetailsElement, supplied?: NavigationTreePayload) => {
+  // The rows a window leaves out: a button for the pill that lists them, or a count when no one pill does.
+  const moreItem = (node: NavigationTreeRecord, hidden: number): HTMLLIElement => {
+    const item = root.ownerDocument.createElement('li');
+    const more = root.ownerDocument.createElement(node.search ? 'button' : 'span');
+    more.className = 'atlas-row atlas-tree-more';
+    if (node.search) { more.setAttribute('type', 'button'); more.dataset.searchClassification = node.search; }
+    more.textContent = moreLabel(hidden);
+    item.append(more);
+    return item;
+  };
+  // `centre` is the child the branch opens for, kept inside the window.
+  const materialize = async (details: HTMLDetailsElement, supplied?: NavigationTreePayload, centre?: string) => {
     if (!details.hasAttribute('data-atlas-lazy')) return;
     const payload = supplied ?? await load();
     if (!visible || events.signal.aborted) return;
@@ -95,7 +107,9 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
     if (!node) throw new Error(`Navigation branch is missing: ${key ?? ''}.`);
     const list = root.ownerDocument.createElement('ul');
     const depth = Number(details.dataset.atlasDepth) + 1;
-    for (const child of node.children) list.append(createItem(child, depth, payload));
+    const { rows, hidden } = windowRows(node.children, centre ? node.children.indexOf(centre) : -1);
+    for (const child of rows) list.append(createItem(child, depth, payload));
+    if (hidden) list.append(moreItem(node, hidden));
     details.append(list);
     details.removeAttribute('data-atlas-lazy');
   };
@@ -127,10 +141,10 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
         const path: string[] = [];
         const targetKey = Object.entries(payload.nodes).find(([, node]) => node.objectId === objectId)?.[0];
         for (let key: string | undefined = targetKey; key; key = parent.get(key)) path.unshift(key);
-        for (const key of path.slice(0, -1)) {
+        for (const [index, key] of path.slice(0, -1).entries()) {
           const details = detailsByKey(key);
           if (!details) break;
-          await materialize(details, payload);
+          await materialize(details, payload, path[index + 1]);
           if (!current()) return;
           details.open = true;
         }

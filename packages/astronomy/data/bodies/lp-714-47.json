@@ -1,0 +1,30 @@
+{
+ "id": "lp-714-47",
+ "classification": "star",
+ "order": 3823,
+ "physical": {
+  "name": "LP 714-47",
+  "horizonsCode": null,
+  "meanRadiusKm": 372895.2,
+  "gravitationalParameterKm3PerS2": 71930142502.73114,
+  "parent": null,
+  "effectiveTemperatureK": 4123
+ },
+ "physicalNotes": "Radius 0.536 +/- 0.001 solar radii from Serrano Bell et al. 2026, the stellar radius of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract): 372,895 km at 695,700 km per solar radius. Mass 0.542 +/- 0.001 solar masses from Serrano Bell et al. 2026, the stellar mass of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract); GM is that mass times the JPL solar GM. Temperature 4123 +/- 44 K from Serrano Bell et al. 2026, the stellar temperature of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 64.19022831592721,
+  "declinationDegrees": -12.084891661913487,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 52.340218983243716,
+  "properMotionRaMasPerYear": 49.83457329853387,
+  "properMotionDecMasPerYear": -197.20313787455936,
+  "radialVelocityKmPerS": -7.9655232,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3189306030970782208 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/lp-714-47/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 19.1058 +/- 0.0201 mas (same row, RUWE 1.13): 52.34 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 49.835, -197.203 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -7.97 +/- 0.29 km/s"
+  }
+ }
+}

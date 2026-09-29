@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-757b",
+  "displayName": "TOI-757 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.5 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1767",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A",
+          "label": "Alqasim et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "17.5 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1767",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A",
+          "label": "Alqasim et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "10 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stae1767",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A",
+          "label": "Alqasim et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-757; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-757b-lens-shape.webp",
+        "surface": "toi-757b-surface-shape@2x.webp",
+        "poles": "toi-757b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-757b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-757 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-757's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-757b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-757b/toi-757b-system-orbits.svg",
+      "alt": "The orbits of TOI-757's planets in this map from above, to scale, with TOI-757 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-757b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A"
+      }
+    },
+    {
+      "id": "toi-757b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-757b/toi-757b-transit.svg",
+      "alt": "TOI-757 b crossing its star, as TESS recorded it: 3 sectors (37, 64, 101) of the SPOC pipeline's 2-minute light curves of TIC 130924120, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-757b-tess-sector-37",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021091135823-s0037-0000000130924120-0208-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Alqasim et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract",
+      "credit": "Alqasim et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-757b.json",
+      "credit": "Radius from Alqasim et al. 2024 (2024MNRAS.533....1A), via the NASA Exoplanet Archive; mass from Alqasim et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.533....1A), via the NASA Exoplanet Archive; orbit from Alqasim et al. 2024 (2024MNRAS.533....1A), via the NASA Exoplanet Archive"
+    }
+  }
+}

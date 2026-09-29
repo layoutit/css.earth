@@ -1,0 +1,24 @@
+{
+  "host": "toi-178",
+  "planets": [
+    {
+      "id": "toi-178c",
+      "name": "TOI-178 c",
+      "description": "Transiting planet of TOI-178 with a 3.24-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract",
+        "credit": "Leleu et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LELEU_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-178 c was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 6 planets known around TOI-178. Its orbit and size follow Leleu et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LELEU_ET_AL__2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 6; pl_orbper 3.23845, pl_radj 0.15648167, pl_bmassj 0.01459907"
+      },
+      "order": 4151
+    }
+  ]
+}

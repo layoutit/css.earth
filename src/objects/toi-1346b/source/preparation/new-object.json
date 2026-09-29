@@ -1,0 +1,24 @@
+{
+  "host": "toi-1346",
+  "planets": [
+    {
+      "id": "toi-1346b",
+      "name": "TOI-1346 b",
+      "description": "Transiting planet of TOI-1346 with a 1.76-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+        "credit": "Gomez Barrientos et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GOMEZ_BARRIENTOS_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-1346 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1346. Its orbit and size follow Gomez Barrientos et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_BARRIENTOS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.7622538, pl_radj 0.21322189, pl_bmassj 0.0198"
+      },
+      "order": 3005
+    }
+  ]
+}

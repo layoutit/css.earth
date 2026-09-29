@@ -1,0 +1,24 @@
+{
+  "host": "k2-26",
+  "planets": [
+    {
+      "id": "k2-26b",
+      "name": "K2-26 b",
+      "description": "Transiting planet of K2-26 with a 14.6-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract",
+        "credit": "Schlieder et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SCHLIEDER_ET_AL__2016"
+      },
+      "text": {
+        "card": "K2-26 b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-26. Its orbit and size follow Schlieder et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SCHLIEDER_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 14.568101, pl_radj 0.23820145, pl_bmassj 0.0239"
+      },
+      "order": 3435
+    }
+  ]
+}

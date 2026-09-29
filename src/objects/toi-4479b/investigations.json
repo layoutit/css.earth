@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-4479b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.25158398 Jupiter radii from Esparza-Borges et al. 2022 (2022A&A...666A..10E), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0263 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.15890129424 d; Esparza-Borges et al. 2022 (2022A&A...666A..10E), via the NASA Exoplanet Archive ps table (pl_refname ESPARZA_BORGES_ET_AL_2022): a/R* 7.8; Esparza-Borges et al. 2022 (2022A&A...666A..10E), via the NASA Exoplanet Archive ps table (pl_refname ESPARZA_BORGES_ET_AL_2022): inclination 86.36 degrees; No archive row states an eccentricity; the orbit is taken as circular; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459797.406342 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract"
+      ]
+    }
+  ]
+}

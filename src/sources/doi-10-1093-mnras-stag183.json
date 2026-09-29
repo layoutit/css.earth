@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1093-mnras-stag183",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Morello et al. (2026): The K-dwarfs survey – I. Four validated planets from the radius valley to the Neptune desert",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stag183"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.549ag183M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Morello et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag183",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 549 stag183",
+  "creators": [
+    "G Morello",
+    "A Peláez-Torres",
+    "F J Pozuelos",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

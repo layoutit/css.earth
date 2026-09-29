@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-700e",
+  "card": {
+    "text": "TOI-700 e was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae9283",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "label": "Pass et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 27.810124, pl_radj 0.08198783, pl_bmassj 0.00226"
+      },
+      {
+        "catalogueId": "wikipedia-toi-700-e",
+        "url": "https://en.wikipedia.org/wiki/TOI-700_e",
+        "label": "Wikipedia, \"TOI-700 e\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086710",
+        "quote": "TOI-700 e is the second outermost known exoplanet orbiting TOI-700, a red dwarf star in the constellation of Dorado."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around TOI-700. Its orbit and size follow Pass et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae9283",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "label": "Pass et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 27.810124, pl_radj 0.08198783, pl_bmassj 0.00226"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

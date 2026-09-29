@@ -1,7 +1,7 @@
 import { orbitFixture } from '@cssearth/renderer/test/orbit-fixture.mts';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "@cssearth/renderer";
 import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeCapabilities } from "@cssearth/renderer/runtime/object-runtime-types.ts";

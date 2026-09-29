@@ -1,0 +1,41 @@
+{
+  "id": "toi-4311",
+  "name": "TOI-4311",
+  "system": "TOI-4311 system",
+  "description": "Star of 5,063 K, 135 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4311",
+  "gaia": "5064693746900436736",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+    "credit": "Eschen et al. 2026"
+  },
+  "radius": {
+    "value": 0.8441,
+    "source": "Eschen et al. 2026, the stellar radius of the default parameter set of TOI-4311 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+    "uncertainty": 0.0062
+  },
+  "mass": {
+    "value": 0.816,
+    "source": "Eschen et al. 2026, the stellar mass of the default parameter set of TOI-4311 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+    "uncertainty": 0.047
+  },
+  "temperature": {
+    "value": 5063,
+    "source": "Eschen et al. 2026, the stellar temperature of the default parameter set of TOI-4311 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+    "uncertainty": 66
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4311 c crosses TOI-4311 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Eschen et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ESCHEN_ET_AL_2026): st_teff 5063, st_rad 0.8441, st_mass 0.816"
+  },
+  "notes": [
+    "TOI-4311 b: Eschen et al. 2026's mass 0.01415858 Jupiter masses in 0.12275871 Jupiter radii is 9.5 g/cm^3, outside what the records accept"
+  ],
+  "order": 4397
+}

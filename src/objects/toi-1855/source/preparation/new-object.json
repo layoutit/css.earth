@@ -1,0 +1,39 @@
+{
+  "id": "toi-1855",
+  "name": "TOI-1855",
+  "system": "TOI-1855 system",
+  "description": "Star of 5,359 K, 177 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1855",
+  "gaia": "1247603719345703808",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract",
+    "credit": "Schulte et al. 2024"
+  },
+  "radius": {
+    "value": 1.041,
+    "source": "Schulte et al. 2024, the stellar radius of the default parameter set of TOI-1855 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract",
+    "uncertainty": 0.031
+  },
+  "mass": {
+    "value": 0.987,
+    "source": "Schulte et al. 2024, the stellar mass of the default parameter set of TOI-1855 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract",
+    "uncertainty": 0.058
+  },
+  "temperature": {
+    "value": 5359,
+    "source": "Schulte et al. 2024, the stellar temperature of the default parameter set of TOI-1855 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract",
+    "uncertainty": 89
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1855 b crosses TOI-1855 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Schulte et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SCHULTE_ET_AL__2024): st_teff 5359, st_rad 1.041, st_mass 0.987"
+  },
+  "notes": [],
+  "order": 4190
+}

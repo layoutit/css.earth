@@ -1,0 +1,39 @@
+{
+  "id": "wasp-123",
+  "name": "WASP-123",
+  "system": "WASP-123 system",
+  "description": "Star of 5,740 K, 198 parsecs away, with 1 transiting planet.",
+  "target": "WASP-123",
+  "gaia": "6756148659453907200",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+    "credit": "Alexoudi 2022"
+  },
+  "radius": {
+    "value": 1.285,
+    "source": "Turner et al. 2016, the stellar radius of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "uncertainty": 0.051
+  },
+  "mass": {
+    "value": 1.166,
+    "source": "Turner et al. 2016, the stellar mass of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "uncertainty": 0.061
+  },
+  "temperature": {
+    "value": 5740,
+    "source": "Turner et al. 2016, the stellar temperature of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract",
+    "uncertainty": 130
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-123 b crosses WASP-123 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Turner et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL__2016): st_teff 5740, st_rad 1.285, st_mass 1.166"
+  },
+  "notes": [],
+  "order": 4778
+}

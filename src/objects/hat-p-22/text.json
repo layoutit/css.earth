@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-22",
+  "card": {
+    "text": "HAT-P-22 b crosses HAT-P-22 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5302, st_rad 1.11, st_mass 1.13"
+      },
+      {
+        "catalogueId": "wikipedia-hd-233731",
+        "url": "https://en.wikipedia.org/wiki/HD_233731",
+        "label": "Wikipedia, \"HD 233731\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1357585973",
+        "quote": "HD 233731, or HAT-P-22, is a suspected multiple star system in the northern circumpolar constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5302, st_rad 1.11, st_mass 1.13"
+      },
+      {
+        "catalogueId": "wikipedia-hd-233731",
+        "url": "https://en.wikipedia.org/wiki/HD_233731",
+        "label": "Wikipedia, \"HD 233731\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1357585973",
+        "quote": "It is invisible to the naked eye, having an apparent visual magnitude of 9.732."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1062b",
+  "card": {
+    "text": "TOI-1062 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202040247",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+        "label": "Otegi et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OTEGI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.11505271542, pl_radj 0.20207011, pl_bmassj 0.03193547"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1062. Its orbit and size follow Otegi et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202040247",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+        "label": "Otegi et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OTEGI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.11505271542, pl_radj 0.20207011, pl_bmassj 0.03193547"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

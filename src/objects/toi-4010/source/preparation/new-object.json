@@ -1,0 +1,41 @@
+{
+  "id": "toi-4010",
+  "name": "TOI-4010",
+  "system": "TOI-4010 system",
+  "description": "Star of 4,960 K, 178 parsecs away, with 3 transiting planets.",
+  "target": "TOI-4010",
+  "gaia": "525352325110310400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....7K/abstract",
+    "credit": "Kunimoto et al. 2023"
+  },
+  "radius": {
+    "value": 0.83,
+    "source": "Kunimoto et al. 2023, the stellar radius of the default parameter set of TOI-4010 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....7K/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.88,
+    "source": "Kunimoto et al. 2023, the stellar mass of the default parameter set of TOI-4010 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....7K/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 4960,
+    "source": "Kunimoto et al. 2023, the stellar temperature of the default parameter set of TOI-4010 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....7K/abstract",
+    "uncertainty": 36
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross TOI-4010 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Kunimoto et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KUNIMOTO_ET_AL__2023): st_teff 4960, st_rad 0.83, st_mass 0.88"
+  },
+  "notes": [
+    "TOI-4010 e: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4378
+}

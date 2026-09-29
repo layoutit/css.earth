@@ -1,0 +1,28 @@
+{
+ "id": "toi-2266b",
+ "classification": "exoplanet",
+ "order": 4277,
+ "physical": {
+  "name": "TOI-2266 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 9822.3,
+  "gravitationalParameterKm3PerS2": 1190853.4,
+  "parent": "toi-2266"
+ },
+ "physicalNotes": "Radius 0.13738983 Jupiter radii from Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract): 9,822.3 km at 71,492 km per Jupiter radius. GM from the mass 0.0094 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.326318,
+  "semiMajorAxisStellarRadii": 18.43,
+  "inclinationDegrees": 88.51,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59255.19482,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): P 2.326318 d",
+   "shape": "Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): a/R* 18.43; Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): inclination 88.51 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Parviainen et al. 2024 (2024A&A...683A.170P), via the NASA Exoplanet Archive ps table (pl_refname PARVIAINEN_ET_AL_2024): transit mid-time 2459255.6948195 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

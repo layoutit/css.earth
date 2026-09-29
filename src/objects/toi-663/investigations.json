@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-663",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3762515188088861184: position at J2016.0. Distance: Gaia DR3 parallax 15.6390 +/- 0.0231 mas (same row, RUWE 1.60): 63.94 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published. Proper motion: Gaia DR3 (same row): -141.994, -83.131 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.512 +/- 0.015 solar radii from Cointepas et al. 2024, the stellar radius of the default parameter set of TOI-663 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract). Mass 0.514 +/- 0.012 solar masses from Cointepas et al. 2024, the stellar mass of the default parameter set of TOI-663 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract). Temperature 3681 +/- 70 K from Cointepas et al. 2024, the stellar temperature of the default parameter set of TOI-663 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 3,681 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffcc95. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,681 K and log g 4.73 (u1 0.399, u2 0.359): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

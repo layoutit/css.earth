@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1246",
+  "card": {
+    "text": "4 planets cross TOI-1246 as seen from Earth: b, c, d, e.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac69e5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract",
+        "label": "Turtelboom et al. (2022), The Astronomical Journal 163 293",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURTELBOOM_ET_AL_2022): st_teff 5151, st_rad 0.86, st_mass 0.87"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Turtelboom et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac69e5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract",
+        "label": "Turtelboom et al. (2022), The Astronomical Journal 163 293",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURTELBOOM_ET_AL_2022): st_teff 5151, st_rad 0.86, st_mass 0.87"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

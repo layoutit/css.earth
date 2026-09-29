@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-107",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3578638842054261248: position at J2016.0. Distance: Gaia DR3 parallax 15.5277 +/- 0.0260 mas (same row, RUWE 1.54): 64.40 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published. Proper motion: Gaia DR3 (same row): -96.665, -9.372 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.67 +/- 0.02 solar radii from Howard et al. 2025, the stellar radius of WASP-107 b's parameter set from Howard et al. 2025 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract). Mass 0.683 +/- 0.017 solar masses from Piaulet et al. 2021, the stellar mass of WASP-107 b's parameter set from Piaulet et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161...70P/abstract). Temperature 4425 +/- 70 K from Howard et al. 2025, the stellar temperature of WASP-107 b's parameter set from Howard et al. 2025 (the default leaves it empty) in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2021AJ....161...70P/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 3578638842054261248, through the CIE 1931 2-degree observer: #ffc49e. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3578638842054261248&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,425 K and log g 4.62 (u1 0.765, u2 0.028): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

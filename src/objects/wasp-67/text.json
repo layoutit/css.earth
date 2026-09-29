@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-67",
+  "card": {
+    "text": "WASP-67 b crosses WASP-67 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5200, st_rad 0.88, st_mass 0.91"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-67",
+        "url": "https://en.wikipedia.org/wiki/WASP-67",
+        "label": "Wikipedia, \"WASP-67\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374437321",
+        "quote": "WASP-67 is a K-type main-sequence star about 620 light-years away in the constellation Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5200, st_rad 0.88, st_mass 0.91"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-67",
+        "url": "https://en.wikipedia.org/wiki/WASP-67",
+        "label": "Wikipedia, \"WASP-67\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374437321",
+        "quote": "The star's age is poorly constrained."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

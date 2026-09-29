@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aca327",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dai et al. (2023): TOI-1136 is a Young, Coplanar, Aligned Planetary System in a Pristine Resonant Chain",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2210.09283"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aca327"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023AJ....165...33D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...33D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aca327",
+      "label": "The Astronomical Journal 165 33"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...33D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dai et al. (2023), The Astronomical Journal 165 33",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...33D"
+    }
+  ],
+  "publisher": "The Astronomical Journal 165 33",
+  "creators": [
+    "Fei Dai",
+    "Kento Masuda",
+    "Corey Beard",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

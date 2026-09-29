@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-6086b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-6086b-orbits",
+      "title": "TOI-6086 b: orbits around TOI-6086",
+      "output": "toi-6086b-system-orbits.svg",
+      "system": "toi-6086",
+      "highlight": "toi-6086b",
+      "description": "The orbits of TOI-6086's planets in this map from above, to scale, with TOI-6086 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.38885844017 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-6086b-transit",
+      "title": "TOI-6086 b: its transit",
+      "description": "TOI-6086 b crossing its star, as TESS recorded it: 3 sectors (53, 79, 80) of the SPOC pipeline's 2-minute light curves of TIC 18318288, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 14 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 49 minutes at these dates, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-6086b-transit.svg",
+      "metadata": {
+        "tic": "TIC 18318288",
+        "sectors": [
+          53,
+          79,
+          80
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-6086b",
+      "sources": [
+        "photometry/tess/tess2022164095748-s0053-0000000018318288-0226-s_lc.fits",
+        "photometry/tess/tess2024142205832-s0079-0000000018318288-0274-s_lc.fits",
+        "photometry/tess/tess2024170053053-s0080-0000000018318288-0275-s_lc.fits"
+      ],
+      "durationHours": 0.7,
+      "binMinutes": 4,
+      "alignMinutes": 14,
+      "notes": [
+        "TESS 2-min SPOC · sectors 53, 79, 80",
+        "Aligned on TESS's dip, 14 min late; 4-min bins.",
+        "The ephemeris's own 1σ there is 16 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

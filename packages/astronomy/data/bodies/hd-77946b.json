@@ -1,0 +1,31 @@
+{
+ "id": "hd-77946b",
+ "classification": "exoplanet",
+ "order": 3234,
+ "physical": {
+  "name": "HD 77946 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 18473.9,
+  "gravitationalParameterKm3PerS2": 4344745.02,
+  "parent": "hd-77946"
+ },
+ "physicalNotes": "Radius 0.25840541 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 18,473.9 km at 71,492 km per Jupiter radius. GM from the mass 0.03429524 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.527282,
+  "semiMajorAxisStellarRadii": 11.9154,
+  "inclinationDegrees": 87.79,
+  "eccentricity": 0.211,
+  "argumentOfPeriapsisDegrees": 9.199999999999989,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59586.974,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Palethorpe et al. 2024 (2024MNRAS.529.3323P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2024): P 6.527282 d",
+   "shape": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): a/R* derived from its semi-major axis 0.073 au and stellar radius 1.3174 solar radii; Palethorpe et al. 2024 (2024MNRAS.529.3323P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2024): inclination 87.79 degrees",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0.211",
+   "argumentOfPeriapsis": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): omega 9.2 degrees",
+   "phase": "Palethorpe et al. 2024 (2024MNRAS.529.3323P), via the NASA Exoplanet Archive ps table (pl_refname PALETHORPE_ET_AL_2024): transit mid-time 2459587.474 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

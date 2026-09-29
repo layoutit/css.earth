@@ -1,0 +1,39 @@
+{
+  "id": "toi-6054",
+  "name": "TOI-6054",
+  "system": "TOI-6054 system",
+  "description": "Star of 6,047 K, 79.4 parsecs away, with 2 transiting planets.",
+  "target": "TOI-6054",
+  "gaia": "474143193821024256",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract",
+    "credit": "Kroft et al. 2025"
+  },
+  "radius": {
+    "value": 1.662,
+    "source": "Kroft et al. 2025, the stellar radius of the default parameter set of TOI-6054.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract",
+    "uncertainty": 0.071
+  },
+  "mass": {
+    "value": 1.107,
+    "source": "Kroft et al. 2025, the stellar mass of the default parameter set of TOI-6054.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 6047,
+    "source": "Kroft et al. 2025, the stellar temperature of the default parameter set of TOI-6054.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-6054 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Kroft et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KROFT_ET_AL__2025): st_teff 6047, st_rad 1.662, st_mass 1.107"
+  },
+  "notes": [],
+  "order": 4958
+}

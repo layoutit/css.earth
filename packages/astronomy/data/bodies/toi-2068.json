@@ -1,0 +1,30 @@
+{
+ "id": "toi-2068",
+ "classification": "star",
+ "order": 4226,
+ "physical": {
+  "name": "TOI-2068",
+  "horizonsCode": null,
+  "meanRadiusKm": 372199.5,
+  "gravitationalParameterKm3PerS2": 74186253983.44412,
+  "parent": null,
+  "effectiveTemperatureK": 3710
+ },
+ "physicalNotes": "Radius 0.535 +/- 0.022 solar radii from Mistry et al. 2024, the stellar radius of the default parameter set of TOI-2068 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract): 372,200 km at 695,700 km per solar radius. Mass 0.559 +/- 0.027 solar masses from Mistry et al. 2024, the stellar mass of the default parameter set of TOI-2068 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract); GM is that mass times the JPL solar GM. Temperature 3710 +/- 57 K from Mistry et al. 2024, the stellar temperature of the default parameter set of TOI-2068 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 186.27350445506625,
+  "declinationDegrees": 60.418344740817,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 52.99531374917693,
+  "properMotionRaMasPerYear": -197.9432020136407,
+  "properMotionDecMasPerYear": -6.0624030712826515,
+  "radialVelocityKmPerS": 11.537678,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1581657479535392256 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-2068/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 18.8696 +/- 0.0131 mas (same row, RUWE 1.16): 53.00 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -197.943, -6.062 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 11.54 +/- 0.47 km/s"
+  }
+ }
+}

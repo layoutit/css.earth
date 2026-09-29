@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-6034b",
+  "radiusKm": 75996,
+  "radiusSource": "Radius 1.063 Jupiter radii from Kanodia et al. 2024 (2024AJ....168..235K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract): 75,996 km at 71,492 km per Jupiter radius. GM from the mass 0.798 Jupiter masses (Kanodia et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..235K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.576184,
+  "orbitalPeriodSource": "Kanodia et al. 2024 (2024AJ....168..235K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2024): P 2.576184 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-6034 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.798 Jupiter masses: Kanodia et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..235K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract)."
+}

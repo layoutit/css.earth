@@ -1,0 +1,46 @@
+{
+  "id": "gj-436",
+  "name": "GJ 436",
+  "system": "GJ 436 system",
+  "description": "Star of 3,505 K, 9.75 parsecs away, with 1 transiting planet.",
+  "target": "GJ 436",
+  "gaia": "4017860992519744384",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract",
+    "credit": "Maciejewski et al. 2014"
+  },
+  "radius": {
+    "value": 0.455,
+    "source": "Maciejewski et al. 2014, the stellar radius of the default parameter set of GJ 436 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract",
+    "uncertainty": 0.018
+  },
+  "mass": {
+    "value": 0.47,
+    "source": "Maciejewski et al. 2014, the stellar mass of the default parameter set of GJ 436 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract",
+    "uncertainty": 0.07
+  },
+  "temperature": {
+    "value": 3505,
+    "source": "Maxted et al. 2022, the stellar temperature of GJ 436 b's parameter set from Maxted et al. 2022 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M/abstract",
+    "uncertainty": 51
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 436 b crosses GJ 436 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Maciejewski et al. 2014, and its temperature Maxted et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MAXTED_ET_AL_2022, MACIEJEWSKI_ET_AL__2014): st_teff 3505, st_rad 0.455, st_mass 0.47",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Gliese_436",
+      "title": "Gliese 436",
+      "revision": "1370776305",
+      "card": "Gliese 436, also known as Noquisi, is a red dwarf located 31.9 light-years away in the zodiac constellation of Leo.",
+      "introduction": "It has an apparent visual magnitude of 10.67, which is much too faint to be seen with the naked eye."
+    }
+  },
+  "notes": [],
+  "order": 3097
+}

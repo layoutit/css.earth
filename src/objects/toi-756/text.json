@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-756",
+  "card": {
+    "text": "TOI-756 b crosses TOI-756 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555684",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract",
+        "label": "Parc et al. (2025), Astronomy & Astrophysics 702 A138",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PARC_ET_AL__2025): st_teff 3657, st_rad 0.505, st_mass 0.505"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Parc et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555684",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract",
+        "label": "Parc et al. (2025), Astronomy & Astrophysics 702 A138",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PARC_ET_AL__2025): st_teff 3657, st_rad 0.505, st_mass 0.505"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

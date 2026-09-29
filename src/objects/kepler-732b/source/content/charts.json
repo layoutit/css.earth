@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-732b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-732b-orbits",
+      "title": "Kepler-732 b: orbits around Kepler-732",
+      "output": "kepler-732b-system-orbits.svg",
+      "system": "kepler-732",
+      "highlight": "kepler-732b",
+      "description": "The orbits of Kepler-732's planets in this map from above, to scale, with Kepler-732 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 9.46781385 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kepler-732b-transit",
+      "title": "Kepler-732 b: its transit",
+      "description": "Kepler-732 b crossing its star, as TESS recorded it: 3 sectors (80, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 164555597, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "output": "kepler-732b-transit.svg",
+      "metadata": {
+        "tic": "TIC 164555597",
+        "sectors": [
+          80,
+          81,
+          82
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kepler-732b",
+      "sources": [
+        "photometry/tess/tess2024170053053-s0080-0000000164555597-0275-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000164555597-0276-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000164555597-0278-s_lc.fits"
+      ],
+      "durationHours": 2.4437,
+      "binMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sectors 80, 81, 82",
+        "Folded on the app's orbit; 10-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

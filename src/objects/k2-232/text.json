@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-232",
+  "card": {
+    "text": "K2-232's planets b, c are placed on the orbits their papers measured.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-09077",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+        "label": "Ranshaw et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RANSHAW_ET_AL_2026): st_teff 6100, st_rad 1.21, st_mass 1.121"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Ranshaw et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-09077",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+        "label": "Ranshaw et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RANSHAW_ET_AL_2026): st_teff 6100, st_rad 1.21, st_mass 1.121"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -261,6 +261,7 @@ src/objects/*/source/**/*.bpc
 
 # Combined catalogues and navigation are rebuilt from individual body records.
 /site/prepared-sources.json
+/site/prepared-source-credits.json
 /site/prepared-facilities.json
 /site/prepared-catalogue.mjs
 /site/prepared-overview-objects.json
@@ -268,6 +269,7 @@ src/objects/*/source/**/*.bpc
 /site/prepared-stellar-extents.json
 /site/prepared-local-group-galaxies.json
 /site/prepared-context-objects.mts
+/site/prepared-context-json.mts
 /site/prepared-feature-index.json
 /site/prepared-lens-billboards.json
 /site/prepared-lens-billboards.webp

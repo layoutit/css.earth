@@ -1,0 +1,49 @@
+{
+  "id": "gj-357",
+  "name": "GJ 357",
+  "system": "GJ 357 system",
+  "description": "Star of 3,505 K, 9.44 parsecs away, with 1 transiting planet.",
+  "target": "GJ 357",
+  "gaia": "5664814198431308288",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract",
+    "credit": "Oddo et al. 2023"
+  },
+  "radius": {
+    "value": 0.337,
+    "source": "Oddo et al. 2023, the stellar radius of the default parameter set of GJ 357 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.342,
+    "source": "Oddo et al. 2023, the stellar mass of the default parameter set of GJ 357 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract",
+    "uncertainty": 0.011
+  },
+  "temperature": {
+    "value": 3505,
+    "source": "Oddo et al. 2023, the stellar temperature of the default parameter set of GJ 357 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract",
+    "uncertainty": 51
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 357 b crosses GJ 357 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Oddo et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ODDO_ET_AL__2023): st_teff 3505, st_rad 0.337, st_mass 0.342",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Gliese_357",
+      "title": "Gliese 357",
+      "revision": "1370776275",
+      "card": "GJ 357 is a red dwarf star with an unusually low starspot activity.",
+      "introduction": "It is located 31 light-years from Earth, in the Hydra constellation."
+    }
+  },
+  "notes": [
+    "GJ 357 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "GJ 357 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3091
+}

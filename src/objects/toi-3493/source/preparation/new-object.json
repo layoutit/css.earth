@@ -1,0 +1,39 @@
+{
+  "id": "toi-3493",
+  "name": "TOI-3493",
+  "system": "TOI-3493 system",
+  "description": "Star of 5,844 K, 96.7 parsecs away, with 1 transiting planet.",
+  "target": "TOI-3493",
+  "gaia": "6192360843805622528",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...697A.169C/abstract",
+    "credit": "Chaturvedi et al. 2025"
+  },
+  "radius": {
+    "value": 1.228,
+    "source": "Chaturvedi et al. 2025, the stellar radius of the default parameter set of TOI-3493 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...697A.169C/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 1.023,
+    "source": "Chaturvedi et al. 2025, the stellar mass of the default parameter set of TOI-3493 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...697A.169C/abstract",
+    "uncertainty": 0.041
+  },
+  "temperature": {
+    "value": 5844,
+    "source": "Chaturvedi et al. 2025, the stellar temperature of the default parameter set of TOI-3493 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...697A.169C/abstract",
+    "uncertainty": 42
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-3493 b crosses TOI-3493 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Chaturvedi et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHATURVEDI_ET_AL_2025): st_teff 5844, st_rad 1.228, st_mass 1.023"
+  },
+  "notes": [],
+  "order": 4358
+}

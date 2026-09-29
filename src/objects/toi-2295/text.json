@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2295",
+  "card": {
+    "text": "TOI-2295 b crosses TOI-2295 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202451519",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+        "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HEIDARI_ET_AL_2025): st_teff 5730, st_rad 1.459, st_mass 1.168"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Heidari et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202451519",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+        "label": "Heidari et al. (2025), Astronomy & Astrophysics 694 A36",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HEIDARI_ET_AL_2025): st_teff 5730, st_rad 1.459, st_mass 1.168"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

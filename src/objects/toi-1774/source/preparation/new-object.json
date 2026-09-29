@@ -1,0 +1,41 @@
+{
+  "id": "toi-1774",
+  "name": "TOI-1774",
+  "system": "TOI-1774 system",
+  "description": "Star of 5,746 K, 54 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1774",
+  "gaia": "796063843195758208",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1934L/abstract",
+    "credit": "Lienhard et al. 2026"
+  },
+  "radius": {
+    "value": 1.1303,
+    "source": "Lienhard et al. 2026, the stellar radius of the default parameter set of TOI-1774.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1934L/abstract",
+    "uncertainty": 0.0069
+  },
+  "mass": {
+    "value": 0.991,
+    "source": "Lienhard et al. 2026, the stellar mass of the default parameter set of TOI-1774.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1934L/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 5746,
+    "source": "Lienhard et al. 2026, the stellar temperature of the default parameter set of TOI-1774.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1934L/abstract",
+    "uncertainty": 59
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1774 b crosses TOI-1774 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lienhard et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIENHARD_ET_AL_2026): st_teff 5746, st_rad 1.1303, st_mass 0.991"
+  },
+  "notes": [
+    "HD 85426 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4935
+}

@@ -2,15 +2,13 @@
   "extends": "../../tsconfig.json",
   "include": [
     "sbmt/**/*.mts",
-    "setup.mts",
-    "run.mts",
-    "fixture.mts",
     "test-fits.mts",
     "test-sbmt.mts",
-    "isis-geotiff-grid.mts",
-    "geotiff-image.mts",
-    "lunar-mi-quality.mts",
-    "reflectance-mosaics.mts"
+    "../../tests/objects/unit/venus/oracle.test.mts",
+    "../../packages/bake/src/objects/raster/fixtures/isis-geotiff-grid.mts",
+    "../../packages/bake/src/objects/raster/fixtures/geotiff-image.mts",
+    "../../packages/bake/src/objects/raster/fixtures/lunar-mi-quality.mts",
+    "../../packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts"
   ],
   "exclude": []
 }

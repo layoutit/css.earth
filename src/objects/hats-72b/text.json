@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hats-72b",
+  "card": {
+    "text": "HATS-72 b was found in 2020 by HATSouth as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab7821",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+        "label": "Hartman et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2020): disc_year 2020, disc_facility HATSouth, sy_pnum 1; pl_orbper 7.3279496, pl_radj 0.7224, pl_bmassj 0.1254"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HATS-72. Its orbit and size follow Hartman et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab7821",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+        "label": "Hartman et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2020): disc_year 2020, disc_facility HATSouth, sy_pnum 1; pl_orbper 7.3279496, pl_radj 0.7224, pl_bmassj 0.1254"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

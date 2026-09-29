@@ -1,0 +1,28 @@
+{
+ "id": "hd-21520b",
+ "classification": "exoplanet",
+ "order": 3188,
+ "physical": {
+  "name": "HD 21520 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 17201.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "hd-21520"
+ },
+ "physicalNotes": "Radius 0.24061064 Jupiter radii from Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract): 17,201.7 km at 71,492 km per Jupiter radius. No mass is measured: Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract) gives only an upper limit of 0.05569043 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 25.1292,
+  "semiMajorAxisStellarRadii": 35.6,
+  "inclinationDegrees": 89.23,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59159.5157,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive ps table (pl_refname NIES_ET_AL_2024): P 25.1292 d",
+   "shape": "Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive ps table (pl_refname NIES_ET_AL_2024): a/R* 35.6; Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive ps table (pl_refname NIES_ET_AL_2024): inclination 89.23 degrees",
+   "eccentricity": "Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive ps table (pl_refname NIES_ET_AL_2024): e 0",
+   "phase": "Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive ps table (pl_refname NIES_ET_AL_2024): transit mid-time 2459160.0157 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

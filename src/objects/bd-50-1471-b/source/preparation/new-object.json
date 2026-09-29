@@ -1,0 +1,40 @@
+{
+  "id": "bd-50-1471-b",
+  "name": "BD+50 1471B",
+  "system": "XO-2 N system",
+  "description": "Star bound to XO-2 N, 4,677 AU away.",
+  "gaia": "934346740559239296",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.963,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 356473029 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.048
+  },
+  "mass": {
+    "value": 0.977,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 356473029 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.118
+  },
+  "temperature": {
+    "value": 5547,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 356473029 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 116.4
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "BD+50 1471B is a star of 5,547 K, bound to XO-2 N 4,677 AU away.",
+    "introduction": "BD+50 1471B shares its motion through space with XO-2 N, 4,677 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 934346809278715776 and 934346740559239296, sep_AU 4677.323008791652683, R_chance_align 1.053631804065363190e-11"
+  },
+  "notes": [
+    "BD+50 1471B's orbit around XO-2 N is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4865
+}

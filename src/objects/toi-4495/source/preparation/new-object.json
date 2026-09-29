@@ -1,0 +1,45 @@
+{
+  "id": "toi-4495",
+  "name": "TOI-4495",
+  "system": "TOI-4495 system",
+  "description": "Star of 6,210 K, 132 parsecs away, with 2 transiting planets.",
+  "target": "TOI-4495",
+  "gaia": "2099011888349441536",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract",
+    "credit": "Wang et al. 2026"
+  },
+  "radius": {
+    "value": 1.309,
+    "source": "Wang et al. 2026, the stellar radius of the default parameter set of TOI-4495 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract",
+    "uncertainty": 0.059
+  },
+  "mass": {
+    "value": 1.247,
+    "source": "Wang et al. 2026, the stellar mass of the default parameter set of TOI-4495 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract",
+    "uncertainty": 0.045
+  },
+  "temperature": {
+    "value": 6210,
+    "source": "Wang et al. 2026, the stellar temperature of the default parameter set of TOI-4495 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-4495 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Wang et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname WANG_ET_AL_2026): st_teff 6210, st_rad 1.309, st_mass 1.247"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -25.17,
+    "uncertainty": 0.33,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2099011888349441536 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract"
+  },
+  "order": 3021
+}

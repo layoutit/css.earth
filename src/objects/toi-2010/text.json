@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2010",
+  "card": {
+    "text": "TOI-2010 b crosses TOI-2010 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad00bc",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+        "label": "Mann et al. (2023), The Astronomical Journal 166 239",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL_2023): st_teff 5929, st_rad 1.079, st_mass 1.112"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mann et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad00bc",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+        "label": "Mann et al. (2023), The Astronomical Journal 166 239",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL_2023): st_teff 5929, st_rad 1.079, st_mass 1.112"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

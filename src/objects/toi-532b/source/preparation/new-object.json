@@ -1,0 +1,24 @@
+{
+  "host": "toi-532",
+  "planets": [
+    {
+      "id": "toi-532b",
+      "name": "TOI-532 b",
+      "description": "Transiting planet of TOI-532 with a 2.33-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..135K/abstract",
+        "credit": "Kanodia et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KANODIA_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-532 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-532. Its orbit and size follow Kanodia et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.32663999021, pl_radj 0.51922652, pl_bmassj 0.19350064"
+      },
+      "order": 4510
+    }
+  ]
+}

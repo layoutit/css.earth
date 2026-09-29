@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-198b",
+  "card": {
+    "text": "K2-198 b was found in 2018 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ab2a74",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+        "label": "Hedges et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEDGES_ET_AL__2019): disc_year 2018, disc_facility K2, sy_pnum 3; pl_orbper 17.0428683, pl_radj 0.37371755, pl_bmassj 0.0514"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around K2-198. Its orbit and size follow Hedges et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ab2a74",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+        "label": "Hedges et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEDGES_ET_AL__2019): disc_year 2018, disc_facility K2, sy_pnum 3; pl_orbper 17.0428683, pl_radj 0.37371755, pl_bmassj 0.0514"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

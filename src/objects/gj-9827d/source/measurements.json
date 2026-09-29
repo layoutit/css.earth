@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "gj-9827d",
+  "radiusKm": 12628.6,
+  "radiusSource": "Radius 0.17664407 Jupiter radii from Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract): 12,628.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00950198 Jupiter masses (Piaulet-Ghorayeb et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...974L..10P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.20183,
+  "orbitalPeriodSource": "Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_GHORAYEB_ET_AL__2024): P 6.20183 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of GJ 9827 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00950198 Jupiter masses: Piaulet-Ghorayeb et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...974L..10P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract)."
+}

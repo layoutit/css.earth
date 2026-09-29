@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202452236",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nardiello et al. (2025): The GAPS Programme at TNG",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2411.12795"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202452236"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...693A..32N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202452236",
+      "label": "Astronomy & Astrophysics 693 A32"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nardiello et al. (2025), Astronomy & Astrophysics 693 A32",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 693 A32",
+  "creators": [
+    "D. Nardiello",
+    "J. M. Akana Murphy",
+    "R. Spinelli",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

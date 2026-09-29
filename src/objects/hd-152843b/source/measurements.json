@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-152843b",
+  "radiusKm": 19453.2,
+  "radiusSource": "Radius 0.27210324 Jupiter radii from Nicholson et al. 2024 (2024MNRAS.532.4632N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract): 19,453.2 km at 71,492 km per Jupiter radius. GM from the mass 0.03089718 Jupiter masses (Nicholson et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.532.4632N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 11.62075439967,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.62075439967 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 152843 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.03089718 Jupiter masses: Nicholson et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.532.4632N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract)."
+}

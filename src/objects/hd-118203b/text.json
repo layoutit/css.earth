@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-118203b",
+  "card": {
+    "text": "HD 118203 b was found in 2005 by Haute-Provence Observatory as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad86c4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract",
+        "label": "张 et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHANG_ET_AL__2024): disc_year 2005, disc_facility Haute-Provence Observatory, sy_pnum 2; pl_orbper 6.1349847, pl_radj 1.14, pl_bmassj 2.14"
+      },
+      {
+        "catalogueId": "wikipedia-hd-118203-b",
+        "url": "https://en.wikipedia.org/wiki/HD_118203_b",
+        "label": "Wikipedia, \"HD 118203 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374388039",
+        "quote": "HD 118203 b, formally named Staburags, is a jovian planet that takes only 6.13 days or 147 hours to orbit the parent star HD 118203 at a distance of 0.07 astronomical units."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HD 118203. Its orbit and size follow Zhang et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad86c4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract",
+        "label": "张 et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHANG_ET_AL__2024): disc_year 2005, disc_facility Haute-Provence Observatory, sy_pnum 2; pl_orbper 6.1349847, pl_radj 1.14, pl_bmassj 2.14"
+      },
+      {
+        "catalogueId": "wikipedia-hd-118203-b",
+        "url": "https://en.wikipedia.org/wiki/HD_118203_b",
+        "label": "Wikipedia, \"HD 118203 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374388039",
+        "quote": "The exact mass was not known since inclination was not known until TESS detected the planet."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

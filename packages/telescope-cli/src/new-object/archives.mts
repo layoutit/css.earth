@@ -16,7 +16,7 @@ export interface Archive {
 /** A dropped connection, before or during the transfer, is retried twice, a second apart; an HTTP error answer is not, so a
  * failed service is reported at once. Every failure names its URL. A request that gives nothing for TRANSFER_TIMEOUT_MS is a
  * dropped connection: the archives answer in seconds, and a hung one would otherwise hold a batch forever. A service that asks us
- * to slow down (429, or 503 with Retry-After) is waited for as it asks and tried again, up to three times; and a host with a
+ * to slow down (429, or 503 with Retry-After) is waited for as it asks and tried again, up to five times for a 429 and three for a 5xx; and a host with a
  * published request pace is never asked faster than that (PACE_MS). */
 export const TRANSFER_TIMEOUT_MS = 120_000;
 export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
@@ -39,10 +39,14 @@ async function transfer<T>(url: string, read: (response: Response) => Promise<T>
       const retryAfter = Number(response.headers.get('retry-after'));
       // A rate limit or a server error is the archive's moment, not an answer: wait (as long as it asks) and ask again. A draft of
       // 24 hosts met a bare 503 from the NASA TAP service, which used to leave the whole host out.
-      if ((response.status === 429 || response.status >= 500) && slowed < 3) {
+      // arXiv still answered 429 after 10 + 20 + 30 s during an 818-host batch (2026-09-29), so a rate limit is given five tries,
+      // doubling from 15 s: about six minutes in all. The same batch met Gaia's TAP answering 500 through 1 + 2 + 3 s; a 5xx now waits 5,
+      // 10 and 15 s.
+      const limited = response.status === 429;
+      if ((limited || response.status >= 500) && slowed < (limited ? 5 : 3)) {
         slowed++; attempt--;
         await response.body?.cancel();
-        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : (response.status === 429 ? 10 : 1) * slowed) * 1000));
+        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : limited ? 15 * 2 ** (slowed - 1) : 5 * slowed) * 1000));
         continue;
       }
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
@@ -137,7 +141,9 @@ export const telescopeResolver = (root: string): Resolver => async name => {
 /** SIMBAD's identifiers for a spec's target or Gaia source; a target and a Gaia id that name different stars are refused. */
 export async function identify(resolver: Resolver, target: string | undefined, gaia: string | undefined, id: string): Promise<Identifiers & { readonly gaia: string }> {
   // A catalogue name SIMBAD does not hold (some KIC numbers) is not fatal when the spec also gives the star's Gaia DR3 source.
-  const byTarget = target ? await resolver(target) : undefined, name = byTarget || !gaia ? target ?? `Gaia DR3 ${gaia}` : `Gaia DR3 ${gaia}`;
+  // The archive writes a binary's component apart ("K2-288 B"); SIMBAD may hold it joined ("K2-288B").
+  const joined = target && /^(.+\S) ([A-C])$/u.exec(target);
+  const byTarget = target ? await resolver(target) ?? (joined ? await resolver(`${joined[1]}${joined[2]}`) : undefined) : undefined, name = byTarget || !gaia ? target ?? `Gaia DR3 ${gaia}` : `Gaia DR3 ${gaia}`;
   const found = byTarget ?? await resolver(name);
   // A Gaia source SIMBAD has never catalogued (most distant giants) is still that source: the Gaia row the generator reads
   // next is its identity and its evidence. A target without a Gaia source is refused.
@@ -178,6 +184,23 @@ export function parseCrossref(json: string, doi: string, url: string): Publicati
   return { id: `doi-${doi.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/-$/u, '')}`, title: clean(title), creators, year, url, doi,
     ...(container ? { publisher: clean([container, volume, page].filter(Boolean).join(' ')) } : {}) };
 }
+/** A DOI resolved through DataCite, the registry of the DOIs Crossref does not hold (CDS VizieR catalogues, Zenodo deposits). */
+export function parseDatacite(json: string, doi: string, url: string): Publication {
+  const attributes = (JSON.parse(json) as { data?: { attributes?: Record<string, any> } }).data?.attributes;
+  if (!attributes) throw new TypeError(`DOI ${doi}: DataCite returned no record.`);
+  const title = requireString(attributes.titles?.[0]?.title, `DOI ${doi} title`), year = String(attributes.publicationYear ?? '');
+  const creators = (attributes.creators ?? []).map((c: { name?: string; givenName?: string; familyName?: string }) => clean(c.familyName ? `${c.givenName ?? ''} ${c.familyName}` : c.name ?? ''));
+  const publisher = typeof attributes.publisher === 'string' ? attributes.publisher : attributes.publisher?.name;
+  return { id: `doi-${doi.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/-$/u, '')}`, title: clean(title), creators, year, url, doi, ...(publisher ? { publisher: clean(String(publisher)) } : {}) };
+}
+/** A DOI's publication: Crossref's record, or DataCite's when Crossref does not hold the DOI. */
+async function doiPublication(archive: Archive, doi: string, url: string): Promise<Publication> {
+  try { return parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, url); }
+  catch (error) {
+    if (!/\b404\b/u.test((error as Error).message)) throw error;
+    return parseDatacite(await archive.text(`https://api.datacite.org/dois/${encodeURIComponent(doi)}`), doi, url);
+  }
+}
 /** The publication behind a cited URL: an arXiv abstract or a DOI link. Any other URL is cited as a web page by its author. */
 export async function fetchPublication(archive: Archive, url: string): Promise<Publication | undefined> {
   const arxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(url)?.[1];
@@ -192,7 +215,13 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
     const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = /doi\.org\/(10\.\S+)$/u.exec(published ?? '')?.[1];
     // The published paper first (Crossref, the better citation, with no request limit), its preprint id kept alongside; the arXiv API
     // (one request every 3 s) only for a paper with no DOI.
-    if (linkedDoi) { const doi = decodeURIComponent(linkedDoi); return { ...parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, landing), ...(linkedArxiv ? { arxiv: linkedArxiv } : {}), bibcode: code, year }; }
+    if (linkedDoi) {
+      const doi = decodeURIComponent(linkedDoi), paper = await doiPublication(archive, doi, landing);
+      // Crossref may list no authors: the archive cites TOI-2447 b to 2024MNRAS.533..109G, a correction whose DOI record has none.
+      // The preprint the bibcode links names them.
+      const creators = paper.creators.length || !linkedArxiv ? paper.creators : parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${linkedArxiv}`), linkedArxiv, landing).creators;
+      return { ...paper, creators, ...(linkedArxiv ? { arxiv: linkedArxiv } : {}), bibcode: code, year };
+    }
     // The year is the bibcode's, the published one the archive cites, not the preprint's.
     if (linkedArxiv) return { ...parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${linkedArxiv}`), linkedArxiv, landing), bibcode: code, year };
     return { id: `publication-${code.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, title: `Reference ${code}`, creators: [], year, url: `https://ui.adsabs.harvard.edu/abs/${code}`, bibcode: code };
@@ -204,7 +233,7 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
     return { id: `wikipedia-${title.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, title, creators: ['Wikipedia contributors'], year: '', url, page: true, wikipedia: {} };
   }
   const doi = /doi\.org\/(10\.\S+)$/u.exec(url)?.[1];
-  if (doi) return parseCrossref(await archive.text(`https://api.crossref.org/works/${encodeURIComponent(doi)}`), doi, url);
+  if (doi) return doiPublication(archive, doi, url);
   // Any other page (an archive's documentation, ExoFOP): a reference page named by its address.
   // The query names the record when there is one: SIMBAD's sim-id page is one path for every star.
   const { hostname, pathname, search } = new URL(url), id = `page-${`${hostname}${pathname.replace(/\.(html?|php)$/u, '')}${decodeURIComponent(search)}`.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;

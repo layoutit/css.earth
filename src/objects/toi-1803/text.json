@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1803",
+  "card": {
+    "text": "2 planets cross TOI-1803 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202451180",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+        "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZINGALES_ET_AL__2025): st_teff 4687, st_rad 0.715, st_mass 0.756"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Zingales et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202451180",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract",
+        "label": "Zingales et al. (2025), Astronomy & Astrophysics 695 A273",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZINGALES_ET_AL__2025): st_teff 4687, st_rad 0.715, st_mass 0.756"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

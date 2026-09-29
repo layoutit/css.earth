@@ -1,0 +1,39 @@
+{
+  "id": "k2-117",
+  "name": "K2-117",
+  "system": "K2-117 system",
+  "description": "Star of 3,778 K, 102 parsecs away, with 2 transiting planets.",
+  "target": "K2-117",
+  "gaia": "597829077890316928",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+    "credit": "Livingston et al. 2018"
+  },
+  "radius": {
+    "value": 0.51,
+    "source": "Livingston et al. 2018, the stellar radius of the default parameter set of K2-117 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.54,
+    "source": "Livingston et al. 2018, the stellar mass of the default parameter set of K2-117 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 3778,
+    "source": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-117 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+    "uncertainty": 53
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross K2-117 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Livingston et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 3778, st_rad 0.51, st_mass 0.54"
+  },
+  "notes": [],
+  "order": 3284
+}

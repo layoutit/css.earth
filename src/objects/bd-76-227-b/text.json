@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bd-76-227-b",
+  "card": {
+    "text": "BD+76 227B is a star of 3,470 K, bound to TOI-1710 3,609 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 1116613161053977472 and 1116612783096856960, sep_AU 3609.023045359027037, R_chance_align 3.790727077162044524e-05"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "BD+76 227B shares its motion through space with TOI-1710, 3,609 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 1116613161053977472 and 1116612783096856960, sep_AU 3609.023045359027037, R_chance_align 3.790727077162044524e-05"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

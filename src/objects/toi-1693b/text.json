@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1693b",
+  "card": {
+    "text": "TOI-1693 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac4334",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+        "label": "Giacalone et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GIACALONE_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.76669200948, pl_radj 0.12579199, pl_bmassj 0.00809"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1693. Its orbit and size follow Giacalone et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac4334",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+        "label": "Giacalone et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GIACALONE_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.76669200948, pl_radj 0.12579199, pl_bmassj 0.00809"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

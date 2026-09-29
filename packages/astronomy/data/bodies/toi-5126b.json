@@ -1,0 +1,28 @@
+{
+ "id": "toi-5126b",
+ "classification": "exoplanet",
+ "order": 4487,
+ "physical": {
+  "name": "TOI-5126 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 30232.2,
+  "gravitationalParameterKm3PerS2": 8031926.12,
+  "parent": "toi-5126"
+ },
+ "physicalNotes": "Radius 0.4228752 Jupiter radii from Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract): 30,232.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0634 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.4588385,
+  "semiMajorAxisStellarRadii": 11.32,
+  "inclinationDegrees": 88.79,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59626.53862,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): P 5.4588385 d",
+   "shape": "Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): a/R* 11.32; Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): inclination 88.79 degrees",
+   "eccentricity": "Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): e 0",
+   "phase": "Fairnington et al. 2024 (2024MNRAS.527.8768F), via the NASA Exoplanet Archive ps table (pl_refname FAIRNINGTON_ET_AL_2024): transit mid-time 2459627.03862 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

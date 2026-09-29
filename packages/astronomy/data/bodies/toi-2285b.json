@@ -1,0 +1,31 @@
+{
+ "id": "toi-2285b",
+ "classification": "exoplanet",
+ "order": 4281,
+ "physical": {
+  "name": "TOI-2285 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 11289.2,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-2285"
+ },
+ "physicalNotes": "Radius 0.1579091 Jupiter radii from Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025RNAAS...9...73F/abstract): 11,289.2 km at 71,492 km per Jupiter radius. No mass is measured: Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract) gives only an upper limit of 0.06135386 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 13.635109,
+  "semiMajorAxisStellarRadii": 43.1,
+  "inclinationDegrees": 89.66,
+  "eccentricity": 0.3,
+  "argumentOfPeriapsisDegrees": 56,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58746.6831,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): P 13.635109 d",
+   "shape": "Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): a/R* 43.1; Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2022): inclination 89.66 degrees",
+   "eccentricity": "Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2022): e 0.3",
+   "argumentOfPeriapsis": "Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2022): omega 56 degrees",
+   "phase": "Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): transit mid-time 2458747.1831 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

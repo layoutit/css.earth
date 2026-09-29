@@ -1,0 +1,28 @@
+{
+ "id": "toi-286c",
+ "classification": "exoplanet",
+ "order": 4347,
+ "physical": {
+  "name": "TOI-286 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 11990.8,
+  "gravitationalParameterKm3PerS2": 1482793.64,
+  "parent": "toi-286"
+ },
+ "physicalNotes": "Radius 0.16772265 Jupiter radii from Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract): 11,990.8 km at 71,492 km per Jupiter radius. GM from the mass 0.01170443 Jupiter masses (Hobson et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.216H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 39.361826,
+  "semiMajorAxisStellarRadii": 58.7203,
+  "inclinationDegrees": 89.69,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60154.5251,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): P 39.361826 d",
+   "shape": "Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): a/R* derived from its semi-major axis 0.213 au and stellar radius 0.78 solar radii; Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): inclination 89.69 degrees",
+   "eccentricity": "Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): e 0",
+   "phase": "Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): transit mid-time 2460155.0251 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2096b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.11089322 Jupiter radii from Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.00653 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): P 3.1190633 d; Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): a/R* derived from its semi-major axis 0.025 au and stellar radius 0.235 solar radii; Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): inclination 89.24 degrees; Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): e 0.15; Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): omega 245 degrees; Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): transit mid-time 2459146.45853 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract"
+      ]
+    }
+  ]
+}

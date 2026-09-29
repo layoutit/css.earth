@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, assertProductsCombinable, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';

@@ -1,0 +1,39 @@
+{
+  "id": "toi-908",
+  "name": "TOI-908",
+  "system": "TOI-908 system",
+  "description": "Star of 5,626 K, 176 parsecs away, with 1 transiting planet.",
+  "target": "TOI-908",
+  "gaia": "4619238087059206784",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+    "credit": "Hawthorn et al. 2023"
+  },
+  "radius": {
+    "value": 1.028,
+    "source": "Hawthorn et al. 2023, the stellar radius of the default parameter set of TOI-908 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.95,
+    "source": "Hawthorn et al. 2023, the stellar mass of the default parameter set of TOI-908 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 5626,
+    "source": "Hawthorn et al. 2023, the stellar temperature of the default parameter set of TOI-908 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+    "uncertainty": 61
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-908 b crosses TOI-908 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hawthorn et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HAWTHORN_ET_AL_2023): st_teff 5626, st_rad 1.028, st_mass 0.95"
+  },
+  "notes": [],
+  "order": 4747
+}

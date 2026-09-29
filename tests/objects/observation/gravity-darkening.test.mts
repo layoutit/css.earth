@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { readFile, readdir } from 'node:fs/promises';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from '@cssearth/bake/objects/color';

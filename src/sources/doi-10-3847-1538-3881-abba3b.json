@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-abba3b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Brahm et al. (2020): TOI-481 b and TOI-892 b: Two Long-period Hot Jupiters from the Transiting Exoplanet Survey Satellite",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2009.08881"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/abba3b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....160..235B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/abba3b",
+      "label": "The Astronomical Journal 160 235"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Brahm et al. (2020), The Astronomical Journal 160 235",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B"
+    }
+  ],
+  "publisher": "The Astronomical Journal 160 235",
+  "creators": [
+    "Rafael Brahm",
+    "Louise D. Nielsen",
+    "Robert A. Wittenmyer",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

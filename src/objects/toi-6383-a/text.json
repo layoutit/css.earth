@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6383-a",
+  "card": {
+    "text": "TOI-6383 A b crosses TOI-6383 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad7fe8",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract",
+        "label": "Bernabò et al. (2024), The Astronomical Journal 168 273",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BERNAB_AMP_OGRAVE__ET_AL__2024): st_teff 3444, st_rad 0.457, st_mass 0.458"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bernab&ograve; et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad7fe8",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract",
+        "label": "Bernabò et al. (2024), The Astronomical Journal 168 273",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BERNAB_AMP_OGRAVE__ET_AL__2024): st_teff 3444, st_rad 0.457, st_mass 0.458"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

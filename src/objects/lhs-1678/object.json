@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lhs-1678",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LHS 1678",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 228885.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lhs-1678-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LHS 1678",
+      "classification": "star",
+      "color": "#ffc282",
+      "distanceAu": 4097465.5,
+      "description": "3 planets cross LHS 1678 as seen from Earth: b, c, d.",
+      "systemName": "LHS 1678 system",
+      "order": 3808,
+      "context": {
+        "order": 3805
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        175059184688521950,
+        437235459354786900,
+        -392319065439642940
+      ],
+      "presentationToReference": [
+        0.28560268855614573,
+        -0.23788884371378285,
+        0.9283533822451561,
+        0.713333737403304,
+        -0.5941338077159577,
+        -0.37169879958263485,
+        -0.6399891275418167,
+        -0.7683839642818275,
+        -0.000007925127125567266
+      ],
+      "orbitUpReference": [
+        0.23788884371378285,
+        0.5941338077159577,
+        0.7683839642818275
+      ],
+      "metersPerUnit": 738339.6774193548,
+      "bodyRadiusM": 228885300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

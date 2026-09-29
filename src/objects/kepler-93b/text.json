@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-93b",
+  "card": {
+    "text": "Kepler-93 b was found in 2014 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2014, disc_facility Kepler, sy_pnum 2; pl_orbper 4.72674002, pl_radj 0.13185856, pl_bmassj 0.014662"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-93b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-93b",
+        "label": "Wikipedia, \"Kepler-93b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249753",
+        "quote": "Kepler-93b (KOI-69b) is a hot, dense transiting Super-Earth exoplanet located approximately 313 light-years away in the constellation of Lyra, orbiting the G-type star Kepler-93."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around Kepler-93. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2014, disc_facility Kepler, sy_pnum 2; pl_orbper 4.72674002, pl_radj 0.13185856, pl_bmassj 0.014662"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-93b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-93b",
+        "label": "Wikipedia, \"Kepler-93b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249753",
+        "quote": "Its discovery was announced in February 2014 by American astronomer Geoffrey Marcy and his team."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

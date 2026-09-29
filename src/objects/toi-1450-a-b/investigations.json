@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1450-a-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.10081202 Jupiter radii from Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.00395811 Jupiter masses: Brady et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168...67B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): P 2.0439274 d; Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): a/R* 11.23; Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): inclination 86.245 degrees; No archive row states an eccentricity; the orbit is taken as circular; Brady et al. 2024 (2024AJ....168...67B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL_2024): transit mid-time 2458685.34221 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract"
+      ]
+    }
+  ]
+}

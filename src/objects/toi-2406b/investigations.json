@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2406b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.25515255 Jupiter radii from Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.04908309 Jupiter masses: Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): P 3.0766891 d; Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): a/R* 23.95; Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): inclination 89.8 degrees; Wells et al. 2021 (2021A&A...653A..97W), via the NASA Exoplanet Archive ps table (pl_refname WELLS_ET_AL__2021): e 0.26; Wells et al. 2021 (2021A&A...653A..97W), via the NASA Exoplanet Archive ps table (pl_refname WELLS_ET_AL__2021): omega 279 degrees; Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): transit mid-time 2459115.976 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..97W/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/tess/tess2020294194027-s0031-0000000318753380-0198-s_lc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020294194027-s0031-0000000318753380-0198-s_lc.fits"
+    }
+  ]
+}

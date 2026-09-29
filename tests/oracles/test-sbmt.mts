@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { ORACLE_ROOT } from './fixture.mts';
+import { ORACLE_ROOT } from '@cssearth/core/oracle';
 import { restoreInputs } from './sbmt/restore.mts';
 
 const flags=process.argv.slice(2);

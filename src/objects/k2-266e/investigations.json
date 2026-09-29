@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-266e",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.24355429 Jupiter radii from Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.04499261 Jupiter masses: Rodriguez et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018AJ....156..245R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 19.48348329613 d; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): a/R* 38.2; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): inclination 89.45 degrees; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): e 0.043; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): omega 89 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459263.380209 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 25 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract"
+      ]
+    }
+  ]
+}

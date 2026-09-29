@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2989b",
+  "displayName": "TOI-2989 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202553879",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F",
+          "label": "Frensch et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.12 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202553879",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F",
+          "label": "Frensch et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.0 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202553879",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F",
+          "label": "Frensch et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-2989; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-2989b-lens-shape.webp",
+        "surface": "toi-2989b-surface-shape@2x.webp",
+        "poles": "toi-2989b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-2989b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-2989 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-2989's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-2989b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-2989b/toi-2989b-system-orbits.svg",
+      "alt": "The orbits of TOI-2989's planets in this map from above, to scale, with TOI-2989 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-2989b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F"
+      }
+    },
+    {
+      "id": "toi-2989b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-2989b/toi-2989b-transit.svg",
+      "alt": "TOI-2989 b crossing its star, as TESS recorded it: 3 sectors (90, 100, 101) of the SPOC pipeline's 2-minute light curves of TIC 97825640, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-2989b-tess-sector-90",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025071122000-s0090-0000000097825640-0287-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Frensch et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+      "credit": "Frensch et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2989b.json",
+      "credit": "Radius from Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive; mass from Frensch et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...700A.118F), via the NASA Exoplanet Archive; orbit from Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive"
+    }
+  }
+}

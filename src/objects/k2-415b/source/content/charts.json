@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-415b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-415b-orbits",
+      "title": "K2-415 b: orbits around K2-415",
+      "output": "k2-415b-system-orbits.svg",
+      "system": "k2-415",
+      "highlight": "k2-415b",
+      "description": "The orbits of K2-415's planets in this map from above, to scale, with K2-415 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL_2023): P 4.0179694 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-415b-transit",
+      "title": "K2-415 b: its transit",
+      "description": "K2-415 b crossing its star, as TESS recorded it: 3 sectors (45, 46, 72) of the SPOC pipeline's 2-minute light curves of TIC 323687123, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-415b-transit.svg",
+      "metadata": {
+        "tic": "TIC 323687123",
+        "sectors": [
+          45,
+          46,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-415b",
+      "sources": [
+        "photometry/tess/tess2021310001228-s0045-0000000323687123-0216-s_lc.fits",
+        "photometry/tess/tess2021336043614-s0046-0000000323687123-0217-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000323687123-0267-s_lc.fits"
+      ],
+      "durationHours": 1.1195616,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 45, 46, 72",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

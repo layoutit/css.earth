@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kelt-24b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.134 Jupiter radii from Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "4.59 Jupiter masses: Giovinazzi et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..118G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive ps table (pl_refname GIOVINAZZI_ET_AL__2024): P 5.55149296 d; Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive ps table (pl_refname GIOVINAZZI_ET_AL__2024): a/R* 10.67; Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive ps table (pl_refname GIOVINAZZI_ET_AL__2024): inclination 89.67 degrees; Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive ps table (pl_refname GIOVINAZZI_ET_AL__2024): e 0.0319; Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive ps table (pl_refname GIOVINAZZI_ET_AL__2024): omega 3 degrees; Giovinazzi et al. 2024 (2024AJ....168..118G), via the NASA Exoplanet Archive ps table (pl_refname GIOVINAZZI_ET_AL__2024): transit mid-time 2459173.347426 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract"
+      ]
+    }
+  ]
+}

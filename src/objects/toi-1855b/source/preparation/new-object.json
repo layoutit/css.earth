@@ -1,0 +1,24 @@
+{
+  "host": "toi-1855",
+  "planets": [
+    {
+      "id": "toi-1855b",
+      "name": "TOI-1855 b",
+      "description": "Transiting planet of TOI-1855 with a 1.36-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract",
+        "credit": "Schulte et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SCHULTE_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1855 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1855. Its orbit and size follow Schulte et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SCHULTE_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.36414864, pl_radj 1.65, pl_bmassj 1.133"
+      },
+      "order": 4191
+    }
+  ]
+}

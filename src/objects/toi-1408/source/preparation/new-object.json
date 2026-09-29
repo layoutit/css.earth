@@ -1,0 +1,39 @@
+{
+  "id": "toi-1408",
+  "name": "TOI-1408",
+  "system": "TOI-1408 system",
+  "description": "Star of 6,117 K, 139 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1408",
+  "gaia": "2275130045974715904",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract",
+    "credit": "Korth et al. 2024"
+  },
+  "radius": {
+    "value": 1.53,
+    "source": "Korth et al. 2024, the stellar radius of the default parameter set of TOI-1408 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 1.312,
+    "source": "Korth et al. 2024, the stellar mass of the default parameter set of TOI-1408 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract",
+    "uncertainty": 0.009
+  },
+  "temperature": {
+    "value": 6117,
+    "source": "Korth et al. 2024, the stellar temperature of the default parameter set of TOI-1408 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract",
+    "uncertainty": 31
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1408 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Korth et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KORTH_ET_AL_2024): st_teff 6117, st_rad 1.53, st_mass 1.312"
+  },
+  "notes": [],
+  "order": 4018
+}

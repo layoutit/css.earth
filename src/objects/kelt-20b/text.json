@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-20b",
+  "card": {
+    "text": "KELT-20 b was found in 2017 by KELT-North as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa8f95",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+        "label": "Lund et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUND_ET_AL__2017): disc_year 2017, disc_facility KELT-North, sy_pnum 1; pl_orbper 3.4741012, pl_radj 1.741, pl_bmassj 3.382"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around KELT-20. Its orbit and size follow Lund et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa8f95",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+        "label": "Lund et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUND_ET_AL__2017): disc_year 2017, disc_facility KELT-North, sy_pnum 1; pl_orbper 3.4741012, pl_radj 1.741, pl_bmassj 3.382"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

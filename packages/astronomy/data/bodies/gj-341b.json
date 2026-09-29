@@ -1,0 +1,28 @@
+{
+ "id": "gj-341b",
+ "classification": "exoplanet",
+ "order": 3085,
+ "physical": {
+  "name": "GJ 341 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 5612.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "gj-341"
+ },
+ "physicalNotes": "Radius 0.07850848 Jupiter radii from DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract): 5,612.7 km at 71,492 km per Jupiter radius. No mass is measured: DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract) gives only an upper limit of 0.01258541 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.5768334,
+  "semiMajorAxisStellarRadii": 24.5,
+  "inclinationDegrees": 89.24,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60005.91417,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.5768334 d",
+   "shape": "DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): a/R* 24.5; DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): inclination 89.24 degrees",
+   "eccentricity": "DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460006.41417 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

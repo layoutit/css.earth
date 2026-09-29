@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "cd-35-16019-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CD-35 16019B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 332544.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cd-35-16019-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CD-35 16019B",
+      "classification": "star",
+      "color": "#ffcd98",
+      "distanceAu": 18576043.5,
+      "description": "CD-35 16019B is a star of 3,740 K, bound to WASP-8 406 AU away.",
+      "systemName": "WASP-8 system",
+      "order": 4842,
+      "context": {
+        "order": 4839
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2275462164862173400,
+        -3910566726399737,
+        -1595225687029333200
+      ],
+      "presentationToReference": [
+        0.818824637062763,
+        -0.5740411590872566,
+        -0.0017208755890904199,
+        -0.0014072167084628491,
+        0.0009905375623172437,
+        -0.9999985192871402,
+        -0.5740420136890415,
+        -0.8188258462634752,
+        -0.000003276249548482876
+      ],
+      "orbitUpReference": [
+        0.5740411590872566,
+        -0.0009905375623172437,
+        0.8188258462634752
+      ],
+      "metersPerUnit": 1072724.5161290322,
+      "bodyRadiusM": 332544600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

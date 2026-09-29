@@ -1,7 +1,7 @@
 /** A published phase-curve fit as a heat-map lens beside a planet's default lens (phase-curve-lens.mts), offline. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { installPhaseCurveLens, parsePhaseCurveEntries } from './phase-curve-lens.mts';
 
 const test = sourceTest();

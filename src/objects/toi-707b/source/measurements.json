@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-707b",
+  "radiusKm": 15406.5,
+  "radiusSource": "Radius 0.2155 Jupiter radii from Rea et al. 2026 (2026A&A...711A..86R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract): 15,406.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0202 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 52.79920330011,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 52.79920330011 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-707 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.0202 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html)."
+}

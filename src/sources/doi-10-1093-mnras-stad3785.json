@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad3785",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bieryla et al. (2024): TOI-4641b: an aligned warm Jupiter orbiting a bright (<i>V</i>=7.5) rapidly rotating F-star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2312.03971"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad3785"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024MNRAS.52710955B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad3785",
+      "label": "Monthly Notices of the Royal Astronomical Society 527 10955-10964"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bieryla et al. (2024), Monthly Notices of the Royal Astronomical Society 527 10955-10964",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 527 10955-10964",
+  "creators": [
+    "Allyson Bieryla",
+    "George Zhou",
+    "Juliana García-Mejía",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

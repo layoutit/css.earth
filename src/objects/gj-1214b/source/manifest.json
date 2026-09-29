@@ -1,0 +1,236 @@
+{
+  "schema": "cssearth-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "gj-1214b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract",
+      "credit": "Mahajan et al. 2024",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "gj-1214b-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "gj-1214b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "gj-1214b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield",
+        "sky-sun"
+      ]
+    },
+    {
+      "id": "gj-1214b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "gj-1214b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "gj-1214b-archive-transmission",
+      "path": "science/archive-spectra/transmission.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2014Natur.505...69K/abstract",
+      "credit": "Kreidberg et al. 2014, via the NASA Exoplanet Archive transitspec table",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "The measured rows of Kreidberg et al. 2014 in the archive's transitspec table (science/archive-spectra/transmission.csv), written as published: no limits, no filled errors",
+      "redistribution": "Factual parameter transcription only",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Transcribed from science/archive-spectra/transmission.csv, the archive's rows as served; the generator rewrites both."
+      }
+    },
+    {
+      "id": "gj-1214b-archive-transmission-rows",
+      "path": "science/archive-spectra/transmission.csv",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%27GJ+1214+b%27+order+by+centralwavelng&format=csv",
+      "credit": "NASA Exoplanet Archive, transitspec table",
+      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "acquisition": "TAP query in source/preparation/acquisition.json: every transitspec row of GJ 1214 b.",
+      "redistribution": "Table rows as served, with the archive acknowledged.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gj-1214b-archive-transmission-rows",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-1214b-archive-emission",
+      "path": "science/archive-spectra/emission.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2023arXiv230506240K/abstract",
+      "credit": "Kempton et al. 2023, via the NASA Exoplanet Archive emissionspec table",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "The measured rows of Kempton et al. 2023 in the archive's emissionspec table (science/archive-spectra/emission.csv), written as published: no limits, no filled errors",
+      "redistribution": "Factual parameter transcription only",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Transcribed from science/archive-spectra/emission.csv, the archive's rows as served; the generator rewrites both."
+      }
+    },
+    {
+      "id": "gj-1214b-archive-emission-rows",
+      "path": "science/archive-spectra/emission.csv",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27GJ+1214+b%27+order+by+centralwavelng&format=csv",
+      "credit": "NASA Exoplanet Archive, emissionspec table",
+      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "acquisition": "TAP query in source/preparation/acquisition.json: every emissionspec row of GJ 1214 b.",
+      "redistribution": "Table rows as served, with the archive acknowledged.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gj-1214b-archive-emission-rows",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "lens-colour-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract",
+      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "inputs": [
+          "gj-1214b-observational-measurements",
+          "gj-1214b-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths."
+      }
+    }
+  ]
+}

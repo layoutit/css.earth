@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lhs-1478b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LHS 1478 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7487.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lhs-1478b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LHS 1478 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 3757007.7,
+      "description": "LHS 1478 b was found in 2021 by TESS as it crossed its star.",
+      "systemName": "LHS 1478 system",
+      "order": 3807,
+      "context": {
+        "order": 3807
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        93483825395550640,
+        91380357699505300,
+        546625792546217340
+      ],
+      "presentationToReference": [
+        0.1380489770104958,
+        0.7050424388060296,
+        -0.6955987632455952,
+        0.1912567212995942,
+        -0.7080808187863248,
+        -0.6797370231380788,
+        0.9717835903657176,
+        0.039200938118033726,
+        0.23259393789731742
+      ],
+      "orbitUpReference": [
+        -0.7050424388060296,
+        0.7080808187863248,
+        -0.039200938118033726
+      ],
+      "metersPerUnit": 24154.516129032258,
+      "bodyRadiusM": 7487900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

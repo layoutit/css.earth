@@ -1,0 +1,31 @@
+{
+  "host": "hip-116454",
+  "planets": [
+    {
+      "id": "hip-116454b",
+      "name": "HIP 116454 b",
+      "description": "Transiting planet of HIP 116454 with a 9.1-day year, found in 2014.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract",
+        "credit": "Thygesen et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "THYGESEN_ET_AL__2024"
+      },
+      "text": {
+        "card": "HIP 116454 b was found in 2014 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around HIP 116454. Its orbit and size follow Thygesen et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THYGESEN_ET_AL__2024): disc_year 2014, disc_facility K2, sy_pnum 1; pl_orbper 9.1004157, pl_radj 0.22026981, pl_bmassj 0.03051961",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HIP_116454_b",
+          "title": "HIP 116454 b",
+          "revision": "1348641166",
+          "card": "HIP 116454 b, or K2-2 b, is an exoplanet orbiting the star HIP 116454, 62 parsecs (201 ly) from Earth toward the constellation Pisces.",
+          "introduction": "It is 32,000 kilometres (20,000 mi) in diameter and 12 times as massive as Earth."
+        }
+      },
+      "order": 3251
+    }
+  ]
+}

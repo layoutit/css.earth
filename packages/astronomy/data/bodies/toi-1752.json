@@ -1,0 +1,30 @@
+{
+ "id": "toi-1752",
+ "classification": "star",
+ "order": 4130,
+ "physical": {
+  "name": "TOI-1752",
+  "horizonsCode": null,
+  "meanRadiusKm": 368721,
+  "gravitationalParameterKm3PerS2": 69541318581.97624,
+  "parent": null,
+  "effectiveTemperatureK": 3762
+ },
+ "physicalNotes": "Radius 0.53 +/- 0.015 solar radii from Peláez-Torres et al. 2026, the stellar radius of the default parameter set of TOI-1752 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract): 368,721 km at 695,700 km per solar radius. Mass 0.524 +/- 0.012 solar masses from Peláez-Torres et al. 2026, the stellar mass of the default parameter set of TOI-1752 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract); GM is that mass times the JPL solar GM. Temperature 3762 +/- 77 K from Peláez-Torres et al. 2026, the stellar temperature of the default parameter set of TOI-1752 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 253.4614374657688,
+  "declinationDegrees": 60.709637075897966,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 103.23771112334624,
+  "properMotionRaMasPerYear": -171.22601573138365,
+  "properMotionDecMasPerYear": 125.0893134727133,
+  "radialVelocityKmPerS": -71.78514,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1438168463332034816 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1752/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 9.6864 +/- 0.0125 mas (same row, RUWE 1.11): 103.24 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -171.226, 125.089 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -71.79 +/- 1.54 km/s"
+  }
+ }
+}

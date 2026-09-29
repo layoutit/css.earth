@@ -1,0 +1,30 @@
+{
+ "id": "toi-1756",
+ "classification": "star",
+ "order": 4893,
+ "physical": {
+  "name": "TOI-1756",
+  "horizonsCode": null,
+  "meanRadiusKm": 391405.7,
+  "gravitationalParameterKm3PerS2": 73788116663.3183,
+  "parent": null,
+  "effectiveTemperatureK": 3891.86
+ },
+ "physicalNotes": "Radius 0.562607 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-1756 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 391,406 km at 695,700 km per solar radius. Mass 0.556 +/- 0.02 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 364074068 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 3891.86 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-1756 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 306.32876589930095,
+  "declinationDegrees": 77.636419105159,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 86.92262310544777,
+  "properMotionRaMasPerYear": -12.494980052731165,
+  "properMotionDecMasPerYear": 52.0307311487308,
+  "radialVelocityKmPerS": -13.732319,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2290553720211705344 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1756/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 11.5045 +/- 0.0093 mas (same row, RUWE 1.09): 86.92 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -12.495, 52.031 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -13.73 +/- 0.78 km/s"
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bd-20-761-b",
+  "card": {
+    "text": "BD-20 761B is a star of 3,968 K, bound to WASP-140 845 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 5094154336332482304 and 5094154336332482176, sep_AU 844.939609021909519, R_chance_align 2.809327392705491240e-08"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "BD-20 761B shares its motion through space with WASP-140, 845 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 5094154336332482304 and 5094154336332482176, sep_AU 844.939609021909519, R_chance_align 2.809327392705491240e-08"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

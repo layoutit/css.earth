@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1080b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1080b-orbits",
+      "title": "TOI-1080 b: orbits around TOI-1080",
+      "output": "toi-1080b-system-orbits.svg",
+      "system": "toi-1080",
+      "highlight": "toi-1080b",
+      "description": "The orbits of TOI-1080's planets in this map from above, to scale, with TOI-1080 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gómez Maqueo Chew et al. 2026 (2026MNRAS.548ag438G), via the NASA Exoplanet Archive ps table (pl_refname GOMEZ_MAQUEO_CHEW_ET_AL_2026): P 3.9652482 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-1080b-transit",
+      "title": "TOI-1080 b: its transit",
+      "description": "TOI-1080 b crossing its star, as TESS recorded it: 3 sectors (93, 103, 104) of the SPOC pipeline's 2-minute light curves of TIC 161032923, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-1080b-transit.svg",
+      "metadata": {
+        "tic": "TIC 161032923",
+        "sectors": [
+          93,
+          103,
+          104
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-1080b",
+      "sources": [
+        "photometry/tess/tess2025154050500-s0093-0000000161032923-0290-s_lc.fits",
+        "photometry/tess/tess2026111101500-s0103-0000000161032923-0305-s_lc.fits",
+        "photometry/tess/tess2026137223500-s0104-0000000161032923-0306-s_lc.fits"
+      ],
+      "durationHours": 1.02,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 93, 103, 104",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

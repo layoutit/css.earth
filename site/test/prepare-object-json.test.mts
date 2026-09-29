@@ -1,7 +1,7 @@
 import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { refuseStaleKeptBindings } from '../build/prepare/prepare-object-json.mts';

@@ -1,0 +1,28 @@
+{
+ "id": "toi-5076b",
+ "classification": "exoplanet",
+ "order": 4478,
+ "physical": {
+  "name": "TOI-5076 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 22255.5,
+  "gravitationalParameterKm3PerS2": 6435675.82,
+  "parent": "toi-5076"
+ },
+ "physicalNotes": "Radius 0.3113 Jupiter radii from Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract): 22,255.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0508 Jupiter masses (Heidari et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...694A..36H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 23.443162,
+  "semiMajorAxisStellarRadii": 37.7325,
+  "inclinationDegrees": 89.84,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60203.5018,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2025): P 23.443162 d",
+   "shape": "Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2025): a/R* derived from its semi-major axis 0.1481 au and stellar radius 0.844 solar radii; Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2025): inclination 89.84 degrees",
+   "eccentricity": "Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2025): e 0",
+   "phase": "Heidari et al. 2025 (2025A&A...694A..36H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2025): transit mid-time 2460204.0018 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

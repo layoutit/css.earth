@@ -1,0 +1,24 @@
+{
+  "host": "toi-2093",
+  "planets": [
+    {
+      "id": "toi-2093c",
+      "name": "TOI-2093 c",
+      "description": "Transiting planet of TOI-2093 with a 53.8-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract",
+        "credit": "Sanz-Forcada et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SANZ_FORCADA_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-2093 c was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-2093. Its orbit and size follow Sanz-Forcada et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SANZ_FORCADA_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 53.81149, pl_radj 0.20519261, pl_bmassj 0.04971236"
+      },
+      "order": 4241
+    }
+  ]
+}

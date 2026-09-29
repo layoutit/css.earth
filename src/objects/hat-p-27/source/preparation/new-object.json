@@ -1,0 +1,46 @@
+{
+  "id": "hat-p-27",
+  "name": "HAT-P-27",
+  "system": "HAT-P-27 system",
+  "description": "Star of 5,316 K, 199 parsecs away, with 1 transiting planet.",
+  "target": "HAT-P-27",
+  "gaia": "1159336403336463872",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "credit": "TICv8"
+  },
+  "radius": {
+    "value": 0.864673,
+    "source": "TICv8, the stellar radius of the default parameter set of HAT-P-27 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "uncertainty": 0.049715
+  },
+  "mass": {
+    "value": 0.916,
+    "source": "TICv8, the stellar mass of the default parameter set of HAT-P-27 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "uncertainty": 0.121408
+  },
+  "temperature": {
+    "value": 5316,
+    "source": "TICv8, the stellar temperature of the default parameter set of HAT-P-27 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract",
+    "uncertainty": 87.12
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-27 b crosses HAT-P-27 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow TICv8.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2019): st_teff 5316, st_rad 0.864673, st_mass 0.916",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-27",
+      "title": "HAT-P-27",
+      "revision": "1374863887",
+      "card": "HAT-P-27, also known as WASP-40, is the primary of a binary star system about 659 light-years away.",
+      "introduction": "It is a G-type main-sequence star."
+    }
+  },
+  "notes": [],
+  "order": 3129
+}

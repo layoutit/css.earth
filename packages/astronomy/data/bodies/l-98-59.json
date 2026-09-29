@@ -1,0 +1,30 @@
+{
+ "id": "l-98-59",
+ "classification": "star",
+ "order": 3799,
+ "physical": {
+  "name": "L 98-59",
+  "horizonsCode": null,
+  "meanRadiusKm": 219493.4,
+  "gravitationalParameterKm3PerS2": 38791846224.25888,
+  "parent": null,
+  "effectiveTemperatureK": 3415
+ },
+ "physicalNotes": "Radius 0.3155 +/- 0.0062 solar radii from Cadieux et al. 2025, the stellar radius of the default parameter set of L 98-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract): 219,493 km at 695,700 km per solar radius. Mass 0.2923 +/- 0.0067 solar masses from Cadieux et al. 2025, the stellar mass of the default parameter set of L 98-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract); GM is that mass times the JPL solar GM. Temperature 3415 +/- 60 K from Cadieux et al. 2025, the stellar temperature of the default parameter set of L 98-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 124.53289609935437,
+  "declinationDegrees": -68.31451297878304,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 10.608238227245772,
+  "properMotionRaMasPerYear": 94.79378412168865,
+  "properMotionDecMasPerYear": -340.08431073762046,
+  "radialVelocityKmPerS": -6.095192,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5271055243163629056 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/l-98-59/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 94.2664 +/- 0.0155 mas (same row, RUWE 1.27): 10.61 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 94.794, -340.084 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -6.10 +/- 0.19 km/s"
+  }
+ }
+}

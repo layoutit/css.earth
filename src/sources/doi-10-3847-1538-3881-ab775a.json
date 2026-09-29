@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ab775a",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gan et al. (2020): LHS 1815b: The First Thick-disk Planet Detected by TESS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2003.04525"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab775a"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....159..160G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab775a",
+      "label": "The Astronomical Journal 159 160"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gan et al. (2020), The Astronomical Journal 159 160",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 159 160",
+  "creators": [
+    "Tianjun Gan",
+    "Avi Shporer",
+    "John H. Livingston",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

@@ -1,0 +1,31 @@
+{
+  "host": "toi-700",
+  "planets": [
+    {
+      "id": "toi-700d",
+      "name": "TOI-700 d",
+      "description": "Transiting planet of TOI-700 with a 37.4-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "credit": "Pass et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PASS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-700 d was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-700. Its orbit and size follow Pass et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 37.423457, pl_radj 0.10215023, pl_bmassj 0.00497",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-700_d",
+          "title": "TOI-700 d",
+          "revision": "1374086720",
+          "card": "TOI-700 d is a dense, rocky, near-Earth-sized exoplanet orbiting within the habitable zone of the red dwarf TOI-700.",
+          "introduction": "It is located roughly 101.4 light-years (31.1 pc) away from Earth in the constellation of Dorado and is the outermost of four confirmed exoplanets around its star."
+        }
+      },
+      "order": 4671
+    }
+  ]
+}

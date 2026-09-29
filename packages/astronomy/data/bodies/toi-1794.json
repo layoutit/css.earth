@@ -1,0 +1,30 @@
+{
+ "id": "toi-1794",
+ "classification": "star",
+ "order": 4159,
+ "physical": {
+  "name": "TOI-1794",
+  "horizonsCode": null,
+  "meanRadiusKm": 915680.3,
+  "gravitationalParameterKm3PerS2": 128704524352.6728,
+  "parent": null,
+  "effectiveTemperatureK": 5631
+ },
+ "physicalNotes": "Radius 1.3162 +/- 0.023 solar radii from MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1794 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract): 915,680 km at 695,700 km per solar radius. Mass 0.9698 +/- 0.0328 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1794 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract); GM is that mass times the JPL solar GM. Temperature 5631 +/- 78 K from MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1794 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 203.3974787754962,
+  "declinationDegrees": 49.060833924097246,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 155.29758920316965,
+  "properMotionRaMasPerYear": -32.929033500195125,
+  "properMotionDecMasPerYear": -67.94790157534669,
+  "radialVelocityKmPerS": -31.158993,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1552562615159689088 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1794/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.4392 +/- 0.0125 mas (same row, RUWE 0.94): 155.30 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -32.929, -67.948 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -31.16 +/- 0.25 km/s"
+  }
+ }
+}

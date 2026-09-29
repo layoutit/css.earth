@@ -16,6 +16,7 @@ behind the separate `@cssearth/core/node` entry.
 | | prepared `matrix3d` transport: `requirePreparedMatrix4`, `readPreparedMatrix4`, `multiplyPreparedMatrix4`, `preparedRotationMatrix4`, `invertPreparedAffineMatrix4`, `transformPreparedPoint`, `serializePreparedMatrix4` | `Prepared projection requires …`, `Prepared rotation axis is invalid.`, `Prepared material parent became singular.` |
 | | `isArray`, `canonical` (recursively key-sorted copy for stable JSON), `flagValue`, `positionalArguments` | no throw |
 | `@cssearth/core/schema` | structural guards: `object`, `array`, `tuple`, `union`, `literal`, `json`, … and `parse` | `Invalid <label> structure at <path> (<value>).` |
+| `@cssearth/core/oracle` | Shared oracle fixture validation and input reading; [Python harness](src/node/oracle/README.md) | Node only, ESM only |
 | `@cssearth/core/node` | `sha256` (the content address of a published runtime asset, from text as UTF-8 or bytes), `projectRoot` (nearest ancestor with `pnpm-workspace.yaml`) | Node only |
 
 Getters take at most two parameters, so `requireArray(rows).map(requireString)` works and names a

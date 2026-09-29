@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4463-a",
+  "card": {
+    "text": "TOI-4463 A b crosses TOI-4463 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4365-aca286",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract",
+        "label": "Yee et al. (2023), The Astrophysical Journal Supplement Series 265 1",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname YEE_ET_AL__2023): st_teff 5640, st_rad 1.062, st_mass 1.056"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Yee et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4365-aca286",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract",
+        "label": "Yee et al. (2023), The Astrophysical Journal Supplement Series 265 1",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname YEE_ET_AL__2023): st_teff 5640, st_rad 1.062, st_mass 1.056"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "host": "k2-321",
+  "planets": [
+    {
+      "id": "k2-321b",
+      "name": "K2-321 b",
+      "description": "Transiting planet of K2-321 with a 2.3-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+        "credit": "Thygesen et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "THYGESEN_ET_AL__2023"
+      },
+      "text": {
+        "card": "K2-321 b was found in 2020 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-321. Its orbit and size follow Thygesen et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THYGESEN_ET_AL__2023): disc_year 2020, disc_facility K2, sy_pnum 1; pl_orbper 2.2979749, pl_radj 0.183, pl_bmassj 0.0153"
+      },
+      "order": 3499
+    }
+  ]
+}

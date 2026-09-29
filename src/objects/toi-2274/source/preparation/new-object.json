@@ -1,0 +1,39 @@
+{
+  "id": "toi-2274",
+  "name": "TOI-2274",
+  "system": "TOI-2274 system",
+  "description": "Star of 3,943 K, 48.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2274",
+  "gaia": "2110345512468201344",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "credit": "Peláez-Torres et al. 2024"
+  },
+  "radius": {
+    "value": 0.631,
+    "source": "Peláez-Torres et al. 2024, the stellar radius of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "uncertainty": 0.019
+  },
+  "mass": {
+    "value": 0.612,
+    "source": "Peláez-Torres et al. 2024, the stellar mass of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "uncertainty": 0.0202
+  },
+  "temperature": {
+    "value": 3943,
+    "source": "Peláez-Torres et al. 2024, the stellar temperature of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2274 b crosses TOI-2274 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Peláez-Torres et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): st_teff 3943, st_rad 0.631, st_mass 0.612"
+  },
+  "notes": [],
+  "order": 4278
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-7384b",
+ "classification": "exoplanet",
+ "order": 4698,
+ "physical": {
+  "name": "TOI-7384 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 22734.5,
+  "gravitationalParameterKm3PerS2": 4940774.74,
+  "parent": "toi-7384"
+ },
+ "physicalNotes": "Radius 0.318 Jupiter radii from Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S/abstract): 22,734.5 km at 71,492 km per Jupiter radius. GM from the mass 0.039 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.2340258,
+  "semiMajorAxisStellarRadii": 29.7,
+  "inclinationDegrees": 88.79,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59564.60114,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): P 6.2340258 d",
+   "shape": "Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): a/R* 29.7; Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): inclination 88.79 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Scott et al. 2026 (2026MNRAS.547ag070S), via the NASA Exoplanet Archive ps table (pl_refname SCOTT_ET_AL_2026): transit mid-time 2459565.10114 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readSkyTarget, simbadObjectQuery, skyRegion, type MetadataResponse, type SkyTarget } from '@cssearth/telescope/node';
 import { skyTargetRequest } from './exploration.mts';

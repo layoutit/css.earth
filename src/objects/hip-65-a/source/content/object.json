@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hip-65-a",
+  "displayName": "HIP 65 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.72 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202037941",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N",
+          "label": "Nielsen et al. (2020), Astronomy & Astrophysics 639 A76",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "61.9 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hip-65-a",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hip-65-a-lens-color.webp",
+        "surface": "hip-65-a-surface-color@2x.webp",
+        "poles": "hip-65-a-poles-color@2x.webp",
+        "source": {
+          "id": "hip-65-a-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4923860051276772608&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,590 K and log g 4.61 (u1 0.759, u2 0.034): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Nielsen et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+      "credit": "Nielsen et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hip-65-a.json",
+      "credit": "Nielsen et al. 2020, the stellar radius of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

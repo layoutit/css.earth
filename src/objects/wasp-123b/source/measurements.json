@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-123b",
+  "radiusKm": 96514.2,
+  "radiusSource": "Radius 1.35 Jupiter radii from Alexoudi 2022 (2022AN....34324012A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract): 96,514.2 km at 71,492 km per Jupiter radius. GM from the mass 0.899 Jupiter masses (Turner et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016PASP..128f4401T), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.9776446,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.9776446 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of WASP-123 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.899 Jupiter masses: Turner et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016PASP..128f4401T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract)."
+}

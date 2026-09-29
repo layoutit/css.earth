@@ -1,0 +1,24 @@
+{
+  "host": "toi-5143",
+  "planets": [
+    {
+      "id": "toi-5143c",
+      "name": "TOI-5143 c",
+      "description": "Transiting planet of TOI-5143 with a 5.21-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+        "credit": "Radzom et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "RADZOM_ET_AL__2025"
+      },
+      "text": {
+        "card": "TOI-5143 c was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5143. Its orbit and size follow Radzom et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RADZOM_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.2097118, pl_radj 1.45, no pl_bmassj in pscomppars"
+      },
+      "order": 4490
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-824",
+  "name": "TOI-824",
+  "system": "TOI-824 system",
+  "description": "Star of 4,600 K, 63.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-824",
+  "gaia": "5880886001621564928",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract",
+    "credit": "Burt et al. 2020"
+  },
+  "radius": {
+    "value": 0.695,
+    "source": "Burt et al. 2020, the stellar radius of the default parameter set of TOI-824 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 0.71,
+    "source": "Burt et al. 2020, the stellar mass of the default parameter set of TOI-824 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract",
+    "uncertainty": 0.032
+  },
+  "temperature": {
+    "value": 4600,
+    "source": "Burt et al. 2020, the stellar temperature of the default parameter set of TOI-824 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract",
+    "uncertainty": 110
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-824 b crosses TOI-824 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Burt et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BURT_ET_AL__2020): st_teff 4600, st_rad 0.695, st_mass 0.71"
+  },
+  "notes": [],
+  "order": 4729
+}

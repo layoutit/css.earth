@@ -1,0 +1,45 @@
+{
+  "id": "toi-1231",
+  "name": "TOI-1231",
+  "system": "TOI-1231 system",
+  "description": "Star of 3,553 K, 27.6 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1231",
+  "gaia": "5357465071731312768",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract",
+    "credit": "Burt et al. 2021"
+  },
+  "radius": {
+    "value": 0.476,
+    "source": "Burt et al. 2021, the stellar radius of the default parameter set of TOI-1231 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.485,
+    "source": "Burt et al. 2021, the stellar mass of the default parameter set of TOI-1231 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract",
+    "uncertainty": 0.024
+  },
+  "temperature": {
+    "value": 3553,
+    "source": "Burt et al. 2021, the stellar temperature of the default parameter set of TOI-1231 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract",
+    "uncertainty": 51
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1231 b crosses TOI-1231 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Burt et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BURT_ET_AL__2021): st_teff 3553, st_rad 0.476, st_mass 0.485"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 70.48,
+    "uncertainty": 0.54,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5357465071731312768 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract"
+  },
+  "order": 3959
+}

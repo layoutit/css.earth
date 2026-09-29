@@ -1,0 +1,39 @@
+{
+  "id": "toi-2374",
+  "name": "TOI-2374",
+  "system": "TOI-2374 system",
+  "description": "Star of 5,002 K, 135 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2374",
+  "gaia": "6828814283414902912",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract",
+    "credit": "Yee et al. 2025"
+  },
+  "radius": {
+    "value": 0.711,
+    "source": "Yee et al. 2025, the stellar radius of the default parameter set of TOI-2374 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.802,
+    "source": "Yee et al. 2025, the stellar mass of the default parameter set of TOI-2374 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract",
+    "uncertainty": 0.029
+  },
+  "temperature": {
+    "value": 5002,
+    "source": "Yee et al. 2025, the stellar temperature of the default parameter set of TOI-2374 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract",
+    "uncertainty": 65
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2374 b crosses TOI-2374 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Yee et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname YEE_ET_AL_2025): st_teff 5002, st_rad 0.711, st_mass 0.802"
+  },
+  "notes": [],
+  "order": 4290
+}

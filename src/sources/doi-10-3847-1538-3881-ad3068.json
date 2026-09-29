@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad3068",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hord et al. (2024): Identification of the Top TESS Objects of Interest for Atmospheric Characterization of Transiting Exoplanets with JWST",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2308.09617"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad3068"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....167..233H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad3068",
+      "label": "The Astronomical Journal 167 233"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hord et al. (2024), The Astronomical Journal 167 233",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 167 233",
+  "creators": [
+    "Benjamin J. Hord",
+    "Eliza M.-R. Kempton",
+    "Thomas M. Evans-Soma",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

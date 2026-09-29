@@ -1,0 +1,40 @@
+{
+  "id": "cd-35-16019-b",
+  "name": "CD-35 16019B",
+  "system": "WASP-8 system",
+  "description": "Star bound to WASP-8, 406 AU away.",
+  "gaia": "2312679845529776128",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.478,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 183532608 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 0.56,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 183532608 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.086
+  },
+  "temperature": {
+    "value": 3740,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 183532608 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 128.8
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "CD-35 16019B is a star of 3,740 K, bound to WASP-8 406 AU away.",
+    "introduction": "CD-35 16019B shares its motion through space with WASP-8, 406 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 2312679845530628096 and 2312679845529776128, sep_AU 406.253682392982057, R_chance_align 1.390558831631277885e-09"
+  },
+  "notes": [
+    "CD-35 16019B's orbit around WASP-8 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4842
+}

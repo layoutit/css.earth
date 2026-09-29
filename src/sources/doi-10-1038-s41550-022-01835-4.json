@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1038-s41550-022-01835-4",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Piaulet et al. (2023): Evidence for the volatile-rich composition of a 1.5-Earth-radius planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2212.08477"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-022-01835-4"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023NatAs...7..206P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-022-01835-4",
+      "label": "Nature Astronomy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Piaulet et al. (2023), Nature Astronomy",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P"
+    }
+  ],
+  "publisher": "Nature Astronomy",
+  "creators": [
+    "Caroline Piaulet",
+    "Björn Benneke",
+    "Jose M. Almenara",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

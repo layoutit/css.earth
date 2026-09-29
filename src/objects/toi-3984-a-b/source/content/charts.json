@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-3984-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-3984-a-b-orbits",
+      "title": "TOI-3984 A b: orbits around TOI-3984 A",
+      "output": "toi-3984-a-b-system-orbits.svg",
+      "system": "toi-3984-a",
+      "highlight": "toi-3984-a-b",
+      "description": "The orbits of TOI-3984 A's planets in this map from above, to scale, with TOI-3984 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Cañas et al. 2023 (2023AJ....166...30C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2023): P 4.353326 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-3984-a-b-transit",
+      "title": "TOI-3984 A b: its transit",
+      "description": "TOI-3984 A b crossing its star, as TESS recorded it: 3 sectors (51, 77, 78) of the SPOC pipeline's 2-minute light curves of TIC 20182780, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-3984-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 20182780",
+        "sectors": [
+          51,
+          77,
+          78
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-3984-a-b",
+      "sources": [
+        "photometry/tess/tess2022112184951-s0051-0000000020182780-0223-s_lc.fits",
+        "photometry/tess/tess2024085201119-s0077-0000000020182780-0272-s_lc.fits",
+        "photometry/tess/tess2024114025118-s0078-0000000020182780-0273-s_lc.fits"
+      ],
+      "durationHours": 2.01,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 51, 77, 78",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

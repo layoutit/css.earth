@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aad6e7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Yu et al. (2018): Two Warm, Low-density Sub-Jovian Planets Orbiting Bright Stars in K2 Campaigns 13 and 14",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1803.02858"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aad6e7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....156..127Y"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aad6e7",
+      "label": "The Astronomical Journal 156 127"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Yu et al. (2018), The Astronomical Journal 156 127",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y"
+    }
+  ],
+  "publisher": "The Astronomical Journal 156 127",
+  "creators": [
+    "Liang Yu",
+    "Joseph E. Rodriguez",
+    "Jason D. Eastman",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

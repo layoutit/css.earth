@@ -1,0 +1,31 @@
+{
+ "id": "ngts-35b",
+ "classification": "exoplanet",
+ "order": 3001,
+ "physical": {
+  "name": "NGTS-35 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 69521.3,
+  "gravitationalParameterKm3PerS2": 60587261.26,
+  "parent": "ngts-35"
+ },
+ "physicalNotes": "Radius 0.97243454 Jupiter radii from Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract): 69,521.3 km at 71,492 km per Jupiter radius. GM from the mass 0.47824548 Jupiter masses (Kendall et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.547f2189K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 731.9966539026,
+  "semiMajorAxisStellarRadii": 45.6908,
+  "inclinationDegrees": 88.816,
+  "eccentricity": 0.192,
+  "argumentOfPeriapsisDegrees": 38,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59283.047474,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 731.9966539026 d",
+   "shape": "Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive ps table (pl_refname KENDALL_ET_AL_2026): a/R* derived from its semi-major axis 0.16 au and stellar radius 0.753 solar radii; Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive ps table (pl_refname KENDALL_ET_AL_2026): inclination 88.816 degrees",
+   "eccentricity": "Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive ps table (pl_refname KENDALL_ET_AL_2026): e 0.192",
+   "argumentOfPeriapsis": "Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive ps table (pl_refname KENDALL_ET_AL_2026): omega 38 degrees",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459283.547474 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

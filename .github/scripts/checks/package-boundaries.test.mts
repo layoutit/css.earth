@@ -2,7 +2,7 @@ import { isRecord } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { fileURLToPath } from 'node:url';
 import { parse } from '@typescript-eslint/parser';

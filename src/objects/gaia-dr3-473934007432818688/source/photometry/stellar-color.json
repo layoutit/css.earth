@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "gaia-dr3-473934007432818688",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3068,
+      "lowerKelvin": 2909,
+      "upperKelvin": 3227,
+      "citation": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 328513444 (VizieR IV/39/tic82): 3068 +/- 159 K, https://doi.org/10.3847/1538-3881/ab3467"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

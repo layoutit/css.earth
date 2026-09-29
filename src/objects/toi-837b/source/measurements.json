@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-837b",
+  "radiusKm": 58480.5,
+  "radiusSource": "Radius 0.818 Jupiter radii from Barragán et al. 2024 (2024MNRAS.531.4275B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract): 58,480.5 km at 71,492 km per Jupiter radius. GM from the mass 0.379 Jupiter masses (Barragán et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.531.4275B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8.3249113,
+  "orbitalPeriodSource": "Barragán et al. 2024 (2024MNRAS.531.4275B), via the NASA Exoplanet Archive ps table (pl_refname BARRAG_AACUTE_N_ET_AL__2024): P 8.3249113 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-837 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.379 Jupiter masses: Barragán et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.531.4275B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract)."
+}

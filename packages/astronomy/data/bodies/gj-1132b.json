@@ -1,0 +1,31 @@
+{
+ "id": "gj-1132b",
+ "classification": "exoplanet",
+ "order": 3075,
+ "physical": {
+  "name": "GJ 1132 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 7599.6,
+  "gravitationalParameterKm3PerS2": 732248.15,
+  "parent": "gj-1132"
+ },
+ "physicalNotes": "Radius 0.1063 Jupiter radii from Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract): 7,599.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00578 Jupiter masses (Xue et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...973L...8X), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.62892911,
+  "semiMajorAxisStellarRadii": 15.26,
+  "inclinationDegrees": 88.16,
+  "eccentricity": 0.0118,
+  "argumentOfPeriapsisDegrees": 264.2,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59280.48988,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): P 1.62892911 d",
+   "shape": "Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): a/R* 15.26; Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): inclination 88.16 degrees",
+   "eccentricity": "Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): e 0.0118",
+   "argumentOfPeriapsis": "Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): omega -95.8 degrees, stored as 264.2",
+   "phase": "Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): transit mid-time 2459280.98988 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-2445",
+  "planets": [
+    {
+      "id": "toi-2445b",
+      "name": "TOI-2445 b",
+      "description": "Transiting planet of TOI-2445 with a 0.371-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+        "credit": "Giacalone et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GIACALONE_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-2445 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2445. Its orbit and size follow Giacalone et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GIACALONE_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.3711281, pl_radj 0.11151772, pl_bmassj 0.0066"
+      },
+      "order": 4311
+    }
+  ]
+}

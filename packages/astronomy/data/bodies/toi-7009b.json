@@ -1,0 +1,28 @@
+{
+ "id": "toi-7009b",
+ "classification": "exoplanet",
+ "order": 4673,
+ "physical": {
+  "name": "TOI-7009 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 23662.8,
+  "gravitationalParameterKm3PerS2": 5295497.03,
+  "parent": "toi-7009"
+ },
+ "physicalNotes": "Radius 0.3309846 Jupiter radii from Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract): 23,662.8 km at 71,492 km per Jupiter radius. GM from the mass 0.0418 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.3206612,
+  "semiMajorAxisStellarRadii": 10.95,
+  "inclinationDegrees": 86.1,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60391.8627,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): P 2.3206612 d",
+   "shape": "Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): a/R* 10.95; Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): inclination 86.1 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): transit mid-time 2460392.3627 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

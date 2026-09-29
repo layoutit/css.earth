@@ -1,0 +1,24 @@
+{
+  "host": "toi-1883",
+  "planets": [
+    {
+      "id": "toi-1883b",
+      "name": "TOI-1883 b",
+      "description": "Transiting planet of TOI-1883 with a 4.51-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract",
+        "credit": "Fukuda et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "FUKUDA_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-1883 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1883. Its orbit and size follow Fukuda et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FUKUDA_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.50638, pl_radj 0.50406011, pl_bmassj 0.04310502"
+      },
+      "order": 4197
+    }
+  ]
+}

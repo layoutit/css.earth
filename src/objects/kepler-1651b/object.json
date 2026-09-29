@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kepler-1651b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-1651 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11735.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kepler-1651b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-1651 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 13673372.1,
+      "description": "Kepler-1651 b was found in 2017 by Kepler as it crossed its star.",
+      "systemName": "Kepler-1651 system",
+      "order": 3691,
+      "context": {
+        "order": 3691
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        320047112738684000,
+        -1320072135885002000,
+        1529405028612804400
+      ],
+      "presentationToReference": [
+        0.22487900547212764,
+        -0.958328234468622,
+        -0.17617158658001753,
+        -0.6270500210807542,
+        -0.28072162413289575,
+        0.726638590226816,
+        0.7458134511796446,
+        0.052937366429045375,
+        0.6640481392753574
+      ],
+      "orbitUpReference": [
+        0.958328234468622,
+        0.28072162413289575,
+        -0.052937366429045375
+      ],
+      "metersPerUnit": 37857.096774193546,
+      "bodyRadiusM": 11735700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

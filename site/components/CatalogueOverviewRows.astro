@@ -1,24 +1,9 @@
 ---
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
-import ObjectNavigationMarker from './ObjectNavigationMarker.astro';
-import { allPlanetarySystems } from '../object-systems.mts';
-import { OVERVIEWS, SCENE_OBJECTS } from '../objects.mts';
-import { sourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
-
-const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({
-  system,
-  star: SCENE_OBJECTS.find(object => object.id === system.id)!,
-  source: systemSourceDocumentation(system),
-}));
+import { OVERVIEWS } from '../objects.mts';
+import { sourceDocumentation } from '../source-documentation.mts';
 ---
 
-{systems.map(({ system, star, source }) => <li data-search-overview={system.name.toLocaleLowerCase('en')} hidden>
-  <a class="object-link object-observation-control object-thumbnail-leading" href={`${system.route}?overview=system`}
-    data-source-subject={`overview:system:${system.id}`} data-source-document={source.href} data-source-label={source.label}>
-    <span class="object-lens-icon"><ObjectNavigationMarker objectId={star.id} color={star.color} /></span>
-    <span class="object-name object-lens-label">{system.name}</span>
-  </a>
-</li>)}
 {OVERVIEWS.map(overview => <li data-search-overview={overview.name.toLocaleLowerCase('en')} hidden>
   <a class="object-link object-observation-control object-thumbnail-leading" href={overview.route}
     data-source-subject={`overview:${overview.id}`} data-source-document={sourceDocumentation(overview.id, overview.name).href}

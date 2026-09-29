@@ -1,0 +1,39 @@
+{
+  "id": "k2-182",
+  "name": "K2-182",
+  "system": "K2-182 system",
+  "description": "Star of 5,128 K, 155 parsecs away, with 1 transiting planet.",
+  "target": "K2-182",
+  "gaia": "601480723509077632",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "credit": "Thygesen et al. 2023"
+  },
+  "radius": {
+    "value": 0.789,
+    "source": "Thygesen et al. 2023, the stellar radius of the default parameter set of K2-182 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 0.025
+  },
+  "mass": {
+    "value": 0.823,
+    "source": "Thygesen et al. 2023, the stellar mass of the default parameter set of K2-182 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 0.036
+  },
+  "temperature": {
+    "value": 5128,
+    "source": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-182 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 79
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-182 b crosses K2-182 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Thygesen et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname THYGESEN_ET_AL__2023): st_teff 5128, st_rad 0.789, st_mass 0.823"
+  },
+  "notes": [],
+  "order": 3365
+}

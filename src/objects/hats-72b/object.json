@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hats-72b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HATS-72 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 51645.8
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hats-72b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HATS-72 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 26149098.8,
+      "description": "HATS-72 b was found in 2020 by HATSouth as it crossed its star.",
+      "systemName": "HATS-72 system",
+      "order": 3138,
+      "context": {
+        "order": 3138
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3493035420841626600,
+        -1339068150623322400,
+        -1143751110982429300
+      ],
+      "presentationToReference": [
+        0.8956615561610896,
+        -0.3510793538765087,
+        0.2730085421680954,
+        -0.3351248620972281,
+        -0.9363430172940408,
+        -0.10465696713074343,
+        -0.29237254251965816,
+        -0.0022452719979733932,
+        0.9563018640231995
+      ],
+      "orbitUpReference": [
+        0.3510793538765087,
+        0.9363430172940408,
+        0.0022452719979733932
+      ],
+      "metersPerUnit": 166599.35483870967,
+      "bodyRadiusM": 51645800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

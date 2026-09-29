@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from './fixture.mts';
+import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
@@ -27,15 +27,19 @@ run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tests/oracles/fits/core.oracle.test.mts', 'tests/oracles/fits/sky-orientation.oracle.test.mts', 'tests/oracles/fits/sky-projection.oracle.test.mts',
   'tests/oracles/fits/file-region.oracle.test.mts', 'tests/oracles/fits/rice.oracle.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'tests/objects/color/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
-  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts',
-  ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
-    .map(name => `tests/objects/terrestrial/${name}.test.mts`)];
+  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tests/contract/oracle-fixtures.test.mts',
+  "packages/bake/src/objects/raster/observed/observed-fits.test.mts",
+  "packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.test.mts",
+  "packages/bake/src/objects/raster/fits-image-map.test.mts",
+  "packages/bake/src/objects/raster/facet-scalars.test.mts",
+  "packages/bake/src/objects/raster/obj-uv-fits.test.mts",
+  "packages/bake/src/objects/layers/terrestrial/missions/pds4-geometry-cube.test.mts"];
 run(['--test', '--test-concurrency=1', ...unit]);
 run(['labs/nebula/run.mts', 'test', 'getsf', 'sampled-prior', 'ownership', 'source-pin']);
 if (args.includes('--unit')) process.exit(0);
 
 const inputs = new Map<string, { path: string; bytes?: number }>();
-for (const name of ['fits/encounter.json', 'fits/llorri.json', 'fits/charon-leisa.json', 'fits/synoptic.json', 'fits/pallas.json', 'pds/dart-draco-cube.json'])
+for (const name of ['fits/encounter.json', 'fits/llorri.json', 'fits/charon-leisa.json', 'fits/synoptic.json', 'fits/pallas.json', '../../packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json'])
   for (const input of (await readOracleFixture(name)).inputs) inputs.set(input.path, input);
 for (const id of ['didymos', 'dimorphos', 'arrokoth', 'pluto']) {
   const source = resolve(ORACLE_ROOT, 'src/objects', id, 'source');
@@ -104,8 +108,8 @@ if (missing.length) {
 run(['--test', '--test-concurrency=1',
   'tests/oracles/fits/synoptic.test.mts',
   'tests/oracles/fits/pallas.test.mts',
-  'tests/objects/terrestrial/encounter-fits.oracle.test.mts',
-  'tests/objects/terrestrial/llorri-geo.oracle.test.mts',
-  'tests/objects/terrestrial/pds4-geometry-cube.oracle.test.mts',
-  'tests/objects/terrestrial/new-horizons-geo.test.mts',
+  'packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts',
+  'packages/bake/src/objects/layers/terrestrial/missions/llorri-geo.oracle.test.mts',
+  'packages/bake/src/objects/layers/terrestrial/missions/pds4-geometry-cube.oracle.test.mts',
+  'packages/bake/src/objects/layers/terrestrial/missions/new-horizons-geo.test.mts',
   'tests/objects/observation/spectral-band-maps.test.mts']);

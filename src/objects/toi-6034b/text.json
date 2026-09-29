@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6034b",
+  "card": {
+    "text": "TOI-6034 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad7796",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract",
+        "label": "Kanodia et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.576184, pl_radj 1.063, pl_bmassj 0.798"
+      },
+      {
+        "catalogueId": "wikipedia-toi-6034-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-6034_b",
+        "label": "Wikipedia, \"TOI-6034 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374090082",
+        "quote": "TOI-6034 b is an exoplanet about 385 light-years away from the Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-6034. Its orbit and size follow Kanodia et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad7796",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract",
+        "label": "Kanodia et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.576184, pl_radj 1.063, pl_bmassj 0.798"
+      },
+      {
+        "catalogueId": "wikipedia-toi-6034-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-6034_b",
+        "label": "Wikipedia, \"TOI-6034 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374090082",
+        "quote": "It was first discovered by NASA’s Transiting Exoplanet Survey Satellite (TESS) and its discovery was announced in 2024."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-125",
+  "card": {
+    "text": "3 planets cross TOI-125 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa197",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract",
+        "label": "Nielsen et al. (2020), Monthly Notices of the Royal Astronomical Society 492 5399-5412",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NIELSEN_ET_AL__2020): st_teff 5320, st_rad 0.848, st_mass 0.859"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Nielsen et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa197",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract",
+        "label": "Nielsen et al. (2020), Monthly Notices of the Royal Astronomical Society 492 5399-5412",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NIELSEN_ET_AL__2020): st_teff 5320, st_rad 0.848, st_mass 0.859"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

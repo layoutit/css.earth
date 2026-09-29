@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-9618",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 9618",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 667385
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-9618-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 9618",
+      "classification": "star",
+      "color": "#fff1ee",
+      "distanceAu": 13880433.8,
+      "description": "2 planets cross HIP 9618 as seen from Earth: b, c.",
+      "systemName": "HIP 9618 system",
+      "order": 3016,
+      "context": {
+        "order": 3013
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1660158891576501200,
+        993802439173411800,
+        753665851905338900
+      ],
+      "presentationToReference": [
+        0.7995067705628851,
+        0.3114164206448436,
+        0.513623146652154,
+        0.4785998392793003,
+        0.18641601494395563,
+        -0.8580158875068941,
+        0.36294781672567517,
+        -0.9318094667501338,
+        0.0000029827805126522743
+      ],
+      "orbitUpReference": [
+        -0.3114164206448436,
+        -0.18641601494395563,
+        0.9318094667501338
+      ],
+      "metersPerUnit": 2152854.8387096776,
+      "bodyRadiusM": 667385000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

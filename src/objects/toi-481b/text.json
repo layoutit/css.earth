@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-481b",
+  "card": {
+    "text": "TOI-481 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abba3b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+        "label": "Brahm et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRAHM_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 10.33116210622, pl_radj 0.99, pl_bmassj 1.53"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-481. Its orbit and size follow Brahm et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abba3b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+        "label": "Brahm et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRAHM_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 10.33116210622, pl_radj 0.99, pl_bmassj 1.53"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

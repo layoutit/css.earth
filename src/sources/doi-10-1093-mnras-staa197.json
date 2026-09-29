@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staa197",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nielsen et al. (2020): Mass determinations of the three mini-Neptunes transiting TOI-125",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2001.08834"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staa197"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020MNRAS.492.5399N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staa197",
+      "label": "Monthly Notices of the Royal Astronomical Society 492 5399-5412"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nielsen et al. (2020), Monthly Notices of the Royal Astronomical Society 492 5399-5412",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 492 5399-5412",
+  "creators": [
+    "L D Nielsen",
+    "D Gandolfi",
+    "D J Armstrong",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

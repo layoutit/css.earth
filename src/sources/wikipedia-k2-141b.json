@@ -1,0 +1,44 @@
+{
+  "id": "wikipedia-k2-141b",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Wikipedia article: K2-141b",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://en.wikipedia.org/wiki/K2-141b"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://en.wikipedia.org/wiki/K2-141b",
+      "label": "Wikipedia, K2-141b"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://en.wikipedia.org/wiki/K2-141b",
+      "checkedOn": "2026-09-29",
+      "locator": "Lead section, as the REST summary API serves it; the quotes name the revision"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wikipedia contributors, \"K2-141b\", Wikipedia, The Free Encyclopedia",
+      "scope": "citation",
+      "evidence": "https://en.wikipedia.org/wiki/K2-141b"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution",
+      "scope": "Quoted text",
+      "evidence": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ],
+  "creators": [
+    "Wikipedia contributors"
+  ]
+}

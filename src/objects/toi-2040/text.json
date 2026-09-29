@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2040",
+  "card": {
+    "text": "TOI-2040 b crosses TOI-2040 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae6449",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+        "label": "Guenther et al. (2026), The Astronomical Journal 172 54",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GUENTHER_ET_AL_2026): st_teff 5132, st_rad 0.87, st_mass 0.92"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Guenther et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae6449",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+        "label": "Guenther et al. (2026), The Astronomical Journal 172 54",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GUENTHER_ET_AL_2026): st_teff 5132, st_rad 0.87, st_mass 0.92"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

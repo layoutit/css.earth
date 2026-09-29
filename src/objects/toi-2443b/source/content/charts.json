@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-2443b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-2443b-orbits",
+      "title": "TOI-2443 b: orbits around TOI-2443",
+      "output": "toi-2443b-system-orbits.svg",
+      "system": "toi-2443",
+      "highlight": "toi-2443b",
+      "description": "The orbits of TOI-2443's planets in this map from above, to scale, with TOI-2443 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Naponiello et al. 2025 (2025A&A...693A...7N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL__2025): P 15.66858 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-2443b-transit",
+      "title": "TOI-2443 b: its transit",
+      "description": "TOI-2443 b crossing its star, as TESS recorded it: 1 sector (31) of the SPOC pipeline's 2-minute light curves of TIC 318753380, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 18-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-2443b-transit.svg",
+      "metadata": {
+        "tic": "TIC 318753380",
+        "sectors": [
+          31
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-2443b",
+      "sources": [
+        "photometry/tess/tess2020294194027-s0031-0000000318753380-0198-s_lc.fits"
+      ],
+      "durationHours": 4.548,
+      "binMinutes": 18,
+      "notes": [
+        "TESS 2-min SPOC · sector 31",
+        "Folded on the app's orbit; 18-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

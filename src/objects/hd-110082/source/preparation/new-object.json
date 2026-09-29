@@ -1,0 +1,39 @@
+{
+  "id": "hd-110082",
+  "name": "HD 110082",
+  "system": "HD 110082 system",
+  "description": "Star of 6,200 K, 105 parsecs away, with 1 transiting planet.",
+  "target": "HD 110082",
+  "gaia": "5765748511163751936",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract",
+    "credit": "Tofflemire et al. 2021"
+  },
+  "radius": {
+    "value": 1.19,
+    "source": "Tofflemire et al. 2021, the stellar radius of the default parameter set of HD 110082 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 1.21,
+    "source": "Tofflemire et al. 2021, the stellar mass of the default parameter set of HD 110082 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 6200,
+    "source": "Tofflemire et al. 2021, the stellar temperature of the default parameter set of HD 110082 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 110082 b crosses HD 110082 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Tofflemire et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TOFFLEMIRE_ET_AL__2021): st_teff 6200, st_rad 1.19, st_mass 1.21"
+  },
+  "notes": [],
+  "order": 3152
+}

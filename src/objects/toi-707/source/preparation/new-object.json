@@ -1,0 +1,45 @@
+{
+  "id": "toi-707",
+  "name": "TOI-707",
+  "system": "TOI-707 system",
+  "description": "Star of 5,424 K, 131 parsecs away, with 1 transiting planet.",
+  "target": "TOI-707",
+  "gaia": "5280307324275126016",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract",
+    "credit": "Rea et al. 2026"
+  },
+  "radius": {
+    "value": 0.978,
+    "source": "Rea et al. 2026, the stellar radius of the default parameter set of TOI-707 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract",
+    "uncertainty": 0.021
+  },
+  "mass": {
+    "value": 0.99,
+    "source": "Rea et al. 2026, the stellar mass of the default parameter set of TOI-707 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 5424,
+    "source": "Rea et al. 2026, the stellar temperature of the default parameter set of TOI-707 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract",
+    "uncertainty": 61
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-707 b crosses TOI-707 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Rea et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname REA_ET_AL_2026): st_teff 5424, st_rad 0.978, st_mass 0.99"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 41.5289,
+    "uncertainty": 0.0229,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5280307324275126016 (quality A), from 2022ApJS..259...35A; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...35A/abstract"
+  },
+  "order": 4674
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-2095c",
+  "radiusKm": 8482.9,
+  "radiusSource": "Radius 0.11865486 Jupiter radii from Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract): 8,482.9 km at 71,492 km per Jupiter radius. No mass is measured: Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract) gives only an upper limit of 0.023283 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 28.1722,
+  "orbitalPeriodSource": "Quintana et al. 2023 (2023AJ....166..195Q), via the NASA Exoplanet Archive ps table (pl_refname QUINTANA_ET_AL__2023): P 28.1722 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-2095 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.023283 Jupiter masses: Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract)."
+}

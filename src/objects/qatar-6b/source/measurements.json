@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "qatar-6b",
+  "radiusKm": 75924.5,
+  "radiusSource": "Radius 1.062 Jupiter radii from Alsubai et al. 2018 (2018AJ....155...52A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract): 75,924.5 km at 71,492 km per Jupiter radius. GM from the mass 0.668 Jupiter masses (Alsubai et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018AJ....155...52A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.50616494168,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.50616494168 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Qatar-6 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.668 Jupiter masses: Alsubai et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018AJ....155...52A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)."
+}

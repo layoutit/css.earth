@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { missingPreparedFiles, restoreDriftedFiles, textBudgetFindings, worldStepOutput } from '../build/prepare/check-preparation-inputs.mts';
 const test = sourceTest();
 

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4559",
+  "card": {
+    "text": "TOI-4559 b crosses TOI-4559 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1017-pasa-2024-29",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+        "label": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MISTRY_ET_AL_2024): st_teff 3558, st_rad 0.374, st_mass 0.392"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mistry et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1017-pasa-2024-29",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+        "label": "Mistry et al. (2024), Publications of the Astronomical Society of Australia 41 e030",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MISTRY_ET_AL_2024): st_teff 3558, st_rad 0.374, st_mass 0.392"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-42b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.122 Jupiter radii from Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.527 Jupiter masses: Southworth et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.457.4205S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 4.98168178 d; Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive ps table (pl_refname SOUTHWORTH_ET_AL__2016): a/R* 13.5; Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive ps table (pl_refname SOUTHWORTH_ET_AL__2016): inclination 88 degrees; Bonomo et al. 2017 (2017A&A...602A.107B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL__2017): e 0.062; Bonomo et al. 2017 (2017A&A...602A.107B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL__2017): omega 159 degrees; Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2456472.54482 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...62I/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract"
+      ]
+    }
+  ]
+}

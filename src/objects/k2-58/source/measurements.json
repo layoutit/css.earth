@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-58",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 598,302 km at 182.04 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 182.0429706778631,
+  "distanceSource": "Gaia DR3 parallax 5.4932 +/- 0.0194 mas (same row, RUWE 1.32): 182.04 pc, no zero-point correction",
+  "radiusKm": 598302,
+  "radiusSource": "Radius 0.86 +/- 0.1 solar radii from Crossfield et al. 2016, the stellar radius of the default parameter set of K2-58 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract): 598,302 km at 695,700 km per solar radius. Mass 0.89 +/- 0.08 solar masses from Crossfield et al. 2016, the stellar mass of the default parameter set of K2-58 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract); GM is that mass times the JPL solar GM. Temperature 5413 +/- 255 K from Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-58 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5413,
+  "effectiveTemperatureSource": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-58 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract)",
+  "surfaceGravityLogg": 4.52,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-58.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.518, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

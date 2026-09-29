@@ -1,0 +1,39 @@
+{
+  "id": "toi-481",
+  "name": "TOI-481",
+  "system": "TOI-481 system",
+  "description": "Star of 5,735 K, 179 parsecs away, with 1 transiting planet.",
+  "target": "TOI-481",
+  "gaia": "5486322710592888064",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+    "credit": "Brahm et al. 2020"
+  },
+  "radius": {
+    "value": 1.66,
+    "source": "Brahm et al. 2020, the stellar radius of the default parameter set of TOI-481 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 1.14,
+    "source": "Brahm et al. 2020, the stellar mass of the default parameter set of TOI-481 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5735,
+    "source": "Brahm et al. 2020, the stellar temperature of the default parameter set of TOI-481 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+    "uncertainty": 72
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-481 b crosses TOI-481 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Brahm et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BRAHM_ET_AL__2020): st_teff 5735, st_rad 1.66, st_mass 1.14"
+  },
+  "notes": [],
+  "order": 4469
+}

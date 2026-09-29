@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-199c",
+  "radiusKm": 18177.6,
+  "radiusSource": "Radius 0.25426041 Jupiter radii from Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract): 18,177.6 km at 71,492 km per Jupiter radius. GM from the mass 0.03901476 Jupiter masses (Akana Murphy et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts (2021AJ....162..294A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 7.3744897,
+  "orbitalPeriodSource": "Akana Murphy et al. 2021 (2021AJ....162..294A), via the NASA Exoplanet Archive ps table (pl_refname AKANA_MURPHY_ET_AL__2021): P 7.3744897 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-199 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.03901476 Jupiter masses: Akana Murphy et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts (2021AJ....162..294A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract)."
+}

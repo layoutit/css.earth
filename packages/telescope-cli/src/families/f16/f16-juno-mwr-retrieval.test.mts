@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { member } from '../common.mts';
 import { describeJunoMwrRetrieval, F16_JUNO_MWR_RETRIEVAL_HANDLER, inspectJunoMwrRetrieval, inspectJunoMwrTable, type JunoMwrRetrievalInput, type JunoMwrTableInput } from './f16-juno-mwr-retrieval.mts';

@@ -1,0 +1,44 @@
+{
+  "id": "wikipedia-toi-2257-b",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Wikipedia article: TOI-2257 b",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://en.wikipedia.org/wiki/TOI-2257_b"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://en.wikipedia.org/wiki/TOI-2257_b",
+      "label": "Wikipedia, TOI-2257 b"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://en.wikipedia.org/wiki/TOI-2257_b",
+      "checkedOn": "2026-09-29",
+      "locator": "Lead section, as the REST summary API serves it; the quotes name the revision"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wikipedia contributors, \"TOI-2257 b\", Wikipedia, The Free Encyclopedia",
+      "scope": "citation",
+      "evidence": "https://en.wikipedia.org/wiki/TOI-2257_b"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution",
+      "scope": "Quoted text",
+      "evidence": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ],
+  "creators": [
+    "Wikipedia contributors"
+  ]
+}

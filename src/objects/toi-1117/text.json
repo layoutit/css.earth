@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1117",
+  "card": {
+    "text": "TOI-1117 b crosses TOI-1117 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf939",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+        "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LOCKLEY_ET_AL_2025): st_teff 5635, st_rad 1.05, st_mass 0.97"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1117",
+        "url": "https://en.wikipedia.org/wiki/TOI-1117",
+        "label": "Wikipedia, \"TOI-1117\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1337544506",
+        "quote": "TOI-1117 is a single G-type star in the constellation of Pavo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lockley et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf939",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+        "label": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LOCKLEY_ET_AL_2025): st_teff 5635, st_rad 1.05, st_mass 0.97"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1117",
+        "url": "https://en.wikipedia.org/wiki/TOI-1117",
+        "label": "Wikipedia, \"TOI-1117\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1337544506",
+        "quote": "It has approximately 0.97 times the mass and 1.05 times the radius of the Sun, with a surface temperature of 5,635±62 K and a spectral type of G7."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

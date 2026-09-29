@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-2158b",
+  "radiusKm": 68632.3,
+  "radiusSource": "Radius 0.96 Jupiter radii from Knudstrup et al. 2022 (2022A&A...667A..22K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract): 68,632.3 km at 71,492 km per Jupiter radius. GM from the mass 0.82 Jupiter masses (Knudstrup et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...667A..22K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8.6007557,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.6007557 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-2158 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.82 Jupiter masses: Knudstrup et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...667A..22K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract)."
+}

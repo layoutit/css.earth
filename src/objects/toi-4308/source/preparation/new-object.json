@@ -1,0 +1,39 @@
+{
+  "id": "toi-4308",
+  "name": "TOI-4308",
+  "system": "TOI-4308 system",
+  "description": "Star of 5,243 K, 109 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4308",
+  "gaia": "6565868036138018304",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+    "credit": "Mistry et al. 2023"
+  },
+  "radius": {
+    "value": 0.7934,
+    "source": "Mistry et al. 2023, the stellar radius of the default parameter set of TOI-4308 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+    "uncertainty": 0.0465
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Mistry et al. 2023, the stellar mass of the default parameter set of TOI-4308 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+    "uncertainty": 0.1133
+  },
+  "temperature": {
+    "value": 5243,
+    "source": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-4308 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract",
+    "uncertainty": 126
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4308 b crosses TOI-4308 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mistry et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MISTRY_ET_AL_2023): st_teff 5243, st_rad 0.7934, st_mass 0.9"
+  },
+  "notes": [],
+  "order": 4395
+}

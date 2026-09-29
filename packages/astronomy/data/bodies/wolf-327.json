@@ -1,0 +1,30 @@
+{
+ "id": "wolf-327",
+ "classification": "star",
+ "order": 4857,
+ "physical": {
+  "name": "Wolf 327",
+  "horizonsCode": null,
+  "meanRadiusKm": 282454.2,
+  "gravitationalParameterKm3PerS2": 53748538216.98545,
+  "parent": null,
+  "effectiveTemperatureK": 3542
+ },
+ "physicalNotes": "Radius 0.406 +/- 0.015 solar radii from Murgas et al. 2024, the stellar radius of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract): 282,454 km at 695,700 km per solar radius. Mass 0.405 +/- 0.019 solar masses from Murgas et al. 2024, the stellar mass of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract); GM is that mass times the JPL solar GM. Temperature 3542 +/- 70 K from Murgas et al. 2024, the stellar temperature of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 148.3783050027284,
+  "declinationDegrees": 35.5705234945256,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 28.572408910335216,
+  "properMotionRaMasPerYear": -87.75994574280055,
+  "properMotionDecMasPerYear": -177.13504162180595,
+  "radialVelocityKmPerS": 9.388398,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 796185407950360192 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wolf-327/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 34.9988 +/- 0.0282 mas (same row, RUWE 1.33): 28.57 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -87.760, -177.135 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 9.39 +/- 0.42 km/s"
+  }
+ }
+}

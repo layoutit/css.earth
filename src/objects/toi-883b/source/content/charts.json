@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-883b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-883b-orbits",
+      "title": "TOI-883 b: orbits around TOI-883",
+      "output": "toi-883b-system-orbits.svg",
+      "system": "toi-883",
+      "highlight": "toi-883b",
+      "description": "The orbits of TOI-883's planets in this map from above, to scale, with TOI-883 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): P 10.05771848538 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-883b-transit",
+      "title": "TOI-883 b: its transit",
+      "description": "TOI-883 b crossing its star, as TESS recorded it: 2 sectors (33, 87) of the SPOC pipeline's 2-minute light curves of TIC 123846039, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-883b-transit.svg",
+      "metadata": {
+        "tic": "TIC 123846039",
+        "sectors": [
+          33,
+          87
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-883b",
+      "sources": [
+        "photometry/tess/tess2020351194500-s0033-0000000123846039-0203-s_lc.fits",
+        "photometry/tess/tess2024353092137-s0087-0000000123846039-0284-s_lc.fits"
+      ],
+      "durationHours": 3.692482,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 33, 87",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

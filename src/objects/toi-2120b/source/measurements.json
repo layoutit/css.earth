@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-2120b",
+  "radiusKm": 13534.3,
+  "radiusSource": "Radius 0.18931249 Jupiter radii from Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract): 13,534.3 km at 71,492 km per Jupiter radius. No mass is measured: Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract) gives only an upper limit of 0.02139519 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.7998164,
+  "orbitalPeriodSource": "Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): P 5.7998164 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-2120 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.02139519 Jupiter masses: Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)."
+}

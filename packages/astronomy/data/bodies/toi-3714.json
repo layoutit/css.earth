@@ -1,0 +1,30 @@
+{
+ "id": "toi-3714",
+ "classification": "star",
+ "order": 4366,
+ "physical": {
+  "name": "TOI-3714",
+  "horizonsCode": null,
+  "meanRadiusKm": 354807,
+  "gravitationalParameterKm3PerS2": 70337593222.22787,
+  "parent": null,
+  "effectiveTemperatureK": 3660
+ },
+ "physicalNotes": "Radius 0.51 +/- 0.01 solar radii from Cañas et al. 2022, the stellar radius of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract): 354,807 km at 695,700 km per solar radius. Mass 0.53 +/- 0.02 solar masses from Cañas et al. 2022, the stellar mass of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract); GM is that mass times the JPL solar GM. Temperature 3660 +/- 90 K from Cañas et al. 2022, the stellar temperature of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 69.55234508139512,
+  "declinationDegrees": 39.4579936460994,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 113.14103214309412,
+  "properMotionRaMasPerYear": 19.826119803750334,
+  "properMotionDecMasPerYear": -70.76231775788699,
+  "radialVelocityKmPerS": 33.25154,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 178924390478792320 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-3714/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 8.8385 +/- 0.0219 mas (same row, RUWE 1.15): 113.14 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 19.826, -70.762 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 33.25 +/- 2.29 km/s"
+  }
+ }
+}

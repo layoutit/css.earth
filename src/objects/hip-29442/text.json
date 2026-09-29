@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-29442",
+  "card": {
+    "text": "3 planets cross TOI-469 as seen from Earth: b, HIP 29442 c, HIP 29442 d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450472",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E/abstract",
+        "label": "Egger et al. (2024), Astronomy & Astrophysics 688 A223",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname EGGER_ET_AL__2024): st_teff 5289, st_rad 0.98, st_mass 0.901"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Egger et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450472",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E/abstract",
+        "label": "Egger et al. (2024), Astronomy & Astrophysics 688 A223",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname EGGER_ET_AL__2024): st_teff 5289, st_rad 0.98, st_mass 0.901"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

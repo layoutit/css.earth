@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hats-71",
+  "displayName": "HATS-71",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.48 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab8ad1",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B",
+          "label": "Bakos et al. (2020), The Astronomical Journal 159 267",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "141 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hats-71",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hats-71-lens-color.webp",
+        "surface": "hats-71-surface-color@2x.webp",
+        "poles": "hats-71-poles-color@2x.webp",
+        "source": {
+          "id": "hats-71-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,405 K and log g 4.77 (u1 0.168, u2 0.441): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bakos et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract",
+      "credit": "Bakos et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hats-71.json",
+      "credit": "Bakos et al. 2020, the stellar radius of the default parameter set of HATS-71 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-341b",
+  "card": {
+    "text": "GJ 341 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+        "label": "DiTomasso et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.5768334, pl_radj 0.07850848, pl_bmassj 0.01258541"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around GJ 341. Its orbit and size follow DiTomasso et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+        "label": "DiTomasso et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.5768334, pl_radj 0.07850848, pl_bmassj 0.01258541"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/archive-spectra/transmission.csv",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%27HAT-P-26+b%27+order+by+centralwavelng&format=csv"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/tess/tess2022085151738-s0050-0000000420779000-0222-s_lc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022085151738-s0050-0000000420779000-0222-s_lc.fits"
+    }
+  ]
+}

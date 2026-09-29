@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1038-s41586-023-05934-8",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Peterson et al. (2023): A temperate Earth-sized planet with tidal heating transiting an M6 star",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/s41586-023-05934-8"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023Natur.617..701P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Peterson et al. (2023), Nature 617 701-705",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P"
+    }
+  ],
+  "publisher": "Nature 617 701-705",
+  "creators": [
+    "Merrin S. Peterson",
+    "Björn Benneke",
+    "Karen Collins",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

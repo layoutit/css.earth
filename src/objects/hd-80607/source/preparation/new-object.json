@@ -1,0 +1,40 @@
+{
+  "id": "hd-80607",
+  "name": "HD 80607",
+  "system": "HD 80606 system",
+  "description": "Star bound to HD 80606, 1,355 AU away.",
+  "gaia": "1019003329101872896",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 1.016,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 457134361 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.059
+  },
+  "mass": {
+    "value": 0.97,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 457134361 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.13
+  },
+  "temperature": {
+    "value": 5538.3,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 457134361 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 139
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 80607 is a star of 5,538 K, bound to HD 80606 1,355 AU away.",
+    "introduction": "HD 80607 shares its motion through space with HD 80606, 1,355 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 1019003226022657920 and 1019003329101872896, sep_AU 1354.649307306259288, R_chance_align 3.649506517497909033e-06"
+  },
+  "notes": [
+    "HD 80607's orbit around HD 80606 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 3237
+}

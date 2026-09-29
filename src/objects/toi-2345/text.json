@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2345",
+  "card": {
+    "text": "2 planets cross TOI-2345 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1806",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract",
+        "label": "Eschen et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2614-2636",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESCHEN_ET_AL_2025): st_teff 4687, st_rad 0.729, st_mass 0.727"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Eschen et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1806",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract",
+        "label": "Eschen et al. (2025), Monthly Notices of the Royal Astronomical Society 544 2614-2636",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESCHEN_ET_AL_2025): st_teff 4687, st_rad 0.729, st_mass 0.727"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

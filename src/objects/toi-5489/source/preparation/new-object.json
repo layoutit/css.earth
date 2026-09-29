@@ -1,0 +1,39 @@
+{
+  "id": "toi-5489",
+  "name": "TOI-5489",
+  "system": "TOI-5489 system",
+  "description": "Star of 3,547 K, 45.1 parsecs away, with 2 transiting planets.",
+  "target": "TOI-5489",
+  "gaia": "602498085299079680",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+    "credit": "Gomez Barrientos et al. 2026"
+  },
+  "radius": {
+    "value": 0.42,
+    "source": "Gomez Barrientos et al. 2026, the stellar radius of the default parameter set of TOI-5489 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.41,
+    "source": "Gomez Barrientos et al. 2026, the stellar mass of the default parameter set of TOI-5489 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3547,
+    "source": "Gomez Barrientos et al. 2026, the stellar temperature of the default parameter set of TOI-5489 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-5489 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Gomez Barrientos et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_BARRIENTOS_ET_AL_2026): st_teff 3547, st_rad 0.42, st_mass 0.41"
+  },
+  "notes": [],
+  "order": 4526
+}

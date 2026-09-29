@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6564",
+  "card": {
+    "text": "TOI-6564 b crosses TOI-6564 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag1053",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract",
+        "label": "Battley et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag1053",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BATTLEY_ET_AL_2026): st_teff 5943, st_rad 1.7, st_mass 1.18"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Battley et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag1053",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract",
+        "label": "Battley et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag1053",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BATTLEY_ET_AL_2026): st_teff 5943, st_rad 1.7, st_mass 1.18"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

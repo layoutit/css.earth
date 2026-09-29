@@ -1,0 +1,39 @@
+{
+  "id": "toi-1898",
+  "name": "TOI-1898",
+  "system": "TOI-1898 system",
+  "description": "Star of 6,241 K, 79.7 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1898",
+  "gaia": "644224345413418880",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 1.6131,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1898 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0292
+  },
+  "mass": {
+    "value": 1.2484,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1898 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0261
+  },
+  "temperature": {
+    "value": 6241,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1898 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 88
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1898 b crosses TOI-1898 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 6241, st_rad 1.6131, st_mass 1.2484"
+  },
+  "notes": [],
+  "order": 4198
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-80606b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.032 Jupiter radii from Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "4.1641 Jupiter masses: Pearson et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....164..178P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive ps table (pl_refname PEARSON_ET_AL__2022): P 111.436765 d; Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive ps table (pl_refname PEARSON_ET_AL__2022): a/R* 94.452; Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive ps table (pl_refname PEARSON_ET_AL__2022): inclination 89.24 degrees; Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive ps table (pl_refname PEARSON_ET_AL__2022): e 0.93183; Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive ps table (pl_refname PEARSON_ET_AL__2022): omega -58.887 degrees, stored as 301.113; Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive ps table (pl_refname PEARSON_ET_AL__2022): transit mid-time 2458888.07466 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract"
+      ]
+    }
+  ]
+}

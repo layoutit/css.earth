@@ -1,0 +1,45 @@
+{
+  "id": "hat-p-1",
+  "name": "HAT-P-1",
+  "system": "HAT-P-1 system",
+  "description": "Star of 5,980 K, 159 parsecs away, with 1 transiting planet.",
+  "target": "HAT-P-1",
+  "gaia": "1928431764627661440",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+    "credit": "Nikolov et al. 2014"
+  },
+  "radius": {
+    "value": 1.174,
+    "source": "Nikolov et al. 2014, the stellar radius of the default parameter set of HAT-P-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+    "uncertainty": 0.026
+  },
+  "mass": {
+    "value": 1.151,
+    "source": "Nikolov et al. 2014, the stellar mass of the default parameter set of HAT-P-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+    "uncertainty": 0.052
+  },
+  "temperature": {
+    "value": 5980,
+    "source": "Nikolov et al. 2014, the stellar temperature of the default parameter set of HAT-P-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract",
+    "uncertainty": 49
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-1 b crosses HAT-P-1 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Nikolov et al. 2014.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NIKOLOV_ET_AL__2014): st_teff 5980, st_rad 1.174, st_mass 1.151",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/ADS_16402",
+      "title": "ADS 16402",
+      "revision": "1369429338",
+      "card": "The secondary star ADS 16402 B is also designated HAT-P-1."
+    }
+  },
+  "notes": [],
+  "order": 3109
+}

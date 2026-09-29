@@ -120,7 +120,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       throw new TypeError('World context planning requires a matching frame, body state and measured viewport.');
     }
     const bodies = prepared.map((entry, index) => {
-      const state = (entry.state ??= { ...entry, ...view.bodies[index], index, indicatorCutout: false }) as typeof entry & WorldBodyPresentation & { index: number; indicatorCutout: boolean };
+      const state = (entry.state ??= { ...entry, ...view.bodies[index], index, indicatorCutout: false, retired: false }) as typeof entry & WorldBodyPresentation & { index: number; indicatorCutout: boolean; retired: boolean };
       Object.assign(state, view.bodies[index]); state.indicatorCutout = false;
       return state;
     });
@@ -129,11 +129,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
     const opacity = systemFade.update(world.pose.positionM);
-    const focusDistanceM = Math.hypot(
-      world.pose.positionM[0] - plan.focus.positionM[0],
-      world.pose.positionM[1] - plan.focus.positionM[1],
-      world.pose.positionM[2] - plan.focus.positionM[2],
-    );
+    const focusDistanceM = Math.hypot(world.pose.positionM[0] - plan.focus.positionM[0], world.pose.positionM[1] - plan.focus.positionM[1], world.pose.positionM[2] - plan.focus.positionM[2]);
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       // The camera rotation applied to the camera-relative position, fused: one array per point instead of two, the same
       // arithmetic in the same order. toEyeAt reads a prepared vertex without building an input array.
@@ -236,8 +232,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const bodyOrbitOpacity = isOrbitFocus ? ownOrbitOpacity : !orbitOverview && !nearSelected &&
           !entry.hovered && entry.highlighted !== true && body.id !== emphasizedId ? orbitOpacity * ownOrbitOpacity : orbitOpacity;
         const systemOpacity = systemFade.of(entry.index);
+        // A body of a faded-out system that nothing targets or shows has no marker, path or caption: the stub, unprojected.
+        const retiredWithSystem = entry.retired = systemOpacity === 0 && entry.orbit !== null && !ownsDetail && !isOrbitFocus && body.id !== emphasizedId &&
+          body.id !== selectionPreview && !entry.hovered && entry.highlighted !== true && !entry.indicatorShown && !entry.labelShown;
         // Category visibility never removes the object the user is inspecting.
-        if (entry.bodyHidden && !isSelected) {
+        if (entry.bodyHidden && !isSelected || retiredWithSystem) {
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
           const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false,
@@ -375,6 +374,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // normal browser clipping. The viewport width still owns density only.
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
       for (const projected of projectedBodies) {
+        if (projected.entry.retired) continue; // retired with its faded system: never named
         const { entry, x, y, diameter, annotationVisible, hovered, priority } = projected;
         let { circle } = projected;
         const { body, labelSize: size } = entry;

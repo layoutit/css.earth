@@ -1,0 +1,40 @@
+{
+  "host": "wasp-10",
+  "planets": [
+    {
+      "id": "wasp-10b",
+      "name": "WASP-10 b",
+      "description": "Transiting planet of WASP-10 with a 3.09-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract",
+        "credit": "Johnson et al. 2009"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "JOHNSON_ET_AL__2009"
+      },
+      "text": {
+        "card": "WASP-10 b was found in 2008 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-10. Its orbit and size follow Johnson et al. 2009's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOHNSON_ET_AL__2009): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.09272826, pl_radj 1.08, pl_bmassj 3.15",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-10b",
+          "title": "WASP-10b",
+          "revision": "1374241985",
+          "card": "WASP-10b is an extrasolar planet discovered in 2008 by SuperWASP using the transit method.",
+          "introduction": "It takes about three days to orbit around WASP-10."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1152,
+        "uncertaintyK": 36,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Kammer et al. 2015, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract",
+        "chosen": "2 measured of 3 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 4766
+    }
+  ]
+}

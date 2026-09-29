@@ -144,7 +144,7 @@ instead of editing a shared list or atlas position.
 | Source sampling, position welding, compaction, meshoptimizer simplification and topology checks | `packages/bake/src/objects/geometry/radial-mesh.ts` |
 | Per-texel lighting and material atlas baking | `packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts` |
 | PDS radius values / OBJ radial intersections | `packages/bake/src/objects/raster/pds/pds-scalar-grid.ts`, `packages/bake/src/objects/geometry/obj-shape.ts` |
-| Geometry regressions and independent body anchors | `tests/objects/terrestrial/radial-meshoptimizer.test.mts`, `tests/objects/terrestrial/radial-terrain.test.mts`, `tests/objects/unit/vesta/source.test.mts` |
+| Geometry regressions and independent body anchors | `packages/bake/src/objects/geometry/radial-meshoptimizer.test.mts`, `packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.test.mts`, `tests/objects/unit/vesta/source.test.mts` |
 
 The OBJ sampler supplies radius by ray intersection; this route resamples the
 shape and does not retain arbitrary OBJ connectivity or UVs. It is not proof of
@@ -208,7 +208,7 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | The second star of a close pair that a planet orbits | Astronomy record `classification: star` with a `hostedOrbit` around the placed primary (Gaia does not resolve the pair); scaffolded by `packages/telescope-cli/src/new-object/new-hosted-planet.mts --self-luminous`, which keeps the star class and a temperature catalogue colour | VHS 1256-1257 B (Dupuy et al. 2023), ROXs 42B B (Inglis et al. 2026) | `hostedOrbits.test.ts` reproduces each paper's measured positions of B around A | Posterior medians of a bimodal (omega, Omega) posterior may mix modes; the measured positions decide |
 | A star with no spectrum or catalogue temperature of its own | `stellar-photometric-color` with `spectrum: planck` and `temperature.published` (kelvin, bounds, citation with URL) instead of a catalogue row (`packages/bake/src/objects/stellar/stellar-photometric-color.ts`) | The six stars of VHS 1256-1257, GQ Lup, DH Tau and ROXs 42B | `stellar-photometric-color.test.mts` | No limb darkening unless a law is cited |
 | A placed star whose spin axis is measured against its planet's orbit | `cssearth-measured-obliquity-pole@1` (projected obliquity, stellar inclination, true obliquity checked against them, equatorial period; `packages/bake/src/objects/scene/authored-rotation.ts`) or `cssearth-orbit-aligned-pole@1` when only an aligned projected angle is measured | HD 189733 A (Cristo et al. 2024); WASP-43 (aligned) | `tests/objects/scene/authored-rotation.test.mts`, `tests/objects/unit/hd-189733/source.test.mts` | The axis's position angle on the sky follows the orbit's display convention |
-| An eclipse map deposited without grid arrays or covering unobserved longitudes | `npy-dictionary-map` with `gridLayout: pixel-centres` and `visibleLongitudes` (ThERESA's rule from the deposit's own observation times) | HD 189733b `temperature` (Lally et al. 2025, output_E.npy) | `tests/objects/terrestrial/npy-pickle.test.mts`, `tests/objects/unit/hd-189733b/eclipse-map.test.mts` | Unobserved columns are missing data, as in the authors' figures |
+| An eclipse map deposited without grid arrays or covering unobserved longitudes | `npy-dictionary-map` with `gridLayout: pixel-centres` and `visibleLongitudes` (ThERESA's rule from the deposit's own observation times) | HD 189733b `temperature` (Lally et al. 2025, output_E.npy) | `packages/bake/src/objects/raster/numpy/npy-pickle.test.mts`, `tests/objects/unit/hd-189733b/eclipse-map.test.mts` | Unobserved columns are missing data, as in the authors' figures |
 | A placed star with no measured rotation axis | `cssearth-display-orientation@1` rotation record with the pole set to sky north in the plane of the sky and `displayMeridianDegrees` facing the Earth; star record `presentationUp: display-axis` (`packages/astronomy/src/stars.ts`, read by `packages/bake/cli/prepare-solar-geometry.mts`) so the presentation frame and the camera orbit use that axis instead of the ecliptic pole | π¹ Gruis `pionier`: Paladini's image-ready PIONIER OIFITS from the OiDB read as is, `packages/bake/src/objects/layers/observation/interferometry/oifits-rows.ts` for the per-channel fit | `tests/objects/unit/pi1-gruis/{camera,default-view}.test.mts` | The axis is a labelled convention; a star far from the ecliptic would otherwise never face its sub-Earth point |
 | A default camera angle, a body orientation or an off-limb plate turn | Nothing authored: `packages/bake/src/objects/scene/default-camera.ts` derives the camera (photograph frames, a self-luminous body facing the Sun, or the lit design pose); the world-navigation stage solves the system node so the drawn body is in the ecliptic presentation frame; `prepareSkyNorthScreenAngleDegrees` turns the plate. Recipes that state `initialScenePitchDegrees`, `defaultControlYawDegrees` or `offLimb.rotationDegrees` are refused | Amalthea (photo mosaic), Betelgeuse (star and plate), Callisto (lit pose) | `packages/bake/src/objects/default-view/default-view.ts` measures the result through the runtime camera math | The world-navigation stage owns the pose: `node site/build/prepare/prepare-object-json.mts --keep-bindings` re-applies a rule change to every object in seconds; the five planet lanes bake lighting at the rule's pitch and re-bake only when it changes |
 | The default camera of a photograph lens on the planet route | `packages/bake/src/objects/default-view/default-view.ts` (`assertDefaultViewFacesLens`, run by `prepare-authored` for every `surface-observation` lens) | Betelgeuse `default-view.test.mts` | The runtime's scene matrix and `worldCameraFromPresentation` give the sub-camera point and the screen angle of any direction without a browser | Preparation refuses a default view more than 25 degrees from the lens's sub-observer point; the test pins the browser-measured angles |
@@ -384,7 +384,7 @@ if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 
 The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tests/oracles/` holds them with a
-pinned Python environment (`node tests/oracles/setup.mts`, `tests/oracles/requirements.txt`),
+pinned Python environment (`node packages/core/src/node/oracle/setup.mts`, `packages/core/src/node/oracle/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions, input
 paths and byte counts. Existing decoder references include
 SpiceyPy for `@cssearth/spice` (a microsecond in time, a millimetre in position, a
@@ -401,7 +401,7 @@ fixtures. Camera controls still need their geometric checks. Regenerate a fixtur
 only when its tool or inputs change, and say so in the PR. ALE and usgscsm (pixel models and
 distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
 photometric models are checked against the truth files of their unit tests,
-which need no ISIS install. See `tests/oracles/README.md`.
+which need no ISIS install. See `packages/core/src/node/oracle/README.md`.
 
 For SUM/INFO image-to-shape investigations, use the optional
 [native SBMT preparation oracle](../../../../tests/oracles/sbmt/README.md).
@@ -425,7 +425,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Restore missing declared source files | `node packages/bake/cli/object-operations.mts acquire <id>` |
 | Check declared source-file coverage without acquiring | `node packages/bake/cli/object-operations.mts acquire <id> --verify-only`; this does not verify source digests |
 | Prepare selected objects and the shared steps | `pnpm prepare:objects -- --object=<id>` |
-| Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, then `node tests/oracles/run.mts [group/name ...]` |
+| Create the oracle environment and regenerate oracle fixtures | `node packages/core/src/node/oracle/setup.mts`, then `node packages/core/src/node/oracle/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node site/build/prepare/prepare-authored.ts <id> --write` |
 | Prepare one authored object end to end, resumable by step | `node packages/bake/cli/prepare-object.mts <id> [--from <step>] [--reuse-images]` (a paged-ellipsoid or raster body redraws only its lighting and atmosphere banks by default when nothing else changed; `prepare-authored.ts <id> --write --full` bakes everything; `--reuse-images` forces the redraw-only run and stops after the prepare step): stale install and builds, reader text budgets and the Sun's installed files, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
 | Say which build a run would read stale | `node packages/bake/cli/check-stale-builds.mts` |

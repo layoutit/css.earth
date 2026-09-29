@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-286",
+  "card": {
+    "text": "TOI-286 c crosses TOI-286 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450505",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract",
+        "label": "Hobson et al. (2024), Astronomy & Astrophysics 688 A216",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOBSON_ET_AL_2024): st_teff 5152, st_rad 0.78, st_mass 0.832"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hobson et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450505",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract",
+        "label": "Hobson et al. (2024), Astronomy & Astrophysics 688 A216",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOBSON_ET_AL_2024): st_teff 5152, st_rad 0.78, st_mass 0.832"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

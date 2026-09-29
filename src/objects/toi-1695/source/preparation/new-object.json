@@ -1,0 +1,39 @@
+{
+  "id": "toi-1695",
+  "name": "TOI-1695",
+  "system": "TOI-1695 system",
+  "description": "Star of 3,690 K, 45.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1695",
+  "gaia": "534988616816537728",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+    "credit": "Cherubim et al. 2023"
+  },
+  "radius": {
+    "value": 0.515,
+    "source": "Cherubim et al. 2023, the stellar radius of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.513,
+    "source": "Cherubim et al. 2023, the stellar mass of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+    "uncertainty": 0.012
+  },
+  "temperature": {
+    "value": 3690,
+    "source": "Cherubim et al. 2023, the stellar temperature of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1695 b crosses TOI-1695 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Cherubim et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHERUBIM_ET_AL_2023): st_teff 3690, st_rad 0.515, st_mass 0.513"
+  },
+  "notes": [],
+  "order": 4095
+}

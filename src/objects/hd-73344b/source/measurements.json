@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-73344b",
+  "radiusKm": 18394.4,
+  "radiusSource": "Radius 0.25729369 Jupiter radii from Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract): 18,394.4 km at 71,492 km per Jupiter radius. No mass is measured: Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract) gives only an upper limit of 0.03297377 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 15.611,
+  "orbitalPeriodSource": "Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): P 15.611 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 73344 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.03297377 Jupiter masses: Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract)."
+}

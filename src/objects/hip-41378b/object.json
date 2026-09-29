@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-41378b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 41378 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 16838.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-41378b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 41378 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 21859412.5,
+      "description": "HIP 41378 b was found in 2016 by K2 as it crossed its star.",
+      "systemName": "HIP 41378 system",
+      "order": 3253,
+      "context": {
+        "order": 3253
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1920337413261198800,
+        2584259015755927600,
+        572367533585770600
+      ],
+      "presentationToReference": [
+        -0.6036993280971461,
+        0.7903471761676729,
+        0.10439570095956988,
+        0.7777691804286178,
+        0.6126485622281334,
+        -0.14048786842712546,
+        0.1749920661928728,
+        0.0036166729996601624,
+        0.98456320083881
+      ],
+      "orbitUpReference": [
+        -0.7903471761676729,
+        -0.6126485622281334,
+        -0.0036166729996601624
+      ],
+      "metersPerUnit": 54316.77419354839,
+      "bodyRadiusM": 16838200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-5938b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-5938b-orbits",
+      "title": "TOI-5938 b: orbits around TOI-5938",
+      "output": "toi-5938b-system-orbits.svg",
+      "system": "toi-5938",
+      "highlight": "toi-5938b",
+      "description": "The orbits of TOI-5938's planets in this map from above, to scale, with TOI-5938 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Morello et al. 2026 (2026MNRAS.549ag183M), via the NASA Exoplanet Archive ps table (pl_refname MORELLO_ET_AL_2026): P 2.260424 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-5938b-transit",
+      "title": "TOI-5938 b: its transit",
+      "description": "TOI-5938 b crossing its star, as TESS recorded it: 2 sectors (81, 82) of the SPOC pipeline's 2-minute light curves of TIC 452508760, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 7 minutes at these dates, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-5938b-transit.svg",
+      "metadata": {
+        "tic": "TIC 452508760",
+        "sectors": [
+          81,
+          82
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-5938b",
+      "sources": [
+        "photometry/tess/tess2024196212429-s0081-0000000452508760-0276-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000452508760-0278-s_lc.fits"
+      ],
+      "durationHours": 1.915,
+      "binMinutes": 8,
+      "alignMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 81, 82",
+        "Aligned on TESS's dip, 4 min late; 8-min bins.",
+        "The ephemeris's own 1σ there is 2 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

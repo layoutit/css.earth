@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1246b",
+  "radiusKm": 19198.1,
+  "radiusSource": "Radius 0.26853468 Jupiter radii from Turtelboom et al. 2022 (2022AJ....163..293T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract): 19,198.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02548545 Jupiter masses (Turtelboom et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..293T), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.30745132484,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.30745132484 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1246 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02548545 Jupiter masses: Turtelboom et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..293T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract)."
+}

@@ -39,7 +39,7 @@ packages/fits/
 ## Evidence
 
 The package's tests are self-contained. The comparisons with Astropy live beside the scripts that write their fixtures
-in [`tests/oracles/fits/`](../../tests/oracles/README.md). `node tests/oracles/test-fits.mts --unit` runs all of them
+in [`tests/oracles/fits/`](../../packages/core/src/node/oracle/README.md). `node tests/oracles/test-fits.mts --unit` runs all of them
 offline.
 
 ESM, CommonJS and declarations are built with tsup, like the other packages. From the repository root:

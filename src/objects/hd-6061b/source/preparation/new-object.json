@@ -1,0 +1,24 @@
+{
+  "host": "hd-6061",
+  "planets": [
+    {
+      "id": "hd-6061b",
+      "name": "HD 6061 b",
+      "description": "Transiting planet of HD 6061 with a 5.25-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HD 6061 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 6061. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.2544884, pl_radj 0.21657951, pl_bmassj 0.03146352"
+      },
+      "order": 3227
+    }
+  ]
+}

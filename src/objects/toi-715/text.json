@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-715",
+  "card": {
+    "text": "TOI-715 b crosses TOI-715 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1439",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract",
+        "label": "Dransfield et al. (2024), Monthly Notices of the Royal Astronomical Society 527 35-52",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DRANSFIELD_ET_AL_2024): st_teff 3075, st_rad 0.24, st_mass 0.225"
+      },
+      {
+        "catalogueId": "wikipedia-toi-715",
+        "url": "https://en.wikipedia.org/wiki/TOI-715",
+        "label": "Wikipedia, \"TOI-715\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442455",
+        "quote": "TOI-715 is a red dwarf star located 42 parsecs (140 ly) from the Earth in the constellation Volans, very close to the southern celestial pole."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Dransfield et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1439",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract",
+        "label": "Dransfield et al. (2024), Monthly Notices of the Royal Astronomical Society 527 35-52",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DRANSFIELD_ET_AL_2024): st_teff 3075, st_rad 0.24, st_mass 0.225"
+      },
+      {
+        "catalogueId": "wikipedia-toi-715",
+        "url": "https://en.wikipedia.org/wiki/TOI-715",
+        "label": "Wikipedia, \"TOI-715\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442455",
+        "quote": "It hosts one confirmed exoplanet, named TOI-715 b, a super-Earth orbiting in its habitable zone."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "iras-04125-2902",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "IRAS 04125+2902",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1008765
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/iras-04125-2902-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "IRAS 04125+2902",
+      "classification": "star",
+      "color": "#ffd5a9",
+      "distanceAu": 33016004.4,
+      "description": "IRAS 04125+2902 b crosses IRAS 04125+2902 as seen from Earth, which is how it was found.",
+      "systemName": "IRAS 04125+2902 system",
+      "order": 3268,
+      "context": {
+        "order": 3265
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1895485608215443700,
+        3874023764306446300,
+        2407076987331749000
+      ],
+      "presentationToReference": [
+        0.3837693956540391,
+        0.21418775221291525,
+        0.8982453215916643,
+        0.7843540211199015,
+        0.43775955422405877,
+        -0.43949441661822564,
+        0.48734979276939755,
+        -0.8732068366014619,
+        3.051564845522191e-7
+      ],
+      "orbitUpReference": [
+        -0.21418775221291525,
+        -0.43775955422405877,
+        0.8732068366014619
+      ],
+      "metersPerUnit": 3254080.64516129,
+      "bodyRadiusM": 1008765000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

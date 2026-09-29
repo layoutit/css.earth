@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac0157",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cloutier et al. (2021): TOI-1634 b: An Ultra-short-period Keystone Planet Sitting inside the M-dwarf Radius Valley",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2103.12790"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac0157"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021AJ....162...79C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac0157",
+      "label": "The Astronomical Journal 162 79"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cloutier et al. (2021), The Astronomical Journal 162 79",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 79",
+  "creators": [
+    "Ryan Cloutier",
+    "David Charbonneau",
+    "Keivan G. Stassun",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

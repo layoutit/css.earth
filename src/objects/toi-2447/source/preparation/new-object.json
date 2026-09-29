@@ -1,0 +1,39 @@
+{
+  "id": "toi-2447",
+  "name": "TOI-2447",
+  "system": "TOI-2447 system",
+  "description": "Star of 5,730 K, 149 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2447",
+  "gaia": "4877544322252002048",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract",
+    "credit": "Gill et al. 2024"
+  },
+  "radius": {
+    "value": 1.006,
+    "source": "Gill et al. 2024, the stellar radius of the default parameter set of TOI-2447 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract",
+    "uncertainty": 0.009
+  },
+  "mass": {
+    "value": 1.034,
+    "source": "Gill et al. 2024, the stellar mass of the default parameter set of TOI-2447 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract",
+    "uncertainty": 0.032
+  },
+  "temperature": {
+    "value": 5730,
+    "source": "Gill et al. 2024, the stellar temperature of the default parameter set of TOI-2447 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2447 b crosses TOI-2447 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gill et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GILL_ET_AL_2024): st_teff 5730, st_rad 1.006, st_mass 1.034"
+  },
+  "notes": [],
+  "order": 4913
+}

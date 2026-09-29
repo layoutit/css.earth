@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "au-mic-c",
+  "card": {
+    "text": "AU Mic c was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450047",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+        "label": "Mallorquín et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQUIN_ET_AL_2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 18.859019, pl_radj 0.24890756, pl_bmassj 0.04549625"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around AU Mic. Its orbit and size follow Mallorquín et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450047",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract",
+        "label": "Mallorquín et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQUIN_ET_AL_2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 18.859019, pl_radj 0.24890756, pl_bmassj 0.04549625"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

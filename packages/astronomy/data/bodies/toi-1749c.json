@@ -1,0 +1,31 @@
+{
+ "id": "toi-1749c",
+ "classification": "exoplanet",
+ "order": 4124,
+ "physical": {
+  "name": "TOI-1749 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 13521.6,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-1749"
+ },
+ "physicalNotes": "Radius 0.18913406 Jupiter radii from Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract): 13,521.6 km at 71,492 km per Jupiter radius. No mass is measured: Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract) gives only an upper limit of 0.04404893 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.48913668478,
+  "semiMajorAxisStellarRadii": 17.3199,
+  "inclinationDegrees": 88.8,
+  "eccentricity": 0.019,
+  "argumentOfPeriapsisDegrees": 286,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59762.823055,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.48913668478 d",
+   "shape": "Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2021): a/R* derived from its semi-major axis 0.0443 au and stellar radius 0.55 solar radii; Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2021): inclination 88.8 degrees",
+   "eccentricity": "Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2021): e 0.019",
+   "argumentOfPeriapsis": "Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_ET_AL__2021): omega -74 degrees, stored as 286",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459763.323055 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

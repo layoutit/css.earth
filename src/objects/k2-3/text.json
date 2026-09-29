@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-3",
+  "card": {
+    "text": "3 planets cross K2-3 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac7807",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+        "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DIAMOND_LOWE_ET_AL__2022): st_teff 3844, st_rad 0.546, st_mass 0.549"
+      },
+      {
+        "catalogueId": "wikipedia-k2-3",
+        "url": "https://en.wikipedia.org/wiki/K2-3",
+        "label": "Wikipedia, \"K2-3\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1352666720",
+        "quote": "K2-3, also known as EPIC 201367065, is a red dwarf star with three known planets."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Diamond-Lowe et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac7807",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+        "label": "Diamond-Lowe et al. (2022), The Astronomical Journal 164 172",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DIAMOND_LOWE_ET_AL__2022): st_teff 3844, st_rad 0.546, st_mass 0.549"
+      },
+      {
+        "catalogueId": "wikipedia-k2-3",
+        "url": "https://en.wikipedia.org/wiki/K2-3",
+        "label": "Wikipedia, \"K2-3\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1352666720",
+        "quote": "It is on the borderline of being a late orange dwarf/K-type star, but because of its temperature, it is classified as a red dwarf."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

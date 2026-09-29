@@ -1,0 +1,41 @@
+{
+  "id": "toi-771",
+  "name": "TOI-771",
+  "system": "TOI-771 system",
+  "description": "Star of 3,370 K, 25.3 parsecs away, with 1 transiting planet.",
+  "target": "TOI-771",
+  "gaia": "5229384714547758720",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+    "credit": "Lacedelli et al. 2025"
+  },
+  "radius": {
+    "value": 0.232,
+    "source": "Lacedelli et al. 2025, the stellar radius of the default parameter set of TOI-771 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.22,
+    "source": "Lacedelli et al. 2025, the stellar mass of the default parameter set of TOI-771 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3370,
+    "source": "Lacedelli et al. 2025, the stellar temperature of the default parameter set of TOI-771 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-771 b crosses TOI-771 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lacedelli et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LACEDELLI_ET_AL_2025): st_teff 3370, st_rad 0.232, st_mass 0.22"
+  },
+  "notes": [
+    "TOI-771 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4713
+}

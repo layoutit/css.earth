@@ -1,0 +1,39 @@
+{
+  "id": "toi-132",
+  "name": "TOI-132",
+  "system": "TOI-132 system",
+  "description": "Star of 5,397 K, 164 parsecs away, with 1 transiting planet.",
+  "target": "TOI-132",
+  "gaia": "6520880040423258240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+    "credit": "Díaz et al. 2020"
+  },
+  "radius": {
+    "value": 0.9,
+    "source": "Díaz et al. 2020, the stellar radius of the default parameter set of TOI-132 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.97,
+    "source": "Díaz et al. 2020, the stellar mass of the default parameter set of TOI-132 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 5397,
+    "source": "Díaz et al. 2020, the stellar temperature of the default parameter set of TOI-132 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+    "uncertainty": 46
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-132 b crosses TOI-132 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Díaz et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname D_IACUTE_AZ_ET_AL__2020): st_teff 5397, st_rad 0.9, st_mass 0.97"
+  },
+  "notes": [],
+  "order": 4010
+}

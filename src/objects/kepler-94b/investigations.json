@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-94b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.313 Jupiter radii from Marcy et al. 2014 (2014ApJS..210...20M), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.034 Jupiter masses: Marcy et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014ApJS..210...20M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 2.50805761 d; Marcy et al. 2014 (2014ApJS..210...20M), via the NASA Exoplanet Archive ps table (pl_refname MARCY_ET_AL__2014): a/R* derived by Kepler's third law from its period 2.50805761 d, stellar mass 0.81 and radius 0.76 solar units; Q1-Q17 DR24 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR24_KOI_TABLE): inclination 87.66 degrees; Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0; Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454955.46048 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2016ApJS..225....9H/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2024ApJS..270....8W/abstract"
+      ]
+    }
+  ]
+}

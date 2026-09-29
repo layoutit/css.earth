@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-41378",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 41378",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 904410
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-41378-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 41378",
+      "classification": "star",
+      "color": "#f4f1ff",
+      "distanceAu": 21859412.4,
+      "description": "5 planets cross HIP 41378 as seen from Earth: b, c, d, e, f.",
+      "systemName": "HIP 41378 system",
+      "order": 3252,
+      "context": {
+        "order": 3249
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1920337401959347500,
+        2584259001213230600,
+        572367527274669250
+      ],
+      "presentationToReference": [
+        -0.5872373174948489,
+        -0.10439569845537165,
+        0.8026542662226803,
+        0.7902638994772319,
+        0.14048786520087003,
+        0.5964445732122489,
+        0.17502943216640393,
+        -0.9845632015646925,
+        -4.346488543878735e-7
+      ],
+      "orbitUpReference": [
+        0.10439569845537165,
+        -0.14048786520087003,
+        0.9845632015646925
+      ],
+      "metersPerUnit": 2917451.6129032257,
+      "bodyRadiusM": 904410000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

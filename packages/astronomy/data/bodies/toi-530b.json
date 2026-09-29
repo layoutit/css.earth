@@ -1,0 +1,28 @@
+{
+ "id": "toi-530b",
+ "classification": "exoplanet",
+ "order": 4504,
+ "physical": {
+  "name": "TOI-530 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 59338.4,
+  "gravitationalParameterKm3PerS2": 50674612.76,
+  "parent": "toi-530"
+ },
+ "physicalNotes": "Radius 0.83 Jupiter radii from Gan et al. 2022 (2022MNRAS.511...83G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract): 59,338.4 km at 71,492 km per Jupiter radius. GM from the mass 0.4 Jupiter masses (Gan et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511...83G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.387573911,
+  "semiMajorAxisStellarRadii": 20.97,
+  "inclinationDegrees": 89.1,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58469.702595,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.387573911 d",
+   "shape": "Gan et al. 2022 (2022MNRAS.511...83G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL__2022): a/R* 20.97; Gan et al. 2022 (2022MNRAS.511...83G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL__2022): inclination 89.1 degrees",
+   "eccentricity": "Gan et al. 2022 (2022MNRAS.511...83G), via the NASA Exoplanet Archive ps table (pl_refname GAN_ET_AL__2022): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458470.202595 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

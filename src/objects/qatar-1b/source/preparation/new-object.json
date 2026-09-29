@@ -1,0 +1,24 @@
+{
+  "host": "qatar-1",
+  "planets": [
+    {
+      "id": "qatar-1b",
+      "name": "Qatar-1 b",
+      "description": "Transiting planet of Qatar-1 with a 1.42-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+        "credit": "Collins et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "COLLINS_ET_AL__2017"
+      },
+      "text": {
+        "card": "Qatar-1 b was found in 2010 by Qatar as it crossed its star.",
+        "introduction": "It is the only planet known around Qatar-1. Its orbit and size follow Collins et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COLLINS_ET_AL__2017): disc_year 2010, disc_facility Qatar, sy_pnum 1; pl_orbper 1.420024291, pl_radj 1.143, pl_bmassj 1.294"
+      },
+      "order": 3849
+    }
+  ]
+}

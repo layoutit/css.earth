@@ -1,0 +1,46 @@
+{
+  "id": "lhs-1478",
+  "name": "LHS 1478",
+  "system": "LHS 1478 system",
+  "description": "Star of 3,415 K, 18.2 parsecs away, with 1 transiting planet.",
+  "target": "LHS 1478",
+  "gaia": "549007291282705024",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+    "credit": "August et al. 2025"
+  },
+  "radius": {
+    "value": 0.2462,
+    "source": "August et al. 2025, the stellar radius of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.2301,
+    "source": "August et al. 2025, the stellar mass of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+    "uncertainty": 0.0054
+  },
+  "temperature": {
+    "value": 3415,
+    "source": "August et al. 2025, the stellar temperature of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+    "uncertainty": 82
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "LHS 1478 b crosses LHS 1478 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow August et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname AUGUST_ET_AL_2025): st_teff 3415, st_rad 0.2462, st_mass 0.2301",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/LHS_1478",
+      "title": "LHS 1478",
+      "revision": "1374442044",
+      "card": "LHS 1478 is a M3V-type main sequence star located 59.4 light-years from Earth in the constellation of Cassiopeia.",
+      "introduction": "It has a mass of 0.24 solar masses and a radius of 0.25 solar radii."
+    }
+  },
+  "notes": [],
+  "order": 3806
+}

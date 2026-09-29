@@ -1,0 +1,42 @@
+{
+  "id": "bell-2025-m83-halo",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The low-mass and structured stellar halo of M83 argues against a merger origin for its starburst and extended neutral hydrogen disk",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "2512.11744"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2512.11744",
+      "label": "arXiv:2512.11744"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2512.11744",
+      "checkedOn": "2026-09-29",
+      "locator": "Abstract: Subaru and HST imaging map an extended, smooth stellar halo of old, metal-poor RGB stars \"with a mass between 15 and 40 kpc\"."
+    }
+  ],
+  "creators": [
+    "E. F. Bell",
+    "B. Harmsen",
+    "M. Cosby",
+    "P. A. Price"
+  ],
+  "publisher": "arXiv:2512.11744",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Bell et al., arXiv:2512.11744.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/2512.11744"
+    }
+  ]
+}

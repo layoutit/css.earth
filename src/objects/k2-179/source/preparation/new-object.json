@@ -1,0 +1,39 @@
+{
+  "id": "k2-179",
+  "name": "K2-179",
+  "system": "K2-179 system",
+  "description": "Star of 5,015 K, 191 parsecs away, with 1 transiting planet.",
+  "target": "K2-179",
+  "gaia": "65797082206292224",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+    "credit": "Mayo et al. 2018"
+  },
+  "radius": {
+    "value": 0.768067,
+    "source": "Mayo et al. 2018, the stellar radius of the default parameter set of K2-179 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+    "uncertainty": 0.021681
+  },
+  "mass": {
+    "value": 0.824345,
+    "source": "Mayo et al. 2018, the stellar mass of the default parameter set of K2-179 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+    "uncertainty": 0.02188
+  },
+  "temperature": {
+    "value": 5015,
+    "source": "Mayo et al. 2018, the stellar temperature of the default parameter set of K2-179 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-179 b crosses K2-179 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mayo et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MAYO_ET_AL__2018): st_teff 5015, st_rad 0.768067, st_mass 0.824345"
+  },
+  "notes": [],
+  "order": 3363
+}

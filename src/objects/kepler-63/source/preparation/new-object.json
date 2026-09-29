@@ -1,0 +1,46 @@
+{
+  "id": "kepler-63",
+  "name": "Kepler-63",
+  "system": "Kepler-63 system",
+  "description": "Star of 5,576 K, 194 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-63",
+  "gaia": "2132628489996257920",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract",
+    "credit": "Sanchis-Ojeda et al. 2013"
+  },
+  "radius": {
+    "value": 0.901,
+    "source": "Sanchis-Ojeda et al. 2013, the stellar radius of the default parameter set of Kepler-63 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 0.984,
+    "source": "Sanchis-Ojeda et al. 2013, the stellar mass of the default parameter set of Kepler-63 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract",
+    "uncertainty": 0.035
+  },
+  "temperature": {
+    "value": 5576,
+    "source": "Sanchis-Ojeda et al. 2013, the stellar temperature of the default parameter set of Kepler-63 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-63 b crosses Kepler-63 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Sanchis-Ojeda et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SANCHIS_OJEDA_ET_AL__2013): st_teff 5576, st_rad 0.901, st_mass 0.984",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-63",
+      "title": "Kepler-63",
+      "revision": "1374405156",
+      "card": "Kepler-63 is a G-type main-sequence star about 638 light-years away.",
+      "introduction": "The star is much younger than the Sun, at 0.21 billion years."
+    }
+  },
+  "notes": [],
+  "order": 3775
+}

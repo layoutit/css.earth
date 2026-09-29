@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-6564b",
+  "radiusKm": 104592.8,
+  "radiusSource": "Radius 1.463 Jupiter radii from Battley et al. 2026 (2026MNRAS.549g1053B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract): 104,592.8 km at 71,492 km per Jupiter radius. GM from the mass 0.699 Jupiter masses (Battley et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.549g1053B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.985413,
+  "orbitalPeriodSource": "Battley et al. 2026 (2026MNRAS.549g1053B), via the NASA Exoplanet Archive ps table (pl_refname BATTLEY_ET_AL_2026): P 3.985413 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-6564 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.699 Jupiter masses: Battley et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.549g1053B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)."
+}

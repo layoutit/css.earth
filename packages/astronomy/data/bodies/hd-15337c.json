@@ -1,0 +1,31 @@
+{
+ "id": "hd-15337c",
+ "classification": "exoplanet",
+ "order": 3171,
+ "physical": {
+  "name": "HD 15337 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 16111.1,
+  "gravitationalParameterKm3PerS2": 2707293.72,
+  "parent": "hd-15337"
+ },
+ "physicalNotes": "Radius 0.22535501 Jupiter radii from Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract): 16,111.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02137002 Jupiter masses (Rosário et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.282R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 17.17966727335,
+  "semiMajorAxisStellarRadii": 30.785,
+  "inclinationDegrees": 88.41,
+  "eccentricity": 0.096,
+  "argumentOfPeriapsisDegrees": 56.629999999999995,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60973.824328,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 17.17966727335 d",
+   "shape": "Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): a/R* derived by Kepler's third law from its period 17.17966727335 d, stellar mass 0.829 and radius 0.855 solar units; Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): inclination 88.41 degrees",
+   "eccentricity": "Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): e 0.096",
+   "argumentOfPeriapsis": "Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): omega 56.63 degrees",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460974.324328 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

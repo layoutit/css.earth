@@ -1,0 +1,31 @@
+{
+ "id": "toi-1728b",
+ "classification": "exoplanet",
+ "order": 4109,
+ "physical": {
+  "name": "TOI-1728 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 32209.3,
+  "gravitationalParameterKm3PerS2": 10674465.29,
+  "parent": "toi-1728"
+ },
+ "physicalNotes": "Radius 0.45053082 Jupiter radii from Kanodia et al. 2020 (2020ApJ...899...29K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract): 32,209.3 km at 71,492 km per Jupiter radius. GM from the mass 0.08425888 Jupiter masses (Kanodia et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020ApJ...899...29K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.491402,
+  "semiMajorAxisStellarRadii": 13.48,
+  "inclinationDegrees": 88.31,
+  "eccentricity": 0.057,
+  "argumentOfPeriapsisDegrees": 45,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58839.2833,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Antonov et. al 2026, via the NASA Exoplanet Archive ps table (pl_refname ANTONOV_ET_AL_2026): P 3.491402 d",
+   "shape": "Kanodia et al. 2020 (2020ApJ...899...29K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2020): a/R* 13.48; Kanodia et al. 2020 (2020ApJ...899...29K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2020): inclination 88.31 degrees",
+   "eccentricity": "Kanodia et al. 2020 (2020ApJ...899...29K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2020): e 0.057",
+   "argumentOfPeriapsis": "Kanodia et al. 2020 (2020ApJ...899...29K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL__2020): omega 45 degrees",
+   "phase": "Antonov et. al 2026, via the NASA Exoplanet Archive ps table (pl_refname ANTONOV_ET_AL_2026): transit mid-time 2458839.7833 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-341",
+  "card": {
+    "text": "GJ 341 b crosses GJ 341 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+        "label": "DiTomasso et al. (2025), The Astrophysical Journal 979 214",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DITOMASSO_ET_AL__2025): st_teff 3770, st_rad 0.5066, st_mass 0.48"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow DiTomasso et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ad9dd3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+        "label": "DiTomasso et al. (2025), The Astrophysical Journal 979 214",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DITOMASSO_ET_AL__2025): st_teff 3770, st_rad 0.5066, st_mass 0.48"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

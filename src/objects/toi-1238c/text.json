@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1238c",
+  "card": {
+    "text": "TOI-1238 c was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202142128",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract",
+        "label": "González-Álvarez et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GONZALEZ_ALVAREZ_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.2947609691, pl_radj 0.18824192, pl_bmassj 0.02617765"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1238. Its orbit and size follow González-Álvarez et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202142128",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract",
+        "label": "González-Álvarez et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GONZALEZ_ALVAREZ_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.2947609691, pl_radj 0.18824192, pl_bmassj 0.02617765"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

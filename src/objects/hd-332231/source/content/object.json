@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-332231",
+  "displayName": "HD 332231",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 solar radii",
+        "source": {
+          "catalogueId": "publication-2023aj-166-33m",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M",
+          "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "80.6 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-332231",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-332231-lens-color.webp",
+        "surface": "hd-332231-surface-color@2x.webp",
+        "poles": "hd-332231-poles-color@2x.webp",
+        "source": {
+          "id": "hd-332231-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2056007995732413312&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,128 K and log g 4.3 (u1 0.395, u2 0.296): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "MacDougall et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+      "credit": "MacDougall et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-332231.json",
+      "credit": "MacDougall et al. 2023, the stellar radius of the default parameter set of HD 332231 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

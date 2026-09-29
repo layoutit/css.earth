@@ -1,0 +1,39 @@
+{
+  "id": "toi-2040",
+  "name": "TOI-2040",
+  "system": "TOI-2040 system",
+  "description": "Star of 5,132 K, 145 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2040",
+  "gaia": "2227309055469504640",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+    "credit": "Guenther et al. 2026"
+  },
+  "radius": {
+    "value": 0.87,
+    "source": "Guenther et al. 2026, the stellar radius of the default parameter set of TOI-2040 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.92,
+    "source": "Guenther et al. 2026, the stellar mass of the default parameter set of TOI-2040 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 5132,
+    "source": "Guenther et al. 2026, the stellar temperature of the default parameter set of TOI-2040 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract",
+    "uncertainty": 129
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2040 b crosses TOI-2040 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Guenther et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GUENTHER_ET_AL_2026): st_teff 5132, st_rad 0.87, st_mass 0.92"
+  },
+  "notes": [],
+  "order": 4218
+}

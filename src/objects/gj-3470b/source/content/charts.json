@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-3470b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-3470b-orbits",
+      "title": "GJ 3470 b: orbits around GJ 3470",
+      "output": "gj-3470b-system-orbits.svg",
+      "system": "gj-3470",
+      "highlight": "gj-3470b",
+      "description": "The orbits of GJ 3470's planets in this map from above, to scale, with GJ 3470 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.3366524 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "gj-3470b-transmission",
+      "title": "GJ 3470 b: transmission spectrum",
+      "description": "GJ 3470 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 28 measured bins from Benneke et al. 2019 (Hubble Space Telescope satellite, Space Telescope Imaging Spectrograph; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "gj-3470b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2019NatAs...3..813B/abstract",
+        "table": "transitspec",
+        "bins": 28
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 28
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0,
+        "maximum": 6,
+        "ticks": [
+          0,
+          2,
+          4,
+          6
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.55,
+        "maximum": 0.65,
+        "ticks": [
+          0.55,
+          0.575,
+          0.6,
+          0.625,
+          0.65
+        ]
+      },
+      "notes": [
+        "Benneke et al. 2019",
+        "Hubble Space Telescope satellite, Space Telescope I…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-3470b-transit",
+      "title": "GJ 3470 b: its transit",
+      "description": "GJ 3470 b crossing its star, as TESS recorded it: 3 sectors (46, 71, 72) of the SPOC pipeline's 2-minute light curves of TIC 19028197, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-3470b-transit.svg",
+      "metadata": {
+        "tic": "TIC 19028197",
+        "sectors": [
+          46,
+          71,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-3470b",
+      "sources": [
+        "photometry/tess/tess2021336043614-s0046-0000000019028197-0217-s_lc.fits",
+        "photometry/tess/tess2023289093419-s0071-0000000019028197-0266-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000019028197-0267-s_lc.fits"
+      ],
+      "durationHours": 1.8984,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 46, 71, 72",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "corot-7b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CoRoT-7 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10723.8
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/corot-7b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CoRoT-7 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 32910002.5,
+      "description": "CoRoT-7 b was found in 2009 by CoRoT as it crossed its star.",
+      "systemName": "CoRoT-7 system",
+      "order": 3054,
+      "context": {
+        "order": 3054
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -935547913379332900,
+        4832696846820653000,
+        -91336043294682580
+      ],
+      "presentationToReference": [
+        -0.355991022638256,
+        0.9344827229744701,
+        -0.0035259414612998086,
+        0.9343106505330356,
+        0.35599419492631795,
+        0.018213771693378844,
+        -0.018275669659536642,
+        -0.00318961455077722,
+        0.9998278983192621
+      ],
+      "orbitUpReference": [
+        -0.9344827229744701,
+        -0.35599419492631795,
+        0.00318961455077722
+      ],
+      "metersPerUnit": 34592.903225806454,
+      "bodyRadiusM": 10723800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

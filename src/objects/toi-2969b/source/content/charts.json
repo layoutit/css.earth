@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-2969b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-2969b-orbits",
+      "title": "TOI-2969 b: orbits around TOI-2969",
+      "output": "toi-2969b-system-orbits.svg",
+      "system": "toi-2969",
+      "highlight": "toi-2969b",
+      "description": "The orbits of TOI-2969's planets in this map from above, to scale, with TOI-2969 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): P 1.8237146 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-2969b-transit",
+      "title": "TOI-2969 b: its transit",
+      "description": "TOI-2969 b crossing its star, as TESS recorded it: 3 sectors (89, 90, 99) of the SPOC pipeline's 2-minute light curves of TIC 36452991, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-2969b-transit.svg",
+      "metadata": {
+        "tic": "TIC 36452991",
+        "sectors": [
+          89,
+          90,
+          99
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-2969b",
+      "sources": [
+        "photometry/tess/tess2025042113628-s0089-0000000036452991-0286-s_lc.fits",
+        "photometry/tess/tess2025071122000-s0090-0000000036452991-0287-s_lc.fits",
+        "photometry/tess/tess2026005125623-s0099-0000000036452991-0300-s_lc.fits"
+      ],
+      "durationHours": 1.846,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 89, 90, 99",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-110082-b",
+  "card": {
+    "text": "HD 110082B is a star of 3,262 K, bound to HD 110082 6,239 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 5765748511163751936 and 5765748511163760640, sep_AU 6239.017902410248098, R_chance_align 9.292407085543662355e-04"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 110082B shares its motion through space with HD 110082, 6,239 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 5765748511163751936 and 5765748511163760640, sep_AU 6239.017902410248098, R_chance_align 9.292407085543662355e-04"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

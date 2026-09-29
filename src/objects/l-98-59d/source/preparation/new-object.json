@@ -1,0 +1,31 @@
+{
+  "host": "l-98-59",
+  "planets": [
+    {
+      "id": "l-98-59d",
+      "name": "L 98-59 d",
+      "description": "Transiting planet of L 98-59 with a 7.45-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+        "credit": "Cadieux et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CADIEUX_ET_AL_2025"
+      },
+      "text": {
+        "card": "L 98-59 d was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is one of 5 planets known around L 98-59. Its orbit and size follow Cadieux et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 7.4507313, pl_radj 0.14515147, pl_bmassj 0.00516002",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/L_98-59_d",
+          "title": "L 98-59 d",
+          "revision": "1376689854",
+          "card": "L 98-59 d is an exoplanet orbiting the star L 98-59 34.6 light years from Earth.",
+          "introduction": "L 98-59 d is the third, potentially fourth, planet in its system."
+        }
+      },
+      "order": 3802
+    }
+  ]
+}

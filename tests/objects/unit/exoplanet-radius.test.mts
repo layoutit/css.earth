@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../../site/objects.mts';
 import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { projectRoot } from '../fixtures.mts';
 import { selectedObjectIds } from './anchor-table.mts';
 

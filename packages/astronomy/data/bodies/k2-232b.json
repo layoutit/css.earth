@@ -1,0 +1,31 @@
+{
+ "id": "k2-232b",
+ "classification": "exoplanet",
+ "order": 3407,
+ "physical": {
+  "name": "K2-232 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 74137.2,
+  "gravitationalParameterKm3PerS2": 54095149.12,
+  "parent": "k2-232"
+ },
+ "physicalNotes": "Radius 1.037 Jupiter radii from Ranshaw et al. 2026 (2026arXiv260909077R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract): 74,137.2 km at 71,492 km per Jupiter radius. GM from the mass 0.427 Jupiter masses (Ranshaw et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260909077R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 11.16844233,
+  "semiMajorAxisStellarRadii": 18.04,
+  "inclinationDegrees": 89.83,
+  "eccentricity": 0.245,
+  "argumentOfPeriapsisDegrees": 181.8,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58159.903851,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 11.16844233 d",
+   "shape": "Ranshaw et al. 2026 (2026arXiv260909077R), via the NASA Exoplanet Archive ps table (pl_refname RANSHAW_ET_AL_2026): a/R* 18.04; Ranshaw et al. 2026 (2026arXiv260909077R), via the NASA Exoplanet Archive ps table (pl_refname RANSHAW_ET_AL_2026): inclination 89.83 degrees",
+   "eccentricity": "Ranshaw et al. 2026 (2026arXiv260909077R), via the NASA Exoplanet Archive ps table (pl_refname RANSHAW_ET_AL_2026): e 0.245",
+   "argumentOfPeriapsis": "Ranshaw et al. 2026 (2026arXiv260909077R), via the NASA Exoplanet Archive ps table (pl_refname RANSHAW_ET_AL_2026): omega -178.2 degrees, stored as 181.8",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458160.403851 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-700d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-700d-orbits",
+      "title": "TOI-700 d: orbits around TOI-700",
+      "output": "toi-700d-system-orbits.svg",
+      "system": "toi-700",
+      "highlight": "toi-700d",
+      "description": "The orbits of TOI-700's planets in this map from above, to scale, with TOI-700 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Pass et al. 2026 (2026AJ....172..175P), via the NASA Exoplanet Archive ps table (pl_refname PASS_ET_AL_2026): P 37.423457 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-700d-transit",
+      "title": "TOI-700 d: its transit",
+      "description": "TOI-700 d crossing its star, as TESS recorded it: 3 sectors (95, 96, 97) of the SPOC pipeline's 2-minute light curves of TIC 150428135, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-700d-transit.svg",
+      "metadata": {
+        "tic": "TIC 150428135",
+        "sectors": [
+          95,
+          96,
+          97
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-700d",
+      "sources": [
+        "photometry/tess/tess2025206162959-s0095-0000000150428135-0292-s_lc.fits",
+        "photometry/tess/tess2025232030459-s0096-0000000150428135-0293-s_lc.fits",
+        "photometry/tess/tess2025258001959-s0097-0000000150428135-0294-s_lc.fits"
+      ],
+      "durationHours": 3.3029,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 95, 96, 97",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

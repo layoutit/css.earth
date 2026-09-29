@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hats-75b",
+  "card": {
+    "text": "HATS-75 b was found in 2021 by HATSouth as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac4a77",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract",
+        "label": "Jordán et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JORD_AACUTE_N_ET_AL__2022): disc_year 2021, disc_facility HATSouth, sy_pnum 1; pl_orbper 2.7886556, pl_radj 0.884, pl_bmassj 0.491"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HATS-75. Its orbit and size follow Jordán et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac4a77",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract",
+        "label": "Jordán et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JORD_AACUTE_N_ET_AL__2022): disc_year 2021, disc_facility HATSouth, sy_pnum 1; pl_orbper 2.7886556, pl_radj 0.884, pl_bmassj 0.491"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

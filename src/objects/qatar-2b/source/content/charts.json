@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/qatar-2b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "qatar-2b-orbits",
+      "title": "Qatar-2 b: orbits around Qatar-2",
+      "output": "qatar-2b-system-orbits.svg",
+      "system": "qatar-2",
+      "highlight": "qatar-2b",
+      "description": "The orbits of Qatar-2's planets in this map from above, to scale, with Qatar-2 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 1.33711644 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "qatar-2b-transit",
+      "title": "Qatar-2 b: its transit",
+      "description": "Qatar-2 b crossing its star, as TESS recorded it: 1 sector (91) of the SPOC pipeline's 2-minute light curves of TIC 2521105, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "qatar-2b-transit.svg",
+      "metadata": {
+        "tic": "TIC 2521105",
+        "sectors": [
+          91
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "qatar-2b",
+      "sources": [
+        "photometry/tess/tess2025099153000-s0091-0000000002521105-0288-s_lc.fits"
+      ],
+      "durationHours": 1.809816,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sector 91",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

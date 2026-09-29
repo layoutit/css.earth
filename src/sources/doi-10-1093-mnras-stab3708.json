@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab3708",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gan et al. (2022): TOI-530b: a giant planet transiting an M-dwarf detected by <i>TESS</i>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2110.04220"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab3708"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022MNRAS.511...83G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab3708",
+      "label": "Monthly Notices of the Royal Astronomical Society 511 83-99"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gan et al. (2022), Monthly Notices of the Royal Astronomical Society 511 83-99",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 511 83-99",
+  "creators": [
+    "Tianjun Gan",
+    "Zitao Lin",
+    "Sharon Xuesong Wang",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

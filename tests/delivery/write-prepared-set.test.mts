@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import fs, { mkdtemp, readFile, writeFile, readdir, rm, stat, symlink } from 'node:fs/promises';
 import { syncBuiltinESMExports } from 'node:module';

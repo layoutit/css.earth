@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-2b",
+  "card": {
+    "text": "WASP-2 b was found in 2007 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-ab03aa",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract",
+        "label": "Addison et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADDISON_ET_AL__2019): disc_year 2007, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.15222216, pl_radj 1.081, pl_bmassj 0.931"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-2b",
+        "url": "https://en.wikipedia.org/wiki/WASP-2b",
+        "label": "Wikipedia, \"WASP-2b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374238799",
+        "quote": "WASP-2b is an extrasolar planet orbiting the star WASP-2 located about 500 light years away in the constellation of Delphinus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-2. Its orbit and size follow Addison et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-1538-3873-ab03aa",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract",
+        "label": "Addison et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADDISON_ET_AL__2019): disc_year 2007, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.15222216, pl_radj 1.081, pl_bmassj 0.931"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-2b",
+        "url": "https://en.wikipedia.org/wiki/WASP-2b",
+        "label": "Wikipedia, \"WASP-2b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374238799",
+        "quote": "It was discovered via the transit method, and then follow up measurements using the radial velocity method confirmed that WASP-2b was a planet."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

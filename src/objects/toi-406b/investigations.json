@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-406b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.18556549 Jupiter radii from Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02067153 Jupiter masses: Lacedelli et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...692A.238L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2024): P 13.175682 d; Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2024): a/R* 44.6; Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2024): inclination 89.4 degrees; Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2024): e 0.056; Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2024): omega 169 degrees; Lacedelli et al. 2024 (2024A&A...692A.238L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2024): transit mid-time 2458388.57 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-3473b",
+  "card": {
+    "text": "GJ 3473 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202038967",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+        "label": "Kemmer et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KEMMER_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.19800484, pl_radj 0.11276653, pl_bmassj 0.00585219"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around GJ 3473. Its orbit and size follow Kemmer et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202038967",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+        "label": "Kemmer et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KEMMER_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.19800484, pl_radj 0.11276653, pl_bmassj 0.00585219"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "lhs-3844",
+  "name": "LHS 3844",
+  "system": "LHS 3844 system",
+  "description": "Star of 3,080 K, 14.9 parsecs away, with 1 transiting planet.",
+  "target": "LHS 3844",
+  "gaia": "6385548541499112448",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+    "credit": "Nagel et al. 2026"
+  },
+  "radius": {
+    "value": 0.189,
+    "source": "Nagel et al. 2026, the stellar radius of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+    "uncertainty": 0.006
+  },
+  "mass": {
+    "value": 0.151,
+    "source": "Nagel et al. 2026, the stellar mass of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+    "uncertainty": 0.014
+  },
+  "temperature": {
+    "value": 3080,
+    "source": "Nagel et al. 2026, the stellar temperature of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "LHS 3844 b crosses LHS 3844 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Nagel et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NAGEL_ET_AL_2026): st_teff 3080, st_rad 0.189, st_mass 0.151",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/LHS_3844",
+      "title": "LHS 3844",
+      "revision": "1372071262",
+      "card": "LHS 3844, also named Batsũ̀, is a red dwarf star located 48.5 light-years away from the Solar System in the constellation of Indus.",
+      "introduction": "The star has about 15% the mass and 19% the radius of the Sun."
+    }
+  },
+  "notes": [],
+  "order": 3819
+}

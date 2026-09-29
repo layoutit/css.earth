@@ -1,0 +1,44 @@
+{
+  "id": "toi-5293-a",
+  "name": "TOI-5293 A",
+  "system": "TOI-5293 system",
+  "description": "Star of 3,586 K, 162 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5293 A",
+  "gaia": "2640121486388076032",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract",
+    "credit": "Cañas et al. 2023"
+  },
+  "radius": {
+    "value": 0.52,
+    "source": "Cañas et al. 2023, the stellar radius of the default parameter set of TOI-5293 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.54,
+    "source": "Cañas et al. 2023, the stellar mass of the default parameter set of TOI-5293 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3586,
+    "source": "Cañas et al. 2023, the stellar temperature of the default parameter set of TOI-5293 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract",
+    "uncertainty": 88
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5293 A b crosses TOI-5293 A as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Cañas et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CA_NTILDE_AS_ET_AL__2023): st_teff 3586, st_rad 0.52, st_mass 0.54"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 2640121486388076032 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 50,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202640121486388076032"
+  },
+  "order": 4501
+}

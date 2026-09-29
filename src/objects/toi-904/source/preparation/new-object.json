@@ -1,0 +1,39 @@
+{
+  "id": "toi-904",
+  "name": "TOI-904",
+  "system": "TOI-904 system",
+  "description": "Star of 3,770 K, 46.1 parsecs away, with 2 transiting planets.",
+  "target": "TOI-904",
+  "gaia": "4620844400530949376",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract",
+    "credit": "Harris et al. 2023"
+  },
+  "radius": {
+    "value": 0.527,
+    "source": "Harris et al. 2023, the stellar radius of the default parameter set of TOI-904 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract",
+    "uncertainty": 0.021
+  },
+  "mass": {
+    "value": 0.557,
+    "source": "Harris et al. 2023, the stellar mass of the default parameter set of TOI-904 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 3770.2,
+    "source": "Harris et al. 2023, the stellar temperature of the default parameter set of TOI-904 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-904 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Harris et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HARRIS_ET_AL__2023): st_teff 3770.2, st_rad 0.527, st_mass 0.557"
+  },
+  "notes": [],
+  "order": 4742
+}

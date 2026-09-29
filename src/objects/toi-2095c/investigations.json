@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2095c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.11865486 Jupiter radii from Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.023283 Jupiter masses: Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Quintana et al. 2023 (2023AJ....166..195Q), via the NASA Exoplanet Archive ps table (pl_refname QUINTANA_ET_AL__2023): P 28.1722 d; Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2023): a/R* 67.19; Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2023): inclination 89.91 degrees; Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2023): e 0; Quintana et al. 2023 (2023AJ....166..195Q), via the NASA Exoplanet Archive ps table (pl_refname QUINTANA_ET_AL__2023): transit mid-time 2459662.1464 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....166..195Q/abstract"
+      ]
+    }
+  ]
+}

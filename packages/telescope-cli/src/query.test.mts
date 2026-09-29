@@ -1,7 +1,7 @@
 /** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the real
  * ledgers use, so nothing asks an archive anything. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { BODY_MAP_SCHEMA } from '@cssearth/bake/objects/layers/observation';
 import { JWST_CUBE_COVERAGE } from './archives/jwst/imaging/bands.mts';

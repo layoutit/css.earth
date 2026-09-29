@@ -1,0 +1,31 @@
+{
+ "id": "toi-2257b",
+ "classification": "exoplanet",
+ "order": 4273,
+ "physical": {
+  "name": "TOI-2257 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13993.6,
+  "gravitationalParameterKm3PerS2": 2166339.7,
+  "parent": "toi-2257"
+ },
+ "physicalNotes": "Radius 0.19573591 Jupiter radii from Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...657A..45S/abstract): 13,993.6 km at 71,492 km per Jupiter radius. GM from the mass 0.0171 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 35.189346,
+  "semiMajorAxisStellarRadii": 99.6155,
+  "inclinationDegrees": 89.786,
+  "eccentricity": 0.496,
+  "argumentOfPeriapsisDegrees": 258.326,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59007.47949,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive ps table (pl_refname SCHANCHE_ET_AL__2022): P 35.189346 d",
+   "shape": "Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive ps table (pl_refname SCHANCHE_ET_AL__2022): a/R* derived from its semi-major axis 0.145 au and stellar radius 0.313 solar radii; Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive ps table (pl_refname SCHANCHE_ET_AL__2022): inclination 89.786 degrees",
+   "eccentricity": "Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive ps table (pl_refname SCHANCHE_ET_AL__2022): e 0.496",
+   "argumentOfPeriapsis": "Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive ps table (pl_refname SCHANCHE_ET_AL__2022): omega -101.674 degrees, stored as 258.326",
+   "phase": "Schanche et al. 2022 (2022A&A...657A..45S), via the NASA Exoplanet Archive ps table (pl_refname SCHANCHE_ET_AL__2022): transit mid-time 2459007.97949 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

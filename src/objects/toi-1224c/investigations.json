@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1224c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.25729369 Jupiter radii from Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0273 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): P 17.945466 d; Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): a/R* derived by Kepler's third law from its period 17.945466 d, stellar mass 0.4 and radius 0.404 solar units; Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): inclination derived from its impact parameter 0.487 with the orbit's a/R* 52.608 (Winn 2010, eq. 7); Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): e 0; Thao et al. 2024 (2024AJ....168...41T), via the NASA Exoplanet Archive ps table (pl_refname THAO_ET_AL__2024): transit mid-time 2458329.859704 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "k2-85",
+  "name": "K2-85",
+  "system": "K2-85 system",
+  "description": "Star of 4,232 K, 97.2 parsecs away, with 1 transiting planet.",
+  "target": "K2-85",
+  "gaia": "49784688211974144",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "credit": "Howard et al. 2025"
+  },
+  "radius": {
+    "value": 0.71,
+    "source": "Howard et al. 2025, the stellar radius of the default parameter set of K2-85 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 0.1
+  },
+  "mass": {
+    "value": 0.7,
+    "source": "Howard et al. 2025, the stellar mass of the default parameter set of K2-85 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4232,
+    "source": "Howard et al. 2025, the stellar temperature of the default parameter set of K2-85 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-85 b crosses K2-85 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Howard et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HOWARD_ET_AL__2025): st_teff 4232, st_rad 0.71, st_mass 0.7"
+  },
+  "notes": [],
+  "order": 3616
+}

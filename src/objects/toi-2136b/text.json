@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2136b",
+  "card": {
+    "text": "TOI-2136 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac1448",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+        "label": "Gan et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GAN_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.851925, pl_radj 0.19537905, pl_bmassj 0.02004226"
+      },
+      {
+        "catalogueId": "wikipedia-toi-2136-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-2136_b",
+        "label": "Wikipedia, \"TOI-2136 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086954",
+        "quote": "TOI-2136 b is a sub-Neptune exoplanet orbiting the nearby red dwarf star TOI-2136."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-2136. Its orbit and size follow Gan et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac1448",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+        "label": "Gan et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GAN_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.851925, pl_radj 0.19537905, pl_bmassj 0.02004226"
+      },
+      {
+        "catalogueId": "wikipedia-toi-2136-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-2136_b",
+        "label": "Wikipedia, \"TOI-2136 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086954",
+        "quote": "It was discovered in 2022 through transit observations by NASA's TESS and independently validated using ground-based photometry and radial velocity measurements."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

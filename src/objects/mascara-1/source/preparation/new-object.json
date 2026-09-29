@@ -1,0 +1,45 @@
+{
+  "id": "mascara-1",
+  "name": "MASCARA-1",
+  "system": "MASCARA-1 system",
+  "description": "Star of 7,490 K, 182 parsecs away, with 1 transiting planet.",
+  "target": "MASCARA-1",
+  "gaia": "1744911763437512064",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+    "credit": "Hooton et al. 2022"
+  },
+  "radius": {
+    "value": 2.082,
+    "source": "Hooton et al. 2022, the stellar radius of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+    "uncertainty": 0.022
+  },
+  "mass": {
+    "value": 1.9,
+    "source": "Hooton et al. 2022, the stellar mass of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+    "uncertainty": 0.063
+  },
+  "temperature": {
+    "value": 7490,
+    "source": "Hooton et al. 2022, the stellar temperature of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+    "uncertainty": 150
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "MASCARA-1 b crosses MASCARA-1 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hooton et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HOOTON_ET_AL__2022): st_teff 7490, st_rad 2.082, st_mass 1.9",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_201585",
+      "title": "HD 201585",
+      "revision": "1324636195",
+      "card": "It is also designated as MASCARA-1 meaning that it is the first star observed by the MASCARA exoplanet search program."
+    }
+  },
+  "notes": [],
+  "order": 3840
+}

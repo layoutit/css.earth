@@ -1,0 +1,39 @@
+{
+  "id": "toi-411",
+  "name": "TOI-411",
+  "system": "TOI-411 system",
+  "description": "Star of 6,169 K, 62.8 parsecs away, with 3 transiting planets.",
+  "target": "HD 22946",
+  "gaia": "4848767461548943104",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+    "credit": "Garai et al. 2023"
+  },
+  "radius": {
+    "value": 1.117,
+    "source": "Garai et al. 2023, the stellar radius of the default parameter set of TOI-411 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+    "uncertainty": 0.009
+  },
+  "mass": {
+    "value": 1.098,
+    "source": "Garai et al. 2023, the stellar mass of the default parameter set of TOI-411 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 6169,
+    "source": "Garai et al. 2023, the stellar temperature of the default parameter set of TOI-411 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+    "uncertainty": 64
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross HD 22946 as seen from Earth: d, TOI-411 b, TOI-411 c.",
+    "introduction": "Its radius and temperature follow Garai et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GARAI_ET_AL__2023): st_teff 6169, st_rad 1.117, st_mass 1.098"
+  },
+  "notes": [],
+  "order": 3196
+}

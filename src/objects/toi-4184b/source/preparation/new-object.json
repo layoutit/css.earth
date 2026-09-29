@@ -1,0 +1,24 @@
+{
+  "host": "toi-4184",
+  "planets": [
+    {
+      "id": "toi-4184b",
+      "name": "TOI-4184 b",
+      "description": "Transiting planet of TOI-4184 with a 4.9-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract",
+        "credit": "Barkaoui et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARKAOUI_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-4184 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4184. Its orbit and size follow Barkaoui et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.9019804, pl_radj 0.21679045, pl_bmassj 0.0204"
+      },
+      "order": 4386
+    }
+  ]
+}

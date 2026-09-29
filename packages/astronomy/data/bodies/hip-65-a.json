@@ -1,0 +1,30 @@
+{
+ "id": "hip-65-a",
+ "classification": "star",
+ "order": 3045,
+ "physical": {
+  "name": "HIP 65 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 503825.9,
+  "gravitationalParameterKm3PerS2": 103648415672.75465,
+  "parent": null,
+  "effectiveTemperatureK": 4590
+ },
+ "physicalNotes": "Radius 0.7242 +/- 0.0081 solar radii from Nielsen et al. 2020, the stellar radius of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract): 503,826 km at 695,700 km per solar radius. Mass 0.781 +/- 0.027 solar masses from Nielsen et al. 2020, the stellar mass of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract); GM is that mass times the JPL solar GM. Temperature 4590 +/- 49 K from Nielsen et al. 2020, the stellar temperature of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 0.18555746500007905,
+  "declinationDegrees": -54.83083281791827,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 61.86532172966987,
+  "properMotionRaMasPerYear": -202.7111034469219,
+  "properMotionDecMasPerYear": -71.6125435702873,
+  "radialVelocityKmPerS": 21.18429,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4923860051276772608 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hip-65-a/source/photometry/gaia-dr3-source.csv; cross-identification HIP 65: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4923860051276772608",
+   "distance": "Gaia DR3 parallax 16.1641 +/- 0.0093 mas (same row, RUWE 0.91): 61.87 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -202.711, -71.613 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 21.18 +/- 0.21 km/s"
+  }
+ }
+}

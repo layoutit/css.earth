@@ -1,0 +1,48 @@
+{
+  "id": "hat-p-17",
+  "name": "HAT-P-17",
+  "system": "HAT-P-17 system",
+  "description": "Star of 5,246 K, 92.4 parsecs away, with 1 transiting planet.",
+  "target": "HAT-P-17",
+  "gaia": "1849786481032616960",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 0.87,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-17 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 0.99,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-17 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.15
+  },
+  "temperature": {
+    "value": 5246,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-17 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-17 b crosses HAT-P-17 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5246, st_rad 0.87, st_mass 0.99",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-17",
+      "title": "HAT-P-17",
+      "revision": "1370776716",
+      "card": "HAT-P-17 is a K-type main-sequence star about 92.4 parsecs (301 ly) away.",
+      "introduction": "It has a mass of about 0.857 ± 0.039 M☉."
+    }
+  },
+  "notes": [
+    "HAT-P-17 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3116
+}

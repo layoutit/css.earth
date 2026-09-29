@@ -1,0 +1,31 @@
+{
+ "id": "hip-94235b",
+ "classification": "exoplanet",
+ "order": 3265,
+ "physical": {
+  "name": "HIP 94235 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 19134.3,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "hip-94235"
+ },
+ "physicalNotes": "Radius 0.26764253 Jupiter radii from Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract): 19,134.3 km at 71,492 km per Jupiter radius. No mass is measured: Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract) gives only an upper limit of 1.19246736 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.713057,
+  "semiMajorAxisStellarRadii": 15.7,
+  "inclinationDegrees": 87.14,
+  "eccentricity": 0.32,
+  "argumentOfPeriapsisDegrees": 17,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59037.3704,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): P 7.713057 d",
+   "shape": "Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): a/R* 15.7; Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): inclination 87.14 degrees",
+   "eccentricity": "Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): e 0.32",
+   "argumentOfPeriapsis": "Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): omega 17 degrees",
+   "phase": "Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): transit mid-time 2459037.8704 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

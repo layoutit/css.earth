@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gj-367b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 367 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4694.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-367b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 367 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 1942836.3,
+      "description": "GJ 367 b was found in 2021 by TESS as it crossed its star.",
+      "systemName": "GJ 367 system",
+      "order": 3094,
+      "context": {
+        "order": 3094
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -168279030589187900,
+        112996103288541810,
+        -208298064755588930
+      ],
+      "presentationToReference": [
+        -0.67775727683919,
+        0.4319908215219564,
+        -0.5950033645386477,
+        0.21698892476988554,
+        0.8906843090208842,
+        0.3994962680566604,
+        -0.7025388816419591,
+        -0.14165236243979581,
+        0.6974049956778989
+      ],
+      "orbitUpReference": [
+        -0.4319908215219564,
+        -0.8906843090208842,
+        0.14165236243979581
+      ],
+      "metersPerUnit": 15142.90322580645,
+      "bodyRadiusM": 4694300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

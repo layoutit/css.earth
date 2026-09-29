@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-707",
+  "card": {
+    "text": "TOI-707 b crosses TOI-707 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202557498",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract",
+        "label": "Rea et al. (2026), Astronomy & Astrophysics 711 A86",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname REA_ET_AL_2026): st_teff 5424, st_rad 0.978, st_mass 0.99"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Rea et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202557498",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract",
+        "label": "Rea et al. (2026), Astronomy & Astrophysics 711 A86",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname REA_ET_AL_2026): st_teff 5424, st_rad 0.978, st_mass 0.99"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

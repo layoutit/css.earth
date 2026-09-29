@@ -1,0 +1,24 @@
+{
+  "host": "wasp-107",
+  "planets": [
+    {
+      "id": "wasp-107b",
+      "name": "WASP-107 b",
+      "description": "Transiting planet of WASP-107 with a 5.72-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+        "credit": "Yee & Vissapragada 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "YEE__VISSAPRAGADA_2026"
+      },
+      "text": {
+        "card": "WASP-107 b was found in 2017 by SuperWASP-South as it crossed its star.",
+        "introduction": "It is one of 2 planets known around WASP-107. Its orbit and size follow Yee & Vissapragada 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YEE__VISSAPRAGADA_2026): disc_year 2017, disc_facility SuperWASP-South, sy_pnum 2; pl_orbper 5.7214876, pl_radj 0.935, pl_bmassj 0.1039"
+      },
+      "order": 4773
+    }
+  ]
+}

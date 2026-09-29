@@ -1,0 +1,40 @@
+{
+  "id": "bd-37-4734-a",
+  "name": "BD+37 4734A",
+  "system": "HAT-P-1 system",
+  "description": "Star bound to HAT-P-1, 1,807 AU away.",
+  "gaia": "1928431764627661312",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 1.449,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 346338553 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.068
+  },
+  "mass": {
+    "value": 1.214,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 346338553 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.183
+  },
+  "temperature": {
+    "value": 6251,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 346338553 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 112.9
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "BD+37 4734A is a star of 6,251 K, bound to HAT-P-1 1,807 AU away.",
+    "introduction": "BD+37 4734A shares its motion through space with HAT-P-1, 1,807 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 1928431764627661440 and 1928431764627661312, sep_AU 1806.822149204077050, R_chance_align 7.871465833917729686e-06"
+  },
+  "notes": [
+    "BD+37 4734A's orbit around HAT-P-1 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 3111
+}

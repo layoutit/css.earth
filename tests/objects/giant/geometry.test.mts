@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { TEXELS_PER_CSS_PIXEL, leafRasterScale, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
 import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from '@cssearth/bake/objects/layers/giant';
 import { publishedLeafImages } from '@cssearth/bake/objects/layers/giant';

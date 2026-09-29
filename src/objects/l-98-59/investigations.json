@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "l-98-59",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5271055243163629056: position at J2016.0. Distance: Gaia DR3 parallax 94.2664 +/- 0.0155 mas (same row, RUWE 1.27): 10.61 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 94.794, -340.084 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.3155 +/- 0.0062 solar radii from Cadieux et al. 2025, the stellar radius of the default parameter set of L 98-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract). Mass 0.2923 +/- 0.0067 solar masses from Cadieux et al. 2025, the stellar mass of the default parameter set of L 98-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract). Temperature 3415 +/- 60 K from Cadieux et al. 2025, the stellar temperature of the default parameter set of L 98-59 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 5271055243163629056, through the CIE 1931 2-degree observer: #ffc480. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5271055243163629056&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,415 K and log g 4.91 (u1 0.161, u2 0.442): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/600/A30"
+      ]
+    }
+  ]
+}

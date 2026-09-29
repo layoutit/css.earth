@@ -1,0 +1,24 @@
+{
+  "host": "xo-2-n",
+  "planets": [
+    {
+      "id": "xo-2-n-b",
+      "name": "XO-2 N b",
+      "description": "Transiting planet of XO-2 N with a 2.62-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+        "credit": "Ruggieri et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "RUGGIERI_ET_AL_2024"
+      },
+      "text": {
+        "card": "XO-2 N b was found in 2007 by XO as it crossed its star.",
+        "introduction": "It is one of 4 planets known around XO-2 N. Its orbit and size follow Ruggieri et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RUGGIERI_ET_AL_2024): disc_year 2007, disc_facility XO, sy_pnum 4; pl_orbper 2.615859462, pl_radj 1.019, pl_bmassj 0.629"
+      },
+      "order": 4864
+    }
+  ]
+}

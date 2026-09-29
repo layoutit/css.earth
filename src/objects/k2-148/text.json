@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-148",
+  "card": {
+    "text": "3 planets cross K2-148 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaa9c1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+        "label": "Hirano et al. (2018), The Astronomical Journal 155 127",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HIRANO_ET_AL__2018): st_teff 4079, st_rad 0.632, st_mass 0.65"
+      },
+      {
+        "catalogueId": "wikipedia-k2-148b",
+        "url": "https://en.wikipedia.org/wiki/K2-148b",
+        "label": "Wikipedia, \"K2-148b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249256",
+        "quote": "K2-148b is a confirmed super-Earth, probably rocky, closely orbiting a small orange dwarf star."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hirano et al. 2018.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaa9c1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+        "label": "Hirano et al. (2018), The Astronomical Journal 155 127",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HIRANO_ET_AL__2018): st_teff 4079, st_rad 0.632, st_mass 0.65"
+      },
+      {
+        "catalogueId": "wikipedia-k2-148b",
+        "url": "https://en.wikipedia.org/wiki/K2-148b",
+        "label": "Wikipedia, \"K2-148b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249256",
+        "quote": "It is the innermost of three Super-Earths around the star K2-148, which is in a wide binary pair with the M0.5V red dwarf EPIC 220194953."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

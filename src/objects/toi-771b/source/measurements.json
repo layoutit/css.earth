@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-771b",
+  "radiusKm": 8674.2,
+  "radiusSource": "Radius 0.12133128 Jupiter radii from Lacedelli et al. 2025 (2025A&A...698A.223L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract): 8,674.2 km at 71,492 km per Jupiter radius. GM from the mass 0.00777149 Jupiter masses (Lacedelli et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...698A.223L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.3260155,
+  "orbitalPeriodSource": "Lacedelli et al. 2025 (2025A&A...698A.223L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2025): P 2.3260155 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-771 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00777149 Jupiter masses: Lacedelli et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...698A.223L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract)."
+}

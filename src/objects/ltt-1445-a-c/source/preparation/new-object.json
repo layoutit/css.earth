@@ -1,0 +1,24 @@
+{
+  "host": "ltt-1445-a",
+  "planets": [
+    {
+      "id": "ltt-1445-a-c",
+      "name": "LTT 1445 A c",
+      "description": "Transiting planet of LTT 1445 A with a 3.12-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..168W/abstract",
+        "credit": "Winters et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WINTERS_ET_AL_2022"
+      },
+      "text": {
+        "card": "LTT 1445 A c was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around LTT 1445 A. Its orbit and size follow Winters et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WINTERS_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.123898, pl_radj 0.10232866, pl_bmassj 0.00484538"
+      },
+      "order": 3833
+    }
+  ]
+}

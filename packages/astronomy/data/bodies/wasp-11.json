@@ -1,0 +1,30 @@
+{
+ "id": "wasp-11",
+ "classification": "star",
+ "order": 4774,
+ "physical": {
+  "name": "WASP-11",
+  "horizonsCode": null,
+  "meanRadiusKm": 619173,
+  "gravitationalParameterKm3PerS2": 188451664859.5539,
+  "parent": null,
+  "effectiveTemperatureK": 4800
+ },
+ "physicalNotes": "Radius 0.89 +/- 0.08 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of WASP-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 619,173 km at 695,700 km per solar radius. Mass 1.42 +/- 0.43 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of WASP-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 4800 +/- 100 K from Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 47.368947889327416,
+  "declinationDegrees": 30.67337557168549,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 129.87554685511523,
+  "properMotionRaMasPerYear": 3.3337671974409737,
+  "properMotionDecMasPerYear": -44.43342847178427,
+  "radialVelocityKmPerS": 5.2108884,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 123376685084303360 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-11/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 7.6997 +/- 0.0579 mas (same row, RUWE 3.60): 129.88 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): 3.334, -44.433 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 5.21 +/- 0.28 km/s"
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-2b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.081 Jupiter radii from Addison et al. 2019 (2019PASP..131k5003A), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.931 Jupiter masses: Addison et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019PASP..131k5003A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.15222216 d; Addison et al. 2019 (2019PASP..131k5003A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2019): a/R* 7.81; Addison et al. 2019 (2019PASP..131k5003A), via the NASA Exoplanet Archive ps table (pl_refname ADDISON_ET_AL__2019): inclination 84.49 degrees; Knutson et al. 2014 (2014ApJ...785..126K), via the NASA Exoplanet Archive ps table (pl_refname KNUTSON_ET_AL__2014): e 0.0054; Knutson et al. 2014 (2014ApJ...785..126K), via the NASA Exoplanet Archive ps table (pl_refname KNUTSON_ET_AL__2014): omega 267 degrees; Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2455229.043082 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019PASP..131k5003A/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2014ApJ...785..126K/abstract"
+      ]
+    }
+  ]
+}
