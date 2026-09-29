@@ -1,4 +1,4 @@
-import { fixtureSource } from '../../../../../../tests/objects/test-source-fixture.mts';
+import { fixtureSource } from '../../sources/fixtures/test-source-fixture.mts';
 import { required } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';

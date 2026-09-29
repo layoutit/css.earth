@@ -1,7 +1,7 @@
 import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { parseShapeLens, parseObjShape, createShapeSurfaceSampler } from '@cssearth/bake/objects/geometry';
 import { shape, array, text, number, optional, requireArray } from '@cssearth/core';
-import { fixtureSource } from '../../../../../tests/objects/test-source-fixture.mts';
+import { fixtureSource } from '../sources/fixtures/test-source-fixture.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';

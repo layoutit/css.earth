@@ -1,5 +1,5 @@
 import { required } from '@cssearth/objects/node/contract';
-import { fixtureSource } from '../../../../../../../tests/objects/test-source-fixture.mts';
+import { fixtureSource } from '../../../sources/fixtures/test-source-fixture.mts';
 import { requireRecord, requireString } from '@cssearth/core';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
