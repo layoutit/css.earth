@@ -1,6 +1,5 @@
-/** FITS files on disk: HDU headers located without reading data, image regions read row by row, and a data-block digest.
+/** FITS files on disk: HDU headers located without reading data, and image regions read row by row.
  * Structure is validated as the byte reader in `../fits.ts` validates it. */
-import { createHash } from 'node:crypto';
 import { open, type FileHandle } from 'node:fs/promises';
 import { integer, MAX_HEADER_RECORDS, optionalNumber, padded, readFitsHeader, RECORD, type FitsHeader } from '../fits.js';
 
@@ -69,18 +68,4 @@ export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
     }
   } finally { if (!handle) await file.close(); }
   return { ...region, values };
-}
-
-/** sha256 of one HDU's data block as stored (big-endian, before scaling), read in chunks: a pin for products whose headers
- * carry run dates and paths, so the file digest changes while the measurement does not. */
-export async function sha256FitsData(path: string, hdu: FitsFileHdu): Promise<string> {
-  const hash = createHash('sha256'), file = await open(path, 'r'), chunk = Buffer.alloc(8 << 20);
-  try {
-    for (let offset = 0; offset < hdu.dataBytes; offset += chunk.length) {
-      const length = Math.min(chunk.length, hdu.dataBytes - offset);
-      await file.read(chunk, 0, length, hdu.dataStart + offset);
-      hash.update(chunk.subarray(0, length));
-    }
-  } finally { await file.close(); }
-  return hash.digest('hex');
 }

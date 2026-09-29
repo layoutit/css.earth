@@ -1,6 +1,5 @@
 // Explicit acquisition only. Preparation reads the committed raw responses
-// offline. Re-running this command updates source pins and requires review.
-import { createHash } from 'node:crypto';
+// offline. Re-running this command replaces those responses and requires review.
 import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { SCENE_EPHEMERIS_DIRECTORY, loadSceneEpochEphemeris } from './scene-ephemeris.mts';

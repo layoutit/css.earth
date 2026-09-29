@@ -10,7 +10,7 @@ globals or file I/O. `src/node/` is published as `@cssearth/spice/node`; it may 
 nothing outside `src/node/` may import it. Tree-shaking must keep working: no top-level side effects beyond constant
 definitions.
 
-The node entry reads kernel sets from disk and restores the pinned mission kernel banks under the checkout's
+The node entry reads kernel sets from disk and restores the declared mission kernel banks under the checkout's
 `src/spice/<set>/`. It finds that directory from the package's own name, never from a fixed offset to its own file, so
 the path is the same from `src/`, from `dist/` and from any caller. A bank's `manifest.json` has the shape of a body's
 source manifest, whose validation belongs to the application: callers pass the manifest reader in.

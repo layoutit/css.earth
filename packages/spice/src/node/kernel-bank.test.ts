@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'vitest';
-import { KERNEL_BANK_ROOT, kernelBankRoot, kernelBanks, readPinnedFile, type KernelBankManifestLocation } from './index.js';
+import { KERNEL_BANK_ROOT, kernelBankRoot, kernelBanks, readRestoredFile, type KernelBankManifestLocation } from './index.js';
 
 test('the kernel banks are the checkout src/spice, found from the package, not from this file', () => {
   assert.equal(KERNEL_BANK_ROOT, fileURLToPath(new URL('../../../../src/spice', import.meta.url)));
@@ -24,7 +24,7 @@ test('a bank opens its manifest through the caller reader, under the identity sp
   assert.equal(await banks.restoredBankFile('/elsewhere/kernel.bsp'), '/elsewhere/kernel.bsp');
 });
 
-test('a pinned file that is present is read without a download', async () => {
+test('a declared file that is present is read without a download', async () => {
   const path = fileURLToPath(new URL('../../package.json', import.meta.url));
-  assert.deepEqual(await readPinnedFile(path, 'https://example.invalid/never', 'unused'), await readFile(path));
+  assert.deepEqual(await readRestoredFile(path, 'https://example.invalid/never'), await readFile(path));
 });

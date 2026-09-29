@@ -1,5 +1,5 @@
 /**
- * Shared SPICE kernel banks: one pinned set of a mission's kernels under the checkout's
+ * Shared SPICE kernel banks: one declared set of a mission's kernels under the checkout's
  * `src/spice/<set>/`, used by every body that mission observed. A bank's
  * `manifest.json` has the shape of a body's source manifest and is verified
  * the same way, under the identity `spice-<set>`. Only the manifest is committed:
@@ -14,7 +14,6 @@
  * bank's first kernel unless the options give others. A recipe names the bank with
  * `spice.kernelSet` and lists kernels by their paths inside it, in load order.
  */
-import { createHash } from 'node:crypto';
 import { lstat, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -45,11 +44,10 @@ export interface KernelBankOptions {
   readonly acquireCommand: string;
 }
 
-/** A file an evidence record pins by origin and SHA-256: read it, restoring it from the origin first when it is missing. */
-export async function readPinnedFile(path: string, origin: string, sha256: string) {
+/** A file an evidence record names by path and origin: read it, restoring it from the origin first when it is missing. */
+export async function readRestoredFile(path: string, origin: string) {
   try { return await readFile(path); } catch { /* missing: restore below */ }
-  const bytes = await download(origin), actual = createHash('sha256').update(bytes).digest('hex');
-  if (actual !== sha256) throw new Error(`${origin} has SHA-256 ${actual}; ${path} pins ${sha256}.`);
+  const bytes = await download(origin);
   await publish(path, bytes);
   return Buffer.from(bytes);
 }
@@ -103,7 +101,7 @@ export function kernelBanks({ openManifest, acquireCommand }: KernelBankOptions)
     const credit = options.credit ?? (first ? requireString(first.credit, 'credit') : undefined);
     const license = options.license ?? (first ? requireString(first.license, 'license') : undefined);
     const binding = options.catalogue
-      ? { kind: 'catalogued', references: [{ catalogueId: options.catalogue, role: 'material', evidence: `NAIF kernel pinned in src/spice/${set}/manifest.json by URL, size and SHA-256.` }] }
+      ? { kind: 'catalogued', references: [{ catalogueId: options.catalogue, role: 'material', evidence: `NAIF kernel declared in src/spice/${set}/manifest.json by path and URL.` }] }
       : first?.sourceBinding;
     if (!credit || !license || !binding) throw new TypeError('The first kernel of a bank needs --credit, --license and --catalogue.');
     const added: string[] = [];

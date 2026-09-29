@@ -2,5 +2,5 @@
 // never reach the browser entry.
 export { loadKernelSet, type KernelSet, type LoadedKernel } from './kernel-set.js';
 export {
-  KERNEL_BANK_ROOT, kernelBankRoot, kernelBanks, readPinnedFile, type KernelBankManifest, type KernelBankManifestLocation, type KernelBankOptions,
+  KERNEL_BANK_ROOT, kernelBankRoot, kernelBanks, readRestoredFile, type KernelBankManifest, type KernelBankManifestLocation, type KernelBankOptions,
 } from './kernel-bank.js';

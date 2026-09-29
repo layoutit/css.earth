@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { parsePreparedNebulaCatalog, isPreparedNebula } from './nebulae.js';
 const fixture=()=>({schema:'cssearth-nebula-catalog@1',frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5},
-  sources:[{id:'paper',url:'https://example.org/paper',sha256:'a'.repeat(64),bytes:10,citation:'Original measurement'}],
+  sources:[{id:'paper',url:'https://example.org/paper',bytes:10,citation:'Original measurement'}],
   objects:[{id:'fixture',kind:'nebula',name:'Example',aliases:[],positionM:[3.085677581491367e18,0,0],skyPosition:{raDeg:0,decDeg:0,sourceRef:'paper'},
     distance:{valuePc:100,sourceRef:'paper',method:'Parallax'},introduction:{text:'An emission nebula with a source-backed reader introduction.',sourceRefs:['paper']},
     classification:{name:'Emission nebula',basis:'Observed extended emission; modeled depth.',sourceRef:'paper'},status:'confirmed',detailedObjectId:'fixture'}]});

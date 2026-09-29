@@ -15,9 +15,9 @@ export function spatialPublicationId(reference: string): string {
 }
 
 export interface SpatialCatalogSource extends SpatialCitation {
-  /** The pinned file's size; a citation-only source (a paper cited, not kept) has none and names its references. */
+  /** The kept file's size; a citation-only source (a paper cited, not kept) has none and names its references. */
   readonly bytes?: number;
-  /** Bibliographic entries transcribed from this pinned source; their URLs are not byte pins. */
+  /** Bibliographic entries transcribed from this kept source; their URLs are citations, not kept files. */
   readonly references?: readonly SpatialCitation[];
 }
 
