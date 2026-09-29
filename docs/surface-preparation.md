@@ -581,7 +581,7 @@ These still set their own encoding:
 - Decorative images take quality 40
   ([`DECORATIVE_WEBP`](../packages/bake/src/raster/lossy-lane.ts)): the sidebar
   dataset maps (`prepared/minimaps/`) and the volume dataset previews
-  (`datasets/<sha>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
+  (`datasets/<lens id>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
   against the quality 90 maps they replaced: 15.8 MB became 4.8 MB with 0.074 %
   of pixels flagged; quality 30 flagged 0.119 %. A nearest-sampled category map
   keeps lossless when that is smaller, as it is for 11 noisy geology and region

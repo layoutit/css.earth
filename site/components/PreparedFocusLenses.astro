@@ -27,7 +27,7 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);
   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);
   // presentation.json (a context object's own prepared JSON, not a Vite asset import) can carry
-  // bare `/scenes/<id>/datasets/<sha>.webp` dataset-preview addresses that Vite never rewrites.
+  // bare `/scenes/<id>/datasets/<lens id>.webp` dataset-preview addresses that Vite never rewrites.
   const parsedPresentation = await resolveSceneAddressesDeep(parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance));
   const presentation = { ...parsedPresentation, controls: parsedPresentation.controls.map(lens => {
     const { detail: _preparedDetail, ...control } = lens;
