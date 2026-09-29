@@ -300,7 +300,14 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     const { candidates: _candidates, ...view } = body.systemView;
     return freeze({ ...body, systemView: freeze(view) });
   };
-  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: members(prepared.focus), bodies: freeze(prepared.bodies.map(members).map(body => {
+  // A body's arrival view is its own page's (the object entry carries it); the world only draws its photograph, so the summary
+  // keeps the billboard's address and scale. With 3,575 bodies the arrival rotations were 1.4 of the summary's 3.5 MB.
+  const drawn = <T extends { readonly discovery?: Readonly<Record<string, unknown>> }>(body: T): T => {
+    if (!body.discovery || body.discovery.arrival === undefined) return body;
+    const { arrival, ...discovery } = body.discovery, billboard = (arrival as { billboard?: { url: string; size: number; focalPixels: number; distanceM: number } }).billboard;
+    return freeze({ ...body, discovery: freeze(discovery), ...(billboard ? { billboard: freeze({ url: billboard.url, size: billboard.size, focalPixels: billboard.focalPixels, distanceM: billboard.distanceM }) } : {}) });
+  };
+  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBanks: freeze({ ...orbitBanks }), focus: drawn(members(prepared.focus)), bodies: freeze(prepared.bodies.map(members).map(drawn).map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),

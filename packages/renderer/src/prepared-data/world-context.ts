@@ -23,6 +23,8 @@ export interface PreparedContextPoint {
   readonly systemName?: string;
   /** Its catalogue discovery record, which the application reads for world visibility; opaque to the renderer. */
   readonly discovery?: Readonly<Record<string, unknown>>;
+  /** Its arrival photograph, which the world draws once the body is large enough: the summary keeps this, not the arrival view. */
+  readonly billboard?: Readonly<{ url: string; size: number; focalPixels: number; distanceM: number }>;
   /** Not a map target: drawn as a plain dot, its path in its own bank (packages/bake/src/world-context/spatial-context.ts). */
   readonly plainDot?: true;
   /** A star's dot colour: its colour dimmed by its luminosity, prepared from its package's cited radius and effective
@@ -158,6 +160,11 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
     })() }),
     ...(input.systemName === undefined ? {} : { systemName: text(input.systemName, `point ${id} system name`) }),
     ...(input.discovery === undefined ? {} : { discovery: Object.freeze({ ...record(input.discovery, `point ${id} discovery`) }) }),
+    ...(input.billboard === undefined ? {} : { billboard: (() => {
+      const billboard = record(input.billboard, `point ${id} billboard`, ['url', 'size', 'focalPixels', 'distanceM']);
+      return Object.freeze({ url: text(billboard.url, `point ${id} billboard url`), size: positive(billboard.size, `point ${id} billboard size`),
+        focalPixels: positive(billboard.focalPixels, `point ${id} billboard focal length`), distanceM: positive(billboard.distanceM, `point ${id} billboard distance`) });
+    })() }),
     ...(input.plainDot === undefined ? {} : input.plainDot === true ? { plainDot: true as const }
       : (() => { throw new TypeError(`Context point ${id} plain dot is ${String(input.plainDot)}, not true.`); })()),
     ...(input.dotColor === undefined ? {} : { dotColor: (() => {
@@ -221,8 +228,8 @@ function parseClassificationViews(value: unknown, bodies: readonly PreparedConte
   return Object.freeze(Object.fromEntries(entries));
 }
 function focusPoint(value: unknown, withCandidates: boolean): PreparedContextFocus {
-  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot']);
-  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot']);
+  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'billboard', 'plainDot']);
+  const raw = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource', 'systemView', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'billboard', 'plainDot']);
   const systemView = parseSystemView(input.systemView, withCandidates);
   const base = systemView ? Object.freeze({ ...raw, systemView }) : raw;
   if (input.pointSource === undefined) return base;
@@ -505,7 +512,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextGeometryBody | PreparedContextBody>(value => {
-    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'plainDot', 'dotColor'];
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo', 'unpackaged', 'orbitsWithinM', 'labelPlacement', 'contextColor', 'labelCase', 'classification', 'systemName', 'discovery', 'billboard', 'plainDot', 'dotColor'];
     const input = record(value, 'context body', fields);
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView, geometry);
