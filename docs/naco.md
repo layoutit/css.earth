@@ -227,7 +227,7 @@ node packages/telescope-cli/src/archives/naco/archive.mts ceres-080C0881 "080.C-
 node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47
 node packages/telescope-cli/src/archives/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:45:32
 node packages/telescope-cli/src/archives/naco/compare.mts ceres-080C0881 .local/naco/ceres-080C0881 2007-11-11T02:38:47 2007-11-11T02:45:32
-node tools/objects/naco/author-body-map.mts ceres ceres-080C0881 \
+node packages/telescope-cli/authoring/naco/author-body-map.mts ceres ceres-080C0881 \
   .local/naco/ceres-080C0881/jitter-2007-11-11T023847/naco_img_jitter.fits \
   --raw .local/naco/ceres-080C0881/raw
 

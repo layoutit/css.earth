@@ -274,7 +274,7 @@
       "path": "src/objects/beta-pictoris-disc/source/density-visible.ktx2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -282,7 +282,7 @@
       "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -290,7 +290,7 @@
       "path": "src/objects/beta-pictoris-disc/source/previews/visible.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -298,7 +298,7 @@
       "path": "src/objects/beta-pictoris-disc/source/density-contrast.ktx2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -306,7 +306,7 @@
       "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -314,7 +314,7 @@
       "path": "src/objects/beta-pictoris-disc/source/previews/contrast.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -322,7 +322,7 @@
       "path": "src/objects/beta-pictoris-disc/source/density-colour.ktx2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -330,7 +330,7 @@
       "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -338,7 +338,7 @@
       "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     }
   ]

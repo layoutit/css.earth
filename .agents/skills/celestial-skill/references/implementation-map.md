@@ -124,7 +124,7 @@ instead of editing a shared list or atlas position.
   preparer's actual shape support before choosing it for another body; verify
   camera picking in the shared renderer if the new geometry requires it.
 - **Published ellipsoids and unresolved outlines:**
-  `tools/objects/source-authoring/distant-worlds/README.md` documents the existing
+  `packages/bake/authoring/distant-worlds/README.md` documents the existing
   analytical radius-table extraction. Its helpers accept a selected input file;
   `packages/bake/authoring/outer-worlds/inputs.json` supplies the later
   occultation and thermal examples.

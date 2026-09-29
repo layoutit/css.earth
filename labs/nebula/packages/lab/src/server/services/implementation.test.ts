@@ -110,7 +110,7 @@ test('the compiler cache identity follows the bake topics its volume compiler re
 });
 
 test('the telescope library a preparation owner reaches is pinned by its sources, not its build', async () => {
-  const pins = await implementationPins(process.cwd(), ['tools/objects/circumstellar/author.mts']);
+  const pins = await implementationPins(process.cwd(), ['packages/telescope-cli/authoring/circumstellar/author.mts']);
   for (const path of ['packages/telescope/package.json', 'packages/telescope/src/product-record.ts', 'packages/telescope/src/node/product-record.ts'])
     assert.ok(pins.some(pin => pin.path === path), path);
   assert.equal(pins.some(pin => pin.path.startsWith('packages/telescope/dist/')), false);

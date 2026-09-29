@@ -3,7 +3,7 @@
  * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
  * checked-in recipe rather than a script per star.
  *
- *   node tools/objects/circumstellar/author.mts <object id> [--check] [--raw <dir>]...
+ *   node packages/telescope-cli/authoring/circumstellar/author.mts <object id> [--check] [--raw <dir>]...
  *
  * The recipe is src/objects/<id>/source/circumstellar.json. A lens names coronagraph bands of a pinned JWST imaging program
  * (packages/telescope-cli/src/archives/jwst/imaging/programs), the star's flux in each and the red, green and blue channels they average into: the
@@ -37,7 +37,7 @@ import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type Pla
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';
 
 const METERS_PER_PARSEC = 3.085677581491367e16;
-const repositoryRoot = resolve(import.meta.dirname, '../../..');
+const repositoryRoot = resolve(import.meta.dirname, '../../../..');
 
 export interface CircumstellarLens {
   readonly id: string; readonly label: string; readonly title: string; readonly summary: string; readonly description: string;
@@ -651,7 +651,7 @@ async function hostPlacement(recipe: CircumstellarRecipe) {
 }
 
 export async function author(id: string, options: { sources?: readonly string[] } = {}) {
-  const repository = resolve(import.meta.dirname, '../../..'), packageBase = `src/objects/${id}/source`, root = resolve(repository, packageBase);
+  const repository = resolve(import.meta.dirname, '../../../..'), packageBase = `src/objects/${id}/source`, root = resolve(repository, packageBase);
   const recipe = parseCircumstellarRecipe(JSON.parse(await readFile(resolve(root, 'circumstellar.json'), 'utf8')));
   if (recipe.id !== id) throw new TypeError(`The recipe is for ${recipe.id}, not ${id}.`);
   const downloadsBase = `.local/${id}`, downloads = resolve(repository, downloadsBase);
@@ -790,7 +790,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
   const local = (path: string, reason: string) => ({ id: path.replace(/[^a-z0-9-]+/gu, '-').toLowerCase(), path: `${packageBase}/${path}`, sourceBinding: { kind: 'local', reason } });
   const intermediates = outputs.filter(([name]) => name.endsWith('.ktx2') || name.startsWith('volume-') || name.startsWith('previews/')).map(([name]) =>
-    local(name, `Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json.`));
+    local(name, `Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json.`));
   const documents = [local('circumstellar.json', 'Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against.'),
     ...recipe.lenses.flatMap(lens => lens.colorMap ? [local(lens.colorMap.path, `The publisher's colour map the ${lens.id} lens is shown in, read from the published figure as the file itself records (${lens.colorMap.source}).`)] : []),
     ...['delivery.json', 'presentation.json', 'provenance.json'].map(name => local(name, 'Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above.'))];

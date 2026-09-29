@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { CUTOUT_ORIGIN, cutDisc } from './author-thermal-maps.mts';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';

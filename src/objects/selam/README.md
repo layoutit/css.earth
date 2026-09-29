@@ -39,7 +39,7 @@ A subsequent inspection recovered
 Inspection shows smooth lobe geometry; it does not establish recovered terrain
 or image registration. The file's existence corrects the acquisition account,
 but is not a reason to replace the present source-constrained ellipsoid envelope.
-The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
+The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographs-remain-unqualified)
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
 
@@ -72,4 +72,4 @@ The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-
 
 ## Preparation
 
-[Reproduction instructions](../../../tools/objects/source-authoring/galileo-lucy/README.md). The canonical prepared mesh contains 1024 triangles, independent of device DPR. Sources, conversion and reduction happen before runtime.
+[Reproduction instructions](../../../packages/bake/authoring/galileo-lucy/README.md). The canonical prepared mesh contains 1024 triangles, independent of device DPR. Sources, conversion and reduction happen before runtime.

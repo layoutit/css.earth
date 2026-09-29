@@ -528,9 +528,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const { body, marker } = entry;
         const navigationSuppressed = entry.unpackaged || entry.plainDot || (distantNavigationActive && distantNonNavigableIds.has(body.id));
         if (mask === 0) continue;
-        const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) *
-          (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
+        const contextEmphasis = (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
           (focusSystemShown && !entry.hovered && !systemFade.inFocusSystem(entry.index) ? OTHER_SYSTEM_OPACITY : 1);
+        const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) * contextEmphasis;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and
         // movement transform. The pseudos only own annotation visibility.
@@ -592,7 +592,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (entry.orbit && orbitShown) {
           if (orbitRenderer === 'bars' && entry.orbitRoot.style.zIndex !== zIndex) entry.orbitRoot.style.zIndex = zIndex;
           if (orbitPaint.dataset.contextSelected !== selection) orbitPaint.dataset.contextSelected = selection;
-          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * emphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
+          fader.multiply(orbitPaint, entry.hovered ? 1 : entry.baseAlpha.line * contextEmphasis, animatedAnnotations.has(entry) && entry.previousCount > 0 ? 120 : 0);
         }
         if (entry.orbit && (mask & ContextChange.orbit)) {
           const orbitTransform = 'none';

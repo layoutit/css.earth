@@ -135,7 +135,7 @@
   "scripts": {
     "build": "node build.mts",
     "prepack": "npm run build",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.authoring.json"
   },
   "devDependencies": {
     "@cssearth/astronomy": "workspace:*",

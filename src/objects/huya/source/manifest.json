@@ -19,7 +19,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 207350.21245858006
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py packages/bake/authoring/outer-worlds/inputs.json.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 packages/bake/authoring/distant-worlds/author.py packages/bake/authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -52,7 +52,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 207350.21245858006
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py packages/bake/authoring/outer-worlds/inputs.json.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 packages/bake/authoring/distant-worlds/author.py packages/bake/authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
         "kind": "local",

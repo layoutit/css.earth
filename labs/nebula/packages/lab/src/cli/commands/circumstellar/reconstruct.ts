@@ -4,7 +4,7 @@
  *
  *   node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar <object id>
  *
- * The inputs are exactly what the circumstellar author displays for each edge-on lens (tools/objects/circumstellar/author.mts
+ * The inputs are exactly what the circumstellar author displays for each edge-on lens (packages/telescope-cli/authoring/circumstellar/author.mts
  * edgeOnSolveInputs): the stretched, tapered channels on the recipe's grid and the measured midplane. Pixels with no data (the
  * coronagraph's inner edge, beyond an image's footprint) are given no weight, and a voxel only they see takes its symmetry
  * group's emission. The command writes, into the object's source/, the density grid `density-<lens>.ktx2` in the encoding the

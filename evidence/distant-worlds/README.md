@@ -8,7 +8,8 @@ affected body READMEs. Rendering is now proved from built HTML by
 `site/test/rendered-page.test.mts`, which needs no browser.
 
 The batch covered the nine models listed in the
-[source-authoring inputs](../../tools/objects/source-authoring/distant-worlds/inputs.json).
+[source-authoring inputs](https://github.com/layoutit/css.earth/blob/fbfb46823b/tools/objects/source-authoring/distant-worlds/inputs.json)
+(pinned at commit `fbfb46823b`; now `packages/bake/authoring/distant-worlds/inputs.json`).
 
 Two drag captures kept `before.png`/`after.png` and a 6 MB gzipped Chrome trace
 each. Nothing cites them and no tool reads them any more, so they were not

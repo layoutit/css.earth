@@ -58,8 +58,8 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
       redistribution: 'Original NASA PNG tiles retained in a local archive with attribution', consumers: ['enso'] };
     const at = manifest.inputs.findIndex(e => e.id === id); if (at < 0) manifest.inputs.push(record); else manifest.inputs[at] = record;
   }
-  const mosaic = { id: 'nasa-mur-gibs-mosaic', path: 'science/mur-gibs.png', origin: 'tools/objects/paged-ellipsoid/mur-imagery.mts',
-    generator: 'tools/objects/paged-ellipsoid/mur-imagery.mts restore src/objects/earth/source/science',
+  const mosaic = { id: 'nasa-mur-gibs-mosaic', path: 'science/mur-gibs.png', origin: 'packages/bake/authoring/earth/mur-imagery.mts',
+    generator: 'packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science',
     description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
     consumers: ['enso'] };
   const mi = manifest.generatedIntermediates.findIndex(e => e.id === mosaic.id);

@@ -128,7 +128,7 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
       } catch (error) {
         if (!hasErrorCode(error, "ENOENT")) throw error;
         await run(process.execPath, [
-          resolve(projectRoot, "tools/objects/paged-ellipsoid/mur-imagery.mts"), "restore", scienceDirectory,
+          resolve(projectRoot, "packages/bake/authoring/earth/mur-imagery.mts"), "restore", scienceDirectory,
         ]);
       }
     }

@@ -1,7 +1,7 @@
 {
  "checkedOn": "2026-09-22",
  "base": "main",
- "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using packages/bake/authoring/irregular-moons/jupiter-small.json.",
+ "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with packages/bake/authoring/distant-worlds/author.py using packages/bake/authoring/irregular-moons/jupiter-small.json.",
  "referenceDirectory": "output/irregular-moons/references",
  "bodies": [
   {
