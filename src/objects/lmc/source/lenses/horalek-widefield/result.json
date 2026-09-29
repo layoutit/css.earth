@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
   "imageId": "horalek-widefield",
-  "removalResultId": "5b508bb10419d1927a4df35c9431aa6104f03dd385f84e5753e6378021f387e1.ec65be265d97e820466d900f3c1632a14d512c588e135b9d167c321a6d061618",
+  "removalResultId": "horalek-widefield",
   "placement": {
     "x": 0,
     "y": 0,
@@ -19,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
+    "id": "reconstruction-lmc-clouds-emission-envelope-horalek-widefield",
     "name": "Horálek · optical wide field · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
+    "directory": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-horalek-widefield",
     "stars": "labs/nebula/models/lmc/stars/prepared/stars-envelope.json",
     "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
     "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
@@ -48,12 +48,12 @@
       },
       "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
     },
-    "imagePath": ".local/nebula-lab/reconstructions/cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-horalek-widefield/source/target.png",
     "menuLabel": "LMC",
     "workflow": "density",
     "sourceSubjectId": "lmc-clouds",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-horalek-widefield/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"

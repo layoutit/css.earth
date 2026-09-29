@@ -15,7 +15,7 @@
       "masterUrl": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
       "notes": [
         "RGB8 publication TIFF with a publisher display stretch; not calibrated B/V/I flux. Bright stars are saturated and have strong instrumental halos/spikes.",
-        "Publisher master is 9700 × 7080, listed as 191 MB; not acquired under the initial 100 MB-per-source cap. Publisher-published SHA-256 is retained separately from locally verified working bytes.",
+        "Publisher master is 9700 × 7080, listed as 191 MB; not acquired under the initial 100 MB-per-source cap. The publisher's master is recorded separately from the locally verified working image.",
         "Embedded AVM supplies ICRS TAN, noncentral reference pixel and −90.69909386° rotation; north is right. Do not reset to a centered/north-up native raster."
       ],
       "metadataUrls": [

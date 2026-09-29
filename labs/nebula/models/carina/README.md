@@ -20,7 +20,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 ## Registration and reproducibility
 
-- `observations.json` pins each downloaded TIFF by SHA-256 and actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
+- `observations.json` names each downloaded TIFF by URL with its actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
 - The common frame contains all native source corners with a six-percent angular margin. No frame was cropped to make the photographs agree.
 - `observation-structures.json` configures the shared wavelet structure extraction.
 - `compiler.json` configures the generic relative-emission compiler and its `depth-model.json` recipe. The latter pins `physical-evidence.json`: one authored curved height surface, with localized deformations at the Trumpler 14, Eta Car and WR25 sky anchors. No Helix joint-fit recipe or planetary expansion prior is reused.
@@ -30,7 +30,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 The VISTA field covers the main complex more broadly than this 33-arcminute optical image. Optical outskirts remain unobserved by this lens. This batch uses ESO0905a because its embedded ICRS astrometry is supported; the wider ESO1250a optical alternative uses FK5/J2000 and opposite Y handedness, requiring explicit frame support and revalidation before adoption. Whole-image preservation must not be confused with complete multiband nebula coverage.
 
-The source packet was verified against both image SHA-256 values and decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
+The source packet was verified against both images' decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
 
 The current recipe replaces the centered diffuse depth prior with an **authored single height surface**. Published central morphology motivates three local deformations, while their depth, curvature, thickness and blend strengths remain assumptions. The wide background is explicitly unconstrained. This solver cannot represent overlapping shells, disconnected fronts, foreground absorption or true empty cavities. See [physical evidence and scope](physical-structure.md).
 
@@ -42,9 +42,9 @@ See [the completed batch assessment and current failures](../inference-candidate
 
 ## Coherent-front comparison · 12 September 2026
 
-Default result: `6f33f78232e0fd3b5548257a8ee4b2b32d798f95df4ca2dc594168a32a430f02` (Detail 65%, Faint 35%, Depth 1×). Its method record snapshots the runnable recipe and evidence ledger and pins the implementation owners. The fit contains 359 supports and 650 compact lights; observer RMSE is 0.051339, missing relative signal 21.66% and excess relative signal 20.30%. These compare against the combined display target, not calibrated flux.
+Default result: `carina-coherent-front` (Detail 65%, Faint 35%, Depth 1×). Its method record snapshots the runnable recipe and evidence ledger. The fit contains 359 supports and 650 compact lights; observer RMSE is 0.051339, missing relative signal 21.66% and excess relative signal 20.30%. These compare against the combined display target, not calibrated flux.
 
-The XYZ bake uses 512/497/126 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source lenses preserve the neutral alpha digest `9f69edc53a0a11e9139c4134ee9dc1924881de4abfe89f13f79a6aa3ec509a39`. The final geometry/material bake took 26.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
+The XYZ bake uses 512/497/126 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source lenses preserve the neutral bank's alpha exactly. The final geometry/material bake took 26.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
 
 Real Chromium inspection passed source switching, stable star positions across lenses, star visibility, original overlay, refresh, observer/oblique and 90° west/89° north views. No inspection action started processing. The rotating shape has localized thickness rather than the previous uniform deep columns.
 

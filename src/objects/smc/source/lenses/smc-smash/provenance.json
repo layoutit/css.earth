@@ -3,10 +3,10 @@
   "method": "simulation-guided-finite-material@1",
   "request": {
     "schema": "cssearth-nebula-reconstruction-work@1",
-    "id": "reconstruction-47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+    "id": "reconstruction-smc-constrained-emission-envelope-ellipsoid-smc-smash",
     "imageId": "smc-smash",
     "name": "Horálek · wide optical",
-    "outputDirectory": "/Users/apresmoi/Documents/cssEarth/.local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+    "outputDirectory": "/Users/apresmoi/Documents/cssEarth/.local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-smash",
     "appearance": {
       "saturation": 1,
       "detailStrength": 0,
@@ -15,13 +15,13 @@
       "gamma": 1
     },
     "source": {
-      "path": ".local/nebula-lab/star-removal-nox-applied/333fa52f7fd247bcc3a468e2853317d446cb7449d312aa08b91d7160085f566d/diffuse.png",
+      "path": ".local/nebula-lab/star-removal-nox-applied/smc-smash/diffuse.png",
       "width": 3827,
       "height": 3190
     },
     "original": {
       "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-      "removalResultId": "333fa52f7fd247bcc3a468e2853317d446cb7449d312aa08b91d7160085f566d.0b16a84cadec2e9ab81fc99fed4775a01b803d5c6d735cf65b964e4f76e0ead1"
+      "removalResultId": "smc-smash"
     },
     "overlay": {
       "widthPx": 2048,
@@ -104,13 +104,13 @@
     }
   },
   "source": {
-    "path": ".local/nebula-lab/star-removal-nox-applied/e6467648096ee00e1604611cf8ec4fa643d3764eace979fa6d064ef8f4676dbb/diffuse.png",
+    "path": ".local/nebula-lab/star-removal-nox-applied/smc-horalek-wide/diffuse.png",
     "width": 6069,
     "height": 4045
   },
   "original": {
     "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
-    "removalResultId": "e6467648096ee00e1604611cf8ec4fa643d3764eace979fa6d064ef8f4676dbb.e4129024e2d639f47080f406dfd25702af8c18dd63a6e178daacc0612e673c7a"
+    "removalResultId": "smc-horalek-wide"
   },
   "material": {
     "schema": "cssearth-component-bound-material@1",
@@ -5582,93 +5582,7 @@
       "detailScale": 24,
       "brightness": 1,
       "gamma": 1
-    },
-    "implementation": [
-      {
-        "path": "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts"
-      },
-      {
-        "path": "labs/nebula/packages/lab/src/cli/commands/finite-density-material-artifacts.ts"
-      },
-      {
-        "path": "labs/nebula/packages/lab/src/cli/commands/simulation-guided-coordinates.ts"
-      },
-      {
-        "path": "labs/nebula/packages/lab/src/cli/commands/simulation-prior.ts"
-      },
-      {
-        "path": "labs/nebula/packages/lab/src/resources/model-paths.ts"
-      },
-      {
-        "path": "labs/nebula/packages/lab/src/server/services/implementation.ts"
-      },
-      {
-        "path": "labs/nebula/packages/lab/src/server/workflows/density/finite-lens.ts"
-      },
-      {
-        "path": "labs/nebula/packages/reconstruction/package.json"
-      },
-      {
-        "path": "labs/nebula/packages/reconstruction/src/methods/inference/simulation-envelope.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-bake/package.json"
-      },
-      {
-        "path": "labs/nebula/packages/volume-bake/src/compact-inputs/density-grid.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-bake/src/compact-inputs/simulation-prior.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-bake/src/slices/density.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-bake/src/slices/material.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-bake/src/slices/raster.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/package.json"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/contracts/volume-recipe.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/coordinates/observer-tangent.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/fields/emission-window.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/fields/emission.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/fields/simulation-envelope.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/materials/cloud-appearance.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/materials/component-material.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/materials/display-color.ts"
-      },
-      {
-        "path": "labs/nebula/packages/volume-core/src/materials/slab-material.ts"
-      },
-      {
-        "path": "src/renderers/css/preparation/leaf-bounds.ts"
-      },
-      {
-        "path": "src/renderers/css/preparation/volume-order.ts"
-      },
-      {
-        "path": "src/renderers/css/preparation/volume.ts"
-      }
-    ]
+    }
   },
   "sourceRegistration": {
     "frame": {

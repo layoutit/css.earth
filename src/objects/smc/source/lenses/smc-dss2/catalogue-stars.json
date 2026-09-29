@@ -36134,15 +36134,15 @@
       "limitation": "A bounded display-light proxy on an sRGB CSS surface, not calibrated screen radiance or physical stellar diameter."
     },
     "finiteModel": {
-      "directory": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
+      "directory": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid",
       "provenance": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/provenance.json"
+        "path": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid/source/provenance.json"
       },
       "emissionField": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/emission-field.json"
+        "path": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid/source/emission-field.json"
       },
       "envelope": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/envelope.json"
+        "path": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid/source/envelope.json"
       },
       "depthDensity": {
         "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json"
@@ -36150,7 +36150,7 @@
       "depthDensitySource": "The cloud pinned by this model's own envelope record.",
       "footprint": {
         "image": {
-          "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/original-image.png"
+          "path": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid/source/original-image.png"
         },
         "width": 384,
         "height": 380,
@@ -36165,10 +36165,10 @@
         ]
       },
       "cutoffSignal": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/aligned-image.png"
+        "path": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid/source/aligned-image.png"
       },
       "cloudParts": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/cloud-parts.json"
+        "path": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid/source/cloud-parts.json"
       },
       "observerDistanceKpc": 62.440000000000005,
       "tangentBoundsKpc": {

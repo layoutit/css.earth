@@ -48,7 +48,7 @@ Paper reading and recipe assistance can use bounded specialist agents when autho
 | Source manifest | Immutable products, credit, data meaning, native grids and coverage |
 | Physical evidence ledger | Measurements versus published models versus authored choices; citations and uncertainty |
 | Runnable depth/fit recipe | Selected methods, evidence IDs, exact numeric settings, local scopes and unsupported assumptions |
-| Processing receipt | Source/recipe/ledger/code hashes, actual stages, validity/coverage reports and output identities |
+| Processing receipt | Source, recipe and ledger paths, actual stages, validity/coverage reports and output names |
 | Model README | What was run, what improved, failed visual/physical gates and next useful constraint |
 
 Shared TypeScript readers must reject unknown methods, dangling evidence/source IDs, nonfinite parameters, invalid units/frames and unsupported operations before processing. Changing an evidence ledger or recipe must invalidate the affected cached fit. Derived textures/maps remain ignored; retain enough source records and configuration to reproduce them.

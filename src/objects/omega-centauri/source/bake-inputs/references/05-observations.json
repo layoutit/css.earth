@@ -41,7 +41,7 @@
         "scaleDeg": [-0.00066245096, 0.00066245096],
         "rotationDeg": 0.00051173061
       },
-      "metadataNote": "Exact embedded AVM WCS from the hash-pinned native TIFF, including its 1280-pixel reference grid and noncentral reference pixel. The AVM sky reference is not the raster centre. Native 14540x14540; the ignored derivative is an 8192px WebP. Relative alignment is tested against WFI; absolute astrometry remains publisher metadata."
+      "metadataNote": "Exact embedded AVM WCS from the downloaded native TIFF, including its 1280-pixel reference grid and noncentral reference pixel. The AVM sky reference is not the raster centre. Native 14540x14540; the ignored derivative is an 8192px WebP. Relative alignment is tested against WFI; absolute astrometry remains publisher metadata."
     },
     {
       "id": "eso0844a",
@@ -69,7 +69,7 @@
         "scaleDeg": [-0.00041507559, 0.00041507559],
         "rotationDeg": -0.00724264734
       },
-      "metadataNote": "Exact embedded AVM WCS from the hash-pinned native TIFF, including its 1280x1204 reference grid and noncentral reference pixel. Independent telescope/instrument/epoch from VST/OmegaCAM. Publisher notes Digitized Sky Survey data fills some gaps in this mosaic; DSS-filled regions are not independently attributed star detections."
+      "metadataNote": "Exact embedded AVM WCS from the downloaded native TIFF, including its 1280x1204 reference grid and noncentral reference pixel. Independent telescope/instrument/epoch from VST/OmegaCAM. Publisher notes Digitized Sky Survey data fills some gaps in this mosaic; DSS-filled regions are not independently attributed star detections."
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
   "imageId": "smc-allwise-wide",
-  "removalResultId": "a3ad3b73aab7a9cd7f3d778b150ae4939e95e7b382c91d464897bc6e4ad93162.fb89b635c3ea8510db75819641035b8cf7b5f93c3bb410ade39eac3c224a7b84",
+  "removalResultId": "smc-allwise-wide",
   "placement": {
     "x": 0,
     "y": 0,
@@ -19,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
+    "id": "reconstruction-smc-constrained-emission-envelope-ellipsoid-smc-allwise-wide",
     "name": "AllWISE · 10° infrared · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
+    "directory": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-allwise-wide",
     "sourcePageUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
     "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -52,10 +52,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-allwise-wide/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-allwise-wide/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"

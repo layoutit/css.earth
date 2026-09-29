@@ -6,7 +6,7 @@ The reconstructed cloud becomes brighter and less saturated away from the front 
 
 ## Measurement
 
-The subject is `lmc-clouds`, built by `labs/nebula/models/lmc/clouds.json` from the CTIO/NOIRLab SMASH image `noirlab2030a` (`.local/nebula-lab/source-originals/noirlab2030a.tif`, SHA-256 `6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0`). The prepared delivery bank is `labs/nebula/models/lmc/clouds/prepared`.
+The subject is `lmc-clouds`, built by `labs/nebula/models/lmc/clouds.json` from the CTIO/NOIRLab SMASH image `noirlab2030a` (`.local/nebula-lab/source-originals/noirlab2030a.tif`). The prepared delivery bank is `labs/nebula/models/lmc/clouds/prepared`.
 
 Rendered-image measurements used the central workspace crop, excluding the header and side panels. HSV saturation was measured for pixels whose RGB peak exceeded 0.02; the reported peak is brightness-weighted. Captures are in `.local/nebula-lab/filled-review/browser/final-fixed/screenshots/`.
 

@@ -6,7 +6,7 @@
   "lenses": [
     {
       "imageId": "smc-horalek-wide",
-      "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
+      "resultId": "smc-constrained-emission-envelope-ellipsoid-smc-horalek-wide",
       "label": "Horálek optical",
       "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
       "enabledIds": [
@@ -31,7 +31,7 @@
     },
     {
       "imageId": "smc-vista",
-      "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
+      "resultId": "smc-constrained-emission-envelope-ellipsoid-smc-vista",
       "label": "ESO VISTA",
       "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
       "enabledIds": [
@@ -56,7 +56,7 @@
     },
     {
       "imageId": "smc-smash",
-      "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+      "resultId": "smc-constrained-emission-envelope-ellipsoid-smc-smash",
       "label": "NOIRLab SMASH",
       "description": "Visible-light colors from the NOIRLab SMASH DECam survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
       "enabledIds": [
@@ -81,7 +81,7 @@
     },
     {
       "imageId": "smc-dss2",
-      "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
+      "resultId": "smc-constrained-emission-envelope-ellipsoid-smc-dss2",
       "label": "DSS2 optical",
       "description": "Visible-light colors from the ESA/Hubble Digitized Sky Survey 2 image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
       "enabledIds": [
@@ -106,7 +106,7 @@
     },
     {
       "imageId": "smc-allwise-wide",
-      "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
+      "resultId": "smc-constrained-emission-envelope-ellipsoid-smc-allwise-wide",
       "label": "NASA AllWISE",
       "description": "Infrared colors from the NASA/IPAC AllWISE color mosaic served by CDS, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
       "enabledIds": [

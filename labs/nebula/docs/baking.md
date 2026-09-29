@@ -14,7 +14,7 @@ pnpm build:packages
 node --experimental-strip-types labs/nebula/run.mts prepare-processing-environment
 ```
 
-The environment command reads the canonical Python/package and NOX model pins from `models/lmc/bake.json`, creates or verifies `.local/open-star-removal/venv`, and downloads only a missing model. Success requires **`ENVIRONMENT_READY pinned Python packages and NOX model`** followed by **`NOX_MODEL_VERIFIED`** with its SHA-256. A ready environment is reused without reinstalling packages; an altered model fails while preserving its existing bytes. This command prepares no object images, density fields or baked assets.
+The environment command reads the canonical Python packages and NOX model path from `models/lmc/bake.json`, creates or verifies `.local/open-star-removal/venv`, and downloads only a missing model. Success requires **`ENVIRONMENT_READY pinned Python packages and NOX model`** followed by **`NOX_MODEL_VERIFIED`** with its path. A ready environment is reused without reinstalling packages, and an existing model file is kept as it is. This command prepares no object images, density fields or baked assets.
 
 Use `--python=/absolute/path/to/venv/bin/python` to verify an existing environment without modifying its packages. The same pinned model is still required. The environment-only command was verified against the existing macOS environment on 2026-09-13; this check is not a new clean-cache installation test.
 
@@ -36,7 +36,7 @@ node --experimental-strip-types labs/nebula/run.mts verify-nebula
 
 Success is **`BAKE_COMPLETE lmc` followed by `NEBULA_VERIFIED`**. The verifier checks the complete native-removal artifacts, saved placement/material settings, shared cloud geometry and catalogue stars, assembled lens-bank manifest, and accepted application textures. It only reads files: a missing or altered output fails without repairing it. The current recipe produces three LMC variants (VISTA, Horálek and WISE), 288 neutral LMC/SMC slices, 432 colored LMC slices, three image previews, six extraction previews and 943 shared stars. SMC gets its neutral density field; it has no accepted color reconstruction yet.
 
-The bake downloads missing native originals and the pinned NOX model, creates a local Python environment with pinned dependencies, and verifies hashes before processing. Large downloads and intermediate files stay in `.local/`. Allow at least 8 GiB beyond the clone for dependencies, originals and generated products. The measured clean run took **15 minutes** on macOS arm64, including downloads and Python setup; a cached full replay took **4.2 seconds**. Hardware and network speed affect these times. The saved pre-NOX baseline examines about 1.7 million VISTA candidates and dominates the first run. Later runs verify and reuse completed native removal/reconstruction results. Python package installation requires an available wheel for the machine's platform.
+The bake downloads missing native originals and the pinned NOX model, creates a local Python environment with pinned dependencies, and checks every input is present before processing. Large downloads and intermediate files stay in `.local/`. Allow at least 8 GiB beyond the clone for dependencies, originals and generated products. The measured clean run took **15 minutes** on macOS arm64, including downloads and Python setup; a cached full replay took **4.2 seconds**. Hardware and network speed affect these times. The saved pre-NOX baseline examines about 1.7 million VISTA candidates and dominates the first run. Later runs verify and reuse completed native removal/reconstruction results. Python package installation requires an available wheel for the machine's platform.
 
 The command does not need the browser's localStorage, a running server or previously completed image jobs. A full bake assembles its three-lens repaint bank under `.local/nebula-lab/bakes/` only: the application LMC now ships the finite-emission model in `models/lmc/envelope/`, restored by `pnpm prepare:nebulae` from `src/objects/lmc/source/compact/`, so this recipe no longer writes into `src/objects/lmc`. It does not restart the lab, change browser settings or publish anything.
 
@@ -44,8 +44,8 @@ The command does not need the browser's localStorage, a running server or previo
 
 | Stage | Source of truth | Result |
 |---|---|---|
-| Density | LMC/SMC scalar grids, physical frames and volume recipes | The same 144 neutral slices per object; geometry and pixel hashes verified |
-| Images | Three native originals, historical SMASH calibration, source hashes and accepted registration metadata | Full-footprint inspection previews; sky registration is preserved |
+| Density | LMC/SMC scalar grids, physical frames and volume recipes | The same 144 neutral slices per object; geometry and pixels verified |
+| Images | Three native originals, historical SMASH calibration, source records and accepted registration metadata | Full-footprint inspection previews; sky registration is preserved |
 | Removal | Saved baseline recipes, pinned NOX script/model and Python versions | Native starless image, residual and mask with exact subtraction checks |
 | Reconstruction | Shared density, catalogue/sky reference, saved placement and RGB controls | XYZ cloud banks plus the same 943 modeled catalogue stars for every image |
 | Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens repaint bank (historical; no longer the app delivery) |
@@ -92,15 +92,15 @@ models/
   lmc/bake.json                    tracked stage recipe and accepted settings
   {lmc,smc}/full-density/source/   tracked compact density grids and provenance
   {lmc,smc}/full-density/prepared/
-    *.json                        tracked reference geometry and resource hashes
+    *.json                        tracked reference geometry and resource sizes
     slices/                       ignored, regenerated textures
-  lmc/candidates/                 tracked registration and expected preview hashes
+  lmc/candidates/                 tracked registration and expected previews
     prepared/*.webp              ignored, regenerated inspection previews
   lmc/clouds-observation/source/
     target.png                    ignored, regenerated historical star-calibration panel
   lmc/stars/                      tracked catalogue input and sky-to-model reference
   lmc/star-separation/
-    *.json, receipts/             tracked extraction configuration and reference hashes
+    *.json, receipts/             tracked extraction configuration and references
     prepared/                     ignored, regenerated starless/residual previews
 src/objects/*/
   prepared/**/*.webp, *.png       ignored, regenerated runtime images
@@ -114,7 +114,7 @@ src/objects/*/
     reconstructions/              individual material banks, stars and manifests
     bakes/
       lmc-all.json                latest completed command receipt
-      lmc-<hash>/                 assembled local lens bank
+      lmc-lenses/                 assembled local lens bank
 ```
 
 Reference metadata stays versioned. Every derived lab image, including the three original-image inspection previews and historical SMASH star-calibration panel, is regenerated. Lab startup runs the assets stage: it restores density and inspection/reference images, acquiring missing originals, without running NOX or reconstruction. The six starless/residual previews and production slice images also remain untracked. Until extraction previews exist, Alignment offers the originals; completed removal jobs supply their own verified layers. The bake can recreate all these previews from the native originals.

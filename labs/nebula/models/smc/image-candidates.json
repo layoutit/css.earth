@@ -464,7 +464,7 @@
             ],
             "rotationDeg": 0
           },
-          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-dss2-fits.108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93.png"
+          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-dss2-fits.skybands.png"
         },
         {
           "id": "smc-herschel-dust",
@@ -501,7 +501,7 @@
             ],
             "rotationDeg": 0
           },
-          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e.png"
+          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.skybands.png"
         },
         {
           "id": "smc-wise-stellar",
@@ -538,7 +538,7 @@
             ],
             "rotationDeg": 0
           },
-          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc.png"
+          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.skybands.png"
         },
         {
           "id": "smc-wise-starforming",
@@ -575,7 +575,7 @@
             ],
             "rotationDeg": 0
           },
-          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-starforming.a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1.png"
+          "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-starforming.skybands.png"
         }
       ]
     }

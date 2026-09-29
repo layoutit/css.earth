@@ -242,7 +242,7 @@ The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and 
 ## 2. Acquire a suitable image and prior
 
 - Prefer observatory/agency/survey originals; credit the actual author and processing source. APOD publication does not transfer ownership to NASA.
-- Record exact URL, license/credit, SHA-256, native dimensions, bit depth, pixel conventions, filters, display stretch and WCS. Preserve original bytes in the ignored local cache.
+- Record exact URL, license/credit, byte count, native dimensions, bit depth, pixel conventions, filters, display stretch and WCS. Preserve original bytes in the ignored local cache.
 - Compare angular footprint and resolution before selecting: a sharp central image may miss the full cloud. Keep no-data regions explicit. Never upscale a preview and call it native detail.
 - Use a suitable measured/simulated spatial dataset, with units, frame, observer transform, source hash and limitations. Preserve the full prior before cutting a delivery region. A single photo without depth constraints requires explicitly authored geometry; report this instead of inventing measured depth.
 - Put object-specific choices in `models/<object>/` and acquisition metadata in `sources/`. Reuse algorithms rather than adding image-name branches.
@@ -251,7 +251,7 @@ The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and 
 
 - Follow the guidelines' eligibility matrix: independent density, symmetry, kinematic surfaces, irregular fronts, connected filaments/lobes, and absorption/scattering are different constraints that may be combined. Do not reduce every object to shells.
 - Use bounded primary-source research for spectroscopy, extinction, density diagnostics, distances, proper motions and simulations. An authorized specialist returns source identities, actual coverage and candidate constraints before any costly bake. Keep literature discovery distinct from data qualification and runtime implementation.
-- Preserve exact products, hashes, units, WCS/epoch, beam, spectral frame, masks, missing errors and access status. Full arrays, inspected headers and unavailable downloads are distinct. Never invent validity masks or treat pixel sampling as resolution.
+- Preserve exact products, units, WCS/epoch, beam, spectral frame, masks, missing errors and access status. Full arrays, inspected headers and unavailable downloads are distinct. Never invent validity masks or treat pixel sampling as resolution.
 - Write `models/<object>/physical-evidence.json`: source IDs plus evidence IDs classified `observed`, `published-model` or `authored`, with units, footprint, uncertainty when supplied and limitations. Use Orion's ledger as a record example, not its geometry as a template for other objects.
 - Keep executable method/parameter choices in a separate recipe. Pin its ledger, selected method/evidence IDs and every authored setting. Shared TypeScript owns validation and algorithms; object data owns all target-specific values. Changing evidence must change the affected fit identity.
 - Register constraints to the common image frame. Small core maps cannot constrain an entire complex; label unsupported regions and do not infer depth from image intensity or directly from velocity. Retain competing literature interpretations and explicit tracer-to-model mappings.
@@ -292,13 +292,13 @@ Choose the configured method first. The numbered procedure below is the **fixed-
 5. Sample registered candidate chromaticity at each existing slice texel’s physical position. Optional saturation, local detail, brightness and gamma are authored RGB material controls; use one coverage-normalized registered detail field for all axes, preserve alpha, and pin settings in the result. Preview explicitly; do not process on slider movement. Image brightness cannot redefine density. Missing/zero-RGB samples retain explicitly counted neutral density color; report this mixed-source coverage.
 6. Preserve observed IDs, astrometry and photometry. One configured sky-to-density fit conditions model depths on the real density field, independently of candidate image. All materials share the same resulting positions and encoded cutoff signal; no per-image selection or repositioning.
 7. Current LMC comparison uses the existing 144 Alignment slices and 943 stars, a 1024px registered color plane, and an original comparison plane up to 2048px within four million pixels. It preserves Alignment density detail, not all native image detail. Prepare original-image geometry through exactly the same mapping.
-8. Verify exact geometry, every decoded alpha byte, catalogue records and resource hashes. Finalize only a complete local result atomically. Decode the next bank before swapping the retained scene; never host or deploy as part of processing.
+8. Verify exact geometry, every decoded alpha byte, catalogue records and every resource file. Finalize only a complete local result atomically. Decode the next bank before swapping the retained scene; never host or deploy as part of processing.
 
 ## 6. Inspect and accept the approximation
 
 - Compare variants at the same camera, scale and brightness. Check front, oblique and edge views plus a continuous orbit.
 - Inspect feature connectivity, parallax, repeated silhouettes, sheet-like depth, slice gaps, disappearing detail, seams, whitening and angle-dependent brightness.
-- Check source identity, placement, exact canonical geometry/alpha, resource hashes, XYZ banks, payload and actual job duration. Use Earth view and the original-image overlay to inspect mapping. Inspect active banks at the same camera pose to isolate handoff defects. A passing front projection does not prove real side geometry.
+- Check source identity, placement, exact canonical geometry/alpha, resource files, XYZ banks, payload and actual job duration. Use Earth view and the original-image overlay to inspect mapping. Inspect active banks at the same camera pose to isolate handoff defects. A passing front projection does not prove real side geometry.
 - Test switching saved sources without reprocessing or scene teardown; refresh must reconnect/load the same result.
 - Prepare stellar area and opacity jointly from catalogue magnitudes, with global exposure and no arbitrary faint-star opacity floor. Image residuals can check correspondence; candidate image brightness must not redefine the shared catalogue light.
 - Keep stellar overlays independent of image choice and coverage. Preserve the same catalogue XYZ and reference-support signal, validate its common reference and positive source-density support, and use a common projection for cutoff. Keep the star toggle. Inferred member depths need documented constraints, not a flat background plane.
@@ -314,7 +314,7 @@ Choose the configured method first. The numbered procedure below is the **fixed-
 
 - Native NOX outputs: `.local/nebula-lab/star-removal-nox-applied/`.
 - Completed volumes: `.local/nebula-lab/reconstructions/`, including descriptor, masters/delivery, provenance and manifest.
-- Preserve exact historical receipt bytes/hashes during organization; resolve relocated paths at loading boundaries.
+- Preserve historical receipts' recorded paths and results during organization; resolve relocated paths at loading boundaries.
 - Keep all derived images out of Git, including original-image inspection previews, historical reference panels, extraction previews and every object’s runtime textures; retain inputs, settings and expected hashes. An accepted recipe may restore already-approved app textures through its pinned delivery manifest. New production promotion still requires explicit scope, reproducible input/recipe/transform/depth/bake records and fixed-camera acceptance. Keep runtime PolyCSS plain TypeScript; React owns the lab UI only.
 - For a future high-detail named structure, test a registered local crop and connected volumetric model first. Multi-band color, wavelets, NeRF or Gaussian splats alone do not recover missing physical depth.
 

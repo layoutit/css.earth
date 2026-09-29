@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
   "imageId": "smc-smash",
-  "removalResultId": "333fa52f7fd247bcc3a468e2853317d446cb7449d312aa08b91d7160085f566d.0b16a84cadec2e9ab81fc99fed4775a01b803d5c6d735cf65b964e4f76e0ead1",
+  "removalResultId": "smc-smash",
   "placement": {
     "x": 0,
     "y": 0,
@@ -19,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+    "id": "reconstruction-smc-constrained-emission-envelope-ellipsoid-smc-smash",
     "name": "NOIRLab SMASH · optical · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+    "directory": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-smash",
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -52,10 +52,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-smash/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-smash/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"

@@ -20,7 +20,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 ## Registration and reproducibility
 
-- `observations.json` pins each downloaded TIFF by SHA-256 and actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
+- `observations.json` names each downloaded TIFF by URL with its actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
 - The common frame contains all native source corners with a six-percent angular margin. No frame was cropped to make the photographs agree.
 - `observation-structures.json` configures the shared wavelet structure extraction.
 - `compiler.json` configures the generic relative-emission compiler. No Helix joint-fit recipe or planetary expansion prior is reused.
@@ -30,7 +30,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 The optical frame covers the central M78 region, while VISTA covers more surrounding cloud. Their orientations differ by about 103 degrees and must come from WCS, not visual rotation guesses. Reflection/scattering and foreground extinction are not modeled by positive relative-emission fitting; results remain a visualization hypothesis.
 
-The source packet was verified against both image SHA-256 values and decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
+The source packet was verified against both images' decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
 
 Without spectroscopy or an independent volume, the compiler’s depth is a conditional diffuse prior. Compact lights are detected image features with illustrative depths; they are not a catalog of confirmed members with measured distances.
 

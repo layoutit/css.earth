@@ -62,7 +62,7 @@ from the **deprojected** 21.2 km/s expansion derived using an assumed 37° tilt.
 ### Verified ALMA product
 
 - Project `2012.1.00116.S`; member `uid://A002/X609170/X14`; observed 2014-07-21 onward.
-- [CO primary-beam-corrected FITS](https://almascience.eso.org/dataPortal/member.uid___A002_X609170_X14.CO_21_SPW0.pbcor.fits): 158,803,200 bytes; SHA-256 `f8893e1489d8da2c73079c5744610aa68bc964bc8c3a491dd7025ecd0bd998fa`.
+- [CO primary-beam-corrected FITS](https://almascience.eso.org/dataPortal/member.uid___A002_X609170_X14.CO_21_SPW0.pbcor.fits): 158,803,200 bytes.
 - Actual delivered header: float32, 630×630×100×1, 0.09″ sky pixels, 0.519″×0.411″ beam, Jy/beam. Frequency starts at 230,553,432,516 Hz with 121,985.1999817 Hz channel step; rest frequency 230,538,000,000 Hz. Frame `LSRK`, radio convention (`VELREF=257`). This gives approximately **0.1586 km/s per channel**.
 - The paper’s separately reduced approximately 0.05 km/s sampling and 0.39″ resolution do **not** describe these delivered bytes. The 56.7″ raster extent also does not equal uniform sensitivity: the primary beam is roughly 28″.
 - [Archive README](https://almascience.eso.org/dataPortal/member.uid___A002_X609170_X14.README.txt) records pipeline calibration/manual imaging, noisy high-resolution bandpass solutions and a single channel mask; only selected spectral portions were imaged. Matching uncorrected `.image.fits` and `.flux.fits.gz` primary-beam products are listed in the archive manifest.

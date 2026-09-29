@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
   "imageId": "vista-infrared",
-  "removalResultId": "6695dc1957c9ab6b2831bfe3a859f52bb7ce2b55d837739d8ff917d394071a54.d37da4f14fa3f503f8560067b0fe7b300e6ee2f0a16ba06d07f0f815f2ffc4a1",
+  "removalResultId": "vista-infrared",
   "placement": {
     "x": 0,
     "y": 0,
@@ -19,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+    "id": "reconstruction-lmc-clouds-emission-envelope-vista-infrared",
     "name": "ESO VISTA · infrared, star-aligned · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+    "directory": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-vista-infrared",
     "stars": "labs/nebula/models/lmc/stars/prepared/stars-envelope.json",
     "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
     "credit": "ESO/VMC Survey",
@@ -48,12 +48,12 @@
       },
       "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
     },
-    "imagePath": ".local/nebula-lab/reconstructions/f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-vista-infrared/source/target.png",
     "menuLabel": "LMC",
     "workflow": "density",
     "sourceSubjectId": "lmc-clouds",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-vista-infrared/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"

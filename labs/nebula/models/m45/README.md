@@ -13,7 +13,7 @@ The composed image preserves the wide surrounding dust and adds central NOIRLab 
 
 ## Catalogue stars and wider optical comparison · 13 September 2026
 
-The current local stellar update is `29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef`. It retains every cloud bank, alpha byte, geometry and fitting input from `a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8`. It does not replace the cloud material with the rejected material experiments.
+The current local stellar update is `m45-stars`. It retains every cloud bank, alpha byte, geometry and fitting input from `m45`. It does not replace the cloud material with the rejected material experiments.
 
 The checked-in [stellar catalogue](stellar-catalogue.json) contains 2,105 Hipparcos/Tycho-2 records. The 450 brightest in-frame entries replace residual-only detections, using apparent Johnson V, measured/approximately transformed B−V and exact TAN sky projection. These optical reference lights stay the same across infrared lenses. Their line-of-sight placement remains illustrative; no membership or physical distance is invented. The [source receipt](stellar-sources.json) pins bounded CDS cones and the reproducible strict TypeScript acquisition owner; a cold download reproduced the catalogue exactly. [Stellar evidence](stellar-evidence.json) records the retained-cloud and native-centroid checks.
 
@@ -34,8 +34,8 @@ processing. Neither archived source was star-removed or reconstructed.
 
 ## Sources
 
-The [observation recipe](observations.json) records exact downloaded bytes,
-SHA-256, dimensions, credits, source URLs, full footprints and WCS. The
+The [observation recipe](observations.json) records exact downloaded byte counts,
+dimensions, credits, source URLs, full footprints and WCS. The
 [source dossier](source-dossier.json) adds band assignments, observation/release
 intervals, sampling versus resolution, original-master access and limitations.
 Large originals remain in the ignored local intake cache.
@@ -169,7 +169,7 @@ artifacts, with no production promotion or hosting.
 
 ## Compiled comparison · 13 September 2026
 
-Current local result: `a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8`.
+Current local result: `m45`.
 [Compiler defaults](compiler.json) pin Detail 100%, Faint 35%, Depth 1× and
 equal source weights. It contains 472 supports, 450 shared compact lights and
 four RGB lenses. Native separation and structure extraction were reused;
@@ -177,14 +177,14 @@ the inspected trial's geometry/material bake took 36.8 seconds, total compile 39
 
 The earlier integration replay changed the implementation identity after shared
 per-lens alpha validation was added. [Processing evidence](processing-evidence.json)
-compares result `93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640`
-with inspected result `ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d`:
+compares result `m45-integration-replay`
+with inspected result `m45-before-integration-replay`:
 all 4,105 bank resources (12,571,204 bytes), the numerical field, geometry,
 alpha, stars, source panels and metrics are identical. The prior model/material
 assessment therefore still applies; this replay adds no model refinement.
 
 The shared star-detector correction later removed its premature 6,000 sharp-peak
-cutoff. Result `8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4`
+cutoff. Result `m45-star-selection-correction`
 retains the 450-light budget but selects 99 newly eligible measured residual
 sources. All cloud resources, geometry, alpha, source panels and metrics remain
 exact. The current owner replay is also byte-equivalent in all those properties
@@ -196,15 +196,14 @@ star union; this final replay adds no geometry, material or stellar refinement.
 | Detail 65% baseline | 359 | 0.028515 | 11.04% | 10.98% |
 | Detail 100% retained trial | 472 | 0.024469 | 9.59% | 9.18% |
 
-The baseline is `37c56fce3ce71f8c4058fb94ecc2d27e9059425eff118aff1685a82f511e4539`.
+The baseline is `m45-retained-trial-baseline`.
 The target image and fitting implementation have identical hashes across these
 two trials; only detail selection and its supporting recipe-default plumbing
 changed. The 14.2% lower residual measures better display-image agreement,
 not improved physical depth. Zero-emission baseline RMSE is 0.179623 for both.
 
 All result/resource hashes validate. The four lenses preserve exact neutral
-frame and slab geometry, and every decoded alpha byte. The recorded alpha
-digest is `4531ee08d209e44ec9725f3b4ef20d0251ca79e10927e8757d552587c8b06466`.
+frame and slab geometry, and every decoded alpha byte.
 XYZ banks use 512px in-plane sampling and four samples per slab.
 
 Isolated Chromium inspection loaded the saved result without processing and
@@ -214,7 +213,7 @@ and refresh. No browser errors or processing POSTs occurred. Screenshots and
 the current star-detector interaction receipt are local in
 `output/nebula-processing/m45-stars-final-browser/`; the first
 comparison remains in `output/m45-inspection-round1/`.
-The latest full inspection tested result `8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4`;
+The latest full inspection tested result `m45-star-selection-correction`;
 exact cloud, stellar and source identity makes it applicable to the current replay.
 The preserved `output/m45-inspection/` folder tested the earlier alpha integration. Its earlier
 interaction receipt was archived from the complete pre-replay file read in

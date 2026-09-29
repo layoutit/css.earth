@@ -46,7 +46,7 @@ Image import and registration do not themselves authorize separation or a volume
 
 ## 1. Acquire and preserve the observation
 
-- Record publisher, source URL, credits, license, bands, native dimensions, bit depth, color profile, SHA-256, WCS and pixel convention. Preserve the exact downloaded bytes.
+- Record publisher, source URL, credits, license, bands, native dimensions, bit depth, color profile, byte count, WCS and pixel convention. Preserve the exact downloaded bytes.
 - Prefer scientific survey/observatory sources. Author photographs are useful with explicit credits and registration; appearing on APOD does not make them NASA-owned or calibrated photometry.
 - Process the native grid of the **pinned source**, then reduce delivery previews. A publisher's 10K derivative is not its larger original. Upscaling does not supply missing detail.
 - Keep the entire footprint and actual no-data regions. A black display pixel alone is not a measured absence of emission. Do not crop to a central connected component, subtract the outskirts, or cut against simulation density before comparing coverage.
@@ -76,7 +76,7 @@ The image sidebar uses **NOX automatic removal**. Manual star picking, profile c
 2. **Quick preview** runs the model on automatically selected native crops. Inspect bright stars, crowded regions and nebula detail. It never changes the full image or the reconstruction.
 3. **Remove stars** processes the full native image using overlapping tiles and bounded batches. The worker reports actual progress. Refresh reconnects to the server-owned job; only **Cancel** stops it. A server restart marks interrupted work honestly.
 4. Derive the positive original-minus-prediction residual. Preserve earlier approved removal when a baseline exists. Subtract once from the original; keep the exact native integer accounting `original = without stars + residual` and the actual changed-pixel mask.
-5. Save native lossless outputs, bounded comparison textures, model/source/code hashes and verification. Install only a completed, verified result; source images, placement and the current 3D reconstruction remain unchanged.
+5. Save native lossless outputs, bounded comparison textures, the model and source paths and verification. Install only a completed, verified result; source images, placement and the current 3D reconstruction remain unchanged.
 
 The three comparison buttons are **Original / Without stars / Residual**. Removal strength defaults to 100%; lowering it blends the completed result rather than refitting stars. No sample list, calibration prerequisite or separate star-removal tab remains.
 
@@ -104,7 +104,7 @@ In **Reconstruction**, choose a completed source and press **Preview**. The sour
 - Use one configured SMASH sky-to-model reference and the pinned full-density field to assign deterministic model depths to the existing 943 observed stars. Preserve their IDs, measured coordinates and photometry. All candidate images use the same resulting star positions; the candidate image cannot select or move stars.
 - Prepare point brightness from the catalogue’s V magnitude, independently of the candidate image. Relative flux is `10 ** (-0.4 * (V - 10))`; see the [observatory magnitude reference](https://lco.global/spacebook/distance/comparing-magnitudes-different-objects/). Split that display-light budget between point area and opacity, compensating the encoded RGB luminance. Do not add a faint-star opacity floor or boost size and opacity independently. Current prepared diameters stay within 0.65–4 px; the measured 943-star sample does not clip its flux budget. This is a bounded display approximation, not radiometrically calibrated output. The Exposure control scales all star light together; Size scales all diameters together.
 - Prepare an original-image comparison plane and nine source-UV landmarks through the actual painter mapping. **Earth view** uses one shared observer/framing in both tabs. Compare the same landmarks across tabs, including legacy object routes; testing one tab against its own transform misses this failure.
-- Verify the actual output against Alignment: every quad, every alpha byte, source/frame hashes, same stars across materials, and source switching at a retained camera. Keep the existing density source and saved browser placements untouched.
+- Verify the actual output against Alignment: every quad, every alpha byte, source/frame records, same stars across materials, and source switching at a retained camera. Keep the existing density source and saved browser placements untouched.
 
 Original-image inspection uses up to 2048px within four million pixels. The cloud has simulated stellar density and modeled display colors/depths, not measured gas geometry. Rotation artifacts of the inherited density bank remain a separate rendering concern.
 

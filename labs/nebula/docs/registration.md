@@ -5,7 +5,7 @@ Read 2026-09-08. This note separates published facts from local derivations. It 
 ## Primary sources read
 
 - Garver et al. (2026), *Reproducing stellar structures in the Magellanic Clouds using a genetic algorithm with N-body simulations*: https://doi.org/10.1093/mnras/stag1287 (open-access HTML: https://academic.oup.com/mnras/article/550/3/stag1287/8732239).
-- Dryad v2 dataset record and README: https://doi.org/10.5061/dryad.1vhhmgr82 and https://datadryad.org/dataset/doi:10.5061/dryad.1vhhmgr82. The README content is embedded in the public landing page; the anonymous individual-file endpoints returned 401/403. README file metadata: id 4645487, 2,934 bytes, SHA-256 `143e0623f2b361477e8765296a35b9178fa9568e56ab1470d00c22a428cda222`.
+- Dryad v2 dataset record and README: https://doi.org/10.5061/dryad.1vhhmgr82 and https://datadryad.org/dataset/doi:10.5061/dryad.1vhhmgr82. The README content is embedded in the public landing page; the anonymous individual-file endpoints returned 401/403. README file metadata: id 4645487, 2,934 bytes.
 - NOIRLab LMC image page and pinned original TIFF: https://noirlab.edu/public/images/noirlab2030a/ and https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif.
 - AVM 1.2 reference table for coordinate conventions: https://www.virtualastronomy.org/AVM_12_ref_table_rlh02_print2.pdf.
 

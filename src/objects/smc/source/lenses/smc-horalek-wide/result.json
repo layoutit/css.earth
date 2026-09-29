@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
   "imageId": "smc-horalek-wide",
-  "removalResultId": "e6467648096ee00e1604611cf8ec4fa643d3764eace979fa6d064ef8f4676dbb.e4129024e2d639f47080f406dfd25702af8c18dd63a6e178daacc0612e673c7a",
+  "removalResultId": "smc-horalek-wide",
   "placement": {
     "x": 0,
     "y": 0,
@@ -19,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
+    "id": "reconstruction-smc-constrained-emission-envelope-ellipsoid-smc-horalek-wide",
     "name": "Horálek · wide optical · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
+    "directory": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-horalek-wide",
     "sourcePageUrl": "https://noirlab.edu/public/images/iotw2615a/",
     "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -52,10 +52,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-horalek-wide/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-horalek-wide/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
