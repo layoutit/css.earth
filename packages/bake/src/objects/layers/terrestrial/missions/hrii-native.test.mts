@@ -16,7 +16,7 @@ for(const c of fixture.cases)test(`${c.body} native ${c.path.split('/').at(-1)} 
 });
 
 for(const c of fixture.cases)test(`${c.body} row ${c.detectorRow}: native FITS channels and masks match the Astropy extract`,async()=>{
- const {createHash}=await import('node:crypto'),{decodeHriiSpectra}=await import('@cssearth/bake/objects/layers/terrestrial');
+ const {decodeHriiSpectra}=await import('@cssearth/bake/objects/layers/terrestrial');
  assert.ok(['comet-9p','comet-103p'].includes(c.body)&&/^science\/hrii\/hi[0-9_]+_r{1,2}\.fit$/.test(c.path));
  const bytes=readFileSync(new URL(`../../../../../../../src/objects/${c.body}/source/${c.path}`,import.meta.url));
  const spectrum=decodeHriiSpectra(bytes),actual=[];

@@ -108,7 +108,6 @@
     }
   },
   "software": [],
-  "toolchainDigest": "13d5f2d75a9fb5d3dc50b9af6fbcf8eff076afc64bda18ebbd09dacafc3803c5",
   "outputs": [
     {
       "path": "nh_charon_color_mosaic.lblx",
@@ -130,7 +129,7 @@
       "kind": "archive-origin",
       "receipt": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
       "product": "nh_charon_color_mosaic.img",
-      "establishes": "nh_charon_color_mosaic.img and every file referenced by urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0 match the PDS Registry sizes and MD5 values, are pinned here by SHA-256, and pdr 1.4.4 decoded the complete science array. This establishes origin, integrity and readability only; no local calibration or archive agreement is claimed."
+      "establishes": "nh_charon_color_mosaic.img and every file referenced by urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0 match the PDS Registry sizes, are pinned here by URI and size, and pdr 1.4.4 decoded the complete science array. This establishes origin and readability only; no local calibration or archive agreement is claimed."
     }
   ]
 }

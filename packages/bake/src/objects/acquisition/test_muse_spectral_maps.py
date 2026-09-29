@@ -83,14 +83,14 @@ class MuseSpectralMapTests(unittest.TestCase):
         self.assertLess((89.1-transform.f)/transform.e,0)
         self.assertEqual(muse.OBSERVABLES['577.3nm_band']['unit'],'ratio')
 
-    def test_recipe_requires_interpretation_pin_and_retains_ratio(self):
+    def test_recipe_requires_declared_sources_and_retains_ratio(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); source=root/'577.3nm_band_ganymede_night_1.fits'
             values=np.full((90,180),np.nan); values[45,0]=1.015; write_fits(source,values)
             plan={'schema':muse.SCHEMA,'target':'ganymede','registration':{'mode':'author-grid-two-degree-nodes',
                   'absoluteSubpixelRegistration':'unresolved','evidence':['independent synthetic test fixture']},
                   'overlapPolicy':'first-valid-night-1-2-3','edgeWithholdNodes':0,'referenceRadiusMeters':2631200,
-                  'pins':{source.name:muse.sha256(source)},'entries':[{'input':source.name,'kind':'577.3nm_band','night':1,'output':'ratio.tif'}],
+                  'entries':[{'input':source.name,'kind':'577.3nm_band','night':1,'output':'ratio.tif'}],
                   'receipt':'receipt.json'}
             path=root/'recipe.json'; path.write_text(json.dumps(plan))
             with contextlib.redirect_stdout(io.StringIO()): receipt=muse.prepare(path)
@@ -98,8 +98,11 @@ class MuseSpectralMapTests(unittest.TestCase):
             with rasterio.open(root/'ratio.tif') as image:
                 self.assertEqual(image.dtypes,('float32',)); self.assertEqual(image.nodata,-9999)
                 self.assertAlmostEqual(float(image.read(1)[44,90]),1.015,places=6)
-            plan['pins'][source.name]='0'*64; path.write_text(json.dumps(plan))
-            with self.assertRaisesRegex(ValueError,'source changed'): muse.prepare(path)
+            path.write_text(json.dumps({**plan,'pins':{source.name:'retired'}}))
+            with self.assertRaisesRegex(ValueError,'"pins" field is retired'): muse.prepare(path)
+            path.write_text(json.dumps(plan)); source.rename(root/'moved.fits')
+            with self.assertRaisesRegex(ValueError,'missing MUSE sources: entries\\[0\\].input'): muse.prepare(path)
+            (root/'moved.fits').rename(source)
             plan['registration']['absoluteSubpixelRegistration']='known'; path.write_text(json.dumps(plan))
             with self.assertRaisesRegex(ValueError,'unresolved subpixel'): muse.prepare(path)
 

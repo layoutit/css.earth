@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';

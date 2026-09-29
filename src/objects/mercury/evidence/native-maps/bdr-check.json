@@ -2,8 +2,6 @@
   "passed": true,
   "method": "Independent PDS3-labelled band-sequential byte offsets and explicit source-cell overlap sums; no production GeoTIFF reader or reduction helper. Checks representative footprints, poles, both sides of the seam and the equator; does not establish instrument accuracy.",
   "native": "output/mercury-native-maps/native/bdr.tif",
-  "compactSha256": "da37ede4dfdf97e064e9923314e1ac15b629d2d704fc6a716b68bf81d187364d",
-  "labelSha256": "0c9efcf9cfebfed6892ab30e1c78cfe434cedd7516e5964d36b77dfe4729c068",
   "checks": [
     {
       "x": 0,

@@ -3,15 +3,12 @@
   "id": "smc-vmc-density",
   "outputDirectory": ".local/nebula-lab/smc-vmc-density",
   "catalogue": {
-    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
-    "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
   },
   "receipt": {
-    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
-    "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
   },
   "frameObject": {
-    "path": "labs/nebula/models/smc/full-density/object.json",
-    "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+    "path": "labs/nebula/models/smc/full-density/object.json"
   }
 }

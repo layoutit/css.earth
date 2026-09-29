@@ -23,4 +23,4 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** SIMBAD knows it as [KTR2013] V66 (not Cl* NGC 6121 SAW V66, a different variable) and links no Gaia DR3 source; it is placed at Gaia DR3 6045465884181859712, 0.31 arcsec from the position in Kaluzny et al. (2013), Table 4, G = 16.47 against DEBCat's V = 16.84.
 - **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

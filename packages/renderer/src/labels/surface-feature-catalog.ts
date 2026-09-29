@@ -114,7 +114,7 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
 
 export type SurfaceFeatureTransport = (url: string, init: { signal: AbortSignal }) => Promise<Response>;
 
-async function loadPinnedCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, descriptor: SurfaceFeatureCatalogDescriptor,
+async function loadCatalogFile(plan: PreparedSurfaceFeaturePlan, objectId: string, descriptor: SurfaceFeatureCatalogDescriptor,
   signal: AbortSignal, transport: SurfaceFeatureTransport): Promise<PreparedSurfaceFeatureCatalog> {
   const response = await transport(descriptor.url, { signal });
   if (!response.ok) throw new Error(`Surface feature catalogue ${objectId} ${descriptor.url} failed: HTTP ${response.status}.`);
@@ -124,7 +124,7 @@ async function loadPinnedCatalog(plan: PreparedSurfaceFeaturePlan, objectId: str
 /** Fetch the default label catalogue. */
 export async function loadPreparedSurfaceFeatureCatalog(plan: PreparedSurfaceFeaturePlan, objectId: string, signal: AbortSignal,
   transport: SurfaceFeatureTransport = (url, init) => fetch(url, init)): Promise<PreparedSurfaceFeatureCatalog> {
-  return loadPinnedCatalog(plan, objectId, plan.catalog, signal, transport);
+  return loadCatalogFile(plan, objectId, plan.catalog, signal, transport);
 }
 
 /** Resolve and load only the bank that can contain a search-only feature. */
@@ -133,7 +133,7 @@ export async function loadPreparedSurfaceFeatureBank(plan: PreparedSurfaceFeatur
   if (!plan.selection) return null;
   const descriptor = plan.selection.banks[surfaceFeatureBankIndex(id, plan.selection.banks.length)];
   if (!descriptor) throw new TypeError('Surface feature selection bank is missing.');
-  return loadPinnedCatalog(plan, objectId, descriptor, signal, transport);
+  return loadCatalogFile(plan, objectId, descriptor, signal, transport);
 }
 
 /** Resolve one selected feature without admitting every search-only outline into memory. */

@@ -1,8 +1,13 @@
 import type { ObjectDiscovery } from './object-discovery.js';
+import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
 import { defineObject } from './object-schema.js';
 import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
+import { parseNavigationDistance } from './navigation-distance.js';
+import { definePreparedFocus } from './prepared-focus-object.js';
+import type { NavigableObject } from './prepared-focus-object.js';
+import { defineOverview } from './overview-object.js';
 
 /** `orbitsWithinAu`: a host's authored presentation range, the camera distance up to which its system draws every orbit. */
 /** `labelPlacement: 'centre'` captions the body over its middle instead of below it (Sgr A*'s black shadow). */
@@ -68,4 +73,18 @@ export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDef
     classificationLabel: typeof catalog.classificationLabel === 'string' ? catalog.classificationLabel : undefined, route: `/${input.id}/`,
     worldFrame: input.properties.worldFrame, discovery, loadScene }), aliases: aliases(catalog.aliases, input.id),
     order: order(catalog.order), ...(context ? { context } : {}) };
+}
+
+/** One entry of the prepared catalogue, as `prepare:catalog` writes it and `/objects/<id>/entry.json` serves it: a scene
+ * object's descriptor with its navigation distance and discovery, a prepared focus or an overview. `loadScene` binds a
+ * scene object's descriptor to the host's scene loader. The catalogue's order and context stay out of the object. */
+export function catalogueObject<Scene, Signal>(value: unknown,
+  loadScene: (descriptor: Record<string, unknown>) => ObjectDefinitionInput<Scene, Signal>['loadScene']): NavigableObject<Scene, Signal> {
+  if (!isRecord(value)) throw new TypeError('Invalid catalogue entry.');
+  if (value.kind === 'prepared-focus') return definePreparedFocus(value);
+  if (value.kind === 'overview') return defineOverview(value);
+  if (value.kind !== 'scene' || !isRecord(value.descriptor)) throw new TypeError('Invalid catalogue entry.');
+  const { order: _order, context: _context, ...object } = catalogEntry(value.descriptor, loadScene(value.descriptor),
+    parseNavigationDistance(value.distance), parseObjectDiscovery(value.discovery));
+  return object;
 }

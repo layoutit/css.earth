@@ -3,7 +3,6 @@
   "rows": [
     {
       "id": "2480981469",
-      "cubeSha256": "6258068a9de0722b72255e9e727c25f770a8e90748de6bda6bb25f3ad0a956d0",
       "nativeXyzSampleStride": 13,
       "samples": 44064,
       "meanMeters": 0.12554949955022268,
@@ -37,13 +36,12 @@
         ],
         "fitPixels": 3197,
         "holdoutPixels": 569479,
-        "maximumResidualPixels": 0.000039185483910343415,
-        "rmsResidualPixels": 0.000009890891732395302
+        "maximumResidualPixels": 3.9185483910343415e-05,
+        "rmsResidualPixels": 9.890891732395302e-06
       }
     },
     {
       "id": "2481672682",
-      "cubeSha256": "7b59b7616c5bb5973e4f7137d1b9325c421708ab7315e15f2a738fcbe6a0a928",
       "nativeXyzSampleStride": 13,
       "samples": 38277,
       "meanMeters": 0.12973337321594924,
@@ -77,13 +75,12 @@
         ],
         "fitPixels": 2791,
         "holdoutPixels": 494820,
-        "maximumResidualPixels": 0.00003597302461905386,
-        "rmsResidualPixels": 0.000008881361956432681
+        "maximumResidualPixels": 3.597302461905386e-05,
+        "rmsResidualPixels": 8.881361956432681e-06
       }
     },
     {
       "id": "2492513077",
-      "cubeSha256": "d3684ac52b7acf53502a0bb2c09e77450824825bc0c48f4fd4fff58035f51132",
       "nativeXyzSampleStride": 13,
       "samples": 25809,
       "meanMeters": 0.1317852267815098,
@@ -117,13 +114,12 @@
         ],
         "fitPixels": 1876,
         "holdoutPixels": 333562,
-        "maximumResidualPixels": 0.000021531426348257918,
-        "rmsResidualPixels": 0.000006020966934059926
+        "maximumResidualPixels": 2.1531426348257918e-05,
+        "rmsResidualPixels": 6.020966934059926e-06
       }
     },
     {
       "id": "2495230070",
-      "cubeSha256": "bbf8c65b2bc7094208a11f65542098e20046dbc9bebda5b5a74cdd6aaf3740b6",
       "nativeXyzSampleStride": 13,
       "samples": 47818,
       "meanMeters": 0.12496147339095647,
@@ -146,7 +142,7 @@
           [
             0.8669670801495705,
             0.4983654070781318,
-            -0.000054449757761834197,
+            -5.4449757761834197e-05,
             3.3538405573865053
           ]
         ],
@@ -157,8 +153,8 @@
         ],
         "fitPixels": 3477,
         "holdoutPixels": 618210,
-        "maximumResidualPixels": 0.000035589057421239626,
-        "rmsResidualPixels": 0.000009484190640795987
+        "maximumResidualPixels": 3.5589057421239626e-05,
+        "rmsResidualPixels": 9.484190640795987e-06
       }
     }
   ]

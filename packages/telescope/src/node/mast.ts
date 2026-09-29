@@ -2,18 +2,17 @@
 import { access, mkdir, rm, stat, symlink, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { WORKSPACE } from './paths.js';
-import { sha256, sha256File } from '@cssearth/core/node';
-import { requireArray, requireFiniteNumber, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroquery } from './astroquery.js';
 
 export const MAST_CACHE = resolve(WORKSPACE, 'output/archive-cache/mast');
 export const mastDownloadUrl = (uri: string) => `https://mast.stsci.edu/api/v0.1/Download/file?uri=${uri}`;
-export interface MastFile { readonly name: string; readonly uri: string; readonly bytes: number; readonly sha256?: string }
+export interface MastFile { readonly name: string; readonly uri: string; readonly bytes: number }
 
 const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
 export const exists = (path: string) => access(path).then(() => true, () => false);
 
-/** Download one MAST URI through Astroquery, then enforce cssEarth's byte pin. */
+/** Download one MAST URI through Astroquery, then enforce the recorded byte count. */
 export async function mastFile(file: MastFile, directory: string, sources: readonly string[] = []): Promise<string> {
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name)) throw new TypeError(`Invalid MAST file name: ${file.name}`);
   await mkdir(directory, { recursive: true });
@@ -26,28 +25,30 @@ export async function mastFile(file: MastFile, directory: string, sources: reado
     await rm(target, { force: true });
     await astroquery({ operation: 'mast-download', uri: file.uri, destination: target });
   }
-  if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} did not download to its pinned ${file.bytes} bytes.`);
-  if (file.sha256 !== undefined && (await sha256File(target)).sha256 !== file.sha256) throw new Error(`${file.name} differs from its pinned sha256.`);
+  if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} (${file.uri}) did not download to its recorded ${file.bytes} bytes.`);
   return target;
 }
 
 export interface MastServiceRequest { readonly service: string; readonly params: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
-export interface MastResponsePin { readonly path: string; readonly sha256: string }
-export interface MastServiceResult { readonly astroquery: string; readonly queriedAt: string; readonly rows: readonly Record<string, unknown>[]; readonly responseRecord?: MastResponsePin }
+export interface MastResponseRecord { readonly path: string }
+export interface MastServiceResult { readonly astroquery: string; readonly queriedAt: string; readonly rows: readonly Record<string, unknown>[]; readonly responseRecord?: MastResponseRecord }
 
 export async function preserveMastResponse(request: MastServiceRequest, result: MastServiceResult, directory = resolve(MAST_CACHE, 'responses')): Promise<MastServiceResult> {
-  const text = `${JSON.stringify({ schema: 'cssearth-mast-response@1', request, response: result }, null, 2)}\n`, digest = sha256(text), path = resolve(directory, `${digest}.json`);
+  // One file per service call, named by the service and the time it answered; replay checks the request it holds.
+  const text = `${JSON.stringify({ schema: 'cssearth-mast-response@1', request, response: result }, null, 2)}\n`;
+  const path = resolve(directory, `${request.service.replace(/[^A-Za-z0-9._-]/gu, '_')}.${result.queriedAt.replace(/[^0-9TZ]/gu, '')}.json`);
   await mkdir(directory, { recursive: true });
-  await writeFile(path, text, { flag: 'wx' }).catch(async (error: unknown) => { if (!hasErrorCode(error, 'EEXIST') || sha256(await readFile(path)) !== digest) throw error; });
-  return { ...result, responseRecord: { path, sha256: digest } };
+  await writeFile(path, text);
+  return { ...result, responseRecord: { path } };
 }
 /** Explicit replay only. A live failure never silently switches to an older response. */
-export async function replayMastResponse(pin: MastResponsePin, request: MastServiceRequest): Promise<MastServiceResult> {
-  const text = await readFile(pin.path, 'utf8'); if (sha256(text) !== pin.sha256) throw new Error('MAST response digest mismatch.');
-  const record = requireRecord(JSON.parse(text), 'MAST response record');
-  if (record.schema !== 'cssearth-mast-response@1' || JSON.stringify(record.request) !== JSON.stringify(request)) throw new Error('MAST response belongs to a different request.');
+export async function replayMastResponse(saved: MastResponseRecord, request: MastServiceRequest): Promise<MastServiceResult> {
+  const text = await readFile(saved.path, 'utf8').catch(() => { throw new Error(`The saved MAST response ${saved.path} for ${request.service} is missing.`); });
+  const record = requireRecord(JSON.parse(text), `MAST response record ${saved.path}`);
+  if (record.schema !== 'cssearth-mast-response@1') throw new Error(`${saved.path}: schema is ${String(record.schema)}, expected cssearth-mast-response@1.`);
+  if (JSON.stringify(record.request) !== JSON.stringify(request)) throw new Error(`${saved.path}: MAST response belongs to a different request.`);
   const response = requireRecord(record.response);
-  return { astroquery: requireString(response.astroquery), queriedAt: requireString(response.queriedAt), rows: requireArray(response.rows).map(row => requireRecord(row)), responseRecord: pin };
+  return { astroquery: requireString(response.astroquery), queriedAt: requireString(response.queriedAt), rows: requireArray(response.rows).map(row => requireRecord(row)), responseRecord: saved };
 }
 
 /** One typed MAST service request through the pinned Astroquery process. */
@@ -72,7 +73,7 @@ export interface MastObservation {
   readonly id: string; readonly collection: string; readonly archiveTarget: string; readonly programme: string; readonly mode: string;
   readonly startIso: string; readonly endIso: string; readonly filter?: string;
 }
-export interface MastObservationResult { readonly astroquery: string; readonly queriedAt: string; readonly observations: readonly MastObservation[]; readonly responseRecord?: MastResponsePin }
+export interface MastObservationResult { readonly astroquery: string; readonly queriedAt: string; readonly observations: readonly MastObservation[]; readonly responseRecord?: MastResponseRecord }
 const MJD_UNIX_EPOCH = 40_587;
 const mjdIso = (value: unknown, label: string) => new Date((requireFiniteNumber(value, label) - MJD_UNIX_EPOCH) * 86_400_000).toISOString();
 const text = (value: unknown, label: string) => typeof value === 'number' ? String(value) : requireString(value, label);

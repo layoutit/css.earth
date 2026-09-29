@@ -43,7 +43,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/runtime-source` | the runtime-source reader: a runtime module parsed into ESTree with its original ranges, imports resolved to source files through package exports and tsup entries, names, keys and static object properties | Node only (`node:*`, the ESLint parser, Vite) |
 | `@cssearth/bake/prepared-presentation` | passes that rewrite a compiled prepared presentation: depth partitions in a proven visibility order, the cascade check that keeps each moved leaf's computed style, the interior fill of a cut-open body, the authored-motion bindings resolved against the object's page styles (passed in by the application) | Node only (`node:*`, `sharp`, Playwright) |
 | `@cssearth/bake/delivery` | the atomic prepared-set and text writers, prepared page metadata, the WebP encodings prepared images are optimised with, pinned source bytes an acquisition publishes, the verify-after-publish gate, the scan for `/scenes/` references an asset-origin build left, the inventoried runtime-asset locations, an object's public runtime manifest and the publication of a staged preparation | Node only (`node:*`, `sharp`, `cwebp-bin`) |
-| `@cssearth/bake/sources` | an object's authored descriptor, the independent records of the source catalogue, the authored physical world frame checked against a prepared scene and runtime, images embedded in a published PDF figure, factsheet source checks, object-information source records, pinned-fact citations, a context manifest's source records, the source catalogue's factsheet citations and inventory, the prepared galaxy and cluster catalogues' bibliography citations, the preparation-evidence digest, the context packages' provenance and the facility artwork refresh (at the routes the application passes in), investigation ledgers, surveys and their report | Node only (`node:*`) |
+| `@cssearth/bake/sources` | an object's authored descriptor, the independent records of the source catalogue, the authored physical world frame checked against a prepared scene and runtime, images embedded in a published PDF figure, factsheet source checks, object-information source records, pinned-fact citations, a context manifest's source records, the source catalogue's factsheet citations and inventory, the prepared galaxy and cluster catalogues' bibliography citations, the context packages' lineage and the facility artwork refresh (at the routes the application passes in), investigation ledgers, surveys and their report | Node only (`node:*`) |
 | `@cssearth/bake/contract` | the checked object runtime definition and its prepared resource catalogue, validated against the prepared-presentation contract and the renderer's object controls, and the audits of a prepared presentation and its authored runtime sources | Node only |
 | `@cssearth/bake/asset-publication` | staging, publishing and checking the runtime assets on the asset host: the staging validator, the publisher, the published-asset gate, the deploy check and the dry-run prune report | Node only (`node:*`, `undici`) |
 | `@cssearth/bake/astronomy` | preparation's access to the built astronomy package, with a build hint when it is missing | Node only (`node:*`) |
@@ -51,7 +51,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/facility-renders` | the facility models' illustrative poses and the three.js renderer the facility thumbnails are drawn with | Node only (`three`) |
 | `@cssearth/bake/site-assets` | the application's prepared assets that are not an object's own: dataset sprites, search thumbnails, the planets' phase charts and the vendored Cesium minimap excerpts | Node only (`node:*`, `sharp`, `vite`) |
 | `@cssearth/bake/surface-previews` | the prepared records a surface minimap or preview raster is drawn from | Node only (`node:*`) |
-| `@cssearth/bake/preparation` | the preparation cache and the preparation trace's record format | Node only (`node:*`) |
+| `@cssearth/bake/preparation` | the stale-build check and the renderer bundling plugin | Node only (`node:*`) |
 | `@cssearth/bake/thread-pool` | sizes libuv's thread pool to the cores; imported for its side effect before other entries | Node only (`node:os`) |
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
 | `@cssearth/bake/objects/geometry` | shape models (including ASCII VTK POLYDATA) and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |
@@ -63,7 +63,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/objects/content` | the object-content contract, lens vocabulary, lens steps and prepared legends, lens billboard colours, palette legend labels derived from the reported stretch | Node only |
 | `@cssearth/bake/objects/surface-features` | surface-feature banks (IAU nomenclature, Natural Earth, landing sites, shape-model landmarks, ellipsoid projection), feature notes, image-control fits for encounter and orthophoto landmarks, the projected-control check, attaching the banks to a prepared globe | Node only |
 | `@cssearth/bake/objects/stellar` | a star's colour lens from its measured, Gaia XP or Planck spectrum, limb darkening, starspots from a published figure or occultation, Roche-von Zeipel gravity darkening | Node only |
-| `@cssearth/bake/objects/provenance` | the record readers and recipe bindings a layered body's provenance is compiled from | Node only |
+| `@cssearth/bake/objects/lineage` | which manifest sources each prepared product of a layered body reads, built in memory from its source records by the recipe bindings of each preparation family | Node only |
 | `@cssearth/bake/objects/candidates` | read-only public-archive searches (ALMA, ESO, MAST, DataCite, JMMC diameters), imagery candidates from OPUS, resolved-star candidates from SIMBAD, OiDB and VizieR | Node only (network) |
 | `@cssearth/bake/objects/default-view` | what a prepared object's default camera looks at, the check that a photograph lens's default camera faces it, the default lens's data coverage the default camera turns toward, and the turn toward a partial lens's data | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/objects/interpretation` | the observation interpreter the raster lane packs surfaces through: each surface's decoder (solar synoptic, terrestrial, shape-model, stellar, static observations, the Akatsuki UVI Level 3b grid), with the solar geometry the host passes in | Node only (`node:*`, `sharp`, `h5wasm`) |
@@ -94,7 +94,7 @@ packages/bake/
 │                  runtime contract, the astronomy package loader, navigation destinations and markers, surface-preview records, the preparation
 │                  cache and trace format, and the thread-pool sizing: one entry each
 ├── cli/           command entries (`node packages/bake/cli/<command>.mts`); nothing imports them
-├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, charts/, content/, surface-features/, stellar/, candidates/, provenance/,
+├── src/objects/   color/, geometry/, cameras/, scene/, raster/, sources/, charts/, content/, surface-features/, stellar/, candidates/, lineage/,
 │                  acquisition/, sphere-survey/, default-view/, celestial/, interpretation/, host-adapters/,
 │                  layers/<kind>/: the shared object libraries, one entry each
 ├── AGENTS.md      Package rules
@@ -149,7 +149,7 @@ to `prepared/<id>.json`, inventoried and published to R2, and it holds at most `
 stack and is written to the ignored `output/catalogue-points/<object>/`: never inventoried, never published, and
 never imported as a module (`packages/bake/src/volume/node/catalogue-banks.ts`). Vite serves an imported JSON file as an
 array literal, which Safari cannot compile past about a hundred thousand elements, and the site's build reads only
-`datasets`, `lenses`, `presentation` and `provenance` from a context object's `prepared/` (`site/prepared-context-json.mts`).
+`datasets`, `lenses` and `presentation` from a context object's `prepared/`, plus its source manifest (`site/prepared-context-json.mts`).
 
 ## Evidence
 
@@ -160,9 +160,9 @@ unchanged apart from import paths. The outputs were compared byte for byte with 
 - `pnpm prepare:volume` for the Milky Way (192 prepared files) and `prepare-stars` for the stellar neighbourhood
   (4 files) wrote identical files.
 - `tools/nebula/prepare.mts` for the eleven deliveries that bake wrote identical files, except each `delivery.json`
-  receipt's `implementationSha256`. That identity hashes the owners by package-relative name, and the name changed from
+  receipt's implementation identity. That identity named the owners by package, and the name changed from
   `@cssearth/volume-core`/`@cssearth/volume-bake` to `@cssearth/bake`. With main's identity substituted, every
-  `delivery.json` matches main's bytes. LMC and SMC record no such identity and matched entirely. M1 fails on both
+  `delivery.json` matched main's bytes. LMC and SMC record no such identity and matched entirely. M1 fails on both
   commits with the same error (`Compact sampled replay changed accepted hubble-optical volume`).
 - The 52 moved tests pass under Vitest, and `node labs/nebula/run.mts test` keeps the same six failures as before
   the move. `pnpm test:lab` stops at the same density-bake assertion both times.

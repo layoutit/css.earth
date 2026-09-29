@@ -96,7 +96,7 @@ were inspected, not claimed byte-identical. The unchanged arrival image is retai
 
 All 56 runtime assets were published and
 [freshly restored](evidence/infrared-mosaic/restoration.json) from R2 with the
-standard installer's byte-count and SHA-256 checks: 32,151,471 bytes for the
+standard installer's byte-count checks: 32,151,471 bytes for the
 whole Enceladus package. The final browser captures use those restored files.
 Each cold browser case fetched the same 1,928,874-byte infrared surface texture;
 this is the texture body size, not the full page transfer. No full-site build
@@ -234,7 +234,7 @@ Feature notes: 43 of the labelled names carry a caption note, the lead summary o
 
 - **Corrected-v2 shape:** Qualification status: source intake and recipe proposal. Salih crater at −5° East and other identifiable features provide cross-solution registration checks; actual image-to-v2 alignment and prepared error remain qualification work. Browser limb and feature qualification remains pending.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

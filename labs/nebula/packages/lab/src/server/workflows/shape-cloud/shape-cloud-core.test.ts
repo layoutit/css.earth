@@ -5,7 +5,6 @@ import { resolve, relative, dirname } from 'node:path';
 import sharp from 'sharp';
 import type { GeometryCandidate, GeometryMap } from '../../../features/observations/models/geometry-model.ts';
 import type { StructureImage } from '../../../features/observations/models/structures-model.ts';
-import { sha256 } from '@cssearth/core/node';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { initializeShapeCloud, readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';
 import { createShapeCloudField, createShapeImageSampler, shapePixelToUnits, shapeUnitsToPixel } from '@cssearth/bake/volume';
@@ -107,7 +106,7 @@ test('3D rings keep their opening through depth; signed terms carve soft cavitie
   assert.throws(() => readShapeCloudSettings({ ...settings, components: [{ ...base, shape: 'unknown' }] }, 200, 200));
   assert.throws(() => readShapeCloudSettings({ ...settings, components: [{ ...base, operation: null }] }, 200, 200));
 });
-test('actual XYZ bake paints the exact neutral alpha and geometry, records pins, responds to exposure and handles empty controls', async t => {
+test('actual XYZ bake paints the exact neutral alpha and geometry, records references, responds to exposure and handles empty controls', async t => {
   const root = resolve('.'), directory = await mkdtemp(resolve('.local/nebula-lab/shape-core-test-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const width = 48, height = 40, rgb = Buffer.alloc(width * height * 3);
@@ -116,19 +115,18 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
   }
   const path = relative(root, resolve(directory, 'source.png'));
   await sharp(rgb, { raw: { width, height, channels: 3 } }).png().toFile(resolve(root, path));
-  const source = { path, sha256: sha256(await readFile(resolve(root, path))) };
+  const source = { path };
   const image: StructureImage = { id: 'fixture', label: 'Fixture', width, height, nativeWidth: width, nativeHeight: height,
-    sourceSha256: '1'.repeat(64), sourceUrl: 'https://example.org/fixture.png', mapSha256: '2'.repeat(64), directory: relative(root, directory), imageToFrame: [1, 0, 0, 1, 0, 0], credit: 'Synthetic', page: 'https://example.org' };
+    sourceUrl: 'https://example.org/fixture.png', directory: relative(root, directory), imageToFrame: [1, 0, 0, 1, 0, 0], credit: 'Synthetic', page: 'https://example.org' };
   const map: GeometryMap = { width, height, groups: [], candidates: [{ ...candidate('a'), center: [20, 18], radii: [14, 9], angleRadians: .4 }] };
   const settings = initializeShapeCloud(map), progress: string[] = [];
-  const input = { root, id: '0'.repeat(64), image, geometry: map, geometrySha256: '3'.repeat(64), settings, source,
+  const input = { root, id: '00000000-0000-4000-8000-000000000000', image, geometry: map, geometryFile: 'geometry.json', settings, source,
     outputDirectory: relative(root, resolve(directory, 'bake')) };
   const result = await bakeShapeCloud(input, { onProgress: value => progress.push(value.phase) });
   assert.equal(result.empty, false); assert.ok(result.neutral && result.textured && result.projection);
   assert.ok(result.comparison); assert.equal(result.comparison.width, width); assert.equal(result.comparison.height, height);
   assert.deepEqual(result.comparison.levels.map(level => level.gain), [1, 2, 4, 8]);
   const diagnostic = result.comparison.levels[0]!.source, diagnosticBytes = await readFile(resolve(root, diagnostic.path));
-  assert.equal(sha256(diagnosticBytes), diagnostic.sha256);
   const diagnosticImage = await sharp(diagnosticBytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(diagnosticImage.info.width, width); assert.equal(diagnosticImage.info.height, height);
   assert.equal(diagnosticImage.info.channels, 3);
@@ -137,17 +135,14 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
     assert.equal(diagnosticImage.data[p * 3], diagnosticImage.data[p * 3 + 2]);
   }
   assert.ok(progress.includes('volume') && progress.includes('texture') && progress.includes('compile'));
-  const payload = async (pin: { path: string; sha256: string }) => {
-    const bytes = await readFile(resolve(root, pin.path)); assert.equal(sha256(bytes), pin.sha256);
+  const payload = async (pin: { path: string }) => {
+    const bytes = await readFile(resolve(root, pin.path));
     return validatePreparedCssVolume(JSON.parse(bytes.toString()));
   };
   const neutral = await payload(result.neutral), textured = await payload(result.textured);
   assert.deepEqual(neutral.frame, textured.frame); assert.deepEqual(neutral.stacks, textured.stacks);
   assert.equal(neutral.id, `shape-cloud-${input.id}`);
   assert.equal(neutral.id, textured.id); assert.equal(neutral.stacks.length, 3); assert.ok(neutral.resources.length > 40);
-  const p: unknown = neutral.provenance, q: unknown = textured.provenance;
-  assert.ok(p && typeof p === 'object' && 'alphaSha256' in p && typeof p.alphaSha256 === 'string');
-  assert.ok(q && typeof q === 'object' && 'alphaSha256' in q); assert.equal(p.alphaSha256, q.alphaSha256);
   let differentRgb = false;
   for (const resource of neutral.resources) {
     const a: Buffer = await sharp(await readFile(resolve(root, dirname(result.neutral.path), resource.path))).ensureAlpha().raw().toBuffer();
@@ -159,7 +154,7 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
     }
   }
   assert.ok(differentRgb, 'Painting must actually change RGB, rather than return the neutral field twice.');
-  const projectionBytes = await readFile(resolve(root, result.projection.path)); assert.equal(sha256(projectionBytes), result.projection.sha256);
+  const projectionBytes = await readFile(resolve(root, result.projection.path));
   const projection = await sharp(projectionBytes).ensureAlpha().raw().toBuffer();
   const meanAlpha = (data: Buffer) => { let sum = 0; for (let at = 3; at < data.length; at += 4) sum += data[at]!; return sum / (data.length / 4); };
   const lower = await bakeShapeCloud({ ...input, outputDirectory: relative(root, resolve(directory, 'lower')), settings: { ...settings, exposure: .2 } });

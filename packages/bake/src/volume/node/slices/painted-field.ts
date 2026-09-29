@@ -1,5 +1,4 @@
 /** Bake a supplied neutral field and material sampler without owning scientific hypotheses. */
-import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {relative} from 'node:path';
 import sharp from 'sharp';
@@ -7,11 +6,10 @@ import type { Bounds3, Vector3 } from '../../contracts/volume-recipe.ts';
 import type { DensityVolumeFrame } from '../../contracts/volume-frame.ts';
 import type { VolumeSlices } from '../../contracts/volume-slices.ts';
 import {containedPath,sourceBytes} from '../compact-inputs/density-grid.ts';
-import { sha256 } from '@cssearth/core/node';
 import {bakeMasterVolumeSlices} from './emission.ts';
 import {recolorCloudSlices} from './material.ts';
 import type {CompilerBakeBackend} from '../compiler/bake.ts';
-export interface FieldPin {path:string;sha256:string}
+export interface FieldPin {path:string}
 export interface PaintedFieldProgress {phase:'volume'|'texture'|'compile'|'comparison';completed:number;total:number;message:string}
 export interface PaintedFieldOptions {signal?:AbortSignal;onProgress?(progress:PaintedFieldProgress):void}
 export interface PaintedFieldInput {
@@ -25,16 +23,19 @@ function cancellation(signal?: AbortSignal) {
 }
 async function writePin(root: string, path: string, bytes: Buffer): Promise<FieldPin> {
   await writeFile(containedPath(root, path), bytes);
-  return { path, sha256: sha256(bytes) };
+  return { path };
 }
 const json = (value: unknown) => Buffer.from(JSON.stringify(value) + '\n');
 
-/** Raw alpha identity covers every slab, including fully empty slabs omitted from the render graph. */
-async function inspectAlpha(directory: string, slices: VolumeSlices, options: PaintedFieldOptions, projection: boolean) {
-  const digest = createHash('sha256'), zQuads = slices.quads.filter(quad => quad.axis === 'z');
+/** Every slab's raw alpha, including fully empty slabs omitted from the render graph. With `expected`, each slab's alpha
+ * must equal the neutral cloud's byte for byte. */
+async function inspectAlpha(directory: string, slices: VolumeSlices, options: PaintedFieldOptions, projection: boolean, expected?: readonly Buffer[]) {
+  const alphas: Buffer[] = [], zQuads = slices.quads.filter(quad => quad.axis === 'z');
   const first = zQuads[0]!;
   const transmission = projection ? new Float64Array(first.widthPx * first.heightPx).fill(1) : null;
-  for (const quad of slices.quads) {
+  if (expected && expected.length !== slices.quads.length)
+    throw new Error(`Textured shape cloud has ${slices.quads.length} slices; the neutral geometry has ${expected.length}.`);
+  for (const [position, quad] of slices.quads.entries()) {
     cancellation(options.signal);
     const input = await sourceBytes(directory, { path: quad.texturePath });
     const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -45,7 +46,8 @@ async function inspectAlpha(directory: string, slices: VolumeSlices, options: Pa
       alpha[index] = data[4 * index + 3]!;
       if (quad.axis === 'z' && transmission) transmission[index]! *= 1 - alpha[index]! / 255;
     }
-    digest.update(alpha);
+    if (expected && !alpha.equals(expected[position]!)) throw new Error(`Textured shape cloud changed the neutral geometry alpha: ${quad.texturePath}.`);
+    alphas.push(alpha);
   }
   let projectionPng: Buffer | undefined;
   if (transmission) {
@@ -57,7 +59,7 @@ async function inspectAlpha(directory: string, slices: VolumeSlices, options: Pa
     }
     projectionPng = await sharp(rgba, { raw: { width: first.widthPx, height: first.heightPx, channels: 4 } }).png().toBuffer();
   }
-  return { alphaSha256: digest.digest('hex'), projectionPng,
+  return { alphas, projectionPng,
     projection: transmission ? { alpha: Float32Array.from(transmission, value => 1 - value), width: first.widthPx, height: first.heightPx } : undefined };
 }
 
@@ -81,15 +83,14 @@ export async function bakePaintedField(input:PaintedFieldInput,backend:Pick<Comp
   onProgress: progress => report('volume', progress.completed, progress.total, `Preparing ${progress.axis.toUpperCase()} cloud slabs`) });
   if (masters.quads.every(quad => quad.alphaCoverage === 0)) return {empty:true as const};
   const neutralAlpha = await inspectAlpha(neutralDirectory, masters, options, true);
-  masters.provenance = { ...provenance, alphaSha256: neutralAlpha.alphaSha256 };
+  masters.provenance = { ...provenance };
   await writeFile(containedPath(neutralDirectory, 'volume-slices.json'), json(masters));
   report('texture', 0, total, 'Painting source colors onto the same cloud');
   const painted = await recolorCloudSlices({ slices: masters, loadResource: path => readFile(containedPath(neutralDirectory, path)),
     sampleImageRgb: input.sampleImageRgb, outputDirectory: texturedDirectory, encoding: { format: 'png' },
     onProgress: progress => report('texture', progress.completed, progress.total, 'Painting source colors; preserving every alpha byte') });
-  const texturedAlpha = await inspectAlpha(texturedDirectory, painted.slices, options, false);
-  if (texturedAlpha.alphaSha256 !== neutralAlpha.alphaSha256) throw new Error('Textured shape cloud changed the neutral geometry alpha.');
-  painted.slices.provenance = { ...provenance, alphaSha256: neutralAlpha.alphaSha256, material: painted.slices.provenance,
+  await inspectAlpha(texturedDirectory, painted.slices, options, false, neutralAlpha.alphas);
+  painted.slices.provenance = { ...provenance, material: painted.slices.provenance,
     coverage: painted.coverage };
   await writeFile(containedPath(texturedDirectory, 'volume-slices.json'), json(painted.slices));
   report('compile', 0, 2, 'Preparing the retained PolyCSS scene');

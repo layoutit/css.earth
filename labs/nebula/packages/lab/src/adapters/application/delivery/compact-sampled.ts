@@ -6,7 +6,6 @@ import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync, gunzipSync } from "node:zlib";
-import { geometrySha } from "../../../server/workflows/geometry/registered-source.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
 import { readSampledRecipe } from "../../../features/sampled-prior/model.ts";
 import { readCompilerResult } from "../../../features/compiler/result.ts";
@@ -52,7 +51,7 @@ async function json(root: string, path: string) {
 }
 async function save(root: string, path: string, bytes: Buffer) {
   await writeFile(resolve(root, path), bytes);
-  return { path, sha256: geometrySha(bytes) };
+  return { path };
 }
 export async function exportCompactSampled(
   root: string,
@@ -90,15 +89,6 @@ export async function exportCompactSampled(
   );
   const materials = array(object(method.materials).receipts),
     lenses = [];
-  const expected: Record<string, string> = {};
-  for (const lens of result.scene.lenses) {
-    const volume = object(
-      JSON.parse((await pinned(root, lens.volume)).toString()),
-    );
-    const data = volume;
-    const { provenance: _provenance, ...rendered } = data;
-    expected[lens.id] = geometrySha(JSON.stringify(rendered));
-  }
   for (const image of images.images) {
     const colors =
         recipe.lensComponents[image.id]!.ejecta > 0
@@ -143,7 +133,6 @@ export async function exportCompactSampled(
         recipe,
         particles,
         lenses,
-        expected,
         scene: result.scene,
         provenance: {
           model: result.model,

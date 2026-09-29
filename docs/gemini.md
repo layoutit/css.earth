@@ -53,7 +53,7 @@ hands the re-run an oracle for free.
    URL and digest and the transport is not what the pin rests on.
 2. **Pin.** `archive.mts <program id> <proposal id> <filter> [--days 15] [--start YYYY-MM-DD]` records one observation:
    every science frame of one sequence in one filter, and for each calibration kind one archive master with the raw frames
-   that master names. Each file carries its CAOM artifact URI, byte count and the archive's md5, with our sha256 added the
+   that master names. Each file carries its CAOM artifact URI, byte count and the archive's md5, checked the
    first time it is downloaded. A frame whose release date has not passed is refused, so nothing proprietary is pinned. An
    `ACQUISITION` frame is a pointing exposure and is never pinned as science. Each science frame's own primary header is
    checked against CAOM and a disagreement stops the pin.

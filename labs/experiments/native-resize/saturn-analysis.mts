@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { loadTrace } from '../../performance/load-trace.mts';
-import { occupiedMs } from '../../performance/trace-brief.mts';
+import { occupiedMs } from '../../performance/trace-sources.mts';
 import { arrayOf, hasDuration, isTraceEvent, isFiniteNumber, present, recordOf } from '../../performance/trace-model.mts';
 
 const directory = 'output/playwright/native-resize/saturn-transparent';
@@ -15,14 +15,13 @@ const comparison = rec(JSON.parse(await readFile(`${directory}/comparison.json`,
 const results: { mode: string; trial: number; durationMs: number; mainTaskMs: number; styleMs: number; layoutMs: number;
   layoutPasses: number; paintMs: number; frameCallbackMs: number; cameraRequests: number; cameraUpdates: number;
   cameraIntervalP50Ms: number; cameraIntervalP95Ms: number; cameraUpdatesPerSecond: number;
-  presentationP95Ms: number; droppedMarkers: number; endpointDifferenceDegrees: number; retained: unknown; traceSha256: string }[] = [];
+  presentationP95Ms: number; droppedMarkers: number; endpointDifferenceDegrees: number; retained: unknown }[] = [];
 for (const item of present(arrayOf(comparison.results), 'comparison results')) {
   const run = rec(item); assert.ok(typeof run.mode === 'string'); const trial = numeric(run.trial);
   const name = `${run.mode}-${trial}`;
   const brief = rec(JSON.parse(await readFile(`${directory}/${name}-analysis/agent-brief.json`, 'utf8')));
   const selection = rec(brief.selection);
   const trace = await loadTrace(`${directory}/${name}.json.gz`);
-  assert.equal(trace.sha256, run.traceSha256);
   const events = trace.events.filter(isTraceEvent);
   const start = present(events.find(event => event.name === 'clock_sync' && event.args?.sync_id === `${name}:drag-start`), 'start marker').ts;
   const end = present(events.find(event => event.name === 'clock_sync' && event.args?.sync_id === `${name}:drag-end`), 'end marker').ts;
@@ -42,7 +41,6 @@ for (const item of present(arrayOf(comparison.results), 'comparison results')) {
     presentationP95Ms: numeric(rec(brief.presentation).p95Ms), droppedMarkers: numeric(rec(brief.pipeline).dropOrSmoothnessMarkers),
     endpointDifferenceDegrees: numeric(run.endpointDifferenceDegrees),
     retained: rec(run.sceneFrames).retained,
-    traceSha256: trace.sha256,
   });
 }
 const summary = ['js', 'resize', 'size'].map(mode => {

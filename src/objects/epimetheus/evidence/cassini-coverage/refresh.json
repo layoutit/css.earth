@@ -6,38 +6,30 @@
   ],
   "seconds": 369.290290375,
   "maxRssMiB": 1542.78125,
-  "recipeSha256": "caaf84cc3b18ecd82917c7b1176eede4c4f49cf2d5c48ddcc162c254d35347a9",
-  "retainedSceneSha256": "f0d48f8dffa0e014deb3d7368e9519d5f04cad8f05dc37cd9556b109eb0cb117",
   "refreshedRuntimeAssets": [
     {
       "filename": "epimetheus-normal-surface@2x.webp",
-      "bytes": 939518,
-      "sha256": "1312facdef62c275daf018654f49a104092ff8ec07028a6b3a2ef3b918e583f5"
+      "bytes": 939518
     },
     {
       "filename": "epimetheus-normal-shadow@2x.webp",
-      "bytes": 378508,
-      "sha256": "63e5637b6ad4570271eab7d899cabf98199d9a97e43d7862936438734fa440f9"
+      "bytes": 378508
     },
     {
       "filename": "epimetheus-normal-thumbnail.webp",
-      "bytes": 2074,
-      "sha256": "5de28b5ea259601ebecaae20e7b06cbb32f4fad83c89cddf416743241858639f"
+      "bytes": 2074
     },
     {
       "filename": "epimetheus-filter-color-surface@2x.webp",
-      "bytes": 412128,
-      "sha256": "ab0f4670d652cbc519ce0d23b8fb9d6e2b2eb05439bac114be90355bf26da7ce"
+      "bytes": 412128
     },
     {
       "filename": "epimetheus-filter-color-shadow@2x.webp",
-      "bytes": 235836,
-      "sha256": "f996548e4c003b2ec4abb8dc58cf93de32958bcfa28b2913b5e81ade48de06bd"
+      "bytes": 235836
     },
     {
       "filename": "epimetheus-filter-color-thumbnail.webp",
-      "bytes": 2414,
-      "sha256": "4a366378f61fd6a45a959895564913855be95fc86d6abe5ff993dd1c2e089b34"
+      "bytes": 2414
     }
   ],
   "retainedRuntimeAssetCount": 32,
@@ -813,60 +805,46 @@
       },
       "sourceIds": [
         {
-          "id": "n1866366029_1",
-          "sha256": "eb1ddba6720b202ad2b57361e17906cb22972bb6c8b106c75dce5e96c0eec7f2"
+          "id": "n1866366029_1"
         },
         {
-          "id": "n1866366029_1-label",
-          "sha256": "c417a0b6735446be7b6f360206816a0460c062f6ec9500d0f6e4799cb902a41c"
+          "id": "n1866366029_1-label"
         },
         {
-          "id": "n1864504671_1",
-          "sha256": "f5719bd13edae4db8b7e60540702080f78990f7cc8e3cd4598ea16f44ad5d9be"
+          "id": "n1864504671_1"
         },
         {
-          "id": "n1864504671_1-label",
-          "sha256": "5390a413e8ffbdb76ab8e8d183ba7b39b154ba7a68eb033bb9a98b025dadb968"
+          "id": "n1864504671_1-label"
         },
         {
-          "id": "n1864504186_1",
-          "sha256": "168db88616145852557edd3e38c48497390bc9af4cf32fa649d423182e5895a3"
+          "id": "n1864504186_1"
         },
         {
-          "id": "n1864504186_1-label",
-          "sha256": "a9ca2486aa0da9972af0d62e34582f6719e895a808a60f85596faaf0b0517c1e"
+          "id": "n1864504186_1-label"
         },
         {
-          "id": "n1828124037_1",
-          "sha256": "9e7023b2e220dc7395945fcac09eea9e9d49d390f61b51ce57fd1d78f4fd17b4"
+          "id": "n1828124037_1"
         },
         {
-          "id": "n1828124037_1-label",
-          "sha256": "0e5f2acfc3b9f4b8f27f16ce13ced44c669e4d4fc85f2d6c901d9decad8a7fe6"
+          "id": "n1828124037_1-label"
         },
         {
-          "id": "n1575363079_1",
-          "sha256": "6433b25a8dcccc76637bffdb98caa77f9f46f90bd86e41200f7e65483957c620"
+          "id": "n1575363079_1"
         },
         {
-          "id": "n1575363079_1-label",
-          "sha256": "c3adedf29c062fc081488671650b5c1476dc275c7053bb77c04d6aef0e3cb727"
+          "id": "n1575363079_1-label"
         },
         {
-          "id": "n1864500586_1",
-          "sha256": "b660766b0ad518b17278673e2ccd1b66f5f3564eae45f82b0d8f3703318e9e1c"
+          "id": "n1864500586_1"
         },
         {
-          "id": "n1864500586_1-label",
-          "sha256": "e3bbf8868dd6f5dbdc8b6d7a2d342b12584a82dcc8368a6fb6734b98835b0ee5"
+          "id": "n1864500586_1-label"
         },
         {
-          "id": "n1649345705_1",
-          "sha256": "172907e3da1aa8ec91f93ae56731a728cf4f8218f51a13ff22839ea87d149861"
+          "id": "n1649345705_1"
         },
         {
-          "id": "n1649345705_1-label",
-          "sha256": "aad4d6aa420e5fec24e459fa00c3883ba97bd72f2ba2c5043787b8149a12b57a"
+          "id": "n1649345705_1-label"
         }
       ],
       "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.",
@@ -893,7 +871,6 @@
       "sampleSources": {
         "file": "normal-source-index.json",
         "bytes": 136273,
-        "sha256": "b9339f6488d2a4a4f5875742babff05100b96ba38abb288a897021e2b05111ac",
         "width": 2048,
         "height": 5760,
         "includesAtlasBleed": true,
@@ -1424,52 +1401,40 @@
       },
       "sourceIds": [
         {
-          "id": "n1866365919",
-          "sha256": "8b4ec2247e1b427091f61f476b973d40870b758fed1214371a8de2d1a96c3dc5"
+          "id": "n1866365919"
         },
         {
-          "id": "n1866365919-label",
-          "sha256": "38e7918c5869c3de395e61f45707a6b4834c0b3c7bf66f7f6e153221d932d3f5"
+          "id": "n1866365919-label"
         },
         {
-          "id": "n1866366139",
-          "sha256": "bcc6988022b7764591c56254f96d5cd4e77fd208cb24011f9a873ce345beb629"
+          "id": "n1866366139"
         },
         {
-          "id": "n1866366139-label",
-          "sha256": "1a943e79f9adbb8c1b9d62d66da53e178ab40924245b154b68aeecfc5b74b768"
+          "id": "n1866366139-label"
         },
         {
-          "id": "n1866365809",
-          "sha256": "cfc77810dac5d57955c09cbeb1981fffc62e5d37d1432e612a4cc26385b7799a"
+          "id": "n1866365809"
         },
         {
-          "id": "n1866365809-label",
-          "sha256": "c76d5f5ac161587dd4499d0f4d22ec4662c99de36f7e3d0e3de9312bb6ef93ad"
+          "id": "n1866365809-label"
         },
         {
-          "id": "n1828124265_1",
-          "sha256": "45d412e549da85e5113f2d9ff1182237d88b5ac92fe024947b76d3cac2233ad7"
+          "id": "n1828124265_1"
         },
         {
-          "id": "n1828124265_1-label",
-          "sha256": "064d2b561ad2313a5f59a2f3b08428600fb7acfb80b425cb864c22201f01685a"
+          "id": "n1828124265_1-label"
         },
         {
-          "id": "n1828122367_1",
-          "sha256": "cdc36715978db0f5553cb6ad35e3a7cbff5db07487a5e9c599d8261e7553e7de"
+          "id": "n1828122367_1"
         },
         {
-          "id": "n1828122367_1-label",
-          "sha256": "2ccb8d376efb441f89c3fc70b184757aca1dac9ff015b2b7c31a2601cfda688a"
+          "id": "n1828122367_1-label"
         },
         {
-          "id": "n1828122742_1",
-          "sha256": "5875ffa6521af61da8f8456bf1acdfa03ba5e7657cf4675d06ae83ebe7d65c13"
+          "id": "n1828122742_1"
         },
         {
-          "id": "n1828122742_1-label",
-          "sha256": "53476ec1895e580f135f9fa25444246c40214344a01750ecd093c12aa53dd1ee"
+          "id": "n1828122742_1-label"
         }
       ],
       "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.",
@@ -1491,7 +1456,6 @@
       "sampleSources": {
         "file": "filter-color-source-index.json",
         "bytes": 70657,
-        "sha256": "82620cf2d76792908ec6a9dd8482b49cc35db0298e5b473d925629643e022dc2",
         "width": 2048,
         "height": 5760,
         "includesAtlasBleed": true,

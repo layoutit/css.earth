@@ -20,12 +20,10 @@
         "lens": "elevation",
         "path": "src/objects/amalthea/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 15414,
-          "sha256": "aa8ecf230b3648353b7d843f66531788905d8ed91b7ee27c13fab5143895c2d5"
+          "bytes": 15414
         },
         "branch": {
-          "bytes": 15414,
-          "sha256": "aa8ecf230b3648353b7d843f66531788905d8ed91b7ee27c13fab5143895c2d5"
+          "bytes": 15414
         },
         "changed": false
       },
@@ -34,12 +32,10 @@
         "lens": "normal",
         "path": "src/objects/amalthea/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 12248,
-          "sha256": "7a07e644c26a780b9e4432c2b8d6bf653779d66b8db0672ab147dddb30350aa8"
+          "bytes": 12248
         },
         "branch": {
-          "bytes": 13858,
-          "sha256": "fbea88a2776af0f82458728d5264213af89f8783740e99fd2268f93e3f3449f8"
+          "bytes": 13858
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -61,8 +57,7 @@
           "mismatchPercent": 60.25439453125,
           "diff": {
             "path": "diffs/amalthea-normal.png",
-            "bytes": 19775,
-            "sha256": "a0a21b90f3bfb26c12c63d5feee0d670c09eb985d096a127b09a647a3d21939a"
+            "bytes": 19775
           }
         },
         "changed": true,
@@ -74,12 +69,10 @@
         "lens": "albedo",
         "path": "src/objects/arrokoth/prepared/minimaps/albedo.webp",
         "reference": {
-          "bytes": 4464,
-          "sha256": "78ec86e2cd05302624ba032faded32bc436f7692ec34e953cb532877114118c6"
+          "bytes": 4464
         },
         "branch": {
-          "bytes": 4464,
-          "sha256": "78ec86e2cd05302624ba032faded32bc436f7692ec34e953cb532877114118c6"
+          "bytes": 4464
         },
         "changed": false
       },
@@ -88,12 +81,10 @@
         "lens": "lorri",
         "path": "src/objects/arrokoth/prepared/minimaps/lorri.webp",
         "reference": {
-          "bytes": 24562,
-          "sha256": "807cd3931f067b74a975309e69559d2c2b526ab21768ed92b92a9b1b391237b7"
+          "bytes": 24562
         },
         "branch": {
-          "bytes": 24706,
-          "sha256": "4f3dd062ae84147d51277a720ffb733f22c0e6c12a7eb9cb47204e3261d23286"
+          "bytes": 24706
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -115,8 +106,7 @@
           "mismatchPercent": 0.1617431640625,
           "diff": {
             "path": "diffs/arrokoth-lorri.png",
-            "bytes": 48447,
-            "sha256": "1627362b0d5fb03e3df2112af4b021a4c6a0415cc2b1e140cb589dc7ab90e0b1"
+            "bytes": 48447
           }
         },
         "changed": true,
@@ -128,12 +118,10 @@
         "lens": "model",
         "path": "src/objects/arrokoth/prepared/minimaps/model.webp",
         "reference": {
-          "bytes": 2958,
-          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2"
+          "bytes": 2958
         },
         "branch": {
-          "bytes": 2958,
-          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2"
+          "bytes": 2958
         },
         "changed": false
       },
@@ -142,12 +130,10 @@
         "lens": "mvic",
         "path": "src/objects/arrokoth/prepared/minimaps/mvic.webp",
         "reference": {
-          "bytes": 5928,
-          "sha256": "7bc2dbea824ad18ca778120b0ee7cd8d010a7ee490eb8dfd4e99a7bd4fdafd15"
+          "bytes": 5928
         },
         "branch": {
-          "bytes": 5890,
-          "sha256": "2b440e9c8eabf263e8de1fc651405776caa3c99bcb20aae4b62d3eb9f1fa1f66"
+          "bytes": 5890
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -169,8 +155,7 @@
           "mismatchPercent": 0.464630126953125,
           "diff": {
             "path": "diffs/arrokoth-mvic.png",
-            "bytes": 12240,
-            "sha256": "e220adb715d937b9b89c665be70f4abc59a9147f40ff398e25a08c6a7b0fd0f4"
+            "bytes": 12240
           }
         },
         "changed": true,
@@ -182,12 +167,10 @@
         "lens": "elevation",
         "path": "src/objects/atlas/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 6766,
-          "sha256": "3374f22692082522aa1f3dbc636d9058faa9e8ce746d38f2a1d661aa2edb06a7"
+          "bytes": 6766
         },
         "branch": {
-          "bytes": 6766,
-          "sha256": "3374f22692082522aa1f3dbc636d9058faa9e8ce746d38f2a1d661aa2edb06a7"
+          "bytes": 6766
         },
         "changed": false
       },
@@ -196,12 +179,10 @@
         "lens": "filter-color",
         "path": "src/objects/atlas/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 6924,
-          "sha256": "60ec14d0b4a67d98505b24896639d4fb96dcb122370018392bf5f279f7c29457"
+          "bytes": 6924
         },
         "branch": {
-          "bytes": 7198,
-          "sha256": "0858952a93eb889f62a1ac6ed099aa9205ea81b4110c09dfd71292dcf3e8c5c8"
+          "bytes": 7198
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -223,8 +204,7 @@
           "mismatchPercent": 0.1328125,
           "diff": {
             "path": "diffs/atlas-filter-color.png",
-            "bytes": 17137,
-            "sha256": "9d7d46ed59ba1407f23ca16ed31b8c1e26e936da6b4a8bc3ba398f723b3433a4"
+            "bytes": 17137
           }
         },
         "changed": true,
@@ -236,12 +216,10 @@
         "lens": "normal",
         "path": "src/objects/atlas/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 9758,
-          "sha256": "6ce9d9a9e690e8398dc5aa5024e80c69bf3b3f3a94e1327ba47eac9d49ec9fd1"
+          "bytes": 9758
         },
         "branch": {
-          "bytes": 11176,
-          "sha256": "8867a7d200e627411e18dd1f227ee8cd278bb6f57cf876c4001b8c52ad040ea9"
+          "bytes": 11176
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -263,8 +241,7 @@
           "mismatchPercent": 20.873046875,
           "diff": {
             "path": "diffs/atlas-normal.png",
-            "bytes": 26814,
-            "sha256": "2d29119721700b1705f2a7ad7f92513ccade1af633b538f13cc5e53028ffc217"
+            "bytes": 26814
           }
         },
         "changed": true,
@@ -276,12 +253,10 @@
         "lens": "elevation",
         "path": "src/objects/calypso/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 9478,
-          "sha256": "8793417a18e6feb8912880d1c789fae81e8d75db694da6a91c9ced89d413ba4b"
+          "bytes": 9478
         },
         "branch": {
-          "bytes": 9478,
-          "sha256": "8793417a18e6feb8912880d1c789fae81e8d75db694da6a91c9ced89d413ba4b"
+          "bytes": 9478
         },
         "changed": false
       },
@@ -290,12 +265,10 @@
         "lens": "false-color",
         "path": "src/objects/calypso/prepared/minimaps/false-color.webp",
         "reference": {
-          "bytes": 9208,
-          "sha256": "bcad22c7fdb4bf127e9031f1cb02642b3670ca258a9954c0a33ccaca4fedf4d7"
+          "bytes": 9208
         },
         "branch": {
-          "bytes": 9838,
-          "sha256": "49f152d6e3c806a96c89660970c5458bc6d655248fa1df918c56b0191e15b94f"
+          "bytes": 9838
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -317,8 +290,7 @@
           "mismatchPercent": 1.31640625,
           "diff": {
             "path": "diffs/calypso-false-color.png",
-            "bytes": 24862,
-            "sha256": "cbdee8194c571908ebd778d6a1a9c3272984f350f7ae2c0e9820c5253ff4a9a2"
+            "bytes": 24862
           }
         },
         "changed": true,
@@ -330,12 +302,10 @@
         "lens": "normal",
         "path": "src/objects/calypso/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 13632,
-          "sha256": "3c579d2b62151a8ff83ceabbaa2ebba44243b6da1d7efe8405ffa2990e6d87eb"
+          "bytes": 13632
         },
         "branch": {
-          "bytes": 10694,
-          "sha256": "3a24f9ca4818b86cf817ee314a271d8aa4241788db8e5c65e096f5f1e3ce7a6a"
+          "bytes": 10694
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -357,8 +327,7 @@
           "mismatchPercent": 18.24462890625,
           "diff": {
             "path": "diffs/calypso-normal.png",
-            "bytes": 32378,
-            "sha256": "26cdf148c65acc85d8fd26d021197ae148e0cb62720afaad661152a2ce33f22e"
+            "bytes": 32378
           }
         },
         "changed": true,
@@ -370,12 +339,10 @@
         "lens": "constraints",
         "path": "src/objects/comet-103p/prepared/minimaps/constraints.webp",
         "reference": {
-          "bytes": 9838,
-          "sha256": "ed560b6faff52eb114ff11747b4e372d44d861560d3949de567fb17497193d54"
+          "bytes": 9838
         },
         "branch": {
-          "bytes": 9838,
-          "sha256": "ed560b6faff52eb114ff11747b4e372d44d861560d3949de567fb17497193d54"
+          "bytes": 9838
         },
         "changed": false
       },
@@ -384,12 +351,10 @@
         "lens": "mri",
         "path": "src/objects/comet-103p/prepared/minimaps/mri.webp",
         "reference": {
-          "bytes": 17430,
-          "sha256": "e624f688c1ae192cb218d452bc63443bc5a0c7d7eecf8851ee45f8315fab6b0d"
+          "bytes": 17430
         },
         "branch": {
-          "bytes": 16278,
-          "sha256": "0bb42f146df815108e679cdc516c1f9e2e9a926990b04bfece9ac94e07d3dfc9"
+          "bytes": 16278
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -411,8 +376,7 @@
           "mismatchPercent": 2.6458740234375,
           "diff": {
             "path": "diffs/comet-103p-mri.png",
-            "bytes": 41014,
-            "sha256": "8acce54f2eb37499fa6c57ebf2b8f15f8fc24564a1df316bf2d687edf6553786"
+            "bytes": 41014
           }
         },
         "changed": true,
@@ -424,12 +388,10 @@
         "lens": "spectral-slope",
         "path": "src/objects/comet-103p/prepared/minimaps/spectral-slope.webp",
         "reference": {
-          "bytes": 3182,
-          "sha256": "044694bb4fb12dd78c4f87e569f0de7d215917c29d728befc29f3b67123876cb"
+          "bytes": 3182
         },
         "branch": {
-          "bytes": 3182,
-          "sha256": "044694bb4fb12dd78c4f87e569f0de7d215917c29d728befc29f3b67123876cb"
+          "bytes": 3182
         },
         "changed": false
       },
@@ -438,12 +400,10 @@
         "lens": "temperature",
         "path": "src/objects/comet-103p/prepared/minimaps/temperature.webp",
         "reference": {
-          "bytes": 3074,
-          "sha256": "5c2f266e96181d2aa781a3a6965bb1b3196f1cfef6175a05dac4cde434d7f5f3"
+          "bytes": 3074
         },
         "branch": {
-          "bytes": 3074,
-          "sha256": "5c2f266e96181d2aa781a3a6965bb1b3196f1cfef6175a05dac4cde434d7f5f3"
+          "bytes": 3074
         },
         "changed": false
       },
@@ -452,12 +412,10 @@
         "lens": "absorption",
         "path": "src/objects/comet-67p/prepared/minimaps/absorption.webp",
         "reference": {
-          "bytes": 47736,
-          "sha256": "c95d9478c13bc22f0edfa0d33b2ba8dfd3494db3c4243b9a2fac025d189e4676"
+          "bytes": 47736
         },
         "branch": {
-          "bytes": 47736,
-          "sha256": "c95d9478c13bc22f0edfa0d33b2ba8dfd3494db3c4243b9a2fac025d189e4676"
+          "bytes": 47736
         },
         "changed": false
       },
@@ -466,12 +424,10 @@
         "lens": "albedo",
         "path": "src/objects/comet-67p/prepared/minimaps/albedo.webp",
         "reference": {
-          "bytes": 41232,
-          "sha256": "330989754ba55aa6ff32d16e778e5ebe0b82db4446b4810277d8140b79fc72b9"
+          "bytes": 41232
         },
         "branch": {
-          "bytes": 41232,
-          "sha256": "330989754ba55aa6ff32d16e778e5ebe0b82db4446b4810277d8140b79fc72b9"
+          "bytes": 41232
         },
         "changed": false
       },
@@ -480,12 +436,10 @@
         "lens": "geology",
         "path": "src/objects/comet-67p/prepared/minimaps/geology.webp",
         "reference": {
-          "bytes": 10156,
-          "sha256": "c73ce2f2c814371f3ab8d651cc29c02c966875e637171f9a72498d9d2123025b"
+          "bytes": 10156
         },
         "branch": {
-          "bytes": 10156,
-          "sha256": "c73ce2f2c814371f3ab8d651cc29c02c966875e637171f9a72498d9d2123025b"
+          "bytes": 10156
         },
         "changed": false
       },
@@ -494,12 +448,10 @@
         "lens": "ice",
         "path": "src/objects/comet-67p/prepared/minimaps/ice.webp",
         "reference": {
-          "bytes": 27380,
-          "sha256": "c52cc596b8276c1dfc8eaf34d4a634e2104a791625b6586f63bc0ead7a272c15"
+          "bytes": 27380
         },
         "branch": {
-          "bytes": 27380,
-          "sha256": "c52cc596b8276c1dfc8eaf34d4a634e2104a791625b6586f63bc0ead7a272c15"
+          "bytes": 27380
         },
         "changed": false
       },
@@ -508,12 +460,10 @@
         "lens": "osiris",
         "path": "src/objects/comet-67p/prepared/minimaps/osiris.webp",
         "reference": {
-          "bytes": 58968,
-          "sha256": "e8296bd0129bd58d97beb3e52370cd00aacd60b2a81a9a2e5615745c2eabdecd"
+          "bytes": 58968
         },
         "branch": {
-          "bytes": 60610,
-          "sha256": "b26307e2cc285052061c7faca59925fc016024202cdb137dbd5e96632ae97326"
+          "bytes": 60610
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -535,8 +485,7 @@
           "mismatchPercent": 7.757568359375,
           "diff": {
             "path": "diffs/comet-67p-osiris.png",
-            "bytes": 87139,
-            "sha256": "838791baa997f82a6fba7825dcd8adc731fe5a8af210bf3b832767a82c01d064"
+            "bytes": 87139
           }
         },
         "changed": true,
@@ -548,12 +497,10 @@
         "lens": "regions",
         "path": "src/objects/comet-67p/prepared/minimaps/regions.webp",
         "reference": {
-          "bytes": 4288,
-          "sha256": "ab09325ba964db0b8fd92c5d85ae75372b68323aa2c8fb4b90914ce57d106ef5"
+          "bytes": 4288
         },
         "branch": {
-          "bytes": 4288,
-          "sha256": "ab09325ba964db0b8fd92c5d85ae75372b68323aa2c8fb4b90914ce57d106ef5"
+          "bytes": 4288
         },
         "changed": false
       },
@@ -562,12 +509,10 @@
         "lens": "slope",
         "path": "src/objects/comet-67p/prepared/minimaps/slope.webp",
         "reference": {
-          "bytes": 40740,
-          "sha256": "a054b8e4993c0e522447b416b248a5b1035b16d75b40f190cfc87958cc803cd7"
+          "bytes": 40740
         },
         "branch": {
-          "bytes": 40740,
-          "sha256": "a054b8e4993c0e522447b416b248a5b1035b16d75b40f190cfc87958cc803cd7"
+          "bytes": 40740
         },
         "changed": false
       },
@@ -576,12 +521,10 @@
         "lens": "navcam",
         "path": "src/objects/comet-81p/prepared/minimaps/navcam.webp",
         "reference": {
-          "bytes": 13486,
-          "sha256": "3a69304cac05618b281eda9841cb29ecdb770682db23bde986a714a71f0a546f"
+          "bytes": 13486
         },
         "branch": {
-          "bytes": 12698,
-          "sha256": "a6e0e3d7f66869584aede564e3f0da4891a14f784751555b545b15c108fcdaf5"
+          "bytes": 12698
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -603,8 +546,7 @@
           "mismatchPercent": 2.411651611328125,
           "diff": {
             "path": "diffs/comet-81p-navcam.png",
-            "bytes": 32574,
-            "sha256": "b8ff044c03e8de5596c3b215133d722f72018b074d056ba554e10a0329bac5db"
+            "bytes": 32574
           }
         },
         "changed": true,
@@ -616,12 +558,10 @@
         "lens": "constraints",
         "path": "src/objects/comet-9p/prepared/minimaps/constraints.webp",
         "reference": {
-          "bytes": 8776,
-          "sha256": "72dd3dd6838797fba0ca21ffad27e501322f5f312f186fa6515220d2d44f360e"
+          "bytes": 8776
         },
         "branch": {
-          "bytes": 8776,
-          "sha256": "72dd3dd6838797fba0ca21ffad27e501322f5f312f186fa6515220d2d44f360e"
+          "bytes": 8776
         },
         "changed": false
       },
@@ -630,12 +570,10 @@
         "lens": "deep-impact",
         "path": "src/objects/comet-9p/prepared/minimaps/deep-impact.webp",
         "reference": {
-          "bytes": 12636,
-          "sha256": "2b60b595aca080693f52546cff3006fabb9d2651a4e58eaca2d4049834c122fe"
+          "bytes": 12636
         },
         "branch": {
-          "bytes": 12470,
-          "sha256": "88f2e4f87950744b10f1e377795f0973169488d74f4ac20921223d823310146f"
+          "bytes": 12470
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -657,8 +595,7 @@
           "mismatchPercent": 1.0986328125,
           "diff": {
             "path": "diffs/comet-9p-deep-impact.png",
-            "bytes": 31137,
-            "sha256": "4acb7903531a3ed0b5dd247fbbd0adb63d3302516312ebcc075dce85e5883f8b"
+            "bytes": 31137
           }
         },
         "changed": true,
@@ -670,12 +607,10 @@
         "lens": "next",
         "path": "src/objects/comet-9p/prepared/minimaps/next.webp",
         "reference": {
-          "bytes": 19554,
-          "sha256": "3081b480818487c3a15c58c12528ede23b170f4c874cc38063ffb180450741f3"
+          "bytes": 19554
         },
         "branch": {
-          "bytes": 18834,
-          "sha256": "b9c3ac7a37838259ec17e5bbb9f5e5e6d180f697fc8da122d0fa20f62de022ce"
+          "bytes": 18834
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -697,8 +632,7 @@
           "mismatchPercent": 1.992034912109375,
           "diff": {
             "path": "diffs/comet-9p-next.png",
-            "bytes": 43485,
-            "sha256": "f2f396273438e96028869116d861e039f76008624ef7e91e5016a4d1240be205"
+            "bytes": 43485
           }
         },
         "changed": true,
@@ -710,12 +644,10 @@
         "lens": "spectral-slope",
         "path": "src/objects/comet-9p/prepared/minimaps/spectral-slope.webp",
         "reference": {
-          "bytes": 4130,
-          "sha256": "09373cbd6063f6a558d38d9e35985053227b0b4475603b7dbd44d405e46e9863"
+          "bytes": 4130
         },
         "branch": {
-          "bytes": 4130,
-          "sha256": "09373cbd6063f6a558d38d9e35985053227b0b4475603b7dbd44d405e46e9863"
+          "bytes": 4130
         },
         "changed": false
       },
@@ -724,12 +656,10 @@
         "lens": "temperature",
         "path": "src/objects/comet-9p/prepared/minimaps/temperature.webp",
         "reference": {
-          "bytes": 4056,
-          "sha256": "a98cb99e0c2c80405983f3008a339801e55357cf2d872fc565bca785593cf5c5"
+          "bytes": 4056
         },
         "branch": {
-          "bytes": 4056,
-          "sha256": "a98cb99e0c2c80405983f3008a339801e55357cf2d872fc565bca785593cf5c5"
+          "bytes": 4056
         },
         "changed": false
       },
@@ -738,12 +668,10 @@
         "lens": "elevation",
         "path": "src/objects/daphnis/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 7384,
-          "sha256": "82585bed56df2093f7072931ddf7db844e5def1afab5ad77c9b97742e4e48c4e"
+          "bytes": 7384
         },
         "branch": {
-          "bytes": 7384,
-          "sha256": "82585bed56df2093f7072931ddf7db844e5def1afab5ad77c9b97742e4e48c4e"
+          "bytes": 7384
         },
         "changed": false
       },
@@ -752,12 +680,10 @@
         "lens": "filter-color",
         "path": "src/objects/daphnis/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 5204,
-          "sha256": "cd271f76cdca3bc5c4b54474ec622acdf729aade10a3f8c41e807845c16a8671"
+          "bytes": 5204
         },
         "branch": {
-          "bytes": 5434,
-          "sha256": "7236ca6955bdd4cc6d5dcf12dcbee1393c001d8c8f23d3b9c7c8a2c8351c1b4f"
+          "bytes": 5434
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -779,8 +705,7 @@
           "mismatchPercent": 3.0478515625,
           "diff": {
             "path": "diffs/daphnis-filter-color.png",
-            "bytes": 16390,
-            "sha256": "09a9bcd5165960b8ac0ddb947ecc43f4d7900a4178dcb8e50cf724398f017d88"
+            "bytes": 16390
           }
         },
         "changed": true,
@@ -792,12 +717,10 @@
         "lens": "normal",
         "path": "src/objects/daphnis/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 5902,
-          "sha256": "860fd8fced3d713e05acce11059453bf8462ce095ff76209d642fcff9c9a2376"
+          "bytes": 5902
         },
         "branch": {
-          "bytes": 8094,
-          "sha256": "b93cfa770c931d17aff424e176e6094a3ac0d015ef554f2161d26b170086bf3a"
+          "bytes": 8094
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -819,8 +742,7 @@
           "mismatchPercent": 31.072265625,
           "diff": {
             "path": "diffs/daphnis-normal.png",
-            "bytes": 17424,
-            "sha256": "a28a079eebfbe980a8de1b80396fad980067d57af23c6ac58682c9e2f84503c2"
+            "bytes": 17424
           }
         },
         "changed": true,
@@ -832,12 +754,10 @@
         "lens": "albedo",
         "path": "src/objects/didymos/prepared/minimaps/albedo.webp",
         "reference": {
-          "bytes": 6390,
-          "sha256": "23ed50b625d72a69dfc1ea8fb1a705217678e76b6c19b645c49e6064bc8952af"
+          "bytes": 6390
         },
         "branch": {
-          "bytes": 6390,
-          "sha256": "23ed50b625d72a69dfc1ea8fb1a705217678e76b6c19b645c49e6064bc8952af"
+          "bytes": 6390
         },
         "changed": false
       },
@@ -846,12 +766,10 @@
         "lens": "draco",
         "path": "src/objects/didymos/prepared/minimaps/draco.webp",
         "reference": {
-          "bytes": 9804,
-          "sha256": "476162bcaa59b1ab19b5c491fdcf98afed3ff87b77b291feffc7c3073a4bbcf5"
+          "bytes": 9804
         },
         "branch": {
-          "bytes": 6342,
-          "sha256": "cff43fee6181bd3f429eced7c3fb96af13d0466b064e29e82b1fa8b4d478ff36"
+          "bytes": 6342
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -873,8 +791,7 @@
           "mismatchPercent": 2.44287109375,
           "diff": {
             "path": "diffs/didymos-draco.png",
-            "bytes": 27179,
-            "sha256": "0c349783f2ac5454887bcccb2521c2d5ae764b6295c48135960e11f817fd0985"
+            "bytes": 27179
           }
         },
         "changed": true,
@@ -886,12 +803,10 @@
         "lens": "elevation",
         "path": "src/objects/didymos/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 8730,
-          "sha256": "ece2e28b1480019990a53f5506089c63476ed66054601aafbc58b60ff26bb0ef"
+          "bytes": 8730
         },
         "branch": {
-          "bytes": 8730,
-          "sha256": "ece2e28b1480019990a53f5506089c63476ed66054601aafbc58b60ff26bb0ef"
+          "bytes": 8730
         },
         "changed": false
       },
@@ -900,12 +815,10 @@
         "lens": "shape",
         "path": "src/objects/didymos/prepared/minimaps/shape.webp",
         "reference": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "branch": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "changed": false
       },
@@ -914,12 +827,10 @@
         "lens": "albedo",
         "path": "src/objects/dimorphos/prepared/minimaps/albedo.webp",
         "reference": {
-          "bytes": 8124,
-          "sha256": "e7ccb5233be78eff69cde9b2321c4d0a80cb0ca8d8318dd035c8ba271e48345a"
+          "bytes": 8124
         },
         "branch": {
-          "bytes": 8124,
-          "sha256": "e7ccb5233be78eff69cde9b2321c4d0a80cb0ca8d8318dd035c8ba271e48345a"
+          "bytes": 8124
         },
         "changed": false
       },
@@ -928,12 +839,10 @@
         "lens": "draco",
         "path": "src/objects/dimorphos/prepared/minimaps/draco.webp",
         "reference": {
-          "bytes": 17596,
-          "sha256": "dad9a65a245591bd24dd103c4a2a7a993e31fcc5baab95bbc7d8c4d17a8f2e75"
+          "bytes": 17596
         },
         "branch": {
-          "bytes": 20016,
-          "sha256": "1f6f809de01bf2e3db60058d2dd7f232838851ccf9ee1dcc6b600c5380fc4b66"
+          "bytes": 20016
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -955,8 +864,7 @@
           "mismatchPercent": 1.47998046875,
           "diff": {
             "path": "diffs/dimorphos-draco.png",
-            "bytes": 41858,
-            "sha256": "b7000e569b19fe8b07d2b628d3170c5d8fd4217efa0493632b61cec4fd9282b7"
+            "bytes": 41858
           }
         },
         "changed": true,
@@ -968,12 +876,10 @@
         "lens": "elevation",
         "path": "src/objects/dimorphos/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 12988,
-          "sha256": "495cd437f29a45d2da35cc3dc44c17bbfa4611137e42d3212899761055b40c54"
+          "bytes": 12988
         },
         "branch": {
-          "bytes": 12988,
-          "sha256": "495cd437f29a45d2da35cc3dc44c17bbfa4611137e42d3212899761055b40c54"
+          "bytes": 12988
         },
         "changed": false
       },
@@ -982,12 +888,10 @@
         "lens": "shape",
         "path": "src/objects/dimorphos/prepared/minimaps/shape.webp",
         "reference": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "branch": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "changed": false
       },
@@ -996,12 +900,10 @@
         "lens": "slope",
         "path": "src/objects/dimorphos/prepared/minimaps/slope.webp",
         "reference": {
-          "bytes": 168022,
-          "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf"
+          "bytes": 168022
         },
         "branch": {
-          "bytes": 168022,
-          "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf"
+          "bytes": 168022
         },
         "changed": false
       },
@@ -1010,12 +912,10 @@
         "lens": "llorri",
         "path": "src/objects/donaldjohanson/prepared/minimaps/llorri.webp",
         "reference": {
-          "bytes": 20606,
-          "sha256": "01c24f4166d5d3a8e77767f4bf94cf54fa784642e8357afe475e0ef25842c126"
+          "bytes": 20606
         },
         "branch": {
-          "bytes": 21142,
-          "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012"
+          "bytes": 21142
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1037,8 +937,7 @@
           "mismatchPercent": 0.8076171875,
           "diff": {
             "path": "diffs/donaldjohanson-llorri.png",
-            "bytes": 56568,
-            "sha256": "ffa756f70ef104f82aeca19a7fe272ebc2b69c732bb120b25bec6f43abd4eb6d"
+            "bytes": 56568
           }
         },
         "changed": true,
@@ -1050,12 +949,10 @@
         "lens": "shape",
         "path": "src/objects/donaldjohanson/prepared/minimaps/shape.webp",
         "reference": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "branch": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "changed": false
       },
@@ -1064,12 +961,10 @@
         "lens": "elevation",
         "path": "src/objects/epimetheus/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 15332,
-          "sha256": "d8118ce02dc51cff3c37858ff4e7d274885770dbc0af51df3a4a36bf9a0303a7"
+          "bytes": 15332
         },
         "branch": {
-          "bytes": 15332,
-          "sha256": "d8118ce02dc51cff3c37858ff4e7d274885770dbc0af51df3a4a36bf9a0303a7"
+          "bytes": 15332
         },
         "changed": false
       },
@@ -1078,12 +973,10 @@
         "lens": "filter-color",
         "path": "src/objects/epimetheus/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 6730,
-          "sha256": "10ca09ac599b9eeddf6cff458ab2e6a530bc64a8711dcfebfaa0519d2e64b99b"
+          "bytes": 6730
         },
         "branch": {
-          "bytes": 6678,
-          "sha256": "ec129d0594b0910e1671de06b0e30f5888e31623d5f9b3e91ed1c7c3c23ae903"
+          "bytes": 6678
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1105,8 +998,7 @@
           "mismatchPercent": 0,
           "diff": {
             "path": "diffs/epimetheus-filter-color.png",
-            "bytes": 19508,
-            "sha256": "80253f17190a7325269f3501a507361838ca2698cf45854c80f3e84c137b81f1"
+            "bytes": 19508
           }
         },
         "changed": true,
@@ -1118,12 +1010,10 @@
         "lens": "normal",
         "path": "src/objects/epimetheus/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 32340,
-          "sha256": "8d02cb18dd1944273d3e0fbe4cb751bc6e0317ea75ef2c430c650e7f679b4a06"
+          "bytes": 32340
         },
         "branch": {
-          "bytes": 35716,
-          "sha256": "e7c67c26c74ce36ed833680367f994e4a4ba9d448a09846ac3cd9e807326e7c5"
+          "bytes": 35716
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1145,8 +1035,7 @@
           "mismatchPercent": 26.95751953125,
           "diff": {
             "path": "diffs/epimetheus-normal.png",
-            "bytes": 66191,
-            "sha256": "6d502cbbc39284e961fff9bbb82c1add1e6b7766414f4ca882692589f39fa0d8"
+            "bytes": 66191
           }
         },
         "changed": true,
@@ -1158,12 +1047,10 @@
         "lens": "calibrated",
         "path": "src/objects/gaspra/prepared/minimaps/calibrated.webp",
         "reference": {
-          "bytes": 6568,
-          "sha256": "11384c9589afcd72d5759b54363b90b01fe1fa183fe9685e19b4a0a1c03db617"
+          "bytes": 6568
         },
         "branch": {
-          "bytes": 7798,
-          "sha256": "3cc7f6c1149c11b06fe75debc804490dea96dbeae9782e41a3cf14ea4d06d0c0"
+          "bytes": 7798
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1185,8 +1072,7 @@
           "mismatchPercent": 1.63232421875,
           "diff": {
             "path": "diffs/gaspra-calibrated.png",
-            "bytes": 21726,
-            "sha256": "5660d01bbdaaaa462c972782cf8716485c0bcd06a3f3727e3dec7ac942d3da06"
+            "bytes": 21726
           }
         },
         "changed": true,
@@ -1198,12 +1084,10 @@
         "lens": "elevation",
         "path": "src/objects/gaspra/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 8848,
-          "sha256": "736fa7e8aeacf1871fe1dc57ee5f218690babb5034ff09451003ebdff8e9448b"
+          "bytes": 8848
         },
         "branch": {
-          "bytes": 8848,
-          "sha256": "736fa7e8aeacf1871fe1dc57ee5f218690babb5034ff09451003ebdff8e9448b"
+          "bytes": 8848
         },
         "changed": false
       },
@@ -1212,12 +1096,10 @@
         "lens": "normal",
         "path": "src/objects/gaspra/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 21022,
-          "sha256": "5bbeb73e1f4f09079f4bfb0b035269c3111485828a5ec945946c61d7b87b95bf"
+          "bytes": 21022
         },
         "branch": {
-          "bytes": 21022,
-          "sha256": "5bbeb73e1f4f09079f4bfb0b035269c3111485828a5ec945946c61d7b87b95bf"
+          "bytes": 21022
         },
         "changed": false
       },
@@ -1226,12 +1108,10 @@
         "lens": "elevation",
         "path": "src/objects/helene/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 15140,
-          "sha256": "ec09412ab9fbdac7663cea6bcacf1b2ba1a7038196c48a3d9d73a5e8980a22e6"
+          "bytes": 15140
         },
         "branch": {
-          "bytes": 15140,
-          "sha256": "ec09412ab9fbdac7663cea6bcacf1b2ba1a7038196c48a3d9d73a5e8980a22e6"
+          "bytes": 15140
         },
         "changed": false
       },
@@ -1240,12 +1120,10 @@
         "lens": "false-color",
         "path": "src/objects/helene/prepared/minimaps/false-color.webp",
         "reference": {
-          "bytes": 8432,
-          "sha256": "6e5acb72b23168e20c0b9f279f87068867886f33073b886d94c6f4858b599f84"
+          "bytes": 8432
         },
         "branch": {
-          "bytes": 8592,
-          "sha256": "0c17fa8b51216dc133432c944eeb238c91175c503731df138a4fd79ca47c47e6"
+          "bytes": 8592
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1267,8 +1145,7 @@
           "mismatchPercent": 0.08349609375,
           "diff": {
             "path": "diffs/helene-false-color.png",
-            "bytes": 25882,
-            "sha256": "3ec50d69859da6fedaa2e986dc89864a9eb864839eebe60bac4becf7b0fbf47e"
+            "bytes": 25882
           }
         },
         "changed": true,
@@ -1280,12 +1157,10 @@
         "lens": "normal",
         "path": "src/objects/helene/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 20454,
-          "sha256": "5d849ea218aa5187f4889258bfc7aa648c6e99f3c05fbbe9ba6f3af62498e984"
+          "bytes": 20454
         },
         "branch": {
-          "bytes": 18726,
-          "sha256": "33731e5eb03b0943987be1170ed51ea5ea6fde012730cec1f42b89dad1277d67"
+          "bytes": 18726
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1307,8 +1182,7 @@
           "mismatchPercent": 45.0888671875,
           "diff": {
             "path": "diffs/helene-normal.png",
-            "bytes": 29206,
-            "sha256": "97241879bed398fcceee754a8ce5275ea1c8d4cb2edd51cf6ed4898f70c66a2a"
+            "bytes": 29206
           }
         },
         "changed": true,
@@ -1320,12 +1194,10 @@
         "lens": "elevation",
         "path": "src/objects/hyperion/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 15664,
-          "sha256": "b8e6e78af253aebebe9288191aeb09a2ba75de156f12b2c11334c79ddca077e0"
+          "bytes": 15664
         },
         "branch": {
-          "bytes": 15664,
-          "sha256": "b8e6e78af253aebebe9288191aeb09a2ba75de156f12b2c11334c79ddca077e0"
+          "bytes": 15664
         },
         "changed": false
       },
@@ -1334,12 +1206,10 @@
         "lens": "filter-color",
         "path": "src/objects/hyperion/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 18454,
-          "sha256": "1aa50cf9accd4c596be0c66979cf17a9c9c784c84c1ec8c5496a5d1d34123359"
+          "bytes": 18454
         },
         "branch": {
-          "bytes": 18592,
-          "sha256": "528b8e5b07ba16ff86bbaa4c907c1590abe34441c3156597bb8066cda32d30aa"
+          "bytes": 18592
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1361,8 +1231,7 @@
           "mismatchPercent": 0.0224609375,
           "diff": {
             "path": "diffs/hyperion-filter-color.png",
-            "bytes": 47336,
-            "sha256": "4fda84cb6aa1d1816e01809b3b2c40868269f6b20a0c63ad4e47e6c763109756"
+            "bytes": 47336
           }
         },
         "changed": true,
@@ -1374,12 +1243,10 @@
         "lens": "normal",
         "path": "src/objects/hyperion/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 43988,
-          "sha256": "010db482ea0825f1d30042106107e3cb7d5778f213a411f21b2b75d2d97df5ce"
+          "bytes": 43988
         },
         "branch": {
-          "bytes": 45380,
-          "sha256": "6aa5e8e0d30ad572a1fd0ced793c6a579dda335f918f2dc1035fb9218d06bca1"
+          "bytes": 45380
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1401,8 +1268,7 @@
           "mismatchPercent": 5.90966796875,
           "diff": {
             "path": "diffs/hyperion-normal.png",
-            "bytes": 103509,
-            "sha256": "98c56dd283a8dd10f516b9e36e3652af8273831b24308ecd45e09b58c5149a4c"
+            "bytes": 103509
           }
         },
         "changed": true,
@@ -1414,12 +1280,10 @@
         "lens": "calibrated",
         "path": "src/objects/ida/prepared/minimaps/calibrated.webp",
         "reference": {
-          "bytes": 6900,
-          "sha256": "936b2f57fdcb6d26070a57f907d3b7756fc48ed388c7e93c71352c080a6190f2"
+          "bytes": 6900
         },
         "branch": {
-          "bytes": 8604,
-          "sha256": "239dbd855ea24039ffcd02cdcebd3bf09999ef686c4138a785db8051734c7210"
+          "bytes": 8604
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1441,8 +1305,7 @@
           "mismatchPercent": 0.3837890625,
           "diff": {
             "path": "diffs/ida-calibrated.png",
-            "bytes": 21045,
-            "sha256": "dc082c8660e2e959e28432a3ec2c274e735931b015802db72d41b4a93835238c"
+            "bytes": 21045
           }
         },
         "changed": true,
@@ -1454,12 +1317,10 @@
         "lens": "elevation",
         "path": "src/objects/ida/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 11318,
-          "sha256": "3d21cdff683207b9846992d211ba082c1b9a1ca1b1e25c9833dcf83b3327fba2"
+          "bytes": 11318
         },
         "branch": {
-          "bytes": 11318,
-          "sha256": "3d21cdff683207b9846992d211ba082c1b9a1ca1b1e25c9833dcf83b3327fba2"
+          "bytes": 11318
         },
         "changed": false
       },
@@ -1468,12 +1329,10 @@
         "lens": "normal",
         "path": "src/objects/ida/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 24534,
-          "sha256": "5e90483a07be8d129518b6828c66407c16fcf58a7a83b2086ad82142351f6a03"
+          "bytes": 24534
         },
         "branch": {
-          "bytes": 24534,
-          "sha256": "5e90483a07be8d129518b6828c66407c16fcf58a7a83b2086ad82142351f6a03"
+          "bytes": 24534
         },
         "changed": false
       },
@@ -1482,12 +1341,10 @@
         "lens": "amica",
         "path": "src/objects/itokawa/prepared/minimaps/amica.webp",
         "reference": {
-          "bytes": 48930,
-          "sha256": "c4bef8180ffe6ea140f426e85232512dc8f2a08fb6a0b27c832b1acf964615b6"
+          "bytes": 48930
         },
         "branch": {
-          "bytes": 52294,
-          "sha256": "7a11f64a6f18e3e346054c3a44a6a7b90f17dbb04f49c920d021ddda68cd4bf0"
+          "bytes": 52294
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1509,8 +1366,7 @@
           "mismatchPercent": 8.1494140625,
           "diff": {
             "path": "diffs/itokawa-amica.png",
-            "bytes": 90423,
-            "sha256": "0a07bdf25d8a5acab67c75ce60d899bbfc7cc4ad961da582aaa6159fd7b6e93f"
+            "bytes": 90423
           }
         },
         "changed": true,
@@ -1522,12 +1378,10 @@
         "lens": "elevation",
         "path": "src/objects/itokawa/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 21892,
-          "sha256": "0d3b2c675abad14df2466228151c2b216527fd795f3db0279b3f796f8bc258aa"
+          "bytes": 21892
         },
         "branch": {
-          "bytes": 21892,
-          "sha256": "0d3b2c675abad14df2466228151c2b216527fd795f3db0279b3f796f8bc258aa"
+          "bytes": 21892
         },
         "changed": false
       },
@@ -1536,12 +1390,10 @@
         "lens": "elevation",
         "path": "src/objects/janus/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 15628,
-          "sha256": "23310f1302bd263cccd2dfdf2947a70fe8582633f4494c2367fe39609dbc4cbb"
+          "bytes": 15628
         },
         "branch": {
-          "bytes": 15628,
-          "sha256": "23310f1302bd263cccd2dfdf2947a70fe8582633f4494c2367fe39609dbc4cbb"
+          "bytes": 15628
         },
         "changed": false
       },
@@ -1550,12 +1402,10 @@
         "lens": "filter-color",
         "path": "src/objects/janus/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 7678,
-          "sha256": "12c98554dfcd8b35015d74384401622f73ea96727446dd3e0d94456e1dbc1263"
+          "bytes": 7678
         },
         "branch": {
-          "bytes": 7702,
-          "sha256": "982c31c1e5b03238f7deb045a398d2b086bd79987c319ca5ba93f4784a749479"
+          "bytes": 7702
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1577,8 +1427,7 @@
           "mismatchPercent": 0.02978515625,
           "diff": {
             "path": "diffs/janus-filter-color.png",
-            "bytes": 24133,
-            "sha256": "56a3d9b50beb2097972e3e896bf69b99c6ded18a5da9dec8981a8c09ede82496"
+            "bytes": 24133
           }
         },
         "changed": true,
@@ -1590,12 +1439,10 @@
         "lens": "normal",
         "path": "src/objects/janus/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 18902,
-          "sha256": "f377edf4fcba9419dbec8ccfd653df1404cbe322d92311b954fa31e989d9e67e"
+          "bytes": 18902
         },
         "branch": {
-          "bytes": 21144,
-          "sha256": "85660f2f4f120e30cd083d560904d57e0dae3fd3a742126109078f31a0cb8216"
+          "bytes": 21144
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1617,8 +1464,7 @@
           "mismatchPercent": 19.3623046875,
           "diff": {
             "path": "diffs/janus-normal.png",
-            "bytes": 50380,
-            "sha256": "143e883abf013256051e506d0a35fd94d6f8cfe7c8b4bc8b478cbfb04d122f3c"
+            "bytes": 50380
           }
         },
         "changed": true,
@@ -1630,12 +1476,10 @@
         "lens": "elevation",
         "path": "src/objects/larissa/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 11170,
-          "sha256": "44be6758828c88c177017921956c9817b9ee8cd608de5e295c206d67fc3c0f5f"
+          "bytes": 11170
         },
         "branch": {
-          "bytes": 11170,
-          "sha256": "44be6758828c88c177017921956c9817b9ee8cd608de5e295c206d67fc3c0f5f"
+          "bytes": 11170
         },
         "changed": false
       },
@@ -1644,12 +1488,10 @@
         "lens": "normal",
         "path": "src/objects/larissa/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 6690,
-          "sha256": "329ea8c5f04a650498a40d5c8be896c121610121f76038b4272b3d0c1f1758ff"
+          "bytes": 6690
         },
         "branch": {
-          "bytes": 8186,
-          "sha256": "dcc6c2cda4e3383e6f9395a2e8d991b77221b3376bf14749f078769253249f0f"
+          "bytes": 8186
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1671,8 +1513,7 @@
           "mismatchPercent": 27.510742187499996,
           "diff": {
             "path": "diffs/larissa-normal.png",
-            "bytes": 18766,
-            "sha256": "03be21755e9ec5f65cf02e33fc00072b9cbf81c5a21293bee36096726aed3822"
+            "bytes": 18766
           }
         },
         "changed": true,
@@ -1684,12 +1525,10 @@
         "lens": "elevation",
         "path": "src/objects/lutetia/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 13866,
-          "sha256": "acf728789c7a55400ab7276a2142ec306a5af20b16340264cd31562c7df6d2d3"
+          "bytes": 13866
         },
         "branch": {
-          "bytes": 13866,
-          "sha256": "acf728789c7a55400ab7276a2142ec306a5af20b16340264cd31562c7df6d2d3"
+          "bytes": 13866
         },
         "changed": false
       },
@@ -1698,12 +1537,10 @@
         "lens": "osiris",
         "path": "src/objects/lutetia/prepared/minimaps/osiris.webp",
         "reference": {
-          "bytes": 30752,
-          "sha256": "dd015a835dc66984b3fbe8796674ec31f8f7eef81bb9698bb9525f7dca42f95d"
+          "bytes": 30752
         },
         "branch": {
-          "bytes": 29842,
-          "sha256": "46b2cfd611ca94145dff80d8f7a9bf069715b58e170452b85c8b1ca4e5f03c47"
+          "bytes": 29842
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1725,8 +1562,7 @@
           "mismatchPercent": 10.10986328125,
           "diff": {
             "path": "diffs/lutetia-osiris.png",
-            "bytes": 59673,
-            "sha256": "6af48c3fdcbcb0eeb24a8ae88970e06d0327f1a4c0d284d9b9ac78031f116737"
+            "bytes": 59673
           }
         },
         "changed": true,
@@ -1738,12 +1574,10 @@
         "lens": "shape",
         "path": "src/objects/lutetia/prepared/minimaps/shape.webp",
         "reference": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "branch": {
-          "bytes": 2964,
-          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd"
+          "bytes": 2964
         },
         "changed": false
       },
@@ -1752,12 +1586,10 @@
         "lens": "elevation",
         "path": "src/objects/mathilde/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 16474,
-          "sha256": "d7e841a69f2526a4f47163f2b10ab3f712868913a80e9dd856048955dce9fd95"
+          "bytes": 16474
         },
         "branch": {
-          "bytes": 16474,
-          "sha256": "d7e841a69f2526a4f47163f2b10ab3f712868913a80e9dd856048955dce9fd95"
+          "bytes": 16474
         },
         "changed": false
       },
@@ -1766,12 +1598,10 @@
         "lens": "near-msi",
         "path": "src/objects/mathilde/prepared/minimaps/near-msi.webp",
         "reference": {
-          "bytes": 12498,
-          "sha256": "142e74730a054b0dc9aa015709492231820a8a77153fb73ba2f447b84ad71e74"
+          "bytes": 12498
         },
         "branch": {
-          "bytes": 10098,
-          "sha256": "bc83b454af83dcf9083b006b96be5ba931687cfdff227a1f54bf7fbd7f6e56a7"
+          "bytes": 10098
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1793,8 +1623,7 @@
           "mismatchPercent": 5.45556640625,
           "diff": {
             "path": "diffs/mathilde-near-msi.png",
-            "bytes": 31438,
-            "sha256": "eb5d58e46175413ebabc7ade95c5a89d2644f7e97e0a3c556522e6a0e37bc177"
+            "bytes": 31438
           }
         },
         "changed": true,
@@ -1806,12 +1635,10 @@
         "lens": "normal",
         "path": "src/objects/mathilde/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 15302,
-          "sha256": "cbc7dbd3977dbd8feb044e13ec49a2b2d7eefd30af96ea577b4a64f13cd821cb"
+          "bytes": 15302
         },
         "branch": {
-          "bytes": 15302,
-          "sha256": "cbc7dbd3977dbd8feb044e13ec49a2b2d7eefd30af96ea577b4a64f13cd821cb"
+          "bytes": 15302
         },
         "changed": false
       },
@@ -1820,12 +1647,10 @@
         "lens": "normal",
         "path": "src/objects/methone/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 4374,
-          "sha256": "a6dfc8dc493d11690c05ba3191b27598a2e40cb0ddcb2675814a1b7a53826726"
+          "bytes": 4374
         },
         "branch": {
-          "bytes": 5148,
-          "sha256": "b8649aa1fe6849f269cb8c84d2c6292c661c77e2eb8199013b95840faf94474f"
+          "bytes": 5148
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1847,8 +1672,7 @@
           "mismatchPercent": 16.924285888671875,
           "diff": {
             "path": "diffs/methone-normal.png",
-            "bytes": 8444,
-            "sha256": "6f42129a3ba8c4bec0a80c1c92cf4ad381cf8ebb52f9ae818ea615e7ba0ea8d6"
+            "bytes": 8444
           }
         },
         "changed": true,
@@ -1860,12 +1684,10 @@
         "lens": "normal",
         "path": "src/objects/metis/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 5382,
-          "sha256": "c28f5c4b7c1f56375eb8e84097c6258f7b91d2aacd9eded9a3159fb24a3335e6"
+          "bytes": 5382
         },
         "branch": {
-          "bytes": 5628,
-          "sha256": "063f037bc0be3aecf108ba2a3b89618b27d14d6fa157c8af0010582bd79a1beb"
+          "bytes": 5628
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1887,8 +1709,7 @@
           "mismatchPercent": 11.875152587890625,
           "diff": {
             "path": "diffs/metis-normal.png",
-            "bytes": 14729,
-            "sha256": "644423a093f0c3e100347976b2b22d8dc1973af1b3ab319bca3f43c407009ee5"
+            "bytes": 14729
           }
         },
         "changed": true,
@@ -1900,12 +1721,10 @@
         "lens": "normal",
         "path": "src/objects/pallene/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 4208,
-          "sha256": "5a659252a8a19030269aa8511bebeaea15cdb1a4ff82c7b799fd92b8b89671c7"
+          "bytes": 4208
         },
         "branch": {
-          "bytes": 4270,
-          "sha256": "41a7c1170aef3b404d06823a69917fa3c410333ed63edab3b7a3cd6647737789"
+          "bytes": 4270
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1927,8 +1746,7 @@
           "mismatchPercent": 9.18426513671875,
           "diff": {
             "path": "diffs/pallene-normal.png",
-            "bytes": 9581,
-            "sha256": "9e38ff0eb17f2f4d4c1504c8139db216c845fab7e95dd7c615e45116198636d1"
+            "bytes": 9581
           }
         },
         "changed": true,
@@ -1940,12 +1758,10 @@
         "lens": "elevation",
         "path": "src/objects/pan/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 8384,
-          "sha256": "02a3056eb2ffe96c3b37f6d6fa0b5c62f3a48588680fabc1a6989ec6e39d187e"
+          "bytes": 8384
         },
         "branch": {
-          "bytes": 8384,
-          "sha256": "02a3056eb2ffe96c3b37f6d6fa0b5c62f3a48588680fabc1a6989ec6e39d187e"
+          "bytes": 8384
         },
         "changed": false
       },
@@ -1954,12 +1770,10 @@
         "lens": "filter-color",
         "path": "src/objects/pan/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 6926,
-          "sha256": "d41ea13fae9ffc0e3ed91e02dd88c26deb77fab24f04aae0ae593bcf7404588f"
+          "bytes": 6926
         },
         "branch": {
-          "bytes": 7674,
-          "sha256": "c2ee39d88894de2e51fbdd89018c3b746eaa18e909f5c725dd1cacaa404426d0"
+          "bytes": 7674
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -1981,8 +1795,7 @@
           "mismatchPercent": 0.369140625,
           "diff": {
             "path": "diffs/pan-filter-color.png",
-            "bytes": 17972,
-            "sha256": "0e84a1e50cbd9ce1e6842997721fcf1756c167b678bdcf127a2702c83bfc9c87"
+            "bytes": 17972
           }
         },
         "changed": true,
@@ -1994,12 +1807,10 @@
         "lens": "normal",
         "path": "src/objects/pan/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 9670,
-          "sha256": "898cac732f46b87fd7f07bd43135a0dba3bc69c0f928b5d1d3ee495f99b01226"
+          "bytes": 9670
         },
         "branch": {
-          "bytes": 10918,
-          "sha256": "7b2a4058c61e5d58e61144da5509821c296d0398502b3043f18d42d7166c05f1"
+          "bytes": 10918
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2021,8 +1832,7 @@
           "mismatchPercent": 1.3359375,
           "diff": {
             "path": "diffs/pan-normal.png",
-            "bytes": 35027,
-            "sha256": "44ca1c7443825e0486c0a9e556bcf18033ba42d0c14d4eff630f692be603fc02"
+            "bytes": 35027
           }
         },
         "changed": true,
@@ -2034,12 +1844,10 @@
         "lens": "elevation",
         "path": "src/objects/pandora/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 12302,
-          "sha256": "2e6a1f990edf8c86f74f70e7784f599624ec2352ee9abf2b78f8def7aee60cf8"
+          "bytes": 12302
         },
         "branch": {
-          "bytes": 12302,
-          "sha256": "2e6a1f990edf8c86f74f70e7784f599624ec2352ee9abf2b78f8def7aee60cf8"
+          "bytes": 12302
         },
         "changed": false
       },
@@ -2048,12 +1856,10 @@
         "lens": "filter-color",
         "path": "src/objects/pandora/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 8188,
-          "sha256": "c0f1ee8c42686f391665d7cc5b295f428ff3d6e1537fbc6e9948eb8c931314b0"
+          "bytes": 8188
         },
         "branch": {
-          "bytes": 8048,
-          "sha256": "4afba84a4ca4ceaf185511507b65473b20e8c43fc636014ab67e29274fd44cc3"
+          "bytes": 8048
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2075,8 +1881,7 @@
           "mismatchPercent": 0.23681640624999997,
           "diff": {
             "path": "diffs/pandora-filter-color.png",
-            "bytes": 22312,
-            "sha256": "4db18454b8f9037cef3f3dee97da491b3e2514432a7adb75615b7e3d344cfeda"
+            "bytes": 22312
           }
         },
         "changed": true,
@@ -2088,12 +1893,10 @@
         "lens": "normal",
         "path": "src/objects/pandora/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 16458,
-          "sha256": "93d5885605d873e878c605691375e37c2fb6aac722fc95a66012639f0e0f488c"
+          "bytes": 16458
         },
         "branch": {
-          "bytes": 17370,
-          "sha256": "6aa644fc89c44d45f41dcc95efc8ece50f17c75b7c504c6523364c4920b228e3"
+          "bytes": 17370
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2115,8 +1918,7 @@
           "mismatchPercent": 15.35009765625,
           "diff": {
             "path": "diffs/pandora-normal.png",
-            "bytes": 51007,
-            "sha256": "ca1fe3dc0e72caffaf5b0b0d10f5ac52e0e8aed996b25e828f425b118ae15c07"
+            "bytes": 51007
           }
         },
         "changed": true,
@@ -2128,12 +1930,10 @@
         "lens": "normal",
         "path": "src/objects/polydeuces/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 3976,
-          "sha256": "637949da9222e33d449cde48ff9c2bd65eb9e45bcb0767caec62d1a818537365"
+          "bytes": 3976
         },
         "branch": {
-          "bytes": 3792,
-          "sha256": "78b3a149148e893269778d70379817dfb43671c978a22569cc70d2b9c250b6ec"
+          "bytes": 3792
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2155,8 +1955,7 @@
           "mismatchPercent": 4.088592529296875,
           "diff": {
             "path": "diffs/polydeuces-normal.png",
-            "bytes": 9011,
-            "sha256": "a53cc06551e5c41428e31b7016f91c94ba7bcba578cf8a2f509a7d79b36acc73"
+            "bytes": 9011
           }
         },
         "changed": true,
@@ -2168,12 +1967,10 @@
         "lens": "elevation",
         "path": "src/objects/prometheus/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 10752,
-          "sha256": "bc3e76423884c8436a5f4e0e678ce61c5eb93cf07420c32589bab625dc647bbb"
+          "bytes": 10752
         },
         "branch": {
-          "bytes": 10752,
-          "sha256": "bc3e76423884c8436a5f4e0e678ce61c5eb93cf07420c32589bab625dc647bbb"
+          "bytes": 10752
         },
         "changed": false
       },
@@ -2182,12 +1979,10 @@
         "lens": "filter-color",
         "path": "src/objects/prometheus/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 9396,
-          "sha256": "1355f371c80cbb6b23819ab2fb5e029aebc66916ea4ef1ca7560d17520cd157d"
+          "bytes": 9396
         },
         "branch": {
-          "bytes": 9386,
-          "sha256": "eb41da3be047b8c1aaf7a0787ba0d0056d264a25d64e2f8d40c29b7295d7db22"
+          "bytes": 9386
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2209,8 +2004,7 @@
           "mismatchPercent": 0.28271484375,
           "diff": {
             "path": "diffs/prometheus-filter-color.png",
-            "bytes": 24090,
-            "sha256": "e001445202e058454ee0e5a9e28be41feb4af8abe03e91c47399afe925bfcf04"
+            "bytes": 24090
           }
         },
         "changed": true,
@@ -2222,12 +2016,10 @@
         "lens": "normal",
         "path": "src/objects/prometheus/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 15052,
-          "sha256": "65a18a2ccd30636499c24f2d5acefa228410e288b194a5f0220df6369b5c4086"
+          "bytes": 15052
         },
         "branch": {
-          "bytes": 16314,
-          "sha256": "5b35c474a77af4c067ecaac6832ee15cbe5abe5433b268157ec765334941fb85"
+          "bytes": 16314
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2249,8 +2041,7 @@
           "mismatchPercent": 9.435546875,
           "diff": {
             "path": "diffs/prometheus-normal.png",
-            "bytes": 43568,
-            "sha256": "56e9ce535be95300799a08353717bbe4c092cd59053858979daf0bded008cd13"
+            "bytes": 43568
           }
         },
         "changed": true,
@@ -2262,12 +2053,10 @@
         "lens": "elevation",
         "path": "src/objects/proteus/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 18448,
-          "sha256": "cc9136fdf0390b5bdd8a3b25b9068171343f4846c3b757843dc910e661aeefe6"
+          "bytes": 18448
         },
         "branch": {
-          "bytes": 18448,
-          "sha256": "cc9136fdf0390b5bdd8a3b25b9068171343f4846c3b757843dc910e661aeefe6"
+          "bytes": 18448
         },
         "changed": false
       },
@@ -2276,12 +2065,10 @@
         "lens": "filter-color",
         "path": "src/objects/proteus/prepared/minimaps/filter-color.webp",
         "reference": {
-          "bytes": 6622,
-          "sha256": "c31166a6461d4712d20cda1d8572db74d11a9789a446322e6a41d3b4af4aa3c1"
+          "bytes": 6622
         },
         "branch": {
-          "bytes": 6716,
-          "sha256": "5b733852c439afdb0c424a8377fb8dfbe24ef4dd71ce3ae33334cc6b5059e211"
+          "bytes": 6716
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2303,8 +2090,7 @@
           "mismatchPercent": 1.34130859375,
           "diff": {
             "path": "diffs/proteus-filter-color.png",
-            "bytes": 17211,
-            "sha256": "24a5426559307af52fcb4a87141b48b7e23d98a0a492b570cde22dde83778962"
+            "bytes": 17211
           }
         },
         "changed": true,
@@ -2316,12 +2102,10 @@
         "lens": "normal",
         "path": "src/objects/proteus/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 22918,
-          "sha256": "bdedc167a33d261e3c4bf62daad7d4ef33051e885b356eba76423a73111f0db5"
+          "bytes": 22918
         },
         "branch": {
-          "bytes": 22414,
-          "sha256": "0c46236aa6741417f9f068699b205f94842393941becea324f3024b8671a5903"
+          "bytes": 22414
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2343,8 +2127,7 @@
           "mismatchPercent": 20.7373046875,
           "diff": {
             "path": "diffs/proteus-normal.png",
-            "bytes": 55819,
-            "sha256": "165711f43dba1ed8526573974563c30085970e55e7931c665c80f4c755be57c5"
+            "bytes": 55819
           }
         },
         "changed": true,
@@ -2356,12 +2139,10 @@
         "lens": "normal",
         "path": "src/objects/puck/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 5102,
-          "sha256": "4a4d0d53ebc728b5b85c5db892ce848460fe3c82492fa3b4818641667e19211b"
+          "bytes": 5102
         },
         "branch": {
-          "bytes": 5546,
-          "sha256": "571880ae1ec88362405ebbdcd1210e7b5dceaf83b4c72d63e09d433031a941cf"
+          "bytes": 5546
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2383,8 +2164,7 @@
           "mismatchPercent": 0.9796142578125,
           "diff": {
             "path": "diffs/puck-normal.png",
-            "bytes": 15899,
-            "sha256": "93a35e1fd364a429dcac829c59b61cd6cdd19a7c07b87e2b19e23cf26edc4e93"
+            "bytes": 15899
           }
         },
         "changed": true,
@@ -2396,12 +2176,10 @@
         "lens": "elevation",
         "path": "src/objects/steins/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 11126,
-          "sha256": "cf54315d8c0247e4f3ac1a55d218dc94ffc9e459553c983fd12fc5cde9d7d516"
+          "bytes": 11126
         },
         "branch": {
-          "bytes": 11126,
-          "sha256": "cf54315d8c0247e4f3ac1a55d218dc94ffc9e459553c983fd12fc5cde9d7d516"
+          "bytes": 11126
         },
         "changed": false
       },
@@ -2410,12 +2188,10 @@
         "lens": "normal",
         "path": "src/objects/steins/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 13144,
-          "sha256": "83c9574cafcbf0e46a1607dc205ef8e31f28fed16220697a313989c22b861738"
+          "bytes": 13144
         },
         "branch": {
-          "bytes": 13144,
-          "sha256": "83c9574cafcbf0e46a1607dc205ef8e31f28fed16220697a313989c22b861738"
+          "bytes": 13144
         },
         "changed": false
       },
@@ -2424,12 +2200,10 @@
         "lens": "osiris",
         "path": "src/objects/steins/prepared/minimaps/osiris.webp",
         "reference": {
-          "bytes": 8502,
-          "sha256": "fa7479ca6c5d2a6f8616c796238f80cb2249b1b98717594390817c36f6d8e724"
+          "bytes": 8502
         },
         "branch": {
-          "bytes": 9876,
-          "sha256": "830dee0eac8f4e1585d1e771b58fc49f409df1384995639e81df3f35d926e655"
+          "bytes": 9876
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2451,8 +2225,7 @@
           "mismatchPercent": 5.14794921875,
           "diff": {
             "path": "diffs/steins-osiris.png",
-            "bytes": 23477,
-            "sha256": "2c1bc01cf7a2b8a2c33692b9e8f8d421dee6d1a80e8b408acbddfc6541d033dc"
+            "bytes": 23477
           }
         },
         "changed": true,
@@ -2464,12 +2237,10 @@
         "lens": "elevation",
         "path": "src/objects/telesto/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 11366,
-          "sha256": "adaff471f4b03e2a1c6e366d394b3b4cbcf143e4af836ab86148fe55728f7c12"
+          "bytes": 11366
         },
         "branch": {
-          "bytes": 11366,
-          "sha256": "adaff471f4b03e2a1c6e366d394b3b4cbcf143e4af836ab86148fe55728f7c12"
+          "bytes": 11366
         },
         "changed": false
       },
@@ -2478,12 +2249,10 @@
         "lens": "false-color",
         "path": "src/objects/telesto/prepared/minimaps/false-color.webp",
         "reference": {
-          "bytes": 6246,
-          "sha256": "a9031634bc1a9974331c399aaa6891f2acddeba2bdd1cd4841fad0101f4097f3"
+          "bytes": 6246
         },
         "branch": {
-          "bytes": 6684,
-          "sha256": "69377a88cde7e27239279b84134697bf7362ce4969b5d516b1d3a9974e04471c"
+          "bytes": 6684
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2505,8 +2274,7 @@
           "mismatchPercent": 0.3125,
           "diff": {
             "path": "diffs/telesto-false-color.png",
-            "bytes": 19094,
-            "sha256": "8a696791fe4229d42055886224c553fbeb9f8b482f14a14e6b14d15affe2e0dd"
+            "bytes": 19094
           }
         },
         "changed": true,
@@ -2518,12 +2286,10 @@
         "lens": "normal",
         "path": "src/objects/telesto/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 16098,
-          "sha256": "f5cee3b3141bab2578b58e3c9c4cacc75120208c063dfb2015fa3c1c530950be"
+          "bytes": 16098
         },
         "branch": {
-          "bytes": 12332,
-          "sha256": "cbf0266da6a286689a43f3f0857772ad0ab64d88f56855bed2010330103b88e1"
+          "bytes": 12332
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2545,8 +2311,7 @@
           "mismatchPercent": 39.232421875,
           "diff": {
             "path": "diffs/telesto-normal.png",
-            "bytes": 39119,
-            "sha256": "e7aa70779413b11860dc739f35e6176b1e3824bc1151a871e4ef4711919d1932"
+            "bytes": 39119
           }
         },
         "changed": true,
@@ -2558,12 +2323,10 @@
         "lens": "elevation",
         "path": "src/objects/tethys/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 69668,
-          "sha256": "8d249f62b9687b1326911fa6d13b501566b87d291f1c13b8a353a79897871943"
+          "bytes": 69668
         },
         "branch": {
-          "bytes": 69668,
-          "sha256": "8d249f62b9687b1326911fa6d13b501566b87d291f1c13b8a353a79897871943"
+          "bytes": 69668
         },
         "changed": false
       },
@@ -2572,12 +2335,10 @@
         "lens": "enhanced",
         "path": "src/objects/tethys/prepared/minimaps/enhanced.webp",
         "reference": {
-          "bytes": 93628,
-          "sha256": "83738f6d749d22beb1710ce55f8bd9bb3111ee542dcc2f7b2baea7b83ceddc27"
+          "bytes": 93628
         },
         "branch": {
-          "bytes": 93628,
-          "sha256": "83738f6d749d22beb1710ce55f8bd9bb3111ee542dcc2f7b2baea7b83ceddc27"
+          "bytes": 93628
         },
         "changed": false
       },
@@ -2586,12 +2347,10 @@
         "lens": "ice-absorption",
         "path": "src/objects/tethys/prepared/minimaps/ice-absorption.webp",
         "reference": {
-          "bytes": 40752,
-          "sha256": "23564d57d6c0715f090ca0cc53b307adb4a9dd96fcd226d948b4b9327d6335a3"
+          "bytes": 40752
         },
         "branch": {
-          "bytes": 40752,
-          "sha256": "23564d57d6c0715f090ca0cc53b307adb4a9dd96fcd226d948b4b9327d6335a3"
+          "bytes": 40752
         },
         "changed": false
       },
@@ -2600,12 +2359,10 @@
         "lens": "infrared",
         "path": "src/objects/tethys/prepared/minimaps/infrared.webp",
         "reference": {
-          "bytes": 11062,
-          "sha256": "778bd091712150e6e7db421fc5835eac1e9c673c64150b50a6a1bc5290c16fbf"
+          "bytes": 11062
         },
         "branch": {
-          "bytes": 11062,
-          "sha256": "778bd091712150e6e7db421fc5835eac1e9c673c64150b50a6a1bc5290c16fbf"
+          "bytes": 11062
         },
         "changed": false
       },
@@ -2614,12 +2371,10 @@
         "lens": "iss",
         "path": "src/objects/tethys/prepared/minimaps/iss.webp",
         "reference": {
-          "bytes": 22440,
-          "sha256": "81ad74453f479474425316a223e0c2fa493b973ef1142d23fbb6b0507196fc00"
+          "bytes": 22440
         },
         "branch": {
-          "bytes": 21284,
-          "sha256": "0cf9f3d90ccf0b2fa4cc6c959c4bf3e32c74060f2392bf3d6cc4449fa0490d08"
+          "bytes": 21284
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2641,8 +2396,7 @@
           "mismatchPercent": 0.60986328125,
           "diff": {
             "path": "diffs/tethys-iss.png",
-            "bytes": 52998,
-            "sha256": "82a982abc4d7f1683f3052970426da97a407c6a405955ba70bff07ad239402ca"
+            "bytes": 52998
           }
         },
         "changed": true,
@@ -2654,12 +2408,10 @@
         "lens": "normal",
         "path": "src/objects/tethys/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 84710,
-          "sha256": "e98eb0c99116a0125c0dde13fa4d2c0f607529287ef15a5f09408ebce9ab052d"
+          "bytes": 84710
         },
         "branch": {
-          "bytes": 84710,
-          "sha256": "e98eb0c99116a0125c0dde13fa4d2c0f607529287ef15a5f09408ebce9ab052d"
+          "bytes": 84710
         },
         "changed": false
       },
@@ -2668,12 +2420,10 @@
         "lens": "relative-albedo",
         "path": "src/objects/tethys/prepared/minimaps/relative-albedo.webp",
         "reference": {
-          "bytes": 194014,
-          "sha256": "ea38e14c079f3e7eb28d111f499385ba6fe41c18bd11cf7564e2f78761a63c36"
+          "bytes": 194014
         },
         "branch": {
-          "bytes": 194014,
-          "sha256": "ea38e14c079f3e7eb28d111f499385ba6fe41c18bd11cf7564e2f78761a63c36"
+          "bytes": 194014
         },
         "changed": false
       },
@@ -2682,12 +2432,10 @@
         "lens": "shape",
         "path": "src/objects/tethys/prepared/minimaps/shape.webp",
         "reference": {
-          "bytes": 3072,
-          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7"
+          "bytes": 3072
         },
         "branch": {
-          "bytes": 3072,
-          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7"
+          "bytes": 3072
         },
         "changed": false
       },
@@ -2696,12 +2444,10 @@
         "lens": "elevation",
         "path": "src/objects/thebe/prepared/minimaps/elevation.webp",
         "reference": {
-          "bytes": 11154,
-          "sha256": "07edf17b5cdc6e06d2fa98eb37622c05256bddaec9790e63028aec3d9b528209"
+          "bytes": 11154
         },
         "branch": {
-          "bytes": 11154,
-          "sha256": "07edf17b5cdc6e06d2fa98eb37622c05256bddaec9790e63028aec3d9b528209"
+          "bytes": 11154
         },
         "changed": false
       },
@@ -2710,12 +2456,10 @@
         "lens": "normal",
         "path": "src/objects/thebe/prepared/minimaps/normal.webp",
         "reference": {
-          "bytes": 9696,
-          "sha256": "bc4d53c1b1fa307dfc2245500e0c05eaaa79fc8dc9ed403ab805cd6af39b35a5"
+          "bytes": 9696
         },
         "branch": {
-          "bytes": 9626,
-          "sha256": "3e444aee4d12da2795d07544c7a9c2f608c57eb136f980b54dffcfcc1429808c"
+          "bytes": 9626
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2737,8 +2481,7 @@
           "mismatchPercent": 41.982421875,
           "diff": {
             "path": "diffs/thebe-normal.png",
-            "bytes": 21678,
-            "sha256": "9646a0216586a1b370b93d452ef237cee684a8ec07d0ee5813144145d36d29be"
+            "bytes": 21678
           }
         },
         "changed": true,
@@ -2750,12 +2493,10 @@
         "lens": "monochrome",
         "path": "src/objects/nix/prepared/minimaps/monochrome.webp",
         "reference": {
-          "bytes": 9678,
-          "sha256": "8daea7724a9501c198e95c9389da94575d5be05c355b4e506955527fcba7af03"
+          "bytes": 9678
         },
         "branch": {
-          "bytes": 10078,
-          "sha256": "8aab96d3a981083ab7f96a098fbc64d1bf0d806ffbfe8c780ec38601103d7927"
+          "bytes": 10078
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2777,8 +2518,7 @@
           "mismatchPercent": 0.608062744140625,
           "diff": {
             "path": "diffs/nix-monochrome.png",
-            "bytes": 28698,
-            "sha256": "96f86fa9055a956d134bd0fcbb034ca0e7a2221ff6e1ca80e8e26d5630cc9a50"
+            "bytes": 28698
           }
         },
         "changed": true,
@@ -2790,12 +2530,10 @@
         "lens": "monochrome",
         "path": "src/objects/hydra/prepared/minimaps/monochrome.webp",
         "reference": {
-          "bytes": 4828,
-          "sha256": "be95bc9e3d895d5d62507d8dd53317c9261e07e91ebe2d7c812d89458c39b5c9"
+          "bytes": 4828
         },
         "branch": {
-          "bytes": 4968,
-          "sha256": "b7c6234912d7aae6624b7ecd6855571bac18903834ea7e3d4a1236c2aebbda09"
+          "bytes": 4968
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2817,8 +2555,7 @@
           "mismatchPercent": 2.03399658203125,
           "diff": {
             "path": "diffs/hydra-monochrome.png",
-            "bytes": 14703,
-            "sha256": "103bae9166418ae2764a86f155fbf07567aad7cd60680063ffeaf95dfc954a2d"
+            "bytes": 14703
           }
         },
         "changed": true,
@@ -2835,12 +2572,10 @@
         "body": "amalthea",
         "path": "src/objects/amalthea/source/presentation/context.png",
         "reference": {
-          "bytes": 44558,
-          "sha256": "cc24a3d225625321b94229125518492454d0d2262642fdcf215f5c8719c516d7"
+          "bytes": 44558
         },
         "branch": {
-          "bytes": 46346,
-          "sha256": "fac868da09c4a7adf37c39a09588f3661f13f47e989b42af6c3bf3168e070abb"
+          "bytes": 46346
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2862,8 +2597,7 @@
           "mismatchPercent": 12.7899169921875,
           "diff": {
             "path": "diffs/amalthea-context.png",
-            "bytes": 12010,
-            "sha256": "b084f06d9d2391148f38b875f9199f5b912ce5244318d0763b1b774acdd53be7"
+            "bytes": 12010
           }
         },
         "row": 1,
@@ -2873,12 +2607,10 @@
         "body": "atlas",
         "path": "src/objects/atlas/source/presentation/context.png",
         "reference": {
-          "bytes": 71406,
-          "sha256": "552a7c0e3d9c464ac2cc8efac2b5b87f44d45126ccb1940fd11c1c79163d83f6"
+          "bytes": 71406
         },
         "branch": {
-          "bytes": 72269,
-          "sha256": "082f9b97c047ec1ada0e1290a92a18aa88c21c53fd403620d024de241b35745d"
+          "bytes": 72269
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2900,8 +2632,7 @@
           "mismatchPercent": 0.823211669921875,
           "diff": {
             "path": "diffs/atlas-context.png",
-            "bytes": 27751,
-            "sha256": "5c0181764f06447674ed4cf60831cd3d4ffd6e493c5968ee0b9d151fbd841e7d"
+            "bytes": 27751
           }
         },
         "row": 1,
@@ -2911,12 +2642,10 @@
         "body": "calypso",
         "path": "src/objects/calypso/source/presentation/context.png",
         "reference": {
-          "bytes": 73451,
-          "sha256": "e7e543483802a247f72e9de483de97452419f7b29d5edb380e64931e22c4ed37"
+          "bytes": 73451
         },
         "branch": {
-          "bytes": 65266,
-          "sha256": "744a1569ed2560e5ea9274dd083e875395ec2ba9ec7b94ebb413b5b206819f8b"
+          "bytes": 65266
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2938,8 +2667,7 @@
           "mismatchPercent": 12.193679809570312,
           "diff": {
             "path": "diffs/calypso-context.png",
-            "bytes": 19883,
-            "sha256": "3b7e3a58f8ef4258ab85571aa688e455dea84fe70c171d30206c3779dfc98cd7"
+            "bytes": 19883
           }
         },
         "row": 1,
@@ -2949,12 +2677,10 @@
         "body": "comet-19p",
         "path": "src/objects/comet-19p/source/presentation/context.png",
         "reference": {
-          "bytes": 58255,
-          "sha256": "d86c4cd1b6ba6b2f0aa528c7c29493732cc60ac6de58a17e59a0aae589b2c170"
+          "bytes": 58255
         },
         "branch": {
-          "bytes": 61739,
-          "sha256": "dfd488df8488052545e8dc47d0d2cf8a9f1f7faf32ce8dbfd845dbdab09020f7"
+          "bytes": 61739
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -2976,8 +2702,7 @@
           "mismatchPercent": 0.069427490234375,
           "diff": {
             "path": "diffs/comet-19p-context.png",
-            "bytes": 25486,
-            "sha256": "af1ec61d375e1d7fe5076f446c176c65c246be3922a61565e66c95f235b32b5c"
+            "bytes": 25486
           }
         },
         "row": 2,
@@ -2987,12 +2712,10 @@
         "body": "daphnis",
         "path": "src/objects/daphnis/source/presentation/context.png",
         "reference": {
-          "bytes": 66439,
-          "sha256": "89152bff736cbbf17defa35f285136cfc305f6d7ef41c11e52b77cc11d63627b"
+          "bytes": 66439
         },
         "branch": {
-          "bytes": 71562,
-          "sha256": "0a151a85ef1d44e43532a1dda022b80e42e676a58a7a8b5c6fc400c2abf4df7f"
+          "bytes": 71562
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3014,8 +2737,7 @@
           "mismatchPercent": 18.515777587890625,
           "diff": {
             "path": "diffs/daphnis-context.png",
-            "bytes": 19132,
-            "sha256": "03bff71fef0c4786a8f3f65d9f3cbd8ea7a7c77f234bd7193f561b115f203eb7"
+            "bytes": 19132
           }
         },
         "row": 2,
@@ -3025,12 +2747,10 @@
         "body": "epimetheus",
         "path": "src/objects/epimetheus/source/presentation/context.png",
         "reference": {
-          "bytes": 137367,
-          "sha256": "2badc18dba9c7ac7a732ee8a07782b4ff10020dd4b9756831dcaa61403ac0218"
+          "bytes": 137367
         },
         "branch": {
-          "bytes": 134520,
-          "sha256": "00f8ef64542e54520dea03c4ba409b874565bb31a7fe3abcacb35a713b4dc627"
+          "bytes": 134520
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3052,8 +2772,7 @@
           "mismatchPercent": 1.5247344970703125,
           "diff": {
             "path": "diffs/epimetheus-context.png",
-            "bytes": 68901,
-            "sha256": "8eba3f07f78227d72344fd1ed632cff765d8c5e0025a40003756319c84373aa1"
+            "bytes": 68901
           }
         },
         "row": 2,
@@ -3063,12 +2782,10 @@
         "body": "gaspra",
         "path": "src/objects/gaspra/source/presentation/context.png",
         "reference": {
-          "bytes": 91335,
-          "sha256": "8d6b2077244356f99618c76e18a7d47c7d514f85e2f8c9c747b1837078b577b8"
+          "bytes": 91335
         },
         "branch": {
-          "bytes": 90870,
-          "sha256": "2b8893d9517f0e2a419fa4b6f43cc52dd5ce29888b53479a993f7daca792ac95"
+          "bytes": 90870
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3090,8 +2807,7 @@
           "mismatchPercent": 0.7354736328125,
           "diff": {
             "path": "diffs/gaspra-context.png",
-            "bytes": 47075,
-            "sha256": "e6912de3a3e45e3906f3bac475759a366d48d86f5c2ecd0491b39d5c4d940470"
+            "bytes": 47075
           }
         },
         "row": 3,
@@ -3101,12 +2817,10 @@
         "body": "helene",
         "path": "src/objects/helene/source/presentation/context.png",
         "reference": {
-          "bytes": 125152,
-          "sha256": "0c6debb1e298710d4e861ddf60ffd3b5e0b22d01f16d297ff90c87b0225fb2ae"
+          "bytes": 125152
         },
         "branch": {
-          "bytes": 121982,
-          "sha256": "aadf516e124bab82d636393864e8557fb198e153b65309ed7239e21d4d77052e"
+          "bytes": 121982
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3128,8 +2842,7 @@
           "mismatchPercent": 26.439666748046875,
           "diff": {
             "path": "diffs/helene-context.png",
-            "bytes": 33109,
-            "sha256": "314c3bde73e848b20b7c7b74caad4d139e2fdfc58675322e573e94aca0364631"
+            "bytes": 33109
           }
         },
         "row": 3,
@@ -3139,12 +2852,10 @@
         "body": "hyperion",
         "path": "src/objects/hyperion/source/presentation/context.png",
         "reference": {
-          "bytes": 168939,
-          "sha256": "5ce12c03b1f3aae7b8897ddbc4186cedbf79a229968ef2dbff90e34b4084a6de"
+          "bytes": 168939
         },
         "branch": {
-          "bytes": 170734,
-          "sha256": "88ce5403764e98cd026dcb6e01a199ccdbea22e8abd2e6adbeb8d16509af33f0"
+          "bytes": 170734
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3166,8 +2877,7 @@
           "mismatchPercent": 0.5390167236328125,
           "diff": {
             "path": "diffs/hyperion-context.png",
-            "bytes": 92011,
-            "sha256": "f99de7c7a723213fd674fad6beeb5460bee3c8dad9d13c71997a59dc9d32933b"
+            "bytes": 92011
           }
         },
         "row": 3,
@@ -3177,12 +2887,10 @@
         "body": "ida",
         "path": "src/objects/ida/source/presentation/context.png",
         "reference": {
-          "bytes": 82228,
-          "sha256": "13b575ec0accebfad5989e3da1f2053896a83e935db19dc9ed73026be96c606e"
+          "bytes": 82228
         },
         "branch": {
-          "bytes": 81982,
-          "sha256": "80f7026d8a229c3dd26719ab0fc7ff926276959deea98c4edcbe1e7f9fc570d5"
+          "bytes": 81982
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3204,8 +2912,7 @@
           "mismatchPercent": 1.219940185546875,
           "diff": {
             "path": "diffs/ida-context.png",
-            "bytes": 45671,
-            "sha256": "8450db5c0eb70d8fa35db6b068c96614cc82ac1d6207044200b27c2d9c263d21"
+            "bytes": 45671
           }
         },
         "row": 4,
@@ -3215,12 +2922,10 @@
         "body": "janus",
         "path": "src/objects/janus/source/presentation/context.png",
         "reference": {
-          "bytes": 128526,
-          "sha256": "09abcf834508767ef6080284556597cddf2143ad5de3e9a3305d59c13a718460"
+          "bytes": 128526
         },
         "branch": {
-          "bytes": 129444,
-          "sha256": "bdba55cfab5e2c3a29c754c1fc90741740b7ac13033b62aca232f60548335e86"
+          "bytes": 129444
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3242,8 +2947,7 @@
           "mismatchPercent": 2.90985107421875,
           "diff": {
             "path": "diffs/janus-context.png",
-            "bytes": 53544,
-            "sha256": "066be884f9f03a80be74e545dd314f896f0f6e7ff8954074f7ba6d127b2aa667"
+            "bytes": 53544
           }
         },
         "row": 4,
@@ -3253,12 +2957,10 @@
         "body": "larissa",
         "path": "src/objects/larissa/source/presentation/context.png",
         "reference": {
-          "bytes": 107361,
-          "sha256": "468d514a3fe40d8815536d38d3001d78ebf80c7144d42f07c7107a718b0df522"
+          "bytes": 107361
         },
         "branch": {
-          "bytes": 113352,
-          "sha256": "ca398ffc9d4152c8924784d5283c4ecef757262bf77f0410315f249aa4fe10ef"
+          "bytes": 113352
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3280,8 +2982,7 @@
           "mismatchPercent": 20.340728759765625,
           "diff": {
             "path": "diffs/larissa-context.png",
-            "bytes": 36316,
-            "sha256": "e6c397f9a7ff273024ee00e2008f2961a7ca553545ee922f314bee8ddd6050ad"
+            "bytes": 36316
           }
         },
         "row": 4,
@@ -3291,12 +2992,10 @@
         "body": "methone",
         "path": "src/objects/methone/source/presentation/context.png",
         "reference": {
-          "bytes": 71756,
-          "sha256": "8ee36a8bfb6bb808ec7bd25708cc4a1d38a3f61ee1d61526b220ca552f906576"
+          "bytes": 71756
         },
         "branch": {
-          "bytes": 78463,
-          "sha256": "c6e92dea177c8ab82833086ba09c30bc6c8bb2dedf85e8b767aea725b37386ce"
+          "bytes": 78463
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3318,8 +3017,7 @@
           "mismatchPercent": 27.338790893554688,
           "diff": {
             "path": "diffs/methone-context.png",
-            "bytes": 16765,
-            "sha256": "43f1b7cb5ff913c7353a2406695e280a1379fabf3aa9add6dde520ac8545f258"
+            "bytes": 16765
           }
         },
         "row": 5,
@@ -3329,12 +3027,10 @@
         "body": "metis",
         "path": "src/objects/metis/source/presentation/context.png",
         "reference": {
-          "bytes": 22553,
-          "sha256": "3fa83e935ae0be5f3807c4da3ff757e7a403d42af973e0a0bb5ad724756f2cae"
+          "bytes": 22553
         },
         "branch": {
-          "bytes": 22483,
-          "sha256": "34dae451cf04ea394693f3caad77e529c0adae6e2bf24cee0d6f8a0baf0b50f8"
+          "bytes": 22483
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3356,8 +3052,7 @@
           "mismatchPercent": 4.49371337890625,
           "diff": {
             "path": "diffs/metis-context.png",
-            "bytes": 8044,
-            "sha256": "36d60c36ca7f364724798f4607b671415c5b9867d51374e0e1239b1fc3e2bb5a"
+            "bytes": 8044
           }
         },
         "row": 5,
@@ -3367,12 +3062,10 @@
         "body": "pallene",
         "path": "src/objects/pallene/source/presentation/context.png",
         "reference": {
-          "bytes": 67251,
-          "sha256": "1a7909939de1601a25f41d8b09c6ef918f47cb7b127ebee8076a6552a2bee33e"
+          "bytes": 67251
         },
         "branch": {
-          "bytes": 71432,
-          "sha256": "c3423e4caf9baa6da5d3e2da8886c38b437b2524693db4a01e00df64c443682e"
+          "bytes": 71432
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3394,8 +3087,7 @@
           "mismatchPercent": 15.7196044921875,
           "diff": {
             "path": "diffs/pallene-context.png",
-            "bytes": 20785,
-            "sha256": "6b78315cf8cbe00a176bfbf5ef1339dd3b45c8721bfd2742da4b3bdc1d563a73"
+            "bytes": 20785
           }
         },
         "row": 5,
@@ -3405,12 +3097,10 @@
         "body": "pan",
         "path": "src/objects/pan/source/presentation/context.png",
         "reference": {
-          "bytes": 91496,
-          "sha256": "b2d3467d917b83e1197e2811f3a892f841218b41ad1d0fdbc9684a2e952e7902"
+          "bytes": 91496
         },
         "branch": {
-          "bytes": 95511,
-          "sha256": "9ccbe5812f99abb613d3f202e3622b8063a5459f19ed75f9d699f30635a85712"
+          "bytes": 95511
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3432,8 +3122,7 @@
           "mismatchPercent": 0.2315521240234375,
           "diff": {
             "path": "diffs/pan-context.png",
-            "bytes": 38168,
-            "sha256": "94bb1127fd9151c2056b29ac6f8d70306a636f7373350c156cc4407f3ec6aa44"
+            "bytes": 38168
           }
         },
         "row": 6,
@@ -3443,12 +3132,10 @@
         "body": "pandora",
         "path": "src/objects/pandora/source/presentation/context.png",
         "reference": {
-          "bytes": 100718,
-          "sha256": "aa97ebb43be933d9cda78fb01f6172095406ff26ce842c61dcec1d026b38c980"
+          "bytes": 100718
         },
         "branch": {
-          "bytes": 97231,
-          "sha256": "30e5c55016b5c9fa0ac9541492ececc23b0be886a6ce4a69353718b77eb058b9"
+          "bytes": 97231
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3470,8 +3157,7 @@
           "mismatchPercent": 9.377670288085938,
           "diff": {
             "path": "diffs/pandora-context.png",
-            "bytes": 39616,
-            "sha256": "578411f5a221d8bf5dfbc42fa2f22fa666481a557125e8784ad93253f4fb21f5"
+            "bytes": 39616
           }
         },
         "row": 6,
@@ -3481,12 +3167,10 @@
         "body": "polydeuces",
         "path": "src/objects/polydeuces/source/presentation/context.png",
         "reference": {
-          "bytes": 76826,
-          "sha256": "2759bf95149c135394e46cbc0dde99f793a93a98048c2cfe41297b60f78fc97b"
+          "bytes": 76826
         },
         "branch": {
-          "bytes": 78354,
-          "sha256": "0eca82ec75197907f207451d173bf18c360259ad0429d4e126ee142ae760f1cb"
+          "bytes": 78354
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3508,8 +3192,7 @@
           "mismatchPercent": 8.729934692382812,
           "diff": {
             "path": "diffs/polydeuces-context.png",
-            "bytes": 22504,
-            "sha256": "880b17a27829c3c7a491bf59cb17dba2b9925ed3174fd77cf24abab8898da8c2"
+            "bytes": 22504
           }
         },
         "row": 6,
@@ -3519,12 +3202,10 @@
         "body": "prometheus",
         "path": "src/objects/prometheus/source/presentation/context.png",
         "reference": {
-          "bytes": 74125,
-          "sha256": "577aad09d36527107f03ec65320f042e3af3e327fccf3c80feb22eb0084c1208"
+          "bytes": 74125
         },
         "branch": {
-          "bytes": 75070,
-          "sha256": "3d8e3bad3c97043d7d2a1662fd78115bfad3f6e7c3e4f3b589901cf7e818c55d"
+          "bytes": 75070
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3546,8 +3227,7 @@
           "mismatchPercent": 2.3258209228515625,
           "diff": {
             "path": "diffs/prometheus-context.png",
-            "bytes": 30949,
-            "sha256": "ea8cf402fd59934baa18a032d23eca7443040f899099e22df5628023ff8fc7e9"
+            "bytes": 30949
           }
         },
         "row": 7,
@@ -3557,12 +3237,10 @@
         "body": "proteus",
         "path": "src/objects/proteus/source/presentation/context.png",
         "reference": {
-          "bytes": 171596,
-          "sha256": "a9c3c8c3da8064423c8a14cea97470034ec1ee52c7500cdcc83b7926decf1546"
+          "bytes": 171596
         },
         "branch": {
-          "bytes": 165480,
-          "sha256": "1ed2c94ec699bc6aaaf4c85d2349c6cd265dbeb8954fb0576cf28c7241396c57"
+          "bytes": 165480
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3584,8 +3262,7 @@
           "mismatchPercent": 0.682830810546875,
           "diff": {
             "path": "diffs/proteus-context.png",
-            "bytes": 86728,
-            "sha256": "f5e91b34a55fdd83933fa7641d661a6853b8990340fbfc1c470369b242f4e175"
+            "bytes": 86728
           }
         },
         "row": 7,
@@ -3595,12 +3272,10 @@
         "body": "puck",
         "path": "src/objects/puck/source/presentation/context.png",
         "reference": {
-          "bytes": 126671,
-          "sha256": "9de80fc3e93b6d47117ed00505995211e4bc12a1e857d569e34231b9ab812ebd"
+          "bytes": 126671
         },
         "branch": {
-          "bytes": 120686,
-          "sha256": "ff3cd581759f775b743bfc85028df48b59084156ab9ba47be743747101e18e0a"
+          "bytes": 120686
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3622,8 +3297,7 @@
           "mismatchPercent": 1.206207275390625,
           "diff": {
             "path": "diffs/puck-context.png",
-            "bytes": 43126,
-            "sha256": "d7236b983cc586ebb3d7678c4fbc86a155e3c5e2e11679e48d8dce063321888a"
+            "bytes": 43126
           }
         },
         "row": 7,
@@ -3633,12 +3307,10 @@
         "body": "telesto",
         "path": "src/objects/telesto/source/presentation/context.png",
         "reference": {
-          "bytes": 97630,
-          "sha256": "f8f9d02b2d7ecf5f3111df1b4f09c019028db426e7562b548b3b124bfe0a77a6"
+          "bytes": 97630
         },
         "branch": {
-          "bytes": 91172,
-          "sha256": "9bf151de98036ee23d8e3b1e97495712f14429d95d070ce20ae59902b15a1e77"
+          "bytes": 91172
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3660,8 +3332,7 @@
           "mismatchPercent": 10.457229614257812,
           "diff": {
             "path": "diffs/telesto-context.png",
-            "bytes": 35418,
-            "sha256": "80d35f9157d75f04afde5ca90fb058df6b714f7e1801cb126deb55b4bd6605c9"
+            "bytes": 35418
           }
         },
         "row": 8,
@@ -3671,12 +3342,10 @@
         "body": "thebe",
         "path": "src/objects/thebe/source/presentation/context.png",
         "reference": {
-          "bytes": 86897,
-          "sha256": "4ce6673f4841257d1378ea381aee467595c01b3aaa7ed305f7ca48c62f94e71e"
+          "bytes": 86897
         },
         "branch": {
-          "bytes": 87103,
-          "sha256": "89b909c7dc504416e58e08021b8d9dee239a7cd49d04cc1ab8dc0ec4a6a31209"
+          "bytes": 87103
         },
         "pixelmatch": {
           "tool": "pixelmatch",
@@ -3698,8 +3367,7 @@
           "mismatchPercent": 27.085494995117188,
           "diff": {
             "path": "diffs/thebe-context.png",
-            "bytes": 21203,
-            "sha256": "892d18b7423620929fbf7d2082a50461aab0b99791d4b944f1b8acd84d04ca56"
+            "bytes": 21203
           }
         },
         "row": 8,

@@ -7,10 +7,9 @@
 // PDFs), so the page is read and each link kept with its file type. A georeferenced raster is a GeoTIFF, ISIS cube, PDS
 // image or JPEG 2000; browse, thumbnail and full-size JPEGs and PNGs are previews. Collection writes only scratch output.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { batch, string, databasePath, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
+import { batch, string, databasePath, checkoutRoot, urlCachePath } from "@cssearth/bake/sources/astronomy-data";
 
 const dir = resolve(checkoutRoot, process.env.USGS_WORK_DIR ?? "output/usgs-files");
 await mkdir(dir + "/cache", { recursive: true });
@@ -18,7 +17,8 @@ export const RASTER = /\.(tif|tiff|cub|img|jp2)$/i;
 export const PREVIEW = /(^|\/)(browse|thumb|full)[^/]*\.(jpg|jpeg|png|gif)$/i;
 
 async function page(url: string): Promise<string> {
-  const path = `${dir}/cache/${createHash("sha256").update(url).digest("hex")}.html`;
+  const path = urlCachePath(`${dir}/cache`, url, ".html");
+  await mkdir(dirname(path), { recursive: true });
   try { return await readFile(path, "utf8"); } catch (e) { if (!(e instanceof Error && "code" in e && e.code === "ENOENT")) throw e; }
   let last: unknown;
   for (let attempt = 0; attempt < 4; attempt++) {

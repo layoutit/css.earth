@@ -23,13 +23,8 @@ const RELOCATED_NODE_TESTS: readonly string[] = [
   'packages/bake/src/delivery/publication.test.mts',
   'packages/bake/src/objects/acquisition/acquisition-request.test.ts',
   'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts',
-  'packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-lightcurve-models.test.mts',
-  'packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radar-models.test.mts',
-  'packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts',
-  'packages/bake/src/objects/sources/fixtures/distant-world-sources.test.mts',
   'packages/bake/src/objects/sources/fixtures/source-fixture.test.mts',
   'packages/bake/src/objects/sphere-survey/commands-root.test.mts',
-  'packages/bake/src/objects/sphere-survey/survey-install-spawns.test.mts',
   'packages/bake/src/presentation/emissive-plates.test.mts',
   'packages/bake/src/photometry/whole-disc-colour.test.mts',
   'packages/bake/src/raster/raster-pages.test.mts',
@@ -39,13 +34,9 @@ const RELOCATED_NODE_TESTS: readonly string[] = [
 /** Tracked test files the Node selection may take, as `git ls-files` pathspecs. */
 export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/src/objects/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts', ...RELOCATED_NODE_TESTS] as const;
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
-/** Tests of an object entry that read the restored prepared packages of real bodies, so they run where those are restored:
- * the source-catalogue step of audit.yml's prepared-universe job. */
-export const RESTORED_PACKAGE_TESTS: readonly string[] = ['packages/bake/src/objects/provenance/object-provenance.test.mts'];
-
-/** Object-entry tests and relocated bake Node suites, sorted, except tests requiring restored packages. */
+/** Object-entry tests and relocated bake Node suites, sorted. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {
-  return files.filter(path => /\.test\.m?ts$/u.test(path) && !RESTORED_PACKAGE_TESTS.includes(path) && (OBJECT_ENTRY.test(read(path)) || RELOCATED_NODE_TESTS.includes(path))).sort();
+  return files.filter(path => /\.test\.m?ts$/u.test(path) && (OBJECT_ENTRY.test(read(path)) || RELOCATED_NODE_TESTS.includes(path))).sort();
 }
 
 function trackedTests(root: string): string[] {

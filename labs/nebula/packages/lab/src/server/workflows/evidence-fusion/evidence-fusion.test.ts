@@ -20,7 +20,7 @@ function fixture(width = 128) {
 const scales = [1.25, 2.5, 5, 10, 20];
 function source(id: string, width = 128): EvidenceSource {
   const image = fixture(width), fields = extractEvidenceFields(image.luminance, image.footprint, width, width, scales, .7);
-  return { id, label: id, sourceSha256: '0'.repeat(64), mapSha256: '1'.repeat(64), sourcePanelSha256: '2'.repeat(64),
+  return { id, label: id, mapDirectory: `.local/structures/${id}/analysis`, sourcePanel: `.local/structures/${id}/analysis/source.png`,
     imageToFrame: [1, 0, 0, 1, 0, 0], workingWidth: width, workingHeight: width, registeredRgba: new Uint8Array(width * width * 4),
     footprint: image.footprint, ...fields, samplingArcseconds: 1 };
 }

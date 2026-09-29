@@ -1,7 +1,6 @@
 {
   "settings": {
     "imageId": "horalek-widefield",
-    "resultId": "cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
     "label": "Horálek optical",
     "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +25,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
+    "id": "reconstruction-lmc-clouds-emission-envelope-horalek-widefield",
     "parts": [
       {
         "id": "all-light",

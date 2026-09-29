@@ -10,21 +10,18 @@ import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../body-map-publication.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
-import { sha256 } from '@cssearth/core/node';
 import { verifiedProduct, localOutput } from '../verified-product.mts';
 import { contextTarget, sourceContext } from '../delivery-context.mts';
 import { followedWorkspaceSources } from '../implementation-dependencies.mts';
+import { VERSION } from '../help.mts';
 
 const root=WORKSPACE;
 /** The rendering lane this export runs: `src/sphere/sphere-lane.mts` beside this module, compiled from there
  * at run time because it reads the checkout's prepared bodies and assets and renders through the application shell. */
 const SPHERE_LANE='packages/telescope-cli/src/sphere/sphere-lane.mts';
-/** The generated solar geometry, loaded beside the lane rather than compiled into it (it is written after the packages build).
- * It stayed part of the implementation identity as it was when the lane imported it: `sphereImplementationFiles` adds it. */
+/** The generated solar geometry, loaded beside the lane rather than compiled into it (it is written after the packages build). */
 export const SOLAR_GEOMETRY_MODULE='src/platform/solar-geometry.mts';
-/** Every workspace file the sphere product's implementation digest covers: the compiled lane's closure plus the solar geometry. */
-export function sphereImplementationFiles(compiledInputs:Readonly<Record<string,unknown>>){return [...new Set([...Object.keys(compiledInputs),SOLAR_GEOMETRY_MODULE])].filter(p=>!p.startsWith('<'));}
-interface SpherePrepared{readonly inputs:readonly {readonly role:string;readonly identity:string;readonly sha256:string;readonly bytes:number}[];readonly owner:Record<string,unknown>}
+interface SpherePrepared{readonly inputs:readonly {readonly role:string;readonly identity:string;readonly bytes:number}[];readonly owner:Record<string,unknown>}
 interface SphereOwner{
   inspectMeasurementSphere(root:string,target:string):Promise<unknown>;
   measurementSphere(root:string,target:string,texture:string,output:string,focus:{longitudeDegrees:number;latitudeDegrees:number;zoom:number},solarGeometry:SolarGeometry):Promise<SpherePrepared>;
@@ -32,10 +29,10 @@ interface SphereOwner{
 }
 async function loadSphereOwner(){
   await mkdir(resolve(root,'work'),{recursive:true});const directory=await mkdtemp(resolve(root,'work/telescope-sphere-owner-'));
-  // The FITS reader is bundled from its sources, so the implementation digest below covers it as it did when it was local.
-  const compiled=await build({entryPoints:[resolve(root,SPHERE_LANE)],bundle:true,write:false,platform:'node',format:'esm',packages:'external',metafile:true,plugins:[followedWorkspaceSources(root)]});
+  // The FITS reader is bundled from its sources, as it was when it was a local module.
+  const compiled=await build({entryPoints:[resolve(root,SPHERE_LANE)],bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[followedWorkspaceSources(root)]});
   const moduleFile=resolve(directory,'lane.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
-  const owner:SphereOwner=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);return {compiled,owner,cleanup:()=>rm(directory,{recursive:true,force:true})};
+  const owner:SphereOwner=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);return {owner,cleanup:()=>rm(directory,{recursive:true,force:true})};
 }
 export async function validateSphereBundle(source:Awaited<ReturnType<typeof verifiedProduct>>){
   if(source.record.stage!=='body-map')throw new TypeError('Sphere export requires a registered body-map product; native pixels have no surface coordinates');
@@ -64,19 +61,17 @@ export async function exportSphere(recordPath:string,outputDirectory:string){
   const source=await verifiedProduct(recordPath),bundle=await validateSphereBundle(source);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
-  const loaded=await loadSphereOwner();try{const {compiled,owner}=loaded;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,context}=bundle;
+  const loaded=await loadSphereOwner();try{const {owner}=loaded;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,context}=bundle;
   const longitude=(360-map.observations[0].subObserver.westLongitudeDegrees)%360,latitude=map.observations[0].subObserver.latitudeDegrees;
   // The generated solar geometry is written after the packages build (src/platform/solar-geometry.mts), so this entry
   // loads it from the checkout it runs in and hands it to the lane as data, as the bake CLI entries do.
   const solarGeometry:SolarGeometry=await import(pathToFileURL(resolve(root,SOLAR_GEOMETRY_MODULE)).href);
   const prepared=await owner.measurementSphere(root,map.frame.body,localOutput(source.root,'texture.png'),staging,{longitudeDegrees:longitude,latitudeDegrees:latitude,zoom:1.1},solarGeometry);
-  const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceContext:context,uncertainty:nav.uncertainty,mapSha256:sha256(await readFile(localOutput(source.root,map.planes.file))),renderer:prepared.owner};
+  const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceContext:context,uncertainty:nav.uncertainty,map:{file:map.planes.file,bytes:(await readFile(localOutput(source.root,map.planes.file))).length},renderer:prepared.owner};
   const html=owner.sphereHtml(prepared,metadata,`${map.frame.body} · ${map.definition.quantity}`,`${map.definition.units} · ${Number(norm.minimum).toPrecision(4)}–${Number(norm.maximum).toPrecision(4)} · grey: unobserved`);
     await writeFile(resolve(staging,'sphere.html'),html);
-    const fresh=await verifiedProduct(source.file);if(fresh.pin.sha256!==source.pin.sha256)throw new Error('Body map changed during sphere preparation');
-    const files=sphereImplementationFiles(compiled.metafile.inputs);
-    const implementation=sha256(Buffer.concat([await readFile(new URL('sphere.mts',import.meta.url)),...await Promise.all(files.sort().map(path=>readFile(resolve(root,path))))]));
-    await writeProductRecord(resolve(staging,'sphere.product.json'),{telescope:source.record.telescope,stage:'telescope-sphere',inputs:[{role:'body-map record',identity:source.file,...source.pin},...prepared.inputs.filter(input=>!input.identity.startsWith(staging)),...source.record.outputs.map(o=>({role:'body-map output',identity:localOutput(source.root,o.path),bytes:o.bytes}))],parameters:metadata,software:[{name:'cssEarth / PolyCSS prepared sphere',version:implementation}]},[{path:'sphere.html',file:resolve(staging,'sphere.html')}]);
+    const fresh=await verifiedProduct(source.file);if(!fresh.recordBytes.equals(source.recordBytes))throw new Error(`${source.file} changed during sphere preparation`);
+    await writeProductRecord(resolve(staging,'sphere.product.json'),{telescope:source.record.telescope,stage:'telescope-sphere',inputs:[{role:'body-map record',identity:source.file,...source.pin},...prepared.inputs.filter(input=>!input.identity.startsWith(staging)),...source.record.outputs.map(o=>({role:'body-map output',identity:localOutput(source.root,o.path),bytes:o.bytes}))],parameters:metadata,software:[{name:'cssEarth / PolyCSS prepared sphere',version:VERSION}]},[{path:'sphere.html',file:resolve(staging,'sphere.html')}]);
     await rm(resolve(staging,'raster'),{recursive:true});
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,html:resolve(destination,'sphere.html'),receipt:resolve(destination,'sphere.product.json'),sourceContext:context};

@@ -1,4 +1,4 @@
-import { prepareContextProvenance, contextProvenanceCompilerClosure, readPreparedContextProvenance } from '@cssearth/bake/sources';
+import { contextLineages } from '@cssearth/bake/sources';
 import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
 import { compileSourceUsage, sourceCredits } from '@cssearth/objects/provenance';
@@ -19,13 +19,11 @@ import { explorationRecord, explorationArray, explorationText, parseAgencies, pa
 import { compileContributions } from '@cssearth/objects/provenance';
 import { parsePreparedExploration, parseExplorationImage } from '@cssearth/objects/provenance';
 import type { ExplorationImage } from '@cssearth/objects/provenance';
-import { validateObjectProvenance } from '@cssearth/objects/provenance';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
-import type { ProvenanceDocument } from '@cssearth/objects/provenance';
+import { bodyLineage } from '@cssearth/bake/objects/lineage';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisition';
-import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
+import { prepareVolumePresentations, readPreparedVolumes, volumePresentationCompilerClosure } from './prepare-volume-presentation.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { CONTEXT_ROUTE, DATASET_ROUTES } from '../../../src/platform/dataset-destination.mts';
 
@@ -33,24 +31,23 @@ const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..
 
 export const explorationCompilerClosure = [
   'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
-  'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-provenance.ts', 'packages/objects/src/provenance/preparation-evidence.ts', 'packages/bake/src/sources/preparation-evidence.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
-  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
+  'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-lineage.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
+  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-catalogue.mjs', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
   'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
-  'packages/objects/src/registry/overview-object.ts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
-  'site/prepared-overview-objects.json',
+  'packages/objects/src/registry/overview-object.ts', 'site/prepared-overview-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'packages/objects/src/provenance/source-usage.ts', 'packages/objects/src/node/source-manifest.ts',
   'packages/objects/src/provenance/prepared-sources.ts', 'packages/bake/src/sources/source-catalogue-inputs.ts',
-  'src/platform/dataset-destination.mts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumeProvenanceCompilerClosure, ...contextProvenanceCompilerClosure,
+  'src/platform/dataset-destination.mts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumePresentationCompilerClosure,
   'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'packages/bake/src/objects/acquisition/restore-factsheet-evidence.ts',
   'packages/core/src/validate.ts', 'packages/bake/src/objects/acquisition/object-operations.ts', 'packages/bake/src/objects/acquisition/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
-  'packages/bake/src/objects/provenance/object-provenance.ts', 'packages/bake/src/objects/provenance/provenance-records.ts', 'packages/bake/src/objects/provenance/provenance-recipes.ts', 'packages/bake/src/objects/provenance/recover-provenance.ts',
+  'packages/bake/src/objects/lineage/body-lineage.ts', 'packages/bake/src/objects/lineage/lineage-recipes.ts',
 ] as const;
 
-interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
+interface Options { root?: string; publish?: boolean | 'catalogues'; sourceTransport?: FactsheetSourceTransport;
   /** Catalogue consumers validate published package records; authoring explicitly reproduces them. */
   packageMode?: 'author' | 'published';
   /** Skip bodies whose derived `prepared/page.json` this checkout has not restored. */
@@ -59,7 +56,7 @@ interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareFacilities({ root = resolve(import.meta.dirname, '../../..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null,
+export async function prepareFacilities({ root = resolve(import.meta.dirname, '../../..'), publish = true, sourceTransport, mirrorOrigin = null,
   restoredOnly = false,
   packageMode = publish === 'catalogues' ? 'published' : 'author' }: Options = {}) {
   if (!['author', 'published'].includes(packageMode) || publish === 'catalogues' && packageMode !== 'published')
@@ -149,31 +146,28 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const lenses = controls.lenses === null ? [] : explorationArray(explorationRecord(controls.lenses).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });
-    // The record is a view of this package's manifest and recipes, so it is built here rather than read back and compared.
-    const document = provenance.get(object.id) ?? validateObjectProvenance(await prepareObjectProvenance({ objectDirectory,
-      publicDirectory: resolve(root, 'public/scenes', object.id), basis: 'recovered', verify: false, write: false }), object.id);
-    inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
-    objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
+    // The lineage is a view of this package's manifest and recipes, built here and never written.
+    const lineage = await bodyLineage(objectDirectory);
+    inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(lineage.sources.map(source => source.path))));
+    objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, lineage });
   }
-  // Deploys consume the exact prepared package restored from R2. Authoring preparation still rebuilds provenance
-  // and previews from their sources, but catalog-only publication must never invent a second package identity.
-  const volumes = packageMode === 'published'
-    ? [...await readPreparedVolumeProvenance({ root, input }),
-      ...await readPreparedContextProvenance({ route: CONTEXT_ROUTE, root, input })]
-    : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ route: CONTEXT_ROUTE, root, input })];
-  for (const volume of volumes) {
-    const document = validateObjectProvenance(volume.provenance, volume.id);
-    const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
+  // Deploys consume the volume presentations restored from R2. Authoring preparation still rebuilds the previews from
+  // their sources, but catalog-only publication must never invent a second package identity.
+  const volumes = packageMode === 'published' ? await readPreparedVolumes({ root, input }) : await prepareVolumePresentations({ root, input, mirrorOrigin });
+  for (const volume of [...volumes, ...await contextLineages({ route: CONTEXT_ROUTE, root, input })]) {
+    const manifestPath = `${sourcePath(volume.base)}/${sourcePath(volume.lineage.manifestPath)}`;
     const manifest = explorationRecord(await json(manifestPath));
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
-    inventory.push(...sourceInventory(manifest, manifestPath, sources, new Set(document.sources.map(source => source.path))));
+    inventory.push(...sourceInventory(manifest, manifestPath, sources, new Set(volume.lineage.sources.map(source => source.path))));
     objects.push(volume);
+  }
+  for (const volume of volumes) {
     for (const output of volume.outputs) {
-      // Generated lineage and presentation join the same atomic set as both graphs.
+      // Generated presentations and previews join the same atomic set as both graphs.
       const path = sourcePath(output.path.slice(resolve(root).length + 1));
       if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
       if (path.startsWith(`${volume.base}/prepared/`) || path === `${volume.base}/inventory.json`) closure.add(path);
-      else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
+      else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-z0-9][a-z0-9-]*\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));

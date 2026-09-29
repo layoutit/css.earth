@@ -10,7 +10,7 @@ The LMC workflow colors a supplied stellar-density model. A planetary nebula wit
 
 The 2013 paper demonstrates M2–9, but also shows failures: M57's nearly observer-facing axis leaves its depth unconstrained by symmetry; dust-rich NGC 6302 violates the simple emission assumptions. Radial banding remains a documented discretization artifact. This is not a general recovery algorithm for every nebula.
 
-Both Wenger PDFs downloaded successfully in this session. The 2013 algorithm, results and limitations were read directly; the 2012 imaging and optimization sections were checked for comparison. PDF hashes: 2013 `d3f71465cff7dbc18ab8fb26bccde1ec94bf2dc56c654a41d333837217825ae9`; 2012 `1005ce30b5671b53ed54b399042b76473afe9a06d23baf82ac6629dfde2afd2f`.
+Both Wenger PDFs downloaded successfully in this session. The 2013 algorithm, results and limitations were read directly; the 2012 imaging and optimization sections were checked for comparison.
 
 The [author download page](https://graphics.tu-bs.de/publications/wenger2013fast) offers reconstructed HDF5 volumes for non-commercial use with citation, and requests contact for commercial use. Those volumes are **not included** in this implementation or its assets. No reusable solver source was found on that page. Our implementation follows the published equations independently.
 

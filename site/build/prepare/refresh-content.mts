@@ -2,7 +2,7 @@
 /** Re-prepare only an object's prepared content record after an edit that touches nothing else (a credit, a provenance path),
  * with the content stage full preparation uses. The stage runs into a scratch folder; the tool refuses unless every other
  * prepared file the stage writes is byte-identical to the object's current one, so no lens, scene or image drifts. Pins are
- * refreshed first; provenance is recorded afterwards, per object.
+ * refreshed first; the shared sources catalogue is rebuilt afterwards.
  *
  *   node site/build/prepare/refresh-content.mts <object-id> [<object-id> ...] */
 import { spawnSync } from 'node:child_process';
@@ -51,7 +51,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const id of ids) if (await refreshContent(id)) changed.push(id);
   console.log(`content refreshed for ${changed.length} of ${ids.length} objects`);
   if (changed.length) {
-    const run = spawnSync('node', ['site/build/prepare/prepare-provenance.mts', ...changed], { stdio: 'inherit' });
+    const run = spawnSync('node', ['site/build/prepare/prepare-facilities.mts', '--catalog-only'], { stdio: 'inherit' });
     if (run.status !== 0) process.exitCode = 1;
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-simulation-guided-reconstruction@1",
-  "baselineId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333",
+  "baselineId": "smc-constrained-smc-horalek-wide",
   "width": 384,
   "longestAxisSlabs": 128,
   "samplesPerSlab": 4,
@@ -38,5 +38,5 @@
     "depthTrim": 0.005
   },
   "fullChromaAlphaByte": 24,
-  "envelopeBaselineId": "22c714c9ab4bc2d4375109c3f19eddf34f22dd8b3eb4388167d6bc151ac84bc0"
+  "envelopeBaselineId": "smc-constrained-smc-dss2-fits"
 }

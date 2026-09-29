@@ -222,7 +222,7 @@ desktop asset requests occurred. The preparation code and map are from
 captions and evidence only. The 20 focused JIRAM, PDS-reader, object-contract,
 dataset-selection and investigation-report tests and preparation typecheck pass.
 A fresh restore verified every file in the Io and Ceres inventories, and the
-new source-cache float map matched its measured SHA-256. Faint residual tracks
+new source-cache float map matched the file it was measured from byte for byte. Faint residual tracks
 and smear remain; the screenshot does not establish absolute radiometry.
 
 The 17 orbit-57 and 22 orbit-58 images did not yield three overlapping qualified
@@ -277,7 +277,7 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 - **Smear and residual artifacts remain.** Column-background subtraction removes the prominent reflection bands, but cannot recover resolution lost to spacecraft motion. Mura et al. use super-resolution and smear correction; we take medians of registered frames. A hot spot is often smaller than one detector pixel. Peaks must not be read as resolved lava boundaries. The old integrated-output agreement above does not establish absolute calibration for the new visits.
 - **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between July 2017 and October 2023. Hot spots vary, so the composite does not describe a single observation date.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -302,7 +302,7 @@ NASA's [Io facts](https://science.nasa.gov/jupiter/jupiter-moons/io/facts/) supp
 
 ## Observed surfaces
 
-Exact source byte lengths, SHA-256 identities, credits and direct restoration URLs are in `source/manifest.json`.
+Exact source byte lengths, credits and direct restoration URLs are in `source/manifest.json`.
 
 Both GeoTIFFs contain 11445 × 5723 samples on a 1000 m grid. Actual monochrome detail varies from approximately 1–10 km per pixel. Color detail varies from 1.3–21 km per pixel; the published false-color product combines Galileo near-infrared, green and violet color ratios with Voyager/Galileo monochrome detail. This is an existing USGS derived observation product, not a new detail transfer in cssEarth.
 
@@ -338,7 +338,7 @@ Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use
 
 Fourteen base-unit categories distinguish plains, flows, patera floors and mountains. Five diffuse-deposit classes belong to a separate overlay and are not rendered here. No terrain displacement is derived from these polygons.
 
-Exact raw members and archive/member CRC32/SHA-256 receipts are retained in `source/science/geology-sim3168/`. The actual SHP is signed east-positive planetocentric degrees on a 1,821,460 m sphere. West-longitude point attributes independently verify the sign: the same first point is −97.1448317468° in SHP X and +97.144831747° in `Long_W`. The displayed 1,821,490 m radius retains those angular positions; the 30 m radius difference is not height. `NoData` polygons, unmapped polar areas and conflicting overlapping categories remain missing.
+Exact raw members and archive/member CRC32 receipts are retained in `source/science/geology-sim3168/`. The actual SHP is signed east-positive planetocentric degrees on a 1,821,460 m sphere. West-longitude point attributes independently verify the sign: the same first point is −97.1448317468° in SHP X and +97.144831747° in `Long_W`. The displayed 1,821,490 m radius retains those angular positions; the 30 m radius difference is not height. `NoData` polygons, unmapped polar areas and conflicting overlapping categories remain missing.
 
 These source discrepancies and the explicit `Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases are retained in the registration audit, rather than forcing label points to replace the polygon `Unit` attribute. The original preparation and browser qualification records retain the tested version and results.
 

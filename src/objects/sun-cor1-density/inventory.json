@@ -3,7 +3,7 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/ad942ed08acbf64bffd442e1b369f389fcc59871968638f710319a2314820788.webp",
+      "filename": "datasets/electron-density.webp",
       "bytes": 1836,
       "sha256": "ad942ed08acbf64bffd442e1b369f389fcc59871968638f710319a2314820788"
     },
@@ -442,20 +442,14 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 108628,
-      "sha256": "935b40bd0848227732c71127e5876b7430161755b05e723e602242103c49e403"
+      "bytes": 101460,
+      "sha256": "33d9a59496f91bfd52814396e68fd6f283b31d78df71b0bea64ff8ab2c58fb68"
     },
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 2632,
-      "sha256": "8dd175f523d7f8fe910112b20ab95ea6ff9adb7a3e405e4478c8a298b4c7ddd6"
-    },
-    {
-      "location": "prepared",
-      "filename": "provenance.json",
-      "bytes": 7158,
-      "sha256": "d3183af361bdfc33f6a6213605e45b8e9563d7c79706839a1d28df52564e3c67"
+      "bytes": 2536,
+      "sha256": "9c4dfa81328bac4ea06b7efe97607d010fae551ee5b37b8571b14ac424c89304"
     }
   ]
 }

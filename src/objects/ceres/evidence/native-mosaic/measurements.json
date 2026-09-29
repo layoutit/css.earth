@@ -5,13 +5,11 @@
   "question": "Does the native DLR 140 m cube, reduced by pixel-area mean to the prepared 4096 x 2048 map, change what the Monochrome lens shows compared with the pinned WMS render of the same product?",
   "current": {
     "file": "src/objects/ceres/source/ceres-fc-global.png",
-    "origin": "USGS WMS layer Ceres_FC_global, 4096 x 2048, 0-360 E",
-    "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c"
+    "origin": "USGS WMS layer Ceres_FC_global, 4096 x 2048, 0-360 E"
   },
   "native": {
     "url": "https://planetarymaps.usgs.gov/mosaic/Ceres_Dawn_FC_DLR_global_59ppd_Feb2016.cub",
     "bytes": 224158431,
-    "sha256": "d384bd5d58305948e06085875042243987b1a0b2d7fee5a0199794132d5fd3b4",
     "grid": {
       "samples": 21093,
       "lines": 10546,

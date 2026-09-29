@@ -5,9 +5,7 @@
       "sourceInputCount": 41
     },
     "sourceGeometryRecipeUnchanged": true,
-    "retainedSceneGeometryUnchanged": true,
-    "geometrySha256": "1e9cd3a8f21a144c91d6294b7db6aafc6d6673ffda39307ce52fba9140b5618a",
-    "surfaceTrianglesSha256": "641fb8995f7c4b7a2ad5568357c43cd9faf8b360ea51cb4e3f8f3eb1f28b2456"
+    "retainedSceneGeometryUnchanged": true
   },
   "normal": {
     "beforeFrames": 7,
@@ -222,6 +220,5 @@
       }
     ]
   },
-  "interpretation": "Grid-cell counts describe the fixed 2048 by 1024 cylindrical preparation map. They are not physical surface-area percentages or an atlas-texel count. Nominal source resolution varies across the projected surface.",
-  "recipeSha256": "732e5697f309648c42ad4e70439ea567002b3b401537d5569af81510be21b95d"
+  "interpretation": "Grid-cell counts describe the fixed 2048 by 1024 cylindrical preparation map. They are not physical surface-area percentages or an atlas-texel count. Nominal source resolution varies across the projected surface."
 }

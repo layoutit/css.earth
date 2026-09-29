@@ -164,7 +164,7 @@ Feature notes: 68 of the labelled names carry a caption note, the lead summary o
 - **Geology symbology files:** `layerSymbology/GanymedeUnits.lyr` in the same ZIP is an older lookup (one palimpsest value, a crater-ejecta value) that does not match the shipped attributes; its shared colors equal the project's. NASA Trek's layer uses different colors for p1, p2, pu, pi and reticulate material. Neither is used.
 - **Geology structures:** contacts, grooves, furrows, crater rims and other line and point symbols are not shown. Geology has not been baked or checked in a browser since the color change.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -175,7 +175,7 @@ Ganymede is Jupiter's largest moon. This standalone package uses the common obje
 
 ## Sources and coordinates
 
-The pinned inputs are recorded in `source/manifest.json`. Runtime installation requires prepared assets, not these source TIFFs. Source byte counts and SHA-256 identities are recorded in the manifest.
+The pinned inputs are recorded in `source/manifest.json`. Runtime installation requires prepared assets, not these source TIFFs. Source byte counts are recorded in the manifest.
 
 - The source observations have varying resolution, approximately 400 m–20 km/pixel. Coarse observed imagery is not replaced with invented high-resolution detail.
 

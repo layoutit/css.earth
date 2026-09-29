@@ -19,7 +19,7 @@
  *     excess inside one disc radius is smaller and the centroid is displaced.
  *
  * sso_freeze here is a producing stage like any other: beside the object-centred list it writes, it records the archive product
- * and the three ephemeris files that made it at their pinned digests, and the CIAO and CALDB that ran. The receipt then states
+ * and the three ephemeris files that made it at their pinned sizes, and the CIAO and CALDB that ran. The receipt then states
  * each list's environment from the record beside that list, never from the software installed on the machine writing the
  * receipt, and refuses when a list has no record. What the Horizons check establishes goes back on both records as geometric
  * registration.
@@ -37,7 +37,7 @@ import { toolchainPython } from '@cssearth/telescope/node';
 import { PROGRAMS, type ChandraFile, type ChandraObservation } from './archive.mts';
 import { reprocessedWith } from './compare.mts';
 import { column, eventTable, gunzipFile, type EventTable } from './events.mts';
-import { chandraFiles, chandraToolchainDigest } from './reprocess.mts';
+import { chandraFiles } from './reprocess.mts';
 import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts';
 
 /** Horizons' observer code for the Chandra X-ray Observatory: site 500 (body centre) of body -151. Verified live. */
@@ -140,16 +140,15 @@ const FROZEN_CONVENTIONS: Readonly<Record<string, string>> = {
 };
 
 /** The run that re-projects the archive's own level-2 list into the frame that moves with the body: that list and the three
- * files the frame is built from at their pinned digests, and the CIAO and CALDB that ran sso_freeze. */
+ * files the frame is built from at their pinned sizes, and the CIAO and CALDB that ran sso_freeze. */
 export function freezeRun(entry: ChandraObservation, files: { readonly archive: ChandraFile; readonly orbit: ChandraFile; readonly body: ChandraFile; readonly aspect: ChandraFile },
-  options: { readonly versions: { ciao: string; caldb: string }; readonly toolchainDigest: string }): ProductRun {
+  options: { readonly versions: { ciao: string; caldb: string } }): ProductRun {
   const pin = (role: string, file: ChandraFile): ProductInput => {
     return { role, identity: file.url, bytes: file.bytes };
   };
   return { telescope: 'Chandra', stage: `sso-freeze/${entry.obsid}-${entry.instrument}`,
     inputs: [pin('archive level-2 event list', files.archive), pin('spacecraft orbit ephemeris', files.orbit), pin('body ephemeris', files.body), pin('aspect solution', files.aspect)],
-    parameters: { ...FREEZE_PARAMETERS, target: entry.targetName }, software: [{ name: 'ciao', version: options.versions.ciao }, { name: 'caldb', version: options.versions.caldb }],
-    toolchainDigest: options.toolchainDigest };
+    parameters: { ...FREEZE_PARAMETERS, target: entry.targetName }, software: [{ name: 'ciao', version: options.versions.ciao }, { name: 'caldb', version: options.versions.caldb }] };
 }
 
 /** What binning the events about the body's Horizons disc establishes, for the record of the run that made the list measured. */
@@ -214,7 +213,7 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
   // This run made the object-centred list, so it records what made it, with the CIAO and CALDB that ran here and now.
   const freezeRecord = productRecordPath(frozen);
   await writeProductRecord(freezeRecord, freezeRun(entry, { archive: archiveLevel2, orbit: pinnedOrbit, body: pinnedBody, aspect: pinnedAspect },
-    { versions, toolchainDigest: await chandraToolchainDigest() }),
+    { versions }),
     [{ path: basename(frozen), file: frozen, conventions: FROZEN_CONVENTIONS }, { path: basename(frozenAsol), file: frozenAsol }]);
   // Each list's environment comes from the record beside that list: the chandra_repro list was made by another run, possibly
   // years ago on another machine, and a list with no record is not measured rather than being given this machine's versions.

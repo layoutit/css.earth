@@ -81,7 +81,7 @@ Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 ru
 
 - **Orientation and orbit:** The displayed mesh uses the observed pre-impact pole (ICRF RA 69.70029°, declination −72.69527°) and an explicitly arbitrary display phase. The pre-impact 11.92177 h period is source metadata, not a post-impact attitude prediction. The shared solar context uses the post-impact DART s547 Dimorphos trajectory relative to the Didymos primary, fitted to the existing precessing Kepler model over JD 2461256.5–2461316.5. This is a compact display fit, not a long-term binary dynamics solution.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -92,7 +92,7 @@ Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 ru
 
 The 0.972 m OBJ release preserves 98,306 Cartesian vertices and 196,608 triangular plates in kilometers, with original origin, winding and connectivity. The archive reports a closed surface with volume 0.001759765951701106 km³ and dimensions approximately 178.44 × 169.25 × 114.60 m. The 75 m reference sphere rounds this model's volume-equivalent radius; it is not a gravitational datum.
 
-Exact URL, byte size and SHA-256 are in `source/manifest.json`; original label and Software Interface Specification are retained in `source/reference/`.
+Exact URL and byte size are in `source/manifest.json`; original label and Software Interface Specification are retained in `source/reference/`.
 
 ## Survey and disposition
 

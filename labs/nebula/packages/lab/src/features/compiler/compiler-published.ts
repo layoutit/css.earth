@@ -5,27 +5,11 @@ import { readSampledRecipe, verifySampledEvidence } from '../sampled-prior/model
 
 interface Pin { path: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
-/** Producer identities are historical metadata; scientific recipes/outputs never match this policy. */
-function producerPath(path: string): boolean {
-  return /^labs\/nebula\/(?:src\/.+\.[cm]?tsx?|packages\/(?:lab|volume-core|volume-bake|reconstruction)\/(?:src\/.+\.[cm]?tsx?|package\.json))$/.test(path) ||
-    /^src\/(?:preparation|renderers|platform)\/.+\.[cm]?ts$/.test(path) ||
-    // The flat names, `tools/fits/` and the lab's volume-core and volume-bake packages are pre-reorganization pins, kept because a
-    // recorded producer identity is history, not a path that still has to resolve; `packages/fits/`, `packages/telescope/`,
-    // `packages/bake/` is where those owners live now (`tools/sources/` is a pre-reorganization pin like the flat names); `src/renderers/` above is the renderer runtime
-    // before it became `packages/renderer/`, and `packages/engine/` holds the star colour fit that was `src/preparation/stars/`.
-    // `packages/spice/` is an owner since the sky-band composite reads the WISE atlas grid through `@cssearth/bake/objects/raster`,
-    // whose entry (followed whole, like every topic entry) reaches the observer cameras. `packages/objects/` is an owner since
-    // the renderer's world-rotation validation joined `@cssearth/objects`, whose main entry is followed whole.
-    // `packages/telescope-cli/src/` (`.mts`) is where the sky-band composite moved from `tools/objects/observation/`; its
-    // relative imports now reach the JWST imaging archive modules it read as external `@cssearth/telescope-cli` entries before.
-    /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:fits|sources)\/.+\.[cm]?ts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path) ||
-    /^packages\/(?:bake|engine|fits|objects|renderer|spice|telescope)\/(?:src\/.+\.ts|package\.json)$/.test(path) ||
-    /^packages\/telescope-cli\/src\/.+\.mts$/.test(path);
-}
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {
-  if (!record(value) || typeof value.path !== 'string' || !(/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) || producerPath(value.path)) ||
-      value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path)) throw new TypeError('Invalid prepared compiler pin.');
+  if (!record(value) || typeof value.path !== 'string' || !/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) || Object.keys(value).join() !== 'path' ||
+      value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path))
+    throw new TypeError(`Invalid prepared compiler input: ${JSON.stringify(value)}`);
   return { path: value.path };
 }
 export function readPublishedCompiler(value: unknown, recipePath: string): Published {
@@ -33,7 +17,7 @@ export function readPublishedCompiler(value: unknown, recipePath: string): Publi
       !Array.isArray(value.inputs) || value.inputs.length < 5 || value.inputs.length > 500) throw new TypeError('Invalid prepared compiler publication.');
   const inputs = value.inputs.map(pin), result = pin(value.result);
   if (new Set(inputs.map(item => item.path)).size !== inputs.length || !inputs.some(item => item.path === recipePath) ||
-      !/^\.local\/nebula-lab\/compiler\/[a-f0-9]{64}\/result\.json$/.test(result.path)) throw new TypeError('Prepared compiler publication has incomplete source ownership.');
+      !/^\.local\/nebula-lab\/compiler\/[a-z0-9][a-z0-9-]*\/result\.json$/.test(result.path)) throw new TypeError('Prepared compiler publication has incomplete source ownership.');
   return { recipePath, result, inputs };
 }
 type FetchLocal = (path: string) => Promise<Response>;
@@ -43,15 +27,13 @@ async function localBytes(path: string, fetchLocal: FetchLocal): Promise<Uint8Ar
   return new Uint8Array(await response.arrayBuffer());
 }
 const checkedBytes = (source: Pin, fetchLocal: FetchLocal): Promise<Uint8Array> => localBytes(source.path, fetchLocal);
-/** Inspect immutable outputs against current scientific inputs; code pins document the historical producer. */
+/** Inspect a saved result against its current scientific inputs; git identifies the code that produced it. */
 export async function loadPublishedCompiler(path: string, recipePath: string, fetchLocal: FetchLocal, expected?: CompilerRequest): Promise<CompilerResult | null> {
   const response = await fetchLocal(path);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error('Prepared nebula receipt is unavailable.');
   const publication = readPublishedCompiler(await response.json(), recipePath);
-  // Preparing code can evolve while a saved cloud remains inspectable. Never replace its recorded producer hashes.
-  const inputs = await Promise.all(publication.inputs.filter(source => !producerPath(source.path))
-    .map(async source => [source.path, await checkedBytes(source, fetchLocal)] as const));
+  const inputs = await Promise.all(publication.inputs.map(async source => [source.path, await checkedBytes(source, fetchLocal)] as const));
   const recipeBytes = inputs.find(([path]) => path === recipePath)![1];
   const recipe = readCompilerRecipe(JSON.parse(new TextDecoder().decode(recipeBytes)));
   const required = [recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue,
@@ -76,7 +58,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   if (publication.result.path !== `.local/nebula-lab/compiler/${result.id}/result.json` || result.defaultSourceId !== recipe.defaultSourceId)
     throw new Error('Prepared nebula result does not match its configured recipe.');
   const method: unknown = JSON.parse(new TextDecoder().decode(await localBytes(result.method.path, fetchLocal)));
-  if (!record(method) || !Array.isArray(method.implementation))
+  if (!record(method) || method.recipePath !== recipePath)
     throw new Error('Prepared nebula method does not match its current recipe.');
   if (recipe.photometricPriorRecipe) {
     const model: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.photometricPriorRecipe)![1]));
@@ -94,7 +76,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     throw new Error('Prepared stellar catalogue differs from its configured source.');
   if (recipe.sampledRecipe) {
     for (const owner of sampledOwnerPins(method, recipe.sampledRecipe)) if (!publication.inputs.some(input => input.path === owner.path))
-      throw new Error('Prepared spatial model is missing a source or implementation pin.');
+      throw new Error('Prepared spatial model is missing a source.');
     const sampled = readSampledRecipe(JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.sampledRecipe)![1])));
     if (sampled.id !== recipe.id || !publication.inputs.some(p => p.path === sampled.source.path) ||
         !publication.inputs.some(p => p.path === sampled.evidence.path))
@@ -121,14 +103,6 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
       const original: unknown = request.imageToFrame[id] ?? (record(image) ? image.imageToFrame : undefined);
       if (!Array.isArray(original) || original.length !== matrix.length || matrix.some((n, i) => n !== original[i])) return null;
     }
-  }
-  for (const implementation of method.implementation) {
-    if (!record(implementation)) throw new Error('Invalid prepared nebula implementation.');
-    const path = typeof implementation.path === 'string' ? implementation.path :
-      typeof implementation.name === 'string' && /^[a-z0-9-]+\.ts$/.test(implementation.name)
-        ? `labs/nebula/src/reconstruction/compiler/${implementation.name}` : '';
-    if (!producerPath(path) || !publication.inputs.some(input => input.path === path))
-      throw new Error('Prepared nebula implementation differs from its published receipt.');
   }
   return result;
 }

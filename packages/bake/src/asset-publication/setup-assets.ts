@@ -107,45 +107,33 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
 /**
  * `node packages/bake/cli/setup-assets.mts [--object=<id>…] [--location=public|prepared] [--metadata] [--allow-missing]`
  * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
- * prepared record and presentation of the volume and context objects, which is all a deploy catalogue reads.
+ * prepared presentation of the volume objects, which is all a deploy catalogue reads.
  */
 /**
  * The files under a body's `prepared/` that a checkout derives itself (`isRegeneratedPreparedFile`): the JSON transport
- * and page from the restored runtime, and for layered bodies the provenance record. R2 never holds them, so a body
- * restored into a checkout that has not baked it has none until something derives them, and the first prepare step to
- * read one fails with a bare ENOENT. Derive them here for every restored scene body that lacks one; a body that has
- * them is left alone, so a repeat run costs nothing. Needs the renderer build (`pnpm prepare:shell`); without it the
- * caller is told which command finishes the job instead of failing on an import.
+ * and page from the restored runtime. R2 never holds them, so a body restored into a checkout that has not baked it has
+ * none until something derives them, and the first prepare step to read one fails with a bare ENOENT. Derive them here for
+ * every restored scene body that lacks one; a body that has them is left alone, so a repeat run costs nothing. Needs the
+ * renderer build (`pnpm prepare:shell`); without it the caller is told which command finishes the job instead of failing
+ * on an import.
  */
 export async function deriveRestoredPreparedFiles(ids: readonly string[], root: string, checkout = process.cwd()) {
   // A deploy runs setup before `pnpm build:tools` writes the scene catalogue; its second setup run derives the files.
   if (Object.values(PREPARED_CATALOGUE).some(path => !existsSync(resolve(checkout, path)))) {
     console.log("Derived page data not written: the scene catalogue is not generated. Run pnpm build:tools && pnpm prepare:object-json.");
-    return { pages: 0, provenance: 0 };
+    return { pages: 0 };
   }
   const SCENE_OBJECTS = readPreparedObjects(checkout).sceneObjects;
-  const { provenanceIsRegenerated } = await import('@cssearth/objects/node');
-  const scene = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id));
   const missing = (id: string, file: string) => !existsSync(resolve(root, "src/objects", id, "prepared", file));
-  const pages: string[] = [], provenance: string[] = [];
-  for (const id of scene) {
-    if (missing(id, "page.json") || missing(id, "object.json")) pages.push(id);
-    if (missing(id, "provenance.json") && await provenanceIsRegenerated(resolve(root, "src/objects", id))) provenance.push(id);
-  }
-  if (!pages.length && !provenance.length) return { pages: 0, provenance: 0 };
+  const pages = ids.filter(id => SCENE_OBJECTS.some(object => object.id === id) && (missing(id, "page.json") || missing(id, "object.json")));
+  if (!pages.length) return { pages: 0 };
   if (!existsSync(resolve(checkout, "packages/renderer/dist/index.js"))) {
-    console.log(`Derived page data not written for ${pages.length + provenance.length} restored object(s): the renderer is not built. Run pnpm prepare:shell && pnpm prepare:object-json.`);
-    return { pages: 0, provenance: 0 };
+    console.log(`Derived page data not written for ${pages.length} restored object(s): the renderer is not built. Run pnpm prepare:shell && pnpm prepare:object-json.`);
+    return { pages: 0 };
   }
-  if (pages.length) {
-    const { restoreObjectJson } = await import("./restore-object-json.ts");
-    await restoreObjectJson(pages, root, { restoredOnly: true, checkout });
-  }
-  if (provenance.length) {
-    const { recoverObjectProvenance } = await import("../objects/provenance/index.ts");
-    await recoverObjectProvenance(provenance, { root, checkout, catalogue: false });
-  }
-  return { pages: pages.length, provenance: provenance.length };
+  const { restoreObjectJson } = await import("./restore-object-json.ts");
+  await restoreObjectJson(pages, root, { restoredOnly: true, checkout });
+  return { pages: pages.length };
 }
 
 export async function setupAssets(args: readonly string[], root = process.cwd()) {
@@ -162,7 +150,7 @@ export async function setupAssets(args: readonly string[], root = process.cwd())
   console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused${result.skipped ? `, ${result.skipped} skipped (missing on R2, allow-missing)` : ""}.`);
   if (!metadata && locationArg !== "public") {
     const derived = await deriveRestoredPreparedFiles(ids, root);
-    if (derived.pages || derived.provenance) console.log(`Derived page data for ${derived.pages} object(s) and provenance for ${derived.provenance}.`);
+    if (derived.pages) console.log(`Derived page data for ${derived.pages} object(s).`);
   }
   return result;
 }

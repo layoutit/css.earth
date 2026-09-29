@@ -1,6 +1,5 @@
 import { test, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -11,7 +10,6 @@ import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { embedNebulaFrame, METERS_PER_PARSEC } from './nebula-frame.ts';
 import { samePreparedCatalogueGeometry } from '@cssearth/renderer/stars/prepared-catalogue-points.ts';
 
-const sha = (v: Uint8Array | string) => createHash('sha256').update(v).digest('hex');
 const frame: DensityVolumeFrame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545 + 16 * 365.25,
   originM: [100 * METERS_PER_PARSEC, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: METERS_PER_PARSEC,
   boundsUnits: { min: [-0.1, -0.1, -0.1], max: [0.1, 0.1, 0.1] } };
@@ -26,7 +24,7 @@ const retainedPoint: PreparedCataloguePoint = { id: 'named-star', positionUnits:
 async function fixture(t: TestContext, value: unknown) {
   const root = await mkdtemp(join(tmpdir(), 'nebula-field-')); t.after(() => rm(root, { recursive: true, force: true }));
   const bytes = JSON.stringify(value); await writeFile(join(root, 'field.json'), bytes);
-  return { root, pin: { path: 'field.json', sha256: sha(bytes) } };
+  return { root, pin: { path: 'field.json' } };
 }
 async function prepare(t: TestContext, value: unknown, target = frame, existing: readonly PreparedCataloguePoint[] = []) {
   const { root, pin } = await fixture(t, value); return prepareNebulaCatalogueField(root, pin, target, existing);
@@ -196,7 +194,7 @@ test('the checked-in Helix selection retains wide-image cores and its central st
     positionUnits: id === 'eso-wfi-1508' ? [0, 0, 0] : [i * 13, i * 7, (i % 3) * 20] }));
   const target = embedNebulaFrame(frame, { centerIcrsDegrees: [337.4107083333334, -20.83717222222222],
     distancePc: 216, imageRotationDegrees: 0, arcsecPerUnit: 1 });
-  const pin = { path, sha256: sha(bytes) };
+  const pin = { path };
   const wfi = await prepareNebulaCatalogueField(process.cwd(), pin, target, [...existing.map(p => p.id.startsWith('eso-vista-') ? {...p,opacity:0} : p), { ...retainedPoint, id: 'unvetted-image-peak' }], existing);
   const infrared = await prepareNebulaCatalogueField(process.cwd(), pin, target,
     existing.map(point => ({ ...point, colorCss: '#aabbcc', opacity: 0.25 })), existing);
@@ -223,7 +221,8 @@ test('catalogue refresh preserves the existing Helix core identities, matching t
   const cells = [star.sourceId, star.raDeg, star.decDeg, star.pmRaMasYr, star.pmDecMasYr, star.parallaxMas,
     star.parallaxErrorMas, star.photGMeanMag, '', '', star.ruwe, star.distancePc, star.distanceLowerPc, star.distanceUpperPc];
   const cache = join(root, '.local/nebula-lab/stellar-fields'); await mkdir(cache, { recursive: true });
-  await writeFile(join(cache, `helix-${sha(query).slice(0, 12)}.csv`), `${columns.join(',')}\n${cells.join(',')}\n`);
+  await writeFile(join(cache, 'helix.csv'), `${columns.join(',')}\n${cells.join(',')}\n`);
+  await writeFile(join(cache, 'helix.csv.query.json'), JSON.stringify({ query }));
   const refreshed = spawnSync(process.execPath, ['--experimental-strip-types',
     join(process.cwd(), 'packages/bake/cli/prepare-nebula-field-catalogues.mts'), 'helix'], { cwd: root, encoding: 'utf8', timeout: 3000 });
   assert.equal(refreshed.status, 0, `${refreshed.error?.message ?? ''}\n${refreshed.stdout}\n${refreshed.stderr}`);

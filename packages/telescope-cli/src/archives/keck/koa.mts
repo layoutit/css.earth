@@ -21,7 +21,6 @@ import { request } from 'node:https';
 import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Transform } from 'node:stream';
-import { sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { tapRows } from '@cssearth/telescope/node';
 
@@ -140,15 +139,15 @@ export async function koaProducts(instrument: string, koaid: string, filehand: s
 
 /** Fetch one archive file to `path` unless it is already there with the pinned size, streaming so a cube is never held whole.
  * KOA answers an unknown path with an HTML message and a 200, so the body is refused unless the service says it is a file. */
-export async function koaDownload(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ sha256: string; bytes: number }> {
+export async function koaDownload(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ bytes: number }> {
   const already = await stat(path).then(entry => entry.size, () => -1);
   if (maxBytes !== undefined && (!Number.isSafeInteger(maxBytes) || maxBytes < 1 || already > maxBytes)) throw new RangeError('KOA file exceeds the transfer bound.');
-  if (already > 0 && (bytes === undefined || already === bytes)) return sha256File(path);
+  if (already > 0 && (bytes === undefined || already === bytes)) return { bytes: already };
   // A partial body is left in the `.part` file and overwritten on the next attempt, never renamed into place.
   return koaRetry(() => fetchOnce(url, path, bytes, maxBytes));
 }
 
-async function fetchOnce(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ sha256: string; bytes: number }> {
+async function fetchOnce(url: string, path: string, bytes?: number, maxBytes?: number): Promise<{ bytes: number }> {
   await mkdir(dirname(path), { recursive: true });
   const response = await koaRequest(url);
   if (response.statusCode !== 200) { response.destroy(); throw new Error(`KOA refused ${url}: ${response.statusCode}`); }
@@ -169,9 +168,9 @@ async function fetchOnce(url: string, path: string, bytes?: number, maxBytes?: n
   try { await pipeline(response, limit, createWriteStream(partial)); }
   catch (error) { await rm(partial, { force: true }); throw error; }
   await rename(partial, path);
-  const digest = await sha256File(path);
-  if (bytes !== undefined && digest.bytes !== bytes) throw new Error(`${path} is ${digest.bytes} bytes, not the pinned ${bytes}.`);
-  return digest;
+  const written = { bytes: (await stat(path)).size };
+  if (bytes !== undefined && written.bytes !== bytes) throw new Error(`${path} (${url}) is ${written.bytes} bytes, not the pinned ${bytes}.`);
+  return written;
 }
 
 export const koaCacheDir = (root: string, ...parts: readonly string[]) => resolve(root, ...parts);

@@ -255,7 +255,6 @@ not an acceptable default for planetary coordinates.
 ## 3. What the latest cssEarth trace establishes
 
 Input: `Trace-20260909T224754.json.gz`.
-SHA-256: `e411a2e9b2361f9e3830eca16cd22f22407b4ce6cb694505ab7db2095324ba41`.
 The selected page is the candidate on port 4243; the analyzed window is 19.05 s.
 
 | Measurement | Result | Interpretation |
@@ -372,7 +371,6 @@ Sources for the static-variable and cadence distinctions:
 
 The untracked local file
 `/Users/ekrof/fed/polycss/notes/software-renderer-bible.md`
-(SHA-256 `1d13fe88e7ffe264d6b0269e3f6e3e7cbb4a489322f0604bf2389f6a3278e9ab`)
 records a specific Mario CodePen experiment on PolyCSS 0.2.11. Its SR-01 table
 reports 180 animation ticks:
 
@@ -391,8 +389,7 @@ unchanged. These are historical ledger results, not benchmarks rerun here or
 measurements of cssEarth. The current ledger explicitly leaves SR-10 unexecuted.
 
 The local Morph target implementation was also inspected at
-`/Users/ekrof/fed/polycss/packages/morph/src/render/preparedDomTarget.ts`
-(SHA-256 `081f3e884b09cb9976ea3739333078ad54b10a77f11b31188d68dc1bd48dc158`).
+`/Users/ekrof/fed/polycss/packages/morph/src/render/preparedDomTarget.ts`.
 It binds stable elements and guards individual transform, visibility, opacity and
 image-position writes. It does not implement a generic batch queue. This source
 file is untracked locally; the pinned Cityflow import demonstrates the consumer

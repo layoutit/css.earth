@@ -65,7 +65,7 @@ after restoration; available banks are selected once at startup. LMC is selected
 
 The native images and their completed star-removal or explicit compact-emission-preservation products feed reconstruction. **The source-card previews never feed the cloud bake.** Shared geometry and star positions remain independent of lens selection; each lens carries its registered color treatment and saved display settings. Pleiades' composite reference preview is Niittee's original wide photograph before NOIRLab detail fusion. Crab's Hubble 2017 bridge supports registration and is excluded from selectable lenses. M2–9 gains an independently catalogued surrounding field; its symmetry image does not infer those stellar positions.
 
-Each object owns `source/presentation.json` and a source manifest with image identities, credits, capture evidence and supporting scientific references. `pnpm prepare:nebulae` prepares `prepared/presentation.json`, standard `cssearth-object-provenance@3` lineage and bounded WebP previews, then refreshes shared source usage. `node site/build/prepare/prepare-facilities.mts --catalog-only` refreshes the shared catalogue from installed provenance. These generated files are ignored. Volume provenance is inventoried and published with the bake; the layered-body provenance generator does not recreate it. An ordinary rebake takes the current descriptor's output identity; it does not require editing a duplicate presentation hash.
+Each object owns `source/presentation.json` and a source manifest with image identities, credits, capture evidence and supporting scientific references. `pnpm prepare:nebulae` prepares `prepared/presentation.json` and bounded WebP previews, then refreshes shared source usage from each volume's source records. `node site/build/prepare/prepare-facilities.mts --catalog-only` refreshes the shared catalogue from the installed presentations. These generated files are ignored; the presentation is inventoried and published with the bake. An ordinary rebake takes the current descriptor's output identity; it does not require editing a duplicate presentation hash.
 
 The site reuses the planets' dataset selector, descriptions, details and source/telescope sidebar. Selecting a lens updates that lens's source context and URL while retaining the world camera and scene. Supporting observations remain distinguishable from the selected image; papers do not become spacecraft observations. Horálek's camera remains unidentified in the retained evidence, so its attribution names the photographer without inventing an instrument.
 
@@ -195,7 +195,7 @@ is separately pinned; changing its method remains research work.
 Application replay and source-catalogue preparation read evidence from each
 object's `source/` directory. `source/provenance-references.json` maps the
 provenance compiler's retained evidence and recipe copies to their original
-research paths, SHA-256 hashes and byte counts. Existing compact
+research paths and byte counts. Existing compact
 replay copies are reused; the copied JSON bytes and scientific pins are unchanged.
 The source manifest covers those copies and the mapping itself.
 

@@ -50,27 +50,6 @@ function imageWorld(g: Pick<ReturnType<typeof compile>, 'matrix' | 'leafWidth' |
     (coefficient(0) * x + coefficient(4) * y + coefficient(12)) / 50,
     (coefficient(2) * x + coefficient(6) * y + coefficient(14)) / 50];
 }
-test('prepared volume descriptor and external PNG bank form a complete pinned closure', async () => {
-  const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { sha256 } = await import('@cssearth/core/node');
-  const root = resolve('src/objects/milky-way');
-  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8')) as unknown);
-  assert(descriptor.prepared);
-  const bytes = await readFile(resolve(root, descriptor.prepared.url));
-  const envelope = record(JSON.parse(bytes.toString('utf8')) as unknown);
-  assert.equal(envelope.id, descriptor.id); assert.equal(envelope.format, descriptor.prepared.format);
-  const data = record(envelope.data), resources = data.resources;
-  assert(Array.isArray(resources) && resources.length > 0);
-  for (const value of resources) {
-    const resource = record(value), path = text(resource.path);
-    assert(!path.startsWith('/') && !path.split('/').includes('..'));
-    const png = await readFile(resolve(root, 'prepared', path));
-    assert.equal(sha256(png), text(resource.sha256)); assert.equal(png.length, finite(resource.bytes));
-  }
-  assert(!bytes.includes(Buffer.from('data:image/')), 'Production payload must reference external PNGs');
-});
-
-
 test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the plane PolyCSS gave them', async () => {
   const { compileCssVolume } = await import('./volume.ts');
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');

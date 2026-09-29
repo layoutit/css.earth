@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
@@ -37,7 +36,8 @@ export async function qualifyMappedComposition(sourceRoot:string,recipePath:stri
    expected=numerator.map((row,y)=>row.map((v,x)=>v===-99||denominator[y][x]===-99||denominator[y][x]===0?-99:v/denominator[y][x]));
   }
   const path=`${dirname(recipePath)}/${selection.id}.tif`,bytes=await readFile(resolve(sourceRoot,path));
-  assert.equal(sha256(bytes),sha256(converted.products[selection.id]),`${selection.id}: reproduction differs`);
+  const reproduced=converted.products[selection.id];
+  assert.ok(reproduced&&Buffer.from(reproduced).equals(bytes),`${selection.id}: reproduction differs`);
   const surface=await loadScienceSurface(sourceRoot,{format:'geotiff',path,grid:converted.report.grid,sampling:'nearest'});
   let valid=0,missing=0;
   const anchors=[];
@@ -49,10 +49,10 @@ export async function qualifyMappedComposition(sourceRoot:string,recipePath:stri
   }
   for(const lat of [-60,0,60])assert.equal(surface.sample(-180,lat),surface.sample(180,lat),'Periodic seam differs');
   assert.equal(surface.sample(0,90),null,'Unobserved north pole was extended');
-  products.push({id:selection.id,path,sha256:sha256(bytes),checkedNodes:valid+missing,valid,missing,anchors});
+  products.push({id:selection.id,path,checkedNodes:valid+missing,valid,missing,anchors});
  }
- return {schema:'cssearth-mapped-composition-evidence@1',target:recipe.target,recipe:{path:recipePath,sha256:sha256(recipeBytes)},
-  input:{path:recipe.input,sha256:sha256(original)},comparison:'Every native geographic node matches exactly after float32 rounding; missing samples remain null. Seam equivalence and absent north-pole coverage checked.',products};
+ return {schema:'cssearth-mapped-composition-evidence@1',target:recipe.target,recipe:{path:recipePath},
+  input:{path:recipe.input},comparison:'Every native geographic node matches exactly after float32 rounding; missing samples remain null. Seam equivalence and absent north-pole coverage checked.',products};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const [sourceRoot,recipePath,output]=process.argv.slice(2);

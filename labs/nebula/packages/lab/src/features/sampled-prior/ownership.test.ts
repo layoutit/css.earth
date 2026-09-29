@@ -3,61 +3,26 @@ import { test } from 'node:test';
 import { sampledOwnerPins } from './ownership.ts';
 
 const recipe = 'labs/nebula/models/example/sampled.json';
-const pin = (path: string, sha256 = 'a'.repeat(64)) => ({ path, sha256 });
-const method = () => ({ inputPins: [pin(recipe), pin('labs/nebula/models/example/evidence.json', 'b'.repeat(64)), pin('.local/nebula-lab/points.fits', 'c'.repeat(64))],
-  extraImplementation: [pin('labs/nebula/packages/volume-core/src/fields/sampled.ts')],
+const pin = (path: string) => ({ path });
+const method = () => ({ inputPins: [pin(recipe), pin('labs/nebula/models/example/evidence.json'), pin('.local/nebula-lab/points.fits')],
   sampledPrior: { recipe: pin('.local/nebula-lab/compiler/example/sampled-recipe.json'),
-    evidence: pin('.local/nebula-lab/compiler/example/physical-evidence.json', 'b'.repeat(64)), source: pin('.local/nebula-lab/points.fits', 'c'.repeat(64)) } });
+    evidence: pin('.local/nebula-lab/compiler/example/physical-evidence.json'), source: pin('.local/nebula-lab/points.fits') } });
 
-test('a sampled publication cannot silently drop or relabel its qualified source and implementation pins', () => {
-  assert.equal(sampledOwnerPins(method(), recipe).length, 4);
+test('a sampled publication cannot silently drop or relabel its qualified source owners', () => {
+  assert.equal(sampledOwnerPins(method(), recipe).length, 3);
   for (let index = 0; index < 3; index++) {
     const changed = method(); changed.inputPins.splice(index, 1);
     assert.throws(() => sampledOwnerPins(changed, recipe));
   }
-  const changed = method(); changed.sampledPrior.source.sha256 = 'd'.repeat(64);
+  const changed = method(); changed.sampledPrior.source = pin('.local/nebula-lab/other.fits');
   assert.throws(() => sampledOwnerPins(changed, recipe), /differ/);
-  const missingOwner = method(); missingOwner.extraImplementation = [];
-  assert.throws(() => sampledOwnerPins(missingOwner, recipe), /ownership/);
-  const outside = method(); outside.extraImplementation[0]!.path = 'labs/nebula/src/reconstruction/sampled-prior/../secret.ts';
+  const outside = method(); outside.inputPins[1] = pin('labs/nebula/models/example/../secret.json');
   assert.throws(() => sampledOwnerPins(outside, recipe), /owner/);
+  const duplicated = method(); duplicated.inputPins.push(pin(recipe));
+  assert.throws(() => sampledOwnerPins(duplicated, recipe), /Duplicate/);
 });
 
-test('the shared FITS decoder is a pinned preparation owner, not an arbitrary tools or package path', () => {
-  for (const path of ['packages/fits/src/fits.ts', 'tools/fits/fits.mts']) {
-    const shared = method(); shared.extraImplementation.push(pin(path));
-    assert.equal(sampledOwnerPins(shared, recipe).length, 5, path);
-  }
-  for (const path of ['tools/other.mts', 'packages/fits/src/other.ts', 'packages/core/src/validate.ts']) {
-    const shared = method(); shared.extraImplementation.push(pin(path));
-    assert.throws(() => sampledOwnerPins(shared, recipe), /owner|path/, path);
-  }
-});
-
-
-test('relocated sampled owners and historical receipts remain readable without allowing unrelated package code', () => {
-  for (const path of [
-    'labs/nebula/src/reconstruction/sampled-prior/field.ts',
-    'labs/nebula/packages/reconstruction/src/methods/sampled/material-solver.ts',
-    'labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts',
-    'labs/nebula/packages/volume-core/src/contracts/sampled-recipe.ts',
-    'packages/bake/src/volume/contracts/sampled-recipe.ts',
-    'packages/bake/src/volume/fields/sampled.ts',
-    'packages/bake/src/volume/node/compact-inputs/sampled.ts',
-  ]) {
-    const value = method(); value.extraImplementation = [pin(path)];
-    assert.equal(sampledOwnerPins(value, recipe).length, 4);
-  }
-  for (const path of [
-    'labs/nebula/packages/volume-core/src/fields/emission.ts',
-    'labs/nebula/packages/reconstruction/src/methods/sampled/not-an-owner.ts',
-    'labs/nebula/packages/volume-bake/src/compact-inputs/../sampled.ts',
-    'labs/nebula/packages/volume-core/src/fields/sampled.test.ts',
-    'packages/bake/src/volume/fields/emission.ts',
-    'packages/bake/src/volume/node/compact-inputs/../sampled.ts',
-    'packages/bake/src/volume/fields/sampled.test.ts',
-  ]) {
-    const value = method(); value.extraImplementation = [pin(path)];
-    assert.throws(() => sampledOwnerPins(value, recipe), /owner|path/);
-  }
+test('owners are named by path only', () => {
+  const recorded = { ...method(), inputPins: [{ path: recipe, bytes: 1 }, ...method().inputPins.slice(1)] };
+  assert.throws(() => sampledOwnerPins(recorded, recipe), /owner/);
 });

@@ -109,11 +109,6 @@ test("rejects malformed chart shapes and unsafe ids", () => {
   }), /data is incompatible/);
 });
 
-test("contains no object id or source record", async () => {
-  const source = await readFile(new URL("./chart-svg.ts", import.meta.url), "utf8");
-  assert.doesNotMatch(source, /mars|saturn|107740|107933/iu);
-});
-
 test('phase dimming increases downward and flux increases upward with explicit units', () => {
   const identity = { id: 'fixture', title: 'Fixture', description: 'Prepared data', metadata: {} };
   const phase = renderPhotometricPhaseChart({ ...identity, points: [

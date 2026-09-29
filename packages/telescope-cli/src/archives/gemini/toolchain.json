@@ -19,6 +19,6 @@
     "reduce": "reduce",
     "caldb": "caldb"
   },
-  "note": "The Gemini channel is http only; port 443 refuses the connection. The lock pins every package by URL, and each download's integrity is the sha256 micromamba checks against the lock, so the transport is not what the pin rests on.",
+  "note": "The Gemini channel is http only; port 443 refuses the connection. The lock pins every package by URL.",
   "memory": "Measured in docs/gemini.md. The GMOS-S imaging slice reduced below the 2 GiB ceiling reduce.mts applies by default."
 }

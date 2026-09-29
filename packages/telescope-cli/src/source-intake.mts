@@ -5,7 +5,7 @@ import { isis3CoreHeader } from '@cssearth/bake/objects/raster';
 import { open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import { resolve, dirname, basename } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
+import { plainName } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString, hasErrorCode } from '@cssearth/core';
 import { readFitsHeader } from '@cssearth/fits';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '@cssearth/telescope';
@@ -19,7 +19,7 @@ export async function sourceHeader(root: string, file: SourceFile, options: { re
   if(local) { try { const bytes=Buffer.alloc(LIMIT); const read=await local.read(bytes,0,bytes.length,0); return bytes.subarray(0,read.bytesRead); } finally {await local.close();} }
   const cache=resolve(root,'output/telescopes/source-headers',`${encodeURIComponent(file.path)}.json`);
   const cached=await readFile(cache,'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
-  if(cached && cached.version === 3) { const bytes=Buffer.from(requireString(cached.base64),'base64'); if(cached.origin!==file.origin || cached.digest!==sha256(bytes))throw new Error('Header cache identity mismatch.');return bytes; }
+  if(cached && cached.version === 4) { const bytes=Buffer.from(requireString(cached.base64),'base64'); if(cached.origin!==file.origin || cached.bytes!==bytes.length)throw new Error(`Header cache ${cache} holds ${String(cached.bytes)} bytes from ${String(cached.origin)}, not the ${bytes.length} bytes of ${file.origin} it should.`);return bytes; }
   if (options.fetchRemote === false) throw new Error('Header retrieval requires a local source file or a previously cached header.');
   const headers=await sourceHeaders(root,file);
   let response:Response|undefined;
@@ -30,14 +30,14 @@ export async function sourceHeader(root: string, file: SourceFile, options: { re
   const reader=response.body.getReader(),chunks:Buffer[]=[];let size=0;
   try { while(size<LIMIT){const next=await reader.read();if(next.done)break;const b=Buffer.from(next.value).subarray(0,LIMIT-size);chunks.push(b);size+=b.length;} } finally {await reader.cancel();}
   const bytes=Buffer.concat(chunks);await mkdir(dirname(cache),{recursive:true});
-  await writeFile(cache,JSON.stringify({version:3,origin:file.origin,queriedAt:new Date().toISOString(),digest:sha256(bytes),base64:bytes.toString('base64')}));return bytes;
+  await writeFile(cache,JSON.stringify({version:4,origin:file.origin,queriedAt:new Date().toISOString(),bytes:bytes.length,base64:bytes.toString('base64')}));return bytes;
 }
 export async function intakeSources(root:string,target:string,existing:readonly SourceProduct[], issues:SourceIntakeIssue[]=[], options: { readonly fetchRemote?: boolean } = {}):Promise<SourceProduct[]> {
  const source=`src/objects/${target}/source`,manifest=await readFile(resolve(root,source,'manifest.json'),'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
  if(!manifest)return [];
  const entries=[...requireArray(manifest.inputs),...requireArray(manifest.documents??[]),...requireArray(manifest.generatedIntermediates??[])];
  // Science products are downloads with an archive origin; files authored here are not products.
- const files=entries.filter(raw=>typeof requireRecord(raw).origin==='string'&&/^https?:\/\//u.test(String(requireRecord(raw).origin))).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:requireString(p.origin),...(p.sourceProcessing===undefined?{}:{sourceProcessing:parseSourceProcessing(p.sourceProcessing)})};});
+ const files=entries.filter(raw=>typeof requireRecord(raw).origin==='string'&&/^https?:\/\//u.test(String(requireRecord(raw).origin))).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${plainName(path)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:requireString(p.origin),...(p.sourceProcessing===undefined?{}:{sourceProcessing:parseSourceProcessing(p.sourceProcessing)})};});
  const products:SourceProduct[]=[];const used=new Set(existing.flatMap(p=>p.files.map(f=>f.path)));
  for(const file of files.filter(f=>/\.(?:fits?|img|cub|qub|lbl|xml)$/iu.test(f.path)&&!used.has(f.path)).sort((a,b)=>(/\.xml$/iu.test(a.path)?0:/\.lbl$/iu.test(a.path)?1:2)-(/\.xml$/iu.test(b.path)?0:/\.lbl$/iu.test(b.path)?1:2))) {
   try {

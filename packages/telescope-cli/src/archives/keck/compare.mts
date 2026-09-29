@@ -21,7 +21,7 @@ import { pathToFileURL } from 'node:url';
 import { positionalArguments, requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { assertInputPins, addProductEvidence, fileSize, readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { assertInputs, addProductEvidence, fileSize, readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput } from '@cssearth/telescope';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
@@ -216,7 +216,7 @@ export async function runProduct(redux: string, product: KeckFile, names: readon
   const made = (record.parameters as { koaid?: unknown }).koaid;
   if (made !== observation.koaid) throw new Error(`${match} was made from ${String(made)}, not from ${observation.koaid}.`);
   if (!record.inputs.some(input => input.identity === observation.science.name && input.bytes === observation.science.bytes))
-    throw new Error(`${match} was not made from the pinned raw frame ${observation.science.name}; its record names ${record.inputs.length} inputs and none of them is that file at the pinned digest.`);
+    throw new Error(`${match} was not made from the pinned raw frame ${observation.science.name}; its record names ${record.inputs.length} inputs and none of them is that file at the pinned size.`);
   return path;
 }
 
@@ -254,9 +254,9 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
     if (!local) { missing.push(product.name); continue; }
     const archive = resolve(DOWNLOADS, id, 'products', product.level ?? 'lev1', product.name);
     // Before a sample is read or a word of evidence is written: every file this comparison will read is the file the program
-    // pins, by byte count and sha256.
+    // pins, by byte count.
     const { pins, files } = await comparisonPins(id, observation, product);
-    await assertInputPins(pins, files);
+    await assertInputs(pins, files);
     const ourHdus = await readFitsFileHdus(local), theirHdus = await readFitsFileHdus(archive);
     const ourPrimary = ourHdus[0]!.header, theirPrimary = theirHdus[0]!.header;
     const ourPipeline = pipelineHistory(ourHdus[0]!.cards), theirPipeline = pipelineHistory(theirHdus[0]!.cards);

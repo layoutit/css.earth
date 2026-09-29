@@ -10,7 +10,6 @@
   "lenses": [
     {
       "imageId": "horalek-widefield",
-      "resultId": "cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
       "label": "Horálek optical",
       "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
       "enabledIds": [
@@ -35,7 +34,6 @@
     },
     {
       "imageId": "vista-infrared",
-      "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
       "label": "ESO VISTA",
       "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
       "enabledIds": [
@@ -60,7 +58,6 @@
     },
     {
       "imageId": "wise-wide-infrared",
-      "resultId": "6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
       "label": "NASA AllWISE",
       "description": "Infrared colors from the NASA/IPAC AllWISE color mosaic served by CDS, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
       "enabledIds": [

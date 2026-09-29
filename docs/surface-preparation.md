@@ -38,7 +38,7 @@ prepared background size and position; the runtime needs no special path.
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
 | Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
-| Record input, recipe and output identities | [Provenance bindings](../packages/bake/src/objects/provenance/provenance-recipes.ts) and [record generation](../packages/bake/src/objects/provenance/object-provenance.ts) |
+| Record which inputs each dataset reads | [Lineage bindings](../packages/bake/src/objects/lineage/lineage-recipes.ts) and [the body reader](../packages/bake/src/objects/lineage/body-lineage.ts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
 [The loader](../packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts) assembles the
@@ -255,9 +255,9 @@ finite floats: `BLANK` applies only to integer arrays; floating gaps are `NaN`.
 This is a tested product subset, not arbitrary FITS support. Compressed images,
 random groups, int64 image decoding, variable-length/general tables, complex
 values, non-ESO/generalized `HIERARCH` names, `CONTINUE` and general WCS interpretation are unsupported.
-FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. The current
-source manifest does not supply a SHA-256 integrity check. Oracle fixtures can
-check recorded byte counts; exact-byte evidence needs its own retained identity.
+FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. Git holds
+the tracked bytes and the R2 source mirror holds the downloads; oracle fixtures can
+check recorded byte counts against those copies.
 
 ### FITS checks
 
@@ -515,9 +515,7 @@ declares a seam outset, preparation writes two corrections instead:
 
 The historical seam browser test
 measured saved Venus radar views over black and white backdrops and compared
-brightness across seams. The current
-[`rendered-page.test.mts`](../site/test/rendered-page.test.mts) checks built HTML
-structure; it does not measure seam pixels.
+brightness across seams. No current test measures seam pixels.
 These corrections do not change breaks in the source imagery itself, such as
 the one-pixel border columns at the edges of the Venus radar, Mars and Ceres
 source maps.
@@ -581,7 +579,7 @@ These still set their own encoding:
 - Decorative images take quality 40
   ([`DECORATIVE_WEBP`](../packages/bake/src/raster/lossy-lane.ts)): the sidebar
   dataset maps (`prepared/minimaps/`) and the volume dataset previews
-  (`datasets/<sha>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
+  (`datasets/<lens id>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
   against the quality 90 maps they replaced: 15.8 MB became 4.8 MB with 0.074 %
   of pixels flagged; quality 30 flagged 0.119 %. A nearest-sampled category map
   keeps lossless when that is smaller, as it is for 11 noisy geology and region
@@ -838,8 +836,8 @@ node site/build/prepare/refresh-photographs.ts io normal enhanced
 Run one body at a time. The command verifies the selected source closure, prepares
 its images and small minimaps, and updates the existing asset inventories and
 captions. It rejects scientific/emissive selections and new resource names.
-Unselected maps and the scene remain retained products; provenance records this
-as a partial refresh rather than a new full-package preparation. The ordinary
+Unselected maps and the scene remain retained products; this is a partial refresh
+rather than a new full-package preparation. The ordinary
 full preparer uses the same image code.
 
 The observed-surface lane's `component-fits` coverage joins an RGB publisher map

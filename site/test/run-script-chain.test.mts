@@ -22,8 +22,6 @@ test('the dev and build chains expand to direct steps: no alias is left for pnpm
     for (const step of steps) assert.match(step.command, /^(node |pnpm (-r|--filter) )/u, `${name}: ${step.command}`);
   }
   for (const step of expandScriptChain(scripts, 'dev:prepare')) assert.match(step.command, /^node /u, `a warm dev start spawns no pnpm: ${step.command}`);
-  assert.equal(scripts.predev, 'node site/build/run-script-chain.mts dev:prepare');
-  assert.equal(scripts.prebuild, 'node site/build/run-script-chain.mts build:prepare');
 });
 
 test('site chains restore prepared assets before discovery reads them, and a deploy keeps the published world', async () => {

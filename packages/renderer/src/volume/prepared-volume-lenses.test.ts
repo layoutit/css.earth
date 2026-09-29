@@ -49,7 +49,7 @@ const volume = (id: string, atlasOffset = 0, geometryOffset = 0): PreparedCssVol
     texturePath: `${id}/${axis}.webp`, widthPx: 1, heightPx: 1,
     style: { width: '1px', height: '1px', transform: `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${axis === 'x' ? geometryOffset : 0},0,0,1)`,
       backgroundSize: '3px 1px', backgroundPosition: `${atlasOffset}px 0px` } }] })),
-  resources: ['x', 'y', 'z'].map(axis => ({ path: `${id}/${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+  resources: ['x', 'y', 'z'].map(axis => ({ path: `${id}/${axis}.webp`, bytes: 1, width: 1, height: 1 })),
   provenance: {}, approximation: {},
 });
 const payload = (): PreparedVolumeLenses => ({ schema: 'cssearth-volume-lenses@1', id: 'fixture', defaultLens: 'first', framingRadiusUnits: 1,
@@ -94,7 +94,7 @@ function budgetPayload(slabCount: number, starCount: number): PreparedVolumeLens
           ({ ...stack.leaves[0]!, id: `${stack.axis}-${index}` })) })),
       impostors: { schema: 'cssearth-volume-impostors@1', radiusUnits: 1,
         fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32, views },
-      resources: [...source.resources, ...views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))],
+      resources: [...source.resources, ...views.map(view => ({ path: view.texturePath, bytes: 1, width: 1, height: 1 }))],
     } };
   }) };
 }
@@ -270,7 +270,7 @@ test('distant prepared images suspend the retained slice renderer and hand off b
     fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32,
     views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
   const data = { ...original, lenses: [{ ...lens, volume: { ...lens.volume, impostors,
-    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] } }] };
+    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, bytes: 1, width: 1, height: 1 }))] } }] };
   const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
   const root = runtime.root as unknown as FakeElement, initial = descendants(root);
   const detail = initial.find(node => node.className === 'css-volume-detail')!;
@@ -409,7 +409,7 @@ test('a phone hands an impostor-sized cloud to its billboards instead of fading 
     fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32,
     views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
   const data = { ...original, lenses: [{ ...lens, volume: { ...lens.volume, impostors,
-    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] } }] };
+    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, bytes: 1, width: 1, height: 1 }))] } }] };
   // A responsive mount resolves its focal length in CSS. The fade reads the same resolved length, so the runtime can
   // tell an invisible presentation from a contributing one instead of keeping both displayed.
   const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` })
@@ -456,7 +456,7 @@ test('a cloud denied its detail is carried by its billboards at every size, unti
     views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
   const base = volume('galaxy');
   const cloud = { ...base, impostors, resources: [...base.resources,
-    ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] };
+    ...impostors.views.map(view => ({ path: view.texturePath, bytes: 1, width: 1, height: 1 }))] };
   const lod = mountPreparedVolumeLod({ ...f.options, payload: cloud, resolveResource: path => `/prepared/${path}` }, () => 1);
   const detail = f.host.children.find(node => node.className === 'css-volume-detail')!;
   const distant = f.host.children.find(node => node.className === 'css-volume-impostors')!;

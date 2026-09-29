@@ -2,17 +2,15 @@
  * GeoTIFF's detached ISIS label. Coordinates and byte offsets come from the
  * label; native samples are read with DataView, without the production reader.
  *
- * node tools/oracles/isis-geotiff-grid.mts <recipe.json> <native.lbl> <grid.tif> <report.json>
+ * node tests/oracles/isis-geotiff-grid.mts <recipe.json> <native.lbl> <grid.tif> <report.json>
  *   [raster-recipe.json] [display-unit-scale, default 1] [calibration-override.json]
  */
 import {readFile, writeFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {resolve, dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {fromFile} from 'geotiff';
 import {loadScienceSurface} from '@cssearth/bake/objects/raster';
 
-const hash = (v: string | Uint8Array) => createHash('sha256').update(v).digest('hex');
 function labelNumber(label: string, key: string) {
   const match = new RegExp(`^\\s*${key}\\s*=\\s*([-+.0-9eE]+)`, 'm').exec(label);
   if (!match || !Number.isFinite(Number(match[1]))) throw new Error(`Label lacks ${key}.`);
@@ -24,7 +22,7 @@ function record(v: unknown): Record<string, unknown> {
 }
 export async function checkIsisGeoTiffGrid(recipePath: string, labelPath: string, gridPath: string,
   options: {scientific?: unknown; unitScale?: number; calibration?: {scale:number;offset:number;source:string;reason:string}} = {}) {
-  const recipeText = await readFile(recipePath, 'utf8'), recipe = record(JSON.parse(recipeText));
+  const recipe = record(JSON.parse(await readFile(recipePath, 'utf8')));
   const source = record(recipe.source), output = record(recipe.output), label = await readFile(labelPath, 'utf8');
   if (typeof source.url !== 'string' || !source.url.startsWith('https://') || typeof source.noData !== 'number' && source.noData !== null)
     throw new TypeError('Missing native URL or missing-value definition.');
@@ -81,7 +79,7 @@ export async function checkIsisGeoTiffGrid(recipePath: string, labelPath: string
       const row = source.coordinates === 'degrees'
         ? Math.floor((labelNumber(label,'MaximumLatitude')-latitude)*labelNumber(label,'Scale'))
         : Math.floor((top-latitude*Math.PI*radius/180)/resolution);
-      let expected: number | null = null, raw: number | null = null, range: string | null = null, rangeSha256: string | null = null;
+      let expected: number | null = null, raw: number | null = null, range: string | null = null;
       if (row >= 0 && row < nativeHeight && col >= 0 && col < nativeWidth) {
         const offset: number = firstByte+(row*nativeWidth+col)*bytesPerSample;
         range = `bytes=${offset}-${offset+bytesPerSample-1}`;
@@ -97,19 +95,18 @@ export async function checkIsisGeoTiffGrid(recipePath: string, labelPath: string
         const view = new DataView(bytes);
         raw = type === 'Real' ? view.getFloat32(0,true) : type === 'SignedWord' ? view.getInt16(0,true) : view.getUint8(0);
         expected = Number.isFinite(raw) && raw !== source.noData ? raw : null;
-        rangeSha256 = hash(new Uint8Array(bytes));
       }
       const value = data[y*width+x], actual = value === missing ? null : value;
       const expectedDisplay = expected === null ? null : (expected*(calibration?.scale??nativeScale)+(calibration?.offset??nativeOffset))*unitScale;
       const actualDisplay = science?.sample(longitude,latitude) ?? null;
       const displayPass = science === null || (expectedDisplay === null ? actualDisplay === null
         : actualDisplay !== null && Math.abs(actualDisplay-expectedDisplay) < 1e-9);
-      checks.push({x,y,longitude,latitude,sourceColumn:col,sourceRow:row,raw,expected,actual,range,rangeSha256,
+      checks.push({x,y,longitude,latitude,sourceColumn:col,sourceRow:row,raw,expected,actual,range,
         ...(science?{expectedDisplay,actualDisplay,displayPass}:{}),pass:actual===expected && displayPass});
     }
     const bytes = await readFile(gridPath), passed = !changed && checks.every(c=>c.pass);
     return {schema:'cssearth-native-grid-oracle@1',passed,method:'Independent ISIS-label coordinates and byte offsets; native samples decoded by DataView. Checks source-to-compact sampling, not instrument accuracy or all native pixels.',
-      recipe:recipePath,recipeSha256:hash(recipeText),label:labelPath,labelSha256:hash(label),grid:gridPath,gridSha256:hash(bytes),
+      recipe:recipePath,label:labelPath,grid:gridPath,gridBytes:bytes.length,
       nativeUrl:source.url,etag:entity,entityChanged:changed,nativeScale,nativeOffset,unitScale,...(calibration?{calibration}:{}),checks};
   } finally {await tiff.close();}
 }

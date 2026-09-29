@@ -6,8 +6,7 @@ import sharp from 'sharp';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import ts from 'typescript';
-import { sanitizeVolumeProvenance, applicationDeliveryKind, installedDeliveryMatchesRecipe, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
-import { sha256 } from '@cssearth/core/node';
+import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
@@ -17,33 +16,26 @@ import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared
 const root = projectRoot(import.meta.url);
 
 test('sanitizeVolumeProvenance replaces the process-pid staging directory with a stable placeholder', () => {
-  const volume = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-59471/compact/hubble-optical/lenses/hubble-optical/volume.json', sha256: 'a'.repeat(64) } } };
+  const volume = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-59471/compact/hubble-optical/lenses/hubble-optical/volume.json' } } };
   const sanitized = sanitizeVolumeProvenance(volume);
   assert.equal(sanitized.provenance.sourceVolume.path,
     'src/objects/m1/.prepared-compact/compact/hubble-optical/lenses/hubble-optical/volume.json');
   assert.doesNotMatch(sanitized.provenance.sourceVolume.path, /\.prepared-\d+/);
   // A different process's bake must record the identical, pid-independent path.
-  const otherPid = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-1/compact/hubble-optical/lenses/hubble-optical/volume.json', sha256: 'a'.repeat(64) } } };
+  const otherPid = { provenance: { layout: 'x', sourceVolume: { path: 'src/objects/m1/.prepared-1/compact/hubble-optical/lenses/hubble-optical/volume.json' } } };
   assert.deepEqual(sanitizeVolumeProvenance(otherPid), sanitized);
 });
 
 test('sanitizeVolumeProvenance leaves provenance without a staging path untouched', () => {
   const noProvenance = { provenance: null };
   assert.equal(sanitizeVolumeProvenance(noProvenance), noProvenance);
-  const stablePath = { provenance: { sourceVolume: { path: 'src/objects/m1/prepared/hubble-optical/volume.json', sha256: 'a'.repeat(64) } } };
+  const stablePath = { provenance: { sourceVolume: { path: 'src/objects/m1/prepared/hubble-optical/volume.json' } } };
   assert.equal(sanitizeVolumeProvenance(stablePath), stablePath);
   const noSourceVolume = { provenance: { layout: 'x' } };
   assert.equal(sanitizeVolumeProvenance(noSourceVolume), noSourceVolume);
   // Only a whole `.prepared-<pid>` path segment is the staging directory.
-  const lookalike = { provenance: { sourceVolume: { path: 'src/objects/m1/data.prepared-7/volume.json', sha256: 'a'.repeat(64) } } };
+  const lookalike = { provenance: { sourceVolume: { path: 'src/objects/m1/data.prepared-7/volume.json' } } };
   assert.equal(sanitizeVolumeProvenance(lookalike), lookalike);
-});
-
-test('consumer preparation reuses a byte-verified delivery across implementation changes but not recipe changes', () => {
-  const receipt = { recipeSha256: 'a'.repeat(64), implementationSha256: 'b'.repeat(64) };
-  assert.equal(installedDeliveryMatchesRecipe(receipt, 'a'.repeat(64)), true);
-  assert.equal(installedDeliveryMatchesRecipe({ ...receipt, implementationSha256: 'c'.repeat(64) }, 'a'.repeat(64)), true);
-  assert.equal(installedDeliveryMatchesRecipe(receipt, 'd'.repeat(64)), false);
 });
 
 test('every volume the nebula delivery validates is sanitized, and an explicit bake records the sanitizer', async () => {
@@ -62,13 +54,8 @@ test('every volume the nebula delivery validates is sanitized, and an explicit b
   visit(file);
   assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
   assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
-  // An explicit bake records these owners: the sanitizer is in this topic, which the package's implementation inventory hashes.
-  // `--if-missing` is a consumer path: it verifies the installed byte closure and recipe without silently rebaking because
-  // unrelated runtime code changed.
-  const bake = JSON.parse(await readFile(resolve(root, 'packages/bake/package.json'), 'utf8')) as { nebulaImplementation: { directories: string[] } };
-  assert.ok(bake.nebulaImplementation.directories.includes('src/nebula'));
-  assert.match(source, /installed\(directory,sha256\(recipeBytes\)\)/);
-  assert.doesNotMatch(source, /installed\(directory,sha256\(recipeBytes\),implementationSha256\)/);
+  // `--if-missing` is a consumer path: it reuses an installed bank whose files are all present, without rebaking.
+  assert.match(source, /installed\(directory, /);
 });
 
 test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {
@@ -86,7 +73,7 @@ test('the real installer rejects post-compiler field stars before replacing the 
   const save = async (path: string, value: unknown) => {
     const bytes = JSON.stringify(value) + '\n', target = resolve(directory, path);
     await writeFile(target, bytes);
-    return { path: relative(root, target), sha256: sha256(bytes) };
+    return { path: relative(root, target) };
   };
   await mkdir(resolve(directory, 'source'));
   await mkdir(resolve(directory, 'prepared'));
@@ -106,7 +93,7 @@ test('the real installer rejects post-compiler field stars before replacing the 
     provenance: {}, approximation: {}, stacks: axes.map(axis => ({ axis, leaves: [{ id: `${axis}-0`,
       centerUnits: [0, 0, 0], texturePath: `${axis}.png`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: transforms[axis], backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: axes.map(axis => ({ path: `${axis}.png`, sha256: sha256(texture), bytes: texture.length, width: 1, height: 1 })) };
+    resources: axes.map(axis => ({ path: `${axis}.png`, bytes: texture.length, width: 1, height: 1 })) };
   const volumePin = await save('volume.json', volume);
   // Explicit synthetic fixture row: the real catalogue-field owner adds it after compiler admission.
   const fieldStars = await save('field.json', { schema: 'cssearth-gaia-nebula-field@1', id: 'budget-fixture', coordinateEpochJulianYear: 2016,
@@ -118,11 +105,11 @@ test('the real installer rejects post-compiler field stars before replacing the 
     request, inputPins: [], sky: { centerIcrsDegrees: [0, 0], distancePc: 1, imageRotationDegrees: 0, arcsecPerUnit: 1 },
     sourceUrl: 'https://example.org/fixture', description: 'Synthetic installer regression', defaultLens: 'first',
     framingRadiusUnits: 1, acceptedLabResult: 'fixture', attachedTo: 'sun', fieldStars });
-  const scene: CompilerBakeResult = { schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity: 'a'.repeat(64), frame,
+  const scene: CompilerBakeResult = { schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity: 'fixture', frame,
     boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] }, skyBoundsArcsec: { min: [-1, -1], max: [1, 1] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: [0, 0, 0], earthView: 'observer-at-negative-z-looking-away' },
     neutral: volumePin, lenses: [{ id: 'first', label: 'First', volume: volumePin,
-      coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [], alphaSha256: 'b'.repeat(64),
+      coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [],
     sampling: { imageWidth: 512, samplesPerSlab: 4, sliceCounts: { x: 1, y: 1, z: 1 },
       renderBudget: createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, 0, 3) } };
   const backend: NebulaResearchBackend = {
@@ -148,6 +135,11 @@ test('the real installer rejects post-compiler field stars before replacing the 
   const receipt: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/delivery.json'), 'utf8'));
   assert.ok(receipt && typeof receipt === 'object' && 'renderElements' in receipt);
   assert.deepEqual(receipt.renderElements, { starCount: 1, slabCount: 3, impostorCount: 26, totalElements: 56 });
+  // --if-missing reuses the bank while its receipt records this recipe, and rebuilds it once the recipe changes.
+  assert.equal((await prepareNebulaObject(root, directory, true, backend)).status, 'verified');
+  const recipe: unknown = JSON.parse(await readFile(resolve(directory, 'source/delivery.json'), 'utf8'));
+  await writeFile(resolve(directory, 'source/delivery.json'), JSON.stringify({ ...(recipe as object), description: 'Changed recipe' }));
+  assert.equal((await prepareNebulaObject(root, directory, true, backend)).status, 'prepared');
 });
 
 test('application preparation dispatches only delivery schemas owned by the nebula pipeline', () => {

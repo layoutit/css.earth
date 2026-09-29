@@ -5,21 +5,20 @@
  *
  *   node packages/bake/authoring/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]
  *
- * The recipe is the object's `source/preparation/eht-topset.json`: the data and pipeline releases by commit and git blob id,
+ * The recipe is the object's `source/preparation/eht-topset.json`: the data and pipeline releases by commit and file path,
  * the one change made to the pipeline, the toolchain it needs and the drawn combinations. Files are fetched from the releases
- * and checked by blob id; reconstructions are kept under `.local/<object-id>/eht/` and a finished one is never run again.
+ * at those commits; reconstructions are kept under `.local/<object-id>/eht/` and a finished one is never run again.
  * The mean is written to the recipe's output beside the object's sources, with the spread between the sample's first half
  * and the whole reported so the average's convergence is on record.
  */
 import { spawn } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
-interface ReleaseFile { readonly role: string; readonly path: string; readonly blob: string }
+interface ReleaseFile { readonly role: string; readonly path: string }
 interface Release { readonly repository: string; readonly commit: string; readonly files: readonly ReleaseFile[] }
 
 const root = resolve(import.meta.dirname, '../../../..');
@@ -37,7 +36,8 @@ const release = (value: unknown, label: string): Release => {
   const record = requireRecord(value, label);
   return { repository: requireString(record.repository, `${label} repository`), commit: requireString(record.commit, `${label} commit`),
     files: requireArray(record.files, `${label} files`).map(file => { const entry = requireRecord(file, `${label} file`);
-      return { role: requireString(entry.role, `${label} file role`), path: requireString(entry.path, `${label} file path`), blob: requireString(entry.blob, `${label} file blob`) }; }) };
+      if ('blob' in entry) throw new Error(`${objectId}: ${label} file ${String(entry.path)} carries a retired "blob" id; releases name files by commit and path.`);
+      return { role: requireString(entry.role, `${label} file role`), path: requireString(entry.path, `${label} file path`) }; }) };
 };
 const data = release(recipe.data, 'data release'), pipeline = release(recipe.pipeline, 'pipeline release');
 const change = requireRecord(requireRecord(recipe.pipeline, 'pipeline release').change, 'pipeline change');
@@ -49,9 +49,8 @@ if (combinations.length !== requireFiniteNumber(sample.size, 'sample size') || n
 }
 
 const work = resolve(root, '.local', objectId, 'eht');
-const gitBlob = (bytes: Buffer) => createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
 const exists = (path: string) => access(path).then(() => true, () => false);
-/** A release file in the work directory, fetched when absent and always checked against its blob id. */
+/** A release file in the work directory, fetched at the release commit when absent. */
 async function releaseFile(source: Release, file: ReleaseFile): Promise<string> {
   const target = resolve(work, 'release', source.repository.split('/').at(-1)!, file.path);
   if (!await exists(target)) {
@@ -60,8 +59,6 @@ async function releaseFile(source: Release, file: ReleaseFile): Promise<string> 
     await mkdir(resolve(target, '..'), { recursive: true });
     await writeFile(target, Buffer.from(await response.arrayBuffer()));
   }
-  const blob = gitBlob(await readFile(target));
-  if (blob !== file.blob) throw new Error(`${source.repository}@${source.commit.slice(0, 7)} ${file.path} is blob ${blob}, not the recipe's ${file.blob}.`);
   return target;
 }
 const [low, high] = await Promise.all(['low band', 'high band'].map(role => {

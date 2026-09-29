@@ -1,8 +1,8 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
+import { readGeometryPin } from '../geometry/registered-source.ts';
+import { variantFor } from '../../services/saved-variants.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { prepareJointInput } from './input.ts';
 import { fitJointModels } from '@cssearth/nebula-reconstruction/methods/joint/fitter';
@@ -11,7 +11,6 @@ import { bakeJointVolume } from './volume.ts';
 import { readJointResult, type JointPin, type JointResult, type JointCandidate } from '../../../features/joint-fit/result.ts';
 import type { JointRequest } from '../../../features/joint-fit/model.ts';
 export const JOINT_FIT_VERSION = 'molecular-wall-joint-fit@1';
-const owners = ['model.ts', 'geometry.ts', 'fitter.ts', 'input.ts', 'prepare.ts', 'volume.ts', 'volume-model.ts'];
 export async function validateJointResult(root: string, value: unknown) {
   const result = readJointResult(value);
   for (const pin of [result.graph, result.method, ...result.sources.map(s => s.image)]) await readGeometryPin(root, pin);
@@ -25,18 +24,19 @@ export async function validateJointResult(root: string, value: unknown) {
 export async function prepareJointFit(root: string, request: JointRequest, signal: AbortSignal, progress: (message: string) => void): Promise<JointResult> {
   signal.throwIfAborted(); progress('Connecting registered ridges and molecular pointings…');
   const input = await prepareJointInput(root, request);
-  const implementation = await implementationPins(root, ['labs/nebula/packages/lab/src/server/workflows/joint-fit/prepare.ts']);
-  const evidenceSha256 = geometrySha(JSON.stringify(input.evidence));
-  const id = geometrySha(JSON.stringify({ version: JOINT_FIT_VERSION, implementation, input: input.inputs.identity, evidenceSha256, graph: input.graph.id,
-    molecularRecipe: input.molecular.recipeSha256, recipe: input.recipeSha256, request }));
-  const directory = `.local/nebula-lab/joint-fit/${id}`, receipt = resolve(root, directory, 'result.json');
-  try { return await validateJointResult(root, JSON.parse(await readFile(receipt, 'utf8'))); }
-  catch (error) { if (!(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT')) throw error; }
+  // Evidence and ridge graph follow from these inputs; the saved request names them by path and variant.
+  const identity = { version: JOINT_FIT_VERSION, input: input.inputs.identity, molecularRecipe: input.molecular.recipePath, recipe: input.recipePath, request };
+  const cache = '.local/nebula-lab/joint-fit', variant = await variantFor(resolve(root, cache), identity);
+  const id = variant.name, directory = `${cache}/${id}`, receipt = resolve(root, directory, 'result.json');
+  if (variant.existing) {
+    try { return await validateJointResult(root, JSON.parse(await readFile(receipt, 'utf8'))); }
+    catch (error) { if (!(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT')) throw error; }
+  }
   const { fits, evaluatedModels } = fitJointModels(input.evidence, request.controls, input.recipe, progress, signal);
   await mkdir(resolve(root, directory), { recursive: true });
   async function save(name: string, bytes: Uint8Array): Promise<JointPin> {
     signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root, path);
-    await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path, sha256: geometrySha(bytes) };
+    await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path };
   }
   const spanArcsec = input.recipe.morphologyRadiusArcsec[1] * 2.2, diagramSize = 512;
   const diagramPoint = (x: number, y: number): [number, number] => [(x / spanArcsec + .5) * diagramSize, (.5 - y / spanArcsec) * diagramSize];
@@ -56,7 +56,7 @@ export async function prepareJointFit(root: string, request: JointRequest, signa
   const candidates: JointCandidate[] = [];
   for (const fit of fits) {
     progress(`Preparing ${fit.parameters.family} in 3D…`);
-    const volume = await bakeJointVolume({ root, outputDirectory: `${directory}/${fit.parameters.family}`, id: geometrySha(JSON.stringify({ id, parameters: fit.parameters })),
+    const volume = await bakeJointVolume({ root, outputDirectory: `${directory}/${fit.parameters.family}`, id: `${id}-${fit.parameters.family}`,
       boundsArcsec: jointBounds(fit.parameters), signal, progress: update => progress(update.message),
       sampleEmission(x, y, z, out) { sampleJointEmission(x, y, z, fit.parameters, out); } });
     const pointings = new Map<string, JointCandidate['pointings'][number]>();
@@ -72,10 +72,10 @@ export async function prepareJointFit(root: string, request: JointRequest, signa
     candidates.push({ fit, volume, outlinePath: path(fit.outline.map(([x, y]) => diagramPoint(x, y))) + ' Z', pointings: [...pointings.values()] });
   }
   const graph = await save('ridge-graph.json', Buffer.from(JSON.stringify(input.graph)));
-  const method = await save('method.json', Buffer.from(JSON.stringify({ version: JOINT_FIT_VERSION, implementation, recipe: input.recipe, recipeSha256: input.recipeSha256,
-    inputIdentity: input.inputs.identity, evidenceSha256, molecularRecipeSha256: input.molecular.recipeSha256,
+  const method = await save('method.json', Buffer.from(JSON.stringify({ version: JOINT_FIT_VERSION, recipe: input.recipe, recipePath: input.recipePath,
+    inputIdentity: input.inputs.identity, molecularRecipePath: input.molecular.recipePath,
     molecularOffsetWestNorthArcsec: input.molecularOffset, registration: 'Small-angle J2000-to-lab-sky anchor at the 70 arcsec beam scale; no precision frame transformation.',
-    graph: graph.sha256, request, evaluatedModels,
+    graph: graph.path, request, evaluatedModels,
     selection: 'Training objective only. All velocity components of pointings in two opposite 45-degree sectors are withheld; adjacent beam footprints can still correlate.',
     geometry: 'Relative neutral thin-shell emission, with fixed authored thickness and a fixed 0.45 equatorial radial reduction for the bipolar family. No calibrated flux, photoskin, dust absorption or hydrodynamics.',
     velocity: 'Homologous speed proportional to 3D radius. Five sightlines at beam-center and one Gaussian sigma offsets supply ideal surface loci. This is not beam-weighted spectral synthesis. Missing intersections incur a fixed penalty; upper-limit intensities are retained as evidence but not fitted.',
@@ -86,5 +86,5 @@ export async function prepareJointFit(root: string, request: JointRequest, signa
     accounting: { ridgePoints: input.evidence.ridges.length, excludedRidgePoints: input.graph.polylines.reduce((n, line) => n + line.points.length, 0) - input.evidence.ridges.length,
       pointings: input.molecular.diagnostics.pointings, components: input.evidence.velocities.length, upperLimits: input.molecular.diagnostics.upperLimits, evaluatedModels, beamFwhmArcsec: input.evidence.beamFwhmArcsec },
     inputIdentity: input.inputs.identity, interpretation: input.recipe.interpretation };
-  readJointResult(result); await save('result.json', Buffer.from(JSON.stringify(result) + '\n')); return result;
+  readJointResult(result); await save('request.json', Buffer.from(JSON.stringify(identity))); await save('result.json', Buffer.from(JSON.stringify(result) + '\n')); return result;
 }

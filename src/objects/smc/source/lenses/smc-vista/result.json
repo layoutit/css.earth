@@ -1,8 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
   "imageId": "smc-vista",
-  "removalResultId": "307546ac34750f57c96872ee4db509be28d7f96707f8349853c08d05dd560c6b.1a85530e3d753838be67253d472114d94a8ec81d0234b7b9b6f954e61ed4abfd",
+  "removalResultId": "smc-vista",
   "placement": {
     "x": 0,
     "y": 0,
@@ -20,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
+    "id": "reconstruction-smc-constrained-emission-envelope-ellipsoid-smc-vista",
     "name": "ESO VISTA · near infrared · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
+    "directory": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-vista",
     "sourcePageUrl": "https://www.eso.org/public/images/eso1714a/",
     "credit": "ESO/VISTA VMC",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -53,10 +52,10 @@
     "workflow": "density",
     "referenceDistanceUnits": 62.440000000000005,
     "referenceEastLeft": true,
-    "imagePath": ".local/nebula-lab/reconstructions/47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-vista/source/target.png",
     "comparisonGroup": "smc-constrained-observation",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/smc-constrained-emission-envelope-ellipsoid-smc-vista/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
@@ -68,12 +67,7 @@
     },
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
-    },
-    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
-  },
-  "finiteMaterial": {
-    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
-    "sourceResultId": "1f80d4736aa5c70518e67239776d4306b1bfab086712c2e962415178d3a8a770"
+    }
   },
   "processing": {
     "densityPreview": false,

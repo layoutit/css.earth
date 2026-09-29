@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { sampleRaster } from '@cssearth/nebula-reconstruction/observations/image-sampling';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -18,7 +17,7 @@ async function raster(root: string, v: unknown): Promise<CompilerRaster> {
   const bytes = await readGeometryPin(root, { path: v.path });
   const { data, info } = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== v.width || info.height !== v.height || info.channels !== 3) throw new TypeError('Source layer dimensions changed.');
-  return { width: info.width, height: info.height, data, path: v.path, sha256: createHash('sha256').update(bytes).digest('hex') };
+  return { width: info.width, height: info.height, data, path: v.path };
 }
 export async function loadCompilerImages(root: string, path: string, request: CompilerRequest, center: [number, number], native = false, lowFrequencyArcsec?: number) {
   if (lowFrequencyArcsec !== undefined && (!native || !Number.isFinite(lowFrequencyArcsec) || lowFrequencyArcsec < 1 || lowFrequencyArcsec > 3600))
@@ -33,21 +32,19 @@ export async function loadCompilerImages(root: string, path: string, request: Co
     let layers: Record<string, unknown> = row.layers;
     if (native) {
       const removal = row.removal, source = row.source;
-      if (!jointRecord(source) || !jointRecord(removal) || !jointRecord(removal.settings) || typeof removal.settings.directory !== 'string' ||
-          typeof removal.receiptSha256 !== 'string' || image.registration.status === 'publisher') throw new TypeError('Native composite requires verified registration and completed NOX.');
+      if (!jointRecord(source) || typeof source.path !== 'string' || !jointRecord(removal) || !jointRecord(removal.settings) || typeof removal.settings.directory !== 'string' ||
+          image.registration.status === 'publisher') throw new TypeError(`Native composite of ${image.id} requires verified registration and completed NOX.`);
       const directory = removal.settings.directory;
       const receipt: unknown = JSON.parse((await readGeometryPin(root, { path: `${directory}/result.json` })).toString());
-      if (!jointRecord(receipt) || receipt.schema !== 'cssearth-nox-output@1' || receipt.sourceSha256 !== removal.sourceSha256 ||
-          !jointRecord(receipt.artifactSha256) || !jointRecord(receipt.applied) || !jointRecord(receipt.applied.verification) ||
+      if (!jointRecord(receipt) || receipt.schema !== 'cssearth-nox-output@1' || !jointRecord(receipt.applied) || !jointRecord(receipt.applied.verification) ||
           receipt.applied.verification.coverageComplete !== true || receipt.applied.verification.maximumReconstructionErrorCodeValues !== 0)
         throw new TypeError('Native composite NOX accounting is incomplete.');
       const dimensions = { width: image.source.width, height: image.source.height };
-      if (JSON.stringify(receipt.nativeDimensions) !== JSON.stringify([dimensions.width, dimensions.height]) ||
-          receipt.artifactSha256['diffuse.png'] !== removal.diffuseSha256 || receipt.artifactSha256['stars.png'] !== removal.residualSha256)
-        throw new TypeError('Native composite source grid or separation pins differ.');
-      layers = { original: { ...dimensions, path: source.path, sha256: source.sha256 },
-        diffuse: { ...dimensions, path: `${directory}/diffuse.png`, sha256: removal.diffuseSha256 },
-        stars: { ...dimensions, path: `${directory}/stars.png`, sha256: removal.residualSha256 } };
+      if (JSON.stringify(receipt.nativeDimensions) !== JSON.stringify([dimensions.width, dimensions.height]))
+        throw new TypeError(`Native composite of ${image.id}: separation grid ${JSON.stringify(receipt.nativeDimensions)} differs from its source.`);
+      layers = { original: { ...dimensions, path: source.path },
+        diffuse: { ...dimensions, path: `${directory}/diffuse.png` },
+        stars: { ...dimensions, path: `${directory}/stars.png` } };
     }
     const [original, diffuse, stars] = await Promise.all(['original', 'diffuse', 'stars'].map(name => raster(root, layers[name])));
     const matrix = request.imageToFrame[image.id] ?? image.imageToFrame, inverse = invertAffine(matrix);

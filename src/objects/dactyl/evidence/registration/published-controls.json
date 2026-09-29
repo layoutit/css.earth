@@ -9,14 +9,12 @@
     "provider": "Elsevier / Academic Press",
     "retrieval": "Complete publisher PDF supplied by the user; all 12 pages read, Tables I–III and Figures 3, 9 and 10 examined. The PDF and extracted figures are local reference inputs, not redistributed assets.",
     "expectedBytes": 424164,
-    "expectedSha256": "e96e704ad303d090d658a0078a083d7d983b17ec78322531d998da90c66bade9",
     "images": [
       {
         "id": "figure-9a",
         "page": 208,
         "offset": 176682,
         "expectedBytes": 9949,
-        "expectedSha256": "8a30f0f24eb5ededd7fed27e16511480adab32eb1dd7cff189918363830893ff",
         "width": 414,
         "height": 350
       },
@@ -25,7 +23,6 @@
         "page": 209,
         "offset": 191159,
         "expectedBytes": 35500,
-        "expectedSha256": "c5897000acf3e8896572b81bfa909341be08c3c9f47a47dd7bdf108ee951311b",
         "width": 427,
         "height": 396
       },
@@ -34,7 +31,6 @@
         "page": 210,
         "offset": 247141,
         "expectedBytes": 13695,
-        "expectedSha256": "aaec33473a453e23a8b4fb735bd8193a059720a690a6d2fcde23a7d42920d5dd",
         "width": 533,
         "height": 288
       }
@@ -103,7 +99,6 @@
     "interpretation": "The west suffix is probably a prose error, an inference rather than an author correction. The conflicting wording is retained; it does not justify silently reversing the map."
   },
   "previousInputPath": "src/objects/dactyl/evidence/registration/inputs.json",
-  "previousInputSha256": "36babc47a849fde247a70d43655cb4e4bbd0a87733b47a1c46f155134ce38b24",
   "limbReportPath": "src/objects/dactyl/evidence/registration/limb-extent.json",
   "alignment": {
     "nativeAnchor": [
@@ -152,6 +147,5 @@
   "qualification": {
     "qualifiedSurface": false,
     "reason": "Published pole and range improve the orientation constraint. Distributed geographic controls, correspondence to the unchanged display ellipsoid, and qualified visibility/coverage remain unresolved. Neither an attractive fit nor same-image correlation supplies those facts."
-  },
-  "limbReportSha256": "86626a3be2235e8a59453dc5ba923cce5d0e661e6e9d6d93a4c0ad343ab38ec0"
+  }
 }

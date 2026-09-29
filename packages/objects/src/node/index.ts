@@ -7,10 +7,10 @@ export { SOURCE_MANIFEST_SCHEMA, assertRangeResponse, assertSourceRange, createS
   verifySourceManifest } from './source-manifest.js';
 export type { SourceEntry, SourceInput, SourceManifest, SourceManifestLocation, SourceRange, SourceVerification } from './source-manifest.js';
 export { safeRelativePath } from './source-path.js';
-export { PREPARED_CATALOGUE, readPreparedObjects } from './prepared-registry.js';
+export { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
 export type { PreparedNavigableObject, PreparedObjectRegistry, PreparedSceneObject } from './prepared-registry.js';
 export { readCatalog, readContextObjects, readOverviews } from './catalog-directory.js';
 export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAssetClosure, bakedPreparedFiles, inventoryPreparedAssets,
-  inventoryPublicAssets, inventoryText, isRegeneratedPreparedFile, mergeInventory, normalizeRuntimeAssetUrls, provenanceIsRegenerated, readInventory,
+  inventoryPublicAssets, inventoryText, isRegeneratedPreparedFile, mergeInventory, normalizeRuntimeAssetUrls, readInventory,
   requireInventory, updateInventory, validateInventory, verifyInventory } from './runtime-asset-closure.js';
 export type { AssetLocation, Inventory, InventoryAsset } from './runtime-asset-closure.js';

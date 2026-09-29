@@ -7,7 +7,6 @@ import sharp from 'sharp';
 import { createAlignedObservationMapping, defaultOverlayPlacement } from '@cssearth/bake/volume';
 import { prepareReconstruction } from './density-reconstruction.ts';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
-import { sha256 } from '@cssearth/core/node';
 import { parseCloudCatalogue, createCloudInspection } from '@cssearth/volume-viewer/scene/cloud-inspection';
 const close=(a:readonly number[],b:readonly number[])=>a.forEach((n,i)=>assert.ok(Math.abs(n-b[i])<1e-10,`${n} != ${b[i]}`));
 
@@ -68,7 +67,7 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     const pin=async(path:string)=>{await readFile(path);return {path};};
     const cloud={descriptor:await pin(descriptorPath),slices:await pin(slicesPath),
       provenance:await pin('labs/nebula/models/lmc/full-density/source/volume.json')};
-    const work={schema:'cssearth-nebula-reconstruction-work@1' as const,id:'reconstruction-'+'a'.repeat(64),imageId:'synthetic',name:'Synthetic native test',
+    const work={schema:'cssearth-nebula-reconstruction-work@1' as const,id:'reconstruction-synthetic-subject-synthetic',imageId:'synthetic',name:'Synthetic native test',
       outputDirectory:resolve(directory,'output'),source:{path:relative(root,resolve(directory,'source.png')),width:32,height:32},
       original:{path:relative(root,resolve(directory,'source.png')),removalResultId:'synthetic'},
       overlay:{widthPx:32,heightPx:32,transform:`matrix3d(${geometry.matrix})`,pivotCssPx:[0,0,0],placement:defaultOverlayPlacement()},frame,
@@ -104,7 +103,7 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     assert.deepEqual(leaves.filter((id:string)=>inspection.includes(id)).sort(),nonempty.sort());
     inspection.setSelection([]);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,0);
     for(const resource of prepared.data.resources){const bytes=await readFile(resolve(work.outputDirectory,'prepared',resource.path));assert.ok(bytes.length>0);}
-    assert.equal(sha256(await readFile(resolve(directory,'source.png'))),sha256(photo));
+    assert.ok((await readFile(resolve(directory,'source.png'))).equals(photo),'The native source is left unchanged.');
     await assert.rejects(()=>prepareReconstruction(work,{settings}),/overwrite/);
   }finally{await rm(directory,{recursive:true,force:true});}
 });

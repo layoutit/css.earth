@@ -15,7 +15,7 @@ The actual-source target comparison retains **99.917%** of the summed signal in 
 
 The preceding recipe limited cloud emission to the registered **ESO optical footprint**, with a 90″ inward feather. The saved selection applied to the fitted target, actual XYZ field and every lens. Original source coverage remained complete. This was an authored display extent, not a measured boundary of the Lagoon.
 
-Historical result: `1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864`. It superseded the earlier cloud results below.
+Historical result: `m8-optical-window`. It superseded the earlier cloud results below.
 
 - The refit has 442 finite supports, 650 shared compact lights and three lenses. Every lens uses the same new alpha field; the refitted interior is not byte-identical to the previous cloud.
 - Independent registered-image coverage checked against 128 × 128 × 32 XYZ field samples found **zero emitting samples outside** the optical image. Removing only the saved window from this same field restores 45,683 emitting outside samples. All 48,372 positive interior samples remain inside the footprint.
@@ -27,14 +27,14 @@ Historical result: `1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2
 
 The later [faint-signal and VISTA-footprint trial](faint-tuning.md) improves the prepared target, but central Spitzer resolution/material artifacts remain unresolved. Its separate recipe has not replaced the active cloud.
 
-The preceding local presentation was `9542641c627154f767d8fe5f745d0fb3693397b25e4f7ea78e17cbb7f9bf98fd`: only the 650 star profiles changed from solid disks to the main application's prepared soft core/halo. Its cloud, star positions and every per-lens color, relative light and angular size input remained exactly those of `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`. Sprite extent compensates the profile's decoded alpha integral. This remains a residual-derived overlay, not a new external stellar catalogue. [Presentation evidence](stellar-profile-evidence.json) records that historical output and browser checks.
+The preceding local presentation was `m8-stellar-profile`: only the 650 star profiles changed from solid disks to the main application's prepared soft core/halo. Its cloud, star positions and every per-lens color, relative light and angular size input remained exactly those of `m8-registered-star-union`. Sprite extent compensates the profile's decoded alpha integral. This remains a residual-derived overlay, not a new external stellar catalogue. [Presentation evidence](stellar-profile-evidence.json) records that historical output and browser checks.
 
 
 The selected optical, near-infrared and mid-infrared images now have verified native star separation and a completed shared 3D cloud. The geometry uses a paper-guided local PDR interpretation with explicitly authored depth across the wider field. It is relative display emission, not recovered gas or dust density.
 
 ## Previous processing · 2026-09-13
 
-Historical result: `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`.
+Historical result: `m8-registered-star-union`.
 
 - Three full native lenses: ESO optical (4000 × 2679), VISTA (4000 × 2202), and [Spitzer IRAC/MIPS](https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula) (1757 × 1417). Their unchanged source footprints share a north-up 129′ frame.
 - Held-out relative star RMS: VISTA 0.758″ and Spitzer approximately 1.00″, across all four common-footprint quadrants. Absolute sky calibration still relies on publisher astrometry.
@@ -47,7 +47,7 @@ Historical result: `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b89
 
 [Processing evidence](processing-evidence.json) binds the result and native checks. [Physical sources](physical-sources.json) pin seven complete primary-paper PDFs and retain 37 published molecular velocity pointings, with missing errors and corrected telescope positions explicit. [Method and source assessment](physical-structure.md) explains why the local PDR interpretation was selected.
 
-The earlier per-lens alpha integration result `4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482` was byte-equivalent to inspected result `60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1`. The subsequent star corrections also preserve all 3,464 cloud bank resources (13,161,734 bytes), numerical field, geometry, alpha, source panels and metrics. The original front/oblique/side receipt and screenshots remain unchanged in `output/m8-reconstruction/browser-final/`; their cloud assessment still applies. Stellar selection and aperture ownership changed, so current star evidence comes from the fresh `output/nebula-processing/m8-stars-union-browser/` inspection, not those historical captures.
+The earlier per-lens alpha integration result `m8-integration-replay` was byte-equivalent to inspected result `m8-bounded-refinement`. The subsequent star corrections also preserve all 3,464 cloud bank resources (13,161,734 bytes), numerical field, geometry, alpha, source panels and metrics. The original front/oblique/side receipt and screenshots remain unchanged in `output/m8-reconstruction/browser-final/`; their cloud assessment still applies. Stellar selection and aperture ownership changed, so current star evidence comes from the fresh `output/nebula-processing/m8-stars-union-browser/` inspection, not those historical captures.
 
 The missing-interior-star investigation found two preparation causes. A 6,000 sharp-peak cutoff discarded broad bright residual sources before aperture ranking; removing it raised central-region selection from 68 to 117 lights. An optical-only catalogue still omitted bright VISTA sources. The registered union raises that same region to 158 lights, with 131 positive optical and 145 positive VISTA appearances. Of the 100 brightest independently measured VISTA core residual maxima, 83 now have a selected point within 3″, versus 10 before the union. This is a coverage diagnostic, not a stellar identification or completeness estimate. Native optical/VISTA crops and exact detector positions verify the two highlighted infrared restorations. The 15 targeted tests pass; removing the early-cutoff fix, union, deduplication or exposure normalization causes its corresponding regression to fail.
 
@@ -85,7 +85,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 ## Registration and reproducibility
 
-- `observations.json` pins each downloaded TIFF by SHA-256 and actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
+- `observations.json` names each downloaded TIFF by URL with its actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
 - The common frame contains all native source corners with a six-percent angular margin. No frame was cropped to make the photographs agree.
 - `observation-structures.json` configures the shared wavelet structure extraction.
 - `compiler.json` configures the generic relative-emission compiler. No Helix joint-fit recipe or planetary expansion prior is reused.
@@ -95,7 +95,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 The optical mosaic is wider than the VISTA strip. Missing infrared support at the northern/southern optical margins is no-data, not absent gas. The VISTA caption gives J/H/Ks; its filter table and AVM incorrectly identify H as H-alpha. The recipe documents the discrepancy rather than treating this as infrared H-alpha.
 
-The source packet was verified against both image SHA-256 values and decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
+The source packet was verified against both images' decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
 
 Without spectroscopy or an independent volume, the compiler’s depth is a conditional diffuse prior. Compact lights are detected image features with illustrative depths; they are not a catalog of confirmed members with measured distances.
 
@@ -132,7 +132,7 @@ The dossier links five primary papers and records whether the abstract, full tex
 - [Kahle et al. (2024)](https://doi.org/10.1051/0004-6361/202349009): molecular spectra at 37 clumps and infrared/submillimetre SEDs; incomplete Hi-GAL coverage, differing beams and foreground emission matter.
 - [Singh et al. (2026)](https://doi.org/10.3847/1538-4357/ae563a): whole-nebula LVM line diagnostics and a [27-map figure set](https://doi.org/10.5281/zenodo.19165622). Preserve fibre positions, masks, inverse variances and line thresholds before qualifying numerical data; plotted figures are not native line-map inputs.
 
-The intake's six byte pins and decoded dimensions were checked with the strict observation reader. This is source qualification only: no star removal, NOX, compiler, reconstruction or bake was run for these additions.
+The intake's six sources and decoded dimensions were checked with the strict observation reader. This is source qualification only: no star removal, NOX, compiler, reconstruction or bake was run for these additions.
 
 ## Central optical detail follow-up
 
@@ -155,7 +155,7 @@ a local multi-resolution material contribution attached to supported 3D
 structures. Neither a whole-cloud Hubble texture nor repeating its patch through
 the full depth is an acceptable composite. No new NOX processing or bake ran.
 
-The subsequent app bake produced `7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6`.
+The subsequent app bake produced `m8-edge-taper`.
 All three lenses were inspected from front and oblique directions in the shared
 world: the faint image boundaries now fade softly, with no browser/HTTP errors.
 See the [current app record](../../../../src/objects/m8/README.md).

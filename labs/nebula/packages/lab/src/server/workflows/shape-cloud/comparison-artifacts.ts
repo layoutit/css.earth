@@ -1,9 +1,8 @@
-/** Prepared grayscale diagnostics; runtime selects verified images, never computes their pixels. */
+/** Prepared grayscale diagnostics; runtime selects prepared images, never computes their pixels. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { relative } from 'node:path';
 import sharp from 'sharp';
 import { containedPath } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
 import { compareShapeSignal, comparisonPixels, type NeutralProjection } from '@cssearth/nebula-reconstruction/evidence/shape-comparison';
 import { comparisonChannels, comparisonGains } from '../../../features/shape-cloud/comparison-result.ts';
 import type { ShapeCloudComparison, ShapeCloudComparisonLevel, ShapeCloudPin } from '../../../features/shape-cloud/types.ts';
@@ -27,7 +26,7 @@ export async function writeShapeComparison(input: {
         .png({ compressionLevel: 3 }).toBuffer();
       input.signal?.throwIfAborted();
       const path = containedPath(directory, `${channel}-${gain}.png`);
-      await writeFile(path, bytes); pins.set(channel, { path: relative(input.root, path), sha256: sha256(bytes) });
+      await writeFile(path, bytes); pins.set(channel, { path: relative(input.root, path) });
     }));
     levels.push({ gain, source: pins.get('source')!, model: pins.get('model')!, sourceEdges: pins.get('sourceEdges')!,
       modelEdges: pins.get('modelEdges')!, difference: pins.get('difference')! });

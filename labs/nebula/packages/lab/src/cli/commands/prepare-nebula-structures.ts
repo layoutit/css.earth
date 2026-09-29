@@ -1,7 +1,5 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 /** Explicit offline first stage of the nebula compiler. No volume or UI-side processing. */
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { nativeStarless } from '../../server/workflows/emission-inference/native-source.ts';
@@ -14,20 +12,19 @@ const record = (value: unknown): Record<string, unknown> => {
 };
 const text = (value: unknown): string => { if (typeof value !== 'string' || !value) throw new TypeError('Recipe text required.'); return value; };
 const number = (value: unknown): number => { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError('Finite recipe number required.'); return value; };
-const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const json = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 const [recipePath, extra] = process.argv.slice(2);
 if (!recipePath || extra) throw new TypeError('Usage: prepare-nebula-structures <recipe.json>');
-const recipeBytes = await readFile(recipePath), recipe = record(JSON.parse(recipeBytes.toString()));
+const recipe = record(JSON.parse(await readFile(recipePath, 'utf8')));
 if (recipe.schema !== 'cssearth-nebula-structure-recipe@1') throw new TypeError('Unsupported structure recipe.');
 const id = text(recipe.id), width = number(recipe.workingWidth);
 if (!/^[a-z0-9-]+$/.test(id) || !Number.isInteger(width) || width < 64 || width > 1024) throw new TypeError('Bounded id/working raster required.');
-const sourceRecipePath = text(recipe.sourceRecipe), sourceRecipeBytes = await readFile(sourceRecipePath);
-const sourceRecipe = record(JSON.parse(sourceRecipeBytes.toString())), source = record(sourceRecipe.source);
+const sourceRecipePath = text(recipe.sourceRecipe), sourceRecipe = record(JSON.parse(await readFile(sourceRecipePath, 'utf8')));
+const source = record(sourceRecipe.source);
 const removal = record(sourceRecipe.nativeRemoval), model = record(removal.model);
-const sourceSha = text(source.sha256), sourceUrl = text(source.url), nativeWidth = number(source.width), nativeHeight = number(source.height);
-if (!/^[a-f0-9]{64}$/.test(sourceSha) || !/^https:\/\//.test(sourceUrl)) throw new TypeError('Pinned HTTPS source required.');
-const cache = resolve('.local/nebula-lab/planetary'), originalPath = resolve(cache, `${sourceSha}.jpg`);
+const sourceUrl = text(source.url), nativeWidth = number(source.width), nativeHeight = number(source.height);
+if (!/^https:\/\//.test(sourceUrl)) throw new TypeError(`${sourceRecipePath}: source.url must be HTTPS, not ${sourceUrl}.`);
+const cache = resolve('.local/nebula-lab/planetary'), originalPath = resolve(cache, `${id}-original.jpg`);
 await mkdir(cache, { recursive: true });
 let original: Buffer;
 try { original = await readFile(originalPath); }
@@ -36,10 +33,11 @@ catch (error) {
   const response = await fetch(sourceUrl);
   if (!response.ok) throw new Error(`Source acquisition failed: ${response.status}`);
   original = Buffer.from(await response.arrayBuffer());
-  if (sha(original) !== sourceSha) throw new Error('Source hash differs.');
+  const acquired = await sharp(original).metadata();
+  if (acquired.width !== nativeWidth || acquired.height !== nativeHeight)
+    throw new Error(`${sourceUrl} is ${acquired.width}×${acquired.height}, not the ${nativeWidth}×${nativeHeight} source in ${sourceRecipePath}.`);
   await writeFile(originalPath, original);
 }
-if (sha(original) !== sourceSha) throw new Error('Source hash differs.');
 const separated = await nativeStarless(original, [nativeWidth, nativeHeight], {
   directory: text(removal.directory),
   model: { path: text(model.path) },
@@ -64,7 +62,7 @@ async function field(file: string, values: Float32Array) {
   const bytes = Buffer.alloc(values.length * 4);
   for (let i = 0; i < values.length; i++) bytes.writeFloatLE(values[i]!, i * 4);
   await writeFile(resolve(staging, file), bytes);
-  return { file, sha256: sha(bytes), values: values.length };
+  return { file, values: values.length };
 }
 await raster('source.png', image);
 const palette = { diffuse: [.65, .3, .85], arcs: [.1, .9, 1], knots: [1, .8, .15], unassigned: [1, .18, .15] };
@@ -105,9 +103,7 @@ const panels = [
 ];
 await json(resolve(staging, 'structure-map.json'), { schema: 'cssearth-nebula-structure-map@1', dimensions, panels,
   metrics: result.metrics, fields, directionField, seconds: (performance.now() - started) / 1000,
-  provenance: { recipePath, recipeSha256: sha(recipeBytes), sourceRecipePath, sourceRecipeSha256: sha(sourceRecipeBytes),
-    source, nativeRemoval: separated.provenance, sourceImageSha256: sha(image), settings,
-    implementation: (await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-nebula-structures.ts'])).map(pin => ({ file: pin.path, sha256: pin.sha256 })) },
+  provenance: { recipePath, sourceRecipePath, source, nativeRemoval: separated.provenance, sourceImage: 'source.png', settings },
   limitations: ['Display RGB, not calibrated emission-line flux or gas density.', 'This stage infers no depth and removes no additional compact sources.',
     'The observed field is preserved; the full astronomical halo extends beyond this photograph.',
     'Exact additive accounting does not establish a correct morphological decomposition.'],

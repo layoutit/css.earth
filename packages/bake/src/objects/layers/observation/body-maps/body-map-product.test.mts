@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
+import { combineUnderPolicy, assertProductsCombinable, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
 
 const salt: MeasurementDefinition = { quantity: 'equivalent width', units: 'Angstrom', timeDependence: 'surface-property', source: 'Trumbo, Brown & Hand 2019, doi:10.1126/sciadv.aaw7123',
   method: { kind: 'equivalent-width', bandAngstrom: [3500, 5300], continuum: { model: 'polynomial', order: 3, anchorsAngstrom: [[3100, 3500], [5300, 5500]] }, reference: 'mean of spectra without the band' } };
@@ -18,9 +18,9 @@ const map = (definition: MeasurementDefinition, observations: BodyMapObservation
 
 test('the same quantity and units are not the same measurement', () => {
   const otherWindow = { ...salt, method: { ...salt.method, bandAngstrom: [4000, 5000] } };
-  assert.notEqual(definitionDigest(salt), definitionDigest(otherWindow));
-  assert.equal(definitionDigest(salt), definitionDigest({ ...salt, source: 'a corrected citation' }), 'a citation is not part of what was measured');
   const policy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } } as const;
+  // A citation is not part of what was measured.
+  assertProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map({ ...salt, source: 'a corrected citation' }, [seen('b', 2457001, 0.1)])], policy);
   assert.throws(() => assertProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map(otherWindow, [seen('b', 2457001, 0.1)])], policy), /not the same measurement/u);
   assert.throws(() => assertProductsCombinable([map(salt, [seen('a', 2457000, 0.1)]), map(heat, [seen('b', 2457001, 0.1)])], policy), /not the same measurement/u);
 });

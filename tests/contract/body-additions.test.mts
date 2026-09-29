@@ -29,9 +29,10 @@ test('context prepared resources stay external until their bank is selected', ()
   assert.doesNotMatch(source, /prepared\/\*\.json|CONTEXT_OBJECT_PREPARED_JSON/u, 'No prepared JSON enters the runtime module graph.');
 });
 
-test('the build reads four named prepared files per context object, never a catalogue bank', () => {
+test('the build reads three named prepared files and the source manifest per context object, never a catalogue bank', () => {
   const source = contextObjectJsonModule([{ id: 'm33' }]);
-  assert.match(source, /'\.\.\/src\/objects\/m33\/prepared\/\{datasets,lenses,presentation,provenance\}\.json'/u);
+  assert.match(source, /'\.\.\/src\/objects\/m33\/prepared\/\{datasets,lenses,presentation\}\.json'/u);
+  assert.match(source, /'\.\.\/src\/objects\/m33\/source\/manifest\.json'/u);
   assert.doesNotMatch(source, /prepared\/\*\.json/u);
 });
 
@@ -82,7 +83,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   git('config', 'user.email', 'test@example.invalid');
   git('config', 'commit.gpgsign', 'false');
   git('config', 'core.hooksPath', '/dev/null');
-  await write(resolve(root, '.gitignore'), '/site/prepared-object-discovery.json\n/site/prepared-object-catalog.mts\n/site/prepared-object-distances.json\n/site/prepared-focus-objects.json\n/site/prepared-overview-objects.json\n/site/prepared-context-objects.mts\n/packages/astronomy/src/data/generated/\n');
+  await write(resolve(root, '.gitignore'), '/site/prepared-catalogue.mjs\n/site/prepared-overview-objects.json\n/site/prepared-context-objects.mts\n/packages/astronomy/src/data/generated/\n');
   await mkdir(resolve(root, 'packages/astronomy/data/fixtures'), { recursive: true });
   await addBody(root, 'sun', 'star');
   await addBody(root, 'existing-body', 'asteroid');

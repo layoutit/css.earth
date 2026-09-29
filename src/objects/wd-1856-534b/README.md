@@ -27,4 +27,4 @@ See the [system evidence](../wd-1856-534/evidence/README.md).
 - The ascending node on the sky is unmeasured and set to celestial north.
 - JWST programmes 9033 and 9157 (MIRI phase curve and IFU) are partly still exclusive and unpublished; see the ledger.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

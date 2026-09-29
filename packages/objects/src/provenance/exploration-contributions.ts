@@ -1,8 +1,8 @@
 import { INPUT_ROLES, productInputRoles } from './product-input-evidence.js';
 import type { InputRole } from './product-input-evidence.js';
 import { sourceEnum } from '../sources/catalog.js';
-import { validateObjectProvenance } from './object-provenance.js';
-import type { ProvenanceDocument } from './object-provenance.js';
+import { checkLineage } from './object-lineage.js';
+import type { ObjectLineage } from './object-lineage.js';
 import { explorationArray, explorationId, explorationRecord, explorationText, parseCapture, parseCaptureObservation, validateCapture } from './exploration-catalog.js';
 import type { CaptureAttribution, CaptureObservation, ExplorationCatalog } from './exploration-catalog.js';
 import { objectDataset, type DatasetHost, type DatasetRoutes } from './dataset-routes.js';
@@ -19,7 +19,7 @@ export interface ContributionGraph {
   readonly byMission: Readonly<Record<string, readonly number[]>>;
   readonly byFacility: Readonly<Record<string, readonly number[]>>;
 }
-export interface ContributionObject { readonly id: string; readonly name: string; readonly route: string; readonly controls: readonly { readonly id: string; readonly label: string }[]; readonly provenance: ProvenanceDocument;
+export interface ContributionObject { readonly id: string; readonly name: string; readonly route: string; readonly controls: readonly { readonly id: string; readonly label: string }[]; readonly lineage: ObjectLineage;
   /** Set for a volume attached to a body: its lenses are reached through these datasets of the body. */
   readonly hostedBy?: { readonly objectId: string; readonly name: string; readonly route: string; readonly datasets: Readonly<Record<string, { readonly lensId: string; readonly label: string }>> }; }
 export const datasetKey = (objectId: string, lensId: string) => `${objectId}/${lensId}`;
@@ -42,20 +42,19 @@ export function compileContributions(objects: readonly ContributionObject[], cat
   for (const object of objects) {
     if (objectIds.has(object.id)) throw new TypeError('Duplicate contribution object.');
     objectIds.add(object.id);
-    const document = validateObjectProvenance(object.provenance, object.id);
-    for (const product of document.products) if (product.observationAttribution === undefined) throw new TypeError(`Undeclared observation attribution: ${object.id}/${product.id}.`);
-    const sources = new Map(document.sources.map(source => [source.id, source]));
     const lensIds = new Set(object.controls.map(control => control.id));
     if (lensIds.size !== object.controls.length) throw new TypeError('Duplicate prepared dataset ID.');
+    if (object.lineage.objectId !== object.id) throw new TypeError(`Lineage belongs to another object: ${object.id}.`);
+    const document = checkLineage(object.lineage, lensIds);
+    const sources = new Map(document.sources.map(source => [source.id, source]));
     const linked = new Set<string>();
     for (const source of document.sources) if (source.capture) validateCapture(source.capture, catalog);
     for (const product of document.products) {
-      for (const lensId of product.lensIds ?? []) if (!lensIds.has(lensId)) throw new TypeError(`Unknown prepared dataset: ${object.id}/${lensId}.`);
       if (product.observationAttribution === 'none') continue;
       for (const [sourceId, roles] of productInputRoles(document, product.id, product => product.observationAttribution === 'source-lineage')) {
         for (const attribution of sources.get(sourceId)?.capture?.attributions ?? []) {
-          edges.push(Object.freeze({ objectId: object.id, productId: product.id, sourceId, roles, ...(sources.get(sourceId)?.capture?.observation ? { observation: sources.get(sourceId)!.capture!.observation } : {}), lensIds: Object.freeze([...(product.lensIds ?? [])]), attribution }));
-          for (const id of product.lensIds ?? []) linked.add(id);
+          edges.push(Object.freeze({ objectId: object.id, productId: product.id, sourceId, roles, ...(sources.get(sourceId)?.capture?.observation ? { observation: sources.get(sourceId)!.capture!.observation } : {}), lensIds: Object.freeze([...product.lensIds]), attribution }));
+          for (const id of product.lensIds) linked.add(id);
         }
       }
     }

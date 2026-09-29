@@ -507,52 +507,40 @@
   },
   "sourceIds": [
     {
-      "id": "n1644757030_1",
-      "sha256": "61d31cc9af9e4b6e88d74ea8e26d278b6dc7ad6a3819cc43f60b4b3b03ed915f"
+      "id": "n1644757030_1"
     },
     {
-      "id": "n1644757030_1-label",
-      "sha256": "fe452c6fa7fe2d3027c38de50b6ee8a7ab511d64ac947bd9ed057cc3c426dfa6"
+      "id": "n1644757030_1-label"
     },
     {
-      "id": "n1644756997_1",
-      "sha256": "103e5fe61f63b2d2bf7b255fc95656d49a66fe0507643c76550a790c1440d1ca"
+      "id": "n1644756997_1"
     },
     {
-      "id": "n1644756997_1-label",
-      "sha256": "fa97e916303126c0bc41fd9c2e81b4f5f9cd900cdb684b2398fcf9bfc3e473de"
+      "id": "n1644756997_1-label"
     },
     {
-      "id": "n1644756505_1",
-      "sha256": "758ab961ee2f2d857f840a9aaf0cbfdb35d0e2cd14b7d7149761b9e393b87936"
+      "id": "n1644756505_1"
     },
     {
-      "id": "n1644756505_1-label",
-      "sha256": "3a2c79b2dbadd0307326f5669f54cb0afc55cdec4fbdb25f59e8cb02974f6f98"
+      "id": "n1644756505_1-label"
     },
     {
-      "id": "N1644754728_1_CALIB.IMG",
-      "sha256": "47c22f207d67f5b18843624f874d70c3f7bf7810d3eda1e74202ba7aa435a67f"
+      "id": "N1644754728_1_CALIB.IMG"
     },
     {
-      "id": "N1644754728_1_CALIB.LBL",
-      "sha256": "7a1024b9e03c05d1c4c8b036054418ed1b478eae35fd1f6e121acc83dccf2eae"
+      "id": "N1644754728_1_CALIB.LBL"
     },
     {
-      "id": "N1644755236_1_CALIB.IMG",
-      "sha256": "2fb2859fe795621379451fe8943006b74a56c12fb27cc4a7b994bd6dbb244938"
+      "id": "N1644755236_1_CALIB.IMG"
     },
     {
-      "id": "N1644755236_1_CALIB.LBL",
-      "sha256": "5d8df2c116bf57a5147cd0a08cce70061da3de73970d1b86dda3946eaf59e720"
+      "id": "N1644755236_1_CALIB.LBL"
     },
     {
-      "id": "N1644754662_1_CALIB.IMG",
-      "sha256": "34eba089e34a07be6127bbd4573931bf5af1266b5fbe0c4e43687cca8acd65d2"
+      "id": "N1644754662_1_CALIB.IMG"
     },
     {
-      "id": "N1644754662_1_CALIB.LBL",
-      "sha256": "0b316d6fce4db4e65a71ab2485fd855efe3d4b26a845e19d6e2babb2398d0815"
+      "id": "N1644754662_1_CALIB.LBL"
     }
   ],
   "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D."

@@ -2,7 +2,7 @@
 No product projection/intersection code is imported. Source arrays are compact;
 triangles are evaluated in bounded chunks, including Bennu's 3.37M faces.
 """
-import json, hashlib, gzip, sys
+import json, gzip, sys
 from pathlib import Path
 import numpy as np
 
@@ -13,8 +13,8 @@ def read_mesh(id):
  p=ROOT/f'src/objects/{id}/source'
  cfg=json.loads((p/'preparation/terrestrial.json').read_text())
  spec=cfg['geometry']['radialTerrain']; path=p/spec['path']; profile=spec['grid']
- with path.open('rb') as f: sha=hashlib.file_digest(f,'sha256').hexdigest()
- entry=next(x for x in json.loads((p/'manifest.json').read_text())['inputs'] if x['path']==spec['path'])
+ if not any(x['path']==spec['path'] for x in json.loads((p/'manifest.json').read_text())['inputs']):
+  raise SystemExit(f"{id}: {spec['path']} (geometry.radialTerrain.path) is not a manifest input")
  if spec['format']=='pds-vertex-facet':
   n=profile['expectedVertices']; v=np.loadtxt(path,skiprows=1,max_rows=n,usecols=(1,2,3));f=np.loadtxt(path,skiprows=n+1,usecols=(1,2,3),dtype=np.int32)-1
  else:
@@ -26,7 +26,7 @@ def read_mesh(id):
     elif line.startswith('f '):f[it]=[int(x.split('/')[0])-1 for x in line.split()[1:4]];it+=1
   assert iv==len(v) and it==len(f)
  assert len(f)==profile['expectedFaces']; v*=profile['metersPerUnit']
- return v,f,cfg,sha
+ return v,f,cfg
 
 def closest(v,f,p):
  best=None
@@ -60,7 +60,7 @@ def main():
  selected=set(sys.argv[1:] or [x['id'] for x in fixtures]); results=[]
  for fixture in fixtures:
   if fixture['id'] not in selected: continue
-  id=fixture['id'];v,f,cfg,sha=read_mesh(id)
+  id=fixture['id'];v,f,cfg=read_mesh(id)
   policy=cfg['raster']['scientific'][0];query=np.array(fixture['checks'][0]['query']);ray=hits(v,f,query/np.linalg.norm(query))
   assert abs(ray[0][0]*policy['valueTransform']['scale']+policy['valueTransform']['offset']-fixture['oldFirstRayHeight'])<1e-7
   if 'oldRadialGrid' in fixture:

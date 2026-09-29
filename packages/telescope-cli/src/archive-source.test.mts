@@ -4,7 +4,6 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { gzipSync } from 'node:zlib';
-import { sha256 } from '@cssearth/core/node';
 import { CADC_TAP } from './archives/gemini/cadc.mts';
 import { TAP as CHANDRA_TAP, obsidDirectory, type ChandraObservation } from './archives/chandra/archive.mts';
 import { SEARCH as SPITZER_SEARCH } from './archives/spitzer/archive.mts';
@@ -26,7 +25,7 @@ const fits = Buffer.from(`${'SIMPLE  =                    T'.padEnd(80)}${'END'.
 const fileResponse = (bytes: Buffer, type = 'application/fits') => new Response(new Uint8Array(bytes), { headers: { 'content-type': type } });
 
 async function saved(root: string, service: string, source: Record<string, unknown>, rows: unknown, maximum = 4096) {
-  const evidence = Buffer.from(`${JSON.stringify({ source: service, request: 'fixture', rows }, null, 2)}\n`), pin = sha256(evidence);
+  const evidence = Buffer.from(`${JSON.stringify({ source: service, request: 'fixture', rows }, null, 2)}\n`), pin = 'example.org-20260929000000000';
   const directory = resolve(root, 'archive-source-evidence'); await mkdir(directory);
   await writeFile(resolve(directory, `${pin}.json`), evidence);
   const exploration = resolve(root, 'explore.json');
@@ -45,7 +44,7 @@ test('source transfer enforces the cap while streaming and rejects an HTML succe
       async () => new Response('<html>error</html>', { headers: { 'content-type': 'text/html' } })), /original file bytes/u);
     const result = await downloadSource({ url: 'https://example.org/a.fits', name: 'a.fits', bytes: fits.length },
       resolve(root, 'a.fits'), 4096, async () => fileResponse(fits));
-    assert.equal(result.sha256, sha256(fits));
+    assert.deepEqual(result, { bytes: fits.length });
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -96,9 +95,9 @@ test('resume refuses changed archive metadata or altered completed bytes', async
       async input => String(input).endsWith('b.fits') ? new Response('unavailable', { status: 503 }) : fileResponse(fits)));
     await assert.rejects(deliverSource(exploration, destination, snapshot, { ...selection, current: { revision: '2' } },
       async () => { throw new Error('Should not download.'); }, true), /changed archive metadata/u);
-    await writeFile(`${destination}.partial/a.fits`, Buffer.from(fits).fill(1, 20, 21));
+    await writeFile(`${destination}.partial/a.fits`, Buffer.concat([fits, Buffer.from([1])]));
     await assert.rejects(deliverSource(exploration, destination, snapshot, selection,
-      async () => { throw new Error('Should not download.'); }, true), /Completed partial file a\.fits changed/u);
+      async () => { throw new Error('Should not download.'); }, true), /Completed partial file a\.fits is \d+ bytes/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -109,19 +108,19 @@ test('a Chandra gzip response is pinned as compressed archive bytes', async () =
       bytes: compressed.length, archiveEncoding: 'gzip' as const };
     const response = async () => new Response(new Uint8Array(compressed), { headers: { 'content-encoding': 'x-gzip', 'content-type': 'image/x-fits' } });
     const result = await downloadSource(file, resolve(root, file.name), compressed.length, response);
-    assert.equal(result.sha256, sha256(compressed));
+    assert.deepEqual(result, { bytes: compressed.length });
     assert.deepEqual(await readFile(resolve(root, file.name)), compressed);
     await assert.rejects(downloadSource({ ...file, name: 'b.fits.gz', archiveEncoding: undefined }, resolve(root, 'b.fits.gz'), 4096,
       response), /original file bytes/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('Gemini revalidates one CADC artifact, preserves original FITS and refuses changed MD5', async () => {
+test('Gemini revalidates one CADC artifact, preserves original FITS and refuses a changed size', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'archive-gemini-'));
   const row = { observationID: 'GN-1-001', type: 'OBJECT', intent: 'science', instrument_name: 'NIRI', target_name: 'HR8799',
-    uri: 'gemini:GEMINI/N20200101S0001.fits', contentLength: String(fits.length), contentChecksum: 'md5:1fb6f27081905bb9d7d49ffae3c8d89a',
+    uri: 'gemini:GEMINI/N20200101S0001.fits', contentLength: String(fits.length),
     energy_bandpassName: 'K', time_exposure: '30', time_bounds_lower: '58849', dataRelease: '2021-01-01T00:00:00.000' };
-  const source = { name: 'N20200101S0001.fits', uri: row.uri, bytes: fits.length, md5: row.contentChecksum.slice(4),
+  const source = { name: 'N20200101S0001.fits', uri: row.uri, bytes: fits.length,
     targetName: 'HR8799', telescope: 'Gemini North', instrument: 'NIRI', observation: row.observationID, dataRelease: row.dataRelease };
   try {
     const exploration = await saved(root, CADC_TAP, source, [row]);
@@ -129,7 +128,7 @@ test('Gemini revalidates one CADC artifact, preserves original FITS and refuses 
     assert.equal(result.status, 'unresolved'); assert.deepEqual(await readFile(result.files[0]!), fits);
     assert.equal((await openFitsSource(result.receipt))?.file, result.files[0]);
     assert.equal((await readSourceQuestion(resolve(root,'out'))).archiveTargetName,'HR8799');
-    await assert.rejects(fetchGeminiSource(exploration, 1, resolve(root, 'changed'), async () => [{ ...row, contentChecksum: 'md5:00000000000000000000000000000000' }]), /changed the Gemini source/u);
+    await assert.rejects(fetchGeminiSource(exploration, 1, resolve(root, 'changed'), async () => [{ ...row, contentLength: String(fits.length + 2880) }]), /changed the Gemini source/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -159,7 +158,7 @@ test('OPUS selects a native raw image with its label and support file, rejecting
     assert.equal((await readFile(resolve(root, 'staged/holdings/volumes/COISS/data/PREFIX.FMT'))).toString(), 'native');
     assert.notEqual(await readFile(resolve(root, 'staged/holdings/volumes/COISS/data/N1.LBL'), 'utf8'), '');
     await writeFile(result.files[0]!, 'changed');
-    await assert.rejects(openPdsSource(result.receipt), /pins changed/u);
+    await assert.rejects(openPdsSource(result.receipt), /no longer its recorded size/u);
     const unsafe = await fetchOpusSource(exploration, 1, resolve(root, 'unsafe'), async () => listing,
       async input => fileResponse(Buffer.from(String(input).endsWith('.LBL')
         ? 'PDS_VERSION_ID = PDS3\n^STRUCTURE = "../../not-pinned.fmt"\nEND\n' : 'native'), 'application/octet-stream'));
@@ -220,15 +219,15 @@ test('an authentic Chandra ACIS event source enters the existing event operation
     assert.ok([0, 3, 4].includes(await main(['family-assess', request, fetched.receipt, '--out', assessment, '--json'],
       root, value => output.push(value), io)));
     const assessed = JSON.parse(await readFile(resolve(assessment, 'family-request.json'), 'utf8'));
-    assert.equal(assessed.descriptor.sha256, sha256(await readFile(fetched.descriptor!)));
+    assert.equal(assessed.descriptor.bytes, (await readFile(fetched.descriptor!)).length);
     const run = await executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'inspect'));
     assert.equal(JSON.parse(await readFile(run.product, 'utf8')).rows, 62471);
     await writeFile(fetched.files[0]!, 'changed');
     const changedCode = await main(['family-assess', request, fetched.receipt, '--out', resolve(root, 'changed-assessment'), '--json'],
       root, value => output.push(value), io);
     assert.equal(changedCode, 1, output.at(-1) ?? 'No CLI error output');
-    assert.match(JSON.parse(output.at(-1)!).error, /pins changed/u);
-    await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /pins changed/u);
+    assert.match(JSON.parse(output.at(-1)!).error, /no longer its recorded size/u);
+    await assert.rejects(executeFamilyOperation(fetched.descriptor!, { operationId: 'event-inspect' }, resolve(root, 'changed')), /no longer its recorded size/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

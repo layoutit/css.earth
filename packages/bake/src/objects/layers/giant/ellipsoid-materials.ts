@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { isArray, shape, array, number, optional } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
 import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedLensMaterial } from './material-contract.ts';
@@ -132,7 +131,7 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
   const config = parseEllipsoidMaterialRecipe(input);
   if(Boolean(config.radialLayer)!==Boolean(radialLayer)||radialLayer&&(!Buffer.isBuffer(radialLayer.data)||radialLayer.data.length!==radialLayer.size*radialLayer.size*4))throw new TypeError('Prepared radial input differs from material capability.');
   const assets: MaterialAsset[]=[],lenses: Record<string, PreparedLensMaterial>={};
-  const publish=async(filename: string,frame: Buffer,width: number,height: number,encoding: WebpOptions,optimization?: 'display-lossless' | 'q75')=>{if(!safeName(filename))throw new TypeError('Invalid material output.');const data=await encodeMaterial(frame,width,height,encoding,optimization);const record={filename,width,height,bytes:data.length,sha256:sha256(data),data};assets.push(record);return record;};
+  const publish=async(filename: string,frame: Buffer,width: number,height: number,encoding: WebpOptions,optimization?: 'display-lossless' | 'q75')=>{if(!safeName(filename))throw new TypeError('Invalid material output.');const data=await encodeMaterial(frame,width,height,encoding,optimization);const record={filename,width,height,bytes:data.length,data};assets.push(record);return record;};
   for(const lens of config.lenses){
     const inputMap=maps.get(lens.id);if(!inputMap)throw new Error(`Material lens ${lens.id} has no observed map.`);
     const map=shape({atmosphereColor:optional(array(number)),coverage:optional(shape({baselineColor:array(number)}))})(inputMap);
@@ -144,7 +143,7 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
       const asset=await publish(product.filename,prepared.rgba,product.size,product.size,product.encoding,product.optimization);
       result[product.shadowless?'shadowless':'fixed'][product.density]={asset,leaf:prepared.leaf};
     }
-    const bank=config.bank,rows=[],presentations=[],frameRawSha256=[],frameForegroundRingTexelCounts=[],frameRingShadowTexelCounts=[],stride=bank.frameSize+bank.gutter*2,width=stride*bank.columns,height=stride;
+    const bank=config.bank,rows=[],presentations=[],frameForegroundRingTexelCounts=[],frameRingShadowTexelCounts=[],stride=bank.frameSize+bank.gutter*2,width=stride*bank.columns,height=stride;
     for(let rowIndex=0;rowIndex<bank.frames/bank.columns;rowIndex++){
       const row=Buffer.alloc(width*height*4),filename=lens.rowOutput.replace('{row}',String(rowIndex).padStart(2,'0'));
       for(let column=0;column<bank.columns;column++){
@@ -152,14 +151,14 @@ export async function prepareEllipsoidMaterials({config: input,maps,radialLayer,
         const state={scenePitchDegrees,systemObliquityDegrees:bank.systemObliquity?bank.systemObliquity.degrees*scenePitchDegrees/bank.systemObliquity.referencePitch:config.fixedState.systemObliquityDegrees};
         if (lens.bankBaseFromCoverage && !map.coverage) throw new TypeError('Material coverage base colour is unavailable.');
         const frame=rasterEllipsoidMaterial(config.raster,{size:bank.frameSize,state,palette:{atmosphere,base:lens.bankBaseFromCoverage?map.coverage?.baselineColor:lens.fixedBase},radialLayer,textureUrl:`${config.urlPrefix}${filename}`});
-        frameRawSha256.push(sha256(frame.rgba));frameForegroundRingTexelCounts.push(frame.foregroundRingTexelCount);frameRingShadowTexelCounts.push(frame.ringShadowTexelCount);
+        frameForegroundRingTexelCounts.push(frame.foregroundRingTexelCount);frameRingShadowTexelCounts.push(frame.ringShadowTexelCount);
         const frameX=column*stride+bank.gutter;writeMaterialAtlasTile({output:row,outputWidth:width,source:frame.rgba,sourceSize:bank.frameSize,frameX,frameY:bank.gutter,gutter:bank.gutter});
         const scale=bank.presentationSize/bank.frameSize;
         presentations.push({frameIndex,rowIndex,...(bank.presentationAssetUrl?{assetUrl:`${config.urlPrefix}${filename}`}:{scenePitchDegrees:Number(scenePitchDegrees.toFixed(6))}),backgroundPosition:`${-frameX*scale}px ${-bank.gutter*scale}px`,backgroundSize:`${width*scale}px ${height*scale}px`});
       }
       rows.push(await publish(filename,row,width,height,bank.encoding,bank.optimization));
     }
-    lenses[lens.id]={...result,bank:{rows,presentations,frameRawSha256,frameForegroundRingTexelCounts,frameRingShadowTexelCounts,...(bank.optimization==='q75'?{encoding:PREPARED_Q75_WEBP_ENCODING}:{})}};
+    lenses[lens.id]={...result,bank:{rows,presentations,frameForegroundRingTexelCounts,frameRingShadowTexelCounts,...(bank.optimization==='q75'?{encoding:PREPARED_Q75_WEBP_ENCODING}:{})}};
   }
   if(write){if(!publicDirectory)throw new TypeError('Material output directory is required for writing.');await mkdir(publicDirectory,{recursive:true});for(const asset of assets)await writeFile(resolve(publicDirectory,asset.filename),asset.data);}
   return {schema:'cssearth-prepared-ellipsoid-materials@1',assets,lenses};

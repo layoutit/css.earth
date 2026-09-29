@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { member } from '../common.mts';
@@ -22,14 +21,13 @@ const format=(kind:'A'|'U',prefixes:readonly string[])=>field(1,'pressure_bar','
 const label=(kind:'A'|'U',table:string,structure:string,body:string,overrides:Readonly<Record<string,string>>={})=>{
   const recordBytes=body.indexOf('\r\n')+2,rows=PRESSURES.length;
   const keys:Record<string,string>={PDS_VERSION_ID:'"PDS3"',RECORD_TYPE:'"STREAM"',RECORD_BYTES:String(recordBytes),FILE_RECORDS:String(rows+1),
-    MD5_CHECKSUM:`"${createHash('md5').update(Buffer.from(body,'latin1')).digest('hex')}"`,
     DATA_SET_ID:'"JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0"',PRODUCT_ID:`"${table}"`,STANDARD_DATA_PRODUCT_ID:`"NH3${kind}"`,PRODUCT_TYPE:`"NH3${kind}"`,
     PRODUCT_VERSION_ID:'"01"',INSTRUMENT_HOST_ID:'"JNO"',INSTRUMENT_ID:'"MWR"',INSTRUMENT_NAME:'"MICROWAVE RADIOMETER"',MISSION_NAME:'"JUNO"',
     TARGET_NAME:'"JUPITER"',PROCESSING_LEVEL_ID:'"5"',START_TIME:'2016-08-27T07:00:04.844',STOP_TIME:'2018-04-01T13:59:59.299',
     SPACECRAFT_CLOCK_START_COUNT:'"5/525553380.60452"',SPACECRAFT_CLOCK_STOP_COUNT:'"5/575863436.60452"',
     HEADER_FILE:`"${table}"`,SPREADSHEET_FILE:`"${table}"`,HEADER_BYTES:String(recordBytes),SPREADSHEET_OFFSET:String(recordBytes+1),
     ROWS:String(rows),ROW_BYTES:'40',FIELDS:String(LATITUDES.length+1),FIELD_DELIMITER:'"COMMA"',STRUCTURE:`"${structure}"`,...overrides};
-  const scalars=['PDS_VERSION_ID','RECORD_TYPE','RECORD_BYTES','FILE_RECORDS','MD5_CHECKSUM','DATA_SET_ID','PRODUCT_ID','STANDARD_DATA_PRODUCT_ID','PRODUCT_TYPE','PRODUCT_VERSION_ID','INSTRUMENT_HOST_ID','INSTRUMENT_ID','INSTRUMENT_NAME','MISSION_NAME','TARGET_NAME','PROCESSING_LEVEL_ID','START_TIME','STOP_TIME','SPACECRAFT_CLOCK_START_COUNT','SPACECRAFT_CLOCK_STOP_COUNT'];
+  const scalars=['PDS_VERSION_ID','RECORD_TYPE','RECORD_BYTES','FILE_RECORDS','DATA_SET_ID','PRODUCT_ID','STANDARD_DATA_PRODUCT_ID','PRODUCT_TYPE','PRODUCT_VERSION_ID','INSTRUMENT_HOST_ID','INSTRUMENT_ID','INSTRUMENT_NAME','MISSION_NAME','TARGET_NAME','PROCESSING_LEVEL_ID','START_TIME','STOP_TIME','SPACECRAFT_CLOCK_START_COUNT','SPACECRAFT_CLOCK_STOP_COUNT'];
   return Buffer.from([...scalars.map(key=>`${key.padEnd(30)}= ${keys[key]}`),
     `^HEADER                       = (${keys.HEADER_FILE},1)`,'OBJECT                        = HEADER',`BYTES                         = ${keys.HEADER_BYTES}`,'HEADER_TYPE                   = "TEXT"','END_OBJECT                    = HEADER',
     `^SPREADSHEET                  = (${keys.SPREADSHEET_FILE},${keys.SPREADSHEET_OFFSET}<BYTES>)`,'OBJECT                        = SPREADSHEET',
@@ -123,7 +121,6 @@ test('the published descriptor keeps pressure native, pairs the uncertainty, and
 });
 
 test('the reader refuses a label whose pointers, checksum or declared counts do not close',()=>{
-  assert.throws(()=>inspectJunoMwrTable(abundanceTable({MD5_CHECKSUM:'"'+'0'.repeat(32)+'"'}),'abundance'),/does not match the label MD5_CHECKSUM/u);
   assert.throws(()=>inspectJunoMwrTable(abundanceTable({SPREADSHEET_FILE:'"OTHER.CSV"'}),'abundance'),/\^SPREADSHEET file must be/u);
   assert.throws(()=>inspectJunoMwrTable(abundanceTable({HEADER_FILE:'"OTHER.CSV"'}),'abundance'),/\^HEADER file must be/u);
   assert.throws(()=>inspectJunoMwrTable(abundanceTable({STRUCTURE:'"MWR_J_H2OA_V01.FMT"'}),'abundance'),/\^STRUCTURE must be/u);

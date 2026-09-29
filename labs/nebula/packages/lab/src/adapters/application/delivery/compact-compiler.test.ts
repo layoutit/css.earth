@@ -20,27 +20,22 @@ test('compact compiler validates the accepted field, material correspondence and
   missing.materials.pop();
   assert.throws(() => readCompactCompiler(missing), /materials differ/);
   const identity = structuredClone(value);
-  identity.field.identity = '0'.repeat(64);
-  assert.throws(() => readCompactCompiler(identity), /identity differs/);
+  identity.field.identity = 'another-field';
+  assert.throws(() => readCompactCompiler(identity), /differs from the scene's field/);
   const shape = structuredClone(value);
   shape.expected[0].resources[0].width = 0;
   assert.throws(() => readCompactCompiler(shape), /resource/);
 });
 
-import { createHash } from 'node:crypto';
 test('compact replay cannot silently omit a retained density envelope or its colors', async () => {
   const value = await input();
   const recipe = JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8'));
-  value.field.photometricEnvelope = { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'c'.repeat(64), recipe,
+  value.field.photometricEnvelope = { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'fixture-prior', recipe,
     width: 2, height: 2, bounds: { min: [-100, -100], max: [100, 100] }, zRange: [-300, 300], gain: [1, 1, 1, 1] };
   for (const material of value.materials) material.envelopeColors = { width: 2, height: 2, rgb: Array(12).fill(255) };
-  value.provenance.modelSha256 = createHash('sha256').update(JSON.stringify(value.field)).digest('hex');
   assert.ok(readCompactCompiler(value).field.photometricEnvelope);
   const missingColors = structuredClone(value); delete missingColors.materials[0].envelopeColors;
   assert.throws(() => readCompactCompiler(missingColors), /envelope colors/);
-  const missingField = structuredClone(value); delete missingField.field.photometricEnvelope;
-  for (const material of missingField.materials) delete material.envelopeColors;
-  assert.throws(() => readCompactCompiler(missingField), /retained model hash/);
 });
 
 test('compact sampling keeps historical omission and rejects a grouped plan that differs from saved output counts', async () => {

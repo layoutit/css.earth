@@ -6,15 +6,14 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { prepareEvidenceInputs } from './provider.ts';
 import { combineEvidence } from '@cssearth/nebula-reconstruction/evidence/combine';
-import { geometrySha } from '../geometry/registered-source.ts';
 
-test('real pinned Helix inputs produce finite reproducible registered evidence with cached reuse', { skip: process.env.NEBULA_EVIDENCE_REAL !== '1' }, async () => {
+test('real Helix inputs produce finite reproducible registered evidence with cached reuse', { skip: process.env.NEBULA_EVIDENCE_REAL !== '1' }, async () => {
   const start = performance.now(), catalogue = '.local/nebula-lab/observations/helix/structures/catalogue.json';
   const inputs = await prepareEvidenceInputs(process.cwd(), catalogue), prepareMs = performance.now() - start;
   assert.equal(inputs.sources.length, 3);
   const output = resolve('.local/nebula-lab/evidence-fusion/verification', inputs.identity); await mkdir(output, { recursive: true });
   const { width, height } = inputs.grid, length = width * height;
-  const summaries = [], imageHashes: Record<string, string> = {};
+  const summaries = [], images: string[] = [];
   for (const source of inputs.sources) {
     assert.ok(source.footprint.some(v => v === 1)); assert.ok(source.footprint.some(v => v === 0));
     for (const plane of Object.values(source.channels)) { assert.equal(plane.signal.length, length); assert.ok(plane.signal.every(v => Number.isFinite(v) && v >= 0)); }
@@ -31,7 +30,7 @@ test('real pinned Helix inputs produce finite reproducible registered evidence w
     for (const [name, field] of [['union', result.union], ['agreement', result.agreement]] as const) {
       const data = Uint8Array.from(field, value => Math.round(value * 255));
       const png = await sharp(data, { raw: { width, height, channels: 1 } }).png().toBuffer();
-      await writeFile(resolve(output, `${channel}-${name}.png`), png); imageHashes[`${channel}-${name}`] = geometrySha(png);
+      await writeFile(resolve(output, `${channel}-${name}.png`), png); images.push(`${channel}-${name}.png`);
     }
     if (channel === 'ridges') for (let i = 0; i < inputs.sources.length; i++) {
       const data = Uint8Array.from(result.planes[i], value => Math.round(value * 255));
@@ -41,7 +40,7 @@ test('real pinned Helix inputs produce finite reproducible registered evidence w
   const cachedStart = performance.now(), repeated = await prepareEvidenceInputs(process.cwd(), catalogue), cachedMs = performance.now() - cachedStart;
   assert.equal(repeated.identity, inputs.identity);
   for (let i = 0; i < inputs.sources.length; i++) assert.deepEqual(repeated.sources[i].channels.ridges.signal, inputs.sources[i].channels.ridges.signal);
-  const report = { identity: inputs.identity, grid: inputs.grid, method: inputs.method, prepareMs, cachedMs, summaries, imageHashes };
+  const report = { identity: inputs.identity, grid: inputs.grid, method: inputs.method, prepareMs, cachedMs, summaries, images };
   await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify({ output, prepareMs, cachedMs, summaries }));
 });

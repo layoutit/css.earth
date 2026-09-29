@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
 import { execFileSync, spawn } from 'node:child_process';
 import { createGzip } from 'node:zlib';
@@ -52,8 +51,8 @@ interface CaptureReport {
   sourceHead: string; sourceStatus: string; viewport: { width: number; height: number }; dpr: number; mode: string;
   scenario: string; route: string; videoEnabled: boolean; invalidationTracking: boolean; domSnapshot: boolean; cache: string;
   errors: unknown[]; milestones: unknown[]; inputs: CaptureInput[]; requests: ObservedRequest[];
-  loadedFiles: Record<string, { bytes: number; sha256: string; modifiedAt: number }>; hostLoad: number[];
-  captureSha256?: string; browser?: string; gpu?: unknown; timeOrigin?: number; settings?: { name: string; value: string }[];
+  loadedFiles: Record<string, { bytes: number; modifiedAt: number }>; hostLoad: number[];
+  browser?: string; gpu?: unknown; timeOrigin?: number; settings?: { name: string; value: string }[];
   retained?: unknown; traceDataLoss?: boolean;
 }
 interface VideoFrame { file: string; epochSeconds: number | undefined; recorderMs: number; arrivalIndex: number }
@@ -68,7 +67,6 @@ const report: CaptureReport = { sourceHead: git('rev-parse', 'HEAD').trim(), sou
   errors: [], milestones: [], inputs: [], requests: [], loadedFiles: {}, hostLoad: os.loadavg() };
 await writeFile(output + '/source.patch', git('diff', 'HEAD', '--binary'));
 await writeFile(output + '/capture.mts', await readFile(import.meta.filename));
-report.captureSha256 = sha256(await readFile(import.meta.filename));
 // Start the site's existing preview entry as a separate application process.
 // The capture only needs its HTTP surface, not its server implementation.
 async function startPreview(): Promise<{ close(): Promise<void> }> {
@@ -373,13 +371,13 @@ finally {
     const file = resolve(root, process.env.CSSEARTH_CAPTURE_DIST ?? 'dist', '.' + decodeURIComponent(u.pathname) + (u.pathname.endsWith('/') ? 'index.html' : ''));
     try {
       const bytes = await readFile(file);
-      report.loadedFiles[u.pathname] = { bytes: bytes.length, sha256: sha256(bytes), modifiedAt: (await stat(file)).mtimeMs };
+      report.loadedFiles[u.pathname] = { bytes: bytes.length, modifiedAt: (await stat(file)).mtimeMs };
       if (/\.(?:js|css)$/.test(u.pathname)) {
         const saved = resolve(output, 'served', '.' + u.pathname);
         await mkdir(dirname(saved), { recursive: true }); await writeFile(saved, bytes);
       }
     }
-    catch (error) { report.errors.push(`Served file identity unavailable: ${u.pathname}: ${errorMessage(error)}`); }
+    catch (error) { report.errors.push(`Served file unavailable: ${u.pathname}: ${errorMessage(error)}`); }
   }
   await writeFile(output + '/report.json', JSON.stringify(report, null, 2));
   if (videoEnabled) await writeFile(output + '/video-frames.json', JSON.stringify(frames));

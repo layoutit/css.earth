@@ -1,11 +1,10 @@
 /** Curated target associations for WWT-hosted numeric FITS collections. They are leads, not field or detection checks. */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { TargetCatalogueEntry } from '@cssearth/telescope';
 
-export interface WwtFitsLead { readonly pick:number;readonly target:string;readonly catalog:string;readonly catalogSha256:string;
+export interface WwtFitsLead { readonly pick:number;readonly target:string;readonly catalog:string;
   readonly imageset:string;readonly bandPass:string;readonly evidence:string;readonly sourceUrl:string }
 export type WwtFitsLeads = {readonly state:'indexed';readonly matches:readonly WwtFitsLead[];readonly scope:'WWT-hosted numeric FITS tiles; target association only; science metadata unresolved'}
   | {readonly state:'unavailable';readonly reason:string};
@@ -30,11 +29,11 @@ export async function loadWwtFitsLeads(root:string,target:TargetCatalogueEntry):
       const bytes=await readFile(resolve(directory,catalog)),snapshot=requireRecord(JSON.parse(bytes.toString('utf8')),'WWT FITS catalog'),source=requireRecord(snapshot.source,'WWT FITS catalog source');
       if(snapshot.schema!=='cssearth-wwt-fits-catalog@1'||source.parser!=='wwt-data-formats@0.18.1')throw new TypeError('Unsupported WWT FITS catalog');
       const wtml=requireString(source.file,'WWT WTML filename');if(basename(wtml)!==wtml||!wtml.endsWith('.wtml'))throw new TypeError('Unsafe WWT WTML filename');
-      if(sha256(await readFile(resolve(directory,wtml)))!==requireString(source.sha256,'WWT WTML digest'))throw new Error('WWT FITS catalog WTML pin changed');
+      await readFile(resolve(directory,wtml)).catch((error:unknown)=>{throw new Error(`WWT FITS catalog ${catalog} names ${wtml}, which is not in ${directory}`,{cause:error});});
       const rows=requireArray(snapshot.imagesets,'WWT FITS imagesets').map(row=>requireRecord(row,'WWT FITS imageset')).filter(row=>row.name===imageset);
       if(rows.length!==1)throw new TypeError(`WWT FITS association names ${rows.length} imagesets: ${imageset}`);
       const row=rows[0]!;
-      matches.push({pick:matches.length+1,target:id,catalog,catalogSha256:sha256(bytes),imageset,bandPass:requireString(row.bandPass,'WWT band'),evidence,
+      matches.push({pick:matches.length+1,target:id,catalog,imageset,bandPass:requireString(row.bandPass,'WWT band'),evidence,
         sourceUrl:requireString(source.url,'WWT WTML URL')});
     }
     return {state:'indexed',matches,scope:'WWT-hosted numeric FITS tiles; target association only; science metadata unresolved'};
@@ -53,7 +52,7 @@ export async function resolveWwtFitsLead(root:string,explorationPath:string,pick
   const fresh=await loadWwtFitsLeads(root,{id:requireString(saved.target,'target'),name:requireString(saved.target,'target'),aliases:[]});
   if(fresh.state!=='indexed')throw new Error(`WWT FITS associations unavailable: ${fresh.reason}`);
   const current=fresh.matches.find(row=>row.catalog===selected.catalog&&row.imageset===selected.imageset);
-  if(!current||current.target!==selected.target||current.catalogSha256!==selected.catalogSha256||current.evidence!==selected.evidence||current.sourceUrl!==selected.sourceUrl||current.bandPass!==selected.bandPass)
+  if(!current||current.target!==selected.target||current.evidence!==selected.evidence||current.sourceUrl!==selected.sourceUrl||current.bandPass!==selected.bandPass)
     throw new Error('WWT FITS catalog or target association changed; explore again');
   return {catalog:resolve(root,'data/wwt',catalogName(current.catalog)),imageset:current.imageset};
 }

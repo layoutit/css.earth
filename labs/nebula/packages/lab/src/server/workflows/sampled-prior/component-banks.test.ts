@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { bakeMasterVolumeSlices, compilerAlphaDigest, sourceBytes, registerComponentBanks } from '@cssearth/bake/volume/node';
+import { bakeMasterVolumeSlices, sourceBytes, registerComponentBanks } from '@cssearth/bake/volume/node';
 import { compilerFrame, compilerPreparedSlices, readCompilerBakeResult, type CompilerPin, validateVolumeLayerSlices, type VolumeLayerPlan } from '@cssearth/bake/volume';
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
@@ -22,8 +22,8 @@ async function fixture(t: { after(fn: () => Promise<void>): void }) {
     exposureGain: 1, masterWidth: 8, masterDirectory: join(root, 'masters'), unitsPerSourceUnit: 1, provenance: {}, cropTransparent: true,
     deliveryBanks: [{ width: 8, outputDirectory: join(root, 'neutral'), imageEncoding: { format: 'png' } }],
     sampleEmission(x, y, z, out) { out.fill(Math.max(Math.abs(x), Math.abs(y), Math.abs(z)) < .6 ? .2 : 0); }, onProgress() {} });
-  const slices = banks[0]!.slices, fieldIdentity = 'a'.repeat(64), alphaSha256 = await compilerAlphaDigest(join(root, 'neutral'), slices);
-  slices.provenance = { fieldIdentity, alphaSha256 };
+  const slices = banks[0]!.slices, fieldIdentity = 'fixture-field';
+  slices.provenance = { fieldIdentity };
   await writeFile(join(root, 'neutral/volume-slices.json'), JSON.stringify(slices));
   const volume = compileCssVolume({ id: 'compiler-empty-layers', frame, slices: compilerPreparedSlices(slices), recipe: { anchors: [] } });
   const bytes = Buffer.from(JSON.stringify(volume));
@@ -31,7 +31,7 @@ async function fixture(t: { after(fn: () => Promise<void>): void }) {
   const neutral: CompilerPin = { path: 'neutral/volume.json' };
   const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'empty-layers', fieldIdentity, frame, boundsArcsec,
     skyBoundsArcsec: { min: [-2, -2], max: [2, 2] }, spanArcsec: 4, sourceImage: { width: 512, height: 512 },
-    coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' }, neutral, alphaSha256,
+    coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' }, neutral,
     stars: [], lenses: [{ id: 'optical', label: 'Optical', volume: neutral, coverage: { positiveAlphaTexels: 12, recoloredTexels: 12, outsideImageTexels: 0 } }],
     sampling: { sliceCounts: { x: 3, y: 3, z: 3 }, imageWidth: 512, samplesPerSlab: 4, layerPlan } });
   const readPinned = (pin: CompilerPin) => sourceBytes(root, pin);
@@ -73,7 +73,7 @@ test('an allegedly pruned slab with real opacity cannot be reintroduced as trans
   const { root, scene, slices, readPinned } = await fixture(t), q = slices.quads.find(q => q.alphaCoverage === 0)!;
   const pixels = Buffer.alloc(q.widthPx * q.heightPx * 4); pixels[3] = 255;
   const bytes = await sharp(pixels, { raw: { width: q.widthPx, height: q.heightPx, channels: 4 } }).png().toBuffer();
-  await writeFile(join(root, 'neutral', q.texturePath), bytes); q.sha256 = sha256(bytes); q.bytes = bytes.length;
+  await writeFile(join(root, 'neutral', q.texturePath), bytes); q.bytes = bytes.length;
   await writeFile(join(root, 'neutral/volume-slices.json'), JSON.stringify(slices));
   await assert.rejects(registerComponentBanks(root, 'registered', scene, scene.lenses, new AbortController().signal, readPinned, {
     compileVolume() { throw new Error('Nontransparent omitted slab must fail before compile'); }, validateVolume: validatePreparedCssVolume,

@@ -22,7 +22,7 @@ Nonconvex SAGE light-curve reconstruction with a published occultation volume-eq
 
 No registered global reflectance mosaic is supplied by these releases. The neutral gray marks missing imagery. Fine relief and albedo are unresolved.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="159-aemilia-source-and-interpretation"></a>
 <a id="shape-and-scale"></a>
@@ -34,11 +34,7 @@ No registered global reflectance mosaic is supplied by these releases. The neutr
 
 **Shape and scale**
 
-Original OBJ SHA-256:
-
-```text
-4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9
-```
+The original OBJ is kept unchanged in the source package; Git records its bytes.
 
 Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole (138.85848,65.93886) and period 24.478724 h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM 137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison.
 

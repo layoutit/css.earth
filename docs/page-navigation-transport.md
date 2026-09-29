@@ -9,15 +9,15 @@ consumes the same list. There is no page-source regex or second object registry.
 
 `packages/bake/cli/restore-object-json.mts` writes `prepared/object.json` and
 `prepared/page.json` from the installed runtime. The descriptor names the
-transport's format and URL; it has no digest pin, and page metadata has no
-`sceneSha256`. The first-load build serializes the decoded prepared tree into
+transport's format and URL; neither it nor the page metadata carries a digest.
+The first-load build serializes the decoded prepared tree into
 `.object-stage`. Navigation fragments use page metadata without including another
 scene. `/objects/<id>/object.json` serves the transport with
 `Cache-Control: public, max-age=0, must-revalidate`.
 
-Runtime validates the prepared structure, but does not authenticate this transport
-against a descriptor hash. R2 delivery inventories own byte counts and SHA-256
-for installed baked assets. Keep transport/page regeneration and inventory
+Runtime validates the prepared structure; it does not authenticate this transport
+against the descriptor. R2 delivery inventories own the byte counts and content
+addresses of installed baked assets. Keep transport/page regeneration and inventory
 publication at those owners when changing a prepared scene.
 
 Navigation fetches `/navigation/<id>/`: the same panels, attribution, metadata
@@ -120,8 +120,8 @@ saved-view and focus requests also update the existing stage between the
 `prepared-scene` boundaries. The
 head, stylesheet bytes and application scripts pass through unchanged. The
 function fetches existing prepared data and never regenerates it. The feature
-index is checked against its byte count and SHA-256 pin from that same page;
-warm function instances cache only authenticated index data. Query responses
+index is checked against the feature count that same page states;
+warm function instances cache only index data that passed that check. Query responses
 are not cached and carry `noindex, follow`. An index failure leaves object
 search usable and displays a retry message in the existing feature section.
 
@@ -187,8 +187,8 @@ Worker reuse, cancellation and disposal are covered by
 in the renderer suite. Browser checks should hold a destination's actual scene
 request and verify an immediate complete card, one scene swap, retained camera
 and correct interruption behavior.
-The rendered-page test parses built HTML only; it does not perform those browser
-interactions.
+The rendered-page test parses built HTML for the information-tab rules only; it
+does not perform those browser interactions.
 
 The progressive enhancement browser check disables JavaScript at desktop and
 phone widths, exercises native controls and links, then holds and releases

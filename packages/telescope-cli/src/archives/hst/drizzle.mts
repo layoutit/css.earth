@@ -19,8 +19,7 @@
  *
  * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope/src/product-record.ts):
  * what went in (this run's calibrated exposure, and the archive files whose headers stated the settings and the sky), the
- * settings themselves, the drizzlepac and CRDS versions the run reported, and the digest of the toolchain pins they were
- * installed from. Its evidence list is empty; compare.mts adds the agreement with the archive's own drizzled product. */
+ * settings themselves, and the drizzlepac and CRDS versions the run reported. Its evidence list is empty; compare.mts adds the agreement with the archive's own drizzled product. */
 import { mkdir, readdir } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
@@ -31,7 +30,7 @@ import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';
-import { hstSoftware, hstToolchainDigest, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
+import { hstSoftware, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
 import { hstToolchain } from './toolchain.mts';
 import { readHstFileHdus } from './product-file.mts';
 
@@ -80,13 +79,13 @@ export function drizzleSettings(header: Readonly<Record<string, unknown>>, outpu
 /** What identifies one drizzle: what went in (this run's calibrated exposure and the archive files its settings and sky were
  * read from), the settings themselves, and the software that ran. */
 export function drizzleRun(program: HstProgram, entry: HstObservation, inputs: readonly ProductInput[], settings: DrizzleSettings, sky: number,
-  software: readonly ProductSoftware[], toolchainDigest: string): ProductRun {
+  software: readonly ProductSoftware[]): ProductRun {
   return {
     telescope: 'HST', stage: 'drizzle', inputs,
     parameters: { instrument: entry.instrument, detector: entry.detector, opticalElement: entry.opticalElement, crdsContext: program.crdsContext,
       kernel: settings.kernel, pixfrac: settings.pixfrac, scale: settings.scale, fillval: settings.fillval, units: settings.units,
       distortionFromUpdatewcs: true, skySubtraction: 'off', archiveSky: sky, images: 1 },
-    software, toolchainDigest,
+    software,
   };
 }
 
@@ -125,7 +124,7 @@ export async function runDrizzle(id: string, observation: string, work: string, 
       { role: 'archive drizzled product, read for the settings of the run that made it', identity: product.uri, ...await fileSize(theirs) },
       { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: exposure.uri, ...await fileSize(theirExposure) },
     ];
-    const made = drizzleRun(program, entry, inputs, settings, sky, software, await hstToolchainDigest());
+    const made = drizzleRun(program, entry, inputs, settings, sky, software);
     await writeProductRecord(productRecordPath(resolve(output, product.name)), made, [{ path: product.name, file: resolve(output, product.name), units: settings.units,
       conventions: { grid: 'the archive product\'s own drizzle grid, from its D001 cards', pixels: `${settings.scale}" a pixel, ${settings.kernel} kernel, pixfrac ${settings.pixfrac}`,
         sky: 'none subtracted; the archive\'s own exposure records MDRIZSKY 0' } }]);

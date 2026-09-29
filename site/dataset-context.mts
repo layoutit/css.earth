@@ -1,12 +1,12 @@
 import type { ContributionGraph } from '@cssearth/objects/provenance';
 import type { ExplorationCatalog } from '@cssearth/objects/provenance';
-import type { ProvenanceDocument } from '@cssearth/objects/provenance';
+import type { LineageSource } from '@cssearth/objects/provenance';
 
 const datasetFacilityLabels: Readonly<Record<string, string>> = Object.freeze({ vst: 'VLT' });
 
 /** The directly captured instrument/facility that belongs in a dataset row. */
-export function datasetSourceDetail(lensId: string, provenance: Pick<ProvenanceDocument, 'sources'>, catalog: ExplorationCatalog) {
-  const labels = provenance.sources.filter(source => source.lensId === lensId).flatMap(source => {
+export function datasetSourceDetail(lensId: string, sources: readonly LineageSource[], catalog: ExplorationCatalog) {
+  const labels = sources.filter(source => source.lensId === lensId).flatMap(source => {
     if (source.capture?.observation?.instrument) return [source.capture.observation.instrument];
     return (source.capture?.attributions ?? []).flatMap(attribution => {
       if (attribution.kind === 'facility') {

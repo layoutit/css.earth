@@ -92,7 +92,7 @@
         "assertion": "The owner writes output.product.json and the focused public-path test reopens and verifies every recorded output pin."
       },
       "owner": "packages/telescope-cli/src/families/f04-slit-profile.mts#slitScanSummary",
-      "independentCheck": "packages/telescope-cli/src/families/f04-slit-profile.test.mts",
+      "independentCheck": "None: the slit-scan checks read reproduction receipts and were removed with them.",
       "limit": "Proves the pinned 60-frame Europa STIS workflow, not arbitrary slit formats."
     },
     {

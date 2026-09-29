@@ -1,7 +1,6 @@
 /** Import real getsf observed-intensity components; never substitute its detection/flattened maps. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
-import { digest } from './benchmark-products.ts';
 import type {GetSfFitsTransport} from './transport.ts';
 
 function statistics(values: Float32Array) {
@@ -30,10 +29,9 @@ export async function collectGetSfBenchmark(options: {
   const execution = await readFile(resolve(work, 'execution.log'), 'utf8');
   if (!/GETSF: DONE IN [\d.]+ MINUTES/.test(execution) || /ERROR in GETSF: Aborted/.test(execution))
     throw new Error('getsf has no successful completion receipt.');
-  const config = await readFile(resolve(work, 'runs/+getsf.cfg'));
-  if (digest(config) !== input.configurationSha256) throw new Error('getsf input configuration pin differs.');
-  const imagePath = resolve(input.imagePath);
-  if (digest(await readFile(imagePath)) !== input.sourceSha256) throw new Error('getsf source image pin differs.');
+  const config = await readFile(resolve(work, 'runs/+getsf.cfg'), 'utf8');
+  if (config !== input.configuration) throw new Error(`getsf ran ${resolve(work, 'runs/+getsf.cfg')}, which is not the configuration recorded in ${resolve(work, 'input.json')}.`);
+  await readFile(resolve(input.imagePath));
   const installed = JSON.parse(await readFile(options.installationReceiptPath, 'utf8'));
   const rawDirectory = resolve(work, 'export');
   await Promise.all([mkdir(rawDirectory, { recursive: true }), mkdir(output, { recursive: true })]);
@@ -47,8 +45,7 @@ export async function collectGetSfBenchmark(options: {
     const stats = statistics(decoded.values), raw = float32LittleEndian(decoded.values);
     const rawPath = resolve(rawDirectory, `${name}-official.f32`);
     await writeFile(rawPath, raw);
-    rawOfficialMaps[name] = { originalFitsPath: relative(root, path), fitsSha256: digest(original),
-      path: relative(root, rawPath), sha256: digest(raw), bytes: raw.length, statistics: stats };
+    rawOfficialMaps[name] = { originalFitsPath: relative(root, path), path: relative(root, rawPath), bytes: raw.length, statistics: stats };
     hasNegative ||= stats.negativeCount > 0;
     if (options.negativePolicy === 'positive-parts-with-signed-residual') {
       for (let p = 0; p < decoded.values.length; p++) decoded.values[p] = Math.max(0, decoded.values[p]!);
@@ -63,7 +60,7 @@ export async function collectGetSfBenchmark(options: {
   for (const path of catalogs) {
     const bytes = await readFile(path), name = basename(path);
     await writeFile(resolve(output, name), bytes);
-    catalogReceipts.push({ name, originalPath: relative(root, path), sha256: digest(bytes), bytes: bytes.length,
+    catalogReceipts.push({ name, originalPath: relative(root, path), bytes: bytes.length,
       rows: bytes.toString('utf8').split('\n').filter(line => line.trim() && !line.trim().startsWith('#')).length });
   }
   const note = 'Actual getsf260706 separation and detection of one display-luminance image. ' +
@@ -78,13 +75,13 @@ export async function collectGetSfBenchmark(options: {
     paperUrl: 'https://www.aanda.org/articles/aa/full_html/2021/05/aa39913-20/aa39913-20.html',
     sourceEquation: 'sources=I−B_source; filaments=B_source−B_filament; diffuse=B_filament',
     rawOfficialMaps, catalogs: catalogReceipts, negativePolicy: options.negativePolicy ?? 'reject',
-    executionSha256: digest(execution), note };
+    execution: 'execution.log', note };
   const receiptPath = resolve(output, 'provenance.json');
   await Promise.all([writeFile(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`),
     writeFile(resolve(output, 'getsf.cfg'), config), writeFile(resolve(output, 'execution.log'), execution)]);
   if (hasNegative && options.negativePolicy !== 'positive-parts-with-signed-residual')
     throw new Error('Official getsf maps contain signed pixels; receipt preserved. Choose an explicit display policy before import.');
-  const manifest = { sourceSha256: input.sourceSha256, width: input.width, height: input.height, maps, note,
+  const manifest = { source: input.imagePath, width: input.width, height: input.height, maps, note,
     provenance: relative(root, receiptPath), metrics: { software: 'getsf260706',
       pixelScaleArcsec: input.pixelScaleArcsec, beamFwhmPx: input.beamFwhmPx,
       sourceMaxFootprintRadiusPx: input.sourceMaxFootprintRadiusPx, filamentMaxFootprintRadiusPx: input.filamentMaxFootprintRadiusPx,

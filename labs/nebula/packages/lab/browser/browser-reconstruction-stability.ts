@@ -1,7 +1,6 @@
 import { gestureCamera } from './browser-camera.ts';
 /** Saved-output acceptance only. Args: [result-ledger.json] [base-url] [output-directory]. */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium, type Browser, type Page } from 'playwright';
@@ -15,7 +14,7 @@ interface Bank {
   opticalCopies: string[]; transform: string;
 }
 interface BankImage {
-  axis: Axis; screenshot: string; sha256: string; width: number; height: number;
+  axis: Axis; screenshot: string; bytes: number; width: number; height: number;
   rgbTotals: Rgb; luminanceTotal: number; chromaticity: Rgb; nonblackPixels: number;
 }
 interface SeamReceipt {
@@ -24,7 +23,7 @@ interface SeamReceipt {
   relativeLuminanceDifference: number; normalizedL1: number; passed: boolean;
 }
 interface Report {
-  schema: 'cssearth-nebula-reconstruction-stability@1'; ledger: string; ledgerSha256?: string;
+  schema: 'cssearth-nebula-reconstruction-stability@1'; ledger: string;
   thresholds: { relativeLuminanceDifference: number; normalizedL1: number };
   measurements: SeamReceipt[]; errors: string[]; failedRequests: [number, string][];
   forbiddenWrites: string[]; expectedComparisons: number; passed: boolean; failure?: string;
@@ -38,7 +37,6 @@ const thresholds = { relativeLuminanceDifference: .05, normalizedL1: .04 };
 const report: Report = { schema: 'cssearth-nebula-reconstruction-stability@1', ledger: ledgerPath,
   thresholds, measurements: [], errors: [], failedRequests: [], forbiddenWrites: [], expectedComparisons: 0, passed: false };
 const seams = [{ axes: ['y', 'z'] as const, direction: 'vertical' }, { axes: ['x', 'z'] as const, direction: 'horizontal' }];
-const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 const sum = (values: readonly number[]) => values.reduce((a, b) => a + b, 0);
 
 async function bankReceipt(page: Page): Promise<Bank[]> {
@@ -129,7 +127,7 @@ async function captureBank(page: Page, row: Result, seam: string, bank: Bank) {
       if (data[index] + data[index + 1] + data[index + 2] > 0) nonblackPixels++;
     }
     assert.ok(nonblackPixels > 0 && sum(rgbTotals) > 0, `${row.imageId}/${seam}/${bank.axis}: empty black screenshot.`);
-    const receipt: BankImage = { axis: bank.axis, screenshot: path, sha256: sha256(encoded), width: info.width, height: info.height,
+    const receipt: BankImage = { axis: bank.axis, screenshot: path, bytes: encoded.length, width: info.width, height: info.height,
       rgbTotals, luminanceTotal: rgbTotals[0] * .2126 + rgbTotals[1] * .7152 + rgbTotals[2] * .0722,
       chromaticity: rgbTotals.map(value => value / sum(rgbTotals)) as Rgb, nonblackPixels };
     return { data, receipt };
@@ -139,12 +137,11 @@ async function captureBank(page: Page, row: Result, seam: string, bank: Bank) {
 await mkdir(screenshots, { recursive: true });
 let browser: Browser | undefined;
 try {
-  const ledgerBytes = await readFile(ledgerPath), ledger = JSON.parse(ledgerBytes.toString());
-  report.ledgerSha256 = sha256(ledgerBytes);
+  const ledger = JSON.parse(await readFile(ledgerPath, 'utf8'));
   assert.equal(ledger.pass, true, 'Result ledger must report verified completed bakes.');
   assert.ok(Array.isArray(ledger.results) && ledger.results.length > 0 && ledger.results.length <= 12, 'Result ledger is empty or unbounded.');
   const rows = ledger.results as Result[];
-  assert.ok(rows.every(row => /^[a-z0-9-]+$/.test(row.imageId) && /^[0-9a-f]{64}$/.test(row.resultId)), 'Invalid saved result identity.');
+  assert.ok(rows.every(row => /^[a-z0-9-]+$/.test(row.imageId) && /^[a-z0-9][a-z0-9-]*$/.test(row.resultId)), 'Invalid saved result name.');
   assert.equal(new Set(rows.map(row => row.resultId)).size, rows.length, 'Duplicate result IDs in ledger.');
   assert.equal(new Set(rows.map(row => row.imageId)).size, rows.length, 'Duplicate image IDs would overwrite screenshots.');
   report.expectedComparisons = rows.length * seams.length;

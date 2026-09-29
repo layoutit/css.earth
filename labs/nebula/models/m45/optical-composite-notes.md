@@ -4,7 +4,7 @@ Niittee supplies observed optical pixels across nearly all of the existing cloud
 
 ## Prepared comparison and limits
 
-Result `4510c5bb3a8890c4fb6eaf9a3534b87e7079a4dbc50a1076a36bec78e251f9e7` adds **Optical composite · NOIRLab + Niittee** to the four existing Reconstruction lenses. [The recipe](optical-composite.json) pins the exact retained cloud and neutral slices; [the observation recipe](optical-composite-observations.json) owns the two registered native inputs. Large originals, separation products, image panels and volume slabs remain ignored.
+Result `m45-optical-composite` adds **Optical composite · NOIRLab + Niittee** to the four existing Reconstruction lenses. [The recipe](optical-composite.json) pins the exact retained cloud and neutral slices; [the observation recipe](optical-composite-observations.json) owns the two registered native inputs. Large originals, separation products, image panels and volume slabs remain ignored.
 
 Embedded source `processingVariant` descriptions retain their original intake-time purpose. The composite recipe's `intakeStatus` and generated native receipts supersede their historical Alignment-only status.
 
@@ -26,11 +26,11 @@ The standalone experiment explicitly depends on the pinned historical cloud snap
 
 Delivery tests include an absent historical cache, a supplied cloud with different bounds, exact decoded-alpha preservation, source-restoration completion checks and verified cached replay. Deleting the supplied-neutral selection makes that fixture fail. These establish the handoff behavior; they do not establish independent visual or physical fidelity.
 
-Native Niittee receipt SHA-256: `9f40eab8196e654f6c0755c00d45cc576bbbcfe98940b0719220725d3a7007e7`; diffuse: `4eab860475b796906bb76bf884ad7c08181a29deab8132209f29ed0511c9efa4`; residual: `b38fd3aa48203ef15ef2462b88977c67b358fe28f183840e254bc1ea9d79e405`. The generated result method records both sources, all native byte pins, material assumptions and historical baseline identity. Local inspection images and receipts are under `output/m45-composite/browser-detail/`.
+The native Niittee separation writes its receipt, diffuse and residual layers under the observation's `native-nox` directory. The generated result method records both sources, their native layer paths, material assumptions and the retained base cloud. Local inspection images and receipts are under `output/m45-composite/browser-detail/`.
 
 ## Coverage measured on 2026-09-13
 
-Measured against the current published cloud `29c367b2…`, retaining cloud model `166244f6…` from `a5c9a65d…`. Integrate each finite component analytically through Z, then use midpoint quadrature over the entire model XY support. Test native pixel-edge footprints using the saved affine transforms, without cropping the model or thresholding image brightness.
+Measured against the current published cloud `m45-stars`, retaining the cloud model of `m45`. Integrate each finite component analytically through Z, then use midpoint quadrature over the entire model XY support. Test native pixel-edge footprints using the saved affine transforms, without cropping the model or thresholding image brightness.
 
 | Source | Full model projected emission covered | Existing target signal covered |
 | --- | ---: | ---: |
@@ -48,7 +48,7 @@ The reproducible local diagnostic and complete input pins are in ignored `output
 
 ## Usable source and registration
 
-- [Niittee's original author record](https://commons.wikimedia.org/wiki/File:Plejades.jpg): Taavi Niittee / Tõrva Astronomy Club, CC BY 4.0. The local original is `.local/nebula-lab/intake/m45/widefield/niittee-pleiades.jpg`, SHA-256 `96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa`. The registered-source copy `.local/nebula-lab/observations/m45/sources/niittee-widefield.tif` has the exact same bytes: it contains JPEG data despite its extension. Both files were decoded and hashed during this check.
+- [Niittee's original author record](https://commons.wikimedia.org/wiki/File:Plejades.jpg): Taavi Niittee / Tõrva Astronomy Club, CC BY 4.0. The local original is `.local/nebula-lab/intake/m45/widefield/niittee-pleiades.jpg`. The registered-source copy `.local/nebula-lab/observations/m45/sources/niittee-widefield.tif` has the exact same bytes: it contains JPEG data despite its extension. Both files were decoded and compared byte for byte during this check.
 - Published raster: 8000 × 5199 RGB8, without alpha. The full image was visually inspected and has observed field content to the edges. The camera sensor is smaller than the published raster; 8K output is not independent detector resolution. The nominal field is 264.79′ × 172.08′. This is broadband optical display color, with the stated L-Pro filter, not calibrated flux.
 - Saved registration: 295 matched stars, 99 held out, four common-field quadrants, 0.450″ held-out RMS. Absolute astrometry inherits the [NOIRLab reference](https://noirlab.edu/public/images/noao-m45/). The outer Niittee footprint has not been independently checked for lens distortion; the passing residual applies to the central overlap.
 - Composition should retain NOIRLab detail in that overlap, estimate brightness/color matching using the shared diffuse optical pixels, and use Niittee's actual surrounding pixels. Matching different processed displays does not establish photometric calibration.

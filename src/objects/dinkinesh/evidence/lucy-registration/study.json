@@ -6,12 +6,10 @@
   "inputs": [
     {
       "path": "src/objects/dinkinesh/source/shape/tempest-dinkinesh.stl",
-      "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
       "bytes": 237239
     },
     {
       "file": "lor_0752129545_03599_00001_1x1_sci_03.fit",
-      "sha256": "857d5de69526397fcb7fb1e16032c12bd36b38b748fbe5a6a3e511d28d5227a6",
       "startTime": "2023-11-01T16:53:27.450",
       "exposureSeconds": 0.01,
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129545_03599_00001_1x1_sci_03.fit",
@@ -19,7 +17,6 @@
     },
     {
       "file": "lor_0752129587_03607_00001_1x1_sci_03.fit",
-      "sha256": "61917cd942aecda5a8a0d1fc16d21aff0892a4564f31d64aef35a56e50c99821",
       "startTime": "2023-11-01T16:54:09.459",
       "exposureSeconds": 0.002,
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129587_03607_00001_1x1_sci_03.fit",
@@ -27,7 +24,6 @@
     },
     {
       "file": "lor_0752129602_03610_00001_1x1_sci_03.fit",
-      "sha256": "6b29c2dc01bb8ed31e8d4c3f5608c8ab401c219bb2138eb16a953e4ad939e052",
       "startTime": "2023-11-01T16:54:24.458",
       "exposureSeconds": 0.002,
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129602_03610_00001_1x1_sci_03.fit",
@@ -35,7 +31,6 @@
     },
     {
       "file": "lor_0752129617_03613_00001_1x1_sci_03.fit",
-      "sha256": "d2c86f7ed98c4f026c5cd52ed4d4dc7eed54d66b1a4ba95af171ccaaba9373d9",
       "startTime": "2023-11-01T16:54:39.458",
       "exposureSeconds": 0.002,
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129617_03613_00001_1x1_sci_03.fit",
@@ -43,7 +38,6 @@
     },
     {
       "file": "lor_0752129632_03616_00001_1x1_sci_03.fit",
-      "sha256": "b641b416917d084b57a48ed56df15ccce053e58cd6802e558ae1e04d6b684127",
       "startTime": "2023-11-01T16:54:54.459",
       "exposureSeconds": 0.002,
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129632_03616_00001_1x1_sci_03.fit",
@@ -51,7 +45,6 @@
     },
     {
       "file": "lor_0752129722_03634_00001_1x1_sci_03.fit",
-      "sha256": "e18abca430f3ef8109d529f98cb14cd3c21b91f9776569ad325ee8cb48bf0dda",
       "startTime": "2023-11-01T16:56:24.459",
       "exposureSeconds": 0.002,
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129722_03634_00001_1x1_sci_03.fit",
@@ -59,39 +52,32 @@
     },
     {
       "file": "lcy_230815_240201_240101_dinkinesh_reconstruction_final_v2.bsp",
-      "sha256": "c2911c239dd031a2f9efeb7e2cfbaa3d13f66ac1164ada2978242f685b11f3dc",
       "role": "Corrected Lucy trajectory; separately compared with CSPICE at three image midpoints. This is not a mesh-frame registration."
     }
   ],
   "processing": [
     {
       "path": "tools/objects/terrestrial-layers/llorri-geo.mts",
-      "sha256": "b728d775f1d352e22ada5fd105c66ae0af712ac9ecfe03ce62cd841c52a3ecbf",
       "uncommitted": false
     },
     {
       "path": "tools/objects/terrestrial-layers/llorri-header-camera.mts",
-      "sha256": "67c94ed5a8d2d656b0a9f6930d984d9410307172a5b354445d20b5598ce3cacb",
       "uncommitted": false
     },
     {
       "path": "tools/objects/terrestrial-layers/camera-band-registration.mts",
-      "sha256": "c0ac20a7f970dff3d8c7ff469e135a91b4688a7add67f6927b4afcf457bf484b",
       "uncommitted": true
     },
     {
       "path": "tools/objects/terrestrial-layers/image-feature-matching.mts",
-      "sha256": "c4871aa719fdc3d89b9b6b4768169a4b14190d99005d513d1f5b55aabdb47307",
       "uncommitted": false
     },
     {
       "path": "tools/objects/surface-observations/footprint.mts",
-      "sha256": "bafb677db0ce50d4740595cbf967ead651ecf645895410f23523d6520ca709c7",
       "uncommitted": false
     },
     {
       "path": "tools/objects/surface-observations/geometry.mts",
-      "sha256": "9421d3f846566ba4654d804f902e7b1d4f8daa337657919bde7917a0e32f450b",
       "uncommitted": false
     }
   ],
@@ -218,37 +204,31 @@
     {
       "path": "native-reader-check.json",
       "bytes": 87276,
-      "sha256": "b5c4fd258f8ee60472d8363ae1d55a9ceb754e5c9b5b5121259646e20ac90500",
       "claim": "Native FITS target binding, calibrated-value samples and paired detector validity for six frames."
     },
     {
       "path": "joint-rigid-probe.json",
       "bytes": 108561,
-      "sha256": "8a9d2f7fb70198401f13b0a606b71f29e4e4bba45fe4be2a21f5f2164bf0e104",
       "claim": "Full-image phase, rigid orientation and detector pointing trial with disjoint terrain holdouts."
     },
     {
       "path": "stereo-native-region-9587.json",
       "bytes": 57782,
-      "sha256": "4bede0a8e1ebfef01b18e9980d333a76e9e406d6607b1e3a3304d640aeb26ea7",
       "claim": "Independent-view check selecting a frozen region after native convolution, with seed cameras and measured controls."
     },
     {
       "path": "llorri-native-overlap-probe.json",
       "bytes": 48410,
-      "sha256": "40e4e8573d50063ef32d7328ee84dcecdaf6c1165a6caf7f9e5dcd6e0a5abf12",
       "claim": "Existing Lucy overlap matcher, including reference visibility; all accepted matches and exclusions."
     },
     {
       "path": "depth-audit.json",
       "bytes": 97868,
-      "sha256": "c7f09c19cab9eda0af359d82d90a0beaf468a30aa74e79ed0e242b3c0590deaa",
       "claim": "Conditional stereo depth comparison supporting the coarse-shape hypothesis; not absolute shape accuracy."
     },
     {
       "path": "native-registration-comparison.png",
       "bytes": 324438,
-      "sha256": "ac7b4b8850fe93c0d408590dc04024201663c009a1610bdec474d05c40dae824",
       "claim": "Inspected native, projected and difference comparison for the failed Lucy overlap trial."
     }
   ],

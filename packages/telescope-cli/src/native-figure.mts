@@ -50,7 +50,7 @@ if a.ndim==3 and meta.get('spectral'):
  for key,value in {'CTYPE3':'WAVE-TAB','CUNIT3':'um','CRPIX3':1.,'CRVAL3':1.,'CDELT3':1.,'PS3_0':'WCS-TAB','PS3_1':'WAVE','PV3_1':1,'PV3_3':1}.items():h.header[key]=value
  column=fits.Column(name='WAVE',format=str(len(wave))+'D',dim='(1,'+str(len(wave))+')',array=wave.reshape(1,len(wave),1))
  table=fits.BinTableHDU.from_columns([column],name='WCS-TAB');table.header['EXTVER']=1;hdus.append(table)
-fits.HDUList(hdus).writeto(path/'native.fits',checksum=True)
+fits.HDUList(hdus).writeto(path/'native.fits')
 `;
 export async function nativeFigureInput(d:NativeFigureInput,directory:string,structure?:string){
   if(/\.fits?$/iu.test(d.file)){if(structure)throw new Error('FITS inputs use --hdu');return {file:d.file};}

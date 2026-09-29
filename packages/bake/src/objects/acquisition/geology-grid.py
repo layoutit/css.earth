@@ -21,7 +21,6 @@ cell it crosses. The grid states presence at its own resolution; it never gives 
 around the point crosses is marked, and so is the cell holding the point, so a feature smaller than a cell still marks
 one. The catalogue's own radius is the size drawn; the grid adds none.
 """
-import hashlib
 import json
 import math
 import pathlib
@@ -35,11 +34,17 @@ from rasterio.windows import Window, transform as window_transform
 import shapefile
 
 
-def pin(path, expected):
-    with path.open('rb') as stream:
-        actual = hashlib.file_digest(stream, 'sha256').hexdigest()
-    if actual != expected:
-        raise ValueError(f'Source pin changed: {path}')
+def require_inputs(plan_path, plan):
+    """Name every declared source file the plan reads that is not on disk."""
+    root = plan_path.parent
+    declared = [('projectionPath', plan['projectionPath'])] if 'projectionPath' in plan else []
+    for index, layer in enumerate(plan.get('layers', [plan])):
+        for key in ('esriJsonPath', 'shapePath', 'attributePath'):
+            if key in layer:
+                declared.append((f'layers[{index}].{key}' if 'layers' in plan else key, layer[key]))
+    missing = [f'{field} = {name}' for field, name in declared if not (root / name).is_file()]
+    if missing:
+        raise ValueError(f'{plan_path}: missing geology sources: ' + ', '.join(missing))
 
 
 def paint_polygon(grid, geometry, bounds, transform, category):
@@ -171,9 +176,10 @@ def layer_records(root, layer, plan):
 
 def prepare(plan_path):
     plan = json.loads(plan_path.read_text())
+    if 'pins' in plan:
+        raise ValueError(f'{plan_path}: the "pins" field is retired; recipes declare inputs by path')
     root = plan_path.parent
-    for path, expected in plan.get('pins', {}).items():
-        pin(root / path, expected)
+    require_inputs(plan_path, plan)
     if 'projectionPath' in plan and (root / plan['projectionPath']).read_text().strip() != plan['projectionWkt']:
         raise ValueError('Source coordinate system changed')
     center = plan.get('centerLongitude', 0)
@@ -259,7 +265,7 @@ def prepare(plan_path):
                    unknownOrConflictingPixels=conflict_pixels,
                    missingPixels=int((grid == -32768).sum()),
                    categories=plan['categories'], output=plan['output'],
-                   sha256=hashlib.sha256(output.read_bytes()).hexdigest(),
+                   bytes=output.stat().st_size,
                    transform=list(output_transform)[:6], radiusMeters=radius,
                    policy=({'point': 'One cell per catalogued point; no feature size or width drawn', 'polyline': 'Every cell a catalogued polyline crosses; no feature size or width drawn',
                             'circle': 'Every cell the catalogued circle (centre and published angular radius) crosses, and the cell holding its centre'}[presence] + '; cells holding two categories withheld' if presence else 'Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld') + ('; the smallest unit covering a withheld pixel takes it (nestedUnits inner)' if nested else '') + '; source edges clipped by global raster extent.')

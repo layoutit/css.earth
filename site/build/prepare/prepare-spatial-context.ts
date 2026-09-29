@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
+import { isRecord } from '@cssearth/core';
 import { readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '@cssearth/bake/world-context';
@@ -77,14 +78,15 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // the colour its marker, orbit and caption take (its swatch, else its catalogue colour lifted for caption contrast,
   // @cssearth/objects `contextColour`), capitals for a star, black hole or planet's caption, and its classification and system name.
   {
-    const registry = readPreparedObjects(process.cwd()).sceneObjects;
+    const prepared = readPreparedObjects(process.cwd()), registry = prepared.sceneObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
     const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
-    // The catalogue step's discovery records (site/prepared-object-discovery.json): what the world's visibility reads per body.
-    const discoveries = JSON.parse(await readFile(resolve(process.cwd(), 'site/prepared-object-discovery.json'), 'utf8')) as Record<string, unknown>;
+    // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
+    const discoveries: Record<string, unknown> = Object.fromEntries(prepared.entries.flatMap(entry =>
+      entry.kind === 'scene' && isRecord(entry.descriptor) && typeof entry.descriptor.id === 'string' ? [[entry.descriptor.id, entry.discovery]] : []));
     const present = async (body: Record<string, unknown>) => {
       const object = byId.get(String(body.id));
       if (!object) return;

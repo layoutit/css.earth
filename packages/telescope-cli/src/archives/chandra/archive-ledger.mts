@@ -309,7 +309,7 @@ ${modes.map(([key, entry]) => `| ${key} | ${entry.state} | ${entry.state === 're
 
 ## Receipts
 
-An observation counts as reproduced only when a receipt beside its program parses, states the \`${CHANDRA_REPRODUCTION_SCHEMA}\` schema, and names that program, that obsid, that detector and mode, and the level-2 product the program pins, with the size and digest of the archive file it compared. A receipt that says anything else is reported here and proves nothing.
+An observation counts as reproduced only when a receipt beside its program parses, states the \`${CHANDRA_REPRODUCTION_SCHEMA}\` schema, and names that program, that obsid, that detector and mode, and the level-2 product the program pins, with the size of the archive file it compared. A receipt that says anything else is reported here and proves nothing.
 
 ${receiptProblemsParagraph(ledger.receiptProblems)}
 `;

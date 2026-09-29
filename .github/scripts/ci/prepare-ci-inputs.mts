@@ -43,7 +43,7 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
 }
 
 /** Published-package inputs for runtime and catalogue-consumer checks, not scientific authoring replay.
- * Runtime ownership, activation and shell contracts inspect every registered body's runtime/scene JSON;
+ * Activation and shell contracts inspect every registered body's runtime/scene JSON;
  * catalogue and feature consumers also inspect inventoried context/public JSON. Keep that open-ended JSON
  * closure. The renderer's volume/loader and shell/loader suites additionally inspect every prepared image in
  * the real Milky Way and Heliosphere fixture banks. Sky and point-field renderer tests read the canonical
@@ -51,9 +51,9 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
  * photometric phase-chart SVG family.
  * These are test fixtures, never a second application registry.
  *
- * This selection intentionally does NOT support prepare:provenance, restore-environment-images, or the full
- * authoring test:sources prerequisite: those replay source preparation and can verify other texture banks.
- * The caller must compile catalogues from restored provenance.
+ * This selection intentionally does NOT support restore-environment-images or the full authoring test:sources
+ * prerequisite: those replay source preparation and can verify other texture banks. The caller compiles catalogues
+ * from the restored volume presentations and the source records.
  */
 export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAssetLocation[]> {
   const assets = await inventoryAssets(root, inventoriedObjectIds([], root));

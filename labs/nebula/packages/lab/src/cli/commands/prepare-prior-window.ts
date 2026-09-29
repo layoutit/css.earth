@@ -1,6 +1,5 @@
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Copy a pinned rectangular float32 density window without interpolation or normalization. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -10,7 +9,7 @@ type Vec3 = [number, number, number];
 interface WindowRecipe {
   schema: 'cssearth-prior-window-recipe@1';
   input: {
-    path: string; sha256: string; bytes: number; layout: 'float32-le-x-fastest-density';
+    path: string; bytes: number; layout: 'float32-le-x-fastest-density';
     dimensions: Vec3; boundsKpc: { min: Vec3; max: Vec3 };
   };
   cellBounds: { minInclusive: Vec3; maxExclusive: Vec3 };
@@ -21,7 +20,6 @@ interface WindowRecipe {
   limitations?: string[];
 }
 
-const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const triple = (value: unknown, name: string, integers = false): Vec3 => {
   if (!Array.isArray(value) || value.length !== 3 || value.some(item =>
     typeof item !== 'number' || !Number.isFinite(item) || integers && !Number.isInteger(item))) {
@@ -31,8 +29,7 @@ const triple = (value: unknown, name: string, integers = false): Vec3 => {
 };
 
 export async function preparePriorWindow(recipePath: string): Promise<void> {
-  const recipeBytes = await readFile(recipePath);
-  const recipe = parseLabModelJson(recipeBytes.toString()) as WindowRecipe;
+  const recipe = parseLabModelJson(await readFile(recipePath, 'utf8')) as WindowRecipe;
   if (recipe.schema !== 'cssearth-prior-window-recipe@1') throw new TypeError('Unsupported prior-window recipe.');
   const dimensions = triple(recipe.input?.dimensions, 'input dimensions', true);
   const boundsMin = triple(recipe.input?.boundsKpc?.min, 'input bounds min');
@@ -54,8 +51,8 @@ export async function preparePriorWindow(recipePath: string): Promise<void> {
 
   const source = await readFile(recipe.input.path);
   const expectedBytes = dimensions.reduce((product, value) => product * value, 4);
-  if (source.length !== recipe.input.bytes || source.length !== expectedBytes || digest(source) !== recipe.input.sha256) {
-    throw new Error('Pinned float32 density source differs in hash, byte length, or dimensions.');
+  if (source.length !== recipe.input.bytes || source.length !== expectedBytes) {
+    throw new Error(`Float32 density ${recipe.input.path} has ${source.length} bytes; its layout ${dimensions.join('×')} needs ${expectedBytes}.`);
   }
   const {outputDimensions,raw,encoded,cellSizeKpc,sourceWindowBoundsKpc,translatedBoundsKpc,sampleValidation,minimum,maximum,sum,nonzero} = copyDensityWindow(source,{dimensions,boundsMin,boundsMax,cellMin,cellMax,translation,level:recipe.output.level});
 
@@ -64,7 +61,7 @@ export async function preparePriorWindow(recipePath: string): Promise<void> {
   await writeFile(outputPath, encoded);
   const receipt = {
     schema: 'cssearth-prior-window@1',
-    recipe: { path: relative(process.cwd(), resolve(recipePath)), sha256: digest(recipeBytes) },
+    recipe: { path: relative(process.cwd(), resolve(recipePath)) },
     source: recipe.input,
     operation: 'Raw little-endian float32 row copy in x-fastest order; no interpolation, arithmetic on values, normalization, or axis reordering.',
     cellBounds: recipe.cellBounds,
@@ -76,11 +73,9 @@ export async function preparePriorWindow(recipePath: string): Promise<void> {
     boundsKpc: translatedBoundsKpc,
     output: {
       path: relative(process.cwd(), outputPath),
-      sha256: digest(encoded),
       bytes: encoded.length,
       compression: 'gzip',
       compressionLevel: recipe.output.level,
-      decodedSha256: digest(raw),
       decodedBytes: raw.length,
       layout: 'float32-le-x-fastest-density',
     },

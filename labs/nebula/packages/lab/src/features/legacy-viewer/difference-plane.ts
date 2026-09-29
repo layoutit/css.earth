@@ -18,7 +18,7 @@ export interface DifferenceOverlayState {
 export const differenceMapUrl = (resultId: string) =>
   `/__nebula/reconstruction-difference?resultId=${encodeURIComponent(resultId)}&format=png`;
 /** The lens result id a registered reconstruction subject carries, when it is one. */
-export const lensResultOf = (subjectId: string) => /^reconstruction-([a-f0-9]{64})$/.exec(subjectId)?.[1];
+export const lensResultOf = (subjectId: string) => /^reconstruction-([a-z0-9][a-z0-9-]*)$/.exec(subjectId)?.[1];
 
 export function createDifferencePlane() {
   let plane: ReturnType<typeof mountReconstructionOverlay> | null = null, pending: Promise<void> | null = null;

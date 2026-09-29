@@ -1,7 +1,6 @@
 {
   "body": "epimetheus",
   "mode": "fixed-camera-validation",
-  "recipeSha256": "b3e8ee5edc9a402087204be610fdbc8845a546273e096e6e22c4aeab3f6d7abe",
   "referenceCamera": {
     "id": "n1828122367_1",
     "path": "observations/N1828122367_1_CALIB.IMG",
@@ -19,10 +18,8 @@
     "pixelAngleMicroradians": 5.989697719921734,
     "backgroundMaximum": 0.003
   },
-  "implementationSha256": "554e629a61076d47a5e3357ad941cd75d86bd42bf8c9dd8e6a45f2afdfa9b7c4",
   "mesh": {
-    "path": "shape/epimetheus_30k_plt.tab",
-    "sha256": "12f47732aacc340512e4238b9125483fd278dc02d249cfa2b226203a2a84b311"
+    "path": "shape/epimetheus_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -36,7 +33,7 @@
     "maximumEmissionDegrees": 65,
     "maximumReferenceIncidenceDegrees": 75,
     "minimumValidSignal": 0.002,
-    "minimumDetailVariance": 0.000001,
+    "minimumDetailVariance": 1e-06,
     "minimumConvolutionMarginPixels": 16,
     "maximumSourceMeshVisibilityResidualMeters": 1
   },
@@ -100,10 +97,8 @@
         "maximumPixels": 1.854287658896336
       },
       "reference": {
-        "id": "n1828122367_1",
-        "sha256": "cdc36715978db0f5553cb6ad35e3a7cbff5db07487a5e9c599d8261e7553e7de"
+        "id": "n1828122367_1"
       },
-      "targetSha256": "45d412e549da85e5113f2d9ff1182237d88b5ac92fe024947b76d3cac2233ad7",
       "controls": [
         {
           "partition": "fit",
@@ -2210,10 +2205,8 @@
         "maximumPixels": 1.0570455561729297
       },
       "reference": {
-        "id": "n1828122367_1",
-        "sha256": "cdc36715978db0f5553cb6ad35e3a7cbff5db07487a5e9c599d8261e7553e7de"
+        "id": "n1828122367_1"
       },
-      "targetSha256": "5875ffa6521af61da8f8456bf1acdfa03ba5e7657cf4675d06ae83ebe7d65c13",
       "controls": [
         {
           "partition": "fit",
@@ -2990,7 +2983,7 @@
           ],
           "offset": [
             0.07455814356895334,
-            0.00004754370890493155
+            4.754370890493155e-05
           ],
           "correlation": 0.9939100857722455,
           "residualPixels": 0.07455815872760219

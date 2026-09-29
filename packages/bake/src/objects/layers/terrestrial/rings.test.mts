@@ -2,7 +2,6 @@ import { required } from '@cssearth/objects/node/contract';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -23,11 +22,16 @@ test('extracted Haumea helper preserves its existing annular geometry and image 
     { url: '/scenes/haumea/haumea-ring.webp', width: 2048, height: 64 },
     1161,
   );
-  // Captured from the original helper.
-  // This checks every transform, texture projection, style and leaf order.
+  // Leaves captured from the original helper: the first, the one opposite it and the last, with their transforms,
+  // texture projection and style. Every leaf steps one 16 px atlas column along the ring image, in order.
   assert.equal(leaves.length, 128);
-  assert.equal(createHash('sha256').update(JSON.stringify(leaves)).digest('hex'),
-    '372bcf6a596c2754cdc821b8da74a00a4ac4b4cab778c835f0a22f1ba208024d');
+  const leaf = (transform: string, position: number) => ({ tag: 's', className: 'shape-model-ring-quad',
+    style: `transform:matrix3d(${transform});backface-visibility:visible;--polycss-atlas-width:16px;--polycss-atlas-height:64px;` +
+      `background-image:url("/scenes/haumea/haumea-ring.webp");background-position:${position}px 0px;background-size:2048px 64px;background-repeat:no-repeat` });
+  assert.deepEqual(leaves[0], leaf('68.481568,-1.681128,0,0,0.000283,0.01152,0,-0.000471,0,0,-1,0,-0.6,22306.046762,0,1', 0));
+  assert.deepEqual(leaves[64], leaf('-68.481568,1.681128,0,0,-0.000283,-0.01152,0,-0.000471,0,0,-1,0,0.6,-22306.046762,0,1', -1024));
+  assert.deepEqual(leaves[127], leaf('68.481568,1.681128,0,0,-0.000283,0.01152,0,-0.000471,0,0,-1,0,-1095.105115,22279.148711,0,1', -2032));
+  leaves.forEach((value, index) => assert.match(JSON.stringify(value), new RegExp(`background-position:${index ? `-${index * 16}` : 0}px 0px;`)));
 });
 
 test('two annuli retain the source radii, central aperture, gap, and separate opacity', async () => {

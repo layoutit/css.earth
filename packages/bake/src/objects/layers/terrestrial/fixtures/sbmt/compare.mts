@@ -5,7 +5,7 @@ import { parsePdsVertexFacetShape } from '../../../../geometry/obj-shape.ts';
 import { readFitsImage } from '@cssearth/fits';
 import { readPointing, camera } from './candidate.mts';
 import { cases, parseCase, vector, assertQueryCoverage, orientations } from './cases.mts';
-import { runtimeLock, hashFile, generatorFingerprint } from './runtime.mts';
+import { runtimeLock, fileBytes } from './runtime.mts';
 
 export const tolerances = Object.freeze({ positionKm: .00005, direction: 1e-10, projectionPixels: .25 });
 export interface Stage { name: string; status: 'match'|'different'; compared: number; maximumError: number; tolerance: number; failures: string[] }
@@ -94,5 +94,5 @@ export async function compare(selectedIds?: readonly string[]) {
         nativeFootprintCells:requireFiniteNumber(expected.footprintCells)});
     }
   }
-  return {schema:'cssearth-sbmt-comparison@1',scope:selectedIds?'selected-cases':'all-cases',fixture:await hashFile(resolve(import.meta.dirname,'projection.json')),tolerances,cases:reports};
+  return {schema:'cssearth-sbmt-comparison@1',scope:selectedIds?'selected-cases':'all-cases',fixture:await fileBytes(resolve(import.meta.dirname,'projection.json')),tolerances,cases:reports};
 }

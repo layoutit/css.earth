@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdtemp, mkdir, readFile, writeFile, cp, symlink, access } from 'node:fs/promises';
 import { resolve, relative, dirname, join } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
 import { spawn, spawnSync } from 'node:child_process';
 const root = process.cwd(), require = createRequire(resolve(root, 'package.json'));
 const engine = createRequire(resolve(root, 'packages/engine/package.json'));
@@ -65,7 +64,7 @@ for (const id of ['m42', 'm2-9', 'lmc']) {
   const bytes = await readFile(join(directory, descriptor.prepared.url));
   const bank = JSON.parse(bytes.toString()).data; let resources = 0;
   for (const lens of bank.lenses) for (const resource of lens.volume.resources) {
-    assert.equal(sha256(await readFile(join(directory, 'prepared', resource.path))), resource.sha256); resources++;
+    assert.equal((await readFile(join(directory, 'prepared', resource.path))).length, resource.bytes, resource.path); resources++;
   }
   assert.ok(resources > 0);
   console.log(`APPLICATION_ISOLATION_PASS ${id} lenses=${bank.lenses.length} resources=${resources} reuse=verified`);

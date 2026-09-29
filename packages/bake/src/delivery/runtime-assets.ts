@@ -81,19 +81,18 @@ export async function inventoryAssets(root: string, objectIds: readonly string[]
   return assets;
 }
 
-/** The small package metadata a deploy catalogue compiles from: each volume or context object's prepared record and presentation. */
-export const VOLUME_METADATA_FILENAMES = ['presentation.json', 'provenance.json'] as const;
+/** The small package metadata a deploy catalogue compiles from: each volume's prepared presentation. */
+export const VOLUME_METADATA_FILENAMES = ['presentation.json'] as const;
 
-/** The volume and context objects, whose bulk data stays on R2 while a deploy catalogue reads only their metadata. */
+/** The volume objects, whose bulk data stays on R2 while a deploy catalogue reads only their presentation. */
 export async function volumeMetadataObjectIds(root: string): Promise<string[]> {
   const ids: string[] = [];
   for (const id of inventoriedObjectIds([], root)) {
     const text = await readFile(resolve(root, 'src/objects', id, 'source/presentation.json'), 'utf8').catch(() => null);
     if (text === null) continue;
-    const presentation = JSON.parse(text) as { schema?: unknown; objectId?: unknown; provenance?: unknown };
-    const volume = presentation.schema === 'cssearth-volume-presentation-source@1';
-    if (!volume && presentation.provenance === undefined) continue;
-    if (volume && presentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
+    const presentation = JSON.parse(text) as { schema?: unknown; objectId?: unknown };
+    if (presentation.schema !== 'cssearth-volume-presentation-source@1') continue;
+    if (presentation.objectId !== id) throw new TypeError(`Mismatched volume presentation object: ${id}.`);
     ids.push(id);
   }
   return ids;

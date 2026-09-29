@@ -60,40 +60,33 @@
   "inputs": [
     {
       "path": "src/planets/dinkinesh/object.json",
-      "bytes": 4126,
-      "sha256": "90447aa2da72ba3aa018a532ae032e15e4d0fb5500bc85d9dcdcb50d33986e1a"
+      "bytes": 4126
     },
     {
       "path": "src/planets/dinkinesh/prepared/object.json",
-      "bytes": 2232028,
-      "sha256": "19f79ec1fc606878f52cdf4018c1d023fb1f80c2cd39c61f2701f66046704f03"
+      "bytes": 2232028
     },
     {
       "path": "src/planets/dinkinesh/source/manifest.json",
-      "bytes": 15930,
-      "sha256": "67301d0ab5d357c2d28684c0aa68643e0e3f5a2540385e6044582b37d2031d58"
+      "bytes": 15930
     },
     {
       "path": "src/planets/dinkinesh/source/shape/tempest-dinkinesh.stl",
-      "bytes": 237239,
-      "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622"
+      "bytes": 237239
     }
   ],
   "images": [
     {
       "path": "dinkinesh-tempest-browser.png",
-      "bytes": 57167,
-      "sha256": "66f9c9d9cd9137195e324eb3b25c1d88cf59649c8564e774232b2aa6cb9657c1"
+      "bytes": 57167
     },
     {
       "path": "dinkinesh-celestia-browser.png",
-      "bytes": 56111,
-      "sha256": "d51a287937cb12b65b6692f13eeee1bb054b07640f8fa99f7e01f69ebbf4a82c"
+      "bytes": 56111
     },
     {
       "path": "dinkinesh-tempest-dragged-browser.png",
-      "bytes": 57318,
-      "sha256": "f65004d7adb46c9231f4b7e821a960b1fe1d702617d724e128df46c03b8303fc"
+      "bytes": 57318
     }
   ]
 }

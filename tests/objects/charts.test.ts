@@ -4,7 +4,6 @@ import assert from 'node:assert/strict';
 import {readFile,mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createHash} from 'node:crypto';
 import {prepareChartAssets,parseChartAssetRecipe} from '../../site/build/charts/charts.ts';
 
 test('phase source rejects an uncovered angle range',()=>{

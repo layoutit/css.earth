@@ -1,5 +1,4 @@
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -8,7 +7,7 @@ import {
   PREPARED_TEXT_SCHEMA, catalogueTextWarnings, compositionWarnings, parseObjectText, readerTextErrors, readerTextWarnings,
 } from '../../object-text.mts';
 import type { ObjectText, TextContext, TextFinding } from '../../object-text.mts';
-import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import { bodyLineage } from '@cssearth/bake/objects/lineage';
 import { parsePreparedExploration } from '@cssearth/objects/provenance';
 import { sourceResolver } from '@cssearth/objects/sources';
 import { readSourceCatalog } from '@cssearth/bake/sources';
@@ -24,16 +23,16 @@ const root = resolve(import.meta.dirname, '../../..');
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
 export const describe = (findings: readonly TextFinding[]) => findings.map(({ objectId, slot, rule, detail }) => `  ${objectId} ${slot}: ${rule} — ${detail}`).join('\n');
 
-interface BodyText { readonly id: string; readonly directory: string; readonly sha256: string; readonly text: ObjectText; readonly context: TextContext }
+interface BodyText { readonly id: string; readonly directory: string; readonly text: ObjectText; readonly context: TextContext }
 
 async function readBody(projectRoot: string, object: { id: string; name: string }, catalogue: ReadonlySet<string>): Promise<BodyText> {
   const directory = resolve(projectRoot, 'src/objects', object.id);
   const bytes = await readFile(resolve(directory, 'text.json'));
   const page = requireRecord(await readJson(resolve(directory, 'prepared/page.json')));
   const lenses = requireRecord(page.controls).lenses;
-  const provenance = validateObjectProvenance(await readJson(resolve(directory, 'prepared/provenance.json')), object.id);
+  const lineage = await bodyLineage(directory);
   return {
-    id: object.id, directory, sha256: sha256(bytes),
+    id: object.id, directory,
     text: parseObjectText(JSON.parse(bytes.toString('utf8')), object.id),
     context: {
       name: object.name, catalogue,
@@ -41,7 +40,7 @@ async function readBody(projectRoot: string, object: { id: string; name: string 
         const control = requireRecord(value);
         return { id: requireString(control.id), label: requireString(control.label) };
       }),
-      evidencedDatasets: new Set(provenance.products.flatMap(product => product.inputs.length ? [product.id, ...(product.lensIds ?? [])] : [])),
+      evidencedDatasets: new Set(lineage.products.flatMap(product => product.inputs.length ? [product.id, ...product.lensIds] : [])),
     },
   };
 }

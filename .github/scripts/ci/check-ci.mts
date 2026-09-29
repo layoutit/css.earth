@@ -7,7 +7,6 @@ import {parse} from 'yaml';
 import {requireArray, requireRecord, requireString} from '@cssearth/core';
 import {affectedJobNames, ALWAYS_JOBS, classifyAffectedPaths, HEAVY_JOBS, loadCiAreasConfig, localChangedPaths, needsProductionBuild} from './ci-affected.mts';
 import {evaluateObjectScopeGate} from './object-scope-gate.mts';
-import {selectRuntimeOwnershipArgs} from './scope-runtime-ownership-check.mts';
 
 interface CiStep {name:string;run:string;env:Record<string,string>;}
 /** The workflow's own token; a local run uses the contributor's `gh` login instead. */
@@ -15,7 +14,6 @@ const WORKFLOW_TOKEN='${{ github.token }}';
 /** Expressions only a real GitHub run can evaluate (a cross-job `needs` output, computed from the PR's diff): a
  * local run has no such diff, so it substitutes the most thorough, always-correct value instead of failing. */
 const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
- '${{ needs.changes.outputs.runtime_ownership_args }}':'--all',
  // The advisory audit runs the relocated source and reproduction lanes only for a change that selects their
  // area. A local run has no PR diff to select from, so it substitutes the most thorough answer: run them.
  '${{ needs.changes.outputs.run_universe }}':'true',
@@ -193,9 +191,8 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  // `audit` lives in its own workflow so its completeness findings cannot turn the gate run red.
  const workflowFile=jobName==='asset-origin-build'?'nightly':jobName==='audit'?'audit':'universe';
  const workflow=await readFile(resolve(root,`.github/workflows/${workflowFile}.yml`),'utf8');
- const substitutions={'${{ needs.changes.outputs.runtime_ownership_args }}':args.includes('--all')?'--all':selectRuntimeOwnershipArgs(changed).join(' ')};
  const auditWorkflow=await readFile(resolve(root,'.github/workflows/audit.yml'),'utf8');
- let steps=jobNames.flatMap(name=>readCiSteps(name==='audit'?auditWorkflow:workflow,name,substitutions));
+ let steps=jobNames.flatMap(name=>readCiSteps(name==='audit'?auditWorkflow:workflow,name));
  if(production)steps.push(...readCiSteps(await readFile(resolve(root,'.github/workflows/nightly.yml'),'utf8'),'asset-origin-build'));
  // Select the same PR documentation/publish diff locally, including uncommitted changes in the documentation audit.
  // Pass through env, never interpolate an arbitrary ref into shell source.

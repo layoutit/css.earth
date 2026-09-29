@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import hashlib
 import json
 import math
 import sys
 
 
-def verify(data, entry, label):
+def require_declared(entry, label):
     if entry is None:
-        raise ValueError(f'{label} differs from its source manifest pin.')
+        raise ValueError(f'{label} is not declared in the source manifest.')
 
 
 def main():
@@ -17,7 +16,7 @@ def main():
     source = Path(sys.argv[1])
     manifest = json.loads((source / 'manifest.json').read_bytes())
     measurement_bytes = (source / 'measurements.json').read_bytes()
-    verify(measurement_bytes, next((entry for entry in manifest['documents']
+    require_declared(next((entry for entry in manifest['documents']
                                    if entry['path'] == 'measurements.json'), None), 'Measurement file')
     measurements = json.loads(measurement_bytes)
     full_axes = measurements.get('fullAxesKm')
@@ -34,7 +33,7 @@ def main():
             r = 1 / math.sqrt((math.cos(p)*math.cos(l)/axes[0])**2 + (math.cos(p)*math.sin(l)/axes[1])**2 + (math.sin(p)/axes[2])**2)
             lines.append(f'{lon} {lat} {r:.12f}')
     table = ('\n'.join(lines) + '\n').encode()
-    verify(table, next((entry for entry in manifest['inputs']
+    require_declared(next((entry for entry in manifest['inputs']
                         if entry['path'] == 'shape/ellipsoid.tab'), None), 'Ellipsoid table')
     sys.stdout.buffer.write(table)
 

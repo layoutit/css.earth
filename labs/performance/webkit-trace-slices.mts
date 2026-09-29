@@ -2,13 +2,12 @@ import { paintClues, paintTraceEvents } from './webkit-paint-clues.mts';
 /** Semantic navigation windows and exclusive cost pivots for every exported iPad trace. */
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { isRecord, requireArray, requireRecord } from '@cssearth/core';
 import { createCostIndex } from './trace-costs.mts';
 import { dataOf, isTraceEvent, type TraceEvent } from './trace-model.mts';
 import { traceCauses, causeTraceEvents } from './webkit-trace-causes.mts';
 import { traceClues } from './webkit-trace-clues.mts';
-import { inspectBuild } from './trace-brief.mts';
+import { inspectBuild } from './trace-sources.mts';
 import { compositorClues, compositorTraceEvents } from './webkit-compositor-clues.mts';
 import { analysisHtml } from './webkit-trace-report.mts';
 
@@ -127,7 +126,6 @@ export function navigationAnalysis(value: unknown, receipt: unknown) {
 
 export async function writeNavigationAnalysis(trace: unknown, directory: string, receipt: unknown, raw: unknown = null) {
   const analysis = navigationAnalysis(trace, receipt);
-  const sourceHash = createHash('sha256').update(JSON.stringify(trace)).digest('hex');
   const styleWrites: unknown = await readFile(resolve(directory, 'style-writes.json'), 'utf8').then(JSON.parse, () => null);
   const causeData: unknown = await readFile(resolve(directory, 'causes.json'), 'utf8').then(JSON.parse, () => null);
   const layerLines = await readFile(resolve(directory, 'layers.jsonl'), 'utf8').catch(() => '');
@@ -141,7 +139,7 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
     ...clues.causes.motion.flatMap(m => m.stack), ...clues.styleInitiators.flatMap(s => s.initiators), ...clues.repeatedSynchronousRendering.map(g => g.caller), ...clues.network.requests.flatMap(r => r.initiator)];
   const locationKey = (v: unknown) => { const r = isRecord(v) ? v : {}; return JSON.stringify([r.url, r.lineNumber, r.columnNumber]); };
   const saved: unknown = await readFile(resolve(directory, 'analysis.sources.json'), 'utf8').then(JSON.parse, () => null);
-  const prior = isRecord(saved) && saved.sourceSha256 === sourceHash && Array.isArray(saved.locations) ? saved.locations.filter(isRecord) : [];
+  const prior = isRecord(saved) && Array.isArray(saved.locations) ? saved.locations.filter(isRecord) : [];
   const byLocation = new Map(prior.map(l => [locationKey(l), l.original]));
   let buildSources: unknown = isRecord(saved) && prior.length ? saved.buildSources : [];
   for (const l of locations) l.original = byLocation.get(locationKey(l));
@@ -152,7 +150,7 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
     // but does not claim independently verified response bytes for old captures.
     if (typeof maps.dist === 'string') buildSources = await inspectBuild({ sampledJsSelf: missing, busiestTasks: [],
       sourceUrls: [...new Set(missing.map(l => l.url))] }, maps.dist).catch(error => [{ unavailable: String(error) }]);
-    await writeFile(resolve(directory, 'analysis.sources.json'), JSON.stringify({ sourceSha256: sourceHash, buildSources, locations }, null, 2) + '\n');
+    await writeFile(resolve(directory, 'analysis.sources.json'), JSON.stringify({ buildSources, locations }, null, 2) + '\n');
   }
   const enriched = parsedTrace(trace);
   enriched.traceEvents.push(...causeTraceEvents(traceCauses(trace, causeData)), ...compositorTraceEvents(compositor), ...paintTraceEvents(paint));
@@ -174,10 +172,10 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
   await mkdir(resolve(directory, 'slices'), { recursive: true });
   for (const view of analysis.views) if (view.phase !== 'full') {
     const slice = sliceDevtoolsTrace(enriched, view);
-    slice.metadata.analysis = { label: view.label, sourceSha256: sourceHash, phase: view.phase };
+    slice.metadata.analysis = { label: view.label, phase: view.phase };
     await writeFile(resolve(directory, view.path), JSON.stringify(slice) + '\n');
   }
-  const manifest = { ...analysis, capture: basename(directory), sourceSha256: sourceHash, clues, compositor, paint, buildSources };
+  const manifest = { ...analysis, capture: basename(directory), clues, compositor, paint, buildSources };
   const pending = resolve(directory, `analysis.${process.pid}.tmp`);
   await writeFile(pending, JSON.stringify(manifest, null, 2) + '\n');
   await rename(pending, resolve(directory, 'analysis.json'));

@@ -5,11 +5,11 @@ export interface RemovalJob {
   id: string; imageId: string; status: 'queued' | 'running' | 'cancelling' | 'completed' | 'cancelled' | 'failed' | 'interrupted';
   progress?: { stage: string; current?: number; total?: number; message: string }; result?: StarRemovalResult; error?: string;
 }
-type Source = Pick<StarRemovalResult, 'imageId' | 'sourceSha256' | 'sourcePreviewSha256' | 'nativeDimensions'>;
+type Source = Pick<StarRemovalResult, 'imageId' | 'nativeDimensions'>;
 interface SavedJob extends Source { request?: RemovalRequest; id: string; status: RemovalJob['status']; installedResultId?: string; }
-const storageKey = (id: string) => `cssearth-star-removal-job-nox-v1:${id}`;
+const storageKey = (id: string) => `cssearth-star-removal-job-nox-v2:${id}`;
 export const removalJobActive = (job: RemovalJob | null) => Boolean(job && ['queued', 'running', 'cancelling'].includes(job.status));
-function sameSource(a: Source, b: Source) { return a.imageId === b.imageId && a.sourceSha256 === b.sourceSha256 && a.sourcePreviewSha256 === b.sourcePreviewSha256 && a.nativeDimensions.join() === b.nativeDimensions.join(); }
+function sameSource(a: Source, b: Source) { return a.imageId === b.imageId && a.nativeDimensions.join() === b.nativeDimensions.join(); }
 function read(source: Source): SavedJob | null {
   try { const value = JSON.parse(localStorage.getItem(storageKey(source.imageId)) ?? 'null') as SavedJob | null;
     return value && Array.isArray(value.nativeDimensions) && sameSource(value, source) && /^[a-f0-9-]{36}$/.test(value.id) ? value : null;

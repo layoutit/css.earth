@@ -1,5 +1,4 @@
-/** Bounded, source-pinned Gaia DR3/Bailer-Jones stellar neighbourhood intake. */
-import { sha256 } from '@cssearth/core/node';
+/** Bounded Gaia DR3/Bailer-Jones stellar neighbourhood intake, recorded by its archive query. */
 import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 
 const arguments_=process.argv.slice(2), magnitudeOptions=arguments_.filter(value=>value.startsWith('--magnitude-limit='));
@@ -27,18 +26,27 @@ function numeric(v:string|undefined, nullable=false): number|null {
 }
 const endpoint='https://dc.zah.uni-heidelberg.de/tap/async';
 const absent = (error:unknown) => error instanceof Error && 'code' in error && error.code==='ENOENT';
-async function acquire(id:string, query:string, limit:number, expectedColumns:readonly string[]=columns) {
-  const cache=`.local/nebula-lab/stellar-fields/${id}-${sha256(query).slice(0,12)}.csv`, jobPath=`${cache}.job.json`;
-  try { return {bytes:await readFile(cache),cache,retrievedAt:(await stat(cache)).mtime.toISOString(),jobUrl:null}; }
-  catch(error) {if(!absent(error)) throw error;}
-  let jobUrl:string;
+/** A cached archive answer is reused only for the query saved beside it; any other query fetches again. */
+async function cachedAnswer(cache:string, query:string) {
   try {
-    const saved:unknown=JSON.parse(await readFile(jobPath,'utf8'));
-    if(!saved || typeof saved!=='object' || !('query' in saved) || saved.query!==query || !('jobUrl' in saved) || typeof saved.jobUrl!=='string')
-      throw new Error('Stored TAP job identity differs.');
-    jobUrl=saved.jobUrl;
-  } catch(error) {
-    if(!absent(error)) throw error;
+    const saved:unknown=JSON.parse(await readFile(`${cache}.query.json`,'utf8'));
+    if(!saved || typeof saved!=='object' || !('query' in saved) || saved.query!==query) return null;
+    return await readFile(cache);
+  } catch(error) {if(absent(error)) return null;throw error;}
+}
+async function saveAnswer(cache:string, query:string, bytes:Buffer) {
+  await writeFile(`${cache}.pending`,bytes);await rename(`${cache}.pending`,cache);
+  await writeFile(`${cache}.query.json`,JSON.stringify({query},null,2)+'\n');
+}
+async function acquire(id:string, query:string, limit:number, expectedColumns:readonly string[]=columns) {
+  const cache=`.local/nebula-lab/stellar-fields/${id}.csv`, jobPath=`${cache}.job.json`;
+  const saved=await cachedAnswer(cache,query);
+  if(saved) return {bytes:saved,cache,retrievedAt:(await stat(cache)).mtime.toISOString(),jobUrl:null};
+  // A submitted job is resumed only for the same query; a job file for another query is replaced by a new submission.
+  const savedJob:unknown=await readFile(jobPath,'utf8').then(text=>JSON.parse(text),(error:unknown)=>{if(absent(error)) return null;throw error;});
+  let jobUrl=savedJob && typeof savedJob==='object' && 'query' in savedJob && savedJob.query===query && 'jobUrl' in savedJob &&
+    typeof savedJob.jobUrl==='string' ? savedJob.jobUrl : null;
+  if(jobUrl===null) {
     const response=await fetch(endpoint,{method:'POST',redirect:'manual',signal:AbortSignal.timeout(30000),
       body:new URLSearchParams({REQUEST:'doQuery',LANG:'ADQL',FORMAT:'csv',MAXREC:String(limit),QUERY:query})});
     const location=response.headers.get('location');
@@ -67,7 +75,7 @@ async function acquire(id:string, query:string, limit:number, expectedColumns:re
       if(!result.ok) throw new Error(`${id}: TAP result HTTP ${result.status}: ${(await result.text()).slice(0,2000)}`);
       const bytes=Buffer.from(await result.arrayBuffer());
       if(!bytes.toString().startsWith(expectedColumns.join(','))) throw new Error(`${id}: TAP did not return the requested CSV: ${bytes.toString().slice(0,2000)}`);
-      await writeFile(`${cache}.pending`,bytes);await rename(`${cache}.pending`,cache);
+      await saveAnswer(cache,query,bytes);
       return {bytes,cache,retrievedAt:new Date().toISOString(),jobUrl};
     }
     if(phase==='ERROR' || phase==='ABORTED') {
@@ -86,44 +94,43 @@ function csvRows(bytes:Buffer, expectedColumns:readonly string[]) {
   return lines.map(line=>{const cells=line.split(',');if(cells.length!==expectedColumns.length || !/^\d{10,20}$/.test(cells[0]!)) throw new Error('Invalid catalogue CSV row.');return cells;});
 }
 async function acquireDistances(id:string, query:string, limit:number) {
-  const cache=`.local/nebula-lab/stellar-fields/${id}-${sha256(query).slice(0,12)}.csv`;
-  let bytes:Buffer;
-  try {bytes=await readFile(cache);} catch(error) {
-    if(!absent(error)) throw error;
+  const cache=`.local/nebula-lab/stellar-fields/${id}.csv`;
+  let bytes=await cachedAnswer(cache,query);
+  if(!bytes) {
     const response=await fetch('https://dc.zah.uni-heidelberg.de/tap/sync',{method:'POST',signal:AbortSignal.timeout(30000),
       body:new URLSearchParams({REQUEST:'doQuery',LANG:'ADQL',FORMAT:'csv',MAXREC:String(limit),QUERY:query})});
     if(!response.ok) throw new Error(`${id}: indexed distance lookup HTTP ${response.status}: ${(await response.text()).slice(0,2000)}`);
     bytes=Buffer.from(await response.arrayBuffer());
     csvRows(bytes,['source_id','r_med_geo','r_lo_geo','r_hi_geo']);
-    await writeFile(`${cache}.pending`,bytes);await rename(`${cache}.pending`,cache);
+    await saveAnswer(cache,query,bytes);
   }
-  return {bytes,cache,retrievedAt:(await stat(cache)).mtime.toISOString(),queryUrl:'https://dc.zah.uni-heidelberg.de/tap/sync',query,sha256:sha256(bytes)};
+  return {bytes,cache,retrievedAt:(await stat(cache)).mtime.toISOString(),queryUrl:'https://dc.zah.uni-heidelberg.de/tap/sync',query};
 }
 async function acquireInTwoStages(id:string, query:string, gaiaColumns:readonly string[]) {
   const candidateLimit=50000,gaia=await acquire(`${id}-gaia`,query,candidateLimit,gaiaColumns),rows=csvRows(gaia.bytes,gaiaColumns);
   if(rows.length>=candidateLimit) throw new Error(`${id}: unordered Gaia candidate query reached its ${candidateLimit}-row cap; refusing an incomplete selection.`);
   const sourceIds=rows.map(row=>row[0]!);
   if(new Set(sourceIds).size!==sourceIds.length) throw new Error('Duplicate Gaia source ids.');
-  const distances=new Map<string,string[]>(),acquisitions:Array<{cache:string;query:string;queryUrl:string;sha256:string;bytes:number;retrievedAt:string;rows:number}>=[];
-  acquisitions.push({cache:gaia.cache,query,queryUrl:gaia.jobUrl??endpoint,sha256:sha256(gaia.bytes),bytes:gaia.bytes.length,retrievedAt:gaia.retrievedAt,rows:rows.length});
+  const distances=new Map<string,string[]>(),acquisitions:Array<{cache:string;query:string;queryUrl:string;bytes:number;retrievedAt:string;rows:number}>=[];
+  acquisitions.push({cache:gaia.cache,query,queryUrl:gaia.jobUrl??endpoint,bytes:gaia.bytes.length,retrievedAt:gaia.retrievedAt,rows:rows.length});
   // Exact indexed ID lookups only. Outer object concurrency bounds the archive requests to three.
   const batchSize=1000;
   for(let offset=0;offset<sourceIds.length;offset+=batchSize) {
     const requests=[sourceIds.slice(offset,offset+batchSize)];
-    const results=await Promise.allSettled(requests.map(batch=>acquireDistances(`${id}-distance`,
+    const results=await Promise.allSettled(requests.map(batch=>acquireDistances(`${id}-distance-${offset/batchSize+1}`,
       `SELECT source_id,r_med_geo,r_lo_geo,r_hi_geo FROM gedr3dist.main WHERE source_id IN (${batch.join(',')})`,batch.length)));
     for(const result of results) {
       if(result.status==='rejected') throw result.reason;
       const acquired=result.value,records=csvRows(acquired.bytes,['source_id','r_med_geo','r_lo_geo','r_hi_geo']);
       for(const record of records){if(distances.has(record[0]!)) throw new Error('Duplicate Bailer-Jones source id.');distances.set(record[0]!,record.slice(1));}
-      acquisitions.push({cache:acquired.cache,query:acquired.query,queryUrl:acquired.queryUrl,sha256:acquired.sha256,bytes:acquired.bytes.length,retrievedAt:acquired.retrievedAt,rows:records.length});
+      acquisitions.push({cache:acquired.cache,query:acquired.query,queryUrl:acquired.queryUrl,bytes:acquired.bytes.length,retrievedAt:acquired.retrievedAt,rows:records.length});
     }
     console.log(`CATALOGUE_DISTANCE_BATCH ${id} ${Math.min(offset+batchSize,sourceIds.length)}/${sourceIds.length}`);
   }
   const matched=rows.flatMap(row=>{const distance=distances.get(row[0]!);return distance?[[...row,...distance].join(',')]:[];});
   const bytes=Buffer.from([columns.join(','),...matched,''].join('\n'));
-  const cache=`.local/nebula-lab/stellar-fields/${id}-joined-${sha256(bytes).slice(0,12)}.csv`;
-  try{await readFile(cache);}catch(error){if(!absent(error))throw error;await writeFile(cache,bytes);}
+  const cache=`.local/nebula-lab/stellar-fields/${id}-joined.csv`;
+  await writeFile(`${cache}.pending`,bytes);await rename(`${cache}.pending`,cache);
   return {bytes,cache,retrievedAt:gaia.retrievedAt,jobUrl:gaia.jobUrl,acquisitions,candidateRows:rows.length,
     candidateLimit,candidateTruncated:rows.length===candidateLimit,missingDistances:rows.length-matched.length};
 }
@@ -219,7 +226,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
     provenance:{catalogue:'Gaia DR3 astrometry/photometry + Bailer-Jones et al.2021 EDR3 geometric distances',
       sourceUrl:'https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist',
       paperUrl:'https://doi.org/10.3847/1538-3881/abd806',credit:'ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO',
-      license:'CC-BY-4.0',queryUrl:jobUrl??endpoint,query,cache,sha256:sha256(bytes),bytes:bytes.length,
+      license:'CC-BY-4.0',queryUrl:jobUrl??endpoint,query,cache,bytes:bytes.length,
       retrievedAt,queryRows:lines.length,truncated:twoStage?truncated:lines.length===limit,
       authoredRadiusPc:radius,radiusSelection:radiusOverride!==null?'Explicit physical neighbourhood radius selected for the displayed surrounding field; independent of image or cloud bounds.':previousRadius!==null?'Reused the physical neighbourhood radius from the existing checked-in field selection.':'Ten times the configured angular framing radius at the nebula distance, bounded to 50–200 pc.',
       ...('acquisitions' in acquired?{acquisitions:acquired.acquisitions,candidateRows:acquired.candidateRows,candidateLimit:acquired.candidateLimit,missingDistances:acquired.missingDistances}:{}),
@@ -229,7 +236,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
       ...(previousImageAnchors===undefined?{}:{imageAnchors:previousImageAnchors}),
       retainedSources:previousRetainedSources!==undefined?previousRetainedSources:id==='m45'?'Eight explicitly named major HIP stars retained from the existing scene because Gaia may omit saturated bright sources. Their existing depths remain inferred; they are not Bailer-Jones catalogue distances.':id==='m1'?'The explicitly named Crab pulsar retains its prior scene placement; surrounding Gaia field rows use Bailer-Jones median distances.':null}};
   const path=`src/objects/${id}/source/stellar-field.json`, text=JSON.stringify(field,null,2)+'\n';await writeFile(path,text);
-  console.log(JSON.stringify({id,stars:stars.length,radiusPc:radius,queryRows:lines.length,truncated:twoStage?truncated:lines.length===limit,path,sha256:sha256(text)}));
+  console.log(JSON.stringify({id,stars:stars.length,radiusPc:radius,queryRows:lines.length,truncated:twoStage?truncated:lines.length===limit,path,bytes:text.length}));
 }
 // Three independent staged object acquisitions; each has only one active archive request.
 const concurrency=twoStage?3:2;

@@ -25,10 +25,10 @@ export interface ExtractionReceipt {
 }
 export interface NativeExtractionReceipt extends Omit<ExtractionReceipt, 'outputs'> {
   outputs: { diffuse: string; mask: string; comparison: string; cutout?: string; residual?: string };
-  outputHashes: Record<string,string>;
+  outputBytes: Record<string,number>;
   options: { maxPixels: null; medianSize: number; outputMode: 'all' | 'diffuse-only'; supportPixels: number;
     thresholdSigma: number; bridgeFraction: number; softEdgeFraction: number };
-  source: { path: string; sha256: string; bytes: number; depth: string; width: number; height: number };
+  source: { path: string; bytes: number; depth: string; width: number; height: number };
   processing: { nativeResolution: true; medianSize: number; outputMode: 'all' | 'diffuse-only';
     borderStatistic: string; elapsedSeconds: number; maximumResidentBytes: number };
 }

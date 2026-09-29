@@ -37,10 +37,10 @@ async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) 
   await inventory('new-body', 'prepared', ['runtime.json', 'scene.json']);
   await inventory('new-body', 'runtime', ['unrelated.webp']);
   await inventory('milky-way', 'prepared', ['volume.json', 'slices/z/one.webp']);
-  await inventory('helix', 'prepared', ['lenses.json', 'slice.webp', 'presentation.json', 'provenance.json']);
+  await inventory('helix', 'prepared', ['lenses.json', 'slice.webp', 'presentation.json']);
   await inventory('helix', 'runtime', ['unrelated-preview.webp']);
   await json('src/objects/helix/source/presentation.json', { schema: 'cssearth-volume-presentation-source@1', objectId: 'helix' });
-  await inventory('local-group', 'runtime', ['catalogue.json', 'presentation.json', 'provenance.json'], 'prepared');
+  await inventory('local-group', 'runtime', ['catalogue.json'], 'prepared');
   await json('src/objects/local-group/source/presentation.json', { provenance: { products: [] } });
   const fetcher: typeof fetch = async url => {
     const key = new URL(String(url)).pathname.slice(1), bytes = payloads.get(key);
@@ -67,8 +67,8 @@ test('preparation selection retains all prepared packages and real fixture textu
   const { root } = await fixture(t);
   const assets = await ciPreparationInputs(root);
   assert.deepEqual(assets.map(asset => `${asset.id}/${asset.filename}`).sort(), [
-    'helix/lenses.json', 'helix/presentation.json', 'helix/provenance.json', 'helix/slice.webp',
-    'local-group/catalogue.json', 'local-group/presentation.json', 'local-group/provenance.json',
+    'helix/lenses.json', 'helix/presentation.json', 'helix/slice.webp',
+    'local-group/catalogue.json',
     'milky-way/slices/z/one.webp', 'milky-way/volume.json',
     'mimas/runtime.json', 'mimas/scene.json', 'mimas/surface.webp',
     'new-body/runtime.json', 'new-body/scene.json',
@@ -116,8 +116,8 @@ test('universe selection keeps registry JSON and actual renderer banks without u
   const assets = await ciUniverseInputs(root);
   assert.deepEqual(assets.map(asset => `${asset.id}/${asset.filename}`).sort(), [
     'heliosphere/atlas.webp', 'heliosphere/shell.json',
-    'helix/lenses.json', 'helix/presentation.json', 'helix/provenance.json',
-    'local-group/catalogue.json', 'local-group/presentation.json', 'local-group/provenance.json',
+    'helix/lenses.json', 'helix/presentation.json',
+    'local-group/catalogue.json',
     'm31/layers.json',
     'milky-way/slices/z/one.webp', 'milky-way/volume.json',
     'mimas/features.json', 'mimas/runtime.json', 'mimas/scene.json',

@@ -64,10 +64,7 @@ function queryStatus(query?: ArchiveQuery) {
 
 const pageIdentity = (objectId: string, query: ArchiveQuery) => JSON.stringify([objectId,
   ...['provider', 'status', 'queriedAt', 'endpoint', 'query', 'radiusDegrees', 'matchedCount', 'matchedEstimatedBytes',
-    'matchedUnknownSizeCount', 'error', 'responseSha256', 'imagesPath', 'imagesSha256', 'imageCount'].map(key => query[key as keyof ArchiveQuery])]);
-async function sha256(raw: ArrayBuffer) {
-  return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', raw)), byte => byte.toString(16).padStart(2, '0')).join('');
-}
+    'matchedUnknownSizeCount', 'error', 'imagesPath', 'imageCount'].map(key => query[key as keyof ArchiveQuery])]);
 interface LoadedQuery { identity: string; query?: ArchiveQuery; loading: boolean; error?: string }
 /** The overview stays compact; only the selected object's referenced records enter the browser. */
 function useSelectedQueries(target: MessierInventory['targets'][number] | undefined, reload: number) {
@@ -85,11 +82,9 @@ function useSelectedQueries(target: MessierInventory['targets'][number] | undefi
       const response = await fetch(localFile(expectedPath), { cache: 'no-store', signal: controller.signal });
       if (!response.ok) throw new Error(`Image records unavailable (${response.status}). Reload the snapshot.`);
       const raw = await response.arrayBuffer();
-      if (await sha256(raw) !== reference.imagesSha256) throw new Error('Image records changed since this snapshot. Reload the snapshot.');
       const query = readArchiveQuery(JSON.parse(new TextDecoder().decode(raw)));
       if (query.imagesPath || query.images.length !== reference.imageCount ||
-          pageIdentity(objectId, { ...query, imagesPath: reference.imagesPath, imagesSha256: reference.imagesSha256,
-            imageCount: reference.imageCount }) !== identity) throw new Error('Image records do not match the selected archive query.');
+          pageIdentity(objectId, { ...query, imagesPath: reference.imagesPath, imageCount: reference.imageCount }) !== identity) throw new Error('Image records do not match the selected archive query.');
       return query;
     })).then(results => {
       if (controller.signal.aborted) return;
@@ -114,7 +109,7 @@ export function CatalogueView() {
   const [selectedId, setSelectedId] = useState(readObjectId), [objectSearch, setObjectSearch] = useState(''), [objectType, setObjectType] = useState('all');
   const [provider, setProvider] = useState<ArchiveProvider | 'all'>('all'), [band, setBand] = useState<Band>('all');
   const [imageRole, setImageRole] = useState<ImageRole | 'all'>('all');
-  const [imageMode, setImageMode] = useState(readImageMode), [catalogueHash, setCatalogueHash] = useState('');
+  const [imageMode, setImageMode] = useState(readImageMode);
   function chooseImageMode(mode: 'surveys' | 'archives' | 'papers') {
     setImageMode(mode); const url = new URL(location.href); if (mode === 'surveys') url.searchParams.delete('view'); else url.searchParams.set('view', mode); history.replaceState(history.state, '', url);
   }
@@ -144,9 +139,7 @@ export function CatalogueView() {
       const requests = await Promise.allSettled([
         fetch(localFile(cataloguePath), { cache: 'no-store', signal: controller.signal }).then(async response => {
           if (!response.ok) throw new Error(`Object catalogue unavailable (${response.status}).`);
-          const raw = await response.arrayBuffer(), data = readMessierCatalogue(JSON.parse(new TextDecoder().decode(raw)));
-          const hash = await sha256(raw);
-          return { data, hash };
+          return readMessierCatalogue(await response.json());
         }),
         fetch(localFile(inventoryPath), { cache: 'no-store', signal: controller.signal }).then(async response => {
           if (response.status === 404) return null;
@@ -157,9 +150,9 @@ export function CatalogueView() {
       if (controller.signal.aborted) return;
       const [objects, snapshot] = requests;
       if (objects.status === 'rejected') { setError(textError(objects.reason)); return; }
-      setCatalogue(objects.value.data); setCatalogueHash(objects.value.hash);
-      if (snapshot.status === 'rejected') { setInventory(previous => previous?.catalogueSha256 === objects.value.hash ? previous : null); setError(textError(snapshot.reason)); return; }
-      if (snapshot.value && snapshot.value.catalogueSha256 !== objects.value.hash) {
+      setCatalogue(objects.value);
+      if (snapshot.status === 'rejected') { setInventory(previous => previous?.catalogue === cataloguePath ? previous : null); setError(textError(snapshot.reason)); return; }
+      if (snapshot.value && snapshot.value.catalogue !== cataloguePath) {
         setInventory(null); setError('Archive snapshot belongs to an earlier object catalogue. Rebuild the inventory.'); return;
       }
       setInventory(snapshot.value); setMissing(snapshot.value === null);
@@ -232,7 +225,7 @@ export function CatalogueView() {
             <button type="button" aria-pressed={imageMode === 'archives'} onClick={() => chooseImageMode('archives')}>Archive records</button>
             <button type="button" aria-pressed={imageMode === 'papers'} onClick={() => chooseImageMode('papers')}>Papers</button>
           </div>
-          {imageMode === 'surveys' ? <div className="catalogue-candidates"><SurveyGallery key={selected.id} object={selected} majorArcsec={objectExtent(selected, appearances.get(selected.id)).majorArcsec} /></div> : imageMode === 'papers' ? <PapersView key={selected.id} object={selected} catalogueSha256={catalogueHash} localFile={localFile} /> : <>
+          {imageMode === 'surveys' ? <div className="catalogue-candidates"><SurveyGallery key={selected.id} object={selected} majorArcsec={objectExtent(selected, appearances.get(selected.id)).majorArcsec} /></div> : imageMode === 'papers' ? <PapersView key={selected.id} object={selected} catalogue={cataloguePath} localFile={localFile} /> : <>
           <div className="catalogue-filters">
             <div className="catalogue-archive-filters" role="group" aria-label="Filter archive">
               <button type="button" aria-pressed={provider === 'all'} onClick={() => setProvider('all')}>All archives</button>

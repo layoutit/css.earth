@@ -31,7 +31,7 @@ Feature notes: 1 of the labelled names carry a caption note, the lead summary of
 - Native VIMS gaps remain missing. Bilinear/WebP packing can soften infrared mask edges, and the fixed 2000-face terrain shows coarse lighting facets. More display texels do not add measurements.
 - The retained rotation phase has no new qualification in these records. The separate SBIB regional RGB candidate still has no qualified registration to the revised shape and center.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -64,7 +64,7 @@ The SBIB regional RGB candidate uses a different reference ellipsoid/shape conve
 
 ## Reproduction and qualification
 
-`source/manifest.json` and `source/preparation/acquisition.json` retain original URLs, lengths and SHA256s. Source-owned numeric recipes produce surfaces, atlases, minimaps and a regenerated radial navigation context ahead of runtime. Native data fixtures check all four cube arrays, the literal missing sentinel and low/zero-count geographic samples. Separate NumPy ray intersections test the six cardinal directions of the exact official OBJ.
+`source/manifest.json` and `source/preparation/acquisition.json` retain original URLs, lengthss. Source-owned numeric recipes produce surfaces, atlases, minimaps and a regenerated radial navigation context ahead of runtime. Native data fixtures check all four cube arrays, the literal missing sentinel and low/zero-count geographic samples. Separate NumPy ray intersections test the six cardinal directions of the exact official OBJ.
 
 </details>
 

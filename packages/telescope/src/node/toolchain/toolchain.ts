@@ -1,30 +1,24 @@
 /** Install one pinned astronomy environment per user; read legacy checkout-local environments when valid. */
-import { createHash } from 'node:crypto';
 import { runToolchainProcess } from './process.js';
 import { accessSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from '../paths.js';
+import { installedMarkerIssue, readToolchainPins, writeInstalledMarker, type ToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 export const ASTROQUERY_ROOT = resolve(WORKSPACE, 'output/toolchains/astroquery');
 export const ASTROQUERY_CACHE = resolve(process.env.CSS_EARTH_ASTROQUERY_CACHE ?? resolve(homedir(), '.cache/css-earth/astroquery'));
 
-function descriptor() {
-  const text = readFileSync(resolve(TOOLCHAINS, 'toolchain.json'), 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
-  const lock = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements)), 'utf8');
-  return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
-}
+const descriptor = (): ToolchainPins => readToolchainPins('astroquery', 'toolchain.json');
 
-export function installedToolchain(root: string, digest: string): boolean {
-  try {
-    const marker = requireRecord(JSON.parse(readFileSync(resolve(root, 'installed.json'), 'utf8')) as unknown);
-    if (marker.id !== 'astroquery' || marker.pinsSha256 !== digest) return false;
-    accessSync(resolve(root, 'env/bin/python'));
-    return true;
-  } catch { return false; }
+/** The shared per-user environment is named by the package versions it pins; its marker holds the exact descriptor and lock. */
+const sharedRoot = (entry: Record<string, unknown>): string => resolve(ASTROQUERY_CACHE, `packages-${expectedVersions(entry).replaceAll(' ', '_')}`);
+
+export function installedToolchain(root: string, pins: ToolchainPins): boolean {
+  if (installedMarkerIssue(root, pins) !== null) return false;
+  try { accessSync(resolve(root, 'env/bin/python')); return true; } catch { return false; }
 }
 
 /** One installer owns a pin at a time. The final marker is written only after package verification. */
@@ -64,10 +58,10 @@ function verifyPackages(root: string, entry: Record<string, unknown>): void {
 }
 
 export async function installAstroquery() {
-  const { entry, digest } = descriptor(), root = resolve(ASTROQUERY_CACHE, digest), prefix = resolve(root, 'env');
+  const pins = descriptor(), { entry } = pins, root = sharedRoot(entry), prefix = resolve(root, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   return withInstallLock(root, async () => {
-    if (installedToolchain(root, digest)) {
+    if (installedToolchain(root, pins)) {
       try { verifyPackages(root, entry); return root; }
       catch { /* A marked but broken environment is rebuilt under the install lock. */ }
     }
@@ -75,7 +69,7 @@ export async function installAstroquery() {
     await mkdir(root, { recursive: true });
     const env = { MAMBA_ROOT_PREFIX: resolve(root, 'mamba') };
     runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
-    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements))]);
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements))]);
     for (const value of requireArray(entry.sourcePackages, 'sourcePackages')) {
       const source = requireRecord(value, 'source package');
       if (source.build !== 'installed-numpy') throw new TypeError('A source package must state the installed-numpy build policy.');
@@ -84,13 +78,13 @@ export async function installAstroquery() {
     }
     verifyPackages(root, entry);
     await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });
-    await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id: 'astroquery', pinsSha256: digest }, null, 2)}\n`);
+    writeInstalledMarker(root, pins);
     return root;
   });
 }
 
 export interface AstroqueryToolchain {
-  readonly python: string; readonly digest: string; readonly version: string; readonly pyvoVersion: string;
+  readonly python: string; readonly version: string; readonly pyvoVersion: string;
   readonly scipyVersion: string; readonly batmanVersion: string; readonly cdflibVersion: string; readonly pyuvdataVersion: string; readonly orbitizeVersion: string; readonly whereIsThePlanetVersion: string; readonly astropyHealpixVersion:string; readonly env: NodeJS.ProcessEnv;
 }
 
@@ -106,26 +100,26 @@ export function toolchainRootIssue(root: string): string | null {
 }
 
 export function astroqueryToolchainSync(): AstroqueryToolchain {
-  const { entry, digest } = descriptor(), shared = resolve(ASTROQUERY_CACHE, digest);
-  const root = findInstalledRoot(ASTROQUERY_ROOT, shared, digest);
+  const pins = descriptor(), { entry } = pins;
+  const root = findInstalledRoot(ASTROQUERY_ROOT, sharedRoot(entry), pins);
   if (!root) {
     const rootIssue = toolchainRootIssue(ASTROQUERY_ROOT);
     throw new Error(rootIssue ?? 'The astronomy packages are not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install');
   }
   const bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
-  return { python, digest, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),
+  return { python, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),
     batmanVersion: requireString(entry.batman), cdflibVersion: requireString(entry.cdflib), pyuvdataVersion: requireString(entry.pyuvdata), orbitizeVersion: requireString(entry.orbitize), whereIsThePlanetVersion: requireString(entry.whereistheplanet), astropyHealpixVersion:requireString(entry.astropyHealpix), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };
 }
 
 export async function astroqueryToolchain(): Promise<AstroqueryToolchain> { return astroqueryToolchainSync(); }
 
-export function findInstalledRoot(local: string, shared: string, digest: string): string | null {
-  return installedToolchain(shared, digest) ? shared : installedToolchain(local, digest) ? local : null;
+export function findInstalledRoot(local: string, shared: string, pins: ToolchainPins): string | null {
+  return installedToolchain(shared, pins) ? shared : installedToolchain(local, pins) ? local : null;
 }
 
 /** Check the installed environment's imports and versions against the pins; the line `verify` prints. */
 export async function verifyAstroqueryToolchain(): Promise<string> {
   const toolchain = await astroqueryToolchain();
   verifyPackages(dirname(dirname(dirname(toolchain.python))), descriptor().entry);
-  return `Astronomy packages ready: Astroquery ${toolchain.version}, PyVO ${toolchain.pyvoVersion}, SciPy ${toolchain.scipyVersion}, batman ${toolchain.batmanVersion}, orbitize ${toolchain.orbitizeVersion}, whereistheplanet ${toolchain.whereIsThePlanetVersion}, cdflib ${toolchain.cdflibVersion}, pyuvdata ${toolchain.pyuvdataVersion}, astropy-healpix ${toolchain.astropyHealpixVersion}; pins ${toolchain.digest.slice(0, 12)}`;
+  return `Astronomy packages ready: Astroquery ${toolchain.version}, PyVO ${toolchain.pyvoVersion}, SciPy ${toolchain.scipyVersion}, batman ${toolchain.batmanVersion}, orbitize ${toolchain.orbitizeVersion}, whereistheplanet ${toolchain.whereIsThePlanetVersion}, cdflib ${toolchain.cdflibVersion}, pyuvdata ${toolchain.pyuvdataVersion}, astropy-healpix ${toolchain.astropyHealpixVersion}`;
 }

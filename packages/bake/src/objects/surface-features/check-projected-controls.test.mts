@@ -48,10 +48,10 @@ test('rejects missing surface intersections and negative camera depth', () => {
   assert.throws(() => inspectProjectedControls(controls, shape, { ...camera, project() { return [50, 50, -1]; } }, 100, 100), /Invalid projection/);
 });
 
-test('checks input bytes before decoding the native image', async () => {
+test('refuses an undecodable native image and an input outside the input directory', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'projected-control-test-'));
   try {
-    const recipe = { schema: 'cssearth-projected-controls@1', coordinateConvention: 'planetocentric-east-positive-z-north', purpose: 'diagnostic-only', source: 'test source', limitations: 'test only', controls: [control('a', 0, 0)], image: { file: 'native.fits', format: 'fits-primary', pixelConvention: 'zero-based-x-right-y-down-reversed-fits-rows', width: 100, height: 100, bytes: 3, sha256: '0'.repeat(64) } };
+    const recipe = { schema: 'cssearth-projected-controls@1', coordinateConvention: 'planetocentric-east-positive-z-north', purpose: 'diagnostic-only', source: 'test source', limitations: 'test only', controls: [control('a', 0, 0)], image: { file: 'native.fits', format: 'fits-primary', pixelConvention: 'zero-based-x-right-y-down-reversed-fits-rows', width: 100, height: 100, bytes: 3 } };
     await writeFile(join(directory, 'native.fits'), 'abc'); await writeFile(join(directory, 'recipe.json'), JSON.stringify(recipe));
     await assert.rejects(checkProjectedControlRecipe(join(directory, 'recipe.json'), directory, join(directory, 'result')));
     recipe.image.file = '../native.fits'; await writeFile(join(directory, 'recipe.json'), JSON.stringify(recipe));

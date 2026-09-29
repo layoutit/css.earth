@@ -36,4 +36,3 @@ export type ObservedRadialLayer = s.Infer<typeof observed>;
 export const radialRecipe = obj({schema: s.literal('cssearth-radial-layer-recipe@1'), units: s.literal('kilometers'), sources: arr(sourcePin), layers: arr(s.union(annular, observed))});
 export type RadialLayerRecipe = s.Infer<typeof radialRecipe>;
 export interface RadialProfile {color: Uint8Array; transparency: Uint8Array; width: number}
-export const runtimeAssetManifest = obj({assets: arr(obj({filename:str,bytes:n,sha256:str}))});

@@ -9,7 +9,7 @@ export interface PreparedCssTransport {
   read(url: string, signal?: AbortSignal): Promise<ArrayBuffer>;
 }
 
-/** Decode a pinned artifact. Runtime never bakes a missing or stale payload. */
+/** Decode a prepared artifact. Runtime never bakes a missing or stale payload. */
 export async function loadPreparedCssObject(
   descriptorInput: unknown,
   transport: PreparedCssTransport,

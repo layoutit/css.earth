@@ -17,7 +17,7 @@ Adopted diameter: **38 ± 5 km**, meaning occultation-constrained volume-equival
 
 ## Evidence
 
-Checked 2026-09-21 by [`tools/objects/source-authoring/damit-asteroids/author.mts`](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/author.mts) from the pinned [inputs](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/inputs.json) (pinned at commit `f4d47f1661`; now `packages/bake/authoring/damit-asteroids/`). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records and every derived record are pinned by bytes and SHA-256 in the [input manifest](source/manifest.json).
+Checked 2026-09-21 by [`tools/objects/source-authoring/damit-asteroids/author.mts`](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/author.mts) from the pinned [inputs](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/inputs.json) (pinned at commit `f4d47f1661`; now `packages/bake/authoring/damit-asteroids/`). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records and every derived record are recorded by path and byte count in the [input manifest](source/manifest.json).
 
 ## Known problems
 
@@ -26,7 +26,7 @@ Checked 2026-09-21 by [`tools/objects/source-authoring/damit-asteroids/author.mt
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - The displayed rotation phase is arbitrary and not propagated from the model epoch. Orbit context is fixed at 2026-09-03 TT.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

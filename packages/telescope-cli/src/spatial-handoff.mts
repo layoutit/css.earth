@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { requireRecord,requireString } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
+import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
 
@@ -38,7 +38,7 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     const pin=requireRecord(recipe[key]),path=relative(root,resolve(root,dirname(recipePath),requireString(pin.path)));
     await read(path);
   }
-  if(kind==='volume-lens-bank')for(const path of ['README.md','prepared/provenance.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
+  if(kind==='volume-lens-bank')for(const path of ['README.md','source/manifest.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
   const entry=new URL(kind==='points'?'../../../packages/renderer/src/stars/loader.ts':kind==='volume'?'../../../packages/renderer/src/volume/loader.ts':'../../../packages/renderer/src/volume/prepared-volume-lenses.ts',import.meta.url);
@@ -54,7 +54,7 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
       :{kind,payload:await loader.loadPreparedVolumeLenses!(descriptor,transport)};
     const manifestPath=requireString(prepared.url);
     const resources=value.kind==='volume-lens-bank'?value.payload.lenses.flatMap(lens=>lens.volume.resources):value.payload.resources;
-    for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes||sha256(content)!==resource.sha256)throw new Error(`Spatial resource pin mismatch: ${resource.path}`);}
+    for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes)throw new Error(`Spatial resource ${resource.path} is ${content.length} bytes; ${manifestPath} lists ${resource.bytes}.`);}
     // A point field publishes its baked provenance beside its manifest (prepared/stars-provenance.json); the others carry it.
     const provenance:unknown=value.kind==='points'?requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),'stars-provenance.json')))).toString())).provenance:value.payload.provenance;
     return {source,root,bytes,descriptor,checked,compiled,provenance,...value};
@@ -74,14 +74,13 @@ export async function exportSpatialObject(objectPath:string,kind:SpatialKind,out
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
   try{
     const value=await validateSpatialObject(objectPath,kind);
-    const {source,bytes,descriptor,checked,compiled,provenance}=value;
+    const {source,bytes,descriptor,checked,provenance}=value;
     const outputs=[{path:'object.json',file:resolve(staging,'object.json')}];await writeFile(outputs[0].file,bytes);
     for(const [path,item] of checked){const file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await writeFile(file,item.bytes);outputs.push({path,file});}
     for(const item of checked.values())if((await readFile(item.pin.identity)).length!==item.pin.bytes)throw new Error('Spatial source changed during export');
-    if(sha256(await readFile(source))!==sha256(bytes))throw new Error('Spatial descriptor changed during export');
-    const implementation=sha256(Buffer.concat([await readFile(new URL('spatial-handoff.mts',import.meta.url)),...await Promise.all(Object.keys(compiled.metafile.inputs).sort().map(file=>readFile(file)))]));
+    if(!(await readFile(source)).equals(bytes))throw new Error(`Spatial descriptor ${source} changed during export`);
     const frame=value.kind==='volume-lens-bank'?requireRecord(requireRecord(descriptor.properties).frame,'physical frame'):value.payload.frame;
-    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:implementation}]},outputs);
+    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:VERSION}]},outputs);
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,object:resolve(destination,'object.json'),receipt:resolve(destination,'output.product.json'),kind};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}

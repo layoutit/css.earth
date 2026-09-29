@@ -14,7 +14,6 @@
     "name": "ngc3132-4416768.ch1.remosaic.fits",
     "bytes": 9792000,
     "stage": "open-remosaic",
-    "toolchainDigest": "57d10b4f335a2b3f6abbe10732b610db92c3e2089cadcaa0059d4b0a78299cc6",
     "software": [
       {
         "name": "numpy",
@@ -60,7 +59,7 @@
   "statistics": {
     "comparedPixels": 809858,
     "archiveCoveredPixels": 812557,
-    "bitIdenticalShare": 0.000006173921848027679,
+    "bitIdenticalShare": 6.173921848027679e-06,
     "medianRatio": 0.9998603295091614,
     "medianLevel": 0.071918785572052,
     "medianAbsoluteDifferenceOverLevel": 0.0037213647141506236,

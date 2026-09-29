@@ -4,7 +4,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Sources
 
-Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj) is attributed to Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes.
+Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj) is attributed to Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts.
 
 Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition.
 
@@ -26,7 +26,7 @@ The display prime meridian is arbitrary; accelerated rotation and lighting do no
 
 The JPL release has more vertices than the 512-vertex fit discussed in the paper. Its sampling density is not observation resolution. The paper gives a model-dependent volume upper bound near 8.8 km³; rounded archival geometry is not a new physical measurement. The separate PDS release is thicker and has different coordinates. These variants are not claimed identical. Later thermophysical research favors a thinner/lightcurve-based interpretation; this package intentionally identifies the archived radar reconstruction.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="geographos-sources"></a>
 <a id="shape-and-physical-interpretation"></a>

@@ -1,5 +1,4 @@
 /** Explicit single-writer metadata enrichment. Stop acquisition before invoking this command. */
-import { createHash } from 'node:crypto';
 import { readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { enrichImageMetadata, selectEnrichmentCandidates, type EnrichedArchiveImage } from './enrich-messier.ts';
@@ -7,7 +6,6 @@ import { inventoryStorage } from '../../../features/catalogue/selection.ts';
 import { readArchiveImage, readArchiveQuery, readMessierInventory, type ArchiveImage, type MessierInventory } from '../../../features/catalogue/types.ts';
 import { isRecord as record } from '@cssearth/core';
 
-const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const directory = '.local/nebula-lab/catalogue/messier';
 const indexPath = `${directory}/index.json`;
 function originalImage(image: ArchiveImage): ArchiveImage {
@@ -32,7 +30,7 @@ export function applyEnrichments(inventory: MessierInventory, updates: Map<strin
         const previous = record(value) && Array.isArray(value.metadataEvidence) ? value.metadataEvidence : [];
         return readArchiveImage({ ...image, accessUrl: update.accessUrl, accessFormat: update.accessFormat,
           estimatedBytes: update.estimatedBytes, previewUrl: update.previewUrl,
-          metadataOriginal: { publishedId: image.id.replace(/#[a-f0-9]{16}$/, ''), accessUrl: original.accessUrl,
+          metadataOriginal: { publishedId: image.id.includes('#') ? image.id.slice(0, image.id.indexOf('#')) : image.id, accessUrl: original.accessUrl,
             accessFormat: original.accessFormat, estimatedBytes: original.estimatedBytes, previewUrl: original.previewUrl },
           metadataEvidence: [...previous, ...update.metadataEvidence] });
       });
@@ -46,7 +44,6 @@ async function hydrate(root: string, text: string): Promise<MessierInventory> {
   for (const target of inventory.targets) for (let i = 0; i < target.queries.length; i++) {
     const query = target.queries[i]!; if (!query.imagesPath) continue;
     const bytes = await readFile(resolve(root, query.imagesPath));
-    if (hash(bytes) !== query.imagesSha256) throw new Error(`Archive page hash mismatch: ${query.imagesPath}`);
     const page = readArchiveQuery(JSON.parse(bytes.toString()));
     if (page.provider !== query.provider || page.images.length !== query.imageCount) throw new Error('Archive page identity/count mismatch.');
     target.queries[i] = page;
@@ -56,22 +53,22 @@ async function hydrate(root: string, text: string): Promise<MessierInventory> {
 }
 async function publish(root: string, originalIndex: string, inventory: MessierInventory) {
   const files = inventory.targets.flatMap(target => target.queries.filter(query => query.status !== 'pending').map(query => {
-    const { imagesPath: _path, imagesSha256: _hash, imageCount: _count, ...full } = query;
+    const { imagesPath: _path, imageCount: _count, ...full } = query;
     return { path: `${directory}/queries/${target.objectId}-${query.provider}.json`, query, contents: JSON.stringify(full) };
   }));
   const snapshot: MessierInventory = { ...inventory, storage: inventoryStorage(inventory), targets: inventory.targets.map(target => ({ ...target,
     queries: target.queries.map(query => {
       const file = files.find(candidate => candidate.query === query);
-      return file ? { ...query, images: [], imageCount: query.images.length, imagesPath: file.path, imagesSha256: hash(file.contents) } : query;
+      return file ? { ...query, images: [], imageCount: query.images.length, imagesPath: file.path } : query;
     }) })) };
   readMessierInventory(snapshot);
-  if (hash(await readFile(resolve(root, indexPath))) !== hash(originalIndex)) {
+  if (await readFile(resolve(root, indexPath), 'utf8') !== originalIndex) {
     throw new Error('Inventory changed during enrichment. Stop acquisition and retry; no pages were modified.');
   }
-  // Single writer: publish complete pages first, then their compact index. Readers check page hashes.
+  // Single writer: publish complete pages first, then their compact index. Readers check each page's provider and count.
   for (const file of files) {
     const path = resolve(root, file.path);
-    if (hash(await readFile(path)) === hash(file.contents)) continue;
+    if (await readFile(path, 'utf8') === file.contents) continue;
     await writeFile(`${path}.enrich.tmp`, file.contents); await rename(`${path}.enrich.tmp`, path);
   }
   const path = resolve(root, indexPath);
@@ -79,7 +76,7 @@ async function publish(root: string, originalIndex: string, inventory: MessierIn
   const verified = readMessierInventory(JSON.parse(await readFile(path, 'utf8')));
   if (JSON.stringify(verified) !== JSON.stringify(snapshot)) throw new Error('Published inventory differs from enrichment snapshot.');
   const summaryPath = resolve(root, directory, 'summary.json');
-  await writeFile(`${summaryPath}.enrich.tmp`, JSON.stringify({ generatedAt: verified.generatedAt, catalogueSha256: verified.catalogueSha256,
+  await writeFile(`${summaryPath}.enrich.tmp`, JSON.stringify({ generatedAt: verified.generatedAt, catalogue: verified.catalogue,
     policy: verified.policy, ...verified.storage, indexBytes: (await readFile(path)).byteLength }, null, 2));
   await rename(`${summaryPath}.enrich.tmp`, summaryPath);
   return verified;

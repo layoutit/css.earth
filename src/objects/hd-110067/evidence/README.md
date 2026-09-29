@@ -10,7 +10,7 @@ The focused astronomy checks passed 26 tests, covering catalogue registration, s
 
 CI exposed a preparation-order defect: restoring the Sun's published context after generating the current catalogue replaced it with a version missing the seven new bodies. The universe lanes now rerun the existing world-context preparation after restoration. Locally, restoring those three published files and regenerating them passed both the catalogue-membership check and the full-context/summary/binary-orbit consistency check (two selected tests).
 
-The shared source validator verified the seven manifests and public assets. The published source catalogue compiled with the new facts and citations. [Delivery evidence](delivery.json) records a fresh restore of all 312 inventoried files (50,027,919 bytes), with zero reuse or skipped files. Every downloaded file passed its inventory size and SHA-256 check.
+The shared source validator verified the seven manifests and public assets. The published source catalogue compiled with the new facts and citations. [Delivery evidence](delivery.json) records a fresh restore of all 312 inventoried files (50,027,919 bytes), with zero reuse or skipped files. Every downloaded file passed its inventory size check.
 
 ## Inspected browser views
 

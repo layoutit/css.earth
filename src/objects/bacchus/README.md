@@ -4,7 +4,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Sources
 
-Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj) is attributed to Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes.
+Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj) is attributed to Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts.
 
 Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition.
 
@@ -24,7 +24,7 @@ This is the paper’s conservative single-lobe working model, not a uniquely res
 
 The display prime meridian is arbitrary; accelerated rotation and lighting do not propagate a measured present-day attitude.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="bacchus-sources"></a>
 <a id="shape-and-physical-interpretation"></a>

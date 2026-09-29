@@ -4,9 +4,9 @@ import { gridTransferDecision, parseSkyBandRegistration, skyBandCandidate } from
 
 const wcs = { projection: 'TAN', coordinateFrame: 'ICRS', referenceDimension: [4000, 4000], referencePixel: [2000, 2000], referenceValueDeg: [13.19, -72.83],
   scaleDeg: [-0.0025063655876377947, 0.0025063655876377947], rotationDeg: 0 };
-const pin = { path: 'labs/nebula/models/x/recipe.json', sha256: 'a'.repeat(64) };
-const candidate = (id: string, extra: Record<string, unknown> = {}) => skyBandCandidate({ id, path: `.local/x/${id}.png`, sha256: 'b'.repeat(64), wcs, skyBands: pin, ...extra });
-const stars = { query: pin, path: '.local/x/stars.csv', sha256: 'c'.repeat(64) };
+const pin = { path: 'labs/nebula/models/x/recipe.json' };
+const candidate = (id: string, extra: Record<string, unknown> = {}) => skyBandCandidate({ id, path: `.local/x/${id}.png`, wcs, skyBands: pin, ...extra });
+const stars = { query: pin, path: '.local/x/stars.csv' };
 
 test('a grid transfer needs a passing catalogue gate on the reference and an identical grid and WCS', () => {
   const grid = JSON.stringify({ width: 4000, height: 4000, fovDeg: 10, centerIcrsDegrees: [13.19, -72.83] });

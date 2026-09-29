@@ -9,75 +9,61 @@
   ],
   "pins": [
     {
-      "path": "src/objects/europa/object.json",
-      "sha256": "d2add4c306364567f001f59966d5eaea74c9282ce8babc536a48cda812cf10a8"
+      "path": "src/objects/europa/object.json"
     },
     {
-      "path": "src/objects/europa/composition.css",
-      "sha256": "9ba9d466a52259eb155b74a726eea337c4d38e9d48c75e9f5971f7fae04d2b07"
+      "path": "src/objects/europa/composition.css"
     },
     {
-      "path": "src/objects/europa/text.json",
-      "sha256": "cc0d43fe4eeea646a5f6864a52d2f3088b946ac98bea74c14ca7fe295e143e60"
+      "path": "src/objects/europa/text.json"
     },
     {
-      "path": "src/objects/europa/source/preparation/raster.json",
-      "sha256": "f932b8bacf14fc327519ad725ce0d8a816857e1bb03abc6b4ec07f501fcbb1d6"
+      "path": "src/objects/europa/source/preparation/raster.json"
     },
     {
-      "path": "src/objects/europa/source/content/object.json",
-      "sha256": "ecdadd63438967d6e9dd54f21b5d7777fd3d4819fa2c1e50bfd38a403c7903ab"
+      "path": "src/objects/europa/source/content/object.json"
     },
     {
-      "path": "src/objects/europa/prepared/scene.refs.json",
-      "sha256": "8e16a56dbdd419ddf8a52d1ecedc82933f3912fe01db01128e7df83360ef7df3"
+      "path": "src/objects/europa/prepared/scene.refs.json"
     },
     {
-      "path": "src/objects/europa/prepared/lenses.json",
-      "sha256": "61293412c6586df677ac0cc45d9f74109c1b2c0bb64bc1d7ef3640801dab22cf"
+      "path": "src/objects/europa/prepared/lenses.json"
     },
     {
-      "path": "src/objects/europa/prepared/page.json",
-      "sha256": "033169d9062a0223f52f9a91cb2aa88f1718c0d4bbdc402237afc47c37c2149e"
+      "path": "src/objects/europa/prepared/page.json"
     },
     {
-      "path": "src/objects/europa/runtime-assets.json",
-      "sha256": "8ca126883c8651c42170d71e03c960fee3b58981fc89351f56dc4daafae219fe"
+      "path": "src/objects/europa/runtime-assets.json"
     }
   ],
   "screenshots": [
     {
       "path": "coarse-ice-mobile.png",
       "bytes": 164793,
-      "sha256": "ef25534e0a03060f581238b14ede4fcae20a14b0545d468f2445cfe4b3c0863d",
       "width": 390,
       "height": 844
     },
     {
       "path": "coarse-ice.png",
       "bytes": 565816,
-      "sha256": "0e79fb82e308be0ae88196a7592123897fcb6a18274db5a984cf4584c26056aa",
       "width": 1440,
       "height": 1000
     },
     {
       "path": "fine-ice.png",
       "bytes": 583998,
-      "sha256": "e4a8ac8bf6fa697fe960037d8e41cddf70db9803e236df7b5a32c90a7b12c595",
       "width": 1440,
       "height": 1000
     },
     {
       "path": "ice-signature-dpr2.png",
       "bytes": 1508410,
-      "sha256": "824d170451b607060b8d73db9e2ec4eaad680ea1d13ad8603e99b234624355d9",
       "width": 2880,
       "height": 2000
     },
     {
       "path": "ice-signature.png",
       "bytes": 572323,
-      "sha256": "035e79397983e0d177bdebee5968fa617295bbb361af2b161a9168c0ddd93f9f",
       "width": 1440,
       "height": 1000
     }
@@ -129,7 +115,7 @@
         "silhouetteRadius": 259.1999999995129,
         "bodyCenterKilometers": [
           9.832438081502914e-10,
-          -4.7873705625534054e-8,
+          -4.7873705625534054e-08,
           -7669.910803331804
         ]
       }
@@ -180,7 +166,7 @@
         "silhouetteRadius": 259.1999999995129,
         "bodyCenterKilometers": [
           9.832438081502914e-10,
-          -4.7873705625534054e-8,
+          -4.7873705625534054e-08,
           -7669.910803331804
         ]
       }
@@ -231,7 +217,7 @@
         "silhouetteRadius": 259.1999999995129,
         "bodyCenterKilometers": [
           9.832438081502914e-10,
-          -4.7873705625534054e-8,
+          -4.7873705625534054e-08,
           -7669.910803331804
         ]
       }
@@ -273,7 +259,7 @@
         "silhouetteRadius": 259.1999999995129,
         "bodyCenterKilometers": [
           9.706414231366432e-10,
-          -4.726010107972152e-8,
+          -4.726010107972152e-08,
           -7571.60439330135
         ]
       },
@@ -328,7 +314,7 @@
       "silhouetteRadius": 259.1999999995129,
       "bodyCenterKilometers": [
         9.832438081502914e-10,
-        -4.7873705625534054e-8,
+        -4.7873705625534054e-08,
         -7669.910803331804
       ]
     },

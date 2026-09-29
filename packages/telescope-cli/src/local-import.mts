@@ -1,11 +1,11 @@
 /** Bounded, data-only local import. It pins original bytes but makes no archive-origin or calibration claim. */
 import { constants } from 'node:fs';
-import { copyFile, lstat, mkdir, mkdtemp, open, readdir, readFile, rename, rm, rmdir, writeFile } from 'node:fs/promises';
+import { copyFile, lstat, mkdir, mkdtemp, open, readdir, rename, rm, rmdir, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
-import { sha256, sha256File } from '@cssearth/core/node';
+import { VERSION } from './help.mts';
 import { proposedFamilyProfiles } from './family-handlers.mts';
 import { FAMILY_IDS, type CalibrationState, type DescriptorMember, type FamilyId, type MemberRole } from './product-descriptor.mts';
 import { describeMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
@@ -24,7 +24,7 @@ export interface LocalImportSpec {
 export interface LocalImportManifest {
   readonly schema:typeof LOCAL_IMPORT_SCHEMA;readonly datasetId:string;readonly declarations?:LocalImportSpec['declarations'];readonly limits:LocalImportSpec['limits'];
   readonly members:readonly DescriptorMember[];readonly proposedProfiles:readonly {readonly handlerId:string;readonly profileId:string}[];
-  readonly descriptor?:{readonly path:string;readonly bytes:number;readonly sha256:string};
+  readonly descriptor?:{readonly path:string;readonly bytes:number};
   readonly issues:readonly {readonly state:'unknown'|'unsupported';readonly reason:string}[];
 }
 const ID=/^[A-Za-z0-9][A-Za-z0-9._:-]*$/u;
@@ -56,7 +56,7 @@ const LOCAL_QUALIFIERS=new Map([
   ['astropy-healpix-fits@1','F14'],
   ['astropy-physical-cartesian-grid@1','F16'],
 ] as const);
-async function qualifyLocalImport(spec:LocalImportSpec,members:readonly DescriptorMember[],candidates:readonly {readonly handlerId:string;readonly profileId:string}[],staging:string):Promise<{readonly descriptor?:{readonly path:string;readonly bytes:number;readonly sha256:string};readonly issue?:LocalImportManifest['issues'][number]}> {
+async function qualifyLocalImport(spec:LocalImportSpec,members:readonly DescriptorMember[],candidates:readonly {readonly handlerId:string;readonly profileId:string}[],staging:string):Promise<{readonly descriptor?:{readonly path:string;readonly bytes:number};readonly issue?:LocalImportManifest['issues'][number]}> {
   const supported=candidates.filter(candidate=>LOCAL_QUALIFIERS.has(candidate.profileId as 'astropy-mixed-nd-fits@1'|'astropy-healpix-fits@1'|'astropy-physical-cartesian-grid@1'));
   const hints=spec.declarations?.familyHints;
   if(hints?.includes('F16')&&spec.declarations?.physicalContext===undefined)return{issue:{state:'unsupported',reason:'Physical Cartesian FITS import requires declarations.physicalContext; XYZ axes alone do not establish a physical volume.'}};
@@ -69,7 +69,7 @@ async function qualifyLocalImport(spec:LocalImportSpec,members:readonly Descript
   }
   const science=members.filter(member=>member.role==='science');
   if(science.length!==1)return{issue:{state:'unknown',reason:`The selected local profile requires exactly one science member; this import has ${science.length}.`}};
-  // The import manifest keeps the digests it computed for its copies; a product descriptor names members by path (PR #531).
+  // A product descriptor names members by path and size.
   const {id,path:memberPath,role,mediaType}=science[0]!,member:DescriptorMember={id,path:memberPath,role,...mediaType?{mediaType}:{}};
   const pin={path:resolve(staging,member.path)},profile=selected[0]!;
   try{
@@ -80,7 +80,7 @@ async function qualifyLocalImport(spec:LocalImportSpec,members:readonly Descript
         ?describeHealpix({id:spec.datasetId,member,map:await inspectHealpix(pin),producingRecord:'import.product.json',acquisition,calibration})
         :spec.declarations?.physicalContext===undefined?(()=>{throw new TypeError('Physical Cartesian FITS import requires declarations.physicalContext; XYZ axes alone do not establish a physical volume.');})()
         :describePhysicalCartesianGrid({id:spec.datasetId,member,context:spec.declarations.physicalContext,inspection:await inspectPhysicalCartesianGrid(pin,spec.declarations.physicalContext),producingRecord:'import.product.json',target:spec.declarations.target,acquisition});
-    const path=resolve(staging,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return{descriptor:{path:'descriptor.json',...await sha256File(path)}};
+    const path=resolve(staging,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return{descriptor:{path:'descriptor.json',bytes:(await stat(path)).size}};
   }catch(error){return{issue:{state:'unsupported',reason:`The selected ${profile.profileId} content validator refused the imported bytes: ${error instanceof Error?error.message:String(error)}`}};}
 }
 
@@ -95,19 +95,18 @@ export async function importLocalArtifact(value:unknown,outputDirectory:string):
     const members:DescriptorMember[]=[],inputs:ProductInput[]=[];let copiedBytes=0;
     for(const [index,file] of pending.entries()){
       const target=resolve(staging,'files',file.logical),rel=relative(resolve(staging,'files'),target);if(rel==='..'||rel.startsWith('../'))throw new TypeError('Local import path escapes staging.');await mkdir(dirname(target),{recursive:true});
-      const before=await sha256File(file.source);if(before.bytes!==file.bytes)throw new Error(`Local source changed during enumeration: ${file.source}.`);await copyFile(file.source,target,constants.COPYFILE_EXCL);const copied=await sha256File(target),after=await sha256File(file.source);if(copied.sha256!==before.sha256||copied.bytes!==before.bytes||after.sha256!==before.sha256||after.bytes!==before.bytes)throw new Error(`Local source changed during import: ${file.source}.`);
+      const before={bytes:(await stat(file.source)).size};if(before.bytes!==file.bytes)throw new Error(`Local source changed during enumeration: ${file.source} is ${before.bytes} bytes, enumerated at ${file.bytes}.`);await copyFile(file.source,target,constants.COPYFILE_EXCL);const copied={bytes:(await stat(target)).size},after={bytes:(await stat(file.source)).size};if(copied.bytes!==before.bytes||after.bytes!==before.bytes)throw new Error(`Local source changed during import: ${file.source} was ${before.bytes} bytes, copied ${copied.bytes}, now ${after.bytes}.`);
       copiedBytes+=copied.bytes;if(copiedBytes>spec.limits.maxBytes)throw new RangeError('Local import byte limit exceeded.');const id=`member-${String(index+1).padStart(4,'0')}`;members.push({id,path:`files/${file.logical}`,role:file.role,...copied,mediaType:mediaType(file.logical)});inputs.push({role:`local ${file.role}`,identity:file.source,bytes:before.bytes});
     }
     const recognized=proposedFamilyProfiles(await Promise.all(members.map(async member=>({path:member.path,prefix:await prefix(resolve(staging,member.path))})))),candidates=[...recognized,...(spec.declarations?.physicalContext&&spec.declarations.familyHints?.includes('F16')?[{handlerId:'f16-cartesian-grid',profileId:'astropy-physical-cartesian-grid@1'} as const]:[])];
     const qualification=await qualifyLocalImport(spec,members,candidates,staging);
     const issues:LocalImportManifest['issues']=[{state:'unknown',reason:spec.declarations?.origin?'Origin was declared by the importer and remains unverified; local byte integrity does not establish it.':'No archive origin was declared; local byte integrity does not establish origin.'},...(spec.declarations?[{state:'unknown' as const,reason:'Target, family, units, frame and calibration metadata in declarations are user-supplied assertions until a handler qualifies each applicable fact.'}]:[]),...(candidates.length?[]:[{state:'unsupported' as const,reason:'No registered handler recognized the imported bytes. Original files remain pinned.'}]),...(qualification.issue?[qualification.issue]:[])];
     const manifestValue:LocalImportManifest={schema:LOCAL_IMPORT_SCHEMA,datasetId:spec.datasetId,...(spec.declarations?{declarations:spec.declarations}:{}),limits:spec.limits,members,proposedProfiles:candidates,...(qualification.descriptor?{descriptor:qualification.descriptor}:{}),issues};const manifest=resolve(staging,'import.json');await writeFile(manifest,`${JSON.stringify(manifestValue,null,2)}\n`);
-    const implementation=sha256(Buffer.concat(await Promise.all(['local-import.mts','family-handlers.mts','product-descriptor.mts','families/f02-mixed-nd.mts','families/f14-healpix.mts','families/f16/f16-cartesian-grid.mts'].map(name=>readFile(new URL(name,import.meta.url))))));
     const fits=members.filter(member=>member.role==='science'&&member.mediaType==='application/fits');
     const scienceMembers=members.filter(member=>member.role==='science');
     const fitsSource=fits.length===1&&scienceMembers.length===1?{schema:FITS_SOURCE_SCHEMA,path:fits[0]!.path,label:spec.declarations?.target??spec.datasetId,
       limitations:['Local import preserves source bytes but does not establish archive origin or calibration.',...issues.map(issue=>issue.reason)]}:undefined;
-    const receipt=resolve(staging,'import.product.json');await writeProductRecord(receipt,{telescope:'local import',stage:'telescope-local-import',inputs,parameters:{datasetId:spec.datasetId,declarations:spec.declarations??{},limits:spec.limits,classification:'Handler profiles are candidates until content and metadata qualification confirms them.',...(fitsSource?{fitsSource}:{})},software:[{name:'cssEarth telescope local import',version:implementation}]},[...members.map(member=>({path:member.path,file:resolve(staging,member.path)})),{path:'import.json',file:manifest},...(qualification.descriptor?[{path:qualification.descriptor.path,file:resolve(staging,qualification.descriptor.path)}]:[])]);
+    const receipt=resolve(staging,'import.product.json');await writeProductRecord(receipt,{telescope:'local import',stage:'telescope-local-import',inputs,parameters:{datasetId:spec.datasetId,declarations:spec.declarations??{},limits:spec.limits,classification:'Handler profiles are candidates until content and metadata qualification confirms them.',...(fitsSource?{fitsSource}:{})},software:[{name:'cssEarth telescope local import',version:VERSION}]},[...members.map(member=>({path:member.path,file:resolve(staging,member.path)})),{path:'import.json',file:manifest},...(qualification.descriptor?[{path:qualification.descriptor.path,file:resolve(staging,qualification.descriptor.path)}]:[])]);
     await rmdir(destination);await rename(staging,destination);return {directory:destination,manifest:resolve(destination,'import.json'),receipt:resolve(destination,'import.product.json'),...(qualification.descriptor?{descriptor:resolve(destination,qualification.descriptor.path)}:{}),value:manifestValue};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}
 }

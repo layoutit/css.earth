@@ -1,5 +1,5 @@
-import { productSourceIds, validateObjectProvenance } from './object-provenance.js';
-import type { ProvenanceDocument } from './object-provenance.js';
+import { checkLineage, productSourceIds } from './object-lineage.js';
+import type { ObjectLineage } from './object-lineage.js';
 import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '../sources/catalog.js';
 import type { SourceResolver, SourceReference } from '../sources/catalog.js';
 import { objectDataset, type DatasetHost, type DatasetRoutes } from './dataset-routes.js';
@@ -20,7 +20,7 @@ export interface SourceUsage {
   readonly edges: readonly SourceUse[]; readonly datasets: readonly SourceDataset[];
   readonly bySource: Readonly<Record<string, readonly number[]>>; readonly byObject: Readonly<Record<string, readonly number[]>>;
 }
-export interface SourceUsageObject { readonly id: string; readonly name: string; readonly route: string; readonly base: string; readonly controls: readonly {readonly id: string; readonly label: string}[]; readonly provenance: ProvenanceDocument;
+export interface SourceUsageObject { readonly id: string; readonly name: string; readonly route: string; readonly base: string; readonly controls: readonly {readonly id: string; readonly label: string}[]; readonly lineage: ObjectLineage;
   /** Set for a volume attached to a body: its lenses are reached through these datasets of the body. */
   readonly hostedBy?: { readonly objectId: string; readonly name: string; readonly route: string; readonly datasets: Readonly<Record<string, { readonly lensId: string; readonly label: string }>> }; }
 export const sourceDatasetKey = (objectId: string, lensId: string) => `${objectId}/${lensId}`;
@@ -37,15 +37,16 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
   const edges: SourceUse[] = [], datasets: SourceDataset[] = [];
   sourceUnique(objects.map(object => object.id), 'usage object');
   for (const object of objects) {
-    const document = validateObjectProvenance(object.provenance,object.id), local = new Map(document.sources.map(source => [source.id,source]));
-    const base = sourcePath(object.base), manifestPath = sourcePath(document.manifest.path);
+    if (object.lineage.objectId !== object.id) throw new TypeError(`Lineage belongs to another object: ${object.id}.`);
+    const document = checkLineage(object.lineage), local = new Map(document.sources.map(source => [source.id,source]));
+    const base = sourcePath(object.base), manifestPath = sourcePath(document.manifestPath);
     if (base.split('/').at(-1) !== object.id) throw new TypeError('Source package owner differs from its object.');
     const ownerPath = `${base}/${manifestPath}`;
     const controls = new Set(object.controls.map(lens => lens.id)), usedLenses = new Set<string>();
     sourceUnique(object.controls.map(lens => lens.id), 'dataset control');
     for (const source of document.sources) if (source.sourceBinding) parseSourceBinding(source.sourceBinding,sources);
     for (const product of document.products) {
-      const lensIds = [...(product.lensIds ?? [])];
+      const lensIds = [...product.lensIds];
       if (lensIds.some(id => !controls.has(id))) throw new TypeError(`Unknown source dataset: ${object.id}/${product.id}.`);
       for (const localSourceId of productSourceIds(document,product.id)) {
         const source = local.get(localSourceId)!;

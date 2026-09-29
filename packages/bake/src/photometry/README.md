@@ -116,7 +116,7 @@ Check each point against the source before merging a record:
   Hapke with shadow hiding, roughness and both ISIS phase functions, plus
   Lunar-Lambert, Minnaert and Lommel-Seeliger.
   [`photometric-truth.py`](fixtures/photometric-truth.py) reads the truth
-  files at the pinned commit, and the fixture records each file's URL and sha256.
+  files at the pinned commit, and the fixture records each file's URL.
 - `whole-disc-colour.test.mts` checks the record parser, the Minnaert disc
   means 2/(2k+1), the tie and the luminance factor and shoulder on synthetic maps.
 - ISIS's truth files do not exercise the 2002 H function, coherent backscatter

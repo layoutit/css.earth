@@ -5,9 +5,7 @@
       "sourceInputCount": 23
     },
     "sourceGeometryRecipeUnchanged": true,
-    "retainedSceneGeometryUnchanged": true,
-    "geometrySha256": "2d3ddb2bb3a788d72abca4004b9c4e39c874fd2c79ce1b06a5aec26547ba339a",
-    "surfaceTrianglesSha256": "8965be49176e7f362a41761c2b928f293f70054f0ebaa3b4a962f25ff2267753"
+    "retainedSceneGeometryUnchanged": true
   },
   "normal": {
     "beforeFrames": 5,
@@ -61,6 +59,5 @@
       "processing": "Source values remain floating point through interpolation, photometry and compositing. One common range maps the selected bands to linear display channels; IEC sRGB encoding and 8-bit quantization happen once, at output. This does not reconstruct natural color."
     }
   },
-  "interpretation": "Grid-cell counts describe the fixed 2048 by 1024 cylindrical preparation map. They are not physical surface-area percentages or an atlas-texel count. Nominal source resolution varies across the projected surface.",
-  "recipeSha256": "9a3790e0629eca9ca4c0f3853b0e5b85b1991ef75b9c9ecbf9fd883edaefe8c2"
+  "interpretation": "Grid-cell counts describe the fixed 2048 by 1024 cylindrical preparation map. They are not physical surface-area percentages or an atlas-texel count. Nominal source resolution varies across the projected surface."
 }

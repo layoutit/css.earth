@@ -159,12 +159,11 @@ export function localLinks(file: string, text: string): Link[] {
   return links;
 }
 
-// `prepared/provenance.json` and `prepared/page.json` are build outputs, never committed: the
-// contract in CLAUDE.md says `prepare-provenance.mts` and `restore-object-json.mts` write them in
+// `prepared/page.json` is a build output, never committed: `restore-object-json.mts` writes it in
 // `predev`/`prebuild`. A checkout therefore never holds one, so a body README that cites its own
-// generated contract file is describing the record correctly, not linking at nothing. Accept the
-// path only where the object's tracked `prepared/` directory proves the object exists.
-const BUILD_OUTPUTS = new Set(['prepared/provenance.json', 'prepared/page.json']);
+// generated page file is describing it correctly, not linking at nothing. Accept the path only
+// where the object's tracked inventory proves the object exists.
+const BUILD_OUTPUTS = new Set(['prepared/page.json']);
 function buildOutput(path: string, known: ReadonlySet<string>): boolean {
   const directory = posix.dirname(posix.dirname(path));
   return BUILD_OUTPUTS.has(path.slice(directory.length + 1)) && known.has(`${directory}/inventory.json`);

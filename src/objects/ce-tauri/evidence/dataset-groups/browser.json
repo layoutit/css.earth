@@ -2,11 +2,6 @@
   "schema": "cssearth-dataset-browser-check@1",
   "date": "2026-09-27T01:59:20.737Z",
   "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
-  "testedFiles": {
-    "source/content/object.json": "bed89fc4417537729463ee4882baf493007c3d196bb38e6f3e796e48eae065e7",
-    "text.json": "c5e08e0e710e9f2b2ab50d7ba5b0c665dd42bb0d1e46b9de597364b2077a20cd",
-    "inventory.json": "2e4f5437861df37c30c8afebd9efd6db0f9fc9ba07eaedd16c975cd677cb0d47"
-  },
   "tests": {
     "sourceLabels": {
       "body": "ce-tauri",
@@ -68,7 +63,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 204696,
-      "sha256": "128b45d24604c19fdf0dad58a7c3a9e8caa3420e9b521025cea0a1f3854ed8e0",
       "decodedPixelsEqualToCapture": true
     }
   ]

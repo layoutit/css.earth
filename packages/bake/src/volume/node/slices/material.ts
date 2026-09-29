@@ -4,7 +4,6 @@ import { dirname } from 'node:path';
 import sharp from 'sharp';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath } from '../compact-inputs/density-grid.ts';
-import { sha256 } from '@cssearth/core/node';
 import type { VolumeImageEncoding, Vector3 } from '../../contracts/volume-recipe.ts';
 import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 import type { SlabMaterialSampling } from '../../materials/slab-material.ts';
@@ -70,7 +69,6 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       });
     }
     const input = Buffer.from(await options.loadResource(quad.texturePath));
-    if (input.length !== quad.bytes || sha256(input) !== quad.sha256) throw new TypeError(`Accepted cloud texture changed: ${quad.texturePath}.`);
     const { data: source, info } = await sharp(input).ensureAlpha().raw({ depth: 'uchar' }).toBuffer({ resolveWithObject: true });
     if (info.width !== quad.widthPx || info.height !== quad.heightPx || info.channels !== 4)
       throw new TypeError(`Accepted cloud texture dimensions/format changed: ${quad.texturePath}.`);
@@ -119,7 +117,7 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       throw new Error(`Recoloring changed Alignment cloud alpha: ${quad.texturePath}.`);
     await mkdir(dirname(outputPath), { recursive: true });
     await writeFile(outputPath, bytes);
-    quads.push({ ...structuredClone(quad), texturePath, sha256: sha256(bytes), bytes: bytes.length });
+    quads.push({ ...structuredClone(quad), texturePath, bytes: bytes.length });
     options.onProgress?.({ completed: quads.length, total: options.slices.quads.length });
   }
   coverage.preservedReferenceTexels = coverage.outsideImageTexels + coverage.blackImageTexels;

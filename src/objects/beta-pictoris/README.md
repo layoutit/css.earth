@@ -35,4 +35,4 @@ Run of 2026-09-22 (this version):
 - No rotation period is adopted; the display axis is a convention.
 - Gaia's astrometry of so bright a star has a high RUWE (3.07); the parallax agrees with Hipparcos (51.44 ± 0.12 mas, the value the planets' orbits were fitted at) to 1%.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

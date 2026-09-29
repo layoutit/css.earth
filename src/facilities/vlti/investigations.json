@@ -27,7 +27,7 @@
       "id": "reduction-software",
       "subject": "ESO instrument pipelines for PIONIER, AMBER, GRAVITY and MATISSE",
       "status": "included",
-      "finding": "The ESO kits are public and pinned by sha256 in toolchains.json: PIONIER 4.0.4 (GPL-3.0, with Yorick, BSD), AMBER 4.4.5 (GPL-2.0), GRAVITY 1.11.0 and MATISSE 2.5.0 (GPL-2.0-or-later). They build on macOS with stated repairs: AMBER needs one package rebuilt for Apple clang 17, and MATISSE is rebuilt against LLVM OpenMP 20.1.8 because the kit compiles its loops out on macOS (759 s single-threaded, 479 s with 4 threads for one exposure).",
+      "finding": "The ESO kits are public and pinned by URL and version in toolchains.json: PIONIER 4.0.4 (GPL-3.0, with Yorick, BSD), AMBER 4.4.5 (GPL-2.0), GRAVITY 1.11.0 and MATISSE 2.5.0 (GPL-2.0-or-later). They build on macOS with stated repairs: AMBER needs one package rebuilt for Apple clang 17, and MATISSE is rebuilt against LLVM OpenMP 20.1.8 because the kit compiles its loops out on macOS (759 s single-threaded, 479 s with 4 threads for one exposure).",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/interferometry/toolchains.json",
         "https://github.com/layoutit/css.earth/pull/291"

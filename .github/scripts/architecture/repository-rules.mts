@@ -26,11 +26,25 @@ export function retiredFiles(files: readonly string[], folders: readonly string[
   });
 }
 
+/** Object packages (`src/objects/<id>/`) hold data: descriptors, sources, evidence and prepared JSON. Code there could reach
+ * the shell's DOM or native scene state; the shared runtime in `site/` and `packages/renderer` owns both. */
+const OBJECT_CODE = /^src\/objects\/.+\.(?:[cm]?[jt]sx?|astro)$/u;
+
+/** One finding per script or Astro module inside an object package. */
+export function objectCodeFiles(files: readonly string[]): string[] {
+  return files.filter(file => OBJECT_CODE.test(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
+}
+
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   {
     id: 'retired-folders',
     description: 'no file lives under a tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
     check: (_root, files) => retiredFiles(files),
+  },
+  {
+    id: 'objects-hold-data',
+    description: 'src/objects/ holds no script or Astro module: object content reaches the runtime as data (objectCodeFiles in repository-rules.mts)',
+    check: (_root, files) => objectCodeFiles(files),
   },
   {
     id: 'nebula-boundaries',

@@ -6,10 +6,8 @@ import { join } from 'node:path';
 import { deflateSync, zstdCompressSync } from 'node:zlib';
 import { decodeExrRgbHalf, halfToFloat } from './exr.ts';
 import { parseSkyRecipe } from './config.ts';
-import { loadSkySource } from './source.ts';
 import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces, compositeSkyStars } from './bake.ts';
 import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
-import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssSky } from '@cssearth/renderer/sky/types.ts';
 
 function exrFixture(compressed: boolean): { bytes: Buffer; expected: Buffer } {
@@ -127,15 +125,6 @@ test('sky recipe display controls default safely and reject malformed values', a
   assert.deepEqual(parseSkyRecipe({ ...raw, bake: { ...bake, shadowFloor: { blackPoint: .04, fullSignal: .12 } } }).bake.shadowFloor,
     { blackPoint: .04, fullSignal: .12 });
 });
-test('actual pinned NASA HALF source is unchanged and unsupported/missing recipes fail', async () => {
-  const root = 'src/objects/milky-way/source/sky', raw: unknown = JSON.parse(await readFile(`${root}/recipe.json`, 'utf8')), recipe = parseSkyRecipe(raw);
-  const image = await loadSkySource(root, recipe);
-  assert.equal(sha256(image.rgb16f), 'aaa66125271df3d95b857bbbafcb0c7055a58372ff173c1f98af1a0778c5b0f6');
-  assert.deepEqual([image.width, image.height], [8192, 4096]);
-  assert.throws(() => parseSkyRecipe({ ...recipe, projection: { ...recipe.projection, mapping: 'ra-right' } }), /Unsupported/);
-  assert.throws(() => parseSkyRecipe({ ...recipe, source: { ...recipe.source, chunks: recipe.source.chunks.slice(1) } }), /every row/);
-  const noTransfer = { ...recipe.bake, transfer: undefined }; assert.throws(() => parseSkyRecipe({ ...recipe, bake: noTransfer }), /Unsupported/);
-});
 
 test('optional authored sky parallax validates physical placement and survives the real offline bake without changing pixels', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'sky-parallax-'));
@@ -144,11 +133,11 @@ test('optional authored sky parallax validates physical placement and survives t
     const packed = zstdCompressSync(source), provenance = Buffer.from('{}');
     await writeFile(join(directory, 'source.zst'), packed); await writeFile(join(directory, 'provenance.json'), provenance);
     const raw = { schema: 'cssearth-sky-recipe@1', source: { format: 'rgb16f-le-zstd-rows', width: 4, height: 2,
-      decodedSha256: sha256(source), chunks: [{ path: 'source.zst', sha256: sha256(packed), firstRow: 0, rows: 2 }],
-      acquisition: { path: 'acquisition.json', sha256: 'a'.repeat(64) } },
+      chunks: [{ path: 'source.zst', firstRow: 0, rows: 2 }],
+      acquisition: { path: 'acquisition.json' } },
       projection: { frame: 'icrf-j2000', mapping: 'equirectangular-ra-left', centerRaDegrees: 0 },
       bake: { faceSize: 2, exposure: 1, transfer: 'linear-to-srgb', webpQuality: 90 },
-      provenance: { path: 'provenance.json', sha256: sha256(provenance) } };
+      provenance: { path: 'provenance.json' } };
     const placement = { originM: [1, -2, 3], radiusM: 1e20 }, infiniteRecipe = parseSkyRecipe(raw);
     assert.equal('parallax' in infiniteRecipe, false);
     const finiteRecipe = parseSkyRecipe({ ...raw, parallax: placement }); assert.deepEqual(finiteRecipe.parallax, placement);

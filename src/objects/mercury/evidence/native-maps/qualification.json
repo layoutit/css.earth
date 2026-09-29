@@ -4,148 +4,119 @@
     "inputs": [
       {
         "path": "src/objects/mercury/inventory.json",
-        "bytes": 14660,
-        "sha256": "98beee3778cc55b7d306e8d24c9f131a051a52d77cf8bfcaec981bbfee2b1db2"
+        "bytes": 14660
       },
       {
         "path": "src/objects/mercury/object.json",
-        "bytes": 4202,
-        "sha256": "683060d45fd18bc8035225a525ff2b2ee968b238712d90d96efa9ac38dc413bb"
+        "bytes": 4202
       },
       {
         "path": "src/objects/mercury/source/content/object.json",
-        "bytes": 14063,
-        "sha256": "a03a577129f65418e718e2341dfe7328a38a8da51ec218239c879b8e4ee8b34a"
+        "bytes": 14063
       },
       {
         "path": "src/objects/mercury/source/manifest.json",
-        "bytes": 41311,
-        "sha256": "5c64af171ff1d7d1903c5913da753edc54215b902bd68b236b3d0b8f8fa06f48"
+        "bytes": 41311
       },
       {
         "path": "src/objects/mercury/source/preparation/acquisition.json",
-        "bytes": 4251,
-        "sha256": "cc8ca47e168bcd2054cea05dadd039a691953f8a94ac036198b1038190b46941"
+        "bytes": 4251
       },
       {
         "path": "src/objects/mercury/source/preparation/geometry.json",
-        "bytes": 2390,
-        "sha256": "a11561b2306b5a356418fce760acdec7081f224962644ddeeed9cffd133fa458"
+        "bytes": 2390
       },
       {
         "path": "src/objects/mercury/source/preparation/raster.json",
-        "bytes": 4981,
-        "sha256": "60a97f2dd7aea9126ce338dbfb6309c94e9ea341c60e16fdd2cf80243dc2d4be"
+        "bytes": 4981
       },
       {
         "path": "src/objects/mercury/text.json",
-        "bytes": 1884,
-        "sha256": "5b46c3c8fe0c3357f3ebc24e0cfcd38c16ae481067c6d9f89cae99ecac24d9ed"
+        "bytes": 1884
       },
       {
         "path": "tools/contract/object-provenance.test.mts",
-        "bytes": 26310,
-        "sha256": "612690b5413189e14abfbfa1dc212d1443b0476755c8df05c9f17d56d2cdbfa1"
+        "bytes": 26310
       },
       {
         "path": "tools/objects/acquisition/geotiff-grid.mts",
-        "bytes": 14331,
-        "sha256": "f9ec1a73e05ef82d6cf1672c5c072ff7a6f0d3152c9fb913bbd18d0e798bf385"
+        "bytes": 14331
       },
       {
         "path": "tools/objects/operations-acquisition.test.ts",
-        "bytes": 22310,
-        "sha256": "b859cf7e6b15bcb59b36d95c881bf960ab8476ee445589681c12190b333dc633"
+        "bytes": 22310
       },
       {
         "path": "tools/objects/operations-acquisition.ts",
-        "bytes": 26516,
-        "sha256": "38fba734c797a4fabd1b7963ef42a06a22bed0bae6b2fe209730842557bbaafb"
+        "bytes": 26516
       },
       {
         "path": "tools/objects/provenance.mts",
-        "bytes": 16424,
-        "sha256": "f53da8c4b212ebe024dea4a32acdf0e79713ec8ac52b0c221c7f630fe9de2bda"
+        "bytes": 16424
       },
       {
         "path": "tools/oracles/tsconfig.json",
-        "bytes": 378,
-        "sha256": "6d0887bfbf2e920f29c615092cae0cfd4b24139c57ebac5e0449f9fdeb3a950c"
+        "bytes": 378
       },
       {
         "path": "src/objects/mercury/source/maps/native/bdr-metadata.json",
-        "bytes": 4685,
-        "sha256": "a0cfd2b66080bd25362894be8e93269e11a88d9e331e4d1976cd85eeb48d78c7"
+        "bytes": 4685
       },
       {
         "path": "src/objects/mercury/source/maps/native/bdr.json",
-        "bytes": 633,
-        "sha256": "0e39b600a5b76830b0ca31ee210e91dee00670855c83ce38ea154c34aa70201a"
+        "bytes": 633
       },
       {
         "path": "src/objects/mercury/source/maps/native/bdr.lbl",
-        "bytes": 2706,
-        "sha256": "0c9efcf9cfebfed6892ab30e1c78cfe434cedd7516e5964d36b77dfe4729c068"
+        "bytes": 2706
       },
       {
         "path": "src/objects/mercury/source/maps/native/enhanced-metadata.json",
-        "bytes": 4030,
-        "sha256": "6baeed0d676f0bf011cab786e4b62ab804d9b0ba69ca92bd813c6043afde1ef6"
+        "bytes": 4030
       },
       {
         "path": "src/objects/mercury/source/maps/native/enhanced.json",
-        "bytes": 629,
-        "sha256": "911ba7488932d22e427a468bc3a2197700a340e884165efe5f724ad22ec5a4d2"
+        "bytes": 629
       },
       {
         "path": "src/objects/mercury/source/maps/native/enhanced.lbl",
-        "bytes": 2741,
-        "sha256": "0cdda9ae42d09ef00034222bdc1d377616904a0a2f300b54170bc4733eb496a6"
+        "bytes": 2741
       },
       {
         "path": "src/objects/mercury/source/maps/native/loi-metadata.json",
-        "bytes": 4385,
-        "sha256": "4ee2edee8ae22575de6fe60261dc612d4a5e0f5a16c9aab8f48d1a4564edf396"
+        "bytes": 4385
       },
       {
         "path": "src/objects/mercury/source/maps/native/loi.json",
-        "bytes": 634,
-        "sha256": "9ace468ce388cdf5d6cd26eac582a72a2b8f5c853a962a6e488b1d6ea35d0424"
+        "bytes": 634
       },
       {
         "path": "src/objects/mercury/source/maps/native/loi.lbl",
-        "bytes": 2705,
-        "sha256": "dca5ddc08a909665166381f4932fa15c963cfbbf174ea9b6cf9d413046919912"
+        "bytes": 2705
       },
       {
         "path": "src/sources/source-mercury-usgs-messenger-bdr-native.json",
-        "bytes": 1064,
-        "sha256": "7296b2400bf0dbe67d84c124d3ba1ffac9a715d10898958408a81f5d11a5b9c4"
+        "bytes": 1064
       },
       {
         "path": "src/sources/source-mercury-usgs-messenger-enhanced-native.json",
-        "bytes": 1094,
-        "sha256": "8eb641b4fd7dbce7748c6bbc13528ff4a862382477918a22f2469334c3378a26"
+        "bytes": 1094
       },
       {
         "path": "src/sources/source-mercury-usgs-messenger-loi-native.json",
-        "bytes": 1074,
-        "sha256": "c9b572584501970375e08a017529085adab43fb199a3ebff3e39cb2b67865f4b"
+        "bytes": 1074
       },
       {
         "path": "tools/objects/acquisition/geotiff-image.mts",
-        "bytes": 8239,
-        "sha256": "3d893f40fc495bab00bc52d97909576c2af7b05bc0bfb311007cdd56b6a6def5"
+        "bytes": 8239
       },
       {
         "path": "tools/objects/acquisition/geotiff-image.test.mts",
-        "bytes": 4067,
-        "sha256": "25398b6f48c9e5d4665fd419e0126b27377b125ecd59452cf9a16111235a02ae"
+        "bytes": 4067
       },
       {
         "path": "tools/oracles/geotiff-image.mts",
-        "bytes": 4416,
-        "sha256": "e498f0b17d5531ce79bcc1df492e159ebf3c77e74467149ded5e7cc68a16162c"
+        "bytes": 4416
       }
     ]
   },
@@ -169,80 +140,66 @@
     "cameraEqual": true,
     "preparedNodes": 910,
     "method": "Deep comparison with the installed base scene, changing only the default .jpg filename to .webp. Deep equality of runtime camera.",
-    "beforeSceneSha256": "9416df70d77ad6a068256187f4226f3d225bcbb5a3ebd7a1556c762fa69f7fe7",
-    "afterSceneSha256": "9416df70d77ad6a068256187f4226f3d225bcbb5a3ebd7a1556c762fa69f7fe7",
     "unchangedNumericAndInteriorAssets": [
       {
         "location": "public",
         "filename": "mercury-interior-core-poles@2x.webp",
-        "bytes": 8368,
-        "sha256": "5c1bf3cda95e01022657e87f5f63a5f01323fc48269661bd5fe544fadc94ff8c"
+        "bytes": 8368
       },
       {
         "location": "public",
         "filename": "mercury-interior-core@2x.webp",
-        "bytes": 24746,
-        "sha256": "de55ef2f1d20f34b999da02101b46cd00e2955a81a02653056fa746db65ca377"
+        "bytes": 24746
       },
       {
         "location": "public",
         "filename": "mercury-interior-outer-poles@2x.webp",
-        "bytes": 26030,
-        "sha256": "701b03a39a50668b5f080188f95b9f10812ca69d3146e6d59c46a6bcdd1baa96"
+        "bytes": 26030
       },
       {
         "location": "public",
         "filename": "mercury-interior-outer-unlit-poles@2x.webp",
-        "bytes": 84106,
-        "sha256": "7359fe2a09c746b0cfec7ca6ee6bb670dd12b936139eed89759631e64d57f5fa"
+        "bytes": 84106
       },
       {
         "location": "public",
         "filename": "mercury-interior-outer-unlit@2x.webp",
-        "bytes": 1822238,
-        "sha256": "8cabccb568e82b7948487b6d3846b250a23df15c6c37530a5c1426da0f233213"
+        "bytes": 1822238
       },
       {
         "location": "public",
         "filename": "mercury-interior-outer@2x.webp",
-        "bytes": 445874,
-        "sha256": "5971053e01354d7d8f74321a6e7086973e1134853123814742ac79972e6f8e7c"
+        "bytes": 445874
       },
       {
         "location": "public",
         "filename": "mercury-interior-section@2x.webp",
-        "bytes": 166284,
-        "sha256": "60b101bbda01bfc1ff5065df7f1d94276113a03e6f4e87a0b16b228eb84602a5"
+        "bytes": 166284
       },
       {
         "location": "public",
         "filename": "mercury-lens-interior.webp",
-        "bytes": 304,
-        "sha256": "2a38bc644540533f52b8bea13c66367613d1fa1ac400a63d8449c49220e6e159"
+        "bytes": 304
       },
       {
         "location": "public",
         "filename": "mercury-lens-topography.webp",
-        "bytes": 730,
-        "sha256": "fd91073b98fe2c382aac3f732081895a4e4220c72a273d487ef8afaf977454d8"
+        "bytes": 730
       },
       {
         "location": "public",
         "filename": "mercury-poles-topography@2x.webp",
-        "bytes": 150816,
-        "sha256": "feb9f6c7427a14df28ba100dcdf0eb8c325c0b9f8c430bbeddc4c02354731ee0"
+        "bytes": 150816
       },
       {
         "location": "public",
         "filename": "mercury-surface-topography@2x.webp",
-        "bytes": 2109316,
-        "sha256": "7d74d86ae385d6d907de7b328ac9a3b74134084c63a9dd59cccfde9e390f071a"
+        "bytes": 2109316
       },
       {
         "location": "prepared",
         "filename": "minimaps/topography.webp",
-        "bytes": 18346,
-        "sha256": "5b1c2839defdf3c3a22eecb8ee17aece5020125a3006eaa30052b18c50f8de86"
+        "bytes": 18346
       }
     ],
     "lighting": "Existing KS3 law and recipe unchanged. Lighting bank images were rebaked with the new BDR mean surface color; these files are not byte-identical."
@@ -318,63 +275,51 @@
     "images": [
       {
         "file": "after-enhanced-crop.png",
-        "bytes": 606934,
-        "sha256": "45d35e6abea8ff293fbaf8aaee61c433c4cb25f9b20075dd2ca4f03fe33e2443"
+        "bytes": 606934
       },
       {
         "file": "after-enhanced.png",
-        "bytes": 930984,
-        "sha256": "209cc253818fc24ddd41715eee5432eecb6a11b2eb374eb8037aed601effb18c"
+        "bytes": 930984
       },
       {
         "file": "after-loi.png",
-        "bytes": 636550,
-        "sha256": "8eca793418602cdbb22dd1008c365d246e9025e3a7eb06db0a2ea5eba2be1bfd"
+        "bytes": 636550
       },
       {
         "file": "after-normal-crop.png",
-        "bytes": 235245,
-        "sha256": "7fd0b4d5a920e8dff50c7cbf21ce44acb93e112da674a2f5338d10bec1ca22ed"
+        "bytes": 235245
       },
       {
         "file": "after-normal.png",
-        "bytes": 396446,
-        "sha256": "b9545a997ba71e87563768fc2fc565275950ca1272540314f0a36f476fe1c4e2"
+        "bytes": 396446
       },
       {
         "file": "before-enhanced-crop.png",
-        "bytes": 606527,
-        "sha256": "14bc671d5fb07b3c06ed066104ebd1718d64c3ea5cc612876a48d00410664959"
+        "bytes": 606527
       },
       {
         "file": "before-normal-crop.png",
-        "bytes": 225727,
-        "sha256": "a33867f4f86838646061587c306514b701ecd68193836aa459c1e6093836ce9e"
+        "bytes": 225727
       },
       {
         "file": "enhanced-diff.png",
-        "bytes": 127907,
-        "sha256": "5ee1a3ba47eca46c8499c94fbf407ed2b40e4b2b888a9c4a0c5bc2e6f0ade982"
+        "bytes": 127907
       },
       {
         "file": "enhanced-north.png",
-        "bytes": 988223,
-        "sha256": "c0d50f6e311a616fcfd31bed23aa32df9d194c7f3d70610973eeb3b8ea45f26b"
+        "bytes": 988223
       },
       {
         "file": "enhanced-shadows.png",
-        "bytes": 644871,
-        "sha256": "56e2f70ba48ccc5c3215a339b94b4d0aecbfe4e33089bdd26ea2542f8a372eae"
+        "bytes": 644871
       },
       {
         "file": "normal-diff.png",
-        "bytes": 95556,
-        "sha256": "d3cc7fda524225ea7cb7f4e520a23073c5832aaf28f362fcbbd9f1efd1a611b4"
+        "bytes": 95556
       },
       {
         "file": "phone-loi.png",
-        "bytes": 110950,
-        "sha256": "021b551450a5cc08ebaecf1cd1ca5f703e9924b4378f6d561072a4fa426db274"
+        "bytes": 110950
       }
     ]
   },

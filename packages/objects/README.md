@@ -8,26 +8,27 @@ are numbers, pixels, and validated recipes; outputs contain no DOM or CSS.
 Node file/image I/O and CSS projection are separate application adapters.
 
 `parseAuthoredObjectDescriptor()` is the authored-data boundary for migrated
-objects. It returns a typed `recipe` composed from pinned source references,
+objects. It returns a typed `recipe` composed from declared source references,
 shape, surfaces and lenses, materials, frame banks, optional layers and motion,
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 
 The registry contracts (`src/registry/`) are what the application's one `OBJECTS` registry (`site/objects.mts`) and the
-preparation tools share: `defineObjects()` and `catalogEntry()` assemble and decode entries, `parseObjectDiscovery()`,
+preparation tools share: `defineObjects()`, `catalogEntry()` and `catalogueObject()` assemble and decode entries (`catalogueObject()` decodes one
+entry of the prepared catalogue, as the registry and a page's object directory both read it), `parseObjectDiscovery()`,
 `parseNavigationDistance()`, `parseArrivalView()` and `definePreparedFocus()` validate the prepared registry data,
 `orderFacts()` orders factsheets, `normalizeDestinationQuery()` is the name normalisation preparation writes and search
 reads, `contextColour()` picks a body's world-context colour, and `validateWorldRotation()` checks a rotation. The host
 binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
 Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
-prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`, in catalogue order) with these contracts and binds a
-`loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
-test (run in the universe runtime lane) holds both reads equal. The object-runtime ownership check
-(`.github/scripts/checks/check-object-runtime-ownership.mts`) reads this prepared registry for object ids and
-inspects `site/objects.mts` as the application's runtime loader source.
+prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`: `site/prepared-catalogue.mjs`, every scene object's
+descriptor with its distance and discovery and every prepared focus in registry order, written by
+`preparedCatalogueModule()`, and the overviews apart in `site/prepared-overview-objects.json`, the one part every page's
+object directory reads) with these contracts and binds a `loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
+test (run in the universe runtime lane) holds both reads equal.
 
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
-physical frame, bounds, and pinned preparation source. Volume images, concrete
+physical frame, bounds, and declared preparation source. Volume images, concrete
 sampling, and renderer-specific slice geometry remain outside this package.
 
 `parseImageLayerBankDescriptor()` uses the same physical-frame contract for
@@ -38,8 +39,8 @@ and compiled rendering leaves stay with the object and preparation adapter.
 `@cssearth/objects/sources` is the source catalogue: its records, citations and
 bindings and the validators every one passes. It stays browser-safe, because the
 application reads the catalogue with it. `@cssearth/objects/provenance` is the second
-browser-safe entry: the validators for object provenance and its preparation and
-product-input evidence, the exploration catalogue with its contribution graph and prepared
+browser-safe entry: the in-memory object lineage (which manifest sources each prepared
+product reads) and its product-input evidence, the exploration catalogue with its contribution graph and prepared
 form, source usage and prepared sources, and context availability. Preparation writes these
 records and the application reads them, so both import the same validators; its tests are in
 the repository's `tests/provenance/`. Which URL selects a dataset is the application's route,

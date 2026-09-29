@@ -15,7 +15,7 @@ No image resolves Eris's surface. At about 96 AU its disc spans about 0.034 arcs
 | Solar B−V, V−R, V−I | 0.653, 0.356, 0.701, each ± 0.003 mag | [Ramírez et al. (2012)](https://doi.org/10.1088/0004-637X/752/1/5), ApJ 752, 5, abstract (line-depth-ratio solution) |
 | B, V, R, I effective wavelengths | 438.1, 544.5, 641.1, 798.2 nm | [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/theory/fps/index.php?mode=browse&gname=Generic&gname2=Bessell), Generic/Bessell, checked 2026-09-16 |
 
-The values are transcribed in [the colour record](source/photometry/disc-color.json). Carraro et al. measured over five nights in 2005 and found V−R stable from night to night. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their sha256 values equal the checksums in CIE's dataset metadata.
+The values are transcribed in [the colour record](source/photometry/disc-color.json). Carraro et al. measured over five nights in 2005 and found V−R stable from night to night. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their bytes match the checksums in CIE's dataset metadata.
 
 The radius is 1,163 ± 6 km from the November 6, 2010 stellar occultation reported by Sicardy et al. (2011). That event is consistent with a spherical body. The render sphere uses the nominal radius; it does not claim a resolved shape mesh.
 
@@ -45,7 +45,7 @@ Measured sensitivity, with the same method: B−V − 0.023 gives 255, 250, 237 
 - A uniform colour hides any albedo pattern; none has been mapped.
 - Rotation content uses the 15.771 ± 0.008-day photometric period of [Bernstein et al. (2023)](https://arxiv.org/abs/2303.13445), consistent with synchronous rotation at Dysnomia's 15.78590-day orbital period. This supersedes the 25.9-hour value still present on NASA's overview. The body has no measured longitude origin or established spin-pole registration. Its display pole and meridian are explicitly arbitrary, and no absolute rotational ephemeris is animated. The existing vendored JPL elements determine orbital position at the shared preparation epoch.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <details>
 <summary>Methods and source notes</summary>

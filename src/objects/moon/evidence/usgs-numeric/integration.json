@@ -388,41 +388,12 @@
       }
     ]
   },
-  "inputHashes": {
-    "src/objects/moon/text.json": "74c53fae09908162971224338e0b7efc58dd5007d3a9399c2931d4bd36e45576",
-    "src/objects/moon/source/content/object.json": "34729f239128d9a53ad690cf360408c30a8b8bea1077c83d606937e5985219b4",
-    "src/objects/venus/text.json": "8e843e35b9e3d26f18967de6f553adb1fa95a279d266babbbae3994efa7c1b28",
-    "src/objects/venus/source/content/object.json": "82524c0797bc496d882b53f8da61ea5034f77aabc461fd984ac6cd044bf740cd",
-    "src/objects/mercury/text.json": "7a4333a69f8c8ccae432d6624a3ad088aefa6fc177b37bef48efeedfb0507a72",
-    "src/objects/mercury/source/content/object.json": "805aaa4e3c224a11e686db746d324dbd0b18b34a04f0deebd6947e81d273c5d0",
-    "src/objects/mars/text.json": "23f095c9f8bafc95d1a2186faa41caaefea2db745f3720f1155e9ba4c42f36eb",
-    "src/objects/mars/source/content/object.json": "55176951b0139a46fe11fc527c393e67a8d73ca665afc97910db50fb4a2d83c2",
-    "src/objects/pluto/text.json": "c307619f45722538ad3d1d339a1a4ef148da348dffd1fc8bbdbf7e31efdfba18",
-    "src/objects/pluto/source/content/object.json": "962bc4eb2cc52ed03cbe194f031ca49b3c69f7a26bda76e4a1d1e2b53eb326c8",
-    "src/objects/ceres/text.json": "b49d8bb2ec81abaaa853ad7d83110c01990de80ec83a0db99ba1b697a4100a67",
-    "src/objects/ceres/source/content/object.json": "8a1ef740889143379fb2a45fefc651244cfa5d0e9bc1f735b47589aa1bed1875",
-    "src/objects/be-ceti/text.json": "31148c430c57fbe05bf8710db22eb6b0d38240477acb6b56437c8f72e6058815",
-    "src/objects/be-ceti/source/content/object.json": "b57054573f7e5da89d534b3c06f93cf429dff6ecd9698d23bd97c559169f45b1",
-    "src/objects/chi1-orionis/text.json": "35982a34bfd6edf6c97cf81d4dfc8f0cfe6c97f4de81ed48944084fe18fd443f",
-    "src/objects/chi1-orionis/source/content/object.json": "4f1f185eff68e70180bf8c4a68e5255ace9b1ab06fc23e9dedd3791091e13dbc",
-    "src/objects/hd-29615/text.json": "b721f5b7d051fec80e4e4eac0092d4b90e76e7b44ef3b56e572538dc61a89449",
-    "src/objects/hd-29615/source/content/object.json": "8af636f9e6ceb221d56dce93ecb9a5f0535d05a78a565a5a2b58a4e000d2ec41",
-    "src/objects/hd-35296/text.json": "e9c9daafe30f4c8c35d9cda20668eecf0d5967f60f81b7629f11f6f037a13e18",
-    "src/objects/hd-35296/source/content/object.json": "2ecfdc38f6a78e4b487c3295cd23db8cf63dc14b6ab655c8c8d4788cf2ec7e66",
-    "src/objects/ce-tauri/text.json": "c5e08e0e710e9f2b2ab50d7ba5b0c665dd42bb0d1e46b9de597364b2077a20cd",
-    "src/objects/ce-tauri/source/content/object.json": "bed89fc4417537729463ee4882baf493007c3d196bb38e6f3e796e48eae065e7",
-    "src/objects/betelgeuse/text.json": "120814db9ee04e41e36fcbfce7a3dbded6728c418db33c8998494c881324f76e",
-    "src/objects/betelgeuse/source/content/object.json": "a1b34e01fef6120990b6b3d6328681a9f0670b48fdcb7496ae066e27b1ebcd8a",
-    "src/objects/wasp-12b/text.json": "27e4216dd58a885d874e8876d4089f208995b41dc7b4bea399cba37f567158e9",
-    "src/objects/wasp-12b/source/content/object.json": "85dfaa8c343b5f4132418ec3ba1c718f232658e6ae0d7fda2221b7a632011160"
-  },
   "screenshots": [
     {
       "path": "src/objects/moon/evidence/usgs-numeric/moon-current-mobile.webp",
       "width": 390,
       "height": 844,
       "bytes": 84690,
-      "sha256": "254955a548097bd8cc5a830f0fda1e6939cbf8b877adbd160fc0d209697af4bd",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -430,7 +401,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 427672,
-      "sha256": "4531f3d672cd230df148a917fe0e11de0b2d1baff969be5c499603e946a1b7d3",
       "decodedPixelsEqualToCapture": true
     }
   ]

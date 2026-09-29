@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -124,11 +123,11 @@ export function convertMappedComposition(bytes: Uint8Array, recipe: MappedCompos
     const encoded = encodeCompositionGrid(values, recipe.referenceRadiusMeters);
     products[selection.id] = encoded;
     reports[selection.id] = { selection, validNativeNodes: retained.length, missingNativeNodes: 180 * 360 - retained.length,
-      minimum: Math.min(...retained), maximum: Math.max(...retained), outputBytes: encoded.byteLength, outputSha256: sha256(encoded) };
+      minimum: Math.min(...retained), maximum: Math.max(...retained), outputBytes: encoded.byteLength };
   }
   const { latitudes, longitudes, ...sourceMetadata } = metadata;
   return { products, report: { schema: 'cssearth-mapped-composition-conversion@1', target: recipe.target,
-    source: { path: recipe.input, sha256: sha256(bytes), bytes: bytes.byteLength, metadata: sourceMetadata },
+    source: { path: recipe.input, bytes: bytes.byteLength, metadata: sourceMetadata },
     grid: { width: 361, height: 180, coordinates: 'degrees', centerLongitude: 0, referenceRadiusMeters: recipe.referenceRadiusMeters,
       origin: [-180.5, 89.5], resolution: [1, -1], wrapLongitude: true, noData: -99 },
     processing: 'Reverse latitude rows, reorder east-positive longitude nodes, repeat the periodic seam column, round values to float32. No spatial smoothing, gap fill or fitted abundance aggregation.',

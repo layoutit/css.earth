@@ -1,9 +1,7 @@
 {
   "date": "2026-09-27",
   "testedVersion": {
-    "changes": "Implementation, source records, screenshots and Io delivery inventory at the implementation commit. This follow-up only pins the investigation ledger and qualification revision; the earlier passes still apply.",
-    "imageSha256": "a8555dd327f6ea6c162ca7f528850c5ab598c9b21b8cf241f9347b046bd5c570",
-    "recipeSha256": "cb64acd6e2d4ce51fc1286683b69476d4550bd4bc933b83e492690fad42fa00d"
+    "changes": "Implementation, source records, screenshots and Io delivery inventory at the implementation commit. This follow-up only pins the investigation ledger and qualification revision; the earlier passes still apply."
   },
   "scientific": {
     "screenedFrames": 2374,
@@ -61,23 +59,19 @@
     "images": [
       {
         "file": "heat-desktop.png",
-        "bytes": 519355,
-        "sha256": "b7ef5241a1cb07d9c2d9af4787f5bb0a6de243739f2a7e954fa27c890f0f012a"
+        "bytes": 519355
       },
       {
         "file": "heat-mobile.png",
-        "bytes": 239919,
-        "sha256": "d542ceaec606d8c84a61ce06006ce179a2c11fffcec3f1c2220b9cbd2a58e624"
+        "bytes": 239919
       },
       {
         "file": "heat-shadows.png",
-        "bytes": 213884,
-        "sha256": "d1d91f93389b3cb1f9064b4a89a0ebc209f838a9871418456abcc2d7d19b1df4"
+        "bytes": 213884
       },
       {
         "file": "coverage-edge.png",
-        "bytes": 513043,
-        "sha256": "6ea5a7337c70caab874ee6ce791a38cc420606bce9626a6cbce2c97ec81a963c"
+        "bytes": 513043
       }
     ],
     "inspected": "Expanded globe and holes, lighting on/off, desktop DPR 1 and 2, mobile dataset map/legend and text. Mobile viewport emulation, not an iPad device capture.",
@@ -111,53 +105,43 @@
     "changed": [
       {
         "filename": "io-lens-volcanic-heat.webp",
-        "bytes": 1148,
-        "sha256": "09990557c1514c62b26e73d530565cf1a7186a41a8ca2d7f9ebd16e999e3a8d6"
+        "bytes": 1148
       },
       {
         "filename": "io-poles-volcanic-heat@2x.webp",
-        "bytes": 22474,
-        "sha256": "5c19508a4426aa46c0d38eb3ad4b8444bc63bb644e2f7f7c20ade318ff58c057"
+        "bytes": 22474
       },
       {
         "filename": "io-volcanic-heat@2x.webp",
-        "bytes": 234822,
-        "sha256": "acab1e7b3cafb90f615c82f2ee043b04e8bb9c33ac51a4743977e74c84e90fa8"
+        "bytes": 234822
       },
       {
         "filename": "assets.json",
-        "bytes": 88707,
-        "sha256": "f9370cc4b31347828d345b3cd6edc0e13f1ef880bea72dbd73dabc5c73a81a6c"
+        "bytes": 88707
       },
       {
         "filename": "authored-preparation.json",
-        "bytes": 1417,
-        "sha256": "1634f7dee9573522b376bb3ec9635342305bfe44762584452cd1f4ac67d59b10"
+        "bytes": 1417
       },
       {
         "filename": "controls.json",
-        "bytes": 6898,
-        "sha256": "a5afd0b01d767fbb0fb290b0ac89080d9391c0420eff96b78f537efdae8a7221"
+        "bytes": 6898
       },
       {
         "filename": "lenses.json",
-        "bytes": 8864,
-        "sha256": "37fb60254081c0e43778d0c82e581a0c9dcb1f8a171d646903945b4fa5f2b7ba"
+        "bytes": 8864
       },
       {
         "filename": "minimaps/volcanic-heat.webp",
-        "bytes": 5046,
-        "sha256": "5af733df8407a66e08d99675d5fb3cab436e594701138652b4578876035a9ed5"
+        "bytes": 5046
       },
       {
         "filename": "runtime.json",
-        "bytes": 583100,
-        "sha256": "09331876a71ae1da2c73ada842d0ae63103cc796f169e8e3504533c6fd96a96b"
+        "bytes": 583100
       },
       {
         "filename": "text.json",
-        "bytes": 1843,
-        "sha256": "1a81259255318c998722154aded78eb9bb7dd19225573ef4ff3a0027f2d32f96"
+        "bytes": 1843
       }
     ],
     "result": {
@@ -167,15 +151,13 @@
     },
     "source": {
       "url": "https://earth-assets.lowpoly.cc/source-cache/io/science/jiram/io-jiram-perry-2017-2023.IMG",
-      "bytes": 4147200,
-      "sha256": "a8555dd327f6ea6c162ca7f528850c5ab598c9b21b8cf241f9347b046bd5c570"
+      "bytes": 4147200
     }
   },
   "archiveRestore": {
     "orbit": 43,
     "productId": "JIR_IMG_RDR_2022186T045549_V01",
     "method": "fetchFits range-download + ZIP CRC + 7z extraction in a fresh temporary directory",
-    "fitsSha256": "6de817b95a82f70c3f2cbb3d48a35f4243260c399eddf1d7df9126f84e6228c0",
     "matchesIndependentAcquisition": true
   },
   "omitted": "No full pnpm build or full browser conformance run: this changes offline preparation and prepared source data only.",

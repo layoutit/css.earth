@@ -2,16 +2,11 @@
   "schema": "cssearth-reflectance-mosaic-check@1",
   "body": "eros",
   "method": "Independent ISIS-label coordinates and float32 byte reads compared with the production native sampler. Native centers, fractional footprints, extrema, negative values and missing cells; not instrument calibration or physical map-to-shape registration.",
-  "manifestSha256": "225fa61ab82fefd3fe3d6dc50cd9c2eacc8a2ee3208e224628e932f32da6184c",
-  "recipeSha256": "7811dfa2a367bd3e61ee604eb44eb6dfe4a2f9eeaa970c1acb6d89367d1d22e5",
-  "oracleSha256": "897fb2252dbaf03edd503dd6b89c5192307def9810e60873bc2bc10130ecdedc",
   "results": [
     {
       "id": "blue",
       "path": "maps/eros_nearmsi_filter2.tif",
       "labelPath": "reference/eros_nearmsi_filter2.lbl",
-      "sourceSha256": "c8f0d71df12bb12635b3fb9884b3e29dd8e5dfededdc50a6e39b64e78e86dc39",
-      "labelSha256": "0bf585df0759a0df048efecd2108ee25997b5b19b7835d5e1207ada95feaa628",
       "wavelengthNm": 450,
       "width": 10682,
       "height": 5341,
@@ -32,7 +27,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -2471,8 +2466,6 @@
       "id": "normal",
       "path": "maps/eros_nearmsi_filter1.tif",
       "labelPath": "reference/eros_nearmsi_filter1.lbl",
-      "sourceSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
-      "labelSha256": "a7920e5e986c3823f6eb281b87cbf17b49c1367d3abe176ac544d4685a0c851b",
       "wavelengthNm": 550,
       "width": 10682,
       "height": 5341,
@@ -2493,7 +2486,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -4932,8 +4925,6 @@
       "id": "near-infrared-760",
       "path": "maps/eros_nearmsi_filter3.tif",
       "labelPath": "reference/eros_nearmsi_filter3.lbl",
-      "sourceSha256": "a3b9e478c420128c5408b7ee792eb1e0133f19856f1f484c70562094e9238255",
-      "labelSha256": "116ef0dbf8048b837648e3fcfb30ad15b64bfdbcd1d6771ce3a5dac8a7c28155",
       "wavelengthNm": 760,
       "width": 10682,
       "height": 5341,
@@ -4954,7 +4945,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -7393,8 +7384,6 @@
       "id": "near-infrared-900",
       "path": "maps/eros_nearmsi_filter5.tif",
       "labelPath": "reference/eros_nearmsi_filter5.lbl",
-      "sourceSha256": "5083caaa492d7a73fdc4848b46f453972f3dee572c3430ab6317bc2401370622",
-      "labelSha256": "34727bffd18092b6b2792dca4129dc3faaa39b98d564ad98c1ce08b28de56a1c",
       "wavelengthNm": 900,
       "width": 10682,
       "height": 5341,
@@ -7415,7 +7404,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -9854,8 +9843,6 @@
       "id": "infrared",
       "path": "maps/eros_nearmsi_filter4.tif",
       "labelPath": "reference/eros_nearmsi_filter4.lbl",
-      "sourceSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
-      "labelSha256": "b91269b57ebad2df1091ca3544784b1269ec07d4b22279aa23c5ad7029ff4c01",
       "wavelengthNm": 950,
       "width": 10682,
       "height": 5341,
@@ -9876,7 +9863,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -12315,8 +12302,6 @@
       "id": "near-infrared-1000",
       "path": "maps/eros_nearmsi_filter6.tif",
       "labelPath": "reference/eros_nearmsi_filter6.lbl",
-      "sourceSha256": "70af1d558980776b6160b8afab332cca73f3457b6b9a1cc466974ba29a3e2edc",
-      "labelSha256": "2e1f968f014abd8c6affede783410fb9465b33a3800e087fc44d091e1ec8b7e3",
       "wavelengthNm": 1000,
       "width": 10682,
       "height": 5341,
@@ -12337,7 +12322,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -14776,8 +14761,6 @@
       "id": "near-infrared-1050",
       "path": "maps/eros_nearmsi_filter7.tif",
       "labelPath": "reference/eros_nearmsi_filter7.lbl",
-      "sourceSha256": "378594986a0dba9de0e874e3b73f563f52217c5642fc8182e379f0a2862ccdac",
-      "labelSha256": "1b08fd1754070341c4d0cf4af61c68677bce59b291b7bc1335e64860abd367f7",
       "wavelengthNm": 1050,
       "width": 10682,
       "height": 5341,
@@ -14798,7 +14781,7 @@
         -89.97122553539603,
         89.97122553539603
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,

@@ -1,11 +1,10 @@
-"""Extract the numeric cut planes and outer mantle surface from a pinned EMC model.
+"""Extract the numeric cut planes and outer mantle surface from the EMC model the recipe names.
 
 Preparation input maintenance only; the normal JS bake reads the checked-in subset.
 Requires Python 3, numpy and h5py. See Earth's README.md for the exact invocation.
 """
 import argparse
 import gzip
-import hashlib
 import json
 from pathlib import Path
 
@@ -16,10 +15,11 @@ import numpy as np
 def extract(model_path, recipe_path, output_path):
     recipe = json.loads(Path(recipe_path).read_text())
     source = recipe["source"]
-    with open(model_path, "rb") as stream:
-        digest = hashlib.file_digest(stream, "sha256").hexdigest()
-    if digest != source["sha256"]:
-        raise ValueError("The upstream tomography model differs from its pin")
+    model_file = Path(model_path)
+    if not model_file.is_file():
+        raise FileNotFoundError(f"earth: {recipe_path} source.url {source['url']}: model file {model_path} is missing")
+    if model_file.stat().st_size != source["bytes"]:
+        raise ValueError(f"earth: {recipe_path} source.bytes {source['bytes']}: model file {model_path} holds {model_file.stat().st_size} bytes")
     with h5py.File(model_path) as model:
         lat = model["latitude"][:].astype(np.float64)
         lon = model["longitude"][:].astype(np.float64)
@@ -57,9 +57,7 @@ def extract(model_path, recipe_path, output_path):
         with open(output_path, "wb") as stream:
             with gzip.GzipFile(filename="", mode="wb", fileobj=stream, mtime=0, compresslevel=9) as zipped:
                 zipped.write(payload)
-    print(json.dumps({"bytes": Path(output_path).stat().st_size,
-                      "sha256": hashlib.sha256(Path(output_path).read_bytes()).hexdigest(),
-                      "values": len(values)}, indent=2))
+    print(json.dumps({"bytes": Path(output_path).stat().st_size, "values": len(values)}, indent=2))
 
 
 if __name__ == "__main__":

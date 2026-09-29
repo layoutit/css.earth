@@ -24,4 +24,4 @@ Run of 2026-09-22 (this version): [`node tools/prepare/prepare-object.mts beta-p
 - No rotation is measured.
 - The planet orbits inside the part of the disc no image here reaches, so it is drawn in the disc's inner hole.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -1,8 +1,7 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
   "imageId": "wise-wide-infrared",
-  "removalResultId": "f42ce90034e9f1156d1ff320883a31018e3b942899f3218c7fa44c37a43cf2de.ded01115a2e30fc0a638a98cd89d74c0c48e22047a91c21992b85c97d7e4b7d7",
+  "removalResultId": "wise-wide-infrared",
   "placement": {
     "x": 0,
     "y": 0,
@@ -20,9 +19,9 @@
     "gamma": 1
   },
   "subject": {
-    "id": "reconstruction-6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
+    "id": "reconstruction-lmc-clouds-emission-envelope-wise-wide-infrared",
     "name": "NASA WISE · 24° infrared candidate · reconstruction · finite material",
-    "directory": ".local/nebula-lab/reconstructions/6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
+    "directory": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared",
     "stars": "labs/nebula/models/lmc/stars/prepared/stars-envelope.json",
     "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
     "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
@@ -49,12 +48,12 @@
       },
       "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
     },
-    "imagePath": ".local/nebula-lab/reconstructions/6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6/source/target.png",
+    "imagePath": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared/source/target.png",
     "menuLabel": "LMC",
     "workflow": "density",
     "sourceSubjectId": "lmc-clouds",
     "comparisonImages": [],
-    "reconstructionOverlay": ".local/nebula-lab/reconstructions/6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6/source/original-overlay.json",
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared/source/original-overlay.json",
     "cloudParts": {
       "descriptor": "inspection-object.json",
       "catalogue": "source/cloud-parts.json"
@@ -66,12 +65,7 @@
     },
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
-    },
-    "materialGeometry": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d"
-  },
-  "finiteMaterial": {
-    "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
-    "sourceResultId": "19c9f90916a4cfe7100972aa898522fb7eee347dacc83163ffadb3b3337277a6"
+    }
   },
   "processing": {
     "densityPreview": false,

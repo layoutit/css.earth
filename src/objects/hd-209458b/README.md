@@ -47,4 +47,4 @@ Run of 2026-09-25 (this version):
 - **The colour lens is not the map.** The thermal colour is one temperature, 1,499 K, over the whole disc; the map shows how that heat is spread.
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The transit time is our own measurement from one JWST visit. The planet is a sphere.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

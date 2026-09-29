@@ -91,8 +91,8 @@ their type colours and brightness tones, even across the view.
 The renderer's catalogue point tests parse the prepared bank and check that a
 stacked bank only adds dots as the view narrows
 (`packages/renderer/src/universe/catalogue-points.test.ts`). The
-[context provenance tests](../../../tests/contract/context-provenance.test.mts)
-verify output and inventory pins.
+[context lineage test](../../../tests/contract/context-lineage.test.mts)
+checks that its products read only its source records.
 
 ## Known problems
 

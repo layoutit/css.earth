@@ -34,4 +34,4 @@ Run of 2026-09-22 (this version):
 - The spin axis is taken on the orbit normal; its direction on the sky is not measured.
 - Orbit elements are posterior medians, which reproduce the data but are not a single self-consistent sample.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

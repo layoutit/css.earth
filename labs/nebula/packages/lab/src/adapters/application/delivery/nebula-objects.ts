@@ -44,7 +44,7 @@ const researchBackend: NebulaResearchBackend = {
       throw new TypeError('Symmetry output belongs to another recipe.');
     const value = record(JSON.parse((await pinned(target,{path:preparedPin.url})).toString()));
     const volume = validatePreparedCssVolume(value.data);
-    return {path:`${recipe.symmetryDirectory}/${preparedPin.url}`,sha256:preparedPin.sha256,frame:volume.frame};
+    return {path:`${recipe.symmetryDirectory}/${preparedPin.url}`,frame:volume.frame};
   },
 };
 export function prepareNebulaObject(root: string, directory: string, ifMissing = false, research = false) {

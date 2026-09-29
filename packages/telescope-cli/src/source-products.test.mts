@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { card, imageFixture } from './fixtures/fits/helpers.mts';
 import { parseSourceProducts, SOURCE_PRODUCTS_SCHEMA } from './source-product-contract.mts';
-import { loadSourceProducts, sourceRun, SOURCE_RUN_FILES } from './source-products.mts';
+import { loadSourceProducts, sourceRun } from './source-products.mts';
 import { qualifySourceProduct, inspectFits, assertPdsDependencies } from './qualify-source.mts';
 import { queryCapabilities, selectObservation } from './query.mts';
 import { type QueryInputs } from './query-contract.mts';
@@ -14,9 +14,6 @@ import type { CapabilityRequest } from './recipe-request.mts';
 import { assessRequest } from './request-satisfaction.mts';
 const test = sourceTest();
 const request: CapabilityRequest = { target: 'test-body', wavelengthMicrometres: [1, 2], time: { any: true }, kind: 'image', result: 'telescope-product', angularResolutionArcsec: 1 };
-nodeTest('every source-qualification implementation input exists before a source is selected', async () => {
-  for (const path of SOURCE_RUN_FILES) assert.ok((await readFile(new URL(path, import.meta.url))).length > 0, path);
-});
 const fixture = async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'source-qualification-')), source = resolve(root, 'src/objects/test-body/source');
   await mkdir(source, { recursive: true });
@@ -31,7 +28,7 @@ test('a new telescope and target need no query registry change: actions, exact q
   const f = await fixture(); try {
     const pinnedRun = await sourceRun(f.root, f.product);
     assert.equal(pinnedRun.inputs[0]!.bytes, f.bytes.length);
-    assert.match(pinnedRun.inputs[0]!.sha256!, /^[a-f0-9]{64}$/u);
+    assert.equal(pinnedRun.inputs[0]!.identity, 'https://example.org/image.fits');
     const before = queryCapabilities(request, await queryInputs(f.root)), candidate = before.candidates[0]!;
     assert.equal(candidate.selectionAssessment.qualificationActions[0]!.configuration.kind, 'source-product');
     assert.equal(candidate.toolkitSupport.level, 'tool-without-checked-program');

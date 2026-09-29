@@ -6,7 +6,6 @@
     "height": 1000
   },
   "dpr": 1,
-  "manifestHash": "87fe180b3530dbe74a552cfe2cf355e8615adcdf0c27895607d73ddade065242",
   "errors": [],
   "defaultShadows": false,
   "retainedAfterDragAndLighting": true,
@@ -85,18 +84,18 @@
       "schema": "cssearth-archived-camera@1",
       "rayMatrix": [
         [
-          -0.00007049623507041079,
+          -7.049623507041079e-05,
           0.00010951790595257212,
           -0.026733138177647303
         ],
         [
-          0.00006451837973612278,
+          6.451837973612278e-05,
           0.00011901417124077991,
           0.04486660708110924
         ],
         [
-          0.000007963524483809708,
-          0.00000527386441072305,
+          7.963524483809708e-06,
+          5.27386441072305e-06,
           -0.9993414365646628
         ]
       ],
@@ -137,23 +136,19 @@
         0,
         99.5
       ],
-      "low": -0.000057929712056647986,
+      "low": -5.7929712056647986e-05,
       "high": 0.004490645136684179,
       "units": "relative I/F with original illumination; linear grayscale display",
       "referenceFrame": "msi-42826360"
     },
-    "shape": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
-    "image": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
     "view": "Source camera and native grid; complete composition flipped and aspect-corrected only for display"
   },
   "images": {
     "registration.webp": {
-      "bytes": 56520,
-      "sha256": "f5348e344ab03dc866d604fbcf605aa36ea85a1adf1cf60813869437ca8cf932"
+      "bytes": 56520
     },
     "view.webp": {
-      "bytes": 97616,
-      "sha256": "7364365244c11e686bbb3d65a88dc5f9b7bc45a8121590aa85c3e76301c379f5"
+      "bytes": 97616
     }
   },
   "recipeMigrationRevalidation": {

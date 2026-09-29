@@ -1,9 +1,8 @@
 /** Compare the delivered geographic intermediate with the original image sampler.
  * This measures resampling loss under the existing registration, not registration accuracy. */
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { cross3, dotN, requireRecord, array, number } from '@cssearth/core';
 import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
@@ -79,14 +78,14 @@ export async function inspectEncounterResampling(source: string, output: string)
     method: 'Three asymmetric barycentric points per full-source triangle. Compare bilinear map samples with direct original-image sampling under the same unchanged registration. Area-weight errors over points whose four interpolation corners use the same photograph at every width; seams and gaps excluded from blur statistics.',
     interpretation: 'Resampling fidelity only. This does not validate surface feature coordinates, recover albedo, or add observations.',
     candidateSamples: samples.length, commonInteriorSamples: common.length, groups,
-    maps: maps.map((map, index) => ({ width: map.width, height: map.width / 2, path: map.path, bytes: map.png.length, sha256: sha256(map.png),
+    maps: maps.map((map, index) => ({ width: map.width, height: map.width / 2, path: map.path, bytes: map.png.length,
       interiorSamples: samples.filter(s => s.values[index] !== null).length })),
     inputs: await Promise.all([
       'manifest.json', 'shape/1682q1halley.tab', 'giotto/hmc_best.gif',
       'giotto/rotation-2004.tab', 'giotto/vega2-flyby.txt', 'giotto/vega2-trajectory.txt',
       'reference/giotto-registration.json', 'reference/encounter-registration.json',
       ...['t11190', 't11194'].flatMap(id => [`vega/${id}.hdr`, `vega/${id}.img`]),
-    ].map(async path => ({ path, sha256: sha256(await readFile(resolve(source, path))) }))) };
+    ].map(async path => ({ path, bytes: (await stat(resolve(source, path))).size }))) };
   await writeFile(resolve(output, 'resampling.json'), JSON.stringify(report, null, 2) + '\n');
   return report;
 }

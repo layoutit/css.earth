@@ -10,7 +10,6 @@ function num(value: unknown, min = -1e6, max = 1e6): number {
 function list<T>(value: unknown, read: (item: unknown) => T, max = 4096): T[] {
   if (!Array.isArray(value) || value.length > max) throw new TypeError('Invalid array.'); return value.map(read);
 }
-function hash(value: unknown): string { const v = str(value); if (!/^[a-f0-9]{64}$/.test(v)) throw new TypeError('Expected SHA-256.'); return v; }
 function url(value: unknown): string { const v = str(value); if (new URL(v).protocol !== 'https:') throw new TypeError('Expected HTTPS citation.'); return v; }
 function anchors(value: unknown): [CalibrationAnchor, CalibrationAnchor] {
   const v = list(value, entry => { const item = record(entry); return { pixel: num(item.pixel, 0), value: num(item.value) }; }, 2);
@@ -30,9 +29,10 @@ export function readSlitEvidence(value: unknown): SlitEvidence {
   if (!samples.length || new Set(samples.map(p => p.id)).size !== samples.length) throw new TypeError('Missing or duplicate observed points.');
   const offsetCalibration = anchors(f.offsetCalibration), velocityCalibration = anchors(f.velocityCalibration);
   if (offsetCalibration.some(p => p.pixel > width) || velocityCalibration.some(p => p.pixel > height)) throw new TypeError('Calibration lies outside the source raster.');
+  const citationKeys = ['label', 'url', 'pdfUrl', 'sourceUrl', 'member'];
+  if (Object.keys(c).some(key => !citationKeys.includes(key))) throw new TypeError(`Slit evidence ${String(v.id)} citation has unexpected fields: ${Object.keys(c).filter(key => !citationKeys.includes(key)).join(', ')}`);
   return { schema: v.schema, id: str(v.id), title: str(v.title),
-    citation: { label: str(c.label), url: url(c.url), pdfUrl: url(c.pdfUrl), sourceUrl: url(c.sourceUrl),
-      sourceArchiveSha256: hash(c.sourceArchiveSha256), member: str(c.member), memberSha256: hash(c.memberSha256), figureSha256: hash(c.figureSha256) },
+    citation: { label: str(c.label), url: url(c.url), pdfUrl: url(c.pdfUrl), sourceUrl: url(c.sourceUrl), member: str(c.member) },
     figure: { width, height, cachePath: str(f.cachePath), extraction: str(f.extraction), pixelConvention: str(f.pixelConvention),
       offsetCalibration, velocityCalibration, readoutUncertaintyPixels: num(f.readoutUncertaintyPixels, .1, 10), readoutNote: str(f.readoutNote) },
     slit: { direction: str(s.direction), offsetUnit: s.offsetUnit, velocityUnit: s.velocityUnit, velocityFrame: s.velocityFrame, positiveVelocity: s.positiveVelocity,
@@ -50,7 +50,7 @@ export function readPreparedKinematics(value: unknown): PreparedKinematics {
   const tick = (p: unknown) => { const t = record(p); return { value: num(t.value), position: num(t.position, 0, 2048) }; };
   const point = (p: unknown): VelocityPoint => { const t = record(p); return { id: str(t.id), offsetArcsec: num(t.offsetArcsec), heliocentricKmS: num(t.heliocentricKmS),
     relativeKmS: num(t.relativeKmS), cx: num(t.cx, 0, 2048), cy: num(t.cy, 0, 2048) }; };
-  const result: PreparedKinematics = { schema: v.schema, evidenceSha256: hash(v.evidenceSha256), evidence: readSlitEvidence(v.evidence), parameters: readKinematicParameters(v.parameters),
+  const result: PreparedKinematics = { schema: v.schema, evidenceSource: str(v.evidenceSource), evidence: readSlitEvidence(v.evidence), parameters: readKinematicParameters(v.parameters),
     chart: { width: num(c.width, 100, 2048), height: num(c.height, 100, 2048), left: num(c.left, 0, 2048), right: num(c.right, 0, 2048),
       top: num(c.top, 0, 2048), bottom: num(c.bottom, 0, 2048), xTicks: list(c.xTicks, tick, 30), yTicks: list(c.yTicks, tick, 30),
       systemicBandTop: num(c.systemicBandTop, 0, 2048), systemicBandHeight: num(c.systemicBandHeight, 0, 2048), zeroY: num(c.zeroY, 0, 2048), zeroX: num(c.zeroX, 0, 2048),

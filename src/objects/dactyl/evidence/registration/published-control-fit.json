@@ -2,23 +2,17 @@
   "schema": "cssearth-dactyl-published-control-result@1",
   "qualifiedSurface": false,
   "date": "2026-09-14",
-  "inputSha256": "82d2bf6df6689e77e4ffd9640538895f2cce980741954bdf33ec5edce2acf0cf",
-  "generatorSha256": "c4635f59bafc40e57d72742ef9d97cd7bd48abfab22c13567b51e23105c73d50",
   "dependencies": [
     {
-      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts",
-      "sha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262"
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts"
     },
     {
-      "path": "tools/spice/text-kernel.mts",
-      "sha256": "4b81fb9ee416c4527476a903da3c6e40af4f85aa217b8d726b00d00511ffe0a9"
+      "path": "tools/spice/text-kernel.mts"
     },
     {
-      "path": "tools/source-values.mts",
-      "sha256": "6a762b3bee9132c09f0d596616c7e1dbe42702df1cf9bd03227874c32dd8a532"
+      "path": "tools/source-values.mts"
     }
   ],
-  "paperSha256": "e96e704ad303d090d658a0078a083d7d983b17ec78322531d998da90c66bade9",
   "rangeKm": 3887,
   "alignment": {
     "parameters": "paper pixels per native pixel, clockwise degrees, paper x/y at native anchor",

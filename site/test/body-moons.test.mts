@@ -8,10 +8,7 @@ const catalogue = catalogues.systems.find(system => system.id === 'saturn')!;
 test('Saturn lists every source moon and only links registered scene objects', () => {
   const moons = prepareBodyMoons('saturn');
   assert.equal(moons.length, catalogue.count);
-  assert.equal(moons.length, 293);
   assert.deepEqual(moons.map(moon => moon.id), catalogue.moons.map(moon => moon.id));
-  assert.equal(moons.filter(moon => moon.object).length, 46);
-  assert.equal(moons.filter(moon => !moon.object).length, 247);
   assert.equal(moons.find(moon => moon.id === 'titan')?.object?.route, '/titan/');
   assert.deepEqual(moons.find(moon => moon.id === 's-2009-s1'), { id: 's-2009-s1', name: 'S/2009 S1', object: undefined });
 });

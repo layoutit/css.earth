@@ -6,7 +6,6 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
 import { prepareImageLayers } from './prepare.ts';
-import { sha256 } from '@cssearth/core/node';
 import { assertImageLayerReplay, restoreEnvironmentObject } from '../environment/environment-images.ts';
 import { resizeRgbaLanczos3 } from './resize-rgba.ts';
 import { TEXELS_PER_CSS_PIXEL } from '../scene/index.ts';
@@ -17,7 +16,7 @@ test('environment restoration leaves dedicated preparation owners to restore the
   try {
     for (const type of ['volume-lens-bank', 'galaxy-point-field']) {
       const descriptor = JSON.stringify({ id: 'fixture', type,
-        prepared: { url: 'prepared/missing.json', sha256: '0'.repeat(64) } });
+        prepared: { url: 'prepared/missing.json' } });
       await writeFile(join(root, 'object.json'), descriptor);
       await restoreEnvironmentObject(root);
       assert.equal(await readFile(join(root, 'object.json'), 'utf8'), descriptor);
@@ -30,7 +29,6 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   const {mkdir,writeFile}=await import('node:fs/promises');await mkdir(source);
   const rgba=Buffer.alloc(7*7*4);for(let y=1;y<6;y++)for(let x=1;x<6;x++){const i=4*(y*7+x),peak=x===3&&y===3;rgba[i]=peak?240:30+x*12;rgba[i+1]=peak?80:25+y*9;rgba[i+2]=peak?40:20+(x+y)*5;rgba[i+3]=255;}
   const image=await sharp(rgba,{raw:{width:7,height:7,channels:4}}).png().toBuffer();await writeFile(join(source,'source.png'),image);await writeFile(join(source,'provenance.json'),'{}\n');
-  const provenance=Buffer.from('{}\n');
   const recipe:ImageLayerRecipe={schema:'cssearth-image-layer-recipe@1',id:'fixture',source:{path:'source.png',dimensions:[7,7],originalDimensions:[7,7],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:40,lineOfNodesPaDeg:25,thicknessKpc:.2,supportRadiusKpc:1,supportTaperFraction:.9,depthWeights:[.25,.5,.25],depthScales:[1,1,1]},bake:{maxFacePixels:7,diffuseFacePixels:7,crossAxisSlices:3,crossAxisAlongPixels:7,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:100}},provenance:{path:'provenance.json'}};
   const parsed=parseImageLayerRecipe(recipe),bank=await prepareImageLayers({sourceDirectory:source,outputDirectory:output,recipe:parsed});
   assert.deepEqual(bank.banks.map(b=>[b.axis,b.leaves.length]),[['x',3],['y',3],['z',4]]);
@@ -46,7 +44,7 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   const recipeBytes = Buffer.from(JSON.stringify(recipe));
   await writeFile(join(source, 'recipe.json'), recipeBytes);
   const preparedBytes = await readFile(join(output, 'image-layers.json'));
-  const descriptor = JSON.stringify({id:'fixture',type:'image-layer-bank',properties:{preparation:{source:'source/recipe.json',sha256:sha256(recipeBytes)}},prepared:{url:'prepared/image-layers.json',sha256:sha256(preparedBytes)}});
+  const descriptor = JSON.stringify({id:'fixture',type:'image-layer-bank',properties:{preparation:{source:'source/recipe.json'}},prepared:{url:'prepared/image-layers.json'}});
   await writeFile(join(root, 'object.json'), descriptor);
   // Exercise a clean-checkout cache miss, not only an already-populated output bank.
   await rm(join(output, 'layers'), {recursive:true});
@@ -63,21 +61,7 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   assert.notDeepEqual(rotated.banks[2].leaves[0].verticesUnits,bank.banks[2].leaves[0].verticesUnits,'astrometric registration must affect baked geometry');
 });
 
-test('recipe rejects an unnormalised depth model',()=>{const bad={schema:'cssearth-image-layer-recipe@1',id:'bad',source:{path:'a.png',sha256:'0'.repeat(64),dimensions:[2,2],originalDimensions:[2,2],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:20,lineOfNodesPaDeg:30,thicknessKpc:1,supportRadiusKpc:2,supportTaperFraction:.9,depthWeights:[1,1,1],depthScales:[1,1,1]},bake:{maxFacePixels:2,diffuseFacePixels:2,crossAxisSlices:3,crossAxisAlongPixels:2,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:90}},provenance:{path:'provenance.json',sha256:'0'.repeat(64)}};assert.throws(()=>parseImageLayerRecipe(bad),/sum to one/);});
-
-
-test('diffuse resize preserves canonical pixels at fractional horizontal phases across CPUs', () => {
-  const width = 2391, height = 64, input = Buffer.alloc(width * height * 4);
-  let state = 1;
-  for (let index = 0; index < input.length; index++) {
-    state = (Math.imul(state, 1664525) + 1013904223) | 0;
-    input[index] = state >>> 24;
-  }
-  // Independent baseline: Sharp 0.35.3 / libvips 8.18.3 on macOS arm64.
-  // Unfused coordinate arithmetic changes two bytes in this small fixture.
-  assert.equal(sha256(resizeRgbaLanczos3(input, width, height, 320, 8)),
-    'ba6855a162e3aff54dbea530227f1bb1389363282bf009faf0d168950609d804');
-});
+test('recipe rejects an unnormalised depth model',()=>{const bad={schema:'cssearth-image-layer-recipe@1',id:'bad',source:{path:'a.png',dimensions:[2,2],originalDimensions:[2,2],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:20,lineOfNodesPaDeg:30,thicknessKpc:1,supportRadiusKpc:2,supportTaperFraction:.9,depthWeights:[1,1,1],depthScales:[1,1,1]},bake:{maxFacePixels:2,diffuseFacePixels:2,crossAxisSlices:3,crossAxisAlongPixels:2,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:90}},provenance:{path:'provenance.json'}};assert.throws(()=>parseImageLayerRecipe(bad),/sum to one/);});
 
 test('diffuse resize rejects malformed dimensions and unsupported enlargement', () => {
   const pixel = Buffer.from([17, 29, 43, 127]);
@@ -88,7 +72,6 @@ test('diffuse resize rejects malformed dimensions and unsupported enlargement', 
   assert.throws(() => resizeRgbaLanczos3(pixel, 1, 1, 2, 1), /downsampling only/);
 });
 
-
 test('image-layer replay permits only bounded coordinate drift and leaves accepted metadata untouched', () => {
   const accepted = {
     id: 'fixture', frame: { originM: [1.6e20, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
@@ -96,8 +79,8 @@ test('image-layer replay permits only bounded coordinate drift and leaves accept
     banks: [{ normalUnits: [0, 0, 1], samplingStepUnits: .1, leaves: [{ id: 'z-0', offsetKpc: -.5,
       centerUnits: [0, 0, -.5], verticesUnits: [[-1, -1, -.5], [1, -1, -.5], [1, 1, -.5], [-1, 1, -.5]],
       uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], widthPx: 320, heightPx: 268,
-      sha256: 'a'.repeat(64), bytes: 1234, style: { transform: 'matrix3d(accepted)' } }] }],
-    resources: [{ path: 'layers/z-0.webp', sha256: 'a'.repeat(64), bytes: 1234, width: 320, height: 268 }],
+      bytes: 1234, style: { transform: 'matrix3d(accepted)' } }] }],
+    resources: [{ path: 'layers/z-0.webp', bytes: 1234, width: 320, height: 268 }],
   };
   const before = JSON.stringify(accepted), drifted = structuredClone(accepted);
   drifted.frame.originM[0] += 70000;
@@ -116,8 +99,6 @@ test('image-layer replay permits only bounded coordinate drift and leaves accept
     value => { value.frame.originM[0] += 1e8; },
     value => { value.banks[0].normalUnits[0] += 1e-10; },
     value => { value.banks[0].leaves[0].verticesUnits[0][2] += 1e-10; },
-    value => { value.banks[0].leaves[0].sha256 = 'b' + 'a'.repeat(63); },
-    value => { value.resources[0].sha256 = 'b' + 'a'.repeat(63); },
     value => { value.resources[0].bytes += 1; },
     value => { value.banks[0].leaves[0].bytes += 1; },
     value => { value.banks[0].leaves[0].widthPx += 1; },

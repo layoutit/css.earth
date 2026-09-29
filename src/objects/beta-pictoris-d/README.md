@@ -24,4 +24,4 @@ Run of 2026-09-22 (this version): [`node tools/prepare/prepare-object.mts beta-p
 - Radius and mass are model values.
 - No rotation is measured.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

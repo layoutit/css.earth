@@ -1,9 +1,9 @@
 import { readFile, access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawn } from 'node:child_process';
-import { readObservations } from '../../../features/observations/models/model.ts';
+import { readObservations, observationsFromRecipe } from '../../../features/observations/models/model.ts';
 import { readStructureCatalogue } from '../../../features/observations/models/structures-model.ts';
-import { geometrySha, readGeometryPin, readRegisteredGeometrySource } from '../geometry/registered-source.ts';
+import { readGeometryPin, readRegisteredGeometrySource } from '../geometry/registered-source.ts';
 import { acquireMolecularSources } from '../kinematics/molecular-source.ts';
 import { readJointRecipe, jointRecord } from '../../../features/joint-fit/model.ts';
 import type { CompilerRecipe } from '../../../features/compiler/model.ts';
@@ -12,7 +12,7 @@ export type CompilerProgress = (message: string, fraction?: number) => void;
 const missing = (error: unknown) => error instanceof Error && 'code' in error && error.code === 'ENOENT';
 async function present(root: string, path: string) { try { await access(resolve(root, path)); return true; } catch (error) { if (missing(error)) return false; throw error; } }
 
-/** Missing derived files are restorable; changed hashes are evidence errors, never silently overwritten. */
+/** Missing derived files are restorable; a layer that exists is the one its catalogue names. */
 export async function compilerLayersReady(root: string, value: unknown): Promise<boolean> {
   readObservations(value);
   if (!jointRecord(value) || !Array.isArray(value.images)) throw new TypeError('Missing observation images.');
@@ -58,7 +58,7 @@ export async function restoreCompilerInputs(root: string, recipe: CompilerRecipe
   if (prepared) {
     const value: unknown = JSON.parse(await readFile(resolve(root, recipe.observationCatalogue), 'utf8'));
     prepared = await compilerLayersReady(root, value);
-    if (jointRecord(value) && jointRecord(value.provenance)) prepared &&= value.provenance.recipeSha256 === geometrySha(await readFile(resolve(root, recipe.observationRecipe)));
+    prepared &&= observationsFromRecipe(value, await readFile(resolve(root, recipe.observationRecipe), 'utf8'));
   }
   if (!prepared) {
     await runCompilerSourceCommand(root, 'prepare-observations', recipe.observationRecipe, 'NEBULA_OBSERVATIONS_COMPLETE', signal, progress); restored = true;

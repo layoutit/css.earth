@@ -4,7 +4,7 @@
   "asOf": "2026-09-13",
   "status": "Diffuse fit compiled and visually inspected as a bounded interior approximation; physical diffuse depth and immediate paint readiness remain unvalidated.",
   "result": {
-    "id": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
+    "id": "m1",
     "secondsWithPreparedSources": 509.723635916,
     "releasedEmissionSamples": 416573,
     "analyticWindTerms": 4,
@@ -43,7 +43,7 @@
       {
         "sourceId": "hubble-optical",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-hubble-optical.json"
+          "path": ".local/nebula-lab/compiler/m1/emission-fit-hubble-optical.json"
         },
         "atomCount": 143,
         "ejectaGain": 1.0407954901531884,
@@ -58,7 +58,7 @@
       {
         "sourceId": "spitzer-infrared",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-spitzer-infrared.json"
+          "path": ".local/nebula-lab/compiler/m1/emission-fit-spitzer-infrared.json"
         },
         "atomCount": 143,
         "ejectaGain": 0.40845510873534047,
@@ -73,7 +73,7 @@
       {
         "sourceId": "vla-radio",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-vla-radio.json"
+          "path": ".local/nebula-lab/compiler/m1/emission-fit-vla-radio.json"
         },
         "atomCount": 143,
         "ejectaGain": 2.758817892664468,
@@ -88,7 +88,7 @@
       {
         "sourceId": "webb-components",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-components.json"
+          "path": ".local/nebula-lab/compiler/m1/emission-fit-webb-components.json"
         },
         "atomCount": 143,
         "ejectaGain": 0.5400976988698133,
@@ -103,7 +103,7 @@
       {
         "sourceId": "webb-infrared",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-infrared.json"
+          "path": ".local/nebula-lab/compiler/m1/emission-fit-webb-infrared.json"
         },
         "atomCount": 143,
         "ejectaGain": 0.9190453236587317,
@@ -140,7 +140,7 @@
   "browser": {
     "status": "All six spectral lenses visibly rendered; original overlay and reload checked in the live lab.",
     "loadingFix": "A historical completed job previously hid the updated CLI result. Restoration now considers the current validated publication and checks matching controls, evidence and registration before superseding saved display state. No job is deleted and active work is preserved.",
-    "testedResultId": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
+    "testedResultId": "m1",
     "method": "Task-scoped inspection in Chrome through the native browser interface; screenshots inspected interactively, not an automated performance or console-error audit.",
     "views": [
       {
@@ -207,7 +207,7 @@
     "asOf": "2026-09-13",
     "status": "Compiled and interactively inspected; immediate CSS paint readiness remains unresolved.",
     "result": {
-      "id": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
+      "id": "m1-measured-only-baseline",
       "secondsWithPreparedSources": 327.666735208,
       "releasedEmissionSamples": 416573,
       "analyticWindTerms": 4,
@@ -270,16 +270,16 @@
         "No processing requests during material, camera or star switches",
         "No browser errors"
       ],
-      "testedResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
+      "testedResultId": "m1-measured-only-baseline-previous",
       "visualFinding": "Earth-facing optical filaments and separate Chandra tori/jets are visible. Initial oblique captures were substantially darker, but a timed investigation found deferred CSS painting: at unchanged pose and framing, Hubble luminance was 0.701 after one second, then 7.175 at five and ten seconds. This does not prove permanent angular darkening; immediate readiness is still a failed gate."
     },
     "sharedOwnerReplay": {
-      "previousResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
+      "previousResultId": "m1-measured-only-baseline-previous",
       "receipt": "output/nebula-processing/m1-star-union-replay.json",
       "interpretation": "The optional multisource star catalogue is enabled only for Lagoon. This current-owner replay preserves all 351 Crab lights, physical grids, panels, geometry, alpha and every bank resource. Only the field descriptor's generated grid paths changed with the result ID."
     },
     "currentBrowser": {
-      "testedResultId": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
+      "testedResultId": "m1-measured-only-baseline",
       "receipt": {
         "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/receipt.json"
       },

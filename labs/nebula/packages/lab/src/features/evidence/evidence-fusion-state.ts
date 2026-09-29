@@ -31,7 +31,7 @@ export function useEvidenceFusion(request: FusionRequest, storageKey: string) {
     }
     async function decode(value: FusionResult) {
       const paths = [value.union, value.colors, value.agreement, ...value.sources.flatMap(s => [s.source, s.evidence])];
-      await Promise.all(paths.map(async asset => { const image = new Image(); image.src = `${localFile(asset.path)}?v=${asset.sha256}`; await image.decode(); }));
+      await Promise.all(paths.map(async asset => { const image = new Image(); image.src = localFile(asset.path); await image.decode(); }));
     }
     async function run() {
       if (running || stopped) return;

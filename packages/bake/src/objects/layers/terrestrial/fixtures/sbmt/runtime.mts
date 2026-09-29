@@ -1,7 +1,5 @@
-import { sha256 } from '@cssearth/core/node';
-import { createHash } from 'node:crypto';
-import { createReadStream, existsSync } from 'node:fs';
-import { readFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { readFile, mkdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { ORACLE_ROOT } from '@cssearth/core/oracle';
@@ -9,15 +7,10 @@ import { javaBridge, call, construct } from './java.mts';
 
 export const base = resolve(ORACLE_ROOT, '.local/oracles/sbmt');
 export const lockPath = resolve(import.meta.dirname, 'runtime.lock.json');
-export async function generatorFingerprint() {
-  const hash=createHash('sha256');
-  for(const path of ['projection.mts','runtime.mts','java.mts','cases.mts'])hash.update(path).update(await readFile(resolve(import.meta.dirname,path)));
-  return hash.digest('hex');
-}
-export async function hashFile(path: string) {
-  const hash = createHash('sha256'); let bytes = 0;
-  for await (const chunk of createReadStream(path)) { hash.update(chunk); bytes += chunk.length; }
-  return { bytes, sha256: hash.digest('hex') };
+/** A file's size; a missing file names its path. */
+export async function fileBytes(path: string) {
+  try { return { bytes: (await stat(path)).size }; }
+  catch (error) { throw new Error(`SBMT file is missing: ${path}`, { cause: error }); }
 }
 export function pin(value: unknown) {
   const p = requireRecord(value), path = requireString(p.path);
@@ -27,20 +20,20 @@ export function pin(value: unknown) {
   return { path, bytes };
 }
 export async function runtimeLock() {
-  const raw = await readFile(lockPath), lock = requireRecord(JSON.parse(raw.toString()));
+  const lock = requireRecord(JSON.parse(await readFile(lockPath, 'utf8')));
   if (lock.schema !== 'cssearth-sbmt-runtime@1') throw new Error('Unknown SBMT runtime lock');
-  return { lock, digest: sha256(raw),
+  return { lock,
     files: requireArray(lock.files).map(pin), nativeFiles: requireArray(lock.nativeFiles).map(pin), bridgeFiles: requireArray(lock.bridgeFiles).map(pin) };
 }
 export async function verifyFiles(directory: string, files: readonly ReturnType<typeof pin>[]) {
   for (const file of files) {
-    const actual = await hashFile(resolve(directory, file.path));
-    if (actual.bytes !== file.bytes) throw new Error(`SBMT byte identity failed: ${file.path}`);
+    const actual = await fileBytes(resolve(directory, file.path));
+    if (actual.bytes !== file.bytes) throw new Error(`SBMT runtime file ${file.path} holds ${actual.bytes} bytes; runtime.lock.json records ${file.bytes}.`);
   }
 }
 /** This runs in a bounded child process. It never opens a render window. */
 export async function startNative() {
-  const { lock, files, nativeFiles, bridgeFiles, digest } = await runtimeLock();
+  const { lock, files, nativeFiles, bridgeFiles } = await runtimeLock();
   if (`${process.platform}-${process.arch}` !== lock.platform) throw new Error(`Native regeneration is qualified for ${lock.platform}; fixture comparisons are portable.`);
   await verifyFiles(base, files);
   await verifyFiles(base, bridgeFiles);
@@ -60,5 +53,5 @@ export async function startNative() {
   call(loader, 'loadHeadlessVtkLibrariesSync');
   await verifyFiles(base, nativeFiles);
   return { java, tool: { sbmt: requireString(lock.sbmt), release: requireString(lock.release), java: requireString(lock.java),
-    'java-bridge': requireString(lock.bridge), runtimeLockSha256: digest, generatorSha256: await generatorFingerprint() } };
+    'java-bridge': requireString(lock.bridge) } };
 }

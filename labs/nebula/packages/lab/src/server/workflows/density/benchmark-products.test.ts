@@ -4,17 +4,17 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
-import { digest, measureComponents, readBenchmarkImage, writeMethodProducts,
+import { measureComponents, readBenchmarkImage, writeMethodProducts,
   type ComponentMaps } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
 
-test('benchmark image loading rejects a changed source before decoding products', async () => {
+test('benchmark image loading rejects a source with other dimensions before decoding products', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'structure-source-pin-'));
   const path = join(directory, 'source.png');
   const pixels = Buffer.from([255, 0, 0, 0, 255, 0]);
   const bytes = await sharp(pixels, { raw: { width: 2, height: 1, channels: 3 } }).png().toBuffer();
   await writeFile(path, bytes);
-  await assert.rejects(readBenchmarkImage(path, '0'.repeat(64), 2, 1), /source pin differs/);
-  const image = await readBenchmarkImage(path, digest(bytes), 2, 1);
+  await assert.rejects(readBenchmarkImage(path, 1, 2), /is 2×1×3, not 1×2×3/);
+  const image = await readBenchmarkImage(path, 2, 1);
   assert.ok(Math.abs(image.luminance[0]! - .2126) < 1e-6);
   assert.ok(Math.abs(image.luminance[1]! - .7152) < 1e-6);
 });

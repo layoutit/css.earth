@@ -1,10 +1,9 @@
-import { sha256 } from '@cssearth/core/node';
 import type { SurfaceBankPlan, SurfaceBankLenses } from './contracts.ts';
 /** `maximumWidth`: the largest level the runtime may choose. Wider levels are still prepared (smaller levels are reduced
  * from the canonical page) but never offered, so no view downloads them. */
 export interface TextureLevelConfiguration {widths:readonly number[];fixedWidth?:number;maximumWidth?:number;hysteresis:number;texelsPerCssPixel:number}
 interface TextureLevelAsset {url:string;decodedBytes:number}
-interface TextureLevelReceipt {source:string;sourceSha256:string;url:string;sha256:string;width:number;height:number;bottomPadding:number}
+interface TextureLevelReceipt {source:string;url:string;width:number;height:number;bottomPadding:number}
 import sharp from 'sharp';
 import { readFile, mkdir, writeFile, rm } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
@@ -100,7 +99,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
           await writeFile(resolve(publicDirectory, targetUrl.slice(config.publicBase.length)), output);
         }
         prepared.push({ url: targetUrl, decodedBytes: targetWidth * outputHeight * 4 });
-        receipts.push({ source: url, sourceSha256: sha256(source), url: targetUrl, sha256: sha256(output), width: targetWidth, height: outputHeight, bottomPadding: padding });
+        receipts.push({ source: url, url: targetUrl, width: targetWidth, height: outputHeight, bottomPadding: padding });
       }
       urls.set(url, prepared);
     }
@@ -112,7 +111,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
   };
   for (const bank of banks) for (const [page, url] of bank.urls.entries()) await prepare(`page:${bank.id}:${page}`, url, 'pages');
   // Small levels: each bank's pages become tiles of one square sheet, which every page's resource then names.
-  const sheets: { url: string; sha256: string; side: number; pages: { source: string; x: number; y: number }[] }[] = [];
+  const sheets: { url: string; side: number; pages: { source: string; x: number; y: number }[] }[] = [];
   const sheetUrls = new Map<string, { key: string; url: string; tiles: { x: number; y: number; scale: number }[] }>();
   const replaced = new Set<string>();
   for (const bank of banks) {
@@ -137,7 +136,7 @@ export async function prepareTextureLevels({ config, plan, lenses, publicDirecto
         const canvas = sharp({ create: { width: side, height: side, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(parts);
         const output = dimensions[0]!.lossless ? await canvas.webp({ lossless: true, effort: 4 }).toBuffer() : await encodeLossyWebp(sharp(await canvas.png().toBuffer()), { alphaQuality: 100, effort: 4 });
         await writeFile(resolve(publicDirectory, url.slice(config.publicBase.length)), output);
-        sheets.push({ url, sha256: sha256(output), side, pages: bank.urls.map((source, p) => ({ source, ...packed.positions[p]! })) });
+        sheets.push({ url, side, pages: bank.urls.map((source, p) => ({ source, ...packed.positions[p]! })) });
         const key = `sheet:${bank.id}:level:${levelWidth}`;
         entries.push({ key, url, decodedBytes: side * side * 4, pool: 'pages' });
         sheet = { key, url, tiles: dimensions.map((page, p) => ({ x: packed.positions[p]!.x / config.atlas.density, y: packed.positions[p]!.y / config.atlas.density, scale: packed.side / page.width })) };

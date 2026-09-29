@@ -1,9 +1,6 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Lab-only high-resolution optical master, followed by smaller prepared CSS banks. */
-import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -17,52 +14,42 @@ import type { VolumeRecipe } from '@cssearth/bake/volume';
 type Vec3 = [number, number, number];
 interface MasterExperiment {
   schema: 'cssearth-photo-master-experiment@1';
-  base: { path: string; sha256: string; targetId: string };
-  photo: { path: string; sha256: string; width: number; height: number; url: string;
+  base: { path: string; targetId: string };
+  photo: { path: string; width: number; height: number; url: string;
     publisherUrl: string; license: string; credit: string };
   extraction: Pick<ExtractionOptions, 'maxPixels' | 'medianSize' | 'outputMode'>;
   master: { width: number; sliceCounts: { x: number; y: number; z: number }; samplesPerSlab: number };
   delivery: { id: string; width: number; directory: string; quality: number }[];
   limitations: string[];
 }
-const sha = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
-async function fileSha(path: string) {
-  const hash = createHash('sha256');
-  for await (const bytes of createReadStream(path)) hash.update(bytes);
-  return hash.digest('hex');
-}
-async function pinned(path: string, expected: string) {
-  if (await fileSha(path).catch(() => '') !== expected) {
-    throw new Error(`Missing or changed pinned input: ${path}. Run the reference acquisition and particle preparation first.`);
-  }
+async function present(path: string) {
+  await access(path).catch(() => { throw new Error(`Missing input: ${path}. Run the reference acquisition and particle preparation first.`); });
 }
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 
 export async function preparePhotoMaster(recipePath: string) {
-  const recipeBytes = await readFile(recipePath);
-  const recipe: MasterExperiment = parseLabModelJson(recipeBytes.toString());
+  const recipe: MasterExperiment = parseLabModelJson(await readFile(recipePath, 'utf8'));
   if (recipe.schema !== 'cssearth-photo-master-experiment@1') throw new TypeError('Unsupported photo-master experiment.');
   if (recipe.extraction.maxPixels !== null) throw new TypeError('Photo masters require native-resolution extraction.');
-  await pinned(recipe.base.path, recipe.base.sha256);
-  await pinned(recipe.photo.path, recipe.photo.sha256);
+  await present(recipe.base.path);
+  await present(recipe.photo.path);
   const base = parseLabModelJson(await readFile(recipe.base.path, 'utf8'));
   const target = base.targets.find((item: { id: string }) => item.id === recipe.base.targetId);
   if (!target?.photoEmission) throw new TypeError('A photo-constrained particle target is required.');
   const imported = parseLabModelJson(await readFile(resolve(target.directory, 'source/import.json'), 'utf8'));
-  if (imported.source.sha256 !== base.source.snapshotSha256 ||
+  if (imported.source.bytes === undefined || imported.source.header?.starCount !== base.source.starCount ||
       JSON.stringify(imported.displayRotation) !== JSON.stringify(target.rotation) ||
       imported.selection.start !== target.starRange.start || imported.selection.count !== target.starRange.count) {
     throw new TypeError('The prepared particle receipt differs from the pinned model. Rebuild the particle target.');
   }
-  await pinned(imported.rotatedOutput.path, imported.rotatedOutput.sha256);
+  await present(imported.rotatedOutput.path);
   const descriptor = parseLabModelJson(await readFile(resolve(target.directory, 'object.json'), 'utf8'));
   const frame: DensityVolumeFrame = descriptor.properties.volume;
   const compilerRecipe: VolumeRecipe = parseLabModelJson(await readFile(resolve(target.directory, 'source/volume.json'), 'utf8'));
-  const pipeline = await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-master.ts']);
-  const masterInputs = { base: recipe.base, photo: recipe.photo, pipeline,
-    extraction: recipe.extraction, master: recipe.master, particles: imported.rotatedOutput.sha256 };
-  const masterInputsSha256 = sha(JSON.stringify(masterInputs));
-  const masterKey = masterInputsSha256.slice(0, 16);
+  const masterInputs = { base: recipe.base, photo: recipe.photo,
+    extraction: recipe.extraction, master: recipe.master, particles: imported.rotatedOutput.path };
+  // One master per particle target; it is reused only while the saved inputs are the same.
+  const masterKey = recipe.base.targetId;
   const cache = resolve('.local/nebula-lab/highres', masterKey);
   const masterDirectory = resolve(cache, 'masters');
   await mkdir(cache, { recursive: true });
@@ -70,7 +57,9 @@ export async function preparePhotoMaster(recipePath: string) {
     outputDirectory: resolve(bank.directory, 'prepared'), imageEncoding: { format: 'webp' as const, quality: bank.quality } }));
   let masters: VolumeSlices;
   let banks: { width: number; slices: VolumeSlices }[];
-  const existing = await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch(() => null);
+  const savedInputs = await readFile(resolve(cache, 'inputs.json'), 'utf8').catch(() => null);
+  const existing = savedInputs !== null && JSON.stringify(JSON.parse(savedInputs)) === JSON.stringify(masterInputs)
+    ? await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch(() => null) : null;
   if (existing) {
     console.log(`PHOTO_MASTER_REUSE ${masterKey}: deriving delivery from verified lossless slices`);
     masters = parseLabModelJson(existing);
@@ -93,8 +82,8 @@ export async function preparePhotoMaster(recipePath: string) {
       encoding: 'sqrt-density-unorm8',
     });
     const densityBytes = await readFile(densityOutputPath);
-    if (!densityReceipt.densityField || densityReceipt.densityField.sha256 !== sha(densityBytes)) {
-      throw new TypeError('The exported depth field does not match its receipt.');
+    if (!densityReceipt.densityField || densityReceipt.densityField.bytes !== densityBytes.length) {
+      throw new TypeError(`The exported depth field ${densityOutputPath} does not match its receipt.`);
     }
     densityReceipt.densityField.path = relative(process.cwd(), densityOutputPath);
     const density = new Float32Array(densityBytes.length / 4);
@@ -106,9 +95,9 @@ export async function preparePhotoMaster(recipePath: string) {
       ...target.photoEmission, exposureGain: target.exposureGain, onProgress: console.log });
     const { processing: _processing, ...stableExtraction } = extraction as NativeExtractionReceipt;
     const provenance = { schema: 'cssearth-photo-master-provenance@1',
-      masterInputs, masterInputsSha256, source: base.source, photo: recipe.photo,
+      masterInputs, source: base.source, photo: recipe.photo,
       particles: imported.rotatedOutput, density: densityReceipt,
-      extraction: { ...stableExtraction, diffuseSha256: await fileSha(diffusePath) },
+      extraction: { ...stableExtraction, diffuse: relative(process.cwd(), diffusePath) },
       display: { alignment: target.alignment, rotation: target.rotation,
         boundsKpc: target.boundsKpc, photoCenterKpc: target.colorCenterKpc, photoSpanKpc: target.colorSpanKpc,
         emission: target.photoEmission, diagnostics: sampler.diagnostics },
@@ -121,17 +110,18 @@ export async function preparePhotoMaster(recipePath: string) {
       masterWidth: recipe.master.width, masterDirectory, deliveryBanks,
       unitsPerSourceUnit: 1, provenance });
     masters = baked.masters; banks = baked.banks;
+    await json(resolve(cache, 'inputs.json'), masterInputs);
   }
   for (const bank of recipe.delivery) {
     const slices = banks.find(item => item.width === bank.width)?.slices;
     if (!slices) throw new Error(`Missing derived bank ${bank.width}.`);
     slices.provenance = { master: slices.provenance,
-      deliveryRecipe: { path: recipePath, sha256: sha(recipeBytes), selectedDelivery: bank } };
+      deliveryRecipe: { path: recipePath, selectedDelivery: bank } };
     const directory = resolve(bank.directory), sourceDirectory = resolve(directory, 'source');
     await mkdir(sourceDirectory, { recursive: true });
     const modelRecipe = { ...recipe, selectedDelivery: bank,
       master: { ...recipe.master, cacheKey: masterKey,
-        manifestSha256: await fileSha(resolve(masterDirectory, 'volume-slices.json')) } };
+        manifest: relative(process.cwd(), resolve(masterDirectory, 'volume-slices.json')) } };
     await json(resolve(sourceDirectory, 'master.json'), modelRecipe);
     await json(resolve(sourceDirectory, 'provenance.json'), slices.provenance);
     await json(resolve(directory, 'prepared/volume-slices.json'), slices);

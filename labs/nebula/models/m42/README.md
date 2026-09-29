@@ -25,7 +25,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 ## Registration and reproducibility
 
-- `observations.json` pins each downloaded TIFF by SHA-256 and actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
+- `observations.json` names each downloaded TIFF by URL with its actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
 - The common frame contains all native source corners with a six-percent angular margin. No frame was cropped to make the photographs agree.
 - `observation-structures.json` configures the shared wavelet structure extraction.
 - `compiler.json` configures the generic relative-emission compiler. No Helix joint-fit recipe or planetary expansion prior is reused.
@@ -35,7 +35,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 The optical image covers the main M42 nebula and its immediate cluster; the infrared source is wider. Neither image covers the entire Orion molecular-cloud complex. The saturated core, diffraction spikes and bright stellar halos must not become inferred nebular structures.
 
-The source packet was verified against both image SHA-256 values and decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
+The source packet was verified against both images' decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
 
 The compiler uses an evidence-addressed, authored irregular front. Compact lights are detected image features with conditional depths; they are not a catalog of confirmed members with measured distances.
 
@@ -58,7 +58,7 @@ Compact lights now use local background-subtracted NOX residual aperture light, 
 
 The previous optical markers emitted 21.78 times the measured residual aperture display energy at the 1024px reference framing. The revised prepared disks preserve 99.70% for optical and 99.86% for VISTA; peak intensity never exceeds the corresponding original aperture peak. Browser alpha compositing and pixel sampling are separate from this preparation-space accounting.
 
-The exact saved request (Detail 100%, Faint 35%, Depth 1×) was rebuilt as `e94ec60c3b2128e213cb20b041a3726f136d61b6a810670794aca01339605f41`. Against its prior result `287801eff85c5adf01ae298c63fe8b55711fdb746a0ff83cfad2da53fce3ac2b`, the volume field, alpha digest, 650 IDs and XYZ positions are unchanged. The default 65% Detail publication is `7312292273a7cb0f9975fa492a3de85146b911b2857621d1f5d3c8b7d46d4d8d`.
+The exact saved request (Detail 100%, Faint 35%, Depth 1×) was rebuilt as `m42-detail-100`. Against its prior result `m42-before-detail-100`, the volume field, neutral alpha, 650 IDs and XYZ positions are unchanged. The default 65% Detail publication is `m42`.
 
 Validation: strict lab TypeScript, lab build and 300 passing tests (two skipped). Restoring the old opacity floor makes the photometry regression fail. Real Chromium inspection of both M42 lenses verified fixed star centers, lens-specific appearance, angular sizing during zoom, rotation, star visibility, original overlay and refresh. Front/oblique images were inspected: excessive star amplification is corrected; diffuse side geometry and optical coverage boundaries remain visible and unresolved.
 
@@ -66,13 +66,13 @@ See [the completed batch assessment and current failures](../inference-candidate
 
 ## Coherent-front comparison · 12 September 2026
 
-Default result: `a4cfffa36c6c4c39b9239d550477a1ef408ae6cd625572ce6f8cf77fcce247a9` (Detail 65%, Faint 35%, Depth 1×). Its method record snapshots the runnable recipe and evidence ledger and pins the implementation owners. The fit contains 355 supports and 650 compact lights; observer RMSE is 0.030138, missing relative signal 8.05% and excess relative signal 9.86%. These compare against the combined display target, not calibrated flux.
+Default result: `m42-coherent-front` (Detail 65%, Faint 35%, Depth 1×). Its method record snapshots the runnable recipe and evidence ledger. The fit contains 355 supports and 650 compact lights; observer RMSE is 0.030138, missing relative signal 8.05% and excess relative signal 9.86%. These compare against the combined display target, not calibrated flux.
 
-The XYZ bake uses 321/512/127 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source lenses preserve the neutral alpha digest `873b51ef6fda0ea8f156dd4e6df72a5020762e3385c999596f39163fbc04a564`. The final geometry/material bake took 38.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
+The XYZ bake uses 321/512/127 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source lenses preserve the neutral bank's alpha exactly. The final geometry/material bake took 38.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
 
 Real Chromium inspection passed source switching, stable star positions across lenses, star visibility, original overlay, refresh, observer/oblique and 90° west/89° north views. No inspection action started processing. The rotating shape has localized thickness rather than the previous uniform deep columns.
 
-The earlier default observer RMSE was 0.039561; the current fit reduces it by 23.8%. This gain also reflects narrower XY supports and a larger usable basis budget, not just changing depth. The saved 100% Detail request and original image transforms were separately completed as `a5bdb41f1919160d14010649395451a4b89314ca291b1fa796454ecfb1d63887`. User settings and historical receipts were not overwritten.
+The earlier default observer RMSE was 0.039561; the current fit reduces it by 23.8%. This gain also reflects narrower XY supports and a larger usable basis budget, not just changing depth. The saved 100% Detail request and original image transforms were separately completed as `m42-detail-100-original-transforms`. User settings and historical receipts were not overwritten.
 
 Visual limits: the support remains a coarse authored surface, and oblique color bands/fine slice traces remain visible. Narrow optical coverage leaves explicitly neutral material outside its footprint. This is a useful experimental comparison, not production visual acceptance or a measured 3D density. Three bounded iterations addressed the depth floor/tilt, slab spacing and material sampling; further artifact work belongs in volumetric material reconstruction and sampling, not invented evidence or per-view image masks.
 

@@ -1,10 +1,10 @@
 """Extract the selected published numeric models; shared preparers own rendering.
 
-Run from the repository root after restoring pinned source inputs. This is the
+Run from the repository root after restoring the declared source inputs. This is the
 radial ellipsoid extraction updates existing packages and their current bindings.
 """
 from pathlib import Path
-import hashlib, json, math, shutil, sys
+import json, math, shutil, sys
 
 ROOT = Path(__file__).resolve().parents[4]
 INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('packages/bake/authoring/distant-worlds/inputs.json')
@@ -14,10 +14,6 @@ REFERENCE_ROOT = ROOT / INPUTS.get('referenceDirectory', 'output/distant-worlds/
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(value if isinstance(value, str) else json.dumps(value, ensure_ascii=False, indent=2) + '\n')
-
-def pin(path):
-    data = path.read_bytes()
-    return dict()
 
 def current(path, body):
     return json.loads((ROOT / 'src/objects' / body['id'] / path).read_text())
@@ -67,7 +63,7 @@ for body in INPUTS['bodies']:
             r = 1 / math.sqrt((math.cos(p)*math.cos(l)/axes[0])**2 + (math.cos(p)*math.sin(l)/axes[1])**2 + (math.sin(p)/axes[2])**2)
             lines.append(f'{lon} {lat} {r:.12f}')
     write(source / 'shape/ellipsoid.tab', '\n'.join(lines) + '\n')
-    manifest['inputs'].append(dict(id='published-shape', path='shape/ellipsoid.tab', **pin(source/'shape/ellipsoid.tab'), origin=body['source'], credit=body['credit'], license='MIT numeric extraction of published scientific facts', licenseEvidence=[body['source']], consumers=['shape'], coverage=description, projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
+    manifest['inputs'].append(dict(id='published-shape', path='shape/ellipsoid.tab', origin=body['source'], credit=body['credit'], license='MIT numeric extraction of published scientific facts', licenseEvidence=[body['source']], consumers=['shape'], coverage=description, projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     content = current('source/content/object.json', body)
     binding = next(entry for entry in reviewed[ident]['inputs'] if entry['id'] == 'published-shape')['sourceBinding']
     catalogue_id = binding['references'][0]['catalogueId']
@@ -115,7 +111,6 @@ for body in INPUTS['bodies']:
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(cached,target)
         if not target.exists(): raise FileNotFoundError(target)
-        actual=pin(target)
         if not ref.get('retainOriginal'):
             operation = dict(kind='download',groups=['restore','refresh'],path='reference/'+ref['file'],url=ref['url'])
             acquisition['operations'] = [op for op in acquisition['operations'] if op.get('path') != operation['path']] + [operation]

@@ -6,11 +6,11 @@ import { readStructureCatalogue } from './structures-model.js';
 function fixture() {
   const raw = { schema: 'cssearth-observation-structures@1',
     frame: { width: 1024, height: 1024, fieldArcminutes: [60, 60], centerIcrsDegrees: [12, -20], northUp: true },
-    images: [{ id: 'image-a', label: 'Image A', sourceSha256: 'a'.repeat(64), sourceUrl: 'https://example.org/image-a.png', mapSha256: 'b'.repeat(64),
+    images: [{ id: 'image-a', label: 'Image A', sourceUrl: 'https://example.org/image-a.png',
       nativeWidth: 6000, nativeHeight: 4000, width: 600, height: 400, imageToFrame: [.12, .04, -.04, .12, 170, 50],
-      directory: '.local/structures/a', page: 'https://example.org/source', credit: 'Source credit', geometry: { file: 'geometry.json', sha256: 'c'.repeat(64) } }] };
+      directory: '.local/structures/a', page: 'https://example.org/source', credit: 'Source credit', geometry: { file: 'geometry.json' } }] };
   const image = readStructureCatalogue(raw).images[0]!;
-  const geometry = { schema: 'cssearth-observation-geometry@1', imageId: image.id, sourceSha256: image.sourceSha256, mapSha256: image.mapSha256,
+  const geometry = { schema: 'cssearth-observation-geometry@1', imageId: image.id, mapDirectory: image.directory,
     width: 600, height: 400, candidates: [{ id: 'ellipse-1', center: [310, 190], radii: [120, 80], angleRadians: .2, score: .8, coverage: .5,
       supportedArcs: [{ startRadians: 0, endRadians: Math.PI }], groupId: 'group-1' },
     { id: 'ellipse-2', center: [309, 189], radii: [160, 110], angleRadians: .22, score: .7, coverage: .5,
@@ -19,11 +19,11 @@ function fixture() {
   return { raw, image, geometry };
 }
 
-test('prepared geometry is bound to the exact source, map and working image grid', () => {
+test('prepared geometry is bound to its image, structure run and working image grid', () => {
   const { image, geometry } = fixture();
   assert.equal(readGeometryMap(geometry, image).candidates.length, 2);
-  for (const changed of [{ imageId: 'other' }, { sourceSha256: 'c'.repeat(64) }, { mapSha256: 'c'.repeat(64) }, { width: 599 }, { height: 399 }])
-    assert.throws(() => readGeometryMap({ ...geometry, ...changed }, image), /registered source/);
+  for (const changed of [{ imageId: 'other' }, { mapDirectory: '.local/structures/b' }, { width: 599 }, { height: 399 }])
+    assert.throws(() => readGeometryMap({ ...geometry, ...changed }, image), /structure map/);
 });
 
 test('geometry boundary rejects invalid radii, support, scores and symmetry membership', () => {
@@ -36,10 +36,10 @@ test('geometry boundary rejects invalid radii, support, scores and symmetry memb
   assert.throws(() => readGeometryMap({ ...geometry, candidates: [candidate, candidate] }, image));
 });
 
-test('optional geometry references use a relative path and immutable content hash', () => {
+test('optional geometry references name one relative file', () => {
   const { raw, image } = fixture();
-  assert.deepEqual(image.geometry, { file: 'geometry.json', sha256: 'c'.repeat(64) });
-  for (const geometry of [{ file: '../geometry.json', sha256: 'c'.repeat(64) }, { file: 'geometry.json', sha256: 'changed' }])
+  assert.deepEqual(image.geometry, { file: 'geometry.json' });
+  for (const geometry of [{ file: '../geometry.json' }, { file: 'geometry.json', bytes: 1 }])
     assert.throws(() => readStructureCatalogue({ ...raw, images: [{ ...raw.images[0], geometry }] }), /geometry reference/);
 });
 

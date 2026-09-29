@@ -2,7 +2,6 @@
  * A composite with enough catalogue stars in its blue channel runs the unchanged fixed-WCS catalogue gate.
  * A composite the gate cannot qualify may inherit the grid only from a passing composite on the identical grid;
  * its own gate result is kept beside the transfer as a diagnostic, never as the qualification. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -10,12 +9,12 @@ import { verifyFixedCatalogue } from '@cssearth/nebula-reconstruction/registrati
 import { validateImageWcs, type ImageWcs } from '@cssearth/bake/volume';
 import { verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 
-type Pin = { path: string; sha256: string };
-export interface SkyBandCandidate { id: string; path: string; sha256: string; wcs: ImageWcs; skyBands?: Pin }
+type Pin = { path: string };
+export interface SkyBandCandidate { id: string; path: string; wcs: ImageWcs; skyBands?: Pin }
 export interface SkyBandRegistrationRecipe {
   schema: 'cssearth-sky-band-registration@1';
   catalogue: string;
-  stars: { query: Pin; path: string; sha256: string };
+  stars: { query: Pin; path: string };
   catalogueChecks: { imageId: string; blueChannel: string; receipt: string }[];
   gridTransfers: { imageId: string; referenceId: string; blueChannel: string; receipt: string; diagnostic: string }[];
   /** Already qualified fixed-WCS rasters, re-run so a protocol change must keep them passing. */
@@ -24,7 +23,6 @@ export interface SkyBandRegistrationRecipe {
   negativeControls: { label: string; imageId: string; blueChannel: string; wcs: ImageWcs; receipt: string }[];
 }
 
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 function record(value: unknown, label: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object.`);
   return value as Record<string, unknown>;
@@ -34,13 +32,12 @@ function text(value: unknown, label: string): string {
   return value;
 }
 const id = (value: unknown, label: string) => { const s = text(value, label); if (!/^[a-z0-9-]+$/.test(s)) throw new TypeError(`${label} must be a safe id.`); return s; };
-const digest = (value: unknown, label: string) => { const s = text(value, label); if (!/^[0-9a-f]{64}$/.test(s)) throw new TypeError(`${label} must be a SHA-256.`); return s; };
 const relativePath = (value: unknown, label: string) => {
   const s = text(value, label);
   if (s.startsWith('/') || s.split('/').includes('..')) throw new TypeError(`${label} must be repository-relative.`);
   return s;
 };
-const pin = (value: unknown, label: string): Pin => { const row = record(value, label); return { path: relativePath(row.path, `${label} path`), sha256: digest(row.sha256, `${label} sha256`) }; };
+const pin = (value: unknown, label: string): Pin => ({ path: relativePath(record(value, label).path, `${label} path`) });
 const receiptPath = (value: unknown, label: string) => {
   const s = relativePath(value, label);
   if (!s.startsWith('labs/nebula/models/') || !s.endsWith('.json')) throw new TypeError(`${label} must be a checked-in model JSON receipt.`);
@@ -78,7 +75,7 @@ export function parseSkyBandRegistration(value: unknown): SkyBandRegistrationRec
   const receipts = [...catalogueChecks, ...gridTransfers.flatMap(transfer => [{ receipt: transfer.receipt }, { receipt: transfer.diagnostic }]), ...fixedWcsChecks, ...negativeControls].map(item => item.receipt);
   if (new Set(receipts).size !== receipts.length) throw new TypeError('Every receipt is written exactly once.');
   return { schema: row.schema, catalogue: relativePath(row.catalogue, 'Catalogue'), catalogueChecks, gridTransfers, fixedWcsChecks, negativeControls,
-    stars: { query: pin(stars.query, 'Star query'), path: relativePath(stars.path, 'Star catalogue path'), sha256: digest(stars.sha256, 'Star catalogue sha256') } };
+    stars: { query: pin(stars.query, 'Star query'), path: relativePath(stars.path, 'Star catalogue path') } };
 }
 
 /** A catalogue entry that carries one fixed WCS: a composed sky band raster, or an already pinned publisher raster. */
@@ -89,7 +86,7 @@ export function fixedWcsCandidate(value: unknown, requireSkyBands: boolean, fall
   if (row.wcs === undefined && !fallbackWcs) throw new TypeError(`${String(row.id)}: a fixed-WCS check needs the candidate's own WCS.`);
   const wcs = row.wcs === undefined ? fallbackWcs! : record(row.wcs, 'Candidate WCS') as unknown as ImageWcs;
   validateImageWcs(wcs);
-  return { id: id(row.id, 'Candidate id'), path: relativePath(row.path, 'Candidate path'), sha256: digest(row.sha256, 'Candidate sha256'), wcs,
+  return { id: id(row.id, 'Candidate id'), path: relativePath(row.path, 'Candidate path'), wcs,
     ...(row.skyBands === undefined ? {} : { skyBands: pin(row.skyBands, 'Sky bands') }) };
 }
 export const skyBandCandidate = (value: unknown): SkyBandCandidate => fixedWcsCandidate(value, true);
@@ -108,9 +105,8 @@ async function writeJson(path: string, value: unknown) {
 }
 
 export async function registerSkyBands(root: string, recipePath: string) {
-  const recipeBytes = await readFile(resolve(root, recipePath)), recipe = parseSkyBandRegistration(JSON.parse(recipeBytes.toString()));
+  const recipe = parseSkyBandRegistration(JSON.parse(await readFile(resolve(root, recipePath), 'utf8')));
   const queryBytes = await readFile(resolve(root, recipe.stars.query.path));
-  if (hash(queryBytes) !== recipe.stars.query.sha256) throw new Error('Changed star catalogue query.');
   let starBytes = await readFile(resolve(root, recipe.stars.path)).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
   if (!starBytes) {
     const url = text(record(JSON.parse(queryBytes.toString()), 'Star query').url, 'Star query URL');
@@ -118,9 +114,10 @@ export async function registerSkyBands(root: string, recipePath: string) {
     const response = await fetch(url, { signal: AbortSignal.timeout(600_000) });
     if (!response.ok) throw new Error(`Star catalogue download failed: ${response.status}`);
     starBytes = Buffer.from(await response.arrayBuffer());
-    if (hash(starBytes) === recipe.stars.sha256) { await mkdir(dirname(resolve(root, recipe.stars.path)), { recursive: true }); await writeFile(resolve(root, recipe.stars.path), starBytes); }
+    // The query is the record: a download that is not the catalogue's CSV header stops here instead of being kept.
+    if (!/^\S+,/.test(starBytes.subarray(0, 256).toString())) throw new Error(`Star catalogue from ${url} is not CSV; ${recipe.stars.path} was not written.`);
+    await mkdir(dirname(resolve(root, recipe.stars.path)), { recursive: true }); await writeFile(resolve(root, recipe.stars.path), starBytes);
   }
-  if (hash(starBytes) !== recipe.stars.sha256) throw new Error('Changed star catalogue.');
   const catalogue = record(JSON.parse(await readFile(resolve(root, recipe.catalogue), 'utf8')), 'Image catalogue');
   const images = (Array.isArray(catalogue.targets) ? catalogue.targets : []).flatMap(target => {
     const row = record(target, 'Catalogue target'); return Array.isArray(row.images) ? row.images : [];
@@ -133,23 +130,21 @@ export async function registerSkyBands(root: string, recipePath: string) {
     const verified = await verifySkyBandSource({ id: parsed.id, width: parsed.wcs.referenceDimension[0], height: parsed.wcs.referenceDimension[1], wcs: parsed.wcs, skyBands: parsed.skyBands }, root);
     return { candidate: parsed, gridJson: JSON.stringify(verified.recipe.grid), recipeFiles: verified.files };
   };
-  const implementation = async (path: string) => ({ path, sha256: hash(await readFile(resolve(root, path))) });
-  const operator = await implementation('labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts');
-  const stars = { query: recipe.stars.query, path: recipe.stars.path, sha256: recipe.stars.sha256 };
+  const stars = { query: recipe.stars.query, path: recipe.stars.path };
   const gate = async (source: SkyBandCandidate, blueChannel: string, variant = '') => {
-    const result = await verifyFixedCatalogue(resolve(root, source.path), source.sha256, source.wcs, resolve(root, recipe.stars.path));
+    const result = await verifyFixedCatalogue(resolve(root, source.path), source.wcs, resolve(root, recipe.stars.path));
     const matchedPath = `.local/nebula-lab/smc-registration/sky-bands/${source.id}${variant}/matched-stars.json`, matched = Buffer.from(JSON.stringify(result.matches));
     await mkdir(dirname(resolve(root, matchedPath)), { recursive: true }); await writeFile(resolve(root, matchedPath), matched);
     // The operator names its detection channel after its first use; this composite's blue channel is recorded beside it.
     return { ...result.receipt, source: { ...result.receipt.source, path: source.path }, catalogue: { ...result.receipt.catalogue, path: recipe.stars.path, query: recipe.stars.query },
-      compositeBlueChannel: blueChannel, ...(source.skyBands ? { skyBands: source.skyBands } : {}), implementation: operator, matchedStars: { path: matchedPath, sha256: hash(matched) } };
+      compositeBlueChannel: blueChannel, ...(source.skyBands ? { skyBands: source.skyBands } : {}), matchedStars: { path: matchedPath } };
   };
   const passed = new Map<string, { candidate: SkyBandCandidate; gridJson: string; gatePass: boolean; receipt: Pin }>();
   const summary = [];
   for (const check of recipe.catalogueChecks) {
     const source = await candidate(check.imageId), receipt = await gate(source.candidate, check.blueChannel);
     await writeJson(resolve(root, check.receipt), receipt);
-    passed.set(check.imageId, { candidate: source.candidate, gridJson: source.gridJson, gatePass: receipt.pass, receipt: { path: check.receipt, sha256: hash(await readFile(resolve(root, check.receipt))) } });
+    passed.set(check.imageId, { candidate: source.candidate, gridJson: source.gridJson, gatePass: receipt.pass, receipt: { path: check.receipt } });
     summary.push({ imageId: check.imageId, kind: 'catalogue', pass: receipt.pass, gates: receipt.gates, uniqueMatchedStars: receipt.uniqueMatchedStars,
       reserved: receipt.reservedCheckResidualNativeWisePixels, shiftedControls: receipt.shiftedControls.map(control => control.matchesWithin2_5Pixels) });
     console.log(`SKY_BAND_CATALOGUE_GATE ${check.imageId} ${receipt.pass ? 'pass' : 'fail'}`);
@@ -176,14 +171,13 @@ export async function registerSkyBands(root: string, recipePath: string) {
     await writeJson(resolve(root, transfer.diagnostic), { ...diagnostic, role: 'diagnostic only: this receipt does not qualify the image' });
     const decision = gridTransferDecision(reference, target);
     const receipt = { schema: 'cssearth-sky-band-grid-transfer@1', pass: decision.pass, checks: decision.checks,
-      source: { id: target.candidate.id, path: target.candidate.path, sha256: target.candidate.sha256, skyBands: target.candidate.skyBands, recipeFiles: target.recipeFiles },
-      reference: { id: reference.candidate.id, path: reference.candidate.path, sha256: reference.candidate.sha256, skyBands: reference.candidate.skyBands, catalogueGate: reference.receipt },
+      source: { id: target.candidate.id, path: target.candidate.path, skyBands: target.candidate.skyBands, recipeFiles: target.recipeFiles },
+      reference: { id: reference.candidate.id, path: reference.candidate.path, skyBands: reference.candidate.skyBands, catalogueGate: reference.receipt },
       grid: JSON.parse(target.gridJson), wcs: target.candidate.wcs, stars,
-      diagnostic: { receipt: { path: transfer.diagnostic, sha256: hash(await readFile(resolve(root, transfer.diagnostic))) }, pass: diagnostic.pass, gates: diagnostic.gates,
+      diagnostic: { receipt: { path: transfer.diagnostic }, pass: diagnostic.pass, gates: diagnostic.gates,
         uniqueMatchedStars: diagnostic.uniqueMatchedStars, reservedCheckResidualNativeWisePixels: diagnostic.reservedCheckResidualNativeWisePixels,
         shiftedControls: diagnostic.shiftedControls, detectedStars: diagnostic.detectedStars },
-      implementation: [await implementation('labs/nebula/packages/lab/src/cli/commands/sky-band-registration.ts'), await implementation('packages/telescope-cli/src/sky/sky-band-composite.mts'), operator],
-      interpretation: 'The composite is pinned to bytes that only the sky band compositor produces after checking every hips2fits band header against this exact TAN grid (no rotation, distortion or unit cards). The grid itself is qualified by the reference composite, which passed the unchanged fixed-WCS catalogue gate on the identical grid.',
+      interpretation: 'The composite is the raster the sky band compositor writes after checking every hips2fits band header against this exact TAN grid (no rotation, distortion or unit cards). The grid itself is qualified by the reference composite, which passed the unchanged fixed-WCS catalogue gate on the identical grid.',
       limitations: ['The transfer qualifies the request grid and its pixel convention. It does not independently measure this survey\'s own HiPS astrometry; the diagnostic receipt records what its own stars show.',
         'Catalogue and reference image share the AllWISE mission.'] };
     await writeJson(resolve(root, transfer.receipt), receipt);
@@ -191,7 +185,7 @@ export async function registerSkyBands(root: string, recipePath: string) {
       diagnosticGates: diagnostic.gates, diagnosticReserved: diagnostic.reservedCheckResidualNativeWisePixels, diagnosticShiftedControls: diagnostic.shiftedControls.map(control => control.matchesWithin2_5Pixels) });
     console.log(`SKY_BAND_GRID_TRANSFER ${transfer.imageId} ${receipt.pass ? 'pass' : 'fail'}`);
   }
-  console.log(JSON.stringify({ recipe: { path: recipePath, sha256: hash(recipeBytes) }, results: summary }, null, 2));
+  console.log(JSON.stringify({ recipe: { path: recipePath }, results: summary }, null, 2));
   return summary;
 }
 

@@ -9,11 +9,10 @@ import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Vector3, VolumeRecipe } from '@cssearth/bake/volume';
 import { decodeDensityKtx2, sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 
-interface PinnedFile {path:string;sha256:string;bytes?:number}
+interface PinnedFile {path:string;bytes?:number}
 interface TargetRecipe {
   id: string;
   outputDirectory: string;
@@ -34,8 +33,8 @@ interface FullDensityRecipe {
 }
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 export async function prepareFullParticleDensity(configPath: string): Promise<void> {
-  const root = process.cwd(), configBytes = await readFile(resolve(configPath));
-  const config = parseLabModelJson(configBytes.toString('utf8')) as FullDensityRecipe;
+  const root = process.cwd();
+  const config = parseLabModelJson(await readFile(resolve(configPath), 'utf8')) as FullDensityRecipe;
   if (config.schema !== 'cssearth-full-particle-density@1' || config.material.sourceChannel !== 3 ||
       !Array.isArray(config.targets) || !config.targets.length) throw new TypeError('Invalid full-density recipe.');
   for (const target of config.targets) {
@@ -48,7 +47,7 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     }
     const imported = parseLabModelJson(importBytes.toString('utf8')) as any;
     const descriptor = parseDensityVolumeObjectDescriptor(parseLabModelJson(objectBytes.toString('utf8')) as unknown);
-    if (imported.output?.sha256 !== target.centeredParticles.sha256 ||
+    if (imported.output?.path !== target.centeredParticles.path ||
         !close(imported.centering?.offsetKpc ?? [], target.centeringOffsetKpc, 1e-8)) {
       throw new TypeError(`Import receipt does not match centered particles for ${target.id}.`);
     }
@@ -86,7 +85,7 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
       throw new TypeError(`Full density source is not scalar alpha with zero padded faces for ${target.id}.`);
     }
     const provenance = { schema: 'cssearth-full-particle-density-provenance@1',
-      config: { path: relative(root, resolve(configPath)).split('\\').join('/'), sha256: sha256(configBytes) },
+      config: { path: relative(root, resolve(configPath)).split('\\').join('/') },
       source: { centeredParticles: target.centeredParticles, importReceipt: target.importReceipt,
         regeneration: `pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json <pinned-archive.zip> ${imported.selection ? target.id.replace(/-full-density$/, '-particles') : target.id}`,
         particleSelection: imported.selection, sourceSnapshot: imported.source,
@@ -130,7 +129,7 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     await json(resolve(sourceDirectory, 'preparation-receipt.json'), {
       schema: 'cssearth-full-particle-density-receipt@1', id: target.id,
       source: converted.outputs, grid: plan, mass: converted.particles, boundary,
-      prepared: { sha256: sha256(preparedBytes), leaves: data.resources.length,
+      prepared: { path: 'prepared/volume.json', leaves: data.resources.length,
         bytes: data.resources.reduce((sum, resource) => sum + resource.bytes, 0) } });
     console.log(`FULL_DENSITY_READY ${target.id}: ${data.resources.length} leaves`);
   }

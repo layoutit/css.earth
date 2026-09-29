@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { readGeometryMap, type GeometryMap } from '../observations/models/geometry-model';
 import type { StructureImage } from '../observations/models/structures-model';
-import { readDetectionQuality, readDetectionResult, type DetectionQuality, type DetectionResult } from './jobs-model.ts';
+import { geometryFile, readDetectionQuality, readDetectionResult, type DetectionQuality, type DetectionResult } from './jobs-model.ts';
 import { readDetectionSettings, type DetectionSettings } from '@cssearth/nebula-reconstruction/evidence/geometry/settings';
 import { localFile } from '../legacy-viewer/controller';
 import { createDetectionClient, detectionJobActive, DetectionHttpError, type DetectionJob } from './geometry-detection-client';
@@ -19,22 +19,21 @@ const defaults = (): SavedDetection => ({ settings: readDetectionSettings(), app
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const message = (reason: unknown) => reason instanceof Error ? reason.message : 'Detector failed.';
 const settingsKey = (value: DetectionSettings) => JSON.stringify(value);
-const samePin = (a?: Pin, b?: Pin) => a?.file === b?.file && a?.sha256 === b?.sha256;
+const samePin = (a?: Pin, b?: Pin) => a?.file === b?.file;
 function readPin(value: unknown): Pin | undefined {
   if (value === undefined) return undefined;
-  if (!record(value) || typeof value.file !== 'string' || !/^geometry(?:-[a-f0-9]{8,64})?\.json$/.test(value.file) ||
-      typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.sha256)) throw new Error('Saved geometry pin is invalid.');
-  return { file: value.file, sha256: value.sha256 };
+  if (!record(value) || !geometryFile(value.file) || Object.keys(value).join() !== 'file') throw new Error('Saved geometry reference is invalid.');
+  return { file: value.file };
 }
 function checkResult(value: unknown, image: StructureImage, cataloguePath: string): DetectionResult {
   const result = readDetectionResult(value);
-  if (result.imageId !== image.id || result.cataloguePath !== cataloguePath || result.sourceSha256 !== image.sourceSha256 ||
-      result.mapSha256 !== image.mapSha256 || result.width !== image.width || result.height !== image.height)
+  if (result.imageId !== image.id || result.cataloguePath !== cataloguePath || result.mapDirectory !== image.directory ||
+      result.width !== image.width || result.height !== image.height)
     throw new Error('Detected geometry belongs to different source data.');
   return result;
 }
 function readSaved(value: unknown, image: StructureImage, cataloguePath: string): SavedDetection {
-  if (!record(value) || !['cssearth-geometry-session@1', 'cssearth-geometry-session@2'].includes(String(value.schema))) throw new Error('Saved detector session is invalid.');
+  if (!record(value) || value.schema !== 'cssearth-geometry-session@3') throw new Error('Saved detector session is invalid.');
   if (value.jobId !== undefined && (typeof value.jobId !== 'string' || !/^[a-f0-9-]{36}$/.test(value.jobId))) throw new Error('Saved detector job is invalid.');
   const pending = value.pending === undefined ? undefined : checkResult(value.pending, image, cataloguePath);
   return { settings: readDetectionSettings(value.settings), applied: readPin(value.applied), previous: readPin(value.previous),
@@ -43,12 +42,9 @@ function readSaved(value: unknown, image: StructureImage, cataloguePath: string)
     jobQuality: readDetectionQuality(value.jobQuality) };
 }
 async function loadGeometry(pin: Pin, owner: StructureImage, signal: AbortSignal) {
-  const response = await fetch(`${localFile(`${owner.directory}/${pin.file}`)}?v=${pin.sha256}`, { signal, cache: 'no-store' });
+  const response = await fetch(localFile(`${owner.directory}/${pin.file}`), { signal, cache: 'no-store' });
   if (!response.ok) throw new Error(`Detector geometry unavailable (${response.status}).`);
-  const bytes = await response.arrayBuffer();
-  const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), byte => byte.toString(16).padStart(2, '0')).join('');
-  if (hash !== pin.sha256) throw new Error('Detector geometry identity changed.');
-  const raw: unknown = JSON.parse(new TextDecoder().decode(bytes));
+  const raw: unknown = await response.json();
   const geometry = readGeometryMap(raw, owner);
   const provenance = record(raw) && record(raw.provenance) ? raw.provenance : undefined;
   const request = provenance && record(provenance.identity) && record(provenance.identity.request) ? provenance.identity.request : undefined;
@@ -58,7 +54,7 @@ async function loadGeometry(pin: Pin, owner: StructureImage, signal: AbortSignal
 
 /** Sliders own the intent. Durable jobs supply latest-only drafts and a final fit, without changing the viewer. */
 export function useGeometryDetection(image: StructureImage | undefined, baseGeometry: GeometryMap | undefined, cataloguePath: string) {
-  const key = image ? `nebula:geometry-detection:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}` : '';
+  const key = image ? `nebula:geometry-detection:2:${cataloguePath}:${image.id}:${image.directory}` : '';
   const [session, setSession] = useState<Session>({ key: '', value: defaults(), geometries: {} });
   const [loadedKey, setLoadedKey] = useState(''), [error, setError] = useState(''), [storageError, setStorageError] = useState('');
   const [job, setJob] = useState<DetectionJob | null>(null), [busy, setBusy] = useState(false), [revision, setRevision] = useState(0);
@@ -67,7 +63,7 @@ export function useGeometryDetection(image: StructureImage | undefined, baseGeom
   const value = session.key === key ? session.value : defaults();
   function save(next: SavedDetection, geometries = current.current.geometries) {
     const nextSession = { key, value: next, geometries }; current.current = nextSession; setSession(nextSession);
-    try { localStorage.setItem(key, JSON.stringify({ schema: 'cssearth-geometry-session@2', ...next })); setStorageError(''); }
+    try { localStorage.setItem(key, JSON.stringify({ schema: 'cssearth-geometry-session@3', ...next })); setStorageError(''); }
     catch { setStorageError('Detector changes are saved for this session only.'); }
   }
   useEffect(() => {
@@ -99,9 +95,8 @@ export function useGeometryDetection(image: StructureImage | undefined, baseGeom
       const saved = parsed === null ? defaults() : readSaved(parsed, owner, cataloguePath);
       const geometries: Record<string, GeometryMap> = {};
       if (saved.applied) {
-        const loaded = await loadGeometry(saved.applied, owner, client.signal); geometries[saved.applied.sha256] = loaded.geometry;
-        if (record(parsed) && parsed.schema === 'cssearth-geometry-session@1') saved.appliedSettings = loaded.settings;
-      } else if (record(parsed) && parsed.schema === 'cssearth-geometry-session@1') saved.appliedSettings = readDetectionSettings();
+        const loaded = await loadGeometry(saved.applied, owner, client.signal); geometries[saved.applied.file] = loaded.geometry;
+      }
       if (client.signal.aborted) return;
       save(saved, geometries);
       let prior: DetectionJob | null = null;
@@ -117,14 +112,14 @@ export function useGeometryDetection(image: StructureImage | undefined, baseGeom
           const requestId = crypto.randomUUID();
           save({ ...current.current.value, jobId: requestId, jobSettings: ticket.value, jobQuality: ticket.quality });
           return watch(await client.start(requestId, { action: 'apply', cataloguePath, imageId: owner.id,
-            sourceSha256: owner.sourceSha256, mapSha256: owner.mapSha256, settings: ticket.value, quality: ticket.quality }), ticket);
+            settings: ticket.value, quality: ticket.quality }), ticket);
         },
         cancel() { cancelWanted = true; },
         accept({ result, geometry }) {
           const latest = current.current.value;
           save({ ...latest, applied: result.geometry, appliedSettings: result.settings, quality: result.quality,
             previous: latest.quality === 'detailed' ? latest.applied ?? owner.geometry : latest.previous },
-          { ...current.current.geometries, [result.geometry.sha256]: geometry });
+          { ...current.current.geometries, [result.geometry.file]: geometry });
           setBusy(false); setError('');
         },
         error(reason) { if (!client.signal.aborted) { setBusy(false); setJob(null); setError(message(reason)); } },
@@ -143,7 +138,7 @@ export function useGeometryDetection(image: StructureImage | undefined, baseGeom
   }, [key, revision]);
   const appliedPin = value.applied ?? image?.geometry;
   const effectiveImage = useMemo(() => image && (value.applied ? { ...image, geometry: value.applied } : image), [image, value.applied]);
-  const effectiveGeometry = appliedPin && (session.key === key ? session.geometries[appliedPin.sha256] : undefined) ||
+  const effectiveGeometry = appliedPin && (session.key === key ? session.geometries[appliedPin.file] : undefined) ||
     (samePin(appliedPin, image?.geometry) ? baseGeometry : undefined);
   return { settings: value.settings, quality: value.quality, effectiveImage, effectiveGeometry, appliedPin,
     ready: loadedKey === key, error, storageError, job, active: busy || detectionJobActive(job),

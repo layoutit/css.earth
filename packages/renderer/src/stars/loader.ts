@@ -4,7 +4,7 @@ import type { PreparedCssTransport } from '../loader.js';
 import type { PreparedCssPointField, PreparedPointAppearance } from './types.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
 
-/** Loads one pinned point-field manifest and the binary column bank it pins. Image
+/** Loads one prepared point-field manifest and the binary column bank it names. Image
  * resources stay in the prepared asset bank. */
 export async function loadPreparedCssPointField(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssPointField> {
   const { descriptor, manifest } = await loadManifest(input, transport);

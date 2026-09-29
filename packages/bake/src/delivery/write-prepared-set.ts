@@ -21,8 +21,7 @@ export async function writePreparedSet(outputs: readonly PreparedOutput[]) {
       const previous = await readFile(output.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
       const bytes = 'remove' in output ? null : 'source' in output ? await readFile(output.source)
         : typeof output.text === 'string' ? Buffer.from(output.text) : output.text;
-      // A file source is an explicit publication, like the former copyFile
-      // path. Keep that write visible to the existing preparation trace.
+      // A file source is an explicit publication, like the former copyFile path.
       if (bytes === null ? previous === null : 'text' in output && previous?.equals(bytes)) continue;
       const entry = { path: output.path, temporary: `${output.path}.${transaction}.tmp`,
         backup: previous === null ? null : `${output.path}.${transaction}.backup`, remove: bytes === null };

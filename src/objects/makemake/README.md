@@ -17,7 +17,7 @@ No image resolves Makemake's surface. The Color lens shows one colour for the wh
 | Solar B−V, V−R, V−I | 0.653, 0.356, 0.701, each ± 0.003 mag | [Ramírez et al. (2012)](https://doi.org/10.1088/0004-637X/752/1/5), ApJ 752, 5, abstract (line-depth-ratio solution) |
 | B, V, R, I effective wavelengths | 438.1, 544.5, 641.1, 798.2 nm | [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/theory/fps/index.php?mode=browse&gname=Generic&gname2=Bessell), Generic/Bessell, checked 2026-09-16 |
 
-The values are transcribed in [the colour record](source/photometry/disc-color.json). Hromakina et al. found no colour change with rotation, within the uncertainties. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their sha256 values equal the checksums in CIE's dataset metadata.
+The values are transcribed in [the colour record](source/photometry/disc-color.json). Hromakina et al. found no colour change with rotation, within the uncertainties. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their bytes match the checksums in CIE's dataset metadata.
 
 The Illustration lens is not an observation. It shows the base-colour texture of NASA's [Makemake 3D Model](https://science.nasa.gov/resource/makemake-3d-model/), credited to NASA Visualization Technology Applications and Development (VTAD). The original GLB is pinned in [the manifest](source/manifest.json) (4,441,844 bytes); on 2026-09-18 NASA's server still returned the same size, last modified 2024-10-19. The resource page gives only a one-line description and the credit; it does not say how the texture was made. Because no image resolves Makemake, its terrain, albedo pattern and colour are the artist's. Preparation carries the texture through the model's own texture coordinates onto the displayed sphere and does not repaint it. The map's left edge is the texture's own 0° column, so its longitudes are arbitrary. Color stays the default lens. The illustration is listed in the package's illustration lenses, so it never counts as imagery: Makemake stays "Shape only". NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
 
@@ -38,7 +38,7 @@ Measured sensitivity, with the same method: each published colour uncertainty mo
 - The Illustration lens is far darker and redder than the measured whole-disc colour (see Evidence). The illustration is shown as NASA published it; no colour is corrected.
 - Display pole and meridian are arbitrary, explicitly recorded as such. The reported rotation period is content only and does not drive an invented ephemeris. Orbital placement uses the existing pinned JPL elements at the shared 2026-09-03 TT epoch.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <details>
 <summary>Methods and source notes</summary>

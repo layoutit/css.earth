@@ -5,10 +5,9 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { createHash } from 'node:crypto';
 import { loadTrace } from './load-trace.mts';
 
-test('streamed JSON and gzip preserve all events, split UTF-8 and original-byte identity', async t => {
+test('streamed JSON and gzip preserve all events, split UTF-8 and byte counts', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-trace-stream-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const events = [{ name: 'α🌍', args: { text: 'escaped " quote \\ brace } [' }, ts: 123456789.125 },
@@ -22,7 +21,6 @@ test('streamed JSON and gzip preserve all events, split UTF-8 and original-byte 
     assert.deepEqual(result.events, events);
     assert.equal(result.bytes, bytes.length); assert.equal(result.decodedBytes, decoded.length);
     assert.equal(result.compressed, compressed);
-    assert.equal(result.sha256, createHash('sha256').update(bytes).digest('hex'));
   }
 });
 

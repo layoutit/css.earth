@@ -2,13 +2,6 @@
   "schema": "cssearth-gallery-removal-check@1",
   "date": "2026-09-27T02:27:50.523Z",
   "scope": "Venus gallery removal above this commit; the file hashes identify the tested working version. All dataset controls, scientific images and reader text are unchanged. Earlier numerical and grouped-selector evidence remains applicable. Prior screenshots retain their original version; these captures show the removed section.",
-  "testedFiles": {
-    "object.json": "85c3fd434bc5ea6760bc94eec48b5c1ab3b752628e083f2c06ac52e7e08fba40",
-    "source/content/object.json": "27d1943a83796b7ec7e361f5d02fdb5f34431d07667764c9ebeee39712750d0c",
-    "source/content/charts.json": "93f27d852132f6072d276373dbe69aa22c6e17f8418f7f9584f436b6eb06f992",
-    "source/manifest.json": "f5d37a3f1133c415bc5a6c61fd858dad5eabd76ceaa63ec95fab6bf63b8caa4a",
-    "inventory.json": "38a3d667fec5c6ce3680c1d2f9fdeb3055d2f3308ba59080d793c0e99f85d48c"
-  },
   "checks": {
     "affectedTests": {
       "passed": 27,
@@ -51,7 +44,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 428774,
-      "sha256": "5a218d584c36967a8e360773c7847fd3af46c9565a02e98b812988ed98e05cc3",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -59,7 +51,6 @@
       "width": 390,
       "height": 844,
       "bytes": 99454,
-      "sha256": "8739e369fe96bf8c0f43d86e3c22d021bd05cc20231a7220085034b36b6319a4",
       "decodedPixelsEqualToCapture": true
     }
   ]

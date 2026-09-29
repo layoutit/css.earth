@@ -10,7 +10,7 @@
       "licenseEvidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
       ],
-      "acquisition": "Original PDS4 radius table; restore exact bytes and SHA-256.",
+      "acquisition": "Original PDS4 radius table; restore exact bytes.",
       "redistribution": "Preserve the PDS product identifier and the label request to credit both Abergel and Stooke.",
       "consumers": [
         "shape"
@@ -272,7 +272,7 @@
         "https://pds-ppi.igpp.ucla.edu/faq.jsp",
         "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count.",
       "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
       "consumers": [
         "encounter-registration"
@@ -298,7 +298,7 @@
         "https://pds-ppi.igpp.ucla.edu/faq.jsp",
         "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count.",
       "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
       "consumers": [
         "encounter-registration"
@@ -324,7 +324,7 @@
         "https://pds-ppi.igpp.ucla.edu/faq.jsp",
         "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count.",
       "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
       "consumers": [
         "encounter-registration"
@@ -350,7 +350,7 @@
         "https://pds-ppi.igpp.ucla.edu/faq.jsp",
         "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count.",
       "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
       "consumers": [
         "encounter-registration"
@@ -376,7 +376,7 @@
         "https://pds-ppi.igpp.ucla.edu/faq.jsp",
         "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count.",
       "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
       "consumers": [
         "encounter-registration"
@@ -402,7 +402,7 @@
         "https://pds-ppi.igpp.ucla.edu/faq.jsp",
         "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/catalog/dataset.cat"
       ],
-      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count and SHA-256.",
+      "acquisition": "Original archived KFKI processed data or matching metadata, with pinned byte count.",
       "redistribution": "Preserve the original team credit and PDS dataset identifier. These archive inputs are not relicensed as MIT application code.",
       "consumers": [
         "encounter-registration"

@@ -14,12 +14,12 @@ links the USGS archive. Its current Individual Investigations object service is
 `https://dwjtvz5c9xobz.cloudfront.net/`. All paths below are under
 `dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/`.
 
-| Product | Relative archive path | Bytes | SHA-256 |
-| --- | --- | ---: | --- |
-| Dione cube | `data/dione/dione_notnorm_pc_modified_2.img` | 66,355,200 | `57eb3fcc82c5e2ac3e239008cde901c1ade5641d540088514a880c755de275e6` |
-| Rhea cube | `data/rhea/rhea_notnorm_pc_modified_2.img` | 66,355,200 | `b36eb4c5d7c43c76c623fe2e1a5d8a133fd5836ba9f4c4c0442daf478553b9f6` |
-| Wavelength table | `data/vims_wavelengths_ir.tab` | 2,304 | `8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449` |
-| Preparation guide | `document/information_file.pdf` | 201,977 | `c6a7599777535917c6ab6d5fc38beab6e811e1045df5e651eba67f5a21da527e` |
+| Product | Relative archive path | Bytes |
+| --- | --- | ---: |
+| Dione cube | `data/dione/dione_notnorm_pc_modified_2.img` | 66,355,200 |
+| Rhea cube | `data/rhea/rhea_notnorm_pc_modified_2.img` | 66,355,200 |
+| Wavelength table | `data/vims_wavelengths_ir.tab` | 2,304 |
+| Preparation guide | `document/information_file.pdf` | 201,977 |
 
 Each cube has a companion `.xml` PDS4 label and `.hdr` ENVI header. These, the
 wavelength label, the source observation lists and phase-function coefficients
@@ -39,7 +39,7 @@ the collection metadata extends to 2017. The maps are mosaics of multiple
 observations, not one simultaneous observation. Source preparation used
 ellipsoidal viewing geometry and proprietary/manual steps, so the original
 mission-to-mosaic calculation is not reproduced by this repository. Conversion
-of the pinned archived mosaics into these views is reproducible.
+of the archived mosaics into these views is reproducible.
 
 ## Geographic interpretation and its limit
 
@@ -68,12 +68,12 @@ No unrecorded change to a source label or inferred higher-precision registration
 is made. Each conversion receipt retains the literal metadata calculation and
 the explicit `absoluteSubpixelRegistration: unresolved` decision.
 
-Orientation was independently compared with the original, already-pinned ISS
+Orientation was independently compared with the original ISS
 maps [PIA18434](https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/)
 and [PIA18438](https://www.jpl.nasa.gov/images/pia18438-color-maps-of-rhea-2014/).
 JPL credits their geographic registration and photometric correction to Paul
 Schenk. These independent visible/near-infrared mosaics are comparison evidence,
-not VIMS gap fills. Source-byte pins match the pre-existing body manifests.
+not VIMS gap fills. The source files are the ones the body manifests already declare.
 
 | Orientation candidate | Dione correlation | Rhea correlation |
 | --- | ---: | ---: |
@@ -108,7 +108,7 @@ wavelengths and the fixed, shared display ranges are:
 | Blue | 12 | 1.06495 | 0…0.65 |
 
 These are authored display ranges, not calibration coefficients. They are the
-same for both bodies, and clip no complete, valid RGB pixel in either pinned
+same for both bodies, and clip no complete, valid RGB pixel in either archived
 cube. An all-channel-valid mask is resolved before encoding. Each observed
 channel is encoded as `floor(1 + 254*clamp(value/rangeHigh,0,1) + 0.5)`;
 code 0 belongs exclusively to missing data.
@@ -152,8 +152,8 @@ No value-only dark-pixel heuristic is added.
 
 Run `python packages/bake/src/objects/acquisition/cassini-vims.py RECIPE.json` with the
 NumPy/Rasterio environment documented by the existing mapped-science acquisition
-requirements. The recipe is schema `cssearth-cassini-vims@1`. It pins the IMG,
-XML, HDR, wavelength table and guide, and must explicitly select the guide-grid
+requirements. The recipe is schema `cssearth-cassini-vims@1`. It names the IMG,
+XML, HDR, wavelength table and guide by path, and must explicitly select the guide-grid
 interpretation and unresolved subpixel registration. Output grid 360×180 keeps
 one output value per native cell, rotating only the longitude address into the
 canonical −180°…180° map. Subsequent preparation must use nearest native cells.

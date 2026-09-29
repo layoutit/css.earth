@@ -40,7 +40,7 @@ displayed texel.
 ### Delivery, cost and browser checks
 
 All 71 published runtime files were installed into an empty destination and
-verified by byte count and SHA-256. The six new original image products were
+verified by byte count. The six new original image products were
 also restored without local reuse. Against the integrated main revision, the
 runtime inventory grows from 28,163,769 to 52,416,035 bytes (28.16 to 52.42 MB).
 This is the complete install, including optional lighting assets, not a measured
@@ -102,7 +102,7 @@ Recorded results for the southern coverage update:
   passed. With this addition, browser checks covered searching
   for Hapi, clicking Seth on the surface, and the Regions dataset.
   [Captured Hapi card](evidence/surface-places.png). The published catalog was
-  downloaded and its byte count and SHA-256 verified; surface assets are unchanged.
+  downloaded and its byte count verified; surface assets are unchanged.
 
 The wider recorded runs include two missing Europa originals, three Earth fixture
 failures and two registry-audit failures. The report
@@ -143,7 +143,7 @@ Neither set supplies IAU feature nomenclature.
 - Browser views compare rendered datasets; they do not establish pixel
   matching with native photographs.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

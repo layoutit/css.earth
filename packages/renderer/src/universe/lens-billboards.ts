@@ -6,10 +6,9 @@ import type { VolumeVector } from '../volume/types.js';
 
 type Vector = readonly [number, number, number];
 /** What the universe knows about a volume lens bank before fetching its lenses: prepared by
- * `pnpm prepare:lens-billboards` from the pinned payload whose sha256 it records. */
+ * `pnpm prepare:lens-billboards` from the bank's prepared payload. */
 export interface LensBankBillboard {
   readonly id: string;
-  readonly payloadSha256: string;
   readonly contextVisibility: 'galactic' | 'independent';
   /** A cloud that accompanies a body stays dark until that body's dataset asks for it. */
   readonly attached: boolean;
@@ -19,7 +18,7 @@ export interface LensBankBillboard {
   readonly billboard?: { readonly cell: number; readonly radiusUnits: number; readonly back: Vector; readonly right: Vector; readonly down: Vector };
 }
 export interface LensBillboards {
-  readonly atlas: { readonly columns: number; readonly rows: number; readonly cellPx: number; readonly sha256: string };
+  readonly atlas: { readonly columns: number; readonly rows: number; readonly cellPx: number };
   readonly banks: ReadonlyMap<string, LensBankBillboard>;
 }
 
@@ -37,15 +36,15 @@ const count = (value: unknown, label: string) => {
 export function parseLensBillboards(value: unknown): LensBillboards {
   const input = record(value, 'lens billboards', ['schema', 'atlas', 'banks']);
   if (input.schema !== 'cssearth-lens-billboards@1') throw new TypeError('Unsupported lens billboards.');
-  const atlasInput = record(input.atlas, 'lens billboard atlas', ['columns', 'rows', 'cellPx', 'sha256']);
+  const atlasInput = record(input.atlas, 'lens billboard atlas', ['columns', 'rows', 'cellPx']);
   const atlas = Object.freeze({ columns: count(atlasInput.columns, 'atlas columns'), rows: count(atlasInput.rows, 'atlas rows'),
-    cellPx: positive(atlasInput.cellPx, 'atlas cell size'), sha256: text(atlasInput.sha256, 'atlas sha256') });
-  if (!/^[a-f0-9]{64}$/.test(atlas.sha256) || atlas.columns < 1 || atlas.rows < 1) throw new TypeError('Lens billboard atlas is invalid.');
+    cellPx: positive(atlasInput.cellPx, 'atlas cell size') });
+  if (atlas.columns < 1 || atlas.rows < 1) throw new TypeError(`Lens billboard atlas needs at least one column and row, not ${atlas.columns} x ${atlas.rows}.`);
   const banks = new Map<string, LensBankBillboard>();
   for (const value of array(input.banks, 'lens billboard banks')) {
-    const bank = record(value, 'lens billboard bank', ['id', 'payloadSha256', 'contextVisibility', 'attached', 'framingRadiusUnits', 'billboard']);
-    const id = text(bank.id, 'lens billboard bank id'), payloadSha256 = text(bank.payloadSha256, 'lens billboard payload sha256');
-    if (banks.has(id) || !/^[a-f0-9]{64}$/.test(payloadSha256)) throw new TypeError('Lens billboard banks must be unique and pinned.');
+    const bank = record(value, 'lens billboard bank', ['id', 'contextVisibility', 'attached', 'framingRadiusUnits', 'billboard']);
+    const id = text(bank.id, 'lens billboard bank id');
+    if (banks.has(id)) throw new TypeError(`Lens billboard bank ${id} is listed twice.`);
     if (bank.contextVisibility !== 'galactic' && bank.contextVisibility !== 'independent') throw new TypeError('Unsupported lens context visibility.');
     if (typeof bank.attached !== 'boolean') throw new TypeError('Lens billboard bank must state whether it is attached.');
     let billboard: LensBankBillboard['billboard'];
@@ -57,7 +56,7 @@ export function parseLensBillboards(value: unknown): LensBillboards {
         back: vector(input.back, 'lens billboard back'), right: vector(input.right, 'lens billboard right'), down: vector(input.down, 'lens billboard down') });
     }
     const framingRadiusUnits = bank.framingRadiusUnits === undefined ? undefined : positive(bank.framingRadiusUnits, 'lens billboard framing radius');
-    banks.set(id, Object.freeze({ id, payloadSha256, contextVisibility: bank.contextVisibility, attached: bank.attached,
+    banks.set(id, Object.freeze({ id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(framingRadiusUnits === undefined ? {} : { framingRadiusUnits }), ...(billboard ? { billboard } : {}) }));
   }
   return Object.freeze({ atlas, banks });

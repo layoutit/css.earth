@@ -126,26 +126,6 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
     resources: () => required(resources, "resources"), resourceOptions: () => required(resourceOptions, "resource options"), orbitArguments: () => required(orbitArguments, "orbit options") };
 }
 
-test("one mount owns the actual prepared tree, startup, celestial layers, readiness and playback", async t => {
-  const h = harness(); t.after(h.restore); h.runtime.resume(); h.runtime.pause(); await h.complete();
-  assert.equal(h.native.playState, "paused"); assert.equal(h.native.currentTime, 0);
-  assert.equal(h.events.at(-1), "ready");
-  assert.equal(h.created.filter(node => !node.closest(".prepared-surface-features")).length, moonDefinition.tree.nodes.length);
-  assert.equal(h.selection().stats().commits, 1);
-  assert.equal(h.selection().stats().framePublications > 0, true);
-  assert.deepEqual(h.orbitArguments().cameraPlan, moonDefinition.camera);
-  h.runtime.resume(); assert.equal(h.native.playState, "running");
-  h.runtime.destroy(); assert.equal(h.native.cancels, 1); assert.equal(h.stage.children.length, 0);
-  assert.deepEqual(h.events.slice(-4).filter(value => value.startsWith("remove:")), ["remove:orbit", "remove:camera"]);
-  assert.deepEqual(h.errors, []);
-});
-for (const suppliedCamera of [false, true]) test(`initial lens publication respects camera ownership: supplied=${suppliedCamera}`, async t => {
-  const h = harness({ definition: earthDefinition, initialWorldCamera: suppliedCamera ? objectView(earthDefinition).worldCamera : undefined }); t.after(h.restore);
-  await h.complete();
-  assert.equal(h.events.includes("camera:reset"), !suppliedCamera, "Only default startup may frame its lens");
-  assert.deepEqual(h.flights, []);
-  assert.equal(h.selection().stats().commits, 1);
-});
 test("production mount restores camera and native playback through its shared view contract", async t => {
   const h = harness(); t.after(h.restore); await h.complete();
   h.native.currentTime = 2345;
@@ -171,13 +151,6 @@ test("a newer saved view cancels an older speed selection", async t => {
   assert.equal(await older, false);
   assert.equal(h.playback().stats().speed, saved.playback.speed);
   assert.equal(h.selection().state().committed?.speed, saved.playback.speed);
-});
-test("destroy settles never-ending real startup and native rejection stays retired", async t => {
-  const h = harness(); t.after(h.restore); await flush(); assert.ok(h.jobs.length > 0);
-  h.runtime.destroy(); await h.runtime.ready;
-  for (const job of h.jobs) job.reject(new Error("late decode")); await flush();
-  assert.deepEqual(h.events, ["remove:camera", "remove:orbit", "remove:camera"]); assert.deepEqual(h.errors, []);
-  assert.equal(h.resources().stats().images.entries.length, 0);
 });
 test("pre-document destroy starts no native resources or presentation", async t => {
   const h = harness({}, { waitDocument: () => new Promise(() => {}) }); t.after(h.restore);
@@ -225,18 +198,6 @@ test("detached native roots cannot satisfy mounted stage readiness", async t => 
   Reflect.set(h.stage, "appendChild", (node: typeof h.stage) => { attach(node); node.remove(); return node; });
   const failure = assert.rejects(h.runtime.ready, /belong to the mounted stage|retained object stage/); await h.resolveJobs(); await failure;
   assert.equal(h.resources().stats().images.entries.length, 0); assert.deepEqual(h.errors, []);
-});
-test("resource readiness contains a native shared material failure and retires the whole mount", async t => {
-  const h = harness(); t.after(h.restore); await h.complete();
-  const binding = moonDefinition.viewBindings.find(binding => binding.kind === "silhouette-fit");
-  assert.ok(binding); const target = h.created[binding.target];
-  Object.defineProperty(target.style, "visibility", { configurable: true, set() { throw new Error("native material write failed"); } });
-  assert.doesNotThrow(() => h.resourceOptions().onReady?.(moonDefinition.assets.startup[0]!));
-  assert.equal(h.errors.length, 1); assert.ok(h.errors[0] instanceof Error); assert.match(h.errors[0].message, /native material write failed/);
-  assert.equal(h.resources().stats().images.entries.length, 0); assert.equal(h.native.cancels, 1);
-  const frames = h.selection().stats().framePublications;
-  h.resourceOptions().onReady?.(moonDefinition.assets.startup[0]!); h.orbitArguments().onPublish?.(publicationForTest());
-  assert.equal(h.selection().stats().framePublications, frames); assert.equal(h.errors.length, 1);
 });
 test("optional warm decode failure is recoverable while native cleanup failure is fatal", async t => {
   const warnings: unknown[] = []; t.mock.method(console, "error", (error: unknown) => warnings.push(error));

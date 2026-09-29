@@ -15,7 +15,7 @@ import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor, readRiceC
 import { pds4ProductIdentity, pds4Blocks, pds4Elements } from '@cssearth/telescope';
 import { pds3Keyword, pds3Values } from '@cssearth/telescope';
 import { pdsPackages } from '@cssearth/telescope/node';
-import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { inside, sourceCacheAddress } from './source-product-contract.mts';
 import { assertPinnedLabel, sourceReceipt, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-product-contract.mts';
 import { sourceRun } from './source-products.mts';
@@ -70,7 +70,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   assertPinnedLabel(product);
   for (const file of product.files) await acquireSourceFile(root, file);
   let run = await sourceRun(root,product); const receipt = sourceReceipt(product);
-  await assertInputPins(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
+  await assertInputs(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
   const previous = await readProductRecord(resolve(root, receipt));
   const oldFacts = await readFile(resolve(root, `${dirname(receipt)}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined);
   if(oldFacts && !await verifyCalibrationDependencies(root,oldFacts.calibrationDependencies??[]))throw new Error('Calibration dependency pin mismatch');
@@ -110,7 +110,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   metadata = await readProductScience(root,{file:scienceFile.path,format:product.decoder==='fits-image'?'fits':product.decoder==='isis3'?'isis3':'pds',target:product.target,label:product.labelPath,decoded});
   run=await sourceRun(root,product,metadata.calibrationDependencies);
   // Recheck after the decoder: the receipt may only attest the exact bytes it read.
-  await assertInputPins(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
+  await assertInputs(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
   const report = `${dirname(receipt)}/decoded.json`;
   await mkdir(resolve(root, dirname(receipt)), { recursive: true });
   await writeFile(resolve(root, report), `${JSON.stringify({ schema: 'cssearth-decoded-source@1', observation: product.id, archiveProductId: product.archiveProductId, decoded,

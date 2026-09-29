@@ -1,5 +1,5 @@
 /** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the real
- * ledgers use, so nothing asks an archive anything; the cases on the committed ledgers are in query-committed.test.mts. */
+ * ledgers use, so nothing asks an archive anything. */
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

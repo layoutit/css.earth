@@ -18,7 +18,7 @@ export interface WwtImageSet {
 export interface WwtCatalog {
   readonly schema: typeof WWT_CATALOG_SCHEMA;
   readonly source: { readonly repository: typeof CORE_REPOSITORY; readonly revision: string; readonly license: 'MIT';
-    readonly parser: 'wwt-data-formats@0.18.1'; readonly inputs: readonly { readonly path: string; readonly sha256: string }[] };
+    readonly parser: 'wwt-data-formats@0.18.1'; readonly inputs: readonly { readonly path: string }[] };
   readonly imagesets: readonly WwtImageSet[];
 }
 export interface WwtImageryMatch extends WwtImageSet {
@@ -55,11 +55,12 @@ export function parseWwtCatalog(value: unknown): WwtCatalog {
   const revision = string(source.revision, 'WWT revision');
   if (!/^[a-f0-9]{40}$/u.test(revision)) throw new TypeError('WWT catalog revision must be a full commit SHA.');
   if (!Array.isArray(source.inputs) || !source.inputs.length) throw new TypeError('WWT catalog needs pinned XML inputs.');
-  const paths = new Set<string>(), inputs: { path: string; sha256: string }[] = [];
+  const paths = new Set<string>(), inputs: { path: string }[] = [];
   for (const raw of source.inputs) {
-    const input = record(raw, 'WWT input'), path = string(input.path, 'WWT input path'), digest = string(input.sha256, 'WWT input digest');
-    if (!/^imagesets\/[a-z0-9_-]+\.xml$/u.test(path) || !/^[a-f0-9]{64}$/u.test(digest) || paths.has(path)) throw new TypeError('Invalid or duplicate WWT source input.');
-    paths.add(path); inputs.push({ path, sha256: digest });
+    const input = record(raw, 'WWT input'), path = string(input.path, 'WWT input path');
+    if (input.sha256 !== undefined) throw new TypeError(`WWT source input ${path} has a sha256 field; the catalog names its inputs by path at the recorded revision.`);
+    if (!/^imagesets\/[a-z0-9_-]+\.xml$/u.test(path) || paths.has(path)) throw new TypeError(`Invalid or duplicate WWT source input ${path}.`);
+    paths.add(path); inputs.push({ path });
   }
   if (!Array.isArray(catalog.imagesets)) throw new TypeError('WWT imagesets must be an array.');
   const imagesets = catalog.imagesets.map((raw: unknown): WwtImageSet => {

@@ -18,7 +18,7 @@ import it. Reading files, and writing the transport image as a `Buffer`, need No
 | | `skyImageAxes`, `skyDisplayRaster`, `skyProjection`: which way an axis-aligned sky image faces, its display raster, and TAN or SIN pixel ↔ ICRS | `TypeError` naming the refused WCS |
 | | `decodeFits`: a 2D primary float image as top-down (DOM row order) Float32 samples | `TypeError`: `Unsupported FITS transport image.`, `Nonfinite FITS pixel.` |
 | | `sampleStatistics`: two sample runs compared (counts, bit identity, relative differences above the median) | no throw |
-| `@cssearth/fits/node` | `readFitsFileHdus` (headers located on disk without reading data), `readFitsFileRegion` (one image rectangle, optionally through an open handle), `sha256FitsData` | as the byte reader, plus `FITS region outside image.` |
+| `@cssearth/fits/node` | `readFitsFileHdus` (headers located on disk without reading data), `readFitsFileRegion` (one image rectangle, optionally through an open handle) | as the byte reader, plus `FITS region outside image.` |
 | | `encodeFits`: top-down Float32 samples to a primary float32 FITS `Buffer`, the inverse of `decodeFits` | `TypeError`: `FITS metadata cannot override the transport layout.` … |
 
 A released `WAVELNTH` label with a numeric wavelength and plain ion names may omit its closing quote. The reader preserves its text and original card and reports a warning; unterminated structural values remain errors.
@@ -39,11 +39,8 @@ packages/fits/
 ## Evidence
 
 The package's tests are self-contained. The comparisons with Astropy live beside the scripts that write their fixtures
-in [`tests/oracles/fits/`](../../packages/core/src/node/oracle/README.md), and
-[`tests/fits/repository-inputs.test.mts`](../../tests/fits/repository-inputs.test.mts) reads every FITS file the
-repository tracks through this package and checks one digest per reading against those recorded from the three readers
-it replaced (`tools/fits/fits.mts` with its rice and sky modules, `tools/objects/observation/fits.mts` and
-`tools/nebula/application/fits.ts`). `node tests/oracles/test-fits.mts --unit` runs all of them offline.
+in [`tests/oracles/fits/`](../../packages/core/src/node/oracle/README.md). `node tests/oracles/test-fits.mts --unit` runs all of them
+offline.
 
 ESM, CommonJS and declarations are built with tsup, like the other packages. From the repository root:
 

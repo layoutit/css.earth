@@ -31,7 +31,6 @@ import { ALMA, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial'
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
-import { sha256 } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
@@ -144,7 +143,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
     const metadata = Buffer.from(formatBodyMapProduct(mapProduct));
     written.set(resolve(source, `${output}.body-map.json`), metadata);
     written.set(resolve(dirname(resolve(source, output)), resolution.output.path), resolution.output.bytes);
-    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, undefined, [resolution.output]))));
+    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, [resolution.output]))));
     const seen = [...map.depth].filter(Number.isFinite);
     evidence.push({ id: mapId, sessions, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: sessions[pair.first]!.session, second: sessions[pair.second]!.session, cells: pair.cells, rmsDifferenceKelvin: round(pair.rmsDifference, 2), correlation: round(pair.correlation, 3) })),
       map: { cells: map.seenCells, areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });

@@ -26,4 +26,4 @@ Run of 2026-09-23 (this version):
 - It misses the 2025 May JWST position of Matthews et al. (2026), which the fit did not use, by 0.3 degrees.
 - The radius is a model value; the planet is a point in every image.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -1,7 +1,6 @@
 /** Acquire full observations, verify field stars, then explicitly separate stars on the native grid. */
 import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { readObservationRecipe, scienceObservationSources, observationSourceFile } from '../../features/observations/recipe.ts';
 import { detectStars, publisherTransform, publisherRegistration, matchStars, verifyRegistration } from '@cssearth/nebula-reconstruction/registration/stellar';
@@ -17,10 +16,9 @@ import { verifySkyBandRecipe } from '../../adapters/sources/sky-bands.ts';
 
 const [recipePath, mode, extra] = process.argv.slice(2);
 if (!recipePath || extra || (mode && mode !== '--alignment-only')) throw new TypeError('Usage: prepare-observations <recipe.json> [--alignment-only]');
-const recipeBytes = await readFile(recipePath), recipe = readObservationRecipe(JSON.parse(recipeBytes.toString()));
+const recipeText = await readFile(recipePath, 'utf8'), recipe = readObservationRecipe(JSON.parse(recipeText));
 const nativeSeparationCache = await loadNativeSeparationCache(recipe);
 const directory = resolve('.local/nebula-lab/observations', recipe.id);
-const sha = (data: Uint8Array) => createHash('sha256').update(data).digest('hex');
 const json = async (file: string, data: unknown) => { await writeFile(`${file}.pending`, JSON.stringify(data, null, 2) + '\n'); await rename(`${file}.pending`, file); };
 await mkdir(resolve(directory, 'sources'), { recursive: true });
 const sources: Array<{ source: typeof recipe.images[number]; bytes: Buffer; stars: Awaited<ReturnType<typeof detectStars>>;
@@ -127,11 +125,11 @@ for (const row of sources.filter(row => row.source.registrationTransfer)) {
   console.log(`OBSERVATION_ALIGNMENT ${row.source.id} ${JSON.stringify({ ...result.evidence, matches: undefined })}`);
 }
 const verified = aligned.every(row => row.registration.status !== 'publisher');
-type Layer = { path: string; width: number; height: number; sha256: string };
+type Layer = { path: string; width: number; height: number };
 const preview = async (output: string, layer: string, bytes: Buffer): Promise<Layer> => {
   const path = resolve(output, `${layer}.png`);
   const info = await sharp(bytes).removeAlpha().toColourspace('srgb').resize({ width: 2048, height: 2048, fit: 'inside', withoutEnlargement: true }).png().toFile(path);
-  return { path: relative(process.cwd(), path), width: info.width, height: info.height, sha256: sha(await readFile(path)) };
+  return { path: relative(process.cwd(), path), width: info.width, height: info.height };
 };
 const images: Array<{ id: string; label: string; source: typeof recipe.images[number] & { path: string };
   layers: { original: Layer; diffuse?: Layer; stars?: Layer }; imageToFrame: typeof reference.initial;
@@ -156,15 +154,14 @@ async function addSeparation(image: typeof images[number], row: typeof aligned[n
     { ...recipe.nativeRemoval, directory: relative(process.cwd(), noxDirectory) }, { allowProcessing });
   const diffuseBytes = await readFile(resolve(noxDirectory, 'diffuse.png')), starBytes = await readFile(resolve(noxDirectory, 'stars.png'));
   const receipt: unknown = JSON.parse(await readFile(resolve(noxDirectory, 'result.json'), 'utf8'));
-  if (!receipt || typeof receipt !== 'object' || !('artifactSha256' in receipt) || !('applied' in receipt)) throw new Error('Missing native receipt artifacts.');
-  const artifacts = receipt.artifactSha256, applied = receipt.applied;
-  if (!artifacts || typeof artifacts !== 'object' || !('stars.png' in artifacts) || sha(starBytes) !== artifacts['stars.png'] ||
-      !applied || typeof applied !== 'object' || !('verification' in applied)) throw new Error(`${source.id}: native residual/receipt differs.`);
+  if (!receipt || typeof receipt !== 'object' || !('applied' in receipt)) throw new Error(`${source.id}: native receipt ${relative(process.cwd(), noxDirectory)}/result.json has no applied output.`);
+  const applied = receipt.applied;
+  if (!applied || typeof applied !== 'object' || !('verification' in applied)) throw new Error(`${source.id}: native receipt has no verification.`);
   const metadata = await sharp(starBytes).metadata();
   if (metadata.width !== source.width || metadata.height !== source.height || metadata.channels !== 3) throw new Error('Native residual grid differs.');
   image.layers.diffuse = await preview(output, 'diffuse', diffuseBytes);
   image.layers.stars = await preview(output, 'stars', starBytes);
-  image.removal = { ...separated.provenance, ...reuse, nativeDimensions: [source.width, source.height], residualSha256: sha(starBytes), accounting: applied.verification };
+  image.removal = { ...separated.provenance, ...reuse, nativeDimensions: [source.width, source.height], accounting: applied.verification };
   return true;
 }
 for (const source of scienceObservationSources(recipe)) {
@@ -179,7 +176,7 @@ for (const source of scienceObservationSources(recipe)) {
 }
 const publish = () => json(resolve(directory, 'observations.json'), { schema: 'cssearth-nebula-observations@1', id: recipe.id, frame: recipe.frame, images,
   registrationReferences: aligned.filter(row => row.source.processingRole === 'registration-reference').map(row => ({ id: row.source.id, source: row.source, imageToFrame: row.imageToFrame, registration: row.registration })),
-  provenance: { recipePath, recipeSha256: sha(recipeBytes), sourceFrameConvention: 'Native raster pixel edges; pixel centres at n+.5. CSS matrix x=a*x+c*y+e, y=b*x+d*y+f.',
+  provenance: { recipePath, recipe: JSON.parse(recipeText), sourceFrameConvention: 'Native raster pixel edges; pixel centres at n+.5. CSS matrix x=a*x+c*y+e, y=b*x+d*y+f.',
     registrationMethod: 'Per-source discovery records below; every direct affine fit uses the same deterministic training RANSAC, spatial holdout, residual, coverage and parity gates. Transferred bands carry reference-bridge residuals only.',
     registrationSources: aligned.map(row => ({ id: row.source.id, mode: row.source.registrationTransfer ? 'shared-grid-transfer' : row.source.matchedStarCatalogue ? 'explicit-native-star-catalogue' : row.source.registrationMode ?? 'field-stars',
       compactStarChannel: row.source.compactStarChannel ?? 'minimum-rgb', matchedStarCatalogue: row.source.matchedStarCatalogue, astrometricCalibration: row.source.astrometricCalibration,

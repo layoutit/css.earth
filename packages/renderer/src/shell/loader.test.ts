@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { expect, test, vi } from 'vitest';
@@ -11,7 +10,7 @@ async function fixture() {
   return { base, descriptor, bytes };
 }
 
-test('loads the pinned surface shell and its prepared material without reading source geometry', async () => {
+test('loads the prepared surface shell and its material without reading source geometry', async () => {
   const { base, descriptor, bytes } = await fixture();
   const read = vi.fn(async () => bytes);
   const payload = await loadPreparedCssSurfaceShell(descriptor, { read });
@@ -25,7 +24,6 @@ test('loads the pinned surface shell and its prepared material without reading s
   for (const resource of payload.resources) {
     const image = await readFile(new URL(resource.path, directory)), metadata = await sharp(image).metadata();
     expect(image.byteLength, resource.path).toBe(resource.bytes);
-    expect(createHash('sha256').update(image).digest('hex'), resource.path).toBe(resource.sha256);
     expect([metadata.width, metadata.height], resource.path).toEqual([resource.width, resource.height]);
     transferBytes += image.byteLength; decodedRgbaBytes += resource.width * resource.height * 4;
   }

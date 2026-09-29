@@ -2,7 +2,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { base, hashFile, runtimeLock, verifyFiles } from './runtime.mts';
+import { base, fileBytes, runtimeLock, verifyFiles } from './runtime.mts';
 import { requireString, requireFiniteNumber } from '@cssearth/core';
 import { restoreInputs } from './restore.mts';
 
@@ -15,8 +15,8 @@ function run(command: string, args: string[], timeout: number) {
 }
 const archive = resolve(base, requireString(lock.package));
 if (!existsSync(archive)) run('curl', ['--fail', '--location', '--max-time', '600', '--output', archive, requireString(lock.url)], 610_000);
-const actual = await hashFile(archive);
-if (actual.bytes !== requireFiniteNumber(lock.bytes) || actual.sha256 !== lock.sha256) throw new Error('SBMT package is incomplete or differs from the pinned release.');
+const actual = await fileBytes(archive), expected = requireFiniteNumber(lock.bytes);
+if (actual.bytes !== expected) throw new Error(`SBMT package ${archive} holds ${actual.bytes} bytes; runtime.lock.json records ${expected}.`);
 if (!existsSync(resolve(base, 'distribution'))) run('pkgutil', ['--expand-full', archive, resolve(base, 'distribution')], 120_000);
 await verifyFiles(base, files);
 const bridge = resolve(base, 'bridge'); await mkdir(bridge, { recursive: true });

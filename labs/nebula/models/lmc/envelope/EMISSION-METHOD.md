@@ -1,7 +1,7 @@
 # Two-scale envelope LMC emission experiment
 
 This is a new inferred-emission model for the LMC. It does not repaint the unchanged stellar-density
-volume. Model `a9e2048a…` and its three lenses are promoted to the application by
+volume. Model `lmc-clouds-emission-envelope` and its three lenses are promoted to the application by
 [`app-lenses.json`](app-lenses.json); [the object's README](../../../../../src/objects/lmc/README.md)
 is the delivered account, and the `alignment-density-material-v1` lenses it replaced remain a historical
 reference.
@@ -14,10 +14,10 @@ approaches; this note records only what is specific to the LMC.
 
 | Input | Pin |
 | --- | --- |
-| Primary registered, star-removed image | Horálek NOIRLab wide field, reconstruction `e7a94397…` (`iotw2547a.jpg`, NOX star removal) |
+| Primary registered, star-removed image | Horálek NOIRLab wide field, reconstruction `lmc-clouds-horalek-widefield` (`iotw2547a.jpg`, NOX star removal) |
 | Depth prior | `labs/nebula/models/lmc/full-density/source/volume.json`, the Garver et al. (2026) stellar simulation, through the baseline request |
-| Registration gate | `labs/nebula/models/lmc/candidates/source/alignment-report.json`, `c9da3dc2…`; all three images pass unchanged |
-| Lens images | the same three registered baselines the application ships: `932a145d…` VISTA, `e7a94397…` Horálek, `a44d4e24…` AllWISE |
+| Registration gate | `labs/nebula/models/lmc/candidates/source/alignment-report.json`; all three images pass unchanged |
+| Lens images | the same three registered baselines the application ships: `lmc-clouds-vista-infrared` VISTA, `lmc-clouds-horalek-widefield` Horálek, `lmc-clouds-wise-wide-infrared` AllWISE |
 
 Horálek is the primary because it is the brightest and most structured of the three registered images;
 VISTA is faint and low-contrast at this scale, and the AllWISE frame spans 24° with the galaxy in a
@@ -38,7 +38,7 @@ small central part of it. Star removal is reused from those baselines and never 
 
 ## Result, 2026-09-18
 
-Recipe `emission-envelope.json`; model `3f626fdd64869bcfe502bccce20f70e05c0f7465415deff3413d005ca620b3a7`.
+Recipe `emission-envelope.json`; model `lmc-clouds-emission-envelope`.
 
 - 469 finite components from 480 iterations. None failed to find prior support, so no component keeps the
   authored fallback depth.
@@ -58,11 +58,11 @@ Recipe `emission-envelope.json`; model `3f626fdd64869bcfe502bccce20f70e05c0f7465
 
 | Lens | Result |
 | --- | --- |
-| `vista-infrared` | `9cd45042384c463af7d22a29b441d2a0394682d09b7fd16f4bc6deea7f9b42e3` |
-| `horalek-widefield` | `af155ea3aa49010fefe99e9741518041b168fa46f85af2285ba801473fd0c87d` |
-| `wise-wide-infrared` | `ecf2d18b5096087dcf6d127692864f482569e4ca49202739339c8aafecaa9768` |
+| `vista-infrared` | `lmc-clouds-emission-envelope-vista-infrared` |
+| `horalek-widefield` | `lmc-clouds-emission-envelope-horalek-widefield` |
+| `wise-wide-infrared` | `lmc-clouds-emission-envelope-wise-wide-infrared` |
 
-`.local/nebula-lab/finite-lenses-3f626fdd….json` indexes them. Each recolours the same neutral alpha with
+`.local/nebula-lab/finite-lenses-lmc-clouds-emission-envelope.json` indexes them. Each recolours the same neutral alpha with
 its own component and envelope chromaticity; the geometry never changes between them.
 
 ## Inspection against the shipped repaint

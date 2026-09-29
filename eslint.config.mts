@@ -2,13 +2,15 @@ import type { Linter } from "eslint";
 import typescriptParser from '@typescript-eslint/parser';
 
 export const packageLineLimit = 600;
+// The contract forbids runtime canvas and WebGL (AGENTS.md); WWT's engine is WebGL. Build-time preparation may rasterize.
+const noCanvas = 'The CSS runtime uses no canvas or WebGL (AGENTS.md).';
 
 export default [
   { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**',
     // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
     // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.
     '**/prepared/**', '**/generated/**', 'src/objects/**', 'src/sources/**',
-    'src/platform/solar-geometry.mts', 'site/prepared-object-catalog.mts', 'site/prepared-context-objects.mts'] },
+    'src/platform/solar-geometry.mts', 'site/prepared-context-objects.mts'] },
   {
     // `src` and `site` (and once `tools`) — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
@@ -78,9 +80,8 @@ export default [
   },
   {
     // The raster lane reads prepared-asset constants the renderer owns (`@cssearth/renderer/rendering/*`); build-time code may
-    // import the runtime package, never the reverse. The layered provenance bindings read the same canonical image density.
-    // Other topics stay on the rule above.
-    files: ['packages/bake/src/raster/**/*.ts', 'packages/bake/src/objects/provenance/**/*.ts'],
+    // import the runtime package, never the reverse. Other topics stay on the rule above.
+    files: ['packages/bake/src/raster/**/*.ts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
@@ -133,9 +134,24 @@ export default [
       'no-restricted-imports': ['error', {
         patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '**/tools/**', '**/labs/**', '**/renderers/**',
           'node:*', '@cssearth/bake', '@cssearth/bake/*', '@cssearth/renderer', '@cssearth/renderer/*'],
-          message: 'The renderer runtime imports packages and its own modules only, never the application, preparation code or Node built-ins.' }],
+          message: 'The renderer runtime imports packages and its own modules only, never the application, preparation code or Node built-ins.' },
+        { group: ['@wwtelescope/*'], message: noCanvas }],
       }],
     },
+  },
+  {
+    // The site's browser runtime (not its build steps or tests) and the renderer draw with retained DOM and CSS only.
+    files: ['site/**/*.{ts,mts}', 'packages/renderer/src/**/*.ts'],
+    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    rules: {
+      'no-restricted-globals': ['error', ...['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext'].map(name => ({ name, message: noCanvas }))],
+      'no-restricted-properties': ['error', { property: 'getContext', message: noCanvas }],
+    },
+  },
+  {
+    files: ['site/**/*.{ts,mts}'],
+    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    rules: { 'no-restricted-imports': ['error', { patterns: [{ group: ['@wwtelescope/*'], message: noCanvas }] }] },
   },
   {
     // Moved unchanged from src/renderers/css, which had no line limit; splitting them is separate work. The site bundle's

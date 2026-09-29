@@ -1,125 +1,121 @@
 {
- "claim": "The CERES18D grids are placed in the frame of the Ceres maps and Gazetteer (Kait at 0 degrees east): named features take the values the papers describe.",
- "method": "Each grid read with the pds3-grid reader (draft with the detached-pointer fix, output/gravity-drafts), nearest 1-degree cell at the IAU/USGS Gazetteer centre; percentile among all cells within 60 degrees of the equator. Run 2026-09-28 on f01a41ff00 plus this change.",
- "inputs": [
-  {
-   "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_ACCEL_0018.IMG",
-   "bytes": 521280,
-   "sha256": "b33105e37a4c4a42509a570ff486d1e68ea17fce841c0836eeeb2d19eda11da1"
+  "claim": "The CERES18D grids are placed in the frame of the Ceres maps and Gazetteer (Kait at 0 degrees east): named features take the values the papers describe.",
+  "method": "Each grid read with the pds3-grid reader (draft with the detached-pointer fix, output/gravity-drafts), nearest 1-degree cell at the IAU/USGS Gazetteer centre; percentile among all cells within 60 degrees of the equator. Run 2026-09-28 on f01a41ff00 plus this change.",
+  "inputs": [
+    {
+      "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_ACCEL_0018.IMG",
+      "bytes": 521280
+    },
+    {
+      "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_ACCERR_0018.IMG",
+      "bytes": 521280
+    },
+    {
+      "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_BOU_0018.IMG",
+      "bytes": 521280
+    },
+    {
+      "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_GEOID_0018.IMG",
+      "bytes": 521280
+    },
+    {
+      "path": "src/objects/ceres/source/features/CERES_nomenclature_center_pts.zip",
+      "note": "tracked in Git"
+    }
+  ],
+  "references": {
+    "Kerwan positive Bouguer anomaly": "Bland et al. (2018), GRL, https://doi.org/10.1002/2017GL075526 (abstract)",
+    "mascon-like structures in the two biggest basins (Kerwan, Yalode)": "Ermakov et al. (2017), JGR Planets, https://doi.org/10.1002/2017JE005302 (abstract)",
+    "free-air anomaly of about 100 mGal near Ahuna Mons (degrees 5 to 14)": "Ruesch et al. (2019), Nature Geoscience, https://doi.org/10.1038/s41561-019-0378-7, Methods",
+    "low Bouguer gravity at high topography and vice versa": "Park et al. (2017), EGU2017-3380, https://meetingorganizer.copernicus.org/EGU2017/EGU2017-3380.pdf"
   },
-  {
-   "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_ACCERR_0018.IMG",
-   "bytes": 521280,
-   "sha256": "3ebb76046bf67f55be9bb72bd3e8b2f8ec63a327ee62659f80228287ae34246a"
+  "gazetteerCentres": {
+    "Urvara": [
+      249.2402,
+      -45.6592
+    ],
+    "Yalode": [
+      292.4824,
+      -42.583
+    ],
+    "Kerwan": [
+      123.9873,
+      -10.7666
+    ],
+    "Ahuna Mons": [
+      316.1996,
+      -10.4778
+    ],
+    "Occator": [
+      239.335,
+      19.8193
+    ],
+    "Hanami Planum": [
+      230,
+      15
+    ]
   },
-  {
-   "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_BOU_0018.IMG",
-   "bytes": 521280,
-   "sha256": "7c3902f3956511bfefe313a91d539b449c6e10eacf417cb5734ca17c78dae605"
+  "values": {
+    "ACCEL_0018": {
+      "Urvara": -258.05,
+      "Yalode": -52.016,
+      "Kerwan": -81.181,
+      "Ahuna Mons": 153.16,
+      "Occator": -111.41,
+      "Hanami Planum": -46.892,
+      "Urvara percentile": 0,
+      "Yalode percentile": 20,
+      "Kerwan percentile": 10,
+      "Ahuna Mons percentile": 99,
+      "Occator percentile": 5,
+      "Hanami Planum percentile": 22
+    },
+    "BOU_0018": {
+      "Urvara": 360.77,
+      "Yalode": 180.36,
+      "Kerwan": 347.68,
+      "Ahuna Mons": 295.17,
+      "Occator": -181.33,
+      "Hanami Planum": -224.93,
+      "Urvara percentile": 100,
+      "Yalode percentile": 89,
+      "Kerwan percentile": 100,
+      "Ahuna Mons percentile": 99,
+      "Occator percentile": 11,
+      "Hanami Planum percentile": 4
+    },
+    "GEOID_0018": {
+      "Urvara": -452.04,
+      "Yalode": -77.715,
+      "Kerwan": -631.11,
+      "Ahuna Mons": 3.2155,
+      "Occator": -858.97,
+      "Hanami Planum": -741.73,
+      "Urvara percentile": 24,
+      "Yalode percentile": 56,
+      "Kerwan percentile": 12,
+      "Ahuna Mons percentile": 62,
+      "Occator percentile": 3,
+      "Hanami Planum percentile": 8
+    },
+    "ACCERR_0018": {
+      "Urvara": 37.373,
+      "Yalode": 35.112,
+      "Kerwan": 19.581,
+      "Ahuna Mons": 19.046,
+      "Occator": 21.609,
+      "Hanami Planum": 20.278,
+      "Urvara percentile": 76,
+      "Yalode percentile": 71,
+      "Kerwan percentile": 21,
+      "Ahuna Mons percentile": 16,
+      "Occator percentile": 33,
+      "Hanami Planum percentile": 26
+    }
   },
-  {
-   "path": "src/objects/ceres/source/science/gravity/JGDWN_CER18D_GEOID_0018.IMG",
-   "bytes": 521280,
-   "sha256": "4ef5d2f102a36c69867e55fb86b716800f1d503ca8b4f1be4ff6f679ecac1665"
-  },
-  {
-   "path": "src/objects/ceres/source/features/CERES_nomenclature_center_pts.zip",
-   "note": "tracked in Git"
+  "extremes": {
+    "ACCEL minimum": "-272.23 mGal at 249 E, 44 S (Urvara)",
+    "BOU maximum": "405.86 mGal at 251 E, 43 S (Urvara)",
+    "pole rows": "every one of the 360 cells of the first and last rows is equal (spread under 0.0001), so line 1 is 90 N and line 181 is 90 S"
   }
- ],
- "references": {
-  "Kerwan positive Bouguer anomaly": "Bland et al. (2018), GRL, https://doi.org/10.1002/2017GL075526 (abstract)",
-  "mascon-like structures in the two biggest basins (Kerwan, Yalode)": "Ermakov et al. (2017), JGR Planets, https://doi.org/10.1002/2017JE005302 (abstract)",
-  "free-air anomaly of about 100 mGal near Ahuna Mons (degrees 5 to 14)": "Ruesch et al. (2019), Nature Geoscience, https://doi.org/10.1038/s41561-019-0378-7, Methods",
-  "low Bouguer gravity at high topography and vice versa": "Park et al. (2017), EGU2017-3380, https://meetingorganizer.copernicus.org/EGU2017/EGU2017-3380.pdf"
- },
- "gazetteerCentres": {
-  "Urvara": [
-   249.2402,
-   -45.6592
-  ],
-  "Yalode": [
-   292.4824,
-   -42.583
-  ],
-  "Kerwan": [
-   123.9873,
-   -10.7666
-  ],
-  "Ahuna Mons": [
-   316.1996,
-   -10.4778
-  ],
-  "Occator": [
-   239.335,
-   19.8193
-  ],
-  "Hanami Planum": [
-   230,
-   15
-  ]
- },
- "values": {
-  "ACCEL_0018": {
-   "Urvara": -258.05,
-   "Yalode": -52.016,
-   "Kerwan": -81.181,
-   "Ahuna Mons": 153.16,
-   "Occator": -111.41,
-   "Hanami Planum": -46.892,
-   "Urvara percentile": 0,
-   "Yalode percentile": 20,
-   "Kerwan percentile": 10,
-   "Ahuna Mons percentile": 99,
-   "Occator percentile": 5,
-   "Hanami Planum percentile": 22
-  },
-  "BOU_0018": {
-   "Urvara": 360.77,
-   "Yalode": 180.36,
-   "Kerwan": 347.68,
-   "Ahuna Mons": 295.17,
-   "Occator": -181.33,
-   "Hanami Planum": -224.93,
-   "Urvara percentile": 100,
-   "Yalode percentile": 89,
-   "Kerwan percentile": 100,
-   "Ahuna Mons percentile": 99,
-   "Occator percentile": 11,
-   "Hanami Planum percentile": 4
-  },
-  "GEOID_0018": {
-   "Urvara": -452.04,
-   "Yalode": -77.715,
-   "Kerwan": -631.11,
-   "Ahuna Mons": 3.2155,
-   "Occator": -858.97,
-   "Hanami Planum": -741.73,
-   "Urvara percentile": 24,
-   "Yalode percentile": 56,
-   "Kerwan percentile": 12,
-   "Ahuna Mons percentile": 62,
-   "Occator percentile": 3,
-   "Hanami Planum percentile": 8
-  },
-  "ACCERR_0018": {
-   "Urvara": 37.373,
-   "Yalode": 35.112,
-   "Kerwan": 19.581,
-   "Ahuna Mons": 19.046,
-   "Occator": 21.609,
-   "Hanami Planum": 20.278,
-   "Urvara percentile": 76,
-   "Yalode percentile": 71,
-   "Kerwan percentile": 21,
-   "Ahuna Mons percentile": 16,
-   "Occator percentile": 33,
-   "Hanami Planum percentile": 26
-  }
- },
- "extremes": {
-  "ACCEL minimum": "-272.23 mGal at 249 E, 44 S (Urvara)",
-  "BOU maximum": "405.86 mGal at 251 E, 43 S (Urvara)",
-  "pole rows": "every one of the 360 cells of the first and last rows is equal (spread under 0.0001), so line 1 is 90 N and line 181 is 90 S"
- }
 }

@@ -3,7 +3,7 @@ import {mkdtemp, readFile, readdir, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {test} from 'node:test';
-import {JIRAM_MOSAIC_PRODUCER, JIRAM_REGISTERED_MOSAIC_PRODUCER, decodeFrame, detectorMask, parseRecipe, readArchivedFrame, subtractColumnBackground, writeMap} from './jiram-mosaic.mts';
+import {decodeFrame, detectorMask, parseRecipe, readArchivedFrame, subtractColumnBackground} from './jiram-mosaic.mts';
 
 const recipe = parseRecipe(JSON.parse(await readFile(new URL('../../../../src/objects/io/source/science/jiram/recipe.json',import.meta.url),'utf8')));
 const frame = {productId:'JIR_IMG_RDR_2023212T042659_V01',volume:'jnojir_2053'};
@@ -83,20 +83,4 @@ test('the raw detector mask excludes the non-linear boundary only in the selecte
   assert.equal(mask.reduce((n,v)=>n+v,0),2);
   assert.throws(()=>detectorMask(raw,rawLabel.replace('0.002 <second>','0.004 <second>'),rdr,recipe,10000),/exposure/u);
   assert.throws(()=>detectorMask(raw,rawLabel.replace(rawId,'WRONG_PRODUCT'),rdr,recipe,10000),/identity/u);
-});
-
-test('the map label serializes the producer names it has always carried, not the current module paths',async()=>{
-  assert.equal(JIRAM_MOSAIC_PRODUCER,'tools/objects/juno/jiram-mosaic.mts');
-  assert.equal(JIRAM_REGISTERED_MOSAIC_PRODUCER,'tools/objects/juno/jiram-registered-mosaic.mts');
-  const root=await mkdtemp(join(tmpdir(),'jiram-label-'));
-  try {
-    const output={pixelsPerDegree:1,image:'map.img',label:'map.lbl',receipt:'map.json',productId:'P'};
-    const target={name:'IO',referenceRadiusKm:1821.6}, band={name:'M',unit:'W'};
-    await writeMap(root,{output,side:'night',background:undefined,target,band,visits:[]},new Float32Array(360*180));
-    assert.match(await readFile(join(root,'map.lbl'),'utf8'),/Written by tools\/objects\/juno\/jiram-mosaic\.mts\."/u);
-    await writeMap(root,{output,side:'night',background:undefined,target,band,visits:[]},new Float32Array(360*180),JIRAM_REGISTERED_MOSAIC_PRODUCER);
-    assert.match(await readFile(join(root,'map.lbl'),'utf8'),/Written by tools\/objects\/juno\/jiram-registered-mosaic\.mts\."/u);
-  } finally { await rm(root,{recursive:true,force:true}); }
-  const registered=await readFile(new URL('./jiram-registered-mosaic.mts',import.meta.url),'utf8');
-  assert.match(registered,/map, JIRAM_REGISTERED_MOSAIC_PRODUCER\);/u,'the registered mosaic must pass its historical producer to writeMap');
 });

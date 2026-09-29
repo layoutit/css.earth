@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /** Run an ordered cssEarth journey in the visible iPad Safari tab with a trace and native screen filmstrip. */
 import { execFile } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { networkInterfaces, tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -55,19 +54,17 @@ async function ensureCurrentBuild(): Promise<void> {
   const built = await stat(resolve(root, 'dist/index.html')).catch(() => null);
   const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
   const sourcePaths = ['site', 'src', 'packages', 'astro.config.mts'];
-  const diff = await exec('git', ['diff', '--binary', 'HEAD', '--', ...sourcePaths], { cwd: root, maxBuffer: 64 * 1024 * 1024 });
-  const untracked = await exec('git', ['ls-files', '--others', '--exclude-standard', '-z', '--', ...sourcePaths], { cwd: root });
-  const digest = createHash('sha256').update(diff.stdout);
-  for (const path of untracked.stdout.split('\0').filter(Boolean)) digest.update(path).update(await readFile(resolve(root, path)));
-  const sourceDigest = digest.digest('hex');
+  // Git identifies the sources: a build made from a clean checkout of HEAD is current; any local change rebuilds.
+  const status = await exec('git', ['status', '--porcelain', '--', ...sourcePaths], { cwd: root });
+  const clean = status.stdout.trim() === '';
   const marker = await readFile(resolve(root, 'dist/.cssearth-performance-build.json'), 'utf8').then(JSON.parse).catch(() => null);
-  if (built && marker?.schema === 'cssearth-performance-build@1' && marker.head === head && marker.sourceDigest === sourceDigest) return;
+  if (built && clean && marker?.schema === 'cssearth-performance-build@2' && marker.head === head && marker.clean === true) return;
   console.error('Built preview is missing the current performance build; rebuilding before the iPad trace…');
   // The dedicated tracer checkout has its prepared assets installed already.
   // Rebuilding the site does not need to re-run source processing for every journey.
   await exec('pnpm', ['exec', 'astro', 'build', '--mode', 'performance'], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
   await writeFile(resolve(root, 'dist/.cssearth-performance-build.json'), JSON.stringify({
-    schema: 'cssearth-performance-build@1', head, sourceDigest, builtAt: new Date().toISOString(),
+    schema: 'cssearth-performance-build@2', head, clean, builtAt: new Date().toISOString(),
   }) + '\n');
 }
 

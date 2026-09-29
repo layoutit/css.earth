@@ -35,7 +35,7 @@ The spectral source has 102,934 samples at −1 and 5,281 at +1. The TIFF does n
 
 ### Checks for this change
 
-Prepared plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six lenses and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base SHA-256; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
+Prepared plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six lenses and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base inventory entries; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
 
 All 50 runtime assets were published through the existing content-addressed asset publisher and installed into an empty temporary destination: 29,095,665 bytes, 50 downloads, zero reused files. The three added lenses contribute 12.45 MB of prepared files. This is scene-asset installation evidence; it excludes shared shell assets and browser network traffic. The temporary install was removed after verification.
 
@@ -60,8 +60,6 @@ An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equ
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-[Source anchors](../../../tests/objects/unit/anchors/asteroid-calibration.json) checked by the shared [calibration runner](../../../tests/objects/unit/asteroid-calibration.test.mts).
-
 ## Known problems
 
 There is no hydration map. Hayabusa2's NIRS3 spectrometer found the 2.72 µm OH band everywhere on Ryugu, at 7–10% depth ([Kitazato et al. 2019](https://doi.org/10.1126/science.aav7432)). No one has released a map of that depth. We tested whether we could make one from the [released spectra](https://doi.org/10.17597/isas.darts/hyb2-01600). The spectra cover almost the whole surface. The problem is the pattern: its small differences do not repeat from one global scan to the next unless the surface temperatures in the two scans also match. A colour map would mostly show leftovers from removing the surface's heat glow, not differences in water-bearing minerals. The measurements are in the [investigation ledger](investigations.json) (`nirs3-hydration-band-depth`).
@@ -76,7 +74,7 @@ Fine triangle-edge artifacts remain visible in smooth areas, particularly Itokaw
 
 The 64-bit JAXA v-band map uses geographic degrees (0.2 degrees/pixel), a 448 m reference sphere and -1 no-data. Its displayed reflectance stretch is 0–0.035. Missing coverage, residual photographed shadows and longitude seams remain visible; the color mosaic is a separately corrected and brightness-matched product.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="ryugu-source-record"></a>
 <a id="selected-data-and-survey"></a>

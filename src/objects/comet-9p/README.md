@@ -10,7 +10,7 @@
 
 ## Surface places
 
-The Deep Impact site and four smooth regions, S1–S4, are searchable places. S1–S4 are representative interiors read from the simple-cylindrical, east-longitude/latitude map in [Thomas et al. (2013), Fig. 2b](https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf). The retained PDF hash is `33cc898a17b33c68a83bd451f901d11220ec3bb1fae4d17690787e8717849429`.
+The Deep Impact site and four smooth regions, S1–S4, are searchable places. S1–S4 are representative interiors read from the simple-cylindrical, east-longitude/latitude map in [Thomas et al. (2013), Fig. 2b](https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf). The paper PDF is retained beside the source records.
 
 The paper is the cited source of the PDS V2 shape model and uses its pole and reference-crater prime meridian, so these coordinates are in the displayed `TEMPEL1_2012_PLAN` frame. They are manually selected map interiors, not named centres or boundaries. Fig. 2b samples about 0.42° per pixel. S1 and S2 fall on locally weak PDS shape cells (100–300 m radial uncertainty); S3 and S4 fall on stereo-controlled cells (under 60 m). Those shape bounds do not make the broad terrain-map placements precise surveys.
 
@@ -54,7 +54,7 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
   Deep Impact site; three focused unit tests passed. With this
   addition, searching for the site and switching to the 2005 photographs showed
   its qualified caption. [Browser capture](evidence/surface-places.png).
-  The published catalog passed a fresh byte-count and SHA-256 check.
+  The published catalog passed a fresh byte-count check.
 
 - **S1–S4 terrain places, 2026-09-12:** three focused checks reproduce the map
   coordinates and validate all five catalog entries against the retained mesh.
@@ -98,7 +98,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

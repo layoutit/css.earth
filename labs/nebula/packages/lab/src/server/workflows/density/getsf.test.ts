@@ -8,7 +8,6 @@ import { prepareGetSfBenchmark } from './getsf.ts';
 import { collectGetSfBenchmark } from './getsf-collect.ts';
 import { decodeFits } from '@cssearth/fits';
 import { encodeFits } from '@cssearth/fits/node';
-import { digest } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
 
 test('getsf input uses shared luminance, native pixel scale and complete official header/config contract', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'getsf-input-'));
@@ -16,7 +15,7 @@ test('getsf input uses shared luminance, native pixel scale and complete officia
     const imagePath = resolve(directory, 'source.png');
     await sharp(Buffer.from([255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255]),
       { raw: { width: 2, height: 2, channels: 3 } }).png().toFile(imagePath);
-    const receipt = await prepareGetSfBenchmark({ imagePath, imageSha256: digest(await readFile(imagePath)),
+    const receipt = await prepareGetSfBenchmark({ imagePath,
       width: 2, height: 2, workDirectory: directory, pixelScaleArcsec: 5, beamFwhmPx: 2,
       sourceMaxFootprintRadiusPx: 8, filamentMaxFootprintRadiusPx: 32,
       wcs: { referencePixel: [12, -3], referenceSkyDeg: [78, -69], rotationDeg: -16 } });
@@ -29,7 +28,7 @@ test('getsf input uses shared luminance, native pixel scale and complete officia
     assert.match(config, /#_{10,}\n$/);
     assert.match(config, /n 1 1 50 n \| measure/);
     assert.match(config, /n \| visualize/);
-    assert.equal(receipt.configurationSha256, digest(config));
+    assert.equal(receipt.configuration, config);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
@@ -43,7 +42,7 @@ test('signed official getsf maps reject default import and remain unchanged with
     await writeFile(resolve(directory, 'runs/+getsf.cfg'), config);
     await writeFile(resolve(directory, 'execution.log'), 'GETSF: DONE IN 1.000 MINUTES');
     await writeFile(resolve(directory, 'input.json'), JSON.stringify({ imagePath: source,
-      sourceSha256: digest('fixture'), configurationSha256: digest(config), width: 2, height: 1 }));
+      configuration: config, width: 2, height: 1 }));
     for (const name of ['fbackground', 'sources', 'filaments']) await writeFile(
       resolve(directory, `001/benchmark.001.obs.${name}.fits`),
       encodeFits(new Float32Array(name === 'sources' ? [-.125, .5] : [.1, .2]), 2, 1, {}));
@@ -58,6 +57,8 @@ test('signed official getsf maps reject default import and remain unchanged with
     assert.equal(preview.readFloatLE(0), 0);
     const receipt = JSON.parse(await readFile(resolve(directory, 'out/provenance.json'), 'utf8'));
     assert.equal(receipt.rawOfficialMaps.compact.statistics.negativeCount, 1);
+    await writeFile(resolve(directory, 'runs/+getsf.cfg'), '#edited\n');
+    await assert.rejects(collectGetSfBenchmark({ ...options, negativePolicy: 'positive-parts-with-signed-residual' }), /not the configuration recorded/);
     await writeFile(resolve(directory, 'execution.log'), 'started');
     await assert.rejects(collectGetSfBenchmark(options), /no successful completion/);
   } finally { await rm(directory, { recursive: true, force: true }); }

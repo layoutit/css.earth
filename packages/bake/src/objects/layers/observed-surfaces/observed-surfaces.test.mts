@@ -5,7 +5,6 @@ import { requireArray } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import {createHash} from 'node:crypto';
 import {readFile,mkdtemp,readdir,rm,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';

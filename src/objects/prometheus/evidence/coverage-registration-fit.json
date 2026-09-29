@@ -1,7 +1,6 @@
 {
   "body": "prometheus",
   "mode": "feature-fit",
-  "recipeSha256": "75034a3cec62d5d3fa987517442572055427b53e0b086577127d04b7a9d2745f",
   "referenceCamera": {
     "id": "n1643263046_1",
     "path": "observations/N1643263046_1_CALIB.IMG",
@@ -18,10 +17,8 @@
     ],
     "pixelAngleMicroradians": 5.989697719921734
   },
-  "implementationSha256": "554e629a61076d47a5e3357ad941cd75d86bd42bf8c9dd8e6a45f2afdfa9b7c4",
   "mesh": {
-    "path": "shape/prometheus_30k_plt.tab",
-    "sha256": "78d1d11346d554f969d4c0f0df3969e5c7f50c715274f69a57ad31ec3be5425c"
+    "path": "shape/prometheus_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -35,7 +32,7 @@
     "maximumEmissionDegrees": 65,
     "maximumReferenceIncidenceDegrees": 75,
     "minimumValidSignal": 0.002,
-    "minimumDetailVariance": 0.000001,
+    "minimumDetailVariance": 1e-06,
     "minimumConvolutionMarginPixels": 16,
     "maximumSourceMeshVisibilityResidualMeters": 1
   },
@@ -97,10 +94,8 @@
         "maximumPixels": 1.8022471047846387
       },
       "reference": {
-        "id": "n1643263046_1",
-        "sha256": "3591eed8181b553187f45d65ce84d3c9d1516a60f3978e4a1e3e7bb826c8bb39"
+        "id": "n1643263046_1"
       },
-      "targetSha256": "9b8d41f63ed909a257b0307d9b175d3944daf5ab09417a64b65e7c9b34790bb4",
       "controls": [
         {
           "partition": "holdout",
@@ -723,10 +718,8 @@
         "maximumPixels": 1.823149175658519
       },
       "reference": {
-        "id": "n1643263046_1",
-        "sha256": "3591eed8181b553187f45d65ce84d3c9d1516a60f3978e4a1e3e7bb826c8bb39"
+        "id": "n1643263046_1"
       },
-      "targetSha256": "8fba11e1458101342c58ce80b9bfd6832cb6b0118978bc103a3581896c751c9a",
       "controls": [
         {
           "partition": "fit",

@@ -14,8 +14,8 @@ test('a wider pointing search recovers an independently shifted image under the 
   return {position:[0,0,1000],sun:[0,0,1],ray(x:number,y:number){const v=[(x-center[0])/1000,(y-center[1])/1000,-1],n=Math.hypot(...v);return v.map(p=>p/n);},
    project(point:readonly number[]){const x=point[0]*1000/(1000-point[2]),y=point[1]*1000/(1000-point[2]);return[center[0]+c*x-s*y,center[1]+s*x+c*y];}};
  };
- const reference={frame:{id:'reference',center:[size/2,size/2],northAzimuthDegrees:0},image:make(0,0,1),sha256:'reference'},
-  targets=[{filter:'test',frame:{id:'shifted',center:[size/2,size/2],northAzimuthDegrees:0},image:make(dx,dy,1.7),sha256:'shifted'}];
+ const reference={frame:{id:'reference',center:[size/2,size/2],northAzimuthDegrees:0},image:make(0,0,1)},
+  targets=[{filter:'test',frame:{id:'shifted',center:[size/2,size/2],northAzimuthDegrees:0},image:make(dx,dy,1.7)}];
  const job={mesh,camera,reference,targets,checkOnly:false};
  const narrow=alignCameraBands(job);assert.equal(narrow.searchRadiusPixels,9);assert.equal(narrow.reports[0].accepted,false);
  const wide=alignCameraBands({...job,searchRadiusPixels:24}),r=wide.reports[0];

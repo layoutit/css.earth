@@ -1,10 +1,6 @@
 {
   "schema": "cssearth-aegaeon-source-review@1",
   "qualifiedSurface": false,
-  "inputManifestSha256": "d39354f7527dad011d9a6160b98e48b2234a0009686341a905b790baf7490ba1",
-  "generatorSha256": "160ba2b523a9c66331ce6f49c439c3bc31f1abfe122fa7162642895bb6dc1f4a",
-  "decoderSha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262",
-  "outputSha256": "822f268a33e8d11222501aa872bfd620e48fb13c23696c32a63161450b5c430a",
   "display": {
     "gain": 20,
     "offset": 0,
@@ -20,8 +16,6 @@
       "imageMidTime": "2010-027T05:44:42.141",
       "filter": "CL1,CL2",
       "imageBytes": 4202496,
-      "imageSha256": "5eb13792ee88676c4f3120e33a48ac11737ad3e3ce0e601333c7e2654f47ce4c",
-      "labelSha256": "edf6e217fb569eb4e8ffdadcbeece3bb76decda6d249081a8b8b1577fbf21176",
       "dimensions": [
         1024,
         1024
@@ -44,8 +38,6 @@
       "imageMidTime": "2010-027T05:46:28.180",
       "filter": "CL1,CL2",
       "imageBytes": 4202496,
-      "imageSha256": "019f2a49f817524d5cf96c0895b1d5a811cf3c33039ed55983916279fc21b7dc",
-      "labelSha256": "be938b10c5de7a34e25f1eb0df4a4eb6ee01abceca5ed0582f4c3074785308ae",
       "dimensions": [
         1024,
         1024

@@ -1,13 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
 import { defaultOverlayTone, overlayToneSample, updateOverlayTone } from '../../features/legacy-viewer/overlay-tone.ts';
 import { createTonePreparer, parseTonePreparationRequest, removalRgba, toneRgba } from './tone.ts';
-const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 
 test('tone formula applies ordered levels, gamma, gain; photograph alpha and density RGB stay unchanged', () => {
   const tone = updateOverlayTone(defaultOverlayTone(), { black: .1, white: .9, gamma: 2, brightness: 1.2 });
@@ -28,9 +26,9 @@ test('tone formula applies ordered levels, gamma, gain; photograph alpha and den
 test('tone requests reject arbitrary paths, unrecognized/missing fields and non-finite or invalid levels', () => {
   const valid = { subjectId: 'lmc-particles', target: 'image', imageId: 'smash-original', tone: defaultOverlayTone() };
   assert.deepEqual(parseTonePreparationRequest(valid), valid);
-  const removalResultId = `${'a'.repeat(64)}.${'b'.repeat(64)}`;
+  const removalResultId = 'smash-original';
   assert.equal(parseTonePreparationRequest({ ...valid, removalResultId }).removalResultId, removalResultId);
-  for (const invalid of ['', '../result', 'a'.repeat(64), `${removalResultId}/diffuse.png`])
+  for (const invalid of ['', '../result', 'Upper-Case', `${removalResultId}/diffuse.png`])
     assert.throws(() => parseTonePreparationRequest({ ...valid, removalResultId: invalid }), TypeError);
   assert.throws(() => parseTonePreparationRequest({ subjectId: 'test', target: 'density', tone: valid.tone, removalResultId }), TypeError);
   for (const bad of [{ ...valid, path: '/etc/passwd' }, { ...valid, subjectId: '../x' }, { ...valid, imageId: '../x' },
@@ -65,23 +63,23 @@ async function fixture() {
   const densityPath = 'labs/nebula/models/density/prepared/slices/z/00.png';
   await write(imagePath, image); await write(densityPath, image);
   await write('labs/nebula/packages/lab/src/state/subjects.json', JSON.stringify([{ id: 'test', density: { directory: 'labs/nebula/models/density', overlays: 'labs/nebula/models/overlays/overlays.json' } }]));
-  await write('labs/nebula/models/overlays/overlays.json', JSON.stringify({ overlays: [{ id: 'test-photo', texturePath: 'prepared/image.png', widthPx: 2, heightPx: 1, sha256: hash(image) }] }));
-  const manifest = Buffer.from(JSON.stringify({ data: { resources: [{ path: 'slices/z/00.png', sha256: hash(image), width: 2, height: 1 }] } }));
+  await write('labs/nebula/models/overlays/overlays.json', JSON.stringify({ overlays: [{ id: 'test-photo', texturePath: 'prepared/image.png', widthPx: 2, heightPx: 1 }] }));
+  const manifest = Buffer.from(JSON.stringify({ data: { resources: [{ path: 'slices/z/00.png', width: 2, height: 1 }] } }));
   await write('labs/nebula/models/density/prepared/volume.json', manifest);
-  await write('labs/nebula/models/density/object.json', JSON.stringify({ prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json', sha256: hash(manifest) } }));
+  await write('labs/nebula/models/density/object.json', JSON.stringify({ prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } }));
   return { root, image, rgba, imagePath, densityPath, write };
 }
 test('saved reconstructions retain inherited Alignment image and density tone targets', async () => {
   const f = await fixture();
   try {
-    const resultId = 'a'.repeat(64), subjectId = `reconstruction-${resultId}`;
+    const resultId = 'test-test-photo', subjectId = `reconstruction-${resultId}`;
     const directory = `.local/nebula-lab/reconstructions/${resultId}`;
     const subject = { id: subjectId, directory, density: {
       directory: 'labs/nebula/models/density', overlays: 'labs/nebula/models/overlays/overlays.json' } };
     const manifest = Buffer.from(JSON.stringify({ data: {} }));
     await f.write(`${directory}/volume.json`, manifest);
     await f.write(`${directory}/object.json`, JSON.stringify({ id: subjectId, type: 'density-volume',
-      prepared: { url: 'volume.json', sha256: hash(manifest) } }));
+      prepared: { url: 'volume.json' } }));
     await f.write(`${directory}/result.json`, JSON.stringify({ schema: 'cssearth-nebula-reconstruction@1', resultId, subject }));
     const prepare = createTonePreparer(f.root), tone = { ...defaultOverlayTone(), brightness: .5 };
     for (const target of ['image', 'density'] as const) {
@@ -116,7 +114,7 @@ test('local preparation writes verifiable pixels, deduplicates concurrent cache 
     await assert.rejects(prepare({ ...request, subjectId: 'unknown' }), /no prepared neutral/);
     await assert.rejects(prepare({ ...request, imageId: 'unknown' }), /Unknown prepared/);
     await f.write(f.imagePath, Buffer.from('changed'));
-    await assert.rejects(prepare(request), /unsupported image format|hash differs/);
+    await assert.rejects(prepare(request), /unsupported image format/);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 
@@ -127,8 +125,8 @@ test('image tone targets the selected prepared layer and rejects a mismatched or
     const layer = await sharp({ create: { width: 2, height: 1, channels: 4, background: '#123456' } }).png().toBuffer();
     await f.write(layerPath, layer);
     const metadata = { schema: 'cssearth-nebula-overlay-variants@1', variants: [{ imageId: 'test-photo',
-      originalTextureSha256: hash(f.image), sourceSha256: hash(f.image), receiptPath: 'receipt.json',
-      layers: [{ id: 'diffuse', label: 'Diffuse trial', texturePath: layerPath, widthPx: 2, heightPx: 1, sha256: hash(layer) }] }] };
+      receiptPath: 'receipt.json',
+      layers: [{ id: 'diffuse', label: 'Diffuse trial', texturePath: layerPath, widthPx: 2, heightPx: 1 }] }] };
     const metadataPath = 'labs/nebula/models/lmc/star-separation/variants.json';
     await f.write(metadataPath, JSON.stringify(metadata));
     const prepare = createTonePreparer(f.root), request = { subjectId: 'test', target: 'image', imageId: 'test-photo',
@@ -151,11 +149,10 @@ test('strength uses the selected full-size grid, preserves endpoints, scales res
     const stars = await sharp(starPixels, { raw: { width: 2, height: 1, channels: 4 } }).png().toBuffer();
     const diffusePath = 'labs/nebula/models/separation/diffuse.png', starsPath = 'labs/nebula/models/separation/stars.png';
     await f.write(f.imagePath, original); await f.write(diffusePath, diffuse); await f.write(starsPath, stars);
-    const catalogue = { overlays: [{ id: 'test-photo', texturePath: 'prepared/image.png', widthPx: 4, heightPx: 2, sha256: hash(original) }] };
-    const variants = { schema: 'cssearth-nebula-overlay-variants@1', variants: [{ imageId: 'test-photo', originalTextureSha256: hash(original),
-      sourceSha256: hash(original), receiptPath: 'receipt.json', layers: [
-        { id: 'diffuse', label: 'Diffuse', texturePath: diffusePath, widthPx: 2, heightPx: 1, sha256: hash(diffuse) },
-        { id: 'stars', label: 'Stars', texturePath: starsPath, widthPx: 2, heightPx: 1, sha256: hash(stars) }] }] };
+    const catalogue = { overlays: [{ id: 'test-photo', texturePath: 'prepared/image.png', widthPx: 4, heightPx: 2 }] };
+    const variants = { schema: 'cssearth-nebula-overlay-variants@1', variants: [{ imageId: 'test-photo', receiptPath: 'receipt.json', layers: [
+        { id: 'diffuse', label: 'Diffuse', texturePath: diffusePath, widthPx: 2, heightPx: 1 },
+        { id: 'stars', label: 'Stars', texturePath: starsPath, widthPx: 2, heightPx: 1 }] }] };
     const saveMetadata = async () => { await f.write('labs/nebula/models/overlays/overlays.json', JSON.stringify(catalogue));
       await f.write('labs/nebula/models/lmc/star-separation/variants.json', JSON.stringify(variants)); };
     await saveMetadata();
@@ -180,10 +177,10 @@ test('strength uses the selected full-size grid, preserves endpoints, scales res
     assert.equal(residual.sourcePath, starsPath);
     assert.deepEqual([...await pixels(residual.url)], [...toneRgba(reduced, 'image', tone)]);
     const changed = await sharp({ create: { width: 4, height: 2, channels: 4, background: '#aa9988' } }).png().toBuffer();
-    await f.write(f.imagePath, changed); catalogue.overlays[0].sha256 = hash(changed); variants.variants[0].originalTextureSha256 = hash(changed);
+    await f.write(f.imagePath, changed); 
     await saveMetadata();
     const newZero = (await prepare({ ...request, removalStrength: 0 })).resources[0];
-    assert.notEqual(newZero.url, zero.url, 'cache key binds the current original source hash');
+    assert.notEqual(newZero.url, zero.url, 'cache key follows the replaced original file');
     assert.notDeepEqual(await pixels(newZero.url), resized);
     assert.deepEqual(await readFile(join(f.root, diffusePath)), diffuse, 'prepared endpoints remain untouched');
     assert.ok((await readdir(join(f.root, '.local/nebula-lab/tone-cache'))).length <= 2);

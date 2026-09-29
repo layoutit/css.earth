@@ -32,10 +32,10 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '@cssearth/telescope/node';
-import { assertInputPins, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
-import { readProgram, writeProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
-import { nacoToolchainDescriptor, nacoToolchainPath } from './toolchain.mts';
+import { readProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
+import { nacoToolchainPath } from './toolchain.mts';
 
 /** Virtual memory a recipe may use, in KiB. A NACO jitter run over one 20-frame Ks template peaked at 0.73 GB, far below
  * this; the ceiling exists so a cube sequence that would not cannot take the machine with it. */
@@ -217,16 +217,11 @@ export function nodSides(offsets: readonly number[]) {
 
 export const TELESCOPE = 'VLT/NACO';
 
-/** Every frame a run consumes, pinned as the file the recipes read, refusing any that is not what the program pins.
+/** Every frame a run consumes, pinned as the file the recipes read, refusing any that is missing.
  *
- * A program records two numbers for a raw frame: the byte count the data portal serves, which is of the compressed stream it
- * delivers, and, once the frame has been downloaded and expanded, the sha256 of the FITS file left on disk. The recipes
- * read that file, so its digest is the pin, and the pin carries that same file's byte count because the program states none
- * for it. A frame the program has not digested is one this run downloaded for the first time: nothing states what it should
- * be, so what the run measured is what it records and what every later run is then checked against.
- *
- * This runs before any recipe does and is the only check of the frames: an altered file that is still a valid FITS is
- * refused here rather than reduced. */
+ * A program records the byte count the data portal serves, which is of the compressed stream it delivers, not of the FITS file
+ * left on disk once the frame is expanded. The recipes read that file, so the pin carries that file's own byte count, measured
+ * here before any recipe runs. */
 export async function pinnedInputs(frames: readonly NacoFrame[], rawDirectory: string): Promise<readonly ProductInput[]> {
   const file = (frame: NacoFrame) => resolve(rawDirectory, `${frame.dpId}.fits`);
   const inputs: ProductInput[] = [];
@@ -235,12 +230,9 @@ export async function pinnedInputs(frames: readonly NacoFrame[], rawDirectory: s
     if (!found) throw new Error(`${frame.dpId} is not in ${rawDirectory}: a run consumes the frames it downloaded.`);
     inputs.push({ role: frame.tag, identity: frame.dpId, bytes: found.bytes });
   }
-  await assertInputPins(inputs, new Map(frames.map(frame => [frame.dpId, file(frame)])));
+  await assertInputs(inputs, new Map(frames.map(frame => [frame.dpId, file(frame)])));
   return inputs;
 }
-
-/** The program with the digests a run measured. A frame the program had pinned is unchanged, because the run was refused
- * unless the file on disk was that very frame; a frame it had not is pinned by the run that first downloaded it. */
 
 export interface ProductFacts { readonly software: readonly ProductSoftware[]; readonly units?: string; readonly conventions: Readonly<Record<string, string>> }
 
@@ -277,8 +269,7 @@ export async function productFacts(product: string, kit: NacoProgram['pipeline']
  * product for a re-run to agree with and nothing here can be archive-agreement. */
 async function writeReductionRecord(stage: string, inputs: readonly ProductInput[], parameters: Readonly<Record<string, unknown>>,
   outputs: readonly { readonly file: string; readonly facts: ProductFacts }[]): Promise<ProductRecord> {
-  const { digest } = await nacoToolchainDescriptor();
-  const run: ProductRun = { telescope: TELESCOPE, stage, inputs, parameters, software: outputs[0]!.facts.software, toolchainDigest: digest };
+  const run: ProductRun = { telescope: TELESCOPE, stage, inputs, parameters, software: outputs[0]!.facts.software };
   return writeProductRecord(productRecordPath(outputs[0]!.file), run,
     outputs.map(({ file, facts }) => ({ path: basename(file), file, ...(facts.units === undefined ? {} : { units: facts.units }), conventions: facts.conventions })));
 }
@@ -502,9 +493,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const program = await readProgram(id);
   const selection = templateIndex >= 0 ? rest[templateIndex + 1] : halfIndex >= 0 ? rest[halfIndex + 1] : undefined;
   const result = await reduceProgram(program, directory, raw, selection);
-  // The frames were checked against the program's pins inside the reduction, before any recipe ran; what is left to do here
-  // is pin the ones the program had not pinned yet, and the digests for that come from the records the run itself wrote.
-  const records = await Promise.all([result.combined, ...(result.standardCombined ? [result.standardCombined] : [])]
+  // The frames were checked inside the reduction, before any recipe ran; each product has the record the run wrote beside it.
+  await Promise.all([result.combined, ...(result.standardCombined ? [result.standardCombined] : [])]
     .map(async product => {
       const record = await readProductRecord(productRecordPath(product));
       if (!record) throw new Error(`${product} has no product record; the run that makes a product writes one beside it.`);

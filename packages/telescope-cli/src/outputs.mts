@@ -1,5 +1,5 @@
 /** A small final stage: verified delivery -> explicit output selection -> pinned figure and numeric values. */
-import { readFile, mkdir, mkdtemp, rename, rm, rmdir, realpath } from 'node:fs/promises';
+import { readFile, mkdir, mkdtemp, rename, rm, rmdir, realpath, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
@@ -7,7 +7,7 @@ import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { parseProductRecord } from '@cssearth/telescope';
-import { sha256, sha256File } from '@cssearth/core/node';
+import { VERSION } from './help.mts';
 import { sciencePackage } from '@cssearth/telescope/node';
 import { plotProduct } from '@cssearth/telescope/node';
 import { parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
@@ -58,13 +58,13 @@ export async function delivery(resultPath:string){
     :parseSourceQuestion(record.sourceQuestion,targetFromContext);
   if(context.kind==='scientific-request'&&JSON.stringify(sourceQuestion)!==JSON.stringify(sourceQuestionFromRequest(context.request)))
     throw new Error('Delivery source question differs from its scientific request');
-  // A delivery binds every copied file by path, size and digest; the delivery record itself is hashed below.
-  const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw),sha256=requireString(f.sha256,'delivery SHA-256');if(!/^[a-f0-9]{64}$/u.test(sha256))throw new TypeError('Invalid delivery SHA-256');return {path:requireString(f.path),bytes:requireFiniteNumber(f.bytes),sha256};});
-  if(!files.length||new Set(files.map(f=>f.path)).size!==files.length)throw new Error('Delivery files must be unique and pinned');
+  // A delivery binds every copied file by path and size.
+  const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw),path=requireString(f.path,'delivery file path');if(f.sha256!==undefined)throw new TypeError(`${resultPath}: delivery file ${path} has a sha256 field; deliveries carry no content digest.`);return {path,bytes:requireFiniteNumber(f.bytes,`delivery file ${path} bytes`)};});
+  if(!files.length||new Set(files.map(f=>f.path)).size!==files.length)throw new Error(`${resultPath}: delivery files must be listed, each once`);
   const realDirectory=await realpath(directory);
   for(const expected of files){
     const file=beneath(directory,expected.path);beneath(realDirectory,relative(realDirectory,await realpath(file)));
-    const actual=await sha256File(file);if(actual.bytes!==expected.bytes||actual.sha256!==expected.sha256)throw new Error(`Delivery content pin mismatch: ${expected.path}`);
+    const actual=(await stat(file)).size;if(actual!==expected.bytes)throw new Error(`Delivery file ${expected.path} is ${actual} bytes; ${resultPath} records ${expected.bytes}.`);
   }
   const productPath=requireString(record.product),product=files.find(f=>f.path===productPath);
   if(!product)throw new Error('The chosen product is absent from the delivery pins');
@@ -74,14 +74,13 @@ export async function delivery(resultPath:string){
   const outputRoot=record.outputRoot===undefined?undefined:beneath(directory,requireString(record.outputRoot));
   const outputPins=producing.outputs.map(output=>{
     const exact=outputRoot===undefined?undefined:relative(directory,beneath(outputRoot,output.path));
-    if(!output.sha256)throw new Error('Producing record has no content digest. Requalify the observation.');
-    const matches=files.filter(f=>f.bytes===output.bytes&&f.sha256===output.sha256&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
+    const matches=files.filter(f=>f.bytes===output.bytes&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
     if(matches.length!==1)throw new Error('Producing output is absent or ambiguous in delivery');return matches[0];
   });
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');
   const facts=requireRecord(record.facts);if(facts.verified!==true)throw new Error('The delivery is not verified');
   const target=requireString(facts.target);if(target!==contextTarget(context))throw new Error('Delivery facts disagree with source context target');
-  return {path,directory,record,context,sourceQuestion,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target,pin:{sha256:sha256(bytes),bytes:bytes.length}};
+  return {path,directory,record,context,sourceQuestion,files,product,producing,telescope:producing.telescope,file:beneath(directory,productPath),target,recordBytes:bytes,pin:{bytes:bytes.length}};
 }
 function choices(structures:readonly NativeMetadata[],sourceOnly=false):OutputChoice[]{
   const result:OutputChoice[]=[];
@@ -152,10 +151,8 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     if(found.length!==1||found[0].extraction===undefined)throw new Error('Selected HDU is not an unambiguous science array');
     const data=requireRecord(found[0].extraction);
     const plotted=await plotProduct(staging,d.target,data,input.file,{...request});
-    const fresh=await delivery(resultPath);if(fresh.pin.sha256!==d.pin.sha256)throw new Error('Delivery changed while producing output');
-    const softwareFiles=['outputs.mts','native-figure.mts','native-metadata.mts','../../../packages/telescope/src/node/pds-client.ts','../../../packages/bake/src/objects/raster/pds/isis3-raster.ts','../../../packages/telescope/src/node/science.ts','../../../packages/telescope/src/node/plots.ts','../../../packages/telescope/src/node/cube-outputs.ts','../../../packages/telescope/toolchains/requirements.lock'];
-    const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
-    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
+    const fresh=await delivery(resultPath);if(!fresh.recordBytes.equals(d.recordBytes))throw new Error(`${resultPath} changed while producing output`);
+    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:VERSION},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});
@@ -182,25 +179,23 @@ async function exportSourceOutput(source:NonNullable<Awaited<ReturnType<typeof o
     const data=requireRecord(found[0].extraction);
     const plotted=await plotProduct(staging,label,data,file,{...request});
     const fresh=pds?await openPdsSource(source.path):await openFitsSource(source.path);
-    if(!fresh||fresh.source.pin.sha256!==source.source.pin.sha256)throw new Error('Source changed while producing output');
-    const softwareFiles=['outputs.mts',pds?'pds-source.mts':'fits-source.mts',...(pds?['native-figure.mts','../../../packages/telescope/src/node/pds-client.ts']:[]),'../../../packages/telescope/src/node/science.ts','../../../packages/telescope/src/node/plots.ts','../../../packages/telescope/src/node/cube-outputs.ts','../../../packages/telescope/toolchains/requirements.lock'];
-    const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
+    if(!fresh||!fresh.source.recordBytes.equals(source.source.recordBytes))throw new Error(`${source.source.file} changed while producing output`);
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),{
       telescope:source.source.record.telescope,stage:'telescope-source-output',
       inputs:[{role:'archive source record',identity:source.source.file,...source.source.pin},
-        ...(pds?source.files.map(member=>({role:'original PDS member',identity:resolve(source.source.root,member.path),bytes:member.bytes,sha256:member.sha256})):
-          [{role:'FITS source',identity:source.file,bytes:source.pin.bytes,sha256:source.pin.sha256},
+        ...(pds?source.files.map(member=>({role:'original PDS member',identity:resolve(source.source.root,member.path),bytes:member.bytes})):
+          [{role:'FITS source',identity:source.file,bytes:source.pin.bytes},
             ...Object.entries(source.companions??{}).map(([role,path])=>{
               const output=source.source.record.outputs.find(entry=>resolve(source.source.root,entry.path)===path);
-              if(!output?.sha256)throw new Error(`${role} FITS companion has no source pin`);
-              return {role:`FITS ${role}`,identity:path,bytes:output.bytes,sha256:output.sha256};
+              if(!output)throw new Error(`${role} FITS companion ${path} is not an output of ${source.source.file}`);
+              return {role:`FITS ${role}`,identity:path,bytes:output.bytes};
             })])],
       parameters:{selection:request,label,status:'unresolved',limitations:source.limitations,...(prepared?.native?{native:prepared.native}:{}),
         definition:data.definition??(request.kind==='image'?'Native sampled image plane; no registered surface map.':'Selected samples from a pinned source.'),
         measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},
         metadata:parseNativeMetadata(found[0]),software:plotted},
-      software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...(prepared?.native?.packages?Object.entries(prepared.native.packages).map(([name,version])=>({name,version})):[])]
+      software:[{name:'cssEarth telescope outputs',version:VERSION},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...(prepared?.native?.packages?Object.entries(prepared.native.packages).map(([name,version])=>({name,version})):[])]
     },names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});
     if(pds){await rm(resolve(staging,'source'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});}

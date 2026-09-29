@@ -15,13 +15,12 @@
  *   node packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts
  *
  * writes both files under .local/betelgeuse-shell/observations/, beside the package's other downloads, and fails unless
- * each matches the pin the author reads. Pass --check to compare without writing.
+ * each has the length the author declares. Pass --check to compare without writing.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu } from '@cssearth/fits';
-import { sha256 } from '@cssearth/core/node';
 import { ALMA_SIO, DOWNLOADS_BASE } from './author.mts';
 
 /** Where the two archive downloads are kept locally; like every download they stay out of git. */
@@ -148,16 +147,19 @@ if (direct) {
   const check = process.argv.includes('--check');
   const target = resolve(import.meta.dirname, '../../../..', DOWNLOADS_BASE);
   const jobs = [
-    { download: ALMA_DOWNLOADS.cube, url: ALMA_SIO.cutout, reduce: reduceAlmaSio, pin: ALMA_SIO },
-    { download: ALMA_DOWNLOADS.continuum, url: ALMA_SIO.continuum.url, reduce: reduceAlmaContinuum, pin: ALMA_SIO.continuum },
+    { download: ALMA_DOWNLOADS.cube, url: ALMA_SIO.cutout, reduce: reduceAlmaSio, declared: ALMA_SIO },
+    { download: ALMA_DOWNLOADS.continuum, url: ALMA_SIO.continuum.url, reduce: reduceAlmaContinuum, declared: ALMA_SIO.continuum },
   ];
   for (const job of jobs) {
     const path = resolve(job.download);
     const bytes = await readFile(path).catch(() => { throw new Error(`No ALMA download at ${path}. Fetch it from ${job.url}`); });
-    const reduced = job.reduce(bytes), digest = sha256(reduced);
-    if (digest !== job.pin.sha256 || reduced.length !== job.pin.bytes)
-      throw new Error(`${job.pin.path} reduces to ${reduced.length} bytes, sha256 ${digest}; the author pins ${job.pin.bytes} bytes, ${job.pin.sha256}.`);
-    if (!check) await writeFile(resolve(target, job.pin.path), reduced);
-    console.log(`${check ? 'CHECKED' : 'WROTE'} ${job.pin.path}: ${reduced.length} bytes, sha256 ${digest}`);
+    const reduced = job.reduce(bytes), output = resolve(target, job.declared.path);
+    if (reduced.length !== job.declared.bytes)
+      throw new Error(`betelgeuse-shell: ${job.declared.path} reduces to ${reduced.length} bytes; the author declares ${job.declared.bytes}.`);
+    if (check) {
+      const existing = await readFile(output).catch(() => null);
+      if (!existing?.equals(reduced)) throw new Error(`betelgeuse-shell: ${output} differs from the reduction of ${path}.`);
+    } else await writeFile(output, reduced);
+    console.log(`${check ? 'CHECKED' : 'WROTE'} ${job.declared.path}: ${reduced.length} bytes`);
   }
 }

@@ -1,5 +1,5 @@
 from pathlib import Path
-import json,hashlib,math,xml.etree.ElementTree as E
+import json,math,xml.etree.ElementTree as E
 import numpy as np
 import rasterio
 from scipy.ndimage import map_coordinates,gaussian_filter
@@ -48,5 +48,5 @@ for i,f in enumerate(features):
  for j,img in enumerate(pair):thumbs.paste(img.resize((100,100),Image.Resampling.NEAREST),(baseX+j*104,baseY))
  draw.text((baseX,baseY+100),f['name']+' | plate / native map',fill=(255,255,255))
 thumbs.save(p/'agent-feature-patches.png')
-report={'status':'fixed-camera diagnostic; human visual review pending','parametersUnchanged':parameters,'fitSha256':hashlib.sha256((p/'registration-exploratory.json').read_bytes()).hexdigest(),'sourcePhotoSha256':hashlib.sha256((p/'PIA03456-usgs.png').read_bytes()).hexdigest(),'gazetteerKmzSha256':hashlib.sha256((p/'agent-CALLISTO-nomenclature.kmz').read_bytes()).hexdigest(),'mapMetadata':meta,'method':'Original unblurred 15138×7569 uint8 map sampled bilinearly at its exact projected pixel centers. No model, roll, radius, center or holdout refit. Local offsets are diagnostic only and never alter the camera. High-pass NCC is an additional diagnostic, not a source-image transformation.','quadrants':quad,'features':features,'outputHashes':[{'path':str(p/n),'sha256':hashlib.sha256((p/n).read_bytes()).hexdigest()}for n in ['agent-source-unmodified.png','agent-native-predicted.png','agent-named-fixed-camera.png','agent-feature-patches.png']]}
+report={'status':'fixed-camera diagnostic; human visual review pending','parametersUnchanged':parameters,'fit':'registration-exploratory.json','sourcePhoto':'PIA03456-usgs.png','gazetteerKmz':'agent-CALLISTO-nomenclature.kmz','mapMetadata':meta,'method':'Original unblurred 15138×7569 uint8 map sampled bilinearly at its exact projected pixel centers. No model, roll, radius, center or holdout refit. Local offsets are diagnostic only and never alter the camera. High-pass NCC is an additional diagnostic, not a source-image transformation.','quadrants':quad,'features':features,'outputs':[{'path':str(p/n),'bytes':(p/n).stat().st_size}for n in ['agent-source-unmodified.png','agent-native-predicted.png','agent-named-fixed-camera.png','agent-feature-patches.png']]}
 (p/'agent-fixed-camera-review.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'quadrants':quad,'features':features},indent=2))

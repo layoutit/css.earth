@@ -80,7 +80,7 @@ Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepa
   ice and unavailable imagery remain gaps; the display does not reconstruct
   continuous temperature measurements from RGB.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 - The limb law is a Minnaert fit to whole-disc EPIC frames, clouds included; bins scatter 18–50% about it because clouds move, and a flattened average stands in for every scene. It applies to every lens, including the cloud-free map. The overlay has one colour and alpha per pixel, exact for the map's displayed mean colour. The night-lights lens takes no lighting or halo, since city light is emitted.
 
@@ -418,7 +418,7 @@ Muted core colors distinguish those schematic layers from the modeled mantle.
 
 The checked-in 520,307-byte numeric subset contains depth means, both cut planes, and the outer
 mantle shell slice. `interior/tomography.json` records the original 343,763,392-byte NetCDF's
-URL and SHA-256. Catalog and metadata snapshots retain the provider's revision, variable
+URL and byte count. Catalog and metadata snapshots retain the provider's revision, variable
 definitions and citations.
 
 Normal preparation uses this pinned subset, and does not need Python or the complete volume.
@@ -469,7 +469,7 @@ python packages/bake/src/objects/layers/paged-ellipsoid/extract-tomography.py \
 node site/build/prepare/prepare-authored.ts earth --write
 ```
 
-The extractor verifies the upstream SHA-256 and source axes before reading the volume. The
+The extractor verifies the upstream byte count and source axes before reading the volume. The
 checked subset allows deterministic offline JS texture preparation. The numeric tests compare
 six independently decoded NetCDF anchors, including both hemispheres and both meridians, and
 verify registration against the prepared geographic frame.

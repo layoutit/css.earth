@@ -3,21 +3,21 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/02ce9f288e4bb7b656153833c64fc41dbdfce9502c8d6780721ee680903aef6b.webp",
+      "filename": "datasets/eso0844a.webp",
       "bytes": 74642,
       "sha256": "02ce9f288e4bb7b656153833c64fc41dbdfce9502c8d6780721ee680903aef6b"
     },
     {
       "location": "public",
-      "filename": "datasets/6bcfba73ffa33a2f54c81bf3c0a291373a3c50dd13796e52d1eb03647031350c.webp",
+      "filename": "datasets/eso1119b.webp",
       "bytes": 54638,
       "sha256": "6bcfba73ffa33a2f54c81bf3c0a291373a3c50dd13796e52d1eb03647031350c"
     },
     {
       "location": "prepared",
       "filename": "delivery.json",
-      "bytes": 695,
-      "sha256": "687101c782a1a62454565ce52c3eb11e3e18fc8ad0aafff0561d4d829ae11c93"
+      "bytes": 2241,
+      "sha256": "dd99b38e13a04b5b2854a85ac2a35378f0342424b2ae61f80cdc57b76ca62a70"
     },
     {
       "location": "prepared",
@@ -370,20 +370,14 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 434333,
-      "sha256": "b085f92f948fe12274b1b20bcbc283f4b38345d5765339c68b861457ffc95d05"
+      "bytes": 428613,
+      "sha256": "54775d664d7b40e3030161d9a54c9bb974a4fd03ac45babded61862d7db37289"
     },
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 4200,
-      "sha256": "819db4dff6f8f4f561be8fb73bb9f9abbe0265eed005f07ffa860a2624fd6aff"
-    },
-    {
-      "location": "prepared",
-      "filename": "provenance.json",
-      "bytes": 73575,
-      "sha256": "f99cec8d5d4353ad38a40959d3e5474cc44f847b28163c6aaa36c4d119709fa3"
+      "bytes": 3976,
+      "sha256": "b3490471e5a12fdbc8f1d01e25968d8205be9fa020a8316885b707ce35cd32aa"
     }
   ]
 }

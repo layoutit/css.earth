@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 import {parse} from '@cssearth/core/schema';
 import {observedRecipe, type Region, type ObservationTransform, type BoundaryContinuation, type FalseColor, type PixelPresence, type UniformCoverage, type DiscBaseline, type Calibration, type BrightTail, type PolarProjection, type RasterMap, type Baseline} from './contract.ts';
@@ -300,7 +299,7 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
       else if(product.kind==='poles')raster=polarDiscAtlas(raster,product.projection);
       else if(product.kind!=='thumbnail')throw new TypeError('Unsupported observation product.');
       let pipeline=sharp(raster.data,{raw:{width:raster.width,height:raster.height,channels:raster.channels}});if(product.removeAlpha)pipeline=pipeline.removeAlpha();
-      const bytes=await pipeline.webp(product.encoding).toBuffer();assets.push({filename:product.filename,width:raster.width,height:raster.height,bytes:bytes.length,sha256:sha256(bytes),data:bytes});
+      const bytes=await pipeline.webp(product.encoding).toBuffer();assets.push({filename:product.filename,width:raster.width,height:raster.height,bytes:bytes.length,data:bytes});
     }
   }
   if(write){if(!publicDirectory)throw new TypeError('Observation output directory is required for writing.');await mkdir(publicDirectory,{recursive:true});for(const asset of assets)await writeFile(resolve(publicDirectory,asset.filename),asset.data);}

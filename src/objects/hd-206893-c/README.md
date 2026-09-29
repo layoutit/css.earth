@@ -27,4 +27,4 @@ Run of 2026-09-23 (this version):
 - The radius and temperature are model values; the planet is a point in every image.
 - No colour is measured in bands comparable with HR 8799's, and no spin axis is measured.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -25,7 +25,7 @@ Adopted diameter: **25.115 ± 0.221 km**, meaning **effective body diameter**, f
 
 The musa validation record contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
-Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are pinned by exact bytes and SHA-256 in the [input manifest](source/manifest.json). Derived source notes retain the physical sizing assumption and pole alternatives.
+Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are recorded by path and byte count in the [input manifest](source/manifest.json). Derived source notes retain the physical sizing assumption and pole alternatives.
 
 ## Known problems
 
@@ -39,7 +39,7 @@ Published alternate pole solutions remain plausible: model 505: λ=360°, β=-74
 
 The displayed phase is not propagated from the historical source epoch and does not claim exact current attitude.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

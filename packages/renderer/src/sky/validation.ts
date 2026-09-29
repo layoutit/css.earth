@@ -40,7 +40,7 @@ function validateSkyFaces(faces: unknown, resources: PreparedCssVolume['resource
       throw new TypeError('Prepared sky face basis must be orthonormal and inward-facing.');
     }
     const resource = resources.find(candidate => candidate.path === face.texturePath);
-    if (!resource || resource.width !== face.widthPx || resource.height !== face.heightPx || !integer(resource.bytes) || !/^[a-f0-9]{64}$/u.test(resource.sha256)) {
+    if (!resource || resource.width !== face.widthPx || resource.height !== face.heightPx || !integer(resource.bytes)) {
       throw new TypeError('Prepared sky face must reference its exact resource metadata.');
     }
     const style = record(face.style, ['width', 'height', 'transform', 'backgroundSize', 'backgroundPosition'], 'sky face style');

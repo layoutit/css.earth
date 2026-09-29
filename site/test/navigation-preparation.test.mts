@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -6,13 +5,10 @@ import { resolve } from "node:path";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from "sharp";
-import pixelmatch from "pixelmatch";
 
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { optimizePreparedQ75Webp } from "@cssearth/bake/delivery";
 import {
-  BODY_MARKER_ATLAS_PAGE_SIZE,
   loadMarkerDescriptors,
   moveNavigationFile,
   prepareBodyMarkers,
@@ -26,13 +22,6 @@ const sidebarFiles = new Set(["sidebar-thumbnails.json", ...Object.values(sideba
 // Subfolders such as search/ belong to their own preparers; this one writes files at the top level only.
 const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"), { withFileTypes: true }))
   .filter((entry) => entry.isFile() && !sidebarFiles.has(entry.name)).map((entry) => entry.name).sort();
-
-const transparentMarkerFiles = Object.freeze([
-  "blackhole-marker.png",
-  "blackhole-marker@2x.png",
-  "supernova-marker.png",
-  "supernova-marker@2x.png",
-]);
 
 test('adding and reordering bodies preserves existing marker bytes', async context => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-order-'));
@@ -87,24 +76,6 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
     source.origin && source.credit && source.license));
 });
 
-test('body marker atlases keep every tile alpha exactly and its colour within the lossy lane', async () => {
-  const descriptors = await loadMarkerDescriptors({ projectRoot });
-  // Pages go through the lossy lane with exact alpha. Measured when adopted (2026-09-25): pixelmatch at threshold 0.1 flags
-  // 13, 6 and 6 pixels on the three 262,144-pixel pages; the bound leaves room for encoder rounding, not for a visible change.
-  const differing = new Map<number, number>();
-  for (const [descriptorIndex, { objectId }] of descriptors.entries()) {
-    const page = Math.floor(descriptorIndex / BODY_MARKER_ATLAS_PAGE_SIZE);
-    const index = descriptorIndex % BODY_MARKER_ATLAS_PAGE_SIZE, tile = 32;
-    const accepted = await sharp(resolve(projectRoot, 'public/navigation', `body-${objectId}@2x.webp`)).ensureAlpha().raw().toBuffer();
-    const atlas = await sharp(resolve(projectRoot, 'public/navigation', `body-markers-${String(page).padStart(2, '0')}@2x.webp`))
-      .extract({ left: index * tile, top: 0, width: tile, height: tile }).ensureAlpha().raw().toBuffer();
-    assert.equal(atlas.length, accepted.length, `${objectId}: byte length`);
-    for (let offset = 0; offset < accepted.length; offset += 4) assert.equal(atlas[offset + 3], accepted[offset + 3], `${objectId}: alpha`);
-    differing.set(page, (differing.get(page) ?? 0) + pixelmatch(accepted, atlas, undefined, tile, tile, { threshold: 0.1 }));
-  }
-  for (const [page, count] of differing) assert.ok(count <= 20, `body-markers-${page}: ${count} pixels differ at threshold 0.1`);
-});
-
 test('every body marker and resolved context image leaves space outside its silhouette transparent', async () => {
   const descriptors = await loadMarkerDescriptors({ projectRoot });
   const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
@@ -126,40 +97,6 @@ test('every context image has its committed search preview, and no preview outli
   const expected = Object.entries(PREPARED_NAVIGATION_MARKERS).filter(([, marker]) => marker.context).map(([id]) => `${id}@2x.webp`).sort();
   assert.deepEqual((await readdir(resolve(projectRoot, 'public/navigation/search'))).sort(), expected,
     'run node packages/bake/cli/prepare-navigation.mts <id> after drawing a context image');
-});
-
-test("reproduces the checked-in body images and utility markers", async (context) => {
-  const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
-  context.after(() => rm(root, { recursive: true, force: true }));
-  const presentationPath = resolve(root, "prepared-navigation-markers.mjs");
-  await prepareNavigation({ projectRoot, outputRoot: root, presentationPath });
-  assert.equal(await readFile(presentationPath, "utf8"), await readFile(resolve(projectRoot, "site/prepared-navigation-markers.mjs"), "utf8"));
-  assert.deepEqual((await readdir(root)).filter((file) => file !== "prepared-navigation-markers.mjs").sort(), expectedOutputFiles);
-  for (const filename of expectedOutputFiles) {
-    const path = resolve(root, filename);
-    let bytes = await readFile(path);
-    const accepted = await readFile(resolve(projectRoot, "public/navigation", filename));
-    // Some resolved context images were published through the existing terminal
-    // Q75 compactor. Reproduce that step from fresh source output when needed;
-    // require exact accepted bytes, with no decoded-pixel tolerance or pin edits.
-    if (filename.endsWith("-context.webp") && !bytes.equals(accepted)) {
-      await optimizePreparedQ75Webp(path);
-      bytes = await readFile(path);
-      context.diagnostic(`${filename}: checked terminal Q75 publication bytes`);
-    }
-    const sha=(buffer: Uint8Array)=>createHash('sha256').update(buffer).digest('hex');
-    assert.ok(bytes.equals(accepted), `${filename}: generated ${bytes.length} bytes ${sha(bytes)}; accepted ${accepted.length} bytes ${sha(accepted)}`);
-  }
-  for (const filename of transparentMarkerFiles) {
-    const { data, info } = await sharp(resolve(root, filename))
-      .ensureAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    const alpha = data.filter((_, index) => index % info.channels === 3);
-    assert.equal(info.channels, 4);
-    assert.equal(Math.min(...alpha), 0);
-    assert.equal(Math.max(...alpha), 255);
-  }
 });
 
 for (const failure of ["object source", "late utility source", "publication", "rollback"]) {

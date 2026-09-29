@@ -14,7 +14,7 @@
 
 The high-sensitivity result's whole-frame normalized luminance RMSE was about 0.500, with 24.6% missing signal and 20.5% excess. The isolated central-ring trial was about 0.861 RMSE, with 85.7% missing and 1.5% excess. These scores include the entire uncalibrated image, residual stars and background. The numerically lower score rewarded broad false emission: **it is not a nebular-shape quality score**. They must not be used to select the high-sensitivity result as an improvement.
 
-Local screenshots and isolated browser-state snapshots are in `.local/nebula-lab/helix-fit-session/`. The registered wider-field source identity is `9736dd85dd142f7b3be7c320235518211e2614380c76e793e24a62706f9584d2`, its actual working raster SHA-256 is `51aae00efb42da3f66ac50c1d76c076e2c2825ed69434f89776984e747150c94`; the unchanged structure map is `1814217705a9360feb347a6fd9df6ec8b13a56e7275f4f059382af1b384aab0e`. These observations apply to the ellipse detector and shell/ring/ellipsoid field at this checkpoint, not later compiler methods.
+Local screenshots and isolated browser-state snapshots are in `.local/nebula-lab/helix-fit-session/`. The registered wider-field source, its working raster and the unchanged structure map are the ones saved with that session. These observations apply to the ellipse detector and shell/ring/ellipsoid field at this checkpoint, not later compiler methods.
 
 ## The actual limitations
 

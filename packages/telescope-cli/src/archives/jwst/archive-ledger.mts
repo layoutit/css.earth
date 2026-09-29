@@ -118,7 +118,7 @@ export async function timeSeriesVisits(nowMjd: number): Promise<TimeSeriesVisit[
 /** The schemas the three imaging stages write their reproduction receipts under. Nothing else is a receipt. */
 export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1', 'cssearth-jwst-image3-reproduction@2', 'cssearth-jwst-coron3-reproduction@1', 'cssearth-jwst-coron3-reproduction@2', 'cssearth-jwst-spec3-reproduction@1', 'cssearth-jwst-spec3-reproduction@2', 'cssearth-jwst-spec3-reproduction@3'] as const;
 /** What a receipt has to say for the band it names to count as checked: which program, band and observation it reduced, and the
- * MAST product it compared the result against, pinned by name, size and digest. */
+ * MAST product it compared the result against, pinned by name and size. */
 export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string; readonly accepted: boolean;
   readonly mast: { readonly name: string; readonly bytes: number } }
 
@@ -307,7 +307,7 @@ ${ledger.objects.map(object => `| ${object.id} | ${Object.entries(object.observa
 
 ## Receipts
 
-A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.
+A band counts as checked only when a receipt beside its program parses, states one of the imaging stages' reproduction schemas, and names that program, that band, that observation and the level-3 product the program pins, with the size of what it compared. A receipt that says anything else is reported here and proves nothing.
 
 ${receiptProblemsParagraph(ledger.receiptProblems)}
 

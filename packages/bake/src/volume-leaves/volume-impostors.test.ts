@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { test } from 'node:test';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
@@ -18,7 +17,6 @@ interface Source {
   raster?: { width: number; height: number; data: Uint8Array };
 }
 interface Fixture { volume: PreparedCssVolume; bytes: Map<string, Uint8Array> }
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 function point(axis: VolumeAxis, depth: number, u: number, v: number): [number, number, number] {
   return axis === 'x' ? [depth, u, v] : axis === 'y' ? [u, depth, v] : [u, v, depth];
 }
@@ -31,7 +29,7 @@ async function fixture(sources: readonly Source[]): Promise<Fixture> {
     const raster = source.raster ?? { width: 1, height: 1, data: Uint8Array.from(source.color) };
     const png = await sharp(raster.data, { raw: { width: raster.width, height: raster.height, channels: 4 } }).png().toBuffer();
     bytes.set(path, png);
-    resources.push({ path, sha256: hash(png), bytes: png.length, width: raster.width, height: raster.height });
+    resources.push({ path, bytes: png.length, width: raster.width, height: raster.height });
     const polygon: Polygon = {
       vertices: [point(axis, depth, u0, v1), point(axis, depth, u1, v1), point(axis, depth, u1, v0), point(axis, depth, u0, v0)],
       uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], texture: path,
@@ -92,7 +90,7 @@ test('26 pinned views use an origin-centered radius and canonical orthonormal ba
     assert(dot(view.down, up) < 0, 'Top of every PNG is the canonical camera up direction');
     const bytes = baked.written.get(view.texturePath)!;
     const metadata = baked.result.resources.find(resource => resource.path === view.texturePath)!;
-    assert.equal(metadata.sha256, hash(bytes)); assert.equal(metadata.bytes, bytes.byteLength);
+    assert.equal(metadata.bytes, bytes.byteLength);
     assert.equal(metadata.width, 256); assert.equal(metadata.height, 256);
     const decoded = await sharp(bytes).raw().toBuffer({ resolveWithObject: true });
     assert.equal(decoded.info.width, 256); assert.equal(decoded.info.height, 256); assert.equal(decoded.info.channels, 4);
@@ -168,7 +166,7 @@ test('bilinear sampling uses premultiplied alpha and actual CSS background regis
   assert(movedImage.data.some((value, p) => p % 4 === 3 && value > 0), 'Shifted source must still render');
 });
 
-test('rejects source identity errors, unsafe output collisions and unsupported projection geometry before writing', async () => {
+test('rejects undecodable sources, unsafe output collisions and unsupported projection geometry before writing', async () => {
   const input = await fixture(AXES.map(axis => ({ axis, depth: 0, color: [255, 255, 255, 100] })));
   let writes = 0;
   const options = { volume: input.volume, brightness: WHITE, prefix: 'fixture/impostors',
@@ -176,7 +174,7 @@ test('rejects source identity errors, unsafe output collisions and unsupported p
     writeResource: async () => { writes++; } };
   await assert.rejects(prepareVolumeImpostors({ ...options, prefix: '../escape' }), /safe relative/);
   await assert.rejects(prepareVolumeImpostors({ ...options, brightness: { ...WHITE, x: 2 } }), /brightness/);
-  await assert.rejects(prepareVolumeImpostors({ ...options, readResource: async () => new Uint8Array([1]) }), /identity mismatch/);
+  await assert.rejects(prepareVolumeImpostors({ ...options, readResource: async () => new Uint8Array([1]) }), /unsupported image format/);
   const source = input.volume.resources[0]!;
   await assert.rejects(prepareVolumeImpostors({ ...options, volume: { ...input.volume, resources: [...input.volume.resources,
     { ...source, path: 'fixture/impostors/view-nnn.png' }] } }), /overwrite a source/);
@@ -222,7 +220,7 @@ test('leaves that share one delivered atlas render the same views as leaves that
           backgroundPosition: `${backgroundX! - TILE_ORIGIN[index]! * perPixel}px ${backgroundY}px` } };
       }) }),
     resources: [...separate.volume.resources.filter(resource => !leaves.some(leaf => leaf.texturePath === resource.path)),
-      { path: atlasPath, sha256: hash(atlasPng), bytes: atlasPng.length, width: ATLAS_WIDTH, height: 4 }] });
+      { path: atlasPath, bytes: atlasPng.length, width: ATLAS_WIDTH, height: 4 }] });
   const atlasFixture = { volume: atlased, bytes: new Map([...separate.bytes, [atlasPath, atlasPng]]) };
   const one = await bake(separate), two = await bake(atlasFixture);
   assert.equal(two.reads.filter(path => path === atlasPath).length, 1, 'A shared atlas is decoded once.');

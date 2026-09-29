@@ -58,7 +58,7 @@ for (const [url, path] of [[source.url, source.path], [query.url, cataloguePath]
   if (!response.ok) throw new Error(`Download failed: ${response.status}`);
   await fs.writeFile(path, Buffer.from(await response.arrayBuffer()));
 }
-const result = await verifyFixedCatalogue(source.path, source.sha256, source.wcs, cataloguePath);
+const result = await verifyFixedCatalogue(source.path, source.wcs, cataloguePath);
 await fs.writeFile('.local/nebula-lab/smc-registration/catalogue/replayed-gate.json', JSON.stringify(result.receipt, null, 2));
 await fs.writeFile('.local/nebula-lab/smc-registration/catalogue/replayed-matches.json', JSON.stringify(result.matches));
 if (!result.receipt.pass) throw new Error('Fixed WCS catalogue gate failed');

@@ -1,26 +1,23 @@
 /** Accepted analytic emission and component colors: no source images, fitting, or baked pixels. */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { dirname } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { bakeCompiler, type CompilerBakeProgress, type CompilerBakeBackend, type CompiledVolumeArtifact } from '../compiler/bake.ts';
 import { readCompilerBakeResult, type CompilerBakeResult } from '../../contracts/compiler-bake.ts';
 import { createPhotometricEmission, readEnvelopeColors, type EnvelopeColors } from '../../fields/photometric-emission.ts';
 import { readRetainedEmissionField } from '../../fields/retained-emission.ts';
-import { hash as geometrySha, pinned, type Pin } from './io.ts';
+import { pinned, type Pin } from './io.ts';
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-const digest = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
 const text = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
 interface Material { sourceId: string; envelopeColors?: EnvelopeColors; components: { id: string; rgb: [number, number, number]; covered: boolean }[] }
-interface Resource { path: string; sha256: string; bytes: number; width: number; height: number }
+interface Resource { path: string; bytes: number; width: number; height: number }
 export function readCompactCompiler(value: unknown) {
   if (!record(value) || value.schema !== 'cssearth-compact-compiler@1' || !text(value.objectId) ||
-      !record(value.provenance) || !digest(value.provenance.resultSha256) || !digest(value.provenance.modelSha256) ||
-      !digest(value.provenance.methodSha256) || !Array.isArray(value.materials) || !Array.isArray(value.sources) || !Array.isArray(value.expected))
+      !record(value.provenance) || !Array.isArray(value.materials) || !Array.isArray(value.sources) || !Array.isArray(value.expected))
     throw new TypeError('Invalid compact compiler inputs.');
   const scene = readCompilerBakeResult(value.scene), field = readRetainedEmissionField(value.field);
-  if (field.identity !== scene.fieldIdentity || !digest(field.identity)) throw new TypeError('Compact field identity differs.');
+  if (field.identity !== scene.fieldIdentity) throw new TypeError(`Compact field ${field.identity} differs from the scene's field ${scene.fieldIdentity}.`);
   const componentIds = field.components.map(component => component.id);
   if (new Set(componentIds).size !== componentIds.length) throw new TypeError('Duplicate field components.');
   const materials: Material[] = value.materials.map((material: unknown) => {
@@ -44,10 +41,10 @@ export function readCompactCompiler(value: unknown) {
     if (!record(bank) || !text(bank.id) || !Array.isArray(bank.resources)) throw new TypeError('Invalid expected bank.');
     const resources: Resource[] = bank.resources.map((resource: unknown) => {
       if (!record(resource) || !text(resource.path) || !/^[a-z0-9/-]+\.png$/.test(resource.path) || resource.path.split('/').includes('..') ||
-          !digest(resource.sha256) || typeof resource.bytes !== 'number' || !Number.isSafeInteger(resource.bytes) || resource.bytes <= 0 || typeof resource.width !== 'number' || !Number.isSafeInteger(resource.width) || resource.width <= 0 ||
+          typeof resource.bytes !== 'number' || !Number.isSafeInteger(resource.bytes) || resource.bytes <= 0 || typeof resource.width !== 'number' || !Number.isSafeInteger(resource.width) || resource.width <= 0 ||
           typeof resource.height !== 'number' || !Number.isSafeInteger(resource.height) || resource.height <= 0)
         throw new TypeError('Invalid expected resource.');
-      return { path: resource.path, sha256: resource.sha256, bytes: resource.bytes, width: resource.width, height: resource.height };
+      return { path: resource.path, bytes: resource.bytes, width: resource.width, height: resource.height };
     });
     if (new Set(resources.map(r => r.path)).size !== resources.length) throw new TypeError('Duplicate expected resource.');
     return { id: bank.id, resources };
@@ -59,9 +56,6 @@ export function readCompactCompiler(value: unknown) {
   const minimumFeatureScaleArcsec = value.minimumFeatureScaleArcsec;
   if (minimumFeatureScaleArcsec !== undefined && (typeof minimumFeatureScaleArcsec !== 'number' || !Number.isFinite(minimumFeatureScaleArcsec) || minimumFeatureScaleArcsec <= 0))
     throw new TypeError('Invalid compact feature scale.');
-  // A retained field is a pinned source artifact, including the envelope. Deleting it cannot select a finite-only fallback.
-  if (createHash('sha256').update(JSON.stringify(value.field)).digest('hex') !== value.provenance.modelSha256)
-    throw new TypeError('Compact retained model hash differs.');
   return { objectId: value.objectId, field, scene, materials, sources, expected, minimumFeatureScaleArcsec };
 }
 
@@ -81,7 +75,6 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
       label: input.sources[index]!.label, sampleMaterial: field.createMaterialSampler(material.components, material.envelopeColors) })),
     stars: old.stars.map(star => ({ ...star, positionArcsec: [star.positionUnits[0] + origin[0], star.positionUnits[1] + origin[1],
       (preparedPhysical ? -star.positionUnits[2] : star.positionUnits[2]) + origin[2]] })), progress }, backend);
-  assert.equal(scene.alphaSha256, old.alphaSha256, 'Compact replay changed neutral opacity.');
   assert.deepEqual(scene.sampling, old.sampling, 'Compact replay changed sampling.');
   // Output locations change with every bake; the sprite content may not.
   const spriteContent = (sprites: typeof scene.starSprites) => sprites && { ...sprites, atlas: undefined, profile: undefined };
@@ -89,7 +82,7 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
   const banks = [{ id: 'neutral', volume: scene.neutral }, ...scene.lenses];
   for (const [index, bank] of banks.entries()) {
     const volume = backend.readVolume(JSON.parse((await pinned(root, bank.volume)).toString()));
-    assert.deepEqual(volume.resources, input.expected[index]!.resources, `Compact replay changed ${bank.id} texture bytes.`);
+    assert.deepEqual(volume.resources, input.expected[index]!.resources, `Compact replay changed ${bank.id} texture sizes or dimensions.`);
     for (const resource of volume.resources) {
       const bytes = await pinned(root, { path: `${dirname(bank.volume.path)}/${resource.path}` });
       assert.equal(bytes.length, resource.bytes);
@@ -98,5 +91,5 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
   // Preserve accepted stellar positions exactly; inverse origin arithmetic need not round-trip float bits.
   const retained: CompilerBakeResult = { ...scene, id: old.id, ...(old.volumeId ? { volumeId: old.volumeId } : {}), stars: old.stars };
   readCompilerBakeResult(retained);
-  return { id: old.id, scene: retained, sources: input.sources, objectId: input.objectId, inputSha256: geometrySha(await pinned(root, pin)) };
+  return { id: old.id, scene: retained, sources: input.sources, objectId: input.objectId };
 }

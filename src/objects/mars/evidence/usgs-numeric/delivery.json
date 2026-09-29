@@ -6,30 +6,13 @@
     "reused": 0,
     "skipped": 0,
     "files": 1500,
-    "bytes": 210933400,
-    "inventories": {
-      "moon": "e8dad4ea5481e6724b7c61fccb36525e732d72d04138b5cb858b24ed1ff523bb",
-      "venus": "38a3d667fec5c6ce3680c1d2f9fdeb3055d2f3308ba59080d793c0e99f85d48c",
-      "mercury": "595d631f45e1cda59299bccc898e131a53fd7cb772713c325cd4a79247d652b9",
-      "mars": "7088a58f57bb0d29a70d6461d5d8f0383eff57a6fda05c249965d97176c54031",
-      "pluto": "a25272505aff75b51925b49bfce64518eff9ff87eea991d41247b44d9077d754",
-      "ceres": "ed3a743612002fbd8700ea56341eb110398b351a32c876ec54eb63c06d9fd7c4",
-      "be-ceti": "7a0aa2078a23e7c7e20ab14f672cfc3b94ca350ce7979fb76fc487a7c981599e",
-      "chi1-orionis": "1f1ccbd2edab02f5f5a0e70435c9c469ba923fed051d1355c1044979b67561a8",
-      "hd-29615": "04fb0a223e64e871f1d4ee393992da33c7012ea06316fa691c271bebee3286c4",
-      "hd-35296": "f8df9d313f1d70c52836a42bd862c070c10118a24e3a89cd0dd4258b2d450759",
-      "ce-tauri": "7afdd69b314276b49f366d0ce15050c859e657ddce040dbd1cf0db52136b43e1",
-      "betelgeuse": "d30d74ebe5b1118fa0f53acbd722139da2b9c5192c35b9c83a00977ca8496519",
-      "wasp-12b": "8d99f793a7f504cfcc1fcd985402518dc0ff05aeb295d8809ec5fddfd57e558d",
-      "sun": "6902d05a2d4054bb5b756bcfcbc33cfc57ed873fdfc5f23d62d2f7d1ab7f2aa9"
-    }
+    "bytes": 210933400
   },
   "sourceFiles": [
     {
       "object": "mars",
       "path": "science/usgs/elevation.tif",
-      "bytes": 8389608,
-      "sha256": "ae531b02a6fba35b3161650532c510807308e85ace13aa26d0ec55b68b06bc0a"
+      "bytes": 8389608
     }
   ],
   "method": "Empty destination directory. Runtime installer fetched and verified every byte count and inventory digest. Acquisition restored all compact grids from source-cache with native fallback disabled; every file equals the checked local numeric input.",

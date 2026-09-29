@@ -15,8 +15,6 @@ export function parseAuthoringManifest(value:unknown) {
     documents:manifest.documents.map(entry=>Object.assign({},requireRecord(entry),entry)),
     generatedIntermediates:manifest.generatedIntermediates.map(entry=>Object.assign({},requireRecord(entry),entry))};
 }
-export const parseAuthoringDescriptor=shape({prepared:shape({sha256:text}),properties:shape({page:optional(requireRecord),worldFrame:optional(value=>value),
-  preparation:optional(shape({state:optional(text)})),recipe:shape({shape:shape({radiusKm:number}),sources:array(shape({path:text}))})})});
 const fact=shape({id:text,label:text,value:text});
 const resource=shape({label:text,role:text,description:text,href:text});
 export const parseAuthoringContent=shape({panel:shape({facts:array(fact),moreFacts:array(fact)}),

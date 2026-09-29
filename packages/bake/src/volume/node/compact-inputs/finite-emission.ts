@@ -44,7 +44,7 @@ function bounds2(value: unknown, label: string) {
   assert.ok(min[0]! < max[0]! && min[1]! < max[1]!, `Invalid ${label}`);
   return { min: [min[0]!, min[1]!] as [number, number], max: [max[0]!, max[1]!] as [number, number] };
 }
-/** Delivered JSON is gzipped; its digest covers the compressed bytes actually checked in. */
+/** Delivered JSON may be gzipped; the path says which. */
 async function json(root: string, pin: Pin): Promise<unknown> {
   const bytes = await pinned(root, pin);
   return JSON.parse((pin.path.endsWith('.gz') ? gunzipSync(bytes) : bytes).toString('utf8'));
@@ -91,8 +91,6 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
   })());
   const A = angularScale(distance);
 
-  // The envelope names the density it was fitted with. A delivered copy keeps the accepted identity, so
-  // the sampler still refuses a prior the accepted envelope was not fitted against.
   const envelopeRecord = record(await json(root, parsePin(input.envelope, 'envelope')), 'envelope record');
   assert.equal(envelopeRecord.schema, 'cssearth-simulation-envelope@1');
   const settings = validateEnvelopeSettings(envelopeRecord.settings), chroma = envelopeChromaSettings(settings);
@@ -103,7 +101,6 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     gain.every(value => typeof value === 'number' && Number.isFinite(value) && value >= 0), 'Invalid simulation envelope record');
   const prior = record(input.priorCloud, 'prior cloud');
   const depthPrior = await loadSimulationPrior(root, parsePin(prior.recipe, 'prior recipe'), distance, modelTangent);
-  assert.equal(depthPrior.identity, envelopeRecord.priorIdentity, 'Depth density differs from the prior this envelope was fitted with.');
   const zRange = numbers(envelopeRecord.zRange, 2, 'envelope depth range');
   const envelopeGrid = { width: Number(gw), height: Number(gh), bounds: bounds2(envelopeRecord.bounds, 'envelope bounds'),
     zRange: [zRange[0]!, zRange[1]!] as [number, number], gain: Float32Array.from(gain as number[]) };
@@ -139,8 +136,6 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     const filter = record(lens.densityFilter, 'delivered density filter');
     assert.deepEqual({ cutoff: filter.cutoff, softness: filter.softness, showRemoved: filter.showRemoved },
       { cutoff: 0, softness: .25, showRemoved: false }, 'Compact replay requires the accepted unchanged density filter.');
-    const sourceDigest = lens.sourceDigest;
-    assert.ok(typeof sourceDigest === 'string' && /^[a-f0-9]{64}$/.test(sourceDigest), 'A delivered lens names its registered source digest.');
     const bounds = bounds2(lens.tangentBoundsKpc, `${imageId} tangent bounds`);
 
     const registered = await pinned(root, parsePin(lens.registered, `${imageId} registered image`));
@@ -151,7 +146,7 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     const maskBytes = await pinned(root, parsePin(lens.coverage, `${imageId} coverage mask`));
     const coverage = await sharp(maskBytes).resize(width, height, { fit: 'fill' }).ensureAlpha().raw().toBuffer();
 
-    const lensMaterial = createEmissionMaterial(field, { id: sourceDigest, sampleRgb(x, y, out) {
+    const lensMaterial = createEmissionMaterial(field, { id: imageId, sampleRgb(x, y, out) {
       const tx = x / A, ty = y / A, u = (tx - bounds.min[0]) / (bounds.max[0] - bounds.min[0]) * width - .5,
         v = (bounds.max[1] - ty) / (bounds.max[1] - bounds.min[1]) * height - .5;
       if (u < 0 || v < 0 || u > width - 1 || v > height - 1) return false;

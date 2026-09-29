@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { loadTrace } from '../../performance/load-trace.mts';
-import { occupiedMs } from '../../performance/trace-brief.mts';
+import { occupiedMs } from '../../performance/trace-sources.mts';
 import { arrayOf, hasDuration, isTraceEvent, isFiniteNumber, present, recordOf } from '../../performance/trace-model.mts';
 
 const directory='output/playwright/native-drag/perf-final';
@@ -9,11 +9,11 @@ const rec=(value:unknown)=>present(recordOf(value),'record');
 const num=(value:unknown)=>{assert.ok(isFiniteNumber(value));return value;};
 const comparison=rec(JSON.parse(await readFile(`${directory}/comparison.json`,'utf8')));
 interface Phase { durationMs:number;mainTaskMs:number;styleMs:number;layoutMs:number;layoutPasses:number;paintMs:number;stylePasses:number }
-const results:{mode:string;trial:number;drag:Phase;idle:Phase;presentationP95Ms:number;droppedMarkers:number;meanPixelDifference:number;materialRowsRequested:number;sha256:string}[]=[];
+const results:{mode:string;trial:number;drag:Phase;idle:Phase;presentationP95Ms:number;droppedMarkers:number;meanPixelDifference:number;materialRowsRequested:number}[]=[];
 for(const item of present(arrayOf(comparison.results),'runs')){
  const run=rec(item);assert.ok(typeof run.mode==='string');const trial=num(run.trial),name=`${run.mode}-${trial}`;
  const brief=rec(JSON.parse(await readFile(`${directory}/${name}-analysis/agent-brief.json`,'utf8'))),selection=rec(brief.selection);
- const trace=await loadTrace(`${directory}/${name}.json.gz`);assert.equal(trace.sha256,rec(run.trace).sha256);
+ const trace=await loadTrace(`${directory}/${name}.json.gz`);
  const events=trace.events.filter(isTraceEvent);
  const measure=(phase:'drag'|'idle')=>{
   const marker=(edge:string)=>present(events.find(event=>event.name==='clock_sync'&&event.args?.sync_id===`${name}:${phase}-${edge}`),'phase marker').ts;
@@ -26,7 +26,7 @@ for(const item of present(arrayOf(comparison.results),'runs')){
  };
  results.push({mode:run.mode,trial,drag:measure('drag'),idle:measure('idle'),
   presentationP95Ms:num(rec(brief.presentation).p95Ms),droppedMarkers:num(rec(brief.pipeline).dropOrSmoothnessMarkers),
-  meanPixelDifference:num(run.meanPixelDifference),materialRowsRequested:num(run.materialRowsRequested),sha256:trace.sha256});
+  meanPixelDifference:num(run.meanPixelDifference),materialRowsRequested:num(run.materialRowsRequested)});
 }
 const summary=['native','js','solar'].map(mode=>{
  const runs=results.filter(run=>run.mode===mode);assert.equal(runs.length,3);
@@ -35,7 +35,7 @@ const summary=['native','js','solar'].map(mode=>{
  return {mode,drag:phase('drag'),idle:phase('idle'),presentationP95Ms:median(runs.map(run=>run.presentationP95Ms)),
   totalDroppedMarkers:runs.reduce((n,run)=>n+run.droppedMarkers,0)};
 });
-await writeFile(`${directory}/summary.json`,JSON.stringify({browser:comparison.browser,scope:comparison.scope,htmlSha256:comparison.htmlSha256,summary,results},null,2));
+await writeFile(`${directory}/summary.json`,JSON.stringify({browser:comparison.browser,scope:comparison.scope,summary,results},null,2));
 const labels:Record<string,string>={native:'Native resize + CSS camera near Saturn',js:'JS pointer input + same CSS camera near Saturn',solar:'Native resize + CSS camera at Solar System scale'};
 const rows=summary.map(run=>`| ${labels[run.mode]} | ${run.drag.mainTaskMs.toFixed(1)} | ${run.drag.styleMs.toFixed(1)} | ${run.drag.layoutMs.toFixed(1)} | ${run.drag.layoutPasses} | ${run.idle.styleMs.toFixed(1)} |`);
 await writeFile(`${directory}/RESULTS.md`,`# Native CSS camera: input and expression cost

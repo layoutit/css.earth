@@ -82,10 +82,8 @@ function compareWithDeposit(fitted: Awaited<ReturnType<typeof fitMap>>, deposit:
 
 test('a map fitted to HD 189733b\'s two MIRI eclipses reduced from raw reproduces Lally et al. (2025)\'s deposited map', async context => {
   const paths = [resolve(run('002'), 'ours-white.csv'), resolve(run('011'), 'ours-white.csv'), resolve(run('002'), 'author-map.json'), resolve(run('002'), 'author-white.csv'), resolve(run('011'), 'author-white.csv')];
-  if (!(await Promise.all(paths.map(path => access(path).then(() => true, () => false)))).every(Boolean)) {
-    context.skip('reduce programs hd-189733b-miri-2021-002 and -011 with packages/telescope-cli/src/archives/jwst/reduce-tso.mts to cover this');
-    return;
-  }
+  // Absent until packages/telescope-cli/src/archives/jwst/reduce-tso.mts reduces programs hd-189733b-miri-2021-002 and -011.
+  await Promise.all(paths.map(path => access(path)));
   const deposit = (JSON.parse(await readFile(paths[2]!, 'utf8')) as { fmap: number[][] }).fmap;
   const raw = await fitMap(await eclipse(paths[0]!, CLIPS[0], ['centroid_y', 'psf_width_y']), await eclipse(paths[1]!, CLIPS[1], []));
   const author = await fitMap(await eclipse(paths[3]!, CLIPS[0], ['d1', 'd2', 'd3']), await eclipse(paths[4]!, CLIPS[1], []));

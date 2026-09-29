@@ -1,8 +1,7 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 /** One reproducible optical-material experiment on an explicitly pinned existing cloud. */
-import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, rename, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
+import { readGeometryPin } from '../geometry/registered-source.ts';
 import { jointRecord, jointPath } from '../../../features/joint-fit/model.ts';
 import { readCompilerRecipe, readCompilerRequest } from '../../../features/compiler/model.ts';
 import { validateCompilerResult } from './bank-validation.ts';
@@ -51,7 +50,8 @@ export async function prepareOpticalCompositeForResult(root: string, recipePath:
   const result = await validateCompilerResult(root, value);
   const recipe = readOpticalCompositeRecipe(JSON.parse(await readFile(resolve(root, modelPath(recipePath)), 'utf8')));
   const neutralPath = `${dirname(result.scene.neutral.path)}/volume-slices.json`;
-  const neutralSlices = sourcePin({ path: neutralPath, sha256: geometrySha(await readFile(resolve(root, neutralPath))) });
+  await readFile(resolve(root, neutralPath));
+  const neutralSlices = sourcePin({ path: neutralPath });
   const sourceInputs = await restoreOpticalCompositeSources(root, recipe, signal, progress);
   const prepared = await prepareComposite(root, recipePath, false, progress, { result, neutralSlices, sourceInputs, signal });
   if (!prepared.result) throw new Error('Composite preparation produced no compiler result.');
@@ -61,15 +61,16 @@ export async function prepareOpticalCompositeForResult(root: string, recipePath:
 async function prepareComposite(root: string, recipePath: string, previewOnly: boolean,
   progress: (message: string) => void, supplied?: SuppliedCompositeBase) {
   const started = performance.now();
-  const recipeBytes = await readFile(resolve(root, modelPath(recipePath))), recipe = readOpticalCompositeRecipe(JSON.parse(recipeBytes.toString()));
+  const recipe = readOpticalCompositeRecipe(JSON.parse(await readFile(resolve(root, modelPath(recipePath)), 'utf8')));
   const base = supplied?.result ?? await validateCompilerResult(root, JSON.parse((await readGeometryPin(root, recipe.baseResult)).toString()));
   const neutralSlices = supplied?.neutralSlices ?? recipe.neutralSlices;
   if (base.sources.some(s => s.id === recipe.id)) throw new TypeError('Composite identity already exists in the retained cloud.');
   const previous: unknown = JSON.parse((await readGeometryPin(root, base.method)).toString());
   if (!jointRecord(previous)) throw new TypeError('Missing original cloud method.');
-  const compilerBytes = await readFile(resolve(root, recipe.compilerRecipe)), compilerRecipe = readCompilerRecipe(JSON.parse(compilerBytes.toString()));
+  const compilerRecipe = readCompilerRecipe(JSON.parse(await readFile(resolve(root, recipe.compilerRecipe), 'utf8')));
   const request = readCompilerRequest(previous.request);
-  if (geometrySha(compilerBytes) !== previous.recipeSha256 || request.recipePath !== recipe.compilerRecipe || !compilerRecipe.depthRecipe)
+  if (previous.recipePath !== recipe.compilerRecipe || JSON.stringify(previous.recipe) !== JSON.stringify(compilerRecipe) ||
+      request.recipePath !== recipe.compilerRecipe || !compilerRecipe.depthRecipe)
     throw new TypeError('Composite must use the retained cloud recipe and sky frame.');
   const depth = previous.physicalDepth;
   if (!jointRecord(depth)) throw new TypeError('Composite requires the retained sky-frame snapshot.');
@@ -88,30 +89,30 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
   const activeDepth: unknown = JSON.parse(await readFile(resolve(root, compilerRecipe.depthRecipe), 'utf8'));
   if (!jointRecord(activeDepth) || !jointRecord(activeDepth.evidence) || typeof activeDepth.evidence.path !== 'string') throw new TypeError('Missing cloud evidence.');
   inputPaths.push(activeDepth.evidence.path);
-  const sourcePins = data.images.flatMap(image => [image.original, image.diffuse, image.stars].map(layer => ({ path: layer.path, sha256: layer.sha256 })));
-  const implementation = await implementationPins(root, ['labs/nebula/packages/lab/src/server/workflows/compiler/optical-composite-preparation.ts']);
+  const sourcePins = data.images.flatMap(image => [image.original, image.diffuse, image.stars].map(layer => ({ path: layer.path })));
   const inputs = await Promise.all([...new Set([...inputPaths, ...sourcePins.map(pin => pin.path),
-    ...(supplied?.sourceInputs.map(pin => pin.path) ?? []), ...(supplied ? [neutralSlices.path] : []),
-    ...implementation.map(owner => owner.path)])]
-    .map(async path => ({ path, sha256: geometrySha(await readFile(resolve(root, path))) })));
+    ...(supplied?.sourceInputs.map(pin => pin.path) ?? []), ...(supplied ? [neutralSlices.path] : [])])]
+    .map(async path => { await readFile(resolve(root, path)); return { path }; }));
   if (supplied?.sourceInputs.some(pin => !inputs.some(input => input.path === pin.path)))
     throw new Error('Composite source inputs changed during preparation.');
   const baseBytes = Buffer.from(JSON.stringify(base));
-  const id = geometrySha(JSON.stringify({ recipe: geometrySha(recipeBytes),
-    base: supplied ? { id: base.id, sha256: geometrySha(baseBytes), neutralSlices } : recipe.baseResult, inputs, fit: composite.metadata }));
-  const directory = `.local/nebula-lab/compiler/${id}`; await mkdir(resolve(root, directory), { recursive: true });
+  // Named by the compiler and composite recipes; reused only while the saved request (recipe, base cloud, inputs, fit) is unchanged.
+  const id = `${compilerRecipe.id}-${recipe.id}`, identity = { recipePath, recipe, base: supplied ? { result: base, neutralSlices } : recipe.baseResult, inputs, fit: composite.metadata };
+  const directory = `.local/nebula-lab/compiler/${id}`;
   if (supplied) {
-    try {
+    const saved = await readFile(resolve(root, directory, 'request.json'), 'utf8').catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+    if (saved !== null && JSON.stringify(JSON.parse(saved)) === JSON.stringify(identity)) try {
       const cached = await validateCompilerResult(root, JSON.parse(await readFile(resolve(root, directory, 'result.json'), 'utf8')));
-      if (cached.id !== id) throw new TypeError('Cached composite result identity differs.');
+      if (cached.id !== id) throw new TypeError(`Cached composite ${directory}/result.json names ${cached.id}, not ${id}.`);
       progress('Prepared optical composite restored.');
       return { id, directory, fit: composite.metadata, publication: undefined, result: cached };
     } catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
   }
+  await rm(resolve(root, directory), { recursive: true, force: true }); await mkdir(resolve(root, directory), { recursive: true });
   const save = async (name: string, bytes: Uint8Array) => { const path = `${directory}/${name}`;
     supplied?.signal.throwIfAborted();
     await writeFile(resolve(root, `${path}.pending`), bytes); await rename(resolve(root, `${path}.pending`), resolve(root, path));
-    return { path, sha256: geometrySha(bytes) }; };
+    return { path }; };
   progress(`Optical detail fusion: ${recipe.lowFrequencyArcsec} arcsec Gaussian scale; ${recipe.featherArcsec} arcsec edge feather; wide-field colour retained.`);
   const original = await compilerImagePanel(image, base.scene.skyBoundsArcsec, true, 2048);
   const starless = await compilerImagePanel(image, base.scene.skyBoundsArcsec, false, 2048);
@@ -128,8 +129,8 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
     onProgress: value => { supplied?.signal.throwIfAborted(); if (value.completed % 100 === 0 || value.completed === value.total) progress(`Optical material: ${value.completed}/${value.total} retained slabs`); } });
   const physicalDepth = { ...depth, recipe: await save('depth-recipe.json', await readGeometryPin(root, sourcePin(depth.recipe))),
     evidence: await save('physical-evidence.json', await readGeometryPin(root, sourcePin(depth.evidence))) };
-  const method = await save('method.json', Buffer.from(JSON.stringify({ ...previous, implementation, physicalDepth,
-    opticalComposite: { recipe: { path: recipePath, sha256: geometrySha(recipeBytes) }, sourcePins, fit: composite.metadata, material: material.receipt,
+  const method = await save('method.json', Buffer.from(JSON.stringify({ ...previous, physicalDepth,
+    opticalComposite: { recipe: { path: recipePath }, sourcePins, fit: composite.metadata, material: material.receipt,
       retainedResult: supplied ? await save('base-result.json', baseBytes) : recipe.baseResult,
       ...(supplied ? { neutralSlices, inputs, baseSelection: 'supplied-compiler-result; historical recipe cloud pins are inspection provenance only' } : {}),
       interpretation: recipe.interpretation },
@@ -146,6 +147,7 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
     lenses: [...base.scene.lenses, lens], stars }, sources: [...base.sources, { id: recipe.id, label: recipe.label, credit: image.credit,
       page: wide.page, width: original.width, height: original.height, boundsArcsec: base.scene.skyBoundsArcsec, original: originalPin, starless: starlessPin }] });
   await validateCompilerResult(root, result);
+  await save('request.json', Buffer.from(JSON.stringify(identity)));
   const resultPin = await save('result.json', Buffer.from(JSON.stringify(result)));
   if (supplied) return { id, directory, fit: composite.metadata, publication: undefined, result };
   const publication = { schema: 'cssearth-nebula-compiler-published@1', recipePath: recipe.compilerRecipe, result: resultPin, inputs };

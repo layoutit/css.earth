@@ -3,7 +3,7 @@ import { parsePreparedGalaxyCatalog } from './spatial.js';
 
 function fixture() {
   return { schema: 'cssearth-galaxy-catalog@1', frame: { referenceFrame: 'sun-icrf', epochJdTt: 1 },
-    sources: [{ id: 'release', url: 'https://example.org/catalog.csv', sha256: 'a'.repeat(64), bytes: 1, citation: 'Measured catalogue' }],
+    sources: [{ id: 'release', url: 'https://example.org/catalog.csv', bytes: 1, citation: 'Measured catalogue' }],
     objects: [{ id: 'nearby', name: 'Nearby galaxy', aliases: [], positionM: [0, 0, -3.085677581491367e17],
       skyPosition: { raDeg: 0, decDeg: -90, sourceRef: 'release' },
       distance: { valuePc: 10, sourceRef: 'release', method: 'resolved-stars' },

@@ -1,13 +1,12 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { inspectContextAvailability, prepareContextAvailability } from '../build/prepare/prepare-context-availability.mts';
 import { parseContextAvailability } from '@cssearth/objects/provenance';
 import { writeContextPackage } from '../../tests/fixtures/context-package.mts';
-import { readPreparedVolumeProvenance } from '../build/prepare/prepare-volume-provenance.mts';
 
 test('a missing bank isolates one object; restoring it admits the complete package on the next startup', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
@@ -22,7 +21,7 @@ test('a missing bank isolates one object; restoring it admits the complete packa
   assert.deepEqual((await prepareContextAvailability({ projectRoot: root, strict: true })).availability, { helix: { available: true }, lmc: { available: true } });
 });
 
-for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'prepared/provenance.json', '../../../public/scenes/helix/preview.webp']) {
+for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'source/manifest.json', '../../../public/scenes/helix/preview.webp']) {
   test(`partial package is unavailable when ${path} is missing`, async t => {
     const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
     const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
@@ -33,30 +32,28 @@ for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'prepar
   });
 }
 
-for (const path of ['prepared/lenses.json', 'prepared/slice.webp', '../../../public/scenes/helix/preview.webp']) {
-  test(`changed ${path} fails its existing identity check without disabling another package`, async t => {
-    const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
-    const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
-    await writeFile(resolve(f.directory, path), 'tampered');
-    const state = await inspectContextAvailability(root);
-    assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
-    await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /identity mismatch|not valid JSON/i);
-  });
-}
+test('a corrupt prepared bank fails to decode without disabling another package', async t => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
+  const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
+  await writeFile(resolve(f.directory, 'prepared/lenses.json'), 'tampered');
+  const state = await inspectContextAvailability(root);
+  assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
+  await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /not valid JSON/i);
+});
 
-test('invalid presentation and provenance cannot become available merely because their files exist', async t => {
+test('an invalid presentation or unbound lens source cannot become available merely because the files exist', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix');
   await writeFile(resolve(f.directory, 'prepared/presentation.json'), JSON.stringify({ ...f.presentation, objectId: 'different' }));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   await writeContextPackage(root, 'helix');
-  await writeFile(resolve(f.directory, 'prepared/provenance.json'), JSON.stringify({ ...f.provenance, objectId: 'different' }));
+  await writeFile(resolve(f.directory, 'source/manifest.json'), JSON.stringify({ ...f.manifest, inputs: [{ ...f.manifest.inputs[0], lensId: 'infrared' }] }));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   assert.throws(() => parseContextAvailability({ helix: { available: 'true' } }));
   assert.throws(() => parseContextAvailability({ helix: { available: false } }));
 });
 
-test('an asset-origin build verifies a missing local preview against its published manifest', async t => {
+test('an asset-origin build accepts a missing local preview that its inventory publishes', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix');
   await rm(resolve(root, 'public/scenes/helix/preview.webp'));
@@ -64,29 +61,9 @@ test('an asset-origin build verifies a missing local preview against its publish
   assert.deepEqual(await inspectContextAvailability(root, { publicAssets: 'manifest' }), { helix: { available: true } });
   const manifestPath = resolve(f.directory, 'inventory.json');
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-  manifest.assets[0].sha256 = '0'.repeat(64);
+  manifest.assets = manifest.assets.filter((asset: { location: string }) => asset.location !== 'public');
   await writeFile(manifestPath, JSON.stringify(manifest));
   const unavailable = (await inspectContextAvailability(root, { publicAssets: 'manifest' })).helix;
-  if (unavailable.available) assert.fail('Changed preview identity must make the package unavailable.');
+  if (unavailable.available) assert.fail('A preview the inventory does not publish must make the package unavailable.');
   assert.match(unavailable.reason, /Unpublished dataset preview/);
-});
-
-test('deploy catalogue input reads the installed prepared volume instead of regenerating it', async t => {
-  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-prepared-volume-')); t.after(() => rm(root, { recursive: true, force: true }));
-  const fixture = await writeContextPackage(root, 'helix');
-  const volumes = await readPreparedVolumeProvenance({ root });
-  assert.equal(volumes.length, 1);
-  assert.equal(volumes[0]?.id, 'helix');
-  assert.equal(volumes[0]?.name, 'helix fixture');
-  assert.deepEqual(volumes[0]?.controls.map(control => control.id), ['optical']);
-  assert.deepEqual(volumes[0]?.provenance, fixture.provenance);
-  assert.deepEqual(volumes[0]?.outputs, []);
-});
-
-test('deploy volume input ignores source-only catalogue contexts with no prepared lens metadata', async t => {
-  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-source-context-')); t.after(() => rm(root, { recursive: true, force: true }));
-  const path = resolve(root, 'src/objects/galaxy-clusters/source/presentation.json');
-  await mkdir(resolve(path, '..'), { recursive: true });
-  await writeFile(path, JSON.stringify({ provenance: { products: [] } }));
-  assert.deepEqual(await readPreparedVolumeProvenance({ root }), []);
 });

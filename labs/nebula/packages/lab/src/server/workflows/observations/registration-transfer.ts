@@ -7,7 +7,7 @@ import type { ObservationSource } from '../../../features/observations/recipe.js
 type DirectEvidence = ReturnType<typeof verifyRegistration>['evidence'];
 export type RegistrationEvidence = Omit<DirectEvidence, 'status'> & {
   status: 'verified' | 'publisher' | 'transferred'; referenceId: string;
-  bridgeMatchedStars?: number; transferEvidenceSha256?: string;
+  bridgeMatchedStars?: number;
 };
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid registration transfer evidence.');

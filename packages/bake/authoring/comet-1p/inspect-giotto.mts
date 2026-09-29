@@ -1,5 +1,4 @@
 import { surveyGiottoIndex } from './giotto-index.mts';
-import { sha256 } from '@cssearth/core/node';
 import {hasErrorCode,requireRecord,shape,text,number,array} from '@cssearth/core';
 export interface IntakeFile {file:string;url:string;bytes:number;}
 export const parseIntakeFile=shape({file:text,url:text,bytes:number});
@@ -93,7 +92,7 @@ async function main() {
   const manifest=Object.assign({},requireRecord(raw),parseIntakeManifest(raw));
   const shapeBytes = await readFile(resolve(sourceRoot, manifest.shape.path));
   await mkdir(output, { recursive: true });
-  const guideBytes = await loadIntakeSource(input, manifest.guide, args.includes('--download'));
+  await loadIntakeSource(input, manifest.guide, args.includes('--download'));
   const { default: sharp } = await import('sharp');
   const survey = args.includes('--all-clear-mdm') ? await surveyGiottoIndex(input, args.includes('--download')) : undefined;
   const selectedFrames = survey?.frames ?? manifest.frames;
@@ -141,8 +140,8 @@ async function main() {
       imageFieldKm: [frame.width * scale, frame.height * scale],
       shapeUncertaintyInImagePixels: manifest.shape.absoluteUncertaintyKm.map(v => v / scale),
       rasterBytes: frame.rasterBytes, paddingBytes: frame.paddingBytes, header: h,
-      sourceFiles: (['header', 'image', 'label'] as const).map((k, index) => ({ ...source[k], sha256: sha256(bytes[index]) })),
-      preview: { file: `${source.id}.png`, bytes: png.length, sha256: sha256(png) } });
+      sourceFiles: (['header', 'image', 'label'] as const).map(k => source[k]),
+      preview: { file: `${source.id}.png`, bytes: png.length } });
   }
   const title = '<svg width="1360" height="65"><g font-family="Arial,sans-serif" fill="#e5eaf1"><text x="0" y="25" font-size="25">Halley / Giotto encounter frames</text><text x="0" y="53" font-size="17">Native pixels enlarged 4×; per-frame contrast stretch. Blue marks invalid raster samples. No surface registration.</text></g></svg>';
   layers.push({ input: Buffer.from(title), left: 24, top: 12 });
@@ -151,16 +150,16 @@ async function main() {
   const sheet = await sharp({ create: { width: 1400, height: 168 + Math.ceil(selectedFrames.length / 4) * 410, channels: 3, background: '#141823' } }).composite(layers).png().toBuffer();
   await writeFile(resolve(output, 'contact-sheet.png'), sheet);
   const report = {
-    schema: 'cssearth-halley-giotto-intake-report@1', manifest: { path: 'src/objects/comet-1p/source/reference/giotto-hmc-intake.json', sha256: sha256(manifestBytes) },
-    archiveSurvey: survey?.report, shape: { ...manifest.shape, sha256: sha256(shapeBytes) },
-    dataset: manifest.dataset, guide: { ...manifest.guide, sha256: sha256(guideBytes) }, frames,
+    schema: 'cssearth-halley-giotto-intake-report@1', manifest: { path: 'src/objects/comet-1p/source/reference/giotto-hmc-intake.json' },
+    archiveSurvey: survey?.report, shape: { ...manifest.shape, bytes: shapeBytes.length },
+    dataset: manifest.dataset, guide: manifest.guide, frames,
     result: { status: 'UNQUALIFIED_SURFACE_LENS', projectedSurfacePixels: null,
       missingEvidence: ['Source-controlled mapping from Stooke body coordinates to the encounter camera.',
         'Validated surface coverage excluding foreground dust and unresolved limb/terminator pixels.',
         'Registration residuals and validation in an independent frame.'],
       meaning: 'Raster decoding is verified. Surface registration has not been established or attempted with a guessed attitude.' },
     distribution: manifest.distribution,
-    localContactSheet: { file: 'contact-sheet.png', bytes: sheet.length, sha256: sha256(sheet) },
+    localContactSheet: { file: 'contact-sheet.png', bytes: sheet.length },
   };
   await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(`Decoded ${frames.length} source frames; ${report.result.status}.\n${output}/contact-sheet.png\n${output}/report.json`);

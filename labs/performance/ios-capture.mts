@@ -48,7 +48,7 @@ import pixelmatch from 'pixelmatch';
 import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readSourceMap } from './trace-brief.mts';
+import { readSourceMap } from './trace-sources.mts';
 import { startLayerSampler } from './ipad-layer-sampler.mts';
 import { INSTALL_TRACE_CAUSES, STOP_TRACE_CAUSES } from './ipad-trace-causes.mts';
 import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';

@@ -44,4 +44,4 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 - **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.
 - **The limb law depends on the baselines.** Inside the first lobe, where the whole disc dominates, the power law is 1.29 ± 0.11; fitted to every baseline, where the convection cells dominate, it is 0.42. The first-lobe law is drawn ([record](source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json), refit by `image-star.test.mts`).
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

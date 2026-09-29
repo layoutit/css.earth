@@ -15,7 +15,6 @@ pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
 node labs/experiments/native-scroll/run.mts http://127.0.0.1:4349 4352
 node labs/experiments/native-resize/run.mts
-node labs/performance/trace-brief.mts <trace.json[.gz]> --url 4349
 node labs/experiments/native-scroll/perf-analysis.mts
 node labs/experiments/native-resize/saturn-analysis.mts
 ```
@@ -95,8 +94,7 @@ These are medians of three trials and browser presentation events, not counts of
 unique camera poses. The separate JS-renderer comparison below measures a
 different camera workload and must not be used to infer an end-to-end speed ratio.
 
-Those captures use the HTML SHA-256
-`2cb6edb2010975d54bd0bab7a72dc134ee477bcc16bdab72a3230a0b85cb59c4`.
+Those captures use the HTML the build wrote on that date.
 The later source cleanup reads the same 0.1px tolerance from its shared owner
 and supplies zero-angle defaults when the native input rule is unsupported.
 Neither changes the measured Chromium path's selection or rendering behavior.
@@ -234,9 +232,6 @@ containment and adds layout/style containment to the resized element.
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/compare-browser.mts
-node labs/performance/trace-brief.mts output/playwright/native-resize/matched-input/native-1.json.gz \
-  --out output/playwright/native-resize/matched-input/native-1-analysis \
-  --framesleuth /path/to/cssGraphics/scripts/frame-sleuth.mjs --url 4351
 ```
 
 Each run records the browser version, raw trace hash, endpoint dimensions and
@@ -280,9 +275,8 @@ prevent a native scrollbar corner from painting over the scene. The failed
 occluded captures are marked invalid in ignored output.
 
 The test stores its substituted module, adapter and source hashes with raw traces
-under `output/playwright/native-resize/saturn-transparent/`. Process each trace
-with `node labs/performance/trace-brief.mts`, selecting port 4349, and then run
-`node labs/experiments/native-resize/saturn-analysis.mts`. The comparison uses
+under `output/playwright/native-resize/saturn-transparent/`. Compare the traces
+with `node labs/experiments/native-resize/saturn-analysis.mts`. The comparison uses
 explicit drag markers and unions main-thread task intervals to avoid counting
 nested work twice. CPU sampling is disabled consistently across the comparison.
 

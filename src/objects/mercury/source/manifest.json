@@ -142,7 +142,7 @@
       "licenseEvidence": [
         "spectrum/LICENSE.md"
       ],
-      "acquisition": "Pinned scientific snapshot derived from the Zenodo archive whose exact URL, 197099868-byte length, MD5 ef886101f3f08eba8fe9aa9a5aa48268, and SHA-256 a36df962f0026c541b157256e08ea74e11e3b33aa3000437cb9da3f676047685 are embedded in the snapshot. The original extraction parsed all 64800 grid features and prepared a cosine-latitude-weighted global mean from the 60704 usable cells at each retained 350-1000 nm channel.",
+      "acquisition": "Pinned scientific snapshot derived from the Zenodo archive whose exact URL and 197099868-byte length are embedded in the snapshot. The original extraction parsed all 64800 grid features and prepared a cosine-latitude-weighted global mean from the 60704 usable cells at each retained 350-1000 nm channel.",
       "redistribution": "Committed 326-point derived spectrum with attribution, license, archive identity, aggregation method, and count discrepancy qualification.",
       "consumers": [
         "spectrum",
@@ -400,7 +400,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"
@@ -460,7 +460,7 @@
       "origin": "Repository-authored pin of the tectonic map snapshot: record page, version, licence evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"

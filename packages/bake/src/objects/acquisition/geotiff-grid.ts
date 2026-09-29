@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { createHash } from 'node:crypto';
 import { BaseClient, BaseResponse, fromCustomClient, fromFile, writeArrayBuffer, type GeoTIFFImage } from 'geotiff';
 
 type Pair = [number, number];
@@ -54,14 +53,14 @@ class ResponseBytes extends BaseResponse {
   override getHeader(name: string) { return this.response.headers.get(name) ?? undefined; }
   override async getData() { return this.bytes; }
 }
-/** Require bounded ranges and a stable entity throughout one conversion. Digests
- * describe the ranges actually read, never pretend to identify an unread file. */
+/** Require bounded ranges and a stable entity throughout one conversion. The
+ * report lists the ranges actually read, never pretending to identify an unread file. */
 export class GridRangeClient extends BaseClient {
   entityTag: string | null = null;
   lastModified: string | null = null;
   totalBytes: number | null = null;
   transferredBytes = 0;
-  readonly ranges: {start: number; end: number; sha256: string}[] = [];
+  readonly ranges: {start: number; end: number}[] = [];
   private transport: typeof fetch;
   private transferUrl: string;
   constructor(url: string, transport: typeof fetch = fetch) { super(url); this.transport = transport; this.transferUrl = url; }
@@ -105,7 +104,7 @@ export class GridRangeClient extends BaseClient {
         } finally { await reader.cancel(); reader.releaseLock(); }
         if (written !== view.length) throw new Error('Truncated GeoTIFF range.');
         this.transferredBytes += bytes.byteLength;
-        this.ranges.push({start, end: Number(extent[2]), sha256: createHash('sha256').update(new Uint8Array(bytes)).digest('hex')});
+        this.ranges.push({start, end: Number(extent[2])});
         return new ResponseBytes(response, bytes);
       } catch (error) { failure = error; }
     }
@@ -199,7 +198,7 @@ export async function prepareGeoTiffGrid(recipe: GeoTiffGridRecipe, options: {
       valid, missing: width * height - valid, minimum, maximum, zeroCount, maxRoundingError, maximumNativeRowBytes: nativeRowBytes,
       sourceIdentity: client ? {url: client.url, etag: client.entityTag, lastModified: client.lastModified, totalBytes: client.totalBytes,
         transferredBytes: client.transferredBytes, ranges: client.ranges.sort((a, b) => a.start - b.start)} : {localPath: options.localPath},
-      anchors: anchors.sort((a, b) => a.y - b.y || a.x - b.x), outputSha256: createHash('sha256').update(bytes).digest('hex'), outputBytes: bytes.length}};
+      anchors: anchors.sort((a, b) => a.y - b.y || a.x - b.x), outputBytes: bytes.length}};
   } finally { await tiff.close(); }
 }
 export async function readGeoTiffGridRecipe(root: string, path: string): Promise<GeoTiffGridRecipe> {

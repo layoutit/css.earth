@@ -1,12 +1,10 @@
 {
   "capturedAt": "2026-09-19T12:00:00.000Z",
   "source": "labs/nebula/models/lmc/envelope/finite-lenses.json",
-  "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
-  "receipt": "SHA-256 of this file's `lenses` array serialized with two-space indentation and a trailing newline.",
+  "receipt": "Copy of the source file's `lenses` array at capture time.",
   "lenses": [
     {
       "imageId": "horalek-widefield",
-      "resultId": "cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -18,7 +16,6 @@
     },
     {
       "imageId": "vista-infrared",
-      "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -30,7 +27,6 @@
     },
     {
       "imageId": "wise-wide-infrared",
-      "resultId": "6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,

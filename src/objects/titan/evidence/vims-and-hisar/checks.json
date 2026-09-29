@@ -8,17 +8,14 @@
   "testedFiles": {
     "source/vims/Titan_global_32ppd_2microns_v2.tif": {
       "bytes": 66402666,
-      "sha256": "95bc64b4eb835a6d0f48950a9f26a88f37c9add61b7879092ca1db085d9f8aa4",
       "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=90ee84fb-30fe-4a56-92e5-c4c3153a24b0"
     },
     "source/vims/Titan_global_32ppd_5microns_v2.tif": {
       "bytes": 66402704,
-      "sha256": "1d16a7f08648a09a235de09fb315139a0c3c18bb600f587beb0c3a38116a295d",
       "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=9f8686c4-d348-4b15-9364-bc37ec43fb27"
     },
     "source/vims/Titan_global_32ppd_ColorRatio_v2.tif": {
       "bytes": 199113224,
-      "sha256": "f7cc4e07fbdf21d0d44d9b706954730f1687e82c68c2a1aebf6f9146b83a2960",
       "origin": "https://trek.nasa.gov/titan/TrekWS/rest/cat/data/stream?uuid=7186b3f4-27a9-4219-8312-5a05808158d0"
     },
     "source/observations/titan-iss-2026.png": {

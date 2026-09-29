@@ -34,4 +34,4 @@ Run of 2026-09-23 (this version):
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The orbit's position angle on the sky is set at 0 as a display convention. The planet is a sphere; it is expected to be stretched toward its star.
 - **Not shown.** The 349-channel phase-resolved spectra, the retrieved dayside and nightside profiles, and the wind layers ESPRESSO measured (Seidel et al. 2025) ([ledger](investigations.json)).
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -59,4 +59,4 @@ The former body-specific checks below last existed in git history. Their recorde
 **Self-luminous, so no lighting.** The star is drawn by the emissive material, the same as the Sun: the leaves carry the reconstruction's own brightness and no light direction or shadow is applied. The pipeline's Sun direction, which from Betelgeuse coincides with the direction to Earth within a thousandth of a degree, only sets the display meridian and the camera's reference view.
 - **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

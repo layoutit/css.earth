@@ -36,7 +36,7 @@ const payload = (count = 1): PreparedCssVolume => ({
         [0, 50, 0, 0, 50, 0, 0, 0, 0, 0, -1, 0, -50, -50, 50 * depth, 1];
     return { id: `${axis}-${index}`, centerUnits: center, texturePath: `${axis}.png`, widthPx: 1, heightPx: 1,
       style: { width: '2px', height: '2px', transform: `matrix3d(${transform})`, backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } };
-  }) })), resources: AXES.map(axis => ({ path: `${axis}.png`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {},
+  }) })), resources: AXES.map(axis => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {},
 });
 function mount(data = payload()) {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);

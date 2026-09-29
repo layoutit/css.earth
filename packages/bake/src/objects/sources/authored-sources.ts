@@ -2,10 +2,9 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { sha256 } from '@cssearth/core/node';
 
-/** A recipe source bound to its manifest record, with the digest of the bytes that were read. */
-export interface BoundSource { readonly id: string; readonly path: string; readonly sha256: string; }
+/** A recipe source bound to its manifest record. */
+export interface BoundSource { readonly id: string; readonly path: string; }
 export interface VerifiedSource { readonly reference: BoundSource; readonly path: string; readonly value: unknown; }
 export interface AuthoredSources {
   readonly descriptor: AuthoredObjectDescriptor;
@@ -34,7 +33,7 @@ export function manifestRecord(manifest: AuthoredSources['manifest'], reference:
 export async function verifiedSource(objectDirectory: string, manifest: AuthoredSources['manifest'], reference: SourceReference): Promise<VerifiedSource> {
   manifestRecord(manifest, reference);
   const path = contained(objectDirectory, reference.path), bytes = await readFile(path);
-  const reference_ = Object.freeze({ id: reference.id, path: reference.path, sha256: sha256(bytes) });
+  const reference_ = Object.freeze({ id: reference.id, path: reference.path });
   try { return Object.freeze({ reference: reference_, path, value: JSON.parse(bytes.toString('utf8')) as unknown }); }
   catch { throw new TypeError(`Source ${reference.path} must be JSON configuration.`); }
 }

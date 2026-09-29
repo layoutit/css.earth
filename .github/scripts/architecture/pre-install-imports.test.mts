@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join } from 'node:path';
 import { test } from 'node:test';
-import { repositoryFiles } from './graph.mts';
-import { checkPreInstallImports, preInstallFindings, preInstallScripts, sparseKeeps } from './pre-install-imports.mts';
+import { preInstallFindings, preInstallScripts, sparseKeeps } from './pre-install-imports.mts';
 import { REPOSITORY_RULES } from './repository-rules.mts';
 
 const WORKFLOW = `
@@ -108,13 +107,4 @@ test('the rule is registered and reads the workflows and scripts of a checkout',
       '.github/workflows/x.yml changes: ci/affected.mts imports @cssearth/core; before install a script may import only node: built-ins and repository files',
     ]);
   } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test('this repository\'s pre-install scripts pass, and the rule finds every one of them', () => {
-  const root = resolve(import.meta.dirname, '../../..'), files = repositoryFiles(root);
-  const scripts = new Set(files.filter(path => /^\.github\/workflows\//u.test(path))
-    .flatMap(path => preInstallScripts(path, readFileSync(resolve(root, path), 'utf8'), files)).map(item => item.script));
-  for (const script of ['.github/scripts/ci/ci-affected.mts', '.github/scripts/ci/commit-message.mts', '.github/scripts/ci/scope-runtime-ownership-check.mts',
-    '.github/scripts/ci/object-scope-gate.mts', '.github/scripts/audits/check-documentation-links.mts']) assert.ok(scripts.has(script), `${script} is found as a pre-install script`);
-  assert.deepEqual(checkPreInstallImports(root, files), []);
 });

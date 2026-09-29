@@ -1,5 +1,4 @@
 /** Offline inspection products. Display units are deliberately not called radiance or gas density. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -12,13 +11,12 @@ export interface BenchmarkMethod {
   panels: BenchmarkPanel[]; metrics?: Record<string, number | string>;
 }
 export type ComponentMaps = Record<'diffuse' | 'compact' | 'elongated' | 'residual', Float32Array>;
-export const digest = (data: Uint8Array | string) => createHash('sha256').update(data).digest('hex');
-
-export async function readBenchmarkImage(path: string, expectedHash: string, width: number, height: number): Promise<BenchmarkImage> {
+/** The frozen benchmark crop, checked by its declared native dimensions. */
+export async function readBenchmarkImage(path: string, width: number, height: number): Promise<BenchmarkImage> {
   const bytes = await readFile(path);
-  if (digest(bytes) !== expectedHash) throw new Error('Benchmark source pin differs.');
   const { data: rgb, info } = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
-  if (info.width !== width || info.height !== height || info.channels !== 3) throw new Error('Benchmark source dimensions differ.');
+  if (info.width !== width || info.height !== height || info.channels !== 3)
+    throw new Error(`Benchmark source ${path} is ${info.width}×${info.height}×${info.channels}, not ${width}×${height}×3.`);
   const luminance = new Float32Array(width * height);
   for (let p = 0; p < luminance.length; p++) luminance[p] =
     (.2126 * rgb[3 * p]! + .7152 * rgb[3 * p + 1]! + .0722 * rgb[3 * p + 2]!) / 255;
@@ -87,14 +85,14 @@ export async function writeMethodProducts(options: {
   if (measured.maxError > 2e-6) throw new Error(`${id}: source reconstruction failed (${measured.maxError}).`);
   const directory = resolve(options.outputDirectory, id), cache = resolve(options.cacheDirectory, id);
   await Promise.all([mkdir(directory, { recursive: true }), mkdir(cache, { recursive: true })]);
-  const panels: BenchmarkPanel[] = [], products: Record<string, { sha256: string; bytes: number }> = {};
+  const panels: BenchmarkPanel[] = [], products: Record<string, { bytes: number }> = {};
   const names = { diffuse: 'Diffuse / background', compact: 'Compact structures', elongated: 'Filament candidates' };
   let componentPreviewClippedPixels = 0, undefinedHuePixels = 0;
   const writePanel = async (panelId: string, name: string, bytes: Buffer, description: string) => {
     const png = await sharp(bytes, { raw: { width: image.width, height: image.height, channels: 3 } }).png().toBuffer();
     const file = `${panelId}.png`;
     await writeFile(resolve(directory, file), png);
-    products[file] = { sha256: digest(png), bytes: png.length };
+    products[file] = { bytes: png.length };
     panels.push({ id: panelId, name, imagePath: `${id}/${file}`, description });
   };
   for (const key of ['diffuse', 'compact', 'elongated'] as const) {
@@ -110,13 +108,13 @@ export async function writeMethodProducts(options: {
     'Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct.');
   if (options.overlay) await writePanel('structures', 'Detected structure outlines', options.overlay,
     'Automatically detected support boundaries. Colors indicate morphology, not verified stars or gas.');
-  const rawProducts: Record<string, { sha256: string; bytes: number }> = {};
+  const rawProducts: Record<string, { bytes: number }> = {};
   for (const [key, values] of Object.entries(maps)) {
     const data = Buffer.alloc(values.length * 4);
     for (let p = 0; p < values.length; p++) data.writeFloatLE(values[p]!, 4 * p);
     const compressed = gzipSync(data, { level: 6 });
     await writeFile(resolve(cache, `${key}.f32.gz`), compressed);
-    rawProducts[key] = { sha256: digest(compressed), bytes: compressed.length };
+    rawProducts[key] = { bytes: compressed.length };
   }
   const percentage = (value: number) => measured.sourceTotal > 0 ? 100 * value / measured.sourceTotal : 0;
   const method: BenchmarkMethod = { id, name: options.name, status: 'complete', note: options.note, panels,

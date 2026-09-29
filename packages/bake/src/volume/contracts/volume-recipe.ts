@@ -39,9 +39,6 @@ export function text(value: unknown, at: string): string {
   if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
   return value;
 }
-function digest(value: unknown, at: string): string {
-  const s = text(value, at); if (!/^[a-f0-9]{64}$/.test(s)) throw new TypeError(`${at} must be SHA256.`); return s;
-}
 function sourcePath(value: unknown): string {
   const path = text(value, 'source path');
   if (path.startsWith('/') || path.split('/').includes('..') || /[\\\u0000]/.test(path)) throw new TypeError('Source must be contained and relative.');

@@ -26,6 +26,6 @@ Not measured and not shown: mass, colour, albedo, surface, atmosphere, rotation.
 
 The scaled distance is derived here from the paper’s semimajor axis (1.046 AU) and stellar radius (1.11 solar radii), not quoted from it. This planet is often described as potentially habitable; nothing here supports or shows that. The package draws a neutral gray sphere of the measured radius.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 **The Illustration lens is art, not data.** Its colours, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no colour corrected.

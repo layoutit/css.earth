@@ -1,23 +1,24 @@
 import { expect, test, vi } from 'vitest';
 import { mountLensBillboards, parseLensBillboards } from './lens-billboards.js';
 
-const sha = 'a'.repeat(64);
 const input = {
-  schema: 'cssearth-lens-billboards@1', atlas: { columns: 2, rows: 2, cellPx: 256, sha256: sha },
+  schema: 'cssearth-lens-billboards@1', atlas: { columns: 2, rows: 2, cellPx: 256 },
   banks: [
-    { id: 'nebula', payloadSha256: sha, contextVisibility: 'independent', attached: false,
+    { id: 'nebula', contextVisibility: 'independent', attached: false,
       billboard: { cell: 3, radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, -1, 0] } },
-    { id: 'galaxy', payloadSha256: sha, contextVisibility: 'galactic', attached: false },
+    { id: 'galaxy', contextVisibility: 'galactic', attached: false },
   ],
 };
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
 
-test('prepared billboards carry every bank, pinned, with an in-atlas cell', () => {
+test('prepared billboards carry every bank once, with an in-atlas cell and no hash', () => {
   const parsed = parseLensBillboards(input);
-  expect(parsed.banks.get('galaxy')).toEqual({ id: 'galaxy', payloadSha256: sha, contextVisibility: 'galactic', attached: false });
+  expect(parsed.banks.get('galaxy')).toEqual({ id: 'galaxy', contextVisibility: 'galactic', attached: false });
   expect(parsed.banks.get('nebula')?.billboard?.cell).toBe(3);
-  expect(() => parseLensBillboards({ ...input, banks: [...input.banks, input.banks[1]] })).toThrow(/unique/);
+  expect(() => parseLensBillboards({ ...input, banks: [...input.banks, input.banks[1]] })).toThrow(/galaxy is listed twice/);
+  expect(() => parseLensBillboards({ ...input, banks: [{ ...input.banks[1], payloadSha256: 'a'.repeat(64) }] })).toThrow(/unsupported lens billboard bank field payloadSha256/);
+  expect(() => parseLensBillboards({ ...input, atlas: { ...input.atlas, sha256: 'a'.repeat(64) } })).toThrow(/unsupported lens billboard atlas field sha256/);
   expect(() => parseLensBillboards({ ...input, banks: [{ ...input.banks[0], billboard: { ...input.banks[0]!.billboard, cell: 4 } }] })).toThrow(/outside its atlas/);
   expect(() => parseLensBillboards({ ...input, banks: [{ ...input.banks[1], attached: undefined }] })).toThrow(/attached/);
 });

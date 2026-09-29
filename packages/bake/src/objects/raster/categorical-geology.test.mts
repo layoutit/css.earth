@@ -5,7 +5,6 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 const root = fileURLToPath(new URL('../../../../../src/objects/', import.meta.url));

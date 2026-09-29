@@ -61,7 +61,7 @@ mapped[~valid]=np.nan;error[~valid]=np.nan
 if not valid.any():raise ValueError('No supported surface samples within the emission limit')
 hdr=fits.Header({'BUNIT':header['BUNIT'],'CTYPE1':'LON','CTYPE2':'LAT','CUNIT1':'deg','CUNIT2':'deg','CRPIX1':1.,'CRPIX2':1.,'CRVAL1':180/w,'CRVAL2':90-90/h,'CDELT1':360/w,'CDELT2':-180/h})
 hdr['HISTORY']='Planetocentric latitude; east-positive longitude; nearest source pixel; repeated map cells are correlated'
-fits.HDUList([fits.PrimaryHDU(),fits.ImageHDU(mapped,header=hdr,name='VALUE'),fits.ImageHDU(error,header=hdr,name='SIGMA'),fits.ImageHDU(emission,name='EMISSION')]).writeto(out/'map.fits',checksum=True)
+fits.HDUList([fits.PrimaryHDU(),fits.ImageHDU(mapped,header=hdr,name='VALUE'),fits.ImageHDU(error,header=hdr,name='SIGMA'),fits.ImageHDU(emission,name='EMISSION')]).writeto(out/'map.fits')
 lo,hi=float(np.nanmin(mapped)),float(np.nanmax(mapped)); norm=ImageNormalize(vmin=lo,vmax=hi,stretch=LinearStretch())
 cmap=matplotlib.colormaps['viridis'].copy();cmap.set_bad('#333941')
 rgba=cmap(norm(np.ma.masked_invalid(mapped)),bytes=True);Image.fromarray(rgba).save(out/'texture.png')

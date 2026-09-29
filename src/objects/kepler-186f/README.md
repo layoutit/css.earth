@@ -22,4 +22,4 @@ Not measured and not shown: mass, colour, albedo, surface, atmosphere, rotation.
 
 Kepler-186 has four more transiting planets (b, c, d, e); only f is represented here. Its scaled distance carries a large uncertainty (178 +65/-21). This planet is often described as potentially habitable; nothing here supports or shows that. The package draws a neutral gray sphere of the measured radius.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

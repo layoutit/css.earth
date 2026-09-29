@@ -29,14 +29,13 @@ beforeEach(() => vi.stubGlobal('Image', class {
   removeAttribute() { this.src = ''; }
 }));
 
-const LENS_PIN = '0'.repeat(64);
 /** Declared lens banks with the prepared facts the universe reads before fetching any of them. These fixtures
  * carry no billboard images, so a small bank draws nothing until its lenses load. */
 const lensBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; contextVisibility?: string; attachedTo?: string }[]) => ({
-  volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.frame, sha256: LENS_PIN })),
+  volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.frame })),
   lensBillboards: { atlasUrl: '/atlas.webp', plan: parseLensBillboards({ schema: 'cssearth-lens-billboards@1',
-    atlas: { columns: 1, rows: 1, cellPx: 256, sha256: LENS_PIN },
-    banks: banks.map(bank => ({ id: bank.id, payloadSha256: LENS_PIN, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
+    atlas: { columns: 1, rows: 1, cellPx: 256 },
+    banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
 });
 
 const spatialFrame = { id: 1, baseId: 0, members: new Uint32Array(), updates: [], emphasizedId: null, opacity: 1, width: 800, height: 600 };
@@ -59,7 +58,7 @@ const fixture = (): PreparedCssSky => ({ schema: 'cssearth-css-sky@1', reference
   faces: bases.map(([id, forwardIcrf, rightIcrf, upIcrf]) => ({ id, forwardIcrf, rightIcrf, upIcrf, texturePath: `sky/${id}.webp`, widthPx: 1536, heightPx: 1536,
     style: { width: '100px', height: '100px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,-50,-50,-50,1)', backgroundSize: '100px 100px', backgroundPosition: '0px 0px' } })),
   provenance: {}, approximation: {} });
-const resources = fixture().faces.map(face => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: 100, sha256: 'a'.repeat(64) }));
+const resources = fixture().faces.map(face => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: 100 }));
 const world = (positionM: readonly [number, number, number] = [0, 0, 0], orientationXyzw: readonly [number, number, number, number] = [0, 0, 0, 1]): WorldCameraPose =>
   ({ referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM, orientationXyzw } });
 const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const;
@@ -336,7 +335,7 @@ test('shared universe draws only resolved nebulae and never prefetches their len
       texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {} };
   const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'nearby-nebula', defaultLens: 'optical',
     framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
@@ -438,7 +437,7 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
       texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {} };
   // Default contextVisibility ('galactic'): this bank's eventual render still waits on the general
   // fade, but its fetch must not, or a future bank baked this way would never load by proximity at all.
@@ -488,7 +487,7 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
       texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {} };
   const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'far-nebula', defaultLens: 'optical',
     framingRadiusUnits: .25, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
@@ -542,7 +541,7 @@ test('hidden lens banks are bounded, active subscriptions pin them, and eviction
         texturePath: `${lensId}/${axis}.webp`, widthPx: 1, heightPx: 1,
         style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
           backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-      resources: ['x', 'y', 'z'].map(axis => ({ path: `${lensId}/${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+      resources: ['x', 'y', 'z'].map(axis => ({ path: `${lensId}/${axis}.webp`, bytes: 1, width: 1, height: 1 })),
       provenance: {}, approximation: {} });
     return { schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical', framingRadiusUnits: 1, contextVisibility: 'independent',
       lenses: ['optical', 'infrared'].map(lensId => ({ id: lensId, label: lensId, title: `${lensId} emission`,
@@ -605,7 +604,7 @@ test("baked stars hand the background to the plain Milky Way beyond the Sun's ne
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
   const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };
-  const nearResources = [...resources, ...nearFaces.map(face => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: 100, sha256: 'b'.repeat(64) }))];
+  const nearResources = [...resources, ...nearFaces.map(face => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: 100 }))];
   const { stars: _stars, ...withoutStars } = payload;
   expect(() => validatePreparedCssSky(withoutStars, nearResources)).toThrow('come together');
   const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources: nearResources, resolveResource: path => `/prepared/${path}` });
@@ -651,7 +650,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {} };
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {} };
   const bank = (id: string): PreparedVolumeLenses => ({ schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical',
     framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared fixture', sourceUrl: 'https://example.org/nebula', volume: { ...small, id },

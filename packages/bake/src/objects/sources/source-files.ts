@@ -9,7 +9,7 @@ import { dirname, posix, resolve, relative, win32 } from 'node:path';
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 const nonempty=(value:unknown):value is string=>typeof value==='string'&&value.length>0;
 
-/** A pin identifies bytes git does not hold. A file authored in this repository carries none; git is its record. */
+/** A manifest entry names its file by path: git holds authored bytes and the source mirror holds downloads. */
 export interface SourceEntry { path:string;id?:string;origin?:string;consumers?:string[];range?:SourceRange;sourceBinding?:SourceBinding; }
 
 /** A file a named tool makes; parseSourceManifest refuses one without its generator. */

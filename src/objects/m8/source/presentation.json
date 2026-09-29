@@ -98,7 +98,7 @@
       ],
       "input": "spitzer-mid-infrared",
       "preview": {
-        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e.png",
+        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
         "skyBands": {
           "path": "src/objects/m8/source/sky-bands/spitzer-irac.json"
         }

@@ -3,7 +3,7 @@ import { fitSimulationEnvelope, createEnvelopeSampler, envelopeChromaticity, val
 import type { SimulationDepthPrior } from './simulation-guided.ts';
 
 // An elongated simulation: bright bar along z at x≈0, depth extent ±8.
-const prior: SimulationDepthPrior = { identity: 'b'.repeat(64), bounds: { min: [-4, -4, -10], max: [4, 4, 10] },
+const prior: SimulationDepthPrior = { bounds: { min: [-4, -4, -10], max: [4, 4, 10] },
   sampleDensity: (x, y, z) => Math.exp(-.5 * ((x / 1.2) ** 2 + (y / 1.2) ** 2 + (z / 5) ** 2)) };
 const width = 32, height = 32, bounds = { min: [-4, -4] as [number, number], max: [4, 4] as [number, number] };
 const coverage = new Uint8Array(width * height).fill(1);

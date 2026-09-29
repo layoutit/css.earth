@@ -8,13 +8,11 @@
     "files": [
       {
         "role": "low band",
-        "path": "uvfits_norm/ER6_SGRA_2017_097_lo_hops_netcal-LMTcal-norm_StokesI.uvfits",
-        "blob": "b15cc04cfb9c6e2295bb42e5b18ceb8764decb51"
+        "path": "uvfits_norm/ER6_SGRA_2017_097_lo_hops_netcal-LMTcal-norm_StokesI.uvfits"
       },
       {
         "role": "high band",
-        "path": "uvfits_norm/ER6_SGRA_2017_097_hi_hops_netcal-LMTcal-norm_StokesI.uvfits",
-        "blob": "f7fe86e647af657f48765cb854c9b91360d99c95"
+        "path": "uvfits_norm/ER6_SGRA_2017_097_hi_hops_netcal-LMTcal-norm_StokesI.uvfits"
       }
     ]
   },
@@ -25,28 +23,23 @@
     "files": [
       {
         "role": "pipeline",
-        "path": "eht-imaging/eht-imaging_pipeline.py",
-        "blob": "7c04998b0ce6c6f67586ad0f436e7d324e3d8cd8"
+        "path": "eht-imaging/eht-imaging_pipeline.py"
       },
       {
         "role": "parameters",
-        "path": "eht-imaging/params/eht-imaging_097_params.csv",
-        "blob": "2970e48f86a53a3eb4014e9e3d80990e125c3f22"
+        "path": "eht-imaging/params/eht-imaging_097_params.csv"
       },
       {
         "role": "pre-imaging",
-        "path": "pre-imaging/preimcal.py",
-        "blob": "6509b05824eea57f0aa2d25ec5e419ef022ade86"
+        "path": "pre-imaging/preimcal.py"
       },
       {
         "role": "scattering model",
-        "path": "pre-imaging/obs_scatt_std_gauss_scaled_3599.pickle",
-        "blob": "6e99a3950daf2b45ceaf7304998ab87ef6ba628b"
+        "path": "pre-imaging/obs_scatt_std_gauss_scaled_3599.pickle"
       },
       {
         "role": "scattering model",
-        "path": "pre-imaging/obs_scatt_std_avg_scaled_3599.pickle",
-        "blob": "7d15b6e1bfdda96687fd1a4d95e6c3c8d731f5d9"
+        "path": "pre-imaging/obs_scatt_std_avg_scaled_3599.pickle"
       }
     ],
     "change": {

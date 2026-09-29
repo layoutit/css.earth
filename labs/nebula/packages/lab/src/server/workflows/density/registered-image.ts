@@ -7,7 +7,6 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { ObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import type { ObservationPhoto } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { prepareOverlayGeometry } from '../../../adapters/renderer/overlay-geometry.ts';
-import { sha256 } from '@cssearth/core/node';
 
 export async function writeOriginalOverlay(directory:string,photo:ObservationPhoto,mapping:ObservationMapping,
   frame:DensityVolumeFrame,source:{id:string;sourcePageUrl:string;credit:string}) {
@@ -22,7 +21,7 @@ export async function writeOriginalOverlay(directory:string,photo:ObservationPho
   await writeFile(resolve(directory,'source/original-image.png'),bytes);
   const geometry=prepareOverlayGeometry([[min[0],max[1],0],[max[0],max[1],0],[max[0],min[1],0],[min[0],min[1],0]],photo.width,photo.height);
   const overlay={id:source.id,label:'Original image',texturePath:'original-image.png',widthPx:photo.width,heightPx:photo.height,
-    sha256:sha256(bytes),bytes:bytes.length,pivotCssPx:[0,0,0],sourcePageUrl:source.sourcePageUrl,credit:source.credit,
+    bytes:bytes.length,pivotCssPx:[0,0,0],sourcePageUrl:source.sourcePageUrl,credit:source.credit,
     registrationNote:'Original source with stars, in the exact fixed-cloud registration used for material sampling.',
     style:{width:`${photo.width}px`,height:`${photo.height}px`,transform:`matrix3d(${geometry.matrix})`,
       backgroundSize:`${photo.width}px ${photo.height}px`,backgroundPosition:'0px 0px'}};

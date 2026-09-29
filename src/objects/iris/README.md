@@ -75,7 +75,7 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 
 The crater coordinates in Hanuš et al. (2019) Table 2 are not used. Projected as printed, they land a median 139 km from the authors' own contours in their Figure 4, and no rotation or mirror of the table fits all six named craters. Their longitude system is not stated.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

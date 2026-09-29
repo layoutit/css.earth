@@ -5,23 +5,18 @@
   ],
   "seconds": 150.723254208,
   "maxRssMiB": 862.625,
-  "recipeSha256": "fb85c3843043909a5ed247b91434e8dbd840c18eeee2657c771b21ffe3902c21",
-  "retainedSceneSha256": "ad34de8ac9697a93493c74cfacba1448474d1598f9b0cc20d17ba870b8cd6ff6",
   "refreshedRuntimeAssets": [
     {
       "filename": "prometheus-filter-color-surface@2x.webp",
-      "bytes": 409108,
-      "sha256": "2fa606c3f48d2704779b4a6b85a886df126c2cae6631a4957bd62e488bdaf22c"
+      "bytes": 409108
     },
     {
       "filename": "prometheus-filter-color-shadow@2x.webp",
-      "bytes": 266008,
-      "sha256": "9435e86c660fad10bd9e5a062bd08f4cf92059061fc268b1b959f105d9de3023"
+      "bytes": 266008
     },
     {
       "filename": "prometheus-filter-color-thumbnail.webp",
-      "bytes": 1908,
-      "sha256": "c30b1c9a8426c0487d8c14054bb2d48b03ca5318b48fbce083137035a7182cd2"
+      "bytes": 1908
     }
   ],
   "retainedRuntimeAssetCount": 35,
@@ -545,52 +540,40 @@
       },
       "sourceIds": [
         {
-          "id": "n1640497881",
-          "sha256": "8a024f5c689356a7a6720f3129e9fbe97b7c2b34047edc067106125164c777f7"
+          "id": "n1640497881"
         },
         {
-          "id": "n1640497881-label",
-          "sha256": "562a471222ba7921f15681619cd75076e6cdd3cd143b08f2406f678aaeb9b1a7"
+          "id": "n1640497881-label"
         },
         {
-          "id": "n1640497816",
-          "sha256": "f9d5b24466f1e9de90d9fece592b975b4c1dd918247a1ca0eac02b28c8a99c42"
+          "id": "n1640497816"
         },
         {
-          "id": "n1640497816-label",
-          "sha256": "5abb16917642df3e1be82a3b4e7daf879030927b7b2a7fb71a90bce01c3c7c9f"
+          "id": "n1640497816-label"
         },
         {
-          "id": "n1640497927",
-          "sha256": "198bff6c8b2cf47f3730aecc7b08b7a8ea22827db124e349d7714f170991de53"
+          "id": "n1640497927"
         },
         {
-          "id": "n1640497927-label",
-          "sha256": "1e12583a03cf5c4b79b09e23ca24b34d0107212a8bdc9ecad684d6e8bebdb612"
+          "id": "n1640497927-label"
         },
         {
-          "id": "n1643263159_1",
-          "sha256": "9b8d41f63ed909a257b0307d9b175d3944daf5ab09417a64b65e7c9b34790bb4"
+          "id": "n1643263159_1"
         },
         {
-          "id": "n1643263159_1-label",
-          "sha256": "a4fee7a192a1de4db881b677001a09013f3309c509e82940aad3e76656cb74db"
+          "id": "n1643263159_1-label"
         },
         {
-          "id": "n1643263046_1",
-          "sha256": "3591eed8181b553187f45d65ce84d3c9d1516a60f3978e4a1e3e7bb826c8bb39"
+          "id": "n1643263046_1"
         },
         {
-          "id": "n1643263046_1-label",
-          "sha256": "89897ef7d086b1bdd0ad0688f9a20cbaeaae43bca38e97fa7859dbb0d0a8c36c"
+          "id": "n1643263046_1-label"
         },
         {
-          "id": "n1643263237_1",
-          "sha256": "8fba11e1458101342c58ce80b9bfd6832cb6b0118978bc103a3581896c751c9a"
+          "id": "n1643263237_1"
         },
         {
-          "id": "n1643263237_1-label",
-          "sha256": "8ce14d3229e355870b16d2834f9e9d38e7c233dbf619530650e556e7e4655e36"
+          "id": "n1643263237_1-label"
         }
       ],
       "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.",
@@ -612,7 +595,6 @@
       "sampleSources": {
         "file": "filter-color-source-index.json",
         "bytes": 85605,
-        "sha256": "d77529df02a56549e949153587caa9ac06ac92382acef51581ef8085418d5ef7",
         "width": 2048,
         "height": 5760,
         "includesAtlasBleed": true,

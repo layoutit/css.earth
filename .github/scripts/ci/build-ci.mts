@@ -1,6 +1,5 @@
-import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { lstatSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { lstatSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { isAbsolute, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ciCacheKeys } from './ci-cache-key.mts';
@@ -60,42 +59,42 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
   return tasks;
 }
 
-/** Receipts cover only the small compiled directories, never the installed tree or restored data banks. */
-function outputInventory(directory: string): Record<string, string> {
-  const files: Record<string, string> = {};
+/** Receipts list only the small compiled directories, never the installed tree or restored data banks. The cache
+ * key already names the exact inputs; the listing proves the restore is complete: every file present, none empty, none extra. */
+function outputInventory(directory: string): string[] {
+  const files: string[] = [];
   const visit = (relative: string) => {
     for (const entry of readdirSync(resolve(directory, relative), { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name, 'en'))) {
       const path = relative ? `${relative}/${entry.name}` : entry.name;
       if (path === RECEIPT) continue;
       if (entry.isDirectory()) visit(path);
       else if (entry.isFile()) {
-        const bytes = readFileSync(resolve(directory, path));
-        if (!bytes.length) throw new TypeError(`Empty compiled output: ${path}`);
-        files[path] = createHash('sha256').update(bytes).digest('hex');
+        if (!statSync(resolve(directory, path)).size) throw new TypeError(`Empty compiled output: ${directory}/${path}`);
+        files.push(path);
       } else throw new TypeError(`Compiled cache outputs must be ordinary files: ${path}`);
     }
   };
   visit('');
-  if (!Object.keys(files).length) throw new TypeError(`Empty compiled output directory: ${directory}`);
+  if (!files.length) throw new TypeError(`Empty compiled output directory: ${directory}`);
   return files;
 }
 
 export function compiledOutputsValid(root: string, output: CompiledDirectory, digest: string): boolean {
   try {
     const directory = resolve(root, output.path), receipt: unknown = JSON.parse(readFileSync(resolve(directory, RECEIPT), 'utf8'));
-    if (!record(receipt) || receipt.schema !== 1 || receipt.digest !== digest || !record(receipt.files)) return false;
-    const files = receipt.files, entries = Object.entries(files);
-    if (!entries.length || !entries.every(([path, hash]) => safePath(path) && typeof hash === 'string' && /^[a-f0-9]{64}$/u.test(hash))) return false;
-    if (!output.required.every(path => Object.hasOwn(files, path))) return false;
-    // A partial restore, empty/corrupt file, extra stale chunk or removed declaration invalidates the hit.
+    if (!record(receipt) || receipt.schema !== 2 || receipt.digest !== digest || !Array.isArray(receipt.files)) return false;
+    const files = receipt.files;
+    if (!files.length || !files.every(safePath)) return false;
+    if (!output.required.every(path => files.includes(path))) return false;
+    // A partial restore, empty file, extra stale chunk or removed declaration invalidates the hit.
     return JSON.stringify(outputInventory(directory)) === JSON.stringify(files);
   } catch { return false; }
 }
 
 function recordOutputs(root: string, output: CompiledDirectory, digest: string): void {
   const directory = resolve(root, output.path), files = outputInventory(directory);
-  for (const path of output.required) if (!Object.hasOwn(files, path) || !lstatSync(resolve(directory, path)).isFile()) throw new TypeError(`Build did not produce ${output.path}/${path}`);
-  writeFileSync(resolve(directory, RECEIPT), JSON.stringify({ schema: 1, digest, files }) + '\n');
+  for (const path of output.required) if (!files.includes(path) || !lstatSync(resolve(directory, path)).isFile()) throw new TypeError(`Build did not produce ${output.path}/${path}`);
+  writeFileSync(resolve(directory, RECEIPT), JSON.stringify({ schema: 2, digest, files }) + '\n');
 }
 
 async function execute(task: CiBuildTask, root: string): Promise<void> {
@@ -110,7 +109,7 @@ export async function buildCi({ root = resolve(import.meta.dirname, '../../..'),
   packageCacheHit = cacheHit, packageDigest = digest, run = execute,
 }: { root?: string; mode: CiBuildMode; cacheHit?: boolean; digest: string; packageCacheHit?: boolean;
   packageDigest?: string; run?: (task: CiBuildTask, root: string) => Promise<void> }) {
-  for (const identity of [digest, packageDigest]) if (!/^[a-f0-9]{64}$/u.test(identity)) throw new TypeError('CI build digests must be an exact SHA-256 cache identity.');
+  for (const identity of [digest, packageDigest]) if (!/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/u.test(identity)) throw new TypeError(`CI build keys must be exact Git object ids (ci-cache-key.mts); got ${JSON.stringify(identity)}.`);
   const plan = ciBuildPlan(root, mode), pending = new Map<string, Promise<void>>(), results: { id: string; cached: boolean; seconds: number }[] = [];
   for (const task of plan) {
     const parents = task.after.map(id => {

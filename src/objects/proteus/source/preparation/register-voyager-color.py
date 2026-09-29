@@ -7,7 +7,6 @@ not absolute geodetic accuracy, pixel-level albedo or the unobserved hemisphere.
 """
 from pathlib import Path
 import argparse
-import hashlib
 import json
 import subprocess
 import numpy as np
@@ -153,9 +152,8 @@ def main():
     provenance = []
     for path in paths:
         data = (source/path).read_bytes()
-        digest = hashlib.sha256(data).hexdigest()
         if path not in pins:
-            raise ValueError('Changed source pin: '+path)
+            raise ValueError('proteus: source/manifest.json inputs/documents do not list path '+path)
         provenance.append(dict(path=path, bytes=len(data)))
     sp.kclear()
     try:

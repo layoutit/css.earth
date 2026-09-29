@@ -33,4 +33,4 @@ Run of 2026-09-23 (this version):
 - **One band.** Only CRIRES chip 2 is mapped ([ledger](investigations.json)). The JWST NIRSpec maps of Wang et al. (2026) are not yet released.
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions. The dwarf is drawn as a sphere, though its fast spin flattens it slightly.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

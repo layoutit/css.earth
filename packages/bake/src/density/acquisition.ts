@@ -1,12 +1,11 @@
-/** Offline, hash-pinned RGBA volume acquisition and deterministic encoded-field reduction. */
+/** Offline RGBA volume acquisition, checked against its recorded length, and deterministic encoded-field reduction. */
 import { mkdir, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { zstdCompressSync, constants } from 'node:zlib';
-import { containedPath, sourceBytes, type DecodedGrid } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
+import { containedPath, sourceBytes, urlCachePath, type DecodedGrid } from '../volume/node/index.ts';
 import { triple, type Vector3, type VolumeRecipe } from '../volume/index.ts';
 import { requireRecord as record } from '@cssearth/core';
 
@@ -73,8 +72,8 @@ export function encodeDensityKtx2(grid: DecodedGrid, level: number): Buffer {
 export async function acquireVolumeSource(sourceDirectory: string, recipe: VolumeRecipe, cacheDirectory: string): Promise<void> {
   if (!recipe.grid.acquisition) throw new TypeError('Volume has no acquisition recipe.');
   const acquisition = parseVolumeAcquisition(JSON.parse((await sourceBytes(sourceDirectory, recipe.grid.acquisition)).toString('utf8')));
-  await mkdir(cacheDirectory, { recursive: true });
-  const cache = resolve(cacheDirectory, `${sha256(Buffer.from(acquisition.source.url))}.raw`);
+  const cache = urlCachePath(cacheDirectory, acquisition.source.url, '.raw');
+  await mkdir(dirname(cache), { recursive: true });
   let raw: Buffer | undefined;
   try { raw = await readFile(cache); } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   if (!raw) {

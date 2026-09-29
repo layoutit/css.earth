@@ -1,14 +1,11 @@
 {
   "schema": "cssearth-finite-lens-recipe@1",
-  "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
   "alignmentReport": {
-    "path": "labs/nebula/models/lmc/candidates/source/alignment-report.json",
-    "sha256": "c9da3dc239c365f10ec3527386b6081a4a74d1909b9d316395cfaa34d3471e98"
+    "path": "labs/nebula/models/lmc/candidates/source/alignment-report.json"
   },
   "sources": [
     {
       "imageId": "vista-infrared",
-      "sourceResultId": "ba8f4ad93ea837aa3db9190f0a403e17708533ee5047389dd14a1d6c18560c5f",
       "toneCurve": {
         "schema": "cssearth-lens-tone-curve@1",
         "knots": [
@@ -157,7 +154,6 @@
     },
     {
       "imageId": "horalek-widefield",
-      "sourceResultId": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b",
       "toneCurve": {
         "schema": "cssearth-lens-tone-curve@1",
         "knots": [
@@ -306,7 +302,6 @@
     },
     {
       "imageId": "wise-wide-infrared",
-      "sourceResultId": "19c9f90916a4cfe7100972aa898522fb7eee347dacc83163ffadb3b3337277a6",
       "toneCurve": {
         "schema": "cssearth-lens-tone-curve@1",
         "knots": [

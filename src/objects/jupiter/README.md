@@ -46,7 +46,7 @@ The dated checks above cover the new maps; the older polar illustrations retain 
 Jupiter is prepared only from the checked inputs declared in
 `source/manifest.json`. Each entry identifies its product and acquisition route.
 Required ignored binaries are restored through `source/preparation/acquisition.json`;
-runtime file sizes and SHA-256 digests belong to `inventory.json`.
+runtime file sizes and R2 content addresses belong to `inventory.json`.
 
 ## Reproduction
 

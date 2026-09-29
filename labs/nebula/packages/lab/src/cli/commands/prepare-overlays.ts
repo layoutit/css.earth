@@ -5,66 +5,61 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
-import { sha256 } from '@cssearth/core/node';
 import { overlayCorners, type ImageWcs, type OverlayFrame, defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement, transferOverlayAlignment, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
 import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 import { composeSkyBandSource, verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 
 interface InputImage {
-  id: string; label: string; path: string; sha256: string; url?: string;
+  id: string; label: string; path: string; url?: string;
   sourcePageUrl: string; credit: string; license: string;
-  wcs?: ImageWcs; wcsSource: { url: string; sha256: string; description: string };
+  wcs?: ImageWcs; wcsSource: { url: string; description: string };
   registration?: ImageRegistration;
   registrationNote: string; maxPixels?: number; legacyPlacementBasis?: string; useSavedAlignment?: boolean;
   /** Pinned publisher TIFFs can contain individual compressed strips larger than libtiff's default allocation limit. */
   allowLargeTiff?: boolean;
-  /** Composed from a pinned survey band recipe instead of downloaded; `path` is then its hash-named composite and `wcs` its grid. */
-  skyBands?: { path: string; sha256: string };
+  /** Composed from a survey band recipe instead of downloaded; `path` is then its `<id>.skybands.png` composite and `wcs` its grid. */
+  skyBands?: { path: string };
 }
 interface Recipe {
   schema: 'cssearth-nebula-overlay-recipe@1'; maxPixels: number;
-  targets: { directory: string; referenceObject: string; images: InputImage[]; alignment?: { path: string; sha256: string } }[];
+  targets: { directory: string; referenceObject: string; images: InputImage[]; alignment?: { path: string } }[];
 }
 async function skyBandBytes(input: InputImage) {
-  if (!input.skyBands || input.url || !input.wcs || !/^[0-9a-f]{64}$/.test(input.skyBands.sha256)) throw new TypeError(`A sky band image names its recipe and grid WCS, not a URL: ${input.id}`);
+  if (!input.skyBands || input.url || !input.wcs) throw new TypeError(`A sky band image names its recipe and grid WCS, not a URL: ${input.id}`);
   const source = { id: input.id, width: input.wcs.referenceDimension[0], height: input.wcs.referenceDimension[1], wcs: input.wcs, skyBands: input.skyBands };
   // Always verify the recipe and grid first, so a warm composite cache cannot hide a changed or missing recipe.
   await verifySkyBandSource(source);
-  if (basename(input.path) !== skyBandCompositeFile(input.id)) throw new TypeError(`A sky band composite is cached under its own hash: ${input.id}`);
+  if (basename(input.path) !== skyBandCompositeFile(input.id)) throw new TypeError(`A sky band composite is cached as ${skyBandCompositeFile(input.id)}, not ${input.path}: ${input.id}`);
   let bytes = await readFile(input.path).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
   if (!bytes) {
     console.log(`OVERLAY_COMPOSE ${input.id}`);
     const composed = await composeSkyBandSource(source);
-    if (composed.sha256 !== input.sha256) throw new Error(`Composed sky band raster ${composed.sha256} differs from its pin: ${input.id}`);
     await mkdir(dirname(input.path), { recursive: true });
     await writeFile(`${input.path}.sky-bands.json`, JSON.stringify(composed.evidence, null, 2) + '\n');
     await writeFile(`${input.path}.part`, composed.bytes); await rename(`${input.path}.part`, input.path);
     bytes = composed.bytes;
   }
-  if (sha256(bytes) !== input.sha256) throw new Error(`Changed sky band composite: ${input.path}`);
   return bytes;
 }
 async function inputBytes(input: InputImage) {
   if (input.skyBands) return skyBandBytes(input);
-  let bytes = await readFile(input.path).catch(() => null);
-  if ((!bytes || sha256(bytes) !== input.sha256) && input.url) {
+  let bytes = await readFile(input.path).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+  if (!bytes && input.url) {
     const response = await fetch(input.url, { signal: AbortSignal.timeout(60000) });
-    if (!response.ok) throw new Error(`Overlay source download failed: ${response.status}`);
+    if (!response.ok) throw new Error(`Overlay source download of ${input.url} failed: ${response.status}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (sha256(bytes) !== input.sha256) throw new Error(`Overlay source hash differs: ${input.id}`);
     await mkdir(dirname(input.path), { recursive: true }); await writeFile(input.path, bytes);
   }
-  if (!bytes || sha256(bytes) !== input.sha256) throw new Error(`Missing pinned overlay source: ${input.id}`);
+  if (!bytes) throw new Error(`Overlay source ${input.path} is missing and ${input.id} names no URL.`);
   return bytes;
 }
 
 export async function prepareOverlays(path: string) {
-  const recipeBytes = await readFile(path), recipe: Recipe = parseLabModelJson(recipeBytes.toString('utf8'));
+  const recipe: Recipe = parseLabModelJson(await readFile(path, 'utf8'));
   if (recipe.schema !== 'cssearth-nebula-overlay-recipe@1' || !Number.isInteger(recipe.maxPixels) ||
       recipe.maxPixels < 256 || recipe.maxPixels > 4096) throw new TypeError('Invalid overlay recipe.');
   for (const target of recipe.targets) {
-    const referenceBytes = await readFile(target.referenceObject);
-    const descriptor = parseLabModelJson(referenceBytes.toString('utf8'));
+    const descriptor = parseLabModelJson(await readFile(target.referenceObject, 'utf8'));
     const { boundsUnits: _bounds, ...frame } = descriptor.properties.volume as OverlayFrame & { boundsUnits: unknown };
     const overlays = [], evidence = [];
     await mkdir(resolve(target.directory, 'prepared'), { recursive: true });
@@ -91,18 +86,16 @@ export async function prepareOverlays(path: string) {
       if (!pivotCssPx.every(Number.isFinite)) throw new TypeError(`Invalid image centre: ${input.id}`);
       overlays.push({ id: input.id, label: input.label, texturePath, widthPx: width, heightPx: height,
         initialPlacement: undefined as OverlayPlacement | undefined, initialOpacity: undefined as number | undefined,
-        sha256: sha256(texture.data), bytes: texture.data.length, pivotCssPx, legacyPlacementBasis: input.legacyPlacementBasis,
+        bytes: texture.data.length, pivotCssPx, legacyPlacementBasis: input.legacyPlacementBasis,
         style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
           backgroundSize: geometry.backgroundSize.map(n => `${n}px`).join(' '),
           backgroundPosition: geometry.backgroundPosition.map(n => `${n}px`).join(' ') },
         sourcePageUrl: input.sourcePageUrl, credit: input.credit, registrationNote: input.registrationNote });
       evidence.push({ input, sourceDimensions: [original.width, original.height], verticesUnits: vertices,
-        output: { texturePath, width, height, sha256: sha256(texture.data), bytes: texture.data.length } });
+        output: { texturePath, width, height, bytes: texture.data.length } });
     }
     if (target.alignment) {
-      const bytes = await readFile(target.alignment.path);
-      if (sha256(bytes) !== target.alignment.sha256) throw new TypeError('Saved image alignment has changed.');
-      const saved = parseLabModelJson(bytes.toString('utf8'));
+      const saved = parseLabModelJson(await readFile(target.alignment.path, 'utf8'));
       const reference = overlays.find(image => image.id === saved.imageId);
       if (saved.schema !== 'cssearth-nebula-image-placement@1' || !reference ||
           !(saved.opacity >= 0 && saved.opacity <= 1)) throw new TypeError('Invalid saved image alignment.');
@@ -117,13 +110,13 @@ export async function prepareOverlays(path: string) {
     await writeFile(resolve(target.directory, 'overlays.json'), JSON.stringify({ schema: 'cssearth-nebula-overlays@1', frame, referenceDistanceUnits: Math.hypot(...frame.originM) / frame.metersPerUnit, overlays }, null, 2) + '\n');
     await mkdir(resolve(target.directory, 'source'), { recursive: true });
     await writeFile(resolve(target.directory, 'source/provenance.json'), JSON.stringify({
-      schema: 'cssearth-nebula-overlay-provenance@1', recipe: { path, sha256: sha256(recipeBytes) },
-      frame: { path: target.referenceObject, sha256: sha256(referenceBytes) }, images: evidence, alignment: target.alignment,
+      schema: 'cssearth-nebula-overlay-provenance@1', recipe: { path },
+      frame: { path: target.referenceObject }, images: evidence, alignment: target.alignment,
       method: 'Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.',
       limits: ['Image WCS metadata supplies angular registration; it does not validate the simulation morphology.',
         'Source sky placement is retained. An optional saved manual alignment supplies initial display controls unless an image explicitly keeps calibrated sky placement.',
         'The flat image plane records one observed projection; it does not assert physical depths for photographed features.',
-        'Textures are bounded inspection previews; native sources and WCS remain pinned for later processing.'],
+        'Textures are bounded inspection previews; native sources and WCS remain named by path for later processing.'],
     }, null, 2) + '\n');
     console.log(`OVERLAYS_READY ${target.directory}: ${overlays.length} WCS image planes`);
   }

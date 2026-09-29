@@ -6,7 +6,6 @@ import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireRecord } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '@cssearth/bake/scene';
@@ -19,10 +18,10 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const id = target.toLowerCase();
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
   const object = resolve(root, 'src/objects', id);
-  const inputs: { role: string; identity: string; sha256: string; bytes: number }[] = [];
+  const inputs: { role: string; identity: string; bytes: number }[] = [];
   const pinned = async (file: string) => {
     const bytes = await readFile(file);
-    inputs.push({ role: 'standard sphere input', identity: file, sha256: sha256(bytes), bytes: bytes.length });
+    inputs.push({ role: 'standard sphere input', identity: file, bytes: bytes.length });
     return bytes;
   };
   const json = async (file: string): Promise<unknown> => JSON.parse((await pinned(file)).toString());
@@ -130,8 +129,8 @@ export async function measurementSphere(root: string, target: string, texture: s
     if (!oldToNew.has(entry.url) && serialized.includes(entry.url)) throw new Error(`Unembedded standard sphere asset: ${entry.key}`);
   }
   return { definition, worldFrame, context, css, inputs, embeddedAssets: Object.fromEntries(oldToNew), owner: {
-    object: id, runtimeSha256: inputs.find(input => input.identity.endsWith('/prepared/runtime.json'))!.sha256,
-    treeSha256: sha256(JSON.stringify(original.tree)), geometry: 'existing standard sphere; unchanged nodes and geometry; inactive image bindings cleared', inactiveImageProperties,
+    object: id, runtime: { file: `src/objects/${id}/prepared/runtime.json`, bytes: inputs.find(input => input.identity.endsWith('/prepared/runtime.json'))!.bytes },
+    geometry: 'existing standard sphere; unchanged nodes and geometry; inactive image bindings cleared', inactiveImageProperties,
     physicalFrame: worldFrame, projectionShape: 'standard reference sphere', surfaceUrl: selected.url,
     rasterToolchain: { node: process.version, sharp: sharp.versions },
   } };

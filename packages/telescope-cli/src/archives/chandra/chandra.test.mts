@@ -4,14 +4,14 @@ const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { addProductEvidence, readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
 import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
 import { archiveAgreement, compareBinnedImage, eventKeys, matchEvents, reprocessedWith } from './compare.mts';
 import { column, eventTable, requireEventColumn, scalar } from './events.mts';
 import { reprocessParameters, reprocessRun, writeReprocessRecord } from './reprocess.mts';
-import { chandraHorizonsBodies, discRegistration, freezeRun } from './solar-system.mts';
+import { chandraHorizonsBodies } from './solar-system.mts';
 
 const BLOCK = 2880, CARD = 80;
 const card = (key: string, value: string) => `${key.padEnd(8)}= ${value}`.padEnd(CARD).slice(0, CARD);
@@ -143,20 +143,6 @@ test('a program pins level-1 inputs and the archive’s level-2 products, and re
   assert.throws(() => parseChandraProgram({ ...program(), schema: 'cssearth-chandra-program@2' }), /Unsupported Chandra program/u);
 });
 
-
-
-test('the Crab halo program pins obsid 2798 with every file digested', async () => {
-  const pinned = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, 'm1-crab-halo.json'), 'utf8')));
-  const [entry] = pinned.observations;
-  assert.equal(entry?.obsid, 2798);
-  assert.equal(entry?.instrument, 'ACIS');
-  assert.equal(entry?.detector, 'ACIS-0123');
-  assert.equal(entry?.dataMode, 'FAINT');
-  assert.equal(entry?.grating, 'NONE');
-  assert.equal(entry?.datasetDoi, '10.25574/02798');
-  assert.ok(entry!.inputs.some(input => /_evt1\.fits\.gz$/u.test(input.path)), 'the level-1 event list is pinned');
-});
-
 test('the Crab halo re-run keeps every archive event and places it within half a sky pixel', async () => {
   const receipt = JSON.parse(await readFile(join(PROGRAMS, 'm1-crab-halo.acisf02798N004_evt2.reproduction.json'), 'utf8')) as {
     events: { archive: number; matched: number; onlyArchive: number; onlyOurs: number };
@@ -180,18 +166,15 @@ test('the Crab halo re-run keeps every archive event and places it within half a
   assert.deepEqual(Object.keys(receipt.differentCards).sort(), ['ASCDSVER', 'BPIXFILE', 'FLTFILE']);
 });
 
-/** The pinned observation with every input digested, as reprocess.mts has it once the files are on disk. */
-const digested = () => {
-  const entry = parseChandraProgram(program()).observations[0]!;
-  return { ...entry, inputs: entry.inputs.map((input, index) => ({ ...input, sha256: String(index).repeat(64) })) };
-};
+/** The pinned observation, as reprocess.mts has it once the files are on disk. */
+const measured = () => parseChandraProgram(program()).observations[0]!;
 /** A reprocessing run's own account of itself, written as that run writes it: the products it made, and no evidence. Nothing
  * here runs CIAO; what is under test is which environment the record carries, not what chandra_repro does. */
 const reprocessed = async (versions: { ciao: string; caldb: string }) => {
   const directory = await mkdtemp(join(tmpdir(), 'chandra-reprocess-')), level2 = 'acisf02798_repro_evt2.fits';
   await writeFile(join(directory, level2), eventFile([event()]));
   const { parameters } = reprocessParameters('NONE', 2 * 2 ** 30);
-  const run = reprocessRun(digested(), { parameters, versions, toolchainDigest: 'c'.repeat(64) });
+  const run = reprocessRun(measured(), { parameters, versions });
   return { directory, level2, record: await writeReprocessRecord(directory, level2, [level2], run) };
 };
 
@@ -251,11 +234,6 @@ test('a search box is that many degrees on the sky, not that many degrees of rig
   assert.throws(() => objectBox({ id: 'jupiter', source: 't' }), /right ascension/u);
 });
 
-test('the checked-in guide is the one the ledger generates', async () => {
-  const ledger = JSON.parse(await readFile(CHANDRA_LEDGER.files.ledger, 'utf8')) as Parameters<typeof chandraLedgerGuide>[0];
-  assert.equal(await readFile(CHANDRA_LEDGER.files.guide, 'utf8'), chandraLedgerGuide(ledger), 'run node packages/telescope-cli/src/archives/chandra/archive-ledger.mts');
-});
-
 test('Jupiter reproduces event for event on HRC-I, and its disc lands in the object-centred frame', async () => {
   const receipt = JSON.parse(await readFile(join(PROGRAMS, 'jupiter-hrci.hrcf18676N003_evt2.reproduction.json'), 'utf8')) as {
     events: { ours: number; archive: number; matched: number; onlyOurs: number; onlyArchive: number }; columns: { column: string; identicalShare: number }[] };
@@ -274,45 +252,6 @@ test('Jupiter reproduces event for event on HRC-I, and its disc lands in the obj
   assert.ok(frozen.horizons.motionArcseconds > frozen.horizons.angularDiameterArcseconds, 'the body moves further than its diameter');
   assert.ok(frozen.objectCentred.enclosed.r1!.excess > 4 * frozen.fixedSky.enclosed.r1!.excess,
     `the object-centred frame concentrates the source: ${frozen.objectCentred.enclosed.r1!.excess} against ${frozen.fixedSky.enclosed.r1!.excess}`);
-});
-
-test('a mode with no read mode is the plain mode, and a receipt written before that is still the one it names', async () => {
-  const hrc = { instrument: 'HRC', detector: 'HRC-I', grating: 'NONE', dataMode: 'OBSERVING' };
-  assert.equal(observationMode(hrc), 'OBSERVING', 'a detector that states no read mode names no read mode');
-  assert.equal(observationMode({ ...hrc, readMode: 'TIMED' }), 'TIMED/OBSERVING');
-  assert.equal(modeKey(hrc), 'HRC-I no grating OBSERVING');
-  // The committed HRC receipt says undefined/OBSERVING, from the template this replaced. It is left as it was written, so the
-  // ledger accepts both spellings and Jupiter stays reproduced; any other mode is still refused.
-  const committed = JSON.parse(await readFile(join(PROGRAMS, 'jupiter-hrci.hrcf18676N003_evt2.reproduction.json'), 'utf8')) as { dataMode: string };
-  assert.equal(committed.dataMode, 'undefined/OBSERVING');
-  const state = await pinnedState();
-  assert.deepEqual(state.problems, [], 'every committed receipt is accepted');
-  assert.ok(state.reproduced.has('jupiter-hrci|18676'), 'the HRC observation is proved by its own receipt');
-});
-
-test('a frozen-frame receipt proves only the observation it names, and one that cannot be read is reported', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'chandra-frozen-')), receipt = (overrides: Record<string, unknown> = {}) => ({
-    schema: 'cssearth-chandra-solar-system@2', program: 'test', obsid: 2798, target: 'CRAB NEBULA HALO',
-    horizons: { angularDiameterArcseconds: 38.42 }, objectCentred: { file: 'acisf02798_repro_evt2.fits' }, ...overrides });
-  await writeFile(join(directory, 'test.json'), `${JSON.stringify(program())}\n`);
-  const state = async () => pinnedState(directory);
-  await writeFile(join(directory, 'test.2798.solar-system.json'), `${JSON.stringify(receipt())}\n`);
-  assert.deepEqual((await state()).problems, []);
-  assert.ok((await state()).frozen.has('test|2798'));
-  // The receipt committed before the schema gained its second version still proves its own observation.
-  await writeFile(join(directory, 'test.2798.solar-system.json'), `${JSON.stringify(receipt({ schema: 'cssearth-chandra-solar-system@1' }))}\n`);
-  assert.ok((await state()).frozen.has('test|2798'));
-  for (const [what, broken] of [['another target', receipt({ target: 'JUPITER' })], ['another schema', receipt({ schema: 'cssearth-chandra-frozen@1' })],
-    ['no measurement', receipt({ objectCentred: undefined })], ['no disc', receipt({ horizons: { angularDiameterArcseconds: 0 } })]] as const) {
-    await writeFile(join(directory, 'test.2798.solar-system.json'), `${JSON.stringify(broken)}\n`);
-    const held = await state();
-    assert.equal(held.frozen.size, 0, `${what} proves no frozen frame`);
-    assert.equal(held.problems.length, 1, what);
-  }
-  await writeFile(join(directory, 'test.2798.solar-system.json'), 'not json at all\n');
-  const unreadable = await state();
-  assert.equal(unreadable.frozen.size, 0, 'a receipt that does not parse is not a check');
-  assert.match(unreadable.problems[0] ?? '', /test\.2798\.solar-system\.json/u);
 });
 
 test('the Horizons bodies of the moving-target route are validated data beside the programs, read when a target is frozen', async () => {

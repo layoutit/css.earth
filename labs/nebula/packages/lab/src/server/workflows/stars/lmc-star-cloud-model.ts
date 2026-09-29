@@ -1,9 +1,7 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 /** Offline verified reconstruction context for cloud-conditioned catalogue depths. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
-import { dirname } from 'node:path';
+import { dirname, posix } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -14,8 +12,7 @@ import { decomposeFilledComponents } from '@cssearth/nebula-reconstruction/metho
 import { createFilledVolumeSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-volume';
 import { createIntegratedSignalSampler } from '@cssearth/bake/volume';
 
-const sha256 = (b: Buffer) => createHash('sha256').update(b).digest('hex');
-type Pin = { path: string; sha256: string; url?: string };
+type Pin = { path: string; url?: string };
 async function pinned(pin: Pin) {
   let downloaded = false;
   const bytes = await readFile(pin.path).catch(async (error: NodeJS.ErrnoException) => {
@@ -24,7 +21,6 @@ async function pinned(pin: Pin) {
     if (!response.ok) throw new Error(`Cloud source download failed: ${response.status}`);
     downloaded = true; return Buffer.from(await response.arrayBuffer());
   });
-  if (sha256(bytes) !== pin.sha256) throw new Error(`Star cloud-model input pin changed: ${pin.path}`);
   if (downloaded) { await mkdir(dirname(pin.path), { recursive: true }); await writeFile(pin.path, bytes); }
   return bytes;
 }
@@ -34,11 +30,19 @@ export async function loadStarCloudModel(frame: DensityVolumeFrame) {
   const buffers = Object.fromEntries(await Promise.all(Object.entries(refs).map(async ([key, value]) => [key, await pinned(value as Pin)])));
   const recipe = parseLabModelJson(buffers.cloudRecipe.toString()), evidence = parseLabModelJson(buffers.cloudProvenance.toString());
   const analysis = parseLabModelJson(buffers.analysis.toString()), object = parseLabModelJson(buffers.cloudObject.toString());
-  if (object.properties.preparation.sha256 !== refs.cloudProvenance.sha256 || evidence.recipe.sha256 !== refs.cloudRecipe.sha256 ||
-      analysis.prior.sha256 !== refs.prior.sha256 || recipe.stellarPrior.sha256 !== refs.recipe.sha256 ||
-      recipe.stellarPrior.path !== refs.recipe.path) throw new Error('Cloud star model dependency pins disagree.');
+  // Every file names the next one by path: the cloud object its provenance, the provenance its recipe, the analysis and
+  // the recipe the stellar density. A catalogue that points at files from different preparations stops here.
+  const beside = (descriptor: string, file: unknown) => typeof file === 'string' ? posix.join(posix.dirname(descriptor), file) : undefined;
+  const disagreements = [
+    ['cloud object preparation', beside(refs.cloudObject.path, object.properties?.preparation?.source), refs.cloudProvenance.path],
+    ['cloud provenance recipe', evidence.recipe?.path, refs.cloudRecipe.path],
+    ['observation prior density', analysis.prior?.source?.path, refs.recipe.path],
+    ['cloud recipe stellar prior', recipe.stellarPrior?.path, refs.recipe.path],
+  ].filter(([, actual, expected]) => actual !== expected);
+  if (disagreements.length) throw new Error(`labs/nebula/models/lmc/stars catalogue depth model disagrees: ${JSON.stringify(disagreements)}`);
   const stellarObject = parseLabModelJson(buffers.object.toString());
-  if (stellarObject.properties.preparation.sha256 !== refs.recipe.sha256) throw new Error('Stellar object does not attest source density.');
+  if (beside(refs.object.path, stellarObject.properties?.preparation?.source) !== refs.recipe.path)
+    throw new Error(`${refs.object.path} does not name ${refs.recipe.path} as its density source.`);
   for (const sourceFrame of [object.properties.volume, stellarObject.properties.volume])
     for (const key of ['referenceFrame', 'epochJdTt', 'originM', 'localToReferenceXyzw', 'metersPerUnit'] as const)
       if (JSON.stringify(sourceFrame[key]) !== JSON.stringify(frame[key])) throw new Error('Star cloud model uses a different physical frame.');
@@ -68,9 +72,8 @@ export async function loadStarCloudModel(frame: DensityVolumeFrame) {
   const sampleSignal=createIntegratedSignalSampler({values:signal,width:target.info.width,height:target.info.height,
     bounds:mapping.boundsUnits,observerDistance:mapping.distanceUnits});
   const source=await loadVolumeSource(dirname(refs.recipe.path),parseLabModelJson(buffers.recipe.toString()));
-  const implementation = Object.fromEntries((await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/server/workflows/stars/lmc-star-cloud-model.ts', 'labs/nebula/packages/lab/src/cli/commands/prepare-lmc-stars.ts'])).map(pin => [pin.path, pin.sha256]));
-  return { source, cloud, mapping, sampleSignal, recipe, provenance: { ...refs, photo:recipe.photo, implementation,
+  return { source, cloud, mapping, sampleSignal, recipe, provenance: { ...refs, photo:recipe.photo,
     grid:source.recipe.grid, stellarProvenance:source.recipe.provenance, channels:recipe.channels,
-    integratedSignal:'Pinned target.png unflopped, Rec.709 encoded RGB luminance, global maximum normalization; identical createIntegratedSignalSampler to cloud-density preparation.' } };
+    integratedSignal:'The catalogue target.png unflopped, Rec.709 encoded RGB luminance, global maximum normalization; identical createIntegratedSignalSampler to cloud-density preparation.' } };
 }
 export type StarCloudModel = Awaited<ReturnType<typeof loadStarCloudModel>>;

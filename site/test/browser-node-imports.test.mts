@@ -113,7 +113,7 @@ test('mutation check: a static import of a workspace node entry reachable from a
   const stage = await mkdtemp(resolve(tmpdir(), 'browser-node-imports-entry-'));
   try {
     await writeFile(resolve(stage, 'entry.mts'), "import './leaf.mts';\n");
-    await writeFile(resolve(stage, 'leaf.mts'), "import { sha256 } from '@cssearth/core/node';\nimport { isArray } from '@cssearth/core';\nsha256(String(isArray([])));\n");
+    await writeFile(resolve(stage, 'leaf.mts'), "import { projectRoot } from '@cssearth/core/node';\nimport { isArray } from '@cssearth/core';\nprojectRoot(String(isArray([])));\n");
     const violations = await findStaticNodeImports([resolve(stage, 'entry.mts')]);
     assert.deepEqual(violations, [{ file: relative(root, resolve(stage, 'leaf.mts')), specifier: '@cssearth/core/node' }]);
   } finally { await rm(stage, { recursive: true, force: true }); }

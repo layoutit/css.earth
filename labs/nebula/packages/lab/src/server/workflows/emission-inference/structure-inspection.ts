@@ -1,7 +1,6 @@
 /** Prepared panels, conserved float fields and actual support atlases for any observation. */
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { analyzeStructureMap, colorStructureLayer, structureLayers } from '@cssearth/nebula-reconstruction/evidence/structure-map';
 import { createSupportAtlases } from '@cssearth/nebula-reconstruction/evidence/support-atlas';
@@ -13,20 +12,19 @@ export function workingRasterToFrame(nativeToFrame: Affine, nativeWidth: number,
   // Pixel edges remain identical after resizing. There is no inferred crop or half-pixel shift.
   return composeAffine(nativeToFrame, [nativeWidth / width, 0, 0, nativeHeight / height, 0, 0]);
 }
-const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 export async function writeStructureInspection(directory: string, rgb: Buffer, width: number, height: number, settings: WaveletSettings) {
   const started = performance.now(), result = analyzeStructureMap(rgb, width, height, settings);
   if (result.metrics.reconstructionMaxError > 1e-6) throw new Error('Structure partition lost source RGB.');
   const raster = async (file: string, bytes: Uint8Array) => {
     const png = await sharp(bytes, { raw: { width, height, channels: 3 } }).png().toBuffer();
     await writeFile(resolve(directory, file), png);
-    return { file, sha256: sha(png) };
+    return { file };
   };
   const field = async (file: string, values: Float32Array) => {
     const bytes = Buffer.alloc(values.length * 4);
     for (let i = 0; i < values.length; i++) bytes.writeFloatLE(values[i]!, i * 4);
     await writeFile(resolve(directory, file), bytes);
-    return { file, values: values.length, sha256: sha(bytes) };
+    return { file, values: values.length };
   };
   const source = await raster('source.png', rgb), combined = Buffer.alloc(rgb.length);
   const palette = { diffuse: [.65, .3, .85], arcs: [.1, .9, 1], knots: [1, .8, .15], unassigned: [1, .18, .15] };
@@ -59,10 +57,10 @@ export async function writeStructureInspection(directory: string, rgb: Buffer, w
     const page = support.pages[i]!, file = `regions-${i}.png`;
     const bytes = await sharp(page.pixels, { raw: { width: page.width, height: page.height, channels: 4 } }).png().toBuffer();
     await writeFile(resolve(directory, file), bytes);
-    atlases.push({ file, width: page.width, height: page.height, sha256: sha(bytes) });
+    atlases.push({ file, width: page.width, height: page.height });
   }
   return { dimensions: { width, height }, panels, fields, directionField, atlases, regions: support.regions, metrics: result.metrics,
-    seconds: (performance.now() - started) / 1000, sourceImageSha256: sha(rgb),
+    seconds: (performance.now() - started) / 1000,
     interpretation: { coordinates: 'Working raster pixel edges; imageToFrame uses native raster edges. Bounds are sprite placement, alpha is actual region support.',
       regionMetrics: 'Contrast is peak positive wavelet coefficient in display luminance [0,1]. Elongation is the weighted spatial major/minor axis ratio, with a 0.5px denominator floor.',
       relationships: 'Scale-plane components and overlap parents are image evidence, not identified physical objects or common depths.',

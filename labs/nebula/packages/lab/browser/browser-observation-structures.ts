@@ -110,7 +110,7 @@ try {
     const stored = JSON.parse(await page.evaluate(key => localStorage.getItem(key), reviewStorageKey(cataloguePath, image)) ?? '{}');
     assert.equal(stored[selectedId], 'keep');
     await page.screenshot({ path: `${directory}/${image.id}.png` });
-    sourceChecks.push({ id: image.id, selectedId, visibleCandidates: count, mapSha256: image.mapSha256 });
+    sourceChecks.push({ id: image.id, selectedId, visibleCandidates: count, directory: image.directory });
   }
   for (const node of sourceNodes) assert.equal(await node.evaluate(element => element.isConnected), true);
   await page.reload();

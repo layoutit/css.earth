@@ -5,7 +5,6 @@ scan validity before sampling, and retain nearest native cells on a compact
 angular grid. No interpolation, topography derivation, or runtime processing.
 """
 import argparse
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -20,11 +19,6 @@ PDS = 'http://pds.nasa.gov/pds4/pds/v1'
 CART = 'http://pds.nasa.gov/pds4/cart/v1'
 SHAPE = (17920, 46080)
 NODATA = -32768
-
-
-def digest(path):
-    with Path(path).open('rb') as stream:
-        return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
 def validate_label(path, product):
@@ -101,15 +95,17 @@ def encode(values, valid, scale, offset):
 def prepare(plan_path, source_directory=None, output_directory=None):
     plan_path = Path(plan_path)
     plan = json.loads(plan_path.read_text())
+    retired = [field for field in ('sha256', 'labelSha256') if field in plan]
+    if retired:
+        raise ValueError(f'{plan_path}: retired hash fields {retired}; recipes declare inputs by path')
     root = Path(source_directory) if source_directory else plan_path.parent
     target_root = Path(output_directory) if output_directory else plan_path.parent
     target_root.mkdir(parents=True, exist_ok=True)
     source = root / plan['input']; label = root / plan['label']
     validate_label(label, plan['product'])
-    if digest(label) != plan['labelSha256']:
-        raise ValueError('Detached label pin differs')
     if source.stat().st_size != SHAPE[0] * SHAPE[1] * 4:
-        raise ValueError('Original IMG byte length differs')
+        raise ValueError(f"{plan['product']} {plan['input']}: {source.stat().st_size} bytes, "
+                         f'expected {SHAPE[0] * SHAPE[1] * 4} for a {SHAPE[0]}x{SHAPE[1]} float32 mosaic')
     width, height = plan['width'], plan['height']
     if width != height * 2 or width < 2:
         raise ValueError('Expected a 2:1 angular display grid')
@@ -120,11 +116,9 @@ def prepare(plan_path, source_directory=None, output_directory=None):
     minimum, maximum = math.inf, -math.inf
     sample_histogram = np.zeros(1202, dtype='int64')
     hist_min, hist_step = plan['histogram']['minimum'], plan['histogram']['step']
-    source_hash = hashlib.sha256()
     with source.open('rb') as stream:
         for start in range(0, SHAPE[0], 32):
             raw = stream.read(min(32, SHAPE[0]-start) * SHAPE[1] * 4)
-            source_hash.update(raw)
             rows = np.frombuffer(raw, dtype='<f4').reshape(-1, SHAPE[1])
             finite = np.isfinite(rows)
             valid = valid_values(rows, plan['quantity'])
@@ -139,9 +133,6 @@ def prepare(plan_path, source_directory=None, output_directory=None):
                 minimum = min(minimum, float(samples.min())); maximum = max(maximum, float(samples.max()))
                 bins = np.floor((samples.astype('float64')-hist_min)/hist_step).astype('int64') + 1
                 sample_histogram += np.bincount(bins.clip(0,1201), minlength=1202)
-    actual_hash = source_hash.hexdigest()
-    if actual_hash != plan['sha256']:
-        raise ValueError('Original IMG hash differs')
     half = math.pi * 1737400
     transform = from_origin(-half, half/2, 2*half/width, half/height)
     out_path = target_root / plan['output']
@@ -180,7 +171,7 @@ def prepare(plan_path, source_directory=None, output_directory=None):
             anchors.append({**anchor, 'sourceColumn':x, 'sourceRow':y,
                             'sourceValue': v if math.isfinite(v) else None,
                             'valid': bool(valid_values(np.array([v]),plan['quantity'])[0])})
-    receipt = {'product':plan['product'], 'sourceSha256':actual_hash,
+    receipt = {'product':plan['product'],
                'sourceBytes':source.stat().st_size, 'sourceShape':list(SHAPE),
                'nativeCells':native_count, 'nativeFiniteCells':finite_count,
                'nativeValidCells':valid_count, 'nativeInvalidFiniteCells':finite_count-valid_count,
@@ -194,7 +185,7 @@ def prepare(plan_path, source_directory=None, output_directory=None):
                'encoding':plan['encoding'], 'maximumQuantizationError':max_error,
                'selectedValidCells':selected_valid, 'selectedMissingCells':width*height-selected_valid,
                'sampling':'Nearest native cell at output pixel center; validity before sampling; no interpolation or fill',
-               'anchors':anchors,'output':plan['output'],'sha256':digest(out_path),'bytes':out_path.stat().st_size}
+               'anchors':anchors,'output':plan['output'],'bytes':out_path.stat().st_size}
     (target_root / plan['receipt']).write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps({k:v for k,v in receipt.items() if k not in ['histogram','anchors']}),flush=True)
     return receipt

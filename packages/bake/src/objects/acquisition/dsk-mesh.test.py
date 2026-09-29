@@ -11,7 +11,7 @@ class ExactWeldTest(unittest.TestCase):
     def test_duplicate_patch_boundary_preserves_coordinates_winding_and_map(self):
         vertices=np.array([[1.,0.,0.],[0.,1.,0.],[0.,0.,1.],[-1.,-1.,-1.],[1.,0.,0.]])
         plates=np.array([[1,2,3],[5,4,2],[2,4,3],[3,4,5]])
-        recipe={'weldedVertices':4,'inputSha256':'0'*64,'inputBytes':1,'spiceypyVersion':'6.0.3','cspiceVersion':'CSPICE_N0067','member':'shape.obj'}
+        recipe={'weldedVertices':4,'inputBytes':1,'spiceypyVersion':'6.0.3','cspiceVersion':'CSPICE_N0067','member':'shape.obj'}
         a,receipt=module.archive_mesh(vertices,plates,recipe,{'frameId':10040})
         b,_=module.archive_mesh(vertices,plates,recipe,{'frameId':10040})
         self.assertEqual(a,b)

@@ -4,10 +4,7 @@
   "date": "2026-09-16",
   "dirtyFiles": "Uncommitted: regenerated ignored site outputs and prepare:sources provenance rewrites only; M8 source and prepared bank as committed.",
   "bank": {
-    "path": "src/objects/m8/prepared/lenses.json",
-    "sha256": "df3a34efce8fc44f7f2a70ad375c4d5f5b2ce622dd8ddb304bf369eb8290ac1a",
-    "descriptorSha256": "df3a34efce8fc44f7f2a70ad375c4d5f5b2ce622dd8ddb304bf369eb8290ac1a",
-    "sourceResult": "37a8918fb195c57ecee4b6cbc47b62e465092adb324416e449e1d439d34a4b9c"
+    "path": "src/objects/m8/prepared/lenses.json"
   },
   "browser": "Chromium 148.0.7778.96 (Playwright, headless)",
   "viewport": {

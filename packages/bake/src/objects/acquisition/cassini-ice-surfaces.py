@@ -1,6 +1,6 @@
 """Offline RC19 spectral surfaces on qualified existing body coordinates.
 
-Reuse the pinned B8 numeric/GeoTIFF helpers without its between-center mapper.
+Reuse the shared B8 numeric/GeoTIFF helpers without its between-center mapper.
 RGB channels always share one native observation and source-pixel owner. This
 tool does not create geometry, photometrically correct data or fit pointing.
 """
@@ -29,8 +29,6 @@ _QUALITY_SPEC.loader.exec_module(detector_quality)
 field = transfer.field
 MISSING = transfer.MISSING
 SCHEMA = 'cssearth-cassini-ice-surfaces@1'
-TRANSFER_SHA256 = '25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914'
-NAVIGATION_SHA256 = 'c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04'
 
 
 def sequence(label, name):
@@ -335,15 +333,13 @@ def write_projected_products(root, plan, observations, projector=project_detecto
                 transfer.write_tiff(audit, array, plan['radiusMeters'], 0, 'uint16')
             edges = np.radians(np.linspace(90, -90, height + 1))
             weights = (np.sin(edges[:-1]) - np.sin(edges[1:]))[:, None] / (2 * width)
-            reports.append({'kind': kind, 'file': plan['outputs'][kind],
-                            'sha256': transfer.digest(output), 'bytes': output.stat().st_size,
+            reports.append({'kind': kind, 'file': plan['outputs'][kind], 'bytes': output.stat().st_size,
                             'areaFraction': float(((owners > 0) * weights).sum()),
                             'contributingDetectorApertures': cells,
                             'owners': {obs['id']: int((owners == n).sum()) for n, obs in enumerate(observations, 1)},
-                            'audit': [{'file': p.name, 'sha256': transfer.digest(p)} for p in audits]})
+                            'audit': [{'file': p.name} for p in audits]})
             if kind == 'rgb':
-                reports[-1]['display'] = {'file': plan['outputs']['rgbDisplay'],
-                                          'sha256': transfer.digest(display), 'bytes': display.stat().st_size,
+                reports[-1]['display'] = {'file': plan['outputs']['rgbDisplay'], 'bytes': display.stat().st_size,
                                           'centerLongitudeDegrees': 180,
                                           'sourceColumnRoll': width // 2,
                                           'stretch': plan['rgbDisplay']}
@@ -353,17 +349,15 @@ def write_projected_products(root, plan, observations, projector=project_detecto
 def prepare(path):
     path = Path(path).resolve()
     plan, root = json.loads(path.read_text()), path.parent
+    retired = [field for field in ('pins', 'detectorQualityPreparerSha256') if field in plan]
+    if retired:
+        raise ValueError(f'{path}: retired hash fields {retired}; recipes declare inputs by path')
     if plan.get('schema') != SCHEMA or plan.get('target') not in ('IAPETUS', 'TETHYS'):
         # Phoebe requires an independently qualified frame transfer; it cannot
         # enter this native-coordinate path just by changing a body name.
         raise ValueError('Unqualified native-coordinate recipe')
-    if transfer.digest(_SPEC.origin) != TRANSFER_SHA256:
-        raise ValueError('Pinned B8 transfer implementation changed')
-    if transfer.digest(_NAV_SPEC.origin) != NAVIGATION_SHA256:
-        raise ValueError('Pinned source-camera implementation changed')
-    if (plan.get('detectorQualityPolicy') != detector_quality.POLICY
-            or transfer.digest(_QUALITY_SPEC.origin) != plan.get('detectorQualityPreparerSha256')):
-        raise ValueError('Pinned original-detector quality implementation changed')
+    if plan.get('detectorQualityPolicy') != detector_quality.POLICY:
+        raise ValueError('Recipe names a different original-detector quality policy')
     validate_policy(plan['policy'])
     insets = plan.get('apertureInsetRadians', [])
     if (plan.get('aperturePolicy') != navigation.APERTURE_POLICY or len(insets) != 2
@@ -375,24 +369,18 @@ def prepare(path):
             or not isinstance(plan.get('registrationEvidence'), dict)):
         raise ValueError('Source registration and interpretation are required')
     evidence = plan['registrationEvidence']
-    if (not evidence.get('qualification') or not evidence.get('sha256')
-            or transfer.digest(root / evidence['file']) != evidence['sha256']):
-        raise ValueError('Source registration evidence changed')
+    if not evidence.get('qualification') or not (root / evidence.get('file', '')).is_file():
+        raise ValueError('Source registration evidence is missing')
     required = [entry[key] for entry in plan['observations'] for key in ('calibrated', 'navigation', 'rawOriginal')]
-    if not all(name in plan['pins'] for name in required):
-        raise ValueError('Every original cube must be pinned')
-    for name, pin in plan['pins'].items():
-        if transfer.digest(root / name) != pin:
-            raise ValueError('Source changed: ' + name)
+    missing = [name for name in required if not (root / name).is_file()]
+    if missing:
+        raise ValueError('Original cubes are missing: ' + ', '.join(missing))
     width, height = plan['width'], plan['height']
     if type(width) is not int or type(height) is not int or width != height * 2 or not 0 < width <= 2048:
         raise ValueError('Invalid canonical map dimensions')
     observations = [read_observation(root, entry, plan) for entry in plan['observations']]
     reports = write_projected_products(root, plan, observations)
-    report = {'schema': SCHEMA, 'recipeSha256': transfer.digest(path),
-              'preparerSha256': transfer.digest(__file__), 'transferSha256': transfer.digest(_SPEC.origin),
-              'navigationPreparerSha256': transfer.digest(_NAV_SPEC.origin),
-              'detectorQualityPreparerSha256': transfer.digest(_QUALITY_SPEC.origin),
+    report = {'schema': SCHEMA, 'recipe': path.name,
               'observations': [o['report'] for o in observations], 'outputs': reports,
               'absolutePointingAccuracy': plan['absolutePointingAccuracy'],
               'photometricCorrection': plan['photometricCorrection'],

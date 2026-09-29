@@ -18,10 +18,9 @@ import { sampleStatistics, type FitsHeader } from '@cssearth/fits';
  * One receipt per product, beside the program: <program id>.<product>.reproduction.json. The receipt is also added to the
  * record the stage that made the product wrote beside it, as `archive-agreement` evidence naming that receipt: a product with
  * no record is refused rather than reported as checked, because nothing then says which run made the file compared. */
-import { access, readFile, writeFile } from 'node:fs/promises';
+import { access, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '@cssearth/bake/objects/raster';
 import { mastFile, WORKSPACE } from '@cssearth/telescope/node';
@@ -152,8 +151,8 @@ export async function compareWithMast(id: string, observation: string, run: stri
       schema: 'cssearth-hst-reproduction@1', program: id, observation, product: pinned.name.replace(/\.fits$/u, ''),
       instrument: `${entry.instrument}/${entry.detector}`, opticalElement: entry.opticalElement,
       toolchain: 'packages/telescope-cli/src/archives/hst/toolchain.json', crdsContext: program.crdsContext,
-      mast: { ...pinned, sha256: (await sha256File(mastPath)).sha256, ...cards(theirPrimary, RUN_CARDS) },
-      local: { sha256: (await sha256File(local)).sha256, ...cards(ourPrimary, RUN_CARDS) },
+      mast: { ...pinned, ...cards(theirPrimary, RUN_CARDS) },
+      local: { bytes: (await stat(local)).size, ...cards(ourPrimary, RUN_CARDS) },
       differentSettings: differentSettings(ourPrimary, theirPrimary), differentGrid,
       repeatedCards: [...new Set([...ourHdus, ...theirHdus].flatMap(hdu => hdu.repeatedCards))].sort(), extensions,
     };

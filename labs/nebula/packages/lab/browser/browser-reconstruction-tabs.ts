@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import { chromium, type Browser, type Page } from 'playwright';
 import type { PreparedReconstruction } from '../src/features/reconstruction/reconstruction-types.ts';
 import type { DensityOverlay } from '../src/features/legacy-viewer/controller';
+import { isResultName } from '../src/features/result-name.ts';
 
 interface Landmark { uv: [number, number]; pixel: [number, number]; }
 interface Row { imageId: string; resultId: string; }
@@ -60,7 +61,7 @@ try {
   assert.ok(Array.isArray(rows) && rows.length > 0 && rows.length <= 12);
   const fixtures: Fixture[] = [];
   for (const row of rows) {
-    assert.match(row.imageId, /^[a-z0-9-]+$/); assert.match(row.resultId, /^[a-f0-9]{64}$/);
+    assert.match(row.imageId, /^[a-z0-9-]+$/); assert.ok(isResultName(row.resultId), row.resultId);
     const prepared = await json(`.local/nebula-lab/reconstructions/${row.resultId}/result.json`) as PreparedReconstruction;
     assert.equal(prepared.resultId, row.resultId); assert.equal(prepared.imageId, row.imageId);
     const provenance = await json(`${prepared.subject.directory}/source/provenance.json`);

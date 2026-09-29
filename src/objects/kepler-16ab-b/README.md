@@ -28,4 +28,4 @@ Not measured and not shown: colour, albedo, surface, atmosphere, rotation. The d
 
 The orbit is drawn as a fixed ellipse. The real orbit precesses: Doyle et al. predicted that transits across A would "cease in early 2018", returning around 2042, which a fixed tilt cannot show. The planet's place in 2026 carries the period's uncertainty over 28 orbits. Star B's light is not added to the planet's lighting.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

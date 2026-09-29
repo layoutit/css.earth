@@ -7,7 +7,6 @@
   "image": {
     "file": "pallas-20171011-cam1.fits",
     "bytes": 593280,
-    "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
     "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam1.fits",
     "format": "fits-primary",
     "bitpix": -64,
@@ -93,7 +92,6 @@
       "input": {
         "file": "2_Pallas_adam.obj",
         "bytes": 121798,
-        "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655",
         "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj"
       },
       "profile": {
@@ -106,18 +104,18 @@
         "schema": "cssearth-archived-camera@1",
         "rayMatrix": [
           [
-            -1.1046870951952486e-8,
-            1.2430790733770957e-8,
+            -1.1046870951952486e-08,
+            1.2430790733770957e-08,
             0.32719745280849855
           ],
           [
-            -1.359147288361474e-8,
-            -1.0872489279132721e-8,
+            -1.359147288361474e-08,
+            -1.0872489279132721e-08,
             -0.14791355856428182
           ],
           [
-            1.7187314495029738e-9,
-            -6.081114156055208e-9,
+            1.7187314495029738e-09,
+            -6.081114156055208e-09,
             0.9333077767159935
           ]
         ],
@@ -158,7 +156,6 @@
       "input": {
         "file": "2_Pallas_mpcd.obj",
         "bytes": 2703739,
-        "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e",
         "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj"
       },
       "profile": {
@@ -171,18 +168,18 @@
         "schema": "cssearth-archived-camera@1",
         "rayMatrix": [
           [
-            -1.1046863164603473e-8,
-            1.2430797668667612e-8,
+            -1.1046863164603473e-08,
+            1.2430797668667612e-08,
             0.3271974510258137
           ],
           [
-            -1.3591479724964832e-8,
-            -1.0872480664329688e-8,
+            -1.3591479724964832e-08,
+            -1.0872480664329688e-08,
             -0.14791357341361744
           ],
           [
-            1.718727401024897e-9,
-            -6.0811153824822126e-9,
+            1.718727401024897e-09,
+            -6.0811153824822126e-09,
             0.9333077749875945
           ]
         ],

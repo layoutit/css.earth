@@ -3,7 +3,7 @@ import test from 'node:test';
 import { adjustedMatrix, imageCorners, readAdjustment, readObservations, transform, unchanged } from './model.js';
 
 function fixture() {
-  const source = { width: 6000, height: 4000, url: 'https://example.org/original.tif', page: 'https://example.org/source', sha256: 'a'.repeat(64), credit: 'Observation credit' };
+  const source = { width: 6000, height: 4000, url: 'https://example.org/original.tif', page: 'https://example.org/source', credit: 'Observation credit' };
   const row = { id: 'a', label: 'Source A', source, layers: { original: { path: '.local/a.webp', width: 1500, height: 1000 } },
     imageToFrame: [.12, .04, -.04, .12, 170, 50], registration: { status: 'verified', matchedStars: 80, rmsPixels: .2, maxResidualPixels: .8 } };
   return { schema: 'cssearth-nebula-observations@1', id: 'any-nebula', frame: { width: 1024, height: 1024, fieldArcminutes: [60, 60], centerIcrsDegrees: [12, -20], northUp: true }, images: [row, { ...row, id: 'b', label: 'Source B' }] };

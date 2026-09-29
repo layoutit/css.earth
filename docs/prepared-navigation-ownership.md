@@ -116,9 +116,8 @@ comparisons and the interpretation used for its model.
   checks activation ownership and cancellation.
 - `node --test site/test/navigation-lifecycle.test.mts site/test/scene-session.test.mts`
   checks navigation and retained scene state.
-- `node --test site/test/rendered-page.test.mts` parses built Saturn, Earth and
-  Mercury HTML for one scene, a camera and prepared texture references. It does
-  not run Chrome or verify animation and flight behavior.
+- `node --test site/test/rendered-page.test.mts` parses built HTML for the
+  information-tab rules. It does not run Chrome or verify animation and flight behavior.
 - [prepared-object-worker-client.test.ts](../packages/renderer/src/prepared-object-worker-client.test.ts)
   in the renderer suite — persistent worker reuse, cancellation and disposal.
 

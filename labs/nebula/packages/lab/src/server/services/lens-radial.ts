@@ -13,6 +13,7 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 import { lensLevelPairs, loadLensLevelGrid, type LensLevelGrid, type LensLevelMaterial } from './lens-levels.ts';
+import { isResultName } from '../../features/result-name.ts';
 
 /** Radial bins from the footprint centroid out to the farthest covered pixel. */
 export const RADIAL_BINS = 24;
@@ -127,7 +128,7 @@ export function lensRadialHandler(root: string, read: (resultId: string) => Prom
     try {
       if (request.method !== 'GET') throw new TypeError('The radial profile is read-only.');
       const url = new URL(request.url ?? '/', 'http://localhost'), id = url.searchParams.get('resultId') ?? '';
-      if (!/^[a-f0-9]{64}$/.test(id)) throw new TypeError('Invalid reconstruction identity.');
+      if (!isResultName(id)) throw new TypeError(`Invalid reconstruction name: ${JSON.stringify(id)}`);
       const value = await lensRadialProfile(root, await read(id));
       response.setHeader('Cache-Control', 'no-store'); response.setHeader('Content-Type', 'application/json'); response.end(JSON.stringify(value));
     } catch (error) {

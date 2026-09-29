@@ -98,7 +98,7 @@
       "licenseEvidence": [
         "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
       ],
-      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "acquisition": "Downloaded unchanged; the bytes match the checksum in the CIE dataset metadata",
       "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
       "consumers": [
         "assets",

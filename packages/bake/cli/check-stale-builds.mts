@@ -6,10 +6,8 @@
  *
  * The one command that imports the bake's source rather than its entry: it has to run before this package is built, and
  * `--run` is what builds it. The module it loads imports only Node built-ins. */
-import { rebuildStale, staleBuilds, staleInstall } from '../src/preparation/stale-builds.ts';
+import { rebuildStale, staleBuilds } from '../src/preparation/stale-builds.ts';
 
-const install = await staleInstall();
-if (install) { console.error(install); process.exit(1); }
 if (process.argv.includes('--run')) {
   const rebuilt = await rebuildStale().catch((error: unknown) => {
     console.error(error instanceof Error ? error.message : String(error));

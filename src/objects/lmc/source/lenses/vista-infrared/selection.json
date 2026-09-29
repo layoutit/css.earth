@@ -1,7 +1,6 @@
 {
   "settings": {
     "imageId": "vista-infrared",
-    "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
     "label": "ESO VISTA",
     "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +25,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
+    "id": "reconstruction-lmc-clouds-emission-envelope-vista-infrared",
     "parts": [
       {
         "id": "all-light",

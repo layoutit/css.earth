@@ -4,7 +4,6 @@
   "bankId": "smc",
   "defaultLens": "smc-horalek-wide",
   "framingRadiusUnits": 7,
-  "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
   "frame": {
     "referenceFrame": "sun-icrf",
     "epochJdTt": 2461286.5,
@@ -99,8 +98,6 @@
   "lenses": [
     {
       "imageId": "smc-horalek-wide",
-      "sourceResultId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333",
-      "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
       "tangentBoundsKpc": {
         "min": [
           -6.934778663022302,
@@ -111,7 +108,6 @@
           5.481686229435286
         ]
       },
-      "sourceDigest": "7160278899509d4e42de27b6dad25990c90aa60855761cee892e47bdb443486d",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-horalek-wide/registered.png",
         "bytes": 778199
@@ -150,8 +146,6 @@
     },
     {
       "imageId": "smc-vista",
-      "sourceResultId": "1f80d4736aa5c70518e67239776d4306b1bfab086712c2e962415178d3a8a770",
-      "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
       "tangentBoundsKpc": {
         "min": [
           -4.099758621990718,
@@ -162,7 +156,6 @@
           2.4551454595970643
         ]
       },
-      "sourceDigest": "bc23102e7f4e3ee90f72d8ea54c2e84780350a68402ccb3443589fc43a5a9366",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-vista/registered.png",
         "bytes": 1639979
@@ -201,8 +194,6 @@
     },
     {
       "imageId": "smc-smash",
-      "sourceResultId": "a1e5a1d4ee16dfa3bb1861fa4b069642bb8840e86928158afcc0ff4b4aa10032",
-      "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
       "tangentBoundsKpc": {
         "min": [
           -4.573045880767771,
@@ -213,7 +204,6 @@
           3.0827097461894732
         ]
       },
-      "sourceDigest": "a385045e34afe3d6a4a18ad3151a8f6aa5d00a9a4d80b13cf4b80175e8f781b7",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-smash/registered.png",
         "bytes": 1274535
@@ -252,8 +242,6 @@
     },
     {
       "imageId": "smc-dss2",
-      "sourceResultId": "a280d527b56c9ad28aeaf58182b5360aa5eb7a80a4f0e0ebb95c0d37aada0031",
-      "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
       "tangentBoundsKpc": {
         "min": [
           -2.4753084363656517,
@@ -264,7 +252,6 @@
           1.937825293962566
         ]
       },
-      "sourceDigest": "bc1ac92a3ebd661fdc75568d0371c2cf3ddd98ea5f78a143edc8505990dffd89",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-dss2/registered.png",
         "bytes": 1857412
@@ -303,8 +290,6 @@
     },
     {
       "imageId": "smc-allwise-wide",
-      "sourceResultId": "298c402ba303bd906466d0279b4d9b7ee2d15718eb3679ee1b0aa5af8a4ef6cb",
-      "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
       "tangentBoundsKpc": {
         "min": [
           -6.588161840382211,
@@ -315,7 +300,6 @@
           5.045880289813057
         ]
       },
-      "sourceDigest": "99eb45c9ab288b20a702e826f319a7aae3e5aabb79cac665eef6cdda52acac2a",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-allwise-wide/registered.png",
         "bytes": 632401

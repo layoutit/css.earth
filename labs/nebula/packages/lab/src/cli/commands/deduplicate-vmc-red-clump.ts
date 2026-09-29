@@ -1,5 +1,4 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 const base = '.local/nebula-lab/smc-vmc';
 const text = await readFile(`${base}/matched-rc.tsv`, 'utf8');
 const lines = text.trim().split('\n');
@@ -41,6 +40,6 @@ rows.forEach((r, i) => { const root = find(i), old = best.get(root); if (old ===
 const output = header + '\n' + [...best.values()].sort((a, b) => a - b).map(i => lines[i]).join('\n') + '\n';
 await writeFile(`${base}/density-rc.tsv`, output);
 const receipt = JSON.parse(await readFile('labs/nebula/models/smc/vmc/crossmatch-receipt.json', 'utf8'));
-receipt.densityCatalogue = { path: `${base}/density-rc.tsv`, sha256: createHash('sha256').update(output).digest('hex'), rows: best.size, removedRepeatedMeasurements: rows.length - best.size, samePhotometryIdPairs: sameIdPairs, crossTileOverlapPairs: overlapPairs, policy: 'Connected components of identical public PSF IDs or pairs in different tiles within 0.3 arcsec. Keep the lowest Ks uncertainty, then lowest matching separation. No averaging of distance or position. Original measurement catalogue remains preserved.', limitation: 'Cross-tile positional deduplication may merge unresolved close pairs. Counts represent selected RC tracers, not a completeness-corrected stellar mass density.' };
+receipt.densityCatalogue = { path: `${base}/density-rc.tsv`, rows: best.size, removedRepeatedMeasurements: rows.length - best.size, samePhotometryIdPairs: sameIdPairs, crossTileOverlapPairs: overlapPairs, policy: 'Connected components of identical public PSF IDs or pairs in different tiles within 0.3 arcsec. Keep the lowest Ks uncertainty, then lowest matching separation. No averaging of distance or position. Original measurement catalogue remains preserved.', limitation: 'Cross-tile positional deduplication may merge unresolved close pairs. Counts represent selected RC tracers, not a completeness-corrected stellar mass density.' };
 await writeFile('labs/nebula/models/smc/vmc/crossmatch-receipt.json', JSON.stringify(receipt, null, 2) + '\n');
 console.log(receipt.densityCatalogue);

@@ -84,5 +84,5 @@ function finite(value: unknown): number { if (typeof value !== 'number' || !Numb
 function positive(value: unknown): number { const n = finite(value); if (!(n > 0)) throw new TypeError('Expected positive cluster value.'); return n; }
 function unique(ids: Set<string>, id: string): void { if (ids.has(id)) throw new TypeError(`Duplicate cluster identifier: ${id}`); ids.add(id); }
 function reference(value: unknown, ids: Set<string>): void {
-  const ref = text(value); if (![...ids].some(id => ref === id || ref.startsWith(`${id}:`))) throw new TypeError('Cluster reference has no pinned source.');
+  const ref = text(value); if (![...ids].some(id => ref === id || ref.startsWith(`${id}:`))) throw new TypeError(`Cluster reference ${ref} has no declared source.`);
 }

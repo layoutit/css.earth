@@ -3,7 +3,7 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/e2fbb981cbaef37caab5c0e14c8440b7e3fdffd70b3f9581d6751b4818f161af.webp",
+      "filename": "datasets/optical.webp",
       "bytes": 5842,
       "sha256": "e2fbb981cbaef37caab5c0e14c8440b7e3fdffd70b3f9581d6751b4818f161af"
     },
@@ -16,8 +16,8 @@
     {
       "location": "prepared",
       "filename": "image-layers.json",
-      "bytes": 285841,
-      "sha256": "1476c587e29d32bc822ee95fe771603c9f6c963895a9ae6fa13d268ebda8e877"
+      "bytes": 260041,
+      "sha256": "7d91de39526b5c1816c3cf56c123ab40000848c3bac0727902c9d63435a0dbbf"
     },
     {
       "location": "prepared",
@@ -922,14 +922,8 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 1660,
-      "sha256": "472373bf5faabfb1515dc60313b7ad7a8812ea8c57ca2d2523f4aa631df68903"
-    },
-    {
-      "location": "prepared",
-      "filename": "provenance.json",
-      "bytes": 53198,
-      "sha256": "1e2686c984c0a659a41ccfcb771eaeaf17c99cc0e9a5e4363829ea05dd2432cc"
+      "bytes": 1546,
+      "sha256": "10fdfa34edd7889c5d7798a2478de8440dc4cb51457d37c342ac15a6e6187188"
     }
   ]
 }

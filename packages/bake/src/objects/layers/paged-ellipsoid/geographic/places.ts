@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -45,8 +44,7 @@ if (new Set(places.map(place => place.id)).size !== places.length || places.leng
 const catalog = { schema: "cssearth-prepared-destinations@1", source: manifest.source,
   snapshotDate: manifest.snapshotDate, qualification: manifest.qualification, places };
 const bytes = Buffer.from(JSON.stringify(catalog) + "\n");
-const descriptor = { url: `${config.publicBase}${config.namespace}-places.json`, bytes: bytes.length,
-  sha256: sha256(bytes), count: places.length,
+const descriptor = { url: `${config.publicBase}${config.namespace}-places.json`, bytes: bytes.length, count: places.length,
   sourcePage: manifest.sourcePage, license: manifest.license, snapshotDate: manifest.snapshotDate };
 await mkdir(publicDirectory,{recursive:true});
 await writeFile(`${publicDirectory}/${config.namespace}-places.json`, bytes);

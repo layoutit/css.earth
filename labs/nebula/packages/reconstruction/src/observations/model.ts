@@ -16,9 +16,11 @@ export interface ArchiveQuery {
   provider: ArchiveProvider; status: 'pending' | 'complete' | 'truncated' | 'error';
   queriedAt: string | null; endpoint: string; query: string; radiusDegrees: number;
   matchedCount: number | null; matchedEstimatedBytes: number | null; matchedUnknownSizeCount: number | null;
-  images: ArchiveImage[]; error?: string; responseSha256?: string;
-  imagesPath?: string; imagesSha256?: string; imageCount?: number;
+  images: ArchiveImage[]; error?: string;
+  imagesPath?: string; imageCount?: number;
 }
+const archiveQueryKeys = ['provider', 'status', 'queriedAt', 'endpoint', 'query', 'radiusDegrees', 'matchedCount', 'matchedEstimatedBytes',
+  'matchedUnknownSizeCount', 'images', 'error', 'imagesPath', 'imageCount'];
 function text(value: unknown): value is string { return typeof value === 'string'; }
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
 function nullableNumber(value: unknown): boolean { return value === null || finite(value); }
@@ -30,7 +32,6 @@ export function safeArchiveUrl(value: unknown): string | null {
   catch { return null; }
 }
 function nullableUrl(value: unknown): boolean { return value === null || safeArchiveUrl(value) !== null; }
-function hash(value: unknown): boolean { return text(value) && /^[a-f0-9]{64}$/.test(value); }
 function date(value: unknown): boolean { return text(value) && Number.isFinite(Date.parse(value)); }
 const safePagePath = (path: string) => !path.startsWith('/') && !/[\\:?#]/.test(path) && path.split('/').every(part => part && part !== '.' && part !== '..');
 export function readArchiveImage(value: unknown): ArchiveImage {
@@ -47,14 +48,15 @@ export function readArchiveQuery(value: unknown, allowedPagePath: (path: string)
       !['pending', 'complete', 'truncated', 'error'].includes(String(value.status)) || !(value.queriedAt === null || date(value.queriedAt)) ||
       !safeArchiveUrl(value.endpoint) || !text(value.query) || !finite(value.radiusDegrees) || value.radiusDegrees <= 0 || value.radiusDegrees > 180 ||
       !['matchedCount', 'matchedEstimatedBytes', 'matchedUnknownSizeCount'].every(k => value[k] === null || (finite(value[k]) && value[k] >= 0)) ||
-      !Array.isArray(value.images) || (value.error !== undefined && !text(value.error)) ||
-      (value.responseSha256 !== undefined && !hash(value.responseSha256))) throw new TypeError('Invalid archive query receipt.');
+      !Array.isArray(value.images) || (value.error !== undefined && !text(value.error))) throw new TypeError('Invalid archive query receipt.');
+  const unexpected = Object.keys(value).filter(key => !archiveQueryKeys.includes(key));
+  if (unexpected.length) throw new TypeError(`Archive query receipt for ${String(value.provider)} has unexpected fields: ${unexpected.join(', ')}`);
   const ids = new Set<string>();
   for (const image of value.images) { const parsed = readArchiveImage(image);
     if (parsed.provider !== value.provider || ids.has(parsed.id)) throw new TypeError('Invalid image ownership or duplicate archive record.'); ids.add(parsed.id); }
   if (value.imagesPath !== undefined && (!text(value.imagesPath) || !allowedPagePath(value.imagesPath) ||
-      !hash(value.imagesSha256) || !finite(value.imageCount) || !Number.isInteger(value.imageCount) || value.imageCount < 0)) throw new TypeError('Invalid archive page reference.');
-  if (value.imagesPath === undefined && (value.imagesSha256 !== undefined || value.imageCount !== undefined)) throw new TypeError('Incomplete archive page reference.');
+      !finite(value.imageCount) || !Number.isInteger(value.imageCount) || value.imageCount < 0)) throw new TypeError('Invalid archive page reference.');
+  if (value.imagesPath === undefined && value.imageCount !== undefined) throw new TypeError('Incomplete archive page reference.');
   if (value.status === 'complete' && (value.matchedCount !== (value.imageCount ?? value.images.length) || value.queriedAt === null)) throw new TypeError('Incomplete archive result marked complete.');
   if (value.status === 'error' && !value.error) throw new TypeError('Archive failure reason is missing.');
   return value as unknown as ArchiveQuery;

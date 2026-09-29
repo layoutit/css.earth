@@ -6,7 +6,6 @@
     "path": "maps/vesta-lamo-clear.png",
     "url": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
     "bytes": 878609842,
-    "sha256": "1a135e6111e0e4f69596583c8ff1662a0a01b8ccc66226b31040a8497e5b9c5a",
     "dimensions": [
       80112,
       40056
@@ -33,24 +32,17 @@
     "added": [
       {
         "filename": "vesta-surface-shadow@2x.webp",
-        "bytes": 1123818,
-        "sha256": "887ba3728704461e2fe2c1f17b274876a7eec900785a5d1c961981c76e3e5929"
+        "bytes": 1123818
       },
       {
         "filename": "vesta-surface-surface@2x.webp",
-        "bytes": 2994634,
-        "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308"
+        "bytes": 2994634
       },
       {
         "filename": "vesta-surface-thumbnail.webp",
-        "bytes": 3782,
-        "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621"
+        "bytes": 3782
       }
-    ],
-    "unchangedGeometry": {
-      "drawingSha256": "0ac1c6e47799c3a8f94dcd1e2d6e79331057df36e6e60cff8696b16cfbc807af",
-      "pickingSha256": "7d02c244a96654573d4e47b3c6953cc01f973904f221e7bb2aaf7f3fce4c9976"
-    }
+    ]
   },
   "checks": {
     "projectedByteImageReader": {
@@ -106,13 +98,11 @@
       "screenshots": [
         {
           "path": "lamo-desktop.png",
-          "bytes": 566909,
-          "sha256": "9e7b3d8336bd1a0824fa08dd0fa7c3c2e45a57a5e4027dce80c846e3021a1544"
+          "bytes": 566909
         },
         {
           "path": "lamo-mobile.png",
-          "bytes": 195861,
-          "sha256": "5b208e322adb6a1986223b84a4444a475bfeb4544b1d142a56ccdb8eb2e00cd8"
+          "bytes": 195861
         }
       ],
       "limits": "Visual and prepared-byte checks, not an independently fitted camera or absolute source-image pixel parity result.",
@@ -131,19 +121,16 @@
     },
     "delivery": [
       {
-        "url": "https://earth-assets.lowpoly.cc/runtime-assets/887ba3728704461e2fe2c1f17b274876a7eec900785a5d1c961981c76e3e5929/vesta-surface-shadow@2x.webp",
-        "bytes": 1123818,
-        "sha256": "887ba3728704461e2fe2c1f17b274876a7eec900785a5d1c961981c76e3e5929"
+        "url": "vesta-surface-shadow@2x.webp",
+        "bytes": 1123818
       },
       {
-        "url": "https://earth-assets.lowpoly.cc/runtime-assets/5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308/vesta-surface-surface@2x.webp",
-        "bytes": 2994634,
-        "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308"
+        "url": "vesta-surface-surface@2x.webp",
+        "bytes": 2994634
       },
       {
-        "url": "https://earth-assets.lowpoly.cc/runtime-assets/5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621/vesta-surface-thumbnail.webp",
-        "bytes": 3782,
-        "sha256": "5ede0b312706a02cd2d1f554c0a5a2611a5281a0fb9089bbc9f6773713cad621"
+        "url": "vesta-surface-thumbnail.webp",
+        "bytes": 3782
       }
     ]
   },

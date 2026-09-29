@@ -7,7 +7,6 @@
     "width": 1440,
     "height": 900
   },
-  "preparedObjectSha256": "693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498",
   "runtimeImages": {
     "count": 35,
     "bytes": 8397846,
@@ -61,62 +60,52 @@
         {
           "path": "/scenes/arrokoth/arrokoth-directional-sun@2x.webp",
           "status": 200,
-          "bytes": 12530,
-          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+          "bytes": 12530
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "status": 200,
-          "bytes": 58,
-          "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845"
+          "bytes": 58
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "status": 200,
-          "bytes": 610,
-          "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c"
+          "bytes": 610
         },
         {
           "path": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "status": 200,
-          "bytes": 444,
-          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+          "bytes": 444
         },
         {
           "path": "/scenes/arrokoth/arrokoth-system-point.webp",
           "status": 200,
-          "bytes": 96,
-          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+          "bytes": 96
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "status": 200,
-          "bytes": 589518,
-          "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0"
+          "bytes": 589518
         },
         {
           "path": "/scenes/arrokoth/arrokoth-lighting.webp",
           "status": 200,
-          "bytes": 1050836,
-          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+          "bytes": 1050836
         },
         {
-          "path": "/objects/arrokoth/693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498.json",
+          "path": "/objects/arrokoth/object.json",
           "status": 200,
-          "bytes": 6820491,
-          "sha256": "693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498"
+          "bytes": 6820491
         },
         {
           "path": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "status": 200,
-          "bytes": 119308,
-          "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c"
+          "bytes": 119308
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-shadow@2x.webp",
           "status": 200,
-          "bytes": 626266,
-          "sha256": "4a3e4f9ec1820f7d3041ee49a5227d73a91b1d6852c32facb46a847ed26e1c47"
+          "bytes": 626266
         }
       ],
       "errors": [],
@@ -169,56 +158,47 @@
         {
           "path": "/scenes/arrokoth/arrokoth-directional-sun@2x.webp",
           "status": 200,
-          "bytes": 12530,
-          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+          "bytes": 12530
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "status": 200,
-          "bytes": 58,
-          "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845"
+          "bytes": 58
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "status": 200,
-          "bytes": 610,
-          "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c"
+          "bytes": 610
         },
         {
           "path": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "status": 200,
-          "bytes": 444,
-          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+          "bytes": 444
         },
         {
           "path": "/scenes/arrokoth/arrokoth-system-point.webp",
           "status": 200,
-          "bytes": 96,
-          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+          "bytes": 96
         },
         {
           "path": "/scenes/arrokoth/arrokoth-lighting.webp",
           "status": 200,
-          "bytes": 1050836,
-          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+          "bytes": 1050836
         },
         {
           "path": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "status": 200,
-          "bytes": 589518,
-          "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0"
+          "bytes": 589518
         },
         {
-          "path": "/objects/arrokoth/693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498.json",
+          "path": "/objects/arrokoth/object.json",
           "status": 200,
-          "bytes": 6820491,
-          "sha256": "693d64771a0e1da577a4d3a86572dd2717fb5bc3424f8c373295171835ca2498"
+          "bytes": 6820491
         },
         {
           "path": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "status": 200,
-          "bytes": 119308,
-          "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c"
+          "bytes": 119308
         }
       ],
       "errors": []
@@ -240,7 +220,6 @@
       "cause": "The DOM-only empty-sky probe missed Haumea in the retained screen-picking registry. Hover at (1168,96) identified Haumea before the failing double-click.",
       "correction": "Probe the actual retained hover target before choosing an empty-sky point. No production camera change.",
       "testPath": "site/test/skybox-pointer-boundary.mjs",
-      "testSha256": "8858cad1e20fcfef052eb68700c75ec89987063566530c2dbd79159800a7fb0a",
       "passedReport": "conformance-dpr.json",
       "passedLog": "conformance-dpr.log"
     }
@@ -260,27 +239,22 @@
   "images": [
     {
       "file": "default-dpr1.png",
-      "bytes": 339276,
-      "sha256": "eb23da8888e3941b2cfc017648c628fc3fcb53860bdcecb32f1fec8f2d24c8e1"
+      "bytes": 339276
     },
     {
       "file": "default-dpr2.png",
-      "bytes": 842531,
-      "sha256": "553eff224201d8b23e45ac6c596bd183c7197b79754fa20cd9e1f2756b859717"
+      "bytes": 842531
     },
     {
       "file": "previous-default.png",
-      "bytes": 301651,
-      "sha256": "9e3151f176efd86b26f20a7ff2428907179a32309f75bdf8dfd5d98b408bb395"
+      "bytes": 301651
     },
     {
       "file": "shadows-on.png",
-      "bytes": 342330,
-      "sha256": "48b3059824659805ea818d3cbaf2ffec9ed49487c1fe0f4ce7856f07a6399374"
+      "bytes": 342330
     }
   ],
   "previousDefault": {
-    "preparedObjectSha256": "7f3259c793a1b375e4f609bc0530d90983018cc3eba93e5dddfa01e199c23dd7",
     "lens": "model",
     "initialScenePitchDegrees": 20,
     "defaultControlYawDegrees": -45,

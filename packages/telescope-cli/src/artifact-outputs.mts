@@ -1,6 +1,5 @@
 /** Inspect a verified artifact and name only the next outputs its present facts can support. */
-import { readFile } from 'node:fs/promises';
-import { sha256File } from '@cssearth/core/node';
+import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
@@ -29,7 +28,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const declarations=raw.declarations===undefined?undefined:requireRecord(raw.declarations,'import declarations');
     const profiles=requireArray(raw.proposedProfiles,'proposed profiles').map(value=>{const row=requireRecord(value,'proposed profile');return {handlerId:requireString(row.handlerId,'handler id'),profileId:requireString(row.profileId,'profile id')};});
     const issues=requireArray(raw.issues,'import issues').map(value=>requireString(requireRecord(value,'import issue').reason,'import issue reason'));
-    if(raw.descriptor!==undefined){const descriptor=requireRecord(raw.descriptor,'qualified import descriptor'),relativePath=requireString(descriptor.path,'qualified descriptor path');if(relativePath!=='descriptor.json'||!Number.isSafeInteger(descriptor.bytes)||typeof descriptor.sha256!=='string')throw new TypeError('Qualified import descriptor pin is invalid.');const path=resolve(artifact,'..',relativePath),pin=await sha256File(path);if(pin.bytes!==descriptor.bytes||pin.sha256!==descriptor.sha256)throw new Error('Qualified import descriptor pin changed.');return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:path,outputs:[],profiles,issues,familyOperations:await verifiedExecutableFamilyOperations(path)};}
+    if(raw.descriptor!==undefined){const descriptor=requireRecord(raw.descriptor,'qualified import descriptor'),relativePath=requireString(descriptor.path,'qualified descriptor path');if(relativePath!=='descriptor.json'||!Number.isSafeInteger(descriptor.bytes)||descriptor.sha256!==undefined)throw new TypeError(`${artifact}: descriptor must be {path:'descriptor.json',bytes} (found ${JSON.stringify(descriptor)}).`);const path=resolve(artifact,'..',relativePath),found=(await stat(path).catch(()=>null))?.size;if(found!==descriptor.bytes)throw new Error(`${path} is ${found===undefined?'missing':`${found} bytes`}; ${artifact} records ${String(descriptor.bytes)} bytes.`);return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:path,outputs:[],profiles,issues,familyOperations:await verifiedExecutableFamilyOperations(path)};}
     return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:artifact,outputs:[],terminal:true,profiles,issues};
   }
   if(raw.schema==='cssearth-telescope-product-descriptor@1'){

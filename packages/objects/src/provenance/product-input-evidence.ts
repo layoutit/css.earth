@@ -1,5 +1,5 @@
-import type { ProvenanceDocument, ProvenanceProduct } from './object-provenance.js';
-import { sourceArray, sourceEnum, sourceObject, sourceText } from '../sources/catalog.js';
+import type { LineageProduct, ObjectLineage } from './object-lineage.js';
+import { sourceEnum, sourceObject, sourceText } from '../sources/catalog.js';
 
 export const INPUT_ROLES = ['appearance', 'geometry', 'placement', 'registration', 'calibration', 'reference', 'unknown'] as const;
 export type InputRole = typeof INPUT_ROLES[number];
@@ -10,8 +10,8 @@ export function parseProductInputEvidence(raw: unknown): ProductInputEvidence {
 }
 
 /** A parent's role is retained; an acquisition dependency's role is unknown unless declared. */
-export function productInputRoles(document: ProvenanceDocument, productId: string,
-  accept: (product: ProvenanceProduct) => boolean = () => true): ReadonlyMap<string, readonly InputRole[]> {
+export function productInputRoles(document: ObjectLineage, productId: string,
+  accept: (product: LineageProduct) => boolean = () => true): ReadonlyMap<string, readonly InputRole[]> {
   const roles = new Map<string, Set<InputRole>>(), products = new Map(document.products.map(p => [p.id, p]));
   const sources = new Map(document.sources.map(s => [s.id, s])), visited = new Set<string>();
   const add = (sourceId: string, role: InputRole) => {
@@ -21,7 +21,7 @@ export function productInputRoles(document: ProvenanceDocument, productId: strin
     if (visited.has(id)) return;
     visited.add(id);
     const product = products.get(id);
-    if (!product) throw new TypeError(`Unknown provenance product: ${id}.`);
+    if (!product) throw new TypeError(`Unknown lineage product: ${id}.`);
     if (!accept(product)) return;
     for (const sourceId of product.inputs) {
       const evidence = product.inputEvidence?.filter(e => e.sourceId === sourceId) ?? [];
@@ -36,7 +36,7 @@ export function productInputRoles(document: ProvenanceDocument, productId: strin
     if (expanded.has(id)) return;
     expanded.add(id);
     const source = sources.get(id);
-    if (!source) throw new TypeError(`Unknown provenance source: ${id}.`);
+    if (!source) throw new TypeError(`Unknown lineage source: ${id}.`);
     for (const dependency of source.dependencies) {
       if (!roles.has(dependency)) add(dependency, 'unknown');
       dependencies(dependency);
@@ -46,11 +46,3 @@ export function productInputRoles(document: ProvenanceDocument, productId: strin
   return new Map([...roles].map(([id, values]) => [id, [...values].sort()]));
 }
 
-export function validateInputEvidence(product: ProvenanceProduct): void {
-  const records = sourceArray(product.inputEvidence ?? [], parseProductInputEvidence), seen = new Set<string>();
-  for (const record of records) {
-    const key = `${record.sourceId}/${record.role}`;
-    if (!product.inputs.includes(record.sourceId) || seen.has(key)) throw new TypeError('Input evidence must identify a unique consumed input and role.');
-    seen.add(key);
-  }
-}

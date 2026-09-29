@@ -4,8 +4,7 @@
  *
  *   node packages/telescope-cli/src/archives/gemini/archive.mts <program id> <proposal id> <filter> [--days 15] [--start YYYY-MM-DD]
  *
- * Every file is pinned by its CAOM artifact URI, its byte count and the archive's own md5, with our sha256 added the first
- * time it is downloaded. Beside them the pin records what the frame is: the CAOM observation, its type (OBJECT, BIAS, FLAT),
+ * Every file is pinned by its CAOM artifact URI and its byte count. Beside them the pin records what the frame is: the CAOM observation, its type (OBJECT, BIAS, FLAT),
  * its intent, its filter, its exposure, when it started and the date CAOM says it became public. A frame whose release date
  * has not passed is refused, so nothing proprietary is ever pinned.
  *
@@ -34,8 +33,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, type FitsHeader } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, flagValue, positionalArguments } from '@cssearth/core';
-import { artifactName, isRawName, primaryHeaderBytes, query, requireMd5, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
-import { sha256File } from '@cssearth/core/node';
+import { artifactName, isRawName, primaryHeaderBytes, query, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 /** The pinned programs and their receipts stay in the checkout beside the bodies' records, not in this package. */
@@ -125,8 +123,8 @@ const frame = (value: unknown): GeminiFrame => {
   const release = requireString(row.dataRelease, 'Data release');
   if (Number.isNaN(Date.parse(release))) throw new TypeError(`${name} has no release date.`);
   if (Date.parse(release) > Date.now()) throw new TypeError(`${name} is proprietary until ${release}; it is not pinned.`);
-  if (row.sha256 !== undefined && !/^[0-9a-f]{64}$/u.test(requireString(row.sha256, 'Frame sha256'))) throw new TypeError(`${name} has an invalid sha256.`);
-  return { name, uri, bytes, md5: requireMd5(row.md5, `${name} md5`), ...(row.sha256 === undefined ? {} : { sha256: row.sha256 as string }),
+  for (const field of ['md5', 'sha256']) if (row[field] !== undefined) throw new TypeError(`Gemini frame ${name} has a ${field} field (${String(row[field])}); frames are pinned by URI and size only.`);
+  return { name, uri, bytes,
     observation: requireString(row.observation, 'Observation'), type, intent, filter: requireString(row.filter, 'Filter'),
     exposureSeconds: requireFiniteNumber(row.exposureSeconds, 'Exposure'), startMjd: requireFiniteNumber(row.startMjd, 'Start MJD'),
     dataRelease: release };
@@ -187,7 +185,7 @@ export const PROGRAM_ID = /^[a-z0-9-]+$/u;
 export const requireProgramId = (id: string) => { if (!PROGRAM_ID.test(id)) throw new TypeError(`${id} is not a program id.`); return id; };
 
 /** Every file a program pins, in one list: the science frames, each calibration set's raw frames, its archive master and the
- * processed bias that master declares. One place decides what a program's files are, so a downloader, a digester and a
+ * processed bias that master declares. One place decides what a program's files are, so a downloader, a reducer and a
  * ledger cannot disagree about it. */
 export const programFiles = (program: GeminiProgram): GeminiFrame[] => [...program.science,
   ...program.calibrations.flatMap(set => [...set.frames, set.product])];
@@ -199,40 +197,20 @@ export async function writeGeminiProgram(program: GeminiProgram): Promise<Gemini
   return checked;
 }
 
-/** Add our own sha256 to every pinned file that is on disk and has none yet, and check the ones that have one.
- *
- * The archive states a byte count and an md5, and `geminiFile` refuses a download that misses either. The sha256 is ours: it
- * is what `assertInputPins` checks before a reduction runs, so a frame that changed under us stops the pipeline instead of
- * quietly reducing into a product. A file that is not on disk is left alone rather than guessed at. */
-export async function digestProgram(program: GeminiProgram, directory: string): Promise<GeminiProgram> {
-  const digests = new Map<string, string>();
-  for (const entry of programFiles(program)) {
-    const path = resolve(directory, entry.name);
-    const found = await sha256File(path).catch(() => null);
-    if (!found) continue;
-    if (found.bytes !== entry.bytes) throw new Error(`${entry.name} on disk is ${found.bytes} bytes, not the pinned ${entry.bytes}.`);
-    if (entry.sha256 !== undefined && entry.sha256 !== found.sha256) throw new Error(`${entry.name} on disk differs from its pinned sha256.`);
-    digests.set(entry.name, found.sha256);
-  }
-  const withDigest = (entry: GeminiFrame): GeminiFrame => digests.has(entry.name) ? { ...entry, sha256: digests.get(entry.name)! } : entry;
-  return writeGeminiProgram({ ...program, science: program.science.map(withDigest),
-    calibrations: program.calibrations.map(set => ({ ...set, product: withDigest(set.product), frames: set.frames.map(withDigest) })) });
-}
-
 export async function readGeminiProgram(id: string): Promise<GeminiProgram> {
   requireProgramId(id);
   return parseGeminiProgram(JSON.parse(await readFile(resolve(PROGRAMS, `${id}.json`), 'utf8')) as unknown);
 }
 
 export const FRAME_COLUMNS = 'o.observationID, o.type, o.intent, o.instrument_name, o.proposal_id, o.proposal_pi, o.target_name, ' +
-  'p.energy_bandpassName, p.time_exposure, p.time_bounds_lower, p.dataRelease, a.uri, a.contentLength, a.contentChecksum';
+  'p.energy_bandpassName, p.time_exposure, p.time_bounds_lower, p.dataRelease, a.uri, a.contentLength';
 export const FRAME_JOIN = 'caom2.Observation o JOIN caom2.Plane p ON o.obsID=p.obsID JOIN caom2.Artifact a ON p.planeID=a.planeID';
 const JOIN = FRAME_JOIN;
 const quote = (value: string) => `'${value.replace(/'/gu, "''")}'`;
 
 const toFrame = (row: Record<string, string>): GeminiFrame => {
   const uri = row.uri ?? '';
-  return { name: artifactName(uri), uri, bytes: Number(row.contentLength), md5: requireMd5(row.contentChecksum, `${uri} checksum`),
+  return { name: artifactName(uri), uri, bytes: Number(row.contentLength),
     observation: row.observationID ?? '', type: row.type ?? '', intent: row.intent ?? '', filter: row.energy_bandpassName ?? '',
     exposureSeconds: Number(row.time_exposure), startMjd: Number(row.time_bounds_lower), dataRelease: row.dataRelease ?? '' };
 };

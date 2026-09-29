@@ -26,7 +26,7 @@ test('row operations require rows and TAP preserves server completeness', () => 
 });
 
 test('the pyuvdata boundary rejects missing or inverted visibility selections', () => {
-  const file = { path: 'fixture.uvfits', bytes: 1, sha256: '0'.repeat(64) };
+  const file = { path: 'fixture.uvfits', bytes: 1 };
   assert.throws(() => parsePyuvdataUvfitsAnswer({}, { operation: 'uvfits-visibility-export', file }), /UVFITS selection/u);
   assert.throws(() => parsePyuvdataUvfitsAnswer({}, { operation: 'uvfits-amplitude-phase-diagnostics', file, selection: { field: 'J1008+0730', timeStartJulianDate: 2, timeEndJulianDate: 1, antenna1: 4, antenna2: 8, rowOffset: 0, rowCount: 1, channelStart: 0, channelCount: 1, polarization: -1 } }), /inverted/u);
 });

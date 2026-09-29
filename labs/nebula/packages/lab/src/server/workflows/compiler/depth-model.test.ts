@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import { conditionDepthComponents, depthSurfaceAt, readDepthRecipe, verifyDepthEvidence, loadDepthModel, type DepthRecipe, type DepthSurface } from './depth-model.ts';
 import { createEmissionField, projectEmissionComponent, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput } from '@cssearth/bake/volume';
 import { fitEmissionField } from './fit.ts';
@@ -13,7 +12,7 @@ function recipe(features = false): DepthRecipe {
     centerArcsec: [2, -3], radiusArcsec: [100, 100], angleDegrees: 0, depthArcsec: 10, gradient: [.3, -.2],
     curvaturePerArcsec: [.002, .001, -.001], thicknessArcsec: 200, strength: 1, rationale: 'Authored smooth reference surface.' };
   return readDepthRecipe({ schema: 'cssearth-nebula-depth-model@1', id: 'synthetic-cloud', centerIcrsDegrees: [30, -20],
-    evidence: { path: 'labs/nebula/models/synthetic-cloud/evidence.json', sha256: 'a'.repeat(64) }, background,
+    evidence: { path: 'labs/nebula/models/synthetic-cloud/evidence.json' }, background,
     features: features ? [{ ...background, id: 'feature', evidenceIds: ['structure'], support: 'paper-guided',
       centerArcsec: [20, 10], radiusArcsec: [8, 5], angleDegrees: 30, depthArcsec: 40, gradient: [-.1, .2], curvaturePerArcsec: [0, 0, 0], thicknessArcsec: 8 }] : [],
     detailThicknessRatio: .4, minimumThicknessArcsec: .01, interpretation: 'Synthetic conditional display geometry, not measured density.' });

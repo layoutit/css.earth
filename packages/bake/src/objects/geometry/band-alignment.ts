@@ -9,7 +9,7 @@ import type {loadCameraShape} from './shape-camera-mosaic.ts';
 export interface AlignmentImage {data:ArrayLike<number>;width:number;height:number}
 export interface AlignmentCamera {position:readonly number[];sun:readonly number[];ray(x:number,y:number):ArrayLike<number>;project(point:readonly number[]):readonly number[]|null}
 export interface AlignmentFrame {id:string;center?:readonly number[];northAzimuthDegrees?:number}
-export interface AlignmentSource<F extends AlignmentFrame> {frame:F;image:AlignmentImage;sha256:string}
+export interface AlignmentSource<F extends AlignmentFrame> {frame:F;image:AlignmentImage}
 type AlignmentMesh = Pick<Awaited<ReturnType<typeof loadCameraShape>>,'intersect'|'indices'|'positions'>;
 
 export const BAND_ALIGNMENT_SETTINGS = {patchRadiusPixels:13,patchSampleStepPixels:2,searchRadiusPixels:9,detailBoxWidthsPixels:[5,31],maximumEmissionDegrees:65,
@@ -116,7 +116,7 @@ export function alignCameraBands<F extends AlignmentFrame>({mesh,camera,referenc
   const stats=(partition:'fit'|'holdout')=>{const cs=residuals.filter(c=>c.partition===partition);return {count:cs.length,rmsPixels:Math.sqrt(cs.reduce((s,c)=>s+c.residualPixels**2,0)/cs.length),maximumPixels:Math.max(...cs.map(c=>c.residualPixels))};};
   const holdout=stats('holdout');
   reports.push({filter:target.filter,id:frame.id,accepted:holdout.count>=C.minimumHoldoutControls&&holdout.rmsPixels<=C.maximumHoldoutRmsPixels&&holdout.maximumPixels<=C.maximumHoldoutResidualPixels,
-   seedCamera:frame,correctedCamera:corrected,fit:stats('fit'),holdout,reference:{id:reference.frame.id,sha256:reference.sha256},targetSha256:target.sha256,controls:residuals});
+   seedCamera:frame,correctedCamera:corrected,fit:stats('fit'),holdout,reference:{id:reference.frame.id},controls:residuals});
  }
  return {patchGridStepPixels:step,patches:patches.length,searchRadiusPixels,reports};
 }

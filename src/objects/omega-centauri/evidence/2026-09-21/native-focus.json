@@ -8,18 +8,15 @@
   "inputPins": [
     {
       "path": "src/objects/sun/prepared/world-context.json",
-      "bytes": 7536975,
-      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+      "bytes": 7536975
     },
     {
       "path": "src/objects/omega-centauri/source/nebula.json",
-      "bytes": 2633,
-      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+      "bytes": 2633
     },
     {
       "path": "src/objects/omega-centauri/prepared/lenses.json",
-      "bytes": 1202415,
-      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+      "bytes": 1202415
     }
   ],
   "errors": [],

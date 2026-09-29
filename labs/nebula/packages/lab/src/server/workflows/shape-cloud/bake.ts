@@ -12,21 +12,21 @@ import { readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';
 import { readShapeCloudQuality, shapeCloudSampling, SHAPE_CLOUD_PREPARATION_VERSION } from '../../../features/shape-cloud/quality.ts';
 import { writeShapeComparison } from './comparison-artifacts.ts';
 import type { ShapeCloudPin, ShapeCloudResult, ShapeCloudSettings, ShapeCloudQuality } from '../../../features/shape-cloud/types.ts';
+import { isVariantName } from '../../../features/variant-name.ts';
+import { geometryFile } from '../../../features/geometry/jobs-model.ts';
 
 export const SHAPE_CLOUD_METHOD = 'detected-boundary-signed-emission-shapes@2';
 export interface ShapeCloudBakeProgress { phase: 'volume' | 'texture' | 'compile' | 'comparison'; completed: number; total: number; message: string }
 export interface ShapeCloudBakeOptions { signal?: AbortSignal; onProgress?(progress: ShapeCloudBakeProgress): void }
-const hash = (value: string) => /^[a-f0-9]{64}$/.test(value);
 function cancellation(signal?: AbortSignal) {
   if (signal?.aborted) throw new DOMException('Shape cloud preview cancelled.', 'AbortError');
 }
 export async function bakeShapeCloud(input: {
   root: string; outputDirectory: string; id: string; image: StructureImage; geometry: GeometryMap;
-  geometrySha256: string; settings: ShapeCloudSettings; source: ShapeCloudPin; quality?: ShapeCloudQuality;
+  geometryFile: string; settings: ShapeCloudSettings; source: ShapeCloudPin; quality?: ShapeCloudQuality;
 }, options: ShapeCloudBakeOptions = {}): Promise<ShapeCloudResult> {
   const { root, image, geometry, source, outputDirectory, id } = input;
-  if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !hash(id) ||
-      !hash(input.geometrySha256) || !hash(source.sha256) || !hash(image.mapSha256) || !hash(image.sourceSha256) ||
+  if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !isVariantName(id) || !geometryFile(input.geometryFile) ||
       geometry.width !== image.width || geometry.height !== image.height || image.width * image.height > 1_000_000)
     throw new TypeError('Invalid shape cloud source or output identity.');
   const quality = readShapeCloudQuality(input.quality);
@@ -40,7 +40,7 @@ export async function bakeShapeCloud(input: {
     throw new TypeError('Shape cloud source must retain the complete registered working-image pixels.');
   const result: ShapeCloudResult = { schema: 'cssearth-shape-cloud-result@1', id, imageId: image.id,
     preparationVersion: SHAPE_CLOUD_PREPARATION_VERSION,
-    sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256,
+    geometryFile: input.geometryFile,
     width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel, settings, quality, empty: field.empty, source: { ...source } };
   const compare = async (projection?: { alpha: Float32Array; width: number; height: number }) => {
     options.onProgress?.({ phase: 'comparison', completed: 0, total: 1, message: 'Comparing neutral structure and source luminosity' });
@@ -51,7 +51,7 @@ export async function bakeShapeCloud(input: {
   };
   if (field.empty) return compare();
   const provenance = { schema: 'cssearth-shape-cloud-provenance@1', method: SHAPE_CLOUD_METHOD, source: { ...source },
-    sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256, settings, quality, sampling,
+    mapDirectory: image.directory, geometryFile: input.geometryFile, settings, quality, sampling,
     projection: { width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel,
       pixelEdgeToUnits: ['(x-width/2)*unitsPerPixel', '(height/2-y)*unitsPerPixel', '0'] },
     interpretation: 'Automatically grouped projected boundaries seed editable shells, rings or filled ellipsoids. Nonnegative emission is max(0, sum(add terms) - sum(subtract terms)). Depth, wall thickness, softness and weights are authored assumptions, not recovered gas density. No photograph column normalization.',
@@ -65,6 +65,7 @@ export async function bakeShapeCloud(input: {
       const data=compileCssVolume({...input,recipe:{anchors:[]}});validatePreparedCssVolume(data);return data;
     }},options);
   if(prepared.empty){result.empty=true;return compare();}
-  result.neutral=prepared.neutral;result.textured=prepared.textured;result.projection=prepared.projection;
+  const reference=(value:{path:string}|undefined)=>value?{path:value.path}:undefined;
+  result.neutral=reference(prepared.neutral);result.textured=reference(prepared.textured);result.projection=reference(prepared.projection);
   return compare(prepared.projectedAlpha);
 }

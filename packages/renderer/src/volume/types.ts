@@ -64,7 +64,7 @@ export interface PreparedCssVolume {
   readonly frame: DensityVolumeFrame;
   readonly anchors?: readonly { readonly id: string; readonly positionUnits: VolumeVector }[];
   readonly stacks: readonly PreparedVolumeStack[];
-  readonly resources: readonly { readonly path: string; readonly sha256: string; readonly bytes: number; readonly width: number; readonly height: number }[];
+  readonly resources: readonly { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }[];
   readonly provenance: unknown;
   readonly approximation: unknown;
   readonly sky?: PreparedCssSky;

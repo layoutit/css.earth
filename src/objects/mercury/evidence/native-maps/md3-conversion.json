@@ -28,8 +28,7 @@
   },
   "processing": "Native pixel-area mean over each output footprint; all-zero no-data pixels excluded. No observed area is gray grid; partial footprints average only their observations. No gap reconstruction or new contrast stretch.",
   "sourceIdentity": {
-    "bytes": 796539539,
-    "sha256": "1f7af8fe53a02e46d9dca74b68b4eead8a451bf2578845a5a303a695bfd1c666"
+    "bytes": 796539539
   },
   "missing": 256870,
   "partial": 17555,
@@ -676,6 +675,5 @@
     }
   ],
   "maximumRowBytes": 552960,
-  "outputBytes": 21871508,
-  "outputSha256": "f770d1818dd21126d2a471c49bbc8a7d6df5c5cc75b6979c3da311e958ea9aa1"
+  "outputBytes": 21871508
 }

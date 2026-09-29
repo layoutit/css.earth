@@ -35,16 +35,6 @@
     ],
     "rotationDeg": -16.920000000000027
   },
-  "pins": {
-    "prepare-filled.ts": "084bcb16b7e5da2f86470ec62347f90a02eaaead3da6ca224d074b912a40f99e",
-    "filled-products.ts": "7f0e959e7b32de21f680f956a04f4b47489ce635c69950335ca13520b6157283",
-    "filled-components.ts": "59b4bab583fbac938db5cacd2d739fc75d266e737d7692bc43bf0c28d31bc211",
-    "filled-volume.ts": "e7c56e254d010737624d13094d2de957e790ea9f6e3d739ce30612bf4f645df7",
-    "observation-prior.ts": "0a5069b32b661270c60d0950df70b2bac7e7c81292d9fb8299f674e296f2db8a",
-    "overlay-wcs.ts": "b75d36a18cf51a7150469399abb0aa332fae6601bcc315e26b37fa314c9d7534",
-    "overlay-geometry.ts": "201d738eee4431eff1b841a779093ea727dcfef0bcab46634b75ad51853eead8",
-    "master-slices.ts": "6727162eba0a3cc8a9955daa93ece8054702c2ac7ef78309ca5a8bc67b094248"
-  },
   "observation": {
     "tangentBoundsKpc": {
       "min": [

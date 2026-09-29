@@ -4,15 +4,13 @@
  *   node packages/bake/cli/published-comparison.mts <object-id>          report the measurements
  *   node packages/bake/cli/published-comparison.mts <object-id> --write  also write evidence/published-comparison.json and its image
  *
- * The body's `source/preparation/published-comparison.json` names the figure: a pinned paper, the figure's image object
- * and its pixels' digest, which rows hold photographs and the model the lens rides, and which lens frame each column
- * shows, in which dark band. A new record may state the digest as 64 zeros; `--write` adopts the figure it finds and
- * says so. Everything is measured through the pipeline's own cameras, derived from the body's observer-cameras record.
+ * The body's `source/preparation/published-comparison.json` names the figure: the paper's address, the figure's image
+ * object and size, which rows hold photographs and the model the lens rides, and which lens frame each column shows, in
+ * which dark band. Everything is measured through the pipeline's own cameras, derived from the body's observer-cameras record.
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { sha256 } from '@cssearth/core/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { readPdfImage } from '../../sources/index.ts';
 import { lamBytes } from './lam.ts';
@@ -23,9 +21,6 @@ import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGR
 const SWEEP = { from: -30, to: 30, step: 2 };
 const round = (value: number, digits = 3) => Number(value.toFixed(digits));
 const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
-
-/** A new record may leave the figure's pixel digest as 64 zeros; `--write` then adopts the figure it finds, once. */
-const UNPINNED = '0'.repeat(64);
 
 /** The measurement for a body's package, or for any source directory laid out like one, such as a setup run's scratch copy. */
 /** `root` is the checkout the body's package, orientation and camera inputs are read from; the command passes it in. */
@@ -38,7 +33,7 @@ export async function measurePublishedComparison(objectId: string, { root, adopt
 
   // The paper, read from its address (a cited paper is not kept in the repository), then the figure, by its object number.
   const paper = await lamBytes(spec.document.url);
-  const image = readPdfImage(paper, spec.document.object), pixels = sha256(image.data);
+  const image = readPdfImage(paper, spec.document.object);
   if (image.width !== spec.document.width || image.height !== spec.document.height)
     throw new Error(`Object ${spec.document.object} is not the ${image.width}×${image.height} ${spec.figure} the spec records.`);
   const figure: Raster = image, cell = columnCells(figure, spec);
@@ -91,7 +86,7 @@ export async function measurePublishedComparison(objectId: string, { root, adopt
   }
   const evidence = {
     schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
-    document: { url: spec.document.url, object: spec.document.object, pixels },
+    document: { url: spec.document.url, object: spec.document.object, width: image.width, height: image.height },
     rotation: { path: record.rotation.path, columnOrder: record.rotation.columnOrder ?? null },
     columns,
     nativeOutline: { frames: atZero.length, residualPixelsAtZero: sweep[0], bestOffsetDegrees: Number(best[0]), sweepDegrees: SWEEP, residualPixels: sweep },

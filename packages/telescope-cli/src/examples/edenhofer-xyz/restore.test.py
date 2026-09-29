@@ -87,9 +87,8 @@ class RestoreTest(unittest.TestCase):
         fetcher = FakeFetcher()
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "crop.fits"
-            bytes_written, digest = restore.restore(output, url="fake://edenhofer", fetcher=fetcher, expected_sha256=None)
+            bytes_written = restore.restore(output, url="fake://edenhofer", fetcher=fetcher)
             self.assertEqual(bytes_written, restore.OUTPUT_BYTES)
-            self.assertEqual(len(digest), 64)
             # Three FITS headers plus 96 contiguous Y spans for each extension:
             # the bounded plane strategy makes 195 requests, not 18,432 rows.
             self.assertEqual(len(fetcher.calls), 195)

@@ -50,7 +50,7 @@ test('invalid requests and corrupt prepared bytes cannot publish another dataset
     assert.equal((await handleSearchRequest(new Request(`${origin}/saturn/?${query}`), noSearchData, transport)).status, 400);
   }
   const corrupt: typeof fetch = async () => new Response('{}');
-  await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|sha256|digest|identity/i);
+  await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', corrupt), /hash|digest|identity/i);
   await assert.rejects(renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'earth', read), /identity/);
 });
 test('a billboard startup page takes the selected scene and its prepared mark', async () => {

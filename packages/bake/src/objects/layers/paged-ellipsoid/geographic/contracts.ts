@@ -20,17 +20,17 @@ export interface WmtsPage extends PageAddress, PageTexture { key: string; raster
   textureBackgroundSize: string; textureBackgroundPosition: string; maximumCssSpan: number; children: string[]; projectionErrorPixels: number }
 export interface CoverageBand { y0: number; y1: number; ranges: [number, number][] }
 export interface WmtsCoverage { zoom: number; firstRow: number; lastRow: number; tileCount: number; blockSide: number; blockCount: number; bands: CoverageBand[] }
-export interface WorldCoverEntry { tile: string; etag: string; sourceBytes: number; lastModified?: string; extractedSha256?: string }
+export interface WorldCoverEntry { tile: string; etag: string; sourceBytes: number; lastModified?: string }
 export interface WorldCoverSource extends WorldCoverEntry { url: string }
-export interface AssetReference { url: string; bytes: number; sha256: string }
-export interface BlockReference extends AssetReference { encoding: string; offset: number; decodedBytes: number; decodedSha256: string }
+export interface AssetReference { url: string; bytes: number }
+export interface BlockReference extends AssetReference { encoding: string; offset: number; decodedBytes: number }
 export interface TileNode { key: string; level: number; corners: number[][]; normal: number[]; normalSlack: number; pages: string[]; children: string[]; maximumCssSpan: number }
 export interface TileStub extends Omit<TileNode, 'pages' | 'children'> { stub: boolean; directory: BlockReference }
 export interface TreeSection { bytes: Uint8Array; root: TileNode; tiles: number; leaves: number; ref: Omit<BlockReference, 'url' | 'offset'> }
 export interface CameraPolicy { maximumControlPitchDegrees: number; maximumScenePitchDegrees: number }
 export interface PreparedCityPage extends PageGeometry { children: string[]; coverageCorners?: number[][]; childrenCoverImage?: boolean }
 export interface CorePage extends PageGeometry { corePath: string; children?: string[]; coverageCorners?: number[][]; childrenCoverImage?: boolean }
-export interface CityRuntimePage extends Omit<PreparedCityPage, 'geographicMatrix' | 'geographicProjection'> { url: string; bytes: number; sha256: string; maximumCssSpan: number }
+export interface CityRuntimePage extends Omit<PreparedCityPage, 'geographicMatrix' | 'geographicProjection'> { url: string; bytes: number; maximumCssSpan: number }
 export interface CityIndexNode extends Partial<CityRuntimePage> { key: string; level: number; x: number; y: number; corners: number[][]; normal: number[]; children: string[] }
 export interface CityIndexHead { key: string; level: number; corners: number[][]; normal: number[]; stub: boolean; directory: AssetReference; coverageCorners?: number[][] }
 export interface CityCoveragePlan { dataset: string; assetPath?: string; assetOrigin: string; roots: CityIndexHead[] }

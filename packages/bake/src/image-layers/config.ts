@@ -46,9 +46,6 @@ const positive = (v: unknown, at: string, integer = false): number => {
 const text = (v: unknown, at: string): string => {
   if (typeof v !== 'string' || !v) throw new TypeError(`${at} must be a string.`); return v;
 };
-const digest = (v: unknown, at: string): string => {
-  const s = text(v, at); if (!/^[a-f0-9]{64}$/.test(s)) throw new TypeError(`${at} must be SHA256.`); return s;
-};
 const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
 };

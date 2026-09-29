@@ -4,7 +4,6 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { deliveryReady } from './delivery.ts';
-import { hash } from './io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';
 
 for (const texture of ['prepared/test/slices/x/00.webp', 'prepared/test/atlases/x.webp']) {
@@ -13,9 +12,9 @@ test(`app preparation rebuilds missing ${texture} and rejects changed textures o
   try {
     const metadata = 'object.json';
     const manifest = JSON.stringify({ schema: 'cssearth-volume-lens-manifest@1', outputs: {
-      [texture]: { sha256: hash('pixels'), bytes: 6 }, [metadata]: { sha256: hash('{}'), bytes: 2 },
+      [texture]: { bytes: 6 }, [metadata]: { bytes: 2 },
     } });
-    const delivery = { directory: 'object', manifest: { path: 'manifest.json', sha256: hash(manifest) } };
+    const delivery = { directory: 'object', manifest: { path: 'manifest.json' } };
     await writeAtomic(join(root, 'manifest.json'), manifest);
     await writeAtomic(join(root, 'object', metadata), '{}');
     assert.equal(await deliveryReady(root, delivery), false);

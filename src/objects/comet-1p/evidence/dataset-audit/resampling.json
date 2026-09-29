@@ -112,7 +112,6 @@
       "height": 256,
       "path": "encounters-512.png",
       "bytes": 26573,
-      "sha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
       "interiorSamples": 3837
     },
     {
@@ -120,7 +119,6 @@
       "height": 512,
       "path": "encounters-1024.png",
       "bytes": 65527,
-      "sha256": "3a0f6284c95a72e75d290d2f19f78d6c9922761bd40e6d6ec14ec4a7c67a01e9",
       "interiorSamples": 3921
     },
     {
@@ -128,58 +126,45 @@
       "height": 1024,
       "path": "encounters-2048.png",
       "bytes": 161686,
-      "sha256": "0d7e1ed802c25b87942999e5add2b4b17e439a7c201e360dc5517e7bfbedde66",
       "interiorSamples": 3962
     }
   ],
   "inputs": [
     {
-      "path": "manifest.json",
-      "sha256": "c241740119cbf9db1ad2cc1f5a7aef82918696b598f59b7d06925122bf5a1cc4"
+      "path": "manifest.json"
     },
     {
-      "path": "shape/1682q1halley.tab",
-      "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824"
+      "path": "shape/1682q1halley.tab"
     },
     {
-      "path": "giotto/hmc_best.gif",
-      "sha256": "d1485de0bfb126c17fcca8b9d1b8936538694f86fd3bc867c6f07ab781dbff18"
+      "path": "giotto/hmc_best.gif"
     },
     {
-      "path": "giotto/rotation-2004.tab",
-      "sha256": "d7fb84ee47f3fd2440466ca22b460e55c04e45ade69ab6f8f432f6d84c2873c0"
+      "path": "giotto/rotation-2004.tab"
     },
     {
-      "path": "giotto/vega2-flyby.txt",
-      "sha256": "622c541ef4b9a3c94dc06fe084a9c62c436a9093c5b7fcf07aeb0dcae7d10bdd"
+      "path": "giotto/vega2-flyby.txt"
     },
     {
-      "path": "giotto/vega2-trajectory.txt",
-      "sha256": "bb51d1e2d5a2115a82593086cbd9116abba356c19c1b9fa1ec636a044e10e491"
+      "path": "giotto/vega2-trajectory.txt"
     },
     {
-      "path": "reference/giotto-registration.json",
-      "sha256": "40582b39fc299083252d38070011a0ee20a95a1a4b1b7d17b0757190499d2a24"
+      "path": "reference/giotto-registration.json"
     },
     {
-      "path": "reference/encounter-registration.json",
-      "sha256": "1a3c7273aeb95e1e4ab9482e2325ae8b5ef4fe800978b8eafe43a0b238759d50"
+      "path": "reference/encounter-registration.json"
     },
     {
-      "path": "vega/t11190.hdr",
-      "sha256": "e6e43ac52b037d69cf5f12cb6a1e5a0f0ad79e30e11a96353dd2e73dfa1a5904"
+      "path": "vega/t11190.hdr"
     },
     {
-      "path": "vega/t11190.img",
-      "sha256": "17b1aa86cdb268f4ae6e9aff3dda6c2059a015885cf0ce6eb7e2c60fcb2a9e9d"
+      "path": "vega/t11190.img"
     },
     {
-      "path": "vega/t11194.hdr",
-      "sha256": "d8756d103854206ff497dc2d4ba2c582bd839a08c647177a6a488a3828310021"
+      "path": "vega/t11194.hdr"
     },
     {
-      "path": "vega/t11194.img",
-      "sha256": "627a11052348a8e5ab01f69fadd7d81d59f6b9dbd4ec79b25f9ee72bedc1130e"
+      "path": "vega/t11194.img"
     }
   ]
 }

@@ -21,7 +21,7 @@ The pinned PDS4 references are the [Standards Reference 1.26.0](https://pds.nasa
 
 | Reference | Requirement adapted here |
 | --- | --- |
-| SR §6D.2–6D.3 | Product identifiers and versions, distinct from file hashes and code revisions |
+| SR §6D.2–6D.3 | Product identifiers and versions, distinct from file bytes and code revisions |
 | SR §8–8A | Data origin, processing, meaning, limits and supporting documentation |
 | SR §7 and §8D | Units, coordinates, datum, orientation, observation time and coverage |
 | SR §8C; DPH §2.2.1 | Provider calibration and processing levels, distinct from our processing |
@@ -32,7 +32,7 @@ Apply [ISO 24495-1:2023, first edition](https://www.iso.org/standard/78907.html)
 [public preview](https://cdn.standards.iteh.ai/samples/78907/d194fac21d6a45f38bfcfec9657f7498/ISO-24495-1-2023.pdf)
 includes the principles and the start of the guidelines.
 
-This is a cssEarth adaptation using Markdown, existing manifests, delivery SHA-256,
+This is a cssEarth adaptation using Markdown, existing manifests, the R2 delivery inventory,
 reproduction comparisons and browser evidence. It claims neither
 PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XML labels or archive submission.
 
@@ -43,11 +43,10 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | Body `README.md` | The single account of sources and evidence described below |
 | Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms; link here instead of duplicating credits |
 | [Source records](../../src/sources/) (`<id>.json`) | One shared published identity per file, with versions, citation links and evidence |
-| `source/manifest.json` | Local input paths, canonical bindings, acquisition and per-input credits; tracked source records do not carry file-stability hashes |
+| `source/manifest.json` | Local input paths, canonical bindings, acquisition and per-input credits; tracked source records carry no hashes |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `node site/build/prepare/prepare-text.mts` publishes `prepared/text.json` |
 | `prepared/object.json`, `prepared/page.json` | Transport and page metadata regenerated from the installed runtime; not inventoried or committed |
-| `prepared/provenance.json` | Generated lineage, never committed. Layered bodies regenerate it; volumes, image layers and catalogues inventory and publish it with their baked outputs |
 | Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed; audit-only terrain reports and source-index rasters are excluded |
 | `inventory.json` at the body root | Generated inventory of every baked file (public textures and `prepared/*`) used by installation and publication |
 | `site/prepared-sources.json`, `site/prepared-source-credits.json` and `site/prepared-facilities.json` | Ignored source usage, page credit and mission attribution outputs; prepare together |
@@ -104,13 +103,11 @@ URL, credits and terms in the existing manifest and acquisition recipe. Follow
 [Sources authoring](../sources-catalogue.md#add-or-update-a-source) to reuse or
 establish its published identity and bind the input. Preserve
 native identifiers: PDS4 LIDVID, PDS3 dataset/product ID, DOI or other published
-release ID. Do not invent PDS identifiers. A hash identifies bytes, not the
-provider's version. Git identifies tracked source bytes;
-manifests and descriptors do not carry file-stability hashes. Missing downloads
-are restored by path from the source cache or origin, without a manifest digest
-comparison. Runtime inventories retain byte counts and SHA-256 for published
-assets. Historical evidence, toolchain locks and untracked processing or telescope
-delivery receipts retain the identities their own verification requires.
+release ID. Do not invent PDS identifiers. Git identifies tracked bytes, and our R2
+copies (runtime assets, and downloads at `source-cache/<object id>/<manifest path>`)
+are the reference for everything git does not hold. So no record carries a hash:
+not manifests, descriptors, recipes, receipts, evidence, provenance or lab results.
+The one hash is the R2 content address in each object's `inventory.json`.
 
 Bodies may combine PDS3, PDS4, Earth-observation, solar and other published data.
 Required inputs must be checked in or downloadable through their recipe. Keep
@@ -119,8 +116,8 @@ and processing levels from the selected input. Record disagreements between
 labels, manifests and recipes, and resolve them from the source before making
 a scientific claim.
 
-Say which bytes a hash identifies. If we converted an image, normalized a response
-or assembled a mosaic before pinning it, explain that step. Disclose an unknown
+Say which file a record names. If we converted an image, normalized a response
+or assembled a mosaic before mirroring it, explain that step. Disclose an unknown
 original download identity.
 Keeping every temporary response is unnecessary.
 
@@ -191,15 +188,14 @@ repetitive logs belong in ignored `output/`.
 Record:
 
 - **Tested inputs:** bodies/views and relevant manifests. Identify
-  uncommitted changes, ignored inputs and files actually served to the browser;
-  record byte counts and hashes for evidence inputs not fixed by Git or a delivery
-  inventory. A path-only source manifest does not establish byte identity.
+  uncommitted changes, ignored inputs and files actually served to the browser.
+  Name each input by its path; Git and the R2 inventory identify its bytes.
 - **Method and result:** command, cases, outcomes, failures and omitted checks.
   Include environment details that affect the result. Browser evidence needs
   browser version, viewport, DPR, camera, dataset and settings.
 - **Inspectable evidence:** original reports and relevant images at retrievable
-  locations. External files need stable download links and byte pins. A local
-  port or ignored path alone cannot identify or preserve a result.
+  locations. External files need stable download links, mirrored to R2 when they
+  matter. A local port or ignored path alone cannot identify or preserve a result.
 
 Use existing report formats; there is no required extra JSON format or file set.
 
@@ -211,7 +207,7 @@ compare regenerated outputs against that baseline, exactly by default. Declare
 any tolerance and its scope before comparing; report the differences.
 
 **Scientific checks need an independent reference.** Compare changed quantities
-with source values or an independent calculation. Hashes and repeated calls to
+with source values or an independent calculation. Repeated calls to
 the same sampler cannot detect a shared interpretation error. `recovered` and
 `prepared` describe how provenance was made, not scientific or visual acceptance.
 
@@ -240,7 +236,7 @@ standalone delivery gate.
 **When using Pixelmatch for matched visual evidence, use threshold `0.1`.** This
 cssEarth requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
 captures or identical documented crops. Retain the input images, generated diff,
-input hashes, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
+input paths, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
 and compared pixel count beside the owning evidence. Choose settings before
 comparing and disclose masks or exclusions. Keep camera, viewport, DPR, dataset,
 lighting and browser fixed. If capture instability could affect the conclusion,
@@ -250,7 +246,7 @@ both inputs. A changed-pixel count locates change; it does not measure sharpness
 scientific accuracy or improvement. Explain the visible result separately and
 keep independent source/registration checks for scientific claims.
 
-**An old pass describes an old version.** Preserve its paths, hashes and
+**An old pass describes an old version.** Preserve its paths and
 outcome. To reuse it, show that relevant dependencies still match. Unchanged textures do not qualify a changed camera.
 
 Separate metadata/file, decoding, scientific and application results. A body test

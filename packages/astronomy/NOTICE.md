@@ -11,7 +11,7 @@ themselves.
 
 The repository-only `source/scene-epoch` directory retains seven NASA/JPL
 Horizons API responses for cssEarth's fixed-date scene preparation. Its manifest
-records the exact queries and hashes; its README describes the time conversion,
+records the exact queries; its README describes the time conversion,
 center conventions and limits. These snapshots are not exported as a general-time
 model by the astronomy package. Credit: NASA/JPL Solar System Dynamics,
 [Horizons](https://ssd.jpl.nasa.gov/horizons/).

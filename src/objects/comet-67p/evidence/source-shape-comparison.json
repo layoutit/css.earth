@@ -2,24 +2,20 @@
   "schema": "cssearth-osiris-shape-comparison@1",
   "objectId": "comet-67p",
   "lensId": "osiris",
-  "recipeSha256": "3adf83fc729ce7d391441c6d63a5a21dbb3ee272b91dcc153bc0ac5b2cc7e376",
   "method": "Every 1009th detector pixel from offset 503, excluding the camera-fitting grid. Native GEO validity and paired L4 flags apply. Compare each archive XYZ to the closest full-source point and reproject that point into the original camera. No emission, phase or visibility filtering; this deliberately includes points later withheld by the mosaic. Detector-weighted statistics are not surface coverage or measurement uncertainty.",
   "meshes": [
     {
       "name": "base",
-      "path": "shape/mtp019.obj",
-      "sha256": "e90fd0b7d86bc826cf967e2e0234a945c55be7dfd2f710c00e11ed953b14f801"
+      "path": "shape/mtp019.obj"
     },
     {
       "name": "selected",
-      "path": "geology/shap7-regions.vtk",
-      "sha256": "9af9fbedcdc04046786a1c3cb614938245f39cacba69639ba1847fa50fb1e963"
+      "path": "geology/shap7-regions.vtk"
     }
   ],
   "frames": [
     {
       "id": "aug05-1944",
-      "sourceSha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b",
       "samples": 1760,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0023821706176153905,
@@ -62,7 +58,6 @@
     },
     {
       "id": "aug05-2344",
-      "sourceSha256": "2cbe1a4cef9576331eb52f387e1d2b72897f2605b41f35b579481e41fc557ed1",
       "samples": 1808,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0017366666179933151,
@@ -105,7 +100,6 @@
     },
     {
       "id": "aug06-0244",
-      "sourceSha256": "c431756b48ec0e00392be8a88d9847a33ec35121c4ca5139edc72ac5a2223d39",
       "samples": 2457,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0018206471521182129,
@@ -148,7 +142,6 @@
     },
     {
       "id": "aug06-0520",
-      "sourceSha256": "0552334b0799c77a0bd9d79a953459e1c28211ef7ff2bb333ef0d6be29d30326",
       "samples": 2081,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.002413140803031524,
@@ -191,7 +184,6 @@
     },
     {
       "id": "n20151026-125938",
-      "sourceSha256": "86e92509e8413eb74ab39fd5d557dad8c9f4e8a5b5c982dc13c194a79a69749e",
       "samples": 342,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0013115601365158238,
@@ -234,7 +226,6 @@
     },
     {
       "id": "n20151031-234514",
-      "sourceSha256": "bd37d73e5f2b5f0ad5064a6975fe0bb8c7fb7b05b1b8cb8c0bd9528ba573a7ef",
       "samples": 381,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0006956584578673325,
@@ -277,7 +268,6 @@
     },
     {
       "id": "n20151104-112633",
-      "sourceSha256": "c52efdf3d8ac954f2eee09eef415fd216b715ef3fd6ef327ae965fcccf72b0ff",
       "samples": 372,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0023264652118532153,
@@ -320,7 +310,6 @@
     },
     {
       "id": "n20151115-050650",
-      "sourceSha256": "a552e2d9e692b68398bb5c18cc18fab8ff7172ac03b52cdd79fd15e0e2ce95a8",
       "samples": 683,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.001389060936477135,
@@ -363,7 +352,6 @@
     },
     {
       "id": "n20160409t151852044id50f22",
-      "sourceSha256": "0b654038310a98278d077bff516c8dcf376a5cb7384d2b2ed5b2b8ca82a0fdd2",
       "samples": 3672,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.001017325161899583,
@@ -406,7 +394,6 @@
     },
     {
       "id": "n20160409t173352247id50f22",
-      "sourceSha256": "0b8c4a916d15f4063132599bb4f3fc5da2699610917843fdb3f94262d0848e09",
       "samples": 4100,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.000723646581244504,
@@ -449,7 +436,6 @@
     },
     {
       "id": "n20160410t114851908id50f22",
-      "sourceSha256": "48f1ea95972001842e06b9559770bc46de19bf37dc76efcdec0fb2a7107599a6",
       "samples": 3852,
       "shapeModel": "cg-dlr_spg-shap7-v1.0_4Mfacets.ver",
       "cameraHoldoutMaximumPixels": 0.0005557585580977548,

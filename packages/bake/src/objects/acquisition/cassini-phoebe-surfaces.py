@@ -6,7 +6,6 @@ geometry, changes a camera at runtime, or uses photographed brightness as a
 coverage mask. Source ownership is exact under the stated nominal fitted model;
 absolute geographic placement retains the measured registration uncertainty.
 """
-import hashlib
 import importlib.util
 import json
 import math
@@ -28,8 +27,6 @@ def module(name, filename):
 ice = module('cassini_ice', 'cassini-ice-surfaces.py')
 fixed = module('cassini_fixed_mesh', 'cassini-fixed-mesh.py')
 nav = ice.navigation
-MESH_HELPER_SHA = 'aae28318139cd4a3cc46838e905c46ae11cfb003def06acccbfd454241cf0020'
-TERRAIN_SHA = 'a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178'
 SCHEMA = 'cssearth-phoebe-registered-vims-surfaces@1'
 
 
@@ -44,7 +41,7 @@ def pck(et, rotation):
     return rz(w) @ rx(math.radians(90-rotation['declinationDegrees'])) @ rz(math.radians(90+rotation['rightAscensionDegrees']))
 
 
-def sun_table(path, expected_hash):
+def sun_table(path):
     raw = Path(path).read_bytes()
     label = raw[:65536].decode('ascii').rstrip('\0')
     table = ice.detector_quality.object_text(label, 'Table', 'SunPosition')
@@ -56,8 +53,8 @@ def sun_table(path, expected_hash):
         raise ValueError('Unqualified Sun cache columns')
     start, length = int(nav._field(table, 'StartByte'))-1, int(nav._field(table, 'Bytes'))
     data = raw[start:start+length]
-    if len(data) != 112 or hashlib.sha256(data).hexdigest() != expected_hash:
-        raise ValueError('Pinned Sun cache changed')
+    if len(data) != 112:
+        raise ValueError(f'{path}: SunPosition table holds {len(data)} bytes, not two 56-byte samples')
     rows = np.array(list(struct.iter_unpack('<7d', data)))
     if not np.isfinite(rows).all() or rows[0, -1] >= rows[1, -1]:
         raise ValueError('Invalid Sun cache samples')
@@ -89,17 +86,11 @@ def read_observation(root, entry, plan, mesh):
     if camera.mode != 'HI-RES':
         raise ValueError('This registered aperture recipe qualifies HI-RES IR only')
     region = json.loads((root / entry['region']).read_text())
-    if (region['observationId'] != entry['id'] or region['terrainSha256'] != TERRAIN_SHA
-            or region['cameraModuleSha256'] != ice.NAVIGATION_SHA256
+    if (region['observationId'] != entry['id']
             or (region['width'], region['height']) != (camera.width, camera.height)):
-        raise ValueError('Registered source-region identity changed')
-    if ice.transfer.digest(root / entry['fitReceipt']) != region['fitReceiptSha256']:
-        raise ValueError('Fitted source look-offset evidence changed')
-    for source in region['sourcePins']:
-        path = next((root / entry[key] for key in ('calibrated', 'navigation')
-                     if Path(entry[key]).name == source['file']), None)
-        if path is None or ice.transfer.digest(path) != source['sha256']:
-            raise ValueError('Registration used different source cubes')
+        raise ValueError(f"{entry['region']}: observationId {region['observationId']} at "
+                         f"{region['width']}x{region['height']} does not match observation {entry['id']} "
+                         f"at {camera.width}x{camera.height}")
     if any(type(value) is not bool for value in region['nativePixelMask']):
         raise ValueError('Boolean native-pixel registration mask required')
     mask = np.array(region['nativePixelMask'], dtype=bool).reshape(camera.height, camera.width)
@@ -109,7 +100,7 @@ def read_observation(root, entry, plan, mesh):
     raw_valid = {b: np.array(quality['validByBand'][b], dtype=bool).reshape(mask.shape) for b in bands}
     valid_depth &= mask & np.stack([raw_valid[b] for b in plan['channels']['depth']]).all(axis=0)
     valid_rgb &= mask & np.stack([raw_valid[b] for b in plan['channels']['rgb']]).all(axis=0)
-    sun = sun_table(root / entry['navigation'], region['sunTableSha256'])
+    sun = sun_table(root / entry['navigation'])
     offsets = np.array(region['fitOffsetsRadians'])
     anchors = {item['nativeFlatIndex']: item for item in region['acceptedPixels']}
     if set(anchors) != set(np.flatnonzero(mask)) or len(anchors) != len(region['acceptedPixels']):
@@ -154,7 +145,7 @@ def read_observation(root, entry, plan, mesh):
                        'registeredRegionPixels': int(mask.sum()), 'depthAcceptedNativePixels': int(valid_depth.sum()),
                        'rgbAcceptedNativePixels': int(valid_rgb.sum()), 'sampledApertures': len(footprints),
                        'apertureRejections': rejected, 'detectorQuality': quality['report'],
-                       'cameraSourceEvidence': camera.input_evidence, 'regionSha256': ice.transfer.digest(root / entry['region']),
+                       'cameraSourceEvidence': camera.input_evidence, 'region': entry['region'],
                        'fitOffsetsRadians': offsets.tolist(), 'placementLimit': region['scope']}}
 
 
@@ -250,46 +241,37 @@ def projector_for(mesh, plan, observations):
 def prepare(path):
     path = Path(path).resolve()
     plan, root = json.loads(path.read_text()), path.parent
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
     if (plan['schema'] != SCHEMA or plan['target'] != 'PHOEBE' or (plan['width'], plan['height']) not in ((720, 360), (1440, 720))
             or plan['radiusMeters'] != 106500 or plan['photometricCorrection'] != 'none'):
         raise ValueError('Unqualified Phoebe recipe')
     if (plan['apertureInsetRadians'] != [1e-6, 1e-6] or plan['exposureFractions'] != [n/8 for n in range(9)]
             or plan['maximumIncidenceEmissionDegrees'] != 60):
         raise ValueError('Unqualified sampled aperture policy')
-    for name, pin in plan['pins'].items():
-        if ice.transfer.digest(root / name) != pin:
-            raise ValueError('Source changed: '+name)
-    for entry in plan['observations']:
-        if any(entry[key] not in plan['pins'] for key in ('calibrated', 'navigation', 'rawOriginal', 'region', 'fitReceipt')):
-            raise ValueError('Every original and registration must be pinned')
-    if (ice.transfer.digest(fixed.__file__) != MESH_HELPER_SHA
-            or ice.transfer.digest(nav.__file__) != ice.NAVIGATION_SHA256
-            or ice.transfer.digest(ice.transfer.__file__) != ice.TRANSFER_SHA256
-            or ice.transfer.digest(ice.detector_quality.__file__) != plan['detectorQualityPreparerSha256']):
-        raise ValueError('Source helper changed')
-    for key in ('terrain', 'rotationPath', 'originComparison'):
-        if plan[key] not in plan['pins']:
-            raise ValueError('Source frame evidence must be pinned')
+    required = [(f"observations[{entry['id']}].{key}", entry[key]) for entry in plan['observations']
+                for key in ('calibrated', 'navigation', 'rawOriginal', 'region', 'fitReceipt')]
+    required += [(key, plan[key]) for key in ('terrain', 'rotationPath', 'originComparison')]
+    missing = [f'{field} = {name}' for field, name in required if not (root / name).is_file()]
+    if missing:
+        raise ValueError(f'phoebe {path.name}: missing inputs: ' + ', '.join(missing))
     rotation = json.loads((root / plan['rotationPath']).read_text())
     comparison = json.loads((root / plan['originComparison']).read_text())
     if (rotation != plan['rotation'] or rotation['referenceEpochJdTt'] != 2451545
             or comparison['surfaceRefinement']['translationKm'] != plan['originTranslationKilometers']):
         raise ValueError('Registered source-frame interpretation differs from its evidence')
     terrain_path = root / plan['terrain']
-    if ice.transfer.digest(terrain_path) != TERRAIN_SHA:
-        raise ValueError('Fixed Phoebe geometry changed')
-    terrain = json.loads(terrain_path.read_text())
+    terrain_bytes = terrain_path.read_bytes()
+    terrain = json.loads(terrain_bytes)
     if len(terrain['faces']) != 3500:
         raise ValueError('Unexpected fixed face count')
     mesh = fixed.FixedMesh(np.array([face['vertices'] for face in terrain['faces']])*106.5/230)
     observations = [read_observation(root, entry, plan, mesh) for entry in plan['observations']]
     projector = projector_for(mesh, plan, observations)
     outputs = ice.write_projected_products(root, plan, observations, projector)
-    if ice.transfer.digest(terrain_path) != TERRAIN_SHA:
-        raise ValueError('Fixed mesh mutated during source mapping')
-    receipt = {'schema': SCHEMA, 'recipeSha256': ice.transfer.digest(path),
-               'preparerSha256': ice.transfer.digest(__file__), 'spectralHelperSha256': ice.transfer.digest(ice.__file__),
-               'fixedMeshHelperSha256': MESH_HELPER_SHA, 'terrainSha256': TERRAIN_SHA,
+    if terrain_path.read_bytes() != terrain_bytes:
+        raise ValueError(f"phoebe {plan['terrain']}: fixed mesh changed during source mapping")
+    receipt = {'schema': SCHEMA, 'recipe': path.name, 'terrain': plan['terrain'],
                'fixedMeshMapping': projector.geometry_report,
                'observations': [obs['report'] for obs in observations], 'outputs': outputs,
                'areaDenominator': 'Reference-sphere solid-angle grid estimate, not physical mesh area',

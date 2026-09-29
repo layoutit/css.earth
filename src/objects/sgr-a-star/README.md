@@ -30,7 +30,7 @@ combinations drawn with a fixed seed from the 5594 of its Top Set (EHT Collabora
 [arXiv:2311.09479](https://arxiv.org/abs/2311.09479), Table "Parameters in the eht-imaging Pipeline Top Set"), then averaged.
 It sits behind the shadow disc, turned so celestial north is where the scene's sky has it, on eht-imaging's own display
 colour map (matplotlib afmhot), with opacity following the light. `node packages/bake/authoring/eht/topset-mean.mts sgr-a-star` remakes
-it from [the recipe](source/preparation/eht-topset.json): both releases by commit and git blob id, the pipeline's one change
+it from [the recipe](source/preparation/eht-topset.json): both releases by commit and file path, the pipeline's one change
 (one process per run), the toolchain and the 200 combinations.
 
 ## The S-stars
@@ -87,4 +87,4 @@ describes.
   path, which a hosted orbit cannot place.
 - Stars found after 2017 (Peißker et al.'s S62 and S4711–S4716) are not in table3 and are not shown.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

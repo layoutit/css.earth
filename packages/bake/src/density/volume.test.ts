@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseVolumeRecipe } from '../volume/index.ts';
 import { loadVolumeSource, sampleEncoded, decodeDensityKtx2, containedPath, bakeSlab, channelDensity, slabStepSize, withinVolumeSupport, encodeVolumeRaster } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import { parseVolumeAcquisition, reduceRawVolume, encodeDensityKtx2 } from './acquisition.ts';
 import sharp from 'sharp';
 import { sunBarycentricAu, M_PER_AU } from '@cssearth/astronomy';
@@ -12,7 +11,7 @@ const readRecipe = async () => parseVolumeRecipe(JSON.parse(await readFile(`${so
 
 test('the galaxy sits on Sgr A* in the Galactic plane: OpenSpace extent and in-plane rotation, measured centre, no tilt', async () => {
   const descriptor=JSON.parse(await readFile('src/objects/milky-way/object.json','utf8')) as {properties:{volume:{referenceFrame:string;originM:number[];epochJdTt:number;localToReferenceXyzw:number[];metersPerUnit:number;boundsUnits:{min:number[];max:number[]}}}};
-  const provenance=JSON.parse(await readFile(`${sourceDirectory}/provenance.json`,'utf8')) as {frame:{centerIcrfM:number[];rotationRadians:number[];fullExtentM:number[]};references:{path:string;sha256:string}[]};
+  const provenance=JSON.parse(await readFile(`${sourceDirectory}/provenance.json`,'utf8')) as {frame:{centerIcrfM:number[];rotationRadians:number[];fullExtentM:number[]};references:{path:string}[]};
   const asset=await readFile(`${sourceDirectory}/openspace/volume.asset`,'utf8');
   assert.match(asset,/KiloParsec = 3\.086E19/);assert.match(asset,/8 \* KiloParsec, 0, 0/);
   assert.match(asset,/1\.2E21, 1\.2E21, 0\.15E21/);
@@ -52,7 +51,7 @@ test('the galaxy sits on Sgr A* in the Galactic plane: OpenSpace extent and in-p
   }
 });
 
-test('pinned density source is self-contained and sampling matches real voxel centers', async () => {
+test('the density source is self-contained and sampling matches real voxel centers', async () => {
   const recipe = await readRecipe(), source = await loadVolumeSource(sourceDirectory, recipe);
   assert.deepEqual(recipe.grid.dimensions,[1024,1024,128]);
   const result: [number, number, number, number] = [0, 0, 0, 0];
@@ -135,7 +134,7 @@ test('compressed volume rasters preserve every original alpha value and crop coo
 test('raw importer preserves X-fastest RGBA order, encoded filtering and rejects source mutations', () => {
   const raw=Buffer.alloc(4*4*4*4);
   for(let z=0;z<4;z++)for(let y=0;y<4;y++)for(let x=0;x<4;x++)for(let c=0;c<4;c++) raw[4*((z*4+y)*4+x)+c]=z*40+y*8+x*2+c;
-  const acquisition=parseVolumeAcquisition({schema:'cssearth-raw-volume-acquisition@1',source:{url:'https://example.test/pinned.raw',sha256:sha256(raw),bytes:raw.length,dimensions:[4,4,4],layout:'x-fastest-rgba8',invertZ:false},reduction:{method:'encoded-box-average-round-half-up',factor:2},compression:{format:'ktx2-rgba8-zstd',level:9}});
+  const acquisition=parseVolumeAcquisition({schema:'cssearth-raw-volume-acquisition@1',source:{url:'https://example.test/source.raw',bytes:raw.length,dimensions:[4,4,4],layout:'x-fastest-rgba8',invertZ:false},reduction:{method:'encoded-box-average-round-half-up',factor:2},compression:{format:'ktx2-rgba8-zstd',level:9}});
   const grid=reduceRawVolume(raw,acquisition);
   assert.deepEqual([grid.width,grid.height,grid.depth],[2,2,2]);
   for(let z=0;z<2;z++)for(let y=0;y<2;y++)for(let x=0;x<2;x++)for(let c=0;c<4;c++) assert.equal(grid.encodedRgba[4*((z*2+y)*2+x)+c],z*80+y*16+x*4+c+25);

@@ -14,7 +14,6 @@ test('photometric evidence validation rejects cross-subject or repinned source s
 import { fitPhotometricEmission } from './photometric-prior.ts';
 import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { createPhotometricEmission, readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/bake/volume';
-import { geometrySha } from '../geometry/registered-source.ts';
 
 test('two-scale fit retains smooth light and finite residuals, including after JSON replay', async () => {
   const published = readPhotometricMgeRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8')));
@@ -26,7 +25,7 @@ test('two-scale fit retains smooth light and finite residuals, including after J
     return Math.exp(-.5 * (x * x + y * y) / 10000) + .5 * Math.exp(-.5 * ((x - 40) ** 2 + (y - 30) ** 2) / 150);
   });
   const fit = fitPhotometricEmission({ target, coverage: new Uint8Array(target.length).fill(1), width, height: width, bounds },
-    { detail: 1, faint: .35, depth: 1 }, { recipe, prior: createPhotometricMgePrior(recipe), recipeBytes: Buffer.from(''), evidenceBytes: Buffer.from(''), recipeSha256: geometrySha('fixture') },
+    { detail: 1, faint: .35, depth: 1 }, { recipe, prior: createPhotometricMgePrior(recipe), recipeBytes: Buffer.from(''), evidenceBytes: Buffer.from(''), recipePath: 'labs/nebula/models/omega-centauri/photometric-mge.json' },
     new AbortController().signal, () => {});
   assert.ok(fit.field.photometricEnvelope);
   assert.ok(fit.field.components.length > 0);
@@ -77,10 +76,10 @@ test('validated envelope chroma bounds the exact round2 green-channel roundoff w
   const recipe = readPhotometricMgeRecipe({ ...published, inclinationDegrees: 90,
     gaussians: [{ centralAmplitude: 1, sigmaArcsec, projectedAxisRatio: 1 }] });
   const skyBounds = { min: [-1, -1] as [number, number], max: [1, 1] as [number, number] };
-  const model: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: 'e'.repeat(64),
+  const model: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: 'fixture-field',
     controls: { detail: 1, faint: .35, depth: 1 }, components: [], bounds: { min: [-1, -1, -1], max: [1, 1, 1] }, skyBounds, scaffold: null,
     assumptions: { kernel: 'regression fixture', projectionUnits: 'relative light', depth: 'regression fixture', halo: 'none', haloRadiusArcsec: 1, equalNearFarSplit: false, velocityUncoveredComponents: 0 },
-    photometricEnvelope: { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'a'.repeat(64), recipe,
+    photometricEnvelope: { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'fixture-prior', recipe,
       width: 2, height: 2, bounds: skyBounds, zRange: [-1, 1], gain: [1, 1, 1, 1] } };
   const field = createPhotometricEmission(model), out: [number, number, number] = [0, 0, 0];
   field.sampleEmission(0, 0, 0, out); assert.equal(out[0], light);

@@ -4,8 +4,7 @@
 [#505](https://github.com/layoutit/css.earth/pull/505)** along with the Playwright
 harness they depended on. What remains here is the record, not a runnable check:
 the reports below are tied to the revisions they tested and are cited by the
-affected body READMEs. Rendering is now proved from built HTML by
-`site/test/rendered-page.test.mts`, which needs no browser.
+affected body READMEs.
 
 The batch covered the nine models listed in the
 [source-authoring inputs](https://github.com/layoutit/css.earth/blob/fbfb46823b/tools/objects/source-authoring/distant-worlds/inputs.json)
@@ -105,7 +104,7 @@ all six. Hash-verified shared sky/font inputs were reused through hard links;
 missing papers were restored by the normal acquisition plan.
 [Fresh runtime installation](outer-worlds/fresh-install.json) downloaded
 186 files, 42.12 MB, directly into the serving directory, with every expected
-size and SHA-256 checked. [Finite radial samples](outer-worlds/surface-fit.json)
+size checked. [Finite radial samples](outer-worlds/surface-fit.json)
 measure approximation to the adopted analytical models, not scientific accuracy
 or a Hausdorff bound.
 

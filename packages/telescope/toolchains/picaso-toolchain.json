@@ -14,7 +14,7 @@
   },
   "requirements": "picaso-requirements.lock",
   "picaso": "4.1",
-  "platform": "The lock pins the files pip resolves on macOS arm64 with Python 3.11; another platform needs its own hashes added to the lock.",
+  "platform": "The lock pins the versions pip resolves on macOS arm64 with Python 3.11; another platform may resolve other versions and needs its own lock.",
   "data": {
     "reference": "picaso.data.get_reference, the reference folder of the installed release (config.json version 4.1)",
     "profiles": { "url": "https://zenodo.org/records/5063476/files/structures_m+0.0.tar.gz", "doi": "10.5281/zenodo.5063476", "note": "Sonora Bobcat (Marley et al. 2021, ApJ 920, 85) cloud-free, solar-metallicity structures, one per temperature and gravity (tTTTTgGGGnc_m0.0.dat, gravity in m/s^2): the release of the paper." },

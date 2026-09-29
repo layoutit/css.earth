@@ -2,16 +2,11 @@
   "schema": "cssearth-reflectance-mosaic-check@1",
   "body": "bennu",
   "method": "Independent ISIS-label coordinates and float32 byte reads compared with the production native sampler. Native centers, fractional footprints, extrema, negative values and missing cells; not instrument calibration or physical map-to-shape registration.",
-  "manifestSha256": "317a53f1a632ad498d71cd3d64969538aa45801022972acc2542950d0fb48254",
-  "recipeSha256": "2fad3c0df93bda892695a790336c3544af85d35e3eec2591c8526f4b5f6c5a23",
-  "oracleSha256": "897fb2252dbaf03edd503dd6b89c5192307def9810e60873bc2bc10130ecdedc",
   "results": [
     {
       "id": "blue",
       "path": "maps/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.tif",
       "labelPath": "reference/Bennu_OSIRIS-REx_OCAMS_b_473nm_mosaic_25cm.lbl",
-      "sourceSha256": "735286dd1349f583cd97b5d4cf615e9065bcbd89fd73a92943b32a977924013b",
-      "labelSha256": "9f125848b1e971c0f08e6b08d0f6a1413a528ea7db22376bbf3b29fd6a2c35c7",
       "wavelengthNm": 473,
       "width": 6284,
       "height": 3142,
@@ -32,7 +27,7 @@
         -64.94476607807881,
         64.94476607807881
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -2651,8 +2646,6 @@
       "id": "green",
       "path": "maps/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.tif",
       "labelPath": "reference/Bennu_OSIRIS-REx_OCAMS_v_550nm_mosaic_25cm.lbl",
-      "sourceSha256": "9f844238aeb6a659e3d76c8241c3d1fac1158d42677abfec497080339f1ad112",
-      "labelSha256": "de661817d47619cf03644bd72d8d87c267413b090678fed2c3237f06e267e117",
       "wavelengthNm": 550,
       "width": 6284,
       "height": 3142,
@@ -2673,7 +2666,7 @@
         -64.94476607807881,
         64.94476607807881
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -5302,8 +5295,6 @@
       "id": "red",
       "path": "maps/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.tif",
       "labelPath": "reference/Bennu_OSIRIS-REx_OCAMS_w_698nm_mosaic_25cm.lbl",
-      "sourceSha256": "5e57a52f8a26cba48c2a46d6e7d64a22073e5bfcf525df35bcdc79411bef7e3b",
-      "labelSha256": "deec45d1d2176df9eb7bbf985048e8aa3edeaa7532a07ba1c1b9942fb7c12736",
       "wavelengthNm": 698,
       "width": 6284,
       "height": 3142,
@@ -5324,7 +5315,7 @@
         -64.94476607807881,
         64.94476607807881
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,
@@ -7953,8 +7944,6 @@
       "id": "near-infrared",
       "path": "maps/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.tif",
       "labelPath": "reference/Bennu_OSIRIS-REx_OCAMS_x_847nm_mosaic_25cm.lbl",
-      "sourceSha256": "f82deca4ba3b91d3d2d3403f10b344ea88c7387332b3e6b3bdd626c19d522532",
-      "labelSha256": "3cb6e4d6df5e86c1781a98eb20d2b5989a3f2b1577bbbb43644602a58bc51136",
       "wavelengthNm": 847,
       "width": 6284,
       "height": 3142,
@@ -7975,7 +7964,7 @@
         -64.94476607807881,
         64.94476607807881
       ],
-      "toleranceDisplayLevels": 0.000001,
+      "toleranceDisplayLevels": 1e-06,
       "checks": [
         {
           "x": 0,

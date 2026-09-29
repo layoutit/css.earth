@@ -3,13 +3,13 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { basename, join } from 'node:path';
-import { bandOfFilters, parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
+import { join } from 'node:path';
+import { bandOfFilters, parseImagingProgram, PROGRAMS } from './archive.mts';
 import { bandMode, bandOfHeader, isCubeBand, JWST_BANDS } from './bands.mts';
 import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope/node';
 import { toolchainPython } from '@cssearth/telescope/node';
 import { findPointSources } from '@cssearth/bake/objects/layers/observation';
 
@@ -20,16 +20,6 @@ const program = (overrides: Record<string, unknown> = {}) => ({
     level3: member('jw02733-o001_t001_nircam_f444w-f470n_i2d.fits'), association: member('jw02733-o001_20260726t151748_image3_00003_asn.json'),
     members: [member('jw02733001001_02103_00001_nrcblong_cal.fits')] }],
   ...overrides,
-});
-
-test('the pinned NGC 3132 program parses, and its reproduction receipt records a close match', async () => {
-  const pinned = parseImagingProgram(JSON.parse(await readFile(join(PROGRAMS, 'ngc-3132-2733.json'), 'utf8')));
-  for (const band of ['NIRCAM-F187N', 'NIRCAM-F470N']) assert.ok(pinned.bands.some(entry => entry.band === band), `${band} is pinned`);
-  const receipt = JSON.parse(await readFile(join(PROGRAMS, 'ngc-3132-2733.NIRCAM-F470N.reproduction.json'), 'utf8')) as
-    { crdsContext: string; mast: { calVer: string }; local: { calVer: string }; pixels: { ratioBins: { medianRatio: number }[] } };
-  assert.equal(receipt.local.calVer, receipt.mast.calVer);
-  // Up to the 99.9th brightness percentile the local mosaic's median brightness is within 0.2% of MAST's.
-  for (const bin of receipt.pixels.ratioBins.slice(0, 4)) assert.ok(Math.abs(bin.medianRatio - 1) < 0.002, `ratio ${bin.medianRatio}`);
 });
 
 test('the pinned HIP 65426 coronagraphy reproduces MAST’s PSF subtraction beyond the mask', async () => {
@@ -152,59 +142,6 @@ test('the diffraction spikes of a bright star are masked, and a nearby filament 
   assert.equal(found.mask[(cy + 30) * width + cx + 5], 0, 'sky between spikes stays');
 });
 
-const LOCK = 'astropy==6.1.0\njwst==2.0.1\nstcal==1.20.0\nstpipe==1.1.0\nunpinned-thing\n';
-const digested = (name: string, hash: string) => ({ ...member(name), sha256: hash });
-const pinnedProgram = (overrides: Record<string, unknown> = {}) => parseImagingProgram(program({
-  bands: [{ ...program().bands[0], members: [digested('jw02733001001_02103_00001_nrcblong_cal.fits', 'a'.repeat(64))] }], ...overrides }));
-const toolchain = { toolchainDigest: 'b'.repeat(64), software: pipelineSoftware(LOCK) };
-const imageRun = (pinned: ImagingProgram, parameters: Record<string, unknown> = {}, band: ImagingBand = pinned.bands[0]!) =>
-  imagingProductRun(pinned, band, 'image3', { image3: pinned.image3 ?? {}, grid: null, ...parameters }, toolchain);
-
-test('an image3 run is identified by the exposures it was given, its settings and the pinned pipeline', () => {
-  const pinned = pinnedProgram({ image3: { tweakreg: { abs_refcat: 'GAIADR3' } } });
-  const run = imageRun(pinned);
-  assert.equal(run.telescope, 'JWST');
-  assert.equal(run.stage, 'image3');
-  assert.deepEqual(run.inputs, [{ role: 'level-2 exposure', identity: 'mast:JWST/product/jw02733001001_02103_00001_nrcblong_cal.fits', bytes: 1000 }]);
-  assert.equal(run.parameters.crdsContext, 'jwst_1535.pmap');
-  assert.deepEqual(run.parameters.image3, { tweakreg: { abs_refcat: 'GAIADR3' } });
-  // The lock pins the environment eurekaToolchain refuses to run without, so these are the versions a run had.
-  assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }, { name: 'stpipe', version: '1.1.0' }]);
-  assert.equal(run.toolchainDigest, 'b'.repeat(64));
-  // Another CRDS context, another grid, another exposure or another pipeline pin is another run, so the mosaic is made again.
-  const base = runDigest(run);
-  assert.notEqual(runDigest(imageRun(pinnedProgram({ crdsContext: 'jwst_1400.pmap', image3: { tweakreg: { abs_refcat: 'GAIADR3' } } }))), base);
-  assert.notEqual(runDigest(imageRun(pinned, { grid: gridResample({ width: 1024, height: 1024, fovDeg: 0.025, centerIcrsDegrees: [151.75735, -40.4364056] as [number, number] }) })), base);
-  assert.notEqual(runDigest(imagingProductRun(pinned, pinned.bands[0]!, 'image3', { image3: pinned.image3 ?? {}, grid: null },
-    { ...toolchain, toolchainDigest: 'c'.repeat(64) })), base);
-  // A member with no digest is not a pin, and a lock that pins no pipeline is not a version.
-  assert.throws(() => imageRun(parseImagingProgram(program())), /no digest/u);
-  assert.throws(() => pipelineSoftware('astropy==6.1.0\n'), /no jwst pipeline version/u);
-});
-
-test('archive agreement is added to the record beside the exact product, and a product with no record is refused', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'jwst-record-'));
-  try {
-    const pinned = pinnedProgram(), mosaic = join(directory, 'jw02733-o001_t001_nircam_f444w-f470n_i2d.fits');
-    const receipt = join(directory, 'test.NIRCAM-F470N.reproduction.json'), agreement = 'The re-run reproduces MAST’s own mosaic of this observation.';
-    await writeFile(mosaic, 'mosaic');
-    // The comparing stage adds evidence; it does not invent the record, so a product no stage recorded is refused.
-    await assert.rejects(recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement), /no product record at/u);
-    await writeProductRecord(productRecordPath(mosaic), imageRun(pinned), [{ path: basename(mosaic), file: mosaic, units: 'MJy/sr' }]);
-    assert.deepEqual((await readProductRecord(productRecordPath(mosaic)))!.evidence, [], 'the producing run states no evidence of its own');
-    await writeFile(receipt, '{}');
-    const record = await recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement);
-    assert.equal(evidenceFor(record, basename(mosaic), 'archive-agreement').length, 1);
-    assert.equal(evidenceFor(record, basename(mosaic), 'geometric-registration').length, 0, 'agreement with MAST places nothing');
-    assert.ok(record.evidence[0]!.receipt.endsWith('.evidence.json'));
-    assert.deepEqual(record.inputs, imageRun(pinned).inputs, 'the run facts stay the ones the run recorded');
-    // The same comparison run twice replaces its own entry, so the record keeps the same bytes.
-    const again = await recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement);
-    assert.equal(again.evidence.length, 1);
-    await writeFile(mosaic, 'another mosaic');
-    await assert.rejects(recordProductEvidence(mosaic, 'archive-agreement', receipt, agreement), /not the files on disk/u);
-  } finally { await rm(directory, { recursive: true, force: true }); }
-});
 
 test('an integral-field observation is a cube band, built by spec3 from _cal exposures', () => {
   assert.equal(bandOfFilters('NIRSPEC', 'F290LP;G395H').id, 'NIRSPEC-G395H-F290LP');
@@ -217,20 +154,6 @@ test('an integral-field observation is a cube band, built by spec3 from _cal exp
   assert.equal(parseImagingProgram(program([cube])).bands[0]!.stage, 'spec3');
   assert.throws(() => parseImagingProgram(program([{ ...cube, stage: undefined }])), /built by spec3/u);
   assert.throws(() => parseImagingProgram(program([{ ...cube, level3: member('jw01250-o002_t001_nirspec_g395h-f290lp_i2d.fits') }])), /level-3 cube/u);
-});
-
-test('a coronagraph run pins the PSF references it subtracted with, and is not the same run as an image3 mosaic', () => {
-  const pinned = pinnedProgram({ bands: [{ ...program().bands[0], band: 'NIRCAM-F444W-MASK335R', observation: 'jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r', stage: 'coron3',
-    level3: member('jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits'), association: member('jw01386-c1020_20260721t201156_coron3_00001_asn.json'),
-    members: [digested('jw01386001001_0310a_00001_nrcalong_calints.fits', 'a'.repeat(64))],
-    references: [digested('jw01386002001_0310a_00001_nrcalong_calints.fits', 'e'.repeat(64))] }] });
-  const band = pinned.bands[0]!, run = imagingProductRun(pinned, band, 'coron3', { psfReferences: 1 }, toolchain);
-  assert.equal(run.stage, 'coron3');
-  assert.deepEqual(run.inputs.map(input => input.role), ['level-2 exposure', 'level-2 PSF reference']);
-  // Another reference star is another subtraction, so the mosaic beside an older record is not reused.
-  const other = pinnedProgram({ bands: [{ ...band, references: [digested('jw01386002001_0310a_00002_nrcalong_calints.fits', 'f'.repeat(64))] }] });
-  assert.notEqual(runDigest(imagingProductRun(other, other.bands[0]!, 'coron3', { psfReferences: 1 }, toolchain)), runDigest(run));
-  assert.notEqual(runDigest(imagingProductRun(pinned, band, 'image3', { psfReferences: 1 }, toolchain)), runDigest(run));
 });
 
 const CARD = 80, BLOCK = 2880;

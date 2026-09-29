@@ -5,7 +5,6 @@ checked-in GeoTIFF; this source conversion is separate from the shared preparer.
 """
 from pathlib import Path
 import argparse
-import hashlib
 import json
 import math
 import numpy as np
@@ -14,16 +13,14 @@ import rasterio
 from rasterio.transform import from_bounds
 
 
-def sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
 def pinned(root, entry):
     path = (root / entry['path']).resolve()
     if not path.is_relative_to(root.resolve()):
         raise ValueError('Source path escapes package')
-    if path.stat().st_size != entry['bytes'] or sha256(path) != entry['sha256']:
-        raise ValueError(f"Source pin differs: {entry['path']}")
+    if not path.is_file():
+        raise ValueError(f"callisto: recipe path {entry['path']} is missing")
+    if path.stat().st_size != entry['bytes']:
+        raise ValueError(f"callisto: recipe path {entry['path']} has {path.stat().st_size} bytes; bytes is {entry['bytes']}")
     return path
 
 
@@ -108,9 +105,8 @@ def convert(recipe_path, output_directory=None):
     weights = np.cos(np.radians(90-(np.arange(height)+.5)*180/height))
     report = {'schema':'cssearth-callisto-color-conversion-proof@1',
         'input':recipe['input'], 'registration':recipe['registration'],
-        'recipeSha256':sha256(recipe_path), 'generatorSha256':sha256(Path(__file__)),
+        'recipe':str(recipe_path.relative_to(root)), 'generator':Path(__file__).name,
         'output':{'path':recipe['output']['path'], 'bytes':destination.stat().st_size,
-            'sha256':sha256(destination), 'rgbaSha256':hashlib.sha256(out.tobytes()).hexdigest(),
             'width':width, 'height':height, 'referenceRadiusMeters':camera['radiusMeters'],
             'noData':0, 'validPixels':int(np.sum(out[:, :, 3] == 255)),
             'sphereCoverageFraction':float(((out[:, :, 3] > 0).sum(axis=1)*weights).sum()/(width*weights.sum()))},

@@ -4,61 +4,48 @@
   "files": [
     {
       "path": "Bonanos2009-ReadMe.txt",
-      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/ReadMe",
-      "sha256": "56d1846aa9c97ac7d55bbc0cabc40cf569a212ba2254ec08103ce103bfae90dc"
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/ReadMe"
     },
     {
       "path": "table1.dat",
-      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table1.dat",
-      "sha256": "e5ff8b477fa08d6be1b6786990a9b77affff3a2dcb1791c48201b8080dd652dc"
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table1.dat"
     },
     {
       "path": "table3.dat",
-      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table3.dat",
-      "sha256": "7be6d2307566607a9bf58ebbeddca97a805b2bdeb5c024bf18413e50306019ef"
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table3.dat"
     },
     {
       "path": "refs.dat",
-      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/refs.dat",
-      "sha256": "ced374c916db9cf5409bc3bcef91018f64671ae673f9595cd28ba041781127e4"
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/refs.dat"
     }
   ],
   "depthModel": {
     "object": {
-      "path": "labs/nebula/models/lmc-full-density/object.json",
-      "sha256": "57b1d75e5eea014736768b65b7c85a1d78f6b96878ae545d03e427aaa3e09662"
+      "path": "labs/nebula/models/lmc-full-density/object.json"
     },
     "recipe": {
-      "path": "labs/nebula/models/lmc-full-density/source/volume.json",
-      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+      "path": "labs/nebula/models/lmc-full-density/source/volume.json"
     },
     "cloudObject": {
-      "path": "labs/nebula/models/lmc-clouds/object.json",
-      "sha256": "710e1fa5a2cfd1d4ab41650aeed5aec72684fb867b5ebcc175a4d5b6dd2ceeb5"
+      "path": "labs/nebula/models/lmc-clouds/object.json"
     },
     "cloudRecipe": {
-      "path": "labs/nebula/models/lmc-clouds.json",
-      "sha256": "3fb1dc8119cd48667c893423fe1ced094eb33e74a21566e8f79033add75c1a95"
+      "path": "labs/nebula/models/lmc-clouds.json"
     },
     "cloudProvenance": {
-      "path": "labs/nebula/models/lmc-clouds/source/provenance.json",
-      "sha256": "1821b677af22e83b79c21427e172d3e4c07c704195156a19db9f7a74d07d0eb0"
+      "path": "labs/nebula/models/lmc-clouds/source/provenance.json"
     },
     "analysis": {
-      "path": "labs/nebula/models/lmc-clouds-observation/source/analysis.json",
-      "sha256": "cfda542930af84e7cc9212f3fb71af10debea4f3dc11821c67cafcdab0c3cc17"
+      "path": "labs/nebula/models/lmc-clouds-observation/source/analysis.json"
     },
     "prior": {
-      "path": "labs/nebula/models/lmc-clouds-observation/source/observation-prior.f32.gz",
-      "sha256": "ce051c076499ffd6b5209446ed79849b5c0bf440597d93e5dbd51bd4bc71f5c5"
+      "path": "labs/nebula/models/lmc-clouds-observation/source/observation-prior.f32.gz"
     },
     "target": {
-      "path": "labs/nebula/models/lmc-clouds-observation/source/target.png",
-      "sha256": "9f7e3afa169a28cf6d3fb4269c6ec43c4f6c7b75b92079d6ea65a096e5c98a59"
+      "path": "labs/nebula/models/lmc-clouds-observation/source/target.png"
     },
     "parts": {
-      "path": "labs/nebula/models/lmc-clouds/source/cloud-parts.json",
-      "sha256": "75575b897c3ff034c45b532b94bf0229a13d35f0602b7dc7bf2121137885c723"
+      "path": "labs/nebula/models/lmc-clouds/source/cloud-parts.json"
     }
   }
 }

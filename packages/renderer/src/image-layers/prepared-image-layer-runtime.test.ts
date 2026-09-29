@@ -53,7 +53,7 @@ test('image textures are demanded once when their retained axis first contribute
     anchors: [], bankViews: views,
     stacks: views.map(({ axis }) => ({ axis, leaves: [{ id: axis, centerUnits: [0, 0, 0], texturePath: `${axis}.png`,
       widthPx: 1, heightPx: 1, style: { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: views.map(({ axis }) => ({ path: `${axis}.png`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+    resources: views.map(({ axis }) => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {},
   };
   const resolveResource = vi.fn((path: string) => `/prepared/${path}`);

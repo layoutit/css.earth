@@ -17,7 +17,7 @@ function kernelEvidence(set: KernelSet) {
   return set.kernels.map(kernel => {
     const path = relative(projectRoot, kernel.path);
     if (path.startsWith('..')) throw new Error(`Kernel evidence path escapes the project root: ${kernel.path}`);
-    return { path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind };
+    return { path, bytes: kernel.bytes, kind: kernel.kind };
   });
 }
 

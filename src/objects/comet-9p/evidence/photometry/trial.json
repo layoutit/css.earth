@@ -13,222 +13,178 @@
     "https://doi.org/10.1016/j.icarus.2012.02.011",
     "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"
   ],
-  "preparationSha256": "87cbc2658f4f763b2782e2e71ea109c9fabbedefb1852382a83b931f6e8bec2a",
   "sourcePins": [
     {
       "path": "shape/tempel1_2012_plan.tab",
-      "expectedBytes": 1634142,
-      "expectedSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777"
+      "expectedBytes": 1634142
     },
     {
       "path": "photography/deep-impact/iv05070405_9000632_001_r.fit",
-      "expectedBytes": 2436480,
-      "expectedSha256": "53884c4e586680b1d7d286c253bb1f220c03208edb88a8481963781947659c81"
+      "expectedBytes": 2436480
     },
     {
       "path": "photography/deep-impact/iv05070405_9000632_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "fb1f2818491dc9044faedc2be1088d6400b13ff8e8549a9c905a610ceb5f5a90"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000632_001_r.json",
-      "expectedBytes": 22719,
-      "expectedSha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51"
+      "expectedBytes": 22719
     },
     {
       "path": "photography/deep-impact/iv05070405_9000639_001_r.fit",
-      "expectedBytes": 662400,
-      "expectedSha256": "acacb9588329abd83d742ba0f558fafd84c0aad554c7c0ead1ead2f913345599"
+      "expectedBytes": 662400
     },
     {
       "path": "photography/deep-impact/iv05070405_9000639_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "00474e4d21fded4b78524f21f7b4e25b34c9496cf1d413e2dbf27de1d8538cc5"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000639_001_r.json",
-      "expectedBytes": 17827,
-      "expectedSha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628"
+      "expectedBytes": 17827
     },
     {
       "path": "photography/deep-impact/iv05070405_9000654_001_r.fit",
-      "expectedBytes": 662400,
-      "expectedSha256": "fc64a20ea7c923e0c208fb3597632182ceaa44a6d2a0f4656968a4e6e1b48afb"
+      "expectedBytes": 662400
     },
     {
       "path": "photography/deep-impact/iv05070405_9000654_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "981707f100e66c0cb36c555ad2a9d269e18e19ddbf9a654fa0d2873c08dc98e1"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000654_001_r.json",
-      "expectedBytes": 14834,
-      "expectedSha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d"
+      "expectedBytes": 14834
     },
     {
       "path": "photography/next/n30036te02_rr.fit",
-      "expectedBytes": 13665600,
-      "expectedSha256": "3bad06293d092e0be85d473086dc7babdb5a00040fc449649d9603b2188fbe24"
+      "expectedBytes": 13665600
     },
     {
       "path": "photography/next/n30036te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "fa2b468b95fe75d16c432b42343168938f61f4b5785dbf9594579a7940373e92"
+      "expectedBytes": 17520
     },
     {
       "path": "photography/next/n30036te02_rr.json",
-      "expectedBytes": 23080,
-      "expectedSha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4"
+      "expectedBytes": 23080
     },
     {
       "path": "photography/next/n30039te02_rr.fit",
-      "expectedBytes": 13665600,
-      "expectedSha256": "7991991b7dbbb8c84b1f5777feb22d1687eb55453c719af64d533d466c1ce68a"
+      "expectedBytes": 13665600
     },
     {
       "path": "photography/next/n30039te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "99fb4fa6678e66610566b1137fbd62e120d5c6f58f6601066367191e1ba1a92c"
+      "expectedBytes": 17520
     },
     {
       "path": "photography/next/n30039te02_rr.json",
-      "expectedBytes": 16354,
-      "expectedSha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691"
+      "expectedBytes": 16354
     },
     {
       "path": "photography/next/n30042te02_rr.fit",
-      "expectedBytes": 13665600,
-      "expectedSha256": "d2c82af5395924f21660bf3466f22b63173c3adf1ac23b0b533b54bbf2eb1a95"
+      "expectedBytes": 13665600
     },
     {
       "path": "photography/next/n30042te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "bef821e9f2d607ed4ccf45722f0a5c854f73c9247e644bd6f2285f41ab7d7822"
+      "expectedBytes": 17520
     },
     {
       "path": "photography/next/n30042te02_rr.json",
-      "expectedBytes": 17694,
-      "expectedSha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e"
+      "expectedBytes": 17694
     },
     {
       "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
-      "expectedBytes": 662400,
-      "expectedSha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087"
+      "expectedBytes": 662400
     },
     {
       "path": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "454beb14950398f963f0b7db0595cbc259993420296ed81fee65bd79f80a60cb"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000644_001_r.json",
-      "expectedBytes": 17997,
-      "expectedSha256": "696ffa2a70e8f1eb26b135d786af0789c6b7943f47f68bbaf1a111d63b8c8452"
+      "expectedBytes": 17997
     },
     {
       "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
-      "expectedBytes": 662400,
-      "expectedSha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026"
+      "expectedBytes": 662400
     },
     {
       "path": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "c07fa63ecc2bdb86466e5927419c94a966f5d2defaf79576d735db1b217b9d1c"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000673_001_r.json",
-      "expectedBytes": 13379,
-      "expectedSha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1"
+      "expectedBytes": 13379
     },
     {
       "path": "photography/next/n30033te02_rr.fit",
-      "expectedBytes": 13665600,
-      "expectedSha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc"
+      "expectedBytes": 13665600
     },
     {
       "path": "photography/next/n30033te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "99e77ed612f4323d72076ddbf82fde723dd5093f779acd33183eb63c1f2bd97a"
+      "expectedBytes": 17520
     },
     {
       "path": "photography/next/n30033te02_rr.json",
-      "expectedBytes": 17740,
-      "expectedSha256": "ff0de3863638c44954eec125b8ecedf6228d13a127913e575ea11ebf269bbd15"
+      "expectedBytes": 17740
     },
     {
       "path": "photography/next/n30045te02_rr.fit",
-      "expectedBytes": 13665600,
-      "expectedSha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4"
+      "expectedBytes": 13665600
     },
     {
       "path": "photography/next/n30045te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "73f982e326d08c0aa3b4c0921ad187ec5259187899eab514080534a5536ba408"
+      "expectedBytes": 17520
     },
     {
       "path": "photography/next/n30045te02_rr.json",
-      "expectedBytes": 17370,
-      "expectedSha256": "3c0ce1af03d4a374b68c6cde5ae4fba4f8f9e8182272e8f2baffdd95a88ec781"
+      "expectedBytes": 17370
     },
     {
       "path": "photography/next/n30048te02_rr.fit",
-      "expectedBytes": 13665600,
-      "expectedSha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506"
+      "expectedBytes": 13665600
     },
     {
       "path": "photography/next/n30048te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "8bbcfa09263bf4109e3fcb9e44557451ca64a5c6ef4a419b0aca10f860c19aa2"
+      "expectedBytes": 17520
     },
     {
       "path": "photography/next/n30048te02_rr.json",
-      "expectedBytes": 17360,
-      "expectedSha256": "1c07ba7d6547cb8e51d959fb38c6ba9bb3a4b020eb1b8b6020ab4f2d6bac9904"
+      "expectedBytes": 17360
     },
     {
       "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
-      "expectedBytes": 662400,
-      "expectedSha256": "1e16220cef4edf6961f06b0a0651be5bb1202c8cf716ebdb0e2c74c7fe115520"
+      "expectedBytes": 662400
     },
     {
       "path": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "72fa11fcdd26d2259f5bc1c0764cf7c651c8776b2658f543181d04c33ce671db"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000675_001_r.json",
-      "expectedBytes": 57084,
-      "expectedSha256": "87d8b0a9e4992ad62bd57fd7c8165f0cce39e639ce7873d7bff67634c583eacb"
+      "expectedBytes": 57084
     },
     {
       "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
-      "expectedBytes": 216000,
-      "expectedSha256": "8cf1f35342c0caec7a22e6a610d66b2d8a91f866d70b4c0f5a9a41de6b799a70"
+      "expectedBytes": 216000
     },
     {
       "path": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "b74737563964f780b19367d8c9418498f7aa3a536f5407cb9401f16013472d40"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000680_001_r.json",
-      "expectedBytes": 15703,
-      "expectedSha256": "75faeb131deaf390f5931556db492878570eb94fb72d185b6ef55d70fb69c7b1"
+      "expectedBytes": 15703
     },
     {
       "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
-      "expectedBytes": 216000,
-      "expectedSha256": "360666794a059670d870c3049354c0a1f6cdbc53619a005817cb2fe940f9fe82"
+      "expectedBytes": 216000
     },
     {
       "path": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "be1f12db5f5bf473485a9c575d669a6b3274b6a6e524ebecf09307066cbd2d9f"
+      "expectedBytes": 32880
     },
     {
       "path": "photography/deep-impact/iv05070405_9000688_001_r.json",
-      "expectedBytes": 16038,
-      "expectedSha256": "5c081d34acb7869b2432322ff1bc13ace9b9d935ed4aaee412b8d335e1e7156d"
+      "expectedBytes": 16038
     }
   ],
   "cases": [

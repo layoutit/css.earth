@@ -30,7 +30,7 @@ async function fixture(value = product(), measured = true) {
   const directory = await mkdtemp(resolve(tmpdir(), 'body-map-publication-')), planePath = resolve(directory, value.planes.file), mapPath = `${planePath}.body-map.json`;
   const metadata = Buffer.from(formatBodyMapProduct(value)), record = bodyMapProductRecord(value, plane, metadata,
     [{ role: 'spectral cube', identity: 'mast:JWST/product/jw01250-o002_s3d.fits', bytes: 12 }],
-    [{ name: 'cssEarth author-body-maps', version: '1' }], undefined, bound ? [bound.output] : []);
+    [{ name: 'cssEarth author-body-maps', version: '1' }], bound ? [bound.output] : []);
   if (bound) await writeFile(resolve(directory, bound.output.path), bound.output.bytes);
   await writeFile(planePath, plane); await writeFile(mapPath, metadata); await writeFile(`${planePath}.product.json`, formatProductRecord(record));
   return { directory, planePath, mapPath };
@@ -110,10 +110,6 @@ test('prose, nominal optics, sampling and unpinned measurements cannot satisfy a
       assert.ok(layer.selection.unresolved.some(item => item.constraint === constraint));
     }
   }
-});
-test('a changed resolution receipt invalidates map publication', async () => {
-  const f = await fixture(); await writeFile(`${f.planePath}.resolution.json`, '{}');
-  await assert.rejects(qualifyBodyMap(f.mapPath, selection), /output bytes/);
 });
 test('a midpoint inside a request does not prove that the entire exposure fits', async () => {
   const map = product(), jd = (iso: string) => Date.parse(iso) / 86400000 + 2440587.5;

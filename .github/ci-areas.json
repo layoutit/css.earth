@@ -21,7 +21,6 @@
     ".github/scripts/ci/ci-affected.mts",
     ".github/scripts/ci/check-ci.mts",
     ".github/scripts/ci/classify-changes.mts",
-    ".github/scripts/ci/scope-runtime-ownership-check.mts",
     ".github/scripts/ci/object-scope-gate.mts",
     "src/platform/**",
     "site/objects.mts",

@@ -4,12 +4,11 @@
  * A JWST band names its level-3 product in the draft ({ band, product }); the product is downloaded by streaming and pinned.
  * WISE tiles come from the IRSA IBE atlas search around the grid; a tile is kept when any sample of its
  * published footprint edges or its centre projects inside the grid. */
-import { sha256, sha256File } from '@cssearth/core/node';
-import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { acquireMastProduct, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
+import { acquireMastProduct, hips2fitsCachePath, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
 import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from '@cssearth/bake/objects/raster';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';
@@ -94,24 +93,25 @@ if (import.meta.main) {
     if (!route) throw new TypeError(`Unsupported band ${id}.`);
     if (route.acquisition.kind === 'hips2fits') {
       const url = skyBandUrl(grid, route.acquisition.hips);
-      if (typeof band.sha256 === 'string') {
-        await cached(resolve(cache, 'hips2fits', `${band.sha256}.fits`), url, bytes => { if (sha256(bytes) !== band.sha256 || bytes.length !== band.bytes) throw new Error(`Changed ${id} response: ${url}`); });
-        bands.push({ band: id, sha256: band.sha256, bytes: band.bytes });
+      const path = hips2fitsCachePath(grid, route.acquisition.hips, cache);
+      if (typeof band.bytes === 'number') {
+        await cached(path, url, bytes => { if (bytes.length !== band.bytes) throw new Error(`${id} response ${url} is ${bytes.length} bytes; the recipe records ${String(band.bytes)}.`); });
+        bands.push({ band: id, bytes: band.bytes });
       } else {
-        const bytes = await download(url), digest = sha256(bytes), path = resolve(cache, 'hips2fits', `${digest}.fits`);
+        const bytes = await download(url);
         await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
-        bands.push({ band: id, sha256: digest, bytes: bytes.length });
+        bands.push({ band: id, bytes: bytes.length });
       }
       console.log(`SKY_BAND ${id} hips2fits pinned`);
       continue;
     }
     if (route.acquisition.kind === 'jwst') {
       const product = requireString(band.product, `${id} product`);
-      if (typeof band.sha256 === 'string') {
-        const expected = { sha256: band.sha256, bytes: Number(band.bytes) };
-        const onDisk = await sha256File(resolve(cache, 'mast', `${band.sha256}.fits`)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-        if (!onDisk) await acquireMastProduct(product, cache, expected);
-        else if (onDisk.sha256 !== expected.sha256 || onDisk.bytes !== expected.bytes) throw new Error(`Changed ${id} product in the cache: ${product}`);
+      if (typeof band.bytes === 'number') {
+        const expected = { bytes: band.bytes };
+        const onDisk = await stat(resolve(cache, 'mast', product)).then(entry => entry.size).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+        if (onDisk === null) await acquireMastProduct(product, cache, expected);
+        else if (onDisk !== expected.bytes) throw new Error(`${id} product ${product} in the cache is ${onDisk} bytes; the recipe records ${expected.bytes}.`);
         bands.push({ band: id, product, ...expected });
       } else bands.push({ band: id, product, ...await acquireMastProduct(product, cache) });
       console.log(`SKY_BAND ${id} ${product} pinned`);
@@ -123,12 +123,12 @@ if (import.meta.main) {
     for (const [index, coaddId] of coaddIds.entries()) {
       const url = wiseAtlasUrl(coaddId, wiseBand), path = resolve(cache, 'wise-atlas', basename(new URL(url).pathname));
       const bytes = await cached(path, url, data => gunzipSync(data));
-      tiles.push({ coaddId, sha256: sha256(bytes), bytes: bytes.length });
+      tiles.push({ coaddId, bytes: bytes.length });
       if ((index + 1) % 25 === 0 || index + 1 === coaddIds.length) console.log(`SKY_BAND ${id} tiles ${index + 1}/${coaddIds.length}`);
     }
     const list = Buffer.from(stable({ schema: 'cssearth-wise-atlas-tiles@1', band: wiseBand, tiles }));
     await writeFile(resolve(root, listPath), list);
-    bands.push({ band: id, tiles: { path: listPath, sha256: sha256(list) } });
+    bands.push({ band: id, tiles: { path: listPath } });
   }
   const recipe = { schema: draft.schema, grid: draft.grid, bands, backgroundPercentile: draft.backgroundPercentile, peakPercentile: draft.peakPercentile,
     ...(draft.coverage === undefined ? {} : { coverage: draft.coverage }), display: draft.display };

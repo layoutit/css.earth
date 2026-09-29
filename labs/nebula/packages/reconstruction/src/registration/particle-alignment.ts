@@ -1,5 +1,4 @@
 /** Offline comparison of an authored photograph placement and an unchanged stellar-particle projection. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -17,7 +16,6 @@ export interface ParticleAlignmentOptions {
   outputDirectory: string;
 }
 
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const levels = [0.1, 0.3, 0.6];
 function validate(options: ParticleAlignmentOptions) {
   const { boundsKpc, photoCenterKpc, photoSpanKpc, resolution } = options;
@@ -174,8 +172,8 @@ export async function createParticleAlignmentDiagnostic(options: ParticleAlignme
   await writeFile(resolve(options.outputDirectory, comparison), png);
   const receipt = {
     schema: 'cssearth-particle-alignment-diagnostic@1',
-    inputs: { particles: { path: options.rotatedParticlePath, sha256: hash(particleBytes), bytes: particleBytes.length },
-      photo: { path: options.extractedPhotoPath, sha256: hash(photoBytes), bytes: photoBytes.length } },
+    inputs: { particles: { path: options.rotatedParticlePath, bytes: particleBytes.length },
+      photo: { path: options.extractedPhotoPath, bytes: photoBytes.length } },
     mapping: { photoCenterKpc: options.photoCenterKpc, photoSpanKpc: options.photoSpanKpc, boundsKpc: options.boundsKpc,
       width, height, kpcPerPixel: [spanX / width, spanY / height], yDirection: 'up',
       projection: 'Orthographic XY. Input particle XYZ unchanged; optional authored Z bounds select the same display region.' },
@@ -186,7 +184,7 @@ export async function createParticleAlignmentDiagnostic(options: ParticleAlignme
       densityDisplay: 'log(1 + 99 × columnMass / peakColumnMass) / log(100)',
       contourFractionsOfPeakMass: levels,
       centroids: 'Independent raw mass and display-luminance centroids; not a goodness-of-fit statistic.' },
-    outputs: { comparison, sha256: hash(png), bytes: png.length },
+    outputs: { comparison, bytes: png.length },
   };
   await writeFile(resolve(options.outputDirectory, 'alignment-receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
   return receipt;

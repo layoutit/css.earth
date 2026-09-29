@@ -2,8 +2,6 @@
   "passed": true,
   "method": "Independent PDS3-labelled band-sequential byte offsets and explicit source-cell overlap sums; no production GeoTIFF reader or reduction helper. Checks representative footprints, poles, both sides of the seam and the equator; does not establish instrument accuracy.",
   "native": "output/ceres-mercury-more-data/raw/Mercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m.tif",
-  "compactSha256": "f770d1818dd21126d2a471c49bbc8a7d6df5c5cc75b6979c3da311e958ea9aa1",
-  "labelSha256": "306eb59840c7c57dc6cf7d1c92d4298c5870b35d46216cdde2635d8ef9c5f68a",
   "checks": [
     {
       "x": 0,

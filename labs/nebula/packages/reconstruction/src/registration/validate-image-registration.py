@@ -7,7 +7,6 @@ never the diffuse image. Final held-out positions do not participate in final fi
 source identities are found using a common descriptor seed (stated in the receipt).
 """
 import argparse
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -23,14 +22,6 @@ CONVENTION = ('Zero-based top-left raster pixel centres; edges at -.5 and size-.
               'AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; '
               'y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. '
               'Row-major homography maps source native centres to reference native centres.')
-
-
-def sha(path):
-    h = hashlib.sha256()
-    with open(path, 'rb') as f:
-        for block in iter(lambda: f.read(1024 * 1024), b''):
-            h.update(block)
-    return h.hexdigest()
 
 
 def dump(path, data):
@@ -176,11 +167,11 @@ def main():
     reference, rn = load(args.reference, args.max_dimension)
     s, shp = extract(source)
     r, rhp = extract(reference)
-    provenance = {'source': {'path': args.source, 'sha256': sha(args.source), 'nativeDimensions': list(sn[1::-1]), 'workingDimensions': list(source.shape[1::-1]), 'wcs': source_wcs},
-                  'reference': {'path': args.reference, 'sha256': sha(args.reference), 'nativeDimensions': list(rn[1::-1]), 'workingDimensions': list(reference.shape[1::-1]), 'wcs': reference_wcs}}
+    provenance = {'source': {'path': args.source, 'nativeDimensions': list(sn[1::-1]), 'workingDimensions': list(source.shape[1::-1]), 'wcs': source_wcs},
+                  'reference': {'path': args.reference, 'nativeDimensions': list(rn[1::-1]), 'workingDimensions': list(reference.shape[1::-1]), 'wcs': reference_wcs}}
     dump(out / 'direction-gate.json', {'schema': 'cssearth-image-direction-gate@1',
          'status': 'incomplete', 'pass': False, 'cloudProcessingPerformed': False,
-         'imageSha256': provenance['source']['sha256'], **provenance})
+         'imagePath': provenance['source']['path'], **provenance})
     # This artifact is written before any matching or cloud-processing stage.
     for name, stars, hp, im, native in [('source', s, shp, source, sn), ('reference', r, rhp, reference, rn)]:
         native_points = transform(stars[:, :2], resize_matrix(im.shape, native))
@@ -262,7 +253,7 @@ def main():
              'identityCountOver5xScrambledControls': len(x) > 5 * max(1, *(q['patternMatchesAbove035'] for q in shifted)),
              'allWrongTransformsMedianOver100ReferencePixels': min(controls[k]['median'] for k in variants) > 100}
     receipt = {'schema': 'cssearth-image-direction-gate@1', 'status': 'pass' if all(gates.values()) else 'fail',
-               'pass': all(gates.values()), 'gates': gates, 'imageSha256': provenance['source']['sha256'], 'coordinateConvention': CONVENTION,
+               'pass': all(gates.values()), 'gates': gates, 'imagePath': provenance['source']['path'], 'coordinateConvention': CONVENTION,
                **provenance, 'starMapsExtractedBeforeRegistration': True, 'cloudProcessingPerformed': False,
                'descriptorSeed': seed_report, 'uniqueMatchedStars': len(x), 'trainingCount': int(train.sum()), 'trainingInlierCount': int(fit_inliers.sum()), 'heldOutCount': int((~train).sum()),
                'heldOutResidualReferenceNativePixels': stats, 'matchedSourceHullFraction': hull, 'heldOutSourceHullFraction': heldout_hull,

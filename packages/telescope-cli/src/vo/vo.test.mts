@@ -8,9 +8,9 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createServer } from 'node:http';
 import { astroquery, VoAccessError } from '@cssearth/telescope/node';
-import { canonical, digest, parseMetadata, parseLimits, parseRegion, recordKey, acquisitionKey, type DiscoverySnapshot, type MetadataResponse, type Resource } from '@cssearth/telescope/node';
+import { canonical, parseMetadata, parseLimits, parseRegion, recordKey, type DiscoverySnapshot, type MetadataResponse, type Resource } from '@cssearth/telescope/node';
 import { associateTarget, fieldAssociation, normalizeSnapshot, SERVICES, targetQuery } from './discovery.mts';
-import { mediaType, planAccess, sodaParameters } from './access.mts';
+import { acquisitionIdentity, mediaType, planAccess, sodaParameters } from './access.mts';
 import { voUrl } from './network-policy.mts';
 import { voCandidates } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
@@ -30,7 +30,6 @@ function esoDescriptor(response: MetadataResponse) { return response.resources.f
 test('metadata preserves raw evidence, nulls, field widths and distinct observations sharing one dataset', async () => {
   const response = await almaPromise(), saved = snapshot(response);
   assert.equal(response.queryStatus, 'OK'); assert.equal(response.rows.length, 2);
-  assert.equal(response.raw.sha256, 'ea9d3eda733a4299d5b98fb2110b2f0cf26e410fafc0fcbbeb5b84621f49226f');
   assert.equal(response.fields.find(f => f.name === 'access_format')!.arraysize, '9');
   assert.equal(response.rows[0]!.access_format, 'applicati');
   assert.equal(response.rows[0]!.obs_publisher_did, response.rows[1]!.obs_publisher_did);
@@ -42,12 +41,13 @@ test('metadata preserves raw evidence, nulls, field widths and distinct observat
 });
 test('canonical identities preserve opaque strings and reject lossy or undefined values', () => {
   assert.equal(canonical({ b: 2, a: null }), canonical({ a: null, b: 2 }));
-  assert.notEqual(digest({ id: 'ABC/1' }), digest({ id: 'abc/1' }));
-  assert.notEqual(digest({ a: null }), digest({}));
+  assert.notEqual(canonical({ id: 'ABC/1' }), canonical({ id: 'abc/1' }));
+  assert.notEqual(canonical({ a: null }), canonical({}));
   assert.throws(() => canonical({ a: undefined })); assert.throws(() => canonical(2 ** 54)); assert.throws(() => canonical(NaN));
   const limits = parseLimits();
-  assert.notEqual(acquisitionKey('p', { BAND: [1, 2] }, {}, limits, 'v1'), acquisitionKey('p', { BAND: [1, 3] }, {}, limits, 'v1'));
-  assert.notEqual(acquisitionKey('p', {}, {}, limits, 'v1'), acquisitionKey('p', {}, {}, { ...limits, scienceBytes: 123 }, 'v1'));
+  const operation = (parameters: Readonly<Record<string, number[]>>) => ({ kind: 'soda-sync' as const, url: 'https://example.org/soda', parameters });
+  assert.notEqual(acquisitionIdentity('p', operation({ BAND: [1, 2] }), request, null, limits), acquisitionIdentity('p', operation({ BAND: [1, 3] }), request, null, limits));
+  assert.notEqual(acquisitionIdentity('p', operation({}), request, null, limits), acquisitionIdentity('p', operation({}), request, null, { ...limits, scienceBytes: 123 }));
 });
 test('Astropy boundary distinguishes JD and MJD, converts declared time scales and preserves unsafe integers', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'vo-time-'));
@@ -232,7 +232,7 @@ test('bounded transfer rejects chunked oversized and error bodies without publis
     await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/large`, destination: resolve(directory,'large.fits'), byteLimit: 1024, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }), /byte limit/u);
     await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/error`, destination: resolve(directory,'error.fits'), byteLimit: 1e6, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }));
     const result = await astroquery({ operation: 'vo-download', url: `${url}/small`, destination: resolve(directory,'small.fits'), byteLimit: 1e6, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] });
-    assert.equal(result.transfer!.file.bytes, 290880); assert.equal(result.transfer!.file.sha256, 'fd2a2d371e121bb50f64d781ac57b60f2f76d2c25d71f1c6a5ab9b5e262def60');
+    assert.equal(result.transfer!.file.bytes, 290880); assert.deepEqual(await readFile(resolve(directory, 'small.fits')), fixture);
     assert.deepEqual(await readdir(directory), ['small.fits']); assert.deepEqual(requests, ['/large','/error','/small']);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(directory, { recursive: true, force: true }); }
 });

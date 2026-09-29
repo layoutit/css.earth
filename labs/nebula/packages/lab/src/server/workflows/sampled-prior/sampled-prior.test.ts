@@ -7,8 +7,8 @@ import { readSampledRecipe, verifySampledEvidence, type SampledRecipe, type Samp
 
 const fixture = {
   schema: 'cssearth-sampled-nebula@1', id: 'qualified-example', centerIcrsDegrees: [80, 22],
-  evidence: { path: 'labs/nebula/models/example/physical-evidence.json', sha256: 'a'.repeat(64) },
-  source: { path: '.local/nebula-lab/physical/example/points.fits', sha256: 'b'.repeat(64), url: 'https://example.org/points.fits', width: 4, height: 2, columns: [0, 1, 2, 3] },
+  evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
+  source: { path: '.local/nebula-lab/physical/example/points.fits', url: 'https://example.org/points.fits', width: 4, height: 2, columns: [0, 1, 2, 3] },
   rawToArcsec: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
   grid: { longestAxis: 32, blurSigmaCells: .5, weightExponent: .5, peakOpticalDepth: 1.5 },
   terms: [], lensComponents: { optical: { ejecta: 1, pwn: 0 }, xray: { ejecta: 0, pwn: 1 } },

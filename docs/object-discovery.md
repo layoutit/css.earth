@@ -86,9 +86,9 @@ approximation with a body-specific mesh, remove that dataset from this list as
 part of the package's source interpretation update.
 
 `pnpm prepare:catalog` derives discovery from exposed `prepared/controls.json`
-lenses and their raster recipes. It writes the ignored
-`site/prepared-object-discovery.json` projection consumed by the single `OBJECTS`
-registry. Runtime reads this prepared metadata; it does not inspect source images or
+lenses and their raster recipes. It writes each body's
+discovery beside its descriptor and distance in the ignored prepared catalogue
+(`site/prepared-catalogue.mjs`) that the single `OBJECTS` registry reads. Runtime reads this prepared metadata; it does not inspect source images or
 generate assets. The controls come from R2, not Git, so the dev, build and deploy
 chains restore prepared assets before the catalogue runs. Without them, a clean
 checkout finds no imagery for any body, and moons and small bodies read **Shape only**.
@@ -232,8 +232,7 @@ Measured stellar limb darkening and thermal-map palettes keep their source
 treatment. The [Earth and Moon browser view](../src/navigation/evidence/marker-silhouettes-20260924/earth-moon.png)
 checks the Moon sprite in the existing world renderer.
 `site/test/navigation-preparation.test.mts` checks every registered body marker
-and resolved context image for transparent corners and nonempty content, and
-compares each atlas tile's alpha and visible pixels with its individual image.
+and resolved context image for transparent corners and nonempty content.
 The shared recipe tests separately check bright-center, darker-limb shading.
 The [catalogue audit](../src/navigation/evidence/marker-silhouettes-20260924/catalogue-audit.json)
 records the inspected marker bytes and disposition for all 641 registered bodies.

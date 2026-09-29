@@ -1,5 +1,4 @@
 /** Exact PDS Registry product -> complete byte set -> pdr decode -> archive-final qualification. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -16,7 +15,7 @@ export const PDS_PROGRAMS_LOCATION = archivePrograms('pds');
 export const PDS_PROGRAMS = resolve(WORKSPACE, PDS_PROGRAMS_LOCATION.path);
 /** The file a program's archive-final receipt is, among the programs. */
 export const pdsReceiptName = (id: string): string => `${id}.archive-final.product.json`;
-const HEX32 = /^[0-9a-f]{32}$/u, SAFE_NAME = /^[A-Za-z0-9._-]+$/u, MAX_FILE_BYTES = 256 * 1024 * 1024;
+const SAFE_NAME = /^[A-Za-z0-9._-]+$/u, MAX_FILE_BYTES = 256 * 1024 * 1024;
 
 export interface PdsQualificationSpec {
   readonly id: string; readonly target: string; readonly targetLid: string; readonly targetName: string;
@@ -24,7 +23,7 @@ export interface PdsQualificationSpec {
   readonly kind: 'image'; readonly use: string; readonly units?: string;
 }
 export interface PdsArchiveFile { readonly role: 'label' | 'science' | 'supplemental'; readonly name: string; readonly uri: string;
-  readonly bytes: number; readonly md5: string; readonly sha256: string }
+  readonly bytes: number }
 
 const list = (value: unknown, label: string): unknown[] => value === undefined || value === null ? [] : Array.isArray(value) ? value : [value];
 const strings = (value: unknown, label: string): string[] => list(value, label).map((entry, index) => requireString(entry, `${label}[${index}]`));
@@ -37,42 +36,39 @@ const numbers = (value: unknown, label: string): number[] => list(value, label).
 export interface DiscoveredPdsProduct {
   readonly lid: string; readonly lidvid: string; readonly version: string; readonly targetNames: readonly string[]; readonly targetLids: readonly string[];
   readonly observingSystem: readonly string[]; readonly startIso: string; readonly stopIso: string; readonly harvestIso: string;
-  readonly label: { readonly uri: string; readonly bytes: number; readonly md5: string };
-  readonly data: readonly { readonly uri: string; readonly bytes: number; readonly md5: string }[];
+  readonly label: { readonly uri: string; readonly bytes: number };
+  readonly data: readonly { readonly uri: string; readonly bytes: number }[];
 }
 
 export function normalizeDiscoveredPdsProduct(value: unknown): DiscoveredPdsProduct {
   const row = requireRecord(value, 'PDS Registry product'), field = (name: string) => row[name];
   const dataUris = strings(field('ops:Data_File_Info.ops:file_ref'), 'PDS data URI');
   const dataBytes = numbers(field('ops:Data_File_Info.ops:file_size'), 'PDS data bytes');
-  const dataMd5 = strings(field('ops:Data_File_Info.ops:md5_checksum'), 'PDS data md5');
-  if (!dataUris.length || dataUris.length !== dataBytes.length || dataUris.length !== dataMd5.length) throw new TypeError('PDS Registry returned an incomplete data-file set.');
-  const labelUris = strings(field('ops:Label_File_Info.ops:file_ref'), 'PDS label URI'), labelBytes = numbers(field('ops:Label_File_Info.ops:file_size'), 'PDS label bytes'),
-    labelMd5 = strings(field('ops:Label_File_Info.ops:md5_checksum'), 'PDS label md5');
-  if (labelUris.length !== 1 || labelBytes.length !== 1 || labelMd5.length !== 1) throw new TypeError('PDS Registry returned no unique label file.');
-  for (const digest of [...labelMd5, ...dataMd5]) if (!HEX32.test(digest)) throw new TypeError(`PDS Registry returned an invalid MD5 ${digest}.`);
+  if (!dataUris.length || dataUris.length !== dataBytes.length) throw new TypeError(`PDS Registry returned an incomplete data-file set (${dataUris.length} URIs, ${dataBytes.length} sizes).`);
+  const labelUris = strings(field('ops:Label_File_Info.ops:file_ref'), 'PDS label URI'), labelBytes = numbers(field('ops:Label_File_Info.ops:file_size'), 'PDS label bytes');
+  if (labelUris.length !== 1 || labelBytes.length !== 1) throw new TypeError(`PDS Registry returned no unique label file (${labelUris.length} URIs, ${labelBytes.length} sizes).`);
   return { lid: requireString(field('lid'), 'PDS lid'), lidvid: requireString(field('lidvid'), 'PDS lidvid'), version: requireString(field('vid'), 'PDS version'),
     targetNames: strings(field('pds:Target_Identification.pds:name'), 'PDS target name'), targetLids: strings(field('ref_lid_target'), 'PDS target lid'),
     observingSystem: strings(field('pds:Observing_System_Component.pds:name'), 'PDS observing system'),
     startIso: requireString(field('pds:Time_Coordinates.pds:start_date_time'), 'PDS start'), stopIso: requireString(field('pds:Time_Coordinates.pds:stop_date_time'), 'PDS stop'),
     harvestIso: requireString(field('ops:Harvest_Info.ops:harvest_date_time'), 'PDS harvest time'),
-    label: { uri: labelUris[0]!, bytes: labelBytes[0]!, md5: labelMd5[0]! },
-    data: dataUris.map((uri, index) => ({ uri, bytes: dataBytes[index]!, md5: dataMd5[index]! })) };
+    label: { uri: labelUris[0]!, bytes: labelBytes[0]! },
+    data: dataUris.map((uri, index) => ({ uri, bytes: dataBytes[index]! })) };
 }
 
-async function acquire(entry: { readonly uri: string; readonly bytes: number; readonly md5: string }, directory: string) {
+async function acquire(entry: { readonly uri: string; readonly bytes: number }, directory: string) {
   const name = basename(new URL(entry.uri).pathname);
   if (!SAFE_NAME.test(name) || entry.bytes > MAX_FILE_BYTES) throw new Error(`Unsupported PDS file ${name || entry.uri}.`);
   const path = resolve(directory, name);
   let bytes = await readFile(path).catch(() => undefined);
-  if (!bytes || bytes.byteLength !== entry.bytes || createHash('md5').update(bytes).digest('hex') !== entry.md5) {
+  if (!bytes || bytes.byteLength !== entry.bytes) {
     const response = await fetch(entry.uri, { signal: AbortSignal.timeout(180_000) });
     if (!response.ok) throw new Error(`PDS download ${entry.uri} returned ${response.status}.`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.byteLength !== entry.bytes || createHash('md5').update(bytes).digest('hex') !== entry.md5) throw new Error(`${entry.uri} does not match the PDS Registry size and MD5.`);
+    if (bytes.byteLength !== entry.bytes) throw new Error(`${entry.uri} is ${bytes.byteLength} bytes; the PDS Registry lists ${entry.bytes}.`);
     await writeFile(path, bytes);
   }
-  return { name, path, uri: entry.uri, bytes: bytes.byteLength, md5: entry.md5, sha256: createHash('sha256').update(bytes).digest('hex') };
+  return { name, path, uri: entry.uri, bytes: bytes.byteLength };
 }
 
 const textField = (record: Record<string, unknown>, name: string) => requireString(record[name], `decoded ${name}`);
@@ -140,7 +136,7 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
   const surfaceResolutionKm = resolution === undefined ? undefined : textField(resolution, 'unit') === 'm/pixel' ? Number(textField(resolution, 'value')) / 1000
     : (() => { throw new Error('Unsupported PDS map-resolution unit.'); })();
   const files: PdsArchiveFile[] = acquired.map(file => ({ role: file.name === label.name ? 'label' : file.name === science.name ? 'science' : 'supplemental',
-    name: file.name, uri: file.uri, bytes: file.bytes, md5: file.md5, sha256: file.sha256 }));
+    name: file.name, uri: file.uri, bytes: file.bytes }));
   const program = { schema: PDS_ARCHIVE_FINAL_SCHEMA, id: spec.id, target: spec.target, targetLid: spec.targetLid, targetName: spec.targetName,
     telescope: spec.telescope, archiveTelescope: spec.archiveTelescope, mode: spec.mode, instrument: spec.instrument, kind: spec.kind, use: spec.use, lidvid: spec.lidvid,
     observation: { id: logicalIdentifier.split(':').at(-1), startIso: product.startIso, stopIso: product.stopIso, filter, filters,
@@ -158,8 +154,9 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
   await mkdir(PDS_PROGRAMS, { recursive: true });
   const programPath = resolve(PDS_PROGRAMS, `${spec.id}.archive-final.json`), recordPath = resolve(PDS_PROGRAMS, `${spec.id}.archive-final.product.json`);
   await writeFile(programPath, `${JSON.stringify(program, null, 2)}\n`);
-  const inputs: ProductInput[] = files.map(file => ({ role: file.role, identity: file.uri, bytes: file.bytes, sha256: file.sha256 }));
-  const toolchain = await pdsToolchain(), run: ProductRun = { telescope: spec.telescope, stage: 'archive-final', inputs, software: [], toolchainDigest: toolchain.digest,
+  const inputs: ProductInput[] = files.map(file => ({ role: file.role, identity: file.uri, bytes: file.bytes }));
+  await pdsToolchain();
+  const run: ProductRun = { telescope: spec.telescope, stage: 'archive-final', inputs, software: [],
     parameters: { selection: { program: spec.id, target: spec.target, targetLid: spec.targetLid, lidvid: spec.lidvid, kind: spec.kind, use: spec.use },
       identityAgreedWith: { registry: { targetNames: product.targetNames, targetLids: product.targetLids, observingSystem: product.observingSystem, startIso: product.startIso, stopIso: product.stopIso },
         label: { logicalIdentifier, version, targetName: spec.targetName, targetLid: spec.targetLid, observingSystem: systems, startIso: labelStart ?? null, stopIso: labelStop ?? null } },
@@ -173,6 +170,6 @@ export async function qualifyPdsArchiveProduct(spec: PdsQualificationSpec, work 
     ...(file.name === science.name ? { units: dataUnits, conventions: { filters: bands.map(band => `${band.filter}: ${band.interval[0]} to ${band.interval[1]} micrometres`).join('; '),
       registration: surfaceResolutionKm === undefined ? 'detector image only; no body-surface registration' : `${optionalTextField(metadata, 'mapProjection')} map at ${surfaceResolutionKm} km/pixel`, qualification: spec.use } } : {}) })),
     [{ kind: 'archive-origin', receipt, product: science.name,
-      establishes: `${science.name} and every file referenced by ${spec.lidvid} match the PDS Registry sizes and MD5 values, are pinned here by SHA-256, and pdr ${decodedAnswer.pdr} decoded the complete science data structures. This establishes origin, integrity and readability only; no local calibration or archive agreement is claimed.` }]);
+      establishes: `${science.name} and every file referenced by ${spec.lidvid} match the PDS Registry sizes, are pinned here by URI and size, and pdr ${decodedAnswer.pdr} decoded the complete science data structures. This establishes origin and readability only; no local calibration or archive agreement is claimed.` }]);
   return { program, record, programPath, recordPath, productPath: science.path };
 }

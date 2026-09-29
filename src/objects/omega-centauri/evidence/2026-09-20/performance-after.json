@@ -98,43 +98,35 @@
   "inputPins": [
     {
       "path": "src/objects/sun/prepared/world-context.json",
-      "bytes": 7536975,
-      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+      "bytes": 7536975
     },
     {
       "path": "src/objects/omega-centauri/source/nebula.json",
-      "bytes": 2633,
-      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+      "bytes": 2633
     },
     {
       "path": "src/objects/omega-centauri/prepared/lenses.json",
-      "bytes": 1202415,
-      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+      "bytes": 1202415
     },
     {
       "path": "site/prepared-context-navigation.mts",
-      "bytes": 13264,
-      "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36"
+      "bytes": 13264
     },
     {
       "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
-      "bytes": 48720,
-      "sha256": "fd0d735b8f44cd639e3c9cf5333a4f4fbef1a2c9dbbbf8d288cf59a4441dae2f"
+      "bytes": 48720
     },
     {
       "path": "src/renderers/css/universe/detailed-focus-context.ts",
-      "bytes": 873,
-      "sha256": "12a727775a8277fede7cd743642b960a30c10a7334f2e47186d97b6e8d5413f4"
+      "bytes": 873
     },
     {
       "path": "src/renderers/css/universe/prepared-world-context.ts",
-      "bytes": 75841,
-      "sha256": "00758c8d75054092c209c68b4e311605a4a886d59fda5b36cdf86bf5d41d9ab2"
+      "bytes": 75841
     },
     {
       "path": "src/renderers/css/dist/universe.js",
-      "bytes": 10185,
-      "sha256": "a4aa3371c6836dcb1df973ab5cadbf9c9bd5d3ebb2555e9e46aff31fc2b9c520"
+      "bytes": 10185
     }
   ],
   "reports": [
@@ -285,7 +277,7 @@
           "RecalcStyleCount": 0,
           "LayoutDuration": 0,
           "RecalcStyleDuration": 0,
-          "DevToolsCommandDuration": 0.00009400000000000033,
+          "DevToolsCommandDuration": 9.400000000000033e-05,
           "ScriptDuration": 0.00033299999999999996,
           "V8CompileDuration": 0,
           "TaskDuration": 0.00538100000000008,
@@ -381,7 +373,7 @@
         "cdpDelta": {
           "LayoutCount": 1,
           "RecalcStyleCount": 47,
-          "LayoutDuration": 0.00005599999999999876,
+          "LayoutDuration": 5.599999999999876e-05,
           "RecalcStyleDuration": 0.012311000000000002,
           "DevToolsCommandDuration": 0.006171999999999999,
           "ScriptDuration": 0.07597899999999999,
@@ -417,7 +409,7 @@
         "RecalcStyleDuration": 0.036433,
         "DevToolsCommandDuration": 0.013875,
         "ScriptDuration": 0.06126,
-        "V8CompileDuration": 0.000057,
+        "V8CompileDuration": 5.7e-05,
         "TaskDuration": 0.813889,
         "TaskOtherDuration": 0.691915,
         "ThreadTime": 0.564984,
@@ -455,7 +447,7 @@
         "RecalcStyleDuration": 0.048744,
         "DevToolsCommandDuration": 0.020047,
         "ScriptDuration": 0.137239,
-        "V8CompileDuration": 0.000057,
+        "V8CompileDuration": 5.7e-05,
         "TaskDuration": 0.974661,
         "TaskOtherDuration": 0.758169,
         "ThreadTime": 0.711158,
@@ -616,7 +608,7 @@
           "RecalcStyleCount": 0,
           "LayoutDuration": 0,
           "RecalcStyleDuration": 0,
-          "DevToolsCommandDuration": 0.00008099999999999948,
+          "DevToolsCommandDuration": 8.099999999999948e-05,
           "ScriptDuration": 0.00037300000000000527,
           "V8CompileDuration": 0,
           "TaskDuration": 0.006313000000000013,
@@ -710,7 +702,7 @@
         "cdpDelta": {
           "LayoutCount": 1,
           "RecalcStyleCount": 46,
-          "LayoutDuration": 0.00005699999999999976,
+          "LayoutDuration": 5.699999999999976e-05,
           "RecalcStyleDuration": 0.011046,
           "DevToolsCommandDuration": 0.005861999999999999,
           "ScriptDuration": 0.07453200000000001,
@@ -746,7 +738,7 @@
         "RecalcStyleDuration": 0.037847,
         "DevToolsCommandDuration": 0.014202,
         "ScriptDuration": 0.06369,
-        "V8CompileDuration": 0.000057,
+        "V8CompileDuration": 5.7e-05,
         "TaskDuration": 0.819974,
         "TaskOtherDuration": 0.693838,
         "ThreadTime": 0.570848,
@@ -784,7 +776,7 @@
         "RecalcStyleDuration": 0.048893,
         "DevToolsCommandDuration": 0.020064,
         "ScriptDuration": 0.138222,
-        "V8CompileDuration": 0.000057,
+        "V8CompileDuration": 5.7e-05,
         "TaskDuration": 0.989636,
         "TaskOtherDuration": 0.772003,
         "ThreadTime": 0.726182,
@@ -945,7 +937,7 @@
           "RecalcStyleCount": 0,
           "LayoutDuration": 0,
           "RecalcStyleDuration": 0,
-          "DevToolsCommandDuration": 0.00006300000000000056,
+          "DevToolsCommandDuration": 6.300000000000056e-05,
           "ScriptDuration": 0.00030000000000000165,
           "V8CompileDuration": 0,
           "TaskDuration": 0.0032200000000000006,
@@ -1041,7 +1033,7 @@
         "cdpDelta": {
           "LayoutCount": 1,
           "RecalcStyleCount": 47,
-          "LayoutDuration": 0.000056000000000000494,
+          "LayoutDuration": 5.6000000000000494e-05,
           "RecalcStyleDuration": 0.010797000000000001,
           "DevToolsCommandDuration": 0.005341,
           "ScriptDuration": 0.07277800000000001,
@@ -1077,7 +1069,7 @@
         "RecalcStyleDuration": 0.036041,
         "DevToolsCommandDuration": 0.013583,
         "ScriptDuration": 0.060449,
-        "V8CompileDuration": 0.000055,
+        "V8CompileDuration": 5.5e-05,
         "TaskDuration": 0.811537,
         "TaskOtherDuration": 0.691045,
         "ThreadTime": 0.563435,
@@ -1115,7 +1107,7 @@
         "RecalcStyleDuration": 0.046838,
         "DevToolsCommandDuration": 0.018924,
         "ScriptDuration": 0.133227,
-        "V8CompileDuration": 0.000055,
+        "V8CompileDuration": 5.5e-05,
         "TaskDuration": 0.979452,
         "TaskOtherDuration": 0.769988,
         "ThreadTime": 0.716982,

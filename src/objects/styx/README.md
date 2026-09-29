@@ -10,7 +10,7 @@
 
 ## Evidence
 
-- The archived label, native-frame identity and OPUS metadata are retained under [source/survey/](source/survey/). The inspected FITS source is excluded from the runtime and is reproducible by its URL and SHA-256 in `native-inspection.json`.
+- The archived label, native-frame identity and OPUS metadata are retained under [source/survey/](source/survey/). The inspected FITS source is excluded from the runtime and is reproducible by its URL in `native-inspection.json`.
 
 ## Known problems
 
@@ -20,7 +20,7 @@
 
 - The shared astronomy model uses the historical Weaver et al. (2016) pole as a static illustration, with an arbitrary spin phase. The reported 3.24-day period is a factsheet value, not an implemented spin-phase ephemeris. Styx is not tidally locked.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

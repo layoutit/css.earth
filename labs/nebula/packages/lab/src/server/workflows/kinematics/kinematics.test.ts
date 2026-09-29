@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { calibratedValue, prepareKinematicsComparison, shellVelocities } from '@cssearth/nebula-reconstruction/methods/kinematics/forward-model';
@@ -10,7 +9,7 @@ import { extractJpegFromEps } from '@cssearth/nebula-reconstruction/methods/kine
 
 const sourcePath = 'labs/nebula/models/helix/kinematics-oiii.json';
 const bytes = await readFile(sourcePath), raw: unknown = JSON.parse(bytes.toString());
-const evidence = readSlitEvidence(raw), identity = createHash('sha256').update(bytes).digest('hex');
+const evidence = readSlitEvidence(raw), identity = sourcePath;
 const near = (actual: number, expected: number) => assert.ok(Math.abs(actual - expected) < 1e-8, `${actual} != ${expected}`);
 
 test('a sphere gives the analytical position-velocity ellipse and no emission beyond its boundary', () => {
@@ -63,14 +62,14 @@ test('external values reject corrupt calibration, unknown frames, missing observ
   assert.throws(() => readSlitEvidence({ ...evidence, figure: { ...evidence.figure, velocityCalibration: [{ pixel: 1, value: 0 }, { pixel: 1, value: -20 }] } }));
   assert.throws(() => readSlitEvidence({ ...evidence, samples: [evidence.samples[0], evidence.samples[0]] }));
   for (const depthRatio of [0, Infinity, NaN, '1']) assert.throws(() => readKinematicParameters({ ...evidence.defaults, depthRatio }));
-  assert.throws(() => prepareKinematicsComparison(evidence, evidence.defaults, '0'.repeat(64)));
+  assert.throws(() => prepareKinematicsComparison(evidence, evidence.defaults, '/etc/passwd'));
   const output = prepareKinematicsComparison(evidence, evidence.defaults, identity);
   assert.deepEqual(readPreparedKinematics(JSON.parse(JSON.stringify(output)) as unknown), output);
   assert.throws(() => readPreparedKinematics({ ...output, chart: { ...output.chart, points: output.chart.points.slice(1) } }));
 });
-test('source identity follows actual recipe bytes and model routes refuse non-model input', async () => {
+test('source identity is the model recipe path and model routes refuse non-model input', async () => {
   const loaded = await loadKinematicEvidence(process.cwd(), sourcePath);
-  assert.equal(loaded.evidenceSha256, identity);
+  assert.equal(loaded.evidenceSource, identity);
   await assert.rejects(loadKinematicEvidence(process.cwd(), '/etc/passwd'));
   await assert.rejects(loadKinematicEvidence(process.cwd(), 'package.json'));
 });

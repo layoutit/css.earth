@@ -148,15 +148,14 @@ jobs:
         if: ${{ !cancelled() }}
         # Package-file completeness (a body without its browser profile or ledger) and source *restorability*
         # (a declared input with neither a tracked copy nor an acquisition operation). Neither reaches the
-        # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
-        # stay blocking in `Contract lint` (physical frame receipts and document pins).
+        # deployed site: it serves the already-baked prepared bank from R2 at the addresses its inventory names.
         run: node --test tests/asset-publication/restore-source-inputs.test.mts
       - name: Reconcile the source catalogue, facility records and provenance receipts
         if: ${{ !cancelled() }}
         # Moved off the `Universe / sources` gate lane. These assert that every catalogue row, facility record
         # and provenance receipt reconciles with the tracked sources and their READMEs — repository bookkeeping.
-        # The site serves the already-baked, sha256-pinned prepared bank and reads none of it, so a reconciliation
-        # gap cannot break a page; the pins that do back shipped bytes stay blocking in `Contract lint`. Nothing
+        # The site serves the already-baked prepared bank its inventories name and reads none of it, so a
+        # reconciliation gap cannot break a page; the inventories that back shipped bytes stay blocking. Nothing
         # is skipped or tolerated: the same commands run in full, with the same arguments, whenever the change
         # selects a universe area — the identical selection the gate lane applied as a job condition.
         env:
@@ -172,22 +171,21 @@ jobs:
             node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
           node packages/bake/cli/restore-object-json.mts
-          node site/build/prepare/prepare-provenance.mts --objects-only
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node site/build/prepare/prepare-facilities.mts --catalog-only
           if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then
-            # Authoring replays volume provenance from pinned FITS.
+            # Authoring replays the volume presentations from their FITS sources.
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "packages/bake/src/objects/provenance/object-provenance.test.mts" packages/bake/src/objects/content/prepare-factsheets-cli.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           else
-            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "packages/bake/src/objects/provenance/object-provenance.test.mts" packages/bake/src/objects/content/prepare-factsheets-cli.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           fi
       - name: Reproduce the prepared bank from its pinned inputs
         if: ${{ !cancelled() }}
         # Moved off the `Preparation / world` gate lane. These re-run a bake and compare it with the recorded
         # output: finalization idempotence and catalogue-row reconciliation. The site never bakes anything — it
-        # serves the published bank, whose bytes `Contract lint` still verifies by SHA-256 — so a reproduction gap is a stale recipe or a drifted
+        # serves the published bank at its R2 content address, so a reproduction gap is a stale recipe or a drifted
         # toolchain, visible here, and not a broken page. Nothing is skipped: the same commands run in full.
         env:
           CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}

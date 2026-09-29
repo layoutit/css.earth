@@ -273,7 +273,7 @@ the atlas transfer counts.
 | `registration` | The registration stage for every lens whose frames carry a camera: `silhouette` (limb position-angle residual per frame, the noise floor from exposures minutes apart, the systematic remainder) and `reference` (each frame turned about the pole against the named map observation or the lens's other frames: exact peak, both mirrors, the decisive count and median offset). A controlled colour lens keeps its band check under `bands` |
 | `display` | Where the range came from, the range and its units |
 | `areaCoverage` | The share of the displayed surface each frame covers, from equal-area samples |
-| `sourceIds` | Every consumed input, with its sha256 |
+| `sourceIds` | The id of every consumed input |
 
 ## Evidence
 
@@ -287,14 +287,14 @@ with `main`:
   encoding; 55 are byte-identical.
 - [The context sheet](../../../../../../../evidence/photograph-pipeline/contexts.webp) does the same
   for the 23 changed context images.
-- [`evidence.json`](../../../../../../../evidence/photograph-pipeline/evidence.json) pins both inputs
-  and each diff by size and SHA-256 and records the compared and mismatched
+- [`evidence.json`](../../../../../../../evidence/photograph-pipeline/evidence.json) names both inputs
+  and each diff by path and size and records the compared and mismatched
   pixels. `diffs/` keeps every diff at full size.
 - The browser views of ten lenses at 1440 × 1000 and DPR 2 were never
   committed: the repository ignores `captures/` folders, and no copy remains.
   The sheets above are the kept visual evidence.
 
-[`tools/compare-visual-evidence.mts`](https://github.com/layoutit/css.earth/blob/f2f7d0f2ad/tools/compare-visual-evidence.mts) (now
+`tools/compare-visual-evidence.mts` (now
 [`labs/investigations/compare-visual-evidence.mts`](../../../../../../../labs/investigations/compare-visual-evidence.mts)) made each diff from the exact committed
 bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
 locates change. The sheets were inspected against `main` at native resolution,

@@ -1,7 +1,8 @@
 import { jointPath, jointRecord, readJointControls, readJointParameters, type JointControls, type JointFit } from './model.ts';
 import { readJointVolumeResult, type JointVolumeResult } from '@cssearth/bake/volume';
+import { isVariantName } from '../variant-name.ts';
 
-export interface JointPin { path: string; sha256: string }
+export interface JointPin { path: string }
 export interface JointCandidate { fit: JointFit; volume: JointVolumeResult; outlinePath: string; pointings: { id: string; x: number; y: number; heldOut: boolean; residualKmS: number; color: string; measurements: string }[] }
 export interface JointResult {
   schema: 'cssearth-joint-fit-result@1'; id: string; controls: JointControls; spanArcsec: number; diagramSize: number;
@@ -11,8 +12,10 @@ export interface JointResult {
   inputIdentity: string; interpretation: string;
 }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
-const hash = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
-function pin(v: unknown): JointPin { if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/') || !hash(v.sha256)) throw new TypeError('Invalid joint result asset.'); return { path: v.path, sha256: v.sha256 }; }
+function pin(v: unknown): JointPin {
+  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/') || Object.keys(v).join() !== 'path') throw new TypeError(`Invalid joint result asset: ${JSON.stringify(v)}`);
+  return { path: v.path };
+}
 function readFit(v: unknown): JointFit {
   if (!jointRecord(v) || !jointRecord(v.metrics) || !Array.isArray(v.outline) || v.outline.length > 2048 || !Array.isArray(v.residuals) || v.residuals.length > 10000) throw new TypeError('Invalid joint candidate.');
   const m = v.metrics;
@@ -30,7 +33,7 @@ function readFit(v: unknown): JointFit {
     missingTraining: Number(m.missingTraining), missingHeldOut: Number(m.missingHeldOut), objective: Number(m.objective) } };
 }
 export function readJointResult(v: unknown): JointResult {
-  if (!jointRecord(v) || v.schema !== 'cssearth-joint-fit-result@1' || !hash(v.id) || !hash(v.inputIdentity) ||
+  if (!jointRecord(v) || v.schema !== 'cssearth-joint-fit-result@1' || !isVariantName(v.id) || !isVariantName(v.inputIdentity) ||
       !finite(v.spanArcsec) || v.spanArcsec <= 0 || v.diagramSize !== 512 || !Array.isArray(v.sources) || !v.sources.length || v.sources.length > 8 ||
       !Array.isArray(v.ridgePaths) || v.ridgePaths.length > 20000 || !v.ridgePaths.every(p => typeof p === 'string') || !Array.isArray(v.candidates) || v.candidates.length !== 2 ||
       !jointRecord(v.accounting) || typeof v.interpretation !== 'string') throw new TypeError('Invalid joint fit result.');

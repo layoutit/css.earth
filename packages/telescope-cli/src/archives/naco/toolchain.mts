@@ -5,26 +5,25 @@
  *   node packages/telescope-cli/src/archives/naco/toolchain.mts verify
  *   node packages/telescope-cli/src/archives/naco/toolchain.mts recipes
  *
- * The kit is ESO's own, downloaded from ftp.eso.org and verified against both digests this repository can state for it: the
- * sha256 measured here, and the BSD `cksum` value ESO publishes beside the kit. Its `install_pipeline` builds erfa, fftw, cpl,
+ * The kit is ESO's own, downloaded from ftp.eso.org and checked against the byte count the pin records. Its `install_pipeline`
+ * builds erfa, fftw, cpl,
  * cfitsio, wcslib, gsl, esorex and the naco recipes into `pipeline`, and unpacks the static calibration into `calib`.
  *
  * The interferometry toolchains install the same way, but that installer reads its own descriptor and its own list of ids
  * (packages/telescope-cli/src/archives/interferometry/toolchain.mts), and NACO is not an interferometer. What is shared is what runs the result:
  * `esoEnvironment` and `runRecipe` from `@cssearth/telescope/node` (`eso-pipeline.ts`), which this module does not repeat.
  *
- * An installed toolchain records the sha256 of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
- * pin. The verified archive is deleted after the build. */
+ * An installed toolchain keeps the text of toolchain.json; `verify` and `nacoToolchainPath` refuse one built from another
+ * pin. The downloaded archive is deleted after the build. */
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, copyFile, link, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, copyFile, link, readdir, readFile, rm, stat } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
-import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 
 const repository = WORKSPACE;
 /** The toolchain pin sits beside this code and the programs it reduces. */
@@ -33,10 +32,11 @@ export const TOOLCHAIN_ROOT = resolve(repository, 'output/toolchains/naco');
 
 const exists = (path: string) => access(path).then(() => true, () => false);
 
-/** The pinned descriptor and the digest an install records, so a changed pin invalidates the build. */
-export async function nacoToolchainDescriptor() {
-  const entry = requireRecord(JSON.parse(await readFile(DESCRIPTOR, 'utf8')) as unknown, 'toolchain.json');
-  return { entry, digest: sha256(JSON.stringify(entry)) };
+/** The pinned descriptor, whose text an install keeps, so a changed pin invalidates the build. */
+export async function nacoToolchainDescriptor(): Promise<ToolchainPins> {
+  const text = await readFile(DESCRIPTOR, 'utf8');
+  const entry = requireRecord(JSON.parse(text) as unknown, 'packages/telescope-cli/src/archives/naco/toolchain.json');
+  return { id: 'naco', file: 'packages/telescope-cli/src/archives/naco/toolchain.json', descriptor: text, lock: null, entry };
 }
 
 /** The recipes this toolkit runs, as the descriptor names them. */
@@ -51,26 +51,11 @@ function run(command: string, args: readonly string[], options: { cwd: string; e
   if (result.status !== 0) throw new Error(`${command} ${args.join(' ')} failed in ${options.cwd} (status ${String(result.status)}).`);
 }
 
-/** BSD cksum of a file: the CRC ESO publishes beside each kit, and the only digest it states for one. */
-export function cksum(bytes: Uint8Array) {
-  const table = new Uint32Array(256);
-  for (let index = 0; index < 256; index++) {
-    let value = index << 24;
-    for (let bit = 0; bit < 8; bit++) value = value & 0x80000000 ? ((value << 1) ^ 0x04c11db7) >>> 0 : (value << 1) >>> 0;
-    table[index] = value >>> 0;
-  }
-  let crc = 0;
-  for (const byte of bytes) crc = ((crc << 8) ^ table[((crc >>> 24) ^ byte) & 0xff]!) >>> 0;
-  for (let length = bytes.length; length > 0; length >>>= 8) crc = ((crc << 8) ^ table[((crc >>> 24) ^ (length & 0xff)) & 0xff]!) >>> 0;
-  return { crc: (~crc >>> 0), bytes: bytes.length };
-}
-
-/** The pinned kit, from a cache directory that already holds it or from ESO, verified by size, sha256 and ESO's own cksum. */
+/** The pinned kit, from a cache directory that already holds it or from ESO, checked by the size the pin records. */
 async function fetchKit(record: Record<string, unknown>, directory: string, caches: readonly string[]) {
-  const name = requireString(record.path, 'download path'), digest = requireString(record.sha256, 'download sha256');
-  const size = requireFiniteNumber(record.bytes, 'download bytes'), stated = requireString(record.cksum, 'download cksum');
+  const name = requireString(record.path, 'download path'), size = requireFiniteNumber(record.bytes, `${name} bytes`);
   const target = resolve(directory, name);
-  const good = async (path: string) => await exists(path) && await sha256File(path).then(result => result.sha256 === digest && result.bytes === size, () => false);
+  const good = async (path: string) => (await stat(path).catch(() => null))?.size === size;
   if (!await good(target)) {
     let linked = false;
     for (const cache of caches) {
@@ -83,15 +68,13 @@ async function fetchKit(record: Record<string, unknown>, directory: string, cach
       if (!response.ok || !response.body) throw new Error(`${url} answered ${response.status}.`);
       await pipeline(Readable.fromWeb(response.body as never), createWriteStream(target));
     }
-    if (!await good(target)) throw new Error(`${name} does not match its pinned sha256 (${size} bytes expected).`);
+    if (!await good(target)) throw new Error(`${name} (${String(record.url)}) is not its pinned ${size} bytes.`);
   }
-  const measured = cksum(await readFile(target));
-  if (`${measured.crc} ${measured.bytes} ${name}` !== stated) throw new Error(`${name}: cksum is "${measured.crc} ${measured.bytes} ${name}", not ESO's "${stated}".`);
   return target;
 }
 
 export async function installNacoToolchain(caches: readonly string[] = []) {
-  const { entry, digest } = await nacoToolchainDescriptor(), root = TOOLCHAIN_ROOT, downloads = resolve(root, 'downloads');
+  const pins = await nacoToolchainDescriptor(), { entry } = pins, root = TOOLCHAIN_ROOT, downloads = resolve(root, 'downloads');
   if (await nacoToolchainPath().then(() => true, () => false)) return root;
   await mkdir(downloads, { recursive: true });
   const kitArchive = requireString(entry.kit, 'kit');
@@ -110,19 +93,16 @@ export async function installNacoToolchain(caches: readonly string[] = []) {
   const plugins = resolve(root, 'pipeline/lib/esopipes-plugins');
   const installed = (await readdir(plugins).catch(() => [])).filter(name => name.startsWith('naco-'));
   if (installed.length !== 1) throw new Error(`${installed.length} naco plugin directories in ${plugins}.`);
-  // The build tree is not needed at run time, and neither is the verified archive; the disk is kept for data.
+  // The build tree is not needed at run time, and neither is the downloaded archive; the disk is kept for data.
   await rm(kit, { recursive: true, force: true });
   await rm(downloads, { recursive: true, force: true });
-  await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id: 'naco', descriptorSha256: digest, plugins: installed[0] }, null, 2)}\n`);
+  writeInstalledMarker(root, pins);
   return root;
 }
 
 /** The installed toolchain's root, refusing a missing install or one built from a different pin. */
 export async function nacoToolchainPath() {
-  const { digest } = await nacoToolchainDescriptor();
-  const marker = await readFile(resolve(TOOLCHAIN_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown, 'installed.json'), () => null);
-  if (!marker) throw new Error('The NACO toolchain is not installed: node packages/telescope-cli/src/archives/naco/toolchain.mts install');
-  if (marker.descriptorSha256 !== digest) throw new Error('The NACO toolchain was built from another toolchain.json; reinstall it.');
+  assertInstalledMarker(TOOLCHAIN_ROOT, await nacoToolchainDescriptor(), 'NACO', 'node packages/telescope-cli/src/archives/naco/toolchain.mts install');
   return TOOLCHAIN_ROOT;
 }
 

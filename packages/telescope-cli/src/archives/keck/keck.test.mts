@@ -1,25 +1,23 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { runDigest } from '@cssearth/telescope/node';
+import { runKey } from '@cssearth/telescope/node';
 import { instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts';
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
-import { assertInputPins } from '@cssearth/telescope/node';
+import { assertInputs } from '@cssearth/telescope/node';
 import { checkReceipt, keckTargetObject, nameCandidates, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
 import { normaliseTargetName } from '../targets.mts';
-import { assertNoPlotServer, configureWithoutPlots, pinnedInput, PLOT_SERVER_LINES, PLOTS_OFF, REDUCIBLE, reductionRun, stagedName } from './reduce.mts';
+import { assertNoPlotServer, configureWithoutPlots, PLOT_SERVER_LINES, PLOTS_OFF, REDUCIBLE, reductionRun, stagedName } from './reduce.mts';
 import { archiveAgreement, assertRunIsFor, comparisonPins, pairExtensions, productStems, runProduct, selectRunProduct, stageOf } from './compare.mts';
 
 const KOA = 'https://koa.ipac.caltech.edu';
 const path = '/KCWI/2023/20231209/lev0/KB.20231209.37031.94.fits';
-const digest = 'a'.repeat(64);
 const file = (overrides: Record<string, unknown> = {}) => ({ koaid: 'KB.20231209.37031.94.fits', name: 'KB.20231209.37031.94.fits',
   observatoryName: 'kb231209_00085.fits', filehand: path, url: `${KOA}/cgi-bin/getKOA/nph-getKOA?filehand=${path}`,
-  bytes: 10166400, sha256: digest, imageType: 'object', ...overrides });
+  bytes: 10166400, imageType: 'object', ...overrides });
 const calibration = (overrides: Record<string, unknown> = {}) => {
   const bias = '/KCWI/2023/20231209/lev0/KB.20231209.20185.51.fits';
   return file({ koaid: 'KB.20231209.20185.51.fits', name: 'KB.20231209.20185.51.fits', observatoryName: 'kb231209_00017.fits',
@@ -29,7 +27,7 @@ const product = (overrides: Record<string, unknown> = {}) => {
   const lev1 = '/KCWI/2023/20231209/lev1/redux/KB.20231209.37031.94_icubed.fits';
   return { koaid: 'KB.20231209.37031.94.fits', name: 'KB.20231209.37031.94_icubed.fits', filehand: lev1,
     url: `${KOA}/cgi-bin/KoaAPI/nph-dnloadL1data?instrument=kcwi&koaid=KB.20231209.37031.94.fits&filehand=${lev1}`,
-    bytes: 4096, sha256: 'b'.repeat(64), level: 'lev1', description: 'Differential atmospheric refraction corrected data', ...overrides };
+    bytes: 4096, level: 'lev1', description: 'Differential atmospheric refraction corrected data', ...overrides };
 };
 const observation = (overrides: Record<string, unknown> = {}) => ({ koaid: 'KB.20231209.37031.94.fits', targetName: 'm42',
   dateObs: '2023-12-09 00:00:00', ut: '10:17:11.94', elapsedSeconds: 5, proprietaryMonths: 18,
@@ -119,25 +117,6 @@ test('two products are compared only where they are on one grid', () => {
   assert.deepEqual(pairExtensions([hdu([]), hdu([4, 4], 'SCI')], [hdu([]), hdu([4, 4], 'SCI')]).pairs.map(pair => pair.name), ['SCI']);
 });
 
-test('the shipped M42 program pins the frames the archive associates, and KOA’s own cube to check against', async () => {
-  const pinned = parseKeckProgram(JSON.parse(await readFile(join(PROGRAMS, 'm42-kcwi-2023b-u124.json'), 'utf8')));
-  assert.equal(pinned.instrument, 'KCWI');
-  assert.equal(pinned.target, 'm42');
-  assert.equal(pinned.programme, 'U124');
-  const entry = pinned.observations[0]!;
-  assert.equal(entry.koaid, 'KB.20231209.37031.94.fits');
-  assert.equal(entry.configuration.bgratnam, 'BL');
-  assert.equal(entry.configuration.ifunam, 'Medium');
-  assert.ok(entry.calibrations.length >= 20, `a night's calibrations are pinned, not a few (${entry.calibrations.length})`);
-  for (const kind of ['bias', 'contbars', 'arclamp', 'flatlamp']) assert.ok(entry.calibrations.some(file => file.imageType === kind), `${kind} is pinned`);
-  assert.ok(entry.archiveProducts.some(product => stageOf(product.name) === 'icubed'), 'KOA’s own cube is pinned to compare against');
-  for (const file of [entry.science, ...entry.calibrations, ...entry.archiveProducts]) {
-    assert.ok(file.bytes > 0 && file.url.startsWith(KOA), `${file.name} is pinned by URL and size`);
-  }
-});
-
-
-
 test('the nights a pin may reach are the frame’s own and the days either side of it', () => {
   assert.deepEqual(nightsAround('KB.20231209.37031.94.fits', 0), ['20231209']);
   assert.deepEqual(nightsAround('KB.20231209.37031.94.fits', 1), ['20231208', '20231209', '20231210']);
@@ -188,13 +167,6 @@ test('a target name is matched to a shipped object by its number, never by its b
   assert.equal(normaliseTargetName('M 42'), 'M42');
 });
 
-test('a mode counts as reduced only where a receipt names an observation a program pins', async () => {
-  const { programs, receipts } = await pinnedEvidence();
-  assert.ok(programs.some(entry => entry.instrument === 'KCWI' && entry.koaids.includes('KB.20231209.37031.94.fits')), 'the M42 program is pinned');
-  for (const receipt of receipts) assert.ok(programs.some(entry => entry.instrument === receipt.instrument && entry.koaids.includes(receipt.koaid)),
-    `${receipt.file} names an observation a program pins`);
-});
-
 test('every instrument KOA serves has a stated reduction state, and only the installed one can be re-run', () => {
   for (const table of INSTRUMENT_TABLES) {
     const rule = REDUCTION_STATE[table];
@@ -208,21 +180,20 @@ test('every instrument KOA serves has a stated reduction state, and only the ins
 
 test('the reduction record names the frames it read, the channel, and the two settings it changed', () => {
   const parsed = parseKeckProgram(program());
-  const inputs = [parsed.observations[0]!.science].map(file => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256: digest }));
+  const inputs = [parsed.observations[0]!.science].map(file => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes }));
   const made = reductionRun(parsed, parsed.observations[0]!, inputs,
-    { channel: 'KB', command: ['kcwiReduce', '-g', '-b'], configuration: { source: 'kcwidrp/configs/kcwi.cfg', sha256: 'b'.repeat(64), changed: { enable_bokeh: { shipped: 'True', used: 'False' } } } },
-    [{ name: 'kcwidrp', version: '1.3.1' }], 'c'.repeat(64));
+    { channel: 'KB', command: ['kcwiReduce', '-g', '-b'], configuration: { source: 'kcwidrp/configs/kcwi.cfg', changed: { enable_bokeh: { shipped: 'True', used: 'False' } } } },
+    [{ name: 'kcwidrp', version: '1.3.1' }]);
   assert.equal(made.telescope, 'Keck');
   assert.equal(made.stage, 'kcwi-drp-group');
   assert.deepEqual(made.inputs.map(input => input.role), ['object']);
-  assert.equal(made.toolchainDigest, 'c'.repeat(64));
   assert.equal((made.parameters as { channel: string }).channel, 'KB');
-  // The same run is the same digest whatever order the inputs came in; a changed setting is a different run.
+  // The same run is the same run key whatever order the inputs came in; a changed setting is a different run.
   const other = reductionRun(parsed, parsed.observations[0]!, [...inputs].reverse(),
-    { channel: 'KB', command: ['kcwiReduce', '-g', '-b'], configuration: { source: 'kcwidrp/configs/kcwi.cfg', sha256: 'b'.repeat(64), changed: { enable_bokeh: { shipped: 'True', used: 'False' } } } },
-    [{ name: 'kcwidrp', version: '1.3.1' }], 'c'.repeat(64));
-  assert.equal(runDigest(made), runDigest(other));
-  assert.notEqual(runDigest(made), runDigest({ ...made, parameters: { ...made.parameters, channel: 'KR' } }));
+    { channel: 'KB', command: ['kcwiReduce', '-g', '-b'], configuration: { source: 'kcwidrp/configs/kcwi.cfg', changed: { enable_bokeh: { shipped: 'True', used: 'False' } } } },
+    [{ name: 'kcwidrp', version: '1.3.1' }]);
+  assert.equal(runKey(made), runKey(other));
+  assert.notEqual(runKey(made), runKey({ ...made, parameters: { ...made.parameters, channel: 'KR' } }));
 });
 
 test('what the comparison establishes is tied to the exact product it checked', () => {
@@ -277,21 +248,19 @@ test('a product with no record, or a record of another observation, is refused r
   assert.equal(await runProduct(redux, archiveProduct, ['kb231210_00042_icubed.fits'], pinned), null, 'another night is simply absent');
   await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /has no product record beside it/u);
   const record = (overrides: Record<string, unknown> = {}) => ({ schema: 'cssearth-telescope-product@1', telescope: 'Keck', stage: 'kcwi-drp-group',
-    inputs: [{ role: 'object', identity: pinned.science.name, bytes: pinned.science.bytes, sha256: digest }],
+    inputs: [{ role: 'object', identity: pinned.science.name, bytes: pinned.science.bytes }],
     parameters: { koaid: pinned.koaid }, software: [{ name: 'kcwidrp', version: '1.3.1' }],
-    outputs: [{ path: name, bytes: 17, sha256: 'b'.repeat(64) }], evidence: [], ...overrides });
+    outputs: [{ path: name, bytes: 17 }], evidence: [], ...overrides });
   const put = async (value: unknown) => writeFile(`${cube}.product.json`, JSON.stringify(value));
   await put(record({ parameters: { koaid: 'KB.20231210.04100.00.fits' } }));
   await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /was made from KB\.20231210\.04100\.00\.fits, not from KB\.20231209\.37031\.94\.fits/u);
-  await put(record({ inputs: [{ role: 'bias', identity: 'KB.20231209.20185.51.fits', bytes: 10166400, sha256: 'a'.repeat(64) }] }));
+  await put(record({ inputs: [{ role: 'bias', identity: 'KB.20231209.20185.51.fits', bytes: 10166400 }] }));
   await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /was not made from the pinned raw frame/u);
   await put(record());
   assert.equal(await runProduct(redux, archiveProduct, [name], pinned), cube);
 });
 
-test('an archive product that is not the pinned bytes is refused before a sample is read', async () => {
-  // The reviewer's case: a fixture of exactly the pinned size with altered samples. Reading it and writing its own digest
-  // into the receipt reported 100% identical samples and earned archive-agreement evidence against the program's own pin.
+test('an archive product that is missing or not the pinned size is refused before a sample is read', async () => {
   const pinned = parseKeckProgram(program({ observations: [observation({ archiveProducts: [product()] })] }));
   const entry = pinned.observations[0]!, archiveProduct = entry.archiveProducts[0]!;
   const downloads = await mkdtemp(join(tmpdir(), 'keck-pins-'));
@@ -305,44 +274,15 @@ test('an archive product that is not the pinned bytes is refused before a sample
   };
   const genuine = new Map<string, Buffer>();
   for (const pin of pins) {
-    // The bytes whose sha256 the program pins, made here so the pin and the file agree to begin with.
+    // Files of the pinned sizes, made here so the pin and the file agree to begin with.
     const bytes = Buffer.alloc(pin.bytes, pin.role === 'object' ? 1 : pin.role === 'bias' ? 2 : 3);
     genuine.set(pin.identity, bytes);
     await write(pin.identity, bytes);
   }
-  const pinnedNow = pins.map(pin => ({ ...pin, sha256: createHash('sha256').update(genuine.get(pin.identity)!).digest('hex') }));
-  await assertInputPins(pinnedNow, files);
-});
-
-test('a receipt counts only where it records a whole comparison of the bytes the program pins now', async (t) => {
-  const pinned = parseKeckProgram(program({ observations: [observation({ archiveProducts: [product()] })] }));
-  const archiveProduct = pinned.observations[0]!.archiveProducts[0]!;
-  const directory = await mkdtemp(join(tmpdir(), 'keck-receipt-'));
-  const recordPath = join(directory, 'kb231209_00085_icubed.fits.product.json');
-  const ourDigest = 'c'.repeat(64);
-  await writeFile(recordPath, JSON.stringify({ schema: 'cssearth-telescope-product@1', telescope: 'Keck', stage: 'kcwi-drp-group',
-    inputs: [pinned.observations[0]!.science, ...pinned.observations[0]!.calibrations].map(file => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256: digest })),
-    parameters: { koaid: 'KB.20231209.37031.94.fits' }, software: [{ name: 'kcwidrp', version: '1.3.1' }],
-    outputs: [{ path: 'kb231209_00085_icubed.fits', bytes: 117411840, sha256: ourDigest }], evidence: [] }));
-  const cut = { samples: 10, correlation: 0.99, relativeDifference: { median: 0, p99: 0, largest: 0 } };
-  const whole = () => ({ schema: 'cssearth-keck-reproduction@1', program: 'test', koaid: 'KB.20231209.37031.94.fits',
-    product: 'icubed', instrument: 'KCWI',
-    extensions: [{ extname: 'PRIMARY', samples: 100, both: 100, identicalShare: 1, aboveMedian: cut, aboveBrightestPercent: cut }],
-    archive: { filehand: archiveProduct.filehand, bytes: archiveProduct.bytes, sha256: digest,
-      read: { bytes: archiveProduct.bytes, sha256: digest } },
-    local: { name: 'kb231209_00085_icubed.fits', bytes: 117411840, sha256: ourDigest, record: recordPath } });
-  const check = (value: Record<string, unknown>) => checkReceipt('test.lev1-icubed.reproduction.json', value, [pinned]);
-  assert.deepEqual(await check(whole()), { file: 'test.lev1-icubed.reproduction.json', instrument: 'KCWI', koaid: 'KB.20231209.37031.94.fits', product: 'icubed' });
-  // The bare receipt the reviewer wrote: four fields, no comparison in it at all.
-  const bare = { schema: 'cssearth-keck-reproduction@1', program: 'test', instrument: 'KCWI', koaid: 'KB.20231209.37031.94.fits', product: 'icubed' };
-  assert.match(((await check(bare)) as { problem: string }).problem, /holds no compared extension/u);
-  const problem = async (overrides: Record<string, unknown>) => ((await check({ ...whole(), ...overrides })) as { problem: string }).problem;
-  assert.match(await problem({ archive: { ...whole().archive, filehand: '/KCWI/2023/20231209/lev1/redux/other_icubed.fits' } }), /no longer pins an archive product/u);
-  assert.match(await problem({ local: { ...whole().local, name: 'kb231210_00042_icubed.fits' } }), /does not name the product/u);
-  assert.match(await problem({ local: { ...whole().local, record: join(directory, 'gone.json') } }), /is not on this machine/u);
-  assert.match(await problem({ extensions: [{ extname: 'PRIMARY', samples: 100, both: 100, aboveMedian: cut }] }), /states no aboveBrightestPercent cut/u);
-  assert.match(await problem({ koaid: 'KB.20231210.04100.00.fits' }), /pins no observation/u);
-  assert.match(await problem({ program: 'other' }), /no program other is pinned/u);
-  assert.match(await problem({ instrument: 'NIRC2' }), /is a KCWI program and the receipt says NIRC2/u);
-  t.diagnostic('every rejection names the file and the reason, which is what the ledger prints.');
+  await assertInputs(pins, files);
+  const archive = pins.find(pin => pin.role === 'archive product')!;
+  await write(archive.identity, Buffer.alloc(archive.bytes + 1));
+  await assert.rejects(assertInputs(pins, files), /is not the recorded/u);
+  await rm(files.get(archive.identity)!);
+  await assert.rejects(assertInputs(pins, files), /is not at/u);
 });

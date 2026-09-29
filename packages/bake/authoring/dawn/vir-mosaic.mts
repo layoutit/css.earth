@@ -19,7 +19,6 @@ import { projectReducedFile, pixelStepKm, boxMean } from './vir-projection.mts';
  *
  * Byte order is measured, not taken from the labels: the spectral cubes are big-endian and the wavelength cubes
  * little-endian although both labels say IEEE_REAL. */
-import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -97,7 +96,7 @@ async function download(url: string) {
 }
 
 /** One cube's kept bands and geometry. Records are per pixel: lat, lon, cos(incidence), cos(emission), then I/F per kept band. */
-export interface Reduced { schema: typeof REDUCED_SCHEMA; product: string; volume: string; sha256: string; lines: number; samples: number; wavelengths: number[][]; kept: number[]; records: number }
+export interface Reduced { schema: typeof REDUCED_SCHEMA; product: string; volume: string; lines: number; samples: number; wavelengths: number[][]; kept: number[]; records: number }
 
 /** Stream one cube, reduce it, and write `<product>.json` (header) and `<product>.f32` (records) to the work directory. */
 async function reduceCube(recipe: VirRecipe, phase: VirPhase, path: string, set: KernelSet, sun: number[], work: string): Promise<Reduced | null> {
@@ -140,7 +139,7 @@ async function reduceCube(recipe: VirRecipe, phase: VirPhase, path: string, set:
   }
   const width = 5 + hi - lo + 1, records = out.length / width;
   const wavelengths = Array.from({ length: samples }, (_, s) => Array.from({ length: hi - lo + 1 }, (_, i) => +wl(lo + i, s).toFixed(5)));
-  const reduced: Reduced = { schema: REDUCED_SCHEMA, product, volume: phase.volume, sha256: sha256(cube), lines, samples, wavelengths, kept: [lo, hi], records };
+  const reduced: Reduced = { schema: REDUCED_SCHEMA, product, volume: phase.volume, lines, samples, wavelengths, kept: [lo, hi], records };
   await writeFile(resolve(work, `${product}.f32`), Buffer.from(new Float32Array(out).buffer));
   await writeFile(resolve(work, `${product}.json`), JSON.stringify(reduced));
   return reduced;
@@ -369,7 +368,7 @@ export async function phase(recipe: VirRecipe, work: string) {
 export async function mosaic(recipe: VirRecipe, root: string, work: string) {
   const { gain } = JSON.parse(await readFile(resolve(work, 'stripes.json'), 'utf8')) as { gain: number[][] };
   const photometry = await readFile(resolve(work, 'photometry.json'), 'utf8').then(text => JSON.parse(text) as { referenceDegrees: number; fillMaximumStepKm?: number; rejected: string[]; levelled?: Record<string, number[]>; fit: { slopePerDegree: number }[]; phases: Record<string, number> }, () => null);
-  const cubeRecords: { product: string; volume: string; sha256: string; lines: number; pixels: number; offsets: number[] | null }[] = [];
+  const cubeRecords: { product: string; volume: string; lines: number; pixels: number; offsets: number[] | null }[] = [];
   const ppd = recipe.output.pixelsPerDegree, limit = recipe.output.latitudeLimitDegrees, width = 360 * ppd, height = 2 * limit * ppd;
   const layer = () => ({ sums: recipe.parameters.map(() => new Float64Array(width * height)), highSums: recipe.parameters.map(() => new Float64Array(width * height)), counts: new Uint16Array(width * height) });
   // Tiers in priority order: accepted primary cubes, each fill phase in recipe order, then rejected cubes levelled by their offset.
@@ -379,7 +378,7 @@ export async function mosaic(recipe: VirRecipe, root: string, work: string) {
     const cubePhase = photometry?.phases[header.product];
     const levelled = photometry?.levelled?.[header.product], rejected = photometry?.rejected.includes(header.product) ?? false;
     const shift = photometry && cubePhase !== undefined ? photometry.fit.map((f, i) => f.slopePerDegree * (cubePhase - photometry.referenceDegrees) + (rejected ? levelled?.[i] ?? 0 : 0)) : null;
-    cubeRecords.push({ product: header.product, volume: header.volume, sha256: header.sha256, lines: header.lines, pixels: header.records, offsets: shift });
+    cubeRecords.push({ product: header.product, volume: header.volume, lines: header.lines, pixels: header.records, offsets: shift });
     if (!projected || (rejected && !levelled)) return;
     if (rejected) levelledUsed++; else used++;
     const target = tiers[rejected ? tiers.length - 1 : fillVolumes.indexOf(header.volume) + 1];

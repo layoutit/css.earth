@@ -67,7 +67,7 @@ function bakedFixture(): BakedSky {
     ['pz', [0, 0, 1], [0, -1, 0], [-1, 0, 0]], ['nz', [0, 0, -1], [0, -1, 0], [1, 0, 0]],
   ] as const;
   return { faces: bases.map(([id, f, r, u]) => ({ id, forwardIcrf: [...f], rightIcrf: [...r], upIcrf: [...u],
-    texturePath: `sky/${id}.webp`, widthPx: 8, heightPx: 8, sha256: 'a'.repeat(64), bytes: 100,
+    texturePath: `sky/${id}.webp`, widthPx: 8, heightPx: 8, bytes: 100,
     vertices: [[-1, 1], [1, 1], [1, -1], [-1, -1]].map(([x, y]) => f.map((n, i) => n + x * r[i] + y * u[i]) as [number, number, number]),
     uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
   })), provenance: {}, approximation: {} };

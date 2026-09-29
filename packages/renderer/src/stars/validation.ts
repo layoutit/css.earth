@@ -5,10 +5,9 @@ import type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedDire
 
 const IDENTIFIER = /^[a-z][a-z0-9-]*$/u;
 const ID_PREFIX = /^[a-z0-9][a-z0-9.-]*$/u;
-const HASH = /^[a-f0-9]{64}$/u;
 const MAX_LEAF_STARS = 32;
 
-/** Validates the JSON manifest of one prepared point field; its rows arrive in the pinned bank. */
+/** Validates the JSON manifest of one prepared point field; its rows arrive in the bank it names. */
 export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssPointFieldManifest {
   const input = record(value, 'prepared CSS point field');
   allowedKeys(input, ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'directPoints', 'resources'], 'prepared CSS point field');
@@ -72,10 +71,10 @@ function parseDirectPoints(value: unknown, bank: PreparedPointFieldBank, colorCo
 
 function parseBank(value: unknown): PreparedPointFieldBank {
   const input = record(value, 'point-field bank');
-  exactKeys(input, ['encoding', 'path', 'bytes', 'sha256', 'starIdPrefix', 'starCount', 'nodeCount', 'childLinkCount', 'anchorCount', 'columns', 'names', 'quantization'], 'point-field bank');
+  exactKeys(input, ['encoding', 'path', 'bytes', 'starIdPrefix', 'starCount', 'nodeCount', 'childLinkCount', 'anchorCount', 'columns', 'names', 'quantization'], 'point-field bank');
   const { starCount, nodeCount, childLinkCount, anchorCount } = input;
   if (input.encoding !== POINT_FIELD_BANK_ENCODING || !relativePath(input.path) || !safePositive(input.bytes) ||
-      typeof input.sha256 !== 'string' || !HASH.test(input.sha256) || typeof input.starIdPrefix !== 'string' || !ID_PREFIX.test(input.starIdPrefix) ||
+      typeof input.starIdPrefix !== 'string' || !ID_PREFIX.test(input.starIdPrefix) ||
       !safePositive(starCount) || !safePositive(nodeCount) || !safeNonnegative(childLinkCount) || !safeNonnegative(anchorCount) ||
       !Array.isArray(input.columns) || !Array.isArray(input.names) || !Array.isArray(input.quantization)) throw new TypeError('Prepared point-field bank is invalid.');
   const layout = pointFieldBankLayout({ starCount, nodeCount, childLinkCount, anchorCount });
@@ -105,7 +104,7 @@ function parseBank(value: unknown): PreparedPointFieldBank {
     }
     return Object.freeze({ ...expected, measured: field.measured, displayAlphaChange: field.displayAlphaChange });
   }));
-  return Object.freeze({ encoding: POINT_FIELD_BANK_ENCODING, path: input.path, bytes: input.bytes, sha256: input.sha256, starIdPrefix: input.starIdPrefix,
+  return Object.freeze({ encoding: POINT_FIELD_BANK_ENCODING, path: input.path, bytes: input.bytes, starIdPrefix: input.starIdPrefix,
     starCount, nodeCount, childLinkCount, anchorCount, columns: layout.columns, names, quantization });
 }
 
@@ -187,11 +186,11 @@ function parseResources(value: unknown): readonly PreparedPointFieldResource[] {
   const paths = new Set<string>();
   return Object.freeze(value.map((entry, index) => {
     const input = record(entry, `point-field resource ${index}`);
-    exactKeys(input, ['path', 'sha256', 'bytes', 'width', 'height'], 'point-field resource');
-    if (!relativePath(input.path) || paths.has(input.path) || typeof input.sha256 !== 'string' || !HASH.test(input.sha256) ||
+    exactKeys(input, ['path', 'bytes', 'width', 'height'], 'point-field resource');
+    if (!relativePath(input.path) || paths.has(input.path) ||
         !safePositive(input.bytes) || !safePositive(input.width) || !safePositive(input.height)) throw new TypeError('Prepared point-field resource is invalid.');
     paths.add(input.path);
-    return Object.freeze({ path: input.path, sha256: input.sha256, bytes: input.bytes, width: input.width, height: input.height });
+    return Object.freeze({ path: input.path, bytes: input.bytes, width: input.width, height: input.height });
   }));
 }
 

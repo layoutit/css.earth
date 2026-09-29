@@ -10,13 +10,12 @@ import { sampleAgreement } from '../sample-agreement.mts';
  * A coronagraph band's mosaic is PSF-subtracted: most pixels are residual noise, and how well KLIP matches changes with distance
  * from the star, so its receipt also gives the RMS difference and correlation in annuli around the target's position.
  * MAST's product must name the program's band in its own header (the mask is not in the archive's filter list).
- * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and digests, and the
+ * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and sizes, and the
  * agreement it establishes is added as `archive-agreement` evidence to the product record the stage wrote beside the mosaic. A
  * mosaic with no record is refused. */
-import { writeFile } from 'node:fs/promises';
+import { stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 import { skyProjection } from '@cssearth/fits';
 import { mastFile } from '@cssearth/telescope/node';
@@ -112,8 +111,8 @@ export async function compareWithMast(id: string, band: string, local: string, s
   const receipt = {
     schema: `cssearth-jwst-${entry.stage ?? 'image3'}-reproduction@2`, program: id, band, observation: entry.observation,
     toolchain: 'packages/telescope-cli/src/archives/jwst/toolchain.json', crdsContext: program.crdsContext,
-    mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX },
-    local: { name: basename(local), ...(await sha256File(local)), calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance, samples,
+    mast: { ...entry.level3, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX },
+    local: { name: basename(local), bytes: (await stat(local)).size, calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance, samples,
     wcs, differentWcs,
     pixels: { both, onlyOurs, onlyMast: onlyTheirs, identicalShare: sameGrid ? identical / both : null, comparedOn: sameGrid ? 'pixels' : 'sky positions', medianAbsoluteDifferenceOverMedian: medianDifference / median,
       aboveMedian: { pixels: n, rmsDifferenceOverRms: Math.sqrt(sdd / n) / Math.sqrt(sbb / n),

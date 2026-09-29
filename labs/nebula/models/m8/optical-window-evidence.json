@@ -1,7 +1,7 @@
 {
-  "resultId": "1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864",
+  "resultId": "m8-optical-window",
   "model": {
-    "path": ".local/nebula-lab/compiler/1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864/field.json"
+    "path": ".local/nebula-lab/compiler/m8-optical-window/field.json"
   },
   "emissionWindow": {
     "sourceId": "eso-optical",
@@ -67,89 +67,6 @@
   "interpretation": "Independent registered optical raster coverage against actual XYZ field samples. Counterfactual deletes only the saved window from the same newly fitted field.",
   "schema": "cssearth-lab-optical-window-evidence@1",
   "tested": "2026-09-13; plus the optical-window implementation committed with this record. Screenshot and field result are the default recipe, Detail 90%, Faint 15%, Depth 1x.",
-  "implementation": [
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/bake-types.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/bake.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/bank-validation.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/catalogue-stars.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/compile.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/component-material.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/depth-model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/emission-window.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/field-model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/field-types.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/field.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/fit.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/images.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/material.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/optical-composite-preparation.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/optical-composite.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/prerequisites.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/refresh-stars.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/result.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/retained-material-bank.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/server.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/star-sprites.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/star-union.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/stars.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/target.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/worker.ts"
-    }
-  ],
   "recipe": {
     "path": "compiler.json"
   },
@@ -158,7 +75,7 @@
     "candidates": [
       {
         "id": "m8",
-        "result": "1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864",
+        "result": "m8-optical-window",
         "lenses": [
           "eso-optical",
           "eso-vista",

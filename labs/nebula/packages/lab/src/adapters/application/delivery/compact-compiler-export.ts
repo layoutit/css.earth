@@ -3,16 +3,17 @@ import { readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
-import { hash, localPath, pinned } from '../../../server/workflows/density/io.ts';
+import { localPath, pinned } from '../../../server/workflows/density/io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';
 import { readCompactCompiler } from './compact-compiler.ts';
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 export async function exportCompactCompiler(root: string, objectId: string) {
   if (!/^[a-z0-9][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid object identity.');
   const receipt: unknown = JSON.parse(await readFile(localPath(root, `src/objects/${objectId}/prepared/delivery.json`), 'utf8'));
-  if (!record(receipt) || typeof receipt.sourceResult !== 'string' || !/^[a-f0-9]{64}$/.test(receipt.sourceResult)) throw new TypeError('Missing current app result.');
-  const resultPath = `.local/nebula-lab/compiler/${receipt.sourceResult}/result.json`, resultBytes = await readFile(localPath(root, resultPath));
-  const result = readCompilerResult(JSON.parse(resultBytes.toString()));
+  if (!record(receipt) || typeof receipt.sourceResult !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(receipt.sourceResult))
+    throw new TypeError(`src/objects/${objectId}/prepared/delivery.json names no compiler result: ${JSON.stringify(record(receipt) ? receipt.sourceResult : receipt)}`);
+  const resultPath = `.local/nebula-lab/compiler/${receipt.sourceResult}/result.json`;
+  const result = readCompilerResult(JSON.parse(await readFile(localPath(root, resultPath), 'utf8')));
   const modelBytes = await pinned(root, result.model), methodBytes = await pinned(root, result.method);
   const method: unknown = JSON.parse(methodBytes.toString());
   if (!record(method) || !Array.isArray(method.materials)) throw new TypeError('Historical projected-image material is not a compact component material.');
@@ -36,7 +37,7 @@ export async function exportCompactCompiler(root: string, objectId: string) {
     expected.push({ id: bank.id, resources: volume.resources });
   }
   const input = { schema: 'cssearth-compact-compiler@1', objectId,
-    provenance: { resultPath, resultSha256: hash(resultBytes), modelSha256: hash(modelBytes), methodSha256: hash(methodBytes),
+    provenance: { resultPath,
       interpretation: 'Accepted fitted emission components, any retained photometric envelope with coarse source chromaticity, per-component colors, stars and sampling. Derived field inputs, not measured volumetric gas density. Full source acquisition remains available in the research recipes.' },
     field: JSON.parse(modelBytes.toString()), scene: result.scene, materials,
     sources: result.scene.lenses.map(lens => { const source = result.sources.find(source => source.id === lens.id)!;
@@ -46,5 +47,5 @@ export async function exportCompactCompiler(root: string, objectId: string) {
   const raw = Buffer.from(JSON.stringify(input)), bytes = gzipSync(raw, { level: 9 });
   const path = `src/objects/${objectId}/source/bake-inputs.json.gz`;
   await writeAtomic(localPath(root, path), bytes);
-  return { path, sha256: hash(bytes), bytes: bytes.length, uncompressedBytes: raw.length };
+  return { path, bytes: bytes.length, uncompressedBytes: raw.length };
 }

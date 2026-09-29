@@ -15,7 +15,7 @@ function sampling(counts = { x: 50, y: 50, z: 50 }, stars = 3): CompilerBakeResu
     renderBudget: createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, stars, counts.x + counts.y + counts.z) };
 }
 function volume(id: string, counts: Record<typeof axes[number], number>, impostorCount: number): PreparedCssVolume {
-  const resource = (path: string) => ({ path, width: 1, height: 1, bytes: 1, sha256: 'a'.repeat(64) });
+  const resource = (path: string) => ({ path, width: 1, height: 1, bytes: 1 });
   const views = Array.from({ length: impostorCount }, (_, index) => ({ id: `view-${index}`, texturePath: `${id}/view-${index}.png`,
     back: [0, 0, 1] as VolumeVector, right: [1, 0, 0] as VolumeVector, down: [0, -1, 0] as VolumeVector }));
   return { schema: 'cssearth-css-volume@1', id, frame, anchors: [], provenance: {}, approximation: {},

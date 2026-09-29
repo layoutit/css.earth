@@ -8,7 +8,7 @@
     },
     {
       "jd": 2461286.5,
-      "errorKm": 1.4919776018337002e-7
+      "errorKm": 1.4919776018337002e-07
     },
     {
       "jd": 2461316.5,
@@ -16,6 +16,5 @@
     }
   ],
   "regressionLimitKm": 1042,
-  "qualification": "Measured only at the retained epoch and two independent 30-day endpoints; not an intervening-date or long-term accuracy claim.",
-  "sourceSha256": "19c8fd9edfab12112470d412503de057e6ba3cbdbe82f3c23a439c0b9c9159bc"
+  "qualification": "Measured only at the retained epoch and two independent 30-day endpoints; not an intervening-date or long-term accuracy claim."
 }

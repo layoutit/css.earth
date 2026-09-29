@@ -43,7 +43,7 @@
       "fitPixels": 1464,
       "holdoutPixels": 260680,
       "maximumResidualPixels": 0.000196418810455344,
-      "rmsResidualPixels": 0.00004290637412997224
+      "rmsResidualPixels": 4.290637412997224e-05
     },
     "frames": [
       {
@@ -79,7 +79,7 @@
           "fitPixels": 1464,
           "holdoutPixels": 260680,
           "maximumResidualPixels": 0.000196418810455344,
-          "rmsResidualPixels": 0.00004290637412997224
+          "rmsResidualPixels": 4.290637412997224e-05
         },
         "sourceCoverage": {
           "geometryPixels": 262144,
@@ -181,12 +181,10 @@
         },
         "sourceIds": [
           {
-            "id": "draco-0401930049-43695-geo",
-            "sha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629"
+            "id": "draco-0401930049-43695-geo"
           },
           {
-            "id": "draco-0401930049-43695-label",
-            "sha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee"
+            "id": "draco-0401930049-43695-label"
           }
         ],
         "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
@@ -224,7 +222,7 @@
           "fitPixels": 1465,
           "holdoutPixels": 260679,
           "maximumResidualPixels": 0.0002773312130641524,
-          "rmsResidualPixels": 0.00003872014933474034
+          "rmsResidualPixels": 3.872014933474034e-05
         },
         "sourceCoverage": {
           "geometryPixels": 262144,
@@ -326,12 +324,10 @@
         },
         "sourceIds": [
           {
-            "id": "draco-0401930046-49265-geo",
-            "sha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443"
+            "id": "draco-0401930046-49265-geo"
           },
           {
-            "id": "draco-0401930046-49265-label",
-            "sha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319"
+            "id": "draco-0401930046-49265-label"
           }
         ],
         "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
@@ -369,7 +365,7 @@
           "fitPixels": 1363,
           "holdoutPixels": 242438,
           "maximumResidualPixels": 0.00024225216692492894,
-          "rmsResidualPixels": 0.00004220904430162961
+          "rmsResidualPixels": 4.220904430162961e-05
         },
         "sourceCoverage": {
           "geometryPixels": 243801,
@@ -471,12 +467,10 @@
         },
         "sourceIds": [
           {
-            "id": "draco-0401930045-02979-geo",
-            "sha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe"
+            "id": "draco-0401930045-02979-geo"
           },
           {
-            "id": "draco-0401930045-02979-label",
-            "sha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e"
+            "id": "draco-0401930045-02979-label"
           }
         ],
         "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
@@ -514,7 +508,7 @@
           "fitPixels": 716,
           "holdoutPixels": 127575,
           "maximumResidualPixels": 0.00015439616115771763,
-          "rmsResidualPixels": 0.00003182553540393924
+          "rmsResidualPixels": 3.182553540393924e-05
         },
         "sourceCoverage": {
           "geometryPixels": 128291,
@@ -616,12 +610,10 @@
         },
         "sourceIds": [
           {
-            "id": "draco-0401930040-12262-geo",
-            "sha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2"
+            "id": "draco-0401930040-12262-geo"
           },
           {
-            "id": "draco-0401930040-12262-label",
-            "sha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890"
+            "id": "draco-0401930040-12262-label"
           }
         ],
         "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
@@ -629,36 +621,28 @@
     ],
     "sourceIds": [
       {
-        "id": "draco-0401930040-12262-geo",
-        "sha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2"
+        "id": "draco-0401930040-12262-geo"
       },
       {
-        "id": "draco-0401930040-12262-label",
-        "sha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890"
+        "id": "draco-0401930040-12262-label"
       },
       {
-        "id": "draco-0401930049-43695-geo",
-        "sha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629"
+        "id": "draco-0401930049-43695-geo"
       },
       {
-        "id": "draco-0401930049-43695-label",
-        "sha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee"
+        "id": "draco-0401930049-43695-label"
       },
       {
-        "id": "draco-0401930046-49265-geo",
-        "sha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443"
+        "id": "draco-0401930046-49265-geo"
       },
       {
-        "id": "draco-0401930046-49265-label",
-        "sha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319"
+        "id": "draco-0401930046-49265-label"
       },
       {
-        "id": "draco-0401930045-02979-geo",
-        "sha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe"
+        "id": "draco-0401930045-02979-geo"
       },
       {
-        "id": "draco-0401930045-02979-label",
-        "sha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e"
+        "id": "draco-0401930045-02979-label"
       }
     ],
     "selection": "recipe-order",
@@ -745,6 +729,5 @@
     },
     "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
   },
-  "recipeSha256": "84f36e5501c656e30e3754dca542badc0c6fc0723ff990d006047642a40b6803",
   "interpretation": "Preparation trial at 64 samples per triangle on the retained 800-face mesh. The same source frames and selection/photometry/transfer parameters feed the delivered atlas. Coverage is area-weighted sampling, not exhaustive integration."
 }

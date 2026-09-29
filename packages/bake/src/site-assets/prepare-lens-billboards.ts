@@ -3,11 +3,10 @@
 // prepared impostors, the one impostor view that faces the Sun, packed with the others into one atlas image.
 // From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: the atlas draws it there,
 // and its megabytes of lenses are fetched only once it is large on screen. Inputs are the restored prepared
-// lens payloads; the output records each payload's pinned sha256 so a stale atlas cannot pass for a fresh one.
+// lens payloads, each one the object's inventory lists.
 // An image-layer galaxy (Andromeda, Triangulum) gets the same one view: its source-facing slices, seen from the Sun and
 // composited back to front as the page composites them, so the galaxy shows from afar before its slices load.
 import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { encodeLossyWebp } from '../raster/index.ts';
@@ -25,7 +24,6 @@ const vector = (value: unknown, label: string): Vector => {
   if (values.length !== 3 || !values.every(item => typeof item === 'number' && Number.isFinite(item))) throw new TypeError(`${label} must be three finite numbers.`);
   return values as Vector;
 };
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 async function writeIfChanged(path: string, bytes: Uint8Array | string): Promise<void> {
   const next = typeof bytes === 'string' ? Buffer.from(bytes) : Buffer.from(bytes);
@@ -33,15 +31,16 @@ async function writeIfChanged(path: string, bytes: Uint8Array | string): Promise
   await writeFile(path, next);
 }
 
-/** The prepared payload a descriptor pins, checked against the object's inventory. */
-async function pinnedPayload(id: string, descriptor: Record<string, unknown>, objects: string) {
+/** The prepared payload a descriptor names, which the object's inventory must list. */
+async function preparedPayload(id: string, descriptor: Record<string, unknown>, objects: string) {
   const pin = requireRecord(descriptor.prepared, `${id} prepared pin`);
   const url = requireString(pin.url, `${id} prepared url`), filename = url.replace(/^prepared\//u, '');
   const entry = (await readInventory(id, resolve(objects, id)))?.assets.find(asset => asset.location === 'prepared' && asset.filename === filename);
   if (!entry) throw new TypeError(`${id}: src/objects/${id}/inventory.json lists no prepared ${filename}.`);
-  const bytes = await readFile(resolve(objects, id, url));
-  if (sha256(bytes) !== entry.sha256) throw new TypeError(`${id}: ${url} is ${sha256(bytes)}, but its inventory says ${entry.sha256}; run pnpm setup:prepared.`);
-  return { sha256: entry.sha256, data: requireRecord(JSON.parse(bytes.toString('utf8')), `${id} prepared payload`) };
+  const bytes = await readFile(resolve(objects, id, url)).catch((error: unknown) => {
+    throw new Error(`${id}: src/objects/${id}/${url} is missing; run pnpm setup:prepared.`, { cause: error });
+  });
+  return requireRecord(JSON.parse(bytes.toString('utf8')), `${id} prepared payload`);
 }
 
 const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
@@ -53,7 +52,7 @@ const along = (a: readonly number[], b: readonly number[], scale: number): Vecto
  * through the frame origin, each resized to the size it covers there, then stacked far to near with the straight-alpha
  * "over" the page applies to them, in sRGB as the page does. */
 async function imageLayerBillboard(id: string, descriptor: Record<string, unknown>, objects: string) {
-  const { sha256: payloadSha256, data } = await pinnedPayload(id, descriptor, objects);
+  const data = await preparedPayload(id, descriptor, objects);
   const frame = requireRecord(data.frame, `${id} frame`) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
   if (JSON.stringify(frame) !== JSON.stringify(requireRecord(descriptor.properties).frame)) throw new TypeError(`${id}: image-layer frame differs from the descriptor frame.`);
   const toViewer = unit(presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, frame).positionUnits);
@@ -104,13 +103,13 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
     rgba[index * 4 + 3] = Math.round(alpha * 255);
   }
   const image = await sharp(rgba, { raw: { width: CELL_PX, height: CELL_PX, channels: 4 } }).png().toBuffer();
-  return { id, payloadSha256, contextVisibility: 'galactic' as const, attached: false, view: { back: toViewer, right: rightAxis, down: downAxis }, radiusUnits, image };
+  return { id, contextVisibility: 'galactic' as const, attached: false, view: { back: toViewer, right: rightAxis, down: downAxis }, radiusUnits, image };
 }
 
 /** Writes the lens billboards of the checkout at `projectRoot`. */
 export async function prepareLensBillboards(projectRoot = process.cwd()) {
   const objects = resolve(projectRoot, 'src/objects');
-  const banks: { id: string; payloadSha256: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
+  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
     view?: { back: Vector; right: Vector; down: Vector }; radiusUnits?: number; framingRadiusUnits?: number; image?: Buffer }[] = [];
   for (const id of (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
     let descriptor: Record<string, unknown>;
@@ -118,9 +117,7 @@ export async function prepareLensBillboards(projectRoot = process.cwd()) {
     catch (error) { if (isRecord(error) && error.code === 'ENOENT') continue; throw error; }
     if (descriptor.type === 'image-layer-bank') { banks.push(await imageLayerBillboard(id, descriptor, objects)); continue; }
     if (descriptor.type !== 'volume-lens-bank') continue;
-    // The object's inventory is the one record of its baked bytes; descriptors carry no digest.
-    const payload = await pinnedPayload(id, descriptor, objects), entry = { sha256: payload.sha256 };
-    const data = requireRecord(payload.data.data, `${id} lenses`);
+    const data = requireRecord((await preparedPayload(id, descriptor, objects)).data, `${id} lenses`);
     const contextVisibility = data.contextVisibility ?? 'galactic';
     if (contextVisibility !== 'galactic' && contextVisibility !== 'independent') throw new TypeError(`${id}: unsupported context visibility.`);
     const lens = requireArray(data.lenses, `${id} lenses`).map(value => requireRecord(value)).find(value => value.id === data.defaultLens);
@@ -133,7 +130,7 @@ export async function prepareLensBillboards(projectRoot = process.cwd()) {
     const framingRadiusUnits = data.framingRadiusUnits;
     if (typeof framingRadiusUnits !== 'number' || !(framingRadiusUnits > 0)) throw new TypeError(`${id}: lenses need a positive framingRadiusUnits, got ${String(framingRadiusUnits)}.`);
     // The authored framing radius is what the universe hangs the bank's caption under, before any lens loads.
-    const bank = { id, payloadSha256: entry.sha256, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];
+    const bank = { id, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];
     if (volume.impostors !== undefined) {
       const impostors = requireRecord(volume.impostors, `${id} impostors`);
       const frame = requireRecord(volume.frame) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
@@ -162,8 +159,8 @@ export async function prepareLensBillboards(projectRoot = process.cwd()) {
   const atlas = await encodeLossyWebp(sharp({ create: { width: columns * CELL_PX, height: rows * CELL_PX, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
     .composite(drawn.map((bank, index) => ({ input: bank.image!, left: (index % columns) * CELL_PX, top: Math.floor(index / columns) * CELL_PX }))),
     { alphaQuality: 100, effort: 6 });
-  const metadata = { schema: 'cssearth-lens-billboards@1', atlas: { columns, rows, cellPx: CELL_PX, sha256: sha256(atlas) },
-    banks: banks.map(bank => ({ id: bank.id, payloadSha256: bank.payloadSha256, contextVisibility: bank.contextVisibility, attached: bank.attached,
+  const metadata = { schema: 'cssearth-lens-billboards@1', atlas: { columns, rows, cellPx: CELL_PX },
+    banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),
       ...(bank.view ? { billboard: { cell: drawn.indexOf(bank), radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.atlas), atlas);

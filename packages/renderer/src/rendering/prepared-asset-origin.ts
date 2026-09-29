@@ -26,19 +26,13 @@ export function preparedAssetGroupFile(group: string): string {
 const SCENE_ADDRESS = /^\/scenes\/[a-z][a-z0-9-]*\/(.+)$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 
-/** `sha256`, when the caller already carries a pin beside this address (a JSON
- * catalogue's own `sha256` field), is used ahead of the object's asset map and
- * verified against it if both are present. */
-export function resolvePreparedAssetUrl(address: string, assetOrigin: PreparedAssetOrigin | null | undefined, sha256?: string): string {
+/** The published URL of an address, from the content address the object's asset map (its inventory) records. */
+export function resolvePreparedAssetUrl(address: string, assetOrigin: PreparedAssetOrigin | null | undefined): string {
   if (!assetOrigin) return address;
   const match = SCENE_ADDRESS.exec(address);
   if (!match) return address;
   const filename = match[1]!;
-  const fromMap = assetOrigin.assets?.[filename];
-  if (sha256 !== undefined && fromMap !== undefined && sha256 !== fromMap) {
-    throw new Error(`Prepared asset hash disagreement for ${address}.`);
-  }
-  const digest = sha256 ?? fromMap;
+  const digest = assetOrigin.assets?.[filename];
   if (!digest || !SHA256.test(digest)) throw new Error(`No published asset hash for ${address}.`);
   return `${assetOrigin.origin}/runtime-assets/${digest}/${filename}`;
 }

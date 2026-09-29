@@ -14,8 +14,8 @@ import type { PreparedDepthOrder } from '@cssearth/renderer/rendering/prepared-d
 import type { SurfacePoint, SurfaceTriangle } from '@cssearth/renderer/navigation/prepared-surface-hit.ts';
 
 const runtimeRoot = fileURLToPath(new URL('', pathToFileURL(projectRoot(import.meta.url) + "/")));
-const mimasInput: unknown = JSON.parse(await readFile(join(runtimeRoot, 'src/objects/mimas/prepared/runtime.json'), 'utf8'));
-const mimasRuntime = requireObjectRuntimeDefinition(mimasInput);
+/** Mimas's prepared camera, read inside a test so an unrestored runtime skips it. */
+const mimasCamera = async () => requireObjectRuntimeDefinition(JSON.parse(await readFile(join(runtimeRoot, 'src/objects/mimas/prepared/runtime.json'), 'utf8'))).camera;
 type Plane = readonly [number, number, number, number];
 type PlaneBranch = { plane: Plane; sign: -1 | 1 };
 const point = (x: number, y: number, z: number): SurfacePoint => [x, y, z];
@@ -47,16 +47,16 @@ test('an unpartitionable surface keeps its native depth space', () => {
   assert.equal(partitionSurface([triangle, triangle, triangle], 1).groups.length, 1);
 });
 
-test('a partially separable surface cannot bypass the per-group face budget', () => {
-  const source = { camera: mimasRuntime.camera, tree: { camera: 0, scene: 0, stageClasses: [], properties: [], nodes: [{ tag: 'div', parent: -1, className: null, style: '', properties: [], attributes: {} }] }, variants: [], materials: [], viewBindings: [], animations: [], surfaceHit: { target: 0, triangles: octants.flatMap(face => Array.from({ length: 65 }, () => face)) } } satisfies PreparedPresentationDefinition;
+test('a partially separable surface cannot bypass the per-group face budget', async () => {
+  const source = { camera: await mimasCamera(), tree: { camera: 0, scene: 0, stageClasses: [], properties: [], nodes: [{ tag: 'div', parent: -1, className: null, style: '', properties: [], attributes: {} }] }, variants: [], materials: [], viewBindings: [], animations: [], surfaceHit: { target: 0, triangles: octants.flatMap(face => Array.from({ length: 65 }, () => face)) } } satisfies PreparedPresentationDefinition;
   assert.ok(partitionSurface(source.surfaceHit.triangles).groups.length > 1);
   assert.equal(prepareDepthPartitions(source, null), source);
 });
 
-test('compilation retains every original leaf and remaps selection, facing and activation ownership together', () => {
+test('compilation retains every original leaf and remaps selection, facing and activation ownership together', async () => {
   const triangles = octants.flatMap(face => Array.from({ length: 16 }, () => face));
   const node = (parent: number, className: string | null, style = ''): PreparedTree['nodes'][number] => ({ parent, className, style, tag: 'div', properties: [], attributes: {} });
-  const source = { camera: mimasRuntime.camera, tree: { camera: 0, scene: 1, stageClasses: [], properties: [],
+  const source = { camera: await mimasCamera(), tree: { camera: 0, scene: 1, stageClasses: [], properties: [],
     nodes: [node(-1, 'polycss-camera'), node(0, 'polycss-scene source-scene'), node(1, 'body'),
       ...triangles.map((_, i) => node(2, null, `transform:translateZ(${i}px)`)), node(-1, 'overlay')] },
     surfaceHit: { target: 2, triangles },

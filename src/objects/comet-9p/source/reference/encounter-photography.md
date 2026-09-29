@@ -43,7 +43,7 @@ Only two detector translation parameters are fitted. Attitude, intrinsics, sourc
 | 9000680 | 128×128 | 5.893 m/pixel | 9000673 | 10 / 12 | 0.299 / 0.561 pixels |
 | 9000688 | 128×128 | 3.123 m/pixel | 9000680 | 11 / 12 | 0.532 / 0.737 pixels |
 
-The checked-in controls bind each reference image and its camera record by SHA-256. Preparation reprojects reference controls, rechecks original-mesh visibility and recalculates both partitions’ residuals. References must already have qualified earlier in the same mosaic. These small **relative** residuals inherit the limb anchor’s placement and the coarse shape’s uncertainty; they do not establish meter-accurate positions or a measured impact-site terrain model.
+The checked-in controls bind each reference image and its camera record by path. Preparation reprojects reference controls, rechecks original-mesh visibility and recalculates both partitions’ residuals. References must already have qualified earlier in the same mosaic. These small **relative** residuals inherit the limb anchor’s placement and the coarse shape’s uncertainty; they do not establish meter-accurate positions or a measured impact-site terrain model.
 
 Reproduce the records with `node packages/bake/authoring/comet-9p/prepare-closeups.mts` (verification) or the same command with `--write` (regeneration). The pinned recipe is [preparation/closeups.json](../preparation/closeups.json). The eight native FITS images, labels, controls and acquisition URLs are in [manifest.json](../manifest.json).
 

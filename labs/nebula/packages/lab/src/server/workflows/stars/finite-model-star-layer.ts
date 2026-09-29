@@ -8,13 +8,11 @@
  * provenance prose; nothing about a single body belongs here.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { sha256 } from '@cssearth/core/node';
 import { basename, dirname, resolve } from 'node:path';
 import { sampleJointDepth } from '@cssearth/nebula-reconstruction/stars/joint-depth';
 import { prepareStarPhotometry, rayToOverlayPlane, type PreparedLmcStar, type PreparedLmcStars, parsePreparedLmcStars } from '@cssearth/bake/volume';
 import { catalogueColor } from '../../../adapters/sources/stellar-color.ts';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
-import { implementationPins } from '../../services/implementation.ts';
 import { finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
 
 /** Published Johnson V limit of every finite-model star layer. */
@@ -22,12 +20,6 @@ export const MAGNITUDE_LIMIT = 16;
 /** Model-owned external index beside the lens bundle; discovery reads exactly this path. */
 export const finiteModelStarsIndex = (modelResultId: string) => `.local/nebula-lab/finite-stars-${modelResultId}.json`;
 const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
-
-/** The executable owners of the shared placement, pinned into every layer's provenance. */
-export const FINITE_STAR_PLACEMENT_OWNERS = [
-  'labs/nebula/packages/lab/src/server/workflows/stars/finite-model-star-layer.ts',
-  'labs/nebula/packages/lab/src/server/workflows/stars/finite-model-star-context.ts',
-] as const;
 
 /** The published columns the shared placement needs from one catalogue row. Blank optional fields are NaN. */
 export interface CatalogueStarRow {
@@ -105,10 +97,10 @@ export function preparedStarsLayerPath(starDirectory: string, finiteLensRecipe: 
 
 /** The checked-in lens recipe names the current model; a re-fit updates it and the star command follows. */
 export async function readFiniteLensRecipe(root: string, path: string) {
-  const bytes = await readFile(resolve(root, path)), recipe: unknown = parseLabModelJson(bytes.toString());
+  const recipe: unknown = parseLabModelJson(await readFile(resolve(root, path), 'utf8'));
   if (!record(recipe) || recipe.schema !== 'cssearth-finite-lens-recipe@1' || typeof recipe.modelResultId !== 'string' ||
-      !/^[a-f0-9]{64}$/.test(recipe.modelResultId)) throw new TypeError('Invalid finite lens recipe.');
-  return { modelResultId: recipe.modelResultId, sha256: sha256(bytes) };
+      !/^[a-z0-9][a-z0-9-]*$/.test(recipe.modelResultId)) throw new TypeError(`Finite lens recipe ${path} names no model reconstruction.`);
+  return { modelResultId: recipe.modelResultId };
 }
 
 /** The lab subject that owns the model; discovery refuses a star index that names any other subject. */
@@ -119,23 +111,17 @@ export async function finiteModelSubjectId(root: string, modelResultId: string) 
   return subjectId;
 }
 
-/** Byte pins of a body's checked-in catalogue tables; a changed file stops the preparation. */
+/** A body's checked-in catalogue tables, by path; git records their bytes. */
 export async function readPinnedCatalogueFiles(root: string, sourceDirectory: string,
-  files: readonly { path: string; sha256: string; url: string }[]) {
-  return Promise.all(files.map(async entry => {
-    const bytes = await readFile(resolve(root, sourceDirectory, entry.path));
-    if (sha256(bytes) !== entry.sha256) throw new Error(`Catalogue pin changed: ${entry.path}`);
-    return { ...entry, bytes: bytes.length };
-  }));
+  files: readonly { path: string; url: string }[]) {
+  return Promise.all(files.map(async entry => ({ ...entry, bytes: (await readFile(resolve(root, sourceDirectory, entry.path))).length })));
 }
 
-/** The shared finite-model block of a layer's provenance: the model's own pins plus the placement method. */
-export async function finiteModelStarProvenance(root: string, options: {
-  context: FiniteModelStarContext; subjectId: string; lensRecipe: { path: string; sha256: string }; command: string;
+/** The shared finite-model block of a layer's provenance: the model's own files plus the placement method. */
+export async function finiteModelStarProvenance(_root: string, options: {
+  context: FiniteModelStarContext; subjectId: string; lensRecipe: { path: string }; command: string;
 }) {
-  const implementation = Object.fromEntries((await implementationPins(root,
-    [options.command, ...FINITE_STAR_PLACEMENT_OWNERS])).map(pin => [pin.path, pin.sha256]));
-  return { ...options.context.provenance, subjectId: options.subjectId, lensRecipe: options.lensRecipe, implementation,
+  return { ...options.context.provenance, subjectId: options.subjectId, lensRecipe: options.lensRecipe, command: options.command,
     method: FINITE_STAR_METHOD, coordinates: FINITE_STAR_COORDINATES, support: FINITE_STAR_SUPPORT };
 }
 
@@ -151,8 +137,8 @@ export async function writeFiniteModelStarLayer(root: string, options: {
   await mkdir(dirname(resolve(root, options.output)), { recursive: true });
   await writeFile(resolve(root, options.output), bytes);
   const index = { schema: 'cssearth-finite-model-stars@1', modelResultId: options.context.modelResultId,
-    subjectId: options.subjectId, stars: { path: options.output, sha256: sha256(bytes) } };
+    subjectId: options.subjectId, stars: { path: options.output } };
   const indexPath = finiteModelStarsIndex(options.context.modelResultId);
   await writeFile(resolve(root, indexPath), JSON.stringify(index, null, 2) + '\n');
-  return { index: indexPath, sha256: index.stars.sha256 };
+  return { index: indexPath };
 }

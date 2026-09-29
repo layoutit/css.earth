@@ -9,10 +9,9 @@ density product, not a new measurement.
 The source is [Zenodo record 10658339](https://zenodo.org/records/10658339),
 [DOI 10.5281/zenodo.10658339](https://doi.org/10.5281/zenodo.10658339),
 released under CC-BY-4.0. The record's `mean_and_std_xyz.fits` is 15,662,543,040
-bytes and declares MD5 `13ddd81b5e35e01582b74e0ec8db0fe5`. This restore does
-not download the whole parent, so it cannot independently verify that whole-file
-MD5. It validates HTTP 206, every requested `Content-Range`, response/part
-lengths, and the pinned parent byte total instead.
+bytes. This restore does not download the whole parent. It validates HTTP 206,
+every requested `Content-Range`, response/part lengths, and the pinned parent
+byte total.
 
 Its two parent image arrays are uncompressed big-endian float32 FITS cubes with
 `NAXIS1=NAXIS2=NAXIS3=1251`; their bytes begin at offsets 5,760 (`MEAN`) and
@@ -42,8 +41,7 @@ output/toolchains/astroquery/env/bin/python packages/telescope-cli/src/examples/
 ```
 
 The command refuses a different Astroquery/Astropy environment and refuses to
-overwrite output. A successful restoration is exactly 7,087,680 bytes with
-SHA-256 `c4338d130262e349b41951edbdf18b5fcb064ae9f6d0b1ba0d688c20627abd33`.
+overwrite output. A successful restoration is exactly 7,087,680 bytes.
 It uses one ordinary contiguous `Range: bytes=start-end` request for each
 selected Z plane. Each response is about 480 KB, and it reports bounded
 progress after each cumulative 10 MB. The plane range deliberately includes the

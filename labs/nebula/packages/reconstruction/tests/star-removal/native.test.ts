@@ -23,7 +23,7 @@ test('configured worker gets its exact request and reports process failure witho
     const script = join(directory, 'worker.ts'), result = join(directory, 'request.json');
     await writeFile(script, "import {writeFileSync} from 'node:fs';let s='';process.stdin.on('data',b=>s+=b);process.stdin.on('end',()=>{const r=JSON.parse(s);writeFileSync(r.outputDirectory+'/request.json',s);process.exit(r.model.path==='fail'?2:0);});");
     const request: NativeRemovalRequest = { schema: 'cssearth-star-removal@1', operation: 'apply',
-      source: { path: '/source', sha256: 'a'.repeat(64), nativeDimensions: [2, 1] },
+      source: { path: '/source', nativeDimensions: [2, 1] },
       model: { path: '/model' }, outputDirectory: directory };
     const execution = { executable: process.execPath, script, cwd: directory };
     await runNativeRemoval(request, execution);

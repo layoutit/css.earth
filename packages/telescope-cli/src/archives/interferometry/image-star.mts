@@ -25,7 +25,6 @@
  *    author-derived image already shipped.
  *
  * Nights calibrate into <work>/nights/<date>. The result is verdict.json in the work directory. */
-import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -130,7 +129,7 @@ const exists = (path: string) => access(path).then(() => true, () => false);
 export const TWIN_SCALES: readonly number[] = [0.98, 0.99, 1, 1.01, 1.02];
 const repository = WORKSPACE;
 
-interface Progress { calibrated: Record<string, string[]>; runs: Record<string, SqueezeFit & { seconds: number; inputs: string }> }
+interface Progress { calibrated: Record<string, string[]>; runs: Record<string, SqueezeFit & { seconds: number; recipe: string }> }
 
 export async function imageStar(seasonDirectory: string, work: string, rawDirectory: string, { calibrated }: { calibrated?: readonly string[] } = {}) {
   const season = parseSeason(JSON.parse(await readFile(resolve(seasonDirectory, 'season.json'), 'utf8')) as unknown);
@@ -168,6 +167,9 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
 
   // 3. Size.
   const rows = readChannelRows(selected.bytes), disc = fitUniformDisc(rows, { referenceMas: season.referenceDiameterMas });
+  // What the previous runs read, kept before this run rewrites it: a run is reused only when its inputs are byte for byte these.
+  const previous = async (name: string) => readFile(resolve(work, `${name}.fits`)).catch(() => null);
+  const previousStart = await previous('start');
   await writeFile(resolve(work, 'start.fits'), discStartImage(disc.diameterMas, season.recipe.pixelMas, season.recipe.width));
 
   // 4. Twins.
@@ -178,16 +180,17 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
   const inputs: Record<string, Buffer> = { season: selected.bytes };
   for (const scale of new Set([1, ...season.twinScales])) inputs[twinName(scale)] = scale === 1 ? spotless : twin(scale);
   for (const half of ['even', 'odd'] as const) { inputs[half] = selectOifits(selected.bytes, { half }).bytes; inputs[`${half}-spotless`] = selectOifits(spotless, { half }).bytes; }
+  const previousInputs = new Map(await Promise.all(Object.keys(inputs).map(async name => [name, await previous(name)] as const)));
   for (const [name, bytes] of Object.entries(inputs)) await writeFile(resolve(work, `${name}.fits`), bytes);
 
   // 5. Reconstruct, one run at a time.
   // A run is reused only when its data, start image and recipe are the ones it was made from.
-  const start = await readFile(resolve(work, 'start.fits'));
+  const start = await readFile(resolve(work, 'start.fits')), recipe = JSON.stringify(season.recipe);
   for (const [name, bytes] of Object.entries(inputs)) {
-    const key = createHash('sha256').update(bytes).update(start).update(JSON.stringify(season.recipe)).digest('hex');
-    if (progress.runs[name]?.inputs === key && await exists(resolve(work, `${name}-image.fits`))) continue;
+    const same = progress.runs[name]?.recipe === recipe && previousStart?.equals(start) === true && previousInputs.get(name)?.equals(bytes) === true;
+    if (same && await exists(resolve(work, `${name}-image.fits`))) continue;
     const { fit, seconds } = await runSqueeze(resolve(work, `${name}.fits`), resolve(work, 'start.fits'), `${name}-image`, season.recipe);
-    progress.runs[name] = { ...fit, seconds, inputs: key };
+    progress.runs[name] = { ...fit, seconds, recipe };
     await save();
   }
 

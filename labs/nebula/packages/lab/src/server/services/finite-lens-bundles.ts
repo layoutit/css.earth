@@ -1,14 +1,13 @@
 /** Discover the baked image lenses of the newest finite model owned by one lab subject. */
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { parsePreparedLmcStars, type DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 
 export const finiteLensDirectory = '.local/nebula-lab';
 const reconstructions = `${finiteLensDirectory}/reconstructions`;
-const bundleName = /^finite-lenses-([a-f0-9]{64})\.json$/;
-const token = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+const bundleName = /^finite-lenses-([a-z0-9][a-z0-9-]*)\.json$/;
+const token = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(value);
 const imageId = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9-]+$/.test(value);
 
 export interface FiniteLensBundle {
@@ -46,7 +45,7 @@ const relativeFile = (value: unknown): value is string => typeof value === 'stri
   !value.split(/[\\/]/).includes('..') && !/[\u0000-\u001f?#]/.test(value);
 /**
  * Optional image-independent star layer of one model, written by its star preparation command beside the lens index.
- * The pinned file must name this model and share its physical frame; every lens then references the same prepared stars.
+ * The named file must name this model and share its physical frame; every lens then references the same prepared stars.
  */
 export async function finiteModelStarsPath(root: string, subjectId: string, modelResultId: string): Promise<string | undefined> {
   const text = await readFile(resolve(root, finiteLensDirectory, `finite-stars-${modelResultId}.json`), 'utf8').catch((error: NodeJS.ErrnoException) => {
@@ -55,12 +54,12 @@ export async function finiteModelStarsPath(root: string, subjectId: string, mode
   if (text === null) return undefined;
   const value: unknown = JSON.parse(text);
   const stars = value && typeof value === 'object' ? Reflect.get(value, 'stars') : undefined;
-  const path = stars && typeof stars === 'object' ? Reflect.get(stars, 'path') : undefined, pin = stars && typeof stars === 'object' ? Reflect.get(stars, 'sha256') : undefined;
+  const path = stars && typeof stars === 'object' ? Reflect.get(stars, 'path') : undefined;
   if (!value || typeof value !== 'object' || Reflect.get(value, 'schema') !== 'cssearth-finite-model-stars@1' ||
-      Reflect.get(value, 'modelResultId') !== modelResultId || Reflect.get(value, 'subjectId') !== subjectId || !relativeFile(path) || !token(pin))
-    throw new TypeError('Finite model star index differs from its model and subject.');
+      Reflect.get(value, 'modelResultId') !== modelResultId || Reflect.get(value, 'subjectId') !== subjectId || !relativeFile(path) ||
+      Object.keys(stars ?? {}).join() !== 'path')
+    throw new TypeError(`Finite model star index finite-stars-${modelResultId}.json must name model ${modelResultId}, subject ${subjectId} and stars.path only.`);
   const bytes = await readFile(resolve(root, path));
-  if (createHash('sha256').update(bytes).digest('hex') !== pin) throw new TypeError('Finite model stars changed after their index was written; re-run the star preparation.');
   const provenance: unknown = JSON.parse(await readFile(resolve(root, reconstructions, modelResultId, 'source/provenance.json'), 'utf8'));
   const request = provenance && typeof provenance === 'object' ? Reflect.get(provenance, 'request') : undefined;
   const frame = request && typeof request === 'object' ? Reflect.get(request, 'frame') : undefined;
@@ -73,8 +72,8 @@ export async function finiteModelStarsPath(root: string, subjectId: string, mode
 }
 
 /**
- * Bundles are ordered by the completion time of their immutable model result (its hash-addressed
- * directory is published once), then by the bundle's own write time. A re-fitted model therefore wins
+ * Bundles are ordered by the completion time of their model result (each named model directory is
+ * replaced whole when it is re-fitted), then by the bundle's own write time. A re-fitted model therefore wins
  * as soon as its lens index exists, and re-baking an older model's lenses cannot displace it.
  * A bundle is used only if every lens validates, belongs to the requested subject and names that model.
  */

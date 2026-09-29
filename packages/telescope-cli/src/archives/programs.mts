@@ -41,8 +41,8 @@ export function archivePrograms(archive: MovedArchive): ArchivePrograms {
 }
 
 /** Archives that moved beside their code as a whole folder, programs or not. The interferometry toolchain descriptor names the
- * ROTIR Julia environment by its repository path, and that descriptor's text is hashed into the digest an installed toolchain
- * records, so it keeps the path it was written with. */
+ * ROTIR Julia environment by its repository path, and an installed toolchain keeps that descriptor's text, so it keeps the
+ * path it was written with. */
 export type MovedArchiveFolder = 'interferometry';
 const MOVED_FOLDERS: readonly MovedArchiveFolder[] = ['interferometry'];
 

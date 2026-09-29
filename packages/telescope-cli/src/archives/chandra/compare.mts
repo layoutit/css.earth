@@ -24,7 +24,7 @@ import { access, readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { FitsHeader } from '@cssearth/fits';
-import { addProductEvidence, readProductRecord, runDigest, WORKSPACE } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductRecord } from '@cssearth/telescope';
 import { chandraFile, observationMode, PROGRAMS, type ChandraFile } from './archive.mts';
 import { column, eventColumn, eventTable, gunzipFile, requireEventColumn, scalar, type EventTable } from './events.mts';
@@ -231,9 +231,9 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
       schema: 'cssearth-chandra-reproduction@2', program: id, obsid, product: name.replace(/\.fits$/u, ''),
       instrument: `${entry.instrument}/${entry.detector}`, grating: entry.grating, dataMode: observationMode(entry),
       target: entry.targetName, toolchain: 'packages/telescope-cli/src/archives/chandra/toolchain.json',
-      // Where the versions below come from: the record the reprocessing run wrote beside its event list, and the digest of that
-      // run. Nothing here is read from the software installed on the machine that ran this comparison.
-      productRecord: { file: recordPath.slice(run.length + 1), runDigest: runDigest(made.record) },
+      // Where the versions below come from: the record the reprocessing run wrote beside its event list. Nothing here is read
+      // from the software installed on the machine that ran this comparison.
+      productRecord: { file: recordPath.slice(run.length + 1) },
       reprocessedWith: { ciao: made.ciao, caldb: made.caldb },
       archive: { ...pinned, ...cards(theirs.table.hdu.header, RUN_CARDS) },
       local: { name: written[0]!, bytes: ours.bytes.length, ...cards(ours.table.hdu.header, RUN_CARDS) },

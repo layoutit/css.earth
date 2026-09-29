@@ -4,7 +4,6 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { gunzipSync, gzipSync } from "node:zlib";
-import { createHash } from "node:crypto";
 import { replayCompactSampled } from "./compact-sampled.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
 import { maximumPlanningEmission, prepareCompactSampledInputs } from '@cssearth/bake/volume/node';
@@ -58,7 +57,7 @@ test('retained sampled loader rejects a renamed scene before reading particles o
   const root = await mkdtemp(join(tmpdir(), 'nebula-retained-sampled-'));
   try {
     const value: unknown = JSON.parse(gunzipSync(await readFile('src/objects/m1/source/compact/model.json.gz')).toString());
-    assert.ok(jointRecord(value)); value.sourceResult = '0'.repeat(64);
+    assert.ok(jointRecord(value)); value.sourceResult = 'another-result';
     const bytes = gzipSync(Buffer.from(JSON.stringify(value))), path = 'input.json.gz';
     await writeFile(join(root, path), bytes);
     await assert.rejects(prepareCompactSampledInputs(root,

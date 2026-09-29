@@ -2,148 +2,94 @@
   "schema": "cssearth-jiram-mosaic-receipt@1",
   "recipe": "IO_JIRAM_M_PJ58",
   "side": "night",
-  "kernels": {
-    "src/spice/juno/lsk/naif0012.tls": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
-    "src/spice/juno/pck/pck00011.tpc": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-    "src/spice/juno/sclk/JNO_SCLKSCET.00211.tsc": "8bbb70ddb8cd9d81d63834cab39f146ad485b048eb0bf454054d72b268b2642f",
-    "src/spice/juno/fk/juno_v12.tf": "12a30da08609c1cd1b631b93910b4b6f4114380a761aafabbef077368860ef02",
-    "src/spice/juno/ik/juno_jiram_v02.ti": "814c98849618c1f497960d2babf91152bee02de47dec06981fb90d6d8985185a",
-    "src/spice/juno/spk/spk_rec_240118_240221_240226.bsp": "dc6434698cb841f9e2eb6cb3a76fbeeb5d57d95e388eb15d4cd7cbec96d35afb",
-    "src/spice/juno/spk/jup363.bsp": "9f09603885e191ad5f4a0edcd6334116df616e125610a38a3891bdfb6ac27dad",
-    "src/spice/juno/ck/juno_sc_rec_240128_240203_v01.bc": "487bdffc3331aee48c58cab4343065fc51cc7e1b8bb7c65c13bf2ebdefaeff1c"
-  },
   "inputs": [
     {
       "productId": "JIR_IMG_RDR_2024034T174736_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "90806204d1091d8055806d8969222910179436bad37979f8b82359f2b0b91934",
-      "labelSha256": "8e8cc1570cb2aec793bc54b47a3e519bdafc131abc26276cacd3cf9436edae70"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T174806_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "bf815ff5f61ff58586c59041fefbdcc32d7ec4e3771e9f10cc2eca3fc0618a47",
-      "labelSha256": "86bed77aab77d3349d2a5413105050fffe71b4ea6c77c89a3c0817c8e08f9bed"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T174837_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "0a5593c0f8f51721082700289448bf9e02bb51f6cb693384e1d9431b6d947dbe",
-      "labelSha256": "2043e10036df27829fd2285877d4ff9067558c242cbca7acc4af28d89c069847"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T174907_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "1ef57df63cac0fc2cf3580dbddb5df6ffbb283830d6bc543333729300f6703f8",
-      "labelSha256": "27737dbf2d3ce5abe07eba6f067ce2d34557815d7a700c562ef271e0eb3158c7"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T174938_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "8ad30eb4d248088b3eb798911b564336f6ba99bd37215f5e23d7f27e615a0e21",
-      "labelSha256": "929136cace436f4dac39b375b7ff3b428a40de0a2d80f96547a8043085085664"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175008_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "53f589a43e5e33e9096d9436d0f6157d8912edc33c1253addaf26b8ac8d15ab0",
-      "labelSha256": "755d9b8be9a0fd29e4b678f1ca0662d1d3d58a0980227eff97cc79980189c063"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175039_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "96114e4bc8cb3de9db2044f23de61c6edeec26db9801d4f56b3f2f9d45f7cdb2",
-      "labelSha256": "177370de3dd68f42b38b23eb14c38170c42ab17607ed6a6ec7542614d934c151"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175109_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "01230694eeaa928738a420320b83e0031eab9322393db2848d342a534c77143a",
-      "labelSha256": "f6b86240a88e1901497f68c77f6f83c8c5d88ad397574fdc4652ba20a46fc38b"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175140_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "40a8c900a05d34af97d1e9d3416947f2dd0d5ed39e7c9e8b81c66e16eb4bd030",
-      "labelSha256": "7c892900a4f21b8565b4aca39cf18f362a27551637bbdc896be58f9d8b375e6e"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175210_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "be79571451245d418ea34b321d8dca5ff398fb2a537031eb6a56129c13500083",
-      "labelSha256": "d898c0eb294a5ea5ed640de4370d72b9c37ffaf52ea5458be316105322e24c80"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175241_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "752b123e6da76c542d87b431a6266d45f6ead39a0e75d34bfca1bbb01e8d222f",
-      "labelSha256": "726d8534f13c7b0ba943a037039237e4fbb3480ebec53ab9c41d110c96cbe939"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175311_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "f93d4b44598b9d43e68cedb75305fe15015fe62b3fd2202981f71dd805fc911a",
-      "labelSha256": "ebda6201d592361fe049c415fb87b2640c15e8c934a4d76caa9a443e449bc8d8"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175342_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "790fafd9ee021bdb1442909d687c5547b9e970ef8dc8b0c8c54445498477c958",
-      "labelSha256": "521ebec6babc3474f7e0ade3b896d95c11086bcba96348e089d5b77ba2c0d120"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175412_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "a8d80410c18a30d97d8094a96c72c4ab4e0a4e0414e6112100b1b5a632196e71",
-      "labelSha256": "7cffa6a2a57bd549ef058598ba7f8d15bb0928dd720ce062ae56483e9a13c7db"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175443_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "4dc8122618c23acdc7990a53e35b511f21012af3a2f96690c9e93ff73bef8290",
-      "labelSha256": "1ed05b34e2a6eac3acf563bbfc3b1098cfb47b5e326b9e393a46e3e092c343e7"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175513_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "602b1fe24f509bf0d11c433a70b6e9c1d67213cf137bcbc570c975b66316744b",
-      "labelSha256": "9375ca31e49d23a16170901b8be90e5ba72c5fc015b637a6ddaca22bd492fe25"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175543_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "28b254ce6b4c69be8b1f339ea3843d800e91d43c85df4baa9e1b94170530b8f6",
-      "labelSha256": "bf13dea27f6dd4af224b78b2940861e4122c9df1f1bcf16b8603613a8b3b1524"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175614_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "fbda0357552f1f115019257ee8fcd1681e372fec44561c4c3876eef6ea57d136",
-      "labelSha256": "0b7eb1c7eaa1556d28419081381fe3a705bc6fc4b8a0d947f6fe38f6a9797be4"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175644_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "27cf9f3f66f72eed9deaa7a9970e2c47f4bad602cf37f8ec7267b3929fe72d9a",
-      "labelSha256": "05174f7312280b5d7879b1f08d7c106417f459751fe4cffc389e0c14384a6893"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175715_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "e060ebd41834abf0f5e3f9b558cf7730ee869ae482e459a1eaa923f1de466986",
-      "labelSha256": "963d548b9912d92440f1f33ce2f80c2df305050b7b6d208dd374e50b98e9fa16"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175745_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "d0cebd6b7d7c60c731ea5b359d7310a35f6a5ef37204b0a87de34b8f18cb88a0",
-      "labelSha256": "ffc50b03773b0aaa30f74834b86e32a038df0843ea130ac126e0a0bbedaf30a5"
+      "volume": "jnojir_2058"
     },
     {
       "productId": "JIR_IMG_RDR_2024034T175816_V01",
-      "volume": "jnojir_2058",
-      "imageSha256": "a2d2821a785ba49257242ec6cc3055815eb2e3da56653167fe76ba0cfa23c136",
-      "labelSha256": "5c2b920ca971596ea629fee44ff785e6fa45f4b133d4b7e877c222a2b32a1ba6"
+      "volume": "jnojir_2058"
     }
   ],
   "radiiKm": [

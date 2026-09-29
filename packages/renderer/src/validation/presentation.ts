@@ -203,19 +203,20 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
     for (const value of frame) if (!ancestor(nodeReference(value, tree), tree.scene, tree)) fail('motion frame must belong to scene');
   }
   if (plan.destinations !== undefined) {
-    const destinations = record(plan.destinations, 'destinations', ['catalog', 'defaultLens', 'statuses']), catalog = record(destinations.catalog, 'destination catalog');
-    if (!text(catalog.url, 'catalog URL').startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(catalog.sha256, 'catalog hash')) || !lensIds.includes(text(destinations.defaultLens, 'destination lens'))) fail('destinations require pinned catalog and declared lens');
+    const destinations = record(plan.destinations, 'destinations', ['catalog', 'defaultLens', 'statuses']);
+    const catalog = record(destinations.catalog, 'destination catalog', ['url', 'bytes', 'count', 'sourcePage', 'license', 'snapshotDate']);
+    if (!text(catalog.url, 'catalog URL').startsWith('/scenes/') || !lensIds.includes(text(destinations.defaultLens, 'destination lens'))) fail('destinations require a /scenes/ catalog and a declared lens');
     integer(catalog.bytes, 'catalog bytes', 1); integer(catalog.count, 'catalog count', 1);
     const statuses = record(destinations.statuses, 'destination statuses', ['detail', 'overview']); text(statuses.detail, 'detail status'); text(statuses.overview, 'overview status');
   }
   if (plan.features !== undefined) requireSurfaceFeatures(plan.features, tree, lensIds);
 }
 
-/** Prepared nomenclature labels: a pinned catalogue anchored to one scene mesh, shown for declared lenses. */
+/** Prepared nomenclature labels: a prepared catalogue anchored to one scene mesh, shown for declared lenses. */
 export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensIds: readonly string[]): void {
   const features = record(value, 'surface features', ['catalog', 'selection', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits', 'surfaceEllipsoidUnits']);
-  const catalog = record(features.catalog, 'surface feature catalog', ['url', 'bytes', 'sha256', 'count']);
-  if (!text(catalog.url, 'feature catalog URL').startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(catalog.sha256, 'feature catalog hash'))) fail('surface features require a pinned catalogue');
+  const catalog = record(features.catalog, 'surface feature catalog', ['url', 'bytes', 'count']);
+  if (!text(catalog.url, 'feature catalog URL').startsWith('/scenes/')) fail(`surface feature catalog ${String(catalog.url)} must be a /scenes/ address`);
   integer(catalog.bytes, 'feature catalog bytes', 1); integer(catalog.count, 'feature catalog count', 1);
   if (features.selection !== undefined) {
     const selection = record(features.selection, 'surface feature selection', ['count', 'banks']);
@@ -225,9 +226,9 @@ export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensI
     let found = 0;
     const urls: string[] = [];
     for (const [index, value] of banks.entries()) {
-      const bank = record(value, `surface feature selection bank ${index}`, ['url', 'bytes', 'sha256', 'count']);
+      const bank = record(value, `surface feature selection bank ${index}`, ['url', 'bytes', 'count']);
       const url = text(bank.url, 'feature selection bank URL');
-      if (!url.startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(bank.sha256, 'feature selection bank hash'))) fail('surface feature selection requires pinned banks');
+      if (!url.startsWith('/scenes/')) fail(`surface feature selection bank ${index} ${url} must be a /scenes/ address`);
       integer(bank.bytes, 'feature selection bank bytes', 1); found += integer(bank.count, 'feature selection bank count', 1); urls.push(url);
     }
     unique(urls, 'surface feature selection bank URLs');

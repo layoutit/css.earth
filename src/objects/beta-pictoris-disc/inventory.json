@@ -3,19 +3,19 @@
   "assets": [
     {
       "location": "public",
-      "filename": "datasets/1092ca8d84b849fa87ec2013e574a943665f1154feef4326beb0c984b47e042b.webp",
+      "filename": "datasets/colour.webp",
       "bytes": 5534,
       "sha256": "1092ca8d84b849fa87ec2013e574a943665f1154feef4326beb0c984b47e042b"
     },
     {
       "location": "public",
-      "filename": "datasets/7215dab7d7bb3435ffab69b08c938e82220a05ae1f588b900bdf239aee3afc8d.webp",
+      "filename": "datasets/contrast.webp",
       "bytes": 4522,
       "sha256": "7215dab7d7bb3435ffab69b08c938e82220a05ae1f588b900bdf239aee3afc8d"
     },
     {
       "location": "public",
-      "filename": "datasets/fe5c9bdd24b74de35ba12fb1fc286d31e156f75c5e0f9d3b11bc9f07765a843d.webp",
+      "filename": "datasets/visible.webp",
       "bytes": 1562,
       "sha256": "fe5c9bdd24b74de35ba12fb1fc286d31e156f75c5e0f9d3b11bc9f07765a843d"
     },
@@ -370,26 +370,20 @@
     {
       "location": "prepared",
       "filename": "delivery.json",
-      "bytes": 583,
-      "sha256": "e253ac8209db8f272cbf1e1b84a5aeb7e7a0807044557f4ad742b8e92e7da714"
+      "bytes": 2935,
+      "sha256": "b5987b244415602af5b12e870ed086ece902a69bc261d402cfdd644640dcae35"
     },
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 973766,
-      "sha256": "f8c28aa3a8954953e64efe6642a59f590359a0988ef7ad4641ab5741965a7b04"
+      "bytes": 960524,
+      "sha256": "386adccb6d8541a01912b0ae4be21dde171f2ff0b5d1d7081a7b3bce106cae4a"
     },
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 9869,
-      "sha256": "78398f2c9b0985ec20f4a81cd351c88ec1685693955ff05be7423895c728edde"
-    },
-    {
-      "location": "prepared",
-      "filename": "provenance.json",
-      "bytes": 42340,
-      "sha256": "1f3b354470dcaf01af123e05f6f2c68d67fd293d0df2d7a5fe62cf665cc1c0c9"
+      "bytes": 9527,
+      "sha256": "cf529f0f030e9a207743dd3f2f5f2e4e90ec36d3deb2e80eb56c458e0a7936a7"
     },
     {
       "location": "prepared",

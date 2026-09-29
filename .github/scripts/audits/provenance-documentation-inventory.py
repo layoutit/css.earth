@@ -3,7 +3,6 @@
 import argparse
 import collections
 import datetime
-import hashlib
 import json
 import re
 import subprocess
@@ -82,7 +81,7 @@ def summarize(label, entries):
         ext = '.tar.gz' if p.endswith('.tar.gz') else Path(p).suffix.lower()
         extensions[ext][p] = v
         duplicates[v['oid']].append(p)
-    selected = {p for p in entries if re.fullmatch(r'src/objects/[^/]+/(object|source/manifest|prepared/provenance)\.json', p)}
+    selected = {p for p in entries if re.fullmatch(r'src/objects/[^/]+/(object|source/manifest)\.json', p)}
     selected.update(p for p,v in docs.items() if Path(p).suffix in ('.md','.json') and v['bytes'] < 6_000_000)
     registry = next((path for path in ('site/objects.mts', 'site/objects.mjs') if path in entries), None)
     if registry is None:
@@ -90,7 +89,7 @@ def summarize(label, entries):
     selected.add(registry)
     content = blobs(entries, selected)
     registry_source = content[registry].decode()
-    if re.search(r"from ['\"]\./prepared-object-catalog\.m[jt]s['\"]", registry_source):
+    if re.search(r"from ['\"]\./prepared-(?:object-catalog\.m[jt]s|catalogue\.mjs)['\"]", registry_source):
         registry_basis = 'descriptor properties.catalog'
         registry_ids = []
         for path, raw in content.items():
@@ -112,9 +111,9 @@ def summarize(label, entries):
         raise RuntimeError(f'No registered bodies found in {label}; update registry discovery before using this inventory')
     # Read the selected Git snapshot, never execute its JavaScript or use local assets.
     manifests = [p for p in content if p.endswith('/source/manifest.json')]
-    required = ['README.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','inventory.json']
+    required = ['README.md','NOTICE.md','source/manifest.json','object.json','inventory.json']
     missing = {suffix:[i for i in registry_ids if f'src/objects/{i}/{suffix}' not in entries] for suffix in required}
-    source_counts, rights_counts, bases = collections.Counter(), collections.Counter(), collections.Counter()
+    source_counts, rights_counts = collections.Counter(), collections.Counter()
     invalid_json = []
     for p in manifests:
         m = json.loads(content[p])
@@ -126,10 +125,6 @@ def summarize(label, entries):
                 source_counts[collection+('_in_git' if present else '_outside_git')] += 1
                 if collection == 'inputs':
                     rights_counts['with_license_evidence' if item.get('licenseEvidence') else 'without_license_evidence'] += 1
-    for p in content:
-        if p.endswith('/prepared/provenance.json'):
-            m = json.loads(content[p])
-            bases[str(m.get('basis'))] += 1
     local_refs, doc_json_keys = [], collections.Counter()
     for p,raw in content.items():
         if not p.startswith('docs/'):
@@ -162,7 +157,6 @@ def summarize(label, entries):
         'registeredBodies':len(registry_ids), 'registryBasis':registry_basis, 'sourceManifests':len(manifests),
         'missingRequiredFilesByRegisteredBody':missing,
         'sourceEntries':dict(source_counts), 'sourceLicenseEvidenceField':dict(rights_counts),
-        'preparedProvenanceBasis':dict(bases),
         'provenanceCoverageMeasurement':'Not measured in this snapshot; no all-body coverage-gap claim.',
         'docJsonTopLevelKeys':dict(doc_json_keys.most_common(30)),
         'docsWithLocalReferences':len(local_refs),'localReferenceExamples':local_refs[:25],
@@ -181,7 +175,6 @@ for ref in args.ref:
     snapshots.append(result)
 if args.index:
     result = summarize('index', index_tree(initial_index))
-    result['lsFilesStageSha256'] = hashlib.sha256(initial_index).hexdigest()
     snapshots.append(result)
 report = {
     'schema':'cssearth-provenance-documentation-inventory@1',
@@ -193,4 +186,4 @@ report = {
 }
 Path(args.output).write_text(json.dumps(report,indent=2)+'\n')
 for s in snapshots:
-    print(json.dumps({k:s[k] for k in ('label','gitBlobTotals','docs','registeredBodies','registryBasis','sourceManifests','sourceEntries','preparedProvenanceBasis','bodyEntryPoints','docsWithLocalReferences','duplicateDocWorkingBytes')}))
+    print(json.dumps({k:s[k] for k in ('label','gitBlobTotals','docs','registeredBodies','registryBasis','sourceManifests','sourceEntries','bodyEntryPoints','docsWithLocalReferences','duplicateDocWorkingBytes')}))

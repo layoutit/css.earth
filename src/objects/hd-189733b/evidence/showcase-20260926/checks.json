@@ -296,23 +296,19 @@
     "screenshots": [
       {
         "file": "desktop-uncertainty.png",
-        "bytes": 442553,
-        "sha256": "bef2265e3add6861c943f1a6adc31cbcc04a4b39acb1b55d01d501752f476ee7"
+        "bytes": 442553
       },
       {
         "file": "desktop-charts.png",
-        "bytes": 456033,
-        "sha256": "278a5f8e95100395b1b569231b0398ce035f12dbf71f600b26470dd159c86005"
+        "bytes": 456033
       },
       {
         "file": "mobile-reflected-light.png",
-        "bytes": 48311,
-        "sha256": "c89e4a031399f616248883c454338ebdcc46a8bfabfc006ea4ba22ef2c7aafb5"
+        "bytes": 48311
       },
       {
         "file": "mobile-transmission.png",
-        "bytes": 65402,
-        "sha256": "7ca23ec5bf0e09257e07296488fb829c68056bf16daaea2a00449ff700c2a4d0"
+        "bytes": 65402
       }
     ],
     "chartDom": {
@@ -376,8 +372,7 @@
       "Sun magnetic lens does not match the legacy CSS override selector."
     ],
     "inputsCompared": 683,
-    "comparison": "Every CSS file read by this test, the test itself and the Sun content are byte-identical to the base commit.",
-    "combinedInputSha256": "42f53f51454421b98852fa76f7d5d1a0f289932e0dd6eb63645ed4ce9bdf06cc"
+    "comparison": "Every CSS file read by this test, the test itself and the Sun content are byte-identical to the base commit."
   },
   "limits": [
     "Focused checks, not the full local test suite.",
@@ -388,7 +383,6 @@
   "integration": {
     "resolution": "Chart titles follow main into tools/objects/content/prepare.ts; the deleted site title module stays deleted.",
     "inventoryByteIdenticalToImplementation": true,
-    "inventorySha256": "19650c1844daf991b996bc648e0e91247668bfc15cd4108e7a5ddf0f99ac7338",
     "rerunResults": {
       "focusedTests": 28,
       "sharedPageAndDatasetTests": 19,

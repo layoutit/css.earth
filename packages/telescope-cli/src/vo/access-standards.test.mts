@@ -31,7 +31,7 @@ function descriptor(id: string, standardID: string): Resource {
   return { id, type: 'meta', utype: 'adhoc:service', parameters: [parameter('standardID', 'char', '*', null, null, standardID)], groups: [] };
 }
 function response(base: MetadataResponse, name: string, rows: readonly Readonly<Record<string, Json>>[], resources: readonly Resource[] = [], bindings: MetadataResponse['bindings'] = []): MetadataResponse {
-  return { ...base, raw: { path: `/fixture/${name}.xml`, bytes: name.length, sha256: name.padEnd(64, '0').slice(0, 64) }, effectiveUrl: `https://example.org/${name}`,
+  return { ...base, raw: { path: `/fixture/${name}.xml`, bytes: name.length }, effectiveUrl: `https://example.org/${name}`,
     rows, resources, bindings, times: rows.map(() => ({})) };
 }
 

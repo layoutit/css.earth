@@ -3,7 +3,6 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import { sourceBytes } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
 import {fitForwardModel,evaluateForwardModel,transformForwardPoint,FORWARD_PARAMETER_KEYS,
  type ForwardParameters,type ParameterBounds,type FitOptions,type ForwardFit,type ForwardEvaluation} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';
 import {fitRegionalWeights,applyRegionalWeights} from '@cssearth/nebula-reconstruction/registration/regional-density-weights';
@@ -13,7 +12,7 @@ function parameters(value:unknown):ForwardParameters{const p=record(value);const
 function bounds(value:unknown):ParameterBounds{const p=record(value);const entries=FORWARD_PARAMETER_KEYS.map(k=>{const v=p[k];if(!Array.isArray(v)||v.length!==2)throw new TypeError('Missing parameter bounds');return [k,[finite(v[0]),finite(v[1])]];});return Object.fromEntries(entries) as unknown as ParameterBounds;}
 const summary=(fit:ForwardEvaluation)=>({parameters:fit.parameters,amplitude:fit.amplitude,train:fit.train,validation:fit.validation});
 export async function fitTracerDensity(recipePath:string){
- const root=process.cwd(),recipeBytes=await readFile(recipePath),config=record(JSON.parse(recipeBytes.toString('utf8')) as unknown);
+ const root=process.cwd(),config=record(JSON.parse(await readFile(recipePath,'utf8')) as unknown);
  if(config.schema!=='cssearth-tracer-forward-fit@1')throw new TypeError('Unsupported fit recipe');
  const out=string(config.outputDirectory),output=resolve(root,out);
  if(!out.startsWith('.local/nebula-lab/')||relative(resolve(root,'.local/nebula-lab'),output).startsWith('..'))throw new TypeError('Output must stay in the local cache');
@@ -67,9 +66,8 @@ export async function fitTracerDensity(recipePath:string){
   const histogram=Buffer.alloc(fullEvaluation.expected.length*4);fullEvaluation.expected.forEach((v,i)=>histogram.writeFloatLE(v,i*4));
   await writeFile(resolve(output,`${family.id}-expected.f32`),histogram);
   const result={family:family.id,...summary(best),fullParticleEvaluation:summary(fullEvaluation),regional,affineRefitSensitivity:sensitivity,searches,
-   activeBounds:best.parametersAtBounds.filter(k=>range[k][0]!==range[k][1]),particles:{path:particlePath,sha256:sha256(bytes),count:family.full.length}};
-  const codePins=await Promise.all(['labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts','labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts','labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts','labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts'].map(async path=>({path,sha256:sha256(await readFile(resolve(root,path)))})));
-  const receipt={codePins,schema:'cssearth-constrained-tracer-fit@1',recipe:{path:relative(root,resolve(recipePath)),sha256:sha256(recipeBytes)},
+   activeBounds:best.parametersAtBounds.filter(k=>range[k][0]!==range[k][1]),particles:{path:particlePath,count:family.full.length}};
+  const receipt={schema:'cssearth-constrained-tracer-fit@1',recipe:{path:relative(root,resolve(recipePath))},
    inputs:{simulation:config.simulation,catalogue:config.catalogue,footprint:config.footprint,observedReceipt:config.observedReceipt,frameObject:config.frameObject},
    simulationCenter:data.center,forwardModel:data.forward,selection:data.diagnostics,result,
    interpretation:config.interpretation,limitations:config.limitations,materialGatePassed:false,
@@ -77,7 +75,7 @@ export async function fitTracerDensity(recipePath:string){
   const receiptPath=`${out}/${family.id}-receipt.json`,receiptBytes=Buffer.from(JSON.stringify(receipt,null,2)+'\n');await writeFile(resolve(root,receiptPath),receiptBytes);
   const bakePath=`${out}/${family.id}-bake.json`;await json(resolve(root,bakePath),{
    schema:'cssearth-tracer-density@1',id:`${string(config.id)}-${family.id}`,outputDirectory:`${out}/${family.id}-volume`,
-   particles:result.particles,receipt:{path:receiptPath,sha256:sha256(receiptBytes)},frameObject:config.frameObject,
+   particles:result.particles,receipt:{path:receiptPath},frameObject:config.frameObject,
    interpretation:config.interpretation,limitations:config.limitations});
   outputs.push({...result,bakePath,receiptPath});
   console.log('FORWARD_FIT_READY',family.id,JSON.stringify({fullTrain:fullEvaluation.train.deviancePerObservedCount,fullValidation:fullEvaluation.validation.deviancePerObservedCount,parameters:best.parameters}));

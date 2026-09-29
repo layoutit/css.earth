@@ -29,4 +29,4 @@ Run of 2026-09-23 (this version):
 - **The star is unresolved.** It is 0.1 mas across. The shading comes from a transit fit and the limb from a model; no image exists ([ledger](investigations.json)).
 - **Pulsations are not drawn.** Wong et al. (2020) and Mansfield et al. (2020) find a 7.6-hour stellar variation of about 100 ppm.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

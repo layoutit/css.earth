@@ -107,6 +107,6 @@ records are the identities the telescope query passes back to the NACO qualifica
 
 ## Receipts
 
-A receipt counts only when it parses, states one of the schemas this route writes (`cssearth-naco-reproduction@1`, `cssearth-naco-spectrum@1`), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path, size and digest. A receipt that says anything else is reported here and proves nothing.
+A receipt counts only when it parses, states one of the schemas this route writes (`cssearth-naco-reproduction@1`, `cssearth-naco-spectrum@1`), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path and size. A receipt that says anything else is reported here and proves nothing.
 
 None: every receipt beside a pinned program was accepted.

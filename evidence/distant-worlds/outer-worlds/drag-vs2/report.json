@@ -1,7 +1,6 @@
 {
   "schema": "cssearth-comet-drag-trace@1",
   "capturedAt": "2026-09-10T11:53:06.424Z",
-  "worktreeDiffSha256": "1d65406b28a4f851cd90d70884c5e2c1992468c87048a6f8d73c5b8f7c0af7a4",
   "build": "development",
   "diagnosticsAvailable": true,
   "route": "http://127.0.0.1:4278/asteroid-2003-vs2/?v=MMZAmc_F8ek4Z0FCxzNAAAAAv9hWfF_zVHK_1lIfER7ILj_EKYDjX66vAAA",
@@ -115,302 +114,242 @@
   "interactionRequests": [],
   "prepared": {
     "src/planets/asteroid-2003-vs2/prepared/object.json": {
-      "bytes": 6337722,
-      "sha256": "05bb4bb2d9dbbdb2fe6a28e509b9a3c006e0f4900603ad68dc319c9c9aff57fb"
+      "bytes": 6337722
     },
     "src/planets/asteroid-2003-vs2/prepared/runtime.json": {
-      "bytes": 6337596,
-      "sha256": "8a25b0758b39be08c7ec51a77f0d5a710161f1268ede036e88b14fdbdf0877b5"
+      "bytes": 6337596
     },
     "src/planets/asteroid-2003-vs2/runtime-assets.json": {
-      "bytes": 5731,
-      "sha256": "6ab9531d3a155400117bea40b8f4ec8ef61072e2cec8192e903b204e8c69cb3b"
+      "bytes": 5731
     },
     "src/planets/asteroid-2003-vs2/prepared/terrain.json": {
-      "bytes": 221940,
-      "sha256": "bf349e2d8d89f5257ae019b57aa274603ae8bb4b9f3c5d16fd1117dd6f474f06"
+      "bytes": 221940
     }
   },
   "loaded": [
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Cartesian2__js.js?v=dc261926",
-      "bytes": 70818,
-      "sha256": "38133cb3f90070dd7154ef53381c273c0957dc7fb30bce8b6f87b6d7c7b39241"
+      "bytes": 70818
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Cartesian3__js.js?v=dc261926",
-      "bytes": 106400,
-      "sha256": "bd152100d18ec3edd96da1ff137b2b6a19c9d39b23197b4fc42fd1891c508fda"
+      "bytes": 106400
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Cartesian4__js.js?v=dc261926",
-      "bytes": 83871,
-      "sha256": "ca655d8192320c892b6320bd82f77676f78428b459277caefc85c5c81801e411"
+      "bytes": 83871
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Cartographic__js.js?v=dc261926",
-      "bytes": 1568,
-      "sha256": "0558bba79614611d8e4f72de27227f6c30d1308ddcc1e32c7b9ff42c322b77e9"
+      "bytes": 1568
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Check__js.js?v=dc261926",
-      "bytes": 1148,
-      "sha256": "53f7c17d6f4cf369cac01659f6c27aa6ea0fcf43ef48ea2612fc397137ce48de"
+      "bytes": 1148
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_CullingVolume__js.js?v=dc261926",
-      "bytes": 330279,
-      "sha256": "c1f941af66e151dac5237a56c67a28f58c62bd56192aa345ed7b01205c7f4a32"
+      "bytes": 330279
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_defined__js.js?v=dc261926",
-      "bytes": 1429,
-      "sha256": "d62d2c63d508d520c1c58458f8d82db6ce7bb91a610269412e9d2e6259e434db"
+      "bytes": 1429
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Ellipsoid__js.js?v=dc261926",
-      "bytes": 76522,
-      "sha256": "d7bba2591d7dd1715e17331e2e356be2374de7879c714d18676d060ee422babf"
+      "bytes": 76522
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Intersect__js.js?v=dc261926",
-      "bytes": 2569,
-      "sha256": "a7ff1ae3889088a8330ff5c23b382305b4adff6f50902845cc2803b157fcf54b"
+      "bytes": 2569
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_IntersectionTests__js.js?v=dc261926",
-      "bytes": 151202,
-      "sha256": "72b116493f465ac3844199f9f0dcffac18b989cab6e18ede2e94fd78764ba312"
+      "bytes": 151202
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Math__js.js?v=dc261926",
-      "bytes": 107298,
-      "sha256": "10b3cc97938720703d4f50608f0e9b69a92a8e755d368f7945498b9a62504e81"
+      "bytes": 107298
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@cesium_engine_Source_Core_Ray__js.js?v=dc261926",
-      "bytes": 7327,
-      "sha256": "4d6dd71f417475d8dea40d319f276b72406af6af6aee3bcf6da72e6ba2f0b0cf"
+      "bytes": 7327
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/@layoutit_polycss.js?v=dc261926",
-      "bytes": 1968179,
-      "sha256": "96c1b3a6c067f4bc0e64f6142267eb48be37ed2ded741b0a45e23c3d094ad06f"
+      "bytes": 1968179
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/Cartographic-Dsuh2uob.js?v=dc261926",
-      "bytes": 40893,
-      "sha256": "3cdd724c0f07d136c95b1b683dd1ef0b80c7e215cecd6e4e35ce701804d5a05e"
+      "bytes": 40893
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/Check-Ds6XX5JC.js?v=dc261926",
-      "bytes": 23055,
-      "sha256": "aaf09acd0852c9e0af0b7ac65f350bf52b9c74d561ad71adaa9826c9a0354dc1"
+      "bytes": 23055
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/Matrix3-CvvImf5_.js?v=dc261926",
-      "bytes": 161742,
-      "sha256": "dbdbd6534afa01bcc648eea0022c436bb3d20a5a0f034eb6b1a34c0e18fa9b2b"
+      "bytes": 161742
     },
     {
       "url": "http://127.0.0.1:4278/node_modules/.vite/deps/rolldown-runtime-BPOCksWG.js?v=dc261926",
-      "bytes": 6419,
-      "sha256": "c26d700603d4bfbd45cb73684e6c51a4c881bb6b0df398b9354e4b80719ababa"
+      "bytes": 6419
     },
     {
-      "url": "http://127.0.0.1:4278/objects/asteroid-2003-vs2/05bb4bb2d9dbbdb2fe6a28e509b9a3c006e0f4900603ad68dc319c9c9aff57fb.json",
-      "bytes": 6337722,
-      "sha256": "05bb4bb2d9dbbdb2fe6a28e509b9a3c006e0f4900603ad68dc319c9c9aff57fb"
-    },
-    {
-      "url": "http://127.0.0.1:4278/packages/engine/dist/index.js",
-      "bytes": 315873,
-      "sha256": "d82a3f7d9070fbdb93aa8720d24134c9b6058ff47b2849ed1ade801510f22ecf"
+      "url": "http://127.0.0.1:4278/objects/asteroid-2003-vs2/object.json",
+      "bytes": 6337722
     },
     {
       "url": "http://127.0.0.1:4278/packages/engine/dist/index.js",
-      "bytes": 315873,
-      "sha256": "d82a3f7d9070fbdb93aa8720d24134c9b6058ff47b2849ed1ade801510f22ecf"
+      "bytes": 315873
     },
     {
       "url": "http://127.0.0.1:4278/packages/engine/dist/index.js",
-      "bytes": 315873,
-      "sha256": "d82a3f7d9070fbdb93aa8720d24134c9b6058ff47b2849ed1ade801510f22ecf"
+      "bytes": 315873
     },
     {
       "url": "http://127.0.0.1:4278/packages/engine/dist/index.js",
-      "bytes": 315873,
-      "sha256": "d82a3f7d9070fbdb93aa8720d24134c9b6058ff47b2849ed1ade801510f22ecf"
+      "bytes": 315873
+    },
+    {
+      "url": "http://127.0.0.1:4278/packages/engine/dist/index.js",
+      "bytes": 315873
     },
     {
       "url": "http://127.0.0.1:4278/packages/objects/dist/index.js",
-      "bytes": 340437,
-      "sha256": "63b7efbfd884dcfe31b822c72fbff368a83584cbaf893bbd8f54daa239a4667a"
+      "bytes": 340437
     },
     {
       "url": "http://127.0.0.1:4278/packages/objects/dist/index.js",
-      "bytes": 340437,
-      "sha256": "63b7efbfd884dcfe31b822c72fbff368a83584cbaf893bbd8f54daa239a4667a"
+      "bytes": 340437
     },
     {
       "url": "http://127.0.0.1:4278/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-surface@2x.webp",
-      "bytes": 55368,
-      "sha256": "754427bd2f6830c3de98754af8928ddc0a1d2e074beb32d8b33e0809b959c377"
+      "bytes": 55368
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-4H6PHH2Y.js",
-      "bytes": 21798,
-      "sha256": "02b937d9ad6268e2f6a261862da8c60fa6143420f30b96bc4931c3eb977575c0"
+      "bytes": 21798
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-6RBIFOBP.js",
-      "bytes": 707770,
-      "sha256": "f6964f4792185da64d8dbe23fab6589984b5c6da53377588d4e2579bc004e772"
+      "bytes": 707770
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-7S73IRWW.js",
-      "bytes": 123277,
-      "sha256": "60f6bbfb71d717ffb0a4551cc45b3f370b5b61f4a57ad2226e7506fcad4c293f"
+      "bytes": 123277
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-FYAUJ7OO.js",
-      "bytes": 3355,
-      "sha256": "322a5ec1ecfe19995ed954683b6b883c8a28fba0ab9fa41cf3f7581c6b2c8bc2"
+      "bytes": 3355
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-FYAUJ7OO.js",
-      "bytes": 3355,
-      "sha256": "322a5ec1ecfe19995ed954683b6b883c8a28fba0ab9fa41cf3f7581c6b2c8bc2"
+      "bytes": 3355
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-GELTBGHK.js",
-      "bytes": 40256,
-      "sha256": "f53b78917d1a309118864cbed25145fcce37feba9c2cbd966097bb3e5c86aa8e"
+      "bytes": 40256
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-GELTBGHK.js",
-      "bytes": 40256,
-      "sha256": "f53b78917d1a309118864cbed25145fcce37feba9c2cbd966097bb3e5c86aa8e"
+      "bytes": 40256
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-GR2A6OSB.js",
-      "bytes": 126610,
-      "sha256": "7a0a37582d544477d3661c5a25dca8b7cc007551736d72faec26b6a312d6f70c"
+      "bytes": 126610
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-GR2A6OSB.js",
-      "bytes": 126610,
-      "sha256": "7a0a37582d544477d3661c5a25dca8b7cc007551736d72faec26b6a312d6f70c"
+      "bytes": 126610
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-HSWBQSU4.js",
-      "bytes": 320605,
-      "sha256": "c444b54f40a5f14407fce09f587a889d3b13406ffb89f7d6fcbc4327be8b9ec6"
+      "bytes": 320605
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-HSWBQSU4.js",
-      "bytes": 320605,
-      "sha256": "c444b54f40a5f14407fce09f587a889d3b13406ffb89f7d6fcbc4327be8b9ec6"
+      "bytes": 320605
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-IFHMFM2Z.js",
-      "bytes": 444289,
-      "sha256": "09c56369c98cd05b3e8e3e255b54a3b130dfa4205476aacec19d765b6e9e3e50"
+      "bytes": 444289
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-IFHMFM2Z.js",
-      "bytes": 444289,
-      "sha256": "09c56369c98cd05b3e8e3e255b54a3b130dfa4205476aacec19d765b6e9e3e50"
+      "bytes": 444289
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-JAMP5PAP.js",
-      "bytes": 305546,
-      "sha256": "ef3e1730766270e92ded08f16b1a756e02d8449e2ad2cb709e086cf3effd1342"
+      "bytes": 305546
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-MTDNCJBO.js",
-      "bytes": 392129,
-      "sha256": "d54d034e5a43e049132337c096a5210043de05c60df4ebeac0ca4e40cce6d979"
+      "bytes": 392129
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-TLSO4G42.js",
-      "bytes": 38201,
-      "sha256": "1a2ca29de41cadf1bce8c988e3f2f1fa658cffa50a1e814eb4a29e26541274c4"
+      "bytes": 38201
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-TLSO4G42.js",
-      "bytes": 38201,
-      "sha256": "1a2ca29de41cadf1bce8c988e3f2f1fa658cffa50a1e814eb4a29e26541274c4"
+      "bytes": 38201
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-TLSO4G42.js",
-      "bytes": 38201,
-      "sha256": "1a2ca29de41cadf1bce8c988e3f2f1fa658cffa50a1e814eb4a29e26541274c4"
+      "bytes": 38201
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-WJSCGX7B.js",
-      "bytes": 97446,
-      "sha256": "da21c5da72280a927edb73847c52f099f6fc8fc1e0b2258493e700796f19a3d2"
+      "bytes": 97446
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-WJSCGX7B.js",
-      "bytes": 97446,
-      "sha256": "da21c5da72280a927edb73847c52f099f6fc8fc1e0b2258493e700796f19a3d2"
+      "bytes": 97446
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-WMJQ67RL.js",
-      "bytes": 125554,
-      "sha256": "96f5c8cc637df03bada813487ac9a6dc553dc45d545d3b9bd705d427a4a1ae70"
+      "bytes": 125554
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-WMJQ67RL.js",
-      "bytes": 125554,
-      "sha256": "96f5c8cc637df03bada813487ac9a6dc553dc45d545d3b9bd705d427a4a1ae70"
+      "bytes": 125554
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-WMJQ67RL.js",
-      "bytes": 125554,
-      "sha256": "96f5c8cc637df03bada813487ac9a6dc553dc45d545d3b9bd705d427a4a1ae70"
+      "bytes": 125554
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-ZQMQUVRT.js",
-      "bytes": 19415,
-      "sha256": "b4ce0fa6acbf687b48996ee5b9f8418da1e42574797ee9b2f842db8cd2ce04fb"
+      "bytes": 19415
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/chunk-ZQMQUVRT.js",
-      "bytes": 19415,
-      "sha256": "b4ce0fa6acbf687b48996ee5b9f8418da1e42574797ee9b2f842db8cd2ce04fb"
+      "bytes": 19415
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/index.js",
-      "bytes": 972506,
-      "sha256": "311edfe83cec6546ef75c48212dd75b85499873ae5b20d663366c32416307ceb"
+      "bytes": 972506
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/navigation.js",
-      "bytes": 20507,
-      "sha256": "8bd5cf93a02c244b47be4237b3f77642d65d503c6f99d18471065eda2e9e945c"
+      "bytes": 20507
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/point-field-selection-worker.js?worker_file&type=module",
-      "bytes": 5148,
-      "sha256": "ecb865c26669de0d85df8976a4a0f6eec02444ade0c7ad305f5c8932bbe36301"
+      "bytes": 5148
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/prepared-object-worker.js?worker_file&type=module",
-      "bytes": 3791,
-      "sha256": "e47eb9c774d0eb774ff2045d85d5b8946b268cf8dc2b0e6924385c878dc80d2d"
+      "bytes": 3791
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/universe.js",
-      "bytes": 20169,
-      "sha256": "158232732b8756390a6bd1efae7115351501d8b072d7516e9aaca28c5b1c5813"
+      "bytes": 20169
     },
     {
       "url": "http://127.0.0.1:4278/src/renderers/css/dist/world-context-planner-worker.js?worker_file&type=module",
-      "bytes": 3936,
-      "sha256": "30e305a6d8f898b9dcee65fe28b42cad767e2c09674f1580e249ed42f1441bae"
+      "bytes": 3936
     }
   ],
   "documents": [
@@ -670,7 +609,6 @@
   },
   "trace": {
     "filename": "chrome-trace.json.gz",
-    "bytes": 5995552,
-    "sha256": "a4655f13ee465b1c4e5e7f0bbfc2a7d7f4a3207efc771e78ea041e2ed3c8093f"
+    "bytes": 5995552
   }
 }

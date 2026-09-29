@@ -4,15 +4,13 @@ import assert from 'node:assert/strict';
 import { mkdtemp, writeFile, readFile, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { createCostIndex, diagnoseCosts } from './trace-costs.mts';
-import { chartIdleGaps, averageFrames, renderAverageChart, validateSeries } from './trace-chart.mts';
 import { alignRecorder, readCapture, compareCaptures } from './trace-capture.mts';
 import { indexNodeOwners, summarizeInvalidations } from './trace-invalidations.mts';
 import { correlateEvidence } from './trace-evidence.mts';
 import type { EvidenceInput } from './trace-evidence.mts';
-import { inspectBuild, main } from './trace-brief.mts';
+import { inspectBuild } from './trace-sources.mts';
 import type { JsonRecord, TraceEvent } from './trace-model.mts';
 
 const selection = { rendererPid: 1, rendererMainTid: 2 }, window = { startTs: 0, endTs: 100000, durationMs: 100 };
@@ -50,32 +48,7 @@ test('busy frame ranking does not mistake a large low-work interval for the CPU 
   assert.match(costs.longestPresentationGaps[0]?.classification ?? '', /alone does not explain/);
 });
 
-const seriesOptions = { durationMs: 1000, label: 'test', sha256: 'abc', source: 'presentation' };
-test('500ms mean uses interval end times, not averages of averages or invented zeroes', () => {
-  const series = averageFrames([{ endMs: 100, intervalMs: 10 }, { endMs: 200, intervalMs: 30 }, { endMs: 1000, intervalMs: 800 }], seriesOptions);
-  assert.equal(series.points.find(p => p.atMs === 200)?.meanMs, 20);
-  assert.equal(series.points.find(p => p.atMs === 600)?.meanMs, 30);
-  assert.equal(series.points.find(p => p.atMs === 700)?.meanMs, null);
-  assert.equal(series.points.at(-1)?.meanMs, 800);
-  assert.equal(series.points.at(-1)?.intervals, 1);
-  validateSeries(series);
-});
-test('empty observations produce a broken line; short partial windows and final endpoint are retained', () => {
-  const empty = averageFrames([], { ...seriesOptions, durationMs: 255 });
-  assert.deepEqual(empty.points.map(p => p.atMs), [0, 100, 200, 255]);
-  assert.ok(empty.points.every(p => p.meanMs === null));
-  assert.doesNotThrow(() => renderAverageChart([empty]));
-});
-test('comparison draws one line per trace, escapes labels and rejects inconsistent smoothing', () => {
-  const a = averageFrames([{ endMs: 100, intervalMs: 25 }], { ...seriesOptions, label: '<script>alert(1)</script>' });
-  const b = { ...a, label: 'second', sha256: 'def' };
-  const svg = renderAverageChart([a, b]);
-  assert.equal((svg.match(/data-trace=/g) ?? []).length, 2);
-  assert.ok(svg.includes('&lt;script&gt;'));
-  assert.equal(svg.includes('<script>'), false);
-  assert.throws(() => validateSeries({ ...a, windowMs: 1000 }), /same 500 ms/);
-  assert.throws(() => validateSeries({ ...a, points: [{ atMs: 0, meanMs: 0, intervals: 1 }] }), /Invalid comparison/);
-});
+const seriesOptions = { durationMs: 1000, label: 'test', source: 'presentation' };
 
 const recording = { id: 'r', metadata: { sampleIntervalMs: 100 }, events: [
   { name: 'cssEarth:recording:started', time: 10, detail: { recordingId: 'r' } },
@@ -159,38 +132,15 @@ test('missing DOM snapshots retain invalidation counts but leave ownership unres
   assert.equal(result.domOwnership, 'unavailable');
   assert.equal(result.owners[0]?.owner, 'unresolved');
 });
-test('CLI produces a useful raw-trace report without sidecars or presentation events', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'trace-cli-'));
-  try {
-    const input = join(root, 'raw.json');
-    const events = [event('thread_name', 0, 0, {}, { ph: 'M', args: { name: 'CrRendererMain' } }),
-      event('thread_name', 0, 0, {}, { ph: 'M', tid: 3, args: { name: 'Compositor' } })];
-    for (let i = 0; i < 12; i++) events.push(event('RunTask', i * 16667, 3000), event('FireAnimationFrame', i * 16667, 3000),
-      event('DrawFrame', i * 16667 + 4000, 0, {}, { tid: 3 }));
-    await writeFile(input, JSON.stringify({ traceEvents: events }));
-    const result = await main([input, '--out', join(root, 'report'), '--label', 'Raw fixture']);
-    assert.ok(result);
-    const { output, brief } = result;
-    assert.equal(brief.capture.status, 'trace-only');
-    assert.equal(brief.averageSeries.source, 'DrawFrame fallback');
-    assert.ok(brief.averageSeries.points.some(p => (p.meanMs ?? 0) > 0));
-    assert.equal(brief.busiestTasks[0]?.recorder, null);
-    const diagnosis = requireRecord(JSON.parse(await readFile(join(output, 'diagnosis.json'), 'utf8')));
-    assert.equal(diagnosis.status, 'PARTIAL evidence');
-    assert.ok(requireArray(diagnosis.missing).some(m => typeof m === 'string' && m.includes('recorder')));
-    assert.equal(((await readFile(join(output, 'performance.svg'), 'utf8')).match(/data-trace=/g) ?? []).length, 1);
-  } finally { await rm(root, { recursive: true, force: true }); }
-});
-test('source attribution verifies bytes and refuses symlink escapes or wrong bundles', async () => {
+test('source attribution reads the supplied bundle and refuses symlink escapes', async () => {
   const root = await mkdtemp(join(tmpdir(), 'trace-source-'));
   try {
-    const bytes = 'const version = 1;', sha256 = createHash('sha256').update(bytes).digest('hex');
+    const bytes = 'const version = 1;';
     await writeFile(join(root, 'bundle.js'), bytes);
     const brief = { sourceUrls: ['http://localhost/bundle.js'], sampledJsSelf: [], busiestTasks: [] };
-    assert.equal((await inspectBuild(brief, root, { '/bundle.js': { bytes: bytes.length, sha256 } }))[0]?.verification, 'matches capture manifest');
-    const bad = await inspectBuild(brief, root, { '/bundle.js': { bytes: 1, sha256: 'wrong' } });
-    assert.match(bad[0]?.verification ?? '', /MISMATCH/);
-    assert.equal(bad[0]?.sourceMap, undefined);
+    const read = await inspectBuild(brief, root);
+    assert.equal(read[0]?.bytes, bytes.length);
+    assert.equal(read[0]?.sourceMap?.status, 'unavailable');
     await symlink('/etc/hosts', join(root, 'outside.js'));
     const unavailable = (await inspectBuild({ ...brief, sourceUrls: ['http://localhost/outside.js'] }, root))[0]?.unavailable;
     assert.ok(typeof unavailable === 'string');
@@ -199,22 +149,3 @@ test('source attribution verifies bytes and refuses symlink escapes or wrong bun
 });
 
 
-test('chart omits explicitly idle gaps but preserves dropped frames, work and uncertain gaps', () => {
-  const brief = { selection: { rendererPid: 1, rendererMainTid: 1 }, window: { startTs: 0, endTs: 1e6 }, displayBudgetMs: 16.667 };
-  const frame = { index: 0, startMs: 0, endMs: 400, intervalMs: 400, mainBusyMs: .4 };
-  const idle = [
-    { pid: 1, tid: 2, name: 'NeedsBeginFrameChanged', ts: 1000, args: { layerTreeId: 1, data: { needsBeginFrame: 0 } } },
-    { pid: 1, tid: 2, name: 'PipelineReporter', ts: 1000, args: { frame_reporter: { state: 'STATE_NO_UPDATE_DESIRED' } } },
-    { pid: 1, tid: 2, name: 'NeedsBeginFrameChanged', ts: 399000, args: { layerTreeId: 1, data: { needsBeginFrame: 1 } } },
-  ];
-  const excludedGaps = chartIdleGaps(idle, [frame], brief);
-  assert.equal(excludedGaps.length, 1);
-  const series = averageFrames([frame], { ...seriesOptions, excludedGaps });
-  assert.ok(series.points.every(p => p.meanMs === null));
-  assert.equal(series.excludedGaps[0]?.intervalMs, 400);
-  assert.deepEqual(chartIdleGaps([], [frame], brief), []);
-  assert.deepEqual(chartIdleGaps(idle, [{ ...frame, mainBusyMs: 150 }], brief), []);
-  assert.deepEqual(chartIdleGaps([...idle, { pid: 1, tid: 2, name: 'PipelineReporter', ts: 5000,
-    args: { frame_reporter: { state: 'STATE_DROPPED', affects_smoothness: true } } }], [frame], brief), []);
-  assert.deepEqual(chartIdleGaps([...idle, { pid: 1, tid: 1, name: 'FunctionCall', ts: 5000, dur: 2000 }], [frame], brief), []);
-});

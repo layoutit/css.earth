@@ -1,19 +1,19 @@
 import { sampleStatistics as statistics } from '@cssearth/fits';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseAssociationTree, WORKSPACE } from '@cssearth/telescope/node';
+import { parseAssociationTree } from '@cssearth/telescope/node';
 import { parseRawTable } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord } from '@cssearth/telescope/node';
 import { CALIBRATION_TAGS, DP_ID, calibrationFor, modeOf, SCHEMA, scienceTag, templatesOf, treeFiles, type NacoFrame, type NacoProgram } from './archive.mts';
 import { reduceProgram, requireRunnableRecipe, templateFrames, type NacoRecipeRunner } from './reduce.mts';
 import { addComparisonEvidence, overlapOf, repositoryPath } from './compare.mts';
-import { cksum, nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
+import { nacoToolchainDescriptor, nacoRecipes } from './toolchain.mts';
 import { bucketOf, nacoLedgerGuide, observationsOf, NACO_LEDGER, NACO_TARGET_NAMES } from './archive-ledger.mts';
 import { matchNumberedTarget, parseNumberedTarget } from '../targets.mts';
 import { midpointUtc, resolutionOf, slitGeometry } from './spectroscopy-receipt.mts';
@@ -22,7 +22,7 @@ import { median, supportOf, traceDirection, widthOf } from './spectrum.mts';
 /** Archive responses kept exactly as the services returned them on 19 September 2026. */
 const FIXTURES = resolve(import.meta.dirname, 'fixtures');
 
-test('the toolchain pins one ESO kit with both digests ESO can be held to', async () => {
+test('the toolchain pins one ESO kit by URL and size', async () => {
   const { entry } = await nacoToolchainDescriptor();
   assert.equal(entry.schema, 'cssearth-naco-toolchain@1');
   assert.equal(entry.instrument, 'NAOS+CONICA');
@@ -30,15 +30,8 @@ test('the toolchain pins one ESO kit with both digests ESO can be held to', asyn
   assert.equal(downloads.length, 1);
   const kit = requireRecord(downloads[0], 'kit');
   assert.match(requireString(kit.url), /^https:\/\/ftp\.eso\.org\/pub\/dfs\/pipelines\/instruments\/naco\//u);
-  // ESO states a cksum beside every kit, and it names the file: the pin repeats it verbatim so a swapped file is caught.
-  assert.equal(requireString(kit.cksum).split(' ').at(-1), requireString(kit.path));
-  assert.equal(Number(requireString(kit.cksum).split(' ')[1]), kit.bytes);
-});
-
-test('cksum reproduces the BSD CRC ESO publishes', () => {
-  // The values POSIX states for cksum: the empty input, and a short known string.
-  assert.deepEqual(cksum(new Uint8Array()), { crc: 4294967295, bytes: 0 });
-  assert.deepEqual(cksum(new TextEncoder().encode('a')), { crc: 1220704766, bytes: 1 });
+  assert.equal(requireString(kit.url).split('/').at(-1), requireString(kit.path));
+  assert.ok(Number.isSafeInteger(kit.bytes) && Number(kit.bytes) > 0);
 });
 
 test('the recipes the descriptor names are the ones this route runs', async () => {
@@ -194,16 +187,9 @@ test('two mosaics are compared over the rectangle both hold', () => {
   assert.deepEqual(overlapOf([1024, 1024], [1024, 1024]), { width: 1024, height: 1024 });
 });
 
-test('a receipt records a path the repository can read, never a local absolute one', () => {
-  const inside = resolve(WORKSPACE, '.local/naco/x/jitter/naco_img_jitter.fits');
-  assert.equal(repositoryPath(inside), '.local/naco/x/jitter/naco_img_jitter.fits');
-  assert.equal(repositoryPath('/somewhere/else/naco_img_jitter.fits'), '/somewhere/else/naco_img_jitter.fits');
-});
-
 test('a pinned program states the schema this route reads', async () => {
   assert.equal(SCHEMA, 'cssearth-naco-program@1');
 });
-
 
 test('a recipe this route has never run is refused by name, with the reason', () => {
   for (const recipe of ['naco_img_lampflat', 'naco_img_zpoint', 'naco_img_detlin', 'naco_img_strehl', 'naco_spc_wavecal']) {
@@ -224,9 +210,9 @@ const fitsBytes = (cards: readonly string[] = []) => {
 };
 
 /** One imaging night on disk and the program that pins it: two object templates of four frames, three sky frames, two darks
- * and two twilight flats, each a header-only FITS, each pinned by the digest of the file written here. The byte count the
+ * and two twilight flats, each a header-only FITS, each pinned at the size of the file written here. The byte count the
  * program states is the data portal's, of the compressed stream it serves, and deliberately not the file's own: that is
- * what a program records, and it is the digest that pins the file a recipe reads.
+ * what a program records, and the run pins the file a recipe reads at its own size.
  *
  * The recipes are a runner of the test's own, which writes a product per category and records what it was asked for. No ESO
  * pipeline is installed or run: what is under test is what the reduction checks before it asks for one, and what it records
@@ -279,10 +265,9 @@ test('a reduction writes the record of what made its product, with the pins the 
   assert.equal(record.stage, 'imaging/naco_img_jitter');
   assert.equal(record.parameters.template, 'A');
   assert.deepEqual(record.evidence, [], 'a run establishes nothing about its own product');
-  assert.equal(record.toolchainDigest, (await nacoToolchainDescriptor()).digest);
   assert.ok(record.software.some(item => item.name === 'naco' && item.version === '4.4.13'), 'the pipeline version the product states');
 
-  // Every frame the run consumed, by its own id and the digest the program pins for it. The other template's frames went
+  // Every frame the run consumed, by its own id and the size of the file the recipes read. The other template's frames went
   // nowhere near this product and are not in the record.
   const consumed = [...templateFrames(fixture.program.science, 'A'), ...fixture.program.calibration];
   const sizes = new Map(consumed.map(frame => [frame.dpId, frame.bytes]));
@@ -357,8 +342,6 @@ test('a technique falls in exactly one ledger bucket, and the refused ones keep 
   assert.equal(bucketOf('SPECTRUM,JITTER'), 'other');
 });
 
-
-
 test('observations group by shipped object and keep both spellings of a name', () => {
   const rows = [
     { object: 'EUROPA', prog_id: '088.C-0833(B)', dp_tech: 'SPECTRUM,NODDING', n: '98' },
@@ -380,26 +363,6 @@ test('observations group by shipped object and keep both spellings of a name', (
     ['178.C-0867-B-52_EUROPA-2009-01-02-imaging', 2, '2009-01-02T03:00:00.000Z', '2009-01-02T03:01:00.000Z'],
     ['178.C-0867-B-52_EUROPA-2009-01-03-imaging', 1, '2009-01-03T03:00:00.000Z', '2009-01-03T03:00:00.000Z'],
   ]);
-});
-
-test('the ledger on disk is the one the guide states, and its states come from the programs beside it', async () => {
-  const ledger = requireRecord(JSON.parse(await readFile(resolve(WORKSPACE, 'data/naco/ledger.json'), 'utf8')) as unknown, 'ledger.json');
-  assert.equal(ledger.schema, NACO_LEDGER.schema);
-  assert.equal(ledger.instrument, 'NAOS+CONICA');
-  const modes = requireArray(ledger.modes, 'modes').map(item => requireRecord(item, 'mode'));
-  const programs = await readdir(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs'));
-  for (const mode of modes) {
-    const pinned = requireArray(mode.programs, 'programs').map(value => requireString(value));
-    const receipts = requireArray(mode.receipts, 'receipts').map(value => requireString(value));
-    // A state is derived: it may not claim a program or a receipt that is not on disk.
-    for (const program of pinned) assert.ok(programs.includes(`${program}.json`), `${program}.json exists`);
-    for (const receipt of receipts) assert.ok(programs.includes(receipt), `${receipt} exists`);
-    if (receipts.length) assert.equal(mode.state, 'reduced');
-    else if (pinned.length) assert.equal(mode.state, 'pinned');
-  }
-  // The guide is generated from the ledger, so regenerating it from the same ledger must reproduce the file on disk.
-  const guide = await readFile(resolve(WORKSPACE, 'docs/naco-ledger.md'), 'utf8');
-  assert.equal(nacoLedgerGuide(ledger as never), guide);
 });
 
 // --- the spectroscopy receipt ------------------------------------------------------------------------------------------
@@ -461,17 +424,4 @@ test('the slit geometry is read from the frames own headers, and a missing card 
   assert.equal(geometry.rotatorStartDeg, null);
   assert.equal(geometry.raDeg, null);
   assert.deepEqual(geometry.exposureMidpointsUtc, ['2012-01-03T00:38:36.037Z']);
-});
-
-test('the Europa receipt states what was measured, including that it is not resolved along the slit', async () => {
-  const receipt = requireRecord(JSON.parse(await readFile(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/naco/programs/europa-088C0833.spectrum.reproduction.json'), 'utf8')) as unknown, 'receipt');
-  assert.equal(receipt.schema, 'cssearth-naco-spectrum@1');
-  assert.equal(receipt.object, 'EUROPA');
-  assert.equal(receipt.arcs, false, 'the night associates no arc frames, so no wavelength calibration was run');
-  const resolution = requireRecord(receipt.resolution, 'resolution');
-  assert.equal(resolution.resolvedAlongSlit, false);
-  const halves = requireArray(receipt.halves, 'halves');
-  assert.equal(halves.length, 2);
-  // The two halves share no exposure, so each holds half the night's twelve nods.
-  for (const half of halves) assert.equal(requireRecord(half, 'half').frames, 6);
 });

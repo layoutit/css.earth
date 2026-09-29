@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { lightingFrame, type LambertRasterConfig } from '@cssearth/objects';
 import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/index.ts';
 import { RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from './config.ts';
-import { raster, hashFile, outputName } from './io.ts';
+import { raster, fileBytes, outputName } from './io.ts';
 import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 /** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */
 export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
@@ -33,7 +33,6 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
         url: string;
         encoding: string;
         bytes: number;
-        sha256: string;
         width: number;
         height: number;
         decodedRgbaBytes: number;
@@ -43,7 +42,7 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     // Encoding a lossless row (8 frames at 2x, about 0.5 MB) is single-threaded in libvips and took about 1.2 s; 32 rows in
     // sequence made a shape-only planet a 40-second bake with one core busy. Rows now encode on sharp's thread pool while the
     // next row's frames are computed, at most LIGHTING_ENCODE_CONCURRENCY in flight (each row holds 32 MB of RGBA until its
-    // encoder has it). Row order, bytes and hashes are unchanged: every row is still written from its own pixels.
+    // encoder has it). Row order and bytes are unchanged: every row is still written from its own pixels.
     const encodes: Promise<void>[] = [];
     const pending = new Set<Promise<void>>();
     const fromBank = async (file: string) => {
@@ -71,7 +70,7 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
         }
         const path = resolve(publicDirectory, file);
         const encode = (bankDirectory ? fromBank(file) : Promise.all(thumbnails).then(() => raster(pixels!, width, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(path))).then(async () => {
-            rows[rowIndex] = { rowIndex, url, encoding: 'lossless-webp', ...await hashFile(path), width, height: frameSize, decodedRgbaBytes: width * frameSize * 4, firstFrame, frameCount };
+            rows[rowIndex] = { rowIndex, url, encoding: 'lossless-webp', ...await fileBytes(path), width, height: frameSize, decodedRgbaBytes: width * frameSize * 4, firstFrame, frameCount };
         });
         encodes.push(encode);
         const tracked: Promise<void> = encode.finally(() => pending.delete(tracked));
@@ -90,19 +89,19 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     const sfPath = resolve(publicDirectory, sfFile), sfUrl = config.publicBase + sfFile;
     if (bankDirectory) await fromBank(sfFile);
     else await raster(frameFor(frameSize, lastFrame, recipe, limb), frameSize, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(sfPath);
-    const shadowless = { url: sfUrl, encoding: 'lossless-webp', ...await hashFile(sfPath), width: frameSize, height: frameSize, frameIndex: lastFrame,
+    const shadowless = { url: sfUrl, encoding: 'lossless-webp', ...await fileBytes(sfPath), width: frameSize, height: frameSize, frameIndex: lastFrame,
         backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
     // The far view's shadowless frame alone, the same tile the billboard atlas carries among its 256 (the Moon's atlas is
     // 116 KB): with shadows off a distant body shows only this tile.
     const sbFile = outputName(recipe.billboardOutput, density).replace('billboard', 'shadowless-billboard'), sbPath = resolve(publicDirectory, sbFile);
     if (bankDirectory) await fromBank(sbFile);
     else await raster(frameFor(frameSize, lastFrame, recipe, limb), frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).webp({ lossless: true, alphaQuality: 100 }).toFile(sbPath);
-    const billboardShadowless = { url: config.publicBase + sbFile, encoding: 'lossless-webp', ...await hashFile(sbPath), width: bbSize, height: bbSize, frameIndex: lastFrame,
+    const billboardShadowless = { url: config.publicBase + sbFile, encoding: 'lossless-webp', ...await fileBytes(sbPath), width: bbSize, height: bbSize, frameIndex: lastFrame,
         backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
     const defaultRow = Math.floor(recipe.defaultFrame / recipe.columns), initialWarmRows = [Math.max(0, defaultRow - 1), defaultRow, Math.min(rowCount - 1, defaultRow + 1)];
     const initialDecodedWorkingSetBytes = initialWarmRows.reduce((sum, row) => sum + rows[row].decodedRgbaBytes, 0);
     banks[density] = { schema: recipe.bankSchema, preparedPixelDensity: density, frameSize, presentationFrameSize: recipe.presentationSize,
-        billboard: { schema: recipe.billboardSchema, url: bbUrl, shadowless: billboardShadowless, encoding: 'lossless-webp', ...await hashFile(bbPath), width: bbWidth, height: bbHeight, frameSize: bbSize, columns: recipe.billboardColumns, rowCount: bbRows, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, decodedRgbaBytes: bbWidth * bbHeight * 4, presentations: bbPresentations },
+        billboard: { schema: recipe.billboardSchema, url: bbUrl, shadowless: billboardShadowless, encoding: 'lossless-webp', ...await fileBytes(bbPath), width: bbWidth, height: bbHeight, frameSize: bbSize, columns: recipe.billboardColumns, rowCount: bbRows, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, decodedRgbaBytes: bbWidth * bbHeight * 4, presentations: bbPresentations },
         transport: { model: 'row-shard-cache', encoding: 'lossless-webp', preloadBeforeMount: true, retainedLeafCount: 1, interpolation: 'nearest-prepared-camera-frame', framesPerRow: recipe.columns, rowCount, defaultFrame: recipe.defaultFrame, defaultRow, initialWarmRows, maximumRetainedRowCount: 3, addressWritesOnlyOnInput: true, retainLastReadyPresentation: true, idleCallbacks: 0, initialDecodedWorkingSetBytes, maximumDecodedWorkingSetBytes: initialDecodedWorkingSetBytes },
         rows, presentations, shadowless, totalBytes: rows.reduce((sum, row) => sum + row.bytes, 0), fullBankDecodedRgbaBytes: rows.reduce((sum, row) => sum + row.decodedRgbaBytes, 0) };
     const limbMetadata = limb ? { limb: { model: 'published-photometric-models-relative-to-the-flood-lit-disc-centre', models: limb.law.paths, referenceColor: limb.reference, referenceSource: limb.referenceSource } } : {};

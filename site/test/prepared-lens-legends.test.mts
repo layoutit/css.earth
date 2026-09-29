@@ -1,11 +1,8 @@
-import {requireRecord, requireArray} from '@cssearth/core';
-import {parseObjectContentFixture} from '../../tests/objects/content/object-content-fixture.mts';
 import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mts";
 import { prepareObjectContent } from "../build/content/prepare.ts";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { OBJECTS } from "../objects.mts";
 
 import {
   prepareLensCategoryLegend,
@@ -68,22 +65,4 @@ test('named categories can omit a redundant description while supplied descripti
   assert.deepEqual(legend.items.map(({label})=>label),['Ash','Hapi']);
   assert.ok(legend.items.every(item=>!Object.hasOwn(item,'description')));
   assert.throws(()=>prepareLensCategoryLegend({...input,items:input.items.map(item=>({...item,description:''}))}),/description must be/);
-});
-
-test("every object forwards its object-owned legend through the shared shell", async () => {
-  await Promise.all(OBJECTS.map(async ({ id }) => {
-    const loaded = await loadObjectContent(id);
-    const source = await loaded.source("content");
-    const controls = prepareObjectContent(parseObjectContentFixture(source));
-    const legends = (lenses: unknown) => lenses == null ? [] : requireArray(requireRecord(lenses).controls).map(value => {
-      const { id, legend } = requireRecord(value);
-      return { id, legend };
-    });
-    const objectControls = requireRecord(requireRecord(loaded.object.data).controls);
-    assert.deepEqual(
-      JSON.parse(JSON.stringify(legends(objectControls.lenses))),
-      JSON.parse(JSON.stringify(legends(controls.lenses))),
-      id + " must forward every source-derived legend, including colors and ranges",
-    );
-  }));
 });

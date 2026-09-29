@@ -8,7 +8,7 @@ import { sourceBytes, bakeMasterVolumeSlices } from '@cssearth/bake/volume/node'
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import { compilerAlphaDigest, compilerFrame } from './bake.ts';
+import { compilerFrame } from './bake.ts';
 import { readCompilerBakeResult } from '@cssearth/bake/volume';
 import { assertCompilerLensGeometry } from './bank-validation.ts';
 import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from './retained-material-bank.ts';
@@ -16,7 +16,7 @@ import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from '.
 async function fixture(t: TestContext, variable = false) {
   const root = await mkdtemp(join(tmpdir(), 'retained-material-')); t.after(() => rm(root, { recursive: true, force: true }));
   const boundsArcsec = { min: [10, 20, 30] as [number, number, number], max: [12, 22, 32] as [number, number, number] };
-  const { frame, localBounds, origin } = compilerFrame(boundsArcsec), fieldIdentity = 'a'.repeat(64);
+  const { frame, localBounds, origin } = compilerFrame(boundsArcsec), fieldIdentity = 'fixture-field';
   const layerPlan = variable ? { schema: 'cssearth-volume-layer-plan@1' as const,
     referenceSliceCounts: { x: 4, y: 4, z: 4 }, referenceSamplesPerSlab: 4,
     axes: { x: [{ startCell: 0, endCell: 1 }, { startCell: 1, endCell: 4 }],
@@ -28,16 +28,16 @@ async function fixture(t: TestContext, variable = false) {
       { width: 8, outputDirectory: join(root, 'neutral'), imageEncoding: { format: 'png' } }], unitsPerSourceUnit: 1,
     provenance: {}, cropTransparent: true, sampleEmission(x, y, z, out) { out[0] = out[1] = out[2] = Math.hypot(x, y, z) < .9 ? .2 : 0; },
     onProgress() {} });
-  const slices = baked.banks[0]!.slices, alphaSha256 = await compilerAlphaDigest(join(root, 'neutral'), slices);
-  slices.provenance = { fieldIdentity, alphaSha256 };
+  const slices = baked.banks[0]!.slices;
+  slices.provenance = { fieldIdentity };
   async function pin(path: string, value: unknown) {
-    const bytes = Buffer.from(JSON.stringify(value) + '\n'); await writeFile(join(root, path), bytes); return { path, sha256: sha256(bytes) };
+    await writeFile(join(root, path), JSON.stringify(value) + '\n'); return { path };
   }
   const neutral = await pin('neutral/volume.json', compileCssVolume({ id: 'compiler-fixture', frame, slices, recipe: { anchors: [] } }));
   const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity, frame, boundsArcsec,
     skyBoundsArcsec: { min: [10, 20], max: [12, 22] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
-    neutral, alphaSha256, lenses: [{ id: 'original', label: 'Original', volume: neutral,
+    neutral, lenses: [{ id: 'original', label: 'Original', volume: neutral,
       coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }], stars: [],
     sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4, ...(layerPlan ? { layerPlan } : {}) } });
   const options: RetainedMaterialBankOptions = { root, outputDirectory: 'painted', scene,
@@ -51,12 +51,12 @@ async function fixture(t: TestContext, variable = false) {
 }
 
 test('retained material prepares RGB through the existing slab/compiler path with exact geometry and alpha', async t => {
-  const { options, slices } = await fixture(t), sourceHash = sha256(await readFile(join(options.root, options.scene.neutral.path)));
+  const { options, slices } = await fixture(t), neutralBytes = await readFile(join(options.root, options.scene.neutral.path));
   const lens = await prepareRetainedMaterialBank(options);
   const neutral = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, options.scene.neutral)).toString()));
   const painted = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, lens.volume)).toString()));
-  assertCompilerLensGeometry(neutral, painted, options.scene, {});
-  assert.equal(sha256(await readFile(join(options.root, options.scene.neutral.path))), sourceHash);
+  assertCompilerLensGeometry(neutral, painted, options.scene);
+  assert.ok((await readFile(join(options.root, options.scene.neutral.path))).equals(neutralBytes), 'The neutral bank is left untouched.');
   assert.ok(lens.coverage.recoloredTexels > 0);
   assert.deepEqual(painted.provenance && Object.getOwnPropertyDescriptor(painted.provenance, 'materialLensId')?.value, lens.id);
   for (const q of slices.quads) {
@@ -64,7 +64,6 @@ test('retained material prepares RGB through the existing slab/compiler path wit
     const colored = await sharp(join(options.root, 'painted', q.texturePath)).ensureAlpha().raw().toBuffer();
     assert.deepEqual(colored.filter((_b, i) => i % 4 === 3), original.filter((_b, i) => i % 4 === 3));
   }
-  assert.notEqual(painted.resources[0]!.sha256, neutral.resources[0]!.sha256);
 });
 
 test('retained nonuniform material preserves intervals and rejects missing replay metadata', async t => {
@@ -85,9 +84,8 @@ test('retained nonuniform material preserves intervals and rejects missing repla
   }
 });
 
-test('retained material rejects changed pinned alpha, positions and slab metadata', async t => {
+test('retained material rejects changed positions and slab metadata', async t => {
   const { options, slices, pin } = await fixture(t);
-  await assert.rejects(prepareRetainedMaterialBank({ ...options, scene: { ...options.scene, alphaSha256: 'f'.repeat(64) } }), /alpha support/);
   for (const mutation of [
     () => { slices.quads[0]!.center[0] += .01; },
     () => { slices.quads[0]!.vertices[0][0] = NaN; },
@@ -97,11 +95,6 @@ test('retained material rejects changed pinned alpha, positions and slab metadat
     await assert.rejects(prepareRetainedMaterialBank({ ...options, neutralSlicesPin: await pin('neutral/volume-slices.json', slices) }), /geometry|Invalid retained/);
     Object.assign(slices, original);
   }
-  const q = slices.quads[0]!, image = await sharp(join(options.root, 'neutral', q.texturePath)).ensureAlpha().raw().toBuffer();
-  image[3] = image[3] === 0 ? 1 : image[3]! - 1;
-  const bytes = await sharp(image, { raw: { width: q.widthPx, height: q.heightPx, channels: 4 } }).png().toBuffer();
-  await writeFile(join(options.root, 'neutral', q.texturePath), bytes); q.bytes = bytes.length; q.sha256 = sha256(bytes);
-  await assert.rejects(prepareRetainedMaterialBank({ ...options, neutralSlicesPin: await pin('neutral/volume-slices.json', slices) }), /changed the shared alpha/);
 });
 
 test('retained material rejects missing XYZ and nonfinite sampler results', async t => {

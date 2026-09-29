@@ -1,7 +1,6 @@
 /** Snapshot a WWT WTML FITS collection with WWT's own parser for runtime-free lookup. */
-import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { basename } from 'node:path';
 
@@ -35,7 +34,6 @@ const [inputArgument, sourceUrl, outputArgument] = process.argv.slice(2);
 if (!inputArgument || !sourceUrl || !outputArgument || process.argv.length !== 5 || new URL(sourceUrl).protocol !== 'https:')
   throw new TypeError('Usage: wwt-fits-catalog-build.mts INPUT.wtml HTTPS_SOURCE_URL OUTPUT.json');
 const input = resolve(inputArgument), output = resolve(outputArgument);
-const sourceBytes = await readFile(input);
 const result = spawnSync(process.env.CSSEARTH_WWT_PYTHON ?? 'python3', ['-c', parser, input],
   { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
 if (result.status !== 0) throw new Error(`WWT FITS catalog parse failed: ${result.error?.message ?? result.stderr}`);
@@ -43,7 +41,6 @@ const imagesets: unknown = JSON.parse(result.stdout);
 if (!Array.isArray(imagesets) || !imagesets.length || imagesets.some(row => !row || typeof row !== 'object' ||
   typeof (row as Record<string, unknown>).name !== 'string' || typeof (row as Record<string, unknown>).urlTemplate !== 'string'))
   throw new TypeError('WWT parser found no FITS imagesets.');
-const snapshot = { schema: 'cssearth-wwt-fits-catalog@1', source: { url: sourceUrl, file: basename(input),
-  sha256: createHash('sha256').update(sourceBytes).digest('hex'), parser: 'wwt-data-formats@0.18.1' }, imagesets };
+const snapshot = { schema: 'cssearth-wwt-fits-catalog@1', source: { url: sourceUrl, file: basename(input), parser: 'wwt-data-formats@0.18.1' }, imagesets };
 await writeFile(output, `${JSON.stringify(snapshot, null, 2)}\n`);
 process.stdout.write(`${imagesets.length} WWT FITS imagesets -> ${output}\n`);

@@ -5,7 +5,6 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createHash} from 'node:crypto';
 import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '@cssearth/bake/objects/layers/terrestrial';
 const root=resolve(import.meta.dirname,'../../../../../../..');
 const parseAnchors=shape({products:array(shape({body:text,path:text,width:number,height:number,units:text,anchors:array(shape({x:number,y:number,quality:number,radiance:nullable(number)}))}))});

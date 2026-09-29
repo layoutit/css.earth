@@ -1,8 +1,7 @@
-// `@cssearth/bake/nebula`: the nebula delivery bake (Node only). Delivery recipes and identities, the compact density,
+// `@cssearth/bake/nebula`: the nebula delivery bake (Node only). Delivery recipes and kinds, the compact density,
 // finite-emission and compiler deliveries, catalogue fields and star sprites, frames, render-element budgets, replay
-// references, volume provenance and the package implementation pins a delivery identity hashes.
-export * from './package-identity.ts';
-export * from './delivery-identity.ts';
+// references and volume provenance.
+export * from './delivery-kind.ts';
 export * from './references.ts';
 export * from './volume-provenance.ts';
 export * from './element-budget.ts';

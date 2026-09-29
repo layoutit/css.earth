@@ -15,13 +15,12 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
     const plan = object(input, 'destinations'), catalog = object(plan.catalog, 'destination catalog');
     const statuses = object(plan.statuses, 'destination statuses');
     if (typeof catalog.url !== 'string' || !catalog.url.startsWith('/scenes/') ||
-        typeof catalog.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(catalog.sha256) ||
         !integer(catalog.bytes, 1) || !integer(catalog.count, 1) ||
         typeof plan.defaultLens !== 'string' || typeof statuses.detail !== 'string' || typeof statuses.overview !== 'string') {
       throw new TypeError('Invalid prepared destination plan.');
     }
     // The catalogue itself never reaches the page: the site's search function searches it and returns one place's record
-    // to select (Earth's is 14.8 MB). The plan keeps its pin, which that function verifies.
+    // to select (Earth's is 14.8 MB).
     const assertLive = () => { if (lifetime.disposed) throw new Error('Object was unmounted.'); };
     const detailStatus = statuses.detail, overviewStatus = statuses.overview;
     return Object.freeze<PreparedDestinationRuntime>({

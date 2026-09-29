@@ -21,7 +21,7 @@ takes about 17 s; `pnpm setup:assets` runs the restore on its own. For a
 single body, use `pnpm setup:assets --object=<id>` and open `/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
 `prepared/*` entries (skipping the public texture download) — useful when
 only the JSON changed. Either restore also derives the files R2 never holds
-(`prepared/object.json`, `page.json` and a layered body's `provenance.json`)
+(`prepared/object.json` and `page.json`)
 for restored bodies that lack them. For a production build, run `pnpm build`, then `pnpm
 preview`; the build first runs `setup:assets` itself, which only downloads
 files that are missing or changed.
@@ -40,7 +40,7 @@ body and shared world resources still need their prepared assets. See the
 [nebula guide](docs/nebulae/README.md#reproduce-from-a-clean-checkout) for restoration.
 Restart the server after installing a package: its available banks stay fixed for
 the session. Production builds require every configured volume package and
-reject missing files, invalid metadata and mismatched asset hashes.
+reject missing files, invalid metadata and assets their inventories do not publish.
 
 Re-preparing a body from its sources needs more: run
 `node packages/bake/cli/restore-source-inputs.mts --object=<id>` to restore missing
@@ -87,7 +87,7 @@ A maintainer then runs the **Publish prepared assets** workflow against your
 pull request (Actions → Publish prepared assets → Run workflow, with the pull
 request number, the object id and its kind, using the main branch). It rebakes
 your branch and checks the inventory. Before uploading, trusted tooling compares
-the inventories with the frozen pull request commit and verifies every file hash.
+the inventories with the frozen pull request commit and verifies every file against its inventory entry.
 Nothing needs to be pushed to your branch, and no maintainer has to reproduce
 your setup locally.
 
@@ -96,7 +96,7 @@ That approval does not publish assets; use the separate workflow above.
 
 ## Publishing prepared assets (maintainers)
 
-Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. One small inventory per object is tracked in Git instead of the baked bytes: `inventory.json`, listing the public browser textures and everything baked under `prepared/`, each entry with its location, filename, bytes and hash (`object.json` and `page.json` are regenerated, not inventoried; layered-body provenance is regenerated too, while volumes, image layers and catalogues publish their baked `provenance.json`). The inventory owner also excludes audit-only terrain reports and source-index rasters.
+Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. One small inventory per object is tracked in Git instead of the baked bytes: `inventory.json`, listing the public browser textures and everything baked under `prepared/`, each entry with its location, filename, bytes and hash (`object.json` and `page.json` are regenerated, not inventoried). The inventory owner also excludes audit-only terrain reports and source-index rasters.
 
 A page embeds only the hashes its first view reads: files its prepared markup and styles name, its startup resources and the textures its server markup writes. Each other resource's hash waits in a same-origin group file, `/objects/<id>/asset-hashes/<group>.json`, which the browser reads the first time a zoom level or dataset needs it. Resources whose keys differ only in their first index share a group (one dataset's pages at one level); keys without an index share one. A hash is 64 characters that do not compress, so Earth's page would otherwise carry 1,754 of them ([`site/asset-origin.mts`](site/asset-origin.mts)).
 
@@ -116,9 +116,8 @@ origin URL when a file is missing. `node packages/bake/cli/publish-source-cache.
 --object=<id>` publishes that object's available downloads; restore them first
 with `node packages/bake/cli/restore-source-inputs.mts --object=<id>`. To publish one
 file, use `--file=<path> --key=<object id>/<manifest path>`. The publisher verifies
-the upload; this is not a manifest digest check during acquisition. Earlier
-hash-addressed source-cache keys may remain in R2, but current restorers use the
-path keys and fall back to the source archive.
+the upload by reading it back; acquisition itself checks no recorded digest.
+Current restorers use the path keys and fall back to the source archive.
 
 A restorer writes a file only when its bytes match its extension (JPEG, PNG, WebP,
 TIFF, FITS or gzip), and never writes an HTML page, even one served with HTTP 200:
@@ -224,7 +223,8 @@ import of a shared package names no entry it can trace to a source file.
 
 The same check applies repository rules that have no baseline, so any finding
 fails it: no file under the retired `tools/` folder (`RETIRED_FOLDERS` in
-`repository-rules.mts`), the nebula
+`repository-rules.mts`), no script or Astro module under `src/objects/` (object
+packages hold data; the shared runtime owns the DOM and scene state), the nebula
 boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 `pnpm check:nebula-boundaries` is an alias of the check), and declared
 dependencies: a `packages/*` file imports another workspace package only when
@@ -251,10 +251,6 @@ changes" job) — a job it skips still reports success, never failure, so it nev
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
 
-`node .github/scripts/checks/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
-(it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
-`prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
-
 Browser checks also require the exact prepared rendering assets. Sources and
 catalogue preparation restore metadata, not those assets. Successfully opening
 an unavailable Helix view does not qualify Helix's rendering or interaction.
@@ -280,7 +276,7 @@ environment limitation, not a passing integration result.
 ## Commits
 
 Write every commit as one [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) line, for example
-`refactor(core): move sha256 into core`. Leave out a body, trailers and any attribution such as `Co-Authored-By`.
+`refactor(core): move isRecord into core`. Leave out a body, trailers and any attribution such as `Co-Authored-By`.
 Split a change into small steps so each line explains one step. Git's own merge, revert and `--fixup` messages are
 accepted as Git writes them.
 

@@ -6,12 +6,10 @@ import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC, type Vector3, type VolumeRecipe } from '@cssearth/bake/volume';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
 import { sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 type Pin = {
     path: string;
-    sha256: string;
 };
 function object(value: unknown): Record<string, unknown> {
     if (!value || typeof value !== 'object' || Array.isArray(value))
@@ -20,14 +18,13 @@ function object(value: unknown): Record<string, unknown> {
 }
 function pin(value: unknown): Pin {
     const p = object(value);
-    if (typeof p.path !== 'string' || typeof p.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(p.sha256))
-        throw new TypeError('Expected pinned file.');
-    return { path: p.path, sha256: p.sha256 };
+    if (typeof p.path !== 'string')
+        throw new TypeError(`Expected a file named by path, not ${JSON.stringify(value)}.`);
+    return { path: p.path };
 }
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 export async function prepareCatalogueDensity(configPath: string) {
-    const root = process.cwd(), configBytes = await readFile(configPath);
-    const config = object(JSON.parse(configBytes.toString('utf8')) as unknown);
+    const root = process.cwd(), config = object(JSON.parse(await readFile(configPath, 'utf8')) as unknown);
     if (!['cssearth-catalogue-density@1', 'cssearth-tracer-density@1'].includes(String(config.schema)) || typeof config.id !== 'string' ||
         !/^[a-z0-9-]+$/.test(config.id) || typeof config.outputDirectory !== 'string' ||
         !config.outputDirectory.startsWith('.local/nebula-lab/'))
@@ -85,7 +82,7 @@ export async function prepareCatalogueDensity(configPath: string) {
         } });
     if (converted.particles.accepted !== count)
         throw new Error('Catalogue density lost tracers outside its grid.');
-    const provenance = { schema: 'cssearth-catalogue-density-provenance@1', recipe: { path: relative(root, resolve(configPath)), sha256: sha256(configBytes) },
+    const provenance = { schema: 'cssearth-catalogue-density-provenance@1', recipe: { path: relative(root, resolve(configPath)) },
         catalogue, receipt, frame: framePin, inputReceipt: JSON.parse(receiptBytes.toString('utf8')) as unknown,
         count, grid: plan, gridSettings,
         interpretation: particleMode ? config.interpretation : 'Smoothed observed tracer number counts in photometric-distance space; not gas, dust, mass density or independently measured stellar depths.',
@@ -112,7 +109,7 @@ export async function prepareCatalogueDensity(configPath: string) {
     await json(resolve(output, 'object.json'), { schema: 'cssearth-object@1', id: config.id, type: 'density-volume',
         properties: { volume: frame, preparation: { source: 'source/volume.json' } },
         prepared: { format: envelope.format, url: 'prepared/volume.json' } });
-    await json(resolve(output, 'receipt.json'), { ...provenance, prepared: { sha256: sha256(preparedBytes), leaves: data.resources.length,
+    await json(resolve(output, 'receipt.json'), { ...provenance, prepared: { path: 'prepared/volume.json', leaves: data.resources.length,
             bytes: data.resources.reduce((sum, r) => sum + r.bytes, 0) } });
     console.log(`CATALOGUE_DENSITY_READY ${config.id}: ${count} tracers, ${data.resources.length} leaves`);
 }

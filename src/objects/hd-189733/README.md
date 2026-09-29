@@ -51,4 +51,4 @@ The initial package was prepared on 2026-09-17 with [`node tools/prepare/prepare
 
 **Spot patterns are stationary models.** A transit constrains a dark region along one chord, not unobserved latitudes or the entire photosphere. The selected 2021 candidate cannot be carried to another date through rotation without a tracked location and evolution model. The Figure 7 bands illustrate one arrangement consistent with activity estimates, not a measured surface. Both spot plates remain fixed while the underlying uniform sphere turns. Rotating spots require a later, explicit model.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

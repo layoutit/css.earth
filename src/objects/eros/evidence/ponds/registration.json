@@ -8,16 +8,13 @@
   "environment": "Node 24.21.0 with the worktree's built @cssearth/bake (loadPdsVertexFacetShape, closestPoint, paintScienceSurface, renderRadialSnapshot).",
   "inputs": {
     "source/ponds/erosshiftedponds_20190226_circles.csv": {
-      "bytes": 17350,
-      "sha256": "1dcdfa86f189abce95e27e072cfb84c0f94576646dc312fed7b12c17c8bfbae7"
+      "bytes": 17350
     },
     "source/ponds/erosshiftedponds_20190226_circles.xml": {
-      "bytes": 5724,
-      "sha256": "44f3dee69c8166340228631e8c279488bb065bb2f8d83bb9f051623aa4ddf202"
+      "bytes": 5724
     },
     "source/shape/ver128q.tab": {
-      "bytes": 16897935,
-      "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458"
+      "bytes": 16897935
     }
   },
   "labelCheck": "The PDS4 label's file name, 334 records, CRLF and comma delimiters and the eight field names and units equal the recipe.",

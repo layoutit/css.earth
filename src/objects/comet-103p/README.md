@@ -36,7 +36,7 @@ The selected scan yields 162 accepted spatial pixels and 757 of the model’s 32
 
 - The [landmark source record](source/features/landmarks.json) links each location to the published figure and records its coordinate precision.
 
-- **Surface places, 2026-09-12:** preparation and the runtime parser accepted three locations; three focused unit tests passed. Browser inspection with this addition covered the waist search, camera arrival and EPOXI dataset. The published catalog passed a fresh byte-count and SHA-256 check. Surface assets are unchanged.
+- **Surface places, 2026-09-12:** preparation and the runtime parser accepted three locations; three focused unit tests passed. Browser inspection with this addition covered the waist search, camera arrival and EPOXI dataset. The published catalog passed a fresh byte-count check. Surface assets are unchanged.
 
 - **Reader oracle, 2026-09-12:** [`tools/oracles/fits/encounter.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/fits/encounter.py) (now [`packages/bake/src/objects/layers/terrestrial/missions/encounter.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/encounter.py)) reads the pinned MRI product `mv10110413_6000001_001_r.fit` with astropy. [`tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts) (now [`packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts)) requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, border, flagged and non-finite pixels to agree.
 
@@ -65,7 +65,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - The landmarks are mapped terrain, not official names or precise boundaries. Two are published figure-panel centres; the elongate smooth area is a representative point read from the map. The ±3° and ±12° placement estimates are ours, not published measurement errors.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

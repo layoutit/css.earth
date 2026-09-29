@@ -68,7 +68,7 @@ with (out/'values.csv').open('w',newline='') as file:
    if unit is not None:err.header['BUNIT']=unit.to_string('fits') or '1'
    err.header['HISTORY']='Standard deviation; NaN means unavailable. See uncertainty policy in primary header.'
    product.append(err)
-  product.writeto(out/'image.fits',checksum=True);product.close();files.append('image.fits')
+  product.writeto(out/'image.fits');product.close();files.append('image.fits')
   fig,ax=plt.subplots(figsize=(8,5),layout='constrained',subplot_kw={'projection':spatial} if spatial is not None else {})
   lo,hi=float(np.nanmin(values)),float(np.nanmax(values))
   if kind=='feature-map':hi=max(abs(lo),abs(hi));lo=-hi

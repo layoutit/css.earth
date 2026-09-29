@@ -1,9 +1,7 @@
 import {rotateParticles} from '@cssearth/nebula-reconstruction/stars/rotate-particles';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Reproducible local experiment: a pinned simulation snapshot, photograph colors, and the shared volume baker. */
-import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
@@ -16,11 +14,11 @@ import type { VolumeRecipe, Vector3 } from '@cssearth/bake/volume';
 
 interface ParticleExperiment {
   schema: 'cssearth-magellanic-particle-experiment@1';
-  source: { url: string; license: string; archiveSha256: string; archiveBytes: number;
-    entry: string; snapshotSha256: string; snapshotAgeGyr: number; massUnitSolarMass: number;
+  source: { url: string; license: string; archiveBytes: number;
+    entry: string; snapshotAgeGyr: number; massUnitSolarMass: number;
     totalCount: number; gasCount: number; darkCount: number; starCount: number };
   targets: { id: string; directory: string; referenceObject: string; photo: string;
-    photoSha256: string; photoUrl: string; photoCredit: string; photoReceipt?: string;
+    photoUrl: string; photoCredit: string; photoReceipt?: string;
     starRange: { start: number; count: number }; rotation: number[];
     boundsKpc: { min: Vector3; max: Vector3 }; dimensions: Vector3;
     colorSpanKpc: [number, number]; colorCenterKpc: Vector3;
@@ -29,26 +27,18 @@ interface ParticleExperiment {
     photoEmission?: Omit<ParticlePhotoEmissionOptions, 'exposureGain'>;
     alignment?: { method: string; photoScale: string; displayScope: string; registration: string } }[];
 }
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
-async function fileDigest(path: string) {
-  const hash = createHash('sha256');
-  for await (const chunk of createReadStream(path)) hash.update(chunk);
-  return hash.digest('hex');
-}
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 
 async function snapshot(source: ParticleExperiment['source'], archive: string, cache: string) {
   const destination = resolve(cache, source.entry.replace(/\.gz$/, ''));
-  if (await fileDigest(destination).catch(() => '') === source.snapshotSha256) return destination;
-  if (await fileDigest(archive) !== source.archiveSha256) throw new Error('Archive SHA256 differs from the published pin.');
+  // An extracted snapshot is reused; its Tipsy header counts are checked against the recipe on import.
+  if (await access(destination).then(() => true, () => false)) return destination;
   // Extract only the named member; no archive paths are used as output paths.
   const extraction = spawnSync('python3', ['-c',
     'import sys,zipfile,gzip; z=zipfile.ZipFile(sys.argv[1]); data=z.read(sys.argv[2]); open(sys.argv[3],"wb").write(gzip.decompress(data))',
     archive, source.entry, destination], { stdio: 'inherit' });
   if (extraction.error) throw extraction.error;
-  if (extraction.status !== 0 || await fileDigest(destination) !== source.snapshotSha256) {
-    throw new Error('Snapshot extraction or pinned-byte verification failed.');
-  }
+  if (extraction.status !== 0) throw new Error(`Extracting ${source.entry} from ${archive} failed.`);
   return destination;
 }
 
@@ -74,8 +64,8 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
     await writeFile(particlePath, particles);
     await json(resolve(sourceDirectory, 'import.json'), { ...imported,
       displayRotation: target.rotation,
-      rotatedOutput: { path: particlePath, sha256: digest(particles), bytes: particles.length } });
-    if (await fileDigest(target.photo) !== target.photoSha256) throw new Error('Observation photo SHA256 mismatch.');
+      rotatedOutput: { path: particlePath, bytes: particles.length } });
+    await access(target.photo).catch(() => { throw new Error(`${target.id}: observation photo ${target.photo} is missing; acquire it first.`); });
     const extraction = await extractExtendedSource({ inputPath: target.photo,
       outputDirectory: sourceDirectory, id: 'photo', maxPixels: 1200, ...target.extraction });
     if (target.photoEmission) await createParticleAlignmentDiagnostic({ rotatedParticlePath: particlePath,
@@ -91,8 +81,8 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
         centerKpc: target.colorCenterKpc, rightDirection: [1, 0, 0], upDirection: [0, 1, 0], spanKpc: target.colorSpanKpc } });
     const provenance = { schema: 'cssearth-particle-volume-provenance@1', source: recipe.source,
       sourceFamily: imported.selection, density: converted.interpretation.density,
-      photo: { path: target.photo, sha256: target.photoSha256, url: target.photoUrl, credit: target.photoCredit, license: 'CC-BY-4.0',
-        ...(target.photoReceipt ? { acquisition: { path: target.photoReceipt, sha256: await fileDigest(target.photoReceipt) } } : {}) },
+      photo: { path: target.photo, url: target.photoUrl, credit: target.photoCredit, license: 'CC-BY-4.0',
+        ...(target.photoReceipt ? { acquisition: { path: target.photoReceipt } } : {}) },
       display: { rotation: target.rotation, boundsKpc: target.boundsKpc,
         alignment: target.alignment ?? 'Authored lab alignment, not an astrometric fit between the simulation and photograph.',
         color: converted.interpretation.color, dust: converted.interpretation.dust,

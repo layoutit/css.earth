@@ -75,8 +75,6 @@ An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equ
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-[Source anchors](../../../tests/objects/unit/anchors/asteroid-calibration.json) checked by the shared [calibration runner](../../../tests/objects/unit/asteroid-calibration.test.mts).
-
 The [native-value check](evidence/spectral-bands/native-values.json) compares all seven production samplers with independent float32 byte reads and coordinates from the original ISIS labels, including fractional footprints, source extrema and gaps. It verifies decoding and display transfer; it does not revalidate the mission’s calibration or physical registration.
 
 The native check passed 1,701 source probes. At most 0.13% of valid native samples in any band lie outside the common display range. The [restoration check](evidence/spectral-bands/source-restoration.json) extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
@@ -110,7 +108,7 @@ specify the actual 0–360° grid. The shared scalar reader validates the actual
 GeoTIFF. The body remains the independently sized 8.42 km Gaskell mesh;
 the 17 km projection radius only converts map coordinates.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="eros-source-record"></a>
 <a id="selected-data-and-survey"></a>

@@ -32,4 +32,4 @@ Run of 2026-09-23 (this version):
 - No colour is measured in three bands, and our JWST reduction does not yet reproduce the paper's detection (see [51 Eridani](../hd-29391/README.md)).
 - No spin is measured; the axis shown is the orbit normal.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

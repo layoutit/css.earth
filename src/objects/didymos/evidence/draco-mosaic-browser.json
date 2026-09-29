@@ -77,11 +77,7 @@
         "retained": true,
         "density": 2
       },
-      "errors": [],
-      "lighting": [
-        "73a75283bf1e031ef929f63387cdc3503e91c838c4c24b9d8c472485d7e329ae",
-        "0653b39f8a5f3416bc84f2591caa64f4dca94bff3739d560e5f82555d44f5e3d"
-      ]
+      "errors": []
     },
     {
       "id": "didymos",
@@ -157,11 +153,7 @@
         "retained": true,
         "density": 2
       },
-      "errors": [],
-      "lighting": [
-        "a4f41a9a4dbbad35d3fdd1ee673f2fbbff00b088ed8d2f45e272cee18b517f91",
-        "5056f92a49d7a21b73063103c17b97134a06d82606e91c35e9bc2e2e4a209769"
-      ]
+      "errors": []
     },
     {
       "id": "didymos",
@@ -237,11 +229,7 @@
         "retained": true,
         "density": 2
       },
-      "errors": [],
-      "lighting": [
-        "b0de2e6dbeaf8927fa9da041537c84f2de9760621a5016c0f18f530faf9eb5c8",
-        "4e358361f252ef17ebfb7fea07ef8b589bb5320d1bb7128955d864e2b230eae8"
-      ]
+      "errors": []
     }
   ],
   "finalCaptures": {
@@ -257,7 +245,6 @@
     "files": [
       {
         "path": "draco-mosaic-overview.webp",
-        "sha256": "19b6a9e744e3d4cf2bde58eee88194cf097997a747c6f9ac5b1952b7c852d9ef",
         "capture": {
           "id": "didymos",
           "zoom": 1.35,
@@ -301,7 +288,6 @@
       },
       {
         "path": "draco-mosaic-close.webp",
-        "sha256": "fedf3af37c6cdc9df4d51802e2fe12c41516d93c041bf0946f6e716407104359",
         "capture": {
           "id": "didymos",
           "zoom": 2.2275,

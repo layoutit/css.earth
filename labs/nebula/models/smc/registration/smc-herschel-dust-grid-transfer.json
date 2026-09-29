@@ -8,7 +8,7 @@
   },
   "source": {
     "id": "smc-herschel-dust",
-    "path": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e.png",
+    "path": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.skybands.png",
     "skyBands": {
       "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-herschel-dust.json"
     },
@@ -21,7 +21,7 @@
   },
   "reference": {
     "id": "smc-wise-stellar",
-    "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc.png",
+    "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.skybands.png",
     "skyBands": {
       "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar.json"
     },
@@ -112,17 +112,6 @@
     ],
     "detectedStars": 35065
   },
-  "implementation": [
-    {
-      "path": "labs/nebula/packages/lab/src/cli/commands/sky-band-registration.ts"
-    },
-    {
-      "path": "tools/objects/observation/sky-band-composite.mts"
-    },
-    {
-      "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts"
-    }
-  ],
   "interpretation": "The composite is pinned to bytes that only the sky band compositor produces after checking every hips2fits band header against this exact TAN grid (no rotation, distortion or unit cards). The grid itself is qualified by the reference composite, which passed the unchanged fixed-WCS catalogue gate on the identical grid.",
   "limitations": [
     "The transfer qualifies the request grid and its pixel convention. It does not independently measure this survey's own HiPS astrometry; the diagnostic receipt records what its own stars show.",

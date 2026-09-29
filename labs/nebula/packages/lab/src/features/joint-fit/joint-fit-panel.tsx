@@ -35,8 +35,8 @@ export function JointFitPanel({ cataloguePath, recipePath, observationManifest }
 function JointFitSession({ catalogue, cataloguePath, recipePath, observationManifest }: JointFitPanelProps & { catalogue: StructureCatalogue }) {
   const matrices = useMemo(() => catalogueMatrices(catalogue, observationManifest),
   [catalogue, observationManifest]);
-  const evidenceKey = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image =>
-    [image.id, image.sourceSha256, image.mapSha256, matrices[image.id]]))}`;
+  const evidenceKey = `nebula:joint-evidence:2:${cataloguePath}:${JSON.stringify(catalogue.images.map(image =>
+    [image.id, image.directory, matrices[image.id]]))}`;
   const evidence = useMemo(() => {
     try {
       const saved = readFusionSettings(JSON.parse(localStorage.getItem(evidenceKey) ?? 'null'));
@@ -44,8 +44,8 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
     } catch { /* Missing or stale Combine settings use neutral source weights. */ }
     return { sensitivity: 1, weights: catalogue.images.map(() => 1) };
   }, [catalogue, evidenceKey]);
-  const storageKey = `nebula:joint-fit:1:${recipePath}:${cataloguePath}:${JSON.stringify(catalogue.images.map(image =>
-    [image.id, image.sourceSha256, image.mapSha256, matrices[image.id]]))}`;
+  const storageKey = `nebula:joint-fit:2:${recipePath}:${cataloguePath}:${JSON.stringify(catalogue.images.map(image =>
+    [image.id, image.directory, matrices[image.id]]))}`;
   const [controls, setControls] = useState<JointControls>(() => {
     try {
       const saved = readJointControls(JSON.parse(localStorage.getItem(`${storageKey}:controls`) ?? 'null'));
@@ -70,7 +70,7 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
   const best = result?.candidates.reduce((current, candidate) => candidate.fit.metrics.objective < current.fit.metrics.objective ? candidate : current);
   const candidate = result?.candidates.find(item => item.fit.parameters.family === family) ?? best;
   const source = result?.sources.find(item => item.id === sourceId) ?? result?.sources[0];
-  const imageUrl = source ? `${localFile(source.image.path)}?v=${source.image.sha256}` : '';
+  const imageUrl = source ? localFile(source.image.path) : '';
   const withheldMismatch = candidate?.fit.metrics.heldOutRmsKmS !== null && candidate?.fit.metrics.heldOutRmsKmS !== undefined &&
     (candidate.fit.metrics.trainingRmsKmS === null || candidate.fit.metrics.heldOutRmsKmS > candidate.fit.metrics.trainingRmsKmS * 1.5);
   const status = state.error || storageError || (state.busy ? state.progress || 'Fitting registered evidence…' : result ? 'Joint fit up to date' : 'Preparing joint fit…');

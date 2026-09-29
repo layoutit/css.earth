@@ -1,15 +1,11 @@
-/** Build-derived identity for the complete local TypeScript module closure of an operation. */
-import { createHash } from 'node:crypto';
-import { existsSync, realpathSync } from 'node:fs';
+/** The workspace packages a bundled lane compiles from their TypeScript sources rather than their builds. */
 import { readFile } from 'node:fs/promises';
-import { isAbsolute, relative, resolve, sep } from 'node:path';
-import { build, type Plugin } from 'esbuild';
+import { resolve } from 'node:path';
+import type { Plugin } from 'esbuild';
 import { pathToFileURL } from 'node:url';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
-export interface ImplementationFingerprint { readonly sha256: string; readonly files: readonly { readonly path: string; readonly sha256: string }[] }
-
-/** Workspace entries whose TypeScript sources an identity follows as local modules. The FITS reader was a local module
+/** Workspace entries a bundled lane compiles from their TypeScript sources, as it did when they were local modules. The FITS reader was a local module
  * (`tools/fits/`) before it became `@cssearth/fits`, the SPICE kernel readers were local modules (`tools/spice/`) before
  * they became `@cssearth/spice`, and the telescope library's product records, label readers and astronomy-package clients
  * were local modules under `tools/objects/` before they became `@cssearth/telescope`, and the photometric models and raster lane
@@ -22,9 +18,8 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
  * `@cssearth/bake/{prepared-presentation,delivery,sources,contract}` and `@cssearth/objects/node/contract`, and the provenance,
  * exploration and source-usage records and the runtime asset closure (`src/platform/`) before `@cssearth/objects/provenance` and
  * `@cssearth/objects/node`, and the galaxy, cluster and nebula catalogue readers (`packages/catalog/src/`), which the navigation
- * destinations and the spatial source citations imported by path before they joined the bake, and the layered
- * provenance records and bindings (`tools/objects/`) before `@cssearth/bake/objects/provenance`; following them keeps
- * every operation identified by the code it ran. Other packages stay external, as they always were. */
+ * destinations and the spatial source citations imported by path before they joined the bake; following them bundles
+ * the code the lane runs from the checkout. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
   '@cssearth/catalog': 'packages/catalog/src/index.ts',
@@ -71,7 +66,6 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
   '@cssearth/bake/objects/stellar': 'packages/bake/src/objects/stellar/index.ts',
   '@cssearth/bake/objects/candidates': 'packages/bake/src/objects/candidates/index.ts',
-  '@cssearth/bake/objects/provenance': 'packages/bake/src/objects/provenance/index.ts',
   '@cssearth/bake/objects/acquisition': 'packages/bake/src/objects/acquisition/index.ts',
   '@cssearth/bake/objects/sphere-survey': 'packages/bake/src/objects/sphere-survey/index.ts',
   '@cssearth/bake/objects/default-view': 'packages/bake/src/objects/default-view/index.ts',
@@ -97,7 +91,7 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its
  * tsup configuration names (`@cssearth/renderer/navigation` → `src/navigation/index.ts`); its source subpaths name the file. */
 let rendererEntries: Promise<Readonly<Record<string, string>>> | undefined;
-/** Read once, when an identity first reaches the renderer, so a change to the renderer's entry list touches only those. */
+/** Read once, when a bundle first reaches the renderer, so a change to the renderer's entry list touches only those. */
 const loadRendererEntries = () => rendererEntries ??= import(pathToFileURL(resolve(WORKSPACE, 'packages/renderer/tsup.config.ts')).href)
   .then((config: { default: { entry: Record<string, string> } }) => Object.fromEntries(Object.entries(config.default.entry)
     .map(([name, source]) => [name, `src/${source.slice(source.lastIndexOf('/src/') + '/src/'.length)}`])));
@@ -111,7 +105,7 @@ async function rendererSource(specifier: string): Promise<string | undefined> {
 /** The telescope command's modules were relative modules under `tools/objects/telescopes/` before they became
  * `@cssearth/telescope-cli`. A subpath is followed to the source its package.json `exports` entry declares, as Node resolves it
  * (`@cssearth/telescope-cli/archives/jwst/imaging/image3` → `src/archives/jwst/imaging/image3.mts`); a subpath the package does
- * not export stays external, as Node would refuse it. The map is read from the fingerprinted checkout, once per bundle. */
+ * not export stays external, as Node would refuse it. The map is read from the bundled checkout, once per bundle. */
 async function telescopeCliExports(root: string): Promise<ReadonlyMap<string, string>> {
   let text: string;
   try { text = await readFile(resolve(root, 'packages/telescope-cli/package.json'), 'utf8'); }
@@ -140,44 +134,3 @@ export function followedWorkspaceSources(root: string): Plugin {
   } };
 }
 
-/** A workspace command the telescope runs as a process of its own (a `workspace-commands/<name>.mts` module) is code the
- * operation runs, as it was when the operation imported it: the command's `source` entry joins the identity. */
-const COMMAND_MODULE = /(^|\/)workspace-commands\/[\w-]+\.mts$/u;
-async function dispatchedSources(root: string, inputs: readonly string[]): Promise<string[]> {
-  const sources: string[] = [];
-  for (const input of inputs) if (COMMAND_MODULE.test(input.split(sep).join('/')))
-    for (const match of (await readFile(resolve(root, input), 'utf8')).matchAll(/\bsource: '([^']+)'/gu)) sources.push(resolve(root, match[1]!));
-  return sources;
-}
-
-export async function implementationFingerprint(root: string, entries: readonly string[]): Promise<ImplementationFingerprint> {
-  const absolute = entries.map(entry => isAbsolute(entry) ? entry : resolve(root, entry));
-  const canonicalRoot = realpathSync(root);
-  const bundle = (entryPoints: readonly string[]) => build({ absWorkingDir: root, entryPoints: [...entryPoints], outdir: resolve(root, '.fingerprint-output'), bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
-    packages: 'external', conditions: ['types'], treeShaking: false, logLevel: 'silent', plugins: [followedWorkspaceSources(root), {
-      name: 'authored-generated-imports',
-      setup(builder) {
-        builder.onResolve({ filter: /\.js$/ }, args => {
-          if (!args.path.startsWith('.')) return;
-          const requested = resolve(args.resolveDir, args.path), marker = `${sep}dist${sep}`, at = requested.lastIndexOf(marker);
-          if (at < 0) return;
-          const stem = `${requested.slice(0, at)}${sep}${requested.slice(at + marker.length, -3)}`;
-          for (const source of [`${stem}.ts`, `${stem}.mts`, resolve(stem, 'index.ts'), resolve(stem, 'index.mts')]) {
-            if (existsSync(source) && !relative(canonicalRoot, realpathSync(source)).startsWith('..')) return { path: source };
-          }
-          return;
-        });
-      },
-    }] });
-  let entryPoints = absolute, result = await bundle(entryPoints);
-  for (;;) {
-    const dispatched = (await dispatchedSources(root, Object.keys(result.metafile.inputs))).filter(path => !entryPoints.includes(path));
-    if (!dispatched.length) break;
-    entryPoints = [...entryPoints, ...dispatched]; result = await bundle(entryPoints);
-  }
-  const paths = Object.keys(result.metafile.inputs).map(path => resolve(root, path)).filter(path => !relative(root, path).startsWith('..')).sort();
-  const files = await Promise.all(paths.map(async path => { const bytes = await readFile(path); return { path: relative(root, path), sha256: createHash('sha256').update(bytes).digest('hex'), bytes }; }));
-  const digest = createHash('sha256');
-  for (const file of files) digest.update(file.path.length.toString()).update(':').update(file.path).update(':').update(file.bytes);
-  return { sha256: digest.digest('hex'), files: files.map(({ path, sha256 }) => ({ path, sha256 })) };
-}

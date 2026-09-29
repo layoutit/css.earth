@@ -14,10 +14,11 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium, type Page } from 'playwright';
 import { gestureCamera } from './browser-camera.ts';
+import { isResultName } from '../src/features/result-name.ts';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4331';
 const output = resolve(process.argv[3] ?? '.local/nebula-lab/difference-map');
-const lenses = process.argv.slice(4).filter(value => /^[a-f0-9]{64}$/.test(value));
+const lenses = process.argv.slice(4).filter(isResultName);
 if (!lenses.length) throw new TypeError('Usage: browser-difference-map [base-url] [output-directory] <lensResultId…>');
 await mkdir(output, { recursive: true });
 

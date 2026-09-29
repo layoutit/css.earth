@@ -49,19 +49,11 @@ physical-units, eccentric hosted-orbits and the Venus audits. Bake-owned FITS re
 eclipse-map cases now live beside their comparing bake suites. SBMT lives in
 `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/`. Most
 scripts sit beside the fixture they write. Historical `generatedBy` strings keep
-the generator's original path until regeneration.
+the generator's original path until regeneration. `tests/oracles/tsconfig.json` is
+maintained to include the relocated scripts.
 
-Four scripts keep their bytes because body evidence pins their SHA-256:
-`packages/bake/src/objects/raster/fixtures/{isis-geotiff-grid,lunar-mi-quality,geotiff-image}.mts`
-and `packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts`.
-Their usage comments retain historical paths; run their current paths with Node
-from the repository root. `tests/oracles/tsconfig.json` is maintained to include
-the relocated scripts.
-
-Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
-only. It no longer holds a runtime-lock or generator digest, while
-`tests/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
-test runs past its restored-source skips. The shared FITS reader is the
+The SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions only.
+The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
 span `tests/oracles/spice/`, `packages/bake/src/astronomy/fixtures/` and
@@ -71,17 +63,13 @@ span `tests/oracles/spice/`, `packages/bake/src/astronomy/fixtures/` and
 
 - A fixture is evidence. Its current envelope records oracle/interpreter
   versions, input paths and byte counts. External references name a commit in
-  their URL and record a size. `tests/contract/oracle-fixtures.test.mts`, included
-  in `pnpm test:node`, checks tool versions, permitted input declarations and
-  reference URLs. Body inputs must appear in their manifest; the shared reader
-  also accepts the declared FITS, SBMT and hosted-orbit test fixtures. These checks
-  need no Python, but may need restored files. A source-dependent skip is not a
-  completed fixture audit.
+  their URL and record a size. Body inputs must appear in their manifest; the shared reader
+  also accepts the declared FITS, SBMT and hosted-orbit test fixtures. A source-dependent
+  skip is not a completed fixture audit.
 - Comparing tests read the committed fixture and the same declared inputs the
   pipeline reads. They run without Python. `readOracleInput` checks the recorded
-  byte count immediately before comparison; it does not verify a source SHA-256.
-  Preserve existing historical hashes and toolchain-lock identities without
-  claiming that the current fixture reader validates input digests.
+  byte count immediately before comparison. Git identifies tracked inputs and the
+  R2 source mirror identifies restored downloads, so fixtures record no digests.
 - An oracle reads the archive with its own reader. It may read a recipe's declared
   policy, such as a detector border, but never a value the pipeline computed.
 - Regenerate a fixture only when the oracle version or an input changes, and say
@@ -95,7 +83,7 @@ span `tests/oracles/spice/`, `packages/bake/src/astronomy/fixtures/` and
 
 SBMT is an opt-in native backend: `node packages/core/src/node/oracle/setup.mts sbmt`, then
 `node packages/core/src/node/oracle/run.mts sbmt/projection`. It uses the same fixture envelope with a
-pinned executable/software lock (its fixture records no digest; see the known gap above). `node tests/oracles/test-sbmt.mts --unit`
+pinned executable/software lock that names each file's path and size. `node tests/oracles/test-sbmt.mts --unit`
 runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 The commands below operate on the Python backends.

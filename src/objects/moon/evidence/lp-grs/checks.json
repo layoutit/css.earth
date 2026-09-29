@@ -1,401 +1,398 @@
 {
- "schema": "cssearth-moon-lp-grs-checks@1",
- "base": "ccbf483de86e281069b2f17f12de1f50bb2c8d07",
- "date": "2026-09-27",
- "scope": "Working changes above the named base: the thorium, potassium, iron-gamma and titanium blocks of source/preparation/raster.json, read by the draft pds-equal-area-table reader (output/moon-more-data/drafts) and painted by the shared paintScienceSurface outside a bake.",
- "testedFiles": {
-  "lpgrs_high1_elem_abundance_2deg.tab": {
-   "bytes": 9949280,
-   "sha256": "e866953499813ec089067f1985dfb92fe7adc8957a2121bb115a3b27ea14e946"
+  "schema": "cssearth-moon-lp-grs-checks@1",
+  "base": "ccbf483de86e281069b2f17f12de1f50bb2c8d07",
+  "date": "2026-09-27",
+  "scope": "Working changes above the named base: the thorium, potassium, iron-gamma and titanium blocks of source/preparation/raster.json, read by the draft pds-equal-area-table reader (output/moon-more-data/drafts) and painted by the shared paintScienceSurface outside a bake.",
+  "testedFiles": {
+    "lpgrs_high1_elem_abundance_2deg.tab": {
+      "bytes": 9949280
+    },
+    "lpgrs_high1_elem_abundance_2deg.lbl": {
+      "bytes": 8102
+    },
+    "lpgrs_elem_abundance.fmt": {
+      "bytes": 23574
+    }
   },
-  "lpgrs_high1_elem_abundance_2deg.lbl": {
-   "bytes": 8102,
-   "sha256": "8eb4daac25d68cfe0a9a8d778d447949ceb2239e67635207475aa87f5f3b618e"
+  "methods": {
+    "oracle": "Each row split on whitespace, independently of the reader, which cuts rows at the format file START_BYTE and BYTES. Every pixel is probed at its centre and 1e-6 degrees inside its four corners.",
+    "tiling": "Pixel areas (sin north - sin south) x (east - west) sum to 4 pi to 1e-12; the smallest pixel has 0.75 of the largest pixel area (the 1 degree polar caps).",
+    "uncertainty": "medianSigma: median over pixels of the square root of the error-matrix diagonal term named by errorColumn, in the lens units (dataset.cat: the square root of the diagonal gives the propagated uncertainty).",
+    "sites": "Values of the pixel containing each named point. Landing and sample sites use the NSSDCA coordinates in source/features/sites.json (rounded to 0.001 degree; no pixel changes). The farside, South Pole-Aitken, Imbrium and Aristarchus points are rounded map positions chosen for this check."
   },
-  "lpgrs_elem_abundance.fmt": {
-   "bytes": 23574,
-   "sha256": "87c1b725aba228ecf44e7aa0c80efaf899aa3d4033b6bf85776bf60cd2913d99"
+  "results": {
+    "thorium": {
+      "column": "W_TH",
+      "probes": 56530,
+      "mismatches": 0,
+      "report": {
+        "format": "pds-equal-area-table",
+        "pixels": 11306,
+        "bands": 91,
+        "mappedPixels": 11306,
+        "valueRange": [
+          0.003663,
+          11.644
+        ],
+        "sampling": "containing-pixel",
+        "medianSigma": 0.2621259239373321,
+        "negativeVariances": 0
+      }
+    },
+    "potassium": {
+      "column": "W_K",
+      "probes": 56530,
+      "mismatches": 0,
+      "report": {
+        "format": "pds-equal-area-table",
+        "pixels": 11306,
+        "bands": 91,
+        "mappedPixels": 11306,
+        "valueRange": [
+          0,
+          4356.4
+        ],
+        "sampling": "containing-pixel",
+        "medianSigma": 227.7432765198569,
+        "negativeVariances": 0
+      }
+    },
+    "iron-gamma": {
+      "column": "W_FEO",
+      "probes": 56530,
+      "mismatches": 0,
+      "report": {
+        "format": "pds-equal-area-table",
+        "pixels": 11306,
+        "bands": 91,
+        "mappedPixels": 11306,
+        "valueRange": [
+          0,
+          30.749
+        ],
+        "sampling": "containing-pixel",
+        "medianSigma": 1.000399920031984,
+        "negativeVariances": 0
+      }
+    },
+    "titanium": {
+      "column": "TIO2",
+      "probes": 56530,
+      "mismatches": 0,
+      "report": {
+        "format": "pds-equal-area-table",
+        "pixels": 11306,
+        "bands": 91,
+        "mappedPixels": 11306,
+        "valueRange": [
+          0,
+          11.993
+        ],
+        "sampling": "containing-pixel",
+        "medianSigma": 0.523201681954483,
+        "negativeVariances": 0
+      }
+    }
+  },
+  "statistics": {
+    "TiO2": {
+      "min": 0,
+      "minAt": [
+        -86,
+        -168
+      ],
+      "max": 11.993,
+      "maxAt": [
+        12,
+        25
+      ],
+      "zeros": 2117,
+      "p01": 0,
+      "p05": 0,
+      "p50": 0.5368999999999999,
+      "p95": 4.4358,
+      "p99": 7.0504999999999995,
+      "medianSigma": 0.523201681954483
+    },
+    "FeO": {
+      "min": 0,
+      "minAt": [
+        0,
+        168.75
+      ],
+      "max": 30.749,
+      "maxAt": [
+        30,
+        -57
+      ],
+      "zeros": 1,
+      "p01": 2.1399,
+      "p05": 2.9534000000000002,
+      "p50": 5.4982999999999995,
+      "p95": 19.122,
+      "p99": 23.945,
+      "medianSigma": 1.000399920031984
+    },
+    "K": {
+      "min": 0,
+      "minAt": [
+        -70,
+        -57.5
+      ],
+      "max": 4356.4,
+      "maxAt": [
+        2,
+        -19
+      ],
+      "zeros": 432,
+      "p01": 0,
+      "p05": 30.591,
+      "p50": 521.23,
+      "p95": 2456.1,
+      "p99": 3374.6,
+      "medianSigma": 227.7432765198569
+    },
+    "Th": {
+      "min": 0.003663,
+      "minAt": [
+        -60,
+        -46.5
+      ],
+      "max": 11.644,
+      "maxAt": [
+        0,
+        -18.75
+      ],
+      "zeros": 0,
+      "p01": 0.003663,
+      "p05": 0.22277,
+      "p50": 0.96758,
+      "p95": 6.2261,
+      "p99": 9.0892,
+      "medianSigma": 0.2621259239373321
+    }
+  },
+  "sites": {
+    "Apollo 11 (Mare Tranquillitatis)": {
+      "TiO2": 3.444,
+      "FeO": 12.234,
+      "K": 1132.3,
+      "Th": 1.491,
+      "TiO2_sig": 1.199,
+      "FeO_sig": 1.959,
+      "K_sig": 254.016,
+      "Th_sig": 0.289,
+      "pixel": [
+        5668,
+        -1,
+        1,
+        22.5,
+        24
+      ]
+    },
+    "Apollo 12 (Oceanus Procellarum)": {
+      "TiO2": 3.772,
+      "FeO": 21.333,
+      "K": 3193.9,
+      "Th": 7.801,
+      "TiO2_sig": 1.355,
+      "FeO_sig": 2.179,
+      "K_sig": 258.534,
+      "Th_sig": 0.305,
+      "pixel": [
+        5251,
+        -5,
+        -3,
+        -24,
+        -22
+      ]
+    },
+    "Apollo 14 (Fra Mauro)": {
+      "TiO2": 1.211,
+      "FeO": 15.548,
+      "K": 4041.1,
+      "Th": 10.737,
+      "TiO2_sig": 1.356,
+      "FeO_sig": 2.15,
+      "K_sig": 260.925,
+      "Th_sig": 0.314,
+      "pixel": [
+        5254,
+        -5,
+        -3,
+        -18,
+        -16
+      ]
+    },
+    "Apollo 15 (Hadley-Apennine)": {
+      "TiO2": 1.816,
+      "FeO": 12.807,
+      "K": 2208.5,
+      "Th": 6.431,
+      "TiO2_sig": 1.069,
+      "FeO_sig": 1.802,
+      "K_sig": 268.717,
+      "Th_sig": 0.315,
+      "pixel": [
+        8024,
+        25,
+        27,
+        2,
+        4
+      ]
+    },
+    "Apollo 16 (Descartes highlands)": {
+      "TiO2": 0,
+      "FeO": 5.687,
+      "K": 903.84,
+      "Th": 2.447,
+      "TiO2_sig": 0.658,
+      "FeO_sig": 1.217,
+      "K_sig": 240.042,
+      "Th_sig": 0.28,
+      "pixel": [
+        4910,
+        -9,
+        -7,
+        14,
+        16
+      ]
+    },
+    "Apollo 17 (Taurus-Littrow)": {
+      "TiO2": 4.096,
+      "FeO": 13.813,
+      "K": 1029.7,
+      "Th": 1.791,
+      "TiO2_sig": 0.939,
+      "FeO_sig": 1.587,
+      "K_sig": 246.146,
+      "Th_sig": 0.283,
+      "pixel": [
+        7498,
+        19,
+        21,
+        30,
+        32
+      ]
+    },
+    "Luna 16 (Mare Fecunditatis)": {
+      "TiO2": 4.854,
+      "FeO": 20.594,
+      "K": 841.99,
+      "Th": 1.541,
+      "TiO2_sig": 1.362,
+      "FeO_sig": 2.359,
+      "K_sig": 314.835,
+      "Th_sig": 0.36,
+      "pixel": [
+        5690,
+        -1,
+        1,
+        55.5,
+        57
+      ]
+    },
+    "Luna 24 (Mare Crisium)": {
+      "TiO2": 1.57,
+      "FeO": 12.859,
+      "K": 45.69,
+      "Th": 0.774,
+      "TiO2_sig": 0.761,
+      "FeO_sig": 1.372,
+      "K_sig": 237.664,
+      "Th_sig": 0.273,
+      "pixel": [
+        6794,
+        11,
+        13,
+        62,
+        64
+      ]
+    },
+    "Luna 20 (Apollonius highlands)": {
+      "TiO2": 1.285,
+      "FeO": 11.179,
+      "K": 1240.1,
+      "Th": 1.221,
+      "TiO2_sig": 0.8,
+      "FeO_sig": 1.451,
+      "K_sig": 262.063,
+      "Th_sig": 0.297,
+      "pixel": [
+        6071,
+        3,
+        5,
+        56,
+        58
+      ]
+    },
+    "Farside highlands 0N 180E": {
+      "TiO2": 0.732,
+      "FeO": 2.596,
+      "K": 348.8,
+      "Th": 0.863,
+      "TiO2_sig": 0.544,
+      "FeO_sig": 1.044,
+      "K_sig": 262.011,
+      "Th_sig": 0.304,
+      "pixel": [
+        5772,
+        -1,
+        1,
+        178.5,
+        180
+      ]
+    },
+    "South Pole-Aitken centre (-53, -169)": {
+      "TiO2": 1.748,
+      "FeO": 11.181,
+      "K": 449.18,
+      "Th": 1.77,
+      "TiO2_sig": 0.742,
+      "FeO_sig": 1.324,
+      "K_sig": 221.856,
+      "Th_sig": 0.263,
+      "pixel": [
+        1192,
+        -53,
+        -51,
+        -171,
+        -168
+      ]
+    },
+    "Imbrium centre (33N,-18E)": {
+      "TiO2": 1.123,
+      "FeO": 18.204,
+      "K": 1461.3,
+      "Th": 4.313,
+      "TiO2_sig": 1.258,
+      "FeO_sig": 2.027,
+      "K_sig": 247.33,
+      "Th_sig": 0.286,
+      "pixel": [
+        8734,
+        33,
+        35,
+        -18,
+        -16
+      ]
+    },
+    "Aristarchus (23.7N,-47.4E)": {
+      "TiO2": 4.808,
+      "FeO": 22.505,
+      "K": 3978.3,
+      "Th": 9.126,
+      "TiO2_sig": 1.636,
+      "FeO_sig": 2.516,
+      "K_sig": 270.165,
+      "Th_sig": 0.316,
+      "pixel": [
+        7819,
+        23,
+        25,
+        -48,
+        -46
+      ]
+    }
   }
- },
- "methods": {
-  "oracle": "Each row split on whitespace, independently of the reader, which cuts rows at the format file START_BYTE and BYTES. Every pixel is probed at its centre and 1e-6 degrees inside its four corners.",
-  "tiling": "Pixel areas (sin north - sin south) x (east - west) sum to 4 pi to 1e-12; the smallest pixel has 0.75 of the largest pixel area (the 1 degree polar caps).",
-  "uncertainty": "medianSigma: median over pixels of the square root of the error-matrix diagonal term named by errorColumn, in the lens units (dataset.cat: the square root of the diagonal gives the propagated uncertainty).",
-  "sites": "Values of the pixel containing each named point. Landing and sample sites use the NSSDCA coordinates in source/features/sites.json (rounded to 0.001 degree; no pixel changes). The farside, South Pole-Aitken, Imbrium and Aristarchus points are rounded map positions chosen for this check."
- },
- "results": {
-  "thorium": {
-   "column": "W_TH",
-   "probes": 56530,
-   "mismatches": 0,
-   "report": {
-    "format": "pds-equal-area-table",
-    "pixels": 11306,
-    "bands": 91,
-    "mappedPixels": 11306,
-    "valueRange": [
-     0.003663,
-     11.644
-    ],
-    "sampling": "containing-pixel",
-    "medianSigma": 0.2621259239373321,
-    "negativeVariances": 0
-   }
-  },
-  "potassium": {
-   "column": "W_K",
-   "probes": 56530,
-   "mismatches": 0,
-   "report": {
-    "format": "pds-equal-area-table",
-    "pixels": 11306,
-    "bands": 91,
-    "mappedPixels": 11306,
-    "valueRange": [
-     0,
-     4356.4
-    ],
-    "sampling": "containing-pixel",
-    "medianSigma": 227.7432765198569,
-    "negativeVariances": 0
-   }
-  },
-  "iron-gamma": {
-   "column": "W_FEO",
-   "probes": 56530,
-   "mismatches": 0,
-   "report": {
-    "format": "pds-equal-area-table",
-    "pixels": 11306,
-    "bands": 91,
-    "mappedPixels": 11306,
-    "valueRange": [
-     0,
-     30.749
-    ],
-    "sampling": "containing-pixel",
-    "medianSigma": 1.000399920031984,
-    "negativeVariances": 0
-   }
-  },
-  "titanium": {
-   "column": "TIO2",
-   "probes": 56530,
-   "mismatches": 0,
-   "report": {
-    "format": "pds-equal-area-table",
-    "pixels": 11306,
-    "bands": 91,
-    "mappedPixels": 11306,
-    "valueRange": [
-     0,
-     11.993
-    ],
-    "sampling": "containing-pixel",
-    "medianSigma": 0.523201681954483,
-    "negativeVariances": 0
-   }
-  }
- },
- "statistics": {
-  "TiO2": {
-   "min": 0,
-   "minAt": [
-    -86,
-    -168
-   ],
-   "max": 11.993,
-   "maxAt": [
-    12,
-    25
-   ],
-   "zeros": 2117,
-   "p01": 0,
-   "p05": 0,
-   "p50": 0.5368999999999999,
-   "p95": 4.4358,
-   "p99": 7.0504999999999995,
-   "medianSigma": 0.523201681954483
-  },
-  "FeO": {
-   "min": 0,
-   "minAt": [
-    0,
-    168.75
-   ],
-   "max": 30.749,
-   "maxAt": [
-    30,
-    -57
-   ],
-   "zeros": 1,
-   "p01": 2.1399,
-   "p05": 2.9534000000000002,
-   "p50": 5.4982999999999995,
-   "p95": 19.122,
-   "p99": 23.945,
-   "medianSigma": 1.000399920031984
-  },
-  "K": {
-   "min": 0,
-   "minAt": [
-    -70,
-    -57.5
-   ],
-   "max": 4356.4,
-   "maxAt": [
-    2,
-    -19
-   ],
-   "zeros": 432,
-   "p01": 0,
-   "p05": 30.591,
-   "p50": 521.23,
-   "p95": 2456.1,
-   "p99": 3374.6,
-   "medianSigma": 227.7432765198569
-  },
-  "Th": {
-   "min": 0.003663,
-   "minAt": [
-    -60,
-    -46.5
-   ],
-   "max": 11.644,
-   "maxAt": [
-    0,
-    -18.75
-   ],
-   "zeros": 0,
-   "p01": 0.003663,
-   "p05": 0.22277,
-   "p50": 0.96758,
-   "p95": 6.2261,
-   "p99": 9.0892,
-   "medianSigma": 0.2621259239373321
-  }
- },
- "sites": {
-  "Apollo 11 (Mare Tranquillitatis)": {
-   "TiO2": 3.444,
-   "FeO": 12.234,
-   "K": 1132.3,
-   "Th": 1.491,
-   "TiO2_sig": 1.199,
-   "FeO_sig": 1.959,
-   "K_sig": 254.016,
-   "Th_sig": 0.289,
-   "pixel": [
-    5668,
-    -1,
-    1,
-    22.5,
-    24
-   ]
-  },
-  "Apollo 12 (Oceanus Procellarum)": {
-   "TiO2": 3.772,
-   "FeO": 21.333,
-   "K": 3193.9,
-   "Th": 7.801,
-   "TiO2_sig": 1.355,
-   "FeO_sig": 2.179,
-   "K_sig": 258.534,
-   "Th_sig": 0.305,
-   "pixel": [
-    5251,
-    -5,
-    -3,
-    -24,
-    -22
-   ]
-  },
-  "Apollo 14 (Fra Mauro)": {
-   "TiO2": 1.211,
-   "FeO": 15.548,
-   "K": 4041.1,
-   "Th": 10.737,
-   "TiO2_sig": 1.356,
-   "FeO_sig": 2.15,
-   "K_sig": 260.925,
-   "Th_sig": 0.314,
-   "pixel": [
-    5254,
-    -5,
-    -3,
-    -18,
-    -16
-   ]
-  },
-  "Apollo 15 (Hadley-Apennine)": {
-   "TiO2": 1.816,
-   "FeO": 12.807,
-   "K": 2208.5,
-   "Th": 6.431,
-   "TiO2_sig": 1.069,
-   "FeO_sig": 1.802,
-   "K_sig": 268.717,
-   "Th_sig": 0.315,
-   "pixel": [
-    8024,
-    25,
-    27,
-    2,
-    4
-   ]
-  },
-  "Apollo 16 (Descartes highlands)": {
-   "TiO2": 0,
-   "FeO": 5.687,
-   "K": 903.84,
-   "Th": 2.447,
-   "TiO2_sig": 0.658,
-   "FeO_sig": 1.217,
-   "K_sig": 240.042,
-   "Th_sig": 0.28,
-   "pixel": [
-    4910,
-    -9,
-    -7,
-    14,
-    16
-   ]
-  },
-  "Apollo 17 (Taurus-Littrow)": {
-   "TiO2": 4.096,
-   "FeO": 13.813,
-   "K": 1029.7,
-   "Th": 1.791,
-   "TiO2_sig": 0.939,
-   "FeO_sig": 1.587,
-   "K_sig": 246.146,
-   "Th_sig": 0.283,
-   "pixel": [
-    7498,
-    19,
-    21,
-    30,
-    32
-   ]
-  },
-  "Luna 16 (Mare Fecunditatis)": {
-   "TiO2": 4.854,
-   "FeO": 20.594,
-   "K": 841.99,
-   "Th": 1.541,
-   "TiO2_sig": 1.362,
-   "FeO_sig": 2.359,
-   "K_sig": 314.835,
-   "Th_sig": 0.36,
-   "pixel": [
-    5690,
-    -1,
-    1,
-    55.5,
-    57
-   ]
-  },
-  "Luna 24 (Mare Crisium)": {
-   "TiO2": 1.57,
-   "FeO": 12.859,
-   "K": 45.69,
-   "Th": 0.774,
-   "TiO2_sig": 0.761,
-   "FeO_sig": 1.372,
-   "K_sig": 237.664,
-   "Th_sig": 0.273,
-   "pixel": [
-    6794,
-    11,
-    13,
-    62,
-    64
-   ]
-  },
-  "Luna 20 (Apollonius highlands)": {
-   "TiO2": 1.285,
-   "FeO": 11.179,
-   "K": 1240.1,
-   "Th": 1.221,
-   "TiO2_sig": 0.8,
-   "FeO_sig": 1.451,
-   "K_sig": 262.063,
-   "Th_sig": 0.297,
-   "pixel": [
-    6071,
-    3,
-    5,
-    56,
-    58
-   ]
-  },
-  "Farside highlands 0N 180E": {
-   "TiO2": 0.732,
-   "FeO": 2.596,
-   "K": 348.8,
-   "Th": 0.863,
-   "TiO2_sig": 0.544,
-   "FeO_sig": 1.044,
-   "K_sig": 262.011,
-   "Th_sig": 0.304,
-   "pixel": [
-    5772,
-    -1,
-    1,
-    178.5,
-    180
-   ]
-  },
-  "South Pole-Aitken centre (-53, -169)": {
-   "TiO2": 1.748,
-   "FeO": 11.181,
-   "K": 449.18,
-   "Th": 1.77,
-   "TiO2_sig": 0.742,
-   "FeO_sig": 1.324,
-   "K_sig": 221.856,
-   "Th_sig": 0.263,
-   "pixel": [
-    1192,
-    -53,
-    -51,
-    -171,
-    -168
-   ]
-  },
-  "Imbrium centre (33N,-18E)": {
-   "TiO2": 1.123,
-   "FeO": 18.204,
-   "K": 1461.3,
-   "Th": 4.313,
-   "TiO2_sig": 1.258,
-   "FeO_sig": 2.027,
-   "K_sig": 247.33,
-   "Th_sig": 0.286,
-   "pixel": [
-    8734,
-    33,
-    35,
-    -18,
-    -16
-   ]
-  },
-  "Aristarchus (23.7N,-47.4E)": {
-   "TiO2": 4.808,
-   "FeO": 22.505,
-   "K": 3978.3,
-   "Th": 9.126,
-   "TiO2_sig": 1.636,
-   "FeO_sig": 2.516,
-   "K_sig": 270.165,
-   "Th_sig": 0.316,
-   "pixel": [
-    7819,
-    23,
-    25,
-    -48,
-    -46
-   ]
-  }
- }
 }

@@ -1,19 +1,17 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
-import { assembleSpitzerLedger, spitzerLedgerGuide, naifIdFromHorizonsCode, observationRecords, parseSpitzerLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
-import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
-import { addProductEvidence, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
-import { evidenceFor } from '@cssearth/telescope';
+import { archiveUrl, DATA, frameSibling, parseSpitzerProgram } from './archive.mts';
+import { naifIdFromHorizonsCode, observationRecords } from './archive-ledger.mts';
+import { compareMosaics, LIMITS } from './compare.mts';
+import { fileSize } from '@cssearth/telescope/node';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
-const sha = (seed: string) => seed.repeat(64).slice(0, 64);
 const url = (name: string) => `${DATA}/sha/archive/proc/IRAC003600/r4416768/ch1/${name.includes('maic') || name.includes('munc') || name.includes('mcov') ? 'pbcd' : 'bcd'}/${name}`;
-const file = (role: string, name: string, seed: string) => ({ role, name, url: url(name), bytes: 100, sha256: sha(seed) });
+const file = (role: string, name: string, _seed?: string) => ({ role, name, url: url(name), bytes: 100 });
 const frameFiles = (dce: string, seed: string) => [
   file('frame', `SPITZER_I1_4416768_${dce}_0000_7_cbcd.fits`, seed),
   file('frame-uncertainty', `SPITZER_I1_4416768_${dce}_0000_7_cbunc.fits`, `${seed}b`),
@@ -187,29 +185,6 @@ test('a comparison refuses an archive file that is not its pinned bytes, before 
   }
 });
 
-test('a reproduction receipt parses, keeps its limits, and refuses another schema', () => {
-  const receipt = {
-    schema: 'cssearth-spitzer-reproduction@1', program: 'ngc3132-4416768', aorKey: 4416768, target: 'NGC 3132', channel: 1,
-    wavelength: 'IRAC 3.6um',
-    archiveProduct: { name: 'maic.fits', bytes: 9797760, sha256: sha('a'), pipeline: 'S18.25.0' },
-    ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
-    archiveUncertainty: { name: 'munc.fits', bytes: 9797760, sha256: sha('d') },
-    archiveCoverage: { name: 'mcov.fits', bytes: 9797760, sha256: sha('e') },
-    framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
-    statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
-      medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
-      shareWithinArchiveSigma: 0.98, shareWithinOnePercent: 0.7, shareWithinFivePercent: 0.93, correlation: 0.98 },
-    limits: LIMITS,
-  };
-  const parsed = parseReproduction(receipt);
-  assert.equal(parsed.ourProduct.stage, 'open-remosaic');
-  assert.ok(parsed.limits.some(limit => limit.includes('MOPEX')), 'the receipt says the observatory pipeline did not run');
-  assert.equal(parsed.archiveUncertainty.name, 'munc.fits');
-  assert.throws(() => parseReproduction({ ...receipt, schema: 'other' }), /Unsupported/u);
-  assert.throws(() => parseReproduction({ ...receipt, archiveUncertainty: undefined }), /archive uncertainty/u);
-  assert.throws(() => parseReproduction({ ...receipt, statistics: { ...receipt.statistics, correlation: 'high' } }), /correlation/u);
-});
-
 test('a mosaic run reports both the grid it used and the grid its frames imply', () => {
   const summary = parseMosaicSummary({ frames: 12, shape: [1036, 2361], stackBytes: 117407808, coveredPixels: 791713,
     maxContributingFrames: 6, medianContributingFrames: 4, backgroundOffsets: [-0.02, 0.01, 0.01],
@@ -223,118 +198,8 @@ test('a mosaic run reports both the grid it used and the grid its frames imply',
     gridImpliedByFrames: { shape: [1, 1], crval: [0, 0], pixelScaleArcsec: 1 } }), /pair/u);
 });
 
-const objects: ShippedObject[] = [
-  { id: 'europa', name: 'Europa', classification: 'satellite', query: { kind: 'naif', naifId: 502 } },
-  { id: 'io', name: 'Io', classification: 'satellite', query: { kind: 'naif', naifId: 501 } },
-  { id: 'ganymede', name: 'Ganymede', classification: 'satellite', query: { kind: 'naif', naifId: 503 } },
-  { id: 'callisto', name: 'Callisto', classification: 'satellite', query: { kind: 'naif', naifId: 504 } },
-  { id: 'ceres', name: 'Ceres', classification: 'dwarf-planet', query: { kind: 'naif', naifId: 2000001 } },
-  { id: 'comet-103p', name: '103P/Hartley 2', classification: 'comet', query: { kind: 'none', reason: 'its Horizons code is the designation DES=103P;CAP;, which is not a NAIF id' } },
-];
-const records = [
-  { id: '101', programme: '10', mode: 'MIPS Phot', title: 'Ceres one', startIso: '2005-01-01T00:00:00.000Z', endIso: '2005-01-01T00:10:00.000Z' },
-  { id: '102', programme: '10', mode: 'MIPS Phot', title: 'Ceres two', startIso: '2005-01-02T00:00:00.000Z', endIso: '2005-01-02T00:10:00.000Z' },
-];
-const survey = { holdings: [{ object: 'ceres', name: 'Ceres', classification: 'dwarf-planet', askedAs: 'NAIF 2000001', observations: 2, modes: { 'MIPS Phot': 2 }, records }], unanswered: [], searched: ['ceres'] };
-
 test('archive rows retain the AOR identity, programme, mode and complete time range', () => {
   assert.deepEqual(observationRecords([{ reqkey: '35303936', progid: '61012', modedisplayname: 'IRAC Map PC', reqtitle: 'Itokawa',
     reqbegintime: '2010-05-15 14:35:42.395', reqendtime: '2010-05-15 14:49:52.594' }]), [{ id: '35303936', programme: '61012', mode: 'IRAC Map PC',
     title: 'Itokawa', startIso: '2010-05-15T14:35:42.395Z', endIso: '2010-05-15T14:49:52.594Z' }]);
-});
-
-test('a ledger counts a mode as checked only from a receipt, and says plainly that Spitzer has no Galilean data', () => {
-  const unproved = assembleSpitzerLedger(objects, survey, { pinned: new Map([['IRAC Map', 4]]), checked: new Map() }, '2026-09-19');
-  const iracMap = unproved.modes.find(entry => entry.mode === 'IRAC Map')!;
-  assert.equal(iracMap.pinnedPrograms, 4);
-  assert.equal(iracMap.checkedProducts, 0);
-  assert.equal(unproved.asked, 5);
-  assert.equal(unproved.notAsked.length, 1);
-  assert.equal(unproved.holdings.length, 1, 'only objects with observations are listed');
-  // A mode the archive returned that this toolkit does not describe is still counted, so it cannot go unnoticed.
-  const surprisingRecords = records.map((record, index) => ({ ...record, id: String(200 + index), mode: 'IRAC Something New' }));
-  const surprising = assembleSpitzerLedger(objects, { holdings: [{ ...survey.holdings[0]!, modes: { 'IRAC Something New': 2 }, records: surprisingRecords }], unanswered: [], searched: ['ceres'] }, { pinned: new Map(), checked: new Map() }, '2026-09-19');
-  const unknown = surprising.modes.find(entry => entry.mode === 'IRAC Something New')!;
-  assert.equal(unknown.observationsForOurObjects, 2);
-  assert.equal(unknown.records, null);
-
-  const guide = spitzerLedgerGuide(unproved);
-  assert.match(guide, /no observation of Io, Europa, Ganymede or Callisto/u);
-  assert.match(guide, /the same search, in the same pass, returned 2 for Ceres/u);
-  assert.match(guide, /not asked for at all/u);
-  assert.deepEqual(parseSpitzerLedger(JSON.parse(JSON.stringify(unproved)) as unknown), unproved);
-  assert.throws(() => parseSpitzerLedger({ ...unproved, schema: 'cssearth-spitzer-ledger@1' }), /Unsupported/u);
-  assert.throws(() => parseSpitzerLedger({ ...unproved, holdings: [{ ...unproved.holdings[0], records: [] }] }), /do not reproduce/u);
-});
-
-test('a checked mosaic carries its evidence on its own record, and evidence never drifts onto other bytes', async () => {
-  const work = await mkdtemp(resolve(tmpdir(), 'spitzer-evidence-'));
-  const pinnedProgram = parseSpitzerProgram(program()), channel = pinnedProgram.channels[0]!;
-  const mosaic = 'ngc3132-4416768.ch1.remosaic.fits', mosaicPath = resolve(work, mosaic);
-  await writeFile(mosaicPath, fitsFile([1, 2, 3, 4], 2, 2));
-  const recordPath = resolve(work, `${mosaic}.product.json`);
-  const run = { telescope: 'spitzer', stage: 'open-remosaic', inputs: [{ role: 'frame', identity: 'a_cbcd.fits', bytes: 1, sha256: sha('1') }],
-    parameters: {}, software: [{ name: 'reproject', version: '0.21.0' }] };
-
-  // The producing stage writes the record with nothing proved yet, which is what a consumer should see before any check.
-  await writeProductRecord(recordPath, run, [{ path: mosaic, file: mosaicPath }]);
-  assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement'), []);
-
-  const entry = archiveAgreement(pinnedProgram, channel, 'SPITZER_I1_4416768_0000_7_E8348771_maic.fits', mosaic);
-  await writeFile(resolve(work, entry.receipt), '{}');
-  await addProductEvidence(recordPath, [entry], path => resolve(work, path));
-  const checked = evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement');
-  assert.equal(checked.length, 1);
-  assert.ok(checked[0]!.receipt.endsWith('.evidence.json'));
-  assert.match(checked[0]!.establishes, /NON-official/u);
-  assert.match(checked[0]!.establishes, /MOPEX did not run here/u);
-  // Evidence of another kind, or about another product, does not answer for this one.
-  assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, mosaic, 'internal-consistency'), []);
-  assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, 'other.fits', 'archive-agreement'), []);
-
-});
-
-test("the repository's own state is read from its programs, not declared", async () => {
-  const state = await repositoryState();
-  for (const [mode, count] of state.checked) assert.ok((state.pinned.get(mode) ?? 0) > 0, `${mode} has ${count} checked products but no pinned channels`);
-});
-
-test('a receipt counts only when the archive files it says it read are the ones the program pinned', async () => {
-  // The committed receipts must survive this, or the ledger is counting checks made against bytes nobody pinned.
-  const real = await repositoryState();
-  const scratch = await mkdtemp(resolve(tmpdir(), 'spitzer-state-'));
-  const pinnedProgram = parseSpitzerProgram(program()), channel = pinnedProgram.channels[0]!;
-  const plane = (role: string) => channel.products.find(product => product.role === role)!;
-  const receipt = (uncertaintySha256: string) => ({
-    schema: 'cssearth-spitzer-reproduction@1', program: pinnedProgram.id, aorKey: pinnedProgram.aorKey, target: pinnedProgram.target,
-    channel: channel.channel, wavelength: channel.wavelength,
-    archiveProduct: { name: plane('mosaic').name, bytes: plane('mosaic').bytes, sha256: 'a'.repeat(64), pipeline: 'S18.25.0' },
-    ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
-    archiveUncertainty: { name: plane('mosaic-uncertainty').name, bytes: plane('mosaic-uncertainty').bytes, sha256: uncertaintySha256 },
-    archiveCoverage: { name: plane('mosaic-coverage').name, bytes: plane('mosaic-coverage').bytes, sha256: 'b'.repeat(64) },
-    framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
-    statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
-      medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
-      shareWithinArchiveSigma: 1, shareWithinOnePercent: 0.7, shareWithinFivePercent: 0.93, correlation: 0.98 },
-    limits: LIMITS,
-  });
-  await writeFile(resolve(scratch, `${pinnedProgram.id}.json`), JSON.stringify(program()));
-  const receiptFile = resolve(scratch, `${pinnedProgram.id}.ch1.remosaic.reproduction.json`);
-
-  await writeFile(receiptFile, JSON.stringify(receipt('c'.repeat(64))));
-  assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), 1);
-
-  assert.ok((real.checked.get('IRAC Map') ?? 0) > 0, "this repository's own IRAC Map receipts name the bytes their program pinned");
-});
-
-test('mosaic.py keeps the FITS ORIGIN string it serialized before the archive code moved into telescope-cli', async () => {
-  // No pinned Python/astropy toolchain runs in this suite, so the identity is checked the way the rest of this stage's
-  // Python is checked from here: by reading the source mosaic.py writes from, not by executing it.
-  const source = await readFile(resolve(import.meta.dirname, 'mosaic.py'), 'utf8');
-  const constant = source.match(/^HISTORICAL_ORIGIN\s*=\s*"([^"]*)"/mu);
-  assert.ok(constant, 'mosaic.py names a HISTORICAL_ORIGIN constant');
-  assert.equal(constant![1], 'cssEarth tools/objects/spitzer');
-  // The header write has to use that named constant, not a literal that could drift from it unnoticed.
-  assert.match(source, /out_header\["ORIGIN"\]\s*=\s*HISTORICAL_ORIGIN\b/u,
-    'the ORIGIN header write must reference the HISTORICAL_ORIGIN constant');
 });

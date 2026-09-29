@@ -63,7 +63,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     localGroup: data.objects.filter(row => row.membership.group === 'local-group').length,
     confirmedLocalGroup: data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length };
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    // The catalogue's outputs are the context's prepared inventory; the provenance step adds its record and presentation.
+    // The catalogue's outputs are the context's prepared inventory.
     const current = await readInventory(basename(objectDirectory), objectDirectory);
     const kept = current?.assets.filter(asset => asset.location === 'prepared' && !receipt.outputs.some(output => output.path === asset.filename)) ?? [];
     await updateInventory({ objectId: basename(objectDirectory), objectDirectory, location: 'prepared',

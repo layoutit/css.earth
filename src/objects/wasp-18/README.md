@@ -25,4 +25,4 @@ Run of 2026-09-23 (this version):
 - **The radius is the mapping configuration's, not a table value.** It is kept so the planet's orbit matches the fit its maps come from; Cortés-Zuleta et al. (2020) measure 1.319 solar radii.
 - **The spin axis is a display convention.**
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

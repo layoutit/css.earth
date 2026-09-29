@@ -1,11 +1,11 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Generic lab-only experiment: frozen image + automatic supports → finite 3D → prepared PolyCSS. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { digest, readBenchmarkImage } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
+import { readBenchmarkImage } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
+import { savedInputsMatch } from '../../server/services/saved-variants.ts';
 import { decomposeStructures, type WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 import { createCoherentVolumeSampler, type CoarseStellarDensityPrior } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-volume';
 import { validateCoherentColumns, validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
@@ -20,33 +20,28 @@ interface Variant {
 }
 interface Recipe {
   schema: 'cssearth-coherent-experiment@1'; id: string;
-  benchmark: { path: string; sha256: string };
+  benchmark: { path: string };
   /** Lengths below are fractions of projected image width, shared across cases. */
   projectedWidthKpc: number; projectedScaleNote: string; depthExtentWidths: number;
-  densityPrior?: { path: string; sha256: string; dimensions: Vec3; boundsKpc: { min: Vec3; max: Vec3 }; note: string };
+  densityPrior?: { path: string; dimensions: Vec3; boundsKpc: { min: Vec3; max: Vec3 }; note: string };
   master: { width: number; sliceCounts: { x: number; y: number; z: number }; samplesPerSlab: number };
   delivery: { width: number; quality: number };
   exposureGain: number; maxDisplaySignal: number; variants: Variant[]; limitations: string[];
 }
 const json = (path: string, value: unknown) => writeFile(path, `${JSON.stringify(value, null, 2)}\n`);
-async function pinned(path: string, pin: string) {
-  const bytes = await readFile(path);
-  if (digest(bytes) !== pin) throw new Error(`Pinned input differs: ${path}`);
-  return bytes;
-}
 
 const [recipePath, selectedVariant, extra] = process.argv.slice(2);
 if (!recipePath || extra) throw new TypeError('Usage: prepare-coherent <recipe.json> [variant-id]');
-const recipeBytes = await readFile(recipePath), recipe: Recipe = parseLabModelJson(recipeBytes.toString());
+const recipe: Recipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
 if (recipe.schema !== 'cssearth-coherent-experiment@1' || !(recipe.projectedWidthKpc > 0) ||
     !Number.isFinite(recipe.projectedWidthKpc) || !(recipe.depthExtentWidths > 0) || !Number.isFinite(recipe.depthExtentWidths))
   throw new TypeError('Unsupported coherent experiment or invalid physical extent.');
 const selected = recipe.variants.filter(variant => !selectedVariant || variant.id === selectedVariant);
 if (!selected.length) throw new TypeError('No matching coherent variant.');
-const benchmark = parseLabModelJson((await pinned(recipe.benchmark.path, recipe.benchmark.sha256)).toString()) as {
-  input: { path: string; sha256: string; width: number; height: number }; wavelets: WaveletSettings;
+const benchmark = parseLabModelJson(await readFile(recipe.benchmark.path, 'utf8')) as {
+  input: { path: string; width: number; height: number }; wavelets: WaveletSettings;
 };
-const photo = await readBenchmarkImage(benchmark.input.path, benchmark.input.sha256, benchmark.input.width, benchmark.input.height);
+const photo = await readBenchmarkImage(benchmark.input.path, benchmark.input.width, benchmark.input.height);
 const rgba = new Uint8Array(photo.width * photo.height * 4);
 for (let p = 0; p < photo.width * photo.height; p++) {
   rgba[4 * p] = photo.rgb[3 * p]!; rgba[4 * p + 1] = photo.rgb[3 * p + 1]!;
@@ -58,15 +53,13 @@ const half: Vec3 = [span / 2, span * aspect / 2, span * recipe.depthExtentWidths
 const bounds = { min: half.map(value => -value) as Vec3, max: half };
 let densityPrior: CoarseStellarDensityPrior | undefined;
 if (recipe.densityPrior) {
-  const raw = gunzipSync(await pinned(recipe.densityPrior.path, recipe.densityPrior.sha256));
+  const raw = gunzipSync(await readFile(recipe.densityPrior.path));
   const count = recipe.densityPrior.dimensions.reduce((a, b) => a * b, 1);
-  if (raw.length !== count * 4) throw new Error('Pinned density-prior dimensions differ.');
+  if (raw.length !== count * 4) throw new Error(`Density prior ${recipe.densityPrior.path} holds ${raw.length / 4} samples, not the ${count} its dimensions declare.`);
   const density = new Float32Array(count);
   for (let p = 0; p < count; p++) density[p] = raw.readFloatLE(4 * p);
   densityPrior = { density, dimensions: recipe.densityPrior.dimensions, boundsKpc: recipe.densityPrior.boundsKpc };
 }
-const codePins = Object.fromEntries((await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-coherent.ts'])).map(pin => [pin.path, pin.sha256]));
-codePins['css-volume-compiler'] = digest(await readFile('packages/bake/src/volume-leaves/volume.ts'));
 const frame: DensityVolumeFrame = {
   referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: span * 3.085677581491367e19,
@@ -89,21 +82,22 @@ for (const variant of selected) {
   const validation = { columns, axisSampling };
   console.log(`COHERENT_FIELD_READY ${variant.id}: ${analysis.catalog.length} scale regions, ` +
     `${(sampler.diagnostics.assignmentCoverage.fraction * 100).toFixed(2)}% supported pixels; source-column gate passed`);
-  const provenance = { schema: 'cssearth-coherent-experiment-result@1', recipePath, recipeSha256: digest(recipeBytes),
-    variant, input: benchmark.input, benchmark: recipe.benchmark, settings: benchmark.wavelets, codePins,
+  const provenance = { schema: 'cssearth-coherent-experiment-result@1', recipePath,
+    variant, input: benchmark.input, benchmark: recipe.benchmark, settings: benchmark.wavelets,
     target: 'Entire frozen display photograph, including unresolved stars. No point-source subtraction or gas-membership claim.',
     model: { projectedWidthKpc: span, projectedScaleNote: recipe.projectedScaleNote,
       localFrame: 'Isolated crop centred on its image; identity orientation and zero origin are lab framing, not a celestial placement.',
       densityPrior: variant.useDensityPrior ? recipe.densityPrior : null,
       diagnostics: sampler.diagnostics }, validation, limitations: recipe.limitations };
-  const cacheKey = digest(JSON.stringify({ provenance, master: recipe.master, exposure: recipe.exposureGain })).slice(0, 16);
-  const masterDirectory = resolve('.local/nebula-lab/coherent', cacheKey, 'masters');
+  // One lossless master per variant, reused while it was baked from the same provenance, master and exposure.
+  const inputs = { provenance, master: recipe.master, exposure: recipe.exposureGain }, cacheKey = `${recipe.id}-${variant.id}`;
+  const variantCache = resolve('.local/nebula-lab/coherent', cacheKey), masterDirectory = resolve(variantCache, 'masters');
   const deliveryBanks = [{ width: recipe.delivery.width, outputDirectory: resolve(variant.directory, 'prepared'),
     imageEncoding: { format: 'webp' as const, quality: recipe.delivery.quality } }];
-  const existing = await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch((error: NodeJS.ErrnoException) => {
+  const existing = await savedInputsMatch(variantCache, inputs) ? await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch((error: NodeJS.ErrnoException) => {
     if (error.code !== 'ENOENT') throw error;
     return null;
-  });
+  }) : null;
   let slices: VolumeSlices;
   if (existing) {
     console.log(`COHERENT_MASTER_REUSE ${variant.id} ${cacheKey}`);
@@ -113,6 +107,7 @@ for (const variant of selected) {
       ...recipe.master, masterWidth: recipe.master.width, masterDirectory, deliveryBanks,
       exposureGain: recipe.exposureGain, unitsPerSourceUnit: 1 / span, provenance });
     slices = baked.banks[0]!.slices;
+    await json(resolve(variantCache, 'inputs.json'), inputs);
   }
   const data = compileCssVolume({ id: variant.id, frame, slices, recipe: { anchors: [] } });
   const prepared = { schema: 'cssearth-prepared-object@1', id: variant.id, type: 'density-volume',
@@ -125,8 +120,7 @@ for (const variant of selected) {
   await json(resolve(sourceDirectory, 'validation.json'), validation);
   await writeFile(resolve(variant.directory, 'prepared/volume.json'), bytes);
   await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@1', id: variant.id, type: 'density-volume',
-    properties: { volume: frame, preparation: { source: 'source/experiment.json',
-      sha256: digest(await readFile(resolve(sourceDirectory, 'experiment.json'))) } },
+    properties: { volume: frame, preparation: { source: 'source/experiment.json' } },
     prepared: { format: prepared.format, url: 'prepared/volume.json' } });
   console.log(`COHERENT_PREPARED ${variant.id}: ${data.resources.length} images, ` +
     `${(data.resources.reduce((sum, item) => sum + item.bytes, 0) / 1e6).toFixed(2)} MB, ` +

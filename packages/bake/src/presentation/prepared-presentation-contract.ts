@@ -34,7 +34,7 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
-  destinations?: { catalog: { url: string; bytes: number; count: number; sha256: string }; defaultLens: string; statuses: { detail: string; overview: string } };
+  destinations?: { catalog: { url: string; bytes: number; count: number; sourcePage?: string; license?: string; snapshotDate?: string }; defaultLens: string; statuses: { detail: string; overview: string } };
 };
 import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
@@ -290,16 +290,17 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   if (plan.destinations !== undefined) {
     record(plan.destinations, "destinations", ["catalog", "defaultLens", "statuses"]);
     const {catalog,defaultLens,statuses}=plan.destinations;
-    if (!catalog?.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
-        !Number.isSafeInteger(catalog.count) || catalog.count < 1 || !/^[a-f0-9]{64}$/.test(catalog.sha256??"") ||
-        !lensIds.includes(defaultLens)) fail("destinations require a pinned catalogue and declared lens");
+    record(catalog, "destinations catalog", ["url", "bytes", "count", "sourcePage", "license", "snapshotDate"]);
+    if (!catalog.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
+        !Number.isSafeInteger(catalog.count) || catalog.count < 1 ||
+        !lensIds.includes(defaultLens)) fail("destinations require a catalogue and declared lens");
     record(statuses,"destination statuses",["detail","overview"]); string(statuses.detail,"detail status");string(statuses.overview,"overview status");
   }
   if (plan.features !== undefined) {
     const features = plan.features;
     record(features, "surface features", ["catalog", "selection", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits", "surfaceEllipsoidUnits"]);
-    record(features.catalog, "surface feature catalog", ["url", "bytes", "sha256", "count"]);
-    if (!features.catalog.url?.startsWith("/scenes/") || !/^[a-f0-9]{64}$/.test(features.catalog.sha256 ?? "")) fail("surface features require a pinned catalogue");
+    record(features.catalog, "surface feature catalog", ["url", "bytes", "count"]);
+    if (!features.catalog.url?.startsWith("/scenes/")) fail("surface features require a catalogue under /scenes/");
     integer(features.catalog.bytes, "feature catalog bytes", 1); integer(features.catalog.count, "feature catalog count", 1);
     if (features.selection !== undefined) {
       const selection = features.selection;
@@ -310,8 +311,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if (!banks.length || banks.length > 256) fail("surface feature selection banks are out of range");
       let found = 0; const urls: string[] = [];
       for (const bank of banks) {
-        record(bank, "surface feature selection bank", ["url", "bytes", "sha256", "count"]);
-        if (!bank.url?.startsWith("/scenes/") || !/^[a-f0-9]{64}$/.test(bank.sha256 ?? "")) fail("surface feature selection requires pinned banks");
+        record(bank, "surface feature selection bank", ["url", "bytes", "count"]);
+        if (!bank.url?.startsWith("/scenes/")) fail("surface feature selection requires banks under /scenes/");
         integer(bank.bytes, "feature selection bank bytes", 1); integer(bank.count, "feature selection bank count", 1); found += bank.count; urls.push(bank.url);
       }
       unique(urls, "surface feature selection bank URLs");
