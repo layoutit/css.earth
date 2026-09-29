@@ -9,8 +9,7 @@
  * membership does not match refuses rather than producing a mosaic of the wrong exposures.
  *
  * The work itself is mosaic.py in the pinned environment. Beside each output this stage writes the shared
- * `cssearth-telescope-product@1` record: the exact inputs, the parameters, the package versions and the toolchain digest that
- * made it. A second run with the same record and the same output bytes on disk does no work.
+ * `cssearth-telescope-product@1` record: the exact inputs, the parameters and the package versions that made it. A second run with the same record and the same output bytes on disk does no work.
  *
  * The record's software list names astropy and reproject, not MOPEX, and the stage is called `open-remosaic` rather than
  * anything that reads as the observatory's pipeline. compare.mts writes the evidence, and it is `archive-agreement` of an
@@ -148,7 +147,7 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
     maskRejects: `imask bits ${FATAL_IMASK_BITS.join(', ')} (contaminated or not a measurement); the artifacts the corrected frame already had removed are kept`,
     backgroundMatchPasses: BACKGROUND_MATCH_PASSES,
     frameTimeSeconds: channel.mosaicFrameTimeSeconds, frames: members.map(frame => frame.dce) };
-  const run: ProductRun = { telescope: TELESCOPE, stage: STAGE, inputs, parameters, software, toolchainDigest: toolchain.digest };
+  const run: ProductRun = { telescope: TELESCOPE, stage: STAGE, inputs, parameters, software };
   const output = mosaicName(program, channel.channel);
   const recordPath = resolve(work, `${output}.product.json`);
   // Before anything else, including the decision to reuse: every pinned level-1 frame, its mask and the archive mosaic this

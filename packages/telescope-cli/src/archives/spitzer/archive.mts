@@ -5,9 +5,7 @@
  *
  * What is pinned, per IRAC channel: the archive's own level-2 mosaic (`maic`) with its uncertainty (`munc`) and coverage
  * (`mcov`), and the level-1 frames that went into it, each as its corrected basic-calibrated image (`cbcd`), its uncertainty
- * (`cbunc`) and its imask (`bimsk`). Every file is recorded by URL, byte count and sha256, the sha256 taken from the bytes on
- * first download. Where the archive publishes its own MD5 for a file (it does for the primary level-1 and level-2 products,
- * not for the ancillary planes beside them) that MD5 is recorded and checked, and a mismatch refuses the pin.
+ * (`cbunc`) and its imask (`bimsk`). Every file is recorded by URL and byte count.
  *
  * Beside the files it records what the observation is, twice over: once as the archive's catalogue describes it (target,
  * position, programme, principal investigator, instrument, mode, start and end) and once from the pinned FITS headers
@@ -27,7 +25,6 @@
  *    application backend, not a published API, and it may change without notice; everything it returns is validated here.
  *
  * The program is written to packages/telescope-cli/src/archives/spitzer/programs/<program id>.json. */
-import { createHash } from 'node:crypto';
 import { mkdir, open, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -35,7 +32,6 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileHdus } from '@cssearth/fits/node';
-import { sha256File } from '@cssearth/core/node';
 import { flagValue, positionalArguments, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { archivePrograms } from '../programs.mts';
@@ -47,14 +43,14 @@ export const REPOSITORY = WORKSPACE;
 export const SEARCH = 'https://irsa.ipac.caltech.edu/applications/Spitzer/SHA/sticky/CmdSrv';
 export const DATA = 'https://irsa.ipac.caltech.edu/ibe/data/spitzer';
 const SCHEMA = 'cssearth-spitzer-program@1';
-const HEX64 = /^[0-9a-f]{64}$/u, HEX32 = /^[0-9a-f]{32}$/u;
+
 const REQUEST_TIMEOUT_MS = 180_000, ATTEMPTS = 3;
 
 /** What each pinned file is for. The three frame roles are one frame's image, its uncertainty and its mask; the three mosaic
  * roles are the archive's product and the two planes that say where it is covered and how well it is known. */
 export const FILE_ROLES = ['mosaic', 'mosaic-uncertainty', 'mosaic-coverage', 'frame', 'frame-uncertainty', 'frame-mask'] as const;
 export type FileRole = typeof FILE_ROLES[number];
-/** The archive's file suffix for each role, and whether the catalogue publishes an MD5 for it. */
+/** The archive's file suffix for each role. */
 const ROLE_SUFFIX: Readonly<Record<FileRole, string>> = {
   mosaic: 'maic', 'mosaic-uncertainty': 'munc', 'mosaic-coverage': 'mcov',
   frame: 'cbcd', 'frame-uncertainty': 'cbunc', 'frame-mask': 'bimsk',
@@ -65,8 +61,6 @@ export interface SpitzerFile {
   readonly name: string;
   readonly url: string;
   readonly bytes: number;
-  /** The archive's own MD5, where its catalogue publishes one. Absent for the ancillary planes, which it does not list. */
-  readonly archiveMd5?: string;
 }
 export interface SpitzerFrame {
   /** The frame's data-collection-event number inside the AOR, as the file name carries it (`0001`). */
@@ -193,11 +187,11 @@ export async function mosaicCompanions(mosaicUrl: string, aorKey: number, channe
   });
 }
 
-/** Download `url` to `path` unless the bytes are already there, and return its identity. Written to a neighbouring `.part`
+/** Download `url` to `path` unless the bytes are already there, and return its size. Written to a neighbouring `.part`
  * file and renamed only once it is whole, so an interrupted run never leaves a short file that looks finished. */
-export async function download(url: string, path: string): Promise<{ bytes: number; sha256: string }> {
+export async function download(url: string, path: string): Promise<{ bytes: number }> {
   const existing = await stat(path).then(entry => entry.size, error => { if (hasErrorCode(error, 'ENOENT')) return -1; throw error; });
-  if (existing >= 0) return sha256File(path);
+  if (existing >= 0) return { bytes: existing };
   await mkdir(resolve(path, '..'), { recursive: true });
   const part = `${path}.part`;
   const response = await fetch(url, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
@@ -206,35 +200,16 @@ export async function download(url: string, path: string): Promise<{ bytes: numb
   try { await pipeline(Readable.fromWeb(response.body as Parameters<typeof Readable.fromWeb>[0]), handle.createWriteStream()); }
   finally { await handle.close(); }
   await rename(part, path);
-  return sha256File(path);
+  return { bytes: (await stat(path)).size };
 }
 
-const md5File = async (path: string): Promise<string> => {
-  const hash = createHash('md5'), handle = await open(path, 'r');
-  try {
-    const chunk = Buffer.alloc(8 << 20);
-    for (let offset = 0; ; offset += chunk.length) {
-      const { bytesRead } = await handle.read(chunk, 0, chunk.length, offset);
-      if (!bytesRead) break;
-      hash.update(chunk.subarray(0, bytesRead));
-    }
-  } finally { await handle.close(); }
-  return hash.digest('hex');
-};
-
-/** Fetch one file and pin it. `archiveMd5` is checked against the bytes when the catalogue published one; the pin is refused
- * rather than recorded when they differ, because a pin that records a digest it could not confirm is worth nothing. */
-export async function pinFile(role: FileRole, url: string, directory: string, archiveMd5?: string): Promise<SpitzerFile> {
+/** Fetch one file and pin it by URL and size. */
+export async function pinFile(role: FileRole, url: string, directory: string): Promise<SpitzerFile> {
   const name = url.slice(url.lastIndexOf('/') + 1);
   if (!/^[A-Za-z0-9._-]+\.fits$/u.test(name)) throw new TypeError(`Not an archive FITS name: ${name}`);
   const path = resolve(directory, name);
   const { bytes } = await download(url, path);
-  if (archiveMd5 !== undefined) {
-    if (!HEX32.test(archiveMd5)) throw new TypeError(`${name}: the archive's checksum is not an MD5 (${archiveMd5}).`);
-    const found = await md5File(path);
-    if (found !== archiveMd5) throw new Error(`${name} does not match the archive's own MD5: got ${found}, the catalogue says ${archiveMd5}.`);
-  }
-  return { role, name, url, bytes, ...(archiveMd5 === undefined ? {} : { archiveMd5 }) };
+  return { role, name, url, bytes };
 }
 
 const card = (header: FitsHeader, key: string, label: string): string => {
@@ -255,7 +230,7 @@ export const primaryHeader = async (path: string): Promise<FitsHeader> => (await
 /** Pin one AOR: its catalogue description, its level-2 mosaics and the level-1 frames behind them.
  *
  * `channels` selects IRAC channels; every channel the archive holds a mosaic for is available. Files land under
- * `<data>/<program id>/ch<n>/`, and a file already there is reused by byte count and digest rather than fetched again. */
+ * `<data>/<program id>/ch<n>/`, and a file already there is reused rather than fetched again. */
 export async function pinProgram(id: string, aorKey: number, channels: readonly number[], dataRoot: string): Promise<SpitzerProgram> {
   if (!/^[A-Za-z0-9._-]+$/u.test(id)) throw new TypeError(`${id} is not a program id.`);
   if (!Number.isSafeInteger(aorKey) || aorKey < 1) throw new TypeError(`${aorKey} is not an AORKEY.`);
@@ -275,7 +250,7 @@ export async function pinProgram(id: string, aorKey: number, channels: readonly 
     if (!row) throw new Error(`AOR ${aorKey} has no channel ${channel} mosaic.`);
     const directory = resolve(dataRoot, id, `ch${channel}`);
     const mosaicUrl = archiveUrl(requireString(row.heritagefilename, 'mosaic path'));
-    const products = [await pinFile('mosaic', mosaicUrl, directory, row.checksum || undefined)];
+    const products = [await pinFile('mosaic', mosaicUrl, directory)];
     for (const [index, url] of (await mosaicCompanions(mosaicUrl, aorKey, channel)).entries())
       products.push(await pinFile(index === 0 ? 'mosaic-uncertainty' : 'mosaic-coverage', url, directory));
 
@@ -333,8 +308,8 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
     const name = requireString(entry.name, 'file name'), url = requireString(entry.url, 'file url'), bytes = number(entry.bytes, `${name} bytes`);
     if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${name} has no byte count.`);
     if (!url.startsWith(`${DATA}/sha/archive/`) || !url.endsWith(`/${name}`)) throw new TypeError(`${name} is not pinned to the Spitzer archive.`);
-    if (entry.archiveMd5 !== undefined && !HEX32.test(requireString(entry.archiveMd5, 'archive md5'))) throw new TypeError(`${name} has an unreadable archive MD5.`);
-    return { role: role as FileRole, name, url, bytes, ...(entry.archiveMd5 === undefined ? {} : { archiveMd5: entry.archiveMd5 as string }) };
+    for (const field of ['archiveMd5', 'sha256']) if (entry[field] !== undefined) throw new TypeError(`${name} has a ${field} field (${String(entry[field])}); Spitzer programs record files by URL and size only.`);
+    return { role: role as FileRole, name, url, bytes };
   };
   const channels = requireArray(row.channels, 'channels').map(raw => {
     const entry = requireRecord(raw, 'channel'), channel = number(entry.channel, 'channel');
