@@ -67,7 +67,11 @@ test('overview leaves the Solar System when its bodies fade and restores correct
   const { fadeOutStartDistanceM: start, hiddenDistanceM: hidden } = context.system, middle = Math.sqrt(start * hidden);
   assert.equal(overviewScopeAtCamera(camera(hidden * .99)), 'system');
   assert.equal(overviewScopeAtCamera(camera(hidden)), 'milky-way');
-  assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'nearby-universe');
+  assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'observable-universe');
+  const gpc = 1e9 * 3.085677581491367e16;
+  assert.equal(overviewScopeAtCamera(camera(.9 * gpc)), 'nearby-universe', 'short of 1 Gpc the view is the nearby universe');
+  assert.equal(overviewScopeAtCamera(camera(.9 * gpc), 'observable-universe'), 'observable-universe', 'and returns only below 800 Mpc');
+  assert.equal(overviewScopeAtCamera(camera(.7 * gpc), 'observable-universe'), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(middle * 1.01), 'milky-way'), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
 });

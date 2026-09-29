@@ -16,6 +16,7 @@ const object = SCENE_OBJECTS.find(object => object.id === objectId);
 // The galactic scopes are measured from the Sun, so their overviews stay on its route.
 const galacticRoute = systemById(SCENE_OBJECTS, SOLAR_SYSTEM_ID)!.route;
 const galactic: { scope: OverviewScope; label: string }[] = [
+  { scope: 'observable-universe', label: 'Observable Universe' },
   { scope: 'nearby-universe', label: 'Nearby Universe' },
   { scope: 'local-group', label: 'Local Group' },
   { scope: 'milky-way', label: 'Milky Way' },

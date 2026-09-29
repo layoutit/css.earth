@@ -30,14 +30,17 @@ const groups = [
   { id: 'nearby-universe' as const, name: 'Nearby Universe', section: 'Galaxy clusters',
     introduction: 'Selected nearby galaxy clusters. This view is not a complete map of the observable universe.',
     objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) })) },
+  { id: 'observable-universe' as const, name: 'Observable Universe', section: 'Galaxy clusters',
+    introduction: 'Everything whose light has had time to reach us: DESI\'s galaxies and quasars out to 6.6 Gpc, and at its edge the cosmic microwave background, light from 380,000 years after the Big Bang, 14 Gpc away.',
+    objects: [] },
 ];
 ---
 {groups.map(group => <ObjectCard class="object-overview-card" data-large-scale-overview={group.id} data-large-scale-name={group.name} hidden>
   <ObjectCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
     <ObjectBreadcrumbs scope={group.id} />
   </ObjectCardHeader>
-  <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
-    tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />
+  {group.objects.length > 0 && <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
+    tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />}
   <div class="object-results-scroll object-card-tabpanel" id={`${group.id}-objects-content`} hidden
     role="region" aria-label={group.section}>
     <ul class="object-list">

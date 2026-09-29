@@ -30,7 +30,7 @@ export function overviewScopeFromUrl(url: string | URL) {
   // Normalized once, here: a named focus leaves no overview to resolve.
   if (query.has('focus')) return null;
   const scope = query.get('overview');
-  return scope === 'system' || scope === 'milky-way' || scope === 'local-group' || scope === 'nearby-universe' ? scope : null;
+  return scope === 'system' || scope === 'milky-way' || scope === 'local-group' || scope === 'nearby-universe' || scope === 'observable-universe' ? scope : null;
 }
 
 /** Satellite systems are selections on a body's route, below the stellar overview. */
