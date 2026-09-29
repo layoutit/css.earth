@@ -1,0 +1,64 @@
+{
+  "id": "long-2010-m33-snrs",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Chandra ACIS Survey of M33: X-ray, Optical, and Radio Properties of the Supernova Remnants",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0067-0049/187/2/495"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/187/495"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0067-0049/187/2/495",
+      "label": "ApJS 187, 495"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/187/495",
+      "label": "CDS J/ApJS/187/495"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/187/495/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table3.dat: RAh-DEs (J2000); 137 SNRs and SNR candidates"
+    }
+  ],
+  "creators": [
+    "K. S. Long",
+    "W. P. Blair",
+    "P. F. Winkler",
+    "R. H. Becker",
+    "T. J. Gaetz",
+    "P. Ghavamian",
+    "D. J. Helfand",
+    "J. P. Hughes",
+    "R. P. Kirshner",
+    "K. D. Kuntz",
+    "E. K. McNeil",
+    "T. G. Pannuti",
+    "P. P. Plucinsky",
+    "D. Saul",
+    "R. Tüllmann",
+    "B. Williams"
+  ],
+  "publisher": "ApJS 187, 495",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Long et al. (2010), ApJS 187, 495.",
+      "scope": "M33 supernova remnant positions",
+      "evidence": "https://doi.org/10.1088/0067-0049/187/2/495"
+    }
+  ]
+}
