@@ -34,17 +34,16 @@
  * form pinned here. Both are read by this repository's own FITS reader; a unit this reader cannot read stops the run and says
  * why, and nothing is inferred around it.
  *
- * WHAT RUNNING THIS ESTABLISHES, AND WHAT IT DOES NOT. Retrieval establishes origin and integrity: these bytes are the
- * archive's own final product, at the size and sha256 recorded. It is written as `archive-origin` evidence and never as
+ * WHAT RUNNING THIS ESTABLISHES, AND WHAT IT DOES NOT. Retrieval establishes origin: these bytes are the archive's own final
+ * product, at the size recorded. It is written as `archive-origin` evidence and never as
  * `archive-agreement`, and it is not a successful local re-calibration anywhere: nothing here re-ran anyone's pipeline and
  * nothing was compared against anything.
  *
  * The record of the run is written beside the downloaded products, which are not committed, and a copy is committed beside the
  * program as `<program id>.archive-final.product.json`, so the ledger can read what was pinned without holding the files. */
-import { copyFile, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, readFile, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
@@ -69,7 +68,6 @@ export type ArchiveFinalKind = typeof ARCHIVE_FINAL_KINDS[number];
 /** No unit larger than this is read whole; a WFPC2 chip is 640,000 samples. */
 const MAX_SAMPLES = 8 * 1024 * 1024;
 const NAME = /^[A-Za-z0-9._-]+$/u;
-const HEX64 = /^[0-9a-f]{64}$/u;
 /** A reference file is written as an IRAF path: `uref$m3c1004mu.r4h`, `ytab$l611655oy.cy6`. */
 const REFERENCE_VALUE = /^[A-Za-z][A-Za-z0-9]*\$\S/u;
 /** One second, as a fraction of a day: MAST's catalogue and a header state the same epoch to about this. */
@@ -154,8 +152,8 @@ export function parseArchiveFinalProgram(value: unknown, label = 'archive-final 
     const bytes = requireFiniteNumber(entry.bytes, `${label}: ${name} bytes`), uri = requireString(entry.uri, `${label}: ${name} uri`);
     if (!NAME.test(name) || uri !== `mast:HST/product/${name}` || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${label}: ${name} is not a MAST file.`);
     if (name.slice(0, name.lastIndexOf('_')) !== observation) throw new TypeError(`${label}: ${name} belongs to no exposure of ${observation}.`);
-    if (entry.sha256 !== undefined && !HEX64.test(requireString(entry.sha256, `${label}: ${name} sha256`))) throw new TypeError(`${label}: ${name} has no sha256.`);
-    return { name, uri, bytes, ...(entry.sha256 === undefined ? {} : { sha256: entry.sha256 as string }) };
+    if (entry.sha256 !== undefined) throw new TypeError(`${label}: ${name} has a sha256 field (${String(entry.sha256)}); archive-final programs record files by URI and size only.`);
+    return { name, uri, bytes };
   });
   if (new Set(files.map(file => file.name)).size !== files.length) throw new TypeError(`${label}: a file appears twice.`);
   const components = requireArray(row.components, `${label}: components`).map((raw, index) => {
@@ -408,7 +406,7 @@ const roleOf = (program: ArchiveFinalProgram, name: string) =>
 
 export interface ArchiveFinalRun {
   readonly program: ArchiveFinalProgram;
-  readonly files: readonly (MastFile & { readonly sha256: string; readonly path: string })[];
+  readonly files: readonly (MastFile & { readonly path: string })[];
   readonly identity: ArchiveFinalIdentity;
   readonly catalogue: CatalogueEntry;
   readonly calibration: ReturnType<typeof archiveCalibration>;
@@ -418,16 +416,15 @@ export interface ArchiveFinalRun {
 /** Download the pinned files, refuse anything that is not them, read every part the archive supplies and measure it. */
 export async function runArchiveFinal(id: string, work: string, sources: readonly string[] = [], log: (line: string) => void = () => {}): Promise<ArchiveFinalRun> {
   const program = await readArchiveFinalProgram(id);
-  const downloaded: (MastFile & { sha256: string; path: string })[] = [];
+  const downloaded: (MastFile & { path: string })[] = [];
   for (const file of program.files) {
-    const path = await mastFile(file, work, sources);
-    const { bytes, sha256 } = await sha256File(path);
+    const path = await mastFile(file, work, sources), bytes = (await stat(path)).size;
     if (bytes !== file.bytes) throw new Error(`${file.name} downloaded to ${bytes} bytes, not the pinned ${file.bytes}.`);
-    downloaded.push({ ...file, sha256, path });
-    log(`${file.name}: ${bytes} bytes, sha256 ${sha256}${file.sha256 === undefined ? ' (first download; the pin records it)' : ''}`);
+    downloaded.push({ ...file, path });
+    log(`${file.name}: ${bytes} bytes`);
   }
   // Nothing is read before the pins are met: a record must describe the files its run actually used.
-  await assertInputs(downloaded.map(file => ({ role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes, sha256: file.sha256 })),
+  await assertInputs(downloaded.map(file => ({ role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes })),
     new Map(downloaded.map(file => [file.uri, file.path])));
   // Every pinned file is read with this repository's own reader. One it cannot read stops the run and says why: a product half
   // read is not a product pinned, and nothing here guesses at a layout.
@@ -466,18 +463,18 @@ export async function runArchiveFinal(id: string, work: string, sources: readonl
 export const archiveOriginEvidence = (run: ArchiveFinalRun, receipt: string): ProductEvidence => {
   const science = run.files.find(file => file.name === run.program.components.find(component => component.role === 'science')!.file)!;
   return { kind: 'archive-origin', receipt, product: science.name,
-    establishes: `${science.name} is the archive's own final calibrated product for ${run.program.observation}, retrieved from MAST and pinned at ${science.bytes} bytes, sha256 ${science.sha256}. ` +
-      `It establishes origin and integrity: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. ` +
+    establishes: `${science.name} is the archive's own final calibrated product for ${run.program.observation}, retrieved from MAST and pinned at ${science.bytes} bytes. ` +
+      `It establishes origin: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. ` +
       'It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive.' };
 };
 
 /** Everything about a program that decides WHICH samples were read, as one block the record carries and a later reader can
  * rebuild from the program.
  *
- * The digests of the pinned files are not enough on their own. One WFPC2 file holds four chips and a waivered spectrum holds
+ * The sizes of the pinned files are not enough on their own. One WFPC2 file holds four chips and a waivered spectrum holds
  * every group of its exposure, so moving a component from unit 1 to unit 2 measures a different detector out of the same bytes,
- * and every digest still matches. Which unit each part was read from, what role it played, and which observation the identity
- * check ran against are all part of what was qualified, so they are pinned here and the run digest covers them. */
+ * and every size still matches. Which unit each part was read from, what role it played, and which observation the identity
+ * check ran against are all part of what was qualified, so they are pinned here and the run key covers them. */
 export const archiveFinalSelection = (program: ArchiveFinalProgram) => ({
   program: program.id, observation: program.observation, configuration: program.configuration, target: program.target,
   kind: program.kind, handbook: program.handbook,
@@ -493,7 +490,7 @@ export function archiveFinalQualificationRun(program: ArchiveFinalProgram): Prod
   return { telescope: ARCHIVE_FINAL_TELESCOPE, stage: ARCHIVE_FINAL_STAGE, inputs, parameters: { selection: archiveFinalSelection(program) }, software: [] };
 }
 
-/** A record projected onto what a program can rebuild. A projection whose digest differs from the program's own was qualified
+/** A record projected onto what a program can rebuild. A projection whose run key differs from the program's own was qualified
  * against another selection, another identity or other bytes. */
 export const archiveFinalQualifiedRun = (record: ProductRecord): ProductRun =>
   ({ telescope: record.telescope, stage: record.stage, inputs: record.inputs, parameters: { selection: record.parameters.selection }, software: record.software });
@@ -527,21 +524,12 @@ export async function writeArchiveFinalRecord(run: ArchiveFinalRun, work: string
   return { record, committed };
 }
 
-/** The digests this run measured, written back into the program the way archive.mts does: a pin gains its digest the first time
- * the file is downloaded, and every later run is refused unless the bytes are those. */
-export async function recordDigests(run: ArchiveFinalRun) {
-  const path = archiveFinalPath(run.program.id);
-  const program = { ...run.program, files: run.program.files.map(file => ({ ...file, sha256: run.files.find(other => other.name === file.name)!.sha256 })) };
-  await writeFile(path, `${JSON.stringify(parseArchiveFinalProgram(program), null, 2)}\n`);
-  return path;
-}
-
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), [id, work] = positionalArguments(args, ['--raw']);
   if (!id || !NAME.test(id) || !work) throw new TypeError('Usage: archive-final <program id> <work directory> [--raw <dir>]');
   const sources = args.flatMap((argument, index) => argument === '--raw' && args[index + 1] ? [resolve(args[index + 1]!)] : []);
   const run = await runArchiveFinal(id, resolve(work), sources, line => console.log(line));
-  const path = await recordDigests(run);
+  const path = archiveFinalPath(run.program.id);
   const { record, committed } = await writeArchiveFinalRecord(run, resolve(work));
   console.log(`ARCHIVE_FINAL ${path} ${committed} ${JSON.stringify({ outputs: record.outputs.length, measured: run.measured })}`);
 }

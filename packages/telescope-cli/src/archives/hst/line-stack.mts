@@ -26,14 +26,14 @@
  * reproduction receipt beside the definition.
  *
  * Beside every stacked product it also writes that product's own record (`<product>.product.json`,
- * packages/telescope/src/product-record.ts): the frames that went into that set at their pinned digests, the definition and Horizons
+ * packages/telescope/src/product-record.ts): the frames that went into that set at their pinned sizes, the definition and Horizons
  * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
  * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
-import { sha256 } from '@cssearth/core/node';
+import { VERSION } from '../../help.mts';
 import { addProductEvidence, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
@@ -42,8 +42,7 @@ import { readHorizonsResponses, stackEphemerides, writeHorizonsResponses } from 
 import { type Card, DEGREE, type FrameHeader, MJD_TO_JD, type PreparedFrame, type VisitRegistration, locateAcrossSlit, locateDiscRow, readFrameHeader, readFrameRegion, reflectedSunlight, skyByColumn } from './line-stack-frames.mts';
 
 // The FITS ORIGIN card and software name this stage has always serialized, from when this module lived at
-// tools/objects/hst/line-stack.mts. Changing it changes every output's hash, so it is pinned rather than derived from the
-// module's current path.
+// tools/objects/hst/line-stack.mts. Earlier records name it, so it is kept rather than derived from the module's current path.
 const HISTORICAL_ORIGIN = 'cssEarth tools/objects/hst/line-stack.mts';
 const HISTORICAL_SOFTWARE_NAME = 'cssearth tools/objects/hst/line-stack.mts';
 
@@ -58,13 +57,13 @@ export interface LineStackRun {
 }
 
 /** Every pinned frame, with its headers checked against the pin and its geometry from Horizons. */
-export async function prepareFrames(definition: LineStackDefinition, directory: string, mayAsk: boolean, verifyDigests: boolean): Promise<PreparedFrame[]> {
+export async function prepareFrames(definition: LineStackDefinition, directory: string, mayAsk: boolean, verifySizes: boolean): Promise<PreparedFrame[]> {
   const headers: FrameHeader[] = [];
   for (const pinned of definition.frames) {
     const path = resolve(directory, pinned.name), header = await readFrameHeader(path, pinned.name);
     if (header.programme !== pinned.programme || header.targetName !== pinned.targetName)
       throw new Error(`${pinned.name}: the file is programme ${header.programme} target ${header.targetName}, the pin says ${pinned.programme} ${pinned.targetName}.`);
-    if (verifyDigests) {
+    if (verifySizes) {
       if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`);
     }
     headers.push(header);
@@ -235,18 +234,14 @@ export function measureSet(definition: LineStackDefinition, set: StackSet): SetM
     exposureHours: set.accumulator.exposureSeconds / 3600, ...metrics, pedestalRayleigh: fall.pedestalRayleigh, limbRayleigh: fall.limbRayleigh, eFoldingKm: fall.eFoldingKm };
 }
 
-/** The version of the software that stacked a set. There is no installed toolchain here: the reduction is this repository's
- * own TypeScript, so what a record can state is the digest of the modules that do the arithmetic. */
+/** The software that stacked a set. There is no installed toolchain here: the reduction is this repository's own TypeScript,
+ * named with the telescope command's version. */
 export async function lineStackSoftware(): Promise<ProductSoftware[]> {
-  const sources = await Promise.all(['line-stack.mts', 'line-stack-reduction.mts', 'line-stack-ephemeris.mts']
-    .map(name => readFile(resolve(import.meta.dirname, name))));
-  return [{ name: HISTORICAL_SOFTWARE_NAME, version: sha256(Buffer.concat(sources)) }];
+  return [{ name: HISTORICAL_SOFTWARE_NAME, version: VERSION }];
 }
 
-/** What identifies one stacked set: the frames that went into this one at their pinned sizes and digests, the definition and
+/** What identifies one stacked set: the frames that went into this one at their pinned sizes, the definition and
  * the pinned Horizons responses that placed them, and the line, subset and grid it was stacked on. */
-/** Frame digests measured while the stack read its frames; a receipt names what was actually read, not a pin. */
-const measuredFrameDigests = new Map<string, string>();
 export async function stackRun(definition: LineStackDefinition, line: StackLine, subset: string, frames: readonly string[],
   software: readonly ProductSoftware[]): Promise<ProductRun> {
   const pinned = new Map(definition.frames.map(frame => [frame.name, frame]));
@@ -308,7 +303,7 @@ export interface LineStackOptions {
   readonly directory: string;
   /** Whether a Horizons request the pinned responses do not answer may be made. A pinned run asks for nothing. */
   readonly mayAsk?: boolean;
-  readonly verifyDigests?: boolean;
+  readonly verifySizes?: boolean;
   /** Stack the opposite handedness as well, which is the evidence for the one adopted. */
   readonly mirror?: boolean;
   readonly log?: (line: string) => void;
@@ -316,7 +311,7 @@ export interface LineStackOptions {
 /** One run of the stage: the frames, where each visit was placed, the adopted stack and, when asked for, the mirrored one. */
 export async function runLineStack(definition: LineStackDefinition, options: LineStackOptions): Promise<LineStackRun & { mirrored?: readonly StackSet[] }> {
   const log = options.log ?? (() => {});
-  const frames = await prepareFrames(definition, options.directory, options.mayAsk ?? false, options.verifyDigests ?? true);
+  const frames = await prepareFrames(definition, options.directory, options.mayAsk ?? false, options.verifySizes ?? true);
   const used = frames.filter(frame => !frame.rejected);
   log(`${used.length} of ${frames.length} frames used, ${frames.length - used.length} rejected`);
   const registration = await registerVisits(definition, options.directory, used);
@@ -415,7 +410,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const unknown = flags.filter(flag => !['--fetch', '--receipt', '--mirror', '--no-verify'].includes(flag));
   if (unknown.length) { console.error(`unknown option ${unknown.join(' ')}`); process.exit(2); }
   const definition = await readLineStack(id);
-  const run = await runLineStack(definition, { directory, mayAsk: flags.includes('--fetch'), verifyDigests: !flags.includes('--no-verify'),
+  const run = await runLineStack(definition, { directory, mayAsk: flags.includes('--fetch'), verifySizes: !flags.includes('--no-verify'),
     mirror: flags.includes('--mirror'), log: line => console.log(line) });
   const written = await writeProducts(definition, run, output);
   for (const entry of measurementsOf(run)) console.log(`${entry.set.padEnd(18)} frames ${String(entry.frames).padStart(3)}  ${entry.exposureHours.toFixed(1).padStart(5)} h  ` +

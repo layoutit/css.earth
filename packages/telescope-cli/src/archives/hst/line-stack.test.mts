@@ -7,6 +7,7 @@ import { join, resolve } from 'node:path';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { PROGRAMS } from './archive.mts';
+import { VERSION } from '../../help.mts';
 import {
   accumulatedImage, addSample, discMetrics, gridPoint, limbFallOff, newAccumulator, parseLineStack, quadraticFit, radialProfile, rayleighPerSample,
   rejectionReason, inSubset, sampleFor, clippedMean, median, type StackGrid,
@@ -211,9 +212,8 @@ test('a stacked set’s record pins the frames that went into that set, and what
   assert.ok(made.inputs.slice(2).every(input => input.bytes > 0));
   assert.deepEqual([made.parameters.line, made.parameters.subset, made.parameters.handedness, made.parameters.gridPixels],
     ['oi1356', 'all', definition.handedness, definition.grid.pixels]);
-  // There is no installed toolchain: the version is the digest of the modules that did the arithmetic.
-  assert.equal(made.toolchainDigest, undefined);
-  assert.match(made.software[0]!.version, /^[0-9a-f]{64}$/u);
+  // There is no installed toolchain: the version is the telescope command's.
+  assert.deepEqual(made.software, [{ name: 'cssearth tools/objects/hst/line-stack.mts', version: VERSION }]);
   await assert.rejects(stackRun(definition, line, 'all', ['o8k901010_x1d.fits'], await lineStackSoftware()), /not a frame the definition pins/u);
 });
 

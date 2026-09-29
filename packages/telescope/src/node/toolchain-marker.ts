@@ -12,7 +12,7 @@ export function readToolchainPins(id: string, file: string): ToolchainPins {
   const descriptor = readFileSync(resolve(TOOLCHAINS, file), 'utf8');
   const entry = requireRecord(JSON.parse(descriptor) as unknown, file);
   const lock = entry.requirements === undefined ? null : readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, `${file} requirements`)), 'utf8');
-  return { id, file, descriptor, lock, entry };
+  return { id, file: `packages/telescope/toolchains/${file}`, descriptor, lock, entry };
 }
 
 export function writeInstalledMarker(root: string, pins: ToolchainPins): void {
@@ -31,5 +31,5 @@ export function installedMarkerIssue(root: string, pins: ToolchainPins): 'missin
 export function assertInstalledMarker(root: string, pins: ToolchainPins, name: string, install: string): void {
   const issue = installedMarkerIssue(root, pins);
   if (issue === 'missing') throw new Error(`The ${name} toolchain is not installed at ${root}: ${install}`);
-  if (issue === 'other-pins') throw new Error(`The ${name} toolchain at ${root} was installed from other pins than toolchains/${pins.file}; reinstall it: ${install}`);
+  if (issue === 'other-pins') throw new Error(`The ${name} toolchain at ${root} was installed from other pins than ${pins.file}; reinstall it: ${install}`);
 }

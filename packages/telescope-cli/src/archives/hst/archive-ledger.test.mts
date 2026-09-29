@@ -93,7 +93,7 @@ test('an instrument whose pipeline is retired can still be qualified on the arch
 
 test('a program that moves a component to another unit of the same file is not qualified by the record of the old one', async () => {
   // The reviewer's case. A WFPC2 exposure keeps all four chips in one pair of files, so selecting chip 2 instead of chip 1
-  // changes which detector was measured and leaves every pinned digest untouched. The record of the chip-1 run must not qualify
+  // changes which detector was measured and leaves every pinned size untouched. The record of the chip-1 run must not qualify
   // the chip-2 program, and the configuration falls back to pinned-but-not-qualified with the reason said.
   const program = await read('europa-wfpc2-11085.archive-final.json') as Record<string, unknown>;
   const record = await read('europa-wfpc2-11085.archive-final.product.json');

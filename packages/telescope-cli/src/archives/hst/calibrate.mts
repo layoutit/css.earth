@@ -3,8 +3,8 @@
  *
  *   node packages/telescope-cli/src/archives/hst/calibrate.mts <program id> <observation> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
  *
- * The pinned inputs are taken from a --raw directory that already holds them or downloaded from MAST, each at its pinned size
- * and digest; a digest missing from the program is measured and written back. They are copied into <work>/run, because the
+ * The pinned inputs are taken from a --raw directory that already holds them or downloaded from MAST, each at its pinned
+ * size. They are copied into <work>/run, because the
  * next step rewrites their headers and the pipeline writes its products beside them.
  *
  * CRDS then selects the reference files for that exposure at the program's pinned context and downloads the ones the cache
@@ -25,15 +25,14 @@
  * The group is sampled every second and the pipeline is stopped if it passes the ceiling (2 GiB by default).
  *
  * Beside every product it writes, the run writes its own record (`<product>.product.json`, packages/telescope/src/product-record.ts):
- * the observation's pinned inputs at their sizes and digests, the CRDS context and the reference files that chose the
- * calibration, the pipeline and CRDS versions the run reported and the digest of the toolchain pins they were installed from.
+ * the observation's pinned inputs at their sizes, the CRDS context and the reference files that chose the calibration, and the
+ * pipeline and CRDS versions the run reported.
  * Its evidence list is empty. What a product was checked against is added by the stage that checked it: compare.mts adds the
  * agreement with the archive's own product. */
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastFile, type MastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
@@ -126,36 +125,16 @@ export async function readHstProgram(id: string) {
   return { path, program: parseHstProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
-/** A pinned file as a product record states an input: named by the MAST product it is, at the size and digest the run read. */
-export type PinnedFile = MastFile & { readonly sha256: string };
+/** A pinned file as a product record states an input: named by the MAST product it is, at the size the run read. */
+export type PinnedFile = MastFile;
 
-/** An observation's pinned files on disk at their pinned sizes and digests; digests missing from the program are measured and
- * written back. */
+/** An observation's pinned files on disk at their pinned sizes. */
 export async function hstFiles(id: string, observation: string, directory: string, sources: readonly string[] = []) {
-  const { path, program } = await readHstProgram(id), entry = program.observations.find(other => other.observation === observation);
+  const { program } = await readHstProgram(id), entry = program.observations.find(other => other.observation === observation);
   if (!entry) throw new Error(`${id} has no observation ${observation}.`);
-  const fetchAll = async (pinned: readonly MastFile[]) => {
-    const files: string[] = [], digested: PinnedFile[] = [];
-    for (const member of pinned) {
-      const local = await mastFile(member, directory, sources);
-      files.push(local);
-      digested.push({ ...member, sha256: member.sha256 ?? (await sha256File(local)).sha256 });
-    }
-    return { files, digested, changed: digested.some((member, i) => member.sha256 !== pinned[i]!.sha256) };
-  };
-  const inputs = await fetchAll(entry.inputs);
-  if (inputs.changed) {
-    const updated: HstProgram = { ...program, observations: program.observations.map(other => other.observation === observation ? { ...other, inputs: inputs.digested } : other) };
-    await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
-  }
-  return { program, entry, files: inputs.files, inputs: inputs.digested };
-}
-
-/** The digest of the pins the installed HST environment was built from. `hstToolchain` has already refused an environment
- * built from any other, so the marker it checked is what the run's software came from. */
-export async function hstToolchainDigest(): Promise<string> {
-  const marker = requireRecord(JSON.parse(await readFile(resolve(HST_ROOT, 'installed.json'), 'utf8')) as unknown, 'the HST toolchain marker');
-  return requireString(marker.pinsSha256, 'the HST toolchain pins digest');
+  const files: string[] = [];
+  for (const member of entry.inputs) files.push(await mastFile(member, directory, sources));
+  return { program, entry, files, inputs: entry.inputs };
 }
 
 /** The versions a run reported of what it ran, as a record states software. */
@@ -178,14 +157,14 @@ export async function productUnits(file: string) {
  * software that ran. The same files calibrated at the same context by the same installed pipeline are the same run. */
 export function calibrationRun(program: HstProgram, entry: HstObservation, inputs: readonly PinnedFile[],
   settings: { readonly given: string; readonly wavecal: string; readonly references: Readonly<Record<string, Record<string, string>>> },
-  software: readonly ProductSoftware[], toolchainDigest: string): ProductRun {
+  software: readonly ProductSoftware[]): ProductRun {
   return {
     telescope: 'HST', stage: 'calibrate',
-    inputs: inputs.map(input => ({ role: suffixOf(input.name).toLowerCase(), identity: input.uri, bytes: input.bytes, sha256: input.sha256 })),
+    inputs: inputs.map(input => ({ role: suffixOf(input.name).toLowerCase(), identity: input.uri, bytes: input.bytes })),
     parameters: { instrument: entry.instrument, detector: entry.detector, opticalElement: entry.opticalElement, aperture: entry.aperture,
       pipeline: PIPELINES[entry.instrument]?.pipeline ?? entry.instrument, given: settings.given, ...(settings.wavecal ? { wavecal: settings.wavecal } : {}),
       crdsContext: program.crdsContext, calibrationSwitches: entry.calibrationSwitches, references: settings.references },
-    software, toolchainDigest,
+    software,
   };
 }
 
@@ -220,7 +199,7 @@ export async function runCalibration(id: string, observation: string, work: stri
     !copied.some(input => input.name === name)).sort();
   const references = requireRecord(reported.references, 'references') as Record<string, Record<string, string>>;
   // The record of this run, beside each product it made, with nothing checked yet: compare.mts adds what it establishes.
-  const made = calibrationRun(program, entry, inputs, { given, wavecal, references }, hstSoftware(reported.software), await hstToolchainDigest());
+  const made = calibrationRun(program, entry, inputs, { given, wavecal, references }, hstSoftware(reported.software));
   for (const name of written) await writeProductRecord(productRecordPath(resolve(run, name)), made, [{ path: name, file: resolve(run, name), ...await productUnits(resolve(run, name)) }]);
   return { run, pipeline: pipeline.pipeline, given, products: written, records: written.map(name => productRecordPath(name)),
     seconds: requireFiniteNumber(reported.seconds, 'seconds'),

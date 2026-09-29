@@ -191,7 +191,7 @@ export function parseReproductionReceipt(value: unknown, label: string): Reprodu
 
 /** What an archive-final program has to have for its configuration to count as qualified: the program parses, the record beside
  * it parses as a product record of the `archive-final` stage, names that exact program, observation and configuration, states
- * that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries exactly one
+ * that no software of ours ran, pins every file the program pins at the same byte count, and carries exactly one
  * `archive-origin` entry for the science product and no `archive-agreement` at all. Anything else is a problem and qualifies
  * nothing: a record that cannot be read proves less than no record, because it looks like proof. */
 const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical)
@@ -216,7 +216,7 @@ export function archiveFinalQualification(program: ArchiveFinalProgram, record: 
   const expected = archiveFinalQualificationRun(program), stated = archiveFinalQualifiedRun(record);
   if (runKey(expected) !== runKey(stated)) {
     const wanted = expected.parameters.selection as Record<string, unknown>, held = stated.parameters.selection;
-    // The verdict is the digest, which ignores key order; the message sorts keys too, so it never blames a field that only moved.
+    // The verdict is the run key, which ignores key order; the message sorts keys too, so it never blames a field that only moved.
     const said = !isRecord(held) ? 'it states no selection at all, so nothing says which units it read'
       : Object.keys(wanted).filter(key => stable(held[key]) !== stable(wanted[key])).map(key => `${key} (${stable(held[key])}, not ${stable(wanted[key])})`).join('; ')
         || 'its inputs are not the files this program records, in these roles, at these sizes';
@@ -252,7 +252,7 @@ export async function repositoryArchiveFinal(repository = REPOSITORY) {
 
 /** What this repository holds for each configuration (the programs pinned and those a receipt proved), and every receipt that
  * could not be accepted. A program counts as re-calibrated in a configuration only when a receipt names one of its observations
- * in that configuration and the MAST product the program pins for it, with the digest of what it compared. */
+ * in that configuration and the MAST product the program pins for it, at the size it compared. */
 export async function repositoryReceipts(repository = REPOSITORY) {
   const directory = resolve(repository, HST_PROGRAMS.path), files = (await readdir(directory)).sort();
   const state = new Map<string, { programs: Set<string>; checked: Set<string> }>(), problems: string[] = [];
@@ -432,9 +432,9 @@ export function hubbleLedgerGuide(ledger: Ledger): string {
     '',
     '## Receipts',
     '',
-    `A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the \`${HST_REPRODUCTION_SCHEMA}\` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, with the digest of what it compared. A receipt that says anything else is reported here and proves nothing.`,
+    `A program counts as re-calibrated in a configuration only when a receipt beside it parses, states the \`${HST_REPRODUCTION_SCHEMA}\` schema, and names one of its observations in that configuration together with the MAST product the program pins for it, at the size it compared. A receipt that says anything else is reported here and proves nothing.`,
     '',
-    `An archive-final program counts as qualified only when the \`<id>.archive-final.product.json\` beside it parses as a \`${ARCHIVE_FINAL_STAGE}\` product record, matches the current program selection (including component HDUs, units and observation identity), states that no software of ours ran, pins every file the program pins at the same byte count and digest, and carries one \`archive-origin\` entry for the science product and no \`archive-agreement\` at all. A record that cannot be read proves less than no record, so it is reported here too.`,
+    `An archive-final program counts as qualified only when the \`<id>.archive-final.product.json\` beside it parses as a \`${ARCHIVE_FINAL_STAGE}\` product record, matches the current program selection (including component HDUs, units and observation identity), states that no software of ours ran, pins every file the program pins at the same byte count, and carries one \`archive-origin\` entry for the science product and no \`archive-agreement\` at all. A record that cannot be read proves less than no record, so it is reported here too.`,
     '',
     receiptProblemsParagraph(ledger.receiptProblems),
     '',

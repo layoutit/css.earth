@@ -7,13 +7,13 @@ import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
  *
  * micromamba creates Python from conda-forge; pip then installs requirements.lock, every package at the version the KCWI DRP's
  * own pip-compile output pins, without resolving further dependencies, so this environment is that file and nothing else. The
- * install records the sha256 of the descriptor and the lock, and `keckToolchain` refuses an environment built from other pins.
+ * install keeps the descriptor and lock texts it was built from, and `keckToolchain` refuses an environment built from other pins.
  * micromamba itself is taken from PATH.
  *
  * Only the KCWI pipeline is installed. The OSIRIS DRP is IDL and does not run here; toolchain.json says so, and archive.mts
  * pins KOA's own OSIRIS products instead of re-running them. */
 import { spawnSync } from 'node:child_process';
-import { runToolchainProcess, WORKSPACE } from '@cssearth/telescope/node';
+import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -25,7 +25,7 @@ const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/keck');
 export const KECK_ROOT = resolve(repository, 'output/toolchains/keck');
 
 export async function installKeck() {
-  const { entry, digest } = await readToolchainDescriptor(PINS), prefix = resolve(KECK_ROOT, 'env');
+  const pins = await readToolchainDescriptor(PINS, 'keck'), { entry } = pins, prefix = resolve(KECK_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(KECK_ROOT, { recursive: true, force: true });
   await mkdir(KECK_ROOT, { recursive: true });
@@ -33,25 +33,19 @@ export async function installKeck() {
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
   runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-r', resolve(PINS, requireString(entry.requirements))]);
   await rm(resolve(KECK_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  await writeFile(resolve(KECK_ROOT, 'installed.json'), `${JSON.stringify({ id: 'keck', pinsSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(KECK_ROOT, pins);
   return KECK_ROOT;
 }
 
 export interface KeckToolchain { readonly python: string; readonly sitePackages: string; readonly binaries: Readonly<Record<string, string>>; readonly env: NodeJS.ProcessEnv }
-
-/** The digest of the pins this environment is built from: toolchain.json and the lock, together. It goes in the record of
- * every product a run makes, so a product states the environment it came out of and not only the package versions. */
-export const keckToolchainDigest = async (): Promise<string> => (await readToolchainDescriptor(PINS)).digest;
 
 /** The installed environment's Python, the directory its packages live in (which is where the pipeline's own shipped
  * configuration is read from), the pipeline executables, and the variables a reduction runs with. The environment is headless:
  * matplotlib draws to Agg, the home directory is inside the toolchain, and the reduction turns the DRP's bokeh plotting off in
  * the configuration it passes, so no plot server is started. Refuses a missing install or one built from other pins. */
 export async function keckToolchain(): Promise<KeckToolchain> {
-  const { entry, digest } = await readToolchainDescriptor(PINS), bin = resolve(KECK_ROOT, 'env/bin');
-  const marker = await readFile(resolve(KECK_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Keck toolchain is not installed: node packages/telescope-cli/src/archives/keck/toolchain.mts install');
-  if (marker.pinsSha256 !== digest) throw new Error('The Keck toolchain was installed from other pins; reinstall it.');
+  const pins = await readToolchainDescriptor(PINS, 'keck'), { entry } = pins, bin = resolve(KECK_ROOT, 'env/bin');
+  assertInstalledMarker(KECK_ROOT, pins, 'Keck', 'node packages/telescope-cli/src/archives/keck/toolchain.mts install');
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
     binaries[name] = resolve(bin, requireString(file, name));

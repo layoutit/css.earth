@@ -176,7 +176,7 @@ test('the calibration the archive ran is read from whichever header states it, a
 test('archive-origin is a kind of its own and never answers a question about archive agreement', () => {
   assert.ok((EVIDENCE_KINDS as readonly string[]).includes('archive-origin'));
   const record = parseProductRecord({ schema: 'cssearth-telescope-product@1', telescope: 'Hubble', stage: ARCHIVE_FINAL_STAGE, inputs: [], parameters: {}, software: [],
-    outputs: [{ path: 'a_c1f.fits', bytes: 1, sha256: 'a'.repeat(64) }],
+    outputs: [{ path: 'a_c1f.fits', bytes: 1 }],
     evidence: [{ kind: 'archive-origin', receipt: 'programs/a.archive-final.product.json', product: 'a_c1f.fits', establishes: "The bytes are the archive's own." }] });
   assert.equal(evidenceFor(record, 'a_c1f.fits', 'archive-origin').length, 1);
   assert.deepEqual(evidenceFor(record, 'a_c1f.fits', 'archive-agreement'), [], 'retrieval is not a reproduction');

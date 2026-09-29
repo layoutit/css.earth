@@ -347,10 +347,10 @@ test('a drizzled product states how it was drizzled, and only a single-image dri
 
 /** The observation a record is written for, its inputs pinned as a run that read them would have them. */
 const CALIBRATED = parseHstProgram(observation({ inputs: [file('od9l12010_raw.fits', 2000), file('od9l12010_wav.fits', 1000)], products: [file('od9l12010_flt.fits')] }));
-const PINS: PinnedFile[] = [{ ...file('od9l12010_raw.fits', 2000), sha256: 'a'.repeat(64) }, { ...file('od9l12010_wav.fits', 1000), sha256: 'b'.repeat(64) }];
+const PINS: PinnedFile[] = [file('od9l12010_raw.fits', 2000), file('od9l12010_wav.fits', 1000)];
 const calibration = () => calibrationRun(CALIBRATED, CALIBRATED.observations[0]!, PINS,
   { given: 'od9l12010_raw.fits', wavecal: 'od9l12010_wav.fits', references: { 'od9l12010_raw.fits': { DARKFILE: 'oref$n7p1032ao_drk.fits' } } },
-  [{ name: 'stistools', version: '1.4.5' }, { name: 'crds', version: '14.0.0' }, { name: 'cs0.e', version: '3.2.0' }], 'c'.repeat(64));
+  [{ name: 'stistools', version: '1.4.5' }, { name: 'crds', version: '14.0.0' }, { name: 'cs0.e', version: '3.2.0' }]);
 /** A calibrated product on disk with the record of the run that made it beside it. */
 async function calibratedProduct(work: string, name = 'od9l12010_flt.fits', level = (x: number, y: number) => x + y) {
   const product = join(work, name);
@@ -373,7 +373,6 @@ test('a calibration record pins the observation’s own files, the context that 
     assert.equal(record.parameters.pipeline, 'calstis');
     assert.deepEqual(record.parameters.references, { 'od9l12010_raw.fits': { DARKFILE: 'oref$n7p1032ao_drk.fits' } });
     assert.deepEqual(record.software.map(entry => entry.name), ['stistools', 'crds', 'cs0.e']);
-    assert.equal(record.toolchainDigest, 'c'.repeat(64), 'the pins the software was installed from');
     // The product is pinned as the run wrote it, and states its own units.
     assert.equal(record.outputs[0]!.path, 'od9l12010_flt.fits');
     assert.equal(record.outputs[0]!.units, 'COUNTS/S');
@@ -402,17 +401,16 @@ test('the comparison adds its receipt to the record of the exact product it comp
 });
 
 test('a drizzle record states what went in and the settings the archive’s own product gave', () => {
-  const inputs = [{ role: 'calibrated exposure, this run\'s own product', identity: 'idr203wtq_flt.fits', bytes: 11, sha256: 'a'.repeat(64) },
-    { role: 'archive drizzled product, read for the settings of the run that made it', identity: 'mast:HST/product/idr203wtq_drz.fits', bytes: 22, sha256: 'b'.repeat(64) },
-    { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: 'mast:HST/product/idr203wtq_flt.fits', bytes: 33, sha256: 'c'.repeat(64) }];
+  const inputs = [{ role: 'calibrated exposure, this run\'s own product', identity: 'idr203wtq_flt.fits', bytes: 11 },
+    { role: 'archive drizzled product, read for the settings of the run that made it', identity: 'mast:HST/product/idr203wtq_drz.fits', bytes: 22 },
+    { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: 'mast:HST/product/idr203wtq_flt.fits', bytes: 33 }];
   const settings = drizzleSettings(DRIZZLED, 'idr203wtq_drz');
-  const made = drizzleRun(CALIBRATED, CALIBRATED.observations[0]!, inputs, settings, archiveSky({ MDRIZSKY: 0 }), [{ name: 'drizzlepac', version: '3.11.0' }], 'd'.repeat(64));
+  const made = drizzleRun(CALIBRATED, CALIBRATED.observations[0]!, inputs, settings, archiveSky({ MDRIZSKY: 0 }), [{ name: 'drizzlepac', version: '3.11.0' }]);
   assert.equal(made.stage, 'drizzle');
   assert.deepEqual(made.inputs, inputs, 'the exposure drizzled and the archive files the settings and the sky were read from');
   assert.deepEqual([made.parameters.kernel, made.parameters.pixfrac, made.parameters.scale, made.parameters.fillval, made.parameters.units],
     ['square', 1, 0.03962000086903572, 'INDEF', 'cps']);
   assert.deepEqual([made.parameters.skySubtraction, made.parameters.archiveSky, made.parameters.images], ['off', 0, 1]);
-  assert.equal(made.toolchainDigest, 'd'.repeat(64));
 });
 
 test('AstroDrizzle reproduces the archive’s grid exactly; what it does not reproduce is the archive’s unrecorded DQ mask', async () => {
