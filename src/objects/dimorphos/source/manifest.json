@@ -121,7 +121,7 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (11 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (11 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different bytes, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
       "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "consumers": [
         "features"
@@ -141,7 +141,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation",
@@ -170,7 +170,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -195,7 +195,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:lsk_naif0012.tls::1.0",
       "credit": "NASA/JPL NAIF; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -219,7 +219,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:pck_pck00010.tpc::1.0",
       "credit": "NASA/JPL NAIF; IAU Working Group on Cartographic Coordinates and Rotational Elements (2009); archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -243,7 +243,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:pck_didymos_system_15.tpc::1.0",
       "credit": "DART SOC, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -267,7 +267,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:fk_dart_009.tf::1.0",
       "credit": "DART project, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -291,7 +291,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:fk_didymos_system_007.tf::1.0",
       "credit": "DART SOC, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -315,7 +315,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:ik_dart_draco_003.ti::1.0",
       "credit": "DART project, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -339,7 +339,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:sclk_dart_sclk_0204.tsc::1.0",
       "credit": "DART mission operations, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -363,7 +363,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_de430.bsp::1.0",
       "credit": "NASA/JPL Solar System Dynamics Group; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -387,7 +387,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_didymos_barycenter_s205_v01.bsp::1.0",
       "credit": "NASA/JPL Solar System Dynamics Group; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -411,7 +411,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_didymos_system_s542_v01.bsp::1.0",
       "credit": "NASA/JPL Solar System Dynamics Group; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -435,7 +435,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_struct_v04.bsp::1.0",
       "credit": "DART project, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -459,7 +459,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_2022_231_2022_269_rec_v03.bsp::1.0",
       "credit": "DART Navigation Team, NASA/JPL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -483,7 +483,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_2022_269_2022_269_rec_v03.bsp::1.0",
       "credit": "DART Navigation Team, NASA/JPL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -507,7 +507,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:spk_dart_2022_269_2022_269_spc_v04.bsp::1.0",
       "credit": "DART Navigation Team, NASA/JPL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -531,7 +531,7 @@
       "productId": "urn:nasa:pds:dart.spice:spice_kernels:ck_dart_2022_269_2022_269_spc_v04.bc::1.0",
       "credit": "DART mission operations, JHU/APL; archived by NASA/JPL NAIF in the DART SPICE bundle (Nair, Costa Sitja and Bailey 2025)",
       "license": "NASA PDS scientific data; retain the bundle citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Unmodified kernels are not redistributed; derived camera geometry is evidenced in the body README.",
       "consumers": [
         "draco-spice"
@@ -555,7 +555,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -583,7 +583,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -609,7 +609,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -637,7 +637,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -663,7 +663,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -691,7 +691,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -795,7 +795,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"

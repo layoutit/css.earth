@@ -4,4 +4,4 @@ The committed global spectrum snapshot is prepared from M. D'Amore's DLR dataset
 
 The upstream dataset is licensed under Creative Commons Attribution 4.0 International (CC-BY-4.0): https://creativecommons.org/licenses/by/4.0/
 
-The adapter records the exact archive URL, byte length, MD5 and SHA-256 checksums, aggregation rule, parsed cell counts, and the discrepancy between the record description and verified archive contents in `mascs-global-area-weighted-mean.json`.
+The adapter records the exact archive URL, byte length, aggregation rule, parsed cell counts, and the discrepancy between the record description and verified archive contents in `mascs-global-area-weighted-mean.json`.

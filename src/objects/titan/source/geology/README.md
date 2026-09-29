@@ -32,6 +32,6 @@ Reproduce from this directory’s pinned originals:
     python packages/bake/src/objects/acquisition/geology-grid.py src/objects/titan/source/geology/prepare-grid.json
 
 Use the scientific Python versions in packages/bake/src/objects/acquisition/requirements-mapped-science.txt.
-The original downloadable files and exact SHA-256 hashes are in release-files.json;
+The original downloadable files and their byte counts are in release-files.json;
 the shared acquisition recipe group is cassini-atlas. The compact output TIFF
 is checked in, so ordinary installation needs no scientific source processing.

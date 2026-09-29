@@ -40,7 +40,7 @@
     "purpose": "Preview bootstrap only. M2-9 used a source-recipe-matched cached bank with a temporary local descriptor SHA. This does not qualify the M2-9 bank. No such descriptor change is included in the PR.",
     "path": "src/objects/m2-9/prepared/lenses.json",
     "limitation": "Available bank has the same verified delivery recipe and source volume but differs from the committed M2-9 output pin. This preview does not qualify M2-9 or whole-application source closure.",
-    "temporaryDescriptorChange": "M2-9 prepared SHA-256 temporarily points to this source-recipe-matched cached bank for local preview. Restore byte-for-byte before commit. This is not a release qualification of M2-9."
+    "temporaryDescriptorChange": "M2-9 prepared descriptor temporarily points to this source-recipe-matched cached bank for local preview. Restore byte-for-byte before commit. This is not a release qualification of M2-9."
   },
   "remaining": "Repeat on current main with its exact six nebula banks restored. DPR 2/mobile checks and full changed-lens browser review are still pending."
 }

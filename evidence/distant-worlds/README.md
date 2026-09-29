@@ -105,7 +105,7 @@ all six. Hash-verified shared sky/font inputs were reused through hard links;
 missing papers were restored by the normal acquisition plan.
 [Fresh runtime installation](outer-worlds/fresh-install.json) downloaded
 186 files, 42.12 MB, directly into the serving directory, with every expected
-size and SHA-256 checked. [Finite radial samples](outer-worlds/surface-fit.json)
+size checked. [Finite radial samples](outer-worlds/surface-fit.json)
 measure approximation to the adopted analytical models, not scientific accuracy
 or a Hausdorff bound.
 

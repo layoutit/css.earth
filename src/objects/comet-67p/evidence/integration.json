@@ -17,7 +17,7 @@
     }
   ],
   "restoration": {
-    "method": "Production setupAssets with --object=comet-67p into an empty mkdtemp destination, deriving transport/page/lineage after restoration. Inventory byte counts and SHA-256 are checked by the installer.",
+    "method": "Production setupAssets with --object=comet-67p into an empty mkdtemp destination, deriving transport/page/lineage after restoration. Inventory byte counts are checked by the installer.",
     "result": {
       "installed": 71,
       "reused": 0,

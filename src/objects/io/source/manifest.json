@@ -163,7 +163,7 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4029951286 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4029951286 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-surfaces"
@@ -189,7 +189,7 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-surfaces"
@@ -215,7 +215,7 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2264103816 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2264103816 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-surfaces"
@@ -836,7 +836,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"
@@ -1290,13 +1290,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_geology_metadata.txt",
-      "purpose": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 verified."
     },
     {
       "id": "usgs-sim3168-io-diffusedeposits-dbf",
@@ -1307,13 +1307,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 verified."
     },
     {
       "id": "usgs-sim3168-io-diffusedeposits-prj",
@@ -1324,13 +1324,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 verified."
     },
     {
       "id": "usgs-sim3168-io-diffusedeposits-shp",
@@ -1341,13 +1341,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 verified."
     },
     {
       "id": "usgs-sim3168-io-diffusedeposits-shp-xml",
@@ -1358,13 +1358,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified."
     },
     {
       "id": "usgs-sim3168-io-diffusedeposits-shx",
@@ -1375,13 +1375,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 verified."
     },
     {
       "id": "usgs-sim3168-io-geology-metadata-xml",
@@ -1392,13 +1392,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified."
     },
     {
       "id": "usgs-sim3168-io-geounits-shp-xml",
@@ -1409,13 +1409,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified."
     },
     {
       "id": "usgs-sim3168-io-geounits-shx",
@@ -1426,13 +1426,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 verified."
     },
     {
       "id": "usgs-sim3168-io-geounitspoints-dbf",
@@ -1443,13 +1443,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 verified."
     },
     {
       "id": "usgs-sim3168-io-geounitspoints-prj",
@@ -1460,13 +1460,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 verified."
     },
     {
       "id": "usgs-sim3168-io-geounitspoints-shp",
@@ -1477,13 +1477,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 verified."
     },
     {
       "id": "usgs-sim3168-io-geounitspoints-shp-xml",
@@ -1494,13 +1494,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 verified."
     },
     {
       "id": "usgs-sim3168-io-geounitspoints-shx",
@@ -1511,13 +1511,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx",
-      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 verified."
     },
     {
       "id": "usgs-sim3168-io-diffusedeposits-lyr",
@@ -1528,13 +1528,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr",
-      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 verified."
     },
     {
       "id": "usgs-sim3168-io-geounits-lyr",
@@ -1545,13 +1545,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 and SHA-256 verified.",
+      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr",
-      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 and SHA-256 verified."
+      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 verified."
     },
     {
       "id": "sim3168-archive-index-json",

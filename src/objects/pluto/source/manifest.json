@@ -10,7 +10,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "scene",
@@ -47,7 +47,7 @@
       "licenseEvidence": [
         "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
       ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "lenses"
@@ -82,7 +82,7 @@
       "licenseEvidence": [
         "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
       ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "lenses"
@@ -117,7 +117,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "scene",
@@ -143,7 +143,7 @@
       "licenseEvidence": [
         "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
       ],
-      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified byte count, never silently refreshed",
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "lenses"
@@ -213,7 +213,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"
@@ -407,7 +407,7 @@
         "https://zenodo.org/records/18825240",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned with SHA-256. No conversion.",
+      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned by size. No conversion.",
       "redistribution": "CC BY 4.0 with attribution; independent of the manuscript license.",
       "consumers": [
         "leisa-ice-composition"
@@ -448,7 +448,7 @@
         "https://zenodo.org/records/18825240",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned with SHA-256. No conversion.",
+      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned by size. No conversion.",
       "redistribution": "CC BY 4.0 with attribution; independent of the manuscript license.",
       "consumers": [
         "leisa-ice-composition"

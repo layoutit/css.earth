@@ -1,5 +1,5 @@
 {
-  "method": "Shared installRuntimeAssets used by pnpm setup:assets; empty destination, concurrency 2, exact expected byte count and SHA-256 checked before atomic publication. No source preparation or other body inputs.",
+  "method": "Shared installRuntimeAssets used by pnpm setup:assets; empty destination, concurrency 2, exact expected byte count checked before atomic publication. No source preparation or other body inputs.",
   "installed": {
     "installed": 152,
     "reused": 0

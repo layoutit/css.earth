@@ -1078,7 +1078,7 @@
         "https://ds.iris.edu/ds/products/emc/",
         "https://doi.org/10.1093/gji/ggae270"
       ],
-      "acquisition": "Checked-in numeric subset of the SHA-256 pinned NetCDF. Recreate with packages/bake/src/objects/layers/paged-ellipsoid/extract-tomography.py; the upstream model pin and complete extraction recipe are in interior/tomography.json.",
+      "acquisition": "Checked-in numeric subset of the pinned NetCDF. Recreate with packages/bake/src/objects/layers/paged-ellipsoid/extract-tomography.py; the upstream model pin and complete extraction recipe are in interior/tomography.json.",
       "redistribution": "Numeric scientific-model subset with author, paper and repository attribution; no source illustration is copied.",
       "consumers": [
         "interior"
@@ -1388,7 +1388,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"

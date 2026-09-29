@@ -199,7 +199,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"
@@ -494,7 +494,7 @@
           {
             "catalogueId": "pds-dawn-vir-ceres-ir-rdr",
             "role": "material",
-            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and pinned by SHA-256 in science/vir-reduction/receipt.json."
+            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and named in science/vir-reduction/receipt.json."
           }
         ]
       },
@@ -517,7 +517,7 @@
           {
             "catalogueId": "pds-dawn-vir-ceres-ir-rdr",
             "role": "material",
-            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and pinned by SHA-256 in science/vir-reduction/receipt.json."
+            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and named in science/vir-reduction/receipt.json."
           }
         ]
       }
@@ -539,7 +539,7 @@
           {
             "catalogueId": "pds-dawn-vir-ceres-ir-rdr",
             "role": "material",
-            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and pinned by SHA-256 in science/vir-reduction/receipt.json."
+            "evidence": "1,657 calibrated IR cubes (672 Survey and HAMO, 875 LAMO, 110 Approach) listed in science/vir-reduction/recipe.json and named in science/vir-reduction/receipt.json."
           }
         ]
       }
@@ -1556,7 +1556,7 @@
       "id": "ceres-vir-reduction-receipt",
       "path": "science/vir-reduction/receipt.json",
       "origin": "Repository-generated receipt of packages/bake/authoring/dawn/vir-mosaic.mts",
-      "purpose": "Every reduced cube with its SHA-256, line and pixel counts, and the mosaic's coverage."
+      "purpose": "Every reduced cube with its byte count, line and pixel counts, and the mosaic's coverage."
     },
     {
       "id": "ceres-vir-reduction-photometry",

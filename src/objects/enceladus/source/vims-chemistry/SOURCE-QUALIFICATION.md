@@ -22,7 +22,7 @@ No institutional endorsement is implied; no institutional logos are included.
 
 The portal identifies its data as CC BY 4.0 on its
 [terms page](https://vims.univ-nantes.fr/about).
-Every numeric file, exact download URL, byte count and SHA-256 is recorded in
+Every numeric file, exact download URL and byte count is recorded in
 `source-receipt.json`; the preparation recipe verifies every pin before use.
 Original observation pages and archived PDS labels accompany the cubes.
 

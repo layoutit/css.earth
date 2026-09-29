@@ -8,7 +8,7 @@
     "offset": 5480,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_geology_metadata.txt",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_geology_metadata.xml",
@@ -19,7 +19,7 @@
     "offset": 9887,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_geology_metadata.xml",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf",
@@ -30,7 +30,7 @@
     "offset": 3926680,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_DiffuseDeposits.dbf",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj",
@@ -41,7 +41,7 @@
     "offset": 3935821,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_DiffuseDeposits.prj",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp",
@@ -52,7 +52,7 @@
     "offset": 3938999,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_DiffuseDeposits.shp",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml",
@@ -63,7 +63,7 @@
     "offset": 4043498,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_DiffuseDeposits.shp.xml",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx",
@@ -74,7 +74,7 @@
     "offset": 4048197,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_DiffuseDeposits.shx",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml",
@@ -85,7 +85,7 @@
     "offset": 5070520,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_geology_metadata.xml",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf",
@@ -96,7 +96,7 @@
     "offset": 5075216,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnits.dbf",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj",
@@ -107,7 +107,7 @@
     "offset": 5125180,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnits.prj",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp",
@@ -118,7 +118,7 @@
     "offset": 5136608,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnits.shp",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml",
@@ -129,7 +129,7 @@
     "offset": 6784329,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnits.shp.xml",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx",
@@ -140,7 +140,7 @@
     "offset": 6789021,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnits.shx",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf",
@@ -151,7 +151,7 @@
     "offset": 6796239,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnitsPoints.dbf",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj",
@@ -162,7 +162,7 @@
     "offset": 6822230,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnitsPoints.prj",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp",
@@ -173,7 +173,7 @@
     "offset": 6833487,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml",
@@ -184,7 +184,7 @@
     "offset": 6854831,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp.xml",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx",
@@ -195,7 +195,7 @@
     "offset": 6859529,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnitsPoints.shx",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr",
@@ -206,7 +206,7 @@
     "offset": 7233842,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_DiffuseDeposits.lyr",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   },
   {
     "name": "Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr",
@@ -217,6 +217,6 @@
     "offset": 7238319,
     "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
     "path": "science/geology-sim3168/Io_GeoUnits.lyr",
-    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed SHA-256 verified."
+    "acquisition": "HTTP byte range of ZIP local member; central directory size/CRC32 and decompressed size verified."
   }
 ]

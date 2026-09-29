@@ -13,7 +13,7 @@
   },
   "reproduction": {
     "expectedInventory": "Selected after the first successful preparation, before the second run",
-    "comparison": "Exact byte count and SHA-256 for every runtime file",
+    "comparison": "Exact byte count for every runtime file",
     "changed": 0
   },
   "assetDelta": {
