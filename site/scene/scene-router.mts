@@ -306,7 +306,7 @@ export function createSceneRouter({
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
       const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
-      const selection = registry.createSceneSelection({ objectId,
+      const selection = registry.createSceneSelection({ objectId, systems: objects,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
       const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });

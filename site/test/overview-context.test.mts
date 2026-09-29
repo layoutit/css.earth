@@ -72,6 +72,14 @@ test('overview leaves the Solar System when its bodies fade and restores correct
   assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
 });
 
+test("another star's system overview is left by the distance from that star, not from the Sun", () => {
+  const { hiddenDistanceM: hidden } = context.system, parsec = 3.085677581491367e16, star = [12.47 * parsec, 0, 0];
+  const near = { ...camera(0), pose: { ...camera(0).pose, positionM: [star[0]! + 1.5e11, 0, 0] as const } };
+  assert.equal(overviewScopeAtCamera(near, 'system', context, star), 'system', 'one astronomical unit from its star');
+  const far = { ...camera(0), pose: { ...camera(0).pose, positionM: [star[0]! + hidden, 0, 0] as const } };
+  assert.equal(overviewScopeAtCamera(far, 'system', context, star), 'milky-way');
+});
+
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
   const plan = { ...context, focus: { ...context.focus, positionM: [100, 200, 300] as const } };
   const world = camera(500, plan), frame = frameAt([100, 200, 400], 20);

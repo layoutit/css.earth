@@ -45,8 +45,10 @@ export function selectionKey(subject: SelectionTarget): string {
 }
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */
-export function createSceneSelection({ initial, objectId, initialFocus = null, onChange }: {
+export function createSceneSelection({ initial, objectId, initialFocus = null, systems = [], onChange }: {
   initial: SelectionTarget; objectId: string; initialFocus?: PreparedCatalogObject | null;
+  /** The world's bodies, for a system overview's star: its overview is left by the distance from that star. */
+  systems?: SystemObjects;
   onChange(): void;
 }) {
   // The mounted scene: a URL that selects no focus is on its page.
@@ -82,7 +84,7 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
     followCamera(world: WorldCameraPose) {
       const context = selectionContext(subject);
       if (context.kind !== 'overview') return false;
-      const scope = overviewScopeAtCamera(world, context.overview.scope);
+      const scope = overviewScopeAtCamera(world, context.overview.scope, undefined, systemById(systems, context.overview.systemId)?.originM);
       if (scope === context.overview.scope) return false;
       const next: SceneContext = { kind: 'overview', overview: { ...context.overview, scope } };
       return publish(subject.kind === 'focus' ? { ...subject, context: next } : next);
