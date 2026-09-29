@@ -128,6 +128,12 @@ The build bundles the renderer modules a topic imports and writes `dist/metafile
 
 The prepared-presentation pass resolves whole-surface visibility priorities before packing depth groups. It uses the measured CSS facing of every source face. Groups with a fixed order keep that order as the camera rotates; an inseparable visibility cycle stays together in native 3D, even when it exceeds the 64-leaf packing target. Source-edge plane splitting is reserved for inputs without a proven facing contract. This avoids introducing runtime `z-index` changes merely because a surface admits a geometric split.
 
+## Prepared texture consumers
+
+Every textured presentation resolves its image consumers from the actual scene CSS during preparation. Its tree carries `textureBindings`, including an explicit empty array when a texture cannot be published directly to leaves. Restoring an older runtime only reconstructs its transport; it does not run this compiler. After changing presentation compilation, regenerate the affected runtime assets and publish their inventories.
+
+The runtime uses those bindings to keep the mesh connected, publish images directly to their leaves, and introduce each atlas on one face before activating subsequent batches. A missing binding bank falls back to inherited texture publication and connected-node batching, combining the first atlas upload with the first 64 faces. The registry activation check rejects that omission for textured deliveries.
+
 ## Evidence
 
 The volume entries replaced the lab's `volume-core` and `volume-bake` packages, moving their sources
