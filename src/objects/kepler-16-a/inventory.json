@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "kepler-16-a-arrival.webp",
-      "bytes": 29538,
-      "sha256": "a772df241769f2806616fae408375858def76ab3e998c0efce5304e56a40db04"
+      "bytes": 29544,
+      "sha256": "002936aae9f79d193be8884de2404b4441ee1feac2dd625992fd6b303c3f4f1b"
     },
     {
       "location": "public",
@@ -78,6 +78,12 @@
       "filename": "minimaps/color.webp",
       "bytes": 440,
       "sha256": "2d24bb2f7337423fc7561c0921d3a73ef50c3e77ea266669f81eb04fd4d62cab"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 424,
+      "sha256": "db5f9365ac1126293a111f13117d88044659fb134f62d7e01b0bb92cfbef60a3"
     },
     {
       "location": "prepared",
