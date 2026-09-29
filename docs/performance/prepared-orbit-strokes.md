@@ -152,5 +152,4 @@ view URL. Neither is used in the performance comparison.
 
 Manual trace candidate: `http://127.0.0.1:4247/sun/`, serving
 `output/playwright/prepared-orbit-batches/site` from this worktree. The frozen
-baseline remains on 4246. Final prepared-world SHA-256:
-`c216db5e8a01f0ae19128feeab6319298bd68dbecec54919233777250dd36478`.
+baseline remains on 4246.

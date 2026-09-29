@@ -13,7 +13,7 @@ const commit = (message: string, overrides: Partial<RangeCommit> = {}): RangeCom
   ({ sha: 'a'.repeat(40), parents: 1, message, ...overrides });
 
 test('one Conventional Commits line passes, with or without a scope or a breaking marker', () => {
-  for (const message of ['refactor(core): move sha256 into core\n', 'fix!: drop the old reader\n', 'docs: update CLAUDE.md\n',
+  for (const message of ['refactor(core): move isRecord into core\n', 'fix!: drop the old reader\n', 'docs: update CLAUDE.md\n',
     'ci(commit-message): check every pull request commit', 'chore(deps/pnpm): bump the lockfile\n\n\n']) {
     assert.equal(messageProblem(message), undefined, message);
   }
@@ -32,7 +32,7 @@ test('a body, a trailer or any attribution is rejected', () => {
 });
 
 test('a title outside Conventional Commits is rejected', () => {
-  for (const message of ['moved sha256 into core', 'Refactor(core): move', 'feat(Core): move', 'feat:move', 'feat: ',
+  for (const message of ['moved isRecord into core', 'Refactor(core): move', 'feat(Core): move', 'feat:move', 'feat: ',
     'wip: things', 'feat: trailing space ', '']) {
     assert.notEqual(messageProblem(message), undefined, JSON.stringify(message));
   }

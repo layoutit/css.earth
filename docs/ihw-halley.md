@@ -14,7 +14,7 @@ collection.
 
 `comet-1p-nnsn1121` qualifies one real product in the clean-room interval: IHW image `NNSN1121`, observation `401132`, a
 10-second `GUNN_R` exposure from the Danish 1.5 m reflector at ESO on 1986-03-01. The official PDS label and FITS file are
-pinned by byte count, SHA-256 and the MD5 published in `CHECKSUM.TAB`. The index row, label and FITS header agree on the
+pinned by byte count and the MD5 published in `CHECKSUM.TAB`. The index row, label and FITS header agree on the
 observation; the image is 396 by 597 pixels at 0.36 arcsec per pixel, and the label rates it `EXCELLENT`.
 
 The program and its receipt are in

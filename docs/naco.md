@@ -30,8 +30,8 @@ Two other things are worth knowing before reading the code.
 
 1. **Install the software.** `node packages/telescope-cli/src/archives/naco/toolchain.mts install` downloads ESO's own NACO kit and builds it into
    `output/toolchains/naco` (ignored by git). The kit is pinned in [toolchain.json](../packages/telescope-cli/src/archives/naco/toolchain.json) by
-   byte count, sha256, and the BSD `cksum` value ESO publishes beside it — that last one is the only digest ESO states for a
-   kit, so it is checked as well as the sha256 and a swapped file is caught by ESO's own number. `install_pipeline` builds
+   URL, byte count and the BSD `cksum` value ESO publishes beside it. That is the only checksum ESO states for a kit, so a
+   swapped file is caught by ESO's own number. `install_pipeline` builds
    erfa, fftw, cpl, cfitsio, wcslib, gsl, esorex and the naco recipes; `verify` refuses an install built from another pin and
    `recipes` prints what esorex offers.
 2. **Pin.** `archive.mts <program id> <prog_id> <object> [--night YYYY-MM-DD]` records one night: every science frame, and
@@ -50,7 +50,7 @@ Two other things are worth knowing before reading the code.
    but macOS's shell refuses `ulimit -v`, so on this machine it binds nothing. Every reduction records whether the ceiling
    was actually applied, rather than claiming a protection it does not have.
 
-   Every frame a run consumes is checked against the program's pin (the sha256 of the FITS file the recipes read) inside
+   Every frame a run consumes is checked against the program's pin (the archive name and byte count of the FITS file the recipes read) inside
    the reduction itself and before any recipe is asked for, so a file already in the raw directory that is not the pinned
    frame reaches no pipeline even when it is a perfectly valid FITS. That check has one owner and it sits where the frames
    are used; a frame the program has not pinned is pinned by the run that first downloads it. Each reduction then writes a
@@ -93,8 +93,7 @@ product: how the recipe retained the detector axes, how relative intensity and i
 One slice: Ceres. Measured on 19 September 2026 with the pin in
 [toolchain.json](../packages/telescope-cli/src/archives/naco/toolchain.json), on an Apple silicon Mac (macOS 24.6, arm64).
 
-**Software.** ESO's `naco-kit-4.4.13-15`, 37,596,448 bytes, sha256
-`5d708e5368021246a6367419a8bc246f1dc15631fe64cb6850bf066c250fac3e`, whose `cksum` is `1928251875 37596448` — the value ESO
+**Software.** ESO's `naco-kit-4.4.13-15`, 37,596,448 bytes, whose `cksum` is `1928251875 37596448` — the value ESO
 publishes beside it. It builds on macOS arm64 without a patch, and its `install_pipeline` needs no repair step, unlike the
 AMBER and MATISSE kits. All fifteen recipes install and `esorex --recipes` lists them: `naco_img_dark`, `naco_img_detlin`,
 `naco_img_lampflat`, `naco_img_twflat`, `naco_img_jitter`, `naco_img_zpoint`, `naco_img_strehl`, `naco_img_checkfocus`,

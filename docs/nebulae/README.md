@@ -195,7 +195,7 @@ is separately pinned; changing its method remains research work.
 Application replay and source-catalogue preparation read evidence from each
 object's `source/` directory. `source/provenance-references.json` maps the
 provenance compiler's retained evidence and recipe copies to their original
-research paths, SHA-256 hashes and byte counts. Existing compact
+research paths and byte counts. Existing compact
 replay copies are reused; the copied JSON bytes and scientific pins are unchanged.
 The source manifest covers those copies and the mapping itself.
 

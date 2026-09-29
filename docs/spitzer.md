@@ -10,7 +10,7 @@ Spitzer's own post-BCD software is MOPEX: it makes the mosaics and does the poin
 
 Measured on 2026-09-19, macOS 15 (Darwin 24.6.0), Apple silicon:
 
-- `mopex18_5_0-mac64.dmg` downloaded, 240,297,151 bytes, sha256 `a715cd75f272e4054ddd85a460f85946c324dbd6939bc2351e66abb75a98d4f9`.
+- `mopex18_5_0-mac64.dmg` downloaded, 240,297,151 bytes.
 - Its executables are `Mach-O 64-bit executable x86_64` (`mosaic_int`, `mosaic_coadd`, `mosaic_geom` and the rest of the 104 programs in `mopex.app/Contents/Resources/platform/mac/bin`).
 - Rosetta 2 is installed on this machine: `arch -x86_64 /usr/bin/true` succeeds.
 - The binaries still did not run. macOS Gatekeeper refuses the unsigned, quarantined distribution and raises the system dialog `"mopex" is damaged and can't be opened`, which kills the process. The first attempt here read the binaries' exit status through a pipe and so read the exit status of `head`, not of the binary; the process was in fact being killed. That mistake is recorded because it is how a Gatekeeper refusal can look like a silent success.
@@ -48,7 +48,7 @@ It first requires that the canonical target, mode and AOR occur together in the 
 Spitzer-owned pin, mosaic and comparison functions and refreshes only repository-owned ledger state; it does not repeat or
 redate the archive survey.
 
-**`archive.mts`** finds the observation in the Spitzer Heritage Archive at IRSA and pins it. Per IRAC channel: the archive's own mosaic (`maic`) with its uncertainty (`munc`) and coverage (`mcov`), and every level-1 frame as its corrected image (`cbcd`), uncertainty (`cbunc`) and imask (`bimsk`). Each file by URL, byte count and sha256, with the archive's own MD5 checked where the catalogue publishes one. What the observation is, is recorded twice, from the catalogue and from the FITS headers, and a disagreement refuses the pin.
+**`archive.mts`** finds the observation in the Spitzer Heritage Archive at IRSA and pins it. Per IRAC channel: the archive's own mosaic (`maic`) with its uncertainty (`munc`) and coverage (`mcov`), and every level-1 frame as its corrected image (`cbcd`), uncertainty (`cbunc`) and imask (`bimsk`). Each file by URL and byte count, with the archive's own MD5 checked where the catalogue publishes one. What the observation is, is recorded twice, from the catalogue and from the FITS headers, and a disagreement refuses the pin.
 
 **`mosaic.mts`** drives `mosaic.py` in the pinned environment: read each frame with its own SIP distortion, drop what the imask flags, resample onto the archive's grid with `reproject_exact`, drop an output pixel from a frame that covers less than half of it, put the frames on one background level, average with equal weight per contributing frame. It writes a `cssearth-telescope-product@1` record beside the output naming the exact inputs, parameters, versions and toolchain digest. A second run with the same record and the same bytes does no work.
 

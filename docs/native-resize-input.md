@@ -95,8 +95,7 @@ These are medians of three trials and browser presentation events, not counts of
 unique camera poses. The separate JS-renderer comparison below measures a
 different camera workload and must not be used to infer an end-to-end speed ratio.
 
-Those captures use the HTML SHA-256
-`2cb6edb2010975d54bd0bab7a72dc134ee477bcc16bdab72a3230a0b85cb59c4`.
+Those captures use the HTML the build wrote on that date.
 The later source cleanup reads the same 0.1px tolerance from its shared owner
 and supplies zero-angle defaults when the native input rule is unsupported.
 Neither changes the measured Chromium path's selection or rendering behavior.

@@ -13,7 +13,7 @@ green or blue. That is representative colour, not what an eye would see, and eac
 channel. Channels that do not share a grid are refused rather than resampled onto one another. The rest are grey
 because there is only one measurement to draw. Every source sample becomes a block of equal output pixels. Nothing is
 smoothed, sharpened, interpolated or cleaned up, and a value outside the stated range is clipped rather than rescaled.
-The recipe also pins each product's sha256 and records the command that made it.
+The recipe also names each product by path and byte count and records the command that made it.
 The NGC 3132 NIRCam example has a missing grid recipe, as noted below; its
 product chain cannot currently be rerun from this checkout. For the other
 examples, rerun the chain with:

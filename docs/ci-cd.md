@@ -52,7 +52,7 @@ group and can supersede an older deployment.
   job, and is named in the run summary. Do not move a check there to silence it —
   move it only when its failure cannot make the deployed site broken or wrong, and
   say in the pull request where the shipped-side proof remains.
-  Runtime inventories own the published bytes' SHA-256 identities. Source
+  Runtime inventories own the published bytes' R2 content addresses. Source
   manifests describe paths, acquisition and attribution; do not reintroduce
   their retired file-stability pins as a merge gate.
 - Source-catalogue reconciliation and broad bake reproduction run in the separate
@@ -66,7 +66,8 @@ group and can supersede an older deployment.
   in the same workspace; local execution is serial where GitHub has isolated disks.
 - Cache dependency installation, compiled artifacts and compiler state—not test
   verdicts. Keep running the tests on a cache hit. Compiled outputs require exact
-  input keys; restored assets still require byte-count and SHA-256 validation.
+  input keys, which name each input by its Git object id; restored assets still
+  require the inventory's byte-count and content-address validation.
 - Use separate cache identities for declaration-producing and JavaScript-only
   builds, and for concurrent compiler programs. A JavaScript build may clean
   declarations needed by a later typecheck.
@@ -110,9 +111,10 @@ test goes red; restore it and confirm green. A comment alone proves nothing.
 The [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers)
 own the commands and credentials. These rules prevent stale-receipt failures:
 
-1. Verify actual bytes against their owning inventory, delivery receipt or
-   toolchain lock before changing that record. Source manifests do not contain
-   digest expectations. Never copy an expected hash merely to silence a failure.
+1. Verify actual bytes against their owning inventory before changing that
+   record. Only `inventory.json` holds a hash, the R2 content address; source
+   manifests, receipts and locks name files by path. Never edit an inventory
+   entry merely to silence a failure.
 2. If a source manifest changes, regenerate its dependent provenance using the
    canonical preparation owner and the required prepared bank. Layered bodies
    regenerate lineage; volumes and catalogues publish baked provenance. Review

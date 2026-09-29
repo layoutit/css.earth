@@ -47,9 +47,9 @@ neither moons nor a parent system omit the empty tab.
   existing orbits. Both CSS bar and SVG stroke presentations suppress minor
   moon orbits, including on hover. The moons themselves remain visible.
 
-The catalogue source entries carry hashes of the fetched HTML. The prepared
-labels carry SHA-256 hashes of the compressed Horizons archive and world-context
-input. The archive includes one rejected reply: Horizons currently interprets
+The catalogue source entries name the fetched HTML by URL and retrieval date.
+The prepared labels are recomputed from the tracked compressed Horizons archive and
+the world context. The archive includes one rejected reply: Horizons currently interprets
 code 75052 (S/2025 U1 in JPL's table) as asteroid 75052. This reply never supplies
 a scene position.
 

@@ -255,9 +255,9 @@ finite floats: `BLANK` applies only to integer arrays; floating gaps are `NaN`.
 This is a tested product subset, not arbitrary FITS support. Compressed images,
 random groups, int64 image decoding, variable-length/general tables, complex
 values, non-ESO/generalized `HIERARCH` names, `CONTINUE` and general WCS interpretation are unsupported.
-FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. The current
-source manifest does not supply a SHA-256 integrity check. Oracle fixtures can
-check recorded byte counts; exact-byte evidence needs its own retained identity.
+FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. Git holds
+the tracked bytes and the R2 source mirror holds the downloads; oracle fixtures can
+check recorded byte counts against those copies.
 
 ### FITS checks
 

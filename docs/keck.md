@@ -44,12 +44,12 @@ Downloads are `getKOA/nph-getKOA?filehand=` for a raw frame and `KoaAPI/nph-dnlo
    `output/toolchains/keck` (ignored by git): micromamba Python 3.12 from conda-forge, then
    [requirements.lock](../packages/telescope-cli/src/archives/keck/requirements.lock), the KCWI DRP's own `pip-compile` output with the pipeline
    added, installed with `--no-deps`, so the environment is that file and nothing else. `verify` prints the versions. The
-   install records the sha256 of the descriptor and the lock together, a run refuses an environment built from other pins, and
-   that same digest goes into the record of every product a run makes.
+   install records the descriptor and the lock it was built from, a run refuses an environment built from other pins, and
+   the product record of every run names those same pins.
 2. **Pin.** `archive.mts <program id> <instrument> <koaid>... [--nights n]` records, for each science frame: the raw frame
    itself with what the catalogue says it is (target, date, exposure, proprietary period, programme, and the instrument
    settings that decide which calibrations apply); the calibrations that apply to it; and the archive's own reduced products.
-   Each file is fetched under `.local/keck/<program id>` and pinned by KOA URL, byte count and sha256. Each also keeps the name
+   Each file is fetched under `.local/keck/<program id>` and pinned by KOA URL and byte count. Each also keeps the name
    the observatory wrote it under, because the KCWI DRP reads a night by that convention and KOA stores frames under its own
    ids.
 
@@ -73,7 +73,7 @@ Downloads are `getKOA/nph-getKOA?filehand=` for a raw frame and `KoaAPI/nph-dnlo
    - **no plots.** The DRP's shipped configuration has `enable_bokeh = True`, and the pipeline then starts a detached
      `bokeh serve` with `subprocess.Popen` and draws into a browser. The run passes the pipeline its own configuration file
      with exactly two settings replaced, `enable_bokeh = False` and `plot_level = 0`, and every other line as the pipeline
-     ships it; the file's sha256 and both changed values go in the product record. After the run, the log is read and a run
+     ships it; the file's path and both changed values go in the product record. After the run, the log is read and a run
      that started a server anyway is a failed run. No `bokeh` process was left behind by any run made here (`pgrep -fl bokeh`
      after each: nothing).
 
@@ -120,8 +120,8 @@ ccdproc 2.4.3, astroscrappy 1.1.0, with the 83 packages the lock pins. The envir
 name the archive's own product names, then the continuum bars, the arc, the master flat, the dome flat, the twilight flat and
 the cube.
 
-**The comparison**, our `kb231209_00085_icubed.fits` against KOA's `KB.20231209.37031.94_icubed.fits` (150,932,160 bytes,
-sha256 7140…05f5). Both are 34 x 95 x 2595, so the grid is reproduced exactly, and 8,381,850 samples are paired per extension.
+**The comparison**, our `kb231209_00085_icubed.fits` against KOA's `KB.20231209.37031.94_icubed.fits` (150,932,160 bytes).
+Both are 34 x 95 x 2595, so the grid is reproduced exactly, and 8,381,850 samples are paired per extension.
 
 Both files hold the same four image extensions of the same shape, and ours holds a fifth (`NOSKYSUB`) that 1.0.2 did not
 write. Per extension, over the samples brighter than the 99th percentile of the archive's own levels, which is where the

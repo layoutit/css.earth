@@ -2,7 +2,7 @@
 
 A virtual telescope here is not a picture taken from an archive. It is an observation this repository runs again:
 
-1. **Pin** the exact files the observatory holds: every input by name, byte count and sha256.
+1. **Pin** the exact files the observatory holds: every input by name, archive identity and byte count.
 2. **Re-run the observatory's own software** on them, from a pinned toolchain, with the calibration the observatory used.
 3. **Compare** the result with something outside this repository: the archive's own product, an author's published value,
    the geometry the mission's kernels state, or a second reduction of our own.
@@ -186,7 +186,7 @@ disk unless you pass `--out`. Then the command saves `papers.json` and the downl
 
 ### Software discovery with ASCL
 
-`pnpm -s telescope ascl Astroquery` searches titles in the live [ASCL software catalog](https://ascl.net/). `pnpm -s telescope ascl --product FETCH/output.product.json --json` verifies a product receipt and original files; `pnpm -s telescope ascl --product RUN/pick-N/result.json --json` verifies a portable `get` delivery instead. Both match recorded software names to exact ASCL title aliases. A source manifest may separately declare earlier processing software with its evidence; the lookup labels that claim separately from software recorded for the current run. The JSON reports the catalog URL and SHA-256 of the catalog response, ASCL IDs, entry URLs, code sites and preferred citations where available. A software listing is a citation lead, separate from the receipt's version claim and from source relevance, calibration and detection. Unmatched names are not proof that ASCL lacks the code. The catalog request is explicit, bounded to 8 MiB and does not rewrite the receipt. [ASCL's schema](https://ascl.net/home/getwp/3297) defines the software metadata fields.
+`pnpm -s telescope ascl Astroquery` searches titles in the live [ASCL software catalog](https://ascl.net/). `pnpm -s telescope ascl --product FETCH/output.product.json --json` verifies a product receipt and original files; `pnpm -s telescope ascl --product RUN/pick-N/result.json --json` verifies a portable `get` delivery instead. Both match recorded software names to exact ASCL title aliases. A source manifest may separately declare earlier processing software with its evidence; the lookup labels that claim separately from software recorded for the current run. The JSON reports the catalog URL, ASCL IDs, entry URLs, code sites and preferred citations where available. A software listing is a citation lead, separate from the receipt's version claim and from source relevance, calibration and detection. Unmatched names are not proof that ASCL lacks the code. The catalog request is explicit, bounded to 8 MiB and does not rewrite the receipt. [ASCL's schema](https://ascl.net/home/getwp/3297) defines the software metadata fields.
 
 Use `query` when the wavelength, time, product kind and resolution are actual acceptance criteria:
 
@@ -203,10 +203,10 @@ choice unavailable, in which case a new query is required. A declared wavelength
 resolution never becomes verified merely because a file was decoded.
 
 The delivery contains the native product's complete recorded output set (including
-pinned labels and dependencies), evidence, SHA-256 pins and a `result.json` verdict.
+pinned labels and dependencies), evidence, byte counts and a `result.json` verdict.
 `result.json` is the portable verification entry point. The copied producer record preserves its original bytes and paths as evidence; use `result.json` for `outputs` and `ascl --product` after moving the delivery. New deliveries also preserve the source question so `outputs` can report native kind, wavelength and field relevance alongside the scientific request verdict.
-New deliveries use `cssearth-telescope-delivery@3`; older result files without content
-pins require a new query or exploration directory and a fresh `get` before export.
+Older result files in another delivery format require a new query or exploration
+directory and a fresh `get` before export.
 For the repository script, use `pnpm --silent telescope … --json` to suppress pnpm’s own preamble.
 Progress goes to stderr; `--json` keeps stdout machine-readable, including when a
 native reducer prints to its inherited stdout. `--verbose` retains the full query report.
@@ -482,18 +482,17 @@ Every producing stage writes one `cssearth-telescope-product@1` record beside it
 | Field | What it states |
 | --- | --- |
 | `telescope`, `stage` | Which instrument, and which step of the route made this file. |
-| `inputs` | Every file that went in: its role, its identity in the archive, its byte count and its sha256. |
-| `parameters` | Everything else that decided the product: pipeline settings, calibration context, the script's digest. |
-| `software`, `toolchainDigest` | The versions that ran, and the digest of the pin they were installed from. |
-| `outputs` | Every file that came out, by path, byte count and sha256, with its units and conventions. |
+| `inputs` | Every file that went in: its role, its identity in the archive and its byte count. |
+| `parameters` | Everything else that decided the product: pipeline settings, calibration context, the script that ran. |
+| `software` | The versions that ran, as the toolchain pin installed them. |
+| `outputs` | Every file that came out, by path and byte count, with its units and conventions. |
 | `evidence` | What was checked afterwards, each entry naming its kind, its receipt and the exact product it checked. |
 
-New comparison evidence carries a `receiptPin` (bytes and SHA-256). Adding evidence
-copies the receipt to a content-addressed file beside the exact product. A later run
-may update an archive's latest/index receipt without changing an earlier product's
-evidence. Reuse verifies these receipt pins as well as output pins. Older unpinned
-receipts remain historical records; running a new comparison replaces the corresponding
-legacy entry with pinned evidence.
+Adding comparison evidence copies its receipt to a file beside the exact product,
+named for the check that wrote it. A later run may update an archive's latest/index
+receipt without changing an earlier product's evidence. Reuse checks that each receipt
+and output the record names is present. Running a new comparison replaces the
+corresponding older entry.
 
 JWST cube comparisons use `jwst-cube-samples@1`: identical finite/nonzero coverage,
 at least one shared sample, and a maximum absolute difference divided by
@@ -594,7 +593,7 @@ A receipt's existence establishes nothing. Each entry names what its check is wo
   It establishes that we ran their software the way they ran it. It does **not** establish that the observatory's product is
   right, nor that anything downstream of it is.
 - **`archive-origin`**: the bytes we hold are the observatory's own final product, retrieved from its archive and pinned by
-  size and sha256, with the archive's catalogue and the file's own headers agreeing on which observation it is. It establishes
+  archive identity and size, with the archive's catalogue and the file's own headers agreeing on which observation it is. It establishes
   origin and integrity. It does **not** establish that anything here reproduces that calibration, because nothing was re-run
   and nothing was compared: it is not `archive-agreement`, and a caller asking whether a route reproduces an observatory's
   pipeline is never answered with it.
@@ -923,7 +922,7 @@ archive origin or scientific fitness.
 the target and selected family, delegates spectral-unit conversion to Astropy, and considers every
 eligible component. A fetched `output.product.json` can be supplied in place of the descriptor
 when `telescope outputs` reports family operations. The command reopens the verified source
-closure and records the pinned descriptor's path, byte count and SHA-256 in its saved assessment.
+closure and records the pinned descriptor's path and byte count in its saved assessment.
 Requested observation bounds or measured-resolution thresholds remain
 unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
 selected family are not inherited from the legacy query shape. Every requested scientific
@@ -1047,8 +1046,7 @@ provenance. This is a thin file export boundary, not another plotting toolkit.
 
 These figures come from the local level-3 cube
 `jw01191-o019_t002_nirspec_g235m-f170lp_s3d.fits`, SCI HDU 1, with shape
-191 wavelengths × 55 rows × 51 columns. Its SHA-256 is
-`fbeeb9737ecf46c2b1aad5e27cb55a50e6e8f83fc8e7e347c3aa80d3e07f4bab`.
+191 wavelengths × 55 rows × 51 columns.
 These figures use the product's MJy/sr units and quality mask. Pixel and plane selectors
 are zero-based. Astropy 8.0.1 reads the product; Matplotlib 3.11.2 renders the figures.
 
@@ -1284,7 +1282,7 @@ Navigation is an explicit scientific input. `navigation.json` contains:
   "schema": "cssearth-navigation-input@1",
   "observer": "JWST",
   "kernels": [
-    {"file": "pck00011.tpc", "role": "rotation", "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc", "bytes": 131226, "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"}
+    {"file": "pck00011.tpc", "role": "rotation", "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc", "bytes": 131226}
   ],
   "registration": {"method": "wcs", "explanation": "Header WCS; no independently fitted centre"},
   "width": 360,
@@ -1299,7 +1297,7 @@ observation. Paths are relative to the navigation file. No kernels are found
 implicitly in a home directory or downloaded by the projection command.
 A fitted registration uses `method: "disc"`, `parameters: [x, y, radius, rotation]`
 in PlanetMapper's zero-based native-image convention, an explanation, and an
-`evidence` file with its `file`, `bytes` and `sha256`. WCS must still be valid;
+`evidence` file with its `file` and `bytes`. WCS must still be valid;
 there is no silent image-centre fallback. WCS registration establishes a
 coordinate model, not an independently measured pointing accuracy.
 
@@ -1325,8 +1323,7 @@ controls own drag and zoom. Colour is not relit. Grey is unobserved.
 #### Europa projection, standalone sphere and independent checks
 
 The example uses the archive cube
-`jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits`, SHA256
-`838c59a8b0ddcb8e7f464324e1a1515dcfe8f4a42c7c79b7d10e8f23f5ffe64a`,
+`jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits`,
 already pinned by the Europa 1250 reproduction record. This run checks those
 archive bytes; it does not claim a new Spec3 reproduction. Its 4.2–4.3 µm
 brightness image uses the explicit independent-sample uncertainty assumption.

@@ -20,8 +20,7 @@ object-specific branch. No cssEarth scene capture is used by the markers.
 
 The sidebar collapse control uses Jeremy Schnittman's NASA Goddard scientific
 visualization of a black-hole accretion disk. The exact 1024px source is kept at
-`src/navigation/source/black-hole-accretion-disk-nasa.jpg` with SHA-256
-`40719fba8771e81aefd47f678d9b13b85161201a1674cf3ed65d67c64dcc348c`.
+`src/navigation/source/black-hole-accretion-disk-nasa.jpg`, where Git records its bytes.
 Preparation crops the source, maps its luminance to the approved restrained
 violet treatment and alpha, and writes fixed transparent PNG markers at 1x and
 2x. Credit:
