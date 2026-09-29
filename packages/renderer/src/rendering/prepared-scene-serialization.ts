@@ -1,5 +1,7 @@
-import { initialObjectSelection, resolvePreparedAssetUrl, rewritePreparedStyleUrls, textureTileStyles, tiledTextureKeys } from '@cssearth/renderer';
-import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
+import { initialObjectSelection } from '../runtime/object-contract.js';
+import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
+import { textureTileStyles, tiledTextureKeys } from './prepared-texture-levels.js';
+import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
 export interface SerializedPreparedScene extends PreparedSceneMarkup {

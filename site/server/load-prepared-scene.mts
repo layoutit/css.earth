@@ -1,6 +1,5 @@
-import { loadPreparedCssObject } from '@cssearth/renderer';
+import { loadPreparedCssObject, serializePreparedScene } from '@cssearth/renderer';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
-import { serializePreparedScene } from '../prepared/serialize-prepared-scene.mts';
 import { withPreparedAssetOrigin } from '../asset-origin.mts';
 
 export async function loadPreparedSceneMarkup(id: string) {

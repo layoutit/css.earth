@@ -93,6 +93,7 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/objects/static-surface',
   'tools/objects/surface-features',
   'tools/objects/surface-observations',
+  'tools/objects/telescope-sphere',
   'tools/objects/telescopes',
   'tools/objects/terrestrial-layers',
   'tools/objects/voyager-iss',
