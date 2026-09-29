@@ -9,7 +9,7 @@ export { normalizeDestinationQuery, searchDestinations } from './destination-sea
 export { orderFacts } from './fact-order.js';
 export { distanceDescription, parseNavigationDistance } from './navigation-distance.js';
 export type { NavigationDistance } from './navigation-distance.js';
-export { catalogEntry } from './object-catalog.js';
+export { catalogEntry, catalogueObject } from './object-catalog.js';
 export type { CatalogContext, CatalogEntry } from './object-catalog.js';
 export { matchesObjectCategory, matchesObjectClassification } from './object-categories.js';
 export { discoveryDescription, discoveryVisibility, isDiscoveryAnchor, parseObjectDiscovery } from './object-discovery.js';

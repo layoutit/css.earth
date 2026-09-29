@@ -8,6 +8,8 @@ import { observePreparationPath, readPreparationReceipt, readPreparationTraces, 
 import type { PreparationTraces } from "@cssearth/bake/preparation";
 import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorDigest } from "@cssearth/bake/preparation";
 import type { PreparationAccess, TracedCommand, TracedState } from "@cssearth/bake/preparation";
+import { parseNavigationDistance } from "@cssearth/objects";
+import { PREPARED_CATALOGUE, preparedCatalogueModule } from "@cssearth/objects/node";
 
 async function fixture(run: (root: string) => Promise<void>) {
   const root = await realpath(await mkdtemp(join(tmpdir(), "cssearth-preparation-cache-")));
@@ -194,10 +196,10 @@ test("another body's descriptor that preparation reads through the prepared regi
   const au = (value: number) => ({ meters: value * 149597870700, value, unit: "AU", quantity: "geometric", referencePoint: "heliocentre", epochJdTt: 2461286.5 });
   for (const [id, classification] of [["sun", "star"], ["moon", "satellite"]]) await put(root, `src/objects/${id}/object.json`, JSON.stringify({ schema: "cssearth-object@1", id,
     properties: { catalog: { name: id, systemName: "Solar System", classification, color: "#aabbcc", distanceAu: 1, description: "Card" }, worldFrame: frame } }));
-  await put(root, "site/prepared-object-distances.json", JSON.stringify({ sun: au(0), moon: au(1) }));
-  await put(root, "site/prepared-object-discovery.json", JSON.stringify({ sun: { featured: false, imagery: false, illustration: false }, moon: { featured: false, imagery: false, illustration: false } }));
-  await put(root, "site/prepared-focus-objects.json", "[]");
-  await put(root, "site/prepared-overview-objects.json", "[]");
+  const discovery = { featured: false, imagery: false, illustration: false };
+  await put(root, PREPARED_CATALOGUE.entries, preparedCatalogueModule([{ id: "sun", distance: parseNavigationDistance(au(0)), discovery },
+    { id: "moon", distance: parseNavigationDistance(au(1)), discovery }], []));
+  await put(root, PREPARED_CATALOGUE.overviews, "[]");
   // The body's preparation reads its own descriptor and lists the registry, as a preparer that looks up another scene does.
   await put(root, "prepare.mjs", `import { readFileSync, writeFileSync } from 'node:fs';\nconst { readPreparedObjects } = await import(${JSON.stringify(import.meta.resolve("@cssearth/objects/node"))});\n` +
     "readFileSync('src/objects/moon/object.json');\nwriteFileSync('prepared.json', JSON.stringify(readPreparedObjects(process.cwd()).requireSceneObject('sun').name));\n");
@@ -210,7 +212,6 @@ test("another body's descriptor that preparation reads through the prepared regi
   await rm(trace, { recursive: true });
   const { receipt, refusal } = await seal(root, traces);
   assert.equal(refusal, null);
-  assert.deepEqual(evidence(receipt?.inputs ?? {}), { "prepare.mjs": "bytes", "site/prepared-focus-objects.json": "bytes", "site/prepared-object-discovery.json": "bytes",
-    "site/prepared-overview-objects.json": "bytes",
-    "site/prepared-object-distances.json": "bytes", "src/objects/moon/object.json": "descriptor-recipe", "src/objects/sun/object.json": "descriptor-registry" });
+  assert.deepEqual(evidence(receipt?.inputs ?? {}), { "prepare.mjs": "bytes", "site/prepared-catalogue.mjs": "bytes", "site/prepared-overview-objects.json": "bytes",
+    "src/objects/moon/object.json": "descriptor-recipe", "src/objects/sun/object.json": "descriptor-registry" });
 }));

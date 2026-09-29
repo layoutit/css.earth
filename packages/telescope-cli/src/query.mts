@@ -349,7 +349,7 @@ export const LEDGER_TELESCOPES: readonly string[] = Object.keys(ADAPTERS);
 /** Load only the shipped target catalogue, so human entry points can resolve ambiguity before archive access. */
 export async function loadTargetCatalogue(root: string): Promise<TargetCatalogueEntry[]> {
   // These package descriptors are the source of the application's generated catalogue. Reading them keeps this CLI usable
-  // in a clean checkout, before `prepare` has emitted site/prepared-object-catalog.mts.
+  // in a clean checkout, before `prepare` has emitted site/prepared-catalogue.mjs.
   const objectRoot = resolve(root, 'src/objects'), targetCatalogue: TargetCatalogueEntry[] = [];
   for (const directory of (await readdir(objectRoot, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
     const value = await readJsonSource(resolve(objectRoot, directory, 'object.json')).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });

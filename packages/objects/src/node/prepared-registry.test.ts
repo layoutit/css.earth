@@ -3,7 +3,8 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { onTestFinished, test } from 'vitest';
-import { PREPARED_CATALOGUE, readPreparedObjects } from './prepared-registry.js';
+import { parseNavigationDistance } from '../registry/index.js';
+import { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from './prepared-registry.js';
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 0, 1, 0, 1, 0],
   metersPerUnit: 1, bodyRadiusM: 1 };
@@ -20,7 +21,10 @@ const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', descrip
   zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
   holds: [{ classifications: ['nebula'] }], packages: [], route: '/milky-way/', sceneHostId: 'sun' };
 
-async function checkout(records: { distances?: unknown; discoveries?: unknown; focuses?: unknown; overviews?: unknown } = {}) {
+const scene = (id: string, distanceAu: number, featured: boolean) => ({ id, distance: parseNavigationDistance(au(distanceAu)), discovery: discovery(featured) });
+const scenes = [scene('sun', 0, false), scene('mars', 1.5, true)];
+
+async function checkout(records: { scenes?: typeof scenes; focuses?: readonly unknown[]; module?: string; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
   onTestFinished(() => rm(root, { force: true, recursive: true }));
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
@@ -29,8 +33,9 @@ async function checkout(records: { distances?: unknown; discoveries?: unknown; f
   }
   await mkdir(join(root, 'site'));
   // The catalogue order is the order prepare:catalog wrote, not the alphabetical one.
-  const written = { distances: { sun: au(0), mars: au(1.5) }, discoveries: { sun: discovery(false), mars: discovery(true) }, focuses: [focus], overviews: [overview], ...records };
-  for (const [name, value] of Object.entries(written)) await writeFile(join(root, PREPARED_CATALOGUE[name as keyof typeof PREPARED_CATALOGUE]), JSON.stringify(value));
+  await writeFile(join(root, PREPARED_CATALOGUE.entries), records.module ??
+    preparedCatalogueModule(records.scenes ?? scenes, (records.focuses ?? [focus]) as Parameters<typeof preparedCatalogueModule>[1]));
+  await writeFile(join(root, PREPARED_CATALOGUE.overviews), JSON.stringify(records.overviews ?? [overview]));
   return root;
 }
 
@@ -55,13 +60,13 @@ test('reads each checkout once per process', async () => {
   assert.equal(readPreparedObjects(root), readPreparedObjects(join(root, 'site', '..')));
 });
 
-test('refuses catalogue records that disagree or a focus without its host', async () => {
+test('refuses a catalogue it cannot decode or a focus without its host', async () => {
   const cases: [Parameters<typeof checkout>[0], RegExp][] = [
-    [{ discoveries: { sun: discovery(false) } }, /list different objects/],
-    [{ discoveries: { sun: discovery(false), pluto: discovery(false) } }, /list different objects/],
-    [{ distances: { sun: au(0), mars: au(1.5), pluto: au(39) }, discoveries: { sun: discovery(false), mars: discovery(true), pluto: discovery(false) } }, /Cannot find module|ENOENT/],
+    [{ scenes: [...scenes, scene('pluto', 39, false)] }, /Cannot find module|ENOENT/],
+    [{ scenes: [{ ...scenes[0]!, discovery: { featured: 'yes' } as never }] }, /Invalid prepared object discovery/],
     [{ focuses: [{ ...focus, sceneHostId: 'mars', route: '/helix/' }, { ...focus, id: 'm1', focusId: 'm1', route: '/m1/', sceneHostId: 'jupiter' }] }, /not a registered scene: m1/],
-    [{ focuses: {} }, /focuses/],
+    [{ focuses: [{ kind: 'planet', id: 'x' }] }, /Invalid catalogue entry/],
+    [{ module: 'export const OTHER = [];\n' }, /exports no CATALOGUE_ENTRIES array/],
     [{ overviews: [{ ...overview, sceneHostId: 'jupiter' }] }, /Overview host is not a registered scene: milky-way/],
     [{ overviews: {} }, /overviews/],
   ];

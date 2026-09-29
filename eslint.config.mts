@@ -8,7 +8,7 @@ export default [
     // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
     // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.
     '**/prepared/**', '**/generated/**', 'src/objects/**', 'src/sources/**',
-    'src/platform/solar-geometry.mts', 'site/prepared-object-catalog.mts', 'site/prepared-context-objects.mts'] },
+    'src/platform/solar-geometry.mts', 'site/prepared-context-objects.mts'] },
   {
     // `src` and `site` (and once `tools`) — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:

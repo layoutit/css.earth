@@ -262,8 +262,8 @@ src/objects/*/source/**/*.bpc
 # Combined catalogues and navigation are rebuilt from individual body records.
 /site/prepared-sources.json
 /site/prepared-facilities.json
-/site/prepared-object-catalog.mts
-/site/prepared-object-discovery.json
+/site/prepared-catalogue.mjs
+/site/prepared-overview-objects.json
 /site/prepared-lens-volumes.json
 /site/prepared-stellar-extents.json
 /site/prepared-local-group-galaxies.json
@@ -335,11 +335,6 @@ src/objects/*/source/**/*.bpc
 
 # Restored from the pinned author-hosted method paper, not redistributed in Git.
 /src/objects/charon/source/science/leisa/grundy-2016-supplement.pdf
-
-# Navigation capability projections rebuilt by prepare:catalog.
-/site/prepared-object-distances.json
-/site/prepared-focus-objects.json
-/site/prepared-overview-objects.json
 
 # Image-layer galaxy sidebar outputs are restored by prepare:sources.
 

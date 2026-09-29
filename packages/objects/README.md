@@ -14,14 +14,17 @@ plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 
 The registry contracts (`src/registry/`) are what the application's one `OBJECTS` registry (`site/objects.mts`) and the
-preparation tools share: `defineObjects()` and `catalogEntry()` assemble and decode entries, `parseObjectDiscovery()`,
+preparation tools share: `defineObjects()`, `catalogEntry()` and `catalogueObject()` assemble and decode entries (`catalogueObject()` decodes one
+entry of the prepared catalogue, as the registry and a page's object directory both read it), `parseObjectDiscovery()`,
 `parseNavigationDistance()`, `parseArrivalView()` and `definePreparedFocus()` validate the prepared registry data,
 `orderFacts()` orders factsheets, `normalizeDestinationQuery()` is the name normalisation preparation writes and search
 reads, `contextColour()` picks a body's world-context colour, and `validateWorldRotation()` checks a rotation. The host
 binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
 Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
-prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`, in catalogue order) with these contracts and binds a
-`loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
+prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`: `site/prepared-catalogue.mjs`, every scene object's
+descriptor with its distance and discovery and every prepared focus in registry order, written by
+`preparedCatalogueModule()`, and the overviews apart in `site/prepared-overview-objects.json`, the one part every page's
+object directory reads) with these contracts and binds a `loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
 test (run in the universe runtime lane) holds both reads equal. The object-runtime ownership check
 (`.github/scripts/checks/check-object-runtime-ownership.mts`) still imports `site/objects.mts`; it moves to this reader,
 or out of preparation, in a later slice.

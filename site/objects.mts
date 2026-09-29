@@ -1,11 +1,8 @@
-import { catalogEntry, defineObjects, defineOverview, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import { defineObjects, isSceneObject } from '@cssearth/objects';
 import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry, OverviewObject } from '@cssearth/objects';
-import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';
-import discoveries from './prepared-object-discovery.json' with { type: 'json' };
-import distances from './prepared-object-distances.json' with { type: 'json' };
-import focuses from './prepared-focus-objects.json' with { type: 'json' };
+import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
-import { isRecord } from '@cssearth/core';
+import { objectFromEntry } from './object-directory.mts';
 import type { SceneFactory } from './browser/browser-types.mts';
 
 /** The shared registry types, bound to the shell's scene loader and its abort signal. */
@@ -13,24 +10,9 @@ export type ObjectEntry = RegistryObjectEntry<SceneFactory, AbortSignal>;
 export type CatalogEntry = RegistryCatalogEntry<SceneFactory, AbortSignal>;
 export type NavigableObject = RegistryNavigableObject<SceneFactory, AbortSignal>;
 
-/** The single application registry, assembled from explicitly registered packages. */
-export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map(descriptor => {
-  const { order, context, ...object } = catalogEntry(descriptor, async (signal?: AbortSignal) => {
-    const { loadPackagedObject } = await import('./packaged-object-runtime.mts');
-    return loadPackagedObject(descriptor, signal);
-  }, preparedDistance(descriptor), preparedDiscovery(descriptor));
-  return object;
-}), ...focuses.map(definePreparedFocus), ...overviews.map(defineOverview)]);
-
-function preparedDiscovery(descriptor: unknown) {
-  if (!isRecord(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
-  return parseObjectDiscovery(Object.getOwnPropertyDescriptor(discoveries, descriptor.id)?.value);
-}
-
-function preparedDistance(descriptor: unknown) {
-  if (!isRecord(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
-  return parseNavigationDistance(Object.getOwnPropertyDescriptor(distances, descriptor.id)?.value);
-}
+/** The single application registry: every entry of the prepared catalogue (`pnpm prepare:catalog`), decoded as a page's
+ * object directory decodes the one entry it loads. */
+export const OBJECTS = defineObjects<NavigableObject>([...CATALOGUE_ENTRIES, ...overviews].map(objectFromEntry));
 
 /** A capability projection of OBJECTS, never an independently maintained registry. */
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(isSceneObject));

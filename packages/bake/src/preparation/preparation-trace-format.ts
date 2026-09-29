@@ -21,7 +21,7 @@ export interface PreparationTrace {
 }
 
 export const DESCRIPTOR_PATH = /(?:^|\/)src\/objects\/([a-z][a-z0-9-]*)\/object\.json$/u;
-export const CATALOG_MODULE = 'site/prepared-object-catalog.mts';
+export const CATALOG_MODULE = 'site/prepared-catalogue.mjs';
 export const REGISTRY_MODULE = 'site/objects.mts';
 
 const without = (value: unknown, key: string) => isRecord(value) ? Object.fromEntries(Object.entries(value).filter(([name]) => name !== key)) : value;

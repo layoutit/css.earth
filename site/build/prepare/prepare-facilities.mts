@@ -34,10 +34,9 @@ const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..
 export const explorationCompilerClosure = [
   'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
   'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-provenance.ts', 'packages/objects/src/provenance/preparation-evidence.ts', 'packages/bake/src/sources/preparation-evidence.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
-  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-object-discovery.json', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
+  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-catalogue.mjs', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
   'packages/objects/src/registry/prepared-focus-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
-  'packages/objects/src/registry/overview-object.ts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
-  'site/prepared-overview-objects.json',
+  'packages/objects/src/registry/overview-object.ts', 'site/prepared-overview-objects.json',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'packages/objects/src/provenance/source-usage.ts', 'packages/objects/src/node/source-manifest.ts',
